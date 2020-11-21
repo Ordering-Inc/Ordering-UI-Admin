@@ -1,0 +1,31 @@
+{
+  "fonts": {
+    "primary": {
+      "name": "Poppins",
+      "weights": [300, 400, 500, 600]
+    },
+    "special": {
+      "name": "Lobster",
+      "weights": [400]
+    }
+  },
+  "colors": {
+    "primary": "#FAFAFA",
+    "disabled": "#CBCBCB",
+
+    "textGray": "#C3C3C3",
+    "textBlack": "#000",
+    "textBlackContrast": "#151824",
+
+    "btnPrimary": "#F2F2F2",
+    "btnPrimaryContrast": "#1C202E",
+    "btnSecondary": "#072DB2",
+    "btnSecondaryContrast": "#FFFFFF",
+    "btnDarkBlue": "#182964",
+    "btnDarkBlueContrast": "#fff",
+    
+    "deadlineOk": "#0E9B55",
+    "deadlineDelayed": "#DA4A54",
+    "deadlineRisk": "#FFBF12"
+  }
+}
