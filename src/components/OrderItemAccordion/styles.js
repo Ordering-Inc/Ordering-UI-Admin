@@ -185,7 +185,7 @@ export const OrderDetailToggleButton = styled.span`
   margin-left: 10px;
   margin-top: 3px;
 `
-export const OrderProductsContainer = styled.div`
+export const OrderProductsQuickDetailContainer = styled.div`
   overflow: hidden;
   transition: max-height 0.6s ease;
   width: 100%;

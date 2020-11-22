@@ -1,7 +1,19 @@
 import styled, { css } from 'styled-components'
 
-export const NoneOrders = styled.p`
-    color: ${({ theme }) => theme?.colors?.textBlackContrast || '#000'};
+export const WrapperNoneOrders = styled.div`
+    display: flex;
+    justify-content: center;
+    padding: 20px 10px;
+
+    img {
+        width: 300px;
+    }
+
+    ${({ small }) => small && css`
+        img {
+            width: 150px;
+        }
+    `}    
 `
 export const OrderStatusTitle = styled.p`
     font-size: 20px;
@@ -9,6 +21,7 @@ export const OrderStatusTitle = styled.p`
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 500;
+    padding: 0 5px;
 `
 export const SkeletonOrder = styled.div`
     text-align: center;
@@ -47,12 +60,13 @@ export const SkeletonText = styled.div`
         text-align: right;
     `}
 `
-export const WrapPaginationControl = styled.div`
-    display: flex;
-    column-gap: 10px;
-`
-export const WrapperOrderList = styled.div`
-    overflow-x: auto;
-    overflow-y: hidden;
+export const WrapperOrderListContent = styled.div`
+    overflow: auto;
+    max-height: 650px;
     padding: 5px;
+
+    ${({ small }) => small && css`
+        overflow: initial;
+        max-height: initial;
+    `}
 `

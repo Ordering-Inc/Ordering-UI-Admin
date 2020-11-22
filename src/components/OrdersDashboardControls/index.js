@@ -3,10 +3,10 @@ import { useLanguage } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { Button } from '../../styles/Buttons'
-import ZoDownload from '@meronex/icons/zo/ZoDownload'
 import FaTrash from '@meronex/icons/fa/FaTrash'
 import MdcBasket from '@meronex/icons/mdc/MdcBasket'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
+import { ExportCSV } from '../ExportCSV'
 
 import { OrderDashboardControlsContainer, InnerContnet } from './styles'
 
@@ -22,10 +22,7 @@ export const OrdersDashboardControls = (props) => {
     <>
       <OrderDashboardControlsContainer>
         <InnerContnet>
-          <Button color='primary' borderRadius='6px' withIcon>
-            {width > 600 && t('CSV', 'CSV')}
-            <ZoDownload />
-          </Button>
+          <ExportCSV />
 
           <Button color='primary' borderRadius='6px' withIcon>
             {width > 600 && t('DELETE', 'Delete')}

@@ -24,7 +24,7 @@ import {
   DeliveryIcon,
   DeliveryName,
   OrderDetailToggleButton,
-  OrderProductsContainer,
+  OrderProductsQuickDetailContainer,
   OrderProductsInner,
   ProductTable,
   ProductImageContainer
@@ -199,7 +199,7 @@ export const OrderItemAccordion = (props) => {
         </OrderItemAccordionCell>
       </OrderItemAccordionContainer>
 
-      <OrderProductsContainer
+      <OrderProductsQuickDetailContainer
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
       >
@@ -282,7 +282,7 @@ export const OrderItemAccordion = (props) => {
             </tbody>
           </ProductTable>
         </OrderProductsInner>
-      </OrderProductsContainer>
+      </OrderProductsQuickDetailContainer>
 
     </AccordionSection>
   )

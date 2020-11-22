@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage } from 'ordering-components'
 
+import { SearchBar } from '../SearchBar'
 import { Modal } from '../Modal'
 import { DeadlinesTypeSelector } from '../DeadlinesTypeSelector'
 import { OrdersDashboardSwitch } from '../OrdersDashboardSwitch'
@@ -14,14 +15,17 @@ import {
   WrapperHeaderRightSection,
   HeaderTitle,
   TopRightSection,
-  SearchContainer,
   FilterButton,
   WrapperDeadlineAndSwitch,
   WrapperSearchAndFilter
 } from './styles'
 
 export const OrderContentHeader = (props) => {
-  const { active } = props
+  const {
+    active,
+    handleChangeSearch,
+    searchValue
+  } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const [filterModalOpen, setFilterModalOpen] = useState(false)
@@ -65,10 +69,15 @@ export const OrderContentHeader = (props) => {
         </HeaderSection>
         <TopRightSection>
           <WrapperSearchAndFilter>
-            <SearchContainer>
+            <SearchBar
+              onSearch={handleChangeSearch}
+              search={searchValue}
+              placeholder={t('SEARCH', 'Search')}
+            />
+            {/* <SearchContainer>
               <img src={theme?.images?.icons?.search} alt='search' />
               <input type='text' placeholder='Search...' />
-            </SearchContainer>
+            </SearchContainer> */}
 
             <FilterButton onClick={() => setFilterModalOpen(true)}>
               <img src={theme?.images?.icons?.filter} alt='filter' />

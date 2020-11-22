@@ -13,7 +13,7 @@ export const OrdersDashboardSwitch = (props) => {
 
   return (
     <SwitchContainer>
-      <SwitchItem active={props.active === 'ordersList'} onClick={() => handleGoToPage({ page: 'orders' })}>
+      <SwitchItem active={props.active === 'orders'} onClick={() => handleGoToPage({ page: 'orders' })}>
         {t('ORDERS', 'orders')}
       </SwitchItem>
 
