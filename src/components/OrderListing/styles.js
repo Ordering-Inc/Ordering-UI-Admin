@@ -6,7 +6,7 @@ export const WrapperNoneOrders = styled.div`
     padding: 20px 10px;
 
     img {
-        width: 300px;
+        width: 250px;
     }
 
     ${({ small }) => small && css`
@@ -64,6 +64,7 @@ export const WrapperOrderListContent = styled.div`
     overflow: auto;
     max-height: 650px;
     padding: 5px;
+    margin-bottom: 40px;
 
     ${({ small }) => small && css`
         overflow: initial;

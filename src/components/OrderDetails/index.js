@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useEvent, useUtils } from 'ordering-components'
+import { useLanguage, OrderDetails as OrderDetailsController, useUtils } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
@@ -59,8 +60,8 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
   const theme = useTheme()
-  const [events] = useEvent()
   const [{ parsePrice, parseNumber }] = useUtils()
+  const history = useHistory()
 
   const orderDetail = useRef(null)
 
@@ -96,10 +97,6 @@ const OrderDetailsUI = (props) => {
     }
   }
 
-  const handleGoToPage = (data) => {
-    events.emit('go_to_page', data)
-  }
-
   const handleChangeDriver = (driver) => {
     console.log(driver)
   }
@@ -132,7 +129,7 @@ const OrderDetailsUI = (props) => {
   return (
     <Container>
       <BackActions>
-        <a onClick={() => handleGoToPage({ page: 'orders' })}>
+        <a onClick={() => history.goBack()}>
           <HiOutlineArrowLeft />
         </a>
       </BackActions>
@@ -328,6 +325,7 @@ const OrderDetailsUI = (props) => {
             <DriverSelectorContainer>
               <DriverSelector
                 isPhoneView
+                defaultValue={order?.driver?.id ? order.driver.id : 0}
                 handleChangeDriver={(driver) => handleChangeDriver(driver)}
               />
             </DriverSelectorContainer>

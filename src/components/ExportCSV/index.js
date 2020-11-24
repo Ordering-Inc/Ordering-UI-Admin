@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { CSVLink } from 'react-csv'
 import { useLanguage } from 'ordering-components'
 
-import { AdminOrders as OrderListController } from '../AdminOrdersListControl'
+import { AdminOrdersAndDriversList as AdminOrdersAndDriversListController } from '../AdminOrdersAndDriversListController'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
 import ZoDownload from '@meronex/icons/zo/ZoDownload'
@@ -97,10 +97,6 @@ const ExportButtonUI = (props) => {
 
   // }, [pagination.currentPage])
 
-  useEffect(() => {
-    console.log(pendingOrders)
-  }, [pendingOrders])
-
   const uniqueName = () => {
     const date = new Date()
     return 'orders_' + date.getTime() + '.csv'
@@ -129,5 +125,5 @@ export const ExportCSV = (props) => {
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true
   }
-  return <OrderListController {...OrderControlProps} />
+  return <AdminOrdersAndDriversListController {...OrderControlProps} />
 }

@@ -1,69 +1,107 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components'
+import { DriversList as DriversListController } from '../DriversListControl'
 import { Select } from '../../styles/Select'
-import driverListData from '../../../template/assets/json/driverList.json'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import {
   Option,
   OptionContent,
   DriverNameContainer,
   PhoneContainer,
+  WrapperDriverImage,
+  DriverImage,
   DriverName
 } from './styles'
 
-export const DriverSelector = (props) => {
+const DriverSelectorUI = (props) => {
   const {
-    handleChangeDriver,
+    driversList,
+    handleSelectedDriver,
+    defaultValue,
     isPhoneView,
     small
   } = props
 
   const [, t] = useLanguage()
-  const [driverList, setDriverList] = useState([])
-  const [driverTypes, setDriverTypes] = useState([])
-
+  const [driversOptionList, setDriversOptionList] = useState([])
+  const driversLoading = [{ value: 0, content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
   useEffect(() => {
-    setDriverList(driverListData)
-  }, [])
+    const _driversOptionList = [{ value: 0, content: <Option>{t('DRIVER', 'Driver')}</Option> }]
+    if (!driversList.loading) {
+      const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
+        return {
+          value: driver.id,
+          content: (
+            <Option small={small}>
+              <WrapperDriverImage small={small}>
+                {driver.photo ? (
+                  <DriverImage bgimage={driver.photo} />
+                ) : (
+                  <FaUserAlt />
+                )}
+              </WrapperDriverImage>
+              <OptionContent>
+                <DriverNameContainer small={small}>
+                  <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
+                  {t('DRIVER', 'Driver')}
+                </DriverNameContainer>
+                {isPhoneView && driver.phone && (
+                  <PhoneContainer>
+                    <FiPhone />
+                    {driver.phone}
+                  </PhoneContainer>
+                )}
+              </OptionContent>
+            </Option>
+          )
+        }
+      })
 
-  useEffect(() => {
-    const driverTypesTemp = driverList.map((driver, i) => {
-      return {
-        value: i,
-        content: (
-          <Option small={small}>
-            <img
-              src={require(`../../../template/assets/images/avatars/${driver.photo}`)}
-              alt={driver.driver_name}
-            />
-            <OptionContent>
-              <DriverNameContainer small={small}>
-                <DriverName small={small}>{driver.driver_name}</DriverName>
-                {t('DRIVER', 'Driver')}
-              </DriverNameContainer>
-              {isPhoneView && (
-                <PhoneContainer>
-                  <FiPhone />
-                  {driver.driver_phone}
-                </PhoneContainer>
-              )}
-            </OptionContent>
-          </Option>
-        )
+      for (const option of _driversOptionListTemp) {
+        _driversOptionList.push(option)
       }
-    })
-
-    setDriverTypes(driverTypesTemp)
-  }, [driverList])
+    }
+    setDriversOptionList(_driversOptionList)
+  }, [driversList])
 
   return (
-    <Select
-      defaultValue={0}
-      options={driverTypes}
-      optionInnerMargin='10px'
-      optionInnerMaxHeight='150px'
-      optionBottomBorder
-      onChange={(driver) => handleChangeDriver(driver)}
-    />
+    <>
+      {!driversList.loading ? (
+        <Select
+          defaultValue={defaultValue || 0}
+          options={driversOptionList}
+          optionInnerMargin='10px'
+          optionInnerMaxHeight='150px'
+          optionBottomBorder
+          onChange={(driver) => handleSelectedDriver(driver)}
+        />
+      ) : (
+        <Select
+          defaultValue={0}
+          options={driversLoading}
+          optionInnerMargin='10px'
+          optionInnerMaxHeight='150px'
+          optionBottomBorder
+        />
+      )}
+    </>
+  )
+}
+
+export const DriverSelector = (props) => {
+  const DriversControlProps = {
+    ...props,
+    propsToFetch: ['id', 'name', 'lastname', 'phone', 'cellphone', 'photo'],
+    UIComponent: DriverSelectorUI
+  }
+  return (
+    <>
+      {props.driversList ? (
+        <DriverSelectorUI {...props} />
+      ) : (
+        <DriversListController {...DriversControlProps} />
+      )}
+    </>
   )
 }

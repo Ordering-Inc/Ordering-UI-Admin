@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Option = styled.div`
@@ -72,3 +73,44 @@ export const PhoneContainer = styled.div`
     display: none;
   }
 `
+export const WrapperDriverImage = styled.div`
+  width: 45px;
+  height: 45px;
+  border: 1px solid #E3E3E3;
+  border-radius: 10px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 50%;
+  }
+
+  ${({ small }) => small && css`
+    width: 27px;
+    height: 27px;
+  `}
+`
+const DriverImageStyled = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 10px;
+`
+export const DriverImage = (props) => {
+  return (
+    <DriverImageStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </DriverImageStyled>
+  )
+}

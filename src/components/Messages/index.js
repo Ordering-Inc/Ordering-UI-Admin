@@ -199,10 +199,6 @@ export const MessagesUI = (props) => {
     if (driver) setMessageLevel(2)
   }, [])
 
-  useEffect(() => {
-    console.log(messages)
-    console.log(order)
-  }, [messages])
   return (
     <MessagesContainer>
       <WrapperContainer>

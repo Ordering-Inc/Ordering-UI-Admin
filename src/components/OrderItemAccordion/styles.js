@@ -42,7 +42,7 @@ export const OrderItemAccordionContainer = styled.div`
     }
 
     &:nth-child(4) {
-      width: 17%;
+      width: 18%;
       min-width: 150px;
     }
 
@@ -53,7 +53,7 @@ export const OrderItemAccordionContainer = styled.div`
 
     
     &:nth-child(6) {
-      width: 20%;
+      width: 19%;
       min-width: 170px;
     }
 
@@ -258,6 +258,12 @@ export const ProductTable = styled.table`
         }
       }
     }
+  }
+`
+export const WrapperDriverSelector = styled.div`
+  > div {
+    border: none;
+    margin: 0 -15px;
   }
 `
 export const ProductImageContainer = styled.div`

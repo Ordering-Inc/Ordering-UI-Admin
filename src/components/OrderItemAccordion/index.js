@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { useLanguage, useUtils, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
@@ -6,8 +6,8 @@ import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import BsFillCircleFill from '@meronex/icons/bs/BsFillCircleFill'
 import OiCircleCheck from '@meronex/icons/oi/OiCircleCheck'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
+import { DriverSelector } from '../DriverSelector'
 
 import {
   AccordionSection,
@@ -20,6 +20,7 @@ import {
   WrapperAccordionImage,
   WrapperProductImage,
   AccordionImage,
+  WrapperDriverSelector,
   DeliveryTypeContainer,
   DeliveryIcon,
   DeliveryName,
@@ -31,7 +32,11 @@ import {
 } from './styles'
 
 export const OrderItemAccordion = (props) => {
-  const { order } = props
+  const {
+    order,
+    driversList,
+    handleUpdateOrdersStatus
+  } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -41,18 +46,18 @@ export const OrderItemAccordion = (props) => {
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
-  const [orderStatusDefaultValue, setOrderStatusDefaultValue] = useState(null)
 
   const checkbox = useRef(null)
   const content = useRef(null)
   const toggleBtn = useRef(null)
   const statusTypeSelector = useRef(null)
+  const driverSelectorRef = useRef(null)
   const [selectedOrder, setSelectedOrder] = useState(false)
 
   const toggleOrderSelect = () => {
     setSelectedOrder(!selectedOrder)
   }
-  const toggleAccordion = (e) => {
+  const toggleAccordion = () => {
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
       setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
@@ -62,30 +67,17 @@ export const OrderItemAccordion = (props) => {
     )
   }
 
-  const handleChangeOrderStatusType = (orderType) => {
-    console.log(orderType)
-  }
-
   const handleGoToPage = (e, data) => {
-    const isActionClick = checkbox.current?.contains(e.target) || statusTypeSelector.current?.contains(e.target) || toggleBtn.current?.contains(e.target)
+    const isActionClick = checkbox.current?.contains(e.target) || driverSelectorRef.current?.contains(e.target) || statusTypeSelector.current?.contains(e.target) || toggleBtn.current?.contains(e.target)
 
     if (!isActionClick) {
       events.emit('go_to_page', data)
     }
   }
 
-  useEffect(() => {
-    if (order.status === 0) setOrderStatusDefaultValue(20)
-    if (order.status === 3 || order.status === 8 || order.status === 7) {
-      setOrderStatusDefaultValue(30)
-    }
-    if (order.status === 1 || order.status === 11) {
-      setOrderStatusDefaultValue(40)
-    }
-    if (order.status === 2 || order.status === 5 || order.status === 6 || order.status === 10 || order.status === 12) {
-      setOrderStatusDefaultValue(50)
-    }
-  }, [])
+  const handleSelectedDriver = (driver) => {
+    console.log(driver)
+  }
 
   return (
     <AccordionSection>
@@ -141,26 +133,31 @@ export const OrderItemAccordion = (props) => {
         </OrderItemAccordionCell>
 
         <OrderItemAccordionCell>
-          <WrapperAccordionImage>
-            {order?.driver?.photo ? (
-              <AccordionImage bgimage={order?.driver?.photo} />
-            ) : (
+          {order?.driver_id ? (
+            <WrapperDriverSelector ref={driverSelectorRef}>
+              <DriverSelector
+                defaultValue={order?.driver_id ? order.driver_id : 0}
+                driversList={driversList}
+                handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
+              />
+            </WrapperDriverSelector>
+          ) : (
+            <WrapperAccordionImage>
               <AccordionImage bgimage={theme?.images?.icons?.noDriver} />
-            )}
-          </WrapperAccordionImage>
+            </WrapperAccordionImage>
+          )}
+
           <TextBlockContainer>
             <BigText>
-              {order?.driver ? order.driver.name : 'No Driver'}
-              {order?.driver && <EnChevronDown />}
+              {!order?.driver_id && 'No Driver'}
             </BigText>
-            <SmallText>{order?.driver?.name && 'Driver'}</SmallText>
           </TextBlockContainer>
         </OrderItemAccordionCell>
 
         <OrderItemAccordionCell>
           <DeliveryTypeContainer>
             <DeliveryIcon>
-              {order?.delivery_type === 2 ? (
+              {order?.delivery_type === 1 ? (
                 <img
                   src={theme?.images?.icons?.driverDelivery}
                   alt='Delivery'
@@ -173,16 +170,17 @@ export const OrderItemAccordion = (props) => {
               )}
             </DeliveryIcon>
             <DeliveryName>
-              {order?.delivery_type === 2 ? (t('DELIVERY', 'Delivery')) : (t('PICKUP', 'Pickup'))}
+              {order?.delivery_type === 1 ? (t('DELIVERY', 'Delivery')) : (t('PICKUP', 'Pickup'))}
             </DeliveryName>
           </DeliveryTypeContainer>
         </OrderItemAccordionCell>
 
         <OrderItemAccordionCell ref={statusTypeSelector}>
           <OrderStatusTypeSelector
-            defaultValue={orderStatusDefaultValue}
+            defaultValue={order.status}
+            orderId={order.id}
             noPadding
-            handleChangeOrderStatusType={(orderType) => handleChangeOrderStatusType(orderType)}
+            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
           />
         </OrderItemAccordionCell>
 
@@ -191,7 +189,7 @@ export const OrderItemAccordion = (props) => {
             {parsePrice(order?.total)}
             <OrderDetailToggleButton
               ref={toggleBtn}
-              onClick={(e) => toggleAccordion(e)}
+              onClick={() => toggleAccordion()}
             >
               <EnChevronDown className={`${setRotate}`} />
             </OrderDetailToggleButton>

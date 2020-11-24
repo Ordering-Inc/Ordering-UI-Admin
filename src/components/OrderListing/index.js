@@ -19,8 +19,10 @@ import {
 export const OrderListing = (props) => {
   const {
     orderList,
+    driversList,
     orderListView,
-    orderStatusTitle
+    orderStatusTitle,
+    handleUpdateOrdersStatus
   } = props
 
   const theme = useTheme()
@@ -41,7 +43,11 @@ export const OrderListing = (props) => {
             !orderList.loading ? orderList.orders.map(order => (
               <React.Fragment key={order.id}>
                 {orderListView === 'big' && (
-                  <OrderItemAccordion order={order} />
+                  <OrderItemAccordion
+                    order={order}
+                    driversList={driversList}
+                    handleUpdateOrdersStatus={handleUpdateOrdersStatus}
+                  />
                 )}
               </React.Fragment>
             )
@@ -101,7 +107,11 @@ export const OrderListing = (props) => {
             <>
               {!orderList.loading ? orderList.orders.map(order => (
                 <React.Fragment key={order.id}>
-                  <SmallOrderItemAccordion order={order} />
+                  <SmallOrderItemAccordion
+                    order={order}
+                    driversList={driversList}
+                    handleUpdateOrdersStatus={handleUpdateOrdersStatus}
+                  />
                 </React.Fragment>
               )
               ) : (

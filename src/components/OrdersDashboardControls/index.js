@@ -30,7 +30,7 @@ export const OrdersDashboardControls = (props) => {
           </Button>
 
           <OrderStatusTypeSelector
-            defaultValue={60}
+            defaultValue='default'
             type='primary'
             handleChangeOrderStatusType={(orderType) => handleChangeOrderStatusType(orderType)}
           />

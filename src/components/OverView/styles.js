@@ -47,3 +47,19 @@ export const OverViewStatusValue = styled.p`
   font-weight: 600;
   margin: 0px;
 `
+export const SkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > span {
+    margin: 30px 0;
+  }
+
+  > div {
+    margin-bottom: 30px;
+  }
+`
+export const SkeletonCard = styled.div`
+  display: flex;
+  flex-direction: column;
+`

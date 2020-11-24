@@ -1,5 +1,5 @@
-import React from 'react'
-import { useLanguage } from 'ordering-components'
+import React, { useRef } from 'react'
+import { useLanguage, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -18,19 +18,35 @@ import {
   CustomerInfo,
   CustomerContent,
   WrapperOrderStatus,
-  DriverInfo
+  DriverInfo,
+  WrapperDriverSelector,
+  TextContainer
 } from './styles'
 
 export const SmallOrderItemAccordion = (props) => {
-  const { order } = props
+  const {
+    order,
+    driversList
+  } = props
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [events] = useEvent()
+  const driverSelectorRef = useRef(null)
+  const orderStatusRef = useRef(null)
 
-  const handleChangeDriver = (driver) => {
+  const handleGoToPage = (e, data) => {
+    const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
+
+    if (!isActionClick) {
+      events.emit('go_to_page', data)
+    }
+  }
+
+  const handleSelectedDriver = (driver) => {
     console.log(driver)
   }
   return (
-    <OrderItemContainer>
+    <OrderItemContainer onClick={(e, data) => handleGoToPage(e, { page: 'order_detail', params: { orderId: order.id } })}>
       <WrapperInfo>
         <BusinessInfo>
           <WrapperAccordionImage>
@@ -81,13 +97,27 @@ export const SmallOrderItemAccordion = (props) => {
           </CustomerContent>
         </CustomerInfo>
         <DriverInfo>
-          <DriverSelector
-            small
-            handleChangeDriver={(driver) => handleChangeDriver(driver)}
-          />
+          {order?.driver_id ? (
+            <WrapperDriverSelector ref={driverSelectorRef}>
+              <DriverSelector
+                small
+                defaultValue={order?.driver_id ? order.driver_id : 0}
+                driversList={driversList}
+                handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
+              />
+            </WrapperDriverSelector>
+          ) : (
+            <WrapperAccordionImage small>
+              <AccordionImage bgimage={theme?.images?.icons?.noDriver} />
+            </WrapperAccordionImage>
+          )}
+
+          <TextContainer>
+            {!order?.driver_id && 'No Driver'}
+          </TextContainer>
         </DriverInfo>
       </WrapperInfo>
-      <WrapperOrderStatus>
+      <WrapperOrderStatus ref={orderStatusRef}>
         <OrderStatusTypeSelector
           defaultValue={order?.status}
           noPadding

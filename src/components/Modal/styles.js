@@ -13,6 +13,7 @@ export const ModalDialog = styled.div`
   background-color: ${({ isTransparent }) => isTransparent ? 'transparent' : '#FFF'};
   padding: ${({ padding }) => padding || '20px'};
   width: ${({ width }) => width || '50%'};
+  height: ${({ height }) => height};
   border-radius: 10px;
   box-sizing: border-box;
   margin-top: auto;

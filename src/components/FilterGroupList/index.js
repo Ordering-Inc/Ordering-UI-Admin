@@ -21,11 +21,11 @@ export const FilterGroupList = (props) => {
     console.log(dateType)
   }
 
-  const handleChangeBusinessType = (businessType) => {
+  const handleSelectedBusinessType = (businessType) => {
     console.log(businessType)
   }
 
-  const handleChangeDriver = (driver) => {
+  const handleSelectedDriver = (driver) => {
     console.log(driver)
   }
 
@@ -54,11 +54,11 @@ export const FilterGroupList = (props) => {
         handleChangeDateType={(dateType) => handleChangeDateType(dateType)}
       />
       <BusinessTypeSelector
-        handleChangeBusinessType={(businessType) => handleChangeBusinessType(businessType)}
+        handleSelectedBusinessType={(businessType) => handleSelectedBusinessType(businessType)}
       />
       <DriverSelector
         isPhoneView
-        handleChangeDriver={(driver) => handleChangeDriver(driver)}
+        handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
       />
       <CitySelector
         handleChangeCity={(city) => handleChangeCity(city)}

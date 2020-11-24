@@ -1,11 +1,5 @@
+import React from 'react'
 import styled from 'styled-components'
-
-export const PlaceholderTitle = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 5px;
-  padding: 5px 10px;
-`
 
 export const Option = styled.div`
   display: flex;
@@ -33,3 +27,40 @@ export const OptionCategory = styled.div`
   font-size: 12px;
   line-height: 1.3;
 `
+
+export const WrapperBusinessImage = styled.div`
+  width: 45px;
+  height: 45px;
+  border: 1px solid #E3E3E3;
+  border-radius: 10px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 50%;
+  }
+`
+const BusinessImageStyled = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 10px;
+`
+export const BusinessImage = (props) => {
+  return (
+    <BusinessImageStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </BusinessImageStyled>
+  )
+}

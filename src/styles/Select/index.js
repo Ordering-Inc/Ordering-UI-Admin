@@ -55,7 +55,9 @@ export const Select = (props) => {
   const handleChangeOption = (option) => {
     setSelectedOption(option)
     setValue(option.value)
-    onChange && onChange(option.value)
+    setTimeout(() => {
+      onChange && onChange(option.value)
+    }, 100)
   }
 
   return (
@@ -84,9 +86,9 @@ export const Select = (props) => {
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}
           >
-            {options.map((option) => (
+            {options.map((option, i) => (
               <Option
-                key={option.value}
+                key={i}
                 selected={value === option.value}
                 color={option.color}
                 onClick={() => handleChangeOption(option)}

@@ -4,8 +4,7 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   padding: 3px 0;
-  column-gap: 5px;
-  white-space: nowrap;
+  column-gap: 5px;  
 
   ${({ noPadding }) => noPadding && css`
     padding: 0px;
@@ -13,5 +12,13 @@ export const Option = styled.div`
 
   img {
     width: 15px;
+  }
+
+  p {
+    margin: 0px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 170px;
   }
 `

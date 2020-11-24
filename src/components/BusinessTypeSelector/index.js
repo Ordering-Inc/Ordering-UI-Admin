@@ -1,63 +1,100 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components'
-import { Select } from '../../styles/Select'
-
-import businessListData from '../../../template/assets/json/businessList.json'
-
 import {
-  PlaceholderTitle,
+  useLanguage,
+  BusinessList as BusinessListController
+} from 'ordering-components'
+import { Select } from '../../styles/Select'
+import {
   Option,
   OptionContent,
   OptionName,
-  OptionCategory
+  OptionCategory,
+  WrapperBusinessImage,
+  BusinessImage
 } from './styles'
 
-export const BusinessTypeSelector = (props) => {
-  const { handleChangeBusinessType } = props
+const BusinessTypeSelectorUI = (props) => {
+  const {
+    businessesList,
+    paginationProps,
+    getBusinesses,
+    handleSelectedBusinessType
+  } = props
 
   const [, t] = useLanguage()
-  const [businessList, setBusinessList] = useState([])
   const [businessTypes, setBusinessTypes] = useState([])
 
-  const placeholder = (
-    <PlaceholderTitle>{t('BUSINESS', 'Business')}</PlaceholderTitle>
-  )
+  const businessesLoading = [{ value: 0, content: <Option>{t('BUSINESSES_LOADING', 'Businesses loading')}...</Option> }]
+  useEffect(() => {
+    const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
+    if (!hasMore || businessesList.loading) return
+    getBusinesses()
+  }, [paginationProps.currentPage])
 
   useEffect(() => {
-    setBusinessList(businessListData)
-  }, [])
+    const _businessesOptionList = [{ value: 0, content: <Option>{t('BUSINESS', 'Business')}</Option> }]
+    if (!businessesList.loading) {
+      const _businessTypesTemp = businessesList.businesses.map((business) => {
+        return {
+          value: business.id,
+          content: (
+            <Option>
+              <WrapperBusinessImage>
+                {business.logo && <BusinessImage bgimage={business.logo} />}
+              </WrapperBusinessImage>
+              <OptionContent>
+                <OptionName>
+                  {business.name}
+                </OptionName>
+                <OptionCategory>
+                  {business.alcohol && t('ALCOHOL', 'Alcohol')}
+                  {business.food && t('FOOD', 'Food')}
+                  {business.groceries && t('GROCERIES', 'Groceries')}
+                  {business.laundry && t('LAUNDRY', 'Laundry')}
+                </OptionCategory>
+              </OptionContent>
+            </Option>
+          )
+        }
+      })
 
-  useEffect(() => {
-    const businessTypesTemp = businessList.map((business) => {
-      return {
-        value: business.business_name,
-        content: (
-          <Option>
-            <img src={require(`../../../template/assets/images/business/${business.logo}`)} alt={business.business_name} />
-            <OptionContent>
-              <OptionName>
-                {business.business_name}
-              </OptionName>
-              <OptionCategory>
-                {business.business_categroy}
-              </OptionCategory>
-            </OptionContent>
-          </Option>
-        )
+      for (const option of _businessTypesTemp) {
+        _businessesOptionList.push(option)
       }
-    })
+    }
 
-    setBusinessTypes(businessTypesTemp)
-  }, [businessList])
+    setBusinessTypes(_businessesOptionList)
+  }, [businessesList])
 
   return (
-    <Select
-      placeholder={placeholder}
-      options={businessTypes}
-      optionInnerMargin='10px'
-      optionInnerMaxHeight='150px'
-      optionBottomBorder
-      onChange={(businessType) => handleChangeBusinessType(businessType)}
-    />
+    <>
+      {!businessesList.loading ? (
+        <Select
+          defaultValue={0}
+          options={businessTypes}
+          optionInnerMargin='10px'
+          optionInnerMaxHeight='150px'
+          optionBottomBorder
+          onChange={(businessType) => handleSelectedBusinessType(businessType)}
+        />
+      ) : (
+        <Select
+          defaultValue={0}
+          options={businessesLoading}
+          optionInnerMargin='10px'
+          optionInnerMaxHeight='150px'
+          optionBottomBorder
+        />
+      )}
+    </>
   )
+}
+
+export const BusinessTypeSelector = (props) => {
+  const businessListingProps = {
+    ...props,
+    UIComponent: BusinessTypeSelectorUI,
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
+  }
+  return <BusinessListController {...businessListingProps} />
 }

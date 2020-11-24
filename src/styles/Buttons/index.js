@@ -44,14 +44,24 @@ export const Button = styled.button`
   `}
 
   ${({ color }) => color === 'darkBlue' && css`
-  background: ${props => props.theme.colors.btnDarkBlue};
-  color: ${props => props.theme.colors.btnDarkBlueContrast};
-  border-color: ${props => props.theme.colors.btnDarkBlue};
+    background: ${props => props.theme.colors.btnDarkBlue};
+    color: ${props => props.theme.colors.btnDarkBlueContrast};
+    border-color: ${props => props.theme.colors.btnDarkBlue};
 
-  &:active {
-    background: ${props => darken(0.07, props.theme.colors.btnDarkBlue)};
-  }
-`}
+    &:active {
+      background: ${props => darken(0.07, props.theme.colors.btnDarkBlue)};
+    }
+  `}
+
+  ${({ color }) => color === 'offline' && css`
+    background: ${props => props.theme.colors.offline};
+    color: #fff;
+    border-color: ${props => props.theme.colors.offline};
+
+    &:active {
+      background: ${props => darken(0.07, props.theme.colors.offline)};
+    }
+  `}
 
   ${({ color }) => color === 'modalAccept' && css`
     background: #182964;

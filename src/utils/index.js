@@ -2,6 +2,7 @@ import React from 'react'
 import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
 import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
+import moment from 'moment'
 
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback
@@ -84,4 +85,29 @@ export const convertHoursToMinutes = (time) => {
   const [hour, minute] = time.split(':')
   const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
   return `${result}min`
+}
+
+/**
+ * Function to convert star rate in width to display
+ * @param {int} qualification star rate or qualification
+ */
+export const getStarWidth = (qualification) => {
+  if (qualification) {
+    return qualification / 5 * 100 + '%'
+  } else {
+    return '0%'
+  }
+}
+
+/**
+ * Function to calculate differnece with current time in minutes
+ * @param {string} time past time
+ */
+export const getAgoMinutes = (time) => {
+  const totalMinutes = ((moment().utc() - moment(time)) / 1000 / 60).toFixed(0)
+  const hours = Math.floor(totalMinutes / 60)
+  const minutes = totalMinutes - hours * 60
+  if (hours > 0) {
+    return `${hours} hours ${minutes} mins ago`
+  } else return `${minutes} mins ago`
 }

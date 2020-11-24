@@ -8,6 +8,7 @@ export const OrderItemContainer = styled.div`
   border-bottom: 1px solid #F2F2F2;
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
 `
 export const WrapperInfo = styled.div`
   display: flex;
@@ -116,12 +117,13 @@ export const CustomerInfo = styled.div`
   border: 1px solid #F2F2F2;
   border-radius: 28px;
   align-items: center;
-  padding: 3px 10px;
+  padding: 5px 10px;
+  width: 45%;
 `
 export const DriverInfo = styled.div`
-  > div {
-    border-color: ${props => props.theme.colors.btnDarkBlue};
-  }
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
 `
 export const CustomerContent = styled.div`
   p {
@@ -142,4 +144,10 @@ export const WrapperOrderStatus = styled.div`
     width: 100%;
     border-color: ${props => props.theme.colors.btnDarkBlue};
   }
+`
+
+export const WrapperDriverSelector = styled.div`
+`
+export const TextContainer = styled.p`
+  font-size: 12px;
 `

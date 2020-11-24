@@ -12,6 +12,7 @@
   "colors": {
     "primary": "#FAFAFA",
     "disabled": "#CBCBCB",
+    "offline": "#9D9B9B",
 
     "textGray": "#C3C3C3",
     "textBlack": "#000",

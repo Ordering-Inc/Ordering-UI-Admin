@@ -27,6 +27,7 @@ const ModalUI = (props) => {
   return (
     <ModalDialog
       className='popup-dialog'
+      height={props.height}
       width={props.width}
       padding={props.padding}
       isTransparent={isTransparent}

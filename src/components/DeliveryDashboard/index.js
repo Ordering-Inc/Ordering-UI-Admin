@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { AdminOrders } from '../AdminOrdersListControl'
+import { AdminOrdersAndDriversList } from '../AdminOrdersAndDriversListController'
 import { useLanguage } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
-import GoogleMapReact from 'google-map-react'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import FaRegTimesCircle from '@meronex/icons/fa/FaRegTimesCircle'
 import { OrderStatusFilterBar } from '../../../src/components/OrderStatusFilterBar'
 import { OrderContentHeader } from '../../../src/components/OrderContentHeader'
 import { OrderListing } from '../OrderListing'
+import { DriversModal } from '../DriversModal'
+import { DriversLocation } from '../DriversLocation'
 
 import {
   DeliveryDashboardContainer,
   DeliveryDashboardContent,
   DeliveryDashboardInnerContent,
   MapAndOrderContent,
-  WrapperMap,
   WrapperOrdersAndDriver,
-  WrapperMapMarker,
-  MapMarkerImg,
   OrderAndDriverListContainer,
   OrdersOpenButton,
   OrdersCloseButton,
@@ -32,6 +30,8 @@ const DeliveryDashboardUI = (props) => {
     acceptedByBusinessOrders,
     acceptedByDriverOrders,
     driverArrivedByBusinessOrders,
+    readyForPickupOrders,
+    pickupCompletedByDriverOrders,
     completedByAdminOrders,
     deliveryCompletedByDriverOrders,
     rejectedByAdminOrders,
@@ -39,19 +39,22 @@ const DeliveryDashboardUI = (props) => {
     rejectByDriverOrders,
     pickupFailedByDriverOrders,
     deliveryFailedByDriverOrders,
+    driversList,
+    driverOrders,
 
     searchValue,
     ordersStatusSelected,
     handleChangeSearch,
-    handleChangeOrdersStatus
+    handleOrdersStatusFilter,
+    handleChangeDriverOrders,
+    handleUpdateOrdersStatus
   } = props
 
   const [, t] = useLanguage()
   const { width } = useWindowSize()
-  const mapCenter = { lat: 59.95, lng: 30.33 }
-  const mapZoom = 10
   const [openTab, setOpenTab] = useState({ order: true, driver: false })
   const [openOrderAndDriver, setOpenOrderAndDriver] = useState(true)
+  const [driverAvailable, setDriverAvailable] = useState('all')
 
   useEffect(() => {
     if (width < 1200) {
@@ -61,11 +64,20 @@ const DeliveryDashboardUI = (props) => {
     }
   }, [width])
 
+  const handleChangeDriverAvailable = (available) => {
+    setDriverAvailable(available)
+  }
+
+  const handleChangeOrderAndDriver = () => {
+    setOpenTab({ order: true, driver: false })
+    setDriverAvailable('all')
+  }
+
   return (
     <DeliveryDashboardContainer>
       <OrderStatusFilterBar
         selectedOrderStatus={ordersStatusSelected}
-        changeOrderStatus={handleChangeOrdersStatus}
+        changeOrderStatus={handleOrdersStatusFilter}
       />
       <DeliveryDashboardContent>
         <DeliveryDashboardInnerContent>
@@ -75,22 +87,11 @@ const DeliveryDashboardUI = (props) => {
             handleChangeSearch={handleChangeSearch}
           />
           <MapAndOrderContent>
-            <WrapperMap>
-              <GoogleMapReact
-                bootstrapURLKeys={{
-                  key: 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
-                }}
-                defaultCenter={mapCenter}
-                center={mapCenter}
-                defaultZoom={mapZoom}
-                options={{ fullscreenControl: false }}
-                className='map'
-              >
-                <WrapperMapMarker lat={mapCenter.lat} lng={mapCenter.lng}>
-                  <MapMarkerImg bgimage='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg' />
-                </WrapperMapMarker>
-              </GoogleMapReact>
-            </WrapperMap>
+
+            <DriversLocation
+              driversList={driversList}
+              driverAvailable={driverAvailable}
+            />
 
             {!openOrderAndDriver ? (
               <OrdersOpenButton onClick={() => setOpenOrderAndDriver(true)}>
@@ -106,7 +107,7 @@ const DeliveryDashboardUI = (props) => {
                 <WrapperTab>
                   <Tab
                     active={openTab.order}
-                    onClick={() => setOpenTab({ order: true, driver: false })}
+                    onClick={() => handleChangeOrderAndDriver()}
                   >
                     {t('ORDERS', 'Orders')}
                   </Tab>
@@ -123,11 +124,13 @@ const DeliveryDashboardUI = (props) => {
                       {ordersStatusSelected === 'pending' && (
                         <OrderListing
                           orderList={pendingOrders}
+                          driversList={driversList}
                           orderStatusTitle={t(
                             'PENDING_ORDERS',
                             'Pendig orders'
                           )}
                           orderListView='small'
+                          handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                         />
                       )}
 
@@ -135,27 +138,53 @@ const DeliveryDashboardUI = (props) => {
                         <>
                           <OrderListing
                             orderList={acceptedByBusinessOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'ACCEPTED_BY_BUSINESS',
                               'Accepted by Business'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
                           <OrderListing
                             orderList={acceptedByDriverOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'ACCEPTED_BY_Driver',
                               'Accepted by Driver'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
                           <OrderListing
                             orderList={driverArrivedByBusinessOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'DRIVER_ARRIVED_BY_BUSINESS',
                               'Driver arrived by business'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
+                          />
+                          <OrderListing
+                            orderList={readyForPickupOrders}
+                            driversList={driversList}
+                            orderStatusTitle={t(
+                              'READY_FOR_PICKUP',
+                              'Ready for pickup'
+                            )}
+                            orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
+                          />
+                          <OrderListing
+                            orderList={pickupCompletedByDriverOrders}
+                            driversList={driversList}
+                            orderStatusTitle={t(
+                              'PICKUP_COMPLETED_BY_DRIVER',
+                              'Pickup completed by driver'
+                            )}
+                            orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
                         </>
                       )}
@@ -164,19 +193,23 @@ const DeliveryDashboardUI = (props) => {
                         <>
                           <OrderListing
                             orderList={completedByAdminOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'COMPLETED_BY_ADMIN',
                               'Completed by admin'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
                           <OrderListing
                             orderList={deliveryCompletedByDriverOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'DELIVERY_COMPLETED_BY_DRIVER',
                               'Delivery completed by driver'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
                         </>
                       )}
@@ -185,52 +218,69 @@ const DeliveryDashboardUI = (props) => {
                         <>
                           <OrderListing
                             orderList={rejectedByAdminOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'REJECTED_BY_ADMIN',
                               'Rejected by admin'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
 
                           <OrderListing
                             orderList={rejectByBusinessOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'REJECT_BY_BUSINESS',
                               'Reject by business'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
 
                           <OrderListing
                             orderList={rejectByDriverOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'REJECT_BY_DRIVER',
                               'Reject by driver'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
                           <OrderListing
                             orderList={pickupFailedByDriverOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'PICKUP_FAILED_BY_DRIVER',
                               'Pickup failed by driver'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
 
                           <OrderListing
                             orderList={deliveryFailedByDriverOrders}
+                            driversList={driversList}
                             orderStatusTitle={t(
                               'DELIVERY_FAILED_BY_DRIVER',
                               'Delivery failed by driver'
                             )}
                             orderListView='small'
+                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                           />
                         </>
                       )}
                     </>
                   )}
-                  {openTab.driver && <div>driver</div>}
+                  {openTab.driver && (
+                    <DriversModal
+                      driversList={driversList}
+                      driverOrders={driverOrders}
+                      handleChangeDriverAvailable={handleChangeDriverAvailable}
+                      handleChangeDriverOrders={handleChangeDriverOrders}
+                    />
+                  )}
                 </OrderAndDriverListContainer>
               </WrapperOrdersAndDriver>
             )}
@@ -242,11 +292,11 @@ const DeliveryDashboardUI = (props) => {
 }
 
 export const DeliveryDashboard = () => {
-  const AdminOrdersControlProps = {
+  const AdminOrdersAndDriversListControlProps = {
     UIComponent: DeliveryDashboardUI,
     isSearchByOrderNumber: true,
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true
   }
-  return <AdminOrders {...AdminOrdersControlProps} />
+  return <AdminOrdersAndDriversList {...AdminOrdersAndDriversListControlProps} />
 }
