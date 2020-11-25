@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, OrderDetails as OrderDetailsController, useUtils } from 'ordering-components'
@@ -19,8 +19,8 @@ import {
   Container,
   WrapperContainer,
   OrderInfoContent,
-  LogoWrapper,
-  BusinessLogo,
+  PhotoWrapper,
+  Photo,
   OrderInfo,
   OrderData,
   StatusBar,
@@ -28,7 +28,6 @@ import {
   StatusImage,
   SectionTitle,
   SectionContainer,
-  PhotoBlock,
   InfoBlock,
   CustomerContactBlock,
   OrderProducts,
@@ -126,6 +125,10 @@ const OrderDetailsUI = (props) => {
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
   }
 
+  useEffect(() => {
+    console.log(props.order)
+  }, [props.order])
+
   return (
     <Container>
       <BackActions>
@@ -185,7 +188,7 @@ const OrderDetailsUI = (props) => {
             </PayAndOrderTypeInfo>
 
             <OrderProducts>
-              {order?.products?.length && order?.products.map(product => (
+              {order?.products?.length && order?.products.map((product) => (
                 <ProductItemAccordion
                   key={product.id}
                   product={product}
@@ -253,13 +256,13 @@ const OrderDetailsUI = (props) => {
               {t('CUSTOMER', 'Customer')}
             </SectionTitle>
             <SectionContainer>
-              <div className='photo'>
+              <PhotoWrapper>
                 {order?.customer?.photo ? (
-                  <PhotoBlock src={order?.customer?.photo} />
+                  <Photo bgimage={order?.customer?.photo} />
                 ) : (
                   <FaUserAlt />
                 )}
-              </div>
+              </PhotoWrapper>
               <InfoBlock>
                 <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
                 <span><HiOutlineLocationMarker /> {order?.customer?.address}</span>
@@ -278,9 +281,9 @@ const OrderDetailsUI = (props) => {
               {t('BUSINESS', 'Business')}
             </SectionTitle>
             <SectionContainer>
-              <LogoWrapper>
-                <BusinessLogo bgimage={order?.business?.logo} />
-              </LogoWrapper>
+              <PhotoWrapper>
+                <Photo bgimage={order?.business?.logo} />
+              </PhotoWrapper>
               <InfoBlock>
                 <h1>{order?.business?.name}</h1>
                 <span><HiOutlineLocationMarker /> {order?.business?.address}</span>
@@ -299,24 +302,26 @@ const OrderDetailsUI = (props) => {
               {t('DRIVER', 'Driver')}
             </SectionTitle>
             <SectionContainer>
-              <div className='photo'>
+              <PhotoWrapper>
                 {order?.driver?.photo ? (
-                  <PhotoBlock src={order?.driver?.photo} />
+                  <Photo bgimage={order?.driver?.photo} />
                 ) : (
-                  <PhotoBlock src={theme?.images?.icons?.noDriver} />
+                  <Photo bgimage={theme?.images?.icons?.noDriver} />
                 )}
-              </div>
-              <InfoBlock>
-                <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                <CustomerContactBlock>
-                  <button onClick={() => handleOpenMessages('driver')}>
-                    <BsChat /> {t('CHAT', 'Chat')}
-                  </button>
-                  <button onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                    <HiOutlinePhone /> {t('CALL', 'Call')}
-                  </button>
-                </CustomerContactBlock>
-              </InfoBlock>
+              </PhotoWrapper>
+              {order.driver_id && (
+                <InfoBlock>
+                  <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                  <CustomerContactBlock>
+                    <button onClick={() => handleOpenMessages('driver')}>
+                      <BsChat /> {t('CHAT', 'Chat')}
+                    </button>
+                    <button onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                      <HiOutlinePhone /> {t('CALL', 'Call')}
+                    </button>
+                  </CustomerContactBlock>
+                </InfoBlock>
+              )}
             </SectionContainer>
 
             <SectionTitle>

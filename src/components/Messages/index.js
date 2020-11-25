@@ -360,25 +360,79 @@ export const MessagesUI = (props) => {
                         )}
                         {message.type === 2 && user.id !== message.author_id && (
                           <MessageBusiness>
-                            <BubbleBusines>
-                              <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                              {message.comment}
-                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                            </BubbleBusines>
+                            {customer && message.can_see.includes(3) && (
+                              <>
+                                <BubbleBusines>
+                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  {message.comment}
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleBusines>
+                              </>
+                            )}
+                            {business && message.can_see.includes(1) && (
+                              <>
+                                <BubbleBusines>
+                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  {message.comment}
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleBusines>
+                              </>
+                            )}
+                            {driver && message.can_see.includes(2) && (
+                              <>
+                                <BubbleBusines>
+                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  {message.comment}
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleBusines>
+                              </>
+                            )}
                           </MessageBusiness>
                         )}
                         {message.type === 3 && user.id !== message.author_id && (
                           <MessageBusiness>
-                            <BubbleBusines name='image'>
-                              <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
-                              <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
-                              {message.comment && (
-                                <>
-                                  {message.comment}
-                                </>
-                              )}
-                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                            </BubbleBusines>
+                            {customer && message.can_see.includes(3) && (
+                              <>
+                                <BubbleBusines name='image'>
+                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                                  {message.comment && (
+                                    <>
+                                      {message.comment}
+                                    </>
+                                  )}
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleBusines>
+                              </>
+                            )}
+                            {business && message.can_see.includes(1) && (
+                              <>
+                                <BubbleBusines name='image'>
+                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                                  {message.comment && (
+                                    <>
+                                      {message.comment}
+                                    </>
+                                  )}
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleBusines>
+                              </>
+                            )}
+                            {driver && message.can_see.includes(2) && (
+                              <>
+                                <BubbleBusines name='image'>
+                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                                  {message.comment && (
+                                    <>
+                                      {message.comment}
+                                    </>
+                                  )}
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleBusines>
+                              </>
+                            )}
                           </MessageBusiness>
                         )}
                       </>

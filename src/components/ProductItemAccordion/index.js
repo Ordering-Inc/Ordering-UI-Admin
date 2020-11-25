@@ -233,7 +233,7 @@ export const ProductItemAccordion = (props) => {
         {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
           <ProductOptionsList>
             <p>{t('INGREDIENTS', 'Ingredients')}</p>
-            {productInfo().ingredients.map(ingredient => !ingredient.selected && (
+            {productInfo().ingredients.map((ingredient) => !ingredient.selected && (
               <li className='ingredient' key={ingredient.id}>
                 <span>{t('NO', 'No')} {ingredient.name}</span>
               </li>
@@ -242,8 +242,8 @@ export const ProductItemAccordion = (props) => {
         )}
         {productInfo().options.length > 0 && (
           <ProductOptionsList>
-            {productInfo().options.map(option => (
-              <li key={option.id}>
+            {productInfo().options.map((option, i) => (
+              <li key={i}>
                 <p>{option.name}</p>
                 <ProductOptionsList className='suboption'>
                   {option.suboptions.map(suboption => (

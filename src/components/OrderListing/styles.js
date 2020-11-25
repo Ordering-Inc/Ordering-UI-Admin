@@ -61,8 +61,6 @@ export const SkeletonText = styled.div`
     `}
 `
 export const WrapperOrderListContent = styled.div`
-    overflow: auto;
-    max-height: 650px;
     padding: 5px;
     margin-bottom: 40px;
 

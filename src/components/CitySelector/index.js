@@ -14,10 +14,9 @@ export const CitySelector = (props) => {
   const [, t] = useLanguage()
 
   const cityTypes = [
-    { value: 1, content: <Option>{t('NEW_YORK', 'New York')}</Option> },
-    { value: 2, content: <Option>{t('AUSTIN', 'Austin')}</Option> },
-    { value: 3, content: <Option>{t('SAN_FRANCISCO', 'San Francisco')}</Option> },
-    { value: 4, content: <Option>{t('LOS_ANGELES', 'Los Angeles')}</Option> }
+    { value: 1, content: <Option>{t('AUSTIN', 'Austin')}</Option> },
+    { value: 2, content: <Option>{t('NEW_YORK', 'New York')}</Option> },
+    { value: 3, content: <Option>{t('SAN_FRANCISCO', 'San Francisco')}</Option> }
   ]
 
   const placeholder = <PlaceholderTitle>{t('CITY', 'City')}</PlaceholderTitle>

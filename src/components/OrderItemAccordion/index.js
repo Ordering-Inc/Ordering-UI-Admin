@@ -3,8 +3,6 @@ import { useLanguage, useUtils, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
-import BsFillCircleFill from '@meronex/icons/bs/BsFillCircleFill'
-import OiCircleCheck from '@meronex/icons/oi/OiCircleCheck'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DriverSelector } from '../DriverSelector'
@@ -35,7 +33,9 @@ export const OrderItemAccordion = (props) => {
   const {
     order,
     driversList,
-    handleUpdateOrdersStatus
+    updateOrdersSelectedStatus,
+    handleUpdateOrderStatus,
+    handleSelectedOrderIds
   } = props
 
   const [, t] = useLanguage()
@@ -46,16 +46,14 @@ export const OrderItemAccordion = (props) => {
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
-
   const checkbox = useRef(null)
   const content = useRef(null)
   const toggleBtn = useRef(null)
   const statusTypeSelector = useRef(null)
   const driverSelectorRef = useRef(null)
-  const [selectedOrder, setSelectedOrder] = useState(false)
 
-  const toggleOrderSelect = () => {
-    setSelectedOrder(!selectedOrder)
+  const toggleOrderSelect = (id) => {
+    handleSelectedOrderIds(id)
   }
   const toggleAccordion = () => {
     setActiveState(setActive === '' ? 'active' : '')
@@ -65,6 +63,9 @@ export const OrderItemAccordion = (props) => {
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
+  }
+  const isChecked = (id) => {
+    return updateOrdersSelectedStatus.ids.includes(id)
   }
 
   const handleGoToPage = (e, data) => {
@@ -91,21 +92,19 @@ export const OrderItemAccordion = (props) => {
         //       : theme?.colors?.deadlineRisk
         // }
 
-        onClick={(e, data) => handleGoToPage(e, { page: 'order_detail', params: { orderId: order.id } })}
+        onClick={(e) => handleGoToPage(e, { page: 'order_detail', params: { orderId: order.id } })}
       >
         <OrderItemAccordionCell>
           <CheckBoxContainer ref={checkbox}>
-            {!selectedOrder ? (
-              <BsFillCircleFill className='circle' onClick={() => toggleOrderSelect()} />
-            ) : (
-              <OiCircleCheck className='circle-check' onClick={() => toggleOrderSelect()} />
-            )}
+            <label className='checkbox-container'>
+              <TextBlockContainer>
+                <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
+                <SmallText>{order?.delivery_datetime}</SmallText>
+              </TextBlockContainer>
+              <input type='checkbox' checked={isChecked(order.id)} onChange={() => toggleOrderSelect(order.id)} />
+              <span className='checkmark' />
+            </label>
           </CheckBoxContainer>
-
-          <TextBlockContainer>
-            <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
-            <SmallText>{order?.delivery_datetime}</SmallText>
-          </TextBlockContainer>
         </OrderItemAccordionCell>
 
         <OrderItemAccordionCell>
@@ -180,17 +179,17 @@ export const OrderItemAccordion = (props) => {
             defaultValue={order.status}
             orderId={order.id}
             noPadding
-            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
+            handleUpdateOrderStatus={handleUpdateOrderStatus}
           />
         </OrderItemAccordionCell>
 
         <OrderItemAccordionCell>
-          <BigText>
+          <BigText
+            ref={toggleBtn}
+            onClick={() => toggleAccordion()}
+          >
             {parsePrice(order?.total)}
-            <OrderDetailToggleButton
-              ref={toggleBtn}
-              onClick={() => toggleAccordion()}
-            >
+            <OrderDetailToggleButton>
               <EnChevronDown className={`${setRotate}`} />
             </OrderDetailToggleButton>
           </BigText>

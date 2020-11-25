@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 
 import { OrderItemAccordion } from '../OrderItemAccordion'
 import { SmallOrderItemAccordion } from '../SmallOrderItemAccordion'
+import { OrdersPagination } from '../OrdersPagination'
 
 import {
   OrderStatusTitle,
@@ -20,12 +21,39 @@ export const OrderListing = (props) => {
   const {
     orderList,
     driversList,
+    updateOrdersSelectedStatus,
     orderListView,
     orderStatusTitle,
-    handleUpdateOrdersStatus
+    handleUpdateOrderStatus,
+    handleSelectedOrderIds
   } = props
 
   const theme = useTheme()
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [ordersPerPage] = useState(10)
+
+  // Get current orders
+  const indexOfLastPost = currentPage * ordersPerPage
+  const indexOfFirstPost = indexOfLastPost - ordersPerPage
+  const currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+  const prevPaginate = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+  const nextPaginate = () => {
+    if (currentPage !== Math.ceil(orderList.orders.length / ordersPerPage)) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  useEffect(() => {
+    console.log(orderList)
+  }, [orderList])
 
   return (
     <>
@@ -40,20 +68,22 @@ export const OrderListing = (props) => {
       ) : (
         <WrapperOrderListContent small={orderListView === 'small'}>
           {orderListView === 'big' &&
-            !orderList.loading ? orderList.orders.map(order => (
+            !orderList.loading ? currentOrders.map(order => (
               <React.Fragment key={order.id}>
                 {orderListView === 'big' && (
                   <OrderItemAccordion
                     order={order}
                     driversList={driversList}
-                    handleUpdateOrdersStatus={handleUpdateOrdersStatus}
+                    updateOrdersSelectedStatus={updateOrdersSelectedStatus}
+                    handleUpdateOrderStatus={handleUpdateOrderStatus}
+                    handleSelectedOrderIds={handleSelectedOrderIds}
                   />
                 )}
               </React.Fragment>
             )
             ) : (
               <SkeletonOrder>
-                {orderListView === 'big' && [...Array(8)].map((item, i) => (
+                {orderListView === 'big' && [...Array(10)].map((item, i) => (
                   <SkeletonCard key={i}>
                     <SkeletonCell>
                       <Skeleton width={10} height={10} />
@@ -110,7 +140,6 @@ export const OrderListing = (props) => {
                   <SmallOrderItemAccordion
                     order={order}
                     driversList={driversList}
-                    handleUpdateOrdersStatus={handleUpdateOrdersStatus}
                   />
                 </React.Fragment>
               )
@@ -146,6 +175,17 @@ export const OrderListing = (props) => {
                 </SkeletonOrder>
               )}
             </>
+          )}
+
+          {!orderList.loading && orderList.orders.length > ordersPerPage && (
+            <OrdersPagination
+              ordersPerPage={ordersPerPage}
+              totalOrders={orderList.orders.length}
+              currentPage={currentPage}
+              paginate={paginate}
+              prevPaginate={prevPaginate}
+              nextPaginate={nextPaginate}
+            />
           )}
         </WrapperOrderListContent>
       )}

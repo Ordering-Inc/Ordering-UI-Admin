@@ -11,12 +11,11 @@ import { ExportCSV } from '../ExportCSV'
 import { OrderDashboardControlsContainer, InnerContnet } from './styles'
 
 export const OrdersDashboardControls = (props) => {
+  const {
+    handleChangeMultiOrdersStatus
+  } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
-
-  const handleChangeOrderStatusType = (orderType) => {
-    console.log(orderType)
-  }
 
   return (
     <>
@@ -30,9 +29,10 @@ export const OrdersDashboardControls = (props) => {
           </Button>
 
           <OrderStatusTypeSelector
+            mutiOrdersChange
             defaultValue='default'
             type='primary'
-            handleChangeOrderStatusType={(orderType) => handleChangeOrderStatusType(orderType)}
+            handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
           />
 
           <Button color='secondary' borderRadius='6px' withIcon>

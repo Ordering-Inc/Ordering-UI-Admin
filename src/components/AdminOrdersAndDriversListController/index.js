@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 import { useSession, useApi } from 'ordering-components'
+dayjs.extend(utc)
 
 export const AdminOrdersAndDriversList = (props) => {
   const {
@@ -27,6 +30,10 @@ export const AdminOrdersAndDriversList = (props) => {
    * Object to save pending orders
    */
   const [pendingOrdersStatus, setPendingOrdersStatus] = useState({ loading: true, orders: [], error: null })
+  /**
+   * Object to save preorders
+   */
+  const [preOrdersStatus, setPreOrdersStatus] = useState({ loading: true, orders: [], error: null })
   /**
    * Object to save accepted by business orders
    */
@@ -86,7 +93,7 @@ export const AdminOrdersAndDriversList = (props) => {
   /**
    * Object to update orders
    */
-  const [updateOrdersSelected, setUpdateOrdersSelected] = useState({ })
+  const [updateOrdersSelectedStatus, setUpdateOrdersSelectedStatus] = useState({ ids: [], status: null, lading: true, error: null })
 
   /**
    * Change orders filter by status selected
@@ -114,11 +121,40 @@ export const AdminOrdersAndDriversList = (props) => {
   }
 
   /**
-   * Update Orders status by order ids
-   * @param {object} updateOrders orders id and status
+   * Update Orders status by order id
+   * @param {object} ordersSelected order id and status
    */
-  const handleUpdateOrdersStatus = (updateOrders) => {
-    setUpdateOrdersSelected(updateOrders)
+  const handleUpdateOrderStatus = (orderSelected) => {
+    const id = []
+    id.push(orderSelected.id)
+    setUpdateOrdersSelectedStatus({ ...updateOrdersSelectedStatus, ids: id, status: orderSelected.status })
+  }
+
+  /**
+   * Save ids of orders selected
+   * @param {int} orderId order id
+   */
+  const handleSelectedOrderIds = (orderId) => {
+    const _ids = updateOrdersSelectedStatus.ids
+    if (!_ids.includes(orderId)) {
+      _ids.push(orderId)
+    } else {
+      for (let i = 0; i < _ids.length; i++) {
+        if (_ids[i] === orderId) {
+          _ids.splice(i, 1)
+          i--
+        }
+      }
+    }
+    console.log('idss', _ids)
+    setUpdateOrdersSelectedStatus({ ...updateOrdersSelectedStatus, ids: _ids })
+  }
+  /**
+   * save status to change status for multi orders selected
+   * @param {int} status order status
+   */
+  const handleChangeMultiOrdersStatus = (status) => {
+    setUpdateOrdersSelectedStatus({ ...updateOrdersSelectedStatus, status: status })
   }
 
   const isMatchSearch = (id, email, phone) => {
@@ -129,394 +165,163 @@ export const AdminOrdersAndDriversList = (props) => {
       (phone.toString().toLowerCase().includes(searchValue.toLowerCase()) && isSearchByCustomerPhone)
   }
 
-  /**
-   * Method to get pending orders from API
-   */
-  const getPendingOrders = async () => {
-    try {
-      setPendingOrdersStatus({ ...pendingOrdersStatus, loading: true })
-      const source = {}
-      requestsState.pendingOrders = source
+  const isPendingOrder = (time) => {
+    const diff = ((dayjs().utc().local().unix() - dayjs.utc(time, 'YYYY-MM-DD HH:mm:ss').local().unix())) / 60
+    return diff < 60
+  }
 
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [0] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setPendingOrdersStatus({
-        ...pendingOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setPendingOrdersStatus({
-        ...pendingOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
+  const isPreOrder = (time) => {
+    const diff = ((dayjs().unix() - dayjs.utc(time, 'YYYY-MM-DD HH:mm:ss').local().unix())) / 60
+    return diff > 60
   }
 
   /**
-   * Method to get accepted by business orders from API
+   * Method to get orders according to status from API
    */
-  const getAcceptedByBusinessOrders = async () => {
+  const getOrders = async (status) => {
     try {
-      setAcceptedByBusinessOrdersStatus({ ...acceptedByBusinessOrdersStatus, loading: true })
       const source = {}
-      requestsState.acceptedByBusinessOrders = source
+      requestsState.orders = source
+
+      switch (status) {
+        case 0:
+          setPendingOrdersStatus({ ...pendingOrdersStatus, loading: true })
+          setPreOrdersStatus({ ...preOrdersStatus, loading: true })
+          break
+        case 1:
+          setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: true })
+          break
+        case 2:
+          setRejectedByAdminOrdersStatus({ ...rejectedByAdminOrdersStatus, loading: true })
+          break
+        case 3:
+          setDriverArrivedByBusinessOrdersStatus({ ...driverArrivedByBusinessOrdersStatus, loading: true })
+          break
+        case 4:
+          setReadyForPickupOrdersStatus({ ...readyForPickupOrdersStatus, loading: true })
+          break
+        case 5:
+          setRejectByBusinessOrdersStatus({ ...rejectByBusinessOrdersStatus, loading: true })
+          break
+        case 6:
+          setRejectByDriverOrdersStatus({ ...rejectByDriverOrdersStatus, loading: true })
+          break
+        case 7:
+          setAcceptedByBusinessOrdersStatus({ ...acceptedByBusinessOrdersStatus, loading: true })
+          break
+        case 8:
+          setAcceptedByDriverOrdersStatus({ ...acceptedByDriverOrdersStatus, loading: true })
+          break
+        case 9:
+          setPickupCompletedByDriverOrdersStatus({ ...pickupCompletedByDriverOrdersStatus, loading: true })
+          break
+        case 10:
+          setPickupFailedByDriverOrdersStatus({ ...pickupFailedByDriverOrdersStatus, loading: true })
+          break
+        case 11:
+          setDeliveryCompletedByDriverOrdersStatus({ ...deliveryCompletedByDriverOrdersStatus, loading: true })
+          break
+        case 12:
+          setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: true })
+          break
+      }
+
       const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [7] }
+        { attribute: 'status', value: status }
       ]).get({ cancelToken: source })
 
       const _result = result.filter(
         order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
       )
 
-      setAcceptedByBusinessOrdersStatus({
-        ...acceptedByBusinessOrdersStatus,
-        loading: false,
-        orders: _result
-      })
+      switch (status) {
+        case 0: {
+          const _pendingResult = _result.filter(order => isPendingOrder(order.delivery_datetime))
+          const _preResult = _result.filter(order => isPreOrder(order.delivery_datetime))
+          setPendingOrdersStatus({ ...pendingOrdersStatus, loading: false, orders: _pendingResult })
+          setPreOrdersStatus({ ...preOrdersStatus, loading: false, orders: _preResult })
+          break
+        }
+        case 1:
+          setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: false, orders: _result })
+          break
+        case 2:
+          setRejectedByAdminOrdersStatus({ ...rejectedByAdminOrdersStatus, loading: false, orders: _result })
+          break
+        case 3:
+          setDriverArrivedByBusinessOrdersStatus({ ...driverArrivedByBusinessOrdersStatus, loading: false, orders: _result })
+          break
+        case 4:
+          setReadyForPickupOrdersStatus({ ...readyForPickupOrdersStatus, loading: false, orders: _result })
+          break
+        case 5:
+          setRejectByBusinessOrdersStatus({ ...rejectByBusinessOrdersStatus, loading: false, orders: _result })
+          break
+        case 6:
+          setRejectByDriverOrdersStatus({ ...rejectByDriverOrdersStatus, loading: false, orders: _result })
+          break
+        case 7:
+          setAcceptedByBusinessOrdersStatus({ ...acceptedByBusinessOrdersStatus, loading: false, orders: _result })
+          break
+        case 8:
+          setAcceptedByDriverOrdersStatus({ ...acceptedByDriverOrdersStatus, loading: false, orders: _result })
+          break
+        case 9:
+          setPickupCompletedByDriverOrdersStatus({ ...pickupCompletedByDriverOrdersStatus, loading: false, orders: _result })
+          break
+        case 10:
+          setPickupFailedByDriverOrdersStatus({ ...pickupFailedByDriverOrdersStatus, loading: false, orders: _result })
+          break
+        case 11:
+          setDeliveryCompletedByDriverOrdersStatus({ ...deliveryCompletedByDriverOrdersStatus, loading: false, orders: _result })
+          break
+        case 12:
+          setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: false, orders: _result })
+          break
+      }
     } catch (err) {
-      setAcceptedByBusinessOrdersStatus({
-        ...acceptedByBusinessOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get accepted by driver orders from API
-   */
-  const getAcceptedByDriverOrders = async () => {
-    try {
-      setAcceptedByDriverOrdersStatus({ ...acceptedByDriverOrdersStatus, loading: true })
-      const source = {}
-      requestsState.acceptedByDriverOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [8] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setAcceptedByDriverOrdersStatus({
-        ...acceptedByDriverOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setAcceptedByDriverOrdersStatus({
-        ...acceptedByDriverOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get ready for pick orders from API
-   */
-  const getReadyForPickupOrders = async () => {
-    try {
-      setReadyForPickupOrdersStatus({ ...readyForPickupOrdersStatus, loading: true })
-      const source = {}
-      requestsState.readyForPickupOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [4] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setReadyForPickupOrdersStatus({
-        ...readyForPickupOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setReadyForPickupOrdersStatus({
-        ...readyForPickupOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get pickup completed by driver orders from API
-   */
-  const getPickupCompletedByDriverOrders = async () => {
-    try {
-      setPickupCompletedByDriverOrdersStatus({ ...pickupCompletedByDriverOrdersStatus, loading: true })
-      const source = {}
-      requestsState.readyForPickupOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [9] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setPickupCompletedByDriverOrdersStatus({
-        ...pickupCompletedByDriverOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setPickupCompletedByDriverOrdersStatus({
-        ...pickupCompletedByDriverOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get driver arrived by business orders from API
-   */
-  const getDriverArrivedByBusinessOrders = async () => {
-    try {
-      setDriverArrivedByBusinessOrdersStatus({ ...driverArrivedByBusinessOrdersStatus, loading: true })
-      const source = {}
-      requestsState.driverArrivedByBusinessOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [3] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setDriverArrivedByBusinessOrdersStatus({
-        ...driverArrivedByBusinessOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setDriverArrivedByBusinessOrdersStatus({
-        ...driverArrivedByBusinessOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get completed by admin orders from API
-   */
-  const getCompletedByAdminOrders = async () => {
-    try {
-      setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: true })
-      const source = {}
-      requestsState.completedByAdminOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [1] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setCompletedByAdminOrdersStatus({
-        ...completedByAdminOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setCompletedByAdminOrdersStatus({
-        ...completedByAdminOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get delivery completed by driver orders from API
-   */
-  const getDeliveryCompletedByDriverOrders = async () => {
-    try {
-      setDeliveryCompletedByDriverOrdersStatus({ ...deliveryCompletedByDriverOrdersStatus, loading: true })
-      const source = {}
-      requestsState.deliveryCompletedByDriverOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [11] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setDeliveryCompletedByDriverOrdersStatus({
-        ...deliveryCompletedByDriverOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setDeliveryCompletedByDriverOrdersStatus({
-        ...deliveryCompletedByDriverOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get rejected by admin orders from API
-   */
-  const getRejectedByAdminOrdersOrders = async () => {
-    try {
-      setRejectedByAdminOrdersStatus({ ...rejectedByAdminOrdersStatus, loading: true })
-      const source = {}
-      requestsState.rejectedByAdminOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [2] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setRejectedByAdminOrdersStatus({
-        ...rejectedByAdminOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setRejectedByAdminOrdersStatus({
-        ...rejectedByAdminOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get rejected by business orders from API
-   */
-  const getRejectByBusinessOrders = async () => {
-    try {
-      setRejectByBusinessOrdersStatus({ ...rejectByBusinessOrdersStatus, loading: true })
-      const source = {}
-      requestsState.rejectByBusinessOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [5] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setRejectByBusinessOrdersStatus({
-        ...rejectByBusinessOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setRejectByBusinessOrdersStatus({
-        ...rejectByBusinessOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get reject by driver orders from API
-   */
-  const getRejectByDriverOrders = async () => {
-    try {
-      setRejectByDriverOrdersStatus({ ...rejectByDriverOrdersStatus, loading: true })
-      const source = {}
-      requestsState.rejectByDriverOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [6] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setRejectByDriverOrdersStatus({
-        ...rejectByDriverOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setRejectByDriverOrdersStatus({
-        ...rejectByDriverOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get pickup failed by driver orders from API
-   */
-  const getPickupFailedByDriverOrders = async () => {
-    try {
-      setPickupFailedByDriverOrdersStatus({ ...pickupFailedByDriverOrdersStatus, loading: true })
-      const source = {}
-      requestsState.pickupFailedByDriverOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [10] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setPickupFailedByDriverOrdersStatus({
-        ...pickupFailedByDriverOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setPickupFailedByDriverOrdersStatus({
-        ...pickupFailedByDriverOrdersStatus,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Method to get delivery failed by driver orders from API
-   */
-  const getDeliveryFailedByDriverOrders = async () => {
-    try {
-      setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: true })
-      const source = {}
-      requestsState.deliveryFailedByDriverOrders = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: [12] }
-      ]).get({ cancelToken: source })
-
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
-
-      setDeliveryFailedByDriverOrdersStatus({
-        ...deliveryFailedByDriverOrdersStatus,
-        loading: false,
-        orders: _result
-      })
-    } catch (err) {
-      setDeliveryFailedByDriverOrdersStatus({
-        ...deliveryFailedByDriverOrdersStatus,
-        loading: false,
-        error: err.message
-      })
+      switch (status) {
+        case 0:
+          setPendingOrdersStatus({ ...pendingOrdersStatus, loading: false, error: err.message })
+          setPreOrdersStatus({ ...preOrdersStatus, loading: false, error: err.message })
+          break
+        case 1:
+          setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: false, error: err.message })
+          break
+        case 2:
+          setRejectedByAdminOrdersStatus({ ...rejectedByAdminOrdersStatus, loading: false, error: err.message })
+          break
+        case 3:
+          setDriverArrivedByBusinessOrdersStatus({ ...driverArrivedByBusinessOrdersStatus, loading: false, error: err.message })
+          break
+        case 4:
+          setReadyForPickupOrdersStatus({ ...readyForPickupOrdersStatus, loading: false, error: err.message })
+          break
+        case 5:
+          setRejectByBusinessOrdersStatus({ ...rejectByBusinessOrdersStatus, loading: false, error: err.message })
+          break
+        case 6:
+          setRejectByDriverOrdersStatus({ ...rejectByDriverOrdersStatus, loading: false, error: err.message })
+          break
+        case 7:
+          setAcceptedByBusinessOrdersStatus({ ...acceptedByBusinessOrdersStatus, loading: false, error: err.message })
+          break
+        case 8:
+          setAcceptedByDriverOrdersStatus({ ...acceptedByDriverOrdersStatus, loading: false, error: err.message })
+          break
+        case 9:
+          setPickupCompletedByDriverOrdersStatus({ ...pickupCompletedByDriverOrdersStatus, loading: false, error: err.message })
+          break
+        case 10:
+          setPickupFailedByDriverOrdersStatus({ ...pickupFailedByDriverOrdersStatus, loading: false, error: err.message })
+          break
+        case 11:
+          setDeliveryCompletedByDriverOrdersStatus({ ...deliveryCompletedByDriverOrdersStatus, loading: false, error: err.message })
+          break
+        case 12:
+          setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: false, error: err.message })
+          break
+      }
     }
   }
 
@@ -525,7 +330,6 @@ export const AdminOrdersAndDriversList = (props) => {
    */
   const getDrivers = async () => {
     try {
-      setDriversList({ ...driversList, loading: true })
       const source = {}
       requestsState.drivers = source
 
@@ -567,12 +371,9 @@ export const AdminOrdersAndDriversList = (props) => {
         conditions,
         conector: 'AND'
       }
-
       const source = {}
       requestsState.driverOrders = source
-
       const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where(where).get({ cancelToken: source })
-
       setDriverOrders({
         ...driverOrders,
         loading: false,
@@ -591,15 +392,18 @@ export const AdminOrdersAndDriversList = (props) => {
    * Method to change order status from API
    */
   const updateOrdersStatus = async () => {
-    console.log('update', updateOrdersSelected.ids, updateOrdersSelected.status)
+    console.log('update', updateOrdersSelectedStatus.ids, updateOrdersSelectedStatus.status)
     try {
+      setUpdateOrdersSelectedStatus({ ...updateOrdersSelectedStatus, loading: true, error: null })
       const source = {}
       requestsState.updateOrders = source
-
-      const response = await ordering.setAccessToken(token).orders(updateOrdersSelected.ids).save({ status: updateOrdersSelected.status }, { cancelToken: source })
-      console.log('res', response)
+      for (const id of updateOrdersSelectedStatus.ids) {
+        await ordering.setAccessToken(token).orders(id).save({ status: updateOrdersSelectedStatus.status }, { cancelToken: source })
+      }
+      setUpdateOrdersSelectedStatus({ ids: [], status: null, loading: false, error: null })
     } catch (err) {
-      console.log('error', err)
+      console.log(err)
+      setUpdateOrdersSelectedStatus({ ...updateOrdersSelectedStatus, loading: false, error: err })
     }
   }
 
@@ -607,33 +411,35 @@ export const AdminOrdersAndDriversList = (props) => {
    * Listening orders ids to update status
    */
   useEffect(() => {
-    if (Object.keys(updateOrdersSelected).length !== 0) updateOrdersStatus()
-  }, [updateOrdersSelected])
+    if (updateOrdersSelectedStatus.ids.length !== 0 && updateOrdersSelectedStatus.status !== null) {
+      updateOrdersStatus()
+    }
+  }, [updateOrdersSelectedStatus.ids, updateOrdersSelectedStatus.status])
 
   /**
    * Listening orders status filter
    */
   useEffect(() => {
     if (ordersStatusSelected === 'pending') {
-      getPendingOrders()
+      getOrders(0)
     }
     if (ordersStatusSelected === 'inProgress') {
-      getAcceptedByBusinessOrders()
-      getAcceptedByDriverOrders()
-      getReadyForPickupOrders()
-      getPickupCompletedByDriverOrders()
-      getDriverArrivedByBusinessOrders()
+      getOrders(3)
+      getOrders(4)
+      getOrders(7)
+      getOrders(8)
+      getOrders(9)
     }
     if (ordersStatusSelected === 'completed') {
-      getCompletedByAdminOrders()
-      getDeliveryCompletedByDriverOrders()
+      getOrders(1)
+      getOrders(11)
     }
     if (ordersStatusSelected === 'cancelled') {
-      getRejectedByAdminOrdersOrders()
-      getRejectByBusinessOrders()
-      getRejectByDriverOrders()
-      getPickupFailedByDriverOrders()
-      getDeliveryFailedByDriverOrders()
+      getOrders(2)
+      getOrders(5)
+      getOrders(6)
+      getOrders(10)
+      getOrders(12)
     }
   }, [ordersStatusSelected, searchValue])
 
@@ -645,13 +451,9 @@ export const AdminOrdersAndDriversList = (props) => {
   }, [driverOrdersId])
 
   useEffect(() => {
-    getPendingOrders()
     getDrivers()
 
     return () => {
-      if (requestsState.pendingOrders) {
-        requestsState.pendingOrders.cancel()
-      }
       if (requestsState.drivers) {
         requestsState.drivers.cancel()
       }
@@ -664,6 +466,7 @@ export const AdminOrdersAndDriversList = (props) => {
         <UIComponent
           {...props}
           pendingOrders={pendingOrdersStatus}
+          preOrders={preOrdersStatus}
           acceptedByBusinessOrders={acceptedByBusinessOrdersStatus}
           acceptedByDriverOrders={acceptedByDriverOrdersStatus}
           readyForPickupOrders={readyForPickupOrdersStatus}
@@ -678,13 +481,16 @@ export const AdminOrdersAndDriversList = (props) => {
           deliveryFailedByDriverOrders={deliveryFailedByDriverOrdersStatus}
           driversList={driversList}
           driverOrders={driverOrders}
+          updateOrdersSelectedStatus={updateOrdersSelectedStatus}
 
           searchValue={searchValue}
           ordersStatusSelected={ordersStatusSelected}
           handleChangeSearch={handleChangeSearch}
           handleOrdersStatusFilter={handleOrdersStatusFilter}
           handleChangeDriverOrders={handleChangeDriverOrders}
-          handleUpdateOrdersStatus={handleUpdateOrdersStatus}
+          handleUpdateOrderStatus={handleUpdateOrderStatus}
+          handleSelectedOrderIds={handleSelectedOrderIds}
+          handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
         />
       )}
     </>

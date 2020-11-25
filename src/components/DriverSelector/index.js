@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components'
-import { DriversList as DriversListController } from '../DriversListControl'
+import { useLanguage, DriversList as DriversListController } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiPhone from '@meronex/icons/fi/FiPhone'

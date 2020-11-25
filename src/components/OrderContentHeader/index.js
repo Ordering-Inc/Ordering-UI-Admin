@@ -24,7 +24,8 @@ export const OrderContentHeader = (props) => {
   const {
     active,
     handleChangeSearch,
-    searchValue
+    searchValue,
+    driversList
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -98,7 +99,9 @@ export const OrderContentHeader = (props) => {
         acceptText={t('ACCEPT', 'Accept')}
         onAccept={() => handleFilter()}
       >
-        <FilterGroupList />
+        <FilterGroupList
+          driversList={driversList}
+        />
       </Modal>
 
       <Modal

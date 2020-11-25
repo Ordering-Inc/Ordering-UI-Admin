@@ -59,13 +59,27 @@ export const OrderInfoContent = styled.div`
     padding: 20px 0;
   }
 `
-export const LogoWrapper = styled.div`
+export const PhotoWrapper = styled.div`
   max-width: 80px;
   max-height: 80px;
   height: 80px;
   width: 80px;
+  display: flex;
+  align-items: center;
+
+
+  svg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
+  }
 `
-const BusinessLogoStyled = styled.div`
+const PhotoStyled = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
@@ -78,14 +92,14 @@ const BusinessLogoStyled = styled.div`
   min-height: 75px;
   border-radius: 10px;
 `
-export const BusinessLogo = (props) => {
+export const Photo = (props) => {
   return (
-    <BusinessLogoStyled
+    <PhotoStyled
       {...props}
       style={{ backgroundImage: `url(${props.bgimage})` }}
     >
       {props.children}
-    </BusinessLogoStyled>
+    </PhotoStyled>
   )
 }
 export const OrderInfo = styled.div`
@@ -198,37 +212,8 @@ export const SectionContainer = styled.div`
   display: flex;
   margin: 20px 0px 40px;
   width: 100%;
-
-  div.photo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #FAFAFA;
-    border-radius: 10px;
-
-    svg {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin-right: 10px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 10px;
-        margin-right: 0;
-      `}
-    }
-  }
+  column-gap: 10px;
 `
-export const PhotoBlock = styled.img`
-  border-radius: 50%;
-  width: 80px;
-  margin-right: 10px;
-  border-radius: 10px;
-  ${props => props.theme?.rtl && css`
-    margin-left: 10px;
-    margin-right: 0;
-  `}
-`
-
 export const InfoBlock = styled.div`
   width: 70%;
   display: flex;

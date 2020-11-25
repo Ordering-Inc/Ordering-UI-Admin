@@ -6,13 +6,16 @@ import { DriverSelector } from '../DriverSelector'
 import { CitySelector } from '../CitySelector'
 import { StatusSelector } from '../StatusSelector'
 import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
-import { PaymentTypeSelector } from '../PaymentTypeSelector'
+import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
 
 import {
   FilterGroupListContainer
 } from './styles'
 
 export const FilterGroupList = (props) => {
+  const {
+    driversList
+  } = props
   const handleChangeGroupType = (groupType) => {
     console.log(groupType)
   }
@@ -58,6 +61,7 @@ export const FilterGroupList = (props) => {
       />
       <DriverSelector
         isPhoneView
+        driversList={driversList}
         handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
       />
       <CitySelector
@@ -69,7 +73,7 @@ export const FilterGroupList = (props) => {
       <DeliveryTypeSelector
         handleChangeDeliveryType={(deliveryType) => handleChangeDeliveryType(deliveryType)}
       />
-      <PaymentTypeSelector
+      <PaymethodTypeSelector
         handleChangePaymentType={(paymentType) => handleChangePaymentType(paymentType)}
       />
     </FilterGroupListContainer>

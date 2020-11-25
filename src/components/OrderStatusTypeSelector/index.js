@@ -7,10 +7,12 @@ import { useTheme } from 'styled-components'
 export const OrderStatusTypeSelector = (props) => {
   const {
     defaultValue,
+    mutiOrdersChange,
     orderId,
     type,
     noPadding,
-    handleUpdateOrdersStatus
+    handleUpdateOrderStatus,
+    handleChangeMultiOrdersStatus
   } = props
 
   const [, t] = useLanguage()
@@ -187,9 +189,12 @@ export const OrderStatusTypeSelector = (props) => {
   ]
 
   const handleChangeOrderStatus = (orderStatus) => {
-    console.log(orderStatus)
     if (orderStatus !== 'default' && orderStatus !== 20 && orderStatus !== 30 && orderStatus !== 40 && orderStatus !== 50) {
-      handleUpdateOrdersStatus({ ids: orderId, status: orderStatus })
+      if (!mutiOrdersChange) {
+        handleUpdateOrderStatus({ id: orderId, status: orderStatus })
+      } else {
+        handleChangeMultiOrdersStatus(orderStatus)
+      }
     }
   }
 

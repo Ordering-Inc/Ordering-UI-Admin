@@ -106,7 +106,7 @@ export const DriversLocation = (props) => {
 
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
-    if (!driversList.loading) {
+    if (!driversList.loading && driversList.drivers.length !== 0) {
       mapFit()
     }
   }, [driversList, driverAvailable])
@@ -124,7 +124,7 @@ export const DriversLocation = (props) => {
         options={{ fullscreenControl: false }}
         className='map'
       >
-        {driverAvailable === 'all' &&
+        {driverAvailable === 'all' && driversList.drivers.length !== 0 &&
           driversList.drivers.map((driver) => (
             <WrapperMapMarker
               offline={!driver.available}

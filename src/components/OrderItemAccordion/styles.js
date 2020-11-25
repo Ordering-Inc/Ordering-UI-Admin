@@ -79,19 +79,69 @@ export const OrderItemAccordionCell = styled.div`
       margin-left: initial;
     `}
   }
+
+  .checkbox-container{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-bottom: 0px;
+  }
+  
+  .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 13px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 15px;
+  }
+  
+  .checkbox-container:hover .checkmark {
+    background-color: #ccc;
+  }
+  
+  .checkbox-container input:checked ~ .checkmark {
+    background-color: #182964;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .checkbox-container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 `
 export const CheckBoxContainer = styled.div`
-  .circle {
-    color:  #F2F2F2;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .circle-check {
-    cursor: pointer;
-    color: ${({ theme }) => theme?.colors?.btnSecondary};
-    transition: all 0.3s;
-  }
 `
 export const WrapperAccordionImage = styled.div`
   max-width: 50px;
