@@ -36,7 +36,8 @@ import {
   WrapperSendMessageButton,
   HeaderOnline,
   WrapperHitoryHeader,
-  TabItem
+  TabItem,
+  SkeletonHitory
 } from './styles'
 import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
@@ -271,26 +272,42 @@ export const MessagesUI = (props) => {
           {
             messages.loading && (
               <>
-                <MessageBusiness>
-                  <SkeletonBubbleBusiness>
-                    <Skeleton width={200} height={100} />
-                  </SkeletonBubbleBusiness>
-                </MessageBusiness>
-                <MessageCustomer>
-                  <SkeletonBubbleCustomer>
-                    <Skeleton width={250} height={100} />
-                  </SkeletonBubbleCustomer>
-                </MessageCustomer>
-                <MessageBusiness>
-                  <SkeletonBubbleBusiness>
-                    <Skeleton width={150} height={100} />
-                  </SkeletonBubbleBusiness>
-                </MessageBusiness>
-                <MessageCustomer>
-                  <SkeletonBubbleCustomer>
-                    <Skeleton width={200} height={100} />
-                  </SkeletonBubbleCustomer>
-                </MessageCustomer>
+                {!history ? (
+                  <>
+                    <MessageBusiness>
+                      <SkeletonBubbleBusiness>
+                        <Skeleton width={200} height={100} />
+                      </SkeletonBubbleBusiness>
+                    </MessageBusiness>
+                    <MessageCustomer>
+                      <SkeletonBubbleCustomer>
+                        <Skeleton width={250} height={100} />
+                      </SkeletonBubbleCustomer>
+                    </MessageCustomer>
+                    <MessageBusiness>
+                      <SkeletonBubbleBusiness>
+                        <Skeleton width={150} height={100} />
+                      </SkeletonBubbleBusiness>
+                    </MessageBusiness>
+                    <MessageCustomer>
+                      <SkeletonBubbleCustomer>
+                        <Skeleton width={200} height={100} />
+                      </SkeletonBubbleCustomer>
+                    </MessageCustomer>
+                  </>
+                ) : (
+                  <>
+                    {[...Array(5)].map((item, i) =>
+                      <SkeletonHitory key={i}>
+                        <Skeleton width={400} height={50} />
+                        <Skeleton width={300} height={50} />
+                        <Skeleton width={380} height={50} />
+                        <Skeleton width={200} height={50} />
+                        <Skeleton width={450} height={50} />
+                      </SkeletonHitory>
+                    )}
+                  </>
+                )}
               </>
             )
           }
@@ -307,34 +324,66 @@ export const MessagesUI = (props) => {
                 </MessageConsole>
                 {messages?.messages.map((message) => (
                   <React.Fragment key={message.id}>
-                    {message.type === 1 && (
-                      <MessageConsole key={message.id}>
-                        {message.change?.attribute !== 'driver_id' ? (
-                          <BubbleConsole>
-                            {t('ORDER', 'Order')} {' '}
-                            <strong>{message.change.attribute}</strong> {}
-                            {t('CHANGED_FROM', 'Changed from')} {' '}
-                            {message.change.old !== null && (
-                              <>
-                                <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
-                              </>
+                    {history && (
+                      <>
+                        {tabActive.orderHistory && (
+                          <>
+                            {message.type === 1 && (
+                              <MessageConsole key={message.id}>
+                                {message.change?.attribute !== 'driver_id' ? (
+                                  <BubbleConsole>
+                                    {t('ORDER', 'Order')} {' '}
+                                    <strong>{message.change.attribute}</strong> {}
+                                    {t('CHANGED_FROM', 'Changed from')} {' '}
+                                    {message.change.old !== null && (
+                                      <>
+                                        <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                                      </>
+                                    )}
+                                    <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                  </BubbleConsole>
+                                ) : (
+                                  <BubbleConsole>
+                                    <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                    {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                    {message.comment && (<><br /> {message.comment.length}</>)}
+                                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                  </BubbleConsole>
+                                )}
+                              </MessageConsole>
                             )}
-                            <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
-                            <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                          </BubbleConsole>
-                        ) : (
-                          <BubbleConsole>
-                            <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                            {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                            {message.comment && (<><br /> {message.comment.length}</>)}
-                            <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                          </BubbleConsole>
+                          </>
                         )}
-                      </MessageConsole>
+                      </>
                     )}
-
                     {!history && (message.author.level === 0 || message.author.level === messageLevel) && (
                       <>
+                        {message.type === 1 && (
+                          <MessageConsole key={message.id}>
+                            {message.change?.attribute !== 'driver_id' ? (
+                              <BubbleConsole>
+                                {t('ORDER', 'Order')} {' '}
+                                <strong>{message.change.attribute}</strong> {}
+                                {t('CHANGED_FROM', 'Changed from')} {' '}
+                                {message.change.old !== null && (
+                                  <>
+                                    <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                                  </>
+                                )}
+                                <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </BubbleConsole>
+                            ) : (
+                              <BubbleConsole>
+                                <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                {message.comment && (<><br /> {message.comment.length}</>)}
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </BubbleConsole>
+                            )}
+                          </MessageConsole>
+                        )}
                         {message.type === 2 && user.id === message.author_id && (
                           <MessageCustomer>
                             <BubbleCustomer>

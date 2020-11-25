@@ -488,3 +488,19 @@ export const TabItem = styled.div`
     padding: 5px 10px;
   }
 `
+export const SkeletonHitory = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 20px;
+
+  span {
+    border-radius: 30px;
+  }
+
+  @media (max-width: 576px) {
+    span {
+      width: 250px !important;
+    }
+  }
+`
