@@ -26,7 +26,7 @@ import {
 export const SmallOrderItemAccordion = (props) => {
   const {
     order,
-    driversList
+    drivers
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -102,7 +102,7 @@ export const SmallOrderItemAccordion = (props) => {
               <DriverSelector
                 small
                 defaultValue={order?.driver_id ? order.driver_id : 0}
-                driversList={driversList}
+                drivers={drivers}
                 handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
               />
             </WrapperDriverSelector>

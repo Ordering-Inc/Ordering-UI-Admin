@@ -28,7 +28,7 @@ export const OrdersListUI = (props) => {
     rejectByDriverOrders,
     pickupFailedByDriverOrders,
     deliveryFailedByDriverOrders,
-    driversList,
+    drivers,
     updateOrdersSelectedStatus,
 
     searchValue,
@@ -53,8 +53,9 @@ export const OrdersListUI = (props) => {
           <OrderContentHeader
             active='orders'
             searchValue={searchValue}
+            ordersStatusSelected={ordersStatusSelected}
             handleChangeSearch={handleChangeSearch}
-            driversList={driversList}
+            drivers={drivers}
           />
           <OrdersDashboardControls
             handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
@@ -63,7 +64,7 @@ export const OrdersListUI = (props) => {
             <>
               <OrderListing
                 orderList={pendingOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t('PENDING_ORDERS', 'Pendig orders')}
                 orderListView='big'
@@ -72,7 +73,7 @@ export const OrdersListUI = (props) => {
               />
               <OrderListing
                 orderList={preOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t('PREORDERS', 'Preorders')}
                 orderListView='big'
@@ -86,7 +87,7 @@ export const OrdersListUI = (props) => {
             <>
               <OrderListing
                 orderList={acceptedByBusinessOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t(
                   'ACCEPTED_BY_BUSINESS',
@@ -98,7 +99,7 @@ export const OrdersListUI = (props) => {
               />
               <OrderListing
                 orderList={acceptedByDriverOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t('ACCEPTED_BY_Driver', 'Accepted by Driver')}
                 orderListView='big'
@@ -107,7 +108,7 @@ export const OrdersListUI = (props) => {
               />
               <OrderListing
                 orderList={driverArrivedByBusinessOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t(
                   'DRIVER_ARRIVED_BY_BUSINESS',
@@ -119,7 +120,7 @@ export const OrdersListUI = (props) => {
               />
               <OrderListing
                 orderList={readyForPickupOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t(
                   'READY_FOR_PICKUP',
@@ -131,7 +132,7 @@ export const OrdersListUI = (props) => {
               />
               <OrderListing
                 orderList={pickupCompletedByDriverOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t(
                   'PICKUP_COMPLETED_BY_DRIVER',
@@ -148,7 +149,7 @@ export const OrdersListUI = (props) => {
             <>
               <OrderListing
                 orderList={completedByAdminOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t('COMPLETED_BY_ADMIN', 'Completed by admin')}
                 orderListView='big'
@@ -157,7 +158,7 @@ export const OrdersListUI = (props) => {
               />
               <OrderListing
                 orderList={deliveryCompletedByDriverOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t(
                   'DELIVERY_COMPLETED_BY_DRIVER',
@@ -174,7 +175,7 @@ export const OrdersListUI = (props) => {
             <>
               <OrderListing
                 orderList={rejectedByAdminOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t('REJECTED_BY_ADMIN', 'Rejected by admin')}
                 orderListView='big'
@@ -184,7 +185,7 @@ export const OrdersListUI = (props) => {
 
               <OrderListing
                 orderList={rejectByBusinessOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t('REJECT_BY_BUSINESS', 'Reject by business')}
                 orderListView='big'
@@ -194,7 +195,7 @@ export const OrdersListUI = (props) => {
 
               <OrderListing
                 orderList={rejectByDriverOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t('REJECT_BY_DRIVER', 'Reject by driver')}
                 orderListView='big'
@@ -203,7 +204,7 @@ export const OrdersListUI = (props) => {
               />
               <OrderListing
                 orderList={pickupFailedByDriverOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t(
                   'PICKUP_FAILED_BY_DRIVER',
@@ -216,7 +217,7 @@ export const OrdersListUI = (props) => {
 
               <OrderListing
                 orderList={deliveryFailedByDriverOrders}
-                driversList={driversList}
+                drivers={drivers}
                 updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                 orderStatusTitle={t(
                   'DELIVERY_FAILED_BY_DRIVER',

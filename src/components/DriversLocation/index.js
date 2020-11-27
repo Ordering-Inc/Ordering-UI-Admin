@@ -31,6 +31,11 @@ export const DriversLocation = (props) => {
     const bounds = new google.maps.LatLngBounds()
 
     if (driverAvailable === 'all') {
+      if (driversList.drivers.length === 1) {
+        setMapCenter(driversList.drivers[0].location)
+        setMapZoom(defaultZoom)
+        return
+      }
       for (const driver of driversList.drivers) {
         const marker = driver.location
         const newPoint = new google.maps.LatLng(marker.lat, marker.lng)
@@ -58,6 +63,26 @@ export const DriversLocation = (props) => {
       }
     }
 
+    if (driverAvailable === 'online') {
+      if (_onlineDrivers.length === 0) return
+      if (_onlineDrivers.length === 1) {
+        setMapCenter(_onlineDrivers[0].location)
+        setMapZoom(defaultZoom)
+        return
+      }
+    }
+
+    if (driverAvailable === 'offline') {
+      if (_offlineDrivers.length === 0) {
+        return
+      }
+      if (_offlineDrivers.length === 1) {
+        setMapCenter(_offlineDrivers[0].location)
+        setMapZoom(defaultZoom)
+        return
+      }
+    }
+
     const newBounds = {
       ne: {
         lat: bounds.getNorthEast().lat(),
@@ -75,33 +100,8 @@ export const DriversLocation = (props) => {
     }
 
     const { center, zoom } = fitBounds(newBounds, mapSize)
-
-    if (driverAvailable === 'all') {
-      setMapCenter(center)
-      setMapZoom(zoom)
-    }
-
-    if (driverAvailable === 'online') {
-      if (_onlineDrivers.length > 1) {
-        setMapCenter(center)
-        setMapZoom(zoom)
-      }
-      if (_onlineDrivers.length === 1) {
-        setMapCenter(_onlineDrivers[0].location)
-        setMapZoom(defaultZoom)
-      }
-    }
-
-    if (driverAvailable === 'offline') {
-      if (_offlineDrivers.length > 1) {
-        setMapCenter(center)
-        setMapZoom(zoom)
-      }
-      if (_offlineDrivers.length === 1) {
-        setMapCenter(_offlineDrivers[0].location)
-        setMapZoom(defaultZoom)
-      }
-    }
+    setMapCenter(center)
+    setMapZoom(zoom)
   }
 
   // Fit bounds on mount, and when the markers change

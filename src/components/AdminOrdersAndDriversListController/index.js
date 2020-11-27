@@ -5,25 +5,26 @@ import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 import { useSession, useApi } from 'ordering-components'
+import { result } from 'lodash'
 dayjs.extend(utc)
 
 export const AdminOrdersAndDriversList = (props) => {
   const {
     UIComponent,
-    isSearchByOrderNumber,
-    isSearchByCustomerEmail,
-    isSearchByCustomerPhone,
+    // isSearchByOrderNumber,
+    // isSearchByCustomerEmail,
+    // isSearchByCustomerPhone,
     driversPropsToFetch
   } = props
 
   const [ordering] = useApi()
   const requestsState = {}
-  const [searchValue, setSearchValue] = useState(null)
+  const [searchValue, setSearchValue] = useState('customer')
   const [ordersStatusSelected, setOrdersStatusSelected] = useState('pending')
   const [driverOrdersId, setDriverOrdersId] = useState(null)
 
   /**
-   * Get token session
+   * Get token sessions
    */
   const [{ token }] = useSession()
   /**
@@ -114,7 +115,7 @@ export const AdminOrdersAndDriversList = (props) => {
 
   /**
    * Change driver id to get orders of a driver
-   * @param {int} driver_id driver id
+   * @param {number} driver_id driver id
    */
   const handleChangeDriverOrders = (driverId) => {
     if (driverId !== driverOrdersId) setDriverOrdersId(driverId)
@@ -132,7 +133,7 @@ export const AdminOrdersAndDriversList = (props) => {
 
   /**
    * Save ids of orders selected
-   * @param {int} orderId order id
+   * @param {number} orderId order id
    */
   const handleSelectedOrderIds = (orderId) => {
     const _ids = updateOrdersSelectedStatus.ids
@@ -151,28 +152,22 @@ export const AdminOrdersAndDriversList = (props) => {
   }
   /**
    * save status to change status for multi orders selected
-   * @param {int} status order status
+   * @param {number} status order status
    */
   const handleChangeMultiOrdersStatus = (status) => {
     setUpdateOrdersSelectedStatus({ ...updateOrdersSelectedStatus, status: status })
   }
 
-  const isMatchSearch = (id, email, phone) => {
-    if (!searchValue) return true
-    if (phone === null) phone = ''
-    return (id.toString().toLowerCase().includes(searchValue.toLowerCase()) && isSearchByOrderNumber) ||
-      (email.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByCustomerEmail) ||
-      (phone.toString().toLowerCase().includes(searchValue.toLowerCase()) && isSearchByCustomerPhone)
-  }
+  // const isMatchSearch = (id, email, phone) => {
+  //   if (!searchValue) return true
+  //   if (phone === null) phone = ''
+  //   return (id.toString().toLowerCase().includes(searchValue.toLowerCase()) && isSearchByOrderNumber) ||
+  //     (email.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByCustomerEmail) ||
+  //     (phone.toString().toLowerCase().includes(searchValue.toLowerCase()) && isSearchByCustomerPhone)
+  // }
 
-  const isPendingOrder = (time) => {
-    const diff = ((dayjs().utc().local().unix() - dayjs.utc(time, 'YYYY-MM-DD HH:mm:ss').local().unix())) / 60
-    return diff < 60
-  }
-
-  const isPreOrder = (time) => {
-    const diff = ((dayjs().unix() - dayjs.utc(time, 'YYYY-MM-DD HH:mm:ss').local().unix())) / 60
-    return diff > 60
+  const getTimeAgo = () => {
+    return dayjs(Date.now() - 60 * 60 * 1000).format('YYYY-MM-DD HH:mm:ss')
   }
 
   /**
@@ -186,7 +181,6 @@ export const AdminOrdersAndDriversList = (props) => {
       switch (status) {
         case 0:
           setPendingOrdersStatus({ ...pendingOrdersStatus, loading: true })
-          setPreOrdersStatus({ ...preOrdersStatus, loading: true })
           break
         case 1:
           setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: true })
@@ -224,66 +218,155 @@ export const AdminOrdersAndDriversList = (props) => {
         case 12:
           setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: true })
           break
+        case 13:
+          setPreOrdersStatus({ ...preOrdersStatus, loading: true })
       }
 
-      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where([
-        { attribute: 'status', value: status }
-      ]).get({ cancelToken: source })
+      const where = []
 
-      const _result = result.filter(
-        order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
-      )
+      if (status === 0) {
+        where.push({ attribute: 'status', value: status }, { attribute: 'delivery_datetime', value: { condition: '>', value: getTimeAgo() } })
+      } else if (status === 13) {
+        where.push({ attribute: 'status', value: status }, { attribute: 'delivery_datetime', value: { condition: '<=', value: getTimeAgo() } })
+      } else {
+        where.push({ attribute: 'status', value: status })
+      }
+
+      // let where
+      // const conditions = []
+      // where.push({ attribute: 'status', value: status })
+      // if (searchValue) {
+
+      // let where ={
+      //   conditions:[
+      //       {
+      //         attribute:'status',
+      //         value:0
+      //       },
+      //       {
+      //         conditions:[
+      //             {
+      //               attribute:'email',
+      //               value:{
+      //                   condition:'ilike',
+      //                   value:encodeURI(`%${searchValue}%`)
+      //               }
+      //             },
+      //             {
+      //                 attribute:'cellphone',
+      //                 value:{
+      //                 condition:'ilike',
+      //                 value:encodeURI(`%${searchValue}%`)
+      //                 }
+      //             }
+      //         ],
+      //         conector:'OR',
+      //       },
+      //   ],
+      //   connector:'AND'
+      //  }
+
+      // const searchConditions = []
+      // if (isSearchByCustomerEmail) {
+      //   conditions.push(
+      //     {
+      //       attribute: 'customer',
+      //       conditions: [
+      //         {
+      //           attribute: 'email',
+      //           value: {
+      //             condition: 'ilike',
+      //             value: encodeURI(`%${searchValue}%`)
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   )
+      // }
+      // if (isSearchByCustomerPhone) {
+      //   searchConditions.push(
+      //     {
+      //       attribute: 'customer',
+      //       conditions: [
+      //         {
+      //           attribute: 'cellphone',
+      //           value: {
+      //             condition: 'ilike',
+      //             value: encodeURI(`%${searchValue}%`)
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   )
+      // }
+      // conditions.push({
+      //   conector: 'OR',
+      //   conditions: searchConditions
+      // })
+      // }
+
+      // if (conditions.length > 1) {
+      //   where = {
+      //     conditions,
+      //     connector: 'AND'
+      //   }
+      // }
+
+      const { content: { result } } = await ordering.setAccessToken(token).orders().asDashboard().where(where).get({ cancelToken: source })
+
+      // const result = result.filter(
+      //   order => isMatchSearch(order.id, order.customer.email, order.customer.phone)
+      // )
 
       switch (status) {
         case 0: {
-          const _pendingResult = _result.filter(order => isPendingOrder(order.delivery_datetime))
-          const _preResult = _result.filter(order => isPreOrder(order.delivery_datetime))
-          setPendingOrdersStatus({ ...pendingOrdersStatus, loading: false, orders: _pendingResult })
-          setPreOrdersStatus({ ...preOrdersStatus, loading: false, orders: _preResult })
+          setPendingOrdersStatus({ ...pendingOrdersStatus, loading: false, orders: result })
           break
         }
         case 1:
-          setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: false, orders: _result })
+          setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: false, orders: result })
           break
         case 2:
-          setRejectedByAdminOrdersStatus({ ...rejectedByAdminOrdersStatus, loading: false, orders: _result })
+          setRejectedByAdminOrdersStatus({ ...rejectedByAdminOrdersStatus, loading: false, orders: result })
           break
         case 3:
-          setDriverArrivedByBusinessOrdersStatus({ ...driverArrivedByBusinessOrdersStatus, loading: false, orders: _result })
+          setDriverArrivedByBusinessOrdersStatus({ ...driverArrivedByBusinessOrdersStatus, loading: false, orders: result })
           break
         case 4:
-          setReadyForPickupOrdersStatus({ ...readyForPickupOrdersStatus, loading: false, orders: _result })
+          setReadyForPickupOrdersStatus({ ...readyForPickupOrdersStatus, loading: false, orders: result })
           break
         case 5:
-          setRejectByBusinessOrdersStatus({ ...rejectByBusinessOrdersStatus, loading: false, orders: _result })
+          setRejectByBusinessOrdersStatus({ ...rejectByBusinessOrdersStatus, loading: false, orders: result })
           break
         case 6:
-          setRejectByDriverOrdersStatus({ ...rejectByDriverOrdersStatus, loading: false, orders: _result })
+          setRejectByDriverOrdersStatus({ ...rejectByDriverOrdersStatus, loading: false, orders: result })
           break
         case 7:
-          setAcceptedByBusinessOrdersStatus({ ...acceptedByBusinessOrdersStatus, loading: false, orders: _result })
+          setAcceptedByBusinessOrdersStatus({ ...acceptedByBusinessOrdersStatus, loading: false, orders: result })
           break
         case 8:
-          setAcceptedByDriverOrdersStatus({ ...acceptedByDriverOrdersStatus, loading: false, orders: _result })
+          setAcceptedByDriverOrdersStatus({ ...acceptedByDriverOrdersStatus, loading: false, orders: result })
           break
         case 9:
-          setPickupCompletedByDriverOrdersStatus({ ...pickupCompletedByDriverOrdersStatus, loading: false, orders: _result })
+          setPickupCompletedByDriverOrdersStatus({ ...pickupCompletedByDriverOrdersStatus, loading: false, orders: result })
           break
         case 10:
-          setPickupFailedByDriverOrdersStatus({ ...pickupFailedByDriverOrdersStatus, loading: false, orders: _result })
+          setPickupFailedByDriverOrdersStatus({ ...pickupFailedByDriverOrdersStatus, loading: false, orders: result })
           break
         case 11:
-          setDeliveryCompletedByDriverOrdersStatus({ ...deliveryCompletedByDriverOrdersStatus, loading: false, orders: _result })
+          setDeliveryCompletedByDriverOrdersStatus({ ...deliveryCompletedByDriverOrdersStatus, loading: false, orders: result })
           break
         case 12:
-          setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: false, orders: _result })
+          setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: false, orders: result })
+          break
+        case 13:
+          setPreOrdersStatus({ ...preOrdersStatus, loading: false, orders: result })
           break
       }
     } catch (err) {
       switch (status) {
         case 0:
           setPendingOrdersStatus({ ...pendingOrdersStatus, loading: false, error: err.message })
-          setPreOrdersStatus({ ...preOrdersStatus, loading: false, error: err.message })
           break
         case 1:
           setCompletedByAdminOrdersStatus({ ...completedByAdminOrdersStatus, loading: false, error: err.message })
@@ -321,6 +404,8 @@ export const AdminOrdersAndDriversList = (props) => {
         case 12:
           setDeliveryFailedByDriverOrdersStatus({ ...deliveryFailedByDriverOrdersStatus, loading: false, error: err.message })
           break
+        case 13:
+          setPreOrdersStatus({ ...preOrdersStatus, loading: false, error: err.message })
       }
     }
   }
@@ -398,8 +483,10 @@ export const AdminOrdersAndDriversList = (props) => {
       const source = {}
       requestsState.updateOrders = source
       for (const id of updateOrdersSelectedStatus.ids) {
-        await ordering.setAccessToken(token).orders(id).save({ status: updateOrdersSelectedStatus.status }, { cancelToken: source })
+        const { content: { result } } = await ordering.setAccessToken(token).orders(id).save({ status: updateOrdersSelectedStatus.status }, { cancelToken: source })
+        console.log(result)
       }
+      console.log(result)
       setUpdateOrdersSelectedStatus({ ids: [], status: null, loading: false, error: null })
     } catch (err) {
       console.log(err)
@@ -417,11 +504,13 @@ export const AdminOrdersAndDriversList = (props) => {
   }, [updateOrdersSelectedStatus.ids, updateOrdersSelectedStatus.status])
 
   /**
-   * Listening orders status filter
+   * Listening orders search change
    */
   useEffect(() => {
+    if (searchValue === null) return
     if (ordersStatusSelected === 'pending') {
       getOrders(0)
+      getOrders(13)
     }
     if (ordersStatusSelected === 'inProgress') {
       getOrders(3)
@@ -441,11 +530,36 @@ export const AdminOrdersAndDriversList = (props) => {
       getOrders(10)
       getOrders(12)
     }
-  }, [ordersStatusSelected, searchValue])
+  }, [searchValue])
 
   /**
    * Listening orders status filter
    */
+  useEffect(() => {
+    if (ordersStatusSelected === 'pending') {
+      if (!(pendingOrdersStatus.loading || pendingOrdersStatus.orders.length > 0)) getOrders(0)
+      if (!(preOrdersStatus.loading || preOrdersStatus.orders.length > 0)) getOrders(13)
+    }
+    if (ordersStatusSelected === 'inProgress') {
+      if (!(driverArrivedByBusinessOrdersStatus.orders.length > 0)) getOrders(3)
+      if (!(readyForPickupOrdersStatus.orders.length > 0)) getOrders(4)
+      if (!(acceptedByBusinessOrdersStatus.orders.length > 0)) getOrders(7)
+      if (!(acceptedByDriverOrdersStatus.orders.length > 0)) getOrders(8)
+      if (!(pickupCompletedByDriverOrdersStatus.orders.length > 0)) getOrders(9)
+    }
+    if (ordersStatusSelected === 'completed') {
+      if (!(completedByAdminOrdersStatus.orders.length > 0)) getOrders(1)
+      if (!(deliveryCompletedByDriverOrdersStatus.orders.length > 0)) getOrders(11)
+    }
+    if (ordersStatusSelected === 'cancelled') {
+      if (!(rejectedByAdminOrdersStatus.orders.length > 0)) getOrders(2)
+      if (!(rejectByBusinessOrdersStatus.orders.length > 0)) getOrders(5)
+      if (!(rejectByDriverOrdersStatus.orders.length > 0)) getOrders(6)
+      if (!(pickupFailedByDriverOrdersStatus.orders.length > 0)) getOrders(10)
+      if (!(deliveryFailedByDriverOrdersStatus.orders.length > 0)) getOrders(12)
+    }
+  }, [ordersStatusSelected])
+
   useEffect(() => {
     if (driverOrdersId) getDriverOrders()
   }, [driverOrdersId])

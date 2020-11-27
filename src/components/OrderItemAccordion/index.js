@@ -32,7 +32,7 @@ import {
 export const OrderItemAccordion = (props) => {
   const {
     order,
-    driversList,
+    drivers,
     updateOrdersSelectedStatus,
     handleUpdateOrderStatus,
     handleSelectedOrderIds
@@ -127,7 +127,7 @@ export const OrderItemAccordion = (props) => {
           </WrapperAccordionImage>
           <TextBlockContainer>
             <BigText>{order?.customer?.name}</BigText>
-            <SmallText>{order?.customer?.phone}</SmallText>
+            <SmallText>{order?.customer?.cellphone}</SmallText>
           </TextBlockContainer>
         </OrderItemAccordionCell>
 
@@ -136,7 +136,7 @@ export const OrderItemAccordion = (props) => {
             <WrapperDriverSelector ref={driverSelectorRef}>
               <DriverSelector
                 defaultValue={order?.driver_id ? order.driver_id : 0}
-                driversList={driversList}
+                drivers={drivers}
                 handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
               />
             </WrapperDriverSelector>

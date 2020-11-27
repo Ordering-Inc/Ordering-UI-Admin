@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, OrderDetails as OrderDetailsController, useUtils } from 'ordering-components'
+import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
@@ -94,10 +94,6 @@ const OrderDetailsUI = (props) => {
     } catch (error) {
       return 'https://picsum.photos/75'
     }
-  }
-
-  const handleChangeDriver = (driver) => {
-    console.log(driver)
   }
 
   const handleChangeOrderStatusType = (orderType) => {
@@ -331,7 +327,7 @@ const OrderDetailsUI = (props) => {
               <DriverSelector
                 isPhoneView
                 defaultValue={order?.driver?.id ? order.driver.id : 0}
-                handleChangeDriver={(driver) => handleChangeDriver(driver)}
+                order={order}
               />
             </DriverSelectorContainer>
             <PrintButtonContainer>
@@ -398,6 +394,7 @@ const OrderDetailsUI = (props) => {
 export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
+    asDashboard: true,
     UIComponent: OrderDetailsUI
   }
 

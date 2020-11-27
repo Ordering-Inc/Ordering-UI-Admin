@@ -4,7 +4,7 @@ import { DateTypeSelector } from '../DateTypeSelector'
 import { BusinessTypeSelector } from '../BusinessTypeSelector'
 import { DriverSelector } from '../DriverSelector'
 import { CitySelector } from '../CitySelector'
-import { StatusSelector } from '../StatusSelector'
+import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
 import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
 
@@ -14,7 +14,8 @@ import {
 
 export const FilterGroupList = (props) => {
   const {
-    driversList
+    driversList,
+    ordersStatusSelected
   } = props
   const handleChangeGroupType = (groupType) => {
     console.log(groupType)
@@ -67,7 +68,9 @@ export const FilterGroupList = (props) => {
       <CitySelector
         handleChangeCity={(city) => handleChangeCity(city)}
       />
-      <StatusSelector
+      <OrderStatusTypeSelector
+        modalFilter
+        ordersStatusSelected={ordersStatusSelected}
         handleChangeStatus={(status) => handleChangeStatus(status)}
       />
       <DeliveryTypeSelector

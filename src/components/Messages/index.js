@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {
-  Messages as MessagesController,
   useUtils,
   useLanguage,
-  useSession
+  useSession,
+  Messages as MessagesController
 } from 'ordering-components'
+
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import HiOutlineArrowLeft from '@meronex/icons/hi/HiOutlineArrowLeft'
@@ -58,6 +59,7 @@ export const MessagesUI = (props) => {
     sendMessage,
     setImage,
     setMessage,
+    setCanRead,
     customer,
     business,
     driver,
@@ -131,31 +133,31 @@ export const MessagesUI = (props) => {
   const getStatus = (status) => {
     switch (status) {
       case 0:
-        return 'ORDER_STATUS_PENDING'
+        return 'Pending order'
       case 1:
-        return 'ORDERS_COMPLETED'
+        return 'Completed by admin'
       case 2:
-        return 'ORDER_REJECTED'
+        return 'Rejected by admin'
       case 3:
-        return 'ORDER_STATUS_IN_BUSINESS'
+        return 'Driver arrived by business'
       case 4:
-        return 'ORDER_READY'
+        return 'Order ready'
       case 5:
-        return 'ORDER_REJECTED_RESTAURANT'
+        return 'Reject by business'
       case 6:
-        return 'ORDER_STATUS_CANCELLEDBYDRIVER'
+        return 'Cancelled by driver'
       case 7:
-        return 'ORDER_STATUS_ACCEPTEDBYRESTAURANT'
+        return 'Accepted by business'
       case 8:
-        return 'ORDER_CONFIRMED_ACCEPTED_BY_DRIVER'
+        return 'Accepted by driver'
       case 9:
-        return 'ORDER_PICKUP_COMPLETED_BY_DRIVER'
+        return 'Pickup completed by driver'
       case 10:
-        return 'ORDER_PICKUP_FAILED_BY_DRIVER'
+        return 'Pickup failed by driver'
       case 11:
-        return 'ORDER_DELIVERY_COMPLETED_BY_DRIVER'
+        return 'Delivery completed by driver'
       case 12:
-        return 'ORDER_DELIVERY_FAILED_BY_DRIVER'
+        return 'Delivery failed by driver'
       default:
         return status
     }
@@ -165,9 +167,9 @@ export const MessagesUI = (props) => {
     switch (level) {
       case 0:
         return 'admin'
-      case 1:
-        return 'business'
       case 2:
+        return 'business'
+      case 4:
         return 'driver'
       case 3:
         return 'customer'
@@ -195,10 +197,23 @@ export const MessagesUI = (props) => {
   }
 
   useEffect(() => {
-    if (customer) setMessageLevel(3)
-    if (business) setMessageLevel(1)
-    if (driver) setMessageLevel(2)
+    if (customer) {
+      setMessageLevel(3)
+      setCanRead({ business: false, administrator: true, driver: false })
+    }
+    if (business) {
+      setMessageLevel(2)
+      setCanRead({ business: true, administrator: true, driver: false })
+    }
+    if (driver) {
+      setMessageLevel(4)
+      setCanRead({ business: false, administrator: true, driver: true })
+    }
   }, [])
+
+  useEffect(() => {
+    console.log('message', messages)
+  }, [messages])
 
   return (
     <MessagesContainer>
@@ -337,10 +352,10 @@ export const MessagesUI = (props) => {
                                     {t('CHANGED_FROM', 'Changed from')} {' '}
                                     {message.change.old !== null && (
                                       <>
-                                        <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                                        <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
                                       </>
                                     )}
-                                    <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                                    <> {t('TO', 'to')} {' '} <strong>{getStatus(parseInt(message.change.new, 10))}</strong> </>
                                     <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                   </BubbleConsole>
                                 ) : (
@@ -454,7 +469,7 @@ export const MessagesUI = (props) => {
                                 </BubbleBusines>
                               </>
                             )}
-                            {business && message.can_see.includes(1) && (
+                            {business && message.can_see.includes(2) && (
                               <>
                                 <BubbleBusines name='image'>
                                   <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
@@ -569,6 +584,7 @@ export const MessagesUI = (props) => {
 export const Messages = (props) => {
   const MessagesProps = {
     ...props,
+    asDashboard: true,
     UIComponent: MessagesUI
   }
   return <MessagesController {...MessagesProps} />

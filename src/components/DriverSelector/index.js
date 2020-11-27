@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, DriversList as DriversListController } from 'ordering-components'
+import { useLanguage } from 'ordering-components'
+import { DriversList as DriversController } from '../DriversController'
 import { Select } from '../../styles/Select'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiPhone from '@meronex/icons/fi/FiPhone'
@@ -15,11 +16,12 @@ import {
 
 const DriverSelectorUI = (props) => {
   const {
-    driversList,
-    handleSelectedDriver,
+    order,
+    drivers,
     defaultValue,
     isPhoneView,
-    small
+    small,
+    handleChangeDriver
   } = props
 
   const [, t] = useLanguage()
@@ -27,8 +29,8 @@ const DriverSelectorUI = (props) => {
   const driversLoading = [{ value: 0, content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
   useEffect(() => {
     const _driversOptionList = [{ value: 0, content: <Option>{t('DRIVER', 'Driver')}</Option> }]
-    if (!driversList.loading) {
-      const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
+    if (!drivers.loading) {
+      const _driversOptionListTemp = drivers.drivers.map((driver, i) => {
         return {
           value: driver.id,
           content: (
@@ -62,18 +64,18 @@ const DriverSelectorUI = (props) => {
       }
     }
     setDriversOptionList(_driversOptionList)
-  }, [driversList])
+  }, [drivers])
 
   return (
     <>
-      {!driversList.loading ? (
+      {!drivers.loading ? (
         <Select
           defaultValue={defaultValue || 0}
           options={driversOptionList}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
           optionBottomBorder
-          onChange={(driver) => handleSelectedDriver(driver)}
+          onChange={(driverId) => handleChangeDriver({ orderId: order.id, driverId: driverId, products: order.products })}
         />
       ) : (
         <Select
@@ -91,16 +93,11 @@ const DriverSelectorUI = (props) => {
 export const DriverSelector = (props) => {
   const DriversControlProps = {
     ...props,
-    propsToFetch: ['id', 'name', 'lastname', 'phone', 'cellphone', 'photo'],
     UIComponent: DriverSelectorUI
   }
   return (
     <>
-      {props.driversList ? (
-        <DriverSelectorUI {...props} />
-      ) : (
-        <DriversListController {...DriversControlProps} />
-      )}
+      <DriversController {...DriversControlProps} />
     </>
   )
 }

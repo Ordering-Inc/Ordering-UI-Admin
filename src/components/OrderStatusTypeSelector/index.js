@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import { Option } from './styles'
@@ -11,12 +11,16 @@ export const OrderStatusTypeSelector = (props) => {
     orderId,
     type,
     noPadding,
+    modalFilter,
+    ordersStatusSelected,
     handleUpdateOrderStatus,
     handleChangeMultiOrdersStatus
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
+
+  const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
 
   const orderStatuses = [
     {
@@ -189,7 +193,16 @@ export const OrderStatusTypeSelector = (props) => {
   ]
 
   const handleChangeOrderStatus = (orderStatus) => {
-    if (orderStatus !== 'default' && orderStatus !== 20 && orderStatus !== 30 && orderStatus !== 40 && orderStatus !== 50) {
+    if (orderStatus !== 'default' && orderStatus !== 30) {
+      if (orderStatus === 14 || orderStatus === 20) {
+        orderStatus = 0
+      }
+      if (orderStatus === 40) {
+        orderStatus = 1
+      }
+      if (orderStatus === 50) {
+        orderStatus = 2
+      }
       if (!mutiOrdersChange) {
         handleUpdateOrderStatus({ id: orderId, status: orderStatus })
       } else {
@@ -198,11 +211,34 @@ export const OrderStatusTypeSelector = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (!modalFilter) {
+      setFilteredOrderStatuses(orderStatuses)
+    } else {
+      let _filteredOrderStatues = []
+      switch (ordersStatusSelected) {
+        case 'pending':
+          _filteredOrderStatues = orderStatuses.splice(2, 2)
+          break
+        case 'inProgress':
+          _filteredOrderStatues = orderStatuses.splice(5, 5)
+          break
+        case 'completed':
+          _filteredOrderStatues = orderStatuses.splice(11, 2)
+          break
+        case 'cancelled':
+          _filteredOrderStatues = orderStatuses.splice(14, 5)
+          break
+      }
+      setFilteredOrderStatuses(_filteredOrderStatues)
+    }
+  }, [])
+
   return (
     <Select
       type={type}
       defaultValue={defaultValue}
-      options={orderStatuses}
+      options={filteredOrderStatuses}
       onChange={(orderStatus) => handleChangeOrderStatus(orderStatus)}
     />
   )

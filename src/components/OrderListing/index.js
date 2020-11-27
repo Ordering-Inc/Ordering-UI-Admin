@@ -20,7 +20,7 @@ import {
 export const OrderListing = (props) => {
   const {
     orderList,
-    driversList,
+    drivers,
     updateOrdersSelectedStatus,
     orderListView,
     orderStatusTitle,
@@ -73,7 +73,7 @@ export const OrderListing = (props) => {
                 {orderListView === 'big' && (
                   <OrderItemAccordion
                     order={order}
-                    driversList={driversList}
+                    drivers={drivers}
                     updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                     handleUpdateOrderStatus={handleUpdateOrderStatus}
                     handleSelectedOrderIds={handleSelectedOrderIds}
@@ -139,7 +139,7 @@ export const OrderListing = (props) => {
                 <React.Fragment key={order.id}>
                   <SmallOrderItemAccordion
                     order={order}
-                    driversList={driversList}
+                    drivers={drivers}
                   />
                 </React.Fragment>
               )
