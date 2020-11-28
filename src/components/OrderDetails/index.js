@@ -56,7 +56,9 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
-    handleOrderRedirect
+    actionStatus,
+    handleOrderRedirect,
+    handleUpdateOrderStatus
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -66,7 +68,14 @@ const OrderDetailsUI = (props) => {
 
   const orderDetail = useRef(null)
 
-  const { order, loading } = props.order
+  useEffect(() => {
+    console.log(actionStatus)
+  }, [actionStatus])
+
+  const {
+    order,
+    loading
+  } = props.order
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -96,10 +105,6 @@ const OrderDetailsUI = (props) => {
     } catch (error) {
       return 'https://picsum.photos/75'
     }
-  }
-
-  const handleChangeOrderStatusType = (orderType) => {
-    handleChangeOrderStatusType(orderType)
   }
 
   const handleOpenMessages = (openMessage) => {
@@ -238,8 +243,9 @@ const OrderDetailsUI = (props) => {
           <ContactInfoContent>
             <ContactInfoHeader>
               <OrderStatusTypeSelector
+                orderId={order.id}
                 defaultValue={order.status}
-                handleChangeOrderStatusType={(orderType) => handleChangeOrderStatusType(orderType)}
+                handleUpdateOrderStatus={handleUpdateOrderStatus}
               />
               <WrapperButton>
                 <ButtonLink>
