@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { AdminOrdersAndDriversList } from '../AdminOrdersAndDriversListController'
+import { OrdersManage as OrdersManageController } from '../OrdersManageController'
+import { OrderList as OrdersListController } from '../OrdersListController'
 import { useLanguage } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
@@ -26,28 +27,15 @@ import {
 
 const DeliveryDashboardUI = (props) => {
   const {
-    pendingOrders,
-    acceptedByBusinessOrders,
-    acceptedByDriverOrders,
-    driverArrivedByBusinessOrders,
-    readyForPickupOrders,
-    pickupCompletedByDriverOrders,
-    completedByAdminOrders,
-    deliveryCompletedByDriverOrders,
-    rejectedByAdminOrders,
-    rejectByBusinessOrders,
-    rejectByDriverOrders,
-    pickupFailedByDriverOrders,
-    deliveryFailedByDriverOrders,
-    driversList,
     driverOrders,
-
     searchValue,
-    ordersStatusSelected,
+    driversList,
+    updateOrdersSelectedStatus,
+    ordersStatusGroup,
     handleChangeSearch,
-    handleOrdersStatusFilter,
-    handleChangeDriverOrders,
-    handleUpdateOrdersStatus
+    handleOrdersStatusGroupFilter,
+    handleSelectedOrderIds,
+    handleChangeDriverOrdersModal
   } = props
 
   const [, t] = useLanguage()
@@ -55,6 +43,87 @@ const DeliveryDashboardUI = (props) => {
   const [openTab, setOpenTab] = useState({ order: true, driver: false })
   const [openOrderAndDriver, setOpenOrderAndDriver] = useState(true)
   const [driverAvailable, setDriverAvailable] = useState('all')
+
+  const OrdersCommonControlProps = {
+    ...props,
+    UIComponent: OrderListing,
+    asDashboard: true,
+    searchValue: searchValue,
+    drivers: driversList.drivers,
+    updateOrdersSelectedStatus: updateOrdersSelectedStatus,
+    orderListView: 'small',
+    handleSelectedOrderIds: handleSelectedOrderIds
+  }
+
+  const PendingOrdersControlProps = {
+    orderStatus: ['0'],
+    orderStatusTitle: t('PENDING_ORDERS', 'Pendig orders')
+  }
+
+  const PreOrdersControlProps = {
+    orderStatus: ['13'],
+    orderStatusTitle: t('PREORDERS', 'Preorders')
+  }
+
+  const AcceptedByBusinessOrdersControlProps = {
+    orderStatus: ['7'],
+    orderStatusTitle: t('ACCEPTED_BY_BUSINESS', 'Accepted by Business')
+  }
+
+  const AcceptedByDriverOrdersControlProps = {
+    orderStatus: ['8'],
+    orderStatusTitle: t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')
+  }
+
+  const DriverArrivedByBusinessOrdersControlProps = {
+    orderStatus: ['3'],
+    orderStatusTitle: t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by business')
+  }
+
+  const ReadyForPickupOrdersControlProps = {
+    orderStatus: ['4'],
+    orderStatusTitle: t('READY_FOR_PICKUP', 'Ready for pickup')
+  }
+
+  const PickupCompletedByDriverOrdersControlProps = {
+    orderStatus: ['9'],
+    orderStatusTitle: t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver')
+  }
+
+  const CompletedByAdminOrdersControlProps = {
+    orderStatus: ['1'],
+    orderStatusTitle: t('COMPLETED_BY_ADMIN', 'Completed by admin')
+  }
+
+  const DeliveryCompletedByDriverOrdersControlProps = {
+    orderStatus: ['11'],
+    orderStatusTitle: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver')
+  }
+
+  const RejectByAdminOrdersControlProps = {
+    orderStatus: ['2'],
+    orderStatusTitle: t('REJECTED_BY_ADMIN', 'Rejected by admin')
+  }
+
+  const RejectByBusinessOrdersControlProps = {
+    orderStatus: ['5'],
+    orderStatusTitle: t('REJECT_BY_BUSINESS', 'Reject by business')
+  }
+
+  const RejectByDriverOrdersControlProps = {
+    orderStatus: ['6'],
+    orderStatusTitle: t('REJECT_BY_DRIVER', 'Reject by driver')
+  }
+
+  const PickupFailedByDriverOrdersControlProps = {
+    orderStatus: ['10'],
+    orderStatusTitle: t('PICKUP_FAILED_BY_DRIVER', 'Pickup failed by driver')
+  }
+
+  const DeliveryFailedByDriverOrdersControlProps = {
+    orderStatus: ['12'],
+    orderStatusTitle: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
+  }
 
   useEffect(() => {
     if (width < 1200) {
@@ -76,15 +145,17 @@ const DeliveryDashboardUI = (props) => {
   return (
     <DeliveryDashboardContainer>
       <OrderStatusFilterBar
-        selectedOrderStatus={ordersStatusSelected}
-        changeOrderStatus={handleOrdersStatusFilter}
+        selectedOrderStatus={ordersStatusGroup}
+        changeOrderStatus={handleOrdersStatusGroupFilter}
       />
       <DeliveryDashboardContent>
         <DeliveryDashboardInnerContent>
           <OrderContentHeader
             active='deliveryDashboard'
             searchValue={searchValue}
+            ordersStatusSelected={ordersStatusGroup}
             handleChangeSearch={handleChangeSearch}
+            drivers={driversList}
           />
           <MapAndOrderContent>
 
@@ -121,154 +192,34 @@ const DeliveryDashboardUI = (props) => {
                 <OrderAndDriverListContainer>
                   {openTab.order && (
                     <>
-                      {ordersStatusSelected === 'pending' && (
-                        <OrderListing
-                          orderList={pendingOrders}
-                          driversList={driversList}
-                          orderStatusTitle={t(
-                            'PENDING_ORDERS',
-                            'Pendig orders'
-                          )}
-                          orderListView='small'
-                          handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                        />
-                      )}
-
-                      {ordersStatusSelected === 'inProgress' && (
+                      {ordersStatusGroup === 'pending' && (
                         <>
-                          <OrderListing
-                            orderList={acceptedByBusinessOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'ACCEPTED_BY_BUSINESS',
-                              'Accepted by Business'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-                          <OrderListing
-                            orderList={acceptedByDriverOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'ACCEPTED_BY_Driver',
-                              'Accepted by Driver'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-                          <OrderListing
-                            orderList={driverArrivedByBusinessOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'DRIVER_ARRIVED_BY_BUSINESS',
-                              'Driver arrived by business'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-                          <OrderListing
-                            orderList={readyForPickupOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'READY_FOR_PICKUP',
-                              'Ready for pickup'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-                          <OrderListing
-                            orderList={pickupCompletedByDriverOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'PICKUP_COMPLETED_BY_DRIVER',
-                              'Pickup completed by driver'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
+                          <OrdersListController {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...PreOrdersControlProps} />
                         </>
                       )}
-
-                      {ordersStatusSelected === 'completed' && (
+                      {ordersStatusGroup === 'inProgress' && (
                         <>
-                          <OrderListing
-                            orderList={completedByAdminOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'COMPLETED_BY_ADMIN',
-                              'Completed by admin'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-                          <OrderListing
-                            orderList={deliveryCompletedByDriverOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'DELIVERY_COMPLETED_BY_DRIVER',
-                              'Delivery completed by driver'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
+                          <OrdersListController {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
                         </>
                       )}
-
-                      {ordersStatusSelected === 'cancelled' && (
+                      {ordersStatusGroup === 'completed' && (
                         <>
-                          <OrderListing
-                            orderList={rejectedByAdminOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'REJECTED_BY_ADMIN',
-                              'Rejected by admin'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-
-                          <OrderListing
-                            orderList={rejectByBusinessOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'REJECT_BY_BUSINESS',
-                              'Reject by business'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-
-                          <OrderListing
-                            orderList={rejectByDriverOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'REJECT_BY_DRIVER',
-                              'Reject by driver'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-                          <OrderListing
-                            orderList={pickupFailedByDriverOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'PICKUP_FAILED_BY_DRIVER',
-                              'Pickup failed by driver'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
-
-                          <OrderListing
-                            orderList={deliveryFailedByDriverOrders}
-                            driversList={driversList}
-                            orderStatusTitle={t(
-                              'DELIVERY_FAILED_BY_DRIVER',
-                              'Delivery failed by driver'
-                            )}
-                            orderListView='small'
-                            handleUpdateOrdersStatus={handleUpdateOrdersStatus}
-                          />
+                          <OrdersListController {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
+                        </>
+                      )}
+                      {ordersStatusGroup === 'cancelled' && (
+                        <>
+                          <OrdersListController {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
+                          <OrdersListController {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
                         </>
                       )}
                     </>
@@ -277,8 +228,9 @@ const DeliveryDashboardUI = (props) => {
                     <DriversModal
                       driversList={driversList}
                       driverOrders={driverOrders}
+                      updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                       handleChangeDriverAvailable={handleChangeDriverAvailable}
-                      handleChangeDriverOrders={handleChangeDriverOrders}
+                      handleChangeDriverOrders={handleChangeDriverOrdersModal}
                     />
                   )}
                 </OrderAndDriverListContainer>
@@ -291,12 +243,10 @@ const DeliveryDashboardUI = (props) => {
   )
 }
 
-export const DeliveryDashboard = () => {
-  const AdminOrdersAndDriversListControlProps = {
-    UIComponent: DeliveryDashboardUI,
-    isSearchByOrderNumber: true,
-    isSearchByCustomerEmail: true,
-    isSearchByCustomerPhone: true
+export const DeliveryDashboard = (props) => {
+  const DeliveryDashboardControlProps = {
+    ...props,
+    UIComponent: DeliveryDashboardUI
   }
-  return <AdminOrdersAndDriversList {...AdminOrdersAndDriversListControlProps} />
+  return <OrdersManageController {...DeliveryDashboardControlProps} />
 }

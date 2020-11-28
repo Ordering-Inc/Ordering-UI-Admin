@@ -23,6 +23,7 @@ export const DriverCard = (props) => {
     driver,
     driversList,
     driverOrders,
+    updateOrdersSelectedStatus,
     handleChangeDriverOrders
   } = props
 
@@ -80,6 +81,7 @@ export const DriverCard = (props) => {
           driver={driver}
           driverOrders={driverOrders}
           driversList={driversList}
+          updateOrdersSelectedStatus={updateOrdersSelectedStatus}
         />
       </Modal>
     </>

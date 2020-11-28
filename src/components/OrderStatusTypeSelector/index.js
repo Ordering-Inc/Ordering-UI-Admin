@@ -11,6 +11,7 @@ export const OrderStatusTypeSelector = (props) => {
     orderId,
     type,
     noPadding,
+    noSelected,
     modalFilter,
     ordersStatusSelected,
     handleUpdateOrderStatus,
@@ -28,22 +29,13 @@ export const OrderStatusTypeSelector = (props) => {
       content: <Option noPadding={noPadding}><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>
     },
     {
-      value: 20,
+      value: 'disabled',
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.pending} alt='pending' />
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
       )
-    },
-    {
-      value: 14,
-      content: (
-        <Option noPadding={noPadding}>
-          <p>{t('PREORDER', 'Preorder')}</p>
-        </Option>
-      ),
-      color: 'primary'
     },
     {
       value: 0,
@@ -55,7 +47,16 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 30,
+      value: 13,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('PREORDER', 'Preorder')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 'disabled',
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.inProgress} alt='progress' />
@@ -109,7 +110,7 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 40,
+      value: 'disabled',
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.completed} alt='completed' />
@@ -136,14 +137,13 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 50,
+      value: 'disabled',
       content: (
         <Option noPadding={noPadding}>
-          <p><img src={theme?.images?.orderStatus?.cancelled} alt='cancelled' /></p>
-          {t('CACELLED', 'Cancelled')}
+          <img src={theme?.images?.orderStatus?.cancelled} alt='cancelled' />
+          <p>{t('CACELLED', 'Cancelled')}</p>
         </Option>
-      ),
-      color: 'primary'
+      )
     },
     {
       value: 2,
@@ -193,18 +193,13 @@ export const OrderStatusTypeSelector = (props) => {
   ]
 
   const handleChangeOrderStatus = (orderStatus) => {
-    if (orderStatus !== 'default' && orderStatus !== 30) {
-      if (orderStatus === 14 || orderStatus === 20) {
+    if (orderStatus !== 'default' && orderStatus !== defaultValue) {
+      if (orderStatus === 13) {
         orderStatus = 0
       }
-      if (orderStatus === 40) {
-        orderStatus = 1
-      }
-      if (orderStatus === 50) {
-        orderStatus = 2
-      }
+
       if (!mutiOrdersChange) {
-        handleUpdateOrderStatus({ id: orderId, status: orderStatus })
+        handleUpdateOrderStatus({ id: orderId, newStatus: orderStatus })
       } else {
         handleChangeMultiOrdersStatus(orderStatus)
       }
@@ -237,6 +232,7 @@ export const OrderStatusTypeSelector = (props) => {
   return (
     <Select
       type={type}
+      noSelected={noSelected}
       defaultValue={defaultValue}
       options={filteredOrderStatuses}
       onChange={(orderStatus) => handleChangeOrderStatus(orderStatus)}

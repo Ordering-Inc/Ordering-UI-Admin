@@ -26,7 +26,8 @@ import {
 export const SmallOrderItemAccordion = (props) => {
   const {
     order,
-    drivers
+    drivers,
+    handleUpdateOrderStatus
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -120,7 +121,9 @@ export const SmallOrderItemAccordion = (props) => {
       <WrapperOrderStatus ref={orderStatusRef}>
         <OrderStatusTypeSelector
           defaultValue={order?.status}
+          orderId={order.id}
           noPadding
+          handleUpdateOrderStatus={handleUpdateOrderStatus}
         />
       </WrapperOrderStatus>
     </OrderItemContainer>

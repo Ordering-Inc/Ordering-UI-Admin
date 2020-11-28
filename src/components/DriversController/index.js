@@ -3,7 +3,7 @@ import PropTypes, { string } from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 
-import { useSession, useApi } from 'ordering-components'
+import { useSession, useApi, useWebsocket } from 'ordering-components'
 
 export const DriversList = (props) => {
   const {
@@ -14,10 +14,12 @@ export const DriversList = (props) => {
 
   const [ordering] = useApi()
   const requestsState = {}
+
+  const socket = useWebsocket()
   /**
-   * Get token session
+   * Get session
    */
-  const [{ token }] = useSession()
+  const [session] = useSession()
 
   /**
    * Array to save drivers
@@ -44,7 +46,7 @@ export const DriversList = (props) => {
       const source = {}
       requestsState.drivers = source
       const { content: { result } } = await ordering
-        .setAccessToken(token)
+        .setAccessToken(session.token)
         .users()
         .select(propsToFetch)
         .where([{ attribute: 'level', value: [4] }])
@@ -68,13 +70,13 @@ export const DriversList = (props) => {
    */
   const assignDriver = async () => {
     try {
-      const response = await fetch(`${ordering.root}/paymethods`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
+      const response = await fetch(`${ordering.root}/paymethods`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.token}` } })
       console.log(response)
 
       setAssignStatus({ ...assignStatus, loading: true })
       const source = {}
       requestsState.assignDriver = source
-      const { content: { result } } = await ordering.setAccessToken(token).orders(assignStatus.assign.OrderId).asDashboard().save({
+      const { content: { result } } = await ordering.setAccessToken(session.token).orders(assignStatus.assign.OrderId).asDashboard().save({
         driver_id: assignStatus.assign.driverId,
         paymethod_id: 1,
         business_id: 3,
@@ -96,6 +98,30 @@ export const DriversList = (props) => {
     if (Object.keys(assignStatus.assign).length === 0) return
     assignDriver()
   }, [assignStatus.assign])
+
+  useEffect(() => {
+    if (driversList.loading) return
+    const handleUpdateDriver = (driver) => {
+      console.log('update-driver', driver)
+    }
+    const handleTrackingDriver = (driver) => {
+      console.log('tracking-driver', driver)
+    }
+    socket.on('drivers_update', handleUpdateDriver)
+    socket.on('tracking_driver', handleTrackingDriver)
+    return () => {
+      socket.off('drivers_update', handleUpdateDriver)
+      socket.off('tracking_driver', handleTrackingDriver)
+    }
+  }, [socket])
+
+  useEffect(() => {
+    if (!session.user) return
+    socket.join('drivers')
+    return () => {
+      socket.leave('drivers')
+    }
+  }, [socket, session])
 
   useEffect(() => {
     if (drivers) {

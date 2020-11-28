@@ -3,27 +3,28 @@ import Prev from '@meronex/icons/md/MdKeyboardArrowLeft'
 import Next from '@meronex/icons/md/MdKeyboardArrowRight'
 import {
   WrapperPagination,
+  WrapperPageState,
   PageButton
 } from './styles'
 
-export const OrdersPagination = ({ ordersPerPage, totalOrders, currentPage, paginate, prevPaginate, nextPaginate }) => {
-  const pageNumbers = []
-  for (let i = 1; i <= Math.ceil(totalOrders / ordersPerPage); i++) {
-    pageNumbers.push(i)
-  }
+export const OrdersPagination = ({ ordersPerPage, totalOrders, currentPage, totalPages, prevPaginate, nextPaginate }) => {
+  const indexOfLastOrders = currentPage * ordersPerPage < totalOrders ? currentPage * ordersPerPage : totalOrders
+  const indexOfFirstOrders = (currentPage - 1) * ordersPerPage + 1
   return (
     <WrapperPagination>
-      <PageButton onClick={() => prevPaginate()}>
-        <Prev />
-      </PageButton>
-      {pageNumbers.map((number, i) => (
-        <PageButton onClick={() => paginate(number)} className={`${currentPage === number ? 'active' : null}`} key={i}>
-          {number}
+      <WrapperPageState>
+        : {indexOfFirstOrders}-{indexOfLastOrders} of {totalOrders}
+      </WrapperPageState>
+      {currentPage !== 1 && (
+        <PageButton onClick={() => prevPaginate()}>
+          <Prev />
         </PageButton>
-      ))}
-      <PageButton onClick={() => nextPaginate()}>
-        <Next />
-      </PageButton>
+      )}
+      {currentPage !== totalPages && totalPages !== 1 && (
+        <PageButton onClick={() => nextPaginate()}>
+          <Next />
+        </PageButton>
+      )}
     </WrapperPagination>
   )
 }

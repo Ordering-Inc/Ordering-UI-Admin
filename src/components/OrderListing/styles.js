@@ -34,9 +34,10 @@ export const SkeletonCard = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 5px 0;
-    padding: 5px 10px;
+    margin-bottom: 20px;
+    padding: 19px 10px;
     box-shadow: 0px 0px 3px #00000029;
+    border-radius: 6px;
     ${({ small }) => small && css`
         flex-direction: column;
     `}

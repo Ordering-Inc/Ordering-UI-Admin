@@ -7,6 +7,11 @@ export const Option = styled.div`
   min-width: 100px;
   color: #333;
   cursor: pointer;
+
+  ${({ disabled }) => disabled && css`
+    cursor: no-drop;
+  `}
+
   ${({ optionBottomBorder }) => optionBottomBorder && css`
       border-bottom: 1px solid #D8D8D8;
   `}

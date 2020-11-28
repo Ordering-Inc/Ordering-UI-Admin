@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-
 import { OrderItemAccordion } from '../OrderItemAccordion'
 import { SmallOrderItemAccordion } from '../SmallOrderItemAccordion'
 import { OrdersPagination } from '../OrdersPagination'
@@ -25,11 +24,13 @@ export const OrderListing = (props) => {
     orderListView,
     orderStatusTitle,
     handleUpdateOrderStatus,
-    handleSelectedOrderIds
+    handleSelectedOrderIds,
+    pagination
   } = props
 
   const theme = useTheme()
 
+  // Change page
   const [currentPage, setCurrentPage] = useState(1)
   const [ordersPerPage] = useState(10)
 
@@ -37,28 +38,29 @@ export const OrderListing = (props) => {
   const indexOfLastPost = currentPage * ordersPerPage
   const indexOfFirstPost = indexOfLastPost - ordersPerPage
   const currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
+  const [totalPages, setTotalPages] = useState(null)
 
   // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber)
   const prevPaginate = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1)
     }
   }
   const nextPaginate = () => {
-    if (currentPage !== Math.ceil(orderList.orders.length / ordersPerPage)) {
+    if (currentPage !== totalPages) {
       setCurrentPage(currentPage + 1)
     }
   }
 
   useEffect(() => {
+    const _totalPages = Math.ceil(pagination.total / ordersPerPage)
+    setTotalPages(_totalPages)
     console.log(orderList)
-  }, [orderList])
+  }, [pagination])
 
   return (
     <>
       <OrderStatusTitle>{orderStatusTitle}</OrderStatusTitle>
-
       {!orderList.loading && orderList.orders.length === 0 ? (
         <>
           <WrapperNoneOrders small={orderListView === 'small'}>
@@ -68,19 +70,22 @@ export const OrderListing = (props) => {
       ) : (
         <WrapperOrderListContent small={orderListView === 'small'}>
           {orderListView === 'big' &&
-            !orderList.loading ? currentOrders.map(order => (
-              <React.Fragment key={order.id}>
-                {orderListView === 'big' && (
-                  <OrderItemAccordion
-                    order={order}
-                    drivers={drivers}
-                    updateOrdersSelectedStatus={updateOrdersSelectedStatus}
-                    handleUpdateOrderStatus={handleUpdateOrderStatus}
-                    handleSelectedOrderIds={handleSelectedOrderIds}
-                  />
-                )}
-              </React.Fragment>
-            )
+            !orderList.loading ? (
+              <>
+                {currentOrders.map(order => (
+                  <React.Fragment key={order.id}>
+                    {orderListView === 'big' && (
+                      <OrderItemAccordion
+                        order={order}
+                        drivers={drivers}
+                        updateOrdersSelectedStatus={updateOrdersSelectedStatus}
+                        handleUpdateOrderStatus={handleUpdateOrderStatus}
+                        handleSelectedOrderIds={handleSelectedOrderIds}
+                      />
+                    )}
+                  </React.Fragment>
+                ))}
+              </>
             ) : (
               <SkeletonOrder>
                 {orderListView === 'big' && [...Array(10)].map((item, i) => (
@@ -140,6 +145,7 @@ export const OrderListing = (props) => {
                   <SmallOrderItemAccordion
                     order={order}
                     drivers={drivers}
+                    handleUpdateOrderStatus={handleUpdateOrderStatus}
                   />
                 </React.Fragment>
               )
@@ -177,15 +183,19 @@ export const OrderListing = (props) => {
             </>
           )}
 
-          {!orderList.loading && orderList.orders.length > ordersPerPage && (
-            <OrdersPagination
-              ordersPerPage={ordersPerPage}
-              totalOrders={orderList.orders.length}
-              currentPage={currentPage}
-              paginate={paginate}
-              prevPaginate={prevPaginate}
-              nextPaginate={nextPaginate}
-            />
+          {pagination && (
+            <>
+              {!orderList.loading && pagination.totalPages && (
+                <OrdersPagination
+                  ordersPerPage={ordersPerPage}
+                  totalOrders={orderList.orders.length}
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  prevPaginate={prevPaginate}
+                  nextPaginate={nextPaginate}
+                />
+              )}
+            </>
           )}
         </WrapperOrderListContent>
       )}

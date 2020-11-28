@@ -12,7 +12,7 @@ import {
 } from '../Selects'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type } = props
+  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected } = props
 
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(
@@ -38,8 +38,9 @@ export const Select = (props) => {
   }
 
   useEffect(() => {
-    document.addEventListener('mouseup', closeSelect)
-    return () => document.removeEventListener('mouseup', closeSelect)
+    if (!open) return
+    document.addEventListener('click', closeSelect)
+    return () => document.removeEventListener('click', closeSelect)
   }, [open])
 
   useEffect(() => {
@@ -52,18 +53,22 @@ export const Select = (props) => {
     }
   }, [defaultValue, options])
 
-  const handleChangeOption = (option) => {
-    setSelectedOption(option)
-    setValue(option.value)
+  const handleChangeOption = (e, option) => {
+    if (e.target.closest('.disabled') === null) setOpen(!open)
+    if (option.value === 'disabled') return
+    if (!noSelected) {
+      setSelectedOption(option)
+      setValue(option.value)
+    }
     setTimeout(() => {
       onChange && onChange(option.value)
     }, 100)
   }
 
   return (
-    <SelectInput onClick={handleSelectClick} type={type}>
+    <SelectInput type={type}>
       {!selectedOption && (
-        <Selected>
+        <Selected onClick={handleSelectClick}>
           {placeholder || ''}
           <Chevron>
             <EnChevronDown />
@@ -71,7 +76,7 @@ export const Select = (props) => {
         </Selected>
       )}
       {selectedOption && (
-        <Selected>
+        <Selected onClick={handleSelectClick}>
           <Header>
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>
@@ -91,8 +96,10 @@ export const Select = (props) => {
                 key={i}
                 selected={value === option.value}
                 color={option.color}
-                onClick={() => handleChangeOption(option)}
+                onClick={(e) => handleChangeOption(e, option)}
                 optionBottomBorder={props.optionBottomBorder}
+                disabled={option.value === 'disabled'}
+                className={option.value === 'disabled' ? 'disabled' : null}
               >
                 {option.content}
               </Option>
