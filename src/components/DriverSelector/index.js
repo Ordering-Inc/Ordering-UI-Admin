@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, DriversList as DriversController } from 'ordering-components'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { Select } from '../../styles/Select'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiPhone from '@meronex/icons/fi/FiPhone'
@@ -12,6 +14,7 @@ import {
   DriverImage,
   DriverName
 } from './styles'
+toast.configure()
 
 const DriverSelectorUI = (props) => {
   const {
@@ -21,7 +24,6 @@ const DriverSelectorUI = (props) => {
     isPhoneView,
     small,
     driverActionStatus,
-    toastNotify,
     handleAssignDriver
   } = props
 
@@ -85,6 +87,27 @@ const DriverSelectorUI = (props) => {
       setIsRemoveAction(false)
     }
     handleAssignDriver({ orderId: order.id, driverId: driverId })
+  }
+
+  const toastNotify = (notifyContent) => {
+    const toastConfigure = {
+      position: 'bottom-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    }
+    if (notifyContent.type === 'success') {
+      toast.info(notifyContent.content, toastConfigure)
+    }
+    if (notifyContent.type === 'error') {
+      toast.error(notifyContent.content, toastConfigure)
+    }
+    if (notifyContent.type === 'warning') {
+      toast.warn(notifyContent.content, toastConfigure)
+    }
   }
 
   useEffect(() => {

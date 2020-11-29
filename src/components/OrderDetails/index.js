@@ -9,8 +9,6 @@ import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import HiOutlineArrowLeft from '@meronex/icons/hi/HiOutlineArrowLeft'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -59,8 +57,6 @@ import {
   ChatContainer
 } from './styles'
 import { useTheme } from 'styled-components'
-
-toast.configure()
 
 const OrderDetailsUI = (props) => {
   const {
@@ -129,27 +125,6 @@ const OrderDetailsUI = (props) => {
   const handleCloseMessages = () => {
     orderDetail.current.style.display = 'flex'
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
-  }
-
-  const toastNotify = (notifyContent) => {
-    const toastConfigure = {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    }
-    if (notifyContent.type === 'success') {
-      toast.info(notifyContent.content, toastConfigure)
-    }
-    if (notifyContent.type === 'error') {
-      toast.error(notifyContent.content, toastConfigure)
-    }
-    if (notifyContent.type === 'warning') {
-      toast.warn(notifyContent.content, toastConfigure)
-    }
   }
 
   return (
@@ -360,7 +335,6 @@ const OrderDetailsUI = (props) => {
                 isPhoneView
                 defaultValue={order?.driver?.id ? order.driver.id : 'default'}
                 order={order}
-                toastNotify={toastNotify}
               />
             </DriverSelectorContainer>
             <PrintButtonContainer>
