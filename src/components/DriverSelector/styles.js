@@ -6,6 +6,7 @@ export const Option = styled.div`
   align-items: center;
   column-gap: 10px;
   padding: ${({ padding }) => padding || '10px 0'};
+  white-space: nowrap;
 
   img {
     width: 45px;
