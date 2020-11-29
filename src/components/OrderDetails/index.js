@@ -315,9 +315,11 @@ const OrderDetailsUI = (props) => {
                     <button onClick={() => handleOpenMessages('driver')}>
                       <BsChat /> {t('CHAT', 'Chat')}
                     </button>
-                    <button onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                      <HiOutlinePhone /> {t('CALL', 'Call')}
-                    </button>
+                    {order.driver.cellphone && (
+                      <button onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                        <HiOutlinePhone /> {t('CALL', 'Call')}
+                      </button>
+                    )}
                   </CustomerContactBlock>
                 </InfoBlock>
               ) : (
