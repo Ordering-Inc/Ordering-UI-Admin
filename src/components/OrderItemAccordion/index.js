@@ -135,7 +135,7 @@ export const OrderItemAccordion = (props) => {
           {order?.driver_id ? (
             <WrapperDriverSelector ref={driverSelectorRef}>
               <DriverSelector
-                defaultValue={order?.driver_id ? order.driver_id : 0}
+                defaultValue={order?.driver_id ? order.driver_id : 'default'}
                 drivers={drivers}
                 handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
               />

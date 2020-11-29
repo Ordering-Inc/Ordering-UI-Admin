@@ -26,16 +26,18 @@ export const OrderStatusTypeSelector = (props) => {
   const orderStatuses = [
     {
       value: 'default',
-      content: <Option noPadding={noPadding}><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>
+      content: <Option noPadding={noPadding}><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>,
+      disabled: 'disabled'
     },
     {
-      value: 'disabled',
+      value: null,
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.pending} alt='pending' />
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
-      )
+      ),
+      disabled: 'disabled'
     },
     {
       value: 0,
@@ -56,13 +58,14 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 'disabled',
+      value: null,
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.inProgress} alt='progress' />
           <p>{t('IN_PROGRESS', 'In Progress')}</p>
         </Option>
-      )
+      ),
+      disabled: 'disabled'
     },
     {
       value: 7,
@@ -110,13 +113,14 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 'disabled',
+      value: null,
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.completed} alt='completed' />
           <p>{t('COMPLETED', 'Completed')}</p>
         </Option>
-      )
+      ),
+      disabled: 'disabled'
     },
     {
       value: 1,
@@ -137,13 +141,14 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 'disabled',
+      value: null,
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.cancelled} alt='cancelled' />
           <p>{t('CACELLED', 'Cancelled')}</p>
         </Option>
-      )
+      ),
+      disabled: 'disabled'
     },
     {
       value: 2,
@@ -199,6 +204,7 @@ export const OrderStatusTypeSelector = (props) => {
       }
 
       if (!mutiOrdersChange) {
+        if (orderStatus === orderId) return
         handleUpdateOrderStatus({ id: orderId, newStatus: orderStatus })
       } else {
         handleChangeMultiOrdersStatus(orderStatus)

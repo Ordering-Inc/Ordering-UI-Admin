@@ -15,7 +15,11 @@ export const OrderList = (props) => {
     orderBy,
     orderDirection,
     paginationSettings,
-    asDashboard
+    asDashboard,
+    searchValue,
+    isSearchByOrderId
+    // isSearchByCustomerEmail,
+    // isSearchByCustomerPhone
   } = props
 
   const [ordering] = useApi()
@@ -67,6 +71,8 @@ export const OrderList = (props) => {
 
   const getOrders = async (page) => {
     let options = null
+    let where = []
+    const conditions = []
     if (!asDashboard) {
       options = {
         query: {
@@ -82,21 +88,83 @@ export const OrderList = (props) => {
         }
       }
     }
+
     if (orderIds || orderStatus) {
       options.query.where = []
       if (orderIds) {
-        options.query.where.push({ attribute: 'id', value: orderIds })
+        conditions.push({ attribute: 'id', value: orderIds })
       }
       if (orderStatus) {
-        options.query.where.push({ attribute: 'status', value: orderStatus })
+        conditions.push({ attribute: 'status', value: orderStatus })
       }
     }
+
+    if (searchValue) {
+      const searchConditions = []
+      if (isSearchByOrderId) {
+        searchConditions.push(
+          {
+            attribute: 'id',
+            value: {
+              condition: 'ilike',
+              value: encodeURI(`%${searchValue}%`)
+            }
+          }
+        )
+      }
+      // if (isSearchByCustomerEmail) {
+      //   searchConditions.push(
+      //     {
+      //       attribute: 'customer',
+      //       conditions: [
+      //         {
+      //           attribute: 'email',
+      //           value: {
+      //             condition: 'ilike',
+      //             value: encodeURI(`%${searchValue}%`)
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   )
+      // }
+
+      // if (isSearchByCustomerPhone) {
+      //   searchConditions.push(
+      //     {
+      //       attribute: 'customer',
+      //       conditions: [
+      //         {
+      //           attribute: 'cellphone',
+      //           value: {
+      //             condition: 'ilike',
+      //             value: encodeURI(`%${searchValue}%`)
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   )
+      // }
+
+      conditions.push({
+        conector: 'OR',
+        conditions: searchConditions
+      })
+    }
+
+    if (conditions.length) {
+      where = {
+        conditions,
+        conector: 'AND'
+      }
+    }
+
     const source = {}
     requestsState.orders = source
     options.cancelToken = source
     const functionFetch = asDashboard
-      ? ordering.setAccessToken(token).orders().asDashboard()
-      : ordering.setAccessToken(token).orders()
+      ? ordering.setAccessToken(token).orders().asDashboard().where(where)
+      : ordering.setAccessToken(token).orders().where(where)
     return await functionFetch.get(options)
   }
 
@@ -125,6 +193,13 @@ export const OrderList = (props) => {
       }
     }
   }
+
+  /**
+   * Listening search value change
+   */
+  useEffect(() => {
+    loadOrders()
+  }, [searchValue])
 
   useEffect(() => {
     if (orders) {

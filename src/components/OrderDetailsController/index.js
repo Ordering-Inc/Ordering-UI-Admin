@@ -98,7 +98,6 @@ export const OrderDetails = (props) => {
    * @param {object} order orders id and new status
    */
   const handleUpdateOrderStatus = async (order) => {
-    console.log('asdfasdflkjolakisdjfoaisdjfoa')
     try {
       setActionStatus({ ...actionStatus, loading: true })
       const requestsState = {}

@@ -55,14 +55,12 @@ export const Select = (props) => {
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
-    if (option.value === 'disabled') return
+    if (option.value === null) return
     if (!noSelected) {
       setSelectedOption(option)
       setValue(option.value)
     }
-    setTimeout(() => {
-      onChange && onChange(option.value)
-    }, 100)
+    onChange && onChange(option.value)
   }
 
   return (
@@ -98,8 +96,8 @@ export const Select = (props) => {
                 color={option.color}
                 onClick={(e) => handleChangeOption(e, option)}
                 optionBottomBorder={props.optionBottomBorder}
-                disabled={option.value === 'disabled'}
-                className={option.value === 'disabled' ? 'disabled' : null}
+                disabled={option.disabled === 'disabled'}
+                className={option.disabled === 'disabled' ? 'disabled' : null}
               >
                 {option.content}
               </Option>

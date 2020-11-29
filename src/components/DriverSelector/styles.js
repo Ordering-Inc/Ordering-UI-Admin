@@ -5,7 +5,7 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   column-gap: 10px;
-  padding: 10px 0px;
+  padding: ${({ padding }) => padding || '10px 0'};
 
   img {
     width: 45px;
@@ -25,7 +25,6 @@ export const Option = styled.div`
   @media (max-width: 576px) {
     padding: 5px 0;
   }
-
 `
 
 export const OptionContent = styled.div`

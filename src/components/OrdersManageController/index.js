@@ -160,7 +160,6 @@ export const OrdersManage = (props) => {
       const { content: { result } } = await ordering.setAccessToken(token).orders(id).save({ status: status }, { cancelToken: source })
       console.log(`update order ${id}`, result)
     } catch (err) {
-      // setUpdateOrders({ ...updateOrders, error: err })
       setUpdateOrders({ ...updateOrders, ids: [], error: err })
     }
   }

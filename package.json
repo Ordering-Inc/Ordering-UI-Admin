@@ -62,6 +62,7 @@
     "react-input-mask": "^2.0.4",
     "react-loading-skeleton": "^2.1.1",
     "react-popper": "^2.2.4",
+    "react-toastify": "^6.1.0",
     "styled-components": "^5.2.1"
   },
   "peerDependencies": {

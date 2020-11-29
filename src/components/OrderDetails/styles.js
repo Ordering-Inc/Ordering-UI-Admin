@@ -174,6 +174,7 @@ export const OrderStatus = styled.div`
     font-weight: bold;
     text-transform: uppercase;
     font-size: 13px;
+    max-width: 200px;
   }
 
   @media (min-width: 410px) {
@@ -210,7 +211,7 @@ export const SectionTitle = styled.p`
 `
 export const SectionContainer = styled.div`
   display: flex;
-  margin: 20px 0px 40px;
+  margin: 15px 0px 30px;
   width: 100%;
   column-gap: 10px;
 `
@@ -218,7 +219,7 @@ export const InfoBlock = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   text-transform: capitalize;
   h1,
   span {
@@ -336,6 +337,9 @@ export const BackActions = styled.div`
 export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
 `
 export const SkeletonBlockWrapp = styled.div`
   display: flex;
@@ -343,7 +347,39 @@ export const SkeletonBlockWrapp = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  line-height: 40px;
+`
+export const SkeletonInfoCell = styled.div`
+  display: flex;
+  flex-direction: column;
+  column-gap: 10px;
+`
+export const SkeletonInnerBlock = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+`
+export const WrapperSkeletonText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+export const WrapperSkeletonBottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 100px;
+
+  span {
+    width: 90%;
+    border-radius: 30px;
+  }
+`
+export const WrapperSkeletonButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    border-radius: 20px;
+  }
 `
 export const PayAndOrderTypeInfo = styled.div`
   display: flex;
@@ -509,7 +545,7 @@ export const ButtonLink = styled.button`
   }
 `
 export const DriverSelectorContainer = styled.div`
-  margin: 20px 0 40px 0;
+  margin: 15px 0 100px 0;
   & > div {
     width: 100%;
   }

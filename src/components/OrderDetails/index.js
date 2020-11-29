@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 // import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
@@ -9,7 +9,8 @@ import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import HiOutlineArrowLeft from '@meronex/icons/hi/HiOutlineArrowLeft'
-
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -37,7 +38,12 @@ import {
   BackActions,
   SkeletonBlockWrapp,
   SkeletonBlock,
+  SkeletonInfoCell,
+  SkeletonInnerBlock,
+  WrapperSkeletonBottom,
+  WrapperSkeletonText,
   PayAndOrderTypeInfo,
+  WrapperSkeletonButton,
   Paymethod,
   PaymethodContent,
   PaymethodCreatedDate,
@@ -54,9 +60,10 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 
+toast.configure()
+
 const OrderDetailsUI = (props) => {
   const {
-    actionStatus,
     handleOrderRedirect,
     handleUpdateOrderStatus
   } = props
@@ -67,10 +74,6 @@ const OrderDetailsUI = (props) => {
   const history = useHistory()
 
   const orderDetail = useRef(null)
-
-  useEffect(() => {
-    console.log(actionStatus)
-  }, [actionStatus])
 
   const {
     order,
@@ -128,9 +131,26 @@ const OrderDetailsUI = (props) => {
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
   }
 
-  useEffect(() => {
-    console.log(props.order)
-  }, [props.order])
+  const toastNotify = (notifyContent) => {
+    const toastConfigure = {
+      position: 'bottom-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    }
+    if (notifyContent.type === 'success') {
+      toast.info(notifyContent.content, toastConfigure)
+    }
+    if (notifyContent.type === 'error') {
+      toast.error(notifyContent.content, toastConfigure)
+    }
+    if (notifyContent.type === 'warning') {
+      toast.warn(notifyContent.content, toastConfigure)
+    }
+  }
 
   return (
     <Container>
@@ -310,10 +330,10 @@ const OrderDetailsUI = (props) => {
                 {order?.driver?.photo ? (
                   <Photo bgimage={order?.driver?.photo} />
                 ) : (
-                  <Photo bgimage={theme?.images?.icons?.noDriver} />
+                  <FaUserAlt />
                 )}
               </PhotoWrapper>
-              {order.driver_id && (
+              {order.driver_id ? (
                 <InfoBlock>
                   <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
                   <CustomerContactBlock>
@@ -325,6 +345,10 @@ const OrderDetailsUI = (props) => {
                     </button>
                   </CustomerContactBlock>
                 </InfoBlock>
+              ) : (
+                <InfoBlock>
+                  <h1>{t('NO_DRIVER', 'No driver')}</h1>
+                </InfoBlock>
               )}
             </SectionContainer>
 
@@ -334,8 +358,9 @@ const OrderDetailsUI = (props) => {
             <DriverSelectorContainer>
               <DriverSelector
                 isPhoneView
-                defaultValue={order?.driver?.id ? order.driver.id : 0}
+                defaultValue={order?.driver?.id ? order.driver.id : 'default'}
                 order={order}
+                toastNotify={toastNotify}
               />
             </DriverSelectorContainer>
             <PrintButtonContainer>
@@ -365,11 +390,27 @@ const OrderDetailsUI = (props) => {
           <SkeletonBlockWrapp>
             <SkeletonBlock width={100}>
               <Skeleton height={50} />
-              <Skeleton height={140} />
-              <Skeleton height={140} />
-              <Skeleton height={140} />
-              <Skeleton height={50} />
-              <Skeleton height={50} />
+              {[...Array(3)].map((item, i) => (
+                <SkeletonInfoCell key={i}>
+                  <Skeleton width={80} height={20} />
+                  <SkeletonInnerBlock>
+                    <Skeleton width={80} height={80} />
+                    <WrapperSkeletonText>
+                      <Skeleton width={200} height={20} />
+                      <Skeleton width={200} height={20} />
+                      <WrapperSkeletonButton>
+                        <Skeleton width={80} height={30} />
+                        <Skeleton width={80} height={30} />
+                      </WrapperSkeletonButton>
+                    </WrapperSkeletonText>
+                  </SkeletonInnerBlock>
+                </SkeletonInfoCell>
+              ))}
+              <Skeleton width={120} height={25} />
+              <WrapperSkeletonBottom>
+                <Skeleton height={50} />
+                <Skeleton height={50} />
+              </WrapperSkeletonBottom>
             </SkeletonBlock>
           </SkeletonBlockWrapp>
         </WrapperContainer>

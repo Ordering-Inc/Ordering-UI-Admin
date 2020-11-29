@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components'
-import { DriversList as DriversController } from '../DriversController'
+import { useLanguage, DriversList as DriversController } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiPhone from '@meronex/icons/fi/FiPhone'
@@ -17,20 +16,31 @@ import {
 const DriverSelectorUI = (props) => {
   const {
     order,
-    drivers,
+    driversList,
     defaultValue,
     isPhoneView,
     small,
-    handleChangeDriver
+    driverActionStatus,
+    toastNotify,
+    handleAssignDriver
   } = props
 
   const [, t] = useLanguage()
   const [driversOptionList, setDriversOptionList] = useState([])
-  const driversLoading = [{ value: 0, content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
+  const [isRemoveAction, setIsRemoveAction] = useState(false)
+  const driversLoading = [{ value: 'default', content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
   useEffect(() => {
-    const _driversOptionList = [{ value: 0, content: <Option>{t('DRIVER', 'Driver')}</Option> }]
-    if (!drivers.loading) {
-      const _driversOptionListTemp = drivers.drivers.map((driver, i) => {
+    const _driversOptionList = [
+      {
+        value: 'default',
+        content: <Option padding='3px 0'>{t('SELECT_A_DRIVER', 'Select a driver')}</Option>,
+        color: 'primary',
+        disabled: 'disabled'
+      }
+    ]
+    _driversOptionList.push({ value: 'remove', content: <Option padding='3px'>{t('REMOVE_ASSIGNED_DRIVER', 'Remove assinged driver')}</Option> })
+    if (!driversList.loading) {
+      const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
         return {
           value: driver.id,
           content: (
@@ -64,22 +74,59 @@ const DriverSelectorUI = (props) => {
       }
     }
     setDriversOptionList(_driversOptionList)
-  }, [drivers])
+  }, [driversList])
+
+  const handleChangeDriver = (driverId) => {
+    if (driverId === 'default') return
+    if (driverId === 'remove') {
+      driverId = null
+      setIsRemoveAction(true)
+    } else {
+      setIsRemoveAction(false)
+    }
+    handleAssignDriver({ orderId: order.id, driverId: driverId })
+  }
+
+  useEffect(() => {
+    if (!driverActionStatus) return
+    if (driverActionStatus.loading) return
+    const notifyContent = {}
+    if (driverActionStatus.error === null) {
+      if (!isRemoveAction) {
+        notifyContent.content = t('Driver assigned to order')
+        notifyContent.type = 'success'
+      } else {
+        notifyContent.content = t('Driver was removed')
+        notifyContent.type = 'warning'
+      }
+    } else {
+      if (Array.isArray(driverActionStatus.error)) {
+        notifyContent.content = ''
+        for (const _error of driverActionStatus.error) {
+          notifyContent.content += _error
+        }
+      } else {
+        notifyContent.content = driverActionStatus.error
+      }
+      notifyContent.type = 'error'
+    }
+    toastNotify(notifyContent)
+  }, [driverActionStatus])
 
   return (
     <>
-      {!drivers.loading ? (
+      {!driversList.loading ? (
         <Select
-          defaultValue={defaultValue || 0}
+          defaultValue={defaultValue || 'default'}
           options={driversOptionList}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
           optionBottomBorder
-          onChange={(driverId) => handleChangeDriver({ orderId: order.id, driverId: driverId, products: order.products })}
+          onChange={(driverId) => handleChangeDriver(driverId)}
         />
       ) : (
         <Select
-          defaultValue={0}
+          defaultValue='default'
           options={driversLoading}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
