@@ -36,6 +36,13 @@ export const OrdersFilter = (props) => {
    * * @param {object} dateType date type
   */
   const handleChangeDateType = (dateType) => {
+    switch (dateType) {
+      case 'today':
+      case 'yesterday':
+      case 'last_7':
+      case 'last_30':
+      case 'term':
+    }
     setTypesSelected({ ...typesSelected })
   }
   /**

@@ -50,15 +50,8 @@ export const DateTypeSelector = (props) => {
     </PlaceholderTitle>
   )
 
-  const handleChangeDateType = (dateType) => {
-    switch (dateType) {
-      case 'today':
-      case 'yesterday':
-      case 'last_7':
-      case 'last_30':
-      case 'term':
-    }
-    console.log(dateType)
+  const changeDateType = (dateType) => {
+
   }
 
   return (
@@ -66,7 +59,7 @@ export const DateTypeSelector = (props) => {
       placeholder={placeholder}
       options={dateTypes}
       notAsync
-      onChange={(dateType) => handleChangeDateType(dateType)}
+      onChange={(dateType) => changeDateType(dateType)}
     />
   )
 }
