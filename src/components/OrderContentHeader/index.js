@@ -26,6 +26,8 @@ export const OrderContentHeader = (props) => {
     handleChangeSearch,
     searchValue,
     driversList,
+    paymethodsList,
+    businessesList,
     ordersStatusSelected
   } = props
   const theme = useTheme()
@@ -102,6 +104,8 @@ export const OrderContentHeader = (props) => {
       >
         <FilterGroupList
           driversList={driversList}
+          paymethodsList={paymethodsList}
+          businessesList={businessesList}
           ordersStatusSelected={ordersStatusSelected}
         />
       </Modal>

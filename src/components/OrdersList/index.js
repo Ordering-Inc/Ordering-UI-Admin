@@ -17,6 +17,8 @@ const OrdersListUI = (props) => {
   const {
     searchValue,
     driversList,
+    paymethodsList,
+    businessesList,
     updateOrdersSelectedStatus,
     ordersStatusGroup,
     handleChangeSearch,
@@ -121,9 +123,11 @@ const OrdersListUI = (props) => {
           <OrderContentHeader
             active='orders'
             searchValue={searchValue}
+            driversList={driversList}
+            paymethodsList={paymethodsList}
+            businessesList={businessesList}
             ordersStatusSelected={ordersStatusGroup}
             handleChangeSearch={handleChangeSearch}
-            drivers={driversList}
           />
           <OrdersDashboardControls
             handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}

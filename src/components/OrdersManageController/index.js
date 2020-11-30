@@ -8,7 +8,8 @@ export const OrdersManage = (props) => {
   const {
     UIComponent,
     statusGroup,
-    driversPropsToFetch
+    driversPropsToFetch,
+    businessesPropsToFetch
   } = props
 
   const [ordering] = useApi()
@@ -23,6 +24,14 @@ export const OrdersManage = (props) => {
    * Object to save drivers
    */
   const [driversList, setDriversList] = useState({ drivers: [], loading: true, error: null })
+  /**
+   * Object to save paymethods
+   */
+  const [paymethodsList, setPaymethodsList] = useState({ paymethods: [], loading: true, error: null })
+  /**
+   * Object to save businesses
+   */
+  const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
   /**
    * Object to save driver orders
    */
@@ -85,6 +94,36 @@ export const OrdersManage = (props) => {
       for (let i = 0; i < _ids.length; i++) {
         updateOrderStatus(_ids[i], status)
       }
+    }
+  }
+  /**
+   * Method to get paymethods from API
+   */
+  const getPaymethods = async () => {
+    try {
+      const response = await fetch(`${ordering.root}/paymethods?params=id,name&where=[{%22attribute%22:%22enabled%22,%22value%22:true}]`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
+      const { result } = await response.json()
+      setPaymethodsList({ ...paymethodsList, loading: false, paymethods: result })
+    } catch (err) {
+      setPaymethodsList({ ...paymethodsList, loading: false, error: err.message })
+    }
+  }
+  /**
+   * Method to get businesses from API
+   */
+  const getBusinesses = async () => {
+    try {
+      const source = {}
+      requestsState.business = source
+      const { content: { result } } = await ordering
+        .setAccessToken(token)
+        .businesses()
+        .asDashboard()
+        .select(businessesPropsToFetch)
+        .get({ cancelToken: source })
+      setBusinessesList({ ...businessesList, loading: false, businesses: result })
+    } catch (err) {
+      setBusinessesList({ ...businessesList, loading: false, error: err.message })
     }
   }
   /**
@@ -189,6 +228,8 @@ export const OrdersManage = (props) => {
 
   useEffect(() => {
     getDrivers()
+    getPaymethods()
+    getBusinesses()
 
     return () => {
       if (requestsState.drivers) {
@@ -204,6 +245,8 @@ export const OrdersManage = (props) => {
           {...props}
           searchValue={searchValue}
           driversList={driversList}
+          paymethodsList={paymethodsList}
+          businessesList={businessesList}
           driverOrders={driverOrdersModal}
           updateOrdersSelectedStatus={updateOrders}
           ordersStatusGroup={ordersStatusGroup}
@@ -247,6 +290,7 @@ OrdersManage.propTypes = {
 
 OrdersManage.defaultProps = {
   driversPropsToFetch: ['id', 'name', 'lastname', 'assigned_orders_count', 'available', 'phone', 'cellphone', 'location', 'photo', 'qualification', 'last_order_assigned_at'],
+  businessesPropsToFetch: ['id', 'name', 'logo', 'food', 'laundry', 'alcohol', 'groceries'],
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

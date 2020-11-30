@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Option = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   column-gap: 10px;

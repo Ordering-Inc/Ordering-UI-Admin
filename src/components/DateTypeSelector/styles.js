@@ -16,7 +16,7 @@ export const PlaceholderTitle = styled.div`
 export const Option = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  column-gap: 10px;
   padding: 5px 10px;
 
   svg {
@@ -35,7 +35,7 @@ export const DateContainer = styled.div`
 
   input {
     border-radius: 20px;
-    width: 100px;
+    width: 140px;
     outline: none;
     padding: 3px 10px;
     border: 1px solid #F2F2F2;

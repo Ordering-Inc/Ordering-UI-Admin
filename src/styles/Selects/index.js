@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const Option = styled.div`
+  display: flex;
+  align-items: center;
   padding-left: 15px;
   padding-right: 15px;
   min-width: 100px;
@@ -158,6 +160,9 @@ export const Chevron = styled.div`
 
 export const Header = styled.div`
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
 `
 
 export const SelectImage = styled.div`

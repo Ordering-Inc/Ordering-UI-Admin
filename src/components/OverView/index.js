@@ -1,7 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
-// import { OrdersOverview as OrdersOverviewController, useLanguage } from 'ordering-components'
-import { OrdersOverview as OrdersOverviewController } from '../OrdersOverviewController'
+import { OrdersOverview as OrdersOverviewController, useLanguage } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import {
   OverViewContainer,

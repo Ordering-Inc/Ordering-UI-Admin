@@ -1,9 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
-// import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
-import { useLanguage, useUtils } from 'ordering-components'
-import { OrderDetails as OrderDetailsController } from '../OrderDetailsController'
+import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
@@ -78,13 +76,13 @@ const OrderDetailsUI = (props) => {
 
   const getOrderStatus = (status) => {
     const orderStatus = [
-      { key: 0, value: 'Pending', slug: 'PENDING', percentage: 25 },
-      { key: 1, value: 'Completed', slug: 'COMPLETED', percentage: 100 },
-      { key: 2, value: 'Rejected', slug: 'REJECTED', percentage: 0 },
-      { key: 3, value: 'Driver in business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 70 },
-      { key: 5, value: 'Rejected by business', slug: 'REJECTED_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: 'Canceled by Driver', slug: 'CANCELED_BY_DRIVER', percentage: 0 },
+      { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 25 },
+      { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
+      { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
+      { key: 3, value: 'Driver arrived by business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
+      { key: 4, value: 'Ready for pickup', slug: 'READY_FOR_PICKUP', percentage: 70 },
+      { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
+      { key: 6, value: 'Reject by driver', slug: 'REJECT_BY_DRIVER', percentage: 0 },
       { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
       { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
       { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },

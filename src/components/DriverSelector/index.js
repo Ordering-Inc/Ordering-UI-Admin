@@ -22,6 +22,7 @@ const DriverSelectorUI = (props) => {
     driversList,
     defaultValue,
     isPhoneView,
+    isFilterView,
     small,
     driverActionStatus,
     handleAssignDriver
@@ -40,7 +41,9 @@ const DriverSelectorUI = (props) => {
         disabled: 'disabled'
       }
     ]
-    _driversOptionList.push({ value: 'remove', content: <Option padding='3px'>{t('REMOVE_ASSIGNED_DRIVER', 'Remove assinged driver')}</Option> })
+    if (!isFilterView) {
+      _driversOptionList.push({ value: 'remove', content: <Option padding='3px'>{t('REMOVE_ASSIGNED_DRIVER', 'Remove assinged driver')}</Option> })
+    }
     if (!driversList.loading) {
       const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
         return {
@@ -78,7 +81,7 @@ const DriverSelectorUI = (props) => {
     setDriversOptionList(_driversOptionList)
   }, [driversList])
 
-  const handleChangeDriver = (driverId) => {
+  const changeDriver = (driverId) => {
     if (driverId === 'default') return
     if (driverId === 'remove') {
       driverId = null
@@ -145,7 +148,7 @@ const DriverSelectorUI = (props) => {
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
           optionBottomBorder
-          onChange={(driverId) => handleChangeDriver(driverId)}
+          onChange={(driverId) => changeDriver(driverId)}
         />
       ) : (
         <Select

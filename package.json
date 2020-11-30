@@ -59,7 +59,6 @@
     "react-csv": "^2.0.3",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.11.3",
-    "react-input-mask": "^2.0.4",
     "react-loading-skeleton": "^2.1.1",
     "react-popper": "^2.2.4",
     "react-toastify": "^6.1.0",

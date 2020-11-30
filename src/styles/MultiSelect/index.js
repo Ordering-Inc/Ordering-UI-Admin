@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
+import CheckboxBlankCircle from '@meronex/icons/ri/RiCheckboxBlankCircleLine'
+import CheckboxMarkedCircle from '@meronex/icons/ri/RiCheckboxCircleLine'
 
 import {
   Select as SelectInput,
@@ -11,19 +13,19 @@ import {
   Header
 } from '../Selects'
 
-export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected } = props
+import {
+  CheckBox
+} from './styles'
+
+export const MultiSelect = (props) => {
+  const { placeholder, options, onChange } = props
 
   const [open, setOpen] = useState(false)
-  const defaultOption = options?.find(
-    (option) => option.value === defaultValue
-  )
-  const [selectedOption, setSelectedOption] = useState(defaultOption)
-  const [value, setValue] = useState(defaultValue)
+  const [values, setValues] = useState([])
+  const [selectedOptions, setSelectedOptions] = useState([])
   const dropdownReference = useRef()
 
   const handleSelectClick = (e) => {
-    if (e.target.name === 'startDate' || e.target.name === 'endDate') return
     setOpen(!open)
   }
 
@@ -42,40 +44,43 @@ export const Select = (props) => {
     return () => document.removeEventListener('click', closeSelect)
   }, [open])
 
-  useEffect(() => {
-    if (!notAsync) {
-      const _defaultOption = options?.find(
-        (option) => option.value === defaultValue
-      )
-      setSelectedOption(_defaultOption)
-      setValue(defaultValue)
+  const handleSelectOption = (option) => {
+    if (option.value === null || option.value === 'default') return
+    const _selectedOptions = [...selectedOptions]
+    const _values = [...values]
+    if (!_values.includes(option.value)) {
+      _values.push(option.value)
+      _selectedOptions.push(option)
+    } else {
+      for (let i = 0; i < _values.length; i++) {
+        if (_values[i] === option.value) {
+          _values.splice(i, 1)
+          _selectedOptions.splice(i, 1)
+          i--
+        }
+      }
     }
-  }, [defaultValue, options])
-
-  const handleChangeOption = (e, option) => {
-    if (e.target.closest('.disabled') === null) setOpen(!open)
-    if (option.value === null) return
-    if (!noSelected) {
-      setSelectedOption(option)
-      setValue(option.value)
-    }
+    setSelectedOptions(_selectedOptions)
+    setValues(_values)
     onChange && onChange(option.value)
   }
 
   return (
-    <SelectInput type={type}>
-      {!selectedOption && (
+    <SelectInput>
+      {selectedOptions.length === 0 ? (
         <Selected onClick={handleSelectClick}>
           {placeholder || ''}
           <Chevron>
             <EnChevronDown />
           </Chevron>
         </Selected>
-      )}
-      {selectedOption && (
+      ) : (
         <Selected onClick={handleSelectClick}>
           <Header>
-            {selectedOption.showOnSelected || selectedOption.content}
+            {selectedOptions.map((selectedOption) => (
+              selectedOption.content
+            ))}
+            {selectedOptions.showOnSelected || selectedOptions.content}
           </Header>
           <Chevron>
             <EnChevronDown />
@@ -91,13 +96,18 @@ export const Select = (props) => {
             {options.map((option, i) => (
               <Option
                 key={i}
-                selected={value === option.value}
                 color={option.color}
-                onClick={(e) => handleChangeOption(e, option)}
-                optionBottomBorder={props.optionBottomBorder}
                 disabled={option.disabled === 'disabled'}
-                className={option.disabled === 'disabled' ? 'disabled' : null}
+                onClick={() => handleSelectOption(option)}
+                optionBottomBorder={props.optionBottomBorder}
               >
+                {option.value !== 'default' && (
+                  <CheckBox>
+                    {values.includes(option.value)
+                      ? <CheckboxMarkedCircle />
+                      : <CheckboxBlankCircle />}
+                  </CheckBox>
+                )}
                 {option.content}
               </Option>
             ))}

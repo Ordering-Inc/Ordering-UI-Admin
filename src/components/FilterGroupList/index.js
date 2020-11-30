@@ -1,7 +1,8 @@
 import React from 'react'
+import { OrdersFilter as OrdersFilterController } from '../OrdersFilterController'
 import { GroupTypeSelector } from '../GroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
-import { BusinessTypeSelector } from '../BusinessTypeSelector'
+import { BusinessesSelector } from '../BusinessesSelector'
 import { DriverSelector } from '../DriverSelector'
 import { CitySelector } from '../CitySelector'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -12,73 +13,67 @@ import {
   FilterGroupListContainer
 } from './styles'
 
-export const FilterGroupList = (props) => {
+const FilterGroupListUI = (props) => {
   const {
     driversList,
-    ordersStatusSelected
+    paymethodsList,
+    businessesList,
+    ordersStatusSelected,
+    handleChangeGroup,
+    handleChangeDateType,
+    handleChangeBusinesses,
+    handleChangeDriver,
+    handleChangeCity,
+    handleChangeOrderStatus,
+    handleChangeDeliveryType,
+    handleChangePaymethodType
   } = props
-  const handleChangeGroupType = (groupType) => {
-    console.log(groupType)
-  }
-
-  const handleChangeDateType = (dateType) => {
-    console.log(dateType)
-  }
-
-  const handleSelectedBusinessType = (businessType) => {
-    console.log(businessType)
-  }
-
-  const handleSelectedDriver = (driver) => {
-    console.log(driver)
-  }
-
-  const handleChangeCity = (city) => {
-    console.log(city)
-  }
-
-  const handleChangeStatus = (status) => {
-    console.log(status)
-  }
-
-  const handleChangeDeliveryType = (deliveryType) => {
-    console.log(deliveryType)
-  }
-
-  const handleChangePaymentType = (paymentType) => {
-    console.log(paymentType)
-  }
 
   return (
     <FilterGroupListContainer>
       <GroupTypeSelector
-        handleChangeGroupType={(groupType) => handleChangeGroupType(groupType)}
+        handleChangeGroup={handleChangeGroup}
       />
       <DateTypeSelector
-        handleChangeDateType={(dateType) => handleChangeDateType(dateType)}
+        handleChangeDateType={handleChangeDateType}
       />
-      <BusinessTypeSelector
-        handleSelectedBusinessType={(businessType) => handleSelectedBusinessType(businessType)}
+      <BusinessesSelector
+        handleChangeBusinesses={handleChangeBusinesses}
+        businessesList={businessesList}
       />
       <DriverSelector
         isPhoneView
-        driversList={driversList}
-        handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
+        isFilterView
+        drivers={driversList.drivers}
+        handleChangeDriver={handleChangeDriver}
       />
       <CitySelector
-        handleChangeCity={(city) => handleChangeCity(city)}
+        handleChangeCity={handleChangeCity}
       />
       <OrderStatusTypeSelector
         modalFilter
         ordersStatusSelected={ordersStatusSelected}
-        handleChangeStatus={(status) => handleChangeStatus(status)}
+        handleChangeOrderStatus={handleChangeOrderStatus}
       />
       <DeliveryTypeSelector
-        handleChangeDeliveryType={(deliveryType) => handleChangeDeliveryType(deliveryType)}
+        handleChangeDeliveryType={handleChangeDeliveryType}
       />
       <PaymethodTypeSelector
-        handleChangePaymentType={(paymentType) => handleChangePaymentType(paymentType)}
+        paymethodsList={paymethodsList}
+        handleChangePaymethodType={handleChangePaymethodType}
       />
     </FilterGroupListContainer>
+  )
+}
+
+export const FilterGroupList = (props) => {
+  const FilterControlProps = {
+    ...props,
+    UIComponent: FilterGroupListUI
+  }
+  return (
+    <>
+      <OrdersFilterController {...FilterControlProps} />
+    </>
   )
 }

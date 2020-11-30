@@ -14,17 +14,15 @@ export const DeliveryTypeSelector = (props) => {
   const [, t] = useLanguage()
 
   const deliveryTypes = [
-    { value: 0, content: <Option>{t('DELIVERY_TYPE', 'Delivery type')}</Option> },
+    { value: 'default', content: <Option>{t('SELECT_A_DELIVERY_TYPE', 'Select a delivery type')}</Option>, disabled: 'disabled' },
     { value: 1, content: <Option>{t('DELIVERY', 'Delivery')}</Option> },
     { value: 2, content: <Option>{t('PICKUP', 'Pickup')}</Option> },
-    { value: 3, content: <Option>{t('EAT_IN', 'Eat in')}</Option> },
-    { value: 4, content: <Option>{t('CURBSIDE', 'Curbside')}</Option> },
-    { value: 5, content: <Option>{t('DRIVE_THR', 'Drive thru')}</Option> }
+    { value: 3, content: <Option>{t('EAT_IN', 'Eat in')}</Option> }
   ]
 
   return (
     <Select
-      defaultValue={0}
+      defaultValue='default'
       options={deliveryTypes}
       onChange={(deliveryType) => handleChangeDeliveryType(deliveryType)}
     />

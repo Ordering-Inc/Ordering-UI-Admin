@@ -20,7 +20,7 @@ export const OrderStatusTypeSelector = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-
+  const [defaultOptionValue, setDefaultOptionValue] = useState(defaultValue)
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
 
   const orderStatuses = [
@@ -197,7 +197,7 @@ export const OrderStatusTypeSelector = (props) => {
     }
   ]
 
-  const handleChangeOrderStatus = (orderStatus) => {
+  const changeOrderStatus = (orderStatus) => {
     if (orderStatus !== 'default' && orderStatus !== defaultValue) {
       if (orderStatus === 13) {
         orderStatus = 0
@@ -216,6 +216,12 @@ export const OrderStatusTypeSelector = (props) => {
     if (!modalFilter) {
       setFilteredOrderStatuses(orderStatuses)
     } else {
+      const _defaultOption = [
+        {
+          value: 'default',
+          content: <Option noPadding={noPadding}><p>{t('SELECT_STATUS', 'Select Status')}</p></Option>
+        }
+      ]
       let _filteredOrderStatues = []
       switch (ordersStatusSelected) {
         case 'pending':
@@ -231,7 +237,9 @@ export const OrderStatusTypeSelector = (props) => {
           _filteredOrderStatues = orderStatuses.splice(14, 5)
           break
       }
-      setFilteredOrderStatuses(_filteredOrderStatues)
+      const filteredOrderStatus = _defaultOption.concat(_filteredOrderStatues)
+      setDefaultOptionValue('default')
+      setFilteredOrderStatuses(filteredOrderStatus)
     }
   }, [])
 
@@ -239,9 +247,9 @@ export const OrderStatusTypeSelector = (props) => {
     <Select
       type={type}
       noSelected={noSelected}
-      defaultValue={defaultValue}
+      defaultValue={defaultOptionValue}
       options={filteredOrderStatuses}
-      onChange={(orderStatus) => handleChangeOrderStatus(orderStatus)}
+      onChange={(orderStatus) => changeOrderStatus(orderStatus)}
     />
   )
 }
