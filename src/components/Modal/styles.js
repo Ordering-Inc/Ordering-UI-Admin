@@ -30,24 +30,23 @@ export const ModalDialog = styled.div`
     border-radius: 0px;
   }
 `
-
 export const ModalActions = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin: 30px 0px 0px;
 
   button {
     width: 100%;
     border-radius: 32px;
     opacity: 1;
-    max-width: 550px;
+    max-width: 300px;
+    margin-top: 50px;
+    height: 60px;
   }
 `
 export const ModalHeader = styled.div`
   display: flex;
-
 `
-
 export const ModalTitle = styled.h2`
   text-align: left;
   font-size: 30px;

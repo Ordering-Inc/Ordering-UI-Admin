@@ -21,7 +21,9 @@ const OrdersListUI = (props) => {
     businessesList,
     updateOrdersSelectedStatus,
     ordersStatusGroup,
+    filterValues,
     handleChangeSearch,
+    handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
     handleSelectedOrderIds,
     handleChangeMultiOrdersStatus
@@ -34,10 +36,11 @@ const OrdersListUI = (props) => {
     UIComponent: OrderListing,
     asDashboard: true,
     searchValue: searchValue,
+    filterValues: filterValues,
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true,
-    drivers: driversList.drivers,
+    driversList: driversList,
     updateOrdersSelectedStatus: updateOrdersSelectedStatus,
     orderListView: 'big',
     handleSelectedOrderIds: handleSelectedOrderIds
@@ -45,11 +48,13 @@ const OrdersListUI = (props) => {
 
   const PendingOrdersControlProps = {
     orderStatus: [0],
+    pendingOrder: true,
     orderStatusTitle: t('PENDING_ORDERS', 'Pendig orders')
   }
 
   const PreOrdersControlProps = {
-    orderStatus: [13],
+    orderStatus: [0],
+    preOrder: true,
     orderStatusTitle: t('PREORDERS', 'Preorders')
   }
 
@@ -128,14 +133,15 @@ const OrdersListUI = (props) => {
             businessesList={businessesList}
             ordersStatusSelected={ordersStatusGroup}
             handleChangeSearch={handleChangeSearch}
+            handleChangeFilterValues={handleChangeFilterValues}
           />
           <OrdersDashboardControls
             handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
           />
           {ordersStatusGroup === 'pending' && (
             <>
-              <OrdersListController {...OrdersCommonControlProps} {...PreOrdersControlProps} />
               <OrdersListController {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
+              <OrdersListController {...OrdersCommonControlProps} {...PreOrdersControlProps} />
             </>
           )}
           {ordersStatusGroup === 'inProgress' && (

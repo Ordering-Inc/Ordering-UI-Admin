@@ -19,13 +19,15 @@ import {
 export const OrderListing = (props) => {
   const {
     orderList,
-    drivers,
+    driversList,
     updateOrdersSelectedStatus,
     orderListView,
     orderStatusTitle,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
-    pagination
+    pagination,
+    preOrder,
+    pendingOrder
   } = props
 
   const theme = useTheme()
@@ -53,15 +55,21 @@ export const OrderListing = (props) => {
   }
 
   useEffect(() => {
-    const _totalPages = Math.ceil(pagination.total / ordersPerPage)
+    const _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
     setTotalPages(_totalPages)
     console.log(orderList)
-  }, [pagination])
+  }, [orderList])
+
+  useEffect(() => {
+    if (orderList.loading) {
+      setCurrentPage(1)
+    }
+  }, [orderList])
 
   return (
     <>
       <OrderStatusTitle>{orderStatusTitle}</OrderStatusTitle>
-      {!orderList.loading && orderList.orders.length === 0 ? (
+      {!(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? (
         <>
           <WrapperNoneOrders small={orderListView === 'small'}>
             <img src={theme?.images?.dummies?.nonOrders} alt='none' />
@@ -70,14 +78,16 @@ export const OrderListing = (props) => {
       ) : (
         <WrapperOrderListContent small={orderListView === 'small'}>
           {orderListView === 'big' &&
-            !orderList.loading ? (
+            !(orderList.loading || driversList.loading) ? (
               <>
                 {currentOrders.map(order => (
                   <React.Fragment key={order.id}>
                     {orderListView === 'big' && (
                       <OrderItemAccordion
                         order={order}
-                        drivers={drivers}
+                        drivers={driversList.drivers}
+                        pendingOrder={pendingOrder}
+                        preOrder={preOrder}
                         updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                         handleUpdateOrderStatus={handleUpdateOrderStatus}
                         handleSelectedOrderIds={handleSelectedOrderIds}
@@ -97,7 +107,6 @@ export const OrderListing = (props) => {
                         <Skeleton width={80} />
                       </SkeletonText>
                     </SkeletonCell>
-
                     <SkeletonCell>
                       <Skeleton width={50} height={50} />
                       <SkeletonText>
@@ -105,7 +114,6 @@ export const OrderListing = (props) => {
                         <Skeleton width={80} />
                       </SkeletonText>
                     </SkeletonCell>
-
                     <SkeletonCell>
                       <Skeleton width={50} height={50} />
                       <SkeletonText>
@@ -113,26 +121,21 @@ export const OrderListing = (props) => {
                         <Skeleton width={80} />
                       </SkeletonText>
                     </SkeletonCell>
-
                     <SkeletonCell>
                       <Skeleton width={50} height={50} />
                       <SkeletonText>
                         <Skeleton width={80} />
                       </SkeletonText>
                     </SkeletonCell>
-
                     <SkeletonCell>
                       <Skeleton width={40} height={40} />
                     </SkeletonCell>
-
                     <SkeletonCell>
                       <Skeleton width={100} height={30} />
                     </SkeletonCell>
-
                     <SkeletonCell>
                       <Skeleton width={60} height={20} />
                     </SkeletonCell>
-
                   </SkeletonCard>
                 ))}
               </SkeletonOrder>
@@ -140,11 +143,11 @@ export const OrderListing = (props) => {
 
           {orderListView === 'small' && (
             <>
-              {!orderList.loading ? orderList.orders.map(order => (
+              {!(orderList.loading || driversList.loading) ? orderList.orders.map(order => (
                 <React.Fragment key={order.id}>
                   <SmallOrderItemAccordion
                     order={order}
-                    drivers={drivers}
+                    drivers={driversList.drivers}
                     handleUpdateOrderStatus={handleUpdateOrderStatus}
                   />
                 </React.Fragment>

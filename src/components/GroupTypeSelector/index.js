@@ -6,7 +6,10 @@ import { useTheme } from 'styled-components'
 import { PlaceholderTitle, Option, OptionType, OptionValue } from './styles'
 
 export const GroupTypeSelector = (props) => {
-  const { handleChangeGroup } = props
+  const {
+    filterValues,
+    handleChangeGroup
+  } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -79,6 +82,7 @@ export const GroupTypeSelector = (props) => {
   return (
     <Select
       placeholder={placeholder}
+      defaultValue={filterValues?.groupType}
       options={groupTypes}
       onChange={(groupType) => handleChangeGroup(groupType)}
     />

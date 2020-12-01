@@ -17,9 +17,9 @@ export const OrdersManage = (props) => {
   const [{ token, loading }] = useSession()
 
   const requestsState = {}
-  const [searchValue, setSearchValue] = useState()
+  const [searchValue, setSearchValue] = useState(null)
   const [ordersStatusGroup, setOrdersStatusGroup] = useState(statusGroup || 'pending')
-
+  const [filterValues, setFilterValues] = useState({})
   /**
    * Object to save drivers
    */
@@ -56,6 +56,13 @@ export const OrdersManage = (props) => {
    */
   const handleChangeSearch = (search) => {
     setSearchValue(search)
+  }
+  /**
+   * Save filter type values
+   * @param {object} types
+   */
+  const handleChangeFilterValues = (types) => {
+    setFilterValues(types)
   }
   /**
    * Change driver id to get orders of a driver
@@ -250,7 +257,9 @@ export const OrdersManage = (props) => {
           driverOrders={driverOrdersModal}
           updateOrdersSelectedStatus={updateOrders}
           ordersStatusGroup={ordersStatusGroup}
+          filterValues={filterValues}
           handleChangeSearch={handleChangeSearch}
+          handleChangeFilterValues={handleChangeFilterValues}
           handleOrdersStatusGroupFilter={handleOrdersStatusGroupFilter}
           handleChangeDriverOrdersModal={handleChangeDriverOrdersModal}
           handleSelectedOrderIds={handleSelectedOrderIds}

@@ -9,13 +9,17 @@ export const OrderStatusTypeSelector = (props) => {
     defaultValue,
     mutiOrdersChange,
     orderId,
+    preOrder,
+    pendingOrder,
     type,
     noPadding,
     noSelected,
-    modalFilter,
+    isFilterView,
+    filterValues,
     ordersStatusSelected,
     handleUpdateOrderStatus,
-    handleChangeMultiOrdersStatus
+    handleChangeMultiOrdersStatus,
+    handleChangeOrderStatus
   } = props
 
   const [, t] = useLanguage()
@@ -30,35 +34,36 @@ export const OrderStatusTypeSelector = (props) => {
       disabled: 'disabled'
     },
     {
-      value: null,
+      value: 0,
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.pending} alt='pending' />
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
-      ),
-      disabled: 'disabled'
+      )
     },
     {
-      value: 0,
+      value: 'pending',
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PENDING_ORDER', 'Pending Order')}</p>
         </Option>
       ),
-      color: 'primary'
+      color: 'primary',
+      disabled: 'disabled'
     },
     {
-      value: 13,
+      value: 'preorder',
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PREORDER', 'Preorder')}</p>
         </Option>
       ),
-      color: 'primary'
+      color: 'primary',
+      disabled: 'disabled'
     },
     {
-      value: null,
+      value: 'inProgress',
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.inProgress} alt='progress' />
@@ -198,6 +203,14 @@ export const OrderStatusTypeSelector = (props) => {
   ]
 
   const changeOrderStatus = (orderStatus) => {
+    if (isFilterView) {
+      if (orderStatus === 'default') {
+        handleChangeOrderStatus(null)
+      } else {
+        handleChangeOrderStatus(orderStatus)
+      }
+      return
+    }
     if (orderStatus !== 'default' && orderStatus !== defaultValue) {
       if (orderStatus === 13) {
         orderStatus = 0
@@ -213,7 +226,7 @@ export const OrderStatusTypeSelector = (props) => {
   }
 
   useEffect(() => {
-    if (!modalFilter) {
+    if (!isFilterView) {
       setFilteredOrderStatuses(orderStatuses)
     } else {
       const _defaultOption = [
@@ -225,7 +238,7 @@ export const OrderStatusTypeSelector = (props) => {
       let _filteredOrderStatues = []
       switch (ordersStatusSelected) {
         case 'pending':
-          _filteredOrderStatues = orderStatuses.splice(2, 2)
+          _filteredOrderStatues = orderStatuses.splice(1, 1)
           break
         case 'inProgress':
           _filteredOrderStatues = orderStatuses.splice(5, 5)
@@ -238,10 +251,29 @@ export const OrderStatusTypeSelector = (props) => {
           break
       }
       const filteredOrderStatus = _defaultOption.concat(_filteredOrderStatues)
-      setDefaultOptionValue('default')
       setFilteredOrderStatuses(filteredOrderStatus)
     }
   }, [])
+
+  useEffect(() => {
+    if (isFilterView) {
+      if (filterValues.status === null) {
+        setDefaultOptionValue('default')
+      } else {
+        setDefaultOptionValue(filterValues.status)
+      }
+    }
+  }, [filterValues])
+
+  useEffect(() => {
+    if (pendingOrder) {
+      setDefaultOptionValue('pending')
+    }
+
+    if (preOrder) {
+      setDefaultOptionValue('preorder')
+    }
+  }, [pendingOrder, preOrder])
 
   return (
     <Select

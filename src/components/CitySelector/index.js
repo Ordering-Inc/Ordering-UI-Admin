@@ -8,6 +8,7 @@ import {
 
 export const CitySelector = (props) => {
   const {
+    filterValues,
     handleChangeCity
   } = props
 
@@ -24,6 +25,7 @@ export const CitySelector = (props) => {
   return (
     <Select
       placeholder={placeholder}
+      defaultValue={filterValues.cityId}
       options={cityTypes}
       selectedHeight='65px'
       onChange={(city) => handleChangeCity(city)}

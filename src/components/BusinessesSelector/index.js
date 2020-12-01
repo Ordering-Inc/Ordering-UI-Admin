@@ -14,8 +14,9 @@ import {
 
 export const BusinessesSelector = (props) => {
   const {
+    filterValues,
     businessesList,
-    handleSelectedBusinessType
+    handleChangeBusinesses
   } = props
 
   const [, t] = useLanguage()
@@ -63,13 +64,13 @@ export const BusinessesSelector = (props) => {
     <>
       {!businessesList.loading ? (
         <MultiSelect
-          defaultValue='default'
+          defaultValue={filterValues.businessIds}
           placeholder={Placeholder}
           options={businessTypes}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
           optionBottomBorder
-          onChange={(businessType) => handleSelectedBusinessType(businessType)}
+          onChange={(business) => handleChangeBusinesses(business)}
         />
       ) : (
         <MultiSelect

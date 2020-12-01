@@ -1,18 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const PlaceholderTitle = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100px;
-  padding: 5px 10px;
-
-  img {
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
-  }
-`
-
 export const Option = styled.div`
   display: flex;
   align-items: center;
@@ -27,7 +14,6 @@ export const Option = styled.div`
     `} 
   }
 `
-
 export const DateContainer = styled.div`
   display: flex;
   align-items: center;

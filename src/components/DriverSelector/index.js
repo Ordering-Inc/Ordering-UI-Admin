@@ -23,12 +23,15 @@ const DriverSelectorUI = (props) => {
     defaultValue,
     isPhoneView,
     isFilterView,
+    filterValues,
     small,
     driverActionStatus,
-    handleAssignDriver
+    handleAssignDriver,
+    handleChangeDriver
   } = props
 
   const [, t] = useLanguage()
+  const [defaultOption, setDefaultOption] = useState(defaultValue)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [isRemoveAction, setIsRemoveAction] = useState(false)
   const driversLoading = [{ value: 'default', content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
@@ -38,7 +41,7 @@ const DriverSelectorUI = (props) => {
         value: 'default',
         content: <Option padding='3px 0'>{t('SELECT_A_DRIVER', 'Select a driver')}</Option>,
         color: 'primary',
-        disabled: 'disabled'
+        disabled: !isFilterView ? 'disabled' : null
       }
     ]
     if (!isFilterView) {
@@ -82,6 +85,14 @@ const DriverSelectorUI = (props) => {
   }, [driversList])
 
   const changeDriver = (driverId) => {
+    if (isFilterView) {
+      if (driverId === 'default') {
+        handleChangeDriver(null)
+      } else {
+        handleChangeDriver(driverId)
+      }
+      return
+    }
     if (driverId === 'default') return
     if (driverId === 'remove') {
       driverId = null
@@ -139,11 +150,17 @@ const DriverSelectorUI = (props) => {
     toastNotify(notifyContent)
   }, [driverActionStatus])
 
+  useEffect(() => {
+    if (isFilterView) {
+      setDefaultOption(filterValues.driverId)
+    }
+  }, [filterValues])
+
   return (
     <>
       {!driversList.loading ? (
         <Select
-          defaultValue={defaultValue || 'default'}
+          defaultValue={defaultOption || 'default'}
           options={driversOptionList}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'

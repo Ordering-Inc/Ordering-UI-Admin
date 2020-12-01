@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes, { object, number } from 'prop-types'
+import dayjs from 'dayjs'
 import { useSession, useApi, useWebsocket } from 'ordering-components'
 
 // import { useSession } from '../../contexts/SessionContext'
@@ -12,10 +13,13 @@ export const OrderList = (props) => {
     orders,
     orderIds,
     orderStatus,
+    pendingOrder,
+    preOrder,
     orderBy,
     orderDirection,
     paginationSettings,
     asDashboard,
+    filterValues,
     searchValue,
     isSearchByOrderId
     // isSearchByCustomerEmail,
@@ -89,13 +93,19 @@ export const OrderList = (props) => {
       }
     }
 
-    if (orderIds || orderStatus) {
-      options.query.where = []
-      if (orderIds) {
-        conditions.push({ attribute: 'id', value: orderIds })
-      }
+    if (orderIds) {
+      conditions.push({ attribute: 'id', value: orderIds })
+    }
+
+    if (filterValues?.status === null || Object.keys(filterValues).length === 0) {
       if (orderStatus) {
         conditions.push({ attribute: 'status', value: orderStatus })
+      }
+    } else {
+      if (orderStatus.includes(filterValues.status)) {
+        conditions.push({ attribute: 'status', value: filterValues.status })
+      } else {
+        return
       }
     }
 
@@ -152,6 +162,71 @@ export const OrderList = (props) => {
       })
     }
 
+    if (Object.keys(filterValues).length) {
+      const filterConditons = []
+      if (filterValues.deliveryFromDatetime !== null) {
+        filterConditons.push(
+          {
+            attribute: 'delivery_datetime',
+            value: {
+              condition: '>=',
+              value: encodeURI(filterValues.deliveryFromDatetime)
+            }
+          }
+        )
+      }
+      if (filterValues.deliveryEndDatetime !== null) {
+        filterConditons.push(
+          {
+            attribute: 'delivery_datetime',
+            value: {
+              condition: '<=',
+              value: filterValues.deliveryEndDatetime
+            }
+          }
+        )
+      }
+      if (filterValues.businessIds.length !== 0) {
+        filterConditons.push(
+          {
+            attribute: 'business_id',
+            value: filterValues.businessIds
+          }
+        )
+      }
+      if (filterValues.driverId !== null) {
+        filterConditons.push(
+          {
+            attribute: 'driver_id',
+            value: filterValues.driverId
+          }
+        )
+      }
+      if (filterValues.deliveryType !== null) {
+        filterConditons.push(
+          {
+            attribute: 'delivery_type',
+            value: filterValues.deliveryType
+          }
+        )
+      }
+      if (filterValues.paymethodId !== null) {
+        filterConditons.push(
+          {
+            attribute: 'paymethod_id',
+            value: filterValues.paymethodId
+          }
+        )
+      }
+
+      if (filterConditons.length) {
+        conditions.push({
+          conector: 'AND',
+          conditions: filterConditons
+        })
+      }
+    }
+
     if (conditions.length) {
       where = {
         conditions,
@@ -168,15 +243,50 @@ export const OrderList = (props) => {
     return await functionFetch.get(options)
   }
 
+  const isPendingOrder = (createdAt, deliveryDatetime) => {
+    const date1 = dayjs(createdAt)
+    const date2 = dayjs(deliveryDatetime)
+    return date1.diff(date2, 'minute') < 60
+  }
+
+  const isPreOrder = (createdAt, deliveryDatetime) => {
+    const date1 = dayjs(createdAt)
+    const date2 = dayjs(deliveryDatetime)
+    return date1.diff(date2, 'minute') > 60
+  }
+
   const loadOrders = async () => {
     if (!session.token) return
     try {
+      setOrderList({ ...orderList, loading: true })
       const response = await getOrders(pagination.currentPage + 1)
-      setOrderList({
-        loading: false,
-        orders: response.content.error ? [] : response.content.result,
-        error: response.content.error ? response.content.result : null
-      })
+
+      let filteredResult = []
+      if (pendingOrder) {
+        if (!response.content.error) {
+          filteredResult = response.content.result.filter(order => isPendingOrder(order.created_at, order.delivery_datetime))
+        }
+      }
+      if (preOrder) {
+        if (!response.content.error) {
+          filteredResult = response.content.result.filter((order) => isPreOrder(order.created_at, order.delivery_datetime))
+        }
+      }
+
+      if (pendingOrder || preOrder) {
+        setOrderList({
+          loading: false,
+          orders: response.content.error ? [] : filteredResult,
+          error: response.content.error ? response.content.result : null
+        })
+      } else {
+        setOrderList({
+          loading: false,
+          orders: response.content.error ? [] : response.content.result,
+          error: response.content.error ? response.content.result : null
+        })
+      }
+
       if (!response.content.error) {
         setPagination({
           currentPage: response.content.pagination.current_page,
@@ -198,8 +308,19 @@ export const OrderList = (props) => {
    * Listening search value change
    */
   useEffect(() => {
+    if (searchValue === null) return
     loadOrders()
   }, [searchValue])
+  /**
+   * Listening filter values change
+   */
+  useEffect(() => {
+    if (orderStatus.includes(filterValues.status) || filterValues.status === null || Object.keys(filterValues).length === 0) {
+      loadOrders()
+    } else {
+      setOrderList({ loading: false, orders: [], error: null })
+    }
+  }, [filterValues])
 
   useEffect(() => {
     if (orders) {
@@ -246,21 +367,59 @@ export const OrderList = (props) => {
         const isOrderStatus = orderStatus.includes(parseInt(order.status))
         if (isOrderStatus) {
           orders = [...orderList.orders, order]
-          const _ordres = sortOrdersArray(orderDirection, orders)
+          const _orders = sortOrdersArray(orderDirection, orders)
           pagination.total++
           setPagination({
             ...pagination
           })
           setOrderList({
             ...orderList,
-            orders: _ordres
+            orders: _orders
           })
         }
       }
     }
+    const handleRegisterOrder = (_order) => {
+      const order = { ..._order, status: 0 }
+      let orders = []
+      if (orderStatus.includes(0)) {
+        if (pendingOrder) {
+          const isPending = isPendingOrder(order.created_at, order.delivery_datetime)
+          if (isPending) {
+            orders = [...orderList.orders, order]
+            const _orders = sortOrdersArray(orderDirection, orders)
+            pagination.total++
+            setPagination({
+              ...pagination
+            })
+            setOrderList({
+              ...orderList,
+              orders: _orders
+            })
+          }
+        }
+        if (preOrder) {
+          const isPre = isPreOrder(order.created_at, order.delivery_datetime)
+          if (isPre) {
+            orders = [...orderList.orders, order]
+            const _orders = sortOrdersArray(orderDirection, orders)
+            pagination.total++
+            setPagination({
+              ...pagination
+            })
+            setOrderList({
+              ...orderList,
+              orders: _orders
+            })
+          }
+        }
+      }
+    }
     socket.on('update_order', handleUpdateOrder)
+    socket.on('orders_register', handleRegisterOrder)
     return () => {
       socket.off('update_order', handleUpdateOrder)
+      socket.off('orders_register', handleRegisterOrder)
     }
   }, [orderList.orders, pagination, socket])
 
@@ -340,6 +499,8 @@ export const OrderList = (props) => {
           {...props}
           orderList={orderList}
           pagination={pagination}
+          pendingOrder={pendingOrder}
+          preOrder={preOrder}
           loadMoreOrders={loadMoreOrders}
           goToPage={goToPage}
           handleUpdateOrderStatus={handleUpdateOrderStatus}

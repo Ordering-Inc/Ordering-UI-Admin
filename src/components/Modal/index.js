@@ -47,8 +47,8 @@ const ModalUI = (props) => {
       {children}
       {(onCancel || onAccept) && (
         <ModalActions>
-          {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-          {onAccept && <Button color='modalAccept' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+          {onAccept && <Button color='darkBlue' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+          {onCancel && <Button color='primary' onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
         </ModalActions>)}
     </ModalDialog>
   )

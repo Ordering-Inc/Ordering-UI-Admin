@@ -54,7 +54,7 @@ export const Select = (props) => {
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
-    if (option.value === null) return
+    if (option.value === null || option.disabled) return
     if (!noSelected) {
       setSelectedOption(option)
       setValue(option.value)

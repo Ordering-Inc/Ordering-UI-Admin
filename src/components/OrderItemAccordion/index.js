@@ -33,6 +33,8 @@ export const OrderItemAccordion = (props) => {
   const {
     order,
     drivers,
+    preOrder,
+    pendingOrder,
     updateOrdersSelectedStatus,
     handleUpdateOrderStatus,
     handleSelectedOrderIds
@@ -179,6 +181,8 @@ export const OrderItemAccordion = (props) => {
           <OrderStatusTypeSelector
             defaultValue={order.status}
             orderId={order.id}
+            pendingOrder={pendingOrder}
+            preOrder={preOrder}
             noPadding
             handleUpdateOrderStatus={handleUpdateOrderStatus}
           />

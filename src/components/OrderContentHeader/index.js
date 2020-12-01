@@ -28,15 +28,14 @@ export const OrderContentHeader = (props) => {
     driversList,
     paymethodsList,
     businessesList,
-    ordersStatusSelected
+    ordersStatusSelected,
+    handleChangeFilterValues
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const [filterModalOpen, setFilterModalOpen] = useState(false)
 
-  const [deadlineSettingModalOpen, setDeadlineSettingModalOpen] = useState(
-    false
-  )
+  const [deadlineSettingModalOpen, setDeadlineSettingModalOpen] = useState(false)
   const [deadlineType, setDeadlineType] = useState(0)
 
   const handleChangeDeadlineType = (deadlineType) => {
@@ -47,13 +46,12 @@ export const OrderContentHeader = (props) => {
     }
   }
 
-  const handleFilter = () => {
-    console.log('accept button clicked!')
-    setFilterModalOpen(false)
-  }
-
   const handleDeadlineSetting = () => {
     setDeadlineSettingModalOpen(false)
+  }
+
+  const handleCloseFilterModal = () => {
+    setFilterModalOpen(false)
   }
 
   return (
@@ -93,22 +91,15 @@ export const OrderContentHeader = (props) => {
         </TopRightSection>
       </OrderContentHeaderContainer>
 
-      <Modal
-        title={t('FILTER', 'Filter')}
-        width='70%'
-        padding='30px'
+      <FilterGroupList
         open={filterModalOpen}
-        onClose={() => setFilterModalOpen(false)}
-        acceptText={t('ACCEPT', 'Accept')}
-        onAccept={() => handleFilter()}
-      >
-        <FilterGroupList
-          driversList={driversList}
-          paymethodsList={paymethodsList}
-          businessesList={businessesList}
-          ordersStatusSelected={ordersStatusSelected}
-        />
-      </Modal>
+        handleCloseFilterModal={handleCloseFilterModal}
+        driversList={driversList}
+        paymethodsList={paymethodsList}
+        businessesList={businessesList}
+        ordersStatusSelected={ordersStatusSelected}
+        handleChangeFilterValues={handleChangeFilterValues}
+      />
 
       <Modal
         title={t('SETTINGS', 'Settings')}

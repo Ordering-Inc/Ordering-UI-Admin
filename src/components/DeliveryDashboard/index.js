@@ -30,9 +30,13 @@ const DeliveryDashboardUI = (props) => {
     driverOrders,
     searchValue,
     driversList,
+    paymethodsList,
+    businessesList,
     updateOrdersSelectedStatus,
     ordersStatusGroup,
+    filterValues,
     handleChangeSearch,
+    handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
     handleSelectedOrderIds,
     handleChangeDriverOrdersModal
@@ -49,7 +53,11 @@ const DeliveryDashboardUI = (props) => {
     UIComponent: OrderListing,
     asDashboard: true,
     searchValue: searchValue,
-    drivers: driversList.drivers,
+    filterValues: filterValues,
+    isSearchByOrderId: true,
+    isSearchByCustomerEmail: true,
+    isSearchByCustomerPhone: true,
+    driversList: driversList,
     updateOrdersSelectedStatus: updateOrdersSelectedStatus,
     orderListView: 'small',
     handleSelectedOrderIds: handleSelectedOrderIds
@@ -57,11 +65,13 @@ const DeliveryDashboardUI = (props) => {
 
   const PendingOrdersControlProps = {
     orderStatus: [0],
+    pendingOrder: true,
     orderStatusTitle: t('PENDING_ORDERS', 'Pendig orders')
   }
 
   const PreOrdersControlProps = {
-    orderStatus: [13],
+    orderStatus: [0],
+    preOrder: true,
     orderStatusTitle: t('PREORDERS', 'Preorders')
   }
 
@@ -153,9 +163,12 @@ const DeliveryDashboardUI = (props) => {
           <OrderContentHeader
             active='deliveryDashboard'
             searchValue={searchValue}
+            driversList={driversList}
+            paymethodsList={paymethodsList}
+            businessesList={businessesList}
             ordersStatusSelected={ordersStatusGroup}
             handleChangeSearch={handleChangeSearch}
-            drivers={driversList}
+            handleChangeFilterValues={handleChangeFilterValues}
           />
           <MapAndOrderContent>
 

@@ -7,6 +7,7 @@ import { Option } from './styles'
 export const PaymethodTypeSelector = (props) => {
   const {
     paymethodsList,
+    filterValues,
     handleChangePaymethodType
   } = props
 
@@ -35,16 +36,24 @@ export const PaymethodTypeSelector = (props) => {
     setPaymethodsTypes(_paymthodsOptionList)
   }, [paymethodsList])
 
+  const changePaymethodType = (paymethod) => {
+    if (paymethod === 'default') {
+      handleChangePaymethodType(null)
+    } else {
+      handleChangePaymethodType(paymethod)
+    }
+  }
+
   return (
     <>
       {!paymethodsList.loading ? (
         <Select
-          defaultValue='default'
+          defaultValue={filterValues.paymethodId || 'default'}
           options={paymethodsTypes}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
           optionBottomBorder
-          onChange={(paymethod) => handleChangePaymethodType(paymethod)}
+          onChange={(paymethod) => changePaymethodType(paymethod)}
         />
       ) : (
         <Select

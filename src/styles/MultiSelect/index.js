@@ -18,7 +18,7 @@ import {
 } from './styles'
 
 export const MultiSelect = (props) => {
-  const { placeholder, options, onChange } = props
+  const { placeholder, options, onChange, defaultValue } = props
 
   const [open, setOpen] = useState(false)
   const [values, setValues] = useState([])
@@ -37,6 +37,14 @@ export const MultiSelect = (props) => {
       }
     }
   }
+
+  useEffect(() => {
+    const _defaultOption = options?.filter(
+      (option) => defaultValue.includes(option.value)
+    )
+    setSelectedOptions(_defaultOption)
+    setValues(defaultValue)
+  }, [defaultValue, options])
 
   useEffect(() => {
     if (!open) return
@@ -78,9 +86,10 @@ export const MultiSelect = (props) => {
         <Selected onClick={handleSelectClick}>
           <Header>
             {selectedOptions.map((selectedOption) => (
-              selectedOption.content
+              <React.Fragment key={selectedOption.value}>
+                {selectedOption.content}
+              </React.Fragment>
             ))}
-            {selectedOptions.showOnSelected || selectedOptions.content}
           </Header>
           <Chevron>
             <EnChevronDown />

@@ -1,22 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components'
-import { useTheme } from 'styled-components'
+import dayjs from 'dayjs'
 import { Select } from '../../styles/Select'
-import { Option, PlaceholderTitle, DateContainer } from './styles'
+import { Option, DateContainer } from './styles'
 
 export const DateTypeSelector = (props) => {
-  // const { handleChangeDateType } = props
+  const {
+    filterValues,
+    handleChangeDateType,
+    handleChangeFromDate,
+    handleChangeEndDate
+  } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
-  const [startDate, setStartDate] = useState()
-  const [endDate, setEndDate] = useState()
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const dateTypes = [
+    { value: 'default', content: <Option>{t('SELECT_DATE', 'Select date')}</Option> },
     { value: 'today', content: <Option>{t('TODAY', 'Today')}</Option> },
     { value: 'yesterday', content: <Option>{t('YESTERDAY', 'Yesterday')}</Option> },
-    { value: 'last_7', content: <Option>{t('LAST_7_DAYS', 'Last 7 dyas')}</Option> },
-    { value: 'last_30', content: <Option>{t('LAST_30_DAYS', 'Last 30 days')}</Option> },
+    { value: 'last7', content: <Option>{t('LAST_7_DAYS', 'Last 7 dyas')}</Option> },
+    { value: 'last30', content: <Option>{t('LAST_30_DAYS', 'Last 30 days')}</Option> },
     {
       value: 'term',
       content: (
@@ -27,7 +32,7 @@ export const DateTypeSelector = (props) => {
           </DateContainer>
           <DateContainer>
             {t('TO', 'To')}
-            <input type='date' name='endDate' min='2020-01-01' value={endDate} onChange={(e) => handleChangeDate(e)} />
+            <input type='date' id='endDate' min='' name='endDate' value={endDate} onChange={(e) => handleChangeDate(e)} />
           </DateContainer>
         </Option>
       )
@@ -43,22 +48,41 @@ export const DateTypeSelector = (props) => {
     }
   }
 
-  const placeholder = (
-    <PlaceholderTitle>
-      <img src={theme?.images?.icons?.calendar} alt='calendar' />
-      {t('TODAY', 'Today')}
-    </PlaceholderTitle>
-  )
-
   const changeDateType = (dateType) => {
-
+    handleChangeDateType(dateType)
   }
+
+  useEffect(() => {
+    if (startDate === '' || startDate === null) return
+    document.getElementById('endDate').min = startDate
+    handleChangeFromDate(startDate)
+  }, [startDate])
+
+  useEffect(() => {
+    if (endDate === '' || endDate === null) return
+    handleChangeEndDate(endDate)
+  }, [endDate])
+
+  useEffect(() => {
+    if (filterValues.dateType !== 'term') return
+
+    if (filterValues.deliveryFromDatetime !== null) {
+      setStartDate(dayjs(filterValues.deliveryFromDatetime).format('YYYY-MM-DD'))
+    } else {
+      setStartDate('')
+    }
+
+    if (filterValues.deliveryEndDatetime !== null) {
+      setEndDate(dayjs(filterValues.deliveryEndDatetime).format('YYYY-MM-DD'))
+    } else {
+      setEndDate('')
+    }
+  }, [filterValues])
 
   return (
     <Select
-      placeholder={placeholder}
+      defaultValue={filterValues.dateType || 'default'}
       options={dateTypes}
-      notAsync
       onChange={(dateType) => changeDateType(dateType)}
     />
   )
