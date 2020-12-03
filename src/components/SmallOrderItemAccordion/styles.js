@@ -166,6 +166,3 @@ export const WrapperDriverSelector = styled.div`
     }
   }
 `
-export const TextContainer = styled.p`
-  font-size: 12px;
-`

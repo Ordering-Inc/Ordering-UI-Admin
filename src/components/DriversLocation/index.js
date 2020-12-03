@@ -3,7 +3,6 @@ import GoogleMapReact, { fitBounds } from 'google-map-react'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import { WrapperMap, WrapperMapMarker, MapMarkerImg } from './styles'
-import { toUpper } from 'lodash'
 
 export const DriversLocation = (props) => {
   const { driversList, driverAvailable } = props
@@ -107,7 +106,7 @@ export const DriversLocation = (props) => {
 
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
-    if (driversList.loading || driversList.drivers.length == 0 || mapLoaded) return
+    if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return
     mapFit()
   }, [driversList, driverAvailable, mapLoaded])
 

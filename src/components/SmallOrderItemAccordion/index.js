@@ -19,8 +19,7 @@ import {
   CustomerContent,
   WrapperOrderStatus,
   DriverInfo,
-  WrapperDriverSelector,
-  TextContainer
+  WrapperDriverSelector
 } from './styles'
 
 export const SmallOrderItemAccordion = (props) => {

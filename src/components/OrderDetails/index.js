@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
