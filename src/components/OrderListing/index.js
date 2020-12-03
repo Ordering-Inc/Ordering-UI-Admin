@@ -147,6 +147,8 @@ export const OrderListing = (props) => {
                   <SmallOrderItemAccordion
                     order={order}
                     drivers={driversList.drivers}
+                    pendingOrder={pendingOrder}
+                    preOrder={preOrder}
                     handleUpdateOrderStatus={handleUpdateOrderStatus}
                   />
                 </React.Fragment>

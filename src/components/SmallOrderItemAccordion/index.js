@@ -26,6 +26,8 @@ export const SmallOrderItemAccordion = (props) => {
   const {
     order,
     drivers,
+    pendingOrder,
+    preOrder,
     handleUpdateOrderStatus
   } = props
   const [, t] = useLanguage()
@@ -112,6 +114,8 @@ export const SmallOrderItemAccordion = (props) => {
         <OrderStatusTypeSelector
           defaultValue={order?.status}
           orderId={order.id}
+          pendingOrder={pendingOrder}
+          preOrder={preOrder}
           noPadding
           handleUpdateOrderStatus={handleUpdateOrderStatus}
         />
