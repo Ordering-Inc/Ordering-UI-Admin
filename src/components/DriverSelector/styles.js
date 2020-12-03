@@ -17,8 +17,6 @@ export const Option = styled.div`
   ${({ small }) => small && css`
     column-gap: 5px;
     padding: 5px 0px;
-    margin: 0px -5px;
-
     img {
       width: 25px;
     }
@@ -91,6 +89,7 @@ export const WrapperDriverImage = styled.div`
   ${({ small }) => small && css`
     width: 27px;
     height: 27px;
+    border-radius: 3px;
   `}
 `
 const DriverImageStyled = styled.div`
@@ -104,6 +103,9 @@ const DriverImageStyled = styled.div`
   object-fit: cover;
   background-position: center;
   border-radius: 10px;
+  ${({ small }) => small && css`
+    border-radius: 3px;
+  `}
 `
 export const DriverImage = (props) => {
   return (

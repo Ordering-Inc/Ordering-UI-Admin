@@ -4,14 +4,12 @@ import {
   OrdersContent,
   OrdersInnerContent
 } from './styles'
-import { OrdersManage as OrdersManageController } from '../OrdersManageController'
-import { OrderList as OrdersListController } from '../OrdersListController'
+import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
 
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { OrderListing } from '../OrderListing'
-import { useLanguage } from 'ordering-components'
 
 const OrdersListUI = (props) => {
   const {
@@ -19,14 +17,15 @@ const OrdersListUI = (props) => {
     driversList,
     paymethodsList,
     businessesList,
-    updateOrdersSelectedStatus,
+    selectedOrderIds,
     ordersStatusGroup,
     filterValues,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
     handleSelectedOrderIds,
-    handleChangeMultiOrdersStatus
+    handleChangeMultiOrdersStatus,
+    handleDeleteMultiOrders
   } = props
 
   const [, t] = useLanguage()
@@ -41,7 +40,7 @@ const OrdersListUI = (props) => {
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true,
     driversList: driversList,
-    updateOrdersSelectedStatus: updateOrdersSelectedStatus,
+    selectedOrderIds: selectedOrderIds,
     orderListView: 'big',
     handleSelectedOrderIds: handleSelectedOrderIds
   }
@@ -137,6 +136,7 @@ const OrdersListUI = (props) => {
           />
           <OrdersDashboardControls
             handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+            handleDeleteMultiOrders={handleDeleteMultiOrders}
           />
           {ordersStatusGroup === 'pending' && (
             <>

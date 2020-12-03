@@ -20,7 +20,7 @@ export const OrderListing = (props) => {
   const {
     orderList,
     driversList,
-    updateOrdersSelectedStatus,
+    selectedOrderIds,
     orderListView,
     orderStatusTitle,
     handleUpdateOrderStatus,
@@ -57,7 +57,6 @@ export const OrderListing = (props) => {
   useEffect(() => {
     const _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
     setTotalPages(_totalPages)
-    console.log(orderList)
   }, [orderList])
 
   useEffect(() => {
@@ -88,7 +87,7 @@ export const OrderListing = (props) => {
                         drivers={driversList.drivers}
                         pendingOrder={pendingOrder}
                         preOrder={preOrder}
-                        updateOrdersSelectedStatus={updateOrdersSelectedStatus}
+                        selectedOrderIds={selectedOrderIds}
                         handleUpdateOrderStatus={handleUpdateOrderStatus}
                         handleSelectedOrderIds={handleSelectedOrderIds}
                       />
@@ -165,9 +164,8 @@ export const OrderListing = (props) => {
                           </SkeletonText>
                         </SkeletonCell>
                         <SkeletonCell>
-                          <Skeleton width={50} height={50} />
                           <SkeletonText>
-                            <Skeleton width={80} />
+                            <Skeleton width={120} />
                             <Skeleton width={80} />
                           </SkeletonText>
                         </SkeletonCell>

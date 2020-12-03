@@ -12,6 +12,7 @@ import { OrderDashboardControlsContainer, InnerContnet } from './styles'
 
 export const OrdersDashboardControls = (props) => {
   const {
+    handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus
   } = props
   const [, t] = useLanguage()
@@ -23,7 +24,12 @@ export const OrdersDashboardControls = (props) => {
         <InnerContnet>
           <ExportCSV />
 
-          <Button color='primary' borderRadius='6px' withIcon>
+          <Button
+            color='primary'
+            borderRadius='6px'
+            withIcon
+            onClick={handleDeleteMultiOrders}
+          >
             {width > 600 && t('DELETE', 'Delete')}
             <FaTrash />
           </Button>

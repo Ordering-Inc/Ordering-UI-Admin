@@ -39,7 +39,8 @@ export const SkeletonCard = styled.div`
     box-shadow: 0px 0px 3px #00000029;
     border-radius: 6px;
     ${({ small }) => small && css`
-        flex-direction: column;
+      flex-direction: column;
+      margin-bottom: 0px;
     `}
 `
 export const SkeletonCell = styled.div`

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { OrdersManage as OrdersManageController } from '../OrdersManageController'
-import { OrderList as OrdersListController } from '../OrdersListController'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, OrdersManage as OrdersManageController, OrderList as OrdersListController } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'

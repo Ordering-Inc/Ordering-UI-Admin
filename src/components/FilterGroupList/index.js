@@ -1,6 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
-import { OrdersFilter as OrdersFilterController } from '../OrdersFilterController'
+import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components'
 import { Modal } from '../Modal'
 import { GroupTypeSelector } from '../GroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'

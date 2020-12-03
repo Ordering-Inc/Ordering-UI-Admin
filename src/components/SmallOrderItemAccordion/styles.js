@@ -23,6 +23,7 @@ export const WrapperAccordionImage = styled.div`
   width: 50px;
   border: 1px solid #e3e3e3;
   border-radius: 10px;
+  margin: 0px;
 
   ${({ small }) => small && css`
     width: 25px;
@@ -37,6 +38,10 @@ export const WrapperAccordionImage = styled.div`
     box-sizing: border-box;
     border-radius: 50%;
   }
+
+  ${({ noDriver }) => noDriver && css`
+    width: 25px !important;
+  `}
 `
 const AccordionImageStyled = styled.div`
   display: flex;
@@ -118,17 +123,27 @@ export const CustomerInfo = styled.div`
   border-radius: 28px;
   align-items: center;
   padding: 5px 10px;
-  width: 45%;
+  width: 48%;
+  box-sizing: border-box;
 `
 export const DriverInfo = styled.div`
   display: flex;
   align-items: center;
   column-gap: 8px;
+  width: 48%;
+
+  > div {
+    width: 100%;
+  }
 `
 export const CustomerContent = styled.div`
   p {
       color: #000;
       margin: 0px;
+      white-space: nowrap;
+      max-width: 80px;
+      text-overflow: ellipsis;
+      overflow: hidden;
       &:first-child {
           font-size: 11px;
           font-weight: 500;
@@ -147,6 +162,12 @@ export const WrapperOrderStatus = styled.div`
 `
 
 export const WrapperDriverSelector = styled.div`
+  > div {
+    width: 100%;
+    > div {
+      padding: 0 10px;
+    }
+  }
 `
 export const TextContainer = styled.p`
   font-size: 12px;

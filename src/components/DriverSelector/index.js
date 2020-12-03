@@ -55,7 +55,7 @@ const DriverSelectorUI = (props) => {
             <Option small={small}>
               <WrapperDriverImage small={small}>
                 {driver.photo ? (
-                  <DriverImage bgimage={driver.photo} />
+                  <DriverImage bgimage={driver.photo} small={small} />
                 ) : (
                   <FaUserAlt />
                 )}

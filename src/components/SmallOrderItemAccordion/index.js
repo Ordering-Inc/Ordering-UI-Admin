@@ -108,8 +108,8 @@ export const SmallOrderItemAccordion = (props) => {
               />
             </WrapperDriverSelector>
           ) : (
-            <WrapperAccordionImage small>
-              <AccordionImage bgimage={theme?.images?.icons?.noDriver} />
+            <WrapperAccordionImage small noDriver>
+              <AccordionImage bgimage={theme?.images?.icons?.noDriver} small />
             </WrapperAccordionImage>
           )}
 

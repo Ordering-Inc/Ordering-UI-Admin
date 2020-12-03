@@ -40,7 +40,7 @@ export const UserPopover = (props) => {
       {
         name: 'offset',
         options: {
-          offset: [0, 12]
+          offset: [0, 30]
         }
       }
     ]

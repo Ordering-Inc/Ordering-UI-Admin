@@ -56,7 +56,6 @@
     "ordering-components": "github:sergioaok/ordering-components#admin-development",
     "polished": "^3.6.7",
     "prop-types": "^15.7.2",
-    "react-csv": "^2.0.3",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.11.3",
     "react-loading-skeleton": "^2.1.1",

@@ -27,8 +27,7 @@ export const DriversLocation = (props) => {
     )
     setOfflineDrivers(_offlineDrivers)
 
-    const google = window.google
-    const bounds = new google.maps.LatLngBounds()
+    const bounds = new window.google.maps.LatLngBounds()
 
     if (driverAvailable === 'all') {
       if (driversList.drivers.length === 1) {
@@ -38,7 +37,7 @@ export const DriversLocation = (props) => {
       }
       for (const driver of driversList.drivers) {
         const marker = driver.location
-        const newPoint = new google.maps.LatLng(marker.lat, marker.lng)
+        const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       }
     }
@@ -47,7 +46,7 @@ export const DriversLocation = (props) => {
       for (const driver of _onlineDrivers) {
         if (driver.available) {
           const marker = driver.location
-          const newPoint = new google.maps.LatLng(marker.lat, marker.lng)
+          const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
           bounds.extend(newPoint)
         }
       }
@@ -57,7 +56,7 @@ export const DriversLocation = (props) => {
       for (const driver of _offlineDrivers) {
         if (!driver.available) {
           const marker = driver.location
-          const newPoint = new google.maps.LatLng(marker.lat, marker.lng)
+          const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
           bounds.extend(newPoint)
         }
       }

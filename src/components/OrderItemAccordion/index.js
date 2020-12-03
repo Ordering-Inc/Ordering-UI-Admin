@@ -35,7 +35,7 @@ export const OrderItemAccordion = (props) => {
     drivers,
     preOrder,
     pendingOrder,
-    updateOrdersSelectedStatus,
+    selectedOrderIds,
     handleUpdateOrderStatus,
     handleSelectedOrderIds
   } = props
@@ -67,7 +67,7 @@ export const OrderItemAccordion = (props) => {
     )
   }
   const isChecked = (id) => {
-    return updateOrdersSelectedStatus.ids.includes(id)
+    return selectedOrderIds.includes(id)
   }
 
   const handleGoToPage = (e, data) => {
