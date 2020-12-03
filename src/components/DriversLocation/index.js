@@ -3,6 +3,7 @@ import GoogleMapReact, { fitBounds } from 'google-map-react'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import { WrapperMap, WrapperMapMarker, MapMarkerImg } from './styles'
+import { toUpper } from 'lodash'
 
 export const DriversLocation = (props) => {
   const { driversList, driverAvailable } = props
@@ -11,6 +12,7 @@ export const DriversLocation = (props) => {
   const [mapZoom, setMapZoom] = useState(10)
   const [onlineDrivers, setOnlineDrivers] = useState(null)
   const [offlineDrivers, setOfflineDrivers] = useState(null)
+  const [mapLoaded, setMapLoaded] = useState(true)
 
   const defaultCenter = { lat: 40.7128, lng: 74.006 }
   const defaultZoom = 10
@@ -105,10 +107,9 @@ export const DriversLocation = (props) => {
 
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
-    if (!driversList.loading && driversList.drivers.length !== 0) {
-      mapFit()
-    }
-  }, [driversList, driverAvailable])
+    if (driversList.loading || driversList.drivers.length == 0 || mapLoaded) return
+    mapFit()
+  }, [driversList, driverAvailable, mapLoaded])
 
   return (
     <WrapperMap ref={mapRef}>
@@ -116,6 +117,7 @@ export const DriversLocation = (props) => {
         bootstrapURLKeys={{
           key: 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
         }}
+        onGoogleApiLoaded={() => setMapLoaded(false)}
         defaultCenter={defaultCenter}
         center={mapCenter}
         defaultZoom={defaultZoom}
