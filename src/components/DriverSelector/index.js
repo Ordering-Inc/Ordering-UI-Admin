@@ -65,10 +65,10 @@ const DriverSelectorUI = (props) => {
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
                   {t('DRIVER', 'Driver')}
                 </DriverNameContainer>
-                {isPhoneView && driver.phone && (
+                {isPhoneView && driver.cellphone && (
                   <PhoneContainer>
                     <FiPhone />
-                    {driver.phone}
+                    {driver.cellphone}
                   </PhoneContainer>
                 )}
               </OptionContent>
