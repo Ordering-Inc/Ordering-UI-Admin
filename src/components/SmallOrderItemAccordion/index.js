@@ -98,24 +98,15 @@ export const SmallOrderItemAccordion = (props) => {
           </CustomerContent>
         </CustomerInfo>
         <DriverInfo>
-          {order?.driver_id ? (
-            <WrapperDriverSelector ref={driverSelectorRef}>
-              <DriverSelector
-                small
-                defaultValue={order?.driver_id ? order.driver_id : 0}
-                drivers={drivers}
-                handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
-              />
-            </WrapperDriverSelector>
-          ) : (
-            <WrapperAccordionImage small noDriver>
-              <AccordionImage bgimage={theme?.images?.icons?.noDriver} small />
-            </WrapperAccordionImage>
-          )}
-
-          <TextContainer>
-            {!order?.driver_id && 'No Driver'}
-          </TextContainer>
+          <WrapperDriverSelector ref={driverSelectorRef}>
+            <DriverSelector
+              small
+              defaultValue={order?.driver_id ? order.driver_id : 'default'}
+              drivers={drivers}
+              order={order}
+              handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
+            />
+          </WrapperDriverSelector>
         </DriverInfo>
       </WrapperInfo>
       <WrapperOrderStatus ref={orderStatusRef}>

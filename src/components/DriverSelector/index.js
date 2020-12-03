@@ -31,7 +31,7 @@ const DriverSelectorUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [defaultOption, setDefaultOption] = useState(defaultValue)
+  const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [isRemoveAction, setIsRemoveAction] = useState(false)
   const driversLoading = [{ value: 'default', content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
@@ -39,7 +39,7 @@ const DriverSelectorUI = (props) => {
     const _driversOptionList = [
       {
         value: 'default',
-        content: <Option padding='3px 0'>{t('SELECT_A_DRIVER', 'Select a driver')}</Option>,
+        content: <Option padding='3px 0'>{t('SELECT_DRIVER', 'Select driver')}</Option>,
         color: 'primary',
         disabled: !isFilterView ? 'disabled' : null
       }
@@ -155,6 +155,10 @@ const DriverSelectorUI = (props) => {
       setDefaultOption(filterValues.driverId)
     }
   }, [filterValues])
+
+  useEffect(() => {
+    setDefaultOption(defaultValue)
+  }, [defaultValue])
 
   return (
     <>

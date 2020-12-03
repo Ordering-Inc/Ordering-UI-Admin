@@ -38,10 +38,6 @@ export const WrapperAccordionImage = styled.div`
     box-sizing: border-box;
     border-radius: 50%;
   }
-
-  ${({ noDriver }) => noDriver && css`
-    width: 25px !important;
-  `}
 `
 const AccordionImageStyled = styled.div`
   display: flex;
@@ -131,6 +127,7 @@ export const DriverInfo = styled.div`
   align-items: center;
   column-gap: 8px;
   width: 48%;
+  font-size: 11px;
 
   > div {
     width: 100%;

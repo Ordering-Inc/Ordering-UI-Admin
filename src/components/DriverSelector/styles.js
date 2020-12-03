@@ -77,6 +77,7 @@ export const WrapperDriverImage = styled.div`
   height: 45px;
   border: 1px solid #E3E3E3;
   border-radius: 10px;
+  display: flex;
 
   svg {
     width: 100%;
