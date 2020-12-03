@@ -60,7 +60,7 @@ const FilterGroupListUI = (props) => {
       cancelText={t('CLEAR', 'Clear')}
       onCancel={() => handleClearFilter()}
     >
-      <FilterGroupListContainer>
+      <FilterGroupListContainer className='filter-modal'>
         <GroupTypeSelector
           handleChangeGroup={handleChangeGroup}
           filterValues={filterValues}

@@ -176,11 +176,11 @@ const DeliveryDashboardUI = (props) => {
             />
 
             {!openOrderAndDriver ? (
-              <OrdersOpenButton onClick={() => setOpenOrderAndDriver(true)}>
+              <OrdersOpenButton onClick={() => setOpenOrderAndDriver(true)} name='order-open'>
                 <AiFillPlusCircle />
               </OrdersOpenButton>
             ) : (
-              <OrdersCloseButton onClick={() => setOpenOrderAndDriver(false)}>
+              <OrdersCloseButton onClick={() => setOpenOrderAndDriver(false)} name='order-close'>
                 <FaRegTimesCircle />
               </OrdersCloseButton>
             )}

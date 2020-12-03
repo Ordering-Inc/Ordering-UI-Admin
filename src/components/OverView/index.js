@@ -31,7 +31,7 @@ const OrdersOverViewUI = (props) => {
                 {t('ORDERS_TODAY', 'orders today')}
               </OverViewStatusTitle>
               <OverViewStatusValue>
-                {ordersOverviewList.overview.total}
+                {ordersOverviewList?.overview?.total || 0}
               </OverViewStatusValue>
             </OverViewItem>
 
@@ -40,7 +40,7 @@ const OrdersOverViewUI = (props) => {
                 {t('PENDING', 'pending')}
               </OverViewStatusTitle>
               <OverViewStatusValue>
-                {ordersOverviewList.overview.pending}
+                {ordersOverviewList?.overview?.pending || 0}
               </OverViewStatusValue>
             </OverViewItem>
 
@@ -49,7 +49,7 @@ const OrdersOverViewUI = (props) => {
                 {t('IN_PROGRESS', 'in progress')}
               </OverViewStatusTitle>
               <OverViewStatusValue>
-                {ordersOverviewList.overview.inProgress}
+                {ordersOverviewList?.overview?.inProgress || 0}
               </OverViewStatusValue>
             </OverViewItem>
 
@@ -58,7 +58,7 @@ const OrdersOverViewUI = (props) => {
                 {t('COMPLETED', 'completed')}
               </OverViewStatusTitle>
               <OverViewStatusValue>
-                {ordersOverviewList.overview.completed}
+                {ordersOverviewList?.overview?.completed || 0}
               </OverViewStatusValue>
             </OverViewItem>
 
@@ -67,7 +67,7 @@ const OrdersOverViewUI = (props) => {
                 {t('CANCELLED', 'cancelled')}
               </OverViewStatusTitle>
               <OverViewStatusValue>
-                {ordersOverviewList.overview.cancelled}
+                {ordersOverviewList?.overview?.cancelled || 0}
               </OverViewStatusValue>
             </OverViewItem>
           </OverViewItemContent>

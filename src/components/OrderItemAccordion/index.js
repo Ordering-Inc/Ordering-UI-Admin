@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useLanguage, useUtils, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
-
+import dayjs from 'dayjs'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -101,7 +101,7 @@ export const OrderItemAccordion = (props) => {
             <label className='checkbox-container'>
               <TextBlockContainer>
                 <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
-                <SmallText>{order?.delivery_datetime}</SmallText>
+                <SmallText>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</SmallText>
               </TextBlockContainer>
               <input type='checkbox' checked={isChecked(order.id)} onChange={() => toggleOrderSelect(order.id)} />
               <span className='checkmark' />

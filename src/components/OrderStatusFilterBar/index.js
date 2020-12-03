@@ -22,7 +22,7 @@ export const OrderStatusFilterBar = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   return (
-    <OrderStatusFilterBarContainer>
+    <OrderStatusFilterBarContainer className='order-status-filterbar'>
       <OrderStatusFilterInner>
         <OrderStautsFilterItemContent>
           <OrderStatusFilterItem

@@ -76,7 +76,7 @@ export const OrderContentHeader = (props) => {
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}
             />
-            <FilterButton onClick={() => setFilterModalOpen(true)}>
+            <FilterButton onClick={() => setFilterModalOpen(true)} name='filter-btn'>
               <img src={theme?.images?.icons?.filter} alt='filter' />
             </FilterButton>
           </WrapperSearchAndFilter>

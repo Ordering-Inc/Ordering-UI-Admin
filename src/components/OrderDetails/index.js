@@ -134,7 +134,7 @@ const OrderDetailsUI = (props) => {
       </BackActions>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer ref={orderDetail}>
-          <OrderInfoContent>
+          <OrderInfoContent className='order-info'>
             <OrderInfo>
               <OrderData>
                 <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
@@ -233,7 +233,7 @@ const OrderDetailsUI = (props) => {
               </table>
             </OrderBill>
           </OrderInfoContent>
-          <ContactInfoContent>
+          <ContactInfoContent className='contact-info'>
             <ContactInfoHeader>
               <OrderStatusTypeSelector
                 orderId={order.id}

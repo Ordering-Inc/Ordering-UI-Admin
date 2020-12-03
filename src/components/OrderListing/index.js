@@ -96,14 +96,14 @@ export const OrderListing = (props) => {
                 ))}
               </>
             ) : (
-              <SkeletonOrder>
+              <SkeletonOrder className='skeleton-loading'>
                 {orderListView === 'big' && [...Array(10)].map((item, i) => (
                   <SkeletonCard key={i}>
                     <SkeletonCell>
                       <Skeleton width={10} height={10} />
                       <SkeletonText>
                         <Skeleton width={100} />
-                        <Skeleton width={80} />
+                        <Skeleton width={100} />
                       </SkeletonText>
                     </SkeletonCell>
                     <SkeletonCell>

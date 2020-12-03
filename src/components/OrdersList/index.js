@@ -123,7 +123,7 @@ const OrdersListUI = (props) => {
         changeOrderStatus={handleOrdersStatusGroupFilter}
       />
       <OrdersContent>
-        <OrdersInnerContent>
+        <OrdersInnerContent className='order-content'>
           <OrderContentHeader
             active='orders'
             searchValue={searchValue}

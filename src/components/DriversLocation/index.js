@@ -111,7 +111,7 @@ export const DriversLocation = (props) => {
   }, [driversList, driverAvailable, mapLoaded])
 
   return (
-    <WrapperMap ref={mapRef}>
+    <WrapperMap ref={mapRef} className='drivers-location'>
       <GoogleMapReact
         bootstrapURLKeys={{
           key: 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
