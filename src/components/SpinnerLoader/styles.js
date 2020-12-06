@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
@@ -7,6 +7,14 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  ${({ primary }) => primary && css`
+    top: 0px;
+    position: fixed;
+    width: 100vw;
+    left: 0px;
+    z-index: 100;
+  `}
 `
 
 export const Logo = styled.div`

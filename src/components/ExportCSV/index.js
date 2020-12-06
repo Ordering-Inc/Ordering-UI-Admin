@@ -1,21 +1,36 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
-
+import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components'
+import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
 import ZoDownload from '@meronex/icons/zo/ZoDownload'
-import { WrapperExportButton } from './styles'
 
-export const ExportCSV = (props) => {
+const ExportCSVUI = (props) => {
+  const {
+    actionStatus,
+    handleGetCsvExport
+  } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
   return (
-    <WrapperExportButton>
-      <Button color='primary' borderRadius='6px' withIcon>
+    <>
+      <Button color='primary' borderRadius='6px' withIcon onClick={() => handleGetCsvExport()}>
         {width > 600 && t('CSV', 'CSV')}
         <ZoDownload />
       </Button>
-    </WrapperExportButton>
+
+      {actionStatus.loading && (
+        <SpinnerLoader primary />
+      )}
+    </>
   )
+}
+
+export const ExportCSV = (props) => {
+  const ExportCSVControlProps = {
+    ...props,
+    UIComponent: ExportCSVUI
+  }
+  return <ExportCSVController {...ExportCSVControlProps} />
 }

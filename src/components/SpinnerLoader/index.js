@@ -8,12 +8,13 @@ import {
 
 export const SpinnerLoader = (props) => {
   const {
+    primary,
     logotype,
     content,
     style
   } = props
   return (
-    <Container style={style}>
+    <Container style={style} primary={primary}>
       {logotype && (
         <Logo>
           <img src={logotype} alt='logo' />

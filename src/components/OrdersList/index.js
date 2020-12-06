@@ -5,7 +5,6 @@ import {
   OrdersInnerContent
 } from './styles'
 import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
-
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
@@ -17,13 +16,16 @@ const OrdersListUI = (props) => {
     driversList,
     paymethodsList,
     businessesList,
-    selectedOrderIds,
     ordersStatusGroup,
     filterValues,
+    deleteMultiOrderStatus,
+    handleResetDeleteMulitOrders,
+    changeMulitOrderStatus,
+    multiOrderUpdateStatus,
+    handleResetChangeMultiOrder,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
-    handleSelectedOrderIds,
     handleChangeMultiOrdersStatus,
     handleDeleteMultiOrders
   } = props
@@ -33,16 +35,20 @@ const OrdersListUI = (props) => {
   const OrdersCommonControlProps = {
     ...props,
     UIComponent: OrderListing,
+    useDefualtSessionManager: true,
     asDashboard: true,
     searchValue: searchValue,
     filterValues: filterValues,
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true,
+    deleteMultiOrderStatus: deleteMultiOrderStatus,
+    handleResetDeleteMulitOrders: handleResetDeleteMulitOrders,
+    changeMulitOrderStatus: changeMulitOrderStatus,
+    multiOrderUpdateStatus: multiOrderUpdateStatus,
+    handleResetChangeMultiOrder: handleResetChangeMultiOrder,
     driversList: driversList,
-    selectedOrderIds: selectedOrderIds,
-    orderListView: 'big',
-    handleSelectedOrderIds: handleSelectedOrderIds
+    orderListView: 'big'
   }
 
   const PendingOrdersControlProps = {
@@ -116,6 +122,7 @@ const OrdersListUI = (props) => {
     orderStatus: [12],
     orderStatusTitle: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
   }
+
   return (
     <OrdersListContainer>
       <OrderStatusFilterBar

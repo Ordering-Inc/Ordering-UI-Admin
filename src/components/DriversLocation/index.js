@@ -123,6 +123,7 @@ export const DriversLocation = (props) => {
         zoom={mapZoom}
         options={{ fullscreenControl: false }}
         className='map'
+        yesIWantToUseGoogleMapApiInternals
       >
         {driverAvailable === 'all' && driversList.drivers.length !== 0 &&
           driversList.drivers.map((driver) => (

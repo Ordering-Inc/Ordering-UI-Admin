@@ -3,11 +3,10 @@ import { useLanguage } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import { Button } from '../../styles/Buttons'
-import FaTrash from '@meronex/icons/fa/FaTrash'
 import MdcBasket from '@meronex/icons/mdc/MdcBasket'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ExportCSV } from '../ExportCSV'
-
+import { OrderDelete } from '../OrderDelete'
 import { OrderDashboardControlsContainer, InnerContnet } from './styles'
 
 export const OrdersDashboardControls = (props) => {
@@ -24,15 +23,9 @@ export const OrdersDashboardControls = (props) => {
         <InnerContnet>
           <ExportCSV />
 
-          <Button
-            color='primary'
-            borderRadius='6px'
-            withIcon
-            onClick={handleDeleteMultiOrders}
-          >
-            {width > 600 && t('DELETE', 'Delete')}
-            <FaTrash />
-          </Button>
+          <OrderDelete
+            handleDeleteMultiOrders={handleDeleteMultiOrders}
+          />
 
           <OrderStatusTypeSelector
             mutiOrdersChange

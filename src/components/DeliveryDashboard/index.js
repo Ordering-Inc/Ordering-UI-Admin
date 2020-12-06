@@ -49,6 +49,7 @@ const DeliveryDashboardUI = (props) => {
   const OrdersCommonControlProps = {
     ...props,
     UIComponent: OrderListing,
+    useDefualtSessionManager: true,
     asDashboard: true,
     searchValue: searchValue,
     filterValues: filterValues,
