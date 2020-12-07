@@ -6,9 +6,20 @@ export const DeliveryDashboardContainer = styled.div`
   box-sizing: border-box;
 `
 export const DeliveryDashboardContent = styled.div`
-  flex: 1;
   display: flex;
-  justify-content: center;  
+  justify-content: center;
+  width: calc(100% - 100px);
+  margin-left: 100px;
+
+  @media (max-width: 992px) {
+    width: calc(100% - 42px);
+    margin-left: 42px;
+  }
+
+  @media (max-width: 576px) {
+    margin: 0 auto;
+    width: 100%;
+  }
 `
 export const DeliveryDashboardInnerContent = styled.div`
   width: 92%;

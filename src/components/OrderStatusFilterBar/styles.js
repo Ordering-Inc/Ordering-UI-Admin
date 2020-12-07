@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const OrderStatusFilterBarContainer = styled.div`
+  position: fixed;
   @media (max-width: 600px) {
     display: none;
   }

@@ -65,6 +65,7 @@ export const SkeletonText = styled.div`
 export const WrapperOrderListContent = styled.div`
     padding: 5px;
     margin-bottom: 40px;
+    overflow: auto;
 
     ${({ small }) => small && css`
         overflow: initial;
