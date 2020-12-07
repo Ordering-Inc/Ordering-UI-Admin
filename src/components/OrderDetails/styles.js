@@ -67,7 +67,6 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
 
-
   svg {
     width: 70px;
     height: 70px;
@@ -77,6 +76,10 @@ export const PhotoWrapper = styled.div`
       margin-left: 10px;
       margin-right: 0;
     `}
+  }
+
+  @media print {
+    display: none;
   }
 `
 const PhotoStyled = styled.div`
@@ -208,6 +211,12 @@ export const SectionTitle = styled.p`
   margin: 0px;
   font-size: 18px;
   color: #151824;
+
+  ${({ driver }) => driver && css`
+    @media print {
+      display: none;
+    }
+  `}
 `
 export const SectionContainer = styled.div`
   display: flex;
@@ -269,6 +278,10 @@ export const CustomerContactBlock = styled.div`
       margin-right: 10px;
       font-size: 18px;
     }
+  }
+
+  @media  print {
+    display: none;
   }
 `
 export const OrderProducts = styled(SectionContainer)`
@@ -332,6 +345,10 @@ export const BackActions = styled.div`
 
   @media (max-width: 1200px) {
     left: 2%;
+  }
+
+  @media print {
+    display: none;
   }
 `
 export const SkeletonBlock = styled.div`
@@ -517,6 +534,10 @@ export const ContactInfoHeader = styled.div`
       }
     }
   }
+
+  @media print {
+    display: none;
+  }
 `
 export const WrapperButton = styled.div`
   display: flex;
@@ -549,12 +570,19 @@ export const DriverSelectorContainer = styled.div`
   & > div {
     width: 100%;
   }
+
+  @media print {
+    display: none;
+  }
 `
 export const PrintButtonContainer = styled.div`
   button {
     width: 100%;
     padding: 10px 15px;
     font-size: 20px;
+  }
+  @media print {
+    display: none;
   }
 `
 export const ChatContainer = styled.div`
@@ -563,4 +591,12 @@ export const ChatContainer = styled.div`
   width: 100%;
   background: #fff;
   height: calc(100vh - 65px);
+`
+export const PhoneNumber = styled.div`
+  display: none;
+  font-size: 15px;
+
+  @media print {
+    display: block;
+  }
 `

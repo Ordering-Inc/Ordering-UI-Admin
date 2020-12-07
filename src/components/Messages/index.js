@@ -211,10 +211,6 @@ export const MessagesUI = (props) => {
     }
   }, [])
 
-  useEffect(() => {
-    console.log('message', messages)
-  }, [messages])
-
   return (
     <MessagesContainer>
       <WrapperContainer>

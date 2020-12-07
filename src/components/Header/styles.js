@@ -9,6 +9,10 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   box-shadow: 0px 2px 2px #00000029;
+
+  @media print {
+    display: none;
+  }
 `
 
 export const InnerHeader = styled.div`

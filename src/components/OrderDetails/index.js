@@ -52,7 +52,8 @@ import {
   ButtonLink,
   DriverSelectorContainer,
   PrintButtonContainer,
-  ChatContainer
+  ChatContainer,
+  PhoneNumber
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -267,10 +268,13 @@ const OrderDetailsUI = (props) => {
                   <button onClick={() => handleOpenMessages('customer')}>
                     <BsChat /> {t('CHAT', 'Chat')}
                   </button>
-                  <button onClick={() => window.open(`tel:${order.customer.phone}`)}>
+                  <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
                     <HiOutlinePhone /> {t('CALL', 'Call')}
                   </button>
                 </CustomerContactBlock>
+                <PhoneNumber>
+                  <HiOutlinePhone /> {order?.customer?.cellphone}
+                </PhoneNumber>
               </InfoBlock>
             </SectionContainer>
 
@@ -292,6 +296,9 @@ const OrderDetailsUI = (props) => {
                     <HiOutlinePhone /> {t('CALL', 'Call')}
                   </button>
                 </CustomerContactBlock>
+                <PhoneNumber>
+                  <HiOutlinePhone /> {order.business.phone}
+                </PhoneNumber>
               </InfoBlock>
             </SectionContainer>
 
@@ -313,12 +320,15 @@ const OrderDetailsUI = (props) => {
                     <button onClick={() => handleOpenMessages('driver')}>
                       <BsChat /> {t('CHAT', 'Chat')}
                     </button>
-                    {order.driver.cellphone && (
-                      <button onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                    {order?.driver?.cellphone && (
+                      <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
                         <HiOutlinePhone /> {t('CALL', 'Call')}
                       </button>
                     )}
                   </CustomerContactBlock>
+                  <PhoneNumber>
+                    <HiOutlinePhone /> {order.driver.cellphone}
+                  </PhoneNumber>
                 </InfoBlock>
               ) : (
                 <InfoBlock>
@@ -327,7 +337,7 @@ const OrderDetailsUI = (props) => {
               )}
             </SectionContainer>
 
-            <SectionTitle>
+            <SectionTitle driver>
               {t('SELECT_DRIVER', 'Select Driver')}
             </SectionTitle>
             <DriverSelectorContainer>
@@ -338,7 +348,7 @@ const OrderDetailsUI = (props) => {
               />
             </DriverSelectorContainer>
             <PrintButtonContainer>
-              <Button color='darkBlue'>
+              <Button color='darkBlue' onClick={() => window.print()}>
                 {t('PRINT', 'Print')}
               </Button>
             </PrintButtonContainer>
