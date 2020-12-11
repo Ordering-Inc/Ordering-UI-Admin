@@ -7,13 +7,13 @@ import { WrapperMap, WrapperMapMarker, MapMarkerImg } from './styles'
 export const DriversLocation = (props) => {
   const { driversList, driverAvailable } = props
 
-  const [mapCenter, setMapCenter] = useState({ lat: 40.7128, lng: 74.006 })
+  const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
   const [mapZoom, setMapZoom] = useState(10)
-  const [onlineDrivers, setOnlineDrivers] = useState(null)
-  const [offlineDrivers, setOfflineDrivers] = useState(null)
+  const [onlineDrivers, setOnlineDrivers] = useState([])
+  const [offlineDrivers, setOfflineDrivers] = useState([])
   const [mapLoaded, setMapLoaded] = useState(true)
 
-  const defaultCenter = { lat: 40.7128, lng: 74.006 }
+  const defaultCenter = { lat: 19.4326, lng: -99.1332 }
   const defaultZoom = 10
   const mapRef = useRef(null)
 
