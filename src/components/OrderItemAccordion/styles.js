@@ -42,7 +42,7 @@ export const OrderItemAccordionContainer = styled.div`
     }
 
     &:nth-child(4) {
-      width: 18%;
+      width: 17%;
       min-width: 150px;
     }
 
@@ -53,13 +53,15 @@ export const OrderItemAccordionContainer = styled.div`
 
     
     &:nth-child(6) {
-      width: 19%;
+      width: 20%;
       min-width: 170px;
     }
 
     &:nth-child(7) {
       width: 7%;
-      min-width: fit-content;
+      min-width: 100px;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 `

@@ -17,5 +17,13 @@ export const Option = styled.div`
   p {
     margin: 0px;
     white-space: nowrap;
+
+    @media (max-width: 1300px) {
+      margin: 0px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 115px;
+    }
   }
 `
