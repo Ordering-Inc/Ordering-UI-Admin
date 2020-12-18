@@ -4,7 +4,7 @@ import { useLanguage } from 'ordering-components'
 
 import { SearchBar } from '../SearchBar'
 import { Modal } from '../Modal'
-import { DeadlinesTypeSelector } from '../DeadlinesTypeSelector'
+// import { DeadlinesTypeSelector } from '../DeadlinesTypeSelector'
 import { OrdersDashboardSwitch } from '../OrdersDashboardSwitch'
 import { FilterGroupList } from '../FilterGroupList'
 import { DeadlineSettingInterface } from '../DeadlineSettingInterface'
@@ -36,15 +36,15 @@ export const OrderContentHeader = (props) => {
   const [filterModalOpen, setFilterModalOpen] = useState(false)
 
   const [deadlineSettingModalOpen, setDeadlineSettingModalOpen] = useState(false)
-  const [deadlineType, setDeadlineType] = useState(0)
+  // const [deadlineType, setDeadlineType] = useState(0)
 
-  const handleChangeDeadlineType = (deadlineType) => {
-    setDeadlineType(deadlineType)
+  // const handleChangeDeadlineType = (deadlineType) => {
+  //   setDeadlineType(deadlineType)
 
-    if (deadlineType === 4) {
-      setDeadlineSettingModalOpen(true)
-    }
-  }
+  //   if (deadlineType === 4) {
+  //     setDeadlineSettingModalOpen(true)
+  //   }
+  // }
 
   const handleDeadlineSetting = () => {
     setDeadlineSettingModalOpen(false)
@@ -62,10 +62,10 @@ export const OrderContentHeader = (props) => {
             {active === 'orders' ? t('ORDERS', 'orders') : t('DASHBOARD', 'Dashboard ')}
           </HeaderTitle>
           <WrapperHeaderRightSection>
-            <DeadlinesTypeSelector
+            {/* <DeadlinesTypeSelector
               defaultValue={deadlineType}
               handleChangeDeadlineType={(deadlineType) => handleChangeDeadlineType(deadlineType)}
-            />
+            /> */}
             <OrdersDashboardSwitch active={active} />
           </WrapperHeaderRightSection>
         </HeaderSection>
@@ -82,10 +82,10 @@ export const OrderContentHeader = (props) => {
           </WrapperSearchAndFilter>
 
           <WrapperDeadlineAndSwitch>
-            <DeadlinesTypeSelector
+            {/* <DeadlinesTypeSelector
               defaultValue={deadlineType}
               handleChangeDeadlineType={(deadlineType) => handleChangeDeadlineType(deadlineType)}
-            />
+            /> */}
             <OrdersDashboardSwitch active={active} />
           </WrapperDeadlineAndSwitch>
         </TopRightSection>

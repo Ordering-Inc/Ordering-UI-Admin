@@ -2,8 +2,8 @@ import React from 'react'
 import { useLanguage } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
-import { Button } from '../../styles/Buttons'
-import MdcBasket from '@meronex/icons/mdc/MdcBasket'
+// import { Button } from '../../styles/Buttons'
+// import MdcBasket from '@meronex/icons/mdc/MdcBasket'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ExportCSV } from '../ExportCSV'
 import { OrderDelete } from '../OrderDelete'
@@ -35,10 +35,10 @@ export const OrdersDashboardControls = (props) => {
             handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
           />
 
-          <Button color='secondary' borderRadius='6px' withIcon>
+          {/* <Button color='secondary' borderRadius='6px' withIcon>
             {width > 600 && t('CREATE_ORDER', 'Create Order')}
             <MdcBasket />
-          </Button>
+          </Button> */}
         </InnerContnet>
       </OrderDashboardControlsContainer>
     </>

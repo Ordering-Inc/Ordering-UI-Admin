@@ -23,7 +23,7 @@ export const Option = styled.div`
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      max-width: 115px;
+      max-width: 120px;
     }
   }
 `
