@@ -243,7 +243,7 @@ export const OrderItemAccordion = (props) => {
                       <td>{parsePrice(product?.price)}</td>
                       <td>X {product.quantity}</td>
                       <td>{product.comment}</td>
-                      <td>{parsePrice(order?.subtotal)}</td>
+                      <td>{parsePrice(product?.price * product.quantity)}</td>
                     </tr>
                   )
                 })}
