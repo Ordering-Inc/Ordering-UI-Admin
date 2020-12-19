@@ -74,10 +74,6 @@ export const OrderItemAccordion = (props) => {
     )
   }
 
-  // const isChecked = (id) => {
-  //   return selectedOrderIds.includes(id)
-  // }
-
   const handleGoToPage = (e) => {
     const isActionClick = checkbox.current?.contains(e.target) || driverSelectorRef.current?.contains(e.target) || statusTypeSelector.current?.contains(e.target) || toggleBtn.current?.contains(e.target)
 

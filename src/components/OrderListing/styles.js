@@ -16,12 +16,27 @@ export const WrapperNoneOrders = styled.div`
     `}    
 `
 export const OrderStatusTitle = styled.p`
+    display: flex;
+    align-items: center;
     font-size: 20px;
     color: ${({ theme }) => theme?.colors?.textBlackContrast || '#000'};
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 500;
     padding: 0 5px;
+
+    .rotate {
+        transform: rotate(-90deg);
+    }
+    .collapse_icon {
+        transition: transform 0.3s ease;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+        &:hover {
+            background: #eee;
+        }
+    }
 `
 export const SkeletonOrder = styled.div`
     text-align: center;
@@ -66,6 +81,7 @@ export const WrapperOrderListContent = styled.div`
     padding: 5px;
     margin-bottom: 40px;
     overflow: auto;
+    transition: max-height 0.3s ease;
 
     ${({ small }) => small && css`
         overflow: initial;

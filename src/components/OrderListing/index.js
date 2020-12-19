@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { OrderItemAccordion } from '../OrderItemAccordion'
 import { SmallOrderItemAccordion } from '../SmallOrderItemAccordion'
 import { OrdersPagination } from '../OrdersPagination'
+import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 
 import {
   OrderStatusTitle,
@@ -32,6 +33,12 @@ export const OrderListing = (props) => {
   } = props
 
   const theme = useTheme()
+
+  const [setActive, setActiveState] = useState('')
+  const [setHeight, setHeightState] = useState('inherit')
+  const [setPadding, setPaddingState] = useState('5px')
+  const [setRotate, setRotateState] = useState('collapse_icon')
+  const content = useRef(null)
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -66,9 +73,28 @@ export const OrderListing = (props) => {
     }
   }, [orderList])
 
+  const toggleOrderList = () => {
+    setActiveState(setActive === '' ? 'active' : '')
+    setHeightState(
+      setActive === 'active' ? `${content.current.scrollHeight}px` : '0px'
+    )
+    setPaddingState(
+      setActive === 'active' ? '5px' : '0px'
+    )
+    setRotateState(
+      setActive === 'active' ? 'collapse_icon' : 'collapse_icon rotate'
+    )
+  }
+
   return (
     <>
-      <OrderStatusTitle>{orderStatusTitle}</OrderStatusTitle>
+      <OrderStatusTitle>
+        <GoTriangleDown
+          className={`${setRotate}`}
+          onClick={() => toggleOrderList()}
+        />
+        {orderStatusTitle}
+      </OrderStatusTitle>
       {!(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? (
         <>
           <WrapperNoneOrders small={orderListView === 'small'}>
@@ -76,7 +102,11 @@ export const OrderListing = (props) => {
           </WrapperNoneOrders>
         </>
       ) : (
-        <WrapperOrderListContent small={orderListView === 'small'}>
+        <WrapperOrderListContent
+          ref={content}
+          style={{ maxHeight: `${setHeight}`, padding: `${setPadding}` }}
+          small={orderListView === 'small'}
+        >
           {orderListView === 'big' &&
             !(orderList.loading || driversList.loading) ? (
               <>
