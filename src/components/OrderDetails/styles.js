@@ -333,6 +333,7 @@ export const BackActions = styled.div`
   position: absolute;
   top: 20px;
   left: 4%;
+  z-index: 999;
   a {
     text-decoration: none;
     cursor: pointer;

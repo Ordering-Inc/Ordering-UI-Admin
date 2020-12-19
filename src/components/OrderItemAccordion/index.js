@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -7,6 +7,9 @@ import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DriverSelector } from '../DriverSelector'
+
+import BlankCheckbox from '@meronex/icons/ri/RiCheckboxBlankCircleFill'
+import Checkbox from '@meronex/icons/ri/RiCheckboxCircleFill'
 
 import {
   AccordionSection,
@@ -50,6 +53,7 @@ export const OrderItemAccordion = (props) => {
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
+  const [isChecked, setIsChecked] = useState(false)
   const checkbox = useRef(null)
   const content = useRef(null)
   const toggleBtn = useRef(null)
@@ -57,6 +61,7 @@ export const OrderItemAccordion = (props) => {
   const driverSelectorRef = useRef(null)
 
   const toggleOrderSelect = (id) => {
+    setIsChecked(!isChecked)
     handleSelectedOrderIds(id)
   }
   const toggleAccordion = () => {
@@ -68,9 +73,10 @@ export const OrderItemAccordion = (props) => {
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
   }
-  const isChecked = (id) => {
-    return selectedOrderIds.includes(id)
-  }
+
+  // const isChecked = (id) => {
+  //   return selectedOrderIds.includes(id)
+  // }
 
   const handleGoToPage = (e) => {
     const isActionClick = checkbox.current?.contains(e.target) || driverSelectorRef.current?.contains(e.target) || statusTypeSelector.current?.contains(e.target) || toggleBtn.current?.contains(e.target)
@@ -84,6 +90,10 @@ export const OrderItemAccordion = (props) => {
   const handleSelectedDriver = (driver) => {
     console.log(driver)
   }
+
+  useEffect(() => {
+    if (selectedOrderIds.includes(order.id)) setIsChecked(true)
+  }, [])
 
   return (
     <>
@@ -101,16 +111,17 @@ export const OrderItemAccordion = (props) => {
           onClick={(e) => handleGoToPage(e)}
         >
           <OrderItemAccordionCell>
-            <CheckBoxContainer ref={checkbox}>
-              <label className='checkbox-container'>
-                <TextBlockContainer>
-                  <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
-                  <SmallText>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</SmallText>
-                </TextBlockContainer>
-                <input type='checkbox' checked={isChecked(order.id)} onChange={() => toggleOrderSelect(order.id)} />
-                <span className='checkmark' />
-              </label>
+            <CheckBoxContainer ref={checkbox} onClick={() => toggleOrderSelect(order.id)}>
+              {isChecked ? (
+                <Checkbox />
+              ) : (
+                <BlankCheckbox />
+              )}
             </CheckBoxContainer>
+            <TextBlockContainer>
+              <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
+              <SmallText>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</SmallText>
+            </TextBlockContainer>
           </OrderItemAccordionCell>
 
           <OrderItemAccordionCell>
