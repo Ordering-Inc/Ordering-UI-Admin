@@ -10,7 +10,6 @@ import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 
 import { PageNotFound } from './Pages/PageNotFound'
 import { OrdersList } from './Pages/OrdersList'
-import { OrderDetailsPage } from './Pages/OrderDetails'
 import { Login } from './Pages/Login'
 import { DeliveryDashboard } from './Pages/DeliveryDashboard'
 
@@ -88,12 +87,6 @@ export const App = () => {
                         ? <DeliveryDashboard />
                         : <Redirect to='/login' />
                     }
-                  </Route>
-
-                  <Route exact path='/orders/:orderId'>
-                    {auth
-                      ? <OrderDetailsPage />
-                      : <Redirect to='/login' />}
                   </Route>
 
                   <Route path='*'>

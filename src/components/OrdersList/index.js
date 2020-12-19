@@ -149,9 +149,16 @@ const OrdersListUI = (props) => {
     setIsOpenOrderDetail(true)
   }
 
+  const [displayOrderList, setDisplayOrderList] = useState('flex')
+
+  useEffect(() => {
+    if (isOpenOrderDetail) setDisplayOrderList('none')
+    else setDisplayOrderList('flex')
+  }, [isOpenOrderDetail])
+
   return (
     <>
-      <OrdersListContainer>
+      <OrdersListContainer style={{ display: `${displayOrderList}` }}>
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}

@@ -577,6 +577,7 @@ export const DriverSelectorContainer = styled.div`
   }
 `
 export const PrintButtonContainer = styled.div`
+  padding-bottom: 60px;
   button {
     width: 100%;
     padding: 10px 15px;
@@ -592,6 +593,7 @@ export const ChatContainer = styled.div`
   width: 100%;
   background: #fff;
   height: calc(100vh - 65px);
+  z-index: 1000;
 `
 export const PhoneNumber = styled.div`
   display: none;

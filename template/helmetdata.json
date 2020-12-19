@@ -26,12 +26,5 @@
     "keywords": "test, dummy, data",
     "robots": "",
     "canonicalUrl": ""
-  },
-  "order_details": {
-    "title": "Order details",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "",
-    "canonicalUrl": ""
   }
 }

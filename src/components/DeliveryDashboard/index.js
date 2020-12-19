@@ -169,7 +169,6 @@ const DeliveryDashboardUI = (props) => {
   }, [])
 
   const handleBackRedirect = () => {
-    console.log('back')
     setIsOpenOrderDetail(false)
     history.push('/delivery-dashboard')
   }

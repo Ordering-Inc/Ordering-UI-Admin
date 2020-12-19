@@ -144,6 +144,8 @@ export const OrderDetailsContainer = styled.div`
   min-height: calc(100vh - 65px);
   background: #fff;
   z-index: 999;
+  height: 100%;
+  overflow: auto;
 
   @media (max-width: 768px) {
     width: 100%;
