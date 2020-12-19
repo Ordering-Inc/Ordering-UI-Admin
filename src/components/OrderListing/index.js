@@ -14,7 +14,9 @@ import {
   SkeletonCell,
   SkeletonText,
   SkeletonBlock,
-  WrapperOrderListContent
+  WrapperOrderListContent,
+  InnerOrderListContent,
+  InnerNoneOrdersContainer
 } from './styles'
 
 export const OrderListing = (props) => {
@@ -36,9 +38,10 @@ export const OrderListing = (props) => {
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('inherit')
-  const [setPadding, setPaddingState] = useState('5px')
+  const [setNoneOrderHeight, setNoneOrderHeightState] = useState('inherit')
   const [setRotate, setRotateState] = useState('collapse_icon')
   const content = useRef(null)
+  const noneContent = useRef(null)
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -75,12 +78,16 @@ export const OrderListing = (props) => {
 
   const toggleOrderList = () => {
     setActiveState(setActive === '' ? 'active' : '')
-    setHeightState(
-      setActive === 'active' ? `${content.current.scrollHeight}px` : '0px'
-    )
-    setPaddingState(
-      setActive === 'active' ? '5px' : '0px'
-    )
+    if (content.current) {
+      setHeightState(
+        setActive === 'active' ? `${content.current.scrollHeight}px` : '0px'
+      )
+    }
+    if (noneContent.current) {
+      setNoneOrderHeightState(
+        setActive === 'active' ? `${noneContent.current.scrollHeight}px` : '0px'
+      )
+    }
     setRotateState(
       setActive === 'active' ? 'collapse_icon' : 'collapse_icon rotate'
     )
@@ -97,142 +104,151 @@ export const OrderListing = (props) => {
       </OrderStatusTitle>
       {!(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? (
         <>
-          <WrapperNoneOrders small={orderListView === 'small'}>
-            <img src={theme?.images?.dummies?.nonOrders} alt='none' />
+          <WrapperNoneOrders
+            small={orderListView === 'small'}
+            ref={noneContent}
+            style={{ maxHeight: `${setNoneOrderHeight}` }}
+          >
+            <InnerNoneOrdersContainer>
+              <img src={theme?.images?.dummies?.nonOrders} alt='none' />
+            </InnerNoneOrdersContainer>
           </WrapperNoneOrders>
         </>
       ) : (
         <WrapperOrderListContent
           ref={content}
-          style={{ maxHeight: `${setHeight}`, padding: `${setPadding}` }}
-          small={orderListView === 'small'}
+          style={{ maxHeight: `${setHeight}` }}
         >
-          {orderListView === 'big' &&
-            !(orderList.loading || driversList.loading) ? (
-              <>
-                {currentOrders.map(order => (
-                  <React.Fragment key={order.id}>
-                    {orderListView === 'big' && (
-                      <OrderItemAccordion
-                        order={order}
-                        drivers={driversList.drivers}
-                        pendingOrder={pendingOrder}
-                        preOrder={preOrder}
-                        selectedOrderIds={selectedOrderIds}
-                        handleUpdateOrderStatus={handleUpdateOrderStatus}
-                        handleSelectedOrderIds={handleSelectedOrderIds}
-                        handleOpenOrderDetail={handleOpenOrderDetail}
-                      />
-                    )}
-                  </React.Fragment>
-                ))}
-              </>
-            ) : (
-              <SkeletonOrder className='skeleton-loading'>
-                {orderListView === 'big' && [...Array(10)].map((item, i) => (
-                  <SkeletonCard key={i}>
-                    <SkeletonCell>
-                      <Skeleton width={10} height={10} />
-                      <SkeletonText>
-                        <Skeleton width={100} />
-                        <Skeleton width={100} />
-                      </SkeletonText>
-                    </SkeletonCell>
-                    <SkeletonCell>
-                      <Skeleton width={50} height={50} />
-                      <SkeletonText>
-                        <Skeleton width={80} />
-                        <Skeleton width={80} />
-                      </SkeletonText>
-                    </SkeletonCell>
-                    <SkeletonCell>
-                      <Skeleton width={50} height={50} />
-                      <SkeletonText>
-                        <Skeleton width={80} />
-                        <Skeleton width={80} />
-                      </SkeletonText>
-                    </SkeletonCell>
-                    <SkeletonCell>
-                      <Skeleton width={50} height={50} />
-                      <SkeletonText>
-                        <Skeleton width={80} />
-                      </SkeletonText>
-                    </SkeletonCell>
-                    <SkeletonCell>
-                      <Skeleton width={40} height={40} />
-                    </SkeletonCell>
-                    <SkeletonCell>
-                      <Skeleton width={100} height={30} />
-                    </SkeletonCell>
-                    <SkeletonCell>
-                      <Skeleton width={60} height={20} />
-                    </SkeletonCell>
-                  </SkeletonCard>
-                ))}
-              </SkeletonOrder>
-            )}
-
-          {orderListView === 'small' && (
-            <>
-              {!(orderList.loading || driversList.loading) ? orderList.orders.map(order => (
-                <React.Fragment key={order.id}>
-                  <SmallOrderItemAccordion
-                    order={order}
-                    drivers={driversList.drivers}
-                    pendingOrder={pendingOrder}
-                    preOrder={preOrder}
-                    handleUpdateOrderStatus={handleUpdateOrderStatus}
-                    handleOpenOrderDetail={handleOpenOrderDetail}
-                  />
-                </React.Fragment>
-              )
+          <InnerOrderListContent
+            small={orderListView === 'small'}
+          >
+            {orderListView === 'big' &&
+              !(orderList.loading || driversList.loading) ? (
+                <>
+                  {currentOrders.map(order => (
+                    <React.Fragment key={order.id}>
+                      {orderListView === 'big' && (
+                        <OrderItemAccordion
+                          order={order}
+                          drivers={driversList.drivers}
+                          pendingOrder={pendingOrder}
+                          preOrder={preOrder}
+                          selectedOrderIds={selectedOrderIds}
+                          handleUpdateOrderStatus={handleUpdateOrderStatus}
+                          handleSelectedOrderIds={handleSelectedOrderIds}
+                          handleOpenOrderDetail={handleOpenOrderDetail}
+                        />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </>
               ) : (
-                <SkeletonOrder>
-                  {[...Array(4)].map((item, i) => (
-                    <SkeletonCard small key={i}>
-                      <SkeletonBlock>
-                        <SkeletonCell>
-                          <Skeleton width={50} height={50} />
-                          <SkeletonText>
-                            <Skeleton width={80} />
-                            <Skeleton width={80} />
-                          </SkeletonText>
-                        </SkeletonCell>
-                        <SkeletonCell>
-                          <SkeletonText>
-                            <Skeleton width={120} />
-                            <Skeleton width={80} />
-                          </SkeletonText>
-                        </SkeletonCell>
-                      </SkeletonBlock>
-                      <SkeletonBlock>
-                        <Skeleton width={150} height={40} />
-                        <Skeleton width={150} height={40} />
-                      </SkeletonBlock>
-                      <SkeletonBlock>
-                        <Skeleton width={320} height={30} />
-                      </SkeletonBlock>
+                <SkeletonOrder className='skeleton-loading'>
+                  {orderListView === 'big' && [...Array(10)].map((item, i) => (
+                    <SkeletonCard key={i}>
+                      <SkeletonCell>
+                        <Skeleton width={10} height={10} />
+                        <SkeletonText>
+                          <Skeleton width={100} />
+                          <Skeleton width={100} />
+                        </SkeletonText>
+                      </SkeletonCell>
+                      <SkeletonCell>
+                        <Skeleton width={50} height={50} />
+                        <SkeletonText>
+                          <Skeleton width={80} />
+                          <Skeleton width={80} />
+                        </SkeletonText>
+                      </SkeletonCell>
+                      <SkeletonCell>
+                        <Skeleton width={50} height={50} />
+                        <SkeletonText>
+                          <Skeleton width={80} />
+                          <Skeleton width={80} />
+                        </SkeletonText>
+                      </SkeletonCell>
+                      <SkeletonCell>
+                        <Skeleton width={50} height={50} />
+                        <SkeletonText>
+                          <Skeleton width={80} />
+                        </SkeletonText>
+                      </SkeletonCell>
+                      <SkeletonCell>
+                        <Skeleton width={40} height={40} />
+                      </SkeletonCell>
+                      <SkeletonCell>
+                        <Skeleton width={100} height={30} />
+                      </SkeletonCell>
+                      <SkeletonCell>
+                        <Skeleton width={60} height={20} />
+                      </SkeletonCell>
                     </SkeletonCard>
                   ))}
                 </SkeletonOrder>
               )}
-            </>
-          )}
 
-          {pagination && (
-            <>
-              {!orderList.loading && pagination.totalPages && (
-                <OrdersPagination
-                  ordersPerPage={ordersPerPage}
-                  totalOrders={orderList.orders.length}
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  prevPaginate={prevPaginate}
-                  nextPaginate={nextPaginate}
-                />
-              )}
-            </>
-          )}
+            {orderListView === 'small' && (
+              <>
+                {!(orderList.loading || driversList.loading) ? orderList.orders.map(order => (
+                  <React.Fragment key={order.id}>
+                    <SmallOrderItemAccordion
+                      order={order}
+                      drivers={driversList.drivers}
+                      pendingOrder={pendingOrder}
+                      preOrder={preOrder}
+                      handleUpdateOrderStatus={handleUpdateOrderStatus}
+                      handleOpenOrderDetail={handleOpenOrderDetail}
+                    />
+                  </React.Fragment>
+                )
+                ) : (
+                  <SkeletonOrder>
+                    {[...Array(4)].map((item, i) => (
+                      <SkeletonCard small key={i}>
+                        <SkeletonBlock>
+                          <SkeletonCell>
+                            <Skeleton width={50} height={50} />
+                            <SkeletonText>
+                              <Skeleton width={80} />
+                              <Skeleton width={80} />
+                            </SkeletonText>
+                          </SkeletonCell>
+                          <SkeletonCell>
+                            <SkeletonText>
+                              <Skeleton width={120} />
+                              <Skeleton width={80} />
+                            </SkeletonText>
+                          </SkeletonCell>
+                        </SkeletonBlock>
+                        <SkeletonBlock>
+                          <Skeleton width={150} height={40} />
+                          <Skeleton width={150} height={40} />
+                        </SkeletonBlock>
+                        <SkeletonBlock>
+                          <Skeleton width={320} height={30} />
+                        </SkeletonBlock>
+                      </SkeletonCard>
+                    ))}
+                  </SkeletonOrder>
+                )}
+              </>
+            )}
+
+            {pagination && (
+              <>
+                {!orderList.loading && pagination.totalPages && (
+                  <OrdersPagination
+                    ordersPerPage={ordersPerPage}
+                    totalOrders={orderList.orders.length}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    prevPaginate={prevPaginate}
+                    nextPaginate={nextPaginate}
+                  />
+                )}
+              </>
+            )}
+          </InnerOrderListContent>
         </WrapperOrderListContent>
       )}
     </>

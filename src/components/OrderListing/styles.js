@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const WrapperNoneOrders = styled.div`
-    display: flex;
-    justify-content: center;
-    padding: 20px 10px;
+    overflow: auto;
 
     img {
         width: 250px;
@@ -14,6 +12,11 @@ export const WrapperNoneOrders = styled.div`
             width: 150px;
         }
     `}    
+`
+export const InnerNoneOrdersContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
 `
 export const OrderStatusTitle = styled.p`
     display: flex;
@@ -32,10 +35,6 @@ export const OrderStatusTitle = styled.p`
         transition: transform 0.3s ease;
         padding: 5px;
         cursor: pointer;
-        border-radius: 5px;
-        &:hover {
-            background: #eee;
-        }
     }
 `
 export const SkeletonOrder = styled.div`
@@ -77,14 +76,15 @@ export const SkeletonText = styled.div`
         text-align: right;
     `}
 `
-export const WrapperOrderListContent = styled.div`
+export const InnerOrderListContent = styled.div`
     padding: 5px;
     margin-bottom: 40px;
-    overflow: auto;
-    transition: max-height 0.3s ease;
 
     ${({ small }) => small && css`
         overflow: initial;
         max-height: initial;
     `}
+`
+export const WrapperOrderListContent = styled.div`
+    overflow: auto;
 `
