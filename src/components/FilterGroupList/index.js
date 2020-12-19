@@ -11,7 +11,8 @@ import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
 import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
 
 import {
-  FilterGroupListContainer
+  FilterGroupListContainer,
+  WrapperRow
 } from './styles'
 
 const FilterGroupListUI = (props) => {
@@ -51,7 +52,7 @@ const FilterGroupListUI = (props) => {
   return (
     <Modal
       title={t('FILTER', 'Filter')}
-      width='70%'
+      width='80%'
       padding='30px'
       open={open}
       onClose={() => handleCloseFilterModal(false)}
@@ -61,28 +62,32 @@ const FilterGroupListUI = (props) => {
       onCancel={() => handleClearFilter()}
     >
       <FilterGroupListContainer className='filter-modal'>
-        <GroupTypeSelector
-          handleChangeGroup={handleChangeGroup}
-          filterValues={filterValues}
-        />
-        <DateTypeSelector
-          filterValues={filterValues}
-          handleChangeDateType={handleChangeDateType}
-          handleChangeFromDate={handleChangeFromDate}
-          handleChangeEndDate={handleChangeEndDate}
-        />
-        <BusinessesSelector
-          filterValues={filterValues}
-          businessesList={businessesList}
-          handleChangeBusinesses={handleChangeBusinesses}
-        />
-        <DriverSelector
-          isPhoneView
-          isFilterView
-          drivers={driversList.drivers}
-          filterValues={filterValues}
-          handleChangeDriver={handleChangeDriver}
-        />
+        <WrapperRow>
+          <GroupTypeSelector
+            handleChangeGroup={handleChangeGroup}
+            filterValues={filterValues}
+          />
+          <DateTypeSelector
+            filterValues={filterValues}
+            handleChangeDateType={handleChangeDateType}
+            handleChangeFromDate={handleChangeFromDate}
+            handleChangeEndDate={handleChangeEndDate}
+          />
+        </WrapperRow>
+        <WrapperRow>
+          <BusinessesSelector
+            filterValues={filterValues}
+            businessesList={businessesList}
+            handleChangeBusinesses={handleChangeBusinesses}
+          />
+          <DriverSelector
+            isPhoneView
+            isFilterView
+            drivers={driversList.drivers}
+            filterValues={filterValues}
+            handleChangeDriver={handleChangeDriver}
+          />
+        </WrapperRow>
         <CitySelector
           filterValues={filterValues}
           handleChangeCity={handleChangeCity}
