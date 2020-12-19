@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -59,14 +58,13 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
-    handleOrderRedirect,
+    handleBackRedirect,
     handleUpdateOrderStatus
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
   const theme = useTheme()
   const [{ parsePrice, parseNumber }] = useUtils()
-  const history = useHistory()
 
   const orderDetail = useRef(null)
 
@@ -129,7 +127,7 @@ const OrderDetailsUI = (props) => {
   return (
     <Container>
       <BackActions>
-        <a onClick={() => history.goBack()}>
+        <a onClick={() => handleBackRedirect()}>
           <HiOutlineArrowLeft />
         </a>
       </BackActions>
@@ -404,7 +402,7 @@ const OrderDetailsUI = (props) => {
         <NotFoundSource
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
           btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
-          onClickButton={handleOrderRedirect}
+          onClickButton={handleBackRedirect}
         />
       )}
       {(openMessages.driver || openMessages.business || openMessages.customer || openMessages.history) && (

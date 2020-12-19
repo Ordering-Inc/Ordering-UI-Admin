@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import {
   OrdersListContainer,
   OrdersContent,
-  OrdersInnerContent
+  OrdersInnerContent,
+  OrderDetailsContainer
 } from './styles'
 import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { OrderListing } from '../OrderListing'
+import { OrderDetails } from '../OrderDetails'
 
 const OrdersListUI = (props) => {
   const {
@@ -31,6 +34,10 @@ const OrdersListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
+  const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
+  const [orderDetailId, setOrderDetailId] = useState(null)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -123,62 +130,91 @@ const OrdersListUI = (props) => {
     orderStatusTitle: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
   }
 
-  return (
-    <OrdersListContainer>
-      <OrderStatusFilterBar
-        selectedOrderStatus={ordersStatusGroup}
-        changeOrderStatus={handleOrdersStatusGroupFilter}
-      />
-      <OrdersContent>
-        <OrdersInnerContent className='order-content'>
-          <OrderContentHeader
-            active='orders'
-            searchValue={searchValue}
-            driversList={driversList}
-            paymethodsList={paymethodsList}
-            businessesList={businessesList}
-            ordersStatusSelected={ordersStatusGroup}
-            handleChangeSearch={handleChangeSearch}
-            handleChangeFilterValues={handleChangeFilterValues}
-          />
-          <OrdersDashboardControls
-            handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-            handleDeleteMultiOrders={handleDeleteMultiOrders}
-          />
-          {ordersStatusGroup === 'pending' && (
-            <>
-              <OrdersListController {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...PreOrdersControlProps} />
-            </>
-          )}
-          {ordersStatusGroup === 'inProgress' && (
-            <>
-              <OrdersListController {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
-            </>
-          )}
-          {ordersStatusGroup === 'completed' && (
-            <>
-              <OrdersListController {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
-            </>
-          )}
-          {ordersStatusGroup === 'cancelled' && (
-            <>
-              <OrdersListController {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
-              <OrdersListController {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
-            </>
-          )}
-        </OrdersInnerContent>
-      </OrdersContent>
+  useEffect(() => {
+    const id = query.get('id')
+    if (id === null) setIsOpenOrderDetail(false)
+    else {
+      setOrderDetailId(id)
+      setIsOpenOrderDetail(true)
+    }
+  }, [])
 
-    </OrdersListContainer>
+  const handleBackRedirect = () => {
+    setIsOpenOrderDetail(false)
+    history.push('/orders')
+  }
+
+  const handleOpenOrderDetail = (id) => {
+    setOrderDetailId(id)
+    setIsOpenOrderDetail(true)
+  }
+
+  return (
+    <>
+      <OrdersListContainer>
+        <OrderStatusFilterBar
+          selectedOrderStatus={ordersStatusGroup}
+          changeOrderStatus={handleOrdersStatusGroupFilter}
+        />
+        <OrdersContent>
+          <OrdersInnerContent className='order-content'>
+            <OrderContentHeader
+              active='orders'
+              searchValue={searchValue}
+              driversList={driversList}
+              paymethodsList={paymethodsList}
+              businessesList={businessesList}
+              ordersStatusSelected={ordersStatusGroup}
+              handleChangeSearch={handleChangeSearch}
+              handleChangeFilterValues={handleChangeFilterValues}
+            />
+            <OrdersDashboardControls
+              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+              handleDeleteMultiOrders={handleDeleteMultiOrders}
+            />
+            {ordersStatusGroup === 'pending' && (
+              <>
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PreOrdersControlProps} />
+              </>
+            )}
+            {ordersStatusGroup === 'inProgress' && (
+              <>
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+              </>
+            )}
+            {ordersStatusGroup === 'completed' && (
+              <>
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
+              </>
+            )}
+            {ordersStatusGroup === 'cancelled' && (
+              <>
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
+              </>
+            )}
+          </OrdersInnerContent>
+        </OrdersContent>
+      </OrdersListContainer>
+
+      {isOpenOrderDetail && (
+        <OrderDetailsContainer>
+          <OrderDetails
+            orderId={orderDetailId}
+            handleBackRedirect={handleBackRedirect}
+          />
+        </OrderDetailsContainer>
+      )}
+    </>
   )
 }
 

@@ -39,3 +39,18 @@ export const OrdersInnerContent = styled.div`
     width: 95%;
   }
 `
+export const OrderDetailsContainer = styled.div`
+  position: fixed;
+  top: 65px;
+  left: 60px;
+  display: flex;
+  width: calc(100% - 60px);  
+  min-height: calc(100vh - 65px);
+  background: #fff;
+  z-index: 999;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0px;
+  }
+`

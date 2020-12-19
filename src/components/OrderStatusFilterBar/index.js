@@ -16,6 +16,7 @@ export const OrderStatusFilterBar = (props) => {
   } = props
 
   const changeSelectedOrderStatus = (orderStatus) => {
+    window.scrollTo(0, 0)
     changeOrderStatus(orderStatus)
   }
 

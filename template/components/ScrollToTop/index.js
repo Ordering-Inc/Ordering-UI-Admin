@@ -5,7 +5,7 @@ export const ScrollToTop = withRouter(({ history, children }) => {
   useEffect(() => {
     const unlisten = history.listen((data) => {
       if (!window.location.search.includes('orders')) {
-        window.scrollTo(0, 0)
+        // window.scrollTo(0, 0)
       }
     })
     return () => {

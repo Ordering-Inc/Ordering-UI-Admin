@@ -1,6 +1,6 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
-import { useWindowSize } from '../../hooks/useWindowSize'
+// import { useLanguage } from 'ordering-components'
+// import { useWindowSize } from '../../hooks/useWindowSize'
 
 // import { Button } from '../../styles/Buttons'
 // import MdcBasket from '@meronex/icons/mdc/MdcBasket'
@@ -14,8 +14,8 @@ export const OrdersDashboardControls = (props) => {
     handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus
   } = props
-  const [, t] = useLanguage()
-  const { width } = useWindowSize()
+  // const [, t] = useLanguage()
+  // const { width } = useWindowSize()
 
   return (
     <>

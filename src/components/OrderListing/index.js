@@ -27,7 +27,8 @@ export const OrderListing = (props) => {
     handleSelectedOrderIds,
     pagination,
     preOrder,
-    pendingOrder
+    pendingOrder,
+    handleOpenOrderDetail
   } = props
 
   const theme = useTheme()
@@ -90,6 +91,7 @@ export const OrderListing = (props) => {
                         selectedOrderIds={selectedOrderIds}
                         handleUpdateOrderStatus={handleUpdateOrderStatus}
                         handleSelectedOrderIds={handleSelectedOrderIds}
+                        handleOpenOrderDetail={handleOpenOrderDetail}
                       />
                     )}
                   </React.Fragment>
@@ -150,6 +152,7 @@ export const OrderListing = (props) => {
                     pendingOrder={pendingOrder}
                     preOrder={preOrder}
                     handleUpdateOrderStatus={handleUpdateOrderStatus}
+                    handleOpenOrderDetail={handleOpenOrderDetail}
                   />
                 </React.Fragment>
               )

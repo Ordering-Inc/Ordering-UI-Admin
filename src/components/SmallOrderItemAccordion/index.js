@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
-import { useLanguage, useEvent } from 'ordering-components'
+import { useHistory } from 'react-router-dom'
+import { useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -28,19 +29,22 @@ export const SmallOrderItemAccordion = (props) => {
     drivers,
     pendingOrder,
     preOrder,
-    handleUpdateOrderStatus
+    handleUpdateOrderStatus,
+    handleOpenOrderDetail
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [events] = useEvent()
+  const history = useHistory()
+
   const driverSelectorRef = useRef(null)
   const orderStatusRef = useRef(null)
 
-  const handleGoToPage = (e, data) => {
+  const handleGoToPage = (e) => {
     const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
 
     if (!isActionClick) {
-      events.emit('go_to_page', data)
+      history.push(`/delivery-dashboard?id=${order.id}`)
+      handleOpenOrderDetail(order.id)
     }
   }
 
@@ -48,7 +52,7 @@ export const SmallOrderItemAccordion = (props) => {
     console.log(driver)
   }
   return (
-    <OrderItemContainer onClick={(e, data) => handleGoToPage(e, { page: 'order_detail', params: { orderId: order.id } })}>
+    <OrderItemContainer onClick={(e) => handleGoToPage(e)}>
       <WrapperInfo>
         <BusinessInfo>
           <WrapperAccordionImage>

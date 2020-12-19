@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import { useLanguage, OrdersManage as OrdersManageController, OrderList as OrdersListController } from 'ordering-components'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
@@ -9,6 +10,7 @@ import { OrderContentHeader } from '../../../src/components/OrderContentHeader'
 import { OrderListing } from '../OrderListing'
 import { DriversModal } from '../DriversModal'
 import { DriversLocation } from '../DriversLocation'
+import { OrderDetails } from '../OrderDetails'
 
 import {
   DeliveryDashboardContainer,
@@ -20,7 +22,8 @@ import {
   OrdersOpenButton,
   OrdersCloseButton,
   WrapperTab,
-  Tab
+  Tab,
+  OrderDetailsContainer
 } from './styles'
 
 const DeliveryDashboardUI = (props) => {
@@ -45,6 +48,11 @@ const DeliveryDashboardUI = (props) => {
   const [openTab, setOpenTab] = useState({ order: true, driver: false })
   const [openOrderAndDriver, setOpenOrderAndDriver] = useState(true)
   const [driverAvailable, setDriverAvailable] = useState('all')
+
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
+  const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
+  const [orderDetailId, setOrderDetailId] = useState(null)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -151,107 +159,138 @@ const DeliveryDashboardUI = (props) => {
     setDriverAvailable('all')
   }
 
+  useEffect(() => {
+    const id = query.get('id')
+    if (id === null) setIsOpenOrderDetail(false)
+    else {
+      setOrderDetailId(id)
+      setIsOpenOrderDetail(true)
+    }
+  }, [])
+
+  const handleBackRedirect = () => {
+    console.log('back')
+    setIsOpenOrderDetail(false)
+    history.push('/delivery-dashboard')
+  }
+
+  const handleOpenOrderDetail = (id) => {
+    setOrderDetailId(id)
+    setIsOpenOrderDetail(true)
+  }
+
   return (
-    <DeliveryDashboardContainer>
-      <OrderStatusFilterBar
-        selectedOrderStatus={ordersStatusGroup}
-        changeOrderStatus={handleOrdersStatusGroupFilter}
-      />
-      <DeliveryDashboardContent>
-        <DeliveryDashboardInnerContent>
-          <OrderContentHeader
-            active='deliveryDashboard'
-            searchValue={searchValue}
-            driversList={driversList}
-            paymethodsList={paymethodsList}
-            businessesList={businessesList}
-            ordersStatusSelected={ordersStatusGroup}
-            handleChangeSearch={handleChangeSearch}
-            handleChangeFilterValues={handleChangeFilterValues}
-          />
-          <MapAndOrderContent>
-
-            <DriversLocation
+    <>
+      <DeliveryDashboardContainer>
+        <OrderStatusFilterBar
+          selectedOrderStatus={ordersStatusGroup}
+          changeOrderStatus={handleOrdersStatusGroupFilter}
+        />
+        <DeliveryDashboardContent>
+          <DeliveryDashboardInnerContent>
+            <OrderContentHeader
+              active='deliveryDashboard'
+              searchValue={searchValue}
               driversList={driversList}
-              driverAvailable={driverAvailable}
+              paymethodsList={paymethodsList}
+              businessesList={businessesList}
+              ordersStatusSelected={ordersStatusGroup}
+              handleChangeSearch={handleChangeSearch}
+              handleChangeFilterValues={handleChangeFilterValues}
             />
+            <MapAndOrderContent>
 
-            {!openOrderAndDriver ? (
-              <OrdersOpenButton onClick={() => setOpenOrderAndDriver(true)} name='order-open'>
-                <AiFillPlusCircle />
-              </OrdersOpenButton>
-            ) : (
-              <OrdersCloseButton onClick={() => setOpenOrderAndDriver(false)} name='order-close'>
-                <FaRegTimesCircle />
-              </OrdersCloseButton>
-            )}
-            {openOrderAndDriver && (
-              <WrapperOrdersAndDriver>
-                <WrapperTab>
-                  <Tab
-                    active={openTab.order}
-                    onClick={() => handleChangeOrderAndDriver()}
-                  >
-                    {t('ORDERS', 'Orders')}
-                  </Tab>
-                  <Tab
-                    active={openTab.driver}
-                    onClick={() => setOpenTab({ order: false, driver: true })}
-                  >
-                    {t('DRIVERS', 'Drivers')}
-                  </Tab>
-                </WrapperTab>
-                <OrderAndDriverListContainer>
-                  {openTab.order && (
-                    <>
-                      {ordersStatusGroup === 'pending' && (
-                        <>
-                          <OrdersListController {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...PreOrdersControlProps} />
-                        </>
-                      )}
-                      {ordersStatusGroup === 'inProgress' && (
-                        <>
-                          <OrdersListController {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
-                        </>
-                      )}
-                      {ordersStatusGroup === 'completed' && (
-                        <>
-                          <OrdersListController {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
-                        </>
-                      )}
-                      {ordersStatusGroup === 'cancelled' && (
-                        <>
-                          <OrdersListController {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
-                          <OrdersListController {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
-                        </>
-                      )}
-                    </>
-                  )}
-                  {openTab.driver && (
-                    <DriversModal
-                      driversList={driversList}
-                      driverOrders={driverOrders}
-                      updateOrdersSelectedStatus={updateOrdersSelectedStatus}
-                      handleChangeDriverAvailable={handleChangeDriverAvailable}
-                      handleChangeDriverOrders={handleChangeDriverOrdersModal}
-                    />
-                  )}
-                </OrderAndDriverListContainer>
-              </WrapperOrdersAndDriver>
-            )}
-          </MapAndOrderContent>
-        </DeliveryDashboardInnerContent>
-      </DeliveryDashboardContent>
-    </DeliveryDashboardContainer>
+              <DriversLocation
+                driversList={driversList}
+                driverAvailable={driverAvailable}
+              />
+
+              {!openOrderAndDriver ? (
+                <OrdersOpenButton onClick={() => setOpenOrderAndDriver(true)} name='order-open'>
+                  <AiFillPlusCircle />
+                </OrdersOpenButton>
+              ) : (
+                <OrdersCloseButton onClick={() => setOpenOrderAndDriver(false)} name='order-close'>
+                  <FaRegTimesCircle />
+                </OrdersCloseButton>
+              )}
+              {openOrderAndDriver && (
+                <WrapperOrdersAndDriver>
+                  <WrapperTab>
+                    <Tab
+                      active={openTab.order}
+                      onClick={() => handleChangeOrderAndDriver()}
+                    >
+                      {t('ORDERS', 'Orders')}
+                    </Tab>
+                    <Tab
+                      active={openTab.driver}
+                      onClick={() => setOpenTab({ order: false, driver: true })}
+                    >
+                      {t('DRIVERS', 'Drivers')}
+                    </Tab>
+                  </WrapperTab>
+                  <OrderAndDriverListContainer>
+                    {openTab.order && (
+                      <>
+                        {ordersStatusGroup === 'pending' && (
+                          <>
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PreOrdersControlProps} />
+                          </>
+                        )}
+                        {ordersStatusGroup === 'inProgress' && (
+                          <>
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
+                          </>
+                        )}
+                        {ordersStatusGroup === 'completed' && (
+                          <>
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
+                          </>
+                        )}
+                        {ordersStatusGroup === 'cancelled' && (
+                          <>
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
+                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
+                          </>
+                        )}
+                      </>
+                    )}
+                    {openTab.driver && (
+                      <DriversModal
+                        driversList={driversList}
+                        driverOrders={driverOrders}
+                        updateOrdersSelectedStatus={updateOrdersSelectedStatus}
+                        handleChangeDriverAvailable={handleChangeDriverAvailable}
+                        handleChangeDriverOrders={handleChangeDriverOrdersModal}
+                      />
+                    )}
+                  </OrderAndDriverListContainer>
+                </WrapperOrdersAndDriver>
+              )}
+            </MapAndOrderContent>
+          </DeliveryDashboardInnerContent>
+        </DeliveryDashboardContent>
+      </DeliveryDashboardContainer>
+
+      {isOpenOrderDetail && (
+        <OrderDetailsContainer>
+          <OrderDetails
+            orderId={orderDetailId}
+            handleBackRedirect={handleBackRedirect}
+          />
+        </OrderDetailsContainer>
+      )}
+    </>
   )
 }
 
