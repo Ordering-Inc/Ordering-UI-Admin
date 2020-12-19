@@ -89,8 +89,24 @@ export const ProductItemAccordion = (props) => {
   }
 
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
-    const pos = position ? `(${position})` : ''
-    return `${quantity} x ${name} ${pos} +${price}`
+    if (name !== 'No') {
+      const pos = position ? `(${position})` : ''
+      return `${name} ${pos} ${parsePrice(quantity * price)}`
+    } else {
+      return 'No'
+    }
+  }
+
+  const getProductPrice = (product) => {
+    let price = product.quantity * product.price
+    if (product.options.length > 0) {
+      for (const option of product.options) {
+        for (const suboption of option.suboptions) {
+          price += suboption.quantity * suboption.price
+        }
+      }
+    }
+    return parsePrice(price)
   }
 
   return (
@@ -136,7 +152,7 @@ export const ProductItemAccordion = (props) => {
             <h3>{product.name}</h3>
             {windowSize.width <= 410 && (
               <span>
-                <p>{parsePrice(product.total || product.price)}</p>
+                <p>{getProductPrice(product)}</p>
                 {isCartProduct && (
                   <div>
                     {onEditProduct && (
@@ -160,7 +176,7 @@ export const ProductItemAccordion = (props) => {
           <ProductPriceSection>
             <ProductPrice>
               <span>
-                {parsePrice(product.total || product.price)}
+                {getProductPrice(product)}
               </span>
             </ProductPrice>
             {isCartProduct && (
@@ -253,7 +269,7 @@ export const ProductItemAccordion = (props) => {
                           quantity: suboption.quantity,
                           name: suboption.name,
                           position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                          price: parsePrice(suboption.price)
+                          price: suboption.price
                         })}
                       </span>
                     </li>
@@ -265,7 +281,7 @@ export const ProductItemAccordion = (props) => {
         )}
         {product.comment && (
           <ProductComment>
-            <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
+            <p>{t('COMMENT', 'Comment')}</p>
             <h3>{product.comment}</h3>
           </ProductComment>
         )}

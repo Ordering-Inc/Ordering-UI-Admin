@@ -247,8 +247,13 @@ export const ProductTable = styled.table`
         color: #263238;
         font-weight: 500;
         font-size: 13px;
-        padding: 10px 0;
+        padding-top: 25px;
         border-bottom: 1px solid #F2F2F2;
+        vertical-align: top;
+
+        &:first-child {
+          padding: 10px 0;
+        }
       }
     }
 
@@ -286,4 +291,70 @@ export const ProductImageContainer = styled.div`
   display: flex;
   align-items: center;
   column-gap: 10px;
+`
+export const AccordionContent = styled.div`
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+  width: 100%;
+  margin: auto;
+
+  @media (min-width: 481px) {
+    width: 80%;
+  }
+`
+export const ProductOptionsList = styled.ul`
+  list-style-type: none;
+
+  .suboption {
+    margin-left: -25px;
+    ${props => props.theme?.rtl && css`
+      margin-right: -25px;
+      margin-left: 0px;
+  `}
+  }
+
+  p:nth-child(1) {
+    margin-bottom: 0;
+    font-weight: 500;
+  }
+
+  p {
+    font-weight: 400;
+    margin: 0px;
+  }
+
+  li span {
+    font-weight: 300;
+  }
+
+  li.ingredient {
+    padding-left: 15px;
+    ${props => props.theme?.rtl && css`
+      padding-right: 15px;
+      padding-left: 0px;
+    `}
+  }
+`
+export const ProductComment = styled.div`
+  padding-left: 40px;
+  ${props => props.theme?.rtl && css`
+    padding-right: 40px;
+    padding-left: 0px;
+  `}
+  p {
+    font-weight: bold;
+    margin: 0px;
+  }
+
+  h3 {
+    font-weight: normal;
+    text-transform: capitalize;
+    margin: 0px 20px 0px 40px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    ${props => props.theme?.rtl && css`
+      margin: 0px 40px 0px 20px
+    `}
+  }
 `

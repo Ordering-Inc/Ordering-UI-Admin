@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -73,6 +73,8 @@ const OrderDetailsUI = (props) => {
     loading
   } = props.order
 
+  const [orderTotalPrice, setOrderTotalPrice] = useState(0)
+
   const getOrderStatus = (status) => {
     const orderStatus = [
       { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 25 },
@@ -123,6 +125,25 @@ const OrderDetailsUI = (props) => {
     orderDetail.current.style.display = 'flex'
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
   }
+
+  useEffect(() => {
+    if (loading) return
+    let _orderTotalPrice = order.subtotal
+    if (order?.service_fee > 0) {
+      _orderTotalPrice += order?.subtotal * order?.tax / 100 + order?.subtotal * order?.service_fee / 100
+    }
+    if (order?.deliveryFee > 0) {
+      _orderTotalPrice += order?.deliveryFee
+    }
+    if (order?.driver_tip > 0) {
+      _orderTotalPrice += order?.subtotal * order?.driver_tip / 100
+    }
+    if (order.discount > 0) {
+      _orderTotalPrice -= order.discount
+    }
+
+    setOrderTotalPrice(_orderTotalPrice)
+  }, [order])
 
   return (
     <Container>
@@ -198,10 +219,12 @@ const OrderDetailsUI = (props) => {
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
                     <td>{parsePrice(order?.subtotal)}</td>
                   </tr>
-                  <tr>
-                    <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-                    <td>{parsePrice(order?.totalTax)}</td>
-                  </tr>
+                  {order?.service_fee !== 0 && (
+                    <tr>
+                      <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
+                      <td>{parsePrice(order?.subtotal * order?.tax / 100)}</td>
+                    </tr>
+                  )}
                   <tr>
                     <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                     <td>{parsePrice(order?.deliveryFee)}</td>
@@ -210,10 +233,12 @@ const OrderDetailsUI = (props) => {
                     <td>{t('DRIVER_TIP', 'Driver tip')}</td>
                     <td>{parsePrice(order?.driver_tip)}</td>
                   </tr>
-                  <tr>
-                    <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-                    <td>{parsePrice(order?.serviceFee || 0)}</td>
-                  </tr>
+                  {order?.service_fee !== 0 && (
+                    <tr>
+                      <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+                      <td>{parsePrice(order?.serviceFee || 0)}</td>
+                    </tr>
+                  )}
                   {order?.discount > 0 && (
                     <tr>
                       <td>{t('DISCOUNT', 'Discount')}</td>
@@ -226,7 +251,7 @@ const OrderDetailsUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('TOTAL', 'Total')}</td>
-                    <td>{parsePrice(order?.total)}</td>
+                    <td>{parsePrice(orderTotalPrice)}</td>
                   </tr>
                 </tbody>
               </table>

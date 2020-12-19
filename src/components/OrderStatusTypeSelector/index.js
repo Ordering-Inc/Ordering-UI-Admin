@@ -282,6 +282,7 @@ export const OrderStatusTypeSelector = (props) => {
       defaultValue={defaultOptionValue}
       options={filteredOrderStatuses}
       onChange={(orderStatus) => changeOrderStatus(orderStatus)}
+      selectName='orderStatus'
     />
   )
 }
