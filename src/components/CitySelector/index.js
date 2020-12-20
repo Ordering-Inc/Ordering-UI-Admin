@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { Select } from '../../styles/Select'
+import { MultiSelect } from '../../styles/MultiSelect'
 import {
   PlaceholderTitle,
   Option
@@ -20,14 +20,13 @@ export const CitySelector = (props) => {
     { value: 3, content: <Option>{t('SAN_FRANCISCO', 'San Francisco')}</Option> }
   ]
 
-  const placeholder = <PlaceholderTitle>{t('CITY', 'City')}</PlaceholderTitle>
+  const placeholder = <PlaceholderTitle>{t('SELECT_CITY', 'Select City')}</PlaceholderTitle>
 
   return (
-    <Select
+    <MultiSelect
       placeholder={placeholder}
-      defaultValue={filterValues.cityId}
+      defaultValue={filterValues.cityIds}
       options={cityTypes}
-      selectedHeight='65px'
       onChange={(city) => handleChangeCity(city)}
     />
   )

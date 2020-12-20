@@ -27,3 +27,14 @@ export const Option = styled.div`
     }
   }
 `
+export const PlaceholderTitle = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  padding: 5px 10px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`

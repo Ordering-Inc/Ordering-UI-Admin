@@ -17,6 +17,7 @@ export const Option = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 5px 10px;
+  column-gap: 20px;
 
   svg {
     margin-right: 5px;

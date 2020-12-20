@@ -22,7 +22,7 @@ export const BusinessesSelector = (props) => {
   const [, t] = useLanguage()
   const [businessTypes, setBusinessTypes] = useState([])
 
-  const Placeholder = <Option>{t('SELECT_A_BUSINESS', 'Select a business')}</Option>
+  const Placeholder = <Option>{t('SELECT_BUSINESS', 'Select business')}</Option>
   const businessesLoading = [{ value: 'default', content: <Option>{t('BUSINESSES_LOADING', 'Businesses loading')}...</Option> }]
 
   useEffect(() => {

@@ -4,9 +4,13 @@ import {
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
-  OrderDetailsContainer
+  OrderDetailsContainer,
+  WrapperIndicator
 } from './styles'
 import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
+// import { useLanguage } from 'ordering-components'
+// import { OrdersManage as OrdersManageController } from '../OrdersManageController'
+// import { OrderList as OrdersListController } from '../OrderListController'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
@@ -21,6 +25,7 @@ const OrdersListUI = (props) => {
     businessesList,
     ordersStatusGroup,
     filterValues,
+    selectedOrderNumber,
     deleteMultiOrderStatus,
     handleResetDeleteMulitOrders,
     changeMulitOrderStatus,
@@ -30,7 +35,9 @@ const OrdersListUI = (props) => {
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
     handleChangeMultiOrdersStatus,
-    handleDeleteMultiOrders
+    handleDeleteMultiOrders,
+    handleOrderIds,
+    handleRemoveSelectedOrderId
   } = props
 
   const [, t] = useLanguage()
@@ -38,6 +45,8 @@ const OrdersListUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
+
+  const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -54,6 +63,8 @@ const OrdersListUI = (props) => {
     changeMulitOrderStatus: changeMulitOrderStatus,
     multiOrderUpdateStatus: multiOrderUpdateStatus,
     handleResetChangeMultiOrder: handleResetChangeMultiOrder,
+    handleOrderIds: handleOrderIds,
+    handleRemoveSelectedOrderId: handleRemoveSelectedOrderId,
     driversList: driversList,
     orderListView: 'big'
   }
@@ -156,6 +167,17 @@ const OrdersListUI = (props) => {
     else setDisplayOrderList('flex')
   }, [isOpenOrderDetail])
 
+  useEffect(() => {
+    if (deleteMultiOrderStatus || changeMulitOrderStatus) {
+      setTotalSelectedOrder(selectedOrderNumber)
+    }
+    if (selectedOrderNumber === 0) {
+      setTimeout(() => {
+        setTotalSelectedOrder(0)
+      }, 500)
+    }
+  }, [deleteMultiOrderStatus, changeMulitOrderStatus, selectedOrderNumber])
+
   return (
     <>
       <OrdersListContainer style={{ display: `${displayOrderList}` }}>
@@ -176,16 +198,17 @@ const OrdersListUI = (props) => {
               handleChangeFilterValues={handleChangeFilterValues}
             />
             <OrdersDashboardControls
+              selectedOrderNumber={selectedOrderNumber}
               handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
               handleDeleteMultiOrders={handleDeleteMultiOrders}
             />
-            {ordersStatusGroup === 'pending' && (
+            {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
               <>
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PreOrdersControlProps} />
               </>
             )}
-            {ordersStatusGroup === 'inProgress' && (
+            {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
               <>
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
@@ -194,13 +217,13 @@ const OrdersListUI = (props) => {
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
               </>
             )}
-            {ordersStatusGroup === 'completed' && (
+            {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
               <>
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
               </>
             )}
-            {ordersStatusGroup === 'cancelled' && (
+            {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
               <>
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
@@ -221,6 +244,11 @@ const OrdersListUI = (props) => {
           />
         </OrderDetailsContainer>
       )}
+      {totalSelectedOrder > 0 && (
+        <WrapperIndicator>
+          {selectedOrderNumber}/{totalSelectedOrder}
+        </WrapperIndicator>
+      )}
     </>
   )
 }
@@ -228,7 +256,8 @@ const OrdersListUI = (props) => {
 export const OrdersList = (props) => {
   const OrdersListControlProps = {
     ...props,
-    UIComponent: OrdersListUI
+    UIComponent: OrdersListUI,
+    driversPropsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
   }
   return <OrdersManageController {...OrdersListControlProps} />
 }

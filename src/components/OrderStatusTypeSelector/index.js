@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components'
 import { Select } from '../../styles/Select'
-import { Option } from './styles'
+import { Option, PlaceholderTitle } from './styles'
 import { useTheme } from 'styled-components'
+import { MultiSelect } from '../../styles/MultiSelect'
 
 export const OrderStatusTypeSelector = (props) => {
   const {
@@ -19,13 +20,17 @@ export const OrderStatusTypeSelector = (props) => {
     ordersStatusSelected,
     handleUpdateOrderStatus,
     handleChangeMultiOrdersStatus,
-    handleChangeOrderStatus
+    handleChangeOrderStatus,
+    handleChangeIsPendingOrder,
+    handleChangeIsPreOrder
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [defaultOptionValue, setDefaultOptionValue] = useState(defaultValue)
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
+
+  const placeholder = <PlaceholderTitle>{t('SELECT_STATUS', 'Select Status')}</PlaceholderTitle>
 
   const orderStatuses = [
     {
@@ -203,14 +208,6 @@ export const OrderStatusTypeSelector = (props) => {
   ]
 
   const changeOrderStatus = (orderStatus) => {
-    if (isFilterView) {
-      if (orderStatus === 'default') {
-        handleChangeOrderStatus(null)
-      } else {
-        handleChangeOrderStatus(orderStatus)
-      }
-      return
-    }
     if (orderStatus !== 'default' && orderStatus !== defaultValue) {
       if (orderStatus === 13) {
         orderStatus = 0
@@ -229,16 +226,11 @@ export const OrderStatusTypeSelector = (props) => {
     if (!isFilterView) {
       setFilteredOrderStatuses(orderStatuses)
     } else {
-      const _defaultOption = [
-        {
-          value: 'default',
-          content: <Option noPadding={noPadding}><p>{t('SELECT_STATUS', 'Select Status')}</p></Option>
-        }
-      ]
+      const _defaultOption = []
       let _filteredOrderStatues = []
       switch (ordersStatusSelected) {
         case 'pending':
-          _filteredOrderStatues = orderStatuses.splice(1, 1)
+          _filteredOrderStatues = orderStatuses.splice(2, 2)
           break
         case 'inProgress':
           _filteredOrderStatues = orderStatuses.splice(5, 5)
@@ -275,14 +267,54 @@ export const OrderStatusTypeSelector = (props) => {
     }
   }, [pendingOrder, preOrder])
 
-  return (
-    <Select
-      type={type}
-      noSelected={noSelected}
-      defaultValue={defaultOptionValue}
-      options={filteredOrderStatuses}
-      onChange={(orderStatus) => changeOrderStatus(orderStatus)}
-      selectName='orderStatus'
-    />
-  )
+  const filterChangeOrderStatus = (status) => {
+    if (status === 'pending') {
+      handleChangeOrderStatus(0)
+      handleChangeIsPendingOrder()
+      return
+    }
+    if (status === 'preorder') {
+      handleChangeOrderStatus(0)
+      handleChangeIsPreOrder()
+      return
+    }
+    handleChangeOrderStatus(status)
+  }
+
+  const [defaultFilterValues, setDefaultFilterValues] = useState([])
+
+  useEffect(() => {
+    if (isFilterView) {
+      const _defaultFilterValues = [...filterValues.statuses]
+      if (filterValues.isPendingOrder) {
+        _defaultFilterValues.push('pending')
+      }
+      if (filterValues.isPreOrder) {
+        _defaultFilterValues.push('preorder')
+      }
+      setDefaultFilterValues(_defaultFilterValues)
+    }
+  }, [filterValues])
+
+  if (isFilterView) {
+    return (
+      <MultiSelect
+        placeholder={placeholder}
+        defaultValue={defaultFilterValues}
+        options={filteredOrderStatuses}
+        onChange={(orderStatus) => filterChangeOrderStatus(orderStatus)}
+      />
+    )
+  } else {
+    return (
+      <Select
+        type={type}
+        noSelected={noSelected}
+        defaultValue={defaultOptionValue}
+        options={filteredOrderStatuses}
+        onChange={(orderStatus) => changeOrderStatus(orderStatus)}
+        className='orderStatus'
+      />
+    )
+  }
 }

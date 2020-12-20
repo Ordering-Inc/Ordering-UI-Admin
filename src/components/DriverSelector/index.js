@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Select } from '../../styles/Select'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiPhone from '@meronex/icons/fi/FiPhone'
+import { MultiSelect } from '../../styles/MultiSelect'
+
 import {
   Option,
   OptionContent,
@@ -33,6 +35,7 @@ const DriverSelectorUI = (props) => {
   const [, t] = useLanguage()
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
+  const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
   const [isRemoveAction, setIsRemoveAction] = useState(false)
   const driversLoading = [{ value: 'default', content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
   useEffect(() => {
@@ -52,7 +55,7 @@ const DriverSelectorUI = (props) => {
         return {
           value: driver.id,
           content: (
-            <Option small={small}>
+            <Option small={small} isPhoneView={isPhoneView}>
               <WrapperDriverImage small={small}>
                 {driver.photo ? (
                   <DriverImage bgimage={driver.photo} small={small} />
@@ -76,6 +79,8 @@ const DriverSelectorUI = (props) => {
           )
         }
       })
+
+      setDriversMultiOptionList(_driversOptionListTemp)
 
       for (const option of _driversOptionListTemp) {
         _driversOptionList.push(option)
@@ -151,43 +156,68 @@ const DriverSelectorUI = (props) => {
   }, [driverActionStatus])
 
   useEffect(() => {
-    if (isFilterView) {
-      setDefaultOption(filterValues.driverId)
-    }
-  }, [filterValues])
-
-  useEffect(() => {
     setDefaultOption(defaultValue)
   }, [defaultValue])
 
-  return (
-    <>
-      {!driversList.loading ? (
-        <Select
-          defaultValue={defaultOption || 'default'}
-          options={driversOptionList}
-          optionInnerMargin='10px'
-          optionInnerMaxHeight='150px'
-          optionBottomBorder
-          onChange={(driverId) => changeDriver(driverId)}
-        />
-      ) : (
-        <Select
-          defaultValue='default'
-          options={driversLoading}
-          optionInnerMargin='10px'
-          optionInnerMaxHeight='150px'
-          optionBottomBorder
-        />
-      )}
-    </>
-  )
+  const Placeholder = <Option>{t('SELECT_DRIVER', 'Select driver')}</Option>
+  const businessesLoading = [{ value: 'default', content: <Option>{t('BUSINESSES_LOADING', 'Businesses loading')}...</Option> }]
+
+  if (isFilterView) {
+    return (
+      <>
+        {!driversList.loading ? (
+          <MultiSelect
+            // defaultValue={filterValues.businessIds}
+            defaultValue={filterValues.driverIds}
+            placeholder={Placeholder}
+            options={driversMultiOptionList}
+            optionInnerMargin='10px'
+            optionInnerMaxHeight='150px'
+            optionBottomBorder
+            onChange={(driver) => handleChangeDriver(driver)}
+          />
+        ) : (
+          <MultiSelect
+            defaultValue='default'
+            options={businessesLoading}
+            optionInnerMargin='10px'
+            optionInnerMaxHeight='150px'
+            optionBottomBorder
+          />
+        )}
+      </>
+    )
+  } else {
+    return (
+      <>
+        {!driversList.loading ? (
+          <Select
+            defaultValue={defaultOption || 'default'}
+            options={driversOptionList}
+            optionInnerMargin='10px'
+            optionInnerMaxHeight='150px'
+            optionBottomBorder
+            onChange={(driverId) => changeDriver(driverId)}
+          />
+        ) : (
+          <Select
+            defaultValue='default'
+            options={driversLoading}
+            optionInnerMargin='10px'
+            optionInnerMaxHeight='150px'
+            optionBottomBorder
+          />
+        )}
+      </>
+    )
+  }
 }
 
 export const DriverSelector = (props) => {
   const DriversControlProps = {
     ...props,
-    UIComponent: DriverSelectorUI
+    UIComponent: DriverSelectorUI,
+    propsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
   }
   return (
     <>

@@ -1,9 +1,10 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { Select } from '../../styles/Select'
+import { MultiSelect } from '../../styles/MultiSelect'
 
 import {
-  Option
+  Option,
+  PlaceholderTitle
 } from './styles'
 
 export const DeliveryTypeSelector = (props) => {
@@ -15,25 +16,17 @@ export const DeliveryTypeSelector = (props) => {
   const [, t] = useLanguage()
 
   const deliveryTypes = [
-    { value: 'default', content: <Option>{t('SELECT_A_DELIVERY_TYPE', 'Select a delivery type')}</Option> },
     { value: 1, content: <Option>{t('DELIVERY', 'Delivery')}</Option> },
-    { value: 2, content: <Option>{t('PICKUP', 'Pickup')}</Option> },
-    { value: 3, content: <Option>{t('EAT_IN', 'Eat in')}</Option> }
+    { value: 2, content: <Option>{t('PICKUP', 'Pickup')}</Option> }
   ]
-
-  const changeDeliveryType = (deliveryType) => {
-    if (deliveryType === 'default') {
-      handleChangeDeliveryType(null)
-    } else {
-      handleChangeDeliveryType(deliveryType)
-    }
-  }
+  const placeholder = <PlaceholderTitle>{t('SELECT_DELIVERY_TYPE', 'Select delivery type')}</PlaceholderTitle>
 
   return (
-    <Select
-      defaultValue={filterValues.deliveryType || 'default'}
+    <MultiSelect
+      placeholder={placeholder}
+      defaultValue={filterValues.deliveryTypes}
       options={deliveryTypes}
-      onChange={(deliveryType) => changeDeliveryType(deliveryType)}
+      onChange={(deliveryType) => handleChangeDeliveryType(deliveryType)}
     />
   )
 }

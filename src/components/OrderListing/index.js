@@ -28,6 +28,7 @@ export const OrderListing = (props) => {
     orderStatusTitle,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
+    handleOrderIds,
     pagination,
     preOrder,
     pendingOrder,
@@ -136,6 +137,7 @@ export const OrderListing = (props) => {
                           selectedOrderIds={selectedOrderIds}
                           handleUpdateOrderStatus={handleUpdateOrderStatus}
                           handleSelectedOrderIds={handleSelectedOrderIds}
+                          handleOrderIds={handleOrderIds}
                           handleOpenOrderDetail={handleOpenOrderDetail}
                         />
                       )}

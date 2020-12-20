@@ -45,6 +45,7 @@ export const OrderItemAccordion = (props) => {
     selectedOrderIds,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
+    handleOrderIds,
     handleOpenOrderDetail
   } = props
 
@@ -66,6 +67,7 @@ export const OrderItemAccordion = (props) => {
   const toggleOrderSelect = (id) => {
     setIsChecked(!isChecked)
     handleSelectedOrderIds(id)
+    handleOrderIds(id)
   }
   const toggleAccordion = () => {
     setActiveState(setActive === '' ? 'active' : '')
@@ -78,7 +80,7 @@ export const OrderItemAccordion = (props) => {
   }
 
   const handleGoToPage = (e) => {
-    const isActionClick = checkbox.current?.contains(e.target) || driverSelectorRef.current?.contains(e.target) || toggleBtn.current?.contains(e.target) || e.target.name === 'orderStatus'
+    const isActionClick = checkbox.current?.contains(e.target) || driverSelectorRef.current?.contains(e.target) || toggleBtn.current?.contains(e.target) || e.target.closest('.orderStatus')
 
     if (!isActionClick) {
       history.push(`/orders?id=${order.id}`)
@@ -212,12 +214,13 @@ export const OrderItemAccordion = (props) => {
           <OrderItemAccordionCell>
             <DeliveryTypeContainer>
               <DeliveryIcon>
-                {order?.delivery_type === 1 ? (
+                {order?.delivery_type === 1 && (
                   <img
                     src={theme?.images?.icons?.driverDelivery}
                     alt='Delivery'
                   />
-                ) : (
+                )}
+                {order?.delivery_type === 2 && (
                   <img
                     src={theme?.images?.icons?.pickUp}
                     alt='pick up'
@@ -225,7 +228,8 @@ export const OrderItemAccordion = (props) => {
                 )}
               </DeliveryIcon>
               <DeliveryName>
-                {order?.delivery_type === 1 ? (t('DELIVERY', 'Delivery')) : (t('PICKUP', 'Pickup'))}
+                {order?.delivery_type === 1 && (t('DELIVERY', 'Delivery'))}
+                {order?.delivery_type === 2 && (t('PICKUP', 'Pickup'))}
               </DeliveryName>
             </DeliveryTypeContainer>
           </OrderItemAccordionCell>

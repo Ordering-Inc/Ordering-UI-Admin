@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { Select } from '../../styles/Select'
+import { MultiSelect } from '../../styles/MultiSelect'
 import { useTheme } from 'styled-components'
 
 import { PlaceholderTitle, Option, OptionType, OptionValue } from './styles'
@@ -80,9 +80,9 @@ export const GroupTypeSelector = (props) => {
   )
 
   return (
-    <Select
+    <MultiSelect
       placeholder={placeholder}
-      defaultValue={filterValues?.groupType}
+      defaultValue={filterValues.groupTypes}
       options={groupTypes}
       onChange={(groupType) => handleChangeGroup(groupType)}
     />

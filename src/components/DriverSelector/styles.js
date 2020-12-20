@@ -2,12 +2,14 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Option = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   column-gap: 10px;
-  padding: ${({ padding }) => padding || '10px 0'};
+  padding: ${({ padding }) => padding || '15px 10px'};
   white-space: nowrap;
+  ${({ isPhoneView }) => isPhoneView && css`
+    width: 100%;
+  `}
 
   img {
     width: 45px;

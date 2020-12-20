@@ -163,6 +163,7 @@ export const Header = styled.div`
   overflow: hidden;
   white-space: nowrap;
   display: flex;
+  align-items: baseline;
 `
 
 export const SelectImage = styled.div`

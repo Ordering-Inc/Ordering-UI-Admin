@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components'
-import { Select } from '../../styles/Select'
+import { MultiSelect } from '../../styles/MultiSelect'
 
-import { Option } from './styles'
+import { Option, PlaceholderTitle } from './styles'
 
 export const PaymethodTypeSelector = (props) => {
   const {
@@ -13,11 +13,11 @@ export const PaymethodTypeSelector = (props) => {
 
   const [, t] = useLanguage()
   const [paymethodsTypes, setPaymethodsTypes] = useState([])
-
+  const placeholder = <PlaceholderTitle>{t('SELECT_PAYMETHOD', 'Select paymethod')}</PlaceholderTitle>
   const paymthodsLoading = [{ value: 'default', content: <Option>{t('PAYMETHODS_LOADING', 'Paymethods loading')}...</Option> }]
 
   useEffect(() => {
-    const _paymthodsOptionList = [{ value: 'default', content: <Option>{t('SELECT_A_PAYMETHOD', 'Select a paymethod')}</Option> }]
+    const _paymthodsOptionList = []
     if (!paymethodsList.loading) {
       const _paymthodsOption = paymethodsList.paymethods.map((paymethod) => {
         return {
@@ -36,31 +36,20 @@ export const PaymethodTypeSelector = (props) => {
     setPaymethodsTypes(_paymthodsOptionList)
   }, [paymethodsList])
 
-  const changePaymethodType = (paymethod) => {
-    if (paymethod === 'default') {
-      handleChangePaymethodType(null)
-    } else {
-      handleChangePaymethodType(paymethod)
-    }
-  }
-
   return (
     <>
       {!paymethodsList.loading ? (
-        <Select
-          defaultValue={filterValues.paymethodId || 'default'}
+        <MultiSelect
+          defaultValue={filterValues.paymethodIds}
+          placeholder={placeholder}
           options={paymethodsTypes}
-          optionInnerMargin='10px'
-          optionInnerMaxHeight='150px'
           optionBottomBorder
-          onChange={(paymethod) => changePaymethodType(paymethod)}
+          onChange={(paymethod) => handleChangePaymethodType(paymethod)}
         />
       ) : (
-        <Select
+        <MultiSelect
           defaultValue='default'
           options={paymthodsLoading}
-          optionInnerMargin='10px'
-          optionInnerMaxHeight='150px'
           optionBottomBorder
         />
       )}

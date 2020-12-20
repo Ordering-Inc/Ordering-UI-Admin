@@ -11,6 +11,7 @@ import { OrderDashboardControlsContainer, InnerContnet } from './styles'
 
 export const OrdersDashboardControls = (props) => {
   const {
+    selectedOrderNumber,
     handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus
   } = props
@@ -22,19 +23,21 @@ export const OrdersDashboardControls = (props) => {
       <OrderDashboardControlsContainer>
         <InnerContnet>
           <ExportCSV />
+          {selectedOrderNumber > 0 && (
+            <>
+              <OrderDelete
+                handleDeleteMultiOrders={handleDeleteMultiOrders}
+              />
 
-          <OrderDelete
-            handleDeleteMultiOrders={handleDeleteMultiOrders}
-          />
-
-          <OrderStatusTypeSelector
-            mutiOrdersChange
-            noSelected
-            defaultValue='default'
-            type='primary'
-            handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-          />
-
+              <OrderStatusTypeSelector
+                mutiOrdersChange
+                noSelected
+                defaultValue='default'
+                type='primary'
+                handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+              />
+            </>
+          )}
           {/* <Button color='secondary' borderRadius='6px' withIcon>
             {width > 600 && t('CREATE_ORDER', 'Create Order')}
             <MdcBasket />

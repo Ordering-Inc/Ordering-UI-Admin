@@ -12,7 +12,7 @@ import {
 } from '../Selects'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, selectName } = props
+  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className } = props
 
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(
@@ -63,7 +63,7 @@ export const Select = (props) => {
   }
 
   return (
-    <SelectInput type={type} name={selectName}>
+    <SelectInput type={type} className={className}>
       {!selectedOption && (
         <Selected onClick={handleSelectClick}>
           {placeholder || ''}

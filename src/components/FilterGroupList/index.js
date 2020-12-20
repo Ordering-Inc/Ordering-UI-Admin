@@ -1,5 +1,7 @@
 import React from 'react'
-import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components'
+// import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components'
+import { useLanguage } from 'ordering-components'
+import { OrdersFilter as OrdersFilterController } from '../OrdersFilterController'
 import { Modal } from '../Modal'
 import { GroupTypeSelector } from '../GroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
@@ -35,13 +37,16 @@ const FilterGroupListUI = (props) => {
     handleChangeDeliveryType,
     handleChangePaymethodType,
     handleResetFilterValues,
-    handleChangeFilterValues
+    handleChangeFilterValues,
+    handleChangeIsPendingOrder,
+    handleChangeIsPreOrder
   } = props
 
   const [, t] = useLanguage()
 
   const handleAcceptFilter = () => {
     handleChangeFilterValues(filterValues)
+    handleCloseFilterModal()
   }
 
   const handleClearFilter = () => {
@@ -55,7 +60,7 @@ const FilterGroupListUI = (props) => {
       width='80%'
       padding='30px'
       open={open}
-      onClose={() => handleCloseFilterModal(false)}
+      onClose={() => handleCloseFilterModal()}
       acceptText={t('ACCEPT', 'Accept')}
       onAccept={() => handleAcceptFilter()}
       cancelText={t('CLEAR', 'Clear')}
@@ -81,7 +86,6 @@ const FilterGroupListUI = (props) => {
             handleChangeBusinesses={handleChangeBusinesses}
           />
           <DriverSelector
-            isPhoneView
             isFilterView
             drivers={driversList.drivers}
             filterValues={filterValues}
@@ -97,6 +101,8 @@ const FilterGroupListUI = (props) => {
           ordersStatusSelected={ordersStatusSelected}
           filterValues={filterValues}
           handleChangeOrderStatus={handleChangeOrderStatus}
+          handleChangeIsPendingOrder={handleChangeIsPendingOrder}
+          handleChangeIsPreOrder={handleChangeIsPreOrder}
         />
         <DeliveryTypeSelector
           filterValues={filterValues}

@@ -87,7 +87,7 @@ export const MultiSelect = (props) => {
           <Header>
             {selectedOptions.map((selectedOption) => (
               <React.Fragment key={selectedOption.value}>
-                {selectedOption.content}
+                {selectedOption.content},
               </React.Fragment>
             ))}
           </Header>
@@ -106,7 +106,6 @@ export const MultiSelect = (props) => {
               <Option
                 key={i}
                 color={option.color}
-                disabled={option.disabled === 'disabled'}
                 onClick={() => handleSelectOption(option)}
                 optionBottomBorder={props.optionBottomBorder}
               >
