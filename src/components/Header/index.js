@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import { useWindowSize } from '../../hooks/useWindowSize'
-import IosMenu from '@meronex/icons/ios/IosMenu'
+// import { useWindowSize } from '../../hooks/useWindowSize'
+// import IosMenu from '@meronex/icons/ios/IosMenu'
 
 import {
   HeaderContainer,
   InnerHeader,
   LogoHeader,
   LeftHeader,
-  RightHeader,
-  OverViewControlButton
+  RightHeader
+  // OverViewControlButton
 } from './styles'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
 
@@ -20,9 +20,9 @@ import { MobileSidebarMenu } from '../MobileSidebarMenu'
 export const Header = (props) => {
   const [events] = useEvent()
   const [openPopover, setOpenPopover] = useState({})
-  const [openOverview, setOpenOverview] = useState(true)
+  // const [openOverview, setOpenOverview] = useState(true)
   const theme = useTheme()
-  const { width } = useWindowSize()
+  // const { width } = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
   const handleTogglePopover = (type) => {
@@ -43,19 +43,19 @@ export const Header = (props) => {
     events.emit('go_to_page', data)
   }
 
-  useEffect(() => {
-    if (document.getElementById('overView') !== null) {
-      if (width < 1400) {
-        if (!openOverview) {
-          document.getElementById('overView').style.right = '0px'
-        } else {
-          document.getElementById('overView').style.right = '-140px'
-        }
-      } else {
-        document.getElementById('overView').style.right = '0px'
-      }
-    }
-  }, [openOverview, width])
+  // useEffect(() => {
+  //   if (document.getElementById('overView') !== null) {
+  //     if (width < 1400) {
+  //       if (!openOverview) {
+  //         document.getElementById('overView').style.right = '0px'
+  //       } else {
+  //         document.getElementById('overView').style.right = '-140px'
+  //       }
+  //     } else {
+  //       document.getElementById('overView').style.right = '0px'
+  //     }
+  //   }
+  // }, [openOverview, width])
 
   return (
     <HeaderContainer>
@@ -75,11 +75,11 @@ export const Header = (props) => {
               onClose={() => handleClosePopover('user')}
             />
 
-            {window.location.pathname === '/orders' && (
+            {/* {window.location.pathname === '/orders' && (
               <OverViewControlButton onClick={() => setOpenOverview(!openOverview)}>
                 <IosMenu />
               </OverViewControlButton>
-            )}
+            )} */}
           </RightHeader>
         )}
       </InnerHeader>
