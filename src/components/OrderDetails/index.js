@@ -189,12 +189,13 @@ const OrderDetailsUI = (props) => {
               <OrderTypeInfo>
                 <p>{t('ORDER_TYPE', 'Order Type')}</p>
                 <OrderTypeContent>
-                  {order?.order_type ? (
+                  {order?.delivery_type === 1 && (
                     <>
                       <img src={theme?.images?.icons?.driverDelivery} alt='order type' />
-                      {order?.order_type}
+                      {t('DELIVERY', 'Delivery')}
                     </>
-                  ) : (
+                  )}
+                  {order?.delivery_type === 2 && (
                     <>
                       <img src={theme?.images?.icons?.pickUp} alt='pickup' />
                       {t('PICKUP', 'Pickup')}
