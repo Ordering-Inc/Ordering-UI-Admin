@@ -269,6 +269,7 @@ const OrderDetailsUI = (props) => {
             <ContactInfoHeader>
               <OrderStatusTypeSelector
                 orderId={order.id}
+                deliveryType={order?.delivery_type}
                 defaultValue={order.status}
                 handleUpdateOrderStatus={handleUpdateOrderStatus}
               />

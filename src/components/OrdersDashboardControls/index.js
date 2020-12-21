@@ -31,6 +31,7 @@ export const OrdersDashboardControls = (props) => {
               />
 
               <OrderStatusTypeSelector
+                orderControl
                 mutiOrdersChange
                 noSelected
                 defaultValue='default'

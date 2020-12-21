@@ -8,11 +8,13 @@ import { MultiSelect } from '../../styles/MultiSelect'
 export const OrderStatusTypeSelector = (props) => {
   const {
     defaultValue,
+    deliveryType,
     mutiOrdersChange,
     orderId,
     preOrder,
     pendingOrder,
     type,
+    orderControl,
     noPadding,
     noSelected,
     isFilterView,
@@ -224,7 +226,25 @@ export const OrderStatusTypeSelector = (props) => {
 
   useEffect(() => {
     if (!isFilterView) {
-      setFilteredOrderStatuses(orderStatuses)
+      if (deliveryType === 1 || orderControl) {
+        setFilteredOrderStatuses(orderStatuses)
+      } else {
+        let _filteredOrderStatues = []
+        let extractOrderStatus = []
+        extractOrderStatus = orderStatuses.slice(0, 7)
+        _filteredOrderStatues = [...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(8, 9)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(10, 12)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(13, 16)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        setFilteredOrderStatuses(_filteredOrderStatues)
+      }
     } else {
       const _defaultOption = []
       let _filteredOrderStatues = []

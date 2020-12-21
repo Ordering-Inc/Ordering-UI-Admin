@@ -121,6 +121,7 @@ export const SmallOrderItemAccordion = (props) => {
         <OrderStatusTypeSelector
           defaultValue={order?.status}
           orderId={order.id}
+          deliveryType={order?.delivery_type}
           pendingOrder={pendingOrder}
           preOrder={preOrder}
           noPadding
