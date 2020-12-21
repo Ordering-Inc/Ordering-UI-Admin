@@ -235,6 +235,7 @@ const OrdersListUI = (props) => {
       >
         <OrderDetails
           orderId={orderDetailId}
+          driversList={driversList}
         />
       </Modal>
 

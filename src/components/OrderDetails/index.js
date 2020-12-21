@@ -57,6 +57,7 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
+    driversList,
     handleBackRedirect,
     handleUpdateOrderStatus
   } = props
@@ -362,6 +363,7 @@ const OrderDetailsUI = (props) => {
             </SectionTitle>
             <DriverSelectorContainer>
               <DriverSelector
+                drivers={driversList.drivers}
                 isPhoneView
                 defaultValue={order?.driver?.id ? order.driver.id : 'default'}
                 order={order}
@@ -460,6 +462,7 @@ export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
     asDashboard: true,
+    driversList: props.driversList,
     UIComponent: OrderDetailsUI
   }
 

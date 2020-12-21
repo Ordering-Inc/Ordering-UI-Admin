@@ -288,6 +288,7 @@ const DeliveryDashboardUI = (props) => {
       >
         <OrderDetails
           orderId={orderDetailId}
+          driversList={driversList}
         />
       </Modal>
     </>
