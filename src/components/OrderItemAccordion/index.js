@@ -84,7 +84,7 @@ export const OrderItemAccordion = (props) => {
 
     if (!isActionClick) {
       history.push(`/orders?id=${order.id}`)
-      handleOpenOrderDetail(order.id)
+      handleOpenOrderDetail(order.id, pendingOrder, preOrder)
     }
   }
 

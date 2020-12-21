@@ -44,7 +44,7 @@ export const SmallOrderItemAccordion = (props) => {
 
     if (!isActionClick) {
       history.push(`/delivery-dashboard?id=${order.id}`)
-      handleOpenOrderDetail(order.id)
+      handleOpenOrderDetail(order.id, pendingOrder, preOrder)
     }
   }
 

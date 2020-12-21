@@ -44,6 +44,8 @@ const OrdersListUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
+  const [pendingOrder, setPendingOrder] = useState(false)
+  const [preOrder, setPreOrder] = useState(false)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -151,8 +153,18 @@ const OrdersListUI = (props) => {
     setIsOpenOrderDetail(false)
     history.push('/orders')
   }
+  const handleOpenOrderDetail = (id, pendingOrder, preOrder) => {
+    if (pendingOrder) {
+      setPendingOrder(true)
+    } else {
+      setPendingOrder(false)
+    }
 
-  const handleOpenOrderDetail = (id) => {
+    if (preOrder) {
+      setPreOrder(true)
+    } else {
+      setPreOrder(false)
+    }
     setOrderDetailId(id)
     setIsOpenOrderDetail(true)
   }
@@ -236,6 +248,8 @@ const OrdersListUI = (props) => {
         <OrderDetails
           orderId={orderDetailId}
           driversList={driversList}
+          pendingOrder={pendingOrder}
+          preOrder={preOrder}
         />
       </Modal>
 

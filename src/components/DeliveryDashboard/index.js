@@ -52,6 +52,8 @@ const DeliveryDashboardUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
+  const [pendingOrder, setPendingOrder] = useState(false)
+  const [preOrder, setPreOrder] = useState(false)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -172,7 +174,18 @@ const DeliveryDashboardUI = (props) => {
     history.push('/delivery-dashboard')
   }
 
-  const handleOpenOrderDetail = (id) => {
+  const handleOpenOrderDetail = (id, pendingOrder, preOrder) => {
+    if (pendingOrder) {
+      setPendingOrder(true)
+    } else {
+      setPendingOrder(false)
+    }
+
+    if (preOrder) {
+      setPreOrder(true)
+    } else {
+      setPreOrder(false)
+    }
     setOrderDetailId(id)
     setIsOpenOrderDetail(true)
   }
@@ -289,6 +302,8 @@ const DeliveryDashboardUI = (props) => {
         <OrderDetails
           orderId={orderDetailId}
           driversList={driversList}
+          pendingOrder={pendingOrder}
+          preOrder={preOrder}
         />
       </Modal>
     </>

@@ -57,6 +57,8 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
+    pendingOrder,
+    preOrder,
     driversList,
     handleBackRedirect,
     handleUpdateOrderStatus
@@ -161,7 +163,15 @@ const OrderDetailsUI = (props) => {
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
-                <span>{getOrderStatus(order?.status)?.value}</span>
+                {(!pendingOrder && !preOrder) && (
+                  <span>{getOrderStatus(order?.status)?.value}</span>
+                )}
+                {pendingOrder && (
+                  <span>{t('PENDING', 'Pending')}</span>
+                )}
+                {preOrder && (
+                  <span>{t('PREORDER', 'Preorder')}</span>
+                )}
                 <StatusImage>
                   <img src={getImage(order?.status || 0)} alt='status' />
                 </StatusImage>
