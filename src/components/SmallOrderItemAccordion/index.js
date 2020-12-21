@@ -20,7 +20,9 @@ import {
   CustomerContent,
   WrapperOrderStatus,
   DriverInfo,
-  WrapperDriverSelector
+  WrapperDriverSelector,
+  WrapperNoDriver,
+  NoDriverTitle
 } from './styles'
 
 export const SmallOrderItemAccordion = (props) => {
@@ -107,13 +109,22 @@ export const SmallOrderItemAccordion = (props) => {
         </CustomerInfo>
         <DriverInfo>
           <WrapperDriverSelector ref={driverSelectorRef}>
-            <DriverSelector
-              small
-              defaultValue={order?.driver_id ? order.driver_id : 'default'}
-              drivers={drivers}
-              order={order}
-              handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
-            />
+            {order?.delivery_type === 1 ? (
+              <DriverSelector
+                small
+                defaultValue={order?.driver_id ? order.driver_id : 'default'}
+                drivers={drivers}
+                order={order}
+                handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
+              />
+            ) : (
+              <WrapperNoDriver>
+                <WrapperAccordionImage small>
+                  <FaUserAlt />
+                </WrapperAccordionImage>
+                <NoDriverTitle>{t('NO_DRIVER', 'No driver')}</NoDriverTitle>
+              </WrapperNoDriver>
+            )}
           </WrapperDriverSelector>
         </DriverInfo>
       </WrapperInfo>

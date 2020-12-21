@@ -189,7 +189,7 @@ export const OrderItemAccordion = (props) => {
           </OrderItemAccordionCell>
 
           <OrderItemAccordionCell>
-            {order?.driver_id ? (
+            {order?.driver_id && order?.delivery_type === 1 ? (
               <WrapperDriverSelector ref={driverSelectorRef}>
                 <DriverSelector
                   defaultValue={order?.driver_id ? order.driver_id : 'default'}

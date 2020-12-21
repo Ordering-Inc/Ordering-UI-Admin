@@ -369,17 +369,22 @@ const OrderDetailsUI = (props) => {
               )}
             </SectionContainer>
 
-            <SectionTitle driver>
-              {t('SELECT_DRIVER', 'Select Driver')}
-            </SectionTitle>
-            <DriverSelectorContainer>
-              <DriverSelector
-                drivers={driversList.drivers}
-                isPhoneView
-                defaultValue={order?.driver?.id ? order.driver.id : 'default'}
-                order={order}
-              />
-            </DriverSelectorContainer>
+            {order?.delivery_type === 1 && (
+              <>
+                <SectionTitle driver>
+                  {t('SELECT_DRIVER', 'Select Driver')}
+                </SectionTitle>
+                <DriverSelectorContainer>
+                  <DriverSelector
+                    drivers={driversList.drivers}
+                    isPhoneView
+                    defaultValue={order?.driver?.id ? order.driver.id : 'default'}
+                    order={order}
+                  />
+                </DriverSelectorContainer>
+              </>
+            )}
+
             <PrintButtonContainer>
               <Button color='darkBlue' onClick={() => window.print()}>
                 {t('PRINT', 'Print')}
