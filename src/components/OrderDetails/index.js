@@ -6,7 +6,6 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
-import HiOutlineArrowLeft from '@meronex/icons/hi/HiOutlineArrowLeft'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -31,7 +30,6 @@ import {
   CustomerContactBlock,
   OrderProducts,
   OrderBill,
-  BackActions,
   SkeletonBlockWrapp,
   SkeletonBlock,
   SkeletonInfoCell,
@@ -150,11 +148,6 @@ const OrderDetailsUI = (props) => {
 
   return (
     <Container>
-      <BackActions>
-        <a onClick={() => handleBackRedirect()}>
-          <HiOutlineArrowLeft />
-        </a>
-      </BackActions>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer ref={orderDetail}>
           <OrderInfoContent className='order-info'>

@@ -4,7 +4,6 @@ import {
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
-  OrderDetailsContainer,
   WrapperIndicator
 } from './styles'
 import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
@@ -13,6 +12,7 @@ import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { OrderListing } from '../OrderListing'
 import { OrderDetails } from '../OrderDetails'
+import { Modal } from '../Modal'
 
 const OrdersListUI = (props) => {
   const {
@@ -157,13 +157,6 @@ const OrdersListUI = (props) => {
     setIsOpenOrderDetail(true)
   }
 
-  const [displayOrderList, setDisplayOrderList] = useState('flex')
-
-  useEffect(() => {
-    if (isOpenOrderDetail) setDisplayOrderList('none')
-    else setDisplayOrderList('flex')
-  }, [isOpenOrderDetail])
-
   useEffect(() => {
     if (deleteMultiOrderStatus || changeMulitOrderStatus) {
       setTotalSelectedOrder(selectedOrderNumber)
@@ -177,7 +170,7 @@ const OrdersListUI = (props) => {
 
   return (
     <>
-      <OrdersListContainer style={{ display: `${displayOrderList}` }}>
+      <OrdersListContainer>
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
@@ -234,14 +227,17 @@ const OrdersListUI = (props) => {
         </OrdersContent>
       </OrdersListContainer>
 
-      {isOpenOrderDetail && (
-        <OrderDetailsContainer>
-          <OrderDetails
-            orderId={orderDetailId}
-            handleBackRedirect={handleBackRedirect}
-          />
-        </OrderDetailsContainer>
-      )}
+      <Modal
+        width='90%'
+        height='90vh'
+        open={isOpenOrderDetail}
+        onClose={() => handleBackRedirect()}
+      >
+        <OrderDetails
+          orderId={orderDetailId}
+        />
+      </Modal>
+
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>
           {selectedOrderNumber}/{totalSelectedOrder}

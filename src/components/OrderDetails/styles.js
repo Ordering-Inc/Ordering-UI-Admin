@@ -16,7 +16,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     div.skeleton-loading {
       > div {
         width: 100%;
@@ -33,9 +33,6 @@ export const WrapperContainer = styled.div`
 
   @media (max-width: 1200px) {
     padding: 30px 0;
-  }
-
-  @media (max-width: 992px) {
     flex-direction: column;
     row-gap: 20px;
     width: 92%;
@@ -49,13 +46,8 @@ export const OrderInfoContent = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 1200px) {
-    padding: 25px 25px 25px 0;
     width: 55%;
-  }
-
-  @media (max-width: 992px) {
     width: 100%;
-
     padding: 20px 0;
   }
 `
@@ -329,29 +321,6 @@ export const OrderBill = styled.div`
     }
   }
 `
-export const BackActions = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 4%;
-  z-index: 999;
-  a {
-    text-decoration: none;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  svg {
-    font-size: 30px;
-    color: #000;
-  }
-
-  @media (max-width: 1200px) {
-    left: 2%;
-  }
-
-  @media print {
-    display: none;
-  }
-`
 export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
@@ -505,10 +474,6 @@ export const ContactInfoContent = styled.div`
 
   @media (max-width: 1200px) {
     padding: 20px 25px;
-    width: 45%;
-  }
-  
-  @media (max-width: 992px) {
     width: 100%;
   }
 `

@@ -11,7 +11,7 @@ import { OrderListing } from '../OrderListing'
 import { DriversModal } from '../DriversModal'
 import { DriversLocation } from '../DriversLocation'
 import { OrderDetails } from '../OrderDetails'
-
+import { Modal } from '../Modal'
 import {
   DeliveryDashboardContainer,
   DeliveryDashboardContent,
@@ -22,8 +22,7 @@ import {
   OrdersOpenButton,
   OrdersCloseButton,
   WrapperTab,
-  Tab,
-  OrderDetailsContainer
+  Tab
 } from './styles'
 
 const DeliveryDashboardUI = (props) => {
@@ -281,14 +280,16 @@ const DeliveryDashboardUI = (props) => {
         </DeliveryDashboardContent>
       </DeliveryDashboardContainer>
 
-      {isOpenOrderDetail && (
-        <OrderDetailsContainer>
-          <OrderDetails
-            orderId={orderDetailId}
-            handleBackRedirect={handleBackRedirect}
-          />
-        </OrderDetailsContainer>
-      )}
+      <Modal
+        width='90%'
+        height='90vh'
+        open={isOpenOrderDetail}
+        onClose={() => handleBackRedirect()}
+      >
+        <OrderDetails
+          orderId={orderDetailId}
+        />
+      </Modal>
     </>
   )
 }

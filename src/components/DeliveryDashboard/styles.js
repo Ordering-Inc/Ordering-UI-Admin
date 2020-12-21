@@ -135,20 +135,3 @@ export const OrdersCloseButton = styled.button`
     top: 80px;
   }
 `
-export const OrderDetailsContainer = styled.div`
-  position: fixed;
-  top: 65px;
-  left: 60px;
-  display: flex;
-  width: calc(100% - 60px);  
-  min-height: calc(100vh - 65px);
-  background: #fff;
-  z-index: 999;
-  height: 100%;
-  overflow: auto;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    margin-left: 0px;
-  }
-`
