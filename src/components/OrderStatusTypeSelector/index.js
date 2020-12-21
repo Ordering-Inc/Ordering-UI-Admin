@@ -53,7 +53,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 'pending',
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('PENDING_ORDER', 'Pending Order')}</p>
+          <p>{t('PENDING', 'Pending')}</p>
         </Option>
       ),
       color: 'primary',
