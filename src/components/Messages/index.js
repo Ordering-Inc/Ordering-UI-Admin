@@ -98,6 +98,7 @@ export const MessagesUI = (props) => {
   }, [sendMessage])
 
   useEffect(() => {
+    if (history) return
     if (load < 3) {
       const chat = document.getElementById('chat')
       chat.scrollTop = chat.scrollHeight
@@ -105,6 +106,7 @@ export const MessagesUI = (props) => {
   }, [load])
 
   useEffect(() => {
+    if (history) return
     const chat = document.getElementById('chat')
     chat.scrollTop = chat.scrollHeight
   }, [messages.messages.length])
@@ -218,11 +220,13 @@ export const MessagesUI = (props) => {
   return (
     <MessagesContainer>
       <WrapperContainer>
-        <BackActions>
-          <a onClick={() => props.onClose()}>
-            <HiOutlineArrowLeft />
-          </a>
-        </BackActions>
+        {!history && (
+          <BackActions>
+            <a onClick={() => props.onClose()}>
+              <HiOutlineArrowLeft />
+            </a>
+          </BackActions>
+        )}
         <HeaderProfile>
           <WrapperHeader>
             {!history && (

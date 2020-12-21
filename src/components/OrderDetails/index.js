@@ -13,7 +13,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DriverSelector } from '../DriverSelector'
 import { Messages } from '../Messages'
-
+import { Modal } from '../Modal'
 import {
   Container,
   WrapperContainer,
@@ -107,14 +107,16 @@ const OrderDetailsUI = (props) => {
   }
 
   const handleOpenMessages = (openMessage) => {
-    orderDetail.current.style.display = 'none'
     if (openMessage === 'customer') {
+      orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: true, business: false, driver: false, history: false })
     }
     if (openMessage === 'business') {
+      orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: false, business: true, driver: false, history: false })
     }
     if (openMessage === 'driver') {
+      orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: false, business: false, driver: true, history: false })
     }
     if (openMessage === 'history') {
@@ -432,7 +434,7 @@ const OrderDetailsUI = (props) => {
           onClickButton={handleBackRedirect}
         />
       )}
-      {(openMessages.driver || openMessages.business || openMessages.customer || openMessages.history) && (
+      {(openMessages.driver || openMessages.business || openMessages.customer) && (
         <ChatContainer>
           <Messages
             orderId={order?.id}
@@ -446,6 +448,18 @@ const OrderDetailsUI = (props) => {
         </ChatContainer>
       )}
 
+      <Modal
+        width='70%'
+        height='70vh'
+        open={openMessages.history}
+        onClose={() => handleCloseMessages()}
+      >
+        <Messages
+          orderId={order?.id}
+          order={order}
+          history={openMessages.history}
+        />
+      </Modal>
     </Container>
   )
 }
