@@ -17,6 +17,7 @@ import { Modal } from '../Modal'
 
 const OrdersListUI = (props) => {
   const {
+    apiConfigList,
     searchValue,
     driversList,
     paymethodsList,
@@ -55,6 +56,7 @@ const OrdersListUI = (props) => {
     UIComponent: OrderListing,
     useDefualtSessionManager: true,
     asDashboard: true,
+    apiConfigList: apiConfigList,
     searchValue: searchValue,
     filterValues: filterValues,
     isSearchByOrderId: true,
@@ -195,7 +197,10 @@ const OrdersListUI = (props) => {
   useEffect(() => {
     const sound = document.getElementById('notification-sound')
     const interval = setInterval(() => {
-      if (notificationModalOpen) sound.play()
+      if (notificationModalOpen) {
+        sound.muted = false
+        sound.play()
+      }
     }, 3000)
     if (!notificationModalOpen) {
       clearInterval(interval)
@@ -278,6 +283,7 @@ const OrdersListUI = (props) => {
         onClose={() => handleBackRedirect()}
       >
         <OrderDetails
+          formatTime={apiConfigList.configList.format_time}
           orderId={orderDetailId}
           driversList={driversList}
           pendingOrder={pendingOrder}
@@ -298,7 +304,7 @@ const OrdersListUI = (props) => {
         </WrapperOrderNotification>
       </Modal>
 
-      <audio id='notification-sound'>
+      <audio id='notification-sound' muted>
         <source src={require('../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
         <source src={require('../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
       </audio>

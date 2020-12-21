@@ -38,6 +38,7 @@ import {
 
 export const OrderItemAccordion = (props) => {
   const {
+    formatTime,
     order,
     drivers,
     preOrder,
@@ -160,7 +161,13 @@ export const OrderItemAccordion = (props) => {
             </CheckBoxContainer>
             <TextBlockContainer>
               <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
-              <SmallText>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</SmallText>
+              <SmallText>
+                {formatTime.value === '24' ? (
+                  dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
+                ) : (
+                  dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
+                )}
+              </SmallText>
             </TextBlockContainer>
           </OrderItemAccordionCell>
 

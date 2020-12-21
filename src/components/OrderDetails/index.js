@@ -57,6 +57,7 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
+    formatTime,
     pendingOrder,
     preOrder,
     driversList,
@@ -159,7 +160,13 @@ const OrderDetailsUI = (props) => {
                 <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
                 {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</p>
+                <p className='date'>
+                  {formatTime.value === '24' ? (
+                    dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
+                  ) : (
+                    dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
+                  )}
+                </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
@@ -189,7 +196,13 @@ const OrderDetailsUI = (props) => {
               <PaymethodCreatedDate>
                 <PaymethodCreatedDateContent>
                   <p>{t('DATE', 'Date')}</p>
-                  <p>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</p>
+                  <p>
+                    {formatTime.value === '24' ? (
+                      dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
+                    ) : (
+                      dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
+                    )}
+                  </p>
                 </PaymethodCreatedDateContent>
               </PaymethodCreatedDate>
               <OrderTypeInfo>

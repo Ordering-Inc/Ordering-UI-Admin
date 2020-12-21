@@ -29,6 +29,7 @@ import {
 
 const DeliveryDashboardUI = (props) => {
   const {
+    apiConfigList,
     driverOrders,
     searchValue,
     driversList,
@@ -64,6 +65,7 @@ const DeliveryDashboardUI = (props) => {
     UIComponent: OrderListing,
     useDefualtSessionManager: true,
     asDashboard: true,
+    apiConfigList: apiConfigList,
     searchValue: searchValue,
     filterValues: filterValues,
     isSearchByOrderId: true,
@@ -205,7 +207,10 @@ const DeliveryDashboardUI = (props) => {
   useEffect(() => {
     const sound = document.getElementById('notification-sound')
     const interval = setInterval(() => {
-      if (notificationModalOpen) sound.play()
+      if (notificationModalOpen) {
+        sound.muted = false
+        sound.play()
+      }
     }, 3000)
     if (!notificationModalOpen) {
       clearInterval(interval)
@@ -320,6 +325,7 @@ const DeliveryDashboardUI = (props) => {
         onClose={() => handleBackRedirect()}
       >
         <OrderDetails
+          formatTime={apiConfigList.configList.format_time}
           orderId={orderDetailId}
           driversList={driversList}
           pendingOrder={pendingOrder}
@@ -340,7 +346,7 @@ const DeliveryDashboardUI = (props) => {
         </WrapperOrderNotification>
       </Modal>
 
-      <audio id='notification-sound'>
+      <audio id='notification-sound' muted>
         <source src={require('../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
         <source src={require('../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
       </audio>

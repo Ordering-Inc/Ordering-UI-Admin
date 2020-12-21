@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import dayjs from 'dayjs'
 import { useHistory } from 'react-router-dom'
 import { useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -27,6 +28,7 @@ import {
 
 export const SmallOrderItemAccordion = (props) => {
   const {
+    formatTime,
     order,
     drivers,
     pendingOrder,
@@ -68,7 +70,13 @@ export const SmallOrderItemAccordion = (props) => {
           </BusinessContent>
         </BusinessInfo>
         <DeliveryInfo>
-          <p>{order?.delivery_datetime}</p>
+          <p>
+            {formatTime.value === '24' ? (
+              dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
+            ) : (
+              dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
+            )}
+          </p>
           <DeliveryType>
             <DeliveryIcon>
               {order?.delivery_type === 1 && (
