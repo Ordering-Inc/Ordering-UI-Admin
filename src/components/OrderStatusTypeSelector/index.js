@@ -87,15 +87,6 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 8,
-      content: (
-        <Option noPadding={noPadding}>
-          <p>{t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')}</p>
-        </Option>
-      ),
-      color: 'primary'
-    },
-    {
       value: 4,
       content: (
         <Option noPadding={noPadding}>
@@ -105,10 +96,10 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
-      value: 9,
+      value: 8,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver')}</p>
+          <p>{t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')}</p>
         </Option>
       ),
       color: 'primary'
@@ -118,6 +109,15 @@ export const OrderStatusTypeSelector = (props) => {
       content: (
         <Option noPadding={noPadding}>
           <p>{t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by Business')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 9,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver')}</p>
         </Option>
       ),
       color: 'primary'

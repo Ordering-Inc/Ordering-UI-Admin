@@ -202,10 +202,10 @@ const OrdersListUI = (props) => {
             {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
               <>
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
                 <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
               </>
             )}
             {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
