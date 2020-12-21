@@ -32,7 +32,10 @@ export const OrderListing = (props) => {
     pagination,
     preOrder,
     pendingOrder,
-    handleOpenOrderDetail
+    registerOrderId,
+    handleOpenOrderDetail,
+    handleNotification,
+    handleResetNotification
   } = props
 
   const theme = useTheme()
@@ -93,6 +96,12 @@ export const OrderListing = (props) => {
       setActive === 'active' ? 'collapse_icon' : 'collapse_icon rotate'
     )
   }
+
+  useEffect(() => {
+    if (registerOrderId === null) return
+    handleNotification(registerOrderId)
+    handleResetNotification()
+  }, [registerOrderId])
 
   return (
     <>

@@ -135,3 +135,14 @@ export const OrdersCloseButton = styled.button`
     top: 80px;
   }
 `
+export const WrapperOrderNotification = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  p {
+    text-align: center;
+    font-size: 20px;
+    margin: 0px;
+  }
+`
+export const WrapperOrderlist = styled.div``

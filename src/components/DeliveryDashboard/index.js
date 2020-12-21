@@ -22,7 +22,9 @@ import {
   OrdersOpenButton,
   OrdersCloseButton,
   WrapperTab,
-  Tab
+  Tab,
+  WrapperOrderNotification,
+  WrapperOrderlist
 } from './styles'
 
 const DeliveryDashboardUI = (props) => {
@@ -54,6 +56,8 @@ const DeliveryDashboardUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [pendingOrder, setPendingOrder] = useState(false)
   const [preOrder, setPreOrder] = useState(false)
+  const [notificationModalOpen, setNotificationModalOpen] = useState(false)
+  const [registerOrderId, setRegisterOrderId] = useState(null)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -190,6 +194,26 @@ const DeliveryDashboardUI = (props) => {
     setIsOpenOrderDetail(true)
   }
 
+  const handleNotification = (orderId) => {
+    setRegisterOrderId(orderId)
+    setNotificationModalOpen(true)
+  }
+  const handleCloseNotificationModal = () => {
+    setNotificationModalOpen(false)
+  }
+
+  useEffect(() => {
+    const sound = document.getElementById('notification-sound')
+    const interval = setInterval(() => {
+      if (notificationModalOpen) sound.play()
+    }, 3000)
+    if (!notificationModalOpen) {
+      clearInterval(interval)
+      return
+    }
+    return () => clearInterval(interval)
+  }, [notificationModalOpen])
+
   return (
     <>
       <DeliveryDashboardContainer>
@@ -225,69 +249,65 @@ const DeliveryDashboardUI = (props) => {
                   <FaRegTimesCircle />
                 </OrdersCloseButton>
               )}
-              {openOrderAndDriver && (
-                <WrapperOrdersAndDriver>
-                  <WrapperTab>
-                    <Tab
-                      active={openTab.order}
-                      onClick={() => handleChangeOrderAndDriver()}
-                    >
-                      {t('ORDERS', 'Orders')}
-                    </Tab>
-                    <Tab
-                      active={openTab.driver}
-                      onClick={() => setOpenTab({ order: false, driver: true })}
-                    >
-                      {t('DRIVERS', 'Drivers')}
-                    </Tab>
-                  </WrapperTab>
-                  <OrderAndDriverListContainer>
-                    {openTab.order && (
+              <WrapperOrdersAndDriver style={{ display: `${openOrderAndDriver ? 'block' : 'none'}` }}>
+                <WrapperTab>
+                  <Tab
+                    active={openTab.order}
+                    onClick={() => handleChangeOrderAndDriver()}
+                  >
+                    {t('ORDERS', 'Orders')}
+                  </Tab>
+                  <Tab
+                    active={openTab.driver}
+                    onClick={() => setOpenTab({ order: false, driver: true })}
+                  >
+                    {t('DRIVERS', 'Drivers')}
+                  </Tab>
+                </WrapperTab>
+                <OrderAndDriverListContainer>
+                  <WrapperOrderlist style={{ display: `${openTab.order ? 'block' : 'none'}` }}>
+                    {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
                       <>
-                        {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
-                          <>
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PreOrdersControlProps} />
-                          </>
-                        )}
-                        {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
-                          <>
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
-                          </>
-                        )}
-                        {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
-                          <>
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
-                          </>
-                        )}
-                        {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
-                          <>
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
-                            <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
-                          </>
-                        )}
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PreOrdersControlProps} />
                       </>
                     )}
-                    {openTab.driver && (
-                      <DriversModal
-                        driversList={driversList}
-                        driverOrders={driverOrders}
-                        updateOrdersSelectedStatus={updateOrdersSelectedStatus}
-                        handleChangeDriverAvailable={handleChangeDriverAvailable}
-                        handleChangeDriverOrders={handleChangeDriverOrdersModal}
-                      />
+                    {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
+                      <>
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
+                      </>
                     )}
-                  </OrderAndDriverListContainer>
-                </WrapperOrdersAndDriver>
-              )}
+                    {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
+                      <>
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
+                      </>
+                    )}
+                    {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
+                      <>
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
+                        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
+                      </>
+                    )}
+                  </WrapperOrderlist>
+                  {openTab.driver && (
+                    <DriversModal
+                      driversList={driversList}
+                      driverOrders={driverOrders}
+                      updateOrdersSelectedStatus={updateOrdersSelectedStatus}
+                      handleChangeDriverAvailable={handleChangeDriverAvailable}
+                      handleChangeDriverOrders={handleChangeDriverOrdersModal}
+                    />
+                  )}
+                </OrderAndDriverListContainer>
+              </WrapperOrdersAndDriver>
             </MapAndOrderContent>
           </DeliveryDashboardInnerContent>
         </DeliveryDashboardContent>
@@ -306,6 +326,24 @@ const DeliveryDashboardUI = (props) => {
           preOrder={preOrder}
         />
       </Modal>
+
+      <Modal
+        width='50%'
+        open={notificationModalOpen}
+        onClose={() => handleCloseNotificationModal()}
+        acceptText={t('OK', 'OK')}
+        onAccept={() => handleCloseNotificationModal()}
+      >
+        <WrapperOrderNotification>
+          <p>{t('ORDERING', 'Ordering')}</p>
+          <p>Order #{registerOrderId} has been ordered.</p>
+        </WrapperOrderNotification>
+      </Modal>
+
+      <audio id='notification-sound'>
+        <source src={require('../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
+        <source src={require('../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
+      </audio>
     </>
   )
 }

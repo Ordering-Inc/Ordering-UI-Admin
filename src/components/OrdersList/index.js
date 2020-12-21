@@ -4,7 +4,8 @@ import {
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
-  WrapperIndicator
+  WrapperIndicator,
+  WrapperOrderNotification
 } from './styles'
 import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
@@ -46,6 +47,8 @@ const OrdersListUI = (props) => {
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const [pendingOrder, setPendingOrder] = useState(false)
   const [preOrder, setPreOrder] = useState(false)
+  const [notificationModalOpen, setNotificationModalOpen] = useState(false)
+  const [registerOrderId, setRegisterOrderId] = useState(null)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -169,6 +172,15 @@ const OrdersListUI = (props) => {
     setIsOpenOrderDetail(true)
   }
 
+  const handleNotification = (orderId) => {
+    setRegisterOrderId(orderId)
+    setNotificationModalOpen(true)
+  }
+
+  const handleCloseNotificationModal = () => {
+    setNotificationModalOpen(false)
+  }
+
   useEffect(() => {
     if (deleteMultiOrderStatus || changeMulitOrderStatus) {
       setTotalSelectedOrder(selectedOrderNumber)
@@ -179,6 +191,18 @@ const OrdersListUI = (props) => {
       }, 500)
     }
   }, [deleteMultiOrderStatus, changeMulitOrderStatus, selectedOrderNumber])
+
+  useEffect(() => {
+    const sound = document.getElementById('notification-sound')
+    const interval = setInterval(() => {
+      if (notificationModalOpen) sound.play()
+    }, 3000)
+    if (!notificationModalOpen) {
+      clearInterval(interval)
+      return
+    }
+    return () => clearInterval(interval)
+  }, [notificationModalOpen])
 
   return (
     <>
@@ -207,32 +231,40 @@ const OrdersListUI = (props) => {
             />
             {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
               <>
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PreOrdersControlProps} />
+                <OrdersListController
+                  handleNotification={handleNotification}
+                  handleOpenOrderDetail={handleOpenOrderDetail}
+                  {...OrdersCommonControlProps} {...PendingOrdersControlProps}
+                />
+                <OrdersListController
+                  handleNotification={handleNotification}
+                  handleOpenOrderDetail={handleOpenOrderDetail}
+                  {...OrdersCommonControlProps} {...PreOrdersControlProps}
+                />
               </>
             )}
             {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
               <>
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
               </>
             )}
             {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
               <>
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
               </>
             )}
             {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
               <>
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
-                <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
+                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
               </>
             )}
           </OrdersInnerContent>
@@ -252,6 +284,24 @@ const OrdersListUI = (props) => {
           preOrder={preOrder}
         />
       </Modal>
+
+      <Modal
+        width='50%'
+        open={notificationModalOpen}
+        onClose={() => handleCloseNotificationModal()}
+        acceptText={t('OK', 'OK')}
+        onAccept={() => handleCloseNotificationModal()}
+      >
+        <WrapperOrderNotification>
+          <p>{t('ORDERING', 'Ordering')}</p>
+          <p>Order #{registerOrderId} has been ordered.</p>
+        </WrapperOrderNotification>
+      </Modal>
+
+      <audio id='notification-sound'>
+        <source src={require('../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
+        <source src={require('../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
+      </audio>
 
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>

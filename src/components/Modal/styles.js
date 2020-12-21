@@ -40,7 +40,7 @@ export const ModalActions = styled.div`
     border-radius: 32px;
     opacity: 1;
     max-width: 300px;
-    margin-top: 50px;
+    margin-top: 10px;
     height: 60px;
   }
 `

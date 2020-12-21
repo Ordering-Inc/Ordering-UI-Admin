@@ -55,3 +55,13 @@ export const WrapperIndicator = styled.div`
   font-weight: 500;
   font-size: 24px;
 `
+export const WrapperOrderNotification = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  p {
+    text-align: center;
+    font-size: 20px;
+    margin: 0px;
+  }
+`
