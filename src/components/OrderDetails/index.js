@@ -267,9 +267,9 @@ const OrderDetailsUI = (props) => {
                 handleUpdateOrderStatus={handleUpdateOrderStatus}
               />
               <WrapperButton>
-                <ButtonLink>
+                {/* <ButtonLink>
                   <img src={theme?.images?.icons?.help} alt='help' />
-                </ButtonLink>
+                </ButtonLink> */}
                 <ButtonLink onClick={() => handleOpenMessages('history')}>
                   <img src={theme?.images?.icons?.timeline} alt='timeline' />
                 </ButtonLink>

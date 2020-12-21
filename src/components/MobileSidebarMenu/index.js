@@ -124,7 +124,7 @@ export const MobileSidebarMenu = (props) => {
           </WrappContent>
         </MenuLink>
 
-        <MenuLink
+        {/* <MenuLink
           active={window.location.pathname === '/support'}
           onClick={() => handleGoToPage({ page: '/support' })}
         >
@@ -136,7 +136,7 @@ export const MobileSidebarMenu = (props) => {
               </TextInfo>
             </MenuLinkText>
           </WrappContent>
-        </MenuLink>
+        </MenuLink> */}
 
       </SidebarContent>
     </Container>

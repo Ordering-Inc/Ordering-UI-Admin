@@ -49,12 +49,12 @@ export const SideMenu = (props) => {
           <MenuLinkIcon src={theme?.images?.icons?.setting} alt='setting' />
         </MenuLink>
 
-        <MenuLink
+        {/* <MenuLink
           active={window.location.pathname === '/support'}
           onClick={() => handleGoToPage({ page: '/support' })}
         >
           <MenuLinkIcon src={theme?.images?.icons?.support} alt='support' />
-        </MenuLink>
+        </MenuLink> */}
 
       </SidebarContent>
     </Container>
