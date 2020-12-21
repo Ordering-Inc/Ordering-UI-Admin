@@ -199,6 +199,7 @@ const OrdersListUI = (props) => {
             />
             <OrdersDashboardControls
               selectedOrderNumber={selectedOrderNumber}
+              filterValues={filterValues}
               handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
               handleDeleteMultiOrders={handleDeleteMultiOrders}
             />

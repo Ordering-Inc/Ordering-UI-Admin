@@ -111,10 +111,6 @@ export const Selected = styled.div`
 
   p {
     margin: 0px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 170px;
   }
 
   @media (max-width: 380px) {

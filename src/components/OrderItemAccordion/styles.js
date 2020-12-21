@@ -90,6 +90,28 @@ export const OrderItemAccordionCell = styled.div`
       margin-left: initial;
     `}
   }
+
+  & > div {
+    & > div {
+      &:first-child {
+        p {
+          margin: 0px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          max-width: 150px;
+      
+          @media (max-width: 1300px) {
+            margin: 0px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 120px;
+          }
+        }
+      }
+    }
+  }
 `
 export const CheckBoxContainer = styled.div`
   color: #404040;

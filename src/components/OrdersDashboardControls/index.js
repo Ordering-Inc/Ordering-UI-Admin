@@ -12,6 +12,7 @@ import { OrderDashboardControlsContainer, InnerContnet } from './styles'
 export const OrdersDashboardControls = (props) => {
   const {
     selectedOrderNumber,
+    filterValues,
     handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus
   } = props
@@ -22,7 +23,7 @@ export const OrdersDashboardControls = (props) => {
     <>
       <OrderDashboardControlsContainer>
         <InnerContnet>
-          <ExportCSV />
+          <ExportCSV filterValues={filterValues} />
           {selectedOrderNumber > 0 && (
             <>
               <OrderDelete
