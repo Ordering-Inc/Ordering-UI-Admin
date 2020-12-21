@@ -191,7 +191,7 @@ export const OrderListing = (props) => {
 
             {orderListView === 'small' && (
               <>
-                {!(orderList.loading || driversList.loading) ? orderList.orders.map(order => (
+                {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                   <React.Fragment key={order.id}>
                     <SmallOrderItemAccordion
                       order={order}
