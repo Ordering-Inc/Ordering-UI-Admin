@@ -296,7 +296,8 @@ const DeliveryDashboardUI = (props) => {
 export const DeliveryDashboard = (props) => {
   const DeliveryDashboardControlProps = {
     ...props,
-    UIComponent: DeliveryDashboardUI
+    UIComponent: DeliveryDashboardUI,
+    driversPropsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo', 'location', 'qualification', 'assigned_orders_count']
   }
   return <OrdersManageController {...DeliveryDashboardControlProps} />
 }

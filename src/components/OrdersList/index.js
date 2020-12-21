@@ -8,9 +8,6 @@ import {
   WrapperIndicator
 } from './styles'
 import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
-// import { useLanguage } from 'ordering-components'
-// import { OrdersManage as OrdersManageController } from '../OrdersManageController'
-// import { OrderList as OrdersListController } from '../OrderListController'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'

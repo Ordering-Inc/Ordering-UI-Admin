@@ -456,11 +456,11 @@ export const PaymethodCreatedDate = styled.div`
 `
 export const PaymethodCreatedDateContent = styled.div`
   p {
-    color:  #151824;
+    color: #182964;
     margin: 0px;
 
     &:last-child {
-      color: #182964;
+      color:  #151824;
     }
   }
 

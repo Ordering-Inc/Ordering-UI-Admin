@@ -211,6 +211,10 @@ export const MessagesUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    console.log('message', messages)
+  }, [messages])
+
   return (
     <MessagesContainer>
       <WrapperContainer>
@@ -362,6 +366,15 @@ export const MessagesUI = (props) => {
                                     <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                   </BubbleConsole>
                                 )}
+                              </MessageConsole>
+                            )}
+                          </>
+                        )}
+                        {tabActive.logistics && (
+                          <>
+                            {message.type === 0 && (
+                              <MessageConsole key={message.id}>
+                                {t('LOGISTICS', 'Logistics')}
                               </MessageConsole>
                             )}
                           </>

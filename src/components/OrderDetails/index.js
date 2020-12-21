@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import dayjs from 'dayjs'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -158,9 +159,9 @@ const OrderDetailsUI = (props) => {
             <OrderInfo>
               <OrderData>
                 <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
-                <p className='uuid'>{order?.uuid}</p>
+                {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>{order?.delivery_datetime}</p>
+                <p className='date'>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
@@ -182,7 +183,7 @@ const OrderDetailsUI = (props) => {
               <PaymethodCreatedDate>
                 <PaymethodCreatedDateContent>
                   <p>{t('DATE', 'Date')}</p>
-                  <p>{order?.paymethod?.created_at}</p>
+                  <p>{dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')}</p>
                 </PaymethodCreatedDateContent>
               </PaymethodCreatedDate>
               <OrderTypeInfo>
