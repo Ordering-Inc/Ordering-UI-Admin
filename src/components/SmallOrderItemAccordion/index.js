@@ -69,19 +69,22 @@ export const SmallOrderItemAccordion = (props) => {
           <p>{order?.delivery_datetime}</p>
           <DeliveryType>
             <DeliveryIcon>
-              {order?.delivery_type === 2 ? (
+              {order?.delivery_type === 1 && (
                 <img
                   src={theme?.images?.icons?.driverDelivery}
                   alt='Delivery'
                 />
-              ) : (
-                <img src={theme?.images?.icons?.pickUp} alt='pick up' />
+              )}
+              {order?.delivery_type === 2 && (
+                <img
+                  src={theme?.images?.icons?.pickUp}
+                  alt='pick up'
+                />
               )}
             </DeliveryIcon>
             <DeliveryName>
-              {order?.delivery_type === 2
-                ? t('DELIVERY', 'Delivery')
-                : t('PICKUP', 'Pickup')}
+              {order?.delivery_type === 1 && (t('DELIVERY', 'Delivery'))}
+              {order?.delivery_type === 2 && (t('PICKUP', 'Pickup'))}
             </DeliveryName>
           </DeliveryType>
         </DeliveryInfo>

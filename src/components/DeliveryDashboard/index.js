@@ -74,7 +74,7 @@ const DeliveryDashboardUI = (props) => {
   const PendingOrdersControlProps = {
     orderStatus: [0],
     pendingOrder: true,
-    orderStatusTitle: t('PENDING_ORDERS', 'Pendig orders')
+    orderStatusTitle: t('PENDING', 'Pendig')
   }
 
   const PreOrdersControlProps = {
