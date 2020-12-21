@@ -232,13 +232,13 @@ const DeliveryDashboardUI = (props) => {
                   <OrderAndDriverListContainer>
                     {openTab.order && (
                       <>
-                        {ordersStatusGroup === 'pending' && (
+                        {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
                           <>
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PendingOrdersControlProps} />
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PreOrdersControlProps} />
                           </>
                         )}
-                        {ordersStatusGroup === 'inProgress' && (
+                        {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
                           <>
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
@@ -247,13 +247,13 @@ const DeliveryDashboardUI = (props) => {
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
                           </>
                         )}
-                        {ordersStatusGroup === 'completed' && (
+                        {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
                           <>
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
                           </>
                         )}
-                        {ordersStatusGroup === 'cancelled' && (
+                        {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
                           <>
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
                             <OrdersListController handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
