@@ -58,7 +58,7 @@ export const SmallOrderItemAccordion = (props) => {
   return (
     <OrderItemContainer onClick={(e) => handleGoToPage(e)}>
       <WrapperInfo>
-        <BusinessInfo>
+        <BusinessInfo className='order-item-business'>
           <WrapperAccordionImage>
             <AccordionImage bgimage={order?.business?.logo} />
           </WrapperAccordionImage>

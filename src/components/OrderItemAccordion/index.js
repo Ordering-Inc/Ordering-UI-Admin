@@ -171,7 +171,7 @@ export const OrderItemAccordion = (props) => {
             </TextBlockContainer>
           </OrderItemAccordionCell>
 
-          <OrderItemAccordionCell>
+          <OrderItemAccordionCell className='order-item-business'>
             <WrapperAccordionImage>
               <AccordionImage bgimage={order?.business?.logo} />
             </WrapperAccordionImage>

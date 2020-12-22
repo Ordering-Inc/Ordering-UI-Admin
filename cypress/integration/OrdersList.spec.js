@@ -10,11 +10,15 @@ context('Home Page', () => {
     cy.visit('/orders')
   })
 
-  it('Check UI', () => {
+  it('Check Main UI', () => {
     cy.get('.order-content').should('exist')
     cy.get('.order-status-filterbar').should('exist')
     cy.get('.skeleton-loading').should('be.visible')
     cy.get('button[name=filter-btn').should('be.visible').click()
     cy.get('.filter-modal').should('be.visible')
+    cy.get('.modal-close-icon').click()
+    cy.get('.order-item-business:first').first().click()
+    cy.get('.order-detail').should('exist')
+    cy.get('.modal-close-icon').click()
   })
 })

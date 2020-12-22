@@ -33,7 +33,7 @@ const ModalUI = (props) => {
       isTransparent={isTransparent}
     >
       {!hideCloseDefault && (
-        <ModalIcon>
+        <ModalIcon className='modal-close-icon'>
           <MdClose onClick={() => onClose()} />
         </ModalIcon>
       )}

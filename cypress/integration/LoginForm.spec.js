@@ -9,7 +9,7 @@ context('LoginForm', () => {
     cy.get('img').should('be.visible')
     cy.get('[type="email"]').should('be.visible')
     cy.get('[type="password"]').should('be.visible')
-    cy.get('button').contains('Login').should('be.visible')
+    cy.get('button').contains('LOGIN').should('be.visible')
   })
 
   it('Login', () => {

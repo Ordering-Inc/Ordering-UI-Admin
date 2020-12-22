@@ -151,7 +151,7 @@ const OrderDetailsUI = (props) => {
   }, [order])
 
   return (
-    <Container>
+    <Container className='order-detail'>
       {order && Object.keys(order).length > 0 && (
         <WrapperContainer ref={orderDetail}>
           <OrderInfoContent className='order-info'>

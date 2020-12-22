@@ -243,6 +243,7 @@ const DeliveryDashboardUI = (props) => {
               <DriversLocation
                 driversList={driversList}
                 driverAvailable={driverAvailable}
+                apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               />
 
               {!openOrderAndDriver ? (
