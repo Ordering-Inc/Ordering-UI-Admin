@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { useLanguage, OrdersManage as OrdersManageController, OrderList as OrdersListController } from 'ordering-components'
-import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
+import { useWindowSize } from '../../../src/hooks/useWindowSize'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import FaRegTimesCircle from '@meronex/icons/fa/FaRegTimesCircle'
 import { OrderStatusFilterBar } from '../../../src/components/OrderStatusFilterBar'
@@ -245,7 +245,6 @@ const DeliveryDashboardUI = (props) => {
               <DriversLocation
                 driversList={driversList}
                 driverAvailable={driverAvailable}
-                apiKey='AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
               />
 
               {!openOrderAndDriver ? (
@@ -361,7 +360,7 @@ export const DeliveryDashboard = (props) => {
   const DeliveryDashboardControlProps = {
     ...props,
     UIComponent: DeliveryDashboardUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo', 'location', 'qualification', 'assigned_orders_count']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo', 'location', 'qualification', 'assigned_orders_count', 'last_order_assigned_at']
   }
   return <OrdersManageController {...DeliveryDashboardControlProps} />
 }

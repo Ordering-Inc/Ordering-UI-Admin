@@ -37,7 +37,7 @@ export const DriversLocation = (props) => {
         return
       }
       for (const driver of driversList.drivers) {
-        const marker = driver.location
+        const marker = driver.location !== null ? driver.location : defaultCenter
         const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       }
@@ -46,7 +46,7 @@ export const DriversLocation = (props) => {
     if (driverAvailable === 'online') {
       for (const driver of _onlineDrivers) {
         if (driver.available) {
-          const marker = driver.location
+          const marker = driver.location !== null ? driver.location : defaultCenter
           const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
           bounds.extend(newPoint)
         }
@@ -56,7 +56,7 @@ export const DriversLocation = (props) => {
     if (driverAvailable === 'offline') {
       for (const driver of _offlineDrivers) {
         if (!driver.available) {
-          const marker = driver.location
+          const marker = driver.location !== null ? driver.location : defaultCenter
           const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
           bounds.extend(newPoint)
         }
@@ -129,8 +129,8 @@ export const DriversLocation = (props) => {
           driversList.drivers.map((driver) => (
             <WrapperMapMarker
               offline={!driver.available}
-              lat={driver.location.lat}
-              lng={driver.location.lng}
+              lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
+              lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
               key={driver.id}
             >
               {driver.photo ? (
@@ -145,8 +145,8 @@ export const DriversLocation = (props) => {
           onlineDrivers.map((driver) => (
             <WrapperMapMarker
               offline={!driver.available}
-              lat={driver.location.lat}
-              lng={driver.location.lng}
+              lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
+              lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
               key={driver.id}
             >
               {driver.photo ? (
@@ -161,8 +161,8 @@ export const DriversLocation = (props) => {
           offlineDrivers.map((driver) => (
             <WrapperMapMarker
               offline={!driver.available}
-              lat={driver.location.lat}
-              lng={driver.location.lng}
+              lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
+              lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
               key={driver.id}
             >
               {driver.photo ? (

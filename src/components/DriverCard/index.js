@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components'
-import { getStarWidth, getAgoMinutes } from '../../utils'
+import { useLanguage, useUtils } from 'ordering-components'
+import { getStarWidth } from '../../utils'
 import BsChat from '@meronex/icons/bs/BsChat'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
@@ -28,6 +28,8 @@ export const DriverCard = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ getTimeAgo }] = useUtils()
+
   const [ordersAndDriverModalOpen, setOrdersAndDriverModalOpen] = useState(false)
 
   const handleOpenDriverOrders = () => {
@@ -58,7 +60,7 @@ export const DriverCard = (props) => {
           </InfoBlock>
           <InfoBlock>
             <InfoCell>
-              <p>{getAgoMinutes(driver.last_order_assigned_at)}</p>
+              <p>{getTimeAgo(driver.last_order_assigned_at)}</p>
               <WrapperStar width={getStarWidth(driver.qualification)} />
             </InfoCell>
             <InfoCell>

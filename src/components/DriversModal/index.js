@@ -36,10 +36,6 @@ export const DriversModal = (props) => {
     handleChangeDriverAvailable(driverAvailable)
   }, [driverAvailable])
 
-  useEffect(() => {
-    console.log('driverlist', driversList)
-  }, [driversList])
-
   return (
     <>
       {!driversList.loading ? (

@@ -31,7 +31,7 @@ export const GroupTypeSelector = (props) => {
         return {
           value: group.id,
           content: (
-            <Option>{group.drivers.length}. {group.name}</Option>
+            <Option>{group.id}. {group.name}</Option>
           )
         }
       })

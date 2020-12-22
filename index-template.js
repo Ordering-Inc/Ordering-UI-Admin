@@ -70,14 +70,14 @@ import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
 
 const configFile = {
-  project: 'luisv4',
+  project: 'dragonteam1',
   api: {
-    url: 'https://apiv4-dev.ordering.co',
+    url: 'https://apiv4.ordering.co',
     language: 'en',
     version: 'v400'
   },
   socket: {
-    url: 'https://socket-dev.ordering.co'
+    url: 'https://socket.ordering.co'
   }
 }
 
