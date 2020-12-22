@@ -161,7 +161,7 @@ const OrderDetailsUI = (props) => {
                 {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>
-                  {formatTime.value === '24' ? (
+                  {formatTime?.value === '24' ? (
                     dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
                   ) : (
                     dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
@@ -197,7 +197,7 @@ const OrderDetailsUI = (props) => {
                 <PaymethodCreatedDateContent>
                   <p>{t('DATE', 'Date')}</p>
                   <p>
-                    {formatTime.value === '24' ? (
+                    {formatTime?.value === '24' ? (
                       dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
                     ) : (
                       dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')

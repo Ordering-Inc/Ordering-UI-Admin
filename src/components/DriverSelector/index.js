@@ -25,7 +25,7 @@ const DriverSelectorUI = (props) => {
     defaultValue,
     isPhoneView,
     isFilterView,
-    filterValues,
+    singleDriverIds,
     small,
     driverActionStatus,
     handleAssignDriver,
@@ -167,8 +167,7 @@ const DriverSelectorUI = (props) => {
       <>
         {!driversList.loading ? (
           <MultiSelect
-            // defaultValue={filterValues.businessIds}
-            defaultValue={filterValues.driverIds}
+            defaultValue={singleDriverIds}
             placeholder={Placeholder}
             options={driversMultiOptionList}
             optionInnerMargin='10px'

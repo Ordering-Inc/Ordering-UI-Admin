@@ -25,6 +25,7 @@ export const OrderContentHeader = (props) => {
     active,
     handleChangeSearch,
     searchValue,
+    driverGroupList,
     driversList,
     paymethodsList,
     businessesList,
@@ -94,6 +95,7 @@ export const OrderContentHeader = (props) => {
       <FilterGroupList
         open={filterModalOpen}
         handleCloseFilterModal={handleCloseFilterModal}
+        driverGroupList={driverGroupList}
         driversList={driversList}
         paymethodsList={paymethodsList}
         businessesList={businessesList}

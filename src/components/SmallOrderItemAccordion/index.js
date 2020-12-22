@@ -71,7 +71,7 @@ export const SmallOrderItemAccordion = (props) => {
         </BusinessInfo>
         <DeliveryInfo>
           <p>
-            {formatTime.value === '24' ? (
+            {formatTime?.value === '24' ? (
               dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
             ) : (
               dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')

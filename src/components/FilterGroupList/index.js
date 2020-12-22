@@ -1,7 +1,5 @@
 import React from 'react'
-// import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components'
-import { useLanguage } from 'ordering-components'
-import { OrdersFilter as OrdersFilterController } from '../OrdersFilterController'
+import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components'
 import { Modal } from '../Modal'
 import { GroupTypeSelector } from '../GroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
@@ -22,6 +20,8 @@ const FilterGroupListUI = (props) => {
     open,
     handleCloseFilterModal,
     filterValues,
+    singleDriverIds,
+    driverGroupList,
     driversList,
     paymethodsList,
     businessesList,
@@ -69,6 +69,7 @@ const FilterGroupListUI = (props) => {
       <FilterGroupListContainer className='filter-modal'>
         <WrapperRow>
           <GroupTypeSelector
+            driverGroupList={driverGroupList}
             handleChangeGroup={handleChangeGroup}
             filterValues={filterValues}
           />
@@ -88,7 +89,7 @@ const FilterGroupListUI = (props) => {
           <DriverSelector
             isFilterView
             drivers={driversList.drivers}
-            filterValues={filterValues}
+            singleDriverIds={singleDriverIds}
             handleChangeDriver={handleChangeDriver}
           />
         </WrapperRow>
@@ -121,7 +122,8 @@ const FilterGroupListUI = (props) => {
 export const FilterGroupList = (props) => {
   const FilterControlProps = {
     ...props,
-    UIComponent: FilterGroupListUI
+    UIComponent: FilterGroupListUI,
+    driverGroupList: props.driverGroupList
   }
   return (
     <>

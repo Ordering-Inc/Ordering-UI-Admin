@@ -32,6 +32,7 @@ const DeliveryDashboardUI = (props) => {
     apiConfigList,
     driverOrders,
     searchValue,
+    driverGroupList,
     driversList,
     paymethodsList,
     businessesList,
@@ -231,6 +232,7 @@ const DeliveryDashboardUI = (props) => {
             <OrderContentHeader
               active='deliveryDashboard'
               searchValue={searchValue}
+              driverGroupList={driverGroupList}
               driversList={driversList}
               paymethodsList={paymethodsList}
               businessesList={businessesList}

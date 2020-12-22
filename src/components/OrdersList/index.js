@@ -19,6 +19,7 @@ const OrdersListUI = (props) => {
   const {
     apiConfigList,
     searchValue,
+    driverGroupList,
     driversList,
     paymethodsList,
     businessesList,
@@ -221,6 +222,7 @@ const OrdersListUI = (props) => {
             <OrderContentHeader
               active='orders'
               searchValue={searchValue}
+              driverGroupList={driverGroupList}
               driversList={driversList}
               paymethodsList={paymethodsList}
               businessesList={businessesList}

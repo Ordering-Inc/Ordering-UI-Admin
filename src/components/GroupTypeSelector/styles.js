@@ -27,8 +27,3 @@ export const Option = styled.div`
     `} 
   }
 `
-
-export const OptionType = styled.div`
-`
-export const OptionValue = styled.div`
-`
