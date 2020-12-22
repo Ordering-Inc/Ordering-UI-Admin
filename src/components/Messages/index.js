@@ -38,7 +38,9 @@ import {
   HeaderOnline,
   WrapperHitoryHeader,
   TabItem,
-  SkeletonHitory
+  SkeletonHitory,
+  WrapperOrderHistory,
+  WrapperLogistics
 } from './styles'
 import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
@@ -48,7 +50,7 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Alert } from '../Confirm'
-
+import { Logistics } from '../Logistics'
 export const MessagesUI = (props) => {
   const {
     order,
@@ -213,10 +215,6 @@ export const MessagesUI = (props) => {
     }
   }, [])
 
-  useEffect(() => {
-    console.log('message', messages)
-  }, [messages])
-
   return (
     <MessagesContainer>
       <WrapperContainer>
@@ -345,44 +343,36 @@ export const MessagesUI = (props) => {
                   <React.Fragment key={message.id}>
                     {history && (
                       <>
-                        {tabActive.orderHistory && (
-                          <>
-                            {message.type === 1 && (
-                              <MessageConsole key={message.id}>
-                                {message.change?.attribute !== 'driver_id' ? (
-                                  <BubbleConsole>
-                                    {t('ORDER', 'Order')} {' '}
-                                    <strong>{message.change.attribute}</strong> {}
-                                    {t('CHANGED_FROM', 'Changed from')} {' '}
-                                    {message.change.old !== null && (
-                                      <>
-                                        <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
-                                      </>
-                                    )}
-                                    <> {t('TO', 'to')} {' '} <strong>{getStatus(parseInt(message.change.new, 10))}</strong> </>
-                                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                  </BubbleConsole>
-                                ) : (
-                                  <BubbleConsole>
-                                    <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                    {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                    {message.comment && (<><br /> {message.comment.length}</>)}
-                                    <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                  </BubbleConsole>
-                                )}
-                              </MessageConsole>
-                            )}
-                          </>
-                        )}
-                        {tabActive.logistics && (
-                          <>
-                            {message.type === 0 && (
-                              <MessageConsole key={message.id}>
-                                {t('LOGISTICS', 'Logistics')}
-                              </MessageConsole>
-                            )}
-                          </>
-                        )}
+                        <WrapperOrderHistory style={{ display: `${tabActive.orderHistory ? 'block' : 'none'}` }}>
+                          {message.type === 1 && (
+                            <MessageConsole key={message.id}>
+                              {message.change?.attribute !== 'driver_id' ? (
+                                <BubbleConsole>
+                                  {t('ORDER', 'Order')} {' '}
+                                  <strong>{message.change.attribute}</strong> {}
+                                  {t('CHANGED_FROM', 'Changed from')} {' '}
+                                  {message.change.old !== null && (
+                                    <>
+                                      <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
+                                    </>
+                                  )}
+                                  <> {t('TO', 'to')} {' '} <strong>{getStatus(parseInt(message.change.new, 10))}</strong> </>
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleConsole>
+                              ) : (
+                                <BubbleConsole>
+                                  <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                  {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                  {message.comment && (<><br /> {message.comment.length}</>)}
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </BubbleConsole>
+                              )}
+                            </MessageConsole>
+                          )}
+                        </WrapperOrderHistory>
+                        <WrapperLogistics style={{ display: `${tabActive.logistics ? 'block' : 'none'}` }}>
+                          <Logistics orderId={order.id} />
+                        </WrapperLogistics>
                       </>
                     )}
                     {!history && (message.author.level === 0 || message.author.level === messageLevel) && (
