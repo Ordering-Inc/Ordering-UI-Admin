@@ -136,11 +136,6 @@ export const ProductItemAccordion = (props) => {
           ) : (
             <ProductQuantity>
               {product?.quantity}
-              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
-                <p>
-                  <IosArrowDown className={`${setRotate}`} />
-                </p>
-              )}
             </ProductQuantity>
           )}
           {product?.images && (
@@ -178,6 +173,11 @@ export const ProductItemAccordion = (props) => {
               <span>
                 {getProductPrice(product)}
               </span>
+              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
+                <p>
+                  <IosArrowDown className={`${setRotate}`} />
+                </p>
+              )}
             </ProductPrice>
             {isCartProduct && (
               <ProductActions>

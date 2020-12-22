@@ -17,5 +17,6 @@ context('Home Page', () => {
     cy.get('button[name=order-close]').should('exist')
     cy.get('.order-item-business:first').first().click()
     cy.get('.order-detail').should('exist')
+    cy.get('.modal-close-icon').click()
   })
 })
