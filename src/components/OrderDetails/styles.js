@@ -402,6 +402,7 @@ export const PaymethodContent = styled.div`
   column-gap: 10px;
   align-items: center;  
   color: #151824;
+  font-size: 13px;
 
   img {
     width: 15px;
@@ -430,6 +431,7 @@ export const PaymethodCreatedDateContent = styled.div`
 
     &:last-child {
       color:  #151824;
+      font-size: 13px;
     }
   }
 
@@ -460,6 +462,7 @@ export const OrderTypeContent = styled.div`
   column-gap: 10px;
   align-items: center;  
   color: #151824;
+  font-size: 13px;
 
   img {
     width: 13px;

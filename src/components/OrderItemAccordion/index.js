@@ -58,6 +58,7 @@ export const OrderItemAccordion = (props) => {
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [isChecked, setIsChecked] = useState(false)
   const [orderTotalPrice, setOrderTotalPrice] = useState(0)
+  const [subTotalPrice, setSubTotalPrice] = useState(0)
   const checkbox = useRef(null)
   const content = useRef(null)
   const toggleBtn = useRef(null)
@@ -109,7 +110,12 @@ export const OrderItemAccordion = (props) => {
         }
       }
     }
-    return parsePrice(price)
+    return price
+  }
+
+  const getTaxPrice = () => {
+    const taxPrice = subTotalPrice * order?.tax / 100
+    return parsePrice(taxPrice)
   }
 
   useEffect(() => {
@@ -117,22 +123,29 @@ export const OrderItemAccordion = (props) => {
   }, [])
 
   useEffect(() => {
-    let _orderTotalPrice = order.subtotal
+    let _orderSubprice = 0
+    for (const product of order.products) {
+      _orderSubprice += getProductPrice(product)
+    }
+    setSubTotalPrice(_orderSubprice)
+  }, [order])
+
+  useEffect(() => {
+    let _orderTotalPrice = subTotalPrice
     if (order?.service_fee > 0) {
-      _orderTotalPrice += order?.subtotal * order?.tax / 100 + order?.subtotal * order?.service_fee / 100
+      _orderTotalPrice += subTotalPrice * order?.tax / 100 + subTotalPrice * order?.service_fee / 100
     }
     if (order?.deliveryFee > 0) {
-      _orderTotalPrice += order?.deliveryFee
+      _orderTotalPrice += order.deliveryFee
     }
     if (order?.driver_tip > 0) {
-      _orderTotalPrice += order?.subtotal * order?.driver_tip / 100
+      _orderTotalPrice += subTotalPrice * order.driver_tip / 100
     }
     if (order.discount > 0) {
       _orderTotalPrice -= order.discount
     }
-
     setOrderTotalPrice(_orderTotalPrice)
-  }, [])
+  }, [subTotalPrice])
 
   return (
     <>
@@ -334,7 +347,7 @@ export const OrderItemAccordion = (props) => {
                       <td>{parsePrice(product?.price)}</td>
                       <td>X {product.quantity}</td>
                       <td>{product.comment}</td>
-                      <td>{getProductPrice(product)}</td>
+                      <td>{parsePrice(getProductPrice(product))}</td>
                     </tr>
                   )
                 })}
@@ -344,7 +357,9 @@ export const OrderItemAccordion = (props) => {
                   <td />
                   <td />
                   <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>{parsePrice(order?.subtotal)}</td>
+                  <td>
+                    {order?.subtotal ? parsePrice(order.subtotal) : parsePrice(subTotalPrice)}
+                  </td>
                 </tr>
                 {order?.service_fee > 0 && (
                   <tr className='subFee'>
@@ -352,7 +367,9 @@ export const OrderItemAccordion = (props) => {
                     <td />
                     <td />
                     <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-                    <td>{parsePrice(order?.subtotal * order?.tax / 100)}</td>
+                    <td>
+                      {getTaxPrice()}
+                    </td>
                   </tr>
                 )}
                 <tr className='subFee'>
@@ -368,7 +385,7 @@ export const OrderItemAccordion = (props) => {
                     <td />
                     <td />
                     <td>{t('DRIVER_TIP', 'Driver Tip')}</td>
-                    <td>{parsePrice(order?.driver_tip)}</td>
+                    <td>{parsePrice(subTotalPrice * order?.driver_tip / 100)}</td>
                   </tr>
                 )}
                 {order?.service_fee > 0 && (

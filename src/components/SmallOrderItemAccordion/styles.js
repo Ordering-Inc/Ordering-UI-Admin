@@ -22,7 +22,7 @@ export const WrapperAccordionImage = styled.div`
   height: 50px;
   width: 50px;
   border: 1px solid #e3e3e3;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0px;
 
   ${({ small }) => small && css`
@@ -49,7 +49,7 @@ const AccordionImageStyled = styled.div`
   background-size: contain;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 5px;
 `
 export const AccordionImage = (props) => {
   return (
