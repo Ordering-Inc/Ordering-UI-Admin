@@ -21,7 +21,6 @@ import {
 
 export const OrderListing = (props) => {
   const {
-    apiConfigList,
     orderList,
     driversList,
     selectedOrderIds,
@@ -140,7 +139,6 @@ export const OrderListing = (props) => {
                     <React.Fragment key={order.id}>
                       {orderListView === 'big' && (
                         <OrderItemAccordion
-                          formatTime={apiConfigList.configList.format_time}
                           order={order}
                           drivers={driversList.drivers}
                           pendingOrder={pendingOrder}
@@ -205,7 +203,6 @@ export const OrderListing = (props) => {
                 {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                   <React.Fragment key={order.id}>
                     <SmallOrderItemAccordion
-                      formatTime={apiConfigList.configList.format_time}
                       order={order}
                       drivers={driversList.drivers}
                       pendingOrder={pendingOrder}

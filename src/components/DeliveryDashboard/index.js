@@ -29,7 +29,6 @@ import {
 
 const DeliveryDashboardUI = (props) => {
   const {
-    apiConfigList,
     driverOrders,
     searchValue,
     driverGroupList,
@@ -66,7 +65,6 @@ const DeliveryDashboardUI = (props) => {
     UIComponent: OrderListing,
     useDefualtSessionManager: true,
     asDashboard: true,
-    apiConfigList: apiConfigList,
     searchValue: searchValue,
     filterValues: filterValues,
     isSearchByOrderId: true,
@@ -327,7 +325,6 @@ const DeliveryDashboardUI = (props) => {
         onClose={() => handleBackRedirect()}
       >
         <OrderDetails
-          formatTime={apiConfigList.configList.format_time}
           orderId={orderDetailId}
           driversList={driversList}
           pendingOrder={pendingOrder}

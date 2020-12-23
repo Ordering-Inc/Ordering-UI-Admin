@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import dayjs from 'dayjs'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -57,7 +56,6 @@ import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
-    formatTime,
     pendingOrder,
     preOrder,
     driversList,
@@ -67,7 +65,7 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
   const theme = useTheme()
-  const [{ parsePrice, parseNumber }] = useUtils()
+  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const orderDetail = useRef(null)
 
@@ -161,11 +159,7 @@ const OrderDetailsUI = (props) => {
                 {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>
-                  {formatTime?.value === '24' ? (
-                    dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
-                  ) : (
-                    dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
-                  )}
+                  {parseDate(order?.delivery_datetime)}
                 </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
@@ -197,11 +191,7 @@ const OrderDetailsUI = (props) => {
                 <PaymethodCreatedDateContent>
                   <p>{t('DATE', 'Date')}</p>
                   <p>
-                    {formatTime?.value === '24' ? (
-                      dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
-                    ) : (
-                      dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
-                    )}
+                    {parseDate(order?.delivery_datetime)}
                   </p>
                 </PaymethodCreatedDateContent>
               </PaymethodCreatedDate>

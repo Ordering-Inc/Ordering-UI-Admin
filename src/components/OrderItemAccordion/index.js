@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import dayjs from 'dayjs'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -38,7 +37,6 @@ import {
 
 export const OrderItemAccordion = (props) => {
   const {
-    formatTime,
     order,
     drivers,
     preOrder,
@@ -52,7 +50,7 @@ export const OrderItemAccordion = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseNumber }] = useUtils()
+  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const history = useHistory()
 
   const [setActive, setActiveState] = useState('')
@@ -162,11 +160,7 @@ export const OrderItemAccordion = (props) => {
             <TextBlockContainer>
               <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
               <SmallText>
-                {formatTime?.value === '24' ? (
-                  dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
-                ) : (
-                  dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
-                )}
+                {parseDate(order?.delivery_datetime)}
               </SmallText>
             </TextBlockContainer>
           </OrderItemAccordionCell>

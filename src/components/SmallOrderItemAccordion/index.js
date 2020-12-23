@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
-import dayjs from 'dayjs'
 import { useHistory } from 'react-router-dom'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -28,7 +27,6 @@ import {
 
 export const SmallOrderItemAccordion = (props) => {
   const {
-    formatTime,
     order,
     drivers,
     pendingOrder,
@@ -39,6 +37,7 @@ export const SmallOrderItemAccordion = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const history = useHistory()
+  const [{ parseDate }] = useUtils()
 
   const driverSelectorRef = useRef(null)
   const orderStatusRef = useRef(null)
@@ -71,11 +70,7 @@ export const SmallOrderItemAccordion = (props) => {
         </BusinessInfo>
         <DeliveryInfo>
           <p>
-            {formatTime?.value === '24' ? (
-              dayjs(order?.delivery_datetime).format('YYYY-MM-DD HH:mm')
-            ) : (
-              dayjs(order?.delivery_datetime).format('YYYY-MM-DD hh:mm A')
-            )}
+            {parseDate(order?.delivery_datetime)}
           </p>
           <DeliveryType>
             <DeliveryIcon>

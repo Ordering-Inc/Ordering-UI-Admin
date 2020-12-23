@@ -17,7 +17,6 @@ import { Modal } from '../Modal'
 
 const OrdersListUI = (props) => {
   const {
-    apiConfigList,
     searchValue,
     driverGroupList,
     driversList,
@@ -57,7 +56,6 @@ const OrdersListUI = (props) => {
     UIComponent: OrderListing,
     useDefualtSessionManager: true,
     asDashboard: true,
-    apiConfigList: apiConfigList,
     searchValue: searchValue,
     filterValues: filterValues,
     isSearchByOrderId: true,
@@ -285,7 +283,6 @@ const OrdersListUI = (props) => {
         onClose={() => handleBackRedirect()}
       >
         <OrderDetails
-          formatTime={apiConfigList.configList.format_time}
           orderId={orderDetailId}
           driversList={driversList}
           pendingOrder={pendingOrder}

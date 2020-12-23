@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 export const OrderItemContainer = styled.div`
   border-left: 5px solid;
   border-color: #0e9b55;
-  padding: 15px;
+  padding: 15px 10px;
   border-bottom: 1px solid #F2F2F2;
   width: 100%;
   box-sizing: border-box;
@@ -71,13 +71,17 @@ export const BusinessInfo = styled.div`
 export const BusinessContent = styled.div`
   h1 {
     color: #000000;
-    font-size: 16px;
+    font-size: 14px;
     margin: 0px;
   }
   p {
     color: #000000;
     font-size: 14px;
     margin: 0px;
+    max-width: 90px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 `
 export const DeliveryInfo = styled.div`
