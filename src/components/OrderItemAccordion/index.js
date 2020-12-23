@@ -110,7 +110,7 @@ export const OrderItemAccordion = (props) => {
         }
       }
     }
-    return price
+    return parseFloat(price.toFixed(2))
   }
 
   const getTaxPrice = () => {
@@ -121,7 +121,7 @@ export const OrderItemAccordion = (props) => {
     if (order.tax_type === 1) {
       taxPrice = order.tax
     }
-    return taxPrice
+    return parseFloat(taxPrice.toFixed(2))
   }
 
   useEffect(() => {
@@ -136,6 +136,7 @@ export const OrderItemAccordion = (props) => {
     if (order?.subtotal > 0) {
       _orderSubprice = order.subtotal
     }
+    _orderSubprice = parseFloat(_orderSubprice.toFixed(2))
     setSubTotalPrice(_orderSubprice)
   }, [order])
 
@@ -151,9 +152,11 @@ export const OrderItemAccordion = (props) => {
     if (order?.driver_tip > 0) {
       _orderTotalPrice += subTotalPrice * order.driver_tip / 100
     }
+
     if (order.discount > 0) {
       _orderTotalPrice -= order.discount
     }
+    _orderTotalPrice = parseFloat(_orderTotalPrice.toFixed(2))
     setOrderTotalPrice(_orderTotalPrice)
   }, [subTotalPrice])
 
