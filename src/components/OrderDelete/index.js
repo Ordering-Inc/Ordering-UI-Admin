@@ -26,6 +26,11 @@ const OrderDeleteUI = (props) => {
     setPassword(e.target.value)
   }
 
+  const handleModalOpen = () => {
+    setPassword('')
+    setCheckPasswordModalOpen(true)
+  }
+
   useEffect(() => {
     handleChangePassword(password)
   }, [password])
@@ -45,7 +50,7 @@ const OrderDeleteUI = (props) => {
         color='primary'
         borderRadius='6px'
         withIcon
-        onClick={() => setCheckPasswordModalOpen(true)}
+        onClick={() => handleModalOpen()}
       >
         {width > 600 && t('DELETE', 'Delete')}
         <FaTrash />
@@ -61,7 +66,13 @@ const OrderDeleteUI = (props) => {
         <WrapperCheckPassword>
           <h3>{t('CONFIRM_PASSWORD', 'Confirm password')}</h3>
           <p>{t('TYPE_YOUR_PASSWORD_TO_CONFIRM_DELETE', 'Type your password to confirm delete.')}</p>
-          <input type='password' value={password} placeholder={t('PASSWORD', 'password')} onChange={(e) => handlePassword(e)} />
+          <input
+            autocomplete='new-password'
+            type='password'
+            value={password}
+            placeholder={t('PASSWORD', 'password')}
+            onChange={(e) => handlePassword(e)}
+          />
           <ErrorText>
             {checkPasswordStatus.error}
           </ErrorText>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components'
 import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../hooks/useWindowSize'
@@ -28,6 +28,16 @@ const ExportCSVUI = (props) => {
     setPopoverOpen(false)
     handleGetCsvFilteredExport()
   }
+
+  const closePopover = () => {
+    setPopoverOpen(false)
+  }
+
+  useEffect(() => {
+    if (!popoverOpen) return
+    document.addEventListener('click', closePopover)
+    return () => document.removeEventListener('click', closePopover)
+  }, [popoverOpen])
 
   return (
     <WrapperExportButton>
