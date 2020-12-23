@@ -39,7 +39,6 @@ import {
   WrapperHitoryHeader,
   TabItem,
   SkeletonHitory,
-  WrapperOrderHistory,
   WrapperLogistics
 } from './styles'
 import { Image as ImageWithFallback } from '../Image'
@@ -343,33 +342,31 @@ export const MessagesUI = (props) => {
                   <React.Fragment key={message.id}>
                     {history && (
                       <>
-                        <WrapperOrderHistory style={{ display: `${tabActive.orderHistory ? 'block' : 'none'}` }}>
-                          {message.type === 1 && (
-                            <MessageConsole key={message.id}>
-                              {message.change?.attribute !== 'driver_id' ? (
-                                <BubbleConsole>
-                                  {t('ORDER', 'Order')} {' '}
-                                  <strong>{message.change.attribute}</strong> {}
-                                  {t('CHANGED_FROM', 'Changed from')} {' '}
-                                  {message.change.old !== null && (
-                                    <>
-                                      <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
-                                    </>
-                                  )}
-                                  <> {t('TO', 'to')} {' '} <strong>{getStatus(parseInt(message.change.new, 10))}</strong> </>
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleConsole>
-                              ) : (
-                                <BubbleConsole>
-                                  <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                  {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                  {message.comment && (<><br /> {message.comment.length}</>)}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleConsole>
-                              )}
-                            </MessageConsole>
-                          )}
-                        </WrapperOrderHistory>
+                        {message.type === 1 && (
+                          <MessageConsole key={message.id} style={{ display: `${tabActive.orderHistory ? 'inline-flex' : 'none'}` }}>
+                            {message.change?.attribute !== 'driver_id' ? (
+                              <BubbleConsole>
+                                {t('ORDER', 'Order')} {' '}
+                                <strong>{message.change.attribute}</strong> {}
+                                {t('CHANGED_FROM', 'Changed from')} {' '}
+                                {message.change.old !== null && (
+                                  <>
+                                    <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
+                                  </>
+                                )}
+                                <> {t('TO', 'to')} {' '} <strong>{getStatus(parseInt(message.change.new, 10))}</strong> </>
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </BubbleConsole>
+                            ) : (
+                              <BubbleConsole>
+                                <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                {message.comment && (<><br /> {message.comment.length}</>)}
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </BubbleConsole>
+                            )}
+                          </MessageConsole>
+                        )}
                         <WrapperLogistics style={{ display: `${tabActive.logistics ? 'block' : 'none'}` }}>
                           <Logistics orderId={order.id} />
                         </WrapperLogistics>

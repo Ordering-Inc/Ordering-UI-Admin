@@ -67,7 +67,7 @@ const OrderDeleteUI = (props) => {
           <h3>{t('CONFIRM_PASSWORD', 'Confirm password')}</h3>
           <p>{t('TYPE_YOUR_PASSWORD_TO_CONFIRM_DELETE', 'Type your password to confirm delete.')}</p>
           <input
-            autocomplete='new-password'
+            autoComplete='new-password'
             type='password'
             value={password}
             placeholder={t('PASSWORD', 'password')}

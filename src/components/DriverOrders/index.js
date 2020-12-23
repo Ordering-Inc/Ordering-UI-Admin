@@ -16,8 +16,7 @@ export const DriverOrders = (props) => {
   const {
     driver,
     driversList,
-    driverOrders,
-    updateOrdersSelectedStatus
+    driverOrders
   } = props
 
   const [, t] = useLanguage()
@@ -49,7 +48,6 @@ export const DriverOrders = (props) => {
         <OrderListing
           orderList={driverOrders}
           driversList={driversList}
-          updateOrdersSelectedStatus={updateOrdersSelectedStatus}
           orderListView='big'
         />
       </WrapperOrderListing>

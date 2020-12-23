@@ -75,6 +75,7 @@ const OrderDetailsUI = (props) => {
   } = props.order
 
   const [orderTotalPrice, setOrderTotalPrice] = useState(0)
+  const [subTotalPrice, setSubTotalPrice] = useState(0)
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -147,6 +148,81 @@ const OrderDetailsUI = (props) => {
 
     setOrderTotalPrice(_orderTotalPrice)
   }, [order])
+
+  const getTaxPrice = () => {
+    let taxPrice = 0
+    if (order.tax_type === 2) {
+      if (order.discount > 0) {
+        taxPrice = (subTotalPrice - order.discount) * order?.tax / 100
+      } else {
+        taxPrice = subTotalPrice * order?.tax / 100
+      }
+    }
+    if (order.tax_type === 1) {
+      taxPrice = order.tax
+    }
+    return parseFloat(taxPrice.toFixed(2))
+  }
+
+  const getServiceFee = () => {
+    let serviceFee = 0
+    if (loading) return 0
+    if (order.service_fee > 0) {
+      if (order.discount > 0) {
+        serviceFee = (subTotalPrice - order.discount) * order?.service_fee / 100
+      } else {
+        serviceFee = subTotalPrice * order?.service_fee / 100
+      }
+    }
+    return parseFloat(serviceFee.toFixed(2))
+  }
+
+  const getProductPrice = (product) => {
+    let price = product.quantity * product.price
+    if (product.options.length > 0) {
+      for (const option of product.options) {
+        for (const suboption of option.suboptions) {
+          price += suboption.quantity * suboption.price
+        }
+      }
+    }
+    return parseFloat(price.toFixed(2))
+  }
+
+  useEffect(() => {
+    if (loading) return
+    let _orderSubprice = 0
+    for (const product of order.products) {
+      _orderSubprice += getProductPrice(product)
+    }
+    if (order?.subtotal > 0) {
+      _orderSubprice = order.subtotal
+    }
+    _orderSubprice = parseFloat(_orderSubprice.toFixed(2))
+    setSubTotalPrice(_orderSubprice)
+  }, [order])
+
+  useEffect(() => {
+    if (loading) return
+    let _orderTotalPrice = subTotalPrice
+    if (order?.service_fee > 0) {
+      const taxPrice = getTaxPrice()
+      const serviceFee = getServiceFee()
+      _orderTotalPrice += taxPrice + serviceFee
+    }
+    if (order?.delivery_zone_price > 0) {
+      _orderTotalPrice += order.delivery_zone_price
+    }
+    if (order?.driver_tip > 0) {
+      _orderTotalPrice += subTotalPrice * order.driver_tip / 100
+    }
+
+    if (order.discount > 0) {
+      _orderTotalPrice -= order.discount
+    }
+    _orderTotalPrice = parseFloat(_orderTotalPrice.toFixed(2))
+    setOrderTotalPrice(_orderTotalPrice)
+  }, [subTotalPrice])
 
   return (
     <Container className='order-detail'>
@@ -230,10 +306,16 @@ const OrderDetailsUI = (props) => {
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
                     <td>{parsePrice(order?.subtotal)}</td>
                   </tr>
+                  {order?.discount > 0 && (
+                    <tr>
+                      <td>{t('DISCOUNT', 'Discount')}</td>
+                      <td>-{parsePrice(order?.discount)}</td>
+                    </tr>
+                  )}
                   {order?.service_fee !== 0 && (
                     <tr>
                       <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-                      <td>{parsePrice(order?.subtotal * order?.tax / 100)}</td>
+                      <td>{parsePrice(getTaxPrice())}</td>
                     </tr>
                   )}
                   <tr>
@@ -247,13 +329,7 @@ const OrderDetailsUI = (props) => {
                   {order?.service_fee !== 0 && (
                     <tr>
                       <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-                      <td>{parsePrice(order?.serviceFee || 0)}</td>
-                    </tr>
-                  )}
-                  {order?.discount > 0 && (
-                    <tr>
-                      <td>{t('DISCOUNT', 'Discount')}</td>
-                      <td>{parsePrice(order?.discount)}</td>
+                      <td>{parsePrice(getServiceFee())}</td>
                     </tr>
                   )}
                 </tbody>

@@ -86,7 +86,7 @@ const LogisticsUI = (props) => {
     <>
       {actionStatus.loading ? (
         <>
-          {[...Array(5)].map((item, i) => (
+          {[...Array(3)].map((item, i) => (
             <SkeletonHitory key={i}>
               <Skeleton width={400} height={50} />
               <Skeleton width={300} height={50} />

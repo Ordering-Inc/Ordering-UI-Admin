@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { useLanguage, OrdersManage as OrdersManageController, OrderList as OrdersListController } from 'ordering-components'
-
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import FaRegTimesCircle from '@meronex/icons/fa/FaRegTimesCircle'
@@ -35,13 +34,11 @@ const DeliveryDashboardUI = (props) => {
     driversList,
     paymethodsList,
     businessesList,
-    updateOrdersSelectedStatus,
     ordersStatusGroup,
     filterValues,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
-    handleSelectedOrderIds,
     handleChangeDriverOrdersModal
   } = props
 
@@ -71,9 +68,7 @@ const DeliveryDashboardUI = (props) => {
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true,
     driversList: driversList,
-    updateOrdersSelectedStatus: updateOrdersSelectedStatus,
-    orderListView: 'small',
-    handleSelectedOrderIds: handleSelectedOrderIds
+    orderListView: 'small'
   }
 
   const PendingOrdersControlProps = {
@@ -306,7 +301,6 @@ const DeliveryDashboardUI = (props) => {
                     <DriversModal
                       driversList={driversList}
                       driverOrders={driverOrders}
-                      updateOrdersSelectedStatus={updateOrdersSelectedStatus}
                       handleChangeDriverAvailable={handleChangeDriverAvailable}
                       handleChangeDriverOrders={handleChangeDriverOrdersModal}
                     />

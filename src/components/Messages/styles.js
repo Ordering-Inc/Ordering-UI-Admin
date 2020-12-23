@@ -504,5 +504,4 @@ export const SkeletonHitory = styled.div`
     }
   }
 `
-export const WrapperOrderHistory = styled.div``
 export const WrapperLogistics = styled.div``

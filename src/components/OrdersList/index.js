@@ -24,19 +24,16 @@ const OrdersListUI = (props) => {
     businessesList,
     ordersStatusGroup,
     filterValues,
-    selectedOrderNumber,
-    deleteMultiOrderStatus,
-    handleResetDeleteMulitOrders,
-    changeMulitOrderStatus,
-    multiOrderUpdateStatus,
-    handleResetChangeMultiOrder,
+    deletedOrderId,
+    startMulitOrderStatusChange,
+    startMulitOrderDelete,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
     handleChangeMultiOrdersStatus,
     handleDeleteMultiOrders,
-    handleOrderIds,
-    handleRemoveSelectedOrderId
+    handleSelectedOrderIds,
+    selectedOrderIds
   } = props
 
   const [, t] = useLanguage()
@@ -61,13 +58,9 @@ const OrdersListUI = (props) => {
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true,
-    deleteMultiOrderStatus: deleteMultiOrderStatus,
-    handleResetDeleteMulitOrders: handleResetDeleteMulitOrders,
-    changeMulitOrderStatus: changeMulitOrderStatus,
-    multiOrderUpdateStatus: multiOrderUpdateStatus,
-    handleResetChangeMultiOrder: handleResetChangeMultiOrder,
-    handleOrderIds: handleOrderIds,
-    handleRemoveSelectedOrderId: handleRemoveSelectedOrderId,
+    deletedOrderId: deletedOrderId,
+    handleSelectedOrderIds: handleSelectedOrderIds,
+    selectedOrderIds: selectedOrderIds,
     driversList: driversList,
     orderListView: 'big'
   }
@@ -183,15 +176,18 @@ const OrdersListUI = (props) => {
   }
 
   useEffect(() => {
-    if (deleteMultiOrderStatus || changeMulitOrderStatus) {
-      setTotalSelectedOrder(selectedOrderNumber)
+    if (startMulitOrderStatusChange || startMulitOrderDelete) {
+      setTotalSelectedOrder(selectedOrderIds.length)
     }
-    if (selectedOrderNumber === 0) {
+  }, [startMulitOrderStatusChange, startMulitOrderDelete])
+
+  useEffect(() => {
+    if (selectedOrderIds.length === 0) {
       setTimeout(() => {
         setTotalSelectedOrder(0)
       }, 500)
     }
-  }, [deleteMultiOrderStatus, changeMulitOrderStatus, selectedOrderNumber])
+  }, [selectedOrderIds])
 
   useEffect(() => {
     const sound = document.getElementById('notification-sound')
@@ -229,7 +225,7 @@ const OrdersListUI = (props) => {
               handleChangeFilterValues={handleChangeFilterValues}
             />
             <OrdersDashboardControls
-              selectedOrderNumber={selectedOrderNumber}
+              selectedOrderNumber={selectedOrderIds.length}
               filterValues={filterValues}
               handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
               handleDeleteMultiOrders={handleDeleteMultiOrders}
@@ -310,7 +306,7 @@ const OrdersListUI = (props) => {
 
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>
-          {selectedOrderNumber}/{totalSelectedOrder}
+          {selectedOrderIds.length}/{totalSelectedOrder}
         </WrapperIndicator>
       )}
     </>
