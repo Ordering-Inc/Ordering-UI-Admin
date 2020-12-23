@@ -133,6 +133,9 @@ export const OrderItemAccordion = (props) => {
     for (const product of order.products) {
       _orderSubprice += getProductPrice(product)
     }
+    if (order?.subtotal > 0) {
+      _orderSubprice = order.subtotal
+    }
     setSubTotalPrice(_orderSubprice)
   }, [order])
 
