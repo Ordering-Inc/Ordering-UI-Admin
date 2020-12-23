@@ -114,8 +114,14 @@ export const OrderItemAccordion = (props) => {
   }
 
   const getTaxPrice = () => {
-    const taxPrice = subTotalPrice * order?.tax / 100
-    return parsePrice(taxPrice)
+    let taxPrice = 0
+    if (order.tax_type === 2) {
+      taxPrice = subTotalPrice * order?.tax / 100
+    }
+    if (order.tax_type === 1) {
+      taxPrice = order.tax
+    }
+    return taxPrice
   }
 
   useEffect(() => {
@@ -133,10 +139,11 @@ export const OrderItemAccordion = (props) => {
   useEffect(() => {
     let _orderTotalPrice = subTotalPrice
     if (order?.service_fee > 0) {
-      _orderTotalPrice += subTotalPrice * order?.tax / 100 + subTotalPrice * order?.service_fee / 100
+      const taxPrice = getTaxPrice()
+      _orderTotalPrice += taxPrice + subTotalPrice * order?.service_fee / 100
     }
-    if (order?.deliveryFee > 0) {
-      _orderTotalPrice += order.deliveryFee
+    if (order?.delivery_zone_price > 0) {
+      _orderTotalPrice += order.delivery_zone_price
     }
     if (order?.driver_tip > 0) {
       _orderTotalPrice += subTotalPrice * order.driver_tip / 100
@@ -368,7 +375,7 @@ export const OrderItemAccordion = (props) => {
                     <td />
                     <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
                     <td>
-                      {getTaxPrice()}
+                      {parsePrice(getTaxPrice())}
                     </td>
                   </tr>
                 )}
@@ -377,7 +384,7 @@ export const OrderItemAccordion = (props) => {
                   <td />
                   <td />
                   <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                  <td>{parsePrice(order?.deliveryFee)}</td>
+                  <td>{parsePrice(order?.delivery_zone_price)}</td>
                 </tr>
                 {order?.driver_tip > 0 && (
                   <tr className='subFee'>
