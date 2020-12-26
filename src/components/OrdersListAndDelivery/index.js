@@ -148,7 +148,9 @@ const OrdersListUI = (props) => {
   }
 
   const closeOrderDetailModal = (e) => {
-    if (e.code === 'Escape') setIsOpenOrderDetail(false)
+    if (e.code === 'Escape') {
+      handleBackRedirect()
+    }
   }
 
   const closeNotificationModal = (e) => {
