@@ -36,15 +36,15 @@ export const OrdersList = (props) => {
 
   const PendingOrdersControlProps = {
     orderStatus: [0],
-    pendingOrder: true,
+    // pendingOrder: true,
     orderStatusTitle: t('PENDING', 'Pendig')
   }
 
-  const PreOrdersControlProps = {
-    orderStatus: [0],
-    preOrder: true,
-    orderStatusTitle: t('PREORDERS', 'Preorders')
-  }
+  // const PreOrdersControlProps = {
+  //   orderStatus: [0],
+  //   preOrder: true,
+  //   orderStatusTitle: t('PREORDERS', 'Preorders')
+  // }
 
   const AcceptedByBusinessOrdersControlProps = {
     orderStatus: [7],
@@ -109,12 +109,12 @@ export const OrdersList = (props) => {
     <>
       {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
         <>
-          <OrdersListController
+          {/* <OrdersListController
             size='small'
             handleNotification={handleNotification}
             handleOpenOrderDetail={handleOpenOrderDetail}
             {...OrdersCommonControlProps} {...PreOrdersControlProps}
-          />
+          /> */}
           <OrdersListController
             size='small'
             handleNotification={handleNotification}

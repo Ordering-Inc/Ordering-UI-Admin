@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import FaRegTimesCircle from '@meronex/icons/fa/FaRegTimesCircle'
 import { OrdersManage as OrdersManageController, useLanguage, useConfig } from 'ordering-components'
-import { useWindowSize } from '../../../src/hooks/useWindowSize'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
@@ -20,7 +19,7 @@ import {
   OrdersContent,
   OrdersInnerContent,
   WrapperIndicator,
-  WrapperOrderNotification,
+  // WrapperOrderNotification,
   OrderNotification,
   MapAndOrderContent,
   WrapperOrdersAndDriver,
@@ -59,7 +58,6 @@ const OrdersListUI = (props) => {
 
   const [, t] = useLanguage()
   const [state] = useConfig()
-  const { width } = useWindowSize()
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
@@ -114,6 +112,7 @@ const OrdersListUI = (props) => {
       if (!state.loading) {
         if (state.configs.notification_toast.value === 'true') {
           toastNotify(orderId)
+          setRegisterOrderIds([])
         } else {
           setNotificationModalOpen(true)
         }
@@ -121,9 +120,9 @@ const OrdersListUI = (props) => {
     }
   }
 
-  const handleCloseNotificationModal = (orderId) => {
-    const _registerOrderIds = registerOrderIds.filter(id => id !== orderId)
-    setRegisterOrderIds(_registerOrderIds)
+  const handleCloseNotificationModal = () => {
+    setNotificationModalOpen(false)
+    setRegisterOrderIds([])
   }
 
   const handleSwitch = () => {
@@ -146,6 +145,16 @@ const OrdersListUI = (props) => {
     const sound = document.getElementById('notification-sound')
     sound.muted = false
     sound.play()
+  }
+
+  const closeOrderDetailModal = (e) => {
+    if (e.code === 'Escape') setIsOpenOrderDetail(false)
+  }
+
+  const closeNotificationModal = (e) => {
+    if (e.code === 'Escape') {
+      handleCloseNotificationModal()
+    }
   }
 
   useEffect(() => {
@@ -173,14 +182,6 @@ const OrdersListUI = (props) => {
   }, [selectedOrderIds])
 
   useEffect(() => {
-    if (width < 1200) {
-      setOpenOrderAndDriver(false)
-    } else {
-      setOpenOrderAndDriver(true)
-    }
-  }, [width])
-
-  useEffect(() => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
@@ -202,6 +203,18 @@ const OrdersListUI = (props) => {
       return
     }
     return () => clearInterval(interval)
+  }, [notificationModalOpen])
+
+  useEffect(() => {
+    if (!isOpenOrderDetail) return
+    document.addEventListener('keydown', closeOrderDetailModal)
+    return () => document.removeEventListener('keydown', closeOrderDetailModal)
+  }, [isOpenOrderDetail])
+
+  useEffect(() => {
+    if (!notificationModalOpen) return
+    document.addEventListener('keydown', closeNotificationModal)
+    return () => document.removeEventListener('keydown', closeNotificationModal)
   }, [notificationModalOpen])
 
   return (
@@ -330,17 +343,15 @@ const OrdersListUI = (props) => {
         hideCloseDefault
         open={notificationModalOpen}
       >
-        <WrapperOrderNotification>
+        <OrderNotification>
+          <p>{t('ORDERING', 'Ordering')}</p>
           {registerOrderIds.map((orderId) =>
-            <OrderNotification key={orderId}>
-              <p>{t('ORDERING', 'Ordering')}</p>
-              <p>Order #{orderId} has been ordered.</p>
-              <Button color='darkBlue' onClick={() => handleCloseNotificationModal(orderId)}>
-                {t('OK', 'OK')}
-              </Button>
-            </OrderNotification>
+            <p key={orderId}>Order <span>#{orderId}</span> has been ordered.</p>
           )}
-        </WrapperOrderNotification>
+          <Button color='darkBlue' onClick={() => handleCloseNotificationModal()}>
+            {t('OK', 'OK')}
+          </Button>
+        </OrderNotification>
       </Modal>
 
       <audio id='notification-sound' muted>

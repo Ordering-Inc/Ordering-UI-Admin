@@ -39,7 +39,8 @@ export const DriverOrders = (props) => {
     orders: driverOrders.orders,
     driverOrdersLoading: driverOrders.loading,
     orderStatus: [],
-    handleOpenOrderDetail: handleOpenOrderDetail
+    handleOpenOrderDetail: handleOpenOrderDetail,
+    driverOrdersView: true
   }
 
   return (

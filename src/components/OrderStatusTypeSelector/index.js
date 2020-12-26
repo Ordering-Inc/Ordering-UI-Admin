@@ -11,8 +11,8 @@ export const OrderStatusTypeSelector = (props) => {
     deliveryType,
     mutiOrdersChange,
     orderId,
-    preOrder,
-    pendingOrder,
+    // preOrder,
+    // pendingOrder,
     type,
     orderControl,
     noPadding,
@@ -21,9 +21,9 @@ export const OrderStatusTypeSelector = (props) => {
     filterValues,
     handleUpdateOrderStatus,
     handleChangeMultiOrdersStatus,
-    handleChangeOrderStatus,
-    handleChangeIsPendingOrder,
-    handleChangeIsPreOrder
+    handleChangeOrderStatus
+    // handleChangeIsPendingOrder,
+    // handleChangeIsPreOrder
   } = props
 
   const [, t] = useLanguage()
@@ -40,33 +40,33 @@ export const OrderStatusTypeSelector = (props) => {
       disabled: 'disabled'
     },
     {
-      value: 0,
+      value: 'pending',
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.pending} alt='pending' />
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
-      )
-    },
-    {
-      value: 'preorder',
-      content: (
-        <Option noPadding={noPadding}>
-          <p>{t('PREORDER', 'Preorder')}</p>
-        </Option>
       ),
-      color: 'primary',
       disabled: 'disabled'
     },
+    // {
+    //   value: 'preorder',
+    //   content: (
+    //     <Option noPadding={noPadding}>
+    //       <p>{t('PREORDER', 'Preorder')}</p>
+    //     </Option>
+    //   ),
+    //   color: 'primary',
+    //   disabled: 'disabled'
+    // },
     {
-      value: 'pending',
+      value: 0,
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
       ),
-      color: 'primary',
-      disabled: 'disabled'
+      color: 'primary'
     },
     {
       value: 'inProgress',
@@ -230,13 +230,13 @@ export const OrderStatusTypeSelector = (props) => {
       } else {
         let _filteredOrderStatues = []
         let extractOrderStatus = []
-        extractOrderStatus = orderStatuses.slice(0, 7)
+        extractOrderStatus = orderStatuses.slice(0, 6)
         _filteredOrderStatues = [...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(10, 12)
+        extractOrderStatus = orderStatuses.slice(9, 11)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(13, 16)
+        extractOrderStatus = orderStatuses.slice(12, 15)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
         setFilteredOrderStatuses(_filteredOrderStatues)
@@ -244,16 +244,16 @@ export const OrderStatusTypeSelector = (props) => {
     } else {
       let _filteredOrderStatues = []
       let extractOrderStatus = []
-      extractOrderStatus = orderStatuses.slice(2, 4)
+      extractOrderStatus = orderStatuses.slice(2, 3)
       _filteredOrderStatues = [...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(5, 10)
+      extractOrderStatus = orderStatuses.slice(4, 9)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(11, 13)
+      extractOrderStatus = orderStatuses.slice(10, 12)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(14, 19)
+      extractOrderStatus = orderStatuses.slice(13, 18)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
       setFilteredOrderStatuses(_filteredOrderStatues)
@@ -264,25 +264,25 @@ export const OrderStatusTypeSelector = (props) => {
     setDefaultOptionValue(defaultValue)
   }, [defaultValue])
 
-  useEffect(() => {
-    if (pendingOrder) {
-      setDefaultOptionValue('pending')
-    }
+  // useEffect(() => {
+  //   if (pendingOrder) {
+  //     setDefaultOptionValue('pending')
+  //   }
 
-    if (preOrder) {
-      setDefaultOptionValue('preorder')
-    }
-  }, [pendingOrder, preOrder])
+  //   if (preOrder) {
+  //     setDefaultOptionValue('preorder')
+  //   }
+  // }, [pendingOrder, preOrder])
 
   const filterChangeOrderStatus = (status) => {
-    if (status === 'pending') {
-      handleChangeIsPendingOrder()
-      return
-    }
-    if (status === 'preorder') {
-      handleChangeIsPreOrder()
-      return
-    }
+    // if (status === 'pending') {
+    //   handleChangeIsPendingOrder()
+    //   return
+    // }
+    // if (status === 'preorder') {
+    //   handleChangeIsPreOrder()
+    //   return
+    // }
     handleChangeOrderStatus(status)
   }
 

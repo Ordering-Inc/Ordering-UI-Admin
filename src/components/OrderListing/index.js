@@ -36,7 +36,8 @@ export const OrderListing = (props) => {
     handleNotification,
     handleResetNotification,
     driverOrdersLoading,
-    size
+    size,
+    driverOrdersView
   } = props
 
   const theme = useTheme()
@@ -104,6 +105,7 @@ export const OrderListing = (props) => {
   }
 
   useEffect(() => {
+    if (driverOrdersView) return
     if (registerOrderId === null || !registerOrderId) return
     handleNotification(registerOrderId)
     handleResetNotification()

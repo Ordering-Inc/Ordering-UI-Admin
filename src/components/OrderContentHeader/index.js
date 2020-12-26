@@ -57,6 +57,10 @@ export const OrderContentHeader = (props) => {
     setFilterModalOpen(false)
   }
 
+  const closeModal = (e) => {
+    if (e.code === 'Escape') setFilterModalOpen(false)
+  }
+
   useEffect(() => {
     let _filterApplied = false
     if (Object.keys(filterValues).length === 0) {
@@ -68,6 +72,12 @@ export const OrderContentHeader = (props) => {
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
+
+  useEffect(() => {
+    if (!filterModalOpen) return
+    document.addEventListener('keydown', closeModal)
+    return () => document.removeEventListener('keydown', closeModal)
+  }, [filterModalOpen])
 
   return (
     <>

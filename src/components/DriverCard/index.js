@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import { getStarWidth } from '../../utils'
 // import BsChat from '@meronex/icons/bs/BsChat'
@@ -40,6 +40,15 @@ export const DriverCard = (props) => {
     }
   }
 
+  const closeModal = (e) => {
+    if (e.code === 'Escape') setOrdersAndDriverModalOpen(false)
+  }
+
+  useEffect(() => {
+    if (!ordersAndDriverModalOpen) return
+    document.addEventListener('keydown', closeModal)
+    return () => document.removeEventListener('keydown', closeModal)
+  }, [ordersAndDriverModalOpen])
   return (
     <>
       <DrirverInfo offline={offline}>

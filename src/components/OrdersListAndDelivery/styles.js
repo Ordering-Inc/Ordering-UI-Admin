@@ -55,12 +55,7 @@ export const WrapperIndicator = styled.div`
   font-weight: 500;
   font-size: 24px;
 `
-export const WrapperOrderNotification = styled.div`
-  position: relative;
-  height: 140px;
-`
 export const OrderNotification = styled.div`
-  position: absolute;
   width: 100%;
   background: #fff;
   display: flex;
@@ -70,6 +65,11 @@ export const OrderNotification = styled.div`
     text-align: center;
     font-size: 20px;
     margin: 0px;
+
+    span {
+      color: #182964;
+      font-weight: 600;
+    }
   }
   animation: fadeIn 200ms;
 
@@ -151,7 +151,7 @@ export const OrderAndDriverListContainer = styled.div`
   `}
 `
 export const OrdersOpenButton = styled.button`
-  display: none;
+  display: block;
   position: absolute;
   right: 10px;
   top: 20px;
@@ -164,14 +164,10 @@ export const OrdersOpenButton = styled.button`
   svg {
     font-size: 30px;
     color: ${props => props.theme.colors.btnDarkBlue};
-  }
-
-  @media (max-width: 1200px) {
-    display: block;
   }
 `
 export const OrdersCloseButton = styled.button`
-  display: none;
+  display: block;
   position: absolute;
   right: 10px;
   top: 20px;
@@ -184,10 +180,6 @@ export const OrdersCloseButton = styled.button`
   svg {
     font-size: 30px;
     color: ${props => props.theme.colors.btnDarkBlue};
-  }
-
-  @media (max-width: 1200px) {
-    display: block;
   }
 
   @media (max-width: 576px) {
