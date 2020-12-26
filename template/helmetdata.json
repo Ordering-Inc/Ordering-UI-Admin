@@ -6,8 +6,8 @@
     "robots": "",
     "canonicalUrl": "http://localhost:8300/"
   },
-  "orders": {
-    "title": "Orders",
+  "orders-deliveries": {
+    "title": "Orders-Deliveries",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "",
@@ -15,13 +15,6 @@
   },
   "login": {
     "title": "Login",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "",
-    "canonicalUrl": ""
-  },
-  "deliveryDashboard": {
-    "title": "Delivery Dashbaord",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "",

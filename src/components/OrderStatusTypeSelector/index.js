@@ -19,7 +19,6 @@ export const OrderStatusTypeSelector = (props) => {
     noSelected,
     isFilterView,
     filterValues,
-    ordersStatusSelected,
     handleUpdateOrderStatus,
     handleChangeMultiOrdersStatus,
     handleChangeOrderStatus,
@@ -29,7 +28,7 @@ export const OrderStatusTypeSelector = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [defaultOptionValue, setDefaultOptionValue] = useState(defaultValue)
+  const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
 
   const placeholder = <PlaceholderTitle>{t('SELECT_STATUS', 'Select Status')}</PlaceholderTitle>
@@ -50,20 +49,20 @@ export const OrderStatusTypeSelector = (props) => {
       )
     },
     {
-      value: 'pending',
+      value: 'preorder',
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('PENDING', 'Pending')}</p>
+          <p>{t('PREORDER', 'Preorder')}</p>
         </Option>
       ),
       color: 'primary',
       disabled: 'disabled'
     },
     {
-      value: 'preorder',
+      value: 'pending',
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('PREORDER', 'Preorder')}</p>
+          <p>{t('PENDING', 'Pending')}</p>
         </Option>
       ),
       color: 'primary',
@@ -234,9 +233,6 @@ export const OrderStatusTypeSelector = (props) => {
         extractOrderStatus = orderStatuses.slice(0, 7)
         _filteredOrderStatues = [...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(8, 9)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
         extractOrderStatus = orderStatuses.slice(10, 12)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
@@ -246,36 +242,27 @@ export const OrderStatusTypeSelector = (props) => {
         setFilteredOrderStatuses(_filteredOrderStatues)
       }
     } else {
-      const _defaultOption = []
       let _filteredOrderStatues = []
-      switch (ordersStatusSelected) {
-        case 'pending':
-          _filteredOrderStatues = orderStatuses.splice(2, 2)
-          break
-        case 'inProgress':
-          _filteredOrderStatues = orderStatuses.splice(5, 5)
-          break
-        case 'completed':
-          _filteredOrderStatues = orderStatuses.splice(11, 2)
-          break
-        case 'cancelled':
-          _filteredOrderStatues = orderStatuses.splice(14, 5)
-          break
-      }
-      const filteredOrderStatus = _defaultOption.concat(_filteredOrderStatues)
-      setFilteredOrderStatuses(filteredOrderStatus)
+      let extractOrderStatus = []
+      extractOrderStatus = orderStatuses.slice(2, 4)
+      _filteredOrderStatues = [...extractOrderStatus]
+
+      extractOrderStatus = orderStatuses.slice(5, 10)
+      _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+      extractOrderStatus = orderStatuses.slice(11, 13)
+      _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+      extractOrderStatus = orderStatuses.slice(14, 19)
+      _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+      setFilteredOrderStatuses(_filteredOrderStatues)
     }
   }, [])
 
   useEffect(() => {
-    if (isFilterView) {
-      if (filterValues.status === null) {
-        setDefaultOptionValue('default')
-      } else {
-        setDefaultOptionValue(filterValues.status)
-      }
-    }
-  }, [filterValues])
+    setDefaultOptionValue(defaultValue)
+  }, [defaultValue])
 
   useEffect(() => {
     if (pendingOrder) {
@@ -289,12 +276,10 @@ export const OrderStatusTypeSelector = (props) => {
 
   const filterChangeOrderStatus = (status) => {
     if (status === 'pending') {
-      handleChangeOrderStatus(0)
       handleChangeIsPendingOrder()
       return
     }
     if (status === 'preorder') {
-      handleChangeOrderStatus(0)
       handleChangeIsPreOrder()
       return
     }

@@ -20,7 +20,9 @@ export const DriversModal = (props) => {
     driversList,
     driverOrders,
     handleChangeDriverAvailable,
-    handleChangeDriverOrders
+    handleChangeDriverOrders,
+    handleSelectedOrderIds,
+    handleOpenOrderDetail
   } = props
 
   const [, t] = useLanguage()
@@ -59,6 +61,8 @@ export const DriversModal = (props) => {
                     driversList={driversList}
                     driverOrders={driverOrders}
                     handleChangeDriverOrders={handleChangeDriverOrders}
+                    handleSelectedOrderIds={handleSelectedOrderIds}
+                    handleOpenOrderDetail={handleOpenOrderDetail}
                   />
                 ) : (
                   !driver.available && (
@@ -68,6 +72,8 @@ export const DriversModal = (props) => {
                       driversList={driversList}
                       driverOrders={driverOrders}
                       handleChangeDriverOrders={handleChangeDriverOrders}
+                      handleSelectedOrderIds={handleSelectedOrderIds}
+                      handleOpenOrderDetail={handleOpenOrderDetail}
                     />
                   )
                 )}

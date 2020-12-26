@@ -42,8 +42,8 @@ export const ProductItemAccordion = (props) => {
   const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
-  const [setHeight, setHeightState] = useState('0px')
-  const [setRotate, setRotateState] = useState('accordion__icon')
+  const [setHeight, setHeightState] = useState('inherit')
+  const [setRotate, setRotateState] = useState('accordion__icon rotate')
 
   const content = useRef(null)
   const productSelect = useRef(null)
@@ -73,10 +73,10 @@ export const ProductItemAccordion = (props) => {
     if ((!product?.valid_menu && isCartProduct) || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     setHeightState(
-      setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
+      setActive === 'active' ? `${content.current.scrollHeight}px` : '0px'
     )
     setRotateState(
-      setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
+      setActive === 'active' ? 'accordion__icon rotate' : 'accordion__icon'
     )
   }
 
@@ -91,22 +91,24 @@ export const ProductItemAccordion = (props) => {
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
       const pos = position ? `(${position})` : ''
-      return `${name} ${pos} ${parsePrice(quantity * price)}`
+      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price)}` : `${name} ${pos}`
     } else {
       return 'No'
     }
   }
 
   const getProductPrice = (product) => {
-    let price = product.quantity * product.price
+    let subOptionPrice = 0
     if (product.options.length > 0) {
       for (const option of product.options) {
         for (const suboption of option.suboptions) {
-          price += suboption.quantity * suboption.price
+          subOptionPrice += suboption.quantity * suboption.price
         }
       }
     }
-    return parsePrice(price)
+
+    const price = product.quantity * (product.price + subOptionPrice)
+    return parseFloat(price.toFixed(2))
   }
 
   return (
@@ -147,7 +149,7 @@ export const ProductItemAccordion = (props) => {
             <h3>{product.name}</h3>
             {windowSize.width <= 410 && (
               <span>
-                <p>{getProductPrice(product)}</p>
+                <p>{parsePrice(getProductPrice(product))}</p>
                 {isCartProduct && (
                   <div>
                     {onEditProduct && (
@@ -171,7 +173,7 @@ export const ProductItemAccordion = (props) => {
           <ProductPriceSection>
             <ProductPrice>
               <span>
-                {getProductPrice(product)}
+                {parsePrice(getProductPrice(product))}
               </span>
               {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                 <p>
@@ -263,16 +265,18 @@ export const ProductItemAccordion = (props) => {
                 <p>{option.name}</p>
                 <ProductOptionsList className='suboption'>
                   {option.suboptions.map(suboption => (
-                    <li key={suboption.id}>
-                      <span>
-                        {getFormattedSubOptionName({
-                          quantity: suboption.quantity,
-                          name: suboption.name,
-                          position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                          price: suboption.price
-                        })}
-                      </span>
-                    </li>
+                    <React.Fragment key={suboption.id}>
+                      <li>
+                        <span>
+                          {getFormattedSubOptionName({
+                            quantity: suboption.quantity,
+                            name: suboption.name,
+                            position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
+                            price: suboption.price
+                          })}
+                        </span>
+                      </li>
+                    </React.Fragment>
                   ))}
                 </ProductOptionsList>
               </li>

@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 
-import { WrapperMap, WrapperMapMarker, MapMarkerImg } from './styles'
+import { WrapperMap } from './styles'
 
 export const DriversLocation = (props) => {
-  const { driversList, driverAvailable } = props
+  const {
+    disableUI,
+    driversList,
+    driverAvailable
+  } = props
 
   const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
   const [mapZoom, setMapZoom] = useState(10)
@@ -53,15 +57,15 @@ export const DriversLocation = (props) => {
       }
     }
 
-    if (driverAvailable === 'offline') {
-      for (const driver of _offlineDrivers) {
-        if (!driver.available) {
-          const marker = driver.location !== null ? driver.location : defaultCenter
-          const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
-          bounds.extend(newPoint)
-        }
-      }
-    }
+    // if (driverAvailable === 'offline') {
+    //   for (const driver of _offlineDrivers) {
+    //     if (!driver.available) {
+    //       const marker = driver.location !== null ? driver.location : defaultCenter
+    //       const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+    //       bounds.extend(newPoint)
+    //     }
+    //   }
+    // }
 
     if (driverAvailable === 'online') {
       if (_onlineDrivers.length === 0) return
@@ -75,9 +79,8 @@ export const DriversLocation = (props) => {
     if (driverAvailable === 'offline') {
       if (_offlineDrivers.length === 0) {
         return
-      }
-      if (_offlineDrivers.length === 1) {
-        setMapCenter(_offlineDrivers[0].location)
+      } else {
+        setMapCenter(defaultCenter)
         setMapZoom(defaultZoom)
         return
       }
@@ -111,7 +114,7 @@ export const DriversLocation = (props) => {
   }, [driversList, driverAvailable, mapLoaded])
 
   return (
-    <WrapperMap ref={mapRef} className='drivers-location'>
+    <WrapperMap ref={mapRef} className='drivers-location' disableUI={disableUI}>
       <GoogleMapReact
         bootstrapURLKeys={{
           key: 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
@@ -127,50 +130,32 @@ export const DriversLocation = (props) => {
       >
         {driverAvailable === 'all' && driversList.drivers.length !== 0 &&
           driversList.drivers.map((driver) => (
-            <WrapperMapMarker
-              offline={!driver.available}
+            <DriverMapMarkerAndInfo
+              key={driver.id}
+              driver={driver}
               lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
               lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-              key={driver.id}
-            >
-              {driver.photo ? (
-                <MapMarkerImg bgimage={driver.photo} />
-              ) : (
-                <FaUserAlt />
-              )}
-            </WrapperMapMarker>
+            />
           ))}
         {onlineDrivers !== null &&
           driverAvailable === 'online' &&
           onlineDrivers.map((driver) => (
-            <WrapperMapMarker
-              offline={!driver.available}
+            <DriverMapMarkerAndInfo
+              key={driver.id}
+              driver={driver}
               lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
               lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-              key={driver.id}
-            >
-              {driver.photo ? (
-                <MapMarkerImg bgimage={driver.photo} />
-              ) : (
-                <FaUserAlt />
-              )}
-            </WrapperMapMarker>
+            />
           ))}
         {driverAvailable === 'offline' &&
           offlineDrivers.length > 0 &&
           offlineDrivers.map((driver) => (
-            <WrapperMapMarker
-              offline={!driver.available}
+            <DriverMapMarkerAndInfo
+              key={driver.id}
+              driver={driver}
               lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
               lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-              key={driver.id}
-            >
-              {driver.photo ? (
-                <MapMarkerImg bgimage={driver.photo} />
-              ) : (
-                <FaUserAlt />
-              )}
-            </WrapperMapMarker>
+            />
           ))}
       </GoogleMapReact>
     </WrapperMap>

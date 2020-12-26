@@ -25,7 +25,6 @@ const FilterGroupListUI = (props) => {
     driversList,
     paymethodsList,
     businessesList,
-    ordersStatusSelected,
     handleChangeGroup,
     handleChangeDateType,
     handleChangeFromDate,
@@ -99,7 +98,6 @@ const FilterGroupListUI = (props) => {
         />
         <OrderStatusTypeSelector
           isFilterView
-          ordersStatusSelected={ordersStatusSelected}
           filterValues={filterValues}
           handleChangeOrderStatus={handleChangeOrderStatus}
           handleChangeIsPendingOrder={handleChangeIsPendingOrder}

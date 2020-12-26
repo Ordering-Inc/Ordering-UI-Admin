@@ -37,7 +37,6 @@ import deadlineOK from './template/assets/images/icons/deadlineOK.svg'
 import deadlineRisk from './template/assets/images/icons/deadlineRisk.svg'
 import deadlineDelayed from './template/assets/images/icons/timeOut.svg'
 import deadlineSetting from './template/assets/images/icons/deadlineSetting.png'
-import filter from './template/assets/images/icons/filter.svg'
 import search from './template/assets/images/icons/search.svg'
 import group from './template/assets/images/icons/group.svg'
 import calendar from './template/assets/images/icons/calendar.svg'
@@ -141,7 +140,6 @@ theme.images = {
     deadlineRisk: deadlineRisk,
     deadlineDelayed: deadlineDelayed,
     deadlineSetting: deadlineSetting,
-    filter: filter,
     search: search,
     calendar: calendar,
     group: group,

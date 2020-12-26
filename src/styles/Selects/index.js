@@ -122,7 +122,7 @@ export const Selected = styled.div`
 
 export const Select = styled.div`
   display: inline-block;
-  border-radius: 34px;
+  border-radius: 40px;
   line-height: 34px;
   border-width: 1px;
   border-style: solid;

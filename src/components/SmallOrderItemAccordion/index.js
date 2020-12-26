@@ -20,9 +20,7 @@ import {
   CustomerContent,
   WrapperOrderStatus,
   DriverInfo,
-  WrapperDriverSelector,
-  WrapperNoDriver,
-  NoDriverTitle
+  WrapperDriverSelector
 } from './styles'
 
 export const SmallOrderItemAccordion = (props) => {
@@ -46,7 +44,7 @@ export const SmallOrderItemAccordion = (props) => {
     const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
 
     if (!isActionClick) {
-      history.push(`/delivery-dashboard?id=${order.id}`)
+      history.push(`/orders-deliveries?id=${order.id}`)
       handleOpenOrderDetail(order.id, pendingOrder, preOrder)
     }
   }
@@ -70,7 +68,7 @@ export const SmallOrderItemAccordion = (props) => {
         </BusinessInfo>
         <DeliveryInfo>
           <p>
-            {parseDate(order?.delivery_datetime)}
+            {parseDate(order?.delivery_datetime, { utc: false })}
           </p>
           <DeliveryType>
             <DeliveryIcon>
@@ -112,21 +110,16 @@ export const SmallOrderItemAccordion = (props) => {
         </CustomerInfo>
         <DriverInfo>
           <WrapperDriverSelector ref={driverSelectorRef}>
-            {order?.delivery_type === 1 ? (
+            {order?.delivery_type === 1 && (
               <DriverSelector
                 small
+                orderView
+                padding='5px 0'
                 defaultValue={order?.driver_id ? order.driver_id : 'default'}
                 drivers={drivers}
                 order={order}
                 handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
               />
-            ) : (
-              <WrapperNoDriver>
-                <WrapperAccordionImage small>
-                  <FaUserAlt />
-                </WrapperAccordionImage>
-                <NoDriverTitle>{t('NO_DRIVER', 'No driver')}</NoDriverTitle>
-              </WrapperNoDriver>
             )}
           </WrapperDriverSelector>
         </DriverInfo>

@@ -170,20 +170,3 @@ export const WrapperDriverSelector = styled.div`
     }
   }
 `
-export const WrapperNoDriver = styled.div`
-  border: 1px solid #F2F2F2;
-  border-radius: 28px;
-  display: flex;
-  padding: 5px 10px;
-  box-sizing: border-box;
-  align-items: center;
-
-  & > div {
-    &:first-child {
-      width: 25px;
-      padding: 0;
-    }
-  }
-`
-export const NoDriverTitle = styled.div`
-`

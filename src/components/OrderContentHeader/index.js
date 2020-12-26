@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useTheme } from 'styled-components'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components'
 
 import { SearchBar } from '../SearchBar'
@@ -8,6 +7,8 @@ import { Modal } from '../Modal'
 import { OrdersDashboardSwitch } from '../OrdersDashboardSwitch'
 import { FilterGroupList } from '../FilterGroupList'
 import { DeadlineSettingInterface } from '../DeadlineSettingInterface'
+import MdcFilterOutline from '@meronex/icons/mdc/MdcFilterOutline'
+import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 
 import {
   OrderContentHeaderContainer,
@@ -29,12 +30,13 @@ export const OrderContentHeader = (props) => {
     driversList,
     paymethodsList,
     businessesList,
-    ordersStatusSelected,
-    handleChangeFilterValues
+    filterValues,
+    handleChangeFilterValues,
+    handleSwitch
   } = props
-  const theme = useTheme()
   const [, t] = useLanguage()
   const [filterModalOpen, setFilterModalOpen] = useState(false)
+  const [filterApplied, setFilterApplied] = useState(false)
 
   const [deadlineSettingModalOpen, setDeadlineSettingModalOpen] = useState(false)
   // const [deadlineType, setDeadlineType] = useState(0)
@@ -55,6 +57,18 @@ export const OrderContentHeader = (props) => {
     setFilterModalOpen(false)
   }
 
+  useEffect(() => {
+    let _filterApplied = false
+    if (Object.keys(filterValues).length === 0) {
+      _filterApplied = false
+    } else {
+      _filterApplied = filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
+       filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
+       filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0
+    }
+    setFilterApplied(_filterApplied)
+  }, [filterValues])
+
   return (
     <>
       <OrderContentHeaderContainer>
@@ -67,7 +81,10 @@ export const OrderContentHeader = (props) => {
               defaultValue={deadlineType}
               handleChangeDeadlineType={(deadlineType) => handleChangeDeadlineType(deadlineType)}
             /> */}
-            <OrdersDashboardSwitch active={active} />
+            <OrdersDashboardSwitch
+              active={active}
+              handleSwitch={handleSwitch}
+            />
           </WrapperHeaderRightSection>
         </HeaderSection>
         <TopRightSection>
@@ -78,7 +95,7 @@ export const OrderContentHeader = (props) => {
               placeholder={t('SEARCH', 'Search')}
             />
             <FilterButton onClick={() => setFilterModalOpen(true)} name='filter-btn'>
-              <img src={theme?.images?.icons?.filter} alt='filter' />
+              {filterApplied ? <MdcFilterOutline /> : <MdcFilterOff />}
             </FilterButton>
           </WrapperSearchAndFilter>
 
@@ -87,7 +104,10 @@ export const OrderContentHeader = (props) => {
               defaultValue={deadlineType}
               handleChangeDeadlineType={(deadlineType) => handleChangeDeadlineType(deadlineType)}
             /> */}
-            <OrdersDashboardSwitch active={active} />
+            <OrdersDashboardSwitch
+              active={active}
+              handleSwitch={handleSwitch}
+            />
           </WrapperDeadlineAndSwitch>
         </TopRightSection>
       </OrderContentHeaderContainer>
@@ -99,7 +119,6 @@ export const OrderContentHeader = (props) => {
         driversList={driversList}
         paymethodsList={paymethodsList}
         businessesList={businessesList}
-        ordersStatusSelected={ordersStatusSelected}
         handleChangeFilterValues={handleChangeFilterValues}
       />
 

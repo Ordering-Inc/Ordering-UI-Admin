@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components'
 export const Option = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 10px;
-  padding: ${({ padding }) => padding || '15px 10px'};
+  column-gap: 8px;
+  padding: ${({ padding }) => padding || '5px 10px'};
   white-space: nowrap;
   ${({ isPhoneView }) => isPhoneView && css`
     width: 100%;
@@ -37,7 +37,6 @@ export const OptionContent = styled.div`
 `
 
 export const DriverNameContainer = styled.div`
-  font-size: 12px;
   line-height: 1.3;
   color: #263238;
 
@@ -46,14 +45,15 @@ export const DriverNameContainer = styled.div`
   `}
 `
 
-export const DriverName = styled.div`
+export const DriverName = styled.p`
   font-size: 16px;
   line-height: 1.3;
-  color: #263238;
+  color: #000;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 150px;
+  margin: 0px;
 
   ${({ small }) => small && css`
     font-size: 11px;
@@ -63,7 +63,12 @@ export const DriverName = styled.div`
     max-width: 90px;
   }
 `
-
+export const DriverText = styled.span`
+  font-size: 12px;
+  ${({ small }) => small && css`
+    font-size: 8px;
+  `}
+`
 export const PhoneContainer = styled.div`
   display: flex;
   align-items: center;
@@ -84,15 +89,18 @@ export const WrapperDriverImage = styled.div`
   svg {
     width: 100%;
     height: 100%;
-    padding: 5px;
+    padding: 7px;
     box-sizing: border-box;
     border-radius: 50%;
   }
 
   ${({ small }) => small && css`
-    width: 27px;
-    height: 27px;
-    border-radius: 3px;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    svg {
+      padding: 3px;
+    }
   `}
 `
 const DriverImageStyled = styled.div`

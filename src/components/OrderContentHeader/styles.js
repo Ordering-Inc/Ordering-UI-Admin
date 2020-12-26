@@ -58,10 +58,9 @@ export const FilterButton = styled.button`
   display: flex;
   margin-right: 40px;
   margin-left: 10px;
-
-  img {
-    width: 18px;
-  }
+  font-size: 24px;
+  padding: 0px;
+  color: #1C202E;
 
   &:active {
     opacity: 0.5;

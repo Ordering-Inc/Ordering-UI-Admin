@@ -9,9 +9,8 @@ import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 
 import { PageNotFound } from './Pages/PageNotFound'
-import { OrdersList } from './Pages/OrdersList'
+import { OrdersListAndDelivery } from './Pages/OrdersListAndDelivery'
 import { Login } from './Pages/Login'
-import { DeliveryDashboard } from './Pages/DeliveryDashboard'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -55,7 +54,7 @@ export const App = () => {
                 <Switch>
                   <Route exact path='/'>
                     {
-                      auth ? <Redirect to='/orders' /> : <Redirect to='/login' />
+                      auth ? <Redirect to='/orders-deliveries' /> : <Redirect to='/login' />
                     }
                   </Route>
 
@@ -68,23 +67,15 @@ export const App = () => {
                           />
                         )
                         : (
-                          <Redirect to='/orders' />
+                          <Redirect to='/orders-deliveries' />
                         )
                     }
                   </Route>
 
-                  <Route exact path='/orders'>
+                  <Route exact path='/orders-deliveries'>
                     {
                       auth
-                        ? <OrdersList />
-                        : <Redirect to='/login' />
-                    }
-                  </Route>
-
-                  <Route exact path='/delivery-dashboard'>
-                    {
-                      auth
-                        ? <DeliveryDashboard />
+                        ? <OrdersListAndDelivery />
                         : <Redirect to='/login' />
                     }
                   </Route>

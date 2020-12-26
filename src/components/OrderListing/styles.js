@@ -86,5 +86,5 @@ export const InnerOrderListContent = styled.div`
     `}
 `
 export const WrapperOrderListContent = styled.div`
-    overflow: auto;
+    overflow-x: auto;
 `

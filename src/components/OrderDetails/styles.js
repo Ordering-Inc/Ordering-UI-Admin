@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
+  height: 100%;
 
   div.skeleton-loading {
     justify-content: space-between;
@@ -30,7 +31,7 @@ export const WrapperContainer = styled.div`
   display: flex;
   position: relative;
   max-width: 1200px;
-
+  padding-top: 30px;
   @media (max-width: 1200px) {
     padding: 30px 0;
     flex-direction: column;
@@ -42,13 +43,15 @@ export const OrderInfoContent = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  padding: 50px 50px 50px 0;
+  padding: 50px 35px 50px 0;
   box-sizing: border-box;
-
+  max-height: 800px;
+  overflow: auto;
+  margin-right: 10px;
   @media (max-width: 1200px) {
-    width: 55%;
     width: 100%;
     padding: 20px 0;
+    max-height: initial;
   }
 `
 export const PhotoWrapper = styled.div`
@@ -212,9 +215,9 @@ export const SectionTitle = styled.p`
 `
 export const SectionContainer = styled.div`
   display: flex;
-  margin: 15px 0px 30px;
   width: 100%;
   column-gap: 10px;
+  margin-bottom: 20px;
 `
 export const InfoBlock = styled.div`
   width: 70%;
@@ -278,21 +281,11 @@ export const CustomerContactBlock = styled.div`
 `
 export const OrderProducts = styled(SectionContainer)`
   flex-direction: column;
-  max-height: 300px;
-  overflow: auto;
-  width: calc(100% + 20px);
-  padding-right: 20px;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `
 export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  border-top: 1px solid #BFBFBF;
   table {
     width: 100%;
     font-size: 18px;
@@ -471,7 +464,7 @@ export const OrderTypeContent = styled.div`
 export const ContactInfoContent = styled.div`
   width: 50%;
   background: ${props => props.theme.colors.primary};
-  border-radius: 40px;
+  border-radius: 20px;
   padding: 30px 50px;
   box-sizing: border-box;
 
@@ -535,7 +528,7 @@ export const ButtonLink = styled.button`
   }
 `
 export const DriverSelectorContainer = styled.div`
-  margin: 15px 0 100px 0;
+  margin: 15px 0 0 0;
   & > div {
     width: 100%;
   }
@@ -545,7 +538,7 @@ export const DriverSelectorContainer = styled.div`
   }
 `
 export const PrintButtonContainer = styled.div`
-  padding-bottom: 60px;
+  margin-top: 100px;
   button {
     width: 100%;
     padding: 10px 15px;
@@ -560,8 +553,12 @@ export const ChatContainer = styled.div`
   top: 0px;
   width: 100%;
   background: #fff;
-  height: calc(100vh - 65px);
+  height: 100%;
   z-index: 1000;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  border-radius: 7px;
 `
 export const PhoneNumber = styled.div`
   display: none;

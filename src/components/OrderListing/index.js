@@ -34,7 +34,9 @@ export const OrderListing = (props) => {
     registerOrderId,
     handleOpenOrderDetail,
     handleNotification,
-    handleResetNotification
+    handleResetNotification,
+    driverOrdersLoading,
+    size
   } = props
 
   const theme = useTheme()
@@ -53,7 +55,7 @@ export const OrderListing = (props) => {
   // Get current orders
   const indexOfLastPost = currentPage * ordersPerPage
   const indexOfFirstPost = indexOfLastPost - ordersPerPage
-  const currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
+  const [currentOrders, setCurrentOrders] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
   // Change page
@@ -79,6 +81,11 @@ export const OrderListing = (props) => {
     }
   }, [orderList])
 
+  useEffect(() => {
+    const _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
+    setCurrentOrders(_currentOrders)
+  }, [orderList, currentPage])
+
   const toggleOrderList = () => {
     setActiveState(setActive === '' ? 'active' : '')
     if (content.current) {
@@ -97,21 +104,23 @@ export const OrderListing = (props) => {
   }
 
   useEffect(() => {
-    if (registerOrderId === null) return
+    if (registerOrderId === null || !registerOrderId) return
     handleNotification(registerOrderId)
     handleResetNotification()
   }, [registerOrderId])
 
   return (
     <>
-      <OrderStatusTitle>
-        <GoTriangleDown
-          className={`${setRotate}`}
-          onClick={() => toggleOrderList()}
-        />
-        {orderStatusTitle}
-      </OrderStatusTitle>
-      {!(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? (
+      {orderStatusTitle && (
+        <OrderStatusTitle>
+          <GoTriangleDown
+            className={`${setRotate}`}
+            onClick={() => toggleOrderList()}
+          />
+          {orderStatusTitle}
+        </OrderStatusTitle>
+      )}
+      {!(orderList.loading || driversList.loading || driverOrdersLoading) && orderList.orders.length === 0 ? (
         <>
           <WrapperNoneOrders
             small={orderListView === 'small'}
@@ -132,12 +141,13 @@ export const OrderListing = (props) => {
             small={orderListView === 'small'}
           >
             {orderListView === 'big' &&
-              !(orderList.loading || driversList.loading) ? (
+              !(orderList.loading || driversList.loading || driverOrdersLoading) ? (
                 <>
                   {currentOrders.map(order => (
                     <React.Fragment key={order.id}>
                       {orderListView === 'big' && (
                         <OrderItemAccordion
+                          size={size}
                           order={order}
                           drivers={driversList.drivers}
                           pendingOrder={pendingOrder}
@@ -198,7 +208,7 @@ export const OrderListing = (props) => {
 
             {orderListView === 'small' && (
               <>
-                {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
+                {!(orderList.loading || driversList.loading || driverOrdersLoading) ? currentOrders.map(order => (
                   <React.Fragment key={order.id}>
                     <SmallOrderItemAccordion
                       order={order}
@@ -245,7 +255,7 @@ export const OrderListing = (props) => {
 
             {pagination && (
               <>
-                {!orderList.loading && pagination.totalPages && (
+                {!(orderList.loading || driverOrdersLoading) && totalPages > 0 && (
                   <OrdersPagination
                     ordersPerPage={ordersPerPage}
                     totalOrders={orderList.orders.length}

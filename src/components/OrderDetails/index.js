@@ -178,14 +178,16 @@ const OrderDetailsUI = (props) => {
   }
 
   const getProductPrice = (product) => {
-    let price = product.quantity * product.price
+    let subOptionPrice = 0
     if (product.options.length > 0) {
       for (const option of product.options) {
         for (const suboption of option.suboptions) {
-          price += suboption.quantity * suboption.price
+          subOptionPrice += suboption.quantity * suboption.price
         }
       }
     }
+
+    const price = product.quantity * (product.price + subOptionPrice)
     return parseFloat(price.toFixed(2))
   }
 
@@ -235,13 +237,13 @@ const OrderDetailsUI = (props) => {
                 {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>
-                  {parseDate(order?.delivery_datetime)}
+                  {parseDate(order?.delivery_datetime, { utc: false })}
                 </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               <OrderStatus>
                 {(!pendingOrder && !preOrder) && (
-                  <span>{getOrderStatus(order?.status)?.value}</span>
+                  <span>{getOrderStatus(parseInt(order?.status)).value}</span>
                 )}
                 {pendingOrder && (
                   <span>{t('PENDING', 'Pending')}</span>
@@ -267,7 +269,7 @@ const OrderDetailsUI = (props) => {
                 <PaymethodCreatedDateContent>
                   <p>{t('DATE', 'Date')}</p>
                   <p>
-                    {parseDate(order?.delivery_datetime)}
+                    {parseDate(order?.delivery_datetime, { utc: false })}
                   </p>
                 </PaymethodCreatedDateContent>
               </PaymethodCreatedDate>
@@ -312,21 +314,23 @@ const OrderDetailsUI = (props) => {
                       <td>-{parsePrice(order?.discount)}</td>
                     </tr>
                   )}
-                  {order?.service_fee !== 0 && (
+                  {order?.service_fee > 0 && (
                     <tr>
                       <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
                       <td>{parsePrice(getTaxPrice())}</td>
                     </tr>
                   )}
-                  <tr>
-                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                    <td>{parsePrice(order?.deliveryFee)}</td>
-                  </tr>
+                  {(order?.deliveryFee > 0) && (
+                    <tr>
+                      <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                      <td>{parsePrice(order?.deliveryFee)}</td>
+                    </tr>
+                  )}
                   <tr>
                     <td>{t('DRIVER_TIP', 'Driver tip')}</td>
                     <td>{parsePrice(order?.driver_tip)}</td>
                   </tr>
-                  {order?.service_fee !== 0 && (
+                  {order?.service_fee > 0 && (
                     <tr>
                       <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
                       <td>{parsePrice(getServiceFee())}</td>
@@ -349,7 +353,9 @@ const OrderDetailsUI = (props) => {
               <OrderStatusTypeSelector
                 orderId={order.id}
                 deliveryType={order?.delivery_type}
-                defaultValue={order.status}
+                defaultValue={parseInt(order.status)}
+                pendingOrder={pendingOrder}
+                preOrder={preOrder}
                 handleUpdateOrderStatus={handleUpdateOrderStatus}
               />
               <WrapperButton>
@@ -413,43 +419,42 @@ const OrderDetailsUI = (props) => {
               </InfoBlock>
             </SectionContainer>
 
-            <SectionTitle>
-              {t('DRIVER', 'Driver')}
-            </SectionTitle>
-            <SectionContainer>
-              <PhotoWrapper>
-                {order?.driver?.photo ? (
-                  <Photo bgimage={order?.driver?.photo} />
-                ) : (
-                  <FaUserAlt />
-                )}
-              </PhotoWrapper>
-              {order.driver_id ? (
-                <InfoBlock>
-                  <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                  <CustomerContactBlock>
-                    <button onClick={() => handleOpenMessages('driver')}>
-                      <BsChat /> {t('CHAT', 'Chat')}
-                    </button>
-                    {order?.driver?.cellphone && (
-                      <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
-                        <HiOutlinePhone /> {t('CALL', 'Call')}
-                      </button>
-                    )}
-                  </CustomerContactBlock>
-                  <PhoneNumber>
-                    <HiOutlinePhone /> {order.driver.cellphone}
-                  </PhoneNumber>
-                </InfoBlock>
-              ) : (
-                <InfoBlock>
-                  <h1>{t('NO_DRIVER', 'No driver')}</h1>
-                </InfoBlock>
-              )}
-            </SectionContainer>
-
             {order?.delivery_type === 1 && (
               <>
+                <SectionTitle>
+                  {t('DRIVER', 'Driver')}
+                </SectionTitle>
+                <SectionContainer>
+                  <PhotoWrapper>
+                    {order?.driver?.photo ? (
+                      <Photo bgimage={order?.driver?.photo} />
+                    ) : (
+                      <FaUserAlt />
+                    )}
+                  </PhotoWrapper>
+                  {order.driver_id ? (
+                    <InfoBlock>
+                      <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                      <CustomerContactBlock>
+                        <button onClick={() => handleOpenMessages('driver')}>
+                          <BsChat /> {t('CHAT', 'Chat')}
+                        </button>
+                        {order?.driver?.cellphone && (
+                          <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
+                            <HiOutlinePhone /> {t('CALL', 'Call')}
+                          </button>
+                        )}
+                      </CustomerContactBlock>
+                      <PhoneNumber>
+                        <HiOutlinePhone /> {order.driver.cellphone}
+                      </PhoneNumber>
+                    </InfoBlock>
+                  ) : (
+                    <InfoBlock>
+                      <h1>{t('NO_DRIVER', 'No driver')}</h1>
+                    </InfoBlock>
+                  )}
+                </SectionContainer>
                 <SectionTitle driver>
                   {t('SELECT_DRIVER', 'Select Driver')}
                 </SectionTitle>

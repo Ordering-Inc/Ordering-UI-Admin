@@ -7,7 +7,7 @@ export const AccordionSection = styled.div`
   width: 100%;
   background: #FFF;
   cursor: pointer;
-  min-width: 960px;
+  min-width: 1020px;
 `
 export const OrderItemAccordionContainer = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const OrderItemAccordionContainer = styled.div`
   justify-content: space-between;
   box-shadow: 0px 0px 3px #00000029;
   border-radius: 6px;
-  border-left: 10px solid;
+  border-left: 7px solid;
   border-color: ${({ filterColor }) => filterColor || '#0E9B55'};
   margin-bottom: 10px;
   position: initial;
@@ -24,7 +24,7 @@ export const OrderItemAccordionContainer = styled.div`
 
     &:nth-child(1) {
       width: 15%;
-      min-width: 160px;
+      min-width: 180px;
       align-items: center;
       column-gap: 0px;
       padding: 0px;
@@ -50,24 +50,36 @@ export const OrderItemAccordionContainer = styled.div`
     }
 
     &:nth-child(4) {
-      width: 17%;
+      width: 18%;
       min-width: 150px;
+      padding: 0px;
+      p {
+        font-size: 14px;
+        font-weight: 600;
+      }
     }
 
     &:nth-child(5) {
       min-width: 40px;
-      width: 5%;
+      width: 4%;
+      font-size: 14px;
     }
 
     
     &:nth-child(6) {
-      width: 20%;
-      min-width: 170px;
+      width: ${({ size }) => size === 'small' ? '13%' : '20%'};
+      min-width: ${({ size }) => size === 'small' ? '130px' : '170px'};
+      display: ${({ size }) => size === 'small' ? 'flex' : 'block'};
+      justify-content: ${({ size }) => size === 'small' ? 'center' : 'initial'};
+
+      p {
+        font-size: 12px;
+      }
     }
 
     &:nth-child(7) {
       width: 7%;
-      min-width: 110px;
+      min-width: 120px;
       display: flex;
       justify-content: flex-end;
     }
@@ -99,15 +111,7 @@ export const OrderItemAccordionCell = styled.div`
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
-          max-width: 150px;
-      
-          @media (max-width: 1300px) {
-            margin: 0px;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            max-width: 120px;
-          }
+          max-width: 165px;   
         }
       }
     }
@@ -132,17 +136,17 @@ export const CheckBoxContainer = styled.div`
   }
 `
 export const WrapperAccordionImage = styled.div`
-  max-width: 50px;
-  max-height: 50px;
-  height: 50px;
-  width: 50px;
+  max-width: 45px;
+  max-height: 45px;
+  height: 45px;
+  width: 45px;
   border: 1px solid #E3E3E3;
   border-radius: 10px;
 
   svg {
     width: 100%;
     height: 100%;
-    padding: 10px;
+    padding: 7px;
     box-sizing: border-box;
     border-radius: 50%;
   }
@@ -179,6 +183,9 @@ export const AccordionImage = (props) => {
 export const TextBlockContainer = styled.div`
   flex: 1;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 export const BigText = styled.p`
   color: #000000;
@@ -187,10 +194,11 @@ export const BigText = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 14px;
 `
 export const SmallText = styled.p`
   color: #343434;
-  font-size: 13px;
+  font-size: 12px;
   margin: 0px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -203,7 +211,7 @@ export const DeliveryTypeContainer = styled.div`
   align-items: center;
 `
 export const DeliveryIcon = styled.div`
-  width: 30px;
+  width: 25px;
   height: 30px;
 
   img {

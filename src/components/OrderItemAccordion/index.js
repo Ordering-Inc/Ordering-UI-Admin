@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import dayjs from 'dayjs'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -39,12 +40,11 @@ export const OrderItemAccordion = (props) => {
   const {
     order,
     drivers,
-    preOrder,
-    pendingOrder,
     selectedOrderIds,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
-    handleOpenOrderDetail
+    handleOpenOrderDetail,
+    size
   } = props
 
   const [, t] = useLanguage()
@@ -62,6 +62,8 @@ export const OrderItemAccordion = (props) => {
   const content = useRef(null)
   const toggleBtn = useRef(null)
   const driverSelectorRef = useRef(null)
+  const [pendingOrder, setPendingOrder] = useState(false)
+  const [preOrder, setPreOrder] = useState(false)
 
   const toggleOrderSelect = (id) => {
     setIsChecked(!isChecked)
@@ -81,33 +83,31 @@ export const OrderItemAccordion = (props) => {
     const isActionClick = checkbox.current?.contains(e.target) || driverSelectorRef.current?.contains(e.target) || toggleBtn.current?.contains(e.target) || e.target.closest('.orderStatus')
 
     if (!isActionClick) {
-      history.push(`/orders?id=${order.id}`)
+      history.push(`/orders-deliveries?id=${order.id}`)
       handleOpenOrderDetail(order.id, pendingOrder, preOrder)
     }
-  }
-
-  const handleSelectedDriver = (driver) => {
-    console.log(driver)
   }
 
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
       const pos = position ? `(${position})` : ''
-      return `${name} ${pos} ${parsePrice(quantity * price)}`
+      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price)}` : `${name} ${pos}`
     } else {
       return 'No'
     }
   }
 
   const getProductPrice = (product) => {
-    let price = product.quantity * product.price
+    let subOptionPrice = 0
     if (product.options.length > 0) {
       for (const option of product.options) {
         for (const suboption of option.suboptions) {
-          price += suboption.quantity * suboption.price
+          subOptionPrice += suboption.quantity * suboption.price
         }
       }
     }
+
+    const price = product.quantity * (product.price + subOptionPrice)
     return parseFloat(price.toFixed(2))
   }
 
@@ -138,7 +138,16 @@ export const OrderItemAccordion = (props) => {
     return parseFloat(serviceFee.toFixed(2))
   }
 
+  const isPendingOrPreOrder = (createdAt, deliveryDatetimeUtc) => {
+    const date1 = dayjs(createdAt)
+    const date2 = dayjs(deliveryDatetimeUtc)
+    return Math.abs(date1.diff(date2, 'minute')) < 60
+  }
   useEffect(() => {
+    if (!selectedOrderIds) {
+      setIsChecked(false)
+      return
+    }
     if (selectedOrderIds.includes(order.id)) setIsChecked(true)
   }, [])
 
@@ -152,6 +161,17 @@ export const OrderItemAccordion = (props) => {
     }
     _orderSubprice = parseFloat(_orderSubprice.toFixed(2))
     setSubTotalPrice(_orderSubprice)
+
+    if (order.status === 0) {
+      const checkPendingOrPreOrder = isPendingOrPreOrder(order.created_at, order.delivery_datetime_utc)
+      if (checkPendingOrPreOrder) {
+        setPendingOrder(true)
+        setPreOrder(false)
+      } else {
+        setPendingOrder(false)
+        setPreOrder(true)
+      }
+    }
   }, [order])
 
   useEffect(() => {
@@ -180,6 +200,7 @@ export const OrderItemAccordion = (props) => {
       <AccordionSection>
         <OrderItemAccordionContainer
           className={setActive}
+          size={size}
           // filterColor={
           //   order.deadline_status === 1
           //     ? theme?.colors?.deadlineOk
@@ -187,7 +208,6 @@ export const OrderItemAccordion = (props) => {
           //       ? theme?.colors?.deadlineDelayed
           //       : theme?.colors?.deadlineRisk
           // }
-
           onClick={(e) => handleGoToPage(e)}
         >
           <OrderItemAccordionCell>
@@ -201,7 +221,7 @@ export const OrderItemAccordion = (props) => {
             <TextBlockContainer>
               <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
               <SmallText>
-                {parseDate(order?.delivery_datetime)}
+                {parseDate(order?.delivery_datetime, { utc: false })}
               </SmallText>
             </TextBlockContainer>
           </OrderItemAccordionCell>
@@ -231,26 +251,17 @@ export const OrderItemAccordion = (props) => {
           </OrderItemAccordionCell>
 
           <OrderItemAccordionCell>
-            {order?.driver_id && order?.delivery_type === 1 ? (
+            {order?.delivery_type === 1 && (
               <WrapperDriverSelector ref={driverSelectorRef}>
                 <DriverSelector
+                  orderView
+                  padding='5px 0'
                   defaultValue={order?.driver_id ? order.driver_id : 'default'}
                   drivers={drivers}
                   order={order}
-                  handleSelectedDriver={(driver) => handleSelectedDriver(driver)}
                 />
               </WrapperDriverSelector>
-            ) : (
-              <WrapperAccordionImage>
-                <AccordionImage bgimage={theme?.images?.icons?.noDriver} />
-              </WrapperAccordionImage>
             )}
-
-            <TextBlockContainer>
-              <BigText>
-                {!order?.driver_id && 'No Driver'}
-              </BigText>
-            </TextBlockContainer>
           </OrderItemAccordionCell>
 
           <OrderItemAccordionCell>
@@ -278,7 +289,7 @@ export const OrderItemAccordion = (props) => {
 
           <OrderItemAccordionCell>
             <OrderStatusTypeSelector
-              defaultValue={order.status}
+              defaultValue={parseInt(order.status)}
               orderId={order.id}
               deliveryType={order?.delivery_type}
               pendingOrder={pendingOrder}
@@ -347,16 +358,18 @@ export const OrderItemAccordion = (props) => {
                                   <p>{option.name}</p>
                                   <ProductOptionsList className='suboption'>
                                     {option.suboptions.map(suboption => (
-                                      <li key={suboption.id}>
-                                        <span>
-                                          {getFormattedSubOptionName({
-                                            quantity: suboption.quantity,
-                                            name: suboption.name,
-                                            position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                                            price: suboption.price
-                                          })}
-                                        </span>
-                                      </li>
+                                      <React.Fragment key={suboption.id}>
+                                        <li>
+                                          <span>
+                                            {getFormattedSubOptionName({
+                                              quantity: suboption.quantity,
+                                              name: suboption.name,
+                                              position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
+                                              price: suboption.price
+                                            })}
+                                          </span>
+                                        </li>
+                                      </React.Fragment>
                                     ))}
                                   </ProductOptionsList>
                                 </li>

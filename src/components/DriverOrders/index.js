@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useLanguage } from 'ordering-components'
+import React from 'react'
+import { useLanguage, OrderList as OrdersListController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderListing } from '../OrderListing'
 
@@ -16,14 +16,31 @@ export const DriverOrders = (props) => {
   const {
     driver,
     driversList,
-    driverOrders
+    driverOrders,
+    handleSelectedOrderIds,
+    handleOpenOrderDetail
   } = props
 
   const [, t] = useLanguage()
 
-  useEffect(() => {
-    console.log(driverOrders)
-  }, [driverOrders])
+  const OrdersControlProps = {
+    ...props,
+    UIComponent: OrderListing,
+    useDefualtSessionManager: true,
+    asDashboard: true,
+    // searchValue: searchValue,
+    filterValues: {},
+    isSearchByOrderId: true,
+    isSearchByCustomerEmail: true,
+    isSearchByCustomerPhone: true,
+    handleSelectedOrderIds: handleSelectedOrderIds,
+    driversList: driversList,
+    orderListView: 'big',
+    orders: driverOrders.orders,
+    driverOrdersLoading: driverOrders.loading,
+    orderStatus: [],
+    handleOpenOrderDetail: handleOpenOrderDetail
+  }
 
   return (
     <WrapperDriverOrders>
@@ -45,11 +62,7 @@ export const DriverOrders = (props) => {
         </DriverInfo>
       </Header>
       <WrapperOrderListing>
-        <OrderListing
-          orderList={driverOrders}
-          driversList={driversList}
-          orderListView='big'
-        />
+        <OrdersListController {...OrdersControlProps} />
       </WrapperOrderListing>
     </WrapperDriverOrders>
   )

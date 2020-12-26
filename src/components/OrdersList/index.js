@@ -1,52 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
-import {
-  OrdersListContainer,
-  OrdersContent,
-  OrdersInnerContent,
-  WrapperIndicator,
-  WrapperOrderNotification
-} from './styles'
-import { OrdersManage as OrdersManageController, OrderList as OrdersListController, useLanguage } from 'ordering-components'
-import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
-import { OrderContentHeader } from '../OrderContentHeader'
-import { OrdersDashboardControls } from '../OrdersDashboardControls'
+import React from 'react'
+import { OrderList as OrdersListController, useLanguage } from 'ordering-components'
 import { OrderListing } from '../OrderListing'
-import { OrderDetails } from '../OrderDetails'
-import { Modal } from '../Modal'
 
-const OrdersListUI = (props) => {
+export const OrdersList = (props) => {
   const {
+    orderListView,
     searchValue,
-    driverGroupList,
-    driversList,
-    paymethodsList,
-    businessesList,
-    ordersStatusGroup,
     filterValues,
+    selectedOrderIds,
     deletedOrderId,
-    startMulitOrderStatusChange,
-    startMulitOrderDelete,
-    handleChangeSearch,
-    handleChangeFilterValues,
-    handleOrdersStatusGroupFilter,
-    handleChangeMultiOrdersStatus,
-    handleDeleteMultiOrders,
+    driversList,
+    ordersStatusGroup,
     handleSelectedOrderIds,
-    selectedOrderIds
+    handleNotification,
+    handleOpenOrderDetail
   } = props
-
   const [, t] = useLanguage()
-  const history = useHistory()
-  const query = new URLSearchParams(useLocation().search)
-  const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
-  const [orderDetailId, setOrderDetailId] = useState(null)
-
-  const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
-  const [pendingOrder, setPendingOrder] = useState(false)
-  const [preOrder, setPreOrder] = useState(false)
-  const [notificationModalOpen, setNotificationModalOpen] = useState(false)
-  const [registerOrderId, setRegisterOrderId] = useState(null)
 
   const OrdersCommonControlProps = {
     ...props,
@@ -62,7 +31,7 @@ const OrdersListUI = (props) => {
     handleSelectedOrderIds: handleSelectedOrderIds,
     selectedOrderIds: selectedOrderIds,
     driversList: driversList,
-    orderListView: 'big'
+    orderListView: orderListView
   }
 
   const PendingOrdersControlProps = {
@@ -136,188 +105,48 @@ const OrdersListUI = (props) => {
     orderStatus: [12],
     orderStatusTitle: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
   }
-
-  useEffect(() => {
-    const id = query.get('id')
-    if (id === null) setIsOpenOrderDetail(false)
-    else {
-      setOrderDetailId(id)
-      setIsOpenOrderDetail(true)
-    }
-  }, [])
-
-  const handleBackRedirect = () => {
-    setIsOpenOrderDetail(false)
-    history.push('/orders')
-  }
-  const handleOpenOrderDetail = (id, pendingOrder, preOrder) => {
-    if (pendingOrder) {
-      setPendingOrder(true)
-    } else {
-      setPendingOrder(false)
-    }
-
-    if (preOrder) {
-      setPreOrder(true)
-    } else {
-      setPreOrder(false)
-    }
-    setOrderDetailId(id)
-    setIsOpenOrderDetail(true)
-  }
-
-  const handleNotification = (orderId) => {
-    setRegisterOrderId(orderId)
-    setNotificationModalOpen(true)
-  }
-
-  const handleCloseNotificationModal = () => {
-    setNotificationModalOpen(false)
-  }
-
-  useEffect(() => {
-    if (startMulitOrderStatusChange || startMulitOrderDelete) {
-      setTotalSelectedOrder(selectedOrderIds.length)
-    }
-  }, [startMulitOrderStatusChange, startMulitOrderDelete])
-
-  useEffect(() => {
-    if (selectedOrderIds.length === 0) {
-      setTimeout(() => {
-        setTotalSelectedOrder(0)
-      }, 500)
-    }
-  }, [selectedOrderIds])
-
-  useEffect(() => {
-    const sound = document.getElementById('notification-sound')
-    const interval = setInterval(() => {
-      if (notificationModalOpen) {
-        sound.muted = false
-        sound.play()
-      }
-    }, 3000)
-    if (!notificationModalOpen) {
-      clearInterval(interval)
-      return
-    }
-    return () => clearInterval(interval)
-  }, [notificationModalOpen])
-
   return (
     <>
-      <OrdersListContainer>
-        <OrderStatusFilterBar
-          selectedOrderStatus={ordersStatusGroup}
-          changeOrderStatus={handleOrdersStatusGroupFilter}
-        />
-        <OrdersContent>
-          <OrdersInnerContent className='order-content'>
-            <OrderContentHeader
-              active='orders'
-              searchValue={searchValue}
-              driverGroupList={driverGroupList}
-              driversList={driversList}
-              paymethodsList={paymethodsList}
-              businessesList={businessesList}
-              ordersStatusSelected={ordersStatusGroup}
-              handleChangeSearch={handleChangeSearch}
-              handleChangeFilterValues={handleChangeFilterValues}
-            />
-            <OrdersDashboardControls
-              selectedOrderNumber={selectedOrderIds.length}
-              filterValues={filterValues}
-              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-              handleDeleteMultiOrders={handleDeleteMultiOrders}
-            />
-            {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
-              <>
-                <OrdersListController
-                  handleNotification={handleNotification}
-                  handleOpenOrderDetail={handleOpenOrderDetail}
-                  {...OrdersCommonControlProps} {...PendingOrdersControlProps}
-                />
-                <OrdersListController
-                  handleNotification={handleNotification}
-                  handleOpenOrderDetail={handleOpenOrderDetail}
-                  {...OrdersCommonControlProps} {...PreOrdersControlProps}
-                />
-              </>
-            )}
-            {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
-              <>
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
-              </>
-            )}
-            {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
-              <>
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
-              </>
-            )}
-            {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
-              <>
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
-                <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
-              </>
-            )}
-          </OrdersInnerContent>
-        </OrdersContent>
-      </OrdersListContainer>
-
-      <Modal
-        width='90%'
-        height='90vh'
-        open={isOpenOrderDetail}
-        onClose={() => handleBackRedirect()}
-      >
-        <OrderDetails
-          orderId={orderDetailId}
-          driversList={driversList}
-          pendingOrder={pendingOrder}
-          preOrder={preOrder}
-        />
-      </Modal>
-
-      <Modal
-        width='50%'
-        open={notificationModalOpen}
-        onClose={() => handleCloseNotificationModal()}
-        acceptText={t('OK', 'OK')}
-        onAccept={() => handleCloseNotificationModal()}
-      >
-        <WrapperOrderNotification>
-          <p>{t('ORDERING', 'Ordering')}</p>
-          <p>Order #{registerOrderId} has been ordered.</p>
-        </WrapperOrderNotification>
-      </Modal>
-
-      <audio id='notification-sound' muted>
-        <source src={require('../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
-        <source src={require('../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
-      </audio>
-
-      {totalSelectedOrder > 0 && (
-        <WrapperIndicator>
-          {selectedOrderIds.length}/{totalSelectedOrder}
-        </WrapperIndicator>
+      {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
+        <>
+          <OrdersListController
+            size='small'
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps} {...PreOrdersControlProps}
+          />
+          <OrdersListController
+            size='small'
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps} {...PendingOrdersControlProps}
+          />
+        </>
+      )}
+      {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
+        <>
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
+        </>
+      )}
+      {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
+        <>
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
+        </>
+      )}
+      {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
+        <>
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
+          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
+        </>
       )}
     </>
   )
-}
-
-export const OrdersList = (props) => {
-  const OrdersListControlProps = {
-    ...props,
-    UIComponent: OrdersListUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
-  }
-  return <OrdersManageController {...OrdersListControlProps} />
 }

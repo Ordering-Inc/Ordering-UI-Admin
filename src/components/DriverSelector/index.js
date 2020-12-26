@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, DriversList as DriversController } from 'ordering-components'
+import { useTheme } from 'styled-components'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Select } from '../../styles/Select'
@@ -14,7 +15,8 @@ import {
   PhoneContainer,
   WrapperDriverImage,
   DriverImage,
-  DriverName
+  DriverName,
+  DriverText
 } from './styles'
 toast.configure()
 
@@ -27,12 +29,15 @@ const DriverSelectorUI = (props) => {
     isFilterView,
     singleDriverIds,
     small,
+    padding,
+    orderView,
     driverActionStatus,
     handleAssignDriver,
     handleChangeDriver
   } = props
 
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
@@ -42,20 +47,43 @@ const DriverSelectorUI = (props) => {
     const _driversOptionList = [
       {
         value: 'default',
-        content: <Option padding='3px 0'>{t('SELECT_DRIVER', 'Select driver')}</Option>,
+        content: (
+          <Option padding={padding}>
+            {orderView ? (
+              <>
+                <WrapperDriverImage small={small}>
+                  <DriverImage bgimage={theme?.images?.icons?.noDriver} small={small} />
+                </WrapperDriverImage>
+                <OptionContent>
+                  <DriverNameContainer>
+                    <DriverName small={small}>{t('NO_DRIVER', 'No Driver')}</DriverName>
+                  </DriverNameContainer>
+                </OptionContent>
+              </>
+            ) : (
+              t('SELECT_DRIVER', 'Select driver')
+            )}
+          </Option>
+        ),
         color: 'primary',
         disabled: !isFilterView ? 'disabled' : null
       }
     ]
     if (!isFilterView) {
-      _driversOptionList.push({ value: 'remove', content: <Option padding='3px'>{t('REMOVE_ASSIGNED_DRIVER', 'Remove assinged driver')}</Option> })
+      _driversOptionList.push({
+        value: 'remove',
+        content: (
+          <Option padding='3px'>{t('REMOVE_ASSIGNED_DRIVER', 'Remove assinged driver')}</Option>
+        ),
+        disabled: defaultValue === 'default' ? 'disabled' : null
+      })
     }
     if (!driversList.loading) {
       const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
         return {
           value: driver.id,
           content: (
-            <Option small={small} isPhoneView={isPhoneView}>
+            <Option small={small} isPhoneView={isPhoneView} padding={padding}>
               <WrapperDriverImage small={small}>
                 {driver.photo ? (
                   <DriverImage bgimage={driver.photo} small={small} />
@@ -66,7 +94,7 @@ const DriverSelectorUI = (props) => {
               <OptionContent>
                 <DriverNameContainer small={small}>
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
-                  {t('DRIVER', 'Driver')}
+                  <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
                 </DriverNameContainer>
                 {isPhoneView && driver.cellphone && (
                   <PhoneContainer>
@@ -87,7 +115,7 @@ const DriverSelectorUI = (props) => {
       }
     }
     setDriversOptionList(_driversOptionList)
-  }, [driversList])
+  }, [driversList, defaultValue])
 
   const changeDriver = (driverId) => {
     if (isFilterView) {

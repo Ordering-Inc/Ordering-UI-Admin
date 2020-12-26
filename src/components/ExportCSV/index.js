@@ -12,8 +12,7 @@ import {
 const ExportCSVUI = (props) => {
   const {
     actionStatus,
-    handleGetCsvExport,
-    handleGetCsvFilteredExport
+    getCSV
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -21,12 +20,12 @@ const ExportCSVUI = (props) => {
 
   const handleExportAll = () => {
     setPopoverOpen(false)
-    handleGetCsvExport()
+    getCSV(false)
   }
 
   const handleExportFiltered = () => {
     setPopoverOpen(false)
-    handleGetCsvFilteredExport()
+    getCSV(true)
   }
 
   const closePopover = () => {

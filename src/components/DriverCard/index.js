@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import { getStarWidth } from '../../utils'
-import BsChat from '@meronex/icons/bs/BsChat'
+// import BsChat from '@meronex/icons/bs/BsChat'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import {
@@ -23,7 +23,9 @@ export const DriverCard = (props) => {
     driver,
     driversList,
     driverOrders,
-    handleChangeDriverOrders
+    handleChangeDriverOrders,
+    handleSelectedOrderIds,
+    handleOpenOrderDetail
   } = props
 
   const [, t] = useLanguage()
@@ -62,11 +64,11 @@ export const DriverCard = (props) => {
               <p>{getTimeAgo(driver.last_order_assigned_at)}</p>
               <WrapperStar width={getStarWidth(driver.qualification)} />
             </InfoCell>
-            <InfoCell>
+            {/* <InfoCell>
               <button>
                 <BsChat /> {t('CHAT', 'Chat')}
               </button>
-            </InfoCell>
+            </InfoCell> */}
           </InfoBlock>
         </DriverInfoContent>
       </DrirverInfo>
@@ -82,6 +84,8 @@ export const DriverCard = (props) => {
           driver={driver}
           driverOrders={driverOrders}
           driversList={driversList}
+          handleSelectedOrderIds={handleSelectedOrderIds}
+          handleOpenOrderDetail={handleOpenOrderDetail}
         />
       </Modal>
     </>
