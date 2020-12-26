@@ -80,9 +80,22 @@ export const DriversLocation = (props) => {
       if (_offlineDrivers.length === 0) {
         return
       } else {
-        setMapCenter(defaultCenter)
-        setMapZoom(defaultZoom)
-        return
+        let checkLocation = false
+        for (const driver of _offlineDrivers) {
+          if (!driver.available) {
+            if (driver.location !== null) {
+              checkLocation = true
+            }
+            const marker = driver.location !== null ? driver.location : defaultCenter
+            const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+            bounds.extend(newPoint)
+          }
+        }
+        if (!checkLocation) {
+          setMapCenter(defaultCenter)
+          setMapZoom(defaultZoom)
+          return
+        }
       }
     }
 
