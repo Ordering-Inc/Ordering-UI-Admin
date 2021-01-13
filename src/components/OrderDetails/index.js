@@ -5,6 +5,8 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import BisBusiness from '@meronex/icons/bi/BisBusiness'
+import GrClose from '@meronex/icons/gr/GrClose'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -50,7 +52,11 @@ import {
   DriverSelectorContainer,
   PrintButtonContainer,
   ChatContainer,
-  PhoneNumber
+  PhoneNumber,
+  OrderDetailCloseButton,
+  MessageContactInfo,
+  ContactBlock,
+  InfonContent
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -60,7 +66,11 @@ const OrderDetailsUI = (props) => {
     preOrder,
     driversList,
     handleBackRedirect,
-    handleUpdateOrderStatus
+    handleUpdateOrderStatus,
+    messageDashboardView,
+    handleMessageOrderDetail,
+    messageType,
+    handleOpenMessage
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -227,12 +237,12 @@ const OrderDetailsUI = (props) => {
   }, [subTotalPrice])
 
   return (
-    <Container className='order-detail'>
-      {order && Object.keys(order).length > 0 && (
-        <WrapperContainer ref={orderDetail}>
-          <OrderInfoContent className='order-info'>
+    <Container className='order-detail' messageDashboardView={messageDashboardView}>
+      {order && Object.keys(order).length > 0 && !loading && (
+        <WrapperContainer ref={orderDetail} messageDashboardView={messageDashboardView}>
+          <OrderInfoContent className='order-info' messageDashboardView={messageDashboardView}>
             <OrderInfo>
-              <OrderData>
+              <OrderData messageDashboardView={messageDashboardView}>
                 <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
                 {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
@@ -255,7 +265,67 @@ const OrderDetailsUI = (props) => {
                   <img src={getImage(order?.status || 0)} alt='status' />
                 </StatusImage>
               </OrderStatus>
+              {messageDashboardView && (
+                <OrderDetailCloseButton>
+                  <GrClose onClick={() => handleMessageOrderDetail(false)} />
+                </OrderDetailCloseButton>
+              )}
             </OrderInfo>
+
+            {messageDashboardView && (
+              <MessageContactInfo>
+                <ContactBlock
+                  active={messageType === 'business'}
+                  onClick={() => handleOpenMessage(order, 'business')}
+                >
+                  <PhotoWrapper messageDashboardView={messageDashboardView}>
+                    {order?.business?.logo ? (
+                      <Photo bgimage={order?.business?.logo} />
+                    ) : (
+                      <BisBusiness />
+                    )}
+                  </PhotoWrapper>
+                  <InfonContent>
+                    <p>{order?.business?.name}</p>
+                    <p>{order?.business?.address}</p>
+                  </InfonContent>
+                </ContactBlock>
+                <ContactBlock
+                  active={messageType === 'customer'}
+                  onClick={() => handleOpenMessage(order, 'customer')}
+                >
+                  <PhotoWrapper messageDashboardView={messageDashboardView}>
+                    {order?.customer?.photo ? (
+                      <Photo bgimage={order?.customer?.photo} />
+                    ) : (
+                      <FaUserAlt />
+                    )}
+                  </PhotoWrapper>
+                  <InfonContent>
+                    <p>{order?.customer?.name} {order?.customer?.lastname}</p>
+                    <p>{order?.customer?.cellphone}</p>
+                  </InfonContent>
+                </ContactBlock>
+                {order?.driver_id && (
+                  <ContactBlock
+                    active={messageType === 'driver'}
+                    onClick={() => handleOpenMessage(order, 'driver')}
+                  >
+                    <PhotoWrapper messageDashboardView={messageDashboardView}>
+                      {order?.driver?.photo ? (
+                        <Photo bgimage={order?.driver?.photo} />
+                      ) : (
+                        <FaUserAlt />
+                      )}
+                    </PhotoWrapper>
+                    <InfonContent>
+                      <p>{order?.driver?.name} {order?.driver?.lastname}</p>
+                      <p>{t('DRIVER', 'Driver')}</p>
+                    </InfonContent>
+                  </ContactBlock>
+                )}
+              </MessageContactInfo>
+            )}
 
             <PayAndOrderTypeInfo>
               <Paymethod>
@@ -348,134 +418,135 @@ const OrderDetailsUI = (props) => {
               </table>
             </OrderBill>
           </OrderInfoContent>
-          <ContactInfoContent className='contact-info'>
-            <ContactInfoHeader>
-              <OrderStatusTypeSelector
-                orderId={order.id}
-                deliveryType={order?.delivery_type}
-                defaultValue={parseInt(order.status)}
-                pendingOrder={pendingOrder}
-                preOrder={preOrder}
-                handleUpdateOrderStatus={handleUpdateOrderStatus}
-              />
-              <WrapperButton>
-                {/* <ButtonLink>
-                  <img src={theme?.images?.icons?.help} alt='help' />
-                </ButtonLink> */}
-                <ButtonLink onClick={() => handleOpenMessages('history')}>
-                  <img src={theme?.images?.icons?.timeline} alt='timeline' />
-                </ButtonLink>
-              </WrapperButton>
-            </ContactInfoHeader>
-            <SectionTitle>
-              {t('CUSTOMER', 'Customer')}
-            </SectionTitle>
-            <SectionContainer>
-              <PhotoWrapper>
-                {order?.customer?.photo ? (
-                  <Photo bgimage={order?.customer?.photo} />
-                ) : (
-                  <FaUserAlt />
-                )}
-              </PhotoWrapper>
-              <InfoBlock>
-                <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                <span><HiOutlineLocationMarker /> {order?.customer?.address}</span>
-                <CustomerContactBlock>
-                  <button onClick={() => handleOpenMessages('customer')}>
-                    <BsChat /> {t('CHAT', 'Chat')}
-                  </button>
-                  <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
-                    <HiOutlinePhone /> {t('CALL', 'Call')}
-                  </button>
-                </CustomerContactBlock>
-                <PhoneNumber>
-                  <HiOutlinePhone /> {order?.customer?.cellphone}
-                </PhoneNumber>
-              </InfoBlock>
-            </SectionContainer>
-
-            <SectionTitle>
-              {t('BUSINESS', 'Business')}
-            </SectionTitle>
-            <SectionContainer>
-              <PhotoWrapper>
-                <Photo bgimage={order?.business?.logo} />
-              </PhotoWrapper>
-              <InfoBlock>
-                <h1>{order?.business?.name}</h1>
-                <span><HiOutlineLocationMarker /> {order?.business?.address}</span>
-                <CustomerContactBlock>
-                  <button onClick={() => handleOpenMessages('business')}>
-                    <BsChat /> {t('CHAT', 'Chat')}
-                  </button>
-                  <button onClick={() => window.open(`tel:${order.business.phone}`)}>
-                    <HiOutlinePhone /> {t('CALL', 'Call')}
-                  </button>
-                </CustomerContactBlock>
-                <PhoneNumber>
-                  <HiOutlinePhone /> {order.business.phone}
-                </PhoneNumber>
-              </InfoBlock>
-            </SectionContainer>
-
-            {order?.delivery_type === 1 && (
-              <>
-                <SectionTitle>
-                  {t('DRIVER', 'Driver')}
-                </SectionTitle>
-                <SectionContainer>
-                  <PhotoWrapper>
-                    {order?.driver?.photo ? (
-                      <Photo bgimage={order?.driver?.photo} />
-                    ) : (
-                      <FaUserAlt />
-                    )}
-                  </PhotoWrapper>
-                  {order.driver_id ? (
-                    <InfoBlock>
-                      <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                      <CustomerContactBlock>
-                        <button onClick={() => handleOpenMessages('driver')}>
-                          <BsChat /> {t('CHAT', 'Chat')}
-                        </button>
-                        {order?.driver?.cellphone && (
-                          <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
-                            <HiOutlinePhone /> {t('CALL', 'Call')}
-                          </button>
-                        )}
-                      </CustomerContactBlock>
-                      <PhoneNumber>
-                        <HiOutlinePhone /> {order.driver.cellphone}
-                      </PhoneNumber>
-                    </InfoBlock>
+          {!messageDashboardView && (
+            <ContactInfoContent className='contact-info'>
+              <ContactInfoHeader>
+                <OrderStatusTypeSelector
+                  orderId={order.id}
+                  deliveryType={order?.delivery_type}
+                  defaultValue={parseInt(order.status)}
+                  pendingOrder={pendingOrder}
+                  preOrder={preOrder}
+                  handleUpdateOrderStatus={handleUpdateOrderStatus}
+                />
+                <WrapperButton>
+                  {/* <ButtonLink>
+                    <img src={theme?.images?.icons?.help} alt='help' />
+                  </ButtonLink> */}
+                  <ButtonLink onClick={() => handleOpenMessages('history')}>
+                    <img src={theme?.images?.icons?.timeline} alt='timeline' />
+                  </ButtonLink>
+                </WrapperButton>
+              </ContactInfoHeader>
+              <SectionTitle>
+                {t('CUSTOMER', 'Customer')}
+              </SectionTitle>
+              <SectionContainer>
+                <PhotoWrapper>
+                  {order?.customer?.photo ? (
+                    <Photo bgimage={order?.customer?.photo} />
                   ) : (
-                    <InfoBlock>
-                      <h1>{t('NO_DRIVER', 'No driver')}</h1>
-                    </InfoBlock>
+                    <FaUserAlt />
                   )}
-                </SectionContainer>
-                <SectionTitle driver>
-                  {t('SELECT_DRIVER', 'Select Driver')}
-                </SectionTitle>
-                <DriverSelectorContainer>
-                  <DriverSelector
-                    drivers={driversList.drivers}
-                    isPhoneView
-                    defaultValue={order?.driver?.id ? order.driver.id : 'default'}
-                    order={order}
-                  />
-                </DriverSelectorContainer>
-              </>
-            )}
+                </PhotoWrapper>
+                <InfoBlock>
+                  <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
+                  <span><HiOutlineLocationMarker /> {order?.customer?.address}</span>
+                  <CustomerContactBlock>
+                    <button onClick={() => handleOpenMessages('customer')}>
+                      <BsChat /> {t('CHAT', 'Chat')}
+                    </button>
+                    <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
+                      <HiOutlinePhone /> {t('CALL', 'Call')}
+                    </button>
+                  </CustomerContactBlock>
+                  <PhoneNumber>
+                    <HiOutlinePhone /> {order?.customer?.cellphone}
+                  </PhoneNumber>
+                </InfoBlock>
+              </SectionContainer>
 
-            <PrintButtonContainer>
-              <Button color='darkBlue' onClick={() => window.print()}>
-                {t('PRINT', 'Print')}
-              </Button>
-            </PrintButtonContainer>
-          </ContactInfoContent>
+              <SectionTitle>
+                {t('BUSINESS', 'Business')}
+              </SectionTitle>
+              <SectionContainer>
+                <PhotoWrapper>
+                  <Photo bgimage={order?.business?.logo} />
+                </PhotoWrapper>
+                <InfoBlock>
+                  <h1>{order?.business?.name}</h1>
+                  <span><HiOutlineLocationMarker /> {order?.business?.address}</span>
+                  <CustomerContactBlock>
+                    <button onClick={() => handleOpenMessages('business')}>
+                      <BsChat /> {t('CHAT', 'Chat')}
+                    </button>
+                    <button onClick={() => window.open(`tel:${order.business.phone}`)}>
+                      <HiOutlinePhone /> {t('CALL', 'Call')}
+                    </button>
+                  </CustomerContactBlock>
+                  <PhoneNumber>
+                    <HiOutlinePhone /> {order.business.phone}
+                  </PhoneNumber>
+                </InfoBlock>
+              </SectionContainer>
 
+              {order?.delivery_type === 1 && (
+                <>
+                  <SectionTitle>
+                    {t('DRIVER', 'Driver')}
+                  </SectionTitle>
+                  <SectionContainer>
+                    <PhotoWrapper>
+                      {order?.driver?.photo ? (
+                        <Photo bgimage={order?.driver?.photo} />
+                      ) : (
+                        <FaUserAlt />
+                      )}
+                    </PhotoWrapper>
+                    {order.driver_id ? (
+                      <InfoBlock>
+                        <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                        <CustomerContactBlock>
+                          <button onClick={() => handleOpenMessages('driver')}>
+                            <BsChat /> {t('CHAT', 'Chat')}
+                          </button>
+                          {order?.driver?.cellphone && (
+                            <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
+                              <HiOutlinePhone /> {t('CALL', 'Call')}
+                            </button>
+                          )}
+                        </CustomerContactBlock>
+                        <PhoneNumber>
+                          <HiOutlinePhone /> {order.driver.cellphone}
+                        </PhoneNumber>
+                      </InfoBlock>
+                    ) : (
+                      <InfoBlock>
+                        <h1>{t('NO_DRIVER', 'No driver')}</h1>
+                      </InfoBlock>
+                    )}
+                  </SectionContainer>
+                  <SectionTitle driver>
+                    {t('SELECT_DRIVER', 'Select Driver')}
+                  </SectionTitle>
+                  <DriverSelectorContainer>
+                    <DriverSelector
+                      drivers={driversList.drivers}
+                      isPhoneView
+                      defaultValue={order?.driver?.id ? order.driver.id : 'default'}
+                      order={order}
+                    />
+                  </DriverSelectorContainer>
+                </>
+              )}
+
+              <PrintButtonContainer>
+                <Button color='darkBlue' onClick={() => window.print()}>
+                  {t('PRINT', 'Print')}
+                </Button>
+              </PrintButtonContainer>
+            </ContactInfoContent>
+          )}
         </WrapperContainer>
       )}
 
@@ -493,32 +564,34 @@ const OrderDetailsUI = (props) => {
               <Skeleton height={25} />
             </SkeletonBlock>
           </SkeletonBlockWrapp>
-          <SkeletonBlockWrapp>
-            <SkeletonBlock width={100}>
-              <Skeleton height={50} />
-              {[...Array(3)].map((item, i) => (
-                <SkeletonInfoCell key={i}>
-                  <Skeleton width={80} height={20} />
-                  <SkeletonInnerBlock>
-                    <Skeleton width={80} height={80} />
-                    <WrapperSkeletonText>
-                      <Skeleton width={200} height={20} />
-                      <Skeleton width={200} height={20} />
-                      <WrapperSkeletonButton>
-                        <Skeleton width={80} height={30} />
-                        <Skeleton width={80} height={30} />
-                      </WrapperSkeletonButton>
-                    </WrapperSkeletonText>
-                  </SkeletonInnerBlock>
-                </SkeletonInfoCell>
-              ))}
-              <Skeleton width={120} height={25} />
-              <WrapperSkeletonBottom>
+          {!messageDashboardView && (
+            <SkeletonBlockWrapp>
+              <SkeletonBlock width={100}>
                 <Skeleton height={50} />
-                <Skeleton height={50} />
-              </WrapperSkeletonBottom>
-            </SkeletonBlock>
-          </SkeletonBlockWrapp>
+                {[...Array(3)].map((item, i) => (
+                  <SkeletonInfoCell key={i}>
+                    <Skeleton width={80} height={20} />
+                    <SkeletonInnerBlock>
+                      <Skeleton width={80} height={80} />
+                      <WrapperSkeletonText>
+                        <Skeleton width={200} height={20} />
+                        <Skeleton width={200} height={20} />
+                        <WrapperSkeletonButton>
+                          <Skeleton width={80} height={30} />
+                          <Skeleton width={80} height={30} />
+                        </WrapperSkeletonButton>
+                      </WrapperSkeletonText>
+                    </SkeletonInnerBlock>
+                  </SkeletonInfoCell>
+                ))}
+                <Skeleton width={120} height={25} />
+                <WrapperSkeletonBottom>
+                  <Skeleton height={50} />
+                  <Skeleton height={50} />
+                </WrapperSkeletonBottom>
+              </SkeletonBlock>
+            </SkeletonBlockWrapp>
+          )}
         </WrapperContainer>
       )}
 

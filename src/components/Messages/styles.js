@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const MessagesContainer = styled.div`
   width: 100%;
@@ -62,12 +63,20 @@ export const WrapperHeader = styled.div`
   margin: auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   @media (max-width: 576px) {
     justify-content: center;
     width: 90%;
   }
 
+  ${({ messageDashboardView }) => messageDashboardView && css`
+    width: 92%;
+    border-bottom: 1px solid #D8D8D8;
+    padding-bottom: 5px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  `}
 `
 export const HeaderName = styled.p`
   font-size: 1.1em;
@@ -200,7 +209,7 @@ export const MessageCustomer = styled.div`
 
 export const BubbleConsole = styled.div`
   border-radius: 50px;
-  padding: 5px 15px;
+  padding: 10px 25px 10px 25px;
   max-width: 40%;
   margin-bottom: 15px;
   background: #EFEFEF;
@@ -209,7 +218,7 @@ export const BubbleConsole = styled.div`
   overflow: hidden;
   overflow-wrap: break-word;
   @media (min-width: 1024px){
-    max-width: 30%
+    max-width: 50%;
   }
 `
 
@@ -384,6 +393,10 @@ export const Send = styled.form`
   @media (max-width: 576px) {
     width: 90%;
   }
+
+  ${({ messageDashboardView }) => messageDashboardView && css`
+    width: 92%;
+  `}
 `
 
 export const WrapperSendInput = styled.div`
@@ -505,3 +518,53 @@ export const SkeletonHitory = styled.div`
   }
 `
 export const WrapperLogistics = styled.div``
+export const HeaderInfo = styled.div`
+  display: flex;
+  align-items: center;
+`
+export const SearchAndDetailControlContainer = styled.div`
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+`
+export const MessagesSearch = styled.div`
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 13px;
+    left: 14px;
+  }
+
+  input {
+    width: 200px;
+    border: 1px solid #1C202E;
+    border-radius: 22px;
+    outline: none;
+    padding: 8px;
+    padding-left: 40px;
+    font-size: 15px;
+    background: transparent;
+
+    &::placeholder {
+      color: #182964;
+    }
+  }
+`
+export const OrderDetailIconButton = styled.button`
+  outline: none;
+  border: none;
+  background: #b9bcc7;
+  &:active {
+    background: ${() => darken(0.07, '#b9bcc7')};
+  }
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+
+  svg {
+    font-size: 30px;
+  }
+`

@@ -23,9 +23,15 @@ export const SwitchItem = styled.div`
   font-size: 13px;
   text-transform: capitalize;
   padding: 4px 0;
-  border-radius: 3px;
   cursor: pointer;
   transition: all 0.3s;
+  box-sizing: border-box;
+
+  ${({ horizontalBorder }) => horizontalBorder && css`
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-color: #C3C3C3;
+  `}
 
   ${({ active }) => active && css`
     color: #fff;
@@ -41,17 +47,23 @@ export const SwitchPane = styled.div`
   width: 110px;
   height: 28px;
   z-index: -1;
-  border-radius: 3px;
+  border-radius: 2px;
   transition: all 0.3s ease;
-  ${({ active }) => active && css`
+  ${({ deliveryDashboard }) => deliveryDashboard && css`
     margin-left: 110px;
+  `}
+  ${({ messages }) => messages && css`
+    margin-left: 220px;
   `}
 
   @media (max-width: 560px) {
     width: 80px;
 
-    ${({ active }) => active && css`
+    ${({ deliveryDashboard }) => deliveryDashboard && css`
       margin-left: 80px;
+    `}
+    ${({ messages }) => messages && css`
+      margin-left: 160px;
     `}
   }
 `

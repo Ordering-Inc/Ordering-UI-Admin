@@ -9,6 +9,9 @@ export const OrderItemContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
   cursor: pointer;
+  ${({ messageUI }) => messageUI && css`
+    cursor: initial;
+  `}
 `
 export const WrapperInfo = styled.div`
   display: flex;
@@ -66,6 +69,9 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   column-gap: 8px;
+  ${({ messageUI }) => messageUI && css`
+    cursor: pointer;
+  `}
 `
 
 export const BusinessContent = styled.div`
@@ -125,6 +131,10 @@ export const CustomerInfo = styled.div`
   padding: 5px 10px;
   width: 48%;
   box-sizing: border-box;
+
+  ${({ messageUI }) => messageUI && css`
+    cursor: pointer;
+  `}
 `
 export const DriverInfo = styled.div`
   display: flex;
@@ -132,26 +142,38 @@ export const DriverInfo = styled.div`
   column-gap: 8px;
   width: 48%;
   font-size: 11px;
+  box-sizing: border-box;
 
-  > div {
-    width: 100%;
-  }
+  ${({ deliveryUI }) => deliveryUI && css`
+    > div {
+      width: 100%;
+    }
+  `}
+  ${({ messageUI }) => messageUI && css`
+    cursor: pointer;
+    border: 1px solid #F2F2F2;
+    border-radius: 28px;
+    padding: 5px 10px;
+    ${({ cursorDisable }) => cursorDisable && css`
+      cursor: no-drop;
+    `}
+  `}
 `
 export const CustomerContent = styled.div`
   p {
-      color: #000;
-      margin: 0px;
-      white-space: nowrap;
-      max-width: 80px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      &:first-child {
-          font-size: 11px;
-          font-weight: 500;
-      }
-      &:last-child {
-          font-size: 8px;
-      }
+    color: #000;
+    margin: 0px;
+    white-space: nowrap;
+    max-width: 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:first-child {
+      font-size: 11px;
+      font-weight: 500;
+    }
+    &:last-child {
+      font-size: 8px;
+    }
   }
 `
 export const WrapperOrderStatus = styled.div`
@@ -169,4 +191,11 @@ export const WrapperDriverSelector = styled.div`
       padding: 0 10px;
     }
   }
+`
+export const UnreadMessageIndicator = styled.span`
+  margin-left: 10px;
+  background: ${props => props.theme.colors.btnDarkBlue};
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 10px;
 `

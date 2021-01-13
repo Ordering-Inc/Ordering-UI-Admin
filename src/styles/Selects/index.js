@@ -6,6 +6,7 @@ export const Option = styled.div`
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
+  box-sizing: border-box;
   min-width: 100px;
   color: #333;
   cursor: pointer;

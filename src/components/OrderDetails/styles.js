@@ -13,7 +13,7 @@ export const Container = styled.div`
     justify-content: space-between;
 
     > div {
-      width: 48%;
+      width: ${({ messageDashboardView }) => messageDashboardView ? '100%' : '48%'};
     }
   }
 
@@ -27,17 +27,23 @@ export const Container = styled.div`
 `
 export const WrapperContainer = styled.div`
   width: 92%;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   position: relative;
   max-width: 1200px;
-  padding-top: 30px;
+  box-sizing: border-box;
+  height: 100%;
   @media (max-width: 1200px) {
     padding: 30px 0;
     flex-direction: column;
     row-gap: 20px;
     width: 92%;
   }
+
+  ${({ messageDashboardView }) => messageDashboardView && css`
+    width: 100%;
+    padding: 0;
+  `}
 `
 export const OrderInfoContent = styled.div`
   width: 50%;
@@ -52,7 +58,19 @@ export const OrderInfoContent = styled.div`
     width: 100%;
     padding: 20px 0;
     max-height: initial;
+    overflow: initial;
   }
+
+  ${({ messageDashboardView }) => messageDashboardView && css`
+    width: 100%;
+    padding: 0px 0px 0px 10px;
+    margin-right: 0px;
+
+    @media (max-width: 1200px) {
+      padding: 0;
+      overflow: auto;
+    }
+  `}
 `
 export const PhotoWrapper = styled.div`
   max-width: 80px;
@@ -76,6 +94,16 @@ export const PhotoWrapper = styled.div`
   @media print {
     display: none;
   }
+
+  ${({ messageDashboardView }) => messageDashboardView && css`
+    height: 60px;
+    width: 60px;
+    svg {
+      height: 50px;
+      width: 50px;
+      margin-right: 0px;
+    }
+  `}
 `
 const PhotoStyled = styled.div`
   display: flex;
@@ -87,7 +115,6 @@ const PhotoStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 75px;
   border-radius: 10px;
 `
 export const Photo = (props) => {
@@ -115,8 +142,8 @@ export const OrderData = styled.div`
     margin: 0px;
   }
   h1 {
-    margin-bottom: 5px;
-    font-size: 24px;
+    margin-bottom: ${({ messageDashboardView }) => messageDashboardView ? '0px' : '5px'};
+    font-size: ${({ messageDashboardView }) => messageDashboardView ? '20px' : '24px'};
   }
   p {
     font-size: 13px;
@@ -177,7 +204,7 @@ export const OrderStatus = styled.div`
 
   @media (min-width: 410px) {
     span {
-      font-size: initial;
+      font-size: 13px;
     }
   }
 `
@@ -288,7 +315,7 @@ export const OrderBill = styled.div`
   flex-direction: column;
   table {
     width: 100%;
-    font-size: 18px;
+    font-size: 15px;
     tr td:nth-child(2) {
       text-align: right;
       ${props => props.theme?.rtl && css`
@@ -301,7 +328,7 @@ export const OrderBill = styled.div`
     border-top: 1px solid #BFBFBF;
     margin-top: 15px;
     tr {
-      font-size: 20px;
+      font-size: 16px;
       td:nth-child(1) {
         font-weight: bold;
         padding-top: 10px;
@@ -381,6 +408,7 @@ export const Paymethod = styled.div`
   p {
     color: #182964;
     margin: 0px;
+    font-size: 13px;
   }
 
   @media (max-width: 576px) {
@@ -421,10 +449,10 @@ export const PaymethodCreatedDateContent = styled.div`
   p {
     color: #182964;
     margin: 0px;
+    font-size: 13px;
 
     &:last-child {
       color:  #151824;
-      font-size: 13px;
     }
   }
 
@@ -441,6 +469,7 @@ export const OrderTypeInfo = styled.div`
   p {
     color: #182964;
     margin: 0px;
+    font-size: 13px;
   }
 
   @media (max-width: 576px) {
@@ -566,5 +595,45 @@ export const PhoneNumber = styled.div`
 
   @media print {
     display: block;
+  }
+`
+export const OrderDetailCloseButton = styled.div`
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  svg {
+    cursor: pointer;
+    font-size: 24px;
+    &:active {
+      background: ${() => darken(0.07, '#fff')};
+    }
+  }
+`
+export const MessageContactInfo = styled.div`
+`
+export const ContactBlock = styled.div`
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+
+  ${({ active }) => active && css`
+    background: #c7cad6;
+  `}
+`
+export const InfonContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  p {
+    margin: 0px;
+
+    &:first-child {
+      font-weight: 600;
+    }
   }
 `

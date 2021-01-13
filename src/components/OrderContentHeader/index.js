@@ -23,7 +23,7 @@ import {
 
 export const OrderContentHeader = (props) => {
   const {
-    active,
+    activeSwitch,
     handleChangeSearch,
     searchValue,
     driverGroupList,
@@ -84,7 +84,9 @@ export const OrderContentHeader = (props) => {
       <OrderContentHeaderContainer>
         <HeaderSection>
           <HeaderTitle>
-            {active === 'orders' ? t('ORDERS', 'orders') : t('DASHBOARD', 'Dashboard ')}
+            {activeSwitch?.orders && t('ORDERS', 'orders')}
+            {activeSwitch?.deliveries && t('DASHBOARD', 'Dashboard')}
+            {activeSwitch?.messages && t('MESSAGES', 'Messages')}
           </HeaderTitle>
           <WrapperHeaderRightSection>
             {/* <DeadlinesTypeSelector
@@ -92,7 +94,7 @@ export const OrderContentHeader = (props) => {
               handleChangeDeadlineType={(deadlineType) => handleChangeDeadlineType(deadlineType)}
             /> */}
             <OrdersDashboardSwitch
-              active={active}
+              activeSwitch={activeSwitch}
               handleSwitch={handleSwitch}
             />
           </WrapperHeaderRightSection>
@@ -115,7 +117,7 @@ export const OrderContentHeader = (props) => {
               handleChangeDeadlineType={(deadlineType) => handleChangeDeadlineType(deadlineType)}
             /> */}
             <OrdersDashboardSwitch
-              active={active}
+              activeSwitch={activeSwitch}
               handleSwitch={handleSwitch}
             />
           </WrapperDeadlineAndSwitch>

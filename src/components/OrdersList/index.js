@@ -1,6 +1,7 @@
 import React from 'react'
 import { OrderList as OrdersListController, useLanguage } from 'ordering-components'
 import { OrderListing } from '../OrderListing'
+import { WrapperOrderlist } from './style'
 
 export const OrdersList = (props) => {
   const {
@@ -12,14 +13,20 @@ export const OrdersList = (props) => {
     driversList,
     ordersStatusGroup,
     handleSelectedOrderIds,
+    activeSwitch,
     handleNotification,
-    handleOpenOrderDetail
+    handleOpenOrderDetail,
+    handleOpenMessage,
+    messageDashboardView,
+    openOrclosedOrderView,
+    orderBy
   } = props
   const [, t] = useLanguage()
 
   const OrdersCommonControlProps = {
     ...props,
     UIComponent: OrderListing,
+    orderBy: orderBy,
     useDefualtSessionManager: true,
     asDashboard: true,
     searchValue: searchValue,
@@ -30,6 +37,8 @@ export const OrdersList = (props) => {
     deletedOrderId: deletedOrderId,
     handleSelectedOrderIds: handleSelectedOrderIds,
     selectedOrderIds: selectedOrderIds,
+    activeSwitch: activeSwitch,
+    handleOpenMessage: handleOpenMessage,
     driversList: driversList,
     orderListView: orderListView
   }
@@ -105,48 +114,52 @@ export const OrdersList = (props) => {
     orderStatus: [12],
     orderStatusTitle: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
   }
+
   return (
     <>
-      {(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) && (
-        <>
-          {/* <OrdersListController
-            size='small'
-            handleNotification={handleNotification}
-            handleOpenOrderDetail={handleOpenOrderDetail}
-            {...OrdersCommonControlProps} {...PreOrdersControlProps}
-          /> */}
-          <OrdersListController
-            size='small'
-            handleNotification={handleNotification}
-            handleOpenOrderDetail={handleOpenOrderDetail}
-            {...OrdersCommonControlProps} {...PendingOrdersControlProps}
-          />
-        </>
-      )}
-      {(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) && (
-        <>
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
-        </>
-      )}
-      {(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) && (
-        <>
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
-        </>
-      )}
-      {(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) && (
-        <>
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
-          <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
-        </>
-      )}
+      <WrapperOrderlist
+        style={{ display: `${((!messageDashboardView && ordersStatusGroup === 'pending') || (searchValue !== '' && searchValue !== null) || (messageDashboardView && openOrclosedOrderView === 'open')) ? 'block' : 'none'}` }}
+      >
+        {/* <OrdersListController
+          size='small'
+          handleNotification={handleNotification}
+          handleOpenOrderDetail={handleOpenOrderDetail}
+          {...OrdersCommonControlProps} {...PreOrdersControlProps}
+        /> */}
+        <OrdersListController
+          size='small'
+          handleNotification={handleNotification}
+          handleOpenOrderDetail={handleOpenOrderDetail}
+          {...OrdersCommonControlProps} {...PendingOrdersControlProps}
+        />
+      </WrapperOrderlist>
+
+      <WrapperOrderlist
+        style={{ display: `${((!messageDashboardView && ordersStatusGroup === 'inProgress') || (searchValue !== '' && searchValue !== null) || (messageDashboardView && openOrclosedOrderView === 'open')) ? 'block' : 'none'}` }}
+      >
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByBusinessOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps} />
+      </WrapperOrderlist>
+
+      <WrapperOrderlist
+        style={{ display: `${((!messageDashboardView && ordersStatusGroup === 'completed') || (searchValue !== '' && searchValue !== null) || (messageDashboardView && openOrclosedOrderView === 'close')) ? 'block' : 'none'}` }}
+      >
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps} />
+      </WrapperOrderlist>
+
+      <WrapperOrderlist
+        style={{ display: `${((!messageDashboardView && ordersStatusGroup === 'cancelled') || (searchValue !== '' && searchValue !== null) || (messageDashboardView && openOrclosedOrderView === 'close')) ? 'block' : 'none'}` }}
+      >
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps} />
+        <OrdersListController handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps} />
+      </WrapperOrderlist>
     </>
   )
 }

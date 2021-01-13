@@ -6,7 +6,6 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
-  background: #FFF;
   border-bottom: 1px solid #D9D9D9;
 `
 
@@ -69,10 +68,10 @@ export const WrapperProductImage = styled.div`
   }
 
   @media (min-width: 411px) {
-    max-width: 100px;
-    max-height: 100px;
-    height: 80px;
-    width: 100px;
+    max-width: 70px;
+    max-height: 70px;
+    height: 70px;
+    width: 70px;
   }
 `
 
@@ -211,6 +210,7 @@ export const ProductInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 15px;
   }
 
   p {
@@ -307,7 +307,7 @@ export const ProductPrice = styled.div`
   @media (min-width: 512px) {
     span,
     p {
-      font-size: 18px;
+      font-size: 15px;
     }
   }
 `

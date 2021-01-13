@@ -9,11 +9,14 @@ import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { OrderDetails } from '../OrderDetails'
+import { Messages } from '../Messages'
 import { Modal } from '../Modal'
 import { OrdersList } from '../OrdersList'
 import { DriversLocation } from '../DriversLocation'
 import { DriversModal } from '../DriversModal'
 import { Button } from '../../styles/Buttons'
+import { OpenAndCloseOrderSelector } from '../OpenAndCloseOrderSelector'
+import { OrderBySelector } from '../OrderBySelector'
 import {
   OrdersListContainer,
   OrdersContent,
@@ -21,14 +24,17 @@ import {
   WrapperIndicator,
   // WrapperOrderNotification,
   OrderNotification,
-  MapAndOrderContent,
+  WrapperMainContent,
   WrapperOrdersAndDriver,
   OrderAndDriverListContainer,
   OrdersOpenButton,
   OrdersCloseButton,
   WrapperTab,
   Tab,
-  WrapperOrderlist
+  WrapperOrderlist,
+  WrapperMessage,
+  MessageOrderDetailContainer,
+  WrapperSortContainer
 } from './styles'
 
 toast.configure()
@@ -68,12 +74,19 @@ const OrdersListUI = (props) => {
   const [preOrder, setPreOrder] = useState(false)
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
-  const [activeOrdersList, setActiveOrdersList] = useState(true)
+  const [activeSwitch, setActiveSwitch] = useState({ orders: true, deliveries: false, messages: false })
 
   const [driverAvailable, setDriverAvailable] = useState('all')
   const [openOrderAndDriver, setOpenOrderAndDriver] = useState(true)
+  const [openOrderAndUser, setOpenOrderAndUser] = useState(true)
   const [openTab, setOpenTab] = useState({ order: true, driver: false })
   const [googleMapLoad, setGoogleMapLoad] = useState(false)
+
+  const [messageOrder, setMessageOrder] = useState({})
+  const [messageType, setMessageType] = useState('business')
+  const [openMessageOrderDetail, setOpenMessageOrderDetail] = useState(false)
+  const [openOrclosedOrderView, setOpenOrclosedOrderView] = useState('open')
+  const [orderBy, setOrderBy] = useState('id')
 
   const handleChangeDriverAvailable = (available) => {
     setDriverAvailable(available)
@@ -125,9 +138,19 @@ const OrdersListUI = (props) => {
     setRegisterOrderIds([])
   }
 
-  const handleSwitch = () => {
-    setActiveOrdersList(!activeOrdersList)
-    setGoogleMapLoad(true)
+  const handleSwitch = (switchType) => {
+    switch (switchType) {
+      case 'orders':
+        setActiveSwitch({ orders: true, deliveries: false, messages: false })
+        break
+      case 'deliveries':
+        setActiveSwitch({ orders: false, deliveries: true, messages: false })
+        setGoogleMapLoad(true)
+        break
+      case 'messages':
+        setActiveSwitch({ orders: false, deliveries: false, messages: true })
+        break
+    }
   }
 
   const toastNotify = (orderId) => {
@@ -159,15 +182,24 @@ const OrdersListUI = (props) => {
     }
   }
 
+  const handleOpenMessage = (order, messageType) => {
+    setMessageOrder(order)
+    setMessageType(messageType)
+  }
+
+  const handleMessageOrderDetail = (state) => {
+    setOpenMessageOrderDetail(state)
+  }
+
   useEffect(() => {
     if (registerOrderIds.length > 0) return
     setNotificationModalOpen(false)
   }, [registerOrderIds])
 
   useEffect(() => {
-    if (activeOrdersList) return
+    if (!activeSwitch.deliveries) return
     setOpenTab({ order: true, driver: false })
-  }, [activeOrdersList])
+  }, [activeSwitch])
 
   useEffect(() => {
     if (startMulitOrderStatusChange || startMulitOrderDelete) {
@@ -219,17 +251,27 @@ const OrdersListUI = (props) => {
     return () => document.removeEventListener('keydown', closeNotificationModal)
   }, [notificationModalOpen])
 
+  useEffect(() => {
+    if (!activeSwitch.messages) setOrderBy('id')
+  }, [activeSwitch])
+
   return (
     <>
-      <OrdersListContainer>
-        <OrderStatusFilterBar
-          selectedOrderStatus={ordersStatusGroup}
-          changeOrderStatus={handleOrdersStatusGroupFilter}
-        />
-        <OrdersContent>
+      <OrdersListContainer
+        deliveryAndMessageUI={activeSwitch.deliveries || activeSwitch.messages}
+      >
+        {!activeSwitch.messages && (
+          <OrderStatusFilterBar
+            selectedOrderStatus={ordersStatusGroup}
+            changeOrderStatus={handleOrdersStatusGroupFilter}
+          />
+        )}
+        <OrdersContent
+          messageUI={activeSwitch.messages}
+        >
           <OrdersInnerContent className='order-content'>
             <OrderContentHeader
-              active={activeOrdersList ? 'orders' : 'deliveryDashboard'}
+              activeSwitch={activeSwitch}
               handleSwitch={handleSwitch}
               searchValue={searchValue}
               driverGroupList={driverGroupList}
@@ -240,7 +282,7 @@ const OrdersListUI = (props) => {
               handleChangeSearch={handleChangeSearch}
               handleChangeFilterValues={handleChangeFilterValues}
             />
-            {activeOrdersList && (
+            {activeSwitch.orders && (
               <OrdersDashboardControls
                 selectedOrderNumber={selectedOrderIds.length}
                 filterValues={filterValues}
@@ -248,34 +290,49 @@ const OrdersListUI = (props) => {
                 handleDeleteMultiOrders={handleDeleteMultiOrders}
               />
             )}
-            <MapAndOrderContent
-              deliveryUI={!activeOrdersList}
+            <WrapperMainContent
+              deliveryUI={activeSwitch.deliveries}
+              messageUI={activeSwitch.messages}
             >
               {googleMapLoad && (
                 <DriversLocation
-                  disableUI={activeOrdersList}
+                  disableUI={!activeSwitch.deliveries}
                   driversList={driversList}
                   driverAvailable={driverAvailable}
                 />
               )}
-              {!activeOrdersList && (
+              {activeSwitch.deliveries && (
                 <>
                   {!openOrderAndDriver ? (
-                    <OrdersOpenButton onClick={() => setOpenOrderAndDriver(true)} name='order-open'>
+                    <OrdersOpenButton messageDashboardView={activeSwitch.messages} onClick={() => setOpenOrderAndDriver(true)} name='order-open'>
                       <AiFillPlusCircle />
                     </OrdersOpenButton>
                   ) : (
-                    <OrdersCloseButton onClick={() => setOpenOrderAndDriver(false)} name='order-close'>
+                    <OrdersCloseButton messageDashboardView={activeSwitch.messages} onClick={() => setOpenOrderAndDriver(false)} name='order-close'>
+                      <FaRegTimesCircle />
+                    </OrdersCloseButton>
+                  )}
+                </>
+              )}
+              {activeSwitch.messages && (
+                <>
+                  {!openOrderAndUser ? (
+                    <OrdersOpenButton messageDashboardView={activeSwitch.messages} onClick={() => setOpenOrderAndUser(true)}>
+                      <AiFillPlusCircle />
+                    </OrdersOpenButton>
+                  ) : (
+                    <OrdersCloseButton messageDashboardView={activeSwitch.messages} onClick={() => setOpenOrderAndUser(false)}>
                       <FaRegTimesCircle />
                     </OrdersCloseButton>
                   )}
                 </>
               )}
               <WrapperOrdersAndDriver
-                deliveryUI={!activeOrdersList}
-                style={{ display: `${(openOrderAndDriver || activeOrdersList) ? 'block' : 'none'}` }}
+                deliveryUI={activeSwitch.deliveries}
+                messagesUI={activeSwitch.messages}
+                style={{ display: `${((openOrderAndDriver && activeSwitch.deliveries) || (openOrderAndUser && activeSwitch.messages) || activeSwitch.orders) ? 'block' : 'none'}` }}
               >
-                {!activeOrdersList && (
+                {activeSwitch.deliveries && (
                   <WrapperTab>
                     <Tab
                       active={openTab.order}
@@ -291,12 +348,43 @@ const OrdersListUI = (props) => {
                     </Tab>
                   </WrapperTab>
                 )}
+                {activeSwitch.messages && (
+                  <WrapperTab messageUI={activeSwitch.messages}>
+                    <Tab
+                      active={openTab.order}
+                    >
+                      {t('ORDERS', 'Orders')}
+                    </Tab>
+                    {/* <Tab
+                      active={openTab.driver}
+                      onClick={() => setOpenTab({ order: false, driver: true })}
+                    >
+                      {t('USERS', 'Users')}
+                    </Tab> */}
+                  </WrapperTab>
+                )}
+                {activeSwitch.messages && (
+                  <WrapperSortContainer>
+                    <OpenAndCloseOrderSelector
+                      defaultValue={openOrclosedOrderView}
+                      setOpenOrclosedOrderView={setOpenOrclosedOrderView}
+                    />
+                    <OrderBySelector
+                      defaultValue={orderBy}
+                      setOrderBy={setOrderBy}
+                    />
+                  </WrapperSortContainer>
+                )}
                 <OrderAndDriverListContainer
-                  deliveryUI={!activeOrdersList}
+                  deliveryUI={activeSwitch.deliveries}
+                  messageUI={activeSwitch.messages}
                 >
-                  <WrapperOrderlist style={{ display: `${(openTab.order || activeOrdersList) ? 'block' : 'none'}` }}>
+                  <WrapperOrderlist style={{ display: `${(openTab.order || !activeSwitch.deliveries) ? 'block' : 'none'}` }}>
                     <OrdersList
-                      orderListView={activeOrdersList ? 'big' : 'small'}
+                      orderListView={activeSwitch.orders ? 'big' : 'small'}
+                      orderBy={orderBy}
+                      messageDashboardView={activeSwitch.messages}
+                      openOrclosedOrderView={openOrclosedOrderView}
                       searchValue={searchValue}
                       filterValues={filterValues}
                       selectedOrderIds={selectedOrderIds}
@@ -304,11 +392,13 @@ const OrdersListUI = (props) => {
                       driversList={driversList}
                       ordersStatusGroup={ordersStatusGroup}
                       handleSelectedOrderIds={handleSelectedOrderIds}
+                      activeSwitch={activeSwitch}
                       handleNotification={handleNotification}
                       handleOpenOrderDetail={handleOpenOrderDetail}
+                      handleOpenMessage={handleOpenMessage}
                     />
                   </WrapperOrderlist>
-                  {openTab.driver && !activeOrdersList && (
+                  {openTab.driver && activeSwitch.deliveries && (
                     <DriversModal
                       driversList={driversList}
                       driverOrders={driverOrders}
@@ -320,7 +410,37 @@ const OrdersListUI = (props) => {
                   )}
                 </OrderAndDriverListContainer>
               </WrapperOrdersAndDriver>
-            </MapAndOrderContent>
+
+              {/* message section */}
+              {(Object.keys(messageOrder).length !== 0 && activeSwitch.messages) && (
+                <WrapperMessage>
+                  <Messages
+                    messageDashboardView
+                    orderId={messageOrder?.id}
+                    order={messageOrder}
+                    customer={messageType === 'customer'}
+                    business={messageType === 'business'}
+                    driver={messageType === 'driver'}
+                    handleMessageOrderDetail={handleMessageOrderDetail}
+                  />
+                </WrapperMessage>
+              )}
+              {/* message order detail */}
+              {activeSwitch.messages && Object.keys(messageOrder).length !== 0 && (
+                <MessageOrderDetailContainer style={{ display: `${openMessageOrderDetail ? 'block' : 'none'}` }}>
+                  <OrderDetails
+                    messageDashboardView
+                    orderId={messageOrder?.id}
+                    driversList={driversList}
+                    pendingOrder={pendingOrder}
+                    preOrder={preOrder}
+                    messageType={messageType}
+                    handleOpenMessage={handleOpenMessage}
+                    handleMessageOrderDetail={handleMessageOrderDetail}
+                  />
+                </MessageOrderDetailContainer>
+              )}
+            </WrapperMainContent>
 
           </OrdersInnerContent>
         </OrdersContent>

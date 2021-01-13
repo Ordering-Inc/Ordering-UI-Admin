@@ -37,7 +37,9 @@ export const OrderListing = (props) => {
     handleResetNotification,
     driverOrdersLoading,
     size,
-    driverOrdersView
+    driverOrdersView,
+    activeSwitch,
+    handleOpenMessage
   } = props
 
   const theme = useTheme()
@@ -110,6 +112,14 @@ export const OrderListing = (props) => {
     handleNotification(registerOrderId)
     handleResetNotification()
   }, [registerOrderId])
+
+  useEffect(() => {
+    if (orderList.loading || !activeSwitch.messages) return
+    if (orderList.orders.length === 0) return
+    if (orderList.orders[0].status === 0) {
+      handleOpenMessage(orderList.orders[0], 'business')
+    }
+  }, [orderList.orders, activeSwitch])
 
   return (
     <>
@@ -214,9 +224,11 @@ export const OrderListing = (props) => {
                   <React.Fragment key={order.id}>
                     <SmallOrderItemAccordion
                       order={order}
+                      activeSwitch={activeSwitch}
                       drivers={driversList.drivers}
                       pendingOrder={pendingOrder}
                       preOrder={preOrder}
+                      handleOpenMessage={handleOpenMessage}
                       handleUpdateOrderStatus={handleUpdateOrderStatus}
                       handleOpenOrderDetail={handleOpenOrderDetail}
                     />

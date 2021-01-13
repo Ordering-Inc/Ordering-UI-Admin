@@ -53,7 +53,7 @@
     "google-map-react": "^2.1.9",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
-    "ordering-components": "github:sergioaok/ordering-components#admin-development",
+    "ordering-components": "github:Ordering-Inc/ordering-components#admin-development",
     "polished": "^3.6.7",
     "prop-types": "^15.7.2",
     "react-helmet": "^6.1.0",

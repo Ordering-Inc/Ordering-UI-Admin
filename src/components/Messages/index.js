@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import {
-  useUtils,
-  useLanguage,
-  useSession,
-  Messages as MessagesController
-} from 'ordering-components'
-
+import { useUtils, useLanguage, useSession, Messages as MessagesController } from 'ordering-components'
 import { useForm } from 'react-hook-form'
+import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import HiOutlineArrowLeft from '@meronex/icons/hi/HiOutlineArrowLeft'
+import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
 import {
   MessagesContainer,
   WrapperContainer,
@@ -39,7 +35,11 @@ import {
   WrapperHitoryHeader,
   TabItem,
   SkeletonHitory,
-  WrapperLogistics
+  WrapperLogistics,
+  HeaderInfo,
+  SearchAndDetailControlContainer,
+  MessagesSearch,
+  OrderDetailIconButton
 } from './styles'
 import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
@@ -48,6 +48,7 @@ import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Alert } from '../Confirm'
 import { Logistics } from '../Logistics'
 export const MessagesUI = (props) => {
@@ -64,10 +65,14 @@ export const MessagesUI = (props) => {
     customer,
     business,
     driver,
-    history
+    history,
+    messageDashboardView,
+    handleMessageOrderDetail,
+    handleReadMessages
   } = props
 
   const [, t] = useLanguage()
+  const theme = useTheme()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [load, setLoad] = useState(0)
@@ -76,6 +81,8 @@ export const MessagesUI = (props) => {
   const buttonRef = useRef(null)
   const [messageLevel, setMessageLevel] = useState(null)
   const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false })
+  const [messageSearchValue, setMessageSearchValue] = useState('')
+  const [filteredMessages, setFilteredMessages] = useState([])
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -110,7 +117,7 @@ export const MessagesUI = (props) => {
     if (history) return
     const chat = document.getElementById('chat')
     chat.scrollTop = chat.scrollHeight
-  }, [messages.messages.length])
+  }, [messages.messages.length, filteredMessages])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
@@ -200,6 +207,23 @@ export const MessagesUI = (props) => {
   }
 
   useEffect(() => {
+    if (messages.loading || messages.messages.length === 0) return
+    if (messages.messages[messages.messages.length - 1].read) return
+    handleReadMessages(messages.messages[messages.messages.length - 1].id)
+  }, [messages])
+
+  useEffect(() => {
+    if (messages.loading) return
+    const _filteredMessages = messages.messages.filter(message => {
+      if (message.type === 2) {
+        return message.comment.toLocaleLowerCase().includes(messageSearchValue.toLocaleLowerCase())
+      }
+      return true
+    })
+    setFilteredMessages(_filteredMessages)
+  }, [messages, messageSearchValue])
+
+  useEffect(() => {
     if (customer) {
       setMessageLevel(3)
       setCanRead({ business: false, administrator: true, driver: false, customer: true })
@@ -212,12 +236,12 @@ export const MessagesUI = (props) => {
       setMessageLevel(4)
       setCanRead({ business: false, administrator: true, driver: true, customer: false })
     }
-  }, [])
+  }, [customer, business, driver])
 
   return (
     <MessagesContainer>
       <WrapperContainer>
-        {!history && (
+        {(!history && !messageDashboardView) && (
           <BackActions>
             <a onClick={() => props.onClose()}>
               <HiOutlineArrowLeft />
@@ -225,62 +249,81 @@ export const MessagesUI = (props) => {
           </BackActions>
         )}
         <HeaderProfile>
-          <WrapperHeader>
-            {!history && (
-              <Image>
-                {
-                  customer && (
-                    <ImageWithFallback
-                      src={order.customer?.photo}
-                      fallback={<FaUserAlt />}
-                    />
-                  )
-                }
-                {
-                  business && (
-                    <ImageWithFallback
-                      src={order.business?.logo}
-                      fallback={<FaUserAlt />}
-                    />
-                  )
-                }
-                {
-                  driver && (
-                    <ImageWithFallback
-                      src={order.driver?.photo}
-                      fallback={<RiUser2Fill />}
-                    />
-                  )
-                }
-              </Image>
-            )}
-            {customer && (
-              <HeaderOnline>
-                <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                <span>{t('ONLINE', 'Online')}</span>
-              </HeaderOnline>
-            )}
-            {business && (
-              <HeaderOnline>
-                <h1>{order.business?.name}</h1>
-                <span>{t('ONLINE', 'Online')}</span>
-              </HeaderOnline>
-            )}
-            {driver && (
-              <HeaderOnline>
-                <h1>{order.driver?.name}</h1>
-                <span>{t('ONLINE', 'Online')}</span>
-              </HeaderOnline>
-            )}
-            {history && (
-              <WrapperHitoryHeader>
-                <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false })}>
-                  {t('ORDER_HISTORY', 'Order History')}
-                </TabItem>
-                <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true })}>
-                  {t('LOGISTICS', 'Logistics')}
-                </TabItem>
-              </WrapperHitoryHeader>
+          <WrapperHeader messageDashboardView={messageDashboardView}>
+            <HeaderInfo>
+              {!history && (
+                <Image>
+                  {
+                    customer && (
+                      <ImageWithFallback
+                        src={order.customer?.photo}
+                        fallback={<FaUserAlt />}
+                      />
+                    )
+                  }
+                  {
+                    business && (
+                      <ImageWithFallback
+                        src={order.business?.logo}
+                        fallback={<BisBusiness />}
+                      />
+                    )
+                  }
+                  {
+                    driver && (
+                      <ImageWithFallback
+                        src={order.driver?.photo}
+                        fallback={<RiUser2Fill />}
+                      />
+                    )
+                  }
+                </Image>
+              )}
+              {customer && (
+                <HeaderOnline>
+                  <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
+                  <span>{t('ONLINE', 'Online')}</span>
+                </HeaderOnline>
+              )}
+              {business && (
+                <HeaderOnline>
+                  <h1>{order.business?.name}</h1>
+                  <span>{t('ONLINE', 'Online')}</span>
+                </HeaderOnline>
+              )}
+              {driver && (
+                <HeaderOnline>
+                  <h1>{order.driver?.name}</h1>
+                  <span>{t('ONLINE', 'Online')}</span>
+                </HeaderOnline>
+              )}
+              {history && (
+                <WrapperHitoryHeader>
+                  <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false })}>
+                    {t('ORDER_HISTORY', 'Order History')}
+                  </TabItem>
+                  <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true })}>
+                    {t('LOGISTICS', 'Logistics')}
+                  </TabItem>
+                </WrapperHitoryHeader>
+              )}
+            </HeaderInfo>
+            {messageDashboardView && (
+              <SearchAndDetailControlContainer>
+                <MessagesSearch>
+                  <img src={theme?.images?.icons?.search} alt='search' />
+                  <input
+                    type='text'
+                    name='search'
+                    placeholder='Search'
+                    value={messageSearchValue}
+                    onChange={(e) => setMessageSearchValue(e.target.value)}
+                  />
+                </MessagesSearch>
+                <OrderDetailIconButton onClick={() => handleMessageOrderDetail(true)}>
+                  <AiOutlineInfoCircle />
+                </OrderDetailIconButton>
+              </SearchAndDetailControlContainer>
             )}
           </WrapperHeader>
         </HeaderProfile>
@@ -338,7 +381,7 @@ export const MessagesUI = (props) => {
                     <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
                   </BubbleConsole>
                 </MessageConsole>
-                {messages?.messages.map((message) => (
+                {filteredMessages.length > 0 && filteredMessages.map((message) => (
                   <React.Fragment key={message.id}>
                     {history && (
                       <>
@@ -565,7 +608,7 @@ export const MessagesUI = (props) => {
 
         {!history && (
           <SendForm>
-            <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Send onSubmit={handleSubmit(onSubmit)} noValidate messageDashboardView={messageDashboardView}>
               <WrapperSendInput>
                 <Input
                   placeholder={t('WRITE_A_MESSAGE', 'Write a message...')}
