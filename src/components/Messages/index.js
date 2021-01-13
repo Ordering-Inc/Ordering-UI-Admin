@@ -94,6 +94,10 @@ export const MessagesUI = (props) => {
   }, [errors])
 
   useEffect(() => {
+    setMessageSearchValue('')
+  }, [order.id])
+
+  useEffect(() => {
     if (!sendMessage.loading && sendMessage?.error) {
       setAlertState({
         open: true,
@@ -118,6 +122,14 @@ export const MessagesUI = (props) => {
     const chat = document.getElementById('chat')
     chat.scrollTop = chat.scrollHeight
   }, [messages.messages.length, filteredMessages])
+
+  useEffect(() => {
+    if (history) return
+    setTimeout(() => {
+      const chat = document.getElementById('chat')
+      chat.scrollTop = chat.scrollHeight
+    }, 10)
+  }, [customer, business, driver])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)

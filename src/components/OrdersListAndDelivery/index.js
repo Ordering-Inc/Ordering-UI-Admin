@@ -216,6 +216,13 @@ const OrdersListUI = (props) => {
   }, [selectedOrderIds])
 
   useEffect(() => {
+    if (!activeSwitch.messages) {
+      setOpenMessageOrderDetail(false)
+      setOpenOrclosedOrderView('open')
+    }
+  }, [activeSwitch.messages])
+
+  useEffect(() => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
