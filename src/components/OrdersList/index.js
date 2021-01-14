@@ -19,7 +19,9 @@ export const OrdersList = (props) => {
     handleOpenMessage,
     messageDashboardView,
     openOrclosedOrderView,
-    orderBy
+    orderBy,
+    messageType,
+    orderIdForUnreadCountUpdate
   } = props
   const [, t] = useLanguage()
 
@@ -40,7 +42,9 @@ export const OrdersList = (props) => {
     activeSwitch: activeSwitch,
     handleOpenMessage: handleOpenMessage,
     driversList: driversList,
-    orderListView: orderListView
+    orderListView: orderListView,
+    messageType: messageType,
+    orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate
   }
 
   const PendingOrdersControlProps = {

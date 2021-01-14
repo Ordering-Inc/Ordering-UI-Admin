@@ -39,7 +39,8 @@ export const OrderListing = (props) => {
     size,
     driverOrdersView,
     activeSwitch,
-    handleOpenMessage
+    handleOpenMessage,
+    messageType
   } = props
 
   const theme = useTheme()
@@ -114,12 +115,12 @@ export const OrderListing = (props) => {
   }, [registerOrderId])
 
   useEffect(() => {
-    if (orderList.loading || !activeSwitch.messages) return
+    if (orderList.loading) return
     if (orderList.orders.length === 0) return
     if (orderList.orders[0].status === 0) {
-      handleOpenMessage(orderList.orders[0], 'business')
+      handleOpenMessage(orderList.orders[0], messageType)
     }
-  }, [orderList.orders, activeSwitch])
+  }, [orderList.orders.length])
 
   return (
     <>

@@ -218,10 +218,14 @@ export const MessagesUI = (props) => {
     })
   }
 
-  useEffect(() => {
+  const unreadMessageControl = () => {
     if (messages.loading || messages.messages.length === 0) return
     if (messages.messages[messages.messages.length - 1].read) return
     handleReadMessages(messages.messages[messages.messages.length - 1].id)
+  }
+
+  useEffect(() => {
+    unreadMessageControl()
   }, [messages])
 
   useEffect(() => {

@@ -70,7 +70,8 @@ const OrderDetailsUI = (props) => {
     messageDashboardView,
     handleMessageOrderDetail,
     messageType,
-    handleOpenMessage
+    handleOpenMessage,
+    handleUpdateOrderForUnreadCount
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -611,6 +612,7 @@ const OrderDetailsUI = (props) => {
             business={openMessages.business}
             driver={openMessages.driver}
             history={openMessages.history}
+            handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
             onClose={() => handleCloseMessages()}
           />
         </ChatContainer>
@@ -626,6 +628,7 @@ const OrderDetailsUI = (props) => {
           orderId={order?.id}
           order={order}
           history={openMessages.history}
+          handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
         />
       </Modal>
     </Container>

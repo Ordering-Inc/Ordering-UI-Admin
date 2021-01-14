@@ -87,6 +87,7 @@ const OrdersListUI = (props) => {
   const [openMessageOrderDetail, setOpenMessageOrderDetail] = useState(false)
   const [openOrclosedOrderView, setOpenOrclosedOrderView] = useState('open')
   const [orderBy, setOrderBy] = useState('id')
+  const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
 
   const handleChangeDriverAvailable = (available) => {
     setDriverAvailable(available)
@@ -189,6 +190,10 @@ const OrdersListUI = (props) => {
 
   const handleMessageOrderDetail = (state) => {
     setOpenMessageOrderDetail(state)
+  }
+
+  const handleUpdateOrderForUnreadCount = (orderId) => {
+    setOrderIdForUnreadCountUpdate(orderId)
   }
 
   useEffect(() => {
@@ -400,6 +405,8 @@ const OrdersListUI = (props) => {
                       ordersStatusGroup={ordersStatusGroup}
                       handleSelectedOrderIds={handleSelectedOrderIds}
                       activeSwitch={activeSwitch}
+                      messageType={messageType}
+                      orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
                       handleNotification={handleNotification}
                       handleOpenOrderDetail={handleOpenOrderDetail}
                       handleOpenMessage={handleOpenMessage}
@@ -429,6 +436,7 @@ const OrdersListUI = (props) => {
                     business={messageType === 'business'}
                     driver={messageType === 'driver'}
                     handleMessageOrderDetail={handleMessageOrderDetail}
+                    handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                   />
                 </WrapperMessage>
               )}
@@ -464,6 +472,7 @@ const OrdersListUI = (props) => {
           driversList={driversList}
           pendingOrder={pendingOrder}
           preOrder={preOrder}
+          handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
         />
       </Modal>
 
