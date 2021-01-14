@@ -120,7 +120,7 @@ export const OrderListing = (props) => {
     if (orderList.orders[0].status === 0) {
       handleOpenMessage(orderList.orders[0], messageType)
     }
-  }, [orderList.orders.length])
+  }, [orderList.orders.length, activeSwitch])
 
   return (
     <>
