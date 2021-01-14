@@ -29,6 +29,7 @@ export const OrdersList = (props) => {
     ...props,
     UIComponent: OrderListing,
     orderBy: orderBy,
+    orderDirection: orderBy === 'id' ? 'desc' : 'asc',
     useDefualtSessionManager: true,
     asDashboard: true,
     searchValue: searchValue,
