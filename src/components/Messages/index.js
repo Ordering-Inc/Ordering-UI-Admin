@@ -83,6 +83,7 @@ export const MessagesUI = (props) => {
   const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false })
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
+  const [driverNoneCase, setDriverNoneCase] = useState(false)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -224,10 +225,6 @@ export const MessagesUI = (props) => {
     handleReadMessages(messages.messages[messages.messages.length - 1].id)
   }
 
-  // useEffect(() => {
-  //   unreadMessageControl()
-  // }, [messages])
-
   useEffect(() => {
     if (messages.loading) return
     const _filteredMessages = messages.messages.filter(message => {
@@ -244,15 +241,23 @@ export const MessagesUI = (props) => {
       setMessageLevel(3)
       setCanRead({ business: false, administrator: true, driver: false, customer: true })
     }
-    if (business) {
+    if (business || driverNoneCase) {
       setMessageLevel(2)
       setCanRead({ business: true, administrator: true, driver: false, customer: false })
     }
-    if (driver) {
+    if (driver && !driverNoneCase) {
       setMessageLevel(4)
       setCanRead({ business: false, administrator: true, driver: true, customer: false })
     }
-  }, [customer, business, driver])
+  }, [customer, business, driver, driverNoneCase])
+
+  useEffect(() => {
+    if (driver && order?.driver_id === null) {
+      setDriverNoneCase(true)
+    } else {
+      setDriverNoneCase(false)
+    }
+  }, [order?.driver_id, driver])
 
   return (
     <MessagesContainer>
@@ -278,7 +283,7 @@ export const MessagesUI = (props) => {
                     )
                   }
                   {
-                    business && (
+                    (business || driverNoneCase) && (
                       <ImageWithFallback
                         src={order.business?.logo}
                         fallback={<BisBusiness />}
@@ -286,7 +291,7 @@ export const MessagesUI = (props) => {
                     )
                   }
                   {
-                    driver && (
+                    driver && !driverNoneCase && (
                       <ImageWithFallback
                         src={order.driver?.photo}
                         fallback={<RiUser2Fill />}
@@ -305,7 +310,7 @@ export const MessagesUI = (props) => {
                   )}
                 </HeaderOnline>
               )}
-              {business && (
+              {(business || driverNoneCase) && (
                 <HeaderOnline>
                   <h1>{order.business?.name}</h1>
                   {!messageDashboardView ? (
@@ -315,7 +320,7 @@ export const MessagesUI = (props) => {
                   )}
                 </HeaderOnline>
               )}
-              {driver && (
+              {driver && !driverNoneCase && (
                 <HeaderOnline>
                   <h1>{order.driver?.name}</h1>
                   {!messageDashboardView ? (
@@ -481,7 +486,7 @@ export const MessagesUI = (props) => {
                                 </BubbleCustomer>
                               </>
                             )}
-                            {business && message.can_see.includes(2) && (
+                            {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleCustomer>
                                   <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
@@ -490,7 +495,7 @@ export const MessagesUI = (props) => {
                                 </BubbleCustomer>
                               </>
                             )}
-                            {driver && message.can_see.includes(4) && (
+                            {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleCustomer>
                                   <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
@@ -518,7 +523,7 @@ export const MessagesUI = (props) => {
                                 </BubbleCustomer>
                               </>
                             )}
-                            {business && message.can_see.includes(2) && (
+                            {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleCustomer name='image'>
                                   <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
@@ -532,7 +537,7 @@ export const MessagesUI = (props) => {
                                 </BubbleCustomer>
                               </>
                             )}
-                            {driver && message.can_see.includes(4) && (
+                            {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleCustomer name='image'>
                                   <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
@@ -559,7 +564,7 @@ export const MessagesUI = (props) => {
                                 </BubbleBusines>
                               </>
                             )}
-                            {business && message.can_see.includes(2) && (
+                            {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleBusines>
                                   <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
@@ -568,7 +573,7 @@ export const MessagesUI = (props) => {
                                 </BubbleBusines>
                               </>
                             )}
-                            {driver && message.can_see.includes(4) && (
+                            {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleBusines>
                                   <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
@@ -595,7 +600,7 @@ export const MessagesUI = (props) => {
                                 </BubbleBusines>
                               </>
                             )}
-                            {business && message.can_see.includes(2) && (
+                            {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleBusines name='image'>
                                   <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
@@ -609,7 +614,7 @@ export const MessagesUI = (props) => {
                                 </BubbleBusines>
                               </>
                             )}
-                            {driver && message.can_see.includes(4) && (
+                            {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleBusines name='image'>
                                   <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
