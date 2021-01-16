@@ -31,6 +31,7 @@ export const SmallOrderItemAccordion = (props) => {
     pendingOrder,
     preOrder,
     activeSwitch,
+    messageOrder,
     handleUpdateOrderStatus,
     handleOpenOrderDetail,
     handleOpenMessage
@@ -55,13 +56,17 @@ export const SmallOrderItemAccordion = (props) => {
       const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
       if (!isActionClick) {
         history.push(`/orders-deliveries?id=${order.id}`)
-        handleOpenOrderDetail(order.id, pendingOrder, preOrder)
+        handleOpenOrderDetail(order.id)
       }
     }
   }
 
   return (
-    <OrderItemContainer onClick={(e) => handleGoToPage(e)} messageUI={activeSwitch.messages}>
+    <OrderItemContainer
+      onClick={(e) => handleGoToPage(e)}
+      messageUI={activeSwitch.messages}
+      messageUIActive={messageOrder.id === order.id}
+    >
       <WrapperInfo>
         <BusinessInfo className='order-item-business' ref={businessRef} messageUI={activeSwitch.messages}>
           <WrapperAccordionImage>
@@ -123,57 +128,24 @@ export const SmallOrderItemAccordion = (props) => {
         </CustomerInfo>
         <DriverInfo
           ref={driverRef}
-          deliveryUI={activeSwitch.deliveries}
-          messageUI={activeSwitch.messages}
-          cursorDisable={!order?.driver_id}
         >
-          {activeSwitch.deliveries ? (
-            <WrapperDriverSelector ref={driverSelectorRef}>
-              {order?.delivery_type === 1 && (
-                <DriverSelector
-                  small
-                  orderView
-                  padding='5px 0'
-                  defaultValue={order?.driver_id ? order.driver_id : 'default'}
-                  drivers={drivers}
-                  order={order}
-                />
-              )}
-            </WrapperDriverSelector>
-          ) : (
-            <>
-              <WrapperAccordionImage small>
-                {order?.driver_id ? (
-                  <>
-                    {order?.driver?.photo ? (
-                      <AccordionImage bgimage={order?.driver?.photo} />
-                    ) : (
-                      <FaUserAlt />
-                    )}
-                  </>
-                ) : (
-                  <AccordionImage bgimage={theme?.images?.icons?.noDriver} />
-                )}
-              </WrapperAccordionImage>
-              <CustomerContent>
-                {order?.driver_id ? (
-                  <>
-                    <p>
-                      {order?.driver?.name} {order?.driver?.lastname}
-                    </p>
-                    <p>{t('DRIVER', 'Driver')}</p>
-                  </>
-                ) : (
-                  <p style={{ fontSize: '11px' }}>{t('NO_DRIVER', 'No driver')}</p>
-                )}
-              </CustomerContent>
-            </>
-          )}
+          <WrapperDriverSelector ref={driverSelectorRef}>
+            {order?.delivery_type === 1 && (
+              <DriverSelector
+                small
+                orderView
+                padding='5px 0'
+                defaultValue={order?.driver_id ? order.driver_id : 'default'}
+                drivers={drivers}
+                order={order}
+              />
+            )}
+          </WrapperDriverSelector>
         </DriverInfo>
       </WrapperInfo>
       <WrapperOrderStatus ref={orderStatusRef}>
         <OrderStatusTypeSelector
-          defaultValue={order?.status}
+          defaultValue={parseInt(order?.status)}
           orderId={order.id}
           deliveryType={order?.delivery_type}
           pendingOrder={pendingOrder}

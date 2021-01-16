@@ -11,6 +11,9 @@ export const OrderItemContainer = styled.div`
   cursor: pointer;
   ${({ messageUI }) => messageUI && css`
     cursor: initial;
+    ${({ messageUIActive }) => messageUIActive && css`
+      background: #c7cad6;
+    `}
   `}
 `
 export const WrapperInfo = styled.div`
@@ -125,7 +128,8 @@ export const DeliveryName = styled.p`
 export const CustomerInfo = styled.div`
   display: flex;
   column-gap: 8px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid;
+  border-color: #1c202e;
   border-radius: 28px;
   align-items: center;
   padding: 5px 10px;
@@ -144,20 +148,9 @@ export const DriverInfo = styled.div`
   font-size: 11px;
   box-sizing: border-box;
 
-  ${({ deliveryUI }) => deliveryUI && css`
-    > div {
-      width: 100%;
-    }
-  `}
-  ${({ messageUI }) => messageUI && css`
-    cursor: pointer;
-    border: 1px solid #F2F2F2;
-    border-radius: 28px;
-    padding: 5px 10px;
-    ${({ cursorDisable }) => cursorDisable && css`
-      cursor: no-drop;
-    `}
-  `}
+  > div {
+    width: 100%;
+  }
 `
 export const CustomerContent = styled.div`
   p {

@@ -270,6 +270,7 @@ export const WrapperMessage = styled.div`
 export const MessageOrderDetailContainer = styled.div`
   width: 420px;
   border-left: 1px solid #D8D8D8;
+  overflow: auto;
 
   @media(max-width: 1300px) {
     display: block;

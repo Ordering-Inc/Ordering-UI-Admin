@@ -70,8 +70,6 @@ const OrdersListUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
-  const [pendingOrder, setPendingOrder] = useState(false)
-  const [preOrder, setPreOrder] = useState(false)
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
   const [activeSwitch, setActiveSwitch] = useState({ orders: true, deliveries: false, messages: false })
@@ -86,7 +84,7 @@ const OrdersListUI = (props) => {
   const [messageType, setMessageType] = useState('business')
   const [openMessageOrderDetail, setOpenMessageOrderDetail] = useState(false)
   const [openOrclosedOrderView, setOpenOrclosedOrderView] = useState('open')
-  const [orderBy, setOrderBy] = useState('id')
+  const [orderBy, setOrderBy] = useState('last_direct_message_at')
   const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
 
   const handleChangeDriverAvailable = (available) => {
@@ -102,18 +100,7 @@ const OrdersListUI = (props) => {
     setIsOpenOrderDetail(false)
     history.push('/orders-deliveries')
   }
-  const handleOpenOrderDetail = (id, pendingOrder, preOrder) => {
-    if (pendingOrder) {
-      setPendingOrder(true)
-    } else {
-      setPendingOrder(false)
-    }
-
-    if (preOrder) {
-      setPreOrder(true)
-    } else {
-      setPreOrder(false)
-    }
+  const handleOpenOrderDetail = (id) => {
     setOrderDetailId(id)
     setIsOpenOrderDetail(true)
   }
@@ -184,8 +171,8 @@ const OrdersListUI = (props) => {
   }
 
   const handleOpenMessage = (order, messageType) => {
-    setMessageOrder(order)
     setMessageType(messageType)
+    setMessageOrder(order)
   }
 
   const handleMessageOrderDetail = (state) => {
@@ -264,7 +251,7 @@ const OrdersListUI = (props) => {
   }, [notificationModalOpen])
 
   useEffect(() => {
-    if (!activeSwitch.messages) setOrderBy('id')
+    if (activeSwitch.messages) setOrderBy('last_direct_message_at')
   }, [activeSwitch])
 
   return (
@@ -406,6 +393,7 @@ const OrdersListUI = (props) => {
                       handleSelectedOrderIds={handleSelectedOrderIds}
                       activeSwitch={activeSwitch}
                       messageType={messageType}
+                      messageOrder={messageOrder}
                       orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
                       handleNotification={handleNotification}
                       handleOpenOrderDetail={handleOpenOrderDetail}
@@ -447,11 +435,10 @@ const OrdersListUI = (props) => {
                     messageDashboardView
                     orderId={messageOrder?.id}
                     driversList={driversList}
-                    pendingOrder={pendingOrder}
-                    preOrder={preOrder}
                     messageType={messageType}
                     handleOpenMessage={handleOpenMessage}
                     handleMessageOrderDetail={handleMessageOrderDetail}
+                    handleOpenOrderDetail={handleOpenOrderDetail}
                   />
                 </MessageOrderDetailContainer>
               )}
@@ -470,8 +457,6 @@ const OrdersListUI = (props) => {
         <OrderDetails
           orderId={orderDetailId}
           driversList={driversList}
-          pendingOrder={pendingOrder}
-          preOrder={preOrder}
           handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
         />
       </Modal>

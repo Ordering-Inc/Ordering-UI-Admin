@@ -56,7 +56,8 @@ import {
   OrderDetailCloseButton,
   MessageContactInfo,
   ContactBlock,
-  InfonContent
+  InfonContent,
+  WrapperMoreInformationButton
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -71,7 +72,8 @@ const OrderDetailsUI = (props) => {
     handleMessageOrderDetail,
     messageType,
     handleOpenMessage,
-    handleUpdateOrderForUnreadCount
+    handleUpdateOrderForUnreadCount,
+    handleOpenOrderDetail
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -418,6 +420,13 @@ const OrderDetailsUI = (props) => {
                 </tbody>
               </table>
             </OrderBill>
+            {messageDashboardView && (
+              <WrapperMoreInformationButton>
+                <Button color='darkBlue' onClick={() => handleOpenOrderDetail(order.id)}>
+                  {t('MORE_INFORMATION', 'More information')}
+                </Button>
+              </WrapperMoreInformationButton>
+            )}
           </OrderInfoContent>
           {!messageDashboardView && (
             <ContactInfoContent className='contact-info'>

@@ -224,9 +224,9 @@ export const MessagesUI = (props) => {
     handleReadMessages(messages.messages[messages.messages.length - 1].id)
   }
 
-  useEffect(() => {
-    unreadMessageControl()
-  }, [messages])
+  // useEffect(() => {
+  //   unreadMessageControl()
+  // }, [messages])
 
   useEffect(() => {
     if (messages.loading) return
@@ -298,19 +298,31 @@ export const MessagesUI = (props) => {
               {customer && (
                 <HeaderOnline>
                   <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                  <span>{t('ONLINE', 'Online')}</span>
+                  {!messageDashboardView ? (
+                    <span>{t('ONLINE', 'Online')}</span>
+                  ) : (
+                    <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
+                  )}
                 </HeaderOnline>
               )}
               {business && (
                 <HeaderOnline>
                   <h1>{order.business?.name}</h1>
-                  <span>{t('ONLINE', 'Online')}</span>
+                  {!messageDashboardView ? (
+                    <span>{t('ONLINE', 'Online')}</span>
+                  ) : (
+                    <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
+                  )}
                 </HeaderOnline>
               )}
               {driver && (
                 <HeaderOnline>
                   <h1>{order.driver?.name}</h1>
-                  <span>{t('ONLINE', 'Online')}</span>
+                  {!messageDashboardView ? (
+                    <span>{t('ONLINE', 'Online')}</span>
+                  ) : (
+                    <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
+                  )}
                 </HeaderOnline>
               )}
               {history && (
@@ -629,6 +641,7 @@ export const MessagesUI = (props) => {
                 <Input
                   placeholder={t('WRITE_A_MESSAGE', 'Write a message...')}
                   onChange={onChangeMessage}
+                  onFocus={unreadMessageControl}
                   name='message'
                   id='message'
                   ref={register({
@@ -663,7 +676,7 @@ export const MessagesUI = (props) => {
                 <Button
                   color='darkBlue'
                   type='submit'
-                  disabled={sendMessage.loading || (message === '' && !image)}
+                  disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
                   ref={buttonRef}
                 >
                   <IosSend />

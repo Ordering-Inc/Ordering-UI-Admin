@@ -65,6 +65,8 @@ export const OrderInfoContent = styled.div`
     width: 100%;
     padding: 0px 0px 0px 10px;
     margin-right: 0px;
+    overflow: initial;
+    max-height: initial;
 
     @media (max-width: 1200px) {
       padding: 0;
@@ -635,5 +637,11 @@ export const InfonContent = styled.div`
     &:first-child {
       font-weight: 600;
     }
+  }
+`
+export const WrapperMoreInformationButton = styled.div`
+  padding: 20px 10px 10px 10px;
+  button {
+    width: 100%;
   }
 `
