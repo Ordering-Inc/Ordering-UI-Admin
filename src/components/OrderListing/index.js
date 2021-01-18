@@ -41,7 +41,6 @@ export const OrderListing = (props) => {
     activeSwitch,
     handleOpenMessage,
     messageOrder,
-    lastMessage,
     messageListView,
     messageType
   } = props
@@ -122,16 +121,6 @@ export const OrderListing = (props) => {
     if (orderList.orders.length === 0) return
     handleOpenMessage(orderList.orders[0], messageType)
   }, [orderList.loading, activeSwitch])
-
-  useEffect(() => {
-    if (lastMessage === null) return
-    let _messageType = 'business'
-    if (lastMessage.type === 0 || lastMessage.type === 1 || lastMessage.author.level === 0 || lastMessage.author.level === 1) return
-    if (lastMessage.author.level === 2) _messageType = 'business'
-    if (lastMessage.author.level === 3) _messageType = 'customer'
-    if (lastMessage.author.level === 4) _messageType = 'driver'
-    handleOpenMessage(lastMessage.order, _messageType)
-  }, [lastMessage])
 
   return (
     <>
