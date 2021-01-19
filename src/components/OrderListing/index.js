@@ -44,7 +44,7 @@ export const OrderListing = (props) => {
     lastMessage,
     messageListView,
     messageType,
-    openOrclosedOrderView
+    handleLastMessage
   } = props
 
   const theme = useTheme()
@@ -131,17 +131,7 @@ export const OrderListing = (props) => {
     if (lastMessage.author.level === 2) _messageType = 'business'
     if (lastMessage.author.level === 3) _messageType = 'customer'
     if (lastMessage.author.level === 4) _messageType = 'driver'
-    if (openOrclosedOrderView === 'open') {
-      const openStatus = [0, 7, 8, 3, 4, 9]
-      if (openStatus.includes(parseInt(lastMessage?.order?.status))) {
-        handleOpenMessage(lastMessage.order, _messageType)
-      }
-    } else {
-      const closeStatus = [1, 11, 2, 5, 6, 10, 12]
-      if (closeStatus.includes(parseInt(lastMessage?.order?.status))) {
-        handleOpenMessage(lastMessage.order, _messageType)
-      }
-    }
+    handleLastMessage(lastMessage.order, _messageType)
   }, [lastMessage])
 
   return (
