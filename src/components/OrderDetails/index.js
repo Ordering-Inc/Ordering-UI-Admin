@@ -239,6 +239,10 @@ const OrderDetailsUI = (props) => {
     setOrderTotalPrice(_orderTotalPrice)
   }, [subTotalPrice])
 
+  useEffect(() => {
+    console.log(messageType)
+  }, [messageType])
+
   return (
     <Container className='order-detail' messageDashboardView={messageDashboardView}>
       {order && Object.keys(order).length > 0 && !loading && (

@@ -49,9 +49,7 @@ export const SmallOrderItemAccordion = (props) => {
 
   const handleGoToPage = (e) => {
     if (activeSwitch.messages) {
-      if (businessRef.current?.contains(e.target)) handleOpenMessage(order, 'business')
-      if (customerRef.current?.contains(e.target)) handleOpenMessage(order, 'customer')
-      if (driverRef.current?.contains(e.target) && order?.driver_id) handleOpenMessage(order, 'driver')
+      handleOpenMessage(order, '')
     } else {
       const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
       if (!isActionClick) {
@@ -68,7 +66,7 @@ export const SmallOrderItemAccordion = (props) => {
       messageUIActive={messageOrder.id === order.id}
     >
       <WrapperInfo>
-        <BusinessInfo className='order-item-business' ref={businessRef} messageUI={activeSwitch.messages}>
+        <BusinessInfo className='order-item-business' ref={businessRef}>
           <WrapperAccordionImage>
             <AccordionImage bgimage={order?.business?.logo} />
           </WrapperAccordionImage>
@@ -111,7 +109,7 @@ export const SmallOrderItemAccordion = (props) => {
         </DeliveryInfo>
       </WrapperInfo>
       <WrapperInfo>
-        <CustomerInfo ref={customerRef} messageUI={activeSwitch.messages}>
+        <CustomerInfo ref={customerRef}>
           <WrapperAccordionImage small>
             {order?.customer?.photo ? (
               <AccordionImage bgimage={order?.customer?.photo} />

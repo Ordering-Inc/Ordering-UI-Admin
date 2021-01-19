@@ -81,14 +81,11 @@ const OrdersListUI = (props) => {
   const [googleMapLoad, setGoogleMapLoad] = useState(false)
 
   const [messageOrder, setMessageOrder] = useState({})
-  const [messageType, setMessageType] = useState('business')
+  const [messageType, setMessageType] = useState('')
   const [openMessageOrderDetail, setOpenMessageOrderDetail] = useState(false)
   const [openOrclosedOrderView, setOpenOrclosedOrderView] = useState('open')
   const [orderBy, setOrderBy] = useState('last_direct_message_at')
   const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
-
-  const [lastMessageOrder, setLastMessageOrder] = useState({})
-  const [lastMessageType, setLastMessageType] = useState('business')
 
   const handleChangeDriverAvailable = (available) => {
     setDriverAvailable(available)
@@ -174,8 +171,6 @@ const OrdersListUI = (props) => {
   }
 
   const handleOpenMessage = (order, messageType) => {
-    setLastMessageType(messageType)
-    setLastMessageOrder(order)
     setMessageType(messageType)
     setMessageOrder(order)
   }
@@ -188,9 +183,9 @@ const OrdersListUI = (props) => {
     setOrderIdForUnreadCountUpdate(orderId)
   }
 
-  const handleLastMessage = (order, messageType) => {
-    setLastMessageOrder(order)
-    setLastMessageType(messageType)
+  const handleSetMessageType = (messageType) => {
+    console.log(messageType)
+    setMessageType(messageType)
   }
 
   useEffect(() => {
@@ -408,7 +403,6 @@ const OrdersListUI = (props) => {
                       handleNotification={handleNotification}
                       handleOpenOrderDetail={handleOpenOrderDetail}
                       handleOpenMessage={handleOpenMessage}
-                      handleLastMessage={handleLastMessage}
                     />
                   </WrapperOrderlist>
                   {openTab.driver && activeSwitch.deliveries && (
@@ -429,13 +423,14 @@ const OrdersListUI = (props) => {
                 <WrapperMessage>
                   <Messages
                     messageDashboardView
-                    orderId={lastMessageOrder?.id}
-                    order={lastMessageOrder}
-                    customer={lastMessageType === 'customer'}
-                    business={lastMessageType === 'business'}
-                    driver={lastMessageType === 'driver'}
+                    orderId={messageOrder?.id}
+                    order={messageOrder}
+                    customer={messageType === 'customer'}
+                    business={messageType === 'business'}
+                    driver={messageType === 'driver'}
                     handleMessageOrderDetail={handleMessageOrderDetail}
                     handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                    handleSetMessageType={handleSetMessageType}
                   />
                 </WrapperMessage>
               )}
@@ -444,7 +439,7 @@ const OrdersListUI = (props) => {
                 <MessageOrderDetailContainer style={{ display: `${openMessageOrderDetail ? 'block' : 'none'}` }}>
                   <OrderDetails
                     messageDashboardView
-                    orderId={lastMessageOrder?.id}
+                    orderId={messageOrder?.id}
                     driversList={driversList}
                     messageType={messageType}
                     handleOpenMessage={handleOpenMessage}

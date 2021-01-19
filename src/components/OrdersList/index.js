@@ -22,8 +22,7 @@ export const OrdersList = (props) => {
     orderBy,
     messageType,
     messageOrder,
-    orderIdForUnreadCountUpdate,
-    handleLastMessage
+    orderIdForUnreadCountUpdate
   } = props
   const [, t] = useLanguage()
 
@@ -46,8 +45,7 @@ export const OrdersList = (props) => {
     messageType: messageType,
     messageOrder: messageOrder,
     orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate,
-    handleOpenMessage: handleOpenMessage,
-    handleLastMessage: handleLastMessage
+    handleOpenMessage: handleOpenMessage
   }
 
   const PendingOrdersControlProps = {

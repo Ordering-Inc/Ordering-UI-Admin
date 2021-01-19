@@ -62,13 +62,14 @@ export const MessagesUI = (props) => {
     setImage,
     setMessage,
     setCanRead,
-    customer,
-    business,
-    driver,
+    // customer,
+    // business,
+    // driver,
     history,
     messageDashboardView,
     handleMessageOrderDetail,
-    handleReadMessages
+    handleReadMessages,
+    handleSetMessageType
   } = props
 
   const [, t] = useLanguage()
@@ -84,6 +85,10 @@ export const MessagesUI = (props) => {
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [driverNoneCase, setDriverNoneCase] = useState(false)
+
+  const [business, setBusiness] = useState(props.business)
+  const [customer, setCustomer] = useState(props.customer)
+  const [driver, setDriver] = useState(props.driver)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -258,6 +263,55 @@ export const MessagesUI = (props) => {
       setDriverNoneCase(false)
     }
   }, [order?.driver_id, driver])
+
+  useEffect(() => {
+    if (props.business) {
+      setBusiness(true)
+      setCustomer(false)
+      setDriver(false)
+    }
+    if (props.customer) {
+      setBusiness(false)
+      setCustomer(true)
+      setDriver(false)
+    }
+    if (props.driver) {
+      setBusiness(false)
+      setCustomer(false)
+      setDriver(true)
+    }
+  }, [props.business, props.customer, props.driver])
+
+  useEffect(() => {
+    if (messages.loading || (props.business || props.customer || props.driver || history)) return
+    const _messages = messages.messages.filter(_message => (_message.type !== 1 && _message.type !== 0 && _message.author.level !== 0))
+    if (_messages.length > 0) {
+      const level = _messages[_messages.length - 1].author.level
+      if (level === 2) {
+        setBusiness(true)
+        setCustomer(false)
+        setDriver(false)
+        handleSetMessageType('business')
+      }
+      if (level === 3) {
+        setBusiness(false)
+        setCustomer(true)
+        setDriver(false)
+        handleSetMessageType('customer')
+      }
+      if (level === 4) {
+        setBusiness(false)
+        setCustomer(false)
+        setDriver(true)
+        handleSetMessageType('driver')
+      }
+    } else {
+      setBusiness(true)
+      setCustomer(false)
+      setDriver(false)
+      handleSetMessageType('business')
+    }
+  }, [messages.loading])
 
   return (
     <MessagesContainer>

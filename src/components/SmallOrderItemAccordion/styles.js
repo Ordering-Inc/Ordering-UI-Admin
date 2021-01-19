@@ -10,7 +10,6 @@ export const OrderItemContainer = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   ${({ messageUI }) => messageUI && css`
-    cursor: initial;
     ${({ messageUIActive }) => messageUIActive && css`
       background: #c7cad6;
     `}
@@ -72,9 +71,6 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   column-gap: 8px;
-  ${({ messageUI }) => messageUI && css`
-    cursor: pointer;
-  `}
 `
 
 export const BusinessContent = styled.div`
@@ -135,10 +131,6 @@ export const CustomerInfo = styled.div`
   padding: 5px 10px;
   width: 48%;
   box-sizing: border-box;
-
-  ${({ messageUI }) => messageUI && css`
-    cursor: pointer;
-  `}
 `
 export const DriverInfo = styled.div`
   display: flex;
