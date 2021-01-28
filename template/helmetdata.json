@@ -1,0 +1,23 @@
+{
+  "app": {
+    "title": "Ordering",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": "http://localhost:8300/"
+  },
+  "orders-deliveries": {
+    "title": "Orders-Deliveries",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
+  "login": {
+    "title": "Login",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  }
+}
