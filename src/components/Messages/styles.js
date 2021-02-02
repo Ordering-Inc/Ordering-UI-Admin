@@ -521,6 +521,7 @@ export const WrapperLogistics = styled.div``
 export const HeaderInfo = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
 `
 export const SearchAndDetailControlContainer = styled.div`
   display: flex;

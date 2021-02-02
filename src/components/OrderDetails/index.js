@@ -7,6 +7,9 @@ import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import GrClose from '@meronex/icons/gr/GrClose'
+import AiFillShop from '@meronex/icons/ai/AiFillShop'
+import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -363,6 +366,24 @@ const OrderDetailsUI = (props) => {
                     <>
                       <img src={theme?.images?.icons?.pickUp} alt='pickup' />
                       {t('PICKUP', 'Pickup')}
+                    </>
+                  )}
+                  {order?.delivery_type === 3 && (
+                    <>
+                      <AiFillShop />
+                      {t('EAT_IN', 'Eat in')}
+                    </>
+                  )}
+                  {order?.delivery_type === 4 && (
+                    <>
+                      <GiFoodTruck />
+                      {t('CURBSIDE', 'Curbside')}
+                    </>
+                  )}
+                  {order?.delivery_type === 5 && (
+                    <>
+                      <FaCarSide />
+                      {t('DRIVE_THRU', 'Drive thru')}
                     </>
                   )}
                 </OrderTypeContent>

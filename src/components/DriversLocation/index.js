@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useConfig } from 'ordering-components'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 
@@ -10,6 +11,9 @@ export const DriversLocation = (props) => {
     driversList,
     driverAvailable
   } = props
+
+  const [configState] = useConfig()
+  const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
   const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
   const [mapZoom, setMapZoom] = useState(10)
@@ -130,7 +134,7 @@ export const DriversLocation = (props) => {
     <WrapperMap ref={mapRef} className='drivers-location' disableUI={disableUI}>
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: 'AIzaSyDX5giPfK-mtbLR72qxzevCYSUrbi832Sk'
+          key: googleMapsApiKey
         }}
         onGoogleApiLoaded={() => setMapLoaded(false)}
         defaultCenter={defaultCenter}

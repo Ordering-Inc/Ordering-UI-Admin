@@ -198,9 +198,8 @@ export const Tab = styled.div`
 `
 export const OrderAndDriverListContainer = styled.div`
   ${({ deliveryUI }) => deliveryUI && css`
-    margin-top: 56px;
     overflow: auto;
-    height: calc(100% - 56px);
+    height: calc(100% - 91px);
   `}
   ${({ messageUI }) => messageUI && css`
     overflow: auto;
@@ -295,5 +294,18 @@ export const WrapperSortContainer = styled.div`
     &:last-child {
       border: none;
     }
+  }
+`
+export const WrapperQuickShow = styled.div`
+  display: flex;
+  margin-top: 56px;
+  padding: 5px 20px;
+  justify-content: flex-end;
+  column-gap: 10px;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
   }
 `

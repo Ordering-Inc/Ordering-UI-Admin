@@ -62,7 +62,7 @@ export const Header = (props) => {
       <InnerHeader>
         <LeftHeader>
           <MobileSidebarMenu />
-          <LogoHeader onClick={() => handleGoToPage({ page: 'orders' })}>
+          <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
             <img alt='Logotype' src={theme?.images?.logos?.logotype} />
             <img alt='Isotype' src={theme?.images?.logos?.isotype} />
           </LogoHeader>

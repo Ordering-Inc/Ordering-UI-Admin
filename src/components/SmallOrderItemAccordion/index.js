@@ -5,6 +5,10 @@ import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DriverSelector } from '../DriverSelector'
+import AiFillShop from '@meronex/icons/ai/AiFillShop'
+import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+import FaCarSide from '@meronex/icons/fa/FaCarSide'
+
 import {
   OrderItemContainer,
   WrapperInfo,
@@ -95,10 +99,22 @@ export const SmallOrderItemAccordion = (props) => {
                   alt='pick up'
                 />
               )}
+              {order?.delivery_type === 3 && (
+                <AiFillShop />
+              )}
+              {order?.delivery_type === 4 && (
+                <GiFoodTruck />
+              )}
+              {order?.delivery_type === 5 && (
+                <FaCarSide />
+              )}
             </DeliveryIcon>
             <DeliveryName>
               {order?.delivery_type === 1 && (t('DELIVERY', 'Delivery'))}
               {order?.delivery_type === 2 && (t('PICKUP', 'Pickup'))}
+              {order?.delivery_type === 3 && (t('EAT_IN', 'Eat in'))}
+              {order?.delivery_type === 4 && (t('CURBSIDE', 'Curbside'))}
+              {order?.delivery_type === 5 && (t('DRIVE_THRU', 'Drive thru'))}
               {activeSwitch.messages && order?.unread_count > 0 && (
                 <UnreadMessageIndicator>
                   {order?.unread_count}

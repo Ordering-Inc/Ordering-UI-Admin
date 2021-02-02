@@ -21,14 +21,12 @@ export const OrderItemAccordionContainer = styled.div`
   position: initial;
 
   & > div {
-
-    &:nth-child(1) {
+    &: first-child {
       width: 15%;
       min-width: 180px;
       align-items: center;
       column-gap: 0px;
       padding: 0px;
-
       & > div {
         &:first-child {
           padding: 0 5px;
@@ -36,59 +34,14 @@ export const OrderItemAccordionContainer = styled.div`
           display: flex;
           align-items: center;
         }
-      }
-    }
-
-    &:nth-child(2) {
-      width: 18%;
-      min-width: 150px;
-    }
-
-    &:nth-child(3) {
-      width: 18%;
-      min-width: 150px;
-    }
-
-    &:nth-child(4) {
-      width: 18%;
-      min-width: 150px;
-      padding: 0px;
-      p {
-        font-size: 14px;
-        font-weight: 600;
-      }
-    }
-
-    &:nth-child(5) {
-      min-width: 40px;
-      width: 4%;
-      font-size: 14px;
-    }
-
-    
-    &:nth-child(6) {
-      width: ${({ size }) => size === 'small' ? '13%' : '20%'};
-      min-width: ${({ size }) => size === 'small' ? '130px' : '170px'};
-      display: ${({ size }) => size === 'small' ? 'flex' : 'block'};
-      justify-content: ${({ size }) => size === 'small' ? 'center' : 'initial'};
-
-      p {
-        font-size: 12px;
-      }
-    }
-
-    &:nth-child(7) {
-      width: 7%;
-      min-width: 120px;
-      display: flex;
-      justify-content: flex-end;
+      }    
     }
   }
 `
 export const OrderItemAccordionCell = styled.div`
   display: flex;
   column-gap: 8px;
-  padding: 20px 0;
+  padding: 15px 0;
 
   .rotate {
     transform: rotate(180deg);
@@ -219,6 +172,11 @@ export const DeliveryIcon = styled.div`
     height: 100%;
     border-radius: unset;
     border: none;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 `
 export const DeliveryName = styled.p`
@@ -386,5 +344,93 @@ export const ProductComment = styled.div`
     ${props => props.theme?.rtl && css`
       margin: 0px 40px 0px 20px
     `}
+  }
+`
+export const OrderInfoContainer = styled.div`
+  flex: 1;
+`
+export const WrapperGeneralInfo = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e8e8e8;
+
+  & > div {
+    
+    &:nth-child(1) {
+      width: 20%;
+      min-width: 150px;
+    }
+
+    &:nth-child(2) {
+      width: 20%;
+      min-width: 150px;
+    }
+
+    &:nth-child(3) {
+      width: 23%;
+      min-width: 150px;
+      padding: 0px;
+      p {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+    &:nth-child(4) {
+      min-width: 40px;
+      width: 6%;
+      font-size: 14px;
+    }
+
+    
+    &:nth-child(5) {
+      width: ${({ size }) => size === 'small' ? '15%' : '22%'};
+      min-width: ${({ size }) => size === 'small' ? '130px' : '170px'};
+      display: ${({ size }) => size === 'small' ? 'flex' : 'block'};
+      justify-content: ${({ size }) => size === 'small' ? 'center' : 'initial'};
+
+      p {
+        font-size: 12px;
+      }
+    }
+
+    &:nth-child(6) {
+      width: 9%;
+      width: ${({ size }) => size === 'small' ? '16%' : '9%'};
+      min-width: 120px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+`
+export const WrapperOrderlabel = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > div {
+    &:nth-child(1) {
+      width: 20%;
+      min-width: 150px;
+    }
+
+    &:nth-child(2) {
+      width: 20%;
+      min-width: 150px;
+    }
+
+    &:nth-child(3) {
+      width: 23%;
+      min-width: 150px;
+    }
+
+    &:nth-child(4) {
+      flex: 1;
+      justify-content: flex-end;
+      margin: 0 5px;
+    }
   }
 `

@@ -19,5 +19,12 @@
     "keywords": "test, dummy, data",
     "robots": "",
     "canonicalUrl": ""
+  },
+  "forgotpassword": {
+    "title": "Forgot Password",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
   }
 }

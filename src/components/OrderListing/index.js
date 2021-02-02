@@ -36,13 +36,14 @@ export const OrderListing = (props) => {
     handleNotification,
     handleResetNotification,
     driverOrdersLoading,
-    size,
     driverOrdersView,
     activeSwitch,
+    isCheckedQuickShow,
     handleOpenMessage,
     messageOrder,
     messageListView,
-    messageType
+    messageType,
+    size
   } = props
 
   const theme = useTheme()
@@ -63,6 +64,7 @@ export const OrderListing = (props) => {
   const indexOfFirstPost = indexOfLastPost - ordersPerPage
   const [currentOrders, setCurrentOrders] = useState([])
   const [totalPages, setTotalPages] = useState(null)
+  const [totalOrders, setTotalOrders] = useState(null)
 
   // Change page
   const prevPaginate = () => {
@@ -77,20 +79,31 @@ export const OrderListing = (props) => {
   }
 
   useEffect(() => {
-    const _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
-    setTotalPages(_totalPages)
-  }, [orderList])
-
-  useEffect(() => {
     if (orderList.loading) {
       setCurrentPage(1)
     }
   }, [orderList])
 
   useEffect(() => {
-    const _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
+    if (orderList.loading) return
+    let _orders = []
+    let _currentOrders = []
+    let _totalPages
+    let _totalOrders
+    if (activeSwitch.deliveries && !isCheckedQuickShow) {
+      _orders = orderList.orders.filter(_order => _order.delivery_type === 1)
+      _currentOrders = _orders.slice(indexOfFirstPost, indexOfLastPost)
+      _totalPages = Math.ceil(_orders.length / ordersPerPage)
+      _totalOrders = _orders.length
+    } else {
+      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
+      _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
+      _totalOrders = orderList.orders.length
+    }
+    setTotalOrders(_totalOrders)
+    setTotalPages(_totalPages)
     setCurrentOrders(_currentOrders)
-  }, [orderList, currentPage])
+  }, [orderList, currentPage, activeSwitch, isCheckedQuickShow])
 
   const toggleOrderList = () => {
     setActiveState(setActive === '' ? 'active' : '')
@@ -160,8 +173,8 @@ export const OrderListing = (props) => {
                     <React.Fragment key={order.id}>
                       {orderListView === 'big' && (
                         <OrderItemAccordion
-                          size={size}
                           order={order}
+                          size={size}
                           drivers={driversList.drivers}
                           pendingOrder={pendingOrder}
                           preOrder={preOrder}
@@ -274,7 +287,7 @@ export const OrderListing = (props) => {
                 {!(orderList.loading || driverOrdersLoading) && totalPages > 0 && (
                   <OrdersPagination
                     ordersPerPage={ordersPerPage}
-                    totalOrders={orderList.orders.length}
+                    totalOrders={totalOrders}
                     currentPage={currentPage}
                     totalPages={totalPages}
                     prevPaginate={prevPaginate}

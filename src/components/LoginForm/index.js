@@ -137,6 +137,7 @@ const LoginFormUI = (props) => {
                     }
                   })}
                   onChange={(e) => hanldeChangeInput(e)}
+                  autoComplete='off'
                 />
                 <img src={theme?.images?.icons?.email} alt='email' />
               </InputWithIcon>
@@ -154,6 +155,7 @@ const LoginFormUI = (props) => {
                   ).replace('_attribute_', t('CELLPHONE', 'Cellphone'))
                 })}
                 onChange={(e) => hanldeChangeInput(e)}
+                autoComplete='off'
               />
             )}
 
@@ -179,6 +181,7 @@ const LoginFormUI = (props) => {
                   }
                 })}
                 onChange={(e) => hanldeChangeInput(e)}
+                autoComplete='off'
               />
               <img src={theme?.images?.icons?.lock} alt='lock' />
             </InputWithIcon>

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import FaRegTimesCircle from '@meronex/icons/fa/FaRegTimesCircle'
+import BlankCheckbox from '@meronex/icons/ri/RiCheckboxBlankCircleLine'
+import Checkbox from '@meronex/icons/ri/RiCheckboxCircleLine'
 import { OrdersManage as OrdersManageController, useLanguage, useConfig } from 'ordering-components'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
@@ -34,7 +36,8 @@ import {
   WrapperOrderlist,
   WrapperMessage,
   MessageOrderDetailContainer,
-  WrapperSortContainer
+  WrapperSortContainer,
+  WrapperQuickShow
 } from './styles'
 
 toast.configure()
@@ -79,6 +82,7 @@ const OrdersListUI = (props) => {
   const [openOrderAndUser, setOpenOrderAndUser] = useState(true)
   const [openTab, setOpenTab] = useState({ order: true, driver: false })
   const [googleMapLoad, setGoogleMapLoad] = useState(false)
+  const [isCheckedQuickShow, setIsCheckedQuickShow] = useState(false)
 
   const [messageOrder, setMessageOrder] = useState({})
   const [messageType, setMessageType] = useState('')
@@ -184,7 +188,6 @@ const OrdersListUI = (props) => {
   }
 
   const handleSetMessageType = (messageType) => {
-    console.log(messageType)
     setMessageType(messageType)
   }
 
@@ -257,6 +260,7 @@ const OrdersListUI = (props) => {
 
   useEffect(() => {
     if (activeSwitch.messages) setOrderBy('last_direct_message_at')
+    if (activeSwitch.deliveries) setIsCheckedQuickShow(false)
   }, [activeSwitch])
 
   return (
@@ -337,48 +341,59 @@ const OrdersListUI = (props) => {
                 style={{ display: `${((openOrderAndDriver && activeSwitch.deliveries) || (openOrderAndUser && activeSwitch.messages) || activeSwitch.orders) ? 'block' : 'none'}` }}
               >
                 {activeSwitch.deliveries && (
-                  <WrapperTab>
-                    <Tab
-                      active={openTab.order}
-                      onClick={() => handleChangeOrderAndDriver()}
-                    >
-                      {t('ORDERS', 'Orders')}
-                    </Tab>
-                    <Tab
-                      active={openTab.driver}
-                      onClick={() => setOpenTab({ order: false, driver: true })}
-                    >
-                      {t('DRIVERS', 'Drivers')}
-                    </Tab>
-                  </WrapperTab>
+                  <>
+                    <WrapperTab>
+                      <Tab
+                        active={openTab.order}
+                        onClick={() => handleChangeOrderAndDriver()}
+                      >
+                        {t('ORDERS', 'Orders')}
+                      </Tab>
+                      <Tab
+                        active={openTab.driver}
+                        onClick={() => setOpenTab({ order: false, driver: true })}
+                      >
+                        {t('DRIVERS', 'Drivers')}
+                      </Tab>
+                    </WrapperTab>
+                    <WrapperQuickShow>
+                      {isCheckedQuickShow ? (
+                        <Checkbox onClick={() => setIsCheckedQuickShow(!isCheckedQuickShow)} />
+                      ) : (
+                        <BlankCheckbox onClick={() => setIsCheckedQuickShow(!isCheckedQuickShow)} />
+                      )}
+                      {t('SHOW_ALL', 'Show all')}
+                    </WrapperQuickShow>
+                  </>
                 )}
                 {activeSwitch.messages && (
-                  <WrapperTab messageUI={activeSwitch.messages}>
-                    <Tab
-                      active={openTab.order}
-                    >
-                      {t('ORDERS', 'Orders')}
-                    </Tab>
-                    {/* <Tab
-                      active={openTab.driver}
-                      onClick={() => setOpenTab({ order: false, driver: true })}
-                    >
-                      {t('USERS', 'Users')}
-                    </Tab> */}
-                  </WrapperTab>
+                  <>
+                    <WrapperTab messageUI={activeSwitch.messages}>
+                      <Tab
+                        active={openTab.order}
+                      >
+                        {t('ORDERS', 'Orders')}
+                      </Tab>
+                      {/* <Tab
+                        active={openTab.driver}
+                        onClick={() => setOpenTab({ order: false, driver: true })}
+                      >
+                        {t('USERS', 'Users')}
+                      </Tab> */}
+                    </WrapperTab>
+                    <WrapperSortContainer>
+                      <OpenAndCloseOrderSelector
+                        defaultValue={openOrclosedOrderView}
+                        setOpenOrclosedOrderView={setOpenOrclosedOrderView}
+                      />
+                      <OrderBySelector
+                        defaultValue={orderBy}
+                        setOrderBy={setOrderBy}
+                      />
+                    </WrapperSortContainer>
+                  </>
                 )}
-                {activeSwitch.messages && (
-                  <WrapperSortContainer>
-                    <OpenAndCloseOrderSelector
-                      defaultValue={openOrclosedOrderView}
-                      setOpenOrclosedOrderView={setOpenOrclosedOrderView}
-                    />
-                    <OrderBySelector
-                      defaultValue={orderBy}
-                      setOrderBy={setOrderBy}
-                    />
-                  </WrapperSortContainer>
-                )}
+
                 <OrderAndDriverListContainer
                   deliveryUI={activeSwitch.deliveries}
                   messageUI={activeSwitch.messages}
@@ -397,6 +412,7 @@ const OrdersListUI = (props) => {
                       ordersStatusGroup={ordersStatusGroup}
                       handleSelectedOrderIds={handleSelectedOrderIds}
                       activeSwitch={activeSwitch}
+                      isCheckedQuickShow={isCheckedQuickShow}
                       messageType={messageType}
                       messageOrder={messageOrder}
                       orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}

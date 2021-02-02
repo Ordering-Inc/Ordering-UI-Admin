@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import dayjs from 'dayjs'
+import { getAgoMinutes } from '../../utils'
+
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -10,6 +11,9 @@ import { DriverSelector } from '../DriverSelector'
 
 import BlankCheckbox from '@meronex/icons/ri/RiCheckboxBlankCircleFill'
 import Checkbox from '@meronex/icons/ri/RiCheckboxCircleFill'
+import AiFillShop from '@meronex/icons/ai/AiFillShop'
+import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+import FaCarSide from '@meronex/icons/fa/FaCarSide'
 
 import {
   AccordionSection,
@@ -33,18 +37,21 @@ import {
   ProductImageContainer,
   AccordionContent,
   ProductOptionsList,
-  ProductComment
+  ProductComment,
+  OrderInfoContainer,
+  WrapperGeneralInfo,
+  WrapperOrderlabel
 } from './styles'
 
 export const OrderItemAccordion = (props) => {
   const {
     order,
     drivers,
+    size,
     selectedOrderIds,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
-    handleOpenOrderDetail,
-    size
+    handleOpenOrderDetail
   } = props
 
   const [, t] = useLanguage()
@@ -62,8 +69,6 @@ export const OrderItemAccordion = (props) => {
   const content = useRef(null)
   const toggleBtn = useRef(null)
   const driverSelectorRef = useRef(null)
-  const [pendingOrder, setPendingOrder] = useState(false)
-  const [preOrder, setPreOrder] = useState(false)
 
   const toggleOrderSelect = (id) => {
     setIsChecked(!isChecked)
@@ -138,11 +143,38 @@ export const OrderItemAccordion = (props) => {
     return parseFloat(serviceFee.toFixed(2))
   }
 
-  const isPendingOrPreOrder = (createdAt, deliveryDatetimeUtc) => {
-    const date1 = dayjs(createdAt)
-    const date2 = dayjs(deliveryDatetimeUtc)
-    return Math.abs(date1.diff(date2, 'minute')) < 60
+  const getLogisticTag = (status) => {
+    switch (parseInt(status)) {
+      case 0:
+        return t('PENDING', 'Pending')
+      case 1:
+        return t('IN_PROGRESS', 'In progress')
+      case 2:
+        return t('IN_QUEUE', 'In queue')
+      case 3:
+        return t('EXPIRED', 'Expired')
+      case 4:
+        return t('RESOLVED', 'Resolved')
+      default:
+        return t('UNKNOWN', 'Unknown')
+    }
   }
+
+  const getPriorityTag = (priority) => {
+    switch (parseInt(priority)) {
+      case -1:
+        return t('LOW', 'Low')
+      case 0:
+        return t('NORMAL', 'Normal')
+      case 1:
+        return t('HIGH', 'High')
+      case 2:
+        return t('URGENT', 'Urgent')
+      default:
+        return t('UNKNOWN', 'Unknown')
+    }
+  }
+
   useEffect(() => {
     if (!selectedOrderIds) {
       setIsChecked(false)
@@ -161,17 +193,6 @@ export const OrderItemAccordion = (props) => {
     }
     _orderSubprice = parseFloat(_orderSubprice.toFixed(2))
     setSubTotalPrice(_orderSubprice)
-
-    if (order.status === 0) {
-      const checkPendingOrPreOrder = isPendingOrPreOrder(order.created_at, order.delivery_datetime_utc)
-      if (checkPendingOrPreOrder) {
-        setPendingOrder(true)
-        setPreOrder(false)
-      } else {
-        setPendingOrder(false)
-        setPreOrder(true)
-      }
-    }
   }, [order])
 
   useEffect(() => {
@@ -200,7 +221,6 @@ export const OrderItemAccordion = (props) => {
       <AccordionSection>
         <OrderItemAccordionContainer
           className={setActive}
-          size={size}
           // filterColor={
           //   order.deadline_status === 1
           //     ? theme?.colors?.deadlineOk
@@ -225,91 +245,127 @@ export const OrderItemAccordion = (props) => {
               </SmallText>
             </TextBlockContainer>
           </OrderItemAccordionCell>
+          <OrderInfoContainer>
+            <WrapperGeneralInfo size={size}>
+              <OrderItemAccordionCell className='order-item-business'>
+                <WrapperAccordionImage>
+                  <AccordionImage bgimage={order?.business?.logo} />
+                </WrapperAccordionImage>
+                <TextBlockContainer>
+                  <BigText>{order?.business?.name}</BigText>
+                  <SmallText>{order?.business?.city?.name}</SmallText>
+                </TextBlockContainer>
+              </OrderItemAccordionCell>
 
-          <OrderItemAccordionCell className='order-item-business'>
-            <WrapperAccordionImage>
-              <AccordionImage bgimage={order?.business?.logo} />
-            </WrapperAccordionImage>
-            <TextBlockContainer>
-              <BigText>{order?.business?.name}</BigText>
-              <SmallText>{order?.business?.city?.name}</SmallText>
-            </TextBlockContainer>
-          </OrderItemAccordionCell>
+              <OrderItemAccordionCell>
+                <WrapperAccordionImage>
+                  {order?.customer?.photo ? (
+                    <AccordionImage bgimage={order?.customer?.photo} />
+                  ) : (
+                    <FaUserAlt />
+                  )}
+                </WrapperAccordionImage>
+                <TextBlockContainer>
+                  <BigText>{order?.customer?.name}</BigText>
+                  <SmallText>{order?.customer?.cellphone}</SmallText>
+                </TextBlockContainer>
+              </OrderItemAccordionCell>
 
-          <OrderItemAccordionCell>
-            <WrapperAccordionImage>
-              {order?.customer?.photo ? (
-                <AccordionImage bgimage={order?.customer?.photo} />
-              ) : (
-                <FaUserAlt />
-              )}
-            </WrapperAccordionImage>
-            <TextBlockContainer>
-              <BigText>{order?.customer?.name}</BigText>
-              <SmallText>{order?.customer?.cellphone}</SmallText>
-            </TextBlockContainer>
-          </OrderItemAccordionCell>
-
-          <OrderItemAccordionCell>
-            {order?.delivery_type === 1 && (
-              <WrapperDriverSelector ref={driverSelectorRef}>
-                <DriverSelector
-                  orderView
-                  padding='5px 0'
-                  defaultValue={order?.driver_id ? order.driver_id : 'default'}
-                  drivers={drivers}
-                  order={order}
-                />
-              </WrapperDriverSelector>
-            )}
-          </OrderItemAccordionCell>
-
-          <OrderItemAccordionCell>
-            <DeliveryTypeContainer>
-              <DeliveryIcon>
+              <OrderItemAccordionCell>
                 {order?.delivery_type === 1 && (
-                  <img
-                    src={theme?.images?.icons?.driverDelivery}
-                    alt='Delivery'
-                  />
+                  <WrapperDriverSelector ref={driverSelectorRef}>
+                    <DriverSelector
+                      orderView
+                      padding='5px 0'
+                      defaultValue={order?.driver_id ? order.driver_id : 'default'}
+                      drivers={drivers}
+                      order={order}
+                    />
+                  </WrapperDriverSelector>
                 )}
-                {order?.delivery_type === 2 && (
-                  <img
-                    src={theme?.images?.icons?.pickUp}
-                    alt='pick up'
-                  />
-                )}
-              </DeliveryIcon>
-              <DeliveryName>
-                {order?.delivery_type === 1 && (t('DELIVERY', 'Delivery'))}
-                {order?.delivery_type === 2 && (t('PICKUP', 'Pickup'))}
-              </DeliveryName>
-            </DeliveryTypeContainer>
-          </OrderItemAccordionCell>
+              </OrderItemAccordionCell>
 
-          <OrderItemAccordionCell>
-            <OrderStatusTypeSelector
-              defaultValue={parseInt(order.status)}
-              orderId={order.id}
-              deliveryType={order?.delivery_type}
-              pendingOrder={pendingOrder}
-              preOrder={preOrder}
-              noPadding
-              handleUpdateOrderStatus={handleUpdateOrderStatus}
-            />
-          </OrderItemAccordionCell>
+              <OrderItemAccordionCell>
+                <DeliveryTypeContainer>
+                  <DeliveryIcon>
+                    {order?.delivery_type === 1 && (
+                      <img
+                        src={theme?.images?.icons?.driverDelivery}
+                        alt='Delivery'
+                      />
+                    )}
+                    {order?.delivery_type === 2 && (
+                      <img
+                        src={theme?.images?.icons?.pickUp}
+                        alt='pick up'
+                      />
+                    )}
+                    {order?.delivery_type === 3 && (
+                      <AiFillShop />
+                    )}
+                    {order?.delivery_type === 4 && (
+                      <GiFoodTruck />
+                    )}
+                    {order?.delivery_type === 5 && (
+                      <FaCarSide />
+                    )}
+                  </DeliveryIcon>
+                  <DeliveryName>
+                    {order?.delivery_type === 1 && (t('DELIVERY', 'Delivery'))}
+                    {order?.delivery_type === 2 && (t('PICKUP', 'Pickup'))}
+                    {order?.delivery_type === 3 && (t('EAT_IN', 'Eat in'))}
+                    {order?.delivery_type === 4 && (t('CURBSIDE', 'Curbside'))}
+                    {order?.delivery_type === 5 && (t('DRIVE_THRU', 'Drive thru'))}
+                  </DeliveryName>
+                </DeliveryTypeContainer>
+              </OrderItemAccordionCell>
 
-          <OrderItemAccordionCell>
-            <BigText
-              ref={toggleBtn}
-              onClick={() => toggleAccordion()}
-            >
-              {parsePrice(orderTotalPrice)}
-              <OrderDetailToggleButton>
-                <EnChevronDown className={`${setRotate}`} />
-              </OrderDetailToggleButton>
-            </BigText>
-          </OrderItemAccordionCell>
+              <OrderItemAccordionCell>
+                <OrderStatusTypeSelector
+                  defaultValue={parseInt(order.status)}
+                  orderId={order.id}
+                  deliveryType={order?.delivery_type}
+                  noPadding
+                  handleUpdateOrderStatus={handleUpdateOrderStatus}
+                />
+              </OrderItemAccordionCell>
+
+              <OrderItemAccordionCell>
+                <BigText
+                  ref={toggleBtn}
+                  onClick={() => toggleAccordion()}
+                >
+                  {parsePrice(orderTotalPrice)}
+                  <OrderDetailToggleButton>
+                    <EnChevronDown className={`${setRotate}`} />
+                  </OrderDetailToggleButton>
+                </BigText>
+              </OrderItemAccordionCell>
+            </WrapperGeneralInfo>
+            <WrapperOrderlabel>
+              <OrderItemAccordionCell>
+                <TextBlockContainer>
+                  <BigText>{t('LOGISTIC', 'Logistic')}</BigText>
+                  <SmallText>{getLogisticTag(order?.logistic_status)}</SmallText>
+                </TextBlockContainer>
+              </OrderItemAccordionCell>
+              <OrderItemAccordionCell>
+                <TextBlockContainer>
+                  <BigText>{t('ATTEMPTS', 'Attempts')}</BigText>
+                  <SmallText>{order?.logistic_attemps}</SmallText>
+                </TextBlockContainer>
+              </OrderItemAccordionCell>
+              <OrderItemAccordionCell>
+                <TextBlockContainer>
+                  <BigText>{t('PRIORITY', 'Priority')}</BigText>
+                  <SmallText>{getPriorityTag(order?.priority)}</SmallText>
+                </TextBlockContainer>
+              </OrderItemAccordionCell>
+              <OrderItemAccordionCell>
+                {getAgoMinutes(order?.delivery_datetime)}
+              </OrderItemAccordionCell>
+            </WrapperOrderlabel>
+          </OrderInfoContainer>
         </OrderItemAccordionContainer>
 
         <OrderProductsQuickDetailContainer

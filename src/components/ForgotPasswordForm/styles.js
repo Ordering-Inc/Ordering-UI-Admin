@@ -1,13 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const LoginContainer = styled.div`
+export const ForgotPasswordContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  min-height: ${({ isPopup }) => isPopup ? '500px' : '100vh'};
-
   flex-direction: column;
+  min-height: ${({ isPopup }) => isPopup ? '500px' : '100vh'};
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -17,7 +16,7 @@ const Side = styled.div`
   display: flex;
   width: 100%;
 `
-export const HeroSide = styled.div`
+export const HeroSide = styled(Side)`
   display: none;
 
   ${({ bgimage }) => bgimage && css`
@@ -39,7 +38,7 @@ export const HeroSide = styled.div`
   }
 `
 
-export const LoginHeroContainer = (props) => {
+export const HeroContainer = (props) => {
   const style = {}
   style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
 
@@ -49,6 +48,41 @@ export const LoginHeroContainer = (props) => {
     </HeroSide>
   )
 }
+
+export const TitleFormSide = styled.div`
+  color: #fff;
+  
+  h1 {
+    text-transform: uppercase;
+    font-size: 24px;
+    margin: 0px;
+  }
+
+  p {
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+
+  @media (min-width: 425px) {
+    h1 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    h1 {
+      font-size: 32px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 60px;
+    }
+  }  
+`
 
 export const FormSide = styled(Side)`
   flex-direction: column;
@@ -66,27 +100,6 @@ export const FormSide = styled(Side)`
     margin-left: -80px;
     border-radius: 54px 0px 0px 54px;
     width: calc(50% + 80px);
-  }
-`
-export const LoginWith = styled.div`
-  font-size: 14px;
-
-  @media (min-width: 425px) {
-    font-size: 18px;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 14px;
-  }
-
-  @media (min-width: 992px) {
-    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
-  }
-
-  @media (min-width: 1200px) {
-    ${({ isPopup }) => isPopup && css`
-      font-size: 17px;
-    `};
   }
 `
 
@@ -175,76 +188,5 @@ export const RedirectLink = styled.div`
     ${({ isPopup }) => isPopup && css`
       font-size: 16px;
     `};
-  }
-`
-
-export const SocialButtons = styled.div`
-   width: calc(100% - 40px);
-   margin-top: 5px;
-
-  button {
-    display: flex;
-    justify-content: start;
-    width: 100%;
-    padding: 5px 30px;
-    color: #000000;
-
-    img {
-      width: 30px;
-    }
-
-    div {
-      font-size: 0.8em;
-    }
-  }
-`
-
-export const TitleFormSide = styled.div`
-  color: #fff;
-  
-  h1 {
-    text-transform: uppercase;
-    font-size: 24px;
-    margin: 0px;
-  }
-
-  p {
-    font-size: 16px;
-    margin-top: 0px;
-    margin-bottom: 60px;
-  }
-
-  @media (min-width: 425px) {
-    h1 {
-      font-size: 40px;
-    }
-    p {
-      font-size: 20px;
-    }
-  }
-
-  @media (min-width: 769px) {
-    h1 {
-      font-size: 50px;
-    }
-    p {
-      font-size: 24px;
-      margin-bottom: 80px;
-    }
-  }  
-`
-export const InputWithIcon = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  input {
-    width: 100%;
-  }
-
-  img {
-    position: absolute;
-    width: 20px;
-    padding: 8px 20px;
   }
 `

@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react'
 import {
   useLanguage,
   useSession,
-  LogoutAction as LogoutActionController,
-  useEvent
+  LogoutAction as LogoutActionController
+  // useEvent
 } from 'ordering-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { usePopper } from 'react-popper'
@@ -13,21 +13,21 @@ import {
   PopoverBody,
   PopoverArrow,
   PopoverList,
-  PopoverListItem,
-  PopoverListLink
+  PopoverListItem
+  // PopoverListLink
 } from './styles'
 import { DropDownImage } from '../Dropdown/style'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
-import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
+// import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
+// import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
 
 export const UserPopover = (props) => {
   const { open } = props
   const [sessionState] = useSession()
-  const [, t] = useLanguage()
-  const [events] = useEvent()
+  // const [, t] = useLanguage()
+  // const [events] = useEvent()
   const { width } = useWindowSize()
   const referenceElement = useRef()
   const popperElement = useRef()
@@ -61,10 +61,10 @@ export const UserPopover = (props) => {
     }
   }
 
-  const handleGoToPage = (page) => {
-    events.emit('go_to_page', { page })
-    props.onClick && props.onClick()
-  }
+  // const handleGoToPage = (page) => {
+  //   events.emit('go_to_page', { page })
+  //   props.onClick && props.onClick()
+  // }
 
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
@@ -98,12 +98,12 @@ export const UserPopover = (props) => {
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
-          <PopoverListLink onClick={() => handleGoToPage('profile')}>
+          {/* <PopoverListLink onClick={() => handleGoToPage('profile')}>
             <FaRegAddressCard /> {t('PROFILE', 'Profile')}
           </PopoverListLink>
           <PopoverListLink onClick={() => handleGoToPage('orders')}>
             <FaRegListAlt /> {t('ORDERS', 'Orders')}
-          </PopoverListLink>
+          </PopoverListLink> */}
           <PopoverListItemLogout onClose={props.onClose} />
         </PopoverList>
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />

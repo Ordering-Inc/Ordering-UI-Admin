@@ -105,9 +105,13 @@ export const getStarWidth = (qualification) => {
  */
 export const getAgoMinutes = (time) => {
   const totalMinutes = ((moment().utc() - moment(time)) / 1000 / 60).toFixed(0)
-  const hours = Math.floor(totalMinutes / 60)
-  const minutes = totalMinutes - hours * 60
-  if (hours > 0) {
-    return `${hours} hours ${minutes} mins ago`
-  } else return `${minutes} mins ago`
+  const totalHours = Math.floor(totalMinutes / 60)
+  const minutes = totalMinutes - totalHours * 60
+  const days = Math.floor(totalHours / 24)
+  const hours = totalHours - days * 24
+  if (days > 0) {
+    return `-${days} days ${hours}:${minutes} hrs`
+  } else if (hours > 0) {
+    return `-${hours}:${minutes} hrs`
+  } else return `-00:${minutes} hrs`
 }
