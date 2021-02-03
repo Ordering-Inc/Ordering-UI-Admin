@@ -69,6 +69,7 @@ export const OrderItemAccordion = (props) => {
   const content = useRef(null)
   const toggleBtn = useRef(null)
   const driverSelectorRef = useRef(null)
+  const [diffTime, setDiffTime] = useState(getAgoMinutes(order?.delivery_datetime))
 
   const toggleOrderSelect = (id) => {
     setIsChecked(!isChecked)
@@ -215,6 +216,17 @@ export const OrderItemAccordion = (props) => {
     _orderTotalPrice = parseFloat(_orderTotalPrice.toFixed(2))
     setOrderTotalPrice(_orderTotalPrice)
   }, [subTotalPrice])
+
+  useEffect(() => {
+    const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
+    if (deActive) return
+    const timer = setInterval(() => {
+      setDiffTime(getAgoMinutes(order?.delivery_datetime))
+    }, 60 * 1000)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
 
   return (
     <>
@@ -364,7 +376,7 @@ export const OrderItemAccordion = (props) => {
               <OrderItemAccordionCell>
                 {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
                   <>
-                    {getAgoMinutes(order?.delivery_datetime)}
+                    {diffTime}
                   </>
                 )}
               </OrderItemAccordionCell>

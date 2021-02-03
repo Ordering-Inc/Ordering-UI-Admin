@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components'
 import { getAgoMinutes } from '../../utils'
@@ -60,6 +60,8 @@ export const SmallOrderItemAccordion = (props) => {
   const driverRef = useRef(null)
   const moreDetailRef = useRef(null)
 
+  const [diffTime, setDiffTime] = useState(getAgoMinutes(order?.delivery_datetime))
+
   const handleLocationAndMessage = (e) => {
     if (activeSwitch.messages) {
       handleOpenMessage(order, '')
@@ -107,6 +109,17 @@ export const SmallOrderItemAccordion = (props) => {
         return t('UNKNOWN', 'Unknown')
     }
   }
+
+  useEffect(() => {
+    const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
+    if (deActive) return
+    const timer = setInterval(() => {
+      setDiffTime(getAgoMinutes(order?.delivery_datetime))
+    }, 60 * 1000)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
 
   return (
     <OrderItemContainer
@@ -184,7 +197,7 @@ export const SmallOrderItemAccordion = (props) => {
             </DeliveryName>
           </DeliveryType>
           {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-            <TimeAgo>{getAgoMinutes(order?.delivery_datetime)}</TimeAgo>
+            <TimeAgo>{diffTime}</TimeAgo>
           )}
         </DeliveryInfo>
       </WrapperInfo>
