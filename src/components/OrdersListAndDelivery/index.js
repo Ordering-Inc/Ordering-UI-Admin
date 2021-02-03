@@ -83,6 +83,7 @@ const OrdersListUI = (props) => {
   const [openTab, setOpenTab] = useState({ order: true, driver: false })
   const [googleMapLoad, setGoogleMapLoad] = useState(false)
   const [isCheckedQuickShow, setIsCheckedQuickShow] = useState(false)
+  const [interActionMapOrder, setInterActionMapOrder] = useState(null)
 
   const [messageOrder, setMessageOrder] = useState({})
   const [messageType, setMessageType] = useState('')
@@ -191,6 +192,10 @@ const OrdersListUI = (props) => {
     setMessageType(messageType)
   }
 
+  const handleLocation = (order) => {
+    setInterActionMapOrder(order)
+  }
+
   useEffect(() => {
     if (registerOrderIds.length > 0) return
     setNotificationModalOpen(false)
@@ -261,6 +266,9 @@ const OrdersListUI = (props) => {
   useEffect(() => {
     if (activeSwitch.messages) setOrderBy('last_direct_message_at')
     if (activeSwitch.deliveries) setIsCheckedQuickShow(false)
+    else {
+      setInterActionMapOrder(null)
+    }
   }, [activeSwitch])
 
   return (
@@ -307,6 +315,7 @@ const OrdersListUI = (props) => {
                   disableUI={!activeSwitch.deliveries}
                   driversList={driversList}
                   driverAvailable={driverAvailable}
+                  interActionMapOrder={interActionMapOrder}
                 />
               )}
               {activeSwitch.deliveries && (
@@ -415,10 +424,12 @@ const OrdersListUI = (props) => {
                       isCheckedQuickShow={isCheckedQuickShow}
                       messageType={messageType}
                       messageOrder={messageOrder}
+                      interActionMapOrder={interActionMapOrder}
                       orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
                       handleNotification={handleNotification}
                       handleOpenOrderDetail={handleOpenOrderDetail}
                       handleOpenMessage={handleOpenMessage}
+                      handleLocation={handleLocation}
                     />
                   </WrapperOrderlist>
                   {openTab.driver && activeSwitch.deliveries && (

@@ -557,6 +557,11 @@ export const ButtonLink = styled.button`
   &:active {
     background: ${(props) => darken(0.07, props.theme.colors.btnDarkBlue)};
   }
+
+  svg {
+    color: white;
+    font-size: 24px;
+  }
 `
 export const DriverSelectorContainer = styled.div`
   margin: 15px 0 0 0;

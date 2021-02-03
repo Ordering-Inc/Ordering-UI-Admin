@@ -221,13 +221,13 @@ export const OrderItemAccordion = (props) => {
       <AccordionSection>
         <OrderItemAccordionContainer
           className={setActive}
-          // filterColor={
-          //   order.deadline_status === 1
-          //     ? theme?.colors?.deadlineOk
-          //     : order.deadline_status === 2
-          //       ? theme?.colors?.deadlineDelayed
-          //       : theme?.colors?.deadlineRisk
-          // }
+          filterColor={
+            order?.logistic_status === -1 || order?.logistic_status === 0
+              ? theme?.colors?.deadlineOk
+              : order.logistic_status === 1
+                ? theme?.colors?.deadlineDelayed
+                : theme?.colors?.deadlineRisk
+          }
           onClick={(e) => handleGoToPage(e)}
         >
           <OrderItemAccordionCell>
@@ -362,7 +362,11 @@ export const OrderItemAccordion = (props) => {
                 </TextBlockContainer>
               </OrderItemAccordionCell>
               <OrderItemAccordionCell>
-                {getAgoMinutes(order?.delivery_datetime)}
+                {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                  <>
+                    {getAgoMinutes(order?.delivery_datetime)}
+                  </>
+                )}
               </OrderItemAccordionCell>
             </WrapperOrderlabel>
           </OrderInfoContainer>

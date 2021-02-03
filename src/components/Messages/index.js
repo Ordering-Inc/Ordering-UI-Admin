@@ -36,6 +36,7 @@ import {
   TabItem,
   SkeletonHitory,
   WrapperLogistics,
+  WrapperLogisticInformation,
   HeaderInfo,
   SearchAndDetailControlContainer,
   MessagesSearch,
@@ -51,6 +52,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Alert } from '../Confirm'
 import { Logistics } from '../Logistics'
+import { LogisticInformation } from '../LogisticInformation'
 export const MessagesUI = (props) => {
   const {
     order,
@@ -81,7 +83,7 @@ export const MessagesUI = (props) => {
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
   const [messageLevel, setMessageLevel] = useState(null)
-  const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false })
+  const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [driverNoneCase, setDriverNoneCase] = useState(false)
@@ -386,11 +388,14 @@ export const MessagesUI = (props) => {
               )}
               {history && (
                 <WrapperHitoryHeader>
-                  <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false })}>
+                  <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false, logistic_information: false })}>
                     {t('ORDER_HISTORY', 'Order History')}
                   </TabItem>
-                  <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true })}>
+                  <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true, logistic_information: false })}>
                     {t('LOGISTICS', 'Logistics')}
+                  </TabItem>
+                  <TabItem active={tabActive.logistic_information} onClick={() => setTabActive({ orderHistory: false, logistics: false, logistic_information: true })}>
+                    {t('LOGISTIC_INFORMATION', 'Logistic information')}
                   </TabItem>
                 </WrapperHitoryHeader>
               )}
@@ -460,17 +465,29 @@ export const MessagesUI = (props) => {
           {
             !messages.loading && (
               <>
-                <MessageConsole>
-                  <BubbleConsole>
-                    {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                    <strong>{parseDate(order.created_at)}</strong> {' '}
-                    {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
-                    <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
-                  </BubbleConsole>
-                </MessageConsole>
+                {!tabActive.logistic_information && (
+                  <MessageConsole>
+                    <BubbleConsole>
+                      {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                      <strong>{parseDate(order.created_at)}</strong> {' '}
+                      {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+                      <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
+                    </BubbleConsole>
+                  </MessageConsole>
+                )}
+                {history && (
+                  <>
+                    <WrapperLogistics style={{ display: `${tabActive.logistics ? 'block' : 'none'}` }}>
+                      <Logistics orderId={order.id} />
+                    </WrapperLogistics>
+                    <WrapperLogisticInformation style={{ display: `${tabActive.logistic_information ? 'block' : 'none'}` }}>
+                      <LogisticInformation orderId={order.id} />
+                    </WrapperLogisticInformation>
+                  </>
+                )}
                 {filteredMessages.length > 0 && filteredMessages.map((message) => (
                   <React.Fragment key={message.id}>
-                    {history && (
+                    {history && tabActive.history && (
                       <>
                         {message.type === 1 && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive.orderHistory ? 'inline-flex' : 'none'}` }}>
@@ -497,9 +514,6 @@ export const MessagesUI = (props) => {
                             )}
                           </MessageConsole>
                         )}
-                        <WrapperLogistics style={{ display: `${tabActive.logistics ? 'block' : 'none'}` }}>
-                          <Logistics orderId={order.id} />
-                        </WrapperLogistics>
                       </>
                     )}
                     {!history && (message.author.level === 0 || message.author.level === messageLevel) && (

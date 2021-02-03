@@ -32,7 +32,7 @@ const getEventName = (log) => {
     case 'logistic_driver_found_out_coverage_group':
       return 'logistic driver found out coverage group'
     case 'logistic_driver_autoaccepted':
-      return `Order was auto-assigned and auto-accepted by driver ${log.driver.name} at ${log.data.distance} KM.`
+      return `Order was auto-assigned and auto-accepted by driver ${log.driver.name} at ${(log.data.distance / 1000).toFixed(2)} KM.`
     case 'logistic_driver_autoaccepted_group':
       return 'logisticdriver autoaccepted group'
     case 'logistic_request_autorejected':
@@ -79,12 +79,12 @@ const getEventName = (log) => {
 }
 
 const LogisticsUI = (props) => {
-  const { actionStatus, logisticList } = props
+  const { logisticList } = props
   const [{ getTimeAgo }] = useUtils()
 
   return (
     <>
-      {actionStatus.loading ? (
+      {logisticList.loading ? (
         <>
           {[...Array(3)].map((item, i) => (
             <SkeletonHitory key={i}>

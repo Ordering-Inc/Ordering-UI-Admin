@@ -18,11 +18,13 @@ export const OrdersList = (props) => {
     handleNotification,
     handleOpenOrderDetail,
     handleOpenMessage,
+    handleLocation,
     messageDashboardView,
     openOrclosedOrderView,
     orderBy,
     messageType,
     messageOrder,
+    interActionMapOrder,
     orderIdForUnreadCountUpdate
   } = props
   const [, t] = useLanguage()
@@ -46,8 +48,10 @@ export const OrdersList = (props) => {
     orderListView: orderListView,
     messageType: messageType,
     messageOrder: messageOrder,
+    interActionMapOrder: interActionMapOrder,
     orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate,
-    handleOpenMessage: handleOpenMessage
+    handleOpenMessage: handleOpenMessage,
+    handleLocation: handleLocation
   }
 
   const PendingOrdersControlProps = {

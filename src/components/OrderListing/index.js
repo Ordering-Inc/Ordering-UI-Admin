@@ -40,7 +40,9 @@ export const OrderListing = (props) => {
     activeSwitch,
     isCheckedQuickShow,
     handleOpenMessage,
+    handleLocation,
     messageOrder,
+    interActionMapOrder,
     messageListView,
     messageType,
     size
@@ -239,6 +241,7 @@ export const OrderListing = (props) => {
                     <SmallOrderItemAccordion
                       order={order}
                       messageOrder={messageOrder}
+                      interActionMapOrder={interActionMapOrder}
                       activeSwitch={activeSwitch}
                       drivers={driversList.drivers}
                       pendingOrder={pendingOrder}
@@ -246,6 +249,7 @@ export const OrderListing = (props) => {
                       handleOpenMessage={handleOpenMessage}
                       handleUpdateOrderStatus={handleUpdateOrderStatus}
                       handleOpenOrderDetail={handleOpenOrderDetail}
+                      handleLocation={handleLocation}
                     />
                   </React.Fragment>
                 )

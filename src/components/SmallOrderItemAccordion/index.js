@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components'
+import { getAgoMinutes } from '../../utils'
+
 import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -25,7 +27,11 @@ import {
   WrapperOrderStatus,
   DriverInfo,
   WrapperDriverSelector,
-  UnreadMessageIndicator
+  UnreadMessageIndicator,
+  OrderLabelItem,
+  MoreDetailsButton,
+  TimeAgo,
+  WrapIndicator
 } from './styles'
 
 export const SmallOrderItemAccordion = (props) => {
@@ -36,9 +42,11 @@ export const SmallOrderItemAccordion = (props) => {
     preOrder,
     activeSwitch,
     messageOrder,
+    interActionMapOrder,
     handleUpdateOrderStatus,
     handleOpenOrderDetail,
-    handleOpenMessage
+    handleOpenMessage,
+    handleLocation
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -50,25 +58,78 @@ export const SmallOrderItemAccordion = (props) => {
   const businessRef = useRef(null)
   const customerRef = useRef(null)
   const driverRef = useRef(null)
+  const moreDetailRef = useRef(null)
 
-  const handleGoToPage = (e) => {
+  const handleLocationAndMessage = (e) => {
     if (activeSwitch.messages) {
       handleOpenMessage(order, '')
     } else {
       const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
       if (!isActionClick) {
-        history.push(`/orders-deliveries?id=${order.id}`)
-        handleOpenOrderDetail(order.id)
+        if (moreDetailRef.current?.contains(e.target)) {
+          history.push(`/orders-deliveries?id=${order.id}`)
+          handleOpenOrderDetail(order.id)
+        } else {
+          handleLocation(order)
+        }
       }
+    }
+  }
+
+  const getLogisticTag = (status) => {
+    switch (parseInt(status)) {
+      case 0:
+        return t('PENDING', 'Pending')
+      case 1:
+        return t('IN_PROGRESS', 'In progress')
+      case 2:
+        return t('IN_QUEUE', 'In queue')
+      case 3:
+        return t('EXPIRED', 'Expired')
+      case 4:
+        return t('RESOLVED', 'Resolved')
+      default:
+        return t('UNKNOWN', 'Unknown')
+    }
+  }
+
+  const getPriorityTag = (priority) => {
+    switch (parseInt(priority)) {
+      case -1:
+        return t('LOW', 'Low')
+      case 0:
+        return t('NORMAL', 'Normal')
+      case 1:
+        return t('HIGH', 'High')
+      case 2:
+        return t('URGENT', 'Urgent')
+      default:
+        return t('UNKNOWN', 'Unknown')
     }
   }
 
   return (
     <OrderItemContainer
-      onClick={(e) => handleGoToPage(e)}
+      filterColor={
+        order?.logistic_status === -1 || order?.logistic_status === 0
+          ? theme?.colors?.deadlineOk
+          : order.logistic_status === 1
+            ? theme?.colors?.deadlineDelayed
+            : theme?.colors?.deadlineRisk
+      }
+      onClick={(e) => handleLocationAndMessage(e)}
       messageUI={activeSwitch.messages}
-      messageUIActive={messageOrder.id === order.id}
+      messageUIActive={messageOrder?.id === order.id}
+      deliveryUI={activeSwitch.deliveries}
+      deliveryUIActive={interActionMapOrder?.id === order.id}
     >
+      <WrapIndicator>
+        {activeSwitch.messages && order?.unread_count > 0 && (
+          <UnreadMessageIndicator>
+            {order?.unread_count}
+          </UnreadMessageIndicator>
+        )}
+      </WrapIndicator>
       <WrapperInfo>
         <BusinessInfo className='order-item-business' ref={businessRef}>
           <WrapperAccordionImage>
@@ -79,6 +140,11 @@ export const SmallOrderItemAccordion = (props) => {
               {t('ORDER_NO', 'Order No')}. {order?.id}
             </h1>
             <p>{order?.business?.name}</p>
+            {activeSwitch?.deliveries && (
+              <MoreDetailsButton ref={moreDetailRef}>
+                {t('MORE_DETAIL', 'More detail')}
+              </MoreDetailsButton>
+            )}
           </BusinessContent>
         </BusinessInfo>
         <DeliveryInfo>
@@ -115,14 +181,26 @@ export const SmallOrderItemAccordion = (props) => {
               {order?.delivery_type === 3 && (t('EAT_IN', 'Eat in'))}
               {order?.delivery_type === 4 && (t('CURBSIDE', 'Curbside'))}
               {order?.delivery_type === 5 && (t('DRIVE_THRU', 'Drive thru'))}
-              {activeSwitch.messages && order?.unread_count > 0 && (
-                <UnreadMessageIndicator>
-                  {order?.unread_count}
-                </UnreadMessageIndicator>
-              )}
             </DeliveryName>
           </DeliveryType>
+          {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+            <TimeAgo>{getAgoMinutes(order?.delivery_datetime)}</TimeAgo>
+          )}
         </DeliveryInfo>
+      </WrapperInfo>
+      <WrapperInfo border>
+        <OrderLabelItem>
+          <strong>{t('LOGISTIC', 'Logistic')}:</strong>
+          <span>{getLogisticTag(order?.logistic_status)}</span>
+        </OrderLabelItem>
+        <OrderLabelItem>
+          <strong>{t('PRIORITY', 'Priority')}:</strong>
+          <span>{getPriorityTag(order?.priority)}</span>
+        </OrderLabelItem>
+        <OrderLabelItem>
+          <strong>{t('ATTEMPTS', 'Attempts')}:</strong>
+          <span>{order?.logistic_attemps}</span>
+        </OrderLabelItem>
       </WrapperInfo>
       <WrapperInfo>
         <CustomerInfo ref={customerRef}>

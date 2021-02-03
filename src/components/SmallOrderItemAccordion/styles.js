@@ -1,17 +1,23 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const OrderItemContainer = styled.div`
   border-left: 5px solid;
-  border-color: #0e9b55;
-  padding: 15px 10px;
+  border-color: ${({ filterColor }) => filterColor || '#0E9B55'};
+  padding: 10px;
   border-bottom: 1px solid #F2F2F2;
   width: 100%;
   box-sizing: border-box;
   cursor: pointer;
+  ${({ deliveryUI }) => deliveryUI && css`
+    ${({ deliveryUIActive }) => deliveryUIActive && css`
+      background: #e8e8e8;
+    `}
+  `}
   ${({ messageUI }) => messageUI && css`
     ${({ messageUIActive }) => messageUIActive && css`
-      background: #c7cad6;
+      background: #e8e8e8;
     `}
   `}
 `
@@ -20,6 +26,13 @@ export const WrapperInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 5px 0px;
+
+  ${({ border }) => border && css`
+    border-bottom: 1px solid #F2F2F2;
+    border-top: 1px solid #F2F2F2;
+    margin: 5px 0;
+    padding: 10px 0;
+  `}
 `
 export const WrapperAccordionImage = styled.div`
   max-width: 50px;
@@ -78,10 +91,11 @@ export const BusinessContent = styled.div`
     color: #000000;
     font-size: 14px;
     margin: 0px;
+    line-height: 13px;
   }
   p {
     color: #000000;
-    font-size: 14px;
+    font-size: 12px;
     margin: 0px;
     max-width: 90px;
     white-space: nowrap;
@@ -178,9 +192,35 @@ export const WrapperDriverSelector = styled.div`
   }
 `
 export const UnreadMessageIndicator = styled.span`
-  margin-left: 10px;
   background: ${props => props.theme.colors.btnDarkBlue};
   color: #fff;
-  padding: 2px 8px;
-  border-radius: 10px;
+  padding: 0px 3px;
+  border-radius: 12px;
+  min-width: 12px;
+  font-size: 12px;
+  text-align: center;
+`
+export const OrderLabelItem = styled.div`
+  display: flex;
+  column-gap: 5px;
+  font-size: 12px;
+`
+export const MoreDetailsButton = styled.p`
+  font-size: 12px;
+  color: ${props => props.theme.colors.btnDarkBlue} !important;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+
+  &:hover {
+    color: ${props => darken(0.07, props.theme.colors.btnDarkBlue)} !important;
+  }
+`
+export const TimeAgo = styled.p`
+  font-weight: 600;
+  text-align: right;
+`
+export const WrapIndicator = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `

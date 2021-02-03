@@ -518,6 +518,7 @@ export const SkeletonHitory = styled.div`
   }
 `
 export const WrapperLogistics = styled.div``
+export const WrapperLogisticInformation = styled.div``
 export const HeaderInfo = styled.div`
   display: flex;
   align-items: center;

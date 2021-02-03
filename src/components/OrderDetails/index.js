@@ -10,12 +10,14 @@ import GrClose from '@meronex/icons/gr/GrClose'
 import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
+import EnDotsThreeVertical from '@meronex/icons/en/EnDotsThreeVertical'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DriverSelector } from '../DriverSelector'
 import { Messages } from '../Messages'
+import { MetaFields } from '../MetaFields'
 import { Modal } from '../Modal'
 import {
   Container,
@@ -80,6 +82,7 @@ const OrderDetailsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
+  const [openMetaFields, setOpenMetaFields] = useState(false)
   const theme = useTheme()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
@@ -241,10 +244,6 @@ const OrderDetailsUI = (props) => {
     _orderTotalPrice = parseFloat(_orderTotalPrice.toFixed(2))
     setOrderTotalPrice(_orderTotalPrice)
   }, [subTotalPrice])
-
-  useEffect(() => {
-    console.log(messageType)
-  }, [messageType])
 
   return (
     <Container className='order-detail' messageDashboardView={messageDashboardView}>
@@ -465,9 +464,9 @@ const OrderDetailsUI = (props) => {
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                 />
                 <WrapperButton>
-                  {/* <ButtonLink>
-                    <img src={theme?.images?.icons?.help} alt='help' />
-                  </ButtonLink> */}
+                  <ButtonLink onClick={() => setOpenMetaFields(true)}>
+                    <EnDotsThreeVertical />
+                  </ButtonLink>
                   <ButtonLink onClick={() => handleOpenMessages('history')}>
                     <img src={theme?.images?.icons?.timeline} alt='timeline' />
                   </ButtonLink>
@@ -663,6 +662,17 @@ const OrderDetailsUI = (props) => {
           order={order}
           history={openMessages.history}
           handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+        />
+      </Modal>
+
+      <Modal
+        width='70%'
+        height='70vh'
+        open={openMetaFields}
+        onClose={() => setOpenMetaFields(false)}
+      >
+        <MetaFields
+          orderId={order?.id}
         />
       </Modal>
     </Container>
