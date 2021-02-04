@@ -52,6 +52,27 @@ export const OrdersList = (props) => {
     orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate,
     handleOpenMessage: handleOpenMessage,
     handleLocation: handleLocation
+    // propsToFetch: [
+    //   'business',
+    //   'business_id',
+    //   'created_at',
+    //   'customer',
+    //   'customer_id',
+    //   'delivery_datetime',
+    //   'delivery_type',
+    //   'discount',
+    //   'driver',
+    //   'driver_id',
+    //   'driver_tip',
+    //   'id',
+    //   'logistic_attemps',
+    //   'logistic_status',
+    //   'priority',
+    //   'service_fee',
+    //   'status',
+    //   'summary',
+    //   'products'
+    // ]
   }
 
   const PendingOrdersControlProps = {

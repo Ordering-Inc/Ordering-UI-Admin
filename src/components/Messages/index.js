@@ -487,7 +487,7 @@ export const MessagesUI = (props) => {
                 )}
                 {filteredMessages.length > 0 && filteredMessages.map((message) => (
                   <React.Fragment key={message.id}>
-                    {history && tabActive.history && (
+                    {history && tabActive.orderHistory && (
                       <>
                         {message.type === 1 && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive.orderHistory ? 'inline-flex' : 'none'}` }}>

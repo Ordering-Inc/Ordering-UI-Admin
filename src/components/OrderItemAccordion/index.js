@@ -14,6 +14,7 @@ import Checkbox from '@meronex/icons/ri/RiCheckboxCircleFill'
 import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
+import { OrderProductsQuickDetail } from '../OrderProductQuickDetail'
 
 import {
   AccordionSection,
@@ -24,20 +25,12 @@ import {
   BigText,
   SmallText,
   WrapperAccordionImage,
-  WrapperProductImage,
   AccordionImage,
   WrapperDriverSelector,
   DeliveryTypeContainer,
   DeliveryIcon,
   DeliveryName,
   OrderDetailToggleButton,
-  OrderProductsQuickDetailContainer,
-  OrderProductsInner,
-  ProductTable,
-  ProductImageContainer,
-  AccordionContent,
-  ProductOptionsList,
-  ProductComment,
   OrderInfoContainer,
   WrapperGeneralInfo,
   WrapperOrderlabel
@@ -56,17 +49,16 @@ export const OrderItemAccordion = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [{ parsePrice, parseDate }] = useUtils()
   const history = useHistory()
 
   const [setActive, setActiveState] = useState('')
-  const [setHeight, setHeightState] = useState('0px')
+  // const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
+  const [openOrderQuickDetail, setOpenOrderQuickDetail] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
-  const [orderTotalPrice, setOrderTotalPrice] = useState(0)
-  const [subTotalPrice, setSubTotalPrice] = useState(0)
   const checkbox = useRef(null)
-  const content = useRef(null)
+  // const content = useRef(null)
   const toggleBtn = useRef(null)
   const driverSelectorRef = useRef(null)
   const [diffTime, setDiffTime] = useState(getAgoMinutes(order?.delivery_datetime))
@@ -77,9 +69,10 @@ export const OrderItemAccordion = (props) => {
   }
   const toggleAccordion = () => {
     setActiveState(setActive === '' ? 'active' : '')
-    setHeightState(
-      setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
-    )
+    // setHeightState(
+    //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
+    // )
+    setOpenOrderQuickDetail(!openOrderQuickDetail)
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
@@ -92,56 +85,6 @@ export const OrderItemAccordion = (props) => {
       history.push(`/orders-deliveries?id=${order.id}`)
       handleOpenOrderDetail(order.id)
     }
-  }
-
-  const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
-    if (name !== 'No') {
-      const pos = position ? `(${position})` : ''
-      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price)}` : `${name} ${pos}`
-    } else {
-      return 'No'
-    }
-  }
-
-  const getProductPrice = (product) => {
-    let subOptionPrice = 0
-    if (product.options.length > 0) {
-      for (const option of product.options) {
-        for (const suboption of option.suboptions) {
-          subOptionPrice += suboption.quantity * suboption.price
-        }
-      }
-    }
-
-    const price = product.quantity * (product.price + subOptionPrice)
-    return parseFloat(price.toFixed(2))
-  }
-
-  const getTaxPrice = () => {
-    let taxPrice = 0
-    if (order.tax_type === 2) {
-      if (order.discount > 0) {
-        taxPrice = (subTotalPrice - order.discount) * order?.tax / 100
-      } else {
-        taxPrice = subTotalPrice * order?.tax / 100
-      }
-    }
-    if (order.tax_type === 1) {
-      taxPrice = order.tax
-    }
-    return parseFloat(taxPrice.toFixed(2))
-  }
-
-  const getServiceFee = () => {
-    let serviceFee = 0
-    if (order.service_fee > 0) {
-      if (order.discount > 0) {
-        serviceFee = (subTotalPrice - order.discount) * order?.service_fee / 100
-      } else {
-        serviceFee = subTotalPrice * order?.service_fee / 100
-      }
-    }
-    return parseFloat(serviceFee.toFixed(2))
   }
 
   const getLogisticTag = (status) => {
@@ -183,39 +126,6 @@ export const OrderItemAccordion = (props) => {
     }
     if (selectedOrderIds.includes(order.id)) setIsChecked(true)
   }, [])
-
-  useEffect(() => {
-    let _orderSubprice = 0
-    for (const product of order.products) {
-      _orderSubprice += getProductPrice(product)
-    }
-    if (order?.subtotal > 0) {
-      _orderSubprice = order.subtotal
-    }
-    _orderSubprice = parseFloat(_orderSubprice.toFixed(2))
-    setSubTotalPrice(_orderSubprice)
-  }, [order])
-
-  useEffect(() => {
-    let _orderTotalPrice = subTotalPrice
-    if (order?.service_fee > 0) {
-      const taxPrice = getTaxPrice()
-      const serviceFee = getServiceFee()
-      _orderTotalPrice += taxPrice + serviceFee
-    }
-    if (order?.delivery_zone_price > 0) {
-      _orderTotalPrice += order.delivery_zone_price
-    }
-    if (order?.driver_tip > 0) {
-      _orderTotalPrice += subTotalPrice * order.driver_tip / 100
-    }
-
-    if (order.discount > 0) {
-      _orderTotalPrice -= order.discount
-    }
-    _orderTotalPrice = parseFloat(_orderTotalPrice.toFixed(2))
-    setOrderTotalPrice(_orderTotalPrice)
-  }, [subTotalPrice])
 
   useEffect(() => {
     const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
@@ -347,7 +257,7 @@ export const OrderItemAccordion = (props) => {
                   ref={toggleBtn}
                   onClick={() => toggleAccordion()}
                 >
-                  {parsePrice(orderTotalPrice)}
+                  {parsePrice(order?.summary?.total)}
                   <OrderDetailToggleButton>
                     <EnChevronDown className={`${setRotate}`} />
                   </OrderDetailToggleButton>
@@ -384,152 +294,11 @@ export const OrderItemAccordion = (props) => {
           </OrderInfoContainer>
         </OrderItemAccordionContainer>
 
-        <OrderProductsQuickDetailContainer
-          ref={content}
-          style={{ maxHeight: `${setHeight}` }}
-        >
-          <OrderProductsInner>
-            <ProductTable>
-              <thead>
-                <tr>
-                  <th>{t('NAME', 'Name')}</th>
-                  <th>{t('PRICE', 'Price')}</th>
-                  <th>{t('QTY', 'QTY')}</th>
-                  <th>{t('DISC.', 'Disc.')}</th>
-                  <th>{t('Total', 'Total')}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {order.products.map((product) => {
-                  return (
-                    <tr key={product.id}>
-                      <td>
-                        <ProductImageContainer>
-                          <WrapperProductImage>
-                            <AccordionImage bgimage={product.images} />
-                          </WrapperProductImage>
-                          {product.name}
-                        </ProductImageContainer>
-
-                        <AccordionContent>
-                          {product.ingredients.length > 0 && product.ingredients.some(ingredient => !ingredient.selected) && (
-                            <ProductOptionsList>
-                              <p>{t('INGREDIENTS', 'Ingredients')}</p>
-                              {product.ingredients.map((ingredient) => !ingredient.selected && (
-                                <li className='ingredient' key={ingredient.id}>
-                                  <span>{t('NO', 'No')} {ingredient.name}</span>
-                                </li>
-                              ))}
-                            </ProductOptionsList>
-                          )}
-                          {product.options.length > 0 && (
-                            <ProductOptionsList>
-                              {product.options.map((option, i) => (
-                                <li key={i}>
-                                  <p>{option.name}</p>
-                                  <ProductOptionsList className='suboption'>
-                                    {option.suboptions.map(suboption => (
-                                      <React.Fragment key={suboption.id}>
-                                        <li>
-                                          <span>
-                                            {getFormattedSubOptionName({
-                                              quantity: suboption.quantity,
-                                              name: suboption.name,
-                                              position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                                              price: suboption.price
-                                            })}
-                                          </span>
-                                        </li>
-                                      </React.Fragment>
-                                    ))}
-                                  </ProductOptionsList>
-                                </li>
-                              ))}
-                            </ProductOptionsList>
-                          )}
-                          {product.comment && (
-                            <ProductComment>
-                              <p>{t('COMMENT', 'Comment')}</p>
-                              <h3>{product.comment}</h3>
-                            </ProductComment>
-                          )}
-                        </AccordionContent>
-
-                      </td>
-                      <td>{parsePrice(product?.price)}</td>
-                      <td>X {product.quantity}</td>
-                      <td>{product.comment}</td>
-                      <td>{parsePrice(getProductPrice(product))}</td>
-                    </tr>
-                  )
-                })}
-
-                <tr className='subFee'>
-                  <td />
-                  <td />
-                  <td />
-                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>
-                    {order?.subtotal ? parsePrice(order.subtotal) : parsePrice(subTotalPrice)}
-                  </td>
-                </tr>
-                {order?.discount > 0 && (
-                  <tr className='subFee'>
-                    <td />
-                    <td />
-                    <td />
-                    <td>{t('DISCOUNT', 'Discount')}</td>
-                    <td>-{parsePrice(order?.discount)}</td>
-                  </tr>
-                )}
-                {order?.service_fee > 0 && (
-                  <tr className='subFee'>
-                    <td />
-                    <td />
-                    <td />
-                    <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-                    <td>
-                      {parsePrice(getTaxPrice())}
-                    </td>
-                  </tr>
-                )}
-                <tr className='subFee'>
-                  <td />
-                  <td />
-                  <td />
-                  <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                  <td>{parsePrice(order?.delivery_zone_price)}</td>
-                </tr>
-                {order?.driver_tip > 0 && (
-                  <tr className='subFee'>
-                    <td />
-                    <td />
-                    <td />
-                    <td>{t('DRIVER_TIP', 'Driver Tip')}</td>
-                    <td>{parsePrice(subTotalPrice * order?.driver_tip / 100)}</td>
-                  </tr>
-                )}
-                {order?.service_fee > 0 && (
-                  <tr className='subFee'>
-                    <td />
-                    <td />
-                    <td />
-                    <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-                    <td>{parsePrice(getServiceFee())}</td>
-                  </tr>
-                )}
-                <tr className='totalFee'>
-                  <td />
-                  <td />
-                  <td />
-                  <td>{t('TOTAL', 'Total')}</td>
-                  <td>{parsePrice(orderTotalPrice)}</td>
-                </tr>
-              </tbody>
-            </ProductTable>
-          </OrderProductsInner>
-        </OrderProductsQuickDetailContainer>
+        {openOrderQuickDetail && (
+          <OrderProductsQuickDetail
+            orderId={order?.id}
+          />
+        )}
       </AccordionSection>
     </>
   )

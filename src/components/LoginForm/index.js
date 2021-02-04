@@ -243,7 +243,6 @@ const LoginFormUI = (props) => {
             {elementLinkToSignup}
           </RedirectLink>
         )}
-
       </FormSide>
       <Alert
         title={t('LOGIN')}

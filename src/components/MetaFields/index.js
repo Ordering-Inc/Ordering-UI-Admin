@@ -1,6 +1,6 @@
-import React from 'react'
-import { useLanguage } from 'ordering-components'
-import { MetaFields as MetaFieldsController } from './MetaFieldsController'
+import React, { useState, useEffect } from 'react'
+import { MetaFields as MetaFieldsController, useLanguage } from 'ordering-components'
+import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../SpinnerLoader'
 import FaTrash from '@meronex/icons/fa/FaTrash'
 
@@ -13,8 +13,25 @@ import {
 } from './styles'
 
 const MetaFieldsUI = (props) => {
-  const { metaFieldsList } = props
+  const {
+    metaFieldsList,
+    actionStatus,
+    handleDeleteMetaField
+  } = props
   const [, t] = useLanguage()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  useEffect(() => {
+    if (actionStatus.loading || actionStatus.error === null) return
+    setAlertState({ open: true, content: actionStatus.error })
+  }, [actionStatus])
 
   return (
     <>
@@ -38,7 +55,7 @@ const MetaFieldsUI = (props) => {
                       <RoundBorder>{metaField.value}</RoundBorder>
                     </td>
                     <td>
-                      <FaTrash />
+                      <FaTrash onClick={() => handleDeleteMetaField(metaField.id)} />
                     </td>
                   </tr>
                 ))}
@@ -49,6 +66,15 @@ const MetaFieldsUI = (props) => {
           )}
         </WrapMetaFields>
       )}
+      <Alert
+        title={t('ERROR')}
+        content={alertState.content}
+        acceptText={t('ACCEPT')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

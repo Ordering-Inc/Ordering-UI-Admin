@@ -13,12 +13,25 @@ export const MetaTable = styled.table`
 
   tr {
     td {
-      &:first-child {
-        min-width: 100px;
+      vertical-align: baseline;
+      padding: 5px 0;
+      
+      &:nth-child(3) {
+        word-break: break-all;
       }
       svg {
         color: darkRed;
         cursor: pointer;
+      }
+    }
+  }
+
+  @media (min-width: 576px) {
+    tr {
+      td {
+        &:first-child {
+          min-width: 100px;
+        }
       }
     }
   }
