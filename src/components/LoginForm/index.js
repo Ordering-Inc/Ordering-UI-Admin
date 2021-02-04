@@ -44,7 +44,7 @@ const LoginFormUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [submitted, setSubmitted] = useState(false)
-  const [projectName, setProjectName] = useState('')
+  const [projectName, setProjectName] = useState(null)
   const theme = useTheme()
 
   const [configFile, setConfigFile] = useContext(ConfigFileContext)

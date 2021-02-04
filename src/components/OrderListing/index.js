@@ -16,7 +16,8 @@ import {
   SkeletonBlock,
   WrapperOrderListContent,
   InnerOrderListContent,
-  InnerNoneOrdersContainer
+  InnerNoneOrdersContainer,
+  WrapSkeltonCell
 } from './styles'
 
 export const OrderListing = (props) => {
@@ -92,7 +93,7 @@ export const OrderListing = (props) => {
     let _currentOrders = []
     let _totalPages
     let _totalOrders
-    if (activeSwitch.deliveries && !isCheckedQuickShow) {
+    if (activeSwitch?.deliveries && !isCheckedQuickShow) {
       _orders = orderList.orders.filter(_order => _order.delivery_type === 1)
       _currentOrders = _orders.slice(indexOfFirstPost, indexOfLastPost)
       _totalPages = Math.ceil(_orders.length / ordersPerPage)
@@ -200,26 +201,39 @@ export const OrderListing = (props) => {
                           <Skeleton width={100} />
                         </SkeletonText>
                       </SkeletonCell>
-                      <SkeletonCell>
-                        <Skeleton width={50} height={50} />
-                        <SkeletonText>
-                          <Skeleton width={80} />
-                          <Skeleton width={80} />
-                        </SkeletonText>
-                      </SkeletonCell>
-                      <SkeletonCell>
-                        <Skeleton width={50} height={50} />
-                        <SkeletonText>
-                          <Skeleton width={80} />
-                          <Skeleton width={80} />
-                        </SkeletonText>
-                      </SkeletonCell>
-                      <SkeletonCell>
-                        <Skeleton width={50} height={50} />
-                        <SkeletonText>
-                          <Skeleton width={80} />
-                        </SkeletonText>
-                      </SkeletonCell>
+                      <WrapSkeltonCell>
+                        <SkeletonCell>
+                          <Skeleton width={50} height={50} />
+                          <SkeletonText>
+                            <Skeleton width={80} />
+                            <Skeleton width={80} />
+                          </SkeletonText>
+                        </SkeletonCell>
+                        <Skeleton width={80} />
+                        <Skeleton width={80} />
+                      </WrapSkeltonCell>
+                      <WrapSkeltonCell>
+                        <SkeletonCell>
+                          <Skeleton width={50} height={50} />
+                          <SkeletonText>
+                            <Skeleton width={80} />
+                            <Skeleton width={80} />
+                          </SkeletonText>
+                        </SkeletonCell>
+                        <Skeleton width={80} />
+                        <Skeleton width={80} />
+                      </WrapSkeltonCell>
+                      <WrapSkeltonCell>
+                        <SkeletonCell>
+                          <Skeleton width={50} height={50} />
+                          <SkeletonText>
+                            <Skeleton width={80} />
+                            <Skeleton width={80} />
+                          </SkeletonText>
+                        </SkeletonCell>
+                        <Skeleton width={80} />
+                        <Skeleton width={80} />
+                      </WrapSkeltonCell>
                       <SkeletonCell>
                         <Skeleton width={40} height={40} />
                       </SkeletonCell>

@@ -49,13 +49,20 @@ export const SkeletonCard = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding: 19px 10px;
+    padding: 15px 10px;
     box-shadow: 0px 0px 3px #00000029;
     border-radius: 6px;
     ${({ small }) => small && css`
       flex-direction: column;
       margin-bottom: 0px;
     `}
+    align-items: flex-start;
+
+    & > div {
+        &:first-child {
+            padding-top: 40px;
+        }
+    }
 `
 export const SkeletonCell = styled.div`
     display: flex;
@@ -87,4 +94,10 @@ export const InnerOrderListContent = styled.div`
 `
 export const WrapperOrderListContent = styled.div`
     overflow-x: auto;
+`
+export const WrapSkeltonCell = styled.div`
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: flex-start;
 `

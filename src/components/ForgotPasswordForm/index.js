@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { ConfigFileContext } from '../../contexts/ConfigFileContext'
+
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import {
   ForgotPasswordForm as ForgotPasswordController,
-  useLanguage
+  useLanguage,
+  useApi
 } from 'ordering-components'
 import {
   ForgotPasswordContainer,
@@ -32,6 +35,11 @@ const ForgotPasswordUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, title: '', content: [], success: false })
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [ordering] = useApi()
+
+  const [configFile, setConfigFile] = useContext(ConfigFileContext)
+  const [submitted, setSubmitted] = useState(false)
+  const [projectName, setProjectName] = useState(null)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -66,8 +74,11 @@ const ForgotPasswordUI = (props) => {
   }, [formState.loading])
 
   const onSubmit = () => {
-    setAlertState({ ...alertState, success: true })
-    handleButtonForgotPasswordClick()
+    const _configFile = { ...configFile }
+    _configFile.project = projectName
+    setConfigFile(_configFile)
+    localStorage.setItem('project', projectName)
+    setSubmitted(true)
   }
 
   const closeAlert = () => {
@@ -77,6 +88,16 @@ const ForgotPasswordUI = (props) => {
       content: []
     })
   }
+  const hanldeChangeProject = (e) => {
+    setSubmitted(false)
+    setProjectName(e.target.value)
+  }
+  useEffect(() => {
+    if (ordering.project === '' || !submitted) return
+    setAlertState({ ...alertState, success: true })
+    handleButtonForgotPasswordClick()
+  }, [ordering, submitted])
+
   return (
     <ForgotPasswordContainer isPopup={isPopup}>
       <HeroContainer bgimage={theme.images?.general?.loginHero}>
@@ -92,6 +113,20 @@ const ForgotPasswordUI = (props) => {
           isPopup={isPopup}
           onSubmit={handleSubmit(onSubmit)}
         >
+          <Input
+            type='text'
+            name='project'
+            aria-label='project'
+            placeholder={t('PROJECT', 'Project')}
+            ref={register({
+              required: t(
+                'VALIDATION_ERROR_REQUIRED',
+                'The project field is required'
+              ).replace('_attribute_', t('PROJECT', 'Project'))
+            })}
+            onChange={(e) => hanldeChangeProject(e)}
+            autoComplete='off'
+          />
           <Input
             type='text'
             name='email'
