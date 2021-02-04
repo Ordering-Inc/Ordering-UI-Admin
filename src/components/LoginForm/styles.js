@@ -247,4 +247,11 @@ export const InputWithIcon = styled.div`
     width: 20px;
     padding: 8px 20px;
   }
+
+  svg {
+    position: absolute;
+    font-size: 24px;
+    color: #707070;
+    padding: 8px 20px;
+  }
 `

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { ConfigFileContext } from '../../contexts/ConfigFileContext'
 import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
-  useLanguage
+  useLanguage,
+  useApi
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
+import MdExitToApp from '@meronex/icons/md/MdExitToApp'
 import {
   LoginContainer,
   LoginHeroContainer,
@@ -37,13 +40,32 @@ const LoginFormUI = (props) => {
     isPopup
   } = props
   const [, t] = useLanguage()
+  const [ordering] = useApi()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [submitted, setSubmitted] = useState(false)
+  const [projectName, setProjectName] = useState('')
   const theme = useTheme()
 
+  const [configFile, setConfigFile] = useContext(ConfigFileContext)
+
   const onSubmit = async () => {
-    handleButtonLoginClick()
+    const _configFile = { ...configFile }
+    _configFile.project = projectName
+    setConfigFile(_configFile)
+    localStorage.setItem('project', projectName)
+    setSubmitted(true)
   }
+
+  const hanldeChangeProject = (e) => {
+    setSubmitted(false)
+    setProjectName(e.target.value)
+  }
+
+  useEffect(() => {
+    if (ordering.project === '' || !submitted) return
+    handleButtonLoginClick()
+  }, [ordering, submitted])
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
@@ -116,6 +138,24 @@ const LoginFormUI = (props) => {
             isPopup={isPopup}
             onSubmit={handleSubmit(onSubmit)}
           >
+            <InputWithIcon>
+              <Input
+                type='text'
+                name='project'
+                aria-label='project'
+                placeholder={t('PROJECT', 'Project')}
+                ref={register({
+                  required: t(
+                    'VALIDATION_ERROR_REQUIRED',
+                    'Project is required'
+                  ).replace('_attribute_', t('PROJECT', 'Project'))
+                })}
+                onChange={(e) => hanldeChangeProject(e)}
+                autoComplete='off'
+              />
+              <MdExitToApp />
+            </InputWithIcon>
+
             {useLoginByEmail && loginTab === 'email' && (
               <InputWithIcon>
                 <Input
