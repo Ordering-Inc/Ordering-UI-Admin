@@ -277,3 +277,4 @@ export const WrapperOrderlabel = styled.div`
     }
   }
 `
+export const WrapOrderQuickDetail = styled.div``

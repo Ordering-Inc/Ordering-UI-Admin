@@ -33,7 +33,8 @@ import {
   OrderDetailToggleButton,
   OrderInfoContainer,
   WrapperGeneralInfo,
-  WrapperOrderlabel
+  WrapperOrderlabel,
+  WrapOrderQuickDetail
 } from './styles'
 
 export const OrderItemAccordion = (props) => {
@@ -56,6 +57,7 @@ export const OrderItemAccordion = (props) => {
   // const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [openOrderQuickDetail, setOpenOrderQuickDetail] = useState(false)
+  const [loadedOrderQuickDetail, setLoadedOrderQuickDetail] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const checkbox = useRef(null)
   // const content = useRef(null)
@@ -68,6 +70,7 @@ export const OrderItemAccordion = (props) => {
     handleSelectedOrderIds(id)
   }
   const toggleAccordion = () => {
+    setLoadedOrderQuickDetail(true)
     setActiveState(setActive === '' ? 'active' : '')
     // setHeightState(
     //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
@@ -294,11 +297,13 @@ export const OrderItemAccordion = (props) => {
           </OrderInfoContainer>
         </OrderItemAccordionContainer>
 
-        {openOrderQuickDetail && (
-          <OrderProductsQuickDetail
-            orderId={order?.id}
-          />
-        )}
+        <WrapOrderQuickDetail style={{ display: `${openOrderQuickDetail ? 'block' : 'none'}` }}>
+          {loadedOrderQuickDetail && (
+            <OrderProductsQuickDetail
+              orderId={order?.id}
+            />
+          )}
+        </WrapOrderQuickDetail>
       </AccordionSection>
     </>
   )
