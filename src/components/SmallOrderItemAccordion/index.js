@@ -111,6 +111,11 @@ export const SmallOrderItemAccordion = (props) => {
   }
 
   useEffect(() => {
+    if (interActionMapOrder === null || !activeSwitch?.deliveries) return
+    handleLocation(order)
+  }, [order?.driver])
+
+  useEffect(() => {
     const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
     if (deActive) return
     const timer = setInterval(() => {

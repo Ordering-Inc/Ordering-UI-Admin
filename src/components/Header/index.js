@@ -15,7 +15,7 @@ import {
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
 
 import { UserPopover } from '../UserPopover'
-import { MobileSidebarMenu } from '../MobileSidebarMenu'
+// import { MobileSidebarMenu } from '../MobileSidebarMenu'
 
 export const Header = (props) => {
   const [events] = useEvent()
@@ -61,7 +61,7 @@ export const Header = (props) => {
     <HeaderContainer>
       <InnerHeader>
         <LeftHeader>
-          <MobileSidebarMenu />
+          {/* <MobileSidebarMenu /> */}
           <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
             <img alt='Logotype' src={theme?.images?.logos?.logotype} />
             <img alt='Isotype' src={theme?.images?.logos?.isotype} />

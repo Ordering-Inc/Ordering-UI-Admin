@@ -89,7 +89,7 @@ const OrdersListUI = (props) => {
   const [messageType, setMessageType] = useState('')
   const [openMessageOrderDetail, setOpenMessageOrderDetail] = useState(false)
   const [openOrclosedOrderView, setOpenOrclosedOrderView] = useState('open')
-  const [orderBy, setOrderBy] = useState('last_direct_message_at')
+  const [orderBy, setOrderBy] = useState('id')
   const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
 
   const handleChangeDriverAvailable = (available) => {
@@ -193,18 +193,13 @@ const OrdersListUI = (props) => {
   }
 
   const handleLocation = (order) => {
-    setInterActionMapOrder(order)
+    setInterActionMapOrder({ ...order })
   }
 
   useEffect(() => {
     if (registerOrderIds.length > 0) return
     setNotificationModalOpen(false)
   }, [registerOrderIds])
-
-  useEffect(() => {
-    if (!activeSwitch.deliveries) return
-    setOpenTab({ order: true, driver: false })
-  }, [activeSwitch])
 
   useEffect(() => {
     if (startMulitOrderStatusChange || startMulitOrderDelete) {
@@ -265,10 +260,18 @@ const OrdersListUI = (props) => {
 
   useEffect(() => {
     if (activeSwitch.messages) setOrderBy('last_direct_message_at')
+    else {
+      setOrderBy('id')
+    }
     if (activeSwitch.deliveries) setIsCheckedQuickShow(false)
     else {
       setInterActionMapOrder(null)
     }
+  }, [activeSwitch])
+
+  useEffect(() => {
+    if (!activeSwitch.deliveries) return
+    setOpenTab({ order: true, driver: false })
   }, [activeSwitch])
 
   return (

@@ -23,6 +23,7 @@ import {
 export const OrderListing = (props) => {
   const {
     orderList,
+    orderLoading,
     driversList,
     selectedOrderIds,
     orderListView,
@@ -30,8 +31,6 @@ export const OrderListing = (props) => {
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
     pagination,
-    preOrder,
-    pendingOrder,
     registerOrderId,
     handleOpenOrderDetail,
     handleNotification,
@@ -82,26 +81,26 @@ export const OrderListing = (props) => {
   }
 
   useEffect(() => {
-    if (orderList.loading) {
+    if (orderLoading) {
       setCurrentPage(1)
     }
   }, [orderList])
 
   useEffect(() => {
-    if (orderList.loading) return
+    if (orderLoading) return
     let _orders = []
     let _currentOrders = []
     let _totalPages
     let _totalOrders
     if (activeSwitch?.deliveries && !isCheckedQuickShow) {
-      _orders = orderList.orders.filter(_order => _order.delivery_type === 1)
+      _orders = orderList.filter(_order => _order.delivery_type === 1)
       _currentOrders = _orders.slice(indexOfFirstPost, indexOfLastPost)
       _totalPages = Math.ceil(_orders.length / ordersPerPage)
       _totalOrders = _orders.length
     } else {
-      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
-      _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
-      _totalOrders = orderList.orders.length
+      _totalPages = Math.ceil(orderList.length / ordersPerPage)
+      _currentOrders = orderList.slice(indexOfFirstPost, indexOfLastPost)
+      _totalOrders = orderList.length
     }
     setTotalOrders(_totalOrders)
     setTotalPages(_totalPages)
@@ -133,10 +132,10 @@ export const OrderListing = (props) => {
   }, [registerOrderId])
 
   useEffect(() => {
-    if (orderList.loading || !messageListView) return
-    if (orderList.orders.length === 0) return
-    handleOpenMessage(orderList.orders[0], messageType)
-  }, [orderList.loading, activeSwitch])
+    if (orderLoading || !messageListView) return
+    if (orderList.length === 0) return
+    handleOpenMessage(orderList[0], messageType)
+  }, [orderLoading, activeSwitch])
 
   return (
     <>
@@ -149,7 +148,7 @@ export const OrderListing = (props) => {
           {orderStatusTitle}
         </OrderStatusTitle>
       )}
-      {!(orderList.loading || driversList.loading || driverOrdersLoading) && orderList.orders.length === 0 ? (
+      {!(orderLoading || driversList.loading || driverOrdersLoading) && orderList.length === 0 ? (
         <>
           <WrapperNoneOrders
             small={orderListView === 'small'}
@@ -170,7 +169,7 @@ export const OrderListing = (props) => {
             small={orderListView === 'small'}
           >
             {orderListView === 'big' &&
-              !(orderList.loading || driversList.loading || driverOrdersLoading) ? (
+              !(orderLoading || driversList.loading || driverOrdersLoading) ? (
                 <>
                   {currentOrders.map(order => (
                     <React.Fragment key={order.id}>
@@ -179,8 +178,6 @@ export const OrderListing = (props) => {
                           order={order}
                           size={size}
                           drivers={driversList.drivers}
-                          pendingOrder={pendingOrder}
-                          preOrder={preOrder}
                           selectedOrderIds={selectedOrderIds}
                           handleUpdateOrderStatus={handleUpdateOrderStatus}
                           handleSelectedOrderIds={handleSelectedOrderIds}
@@ -250,7 +247,7 @@ export const OrderListing = (props) => {
 
             {orderListView === 'small' && (
               <>
-                {!(orderList.loading || driversList.loading || driverOrdersLoading) ? currentOrders.map(order => (
+                {!(orderLoading || driversList.loading || driverOrdersLoading) ? currentOrders.map(order => (
                   <React.Fragment key={order.id}>
                     <SmallOrderItemAccordion
                       order={order}
@@ -258,8 +255,6 @@ export const OrderListing = (props) => {
                       interActionMapOrder={interActionMapOrder}
                       activeSwitch={activeSwitch}
                       drivers={driversList.drivers}
-                      pendingOrder={pendingOrder}
-                      preOrder={preOrder}
                       handleOpenMessage={handleOpenMessage}
                       handleUpdateOrderStatus={handleUpdateOrderStatus}
                       handleOpenOrderDetail={handleOpenOrderDetail}
@@ -302,7 +297,7 @@ export const OrderListing = (props) => {
 
             {pagination && (
               <>
-                {!(orderList.loading || driverOrdersLoading) && totalPages > 0 && (
+                {!(orderLoading || driverOrdersLoading) && totalPages > 0 && (
                   <OrdersPagination
                     ordersPerPage={ordersPerPage}
                     totalOrders={totalOrders}
