@@ -67,6 +67,7 @@ export const OrderListing = (props) => {
   const [currentOrders, setCurrentOrders] = useState([])
   const [totalPages, setTotalPages] = useState(null)
   const [totalOrders, setTotalOrders] = useState(null)
+  const [endCurrentOrdersSetting, setEndCurrentOrdersSetting] = useState(true)
 
   // Change page
   const prevPaginate = () => {
@@ -105,6 +106,7 @@ export const OrderListing = (props) => {
     setTotalOrders(_totalOrders)
     setTotalPages(_totalPages)
     setCurrentOrders(_currentOrders)
+    setEndCurrentOrdersSetting(false)
   }, [orderList, currentPage, activeSwitch, isCheckedQuickShow])
 
   const toggleOrderList = () => {
@@ -169,7 +171,7 @@ export const OrderListing = (props) => {
             small={orderListView === 'small'}
           >
             {orderListView === 'big' &&
-              !(orderLoading || driversList.loading || driverOrdersLoading) ? (
+              !(orderLoading || endCurrentOrdersSetting || driversList.loading || driverOrdersLoading) ? (
                 <>
                   {currentOrders.map(order => (
                     <React.Fragment key={order.id}>
