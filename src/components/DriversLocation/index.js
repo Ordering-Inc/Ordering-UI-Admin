@@ -4,6 +4,7 @@ import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 import { InterActOrderMarker } from '../InterActOrderMarker'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import { AutoScroll } from '../AutoScroll'
 
 import {
   WrapperMap,
@@ -150,9 +151,10 @@ export const DriversLocation = (props) => {
   }, [driversList, driverAvailable, mapLoaded])
 
   useEffect(() => {
-    if (driverAvailable === 'online' || driverAvailable === 'offline' || interActionMapOrder === null) return
+    if (mapLoaded) return
+    if (driverAvailable === 'online' || driverAvailable === 'offline') return
     mapFit()
-  }, [interActionMapOrder])
+  }, [interActionMapOrder, mapLoaded])
 
   return (
     <WrapperMap ref={mapRef} className='drivers-location' disableUI={disableUI}>
@@ -226,25 +228,27 @@ export const DriversLocation = (props) => {
         <WrapperOnlineDrivers>
           <p>{t('DRIVERS_ONLINE', 'Drivers online')}</p>
           <OnlineDrivers>
-            {onlineDrivers.length > 0 && (
-              <>
-                {onlineDrivers.map(driver => (
-                  <WrapDriverInfo key={driver.id}>
-                    <WrapperDriverImage>
-                      {driver.photo ? (
-                        <DriverImage bgimage={driver.photo} />
-                      ) : (
-                        <FaUserAlt />
-                      )}
-                    </WrapperDriverImage>
-                    <DriverInfo>
-                      <p>{driver.name} {driver.lastname}</p>
-                      <p>{t('DRIVER', 'Driver')}</p>
-                    </DriverInfo>
-                  </WrapDriverInfo>
-                ))}
-              </>
-            )}
+            <AutoScroll innerScroll>
+              {onlineDrivers.length > 0 && (
+                <>
+                  {onlineDrivers.map(driver => (
+                    <WrapDriverInfo key={driver.id}>
+                      <WrapperDriverImage>
+                        {driver.photo ? (
+                          <DriverImage bgimage={driver.photo} />
+                        ) : (
+                          <FaUserAlt />
+                        )}
+                      </WrapperDriverImage>
+                      <DriverInfo>
+                        <p>{driver.name} {driver.lastname}</p>
+                        <p>{t('DRIVER', 'Driver')}</p>
+                      </DriverInfo>
+                    </WrapDriverInfo>
+                  ))}
+                </>
+              )}
+            </AutoScroll>
           </OnlineDrivers>
         </WrapperOnlineDrivers>
       )}

@@ -203,7 +203,7 @@ export const OrderAndDriverListContainer = styled.div`
   `}
   ${({ messageUI }) => messageUI && css`
     overflow: auto;
-    height: calc(100% - 56px);
+    height: calc(100% - 90px);
   `}
 `
 export const OrdersOpenButton = styled.button`

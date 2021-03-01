@@ -77,6 +77,10 @@ export const WrapperHeader = styled.div`
     flex-wrap: wrap;
     row-gap: 10px;
   `}
+
+  ${({ historyView }) => historyView && css`
+    width: 92%;
+  `}
 `
 export const HeaderName = styled.p`
   font-size: 1.1em;
@@ -481,16 +485,14 @@ export const WrapperHitoryHeader = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-
-  @media (max-width: 576px) {
-    justify-content: center;
-  }
+  align-items: center;
 `
 
 export const TabItem = styled.div`
   font-size: 20px;
   padding: 5px 20px;
   cursor: pointer;
+  text-align: center;
 
   ${({ active }) => active && css`
     border-bottom: 2px solid ${props => props.theme.colors.btnDarkBlue};
@@ -499,6 +501,7 @@ export const TabItem = styled.div`
 
   @media (max-width: 576px) {
     padding: 5px 10px;
+    font-size: 14px;
   }
 `
 export const SkeletonHitory = styled.div`

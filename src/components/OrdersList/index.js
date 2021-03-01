@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { OrderList as OrdersListController, useLanguage } from 'ordering-components'
+// import { OrderList as OrdersListController, useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components'
+import { DashbordOrderList as OrdersListController } from './DashbordOrderList'
 import { OrderListing } from '../OrderListing'
 import { WrapperOrderlist } from './styles'
 
@@ -51,31 +53,9 @@ export const OrdersList = (props) => {
     interActionMapOrder: interActionMapOrder,
     orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate,
     handleOpenMessage: handleOpenMessage,
-    handleLocation: handleLocation
-    // paginationSettings: {
-    //   pageSize: 50
-    // }
-    // propsToFetch: [
-    //   'business',
-    //   'business_id',
-    //   'created_at',
-    //   'customer',
-    //   'customer_id',
-    //   'delivery_datetime',
-    //   'delivery_type',
-    //   'discount',
-    //   'driver',
-    //   'driver_id',
-    //   'driver_tip',
-    //   'id',
-    //   'logistic_attemps',
-    //   'logistic_status',
-    //   'priority',
-    //   'service_fee',
-    //   'status',
-    //   'summary',
-    //   'products'
-    // ]
+    handleLocation: handleLocation,
+    initialPageSize: 50,
+    loadMorePageSize: 10
   }
 
   const PendingOrdersControlProps = {
@@ -169,6 +149,12 @@ export const OrdersList = (props) => {
     orderStatusTitle: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
   }
 
+  const allOrdersControlProps = {
+    orderStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    orderBy: orderBy,
+    orderDirection: orderBy === 'id' ? 'desc' : 'asc'
+  }
+
   const openOrdersControlProps = {
     orderStatus: [0, 7, 8, 3, 4, 9],
     orderBy: orderBy,
@@ -210,7 +196,7 @@ export const OrdersList = (props) => {
         />
       </WrapperOrderlist>
 
-      {inProgressOrdersLoaded && (
+      {(inProgressOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
         <WrapperOrderlist
           style={{ display: `${(!messageDashboardView && (ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
         >
@@ -221,51 +207,84 @@ export const OrdersList = (props) => {
             {...AcceptedByBusinessOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...ReadyForPickupOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...ReadyForPickupOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...AcceptedByDriverOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...AcceptedByDriverOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DriverArrivedByBusinessOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...DriverArrivedByBusinessOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupCompletedByDriverOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...PickupCompletedByDriverOrdersControlProps}
           />
         </WrapperOrderlist>
       )}
 
-      {completedOrdersLoaded && (
+      {(completedOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
         <WrapperOrderlist
           style={{ display: `${(!messageDashboardView && (ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
         >
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...CompletedByAdminOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...CompletedByAdminOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryCompletedByDriverOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...DeliveryCompletedByDriverOrdersControlProps}
           />
         </WrapperOrderlist>
       )}
 
-      {cancelledOrdersLoaded && (
+      {(cancelledOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
         <WrapperOrderlist
           style={{ display: `${(!messageDashboardView && (ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
         >
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByAdminOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...RejectByAdminOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByBusinessOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...RejectByBusinessOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...RejectByDriverOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...RejectByDriverOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...PickupFailedByDriverOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...PickupFailedByDriverOrdersControlProps}
           />
           <OrdersListController
-            handleNotification={handleNotification} handleOpenOrderDetail={handleOpenOrderDetail} {...OrdersCommonControlProps} {...DeliveryFailedByDriverOrdersControlProps}
+            handleNotification={handleNotification}
+            handleOpenOrderDetail={handleOpenOrderDetail}
+            {...OrdersCommonControlProps}
+            {...DeliveryFailedByDriverOrdersControlProps}
           />
         </WrapperOrderlist>
       )}
@@ -273,6 +292,17 @@ export const OrdersList = (props) => {
       {/* Message dashboard view */}
       {messageListLoaded && (
         <>
+          <WrapperOrderlist
+            style={{ display: `${(messageDashboardView && (openOrclosedOrderView === 'all' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
+          >
+            <OrdersListController
+              messageListView
+              handleNotification={handleNotification}
+              handleOpenOrderDetail={handleOpenOrderDetail}
+              {...OrdersCommonControlProps}
+              {...allOrdersControlProps}
+            />
+          </WrapperOrderlist>
           <WrapperOrderlist
             style={{ display: `${(messageDashboardView && (openOrclosedOrderView === 'open' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
           >
@@ -288,6 +318,7 @@ export const OrdersList = (props) => {
             style={{ display: `${(messageDashboardView && (openOrclosedOrderView === 'close' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
           >
             <OrdersListController
+              messageListView
               handleNotification={handleNotification}
               handleOpenOrderDetail={handleOpenOrderDetail}
               {...OrdersCommonControlProps}

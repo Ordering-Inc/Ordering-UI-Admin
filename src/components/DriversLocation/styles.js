@@ -28,12 +28,12 @@ export const WrapperOnlineDrivers = styled.div`
 `
 export const OnlineDrivers = styled.div`
   display: flex;
-  column-gap: 20px;
 `
 export const WrapDriverInfo = styled.div`
   display: flex;
   column-gap: 10px;
   align-items: center;
+  margin: 0 10px;
 `
 export const WrapperDriverImage = styled.div`
   width: 50px;
@@ -48,6 +48,8 @@ export const WrapperDriverImage = styled.div`
     border-radius: 100%;
     padding: 3px;
     box-sizing: border-box;
+    border: none;
+    background: none;
   }
 `
 const DriverImgStyled = styled.div`
@@ -79,6 +81,9 @@ export const DriverInfo = styled.div`
     &: first-child {
       font-size: 14px;
       font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &: last-child {

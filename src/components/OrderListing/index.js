@@ -46,7 +46,8 @@ export const OrderListing = (props) => {
     interActionMapOrder,
     messageListView,
     messageType,
-    size
+    size,
+    loadMoreOrders
   } = props
 
   const theme = useTheme()
@@ -77,36 +78,30 @@ export const OrderListing = (props) => {
   }
   const nextPaginate = () => {
     if (currentPage !== totalPages) {
+      if (orderList.orders.length < ordersPerPage * currentPage + 1) {
+        loadMoreOrders()
+      }
       setCurrentPage(currentPage + 1)
     }
   }
-
-  useEffect(() => {
-    if (orderList.loading) {
-      setCurrentPage(1)
-    }
-  }, [orderList])
 
   useEffect(() => {
     if (orderList.loading) return
     let _orders = []
     let _currentOrders = []
     let _totalPages
-    let _totalOrders
     if (activeSwitch?.deliveries && !isCheckedQuickShow) {
       _orders = orderList.orders.filter(_order => _order.delivery_type === 1)
       _currentOrders = _orders.slice(indexOfFirstPost, indexOfLastPost)
       _totalPages = Math.ceil(_orders.length / ordersPerPage)
-      _totalOrders = _orders.length
     } else {
-      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
+      _totalPages = Math.ceil(pagination?.total / ordersPerPage)
       _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
-      _totalOrders = orderList.orders.length
     }
-    setTotalOrders(_totalOrders)
+    setTotalOrders(pagination?.total)
     setTotalPages(_totalPages)
     setCurrentOrders(_currentOrders)
-  }, [orderList, currentPage, activeSwitch, isCheckedQuickShow])
+  }, [orderList, currentPage, activeSwitch, isCheckedQuickShow, pagination])
 
   const toggleOrderList = () => {
     setActiveState(setActive === '' ? 'active' : '')
@@ -126,17 +121,17 @@ export const OrderListing = (props) => {
   }
 
   useEffect(() => {
-    if (driverOrdersView) return
+    if (driverOrdersView || messageListView) return
     if (registerOrderId === null || !registerOrderId) return
     handleNotification(registerOrderId)
     handleResetNotification()
-  }, [registerOrderId])
+  }, [registerOrderId, messageListView])
 
   useEffect(() => {
     if (orderList.loading || !messageListView) return
     if (orderList.orders.length === 0) return
-    handleOpenMessage(orderList.orders[0], messageType)
-  }, [orderList.loading, activeSwitch])
+    handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType)
+  }, [orderList.loading, activeSwitch, messageListView])
 
   return (
     <>

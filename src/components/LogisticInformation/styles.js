@@ -27,7 +27,7 @@ export const SkeletonHitory = styled.div`
 export const BubbleConsole = styled.div`
   border-radius: 50px;
   padding: 5px 15px;
-  max-width: 40%;
+  max-width: 90%;
   margin-bottom: 15px;
   background: #EFEFEF;
   text-align: center;
@@ -36,7 +36,7 @@ export const BubbleConsole = styled.div`
   overflow-wrap: break-word;
 
   @media (min-width: 1024px){
-    max-width: 30%
+    max-width: 60%
   }
 `
 
@@ -45,6 +45,7 @@ export const UppercaseText = styled.span`
 
   ${({ title }) => title && css`
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
+    opacity: 0.8;
   `}
 `

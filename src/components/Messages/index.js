@@ -326,7 +326,10 @@ export const MessagesUI = (props) => {
           </BackActions>
         )}
         <HeaderProfile>
-          <WrapperHeader messageDashboardView={messageDashboardView}>
+          <WrapperHeader
+            messageDashboardView={messageDashboardView}
+            historyView={history}
+          >
             <HeaderInfo>
               {!history && (
                 <Image>
