@@ -31,7 +31,7 @@ const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
     useLoginByCellphone,
-    hanldeChangeInput,
+    handleChangeInput,
     hanldeChangeTab,
     handleButtonLoginClick,
     elementLinkToSignup,
@@ -188,7 +188,7 @@ const LoginFormUI = (props) => {
                       ).replace('_attribute_', t('EMAIL', 'Email'))
                     }
                   })}
-                  onChange={(e) => hanldeChangeInput(e)}
+                  onChange={(e) => handleChangeInput(e)}
                   autoComplete='off'
                 />
                 <img src={theme?.images?.icons?.email} alt='email' />
@@ -206,7 +206,7 @@ const LoginFormUI = (props) => {
                     'Cellphone is required'
                   ).replace('_attribute_', t('CELLPHONE', 'Cellphone'))
                 })}
-                onChange={(e) => hanldeChangeInput(e)}
+                onChange={(e) => handleChangeInput(e)}
                 autoComplete='off'
               />
             )}
@@ -232,7 +232,7 @@ const LoginFormUI = (props) => {
                       .replace('_min_', 8)
                   }
                 })}
-                onChange={(e) => hanldeChangeInput(e)}
+                onChange={(e) => handleChangeInput(e)}
                 autoComplete='off'
               />
               <img src={theme?.images?.icons?.lock} alt='lock' />

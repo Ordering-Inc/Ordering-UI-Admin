@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const RoundMarker = styled.div`
     width: 100px;
@@ -14,8 +14,8 @@ export const RoundMarker = styled.div`
     border-radius: 100%;
 `
 export const WrapperMapMarker = styled.div`
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   background: #fff;
   border: 5px solid #0E9B55;
   box-shadow: 0px 3px 6px #00000029;
@@ -52,3 +52,27 @@ export const MapMarkerImg = (props) => {
     </MapMarkerImgStyled>
   )
 }
+
+export const InfoContainer = styled.div`
+  background: #fff;
+  position: absolute;
+  border-radius: 5px;
+  padding: 10px;
+  row-gap: 5px;
+  z-index: 2;
+  box-shadow: 0px 2px 2px #00000029;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+`
+export const TextContainer = styled.div`
+  display: flex;
+  column-gap: 10px;
+`
+export const Text = styled.span`
+  ${({ fontWeight }) => fontWeight && css`
+    font-weight: 600;
+  `}
+  font-size: 14px;
+  white-space: nowrap;
+`

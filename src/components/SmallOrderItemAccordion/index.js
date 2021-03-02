@@ -111,8 +111,8 @@ export const SmallOrderItemAccordion = (props) => {
   }
 
   useEffect(() => {
-    if (interActionMapOrder === null || !activeSwitch?.deliveries) return
-    handleLocation(order)
+    if (!activeSwitch?.deliveries || interActionMapOrder === null || interActionMapOrder?.id !== order?.id) return
+    handleLocation && handleLocation(order)
   }, [order?.driver])
 
   useEffect(() => {

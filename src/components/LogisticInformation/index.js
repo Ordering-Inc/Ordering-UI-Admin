@@ -1,6 +1,7 @@
 import React from 'react'
 import { LogisticInformation as LogisticInformationController, useLanguage, useUtils } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
+import { Button } from '../../styles/Buttons'
 import {
   WraaperLogs,
   SkeletonHitory,
@@ -9,7 +10,7 @@ import {
 } from './styles'
 
 const LogisticInformationUI = (props) => {
-  const { logisticInformation } = props
+  const { logisticInformation, getLogistics } = props
   const [, t] = useLanguage()
 
   const [{ parseDate }] = useUtils()
@@ -52,11 +53,11 @@ const LogisticInformationUI = (props) => {
         <>
           {[...Array(3)].map((item, i) => (
             <SkeletonHitory key={i}>
-              <Skeleton width={400} height={50} />
-              <Skeleton width={300} height={50} />
-              <Skeleton width={380} height={50} />
-              <Skeleton width={200} height={50} />
-              <Skeleton width={450} height={50} />
+              <Skeleton width={400} height={40} />
+              <Skeleton width={300} height={40} />
+              <Skeleton width={380} height={40} />
+              <Skeleton width={200} height={40} />
+              <Skeleton width={450} height={40} />
             </SkeletonHitory>
           ))}
         </>
@@ -64,6 +65,9 @@ const LogisticInformationUI = (props) => {
         <>
           {logisticInformation.error === null ? (
             <WraaperLogs>
+              <Button color='darkBlue' onClick={() => getLogistics()}>
+                {t('RELOAD', 'Reload')}
+              </Button>
               <BubbleConsole>
                 <UppercaseText><strong>{t('distance_customer_from_business', 'distance_customer_from_business')}</strong></UppercaseText>
                 : {(logisticInformation?.data?.distance_customer_from_business / 1000).toFixed(2)} KM
