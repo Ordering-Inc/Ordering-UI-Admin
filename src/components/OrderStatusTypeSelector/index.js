@@ -37,7 +37,7 @@ export const OrderStatusTypeSelector = (props) => {
     {
       value: 'default',
       content: <Option noPadding={noPadding}><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>,
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 'pending',
@@ -47,7 +47,7 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
     // {
     //   value: 'preorder',
@@ -76,7 +76,7 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('IN_PROGRESS', 'In Progress')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 7,
@@ -131,7 +131,7 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('COMPLETED', 'Completed')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 1,
@@ -159,7 +159,7 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('CACELLED', 'Cancelled')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 2,

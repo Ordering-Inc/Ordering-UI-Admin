@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { useTheme } from 'styled-components'
 import {
@@ -19,6 +19,8 @@ export const InterActOrderMarker = (props) => {
     driver
   } = props
   const [, t] = useLanguage()
+  const [{ parseDate }] = useUtils()
+
   const theme = useTheme()
   const [infoShow, setInfoShow] = useState(false)
   const infoRef = useRef(null)
@@ -115,6 +117,24 @@ export const InterActOrderMarker = (props) => {
                     {t('CELLPHONE', 'Cellphone')}:
                   </Text>
                   <Text>{driver.cellphone}</Text>
+                </TextContainer>
+              )}
+              {driver?.drivergroups?.length > 0 && (
+                <TextContainer>
+                  <Text fontWeight='bold'>
+                    {t('DRIVER_GROUP', 'Driver group')}:
+                  </Text>
+                  {driver.drivergroups.map(group => (
+                    <Text key={group.id}>{group.name},</Text>
+                  ))}
+                </TextContainer>
+              )}
+              {driver?.last_location_at && (
+                <TextContainer>
+                  <Text fontWeight='bold'>
+                    {t('LAST_LOCATION', 'Last location')}:
+                  </Text>
+                  <Text>{parseDate(driver.last_location_at, { utc: false })}</Text>
                 </TextContainer>
               )}
             </>

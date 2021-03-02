@@ -49,6 +49,10 @@ export const DeliveryDashboard = (props) => {
     setDriverAvailable('all')
   }
 
+  const handleUpdateDriverLocation = (order) => {
+    setInterActionMapOrder({ ...order })
+  }
+
   const handleLocation = (order) => {
     if (interActionMapOrder?.id === order?.id) {
       setInterActionMapOrder(null)
@@ -112,6 +116,7 @@ export const DeliveryDashboard = (props) => {
               interActionMapOrder={interActionMapOrder}
               handleOpenOrderDetail={handleOpenOrderDetail}
               handleLocation={handleLocation}
+              handleUpdateDriverLocation={handleUpdateDriverLocation}
             />
           </WrapperOrderlist>
           {openTab.driver && (

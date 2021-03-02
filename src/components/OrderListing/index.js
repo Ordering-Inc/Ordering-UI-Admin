@@ -42,6 +42,7 @@ export const OrderListing = (props) => {
     isCheckedQuickShow,
     handleOpenMessage,
     handleLocation,
+    handleUpdateDriverLocation,
     messageOrder,
     interActionMapOrder,
     messageListView,
@@ -250,6 +251,7 @@ export const OrderListing = (props) => {
                       handleUpdateOrderStatus={handleUpdateOrderStatus}
                       handleOpenOrderDetail={handleOpenOrderDetail}
                       handleLocation={handleLocation}
+                      handleUpdateDriverLocation={handleUpdateDriverLocation}
                     />
                   </React.Fragment>
                 )

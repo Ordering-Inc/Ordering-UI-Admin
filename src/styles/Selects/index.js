@@ -13,6 +13,7 @@ export const Option = styled.div`
 
   ${({ disabled }) => disabled && css`
     cursor: no-drop;
+    opacity: 0.6;
   `}
 
   ${({ optionBottomBorder }) => optionBottomBorder && css`

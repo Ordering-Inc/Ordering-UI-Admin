@@ -46,7 +46,8 @@ export const SmallOrderItemAccordion = (props) => {
     handleUpdateOrderStatus,
     handleOpenOrderDetail,
     handleOpenMessage,
-    handleLocation
+    handleLocation,
+    handleUpdateDriverLocation
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -112,7 +113,7 @@ export const SmallOrderItemAccordion = (props) => {
 
   useEffect(() => {
     if (!activeSwitch?.deliveries || interActionMapOrder === null || interActionMapOrder?.id !== order?.id) return
-    handleLocation && handleLocation(order)
+    handleUpdateDriverLocation && handleUpdateDriverLocation(order)
   }, [order?.driver])
 
   useEffect(() => {

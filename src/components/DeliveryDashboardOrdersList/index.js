@@ -19,6 +19,7 @@ export const DeliveryDashboardOrdersList = (props) => {
     isOnlyDelivery,
     handleOpenOrderDetail,
     handleLocation,
+    handleUpdateDriverLocation,
     interActionMapOrder
   } = props
   const [, t] = useLanguage()
@@ -46,6 +47,7 @@ export const DeliveryDashboardOrdersList = (props) => {
     orderListView: orderListView,
     interActionMapOrder: interActionMapOrder,
     handleLocation: handleLocation,
+    handleUpdateDriverLocation: handleUpdateDriverLocation,
     handleOpenOrderDetail: handleOpenOrderDetail
   }
 

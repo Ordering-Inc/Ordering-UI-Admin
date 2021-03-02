@@ -66,7 +66,7 @@ const DriverSelectorUI = (props) => {
           </Option>
         ),
         color: 'primary',
-        disabled: !isFilterView ? 'disabled' : null
+        disabled: !isFilterView
       }
     ]
     if (!isFilterView) {
@@ -75,13 +75,14 @@ const DriverSelectorUI = (props) => {
         content: (
           <Option padding='3px'>{t('REMOVE_ASSIGNED_DRIVER', 'Remove assinged driver')}</Option>
         ),
-        disabled: defaultValue === 'default' ? 'disabled' : null
+        disabled: defaultValue === 'default'
       })
     }
     if (!driversList.loading) {
       const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
         return {
           value: driver.id,
+          disabled: !driver?.available,
           content: (
             <Option small={small} isPhoneView={isPhoneView} padding={padding}>
               <WrapperDriverImage small={small}>
@@ -188,7 +189,6 @@ const DriverSelectorUI = (props) => {
   }, [defaultValue])
 
   const Placeholder = <Option>{t('SELECT_DRIVER', 'Select driver')}</Option>
-  const businessesLoading = [{ value: 'default', content: <Option>{t('BUSINESSES_LOADING', 'Businesses loading')}...</Option> }]
 
   if (isFilterView) {
     return (
@@ -206,7 +206,7 @@ const DriverSelectorUI = (props) => {
         ) : (
           <MultiSelect
             defaultValue='default'
-            options={businessesLoading}
+            options={driversLoading}
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
             optionBottomBorder

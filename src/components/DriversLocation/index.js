@@ -219,8 +219,8 @@ export const DriversLocation = (props) => {
         {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
           <InterActOrderMarker
             driver={interActionMapOrder?.driver}
-            lat={interActionMapOrder?.driver?.location?.lat}
-            lng={interActionMapOrder?.driver?.location?.lng}
+            lat={interActionMapOrder?.driver?.location !== null ? interActionMapOrder?.driver?.location?.lat : defaultCenter.lat}
+            lng={interActionMapOrder?.driver?.location !== null ? interActionMapOrder?.driver?.location?.lng : defaultCenter.lng}
             image={interActionMapOrder?.driver?.photo}
           />
         )}
