@@ -5,11 +5,12 @@ import PropTypes, { string, object, number } from 'prop-types'
 // import { useWebsocket } from '../../contexts/WebsocketContext'
 import { useSession, useApi, useWebsocket } from 'ordering-components'
 
-export const DashbordOrderList = (props) => {
+export const DashboardOrderList = (props) => {
   const {
     UIComponent,
     propsToFetch,
     orders,
+    isOnlyDelivery,
     initialPageSize,
     loadMorePageSize,
     orderIds,
@@ -132,6 +133,15 @@ export const DashbordOrderList = (props) => {
           conditions.push({ attribute: 'status', value: orderStatus })
         }
       }
+    }
+
+    if (isOnlyDelivery) {
+      conditions.push(
+        {
+          attribute: 'delivery_type',
+          value: 1
+        }
+      )
     }
 
     if (searchValue) {
@@ -384,21 +394,6 @@ export const DashbordOrderList = (props) => {
     setOrderList({ ...orderList, orders })
   }, [deletedOrderId])
 
-  // /**
-  //  * Listening search value change
-  //  */
-  // useEffect(() => {
-  //   if (searchValue === null) return
-  //   loadOrders()
-  // }, [searchValue])
-  // /**
-  //  * Listening  orderBy value change
-  //  */
-  // useEffect(() => {
-  //   if (orderList.loading || orderBy === null) return
-  //   loadOrders()
-  // }, [searchValue, orderBy])
-
   /**
    * Listening sesssion and filter values change
    */
@@ -432,7 +427,7 @@ export const DashbordOrderList = (props) => {
         requestsState.orders.cancel()
       }
     }
-  }, [session, searchValue, orderBy, filterValues, orders])
+  }, [session, searchValue, orderBy, filterValues, isOnlyDelivery, orders])
 
   useEffect(() => {
     if (orderList.loading) return
@@ -568,7 +563,7 @@ export const DashbordOrderList = (props) => {
   )
 }
 
-DashbordOrderList.propTypes = {
+DashboardOrderList.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -649,7 +644,7 @@ DashbordOrderList.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-DashbordOrderList.defaultProps = {
+DashboardOrderList.defaultProps = {
   orderBy: 'id',
   orderDirection: 'desc',
   paginationSettings: { initialPage: 1, pageSize: 10, controlType: 'infinity' },

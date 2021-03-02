@@ -1,24 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const MessagesContainer = styled.div`
-  width: 100%;
-  margin-left: 0px;
-  display: flex;
-  justify-content: center;
-  min-width: 300px;
-
-  @media (max-width: 600px) {
-    width: 95%;
-    margin: 0px auto;
-  }
-`
-export const MessagesInnerContent = styled.div`
-  width: 92%;
-  @media (max-width: 1400px) {
-    width: 95%;
-  }
-`
-export const WrapperMainContent = styled.div`
+export const MessagesManagerContainer = styled.div`
   display: flex;
   margin-top: 20px;
   height: calc(100vh - 224px);;
@@ -70,22 +52,15 @@ export const OrdersCloseButton = styled.button`
     color: ${props => props.theme.colors.btnDarkBlue};
   }
 
-  @media (max-width: 576px) {
-    position: fixed;
-    z-index: 200;
-    top: 80px;
-  }
-
   @media (min-width: 992px) {
     display: none;
   }
-  right: initial;
   @media (max-width: 576px) {
     position: absolute;
     top: 20px
   }
 `
-export const WrapperMessagesList = styled.div`
+export const WrapperOrdersAndUser = styled.div`
   width: 350px;
   background: #fff;
   left: 10px;
@@ -101,7 +76,6 @@ export const WrapperMessagesList = styled.div`
     height: calc(100% - 30px);
   }
 `
-
 export const WrapperTab = styled.div`
   position: relative;
   width: 350px;
@@ -136,9 +110,9 @@ export const WrapperSortContainer = styled.div`
     }
   }
 `
-export const OrdersListContainer = styled.div`
+export const OrderAndUserListContainer = styled.div`
   overflow: auto;
-  height: calc(100% - 56px);
+  height: calc(100% - 90px);
 `
 export const WrapperMessage = styled.div`
   flex: 1;

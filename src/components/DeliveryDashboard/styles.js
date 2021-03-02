@@ -1,36 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const DeliveryConatiner = styled.div`
-  width: 100%;
-  height: 100%;
-`
-export const DeliveryContent = styled.div`
-  width: calc(100% - 100px);
-  height: 100%;
-  margin-left: 100px;
-  display: flex;
-  justify-content: center;
-  min-width: 300px;
-
-  @media (max-width: 992px) {
-    width: calc(100% - 42px);
-    margin-left: 42px;
-  }
-
-  @media (max-width: 600px) {
-    width: 95%;
-    margin: 0px auto;
-  }
-`
-
-export const InnerContent = styled.div`
-  width: 92%;
-
-  @media (max-width: 1400px) {
-    width: 95%;
-  }
-`
-export const WrapperMainContent = styled.div`
+export const DeliveryDashboardContainer = styled.div`
   margin-top: 20px;
   height: calc(100% - 65px);
   background: #FAFAFA;
@@ -84,7 +54,7 @@ export const OrdersCloseButton = styled.button`
     top: 80px;
   }
 `
-export const WrapOrdersListAndMap = styled.div`
+export const WrapperOrdersAndDriver = styled.div`
   width: 350px;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 12px;
@@ -103,7 +73,7 @@ export const WrapOrdersListAndMap = styled.div`
   }
 `
 export const WrapperTab = styled.div`
-  position: fixed;
+  position: absolute;
   width: 350px;
   display: flex;
   align-items: center;
@@ -135,8 +105,9 @@ export const WrapperQuickShow = styled.div`
     cursor: pointer;
   }
 `
-export const OrdersListContainer = styled.div`
+export const OrderAndDriverListContainer = styled.div`
   overflow: auto;
   height: calc(100% - 91px);
 `
-export const WrapperOrderlist = styled.div``
+export const WrapperOrderlist = styled.div`
+`

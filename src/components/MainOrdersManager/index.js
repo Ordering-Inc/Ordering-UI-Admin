@@ -3,17 +3,22 @@ import { useLocation, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { OrdersManage as OrdersManageController, useLanguage, useConfig } from 'ordering-components'
+import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
+import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
-import { OrdersManager } from '../OrdersManager'
 import {
   OrdersListContainer,
+  OrdersContent,
+  OrdersInnerContent,
+  WrapItemView,
   WrapperIndicator,
   OrderNotification
 } from './styles'
+import { OrdersDashboard } from '../OrdersDashboard'
 import { DeliveryDashboard } from '../DeliveryDashboard'
-import { MessagesManager } from '../MessagesManager'
+import { MessagesDashbaord } from '../MessagesDashbaord'
 
 toast.configure()
 
@@ -45,20 +50,21 @@ const MainOrdersManagerUI = (props) => {
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [deliveryDashboardLoaded, setDeliveryDashboardLoaded] = useState(false)
-  const [MessagesManagerLoaded, setMessagesManagerLoaded] = useState(false)
+  const [messagesDashboardLoaded, setMessagesDashboardLoaded] = useState(false)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
+  const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
   const [activeSwitch, setActiveSwitch] = useState({ orders: true, deliveries: false, messages: false })
-  const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
 
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     history.push('/orders-deliveries')
   }
+
   const handleOpenOrderDetail = (id) => {
     setOrderDetailId(id)
     setIsOpenOrderDetail(true)
@@ -188,12 +194,12 @@ const MainOrdersManagerUI = (props) => {
   }, [notificationModalOpen])
 
   useEffect(() => {
-    if (deliveryDashboardLoaded && MessagesManagerLoaded) return
+    if (deliveryDashboardLoaded && messagesDashboardLoaded) return
     if (activeSwitch.deliveries) {
       setDeliveryDashboardLoaded(true)
     }
     if (activeSwitch.messages) {
-      setMessagesManagerLoaded(true)
+      setMessagesDashboardLoaded(true)
     }
   }, [activeSwitch])
 
@@ -202,55 +208,19 @@ const MainOrdersManagerUI = (props) => {
       <OrdersListContainer
         deliveryAndMessageUI={activeSwitch.deliveries || activeSwitch.messages}
       >
-        <div style={{ display: `${activeSwitch.orders ? 'block' : 'none'}` }}>
-          <OrdersManager
-            searchValue={searchValue}
-            driversList={driversList}
-            driverGroupList={driverGroupList}
-            paymethodsList={paymethodsList}
-            businessesList={businessesList}
-            ordersStatusGroup={ordersStatusGroup}
-            filterValues={filterValues}
-            deletedOrderId={deletedOrderId}
-            handleOrdersStatusGroupFilter={handleOrdersStatusGroupFilter}
-            handleChangeSearch={handleChangeSearch}
-            handleChangeFilterValues={handleChangeFilterValues}
-            selectedOrderIds={selectedOrderIds}
-            handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-            handleDeleteMultiOrders={handleDeleteMultiOrders}
-            handleSelectedOrderIds={handleSelectedOrderIds}
-            handleNotification={handleNotification}
-            handleOpenOrderDetail={handleOpenOrderDetail}
-            handleSwitch={handleSwitch}
-            activeSwitch={activeSwitch}
+        {!activeSwitch.messages && (
+          <OrderStatusFilterBar
+            selectedOrderStatus={ordersStatusGroup}
+            changeOrderStatus={handleOrdersStatusGroupFilter}
           />
-        </div>
-        {deliveryDashboardLoaded && (
-          <div style={{ display: `${activeSwitch.deliveries ? 'block' : 'none'}` }}>
-            <DeliveryDashboard
-              searchValue={searchValue}
-              driversList={driversList}
-              driverGroupList={driverGroupList}
-              paymethodsList={paymethodsList}
-              businessesList={businessesList}
-              ordersStatusGroup={ordersStatusGroup}
-              filterValues={filterValues}
-              handleOrdersStatusGroupFilter={handleOrdersStatusGroupFilter}
-              handleChangeSearch={handleChangeSearch}
-              handleChangeFilterValues={handleChangeFilterValues}
-              driverOrders={driverOrders}
-              handleSelectedOrderIds={handleSelectedOrderIds}
-              handleChangeDriverOrdersModal={handleChangeDriverOrdersModal}
+        )}
+        <OrdersContent
+          messageUI={activeSwitch.messages}
+        >
+          <OrdersInnerContent className='order-content'>
+            <OrderContentHeader
               activeSwitch={activeSwitch}
               handleSwitch={handleSwitch}
-              handleNotification={handleNotification}
-              handleOpenOrderDetail={handleOpenOrderDetail}
-            />
-          </div>
-        )}
-        {MessagesManagerLoaded && (
-          <div style={{ display: `${activeSwitch.messages ? 'block' : 'none'}` }}>
-            <MessagesManager
               searchValue={searchValue}
               driverGroupList={driverGroupList}
               driversList={driversList}
@@ -259,16 +229,61 @@ const MainOrdersManagerUI = (props) => {
               filterValues={filterValues}
               handleChangeSearch={handleChangeSearch}
               handleChangeFilterValues={handleChangeFilterValues}
-              activeSwitch={activeSwitch}
-              handleSwitch={handleSwitch}
-              ordersStatusGroup={ordersStatusGroup}
-              orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
-              handleNotification={handleNotification}
-              handleOpenOrderDetail={handleOpenOrderDetail}
-              handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
             />
-          </div>
-        )}
+            <WrapItemView
+              style={{ display: `${activeSwitch.orders ? 'block' : 'none'}` }}
+            >
+              <OrdersDashboard
+                searchValue={searchValue}
+                filterValues={filterValues}
+                selectedOrderIds={selectedOrderIds}
+                deletedOrderId={deletedOrderId}
+                driversList={driversList}
+                ordersStatusGroup={ordersStatusGroup}
+                handleSelectedOrderIds={handleSelectedOrderIds}
+                handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+                handleDeleteMultiOrders={handleDeleteMultiOrders}
+                handleNotification={handleNotification}
+                handleOpenOrderDetail={handleOpenOrderDetail}
+                activeSwitch={activeSwitch}
+              />
+            </WrapItemView>
+            {deliveryDashboardLoaded && (
+              <WrapItemView
+                style={{ display: `${activeSwitch.deliveries ? 'block' : 'none'}` }}
+              >
+                <DeliveryDashboard
+                  searchValue={searchValue}
+                  filterValues={filterValues}
+                  driversList={driversList}
+                  deletedOrderId={deletedOrderId}
+                  ordersStatusGroup={ordersStatusGroup}
+                  driverOrders={driverOrders}
+                  handleChangeDriverOrdersModal={handleChangeDriverOrdersModal}
+                  handleSelectedOrderIds={handleSelectedOrderIds}
+                  activeSwitch={activeSwitch}
+                  handleOpenOrderDetail={handleOpenOrderDetail}
+                />
+              </WrapItemView>
+            )}
+            {messagesDashboardLoaded && (
+              <WrapItemView
+                style={{ display: `${activeSwitch.messages ? 'block' : 'none'}` }}
+              >
+                <MessagesDashbaord
+                  searchValue={searchValue}
+                  filterValues={filterValues}
+                  deletedOrderId={deletedOrderId}
+                  driversList={driversList}
+                  activeSwitch={activeSwitch}
+                  handleOpenOrderDetail={handleOpenOrderDetail}
+                  orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
+                  handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                />
+              </WrapItemView>
+            )}
+          </OrdersInnerContent>
+        </OrdersContent>
       </OrdersListContainer>
 
       <Modal

@@ -18,7 +18,6 @@ import {
 
 export const DriversLocation = (props) => {
   const {
-    disableUI,
     driversList,
     driverAvailable,
     interActionMapOrder
@@ -157,7 +156,7 @@ export const DriversLocation = (props) => {
   }, [interActionMapOrder, mapLoaded])
 
   return (
-    <WrapperMap ref={mapRef} className='drivers-location' disableUI={disableUI}>
+    <WrapperMap ref={mapRef} className='drivers-location'>
       <GoogleMapReact
         bootstrapURLKeys={{
           key: googleMapsApiKey

@@ -4,8 +4,8 @@ import { HelmetTags } from '../../components/HelmetTags'
 import {
   WrapperOrdersListAndDelivery
 } from './styles'
-// import { MainOrdersManager as MainOrdersManagerController } from '../../../src/components/MainOrdersManager'
-import { OrdersListAndDelivery as OrdersListAndDeliveryController } from '../../../src/components/OrdersListAndDelivery'
+import { MainOrdersManager as MainOrdersManagerController } from '../../../src/components/MainOrdersManager'
+// import { OrdersListAndDelivery as OrdersListAndDeliveryController } from '../../../src/components/OrdersListAndDelivery'
 // import { OverView } from '../../../src/components/OverView'
 
 export const OrdersListAndDelivery = (props) => {
@@ -14,8 +14,8 @@ export const OrdersListAndDelivery = (props) => {
       <HelmetTags page='orders-deliveries' />
       <AdminLayout>
         <WrapperOrdersListAndDelivery>
-          {/* <MainOrdersManagerController /> */}
-          <OrdersListAndDeliveryController />
+          <MainOrdersManagerController />
+          {/* <OrdersListAndDeliveryController /> */}
           {/* <OverView /> */}
         </WrapperOrdersListAndDelivery>
       </AdminLayout>

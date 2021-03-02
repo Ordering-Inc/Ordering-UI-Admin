@@ -87,17 +87,8 @@ export const OrderListing = (props) => {
 
   useEffect(() => {
     if (orderList.loading) return
-    let _orders = []
-    let _currentOrders = []
-    let _totalPages
-    if (activeSwitch?.deliveries && !isCheckedQuickShow) {
-      _orders = orderList.orders.filter(_order => _order.delivery_type === 1)
-      _currentOrders = _orders.slice(indexOfFirstPost, indexOfLastPost)
-      _totalPages = Math.ceil(_orders.length / ordersPerPage)
-    } else {
-      _totalPages = Math.ceil(pagination?.total / ordersPerPage)
-      _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
-    }
+    const _totalPages = Math.ceil(pagination?.total / ordersPerPage)
+    const _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
     setTotalOrders(pagination?.total)
     setTotalPages(_totalPages)
     setCurrentOrders(_currentOrders)
@@ -123,7 +114,7 @@ export const OrderListing = (props) => {
   useEffect(() => {
     if (driverOrdersView || messageListView) return
     if (registerOrderId === null || !registerOrderId) return
-    handleNotification(registerOrderId)
+    handleNotification && handleNotification(registerOrderId)
     handleResetNotification()
   }, [registerOrderId, messageListView])
 
