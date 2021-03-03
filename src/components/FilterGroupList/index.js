@@ -36,9 +36,7 @@ const FilterGroupListUI = (props) => {
     handleChangeDeliveryType,
     handleChangePaymethodType,
     handleResetFilterValues,
-    handleChangeFilterValues,
-    handleChangeIsPendingOrder,
-    handleChangeIsPreOrder
+    handleChangeFilterValues
   } = props
 
   const [, t] = useLanguage()
@@ -100,8 +98,6 @@ const FilterGroupListUI = (props) => {
           isFilterView
           filterValues={filterValues}
           handleChangeOrderStatus={handleChangeOrderStatus}
-          handleChangeIsPendingOrder={handleChangeIsPendingOrder}
-          handleChangeIsPreOrder={handleChangeIsPreOrder}
         />
         <DeliveryTypeSelector
           filterValues={filterValues}
