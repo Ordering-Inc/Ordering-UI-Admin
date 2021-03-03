@@ -35,7 +35,6 @@ export const OrderListing = (props) => {
     registerOrderId,
     handleOpenOrderDetail,
     handleNotification,
-    handleResetNotification,
     driverOrdersView,
     activeSwitch,
     isCheckedQuickShow,
@@ -120,7 +119,6 @@ export const OrderListing = (props) => {
     if (driverOrdersView || messageListView) return
     if (registerOrderId === null || !registerOrderId) return
     handleNotification && handleNotification(registerOrderId)
-    handleResetNotification()
   }, [registerOrderId, messageListView])
 
   useEffect(() => {

@@ -100,5 +100,9 @@ export const OrderNotification = styled.div`
 `
 export const WrapItemView = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px);
+
+  @media (max-width: 1200px) {
+    height: calc(100% - 90px);
+  }
 `

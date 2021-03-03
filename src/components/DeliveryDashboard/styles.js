@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components'
 
 export const DeliveryDashboardContainer = styled.div`
   margin-top: 20px;
-  height: calc(100% - 65px);
+  height: calc(100% - 20px);
   background: #FAFAFA;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
 
   @media (max-width: 1200px) {
-    height: calc(100% - 120px);
+    height: calc(100% - 30px);
   }
 
   @media (max-width: 576px) {
