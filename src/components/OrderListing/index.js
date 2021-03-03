@@ -123,7 +123,7 @@ export const OrderListing = (props) => {
 
   useEffect(() => {
     if (orderList.loading || !messageListView) return
-    if (orderList.orders.length === 0) return
+    if (orderList.orders.length === 0 || messageOrder) return
     handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType)
   }, [orderList.loading, activeSwitch, messageListView])
 

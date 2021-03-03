@@ -36,7 +36,7 @@ export const MessagesDashbaord = (props) => {
   const [orderBy, setOrderBy] = useState('last_direct_message_at')
   const [openOrderAndUser, setOpenOrderAndUser] = useState(true)
   const [messageType, setMessageType] = useState('')
-  const [messageOrder, setMessageOrder] = useState({})
+  const [messageOrder, setMessageOrder] = useState(null)
   const [openMessageOrderDetail, setOpenMessageOrderDetail] = useState(false)
 
   const handleOpenMessage = (order, messageType) => {
@@ -85,7 +85,6 @@ export const MessagesDashbaord = (props) => {
           <MessagesDashboardOrdersList
             orderListView='small'
             orderBy={orderBy}
-            messageDashboardView
             openOrclosedOrderView={openOrclosedOrderView}
             searchValue={searchValue}
             filterValues={filterValues}
@@ -101,7 +100,7 @@ export const MessagesDashbaord = (props) => {
         </OrderAndUserListContainer>
       </WrapperOrdersAndUser>
       {/* message section */}
-      {Object.keys(messageOrder).length !== 0 && (
+      {messageOrder && (
         <WrapperMessage>
           <Messages
             messageDashboardView
@@ -117,7 +116,7 @@ export const MessagesDashbaord = (props) => {
         </WrapperMessage>
       )}
       {/* message order detail */}
-      {Object.keys(messageOrder).length !== 0 && (
+      {messageOrder && (
         <MessageOrderDetailContainer style={{ display: `${openMessageOrderDetail ? 'block' : 'none'}` }}>
           <OrderDetails
             messageDashboardView

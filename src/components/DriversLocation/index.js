@@ -73,7 +73,7 @@ export const DriversLocation = (props) => {
       }
     }
 
-    if (driverAvailable === 'online' || (interActionMapOrder !== null && interActionMapOrder?.driver === null)) {
+    if (driverAvailable === 'online') {
       if (_onlineDrivers.length === 0) return
       if (_onlineDrivers.length === 1) {
         setMapCenter(_onlineDrivers[0].location)

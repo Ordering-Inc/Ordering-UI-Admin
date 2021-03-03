@@ -104,6 +104,7 @@ export const WrapperSortContainer = styled.div`
     border-radius: 3px;
     &:first-child {
       border: 1px solid #F2F2F2;
+      padding: 0 10px;
     }
     &:last-child {
       border: none;

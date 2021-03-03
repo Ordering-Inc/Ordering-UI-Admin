@@ -13,7 +13,6 @@ export const MessagesDashboardOrdersList = (props) => {
     activeSwitch,
     handleOpenOrderDetail,
     handleOpenMessage,
-    messageDashboardView,
     openOrclosedOrderView,
     orderBy,
     messageType,
@@ -60,33 +59,33 @@ export const MessagesDashboardOrdersList = (props) => {
 
   return (
     <>
-      <WrapperOrderlist
-        style={{ display: `${(messageDashboardView && (openOrclosedOrderView === 'all' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
-      >
-        <OrdersListController
-          messageListView
-          {...OrdersCommonControlProps}
-          {...allOrdersControlProps}
-        />
-      </WrapperOrderlist>
-      <WrapperOrderlist
-        style={{ display: `${(messageDashboardView && (openOrclosedOrderView === 'open' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
-      >
-        <OrdersListController
-          messageListView
-          {...OrdersCommonControlProps}
-          {...openOrdersControlProps}
-        />
-      </WrapperOrderlist>
-      <WrapperOrderlist
-        style={{ display: `${(messageDashboardView && (openOrclosedOrderView === 'close' || (searchValue !== '' && searchValue !== null))) ? 'block' : 'none'}` }}
-      >
-        <OrdersListController
-          messageListView
-          {...OrdersCommonControlProps}
-          {...closedOrdersControlProps}
-        />
-      </WrapperOrderlist>
+      {openOrclosedOrderView === 'all' && (
+        <WrapperOrderlist>
+          <OrdersListController
+            messageListView
+            {...OrdersCommonControlProps}
+            {...allOrdersControlProps}
+          />
+        </WrapperOrderlist>
+      )}
+      {openOrclosedOrderView === 'open' && (
+        <WrapperOrderlist>
+          <OrdersListController
+            messageListView
+            {...OrdersCommonControlProps}
+            {...openOrdersControlProps}
+          />
+        </WrapperOrderlist>
+      )}
+      {openOrclosedOrderView === 'close' && (
+        <WrapperOrderlist>
+          <OrdersListController
+            messageListView
+            {...OrdersCommonControlProps}
+            {...closedOrdersControlProps}
+          />
+        </WrapperOrderlist>
+      )}
     </>
   )
 }
