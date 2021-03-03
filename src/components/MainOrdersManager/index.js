@@ -27,7 +27,6 @@ const MainOrdersManagerUI = (props) => {
     searchValue,
     driverGroupList,
     driversList,
-    driverOrders,
     paymethodsList,
     businessesList,
     ordersStatusGroup,
@@ -41,7 +40,6 @@ const MainOrdersManagerUI = (props) => {
     handleChangeMultiOrdersStatus,
     handleDeleteMultiOrders,
     handleSelectedOrderIds,
-    handleChangeDriverOrdersModal,
     selectedOrderIds
   } = props
 
@@ -258,8 +256,6 @@ const MainOrdersManagerUI = (props) => {
                   driversList={driversList}
                   deletedOrderId={deletedOrderId}
                   ordersStatusGroup={ordersStatusGroup}
-                  driverOrders={driverOrders}
-                  handleChangeDriverOrdersModal={handleChangeDriverOrdersModal}
                   handleSelectedOrderIds={handleSelectedOrderIds}
                   activeSwitch={activeSwitch}
                   handleOpenOrderDetail={handleOpenOrderDetail}

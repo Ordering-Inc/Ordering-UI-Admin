@@ -25,8 +25,6 @@ export const DeliveryDashboard = (props) => {
     driversList,
     deletedOrderId,
     ordersStatusGroup,
-    driverOrders,
-    handleChangeDriverOrdersModal,
     handleSelectedOrderIds,
     activeSwitch,
     handleOpenOrderDetail
@@ -122,9 +120,7 @@ export const DeliveryDashboard = (props) => {
           {openTab.driver && (
             <DriversModal
               driversList={driversList}
-              driverOrders={driverOrders}
               handleChangeDriverAvailable={handleChangeDriverAvailable}
-              handleChangeDriverOrders={handleChangeDriverOrdersModal}
               handleSelectedOrderIds={handleSelectedOrderIds}
               handleOpenOrderDetail={handleOpenOrderDetail}
             />

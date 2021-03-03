@@ -22,8 +22,6 @@ export const DriverCard = (props) => {
     offline,
     driver,
     driversList,
-    driverOrders,
-    handleChangeDriverOrders,
     handleSelectedOrderIds,
     handleOpenOrderDetail
   } = props
@@ -36,7 +34,6 @@ export const DriverCard = (props) => {
   const handleOpenDriverOrders = () => {
     if (!offline) {
       setOrdersAndDriverModalOpen(true)
-      handleChangeDriverOrders(driver.id)
     }
   }
 
@@ -91,7 +88,6 @@ export const DriverCard = (props) => {
       >
         <DriverOrders
           driver={driver}
-          driverOrders={driverOrders}
           driversList={driversList}
           handleSelectedOrderIds={handleSelectedOrderIds}
           handleOpenOrderDetail={handleOpenOrderDetail}

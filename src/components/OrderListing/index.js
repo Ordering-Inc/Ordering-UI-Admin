@@ -36,7 +36,6 @@ export const OrderListing = (props) => {
     handleOpenOrderDetail,
     handleNotification,
     handleResetNotification,
-    driverOrdersLoading,
     driverOrdersView,
     activeSwitch,
     isCheckedQuickShow,
@@ -88,7 +87,12 @@ export const OrderListing = (props) => {
 
   useEffect(() => {
     if (orderList.loading) return
-    const _totalPages = Math.ceil(pagination?.total / ordersPerPage)
+    let _totalPages
+    if (pagination?.total) {
+      _totalPages = Math.ceil(pagination?.total / ordersPerPage)
+    } else if (orderList.orders.length > 0) {
+      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
+    }
     const _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
     setTotalOrders(pagination?.total)
     setTotalPages(_totalPages)
@@ -136,7 +140,7 @@ export const OrderListing = (props) => {
           {orderStatusTitle}
         </OrderStatusTitle>
       )}
-      {!(orderList.loading || driversList.loading || driverOrdersLoading) && orderList.orders.length === 0 ? (
+      {!(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? (
         <>
           <WrapperNoneOrders
             small={orderListView === 'small'}
@@ -157,7 +161,7 @@ export const OrderListing = (props) => {
             small={orderListView === 'small'}
           >
             {orderListView === 'big' &&
-              !(orderList.loading || driversList.loading || driverOrdersLoading) ? (
+              !(orderList.loading || driversList.loading) ? (
                 <>
                   {currentOrders.map(order => (
                     <React.Fragment key={order.id}>
@@ -237,7 +241,7 @@ export const OrderListing = (props) => {
 
             {orderListView === 'small' && (
               <>
-                {!(orderList.loading || driversList.loading || driverOrdersLoading) ? currentOrders.map(order => (
+                {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                   <React.Fragment key={order.id}>
                     <SmallOrderItemAccordion
                       order={order}
@@ -290,7 +294,7 @@ export const OrderListing = (props) => {
 
             {pagination && (
               <>
-                {!(orderList.loading || driverOrdersLoading) && totalPages > 0 && (
+                {!orderList.loading && totalPages > 0 && (
                   <OrdersPagination
                     ordersPerPage={ordersPerPage}
                     totalOrders={totalOrders}

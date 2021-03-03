@@ -18,9 +18,7 @@ import { Button } from '../../styles/Buttons'
 export const DriversModal = (props) => {
   const {
     driversList,
-    driverOrders,
     handleChangeDriverAvailable,
-    handleChangeDriverOrders,
     handleSelectedOrderIds,
     handleOpenOrderDetail
   } = props
@@ -59,8 +57,6 @@ export const DriversModal = (props) => {
                   <DriverCard
                     driver={driver}
                     driversList={driversList}
-                    driverOrders={driverOrders}
-                    handleChangeDriverOrders={handleChangeDriverOrders}
                     handleSelectedOrderIds={handleSelectedOrderIds}
                     handleOpenOrderDetail={handleOpenOrderDetail}
                   />
@@ -70,8 +66,6 @@ export const DriversModal = (props) => {
                       offline
                       driver={driver}
                       driversList={driversList}
-                      driverOrders={driverOrders}
-                      handleChangeDriverOrders={handleChangeDriverOrders}
                       handleSelectedOrderIds={handleSelectedOrderIds}
                       handleOpenOrderDetail={handleOpenOrderDetail}
                     />

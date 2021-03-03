@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, OrderList as OrdersListController } from 'ordering-components'
+import { useLanguage, DashboardOrdersList as OrdersListController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderListing } from '../OrderListing'
 
@@ -16,7 +16,6 @@ export const DriverOrders = (props) => {
   const {
     driver,
     driversList,
-    driverOrders,
     handleSelectedOrderIds,
     handleOpenOrderDetail
   } = props
@@ -26,9 +25,14 @@ export const DriverOrders = (props) => {
   const OrdersControlProps = {
     ...props,
     UIComponent: OrderListing,
+    orderBy: 'id',
+    orderDirection: 'desc',
     useDefualtSessionManager: true,
     asDashboard: true,
-    // searchValue: searchValue,
+    orderStatus: [0, 3, 4, 7, 8, 9],
+    initialPageSize: 50,
+    loadMorePageSize: 10,
+    driverId: driver.id,
     filterValues: {},
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,
@@ -36,9 +40,6 @@ export const DriverOrders = (props) => {
     handleSelectedOrderIds: handleSelectedOrderIds,
     driversList: driversList,
     orderListView: 'big',
-    orders: driverOrders.orders,
-    driverOrdersLoading: driverOrders.loading,
-    orderStatus: [],
     handleOpenOrderDetail: handleOpenOrderDetail,
     driverOrdersView: true
   }
