@@ -480,12 +480,16 @@ export const MessagesUI = (props) => {
                 )}
                 {history && (
                   <>
-                    <WrapperLogistics style={{ display: `${tabActive.logistics ? 'block' : 'none'}` }}>
-                      <Logistics orderId={order.id} />
-                    </WrapperLogistics>
-                    <WrapperLogisticInformation style={{ display: `${tabActive.logistic_information ? 'block' : 'none'}` }}>
-                      <LogisticInformation orderId={order.id} />
-                    </WrapperLogisticInformation>
+                    {tabActive.logistics && (
+                      <WrapperLogistics>
+                        <Logistics orderId={order.id} />
+                      </WrapperLogistics>
+                    )}
+                    {tabActive.logistic_information && (
+                      <WrapperLogisticInformation>
+                        <LogisticInformation orderId={order.id} />
+                      </WrapperLogisticInformation>
+                    )}
                   </>
                 )}
                 {filteredMessages.length > 0 && filteredMessages.map((message) => (

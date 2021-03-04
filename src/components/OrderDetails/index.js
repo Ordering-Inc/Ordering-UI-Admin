@@ -452,7 +452,7 @@ const OrderDetailsUI = (props) => {
                           )}
                         </CustomerContactBlock>
                         <PhoneNumber>
-                          <HiOutlinePhone /> {order.driver.cellphone}
+                          <HiOutlinePhone /> {order?.driver?.cellphone}
                         </PhoneNumber>
                       </InfoBlock>
                     ) : (
