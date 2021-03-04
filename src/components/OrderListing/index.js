@@ -32,10 +32,7 @@ export const OrderListing = (props) => {
     pagination,
     preOrder,
     pendingOrder,
-    registerOrderId,
     handleOpenOrderDetail,
-    handleNotification,
-    driverOrdersView,
     activeSwitch,
     isCheckedQuickShow,
     handleOpenMessage,
@@ -114,12 +111,6 @@ export const OrderListing = (props) => {
       setActive === 'active' ? 'collapse_icon' : 'collapse_icon rotate'
     )
   }
-
-  useEffect(() => {
-    if (driverOrdersView || messageListView) return
-    if (registerOrderId === null || !registerOrderId) return
-    handleNotification && handleNotification(registerOrderId)
-  }, [registerOrderId, messageListView])
 
   useEffect(() => {
     if (orderList.loading || !messageListView) return

@@ -306,19 +306,19 @@ const OrderDetailsUI = (props) => {
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
                     <td>{parsePrice(order?.summary?.subtotal)}</td>
                   </tr>
-                  {order?.discount > 0 && (
+                  {order?.summary?.discount > 0 && (
                     <tr>
                       <td>{t('DISCOUNT', 'Discount')}</td>
                       <td>-{parsePrice(order?.summary?.discount)}</td>
                     </tr>
                   )}
-                  {order?.service_fee > 0 && (
+                  {order?.summary?.tax > 0 && (
                     <tr>
                       <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
                       <td>{parsePrice(order?.summary?.tax)}</td>
                     </tr>
                   )}
-                  {(order?.deliveryFee > 0) && (
+                  {(order?.summary?.delivery_price > 0) && (
                     <tr>
                       <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                       <td>{parsePrice(order?.summary?.delivery_price)}</td>
@@ -328,7 +328,7 @@ const OrderDetailsUI = (props) => {
                     <td>{t('DRIVER_TIP', 'Driver tip')}</td>
                     <td>{parsePrice(order?.summary?.driver_tip)}</td>
                   </tr>
-                  {order?.service_fee > 0 && (
+                  {order?.summary?.service_fee > 0 && (
                     <tr>
                       <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
                       <td>{parsePrice(order?.summary?.service_fee)}</td>

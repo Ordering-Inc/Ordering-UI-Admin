@@ -49,11 +49,18 @@ export const DeliveryDashboardOrdersList = (props) => {
     handleOpenOrderDetail: handleOpenOrderDetail
   }
 
+  // pending section
   const PendingOrdersControlProps = {
     orderStatus: [0],
     orderStatusTitle: t('PENDING', 'Pendig')
   }
 
+  const PreOrdersControlProps = {
+    orderStatus: [13],
+    orderStatusTitle: t('PREORDER', 'Preorder')
+  }
+
+  // in progress section
   const AcceptedByBusinessOrdersControlProps = {
     orderStatus: [7],
     orderStatusTitle: t('ACCEPTED_BY_BUSINESS', 'Accepted by Business')
@@ -79,6 +86,32 @@ export const DeliveryDashboardOrdersList = (props) => {
     orderStatusTitle: t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by business')
   }
 
+  const OrderNotReadyOrdersControlprops = {
+    orderStatus: [14],
+    orderStatusTitle: t('ORDER_NOT_READY', 'Order not ready')
+  }
+
+  const DriverAlmostArrivedToBusinessOrdersControlProps = {
+    orderStatus: [18],
+    orderStatusTitle: t('DRIVER_ALMOST_ARRIVED_TO_BUSINESS', 'Driver almost arrived to business')
+  }
+
+  const DriverAlmostArrivedToCustomerOrdersProps = {
+    orderStatus: [19],
+    orderStatusTitle: t('DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', 'Driver almost arrived to customer')
+  }
+
+  const CustomerAlmostArrivedToBusinessOrdersProps = {
+    orderStatus: [20],
+    orderStatusTitle: t('CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', 'Customer almost arrived to business')
+  }
+
+  const CustomerArrivedToBusinessOrdersProps = {
+    orderStatus: [21],
+    orderStatusTitle: t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business')
+  }
+
+  // completed section
   const CompletedByAdminOrdersControlProps = {
     orderStatus: [1],
     orderStatusTitle: t('COMPLETED_BY_ADMIN', 'Completed by admin')
@@ -89,6 +122,12 @@ export const DeliveryDashboardOrdersList = (props) => {
     orderStatusTitle: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver')
   }
 
+  const PickupCompletedByCustomerOrdersControlProps = {
+    orderStatus: [15],
+    orderStatusTitle: t('PICKUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')
+  }
+
+  // cancelled section
   const RejectByAdminOrdersControlProps = {
     orderStatus: [2],
     orderStatusTitle: t('REJECTED_BY_ADMIN', 'Rejected by admin')
@@ -112,6 +151,16 @@ export const DeliveryDashboardOrdersList = (props) => {
   const DeliveryFailedByDriverOrdersControlProps = {
     orderStatus: [12],
     orderStatusTitle: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
+  }
+
+  const CancelledByCustomerOrdersControlProps = {
+    orderStatus: [16],
+    orderStatusTitle: t('CANCELLED_BY_CUSTOMER', 'Cancelled by customer')
+  }
+
+  const NotPickedByCustomerOrdersControlProps = {
+    orderStatus: [17],
+    orderStatusTitle: t('NOT_PICKED_BY_CUSTOMER', 'Not picked by customer')
   }
 
   const [inProgressOrdersLoaded, setInProgressOrdersLoaded] = useState(false)
@@ -141,6 +190,11 @@ export const DeliveryDashboardOrdersList = (props) => {
           {...OrdersCommonControlProps}
           {...PendingOrdersControlProps}
         />
+        <OrdersListController
+          size='small'
+          {...OrdersCommonControlProps}
+          {...PreOrdersControlProps}
+        />
       </WrapperOrderlist>
 
       {(inProgressOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
@@ -167,6 +221,26 @@ export const DeliveryDashboardOrdersList = (props) => {
             {...OrdersCommonControlProps}
             {...PickupCompletedByDriverOrdersControlProps}
           />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...OrderNotReadyOrdersControlprops}
+          />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...DriverAlmostArrivedToBusinessOrdersControlProps}
+          />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...DriverAlmostArrivedToCustomerOrdersProps}
+          />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...CustomerAlmostArrivedToBusinessOrdersProps}
+          />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...CustomerArrivedToBusinessOrdersProps}
+          />
         </WrapperOrderlist>
       )}
 
@@ -181,6 +255,10 @@ export const DeliveryDashboardOrdersList = (props) => {
           <OrdersListController
             {...OrdersCommonControlProps}
             {...DeliveryCompletedByDriverOrdersControlProps}
+          />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...PickupCompletedByCustomerOrdersControlProps}
           />
         </WrapperOrderlist>
       )}
@@ -208,6 +286,14 @@ export const DeliveryDashboardOrdersList = (props) => {
           <OrdersListController
             {...OrdersCommonControlProps}
             {...DeliveryFailedByDriverOrdersControlProps}
+          />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...CancelledByCustomerOrdersControlProps}
+          />
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...NotPickedByCustomerOrdersControlProps}
           />
         </WrapperOrderlist>
       )}

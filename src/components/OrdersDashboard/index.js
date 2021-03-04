@@ -16,7 +16,6 @@ export const OrdersDashboard = (props) => {
     handleSelectedOrderIds,
     handleChangeMultiOrdersStatus,
     handleDeleteMultiOrders,
-    handleNotification,
     handleOpenOrderDetail,
     activeSwitch
   } = props
@@ -38,7 +37,6 @@ export const OrdersDashboard = (props) => {
         ordersStatusGroup={ordersStatusGroup}
         handleSelectedOrderIds={handleSelectedOrderIds}
         activeSwitch={activeSwitch}
-        handleNotification={handleNotification}
         handleOpenOrderDetail={handleOpenOrderDetail}
       />
     </OrdersManageContainer>

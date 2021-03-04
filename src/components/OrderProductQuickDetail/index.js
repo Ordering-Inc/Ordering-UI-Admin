@@ -196,7 +196,7 @@ const OrderProductsQuickDetailUI = (props) => {
                     {parsePrice(order?.summary?.subtotal)}
                   </td>
                 </tr>
-                {order?.discount > 0 && (
+                {order?.summary?.discount && (
                   <tr className='subFee'>
                     <td />
                     <td />
@@ -205,7 +205,7 @@ const OrderProductsQuickDetailUI = (props) => {
                     <td>-{parsePrice(order?.summary?.discount)}</td>
                   </tr>
                 )}
-                {order?.service_fee > 0 && (
+                {order?.summary?.tax > 0 && (
                   <tr className='subFee'>
                     <td />
                     <td />
@@ -223,7 +223,7 @@ const OrderProductsQuickDetailUI = (props) => {
                   <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                   <td>{parsePrice(order?.summary?.delivery_price)}</td>
                 </tr>
-                {order?.driver_tip > 0 && (
+                {order?.summary?.driver_tip > 0 && (
                   <tr className='subFee'>
                     <td />
                     <td />
@@ -232,7 +232,7 @@ const OrderProductsQuickDetailUI = (props) => {
                     <td>{parsePrice(order?.summary?.driver_tip)}</td>
                   </tr>
                 )}
-                {order?.service_fee > 0 && (
+                {order?.summary?.service_fee > 0 && (
                   <tr className='subFee'>
                     <td />
                     <td />

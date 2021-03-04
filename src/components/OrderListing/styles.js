@@ -20,7 +20,6 @@ export const InnerNoneOrdersContainer = styled.div`
 `
 export const OrderStatusTitle = styled.p`
     display: flex;
-    align-items: center;
     font-size: 20px;
     color: ${({ theme }) => theme?.colors?.textBlackContrast || '#000'};
     margin-top: 10px;

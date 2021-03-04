@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { OrdersManage as OrdersManageController, useLanguage, useConfig } from 'ordering-components'
+import { OrdersManage as OrdersManageController, useLanguage, useConfig, useEvent } from 'ordering-components'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../OrderDetails'
@@ -44,7 +44,8 @@ const MainOrdersManagerUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [state] = useConfig()
+  const [configState] = useConfig()
+  const [events] = useEvent()
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [deliveryDashboardLoaded, setDeliveryDashboardLoaded] = useState(false)
@@ -73,13 +74,10 @@ const MainOrdersManagerUI = (props) => {
     if (!_registerOrderIds.includes(orderId)) {
       _registerOrderIds.push(orderId)
       setRegisterOrderIds(_registerOrderIds)
-      if (!state.loading) {
-        if (state.configs.notification_toast.value === 'true') {
-          toastNotify(orderId)
-          setRegisterOrderIds([])
-        } else {
-          setNotificationModalOpen(true)
-        }
+      if (configState?.configs?.notification_toast?.value === 'true') {
+        toastNotify(orderId)
+      } else {
+        setNotificationModalOpen(true)
       }
     }
   }
@@ -118,6 +116,7 @@ const MainOrdersManagerUI = (props) => {
     const sound = document.getElementById('notification-sound')
     sound.muted = false
     sound.play()
+    setRegisterOrderIds([])
   }
 
   const closeOrderDetailModal = (e) => {
@@ -201,6 +200,14 @@ const MainOrdersManagerUI = (props) => {
     }
   }, [activeSwitch])
 
+  useEffect(() => {
+    if (configState.loading) return
+    events.on('order_added', handleNotification)
+    return () => {
+      events.off('order_added', handleNotification)
+    }
+  }, [configState])
+
   return (
     <>
       <OrdersListContainer
@@ -241,7 +248,6 @@ const MainOrdersManagerUI = (props) => {
                 handleSelectedOrderIds={handleSelectedOrderIds}
                 handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
                 handleDeleteMultiOrders={handleDeleteMultiOrders}
-                handleNotification={handleNotification}
                 handleOpenOrderDetail={handleOpenOrderDetail}
                 activeSwitch={activeSwitch}
               />
