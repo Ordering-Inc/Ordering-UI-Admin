@@ -51,8 +51,8 @@ const LoginFormUI = (props) => {
 
   const [configFile, setConfigFile] = useContext(ConfigFileContext)
 
-  const onSubmit = async () => {
-    const _configFile = { ...configFile }
+  const onSubmit = () => {
+    const _configFile = configFile
     _configFile.project = projectName
     setConfigFile(_configFile)
     localStorage.setItem('project', projectName)
