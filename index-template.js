@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { Router } from './template/router'
-import { OrderingProvider } from 'ordering-components'
+import { OrderingProvider } from 'ordering-components-admin'
 import { Alert } from './src/components/Confirm'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'

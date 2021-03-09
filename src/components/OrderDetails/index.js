@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
+import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'

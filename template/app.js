@@ -5,7 +5,7 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import { useSession, useOrder, useLanguage } from 'ordering-components'
+import { useSession, useOrder, useLanguage } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 

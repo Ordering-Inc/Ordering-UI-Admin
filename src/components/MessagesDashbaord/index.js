@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components-admin'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import FaRegTimesCircle from '@meronex/icons/fa/FaRegTimesCircle'
 import { OpenAndCloseOrderSelector } from '../OpenAndCloseOrderSelector'

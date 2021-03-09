@@ -6,7 +6,7 @@ import {
   useLanguage,
   useApi
   // useSession
-} from 'ordering-components'
+} from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
 import MdExitToApp from '@meronex/icons/md/MdExitToApp'

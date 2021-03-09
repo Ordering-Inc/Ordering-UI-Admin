@@ -7,7 +7,7 @@ import {
   ForgotPasswordForm as ForgotPasswordController,
   useLanguage,
   useApi
-} from 'ordering-components'
+} from 'ordering-components-admin'
 import {
   ForgotPasswordContainer,
   FormSide,

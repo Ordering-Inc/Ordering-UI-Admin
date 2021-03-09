@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useEvent } from 'ordering-components'
+import { useEvent } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 // import { useWindowSize } from '../../hooks/useWindowSize'
 // import IosMenu from '@meronex/icons/ios/IosMenu'

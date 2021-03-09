@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MetaFields as MetaFieldsController, useLanguage } from 'ordering-components'
+import { MetaFields as MetaFieldsController, useLanguage } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../SpinnerLoader'
 import FaTrash from '@meronex/icons/fa/FaTrash'

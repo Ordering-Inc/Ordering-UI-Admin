@@ -1,5 +1,5 @@
 import React from 'react'
-import { Logistics as LogisticsController, useUtils } from 'ordering-components'
+import { Logistics as LogisticsController, useUtils } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import {
   WraaperLogs,

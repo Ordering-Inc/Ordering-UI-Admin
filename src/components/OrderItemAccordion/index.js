@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { getAgoMinutes } from '../../utils'
 
 import { useHistory } from 'react-router-dom'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'

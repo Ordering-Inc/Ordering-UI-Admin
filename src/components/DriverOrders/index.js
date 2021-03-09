@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, DashboardOrdersList as OrdersListController } from 'ordering-components'
+import { useLanguage, DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { OrderListing } from '../OrderListing'
 

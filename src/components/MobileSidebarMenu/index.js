@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import IosMenu from '@meronex/icons/ios/IosMenu'
 import MdClose from '@meronex/icons/md/MdClose'
-import { useEvent, useLanguage } from 'ordering-components'
+import { useEvent, useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { useWindowSize } from '../../hooks/useWindowSize'
 

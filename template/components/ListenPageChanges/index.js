@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useEvent, useLanguage } from 'ordering-components'
+import { useEvent, useLanguage } from 'ordering-components-admin'
 import { useTheme } from '../../../src/contexts/ThemeContext'
 
 export const ListenPageChanges = ({ children }) => {
