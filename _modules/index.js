@@ -63,6 +63,12 @@ Object.defineProperty(exports, "FilterGroupList", {
     return _FilterGroupList.FilterGroupList;
   }
 });
+Object.defineProperty(exports, "ForgotPasswordForm", {
+  enumerable: true,
+  get: function get() {
+    return _ForgotPasswordForm.ForgotPasswordForm;
+  }
+});
 Object.defineProperty(exports, "GroupTypeSelector", {
   enumerable: true,
   get: function get() {
@@ -321,6 +327,8 @@ var _DriverSelector = require("./components/DriverSelector");
 var _Dropdown = require("./components/Dropdown");
 
 var _FilterGroupList = require("./components/FilterGroupList");
+
+var _ForgotPasswordForm = require("./components/ForgotPasswordForm");
 
 var _GroupTypeSelector = require("./components/GroupTypeSelector");
 
