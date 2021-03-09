@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { ConfigFileContext } from '../../contexts/ConfigFileContext'
 import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
-  useLanguage
+  useLanguage,
+  useApi
+  // useSession
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
+import MdExitToApp from '@meronex/icons/md/MdExitToApp'
 import {
   LoginContainer,
   LoginHeroContainer,
@@ -27,7 +31,7 @@ const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
     useLoginByCellphone,
-    hanldeChangeInput,
+    handleChangeInput,
     hanldeChangeTab,
     handleButtonLoginClick,
     elementLinkToSignup,
@@ -37,13 +41,33 @@ const LoginFormUI = (props) => {
     isPopup
   } = props
   const [, t] = useLanguage()
+  const [ordering] = useApi()
+  // const [{ auth, user }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [submitted, setSubmitted] = useState(false)
+  const [projectName, setProjectName] = useState(null)
   const theme = useTheme()
 
+  const [configFile, setConfigFile] = useContext(ConfigFileContext)
+
   const onSubmit = async () => {
-    handleButtonLoginClick()
+    const _configFile = { ...configFile }
+    _configFile.project = projectName
+    setConfigFile(_configFile)
+    localStorage.setItem('project', projectName)
+    setSubmitted(true)
   }
+
+  const hanldeChangeProject = (e) => {
+    setSubmitted(false)
+    setProjectName(e.target.value)
+  }
+
+  useEffect(() => {
+    if (ordering.project === '' || !submitted) return
+    handleButtonLoginClick()
+  }, [ordering, submitted])
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
@@ -69,6 +93,16 @@ const LoginFormUI = (props) => {
       content: []
     })
   }
+
+  // useEffect(() => {
+  //   if (!auth || formState.loading) return
+  //   if (user?.level !== 0) {
+  //     setAlertState({
+  //       open: true,
+  //       content: t('YOU_DONT_PERMISSION', 'You don\'t have permission')
+  //     })
+  //   }
+  // }, [auth, formState.loading])
 
   return (
     <LoginContainer isPopup={isPopup}>
@@ -116,6 +150,24 @@ const LoginFormUI = (props) => {
             isPopup={isPopup}
             onSubmit={handleSubmit(onSubmit)}
           >
+            <InputWithIcon>
+              <Input
+                type='text'
+                name='project'
+                aria-label='project'
+                placeholder={t('PROJECT', 'Project')}
+                ref={register({
+                  required: t(
+                    'VALIDATION_ERROR_REQUIRED',
+                    'Project is required'
+                  ).replace('_attribute_', t('PROJECT', 'Project'))
+                })}
+                onChange={(e) => hanldeChangeProject(e)}
+                autoComplete='off'
+              />
+              <MdExitToApp />
+            </InputWithIcon>
+
             {useLoginByEmail && loginTab === 'email' && (
               <InputWithIcon>
                 <Input
@@ -136,7 +188,8 @@ const LoginFormUI = (props) => {
                       ).replace('_attribute_', t('EMAIL', 'Email'))
                     }
                   })}
-                  onChange={(e) => hanldeChangeInput(e)}
+                  onChange={(e) => handleChangeInput(e)}
+                  autoComplete='off'
                 />
                 <img src={theme?.images?.icons?.email} alt='email' />
               </InputWithIcon>
@@ -153,7 +206,8 @@ const LoginFormUI = (props) => {
                     'Cellphone is required'
                   ).replace('_attribute_', t('CELLPHONE', 'Cellphone'))
                 })}
-                onChange={(e) => hanldeChangeInput(e)}
+                onChange={(e) => handleChangeInput(e)}
+                autoComplete='off'
               />
             )}
 
@@ -178,7 +232,8 @@ const LoginFormUI = (props) => {
                       .replace('_min_', 8)
                   }
                 })}
-                onChange={(e) => hanldeChangeInput(e)}
+                onChange={(e) => handleChangeInput(e)}
+                autoComplete='off'
               />
               <img src={theme?.images?.icons?.lock} alt='lock' />
             </InputWithIcon>
@@ -200,7 +255,6 @@ const LoginFormUI = (props) => {
             {elementLinkToSignup}
           </RedirectLink>
         )}
-
       </FormSide>
       <Alert
         title={t('LOGIN')}

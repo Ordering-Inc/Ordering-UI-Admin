@@ -16,7 +16,8 @@ import {
   SkeletonBlock,
   WrapperOrderListContent,
   InnerOrderListContent,
-  InnerNoneOrdersContainer
+  InnerNoneOrdersContainer,
+  WrapSkeltonCell
 } from './styles'
 
 export const OrderListing = (props) => {
@@ -31,18 +32,18 @@ export const OrderListing = (props) => {
     pagination,
     preOrder,
     pendingOrder,
-    registerOrderId,
     handleOpenOrderDetail,
-    handleNotification,
-    handleResetNotification,
-    driverOrdersLoading,
-    size,
-    driverOrdersView,
     activeSwitch,
+    isCheckedQuickShow,
     handleOpenMessage,
+    handleLocation,
+    handleUpdateDriverLocation,
     messageOrder,
+    interActionMapOrder,
     messageListView,
-    messageType
+    messageType,
+    size,
+    loadMoreOrders
   } = props
 
   const theme = useTheme()
@@ -63,6 +64,7 @@ export const OrderListing = (props) => {
   const indexOfFirstPost = indexOfLastPost - ordersPerPage
   const [currentOrders, setCurrentOrders] = useState([])
   const [totalPages, setTotalPages] = useState(null)
+  const [totalOrders, setTotalOrders] = useState(null)
 
   // Change page
   const prevPaginate = () => {
@@ -72,25 +74,26 @@ export const OrderListing = (props) => {
   }
   const nextPaginate = () => {
     if (currentPage !== totalPages) {
+      if (orderList.orders.length < ordersPerPage * currentPage + 1) {
+        loadMoreOrders()
+      }
       setCurrentPage(currentPage + 1)
     }
   }
 
   useEffect(() => {
-    const _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
-    setTotalPages(_totalPages)
-  }, [orderList])
-
-  useEffect(() => {
-    if (orderList.loading) {
-      setCurrentPage(1)
+    if (orderList.loading) return
+    let _totalPages
+    if (pagination?.total) {
+      _totalPages = Math.ceil(pagination?.total / ordersPerPage)
+    } else if (orderList.orders.length > 0) {
+      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
     }
-  }, [orderList])
-
-  useEffect(() => {
     const _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
+    setTotalOrders(pagination?.total)
+    setTotalPages(_totalPages)
     setCurrentOrders(_currentOrders)
-  }, [orderList, currentPage])
+  }, [orderList, currentPage, activeSwitch, isCheckedQuickShow, pagination])
 
   const toggleOrderList = () => {
     setActiveState(setActive === '' ? 'active' : '')
@@ -110,17 +113,10 @@ export const OrderListing = (props) => {
   }
 
   useEffect(() => {
-    if (driverOrdersView) return
-    if (registerOrderId === null || !registerOrderId) return
-    handleNotification(registerOrderId)
-    handleResetNotification()
-  }, [registerOrderId])
-
-  useEffect(() => {
     if (orderList.loading || !messageListView) return
-    if (orderList.orders.length === 0) return
-    handleOpenMessage(orderList.orders[0], messageType)
-  }, [orderList.loading, activeSwitch])
+    if (orderList.orders.length === 0 || messageOrder) return
+    handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType)
+  }, [orderList.loading, activeSwitch, messageListView])
 
   return (
     <>
@@ -133,7 +129,7 @@ export const OrderListing = (props) => {
           {orderStatusTitle}
         </OrderStatusTitle>
       )}
-      {!(orderList.loading || driversList.loading || driverOrdersLoading) && orderList.orders.length === 0 ? (
+      {!(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? (
         <>
           <WrapperNoneOrders
             small={orderListView === 'small'}
@@ -154,14 +150,14 @@ export const OrderListing = (props) => {
             small={orderListView === 'small'}
           >
             {orderListView === 'big' &&
-              !(orderList.loading || driversList.loading || driverOrdersLoading) ? (
+              !(orderList.loading || driversList.loading) ? (
                 <>
                   {currentOrders.map(order => (
                     <React.Fragment key={order.id}>
                       {orderListView === 'big' && (
                         <OrderItemAccordion
-                          size={size}
                           order={order}
+                          size={size}
                           drivers={driversList.drivers}
                           pendingOrder={pendingOrder}
                           preOrder={preOrder}
@@ -185,26 +181,39 @@ export const OrderListing = (props) => {
                           <Skeleton width={100} />
                         </SkeletonText>
                       </SkeletonCell>
-                      <SkeletonCell>
-                        <Skeleton width={50} height={50} />
-                        <SkeletonText>
-                          <Skeleton width={80} />
-                          <Skeleton width={80} />
-                        </SkeletonText>
-                      </SkeletonCell>
-                      <SkeletonCell>
-                        <Skeleton width={50} height={50} />
-                        <SkeletonText>
-                          <Skeleton width={80} />
-                          <Skeleton width={80} />
-                        </SkeletonText>
-                      </SkeletonCell>
-                      <SkeletonCell>
-                        <Skeleton width={50} height={50} />
-                        <SkeletonText>
-                          <Skeleton width={80} />
-                        </SkeletonText>
-                      </SkeletonCell>
+                      <WrapSkeltonCell>
+                        <SkeletonCell>
+                          <Skeleton width={50} height={50} />
+                          <SkeletonText>
+                            <Skeleton width={80} />
+                            <Skeleton width={80} />
+                          </SkeletonText>
+                        </SkeletonCell>
+                        <Skeleton width={80} />
+                        <Skeleton width={80} />
+                      </WrapSkeltonCell>
+                      <WrapSkeltonCell>
+                        <SkeletonCell>
+                          <Skeleton width={50} height={50} />
+                          <SkeletonText>
+                            <Skeleton width={80} />
+                            <Skeleton width={80} />
+                          </SkeletonText>
+                        </SkeletonCell>
+                        <Skeleton width={80} />
+                        <Skeleton width={80} />
+                      </WrapSkeltonCell>
+                      <WrapSkeltonCell>
+                        <SkeletonCell>
+                          <Skeleton width={50} height={50} />
+                          <SkeletonText>
+                            <Skeleton width={80} />
+                            <Skeleton width={80} />
+                          </SkeletonText>
+                        </SkeletonCell>
+                        <Skeleton width={80} />
+                        <Skeleton width={80} />
+                      </WrapSkeltonCell>
                       <SkeletonCell>
                         <Skeleton width={40} height={40} />
                       </SkeletonCell>
@@ -221,11 +230,12 @@ export const OrderListing = (props) => {
 
             {orderListView === 'small' && (
               <>
-                {!(orderList.loading || driversList.loading || driverOrdersLoading) ? currentOrders.map(order => (
+                {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                   <React.Fragment key={order.id}>
                     <SmallOrderItemAccordion
                       order={order}
                       messageOrder={messageOrder}
+                      interActionMapOrder={interActionMapOrder}
                       activeSwitch={activeSwitch}
                       drivers={driversList.drivers}
                       pendingOrder={pendingOrder}
@@ -233,6 +243,8 @@ export const OrderListing = (props) => {
                       handleOpenMessage={handleOpenMessage}
                       handleUpdateOrderStatus={handleUpdateOrderStatus}
                       handleOpenOrderDetail={handleOpenOrderDetail}
+                      handleLocation={handleLocation}
+                      handleUpdateDriverLocation={handleUpdateDriverLocation}
                     />
                   </React.Fragment>
                 )
@@ -271,12 +283,14 @@ export const OrderListing = (props) => {
 
             {pagination && (
               <>
-                {!(orderList.loading || driverOrdersLoading) && totalPages > 0 && (
+                {!orderList.loading && totalPages > 0 && (
                   <OrdersPagination
                     ordersPerPage={ordersPerPage}
-                    totalOrders={orderList.orders.length}
+                    totalOrders={totalOrders}
+                    // totalOrders={pagination.total}
                     currentPage={currentPage}
                     totalPages={totalPages}
+                    // totalPages={pagination.total_pages}
                     prevPaginate={prevPaginate}
                     nextPaginate={nextPaginate}
                   />

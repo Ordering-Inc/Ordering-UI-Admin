@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 export const WrapperMapMarker = styled.div`
   width: 40px;
@@ -6,7 +7,6 @@ export const WrapperMapMarker = styled.div`
   border: 5px solid #F79B16;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 6px;
-  padding: 5px;
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -14,14 +14,6 @@ export const WrapperMapMarker = styled.div`
   ${({ offline }) => offline && css`
     border: 5px solid #9D9B9B;
   `}
-
-  svg {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    padding: 3px;
-    box-sizing: border-box;
-  }
 `
 const MapMarkerImgStyled = styled.div`
   display: flex;

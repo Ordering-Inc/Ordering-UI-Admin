@@ -17,6 +17,7 @@ export const OpenAndCloseOrderSelector = (props) => {
   const [, t] = useLanguage()
 
   const selectTypes = [
+    { value: 'all', content: <Option><BsInboxFill /> {t('ALL', 'All')}</Option> },
     { value: 'open', content: <Option><BsInboxFill /> {t('OPEN', 'Open')}</Option> },
     { value: 'close', content: <Option><GoCircleSlash /> {t('CLOSED', 'Closed')}</Option> }
   ]

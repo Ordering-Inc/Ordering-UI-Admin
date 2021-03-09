@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { Router } from './template/router'
 import { OrderingProvider } from 'ordering-components'
@@ -6,6 +6,7 @@ import { Alert } from './src/components/Confirm'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
+import { ConfigFileContext } from './src/contexts/ConfigFileContext'
 import theme from './template/theme.json'
 
 /**
@@ -68,17 +69,17 @@ import orderStatus10 from './template/assets/images/order/status-10.svg'
 import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
 
-const configFile = {
-  project: 'dragonteam1',
-  api: {
-    url: 'https://apiv4.ordering.co',
-    language: 'en',
-    version: 'v400'
-  },
-  socket: {
-    url: 'https://socket.ordering.co'
-  }
-}
+// const configFile = {
+//   project: 'dragonteam1',
+//   api: {
+//     url: 'https://apiv4.ordering.co',
+//     language: 'en',
+//     version: 'v400'
+//   },
+//   socket: {
+//     url: 'https://socket.ordering.co'
+//   }
+// }
 
 Sentry.init({
   environment: process.env.NODE_ENV,
@@ -157,11 +158,29 @@ theme.images = {
   }
 }
 
+const RouteApp = () => {
+  const [configFile, setConfigFile] = useState({
+    project: localStorage.getItem('project') !== null ? localStorage.getItem('project') : null,
+    api: {
+      url: 'https://apiv4.ordering.co',
+      language: 'en',
+      version: 'v400'
+    },
+    socket: {
+      url: 'https://socket.ordering.co'
+    }
+  })
+
+  return (
+    <ConfigFileContext.Provider value={[configFile, setConfigFile]}>
+      <ThemeProvider theme={theme}>
+        <OrderingProvider Alert={Alert} settings={configFile}>
+          <Router />
+        </OrderingProvider>
+      </ThemeProvider>
+    </ConfigFileContext.Provider>
+  )
+}
+
 const wrapper = document.getElementById('app')
-ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <OrderingProvider Alert={Alert} settings={configFile}>
-      <Router />
-    </OrderingProvider>
-  </ThemeProvider>
-  , wrapper)
+ReactDOM.render(<RouteApp />, wrapper)

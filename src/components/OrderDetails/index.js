@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -7,12 +7,17 @@ import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import GrClose from '@meronex/icons/gr/GrClose'
+import AiFillShop from '@meronex/icons/ai/AiFillShop'
+import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+import FaCarSide from '@meronex/icons/fa/FaCarSide'
+import EnDotsThreeVertical from '@meronex/icons/en/EnDotsThreeVertical'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DriverSelector } from '../DriverSelector'
 import { Messages } from '../Messages'
+import { MetaFields } from '../MetaFields'
 import { Modal } from '../Modal'
 import {
   Container,
@@ -77,6 +82,7 @@ const OrderDetailsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
+  const [openMetaFields, setOpenMetaFields] = useState(false)
   const theme = useTheme()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
@@ -86,9 +92,6 @@ const OrderDetailsUI = (props) => {
     order,
     loading
   } = props.order
-
-  const [orderTotalPrice, setOrderTotalPrice] = useState(0)
-  const [subTotalPrice, setSubTotalPrice] = useState(0)
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -142,106 +145,6 @@ const OrderDetailsUI = (props) => {
     orderDetail.current.style.display = 'flex'
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
   }
-
-  useEffect(() => {
-    if (loading) return
-    let _orderTotalPrice = order.subtotal
-    if (order?.service_fee > 0) {
-      _orderTotalPrice += order?.subtotal * order?.tax / 100 + order?.subtotal * order?.service_fee / 100
-    }
-    if (order?.deliveryFee > 0) {
-      _orderTotalPrice += order?.deliveryFee
-    }
-    if (order?.driver_tip > 0) {
-      _orderTotalPrice += order?.subtotal * order?.driver_tip / 100
-    }
-    if (order.discount > 0) {
-      _orderTotalPrice -= order.discount
-    }
-
-    setOrderTotalPrice(_orderTotalPrice)
-  }, [order])
-
-  const getTaxPrice = () => {
-    let taxPrice = 0
-    if (order.tax_type === 2) {
-      if (order.discount > 0) {
-        taxPrice = (subTotalPrice - order.discount) * order?.tax / 100
-      } else {
-        taxPrice = subTotalPrice * order?.tax / 100
-      }
-    }
-    if (order.tax_type === 1) {
-      taxPrice = order.tax
-    }
-    return parseFloat(taxPrice.toFixed(2))
-  }
-
-  const getServiceFee = () => {
-    let serviceFee = 0
-    if (loading) return 0
-    if (order.service_fee > 0) {
-      if (order.discount > 0) {
-        serviceFee = (subTotalPrice - order.discount) * order?.service_fee / 100
-      } else {
-        serviceFee = subTotalPrice * order?.service_fee / 100
-      }
-    }
-    return parseFloat(serviceFee.toFixed(2))
-  }
-
-  const getProductPrice = (product) => {
-    let subOptionPrice = 0
-    if (product.options.length > 0) {
-      for (const option of product.options) {
-        for (const suboption of option.suboptions) {
-          subOptionPrice += suboption.quantity * suboption.price
-        }
-      }
-    }
-
-    const price = product.quantity * (product.price + subOptionPrice)
-    return parseFloat(price.toFixed(2))
-  }
-
-  useEffect(() => {
-    if (loading) return
-    let _orderSubprice = 0
-    for (const product of order.products) {
-      _orderSubprice += getProductPrice(product)
-    }
-    if (order?.subtotal > 0) {
-      _orderSubprice = order.subtotal
-    }
-    _orderSubprice = parseFloat(_orderSubprice.toFixed(2))
-    setSubTotalPrice(_orderSubprice)
-  }, [order])
-
-  useEffect(() => {
-    if (loading) return
-    let _orderTotalPrice = subTotalPrice
-    if (order?.service_fee > 0) {
-      const taxPrice = getTaxPrice()
-      const serviceFee = getServiceFee()
-      _orderTotalPrice += taxPrice + serviceFee
-    }
-    if (order?.delivery_zone_price > 0) {
-      _orderTotalPrice += order.delivery_zone_price
-    }
-    if (order?.driver_tip > 0) {
-      _orderTotalPrice += subTotalPrice * order.driver_tip / 100
-    }
-
-    if (order.discount > 0) {
-      _orderTotalPrice -= order.discount
-    }
-    _orderTotalPrice = parseFloat(_orderTotalPrice.toFixed(2))
-    setOrderTotalPrice(_orderTotalPrice)
-  }, [subTotalPrice])
-
-  useEffect(() => {
-    console.log(messageType)
-  }, [messageType])
 
   return (
     <Container className='order-detail' messageDashboardView={messageDashboardView}>
@@ -365,6 +268,24 @@ const OrderDetailsUI = (props) => {
                       {t('PICKUP', 'Pickup')}
                     </>
                   )}
+                  {order?.delivery_type === 3 && (
+                    <>
+                      <AiFillShop />
+                      {t('EAT_IN', 'Eat in')}
+                    </>
+                  )}
+                  {order?.delivery_type === 4 && (
+                    <>
+                      <GiFoodTruck />
+                      {t('CURBSIDE', 'Curbside')}
+                    </>
+                  )}
+                  {order?.delivery_type === 5 && (
+                    <>
+                      <FaCarSide />
+                      {t('DRIVE_THRU', 'Drive thru')}
+                    </>
+                  )}
                 </OrderTypeContent>
               </OrderTypeInfo>
             </PayAndOrderTypeInfo>
@@ -383,34 +304,34 @@ const OrderDetailsUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{parsePrice(order?.subtotal)}</td>
+                    <td>{parsePrice(order?.summary?.subtotal)}</td>
                   </tr>
-                  {order?.discount > 0 && (
+                  {order?.summary?.discount > 0 && (
                     <tr>
                       <td>{t('DISCOUNT', 'Discount')}</td>
-                      <td>-{parsePrice(order?.discount)}</td>
+                      <td>-{parsePrice(order?.summary?.discount)}</td>
                     </tr>
                   )}
-                  {order?.service_fee > 0 && (
+                  {order?.summary?.tax > 0 && (
                     <tr>
                       <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-                      <td>{parsePrice(getTaxPrice())}</td>
+                      <td>{parsePrice(order?.summary?.tax)}</td>
                     </tr>
                   )}
-                  {(order?.deliveryFee > 0) && (
+                  {(order?.summary?.delivery_price > 0) && (
                     <tr>
                       <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                      <td>{parsePrice(order?.deliveryFee)}</td>
+                      <td>{parsePrice(order?.summary?.delivery_price)}</td>
                     </tr>
                   )}
                   <tr>
                     <td>{t('DRIVER_TIP', 'Driver tip')}</td>
-                    <td>{parsePrice(order?.driver_tip)}</td>
+                    <td>{parsePrice(order?.summary?.driver_tip)}</td>
                   </tr>
-                  {order?.service_fee > 0 && (
+                  {order?.summary?.service_fee > 0 && (
                     <tr>
                       <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-                      <td>{parsePrice(getServiceFee())}</td>
+                      <td>{parsePrice(order?.summary?.service_fee)}</td>
                     </tr>
                   )}
                 </tbody>
@@ -419,7 +340,7 @@ const OrderDetailsUI = (props) => {
                 <tbody>
                   <tr>
                     <td>{t('TOTAL', 'Total')}</td>
-                    <td>{parsePrice(orderTotalPrice)}</td>
+                    <td>{parsePrice(order?.summary?.total)}</td>
                   </tr>
                 </tbody>
               </table>
@@ -444,9 +365,9 @@ const OrderDetailsUI = (props) => {
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                 />
                 <WrapperButton>
-                  {/* <ButtonLink>
-                    <img src={theme?.images?.icons?.help} alt='help' />
-                  </ButtonLink> */}
+                  <ButtonLink onClick={() => setOpenMetaFields(true)}>
+                    <EnDotsThreeVertical />
+                  </ButtonLink>
                   <ButtonLink onClick={() => handleOpenMessages('history')}>
                     <img src={theme?.images?.icons?.timeline} alt='timeline' />
                   </ButtonLink>
@@ -531,7 +452,7 @@ const OrderDetailsUI = (props) => {
                           )}
                         </CustomerContactBlock>
                         <PhoneNumber>
-                          <HiOutlinePhone /> {order.driver.cellphone}
+                          <HiOutlinePhone /> {order?.driver?.cellphone}
                         </PhoneNumber>
                       </InfoBlock>
                     ) : (
@@ -642,6 +563,17 @@ const OrderDetailsUI = (props) => {
           order={order}
           history={openMessages.history}
           handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+        />
+      </Modal>
+
+      <Modal
+        width='70%'
+        height='70vh'
+        open={openMetaFields}
+        onClose={() => setOpenMetaFields(false)}
+      >
+        <MetaFields
+          orderId={order?.id}
         />
       </Modal>
     </Container>

@@ -36,6 +36,7 @@ import {
   TabItem,
   SkeletonHitory,
   WrapperLogistics,
+  WrapperLogisticInformation,
   HeaderInfo,
   SearchAndDetailControlContainer,
   MessagesSearch,
@@ -51,6 +52,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Alert } from '../Confirm'
 import { Logistics } from '../Logistics'
+import { LogisticInformation } from '../LogisticInformation'
 export const MessagesUI = (props) => {
   const {
     order,
@@ -81,7 +83,7 @@ export const MessagesUI = (props) => {
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
   const [messageLevel, setMessageLevel] = useState(null)
-  const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false })
+  const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [driverNoneCase, setDriverNoneCase] = useState(false)
@@ -284,9 +286,9 @@ export const MessagesUI = (props) => {
 
   useEffect(() => {
     if (messages.loading || (props.business || props.customer || props.driver || history)) return
-    const _messages = messages.messages.filter(_message => (_message.type !== 1 && _message.type !== 0 && _message.author.level !== 0))
+    const _messages = messages.messages.filter(_message => (_message.type !== 1 && _message.type !== 0 && _message?.author?.level !== 0))
     if (_messages.length > 0) {
-      const level = _messages[_messages.length - 1].author.level
+      const level = _messages[_messages.length - 1].author?.level
       if (level === 2) {
         setBusiness(true)
         setCustomer(false)
@@ -324,7 +326,10 @@ export const MessagesUI = (props) => {
           </BackActions>
         )}
         <HeaderProfile>
-          <WrapperHeader messageDashboardView={messageDashboardView}>
+          <WrapperHeader
+            messageDashboardView={messageDashboardView}
+            historyView={history}
+          >
             <HeaderInfo>
               {!history && (
                 <Image>
@@ -386,11 +391,14 @@ export const MessagesUI = (props) => {
               )}
               {history && (
                 <WrapperHitoryHeader>
-                  <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false })}>
+                  <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false, logistic_information: false })}>
                     {t('ORDER_HISTORY', 'Order History')}
                   </TabItem>
-                  <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true })}>
+                  <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true, logistic_information: false })}>
                     {t('LOGISTICS', 'Logistics')}
+                  </TabItem>
+                  <TabItem active={tabActive.logistic_information} onClick={() => setTabActive({ orderHistory: false, logistics: false, logistic_information: true })}>
+                    {t('LOGISTIC_INFORMATION', 'Logistic information')}
                   </TabItem>
                 </WrapperHitoryHeader>
               )}
@@ -460,17 +468,33 @@ export const MessagesUI = (props) => {
           {
             !messages.loading && (
               <>
-                <MessageConsole>
-                  <BubbleConsole>
-                    {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                    <strong>{parseDate(order.created_at)}</strong> {' '}
-                    {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
-                    <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
-                  </BubbleConsole>
-                </MessageConsole>
+                {!tabActive.logistic_information && (
+                  <MessageConsole>
+                    <BubbleConsole>
+                      {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                      <strong>{parseDate(order.created_at)}</strong> {' '}
+                      {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+                      <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
+                    </BubbleConsole>
+                  </MessageConsole>
+                )}
+                {history && (
+                  <>
+                    {tabActive.logistics && (
+                      <WrapperLogistics>
+                        <Logistics orderId={order.id} />
+                      </WrapperLogistics>
+                    )}
+                    {tabActive.logistic_information && (
+                      <WrapperLogisticInformation>
+                        <LogisticInformation orderId={order.id} />
+                      </WrapperLogisticInformation>
+                    )}
+                  </>
+                )}
                 {filteredMessages.length > 0 && filteredMessages.map((message) => (
                   <React.Fragment key={message.id}>
-                    {history && (
+                    {history && tabActive.orderHistory && (
                       <>
                         {message.type === 1 && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive.orderHistory ? 'inline-flex' : 'none'}` }}>
@@ -497,12 +521,9 @@ export const MessagesUI = (props) => {
                             )}
                           </MessageConsole>
                         )}
-                        <WrapperLogistics style={{ display: `${tabActive.logistics ? 'block' : 'none'}` }}>
-                          <Logistics orderId={order.id} />
-                        </WrapperLogistics>
                       </>
                     )}
-                    {!history && (message.author.level === 0 || message.author.level === messageLevel) && (
+                    {!history && (message?.author?.level === 0 || message?.author?.level === messageLevel) && (
                       <>
                         {message.type === 1 && (
                           <MessageConsole key={message.id}>
@@ -534,7 +555,7 @@ export const MessagesUI = (props) => {
                             {customer && message.can_see.includes(3) && (
                               <>
                                 <BubbleCustomer>
-                                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
                                   {message.comment}
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </BubbleCustomer>
@@ -543,7 +564,7 @@ export const MessagesUI = (props) => {
                             {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleCustomer>
-                                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
                                   {message.comment}
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </BubbleCustomer>
@@ -552,7 +573,7 @@ export const MessagesUI = (props) => {
                             {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleCustomer>
-                                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
                                   {message.comment}
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </BubbleCustomer>
@@ -566,7 +587,7 @@ export const MessagesUI = (props) => {
                             {customer && message.can_see.includes(3) && (
                               <>
                                 <BubbleCustomer name='image'>
-                                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
                                   <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                                   {message.comment && (
                                     <>
@@ -580,7 +601,7 @@ export const MessagesUI = (props) => {
                             {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleCustomer name='image'>
-                                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
                                   <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                                   {message.comment && (
                                     <>
@@ -594,7 +615,7 @@ export const MessagesUI = (props) => {
                             {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleCustomer name='image'>
-                                  <strong><MyName>{message.author.name} ({getLevel(message.author.level)})</MyName></strong>
+                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
                                   <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                                   {message.comment && (
                                     <>
@@ -612,7 +633,7 @@ export const MessagesUI = (props) => {
                             {customer && message.can_see.includes(3) && (
                               <>
                                 <BubbleBusines>
-                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
                                   {message.comment}
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </BubbleBusines>
@@ -621,7 +642,7 @@ export const MessagesUI = (props) => {
                             {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleBusines>
-                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
                                   {message.comment}
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </BubbleBusines>
@@ -630,7 +651,7 @@ export const MessagesUI = (props) => {
                             {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleBusines>
-                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
                                   {message.comment}
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </BubbleBusines>
@@ -643,7 +664,7 @@ export const MessagesUI = (props) => {
                             {customer && message.can_see.includes(3) && (
                               <>
                                 <BubbleBusines name='image'>
-                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
                                   <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                                   {message.comment && (
                                     <>
@@ -657,7 +678,7 @@ export const MessagesUI = (props) => {
                             {(business || driverNoneCase) && message.can_see.includes(2) && (
                               <>
                                 <BubbleBusines name='image'>
-                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
                                   <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                                   {message.comment && (
                                     <>
@@ -671,7 +692,7 @@ export const MessagesUI = (props) => {
                             {driver && !driverNoneCase && message.can_see.includes(4) && (
                               <>
                                 <BubbleBusines name='image'>
-                                  <strong><PartnerName>{message.author.name} ({getLevel(message.author.level)})</PartnerName></strong>
+                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
                                   <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                                   {message.comment && (
                                     <>

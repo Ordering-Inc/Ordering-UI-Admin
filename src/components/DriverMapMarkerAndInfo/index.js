@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import { useTheme } from 'styled-components'
 
 import {
   WrapperMapMarker,
@@ -14,6 +14,7 @@ export const DriverMapMarkerAndInfo = (props) => {
     driver
   } = props
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ parseDate }] = useUtils()
   const [infoShow, setInfoShow] = useState(false)
   const infoRef = useRef(null)
@@ -21,7 +22,7 @@ export const DriverMapMarkerAndInfo = (props) => {
 
   useEffect(() => {
     if (!infoShow) return
-    setInfoTop(`-${infoRef.current.scrollHeight + 33}px`)
+    setInfoTop(`-${infoRef.current.scrollHeight + 30}px`)
   }, [infoShow])
 
   return (
@@ -42,7 +43,7 @@ export const DriverMapMarkerAndInfo = (props) => {
               <Text>{parseDate(driver.last_order_assigned_at, { utc: false })}</Text>
             </TextContainer>
           )}
-          {driver?.drivergroups.length > 0 && (
+          {driver?.drivergroups?.length > 0 && (
             <TextContainer>
               <Text fontWeight='bold'>
                 {t('DRIVER_GROUP', 'Driver group')}:
@@ -64,14 +65,13 @@ export const DriverMapMarkerAndInfo = (props) => {
       )}
       <WrapperMapMarker
         offline={!driver.available}
-        key={driver.id}
         onMouseOver={() => setInfoShow(true)}
         onMouseLeave={() => setInfoShow(false)}
       >
         {driver.photo ? (
           <MapMarkerImg bgimage={driver.photo} />
         ) : (
-          <FaUserAlt />
+          <MapMarkerImg bgimage={theme?.images?.icons?.noDriver} />
         )}
       </WrapperMapMarker>
     </>

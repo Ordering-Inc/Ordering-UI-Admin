@@ -95,8 +95,8 @@ export const Select = (props) => {
                 color={option.color}
                 onClick={(e) => handleChangeOption(e, option)}
                 optionBottomBorder={props.optionBottomBorder}
-                disabled={option.disabled === 'disabled'}
-                className={option.disabled === 'disabled' ? 'disabled' : null}
+                disabled={option.disabled}
+                className={option.disabled ? 'disabled' : null}
               >
                 {option.content}
               </Option>

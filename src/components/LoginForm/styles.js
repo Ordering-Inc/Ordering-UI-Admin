@@ -132,6 +132,7 @@ export const RedirectLink = styled.div`
 
   span {
     color: #4C6CDB;
+    margin-right: 5px;
 
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
@@ -230,8 +231,7 @@ export const TitleFormSide = styled.div`
       font-size: 24px;
       margin-bottom: 80px;
     }
-  }
-  
+  }  
 `
 export const InputWithIcon = styled.div`
   position: relative;
@@ -245,6 +245,13 @@ export const InputWithIcon = styled.div`
   img {
     position: absolute;
     width: 20px;
+    padding: 8px 20px;
+  }
+
+  svg {
+    position: absolute;
+    font-size: 24px;
+    color: #707070;
     padding: 8px 20px;
   }
 `

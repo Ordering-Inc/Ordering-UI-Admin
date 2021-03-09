@@ -11,8 +11,6 @@ export const OrderStatusTypeSelector = (props) => {
     deliveryType,
     mutiOrdersChange,
     orderId,
-    // preOrder,
-    // pendingOrder,
     type,
     orderControl,
     noPadding,
@@ -22,8 +20,6 @@ export const OrderStatusTypeSelector = (props) => {
     handleUpdateOrderStatus,
     handleChangeMultiOrdersStatus,
     handleChangeOrderStatus
-    // handleChangeIsPendingOrder,
-    // handleChangeIsPreOrder
   } = props
 
   const [, t] = useLanguage()
@@ -37,7 +33,7 @@ export const OrderStatusTypeSelector = (props) => {
     {
       value: 'default',
       content: <Option noPadding={noPadding}><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>,
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 'pending',
@@ -47,23 +43,22 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
-    // {
-    //   value: 'preorder',
-    //   content: (
-    //     <Option noPadding={noPadding}>
-    //       <p>{t('PREORDER', 'Preorder')}</p>
-    //     </Option>
-    //   ),
-    //   color: 'primary',
-    //   disabled: 'disabled'
-    // },
     {
       value: 0,
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PENDING', 'Pending')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 13,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('PREORDER', 'Preorder')}</p>
         </Option>
       ),
       color: 'primary'
@@ -76,7 +71,7 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('IN_PROGRESS', 'In Progress')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 7,
@@ -124,6 +119,51 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
+      value: 14,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('ORDER_NOT_READY', 'Order not ready')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 18,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('DRIVER_ALMOST_ARRIVED_TO_BUSINESS', 'Driver almost arrived to business')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 19,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', 'Driver almost arrived to customer')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 20,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', 'Customer almost arrived to business')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 21,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
       value: null,
       content: (
         <Option noPadding={noPadding}>
@@ -131,7 +171,7 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('COMPLETED', 'Completed')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 1,
@@ -152,6 +192,15 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
+      value: 15,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('PICKUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
       value: null,
       content: (
         <Option noPadding={noPadding}>
@@ -159,7 +208,7 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('CACELLED', 'Cancelled')}</p>
         </Option>
       ),
-      disabled: 'disabled'
+      disabled: true
     },
     {
       value: 2,
@@ -205,15 +254,29 @@ export const OrderStatusTypeSelector = (props) => {
         </Option>
       ),
       color: 'primary'
+    },
+    {
+      value: 16,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('CANCELLED_BY_CUSTOMER', 'Cancelled by customer')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 17,
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('NOT_PICKED_BY_CUSTOMER', 'Not picked by customer')}</p>
+        </Option>
+      ),
+      color: 'primary'
     }
   ]
 
   const changeOrderStatus = (orderStatus) => {
     if (orderStatus !== 'default' && orderStatus !== defaultValue) {
-      if (orderStatus === 13) {
-        orderStatus = 0
-      }
-
       if (!mutiOrdersChange) {
         if (orderStatus === orderId) return
         handleUpdateOrderStatus({ id: orderId, newStatus: orderStatus })
@@ -230,13 +293,19 @@ export const OrderStatusTypeSelector = (props) => {
       } else {
         let _filteredOrderStatues = []
         let extractOrderStatus = []
-        extractOrderStatus = orderStatuses.slice(0, 6)
+        extractOrderStatus = orderStatuses.slice(0, 7)
         _filteredOrderStatues = [...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(9, 11)
+        extractOrderStatus = orderStatuses.slice(10, 11)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(12, 15)
+        extractOrderStatus = orderStatuses.slice(13, 17)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(18, 22)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(25, 27)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
         setFilteredOrderStatuses(_filteredOrderStatues)
@@ -244,16 +313,16 @@ export const OrderStatusTypeSelector = (props) => {
     } else {
       let _filteredOrderStatues = []
       let extractOrderStatus = []
-      extractOrderStatus = orderStatuses.slice(2, 3)
+      extractOrderStatus = orderStatuses.slice(2, 4)
       _filteredOrderStatues = [...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(4, 9)
+      extractOrderStatus = orderStatuses.slice(5, 15)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(10, 12)
+      extractOrderStatus = orderStatuses.slice(16, 19)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(13, 18)
+      extractOrderStatus = orderStatuses.slice(20, 27)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
       setFilteredOrderStatuses(_filteredOrderStatues)
@@ -264,25 +333,7 @@ export const OrderStatusTypeSelector = (props) => {
     setDefaultOptionValue(defaultValue)
   }, [defaultValue])
 
-  // useEffect(() => {
-  //   if (pendingOrder) {
-  //     setDefaultOptionValue('pending')
-  //   }
-
-  //   if (preOrder) {
-  //     setDefaultOptionValue('preorder')
-  //   }
-  // }, [pendingOrder, preOrder])
-
   const filterChangeOrderStatus = (status) => {
-    // if (status === 'pending') {
-    //   handleChangeIsPendingOrder()
-    //   return
-    // }
-    // if (status === 'preorder') {
-    //   handleChangeIsPreOrder()
-    //   return
-    // }
     handleChangeOrderStatus(status)
   }
 
@@ -291,12 +342,6 @@ export const OrderStatusTypeSelector = (props) => {
   useEffect(() => {
     if (isFilterView) {
       const _defaultFilterValues = [...filterValues.statuses]
-      if (filterValues.isPendingOrder) {
-        _defaultFilterValues.push('pending')
-      }
-      if (filterValues.isPreOrder) {
-        _defaultFilterValues.push('preorder')
-      }
       setDefaultFilterValues(_defaultFilterValues)
     }
   }, [filterValues])
@@ -304,6 +349,7 @@ export const OrderStatusTypeSelector = (props) => {
   if (isFilterView) {
     return (
       <MultiSelect
+        optionInnerMaxHeight='50vh'
         placeholder={placeholder}
         defaultValue={defaultFilterValues}
         options={filteredOrderStatuses}
@@ -314,6 +360,7 @@ export const OrderStatusTypeSelector = (props) => {
     return (
       <Select
         type={type}
+        optionInnerMaxHeight='50vh'
         noSelected={noSelected}
         defaultValue={defaultOptionValue}
         options={filteredOrderStatuses}

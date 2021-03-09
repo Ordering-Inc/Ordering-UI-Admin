@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
   Switch,
   Route,
+  Link,
   Redirect
 } from 'react-router-dom'
 import { useSession, useOrder, useLanguage } from 'ordering-components'
@@ -11,6 +12,7 @@ import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { PageNotFound } from './Pages/PageNotFound'
 import { OrdersListAndDelivery } from './Pages/OrdersListAndDelivery'
 import { Login } from './Pages/Login'
+import { ForgotPassword } from './pages/ForgotPassword'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -64,11 +66,23 @@ export const App = () => {
                         ? (
                           <Login
                             useLoginByEmail
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                           />
                         )
                         : (
                           <Redirect to='/orders-deliveries' />
                         )
+                    }
+                  </Route>
+
+                  <Route exact path='/password/forgot'>
+                    {
+                      !auth ? (
+                        <ForgotPassword
+                          elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                        />
+                      )
+                        : <Redirect to='/orders-deliveries' />
                     }
                   </Route>
 
