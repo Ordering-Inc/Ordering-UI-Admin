@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select'
 import { Option, PlaceholderTitle } from './styles'
 import { useTheme } from 'styled-components'

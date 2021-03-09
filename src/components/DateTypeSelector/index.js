@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components-admin'
 import dayjs from 'dayjs'
 import { Select } from '../../styles/Select'
 import { Option, DateContainer } from './styles'

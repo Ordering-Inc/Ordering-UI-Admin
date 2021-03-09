@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEvent } from 'ordering-components'
+import { useEvent } from 'ordering-components-admin'
 import {
   Container,
   SidebarContent,

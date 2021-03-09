@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageNotFoundContainer, PageNotFoundText } from './styles'
-import { useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 
 export const PageNotFound = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, DriversList as DriversController } from 'ordering-components'
+import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'

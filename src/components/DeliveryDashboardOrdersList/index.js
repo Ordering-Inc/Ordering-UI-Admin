@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, DashboardOrdersList as OrdersListController } from 'ordering-components'
+import { useLanguage, DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
 import { OrderListing } from '../OrderListing'
 import { WrapperOrderlist } from './styles'
 

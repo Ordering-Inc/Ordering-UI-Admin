@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 
 import {

@@ -4,7 +4,7 @@ import {
   useSession,
   LogoutAction as LogoutActionController
   // useEvent
-} from 'ordering-components'
+} from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { usePopper } from 'react-popper'
 import {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components-admin'
 import { MultiSelect } from '../../styles/MultiSelect'
 
 import {

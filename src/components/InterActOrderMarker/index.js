@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { useTheme } from 'styled-components'
 import {

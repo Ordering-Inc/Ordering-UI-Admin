@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import { getAgoMinutes } from '../../utils'
 
 import { useTheme } from 'styled-components'

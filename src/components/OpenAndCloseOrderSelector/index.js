@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select'
 import BsInboxFill from '@meronex/icons/bs/BsInboxFill'
 import GoCircleSlash from '@meronex/icons/go/GoCircleSlash'

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components'
+import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components-admin'
 import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'

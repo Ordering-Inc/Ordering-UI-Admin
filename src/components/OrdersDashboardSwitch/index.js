@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage } from 'ordering-components-admin'
 import { SwitchContainer, SwitchItem, SwitchPane } from './styles'
 
 export const OrdersDashboardSwitch = (props) => {
