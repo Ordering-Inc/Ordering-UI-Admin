@@ -32,6 +32,9 @@ import { SideMenu } from './components/SideMenu'
 import { SmallOrderItemAccordion } from './components/SmallOrderItemAccordion'
 import { SpinnerLoader } from './components/SpinnerLoader'
 import { UserPopover } from './components/UserPopover'
+import { MainOrdersManager } from './components/MainOrdersManager'
+
+import { AdminLayout } from './layouts/AdminLayout'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
@@ -77,6 +80,7 @@ export {
   SmallOrderItemAccordion,
   SpinnerLoader,
   UserPopover,
+  MainOrdersManager,
 
   // Contexts
   ThemeContext,
@@ -98,5 +102,8 @@ export {
   InputSecundary,
   Select,
   Tab,
-  Tabs
+  Tabs,
+
+  // layouts
+  AdminLayout
 }
