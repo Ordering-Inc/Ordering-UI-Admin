@@ -1,4 +1,3 @@
-import { BusinessTypeSelector } from './components/BusinessTypeSelector'
 import { CitySelector } from './components/CitySelector'
 import { Confirm, Alert } from './components/Confirm'
 import { DateTypeSelector } from './components/DateTypeSelector'
@@ -27,12 +26,10 @@ import { OrdersDashboardSwitch } from './components/OrdersDashboardSwitch'
 import { OrderStatusFilterBar } from './components/OrderStatusFilterBar'
 import { OverView } from './components/OverView'
 import { PageNotFound } from './components/PageNotFound'
-import { PaymentTypeSelector } from './components/PaymentTypeSelector'
 import { ProductItemAccordion } from './components/ProductItemAccordion'
 import { SideMenu } from './components/SideMenu'
 import { SmallOrderItemAccordion } from './components/SmallOrderItemAccordion'
 import { SpinnerLoader } from './components/SpinnerLoader'
-import { StatusSelector } from './components/StatusSelector'
 import { UserPopover } from './components/UserPopover'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
@@ -44,7 +41,6 @@ import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
 
 export {
-  BusinessTypeSelector,
   CitySelector,
   Confirm,
   Alert,
@@ -74,12 +70,10 @@ export {
   OrderStatusFilterBar,
   OverView,
   PageNotFound,
-  PaymentTypeSelector,
   ProductItemAccordion,
   SideMenu,
   SmallOrderItemAccordion,
   SpinnerLoader,
-  StatusSelector,
   UserPopover,
 
   // Contexts

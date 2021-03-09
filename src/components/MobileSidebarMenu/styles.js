@@ -156,3 +156,5 @@ export const TextInfo = styled.span`
   white-space: nowrap;
   color: #fff;
 `
+
+export const MenuLinkSeparator = styled.div``
