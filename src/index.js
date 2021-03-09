@@ -7,6 +7,7 @@ import { DeliveryTypeSelector } from './components/DeliveryTypeSelector'
 import { DriverSelector } from './components/DriverSelector'
 import { Dropdown } from './components/Dropdown'
 import { FilterGroupList } from './components/FilterGroupList'
+import { ForgotPasswordForm } from './components/ForgotPasswordForm'
 import { GroupTypeSelector } from './components/GroupTypeSelector'
 import { Header } from './components/Header'
 import { Image } from './components/Image'
@@ -51,6 +52,7 @@ export {
   DriverSelector,
   Dropdown,
   FilterGroupList,
+  ForgotPasswordForm,
   GroupTypeSelector,
   Header,
   Image,
