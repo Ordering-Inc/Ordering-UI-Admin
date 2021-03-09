@@ -36,7 +36,8 @@ import { MainOrdersManager } from './components/MainOrdersManager'
 
 import { AdminLayout } from './layouts/AdminLayout'
 
-import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
+import { ThemeContext, ThemeProvider, e } from './contexts/ThemeContext'
+import { ConfigFileContext } from './contextsuseThem/ConfigFileContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Button } from './styles/Buttons'
@@ -86,6 +87,7 @@ export {
   ThemeContext,
   ThemeProvider,
   useTheme,
+  ConfigFileContext,
 
   // Hooks
   useOnlineStatus,
