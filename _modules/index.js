@@ -213,6 +213,18 @@ Object.defineProperty(exports, "UserPopover", {
     return _UserPopover.UserPopover;
   }
 });
+Object.defineProperty(exports, "MainOrdersManager", {
+  enumerable: true,
+  get: function get() {
+    return _MainOrdersManager.MainOrdersManager;
+  }
+});
+Object.defineProperty(exports, "AdminLayout", {
+  enumerable: true,
+  get: function get() {
+    return _AdminLayout.AdminLayout;
+  }
+});
 Object.defineProperty(exports, "ThemeContext", {
   enumerable: true,
   get: function get() {
@@ -377,6 +389,10 @@ var _SmallOrderItemAccordion = require("./components/SmallOrderItemAccordion");
 var _SpinnerLoader = require("./components/SpinnerLoader");
 
 var _UserPopover = require("./components/UserPopover");
+
+var _MainOrdersManager = require("./components/MainOrdersManager");
+
+var _AdminLayout = require("./layouts/AdminLayout");
 
 var _ThemeContext = require("./contexts/ThemeContext");
 
