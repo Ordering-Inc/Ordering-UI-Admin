@@ -243,6 +243,12 @@ Object.defineProperty(exports, "useTheme", {
     return _ThemeContext.useTheme;
   }
 });
+Object.defineProperty(exports, "ConfigFileContext", {
+  enumerable: true,
+  get: function get() {
+    return _ConfigFileContext.ConfigFileContext;
+  }
+});
 Object.defineProperty(exports, "useOnlineStatus", {
   enumerable: true,
   get: function get() {
@@ -395,6 +401,8 @@ var _MainOrdersManager = require("./components/MainOrdersManager");
 var _AdminLayout = require("./layouts/AdminLayout");
 
 var _ThemeContext = require("./contexts/ThemeContext");
+
+var _ConfigFileContext = require("./contexts/ConfigFileContext");
 
 var _useOnlineStatus = require("./hooks/useOnlineStatus");
 
