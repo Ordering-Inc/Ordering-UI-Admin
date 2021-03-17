@@ -83,7 +83,7 @@ import orderStatus12 from './template/assets/images/order/status-12.svg'
 
 Sentry.init({
   environment: process.env.NODE_ENV,
-  dsn: 'https://ab508d2c6990411c8da375c997f9f3d6@o460529.ingest.sentry.io/5496646',
+  dsn: 'https://136774353f6d423da02589e771165836@o460529.ingest.sentry.io/5681485',
   integrations: [
     new Integrations.BrowserTracing()
   ],
