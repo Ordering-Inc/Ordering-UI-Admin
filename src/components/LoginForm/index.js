@@ -74,6 +74,7 @@ const LoginFormUI = (props) => {
         open: true,
         content: formState.result?.result || [t('ERROR')]
       })
+      setSubmitted(false)
     }
   }, [formState])
 
