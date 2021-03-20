@@ -42,7 +42,6 @@ const LoginFormUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
-  // const [{ auth, user }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [submitted, setSubmitted] = useState(false)
@@ -93,17 +92,6 @@ const LoginFormUI = (props) => {
       content: []
     })
   }
-
-  // useEffect(() => {
-  //   if (!auth || formState.loading) return
-  //   if (user?.level !== 0) {
-  //     setAlertState({
-  //       open: true,
-  //       content: t('YOU_DONT_PERMISSION', 'You don\'t have permission')
-  //     })
-  //   }
-  // }, [auth, formState.loading])
-
   return (
     <LoginContainer isPopup={isPopup}>
       <LoginHeroContainer bgimage={theme.images?.general?.loginHero}>
