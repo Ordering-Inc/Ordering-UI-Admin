@@ -5,7 +5,6 @@ import {
   LoginForm as LoginFormController,
   useLanguage,
   useApi
-  // useSession
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
@@ -262,7 +261,7 @@ export const LoginForm = (props) => {
   const loginControllerProps = {
     ...props,
     UIComponent: LoginFormUI,
-    allowedLevels: [0]
+    allowedLevels: [0, 2]
   }
   return <LoginFormController {...loginControllerProps} />
 }
