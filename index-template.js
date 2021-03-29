@@ -69,18 +69,6 @@ import orderStatus10 from './template/assets/images/order/status-10.svg'
 import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
 
-// const configFile = {
-//   project: 'dragonteam1',
-//   api: {
-//     url: 'https://apiv4.ordering.co',
-//     language: 'en',
-//     version: 'v400'
-//   },
-//   socket: {
-//     url: 'https://socket.ordering.co'
-//   }
-// }
-
 Sentry.init({
   environment: process.env.NODE_ENV,
   dsn: 'https://ab508d2c6990411c8da375c997f9f3d6@o460529.ingest.sentry.io/5496646',

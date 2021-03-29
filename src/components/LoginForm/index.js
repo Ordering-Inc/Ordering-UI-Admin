@@ -63,7 +63,7 @@ const LoginFormUI = (props) => {
   }
 
   useEffect(() => {
-    if (ordering.project === '' || !submitted) return
+    if (ordering.project === null || !submitted) return
     handleButtonLoginClick()
   }, [ordering, submitted])
 

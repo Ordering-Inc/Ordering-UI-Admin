@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { getStarWidth } from '../../utils'
-// import BsChat from '@meronex/icons/bs/BsChat'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import {
@@ -70,11 +69,6 @@ export const DriverCard = (props) => {
               <p>{getTimeAgo(driver.last_order_assigned_at)}</p>
               <WrapperStar width={getStarWidth(driver.qualification)} />
             </InfoCell>
-            {/* <InfoCell>
-              <button>
-                <BsChat /> {t('CHAT', 'Chat')}
-              </button>
-            </InfoCell> */}
           </InfoBlock>
         </DriverInfoContent>
       </DrirverInfo>
