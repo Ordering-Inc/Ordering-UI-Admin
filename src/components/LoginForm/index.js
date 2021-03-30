@@ -262,7 +262,7 @@ export const LoginForm = (props) => {
   const loginControllerProps = {
     ...props,
     UIComponent: LoginFormUI,
-    allowedLevels: [0]
+    allowedLevels: [0, 2]
   }
   return <LoginFormController {...loginControllerProps} />
 }
