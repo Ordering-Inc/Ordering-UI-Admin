@@ -52,7 +52,7 @@ const LoginFormUI = (props) => {
   const onSubmit = () => {
     const _configFile = configFile
     _configFile.project = projectName
-    setConfigFile(_configFile)
+    setConfigFile({ ..._configFile })
     localStorage.setItem('project', projectName)
     setSubmitted(true)
   }
@@ -92,6 +92,7 @@ const LoginFormUI = (props) => {
       content: []
     })
   }
+
   return (
     <LoginContainer isPopup={isPopup}>
       <LoginHeroContainer bgimage={theme.images?.general?.loginHero}>
