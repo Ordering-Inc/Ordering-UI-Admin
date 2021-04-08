@@ -39,12 +39,12 @@ export const DriversLocation = (props) => {
 
   const mapFit = () => {
     const _onlineDrivers = driversList.drivers.filter(
-      (driver) => driver.available
+      (driver) => driver.enabled
     )
     setOnlineDrivers(_onlineDrivers)
 
     const _offlineDrivers = driversList.drivers.filter(
-      (driver) => !driver.available
+      (driver) => !driver.enabled
     )
     setOfflineDrivers(_offlineDrivers)
 
@@ -65,7 +65,7 @@ export const DriversLocation = (props) => {
 
     if (driverAvailable === 'online' || (interActionMapOrder !== null && interActionMapOrder?.driver === null)) {
       for (const driver of _onlineDrivers) {
-        if (driver.available) {
+        if (driver.enabled) {
           const marker = driver.location !== null ? driver.location : defaultCenter
           const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
           bounds.extend(newPoint)
@@ -105,7 +105,7 @@ export const DriversLocation = (props) => {
       } else {
         let checkLocation = false
         for (const driver of _offlineDrivers) {
-          if (!driver.available) {
+          if (!driver.enabled) {
             if (driver.location !== null) {
               checkLocation = true
             }

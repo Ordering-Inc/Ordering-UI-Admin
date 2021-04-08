@@ -20,6 +20,10 @@ export const OrderItemContainer = styled.div`
       background: #e8e8e8;
     `}
   `}
+
+  ${({ isOrdersListView }) => isOrdersListView && css`
+    cursor: initial;
+  `}
 `
 export const WrapperInfo = styled.div`
   display: flex;

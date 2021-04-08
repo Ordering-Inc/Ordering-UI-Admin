@@ -133,7 +133,6 @@ const OrderProductsQuickDetailUI = (props) => {
                           </WrapperProductImage>
                           {product.name}
                         </ProductImageContainer>
-
                         <AccordionContent>
                           {product.ingredients.length > 0 && product.ingredients.some(ingredient => !ingredient.selected) && (
                             <ProductOptionsList>
@@ -177,7 +176,6 @@ const OrderProductsQuickDetailUI = (props) => {
                             </ProductComment>
                           )}
                         </AccordionContent>
-
                       </td>
                       <td>{parsePrice(product?.price)}</td>
                       <td>X {product.quantity}</td>
@@ -186,7 +184,6 @@ const OrderProductsQuickDetailUI = (props) => {
                     </tr>
                   )
                 })}
-
                 <tr className='subFee'>
                   <td />
                   <td />
@@ -196,7 +193,7 @@ const OrderProductsQuickDetailUI = (props) => {
                     {parsePrice(order?.summary?.subtotal)}
                   </td>
                 </tr>
-                {order?.summary?.discount && (
+                {order?.summary?.discount > 0 && (
                   <tr className='subFee'>
                     <td />
                     <td />

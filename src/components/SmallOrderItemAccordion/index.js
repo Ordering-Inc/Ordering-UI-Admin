@@ -36,6 +36,7 @@ import {
 
 export const SmallOrderItemAccordion = (props) => {
   const {
+    isOrdersListView,
     order,
     drivers,
     pendingOrder,
@@ -64,7 +65,8 @@ export const SmallOrderItemAccordion = (props) => {
   const [diffTime, setDiffTime] = useState(getAgoMinutes(order?.delivery_datetime))
 
   const handleLocationAndMessage = (e) => {
-    if (activeSwitch.messages) {
+    if (isOrdersListView) return
+    if (activeSwitch?.messages) {
       handleOpenMessage(order, '')
     } else {
       const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
@@ -77,6 +79,12 @@ export const SmallOrderItemAccordion = (props) => {
         }
       }
     }
+  }
+
+  const openOrderDetail = () => {
+    if (!isOrdersListView) return
+    history.push(`/orders-deliveries?id=${order.id}`)
+    handleOpenOrderDetail(order.id)
   }
 
   const getLogisticTag = (status) => {
@@ -137,13 +145,14 @@ export const SmallOrderItemAccordion = (props) => {
             : theme?.colors?.deadlineRisk
       }
       onClick={(e) => handleLocationAndMessage(e)}
-      messageUI={activeSwitch.messages}
+      messageUI={activeSwitch?.messages}
       messageUIActive={messageOrder?.id === order.id}
-      deliveryUI={activeSwitch.deliveries}
+      deliveryUI={activeSwitch?.deliveries}
       deliveryUIActive={interActionMapOrder?.id === order.id}
+      isOrdersListView={isOrdersListView}
     >
       <WrapIndicator>
-        {activeSwitch.messages && order?.unread_count > 0 && (
+        {activeSwitch?.messages && order?.unread_count > 0 && (
           <UnreadMessageIndicator>
             {order?.unread_count}
           </UnreadMessageIndicator>
@@ -159,8 +168,8 @@ export const SmallOrderItemAccordion = (props) => {
               {t('ORDER_NO', 'Order No')}. {order?.id}
             </h1>
             <p>{order?.business?.name}</p>
-            {activeSwitch?.deliveries && (
-              <MoreDetailsButton ref={moreDetailRef}>
+            {(activeSwitch?.deliveries || isOrdersListView) && (
+              <MoreDetailsButton ref={moreDetailRef} onClick={() => openOrderDetail()}>
                 {t('MORE_DETAIL', 'More detail')}
               </MoreDetailsButton>
             )}

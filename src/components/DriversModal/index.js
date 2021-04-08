@@ -53,7 +53,7 @@ export const DriversModal = (props) => {
           {driversList.drivers.map((driver) => (
             <React.Fragment key={driver.id}>
               {driverAvailable === 'online'
-                ? driver.available && (
+                ? driver.enabled && (
                   <DriverCard
                     driver={driver}
                     driversList={driversList}
@@ -61,7 +61,7 @@ export const DriversModal = (props) => {
                     handleOpenOrderDetail={handleOpenOrderDetail}
                   />
                 ) : (
-                  !driver.available && (
+                  !driver.enabled && (
                     <DriverCard
                       offline
                       driver={driver}

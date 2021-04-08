@@ -5,7 +5,7 @@ import { OrderItemAccordion } from '../OrderItemAccordion'
 import { SmallOrderItemAccordion } from '../SmallOrderItemAccordion'
 import { OrdersPagination } from '../OrdersPagination'
 import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
-
+import { useWindowSize } from '../../hooks/useWindowSize'
 import {
   OrderStatusTitle,
   WrapperNoneOrders,
@@ -54,6 +54,7 @@ export const OrderListing = (props) => {
   const [setRotate, setRotateState] = useState('collapse_icon')
   const content = useRef(null)
   const noneContent = useRef(null)
+  const windowSize = useWindowSize()
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -155,24 +156,40 @@ export const OrderListing = (props) => {
                   {currentOrders.map(order => (
                     <React.Fragment key={order.id}>
                       {orderListView === 'big' && (
-                        <OrderItemAccordion
-                          order={order}
-                          size={size}
-                          drivers={driversList.drivers}
-                          pendingOrder={pendingOrder}
-                          preOrder={preOrder}
-                          selectedOrderIds={selectedOrderIds}
-                          handleUpdateOrderStatus={handleUpdateOrderStatus}
-                          handleSelectedOrderIds={handleSelectedOrderIds}
-                          handleOpenOrderDetail={handleOpenOrderDetail}
-                        />
+                        <>
+                          {windowSize.width > 992 ? (
+                            <OrderItemAccordion
+                              order={order}
+                              size={size}
+                              drivers={driversList.drivers}
+                              pendingOrder={pendingOrder}
+                              preOrder={preOrder}
+                              selectedOrderIds={selectedOrderIds}
+                              handleUpdateOrderStatus={handleUpdateOrderStatus}
+                              handleSelectedOrderIds={handleSelectedOrderIds}
+                              handleOpenOrderDetail={handleOpenOrderDetail}
+                            />
+                          ) : (
+                            <SmallOrderItemAccordion
+                              isOrdersListView
+                              order={order}
+                              drivers={driversList.drivers}
+                              pendingOrder={pendingOrder}
+                              preOrder={preOrder}
+                              selectedOrderIds={selectedOrderIds}
+                              handleUpdateOrderStatus={handleUpdateOrderStatus}
+                              handleSelectedOrderIds={handleSelectedOrderIds}
+                              handleOpenOrderDetail={handleOpenOrderDetail}
+                            />
+                          )}
+                        </>
                       )}
                     </React.Fragment>
                   ))}
                 </>
               ) : (
                 <SkeletonOrder className='skeleton-loading'>
-                  {orderListView === 'big' && [...Array(10)].map((item, i) => (
+                  {orderListView === 'big' && windowSize.width > 992 && [...Array(10)].map((item, i) => (
                     <SkeletonCard key={i}>
                       <SkeletonCell>
                         <Skeleton width={10} height={10} />
@@ -228,7 +245,7 @@ export const OrderListing = (props) => {
                 </SkeletonOrder>
               )}
 
-            {orderListView === 'small' && (
+            {(orderListView === 'small' || windowSize.width <= 992) && (
               <>
                 {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                   <React.Fragment key={order.id}>
