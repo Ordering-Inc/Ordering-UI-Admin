@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
+
 import { Select } from '../../styles/Select'
 import { Option, DateContainer } from './styles'
 
@@ -13,8 +16,8 @@ export const DateTypeSelector = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
 
   const dateTypes = [
     { value: 'default', content: <Option>{t('SELECT_DATE', 'Select date')}</Option> },
@@ -28,54 +31,59 @@ export const DateTypeSelector = (props) => {
         <Option>
           <DateContainer>
             {t('FROM', 'From')}
-            <input type='date' name='startDate' value={startDate} onChange={(e) => handleChangeDate(e)} />
+            <DatePicker
+              selected={startDate}
+              placeholderText='mm/dd/yyyy'
+              className='startDate'
+              isClearable
+              onChange={date => _handleChangeFromDate(date)}
+            />
           </DateContainer>
           <DateContainer>
             {t('TO', 'To')}
-            <input type='date' id='endDate' min='' name='endDate' value={endDate} onChange={(e) => handleChangeDate(e)} />
+            <DatePicker
+              selected={endDate}
+              minDate={new Date(startDate)}
+              placeholderText='mm/dd/yyyy'
+              className='endDate'
+              isClearable
+              onChange={date => _handleChangeEndDate(date)}
+            />
           </DateContainer>
         </Option>
       )
     }
   ]
 
-  const handleChangeDate = (e) => {
-    if (e.target.name === 'startDate') {
-      setStartDate(e.target.value)
-    }
-    if (e.target.name === 'endDate') {
-      setEndDate(e.target.value)
-    }
-  }
-
   const changeDateType = (dateType) => {
     handleChangeDateType(dateType)
   }
 
-  useEffect(() => {
-    if (startDate === '' || startDate === null) return
-    document.getElementById('endDate').min = startDate
-    handleChangeFromDate(startDate)
-  }, [startDate])
+  const _handleChangeFromDate = (date) => {
+    setStartDate(date)
+    if (date !== null) {
+      handleChangeFromDate(dayjs(date).format('YYYY-MM-DD'))
+    } else {
+      handleChangeFromDate(null)
+    }
+  }
 
-  useEffect(() => {
-    if (endDate === '' || endDate === null) return
-    handleChangeEndDate(endDate)
-  }, [endDate])
-
+  const _handleChangeEndDate = (date) => {
+    setEndDate(date)
+    if (date !== null) {
+      handleChangeEndDate(dayjs(date).format('YYYY-MM-DD'))
+    } else {
+      handleChangeEndDate(null)
+    }
+  }
   useEffect(() => {
     if (filterValues.dateType !== 'term') return
 
     if (filterValues.deliveryFromDatetime !== null) {
-      setStartDate(dayjs(filterValues.deliveryFromDatetime).format('YYYY-MM-DD'))
-    } else {
-      setStartDate('')
+      setStartDate(new Date(filterValues.deliveryFromDatetime))
     }
-
     if (filterValues.deliveryEndDatetime !== null) {
-      setEndDate(dayjs(filterValues.deliveryEndDatetime).format('YYYY-MM-DD'))
-    } else {
-      setEndDate('')
+      setEndDate(new Date(filterValues.deliveryEndDatetime))
     }
   }, [filterValues])
 
@@ -84,6 +92,7 @@ export const DateTypeSelector = (props) => {
       defaultValue={filterValues.dateType || 'default'}
       options={dateTypes}
       onChange={(dateType) => changeDateType(dateType)}
+      className='date-filter-container'
     />
   )
 }

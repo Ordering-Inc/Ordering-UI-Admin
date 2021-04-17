@@ -50,7 +50,7 @@ export const OrderItemAccordion = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseDate }] = useUtils()
+  const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
   const history = useHistory()
 
   const [setActive, setActiveState] = useState('')
@@ -141,6 +141,18 @@ export const OrderItemAccordion = (props) => {
     }
   }, [])
 
+  const getImage = () => {
+    const http = new XMLHttpRequest()
+    http.open('HEAD', order.business?.logo, false)
+    http.send()
+
+    if (http.status !== 404) {
+      return optimizeImage(order.business?.logo, 'h_200,c_limit')
+    } else {
+      return theme.images?.dummies?.businessLogo
+    }
+  }
+
   return (
     <>
       <AccordionSection>
@@ -174,7 +186,7 @@ export const OrderItemAccordion = (props) => {
             <WrapperGeneralInfo size={size}>
               <OrderItemAccordionCell className='order-item-business'>
                 <WrapperAccordionImage>
-                  <AccordionImage bgimage={order?.business?.logo} />
+                  <AccordionImage bgimage={getImage()} />
                 </WrapperAccordionImage>
                 <TextBlockContainer>
                   <BigText>{order?.business?.name}</BigText>

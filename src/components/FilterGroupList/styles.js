@@ -43,6 +43,10 @@ export const WrapperRow = styled.div`
     }
   }
 
+  .date-filter-container {
+    z-index: 100;
+  }
+
   @media (max-width: 1300px) {
     flex-direction: column;
     row-gap: 30px;

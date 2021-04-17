@@ -23,7 +23,7 @@ export const Select = (props) => {
   const dropdownReference = useRef()
 
   const handleSelectClick = (e) => {
-    if (e.target.name === 'startDate' || e.target.name === 'endDate') return
+    if (e.target.closest('.react-datepicker-wrapper') || e.target.closest('.react-datepicker')) return
     setOpen(!open)
   }
 

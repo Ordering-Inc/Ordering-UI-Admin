@@ -23,6 +23,10 @@ import notFound404 from './template/assets/images/not-found-404.svg'
 import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import loginHero from './template/assets/images/loginHero.png'
 
+/**
+ * dummies
+ */
+import storeDummy from './template/assets/images/dummies/store.png'
 import nonOrders from './template/assets/images/dummies/nonOrders.svg'
 
 /**
@@ -142,7 +146,8 @@ theme.images = {
     timeline: timeline
   },
   dummies: {
-    nonOrders: nonOrders
+    nonOrders: nonOrders,
+    businessLogo: storeDummy
   }
 }
 
