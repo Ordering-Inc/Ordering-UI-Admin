@@ -141,17 +141,17 @@ export const OrderItemAccordion = (props) => {
     }
   }, [])
 
-  const getImage = () => {
-    const http = new XMLHttpRequest()
-    http.open('HEAD', order.business?.logo, false)
-    http.send()
+  // const getImage = () => {
+  //   const http = new XMLHttpRequest()
+  //   http.open('HEAD', order.business?.logo, false)
+  //   http.send()
 
-    if (http.status !== 404) {
-      return optimizeImage(order.business?.logo, 'h_200,c_limit')
-    } else {
-      return theme.images?.dummies?.businessLogo
-    }
-  }
+  //   if (http.status !== 404) {
+  //     return optimizeImage(order.business?.logo, 'h_200,c_limit')
+  //   } else {
+  //     return theme.images?.dummies?.businessLogo
+  //   }
+  // }
 
   return (
     <>
@@ -186,7 +186,7 @@ export const OrderItemAccordion = (props) => {
             <WrapperGeneralInfo size={size}>
               <OrderItemAccordionCell className='order-item-business'>
                 <WrapperAccordionImage>
-                  <AccordionImage bgimage={getImage()} />
+                  <AccordionImage bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
                 </WrapperAccordionImage>
                 <TextBlockContainer>
                   <BigText>{order?.business?.name}</BigText>

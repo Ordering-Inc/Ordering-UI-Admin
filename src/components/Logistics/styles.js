@@ -10,7 +10,7 @@ export const WraaperLogs = styled.div`
 `
 export const BubbleConsole = styled.div`
   border-radius: 50px;
-  padding: 5px 15px;
+  padding: 15px 25px;
   max-width: 40%;
   margin-bottom: 15px;
   background: #EFEFEF;

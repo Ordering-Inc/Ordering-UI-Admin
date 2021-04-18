@@ -24,19 +24,19 @@ const LogisticsUI = (props) => {
       case 'logistic_driver_not_found_group':
         return 'Drivers was not found to the group'
       case 'logistic_driver_found_in_coverage':
-        return 'logistic driver found in coverage'
+        return `Logistic: Driver ${log.driver.name} found to the order at ${parseDistance((log?.data?.distance / 1000).toFixed(2))} in ${parseDistance((log.data.coverage / 1000).toFixed(2))} of coverage.`
       case 'logistic_driver_found_in_coverage_group':
         return 'logistic driver found in coverage group'
       case 'logistic_driver_found_out_coverage':
-        return `Driver ${log.driver.name} found to the order at ${parseDistance((log?.data?.distance / 1000).toFixed(2))} out of ${parseDistance(log.data.coverage)} of coverage.`
+        return `Driver ${log.driver.name} found to the order at ${parseDistance((log?.data?.distance / 1000).toFixed(2))} out of ${parseDistance((log.data.coverage / 1000).toFixed(2))} of coverage.`
       case 'logistic_driver_found_out_coverage_group':
         return 'logistic driver found out coverage group'
       case 'logistic_driver_autoaccepted':
-        return `Order was auto-assigned and auto-accepted by driver ${log.driver.name} at ${parseDistance((log.data.distance / 1000).toFixed(2))}.`
+        return `Order was auto-assigned and auto-accepted by driver ${log.driver.name} at ${parseDistance((log?.data?.distance / 1000).toFixed(2))}.`
       case 'logistic_driver_autoaccepted_group':
         return 'logisticdriver autoaccepted group'
       case 'logistic_request_autorejected':
-        return `Request of the driver ${log.driver.name} was auto-rejected with order ${log?.with_orders.join()} by process.`
+        return `Request of the driver ${log.driver.name} was auto-rejected with order ${log?.with_orders?.join()} by process.`
       case 'logistic_request_autorejected_group':
         return 'logistic request autorejected group'
       case 'logistic_assign_request_accepted':
