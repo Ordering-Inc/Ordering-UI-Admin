@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
@@ -85,6 +85,7 @@ const OrderDetailsUI = (props) => {
   const [openMetaFields, setOpenMetaFields] = useState(false)
   const theme = useTheme()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [{ user }] = useSession()
 
   const orderDetail = useRef(null)
 
@@ -386,44 +387,59 @@ const OrderDetailsUI = (props) => {
                 </PhotoWrapper>
                 <InfoBlock>
                   <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                  <span><HiOutlineLocationMarker /> {order?.customer?.address}</span>
+                  {order?.customer?.address && (
+                    <span><HiOutlineLocationMarker /> {order?.customer?.address}</span>
+                  )}
                   <CustomerContactBlock>
                     <button onClick={() => handleOpenMessages('customer')}>
                       <BsChat /> {t('CHAT', 'Chat')}
                     </button>
-                    <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
-                      <HiOutlinePhone /> {t('CALL', 'Call')}
-                    </button>
+                    {order?.customer?.cellphone && (
+                      <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
+                        <HiOutlinePhone /> {t('CALL', 'Call')}
+                      </button>
+                    )}
                   </CustomerContactBlock>
-                  <PhoneNumber>
-                    <HiOutlinePhone /> {order?.customer?.cellphone}
-                  </PhoneNumber>
+                  {order?.customer?.cellphone && (
+                    <PhoneNumber>
+                      <HiOutlinePhone /> {order?.customer?.cellphone}
+                    </PhoneNumber>
+                  )}
                 </InfoBlock>
               </SectionContainer>
-
-              <SectionTitle>
-                {t('BUSINESS', 'Business')}
-              </SectionTitle>
-              <SectionContainer>
-                <PhotoWrapper>
-                  <Photo bgimage={order?.business?.logo} />
-                </PhotoWrapper>
-                <InfoBlock>
-                  <h1>{order?.business?.name}</h1>
-                  <span><HiOutlineLocationMarker /> {order?.business?.address}</span>
-                  <CustomerContactBlock>
-                    <button onClick={() => handleOpenMessages('business')}>
-                      <BsChat /> {t('CHAT', 'Chat')}
-                    </button>
-                    <button onClick={() => window.open(`tel:${order.business.phone}`)}>
-                      <HiOutlinePhone /> {t('CALL', 'Call')}
-                    </button>
-                  </CustomerContactBlock>
-                  <PhoneNumber>
-                    <HiOutlinePhone /> {order.business.phone}
-                  </PhoneNumber>
-                </InfoBlock>
-              </SectionContainer>
+              {user?.level === 0 && (
+                <>
+                  <SectionTitle>
+                    {t('BUSINESS', 'Business')}
+                  </SectionTitle>
+                  <SectionContainer>
+                    <PhotoWrapper>
+                      <Photo bgimage={order?.business?.logo} />
+                    </PhotoWrapper>
+                    <InfoBlock>
+                      <h1>{order?.business?.name}</h1>
+                      {order?.business?.address && (
+                        <span><HiOutlineLocationMarker />{order?.business?.address}</span>
+                      )}
+                      <CustomerContactBlock>
+                        <button onClick={() => handleOpenMessages('business')}>
+                          <BsChat /> {t('CHAT', 'Chat')}
+                        </button>
+                        {order?.business?.phone && (
+                          <button onClick={() => window.open(`tel:${order.business.phone}`)}>
+                            <HiOutlinePhone /> {t('CALL', 'Call')}
+                          </button>
+                        )}
+                      </CustomerContactBlock>
+                      {order?.business?.phone && (
+                        <PhoneNumber>
+                          <HiOutlinePhone /> {order.business.phone}
+                        </PhoneNumber>
+                      )}
+                    </InfoBlock>
+                  </SectionContainer>
+                </>
+              )}
 
               {order?.delivery_type === 1 && (
                 <>

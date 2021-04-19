@@ -5,7 +5,6 @@ import {
   LoginForm as LoginFormController,
   useLanguage,
   useApi
-  // useSession
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
@@ -42,7 +41,6 @@ const LoginFormUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
-  // const [{ auth, user }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [submitted, setSubmitted] = useState(false)
@@ -54,7 +52,7 @@ const LoginFormUI = (props) => {
   const onSubmit = () => {
     const _configFile = configFile
     _configFile.project = projectName
-    setConfigFile(_configFile)
+    setConfigFile({ ..._configFile })
     localStorage.setItem('project', projectName)
     setSubmitted(true)
   }
@@ -65,7 +63,7 @@ const LoginFormUI = (props) => {
   }
 
   useEffect(() => {
-    if (ordering.project === '' || !submitted) return
+    if (ordering.project === null || !submitted) return
     handleButtonLoginClick()
   }, [ordering, submitted])
 
@@ -75,6 +73,7 @@ const LoginFormUI = (props) => {
         open: true,
         content: formState.result?.result || [t('ERROR')]
       })
+      setSubmitted(false)
     }
   }, [formState])
 
@@ -93,16 +92,6 @@ const LoginFormUI = (props) => {
       content: []
     })
   }
-
-  // useEffect(() => {
-  //   if (!auth || formState.loading) return
-  //   if (user?.level !== 0) {
-  //     setAlertState({
-  //       open: true,
-  //       content: t('YOU_DONT_PERMISSION', 'You don\'t have permission')
-  //     })
-  //   }
-  // }, [auth, formState.loading])
 
   return (
     <LoginContainer isPopup={isPopup}>
@@ -272,7 +261,8 @@ const LoginFormUI = (props) => {
 export const LoginForm = (props) => {
   const loginControllerProps = {
     ...props,
-    UIComponent: LoginFormUI
+    UIComponent: LoginFormUI,
+    allowedLevels: [0, 2]
   }
   return <LoginFormController {...loginControllerProps} />
 }

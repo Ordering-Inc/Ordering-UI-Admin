@@ -61,7 +61,8 @@ export const OrderStatusTypeSelector = (props) => {
           <p>{t('PREORDER', 'Preorder')}</p>
         </Option>
       ),
-      color: 'primary'
+      color: 'primary',
+      disabled: true
     },
     {
       value: 'inProgress',

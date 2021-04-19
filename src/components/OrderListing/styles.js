@@ -92,7 +92,6 @@ export const InnerOrderListContent = styled.div`
     `}
 `
 export const WrapperOrderListContent = styled.div`
-    overflow-x: auto;
 `
 export const WrapSkeltonCell = styled.div`
     display: flex;

@@ -33,7 +33,7 @@ export const HeroSide = styled.div`
     display: block;
     img {
       width: 35%;
-      margin-top: 10%;
+      margin-top: 18vh;
       margin-left: -80px;
     }
   }

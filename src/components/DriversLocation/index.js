@@ -39,12 +39,12 @@ export const DriversLocation = (props) => {
 
   const mapFit = () => {
     const _onlineDrivers = driversList.drivers.filter(
-      (driver) => driver.available
+      (driver) => driver.enabled && driver.available && !driver.busy
     )
     setOnlineDrivers(_onlineDrivers)
 
     const _offlineDrivers = driversList.drivers.filter(
-      (driver) => !driver.available
+      (driver) => !(driver.enabled && driver.available && !driver.busy)
     )
     setOfflineDrivers(_offlineDrivers)
 
@@ -65,11 +65,9 @@ export const DriversLocation = (props) => {
 
     if (driverAvailable === 'online' || (interActionMapOrder !== null && interActionMapOrder?.driver === null)) {
       for (const driver of _onlineDrivers) {
-        if (driver.available) {
-          const marker = driver.location !== null ? driver.location : defaultCenter
-          const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
-          bounds.extend(newPoint)
-        }
+        const marker = driver.location !== null ? driver.location : defaultCenter
+        const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+        bounds.extend(newPoint)
       }
     }
 
@@ -105,14 +103,12 @@ export const DriversLocation = (props) => {
       } else {
         let checkLocation = false
         for (const driver of _offlineDrivers) {
-          if (!driver.available) {
-            if (driver.location !== null) {
-              checkLocation = true
-            }
-            const marker = driver.location !== null ? driver.location : defaultCenter
-            const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
-            bounds.extend(newPoint)
+          if (driver.location !== null) {
+            checkLocation = true
           }
+          const marker = driver.location !== null ? driver.location : defaultCenter
+          const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+          bounds.extend(newPoint)
         }
         if (!checkLocation) {
           setMapCenter(defaultCenter)
@@ -236,8 +232,8 @@ export const DriversLocation = (props) => {
                   {onlineDrivers.map(driver => (
                     <WrapDriverInfo key={driver.id}>
                       <WrapperDriverImage>
-                        {driver.photo ? (
-                          <DriverImage bgimage={driver.photo} />
+                        {driver?.photo ? (
+                          <DriverImage bgimage={driver?.photo} />
                         ) : (
                           <FaUserAlt />
                         )}
