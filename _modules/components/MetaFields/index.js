@@ -17,6 +17,16 @@ var _SpinnerLoader = require("../SpinnerLoader");
 
 var _FaTrash = _interopRequireDefault(require("@meronex/icons/fa/FaTrash"));
 
+var _IosAddCircle = _interopRequireDefault(require("@meronex/icons/ios/IosAddCircle"));
+
+var _Select = require("../../styles/Select");
+
+var _reactHookForm = require("react-hook-form");
+
+var _jsoneditorReact = require("jsoneditor-react");
+
+require("jsoneditor-react/es/editor.min.css");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -44,13 +54,20 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MetaFieldsUI = function MetaFieldsUI(props) {
-  var metaFieldsList = props.metaFieldsList,
-      actionStatus = props.actionStatus,
-      handleDeleteMetaField = props.handleDeleteMetaField;
+  var orderId = props.orderId,
+      metaFieldsList = props.metaFieldsList,
+      actionState = props.actionState,
+      handleDeleteMetaField = props.handleDeleteMetaField,
+      handeAddMetaField = props.handeAddMetaField;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit,
+      register = _useForm.register,
+      errors = _useForm.errors;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -60,6 +77,55 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useState3 = (0, _react.useState)('text'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      selectedMetaKey = _useState4[0],
+      setSelectedMetaKey = _useState4[1];
+
+  var _useState5 = (0, _react.useState)('1'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      selectedBoolean = _useState6[0],
+      setSelectedBoolean = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      metaKey = _useState8[0],
+      setMetaKey = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      metaValue = _useState10[0],
+      setMetaValue = _useState10[1];
+
+  var _useState11 = (0, _react.useState)({}),
+      _useState12 = _slicedToArray(_useState11, 2),
+      json = _useState12[0],
+      setJson = _useState12[1];
+
+  var metaTypeOptions = [{
+    value: 'integer',
+    content: t('INTEGER', 'integer')
+  }, {
+    value: 'decimal',
+    content: t('DECIMAL', 'decimal')
+  }, {
+    value: 'boolean',
+    content: t('BOOLEAN', 'boolean')
+  }, {
+    value: 'text',
+    content: t('TEXT', 'text')
+  }, {
+    value: 'json',
+    content: t('JSON', 'json')
+  }];
+  var booleanOptions = [{
+    value: '1',
+    content: t('TRUE', 'true')
+  }, {
+    value: '0',
+    content: t('FALSE', 'false')
+  }];
+
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -67,24 +133,173 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
     });
   };
 
-  (0, _react.useEffect)(function () {
-    if (actionStatus.loading || actionStatus.error === null) return;
-    setAlertState({
-      open: true,
-      content: actionStatus.error
+  var handleChangeJson = function handleChangeJson(v) {
+    setJson(v);
+  };
+
+  var onSubmit = function onSubmit() {
+    var value;
+
+    if (selectedMetaKey === 'json') {
+      value = JSON.stringify(json);
+    } else if (selectedMetaKey === 'boolean') {
+      value = selectedBoolean;
+    } else {
+      value = metaValue;
+    }
+
+    handeAddMetaField({
+      key: metaKey,
+      order_id: orderId,
+      value: value,
+      value_type: selectedMetaKey
     });
-  }, [actionStatus]);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (document.getElementById('meta_key')) {
+      document.getElementById('meta_key').value = '';
+    }
+
+    if (document.getElementById('meta_value')) {
+      document.getElementById('meta_value').value = '';
+    }
+  }, [selectedMetaKey]);
+  (0, _react.useEffect)(function () {
+    var _actionState$result, _actionState$result3;
+
+    if (!actionState.loading && ((_actionState$result = actionState.result) === null || _actionState$result === void 0 ? void 0 : _actionState$result.error)) {
+      var _actionState$result2;
+
+      setAlertState({
+        open: true,
+        content: ((_actionState$result2 = actionState.result) === null || _actionState$result2 === void 0 ? void 0 : _actionState$result2.result) || [t('ERROR')]
+      });
+    }
+
+    if (!actionState.loading && !((_actionState$result3 = actionState.result) === null || _actionState$result3 === void 0 ? void 0 : _actionState$result3.error)) {
+      if (document.getElementById('meta_key')) {
+        document.getElementById('meta_key').value = '';
+      }
+
+      if (document.getElementById('meta_value')) {
+        document.getElementById('meta_value').value = '';
+      }
+    }
+  }, [actionState]);
+  (0, _react.useEffect)(function () {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(function (error) {
+          return error.message;
+        })
+      });
+    }
+  }, [errors]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.loading ? /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     primary: true
-  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FEILDS', 'Custom Fields')), metaFieldsList.metaFields.length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.MetaTable, null, /*#__PURE__*/_react.default.createElement("tbody", null, metaFieldsList.metaFields.map(function (metaField) {
-    return /*#__PURE__*/_react.default.createElement("tr", {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FEILDS', 'Custom Fields')), metaFieldsList.metaFields.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.metaFields.map(function (metaField) {
+    return /*#__PURE__*/_react.default.createElement(_styles.MetaContainer, {
       key: metaField.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, metaField.value_type), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.key)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.value)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_FaTrash.default, {
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "meta_type"
+    }, metaField.value_type), /*#__PURE__*/_react.default.createElement("div", {
+      className: "meta_key"
+    }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.key)), /*#__PURE__*/_react.default.createElement("div", {
+      className: "meta_value"
+    }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.value_type === 'boolean' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value)), /*#__PURE__*/_react.default.createElement(_FaTrash.default, {
       onClick: function onClick() {
         return handleDeleteMetaField(metaField.id);
       }
     })));
-  }))) : /*#__PURE__*/_react.default.createElement(_styles.NoMetaField, null, t('NO_METAFIELD', 'No MetaField'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.NoMetaField, null, t('NO_METAFIELD', 'No MetaField')), /*#__PURE__*/_react.default.createElement(_styles.MetaAddForm, {
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/_react.default.createElement(_styles.MetaAddContainer, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "meta_type"
+  }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    defaultValue: selectedMetaKey || 'text',
+    options: metaTypeOptions,
+    onChange: function onChange(key) {
+      return setSelectedMetaKey(key);
+    }
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "meta_key"
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "key",
+    id: "meta_key" // value={metaKey}
+    ,
+    onChange: function onChange(e) {
+      return setMetaKey(e.target.value);
+    },
+    placeholder: t('KEY', 'key'),
+    ref: register({
+      required: t('VALIDATION_ERROR_REQUIRED', 'Key is required').replace('_attribute_', t('KEY', 'Key'))
+    })
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "meta_value"
+  }, selectedMetaKey === 'text' && /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "value",
+    id: "meta_value" // value={metaValue}
+    ,
+    onChange: function onChange(e) {
+      return setMetaValue(e.target.value);
+    },
+    placeholder: t('VALUE', 'Vlue'),
+    ref: register({
+      required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Vlue'))
+    })
+  }), selectedMetaKey === 'integer' && /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "value" // value={metaValue}
+    ,
+    onChange: function onChange(e) {
+      return setMetaValue(e.target.value);
+    },
+    placeholder: t('VALUE', 'Vlue'),
+    ref: register({
+      required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Vlue')),
+      pattern: {
+        value: /^\d+$/,
+        message: t('VALIDATION_ERROR_INTEGER', 'Invalid integer').replace('_attribute_', t('VALUE', 'Vlue'))
+      }
+    })
+  }), selectedMetaKey === 'decimal' && /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "value" // value={metaValue}
+    ,
+    onChange: function onChange(e) {
+      return setMetaValue(e.target.value);
+    },
+    placeholder: t('VALUE', 'Vlue'),
+    ref: register({
+      required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Vlue')),
+      pattern: {
+        value: /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/,
+        message: t('VALIDATION_ERROR_DECIMAL', 'Invalid decimal').replace('_attribute_', t('VALUE', 'Vlue'))
+      }
+    })
+  }), selectedMetaKey === 'boolean' && /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    className: "select-input",
+    defaultValue: selectedBoolean || '1',
+    options: booleanOptions,
+    onChange: function onChange(val) {
+      return setSelectedBoolean(val);
+    }
+  }), selectedMetaKey === 'json' && /*#__PURE__*/_react.default.createElement("div", {
+    className: "json_editor"
+  }, /*#__PURE__*/_react.default.createElement(_jsoneditorReact.JsonEditor, {
+    value: json,
+    onChange: function onChange(v) {
+      return handleChangeJson(v);
+    }
+  })), /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit"
+  }, /*#__PURE__*/_react.default.createElement(_IosAddCircle.default, null))))), actionState.loading && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+    primary: true
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR'),
     content: alertState.content,
     acceptText: t('ACCEPT'),

@@ -97,13 +97,13 @@ var DriversLocation = function DriversLocation(props) {
 
   var mapFit = function mapFit() {
     var _onlineDrivers = driversList.drivers.filter(function (driver) {
-      return driver.available;
+      return driver.enabled && driver.available && !driver.busy;
     });
 
     setOnlineDrivers(_onlineDrivers);
 
     var _offlineDrivers = driversList.drivers.filter(function (driver) {
-      return !driver.available;
+      return !(driver.enabled && driver.available && !driver.busy);
     });
 
     setOfflineDrivers(_offlineDrivers);
@@ -141,13 +141,11 @@ var DriversLocation = function DriversLocation(props) {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var _driver = _step2.value;
 
-          if (_driver.available) {
-            var _marker = _driver.location !== null ? _driver.location : defaultCenter;
+          var _marker = _driver.location !== null ? _driver.location : defaultCenter;
 
-            var _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
+          var _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
 
-            bounds.extend(_newPoint);
-          }
+          bounds.extend(_newPoint);
         }
       } catch (err) {
         _iterator2.e(err);
@@ -200,17 +198,15 @@ var DriversLocation = function DriversLocation(props) {
           for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
             var _driver2 = _step3.value;
 
-            if (!_driver2.available) {
-              if (_driver2.location !== null) {
-                checkLocation = true;
-              }
-
-              var _marker3 = _driver2.location !== null ? _driver2.location : defaultCenter;
-
-              var _newPoint3 = new window.google.maps.LatLng(_marker3.lat, _marker3.lng);
-
-              bounds.extend(_newPoint3);
+            if (_driver2.location !== null) {
+              checkLocation = true;
             }
+
+            var _marker3 = _driver2.location !== null ? _driver2.location : defaultCenter;
+
+            var _newPoint3 = new window.google.maps.LatLng(_marker3.lat, _marker3.lng);
+
+            bounds.extend(_newPoint3);
           }
         } catch (err) {
           _iterator3.e(err);
@@ -319,8 +315,8 @@ var DriversLocation = function DriversLocation(props) {
   }, onlineDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onlineDrivers.map(function (driver) {
     return /*#__PURE__*/_react.default.createElement(_styles.WrapDriverInfo, {
       key: driver.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, null, driver.photo ? /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
-      bgimage: driver.photo
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, null, (driver === null || driver === void 0 ? void 0 : driver.photo) ? /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
+      bgimage: driver === null || driver === void 0 ? void 0 : driver.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))));
   }))))));
 };

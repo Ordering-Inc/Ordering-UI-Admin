@@ -7,6 +7,8 @@ exports.DriverInfo = exports.DriverImage = exports.WrapperDriverImage = exports.
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
+var _react = _interopRequireDefault(require("react"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject7() {
@@ -108,7 +110,7 @@ exports.WrapperDriverImage = WrapperDriverImage;
 var DriverImgStyled = _styledComponents.default.div(_templateObject6());
 
 var DriverImage = function DriverImage(props) {
-  return /*#__PURE__*/React.createElement(DriverImgStyled, _extends({}, props, {
+  return /*#__PURE__*/_react.default.createElement(DriverImgStyled, _extends({}, props, {
     style: {
       backgroundImage: "url(".concat(props.bgimage, ")")
     }

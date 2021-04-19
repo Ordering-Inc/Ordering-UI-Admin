@@ -63,7 +63,7 @@ var Select = function Select(props) {
   var dropdownReference = (0, _react.useRef)();
 
   var handleSelectClick = function handleSelectClick(e) {
-    if (e.target.name === 'startDate' || e.target.name === 'endDate') return;
+    if (e.target.closest('.react-datepicker-wrapper') || e.target.closest('.react-datepicker')) return;
     setOpen(!open);
   };
 

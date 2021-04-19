@@ -24,7 +24,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n    overflow-x: auto;\n"]);
+  var data = _taggedTemplateLiteral(["\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;

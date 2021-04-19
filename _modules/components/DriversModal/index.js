@@ -77,12 +77,12 @@ var DriversModal = function DriversModal(props) {
   }, /*#__PURE__*/_react.default.createElement(_BsArrowUp.default, null), driverAvailable === 'online' ? t('ONLINE', 'Online') : t('OFFLINE', 'Offline'))), driversList.drivers.map(function (driver) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: driver.id
-    }, driverAvailable === 'online' ? driver.available && /*#__PURE__*/_react.default.createElement(_DriverCard.DriverCard, {
+    }, driverAvailable === 'online' ? driver.enabled && driver.available && !driver.busy && /*#__PURE__*/_react.default.createElement(_DriverCard.DriverCard, {
       driver: driver,
       driversList: driversList,
       handleSelectedOrderIds: handleSelectedOrderIds,
       handleOpenOrderDetail: handleOpenOrderDetail
-    }) : !driver.available && /*#__PURE__*/_react.default.createElement(_DriverCard.DriverCard, {
+    }) : !(driver.enabled && driver.available && !driver.busy) && /*#__PURE__*/_react.default.createElement(_DriverCard.DriverCard, {
       offline: true,
       driver: driver,
       driversList: driversList,

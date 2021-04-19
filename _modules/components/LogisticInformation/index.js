@@ -55,7 +55,9 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parseDate = _useUtils2[0].parseDate;
+      _useUtils2$ = _useUtils2[0],
+      parseDate = _useUtils2$.parseDate,
+      parseDistance = _useUtils2$.parseDistance;
 
   var getStatus = function getStatus(status) {
     switch (status) {
@@ -127,7 +129,7 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     onClick: function onClick() {
       return getLogistics();
     }
-  }, t('RELOAD', 'Reload')), /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles.UppercaseText, null, /*#__PURE__*/_react.default.createElement("strong", null, t('distance_customer_from_business', 'distance_customer_from_business'))), ": ", ((logisticInformation === null || logisticInformation === void 0 ? void 0 : (_logisticInformation$ = logisticInformation.data) === null || _logisticInformation$ === void 0 ? void 0 : _logisticInformation$.distance_customer_from_business) / 1000).toFixed(2), " KM"), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles.UppercaseText, {
+  }, t('RELOAD', 'Reload')), /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles.UppercaseText, null, /*#__PURE__*/_react.default.createElement("strong", null, t('distance_customer_from_business', 'distance_customer_from_business'))), ": ", parseDistance(((logisticInformation === null || logisticInformation === void 0 ? void 0 : (_logisticInformation$ = logisticInformation.data) === null || _logisticInformation$ === void 0 ? void 0 : _logisticInformation$.distance_customer_from_business) / 1000).toFixed(2))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles.UppercaseText, {
     title: "title"
   }, t('queues', 'queues'))), logisticInformation.data.queues.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.data.queues.map(function (queue, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

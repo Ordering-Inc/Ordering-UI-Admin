@@ -156,32 +156,34 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var getProductPrice = function getProductPrice(product) {
     var subOptionPrice = 0;
 
-    if (product.options.length > 0) {
-      var _iterator = _createForOfIteratorHelper(product.options),
-          _step;
+    if (Array.isArray(product.options)) {
+      if (product.options.length > 0) {
+        var _iterator = _createForOfIteratorHelper(product.options),
+            _step;
 
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var option = _step.value;
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var option = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(option.suboptions),
-              _step2;
+            var _iterator2 = _createForOfIteratorHelper(option.suboptions),
+                _step2;
 
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var suboption = _step2.value;
-              subOptionPrice += suboption.quantity * suboption.price;
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var suboption = _step2.value;
+                subOptionPrice += suboption.quantity * suboption.price;
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
             }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
           }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
         }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
       }
     }
 
@@ -277,7 +279,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       className: "ingredient",
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
-  })), productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo().options.map(function (option, i) {
+  })), productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, Array.isArray(productInfo().options) && productInfo().options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {

@@ -52,7 +52,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
   var _theme$colors, _theme$colors2, _theme$colors3, _order$business, _order$business2, _theme$images, _theme$images$icons, _theme$images2, _theme$images2$icons, _order$customer, _order$customer2, _order$customer3, _order$customer4;
 
-  var order = props.order,
+  var isOrdersListView = props.isOrdersListView,
+      order = props.order,
       drivers = props.drivers,
       pendingOrder = props.pendingOrder,
       preOrder = props.preOrder,
@@ -89,7 +90,9 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
       setDiffTime = _useState2[1];
 
   var handleLocationAndMessage = function handleLocationAndMessage(e) {
-    if (activeSwitch.messages) {
+    if (isOrdersListView) return;
+
+    if (activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.messages) {
       handleOpenMessage(order, '');
     } else {
       var _driverSelectorRef$cu, _orderStatusRef$curre;
@@ -107,6 +110,12 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
         }
       }
     }
+  };
+
+  var openOrderDetail = function openOrderDetail() {
+    if (!isOrdersListView) return;
+    history.push("/orders-deliveries?id=".concat(order.id));
+    handleOpenOrderDetail(order.id);
   };
 
   var getLogisticTag = function getLogisticTag(status) {
@@ -169,17 +178,21 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
     onClick: function onClick(e) {
       return handleLocationAndMessage(e);
     },
-    messageUI: activeSwitch.messages,
+    messageUI: activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.messages,
     messageUIActive: (messageOrder === null || messageOrder === void 0 ? void 0 : messageOrder.id) === order.id,
-    deliveryUI: activeSwitch.deliveries,
-    deliveryUIActive: (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.id) === order.id
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapIndicator, null, activeSwitch.messages && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageIndicator, null, order === null || order === void 0 ? void 0 : order.unread_count)), /*#__PURE__*/_react.default.createElement(_styles.WrapperInfo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+    deliveryUI: activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.deliveries,
+    deliveryUIActive: (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.id) === order.id,
+    isOrdersListView: isOrdersListView
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapIndicator, null, (activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.messages) && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageIndicator, null, order === null || order === void 0 ? void 0 : order.unread_count)), /*#__PURE__*/_react.default.createElement(_styles.WrapperInfo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "order-item-business",
     ref: businessRef
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperAccordionImage, null, /*#__PURE__*/_react.default.createElement(_styles.AccordionImage, {
     bgimage: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_NO', 'Order No'), ". ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), (activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.deliveries) && /*#__PURE__*/_react.default.createElement(_styles.MoreDetailsButton, {
-    ref: moreDetailRef
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_NO', 'Order No'), ". ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), ((activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.deliveries) || isOrdersListView) && /*#__PURE__*/_react.default.createElement(_styles.MoreDetailsButton, {
+    ref: moreDetailRef,
+    onClick: function onClick() {
+      return openOrderDetail();
+    }
   }, t('MORE_DETAIL', 'More detail')))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryInfo, null, /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   })), /*#__PURE__*/_react.default.createElement(_styles.DeliveryType, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryIcon, null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement("img", {

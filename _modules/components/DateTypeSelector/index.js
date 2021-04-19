@@ -11,6 +11,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
+
+require("react-datepicker/dist/react-datepicker.css");
+
 var _dayjs = _interopRequireDefault(require("dayjs"));
 
 var _Select = require("../../styles/Select");
@@ -45,12 +49,12 @@ var DateTypeSelector = function DateTypeSelector(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(''),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       startDate = _useState2[0],
       setStartDate = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(''),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       endDate = _useState4[0],
       setEndDate = _useState4[1];
@@ -72,61 +76,59 @@ var DateTypeSelector = function DateTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('LAST_30_DAYS', 'Last 30 days'))
   }, {
     value: 'term',
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, t('FROM', 'From'), /*#__PURE__*/_react.default.createElement("input", {
-      type: "date",
-      name: "startDate",
-      value: startDate,
-      onChange: function onChange(e) {
-        return handleChangeDate(e);
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, t('FROM', 'From'), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
+      selected: startDate,
+      placeholderText: "mm/dd/yyyy",
+      className: "startDate",
+      isClearable: true,
+      onChange: function onChange(date) {
+        return _handleChangeFromDate(date);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, t('TO', 'To'), /*#__PURE__*/_react.default.createElement("input", {
-      type: "date",
-      id: "endDate",
-      min: "",
-      name: "endDate",
-      value: endDate,
-      onChange: function onChange(e) {
-        return handleChangeDate(e);
+    })), /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, t('TO', 'To'), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
+      selected: endDate,
+      minDate: new Date(startDate),
+      placeholderText: "mm/dd/yyyy",
+      className: "endDate",
+      isClearable: true,
+      onChange: function onChange(date) {
+        return _handleChangeEndDate(date);
       }
     })))
   }];
-
-  var handleChangeDate = function handleChangeDate(e) {
-    if (e.target.name === 'startDate') {
-      setStartDate(e.target.value);
-    }
-
-    if (e.target.name === 'endDate') {
-      setEndDate(e.target.value);
-    }
-  };
 
   var changeDateType = function changeDateType(dateType) {
     handleChangeDateType(dateType);
   };
 
-  (0, _react.useEffect)(function () {
-    if (startDate === '' || startDate === null) return;
-    document.getElementById('endDate').min = startDate;
-    handleChangeFromDate(startDate);
-  }, [startDate]);
-  (0, _react.useEffect)(function () {
-    if (endDate === '' || endDate === null) return;
-    handleChangeEndDate(endDate);
-  }, [endDate]);
+  var _handleChangeFromDate = function _handleChangeFromDate(date) {
+    setStartDate(date);
+
+    if (date !== null) {
+      handleChangeFromDate((0, _dayjs.default)(date).format('YYYY-MM-DD'));
+    } else {
+      handleChangeFromDate(null);
+    }
+  };
+
+  var _handleChangeEndDate = function _handleChangeEndDate(date) {
+    setEndDate(date);
+
+    if (date !== null) {
+      handleChangeEndDate((0, _dayjs.default)(date).format('YYYY-MM-DD'));
+    } else {
+      handleChangeEndDate(null);
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (filterValues.dateType !== 'term') return;
 
     if (filterValues.deliveryFromDatetime !== null) {
-      setStartDate((0, _dayjs.default)(filterValues.deliveryFromDatetime).format('YYYY-MM-DD'));
-    } else {
-      setStartDate('');
+      setStartDate(new Date(filterValues.deliveryFromDatetime));
     }
 
     if (filterValues.deliveryEndDatetime !== null) {
-      setEndDate((0, _dayjs.default)(filterValues.deliveryEndDatetime).format('YYYY-MM-DD'));
-    } else {
-      setEndDate('');
+      setEndDate(new Date(filterValues.deliveryEndDatetime));
     }
   }, [filterValues]);
   return /*#__PURE__*/_react.default.createElement(_Select.Select, {
@@ -134,7 +136,8 @@ var DateTypeSelector = function DateTypeSelector(props) {
     options: dateTypes,
     onChange: function onChange(dateType) {
       return changeDateType(dateType);
-    }
+    },
+    className: "date-filter-container"
   });
 };
 

@@ -104,7 +104,8 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
     }, /*#__PURE__*/_react.default.createElement("p", null, t('PREORDER', 'Preorder'))),
-    color: 'primary'
+    color: 'primary',
+    disabled: true
   }, {
     value: 'inProgress',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {

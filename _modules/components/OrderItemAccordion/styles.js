@@ -28,7 +28,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  & > div {\n    &:nth-child(1) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(2) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(3) {\n      width: 23%;\n      min-width: 150px;\n    }\n\n    &:nth-child(4) {\n      flex: 1;\n      justify-content: flex-end;\n      margin: 0 5px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  & > div {\n    &:nth-child(1) {\n      width: 20%;\n    }\n\n    &:nth-child(2) {\n      width: 20%;\n    }\n\n    &:nth-child(3) {\n      width: 23%;\n    }\n\n    &:nth-child(4) {\n      flex: 1;\n      justify-content: flex-end;\n      margin: 0 5px;\n    }\n  }\n\n  @media (max-width: 1200px) {\n    & > div {\n      &:nth-child(1),\n      &:nth-child(2) {\n        width: 29%;\n      }\n    }\n  }\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -38,7 +38,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid #e8e8e8;\n\n  & > div {\n    \n    &:nth-child(1) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(2) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(3) {\n      width: 23%;\n      min-width: 150px;\n      padding: 0px;\n      p {\n        font-size: 14px;\n        font-weight: 600;\n      }\n    }\n\n    &:nth-child(4) {\n      min-width: 40px;\n      width: 6%;\n      font-size: 14px;\n    }\n\n    \n    &:nth-child(5) {\n      width: ", ";\n      min-width: ", ";\n      display: ", ";\n      justify-content: ", ";\n\n      p {\n        font-size: 12px;\n      }\n    }\n\n    &:nth-child(6) {\n      width: 9%;\n      width: ", ";\n      min-width: 120px;\n      display: flex;\n      justify-content: flex-end;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid #e8e8e8;\n\n  & > div {\n    \n    &:nth-child(1) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(2) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(3) {\n      width: 23%;\n      min-width: 150px;\n      padding: 0px;\n      p {\n        font-size: 14px;\n        font-weight: 600;\n      }\n    }\n\n    &:nth-child(4) {\n      min-width: 40px;\n      width: 6%;\n      font-size: 14px;\n    }\n\n    \n    &:nth-child(5) {\n      width: ", ";\n      min-width: ", ";\n      display: ", ";\n      justify-content: ", ";\n\n      p {\n        font-size: 12px;\n      }\n    }\n\n    &:nth-child(6) {\n      width: 9%;\n      width: ", ";\n      min-width: 120px;\n      display: flex;\n      justify-content: flex-end;\n    }\n  }\n\n  @media (max-width: 1200px) {\n    & > div {\n      &:nth-child(3),\n      &:nth-child(4) {\n        display: none;\n      }\n    }\n  }\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -200,7 +200,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  background: #FFF;\n  cursor: pointer;\n  min-width: 1020px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  background: #FFF;\n  cursor: pointer;\n"]);
 
   _templateObject = function _templateObject() {
     return data;

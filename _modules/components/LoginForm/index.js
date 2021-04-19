@@ -75,8 +75,7 @@ var LoginFormUI = function LoginFormUI(props) {
 
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
       _useApi2 = _slicedToArray(_useApi, 1),
-      ordering = _useApi2[0]; // const [{ auth, user }] = useSession()
-
+      ordering = _useApi2[0];
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -111,7 +110,7 @@ var LoginFormUI = function LoginFormUI(props) {
   var onSubmit = function onSubmit() {
     var _configFile = configFile;
     _configFile.project = projectName;
-    setConfigFile(_configFile);
+    setConfigFile(_objectSpread({}, _configFile));
     localStorage.setItem('project', projectName);
     setSubmitted(true);
   };
@@ -122,7 +121,7 @@ var LoginFormUI = function LoginFormUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (ordering.project === '' || !submitted) return;
+    if (ordering.project === null || !submitted) return;
     handleButtonLoginClick();
   }, [ordering, submitted]);
   (0, _react.useEffect)(function () {
@@ -135,6 +134,7 @@ var LoginFormUI = function LoginFormUI(props) {
         open: true,
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR')]
       });
+      setSubmitted(false);
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
@@ -153,16 +153,7 @@ var LoginFormUI = function LoginFormUI(props) {
       open: false,
       content: []
     });
-  }; // useEffect(() => {
-  //   if (!auth || formState.loading) return
-  //   if (user?.level !== 0) {
-  //     setAlertState({
-  //       open: true,
-  //       content: t('YOU_DONT_PERMISSION', 'You don\'t have permission')
-  //     })
-  //   }
-  // }, [auth, formState.loading])
-
+  };
 
   return /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
     isPopup: isPopup
@@ -279,7 +270,8 @@ var LoginFormUI = function LoginFormUI(props) {
 
 var LoginForm = function LoginForm(props) {
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: LoginFormUI
+    UIComponent: LoginFormUI,
+    allowedLevels: [0, 2]
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LoginForm, loginControllerProps);

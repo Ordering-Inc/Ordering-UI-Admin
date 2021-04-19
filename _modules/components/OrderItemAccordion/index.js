@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderItemAccordion = function OrderItemAccordion(props) {
-  var _theme$colors, _theme$colors2, _theme$colors3, _order$business, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _theme$images, _theme$images$icons, _theme$images2, _theme$images2$icons, _order$summary;
+  var _theme$colors, _theme$colors2, _theme$colors3, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _theme$images2, _theme$images2$icons, _theme$images3, _theme$images3$icons, _order$summary;
 
   var order = props.order,
       drivers = props.drivers,
@@ -78,7 +78,8 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
-      parseDate = _useUtils2$.parseDate;
+      parseDate = _useUtils2$.parseDate,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var history = (0, _reactRouterDom.useHistory)();
 
@@ -202,7 +203,17 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
     return function () {
       clearInterval(timer);
     };
-  }, []);
+  }, []); // const getImage = () => {
+  //   const http = new XMLHttpRequest()
+  //   http.open('HEAD', order.business?.logo, false)
+  //   http.send()
+  //   if (http.status !== 404) {
+  //     return optimizeImage(order.business?.logo, 'h_200,c_limit')
+  //   } else {
+  //     return theme.images?.dummies?.businessLogo
+  //   }
+  // }
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionContainer, {
     className: setActive,
     filterColor: (order === null || order === void 0 ? void 0 : order.logistic_status) === -1 || (order === null || order === void 0 ? void 0 : order.logistic_status) === 0 ? theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.deadlineOk : order.logistic_status === 1 ? theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.deadlineDelayed : theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.deadlineRisk,
@@ -221,7 +232,7 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, {
     className: "order-item-business"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperAccordionImage, null, /*#__PURE__*/_react.default.createElement(_styles.AccordionImage, {
-    bgimage: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo
+    bgimage: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles.TextBlockContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BigText, null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement(_styles.SmallText, null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : (_order$business3$city = _order$business3.city) === null || _order$business3$city === void 0 ? void 0 : _order$business3$city.name))), /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperAccordionImage, null, (order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo) ? /*#__PURE__*/_react.default.createElement(_styles.AccordionImage, {
     bgimage: order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.TextBlockContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BigText, null, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name), /*#__PURE__*/_react.default.createElement(_styles.SmallText, null, order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.cellphone))), /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverSelector, {
@@ -233,10 +244,10 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
     drivers: drivers,
     order: order
   }))), /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryTypeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryIcon, null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.driverDelivery,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.driverDelivery,
     alt: "Delivery"
   }), (order === null || order === void 0 ? void 0 : order.delivery_type) === 2 && /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.pickUp,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$icons = _theme$images3.icons) === null || _theme$images3$icons === void 0 ? void 0 : _theme$images3$icons.pickUp,
     alt: "pick up"
   }), (order === null || order === void 0 ? void 0 : order.delivery_type) === 3 && /*#__PURE__*/_react.default.createElement(_AiFillShop.default, null), (order === null || order === void 0 ? void 0 : order.delivery_type) === 4 && /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null), (order === null || order === void 0 ? void 0 : order.delivery_type) === 5 && /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null)), /*#__PURE__*/_react.default.createElement(_styles.DeliveryName, null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && t('DELIVERY', 'Delivery'), (order === null || order === void 0 ? void 0 : order.delivery_type) === 2 && t('PICKUP', 'Pickup'), (order === null || order === void 0 ? void 0 : order.delivery_type) === 3 && t('EAT_IN', 'Eat in'), (order === null || order === void 0 ? void 0 : order.delivery_type) === 4 && t('CURBSIDE', 'Curbside'), (order === null || order === void 0 ? void 0 : order.delivery_type) === 5 && t('DRIVE_THRU', 'Drive thru')))), /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     defaultValue: parseInt(order.status),

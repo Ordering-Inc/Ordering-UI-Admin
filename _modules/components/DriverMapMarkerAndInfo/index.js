@@ -84,7 +84,7 @@ var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
   }, t('LAST_LOCATION', 'Last location'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, parseDate(driver.last_location_at, {
     utc: false
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperMapMarker, {
-    offline: !driver.available,
+    offline: !(driver.enabled && driver.available && !driver.busy),
     onMouseOver: function onMouseOver() {
       return setInfoShow(true);
     },

@@ -21,6 +21,8 @@ var _OrdersPagination = require("../OrdersPagination");
 
 var _GoTriangleDown = _interopRequireDefault(require("@meronex/icons/go/GoTriangleDown"));
 
+var _useWindowSize = require("../../hooks/useWindowSize");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -81,51 +83,46 @@ var OrderListing = function OrderListing(props) {
       setActive = _useState2[0],
       setActiveState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)('inherit'),
+  var _useState3 = (0, _react.useState)('collapse_icon'),
       _useState4 = _slicedToArray(_useState3, 2),
-      setHeight = _useState4[0],
-      setHeightState = _useState4[1];
+      setRotate = _useState4[0],
+      setRotateState = _useState4[1];
 
-  var _useState5 = (0, _react.useState)('inherit'),
+  var windowSize = (0, _useWindowSize.useWindowSize)();
+
+  var _useState5 = (0, _react.useState)(true),
       _useState6 = _slicedToArray(_useState5, 2),
-      setNoneOrderHeight = _useState6[0],
-      setNoneOrderHeightState = _useState6[1];
+      isShow = _useState6[0],
+      setIsShow = _useState6[1]; // Change page
 
-  var _useState7 = (0, _react.useState)('collapse_icon'),
+
+  var _useState7 = (0, _react.useState)(1),
       _useState8 = _slicedToArray(_useState7, 2),
-      setRotate = _useState8[0],
-      setRotateState = _useState8[1];
+      currentPage = _useState8[0],
+      setCurrentPage = _useState8[1];
 
-  var content = (0, _react.useRef)(null);
-  var noneContent = (0, _react.useRef)(null); // Change page
-
-  var _useState9 = (0, _react.useState)(1),
-      _useState10 = _slicedToArray(_useState9, 2),
-      currentPage = _useState10[0],
-      setCurrentPage = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(10),
-      _useState12 = _slicedToArray(_useState11, 1),
-      ordersPerPage = _useState12[0]; // Get current orders
+  var _useState9 = (0, _react.useState)(10),
+      _useState10 = _slicedToArray(_useState9, 1),
+      ordersPerPage = _useState10[0]; // Get current orders
 
 
   var indexOfLastPost = currentPage * ordersPerPage;
   var indexOfFirstPost = indexOfLastPost - ordersPerPage;
 
-  var _useState13 = (0, _react.useState)([]),
+  var _useState11 = (0, _react.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      currentOrders = _useState12[0],
+      setCurrentOrders = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
-      currentOrders = _useState14[0],
-      setCurrentOrders = _useState14[1];
+      totalPages = _useState14[0],
+      setTotalPages = _useState14[1];
 
   var _useState15 = (0, _react.useState)(null),
       _useState16 = _slicedToArray(_useState15, 2),
-      totalPages = _useState16[0],
-      setTotalPages = _useState16[1];
-
-  var _useState17 = (0, _react.useState)(null),
-      _useState18 = _slicedToArray(_useState17, 2),
-      totalOrders = _useState18[0],
-      setTotalOrders = _useState18[1]; // Change page
+      totalOrders = _useState16[0],
+      setTotalOrders = _useState16[1]; // Change page
 
 
   var prevPaginate = function prevPaginate() {
@@ -165,13 +162,9 @@ var OrderListing = function OrderListing(props) {
   var toggleOrderList = function toggleOrderList() {
     setActiveState(setActive === '' ? 'active' : '');
 
-    if (content.current) {
-      setHeightState(setActive === 'active' ? "".concat(content.current.scrollHeight, "px") : '0px');
-    }
-
-    if (noneContent.current) {
-      setNoneOrderHeightState(setActive === 'active' ? "".concat(noneContent.current.scrollHeight, "px") : '0px');
-    }
+    if (setActive === 'active') {
+      setIsShow(true);
+    } else setIsShow(false);
 
     setRotateState(setActive === 'active' ? 'collapse_icon' : 'collapse_icon rotate');
   };
@@ -186,26 +179,17 @@ var OrderListing = function OrderListing(props) {
     onClick: function onClick() {
       return toggleOrderList();
     }
-  }), orderStatusTitle), !(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperNoneOrders, {
-    small: orderListView === 'small',
-    ref: noneContent,
-    style: {
-      maxHeight: "".concat(setNoneOrderHeight)
-    }
+  }), orderStatusTitle), !(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShow && /*#__PURE__*/_react.default.createElement(_styles.WrapperNoneOrders, {
+    small: orderListView === 'small'
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerNoneOrdersContainer, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.nonOrders,
     alt: "none"
-  })))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderListContent, {
-    ref: content,
-    style: {
-      maxHeight: "".concat(setHeight)
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.InnerOrderListContent, {
+  })))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderListContent, null, isShow && /*#__PURE__*/_react.default.createElement(_styles.InnerOrderListContent, {
     small: orderListView === 'small'
   }, orderListView === 'big' && !(orderList.loading || driversList.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentOrders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: order.id
-    }, orderListView === 'big' && /*#__PURE__*/_react.default.createElement(_OrderItemAccordion.OrderItemAccordion, {
+    }, orderListView === 'big' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 992 ? /*#__PURE__*/_react.default.createElement(_OrderItemAccordion.OrderItemAccordion, {
       order: order,
       size: size,
       drivers: driversList.drivers,
@@ -215,10 +199,20 @@ var OrderListing = function OrderListing(props) {
       handleUpdateOrderStatus: handleUpdateOrderStatus,
       handleSelectedOrderIds: handleSelectedOrderIds,
       handleOpenOrderDetail: handleOpenOrderDetail
-    }));
+    }) : /*#__PURE__*/_react.default.createElement(_SmallOrderItemAccordion.SmallOrderItemAccordion, {
+      isOrdersListView: true,
+      order: order,
+      drivers: driversList.drivers,
+      pendingOrder: pendingOrder,
+      preOrder: preOrder,
+      selectedOrderIds: selectedOrderIds,
+      handleUpdateOrderStatus: handleUpdateOrderStatus,
+      handleSelectedOrderIds: handleSelectedOrderIds,
+      handleOpenOrderDetail: handleOpenOrderDetail
+    })));
   })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
     className: "skeleton-loading"
-  }, orderListView === 'big' && _toConsumableArray(Array(10)).map(function (item, i) {
+  }, orderListView === 'big' && windowSize.width > 992 && _toConsumableArray(Array(10)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonCard, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonCell, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -271,7 +265,7 @@ var OrderListing = function OrderListing(props) {
       width: 60,
       height: 20
     })));
-  })), orderListView === 'small' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
+  })), (orderListView === 'small' || windowSize.width <= 992) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement(_SmallOrderItemAccordion.SmallOrderItemAccordion, {
@@ -315,11 +309,9 @@ var OrderListing = function OrderListing(props) {
     })));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !orderList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_OrdersPagination.OrdersPagination, {
     ordersPerPage: ordersPerPage,
-    totalOrders: totalOrders // totalOrders={pagination.total}
-    ,
+    totalOrders: totalOrders,
     currentPage: currentPage,
-    totalPages: totalPages // totalPages={pagination.total_pages}
-    ,
+    totalPages: totalPages,
     prevPaginate: prevPaginate,
     nextPaginate: nextPaginate
   })))));
