@@ -99,10 +99,12 @@ export const ProductItemAccordion = (props) => {
 
   const getProductPrice = (product) => {
     let subOptionPrice = 0
-    if (product.options.length > 0) {
-      for (const option of product.options) {
-        for (const suboption of option.suboptions) {
-          subOptionPrice += suboption.quantity * suboption.price
+    if (Array.isArray(product.options)) {
+      if (product.options.length > 0) {
+        for (const option of product.options) {
+          for (const suboption of option.suboptions) {
+            subOptionPrice += suboption.quantity * suboption.price
+          }
         }
       }
     }
@@ -260,7 +262,7 @@ export const ProductItemAccordion = (props) => {
         )}
         {productInfo().options.length > 0 && (
           <ProductOptionsList>
-            {productInfo().options.map((option, i) => (
+            {Array.isArray(productInfo().options) && productInfo().options.map((option, i) => (
               <li key={i}>
                 <p>{option.name}</p>
                 <ProductOptionsList className='suboption'>

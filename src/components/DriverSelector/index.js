@@ -82,7 +82,7 @@ const DriverSelectorUI = (props) => {
       const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
         return {
           value: driver.id,
-          disabled: !driver?.available,
+          disabled: !(driver?.enabled && driver?.available && !driver?.busy),
           content: (
             <Option small={small} isPhoneView={isPhoneView} padding={padding}>
               <WrapperDriverImage small={small}>

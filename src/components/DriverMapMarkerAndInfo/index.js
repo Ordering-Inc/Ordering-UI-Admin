@@ -64,7 +64,7 @@ export const DriverMapMarkerAndInfo = (props) => {
         </DriverInfo>
       )}
       <WrapperMapMarker
-        offline={!driver.available}
+        offline={!(driver.enabled && driver.available && !driver.busy)}
         onMouseOver={() => setInfoShow(true)}
         onMouseLeave={() => setInfoShow(false)}
       >

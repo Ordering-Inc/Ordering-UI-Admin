@@ -7,7 +7,6 @@ export const AccordionSection = styled.div`
   width: 100%;
   background: #FFF;
   cursor: pointer;
-  min-width: 1020px;
 `
 export const OrderItemAccordionContainer = styled.div`
   display: flex;
@@ -247,6 +246,15 @@ export const WrapperGeneralInfo = styled.div`
       justify-content: flex-end;
     }
   }
+
+  @media (max-width: 1200px) {
+    & > div {
+      &:nth-child(3),
+      &:nth-child(4) {
+        display: none;
+      }
+    }
+  }
 `
 export const WrapperOrderlabel = styled.div`
   width: 100%;
@@ -257,23 +265,29 @@ export const WrapperOrderlabel = styled.div`
   & > div {
     &:nth-child(1) {
       width: 20%;
-      min-width: 150px;
     }
 
     &:nth-child(2) {
       width: 20%;
-      min-width: 150px;
     }
 
     &:nth-child(3) {
       width: 23%;
-      min-width: 150px;
     }
 
     &:nth-child(4) {
       flex: 1;
       justify-content: flex-end;
       margin: 0 5px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    & > div {
+      &:nth-child(1),
+      &:nth-child(2) {
+        width: 29%;
+      }
     }
   }
 `

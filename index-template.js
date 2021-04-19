@@ -23,6 +23,10 @@ import notFound404 from './template/assets/images/not-found-404.svg'
 import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import loginHero from './template/assets/images/loginHero.png'
 
+/**
+ * dummies
+ */
+import storeDummy from './template/assets/images/dummies/store.png'
 import nonOrders from './template/assets/images/dummies/nonOrders.svg'
 
 /**
@@ -68,18 +72,6 @@ import orderStatus9 from './template/assets/images/order/status-9.svg'
 import orderStatus10 from './template/assets/images/order/status-10.svg'
 import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
-
-// const configFile = {
-//   project: 'dragonteam1',
-//   api: {
-//     url: 'https://apiv4.ordering.co',
-//     language: 'en',
-//     version: 'v400'
-//   },
-//   socket: {
-//     url: 'https://socket.ordering.co'
-//   }
-// }
 
 Sentry.init({
   environment: process.env.NODE_ENV,
@@ -154,7 +146,8 @@ theme.images = {
     timeline: timeline
   },
   dummies: {
-    nonOrders: nonOrders
+    nonOrders: nonOrders,
+    businessLogo: storeDummy
   }
 }
 

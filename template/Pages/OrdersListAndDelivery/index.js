@@ -5,7 +5,6 @@ import {
   WrapperOrdersListAndDelivery
 } from './styles'
 import { MainOrdersManager as MainOrdersManagerController } from '../../../src/components/MainOrdersManager'
-// import { OrdersListAndDelivery as OrdersListAndDeliveryController } from '../../../src/components/OrdersListAndDelivery'
 // import { OverView } from '../../../src/components/OverView'
 
 export const OrdersListAndDelivery = (props) => {
@@ -15,7 +14,6 @@ export const OrdersListAndDelivery = (props) => {
       <AdminLayout>
         <WrapperOrdersListAndDelivery>
           <MainOrdersManagerController />
-          {/* <OrdersListAndDeliveryController /> */}
           {/* <OverView /> */}
         </WrapperOrdersListAndDelivery>
       </AdminLayout>

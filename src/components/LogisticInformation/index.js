@@ -13,7 +13,7 @@ const LogisticInformationUI = (props) => {
   const { logisticInformation, getLogistics } = props
   const [, t] = useLanguage()
 
-  const [{ parseDate }] = useUtils()
+  const [{ parseDate, parseDistance }] = useUtils()
   const getStatus = (status) => {
     switch (status) {
       case 0:
@@ -70,7 +70,7 @@ const LogisticInformationUI = (props) => {
               </Button>
               <BubbleConsole>
                 <UppercaseText><strong>{t('distance_customer_from_business', 'distance_customer_from_business')}</strong></UppercaseText>
-                : {(logisticInformation?.data?.distance_customer_from_business / 1000).toFixed(2)} KM
+                : {parseDistance((logisticInformation?.data?.distance_customer_from_business / 1000).toFixed(2))}
               </BubbleConsole>
               <>
                 <BubbleConsole>

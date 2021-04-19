@@ -523,7 +523,7 @@ export const MessagesUI = (props) => {
                         )}
                       </>
                     )}
-                    {!history && (message?.author?.level === 0 || message?.author?.level === messageLevel) && (
+                    {!history && (message?.author?.level === 0 || message?.author?.level === 2 || message?.author?.level === messageLevel) && (
                       <>
                         {message.type === 1 && (
                           <MessageConsole key={message.id}>
