@@ -29,5 +29,5 @@ export const PageButton = styled.button`
 `
 export const WrapperPageState = styled.div`
   display: flex;
-  min-width: 120px;
+  min-width: 140px;
 `
