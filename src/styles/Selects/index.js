@@ -92,6 +92,7 @@ export const OptionsInner = styled.div`
   overflow: auto;
   margin: ${({ optionInnerMargin }) => optionInnerMargin};
   max-height: ${({ optionInnerMaxHeight }) => optionInnerMaxHeight};
+  overscroll-behavior: contain;
 `
 export const Selected = styled.div`
   padding-left: 15px;
