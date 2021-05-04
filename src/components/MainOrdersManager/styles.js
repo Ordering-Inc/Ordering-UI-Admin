@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
   display: flex;
-  width: calc(100% - 140px);
+  width: 100%;
   padding: 30px 20px;
   box-sizing: border-box;
 
