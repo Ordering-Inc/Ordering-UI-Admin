@@ -41,7 +41,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// import { MobileSidebarMenu } from '../MobileSidebarMenu'
 var Header = function Header(props) {
   var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos;
 
@@ -49,14 +48,16 @@ var Header = function Header(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useState = (0, _react.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       openPopover = _useState2[0],
-      setOpenPopover = _useState2[1]; // const [openOverview, setOpenOverview] = useState(true)
+      setOpenPopover = _useState2[1];
 
-
-  var theme = (0, _styledComponents.useTheme)(); // const { width } = useWindowSize()
-
+  var theme = (0, _styledComponents.useTheme)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
 
   var handleTogglePopover = function handleTogglePopover(type) {
@@ -69,20 +70,7 @@ var Header = function Header(props) {
 
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
-  }; // useEffect(() => {
-  //   if (document.getElementById('overView') !== null) {
-  //     if (width < 1400) {
-  //       if (!openOverview) {
-  //         document.getElementById('overView').style.right = '0px'
-  //       } else {
-  //         document.getElementById('overView').style.right = '-140px'
-  //       }
-  //     } else {
-  //       document.getElementById('overView').style.right = '0px'
-  //     }
-  //   }
-  // }, [openOverview, width])
-
+  };
 
   return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
@@ -96,7 +84,18 @@ var Header = function Header(props) {
   }), /*#__PURE__*/_react.default.createElement("img", {
     alt: "Isotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.isotype
-  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.SendFeedback, null, /*#__PURE__*/_react.default.createElement("a", {
+    className: "typeform-share link",
+    href: "https://form.typeform.com/to/TL9rslqL?typeform-medium=embed-snippet",
+    "data-mode": "popup",
+    style: {
+      color: '#0445AF',
+      textDecoration: 'underline',
+      fontSize: 18
+    },
+    "data-size": "100",
+    target: "_blank"
+  }, t('SEND_FEEDBACK', 'Send feedback'))), /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     open: openPopover.user,
     onClick: function onClick() {
       return handleTogglePopover('user');

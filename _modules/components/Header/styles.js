@@ -3,11 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OverViewControlButton = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.HeaderContainer = void 0;
+exports.SendFeedback = exports.OverViewControlButton = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.HeaderContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral([""]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject6() {
   var data = _taggedTemplateLiteral(["\n  background: ", ";\n  border-radius: 100%;\n  border: none;\n  outline: none;\n  width: 35px;\n  height: 35px;\n  display: flex;\n  justify-content: center;\n  cursor: pointer;\n  \n  svg {\n    flex-shrink: 0;\n    font-size: 30px;\n    color: #333;\n  }\n\n  @media (min-width: 1400px) {\n    display: none;\n  }\n"]);
@@ -96,3 +106,7 @@ var OverViewControlButton = _styledComponents.default.button(_templateObject6(),
 });
 
 exports.OverViewControlButton = OverViewControlButton;
+
+var SendFeedback = _styledComponents.default.div(_templateObject7());
+
+exports.SendFeedback = SendFeedback;
