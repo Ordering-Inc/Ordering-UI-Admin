@@ -87,3 +87,5 @@ export const OverViewControlButton = styled.button`
     display: none;
   }
 `
+
+export const SendFeedback = styled.div``
