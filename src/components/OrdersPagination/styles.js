@@ -18,9 +18,13 @@ export const PageButton = styled.button`
   justify-content: center;
   cursor: pointer;
 
-  &.active {
+  &:active {
     background: #1c202e;
     color: #fff;
+  }
+  &:disabled {
+    cursor: no-drop;
+    pointer-events: none;
   }
 `
 export const WrapperPageState = styled.div`
