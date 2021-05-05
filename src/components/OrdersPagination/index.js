@@ -13,18 +13,20 @@ export const OrdersPagination = ({ ordersPerPage, totalOrders, currentPage, tota
   return (
     <WrapperPagination>
       <WrapperPageState>
-        : {indexOfFirstOrders}-{indexOfLastOrders} of {totalOrders}
+        {indexOfFirstOrders}-{indexOfLastOrders} of {totalOrders}
       </WrapperPageState>
-      {currentPage !== 1 && (
-        <PageButton onClick={() => prevPaginate()}>
-          <Prev />
-        </PageButton>
-      )}
-      {currentPage !== totalPages && totalPages !== 1 && (
-        <PageButton onClick={() => nextPaginate()}>
-          <Next />
-        </PageButton>
-      )}
+      <PageButton
+        disabled={currentPage === 1}
+        onClick={() => prevPaginate()}
+      >
+        <Prev />
+      </PageButton>
+      <PageButton
+        onClick={() => nextPaginate()}
+        disabled={currentPage === totalPages || totalPages === 1}
+      >
+        <Next />
+      </PageButton>
     </WrapperPagination>
   )
 }
