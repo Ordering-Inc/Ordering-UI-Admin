@@ -203,6 +203,51 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       value: 'Delivery Failed by driver',
       slug: 'DELIVERY_FAILED_BY_DRIVER',
       percentage: 0
+    }, {
+      key: 13,
+      value: 'Preorder',
+      slug: 'PREORDER',
+      percentage: 25
+    }, {
+      key: 14,
+      value: 'Order not ready',
+      slug: 'ORDER_NOT_READY',
+      percentage: 65
+    }, {
+      key: 15,
+      value: 'Pickup completed by customer',
+      slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
+      percentage: 100
+    }, {
+      key: 16,
+      value: 'Canceled by customer',
+      slug: 'CANCELED_BY_CUSTOMER',
+      percentage: 0
+    }, {
+      key: 17,
+      value: 'Not picked by customer',
+      slug: 'NOT_PICKED_BY_CUSTOMER',
+      percentage: 0
+    }, {
+      key: 18,
+      value: 'Driver almost arrived to business',
+      slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
+      percentage: 50
+    }, {
+      key: 19,
+      value: 'Driver almost arrived to customer',
+      slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
+      percentage: 90
+    }, {
+      key: 20,
+      value: 'Customer almost arrived to business',
+      slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
+      percentage: 50
+    }, {
+      key: 21,
+      value: 'Customer arrived to business',
+      slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
+      percentage: 60
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;

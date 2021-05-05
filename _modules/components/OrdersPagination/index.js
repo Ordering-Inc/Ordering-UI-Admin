@@ -24,14 +24,16 @@ var OrdersPagination = function OrdersPagination(_ref) {
       nextPaginate = _ref.nextPaginate;
   var indexOfLastOrders = currentPage * ordersPerPage < totalOrders ? currentPage * ordersPerPage : totalOrders;
   var indexOfFirstOrders = (currentPage - 1) * ordersPerPage + 1;
-  return /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperPageState, null, ": ", indexOfFirstOrders, "-", indexOfLastOrders, " of ", totalOrders), currentPage !== 1 && /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperPageState, null, indexOfFirstOrders, "-", indexOfLastOrders, " of ", totalOrders), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
+    disabled: currentPage === 1,
     onClick: function onClick() {
       return prevPaginate();
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null)), currentPage !== totalPages && totalPages !== 1 && /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
+  }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null)), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
     onClick: function onClick() {
       return nextPaginate();
-    }
+    },
+    disabled: currentPage === totalPages || totalPages === 1
   }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null)));
 };
 
