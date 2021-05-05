@@ -279,7 +279,6 @@ export const OrderStatusTypeSelector = (props) => {
   const changeOrderStatus = (orderStatus) => {
     if (orderStatus !== 'default' && orderStatus !== defaultValue) {
       if (!mutiOrdersChange) {
-        if (orderStatus === orderId) return
         handleUpdateOrderStatus({ id: orderId, newStatus: orderStatus })
       } else {
         handleChangeMultiOrdersStatus(orderStatus)
