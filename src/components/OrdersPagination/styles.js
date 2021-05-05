@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const WrapperPagination = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 7px;
   margin-top: 5px;
 `
 export const PageButton = styled.button`
@@ -17,12 +16,18 @@ export const PageButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin: 0 5px;
 
-  &.active {
+  &:active {
     background: #1c202e;
     color: #fff;
+  }
+  &:disabled {
+    cursor: no-drop;
+    pointer-events: none;
   }
 `
 export const WrapperPageState = styled.div`
   display: flex;
+  min-width: 140px;
 `
