@@ -74,7 +74,7 @@ import orderStatus11 from './template/assets/images/order/status-11.svg'
 import orderStatus12 from './template/assets/images/order/status-12.svg'
 
 Sentry.init({
-  environment: process.env.NODE_ENV,
+  environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
   dsn: 'https://136774353f6d423da02589e771165836@o460529.ingest.sentry.io/5681485',
   integrations: [
     new Integrations.BrowserTracing()
