@@ -279,6 +279,7 @@ export const OrderStatusTypeSelector = (props) => {
   const changeOrderStatus = (orderStatus) => {
     if (orderStatus !== 'default' && orderStatus !== defaultValue) {
       if (!mutiOrdersChange) {
+        if (orderStatus === orderId) return
         handleUpdateOrderStatus({ id: orderId, newStatus: orderStatus })
       } else {
         handleChangeMultiOrdersStatus(orderStatus)
@@ -288,8 +289,21 @@ export const OrderStatusTypeSelector = (props) => {
 
   useEffect(() => {
     if (!isFilterView) {
-      if (deliveryType === 1 || orderControl) {
+      if (orderControl) {
         setFilteredOrderStatuses(orderStatuses)
+      } else if (deliveryType === 1) {
+        let _filteredOrderStatues = []
+        let extractOrderStatus = []
+        extractOrderStatus = orderStatuses.slice(0, 12)
+        _filteredOrderStatues = [...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(15, 17)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(18, 26)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        setFilteredOrderStatuses(_filteredOrderStatues)
       } else {
         let _filteredOrderStatues = []
         let extractOrderStatus = []
