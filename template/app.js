@@ -9,9 +9,9 @@ import { useSession, useOrder, useLanguage } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 
-import { PageNotFound } from './Pages/PageNotFound'
-import { OrdersListAndDelivery } from './Pages/OrdersListAndDelivery'
-import { Login } from './Pages/Login'
+import { PageNotFound } from './pages/PageNotFound'
+import { OrdersListAndDelivery } from './pages/OrdersListAndDelivery'
+import { Login } from './pages/Login'
 import { ForgotPassword } from './pages/ForgotPassword'
 
 import { ScrollToTop } from './components/ScrollToTop'

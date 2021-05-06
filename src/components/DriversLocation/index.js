@@ -33,6 +33,8 @@ export const DriversLocation = (props) => {
   const [offlineDrivers, setOfflineDrivers] = useState([])
   const [mapLoaded, setMapLoaded] = useState(true)
 
+  const [interActionOrderDriverLocation, setInterActionOrderDriverLocation] = useState(null)
+
   const defaultCenter = { lat: 19.4326, lng: -99.1332 }
   const defaultZoom = 10
   const mapRef = useRef(null)
@@ -90,8 +92,8 @@ export const DriversLocation = (props) => {
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
 
-      if (interActionMapOrder.driver !== null) {
-        marker = interActionMapOrder?.driver?.location !== null ? interActionMapOrder.driver.location : defaultCenter
+      if (interActionMapOrder.driver !== null && interActionOrderDriverLocation) {
+        marker = interActionOrderDriverLocation !== null ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       }
@@ -141,15 +143,29 @@ export const DriversLocation = (props) => {
 
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
-    if (driversList.loading || driversList.drivers.length === 0 || mapLoaded || interActionMapOrder !== null) return
-    mapFit()
+    if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return
+    if (interActionMapOrder !== null) {
+      for (const driver of driversList.drivers) {
+        if (driver.id === interActionMapOrder?.driver?.id) {
+          setInterActionOrderDriverLocation(driver.location)
+        }
+      }
+    } else {
+      mapFit()
+    }
   }, [driversList, driverAvailable, mapLoaded])
 
   useEffect(() => {
     if (mapLoaded) return
     if (driverAvailable === 'online' || driverAvailable === 'offline') return
+    setInterActionOrderDriverLocation(interActionMapOrder?.driver?.location)
     mapFit()
   }, [interActionMapOrder, mapLoaded])
+
+  useEffect(() => {
+    if (mapLoaded) return
+    mapFit()
+  }, [interActionOrderDriverLocation, mapLoaded])
 
   return (
     <WrapperMap ref={mapRef} className='drivers-location'>
@@ -215,8 +231,8 @@ export const DriversLocation = (props) => {
         {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
           <InterActOrderMarker
             driver={interActionMapOrder?.driver}
-            lat={interActionMapOrder?.driver?.location !== null ? interActionMapOrder?.driver?.location?.lat : defaultCenter.lat}
-            lng={interActionMapOrder?.driver?.location !== null ? interActionMapOrder?.driver?.location?.lng : defaultCenter.lng}
+            lat={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
+            lng={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lng : defaultCenter.lng}
             image={interActionMapOrder?.driver?.photo}
           />
         )}
