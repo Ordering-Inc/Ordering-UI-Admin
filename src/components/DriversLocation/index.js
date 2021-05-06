@@ -144,12 +144,15 @@ export const DriversLocation = (props) => {
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
     if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return
-    for (const driver of driversList.drivers) {
-      if (driver.id === interActionMapOrder?.driver?.id) {
-        setInterActionOrderDriverLocation(driver.location)
+    if (interActionMapOrder !== null) {
+      for (const driver of driversList.drivers) {
+        if (driver.id === interActionMapOrder?.driver?.id) {
+          setInterActionOrderDriverLocation(driver.location)
+        }
       }
+    } else {
+      mapFit()
     }
-    mapFit()
   }, [driversList, driverAvailable, mapLoaded])
 
   useEffect(() => {
