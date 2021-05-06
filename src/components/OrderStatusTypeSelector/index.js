@@ -297,10 +297,10 @@ export const OrderStatusTypeSelector = (props) => {
         extractOrderStatus = orderStatuses.slice(0, 12)
         _filteredOrderStatues = [...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(15, 17)
+        extractOrderStatus = orderStatuses.slice(15, 18)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(18, 26)
+        extractOrderStatus = orderStatuses.slice(19, 26)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
         setFilteredOrderStatuses(_filteredOrderStatues)
