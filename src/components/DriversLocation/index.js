@@ -156,8 +156,12 @@ export const DriversLocation = (props) => {
     if (mapLoaded) return
     if (driverAvailable === 'online' || driverAvailable === 'offline') return
     setInterActionOrderDriverLocation(interActionMapOrder?.driver?.location)
-    mapFit()
   }, [interActionMapOrder, mapLoaded])
+
+  useEffect(() => {
+    if (mapLoaded) return
+    mapFit()
+  }, [interActionOrderDriverLocation, mapLoaded])
 
   return (
     <WrapperMap ref={mapRef} className='drivers-location'>
