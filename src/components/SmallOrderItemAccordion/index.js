@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import { getAgoMinutes } from '../../utils'
 
 import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -53,7 +52,7 @@ export const SmallOrderItemAccordion = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const history = useHistory()
-  const [{ parseDate }] = useUtils()
+  const [{ parseDate, getTimeAgo }] = useUtils()
 
   const driverSelectorRef = useRef(null)
   const orderStatusRef = useRef(null)
@@ -62,7 +61,7 @@ export const SmallOrderItemAccordion = (props) => {
   const driverRef = useRef(null)
   const moreDetailRef = useRef(null)
 
-  const [diffTime, setDiffTime] = useState(getAgoMinutes(order?.delivery_datetime))
+  const [diffTime, setDiffTime] = useState(getTimeAgo(order?.delivery_datetime))
 
   const handleLocationAndMessage = (e) => {
     if (isOrdersListView) return
@@ -128,7 +127,7 @@ export const SmallOrderItemAccordion = (props) => {
     const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
     if (deActive) return
     const timer = setInterval(() => {
-      setDiffTime(getAgoMinutes(order?.delivery_datetime))
+      setDiffTime(getTimeAgo(order?.delivery_datetime))
     }, 60 * 1000)
     return () => {
       clearInterval(timer)
