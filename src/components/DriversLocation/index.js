@@ -92,7 +92,7 @@ export const DriversLocation = (props) => {
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
 
-      if (interActionMapOrder.driver !== null) {
+      if (interActionMapOrder.driver !== null && interActionOrderDriverLocation) {
         marker = interActionOrderDriverLocation !== null ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
@@ -159,6 +159,7 @@ export const DriversLocation = (props) => {
     if (mapLoaded) return
     if (driverAvailable === 'online' || driverAvailable === 'offline') return
     setInterActionOrderDriverLocation(interActionMapOrder?.driver?.location)
+    mapFit()
   }, [interActionMapOrder, mapLoaded])
 
   useEffect(() => {
