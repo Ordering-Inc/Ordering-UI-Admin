@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import BsBell from '@meronex/icons/bs/BsBell'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
@@ -62,7 +63,8 @@ import {
   MessageContactInfo,
   ContactBlock,
   InfonContent,
-  WrapperMoreInformationButton
+  WrapperMoreInformationButton,
+  NotificationIcon
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -403,6 +405,11 @@ const OrderDetailsUI = (props) => {
                     <button onClick={() => handleOpenMessages('customer')}>
                       <BsChat /> {t('CHAT', 'Chat')}
                     </button>
+                    {order?.unread_count > 0 && (
+                      <NotificationIcon>
+                        <BsBell />
+                      </NotificationIcon>
+                    )}
                     {order?.customer?.cellphone && (
                       <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
                         <HiOutlinePhone /> {t('CALL', 'Call')}
@@ -434,6 +441,9 @@ const OrderDetailsUI = (props) => {
                         <button onClick={() => handleOpenMessages('business')}>
                           <BsChat /> {t('CHAT', 'Chat')}
                         </button>
+                        <NotificationIcon>
+                          <BsBell />
+                        </NotificationIcon>
                         {order?.business?.phone && (
                           <button onClick={() => window.open(`tel:${order.business.phone}`)}>
                             <HiOutlinePhone /> {t('CALL', 'Call')}
@@ -470,6 +480,9 @@ const OrderDetailsUI = (props) => {
                           <button onClick={() => handleOpenMessages('driver')}>
                             <BsChat /> {t('CHAT', 'Chat')}
                           </button>
+                          <NotificationIcon>
+                            <BsBell />
+                          </NotificationIcon>
                           {order?.driver?.cellphone && (
                             <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
                               <HiOutlinePhone /> {t('CALL', 'Call')}

@@ -275,7 +275,7 @@ export const InfoBlock = styled.div`
 `
 export const CustomerContactBlock = styled.div`
   display: flex;
-  column-gap: 20px;
+  column-gap: 10px;
 
   button {
     outline: none;
@@ -306,6 +306,10 @@ export const CustomerContactBlock = styled.div`
 
   @media  print {
     display: none;
+  }
+  
+  BsBell {
+    margin: 5px;
   }
 `
 export const OrderProducts = styled(SectionContainer)`
@@ -649,4 +653,9 @@ export const WrapperMoreInformationButton = styled.div`
   button {
     width: 100%;
   }
+`
+export const NotificationIcon = styled.div`
+  margin-top: 2px;
+  color: #182964;
+  font-size: 20px;
 `
