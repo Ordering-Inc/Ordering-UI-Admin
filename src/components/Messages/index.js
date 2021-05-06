@@ -77,17 +77,17 @@ export const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const { handleSubmit, register, errors } = useForm()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [load, setLoad] = useState(0)
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
+
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [messageLevel, setMessageLevel] = useState(null)
   const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [driverNoneCase, setDriverNoneCase] = useState(false)
-
+  const [load, setLoad] = useState(0)
   const [business, setBusiness] = useState(props.business)
   const [customer, setCustomer] = useState(props.customer)
   const [driver, setDriver] = useState(props.driver)
@@ -519,21 +519,35 @@ export const MessagesUI = (props) => {
                             {message.change?.attribute !== 'driver_id' ? (
                               <BubbleConsole>
                                 {t('ORDER', 'Order')} {' '}
-                                <strong>{message.change.attribute}</strong> {}
+                                <strong>{t(message.change.attribute)}</strong> {' '}
                                 {t('CHANGED_FROM', 'Changed from')} {' '}
                                 {message.change.old !== null && (
                                   <>
                                     <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
                                   </>
                                 )}
-                                <> {t('TO', 'to')} {' '} <strong>{getStatus(parseInt(message.change.new, 10))}</strong> </>
+                                <>
+                                  {t('TO', 'to')} {' '}
+                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
+                                  {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             ) : (
                               <BubbleConsole>
-                                <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                {message.comment && (<><br /> {message.comment.length}</>)}
+                                <>
+                                  {message.change.new !== null ? (
+                                    <>
+                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                      {message.comment && (<><br /> {message.comment.length}</>)}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
+                                    </>
+                                  )}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             )}
@@ -543,26 +557,40 @@ export const MessagesUI = (props) => {
                     )}
                     {!history && (message?.author?.level === 0 || message?.author?.level === 2 || message?.author?.level === messageLevel) && (
                       <>
-                        {message.type === 1 && (
+                        {message.type === 1 && message.change?.attribute !== 'comment' && (
                           <MessageConsole key={message.id}>
                             {message.change?.attribute !== 'driver_id' ? (
                               <BubbleConsole>
                                 {t('ORDER', 'Order')} {' '}
-                                <strong>{message.change.attribute}</strong> {}
+                                <strong>{t(message.change.attribute)}</strong> {' '}
                                 {t('CHANGED_FROM', 'Changed from')} {' '}
                                 {message.change.old !== null && (
                                   <>
                                     <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
                                   </>
                                 )}
-                                <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                                <>
+                                  {t('TO', 'to')} {' '}
+                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
+                                  {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             ) : (
                               <BubbleConsole>
-                                <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                {message.comment && (<><br /> {message.comment.length}</>)}
+                                <>
+                                  {message.change.new !== null ? (
+                                    <>
+                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                      {message.comment && (<><br /> {message.comment.length}</>)}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
+                                    </>
+                                  )}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             )}
