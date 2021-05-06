@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Option = styled.div`
+  color: #000;
   display: flex;
   align-items: center;
   padding: 3px 0;
