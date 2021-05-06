@@ -173,7 +173,7 @@ const OrderDetailsUI = (props) => {
               </OrderData>
               <OrderStatus>
                 {(!pendingOrder && !preOrder) && (
-                  <span>{getOrderStatus(parseInt(order?.status)).value}</span>
+                  <span>{getOrderStatus(parseInt(order?.status))?.value}</span>
                 )}
                 {pendingOrder && (
                   <span>{t('PENDING', 'Pending')}</span>
