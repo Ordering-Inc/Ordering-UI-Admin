@@ -34,7 +34,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 3px 0;\n  column-gap: 5px;  \n\n  ", "\n\n  img {\n    width: 15px;\n  }\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  color: #000;\n  display: flex;\n  align-items: center;\n  padding: 3px 0;\n  column-gap: 5px;  \n\n  ", "\n\n  img {\n    width: 15px;\n  }\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

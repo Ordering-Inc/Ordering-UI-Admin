@@ -255,7 +255,7 @@ var OrderListing = function OrderListing(props) {
       width: 60,
       height: 20
     })));
-  })), (orderListView === 'small' || windowSize.width <= 992) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
+  })), orderListView === 'small' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement(_SmallOrderItemAccordion.SmallOrderItemAccordion, {

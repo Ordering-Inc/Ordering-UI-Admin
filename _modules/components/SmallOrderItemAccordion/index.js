@@ -13,8 +13,6 @@ var _reactRouterDom = require("react-router-dom");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _utils = require("../../utils");
-
 var _styledComponents = require("styled-components");
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
@@ -75,7 +73,9 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parseDate = _useUtils2[0].parseDate;
+      _useUtils2$ = _useUtils2[0],
+      parseDate = _useUtils2$.parseDate,
+      getTimeAgo = _useUtils2$.getTimeAgo;
 
   var driverSelectorRef = (0, _react.useRef)(null);
   var orderStatusRef = (0, _react.useRef)(null);
@@ -84,7 +84,7 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
   var driverRef = (0, _react.useRef)(null);
   var moreDetailRef = (0, _react.useRef)(null);
 
-  var _useState = (0, _react.useState)((0, _utils.getAgoMinutes)(order === null || order === void 0 ? void 0 : order.delivery_datetime)),
+  var _useState = (0, _react.useState)(getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime)),
       _useState2 = _slicedToArray(_useState, 2),
       diffTime = _useState2[0],
       setDiffTime = _useState2[1];
@@ -167,7 +167,7 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
     var deActive = (order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12;
     if (deActive) return;
     var timer = setInterval(function () {
-      setDiffTime((0, _utils.getAgoMinutes)(order === null || order === void 0 ? void 0 : order.delivery_datetime));
+      setDiffTime(getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime));
     }, 60 * 1000);
     return function () {
       clearInterval(timer);

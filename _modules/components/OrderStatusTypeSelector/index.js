@@ -258,6 +258,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
   var changeOrderStatus = function changeOrderStatus(orderStatus) {
     if (orderStatus !== 'default' && orderStatus !== defaultValue) {
       if (!mutiOrdersChange) {
+        if (orderStatus === orderId) return;
         handleUpdateOrderStatus({
           id: orderId,
           newStatus: orderStatus
@@ -270,35 +271,45 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
 
   (0, _react.useEffect)(function () {
     if (!isFilterView) {
-      if (deliveryType === 1 || orderControl) {
+      if (orderControl) {
         setFilteredOrderStatuses(orderStatuses);
-      } else {
+      } else if (deliveryType === 1) {
         var _filteredOrderStatues = [];
         var extractOrderStatus = [];
-        extractOrderStatus = orderStatuses.slice(0, 7);
+        extractOrderStatus = orderStatuses.slice(0, 12);
         _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
-        extractOrderStatus = orderStatuses.slice(10, 11);
+        extractOrderStatus = orderStatuses.slice(15, 18);
         _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
-        extractOrderStatus = orderStatuses.slice(13, 17);
-        _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
-        extractOrderStatus = orderStatuses.slice(18, 22);
-        _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
-        extractOrderStatus = orderStatuses.slice(25, 27);
+        extractOrderStatus = orderStatuses.slice(19, 26);
         _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
         setFilteredOrderStatuses(_filteredOrderStatues);
+      } else {
+        var _filteredOrderStatues2 = [];
+        var _extractOrderStatus = [];
+        _extractOrderStatus = orderStatuses.slice(0, 7);
+        _filteredOrderStatues2 = _toConsumableArray(_extractOrderStatus);
+        _extractOrderStatus = orderStatuses.slice(10, 11);
+        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+        _extractOrderStatus = orderStatuses.slice(13, 17);
+        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+        _extractOrderStatus = orderStatuses.slice(18, 22);
+        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+        _extractOrderStatus = orderStatuses.slice(25, 27);
+        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+        setFilteredOrderStatuses(_filteredOrderStatues2);
       }
     } else {
-      var _filteredOrderStatues2 = [];
-      var _extractOrderStatus = [];
-      _extractOrderStatus = orderStatuses.slice(2, 4);
-      _filteredOrderStatues2 = _toConsumableArray(_extractOrderStatus);
-      _extractOrderStatus = orderStatuses.slice(5, 15);
-      _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-      _extractOrderStatus = orderStatuses.slice(16, 19);
-      _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-      _extractOrderStatus = orderStatuses.slice(20, 27);
-      _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-      setFilteredOrderStatuses(_filteredOrderStatues2);
+      var _filteredOrderStatues3 = [];
+      var _extractOrderStatus2 = [];
+      _extractOrderStatus2 = orderStatuses.slice(2, 4);
+      _filteredOrderStatues3 = _toConsumableArray(_extractOrderStatus2);
+      _extractOrderStatus2 = orderStatuses.slice(5, 15);
+      _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
+      _extractOrderStatus2 = orderStatuses.slice(16, 19);
+      _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
+      _extractOrderStatus2 = orderStatuses.slice(20, 27);
+      _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
+      setFilteredOrderStatuses(_filteredOrderStatues3);
     }
   }, []);
   (0, _react.useEffect)(function () {
