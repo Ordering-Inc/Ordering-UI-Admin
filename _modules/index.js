@@ -339,6 +339,12 @@ Object.defineProperty(exports, "Tabs", {
     return _Tabs.Tabs;
   }
 });
+Object.defineProperty(exports, "TestComponent", {
+  enumerable: true,
+  get: function get() {
+    return _TestComponent.TestComponent;
+  }
+});
 
 var _CitySelector = require("./components/CitySelector");
 
@@ -431,3 +437,5 @@ var _Inputs = require("./styles/Inputs");
 var _Select = require("./styles/Select");
 
 var _Tabs = require("./styles/Tabs");
+
+var _TestComponent = require("./components/TestComponent");
