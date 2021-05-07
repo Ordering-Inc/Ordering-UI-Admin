@@ -46,10 +46,8 @@ import { Button } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary } from './styles/Inputs'
 import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
-import { TestComponent } from './components/TestComponent'
 
 export {
-  TestComponent,
   CitySelector,
   Confirm,
   Alert,
