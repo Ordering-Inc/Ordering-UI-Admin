@@ -54,7 +54,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  background-color: #38a1f4;\n  color: white;\n"]);
+  var data = _taggedTemplateLiteral(["\n  background-color: ", ";\n  color: white;\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -124,7 +124,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  padding: 20px 10px;\n  box-sizing: border-box;\n\n  @media (min-width: 769px){\n    width: 200px;\n    padding: 10px 5px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  padding: 20px 10px;\n  box-sizing: border-box;\n  height: 100%;\n\n  @media (min-width: 769px){\n    width: 200px;\n    padding: 10px 5px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -178,7 +178,9 @@ exports.UserName = UserName;
 
 var MenuItem = _styledComponents.default.div(_templateObject8(), function (_ref2) {
   var active = _ref2.active;
-  return active && (0, _styledComponents.css)(_templateObject9());
+  return active && (0, _styledComponents.css)(_templateObject9(), function (props) {
+    return props.theme.colors.primary;
+  });
 });
 
 exports.MenuItem = MenuItem;

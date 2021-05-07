@@ -20,11 +20,11 @@ export const UserTypeFilterContainer = styled.div`
 export const FilterItemText = styled.div`
   padding: 10px 5px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 5px;
   transition: all 0.3s;
   ${({ active }) => active && css`
-    background-color: #38a1f4;
+    background-color: ${props => props.theme.colors.primary};
     color: white;
   `};
 `

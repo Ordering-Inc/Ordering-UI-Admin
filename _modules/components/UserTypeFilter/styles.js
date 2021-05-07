@@ -14,7 +14,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    background-color: #38a1f4;\n    color: white;\n  "]);
+  var data = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: white;\n  "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -24,7 +24,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  padding: 10px 5px;\n  cursor: pointer;\n  font-size: 12px;\n  border-radius: 5px;\n  transition: all 0.3s;\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 10px 5px;\n  cursor: pointer;\n  font-size: 14px;\n  border-radius: 5px;\n  transition: all 0.3s;\n  ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -51,7 +51,9 @@ exports.UserTypeFilterContainer = UserTypeFilterContainer;
 
 var FilterItemText = _styledComponents.default.div(_templateObject2(), function (_ref) {
   var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject3());
+  return active && (0, _styledComponents.css)(_templateObject3(), function (props) {
+    return props.theme.colors.primary;
+  });
 });
 
 exports.FilterItemText = FilterItemText;

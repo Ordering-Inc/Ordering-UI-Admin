@@ -22,6 +22,7 @@ export const MenuContent = styled.div`
   flex-direction: column;
   padding: 20px 10px;
   box-sizing: border-box;
+  height: 100%;
 
   @media (min-width: 769px){
     width: 200px;
@@ -74,7 +75,7 @@ export const MenuItem = styled.div`
     margin: 0px 15px;
   }
   ${({ active }) => active && css`
-  background-color: #38a1f4;
+  background-color: ${props => props.theme.colors.primary};
   color: white;
 `};
 `

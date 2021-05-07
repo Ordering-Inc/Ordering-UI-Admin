@@ -134,7 +134,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  padding: 20px 0px;\n  display: flex;\n  align-items: center;\n  font-size: 12px;\n\n  .default-user-avatar {\n    font-size: 24px;\n    margin-right: 5px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 20px 0px;\n  display: flex;\n  align-items: center;\n  font-size: 12px;\n\n  @media (min-width: 769px){\n    font-size: 14px;\n  };\n\n  .default-user-avatar {\n    font-size: 24px;\n    margin-right: 5px;\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;

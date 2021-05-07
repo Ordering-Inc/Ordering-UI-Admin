@@ -73,6 +73,10 @@ export const BodyItemContent = styled.div`
   align-items: center;
   font-size: 12px;
 
+  @media (min-width: 769px){
+    font-size: 14px;
+  };
+
   .default-user-avatar {
     font-size: 24px;
     margin-right: 5px;
