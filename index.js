@@ -23,6 +23,7 @@ import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleAutocompleteInput } from './src/components/GoogleAutocompleteInput'
 import { GoogleMaps } from './src/components/GoogleMaps'
 import { GpsButton, GoogleGpsButton } from './src/components/GpsButton'
+import { LateralMenu } from './src/components/LateralMenu'
 import { LanguageSelector } from './src/components/LanguageSelector'
 import { LoginForm } from './src/components/LoginForm'
 import { LogoutAction } from './src/components/LogoutAction'
@@ -50,6 +51,7 @@ import { SingleOrderCard } from './src/components/SingleOrderCard'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { UserDetails } from './src/components/UserDetails'
 import { UserProfileForm } from './src/components/UserProfileForm'
+import { UserListing } from './src/components/UserListing'
 import { WrapperGoogleMaps } from './src/components/WrapperGoogleMaps'
 import { ConfigContext, ConfigProvider, useConfig } from './src/contexts/ConfigContext'
 import { LanguageContext, LanguageProvider, useLanguage } from './src/contexts/LanguageContext'
@@ -85,6 +87,7 @@ export {
   GpsButton,
   GoogleGpsButton,
   LanguageSelector,
+  LateralMenu,
   LoginForm,
   LogoutAction,
   MainSearch,
@@ -111,6 +114,7 @@ export {
   SingleProductCard,
   UserDetails,
   UserProfileForm,
+  UserListing,
   WrapperGoogleMaps,
   // Contexts
   ConfigContext,

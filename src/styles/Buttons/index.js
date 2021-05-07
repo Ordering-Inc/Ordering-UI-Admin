@@ -123,5 +123,8 @@ ${({ circle, outline }) => circle && outline && css`
     background: ${darken(0.07, '#CCC')};
   }
 `}
+`
 
+export const RectButton = styled(Button)`
+  border-radius: 5px;
 `
