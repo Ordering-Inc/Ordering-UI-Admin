@@ -49,6 +49,8 @@ var _MetaFields = require("../MetaFields");
 
 var _Modal = require("../Modal");
 
+var _SpinnerLoader = require("../SpinnerLoader");
+
 var _styles = require("./styles");
 
 var _styledComponents = require("styled-components");
@@ -98,7 +100,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       messageType = props.messageType,
       handleOpenMessage = props.handleOpenMessage,
       handleUpdateOrderForUnreadCount = props.handleUpdateOrderForUnreadCount,
-      handleOpenOrderDetail = props.handleOpenOrderDetail;
+      handleOpenOrderDetail = props.handleOpenOrderDetail,
+      actionStatus = props.actionStatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -333,7 +336,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     utc: false
   })), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
-  })), /*#__PURE__*/_react.default.createElement(_styles.OrderStatus, null, !pendingOrder && !preOrder && /*#__PURE__*/_react.default.createElement("span", null, (_getOrderStatus2 = getOrderStatus(parseInt(order === null || order === void 0 ? void 0 : order.status))) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), pendingOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PENDING', 'Pending')), preOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.StatusImage, null, /*#__PURE__*/_react.default.createElement("img", {
+  })), (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) ? /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+    style: {
+      width: 170,
+      height: 90,
+      transform: 'scale(0.3)'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_styles.OrderStatus, null, !pendingOrder && !preOrder && /*#__PURE__*/_react.default.createElement("span", null, (_getOrderStatus2 = getOrderStatus(parseInt(order === null || order === void 0 ? void 0 : order.status))) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), pendingOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PENDING', 'Pending')), preOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.StatusImage, null, /*#__PURE__*/_react.default.createElement("img", {
     src: getImage((order === null || order === void 0 ? void 0 : order.status) || 0),
     alt: "status"
   }))), messageDashboardView && /*#__PURE__*/_react.default.createElement(_styles.OrderDetailCloseButton, null, /*#__PURE__*/_react.default.createElement(_GrClose.default, {
