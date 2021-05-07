@@ -8,6 +8,7 @@ export const UserContainer = styled.div`
 
   @media (min-width: 769px){
     flex-direction: row;
+    padding: 0px;
   }
 `
 

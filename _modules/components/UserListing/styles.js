@@ -30,7 +30,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-start;\n  flex-direction: column;\n  padding: 0px 15px;\n\n  @media (min-width: 769px){\n    flex-direction: row;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-start;\n  flex-direction: column;\n  padding: 0px 15px;\n\n  @media (min-width: 769px){\n    flex-direction: row;\n    padding: 0px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
