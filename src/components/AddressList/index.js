@@ -28,7 +28,7 @@ export const AddressList = (props) => {
           <BodyActionContainer>
             <BodyActionContent>
               <FiMoreVertical className='more-svg' />
-              <GrFormEdit className='edit-svg' onClick={() => openModal(user)} />
+              <GrFormEdit className='edit-svg' />
               <MdcDeleteOutline className='remove-svg' />
             </BodyActionContent>
           </BodyActionContainer>

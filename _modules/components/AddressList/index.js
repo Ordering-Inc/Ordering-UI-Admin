@@ -24,10 +24,7 @@ var AddressList = function AddressList(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, null, (user === null || user === void 0 ? void 0 : user.address) && /*#__PURE__*/_react.default.createElement(_styles.AddressItem, null, /*#__PURE__*/_react.default.createElement(_styles.AddressText, null, user === null || user === void 0 ? void 0 : user.address), /*#__PURE__*/_react.default.createElement(_style.BodyActionContainer, null, /*#__PURE__*/_react.default.createElement(_style.BodyActionContent, null, /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, {
     className: "more-svg"
   }), /*#__PURE__*/_react.default.createElement(_GrFormEdit.default, {
-    className: "edit-svg",
-    onClick: function onClick() {
-      return openModal(user);
-    }
+    className: "edit-svg"
   }), /*#__PURE__*/_react.default.createElement(_MdcDeleteOutline.default, {
     className: "remove-svg"
   })))));
