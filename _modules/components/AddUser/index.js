@@ -235,6 +235,22 @@ var AddUserUI = function AddUserUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    if (Object.keys(formMethods.errors).length > 0) {
+      var content = Object.values(formMethods.errors).map(function (error) {
+        return error.message;
+      });
+
+      if (!isValidPhoneNumber && userPhoneNumber) {
+        content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'));
+      }
+
+      setAlertState({
+        open: true,
+        content: content
+      });
+    }
+  }, [formMethods.errors]);
+  (0, _react.useEffect)(function () {
     var _formState$result;
 
     if (!(formState === null || formState === void 0 ? void 0 : formState.loading) && (formState === null || formState === void 0 ? void 0 : (_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.error)) {

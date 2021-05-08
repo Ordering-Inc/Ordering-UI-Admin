@@ -169,6 +169,19 @@ const AddUserUI = (props) => {
   }
 
   useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
+      const content = Object.values(formMethods.errors).map(error => error.message)
+      if (!isValidPhoneNumber && userPhoneNumber) {
+        content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'))
+      }
+      setAlertState({
+        open: true,
+        content
+      })
+    }
+  }, [formMethods.errors])
+
+  useEffect(() => {
     if ((!formState?.loading && formState?.result?.error)) {
       setAlertState({
         open: true,
