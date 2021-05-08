@@ -94,7 +94,8 @@ var ActionsSection = function ActionsSection(props) {
       return setAddUserModal(_objectSpread(_objectSpread({}, addUserModal), {}, {
         formOpen: true
       }));
-    }
+    },
+    color: "primary"
   }, /*#__PURE__*/_react.default.createElement(_GrAddCircle.default, null), t('ADD_USER', 'Add user')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modals.formOpen,
     width: "70%",

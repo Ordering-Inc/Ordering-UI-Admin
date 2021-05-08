@@ -45,7 +45,10 @@ export const ActionsSection = (props) => {
           />
         </ExportContainer>
         <AddUserContainer>
-          <RectButton onClick={() => setAddUserModal({ ...addUserModal, formOpen: true })}>
+          <RectButton
+            onClick={() => setAddUserModal({ ...addUserModal, formOpen: true })}
+            color='primary'
+          >
             <GrAddCircle />{t('ADD_USER', 'Add user')}
           </RectButton>
         </AddUserContainer>
