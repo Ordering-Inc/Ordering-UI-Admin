@@ -15,8 +15,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _templateObject13() {
+  var data = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border-color: ", ";\n\n  &:active {\n    background: ", ";\n  }\n"]);
+
+  _templateObject13 = function _templateObject13() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 5px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-radius: 5px;\n\n  ", "\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -208,5 +218,12 @@ var Button = _styledComponents.default.button(_templateObject(), function (_ref)
 });
 
 exports.Button = Button;
-var RectButton = (0, _styledComponents.default)(Button)(_templateObject12());
+var RectButton = (0, _styledComponents.default)(Button)(_templateObject12(), function (_ref12) {
+  var outline = _ref12.outline;
+  return outline && (0, _styledComponents.css)(_templateObject13(), function (props) {
+    return props.theme.colors.btnPrimary;
+  }, function (props) {
+    return props.theme.colors.btnPrimary;
+  }, (0, _polished.darken)(0.07, '#FFF'));
+});
 exports.RectButton = RectButton;

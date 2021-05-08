@@ -20,7 +20,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-block;\n  width: 60px;\n  height: 34px;\n\n  input {\n    opacity: 0;\n    width: 0;\n    height: 0;\n\n    &:checked + span {\n      background-color: #2196F3;\n    }\n    &:focus + span {\n      box-shadow: 0 0 1px #2196F3;\n    }\n    &:checked + span:before {\n      -webkit-transform: translateX(26px);\n      -ms-transform: translateX(26px);\n      transform: translateX(26px);\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-block;\n  width: 60px;\n  height: 34px;\n\n  input {\n    opacity: 0;\n    width: 0;\n    height: 0;\n\n    &:checked + span {\n      background-color: ", ";\n    }\n    &:focus + span {\n      box-shadow: 0 0 1px ", ";\n    }\n    &:checked + span:before {\n      -webkit-transform: translateX(26px);\n      -ms-transform: translateX(26px);\n      transform: translateX(26px);\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -31,7 +31,11 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ToggleSwitchContainer = _styledComponents.default.label(_templateObject());
+var ToggleSwitchContainer = _styledComponents.default.label(_templateObject(), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.colors.primary;
+});
 
 exports.ToggleSwitchContainer = ToggleSwitchContainer;
 

@@ -127,4 +127,14 @@ ${({ circle, outline }) => circle && outline && css`
 
 export const RectButton = styled(Button)`
   border-radius: 5px;
+
+  ${({ outline }) => outline && css`
+  background: #FFF;
+  color: ${props => props.theme.colors.btnPrimary};
+  border-color: ${props => props.theme.colors.btnPrimary};
+
+  &:active {
+    background: ${darken(0.07, '#FFF')};
+  }
+`}
 `

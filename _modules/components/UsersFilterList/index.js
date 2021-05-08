@@ -124,12 +124,12 @@ var UsersFilterListUI = function UsersFilterListUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     outline: true,
     type: "button",
-    color: "primary",
     onClick: function onClick() {
       return clearFilter();
     }
   }, t('CLEAR', 'Clear')), /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
-    type: "submit"
+    type: "submit",
+    color: "primary"
   }, t('FILTER', 'Filter')))));
 };
 

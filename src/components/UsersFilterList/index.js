@@ -84,13 +84,13 @@ const UsersFilterListUI = (props) => {
           <RectButton
             outline
             type='button'
-            color='primary'
             onClick={() => clearFilter()}
           >
             {t('CLEAR', 'Clear')}
           </RectButton>
           <RectButton
             type='submit'
+            color='primary'
           >
             {t('FILTER', 'Filter')}
           </RectButton>
