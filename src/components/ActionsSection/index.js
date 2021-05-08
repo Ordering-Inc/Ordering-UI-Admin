@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import GrFilter from '@meronex/icons/gr/GrFilter'
 import { RectButton } from '../../styles/Buttons'
-import GrAddCircle from '@meronex/icons/gr/GrAddCircle'
+import MdAddCircleOutline from '@meronex/icons/ios/MdAddCircleOutline'
 import { Modal } from '../Modal'
 
 import { UserExport } from '../UserExport'
@@ -49,7 +49,7 @@ export const ActionsSection = (props) => {
             onClick={() => setAddUserModal({ ...addUserModal, formOpen: true })}
             color='primary'
           >
-            <GrAddCircle />{t('ADD_USER', 'Add user')}
+            <MdAddCircleOutline />{t('ADD_USER', 'Add user')}
           </RectButton>
         </AddUserContainer>
       </ActionsSectionContainer>

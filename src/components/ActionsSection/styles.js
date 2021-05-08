@@ -84,6 +84,7 @@ export const AddUserContainer = styled.div`
     > svg {
       margin: 0px 10px;
       color: ${props => props.theme.colors.btnPrimaryContrast};
+      font-size: 22px;
     }
   }
 `

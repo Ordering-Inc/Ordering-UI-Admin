@@ -31,8 +31,8 @@ export const UserImage = styled.div`
 export const Image = styled.div`
   width: 150px;
   height: 150px;
-  border: 2px solid ${props => props.theme.colors.primary};
-  border-radius: 100%;
+  border: 2px solid #e8f0fe;
+  border-radius: 20px;
   overflow: hidden;
   padding: 20px;
   background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
@@ -42,7 +42,7 @@ export const Image = styled.div`
   img,
   div {
     width: 100%;
-    border-radius: 50%;
+    border-radius: 20px;
     height: 100%;
     border: none;
     overflow: hidden;

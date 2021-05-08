@@ -9,6 +9,8 @@ exports.GeneralInfo = exports.CustomerInfoContent = exports.InfoItem = exports.C
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
+var _polished = require("polished");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -34,7 +36,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      background: #d3eafd;\n      color: #38a1f4;\n  "]);
+  var data = _taggedTemplateLiteral(["\n      background: ", ";\n      color: ", ";\n  "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -99,7 +101,11 @@ exports.CustomerInfoList = CustomerInfoList;
 
 var InfoItem = _styledComponents.default.span(_templateObject4(), function (_ref) {
   var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject5());
+  return active && (0, _styledComponents.css)(_templateObject5(), function (props) {
+    return (0, _polished.darken)(0.07, props.theme.colors.primary);
+  }, function (props) {
+    return props.theme.colors.primary;
+  });
 });
 
 exports.InfoItem = InfoItem;

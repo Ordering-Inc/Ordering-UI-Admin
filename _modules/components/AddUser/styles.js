@@ -124,7 +124,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  width: 150px;\n  height: 150px;\n  border: 2px solid ", ";\n  border-radius: 100%;\n  overflow: hidden;\n  padding: 20px;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 50%;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 480px){\n    width: 200px;\n    height: 200px;\n  }\n\n  @media (min-width: 768px){\n    width: 150px;\n    height: 150px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 150px;\n  height: 150px;\n  border: 2px solid #e8f0fe;\n  border-radius: 20px;\n  overflow: hidden;\n  padding: 20px;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 20px;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 480px){\n    width: 200px;\n    height: 200px;\n  }\n\n  @media (min-width: 768px){\n    width: 150px;\n    height: 150px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -191,9 +191,7 @@ var UserImage = _styledComponents.default.div(_templateObject4());
 
 exports.UserImage = UserImage;
 
-var Image = _styledComponents.default.div(_templateObject5(), function (props) {
-  return props.theme.colors.primary;
-}, function (_ref) {
+var Image = _styledComponents.default.div(_templateObject5(), function (_ref) {
   var isImage = _ref.isImage,
       theme = _ref.theme;
   return isImage ? '#FFF' : "".concat(theme.colors.backgroundPage);

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const UserDetailsContainer = styled.div``
 
@@ -20,8 +21,8 @@ export const InfoItem = styled.span`
   cursor: pointer;
   margin-right: 5px;
   ${({ active }) => active && css`
-      background: #d3eafd;
-      color: #38a1f4;
+      background: ${props => darken(0.07, props.theme.colors.primary)};
+      color: ${props => props.theme.colors.primary};
   `}
 
   @media (min-width: 480px){

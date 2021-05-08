@@ -31,7 +31,7 @@ ${({ isLoading }) => isLoading && css`
 
 export const UserListTR = styled.tr`
 &:hover {
-  border: 1px solid #38a1f4 !important;
+  border: 1px solid ${props => props.theme.colors.primary} !important;
 }
 `
 export const UserListHeaderItem = styled.th`

@@ -204,7 +204,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n&:hover {\n  border: 1px solid #38a1f4 !important;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\n&:hover {\n  border: 1px solid ", " !important;\n}\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -270,7 +270,9 @@ var HeaderTR = _styledComponents.default.tr(_templateObject3(), function (_ref) 
 
 exports.HeaderTR = HeaderTR;
 
-var UserListTR = _styledComponents.default.tr(_templateObject5());
+var UserListTR = _styledComponents.default.tr(_templateObject5(), function (props) {
+  return props.theme.colors.primary;
+});
 
 exports.UserListTR = UserListTR;
 

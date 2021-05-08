@@ -15,7 +15,7 @@ var _GrFilter = _interopRequireDefault(require("@meronex/icons/gr/GrFilter"));
 
 var _Buttons = require("../../styles/Buttons");
 
-var _GrAddCircle = _interopRequireDefault(require("@meronex/icons/gr/GrAddCircle"));
+var _MdAddCircleOutline = _interopRequireDefault(require("@meronex/icons/ios/MdAddCircleOutline"));
 
 var _Modal = require("../Modal");
 
@@ -96,7 +96,7 @@ var ActionsSection = function ActionsSection(props) {
       }));
     },
     color: "primary"
-  }, /*#__PURE__*/_react.default.createElement(_GrAddCircle.default, null), t('ADD_USER', 'Add user')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, /*#__PURE__*/_react.default.createElement(_MdAddCircleOutline.default, null), t('ADD_USER', 'Add user')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modals.formOpen,
     width: "70%",
     onClose: function onClose() {
