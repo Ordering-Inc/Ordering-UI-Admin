@@ -44,7 +44,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\ndisplay: flex;\nflex-direction: column;\nalign-items: center;\nwidth: 100%;\nmargin: 0 auto;\ndiv.phone_number {\n  margin-bottom: 20px;\n  width: 100%;\n}\ninput.form {\n  padding: 10px 15px;\n  width: 100%;\n  margin-bottom: 20px;\n  box-sizing: border-box;\n  &:disabled {\n    background-color: rgba(239, 239, 239, 0.3);\n    cursor: not-allowed;\n  }\n}\nbutton {\n  width: 100%;\n  padding: 7px 0;\n}\n@media (min-width: 769px) {\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: flex-start;\n  input.form {\n    width: 49%;\n  }\n  ", "\n}\n"]);
+  var data = _taggedTemplateLiteral(["\ndisplay: flex;\nflex-direction: column;\nalign-items: center;\nwidth: 100%;\nmargin: 0 auto;\ndiv.phone_number {\n  margin-bottom: 20px;\n  width: 100%;\n}\ninput.form {\n  color: black;\n  padding: 10px 15px;\n  width: 100%;\n  margin-bottom: 20px;\n  box-sizing: border-box;\n  &:disabled {\n    background-color: rgba(239, 239, 239, 0.3);\n    cursor: not-allowed;\n  }\n}\nbutton {\n  width: 100%;\n  padding: 7px 0;\n}\n@media (min-width: 769px) {\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: flex-start;\n  input.form {\n    width: 49%;\n  }\n  ", "\n}\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
