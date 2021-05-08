@@ -16,6 +16,7 @@ import { bytesConverter } from '../../utils'
 
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
+import { AddressList } from '../AddressList'
 
 import {
   Container,
@@ -27,7 +28,8 @@ import {
   UploadImageIcon,
   SkeletonWrapper,
   WrapperForm,
-  SpinnerLoadWrapper
+  SpinnerLoadWrapper,
+  SavedPlaces
 } from './styles'
 
 const UserProfileFormUI = (props) => {
@@ -110,8 +112,7 @@ const UserProfileFormUI = (props) => {
                             <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
                           </UploadImageIcon>
                         )
-                      : formState?.changes?.photo && formState.result.error &&
-                      <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
+                      : formState?.changes?.photo && formState.result.error && <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
                     )}
                 </DragAndDrop>
               </ExamineClick>
@@ -130,6 +131,12 @@ const UserProfileFormUI = (props) => {
             </WrapperForm>
           </SideForm>
         </UserProfileContainer>
+        {selectedUser?.address && (
+          <SavedPlaces>
+            <h1>{t('SAVED_PLACES', 'Saved Places')}</h1>
+            <AddressList user={selectedUser} />
+          </SavedPlaces>
+        )}
         {
           formState.loading &&
           <SpinnerLoadWrapper>

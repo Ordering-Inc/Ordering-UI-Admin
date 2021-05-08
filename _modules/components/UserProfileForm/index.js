@@ -25,6 +25,8 @@ var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
+var _AddressList = require("../AddressList");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -169,7 +171,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     isEdit: true,
     userData: selectedUser,
     deleteUser: deleteUser
-  }))))), formState.loading && /*#__PURE__*/_react.default.createElement(_styles.SpinnerLoadWrapper, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }))))), (selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.address) && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SAVED_PLACES', 'Saved Places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    user: selectedUser
+  })), formState.loading && /*#__PURE__*/_react.default.createElement(_styles.SpinnerLoadWrapper, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
