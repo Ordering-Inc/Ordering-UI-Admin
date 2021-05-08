@@ -14,7 +14,7 @@ export const UserProfileContainer = styled.div`
   overflow-x: hidden;
   margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     align-items: flex-start;
     flex-direction: row;
   }
