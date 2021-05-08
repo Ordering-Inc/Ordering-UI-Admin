@@ -117,7 +117,7 @@ export const UserListStatusRound = styled.div`
   height: 10px;
   border-radius: 50%;
   margin: ${props => props.theme?.rtl ? '0px 0px 0px 10px' : '0px 10px 0px 0px'};
-  background: ${({ active }) => active ? '#0e9b55' : '#da4a54' };
+  background: ${({ active }) => active ? '#0e9b55' : '#da4a54'};
 `
 
 export const BodyActionContainer = styled.div`

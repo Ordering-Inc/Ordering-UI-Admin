@@ -129,9 +129,9 @@ export const UserList = (props) => {
                 <UserListBodyItem>
                   <BodyItemContent>
                     {
-                      user?.photo ?
-                        <UserAvatarSection style={{ backgroundImage: `url(${user?.photo})` }} loading='lazy' /> :
-                        <FaUserAlt className='default-user-avatar' />
+                      user?.photo
+                      ? <UserAvatarSection style={{ backgroundImage: `url(${user?.photo})` }} loading='lazy' />
+                      : <FaUserAlt className='default-user-avatar' />
                     }
                     {
                       user?.name && user?.name
@@ -243,7 +243,8 @@ export const UserList = (props) => {
                 </UserListBodyItem>
               </UserListTR>
             </UserListBody>
-          ))}
+          ))
+        }
         {
           usersList?.users?.length > 0 && !usersList?.loading &&
           <UserListFoot>

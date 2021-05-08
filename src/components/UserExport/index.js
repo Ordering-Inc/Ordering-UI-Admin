@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage,
+import {
+  useLanguage,
   UserExport as UserExportController
 } from 'ordering-components-admin'
 import BsFillCaretDownFill from '@meronex/icons/bs/BsFillCaretDownFill'

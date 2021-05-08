@@ -24,4 +24,3 @@ export const UserListSection = styled.div`
     padding-right: 50px;
   }
 `
-

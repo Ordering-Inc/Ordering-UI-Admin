@@ -13,10 +13,9 @@ import {
   Option
 } from './styles'
 
-import { RectangleInput } from '../../styles/Inputs'
+import { RectangleInput, RectTextArea } from '../../styles/Inputs'
 import { RectButton } from '../../styles/Buttons'
 import { Select } from '../../styles/Select'
-import { RectTextArea } from '../../styles/Inputs'
 import { ToggleSwitch } from '../../styles/ToggleSwitch'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'

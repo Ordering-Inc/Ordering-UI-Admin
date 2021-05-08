@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
 
 export const UserDetailsContainer = styled.div``
 
