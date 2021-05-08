@@ -42,7 +42,8 @@ const AddUserUI = (props) => {
     handleChangeInput,
     validationFields,
     isRequiredField,
-    setFormState
+    setFormState,
+    onCloseModal
   } = props
   const [, t] = useLanguage()
   const formMethods = useForm()
@@ -315,6 +316,7 @@ const AddUserUI = (props) => {
                   outline
                   type='button'
                   color='primary'
+                  onClick={onCloseModal}
                   disabled={formState.loading}
                 >
                   {t('CANCEL', 'Cancel')}

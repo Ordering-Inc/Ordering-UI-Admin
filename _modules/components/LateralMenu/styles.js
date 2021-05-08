@@ -74,7 +74,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  font-size: 12px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -84,7 +84,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 25px;\n  svg {\n    margin: 0px 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 25px;\n  img,\n  svg {\n    margin: 0px 15px;\n  }\n  > div {\n    font-size: 14px;\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;

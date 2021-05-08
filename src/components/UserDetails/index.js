@@ -36,7 +36,7 @@ export const UserDetails = (props) => {
 
   return (
     <UserDetailsContainer>
-      <DetailsTitle>{t('CUSTOMER_NAME', 'Customer name')}</DetailsTitle>
+      <DetailsTitle>{user?.name || t('CUSTOMER_NAME', 'Customer name')}</DetailsTitle>
       <CustomerInfoList>
         {itemTypes && itemTypes.length > 0 && itemTypes.map((type, i) => (
           <InfoItem

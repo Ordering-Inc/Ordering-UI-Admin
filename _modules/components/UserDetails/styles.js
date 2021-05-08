@@ -102,7 +102,7 @@ exports.CustomerInfoList = CustomerInfoList;
 var InfoItem = _styledComponents.default.span(_templateObject4(), function (_ref) {
   var active = _ref.active;
   return active && (0, _styledComponents.css)(_templateObject5(), function (props) {
-    return (0, _polished.darken)(0.07, props.theme.colors.primary);
+    return (0, _polished.darken)(0.03, props.theme.colors.primary);
   }, function (props) {
     return props.theme.colors.primary;
   });

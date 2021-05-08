@@ -53,15 +53,19 @@ export const UserAvatar = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 25px;
+  img,
   svg {
-    margin: 0px 20px;
+    margin: 0px 15px;
+  }
+  > div {
+    font-size: 14px;
   }
 `
 
 export const UserName = styled.div`
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
 `
 
 export const MenuItem = styled.div`

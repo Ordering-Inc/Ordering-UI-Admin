@@ -46,7 +46,7 @@ const UsersFilterListUI = (props) => {
   ]
 
   const onSubmit = () => {
-    applyFilter()
+    applyFilter && applyFilter()
   }
 
   return (
@@ -73,7 +73,7 @@ const UsersFilterListUI = (props) => {
                   name={item?.key}
                   className='form'
                   placeholder={item?.label}
-                  defaultValue={filterState?.changes?.[`${item?.key}`] || ''}
+                  value={filterState?.changes?.[`${item?.key}`] || ''}
                   onChange={(e) => handleChangeInput(e.target.name, e.target.value)}
                   autoComplete='off'
                 />

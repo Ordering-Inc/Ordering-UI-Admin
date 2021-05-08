@@ -90,7 +90,7 @@ var UsersFilterListUI = function UsersFilterListUI(props) {
   }];
 
   var onSubmit = function onSubmit() {
-    applyFilter();
+    applyFilter && applyFilter();
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.UserFilterListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('FILTERS', 'Filters')), /*#__PURE__*/_react.default.createElement(_styles.InputForm, {
@@ -115,7 +115,7 @@ var UsersFilterListUI = function UsersFilterListUI(props) {
       name: item === null || item === void 0 ? void 0 : item.key,
       className: "form",
       placeholder: item === null || item === void 0 ? void 0 : item.label,
-      defaultValue: (filterState === null || filterState === void 0 ? void 0 : (_filterState$changes2 = filterState.changes) === null || _filterState$changes2 === void 0 ? void 0 : _filterState$changes2["".concat(item === null || item === void 0 ? void 0 : item.key)]) || '',
+      value: (filterState === null || filterState === void 0 ? void 0 : (_filterState$changes2 = filterState.changes) === null || _filterState$changes2 === void 0 ? void 0 : _filterState$changes2["".concat(item === null || item === void 0 ? void 0 : item.key)]) || '',
       onChange: function onChange(e) {
         return handleChangeInput(e.target.name, e.target.value);
       },

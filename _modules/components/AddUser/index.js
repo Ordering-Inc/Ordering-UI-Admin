@@ -70,7 +70,8 @@ var AddUserUI = function AddUserUI(props) {
       handleChangeInput = props.handleChangeInput,
       validationFields = props.validationFields,
       isRequiredField = props.isRequiredField,
-      setFormState = props.setFormState;
+      setFormState = props.setFormState,
+      onCloseModal = props.onCloseModal;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -361,6 +362,7 @@ var AddUserUI = function AddUserUI(props) {
     outline: true,
     type: "button",
     color: "primary",
+    onClick: onCloseModal,
     disabled: formState.loading
   }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     type: "submit",

@@ -70,7 +70,7 @@ var UserDetails = function UserDetails(props) {
     key: 'Personalization',
     value: 5
   }];
-  return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsTitle, null, t('CUSTOMER_NAME', 'Customer name')), /*#__PURE__*/_react.default.createElement(_styles.CustomerInfoList, null, itemTypes && itemTypes.length > 0 && itemTypes.map(function (type, i) {
+  return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsTitle, null, (user === null || user === void 0 ? void 0 : user.name) || t('CUSTOMER_NAME', 'Customer name')), /*#__PURE__*/_react.default.createElement(_styles.CustomerInfoList, null, itemTypes && itemTypes.length > 0 && itemTypes.map(function (type, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.InfoItem, {
       active: type.value === currentItemSelected,
       onClick: function onClick() {
