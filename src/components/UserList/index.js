@@ -128,11 +128,11 @@ export const UserList = (props) => {
                 </UserListBodyItem>
                 <UserListBodyItem>
                   <BodyItemContent>
-                    {
-                      user?.photo
-                      ? <UserAvatarSection style={{ backgroundImage: `url(${user?.photo})` }} loading='lazy' />
-                      : <FaUserAlt className='default-user-avatar' />
-                    }
+                    {user?.photo ? (
+                      <UserAvatarSection style={{ backgroundImage: `url(${user?.photo})` }} loading='lazy' />
+                    ) : (
+                      <FaUserAlt className='default-user-avatar' />
+                    )}
                     {
                       user?.name && user?.name
                     }
@@ -188,8 +188,7 @@ export const UserList = (props) => {
             </UserListBody>
           ))
         }
-        {
-          !usersList?.loading && usersList?.users?.length === 0 &&
+        {!usersList?.loading && usersList?.users?.length === 0 && (
           <UserListBody>
             <UserListTR>
               <UserListBodyItem colSpan='7'>
@@ -199,7 +198,7 @@ export const UserList = (props) => {
               </UserListBodyItem>
             </UserListTR>
           </UserListBody>
-        }
+        )}
         {
           !spinLoading && usersList?.loading && [...Array(10)].map((item, i) => (
             <UserListBody key={i}>
@@ -232,21 +231,20 @@ export const UserList = (props) => {
                 </UserListBodyItem>
                 <UserListBodyItem>
                   <SkeletonContainer>
-                    <Skeleton circle={true} width={15} height={15} />
+                    <Skeleton circle width={15} height={15} />
                     <Skeleton width={40} className='item-text' />
                   </SkeletonContainer>
                 </UserListBodyItem>
                 <UserListBodyItem>
                   <SkeletonContainer>
-                    <Skeleton circle={true} width={30} height={30} />
+                    <Skeleton circle width={30} height={30} />
                   </SkeletonContainer>
                 </UserListBodyItem>
               </UserListTR>
             </UserListBody>
           ))
         }
-        {
-          usersList?.users?.length > 0 && !usersList?.loading &&
+        {usersList?.users?.length > 0 && !usersList?.loading && (
           <UserListFoot>
             <HeaderTR>
               <td colSpan='7'>
@@ -264,14 +262,13 @@ export const UserList = (props) => {
               </td>
             </HeaderTR>
           </UserListFoot>
-        }
+        )}
       </UserListContainer>
-      {
-        spinLoading &&
+      {spinLoading && (
         <SpinnerLoadWrapper>
           <SpinnerLoader />
         </SpinnerLoadWrapper>
-      }
+      )}
       <Modal
         open={modals.formOpen}
         width='70%'

@@ -53,33 +53,32 @@ const UsersFilterListUI = (props) => {
     <UserFilterListContainer>
       <Title>{t('FILTERS', 'Filters')}</Title>
       <InputForm onSubmit={handleSubmit(onSubmit)}>
-        {
-          FilterOptions && FilterOptions.map((item, i) => (
-            item.type === 'select'
-              ? <InputWrapper key={i}>
-                <Label>{item?.label}</Label>
-                <Select
-                  defaultValue={filterState?.changes?.[`${item?.key}`]}
-                  options={selectTypes}
-                  placeholder={t('SELECT_A_TYPE', 'Select a type')}
-                  className='rectangle-select'
-                  onChange={(val) => handleChangeInput(item?.key, val)}
-                />
-              </InputWrapper>
-              : <InputWrapper key={i}>
-                <Label>{item?.label}</Label>
-                <RectangleInput
-                  type={item?.type}
-                  name={item?.key}
-                  className='form'
-                  placeholder={item?.label}
-                  value={filterState?.changes?.[`${item?.key}`] || ''}
-                  onChange={(e) => handleChangeInput(e.target.name, e.target.value)}
-                  autoComplete='off'
-                />
-              </InputWrapper>
-          ))
-        }
+        {FilterOptions && FilterOptions.map((item, i) => (
+          item.type === 'select' ? (
+            <InputWrapper key={i}>
+              <Label>{item?.label}</Label>
+              <Select
+                defaultValue={filterState?.changes?.[`${item?.key}`]}
+                options={selectTypes}
+                placeholder={t('SELECT_A_TYPE', 'Select a type')}
+                className='rectangle-select'
+                onChange={(val) => handleChangeInput(item?.key, val)}
+              />
+            </InputWrapper>
+          ) : (
+            <InputWrapper key={i}>
+              <Label>{item?.label}</Label>
+              <RectangleInput
+                type={item?.type}
+                name={item?.key}
+                className='form'
+                placeholder={item?.label}
+                value={filterState?.changes?.[`${item?.key}`] || ''}
+                onChange={(e) => handleChangeInput(e.target.name, e.target.value)}
+                autoComplete='off'
+              />
+            </InputWrapper>
+          )))}
         <ActionButtons>
           <RectButton
             outline

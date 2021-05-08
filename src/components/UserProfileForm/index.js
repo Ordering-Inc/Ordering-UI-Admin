@@ -124,7 +124,7 @@ const UserProfileFormUI = (props) => {
               <UserFormDetailsUI
                 {...props}
                 isHiddenAddress={isHiddenAddress}
-                isEdit={true}
+                isEdit
                 userData={selectedUser}
                 deleteUser={deleteUser}
               />
@@ -137,12 +137,11 @@ const UserProfileFormUI = (props) => {
             <AddressList user={selectedUser} />
           </SavedPlaces>
         )}
-        {
-          formState.loading &&
+        {formState.loading && (
           <SpinnerLoadWrapper>
             <SpinnerLoader />
           </SpinnerLoadWrapper>
-        }
+        )}
       </Container>
       <Alert
         title={t('PROFILE', 'Profile')}

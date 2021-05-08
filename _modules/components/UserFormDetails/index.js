@@ -428,10 +428,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_ToggleSwitch.ToggleSwitch, {
     defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$result11 = formState.result) === null || _formState$result11 === void 0 ? void 0 : _formState$result11.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result12 = formState.result) === null || _formState$result12 === void 0 ? void 0 : (_formState$result12$r = _formState$result12.result) === null || _formState$result12$r === void 0 ? void 0 : _formState$result12$r.enabled : (_ref5 = (_formState$changes$en = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.enabled) !== null && _formState$changes$en !== void 0 ? _formState$changes$en : user && (user === null || user === void 0 ? void 0 : user.enabled)) !== null && _ref5 !== void 0 ? _ref5 : false,
-    onChange: function onChange(enabled) {
+    onChange: function onChange(val) {
       return setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
-          'enabled': enabled
+          'enabled': val
         })
       }));
     }

@@ -346,7 +346,7 @@ export const UserFormDetailsUI = (props) => {
             )}
             <InputWrapper style={{ width: '100%' }}>
               <Label>{t('USER_NOTES', 'User notes')}</Label>
-              <RectTextArea style={{ width: '100%' }} placeholder={t('WRITE_NOTES', 'Write notes')}></RectTextArea>
+              <RectTextArea style={{ width: '100%' }} placeholder={t('WRITE_NOTES', 'Write notes')} />
             </InputWrapper>
             {
               props.afterMidElements?.map((MidElement, i) => (
@@ -365,9 +365,9 @@ export const UserFormDetailsUI = (props) => {
                     ? formState?.result?.result?.enabled
                     : formState?.changes?.enabled ?? (user && user?.enabled) ?? false
                 }
-                onChange={(enabled) => setFormState({
+                onChange={(val) => setFormState({
                   ...formState,
-                  changes: { ...formState?.changes, 'enabled': enabled }
+                  changes: { ...formState?.changes, 'enabled': val }
                 })}
               />
               <RectButton

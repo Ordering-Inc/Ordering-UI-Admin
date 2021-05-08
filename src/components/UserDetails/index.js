@@ -49,8 +49,7 @@ export const UserDetails = (props) => {
         ))}
       </CustomerInfoList>
       <CustomerInfoContent>
-        {
-          currentItemSelected === 1 &&
+        {currentItemSelected === 1 && (
           <GeneralInfo>
             <UserProfileForm
               onClose={onClose}
@@ -61,19 +60,16 @@ export const UserDetails = (props) => {
               useValidationFields
             />
           </GeneralInfo>
-        }
-        {
-          currentItemSelected === 2 &&
+        )}
+        {currentItemSelected === 2 && (
           <UserOrders />
-        }
-        {
-          currentItemSelected === 4 &&
+        )}
+        {currentItemSelected === 4 && (
           <ActivityRegister />
-        }
-        {
-          currentItemSelected === 5 &&
+        )}
+        {currentItemSelected === 5 && (
           <Personalization />
-        }
+        )}
       </CustomerInfoContent>
     </UserDetailsContainer>
   )
