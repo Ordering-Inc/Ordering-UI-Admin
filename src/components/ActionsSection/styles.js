@@ -8,6 +8,7 @@ export const ActionsSectionContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: space-between;
 
   @media (min-width: 576px) {
     flex-direction: row;
@@ -55,6 +56,10 @@ export const SearchContent = styled.div`
 
     @media (min-width: 1200px) {
       width: 350px;
+    }
+
+    @media (min-width: 1366px) {
+      width: 550px;
     }
 
     &:focus {

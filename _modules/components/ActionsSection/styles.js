@@ -46,7 +46,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  img {\n    width: 18px;\n    position: absolute;\n    left: 10px;\n    ", ";\n    top: 11px;\n  }\n  input {\n    border-radius: 5px;\n    transition: all 0.3s;\n\n    @media (min-width: 576px) {\n      width: 150px;\n    }\n\n    @media (min-width: 769px) {\n      width: 170px;\n    }\n\n    @media (min-width: 1200px) {\n      width: 350px;\n    }\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  img {\n    width: 18px;\n    position: absolute;\n    left: 10px;\n    ", ";\n    top: 11px;\n  }\n  input {\n    border-radius: 5px;\n    transition: all 0.3s;\n\n    @media (min-width: 576px) {\n      width: 150px;\n    }\n\n    @media (min-width: 769px) {\n      width: 170px;\n    }\n\n    @media (min-width: 1200px) {\n      width: 350px;\n    }\n\n    @media (min-width: 1366px) {\n      width: 550px;\n    }\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -66,7 +66,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  padding: 20px 15px 0px 15px;\n  margin-bottom: 20px;\n  background-color: #ffffff;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n\n  @media (min-width: 576px) {\n    flex-direction: row;\n  }\n\n  > div {\n    @media(max-width: 576px) {\n      width: 100%;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 20px 15px 0px 15px;\n  margin-bottom: 20px;\n  background-color: #ffffff;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: space-between;\n\n  @media (min-width: 576px) {\n    flex-direction: row;\n  }\n\n  > div {\n    @media(max-width: 576px) {\n      width: 100%;\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

@@ -36,7 +36,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      background: ", ";\n      color: ", ";\n  "]);
+  var data = _taggedTemplateLiteral(["\n      background: #2a9af34d;\n      color: ", ";\n  "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -102,8 +102,6 @@ exports.CustomerInfoList = CustomerInfoList;
 var InfoItem = _styledComponents.default.span(_templateObject4(), function (_ref) {
   var active = _ref.active;
   return active && (0, _styledComponents.css)(_templateObject5(), function (props) {
-    return (0, _polished.darken)(0.03, props.theme.colors.primary);
-  }, function (props) {
     return props.theme.colors.primary;
   });
 });

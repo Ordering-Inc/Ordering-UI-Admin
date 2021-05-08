@@ -21,7 +21,7 @@ export const InfoItem = styled.span`
   cursor: pointer;
   margin-right: 5px;
   ${({ active }) => active && css`
-      background: ${props => darken(0.03, props.theme.colors.primary)};
+      background: #2a9af34d;
       color: ${props => props.theme.colors.primary};
   `}
 
