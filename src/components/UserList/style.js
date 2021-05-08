@@ -79,7 +79,7 @@ export const BodyItemContent = styled.div`
 
   .default-user-avatar {
     font-size: 24px;
-    margin-right: 5px;
+    margin: ${props => props.theme?.rtl ? '0px 0px 0px 10px' : '0px 10px 0px 0px'};
   }
 `
 
@@ -116,7 +116,7 @@ export const UserListStatusRound = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin: ${props => props.theme?.rtl ? '0px 0px 0px 10px' : '0px 10px 0px 0px'};
   background: ${({ active }) => active ? '#0e9b55' : '#da4a54' };
 `
 

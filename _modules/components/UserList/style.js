@@ -94,7 +94,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  margin-right: 10px;\n  background: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  margin: ", ";\n  background: ", ";\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -134,7 +134,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  padding: 20px 0px;\n  display: flex;\n  align-items: center;\n  font-size: 12px;\n\n  @media (min-width: 769px){\n    font-size: 14px;\n  };\n\n  .default-user-avatar {\n    font-size: 24px;\n    margin-right: 5px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 20px 0px;\n  display: flex;\n  align-items: center;\n  font-size: 12px;\n\n  @media (min-width: 769px){\n    font-size: 14px;\n  };\n\n  .default-user-avatar {\n    font-size: 24px;\n    margin: ", ";\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -300,7 +300,11 @@ var UserListBodyItem = _styledComponents.default.td(_templateObject11());
 
 exports.UserListBodyItem = UserListBodyItem;
 
-var BodyItemContent = _styledComponents.default.div(_templateObject12());
+var BodyItemContent = _styledComponents.default.div(_templateObject12(), function (props) {
+  var _props$theme;
+
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) ? '0px 0px 0px 10px' : '0px 10px 0px 0px';
+});
 
 exports.BodyItemContent = BodyItemContent;
 
@@ -316,7 +320,11 @@ var UserAvatarSection = _styledComponents.default.div(_templateObject15());
 
 exports.UserAvatarSection = UserAvatarSection;
 
-var UserListStatusRound = _styledComponents.default.div(_templateObject16(), function (_ref2) {
+var UserListStatusRound = _styledComponents.default.div(_templateObject16(), function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) ? '0px 0px 0px 10px' : '0px 10px 0px 0px';
+}, function (_ref2) {
   var active = _ref2.active;
   return active ? '#0e9b55' : '#da4a54';
 });
