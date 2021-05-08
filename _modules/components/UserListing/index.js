@@ -48,7 +48,8 @@ var UserListingUI = function UserListingUI(props) {
       setFilterValues = props.setFilterValues,
       searchVal = props.searchVal,
       onSearch = props.onSearch,
-      spinLoading = props.spinLoading;
+      spinLoading = props.spinLoading,
+      paginationDetail = props.paginationDetail;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -67,7 +68,8 @@ var UserListingUI = function UserListingUI(props) {
     getUserById: getUserById,
     getUsers: getUsers,
     setUsersList: setUsersList,
-    spinLoading: spinLoading
+    spinLoading: spinLoading,
+    paginationDetail: paginationDetail
   }))));
 };
 

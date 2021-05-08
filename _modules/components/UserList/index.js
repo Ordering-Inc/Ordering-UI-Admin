@@ -81,7 +81,8 @@ var UserList = function UserList(props) {
       getUserById = props.getUserById,
       getUsers = props.getUsers,
       setUsersList = props.setUsersList,
-      spinLoading = props.spinLoading;
+      spinLoading = props.spinLoading,
+      paginationDetail = props.paginationDetail;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -100,17 +101,6 @@ var UserList = function UserList(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       selectedUser = _useState4[0],
       setSelectedUser = _useState4[1];
-
-  var CurrentPageItems = function CurrentPageItems() {
-    var lastItem = (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) * (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize);
-
-    if (paginationProps.totalItems - lastItem < paginationProps.pageSize) {
-      lastItem = paginationProps.totalItems - (lastItem - (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize));
-    }
-
-    var firstItem = (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) * (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize) - (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize) + 1;
-    return "".concat(firstItem, " - ").concat(lastItem, " of ").concat(paginationProps.totalItems);
-  };
 
   var editUserById = function editUserById(userId, enabled) {
     getUserById && getUserById(userId, enabled);
@@ -203,7 +193,7 @@ var UserList = function UserList(props) {
     })))));
   }), (usersList === null || usersList === void 0 ? void 0 : (_usersList$users4 = usersList.users) === null || _usersList$users4 === void 0 ? void 0 : _usersList$users4.length) > 0 && !(usersList === null || usersList === void 0 ? void 0 : usersList.loading) && /*#__PURE__*/_react.default.createElement(_style.UserListFoot, null, /*#__PURE__*/_react.default.createElement(_style.HeaderTR, null, /*#__PURE__*/_react.default.createElement("td", {
     colSpan: "7"
-  }, /*#__PURE__*/_react.default.createElement(_style.PaginationList, null, /*#__PURE__*/_react.default.createElement(_style.PaginationItem, null, /*#__PURE__*/_react.default.createElement(CurrentPageItems, null)), (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) > 1 && /*#__PURE__*/_react.default.createElement(_TiMediaPlayReverse.default, {
+  }, /*#__PURE__*/_react.default.createElement(_style.PaginationList, null, /*#__PURE__*/_react.default.createElement(_style.PaginationItem, null, "".concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.from, " - ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.to, " of ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.total)), (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) > 1 && /*#__PURE__*/_react.default.createElement(_TiMediaPlayReverse.default, {
     onClick: function onClick() {
       return prevNextPage(false);
     }

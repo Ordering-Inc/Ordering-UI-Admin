@@ -46,23 +46,13 @@ export const UserList = (props) => {
     getUserById,
     getUsers,
     setUsersList,
-    spinLoading
+    spinLoading,
+    paginationDetail
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [selectedUser, setSelectedUser] = useState({})
-
-  const CurrentPageItems = () => {
-    let lastItem = paginationProps?.currentPage * paginationProps?.pageSize
-    if (paginationProps.totalItems - lastItem < paginationProps.pageSize) {
-      lastItem = paginationProps.totalItems - (lastItem - paginationProps?.pageSize)
-    }
-    const firstItem = paginationProps?.currentPage * paginationProps?.pageSize - paginationProps?.pageSize + 1
-    return (
-      `${firstItem} - ${lastItem} of ${paginationProps.totalItems}`
-    )
-  }
 
   const editUserById = (userId, enabled) => {
     getUserById && getUserById(userId, enabled)
@@ -261,7 +251,7 @@ export const UserList = (props) => {
               <td colSpan='7'>
                 <PaginationList>
                   <PaginationItem>
-                    <CurrentPageItems />
+                    {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
                   </PaginationItem>
                   {
                     paginationProps?.currentPage > 1 && <TiMediaPlayReverse onClick={() => prevNextPage(false)} />

@@ -26,7 +26,8 @@ const UserListingUI = (props) => {
     setFilterValues,
     searchVal,
     onSearch,
-    spinLoading
+    spinLoading,
+    paginationDetail
   } = props
   const [, t] = useLanguage()
 
@@ -51,6 +52,7 @@ const UserListingUI = (props) => {
             getUsers={getUsers}
             setUsersList={setUsersList}
             spinLoading={spinLoading}
+            paginationDetail={paginationDetail}
           />
         </UserListSection>
 
