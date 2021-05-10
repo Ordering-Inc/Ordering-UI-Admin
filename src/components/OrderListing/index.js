@@ -219,7 +219,7 @@ export const OrderListing = (props) => {
                   </SkeletonOrder>
                 )}
 
-              {orderListView === 'small' && (
+              {(orderListView === 'small' || windowSize.width <= 992) && (
                 <>
                   {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                     <React.Fragment key={order.id}>
