@@ -80,7 +80,7 @@ const OrderDetailsUI = (props) => {
     handleOpenMessage,
     handleUpdateOrderForUnreadCount,
     handleOpenOrderDetail,
-    actionStatus,
+    actionStatus
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -166,7 +166,6 @@ const OrderDetailsUI = (props) => {
             <OrderInfo>
               <OrderData messageDashboardView={messageDashboardView}>
                 <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
-                {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>
                   {parseDate(order?.delivery_datetime, { utc: false })}
@@ -174,8 +173,9 @@ const OrderDetailsUI = (props) => {
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
               {actionStatus?.loading
-                ? <SpinnerLoader style={{ width: 170, height: 90, transform: 'scale(0.3)' }} />
-                : (
+                ? (
+                  <SpinnerLoader style={{ width: 170, height: 90, transform: 'scale(0.3)' }} />
+                ) : (
                   <OrderStatus>
                     {(!pendingOrder && !preOrder) && (
                       <span>{getOrderStatus(parseInt(order?.status))?.value}</span>
@@ -190,8 +190,7 @@ const OrderDetailsUI = (props) => {
                       <img src={getImage(order?.status || 0)} alt='status' />
                     </StatusImage>
                   </OrderStatus>
-                )
-              }
+                )}
               {messageDashboardView && (
                 <OrderDetailCloseButton>
                   <GrClose onClick={() => handleMessageOrderDetail(false)} />
