@@ -40,7 +40,6 @@ export const OrderItemAccordion = (props) => {
   const {
     order,
     drivers,
-    size,
     selectedOrderIds,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
@@ -177,7 +176,7 @@ export const OrderItemAccordion = (props) => {
             </TextBlockContainer>
           </OrderItemAccordionCell>
           <OrderInfoContainer>
-            <WrapperGeneralInfo size={size}>
+            <WrapperGeneralInfo>
               <OrderItemAccordionCell className='order-item-business'>
                 <WrapperAccordionImage>
                   <AccordionImage bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
