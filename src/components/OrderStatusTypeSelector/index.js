@@ -289,8 +289,21 @@ export const OrderStatusTypeSelector = (props) => {
 
   useEffect(() => {
     if (!isFilterView) {
-      if (deliveryType === 1 || orderControl) {
+      if (orderControl) {
         setFilteredOrderStatuses(orderStatuses)
+      } else if (deliveryType === 1) {
+        let _filteredOrderStatues = []
+        let extractOrderStatus = []
+        extractOrderStatus = orderStatuses.slice(0, 12)
+        _filteredOrderStatues = [...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(15, 18)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(19, 26)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        setFilteredOrderStatuses(_filteredOrderStatues)
       } else {
         let _filteredOrderStatues = []
         let extractOrderStatus = []

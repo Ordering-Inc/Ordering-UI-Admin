@@ -145,34 +145,18 @@ export const OrderListing = (props) => {
                   <>
                     {currentOrders.map(order => (
                       <React.Fragment key={order.id}>
-                        {orderListView === 'big' && (
-                          <>
-                            {windowSize.width > 992 ? (
-                              <OrderItemAccordion
-                                order={order}
-                                size={size}
-                                drivers={driversList.drivers}
-                                pendingOrder={pendingOrder}
-                                preOrder={preOrder}
-                                selectedOrderIds={selectedOrderIds}
-                                handleUpdateOrderStatus={handleUpdateOrderStatus}
-                                handleSelectedOrderIds={handleSelectedOrderIds}
-                                handleOpenOrderDetail={handleOpenOrderDetail}
-                              />
-                            ) : (
-                              <SmallOrderItemAccordion
-                                isOrdersListView
-                                order={order}
-                                drivers={driversList.drivers}
-                                pendingOrder={pendingOrder}
-                                preOrder={preOrder}
-                                selectedOrderIds={selectedOrderIds}
-                                handleUpdateOrderStatus={handleUpdateOrderStatus}
-                                handleSelectedOrderIds={handleSelectedOrderIds}
-                                handleOpenOrderDetail={handleOpenOrderDetail}
-                              />
-                            )}
-                          </>
+                        {orderListView === 'big' && windowSize.width > 992 && (
+                          <OrderItemAccordion
+                            order={order}
+                            size={size}
+                            drivers={driversList.drivers}
+                            pendingOrder={pendingOrder}
+                            preOrder={preOrder}
+                            selectedOrderIds={selectedOrderIds}
+                            handleUpdateOrderStatus={handleUpdateOrderStatus}
+                            handleSelectedOrderIds={handleSelectedOrderIds}
+                            handleOpenOrderDetail={handleOpenOrderDetail}
+                          />
                         )}
                       </React.Fragment>
                     ))}
@@ -235,7 +219,7 @@ export const OrderListing = (props) => {
                   </SkeletonOrder>
                 )}
 
-              {(orderListView === 'small' || windowSize.width <= 992) && (
+              {orderListView === 'small' && (
                 <>
                   {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                     <React.Fragment key={order.id}>

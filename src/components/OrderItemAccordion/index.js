@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { getAgoMinutes } from '../../utils'
 
 import { useHistory } from 'react-router-dom'
 import { useLanguage, useUtils } from 'ordering-components-admin'
@@ -50,7 +49,7 @@ export const OrderItemAccordion = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
+  const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
   const history = useHistory()
 
   const [setActive, setActiveState] = useState('')
@@ -63,7 +62,7 @@ export const OrderItemAccordion = (props) => {
   // const content = useRef(null)
   const toggleBtn = useRef(null)
   const driverSelectorRef = useRef(null)
-  const [diffTime, setDiffTime] = useState(getAgoMinutes(order?.delivery_datetime))
+  const [diffTime, setDiffTime] = useState(getTimeAgo(order?.delivery_datetime))
 
   const toggleOrderSelect = (id) => {
     setIsChecked(!isChecked)
@@ -134,7 +133,7 @@ export const OrderItemAccordion = (props) => {
     const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
     if (deActive) return
     const timer = setInterval(() => {
-      setDiffTime(getAgoMinutes(order?.delivery_datetime))
+      setDiffTime(getTimeAgo(order?.delivery_datetime))
     }, 60 * 1000)
     return () => {
       clearInterval(timer)

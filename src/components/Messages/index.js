@@ -77,17 +77,17 @@ export const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const { handleSubmit, register, errors } = useForm()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [load, setLoad] = useState(0)
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
+
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [messageLevel, setMessageLevel] = useState(null)
   const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [driverNoneCase, setDriverNoneCase] = useState(false)
-
+  const [load, setLoad] = useState(0)
   const [business, setBusiness] = useState(props.business)
   const [customer, setCustomer] = useState(props.customer)
   const [driver, setDriver] = useState(props.driver)
@@ -163,31 +163,49 @@ export const MessagesUI = (props) => {
   const getStatus = (status) => {
     switch (status) {
       case 0:
-        return 'Pending order'
+        return t('PENDING', 'Pending')
       case 1:
-        return 'Completed by admin'
+        return t('COMPLETED_BY_ADMIN', 'Completed by admin')
       case 2:
-        return 'Reject by admin'
+        return t('REJECTED_BY_ADMIN', 'Rejected by admin')
       case 3:
-        return 'Driver arrived by business'
+        return t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by business')
       case 4:
-        return 'Ready for pickup'
+        return t('READY_FOR_PICKUP', 'Ready for pickup')
       case 5:
-        return 'Reject by business'
+        return t('REJECT_BY_BUSINESS', 'Reject by business')
       case 6:
-        return 'Reject by driver'
+        return t('REJECT_BY_DRIVER', 'Reject by driver')
       case 7:
-        return 'Accepted by business'
+        return t('ACCEPTED_BY_BUSINESS', 'Accepted by Business')
       case 8:
-        return 'Accepted by driver'
+        return t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')
       case 9:
-        return 'Pickup completed by driver'
+        return t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver')
       case 10:
-        return 'Pickup failed by driver'
+        return t('PICKUP_FAILED_BY_DRIVER', 'Pickup failed by driver')
       case 11:
-        return 'Delivery completed by driver'
+        return t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver')
       case 12:
-        return 'Delivery failed by driver'
+        return t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
+      case 13:
+        return t('PREORDER', 'Preorder')
+      case 14:
+        return t('ORDER_NOT_READY', 'Order not ready')
+      case 15:
+        return t('PICKUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')
+      case 16:
+        return t('CANCELLED_BY_CUSTOMER', 'Cancelled by customer')
+      case 17:
+        return t('NOT_PICKED_BY_CUSTOMER', 'Not picked by customer')
+      case 18:
+        return t('DRIVER_ALMOST_ARRIVED_TO_BUSINESS', 'Driver almost arrived to business')
+      case 19:
+        return t('DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', 'Driver almost arrived to customer')
+      case 20:
+        return t('CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', 'Customer almost arrived to business')
+      case 21:
+        return t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business')
       default:
         return status
     }
@@ -501,21 +519,35 @@ export const MessagesUI = (props) => {
                             {message.change?.attribute !== 'driver_id' ? (
                               <BubbleConsole>
                                 {t('ORDER', 'Order')} {' '}
-                                <strong>{message.change.attribute}</strong> {}
+                                <strong>{t(message.change.attribute)}</strong> {' '}
                                 {t('CHANGED_FROM', 'Changed from')} {' '}
                                 {message.change.old !== null && (
                                   <>
                                     <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
                                   </>
                                 )}
-                                <> {t('TO', 'to')} {' '} <strong>{getStatus(parseInt(message.change.new, 10))}</strong> </>
+                                <>
+                                  {t('TO', 'to')} {' '}
+                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
+                                  {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             ) : (
                               <BubbleConsole>
-                                <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                {message.comment && (<><br /> {message.comment.length}</>)}
+                                <>
+                                  {message.change.new !== null ? (
+                                    <>
+                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                      {message.comment && (<><br /> {message.comment.length}</>)}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
+                                    </>
+                                  )}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             )}
@@ -525,26 +557,40 @@ export const MessagesUI = (props) => {
                     )}
                     {!history && (message?.author?.level === 0 || message?.author?.level === 2 || message?.author?.level === messageLevel) && (
                       <>
-                        {message.type === 1 && (
+                        {message.type === 1 && message.change?.attribute !== 'comment' && (
                           <MessageConsole key={message.id}>
                             {message.change?.attribute !== 'driver_id' ? (
                               <BubbleConsole>
                                 {t('ORDER', 'Order')} {' '}
-                                <strong>{message.change.attribute}</strong> {}
+                                <strong>{t(message.change.attribute)}</strong> {' '}
                                 {t('CHANGED_FROM', 'Changed from')} {' '}
                                 {message.change.old !== null && (
                                   <>
                                     <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
                                   </>
                                 )}
-                                <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                                <>
+                                  {t('TO', 'to')} {' '}
+                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
+                                  {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             ) : (
                               <BubbleConsole>
-                                <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                {message.comment && (<><br /> {message.comment.length}</>)}
+                                <>
+                                  {message.change.new !== null ? (
+                                    <>
+                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                      {message.comment && (<><br /> {message.comment.length}</>)}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
+                                    </>
+                                  )}
+                                </>
                                 <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                               </BubbleConsole>
                             )}
