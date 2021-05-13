@@ -9,6 +9,7 @@ export const ActionsSectionContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0px 2px 2px #00000029;
 
   @media (min-width: 576px) {
     flex-direction: row;
