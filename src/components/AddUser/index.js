@@ -328,7 +328,7 @@ const AddUserUI = (props) => {
                 <RectButton
                   outline
                   type='button'
-                  color='primary'
+                  color='darkBlue'
                   onClick={onCloseModal}
                   disabled={formState.loading}
                 >

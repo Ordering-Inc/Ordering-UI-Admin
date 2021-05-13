@@ -377,7 +377,7 @@ var AddUserUI = function AddUserUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     outline: true,
     type: "button",
-    color: "primary",
+    color: "darkBlue",
     onClick: onCloseModal,
     disabled: formState.loading
   }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {

@@ -100,7 +100,7 @@ var ExportContainer = _styledComponents.default.div(_templateObject5());
 exports.ExportContainer = ExportContainer;
 
 var AddUserContainer = _styledComponents.default.div(_templateObject6(), function (props) {
-  return props.theme.colors.btnPrimaryContrast;
+  return props.theme.colors.btnDarkBlueContrast;
 });
 
 exports.AddUserContainer = AddUserContainer;

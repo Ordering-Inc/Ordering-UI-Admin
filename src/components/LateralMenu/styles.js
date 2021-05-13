@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const LateralMenuContainer = styled.div`
   padding-top: 15px;
   position: fixed;
-  z-index: 9999;
+  z-index: 1200;
   background-color: #ffffff;
   height: 100vh;
   box-shadow: 0px 2px 2px #00000029;
