@@ -151,6 +151,7 @@ const LogoutActionUI = (props) => {
 
 const PopoverListItemLogout = (props) => {
   const logoutActionProps = {
+    ...props,
     UIComponent: LogoutActionUI,
     onClose: props.onClose
   }
