@@ -27,12 +27,15 @@ import {
   SidbeBarControl
 } from './styles'
 
-export const LateralMenu = () => {
+export const LateralMenu = (props) => {
+  const {
+    isCollapse,
+    setIsCollapse
+  } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const [sessionState] = useSession()
   const [isMobile, setIsMobile] = useState(false)
-  const [isText, setIsText] = useState(true)
 
   return (
     <>
@@ -42,13 +45,13 @@ export const LateralMenu = () => {
       </MobileHeader>
       <LateralMenuContainer
         isShowMenu={isMobile}
-        colapse={isText}
+        colapse={isCollapse}
       >
         <MenuContent>
           <MainMenuList>
             <LogoHeader>
               {
-                isText
+                isCollapse
                   ? <img alt='Logotype' src={theme?.images?.logos?.logotype} />
                   : <img alt='Logotype' className='isotype' src={theme?.images?.logos?.isotype} />
               }
@@ -62,7 +65,7 @@ export const LateralMenu = () => {
                 fallback={<FaUserAlt />}
               />
               {
-                (isText || isMobile) && (
+                (isCollapse || isMobile) && (
                   <UserName>
                     {sessionState?.user?.name} {sessionState?.user?.lastname}
                     <BiChevronDown />
@@ -73,7 +76,7 @@ export const LateralMenu = () => {
             <MenuItem>
               <BsListTask />
               {
-                (isText || isMobile) && <ItemText>{t('ORDERS_MANAGER', 'Orders Manager')}</ItemText>
+                (isCollapse || isMobile) && <ItemText>{t('ORDERS_MANAGER', 'Orders Manager')}</ItemText>
               }
             </MenuItem>
             <MenuItem
@@ -83,7 +86,7 @@ export const LateralMenu = () => {
             >
               <EnUsers />
               {
-                (isText || isMobile) && <ItemText>{t('USERS', 'Users')}</ItemText>
+                (isCollapse || isMobile) && <ItemText>{t('USERS', 'Users')}</ItemText>
               }
             </MenuItem>
           </MainMenuList>
@@ -91,14 +94,14 @@ export const LateralMenu = () => {
             <LogOutItem>
               <RiLogoutCircleRLine />
               {
-                (isText || isMobile) && <ItemText>{t('LOG_OUT', 'Log out')}</ItemText>
+                (isCollapse || isMobile) && <ItemText>{t('LOG_OUT', 'Log out')}</ItemText>
               }
             </LogOutItem>
             {
               !isMobile && (
-                <SidbeBarControl colapse={isText}>
+                <SidbeBarControl colapse={isCollapse}>
                   <EnLogin
-                    onClick={() => setIsText(!isText)}
+                    onClick={() => setIsCollapse(!isCollapse)}
                   />
                 </SidbeBarControl>
               )

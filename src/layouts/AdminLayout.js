@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Header } from '../components/Header'
 // import { SideMenu } from '../components/SideMenu'
 import { LateralMenu } from '../components/LateralMenu'
@@ -8,12 +8,19 @@ import {
 } from './styles'
 
 export const AdminLayout = (props) => {
+  const [isCollapse, setIsCollapse] = useState(false)
+
+  sideMenuProps = {
+    isCollapse: isCollapse,
+    setIsCollapse: setIsCollapse
+  }
+
   return (
     <>
       <Header />
       <AdminMainContainer>
-        <LateralMenu />
-        <AdminContent>
+        <LateralMenu {...sideMenuProps} />
+        <AdminContent collapse={isCollapse}>
           {props.children}
         </AdminContent>
       </AdminMainContainer>

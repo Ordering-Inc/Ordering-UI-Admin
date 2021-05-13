@@ -10,7 +10,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  padding-left: 0px;\n  @media (min-width: 769px){\n    padding-left: 200px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding-left: 0px;\n\n  @media (min-width: 769px){\n    padding-left: ", ";\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -35,6 +35,8 @@ var AdminMainContainer = _styledComponents.default.div(_templateObject());
 
 exports.AdminMainContainer = AdminMainContainer;
 
-var AdminContent = _styledComponents.default.div(_templateObject2());
+var AdminContent = _styledComponents.default.div(_templateObject2(), function (collapse) {
+  return collapse ? "200px" : '65px';
+});
 
 exports.AdminContent = AdminContent;
