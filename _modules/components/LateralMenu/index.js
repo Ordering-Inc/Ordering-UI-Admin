@@ -162,5 +162,5 @@ var PopoverListItemLogout = function PopoverListItemLogout(props) {
     UIComponent: LogoutActionUI,
     onClose: props.onClose
   };
-  return /*#__PURE__*/_react.default.createElement(LogoutActionController, logoutActionProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LogoutAction, logoutActionProps);
 };

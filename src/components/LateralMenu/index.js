@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useLanguage, useEvent } from 'ordering-components-admin'
+import {
+  useSession,
+  useLanguage,
+  useEvent,
+  LogoutAction as LogoutActionController
+} from 'ordering-components-admin'
 import BiChevronDown from '@meronex/icons/bi/BiChevronDown'
 import { DropDownCircleImage } from '../Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
