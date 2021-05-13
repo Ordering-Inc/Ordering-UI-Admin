@@ -8,7 +8,7 @@ import {
 } from './styles'
 
 export const AdminLayout = (props) => {
-  const [isCollapse, setIsCollapse] = useState(false)
+  const [isCollapse, setIsCollapse] = useState(true)
 
   const sideMenuProps = {
     isCollapse: isCollapse,
