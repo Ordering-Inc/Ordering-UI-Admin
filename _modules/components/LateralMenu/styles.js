@@ -134,7 +134,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  flex-direction: column;\n  padding: 20px 10px;\n  box-sizing: border-box;\n  height: 100%;\n\n  @media (min-width: 769px){\n    padding: 10px 5px;\n    justify-content: space-between;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  flex-direction: column;\n  padding: 5px 10px;\n  box-sizing: border-box;\n  height: 100%;\n\n  @media (min-width: 769px){\n    padding: 10px 5px;\n    justify-content: space-between;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

@@ -27,7 +27,7 @@ export const MenuContent = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  padding: 20px 10px;
+  padding: 5px 10px;
   box-sizing: border-box;
   height: 100%;
 
