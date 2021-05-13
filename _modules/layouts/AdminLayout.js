@@ -37,7 +37,7 @@ var AdminLayout = function AdminLayout(props) {
       isCollapse = _useState2[0],
       setIsCollapse = _useState2[1];
 
-  sideMenuProps = {
+  var sideMenuProps = {
     isCollapse: isCollapse,
     setIsCollapse: setIsCollapse
   };

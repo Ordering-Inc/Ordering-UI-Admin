@@ -10,7 +10,7 @@ import {
 export const AdminLayout = (props) => {
   const [isCollapse, setIsCollapse] = useState(false)
 
-  sideMenuProps = {
+  const sideMenuProps = {
     isCollapse: isCollapse,
     setIsCollapse: setIsCollapse
   }
