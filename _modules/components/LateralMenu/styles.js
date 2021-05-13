@@ -144,7 +144,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  position: fixed;\n  z-index: 1000;\n  background-color: #ffffff;\n  height: calc(100vh - 65px);\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n\n  @media (min-width: 769px){\n    width: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  position: fixed;\n  z-index: 9999;\n  background-color: #ffffff;\n  height: calc(100vh - 65px);\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n  top: 0px;\n\n  @media (min-width: 769px){\n    top: auto;\n    width: ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

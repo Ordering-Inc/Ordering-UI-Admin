@@ -3,15 +3,17 @@ import styled, { css } from 'styled-components'
 export const LateralMenuContainer = styled.div`
   padding-top: 15px;
   position: fixed;
-  z-index: 1000;
+  z-index: 9999;
   background-color: #ffffff;
   height: calc(100vh - 65px);
   box-shadow: 0px 2px 2px #00000029;
   width: ${({ isShowMenu }) => isShowMenu ? '100vw' : '0px'};
   overflow: auto;
   transition: all 0.3s;
+  top: 0px;
 
   @media (min-width: 769px){
+    top: auto;
     width: ${({ colapse }) => colapse ? '200px' : '65px'};
   }
 `
