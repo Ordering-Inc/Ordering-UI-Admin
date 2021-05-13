@@ -23,11 +23,13 @@ var _BsListTask = _interopRequireDefault(require("@meronex/icons/bs/BsListTask")
 
 var _EnUsers = _interopRequireDefault(require("@meronex/icons/en/EnUsers"));
 
-var _EnLogOut = _interopRequireDefault(require("@meronex/icons/en/EnLogOut"));
+var _RiLogoutCircleRLine = _interopRequireDefault(require("@meronex/icons/ri/RiLogoutCircleRLine"));
 
 var _HiMenu = _interopRequireDefault(require("@meronex/icons/hi/HiMenu"));
 
 var _GrClose = _interopRequireDefault(require("@meronex/icons/gr/GrClose"));
+
+var _EnLogin = _interopRequireDefault(require("@meronex/icons/en/EnLogin"));
 
 var _styles = require("./styles");
 
@@ -50,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LateralMenu = function LateralMenu() {
-  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _sessionState$user, _sessionState$user2, _sessionState$user3;
+  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _sessionState$user, _sessionState$user2, _sessionState$user3;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -67,6 +69,11 @@ var LateralMenu = function LateralMenu() {
       isMobile = _useState2[0],
       setIsMobile = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isText = _useState4[0],
+      setIsText = _useState4[1];
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MobileHeader, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, {
     onClick: function onClick() {
       return setIsMobile(true);
@@ -75,10 +82,15 @@ var LateralMenu = function LateralMenu() {
     alt: "Logotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype
   })), /*#__PURE__*/_react.default.createElement(_styles.LateralMenuContainer, {
-    isShowMenu: isMobile
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, null, /*#__PURE__*/_react.default.createElement("img", {
+    isShowMenu: isMobile,
+    colapse: isText
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, null, isText ? /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
+  }) : /*#__PURE__*/_react.default.createElement("img", {
+    alt: "Logotype",
+    className: "isotype",
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.isotype
   })), /*#__PURE__*/_react.default.createElement(_styles.CloseMenu, null, /*#__PURE__*/_react.default.createElement(_GrClose.default, {
     onClick: function onClick() {
       return setIsMobile(false);
@@ -86,9 +98,15 @@ var LateralMenu = function LateralMenu() {
   })), /*#__PURE__*/_react.default.createElement(_styles.UserAvatar, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), /*#__PURE__*/_react.default.createElement(_styles.UserName, null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.lastname, /*#__PURE__*/_react.default.createElement(_BiChevronDown.default, null))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, null, /*#__PURE__*/_react.default.createElement(_BsListTask.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('ORDERS_MANAGER', 'Orders Manager'))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, {
+  }), (isText || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.lastname, /*#__PURE__*/_react.default.createElement(_BiChevronDown.default, null))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, null, /*#__PURE__*/_react.default.createElement(_BsListTask.default, null), (isText || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('ORDERS_MANAGER', 'Orders Manager'))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, {
     active: window.location.pathname === '/users'
-  }, /*#__PURE__*/_react.default.createElement(_EnUsers.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuBottom, null, /*#__PURE__*/_react.default.createElement(_styles.LogOutItem, null, /*#__PURE__*/_react.default.createElement(_EnLogOut.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('LOG_OUT', 'Log out')))))));
+  }, /*#__PURE__*/_react.default.createElement(_EnUsers.default, null), (isText || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuBottom, null, /*#__PURE__*/_react.default.createElement(_styles.LogOutItem, null, /*#__PURE__*/_react.default.createElement(_RiLogoutCircleRLine.default, null), (isText || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('LOG_OUT', 'Log out'))), !isMobile && /*#__PURE__*/_react.default.createElement(_styles.SidbeBarControl, {
+    colapse: isText
+  }, /*#__PURE__*/_react.default.createElement(_EnLogin.default, {
+    onClick: function onClick() {
+      return setIsText(!isText);
+    }
+  }))))));
 };
 
 exports.LateralMenu = LateralMenu;

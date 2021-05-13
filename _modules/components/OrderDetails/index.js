@@ -49,6 +49,8 @@ var _MetaFields = require("../MetaFields");
 
 var _Modal = require("../Modal");
 
+var _SpinnerLoader = require("../SpinnerLoader");
+
 var _styles = require("./styles");
 
 var _styledComponents = require("styled-components");
@@ -86,7 +88,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _getOrderStatus, _order$business, _order$business2, _order$business3, _order$business4, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$driver, _order$driver2, _order$driver3, _order$driver4, _theme$images2, _theme$images2$icons, _order$paymethod, _theme$images3, _theme$images3$icons, _theme$images4, _theme$images4$icons, _order$products, _order$summary, _order$summary2, _order$summary3, _order$summary4, _order$summary5, _order$summary6, _order$summary7, _order$summary8, _order$summary9, _order$summary10, _order$summary11, _theme$images5, _theme$images5$icons, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer14, _order$customer15, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11;
+  var _getOrderStatus, _getOrderStatus2, _order$business, _order$business2, _order$business3, _order$business4, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$driver, _order$driver2, _order$driver3, _order$driver4, _theme$images2, _theme$images2$icons, _order$paymethod, _theme$images3, _theme$images3$icons, _theme$images4, _theme$images4$icons, _order$products, _order$summary, _order$summary2, _order$summary3, _order$summary4, _order$summary5, _order$summary6, _order$summary7, _order$summary8, _order$summary9, _order$summary10, _order$summary11, _theme$images5, _theme$images5$icons, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer14, _order$customer15, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11;
 
   var pendingOrder = props.pendingOrder,
       preOrder = props.preOrder,
@@ -98,7 +100,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       messageType = props.messageType,
       handleOpenMessage = props.handleOpenMessage,
       handleUpdateOrderForUnreadCount = props.handleUpdateOrderForUnreadCount,
-      handleOpenOrderDetail = props.handleOpenOrderDetail;
+      handleOpenOrderDetail = props.handleOpenOrderDetail,
+      actionStatus = props.actionStatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -203,6 +206,51 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       value: 'Delivery Failed by driver',
       slug: 'DELIVERY_FAILED_BY_DRIVER',
       percentage: 0
+    }, {
+      key: 13,
+      value: 'Preorder',
+      slug: 'PREORDER',
+      percentage: 25
+    }, {
+      key: 14,
+      value: 'Order not ready',
+      slug: 'ORDER_NOT_READY',
+      percentage: 65
+    }, {
+      key: 15,
+      value: 'Pickup completed by customer',
+      slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
+      percentage: 100
+    }, {
+      key: 16,
+      value: 'Canceled by customer',
+      slug: 'CANCELED_BY_CUSTOMER',
+      percentage: 0
+    }, {
+      key: 17,
+      value: 'Not picked by customer',
+      slug: 'NOT_PICKED_BY_CUSTOMER',
+      percentage: 0
+    }, {
+      key: 18,
+      value: 'Driver almost arrived to business',
+      slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
+      percentage: 50
+    }, {
+      key: 19,
+      value: 'Driver almost arrived to customer',
+      slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
+      percentage: 90
+    }, {
+      key: 20,
+      value: 'Customer almost arrived to business',
+      slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
+      percentage: 50
+    }, {
+      key: 21,
+      value: 'Customer arrived to business',
+      slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
+      percentage: 60
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;
@@ -288,7 +336,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     utc: false
   })), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
-  })), /*#__PURE__*/_react.default.createElement(_styles.OrderStatus, null, !pendingOrder && !preOrder && /*#__PURE__*/_react.default.createElement("span", null, getOrderStatus(parseInt(order === null || order === void 0 ? void 0 : order.status)).value), pendingOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PENDING', 'Pending')), preOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.StatusImage, null, /*#__PURE__*/_react.default.createElement("img", {
+  })), (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) ? /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+    style: {
+      width: 170,
+      height: 90,
+      transform: 'scale(0.3)'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_styles.OrderStatus, null, !pendingOrder && !preOrder && /*#__PURE__*/_react.default.createElement("span", null, (_getOrderStatus2 = getOrderStatus(parseInt(order === null || order === void 0 ? void 0 : order.status))) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), pendingOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PENDING', 'Pending')), preOrder && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.StatusImage, null, /*#__PURE__*/_react.default.createElement("img", {
     src: getImage((order === null || order === void 0 ? void 0 : order.status) || 0),
     alt: "status"
   }))), messageDashboardView && /*#__PURE__*/_react.default.createElement(_styles.OrderDetailCloseButton, null, /*#__PURE__*/_react.default.createElement(_GrClose.default, {

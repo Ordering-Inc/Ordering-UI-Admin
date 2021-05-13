@@ -106,19 +106,6 @@ var MessagesUI = function MessagesUI(props) {
       register = _useForm.register,
       errors = _useForm.errors;
 
-  var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      load = _useState4[0],
-      setLoad = _useState4[1];
-
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
@@ -131,34 +118,47 @@ var MessagesUI = function MessagesUI(props) {
 
   var buttonRef = (0, _react.useRef)(null);
 
-  var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      messageLevel = _useState6[0],
-      setMessageLevel = _useState6[1];
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
-  var _useState7 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      messageLevel = _useState4[0],
+      setMessageLevel = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
     orderHistory: true,
     logistics: false,
     logistic_information: false
   }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      tabActive = _useState6[0],
+      setTabActive = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      tabActive = _useState8[0],
-      setTabActive = _useState8[1];
+      messageSearchValue = _useState8[0],
+      setMessageSearchValue = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(''),
+  var _useState9 = (0, _react.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      messageSearchValue = _useState10[0],
-      setMessageSearchValue = _useState10[1];
+      filteredMessages = _useState10[0],
+      setFilteredMessages = _useState10[1];
 
-  var _useState11 = (0, _react.useState)([]),
+  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      filteredMessages = _useState12[0],
-      setFilteredMessages = _useState12[1];
+      driverNoneCase = _useState12[0],
+      setDriverNoneCase = _useState12[1];
 
-  var _useState13 = (0, _react.useState)(false),
+  var _useState13 = (0, _react.useState)(0),
       _useState14 = _slicedToArray(_useState13, 2),
-      driverNoneCase = _useState14[0],
-      setDriverNoneCase = _useState14[1];
+      load = _useState14[0],
+      setLoad = _useState14[1];
 
   var _useState15 = (0, _react.useState)(props.business),
       _useState16 = _slicedToArray(_useState15, 2),
@@ -247,43 +247,70 @@ var MessagesUI = function MessagesUI(props) {
   var getStatus = function getStatus(status) {
     switch (status) {
       case 0:
-        return 'Pending order';
+        return t('PENDING', 'Pending');
 
       case 1:
-        return 'Completed by admin';
+        return t('COMPLETED_BY_ADMIN', 'Completed by admin');
 
       case 2:
-        return 'Reject by admin';
+        return t('REJECTED_BY_ADMIN', 'Rejected by admin');
 
       case 3:
-        return 'Driver arrived by business';
+        return t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by business');
 
       case 4:
-        return 'Ready for pickup';
+        return t('READY_FOR_PICKUP', 'Ready for pickup');
 
       case 5:
-        return 'Reject by business';
+        return t('REJECT_BY_BUSINESS', 'Reject by business');
 
       case 6:
-        return 'Reject by driver';
+        return t('REJECT_BY_DRIVER', 'Reject by driver');
 
       case 7:
-        return 'Accepted by business';
+        return t('ACCEPTED_BY_BUSINESS', 'Accepted by Business');
 
       case 8:
-        return 'Accepted by driver';
+        return t('ACCEPTED_BY_DRIVER', 'Accepted by Driver');
 
       case 9:
-        return 'Pickup completed by driver';
+        return t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver');
 
       case 10:
-        return 'Pickup failed by driver';
+        return t('PICKUP_FAILED_BY_DRIVER', 'Pickup failed by driver');
 
       case 11:
-        return 'Delivery completed by driver';
+        return t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver');
 
       case 12:
-        return 'Delivery failed by driver';
+        return t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver');
+
+      case 13:
+        return t('PREORDER', 'Preorder');
+
+      case 14:
+        return t('ORDER_NOT_READY', 'Order not ready');
+
+      case 15:
+        return t('PICKUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer');
+
+      case 16:
+        return t('CANCELLED_BY_CUSTOMER', 'Cancelled by customer');
+
+      case 17:
+        return t('NOT_PICKED_BY_CUSTOMER', 'Not picked by customer');
+
+      case 18:
+        return t('DRIVER_ALMOST_ARRIVED_TO_BUSINESS', 'Driver almost arrived to business');
+
+      case 19:
+        return t('DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', 'Driver almost arrived to customer');
+
+      case 20:
+        return t('CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', 'Customer almost arrived to business');
+
+      case 21:
+        return t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business');
 
       default:
         return status;
@@ -541,7 +568,7 @@ var MessagesUI = function MessagesUI(props) {
   })), tabActive.logistic_information && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_LogisticInformation.LogisticInformation, {
     orderId: order.id
   }))), filteredMessages.length > 0 && filteredMessages.map(function (message) {
-    var _message$change, _message$driver, _message$driver2, _message$author2, _message$author3, _message$author4, _message$change2, _message$driver3, _message$driver4, _message$author5, _message$author6, _message$author7, _message$author8, _message$author9, _message$author10, _message$author11, _message$author12, _message$author13, _message$author14, _message$author15, _message$author16, _message$author17, _message$author18, _message$author19, _message$author20, _message$author21, _message$author22, _message$author23, _message$author24, _message$author25, _message$author26, _message$author27, _message$author28;
+    var _message$change, _message$change2, _message$change3, _message$driver, _message$driver2, _message$author2, _message$author3, _message$author4, _message$change4, _message$change5, _message$change6, _message$change7, _message$driver3, _message$driver4, _message$author5, _message$author6, _message$author7, _message$author8, _message$author9, _message$author10, _message$author11, _message$author12, _message$author13, _message$author14, _message$author15, _message$author16, _message$author17, _message$author18, _message$author19, _message$author20, _message$author21, _message$author22, _message$author23, _message$author24, _message$author25, _message$author26, _message$author27, _message$author28;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: message.id
@@ -550,9 +577,9 @@ var MessagesUI = function MessagesUI(props) {
       style: {
         display: "".concat(tabActive.orderHistory ? 'inline-flex' : 'none')
       }
-    }, ((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.attribute), " ", t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, getStatus(parseInt(message.change.old, 10))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, " ", t('TO', 'to'), " ", ' ', " ", /*#__PURE__*/_react.default.createElement("strong", null, getStatus(parseInt(message.change.new, 10))), " "), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver = message.driver) === null || _message$driver === void 0 ? void 0 : _message$driver.name, " ", ' ', " ", ((_message$driver2 = message.driver) === null || _message$driver2 === void 0 ? void 0 : _message$driver2.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), !history && ((message === null || message === void 0 ? void 0 : (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.level) === 0 || (message === null || message === void 0 ? void 0 : (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.level) === 2 || (message === null || message === void 0 ? void 0 : (_message$author4 = message.author) === null || _message$author4 === void 0 ? void 0 : _message$author4.level) === messageLevel) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+    }, ((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, getStatus(parseInt(message.change.old, 10))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))), (message === null || message === void 0 ? void 0 : (_message$change2 = message.change) === null || _message$change2 === void 0 ? void 0 : _message$change2.comment) ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change3 = message.change) === null || _message$change3 === void 0 ? void 0 : _message$change3.comment, "'") : ''), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver = message.driver) === null || _message$driver === void 0 ? void 0 : _message$driver.name, " ", ' ', " ", ((_message$driver2 = message.driver) === null || _message$driver2 === void 0 ? void 0 : _message$driver2.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), !history && ((message === null || message === void 0 ? void 0 : (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.level) === 0 || (message === null || message === void 0 ? void 0 : (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.level) === 2 || (message === null || message === void 0 ? void 0 : (_message$author4 = message.author) === null || _message$author4 === void 0 ? void 0 : _message$author4.level) === messageLevel) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && ((_message$change4 = message.change) === null || _message$change4 === void 0 ? void 0 : _message$change4.attribute) !== 'comment' && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id
-    }, ((_message$change2 = message.change) === null || _message$change2 === void 0 ? void 0 : _message$change2.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.attribute), " ", t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, t(getStatus(parseInt(message.change.old, 10)))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, " ", t('TO', 'to'), " ", ' ', " ", /*#__PURE__*/_react.default.createElement("strong", null, t(getStatus(parseInt(message.change.new, 10)))), " "), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver3 = message.driver) === null || _message$driver3 === void 0 ? void 0 : _message$driver3.name, " ", ' ', " ", ((_message$driver4 = message.driver) === null || _message$driver4 === void 0 ? void 0 : _message$driver4.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), message.type === 2 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author5 = message.author) === null || _message$author5 === void 0 ? void 0 : _message$author5.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author6 = message.author) === null || _message$author6 === void 0 ? void 0 : _message$author6.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), (business || driverNoneCase) && message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author7 = message.author) === null || _message$author7 === void 0 ? void 0 : _message$author7.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author8 = message.author) === null || _message$author8 === void 0 ? void 0 : _message$author8.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), driver && !driverNoneCase && message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author9 = message.author) === null || _message$author9 === void 0 ? void 0 : _message$author9.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author10 = message.author) === null || _message$author10 === void 0 ? void 0 : _message$author10.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), message.type === 3 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
+    }, ((_message$change5 = message.change) === null || _message$change5 === void 0 ? void 0 : _message$change5.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, t(getStatus(parseInt(message.change.old, 10)))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))), (message === null || message === void 0 ? void 0 : (_message$change6 = message.change) === null || _message$change6 === void 0 ? void 0 : _message$change6.comment) ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change7 = message.change) === null || _message$change7 === void 0 ? void 0 : _message$change7.comment, "'") : ''), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver3 = message.driver) === null || _message$driver3 === void 0 ? void 0 : _message$driver3.name, " ", ' ', " ", ((_message$driver4 = message.driver) === null || _message$driver4 === void 0 ? void 0 : _message$driver4.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), message.type === 2 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author5 = message.author) === null || _message$author5 === void 0 ? void 0 : _message$author5.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author6 = message.author) === null || _message$author6 === void 0 ? void 0 : _message$author6.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), (business || driverNoneCase) && message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author7 = message.author) === null || _message$author7 === void 0 ? void 0 : _message$author7.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author8 = message.author) === null || _message$author8 === void 0 ? void 0 : _message$author8.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), driver && !driverNoneCase && message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author9 = message.author) === null || _message$author9 === void 0 ? void 0 : _message$author9.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author10 = message.author) === null || _message$author10 === void 0 ? void 0 : _message$author10.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), message.type === 3 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
       name: "image"
     }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author11 = message.author) === null || _message$author11 === void 0 ? void 0 : _message$author11.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author12 = message.author) === null || _message$author12 === void 0 ? void 0 : _message$author12.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
       src: message.source,

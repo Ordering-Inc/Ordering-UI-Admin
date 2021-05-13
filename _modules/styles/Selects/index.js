@@ -106,7 +106,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin: ", ";\n  max-height: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin: ", ";\n  max-height: ", ";\n  overscroll-behavior: contain;\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;

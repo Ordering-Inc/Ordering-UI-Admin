@@ -84,7 +84,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: calc(100% - 140px);\n  padding: 30px 20px;\n  box-sizing: border-box;\n\n  ", "\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding-right: 0px;\n  }\n\n  @media (max-width: 600px) {\n    padding: 10px 0;\n  }\n\n  transition: all 0.5s;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  padding: 30px 20px;\n  box-sizing: border-box;\n\n  ", "\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding-right: 0px;\n  }\n\n  @media (max-width: 600px) {\n    padding: 10px 0;\n  }\n\n  transition: all 0.5s;\n"]);
 
   _templateObject = function _templateObject() {
     return data;

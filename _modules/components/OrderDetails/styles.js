@@ -100,7 +100,7 @@ function _templateObject43() {
 }
 
 function _templateObject42() {
-  var data = _taggedTemplateLiteral(["\n  margin-top: 100px;\n  button {\n    width: 100%;\n    padding: 10px 15px;\n    font-size: 20px;\n  }\n  @media print {\n    display: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-top: 3em;\n  padding: 10px 0;\n  button {\n    width: 100%;\n    padding: 10px 15px;\n    font-size: 20px;\n  }\n  @media print {\n    display: none;\n  }\n"]);
 
   _templateObject42 = function _templateObject42() {
     return data;

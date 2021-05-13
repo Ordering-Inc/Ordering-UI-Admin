@@ -9,8 +9,6 @@ exports.OrderItemAccordion = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _utils = require("../../utils");
-
 var _reactRouterDom = require("react-router-dom");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -79,7 +77,8 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate,
-      optimizeImage = _useUtils2$.optimizeImage;
+      optimizeImage = _useUtils2$.optimizeImage,
+      getTimeAgo = _useUtils2$.getTimeAgo;
 
   var history = (0, _reactRouterDom.useHistory)();
 
@@ -114,7 +113,7 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
   var toggleBtn = (0, _react.useRef)(null);
   var driverSelectorRef = (0, _react.useRef)(null);
 
-  var _useState11 = (0, _react.useState)((0, _utils.getAgoMinutes)(order === null || order === void 0 ? void 0 : order.delivery_datetime)),
+  var _useState11 = (0, _react.useState)(getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime)),
       _useState12 = _slicedToArray(_useState11, 2),
       diffTime = _useState12[0],
       setDiffTime = _useState12[1];
@@ -198,7 +197,7 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
     var deActive = (order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12;
     if (deActive) return;
     var timer = setInterval(function () {
-      setDiffTime((0, _utils.getAgoMinutes)(order === null || order === void 0 ? void 0 : order.delivery_datetime));
+      setDiffTime(getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime));
     }, 60 * 1000);
     return function () {
       clearInterval(timer);

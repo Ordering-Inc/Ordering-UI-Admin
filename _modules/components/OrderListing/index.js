@@ -189,7 +189,7 @@ var OrderListing = function OrderListing(props) {
   }, orderListView === 'big' && !(orderList.loading || driversList.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentOrders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: order.id
-    }, orderListView === 'big' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 992 ? /*#__PURE__*/_react.default.createElement(_OrderItemAccordion.OrderItemAccordion, {
+    }, orderListView === 'big' && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_OrderItemAccordion.OrderItemAccordion, {
       order: order,
       size: size,
       drivers: driversList.drivers,
@@ -199,17 +199,7 @@ var OrderListing = function OrderListing(props) {
       handleUpdateOrderStatus: handleUpdateOrderStatus,
       handleSelectedOrderIds: handleSelectedOrderIds,
       handleOpenOrderDetail: handleOpenOrderDetail
-    }) : /*#__PURE__*/_react.default.createElement(_SmallOrderItemAccordion.SmallOrderItemAccordion, {
-      isOrdersListView: true,
-      order: order,
-      drivers: driversList.drivers,
-      pendingOrder: pendingOrder,
-      preOrder: preOrder,
-      selectedOrderIds: selectedOrderIds,
-      handleUpdateOrderStatus: handleUpdateOrderStatus,
-      handleSelectedOrderIds: handleSelectedOrderIds,
-      handleOpenOrderDetail: handleOpenOrderDetail
-    })));
+    }));
   })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
     className: "skeleton-loading"
   }, orderListView === 'big' && windowSize.width > 992 && _toConsumableArray(Array(10)).map(function (item, i) {
@@ -265,7 +255,7 @@ var OrderListing = function OrderListing(props) {
       width: 60,
       height: 20
     })));
-  })), (orderListView === 'small' || windowSize.width <= 992) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
+  })), orderListView === 'small' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement(_SmallOrderItemAccordion.SmallOrderItemAccordion, {
