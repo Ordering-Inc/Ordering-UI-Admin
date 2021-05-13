@@ -95,7 +95,7 @@ var ActionsSection = function ActionsSection(props) {
         formOpen: true
       }));
     },
-    color: "primary"
+    color: "darkBlue"
   }, /*#__PURE__*/_react.default.createElement(_MdAddCircleOutline.default, null), t('ADD_USER', 'Add user')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modals.formOpen,
     width: "70%",

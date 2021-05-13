@@ -97,7 +97,15 @@ var Header = function Header(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_LateralMenu.LateralMenu, {
     isMobile: isMobile,
     setIsMobile: setIsMobile
-  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
+  }), isMobile && /*#__PURE__*/_react.default.createElement(_styles.Overlayer, {
+    onClick: function onClick() {
+      return setIsMobile(false);
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.MobileMenu, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, {
+    onClick: function onClick() {
+      return setIsMobile(true);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'orders-deliveries'
@@ -109,11 +117,7 @@ var Header = function Header(props) {
   }), /*#__PURE__*/_react.default.createElement("img", {
     alt: "Isotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.isotype
-  }))), /*#__PURE__*/_react.default.createElement(_styles.MobileMenu, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, {
-    onClick: function onClick() {
-      return setIsMobile(true);
-    }
-  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     open: openPopover.user,
     onClick: function onClick() {
       return handleTogglePopover('user');

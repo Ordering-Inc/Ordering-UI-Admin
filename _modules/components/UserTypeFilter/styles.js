@@ -52,7 +52,7 @@ exports.UserTypeFilterContainer = UserTypeFilterContainer;
 var FilterItemText = _styledComponents.default.div(_templateObject2(), function (_ref) {
   var active = _ref.active;
   return active && (0, _styledComponents.css)(_templateObject3(), function (props) {
-    return props.theme.colors.primary;
+    return props.theme.colors.btnDarkBlue;
   });
 });
 

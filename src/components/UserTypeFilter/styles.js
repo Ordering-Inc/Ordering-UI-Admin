@@ -24,7 +24,7 @@ export const FilterItemText = styled.div`
   border-radius: 5px;
   transition: all 0.3s;
   ${({ active }) => active && css`
-    background-color: ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.btnDarkBlue};
     color: white;
   `};
 `

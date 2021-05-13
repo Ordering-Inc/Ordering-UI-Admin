@@ -445,7 +445,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     type: "submit",
-    color: "primary",
+    color: "darkBlue",
     disabled: formState.loading
   }, formState.loading ? t('UPDATING', 'Updating...') : t('SAVE', 'Save')))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

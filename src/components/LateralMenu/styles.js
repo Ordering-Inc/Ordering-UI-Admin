@@ -17,6 +17,10 @@ export const LateralMenuContainer = styled.div`
     top: auto;
     width: ${({ colapse }) => colapse ? '200px' : '65px'};
   }
+
+  @media (min-width: 576px){
+    width: 60vw;
+  }
 `
 
 export const MenuContent = styled.div`
@@ -83,7 +87,7 @@ export const MenuItem = styled.div`
     font-size: 24px;
   }
   ${({ active }) => active && css`
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.btnDarkBlue};
   color: white;
 `};
 `

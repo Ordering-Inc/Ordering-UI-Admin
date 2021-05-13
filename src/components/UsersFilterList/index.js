@@ -89,7 +89,7 @@ const UsersFilterListUI = (props) => {
           </RectButton>
           <RectButton
             type='submit'
-            color='primary'
+            color='darkBlue'
           >
             {t('FILTER', 'Filter')}
           </RectButton>

@@ -3,14 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MobileMenu = exports.OverViewControlButton = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.HeaderContainer = void 0;
+exports.Overlayer = exports.MobileMenu = exports.OverViewControlButton = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.HeaderContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n  background: rgba(0, 0, 0, 0.3);\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%\n  z-index: 9900;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  display: block;\n\n  @media (min-width: 769px){\n    display: none;\n  }\n\n  svg {\n    font-size: 40px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: block;\n  margin: auto 10px;\n  @media (min-width: 769px){\n    display: none;\n  }\n\n  svg {\n    font-size: 38px;\n  }\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -110,3 +120,7 @@ exports.OverViewControlButton = OverViewControlButton;
 var MobileMenu = _styledComponents.default.div(_templateObject7());
 
 exports.MobileMenu = MobileMenu;
+
+var Overlayer = _styledComponents.default.div(_templateObject8());
+
+exports.Overlayer = Overlayer;

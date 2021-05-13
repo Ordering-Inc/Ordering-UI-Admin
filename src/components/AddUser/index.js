@@ -336,7 +336,7 @@ const AddUserUI = (props) => {
                 </RectButton>
                 <RectButton
                   type='submit'
-                  color='primary'
+                  color='darkBlue'
                   disabled={formState.loading}
                 >
                   {formState.loading ? t('UPDATING', 'Updating...') : t('SAVE', 'Save')}

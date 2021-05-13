@@ -382,7 +382,7 @@ var AddUserUI = function AddUserUI(props) {
     disabled: formState.loading
   }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     type: "submit",
-    color: "primary",
+    color: "darkBlue",
     disabled: formState.loading
   }, formState.loading ? t('UPDATING', 'Updating...') : t('SAVE', 'Save'))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADD_USER', 'Add a User'),

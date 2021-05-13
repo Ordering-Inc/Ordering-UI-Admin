@@ -144,7 +144,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  position: fixed;\n  z-index: 9999;\n  background-color: #ffffff;\n  height: 100vh;\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n  top: 0px;\n\n  @media (min-width: 769px){\n    height: calc(100vh - 65px);\n    top: auto;\n    width: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  position: fixed;\n  z-index: 9999;\n  background-color: #ffffff;\n  height: 100vh;\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n  top: 0px;\n\n  @media (min-width: 769px){\n    height: calc(100vh - 65px);\n    top: auto;\n    width: ", ";\n  }\n\n  @media (min-width: 576px){\n    width: 60vw;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -192,7 +192,7 @@ exports.UserName = UserName;
 var MenuItem = _styledComponents.default.div(_templateObject8(), function (_ref3) {
   var active = _ref3.active;
   return active && (0, _styledComponents.css)(_templateObject9(), function (props) {
-    return props.theme.colors.primary;
+    return props.theme.colors.btnDarkBlue;
   });
 });
 

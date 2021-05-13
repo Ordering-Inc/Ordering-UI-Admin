@@ -11,7 +11,8 @@ import {
   LogoHeader,
   LeftHeader,
   RightHeader,
-  MobileMenu
+  MobileMenu,
+  Overlayer
   // OverViewControlButton
 } from './styles'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
@@ -67,18 +68,20 @@ export const Header = (props) => {
         isMobile={isMobile}
         setIsMobile={setIsMobile}
       />
+      { isMobile && <Overlayer onClick={() => setIsMobile(false)} />}
       <HeaderContainer>
         <InnerHeader>
           <LeftHeader>
             {/* <MobileSidebarMenu /> */}
+            <MobileMenu>
+              <HiMenu onClick={() => setIsMobile(true)} />
+            </MobileMenu>
             <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
               <img alt='Logotype' src={theme?.images?.logos?.logotype} />
               <img alt='Isotype' src={theme?.images?.logos?.isotype} />
             </LogoHeader>
           </LeftHeader>
-          <MobileMenu>
-            <HiMenu onClick={() => setIsMobile(true)} />
-          </MobileMenu>
+
           {onlineStatus && (
             <RightHeader>
               <UserPopover
