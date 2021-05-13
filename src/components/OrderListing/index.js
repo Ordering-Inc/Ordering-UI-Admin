@@ -42,7 +42,6 @@ export const OrderListing = (props) => {
     interActionMapOrder,
     messageListView,
     messageType,
-    size,
     loadMoreOrders
   } = props
 
@@ -148,7 +147,6 @@ export const OrderListing = (props) => {
                         {orderListView === 'big' && windowSize.width > 992 && (
                           <OrderItemAccordion
                             order={order}
-                            size={size}
                             drivers={driversList.drivers}
                             pendingOrder={pendingOrder}
                             preOrder={preOrder}
@@ -219,7 +217,7 @@ export const OrderListing = (props) => {
                   </SkeletonOrder>
                 )}
 
-              {orderListView === 'small' && (
+              {(orderListView === 'small' || windowSize.width <= 992) && (
                 <>
                   {!(orderList.loading || driversList.loading) ? currentOrders.map(order => (
                     <React.Fragment key={order.id}>
