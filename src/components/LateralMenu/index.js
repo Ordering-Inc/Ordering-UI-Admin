@@ -6,9 +6,10 @@ import { DropDownCircleImage } from '../Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsListTask from '@meronex/icons/bs/BsListTask'
 import EnUsers from '@meronex/icons/en/EnUsers'
-import EnLogOut from '@meronex/icons/en/EnLogOut'
+import RiLogoutCircleRLine from '@meronex/icons/ri/RiLogoutCircleRLine'
 import HiMenu from '@meronex/icons/hi/HiMenu'
 import GrClose from '@meronex/icons/gr/GrClose'
+import EnLogin from '@meronex/icons/en/EnLogin'
 
 import {
   LateralMenuContainer,
@@ -22,7 +23,8 @@ import {
   LogOutItem,
   MobileHeader,
   MenuContent,
-  CloseMenu
+  CloseMenu,
+  SidbeBarControl
 } from './styles'
 
 export const LateralMenu = () => {
@@ -30,6 +32,7 @@ export const LateralMenu = () => {
   const [, t] = useLanguage()
   const [sessionState] = useSession()
   const [isMobile, setIsMobile] = useState(false)
+  const [isText, setIsText] = useState(true)
 
   return (
     <>
@@ -37,11 +40,18 @@ export const LateralMenu = () => {
         <HiMenu onClick={() => setIsMobile(true)} />
         <img alt='Logotype' src={theme?.images?.logos?.logotype} />
       </MobileHeader>
-      <LateralMenuContainer isShowMenu={isMobile}>
+      <LateralMenuContainer
+        isShowMenu={isMobile}
+        colapse={isText}
+      >
         <MenuContent>
           <MainMenuList>
             <LogoHeader>
-              <img alt='Logotype' src={theme?.images?.logos?.logotype} />
+              {
+                isText
+                  ? <img alt='Logotype' src={theme?.images?.logos?.logotype} />
+                  : <img alt='Logotype' className='isotype' src={theme?.images?.logos?.isotype} />
+              }
             </LogoHeader>
             <CloseMenu>
               <GrClose onClick={() => setIsMobile(false)} />
@@ -51,14 +61,20 @@ export const LateralMenu = () => {
                 src={sessionState?.user?.photo}
                 fallback={<FaUserAlt />}
               />
-              <UserName>
-                {sessionState?.user?.name} {sessionState?.user?.lastname}
-                <BiChevronDown />
-              </UserName>
+              {
+                (isText || isMobile) && (
+                  <UserName>
+                    {sessionState?.user?.name} {sessionState?.user?.lastname}
+                    <BiChevronDown />
+                  </UserName>
+                )
+              }
             </UserAvatar>
             <MenuItem>
               <BsListTask />
-              <ItemText>{t('ORDERS_MANAGER', 'Orders Manager')}</ItemText>
+              {
+                (isText || isMobile) && <ItemText>{t('ORDERS_MANAGER', 'Orders Manager')}</ItemText>
+              }
             </MenuItem>
             <MenuItem
               active={
@@ -66,14 +82,27 @@ export const LateralMenu = () => {
               }
             >
               <EnUsers />
-              <ItemText>{t('USERS', 'Users')}</ItemText>
+              {
+                (isText || isMobile) && <ItemText>{t('USERS', 'Users')}</ItemText>
+              }
             </MenuItem>
           </MainMenuList>
           <MenuBottom>
             <LogOutItem>
-              <EnLogOut />
-              <ItemText>{t('LOG_OUT', 'Log out')}</ItemText>
+              <RiLogoutCircleRLine />
+              {
+                (isText || isMobile) && <ItemText>{t('LOG_OUT', 'Log out')}</ItemText>
+              }
             </LogOutItem>
+            {
+              !isMobile && (
+                <SidbeBarControl colapse={isText}>
+                  <EnLogin
+                    onClick={() => setIsText(!isText)}
+                  />
+                </SidbeBarControl>
+              )
+            }
           </MenuBottom>
         </MenuContent>
       </LateralMenuContainer>

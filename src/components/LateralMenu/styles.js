@@ -5,14 +5,14 @@ export const LateralMenuContainer = styled.div`
   top: 0px;
   z-index: 1000;
   background-color: #ffffff;
-  height: 100vh;
+  height: calc(100vh - 65px);
   box-shadow: 0px 2px 2px #00000029;
   width: ${({ isShowMenu }) => isShowMenu ? '100vw' : '0px'};
   overflow: auto;
   transition: all 0.3s;
 
   @media (min-width: 769px){
-    width: 200px;
+    width: ${({ colapse }) => colapse ? '200px' : '65px'};
   }
 `
 
@@ -25,7 +25,6 @@ export const MenuContent = styled.div`
   height: 100%;
 
   @media (min-width: 769px){
-    width: 200px;
     padding: 10px 5px;
   }
 `
@@ -38,10 +37,13 @@ export const LogoHeader = styled.div`
   cursor: pointer;
   margin-bottom: 25px;
   img {
-    width: 190px;
-    height: 55px;
-    margin: 0;
+    width: 130px;
+    margin: 0 15px;
     vertical-align: middle;
+    &.isotype {
+      width: 43px;
+      margin: 15px auto;
+    }
   }
   display: none;
   @media (min-width: 769px){
@@ -55,6 +57,7 @@ export const UserAvatar = styled.div`
   margin-bottom: 25px;
   img,
   svg {
+    font-size: 24px;
     margin: 0px 15px;
   }
   > div {
@@ -77,6 +80,7 @@ export const MenuItem = styled.div`
   border-radius: 5px;
   svg {
     margin: 0px 15px;
+    font-size: 24px;
   }
   ${({ active }) => active && css`
   background-color: ${props => props.theme.colors.primary};
@@ -86,6 +90,7 @@ export const MenuItem = styled.div`
 
 export const ItemText = styled.span`
   font-size: 12px;
+
 `
 
 export const LogOutItem = styled.div`
@@ -100,6 +105,7 @@ export const LogOutItem = styled.div`
   svg {
     margin: 0px 15px;
     color: red;
+    font-size: 24px;
   }
 `
 
@@ -140,4 +146,24 @@ export const CloseMenu = styled.div`
   @media (min-width: 769px){
     display: none;
   }
+`
+
+export const SidbeBarControl = styled.div`
+  display: flex;
+  aligin-items: center;
+  justify-content: ${({ colapse }) => colapse ? 'flex-end' : 'center'};
+  padding: 15px 0px;
+
+  svg {
+    transform: rotate(0deg);
+    cursor: pointer;
+    font-size: 22px;
+    margin: 0px 15px;
+  }
+
+  ${({ colapse }) => colapse && css`
+    svg {
+      transform: rotate(180deg);
+    }
+  `};
 `
