@@ -305,7 +305,7 @@ const AddUserUI = (props) => {
                   className='rectangle-select'
                   onChange={(typeValue) => setFormState({
                     ...formState,
-                    changes: { ...formState?.changes, 'level': typeValue }
+                    changes: { ...formState?.changes, level: typeValue }
                   })}
                 />
               </InputWrapper>
@@ -322,7 +322,7 @@ const AddUserUI = (props) => {
                   defaultChecked={formState?.changes?.enabled || false}
                   onChange={(enabled) => setFormState({
                     ...formState,
-                    changes: { ...formState?.changes, 'enabled': enabled }
+                    changes: { ...formState?.changes, level: enabled }
                   })}
                 />
                 <RectButton

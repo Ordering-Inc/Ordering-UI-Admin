@@ -329,7 +329,7 @@ export const UserFormDetailsUI = (props) => {
                 className='rectangle-select'
                 onChange={(typeValue) => setFormState({
                   ...formState,
-                  changes: { ...formState?.changes, 'level': typeValue }
+                  changes: { ...formState?.changes, level: typeValue }
                 })}
               />
             </InputWrapper>
@@ -367,7 +367,7 @@ export const UserFormDetailsUI = (props) => {
                 }
                 onChange={(val) => setFormState({
                   ...formState,
-                  changes: { ...formState?.changes, 'enabled': val }
+                  changes: { ...formState?.changes, enabled: val }
                 })}
               />
               <RectButton
