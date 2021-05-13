@@ -74,7 +74,6 @@ var OrderListing = function OrderListing(props) {
       interActionMapOrder = props.interActionMapOrder,
       messageListView = props.messageListView,
       messageType = props.messageType,
-      size = props.size,
       loadMoreOrders = props.loadMoreOrders;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -191,7 +190,6 @@ var OrderListing = function OrderListing(props) {
       key: order.id
     }, orderListView === 'big' && windowSize.width > 992 && /*#__PURE__*/_react.default.createElement(_OrderItemAccordion.OrderItemAccordion, {
       order: order,
-      size: size,
       drivers: driversList.drivers,
       pendingOrder: pendingOrder,
       preOrder: preOrder,
@@ -255,7 +253,7 @@ var OrderListing = function OrderListing(props) {
       width: 60,
       height: 20
     })));
-  })), orderListView === 'small' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
+  })), (orderListView === 'small' || windowSize.width <= 992) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(orderList.loading || driversList.loading) ? currentOrders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement(_SmallOrderItemAccordion.SmallOrderItemAccordion, {

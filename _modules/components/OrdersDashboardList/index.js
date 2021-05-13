@@ -195,11 +195,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     style: {
       display: "".concat(ordersStatusGroup === 'pending' || searchValue !== '' && searchValue !== null ? 'block' : 'none')
     }
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
-    size: "small"
-  }, OrdersCommonControlProps, PendingOrdersControlProps)), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
-    size: "small"
-  }, OrdersCommonControlProps, PreOrdersControlProps))), (inProgressOrdersLoaded || searchValue !== '' && searchValue !== null) && /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderlist, {
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({}, OrdersCommonControlProps, PendingOrdersControlProps)), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({}, OrdersCommonControlProps, PreOrdersControlProps))), (inProgressOrdersLoaded || searchValue !== '' && searchValue !== null) && /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderlist, {
     style: {
       display: "".concat(ordersStatusGroup === 'inProgress' || searchValue !== '' && searchValue !== null ? 'block' : 'none')
     }

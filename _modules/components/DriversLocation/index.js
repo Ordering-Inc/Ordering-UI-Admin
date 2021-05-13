@@ -244,8 +244,8 @@ var DriversLocation = function DriversLocation(props) {
         center = _fitBounds.center,
         zoom = _fitBounds.zoom;
 
-    setMapCenter(center);
     setMapZoom(zoom);
+    setMapCenter(center);
   }; // Fit bounds on mount, and when the markers change
 
 
@@ -287,6 +287,11 @@ var DriversLocation = function DriversLocation(props) {
     if (mapLoaded) return;
     mapFit();
   }, [interActionOrderDriverLocation, mapLoaded]);
+
+  var handleMapChange = function handleMapChange(data) {
+    setMapZoom(data === null || data === void 0 ? void 0 : data.zoom);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     ref: mapRef,
     className: "drivers-location"
@@ -305,6 +310,9 @@ var DriversLocation = function DriversLocation(props) {
       fullscreenControl: false
     },
     className: "map",
+    onChange: function onChange(data) {
+      return handleMapChange(data);
+    },
     yesIWantToUseGoogleMapApiInternals: true
   }, interActionMapOrder === null && driverAvailable === 'all' && driversList.drivers.length !== 0 && driversList.drivers.map(function (driver) {
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {

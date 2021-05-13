@@ -60,7 +60,6 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
 
   var order = props.order,
       drivers = props.drivers,
-      size = props.size,
       selectedOrderIds = props.selectedOrderIds,
       handleUpdateOrderStatus = props.handleUpdateOrderStatus,
       handleSelectedOrderIds = props.handleSelectedOrderIds,
@@ -113,7 +112,9 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
   var toggleBtn = (0, _react.useRef)(null);
   var driverSelectorRef = (0, _react.useRef)(null);
 
-  var _useState11 = (0, _react.useState)(getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime)),
+  var _useState11 = (0, _react.useState)((order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    utc: false
+  })),
       _useState12 = _slicedToArray(_useState11, 2),
       diffTime = _useState12[0],
       setDiffTime = _useState12[1];
@@ -197,22 +198,15 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
     var deActive = (order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12;
     if (deActive) return;
     var timer = setInterval(function () {
-      setDiffTime(getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime));
+      var diff = (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+        utc: false
+      });
+      setDiffTime(diff);
     }, 60 * 1000);
     return function () {
       clearInterval(timer);
     };
-  }, []); // const getImage = () => {
-  //   const http = new XMLHttpRequest()
-  //   http.open('HEAD', order.business?.logo, false)
-  //   http.send()
-  //   if (http.status !== 404) {
-  //     return optimizeImage(order.business?.logo, 'h_200,c_limit')
-  //   } else {
-  //     return theme.images?.dummies?.businessLogo
-  //   }
-  // }
-
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionContainer, {
     className: setActive,
     filterColor: (order === null || order === void 0 ? void 0 : order.logistic_status) === -1 || (order === null || order === void 0 ? void 0 : order.logistic_status) === 0 ? theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.deadlineOk : order.logistic_status === 1 ? theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.deadlineDelayed : theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.deadlineRisk,
@@ -226,9 +220,7 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
     }
   }, isChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxCircleFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankCircleFill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.TextBlockContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BigText, null, t('ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement(_styles.SmallText, null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperGeneralInfo, {
-    size: size
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, {
     className: "order-item-business"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperAccordionImage, null, /*#__PURE__*/_react.default.createElement(_styles.AccordionImage, {
     bgimage: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')

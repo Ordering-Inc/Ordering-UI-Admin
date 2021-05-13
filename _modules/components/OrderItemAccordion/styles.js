@@ -38,7 +38,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid #e8e8e8;\n\n  & > div {\n    \n    &:nth-child(1) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(2) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(3) {\n      width: 23%;\n      min-width: 150px;\n      padding: 0px;\n      p {\n        font-size: 14px;\n        font-weight: 600;\n      }\n    }\n\n    &:nth-child(4) {\n      min-width: 40px;\n      width: 6%;\n      font-size: 14px;\n    }\n\n    \n    &:nth-child(5) {\n      width: ", ";\n      min-width: ", ";\n      display: ", ";\n      justify-content: ", ";\n\n      p {\n        font-size: 12px;\n      }\n    }\n\n    &:nth-child(6) {\n      width: 9%;\n      width: ", ";\n      min-width: 120px;\n      display: flex;\n      justify-content: flex-end;\n    }\n  }\n\n  @media (max-width: 1200px) {\n    & > div {\n      &:nth-child(3),\n      &:nth-child(4) {\n        display: none;\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid #e8e8e8;\n\n  & > div {\n    \n    &:nth-child(1) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(2) {\n      width: 20%;\n      min-width: 150px;\n    }\n\n    &:nth-child(3) {\n      width: 23%;\n      min-width: 150px;\n      padding: 0px;\n      p {\n        font-size: 14px;\n        font-weight: 600;\n      }\n    }\n\n    &:nth-child(4) {\n      min-width: 40px;\n      width: 6%;\n      font-size: 14px;\n    }\n\n    \n    &:nth-child(5) {\n      width: 22%;\n      min-width: 170px;\n      display: block;\n      justify-content: initial;\n      text-align: center;\n\n      p {\n        font-size: 12px;\n      }\n    }\n\n    &:nth-child(6) {\n      width: 9%;\n      width: 9%;\n      min-width: 120px;\n      display: flex;\n      justify-content: flex-end;\n    }\n  }\n\n  @media (max-width: 1200px) {\n    & > div {\n      &:nth-child(3),\n      &:nth-child(4) {\n        display: none;\n      }\n    }\n  }\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -286,22 +286,7 @@ var OrderInfoContainer = _styledComponents.default.div(_templateObject16());
 
 exports.OrderInfoContainer = OrderInfoContainer;
 
-var WrapperGeneralInfo = _styledComponents.default.div(_templateObject17(), function (_ref2) {
-  var size = _ref2.size;
-  return size === 'small' ? '15%' : '22%';
-}, function (_ref3) {
-  var size = _ref3.size;
-  return size === 'small' ? '130px' : '170px';
-}, function (_ref4) {
-  var size = _ref4.size;
-  return size === 'small' ? 'flex' : 'block';
-}, function (_ref5) {
-  var size = _ref5.size;
-  return size === 'small' ? 'center' : 'initial';
-}, function (_ref6) {
-  var size = _ref6.size;
-  return size === 'small' ? '16%' : '9%';
-});
+var WrapperGeneralInfo = _styledComponents.default.div(_templateObject17());
 
 exports.WrapperGeneralInfo = WrapperGeneralInfo;
 
