@@ -94,7 +94,7 @@ var LateralMenu = function LateralMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       return handleGoToPage({
-        page: 'orders-deliveries'
+        page: 'orders_deliveries'
       });
     }
   }, isCollapse ? /*#__PURE__*/_react.default.createElement("img", {
@@ -114,7 +114,7 @@ var LateralMenu = function LateralMenu(props) {
   }), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.lastname, /*#__PURE__*/_react.default.createElement(_BiChevronDown.default, null))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, {
     onClick: function onClick() {
       return handleGoToPage({
-        page: 'orders-deliveries'
+        page: 'orders_deliveries'
       });
     },
     active: window.location.pathname === '/orders-deliveries'

@@ -55,7 +55,7 @@ export const LateralMenu = (props) => {
       >
         <MenuContent>
           <MainMenuList>
-            <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
+            <LogoHeader onClick={() => handleGoToPage({ page: 'orders_deliveries' })}>
               {
                 isCollapse
                   ? <img alt='Logotype' src={theme?.images?.logos?.logotype} />
@@ -80,7 +80,7 @@ export const LateralMenu = (props) => {
               }
             </UserAvatar>
             <MenuItem
-              onClick={() => handleGoToPage({ page: 'orders-deliveries' })}
+              onClick={() => handleGoToPage({ page: 'orders_deliveries' })}
               active={
                 window.location.pathname === '/orders-deliveries'
               }
