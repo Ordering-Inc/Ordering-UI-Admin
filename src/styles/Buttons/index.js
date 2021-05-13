@@ -130,8 +130,8 @@ export const RectButton = styled(Button)`
 
   ${({ outline }) => outline && css`
   background: #FFF;
-  color: ${props => props.theme.colors.btnPrimary};
-  border-color: ${props => props.theme.colors.btnPrimary};
+  color: ${props => props.theme.colors.btnDarkBlue};
+  border-color: ${props => props.theme.colors.btnDarkBlue};
 
   &:active {
     background: ${darken(0.07, '#FFF')};

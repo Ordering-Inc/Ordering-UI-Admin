@@ -20,7 +20,7 @@ export const InfoItem = styled.span`
   cursor: pointer;
   margin-right: 5px;
   ${({ active }) => active && css`
-      background: #2a9af34d;
+      background: #182964c7;
       color: ${props => props.theme.colors.primary};
   `}
 

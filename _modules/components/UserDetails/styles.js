@@ -34,7 +34,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      background: #2a9af34d;\n      color: ", ";\n  "]);
+  var data = _taggedTemplateLiteral(["\n      background: #182964c7;\n      color: ", ";\n  "]);
 
   _templateObject5 = function _templateObject5() {
     return data;

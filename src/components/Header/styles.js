@@ -107,5 +107,5 @@ export const Overlayer = styled.div`
   left: 0px;
   width: 100%;
   height: 100%;
-  z-index: 9900;
+  z-index: 1150;
 `

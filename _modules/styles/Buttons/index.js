@@ -221,9 +221,9 @@ exports.Button = Button;
 var RectButton = (0, _styledComponents.default)(Button)(_templateObject12(), function (_ref12) {
   var outline = _ref12.outline;
   return outline && (0, _styledComponents.css)(_templateObject13(), function (props) {
-    return props.theme.colors.btnPrimary;
+    return props.theme.colors.btnDarkBlue;
   }, function (props) {
-    return props.theme.colors.btnPrimary;
+    return props.theme.colors.btnDarkBlue;
   }, (0, _polished.darken)(0.07, '#FFF'));
 });
 exports.RectButton = RectButton;
