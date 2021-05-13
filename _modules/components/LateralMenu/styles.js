@@ -154,7 +154,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0px;\n  z-index: 1000;\n  background-color: #ffffff;\n  height: calc(100vh - 65px);\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n\n  @media (min-width: 769px){\n    width: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  z-index: 1000;\n  background-color: #ffffff;\n  height: calc(100vh - 65px);\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n\n  @media (min-width: 769px){\n    width: ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

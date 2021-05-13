@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const LateralMenuContainer = styled.div`
   position: fixed;
-  top: 0px;
   z-index: 1000;
   background-color: #ffffff;
   height: calc(100vh - 65px);
