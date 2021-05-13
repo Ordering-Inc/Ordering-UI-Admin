@@ -144,7 +144,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  position: fixed;\n  z-index: 9999;\n  background-color: #ffffff;\n  height: 100vh;\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n  top: 0px;\n\n  @media (min-width: 769px){\n    height: calc(100vh - 65px);\n    top: auto;\n    width: ", ";\n  }\n\n  @media (min-width: 576px){\n    width: 60vw;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  position: fixed;\n  z-index: 9999;\n  background-color: #ffffff;\n  height: 100vh;\n  box-shadow: 0px 2px 2px #00000029;\n  width: ", ";\n  overflow: auto;\n  transition: all 0.3s;\n  top: 0px;\n\n  @media (min-width: 576px){\n    width: ", ";\n  }\n\n  @media (min-width: 769px){\n    height: calc(100vh - 65px);\n    top: auto;\n    width: ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -159,7 +159,10 @@ var LateralMenuContainer = _styledComponents.default.div(_templateObject(), func
   var isShowMenu = _ref.isShowMenu;
   return isShowMenu ? '100vw' : '0px';
 }, function (_ref2) {
-  var colapse = _ref2.colapse;
+  var isShowMenu = _ref2.isShowMenu;
+  return isShowMenu ? '60vw' : '0px';
+}, function (_ref3) {
+  var colapse = _ref3.colapse;
   return colapse ? '200px' : '65px';
 });
 
@@ -189,8 +192,8 @@ var UserName = _styledComponents.default.div(_templateObject7());
 
 exports.UserName = UserName;
 
-var MenuItem = _styledComponents.default.div(_templateObject8(), function (_ref3) {
-  var active = _ref3.active;
+var MenuItem = _styledComponents.default.div(_templateObject8(), function (_ref4) {
+  var active = _ref4.active;
   return active && (0, _styledComponents.css)(_templateObject9(), function (props) {
     return props.theme.colors.btnDarkBlue;
   });
@@ -210,11 +213,11 @@ var CloseMenu = _styledComponents.default.div(_templateObject12());
 
 exports.CloseMenu = CloseMenu;
 
-var SidbeBarControl = _styledComponents.default.div(_templateObject13(), function (_ref4) {
-  var colapse = _ref4.colapse;
-  return colapse ? 'flex-end' : 'center';
-}, function (_ref5) {
+var SidbeBarControl = _styledComponents.default.div(_templateObject13(), function (_ref5) {
   var colapse = _ref5.colapse;
+  return colapse ? 'flex-end' : 'center';
+}, function (_ref6) {
+  var colapse = _ref6.colapse;
   return colapse && (0, _styledComponents.css)(_templateObject14());
 });
 

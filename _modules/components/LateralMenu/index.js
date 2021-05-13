@@ -25,8 +25,6 @@ var _EnUsers = _interopRequireDefault(require("@meronex/icons/en/EnUsers"));
 
 var _RiLogoutCircleRLine = _interopRequireDefault(require("@meronex/icons/ri/RiLogoutCircleRLine"));
 
-var _HiMenu = _interopRequireDefault(require("@meronex/icons/hi/HiMenu"));
-
 var _GrClose = _interopRequireDefault(require("@meronex/icons/gr/GrClose"));
 
 var _EnLogin = _interopRequireDefault(require("@meronex/icons/en/EnLogin"));

@@ -12,14 +12,14 @@ export const LateralMenuContainer = styled.div`
   transition: all 0.3s;
   top: 0px;
 
+  @media (min-width: 576px){
+    width: ${({ isShowMenu }) => isShowMenu ? '60vw' : '0px'};
+  }
+
   @media (min-width: 769px){
     height: calc(100vh - 65px);
     top: auto;
     width: ${({ colapse }) => colapse ? '200px' : '65px'};
-  }
-
-  @media (min-width: 576px){
-    width: 60vw;
   }
 `
 

@@ -12,7 +12,6 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BsListTask from '@meronex/icons/bs/BsListTask'
 import EnUsers from '@meronex/icons/en/EnUsers'
 import RiLogoutCircleRLine from '@meronex/icons/ri/RiLogoutCircleRLine'
-import HiMenu from '@meronex/icons/hi/HiMenu'
 import GrClose from '@meronex/icons/gr/GrClose'
 import EnLogin from '@meronex/icons/en/EnLogin'
 
