@@ -22,17 +22,19 @@ export const AddressList = (props) => {
   return (
     <AddressListContainer>
       {
-        user?.address &&
-        <AddressItem>
-          <AddressText>{user?.address}</AddressText>
-          <BodyActionContainer>
-            <BodyActionContent>
-              <FiMoreVertical className='more-svg' />
-              <GrFormEdit className='edit-svg' />
-              <MdcDeleteOutline className='remove-svg' />
-            </BodyActionContent>
-          </BodyActionContainer>
-        </AddressItem>
+        user?.address && (
+          <AddressItem>
+            <AddressText>{user?.address}</AddressText>
+            <BodyActionContainer>
+              <BodyActionContent>
+                <FiMoreVertical className='more-svg' />
+                <GrFormEdit className='edit-svg' />
+                <MdcDeleteOutline className='remove-svg' />
+              </BodyActionContent>
+            </BodyActionContainer>
+          </AddressItem>
+        )
+
       }
     </AddressListContainer>
   )

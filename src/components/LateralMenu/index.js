@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTheme } from 'styled-components'
 import {
   useSession,
@@ -147,4 +147,3 @@ const PopoverListItemLogout = (props) => {
   }
   return <LogoutActionController {...logoutActionProps} />
 }
-

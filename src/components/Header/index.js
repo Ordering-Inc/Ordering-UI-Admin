@@ -68,7 +68,7 @@ export const Header = (props) => {
         isMobile={isMobile}
         setIsMobile={setIsMobile}
       />
-      { isMobile && <Overlayer onClick={() => setIsMobile(false)} />}
+      {isMobile && <Overlayer onClick={() => setIsMobile(false)} />}
       <HeaderContainer>
         <InnerHeader>
           <LeftHeader>

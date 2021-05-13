@@ -49,11 +49,12 @@ const UserExportUI = (props) => {
         <BsFillCaretDownFill />
       </ExportTitle>
       {
-        popoverOpen &&
-        <ExportDropMenu>
-          <MenuItem onClick={() => handleExportAll()}>{t('EXPORT_ALL', 'Export all')}</MenuItem>
-          <MenuItem onClick={() => handleExportFiltered()}>{t('EXPORT_FILTERED', 'Export filtered')}</MenuItem>
-        </ExportDropMenu>
+        popoverOpen && (
+          <ExportDropMenu>
+            <MenuItem onClick={() => handleExportAll()}>{t('EXPORT_ALL', 'Export all')}</MenuItem>
+            <MenuItem onClick={() => handleExportFiltered()}>{t('EXPORT_FILTERED', 'Export filtered')}</MenuItem>
+          </ExportDropMenu>
+        )
       }
       {actionStatus.loading && (
         <SpinnerLoader primary />

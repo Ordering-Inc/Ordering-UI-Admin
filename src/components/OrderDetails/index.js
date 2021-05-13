@@ -80,7 +80,7 @@ const OrderDetailsUI = (props) => {
     handleOpenMessage,
     handleUpdateOrderForUnreadCount,
     handleOpenOrderDetail,
-    actionStatus,
+    actionStatus
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -173,24 +173,25 @@ const OrderDetailsUI = (props) => {
                 </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
-              {actionStatus?.loading
-                ? <SpinnerLoader style={{ width: 170, height: 90, transform: 'scale(0.3)' }} />
-                : (
-                  <OrderStatus>
-                    {(!pendingOrder && !preOrder) && (
-                      <span>{getOrderStatus(parseInt(order?.status))?.value}</span>
-                    )}
-                    {pendingOrder && (
-                      <span>{t('PENDING', 'Pending')}</span>
-                    )}
-                    {preOrder && (
-                      <span>{t('PREORDER', 'Preorder')}</span>
-                    )}
-                    <StatusImage>
-                      <img src={getImage(order?.status || 0)} alt='status' />
-                    </StatusImage>
-                  </OrderStatus>
-                )
+              {
+                actionStatus?.loading
+                  ? <SpinnerLoader style={{ width: 170, height: 90, transform: 'scale(0.3)' }} />
+                  : (
+                    <OrderStatus>
+                      {(!pendingOrder && !preOrder) && (
+                        <span>{getOrderStatus(parseInt(order?.status))?.value}</span>
+                      )}
+                      {pendingOrder && (
+                        <span>{t('PENDING', 'Pending')}</span>
+                      )}
+                      {preOrder && (
+                        <span>{t('PREORDER', 'Preorder')}</span>
+                      )}
+                      <StatusImage>
+                        <img src={getImage(order?.status || 0)} alt='status' />
+                      </StatusImage>
+                    </OrderStatus>
+                  )
               }
               {messageDashboardView && (
                 <OrderDetailCloseButton>
