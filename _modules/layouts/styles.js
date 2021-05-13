@@ -35,8 +35,9 @@ var AdminMainContainer = _styledComponents.default.div(_templateObject());
 
 exports.AdminMainContainer = AdminMainContainer;
 
-var AdminContent = _styledComponents.default.div(_templateObject2(), function (collapse) {
-  return collapse ? "200px" : '65px';
+var AdminContent = _styledComponents.default.div(_templateObject2(), function (_ref) {
+  var collapse = _ref.collapse;
+  return collapse ? '200px' : '65px';
 });
 
 exports.AdminContent = AdminContent;
