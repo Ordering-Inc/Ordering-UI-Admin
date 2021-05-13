@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const LateralMenuContainer = styled.div`
+  padding-top: 15px;
   position: fixed;
   z-index: 1000;
   background-color: #ffffff;
@@ -17,7 +18,7 @@ export const LateralMenuContainer = styled.div`
 
 export const MenuContent = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: column;
   padding: 20px 10px;
   box-sizing: border-box;
@@ -25,6 +26,7 @@ export const MenuContent = styled.div`
 
   @media (min-width: 769px){
     padding: 10px 5px;
+    justify-content: space-between;
   }
 `
 
@@ -44,9 +46,9 @@ export const LogoHeader = styled.div`
       margin: 15px auto;
     }
   }
-  display: none;
+  display: flex;
   @media (min-width: 769px){
-    display: flex;
+    display: none;
   }
 `
 
@@ -120,10 +122,14 @@ export const CloseMenu = styled.div`
 `
 
 export const SidbeBarControl = styled.div`
-  display: flex;
+  display: none;
   aligin-items: center;
   justify-content: ${({ colapse }) => colapse ? 'flex-end' : 'center'};
   padding: 15px 0px;
+
+  @media (min-width: 769px){
+    display: flex;
+  }
 
   svg {
     transform: rotate(0deg);
