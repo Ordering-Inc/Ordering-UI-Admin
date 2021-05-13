@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LateralMenu = function LateralMenu(props) {
-  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _sessionState$user, _sessionState$user2, _sessionState$user3;
+  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _sessionState$user, _sessionState$user2, _sessionState$user3;
 
   var isCollapse = props.isCollapse,
       setIsCollapse = props.setIsCollapse;
@@ -87,14 +87,7 @@ var LateralMenu = function LateralMenu(props) {
     events.emit('go_to_page', data);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MobileHeader, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, {
-    onClick: function onClick() {
-      return setIsMobile(true);
-    }
-  }), /*#__PURE__*/_react.default.createElement("img", {
-    alt: "Logotype",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype
-  })), /*#__PURE__*/_react.default.createElement(_styles.LateralMenuContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LateralMenuContainer, {
     isShowMenu: isMobile,
     colapse: isCollapse
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
@@ -105,11 +98,11 @@ var LateralMenu = function LateralMenu(props) {
     }
   }, isCollapse ? /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype
   }) : /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     className: "isotype",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.isotype
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.isotype
   })), /*#__PURE__*/_react.default.createElement(_styles.CloseMenu, null, /*#__PURE__*/_react.default.createElement(_GrClose.default, {
     onClick: function onClick() {
       return setIsMobile(false);

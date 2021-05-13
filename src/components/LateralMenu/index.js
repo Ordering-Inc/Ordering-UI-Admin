@@ -26,7 +26,6 @@ import {
   MenuItem,
   ItemText,
   LogOutItem,
-  MobileHeader,
   MenuContent,
   CloseMenu,
   SidbeBarControl
@@ -50,10 +49,6 @@ export const LateralMenu = (props) => {
 
   return (
     <>
-      <MobileHeader>
-        <HiMenu onClick={() => setIsMobile(true)} />
-        <img alt='Logotype' src={theme?.images?.logos?.logotype} />
-      </MobileHeader>
       <LateralMenuContainer
         isShowMenu={isMobile}
         colapse={isCollapse}

@@ -13,11 +13,15 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styledComponents = require("styled-components");
 
+var _HiMenu = _interopRequireDefault(require("@meronex/icons/hi/HiMenu"));
+
 var _styles = require("./styles");
 
 var _useOnlineStatus = require("../../hooks/useOnlineStatus");
 
 var _UserPopover = require("../UserPopover");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -96,7 +100,7 @@ var Header = function Header(props) {
   }), /*#__PURE__*/_react.default.createElement("img", {
     alt: "Isotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.isotype
-  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MobileMenu, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, null)), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     open: openPopover.user,
     onClick: function onClick() {
       return handleTogglePopover('user');

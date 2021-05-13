@@ -108,34 +108,6 @@ export const LogOutItem = styled.div`
   }
 `
 
-export const MobileHeader = styled.div`
-  z-index: 999;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 50px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-  box-shadow: 0px 2px 2px #00000029;
-
-  svg {
-    font-size: 40px;
-  }
-
-  img {
-    height: 100%;
-    margin-top: 10px;
-  }
-
-  @media (min-width: 769px){
-    display: none;
-  }
-`
-
 export const CloseMenu = styled.div`
   margin-bottom: 20px;
   svg {

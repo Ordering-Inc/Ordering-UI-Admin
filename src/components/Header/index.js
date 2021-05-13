@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEvent } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
+import HiMenu from '@meronex/icons/hi/HiMenu'
 // import { useWindowSize } from '../../hooks/useWindowSize'
 // import IosMenu from '@meronex/icons/ios/IosMenu'
 
@@ -9,7 +10,8 @@ import {
   InnerHeader,
   LogoHeader,
   LeftHeader,
-  RightHeader
+  RightHeader,
+  MobileMenu
   // OverViewControlButton
 } from './styles'
 import { useOnlineStatus } from '../../hooks/useOnlineStatus'
@@ -67,6 +69,9 @@ export const Header = (props) => {
             <img alt='Isotype' src={theme?.images?.logos?.isotype} />
           </LogoHeader>
         </LeftHeader>
+        <MobileMenu>
+          <HiMenu />
+        </MobileMenu>
         {onlineStatus && (
           <RightHeader>
             <UserPopover

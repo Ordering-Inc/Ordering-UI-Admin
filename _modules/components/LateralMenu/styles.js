@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SidbeBarControl = exports.CloseMenu = exports.MobileHeader = exports.LogOutItem = exports.ItemText = exports.MenuItem = exports.UserName = exports.UserAvatar = exports.LogoHeader = exports.MenuBottom = exports.MainMenuList = exports.MenuContent = exports.LateralMenuContainer = void 0;
+exports.SidbeBarControl = exports.CloseMenu = exports.LogOutItem = exports.ItemText = exports.MenuItem = exports.UserName = exports.UserAvatar = exports.LogoHeader = exports.MenuBottom = exports.MainMenuList = exports.MenuContent = exports.LateralMenuContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -13,18 +13,8 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n    svg {\n      transform: rotate(180deg);\n    }\n  "]);
-
-  _templateObject15 = function _templateObject15() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  aligin-items: center;\n  justify-content: ", ";\n  padding: 15px 0px;\n\n  svg {\n    transform: rotate(0deg);\n    cursor: pointer;\n    font-size: 22px;\n    margin: 0px 15px;\n  }\n\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n    svg {\n      transform: rotate(180deg);\n    }\n  "]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -34,7 +24,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n  svg {\n    font-size: 22px;\n  }\n  display: flex;\n  @media (min-width: 769px){\n    display: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  aligin-items: center;\n  justify-content: ", ";\n  padding: 15px 0px;\n\n  svg {\n    transform: rotate(0deg);\n    cursor: pointer;\n    font-size: 22px;\n    margin: 0px 15px;\n  }\n\n  ", ";\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -44,7 +34,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  z-index: 999;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  padding: 10px;\n  box-shadow: 0px 2px 2px #00000029;\n\n  svg {\n    font-size: 40px;\n  }\n\n  img {\n    height: 100%;\n    margin-top: 10px;\n  }\n\n  @media (min-width: 769px){\n    display: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n  svg {\n    font-size: 22px;\n  }\n  display: flex;\n  @media (min-width: 769px){\n    display: none;\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -216,20 +206,16 @@ var LogOutItem = _styledComponents.default.div(_templateObject11());
 
 exports.LogOutItem = LogOutItem;
 
-var MobileHeader = _styledComponents.default.div(_templateObject12());
-
-exports.MobileHeader = MobileHeader;
-
-var CloseMenu = _styledComponents.default.div(_templateObject13());
+var CloseMenu = _styledComponents.default.div(_templateObject12());
 
 exports.CloseMenu = CloseMenu;
 
-var SidbeBarControl = _styledComponents.default.div(_templateObject14(), function (_ref4) {
+var SidbeBarControl = _styledComponents.default.div(_templateObject13(), function (_ref4) {
   var colapse = _ref4.colapse;
   return colapse ? 'flex-end' : 'center';
 }, function (_ref5) {
   var colapse = _ref5.colapse;
-  return colapse && (0, _styledComponents.css)(_templateObject15());
+  return colapse && (0, _styledComponents.css)(_templateObject14());
 });
 
 exports.SidbeBarControl = SidbeBarControl;

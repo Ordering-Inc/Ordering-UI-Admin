@@ -87,3 +87,15 @@ export const OverViewControlButton = styled.button`
     display: none;
   }
 `
+
+export const MobileMenu = styled.div`
+  display: block;
+
+  @media (min-width: 769px){
+    display: none;
+  }
+
+  svg {
+    font-size: 40px;
+  }
+`
