@@ -10,6 +10,7 @@ import RiLogoutCircleRLine from '@meronex/icons/ri/RiLogoutCircleRLine'
 import HiMenu from '@meronex/icons/hi/HiMenu'
 import GrClose from '@meronex/icons/gr/GrClose'
 import EnLogin from '@meronex/icons/en/EnLogin'
+import { useEvent } from 'ordering-components-admin'
 
 import {
   LateralMenuContainer,
@@ -32,10 +33,15 @@ export const LateralMenu = (props) => {
     isCollapse,
     setIsCollapse
   } = props
+  const [events] = useEvent()
   const theme = useTheme()
   const [, t] = useLanguage()
   const [sessionState] = useSession()
   const [isMobile, setIsMobile] = useState(false)
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+  }
 
   return (
     <>
@@ -49,7 +55,7 @@ export const LateralMenu = (props) => {
       >
         <MenuContent>
           <MainMenuList>
-            <LogoHeader>
+            <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
               {
                 isCollapse
                   ? <img alt='Logotype' src={theme?.images?.logos?.logotype} />
@@ -73,7 +79,12 @@ export const LateralMenu = (props) => {
                 )
               }
             </UserAvatar>
-            <MenuItem>
+            <MenuItem
+              onClick={() => handleGoToPage({ page: 'orders-deliveries' })}
+              active={
+                window.location.pathname === '/orders-deliveries'
+              }
+            >
               <BsListTask />
               {
                 (isCollapse || isMobile) && <ItemText>{t('ORDERS_MANAGER', 'Orders Manager')}</ItemText>
@@ -83,6 +94,7 @@ export const LateralMenu = (props) => {
               active={
                 window.location.pathname === '/users'
               }
+              onClick={() => handleGoToPage({ page: 'orders-deliveries' })}
             >
               <EnUsers />
               {
@@ -112,3 +124,26 @@ export const LateralMenu = (props) => {
     </>
   )
 }
+
+const LogoutActionUI = (props) => {
+  const [, t] = useLanguage()
+
+  const handleClick = () => {
+    props.handleLogoutClick()
+    props.onClose && props.onClose()
+  }
+  return (
+    <PopoverListItem onClick={handleClick}>
+      <FaSignOutAlt /> {t('LOGOUT', 'Logout')}
+    </PopoverListItem>
+  )
+}
+
+const PopoverListItemLogout = (props) => {
+  const logoutActionProps = {
+    UIComponent: LogoutActionUI,
+    onClose: props.onClose
+  }
+  return <LogoutActionController {...logoutActionProps} />
+}
+

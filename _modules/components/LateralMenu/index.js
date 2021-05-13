@@ -56,6 +56,11 @@ var LateralMenu = function LateralMenu(props) {
 
   var isCollapse = props.isCollapse,
       setIsCollapse = props.setIsCollapse;
+
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -71,6 +76,10 @@ var LateralMenu = function LateralMenu(props) {
       isMobile = _useState2[0],
       setIsMobile = _useState2[1];
 
+  var handleGoToPage = function handleGoToPage(data) {
+    events.emit('go_to_page', data);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MobileHeader, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, {
     onClick: function onClick() {
       return setIsMobile(true);
@@ -81,7 +90,13 @@ var LateralMenu = function LateralMenu(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.LateralMenuContainer, {
     isShowMenu: isMobile,
     colapse: isCollapse
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, null, isCollapse ? /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'orders-deliveries'
+      });
+    }
+  }, isCollapse ? /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype
   }) : /*#__PURE__*/_react.default.createElement("img", {
@@ -95,8 +110,20 @@ var LateralMenu = function LateralMenu(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.UserAvatar, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.lastname, /*#__PURE__*/_react.default.createElement(_BiChevronDown.default, null))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, null, /*#__PURE__*/_react.default.createElement(_BsListTask.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('ORDERS_MANAGER', 'Orders Manager'))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, {
-    active: window.location.pathname === '/users'
+  }), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.lastname, /*#__PURE__*/_react.default.createElement(_BiChevronDown.default, null))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, {
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'orders-deliveries'
+      });
+    },
+    active: window.location.pathname === '/orders-deliveries'
+  }, /*#__PURE__*/_react.default.createElement(_BsListTask.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('ORDERS_MANAGER', 'Orders Manager'))), /*#__PURE__*/_react.default.createElement(_styles.MenuItem, {
+    active: window.location.pathname === '/users',
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'orders-deliveries'
+      });
+    }
   }, /*#__PURE__*/_react.default.createElement(_EnUsers.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuBottom, null, /*#__PURE__*/_react.default.createElement(_styles.LogOutItem, null, /*#__PURE__*/_react.default.createElement(_RiLogoutCircleRLine.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('LOG_OUT', 'Log out'))), !isMobile && /*#__PURE__*/_react.default.createElement(_styles.SidbeBarControl, {
     colapse: isCollapse
   }, /*#__PURE__*/_react.default.createElement(_EnLogin.default, {
@@ -107,3 +134,26 @@ var LateralMenu = function LateralMenu(props) {
 };
 
 exports.LateralMenu = LateralMenu;
+
+var LogoutActionUI = function LogoutActionUI(props) {
+  var _useLanguage3 = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
+  var handleClick = function handleClick() {
+    props.handleLogoutClick();
+    props.onClose && props.onClose();
+  };
+
+  return /*#__PURE__*/_react.default.createElement(PopoverListItem, {
+    onClick: handleClick
+  }, /*#__PURE__*/_react.default.createElement(FaSignOutAlt, null), " ", t('LOGOUT', 'Logout'));
+};
+
+var PopoverListItemLogout = function PopoverListItemLogout(props) {
+  var logoutActionProps = {
+    UIComponent: LogoutActionUI,
+    onClose: props.onClose
+  };
+  return /*#__PURE__*/_react.default.createElement(LogoutActionController, logoutActionProps);
+};
