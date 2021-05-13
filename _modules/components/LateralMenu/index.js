@@ -61,7 +61,9 @@ var LateralMenu = function LateralMenu(props) {
   var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _sessionState$user, _sessionState$user2, _sessionState$user3;
 
   var isCollapse = props.isCollapse,
-      setIsCollapse = props.setIsCollapse;
+      setIsCollapse = props.setIsCollapse,
+      isMobile = props.isMobile,
+      setIsMobile = props.setIsMobile;
 
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -76,11 +78,6 @@ var LateralMenu = function LateralMenu(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       sessionState = _useSession2[0];
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isMobile = _useState2[0],
-      setIsMobile = _useState2[1];
 
   var handleGoToPage = function handleGoToPage(data) {
     console.log(data);

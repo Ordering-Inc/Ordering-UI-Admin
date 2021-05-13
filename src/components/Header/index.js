@@ -18,10 +18,12 @@ import { useOnlineStatus } from '../../hooks/useOnlineStatus'
 
 import { UserPopover } from '../UserPopover'
 // import { MobileSidebarMenu } from '../MobileSidebarMenu'
+import { LateralMenu } from '../LateralMenu'
 
 export const Header = (props) => {
   const [events] = useEvent()
   const [openPopover, setOpenPopover] = useState({})
+  const [isMobile, setIsMobile] = useState(false)
   // const [openOverview, setOpenOverview] = useState(true)
   const theme = useTheme()
   // const { width } = useWindowSize()
@@ -60,34 +62,40 @@ export const Header = (props) => {
   // }, [openOverview, width])
 
   return (
-    <HeaderContainer>
-      <InnerHeader>
-        <LeftHeader>
-          {/* <MobileSidebarMenu /> */}
-          <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
-            <img alt='Logotype' src={theme?.images?.logos?.logotype} />
-            <img alt='Isotype' src={theme?.images?.logos?.isotype} />
-          </LogoHeader>
-        </LeftHeader>
-        <MobileMenu>
-          <HiMenu />
-        </MobileMenu>
-        {onlineStatus && (
-          <RightHeader>
-            <UserPopover
-              open={openPopover.user}
-              onClick={() => handleTogglePopover('user')}
-              onClose={() => handleClosePopover('user')}
-            />
+    <>
+      <LateralMenu
+        isMobile={isMobile}
+        setIsMobile={setIsMobile}
+      />
+      <HeaderContainer>
+        <InnerHeader>
+          <LeftHeader>
+            {/* <MobileSidebarMenu /> */}
+            <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
+              <img alt='Logotype' src={theme?.images?.logos?.logotype} />
+              <img alt='Isotype' src={theme?.images?.logos?.isotype} />
+            </LogoHeader>
+          </LeftHeader>
+          <MobileMenu>
+            <HiMenu onClick={() => setIsMobile(true)} />
+          </MobileMenu>
+          {onlineStatus && (
+            <RightHeader>
+              <UserPopover
+                open={openPopover.user}
+                onClick={() => handleTogglePopover('user')}
+                onClose={() => handleClosePopover('user')}
+              />
 
-            {/* {window.location.pathname === '/orders' && (
+              {/* {window.location.pathname === '/orders' && (
               <OverViewControlButton onClick={() => setOpenOverview(!openOverview)}>
                 <IosMenu />
               </OverViewControlButton>
             )} */}
-          </RightHeader>
-        )}
-      </InnerHeader>
-    </HeaderContainer>
+            </RightHeader>
+          )}
+        </InnerHeader>
+      </HeaderContainer>
+    </>
   )
 }

@@ -21,6 +21,8 @@ var _useOnlineStatus = require("../../hooks/useOnlineStatus");
 
 var _UserPopover = require("../UserPopover");
 
+var _LateralMenu = require("../LateralMenu");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -45,7 +47,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// import { MobileSidebarMenu } from '../MobileSidebarMenu'
 var Header = function Header(props) {
   var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos;
 
@@ -56,7 +57,12 @@ var Header = function Header(props) {
   var _useState = (0, _react.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       openPopover = _useState2[0],
-      setOpenPopover = _useState2[1]; // const [openOverview, setOpenOverview] = useState(true)
+      setOpenPopover = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isMobile = _useState4[0],
+      setIsMobile = _useState4[1]; // const [openOverview, setOpenOverview] = useState(true)
 
 
   var theme = (0, _styledComponents.useTheme)(); // const { width } = useWindowSize()
@@ -88,7 +94,10 @@ var Header = function Header(props) {
   // }, [openOverview, width])
 
 
-  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_LateralMenu.LateralMenu, {
+    isMobile: isMobile,
+    setIsMobile: setIsMobile
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'orders-deliveries'
@@ -100,7 +109,11 @@ var Header = function Header(props) {
   }), /*#__PURE__*/_react.default.createElement("img", {
     alt: "Isotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.isotype
-  }))), /*#__PURE__*/_react.default.createElement(_styles.MobileMenu, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, null)), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MobileMenu, null, /*#__PURE__*/_react.default.createElement(_HiMenu.default, {
+    onClick: function onClick() {
+      return setIsMobile(true);
+    }
+  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     open: openPopover.user,
     onClick: function onClick() {
       return handleTogglePopover('user');
@@ -108,7 +121,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }))));
+  })))));
 };
 
 exports.Header = Header;

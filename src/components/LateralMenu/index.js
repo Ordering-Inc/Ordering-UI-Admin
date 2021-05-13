@@ -34,13 +34,14 @@ import {
 export const LateralMenu = (props) => {
   const {
     isCollapse,
-    setIsCollapse
+    setIsCollapse,
+    isMobile,
+    setIsMobile
   } = props
   const [events] = useEvent()
   const theme = useTheme()
   const [, t] = useLanguage()
   const [sessionState] = useSession()
-  const [isMobile, setIsMobile] = useState(false)
 
   const handleGoToPage = (data) => {
     console.log(data)
