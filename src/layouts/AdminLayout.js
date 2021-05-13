@@ -3,7 +3,8 @@ import { Header } from '../components/Header'
 // import { SideMenu } from '../components/SideMenu'
 import { LateralMenu } from '../components/LateralMenu'
 import {
-  AdminMainContainer
+  AdminMainContainer,
+  AdminContent
 } from './styles'
 
 export const AdminLayout = (props) => {
@@ -12,7 +13,9 @@ export const AdminLayout = (props) => {
       <Header />
       <AdminMainContainer>
         <LateralMenu />
-        {props.children}
+        <AdminContent>
+          {props.children}
+        </AdminContent>
       </AdminMainContainer>
     </>
   )

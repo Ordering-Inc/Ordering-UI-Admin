@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import { SideMenu } from '../components/SideMenu'
 var AdminLayout = function AdminLayout(props) {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Header.Header, null), /*#__PURE__*/_react.default.createElement(_styles.AdminMainContainer, null, /*#__PURE__*/_react.default.createElement(_LateralMenu.LateralMenu, null), props.children));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Header.Header, null), /*#__PURE__*/_react.default.createElement(_styles.AdminMainContainer, null, /*#__PURE__*/_react.default.createElement(_LateralMenu.LateralMenu, null), /*#__PURE__*/_react.default.createElement(_styles.AdminContent, null, props.children)));
 };
 
 exports.AdminLayout = AdminLayout;
