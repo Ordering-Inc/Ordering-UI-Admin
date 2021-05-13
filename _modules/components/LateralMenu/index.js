@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LateralMenu = function LateralMenu(props) {
-  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _sessionState$user, _sessionState$user2, _sessionState$user3;
+  var _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user2, _sessionState$user3;
 
   var isCollapse = props.isCollapse,
       setIsCollapse = props.setIsCollapse,
@@ -87,23 +87,19 @@ var LateralMenu = function LateralMenu(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LateralMenuContainer, {
     isShowMenu: isMobile,
     colapse: isCollapse
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, /*#__PURE__*/_react.default.createElement(_styles.MainMenuList, null, /*#__PURE__*/_react.default.createElement(_styles.CloseMenu, null, /*#__PURE__*/_react.default.createElement(_GrClose.default, {
+    onClick: function onClick() {
+      return setIsMobile(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'orders_deliveries'
       });
     }
-  }, isCollapse ? /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype
-  }) : /*#__PURE__*/_react.default.createElement("img", {
-    alt: "Logotype",
-    className: "isotype",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.isotype
-  })), /*#__PURE__*/_react.default.createElement(_styles.CloseMenu, null, /*#__PURE__*/_react.default.createElement(_GrClose.default, {
-    onClick: function onClick() {
-      return setIsMobile(false);
-    }
   })), /*#__PURE__*/_react.default.createElement(_styles.UserAvatar, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)

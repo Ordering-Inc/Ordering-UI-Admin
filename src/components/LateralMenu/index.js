@@ -56,16 +56,12 @@ export const LateralMenu = (props) => {
       >
         <MenuContent>
           <MainMenuList>
-            <LogoHeader onClick={() => handleGoToPage({ page: 'orders_deliveries' })}>
-              {
-                isCollapse
-                  ? <img alt='Logotype' src={theme?.images?.logos?.logotype} />
-                  : <img alt='Logotype' className='isotype' src={theme?.images?.logos?.isotype} />
-              }
-            </LogoHeader>
             <CloseMenu>
               <GrClose onClick={() => setIsMobile(false)} />
             </CloseMenu>
+            <LogoHeader onClick={() => handleGoToPage({ page: 'orders_deliveries' })}>
+              <img alt='Logotype' src={theme?.images?.logos?.logotype} />
+            </LogoHeader>
             <UserAvatar>
               <DropDownCircleImage
                 src={sessionState?.user?.photo}

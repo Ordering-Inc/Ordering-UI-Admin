@@ -5,7 +5,7 @@ export const LateralMenuContainer = styled.div`
   position: fixed;
   z-index: 9999;
   background-color: #ffffff;
-  height: calc(100vh - 65px);
+  height: 100vh;
   box-shadow: 0px 2px 2px #00000029;
   width: ${({ isShowMenu }) => isShowMenu ? '100vw' : '0px'};
   overflow: auto;
@@ -13,6 +13,7 @@ export const LateralMenuContainer = styled.div`
   top: 0px;
 
   @media (min-width: 769px){
+    height: calc(100vh - 65px);
     top: auto;
     width: ${({ colapse }) => colapse ? '200px' : '65px'};
   }
@@ -43,10 +44,6 @@ export const LogoHeader = styled.div`
     width: 130px;
     margin: 0 15px;
     vertical-align: middle;
-    &.isotype {
-      width: 43px;
-      margin: 15px auto;
-    }
   }
   display: flex;
   @media (min-width: 769px){
