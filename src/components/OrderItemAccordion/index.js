@@ -40,7 +40,6 @@ export const OrderItemAccordion = (props) => {
   const {
     order,
     drivers,
-    size,
     selectedOrderIds,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
@@ -62,7 +61,11 @@ export const OrderItemAccordion = (props) => {
   // const content = useRef(null)
   const toggleBtn = useRef(null)
   const driverSelectorRef = useRef(null)
-  const [diffTime, setDiffTime] = useState(getTimeAgo(order?.delivery_datetime))
+  const [diffTime, setDiffTime] = useState(
+    order?.delivery_datetime_utc
+      ? getTimeAgo(order?.delivery_datetime_utc)
+      : getTimeAgo(order?.delivery_datetime, { utc: false })
+  )
 
   const toggleOrderSelect = (id) => {
     setIsChecked(!isChecked)
@@ -133,24 +136,15 @@ export const OrderItemAccordion = (props) => {
     const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
     if (deActive) return
     const timer = setInterval(() => {
-      setDiffTime(getTimeAgo(order?.delivery_datetime))
+      const diff = order?.delivery_datetime_utc
+        ? getTimeAgo(order?.delivery_datetime_utc)
+        : getTimeAgo(order?.delivery_datetime, { utc: false })
+      setDiffTime(diff)
     }, 60 * 1000)
     return () => {
       clearInterval(timer)
     }
   }, [])
-
-  // const getImage = () => {
-  //   const http = new XMLHttpRequest()
-  //   http.open('HEAD', order.business?.logo, false)
-  //   http.send()
-
-  //   if (http.status !== 404) {
-  //     return optimizeImage(order.business?.logo, 'h_200,c_limit')
-  //   } else {
-  //     return theme.images?.dummies?.businessLogo
-  //   }
-  // }
 
   return (
     <>
@@ -182,7 +176,7 @@ export const OrderItemAccordion = (props) => {
             </TextBlockContainer>
           </OrderItemAccordionCell>
           <OrderInfoContainer>
-            <WrapperGeneralInfo size={size}>
+            <WrapperGeneralInfo>
               <OrderItemAccordionCell className='order-item-business'>
                 <WrapperAccordionImage>
                   <AccordionImage bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />

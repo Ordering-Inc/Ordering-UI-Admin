@@ -137,8 +137,8 @@ export const DriversLocation = (props) => {
     }
 
     const { center, zoom } = fitBounds(newBounds, mapSize)
-    setMapCenter(center)
     setMapZoom(zoom)
+    setMapCenter(center)
   }
 
   // Fit bounds on mount, and when the markers change
@@ -167,6 +167,10 @@ export const DriversLocation = (props) => {
     mapFit()
   }, [interActionOrderDriverLocation, mapLoaded])
 
+  const handleMapChange = (data) => {
+    setMapZoom(data?.zoom)
+  }
+
   return (
     <WrapperMap ref={mapRef} className='drivers-location'>
       <GoogleMapReact
@@ -180,6 +184,7 @@ export const DriversLocation = (props) => {
         zoom={mapZoom}
         options={{ fullscreenControl: false }}
         className='map'
+        onChange={(data) => handleMapChange(data)}
         yesIWantToUseGoogleMapApiInternals
       >
 

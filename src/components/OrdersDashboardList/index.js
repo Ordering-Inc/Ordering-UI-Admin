@@ -172,12 +172,10 @@ export const OrdersDashboardList = (props) => {
         style={{ display: `${(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
       >
         <OrdersListController
-          size='small'
           {...OrdersCommonControlProps}
           {...PendingOrdersControlProps}
         />
         <OrdersListController
-          size='small'
           {...OrdersCommonControlProps}
           {...PreOrdersControlProps}
         />
