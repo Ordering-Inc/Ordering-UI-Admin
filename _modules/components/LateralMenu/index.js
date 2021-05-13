@@ -77,6 +77,7 @@ var LateralMenu = function LateralMenu(props) {
       setIsMobile = _useState2[1];
 
   var handleGoToPage = function handleGoToPage(data) {
+    console.log(data);
     events.emit('go_to_page', data);
   };
 
@@ -121,7 +122,7 @@ var LateralMenu = function LateralMenu(props) {
     active: window.location.pathname === '/users',
     onClick: function onClick() {
       return handleGoToPage({
-        page: 'orders-deliveries'
+        page: 'users'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_EnUsers.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuBottom, null, /*#__PURE__*/_react.default.createElement(_styles.LogOutItem, null, /*#__PURE__*/_react.default.createElement(_RiLogoutCircleRLine.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('LOG_OUT', 'Log out'))), !isMobile && /*#__PURE__*/_react.default.createElement(_styles.SidbeBarControl, {

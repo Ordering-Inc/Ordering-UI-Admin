@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useLanguage } from 'ordering-components-admin'
+import { useSession, useLanguage, useEvent } from 'ordering-components-admin'
 import BiChevronDown from '@meronex/icons/bi/BiChevronDown'
 import { DropDownCircleImage } from '../Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -10,7 +10,6 @@ import RiLogoutCircleRLine from '@meronex/icons/ri/RiLogoutCircleRLine'
 import HiMenu from '@meronex/icons/hi/HiMenu'
 import GrClose from '@meronex/icons/gr/GrClose'
 import EnLogin from '@meronex/icons/en/EnLogin'
-import { useEvent } from 'ordering-components-admin'
 
 import {
   LateralMenuContainer,
@@ -40,6 +39,7 @@ export const LateralMenu = (props) => {
   const [isMobile, setIsMobile] = useState(false)
 
   const handleGoToPage = (data) => {
+    console.log(data)
     events.emit('go_to_page', data)
   }
 
@@ -94,7 +94,7 @@ export const LateralMenu = (props) => {
               active={
                 window.location.pathname === '/users'
               }
-              onClick={() => handleGoToPage({ page: 'orders-deliveries' })}
+              onClick={() => handleGoToPage({ page: 'users' })}
             >
               <EnUsers />
               {
