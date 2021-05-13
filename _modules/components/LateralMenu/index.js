@@ -125,7 +125,10 @@ var LateralMenu = function LateralMenu(props) {
         page: 'users'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_EnUsers.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuBottom, null, /*#__PURE__*/_react.default.createElement(_styles.LogOutItem, null, /*#__PURE__*/_react.default.createElement(_RiLogoutCircleRLine.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('LOG_OUT', 'Log out'))), !isMobile && /*#__PURE__*/_react.default.createElement(_styles.SidbeBarControl, {
+  }, /*#__PURE__*/_react.default.createElement(_EnUsers.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuBottom, null, /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
+    isCollapse: isCollapse,
+    isMobile: isMobile
+  }), !isMobile && /*#__PURE__*/_react.default.createElement(_styles.SidbeBarControl, {
     colapse: isCollapse
   }, /*#__PURE__*/_react.default.createElement(_EnLogin.default, {
     onClick: function onClick() {
@@ -137,6 +140,9 @@ var LateralMenu = function LateralMenu(props) {
 exports.LateralMenu = LateralMenu;
 
 var LogoutActionUI = function LogoutActionUI(props) {
+  var isCollapse = props.isCollapse,
+      isMobile = props.isMobile;
+
   var _useLanguage3 = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
@@ -146,9 +152,9 @@ var LogoutActionUI = function LogoutActionUI(props) {
     props.onClose && props.onClose();
   };
 
-  return /*#__PURE__*/_react.default.createElement(PopoverListItem, {
+  return /*#__PURE__*/_react.default.createElement(_styles.LogOutItem, {
     onClick: handleClick
-  }, /*#__PURE__*/_react.default.createElement(FaSignOutAlt, null), " ", t('LOGOUT', 'Logout'));
+  }, /*#__PURE__*/_react.default.createElement(_RiLogoutCircleRLine.default, null), (isCollapse || isMobile) && /*#__PURE__*/_react.default.createElement(_styles.ItemText, null, t('LOGOUT', 'Log out')));
 };
 
 var PopoverListItemLogout = function PopoverListItemLogout(props) {

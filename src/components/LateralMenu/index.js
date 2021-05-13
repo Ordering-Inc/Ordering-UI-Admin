@@ -103,12 +103,10 @@ export const LateralMenu = (props) => {
             </MenuItem>
           </MainMenuList>
           <MenuBottom>
-            <LogOutItem>
-              <RiLogoutCircleRLine />
-              {
-                (isCollapse || isMobile) && <ItemText>{t('LOG_OUT', 'Log out')}</ItemText>
-              }
-            </LogOutItem>
+            <PopoverListItemLogout
+              isCollapse={isCollapse}
+              isMobile={isMobile}
+            />
             {
               !isMobile && (
                 <SidbeBarControl colapse={isCollapse}>
@@ -126,6 +124,10 @@ export const LateralMenu = (props) => {
 }
 
 const LogoutActionUI = (props) => {
+  const {
+    isCollapse,
+    isMobile
+  } = props
   const [, t] = useLanguage()
 
   const handleClick = () => {
@@ -133,9 +135,12 @@ const LogoutActionUI = (props) => {
     props.onClose && props.onClose()
   }
   return (
-    <PopoverListItem onClick={handleClick}>
-      <FaSignOutAlt /> {t('LOGOUT', 'Logout')}
-    </PopoverListItem>
+    <LogOutItem onClick={handleClick}>
+      <RiLogoutCircleRLine />
+      {
+        (isCollapse || isMobile) && <ItemText>{t('LOGOUT', 'Log out')}</ItemText>
+      }
+    </LogOutItem>
   )
 }
 
