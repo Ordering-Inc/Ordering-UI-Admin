@@ -43,7 +43,6 @@ export const LateralMenu = (props) => {
   const [sessionState] = useSession()
 
   const handleGoToPage = (data) => {
-    console.log(data)
     events.emit('go_to_page', data)
   }
 
