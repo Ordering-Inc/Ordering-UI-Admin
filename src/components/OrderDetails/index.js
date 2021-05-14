@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import BsBell from '@meronex/icons/bs/BsBell'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
@@ -63,7 +64,8 @@ import {
   MessageContactInfo,
   ContactBlock,
   InfonContent,
-  WrapperMoreInformationButton
+  WrapperMoreInformationButton,
+  NotificationIcon
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -80,7 +82,8 @@ const OrderDetailsUI = (props) => {
     handleOpenMessage,
     handleUpdateOrderForUnreadCount,
     handleOpenOrderDetail,
-    actionStatus
+    actionStatus,
+    messages
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -90,6 +93,7 @@ const OrderDetailsUI = (props) => {
   const [{ user }] = useSession()
 
   const orderDetail = useRef(null)
+  const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
 
   const {
     order,
@@ -135,18 +139,29 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const unreadMessages = () => {
+    const unreadedMessages = messages?.messages.filter(message => !message?.read && message?.can_see?.includes(0) && message?.author_id !== user.id)
+    const customer = unreadedMessages?.some(message => message?.author?.level === 3)
+    const business = unreadedMessages?.some(message => message?.author?.level === 2)
+    const driver = unreadedMessages?.some(message => message?.author?.level === 4)
+    setUnreadAlert({ business, driver, customer })
+  }
+
   const handleOpenMessages = (openMessage) => {
     if (openMessage === 'customer') {
       orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: true, business: false, driver: false, history: false })
+      setUnreadAlert({ ...unreadAlert, customer: false })
     }
     if (openMessage === 'business') {
       orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: false, business: true, driver: false, history: false })
+      setUnreadAlert({ ...unreadAlert, business: false })
     }
     if (openMessage === 'driver') {
       orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: false, business: false, driver: true, history: false })
+      setUnreadAlert({ ...unreadAlert, driver: false })
     }
     if (openMessage === 'history') {
       setOpenMessages({ customer: false, business: false, driver: false, history: true })
@@ -157,6 +172,10 @@ const OrderDetailsUI = (props) => {
     orderDetail.current.style.display = 'flex'
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
   }
+
+  useEffect(() => {
+    unreadMessages()
+  }, [messages?.messages])
 
   return (
     <Container className='order-detail' messageDashboardView={messageDashboardView}>
@@ -409,6 +428,11 @@ const OrderDetailsUI = (props) => {
                     <button onClick={() => handleOpenMessages('customer')}>
                       <BsChat /> {t('CHAT', 'Chat')}
                     </button>
+                    {order?.unread_count > 0 && unreadAlert.customer && (
+                      <NotificationIcon>
+                        <BsBell />
+                      </NotificationIcon>
+                    )}
                     {order?.customer?.cellphone && (
                       <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
                         <HiOutlinePhone /> {t('CALL', 'Call')}
@@ -440,6 +464,11 @@ const OrderDetailsUI = (props) => {
                         <button onClick={() => handleOpenMessages('business')}>
                           <BsChat /> {t('CHAT', 'Chat')}
                         </button>
+                        {order?.unread_count > 0 && unreadAlert.business && (
+                          <NotificationIcon>
+                            <BsBell />
+                          </NotificationIcon>
+                        )}
                         {order?.business?.phone && (
                           <button onClick={() => window.open(`tel:${order.business.phone}`)}>
                             <HiOutlinePhone /> {t('CALL', 'Call')}
@@ -476,6 +505,11 @@ const OrderDetailsUI = (props) => {
                           <button onClick={() => handleOpenMessages('driver')}>
                             <BsChat /> {t('CHAT', 'Chat')}
                           </button>
+                          {order?.unread_count > 0 && unreadAlert.driver && (
+                            <NotificationIcon>
+                              <BsBell />
+                            </NotificationIcon>
+                          )}
                           {order?.driver?.cellphone && (
                             <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
                               <HiOutlinePhone /> {t('CALL', 'Call')}
@@ -579,6 +613,7 @@ const OrderDetailsUI = (props) => {
             history={openMessages.history}
             handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
             onClose={() => handleCloseMessages()}
+            messages={messages}
           />
         </ChatContainer>
       )}
@@ -594,6 +629,7 @@ const OrderDetailsUI = (props) => {
           order={order}
           history={openMessages.history}
           handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+          messages={messages}
         />
       </Modal>
 
