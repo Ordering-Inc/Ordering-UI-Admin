@@ -578,7 +578,8 @@ export const DriverSelectorContainer = styled.div`
   }
 `
 export const PrintButtonContainer = styled.div`
-  margin-top: 100px;
+  margin-top: 3em;
+  padding: 10px 0;
   button {
     width: 100%;
     padding: 10px 15px;

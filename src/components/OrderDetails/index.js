@@ -20,6 +20,7 @@ import { DriverSelector } from '../DriverSelector'
 import { Messages } from '../Messages'
 import { MetaFields } from '../MetaFields'
 import { Modal } from '../Modal'
+import { SpinnerLoader } from '../SpinnerLoader'
 import {
   Container,
   WrapperContainer,
@@ -80,7 +81,8 @@ const OrderDetailsUI = (props) => {
     messageType,
     handleOpenMessage,
     handleUpdateOrderForUnreadCount,
-    handleOpenOrderDetail
+    handleOpenOrderDetail,
+    actionStatus
   } = props
   const [, t] = useLanguage()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
@@ -166,27 +168,31 @@ const OrderDetailsUI = (props) => {
             <OrderInfo>
               <OrderData messageDashboardView={messageDashboardView}>
                 <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
-                {/* <p className='uuid'>{order?.uuid}</p> */}
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>
                   {parseDate(order?.delivery_datetime, { utc: false })}
                 </p>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               </OrderData>
-              <OrderStatus>
-                {(!pendingOrder && !preOrder) && (
-                  <span>{getOrderStatus(parseInt(order?.status))?.value}</span>
+              {actionStatus?.loading
+                ? (
+                  <SpinnerLoader style={{ width: 170, height: 90, transform: 'scale(0.3)' }} />
+                ) : (
+                  <OrderStatus>
+                    {(!pendingOrder && !preOrder) && (
+                      <span>{getOrderStatus(parseInt(order?.status))?.value}</span>
+                    )}
+                    {pendingOrder && (
+                      <span>{t('PENDING', 'Pending')}</span>
+                    )}
+                    {preOrder && (
+                      <span>{t('PREORDER', 'Preorder')}</span>
+                    )}
+                    <StatusImage>
+                      <img src={getImage(order?.status || 0)} alt='status' />
+                    </StatusImage>
+                  </OrderStatus>
                 )}
-                {pendingOrder && (
-                  <span>{t('PENDING', 'Pending')}</span>
-                )}
-                {preOrder && (
-                  <span>{t('PREORDER', 'Preorder')}</span>
-                )}
-                <StatusImage>
-                  <img src={getImage(order?.status || 0)} alt='status' />
-                </StatusImage>
-              </OrderStatus>
               {messageDashboardView && (
                 <OrderDetailCloseButton>
                   <GrClose onClick={() => handleMessageOrderDetail(false)} />

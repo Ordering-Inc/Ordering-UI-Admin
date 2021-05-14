@@ -228,10 +228,11 @@ export const WrapperGeneralInfo = styled.div`
 
     
     &:nth-child(5) {
-      width: ${({ size }) => size === 'small' ? '15%' : '22%'};
-      min-width: ${({ size }) => size === 'small' ? '130px' : '170px'};
-      display: ${({ size }) => size === 'small' ? 'flex' : 'block'};
-      justify-content: ${({ size }) => size === 'small' ? 'center' : 'initial'};
+      width: 22%;
+      min-width: 170px;
+      display: block;
+      justify-content: initial;
+      text-align: center;
 
       p {
         font-size: 12px;
@@ -240,7 +241,7 @@ export const WrapperGeneralInfo = styled.div`
 
     &:nth-child(6) {
       width: 9%;
-      width: ${({ size }) => size === 'small' ? '16%' : '9%'};
+      width: 9%;
       min-width: 120px;
       display: flex;
       justify-content: flex-end;

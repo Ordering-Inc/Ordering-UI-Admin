@@ -42,7 +42,6 @@ export const OrderListing = (props) => {
     interActionMapOrder,
     messageListView,
     messageType,
-    size,
     loadMoreOrders
   } = props
 
@@ -148,7 +147,6 @@ export const OrderListing = (props) => {
                         {orderListView === 'big' && windowSize.width > 992 && (
                           <OrderItemAccordion
                             order={order}
-                            size={size}
                             drivers={driversList.drivers}
                             pendingOrder={pendingOrder}
                             preOrder={preOrder}
