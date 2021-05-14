@@ -15,6 +15,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
+var _BsBell = _interopRequireDefault(require("@meronex/icons/bs/BsBell"));
+
 var _BsChat = _interopRequireDefault(require("@meronex/icons/bs/BsChat"));
 
 var _HiOutlinePhone = _interopRequireDefault(require("@meronex/icons/hi/HiOutlinePhone"));
@@ -61,12 +63,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -74,6 +70,12 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -101,7 +103,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       handleOpenMessage = props.handleOpenMessage,
       handleUpdateOrderForUnreadCount = props.handleUpdateOrderForUnreadCount,
       handleOpenOrderDetail = props.handleOpenOrderDetail,
-      actionStatus = props.actionStatus;
+      actionStatus = props.actionStatus,
+      messages = props.messages;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -136,6 +139,16 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       user = _useSession2[0].user;
 
   var orderDetail = (0, _react.useRef)(null);
+
+  var _useState5 = (0, _react.useState)({
+    business: false,
+    driver: false,
+    customer: false
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      unreadAlert = _useState6[0],
+      setUnreadAlert = _useState6[1];
+
   var _props$order = props.order,
       order = _props$order.order,
       loading = _props$order.loading;
@@ -268,6 +281,34 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   };
 
+  var unreadMessages = function unreadMessages() {
+    var unreadedMessages = messages === null || messages === void 0 ? void 0 : messages.messages.filter(function (message) {
+      var _message$can_see;
+
+      return !(message === null || message === void 0 ? void 0 : message.read) && (message === null || message === void 0 ? void 0 : (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(0)) && (message === null || message === void 0 ? void 0 : message.author_id) !== user.id;
+    });
+    var customer = unreadedMessages === null || unreadedMessages === void 0 ? void 0 : unreadedMessages.some(function (message) {
+      var _message$author;
+
+      return (message === null || message === void 0 ? void 0 : (_message$author = message.author) === null || _message$author === void 0 ? void 0 : _message$author.level) === 3;
+    });
+    var business = unreadedMessages === null || unreadedMessages === void 0 ? void 0 : unreadedMessages.some(function (message) {
+      var _message$author2;
+
+      return (message === null || message === void 0 ? void 0 : (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.level) === 2;
+    });
+    var driver = unreadedMessages === null || unreadedMessages === void 0 ? void 0 : unreadedMessages.some(function (message) {
+      var _message$author3;
+
+      return (message === null || message === void 0 ? void 0 : (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.level) === 4;
+    });
+    setUnreadAlert({
+      business: business,
+      driver: driver,
+      customer: customer
+    });
+  };
+
   var handleOpenMessages = function handleOpenMessages(openMessage) {
     if (openMessage === 'customer') {
       orderDetail.current.style.display = 'none';
@@ -277,6 +318,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         driver: false,
         history: false
       });
+      setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
+        customer: false
+      }));
     }
 
     if (openMessage === 'business') {
@@ -287,6 +331,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         driver: false,
         history: false
       });
+      setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
+        business: false
+      }));
     }
 
     if (openMessage === 'driver') {
@@ -297,6 +344,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         driver: true,
         history: false
       });
+      setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
+        driver: false
+      }));
     }
 
     if (openMessage === 'history') {
@@ -319,6 +369,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
   };
 
+  (0, _react.useEffect)(function () {
+    unreadMessages();
+  }, [messages === null || messages === void 0 ? void 0 : messages.messages]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     className: "order-detail",
     messageDashboardView: messageDashboardView
@@ -425,7 +478,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return handleOpenMessages('customer');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsChat.default, null), " ", t('CHAT', 'Chat')), (order === null || order === void 0 ? void 0 : (_order$customer12 = order.customer) === null || _order$customer12 === void 0 ? void 0 : _order$customer12.cellphone) && /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement(_BsChat.default, null), " ", t('CHAT', 'Chat')), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && unreadAlert.customer && /*#__PURE__*/_react.default.createElement(_styles.NotificationIcon, null, /*#__PURE__*/_react.default.createElement(_BsBell.default, null)), (order === null || order === void 0 ? void 0 : (_order$customer12 = order.customer) === null || _order$customer12 === void 0 ? void 0 : _order$customer12.cellphone) && /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       var _order$customer13;
 
@@ -437,7 +490,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return handleOpenMessages('business');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsChat.default, null), " ", t('CHAT', 'Chat')), (order === null || order === void 0 ? void 0 : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.phone) && /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement(_BsChat.default, null), " ", t('CHAT', 'Chat')), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && unreadAlert.business && /*#__PURE__*/_react.default.createElement(_styles.NotificationIcon, null, /*#__PURE__*/_react.default.createElement(_BsBell.default, null)), (order === null || order === void 0 ? void 0 : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.phone) && /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       return window.open("tel:".concat(order.business.phone));
     }
@@ -447,7 +500,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return handleOpenMessages('driver');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsChat.default, null), " ", t('CHAT', 'Chat')), (order === null || order === void 0 ? void 0 : (_order$driver9 = order.driver) === null || _order$driver9 === void 0 ? void 0 : _order$driver9.cellphone) && /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement(_BsChat.default, null), " ", t('CHAT', 'Chat')), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && unreadAlert.driver && /*#__PURE__*/_react.default.createElement(_styles.NotificationIcon, null, /*#__PURE__*/_react.default.createElement(_BsBell.default, null)), (order === null || order === void 0 ? void 0 : (_order$driver9 = order.driver) === null || _order$driver9 === void 0 ? void 0 : _order$driver9.cellphone) && /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       return window.open("tel:".concat(order.driver.cellphone));
     }
@@ -530,7 +583,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     onClose: function onClose() {
       return handleCloseMessages();
-    }
+    },
+    messages: messages
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     height: "70vh",
@@ -542,7 +596,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     history: openMessages.history,
-    handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount
+    handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
+    messages: messages
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     height: "70vh",

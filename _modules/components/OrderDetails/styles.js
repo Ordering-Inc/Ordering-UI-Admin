@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperMoreInformationButton = exports.InfonContent = exports.ContactBlock = exports.MessageContactInfo = exports.OrderDetailCloseButton = exports.PhoneNumber = exports.ChatContainer = exports.PrintButtonContainer = exports.DriverSelectorContainer = exports.ButtonLink = exports.WrapperButton = exports.ContactInfoHeader = exports.ContactInfoContent = exports.OrderTypeContent = exports.OrderTypeInfo = exports.PaymethodCreatedDateContent = exports.PaymethodCreatedDate = exports.PaymethodContent = exports.Paymethod = exports.PayAndOrderTypeInfo = exports.WrapperSkeletonButton = exports.WrapperSkeletonBottom = exports.WrapperSkeletonText = exports.SkeletonInnerBlock = exports.SkeletonInfoCell = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.OrderBill = exports.OrderProducts = exports.CustomerContactBlock = exports.InfoBlock = exports.SectionContainer = exports.SectionTitle = exports.StatusImage = exports.OrderStatus = exports.StatusBar = exports.OrderData = exports.OrderInfo = exports.Photo = exports.PhotoWrapper = exports.OrderInfoContent = exports.WrapperContainer = exports.Container = void 0;
+exports.NotificationIcon = exports.WrapperMoreInformationButton = exports.InfonContent = exports.ContactBlock = exports.MessageContactInfo = exports.OrderDetailCloseButton = exports.PhoneNumber = exports.ChatContainer = exports.PrintButtonContainer = exports.DriverSelectorContainer = exports.ButtonLink = exports.WrapperButton = exports.ContactInfoHeader = exports.ContactInfoContent = exports.OrderTypeContent = exports.OrderTypeInfo = exports.PaymethodCreatedDateContent = exports.PaymethodCreatedDate = exports.PaymethodContent = exports.Paymethod = exports.PayAndOrderTypeInfo = exports.WrapperSkeletonButton = exports.WrapperSkeletonBottom = exports.WrapperSkeletonText = exports.SkeletonInnerBlock = exports.SkeletonInfoCell = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.OrderBill = exports.OrderProducts = exports.CustomerContactBlock = exports.InfoBlock = exports.SectionContainer = exports.SectionTitle = exports.StatusImage = exports.OrderStatus = exports.StatusBar = exports.OrderData = exports.OrderInfo = exports.Photo = exports.PhotoWrapper = exports.OrderInfoContent = exports.WrapperContainer = exports.Container = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -18,6 +18,16 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject51() {
+  var data = _taggedTemplateLiteral(["\n  margin-top: 2px;\n  color: #182964;\n  font-size: 20px;\n"]);
+
+  _templateObject51 = function _templateObject51() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject50() {
   var data = _taggedTemplateLiteral(["\n  padding: 20px 10px 10px 10px;\n  button {\n    width: 100%;\n  }\n"]);
@@ -330,7 +340,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  column-gap: 20px;\n\n  button {\n    outline: none;\n    border: 1px solid #182964;\n    border-radius: 42px;\n    background-color: transparent;\n    cursor: pointer;\n    width: 90px;\n    height: 30px;\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    justify-content: space-around;\n\n    &:active {\n      background: ", ";\n    }\n\n    svg {\n      display: flex;\n      align-items: center;\n      column-gap: 10px;\n      color: #182964;\n      margin-right: 10px;\n      font-size: 18px;\n    }\n  }\n\n  @media  print {\n    display: none;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  column-gap: 10px;\n\n  button {\n    outline: none;\n    border: 1px solid #182964;\n    border-radius: 42px;\n    background-color: transparent;\n    cursor: pointer;\n    width: 90px;\n    height: 30px;\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    justify-content: space-around;\n\n    &:active {\n      background: ", ";\n    }\n\n    svg {\n      display: flex;\n      align-items: center;\n      column-gap: 10px;\n      color: #182964;\n      margin-right: 10px;\n      font-size: 18px;\n    }\n  }\n\n  @media  print {\n    display: none;\n  }\n  \n  BsBell {\n    margin: 5px;\n  }\n"]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -757,3 +767,7 @@ exports.InfonContent = InfonContent;
 var WrapperMoreInformationButton = _styledComponents.default.div(_templateObject50());
 
 exports.WrapperMoreInformationButton = WrapperMoreInformationButton;
+
+var NotificationIcon = _styledComponents.default.div(_templateObject51());
+
+exports.NotificationIcon = NotificationIcon;
