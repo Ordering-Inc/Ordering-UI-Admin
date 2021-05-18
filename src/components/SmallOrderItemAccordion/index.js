@@ -74,7 +74,7 @@ export const SmallOrderItemAccordion = (props) => {
           history.push(`/orders-deliveries?id=${order.id}`)
           handleOpenOrderDetail(order.id)
         } else {
-          handleLocation(order)
+          handleLocation && handleLocation(order)
         }
       }
     }
