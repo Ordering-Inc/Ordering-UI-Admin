@@ -79,40 +79,42 @@ const DriverSelectorUI = (props) => {
       })
     }
     if (!driversList.loading) {
-      const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
-        return {
-          value: driver.id,
-          disabled: !(driver?.enabled && driver?.available && !driver?.busy),
-          content: (
-            <Option small={small} isPhoneView={isPhoneView} padding={padding}>
-              <WrapperDriverImage small={small}>
-                {driver.photo ? (
-                  <DriverImage bgimage={driver.photo} small={small} />
-                ) : (
-                  <FaUserAlt />
-                )}
-              </WrapperDriverImage>
-              <OptionContent>
-                <DriverNameContainer small={small}>
-                  <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
-                  <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
-                </DriverNameContainer>
-                {isPhoneView && driver.cellphone && (
-                  <PhoneContainer>
-                    <FiPhone />
-                    {driver.cellphone}
-                  </PhoneContainer>
-                )}
-              </OptionContent>
-            </Option>
-          )
+      const assignableDrivers = driversList.drivers.filter(driver => driver?.enabled && driver?.available && !driver?.busy)
+      if (assignableDrivers.length) {
+        const _driversOptionListTemp = assignableDrivers.map((driver, i) => {
+          return {
+            value: driver.id,
+            content: (
+              <Option small={small} isPhoneView={isPhoneView} padding={padding}>
+                <WrapperDriverImage small={small}>
+                  {driver.photo ? (
+                    <DriverImage bgimage={driver.photo} small={small} />
+                  ) : (
+                    <FaUserAlt />
+                  )}
+                </WrapperDriverImage>
+                <OptionContent>
+                  <DriverNameContainer small={small}>
+                    <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
+                    <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
+                  </DriverNameContainer>
+                  {isPhoneView && driver.cellphone && (
+                    <PhoneContainer>
+                      <FiPhone />
+                      {driver.cellphone}
+                    </PhoneContainer>
+                  )}
+                </OptionContent>
+              </Option>
+            )
+          }
+        })
+
+        setDriversMultiOptionList(_driversOptionListTemp)
+
+        for (const option of _driversOptionListTemp) {
+          _driversOptionList.push(option)
         }
-      })
-
-      setDriversMultiOptionList(_driversOptionListTemp)
-
-      for (const option of _driversOptionListTemp) {
-        _driversOptionList.push(option)
       }
     }
     setDriversOptionList(_driversOptionList)
