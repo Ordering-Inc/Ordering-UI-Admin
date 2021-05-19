@@ -70,12 +70,8 @@ export const SmallOrderItemAccordion = (props) => {
     } else {
       const isActionClick = driverSelectorRef.current?.contains(e.target) || orderStatusRef.current?.contains(e.target)
       if (!isActionClick) {
-        if (moreDetailRef.current?.contains(e.target)) {
-          history.push(`/orders-deliveries?id=${order.id}`)
-          handleOpenOrderDetail(order.id)
-        } else {
-          handleLocation(order)
-        }
+        history.push(`/orders-deliveries?id=${order.id}`)
+        handleOpenOrderDetail(order.id)
       }
     }
   }
