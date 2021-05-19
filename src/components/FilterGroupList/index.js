@@ -73,7 +73,6 @@ const FilterGroupListUI = (props) => {
             autoComplete='off'
             value={filterValues?.orderId || ''}
             onChange={(e) => handleChangeOrderId(e)}
-            pattern='[0-9]+'
           />
         </WrapperRow>
         <WrapperRow>
