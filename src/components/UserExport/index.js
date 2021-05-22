@@ -64,11 +64,10 @@ const UserExportUI = (props) => {
 }
 
 export const UserExport = (props) => {
-  console.log(props);
   const userExportProps = {
     ...props,
     UIComponent: UserExportUI,
-    filterValues: props.filterValues
+    filterValues: props.filterValues?.changes
   }
   return <UserExportController {...userExportProps} />
 }

@@ -94,11 +94,11 @@ var UserExportUI = function UserExportUI(props) {
 };
 
 var UserExport = function UserExport(props) {
-  console.log(props);
+  var _props$filterValues;
 
   var userExportProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserExportUI,
-    filterValues: props.filterValues
+    filterValues: (_props$filterValues = props.filterValues) === null || _props$filterValues === void 0 ? void 0 : _props$filterValues.changes
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UserExport, userExportProps);
