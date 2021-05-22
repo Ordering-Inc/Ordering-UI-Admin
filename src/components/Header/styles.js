@@ -97,6 +97,7 @@ export const MobileMenu = styled.div`
 
   svg {
     font-size: 38px;
+    vertical-align: middle;
   }
 `
 

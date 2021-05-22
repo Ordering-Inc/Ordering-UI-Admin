@@ -20,7 +20,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  display: block;\n  margin: auto 10px;\n  @media (min-width: 769px){\n    display: none;\n  }\n\n  svg {\n    font-size: 38px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: block;\n  margin: auto 10px;\n  @media (min-width: 769px){\n    display: none;\n  }\n\n  svg {\n    font-size: 38px;\n    vertical-align: middle;\n  }\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
