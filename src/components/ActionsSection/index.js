@@ -41,7 +41,7 @@ export const ActionsSection = (props) => {
             />
           </SearchContent>
           <FilterButton onClick={() => setModals({ ...modals, formOpen: true })}>
-            {(filterValues?.changes && Object.keys(filterValues?.changes) > 0)
+            {(filterValues?.changes && Object.keys(filterValues?.changes).length > 0)
               ? <MdcFilterOutline />
               : <MdcFilterOff />
             }

@@ -170,7 +170,7 @@ export const PaginationList = styled.div`
     cursor: pointer;
     font-size: 20px;
     color: black;
-    ${({ isActive }) => !isActive && css`
+    ${({ disabled }) => disabled && css`
       color: #d3d3d3;
       pointer-events: none;
     `};

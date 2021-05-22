@@ -92,7 +92,7 @@ var ActionsSection = function ActionsSection(props) {
         formOpen: true
       }));
     }
-  }, (filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) && Object.keys(filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) > 0 ? /*#__PURE__*/_react.default.createElement(_MdcFilterOutline.default, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_UserExport.UserExport, props)), /*#__PURE__*/_react.default.createElement(_styles.AddUserContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
+  }, (filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) && Object.keys(filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes).length > 0 ? /*#__PURE__*/_react.default.createElement(_MdcFilterOutline.default, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_UserExport.UserExport, props)), /*#__PURE__*/_react.default.createElement(_styles.AddUserContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     onClick: function onClick() {
       return setAddUserModal(_objectSpread(_objectSpread({}, addUserModal), {}, {
         formOpen: true
