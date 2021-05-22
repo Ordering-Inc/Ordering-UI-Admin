@@ -79,6 +79,7 @@ Sentry.init({
   integrations: [
     new Integrations.BrowserTracing()
   ],
+  release: 'ordering-ui-admin@' + process.env.npm_package_version,
 
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
