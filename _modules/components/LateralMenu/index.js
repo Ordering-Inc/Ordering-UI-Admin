@@ -72,6 +72,7 @@ var LateralMenu = function LateralMenu(props) {
       sessionState = _useSession2[0];
 
   var handleGoToPage = function handleGoToPage(data) {
+    console.log(data, "this is test data");
     events.emit('go_to_page', data);
   };
 
