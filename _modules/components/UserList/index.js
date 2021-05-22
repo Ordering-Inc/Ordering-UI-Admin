@@ -192,7 +192,7 @@ var UserList = function UserList(props) {
   }), (usersList === null || usersList === void 0 ? void 0 : (_usersList$users4 = usersList.users) === null || _usersList$users4 === void 0 ? void 0 : _usersList$users4.length) > 0 && !(usersList === null || usersList === void 0 ? void 0 : usersList.loading) && /*#__PURE__*/_react.default.createElement(_style.UserListFoot, null, /*#__PURE__*/_react.default.createElement(_style.HeaderTR, null, /*#__PURE__*/_react.default.createElement("td", {
     colSpan: "7"
   }, /*#__PURE__*/_react.default.createElement(_style.PaginationList, null, /*#__PURE__*/_react.default.createElement(_style.PaginationItem, null, "".concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.from, " - ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.to, " of ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.total)), /*#__PURE__*/_react.default.createElement(_BsFillPlayFill.default, {
-    disabled: !((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) > 1),
+    disabled: true,
     className: "prev",
     onClick: function onClick() {
       return prevNextPage(false);
