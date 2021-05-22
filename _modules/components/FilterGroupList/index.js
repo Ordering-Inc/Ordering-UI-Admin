@@ -27,6 +27,8 @@ var _DeliveryTypeSelector = require("../DeliveryTypeSelector");
 
 var _PaymethodTypeSelector = require("../PaymethodTypeSelector");
 
+var _Inputs = require("../../styles/Inputs");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -69,7 +71,8 @@ var FilterGroupListUI = function FilterGroupListUI(props) {
       handleChangeDeliveryType = props.handleChangeDeliveryType,
       handleChangePaymethodType = props.handleChangePaymethodType,
       handleResetFilterValues = props.handleResetFilterValues,
-      handleChangeFilterValues = props.handleChangeFilterValues;
+      handleChangeFilterValues = props.handleChangeFilterValues,
+      handleChangeOrderId = props.handleChangeOrderId;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -103,7 +106,15 @@ var FilterGroupListUI = function FilterGroupListUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.FilterGroupListContainer, {
     className: "filter-modal"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_GroupTypeSelector.GroupTypeSelector, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: "text",
+    placeholder: "ID",
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.orderId) || '',
+    onChange: function onChange(e) {
+      return handleChangeOrderId(e);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_GroupTypeSelector.GroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroup,
     filterValues: filterValues

@@ -132,6 +132,7 @@ var Select = function Select(props) {
       },
       optionBottomBorder: props.optionBottomBorder,
       disabled: option.disabled,
+      showDisable: option === null || option === void 0 ? void 0 : option.showDisable,
       className: option.disabled ? 'disabled' : null
     }, option.content);
   }))));

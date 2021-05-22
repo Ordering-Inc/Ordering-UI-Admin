@@ -100,14 +100,8 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
       var isActionClick = ((_driverSelectorRef$cu = driverSelectorRef.current) === null || _driverSelectorRef$cu === void 0 ? void 0 : _driverSelectorRef$cu.contains(e.target)) || ((_orderStatusRef$curre = orderStatusRef.current) === null || _orderStatusRef$curre === void 0 ? void 0 : _orderStatusRef$curre.contains(e.target));
 
       if (!isActionClick) {
-        var _moreDetailRef$curren;
-
-        if ((_moreDetailRef$curren = moreDetailRef.current) === null || _moreDetailRef$curren === void 0 ? void 0 : _moreDetailRef$curren.contains(e.target)) {
-          history.push("/orders-deliveries?id=".concat(order.id));
-          handleOpenOrderDetail(order.id);
-        } else {
-          handleLocation(order);
-        }
+        history.push("/orders-deliveries?id=".concat(order.id));
+        handleOpenOrderDetail(order.id);
       }
     }
   };
