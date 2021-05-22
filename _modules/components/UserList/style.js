@@ -13,8 +13,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _templateObject25() {
+function _templateObject26() {
   var data = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  width: 100vw;\n"]);
+
+  _templateObject26 = function _templateObject26() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject25() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 10px;\n  span {\n    display: flex;\n    &.item-text {\n      margin-left: 10px;\n    }\n  }\n"]);
 
   _templateObject25 = function _templateObject25() {
     return data;
@@ -24,7 +34,7 @@ function _templateObject25() {
 }
 
 function _templateObject24() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 10px;\n  span {\n    display: flex;\n    &.item-text {\n      margin-left: 10px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px;\n\n  img {\n    width: 200px;\n  }\n"]);
 
   _templateObject24 = function _templateObject24() {
     return data;
@@ -34,7 +44,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px;\n\n  img {\n    width: 200px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 12px;\n  margin-right: 10px;\n  cursor: pointer;\n"]);
 
   _templateObject23 = function _templateObject23() {
     return data;
@@ -44,7 +54,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n  font-size: 12px;\n  margin-right: 10px;\n  cursor: pointer;\n"]);
+  var data = _taggedTemplateLiteral(["\n      color: #d3d3d3;\n      pointer-events: none;\n    "]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -64,7 +74,7 @@ function _templateObject21() {
 }
 
 function _templateObject20() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 10px 5px;\n\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: black;\n    ", ";\n  }\n\n  .prev {\n    transform: rotateY(175deg);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 10px 5px;\n\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: black;\n  }\n\n  .prev {\n    transform: rotateY(175deg);\n    ", ";\n  }\n\n  .next {\n    ", ";\n  }\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -356,22 +366,25 @@ exports.UserListFoot = UserListFoot;
 var PaginationList = _styledComponents.default.div(_templateObject20(), function (_ref3) {
   var disabled = _ref3.disabled;
   return disabled && (0, _styledComponents.css)(_templateObject21());
+}, function (_ref4) {
+  var disabled = _ref4.disabled;
+  return disabled && (0, _styledComponents.css)(_templateObject22());
 });
 
 exports.PaginationList = PaginationList;
 
-var PaginationItem = _styledComponents.default.span(_templateObject22());
+var PaginationItem = _styledComponents.default.span(_templateObject23());
 
 exports.PaginationItem = PaginationItem;
 
-var EmptyWrapper = _styledComponents.default.div(_templateObject23());
+var EmptyWrapper = _styledComponents.default.div(_templateObject24());
 
 exports.EmptyWrapper = EmptyWrapper;
 
-var SkeletonContainer = _styledComponents.default.div(_templateObject24());
+var SkeletonContainer = _styledComponents.default.div(_templateObject25());
 
 exports.SkeletonContainer = SkeletonContainer;
 
-var SpinnerLoadWrapper = _styledComponents.default.div(_templateObject25());
+var SpinnerLoadWrapper = _styledComponents.default.div(_templateObject26());
 
 exports.SpinnerLoadWrapper = SpinnerLoadWrapper;

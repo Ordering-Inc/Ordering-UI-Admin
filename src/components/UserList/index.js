@@ -12,7 +12,6 @@ import CgCheckR from '@meronex/icons/cg/CgCheckR'
 import BiSquareRounded from '@meronex/icons/bi/BiSquareRounded'
 import BsFillPlayFill from '@meronex/icons/bs/BsFillPlayFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import TiMediaPlayReverse from '@meronex/icons/ti/TiMediaPlayReverse'
 import { useTheme } from 'styled-components'
 import {
   UserListContainer,
@@ -253,7 +252,7 @@ export const UserList = (props) => {
                     {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
                   </PaginationItem>
                   <BsFillPlayFill disabled={!(paginationProps?.currentPage > 1)} className='prev' onClick={() => prevNextPage(false)} />
-                  <BsFillPlayFill disabled={paginationProps?.totalPages === paginationProps?.currentPage} onClick={() => prevNextPage(true)} />
+                  <BsFillPlayFill disabled={paginationProps?.totalPages === paginationProps?.currentPage} className="next" onClick={() => prevNextPage(true)} />
                 </PaginationList>
               </td>
             </HeaderTR>

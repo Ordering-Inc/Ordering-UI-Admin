@@ -35,8 +35,6 @@ var _BsFillPlayFill = _interopRequireDefault(require("@meronex/icons/bs/BsFillPl
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
-var _TiMediaPlayReverse = _interopRequireDefault(require("@meronex/icons/ti/TiMediaPlayReverse"));
-
 var _styledComponents = require("styled-components");
 
 var _style = require("./style");
@@ -201,6 +199,7 @@ var UserList = function UserList(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_BsFillPlayFill.default, {
     disabled: (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) === (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage),
+    className: "next",
     onClick: function onClick() {
       return prevNextPage(true);
     }
