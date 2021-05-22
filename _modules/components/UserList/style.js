@@ -64,7 +64,7 @@ function _templateObject22() {
 }
 
 function _templateObject21() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0px;\n  outline: none;\n  border: none;\n  margin: 0 3px;\n  background: transparent;\n  color: black;\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0px;\n  outline: none;\n  border: none;\n  margin: 0 3px;\n  background: transparent;\n  color: black;\n  ", ";\n\n  .prev {\n    transform: rotateY(180deg);\n  }\n"]);
 
   _templateObject21 = function _templateObject21() {
     return data;

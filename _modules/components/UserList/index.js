@@ -203,9 +203,7 @@ var UserList = function UserList(props) {
     onClick: function onClick() {
       return prevNextPage(true);
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsFillPlayFill.default, {
-    className: "next"
-  }))))))), spinLoading && /*#__PURE__*/_react.default.createElement(_style.SpinnerLoadWrapper, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, /*#__PURE__*/_react.default.createElement(_BsFillPlayFill.default, null))))))), spinLoading && /*#__PURE__*/_react.default.createElement(_style.SpinnerLoadWrapper, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modals.formOpen,
     width: "70%",
     onClose: function onClose() {

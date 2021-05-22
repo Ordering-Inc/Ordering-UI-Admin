@@ -184,6 +184,10 @@ export const PageButton = styled.button`
     color: #d3d3d3;
     pointer-events: none;
   `};
+
+  .prev {
+    transform: rotateY(180deg);
+  }
 `
 
 export const PaginationItem = styled.span`

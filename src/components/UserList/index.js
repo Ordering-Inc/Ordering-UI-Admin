@@ -259,7 +259,7 @@ export const UserList = (props) => {
                     disabled={paginationProps?.totalPages === paginationProps?.currentPage || paginationProps?.totalPages === 1}
                     onClick={() => prevNextPage(true)}
                   >
-                    <BsFillPlayFill className="next" />
+                    <BsFillPlayFill />
                   </PageButton>
                 </PaginationList>
               </td>
