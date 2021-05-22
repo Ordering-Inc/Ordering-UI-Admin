@@ -84,7 +84,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     disabled: disabled,
     placeholder: "00 00 00",
-    defaultCountry: configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value,
+    defaultCountry: (user === null || user === void 0 ? void 0 : user.country_phone_code) || (configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value),
     value: value,
     displayInitialValueAsLocalNumber: true,
     onChange: function onChange(val) {

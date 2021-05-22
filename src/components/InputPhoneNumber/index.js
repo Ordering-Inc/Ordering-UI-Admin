@@ -42,7 +42,7 @@ export const InputPhoneNumber = (props) => {
         <PhoneInput
           disabled={disabled}
           placeholder='00 00 00'
-          defaultCountry={configs?.default_country_code?.value}
+          defaultCountry={user?.country_phone_code || configs?.default_country_code?.value}
           value={value}
           displayInitialValueAsLocalNumber
           onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}

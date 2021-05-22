@@ -162,6 +162,7 @@ flex-direction: column;
 align-items: center;
 width: 100%;
 margin: 0 auto;
+margin-bottom: 40px;
 div.phone_number {
   margin-bottom: 20px;
   width: 100%;
