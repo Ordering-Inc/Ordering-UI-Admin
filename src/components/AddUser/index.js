@@ -322,7 +322,7 @@ const AddUserUI = (props) => {
                   defaultChecked={formState?.changes?.enabled || false}
                   onChange={(enabled) => setFormState({
                     ...formState,
-                    changes: { ...formState?.changes, level: enabled }
+                    changes: { ...formState?.changes, enabled: enabled }
                   })}
                 />
                 <RectButton

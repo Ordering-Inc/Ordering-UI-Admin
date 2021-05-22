@@ -12,10 +12,10 @@ export const ToggleSwitchContainer = styled.label`
     height: 0;
 
     &:checked + span {
-      background-color: ${props => props.theme.colors.primary};
+      background-color: ${props => props.theme.colors.btnDarkBlue};
     }
     &:focus + span {
-      box-shadow: 0 0 1px ${props => props.theme.colors.primary};
+      box-shadow: 0 0 1px ${props => props.theme.colors.btnDarkBlue};
     }
     &:checked + span:before {
       -webkit-transform: translateX(26px);

@@ -120,6 +120,10 @@ export const InputWrapper = styled.div`
   input[type=tel] {
     border: 1px solid #707070 !important;
   }
+
+  span {
+    color: red;
+  }
   @media (min-width: 769px) {
     width: 49%;
     input {

@@ -54,7 +54,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: start;\n  width: 100%;\n  input {\n    border-radius: 5px !important;\n  }\n\n  .PhoneInputCountry {\n    border: 1px solid #707070;\n    border-radius: 5px;\n    padding: 5px 15px;\n  }\n\n  input[type=tel] {\n    border: 1px solid #707070 !important;\n  }\n  @media (min-width: 769px) {\n    width: 49%;\n    input {\n      width: 100% !important;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: start;\n  width: 100%;\n  input {\n    border-radius: 5px !important;\n  }\n\n  .PhoneInputCountry {\n    border: 1px solid #707070;\n    border-radius: 5px;\n    padding: 5px 15px;\n  }\n\n  input[type=tel] {\n    border: 1px solid #707070 !important;\n  }\n\n  span {\n    color: red;\n  }\n  @media (min-width: 769px) {\n    width: 49%;\n    input {\n      width: 100% !important;\n    }\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;

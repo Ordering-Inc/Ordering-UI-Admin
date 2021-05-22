@@ -370,7 +370,7 @@ var AddUserUI = function AddUserUI(props) {
     onChange: function onChange(enabled) {
       return setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
-          level: enabled
+          enabled: enabled
         })
       }));
     }

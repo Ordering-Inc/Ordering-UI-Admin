@@ -32,9 +32,9 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var ToggleSwitchContainer = _styledComponents.default.label(_templateObject(), function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.btnDarkBlue;
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.btnDarkBlue;
 });
 
 exports.ToggleSwitchContainer = ToggleSwitchContainer;
