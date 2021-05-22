@@ -35,7 +35,8 @@ import {
   HeaderTR,
   EmptyWrapper,
   SkeletonContainer,
-  SpinnerLoadWrapper
+  SpinnerLoadWrapper,
+  PageButton
 } from './style'
 
 export const UserList = (props) => {
@@ -251,8 +252,15 @@ export const UserList = (props) => {
                   <PaginationItem>
                     {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
                   </PaginationItem>
-                  <BsFillPlayFill disabled className='prev' onClick={() => prevNextPage(false)} />
-                  <BsFillPlayFill disabled={paginationProps?.totalPages === paginationProps?.currentPage} className="next" onClick={() => prevNextPage(true)} />
+                  <PageButton disabled={paginationProps?.currentPage === 1} onClick={() => prevNextPage(false)}>
+                    <BsFillPlayFill className='prev' />
+                  </PageButton>
+                  <PageButton
+                    disabled={paginationProps?.totalPages === paginationProps?.currentPage || paginationProps?.totalPages === 1}
+                    onClick={() => prevNextPage(true)}
+                  >
+                    <BsFillPlayFill className="next" />
+                  </PageButton>
                 </PaginationList>
               </td>
             </HeaderTR>

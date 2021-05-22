@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SpinnerLoadWrapper = exports.SkeletonContainer = exports.EmptyWrapper = exports.PaginationItem = exports.PaginationList = exports.UserListFoot = exports.BodyActionContent = exports.BodyActionContainer = exports.UserListStatusRound = exports.UserAvatarSection = exports.UserListFooter = exports.BodyCheckSection = exports.BodyItemContent = exports.UserListBodyItem = exports.UserListBody = exports.HeaderItemActionContent = exports.HeaderItemEditContent = exports.HeaderItemContent = exports.UserListHeaderItem = exports.UserListTR = exports.HeaderTR = exports.UserListHeader = exports.UserListContainer = void 0;
+exports.SpinnerLoadWrapper = exports.SkeletonContainer = exports.EmptyWrapper = exports.PaginationItem = exports.PageButton = exports.PaginationList = exports.UserListFoot = exports.BodyActionContent = exports.BodyActionContainer = exports.UserListStatusRound = exports.UserAvatarSection = exports.UserListFooter = exports.BodyCheckSection = exports.BodyItemContent = exports.UserListBodyItem = exports.UserListBody = exports.HeaderItemActionContent = exports.HeaderItemEditContent = exports.HeaderItemContent = exports.UserListHeaderItem = exports.UserListTR = exports.HeaderTR = exports.UserListHeader = exports.UserListContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -54,7 +54,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n      color: #d3d3d3;\n      pointer-events: none;\n    "]);
+  var data = _taggedTemplateLiteral(["\n    color: #d3d3d3;\n    pointer-events: none;\n  "]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -64,7 +64,7 @@ function _templateObject22() {
 }
 
 function _templateObject21() {
-  var data = _taggedTemplateLiteral(["\n      color: #d3d3d3;\n      pointer-events: none;\n    "]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0px;\n  outline: none;\n  border: none;\n  margin: 0 3px;\n  background: transparent;\n  color: black;\n  ", ";\n"]);
 
   _templateObject21 = function _templateObject21() {
     return data;
@@ -74,7 +74,7 @@ function _templateObject21() {
 }
 
 function _templateObject20() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 10px 5px;\n\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: black;\n  }\n\n  .prev {\n    transform: rotateY(175deg);\n    ", ";\n  }\n\n  .next {\n    ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 10px 5px;\n\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n  }\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -363,15 +363,16 @@ var UserListFoot = _styledComponents.default.tfoot(_templateObject19());
 
 exports.UserListFoot = UserListFoot;
 
-var PaginationList = _styledComponents.default.div(_templateObject20(), function (_ref3) {
+var PaginationList = _styledComponents.default.div(_templateObject20());
+
+exports.PaginationList = PaginationList;
+
+var PageButton = _styledComponents.default.button(_templateObject21(), function (_ref3) {
   var disabled = _ref3.disabled;
-  return disabled && (0, _styledComponents.css)(_templateObject21());
-}, function (_ref4) {
-  var disabled = _ref4.disabled;
   return disabled && (0, _styledComponents.css)(_templateObject22());
 });
 
-exports.PaginationList = PaginationList;
+exports.PageButton = PageButton;
 
 var PaginationItem = _styledComponents.default.span(_templateObject23());
 

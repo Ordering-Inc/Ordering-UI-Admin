@@ -169,23 +169,21 @@ export const PaginationList = styled.div`
   svg {
     cursor: pointer;
     font-size: 20px;
-    color: black;
   }
+`
 
-  .prev {
-    transform: rotateY(175deg);
-    ${({ disabled }) => disabled && css`
-      color: #d3d3d3;
-      pointer-events: none;
-    `};
-  }
-
-  .next {
-    ${({ disabled }) => disabled && css`
-      color: #d3d3d3;
-      pointer-events: none;
-    `};
-  }
+export const PageButton = styled.button`
+  display: flex;
+  padding: 0px;
+  outline: none;
+  border: none;
+  margin: 0 3px;
+  background: transparent;
+  color: black;
+  ${({ disabled }) => disabled && css`
+    color: #d3d3d3;
+    pointer-events: none;
+  `};
 `
 
 export const PaginationItem = styled.span`
