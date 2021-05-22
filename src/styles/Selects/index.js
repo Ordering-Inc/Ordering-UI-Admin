@@ -16,6 +16,10 @@ export const Option = styled.div`
     opacity: 0.6;
   `}
 
+  ${({ showDisable }) => showDisable && css`
+    display: none;
+  `}
+
   ${({ optionBottomBorder }) => optionBottomBorder && css`
       border-bottom: 1px solid #D8D8D8;
   `}

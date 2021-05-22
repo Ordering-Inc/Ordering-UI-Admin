@@ -9,6 +9,7 @@ import { CitySelector } from '../CitySelector'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
 import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
+import { Input } from '../../styles/Inputs'
 
 import {
   FilterGroupListContainer,
@@ -36,7 +37,8 @@ const FilterGroupListUI = (props) => {
     handleChangeDeliveryType,
     handleChangePaymethodType,
     handleResetFilterValues,
-    handleChangeFilterValues
+    handleChangeFilterValues,
+    handleChangeOrderId
   } = props
 
   const [, t] = useLanguage()
@@ -64,6 +66,15 @@ const FilterGroupListUI = (props) => {
       onCancel={() => handleClearFilter()}
     >
       <FilterGroupListContainer className='filter-modal'>
+        <WrapperRow>
+          <Input
+            type='text'
+            placeholder='ID'
+            autoComplete='off'
+            value={filterValues?.orderId || ''}
+            onChange={(e) => handleChangeOrderId(e)}
+          />
+        </WrapperRow>
         <WrapperRow>
           <GroupTypeSelector
             driverGroupList={driverGroupList}
