@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import GrFilter from '@meronex/icons/gr/GrFilter'
 import { RectButton } from '../../styles/Buttons'
 import MdAddCircleOutline from '@meronex/icons/ios/MdAddCircleOutline'
 import MdcFilterOutline from '@meronex/icons/mdc/MdcFilterOutline'
@@ -41,8 +40,7 @@ export const ActionsSection = (props) => {
               placeholder={t('SEARCH', 'Search')}
             />
           </SearchContent>
-          <GrFilter onClick={() => setModals({ ...modals, formOpen: true })} />
-          <FilterButton>
+          <FilterButton onClick={() => setModals({ ...modals, formOpen: true })}>
             {(filterValues?.changes && Object.keys(filterValues?.changes) > 0)
               ? <MdcFilterOutline />
               : <MdcFilterOff />

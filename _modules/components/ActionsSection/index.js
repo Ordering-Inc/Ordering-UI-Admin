@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _GrFilter = _interopRequireDefault(require("@meronex/icons/gr/GrFilter"));
-
 var _Buttons = require("../../styles/Buttons");
 
 var _MdAddCircleOutline = _interopRequireDefault(require("@meronex/icons/ios/MdAddCircleOutline"));
@@ -88,13 +86,13 @@ var ActionsSection = function ActionsSection(props) {
     search: searchVal,
     onSearch: onSearch,
     placeholder: t('SEARCH', 'Search')
-  })), /*#__PURE__*/_react.default.createElement(_GrFilter.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.FilterButton, {
     onClick: function onClick() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: true
       }));
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.FilterButton, null, (filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) && Object.keys(filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) > 0 ? /*#__PURE__*/_react.default.createElement(_MdcFilterOutline.default, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_UserExport.UserExport, props)), /*#__PURE__*/_react.default.createElement(_styles.AddUserContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
+  }, (filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) && Object.keys(filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) > 0 ? /*#__PURE__*/_react.default.createElement(_MdcFilterOutline.default, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_UserExport.UserExport, props)), /*#__PURE__*/_react.default.createElement(_styles.AddUserContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     onClick: function onClick() {
       return setAddUserModal(_objectSpread(_objectSpread({}, addUserModal), {}, {
         formOpen: true
