@@ -252,12 +252,8 @@ export const UserList = (props) => {
                   <PaginationItem>
                     {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
                   </PaginationItem>
-                  {
-                    <BsFillPlayFill active={paginationProps?.currentPage > 1} className='prev' onClick={() => prevNextPage(false)} />
-                  }
-                  {
-                    <BsFillPlayFill active={paginationProps?.totalPages !== paginationProps?.currentPage} className='next' onClick={() => prevNextPage(true)} />
-                  }
+                  <BsFillPlayFill isActive={paginationProps?.currentPage > 1} className='prev' onClick={() => prevNextPage(false)} />
+                  <BsFillPlayFill isActive={paginationProps?.totalPages !== paginationProps?.currentPage} className='next' onClick={() => prevNextPage(true)} />
                 </PaginationList>
               </td>
             </HeaderTR>

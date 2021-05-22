@@ -354,8 +354,8 @@ var UserListFoot = _styledComponents.default.tfoot(_templateObject19());
 exports.UserListFoot = UserListFoot;
 
 var PaginationList = _styledComponents.default.div(_templateObject20(), function (_ref3) {
-  var active = _ref3.active;
-  return !active && (0, _styledComponents.css)(_templateObject21());
+  var isActive = _ref3.isActive;
+  return !isActive && (0, _styledComponents.css)(_templateObject21());
 });
 
 exports.PaginationList = PaginationList;
