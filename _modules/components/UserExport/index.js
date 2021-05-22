@@ -94,6 +94,8 @@ var UserExportUI = function UserExportUI(props) {
 };
 
 var UserExport = function UserExport(props) {
+  console.log(props);
+
   var userExportProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserExportUI,
     filterValues: props.filterValues
