@@ -3,6 +3,8 @@ import { useLanguage } from 'ordering-components-admin'
 import GrFilter from '@meronex/icons/gr/GrFilter'
 import { RectButton } from '../../styles/Buttons'
 import MdAddCircleOutline from '@meronex/icons/ios/MdAddCircleOutline'
+import MdcFilterOutline from '@meronex/icons/mdc/MdcFilterOutline'
+import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { Modal } from '../Modal'
 
 import { UserExport } from '../UserExport'
@@ -14,13 +16,15 @@ import {
   FilterContainer,
   SearchContent,
   ExportContainer,
-  AddUserContainer
+  AddUserContainer,
+  FilterButton
 } from './styles'
 
 export const ActionsSection = (props) => {
   const {
     searchVal,
-    onSearch
+    onSearch,
+    filterValues
   } = props
   const [, t] = useLanguage()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
@@ -38,6 +42,12 @@ export const ActionsSection = (props) => {
             />
           </SearchContent>
           <GrFilter onClick={() => setModals({ ...modals, formOpen: true })} />
+          <FilterButton>
+            {(filterValues?.changes && Object.keys(filterValues?.changes) > 0)
+              ? <MdcFilterOutline />
+              : <MdcFilterOff />
+            }
+          </FilterButton>
         </FilterContainer>
         <ExportContainer>
           <UserExport

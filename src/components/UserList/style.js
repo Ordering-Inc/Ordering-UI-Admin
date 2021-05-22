@@ -167,9 +167,17 @@ export const PaginationList = styled.div`
   padding: 10px 5px;
 
   svg {
-    color: #d3d3d3;
     cursor: pointer;
     font-size: 20px;
+    color: black;
+    ${({ isLoading }) => isLoading && css`
+      color: #d3d3d3;
+      pointer-events: none;
+    `};
+  }
+
+  .prev {
+    transform: rotateY(175deg);
   }
 `
 
@@ -177,7 +185,6 @@ export const PaginationItem = styled.span`
   font-size: 12px;
   margin-right: 10px;
   cursor: pointer;
-  color: ${({ active }) => active ? '#38a1f4' : '#d3d3d3'};
 `
 export const EmptyWrapper = styled.div`
   display: flex;

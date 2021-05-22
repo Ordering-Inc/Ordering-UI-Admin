@@ -17,6 +17,10 @@ var _Buttons = require("../../styles/Buttons");
 
 var _MdAddCircleOutline = _interopRequireDefault(require("@meronex/icons/ios/MdAddCircleOutline"));
 
+var _MdcFilterOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcFilterOutline"));
+
+var _MdcFilterOff = _interopRequireDefault(require("@meronex/icons/mdc/MdcFilterOff"));
+
 var _Modal = require("../Modal");
 
 var _UserExport = require("../UserExport");
@@ -57,7 +61,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ActionsSection = function ActionsSection(props) {
   var searchVal = props.searchVal,
-      onSearch = props.onSearch;
+      onSearch = props.onSearch,
+      filterValues = props.filterValues;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -89,7 +94,7 @@ var ActionsSection = function ActionsSection(props) {
         formOpen: true
       }));
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_UserExport.UserExport, props)), /*#__PURE__*/_react.default.createElement(_styles.AddUserContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FilterButton, null, (filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) && Object.keys(filterValues === null || filterValues === void 0 ? void 0 : filterValues.changes) > 0 ? /*#__PURE__*/_react.default.createElement(_MdcFilterOutline.default, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_UserExport.UserExport, props)), /*#__PURE__*/_react.default.createElement(_styles.AddUserContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.RectButton, {
     onClick: function onClick() {
       return setAddUserModal(_objectSpread(_objectSpread({}, addUserModal), {}, {
         formOpen: true

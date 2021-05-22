@@ -26,11 +26,6 @@ export const FilterContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  > svg {
-    cursor: pointer;
-    font-size: 18px;
-    margin: 0px 15px;
-  }
 `
 export const SearchContent = styled.div`
   position: relative;
@@ -94,3 +89,20 @@ export const AddUserContainer = styled.div`
     }
   }
 `
+
+export const FilterButton = styled.button`
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  margin: 0 15px;
+  font-size: 19px;
+  padding: 0px;
+  color: #1C202E;
+
+  &:active {
+    opacity: 0.5;
+  }
+`
+

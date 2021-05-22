@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddUserContainer = exports.ExportContainer = exports.SearchContent = exports.FilterContainer = exports.ActionsSectionContainer = void 0;
+exports.FilterButton = exports.AddUserContainer = exports.ExportContainer = exports.SearchContent = exports.FilterContainer = exports.ActionsSectionContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -14,6 +14,16 @@ var _polished = require("polished");
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n  border: none;\n  outline: none;\n  background: transparent;\n  cursor: pointer;\n  display: flex;\n  margin: 0 15px;\n  font-size: 19px;\n  padding: 0px;\n  color: #1C202E;\n\n  &:active {\n    opacity: 0.5;\n  }\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject6() {
   var data = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n  button {\n    width: 255px;\n    transition: all 0.3s;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    \n    @media (min-width: 576px) {\n      width: 150px;\n    }\n\n    > svg {\n      margin: 0px 10px;\n      color: ", ";\n      font-size: 22px;\n    }\n  }\n"]);
@@ -56,7 +66,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n  > svg {\n    cursor: pointer;\n    font-size: 18px;\n    margin: 0px 15px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -104,3 +114,7 @@ var AddUserContainer = _styledComponents.default.div(_templateObject6(), functio
 });
 
 exports.AddUserContainer = AddUserContainer;
+
+var FilterButton = _styledComponents.default.button(_templateObject7());
+
+exports.FilterButton = FilterButton;

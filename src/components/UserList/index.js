@@ -253,10 +253,10 @@ export const UserList = (props) => {
                     {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
                   </PaginationItem>
                   {
-                    paginationProps?.currentPage > 1 && <TiMediaPlayReverse onClick={() => prevNextPage(false)} />
+                    <BsFillPlayFill active={paginationProps?.currentPage > 1} className='prev' onClick={() => prevNextPage(false)} />
                   }
                   {
-                    paginationProps?.totalPages !== paginationProps?.currentPage && <BsFillPlayFill onClick={() => prevNextPage(true)} />
+                    <BsFillPlayFill active={paginationProps?.totalPages !== paginationProps?.currentPage} className='next' onClick={() => prevNextPage(true)} />
                   }
                 </PaginationList>
               </td>
