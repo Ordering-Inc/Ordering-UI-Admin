@@ -47,6 +47,20 @@ export const WrapperRow = styled.div`
     z-index: 100;
   }
 
+  > input {
+    width: 48%;
+    height: 65px;
+    color: #000;
+    box-sizing: border-box;
+    padding: 0 20px;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+  }
+
   @media (max-width: 1300px) {
     flex-direction: column;
     row-gap: 30px;
