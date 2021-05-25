@@ -108,7 +108,7 @@ var Header = function Header(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       return handleGoToPage({
-        page: 'orders-deliveries'
+        page: 'orders_deliveries'
       });
     }
   }, /*#__PURE__*/_react.default.createElement("img", {

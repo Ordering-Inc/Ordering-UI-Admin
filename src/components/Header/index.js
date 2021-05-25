@@ -76,7 +76,7 @@ export const Header = (props) => {
             <MobileMenu>
               <HiMenu onClick={() => setIsMobile(true)} />
             </MobileMenu>
-            <LogoHeader onClick={() => handleGoToPage({ page: 'orders-deliveries' })}>
+            <LogoHeader onClick={() => handleGoToPage({ page: 'orders_deliveries' })}>
               <img alt='Logotype' src={theme?.images?.logos?.logotype} />
               <img alt='Isotype' src={theme?.images?.logos?.isotype} />
             </LogoHeader>
