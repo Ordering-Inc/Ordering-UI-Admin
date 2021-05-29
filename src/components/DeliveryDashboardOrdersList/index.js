@@ -168,7 +168,7 @@ export const DeliveryDashboardOrdersList = (props) => {
   const [cancelledOrdersLoaded, setCancelledOrdersLoaded] = useState(false)
 
   useEffect(() => {
-    if (!activeSwitch.deliveries) return
+    if (!activeSwitch?.deliveries) return
     if (ordersStatusGroup === 'inProgress') {
       setInProgressOrdersLoaded(true)
     }

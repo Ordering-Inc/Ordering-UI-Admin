@@ -115,8 +115,9 @@ export const FormInput = styled.form`
     svg {
       position: absolute;
       right: 35px;
-      top: 8px;
+      top: 15px;
       font-size: 24px;
+      padding: 0px;
     }
   }
 `
@@ -245,13 +246,15 @@ export const InputWithIcon = styled.div`
   img {
     position: absolute;
     width: 20px;
-    padding: 8px 20px;
+    padding: 0px;
+    margin: 0 20px;
   }
 
   svg {
     position: absolute;
     font-size: 24px;
     color: #707070;
-    padding: 8px 20px;
+    padding: 0px;
+    margin: 0 20px;
   }
 `
