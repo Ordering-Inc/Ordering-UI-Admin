@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const OrderContentHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  overflow: auto;
   min-width: 300px;
 
   @media (max-width: 1200px) {
