@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AutoScroll } from '../../../../../components/AutoScroll'
+import { AutoScroll } from '../AutoScroll'
 
 import {
   OrderStatusFilterContainer,

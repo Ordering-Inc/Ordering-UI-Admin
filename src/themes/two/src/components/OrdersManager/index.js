@@ -17,6 +17,7 @@ import {
   OrderNotification
 } from './styles'
 import { OrdersDashboard } from '../OrdersDashboard'
+import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 
 toast.configure()
 
@@ -52,6 +53,13 @@ const OrdersManagerUI = (props) => {
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
+
+  const [selectedSubOrderStatus, setSelectedSubOrderStatus] = useState({
+    pending: 0,
+    inProgress: 7,
+    completed: 1,
+    cancelled: 2
+  })
 
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
@@ -194,6 +202,11 @@ const OrdersManagerUI = (props) => {
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
+        />
+        <OrderStatusSubFilter
+          ordersStatusGroup={ordersStatusGroup}
+          selectedSubOrderStatus={selectedSubOrderStatus}
+          setSelectedSubOrderStatus={setSelectedSubOrderStatus}
         />
         <OrdersContent>
           <OrdersInnerContent className='order-content'>

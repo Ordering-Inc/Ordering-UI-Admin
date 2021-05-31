@@ -5,6 +5,7 @@ export const OrdersListContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
+  overflow: hidden;
 `
 export const OrdersContent = styled.div`
 

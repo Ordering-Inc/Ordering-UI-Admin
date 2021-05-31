@@ -1,5 +1,5 @@
 import React from 'react'
-import { OrdersDashboardList } from '../../../../../components/OrdersDashboardList'
+import { OrdersDashboardList } from '../OrdersDashboardList'
 import {
   OrdersManageContainer
 } from './styles'

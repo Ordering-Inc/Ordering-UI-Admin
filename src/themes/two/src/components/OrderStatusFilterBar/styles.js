@@ -16,6 +16,6 @@ export const Tab = styled.div`
   `}
 
   ${({ active }) => !active && css`
-    color: ${props => props.theme.colors?.secundary};
+    color: #909BA9;
   `}
 `

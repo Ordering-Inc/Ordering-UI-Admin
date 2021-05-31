@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLanguage, CheckPassword as CheckPasswordController } from 'ordering-components-admin'
 import FaTrash from '@meronex/icons/fa/FaTrash'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { Button } from 'react-bootstrap'
+import { Button } from '../../styles/Buttons'
 import { Modal } from '../../../../../components/Modal'
 
 import {
@@ -47,7 +47,7 @@ const OrderDeleteUI = (props) => {
   return (
     <>
       <Button
-        variant='light'
+        color='secundary'
         onClick={() => handleModalOpen()}
       >
         {width > 600 && t('DELETE', 'Delete')}

@@ -4,13 +4,8 @@ export const OrderDashboardControlsContainer = styled.div`
   display: flex;
 
   button {
-    color: ${props => props.theme.colors?.secundary};
     margin: 0 7px;
     height: 42px;
-
-    &:hover {
-      border: 1px solid ${props => props.theme.colors?.secundary};
-    }
 
     svg {
       ${props => props.theme?.rtl ? css`
@@ -30,10 +25,10 @@ export const WrapOrderStatusTypeSelector = styled.div`
   margin: 0 7px;
   div.orderStatus {
     > div:first-child {
-      background-color: #f8f9fa;
+      background-color: ${props => props.theme.colors.secundary};
   
       p {
-        color: ${props => props.theme.colors.secundary};
+        color: ${props => props.theme.colors.secundaryContrast};
       }
     }
   }
