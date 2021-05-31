@@ -3,7 +3,7 @@ import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxLine from '@meronex/icons/ri/RiCheckboxLine'
+import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import Skeleton from 'react-loading-skeleton'
 import {
@@ -159,9 +159,9 @@ export const OrdersTable = (props) => {
                 <OrderNumberContainer
                   onClick={() => handleSelectedOrderIds(order.id)}
                 >
-                  <CheckBox>
+                  <CheckBox isChecked={selectedOrderIds.includes(order?.id)}>
                     {selectedOrderIds.includes(order?.id) ? (
-                      <RiCheckboxLine />
+                      <RiCheckboxFill />
                     ): (
                       <RiCheckboxBlankLine />
                     )}

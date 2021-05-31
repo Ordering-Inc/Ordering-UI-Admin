@@ -32,9 +32,7 @@ export const AllowItem = styled.div`
   color: ${props => props.theme.colors?.headingColor};
   padding: 7px;
   cursor: pointer;
-  svg {
-    font-size: 20px;
-  }
+
   span {
     font-size: 14px;
     font-weight: 400;
@@ -44,4 +42,17 @@ export const AllowItem = styled.div`
       margin-left: 10px;
     `}
   }
+`
+
+export const CheckBox = styled.div`
+  svg {
+    font-size: 24px;
+    color: ${props => props.theme.colors?.headingColor};
+  }
+
+  ${({ isChecked }) => isChecked && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
 `

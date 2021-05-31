@@ -147,6 +147,9 @@ export const CheckBox = styled.span`
     ` : css`
       margin-right: 10px;
     `}
+    ${({ isChecked }) => isChecked && css`
+      color: ${props => props.theme.colors?.primary};
+    `}
   }
 `
 

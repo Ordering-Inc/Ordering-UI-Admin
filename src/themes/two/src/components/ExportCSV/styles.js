@@ -21,3 +21,18 @@ export const Item = styled.div`
     background-color: #F2F2F2;
   }
 `
+
+export const ExportCSVResult = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    width: 100%;
+  }
+`
+
+export const ErrorMessage = styled.p`
+  text-align: center;
+  margin: 5px 0;
+`
