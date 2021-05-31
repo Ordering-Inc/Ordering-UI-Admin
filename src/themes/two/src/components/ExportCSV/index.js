@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components-admin'
-import { useLanguage } from 'ordering-components-admin'
-import { ExportCSV as ExportCSVController } from './naked'
+import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components-admin'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
@@ -45,7 +43,7 @@ const ExportCSVUI = (props) => {
   }, [popoverOpen])
 
   useEffect(() => {
-    if (actionStatus?.error) return
+    if (!actionStatus?.result || actionStatus?.error) return
     setModalOpen(true)
   }, [actionStatus])
 
@@ -84,7 +82,7 @@ const ExportCSVUI = (props) => {
           <h1 className='align-center'>{'ORDERING', 'Ordering'}</h1>
           {actionStatus?.result?.length > 0 && (
             actionStatus?.result.map((e, i) => (
-              <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+              <ErrorMessage key={i}>{e?.message || e}</ErrorMessage>
             )
           ))}
           <Button

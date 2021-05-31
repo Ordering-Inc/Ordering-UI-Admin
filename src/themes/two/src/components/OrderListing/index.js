@@ -112,6 +112,7 @@ export const OrderListing = (props) => {
             loadMoreOrders={loadMoreOrders}
             handleUpdateOrderStatus={handleUpdateOrderStatus}
             handleSelectedOrderIds={handleSelectedOrderIds}
+            handleOpenOrderDetail={handleOpenOrderDetail}
           />
         </WrapperOrderListContent>
       )}

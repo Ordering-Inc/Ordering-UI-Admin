@@ -37,7 +37,8 @@ export const OrdersTable = (props) => {
     selectedOrderIds,
     loadMoreOrders,
     handleUpdateOrderStatus,
-    handleSelectedOrderIds
+    handleSelectedOrderIds,
+    handleOpenOrderDetail
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -93,6 +94,11 @@ export const OrdersTable = (props) => {
       ...allowColumns,
       [type]: !allowColumns[type]
     })
+  }
+
+  const handleClickOrder = (orderId, e) => {
+    if (e.target.closest('.orderNo')) return
+    handleOpenOrderDetail(orderId)
   }
 
   const handleScroll = useCallback(() => {
@@ -152,7 +158,10 @@ export const OrdersTable = (props) => {
         </thead>
         <tbody id='orders'>
           {!(orderList.loading || driversList.loading) ? orderList?.orders.map(order => (
-            <tr key={order.id}>
+            <tr
+              key={order.id}
+              onClick={(e) => handleClickOrder(order.id, e)}
+            >
               <td
                 className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
               >
@@ -306,7 +315,7 @@ export const OrdersTable = (props) => {
                 >
                   <OrderNumberContainer>
                     <CheckBox>
-                      <Skeleton width={30} height={30} style={{ margin: '10px' }} />
+                      <Skeleton width={25} height={25} style={{ margin: '10px' }} />
                     </CheckBox>
                     <div className='info'>
                       {allowColumns?.orderNumber && (

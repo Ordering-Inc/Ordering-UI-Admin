@@ -56,11 +56,8 @@ const OrderDeleteUI = (props) => {
       </Button>
 
       <Modal
-        width='70%'
         open={checkPasswordModalOpen}
         onClose={() => setCheckPasswordModalOpen(false)}
-        acceptText={t('DELETE', 'Delete')}
-        onAccept={() => getCheckPassword()}
       >
         <WrapperCheckPassword>
           <h3>{t('CONFIRM_PASSWORD', 'Confirm password')}</h3>
@@ -75,6 +72,12 @@ const OrderDeleteUI = (props) => {
           <ErrorText>
             {checkPasswordStatus.error}
           </ErrorText>
+          <Button
+            color='primary'
+            onClick={() => getCheckPassword()}
+          >
+            {t('DELETE', 'Delete')}
+          </Button>
         </WrapperCheckPassword>
       </Modal>
     </>

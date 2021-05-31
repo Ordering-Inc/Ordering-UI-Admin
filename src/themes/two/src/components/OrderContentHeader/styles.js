@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const OrderContentHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  overflow: auto;
+  min-width: 300px;
 
   @media (max-width: 1200px) {
     flex-direction: column;
@@ -32,10 +34,12 @@ export const HeaderTitle = styled.p`
 `
 export const TopRightSection = styled.div`
   display: flex;
-  align-items: center;
-
-  @media (max-width: 1200px) {
-    justify-content: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+  
+  @media (min-width: 992px) {
+    flex-direction: row;
+    align-items: center;
   }
 `
 export const FilterButton = styled.button`
@@ -61,5 +65,9 @@ export const FilterButton = styled.button`
 export const WrapperSearchAndFilter = styled.div`
   display: flex;
   align-items: center;
-  flex: 1;
+  margin: 20px 0 10px 0;
+
+  @media (min-width: 992px) {
+    margin: 0px;
+  }
 `

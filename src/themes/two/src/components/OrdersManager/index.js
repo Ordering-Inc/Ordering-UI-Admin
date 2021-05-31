@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
-import { OrderDetails } from '../../../../../components/OrderDetails'
+import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../../../../../components/Modal'
 import { Button } from '../../../../../styles/Buttons'
 import {
@@ -227,17 +227,14 @@ const OrdersManagerUI = (props) => {
         </OrdersContent>
       </OrdersListContainer>
 
-      <Modal
-        width='90%'
-        height='90vh'
-        open={isOpenOrderDetail}
-        onClose={() => handleBackRedirect()}
-      >
+      {isOpenOrderDetail && (
         <OrderDetails
+          open={isOpenOrderDetail}
           orderId={orderDetailId}
           driversList={driversList}
+          onClose={() => setIsOpenOrderDetail(false)}
         />
-      </Modal>
+      )}
 
       <Modal
         width='50%'
