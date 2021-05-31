@@ -2,14 +2,16 @@ import styled, { css } from 'styled-components'
 
 export const SubFilterContainer = styled.div`
   width: 100%;
-  overflow: hidden;
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
 
   button {
-    margin: 20px 10px;
+    margin: 5px;
     white-space: nowrap;
 
     svg {
-      font-size: 24px;
+      font-size: 20px;
 
       ${props => props.theme?.rtl ? css`
         margin-right: 10px;
@@ -18,8 +20,4 @@ export const SubFilterContainer = styled.div`
       `}
     }
   }
-`
-
-export const InnerConatiner = styled.div`
-  display: flex;
 `

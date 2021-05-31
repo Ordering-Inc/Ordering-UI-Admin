@@ -218,6 +218,7 @@ const OrdersManagerUI = (props) => {
                 deletedOrderId={deletedOrderId}
                 driversList={driversList}
                 ordersStatusGroup={ordersStatusGroup}
+                selectedSubOrderStatus={selectedSubOrderStatus}
                 handleSelectedOrderIds={handleSelectedOrderIds}
                 handleOpenOrderDetail={handleOpenOrderDetail}
               />

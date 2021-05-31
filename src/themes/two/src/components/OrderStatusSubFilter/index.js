@@ -1,10 +1,8 @@
 import React from 'react'
 import { Button } from '../../styles/Buttons'
-import { AutoScroll } from '../AutoScroll'
 import MdClose from '@meronex/icons/ios/MdClose'
 import {
-  SubFilterContainer,
-  InnerConatiner
+  SubFilterContainer
 } from './styles'
 
 export const OrderStatusSubFilter = (props) => {
@@ -82,26 +80,22 @@ export const OrderStatusSubFilter = (props) => {
   }
   return (
     <SubFilterContainer>
-      <InnerConatiner>
-        <AutoScroll scrollId='subfilter'>
-          {statues[ordersStatusGroup].map(status => (
-            <Button
-              key={status.key}
-              color={(selectedSubOrderStatus?.pending === status.key ||
-                selectedSubOrderStatus?.inProgress === status.key ||
-                selectedSubOrderStatus?.completed === status.key ||
-                selectedSubOrderStatus?.cancelled === status.key) ? 'primary' : 'secundary'}
-              onClick={() => handleChange(status.key)}
-            >
-              {status.value}
-              {(selectedSubOrderStatus?.pending === status.key ||
-                selectedSubOrderStatus?.inProgress === status.key ||
-                selectedSubOrderStatus?.completed === status.key ||
-                selectedSubOrderStatus?.cancelled === status.key) && <MdClose />}
-            </Button>
-          ))}
-        </AutoScroll>
-      </InnerConatiner>
+      {statues[ordersStatusGroup].map(status => (
+        <Button
+          key={status.key}
+          color={(selectedSubOrderStatus?.pending === status.key ||
+            selectedSubOrderStatus?.inProgress === status.key ||
+            selectedSubOrderStatus?.completed === status.key ||
+            selectedSubOrderStatus?.cancelled === status.key) ? 'primary' : 'secundary'}
+          onClick={() => handleChange(status.key)}
+        >
+          {status.value}
+          {(selectedSubOrderStatus?.pending === status.key ||
+            selectedSubOrderStatus?.inProgress === status.key ||
+            selectedSubOrderStatus?.completed === status.key ||
+            selectedSubOrderStatus?.cancelled === status.key) && <MdClose />}
+        </Button>
+      ))}
     </SubFilterContainer>
   )
 }

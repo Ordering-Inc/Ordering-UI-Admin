@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DashboardOrdersList as OrdersListController, useLanguage } from 'ordering-components-admin'
-import { OrderListing } from '../../../../../components/OrderListing'
+import { OrderListing } from '../OrderListing'
 import { WrapperOrderlist } from './styles'
 
 export const OrdersDashboardList = (props) => {
@@ -14,7 +14,8 @@ export const OrdersDashboardList = (props) => {
     ordersStatusGroup,
     handleSelectedOrderIds,
     activeSwitch,
-    handleOpenOrderDetail
+    handleOpenOrderDetail,
+    selectedSubOrderStatus
   } = props
   const [, t] = useLanguage()
 
@@ -170,60 +171,84 @@ export const OrdersDashboardList = (props) => {
       <WrapperOrderlist
         style={{ display: `${(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
       >
-        <OrdersListController
-          {...OrdersCommonControlProps}
-          {...PendingOrdersControlProps}
-        />
-        <OrdersListController
-          {...OrdersCommonControlProps}
-          {...PreOrdersControlProps}
-        />
+        {selectedSubOrderStatus?.pending === 0 && (
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...PendingOrdersControlProps}
+          />
+        )}
+        {selectedSubOrderStatus?.pending === 13 && (
+          <OrdersListController
+            {...OrdersCommonControlProps}
+            {...PreOrdersControlProps}
+          />
+        )}
       </WrapperOrderlist>
 
       {(inProgressOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
         <WrapperOrderlist
           style={{ display: `${(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
         >
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...AcceptedByBusinessOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...ReadyForPickupOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...AcceptedByDriverOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...DriverArrivedByBusinessOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...PickupCompletedByDriverOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...OrderNotReadyOrdersControlprops}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...DriverAlmostArrivedToBusinessOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...DriverAlmostArrivedToCustomerOrdersProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...CustomerAlmostArrivedToBusinessOrdersProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...CustomerArrivedToBusinessOrdersProps}
-          />
+          {selectedSubOrderStatus?.inProgress === 7 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...AcceptedByBusinessOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 4 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...ReadyForPickupOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 8 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...AcceptedByDriverOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 3 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...DriverArrivedByBusinessOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 9 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...PickupCompletedByDriverOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 14 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...OrderNotReadyOrdersControlprops}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 18 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...DriverAlmostArrivedToBusinessOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 19 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...DriverAlmostArrivedToCustomerOrdersProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 20 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...CustomerAlmostArrivedToBusinessOrdersProps}
+            />
+          )}
+          {selectedSubOrderStatus?.inProgress === 21 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...CustomerArrivedToBusinessOrdersProps}
+            />
+          )}
         </WrapperOrderlist>
       )}
 
@@ -231,18 +256,24 @@ export const OrdersDashboardList = (props) => {
         <WrapperOrderlist
           style={{ display: `${(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
         >
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...CompletedByAdminOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...DeliveryCompletedByDriverOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...PickupCompletedByCustomerOrdersControlProps}
-          />
+          {selectedSubOrderStatus?.completed === 1 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...CompletedByAdminOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.completed === 11 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...DeliveryCompletedByDriverOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.completed === 15 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...PickupCompletedByCustomerOrdersControlProps}
+            />
+          )}
         </WrapperOrderlist>
       )}
 
@@ -250,34 +281,48 @@ export const OrdersDashboardList = (props) => {
         <WrapperOrderlist
           style={{ display: `${(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
         >
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...RejectByAdminOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...RejectByBusinessOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...RejectByDriverOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...PickupFailedByDriverOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...DeliveryFailedByDriverOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...CancelledByCustomerOrdersControlProps}
-          />
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            {...NotPickedByCustomerOrdersControlProps}
-          />
+          {selectedSubOrderStatus?.cancelled === 2 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...RejectByAdminOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.cancelled === 5 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...RejectByBusinessOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.cancelled === 6 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...RejectByDriverOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.cancelled === 10 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...PickupFailedByDriverOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.cancelled === 12 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...DeliveryFailedByDriverOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.cancelled === 16 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...CancelledByCustomerOrdersControlProps}
+            />
+          )}
+          {selectedSubOrderStatus?.cancelled === 17 && (
+            <OrdersListController
+              {...OrdersCommonControlProps}
+              {...NotPickedByCustomerOrdersControlProps}
+            />
+          )}
         </WrapperOrderlist>
       )}
     </>
