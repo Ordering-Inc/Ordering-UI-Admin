@@ -3,7 +3,7 @@ import { useLanguage, useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
 import BsLayoutThreeColumns from '@meronex/icons/bs/BsLayoutThreeColumns'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxLine from '@meronex/icons/ri/RiCheckboxLine'
+import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import {
   HeaderItem,
   PopoverBody,
@@ -131,10 +131,11 @@ export const ColumnAllowSettingPopover = (props) => {
           {optionsDefault.map(option => (
             <AllowItem
               key={option.value}
+              isChecked={allowColumns[option.value]}
               onClick={() => handleChangeAllowColumns(option.value)}
             >
               {allowColumns[option.value] ? (
-                <RiCheckboxLine />
+                <RiCheckboxFill />
               ) : (
                 <RiCheckboxBlankLine />
               )}

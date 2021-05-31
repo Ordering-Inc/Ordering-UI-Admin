@@ -33,7 +33,7 @@ export const AllowItem = styled.div`
   padding: 7px;
   cursor: pointer;
   svg {
-    font-size: 20px;
+    font-size: 24px;
   }
   span {
     font-size: 14px;
@@ -44,4 +44,10 @@ export const AllowItem = styled.div`
       margin-left: 10px;
     `}
   }
+
+  ${({ isChecked }) => isChecked && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
 `
