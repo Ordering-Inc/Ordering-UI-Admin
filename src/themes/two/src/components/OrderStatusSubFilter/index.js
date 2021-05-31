@@ -47,33 +47,51 @@ export const OrderStatusSubFilter = (props) => {
   const handleChange = (status) => {
     switch (ordersStatusGroup) {
       case 'pending':
+        let pendingStatuses = [...selectedSubOrderStatus?.pending]
+        if (pendingStatuses.includes(status)) {
+          pendingStatuses = pendingStatuses.filter(_status => _status !== status)
+        } else {
+          pendingStatuses.push(status)
+        }
         setSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
-          pending: status
+          pending: pendingStatuses
         })
         break
       case 'inProgress':
+        let inProgressStatuses = [...selectedSubOrderStatus?.inProgress]
+        if (inProgressStatuses.includes(status)) {
+          inProgressStatuses = inProgressStatuses.filter(_status => _status !== status)
+        } else {
+          inProgressStatuses.push(status)
+        }
         setSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
-          inProgress: status
+          inProgress: inProgressStatuses
         })
         break
       case 'completed':
+        let completedStatuses = [...selectedSubOrderStatus?.completed]
+        if (completedStatuses.includes(status)) {
+          completedStatuses = completedStatuses.filter(_status => _status !== status)
+        } else {
+          completedStatuses.push(status)
+        }
         setSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
-          completed: status
+          completed: completedStatuses
         })
         break
       case 'cancelled':
+        let cancelledStatuses = [...selectedSubOrderStatus?.cancelled]
+        if (cancelledStatuses.includes(status)) {
+          cancelledStatuses = cancelledStatuses.filter(_status => _status !== status)
+        } else {
+          cancelledStatuses.push(status)
+        }
         setSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
-          cancelled: status
-        })
-        break
-      default:
-        setSelectedSubOrderStatus({
-          ...selectedSubOrderStatus,
-          pending: status
+          cancelled: cancelledStatuses
         })
         break
     }
@@ -83,17 +101,17 @@ export const OrderStatusSubFilter = (props) => {
       {statues[ordersStatusGroup].map(status => (
         <Button
           key={status.key}
-          color={(selectedSubOrderStatus?.pending === status.key ||
-            selectedSubOrderStatus?.inProgress === status.key ||
-            selectedSubOrderStatus?.completed === status.key ||
-            selectedSubOrderStatus?.cancelled === status.key) ? 'primary' : 'secundary'}
+          color={(selectedSubOrderStatus?.pending.includes(status.key) ||
+            selectedSubOrderStatus?.inProgress.includes(status.key) ||
+            selectedSubOrderStatus?.completed.includes(status.key) ||
+            selectedSubOrderStatus?.cancelled.includes(status.key)) ? 'primary' : 'secundary'}
           onClick={() => handleChange(status.key)}
         >
           {status.value}
-          {(selectedSubOrderStatus?.pending === status.key ||
-            selectedSubOrderStatus?.inProgress === status.key ||
-            selectedSubOrderStatus?.completed === status.key ||
-            selectedSubOrderStatus?.cancelled === status.key) && <MdClose />}
+          {(selectedSubOrderStatus?.pending.includes(status.key) ||
+            selectedSubOrderStatus?.inProgress.includes(status.key) ||
+            selectedSubOrderStatus?.completed.includes(status.key) ||
+            selectedSubOrderStatus?.cancelled.includes(status.key)) && <MdClose />}
         </Button>
       ))}
     </SubFilterContainer>

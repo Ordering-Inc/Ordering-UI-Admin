@@ -55,10 +55,10 @@ const OrdersManagerUI = (props) => {
   const [registerOrderIds, setRegisterOrderIds] = useState([])
 
   const [selectedSubOrderStatus, setSelectedSubOrderStatus] = useState({
-    pending: 0,
-    inProgress: 7,
-    completed: 1,
-    cancelled: 2
+    pending: [0],
+    inProgress: [7],
+    completed: [1],
+    cancelled: [2]
   })
 
   const handleBackRedirect = () => {
