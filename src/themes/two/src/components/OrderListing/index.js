@@ -108,8 +108,10 @@ export const OrderListing = (props) => {
             orderList={orderList}
             driversList={driversList}
             pagination={pagination}
+            selectedOrderIds={selectedOrderIds}
             loadMoreOrders={loadMoreOrders}
             handleUpdateOrderStatus={handleUpdateOrderStatus}
+            handleSelectedOrderIds={handleSelectedOrderIds}
           />
         </WrapperOrderListContent>
       )}

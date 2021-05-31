@@ -47,6 +47,7 @@ const OrderDeleteUI = (props) => {
   return (
     <>
       <Button
+        rectangle
         color='secundary'
         onClick={() => handleModalOpen()}
       >

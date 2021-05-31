@@ -76,16 +76,6 @@ export const SidebarMenu = (props) => {
     })
   }
 
-  useEffect(() => {
-    if (windowSize.width < 1200) {
-      setIsCollapse(true)
-    }
-  }, [windowSize.width])
-
-  useEffect(() => {
-    console.log(showSubmenu)
-  }, [])
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

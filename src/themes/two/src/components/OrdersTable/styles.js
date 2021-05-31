@@ -27,6 +27,10 @@ export const Table = styled.table`
     display: block;
     tr {
       width: 100%;
+
+      th {
+        color: ${props => props.theme.colors?.headingColor};
+      }
     }
   }
 
@@ -38,6 +42,7 @@ export const Table = styled.table`
 
     tr {
       width: 100%;
+      cursor: pointer;
     }
   }
 
@@ -50,6 +55,11 @@ export const Table = styled.table`
   .orderNo {
     min-width: 190px;
     max-width: 190px;
+  }
+
+  .small {
+    min-width: 60px;
+    max-width: 60px;
   }
 
   .businessInfo {
@@ -82,26 +92,30 @@ export const Table = styled.table`
     max-width: 220px;
   }
 
-  .fromNow {
-    min-width: 115px;
-    max-width: 115px;
-  }
-
   .orderPrice {
-    width: 100px;
+    min-width: 120px;
+    max-width: 120px;
+
+    div.info {
+      p {
+        ${props => props.theme?.rtl ? css`
+          text-align: left;
+        ` : css`
+          text-align: right;
+        `}
+      }
+    }
   }
 
   div.info {
     p {
       margin: 0px;
       color: ${props => props.theme.colors?.headingColor};
-      &:first-child {
-        font-size: 14px;
-        font-weight: 600;
-      }
-      &:last-child {
-        font-size: 12px;
-      }
+      font-size: 12px;
+    }
+    p.bold {
+      font-size: 14px;
+      font-weight: 600;
     }
   }
 `
@@ -238,14 +252,4 @@ export const WrapOrderStatusSelector = styled.div`
       }
     }
   }
-`
-
-export const FromNow = styled.p`
-  color: ${props => props.theme.colors?.headingColor};
-  font-size: 14px;
-`
-
-export const OrderPrice = styled.p`
-  color: ${props => props.theme.colors?.headingColor};
-  font-size: 14px;
 `
