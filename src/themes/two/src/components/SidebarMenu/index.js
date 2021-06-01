@@ -9,6 +9,7 @@ import FiSettings from '@meronex/icons/fi/FiSettings'
 import BiSupport from '@meronex/icons/bi/BiSupport'
 import MdcArrowLeft from '@meronex/icons/mdc/MdcArrowLeft'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import { LogoutButton } from '../LogoutButton'
 
 import {
   SidebarContainer,
@@ -195,9 +196,10 @@ export const SidebarMenu = (props) => {
             </div>
           </SidebarContent>
           <UserInfo
-            className='d-flex align-items-center py-2 px-2 text-center'
+            className='d-flex flex-column px-1'
           >
             <Button
+              className='d-flex align-items-center m-1'
               onClick={() => handleGoToPage({ page: 'profile' })}
               variant={window.location.pathname === '/profile' && 'primary'}
             >
@@ -208,6 +210,7 @@ export const SidebarMenu = (props) => {
               )}
               {!isCollapse && <span className='mx-2'>{sessionState?.user?.name}</span>}
             </Button>
+            <LogoutButton />
           </UserInfo>
         </SidebarInnerContainer>
       </SidebarContainer>
