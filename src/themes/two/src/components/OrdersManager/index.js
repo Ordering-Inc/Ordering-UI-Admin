@@ -40,7 +40,9 @@ const OrdersManagerUI = (props) => {
     handleDeleteMultiOrders,
     handleSelectedOrderIds,
     selectedOrderIds,
-    onOrderRedirect
+    onOrderRedirect,
+    selectedSubOrderStatus,
+    handleSelectedSubOrderStatus
   } = props
 
   const [, t] = useLanguage()
@@ -54,13 +56,6 @@ const OrdersManagerUI = (props) => {
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
-
-  const [selectedSubOrderStatus, setSelectedSubOrderStatus] = useState({
-    pending: [0],
-    inProgress: [7],
-    completed: [1],
-    cancelled: [2]
-  })
 
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
@@ -207,7 +202,7 @@ const OrdersManagerUI = (props) => {
         <OrderStatusSubFilter
           ordersStatusGroup={ordersStatusGroup}
           selectedSubOrderStatus={selectedSubOrderStatus}
-          setSelectedSubOrderStatus={setSelectedSubOrderStatus}
+          handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
         />
         <OrdersContent>
           <OrdersInnerContent className='order-content'>

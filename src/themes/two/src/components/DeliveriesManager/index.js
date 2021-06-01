@@ -8,6 +8,8 @@ import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../../../../../components/OrderDetails'
 import { Modal } from '../../../../../components/Modal'
 import { Button } from '../../../../../styles/Buttons'
+import { DeliveryDashboard } from '../../../../../components/DeliveryDashboard'
+import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import {
   OrdersListContainer,
   OrdersContent,
@@ -16,7 +18,6 @@ import {
   WrapperIndicator,
   OrderNotification
 } from './styles'
-import { DeliveryDashboard } from '../../../../../components/DeliveryDashboard'
 
 toast.configure()
 
@@ -36,7 +37,9 @@ const DeliveriesManagerUI = (props) => {
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
     handleSelectedOrderIds,
-    selectedOrderIds
+    selectedOrderIds,
+    selectedSubOrderStatus,
+    handleSelectedSubOrderStatus
   } = props
 
   const [, t] = useLanguage()
@@ -189,6 +192,11 @@ const DeliveriesManagerUI = (props) => {
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
+        />
+        <OrderStatusSubFilter
+          ordersStatusGroup={ordersStatusGroup}
+          selectedSubOrderStatus={selectedSubOrderStatus}
+          handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
         />
         <OrdersContent>
           <OrdersInnerContent className='order-content'>

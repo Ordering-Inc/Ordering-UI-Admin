@@ -9,8 +9,10 @@ export const OrderStatusSubFilter = (props) => {
   const {
     selectedSubOrderStatus,
     ordersStatusGroup,
-    setSelectedSubOrderStatus
+    handleSelectedSubOrderStatus
   } = props
+
+  console.log(selectedSubOrderStatus)
   const statues = {
     pending: [
       { key: 0, value: 'Pending' },
@@ -53,7 +55,7 @@ export const OrderStatusSubFilter = (props) => {
         } else {
           pendingStatuses.push(status)
         }
-        setSelectedSubOrderStatus({
+        handleSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
           pending: pendingStatuses
         })
@@ -65,7 +67,7 @@ export const OrderStatusSubFilter = (props) => {
         } else {
           inProgressStatuses.push(status)
         }
-        setSelectedSubOrderStatus({
+        handleSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
           inProgress: inProgressStatuses
         })
@@ -77,7 +79,7 @@ export const OrderStatusSubFilter = (props) => {
         } else {
           completedStatuses.push(status)
         }
-        setSelectedSubOrderStatus({
+        handleSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
           completed: completedStatuses
         })
@@ -89,7 +91,7 @@ export const OrderStatusSubFilter = (props) => {
         } else {
           cancelledStatuses.push(status)
         }
-        setSelectedSubOrderStatus({
+        handleSelectedSubOrderStatus({
           ...selectedSubOrderStatus,
           cancelled: cancelledStatuses
         })
