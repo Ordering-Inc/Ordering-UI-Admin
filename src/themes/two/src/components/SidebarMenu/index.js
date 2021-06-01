@@ -210,7 +210,7 @@ export const SidebarMenu = (props) => {
               )}
               {!isCollapse && <span className='mx-2'>{sessionState?.user?.name}</span>}
             </Button>
-            <LogoutButton />
+            <LogoutButton isCollapse={isCollapse} />
           </UserInfo>
         </SidebarInnerContainer>
       </SidebarContainer>

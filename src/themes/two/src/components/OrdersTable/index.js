@@ -11,8 +11,8 @@ import {
   useUtils
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
-import { DriverSelector } from '../../../../../components/DriverSelector'
-import { OrderStatusTypeSelector } from '../../../../../components/OrderStatusTypeSelector'
+import { DriverSelector } from '../DriverSelector'
+import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import {
   OrdersContainer,
@@ -27,6 +27,8 @@ import {
   OrderType,
   WrapOrderStatusSelector
 } from './styles'
+
+import { Select } from '../../styles/Select'
 
 export const OrdersTable = (props) => {
   const {
@@ -96,7 +98,7 @@ export const OrdersTable = (props) => {
   }
 
   const handleClickOrder = (orderId, e) => {
-    if (e.target.closest('.orderNo')) return
+    if (e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle')) return
     handleOpenOrderDetail(orderId)
   }
 

@@ -36,7 +36,8 @@ export const Table = styled.table`
 
   tbody {
     overflow-x: hidden;
-    height: calc(100vh - 300px);
+    max-height: calc(100vh - 300px);
+    padding-bottom: 10px;
     width: 100%;
     display: block;
 
@@ -176,12 +177,14 @@ export const CustomerInfo = styled(BusinessInfo)`
 
 export const DriversInfo = styled.div`
   > div {
-    border: none;
-    > div:first-child {
-      padding: 0px;
-      p {
-        color: ${props => props.theme.colors?.headingColor};
-        font-size: 14px;
+    > div {
+      border: none;
+      > div:first-child {
+        padding: 0px;
+        p {
+          color: ${props => props.theme.colors?.headingColor};
+          font-size: 14px;
+        }
       }
     }
   }
@@ -252,6 +255,7 @@ export const WrapOrderStatusSelector = styled.div`
     > div:first-child {
       p {
         color: ${props => props.theme.colors?.headingColor};
+        max-width: 140px;
       }
     }
   }

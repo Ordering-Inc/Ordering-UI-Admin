@@ -110,10 +110,12 @@ export const OrderStatus = styled.div`
 
   > div:not(:first-child) {
     min-width: 40%;
-    border-radius: 8px;
-    border-color: ${props => props.theme.colors?.secundary};
-    > div:first-child {
-      background-color: ${props => props.theme.colors?.secundary};
+    > div {
+      border-radius: 8px;
+      border-color: ${props => props.theme.colors?.secundary};
+      > div:first-child {
+        background-color: ${props => props.theme.colors?.secundary};
+      }
     }
   }
 `
@@ -258,11 +260,14 @@ export const DriverSelectorContainer = styled.div`
   min-width: 40%;
   > div {
     width: 100%;
-    border-radius: 8px;
-    border-color: ${props => props.theme.colors?.secundary};
-    > div:first-child {
-      color: ${props => props.theme.colors?.headingColor};
-      background-color: ${props => props.theme.colors?.secundary};
+    > div {
+      width: 100%;
+      border-radius: 8px;
+      border-color: ${props => props.theme.colors?.secundary};
+      > div:first-child {
+        color: ${props => props.theme.colors?.headingColor};
+        background-color: ${props => props.theme.colors?.secundary};
+      }
     }
   }
 `
