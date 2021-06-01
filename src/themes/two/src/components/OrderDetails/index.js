@@ -5,7 +5,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { Messages } from '../Messages'
-import { MetaFields } from '../../../../../components/MetaFields'
+import { MetaFields } from '../MetaFields'
 import { Modal } from '../../../../../components/Modal'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -17,6 +17,7 @@ import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import {
   Container,
+  SkeletonWrapper,
   OrderDetailsContent,
   OrderDetailsExtraContent,
   ChatContainer,
@@ -148,11 +149,18 @@ const OrderDetailsUI = (props) => {
     if (openMessage === 'history') {
       setOpenMessages({ customer: false, business: false, driver: false, history: true })
     }
+    setOpenMetaFields(false)
     setExtraOpen(true)
   }
 
   const handleCloseMessages = () => {
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
+  }
+
+  const handleOpenMetaFields = () => {
+    handleCloseMessages()
+    setExtraOpen(true)
+    setOpenMetaFields(true)
   }
 
   useEffect(() => {
@@ -207,21 +215,22 @@ const OrderDetailsUI = (props) => {
       isSkeleton={loading}
     >
       {loading && (
-        <>
+        <SkeletonWrapper>
           <Skeleton height={75} count={3} style={{ marginBottom: '10px'}} />
           <Skeleton height={200} style={{ marginBottom: '10px'}} />
           <Skeleton height={30} style={{ marginBottom: '10px'}}  />
           <Skeleton height={50} style={{ marginBottom: '10px'}}  />
           <Skeleton height={200} style={{ marginBottom: '10px'}} />
           <Skeleton height={50} style={{ marginBottom: '10px'}}  />
-        </>
+        </SkeletonWrapper>
       )}
       {order && Object.keys(order).length > 0 && !loading && (
         <OrderDetailsContent>
           <OrderDetailsHeader
             order={order}
+            extraOpen={extraOpen}
             actionSidebar={actionSidebar}
-            setOpenMetaFields={setOpenMetaFields}
+            handleOpenMetaFields={handleOpenMetaFields}
             handleOpenMessages={handleOpenMessages}
           />
           <OrderStatus>
@@ -257,6 +266,7 @@ const OrderDetailsUI = (props) => {
           </AdvancedLogistic>
           <OrderContactInformation
             order={order}
+            extraOpen={extraOpen}
             unreadAlert={unreadAlert}
             driversList={driversList}
             handleOpenMessages={handleOpenMessages}
@@ -276,84 +286,105 @@ const OrderDetailsUI = (props) => {
         </OrderDetailsContent>
       )}
 
-      {extraOpen && width >= 1000 && (
-        <OrderDetailsExtraContent>
-          <Button
-            borderRadius='5px'
-            color='secundary'
-            onClick={() => setExtraOpen(false)}
-          >
-            <MdcClose />
-          </Button>
-          {(openMessages.driver || openMessages.business || openMessages.customer) && (
-            <ChatContainer>
-              <Messages
-                orderId={order?.id}
-                order={order}
-                customer={openMessages.customer}
-                business={openMessages.business}
-                driver={openMessages.driver}
-                history={openMessages.history}
-                handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+      {extraOpen && (
+        <>
+          {width >= 1000 ? (
+            <OrderDetailsExtraContent>
+              <Button
+                borderRadius='5px'
+                color='secundary'
+                onClick={() => setExtraOpen(false)}
+              >
+                <MdcClose />
+              </Button>
+              {(openMessages.driver || openMessages.business || openMessages.customer) && (
+                <ChatContainer>
+                  <Messages
+                    orderId={order?.id}
+                    order={order}
+                    customer={openMessages.customer}
+                    business={openMessages.business}
+                    driver={openMessages.driver}
+                    history={openMessages.history}
+                    handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                    onClose={() => handleCloseMessages()}
+                    messages={messages}
+                  />
+                </ChatContainer>
+              )}
+
+              {openMessages.history && (
+                <ChatContainer>
+                  <Messages
+                    orderId={order?.id}
+                    order={order}
+                    history={openMessages.history}
+                    handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                    messages={messages}
+                  />
+                </ChatContainer>
+              )}
+
+              {openMetaFields && (
+                <MetaFields
+                  orderId={order?.id}
+                />
+              )}
+            </OrderDetailsExtraContent>
+          ) : (
+            <>
+              <Modal
+                width='70%'
+                height='90vh'
+                open={(openMessages.driver || openMessages.business || openMessages.customer)}
+                onClose={() => setExtraOpen(false)}
+              >
+                {(openMessages.driver || openMessages.business || openMessages.customer) && (
+                  <ChatContainer>
+                    <Messages
+                      orderId={order?.id}
+                      order={order}
+                      customer={openMessages.customer}
+                      business={openMessages.business}
+                      driver={openMessages.driver}
+                      history={openMessages.history}
+                      handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                      onClose={() => handleCloseMessages()}
+                      messages={messages}
+                    />
+                  </ChatContainer>
+                )}
+              </Modal>
+
+              <Modal
+                width='70%'
+                height='70vh'
+                open={openMessages.history}
                 onClose={() => handleCloseMessages()}
-                messages={messages}
-              />
-            </ChatContainer>
+              >
+                <Messages
+                  orderId={order?.id}
+                  order={order}
+                  history={openMessages.history}
+                  handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                  messages={messages}
+                />
+              </Modal>
+
+              <Modal
+                width='70%'
+                height='70vh'
+                open={openMetaFields}
+                onClose={() => setOpenMetaFields(false)}
+              >
+                <MetaFields
+                  orderId={order?.id}
+                />
+              </Modal>
+            </>
           )}
-        </OrderDetailsExtraContent>
+        </>
       )}
-
-      {width < 1000 && (
-        <Modal
-          width='70%'
-          height='90vh'
-          open={extraOpen}
-          onClose={() => setExtraOpen(false)}
-        >
-          {(openMessages.driver || openMessages.business || openMessages.customer) && (
-            <ChatContainer>
-              <Messages
-                orderId={order?.id}
-                order={order}
-                customer={openMessages.customer}
-                business={openMessages.business}
-                driver={openMessages.driver}
-                history={openMessages.history}
-                handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
-                onClose={() => handleCloseMessages()}
-                messages={messages}
-              />
-            </ChatContainer>
-          )}
-        </Modal>
-      )}
-
-
-      <Modal
-        width='70%'
-        height='70vh'
-        open={openMessages.history}
-        onClose={() => handleCloseMessages()}
-      >
-        <Messages
-          orderId={order?.id}
-          order={order}
-          history={openMessages.history}
-          handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
-          messages={messages}
-        />
-      </Modal>
-
-      <Modal
-        width='70%'
-        height='70vh'
-        open={openMetaFields}
-        onClose={() => setOpenMetaFields(false)}
-      >
-        <MetaFields
-          orderId={order?.id}
-        />
-      </Modal>
 
       {!loading && !order && (
         <NotFoundSource

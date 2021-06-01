@@ -402,19 +402,20 @@ export const WrapperSendMessageButton = styled.div`
 export const WrapperHitoryHeader = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
   align-items: center;
 `
 
 export const TabItem = styled.div`
-  font-size: 20px;
-  padding: 5px 20px;
+  font-size: 14px;
+  padding: 5px 10px;
   cursor: pointer;
   text-align: center;
-
+  color: #909BA9;
+  
   ${({ active }) => active && css`
-    border-bottom: 2px solid ${props => props.theme.colors.btnDarkBlue};
-    color: ${props => props.theme.colors.btnDarkBlue};
+    border-bottom: 1px solid ${props => props.theme.colors?.headingColor};
+    color: ${props => props.theme.colors?.headingColor};
+    font-weight: 600;
   `}
 
   @media (max-width: 576px) {
@@ -427,10 +428,6 @@ export const SkeletonHitory = styled.div`
   flex-direction: column;
   align-items: center;
   column-gap: 20px;
-
-  span {
-    border-radius: 30px;
-  }
 
   @media (max-width: 576px) {
     span {

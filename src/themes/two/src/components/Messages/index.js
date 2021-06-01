@@ -49,8 +49,8 @@ import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Alert } from '../../../../../components/Confirm'
-import { Logistics } from '../../../../../components/Logistics'
-import { LogisticInformation } from '../../../../../components/LogisticInformation'
+import { Logistics } from '../Logistics'
+import { LogisticInformation } from '../LogisticInformation'
 export const MessagesUI = (props) => {
   const {
     order,

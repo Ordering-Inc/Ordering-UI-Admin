@@ -14,7 +14,7 @@ import {
 export const OrderDetailsHeader = (props) => {
   const {
     order,
-    setOpenMetaFields,
+    handleOpenMetaFields,
     handleOpenMessages,
     actionSidebar
   } = props
@@ -64,7 +64,7 @@ export const OrderDetailsHeader = (props) => {
           <AiOutlineApartment />
         </ButtonLink>
         <ButtonLink
-          onClick={() => setOpenMetaFields(true)}
+          onClick={() => handleOpenMetaFields()}
         >
           <MdcDotsVertical />
         </ButtonLink>

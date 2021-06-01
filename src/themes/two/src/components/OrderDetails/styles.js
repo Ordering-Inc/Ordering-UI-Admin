@@ -18,29 +18,32 @@ export const Container = styled.div`
     ` : css`
     right: 0px;
   `}
-
-  ${({ isSkeleton }) => isSkeleton && css`
-    padding: 20px;
-    box-sizing: border-box;
-    flex-direction: column;
-    > span {
-      width: 100%;
-    }
-  `}
-
   @media print {
     box-shadow: none;
   }
 `
 
+export const SkeletonWrapper = styled.div`
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+  > span {
+    width: 100%;
+  }
+`
+
 export const OrderDetailsContent = styled.div`
   padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
 `
 
 export const OrderDetailsExtraContent = styled.div`
   position: relative;
   padding: 20px;
-  flex: 1;
+  box-sizing: border-box;
+  width: 100%;
 
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid ${props => props.theme.colors?.secundary};
