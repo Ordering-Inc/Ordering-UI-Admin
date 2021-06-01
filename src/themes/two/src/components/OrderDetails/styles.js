@@ -20,6 +20,10 @@ export const Container = styled.div`
     ` : css`
     right: 0px;
   `}
+
+  @media print {
+    box-shadow: none;
+  }
 `
 
 export const ChatContainer = styled.div`
@@ -39,9 +43,11 @@ export const OrderDetailsHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column-reverse;
 
   > div:first-child {
     color: ${props => props.theme.colors?.headingColor};
+    width: 100%;
     h1 {
       font-size: 24px;
       margin: 0px;
@@ -55,6 +61,16 @@ export const OrderDetailsHeader = styled.div`
 
   > div:not(:first-child) {
     display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    > div:not(:first-child) {
+      margin-bottom: 0px;
+    }
   }
 `
 

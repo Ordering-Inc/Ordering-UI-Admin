@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const SidebarContainer = styled.div`
+  @media print {
+    display: none;
+  }
 `
 
 export const SidebarInnerContainer = styled.div`

@@ -77,6 +77,7 @@ const OrderDetailsUI = (props) => {
   const orderDetail = useRef(null)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const printRef = useRef()
 
   const {
     order,
@@ -193,7 +194,7 @@ const OrderDetailsUI = (props) => {
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
     document.getElementById('orderDetails').style.width = value
-    ? width > 699 ? '700px' : '100vw'
+    ? width > 599 ? '600px' : '100vw'
     : '0'
     if (!value) {
       props.onClose()
@@ -205,7 +206,7 @@ const OrderDetailsUI = (props) => {
       if (width <= 700) {
         document.getElementById('orderDetails').style.width = '100vw'
       } else {
-        document.getElementById('orderDetails').style.width = '700px'
+        document.getElementById('orderDetails').style.width = '600px'
       }
     }
   }, [width])
@@ -256,7 +257,7 @@ const OrderDetailsUI = (props) => {
               </p>
             </div>
             <div>
-              <ButtonLink>
+              <ButtonLink onClick={() => window.print()}>
                 <AiOutlinePrinter />
               </ButtonLink>
               <ButtonLink
@@ -484,7 +485,14 @@ const OrderDetailsUI = (props) => {
       )}
 
       {loading && (
-        <Skeleton height={75} />             
+        <>
+          <Skeleton height={75} count={3} style={{ marginBottom: '10px'}} />
+          <Skeleton height={200} style={{ marginBottom: '10px'}} />
+          <Skeleton height={30} style={{ marginBottom: '10px'}}  />
+          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
+          <Skeleton height={200} style={{ marginBottom: '10px'}} />
+          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
+        </>
       )}
 
       {!loading && !order && (
