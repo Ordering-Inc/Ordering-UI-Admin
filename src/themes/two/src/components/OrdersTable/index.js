@@ -27,7 +27,6 @@ import {
   OrderType,
   WrapOrderStatusSelector
 } from './styles'
-import { margin } from 'polished'
 
 export const OrdersTable = (props) => {
   const {
@@ -103,7 +102,7 @@ export const OrdersTable = (props) => {
 
   const handleScroll = useCallback(() => {
     const ordersContent = document.getElementById('orders')
-    const hasMore = !(pagination.totalPages === pagination.currentPage)
+    const hasMore = pagination.to < pagination.total
     if (orderList.loading || !hasMore) return
     if ((ordersContent?.scrollTop + 50) >= (ordersContent?.scrollHeight - ordersContent?.offsetHeight)) {
       loadMoreOrders()
@@ -116,7 +115,7 @@ export const OrdersTable = (props) => {
     ordersContent.addEventListener('scroll', handleScroll)
     return () => ordersContent.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
- 
+
   return (
     <OrdersContainer>
       <Table>

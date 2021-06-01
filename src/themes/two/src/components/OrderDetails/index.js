@@ -11,10 +11,11 @@ import GrClose from '@meronex/icons/gr/GrClose'
 import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
-import EnDotsThreeVertical from '@meronex/icons/en/EnDotsThreeVertical'
+import MdcDotsVertical from '@meronex/icons/mdc/MdcDotsVertical'
+import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-import { ProductItemAccordion } from '../../../../../components/ProductItemAccordion'
+import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../../../../../components/OrderStatusTypeSelector'
 import { DriverSelector } from '../../../../../components/DriverSelector'
 import { Messages } from '../../../../../components/Messages'
@@ -22,56 +23,35 @@ import { MetaFields } from '../../../../../components/MetaFields'
 import { Modal } from '../../../../../components/Modal'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import AiOutlinePrinter from '@meronex/icons/ai/AiOutlinePrinter'
+import AiOutlineApartment from '@meronex/icons/ai/AiOutlineApartment'
+import MdcClose from '@meronex/icons/mdc/MdcClose'
 import {
   Container,
-  WrapperContainer,
-  OrderInfoContent,
-  PhotoWrapper,
-  Photo,
-  OrderInfo,
-  OrderData,
-  StatusBar,
-  OrderStatus,
-  StatusImage,
-  SectionTitle,
-  SectionContainer,
-  InfoBlock,
-  CustomerContactBlock,
-  OrderProducts,
-  OrderBill,
-  SkeletonBlockWrapp,
-  SkeletonBlock,
-  SkeletonInfoCell,
-  SkeletonInnerBlock,
-  WrapperSkeletonBottom,
-  WrapperSkeletonText,
-  PayAndOrderTypeInfo,
-  WrapperSkeletonButton,
-  Paymethod,
-  PaymethodContent,
-  PaymethodCreatedDate,
-  PaymethodCreatedDateContent,
-  OrderTypeInfo,
-  OrderTypeContent,
-  ContactInfoContent,
-  ContactInfoHeader,
-  WrapperButton,
-  ButtonLink,
-  DriverSelectorContainer,
-  PrintButtonContainer,
   ChatContainer,
-  PhoneNumber,
-  OrderDetailCloseButton,
-  MessageContactInfo,
-  ContactBlock,
-  InfonContent,
-  WrapperMoreInformationButton,
-  NotificationIcon
+  OrderDetailsHeader,
+  ButtonLink,
+  OrderStatus,
+  StatusBarContainer,
+  StatusBar,
+  AdvancedLogistic,
+  BusinessInfo,
+  Photo,
+  PhotoWrapper,
+  InfoContent,
+  NotificationIcon,
+  CustomerInfo,
+  DriverInfoContainer,
+  DriverInfo,
+  DriverSelectorContainer,
+  OrderProducts,
+  OrderBill
 } from './styles'
 import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
+    open,
     pendingOrder,
     preOrder,
     driversList,
@@ -96,6 +76,7 @@ const OrderDetailsUI = (props) => {
 
   const orderDetail = useRef(null)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const {
     order,
@@ -133,6 +114,38 @@ const OrderDetailsUI = (props) => {
     return objectStatus && objectStatus
   }
 
+  const getLogisticTag = (status) => {
+    switch (parseInt(status)) {
+      case 0:
+        return t('PENDING', 'Pending')
+      case 1:
+        return t('IN_PROGRESS', 'In progress')
+      case 2:
+        return t('IN_QUEUE', 'In queue')
+      case 3:
+        return t('EXPIRED', 'Expired')
+      case 4:
+        return t('RESOLVED', 'Resolved')
+      default:
+        return t('UNKNOWN', 'Unknown')
+    }
+  }
+
+  const getPriorityTag = (priority) => {
+    switch (parseInt(priority)) {
+      case -1:
+        return t('LOW', 'Low')
+      case 0:
+        return t('NORMAL', 'Normal')
+      case 1:
+        return t('HIGH', 'High')
+      case 2:
+        return t('URGENT', 'Urgent')
+      default:
+        return t('UNKNOWN', 'Unknown')
+    }
+  }
+
   const getImage = (status) => {
     try {
       return theme.images?.order?.[`status${status}`]
@@ -156,7 +169,6 @@ const OrderDetailsUI = (props) => {
       setUnreadAlert({ ...unreadAlert, customer: false })
     }
     if (openMessage === 'business') {
-      orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: false, business: true, driver: false, history: false })
       setUnreadAlert({ ...unreadAlert, business: false })
     }
@@ -171,7 +183,6 @@ const OrderDetailsUI = (props) => {
   }
 
   const handleCloseMessages = () => {
-    orderDetail.current.style.display = 'flex'
     setOpenMessages({ customer: false, business: false, driver: false, history: false })
   }
 
@@ -179,17 +190,14 @@ const OrderDetailsUI = (props) => {
     unreadMessages()
   }, [messages?.messages])
 
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
   const actionSidebar = (value) => {
+    setIsMenuOpen(value)
+    document.getElementById('orderDetails').style.width = value
+    ? width > 699 ? '700px' : '100vw'
+    : '0'
     if (!value) {
       props.onClose()
     }
-    setIsMenuOpen(value)
-    document.getElementById('orderDetails').style.width = value
-      ? width > 699 ? '700px' : '100vw'
-      : '0'
   }
 
   useEffect(() => {
@@ -213,419 +221,270 @@ const OrderDetailsUI = (props) => {
       id='orderDetails'
     >
       {order && Object.keys(order).length > 0 && !loading && (
-        <WrapperContainer ref={orderDetail} messageDashboardView={messageDashboardView}>
-          <OrderInfoContent className='order-info' messageDashboardView={messageDashboardView}>
-            <OrderInfo>
-              <OrderData messageDashboardView={messageDashboardView}>
-                <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
-                <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
-                <p className='date'>
-                  {parseDate(order?.delivery_datetime, { utc: false })}
-                </p>
-                <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-              </OrderData>
-              {actionStatus?.loading
-                ? (
-                  <SpinnerLoader style={{ width: 170, height: 90, transform: 'scale(0.3)' }} />
-                ) : (
-                  <OrderStatus>
-                    {(!pendingOrder && !preOrder) && (
-                      <span>{getOrderStatus(parseInt(order?.status))?.value}</span>
-                    )}
-                    {pendingOrder && (
-                      <span>{t('PENDING', 'Pending')}</span>
-                    )}
-                    {preOrder && (
-                      <span>{t('PREORDER', 'Preorder')}</span>
-                    )}
-                    <StatusImage>
-                      <img src={getImage(order?.status || 0)} alt='status' />
-                    </StatusImage>
-                  </OrderStatus>
+        <>
+          <OrderDetailsHeader>
+            <div>
+              <h1>{t('ORDER_NO', 'Order No')}. {order?.id}</h1>
+              <p>                  
+                <span>{order?.paymethod?.name}</span>
+                <EnDotSingle />
+                {order?.delivery_type === 1 && (
+                  <span>
+                    {t('DELIVERY', 'Delivery')}
+                  </span>
                 )}
-              {messageDashboardView && (
-                <OrderDetailCloseButton>
-                  <GrClose onClick={() => handleMessageOrderDetail(false)} />
-                </OrderDetailCloseButton>
+                {order?.delivery_type === 2 && (
+                  <span>
+                    {t('PICKUP', 'Pickup')}
+                  </span>
+                )}
+                {order?.delivery_type === 3 && (
+                  <span>
+                    {t('EAT_IN', 'Eat in')}
+                  </span>
+                )}
+                {order?.delivery_type === 4 && (
+                  <span>
+                    {t('CURBSIDE', 'Curbside')}
+                  </span>
+                )}
+                {order?.delivery_type === 5 && (
+                  <span>
+                    {t('DRIVE_THRU', 'Drive thru')}
+                  </span>
+                )}
+              </p>
+            </div>
+            <div>
+              <ButtonLink>
+                <AiOutlinePrinter />
+              </ButtonLink>
+              <ButtonLink
+                onClick={() => handleOpenMessages('history')}
+              >
+                <AiOutlineApartment />
+              </ButtonLink>
+              <ButtonLink
+                onClick={() => setOpenMetaFields(true)}
+              >
+                <MdcDotsVertical />
+              </ButtonLink>
+              <Button
+                borderRadius='5px'
+                color='secundary'
+                onClick={() => actionSidebar(false)}
+              >
+                <MdcClose />
+              </Button>
+            </div>
+          </OrderDetailsHeader>
+          <OrderStatus>
+            <div>
+              <h2>{t('ORDER_STATUS', 'Order status')}</h2>
+              <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
+            </div>
+            <OrderStatusTypeSelector
+              orderId={order.id}
+              deliveryType={order?.delivery_type}
+              defaultValue={parseInt(order.status)}
+              pendingOrder={pendingOrder}
+              preOrder={preOrder}
+              handleUpdateOrderStatus={handleUpdateOrderStatus}
+            />
+          </OrderStatus>
+          <StatusBarContainer>
+            <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+          </StatusBarContainer>
+          <AdvancedLogistic>
+            <div>
+              <p>{t('LOGISTIC', 'Logistic')}</p>
+              <p>{getLogisticTag(order?.logistic_status)}</p>
+            </div>
+            <div>
+              <p>{t('ATTEMPTS', 'Attempts')}</p>
+              <p>{order?.logistic_attemps}</p>
+            </div>
+            <div>
+              <p>{t('PRIORITY', 'Priority')}</p>
+              <p>{getPriorityTag(order?.priority)}</p>
+            </div>
+          </AdvancedLogistic>
+          <BusinessInfo>
+            <PhotoWrapper>
+              {order?.business?.logo ? (
+                <Photo bgimage={order?.business?.logo} />
+              ) : (
+                <BisBusiness />
               )}
-            </OrderInfo>
-
-            {messageDashboardView && (
-              <MessageContactInfo>
-                <ContactBlock
-                  active={messageType === 'business'}
-                  onClick={() => handleOpenMessage(order, 'business')}
+            </PhotoWrapper>
+            <InfoContent>
+              <div>
+                <p>{order?.business?.name}</p>
+                <ButtonLink
+                  onClick={() => handleOpenMessages('business')}
                 >
-                  <PhotoWrapper messageDashboardView={messageDashboardView}>
-                    {order?.business?.logo ? (
-                      <Photo bgimage={order?.business?.logo} />
-                    ) : (
-                      <BisBusiness />
-                    )}
-                  </PhotoWrapper>
-                  <InfonContent>
-                    <p>{order?.business?.name}</p>
-                    <p>{order?.business?.address}</p>
-                  </InfonContent>
-                </ContactBlock>
-                <ContactBlock
-                  active={messageType === 'customer'}
-                  onClick={() => handleOpenMessage(order, 'customer')}
-                >
-                  <PhotoWrapper messageDashboardView={messageDashboardView}>
-                    {order?.customer?.photo ? (
-                      <Photo bgimage={order?.customer?.photo} />
-                    ) : (
-                      <FaUserAlt />
-                    )}
-                  </PhotoWrapper>
-                  <InfonContent>
-                    <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-                    <p>{order?.customer?.cellphone}</p>
-                  </InfonContent>
-                </ContactBlock>
-                {order?.driver_id && (
-                  <ContactBlock
-                    active={messageType === 'driver'}
-                    onClick={() => handleOpenMessage(order, 'driver')}
-                  >
-                    <PhotoWrapper messageDashboardView={messageDashboardView}>
-                      {order?.driver?.photo ? (
-                        <Photo bgimage={order?.driver?.photo} />
-                      ) : (
-                        <FaUserAlt />
-                      )}
-                    </PhotoWrapper>
-                    <InfonContent>
-                      <p>{order?.driver?.name} {order?.driver?.lastname}</p>
-                      <p>{t('DRIVER', 'Driver')}</p>
-                    </InfonContent>
-                  </ContactBlock>
+                  <BsChat />
+                </ButtonLink>
+                {order?.unread_count > 0 && unreadAlert.business && (
+                  <NotificationIcon>
+                    <BsBell />
+                  </NotificationIcon>
                 )}
-              </MessageContactInfo>
-            )}
-
-            <PayAndOrderTypeInfo>
-              <Paymethod>
-                <p>{t('PAYMETHOD', 'Paymethod')}</p>
-                <PaymethodContent>
-                  <img src={theme?.images?.icons?.cash} alt='cash' />
-                  {order?.paymethod?.name}
-                </PaymethodContent>
-              </Paymethod>
-              <PaymethodCreatedDate>
-                <PaymethodCreatedDateContent>
-                  <p>{t('DATE', 'Date')}</p>
-                  <p>
-                    {parseDate(order?.delivery_datetime, { utc: false })}
-                  </p>
-                </PaymethodCreatedDateContent>
-              </PaymethodCreatedDate>
-              <OrderTypeInfo>
-                <p>{t('ORDER_TYPE', 'Order Type')}</p>
-                <OrderTypeContent>
-                  {order?.delivery_type === 1 && (
-                    <>
-                      <img src={theme?.images?.icons?.driverDelivery} alt='order type' />
-                      {t('DELIVERY', 'Delivery')}
-                    </>
-                  )}
-                  {order?.delivery_type === 2 && (
-                    <>
-                      <img src={theme?.images?.icons?.pickUp} alt='pickup' />
-                      {t('PICKUP', 'Pickup')}
-                    </>
-                  )}
-                  {order?.delivery_type === 3 && (
-                    <>
-                      <AiFillShop />
-                      {t('EAT_IN', 'Eat in')}
-                    </>
-                  )}
-                  {order?.delivery_type === 4 && (
-                    <>
-                      <GiFoodTruck />
-                      {t('CURBSIDE', 'Curbside')}
-                    </>
-                  )}
-                  {order?.delivery_type === 5 && (
-                    <>
-                      <FaCarSide />
-                      {t('DRIVE_THRU', 'Drive thru')}
-                    </>
-                  )}
-                </OrderTypeContent>
-              </OrderTypeInfo>
-            </PayAndOrderTypeInfo>
-
-            <OrderProducts>
-              {order?.products?.length && order?.products.map((product) => (
-                <ProductItemAccordion
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </OrderProducts>
-
-            <OrderBill>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                    <td>{parsePrice(order?.summary?.subtotal)}</td>
-                  </tr>
-                  {order?.summary?.discount > 0 && (
-                    <tr>
-                      <td>{t('DISCOUNT', 'Discount')}</td>
-                      <td>-{parsePrice(order?.summary?.discount)}</td>
-                    </tr>
-                  )}
-                  {order?.summary?.tax > 0 && (
-                    <tr>
-                      <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-                      <td>{parsePrice(order?.summary?.tax)}</td>
-                    </tr>
-                  )}
-                  {(order?.summary?.delivery_price > 0) && (
-                    <tr>
-                      <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                      <td>{parsePrice(order?.summary?.delivery_price)}</td>
-                    </tr>
-                  )}
-                  <tr>
-                    <td>{t('DRIVER_TIP', 'Driver tip')}</td>
-                    <td>{parsePrice(order?.summary?.driver_tip)}</td>
-                  </tr>
-                  {order?.summary?.service_fee > 0 && (
-                    <tr>
-                      <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-                      <td>{parsePrice(order?.summary?.service_fee)}</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-              <table className='total'>
-                <tbody>
-                  <tr>
-                    <td>{t('TOTAL', 'Total')}</td>
-                    <td>{parsePrice(order?.summary?.total)}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </OrderBill>
-            {messageDashboardView && (
-              <WrapperMoreInformationButton>
-                <Button color='darkBlue' onClick={() => handleOpenOrderDetail(order.id)}>
-                  {t('MORE_INFORMATION', 'More information')}
-                </Button>
-              </WrapperMoreInformationButton>
-            )}
-          </OrderInfoContent>
-          {!messageDashboardView && (
-            <ContactInfoContent className='contact-info'>
-              <ContactInfoHeader>
-                <OrderStatusTypeSelector
-                  orderId={order.id}
-                  deliveryType={order?.delivery_type}
-                  defaultValue={parseInt(order.status)}
-                  pendingOrder={pendingOrder}
-                  preOrder={preOrder}
-                  handleUpdateOrderStatus={handleUpdateOrderStatus}
-                />
-                <WrapperButton>
-                  <ButtonLink onClick={() => setOpenMetaFields(true)}>
-                    <EnDotsThreeVertical />
+                {order?.business?.phone && (
+                  <ButtonLink
+                    onClick={() => window.open(`tel:${order.business.phone}`)}
+                  >
+                    <HiOutlinePhone />
                   </ButtonLink>
-                  <ButtonLink onClick={() => handleOpenMessages('history')}>
-                    <img src={theme?.images?.icons?.timeline} alt='timeline' />
+                )}
+              </div>
+              <p>{order?.business?.address}</p>
+            </InfoContent>
+          </BusinessInfo>
+          <CustomerInfo>
+            <PhotoWrapper>
+              {order?.business?.photo ? (
+                <Photo bgimage={order?.customer?.photo} />
+              ) : (
+                <FaUserAlt />
+              )}
+            </PhotoWrapper>
+            <InfoContent>
+              <div>
+                <p>{order?.customer?.name} {order?.customer?.lastname}</p>
+                <ButtonLink
+                  onClick={() => handleOpenMessages('customer')}
+                >
+                  <BsChat />
+                </ButtonLink>
+                {order?.unread_count > 0 && unreadAlert.customer && (
+                  <NotificationIcon>
+                    <BsBell />
+                  </NotificationIcon>
+                )}
+                {order?.customer?.cellphone && (
+                  <ButtonLink
+                    onClick={() => window.open(`tel:${order?.customer?.cellphone }`)}
+                  >
+                    <HiOutlinePhone />
                   </ButtonLink>
-                </WrapperButton>
-              </ContactInfoHeader>
-              <SectionTitle>
-                {t('CUSTOMER', 'Customer')}
-              </SectionTitle>
-              <SectionContainer>
+                )}
+              </div>
+              <p>{order?.customer?.cellphone}</p>
+            </InfoContent>
+          </CustomerInfo>
+          {order?.delivery_type === 1 && (
+            <DriverInfoContainer>
+              <DriverInfo>
                 <PhotoWrapper>
-                  {order?.customer?.photo ? (
-                    <Photo bgimage={order?.customer?.photo} />
+                  {order?.driver?.photo ? (
+                    <Photo bgimage={order?.driver?.photo} />
                   ) : (
                     <FaUserAlt />
                   )}
                 </PhotoWrapper>
-                <InfoBlock>
-                  <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                  {order?.customer?.address && (
-                    <span><HiOutlineLocationMarker /> {order?.customer?.address}</span>
-                  )}
-                  <CustomerContactBlock>
-                    <button onClick={() => handleOpenMessages('customer')}>
-                      <BsChat /> {t('CHAT', 'Chat')}
-                    </button>
-                    {order?.unread_count > 0 && unreadAlert.customer && (
-                      <NotificationIcon>
-                        <BsBell />
-                      </NotificationIcon>
-                    )}
-                    {order?.customer?.cellphone && (
-                      <button onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}>
-                        <HiOutlinePhone /> {t('CALL', 'Call')}
-                      </button>
-                    )}
-                  </CustomerContactBlock>
-                  {order?.customer?.cellphone && (
-                    <PhoneNumber>
-                      <HiOutlinePhone /> {order?.customer?.cellphone}
-                    </PhoneNumber>
-                  )}
-                </InfoBlock>
-              </SectionContainer>
-              {user?.level === 0 && (
-                <>
-                  <SectionTitle>
-                    {t('BUSINESS', 'Business')}
-                  </SectionTitle>
-                  <SectionContainer>
-                    <PhotoWrapper>
-                      <Photo bgimage={order?.business?.logo} />
-                    </PhotoWrapper>
-                    <InfoBlock>
-                      <h1>{order?.business?.name}</h1>
-                      {order?.business?.address && (
-                        <span><HiOutlineLocationMarker />{order?.business?.address}</span>
+                {order.driver_id ? (
+                  <InfoContent>
+                    <div>
+                      <p>{order?.driver?.name} {order?.driver?.lastname}</p>
+                      <ButtonLink
+                        onClick={() => handleOpenMessages('driver')}
+                      >
+                        <BsChat />
+                      </ButtonLink>
+                      {order?.unread_count > 0 && unreadAlert.driver && (
+                        <NotificationIcon>
+                          <BsBell />
+                        </NotificationIcon>
                       )}
-                      <CustomerContactBlock>
-                        <button onClick={() => handleOpenMessages('business')}>
-                          <BsChat /> {t('CHAT', 'Chat')}
-                        </button>
-                        {order?.unread_count > 0 && unreadAlert.business && (
-                          <NotificationIcon>
-                            <BsBell />
-                          </NotificationIcon>
-                        )}
-                        {order?.business?.phone && (
-                          <button onClick={() => window.open(`tel:${order.business.phone}`)}>
-                            <HiOutlinePhone /> {t('CALL', 'Call')}
-                          </button>
-                        )}
-                      </CustomerContactBlock>
-                      {order?.business?.phone && (
-                        <PhoneNumber>
-                          <HiOutlinePhone /> {order.business.phone}
-                        </PhoneNumber>
+                      {order?.driver?.cellphone && (
+                        <ButtonLink
+                          onClick={() => window.open(`tel:${order?.driver?.cellphone }`)}
+                        >
+                          <HiOutlinePhone />
+                        </ButtonLink>
                       )}
-                    </InfoBlock>
-                  </SectionContainer>
-                </>
-              )}
-
-              {order?.delivery_type === 1 && (
-                <>
-                  <SectionTitle>
-                    {t('DRIVER', 'Driver')}
-                  </SectionTitle>
-                  <SectionContainer>
-                    <PhotoWrapper>
-                      {order?.driver?.photo ? (
-                        <Photo bgimage={order?.driver?.photo} />
-                      ) : (
-                        <FaUserAlt />
-                      )}
-                    </PhotoWrapper>
-                    {order.driver_id ? (
-                      <InfoBlock>
-                        <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                        <CustomerContactBlock>
-                          <button onClick={() => handleOpenMessages('driver')}>
-                            <BsChat /> {t('CHAT', 'Chat')}
-                          </button>
-                          {order?.unread_count > 0 && unreadAlert.driver && (
-                            <NotificationIcon>
-                              <BsBell />
-                            </NotificationIcon>
-                          )}
-                          {order?.driver?.cellphone && (
-                            <button onClick={() => window.open(`tel:${order.driver.cellphone}`)}>
-                              <HiOutlinePhone /> {t('CALL', 'Call')}
-                            </button>
-                          )}
-                        </CustomerContactBlock>
-                        <PhoneNumber>
-                          <HiOutlinePhone /> {order?.driver?.cellphone}
-                        </PhoneNumber>
-                      </InfoBlock>
-                    ) : (
-                      <InfoBlock>
-                        <h1>{t('NO_DRIVER', 'No driver')}</h1>
-                      </InfoBlock>
-                    )}
-                  </SectionContainer>
-                  <SectionTitle driver>
-                    {t('SELECT_DRIVER', 'Select Driver')}
-                  </SectionTitle>
-                  <DriverSelectorContainer>
-                    <DriverSelector
-                      drivers={driversList.drivers}
-                      isPhoneView
-                      defaultValue={order?.driver?.id ? order.driver.id : 'default'}
-                      order={order}
-                    />
-                  </DriverSelectorContainer>
-                </>
-              )}
-
-              <PrintButtonContainer>
-                <Button color='darkBlue' onClick={() => window.print()}>
-                  {t('PRINT', 'Print')}
-                </Button>
-              </PrintButtonContainer>
-            </ContactInfoContent>
+                    </div>
+                    <p>{t('DRIVER', 'Driver')}</p>
+                  </InfoContent>
+                ) : (
+                  <InfoContent>
+                    <div>
+                      <p>{t('NO_DRIVER', 'No driver')}</p>
+                    </div>
+                  </InfoContent>
+                )}
+              </DriverInfo>
+              <DriverSelectorContainer>
+                <DriverSelector
+                  drivers={driversList.drivers}
+                  isPhoneView
+                  defaultValue={order?.driver?.id ? order.driver.id : 'default'}
+                  order={order}
+                />
+              </DriverSelectorContainer>
+            </DriverInfoContainer>
           )}
-        </WrapperContainer>
+          <OrderProducts>
+            <h2>{t('ORDER_DETAILS', 'Order details')}</h2>
+            {order?.products?.length && order?.products.map((product) => (
+              <ProductItemAccordion
+                key={product.id}
+                product={product}
+              />
+            ))}
+          </OrderProducts>
+          <OrderBill>
+            <table>
+              <tbody>
+                <tr>
+                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                  <td>{parsePrice(order?.summary?.subtotal)}</td>
+                </tr>
+                {order?.summary?.discount > 0 && (
+                  <tr>
+                    <td>{t('DISCOUNT', 'Discount')}</td>
+                    <td>-{parsePrice(order?.summary?.discount)}</td>
+                  </tr>
+                )}
+                {order?.summary?.tax > 0 && (
+                  <tr>
+                    <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
+                    <td>{parsePrice(order?.summary?.tax)}</td>
+                  </tr>
+                )}
+                {(order?.summary?.delivery_price > 0) && (
+                  <tr>
+                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                    <td>{parsePrice(order?.summary?.delivery_price)}</td>
+                  </tr>
+                )}
+                <tr>
+                  <td>{t('DRIVER_TIP', 'Driver tip')}</td>
+                  <td>{parsePrice(order?.summary?.driver_tip)}</td>
+                </tr>
+                {order?.summary?.service_fee > 0 && (
+                  <tr>
+                    <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+                    <td>{parsePrice(order?.summary?.service_fee)}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            <table className='total'>
+              <tbody>
+                <tr>
+                  <td>{t('TOTAL', 'Total')}</td>
+                  <td>{parsePrice(order?.summary?.total)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </OrderBill>
+        </>
       )}
 
       {loading && (
-        <WrapperContainer className='skeleton-loading'>
-          <SkeletonBlockWrapp>
-            <SkeletonBlock width={100}>
-              <Skeleton height={75} />
-              <Skeleton height={100} />
-              <Skeleton height={250} />
-              <Skeleton height={25} />
-              <Skeleton height={25} />
-              <Skeleton height={25} />
-              <Skeleton height={25} />
-              <Skeleton height={25} />
-            </SkeletonBlock>
-          </SkeletonBlockWrapp>
-          {!messageDashboardView && (
-            <SkeletonBlockWrapp>
-              <SkeletonBlock width={100}>
-                <Skeleton height={50} />
-                {[...Array(3)].map((item, i) => (
-                  <SkeletonInfoCell key={i}>
-                    <Skeleton width={80} height={20} />
-                    <SkeletonInnerBlock>
-                      <Skeleton width={80} height={80} />
-                      <WrapperSkeletonText>
-                        <Skeleton width={200} height={20} />
-                        <Skeleton width={200} height={20} />
-                        <WrapperSkeletonButton>
-                          <Skeleton width={80} height={30} />
-                          <Skeleton width={80} height={30} />
-                        </WrapperSkeletonButton>
-                      </WrapperSkeletonText>
-                    </SkeletonInnerBlock>
-                  </SkeletonInfoCell>
-                ))}
-                <Skeleton width={120} height={25} />
-                <WrapperSkeletonBottom>
-                  <Skeleton height={50} />
-                  <Skeleton height={50} />
-                </WrapperSkeletonBottom>
-              </SkeletonBlock>
-            </SkeletonBlockWrapp>
-          )}
-        </WrapperContainer>
+        <Skeleton height={75} />             
       )}
 
       {!loading && !order && (

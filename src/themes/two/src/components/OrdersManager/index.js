@@ -39,7 +39,8 @@ const OrdersManagerUI = (props) => {
     handleChangeMultiOrdersStatus,
     handleDeleteMultiOrders,
     handleSelectedOrderIds,
-    selectedOrderIds
+    selectedOrderIds,
+    onOrderRedirect
   } = props
 
   const [, t] = useLanguage()
@@ -63,11 +64,12 @@ const OrdersManagerUI = (props) => {
 
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
-    history.push('/orders-deliveries')
+    onOrderRedirect()
   }
 
   const handleOpenOrderDetail = (id) => {
     setOrderDetailId(id)
+    onOrderRedirect(id)
     setIsOpenOrderDetail(true)
   }
 
@@ -142,8 +144,7 @@ const OrdersManagerUI = (props) => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
-      setOrderDetailId(id)
-      setIsOpenOrderDetail(true)
+      handleOpenOrderDetail(id)
     }
   }, [])
 
@@ -232,7 +233,7 @@ const OrdersManagerUI = (props) => {
           open={isOpenOrderDetail}
           orderId={orderDetailId}
           driversList={driversList}
-          onClose={() => setIsOpenOrderDetail(false)}
+          onClose={() => handleBackRedirect()}
         />
       )}
 
