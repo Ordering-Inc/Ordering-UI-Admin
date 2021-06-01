@@ -1,43 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import BsBell from '@meronex/icons/bs/BsBell'
-import BsChat from '@meronex/icons/bs/BsChat'
-import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
-import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
-import { DriverSelector } from '../DriverSelector'
-import { Messages } from '../../../../../components/Messages'
+import { Messages } from '../Messages'
 import { MetaFields } from '../../../../../components/MetaFields'
 import { Modal } from '../../../../../components/Modal'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { OrderDetailsHeader } from '../OrderDetailsHeader'
 import { OrderBill } from '../OrderBill'
+import { OrderContactInformation } from '../OrderContactInformation'
+import { Button } from '../../styles/Buttons'
+import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import {
   Container,
+  OrderDetailsContent,
+  OrderDetailsExtraContent,
   ChatContainer,
-  ButtonLink,
   OrderStatus,
   StatusBarContainer,
   StatusBar,
   AdvancedLogistic,
-  BusinessInfo,
-  Photo,
-  PhotoWrapper,
-  InfoContent,
-  NotificationIcon,
-  CustomerInfo,
-  DriverInfoContainer,
-  DriverInfo,
-  DriverSelectorContainer,
   OrderProducts,
 } from './styles'
-import { useTheme } from 'styled-components'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -60,14 +48,13 @@ const OrderDetailsUI = (props) => {
   const { width } = useWindowSize()
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
   const [openMetaFields, setOpenMetaFields] = useState(false)
-  const theme = useTheme()
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
 
   const orderDetail = useRef(null)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const printRef = useRef()
+  const [extraOpen, setExtraOpen] = useState(false)
 
   const {
     order,
@@ -101,7 +88,6 @@ const OrderDetailsUI = (props) => {
     ]
 
     const objectStatus = orderStatus.find((o) => o.key === status)
-
     return objectStatus && objectStatus
   }
 
@@ -137,7 +123,6 @@ const OrderDetailsUI = (props) => {
     }
   }
 
-
   const unreadMessages = () => {
     const unreadedMessages = messages?.messages.filter(message => !message?.read && message?.can_see?.includes(0) && message?.author_id !== user.id)
     const customer = unreadedMessages?.some(message => message?.author?.level === 3)
@@ -148,7 +133,6 @@ const OrderDetailsUI = (props) => {
 
   const handleOpenMessages = (openMessage) => {
     if (openMessage === 'customer') {
-      orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: true, business: false, driver: false, history: false })
       setUnreadAlert({ ...unreadAlert, customer: false })
     }
@@ -164,6 +148,7 @@ const OrderDetailsUI = (props) => {
     if (openMessage === 'history') {
       setOpenMessages({ customer: false, business: false, driver: false, history: true })
     }
+    setExtraOpen(true)
   }
 
   const handleCloseMessages = () => {
@@ -177,21 +162,29 @@ const OrderDetailsUI = (props) => {
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
     document.getElementById('orderDetails').style.width = value
-    ? width > 599 ? '600px' : '100vw'
+    ? width > 499 ? '500px' : '100vw'
     : '0'
     if (!value) {
       props.onClose()
     }
   }
 
-  useEffect(() => {
+  const toggleMainContent = () => {
     if (isMenuOpen) {
-      if (width <= 700) {
+      if (width <= 500) {
         document.getElementById('orderDetails').style.width = '100vw'
       } else {
-        document.getElementById('orderDetails').style.width = '600px'
+        if (extraOpen && width >= 1000) {
+          document.getElementById('orderDetails').style.width = '1000px'
+        } else {
+          document.getElementById('orderDetails').style.width = '500px'
+        }
       }
     }
+  }
+
+  useEffect(() => {
+    toggleMainContent()
   }, [width])
 
   useEffect(() => {
@@ -199,13 +192,32 @@ const OrderDetailsUI = (props) => {
     actionSidebar(true)
   }, [open])
 
+  useEffect(() => {
+    if (width < 1000) return
+    if (extraOpen) {
+      document.getElementById('orderDetails').style.width = '1000px'
+    } else {
+      toggleMainContent()
+    }
+  }, [extraOpen])
 
   return (
     <Container
       id='orderDetails'
+      isSkeleton={loading}
     >
-      {order && Object.keys(order).length > 0 && !loading && (
+      {loading && (
         <>
+          <Skeleton height={75} count={3} style={{ marginBottom: '10px'}} />
+          <Skeleton height={200} style={{ marginBottom: '10px'}} />
+          <Skeleton height={30} style={{ marginBottom: '10px'}}  />
+          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
+          <Skeleton height={200} style={{ marginBottom: '10px'}} />
+          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
+        </>
+      )}
+      {order && Object.keys(order).length > 0 && !loading && (
+        <OrderDetailsContent>
           <OrderDetailsHeader
             order={order}
             actionSidebar={actionSidebar}
@@ -243,122 +255,12 @@ const OrderDetailsUI = (props) => {
               <p>{getPriorityTag(order?.priority)}</p>
             </div>
           </AdvancedLogistic>
-          <BusinessInfo>
-            <PhotoWrapper>
-              {order?.business?.logo ? (
-                <Photo bgimage={order?.business?.logo} />
-              ) : (
-                <BisBusiness />
-              )}
-            </PhotoWrapper>
-            <InfoContent>
-              <div>
-                <p>{order?.business?.name}</p>
-                <ButtonLink
-                  onClick={() => handleOpenMessages('business')}
-                >
-                  <BsChat />
-                </ButtonLink>
-                {order?.unread_count > 0 && unreadAlert.business && (
-                  <NotificationIcon>
-                    <BsBell />
-                  </NotificationIcon>
-                )}
-                {order?.business?.phone && (
-                  <ButtonLink
-                    onClick={() => window.open(`tel:${order.business.phone}`)}
-                  >
-                    <HiOutlinePhone />
-                  </ButtonLink>
-                )}
-              </div>
-              <p>{order?.business?.address}</p>
-            </InfoContent>
-          </BusinessInfo>
-          <CustomerInfo>
-            <PhotoWrapper>
-              {order?.business?.photo ? (
-                <Photo bgimage={order?.customer?.photo} />
-              ) : (
-                <FaUserAlt />
-              )}
-            </PhotoWrapper>
-            <InfoContent>
-              <div>
-                <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-                <ButtonLink
-                  onClick={() => handleOpenMessages('customer')}
-                >
-                  <BsChat />
-                </ButtonLink>
-                {order?.unread_count > 0 && unreadAlert.customer && (
-                  <NotificationIcon>
-                    <BsBell />
-                  </NotificationIcon>
-                )}
-                {order?.customer?.cellphone && (
-                  <ButtonLink
-                    onClick={() => window.open(`tel:${order?.customer?.cellphone }`)}
-                  >
-                    <HiOutlinePhone />
-                  </ButtonLink>
-                )}
-              </div>
-              <p>{order?.customer?.cellphone}</p>
-            </InfoContent>
-          </CustomerInfo>
-          {order?.delivery_type === 1 && (
-            <DriverInfoContainer>
-              <DriverInfo>
-                <PhotoWrapper>
-                  {order?.driver?.photo ? (
-                    <Photo bgimage={order?.driver?.photo} />
-                  ) : (
-                    <FaUserAlt />
-                  )}
-                </PhotoWrapper>
-                {order.driver_id ? (
-                  <InfoContent>
-                    <div>
-                      <p>{order?.driver?.name} {order?.driver?.lastname}</p>
-                      <ButtonLink
-                        onClick={() => handleOpenMessages('driver')}
-                      >
-                        <BsChat />
-                      </ButtonLink>
-                      {order?.unread_count > 0 && unreadAlert.driver && (
-                        <NotificationIcon>
-                          <BsBell />
-                        </NotificationIcon>
-                      )}
-                      {order?.driver?.cellphone && (
-                        <ButtonLink
-                          onClick={() => window.open(`tel:${order?.driver?.cellphone }`)}
-                        >
-                          <HiOutlinePhone />
-                        </ButtonLink>
-                      )}
-                    </div>
-                    <p>{t('DRIVER', 'Driver')}</p>
-                  </InfoContent>
-                ) : (
-                  <InfoContent>
-                    <div>
-                      <p>{t('NO_DRIVER', 'No driver')}</p>
-                    </div>
-                  </InfoContent>
-                )}
-              </DriverInfo>
-              <DriverSelectorContainer>
-                <DriverSelector
-                  drivers={driversList.drivers}
-                  isPhoneView
-                  defaultValue={order?.driver?.id ? order.driver.id : 'default'}
-                  order={order}
-                />
-              </DriverSelectorContainer>
-            </DriverInfoContainer>
-          )}
+          <OrderContactInformation
+            order={order}
+            unreadAlert={unreadAlert}
+            driversList={driversList}
+            handleOpenMessages={handleOpenMessages}
+          />
           <OrderProducts>
             <h2>{t('ORDER_DETAILS', 'Order details')}</h2>
             {order?.products?.length && order?.products.map((product) => (
@@ -371,42 +273,61 @@ const OrderDetailsUI = (props) => {
           <OrderBill
             order={order}
           />
-        </>
+        </OrderDetailsContent>
       )}
 
-      {loading && (
-        <>
-          <Skeleton height={75} count={3} style={{ marginBottom: '10px'}} />
-          <Skeleton height={200} style={{ marginBottom: '10px'}} />
-          <Skeleton height={30} style={{ marginBottom: '10px'}}  />
-          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
-          <Skeleton height={200} style={{ marginBottom: '10px'}} />
-          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
-        </>
+      {extraOpen && width >= 1000 && (
+        <OrderDetailsExtraContent>
+          <Button
+            borderRadius='5px'
+            color='secundary'
+            onClick={() => setExtraOpen(false)}
+          >
+            <MdcClose />
+          </Button>
+          {(openMessages.driver || openMessages.business || openMessages.customer) && (
+            <ChatContainer>
+              <Messages
+                orderId={order?.id}
+                order={order}
+                customer={openMessages.customer}
+                business={openMessages.business}
+                driver={openMessages.driver}
+                history={openMessages.history}
+                handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                onClose={() => handleCloseMessages()}
+                messages={messages}
+              />
+            </ChatContainer>
+          )}
+        </OrderDetailsExtraContent>
       )}
 
-      {!loading && !order && (
-        <NotFoundSource
-          content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
-          btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
-          onClickButton={handleBackRedirect}
-        />
+      {width < 1000 && (
+        <Modal
+          width='70%'
+          height='90vh'
+          open={extraOpen}
+          onClose={() => setExtraOpen(false)}
+        >
+          {(openMessages.driver || openMessages.business || openMessages.customer) && (
+            <ChatContainer>
+              <Messages
+                orderId={order?.id}
+                order={order}
+                customer={openMessages.customer}
+                business={openMessages.business}
+                driver={openMessages.driver}
+                history={openMessages.history}
+                handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                onClose={() => handleCloseMessages()}
+                messages={messages}
+              />
+            </ChatContainer>
+          )}
+        </Modal>
       )}
-      {(openMessages.driver || openMessages.business || openMessages.customer) && (
-        <ChatContainer>
-          <Messages
-            orderId={order?.id}
-            order={order}
-            customer={openMessages.customer}
-            business={openMessages.business}
-            driver={openMessages.driver}
-            history={openMessages.history}
-            handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
-            onClose={() => handleCloseMessages()}
-            messages={messages}
-          />
-        </ChatContainer>
-      )}
+
 
       <Modal
         width='70%'
@@ -433,6 +354,14 @@ const OrderDetailsUI = (props) => {
           orderId={order?.id}
         />
       </Modal>
+
+      {!loading && !order && (
+        <NotFoundSource
+          content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
+          btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
+          onClickButton={handleBackRedirect}
+        />
+      )}
     </Container>
   )
 }
