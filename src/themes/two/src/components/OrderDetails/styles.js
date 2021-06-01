@@ -39,41 +39,6 @@ export const ChatContainer = styled.div`
   border-radius: 7px;
 `
 
-export const OrderDetailsHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column-reverse;
-
-  > div:first-child {
-    color: ${props => props.theme.colors?.headingColor};
-    width: 100%;
-    h1 {
-      font-size: 24px;
-      margin: 0px;
-    }
-
-    p {
-      font-size: 14px;
-      margin: 0px;
-    }
-  }
-
-  > div:not(:first-child) {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    > div:not(:first-child) {
-      margin-bottom: 0px;
-    }
-  }
-`
-
 export const ButtonLink = styled.div`
   cursor: pointer;
   padding: 5px;
@@ -274,35 +239,5 @@ export const OrderProducts = styled.div`
   h2 {
     color: ${props => props.theme.colors?.headingColor};
     font-size: 18px;
-  }
-`
-
-export const OrderBill = styled.div`
-  color: #191919;
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  table {
-    width: 100%;
-    font-size: 15px;
-    tr td:nth-child(2) {
-      text-align: right;
-      ${props => props.theme?.rtl && css`
-        text-align: left;
-      `}
-    }
-  }
-
-  table.total {
-    border-top: 1px solid #BFBFBF;
-    margin-top: 15px;
-    tr {
-      font-size: 16px;
-      td {
-        font-weight: bold;
-        padding-top: 10px;
-      }
-    }
   }
 `

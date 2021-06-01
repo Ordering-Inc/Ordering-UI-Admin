@@ -6,9 +6,6 @@ import BsBell from '@meronex/icons/bs/BsBell'
 import BsChat from '@meronex/icons/bs/BsChat'
 import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
-import MdcDotsVertical from '@meronex/icons/mdc/MdcDotsVertical'
-import EnDotSingle from '@meronex/icons/en/EnDotSingle'
-import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
@@ -18,13 +15,12 @@ import { MetaFields } from '../../../../../components/MetaFields'
 import { Modal } from '../../../../../components/Modal'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import AiOutlinePrinter from '@meronex/icons/ai/AiOutlinePrinter'
-import AiOutlineApartment from '@meronex/icons/ai/AiOutlineApartment'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { OrderDetailsHeader } from '../OrderDetailsHeader'
+import { OrderBill } from '../OrderBill'
+
 import {
   Container,
   ChatContainer,
-  OrderDetailsHeader,
   ButtonLink,
   OrderStatus,
   StatusBarContainer,
@@ -40,7 +36,6 @@ import {
   DriverInfo,
   DriverSelectorContainer,
   OrderProducts,
-  OrderBill
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -66,7 +61,7 @@ const OrderDetailsUI = (props) => {
   const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
   const [openMetaFields, setOpenMetaFields] = useState(false)
   const theme = useTheme()
-  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
 
   const orderDetail = useRef(null)
@@ -142,13 +137,6 @@ const OrderDetailsUI = (props) => {
     }
   }
 
-  const getImage = (status) => {
-    try {
-      return theme.images?.order?.[`status${status}`]
-    } catch (error) {
-      return 'https://picsum.photos/75'
-    }
-  }
 
   const unreadMessages = () => {
     const unreadedMessages = messages?.messages.filter(message => !message?.read && message?.can_see?.includes(0) && message?.author_id !== user.id)
@@ -218,62 +206,12 @@ const OrderDetailsUI = (props) => {
     >
       {order && Object.keys(order).length > 0 && !loading && (
         <>
-          <OrderDetailsHeader>
-            <div>
-              <h1>{t('ORDER_NO', 'Order No')}. {order?.id}</h1>
-              <p>                  
-                <span>{order?.paymethod?.name}</span>
-                <EnDotSingle />
-                {order?.delivery_type === 1 && (
-                  <span>
-                    {t('DELIVERY', 'Delivery')}
-                  </span>
-                )}
-                {order?.delivery_type === 2 && (
-                  <span>
-                    {t('PICKUP', 'Pickup')}
-                  </span>
-                )}
-                {order?.delivery_type === 3 && (
-                  <span>
-                    {t('EAT_IN', 'Eat in')}
-                  </span>
-                )}
-                {order?.delivery_type === 4 && (
-                  <span>
-                    {t('CURBSIDE', 'Curbside')}
-                  </span>
-                )}
-                {order?.delivery_type === 5 && (
-                  <span>
-                    {t('DRIVE_THRU', 'Drive thru')}
-                  </span>
-                )}
-              </p>
-            </div>
-            <div>
-              <ButtonLink onClick={() => window.print()}>
-                <AiOutlinePrinter />
-              </ButtonLink>
-              <ButtonLink
-                onClick={() => handleOpenMessages('history')}
-              >
-                <AiOutlineApartment />
-              </ButtonLink>
-              <ButtonLink
-                onClick={() => setOpenMetaFields(true)}
-              >
-                <MdcDotsVertical />
-              </ButtonLink>
-              <Button
-                borderRadius='5px'
-                color='secundary'
-                onClick={() => actionSidebar(false)}
-              >
-                <MdcClose />
-              </Button>
-            </div>
-          </OrderDetailsHeader>
+          <OrderDetailsHeader
+            order={order}
+            actionSidebar={actionSidebar}
+            setOpenMetaFields={setOpenMetaFields}
+            handleOpenMessages={handleOpenMessages}
+          />
           <OrderStatus>
             <div>
               <h2>{t('ORDER_STATUS', 'Order status')}</h2>
@@ -430,52 +368,9 @@ const OrderDetailsUI = (props) => {
               />
             ))}
           </OrderProducts>
-          <OrderBill>
-            <table>
-              <tbody>
-                <tr>
-                  <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                  <td>{parsePrice(order?.summary?.subtotal)}</td>
-                </tr>
-                {order?.summary?.discount > 0 && (
-                  <tr>
-                    <td>{t('DISCOUNT', 'Discount')}</td>
-                    <td>-{parsePrice(order?.summary?.discount)}</td>
-                  </tr>
-                )}
-                {order?.summary?.tax > 0 && (
-                  <tr>
-                    <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-                    <td>{parsePrice(order?.summary?.tax)}</td>
-                  </tr>
-                )}
-                {(order?.summary?.delivery_price > 0) && (
-                  <tr>
-                    <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                    <td>{parsePrice(order?.summary?.delivery_price)}</td>
-                  </tr>
-                )}
-                <tr>
-                  <td>{t('DRIVER_TIP', 'Driver tip')}</td>
-                  <td>{parsePrice(order?.summary?.driver_tip)}</td>
-                </tr>
-                {order?.summary?.service_fee > 0 && (
-                  <tr>
-                    <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-                    <td>{parsePrice(order?.summary?.service_fee)}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-            <table className='total'>
-              <tbody>
-                <tr>
-                  <td>{t('TOTAL', 'Total')}</td>
-                  <td>{parsePrice(order?.summary?.total)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </OrderBill>
+          <OrderBill
+            order={order}
+          />
         </>
       )}
 

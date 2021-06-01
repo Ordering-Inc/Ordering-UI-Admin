@@ -180,7 +180,7 @@ export const DriversInfo = styled.div`
     > div {
       border: none;
       > div:first-child {
-        padding: 0px;
+        padding: 0px 10px;
         p {
           color: ${props => props.theme.colors?.headingColor};
           font-size: 14px;
