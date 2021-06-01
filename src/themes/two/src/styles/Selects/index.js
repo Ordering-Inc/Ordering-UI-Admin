@@ -60,7 +60,6 @@ export const Option = styled.div`
 export const Options = styled.div`
   min-width: 100%;
   background-color: #fff;
-  margin-top: 7px;
   z-index: 10000;
   border-width: 1px;
   border-style: solid;

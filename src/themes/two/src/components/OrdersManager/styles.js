@@ -6,6 +6,9 @@ export const OrdersListContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
+  @media print {
+    display: none;
+  }
 `
 export const OrdersContent = styled.div`
 
