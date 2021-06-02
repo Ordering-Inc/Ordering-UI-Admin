@@ -8,13 +8,7 @@ export const OrdersListContainer = styled.div`
 `
 export const OrdersContent = styled.div`
 `
-export const OrdersInnerContent = styled.div`
-  width: 92%;
 
-  @media (max-width: 1400px) {
-    width: 95%;
-  }
-`
 export const WrapperIndicator = styled.div`
   position: fixed;
   bottom: 20px;

@@ -9,7 +9,7 @@ export const OrdersDashboard = (props) => {
     <OrdersManageContainer>
       <OrdersDashboardList
         {...props}
-        orderListView='big'
+        orderListView='table'
       />
     </OrdersManageContainer>
   )

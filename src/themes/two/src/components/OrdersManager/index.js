@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
@@ -7,7 +7,7 @@ import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../../../../../components/Modal'
-import { Button } from '../../../../../styles/Buttons'
+import { Button } from '../../styles/Buttons'
 import {
   OrdersListContainer,
   OrdersContent,
@@ -48,7 +48,6 @@ const OrdersManagerUI = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const [events] = useEvent()
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)

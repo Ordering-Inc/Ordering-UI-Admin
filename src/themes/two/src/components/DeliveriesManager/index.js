@@ -3,17 +3,15 @@ import { useLocation, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../../../../../components/OrderDetails'
 import { Modal } from '../../../../../components/Modal'
 import { Button } from '../../../../../styles/Buttons'
-import { DeliveryDashboard } from '../../../../../components/DeliveryDashboard'
-import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
+import { DeliveryDashboard } from '../DeliveryDashboard'
+
 import {
   OrdersListContainer,
   OrdersContent,
-  OrdersInnerContent,
   WrapItemView,
   WrapperIndicator,
   OrderNotification
@@ -189,29 +187,20 @@ const DeliveriesManagerUI = (props) => {
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
         />
-        <OrderStatusFilterBar
-          selectedOrderStatus={ordersStatusGroup}
-          changeOrderStatus={handleOrdersStatusGroupFilter}
-        />
-        <OrderStatusSubFilter
-          ordersStatusGroup={ordersStatusGroup}
-          selectedSubOrderStatus={selectedSubOrderStatus}
-          handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
-        />
         <OrdersContent>
-          <OrdersInnerContent className='order-content'>
-            <WrapItemView>
-              <DeliveryDashboard
-                searchValue={searchValue}
-                filterValues={filterValues}
-                driversList={driversList}
-                deletedOrderId={deletedOrderId}
-                ordersStatusGroup={ordersStatusGroup}
-                handleSelectedOrderIds={handleSelectedOrderIds}
-                handleOpenOrderDetail={handleOpenOrderDetail}
-              />
-            </WrapItemView>
-          </OrdersInnerContent>
+          <WrapItemView>
+            <DeliveryDashboard
+              searchValue={searchValue}
+              filterValues={filterValues}
+              driversList={driversList}
+              deletedOrderId={deletedOrderId}
+              ordersStatusGroup={ordersStatusGroup}
+              selectedSubOrderStatus={selectedSubOrderStatus}
+              handleSelectedOrderIds={handleSelectedOrderIds}
+              handleOpenOrderDetail={handleOpenOrderDetail}
+              handleOrdersStatusGroupFilter={handleOrdersStatusGroupFilter}
+            />
+          </WrapItemView>
         </OrdersContent>
       </OrdersListContainer>
 

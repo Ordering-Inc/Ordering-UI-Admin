@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const SubFilterContainer = styled.div`
   width: 100%;
-  margin: 20px 0;
+  padding: 20px 0;
   display: flex;
   flex-wrap: wrap;
 

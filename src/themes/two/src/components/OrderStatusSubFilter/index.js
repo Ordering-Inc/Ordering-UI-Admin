@@ -12,7 +12,6 @@ export const OrderStatusSubFilter = (props) => {
     handleSelectedSubOrderStatus
   } = props
 
-  console.log(selectedSubOrderStatus)
   const statues = {
     pending: [
       { key: 0, value: 'Pending' },

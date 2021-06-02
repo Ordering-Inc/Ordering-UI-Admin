@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import { OrdersTable } from '../OrdersTable'
+import { OrdersCards } from '../OrdersCards'
 import {
   WrapperNoneOrders,
   WrapperOrderListContent,
@@ -9,6 +10,7 @@ import {
 
 export const OrderListing = (props) => {
   const {
+    style,
     orderList,
     driversList,
     selectedOrderIds,
@@ -49,16 +51,29 @@ export const OrderListing = (props) => {
         </WrapperNoneOrders>
       ) : (
         <WrapperOrderListContent>
-          <OrdersTable
-            orderList={orderList}
-            driversList={driversList}
-            pagination={pagination}
-            selectedOrderIds={selectedOrderIds}
-            loadMoreOrders={loadMoreOrders}
-            handleUpdateOrderStatus={handleUpdateOrderStatus}
-            handleSelectedOrderIds={handleSelectedOrderIds}
-            handleOpenOrderDetail={handleOpenOrderDetail}
-          />
+          {orderListView === 'table' ? (
+            <OrdersTable
+              orderList={orderList}
+              driversList={driversList}
+              pagination={pagination}
+              selectedOrderIds={selectedOrderIds}
+              loadMoreOrders={loadMoreOrders}
+              handleUpdateOrderStatus={handleUpdateOrderStatus}
+              handleSelectedOrderIds={handleSelectedOrderIds}
+              handleOpenOrderDetail={handleOpenOrderDetail}
+            />
+          ) : (
+            <OrdersCards
+              orderList={orderList}
+              driversList={driversList}
+              pagination={pagination}
+              selectedOrderIds={selectedOrderIds}
+              loadMoreOrders={loadMoreOrders}
+              handleUpdateOrderStatus={handleUpdateOrderStatus}
+              handleSelectedOrderIds={handleSelectedOrderIds}
+              handleOpenOrderDetail={handleOpenOrderDetail}
+            />
+          )}
         </WrapperOrderListContent>
       )}
     </>

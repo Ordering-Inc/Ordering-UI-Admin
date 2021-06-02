@@ -43,7 +43,7 @@ export const OrderNotification = styled.div`
     margin: 0px;
 
     span {
-      color: #182964;
+      color: ${props => props.theme.colors.primary};
       font-weight: 600;
     }
   }

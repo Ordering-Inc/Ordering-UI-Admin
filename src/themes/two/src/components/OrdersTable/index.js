@@ -28,8 +28,6 @@ import {
   WrapOrderStatusSelector
 } from './styles'
 
-import { Select } from '../../styles/Select'
-
 export const OrdersTable = (props) => {
   const {
     orderList,
@@ -158,7 +156,7 @@ export const OrdersTable = (props) => {
           </tr>
         </thead>
         <tbody id='orders'>
-          {!(orderList.loading || driversList.loading) ? orderList?.orders.map(order => (
+          {!(orderList.loading && driversList.loading) ? orderList?.orders.map(order => (
             <tr
               key={order.id}
               onClick={(e) => handleClickOrder(order.id, e)}
