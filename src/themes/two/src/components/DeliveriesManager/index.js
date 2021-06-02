@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrderContentHeader } from '../OrderContentHeader'
-import { OrderDetails } from '../../../../../components/OrderDetails'
+import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../../../../../components/Modal'
 import { Button } from '../../../../../styles/Buttons'
 import { DeliveryDashboard } from '../DeliveryDashboard'
@@ -37,7 +37,8 @@ const DeliveriesManagerUI = (props) => {
     handleSelectedOrderIds,
     selectedOrderIds,
     selectedSubOrderStatus,
-    handleSelectedSubOrderStatus
+    handleSelectedSubOrderStatus,
+    onOrderRedirect
   } = props
 
   const [, t] = useLanguage()
@@ -54,11 +55,12 @@ const DeliveriesManagerUI = (props) => {
 
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
-    history.push('/orders-deliveries')
+    onOrderRedirect()
   }
 
   const handleOpenOrderDetail = (id) => {
     setOrderDetailId(id)
+    onOrderRedirect(id)
     setIsOpenOrderDetail(true)
   }
 
@@ -133,8 +135,7 @@ const DeliveriesManagerUI = (props) => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
-      setOrderDetailId(id)
-      setIsOpenOrderDetail(true)
+      handleOpenOrderDetail(id)
     }
   }, [])
 
@@ -206,17 +207,14 @@ const DeliveriesManagerUI = (props) => {
         </OrdersContent>
       </OrdersListContainer>
 
-      <Modal
-        width='90%'
-        height='90vh'
-        open={isOpenOrderDetail}
-        onClose={() => handleBackRedirect()}
-      >
+      {isOpenOrderDetail && (
         <OrderDetails
+          open={isOpenOrderDetail}
           orderId={orderDetailId}
           driversList={driversList}
+          onClose={() => handleBackRedirect()}
         />
-      </Modal>
+      )}
 
       <Modal
         width='50%'

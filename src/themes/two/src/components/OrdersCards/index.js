@@ -74,6 +74,7 @@ export const OrdersCards = (props) => {
               <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
               <ViewDetails
                 className='view-details'
+                onClick={() => handleOpenOrderDetail(order.id)}
               >
                 {t('VIEW_DETAILS', 'View details')}
               </ViewDetails>
