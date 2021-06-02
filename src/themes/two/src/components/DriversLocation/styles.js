@@ -4,7 +4,8 @@ import React from 'react'
 export const WrapperMap = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #CCC;
+  background-color: #EEE;
+  position: relative;
 `
 export const WrapperOnlineDrivers = styled.div`
   position: absolute;
@@ -21,7 +22,7 @@ export const WrapperOnlineDrivers = styled.div`
   & > p {
     font-weight: 600;
     font-size: 14px;
-    color: ${props => props.theme.colors.btnDarkBlue};
+    color: ${props => props.theme.colors.primary};
     margin: 0 0 5px 0;
   }
 `
@@ -33,6 +34,7 @@ export const WrapDriverInfo = styled.div`
   column-gap: 10px;
   align-items: center;
   margin: 0 10px;
+  color: ${props => props.theme.colors?.headingColor};
 `
 export const WrapperDriverImage = styled.div`
   width: 50px;

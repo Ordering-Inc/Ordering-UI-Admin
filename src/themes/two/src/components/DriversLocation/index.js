@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useConfig, useLanguage } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
-import { DriverMapMarkerAndInfo } from '../../../../../components/DriverMapMarkerAndInfo'
-import { InterActOrderMarker } from '../../../../../components/InterActOrderMarker'
+import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
+import { InterActOrderMarker } from '../InterActOrderMarker'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { AutoScroll } from '../../../../../components/AutoScroll'
 
@@ -149,17 +149,9 @@ export const DriversLocation = (props) => {
           setInterActionOrderDriverLocation(driver.location)
         }
       }
-    } else {
-      mapFit()
     }
-  }, [driversList, driverAvailable, interActionMapOrder, mapLoaded])
-
-  useEffect(() => {
-    if (mapLoaded || interActionMapOrder === null) return
-    if (driverAvailable === 'online' || driverAvailable === 'offline') return
-    setInterActionOrderDriverLocation(interActionMapOrder?.driver?.location)
     mapFit()
-  }, [interActionMapOrder, mapLoaded])
+  }, [driversList, driverAvailable, interActionMapOrder, mapLoaded])
 
   useEffect(() => {
     if (mapLoaded || interActionOrderDriverLocation === null) return

@@ -24,7 +24,7 @@ export const OrderStatusFilterBar = (props) => {
     <>
       <OrderStatusFilterContainer>
         <InnerContainer>
-          <AutoScroll>
+          <AutoScroll scrollId='orderStatus'>
             <Tab
               active={selectedOrderStatus === 'pending'}
               onClick={() => changeSelectedOrderStatus('pending')}
