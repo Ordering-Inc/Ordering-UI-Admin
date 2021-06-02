@@ -84,7 +84,7 @@ export const DriversLocation = (props) => {
 
     if (!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null) {
       let marker, newPoint
-      marker = interActionMapOrder?.business?.location !== null ? interActionMapOrder.business.location : defaultCenter
+      marker = interActionMapOrder?.business?.location !== null ? interActionMapOrder?.business?.location : defaultCenter
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
 

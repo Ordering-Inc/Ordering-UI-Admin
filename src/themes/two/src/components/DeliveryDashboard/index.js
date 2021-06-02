@@ -26,12 +26,8 @@ export const DeliveryDashboard = (props) => {
   const [driverAvailable, setDriverAvailable] = useState('all')
   const [interActionMapOrder, setInterActionMapOrder] = useState(null)
 
-  const handleUpdateDriverLocation = (orders) => {
-    const foundOrder = orders.filter(order => order.id === interActionMapOrder?.id)
-    if (foundOrder) {
-      const updatedOrder = foundOrder[0]
-      setInterActionMapOrder({ ...updatedOrder })
-    }
+  const handleUpdateDriverLocation = (order) => {
+    setInterActionMapOrder({ ...order })
   }
 
   const handleLocation = (order) => {

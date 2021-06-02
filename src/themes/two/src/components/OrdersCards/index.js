@@ -57,7 +57,11 @@ export const OrdersCards = (props) => {
 
   useEffect(() => {
     if (orderList.loading || !interActionMapOrder) return
-    handleUpdateDriverLocation && handleUpdateDriverLocation(orderList?.orders)
+    const updatedOrder = orderList?.orders.find(order => order.id === interActionMapOrder?.id)
+    if (updatedOrder) {
+      handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder)
+    }
+
   }, [orderList?.orders])
 
   return (
