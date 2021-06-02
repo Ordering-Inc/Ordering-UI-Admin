@@ -2,8 +2,13 @@ import styled, { css } from 'styled-components'
 
 export const DeliveryDashboardContainer = styled.div`
   display: flex;
-  height: calc(100vh - 90px);
+  flex-direction: column-reverse;
   margin-top: 15px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    height: calc(100vh - 95px);
+  }
 `
 
 export const FiterContainer = styled.div`
@@ -17,8 +22,12 @@ export const OrdersContainer = styled.div`
   border: 1px solid #E9ECEF;
   border-radius: 8px;
   height: 100%;
-  max-width: 330px;
-  width: 330px;
+  overflow: hidden;
+  
+  @media (min-width: 1024px) {
+    width: 330px;
+    max-width: 330px;
+  }
 
   @media (min-width: 1300px) {
     max-width: 500px;
@@ -33,14 +42,19 @@ export const WrapperOrderlist = styled.div`
 `
 
 export const WrapperDriversLocation = styled.div`
-  height: 100%;
-  flex: 1;
+  height: 80vh;
   border-radius: 8px;
   overflow: hidden;
-
-  ${props => props.theme?.rtl ? css`
-    margin-right: 15px;
-  ` : css`
-    margin-left: 15px;
-  `}
+  margin-top: 20px;
+  
+  @media (min-width: 1024px) {
+    margin-top: 0px;
+    height: 100%;
+    flex: 1;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 15px;
+    ` : css`
+      margin-left: 15px;
+    `}
+  }
 `

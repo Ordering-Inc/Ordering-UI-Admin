@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const OrderDashboardControlsContainer = styled.div`
   display: flex;
+  margin-top: 10px;
 
   button {
     margin: 0 7px;
@@ -14,6 +15,10 @@ export const OrderDashboardControlsContainer = styled.div`
         margin-left: 5px;
       `}
     }
+  }
+
+  @media (min-width: 992px) {
+    margin: 0px;
   }
 `
 

@@ -76,7 +76,7 @@ export const BusinessInfo = styled.div`
     }
   }
   @media (min-width: 1300px) {
-    width: 50%;
+    width: 45%;
   }
 `
 
@@ -140,16 +140,21 @@ export const DriverSelectorWrapper = styled.div`
     > div:first-child {
       border: none;
       padding: 0px;
+      > div:first-child {
+        padding: 0px
+      }
     }
   }
 
   @media (min-width: 1300px) {
-    width: 50%;
+    width: 55%;
     margin-top: 0px;
     ${props => props.theme?.rtl ? css`
       border-right: 1px solid ${props => props.theme.colors?.secundary};
+      padding-right: 15px;
     ` : css`
       border-left: 1px solid ${props => props.theme.colors?.secundary};
+      padding-left: 15px;
     `}
   }
 `

@@ -23,6 +23,10 @@ export const Table = styled.table`
     }
   }
 
+  th {
+    padding-top: 0px;
+  }
+
   thead {
     display: block;
     tr {
@@ -36,7 +40,7 @@ export const Table = styled.table`
 
   tbody {
     overflow-x: hidden;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 380px);
     padding-bottom: 10px;
     width: 100%;
     display: block;
@@ -117,6 +121,12 @@ export const Table = styled.table`
     p.bold {
       font-size: 14px;
       font-weight: 600;
+    }
+  }
+
+  @media (min-width: 992px) {
+    tbody {
+      max-height: calc(100vh - 300px);
     }
   }
 `
