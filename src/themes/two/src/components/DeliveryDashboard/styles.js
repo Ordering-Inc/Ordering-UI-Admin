@@ -3,7 +3,11 @@ import styled, { css } from 'styled-components'
 export const DeliveryDashboardContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  margin-top: 15px;
+  margin-top: 0px;
+
+  @media (min-width: 760px) {
+    margin-top: 15px
+  }
 
   @media (min-width: 1024px) {
     flex-direction: row;
@@ -23,6 +27,11 @@ export const OrdersContainer = styled.div`
   border-radius: 8px;
   height: 100%;
   overflow: hidden;
+  margin-top: 20px;
+
+  @media (min-width: 760px) {
+    margin-top: 0px;
+  }
   
   @media (min-width: 1024px) {
     width: 330px;

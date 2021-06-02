@@ -10,7 +10,7 @@ import { Button } from '../../../../../styles/Buttons'
 import { DeliveryDashboard } from '../DeliveryDashboard'
 
 import {
-  OrdersListContainer,
+  DeliveriesContainer,
   OrdersContent,
   WrapItemView,
   WrapperIndicator,
@@ -176,7 +176,7 @@ const DeliveriesManagerUI = (props) => {
 
   return (
     <>
-      <OrdersListContainer>
+      <DeliveriesContainer>
         <OrderContentHeader
           isDisableControl
           title={t('DELIVERY_DASHBOARD', 'Delivery dashboard')}
@@ -205,7 +205,7 @@ const DeliveriesManagerUI = (props) => {
             />
           </WrapItemView>
         </OrdersContent>
-      </OrdersListContainer>
+      </DeliveriesContainer>
 
       {isOpenOrderDetail && (
         <OrderDetails

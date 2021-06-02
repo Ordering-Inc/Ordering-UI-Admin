@@ -10,6 +10,8 @@ import BiSupport from '@meronex/icons/bi/BiSupport'
 import MdcArrowLeft from '@meronex/icons/mdc/MdcArrowLeft'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { LogoutButton } from '../LogoutButton'
+import IosMenu from '@meronex/icons/ios/IosMenu'
+import MdClose from '@meronex/icons/md/MdClose'
 
 import {
   SidebarContainer,
@@ -17,7 +19,8 @@ import {
   LogoWrap,
   SidebarContent,
   UserInfo,
-  CollapseButton
+  CollapseButton,
+  IconContent
 } from './styles'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -37,6 +40,7 @@ export const SidebarMenu = (props) => {
 
   const [isCollapse, setIsCollapse] = useState(false)
   const [showSubmenu, setShowSubmenu] = useState({})
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const ordersSubMenus = {
     menu: t('ORDERS', 'Orders'),
@@ -77,6 +81,23 @@ export const SidebarMenu = (props) => {
     })
   }
 
+  useEffect(() => {
+    if (windowSize.width >=760 || !isCollapse) return
+    setIsCollapse(false)
+  }, [windowSize.width])
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.getElementById('side_inner_container').style.height = '100vh'
+      document.getElementById('side_content').style.width = '100vw'
+      document.getElementById('user_info').style.width = '100vw'
+    } else {
+      document.getElementById('side_inner_container').style.height = '60px'
+      document.getElementById('side_content').style.width = '0px'
+      document.getElementById('user_info').style.width = '0px'
+    }
+  }, [menuOpen])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -89,15 +110,36 @@ export const SidebarMenu = (props) => {
       <SidebarContainer>
         <SidebarInnerContainer
           className='d-flex flex-column'
+          id='side_inner_container'
           isCollapse={isCollapse}
         >
-          <CollapseButton
-            className='position-absolute bg-white p-1'
-            onClick={() => setIsCollapse(!isCollapse)}
-            isCollapse={isCollapse}
-          >
-            <MdcArrowLeft />
-          </CollapseButton>
+          {windowSize.width >= 760 && (
+            <CollapseButton
+              className='position-absolute bg-white p-1'
+              onClick={() => setIsCollapse(!isCollapse)}
+              isCollapse={isCollapse}
+            >
+              <MdcArrowLeft />
+            </CollapseButton>
+          )}
+          {windowSize.width < 760 && (
+            <>
+              {!menuOpen ? (
+                <IconContent
+                  onClick={() => setMenuOpen(true)}
+                >
+                  <IosMenu />
+                </IconContent>
+              ) : (
+                <IconContent
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <MdClose />
+                </IconContent>
+              )}
+              
+            </>
+          )}
           <LogoWrap
             className='d-flex justify-content-center align-items-center'
             onClick={() => handleGoToPage({ page: 'home' })}
@@ -109,6 +151,7 @@ export const SidebarMenu = (props) => {
             )}
           </LogoWrap>
           <SidebarContent
+            id='side_content'
             className='d-flex flex-column justify-content-between p-1 pt-0'
           >
             {showSubmenu?.orders && (
@@ -196,6 +239,7 @@ export const SidebarMenu = (props) => {
             </div>
           </SidebarContent>
           <UserInfo
+            id='user_info'
             className='d-flex flex-column px-1'
           >
             <Button

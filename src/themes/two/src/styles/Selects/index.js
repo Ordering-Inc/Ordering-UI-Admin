@@ -151,11 +151,10 @@ export const Chevron = styled.div`
   display: flex;
   align-items: center;
   margin-left: 5px;
-  margin-right: -5px;
   ${props => props.theme?.rtl && css`
-        margin-right: 5px;
-        margin-left: -5px;
-    `}
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
 `
 
 export const Header = styled.div`

@@ -69,7 +69,11 @@ export const FilterButton = styled.button`
 export const WrapperSearchAndFilter = styled.div`
   display: flex;
   align-items: center;
-  margin: 20px 0 10px 0;
+  margin-top: 10px;
+
+  @media (min-width: 760px) {
+    margin: 20px 0 10px 0;
+  }
 
   @media (min-width: 992px) {
     margin: 0px;
