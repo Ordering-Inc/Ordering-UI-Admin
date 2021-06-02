@@ -42,7 +42,7 @@ const DriverSelectorUI = (props) => {
   const [driversOptionList, setDriversOptionList] = useState([])
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
   const [isRemoveAction, setIsRemoveAction] = useState(false)
-  const driversLoading = [{ value: 'default', content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
+  const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
   useEffect(() => {
     const _driversOptionList = [
       {

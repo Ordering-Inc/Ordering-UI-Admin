@@ -4,8 +4,11 @@ export const SubFilterContainer = styled.div`
   width: 100%;
   padding: 20px 0;
   display: flex;
-  flex-wrap: wrap;
+  overflow-x: auto;
+`
 
+export const InnerContainer = styled.div`
+  display: flex;
   button {
     margin: 5px;
     white-space: nowrap;

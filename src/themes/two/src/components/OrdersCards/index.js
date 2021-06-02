@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -30,6 +30,21 @@ export const OrdersCards = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
+
+  const handleScroll = useCallback(() => {
+    const ordersContent = document.getElementById('cardOrders')
+    const hasMore = pagination.to < pagination.total
+    if (orderList.loading || !hasMore) return
+    if ((ordersContent?.scrollTop + 50) >= (ordersContent?.scrollHeight - ordersContent?.offsetHeight)) {
+      loadMoreOrders()
+    }
+  }, [orderList, pagination])
+
+  useEffect(() => {
+    const ordersContent = document.getElementById('cardOrders')
+    ordersContent.addEventListener('scroll', handleScroll)
+    return () => ordersContent.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <OrdersListContainer>

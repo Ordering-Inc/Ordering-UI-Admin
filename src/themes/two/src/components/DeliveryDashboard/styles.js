@@ -17,17 +17,19 @@ export const OrdersContainer = styled.div`
   border: 1px solid #E9ECEF;
   border-radius: 8px;
   height: 100%;
-  overflow-x: hidden;
-  min-width: 400px;
+  max-width: 500px;
+  width: 500px;
 `
 
 export const WrapperOrderlist = styled.div`
   padding: 15px;
+  overflow-x: hidden;
+  height: calc(100% - 135px);
 `
 
 export const WrapperDriversLocation = styled.div`
   height: 100%;
-  width: 100%;
+  flex: 1;
   border-radius: 8px;
   overflow: hidden;
 

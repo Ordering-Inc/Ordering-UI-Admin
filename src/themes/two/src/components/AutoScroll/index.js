@@ -40,7 +40,7 @@ export const AutoScroll = ({ children, modal, special, scrollId }) => {
         } else {
           botonRight && botonRight.classList.remove('hidden')
         }
-        if ((containerElement?.scrollLeft * -1) > parentElement?.scrollWidth - containerElement?.offsetWidth - 20) {
+        if ((containerElement?.scrollLeft * -1) > parentElement?.scrollWidth - containerElement?.offsetWidth - 40) {
           botonLeft && botonLeft.classList.add('hidden')
         } else {
           botonLeft && botonLeft.classList.remove('hidden')
@@ -51,7 +51,7 @@ export const AutoScroll = ({ children, modal, special, scrollId }) => {
         } else {
           botonLeft && botonLeft.classList.remove('hidden')
         }
-        if (containerElement?.scrollLeft > parentElement?.scrollWidth - containerElement?.offsetWidth - 20) {
+        if (containerElement?.scrollLeft > parentElement?.scrollWidth - containerElement?.offsetWidth - 40) {
           botonRight && botonRight.classList.add('hidden')
         } else {
           botonRight && botonRight.classList.remove('hidden')

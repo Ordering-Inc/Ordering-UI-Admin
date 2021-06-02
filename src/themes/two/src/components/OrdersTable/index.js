@@ -116,6 +116,8 @@ export const OrdersTable = (props) => {
     return () => ordersContent.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  console.log(pagination)
+
   return (
     <OrdersContainer>
       <Table>
@@ -156,7 +158,7 @@ export const OrdersTable = (props) => {
           </tr>
         </thead>
         <tbody id='orders'>
-          {!(orderList.loading && driversList.loading) ? orderList?.orders.map(order => (
+          {orderList?.orders?.map(order => (
             <tr
               key={order.id}
               onClick={(e) => handleClickOrder(order.id, e)}
@@ -306,7 +308,8 @@ export const OrdersTable = (props) => {
                 </div>
               </td>
             </tr>
-          )) : (
+          ))}
+          {(orderList.loading || driversList.loading) &&
             [...Array(10).keys()].map(i => (
               <tr key={i}>
                 <td
@@ -406,7 +409,7 @@ export const OrdersTable = (props) => {
                 </td>
               </tr>
             ))
-          )}
+          }
         </tbody>
       </Table>
       </OrdersContainer>

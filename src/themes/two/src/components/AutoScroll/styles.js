@@ -4,19 +4,19 @@ export const AutoscrollContainer = styled.span`
   display: ${props => props.modal ? 'flex' : 'inherit'};
   width: ${props => props.modal ? '300vw' : 'initial'};
   
-  svg {
-    background: #D9D9D9;
+  svg.right-autoscroll,
+  svg.left-autoscroll {
+    background: #FFF;
     display: inline-block;
     border-radius: 50%;
-    width: 16px;
-    min-width: 16px;
-    height: 16px;
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
     align-self: center;
     top: ${props => props.modal ? '35%' : '0'};
     position: sticky;
     color: #000000;
     border: 1px solid #D9D9D9;
-    opacity: 0.8;
   }
   .right-autoscroll{
     ${props => props.theme?.rtl ? css`

@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button } from '../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
+import { AutoScroll } from '../AutoScroll'
 import {
-  SubFilterContainer
+  SubFilterContainer,
+  InnerContainer
 } from './styles'
 
 export const OrderStatusSubFilter = (props) => {
@@ -99,22 +101,26 @@ export const OrderStatusSubFilter = (props) => {
   }
   return (
     <SubFilterContainer>
-      {statues[ordersStatusGroup].map(status => (
-        <Button
-          key={status.key}
-          color={(selectedSubOrderStatus?.pending.includes(status.key) ||
-            selectedSubOrderStatus?.inProgress.includes(status.key) ||
-            selectedSubOrderStatus?.completed.includes(status.key) ||
-            selectedSubOrderStatus?.cancelled.includes(status.key)) ? 'primary' : 'secundary'}
-          onClick={() => handleChange(status.key)}
-        >
-          {status.value}
-          {(selectedSubOrderStatus?.pending.includes(status.key) ||
-            selectedSubOrderStatus?.inProgress.includes(status.key) ||
-            selectedSubOrderStatus?.completed.includes(status.key) ||
-            selectedSubOrderStatus?.cancelled.includes(status.key)) && <MdClose />}
-        </Button>
-      ))}
+      <InnerContainer>
+        <AutoScroll scrollId='subFilter'>
+          {statues[ordersStatusGroup].map(status => (
+            <Button
+              key={status.key}
+              color={(selectedSubOrderStatus?.pending.includes(status.key) ||
+                selectedSubOrderStatus?.inProgress.includes(status.key) ||
+                selectedSubOrderStatus?.completed.includes(status.key) ||
+                selectedSubOrderStatus?.cancelled.includes(status.key)) ? 'primary' : 'secundary'}
+              onClick={() => handleChange(status.key)}
+            >
+              {status.value}
+              {(selectedSubOrderStatus?.pending.includes(status.key) ||
+                selectedSubOrderStatus?.inProgress.includes(status.key) ||
+                selectedSubOrderStatus?.completed.includes(status.key) ||
+                selectedSubOrderStatus?.cancelled.includes(status.key)) && <MdClose />}
+            </Button>
+          ))}
+        </AutoScroll>
+      </InnerContainer>
     </SubFilterContainer>
   )
 }
