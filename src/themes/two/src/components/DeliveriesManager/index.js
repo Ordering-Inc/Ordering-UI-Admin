@@ -177,6 +177,7 @@ const DeliveriesManagerUI = (props) => {
     <>
       <OrdersListContainer>
         <OrderContentHeader
+          isDisableControl
           title={t('DELIVERY_DASHBOARD', 'Delivery dashboard')}
           searchValue={searchValue}
           driverGroupList={driverGroupList}
@@ -199,6 +200,7 @@ const DeliveriesManagerUI = (props) => {
               handleSelectedOrderIds={handleSelectedOrderIds}
               handleOpenOrderDetail={handleOpenOrderDetail}
               handleOrdersStatusGroupFilter={handleOrdersStatusGroupFilter}
+              handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
             />
           </WrapItemView>
         </OrdersContent>

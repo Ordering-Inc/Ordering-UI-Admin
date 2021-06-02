@@ -26,8 +26,12 @@ export const DeliveryDashboard = (props) => {
   const [driverAvailable, setDriverAvailable] = useState('all')
   const [interActionMapOrder, setInterActionMapOrder] = useState(null)
 
-  const handleUpdateDriverLocation = (order) => {
-    setInterActionMapOrder({ ...order })
+  const handleUpdateDriverLocation = (orders) => {
+    const foundOrder = orders.filter(order => order.id === interActionMapOrder?.id)
+    if (foundOrder) {
+      const updatedOrder = foundOrder[0]
+      setInterActionMapOrder({ ...updatedOrder })
+    }
   }
 
   const handleLocation = (order) => {
@@ -54,8 +58,11 @@ export const DeliveryDashboard = (props) => {
         </FiterContainer>
         <WrapperOrderlist id='cardOrders'>
           <OrdersDashboardList
-            orderListView='card'
             {...props}
+            orderListView='card'
+            interActionMapOrder={interActionMapOrder}
+            handleLocation={handleLocation}
+            handleUpdateDriverLocation={handleUpdateDriverLocation}
           />
         </WrapperOrderlist>
       </OrdersContainer>

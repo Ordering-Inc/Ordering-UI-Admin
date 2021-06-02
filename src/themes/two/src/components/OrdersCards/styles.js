@@ -8,6 +8,7 @@ export const OrderNunberContainer = styled.div`
 
 `
 export const OrderCard = styled.div`
+  cursor: pointer;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.colors?.secundary};
   margin-bottom: 20px;
@@ -21,6 +22,10 @@ export const OrderCard = styled.div`
   h2 {
     font-size: 18px;
   }
+
+  ${({ active }) => active && css`
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
 `
 
 export const OrderHeader = styled.div`
@@ -42,7 +47,7 @@ export const ViewDetails = styled.a`
 `
 
 export const BusinessInfo = styled.div`
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
   p {
     overflow: hidden;
@@ -69,6 +74,9 @@ export const BusinessInfo = styled.div`
       font-size: 14px;
       font-weight: 600;
     }
+  }
+  @media (min-width: 1300px) {
+    width: 50%;
   }
 `
 
@@ -117,21 +125,31 @@ export const Image = (props) => {
 
 export const CardContent = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1300px) {
+    flex-direction: row;
+  }
 `
 
 export const DriverSelectorWrapper = styled.div`
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
-  ${props => props.theme?.rtl ? css`
-    border-right: 1px solid ${props => props.theme.colors?.secundary};
-  ` : css`
-    border-left: 1px solid ${props => props.theme.colors?.secundary};
-  `}
-
+  margin-top: 10px;
   > div {
     > div:first-child {
       border: none;
       padding: 0px;
     }
+  }
+
+  @media (min-width: 1300px) {
+    width: 50%;
+    margin-top: 0px;
+    ${props => props.theme?.rtl ? css`
+      border-right: 1px solid ${props => props.theme.colors?.secundary};
+    ` : css`
+      border-left: 1px solid ${props => props.theme.colors?.secundary};
+    `}
   }
 `

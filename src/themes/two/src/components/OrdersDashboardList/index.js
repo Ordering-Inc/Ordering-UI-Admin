@@ -15,7 +15,8 @@ export const OrdersDashboardList = (props) => {
     handleSelectedOrderIds,
     activeSwitch,
     handleOpenOrderDetail,
-    selectedSubOrderStatus
+    selectedSubOrderStatus,
+    handleLocation
   } = props
   const [, t] = useLanguage()
 
@@ -28,18 +29,9 @@ export const OrdersDashboardList = (props) => {
     asDashboard: true,
     initialPageSize: 50,
     loadMorePageSize: 10,
-    searchValue: searchValue,
-    filterValues: filterValues,
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,
-    isSearchByCustomerPhone: true,
-    deletedOrderId: deletedOrderId,
-    handleSelectedOrderIds: handleSelectedOrderIds,
-    selectedOrderIds: selectedOrderIds,
-    activeSwitch: activeSwitch,
-    driversList: driversList,
-    orderListView: orderListView,
-    handleOpenOrderDetail: handleOpenOrderDetail
+    isSearchByCustomerPhone: true
   }
 
   const [inProgressOrdersLoaded, setInProgressOrdersLoaded] = useState(false)

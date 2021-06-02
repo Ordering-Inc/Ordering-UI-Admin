@@ -1,13 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const OrderContentHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   min-width: 300px;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 768px) {
     flex-direction: column;
-    row-gap: 10px;
+  }
+
+  @media (max-width: 1200px) {
+    ${({ isDisableControl }) => !isDisableControl && css`
+      flex-direction: column;
+    `}
   }
 `
 export const HeaderSection = styled.div`
@@ -47,8 +52,6 @@ export const FilterButton = styled.button`
   background: transparent;
   cursor: pointer;
   display: flex;
-  margin-right: 40px;
-  margin-left: 10px;
   font-size: 24px;
   padding: 0px;
   color: #1C202E;
@@ -57,9 +60,11 @@ export const FilterButton = styled.button`
     opacity: 0.5;
   }
 
-  @media (max-width: 1400px) {
+  ${props => props.theme?.rtl ? css`
     margin-right: 10px;
-  }
+  ` : css`
+    margin-left: 10px;
+  `}
 `
 export const WrapperSearchAndFilter = styled.div`
   display: flex;

@@ -28,7 +28,7 @@ export const OrderListing = (props) => {
     interActionMapOrder,
     messageListView,
     messageType,
-    loadMoreOrders
+    loadMoreOrders,
   } = props
 
   const theme = useTheme()
@@ -72,6 +72,9 @@ export const OrderListing = (props) => {
               handleUpdateOrderStatus={handleUpdateOrderStatus}
               handleSelectedOrderIds={handleSelectedOrderIds}
               handleOpenOrderDetail={handleOpenOrderDetail}
+              interActionMapOrder={interActionMapOrder}
+              handleLocation={handleLocation}
+              handleUpdateDriverLocation={handleUpdateDriverLocation}
             />
           )}
         </WrapperOrderListContent>

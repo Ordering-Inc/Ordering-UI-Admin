@@ -25,11 +25,20 @@ export const OrdersCards = (props) => {
     loadMoreOrders,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
-    handleOpenOrderDetail
+    handleOpenOrderDetail,
+    interActionMapOrder,
+    handleLocation,
+    handleUpdateDriverLocation
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
+
+  const handleOrderClick = (e, order) => {
+    const isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector')
+    if (isInvalid) return
+    handleLocation(order)
+  }
 
   const handleScroll = useCallback(() => {
     const ordersContent = document.getElementById('cardOrders')
@@ -46,15 +55,26 @@ export const OrdersCards = (props) => {
     return () => ordersContent.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  useEffect(() => {
+    if (orderList.loading || !interActionMapOrder) return
+    handleUpdateDriverLocation && handleUpdateDriverLocation(orderList?.orders)
+  }, [orderList?.orders])
+
   return (
     <OrdersListContainer>
       {orderList?.orders?.map(order => (
-        <OrderCard key={order.id}>
+        <OrderCard
+          key={order.id}
+          active={interActionMapOrder?.id === order.id}
+          onClick={(e) => handleOrderClick(e, order)}
+        >
           <OrderHeader>
             <h2>{t('ORDER_NO', 'Order No.')} {order?.id}</h2>
             <div>
               <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
-              <ViewDetails>
+              <ViewDetails
+                className='view-details'
+              >
                 {t('VIEW_DETAILS', 'View details')}
               </ViewDetails>
             </div>
@@ -69,7 +89,9 @@ export const OrdersCards = (props) => {
                 <p>{order?.business?.city?.name}</p>
               </div>
             </BusinessInfo>
-            <DriverSelectorWrapper>
+            <DriverSelectorWrapper
+              className='driver-selector'
+            >
               <DriverSelector
                 orderView
                 padding='5px 0'

@@ -20,6 +20,7 @@ import {
 
 export const OrderContentHeader = (props) => {
   const {
+    isDisableControl,
     title,
     handleChangeSearch,
     searchValue,
@@ -71,19 +72,23 @@ export const OrderContentHeader = (props) => {
 
   return (
     <>
-      <OrderContentHeaderContainer>
+      <OrderContentHeaderContainer
+        isDisableControl={isDisableControl}
+      >
         <HeaderSection>
           <HeaderTitle>
             {title}
           </HeaderTitle>
         </HeaderSection>
         <TopRightSection>
-          <OrdersDashboardControls
-            selectedOrderNumber={selectedOrderIds?.length}
-            filterValues={filterValues}
-            handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-            handleDeleteMultiOrders={handleDeleteMultiOrders}
-          />
+          {!isDisableControl && (
+            <OrdersDashboardControls
+              selectedOrderNumber={selectedOrderIds?.length}
+              filterValues={filterValues}
+              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+              handleDeleteMultiOrders={handleDeleteMultiOrders}
+            />
+          )}
           <WrapperSearchAndFilter>
             <SearchBar
               isCustomLayout

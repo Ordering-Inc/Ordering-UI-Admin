@@ -17,8 +17,13 @@ export const OrdersContainer = styled.div`
   border: 1px solid #E9ECEF;
   border-radius: 8px;
   height: 100%;
-  max-width: 500px;
-  width: 500px;
+  max-width: 330px;
+  width: 330px;
+
+  @media (min-width: 1300px) {
+    max-width: 500px;
+    width: 500px;
+  }
 `
 
 export const WrapperOrderlist = styled.div`

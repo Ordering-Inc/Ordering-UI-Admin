@@ -5,6 +5,7 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   column-gap: 8px;
+  color: ${props => props.theme.colors?.headingColor};
   padding: ${({ padding }) => padding || '5px 10px'};
   white-space: nowrap;
   ${({ isPhoneView }) => isPhoneView && css`
@@ -46,7 +47,8 @@ export const DriverNameContainer = styled.div`
 `
 
 export const DriverName = styled.p`
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.3;
   color: #000;
   overflow: hidden;

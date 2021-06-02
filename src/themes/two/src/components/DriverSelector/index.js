@@ -222,7 +222,7 @@ const DriverSelectorUI = (props) => {
             defaultValue={defaultOption || 'default'}
             options={driversOptionList}
             optionInnerMargin='10px'
-            optionInnerMaxHeight='150px'
+            optionInnerMaxHeight='200px'
             optionBottomBorder
             onChange={(driverId) => changeDriver(driverId)}
           />
@@ -231,7 +231,7 @@ const DriverSelectorUI = (props) => {
             defaultValue='default'
             options={driversLoading}
             optionInnerMargin='10px'
-            optionInnerMaxHeight='150px'
+            optionInnerMaxHeight='200px'
             optionBottomBorder
           />
         )}
