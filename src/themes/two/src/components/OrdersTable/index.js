@@ -116,8 +116,6 @@ export const OrdersTable = (props) => {
     return () => ordersContent.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  console.log(pagination)
-
   return (
     <OrdersContainer>
       <Table>
@@ -309,7 +307,7 @@ export const OrdersTable = (props) => {
               </td>
             </tr>
           ))}
-          {(orderList.loading || driversList.loading) &&
+          {orderList.loading &&
             [...Array(10).keys()].map(i => (
               <tr key={i}>
                 <td

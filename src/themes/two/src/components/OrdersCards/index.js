@@ -48,7 +48,7 @@ export const OrdersCards = (props) => {
 
   return (
     <OrdersListContainer>
-      {!(orderList.loading || driversList.loading) ? orderList?.orders.map(order => (
+      {orderList?.orders?.map(order => (
         <OrderCard key={order.id}>
           <OrderHeader>
             <h2>{t('ORDER_NO', 'Order No.')} {order?.id}</h2>
@@ -80,8 +80,41 @@ export const OrdersCards = (props) => {
             </DriverSelectorWrapper>
           </CardContent>
         </OrderCard>
-      )) : (
-        <Skeleton width={100} />
+      ))}
+      {orderList.loading && (
+        [...Array(10).keys()].map(i => (
+          <OrderCard key={i}>
+            <OrderHeader>
+              <Skeleton width={100} height={30} />
+              <div>
+                <Skeleton width={150} />
+                <ViewDetails>
+                  <Skeleton width={100} />
+                </ViewDetails>
+              </div>
+            </OrderHeader>
+            <CardContent>
+              <BusinessInfo>
+                <WrapperImage isSkeleton>
+                  <Skeleton width={45} height={45} />
+                </WrapperImage>
+                <div className='info'>
+                  <p><Skeleton width={100} /></p>
+                  <p><Skeleton width={100} /></p>
+                </div>
+              </BusinessInfo>
+              <BusinessInfo>
+                <WrapperImage isSkeleton>
+                  <Skeleton width={45} height={45} />
+                </WrapperImage>
+                <div className='info'>
+                  <p><Skeleton width={100} /></p>
+                  <p><Skeleton width={100} /></p>
+                </div>
+              </BusinessInfo>
+            </CardContent>
+          </OrderCard>
+        ))
       )}
     </OrdersListContainer>
   )

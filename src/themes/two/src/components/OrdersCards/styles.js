@@ -78,8 +78,10 @@ export const WrapperImage = styled.div`
   max-height: 45px;
   height: 45px;
   width: 45px;
-  border: 1px solid #E3E3E3;
-  border-radius: 10px;
+  ${({ isSkeleton }) => !isSkeleton && css`
+    border: 1px solid #E3E3E3;
+    border-radius: 10px;
+  `}
 
   svg {
     width: 100%;
