@@ -172,75 +172,77 @@ export const DriversLocation = (props) => {
 
   return (
     <WrapperMap ref={mapRef} className='drivers-location'>
-      <GoogleMapReact
-        bootstrapURLKeys={{
-          key: googleMapsApiKey
-        }}
-        onGoogleApiLoaded={() => setMapLoaded(false)}
-        defaultCenter={defaultCenter}
-        center={mapCenter}
-        defaultZoom={defaultZoom}
-        zoom={mapZoom}
-        options={{ fullscreenControl: false }}
-        className='map'
-        onChange={(data) => handleMapChange(data)}
-        yesIWantToUseGoogleMapApiInternals
-      >
+      {googleMapsApiKey && (
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: googleMapsApiKey
+          }}
+          onGoogleApiLoaded={() => setMapLoaded(false)}
+          defaultCenter={defaultCenter}
+          center={mapCenter}
+          defaultZoom={defaultZoom}
+          zoom={mapZoom}
+          options={{ fullscreenControl: true }}
+          className='map'
+          onChange={(data) => handleMapChange(data)}
+          yesIWantToUseGoogleMapApiInternals
+        >
 
-        {interActionMapOrder === null && driverAvailable === 'all' && driversList.drivers.length !== 0 &&
-          driversList.drivers.map((driver) => (
-            <DriverMapMarkerAndInfo
-              key={driver.id}
-              driver={driver}
-              lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-              lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-            />
-          ))}
-        {(driverAvailable === 'online' || (interActionMapOrder !== null && interActionMapOrder?.driver === null)) &&
-          onlineDrivers.map((driver) => (
-            <DriverMapMarkerAndInfo
-              key={driver.id}
-              driver={driver}
-              lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-              lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-            />
-          ))}
-        {driverAvailable === 'offline' && offlineDrivers.length > 0 &&
-          offlineDrivers.map((driver) => (
-            <DriverMapMarkerAndInfo
-              key={driver.id}
-              driver={driver}
-              lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-              lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-            />
-          ))}
+          {interActionMapOrder === null && driverAvailable === 'all' && driversList.drivers.length !== 0 &&
+            driversList.drivers.map((driver) => (
+              <DriverMapMarkerAndInfo
+                key={driver.id}
+                driver={driver}
+                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
+                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
+              />
+            ))}
+          {(driverAvailable === 'online' || (interActionMapOrder !== null && interActionMapOrder?.driver === null)) &&
+            onlineDrivers.map((driver) => (
+              <DriverMapMarkerAndInfo
+                key={driver.id}
+                driver={driver}
+                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
+                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
+              />
+            ))}
+          {driverAvailable === 'offline' && offlineDrivers.length > 0 &&
+            offlineDrivers.map((driver) => (
+              <DriverMapMarkerAndInfo
+                key={driver.id}
+                driver={driver}
+                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
+                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
+              />
+            ))}
 
-        {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (
-          <InterActOrderMarker
-            business={interActionMapOrder?.business}
-            lat={interActionMapOrder?.business?.location?.lat}
-            lng={interActionMapOrder?.business?.location?.lng}
-            image={interActionMapOrder?.business?.logo}
-          />
-        )}
-        {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (
-          <InterActOrderMarker
-            customer={interActionMapOrder?.customer}
-            lat={interActionMapOrder?.customer?.location?.lat ? interActionMapOrder?.customer?.location?.lat : defaultCenter.lat}
-            lng={interActionMapOrder?.customer?.location?.lng ? interActionMapOrder?.customer?.location?.lng : defaultCenter.lng}
-            image={interActionMapOrder?.customer?.photo}
-          />
-        )}
+          {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (
+            <InterActOrderMarker
+              business={interActionMapOrder?.business}
+              lat={interActionMapOrder?.business?.location?.lat}
+              lng={interActionMapOrder?.business?.location?.lng}
+              image={interActionMapOrder?.business?.logo}
+            />
+          )}
+          {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (
+            <InterActOrderMarker
+              customer={interActionMapOrder?.customer}
+              lat={interActionMapOrder?.customer?.location?.lat ? interActionMapOrder?.customer?.location?.lat : defaultCenter.lat}
+              lng={interActionMapOrder?.customer?.location?.lng ? interActionMapOrder?.customer?.location?.lng : defaultCenter.lng}
+              image={interActionMapOrder?.customer?.photo}
+            />
+          )}
 
-        {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
-          <InterActOrderMarker
-            driver={interActionMapOrder?.driver}
-            lat={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
-            lng={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lng : defaultCenter.lng}
-            image={interActionMapOrder?.driver?.photo}
-          />
-        )}
-      </GoogleMapReact>
+          {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
+            <InterActOrderMarker
+              driver={interActionMapOrder?.driver}
+              lat={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
+              lng={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lng : defaultCenter.lng}
+              image={interActionMapOrder?.driver?.photo}
+            />
+          )}
+        </GoogleMapReact>
+      )}
 
       {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver === null && (
         <WrapperOnlineDrivers>

@@ -4,6 +4,7 @@ import React from 'react'
 export const WrapperMap = styled.div`
   width: 100%;
   height: 100%;
+  background-color: #CCC;
 `
 export const WrapperOnlineDrivers = styled.div`
   position: absolute;
