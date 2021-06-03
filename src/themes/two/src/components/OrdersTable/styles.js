@@ -40,7 +40,7 @@ export const Table = styled.table`
 
   tbody {
     overflow-x: hidden;
-    max-height: calc(100vh - 380px);
+    max-height: calc(100vh - 420px);
     padding-bottom: 10px;
     width: 100%;
     display: block;
@@ -122,6 +122,10 @@ export const Table = styled.table`
       font-size: 14px;
       font-weight: 600;
     }
+  }
+
+  @media (min-width: 760px) {
+    max-height: calc(100vh - 380px);
   }
 
   @media (min-width: 992px) {

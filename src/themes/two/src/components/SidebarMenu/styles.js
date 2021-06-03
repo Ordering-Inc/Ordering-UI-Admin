@@ -1,24 +1,36 @@
 import styled, { css } from 'styled-components'
 
+export const Header = styled.div`
+  position: fixed;
+  width: 100vw;
+  border-bottom: 1px solid #CCC;
+  z-index: 1000;
+`
+
 export const SidebarContainer = styled.div`
   @media print {
     display: none;
   }
+  transition: width 0.4s ease;
+  position: fixed;
+  z-index: 1000;
+  background-color: #FFF;
+  width: 0px;
+  height: 100vh;
+  overflow: hidden;
 
-  @media (max-width: 760px) {
-    position: fixed;
-    z-index: 1000;
+  @media (min-width: 760px) {
+    overflow: inherit;
+    position: relative;
+    width: ${({ isCollapse }) => isCollapse ? '65px' : '230px'} !important;
   }
 `
 
 export const SidebarInnerContainer = styled.div`
-  position: sticky;
-  top: 0px;
-  width: 100vw;
-  transition: width 0.4s ease;
+  height: 100%;
   @media (min-width: 760px) {
-    height: 100vh !important;
-    width: ${({ isCollapse }) => isCollapse ? '65px' : '230px'};
+    position: sticky;
+    top: 0px;
     ${props => props.theme?.rtl ? css`
       border-left: 1px solid #E9ECEF;
     ` : css`
@@ -31,9 +43,6 @@ export const LogoWrap = styled.div`
   height: 60px;
   box-sizing: border-box;
   background-color: #FFF;
-  img {
-    height: 60px;
-  }
 
   @media (min-width: 760px) {
     height: 80px;
@@ -42,12 +51,9 @@ export const LogoWrap = styled.div`
 `
 
 export const SidebarContent = styled.div`
-  width: 0;
-  overflow: hidden;
   flex: 1;
   box-sizing: border-box;
-  background-color: #FFF;
-  transition: 0.5s;
+  transition: 0.1s;
   button {
     font-size: 14px;
     box-sizing: border-box;
@@ -57,7 +63,6 @@ export const SidebarContent = styled.div`
   }
 
   @media (min-width: 760px) {
-    width: inherit !important;
     ${props => props.theme?.rtl ? css`
       border-left: 1px solid #E9ECEF;
     ` : css`
@@ -68,13 +73,9 @@ export const SidebarContent = styled.div`
 
 export const UserInfo = styled.div`
   border-top: 1px solid #E9ECEF;
-  background-color: #FFF;
-  width: 0;
-  overflow: hidden;
-  transition: 0.5s;
+  transition: 0.1s;
 
   @media (min-width: 760px) {
-    width: inherit !important;
     ${props => props.theme?.rtl ? css`
       border-left: 1px solid #E9ECEF;
     ` : css`
@@ -106,13 +107,23 @@ export const CollapseButton = styled.div`
 `
 
 export const IconContent = styled.span`
-  position: fixed;
+  position: absolute;
   cursor: pointer;
   top: 9px;
   ${props => props.theme?.rtl ? css`
     right: 10px;
   ` : css`
     left: 10px;
+  `}
+
+  ${({ isClose }) => isClose && css`
+    ${props => props.theme?.rtl ? css`
+      right: initial;
+      left: 10px;
+    ` : css`
+      left: initial;
+      right: 10px;
+    `}
   `}
   width: 35px;
   height: 35px;
@@ -127,4 +138,9 @@ export const IconContent = styled.span`
     flex-shrink: 0;
     font-size: 30px;
   }
+`
+
+export const MenuClose = styled.div`
+  position: relative;
+  height: 60px;
 `

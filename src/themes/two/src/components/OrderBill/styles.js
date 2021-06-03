@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const OrderBillContainer = styled.div`
   color: #191919;
-  margin: 20px 0;
+  padding: 20px 0;
   display: flex;
   align-items: center;
   flex-direction: column;

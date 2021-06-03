@@ -89,6 +89,7 @@ export const Image = styled.div`
   box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);
   border-radius: 7.6px;
   box-sizing: border-box;
+  overflow: hidden;
 
   img {
     width: 100%;
@@ -182,6 +183,8 @@ export const BubbleConsole = styled.div`
   height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
+  max-width: 80%;
+
   @media (min-width: 1024px){
     max-width: 60%;
   }

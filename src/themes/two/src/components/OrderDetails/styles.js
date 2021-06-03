@@ -8,7 +8,7 @@ export const Container = styled.div`
   background: #FFF;
   height: 100vh;
   top: 0px;
-  z-index: 100;
+  z-index: 1001;
   box-shadow: -4px 0px 7px #ccc;
   overflow-x: hidden;
   transition: 0.5s;

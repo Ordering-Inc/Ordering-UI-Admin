@@ -14,13 +14,15 @@ import IosMenu from '@meronex/icons/ios/IosMenu'
 import MdClose from '@meronex/icons/md/MdClose'
 
 import {
+  Header,
   SidebarContainer,
   SidebarInnerContainer,
   LogoWrap,
   SidebarContent,
   UserInfo,
   CollapseButton,
-  IconContent
+  IconContent,
+  MenuClose
 } from './styles'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -64,6 +66,7 @@ export const SidebarMenu = (props) => {
   }
 
   const handleGoToPage = (data) => {
+    setMenuOpen(false)
     events.emit('go_to_page', data)
   }
 
@@ -88,13 +91,9 @@ export const SidebarMenu = (props) => {
 
   useEffect(() => {
     if (menuOpen) {
-      document.getElementById('side_inner_container').style.height = '100vh'
-      document.getElementById('side_content').style.width = '100vw'
-      document.getElementById('user_info').style.width = '100vw'
+      document.getElementById('side_bar').style.width = '100vw'
     } else {
-      document.getElementById('side_inner_container').style.height = '60px'
-      document.getElementById('side_content').style.width = '0px'
-      document.getElementById('user_info').style.width = '0px'
+      document.getElementById('side_bar').style.width = '0px'
     }
   }, [menuOpen])
 
@@ -106,40 +105,16 @@ export const SidebarMenu = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-
-      <SidebarContainer>
-        <SidebarInnerContainer
-          className='d-flex flex-column'
-          id='side_inner_container'
-          isCollapse={isCollapse}
-        >
-          {windowSize.width >= 760 && (
-            <CollapseButton
-              className='position-absolute bg-white p-1'
-              onClick={() => setIsCollapse(!isCollapse)}
-              isCollapse={isCollapse}
+      
+      {windowSize.width < 760 && (
+        <Header>
+          {!menuOpen && (
+            <IconContent
+              onClick={() => setMenuOpen(true)}
             >
-              <MdcArrowLeft />
-            </CollapseButton>
-          )}
-          {windowSize.width < 760 && (
-            <>
-              {!menuOpen ? (
-                <IconContent
-                  onClick={() => setMenuOpen(true)}
-                >
-                  <IosMenu />
-                </IconContent>
-              ) : (
-                <IconContent
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <MdClose />
-                </IconContent>
-              )}
-              
-            </>
-          )}
+              <IosMenu />
+            </IconContent>
+          )}              
           <LogoWrap
             className='d-flex justify-content-center align-items-center'
             onClick={() => handleGoToPage({ page: 'home' })}
@@ -150,8 +125,46 @@ export const SidebarMenu = (props) => {
               <Image src={theme?.images?.logos?.logotype} fluid width='150px' height='45px' />
             )}
           </LogoWrap>
+        </Header>
+      )}
+      <SidebarContainer
+        id='side_bar'
+        isCollapse={isCollapse}
+      >
+        <SidebarInnerContainer
+          className='d-flex flex-column'
+        >
+          {windowSize.width >= 760 ? (
+            <>
+              <CollapseButton
+                className='position-absolute bg-white p-1'
+                onClick={() => setIsCollapse(!isCollapse)}
+                isCollapse={isCollapse}
+              >
+                <MdcArrowLeft />
+              </CollapseButton>            
+              <LogoWrap
+                className='d-flex justify-content-center align-items-center'
+                onClick={() => handleGoToPage({ page: 'home' })}
+              >
+                {isCollapse ? (
+                  <Image src={theme?.images?.logos?.isotype} fluid width='35px' height='45px' />
+                ) : (
+                  <Image src={theme?.images?.logos?.logotype} fluid width='150px' height='45px' />
+                )}
+              </LogoWrap>
+            </>
+          ) : (
+            <MenuClose>
+              <IconContent
+                isClose
+                onClick={() => setMenuOpen(false)}
+              >
+                <MdClose />
+              </IconContent>
+            </MenuClose>
+          )}
           <SidebarContent
-            id='side_content'
             className='d-flex flex-column justify-content-between p-1 pt-0'
           >
             {showSubmenu?.orders && (
