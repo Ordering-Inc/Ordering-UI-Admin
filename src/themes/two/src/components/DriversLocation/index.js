@@ -236,7 +236,7 @@ export const DriversLocation = (props) => {
         </GoogleMapReact>
       )}
 
-      {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver === null && (
+      {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver === null && onlineDrivers.length > 0 && (
         <WrapperOnlineDrivers>
           <p>{t('DRIVERS_ONLINE', 'Drivers online')}</p>
           <OnlineDrivers>
