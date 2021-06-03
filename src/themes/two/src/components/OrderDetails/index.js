@@ -141,7 +141,6 @@ const OrderDetailsUI = (props) => {
       setUnreadAlert({ ...unreadAlert, business: false })
     }
     if (openMessage === 'driver') {
-      orderDetail.current.style.display = 'none'
       setOpenMessages({ customer: false, business: false, driver: true, history: false })
       setUnreadAlert({ ...unreadAlert, driver: false })
     }
