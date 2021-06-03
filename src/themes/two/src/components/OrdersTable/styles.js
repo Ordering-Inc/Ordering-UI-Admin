@@ -133,6 +133,12 @@ export const Table = styled.table`
       max-height: calc(100vh - 300px);
     }
   }
+
+  @media (min-width: 1200px) {
+    tbody {
+      max-height: calc(100vh - 260px);
+    }
+  }
 `
 
 export const OrderNumberContainer = styled.div`
