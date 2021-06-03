@@ -124,7 +124,7 @@ export const OrdersTable = (props) => {
 
   useEffect(() => {
     if (orderList.loading || isRendered) return
-    setShowOrders(orderList.orders.slice(0, 10))
+    setShowOrders(orderList.orders.slice(0, 15))
     setIsRendered(true)
   }, [orderList.orders])
 
