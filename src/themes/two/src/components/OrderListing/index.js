@@ -10,7 +10,6 @@ import {
 
 export const OrderListing = (props) => {
   const {
-    style,
     orderList,
     driversList,
     selectedOrderIds,
@@ -19,8 +18,6 @@ export const OrderListing = (props) => {
     handleSelectedOrderIds,
     pagination,
     handleOpenOrderDetail,
-    activeSwitch,
-    isCheckedQuickShow,
     handleOpenMessage,
     handleLocation,
     handleUpdateDriverLocation,
