@@ -298,11 +298,9 @@ export const OrdersTable = (props) => {
                   {allowColumns?.total && (
                     <p className='bold'>{parsePrice(order?.summary?.total)}</p>
                   )}
-                  <p>
-                    {order?.delivery_datetime_utc
-                      ? getTimeAgo(order?.delivery_datetime_utc)
-                      : getTimeAgo(order?.delivery_datetime, { utc: false })}
-                    </p>
+                  {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                    <TimgeAgo order={order} />
+                  )}
                 </div>
               </td>
             </tr>
@@ -410,6 +408,39 @@ export const OrdersTable = (props) => {
           }
         </tbody>
       </Table>
-      </OrdersContainer>
+    </OrdersContainer>
+  )
+}
+
+const TimgeAgo = (props) => {
+  const {
+    order
+  } = props
+  const [{ getTimeAgo }] = useUtils()
+
+  const [diffTime, setDiffTime] = useState(
+    order?.delivery_datetime_utc
+      ? getTimeAgo(order?.delivery_datetime_utc)
+      : getTimeAgo(order?.delivery_datetime, { utc: false })
+  )
+
+  useEffect(() => {
+    const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
+    if (deActive) return
+    const timer = setInterval(() => {
+      const diff = order?.delivery_datetime_utc
+        ? getTimeAgo(order?.delivery_datetime_utc)
+        : getTimeAgo(order?.delivery_datetime, { utc: false })
+      setDiffTime(diff)
+    }, 60 * 1000)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
+
+  return (
+    <p>
+      {diffTime}
+    </p>
   )
 }
