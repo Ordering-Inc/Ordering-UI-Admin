@@ -98,8 +98,8 @@ export const Table = styled.table`
   }
 
   .orderPrice {
-    min-width: 130px;
-    max-width: 130px;
+    min-width: 140px;
+    max-width: 140px;
 
     div.info {
       p {
