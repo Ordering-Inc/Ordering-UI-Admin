@@ -42,9 +42,7 @@ export const OrdersContainer = styled.div`
 `
 
 export const WrapperOrderlist = styled.div`
-  padding: 15px;
-  overflow-x: hidden;
-  height: calc(100% - 135px);
+  height: calc(100% - 200px);
 `
 
 export const WrapperDriversLocation = styled.div`

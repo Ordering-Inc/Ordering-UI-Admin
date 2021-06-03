@@ -2,7 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
-
+  height: 100%;
+  padding: 0 15px 15px 15px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 `
 export const OrderNunberContainer = styled.div`
 
@@ -157,4 +160,8 @@ export const DriverSelectorWrapper = styled.div`
       padding-left: 15px;
     `}
   }
+`
+
+export const WrapperPagination = styled.div`
+  margin: 20px 15px 0 15px;
 `

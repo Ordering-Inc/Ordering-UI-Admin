@@ -11,7 +11,7 @@ export const WrapperNoneOrders = styled.div`
     img {
       width: 150px;
     }
-  `}    
+  `}
 `
 export const InnerNoneOrdersContainer = styled.div`
   display: flex;
@@ -20,4 +20,7 @@ export const InnerNoneOrdersContainer = styled.div`
 `
 
 export const WrapperOrderListContent = styled.div`
+  ${({ maxHeight }) => maxHeight && css`
+    height: 100%;
+  `}
 `

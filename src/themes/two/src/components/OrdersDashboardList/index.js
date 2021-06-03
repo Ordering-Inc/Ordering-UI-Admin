@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { DashboardOrdersList as OrdersListController, useLanguage } from 'ordering-components-admin'
 import { OrderListing } from '../OrderListing'
-import { WrapperOrderlist } from './styles'
 
 export const OrdersDashboardList = (props) => {
   const {
-    searchValue,
-    ordersStatusGroup,
     selectedSubOrderStatus
   } = props
   const [, t] = useLanguage()
@@ -25,59 +22,31 @@ export const OrdersDashboardList = (props) => {
     isSearchByCustomerPhone: true
   }
 
-  const [inProgressOrdersLoaded, setInProgressOrdersLoaded] = useState(false)
-  const [completedOrdersLoaded, setCompletedOrdersLoaded] = useState(false)
-  const [cancelledOrdersLoaded, setCancelledOrdersLoaded] = useState(false)
-
-  useEffect(() => {
-    if (ordersStatusGroup === 'inProgress') setInProgressOrdersLoaded(true)
-    if (ordersStatusGroup === 'completed') setCompletedOrdersLoaded(true)
-    if (ordersStatusGroup === 'cancelled') setCancelledOrdersLoaded(true)
-  }, [ordersStatusGroup])
-
   return (
     <>
-      <WrapperOrderlist
-        style={{ display: `${(ordersStatusGroup === 'pending' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
-      >
-        <OrdersListController
-          {...OrdersCommonControlProps}
-          orderStatus={selectedSubOrderStatus?.pending}
-        />
-      </WrapperOrderlist>
+      <OrdersListController
+        groupStatus='pending'
+        {...OrdersCommonControlProps}
+        orderStatus={selectedSubOrderStatus?.pending}
+      />
 
-      {(inProgressOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
-        <WrapperOrderlist
-          style={{ display: `${(ordersStatusGroup === 'inProgress' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
-        >
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            orderStatus={selectedSubOrderStatus?.inProgress}
-          />
-        </WrapperOrderlist>
-      )}
+      <OrdersListController
+        groupStatus='inProgress'
+        {...OrdersCommonControlProps}
+        orderStatus={selectedSubOrderStatus?.inProgress}
+      />
 
-      {(completedOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
-        <WrapperOrderlist
-          style={{ display: `${(ordersStatusGroup === 'completed' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
-        >
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            orderStatus={selectedSubOrderStatus?.completed}
-          />
-        </WrapperOrderlist>
-      )}
+      <OrdersListController
+        groupStatus='completed'
+        {...OrdersCommonControlProps}
+        orderStatus={selectedSubOrderStatus?.completed}
+      />
 
-      {(cancelledOrdersLoaded || (searchValue !== '' && searchValue !== null)) && (
-        <WrapperOrderlist
-          style={{ display: `${(ordersStatusGroup === 'cancelled' || (searchValue !== '' && searchValue !== null)) ? 'block' : 'none'}` }}
-        >
-          <OrdersListController
-            {...OrdersCommonControlProps}
-            orderStatus={selectedSubOrderStatus?.cancelled}
-          />
-        </WrapperOrderlist>
-      )}
+      <OrdersListController
+        groupStatus='cancelled'
+        {...OrdersCommonControlProps}
+        orderStatus={selectedSubOrderStatus?.cancelled}
+      />
     </>
   )
 }

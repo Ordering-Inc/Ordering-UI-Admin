@@ -125,18 +125,18 @@ export const Table = styled.table`
   }
 
   @media (min-width: 760px) {
-    max-height: calc(100vh - 380px);
+    max-height: calc(100vh - 420px);
   }
 
   @media (min-width: 992px) {
     tbody {
-      max-height: calc(100vh - 300px);
+      max-height: calc(100vh - 340px);
     }
   }
 
   @media (min-width: 1200px) {
     tbody {
-      max-height: calc(100vh - 260px);
+      max-height: calc(100vh - 300px);
     }
   }
 `
@@ -279,4 +279,8 @@ export const WrapOrderStatusSelector = styled.div`
       }
     }
   }
+`
+
+export const WrapperPagination = styled.div`
+  margin-top: 10px;
 `

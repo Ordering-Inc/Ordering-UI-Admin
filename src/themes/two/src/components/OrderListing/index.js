@@ -25,7 +25,9 @@ export const OrderListing = (props) => {
     interActionMapOrder,
     messageListView,
     messageType,
-    loadMoreOrders
+    loadMoreOrders,
+    ordersStatusGroup,
+    groupStatus
   } = props
 
   const theme = useTheme()
@@ -38,43 +40,49 @@ export const OrderListing = (props) => {
 
   return (
     <>
-      {!orderList.loading  && orderList.orders.length === 0 ? (
-        <WrapperNoneOrders
-          small={orderListView === 'small'}
-        >
-          <InnerNoneOrdersContainer>
-            <img src={theme?.images?.dummies?.nonOrders} alt='none' />
-          </InnerNoneOrdersContainer>
-        </WrapperNoneOrders>
-      ) : (
-        <WrapperOrderListContent>
-          {orderListView === 'table' ? (
-            <OrdersTable
-              orderList={orderList}
-              driversList={driversList}
-              pagination={pagination}
-              selectedOrderIds={selectedOrderIds}
-              loadMoreOrders={loadMoreOrders}
-              handleUpdateOrderStatus={handleUpdateOrderStatus}
-              handleSelectedOrderIds={handleSelectedOrderIds}
-              handleOpenOrderDetail={handleOpenOrderDetail}
-            />
+      {ordersStatusGroup === groupStatus && (
+        <>
+          {!orderList.loading  && orderList.orders.length === 0 ? (
+            <WrapperNoneOrders
+              small={orderListView === 'small'}
+            >
+              <InnerNoneOrdersContainer>
+                <img src={theme?.images?.dummies?.nonOrders} alt='none' />
+              </InnerNoneOrdersContainer>
+            </WrapperNoneOrders>
           ) : (
-            <OrdersCards
-              orderList={orderList}
-              driversList={driversList}
-              pagination={pagination}
-              selectedOrderIds={selectedOrderIds}
-              loadMoreOrders={loadMoreOrders}
-              handleUpdateOrderStatus={handleUpdateOrderStatus}
-              handleSelectedOrderIds={handleSelectedOrderIds}
-              handleOpenOrderDetail={handleOpenOrderDetail}
-              interActionMapOrder={interActionMapOrder}
-              handleLocation={handleLocation}
-              handleUpdateDriverLocation={handleUpdateDriverLocation}
-            />
+            <WrapperOrderListContent
+              maxHeight={orderListView !== 'table'}
+            >
+              {orderListView === 'table' ? (
+                <OrdersTable
+                  orderList={orderList}
+                  driversList={driversList}
+                  pagination={pagination}
+                  selectedOrderIds={selectedOrderIds}
+                  loadMoreOrders={loadMoreOrders}
+                  handleUpdateOrderStatus={handleUpdateOrderStatus}
+                  handleSelectedOrderIds={handleSelectedOrderIds}
+                  handleOpenOrderDetail={handleOpenOrderDetail}
+                />
+              ) : (
+                <OrdersCards
+                  orderList={orderList}
+                  driversList={driversList}
+                  pagination={pagination}
+                  selectedOrderIds={selectedOrderIds}
+                  loadMoreOrders={loadMoreOrders}
+                  handleUpdateOrderStatus={handleUpdateOrderStatus}
+                  handleSelectedOrderIds={handleSelectedOrderIds}
+                  handleOpenOrderDetail={handleOpenOrderDetail}
+                  interActionMapOrder={interActionMapOrder}
+                  handleLocation={handleLocation}
+                  handleUpdateDriverLocation={handleUpdateDriverLocation}
+                />
+              )}
+            </WrapperOrderListContent>
           )}
-        </WrapperOrderListContent>
+        </>
       )}
     </>
   )
