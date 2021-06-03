@@ -11,7 +11,7 @@ export const Container = styled.div`
   z-index: 1001;
   box-shadow: -4px 0px 7px #ccc;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.3s;
 
   ${props => props.theme?.rtl ? css`
     left: 0px;

@@ -25,7 +25,7 @@ export const OrderListing = (props) => {
     interActionMapOrder,
     messageListView,
     messageType,
-    loadMoreOrders,
+    loadMoreOrders
   } = props
 
   const theme = useTheme()
@@ -38,7 +38,7 @@ export const OrderListing = (props) => {
 
   return (
     <>
-      {!(orderList.loading || driversList.loading) && orderList.orders.length === 0 ? (
+      {!orderList.loading  && orderList.orders.length === 0 ? (
         <WrapperNoneOrders
           small={orderListView === 'small'}
         >

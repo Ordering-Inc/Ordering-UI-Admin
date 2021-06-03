@@ -48,6 +48,7 @@ const DeliveriesManagerUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
+  const [detailsOrder, setDetailsOrder] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
@@ -58,9 +59,10 @@ const DeliveriesManagerUI = (props) => {
     onOrderRedirect()
   }
 
-  const handleOpenOrderDetail = (id) => {
-    setOrderDetailId(id)
-    onOrderRedirect(id)
+  const handleOpenOrderDetail = (order) => {
+    setDetailsOrder(order)
+    setOrderDetailId(order.id)
+    onOrderRedirect(order.id)
     setIsOpenOrderDetail(true)
   }
 
@@ -136,7 +138,9 @@ const DeliveriesManagerUI = (props) => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
-      handleOpenOrderDetail(id)
+      setOrderDetailId(id)
+      onOrderRedirect(id)
+      setIsOpenOrderDetail(true)
     }
   }, [])
 
@@ -211,6 +215,7 @@ const DeliveriesManagerUI = (props) => {
       {isOpenOrderDetail && (
         <OrderDetails
           open={isOpenOrderDetail}
+          order={detailsOrder}
           orderId={orderDetailId}
           driversList={driversList}
           onClose={() => handleBackRedirect()}

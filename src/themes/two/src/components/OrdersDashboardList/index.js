@@ -5,18 +5,9 @@ import { WrapperOrderlist } from './styles'
 
 export const OrdersDashboardList = (props) => {
   const {
-    orderListView,
     searchValue,
-    filterValues,
-    selectedOrderIds,
-    deletedOrderId,
-    driversList,
     ordersStatusGroup,
-    handleSelectedOrderIds,
-    activeSwitch,
-    handleOpenOrderDetail,
-    selectedSubOrderStatus,
-    handleLocation
+    selectedSubOrderStatus
   } = props
   const [, t] = useLanguage()
 

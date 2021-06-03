@@ -41,7 +41,10 @@ export const OrdersTable = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
+  const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
+
+  const [showOrders, setShowOrders] = useState([])
+  const [isRendered, setIsRendered] = useState(false)
 
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
@@ -95,26 +98,35 @@ export const OrdersTable = (props) => {
     })
   }
 
-  const handleClickOrder = (orderId, e) => {
+  const handleClickOrder = (order, e) => {
     if (e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle')) return
-    handleOpenOrderDetail(orderId)
+    handleOpenOrderDetail(order)
   }
 
   const handleScroll = useCallback(() => {
     const ordersContent = document.getElementById('orders')
+    if (orderList.orders.length > showOrders.length) {
+      setShowOrders(orderList.orders)
+      return
+    }
     const hasMore = pagination.to < pagination.total
     if (orderList.loading || !hasMore) return
     if ((ordersContent?.scrollTop + 50) >= (ordersContent?.scrollHeight - ordersContent?.offsetHeight)) {
       loadMoreOrders()
     }
-  }, [orderList, pagination])
+  }, [orderList, pagination, showOrders])
 
   useEffect(() => {
     const ordersContent = document.getElementById('orders')
-
     ordersContent.addEventListener('scroll', handleScroll)
     return () => ordersContent.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  useEffect(() => {
+    if (orderList.loading || isRendered) return
+    setShowOrders(orderList.orders.slice(0, 10))
+    setIsRendered(true)
+  }, [orderList.orders])
 
   return (
     <OrdersContainer>
@@ -156,10 +168,10 @@ export const OrdersTable = (props) => {
           </tr>
         </thead>
         <tbody id='orders'>
-          {orderList?.orders?.map(order => (
+          {showOrders.map(order => (
             <tr
               key={order.id}
-              onClick={(e) => handleClickOrder(order.id, e)}
+              onClick={(e) => handleClickOrder(order, e)}
             >
               <td
                 className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}

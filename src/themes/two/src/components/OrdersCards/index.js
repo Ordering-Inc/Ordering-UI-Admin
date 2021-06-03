@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -29,7 +29,10 @@ export const OrdersCards = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
+  const [{ parseDate, optimizeImage }] = useUtils()
+
+  const [showOrders, setShowOrders] = useState([])
+  const [isRendered, setIsRendered] = useState(false)
 
   const handleOrderClick = (e, order) => {
     const isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector')
@@ -37,8 +40,18 @@ export const OrdersCards = (props) => {
     handleLocation(order)
   }
 
+  useEffect(() => {
+    if (orderList.loading || isRendered) return
+    setShowOrders(orderList.orders.slice(0, 10))
+    setIsRendered(true)
+  }, [orderList.orders])
+
   const handleScroll = useCallback(() => {
     const ordersContent = document.getElementById('cardOrders')
+    if (orderList?.orders?.length > showOrders.length) {
+      setShowOrders(orderList.orders)
+      return
+    }
     const hasMore = pagination.to < pagination.total
     if (orderList.loading || !hasMore) return
     if ((ordersContent?.scrollTop + 50) >= (ordersContent?.scrollHeight - ordersContent?.offsetHeight)) {
@@ -58,12 +71,11 @@ export const OrdersCards = (props) => {
     if (updatedOrder) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder)
     }
-
   }, [orderList?.orders])
 
   return (
     <OrdersListContainer>
-      {orderList?.orders?.map(order => (
+      {showOrders?.map(order => (
         <OrderCard
           key={order.id}
           active={interActionMapOrder?.id === order.id}
@@ -75,7 +87,7 @@ export const OrdersCards = (props) => {
               <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
               <ViewDetails
                 className='view-details'
-                onClick={() => handleOpenOrderDetail(order.id)}
+                onClick={() => handleOpenOrderDetail(order)}
               >
                 {t('VIEW_DETAILS', 'View details')}
               </ViewDetails>
