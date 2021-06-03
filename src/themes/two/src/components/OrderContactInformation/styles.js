@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const ButtonLink = styled.div`
   cursor: pointer;
-  padding: 5px;
+  padding: 3px;
   margin: 0 5px;
 
   &:hover {
