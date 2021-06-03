@@ -20,6 +20,7 @@ export const SidebarContainer = styled.div`
   overflow: hidden;
 
   @media (min-width: 760px) {
+    height: inherit;
     overflow: inherit;
     position: relative;
     width: ${({ isCollapse }) => isCollapse ? '65px' : '230px'} !important;
@@ -29,6 +30,7 @@ export const SidebarContainer = styled.div`
 export const SidebarInnerContainer = styled.div`
   height: 100%;
   @media (min-width: 760px) {
+    height: 100vh;
     position: sticky;
     top: 0px;
     ${props => props.theme?.rtl ? css`

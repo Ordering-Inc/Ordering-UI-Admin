@@ -29,13 +29,10 @@ export const OrdersContainer = styled.div`
   overflow: hidden;
   margin-top: 20px;
 
-  @media (min-width: 760px) {
-    margin-top: 0px;
-  }
-  
   @media (min-width: 1024px) {
     width: 330px;
     max-width: 330px;
+    margin-top: 0px;
   }
 
   @media (min-width: 1300px) {
