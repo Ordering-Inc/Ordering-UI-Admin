@@ -6,7 +6,7 @@ import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageControlle
 import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../../../../../components/Modal'
-import { Button } from '../../../../../styles/Buttons'
+import { Button } from '../../styles/Buttons'
 import { DeliveryDashboard } from '../DeliveryDashboard'
 
 import {
@@ -65,10 +65,11 @@ const DeliveriesManagerUI = (props) => {
   }
 
   const handleNotification = (orderId) => {
-    const _registerOrderIds = [...registerOrderIds]
-    if (!_registerOrderIds.includes(orderId)) {
-      _registerOrderIds.push(orderId)
-      setRegisterOrderIds(_registerOrderIds)
+    if (!registerOrderIds.includes(orderId)) {
+      setRegisterOrderIds([
+        ...registerOrderIds,
+        orderId
+      ])
       if (configState?.configs?.notification_toast?.value === 'true') {
         toastNotify(orderId)
       } else {
