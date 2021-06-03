@@ -168,9 +168,7 @@ const OrderDetailsUI = (props) => {
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
-    document.getElementById('orderDetails').style.width = value
-    ? width > 499 ? '500px' : '100vw'
-    : '0'
+
     if (!value) {
       props.onClose()
     }

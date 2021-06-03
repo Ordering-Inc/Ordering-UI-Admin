@@ -11,6 +11,10 @@ export const DeliveriesContainer = styled.div`
     margin-top: 0px;
     padding: 20px;
   }
+
+  @media print {
+    display: none;
+  }
 `
 export const OrdersContent = styled.div`
 `
