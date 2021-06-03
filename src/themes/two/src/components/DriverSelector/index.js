@@ -12,7 +12,6 @@ import {
   Option,
   OptionContent,
   DriverNameContainer,
-  PhoneContainer,
   WrapperDriverImage,
   DriverImage,
   DriverName,
@@ -97,12 +96,6 @@ const DriverSelectorUI = (props) => {
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
                   <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
                 </DriverNameContainer>
-                {isPhoneView && driver.cellphone && (
-                  <PhoneContainer>
-                    <FiPhone />
-                    {driver.cellphone}
-                  </PhoneContainer>
-                )}
               </OptionContent>
             </Option>
           )

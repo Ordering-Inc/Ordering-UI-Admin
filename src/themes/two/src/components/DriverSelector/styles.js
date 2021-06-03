@@ -71,16 +71,7 @@ export const DriverText = styled.span`
     font-size: 8px;
   `}
 `
-export const PhoneContainer = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  color: #000000;
 
-  @media (max-width: 1200px) {
-    display: none;
-  }
-`
 export const WrapperDriverImage = styled.div`
   width: 45px;
   height: 45px;
