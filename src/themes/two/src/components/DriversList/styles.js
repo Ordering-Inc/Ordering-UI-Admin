@@ -6,6 +6,7 @@ export const DriversListContainer = styled.div`
 `
 
 export const DriverCard = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   border: 1px solid #E9ECEF;
@@ -13,6 +14,10 @@ export const DriverCard = styled.div`
   border-radius: 8px;
   margin-bottom: 20px;
   padding: 10px 15px;
+  
+  ${({ active }) => active && css`
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
 `
 
 export const WrapperImage = styled.div`

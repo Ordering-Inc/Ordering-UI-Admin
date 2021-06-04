@@ -19,6 +19,8 @@ export const DriversList = (props) => {
     driversIsOnline,
     onlineDrivers,
     offlineDrivers,
+    selectedDriver,
+    handleChangeDriver
   } = props
   
   const theme = useTheme()
@@ -29,13 +31,29 @@ export const DriversList = (props) => {
     <DriversListContainer>
       {loading ? (
         <>
-          <Skeleton />
+          {[...Array(10).keys()].map(i => (
+            <DriverCard
+              key={i}
+            >
+              <WrapperImage>
+                <Skeleton width={45} height={45} />
+              </WrapperImage>
+              <DriverInfo>
+                <div>
+                  <Skeleton width={100} />
+                </div>
+                <Skeleton width={100} />
+              </DriverInfo>
+            </DriverCard>
+          ))}
         </>
       ) : (
         <>
           {(driversIsOnline ? onlineDrivers : offlineDrivers).map(driver => (
             <DriverCard
               key={driver.id}
+              onClick={() => handleChangeDriver(driver)}
+              active={selectedDriver?.id === driver.id}
             >
               <WrapperImage>
                 <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />

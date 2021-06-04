@@ -22,6 +22,11 @@ export const DriversDashboardUI = (props) => {
     handleChangeDriverIsOnline,
     handleChangeDriversSubFilter
   } = props
+
+  const [selectedDriver, setSelectedDriver] = useState(null)
+  const handleChangeDriver = (driver) => {
+    setSelectedDriver(driver)
+  }
   return (
     <DriversDashboardContainer>
       <DriversContainer>
@@ -41,12 +46,15 @@ export const DriversDashboardUI = (props) => {
             driversIsOnline={driversIsOnline}
             onlineDrivers={onlineDrivers}
             offlineDrivers={offlineDrivers}
+            selectedDriver={selectedDriver}
+            handleChangeDriver={handleChangeDriver}
           />
         </WrapperDriversList>
       </DriversContainer>
       <WrapperDriversLocation>
         <DriversLocation
           driversIsOnline={driversIsOnline}
+          selectedDriver={selectedDriver}
           onlineDrivers={onlineDrivers}
           offlineDrivers={offlineDrivers}
           driversList={driversList}

@@ -11,7 +11,8 @@ export const DriversLocation = (props) => {
   const {
     driversIsOnline,
     onlineDrivers,
-    offlineDrivers
+    offlineDrivers,
+    selectedDriver
   } = props
 
   const [, t] = useLanguage()
@@ -70,12 +71,16 @@ export const DriversLocation = (props) => {
   }, [showDrivers, mapLoaded])
 
   useEffect(() => {
-    if (driversIsOnline) {
-      setShowDrivers(onlineDrivers)
+    if (selectedDriver) {
+      setShowDrivers([selectedDriver])
     } else {
-      setShowDrivers(offlineDrivers)
+      if (driversIsOnline) {
+        setShowDrivers(onlineDrivers)
+      } else {
+        setShowDrivers(offlineDrivers)
+      }
     }
-  }, [onlineDrivers, offlineDrivers, driversIsOnline])
+  }, [onlineDrivers, offlineDrivers, driversIsOnline, selectedDriver])
 
   const handleMapChange = (data) => {
     setMapZoom(data?.zoom)
