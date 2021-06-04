@@ -16,10 +16,9 @@ import {
   DriverInfo
 } from './styles'
 
-export const DriversLocation = (props) => {
+export const DeliveriesLocation = (props) => {
   const {
     driversList,
-    driverAvailable,
     interActionMapOrder
   } = props
 
@@ -52,7 +51,7 @@ export const DriversLocation = (props) => {
 
     const bounds = new window.google.maps.LatLngBounds()
 
-    if (interActionMapOrder === null && driverAvailable === 'all') {
+    if (interActionMapOrder === null) {
       if (driversList.drivers.length === 1) {
         setMapCenter(driversList.drivers[0].location)
         setMapZoom(defaultZoom)
@@ -65,24 +64,8 @@ export const DriversLocation = (props) => {
       }
     }
 
-    if (driverAvailable === 'online' || (interActionMapOrder !== null && interActionMapOrder?.driver === null)) {
-      for (const driver of _onlineDrivers) {
-        const marker = driver.location !== null ? driver.location : defaultCenter
-        const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
-        bounds.extend(newPoint)
-      }
-    }
 
-    if (driverAvailable === 'online') {
-      if (_onlineDrivers.length === 0) return
-      if (_onlineDrivers.length === 1) {
-        setMapCenter(_onlineDrivers[0].location)
-        setMapZoom(defaultZoom)
-        return
-      }
-    }
-
-    if (!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null) {
+    if (interActionMapOrder !== null) {
       let marker, newPoint
       marker = interActionMapOrder?.business?.location !== null ? interActionMapOrder?.business?.location : defaultCenter
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
@@ -96,27 +79,6 @@ export const DriversLocation = (props) => {
         marker = interActionOrderDriverLocation !== null ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
-      }
-    }
-
-    if (driverAvailable === 'offline') {
-      if (_offlineDrivers.length === 0) {
-        return
-      } else {
-        let checkLocation = false
-        for (const driver of _offlineDrivers) {
-          if (driver.location !== null) {
-            checkLocation = true
-          }
-          const marker = driver.location !== null ? driver.location : defaultCenter
-          const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
-          bounds.extend(newPoint)
-        }
-        if (!checkLocation) {
-          setMapCenter(defaultCenter)
-          setMapZoom(defaultZoom)
-          return
-        }
       }
     }
 
@@ -151,7 +113,7 @@ export const DriversLocation = (props) => {
       }
     }
     mapFit()
-  }, [driversList, driverAvailable, interActionMapOrder, mapLoaded])
+  }, [driversList, interActionMapOrder, mapLoaded])
 
   useEffect(() => {
     if (mapLoaded || interActionOrderDriverLocation === null) return
@@ -180,7 +142,7 @@ export const DriversLocation = (props) => {
           yesIWantToUseGoogleMapApiInternals
         >
 
-          {interActionMapOrder === null && driverAvailable === 'all' && driversList.drivers.length !== 0 &&
+          {interActionMapOrder === null && driversList.drivers.length !== 0 &&
             driversList.drivers.map((driver) => (
               <DriverMapMarkerAndInfo
                 key={driver.id}
@@ -189,26 +151,8 @@ export const DriversLocation = (props) => {
                 lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
               />
             ))}
-          {(driverAvailable === 'online' || (interActionMapOrder !== null && interActionMapOrder?.driver === null)) &&
-            onlineDrivers.map((driver) => (
-              <DriverMapMarkerAndInfo
-                key={driver.id}
-                driver={driver}
-                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-              />
-            ))}
-          {driverAvailable === 'offline' && offlineDrivers.length > 0 &&
-            offlineDrivers.map((driver) => (
-              <DriverMapMarkerAndInfo
-                key={driver.id}
-                driver={driver}
-                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-              />
-            ))}
 
-          {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (
+          {interActionMapOrder !== null && (
             <InterActOrderMarker
               business={interActionMapOrder?.business}
               lat={interActionMapOrder?.business?.location?.lat}
@@ -216,7 +160,7 @@ export const DriversLocation = (props) => {
               image={interActionMapOrder?.business?.logo}
             />
           )}
-          {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (
+          {interActionMapOrder !== null && (
             <InterActOrderMarker
               customer={interActionMapOrder?.customer}
               lat={interActionMapOrder?.customer?.location?.lat ? interActionMapOrder?.customer?.location?.lat : defaultCenter.lat}
@@ -225,7 +169,7 @@ export const DriversLocation = (props) => {
             />
           )}
 
-          {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
+          {interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
             <InterActOrderMarker
               driver={interActionMapOrder?.driver}
               lat={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
@@ -236,7 +180,7 @@ export const DriversLocation = (props) => {
         </GoogleMapReact>
       )}
 
-      {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver === null && onlineDrivers.length > 0 && (
+      {interActionMapOrder !== null && interActionMapOrder?.driver === null && onlineDrivers.length > 0 && (
         <WrapperOnlineDrivers>
           <p>{t('DRIVERS_ONLINE', 'Drivers online')}</p>
           <OnlineDrivers>

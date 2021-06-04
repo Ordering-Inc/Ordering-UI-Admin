@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const DeliveryDashboardContainer = styled.div`
+export const DriversDashboardContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
   margin-top: 0px;
@@ -22,7 +22,7 @@ export const FilterContainer = styled.div`
   z-index: 100;
 `
 
-export const OrdersContainer = styled.div`
+export const DriversContainer = styled.div`
   border: 1px solid #E9ECEF;
   border-radius: 8px;
   height: 100%;
@@ -41,11 +41,11 @@ export const OrdersContainer = styled.div`
   }
 `
 
-export const WrapperOrderlist = styled.div`
+export const WrapperDriversList = styled.div`
   height: calc(100% - 200px);
 `
 
-export const WrapperDeliveriesLocation = styled.div`
+export const WrapperDriversLocation = styled.div`
   height: 80vh;
   border-radius: 8px;
   overflow: hidden;

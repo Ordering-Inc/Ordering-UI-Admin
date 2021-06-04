@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrderContentHeader } from '../OrderContentHeader'
+import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../../../../../components/Modal'
 import { Button } from '../../styles/Buttons'
@@ -13,7 +13,6 @@ import {
   DeliveriesContainer,
   OrdersContent,
   WrapItemView,
-  WrapperIndicator,
   OrderNotification
 } from './styles'
 
@@ -29,13 +28,10 @@ const DeliveriesManagerUI = (props) => {
     ordersStatusGroup,
     filterValues,
     deletedOrderId,
-    startMulitOrderStatusChange,
-    startMulitOrderDelete,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
     handleSelectedOrderIds,
-    selectedOrderIds,
     selectedSubOrderStatus,
     handleSelectedSubOrderStatus,
     onOrderRedirect
@@ -44,13 +40,11 @@ const DeliveriesManagerUI = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const [events] = useEvent()
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
 
-  const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
 
@@ -121,20 +115,6 @@ const DeliveriesManagerUI = (props) => {
   }, [registerOrderIds])
 
   useEffect(() => {
-    if (startMulitOrderStatusChange || startMulitOrderDelete) {
-      setTotalSelectedOrder(selectedOrderIds.length)
-    }
-  }, [startMulitOrderStatusChange, startMulitOrderDelete])
-
-  useEffect(() => {
-    if (selectedOrderIds.length === 0) {
-      setTimeout(() => {
-        setTotalSelectedOrder(0)
-      }, 500)
-    }
-  }, [selectedOrderIds])
-
-  useEffect(() => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
@@ -182,7 +162,7 @@ const DeliveriesManagerUI = (props) => {
   return (
     <>
       <DeliveriesContainer>
-        <OrderContentHeader
+        <OrdersContentHeader
           isDisableControl
           title={t('DELIVERY_DASHBOARD', 'Delivery dashboard')}
           searchValue={searchValue}
@@ -242,12 +222,6 @@ const DeliveriesManagerUI = (props) => {
         <source src={require('../../../../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
         <source src={require('../../../../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
       </audio>
-
-      {totalSelectedOrder > 0 && (
-        <WrapperIndicator>
-          {selectedOrderIds.length}/{totalSelectedOrder}
-        </WrapperIndicator>
-      )}
     </>
   )
 }

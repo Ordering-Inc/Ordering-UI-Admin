@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { DriversLocation } from '../DriversLocation'
-import { DeliveryDashboardOrdersList } from '../../../../../components/DeliveryDashboardOrdersList'
-import { DriversModal } from '../../../../../components/DriversModal'
+import { DeliveriesLocation } from '../DeliveriesLocation'
 import { OrdersDashboardList } from '../OrdersDashboardList'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import {
   DeliveryDashboardContainer,
   OrdersContainer,
-  FiterContainer,
+  FilterContainer,
   WrapperOrderlist,
-  WrapperDriversLocation
+  WrapperDeliveriesLocation
 } from './styles'
 export const DeliveryDashboard = (props) => {
   const {
@@ -22,8 +19,6 @@ export const DeliveryDashboard = (props) => {
     handleSelectedSubOrderStatus
   } = props
 
-  const [, t] = useLanguage()
-  const [driverAvailable, setDriverAvailable] = useState('all')
   const [interActionMapOrder, setInterActionMapOrder] = useState(null)
 
   const handleUpdateDriverLocation = (order) => {
@@ -41,7 +36,7 @@ export const DeliveryDashboard = (props) => {
   return (
     <DeliveryDashboardContainer>
       <OrdersContainer>
-        <FiterContainer>
+        <FilterContainer>
           <OrderStatusFilterBar
             selectedOrderStatus={ordersStatusGroup}
             changeOrderStatus={handleOrdersStatusGroupFilter}
@@ -51,7 +46,7 @@ export const DeliveryDashboard = (props) => {
             selectedSubOrderStatus={selectedSubOrderStatus}
             handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
           />
-        </FiterContainer>
+        </FilterContainer>
         <WrapperOrderlist id='cardOrders'>
           <OrdersDashboardList
             {...props}
@@ -62,13 +57,13 @@ export const DeliveryDashboard = (props) => {
           />
         </WrapperOrderlist>
       </OrdersContainer>
-      <WrapperDriversLocation>
-        <DriversLocation
+      <WrapperDeliveriesLocation>
+        <DeliveriesLocation
           driversList={driversList}
-          driverAvailable={driverAvailable}
+          driverAvailable='all'
           interActionMapOrder={interActionMapOrder}
         />
-      </WrapperDriversLocation>
+      </WrapperDeliveriesLocation>
     </DeliveryDashboardContainer>
   )
 }

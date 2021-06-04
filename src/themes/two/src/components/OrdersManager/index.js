@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
-import { OrderContentHeader } from '../OrderContentHeader'
+import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../../../../../components/Modal'
 import { Button } from '../../styles/Buttons'
@@ -184,7 +184,7 @@ const OrdersManagerUI = (props) => {
   return (
     <>
       <OrdersListContainer>
-        <OrderContentHeader
+        <OrdersContentHeader
           title={t('ORDERS_MANAGER', 'Orders manager')}
           searchValue={searchValue}
           driverGroupList={driverGroupList}

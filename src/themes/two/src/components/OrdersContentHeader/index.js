@@ -18,7 +18,7 @@ import {
   WrapperSearchAndFilter
 } from './styles'
 
-export const OrderContentHeader = (props) => {
+export const OrdersContentHeader = (props) => {
   const {
     isDisableControl,
     title,
