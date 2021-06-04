@@ -2,7 +2,7 @@ import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
 import { DeliveriesManager as DeliveriesManagerController } from '../../../src/themes/two/src/components/DeliveriesManager'
-export const DeliveryDashboard = (props) => {
+export const DeliveriesManager = (props) => {
   const [events] = useEvent()
   const deliveriesManagerProps = {
     ...props,

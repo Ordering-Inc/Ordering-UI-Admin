@@ -17,7 +17,7 @@ import { PageNotFound } from './pages/PageNotFound'
 import { Login } from './pages/Login'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { OrdersManager } from './pages/OrdersManager'
-import { DeliveryDashboard } from './pages/DeliveryDashboard'
+import { DeliveriesManager } from './pages/DeliveriesManager'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -106,7 +106,7 @@ export const App = () => {
                     <Route exact path='/deliveries'>
                       {
                         auth
-                          ? <DeliveryDashboard />
+                          ? <DeliveriesManager />
                           : <Redirect to='/login' />
                       }
                     </Route>
