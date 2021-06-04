@@ -31,7 +31,6 @@ export const Table = styled.table`
     display: block;
     tr {
       width: 100%;
-
       th {
         color: ${props => props.theme.colors?.headingColor};
       }
@@ -47,6 +46,7 @@ export const Table = styled.table`
 
     tr {
       width: 100%;
+      height: 99px;
       cursor: pointer;
     }
   }
