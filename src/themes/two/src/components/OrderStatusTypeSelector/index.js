@@ -293,7 +293,7 @@ export const OrderStatusTypeSelector = (props) => {
       } else if (deliveryType === 1) {
         let _filteredOrderStatues = []
         let extractOrderStatus = []
-        extractOrderStatus = orderStatuses.slice(0, 12)
+        extractOrderStatus = orderStatuses.slice(0, 13)
         _filteredOrderStatues = [...extractOrderStatus]
 
         extractOrderStatus = orderStatuses.slice(15, 18)
