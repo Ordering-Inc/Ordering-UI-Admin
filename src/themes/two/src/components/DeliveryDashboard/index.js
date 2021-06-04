@@ -60,7 +60,6 @@ export const DeliveryDashboard = (props) => {
       <WrapperDeliveriesLocation>
         <DeliveriesLocation
           driversList={driversList}
-          driverAvailable='all'
           interActionMapOrder={interActionMapOrder}
         />
       </WrapperDeliveriesLocation>

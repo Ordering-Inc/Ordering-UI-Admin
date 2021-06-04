@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { DriversLocation } from '../DeliveriesLocation'
-import { OrdersDashboardList } from '../OrdersDashboardList'
-import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
-import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
+import { DriversLocation } from '../DriversLocation'
+import { DriversList } from '../DriversList'
+import { DriversOnlineOfflineFilter } from '../DriversOnlineOfflineFilter'
+import { DriversBusyStatusFilter } from '../DriversBusyStatusFilter'
 import {
   DriversDashboardContainer,
   DriversContainer,
@@ -19,18 +19,21 @@ export const DriversDashboard = (props) => {
     <DriversDashboardContainer>
       <DriversContainer>
         <FilterContainer>
-          filter
+          <DriversOnlineOfflineFilter />
+          <DriversBusyStatusFilter />
         </FilterContainer>
         <WrapperDriversList id='driversList'>
-          drivers list
+          <DriversList
+            driversList={driversList}
+          />
         </WrapperDriversList>
       </DriversContainer>
       <WrapperDriversLocation>
-        {/* <DriversLocation
+        <DriversLocation
           driversList={driversList}
           driverAvailable='all'
           interActionMapOrder={null}
-        /> */}
+        />
       </WrapperDriversLocation>
     </DriversDashboardContainer>
   )

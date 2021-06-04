@@ -28,6 +28,7 @@ export const DriversContainer = styled.div`
   height: 100%;
   overflow: hidden;
   margin-top: 20px;
+  padding: 10px;
 
   @media (min-width: 1024px) {
     width: 330px;
