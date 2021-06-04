@@ -46,9 +46,10 @@ export const DriversDashboardUI = (props) => {
       </DriversContainer>
       <WrapperDriversLocation>
         <DriversLocation
+          driversIsOnline={driversIsOnline}
+          onlineDrivers={onlineDrivers}
+          offlineDrivers={offlineDrivers}
           driversList={driversList}
-          driverAvailable='all'
-          interActionMapOrder={null}
         />
       </WrapperDriversLocation>
     </DriversDashboardContainer>
