@@ -102,7 +102,7 @@ export const OrderStatusSubFilter = (props) => {
   return (
     <SubFilterContainer>
       <InnerContainer>
-        <AutoScroll scrollId='subFilter'>
+        <AutoScroll innerScroll scrollId={`${ordersStatusGroup + 'subFilter'}`}>
           {statues[ordersStatusGroup].map(status => (
             <Button
               key={status.key}

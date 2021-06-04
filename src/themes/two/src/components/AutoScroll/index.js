@@ -12,11 +12,13 @@ export const AutoScroll = ({ children, modal, special, innerScroll, scrollId }) 
   const [theme] = useTheme()
 
   const autoScrollId = scrollId || 'autoscroll'
+  const [parentWidth, setParentWidth] = useState(null)
 
   useLayoutEffect(() => {
     const element = document?.getElementById(`${autoScrollId}`)?.parentNode
     element && element.parentNode.addEventListener('scroll', handleScroll)
     const containerElement = element?.parentNode
+    setParentWidth(element?.offsetWidth)
     setParentElement(element)
     setContainerElement(containerElement)
 
@@ -33,8 +35,8 @@ export const AutoScroll = ({ children, modal, special, innerScroll, scrollId }) 
 
   const handleScroll = () => {
     const autoScrollContainer = document?.getElementById(`${autoScrollId}`)
-    const botonRight = autoScrollContainer.querySelector('.right-autoscroll')
-    const botonLeft = autoScrollContainer.querySelector('.left-autoscroll')
+    const botonRight = autoScrollContainer?.querySelector('.right-autoscroll')
+    const botonLeft = autoScrollContainer?.querySelector('.left-autoscroll')
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
         if ((containerElement?.scrollLeft * -1) < 40) {
@@ -78,14 +80,21 @@ export const AutoScroll = ({ children, modal, special, innerScroll, scrollId }) 
     }
   }
 
+  useEffect(() => {
+    if (!scrollId) return
+    const element = document?.getElementById(`${autoScrollId}`)?.parentNode
+    setParentWidth(element.width)
+    setParentElement(element)
+  }, [scrollId])
+
   return (
     <AutoscrollContainer modal={modal} id={`${autoScrollId}`}>
       {
-        ((!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth)) ? <MdKeyboardArrowLeft className='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        ((!special ? width < parentWidth + 50 : width < parentWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentWidth + 50 : containerElement?.offsetWidth < parentWidth)) ? <MdKeyboardArrowLeft className='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        ((!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth)) ? <MdKeyboardArrowRight className='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        ((!special ? width < parentWidth + 50 : width < parentWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentWidth + 50 : containerElement?.offsetWidth < parentWidth)) ? <MdKeyboardArrowRight className='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 
