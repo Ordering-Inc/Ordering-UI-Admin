@@ -18,6 +18,7 @@ import { Login } from './pages/Login'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { OrdersManager } from './pages/OrdersManager'
 import { DeliveriesManager } from './pages/DeliveriesManager'
+import { DriversManager } from './pages/DriversManager'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -107,6 +108,14 @@ export const App = () => {
                       {
                         auth
                           ? <DeliveriesManager />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+
+                    <Route exact path='/drivers'>
+                      {
+                        auth
+                          ? <DriversManager />
                           : <Redirect to='/login' />
                       }
                     </Route>

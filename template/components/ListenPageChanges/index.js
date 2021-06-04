@@ -12,7 +12,7 @@ export const ListenPageChanges = ({ children }) => {
   const routes = {
     orders: '/orders',
     deliveries: '/deliveries',
-    order_detail: '/orders/:orderId',
+    drivers: '/drivers',
     login: '/login'
   }
 

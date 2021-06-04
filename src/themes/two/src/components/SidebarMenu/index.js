@@ -54,7 +54,7 @@ export const SidebarMenu = (props) => {
       },
       {
         id: 2,
-        title: t('ORDERS_DASHBOARD', 'Orders dashboard'),
+        title: t('DELIVERIES_DASHBOARD', 'Deliveries dashboard'),
         pageName: 'deliveries'
       },
       {
