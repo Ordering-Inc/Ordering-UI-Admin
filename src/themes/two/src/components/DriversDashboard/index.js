@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DriversList as DriversController } from './naked'
+import { DriversList as DriversController } from 'ordering-components-admin'
 import { DriversLocation } from '../DriversLocation'
 import { DriversList } from '../DriversList'
 import { DriversOnlineOfflineFilter } from '../DriversOnlineOfflineFilter'
@@ -15,10 +15,12 @@ import {
 export const DriversDashboardUI = (props) => {
   const {
     driversList,
-    driversIsOnline,
     onlineDrivers,
     offlineDrivers,
-    handleChangeDriverIsOnline
+    driversIsOnline,
+    driversSubfilter,
+    handleChangeDriverIsOnline,
+    handleChangeDriversSubFilter
   } = props
   return (
     <DriversDashboardContainer>
@@ -28,7 +30,10 @@ export const DriversDashboardUI = (props) => {
             driversIsOnline={driversIsOnline}
             handleChangeDriverIsOnline={handleChangeDriverIsOnline}
           />
-          <DriversBusyStatusFilter />
+          <DriversBusyStatusFilter
+            driversSubfilter={driversSubfilter}
+            handleChangeDriversSubFilter={handleChangeDriversSubFilter}
+          />
         </FilterContainer>
         <WrapperDriversList id='driversList'>
           <DriversList
