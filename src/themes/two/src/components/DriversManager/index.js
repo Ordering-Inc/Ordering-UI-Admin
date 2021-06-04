@@ -174,9 +174,7 @@ const DriversManagerUI = (props) => {
           handleChangeFilterValues={handleChangeFilterValues}
         />
         <DriversContent>
-          <DriversDashboard
-            driversList={driversList}
-          />
+          <DriversDashboard />
         </DriversContent>
       </DriversContainer>
 
@@ -217,8 +215,7 @@ const DriversManagerUI = (props) => {
 export const DriversManager = (props) => {
   const OrdersListControlProps = {
     ...props,
-    UIComponent: DriversManagerUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    UIComponent: DriversManagerUI
   }
   return <OrdersManageController {...OrdersListControlProps} />
 }

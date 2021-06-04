@@ -6,16 +6,23 @@ import {
 } from './styles'
 
 export const DriversOnlineOfflineFilter = (props) => {
+  const {
+    driversIsOnline,
+    handleChangeDriverIsOnline
+  } = props
   const [, t] = useLanguage()
   return (
     <Container>
       <Tab
-        active
-        // onClick={() => }
+        active={driversIsOnline}
+        onClick={() => handleChangeDriverIsOnline(true)}
       >
         {t('ONLINE', 'Online')}
       </Tab>
-      <Tab>
+      <Tab
+        active={!driversIsOnline}
+        onClick={() => handleChangeDriverIsOnline(false)}
+      >
         {t('OFFLINE', 'Offline')}
       </Tab>
     </Container>

@@ -14,7 +14,12 @@ import {
 } from './styles'
 
 export const DriversList = (props) => {
-  const { drivers, loading } = props.driversList
+  const {
+    loading,
+    driversIsOnline,
+    onlineDrivers,
+    offlineDrivers,
+  } = props
   
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -28,7 +33,7 @@ export const DriversList = (props) => {
         </>
       ) : (
         <>
-          {drivers.map(driver => (
+          {(driversIsOnline ? onlineDrivers : offlineDrivers).map(driver => (
             <DriverCard
               key={driver.id}
             >
