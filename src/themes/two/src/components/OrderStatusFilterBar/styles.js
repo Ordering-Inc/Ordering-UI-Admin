@@ -3,8 +3,11 @@ import styled, { css } from 'styled-components'
 export const OrderStatusFilterContainer = styled.div`
   display: flex;
   width: 100%;
-  overflow-x: auto;
   border-bottom: 1px solid #CCC;
+  overflow-x: auto;
+  @media (min-width: 992px) {
+    overflow-x: hidden;
+  }
 `
 
 export const InnerContainer = styled.div`
