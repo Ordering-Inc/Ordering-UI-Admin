@@ -4,7 +4,7 @@ export const SubFilterContainer = styled.div`
   width: 100%;
   padding: 20px 0;
   display: flex;
-  overflow-x: auto;
+  overflow-y: hidden;
 `
 
 export const InnerContainer = styled.div`
