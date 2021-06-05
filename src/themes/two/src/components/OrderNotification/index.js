@@ -1,61 +1,27 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrdersContentHeader } from '../OrdersContentHeader'
-import { OrderDetails } from '../OrderDetails'
+import { useLanguage, useConfig, useEvent } from 'ordering-components-admin'
 import { Modal } from '../../../../../components/Modal'
 import { Button } from '../../styles/Buttons'
-import { DriversDashboard } from '../DriversDashboard'
-
-import {
-  DriversContainer,
-  DriversContent,
-  OrderNotification
-} from './styles'
-
+import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify'
 toast.configure()
 
-const DriversManagerUI = (props) => {
-  const {
-    searchValue,
-    driverGroupList,
-    driversList,
-    paymethodsList,
-    businessesList,
-    ordersStatusGroup,
-    filterValues,
-    deletedOrderId,
-    handleChangeSearch,
-    handleChangeFilterValues,
-    handleOrdersStatusGroupFilter,
-    handleSelectedOrderIds,
-    selectedSubOrderStatus,
-    handleSelectedSubOrderStatus,
-    onOrderRedirect
-  } = props
-
-  const [, t] = useLanguage()
+import {
+  ModalContainer
+} from './styles'
+export const OrderNotification = (props) => {
   const [configState] = useConfig()
+  const [, t] = useLanguage()
   const [events] = useEvent()
-  const query = new URLSearchParams(useLocation().search)
-  const [isOpenDriverOrders, setIsOpenDriverOrders] = useState(false)
 
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
 
-  const handleBackRedirect = () => {
-    setIsOpenDriverOrders(false)
-    onOrderRedirect()
-  }
-
   const handleNotification = (orderId) => {
-    if (!registerOrderIds.includes(orderId)) {
-      setRegisterOrderIds([
-        ...registerOrderIds,
-        orderId
-      ])
+    const _registerOrderIds = [...registerOrderIds]
+    if (!_registerOrderIds.includes(orderId)) {
+      _registerOrderIds.push(orderId)
+      setRegisterOrderIds(_registerOrderIds)
       if (configState?.configs?.notification_toast?.value === 'true') {
         toastNotify(orderId)
       } else {
@@ -67,6 +33,12 @@ const DriversManagerUI = (props) => {
   const handleCloseNotificationModal = () => {
     setNotificationModalOpen(false)
     setRegisterOrderIds([])
+  }
+
+  const closeNotificationModal = (e) => {
+    if (e.code === 'Escape') {
+      handleCloseNotificationModal()
+    }
   }
 
   const toastNotify = (orderId) => {
@@ -87,30 +59,10 @@ const DriversManagerUI = (props) => {
     setRegisterOrderIds([])
   }
 
-  const closeOrderDetailModal = (e) => {
-    if (e.code === 'Escape') {
-      handleBackRedirect()
-    }
-  }
-
-  const closeNotificationModal = (e) => {
-    if (e.code === 'Escape') {
-      handleCloseNotificationModal()
-    }
-  }
-
   useEffect(() => {
     if (registerOrderIds.length > 0) return
     setNotificationModalOpen(false)
   }, [registerOrderIds])
-
-  // useEffect(() => {
-  //   const id = query.get('id')
-  //   if (id === null) setIsOpenDriverOrders(false)
-  //   else {
-
-  //   }
-  // }, [])
 
   useEffect(() => {
     const sound = document.getElementById('notification-sound')
@@ -128,12 +80,6 @@ const DriversManagerUI = (props) => {
   }, [notificationModalOpen])
 
   useEffect(() => {
-    if (!isOpenDriverOrders) return
-    document.addEventListener('keydown', closeOrderDetailModal)
-    return () => document.removeEventListener('keydown', closeOrderDetailModal)
-  }, [isOpenDriverOrders])
-
-  useEffect(() => {
     if (!notificationModalOpen) return
     document.addEventListener('keydown', closeNotificationModal)
     return () => document.removeEventListener('keydown', closeNotificationModal)
@@ -149,30 +95,12 @@ const DriversManagerUI = (props) => {
 
   return (
     <>
-      <DriversContainer>
-        <OrdersContentHeader
-          isDisableControl
-          title={t('DRIVERS_DASHBOARD', 'Drivers dashboard')}
-          searchValue={searchValue}
-          driverGroupList={driverGroupList}
-          driversList={driversList}
-          paymethodsList={paymethodsList}
-          businessesList={businessesList}
-          filterValues={filterValues}
-          handleChangeSearch={handleChangeSearch}
-          handleChangeFilterValues={handleChangeFilterValues}
-        />
-        <DriversContent>
-          <DriversDashboard />
-        </DriversContent>
-      </DriversContainer>
-
       <Modal
         width='50%'
         hideCloseDefault
         open={notificationModalOpen}
       >
-        <OrderNotification>
+        <ModalContainer>
           <p>{t('ORDERING', 'Ordering')}</p>
           {registerOrderIds.map((orderId) =>
             <p key={orderId}>Order <span>#{orderId}</span> has been ordered.</p>
@@ -180,21 +108,12 @@ const DriversManagerUI = (props) => {
           <Button color='primary' onClick={() => handleCloseNotificationModal()}>
             {t('OK', 'OK')}
           </Button>
-        </OrderNotification>
+        </ModalContainer>
       </Modal>
-
       <audio id='notification-sound' muted>
         <source src={require('../../../../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
         <source src={require('../../../../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
       </audio>
     </>
   )
-}
-
-export const DriversManager = (props) => {
-  const OrdersListControlProps = {
-    ...props,
-    UIComponent: DriversManagerUI
-  }
-  return <OrdersManageController {...OrdersListControlProps} />
 }

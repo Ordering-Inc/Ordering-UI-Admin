@@ -33,7 +33,7 @@ export const DriversLocation = (props) => {
     const bounds = new window.google.maps.LatLngBounds()
 
     if (showDrivers.length === 1) {
-      setMapCenter(showDrivers[0].location)
+      setMapCenter(showDrivers[0].location ? showDrivers[0].location : defaultCenter)
       setMapZoom(defaultZoom)
       return
     }
@@ -103,9 +103,8 @@ export const DriversLocation = (props) => {
           onChange={(data) => handleMapChange(data)}
           yesIWantToUseGoogleMapApiInternals
         >
-
-          {driversIsOnline && onlineDrivers.length !== 0 &&
-            onlineDrivers.map((driver) => (
+          {showDrivers.length !== 0 &&
+            showDrivers.map((driver) => (
               <DriverMapMarkerAndInfo
                 key={driver.id}
                 driver={driver}
@@ -113,17 +112,6 @@ export const DriversLocation = (props) => {
                 lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
               />
             ))}
-
-          {!driversIsOnline && offlineDrivers.length !== 0 &&
-            offlineDrivers.map((driver) => (
-              <DriverMapMarkerAndInfo
-                key={driver.id}
-                driver={driver}
-                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-              />
-            ))}
-
         </GoogleMapReact>
       )}      
     </WrapperMap>

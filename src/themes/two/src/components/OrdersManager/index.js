@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { useLanguage, useConfig, useEvent, OrdersManage as OrdersManageController } from 'ordering-components-admin'
+import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
-import { Modal } from '../../../../../components/Modal'
-import { Button } from '../../styles/Buttons'
 import {
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
   WrapItemView,
-  WrapperIndicator,
-  OrderNotification
+  WrapperIndicator
 } from './styles'
 import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
-
-toast.configure()
+import { OrderNotification } from '../OrderNotification'
 
 const OrdersManagerUI = (props) => {
   const {
@@ -46,17 +40,12 @@ const OrdersManagerUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [configState] = useConfig()
-  const [events] = useEvent()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
-  const [notificationModalOpen, setNotificationModalOpen] = useState(false)
-  const [registerOrderIds, setRegisterOrderIds] = useState([])
-
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     onOrderRedirect()
@@ -67,60 +56,13 @@ const OrdersManagerUI = (props) => {
     setOrderDetailId(order.id)
     onOrderRedirect(order.id)
     setIsOpenOrderDetail(true)
-  }
-
-  const handleNotification = (orderId) => {
-    const _registerOrderIds = [...registerOrderIds]
-    if (!_registerOrderIds.includes(orderId)) {
-      _registerOrderIds.push(orderId)
-      setRegisterOrderIds(_registerOrderIds)
-      if (configState?.configs?.notification_toast?.value === 'true') {
-        toastNotify(orderId)
-      } else {
-        setNotificationModalOpen(true)
-      }
-    }
-  }
-
-  const handleCloseNotificationModal = () => {
-    setNotificationModalOpen(false)
-    setRegisterOrderIds([])
-  }
-
-  const toastNotify = (orderId) => {
-    const toastConfigure = {
-      position: 'top-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    }
-    const content = `Order #${orderId} has been ordered.`
-    toast.dark(content, toastConfigure)
-    const sound = document.getElementById('notification-sound')
-    sound.muted = false
-    sound.play()
-    setRegisterOrderIds([])
-  }
+  }  
 
   const closeOrderDetailModal = (e) => {
     if (e.code === 'Escape') {
       handleBackRedirect()
     }
   }
-
-  const closeNotificationModal = (e) => {
-    if (e.code === 'Escape') {
-      handleCloseNotificationModal()
-    }
-  }
-
-  useEffect(() => {
-    if (registerOrderIds.length > 0) return
-    setNotificationModalOpen(false)
-  }, [registerOrderIds])
 
   useEffect(() => {
     if (startMulitOrderStatusChange || startMulitOrderDelete) {
@@ -147,40 +89,12 @@ const OrdersManagerUI = (props) => {
   }, [])
 
   useEffect(() => {
-    const sound = document.getElementById('notification-sound')
-    const interval = setInterval(() => {
-      if (notificationModalOpen) {
-        sound.muted = false
-        sound.play()
-      }
-    }, 3000)
-    if (!notificationModalOpen) {
-      clearInterval(interval)
-      return
-    }
-    return () => clearInterval(interval)
-  }, [notificationModalOpen])
-
-  useEffect(() => {
     if (!isOpenOrderDetail) return
     document.addEventListener('keydown', closeOrderDetailModal)
     return () => document.removeEventListener('keydown', closeOrderDetailModal)
   }, [isOpenOrderDetail])
 
-  useEffect(() => {
-    if (!notificationModalOpen) return
-    document.addEventListener('keydown', closeNotificationModal)
-    return () => document.removeEventListener('keydown', closeNotificationModal)
-  }, [notificationModalOpen])
-
-  useEffect(() => {
-    if (configState.loading) return
-    events.on('order_added', handleNotification)
-    return () => {
-      events.off('order_added', handleNotification)
-    }
-  }, [configState])
-
+  
   return (
     <>
       <OrdersListContainer>
@@ -236,26 +150,7 @@ const OrdersManagerUI = (props) => {
         />
       )}
 
-      <Modal
-        width='50%'
-        hideCloseDefault
-        open={notificationModalOpen}
-      >
-        <OrderNotification>
-          <p>{t('ORDERING', 'Ordering')}</p>
-          {registerOrderIds.map((orderId) =>
-            <p key={orderId}>Order <span>#{orderId}</span> has been ordered.</p>
-          )}
-          <Button color='primary' onClick={() => handleCloseNotificationModal()}>
-            {t('OK', 'OK')}
-          </Button>
-        </OrderNotification>
-      </Modal>
-
-      <audio id='notification-sound' muted>
-        <source src={require('../../../../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
-        <source src={require('../../../../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
-      </audio>
+      <OrderNotification />
 
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>

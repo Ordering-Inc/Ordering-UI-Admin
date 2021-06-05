@@ -25,7 +25,11 @@ export const DriversDashboardUI = (props) => {
 
   const [selectedDriver, setSelectedDriver] = useState(null)
   const handleChangeDriver = (driver) => {
-    setSelectedDriver(driver)
+    if (selectedDriver?.id === driver.id) {
+      setSelectedDriver(null)      
+    } else {
+      setSelectedDriver(driver)
+    }
   }
   return (
     <DriversDashboardContainer>
