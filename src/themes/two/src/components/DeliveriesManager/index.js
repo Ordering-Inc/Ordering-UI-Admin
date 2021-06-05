@@ -49,12 +49,6 @@ const DeliveriesManagerUI = (props) => {
     setIsOpenOrderDetail(true)
   }
 
-  const closeOrderDetailModal = (e) => {
-    if (e.code === 'Escape') {
-      handleBackRedirect()
-    }
-  }
-
   useEffect(() => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
@@ -64,12 +58,6 @@ const DeliveriesManagerUI = (props) => {
       setIsOpenOrderDetail(true)
     }
   }, [])
-
-  useEffect(() => {
-    if (!isOpenOrderDetail) return
-    document.addEventListener('keydown', closeOrderDetailModal)
-    return () => document.removeEventListener('keydown', closeOrderDetailModal)
-  }, [isOpenOrderDetail])
 
   return (
     <>

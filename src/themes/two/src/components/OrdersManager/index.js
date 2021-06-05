@@ -56,12 +56,6 @@ const OrdersManagerUI = (props) => {
     setOrderDetailId(order.id)
     onOrderRedirect(order.id)
     setIsOpenOrderDetail(true)
-  }  
-
-  const closeOrderDetailModal = (e) => {
-    if (e.code === 'Escape') {
-      handleBackRedirect()
-    }
   }
 
   useEffect(() => {
@@ -87,13 +81,6 @@ const OrdersManagerUI = (props) => {
       setIsOpenOrderDetail(true)
     }
   }, [])
-
-  useEffect(() => {
-    if (!isOpenOrderDetail) return
-    document.addEventListener('keydown', closeOrderDetailModal)
-    return () => document.removeEventListener('keydown', closeOrderDetailModal)
-  }, [isOpenOrderDetail])
-
   
   return (
     <>

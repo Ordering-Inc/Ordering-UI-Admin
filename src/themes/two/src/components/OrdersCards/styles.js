@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
   height: 100%;
-  padding: 0 15px 15px 15px;
+  padding: 0 12px 15px 12px;
   box-sizing: border-box;
   overflow-x: hidden;
 `

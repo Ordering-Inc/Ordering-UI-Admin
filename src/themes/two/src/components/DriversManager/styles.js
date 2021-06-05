@@ -18,32 +18,3 @@ export const DriversContainer = styled.div`
 `
 export const DriversContent = styled.div`
 `
-
-export const OrderNotification = styled.div`
-  width: 100%;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  row-gap: 15px;
-  p {
-    text-align: center;
-    font-size: 20px;
-    margin: 0px;
-
-    span {
-      color: #182964;
-      font-weight: 600;
-    }
-  }
-  animation: fadeIn 200ms;
-
-  @keyframes fadeIn {
-    from {
-      transform: scale(2);
-    }
-  
-    to {
-      transform: scale(1);
-    }
-  }
-`

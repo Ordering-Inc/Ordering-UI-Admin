@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useConfig, useEvent } from 'ordering-components-admin'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
@@ -33,12 +33,6 @@ export const OrderNotification = (props) => {
   const handleCloseNotificationModal = () => {
     setNotificationModalOpen(false)
     setRegisterOrderIds([])
-  }
-
-  const closeNotificationModal = (e) => {
-    if (e.code === 'Escape') {
-      handleCloseNotificationModal()
-    }
   }
 
   const toastNotify = (orderId) => {
@@ -80,12 +74,6 @@ export const OrderNotification = (props) => {
   }, [notificationModalOpen])
 
   useEffect(() => {
-    if (!notificationModalOpen) return
-    document.addEventListener('keydown', closeNotificationModal)
-    return () => document.removeEventListener('keydown', closeNotificationModal)
-  }, [notificationModalOpen])
-
-  useEffect(() => {
     if (configState.loading) return
     events.on('order_added', handleNotification)
     return () => {
@@ -99,6 +87,7 @@ export const OrderNotification = (props) => {
         width='50%'
         hideCloseDefault
         open={notificationModalOpen}
+        onClose={handleCloseNotificationModal}
       >
         <ModalContainer>
           <p>{t('ORDERING', 'Ordering')}</p>

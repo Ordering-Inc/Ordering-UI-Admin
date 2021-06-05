@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { DriversList as DriversController } from 'ordering-components-admin'
 import { DriversLocation } from '../DriversLocation'
 import { DriversList } from '../DriversList'
 import { DriversOnlineOfflineFilter } from '../DriversOnlineOfflineFilter'
@@ -12,7 +11,7 @@ import {
   WrapperDriversLocation
 } from './styles'
 
-export const DriversDashboardUI = (props) => {
+export const DriversDashboard = (props) => {
   const {
     driversList,
     onlineDrivers,
@@ -65,18 +64,5 @@ export const DriversDashboardUI = (props) => {
         />
       </WrapperDriversLocation>
     </DriversDashboardContainer>
-  )
-}
-
-export const DriversDashboard = (props) => {
-  const DriversControlProps = {
-    ...props,
-    UIComponent: DriversDashboardUI,
-    propsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
-  }
-  return (
-    <>
-      <DriversController {...DriversControlProps} />
-    </>
   )
 }
