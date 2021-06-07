@@ -20,6 +20,7 @@ import {
 
 export const OrdersContentHeader = (props) => {
   const {
+    isDisableHeader,
     isDisableControl,
     title,
     handleChangeSearch,
@@ -75,11 +76,13 @@ export const OrdersContentHeader = (props) => {
       <OrderContentHeaderContainer
         isDisableControl={isDisableControl}
       >
-        <HeaderSection>
-          <HeaderTitle>
-            {title}
-          </HeaderTitle>
-        </HeaderSection>
+        {!isDisableHeader && (
+          <HeaderSection>
+            <HeaderTitle>
+              {title}
+            </HeaderTitle>
+          </HeaderSection>
+        )}
         <TopRightSection>
           {!isDisableControl && (
             <OrdersDashboardControls

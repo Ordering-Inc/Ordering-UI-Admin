@@ -122,6 +122,10 @@ export const HeaderOnline = styled.div`
   h1,
   span {
     margin: 0px;
+    max-width: 150px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   h1 {
@@ -159,7 +163,7 @@ export const MessageBusiness = styled.div`
   flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
-  max-width: 1200px;
+  max-width: 400px;
   margin: auto;
 `
 
@@ -170,7 +174,7 @@ export const MessageCustomer = styled.div`
   flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
-  max-width: 1200px;
+  max-width: 400px;
   margin: auto;
 `
 
@@ -186,14 +190,14 @@ export const BubbleConsole = styled.div`
   max-width: 80%;
 
   @media (min-width: 1024px){
-    max-width: 60%;
+    max-width: 80%;
   }
 `
 
 export const BubbleBusines = styled.div`
   border-radius: 5px;
   padding: 10px 25px 10px 25px;
-  max-width: 60%;
+  max-width: 80%;
   min-width: 80px;
   margin-bottom: 10px;
   background: #EFEFEF;
@@ -207,7 +211,7 @@ export const BubbleBusines = styled.div`
 export const BubbleCustomer = styled.div`
   border-radius: 5px;
   padding: 10px 25px 10px 25px;
-  max-width: 60%;
+  max-width: 80%;
   min-width: 80px;
   height: auto;
   margin-bottom: 10px;
@@ -303,11 +307,11 @@ export const Send = styled.form`
   display: flex;
   margin-top: 3px;
   height: auto;
-  width: 80%;
+  width: 91%;
   max-width: 1200px;
   margin: auto;
   justify-content: space-between;
-  column-gap: 50px;
+  column-gap: 20px;
   input {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -336,7 +340,7 @@ export const SendImage = styled.label`
   
   position: absolute;
   top: 10px;
-  right: 0px;
+  right: 10px;
 
   input {
     display: none;

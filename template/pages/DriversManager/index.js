@@ -7,7 +7,7 @@ export const DriversManager = (props) => {
   const [events] = useEvent()
   const driversManagerProps = {
     ...props,
-    onOrderRedirect: (driverId) => {
+    onDriverRedirect: (driverId) => {
       if (!driverId) {
         return events.emit('go_to_page', { page: 'drivers', replace: true })
       }

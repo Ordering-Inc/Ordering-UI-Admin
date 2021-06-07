@@ -20,12 +20,19 @@ export const DriversList = (props) => {
     onlineDrivers,
     offlineDrivers,
     selectedDriver,
-    handleChangeDriver
+    handleChangeDriver,
+    handleOpenDriverOrders
   } = props
   
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
+
+  const handleClickDriver = (e, driver) => {
+    const isInvalid = e.target.closest('.driver-orders')
+    if (isInvalid) return
+    handleChangeDriver(driver)
+  }
   
   return (
     <DriversListContainer>
@@ -52,7 +59,7 @@ export const DriversList = (props) => {
           {(driversIsOnline ? onlineDrivers : offlineDrivers).map(driver => (
             <DriverCard
               key={driver.id}
-              onClick={() => handleChangeDriver(driver)}
+              onClick={(e) => handleClickDriver(e, driver)}
               active={selectedDriver?.id === driver.id}
             >
               <WrapperImage>
@@ -62,7 +69,10 @@ export const DriversList = (props) => {
                 <div>
                   <p>{driver.name} {driver.lastname}</p>
                   <BsDot />
-                  <span>
+                  <span
+                    className='driver-orders'
+                    onClick={() => handleOpenDriverOrders(driver)}
+                  >
                     {driver.assigned_orders_count} {t('ORDERS', 'Orders')}
                   </span>
                 </div>

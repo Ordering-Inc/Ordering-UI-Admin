@@ -10,17 +10,20 @@ import {
 
 const DriversManagerUI = (props) => {
   const {
-    onOrderRedirect
+    onDriverRedirect
   } = props
+
+  const { drivers, loading } = props.driversList
 
   const [, t] = useLanguage()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenDriverOrders, setIsOpenDriverOrders] = useState(false)
   const [selectedDriver, setSelectedDriver] = useState(null)
+  const [openDriver, setOpenDriver] = useState(null)
 
   const handleBackRedirect = () => {
     setIsOpenDriverOrders(false)
-    onOrderRedirect()
+    onDriverRedirect()
   }
 
   const handleChangeDriver = (driver) => {
@@ -31,10 +34,22 @@ const DriversManagerUI = (props) => {
     }
   }
 
-  useEffect(() => {
-    if (!selectedDriver) return
+  const handleOpenDriverOrders = (driver) => {
+    onDriverRedirect(driver?.id)
+    setOpenDriver(driver)
     setIsOpenDriverOrders(true)
-  }, [selectedDriver])
+  }
+
+  useEffect(() => {
+    if (loading) return
+    const id = query.get('id')
+    if (id === null) setIsOpenDriverOrders(false)
+    else {
+      const driver = drivers.find(_driver => _driver.id === parseInt(id))
+      setOpenDriver(driver)
+      setIsOpenDriverOrders(true)
+    }
+  }, [drivers, loading])
 
   return (
     <>
@@ -44,12 +59,15 @@ const DriversManagerUI = (props) => {
             {...props}
             selectedDriver={selectedDriver}
             handleChangeDriver={handleChangeDriver}
+            handleOpenDriverOrders={handleOpenDriverOrders}
           />
         </DriversContent>
 
-        {isOpenDriverOrders && (
+        {isOpenDriverOrders && openDriver && (
           <DriverOrdersLateralBar
             open={isOpenDriverOrders}
+            driver={openDriver}
+            onClose={() => handleBackRedirect()}
           />
         )}
       </DriversContainer>

@@ -776,7 +776,7 @@ export const MessagesUI = (props) => {
               </WrapperSendInput>
               <WrapperSendMessageButton>
                 <Button
-                  color='darkBlue'
+                  color='primary'
                   type='submit'
                   disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
                   ref={buttonRef}

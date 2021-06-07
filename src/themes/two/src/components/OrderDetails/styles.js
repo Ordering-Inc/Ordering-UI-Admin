@@ -3,13 +3,24 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  width: 0;  
+  width: 0;
   position: fixed;
+  box-shadow: -4px 0px 7px #ccc;
+
+  ${({ isDriverOrders }) => isDriverOrders && css`
+    position: absolute;
+    box-shadow: none;
+
+    ${props => props.theme?.rtl ? css`
+      border-right: 1px solid #CCC;
+    ` : css`
+      border-left: 1px solid #CCC;
+    `}
+  `}
   background: #FFF;
   height: 100vh;
   top: 0px;
   z-index: 1001;
-  box-shadow: -4px 0px 7px #ccc;
   overflow-x: hidden;
   transition: 0.3s;
 
@@ -37,6 +48,7 @@ export const OrderDetailsContent = styled.div`
   padding: 20px;
   box-sizing: border-box;
   width: 100%;
+  overflow-x: hidden;
 `
 
 export const OrderDetailsExtraContent = styled.div`

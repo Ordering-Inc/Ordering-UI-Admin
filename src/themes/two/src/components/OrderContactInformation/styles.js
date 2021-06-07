@@ -72,6 +72,7 @@ export const Photo = (props) => {
 }
 
 export const InfoContent = styled.div`
+  flex: 1;
   > div {
     display: flex;
     align-items: center;
@@ -83,6 +84,10 @@ export const InfoContent = styled.div`
       margin: 0px;
       font-weight: 600;
       color: ${props => props.theme.colors?.headingColor};
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
   }
 

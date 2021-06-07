@@ -19,7 +19,8 @@ export const OrdersDashboardList = (props) => {
     loadMorePageSize: 10,
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,
-    isSearchByCustomerPhone: true
+    isSearchByCustomerPhone: true,
+    driverId: props.driverId
   }
 
   return (

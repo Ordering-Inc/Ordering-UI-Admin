@@ -29,9 +29,8 @@ import {
 
 const OrderDetailsUI = (props) => {
   const {
+    isDriverOrders,
     open,
-    pendingOrder,
-    preOrder,
     driversList,
     handleBackRedirect,
     handleUpdateOrderStatus,
@@ -207,6 +206,7 @@ const OrderDetailsUI = (props) => {
 
   return (
     <Container
+      isDriverOrders={isDriverOrders}
       id='orderDetails'
       isSkeleton={loading}
     >
@@ -238,8 +238,6 @@ const OrderDetailsUI = (props) => {
               orderId={order.id}
               deliveryType={order?.delivery_type}
               defaultValue={parseInt(order.status)}
-              pendingOrder={pendingOrder}
-              preOrder={preOrder}
               handleUpdateOrderStatus={handleUpdateOrderStatus}
             />
           </OrderStatus>

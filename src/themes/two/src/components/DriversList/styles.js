@@ -60,7 +60,6 @@ export const Image = (props) => {
   )
 }
 
-
 export const WrapperStar = styled.div`
   unicode-bidi: bidi-override;
   color: #c5c5c5;
