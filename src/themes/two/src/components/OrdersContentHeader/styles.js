@@ -25,7 +25,7 @@ export const HeaderSection = styled.div`
   }
 `
 export const HeaderTitle = styled.p`
-  color: ${(props) => props.theme.colors.textBlackContrast};
+  color: ${(props) => props.theme.colors.headingColor};
   font-size: 24px;
   font-weight: 500;
   margin: 0px;

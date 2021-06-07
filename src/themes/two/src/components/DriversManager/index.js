@@ -3,14 +3,18 @@ import { useLocation } from 'react-router-dom'
 import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
 import { DriversDashboard } from '../DriversDashboard'
 import { DriverOrdersLateralBar } from '../DriverOrdersLateralBar'
+import { SearchBar } from '../SearchBar'
 import {
+  DriversHeader,
   DriversContainer,
   DriversContent
 } from './styles'
 
 const DriversManagerUI = (props) => {
   const {
-    onDriverRedirect
+    onDriverRedirect,
+    handleChangeSearch,
+    searchValue
   } = props
 
   const { drivers, loading } = props.driversList
@@ -54,6 +58,15 @@ const DriversManagerUI = (props) => {
   return (
     <>
       <DriversContainer>
+        <DriversHeader>
+          <h1>{t('DRIVERS_DASHBOARD', 'Drivers dashboard')}</h1>
+          <SearchBar
+            isCustomLayout
+            onSearch={handleChangeSearch}
+            search={searchValue}
+            placeholder={t('SEARCH', 'Search')}
+          />
+        </DriversHeader>
         <DriversContent>
           <DriversDashboard
             {...props}

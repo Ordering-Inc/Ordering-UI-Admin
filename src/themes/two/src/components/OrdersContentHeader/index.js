@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Modal } from '../Modal'
-import { SearchBar } from '../../../../../components/SearchBar'
+import { SearchBar } from '../SearchBar'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import MdcFilterOutline from '@meronex/icons/mdc/MdcFilterOutline'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
