@@ -71,6 +71,11 @@ export const WrapperSearchAndFilter = styled.div`
   align-items: center;
   margin-top: 10px;
 
+  input {
+    background: ${props => props.theme.colors.secundary};
+    border: none;
+  }
+
   @media (min-width: 760px) {
     margin: 20px 0 10px 0;
   }
