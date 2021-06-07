@@ -95,7 +95,9 @@ const OrdersManagerUI = (props) => {
   
   return (
     <>
-      <OrdersListContainer>
+      <OrdersListContainer
+        isDriverOrders={isDriverOrders}
+      >
         <OrdersContentHeader
           isDisableHeader={isDriverOrders}
           isDisableControl={isDriverOrders}

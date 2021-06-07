@@ -125,7 +125,8 @@ export const OrdersTable = (props) => {
   }
 
   const handleClickOrder = (order, e) => {
-    if (e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle')) return
+    const inValid = !isDriverOrders && e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle')
+    if (inValid) return
     handleOpenOrderDetail(order)
   }
 
@@ -146,7 +147,9 @@ export const OrdersTable = (props) => {
   return (
     <>
       <OrdersContainer>
-        <Table>
+        <Table
+          isDriverOrders={isDriverOrders}
+        >
           <thead>
             <tr>
               <th
@@ -183,10 +186,7 @@ export const OrdersTable = (props) => {
               </th>
             </tr>
           </thead>
-          <tbody
-            id='orders'
-            isDriverOrders={isDriverOrders}
-          >
+          <tbody id='orders'>
             {orderList.loading ? (
               [...Array(10).keys()].map(i => (
                 <tr key={i}>
@@ -300,13 +300,15 @@ export const OrdersTable = (props) => {
                       <OrderNumberContainer
                         onClick={() => handleSelectedOrderIds(order.id)}
                       >
-                        <CheckBox isChecked={selectedOrderIds.includes(order?.id)}>
-                          {selectedOrderIds.includes(order?.id) ? (
-                            <RiCheckboxFill />
-                          ): (
-                            <RiCheckboxBlankLine />
-                          )}
-                        </CheckBox>
+                        {!isDriverOrders && (
+                          <CheckBox isChecked={selectedOrderIds.includes(order?.id)}>
+                            {selectedOrderIds.includes(order?.id) ? (
+                              <RiCheckboxFill />
+                            ): (
+                              <RiCheckboxBlankLine />
+                            )}
+                          </CheckBox>
+                        )}
                         <div className='info'>
                           {allowColumns?.orderNumber && (
                             <p className='bold'>{t('ORDER_NO', 'Order No.')} {order?.id}</p>

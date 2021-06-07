@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
   width: 100%;
@@ -7,6 +7,9 @@ export const OrdersListContainer = styled.div`
   transition: all 0.5s;
   overflow: hidden;
   margin-top: 60px;
+  ${({ isDriverOrders }) => isDriverOrders && css`
+    padding: 20px 0 0 0;
+  `}
   @media print {
     display: none;
   }
