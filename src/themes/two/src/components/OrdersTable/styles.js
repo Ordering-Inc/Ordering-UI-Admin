@@ -137,6 +137,10 @@ export const Table = styled.table`
   @media (min-width: 1200px) {
     tbody {
       max-height: calc(100vh - 300px);
+
+      ${({ isDriverOrders }) => isDriverOrders && css`
+        max-height: calc(100vh - 390px);
+      `}
     }
   }
 `

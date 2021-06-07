@@ -1,6 +1,6 @@
 import React from 'react'
 import { DashboardOrdersList as OrdersListController, useLanguage } from 'ordering-components-admin'
-import { OrderListing } from '../OrderListing'
+import { OrdersListing } from '../OrdersListing'
 
 export const OrdersDashboardList = (props) => {
   const {
@@ -10,7 +10,7 @@ export const OrdersDashboardList = (props) => {
 
   const OrdersCommonControlProps = {
     ...props,
-    UIComponent: OrderListing,
+    UIComponent: OrdersListing,
     useDefualtSessionManager: true,
     orderBy: 'id',
     orderDirection: 'desc',

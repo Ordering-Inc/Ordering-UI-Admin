@@ -32,6 +32,7 @@ import {
 
 export const OrdersTable = (props) => {
   const {
+    isDriverOrders,
     orderList,
     driversList,
     pagination,
@@ -182,7 +183,10 @@ export const OrdersTable = (props) => {
               </th>
             </tr>
           </thead>
-          <tbody id='orders'>
+          <tbody
+            id='orders'
+            isDriverOrders={isDriverOrders}
+          >
             {orderList.loading ? (
               [...Array(10).keys()].map(i => (
                 <tr key={i}>

@@ -125,6 +125,7 @@ const OrdersManagerUI = (props) => {
           <OrdersInnerContent className='order-content'>
             <WrapItemView>
               <OrdersDashboard
+                isDriverOrders={isDriverOrders}
                 driverId={props.driverId}
                 searchValue={searchValue}
                 filterValues={filterValues}

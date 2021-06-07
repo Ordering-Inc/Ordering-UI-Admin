@@ -8,8 +8,9 @@ import {
   InnerNoneOrdersContainer
 } from './styles'
 
-export const OrderListing = (props) => {
+export const OrdersListing = (props) => {
   const {
+    isDriverOrders,
     orderList,
     driversList,
     selectedOrderIds,
@@ -56,6 +57,7 @@ export const OrderListing = (props) => {
             >
               {orderListView === 'table' ? (
                 <OrdersTable
+                  isDriverOrders={isDriverOrders}
                   orderList={orderList}
                   driversList={driversList}
                   pagination={pagination}
