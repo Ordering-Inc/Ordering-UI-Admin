@@ -121,3 +121,7 @@ export const DriverImage = (props) => {
     </DriverImageStyled>
   )
 }
+
+export const PlaceholderTitle = styled(Option)`
+  padding: 10px 15px;
+`

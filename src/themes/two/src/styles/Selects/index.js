@@ -87,6 +87,11 @@ export const Options = styled.div`
         right: initial;
     `}
   `}
+
+  ${({ isAbsolute }) => isAbsolute && css`
+    position: absolute;
+    margin-top: 7px;
+  `}
 `
 
 export const OptionsInner = styled.div`
@@ -126,7 +131,7 @@ export const Selected = styled.div`
 
 export const Select = styled.div`
   display: inline-block;
-  border-radius: 40px;
+  border-radius: 8px;
   line-height: 34px;
   border-width: 1px;
   border-style: solid;
@@ -162,7 +167,7 @@ export const Header = styled.div`
   overflow: hidden;
   white-space: nowrap;
   display: flex;
-  align-items: baseline;
+  align-items: center;
 `
 
 export const SelectImage = styled.div`

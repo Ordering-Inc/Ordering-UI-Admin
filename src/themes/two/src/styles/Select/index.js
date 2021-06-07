@@ -3,7 +3,6 @@ import { useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import {
-  Select as SelectInput,
   Selected,
   Options,
   OptionsInner,

@@ -5,8 +5,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Select } from '../../styles/Select'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import FiPhone from '@meronex/icons/fi/FiPhone'
-import { MultiSelect } from '../../../../../styles/MultiSelect'
+import { MultiSelect } from '../../styles/MultiSelect'
 
 import {
   Option,
@@ -15,7 +14,8 @@ import {
   WrapperDriverImage,
   DriverImage,
   DriverName,
-  DriverText
+  DriverText,
+  PlaceholderTitle
 } from './styles'
 toast.configure()
 
@@ -60,7 +60,7 @@ const DriverSelectorUI = (props) => {
                 </OptionContent>
               </>
             ) : (
-              t('SELECT_DRIVER', 'Select driver')
+                t('SELECT_DRIVER', 'Select driver')
             )}
           </Option>
         ),
@@ -181,7 +181,7 @@ const DriverSelectorUI = (props) => {
     setDefaultOption(defaultValue)
   }, [defaultValue])
 
-  const Placeholder = <Option>{t('SELECT_DRIVER', 'Select driver')}</Option>
+  const Placeholder = <PlaceholderTitle>{t('SELECT_DRIVER', 'Select driver')}</PlaceholderTitle>
 
   if (isFilterView) {
     return (

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-
+import { Modal } from '../Modal'
 import { SearchBar } from '../../../../../components/SearchBar'
-import { Modal } from '../../../../../components/Modal'
-import { FilterGroupList } from '../../../../../components/FilterGroupList'
-import { DeadlineSettingInterface } from '../../../../../components/DeadlineSettingInterface'
+import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import MdcFilterOutline from '@meronex/icons/mdc/MdcFilterOutline'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
@@ -39,20 +37,6 @@ export const OrdersContentHeader = (props) => {
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [filterApplied, setFilterApplied] = useState(false)
 
-  const [deadlineSettingModalOpen, setDeadlineSettingModalOpen] = useState(false)
-
-  const handleDeadlineSetting = () => {
-    setDeadlineSettingModalOpen(false)
-  }
-
-  const handleCloseFilterModal = () => {
-    setFilterModalOpen(false)
-  }
-
-  const closeModal = (e) => {
-    if (e.code === 'Escape') setFilterModalOpen(false)
-  }
-
   useEffect(() => {
     let _filterApplied = false
     if (Object.keys(filterValues).length === 0) {
@@ -64,13 +48,6 @@ export const OrdersContentHeader = (props) => {
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
-
-  useEffect(() => {
-    if (!filterModalOpen) return
-    document.addEventListener('keydown', closeModal)
-    return () => document.removeEventListener('keydown', closeModal)
-  }, [filterModalOpen])
-
   return (
     <>
       <OrderContentHeaderContainer
@@ -106,27 +83,25 @@ export const OrdersContentHeader = (props) => {
         </TopRightSection>
       </OrderContentHeaderContainer>
 
-      <FilterGroupList
-        open={filterModalOpen}
-        handleCloseFilterModal={handleCloseFilterModal}
-        driverGroupList={driverGroupList}
-        driversList={driversList}
-        paymethodsList={paymethodsList}
-        businessesList={businessesList}
-        handleChangeFilterValues={handleChangeFilterValues}
-      />
-
-      <Modal
-        title={t('SETTINGS', 'Settings')}
-        width='50%'
-        padding='30px'
-        open={deadlineSettingModalOpen}
-        onClose={() => setDeadlineSettingModalOpen(false)}
-        acceptText={t('ACCEPT', 'Accept')}
-        onAccept={() => handleDeadlineSetting()}
-      >
-        <DeadlineSettingInterface />
-      </Modal>
+      {filterModalOpen && (
+        <Modal
+          title={t('FILTER', 'Filter')}
+          width='80%'
+          padding='30px'
+          open={filterModalOpen}
+          onClose={() => setFilterModalOpen(false)}
+        >
+          <OrdersFilterGroup
+            open={filterModalOpen}
+            handleCloseFilterModal={() => setFilterModalOpen(false)}
+            driverGroupList={driverGroupList}
+            driversList={driversList}
+            paymethodsList={paymethodsList}
+            businessesList={businessesList}
+            handleChangeFilterValues={handleChangeFilterValues}
+          />
+        </Modal>
+      )}
     </>
   )
 }

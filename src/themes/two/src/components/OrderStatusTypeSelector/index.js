@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select'
-import { Option, PlaceholderTitle } from './styles'
 import { useTheme } from 'styled-components'
-import { MultiSelect } from '../../../../../styles/MultiSelect'
+import { MultiSelect } from '../../styles/MultiSelect'
+import { Option, PlaceholderTitle } from './styles'
 
 export const OrderStatusTypeSelector = (props) => {
   const {

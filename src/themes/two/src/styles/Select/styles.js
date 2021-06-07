@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const HeaderItem = styled.div`
   cursor: pointer;
   display: flex;
-  border-radius: 40px;
+  border-radius: 8px;
   border-style: solid;
   border-color: #1C202E;
   border: 1px solid #CCC;
