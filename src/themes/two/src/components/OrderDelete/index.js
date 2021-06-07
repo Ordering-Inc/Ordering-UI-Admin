@@ -3,7 +3,7 @@ import { useLanguage, CheckPassword as CheckPasswordController } from 'ordering-
 import FaTrash from '@meronex/icons/fa/FaTrash'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 
 import {
   WrapperCheckPassword,
@@ -57,6 +57,7 @@ const OrderDeleteUI = (props) => {
 
       <Modal
         open={checkPasswordModalOpen}
+        width='600px'
         onClose={() => setCheckPasswordModalOpen(false)}
       >
         <WrapperCheckPassword>
@@ -69,14 +70,19 @@ const OrderDeleteUI = (props) => {
             placeholder={t('PASSWORD', 'password')}
             onChange={(e) => handlePassword(e)}
           />
-          <ErrorText>
-            {checkPasswordStatus.error}
-          </ErrorText>
+          {checkPasswordStatus?.error && (
+            <ErrorText
+              className='text-danger'
+            >
+              {checkPasswordStatus.error}
+            </ErrorText>
+          )}
           <Button
             color='primary'
+            borderRadius='5px'
             onClick={() => getCheckPassword()}
           >
-            {t('DELETE', 'Delete')}
+            {t('CONFIRM', 'Confirm')}
           </Button>
         </WrapperCheckPassword>
       </Modal>
