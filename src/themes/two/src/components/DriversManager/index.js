@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
 import { DriversDashboard } from '../DriversDashboard'
-
+import { DriverOrdersLateralBar } from '../DriverOrdersLateralBar'
 import {
   DriversContainer,
   DriversContent
@@ -16,23 +16,25 @@ const DriversManagerUI = (props) => {
   const [, t] = useLanguage()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenDriverOrders, setIsOpenDriverOrders] = useState(false)
+  const [selectedDriver, setSelectedDriver] = useState(null)
 
   const handleBackRedirect = () => {
     setIsOpenDriverOrders(false)
     onOrderRedirect()
   }
 
-  const closeOrderDetailModal = (e) => {
-    if (e.code === 'Escape') {
-      handleBackRedirect()
+  const handleChangeDriver = (driver) => {
+    if (selectedDriver?.id === driver.id) {
+      setSelectedDriver(null)      
+    } else {
+      setSelectedDriver(driver)
     }
   }
 
   useEffect(() => {
-    if (!isOpenDriverOrders) return
-    document.addEventListener('keydown', closeOrderDetailModal)
-    return () => document.removeEventListener('keydown', closeOrderDetailModal)
-  }, [isOpenDriverOrders])
+    if (!selectedDriver) return
+    setIsOpenDriverOrders(true)
+  }, [selectedDriver])
 
   return (
     <>
@@ -40,8 +42,16 @@ const DriversManagerUI = (props) => {
         <DriversContent>
           <DriversDashboard
             {...props}
+            selectedDriver={selectedDriver}
+            handleChangeDriver={handleChangeDriver}
           />
         </DriversContent>
+
+        {isOpenDriverOrders && (
+          <DriverOrdersLateralBar
+            open={isOpenDriverOrders}
+          />
+        )}
       </DriversContainer>
     </>
   )

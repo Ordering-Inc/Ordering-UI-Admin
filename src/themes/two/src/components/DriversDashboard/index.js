@@ -18,18 +18,12 @@ export const DriversDashboard = (props) => {
     offlineDrivers,
     driversIsOnline,
     driversSubfilter,
+    selectedDriver,
+    handleChangeDriver,
     handleChangeDriverIsOnline,
     handleChangeDriversSubFilter
   } = props
 
-  const [selectedDriver, setSelectedDriver] = useState(null)
-  const handleChangeDriver = (driver) => {
-    if (selectedDriver?.id === driver.id) {
-      setSelectedDriver(null)      
-    } else {
-      setSelectedDriver(driver)
-    }
-  }
   return (
     <DriversDashboardContainer>
       <DriversContainer>

@@ -8,10 +8,16 @@ export const LateralBarContainer = styled.div`
   background: #FFF;
   overflow-x: hidden;
   transition: 0.4s;
+  height: 100vh;
 
   ${props => props.theme?.rtl ? css`
     left: 0;
   ` : css`
-    rigth: 0;
+    right: 0;
   `}
 `
+
+export const CloseButton = styled.div`
+
+`
+ 
