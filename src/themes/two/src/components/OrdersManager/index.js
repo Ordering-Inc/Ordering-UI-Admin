@@ -99,7 +99,7 @@ const OrdersManagerUI = (props) => {
         isDriverOrders={isDriverOrders}
       >
         <OrdersContentHeader
-          isDisableHeader={isDriverOrders}
+          isDisableTitle={isDriverOrders}
           isDisableControl={isDriverOrders}
           title={t('ORDERS_MANAGER', 'Orders manager')}
           searchValue={searchValue}
@@ -146,7 +146,7 @@ const OrdersManagerUI = (props) => {
 
       {isOpenOrderDetail && (
         <OrderDetails
-          isDriverOrders
+          isDriverOrders={isDriverOrders}
           open={isOpenOrderDetail}
           order={detailsOrder}
           orderId={orderDetailId}

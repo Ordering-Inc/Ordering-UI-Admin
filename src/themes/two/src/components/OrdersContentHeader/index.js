@@ -18,7 +18,7 @@ import {
 
 export const OrdersContentHeader = (props) => {
   const {
-    isDisableHeader,
+    isDisableTitle,
     isDisableControl,
     title,
     handleChangeSearch,
@@ -53,7 +53,7 @@ export const OrdersContentHeader = (props) => {
       <OrderContentHeaderContainer
         isDisableControl={isDisableControl}
       >
-        {!isDisableHeader && (
+        {!isDisableTitle && (
           <HeaderSection>
             <HeaderTitle>
               {title}
@@ -69,7 +69,9 @@ export const OrdersContentHeader = (props) => {
               handleDeleteMultiOrders={handleDeleteMultiOrders}
             />
           )}
-          <WrapperSearchAndFilter>
+          <WrapperSearchAndFilter
+            fullWidth={isDisableTitle && isDisableControl}
+          >
             <SearchBar
               isCustomLayout
               onSearch={handleChangeSearch}

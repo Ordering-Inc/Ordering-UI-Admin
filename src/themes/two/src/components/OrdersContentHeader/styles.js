@@ -4,6 +4,7 @@ export const OrderContentHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   min-width: 300px;
+  width: 100%;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -30,6 +31,7 @@ export const HeaderTitle = styled.p`
   font-weight: 500;
   margin: 0px;
   text-transform: capitalize;
+  white-space: nowrap;
 
   @media (max-width: 560px) {
     width: 100%;
@@ -37,6 +39,7 @@ export const HeaderTitle = styled.p`
   }
 `
 export const TopRightSection = styled.div`
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
@@ -70,6 +73,17 @@ export const WrapperSearchAndFilter = styled.div`
   display: flex;
   align-items: center;
   margin-top: 10px;
+
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+    > div {
+      width: 100%;
+
+      input {
+        width: 100%;
+      }
+    }
+  `}
 
   input {
     background: ${props => props.theme.colors.secundary};
