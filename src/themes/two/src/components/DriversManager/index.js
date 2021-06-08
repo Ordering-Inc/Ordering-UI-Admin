@@ -4,6 +4,7 @@ import { useLanguage, DriversList as DriversController } from 'ordering-componen
 import { DriversDashboard } from '../DriversDashboard'
 import { DriverOrdersLateralBar } from '../DriverOrdersLateralBar'
 import { SearchBar } from '../SearchBar'
+import { OrderNotification } from '../OrderNotification'
 import {
   DriversHeader,
   DriversContainer,
@@ -83,6 +84,8 @@ const DriversManagerUI = (props) => {
             onClose={() => handleBackRedirect()}
           />
         )}
+
+        <OrderNotification />
       </DriversContainer>
     </>
   )

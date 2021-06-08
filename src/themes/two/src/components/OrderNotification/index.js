@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useConfig, useEvent } from 'ordering-components-admin'
+import {
+  useLanguage,
+  useConfig,
+  useEvent,
+  OrderNotification as OrderNotificationController
+} from 'ordering-components-admin'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import 'react-toastify/dist/ReactToastify.css'
@@ -9,7 +14,8 @@ toast.configure()
 import {
   ModalContainer
 } from './styles'
-export const OrderNotification = (props) => {
+
+const OrderNotificationUI = (props) => {
   const [configState] = useConfig()
   const [, t] = useLanguage()
   const [events] = useEvent()
@@ -79,7 +85,7 @@ export const OrderNotification = (props) => {
     return () => {
       events.off('order_added', handleNotification)
     }
-  }, [configState])
+  }, [configState, registerOrderIds])
 
   return (
     <>
@@ -104,5 +110,15 @@ export const OrderNotification = (props) => {
         <source src={require('../../../../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
       </audio>
     </>
+  )
+}
+
+export const OrderNotification = (props) => {
+  const orderNotificationProps = {
+    ...props,
+    UIComponent: OrderNotificationUI
+  }
+  return (
+    <OrderNotificationController {...orderNotificationProps} />
   )
 }
