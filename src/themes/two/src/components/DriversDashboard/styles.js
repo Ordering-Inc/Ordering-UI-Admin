@@ -43,7 +43,8 @@ export const DriversContainer = styled.div`
 `
 
 export const WrapperDriversList = styled.div`
-  height: calc(100% - 200px);
+  height: calc(100% - 100px);
+  overflow-x: hidden;
 `
 
 export const WrapperDriversLocation = styled.div`

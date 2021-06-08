@@ -91,8 +91,7 @@ const DriversManagerUI = (props) => {
 export const DriversManager = (props) => {
   const DriversControlProps = {
     ...props,
-    UIComponent: DriversManagerUI,
-    propsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    UIComponent: DriversManagerUI   
   }
   return (
     <>
