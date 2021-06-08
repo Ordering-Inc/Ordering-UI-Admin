@@ -26,7 +26,7 @@ const ModalUI = (props) => {
 
   const onCloseModal = (e) => {
     if (e.code === 'Escape') {
-      onClose && onclose()
+      onClose && onClose()
     }
   }
 
