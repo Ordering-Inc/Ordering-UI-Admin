@@ -8,6 +8,7 @@ export const Container = styled.div`
   }
   .select {
     border: none;
+    padding: 0px;
 
     > div:first-child {
       padding: 0px;

@@ -52,15 +52,47 @@ export const UsersList = (props) => {
             </tr>
           </thead>
           {usersList.loading ? (
-            <tbody>
-              <tr>
-                <td><Skeleton /></td>
-                <td><Skeleton /></td>
-                <td><Skeleton /></td>
-                <td><Skeleton /></td>
-                <td><Skeleton /></td>
-              </tr>
-            </tbody>
+            [...Array(10).keys()].map(i => (
+              <tbody key={i}>
+                <tr>
+                  <td>
+                    <UserMainInfo>
+                      <CheckBoxWrapper>
+                        <Skeleton width={20} height={20} />
+                      </CheckBoxWrapper>
+                      <WrapperImage isSkeleton>
+                        <Skeleton width={45} height={45} />
+                      </WrapperImage>
+                      <InfoBlock>
+                        <p className='bold'><Skeleton width={150} /></p>
+                        <p><Skeleton width={100} /></p>
+                      </InfoBlock>
+                    </UserMainInfo>
+                  </td>
+                  <td>
+                    <InfoBlock>
+                      <p className='bold'><Skeleton width={100} /></p>
+                      <p><Skeleton width={100} /></p>
+                    </InfoBlock>
+                  </td>
+                  <td>
+                    <UserTypeWrapper>
+                      <Skeleton width={100} style={{ marginBottom: '10px' }}/>
+                      <p><Skeleton width={100} /></p>
+                    </UserTypeWrapper>
+                  </td>
+                  <td>
+                    <UserEnableWrapper>
+                      <span><Skeleton width={100} /></span>
+                      <Skeleton width={50} />
+                    </UserEnableWrapper>
+                  </td>
+                  <td>
+                    <Skeleton width={20} />
+                  </td>
+                </tr>
+              </tbody>
+            ))
           ) : (
             usersList?.users.map(user => (
               <tbody key={user.id}>

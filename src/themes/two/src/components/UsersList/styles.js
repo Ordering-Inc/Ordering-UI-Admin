@@ -47,7 +47,9 @@ export const WrapperImage = styled.div`
   max-height: 45px;
   height: 45px;
   width: 45px;
-  border: 1px solid #E3E3E3;
+  ${({ isSkeleton }) => !isSkeleton && css`
+    border: 1px solid #E3E3E3;
+  `}
   border-radius: 10px;
 
   svg {
@@ -94,15 +96,15 @@ export const UserMainInfo = styled.div`
 `
 
 export const CheckBoxWrapper = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
   svg {
     font-size: 24px;
     color: ${props => props.theme.colors?.headingColor};
 
-    ${props => props.theme?.rtl ? css`
-      margin-left: 10px;
-    ` : css`
-      margin-right: 10px;
-    `}
     ${({ isChecked }) => isChecked && css`
       color: ${props => props.theme.colors?.primary};
     `}
