@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components-admin'
-import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
+import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
 import ZoDownload from '@meronex/icons/zo/ZoDownload'
-import { Modal } from '../../../../../components/Modal'
+import { Modal } from '../Modal'
 import {
   ExportContainer,
   PopoverContainer,

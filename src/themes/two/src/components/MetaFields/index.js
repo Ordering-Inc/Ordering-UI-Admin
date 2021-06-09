@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { MetaFields as MetaFieldsController, useLanguage } from 'ordering-components-admin'
-import { Alert } from '../../../../../components/Confirm'
+import { Alert } from '../Confirm'
 import Skeleton from 'react-loading-skeleton'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare';
-import { Select } from '../../styles/Select'
+import { Select } from '../../styles/Select/FirstSelect'
 import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
-
+import { SpinnerLoader } from '../SpinnerLoader'
 import {
   WrapMetaFields,
   MetaTitle,
@@ -17,7 +17,8 @@ import {
   NoMetaField,
   MetaAddForm,
   MetaAddContainer,
-  SkeletonItem
+  SkeletonItem,
+  WrapperSpinnerLoader
 } from './styles'
 
 const MetaFieldsUI = (props) => {
@@ -293,7 +294,9 @@ const MetaFieldsUI = (props) => {
             </MetaAddContainer>
           </MetaAddForm>
           {actionState.loading && (
-            <SpinnerLoader primary />
+            <WrapperSpinnerLoader>
+              <SpinnerLoader />
+            </WrapperSpinnerLoader>
           )}
         </WrapMetaFields>
       )}

@@ -22,7 +22,7 @@ import { DriversManager } from './pages/DriversManager'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
-import { SpinnerLoader } from '../src/components/SpinnerLoader'
+import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {

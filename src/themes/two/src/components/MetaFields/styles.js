@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const WrapMetaFields = styled.div`
-  padding: 10px;
+  padding-top: 10px;
   box-sizing: border-box;
 `
 export const MetaTitle = styled.p`
@@ -15,7 +15,7 @@ export const MetaContainer = styled.div`
   color: ${props => props.theme.colors?.headingColor};
 
   .meta_type {
-    width: 20%;
+    width: 25%;
     font-size: 14px;
   }
   .meta_key {
@@ -43,7 +43,7 @@ export const MetaContainer = styled.div`
 export const MetaAddContainer = styled(MetaContainer)`
   input {
     border: 1px solid #c2c2c2;
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 5px 10px;
     outline: none;
     font-size: 16px;
@@ -59,7 +59,7 @@ export const MetaAddContainer = styled(MetaContainer)`
 `
 export const RoundBorder = styled.div`
   border: 1px solid #c2c2c2;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 5px 10px;
   font-size: 14px;
   color: ${props => props.theme.colors?.headingColor};
@@ -92,10 +92,10 @@ export const MetaAddForm = styled.form`
       height: 100%;
     }
     .jsoneditor {
-      border: 1px solid #182964;
+      border: 1px solid ${props => props.theme.colors.primary};
       > div.jsoneditor-menu {
-        background-color: #182964;
-        border-bottom: 1px solid #182964;
+        background-color: ${props => props.theme.colors.primary};
+        border-bottom: 1px solid ${props => props.theme.colors.primary};
       }
     }
     .jsoneditor-search {
@@ -112,6 +112,13 @@ export const SkeletonItem = styled.div`
   margin: 10px 0;
 
   span {
-    border-radius: 20px;
+    border-radius: 5px;
+  }
+`
+
+export const WrapperSpinnerLoader = styled.div`
+  > div {
+    position: absolute;
+    top: 0px;
   }
 `
