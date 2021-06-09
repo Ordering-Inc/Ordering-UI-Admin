@@ -19,6 +19,7 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import { OrdersManager } from './pages/OrdersManager'
 import { DeliveriesManager } from './pages/DeliveriesManager'
 import { DriversManager } from './pages/DriversManager'
+import { UsersList } from './pages/UsersList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -95,7 +96,6 @@ export const App = () => {
                           : <Redirect to='/orders' />
                       }
                     </Route>
-
                     <Route exact path='/orders'>
                       {
                         auth
@@ -103,7 +103,6 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-
                     <Route exact path='/deliveries'>
                       {
                         auth
@@ -111,11 +110,17 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-
                     <Route exact path='/drivers'>
                       {
                         auth
                           ? <DriversManager />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/users'>
+                      {
+                        auth
+                          ? <UsersList />
                           : <Redirect to='/login' />
                       }
                     </Route>
