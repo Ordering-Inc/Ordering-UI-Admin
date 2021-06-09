@@ -105,11 +105,16 @@ export const DriverInfo = styled.div`
       font-weight: 600;
       margin: 0px;
     }
-
-    span {
-      font-size: 14px;
-      cursor: pointer;
-      color: ${props => props.theme.colors.primary};
-    }
   }
+`
+
+export const AssignedOrdersCount = styled.span`
+  font-size: 14px;
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    opacity: 0.5;
+  `}
 `

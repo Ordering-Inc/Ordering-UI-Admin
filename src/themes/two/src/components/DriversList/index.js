@@ -10,7 +10,8 @@ import {
   WrapperImage,
   Image,
   DriverInfo,
-  WrapperStar
+  WrapperStar,
+  AssignedOrdersCount
 } from './styles'
 
 export const DriversList = (props) => {
@@ -69,12 +70,13 @@ export const DriversList = (props) => {
                 <div>
                   <p>{driver.name} {driver.lastname}</p>
                   <BsDot />
-                  <span
+                  <AssignedOrdersCount
                     className='driver-orders'
+                    disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
                     onClick={() => handleOpenDriverOrders(driver)}
                   >
-                    {driver.assigned_orders_count} {t('ORDERS', 'Orders')}
-                  </span>
+                    {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
+                  </AssignedOrdersCount>
                 </div>
                 {driver?.qualification && (
                   <WrapperStar width={getStarWidth(driver?.qualification)} />
