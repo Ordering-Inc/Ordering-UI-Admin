@@ -2,9 +2,10 @@ import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
 import { OrdersManager as OrdersManagerController } from '../../../src/themes/two/src/components/OrdersManager'
-export const OrdersManager = (props) => {
+
+export const OrdersList = (props) => {
   const [events] = useEvent()
-  const ordersManagerProps = {
+  const ordersListProps = {
     ...props,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
@@ -16,7 +17,7 @@ export const OrdersManager = (props) => {
   return (
     <>
       <HelmetTags page='orders' />
-      <OrdersManagerController {...ordersManagerProps} />
+      <OrdersManagerController {...ordersListProps} />
     </>
   )
 }

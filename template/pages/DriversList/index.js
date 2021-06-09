@@ -3,9 +3,9 @@ import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
 import { DriversManager as DriversManagerController } from '../../../src/themes/two/src/components/DriversManager'
 
-export const DriversManager = (props) => {
+export const DriversList = (props) => {
   const [events] = useEvent()
-  const driversManagerProps = {
+  const driversListProps = {
     ...props,
     isSearchByName: true,
     isSearchByCellphone: true,
@@ -21,7 +21,7 @@ export const DriversManager = (props) => {
   return (
     <>
       <HelmetTags page='deliveries' />
-      <DriversManagerController {...driversManagerProps} />
+      <DriversManagerController {...driversListProps} />
     </>
   )
 }

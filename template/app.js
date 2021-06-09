@@ -16,9 +16,9 @@ import { Layout } from '../src/themes/two/src/components/Layout'
 import { PageNotFound } from './pages/PageNotFound'
 import { Login } from './pages/Login'
 import { ForgotPassword } from './pages/ForgotPassword'
-import { OrdersManager } from './pages/OrdersManager'
+import { OrdersList } from './pages/OrdersList'
 import { DeliveriesManager } from './pages/DeliveriesManager'
-import { DriversManager } from './pages/DriversManager'
+import { DriversList } from './pages/DriversList'
 import { UsersList } from './pages/UsersList'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -99,7 +99,7 @@ export const App = () => {
                     <Route exact path='/orders'>
                       {
                         auth
-                          ? <OrdersManager />
+                          ? <OrdersList />
                           : <Redirect to='/login' />
                       }
                     </Route>
@@ -113,7 +113,7 @@ export const App = () => {
                     <Route exact path='/drivers'>
                       {
                         auth
-                          ? <DriversManager />
+                          ? <DriversList />
                           : <Redirect to='/login' />
                       }
                     </Route>
