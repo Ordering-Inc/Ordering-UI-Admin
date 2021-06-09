@@ -44,7 +44,7 @@ const ConfirmUI = (props) => {
       {(onCancel || onAccept || onClose) && (
         <PopupActions>
           {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-          {onAccept && <Button color='darkBlue' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+          {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
         </PopupActions>)}
     </PopupDialog>
   )

@@ -19,7 +19,7 @@ export const OrdersSearch = styled.div`
     font-size: 15px;
 
     &::placeholder {
-      color: #182964;
+      color: #909BA9;
     }
   }
 
