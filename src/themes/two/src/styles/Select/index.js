@@ -100,6 +100,7 @@ export const Select = (props) => {
   return (
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem
+        className='select'
         ref={referenceElement}
         onClick={() => setOpen(!open)}
       >
@@ -122,8 +123,8 @@ export const Select = (props) => {
           </Selected>
         )}
       </HeaderItem>
-      <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <Options>
+      <PopoverBody className='list' ref={popperElement} style={popStyle} {...attributes.popper}>
+        <Options className='options'>
           <OptionsInner
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}

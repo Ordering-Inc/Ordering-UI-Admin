@@ -84,6 +84,7 @@ export const Select = (props) => {
       )}
       {open && options && (
         <Options
+          className='list'
           isAbsolute
           position='right'
           ref={dropdownReference}

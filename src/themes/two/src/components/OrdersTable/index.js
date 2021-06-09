@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AiFillShop from '@meronex/icons/ai/AiFillShop'
 import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
 import FaCarSide from '@meronex/icons/fa/FaCarSide'
