@@ -32,7 +32,8 @@ export const UsersList = (props) => {
     paginationDetail,
     paginationProps,
     getUsers,
-    handleChangeUserType
+    handleChangeUserType,
+    handleChangeActiveUser
   } = props
   const [, t] = useLanguage()
 
@@ -147,8 +148,10 @@ export const UsersList = (props) => {
                     <td>
                       <UserEnableWrapper>
                         <span>{t('ENABLE', 'Enable')}</span>
-                        <Switch
+                        <UserActiveSwitch
+                          userId={user.id}
                           defaultChecked={user?.enabled}
+                          handleChangeActiveUser={handleChangeActiveUser}
                         />
                       </UserEnableWrapper>
                     </td>
@@ -183,5 +186,22 @@ export const UsersList = (props) => {
         )}
       </UsersConatiner>
     </>
+  )
+}
+
+const UserActiveSwitch = (props) => {
+  const {
+    defaultChecked,
+    userId,
+    handleChangeActiveUser
+  } = props
+  const onChangeActiveUser = (enabled) => {
+    handleChangeActiveUser({ id: userId, enabled: enabled })
+  }
+  return (
+    <Switch
+      defaultChecked={defaultChecked}
+      onChange={onChangeActiveUser}
+    />
   )
 }

@@ -304,6 +304,39 @@ export const UsersList = (props) => {
     }
   }
 
+  /**
+   * Method to change user enable/disable
+   * @param {Object} user user id and enable state
+   */
+
+  const handleChangeActiveUser = async (user) => {
+    try {
+      setActionStatus({ ...actionStatus, loading: true })
+      const requestsState = {}
+      const source = {}
+      requestsState.updateOrder = source
+      const { content: { error, result } } = await ordering.setAccessToken(session.token).users(user.id).save({ enabled: user.enabled }, { cancelToken: source })
+      setActionStatus({
+        loading: false,
+        error: error ? result : null
+      })
+      if (!error) {
+        const users = usersList.users.filter(_user => {
+          let valid = true
+          if (_user.id === user.id) {
+            if (user.enabled === !selectedUserActiveState) {
+              valid = false
+            } 
+          }
+          return valid
+        })
+        setUsersList({ ...usersList, users })
+      }
+    } catch (err) {
+      setActionStatus({ loading: false, error: [err.message] })
+    }
+  }
+
   useEffect(() => {
     if (usersList.loading) return
     getUsers(true, false)
@@ -335,6 +368,7 @@ export const UsersList = (props) => {
             selectedUserActiveState={selectedUserActiveState}
             handleChangeUserActiveState={handleChangeUserActiveState}
             handleChangeUserType={handleChangeUserType}
+            handleChangeActiveUser={handleChangeActiveUser}
           />
         )
       }

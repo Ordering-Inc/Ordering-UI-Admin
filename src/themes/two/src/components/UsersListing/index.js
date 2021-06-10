@@ -27,7 +27,8 @@ const UsersListingUI = (props) => {
     paginationDetail,
     selectedUserActiveState,
     handleChangeUserActiveState,
-    handleChangeUserType
+    handleChangeUserType,
+    handleChangeActiveUser
   } = props
 
   const [, t] = useLanguage()
@@ -54,6 +55,7 @@ const UsersListingUI = (props) => {
           // spinLoading={spinLoading}
           paginationDetail={paginationDetail}
           handleChangeUserType={handleChangeUserType}
+          handleChangeActiveUser={handleChangeActiveUser}
         />
       </UsersListingContainer>
     </>
