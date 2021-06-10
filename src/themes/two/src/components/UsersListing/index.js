@@ -7,6 +7,7 @@ import { UsersList } from '../UsersList'
 import {
   UsersListingContainer
 } from './styles'
+import { UserActiveStateFilter } from '../UserActiveStateFilter'
 
 const UsersListingUI = (props) => {
   const {
@@ -21,7 +22,9 @@ const UsersListingUI = (props) => {
     searchVal,
     onSearch,
     spinLoading,
-    paginationDetail
+    paginationDetail,
+    selectedUserActiveState,
+    handleChangeUserActiveState
   } = props
 
   const [, t] = useLanguage()
@@ -31,6 +34,10 @@ const UsersListingUI = (props) => {
       <UsersListingContainer>
         <UsersListingHeader
           title={t('USERS', 'Users')}
+        />
+        <UserActiveStateFilter
+          selectedUserActiveState={selectedUserActiveState}
+          handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <UserTypeFilter
           handleChangeUserType={handleChangeUserType}

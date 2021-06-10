@@ -13,11 +13,11 @@ export const UserTypeFilterUI = (props) => {
   const {
     handleChangeUserType,
     userTypes,
-    currentTypeSelected
+    currentTypesSelected
   } = props
 
-  const handleChangeUserRole = (types) => {
-    handleChangeUserType && handleChangeUserType(types)
+  const handleChangeUserRole = (type) => {
+    handleChangeUserType && handleChangeUserType(type)
   }
 
   return (
@@ -27,11 +27,11 @@ export const UserTypeFilterUI = (props) => {
           {userTypes && userTypes.length > 0 && userTypes.map(type => (
             <Button
               key={type.value}
-              color={type.value === currentTypeSelected ? 'primary': 'secundary'}
+              color={currentTypesSelected.includes(type.value) ? 'primary': 'secundary'}
               onClick={() => handleChangeUserRole(type.value)}
             >
               {type.key}
-              {type.value === currentTypeSelected && <MdClose />}
+              {currentTypesSelected.includes(type.value) && <MdClose />}
             </Button>
           ))}
         </AutoScroll>
@@ -50,7 +50,7 @@ export const UserTypeFilter = (props) => {
       { key: 'City manager', value: 1 },
       { key: 'Admintrators', value: 0 }
     ],
-    defaultUserType: props.defaultUserType || 3,
+    defaultUserTypes: props.defaultUserTypes || [0, 1, 2, 3],
     onChangeUserType: props.handleChangeUserType
   }
 

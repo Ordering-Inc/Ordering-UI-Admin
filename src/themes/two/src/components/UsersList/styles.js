@@ -2,6 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const UsersConatiner = styled.div`
+`
+
+export const UserTableWrapper = styled.div`
   height: calc(100vh - 200px);
   overflow: auto;
 `
