@@ -31,21 +31,10 @@ export const UsersList = (props) => {
     usersList,
     paginationDetail,
     paginationProps,
-    getUsers
+    getUsers,
+    handleChangeUserType
   } = props
   const [, t] = useLanguage()
-
-  const getUserType = (type) => {
-    const userTypes = [
-      { key: 0, value: t('USERS', 'Admintrator') },
-      { key: 1, value: t('CITY_MANAGER', 'City manager') },
-      { key: 2, value: t('BUSINESS_OWNER', 'Business owner') },
-      { key: 3, value: t('USER', 'User') }
-    ]
-
-    const objectStatus = userTypes.find(o => o.key === type)
-    return objectStatus && objectStatus
-  }
 
   const prevNextPage = (isNextPage) => {
     getUsers && getUsers(false, isNextPage)
@@ -135,8 +124,11 @@ export const UsersList = (props) => {
                     </td>
                     <td>
                       <UserTypeWrapper>
-                        <UserTypeSelector />
-                        <p>{getUserType(user?.level)?.value}</p>
+                        <UserTypeSelector
+                          userId={user.id}
+                          defaultUserType={user?.level}
+                          handleChangeUserType={handleChangeUserType}
+                        />
                       </UserTypeWrapper>
                     </td>
                     <td>
@@ -156,6 +148,7 @@ export const UsersList = (props) => {
             )}
           </UsersTable>
         </UserTableWrapper>
+
         {usersList?.users.length > 0 && !usersList.loading && (
           <WrapperPagination>
             <WrapperPageState>

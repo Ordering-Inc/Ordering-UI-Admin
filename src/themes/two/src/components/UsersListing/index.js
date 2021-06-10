@@ -1,5 +1,7 @@
 import React from 'react'
-import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+// import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { UsersList as UsersListController } from './naked'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
@@ -12,7 +14,7 @@ import { UserActiveStateFilter } from '../UserActiveStateFilter'
 const UsersListingUI = (props) => {
   const {
     usersList,
-    handleChangeUserType,
+    handleSelectedUserTypes,
     paginationProps,
     getUserById,
     getUsers,
@@ -24,7 +26,8 @@ const UsersListingUI = (props) => {
     spinLoading,
     paginationDetail,
     selectedUserActiveState,
-    handleChangeUserActiveState
+    handleChangeUserActiveState,
+    handleChangeUserType
   } = props
 
   const [, t] = useLanguage()
@@ -40,7 +43,7 @@ const UsersListingUI = (props) => {
           handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <UserTypeFilter
-          handleChangeUserType={handleChangeUserType}
+          handleChangeUserType={handleSelectedUserTypes}
         />
         <UsersList
           usersList={usersList}
@@ -50,6 +53,7 @@ const UsersListingUI = (props) => {
           // setUsersList={setUsersList}
           // spinLoading={spinLoading}
           paginationDetail={paginationDetail}
+          handleChangeUserType={handleChangeUserType}
         />
       </UsersListingContainer>
     </>

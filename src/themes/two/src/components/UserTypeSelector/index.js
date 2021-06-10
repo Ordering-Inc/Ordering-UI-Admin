@@ -6,6 +6,11 @@ import {
 } from './styles'
 
 export const UserTypeSelector = (props) => {
+  const {
+    userId,
+    defaultUserType,
+    handleChangeUserType
+  } = props
   const [, t] = useLanguage()
 
   const userTypes = [
@@ -14,18 +19,19 @@ export const UserTypeSelector = (props) => {
     { value: 2, content: <Option>{t('BUSINESS_OWNER', 'Business owner')}</Option> },
     { value: 3, content: <Option>{t('USER', 'User')}</Option> }
   ]
-
   const placeholder=<Option>{t('TYPE', 'Type')}</Option>
 
-  const onActionClick = (type) => {
-    console.log(type)
+  const onUpdateUserType = (type) => {
+    handleChangeUserType && handleChangeUserType({ id: userId, level: type })
   }
+
   return (
     <Select
       noSelected
       placeholder={placeholder}
       options={userTypes}
-      onChange={type => onActionClick(type)}
+      defaultValue={defaultUserType}
+      onChange={type => onUpdateUserType(type)}
     />
   )
 }
