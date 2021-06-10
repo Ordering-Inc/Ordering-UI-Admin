@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
-import EnChevronDown from '@meronex/icons/en/EnChevronDown'
+import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 import {
   Selected,
   Options,
@@ -108,7 +108,7 @@ export const Select = (props) => {
           <Selected>
             {placeholder || ''}
             <Chevron>
-              <EnChevronDown />
+              <GoTriangleDown />
             </Chevron>
           </Selected>
         )}
@@ -118,7 +118,7 @@ export const Select = (props) => {
               {selectedOption.showOnSelected || selectedOption.content}
             </Header>
             <Chevron>
-              <EnChevronDown />
+              <GoTriangleDown />
             </Chevron>
           </Selected>
         )}
