@@ -4,6 +4,8 @@ import { useLanguage } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import Prev from '@meronex/icons/md/MdKeyboardArrowLeft'
+import Next from '@meronex/icons/md/MdKeyboardArrowRight'
 import { Switch } from '../../styles/Switch'
 import { UserActionSelector } from '../UserActionSelector'
 import { UserTypeSelector } from '../UserTypeSelector'
@@ -18,12 +20,18 @@ import {
   CheckBoxWrapper,
   InfoBlock,
   UserTypeWrapper,
-  UserEnableWrapper
+  UserEnableWrapper,
+  WrapperPagination,
+  WrapperPageState,
+  PageButton
 } from './styles'
 
 export const UsersList = (props) => {
   const {
-    usersList
+    usersList,
+    paginationDetail,
+    paginationProps,
+    getUsers
   } = props
   const [, t] = useLanguage()
 
@@ -37,6 +45,10 @@ export const UsersList = (props) => {
 
     const objectStatus = userTypes.find(o => o.key === type)
     return objectStatus && objectStatus
+  }
+
+  const prevNextPage = (isNextPage) => {
+    getUsers && getUsers(false, isNextPage)
   }
 
   return (
@@ -144,6 +156,25 @@ export const UsersList = (props) => {
             )}
           </UsersTable>
         </UserTableWrapper>
+        {usersList?.users.length > 0 && !usersList.loading && (
+          <WrapperPagination>
+            <WrapperPageState>
+              {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
+            </WrapperPageState>
+            <PageButton
+              disabled={paginationProps?.currentPage === 1}
+              onClick={() => prevNextPage(false)}
+            >
+              <Prev />
+            </PageButton>
+            <PageButton
+              disabled={paginationProps?.totalPages === paginationProps?.currentPage || paginationProps?.totalPages === 1}
+              onClick={() => prevNextPage(true)}
+            >
+              <Next />
+            </PageButton>
+          </WrapperPagination>
+        )}
       </UsersConatiner>
     </>
   )

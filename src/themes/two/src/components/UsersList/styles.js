@@ -5,7 +5,7 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
-  height: calc(100vh - 200px);
+  height: calc(100vh - 280px);
   overflow: auto;
 `
 
@@ -165,4 +165,35 @@ export const UserEnableWrapper = styled.div`
       padding-right: 10px;
     `}
   }
+`
+export const WrapperPagination = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+`
+export const PageButton = styled.button`
+  outline: none;
+  border: 1px solid #00000029;
+  border-radius: 100%;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 5px;
+
+  &:active {
+    background: #1c202e;
+    color: #fff;
+  }
+  &:disabled {
+    cursor: no-drop;
+    pointer-events: none;
+  }
+`
+export const WrapperPageState = styled.div`
+  display: flex;
+  min-width: 140px;
 `

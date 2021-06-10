@@ -44,12 +44,12 @@ const UsersListingUI = (props) => {
         />
         <UsersList
           usersList={usersList}
-          // paginationProps={paginationProps}
+          getUsers={getUsers}
+          paginationProps={paginationProps}
           // getUserById={getUserById}
-          // getUsers={getUsers}
           // setUsersList={setUsersList}
           // spinLoading={spinLoading}
-          // paginationDetail={paginationDetail}
+          paginationDetail={paginationDetail}
         />
       </UsersListingContainer>
     </>
