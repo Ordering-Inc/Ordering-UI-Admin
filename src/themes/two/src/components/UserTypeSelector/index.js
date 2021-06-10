@@ -14,10 +14,26 @@ export const UserTypeSelector = (props) => {
   const [, t] = useLanguage()
 
   const userTypes = [
-    { value: 0, content: <Option>{t('USERS', 'Admintrator')}</Option> },
-    { value: 1, content: <Option>{t('CITY_MANAGER', 'City manager')}</Option> },
-    { value: 2, content: <Option>{t('BUSINESS_OWNER', 'Business owner')}</Option> },
-    { value: 3, content: <Option>{t('USER', 'User')}</Option> }
+    {
+      value: 0,
+      content: <Option>{t('ADMINISTRATOR', 'Administrator')}</Option>,
+      disabled: defaultUserType === 0
+    },
+    {
+      value: 1,
+      content: <Option>{t('CITY_MANAGER', 'City manager')}</Option>,
+      disabled: defaultUserType === 1
+    },
+    {
+      value: 2,
+      content: <Option>{t('BUSINESS_OWNER', 'Business owner')}</Option>,
+      disabled: defaultUserType === 2
+    },
+    { 
+      value: 3,
+      content: <Option>{t('USER', 'User')}</Option>,
+      disabled: defaultUserType === 3
+    }
   ]
   const placeholder=<Option>{t('TYPE', 'Type')}</Option>
 
@@ -27,10 +43,10 @@ export const UserTypeSelector = (props) => {
 
   return (
     <Select
+      type='primary'
       noSelected
       placeholder={placeholder}
       options={userTypes}
-      defaultValue={defaultUserType}
       onChange={type => onUpdateUserType(type)}
     />
   )

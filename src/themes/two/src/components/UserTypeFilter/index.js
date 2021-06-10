@@ -48,7 +48,7 @@ export const UserTypeFilter = (props) => {
       { key: 'Users', value: 3 },
       { key: 'Business owner', value: 2 },
       { key: 'City manager', value: 1 },
-      { key: 'Admintrators', value: 0 }
+      { key: 'Administrators', value: 0 }
     ],
     defaultUserTypes: props.defaultUserTypes || [0, 1, 2, 3],
     onChangeUserType: props.handleChangeUserType
