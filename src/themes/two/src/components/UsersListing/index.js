@@ -1,7 +1,5 @@
 import React from 'react'
-// import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
-import { useLanguage } from 'ordering-components-admin'
-import { UsersList as UsersListController } from './naked'
+import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
