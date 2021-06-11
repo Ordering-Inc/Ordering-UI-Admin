@@ -183,13 +183,13 @@ export const UsersList = (props) => {
               {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
             </WrapperPageState>
             <PageButton
-              disabled={paginationProps?.currentPage === 1}
+              disabled={paginationProps?.currentPage === 1 || usersList.loading}
               onClick={() => prevNextPage(false)}
             >
               <Prev />
             </PageButton>
             <PageButton
-              disabled={paginationProps?.totalPages === paginationProps?.currentPage || paginationProps?.totalPages === 1}
+              disabled={usersList.loading || paginationProps?.totalPages === paginationProps?.currentPage || paginationProps?.totalPages === 1}
               onClick={() => prevNextPage(true)}
             >
               <Next />

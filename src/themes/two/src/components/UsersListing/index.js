@@ -1,5 +1,5 @@
 import React from 'react'
-// import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
@@ -56,9 +56,6 @@ const UsersListingUI = (props) => {
           usersList={usersList}
           getUsers={getUsers}
           paginationProps={paginationProps}
-          // getUserById={getUserById}
-          // setUsersList={setUsersList}
-          // spinLoading={spinLoading}
           paginationDetail={paginationDetail}
           handleChangeUserType={handleChangeUserType}
           handleChangeActiveUser={handleChangeActiveUser}

@@ -5,12 +5,17 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
-  height: calc(100vh - 280px);
+  height: calc(100vh - 380px);
   overflow: auto;
+
+  @media (min-width: 768px) {
+    height: calc(100vh - 280px);
+  }
 `
 
 export const UsersTable = styled.table`
   width: calc(100% - 10px);
+  min-width: 900px;
   color: ${props => props.theme.colors?.headingColor};
 
   td, th {

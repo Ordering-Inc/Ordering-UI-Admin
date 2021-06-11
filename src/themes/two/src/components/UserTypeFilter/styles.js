@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components'
 
 export const UserTypeFilterContainer = styled.div`
-width: 100%;
-padding: 20px 0;
-display: flex;
-overflow-x: auto;
-@media (min-width: 992px) {
-  overflow-x: hidden;
-}
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  overflow-x: auto;
+  @media (min-width: 992px) {
+    overflow-x: hidden;
+  }
 `
 
 export const InnerContainer = styled.div`
