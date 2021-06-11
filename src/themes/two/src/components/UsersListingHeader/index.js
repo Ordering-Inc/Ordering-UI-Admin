@@ -1,6 +1,9 @@
 import React from 'react'
+import { useLanguage } from 'ordering-components-admin'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
+import { SearchBar } from '../SearchBar'
+
 import {
   HeaderContainer,
   ActionContainer
@@ -13,8 +16,13 @@ export const UsersListingHeader = (props) => {
     deleteUsersActionState,
     handleDeleteSeveralUsers,
     userTypesSelected,
-    selectedUserActiveState
+    selectedUserActiveState,
+    searchValue,
+    onSearch
   } = props
+
+  const [, t] = useLanguage()
+
   return (
     <HeaderContainer>
       <h1>{title}</h1>
@@ -27,6 +35,12 @@ export const UsersListingHeader = (props) => {
         <UsersExportCSV
           userTypesSelected={userTypesSelected}
           selectedUserActiveState={selectedUserActiveState}
+        />
+        <SearchBar
+          isCustomLayout
+          onSearch={onSearch}
+          search={searchValue}
+          placeholder={t('SEARCH', 'Search')}
         />
       </ActionContainer>
     </HeaderContainer>

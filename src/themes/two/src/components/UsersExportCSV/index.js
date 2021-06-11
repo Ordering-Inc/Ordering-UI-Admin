@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { UsersExportCSV as UsersExportCSVController } from './naked'
+import { useLanguage, UsersExportCSV as UsersExportCSVController } from 'ordering-components-admin'
 import { SpinnerLoader } from '../SpinnerLoader'
 import { Button } from '../../styles/Buttons'
 import ZoDownload from '@meronex/icons/zo/ZoDownload'
