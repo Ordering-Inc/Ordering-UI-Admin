@@ -24,6 +24,7 @@ const UsersListingUI = (props) => {
     searchVal,
     onSearch,
     spinLoading,
+    userTypesSelected,
     paginationDetail,
     selectedUserActiveState,
     handleChangeUserActiveState,
@@ -44,6 +45,8 @@ const UsersListingUI = (props) => {
         <UsersListingHeader
           title={t('USERS', 'Users')}
           selectedUsers={selectedUsers}
+          userTypesSelected={userTypesSelected}
+          selectedUserActiveState={selectedUserActiveState}
           deleteUsersActionState={deleteUsersActionState}
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
         />

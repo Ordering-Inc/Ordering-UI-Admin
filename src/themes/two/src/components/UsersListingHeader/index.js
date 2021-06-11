@@ -1,5 +1,6 @@
 import React from 'react'
 import { UsersDeleteButton } from '../UsersDeleteButton'
+import { UsersExportCSV } from '../UsersExportCSV'
 import {
   HeaderContainer,
   ActionContainer
@@ -10,7 +11,9 @@ export const UsersListingHeader = (props) => {
     title,
     selectedUsers,
     deleteUsersActionState,
-    handleDeleteSeveralUsers
+    handleDeleteSeveralUsers,
+    userTypesSelected,
+    selectedUserActiveState
   } = props
   return (
     <HeaderContainer>
@@ -20,6 +23,10 @@ export const UsersListingHeader = (props) => {
           selectedUsers={selectedUsers}
           deleteUsersActionState={deleteUsersActionState}
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
+        />
+        <UsersExportCSV
+          userTypesSelected={userTypesSelected}
+          selectedUserActiveState={selectedUserActiveState}
         />
       </ActionContainer>
     </HeaderContainer>

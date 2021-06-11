@@ -58,7 +58,7 @@ const UsersDeleteButtonUI = (props) => {
   return (
     <>
       <Button
-        borderRadius='6px'
+        borderRadius='5px'
         color='secundary'
         disabled={!selectedUsers.length || deleteUsersActionState.loading}
         onClick={() => handleModalOpen()}
