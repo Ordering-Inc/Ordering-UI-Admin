@@ -1,6 +1,6 @@
 import React from 'react'
 import { OrderStatusTypeSelector } from '../../../../../components/OrderStatusTypeSelector'
-import { ExportCSV } from '../ExportCSV'
+import { OrdersExportCSV } from '../OrdersExportCSV'
 import { OrderDelete } from '../OrderDelete'
 import {
   OrderDashboardControlsContainer,
@@ -20,7 +20,7 @@ export const OrdersDashboardControls = (props) => {
     <>
       <OrderDashboardControlsContainer>
         <InnerContnet>
-          <ExportCSV filterValues={filterValues} />
+          <OrdersExportCSV filterValues={filterValues} />
           {selectedOrderNumber > 0 && (
             <>
               <OrderDelete

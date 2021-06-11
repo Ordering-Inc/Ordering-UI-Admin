@@ -98,7 +98,7 @@ const ExportCSVUI = (props) => {
   )
 }
 
-export const ExportCSV = (props) => {
+export const OrdersExportCSV = (props) => {
   const ExportCSVControlProps = {
     ...props,
     UIComponent: ExportCSVUI,
