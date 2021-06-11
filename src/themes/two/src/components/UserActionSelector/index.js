@@ -9,6 +9,10 @@ import {
 } from './styles'
 
 export const UserActionSelector = (props) => {
+  const {
+    userId,
+    handleDeleteUser
+  } = props
   const [, t] = useLanguage()
 
   const actionTypes = [
@@ -19,7 +23,9 @@ export const UserActionSelector = (props) => {
   const placeholder=<PlaceHolder><FiMoreVertical /></PlaceHolder>
 
   const onActionClick = (type) => {
-    console.log(type)
+    if (type === 2) {
+      handleDeleteUser(userId)
+    }
   }
   return (
     <Container>

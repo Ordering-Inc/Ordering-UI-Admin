@@ -1,5 +1,7 @@
 import React from 'react'
-import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+// import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { UsersList as UsersListController } from './naked'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
@@ -26,7 +28,12 @@ const UsersListingUI = (props) => {
     selectedUserActiveState,
     handleChangeUserActiveState,
     handleChangeUserType,
-    handleChangeActiveUser
+    handleChangeActiveUser,
+    handleDeleteUser,
+    selectedUsers,
+    handleSelectedUsers,
+    deleteUsersActionState,
+    handleDeleteSeveralUsers
   } = props
 
   const [, t] = useLanguage()
@@ -36,6 +43,9 @@ const UsersListingUI = (props) => {
       <UsersListingContainer>
         <UsersListingHeader
           title={t('USERS', 'Users')}
+          selectedUsers={selectedUsers}
+          deleteUsersActionState={deleteUsersActionState}
+          handleDeleteSeveralUsers={handleDeleteSeveralUsers}
         />
         <UserActiveStateFilter
           selectedUserActiveState={selectedUserActiveState}
@@ -54,6 +64,9 @@ const UsersListingUI = (props) => {
           paginationDetail={paginationDetail}
           handleChangeUserType={handleChangeUserType}
           handleChangeActiveUser={handleChangeActiveUser}
+          handleDeleteUser={handleDeleteUser}
+          selectedUsers={selectedUsers}
+          handleSelectedUsers={handleSelectedUsers}
         />
       </UsersListingContainer>
     </>

@@ -33,7 +33,10 @@ export const UsersList = (props) => {
     paginationProps,
     getUsers,
     handleChangeUserType,
-    handleChangeActiveUser
+    handleChangeActiveUser,
+    handleDeleteUser,
+    selectedUsers,
+    handleSelectedUsers
   } = props
   const [, t] = useLanguage()
 
@@ -113,8 +116,14 @@ export const UsersList = (props) => {
                   <tr>
                     <td>
                       <UserMainInfo>
-                        <CheckBoxWrapper>
-                          <RiCheckboxFill />
+                        <CheckBoxWrapper
+                          onClick={() => handleSelectedUsers(user.id)}
+                        >
+                          {selectedUsers.includes(user.id) ? (
+                            <RiCheckboxFill />
+                          ) : (
+                            <RiCheckboxBlankLine />
+                          )}
                         </CheckBoxWrapper>
                         <WrapperImage>
                           {user?.photo ? (
@@ -156,7 +165,10 @@ export const UsersList = (props) => {
                       </UserEnableWrapper>
                     </td>
                     <td>
-                      <UserActionSelector />
+                      <UserActionSelector
+                        userId={user.id}
+                        handleDeleteUser={handleDeleteUser}
+                      />
                     </td>
                   </tr>
                 </tbody>
@@ -165,7 +177,7 @@ export const UsersList = (props) => {
           </UsersTable>
         </UserTableWrapper>
 
-        {usersList?.users.length > 0 && !usersList.loading && (
+        {usersList?.users.length > 0 && (
           <WrapperPagination>
             <WrapperPageState>
               {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}

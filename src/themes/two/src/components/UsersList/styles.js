@@ -99,6 +99,7 @@ export const UserMainInfo = styled.div`
 `
 
 export const CheckBoxWrapper = styled.div`
+  cursor: pointer;
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
   ` : css`
