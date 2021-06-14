@@ -47,6 +47,7 @@ export const UsersTable = styled.table`
 
   tbody {
     border-bottom: 1px solid #E9ECEF;
+    cursor: pointer;
   }
 `
 

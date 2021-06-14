@@ -36,7 +36,8 @@ export const UsersList = (props) => {
     handleChangeActiveUser,
     handleDeleteUser,
     selectedUsers,
-    handleSelectedUsers
+    handleSelectedUsers,
+    handleOpenUserDetails
   } = props
   const [, t] = useLanguage()
 
@@ -54,6 +55,12 @@ export const UsersList = (props) => {
 
   const prevNextPage = (isNextPage) => {
     getUsers && getUsers(false, isNextPage)
+  }
+
+  const onChangeUserDetails = (e, user) => {
+    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
+    if (isInvalid) return
+    handleOpenUserDetails(user)
   }
 
   return (
@@ -113,10 +120,13 @@ export const UsersList = (props) => {
             ) : (
               usersList?.users.map(user => (
                 <tbody key={user.id}>
-                  <tr>
+                  <tr
+                    onClick={(e) => onChangeUserDetails(e, user)}
+                  >
                     <td>
                       <UserMainInfo>
                         <CheckBoxWrapper
+                          className='user_checkbox'
                           onClick={() => handleSelectedUsers(user.id)}
                         >
                           {selectedUsers.includes(user.id) ? (
@@ -145,7 +155,7 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      <UserTypeWrapper>
+                      <UserTypeWrapper className='user_type_selector'>
                         <UserTypeSelector
                           userId={user.id}
                           defaultUserType={user?.level}
@@ -155,7 +165,7 @@ export const UsersList = (props) => {
                       </UserTypeWrapper>
                     </td>
                     <td>
-                      <UserEnableWrapper>
+                      <UserEnableWrapper className='user_enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>
                         <UserActiveSwitch
                           userId={user.id}
@@ -166,6 +176,7 @@ export const UsersList = (props) => {
                     </td>
                     <td>
                       <UserActionSelector
+                        className='user_action'
                         userId={user.id}
                         handleDeleteUser={handleDeleteUser}
                       />

@@ -7,7 +7,7 @@ export const UsersList = (props) => {
   const [events] = useEvent()
   const usersProps = {
     ...props,
-    onOrderRedirect: (userId) => {
+    onUserRedirect: (userId) => {
       if (!userId) {
         return events.emit('go_to_page', { page: 'users', replace: true })
       }

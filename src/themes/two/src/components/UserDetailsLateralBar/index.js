@@ -54,7 +54,9 @@ export const UserDetailsLateralBar = (props) => {
       >
         <MdcClose />
       </CloseButton>
-      <UserDetails />
+      <UserDetails
+        {...props}
+      />
     </LateralBarContainer>
   )
 }
