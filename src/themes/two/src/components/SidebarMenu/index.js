@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BsListCheck from '@meronex/icons/bs/BsListCheck'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
@@ -34,6 +36,7 @@ import {
 import { SubMenu } from '../SubMenu'
 
 export const SidebarMenu = (props) => {
+  const location = useLocation()
   const theme = useTheme()
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -177,7 +180,7 @@ export const SidebarMenu = (props) => {
             {!showSubmenu?.orders && (
               <div className='d-flex flex-column'>
                 <Button
-                  variant={(window.location.pathname === '/home' || window.location.pathname === '/') && 'primary'}
+                  variant={(location.pathname === '/home' || location.pathname === '/') && 'primary'}
                   className='d-flex align-items-center m-1'
                   onClick={() => handleGoToPage({ page: 'home' })}
                 >
@@ -188,9 +191,9 @@ export const SidebarMenu = (props) => {
                   className='d-flex align-items-center m-1'
                   variant={
                     (
-                      window.location.pathname === '/orders' ||
-                      window.location.pathname === '/deliveries' ||
-                      window.location.pathname === '/drivers'
+                      location.pathname === '/orders' ||
+                      location.pathname === '/deliveries' ||
+                      location.pathname === '/drivers'
                     ) && 'primary'
                   }
                   onClick={() => handleShowSubmenu('orders')}
@@ -200,7 +203,7 @@ export const SidebarMenu = (props) => {
                 </Button>
                 <Button
                   className='d-flex align-items-center m-1'
-                  variant={window.location.pathname === '/messages-manager' && 'primary'}
+                  variant={location.pathname === '/messages-manager' && 'primary'}
                   onClick={() => handleGoToPage({ page: 'messages_manager' })}
                 >
                   <BiMessageRounded />
@@ -208,7 +211,7 @@ export const SidebarMenu = (props) => {
                 </Button>
                 <Button
                   className='d-flex align-items-center m-1'
-                  variant={window.location.pathname === '/stores' && 'primary'}
+                  variant={location.pathname === '/stores' && 'primary'}
                   onClick={() => handleGoToPage({ page: 'stores' })}
                 >
                   <BiStore />
@@ -216,7 +219,7 @@ export const SidebarMenu = (props) => {
                 </Button>
                 <Button
                   className='d-flex align-items-center m-1'
-                  variant={window.location.pathname === '/users' && 'primary'}
+                  variant={location.pathname === '/users' && 'primary'}
                   onClick={() => handleGoToPage({ page: 'users' })}
                 >
                   <FiUsers />
@@ -224,7 +227,7 @@ export const SidebarMenu = (props) => {
                 </Button>
                 <Button
                   className='d-flex align-items-center m-1'
-                  variant={window.location.pathname === '/analytics' && 'primary'}
+                  variant={location.pathname === '/analytics' && 'primary'}
                   onClick={() => handleGoToPage({ page: 'analytics' })}
                 >
                   <MdcGoogleAnalytics />
@@ -235,7 +238,7 @@ export const SidebarMenu = (props) => {
             <div className='d-flex flex-column'>
               <Button
                 className='d-flex align-items-center m-1'
-                variant={window.location.pathname === '/settings' && 'primary'}
+                variant={location.pathname === '/settings' && 'primary'}
                 onClick={() => handleGoToPage({ page: 'settings' })}
               >
                 <FiSettings />
@@ -243,7 +246,7 @@ export const SidebarMenu = (props) => {
               </Button>
               <Button
                 className='d-flex align-items-center m-1'
-                variant={window.location.pathname === '/support' && 'primary'}
+                variant={location.pathname === '/support' && 'primary'}
                 onClick={() => handleGoToPage({ page: 'support' })}
               >
                 <BiSupport />
@@ -258,7 +261,7 @@ export const SidebarMenu = (props) => {
             <Button
               className='d-flex align-items-center m-1'
               onClick={() => handleGoToPage({ page: 'profile' })}
-              variant={window.location.pathname === '/profile' && 'primary'}
+              variant={location.pathname === '/profile' && 'primary'}
             >
               {sessionState?.user?.photo ? (
                 <Image src={sessionState?.user?.photo} width='30px' height='30px' roundedCircle />
