@@ -3,11 +3,12 @@ import { useLanguage, UsersList as UsersListController } from 'ordering-componen
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
+import { UserActiveStateFilter } from '../UserActiveStateFilter'
+import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
 
 import {
   UsersListingContainer
 } from './styles'
-import { UserActiveStateFilter } from '../UserActiveStateFilter'
 
 const UsersListingUI = (props) => {
   const {
@@ -64,6 +65,10 @@ const UsersListingUI = (props) => {
           handleSelectedUsers={handleSelectedUsers}
         />
       </UsersListingContainer>
+      
+      <UserDetailsLateralBar
+        open
+      />
     </>
   )
 }
