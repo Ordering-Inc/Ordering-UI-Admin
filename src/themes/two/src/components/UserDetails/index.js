@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { UserDetails as UserDetailsController } from './naked'
+import { UserDetails as UserDetailsController } from 'ordering-components-admin'
 import {
   UserName
 } from './styles'

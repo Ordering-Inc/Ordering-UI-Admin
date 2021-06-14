@@ -35,6 +35,7 @@ const UsersListingUI = (props) => {
 
   const [, t] = useLanguage()
   const query = new URLSearchParams(useLocation().search)
+  const [queryId, setQueryId] = useState(null)
 
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
@@ -56,7 +57,11 @@ const UsersListingUI = (props) => {
     if (id === null) setIsOpenUserDetails(false)
     else {
       const user = usersList.users.find(_user => _user.id === parseInt(id))
-      setOpenUser(user)
+      if (user) {
+        setOpenUser(user)
+      } else {
+        setQueryId(id)
+      }
       setIsOpenUserDetails(true)
     }
   }, [usersList])
@@ -95,11 +100,11 @@ const UsersListingUI = (props) => {
         />
       </UsersListingContainer>
       
-      {isOpenUserDetails && openUser && (
+      {isOpenUserDetails && (
         <UserDetailsLateralBar
           open={isOpenUserDetails}
           user={openUser}
-          userId={openUser?.id}
+          userId={openUser?.id || queryId}
           onClose={() => handleBackRedirect()}
         />
       )}
