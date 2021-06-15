@@ -22,6 +22,7 @@ import notFound from './template/assets/images/not-found.svg'
 import notFound404 from './template/assets/images/not-found-404.svg'
 import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import loginHero from './template/assets/images/loginHero.png'
+import personalization from './template/assets/images/personalization.svg'
 
 /**
  * dummies
@@ -109,7 +110,8 @@ theme.images = {
     notFound,
     notFound404,
     notFoundLighting,
-    loginHero
+    loginHero,
+    personalization
   },
   order: {
     status0: orderStatus0,

@@ -5,20 +5,24 @@ import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../AddressList'
 import { OrdersManager } from '../OrdersManager'
+import { useTheme } from 'styled-components'
 
 import {
   UserName,
   SavedPlaces
 } from './styles'
+import { Personalization } from '../Personalization'
 
 export const UserDetailsUI = (props) => {
   const {
     userState,
     userId,
-    setExtraOpen
+    setExtraOpen,
+    handleSuccessUpdate
   } = props
 
   const [currentMenuSelected, setCurrentMenuSelected] = useState('Profile')
+  const theme = useTheme()
 
   useEffect(() => {
     setExtraOpen(false)
@@ -39,13 +43,13 @@ export const UserDetailsUI = (props) => {
       />
       {!userState?.loading && userState?.user && (
         <>
-          {currentMenuSelected === 'Profile' && (
+          {currentMenuSelected === 'profile' && (
             <UserProfileForm
               user={userState.user}
-              handleSuccessUpdate={(result) => console.log(result)}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           )}
-          {currentMenuSelected === 'Saved_places' && (
+          {currentMenuSelected === 'saved_places' && (
             <>
               {userState?.user?.addresses && (
                 <SavedPlaces>
@@ -59,12 +63,15 @@ export const UserDetailsUI = (props) => {
               )}
             </>
           )}
-          {currentMenuSelected === 'Orders' && (
+          {currentMenuSelected === 'orders' && (
             <OrdersManager
               isSelectedOrders
               customerId={userState.user?.id}
               handleCustomOrderDetail={setExtraOpen}
             />
+          )}
+          {currentMenuSelected === 'personalization' && (
+            <Personalization />
           )}
         </>
       )}

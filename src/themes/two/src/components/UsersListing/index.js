@@ -30,7 +30,8 @@ const UsersListingUI = (props) => {
     handleSelectedUsers,
     deleteUsersActionState,
     handleDeleteSeveralUsers,
-    onUserRedirect
+    onUserRedirect,
+    handleSuccessUpdate
   } = props
 
   const [, t] = useLanguage()
@@ -106,6 +107,7 @@ const UsersListingUI = (props) => {
           user={openUser}
           userId={openUser?.id || queryId}
           onClose={() => handleBackRedirect()}
+          handleSuccessUpdate={handleSuccessUpdate}
         />
       )}
     </>

@@ -16,11 +16,11 @@ export const UserDetailsMenu = (props) => {
 
   const [, t] = useLanguage()
   const menuItems = [
-    { key: 'Profile', content: t('PROFILE', 'Profile') },
-    { key: 'Saved_places', content: t('SAVED_PLACES', 'Saved places') },
-    { key: 'Orders', content: t('ORDERS', 'Orders') },
-    { key: 'Metafields', content: t('METAFIELDS', 'Metafields') },
-    { key: 'Personalization', content: t('PERSONALIZATION', 'Personalization') }
+    { key: 'profile', content: t('PROFILE', 'Profile') },
+    { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
+    { key: 'orders', content: t('ORDERS', 'Orders') },
+    { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
+    { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
   ]
   return (
     <UserDetailsMenuContainer>
