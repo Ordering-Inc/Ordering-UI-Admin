@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
@@ -19,6 +19,10 @@ export const UserDetailsUI = (props) => {
   } = props
 
   const [currentMenuSelected, setCurrentMenuSelected] = useState('Profile')
+
+  useEffect(() => {
+    setExtraOpen(false)
+  }, [currentMenuSelected])
 
   return (
     <>
@@ -59,7 +63,7 @@ export const UserDetailsUI = (props) => {
             <OrdersManager
               isSelectedOrders
               customerId={userState.user?.id}
-              // handleDriverOrderDetail={handleDriverOrderDetail}
+              handleCustomOrderDetail={setExtraOpen}
             />
           )}
         </>

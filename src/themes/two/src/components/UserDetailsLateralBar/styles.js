@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const LateralBarContainer = styled.div`
   width: 0;
-  padding: 20px;
   position: fixed;
   z-index: 1005;
   top: 0;
@@ -17,6 +16,13 @@ export const LateralBarContainer = styled.div`
   ` : css`
     right: 0;
   `}
+`
+
+export const WrapUserDetails = styled.div`
+  max-width: 500px;
+  height: 100%;
+  padding: 20px;
+  position: relative;
 `
 
 export const CloseButton = styled.div`

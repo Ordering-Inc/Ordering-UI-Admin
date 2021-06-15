@@ -36,7 +36,7 @@ export const DriverOrdersLateralBar = (props) => {
     setIsMenuOpen(value)
   }
 
-  const handleDriverOrderDetail = (open) => {
+  const handleCustomOrderDetail = (open) => {
     setIsOpenDriverOrderDetails(open)
   }
 
@@ -92,7 +92,7 @@ export const DriverOrdersLateralBar = (props) => {
         <OrdersManager
           isSelectedOrders
           driverId={driver.id}
-          handleDriverOrderDetail={handleDriverOrderDetail}
+          handleCustomOrderDetail={handleCustomOrderDetail}
         />
       </DriverOrdersContainer>
     </LateralBarContainer>

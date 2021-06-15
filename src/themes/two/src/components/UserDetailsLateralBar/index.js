@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UserDetails } from '../UserDetails'
-import { useTheme } from 'styled-components'
 
 import {
   LateralBarContainer,
-  CloseButton
+  CloseButton,
+  WrapUserDetails
 } from './styles'
 
 export const UserDetailsLateralBar = (props) => {
   const {
     open
   } = props
-  const theme = useTheme()
+
   const { width } = useWindowSize()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -31,7 +31,11 @@ export const UserDetailsLateralBar = (props) => {
       if (width <= 500) {
         document.getElementById('user_lateral_bar').style.width = '100vw'
       } else {
-        document.getElementById('user_lateral_bar').style.width = '500px'
+        if (extraOpen && width >= 1000) {
+          document.getElementById('user_lateral_bar').style.width = '1000px'
+        } else {
+          document.getElementById('user_lateral_bar').style.width = '500px'
+        }
       }
     }
   }
@@ -48,31 +52,25 @@ export const UserDetailsLateralBar = (props) => {
   useEffect(() => {
     if (width < 1000) return
     if (extraOpen) {
-      if (theme?.rtl) {
-        document.getElementById('user_lateral_bar').style.left = '500px'
-      } else {
-        document.getElementById('user_lateral_bar').style.right = '500px'
-      }
+      document.getElementById('user_lateral_bar').style.width = '1000px'
     } else {
-      if (theme?.rtl) {
-        document.getElementById('user_lateral_bar').style.left = '0px'
-      } else {
-        document.getElementById('user_lateral_bar').style.right = '0px'
-      }
+      toggleMainContent()
     }
   }, [extraOpen])
 
   return (
     <LateralBarContainer id='user_lateral_bar'>
-      <CloseButton
-        onClick={() => props.onClose()}
-      >
-        <MdcClose />
-      </CloseButton>
-      <UserDetails
-        {...props}
-        setExtraOpen={setExtraOpen}
-      />
+      <WrapUserDetails>
+        <CloseButton
+          onClick={() => props.onClose()}
+        >
+          <MdcClose />
+        </CloseButton>
+        <UserDetails
+          {...props}
+          setExtraOpen={setExtraOpen}
+        />
+      </WrapUserDetails>
     </LateralBarContainer>
   )
 }

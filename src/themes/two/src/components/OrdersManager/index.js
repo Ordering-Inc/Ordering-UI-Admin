@@ -38,7 +38,7 @@ const OrdersManagerUI = (props) => {
     onOrderRedirect,
     selectedSubOrderStatus,
     handleSelectedSubOrderStatus,
-    handleDriverOrderDetail
+    handleCustomOrderDetail
   } = props
 
   const [, t] = useLanguage()
@@ -53,7 +53,7 @@ const OrdersManagerUI = (props) => {
     if (!isSelectedOrders) {
       onOrderRedirect()
     } else {
-      handleDriverOrderDetail && handleDriverOrderDetail(false)
+      handleCustomOrderDetail && handleCustomOrderDetail(false)
     }
   }
 
@@ -64,7 +64,7 @@ const OrdersManagerUI = (props) => {
     if (!isSelectedOrders) {
       onOrderRedirect(order.id)
     } else {
-      handleDriverOrderDetail && handleDriverOrderDetail(true)
+      handleCustomOrderDetail && handleCustomOrderDetail(true)
     }
   }
 
