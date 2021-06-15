@@ -21,7 +21,7 @@ export const UserDetailsUI = (props) => {
     handleSuccessUpdate
   } = props
 
-  const [currentMenuSelected, setCurrentMenuSelected] = useState('Profile')
+  const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const theme = useTheme()
 
   useEffect(() => {
