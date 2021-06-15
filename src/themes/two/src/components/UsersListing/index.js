@@ -60,7 +60,7 @@ const UsersListingUI = (props) => {
       if (user) {
         setOpenUser(user)
       } else {
-        setQueryId(id)
+        setQueryId(parseInt(id))
       }
       setIsOpenUserDetails(true)
     }
