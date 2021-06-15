@@ -141,19 +141,15 @@ export const AddressTagSection = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 46px;
-    height: 46px;
-
+    padding-top: 5px;
+    padding-bottom: 5px;
     img {
       width: 22px;
       height: 22px;
     }
 
-    span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 22px;
+    svg {
+      font-size: 20px;
     }
   }
 
@@ -189,5 +185,28 @@ export const WrapperSkeleton = styled.div`
 
   span {
     width: 100%;
+  }
+`
+
+export const Title = styled.div`
+  font-size: 24px;
+  font-weight: 500;
+  color: ${props => props.theme.colors.headingColor};
+  text-align: initial;
+`
+
+export const CloseButton = styled.span`
+  position: fixed;
+  cursor: pointer;
+  background: #E9ECEF;
+  padding: 5px;
+  top: 10px;
+  ${props => props.theme?.rtl ? css`
+    left: 10px;
+  ` : css`
+    right: 10px;
+  `}
+  svg {
+    font-size: 24px;
   }
 `

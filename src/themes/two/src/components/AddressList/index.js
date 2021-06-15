@@ -336,9 +336,10 @@ const AddressListUI = (props) => {
         />
       </AddressListContainer>
 
-      {addressOpen && (
+      {addressOpen && isSeletectedUserAddresses && (
         <WrapperAddressForm>
           <AddressForm
+            isSeletectedUserAddresses
             userId={userId}
             addressesList={addressList?.addresses}
             useValidationFileds

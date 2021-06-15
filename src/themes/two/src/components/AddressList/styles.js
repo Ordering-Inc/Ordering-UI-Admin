@@ -174,7 +174,16 @@ export const ContinueButton = styled.div`
 `
 
 export const WrapperAddressForm = styled.div`
-  width: 50%;
+  position: fixed;
+  top: 0px;
+  ${props => props.theme?.rtl ? css`
+    left: 0px;
+  ` : css`
+    right: 0px;
+  `}
+  background: #FFF;
+  width: 500px;
+  height: 100vh;
   box-sizing: border-box;
   padding: 10px;
 

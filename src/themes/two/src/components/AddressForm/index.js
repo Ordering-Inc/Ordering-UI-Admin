@@ -6,6 +6,8 @@ import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
 import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import MdcClose from '@meronex/icons/mdc/MdcClose'
+
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import { useForm } from 'react-hook-form'
 import {
@@ -28,7 +30,9 @@ import {
   AddressTagSection,
   WrapperMap,
   ShowMap,
-  WrapperSkeleton
+  WrapperSkeleton,
+  Title,
+  CloseButton
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -54,7 +58,8 @@ const AddressFormUI = (props) => {
     handleChangeInput,
     saveAddress,
     setIsEdit,
-    userCustomerSetup
+    userCustomerSetup,
+    isSeletectedUserAddresses
   } = props
 
   const [configState] = useConfig()
@@ -349,6 +354,19 @@ const AddressFormUI = (props) => {
         </WrapperSkeleton>
       )}
 
+      {isSeletectedUserAddresses && (
+        <>
+          <Title>
+            {t('EDIT_ADDRESS', 'Edit address')}
+          </Title>
+          <CloseButton
+            onClick={() => onCancel()}
+          >
+            <MdcClose />
+          </CloseButton>
+        </>
+      )}
+
       {!configState.loading && !addressState.loading && (
         <FormControl
           onSubmit={formMethods.handleSubmit(onSubmit)}
@@ -365,7 +383,7 @@ const AddressFormUI = (props) => {
             props.beforeMidComponents?.map((BeforeMidComponents, i) => (
               <BeforeMidComponents key={i} {...props} />))
           }
-          {locationChange && toggleMap && (
+          {locationChange && (
             <WrapperMap>
               <GoogleMapsMap
                 apiKey={googleMapsApiKey}
@@ -415,9 +433,9 @@ const AddressFormUI = (props) => {
                   />
                 </AddressWrap>
 
-                {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
+                {/* {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
                   <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
-                )}
+                )} */}
               </React.Fragment>
             ) : (
               <React.Fragment key={field.name}>
@@ -453,17 +471,17 @@ const AddressFormUI = (props) => {
           {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
 
           <AddressTagSection>
-            <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
-              <span><FaHome /></span>
+            <Button borderRadius='5px' className={addressTag === 'home' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('home')}>
+              <FaHome />
             </Button>
-            <Button className={addressTag === 'office' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('office')}>
-              <span><FaRegBuilding /></span>
+            <Button borderRadius='5px' className={addressTag === 'office' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('office')}>
+              <FaRegBuilding />
             </Button>
-            <Button className={addressTag === 'favorite' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('favorite')}>
-              <span><FaRegHeart /></span>
+            <Button borderRadius='5px' className={addressTag === 'favorite' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('favorite')}>
+              <FaRegHeart />
             </Button>
-            <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
-              <span><FaPlus /></span>
+            <Button borderRadius='5px' className={addressTag === 'other' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('other')}>
+              <FaPlus />
             </Button>
           </AddressTagSection>
           {
