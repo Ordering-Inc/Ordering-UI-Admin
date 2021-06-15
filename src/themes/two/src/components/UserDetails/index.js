@@ -4,6 +4,7 @@ import { UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../AddressList'
+import { OrdersManager } from '../OrdersManager'
 
 import {
   UserName,
@@ -53,6 +54,13 @@ export const UserDetailsUI = (props) => {
                 </SavedPlaces>
               )}
             </>
+          )}
+          {currentMenuSelected === 'Orders' && (
+            <OrdersManager
+              isSelectedOrders
+              customerId={userState.user?.id}
+              // handleDriverOrderDetail={handleDriverOrderDetail}
+            />
           )}
         </>
       )}

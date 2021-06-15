@@ -10,7 +10,7 @@ import {
 
 export const OrdersListing = (props) => {
   const {
-    isDriverOrders,
+    isSelectedOrders,
     orderList,
     driversList,
     selectedOrderIds,
@@ -57,7 +57,7 @@ export const OrdersListing = (props) => {
             >
               {orderListView === 'table' ? (
                 <OrdersTable
-                  isDriverOrders={isDriverOrders}
+                  isSelectedOrders={isSelectedOrders}
                   orderList={orderList}
                   driversList={driversList}
                   pagination={pagination}

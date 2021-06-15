@@ -32,7 +32,7 @@ import {
 
 export const OrdersTable = (props) => {
   const {
-    isDriverOrders,
+    isSelectedOrders,
     orderList,
     driversList,
     pagination,
@@ -125,7 +125,7 @@ export const OrdersTable = (props) => {
   }
 
   const handleClickOrder = (order, e) => {
-    const inValid = !isDriverOrders && e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle')
+    const inValid = !isSelectedOrders && e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle')
     if (inValid) return
     handleOpenOrderDetail(order)
   }
@@ -148,7 +148,7 @@ export const OrdersTable = (props) => {
     <>
       <OrdersContainer>
         <Table
-          isDriverOrders={isDriverOrders}
+          isSelectedOrders={isSelectedOrders}
         >
           <thead>
             <tr>
@@ -300,7 +300,7 @@ export const OrdersTable = (props) => {
                       <OrderNumberContainer
                         onClick={() => handleSelectedOrderIds(order.id)}
                       >
-                        {!isDriverOrders && (
+                        {!isSelectedOrders && (
                           <CheckBox isChecked={selectedOrderIds.includes(order?.id)}>
                             {selectedOrderIds.includes(order?.id) ? (
                               <RiCheckboxFill />

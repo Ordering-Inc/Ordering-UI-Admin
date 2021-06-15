@@ -17,7 +17,7 @@ import { OrderNotification } from '../OrderNotification'
 
 const OrdersManagerUI = (props) => {
   const {
-    isDriverOrders,
+    isSelectedOrders,
     searchValue,
     driverGroupList,
     driversList,
@@ -50,7 +50,7 @@ const OrdersManagerUI = (props) => {
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
-    if (!isDriverOrders) {
+    if (!isSelectedOrders) {
       onOrderRedirect()
     } else {
       handleDriverOrderDetail && handleDriverOrderDetail(false)
@@ -61,7 +61,7 @@ const OrdersManagerUI = (props) => {
     setDetailsOrder(order)
     setOrderDetailId(order.id)
     setIsOpenOrderDetail(true)
-    if (!isDriverOrders) {
+    if (!isSelectedOrders) {
       onOrderRedirect(order.id)
     } else {
       handleDriverOrderDetail && handleDriverOrderDetail(true)
@@ -83,7 +83,7 @@ const OrdersManagerUI = (props) => {
   }, [selectedOrderIds])
 
   useEffect(() => {
-    if (isDriverOrders) return
+    if (isSelectedOrders) return
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
@@ -96,11 +96,11 @@ const OrdersManagerUI = (props) => {
   return (
     <>
       <OrdersListContainer
-        isDriverOrders={isDriverOrders}
+        isSelectedOrders={isSelectedOrders}
       >
         <OrdersContentHeader
-          isDisableTitle={isDriverOrders}
-          isDisableControl={isDriverOrders}
+          isDisableTitle={isSelectedOrders}
+          isDisableControl={isSelectedOrders}
           title={t('ORDERS_MANAGER', 'Orders manager')}
           searchValue={searchValue}
           driverGroupList={driverGroupList}
@@ -127,8 +127,9 @@ const OrdersManagerUI = (props) => {
           <OrdersInnerContent className='order-content'>
             <WrapItemView>
               <OrdersDashboard
-                isDriverOrders={isDriverOrders}
+                isSelectedOrders={isSelectedOrders}
                 driverId={props.driverId}
+                customerId={props.customerId}
                 searchValue={searchValue}
                 filterValues={filterValues}
                 selectedOrderIds={selectedOrderIds}
@@ -146,7 +147,7 @@ const OrdersManagerUI = (props) => {
 
       {isOpenOrderDetail && (
         <OrderDetails
-          isDriverOrders={isDriverOrders}
+          isSelectedOrders={isSelectedOrders}
           open={isOpenOrderDetail}
           order={detailsOrder}
           orderId={orderDetailId}

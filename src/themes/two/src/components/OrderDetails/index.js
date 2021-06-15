@@ -29,7 +29,7 @@ import {
 
 const OrderDetailsUI = (props) => {
   const {
-    isDriverOrders,
+    isSelectedOrders,
     open,
     driversList,
     handleBackRedirect,
@@ -206,7 +206,7 @@ const OrderDetailsUI = (props) => {
 
   return (
     <Container
-      isDriverOrders={isDriverOrders}
+      isSelectedOrders={isSelectedOrders}
       id='orderDetails'
       isSkeleton={loading}
     >

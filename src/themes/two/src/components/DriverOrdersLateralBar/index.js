@@ -90,7 +90,7 @@ export const DriverOrdersLateralBar = (props) => {
           </DriverName>
         </DriverInfo>
         <OrdersManager
-          isDriverOrders
+          isSelectedOrders
           driverId={driver.id}
           handleDriverOrderDetail={handleDriverOrderDetail}
         />
