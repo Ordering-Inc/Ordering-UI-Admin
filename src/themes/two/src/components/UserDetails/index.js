@@ -12,6 +12,7 @@ import {
   SavedPlaces
 } from './styles'
 import { Personalization } from '../Personalization'
+import { UserMetaFields } from '../UserMetaFields'
 
 export const UserDetailsUI = (props) => {
   const {
@@ -68,6 +69,11 @@ export const UserDetailsUI = (props) => {
               isSelectedOrders
               customerId={userState.user?.id}
               handleCustomOrderDetail={setExtraOpen}
+            />
+          )}
+          {currentMenuSelected === 'metafields' && (
+            <UserMetaFields
+              userId={userState.user?.id}
             />
           )}
           {currentMenuSelected === 'personalization' && (
