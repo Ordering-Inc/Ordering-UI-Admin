@@ -13,7 +13,6 @@ import {
 } from 'ordering-components-admin'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
-import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 import { Button } from '../../styles/Buttons'
 import { bytesConverter } from '../../../../../utils'
@@ -26,7 +25,6 @@ import {
   SideForm,
   Camera,
   UserData,
-  SavedPlaces,
   UploadImageIcon,
   SkeletonWrapper,
   WrapperForm
@@ -172,12 +170,6 @@ const UserProfileFormUI = (props) => {
           >
             {t('EDIT', 'Edit')}
           </Button>
-        )}
-        {(userData?.addresses || userState?.result?.result?.addresses) && !isHiddenAddress && (
-          <SavedPlaces>
-            <h1>Saved Places</h1>
-            <AddressList isModal addressList={userState?.result?.result?.addresses} />
-          </SavedPlaces>
         )}
       </Container>
       <Alert

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
+import { darken, lighten } from 'polished'
 
 export const Button = styled.button`
   background: #CCC;

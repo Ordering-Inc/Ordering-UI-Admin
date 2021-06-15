@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import TiPencil from '@meronex/icons/ti/TiPencil'
+import BsPencil from '@meronex/icons/bs/BsPencil'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
@@ -24,7 +24,8 @@ import {
   AddressItemActions,
   WrappNotAddresses,
   FormActions,
-  ContinueButton
+  ContinueButton,
+  WrapperAddressForm
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -43,6 +44,7 @@ const AddressListUI = (props) => {
     setAddressList,
     handleSetDefault,
     isModal,
+    isSeletectedUserAddresses,
     isPopover,
     isProductForm,
     onCancel,
@@ -50,7 +52,8 @@ const AddressListUI = (props) => {
     userId,
     userCustomerSetup,
     isEnableContinueButton,
-    setCustomerModalOpen
+    setCustomerModalOpen,
+    setExtraOpen
   } = props
 
   const [, t] = useLanguage()
@@ -156,6 +159,10 @@ const AddressListUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    setExtraOpen && setExtraOpen(addressOpen)
+  }, [addressOpen])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -168,6 +175,7 @@ const AddressListUI = (props) => {
         {
           (!isPopover || !addressOpen) && (
             <Button
+              borderRadius='5px'
               className='add'
               color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
               onClick={() => openAddress({})}
@@ -177,38 +185,43 @@ const AddressListUI = (props) => {
             </Button>
           )
         }
-        {
-          isPopover && addressOpen && (
-            <AddressForm
-              userId={userId}
-              addressesList={addressList?.addresses}
-              useValidationFileds
-              address={curAddress}
-              onCancel={() => setAddressOpen(false)}
-              onSaveAddress={handleSaveAddress}
-              userCustomerSetup={userCustomerSetup}
-            />
-          )
-        }
-        {
-          !isPopover && (
-            <Modal
-              title={t('ADDRESS', 'Address')}
-              open={!isPopover && addressOpen}
-              onClose={() => setAddressOpen(false)}
-            >
-              <AddressForm
-                userId={userId}
-                addressesList={addressList?.addresses}
-                useValidationFileds
-                address={curAddress}
-                onCancel={() => setAddressOpen(false)}
-                onSaveAddress={handleSaveAddress}
-                userCustomerSetup={userCustomerSetup}
-              />
-            </Modal>
-          )
-        }
+
+        {!isSeletectedUserAddresses && (
+          <>
+            {
+              isPopover && addressOpen && (
+                <AddressForm
+                  userId={userId}
+                  addressesList={addressList?.addresses}
+                  useValidationFileds
+                  address={curAddress}
+                  onCancel={() => setAddressOpen(false)}
+                  onSaveAddress={handleSaveAddress}
+                  userCustomerSetup={userCustomerSetup}
+                />
+              )
+            }
+            {
+              !isPopover && (
+                <Modal
+                  title={t('ADDRESS', 'Address')}
+                  open={!isPopover && addressOpen}
+                  onClose={() => setAddressOpen(false)}
+                >
+                  <AddressForm
+                    userId={userId}
+                    addressesList={addressList?.addresses}
+                    useValidationFileds
+                    address={curAddress}
+                    onCancel={() => setAddressOpen(false)}
+                    onSaveAddress={handleSaveAddress}
+                    userCustomerSetup={userCustomerSetup}
+                  />
+                </Modal>
+              )
+            }
+          </>
+        )}
 
         {
           !addressList.loading &&
@@ -217,14 +230,16 @@ const AddressListUI = (props) => {
           !addressList.error &&
           addressList?.addresses?.length > 0 &&
           typeof orderState.options?.address === 'object' &&
-          ((!addressOpen && isPopover) || isModal) && (
+          ((!addressOpen && isPopover) || isModal || isSeletectedUserAddresses) && (
             <AddressListUl id='list'>
               {uniqueAddressesList.map(address => (
                 <AddressItem key={address?.id}>
-                  <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
-                    <span className='radio'>
-                      {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
-                    </span>
+                  <div className='wrapAddress' onClick={() => !isSeletectedUserAddresses && handleSetAddress(address)}>
+                    {!isSeletectedUserAddresses && (
+                      <span className='radio'>
+                        {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
+                      </span>
+                    )}
                     <span className='tag'>
                       {address?.tag === 'home' && <FaHome />}
                       {address?.tag === 'office' && <FaRegBuilding />}
@@ -238,7 +253,7 @@ const AddressListUI = (props) => {
                   </div>
                   <AddressItemActions className='form'>
                     <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                      <TiPencil />
+                      <BsPencil />
                     </a>
                     <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
                       <VscTrash />
@@ -320,6 +335,21 @@ const AddressListUI = (props) => {
           closeOnBackdrop={false}
         />
       </AddressListContainer>
+
+      {addressOpen && (
+        <WrapperAddressForm>
+          <AddressForm
+            userId={userId}
+            addressesList={addressList?.addresses}
+            useValidationFileds
+            address={curAddress}
+            onCancel={() => setAddressOpen(false)}
+            onSaveAddress={handleSaveAddress}
+            userCustomerSetup={userCustomerSetup}
+          />
+        </WrapperAddressForm>
+      )}
+
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

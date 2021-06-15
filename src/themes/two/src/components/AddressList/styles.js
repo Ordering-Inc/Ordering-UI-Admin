@@ -43,6 +43,7 @@ export const AddressItem = styled.li`
     align-items: center;
 
     span {
+      color: ${props => props.theme.colors.headingColor};
       font-size: 14px;
       display: flex;
       cursor: pointer;
@@ -85,11 +86,11 @@ export const AddressItemActions = styled.div`
     display: flex;
     cursor: pointer;
     margin: 0px 5px;
-    font-size: 30px;
+    font-size: 20px;
 
     &:nth-child(1) {
       svg {
-        color: #F2BB40;
+        color: #03459E;
       }
     }
 
@@ -170,4 +171,16 @@ export const ContinueButton = styled.div`
     white-space: nowrap;
     height: 50px;
   }
+`
+
+export const WrapperAddressForm = styled.div`
+  width: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+
+  ${props => props.theme?.rtl ? css`
+    border-right: 1px solid #E9ECEF
+  ` : css`
+    border-left: 1px solid #E9ECEF
+  `}
 `

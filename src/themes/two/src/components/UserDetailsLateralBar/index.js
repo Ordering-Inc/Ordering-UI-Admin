@@ -16,6 +16,7 @@ export const UserDetailsLateralBar = (props) => {
   const { width } = useWindowSize()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [extraOpen, setExtraOpen] = useState(false)
 
   const actionSidebar = (value) => {
     if (!value) {
@@ -29,11 +30,11 @@ export const UserDetailsLateralBar = (props) => {
       if (width <= 500) {
         document.getElementById('user_lateral_bar').style.width = '100vw'
       } else {
-        // if (isOpenDriverOrderDetails && width >= 1000) {
-        //   document.getElementById('user_lateral_bar').style.width = '1000px'
-        // } else {
+        if (extraOpen && width >= 1000) {
+          document.getElementById('user_lateral_bar').style.width = '1000px'
+        } else {
           document.getElementById('user_lateral_bar').style.width = '500px'
-        // }
+        }
       }
     }
   }
@@ -47,6 +48,15 @@ export const UserDetailsLateralBar = (props) => {
     actionSidebar(true)
   }, [open])
 
+  useEffect(() => {
+    if (width < 1000) return
+    if (extraOpen) {
+      document.getElementById('user_lateral_bar').style.width = '1000px'
+    } else {
+      toggleMainContent()
+    }
+  }, [extraOpen])
+
   return (
     <LateralBarContainer id='user_lateral_bar'>
       <CloseButton
@@ -56,6 +66,7 @@ export const UserDetailsLateralBar = (props) => {
       </CloseButton>
       <UserDetails
         {...props}
+        setExtraOpen={setExtraOpen}
       />
     </LateralBarContainer>
   )

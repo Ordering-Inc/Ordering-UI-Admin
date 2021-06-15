@@ -480,6 +480,7 @@ const AddressFormUI = (props) => {
             <Button
               outline
               type='button'
+              borderRadius='5px'
               disabled={formState.loading}
               onClick={() => onCancel()}
             >
@@ -489,6 +490,7 @@ const AddressFormUI = (props) => {
               <Button
                 id='submit-btn'
                 type='submit'
+                borderRadius='5px'
                 disabled={formState.loading}
                 color='primary'
               >
