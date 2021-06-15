@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select'
+import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import {
   Option
 } from './styles'
@@ -9,7 +10,8 @@ export const UserTypeSelector = (props) => {
   const {
     userId,
     defaultUserType,
-    handleChangeUserType
+    handleChangeUserType,
+    isPrimary
   } = props
   const [, t] = useLanguage()
 
@@ -17,22 +19,22 @@ export const UserTypeSelector = (props) => {
     {
       value: 0,
       content: <Option>{t('ADMINISTRATOR', 'Administrator')}</Option>,
-      disabled: defaultUserType === 0
+      disabled: !isPrimary && defaultUserType === 0
     },
     {
       value: 1,
       content: <Option>{t('CITY_MANAGER', 'City manager')}</Option>,
-      disabled: defaultUserType === 1
+      disabled: !isPrimary && defaultUserType === 1
     },
     {
       value: 2,
       content: <Option>{t('BUSINESS_OWNER', 'Business owner')}</Option>,
-      disabled: defaultUserType === 2
+      disabled: !isPrimary && defaultUserType === 2
     },
     { 
       value: 3,
       content: <Option>{t('USER', 'User')}</Option>,
-      disabled: defaultUserType === 3
+      disabled: !isPrimary && defaultUserType === 3
     }
   ]
   const placeholder=<Option>{t('TYPE', 'Type')}</Option>
@@ -42,12 +44,23 @@ export const UserTypeSelector = (props) => {
   }
 
   return (
-    <Select
-      type='primary'
-      noSelected
-      placeholder={placeholder}
-      options={userTypes}
-      onChange={type => onUpdateUserType(type)}
-    />
+    <>
+      {isPrimary ? (
+        <FirstSelect
+          defaultValue={defaultUserType}
+          placeholder={placeholder}
+          options={userTypes}
+          onChange={type => handleChangeUserType(type)}
+        />
+      ) : (
+        <Select
+          type='primary'
+          noSelected
+          placeholder={placeholder}
+          options={userTypes}
+          onChange={type => onUpdateUserType(type)}
+        />
+      )}
+    </>
   )
 }

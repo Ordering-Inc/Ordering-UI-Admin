@@ -174,6 +174,20 @@ export const UserFormDetails = (props) => {
   }
 
   /**
+   * Update credential data
+   * @param {number} level user level
+   */  
+  const handleChangeUserType = (level) => {
+    const currentChanges = {
+      level: level
+    }
+    setFormState({
+      ...formState,
+      changes: { ...formState.changes, ...currentChanges }
+    })
+  }
+
+  /**
    * Update user photo data
    * @param {File} file Image to change user photo
    */
@@ -232,6 +246,7 @@ export const UserFormDetails = (props) => {
           handleButtonUpdateClick={handleUpdateClick}
           handlechangeImage={handlechangeImage}
           toggleIsEdit={() => setIsEdit(!isEdit)}
+          handleChangeUserType={handleChangeUserType}
         />
       )}
     </>

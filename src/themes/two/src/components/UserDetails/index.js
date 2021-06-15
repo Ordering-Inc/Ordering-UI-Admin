@@ -32,6 +32,7 @@ export const UserDetailsUI = (props) => {
           {currentMenuSelected === 'Profile' && (
             <UserProfileForm
               user={userState.user}
+              handleSuccessUpdate={(result) => console.log(result)}
             />
           )}
         </>

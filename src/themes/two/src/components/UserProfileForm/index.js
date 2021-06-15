@@ -3,10 +3,10 @@ import Skeleton from 'react-loading-skeleton'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
-import { UserFormDetails as UserProfileController } from './naked'
+// import { UserFormDetails as UserProfileController } from './naked'
 
 import {
-  // UserFormDetails as UserProfileController,
+  UserFormDetails as UserProfileController,
   useLanguage,
   DragAndDrop,
   ExamineClick

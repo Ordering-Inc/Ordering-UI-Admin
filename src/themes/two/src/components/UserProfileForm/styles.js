@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   height: calc(100% - 100px);
   overflow: auto;
+  padding-bottom: 20px;
   > button {
     position: absolute;
     bottom: 20px;

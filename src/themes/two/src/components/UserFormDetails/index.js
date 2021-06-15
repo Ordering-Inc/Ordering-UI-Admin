@@ -3,14 +3,14 @@ import Skeleton from 'react-loading-skeleton'
 import { useSession, useLanguage, useCustomer } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
-
-import { FormInput, ActionsForm, SkeletonForm } from './styles'
-
+import { UserTypeSelector } from '../UserTypeSelector'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
+
+import { FormInput, ActionsForm, SkeletonForm, WrapperUserTypeSelector } from './styles'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -26,7 +26,8 @@ export const UserFormDetailsUI = (props) => {
     handleButtonUpdateClick,
     isCheckout,
     userData,
-    isCustomerMode
+    isCustomerMode,
+    handleChangeUserType
   } = props
 
   const formMethods = useForm()
@@ -316,6 +317,14 @@ export const UserFormDetailsUI = (props) => {
              props.afterMidComponents?.map((MidComponent, i) => (
                <MidComponent key={i} {...props} />))
             }
+            <WrapperUserTypeSelector>
+              <UserTypeSelector
+                isPrimary
+                userId={user.id}
+                defaultUserType={formState?.changes?.level || user?.level}
+                handleChangeUserType={handleChangeUserType}
+              />
+            </WrapperUserTypeSelector>
             <ActionsForm>
               {onCancel && (
                 <Button

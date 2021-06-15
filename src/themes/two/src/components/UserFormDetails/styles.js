@@ -102,3 +102,11 @@ export const SkeletonForm = styled.div`
     }
   }
 `
+
+export const WrapperUserTypeSelector = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+  > div {
+    width: 100%;
+  }
+`
