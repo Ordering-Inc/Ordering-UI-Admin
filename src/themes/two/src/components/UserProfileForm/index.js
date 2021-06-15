@@ -108,7 +108,7 @@ const UserProfileFormUI = (props) => {
       <Container>
         <UserProfileContainer mbottom={isHiddenAddress && 25}>
           <UserImage className='user-image'>
-            <Image onClick={() => handleClickImage()} isImage={userState?.result?.result?.photo || (formState?.changes?.photo && !formState.result.error)}>
+            <Image isEdit={edit} onClick={() => handleClickImage()} isImage={userState?.result?.result?.photo || (formState?.changes?.photo && !formState.result.error)}>
               <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
                 <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
                   {formState.loading
@@ -127,7 +127,9 @@ const UserProfileFormUI = (props) => {
                 </DragAndDrop>
               </ExamineClick>
             </Image>
-            <Camera><FiCamera /></Camera>
+            {edit && (
+              <Camera><FiCamera /></Camera>
+            )}
           </UserImage>
 
           {!edit && (
@@ -155,6 +157,7 @@ const UserProfileFormUI = (props) => {
           <WrapperForm>
             <UserFormDetailsUI
               {...props}
+              userData={userState?.result?.result}
               onCancel={toggleEditState}
               onCloseProfile={() => setEdit(false)}
               isHiddenAddress={isHiddenAddress}

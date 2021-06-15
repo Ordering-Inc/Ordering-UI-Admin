@@ -39,7 +39,11 @@ export const UserFormDetailsUI = (props) => {
   const [, { setUserCustomer }] = useCustomer()
   const emailInput = useRef(null)
 
-  const user = userData || userSession
+  const [user, setUser] = useState(userData || userSession)
+
+  useEffect(() => {
+    setUser(userData || userSession)
+  }, [userData, userSession])
 
   const closeAlert = () => {
     setAlertState({
@@ -176,9 +180,6 @@ export const UserFormDetailsUI = (props) => {
   }, [formState?.loading])
 
   useEffect(() => {
-    if (!isEdit && onCloseProfile) {
-      onCloseProfile()
-    }
     if ((user || !isEdit) && !formState?.loading) {
       setUserCellPhone()
       if (!isEdit && !formState?.loading) {
@@ -319,6 +320,7 @@ export const UserFormDetailsUI = (props) => {
               {onCancel && (
                 <Button
                   outline
+                  borderRadius='5px'
                   type='button'
                   onClick={() => onCancel(false)}
                   disabled={formState.loading}
@@ -331,6 +333,7 @@ export const UserFormDetailsUI = (props) => {
                 <Button
                   id='form-btn'
                   color='primary'
+                  borderRadius='5px'
                   type='submit'
                   disabled={formState.loading}
                 >

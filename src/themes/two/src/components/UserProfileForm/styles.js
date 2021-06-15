@@ -49,6 +49,10 @@ export const Image = styled.div`
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 
+  ${({ isEdit }) => !isEdit && css`
+    pointer-event: none;
+  `}
+
   img,
   div {
     width: 100%;
