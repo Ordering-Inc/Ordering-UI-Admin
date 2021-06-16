@@ -182,14 +182,19 @@ export const WrapperAddressForm = styled.div`
     right: 0px;
   `}
   background: #FFF;
-  width: 500px;
+  width: 100vw;
   height: 100vh;
+  overflow: auto;
   box-sizing: border-box;
   padding: 10px;
 
   ${props => props.theme?.rtl ? css`
-    border-right: 1px solid #E9ECEF
+    border-right: 1px solid #E9ECEF;
   ` : css`
-    border-left: 1px solid #E9ECEF
+    border-left: 1px solid #E9ECEF;
   `}
+
+  @media (min-width: 500px) {
+    width: 500px;
+  }
 `

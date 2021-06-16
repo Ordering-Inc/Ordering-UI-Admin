@@ -196,6 +196,8 @@ export const Title = styled.div`
   font-weight: 500;
   color: ${props => props.theme.colors.headingColor};
   text-align: initial;
+  text-transform: capitalize;
+  margin-bottom: 10px;
 `
 
 export const CloseButton = styled.span`
