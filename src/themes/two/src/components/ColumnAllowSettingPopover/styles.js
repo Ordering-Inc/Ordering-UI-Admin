@@ -14,6 +14,7 @@ export const HeaderItem = styled.div`
 `
 
 export const PopoverBody = styled.div`
+  position: absolute;
   background-color: #FFF;
   padding: 15px;
   border-radius: 10px;
@@ -21,6 +22,12 @@ export const PopoverBody = styled.div`
   z-index: 1001;
   border: 1px solid ${props => props.theme.colors?.headingColor};
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+
+  ${props => props.theme?.rtl ? css`
+    left: 0px;
+  ` : css`
+    right: 0px;
+  `}
 `
 
 export const PopoverList = styled.div`

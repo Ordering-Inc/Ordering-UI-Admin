@@ -9,6 +9,11 @@ export const HeaderContainer = styled.div`
     margin: 0px;
   }
 
+  input {
+    background: #E9ECEF;
+    border: none;
+  }
+
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;

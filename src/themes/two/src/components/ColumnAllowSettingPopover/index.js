@@ -1,6 +1,4 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession } from 'ordering-components-admin'
-import { usePopper } from 'react-popper'
 import BsLayoutThreeColumns from '@meronex/icons/bs/BsLayoutThreeColumns'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -18,30 +16,8 @@ export const ColumnAllowSettingPopover = (props) => {
     allowColumns,
     handleChangeAllowColumns
   } = props
-  const [sessionState] = useSession()
-  const [, t] = useLanguage()
   const referenceElement = useRef()
   const popperElement = useRef()
-  const arrowElement = useRef()
-
-  const popper = usePopper(referenceElement.current, popperElement.current, {
-    placement: 'bottom',
-    modifiers: [
-      { name: 'arrow', options: { element: arrowElement.current } },
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 12]
-        }
-      }
-    ]
-  })
-
-  const { styles, attributes, forceUpdate } = popper
-
-  useEffect(() => {
-    forceUpdate && forceUpdate()
-  }, [open, sessionState])
 
   const handleClickOutside = (e) => {
     if (!open) return
@@ -67,55 +43,37 @@ export const ColumnAllowSettingPopover = (props) => {
     }
   }, [open])
 
-  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: '150px' }
-  if (!open) {
-    popStyle.transform = 'translate3d(0px, 0px, 0px)'
-  }
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))
-      }
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
       <HeaderItem
         ref={referenceElement}
         onClick={props.onClick}
       >
         <BsLayoutThreeColumns  />
       </HeaderItem>
-      <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
-        <PopoverList>
-          {optionsDefault.map(option => (
-            <AllowItem
-              key={option.value}
-              isChecked={allowColumns[option.value]}
-              onClick={() => handleChangeAllowColumns(option.value)}
-            >
-              {allowColumns[option.value] ? (
-                <RiCheckboxFill />
-              ) : (
-                <RiCheckboxBlankLine />
-              )}
-              <span>
-                {option.content}
-              </span>
-            </AllowItem>
-          ))}
-        </PopoverList>
-      </PopoverBody>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))
-      }
+      {open && (
+        <PopoverBody ref={popperElement}>
+          <PopoverList>
+            {optionsDefault.map(option => (
+              <AllowItem
+                key={option.value}
+                isChecked={allowColumns[option.value]}
+                onClick={() => handleChangeAllowColumns(option.value)}
+              >
+                {allowColumns[option.value] ? (
+                  <RiCheckboxFill />
+                ) : (
+                  <RiCheckboxBlankLine />
+                )}
+                <span>
+                  {option.content}
+                </span>
+              </AllowItem>
+            ))}
+          </PopoverList>
+        </PopoverBody>
+      )}
     </div>
   )
 }

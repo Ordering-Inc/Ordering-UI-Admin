@@ -12,17 +12,22 @@ const BusinessessListingUI = (props) => {
   const {
     businessList,
     pagination,
+    searchValue,
     selectedBusinessActiveState,
     handleChangeBusinessActiveState,
     handleChangeBusinessType,
     loadMoreBusinesses,
     handleSucessRemoveBusiness,
-    handleSucessAddBusiness
+    handleSucessAddBusiness,
+    onSearch
   } = props
 
   return (
     <BusinessListingContainer>
-      <BusinessListingHeader />
+      <BusinessListingHeader
+        searchValue={searchValue}
+        onSearch={onSearch}
+      />
       <BusinessActiveStateFilter
         selectedBusinessActiveState={selectedBusinessActiveState}
         handleChangeBusinessActiveState={handleChangeBusinessActiveState}
@@ -48,7 +53,10 @@ export const BusinessessListing = (props) => {
     ...props,
     UIComponent: BusinessessListingUI,
     initialPageSize: 50,
-    loadMorePageSize: 10
+    loadMorePageSize: 10,
+    isSearchByBusinessName: true,
+    isSearchByBusinessEmail: true,
+    isSearchByBusinessPhone: true
   }
   return (
     <BusinessListController {...businessListingProps} />
