@@ -186,16 +186,16 @@ export const DashboardBusinessList = (props) => {
    * Change business type
    * @param {object} businessType Business type
    */
-     const handleChangeBusinessType = (businessType) => {
-      if (businessType !== businessTypeSelected) {
-        setBusinessList({
-          ...businessList,
-          businesses: [],
-          loading: true
-        })
-        setBusinessTypeSelected(businessType)
-      }
+  const handleChangeBusinessType = (businessType) => {
+    if (businessType !== businessTypeSelected) {
+      setBusinessList({
+        ...businessList,
+        businesses: [],
+        loading: true
+      })
+      setBusinessTypeSelected(businessType)
     }
+  }
 
   /**
    * Listening session
@@ -259,6 +259,6 @@ DashboardBusinessList.propTypes = {
 DashboardBusinessList.defaultProps = {
   initialPageSize: 10,
   loadMorePageSize: 10,
-  propsToFetch: ['id', 'name', 'header', 'logo', 'name', 'enabled', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug'],
+  propsToFetch: ['id', 'name', 'header', 'logo', 'name', 'city', 'enabled', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug'],
   paginationSettings: { initialPage: 1, pageSize: 10, controlType: 'infinity' }
 }

@@ -168,7 +168,7 @@ export const UsersList = (props) => {
                     <td>
                       <UserEnableWrapper className='user_enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>
-                        <UserActiveSwitch
+                        <UserActiveControlSwitch
                           userId={user.id}
                           defaultChecked={user?.enabled}
                           handleChangeActiveUser={handleChangeActiveUser}
@@ -215,7 +215,7 @@ export const UsersList = (props) => {
   )
 }
 
-const UserActiveSwitch = (props) => {
+const UserActiveControlSwitch = (props) => {
   const {
     defaultChecked,
     userId,

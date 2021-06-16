@@ -3,21 +3,29 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { convertHoursToMinutes } from '../../../../../utils'
 import { PaginationButton } from '../PaginationButton'
+import { useTheme } from 'styled-components'
 
 import {
   BusinessListContainer,
   BusinessListTable,
-  WrapperPagination
+  WrapperPagination,
+  WrapperImage,
+  Image,
+  BusinessGeneralInfo,
+  InfoBlock
 } from './styles'
+import { BusinessActiveControlSwitch } from '../BusinessActiveControlSwitch'
 
 export const BusinessList = (props) => {
   const {
     businessList,
     pagination,
-    loadMoreBusinesses
+    loadMoreBusinesses,
+    handleChangeActiveBusiness
   } = props
   const [, t] = useLanguage()
-  const [{ parsePrice, parseDistance }] = useUtils()
+  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
+  const theme = useTheme()
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -89,19 +97,39 @@ export const BusinessList = (props) => {
               <tbody key={business.id}>
                 <tr>
                   <td>
-                    {business?.name}
-                    {business?.address}
+                    <BusinessGeneralInfo>
+                      <WrapperImage>
+                        <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo)} />
+                      </WrapperImage>
+                      <InfoBlock>
+                        <p className='bold'>{business?.name}</p>
+                        <p>{business?.city?.name}</p>
+                      </InfoBlock>                     
+                    </BusinessGeneralInfo>
                   </td>
                   <td>
-                    {parsePrice(business?.delivery_price)}
+                    <InfoBlock>
+                      <p>{t('DELIVERY_FEE', 'Delivery fee')}</p>
+                      <p>{parsePrice(business?.delivery_price)}</p>
+                    </InfoBlock>
                   </td>
                   <td>
-                    {parseDistance(business?.distance)}
+                    <InfoBlock>
+                      <p className='bold'>{t('DISTANCE', 'Distance')}</p>
+                      <p>{parseDistance(business?.distance)}</p>
+                    </InfoBlock>
                   </td>
                   <td>
-                    {convertHoursToMinutes(business?.delivery_time)}
+                    <InfoBlock>
+                      <p className='bold'>{t('DELIVERY_TIME', 'Delivery time')}</p>
+                      <p>{convertHoursToMinutes(business?.delivery_time)}</p>
+                    </InfoBlock>
                   </td>
                   <td>
+                    <BusinessActiveControlSwitch
+                      businessId={business.id}
+                      handleChangeActiveBusiness={handleChangeActiveBusiness}
+                    />
                   </td>
                   <td></td>
                 </tr>
