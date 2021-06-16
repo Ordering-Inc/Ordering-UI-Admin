@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import { convertHoursToMinutes } from '../../../../../utils'
 import { PaginationButton } from '../PaginationButton'
 import { useTheme } from 'styled-components'
 
 import {
   BusinessListContainer,
   BusinessListTable,
-  WrapperPagination,
-  WrapperImage,
-  Image,
-  BusinessGeneralInfo,
-  InfoBlock
+  WrapperPagination
 } from './styles'
-import { BusinessActiveControlSwitch } from '../BusinessActiveControlSwitch'
+import { SingleBusiness } from '../SingleBusiness'
 
 export const BusinessList = (props) => {
   const {
     businessList,
     pagination,
     loadMoreBusinesses,
-    handleChangeActiveBusiness
+    handleRemoveBusiness 
   } = props
   const [, t] = useLanguage()
-  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
-  const theme = useTheme()
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -81,59 +74,16 @@ export const BusinessList = (props) => {
           </thead>
           {businessList.loading ? (
             [...Array(10).keys()].map(i => (
-              <tbody key={i}>
-                <tr>
-                  <td><Skeleton /></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
+              <SingleBusiness isSkeleton key={i} />
             ))
           ) : (
             currentBusinessess.map(business => (
-              <tbody key={business.id}>
-                <tr>
-                  <td>
-                    <BusinessGeneralInfo>
-                      <WrapperImage>
-                        <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo)} />
-                      </WrapperImage>
-                      <InfoBlock>
-                        <p className='bold'>{business?.name}</p>
-                        <p>{business?.city?.name}</p>
-                      </InfoBlock>                     
-                    </BusinessGeneralInfo>
-                  </td>
-                  <td>
-                    <InfoBlock>
-                      <p>{t('DELIVERY_FEE', 'Delivery fee')}</p>
-                      <p>{parsePrice(business?.delivery_price)}</p>
-                    </InfoBlock>
-                  </td>
-                  <td>
-                    <InfoBlock>
-                      <p className='bold'>{t('DISTANCE', 'Distance')}</p>
-                      <p>{parseDistance(business?.distance)}</p>
-                    </InfoBlock>
-                  </td>
-                  <td>
-                    <InfoBlock>
-                      <p className='bold'>{t('DELIVERY_TIME', 'Delivery time')}</p>
-                      <p>{convertHoursToMinutes(business?.delivery_time)}</p>
-                    </InfoBlock>
-                  </td>
-                  <td>
-                    <BusinessActiveControlSwitch
-                      businessId={business.id}
-                      handleChangeActiveBusiness={handleChangeActiveBusiness}
-                    />
-                  </td>
-                  <td></td>
-                </tr>
-              </tbody>
+              <SingleBusiness
+                key={business.id}
+                businessId={business.id}
+                business={business}
+                handleRemoveBusiness={handleRemoveBusiness}
+              />
             ))
           )}
         </BusinessListTable>

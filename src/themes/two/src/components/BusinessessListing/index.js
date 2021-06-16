@@ -15,7 +15,8 @@ const BusinessessListingUI = (props) => {
     selectedBusinessActiveState,
     handleChangeBusinessActiveState,
     handleChangeBusinessType,
-    loadMoreBusinesses
+    loadMoreBusinesses,
+    handleRemoveBusiness
   } = props
 
   return (
@@ -34,6 +35,7 @@ const BusinessessListingUI = (props) => {
         businessList={businessList}
         pagination={pagination}
         loadMoreBusinesses={loadMoreBusinesses}
+        handleRemoveBusiness={handleRemoveBusiness}
       />
     </BusinessListingContainer>
   )

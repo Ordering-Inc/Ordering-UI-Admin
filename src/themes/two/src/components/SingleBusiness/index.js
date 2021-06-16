@@ -1,0 +1,139 @@
+import React from 'react'
+import Skeleton from 'react-loading-skeleton'
+import { useUtils, useLanguage } from 'ordering-components-admin'
+import { BusinessDetails as BusinessController } from './naked'
+import { useTheme } from 'styled-components'
+import { convertHoursToMinutes } from '../../../../../utils'
+import { Switch } from '../../styles/Switch'
+import { BusinessActionSelector } from '../BusinessActionSelector'
+import {
+  SingleBusinessContainer,
+  WrapperImage,
+  Image,
+  BusinessGeneralInfo,
+  InfoBlock,
+  BusinessEnableWrapper
+} from './styles'
+
+const SingleBusinessUI = (props) => {
+  const {
+    isSkeleton,
+    businessState,
+    handleChangeActiveBusiness
+  } = props
+
+  const [, t] = useLanguage()
+  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
+  const theme = useTheme()
+
+  return (
+    <>
+      {(businessState?.loading || isSkeleton) ? (
+        <SingleBusinessContainer>
+          <tr>
+            <td>
+              <BusinessGeneralInfo>
+                <WrapperImage>
+                  <Skeleton width={45} height={45} />
+                </WrapperImage>
+                <InfoBlock>
+                  <p className='bold'><Skeleton width={150} /></p>
+                  <p><Skeleton width={100} /></p>
+                </InfoBlock>                     
+              </BusinessGeneralInfo>
+            </td>
+            <td>
+              <InfoBlock>
+                <p className='bold'><Skeleton width={150} /></p>
+                <p><Skeleton width={100} /></p>
+              </InfoBlock> 
+            </td>
+            <td>
+              <InfoBlock>
+                <p className='bold'><Skeleton width={150} /></p>
+                <p><Skeleton width={100} /></p>
+              </InfoBlock> 
+            </td>
+            <td>
+              <InfoBlock>
+                <p className='bold'><Skeleton width={150} /></p>
+                <p><Skeleton width={100} /></p>
+              </InfoBlock> 
+            </td>
+            <td>
+              <Skeleton width={100} />
+            </td>
+            <td>
+              <Skeleton width={30} />
+            </td>
+          </tr>
+        </SingleBusinessContainer>
+      ) : (
+        <SingleBusinessContainer>
+          <tr>
+            <td>
+              <BusinessGeneralInfo>
+                <WrapperImage>
+                  <Image bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo)} />
+                </WrapperImage>
+                <InfoBlock>
+                  <p className='bold'>{businessState?.business?.name}</p>
+                  <p>{businessState?.business?.city?.name}</p>
+                </InfoBlock>                     
+              </BusinessGeneralInfo>
+            </td>
+            <td>
+              <InfoBlock>
+                <p className='bold'>{t('DELIVERY_FEE', 'Delivery fee')}</p>
+                <p>{parsePrice(businessState?.business?.delivery_price)}</p>
+              </InfoBlock>
+            </td>
+            <td>
+              <InfoBlock>
+                <p className='bold'>{t('DISTANCE', 'Distance')}</p>
+                <p>{parseDistance(businessState?.business?.distance)}</p>
+              </InfoBlock>
+            </td>
+            <td>
+              <InfoBlock>
+                <p className='bold'>{t('DELIVERY_TIME', 'Delivery time')}</p>
+                <p>{convertHoursToMinutes(businessState?.business?.delivery_time)}</p>
+              </InfoBlock>
+            </td>
+            <td>
+              <BusinessEnableWrapper className='business_enable_control'>
+                <span>{t('ENABLE', 'Enable')}</span>
+                <Switch
+                  defaultChecked={businessState?.business?.enabled}
+                  onChange={handleChangeActiveBusiness}
+                />
+              </BusinessEnableWrapper>
+            </td>
+            <td>
+              <BusinessActionSelector
+                business={businessState?.business}
+              />
+            </td>
+          </tr>
+        </SingleBusinessContainer>
+      )}
+    </>
+  )
+}
+
+export const SingleBusiness = (props) => {
+  const { isSkeleton } = props
+  const singleBusinessProps = {
+    ...props,
+    UIComponent: SingleBusinessUI
+  }
+  return (
+    <>
+      {isSkeleton ? (
+        <SingleBusinessUI isSkeleton />
+      ) : (
+        <BusinessController {...singleBusinessProps} />
+      )}
+    </>
+  )
+}

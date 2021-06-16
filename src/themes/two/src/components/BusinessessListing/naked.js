@@ -198,6 +198,18 @@ export const DashboardBusinessList = (props) => {
   }
 
   /**
+   * Method to remove the business from business list
+   * @param {Number} businessId business id to remove
+   */
+  const handleRemoveBusiness = (businessId) => {
+    const businesses = businessList.businesses.filter(business => business.id !== businessId)
+    setBusinessList({
+      ...businessList,
+      businesses
+    })
+  }
+
+  /**
    * Listening session
    */
   useEffect(() => {
@@ -223,6 +235,7 @@ export const DashboardBusinessList = (props) => {
             loadMoreBusinesses={loadMoreBusinesses}
             handleChangeBusinessActiveState={handleChangeBusinessActiveState}
             handleChangeBusinessType={handleChangeBusinessType}
+            handleRemoveBusiness={handleRemoveBusiness}
           />
         )
       }
