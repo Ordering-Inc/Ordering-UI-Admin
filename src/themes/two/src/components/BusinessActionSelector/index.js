@@ -10,9 +10,10 @@ import {
 
 export const BusinessActionSelector = (props) => {
   const {
-    user,
-    handleDeleteUser,
-    handleOpenUserDetails
+    business,
+    handleDuplicateBusiness,
+    handleDeleteBusiness,
+    handleOpenBusinessDetails
   } = props
   const [, t] = useLanguage()
 
@@ -27,12 +28,13 @@ export const BusinessActionSelector = (props) => {
   const onActionClick = (type) => {
     switch (type)  {
       case 1:
+        handleDuplicateBusiness()
         break
       case 2:
-        handleOpenUserDetails(user)
+        handleOpenBusinessDetails(business)
         break
       case 3:
-        handleDeleteUser(user?.id)
+        handleDeleteBusiness()
         break
     }
   }

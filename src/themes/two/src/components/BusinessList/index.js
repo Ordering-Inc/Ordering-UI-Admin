@@ -16,7 +16,8 @@ export const BusinessList = (props) => {
     businessList,
     pagination,
     loadMoreBusinesses,
-    handleRemoveBusiness 
+    handleSucessRemoveBusiness,
+    handleSucessAddBusiness
   } = props
   const [, t] = useLanguage()
 
@@ -82,7 +83,8 @@ export const BusinessList = (props) => {
                 key={business.id}
                 businessId={business.id}
                 business={business}
-                handleRemoveBusiness={handleRemoveBusiness}
+                handleSucessRemoveBusiness={handleSucessRemoveBusiness}
+                handleSucessAddBusiness={handleSucessAddBusiness}
               />
             ))
           )}

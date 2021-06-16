@@ -1,6 +1,6 @@
 import React from 'react'
 import { BusinessList } from '../BusinessList'
-import { DashboardBusinessList as BusinessListController } from './naked'
+import { DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import { BusinessListingHeader } from '../BusinessListingHeader'
 import {
   BusinessListingContainer
@@ -16,7 +16,8 @@ const BusinessessListingUI = (props) => {
     handleChangeBusinessActiveState,
     handleChangeBusinessType,
     loadMoreBusinesses,
-    handleRemoveBusiness
+    handleSucessRemoveBusiness,
+    handleSucessAddBusiness
   } = props
 
   return (
@@ -35,7 +36,8 @@ const BusinessessListingUI = (props) => {
         businessList={businessList}
         pagination={pagination}
         loadMoreBusinesses={loadMoreBusinesses}
-        handleRemoveBusiness={handleRemoveBusiness}
+        handleSucessRemoveBusiness={handleSucessRemoveBusiness}
+        handleSucessAddBusiness={handleSucessAddBusiness}
       />
     </BusinessListingContainer>
   )

@@ -1,7 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useUtils, useLanguage } from 'ordering-components-admin'
-import { BusinessDetails as BusinessController } from './naked'
+import { useUtils, useLanguage, BusinessDetails as BusinessController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { convertHoursToMinutes } from '../../../../../utils'
 import { Switch } from '../../styles/Switch'
@@ -19,7 +18,9 @@ const SingleBusinessUI = (props) => {
   const {
     isSkeleton,
     businessState,
-    handleChangeActiveBusiness
+    handleChangeActiveBusiness,
+    handleDuplicateBusiness,
+    handleDeleteBusiness
   } = props
 
   const [, t] = useLanguage()
@@ -112,6 +113,9 @@ const SingleBusinessUI = (props) => {
             <td>
               <BusinessActionSelector
                 business={businessState?.business}
+                handleDuplicateBusiness={handleDuplicateBusiness}
+                handleDeleteBusiness={handleDeleteBusiness}
+                handleOpenBusinessDetails={() => console.log('open')}
               />
             </td>
           </tr>
