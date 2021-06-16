@@ -179,7 +179,7 @@ const AddressListUI = (props) => {
             <Button
               borderRadius='5px'
               className='add'
-              color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
+              color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'lightPrimary'}
               onClick={() => openAddress({})}
               disabled={orderState?.loading || actionStatus.loading}
             >

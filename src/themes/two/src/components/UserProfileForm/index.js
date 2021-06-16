@@ -164,7 +164,7 @@ const UserProfileFormUI = (props) => {
         )}
         {!edit && (
           <Button
-            color='secundary'
+            color='lightPrimary'
             borderRadius='5px'
             onClick={() => toggleEditState(true)}
           >

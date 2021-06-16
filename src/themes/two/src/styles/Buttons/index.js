@@ -138,6 +138,15 @@ export const Button = styled.button`
       }
     `}
   `}
+
+  ${({ color }) => color === 'lightPrimary' && css`
+    background: ${props => lighten(0.4, props.theme.colors.primary)};
+    color: ${props => props.theme.colors.primary};
+    border-color: ${props => lighten(0.4, props.theme.colors.primary)};
+    &:active {
+      background: ${props => lighten(0.2, props.theme.colors.primary)};
+    }
+  `}
   ${({ color }) => color === 'secundary' && css`
     background: ${props => props.theme.colors.secundary};
     color: ${props => props.theme.colors.secundaryContrast};
