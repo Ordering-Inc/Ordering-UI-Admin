@@ -85,6 +85,45 @@ export const OrdersTable = (props) => {
     deliveryType: true
   })
 
+  const optionsDefault = [
+    {
+      value: 'orderNumber',
+      content: t('NUMBER_OF_ORDER', 'Number of order')
+    },
+    {
+      value: 'dateTime',
+      content: t('DATE_TIME', 'Date and time')
+    },
+    {
+      value: 'business',
+      content: t('BUSINESS', 'Business')
+    },
+    {
+      value: 'customer',
+      content: t('CUSTOMER', 'Customer')
+    },
+    {
+      value: 'driver',
+      content: t('DRIVER', 'Driver')
+    },
+    {
+      value: 'advanced',
+      content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
+    },
+    {
+      value: 'total',
+      content: t('TOTAL', 'Total')
+    },
+    {
+      value: 'status',
+      content: t('STATUS', 'Status')
+    },
+    {
+      value: 'deliveryType',
+      content: t('DELIVERY_TYPE', 'Delivery type')
+    }
+  ]
+
   const getLogisticTag = (status) => {
     switch (parseInt(status)) {
       case 0:
@@ -181,6 +220,7 @@ export const OrdersTable = (props) => {
                 <ColumnAllowSettingPopover
                   open={openPopover}
                   allowColumns={allowColumns}
+                  optionsDefault={optionsDefault}
                   onClick={() => setOpenPopover(!openPopover)}
                   onClose={() => setOpenPopover(false)}
                   handleChangeAllowColumns={handleChangeAllowColumns}

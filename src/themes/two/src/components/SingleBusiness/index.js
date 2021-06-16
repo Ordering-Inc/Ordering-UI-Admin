@@ -17,6 +17,7 @@ import {
 const SingleBusinessUI = (props) => {
   const {
     isSkeleton,
+    allowColumns,
     businessState,
     handleChangeActiveBusiness,
     handleDuplicateBusiness,
@@ -32,35 +33,43 @@ const SingleBusinessUI = (props) => {
       {(businessState?.loading || isSkeleton) ? (
         <SingleBusinessContainer>
           <tr>
-            <td>
-              <BusinessGeneralInfo>
-                <WrapperImage>
-                  <Skeleton width={45} height={45} />
-                </WrapperImage>
+            {allowColumns?.business && (
+              <td>
+                <BusinessGeneralInfo>
+                  <WrapperImage>
+                    <Skeleton width={45} height={45} />
+                  </WrapperImage>
+                  <InfoBlock>
+                    <p className='bold'><Skeleton width={150} /></p>
+                    <p><Skeleton width={100} /></p>
+                  </InfoBlock>                     
+                </BusinessGeneralInfo>
+              </td>
+            )}
+            {allowColumns?.deliveryFee && (
+              <td>
                 <InfoBlock>
                   <p className='bold'><Skeleton width={150} /></p>
                   <p><Skeleton width={100} /></p>
-                </InfoBlock>                     
-              </BusinessGeneralInfo>
-            </td>
-            <td>
-              <InfoBlock>
-                <p className='bold'><Skeleton width={150} /></p>
-                <p><Skeleton width={100} /></p>
-              </InfoBlock> 
-            </td>
-            <td>
-              <InfoBlock>
-                <p className='bold'><Skeleton width={150} /></p>
-                <p><Skeleton width={100} /></p>
-              </InfoBlock> 
-            </td>
-            <td>
-              <InfoBlock>
-                <p className='bold'><Skeleton width={150} /></p>
-                <p><Skeleton width={100} /></p>
-              </InfoBlock> 
-            </td>
+                </InfoBlock> 
+              </td>
+            )}
+            {allowColumns?.distance && (
+              <td>
+                <InfoBlock>
+                  <p className='bold'><Skeleton width={150} /></p>
+                  <p><Skeleton width={100} /></p>
+                </InfoBlock> 
+              </td>
+            )}
+            {allowColumns?.deliveryTime && (
+              <td>
+                <InfoBlock>
+                  <p className='bold'><Skeleton width={150} /></p>
+                  <p><Skeleton width={100} /></p>
+                </InfoBlock> 
+              </td>
+            )}
             <td>
               <Skeleton width={100} />
             </td>
@@ -72,35 +81,43 @@ const SingleBusinessUI = (props) => {
       ) : (
         <SingleBusinessContainer>
           <tr>
-            <td>
-              <BusinessGeneralInfo>
-                <WrapperImage>
-                  <Image bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo)} />
-                </WrapperImage>
+            {allowColumns?.business && (
+              <td>
+                <BusinessGeneralInfo>
+                  <WrapperImage>
+                    <Image bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo)} />
+                  </WrapperImage>
+                  <InfoBlock>
+                    <p className='bold'>{businessState?.business?.name}</p>
+                    <p>{businessState?.business?.city?.name}</p>
+                  </InfoBlock>                     
+                </BusinessGeneralInfo>
+              </td>
+            )}
+            {allowColumns?.deliveryFee && (
+              <td>
                 <InfoBlock>
-                  <p className='bold'>{businessState?.business?.name}</p>
-                  <p>{businessState?.business?.city?.name}</p>
-                </InfoBlock>                     
-              </BusinessGeneralInfo>
-            </td>
-            <td>
-              <InfoBlock>
-                <p className='bold'>{t('DELIVERY_FEE', 'Delivery fee')}</p>
-                <p>{parsePrice(businessState?.business?.delivery_price)}</p>
-              </InfoBlock>
-            </td>
-            <td>
-              <InfoBlock>
-                <p className='bold'>{t('DISTANCE', 'Distance')}</p>
-                <p>{parseDistance(businessState?.business?.distance)}</p>
-              </InfoBlock>
-            </td>
-            <td>
-              <InfoBlock>
-                <p className='bold'>{t('DELIVERY_TIME', 'Delivery time')}</p>
-                <p>{convertHoursToMinutes(businessState?.business?.delivery_time)}</p>
-              </InfoBlock>
-            </td>
+                  <p className='bold'>{t('DELIVERY_FEE', 'Delivery fee')}</p>
+                  <p>{parsePrice(businessState?.business?.delivery_price)}</p>
+                </InfoBlock>
+              </td>
+            )}
+            {allowColumns?.distance && (
+              <td>
+                <InfoBlock>
+                  <p className='bold'>{t('DISTANCE', 'Distance')}</p>
+                  <p>{parseDistance(businessState?.business?.distance)}</p>
+                </InfoBlock>
+              </td>
+            )}
+            {allowColumns?.deliveryTime && (
+              <td>
+                <InfoBlock>
+                  <p className='bold'>{t('DELIVERY_TIME', 'Delivery time')}</p>
+                  <p>{convertHoursToMinutes(businessState?.business?.delivery_time)}</p>
+                </InfoBlock>
+              </td>
+            )}
             <td>
               <BusinessEnableWrapper className='business_enable_control'>
                 <span>{t('ENABLE', 'Enable')}</span>

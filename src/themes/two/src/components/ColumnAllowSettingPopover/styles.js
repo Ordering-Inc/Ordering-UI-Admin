@@ -36,6 +36,7 @@ export const AllowItem = styled.div`
     font-size: 24px;
   }
   span {
+    white-space: nowrap;
     font-size: 14px;
     font-weight: 400;
     ${props => props.theme?.rtl ? css`

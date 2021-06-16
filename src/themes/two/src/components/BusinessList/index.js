@@ -10,6 +10,7 @@ import {
   WrapperPagination
 } from './styles'
 import { SingleBusiness } from '../SingleBusiness'
+import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 
 export const BusinessList = (props) => {
   const {
@@ -20,6 +21,40 @@ export const BusinessList = (props) => {
     handleSucessAddBusiness
   } = props
   const [, t] = useLanguage()
+
+  const [openPopover, setOpenPopover] = useState(false)
+  const [allowColumns, setAllowColumns] = useState({
+    business: true,
+    deliveryFee: true,
+    distance: true,
+    deliveryTime: true
+  })
+
+  const optionsDefault = [
+    {
+      value: 'business',
+      content: t('BUSINESS', 'Business')
+    },
+    {
+      value: 'deliveryFee',
+      content: t('DELIVERY_FEE', 'Delivery fee')
+    },
+    {
+      value: 'distance',
+      content: t('DISTANCE', 'Distance')
+    },
+    {
+      value: 'deliveryTime',
+      content: t('DELIVERY TIME', 'Delivery time')
+    }   
+  ]
+
+  const handleChangeAllowColumns = (type) => {
+    setAllowColumns({
+      ...allowColumns,
+      [type]: !allowColumns[type]
+    })
+  }
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -67,10 +102,23 @@ export const BusinessList = (props) => {
         <BusinessListTable>
           <thead>
             <tr>
-              <th>{t('BUSINESS', 'Business')}</th>
-              <th colSpan={3}>{t('DETAILS', 'Details')}</th>
+              {allowColumns?.business && (
+                <th>{t('BUSINESS', 'Business')}</th>
+              )}
+              {(allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime) && (
+                <th colSpan={3}>{t('DETAILS', 'Details')}</th>
+              )}
               <th>{t('ACTIONS', 'Actions')}</th>
-              <th></th>
+              <th>
+                <ColumnAllowSettingPopover
+                  open={openPopover}
+                  allowColumns={allowColumns}
+                  optionsDefault={optionsDefault}
+                  onClick={() => setOpenPopover(!openPopover)}
+                  onClose={() => setOpenPopover(false)}
+                  handleChangeAllowColumns={handleChangeAllowColumns}
+                />
+              </th>
             </tr>
           </thead>
           {businessList.loading ? (
@@ -81,6 +129,7 @@ export const BusinessList = (props) => {
             currentBusinessess.map(business => (
               <SingleBusiness
                 key={business.id}
+                allowColumns={allowColumns}
                 businessId={business.id}
                 business={business}
                 handleSucessRemoveBusiness={handleSucessRemoveBusiness}
