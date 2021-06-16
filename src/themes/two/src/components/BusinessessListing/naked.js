@@ -26,6 +26,8 @@ export const DashboardBusinessList = (props) => {
     pageSize: paginationSettings.pageSize ?? 10
   })
 
+  const [selectedBusinessActiveState, setSelectedBusinessActiveState] = useState(true)
+  
   /**
    * Method to get businesses from API
    * @param {number, number} pageSize page
@@ -39,6 +41,8 @@ export const DashboardBusinessList = (props) => {
         page_size: pageSize
       }
     }
+
+    conditions.push({ attribute: 'enabled', value: selectedBusinessActiveState })
 
     if (searchValue) {
       const searchConditions = []
@@ -161,6 +165,13 @@ export const DashboardBusinessList = (props) => {
   }
 
   /**
+   * Method to change user active state for filter
+   */
+  const handleChangeBusinessActiveState = () => {
+    setSelectedBusinessActiveState(!selectedBusinessActiveState)
+  }
+
+  /**
    * Listening session
    */
   useEffect(() => {
@@ -172,7 +183,7 @@ export const DashboardBusinessList = (props) => {
     } else {
       loadBusinesses()
     }
-  }, [session, searchValue])
+  }, [session, searchValue, selectedBusinessActiveState])
 
   return (
     <>
@@ -182,7 +193,9 @@ export const DashboardBusinessList = (props) => {
             {...props}
             businessList={businessList}
             pagination={pagination}
+            selectedBusinessActiveState={selectedBusinessActiveState}
             loadMoreBusinesses={loadMoreBusinesses}
+            handleChangeBusinessActiveState={handleChangeBusinessActiveState}
           />
         )
       }
@@ -219,6 +232,6 @@ DashboardBusinessList.propTypes = {
 DashboardBusinessList.defaultProps = {
   initialPageSize: 10,
   loadMorePageSize: 10,
-  propsToFetch: ['id', 'name', 'header', 'logo', 'name', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug'],
+  propsToFetch: ['id', 'name', 'header', 'logo', 'name', 'enabled', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug'],
   paginationSettings: { initialPage: 1, pageSize: 10, controlType: 'infinity' }
 }

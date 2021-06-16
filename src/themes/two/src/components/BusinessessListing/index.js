@@ -5,15 +5,22 @@ import { BusinessListingHeader } from '../BusinessListingHeader'
 import {
   BusinessListingContainer
 } from './styles'
+import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
 
 const BusinessessListingUI = (props) => {
   const {
-    businessList
+    businessList,
+    selectedBusinessActiveState,
+    handleChangeBusinessActiveState
   } = props
 
   return (
     <BusinessListingContainer>
       <BusinessListingHeader />
+      <BusinessActiveStateFilter
+        selectedBusinessActiveState={selectedBusinessActiveState}
+        handleChangeBusinessActiveState={handleChangeBusinessActiveState}
+      />
       <BusinessList
         businessList={businessList}
       />

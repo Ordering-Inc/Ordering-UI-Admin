@@ -21,13 +21,13 @@ export const BusinessActiveStateFilter = (props) => {
         <InnerContainer>
           <AutoScroll innerScroll scrollId='userActiveState'>
             <Tab
-              active={selectedUserActiveState}
+              active={selectedBusinessActiveState}
               onClick={() => handleChangeBusinessActiveState()}
             >
               {t('ACTIVE', 'Active')}
             </Tab>
             <Tab
-              active={!selectedUserActiveState}
+              active={!selectedBusinessActiveState}
               onClick={() => handleChangeBusinessActiveState()}
             >
               {t('INACTIVE', 'Inactive')}
