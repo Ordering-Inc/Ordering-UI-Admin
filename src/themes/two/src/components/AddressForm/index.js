@@ -357,7 +357,11 @@ const AddressFormUI = (props) => {
       {isSeletectedUserAddresses && (
         <>
           <Title>
-            {t('EDIT_ADDRESS', 'Edit address')}
+            {Object.keys(props?.address).length === 0 ? (
+              t('ADD_ADDRESS', 'Add address')
+            ) : (
+              t('EDIT_ADDRESS', 'Edit address')
+            )}
           </Title>
           <CloseButton
             onClick={() => onCancel()}
