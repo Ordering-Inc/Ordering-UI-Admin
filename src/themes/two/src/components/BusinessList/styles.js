@@ -46,3 +46,7 @@ export const BusinessListTable = styled.table`
     cursor: pointer;
   }
 `
+
+export const WrapperPagination = styled.div`
+  margin-top: 10px;
+`

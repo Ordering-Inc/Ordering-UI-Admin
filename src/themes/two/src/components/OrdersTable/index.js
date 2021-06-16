@@ -14,7 +14,7 @@ import { useTheme } from 'styled-components'
 import { DriverSelector } from '../DriverSelector'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
-import { OrdersPagination } from '../../../../../components/OrdersPagination'
+import { PaginationButton } from '../PaginationButton'
 import {
   OrdersContainer,
   Table,
@@ -451,9 +451,9 @@ export const OrdersTable = (props) => {
       {pagination && (
         <WrapperPagination>
           {!orderList.loading && totalPages > 0 && (
-            <OrdersPagination
-              ordersPerPage={ordersPerPage}
-              totalOrders={totalOrders}
+            <PaginationButton
+              pageSize={ordersPerPage}
+              total={totalOrders}
               currentPage={currentPage}
               totalPages={totalPages}
               prevPaginate={prevPaginate}

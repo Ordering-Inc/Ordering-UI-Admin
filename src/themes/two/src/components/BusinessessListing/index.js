@@ -11,9 +11,11 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 const BusinessessListingUI = (props) => {
   const {
     businessList,
+    pagination,
     selectedBusinessActiveState,
     handleChangeBusinessActiveState,
-    handleChangeBusinessType
+    handleChangeBusinessType,
+    loadMoreBusinesses
   } = props
 
   return (
@@ -30,6 +32,8 @@ const BusinessessListingUI = (props) => {
       />
       <BusinessList
         businessList={businessList}
+        pagination={pagination}
+        loadMoreBusinesses={loadMoreBusinesses}
       />
     </BusinessListingContainer>
   )
