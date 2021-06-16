@@ -19,7 +19,8 @@ export const UserDetailsUI = (props) => {
     userState,
     userId,
     setExtraOpen,
-    handleSuccessUpdate
+    handleSuccessUpdate,
+    handleSuccessAddressesUpdate
   } = props
 
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
@@ -59,6 +60,7 @@ export const UserDetailsUI = (props) => {
                     userId={userState.user?.id}
                     addresses={userState.user?.addresses}
                     setExtraOpen={setExtraOpen}
+                    handleSuccessAddressesUpdate={handleSuccessAddressesUpdate}
                   />
                 </SavedPlaces>
               )}

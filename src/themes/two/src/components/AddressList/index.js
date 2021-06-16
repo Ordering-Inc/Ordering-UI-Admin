@@ -53,7 +53,8 @@ const AddressListUI = (props) => {
     userCustomerSetup,
     isEnableContinueButton,
     setCustomerModalOpen,
-    setExtraOpen
+    setExtraOpen,
+    handleSuccessAddressesUpdate
   } = props
 
   const [, t] = useLanguage()
@@ -96,6 +97,7 @@ const AddressListUI = (props) => {
     if (!found) {
       addresses.push(address)
     }
+    handleSuccessAddressesUpdate && handleSuccessAddressesUpdate(userId, addresses)
     setAddressList({
       ...addressList,
       addresses
