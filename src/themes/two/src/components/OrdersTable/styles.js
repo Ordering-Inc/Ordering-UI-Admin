@@ -2,12 +2,18 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersContainer = styled.div`
-  overflow-y: hidden;
-  width: 100%;
+  height: calc(100vh - 380px);
+  overflow: auto;
+
+  @media (min-width: 768px) {
+    height: calc(100vh - 280px);
+  }
 `
 
 export const Table = styled.table`
-  table-layout: fixed;
+  width: calc(100% - 10px);
+  min-width: 900px;
+
   th,
   td {
     padding: 15px;
@@ -28,21 +34,21 @@ export const Table = styled.table`
   }
 
   thead {
-    display: block;
     tr {
       width: 100%;
       th {
         color: ${props => props.theme.colors?.headingColor};
+        position: sticky;
+        top: 0px;
+        z-index: 100;
+        background: #FFF;
       }
     }
   }
 
   tbody {
-    overflow-x: hidden;
-    max-height: calc(100vh - 420px);
     padding-bottom: 10px;
     width: 100%;
-    display: block;
 
     tr {
       width: 100%;
@@ -57,50 +63,7 @@ export const Table = styled.table`
     white-space: nowrap;
   }
 
-  .orderNo {
-    min-width: 190px;
-    max-width: 190px;
-  }
-
-  .small {
-    min-width: 60px;
-    max-width: 60px;
-  }
-
-  .businessInfo {
-    min-width: 205px;
-    max-width: 205px;
-  }
-
-  .customerInfo {
-    min-width: 205px;
-    max-width: 205px;
-  }
-
-  .driverInfo {
-    min-width: 205px;
-    max-width: 205px;
-  }
-
-  .orderType {
-    min-width: 140px;
-    max-width: 140px;
-  }
-
-  .advanced {
-    min-width: 265px;
-    max-width: 265px;
-  }
-
-  .orderStatusTitle {
-    min-width: 220px;
-    max-width: 220px;
-  }
-
   .orderPrice {
-    min-width: 140px;
-    max-width: 140px;
-
     div.info {
       p {
         ${props => props.theme?.rtl ? css`
@@ -122,27 +85,6 @@ export const Table = styled.table`
       font-size: 14px;
       font-weight: 600;
     }
-  }
-
-  @media (min-width: 760px) {
-    max-height: calc(100vh - 420px);
-  }
-
-  @media (min-width: 992px) {
-    tbody {
-      max-height: calc(100vh - 340px);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    tbody {
-      max-height: calc(100vh - 300px);
-    }
-    ${({ isDriverOrders }) => isDriverOrders && css`
-      tbody {
-        max-height: calc(100vh - 370px);
-      }
-    `}
   }
 `
 
