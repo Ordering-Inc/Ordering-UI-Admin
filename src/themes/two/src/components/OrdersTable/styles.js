@@ -6,6 +6,10 @@ export const OrdersContainer = styled.div`
   overflow: auto;
 
   @media (min-width: 768px) {
+    height: calc(100vh - 290px);
+  }
+
+  @media (min-width: 1200px) {
     height: calc(100vh - 280px);
   }
 `
@@ -38,6 +42,7 @@ export const Table = styled.table`
       width: 100%;
       th {
         color: ${props => props.theme.colors?.headingColor};
+        white-space: nowrap;
         position: sticky;
         top: 0px;
         z-index: 100;
@@ -48,7 +53,6 @@ export const Table = styled.table`
 
   tbody {
     padding-bottom: 10px;
-    width: 100%;
 
     tr {
       width: 100%;

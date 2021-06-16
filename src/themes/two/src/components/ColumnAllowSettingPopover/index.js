@@ -105,7 +105,7 @@ export const ColumnAllowSettingPopover = (props) => {
     }
   }, [open])
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', minWidth: '150px' }
+  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: '150px' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
