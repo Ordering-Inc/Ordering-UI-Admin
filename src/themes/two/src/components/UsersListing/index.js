@@ -118,9 +118,9 @@ export const UsersListing = (props) => {
   const usersListingProps = {
     ...props,
     UIComponent: UsersListingUI,
-    isSearchByUserId: true,
     isSearchByUserEmail: true,
-    isSearchByUserPhone: true
+    isSearchByUserPhone: true,
+    isSearchByUserName: true
   }
   return (
     <UsersListController {...usersListingProps} />
