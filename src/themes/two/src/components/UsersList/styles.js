@@ -133,6 +133,7 @@ export const InfoBlock = styled.div`
   }
 `
 export const UserTypeWrapper = styled.div`
+  width: fit-content;
   > div {
     display: flex;
 
@@ -162,6 +163,7 @@ export const UserTypeWrapper = styled.div`
 export const UserEnableWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: fit-content;
 
   span {
     font-size: 14px;
