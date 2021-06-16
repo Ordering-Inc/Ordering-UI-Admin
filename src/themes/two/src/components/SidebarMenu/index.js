@@ -211,8 +211,8 @@ export const SidebarMenu = (props) => {
                 </Button>
                 <Button
                   className='d-flex align-items-center m-1'
-                  variant={location.pathname === '/stores' && 'primary'}
-                  onClick={() => handleGoToPage({ page: 'stores' })}
+                  variant={location.pathname === '/businesses' && 'primary'}
+                  onClick={() => handleGoToPage({ page: 'businesses' })}
                 >
                   <BiStore />
                   {!isCollapse && <span className='mx-2'>{t('STORES', 'Stores')}</span>}

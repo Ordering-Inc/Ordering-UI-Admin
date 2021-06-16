@@ -14,7 +14,8 @@ export const ListenPageChanges = ({ children }) => {
     deliveries: '/deliveries',
     drivers: '/drivers',
     users: '/users',
-    login: '/login'
+    login: '/login',
+    businesses: '/businesses'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

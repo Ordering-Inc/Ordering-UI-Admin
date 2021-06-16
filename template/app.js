@@ -20,6 +20,7 @@ import { OrdersList } from './pages/OrdersList'
 import { DeliveriesManager } from './pages/DeliveriesManager'
 import { DriversList } from './pages/DriversList'
 import { UsersList } from './pages/UsersList'
+import { BusinessesList } from './pages/BusinessesList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -121,6 +122,13 @@ export const App = () => {
                       {
                         auth
                           ? <UsersList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/businesses'>
+                      {
+                        auth
+                          ? <BusinessesList />
                           : <Redirect to='/login' />
                       }
                     </Route>
