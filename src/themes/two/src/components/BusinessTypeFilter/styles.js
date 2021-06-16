@@ -1,42 +1,34 @@
 import styled, { css } from 'styled-components'
 
 export const TypeContainer = styled.div`
-  display: flex;
   width: 100%;
+  padding: 20px 0;
+  display: flex;
   overflow-x: auto;
-  justify-content: flex-start;
-  text-align: center;
-
-  ::-webkit-scrollbar {
-      opacity: 0
+  @media (min-width: 992px) {
+    overflow-x: hidden;
   }
-  
-  > div{
-    margin: 0 auto;
-    > div {
-    text-overflow: ellipsis;
+`
+
+export const InnerContainer = styled.div`
+  display: flex;
+  button {
+    margin: 5px;
     white-space: nowrap;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-  }
-  }
 
-  .category{
-    padding: 10px 7px;
+    svg {
+      font-size: 20px;
 
-    > span {
-      margin: 0 10px;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 10px;
+      ` : css`
+        margin-left: 10px;
+      `}
     }
   }
 
-  @media (min-width: 480px){
-    .category{
-      padding: 10px 15px;
-    }
+  span {
+    border-radius: 20px;
+    margin: 0 5px;
   }
 `

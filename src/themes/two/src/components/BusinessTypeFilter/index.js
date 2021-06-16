@@ -3,7 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 'ordering-components-admin'
 import { Tabs, Tab } from '../../styles/Tabs'
 import { AutoScroll } from '../AutoScroll'
-import { TypeContainer } from './styles'
+import { Button } from '../../styles/Buttons'
+import { TypeContainer, InnerContainer } from './styles'
 
 const BusinessTypeFilterUI = (props) => {
   const {
@@ -21,33 +22,28 @@ const BusinessTypeFilterUI = (props) => {
   return (
     <>
       <TypeContainer id='container'>
-        {loading && (
-          <Tabs variant='primary'>
-            <AutoScroll>
-              <Tab className='category' style={styles.wrapperSkeleton}>
-                {[...Array(4)].map((_, i) => (
-                  <Skeleton id='skeleton' key={i} circle={true} height={150} width={150} />
-                ))}
-              </Tab>
-            </AutoScroll>
-          </Tabs>
-        )}
-        {!loading && !error && types && types.length > 0 && (
-          <Tabs variant='primary'>
-            <AutoScroll>
+        <InnerContainer>
+          {loading && (
+            <AutoScroll innerScroll scrollId='business_type'>
+              {[...Array(6)].map((_, i) => (
+                <Skeleton key={i} height={35} width={100} />
+              ))}
+             </AutoScroll>
+          )}
+          {!loading && !error && types && types.length > 0 && (
+            <AutoScroll innerScroll scrollId='business_type'>
               {types.map((type, i) => type.enabled && (
-                <Tab
+                <Button
                   key={type.id}
-                  active={type.id === currentTypeSelected}
-                  className='category'
+                  color={type.id === currentTypeSelected ? 'primary' : 'secundary'}
                   onClick={() => handleChangeCategory(type.id)}
                 >
                   {t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)}
-                </Tab>
+                </Button>
               ))}
             </AutoScroll>
-          </Tabs>
-        )}
+          )}
+        </InnerContainer>
       </TypeContainer>
     </>
   )
