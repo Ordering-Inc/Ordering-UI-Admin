@@ -2,15 +2,19 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersContainer = styled.div`
-  height: calc(100vh - 380px);
+  max-height: calc(100vh - 410px);
   overflow: auto;
 
   @media (min-width: 768px) {
-    height: calc(100vh - 290px);
+    max-height: calc(100vh - 370px);
+  }
+
+  @media (min-width: 992px) {
+    max-height: calc(100vh - 290px);
   }
 
   @media (min-width: 1200px) {
-    height: calc(100vh - 280px);
+    max-height: calc(100vh - 280px);
   }
 `
 

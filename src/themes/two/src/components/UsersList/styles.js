@@ -5,7 +5,7 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
-  height: calc(100vh - 380px);
+  max-height: calc(100vh - 380px);
   overflow: auto;
 
   @media (min-width: 768px) {
