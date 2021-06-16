@@ -204,3 +204,6 @@ export const WrapperPageState = styled.div`
   display: flex;
   min-width: 140px;
 `
+
+export const WrapperUserActionSelector = styled.div`
+`

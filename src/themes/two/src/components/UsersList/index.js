@@ -23,7 +23,8 @@ import {
   UserEnableWrapper,
   WrapperPagination,
   WrapperPageState,
-  PageButton
+  PageButton,
+  WrapperUserActionSelector
 } from './styles'
 
 export const UsersList = (props) => {
@@ -175,11 +176,13 @@ export const UsersList = (props) => {
                       </UserEnableWrapper>
                     </td>
                     <td>
-                      <UserActionSelector
-                        className='user_action'
-                        userId={user.id}
-                        handleDeleteUser={handleDeleteUser}
-                      />
+                      <WrapperUserActionSelector className='user_action'>
+                        <UserActionSelector
+                          user={user}
+                          handleDeleteUser={handleDeleteUser}
+                          handleOpenUserDetails={handleOpenUserDetails}
+                        />
+                      </WrapperUserActionSelector>
                     </td>
                   </tr>
                 </tbody>

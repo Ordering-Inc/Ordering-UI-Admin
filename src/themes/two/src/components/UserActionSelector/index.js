@@ -10,8 +10,9 @@ import {
 
 export const UserActionSelector = (props) => {
   const {
-    userId,
-    handleDeleteUser
+    user,
+    handleDeleteUser,
+    handleOpenUserDetails
   } = props
   const [, t] = useLanguage()
 
@@ -23,8 +24,11 @@ export const UserActionSelector = (props) => {
   const placeholder=<PlaceHolder><FiMoreVertical /></PlaceHolder>
 
   const onActionClick = (type) => {
+    if (type === 1) {
+      handleOpenUserDetails(user)
+    }
     if (type === 2) {
-      handleDeleteUser(userId)
+      handleDeleteUser(user?.id)
     }
   }
   return (
