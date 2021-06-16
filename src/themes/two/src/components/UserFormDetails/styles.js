@@ -10,6 +10,9 @@ export const FormInput = styled.form`
     margin-bottom: 20px;
     width: 100%;
   }
+  input {
+    color: ${props => props.theme.colors.headingColor};
+  }
   input.form {
     padding: 10px 15px;
     width: 100%;

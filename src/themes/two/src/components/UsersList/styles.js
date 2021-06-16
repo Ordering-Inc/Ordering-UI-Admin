@@ -9,7 +9,7 @@ export const UserTableWrapper = styled.div`
   overflow: auto;
 
   @media (min-width: 768px) {
-    height: calc(100vh - 280px);
+    max-height: calc(100vh - 280px);
   }
 `
 

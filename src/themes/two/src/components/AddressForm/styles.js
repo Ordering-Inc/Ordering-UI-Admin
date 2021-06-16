@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const FormActions = styled.div`
+  margin-top: 20px;
   padding: 10px 0px;
   display: flex;
   justify-content: space-between;
@@ -61,6 +62,7 @@ export const FormControl = styled.form`
 
   textarea {
     width: 100%;
+    margin: 10px 0;
   }
 
   .input-autocomplete {
@@ -162,6 +164,7 @@ export const AddressTagSection = styled.div`
 export const WrapperMap = styled.div`
   width: 100%;
   height: 250px;
+  margin-bottom: 20px;
   > div {
     position: relative !important;
     width: 100% !important;

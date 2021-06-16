@@ -23,13 +23,19 @@ export const SavedPlaces = styled.div`
       width: auto;
       align-self: center;
       position: absolute;
-      bottom: 20px;
+      bottom: 0px;
 
       ${props => props.theme?.rtl ? css`
         right: 20px;
       ` : css`
         left: 20px;
       `}
+    }
+
+    > ul {
+      margin-top: 0px;
+      max-height: calc(100% - 80px);
+      overflow: auto;
     }
   }
 

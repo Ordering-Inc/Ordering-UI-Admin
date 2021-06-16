@@ -7,7 +7,8 @@ export const OrdersListContainer = styled.div`
   transition: all 0.5s;
   overflow: hidden;
   margin-top: 60px;
-  ${({ isDriverOrders }) => isDriverOrders && css`
+  ${({ isSelectedOrders }) => isSelectedOrders && css`
+    margin-top: 0px;
     padding: 20px 0 0 0;
   `}
   @media print {

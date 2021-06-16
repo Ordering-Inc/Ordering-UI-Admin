@@ -146,7 +146,9 @@ export const OrdersTable = (props) => {
 
   return (
     <>
-      <OrdersContainer>
+      <OrdersContainer
+        isSelectedOrders={isSelectedOrders}
+      >
         <Table
           isSelectedOrders={isSelectedOrders}
         >

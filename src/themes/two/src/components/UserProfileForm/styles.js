@@ -145,6 +145,7 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const WrapperForm = styled.div`
+  padding-bottom: 30px;
   @media (min-width: 768px) {
     width: 100%;
   }

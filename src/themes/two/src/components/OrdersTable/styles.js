@@ -11,10 +11,17 @@ export const OrdersContainer = styled.div`
 
   @media (min-width: 992px) {
     max-height: calc(100vh - 290px);
+    ${({ isSelectedOrders }) => isSelectedOrders && css`
+      max-height: calc(100vh - 345px);
+    `}
   }
 
   @media (min-width: 1200px) {
     max-height: calc(100vh - 280px);
+
+    ${({ isSelectedOrders }) => isSelectedOrders && css`
+      max-height: calc(100vh - 345px);
+    `}
   }
 `
 
