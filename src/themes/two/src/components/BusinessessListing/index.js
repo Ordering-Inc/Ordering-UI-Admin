@@ -6,12 +6,14 @@ import {
   BusinessListingContainer
 } from './styles'
 import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
+import { BusinessTypeFilter } from '../BusinessTypeFilter'
 
 const BusinessessListingUI = (props) => {
   const {
     businessList,
     selectedBusinessActiveState,
-    handleChangeBusinessActiveState
+    handleChangeBusinessActiveState,
+    handleChangeBusinessType
   } = props
 
   return (
@@ -20,6 +22,11 @@ const BusinessessListingUI = (props) => {
       <BusinessActiveStateFilter
         selectedBusinessActiveState={selectedBusinessActiveState}
         handleChangeBusinessActiveState={handleChangeBusinessActiveState}
+      />
+      <BusinessTypeFilter
+        businessTypes={props.businessTypes}
+        defaultBusinessType={props.defaultBusinessType}
+        handleChangeBusinessType={handleChangeBusinessType}
       />
       <BusinessList
         businessList={businessList}

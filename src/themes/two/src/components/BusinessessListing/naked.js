@@ -27,6 +27,7 @@ export const DashboardBusinessList = (props) => {
   })
 
   const [selectedBusinessActiveState, setSelectedBusinessActiveState] = useState(true)
+  const [businessTypeSelected, setBusinessTypeSelected] = useState(null)
   
   /**
    * Method to get businesses from API
@@ -43,6 +44,16 @@ export const DashboardBusinessList = (props) => {
     }
 
     conditions.push({ attribute: 'enabled', value: selectedBusinessActiveState })
+
+    if (businessTypeSelected) {
+      conditions.push({
+        attribute: 'types',
+        conditions: [{
+          attribute: 'id',
+          value: businessTypeSelected
+        }]
+      })
+    }
 
     if (searchValue) {
       const searchConditions = []
@@ -172,6 +183,21 @@ export const DashboardBusinessList = (props) => {
   }
 
   /**
+   * Change business type
+   * @param {object} businessType Business type
+   */
+     const handleChangeBusinessType = (businessType) => {
+      if (businessType !== businessTypeSelected) {
+        setBusinessList({
+          ...businessList,
+          businesses: [],
+          loading: true
+        })
+        setBusinessTypeSelected(businessType)
+      }
+    }
+
+  /**
    * Listening session
    */
   useEffect(() => {
@@ -183,7 +209,7 @@ export const DashboardBusinessList = (props) => {
     } else {
       loadBusinesses()
     }
-  }, [session, searchValue, selectedBusinessActiveState])
+  }, [session, searchValue, selectedBusinessActiveState, businessTypeSelected])
 
   return (
     <>
@@ -196,6 +222,7 @@ export const DashboardBusinessList = (props) => {
             selectedBusinessActiveState={selectedBusinessActiveState}
             loadMoreBusinesses={loadMoreBusinesses}
             handleChangeBusinessActiveState={handleChangeBusinessActiveState}
+            handleChangeBusinessType={handleChangeBusinessType}
           />
         )
       }
