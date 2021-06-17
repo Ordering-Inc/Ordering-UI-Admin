@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BusinessList } from '../BusinessList'
 import { DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import { BusinessListingHeader } from '../BusinessListingHeader'
-import {
-  BusinessListingContainer
-} from './styles'
 import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
+import BsGrid from '@meronex/icons/bs/BsGrid'
+import BsViewList from '@meronex/icons/bs/BsViewList'
+
+import {
+  BusinessListingContainer,
+  ViewContainer,
+  WrapperView,
+  ViewMethodButton
+} from './styles'
 
 const BusinessessListingUI = (props) => {
   const {
@@ -22,16 +28,34 @@ const BusinessessListingUI = (props) => {
     onSearch
   } = props
 
+  const [viewMethod, setViewMethod] = useState('list')
+
   return (
     <BusinessListingContainer>
       <BusinessListingHeader
         searchValue={searchValue}
         onSearch={onSearch}
       />
-      <BusinessActiveStateFilter
-        selectedBusinessActiveState={selectedBusinessActiveState}
-        handleChangeBusinessActiveState={handleChangeBusinessActiveState}
-      />
+      <ViewContainer>
+        <BusinessActiveStateFilter
+          selectedBusinessActiveState={selectedBusinessActiveState}
+          handleChangeBusinessActiveState={handleChangeBusinessActiveState}
+        />
+        <WrapperView>
+          <ViewMethodButton
+            active={viewMethod === 'list'}
+            onClick={() => setViewMethod('list')}
+          >
+            <BsGrid />
+          </ViewMethodButton>
+          <ViewMethodButton
+            active={viewMethod === 'card'}
+            onClick={() => setViewMethod('card')}
+          >
+            <BsViewList />
+          </ViewMethodButton>
+        </WrapperView>
+      </ViewContainer>
       <BusinessTypeFilter
         businessTypes={props.businessTypes}
         defaultBusinessType={props.defaultBusinessType}

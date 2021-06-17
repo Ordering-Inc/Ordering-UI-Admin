@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import { PaginationButton } from '../PaginationButton'
-import { useTheme } from 'styled-components'
 
 import {
   BusinessListContainer,
@@ -123,7 +121,11 @@ export const BusinessList = (props) => {
           </thead>
           {businessList.loading ? (
             [...Array(10).keys()].map(i => (
-              <SingleBusiness isSkeleton key={i} />
+              <SingleBusiness
+                key={i}
+                isSkeleton
+                allowColumns={allowColumns}
+              />
             ))
           ) : (
             currentBusinessess.map(business => (

@@ -27,7 +27,6 @@ const SingleBusinessUI = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const theme = useTheme()
-
   return (
     <>
       {(businessState?.loading || isSkeleton) ? (
@@ -40,8 +39,8 @@ const SingleBusinessUI = (props) => {
                     <Skeleton width={45} height={45} />
                   </WrapperImage>
                   <InfoBlock>
-                    <p className='bold'><Skeleton width={150} /></p>
-                    <p><Skeleton width={100} /></p>
+                    <p className='bold'><Skeleton width={120} /></p>
+                    <p><Skeleton width={80} /></p>
                   </InfoBlock>                     
                 </BusinessGeneralInfo>
               </td>
@@ -49,24 +48,24 @@ const SingleBusinessUI = (props) => {
             {allowColumns?.deliveryFee && (
               <td>
                 <InfoBlock>
-                  <p className='bold'><Skeleton width={150} /></p>
-                  <p><Skeleton width={100} /></p>
+                  <p className='bold'><Skeleton width={120} /></p>
+                  <p><Skeleton width={80} /></p>
                 </InfoBlock> 
               </td>
             )}
             {allowColumns?.distance && (
               <td>
                 <InfoBlock>
-                  <p className='bold'><Skeleton width={150} /></p>
-                  <p><Skeleton width={100} /></p>
+                  <p className='bold'><Skeleton width={120} /></p>
+                  <p><Skeleton width={80} /></p>
                 </InfoBlock> 
               </td>
             )}
             {allowColumns?.deliveryTime && (
               <td>
                 <InfoBlock>
-                  <p className='bold'><Skeleton width={150} /></p>
-                  <p><Skeleton width={100} /></p>
+                  <p className='bold'><Skeleton width={120} /></p>
+                  <p><Skeleton width={80} /></p>
                 </InfoBlock> 
               </td>
             )}
@@ -151,7 +150,7 @@ export const SingleBusiness = (props) => {
   return (
     <>
       {isSkeleton ? (
-        <SingleBusinessUI isSkeleton />
+        <SingleBusinessUI {...props} />
       ) : (
         <BusinessController {...singleBusinessProps} />
       )}

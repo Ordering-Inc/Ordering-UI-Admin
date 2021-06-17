@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const ActiveStateFilterContainer = styled.div`
   display: flex;
   width: 100%;
-  border-bottom: 1px solid #CCC;
   overflow-x: auto;
   @media (min-width: 992px) {
     overflow-x: hidden;

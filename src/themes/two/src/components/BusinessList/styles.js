@@ -35,5 +35,5 @@ export const BusinessListTable = styled.table`
 `
 
 export const WrapperPagination = styled.div`
-  margin-top: 10px;
+  margin-top: 20px;
 `

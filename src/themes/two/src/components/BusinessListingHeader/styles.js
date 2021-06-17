@@ -7,6 +7,8 @@ export const HeaderContainer = styled.div`
   > h1 {
     font-size: 24px;
     margin: 0px;
+    font-weight: 600;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   input {
