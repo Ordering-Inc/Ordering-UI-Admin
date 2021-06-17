@@ -5,13 +5,15 @@ import { PaginationButton } from '../PaginationButton'
 import {
   BusinessListContainer,
   BusinessListTable,
-  WrapperPagination
+  WrapperPagination,
+  BusinessCardContainer
 } from './styles'
 import { SingleBusiness } from '../SingleBusiness'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 
 export const BusinessList = (props) => {
   const {
+    viewMethod,
     businessList,
     pagination,
     loadMoreBusinesses,
@@ -96,29 +98,73 @@ export const BusinessList = (props) => {
 
   return (
     <>
-      <BusinessListContainer>
-        <BusinessListTable>
-          <thead>
-            <tr>
-              {allowColumns?.business && (
-                <th>{t('BUSINESS', 'Business')}</th>
+      {viewMethod === 'list' && (
+        <>
+          <BusinessListContainer>
+            <BusinessListTable>
+              <thead>
+                <tr>
+                  {allowColumns?.business && (
+                    <th>{t('BUSINESS', 'Business')}</th>
+                  )}
+                  {(allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime) && (
+                    <th colSpan={3}>{t('DETAILS', 'Details')}</th>
+                  )}
+                  <th>{t('ACTIONS', 'Actions')}</th>
+                  <th>
+                    <ColumnAllowSettingPopover
+                      open={openPopover}
+                      allowColumns={allowColumns}
+                      optionsDefault={optionsDefault}
+                      onClick={() => setOpenPopover(!openPopover)}
+                      onClose={() => setOpenPopover(false)}
+                      handleChangeAllowColumns={handleChangeAllowColumns}
+                    />
+                  </th>
+                </tr>
+              </thead>
+              {businessList.loading ? (
+                [...Array(10).keys()].map(i => (
+                  <SingleBusiness
+                    key={i}
+                    isSkeleton
+                    allowColumns={allowColumns}
+                  />
+                ))
+              ) : (
+                currentBusinessess.map(business => (
+                  <SingleBusiness
+                    key={business.id}
+                    viewMethod={viewMethod}
+                    allowColumns={allowColumns}
+                    businessId={business.id}
+                    business={business}
+                    handleSucessRemoveBusiness={handleSucessRemoveBusiness}
+                    handleSucessAddBusiness={handleSucessAddBusiness}
+                  />
+                ))
               )}
-              {(allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime) && (
-                <th colSpan={3}>{t('DETAILS', 'Details')}</th>
-              )}
-              <th>{t('ACTIONS', 'Actions')}</th>
-              <th>
-                <ColumnAllowSettingPopover
-                  open={openPopover}
-                  allowColumns={allowColumns}
-                  optionsDefault={optionsDefault}
-                  onClick={() => setOpenPopover(!openPopover)}
-                  onClose={() => setOpenPopover(false)}
-                  handleChangeAllowColumns={handleChangeAllowColumns}
+            </BusinessListTable>
+          </BusinessListContainer>
+          {pagination && (
+            <WrapperPagination>
+              {!businessList.loading && totalPages > 0 && (
+                <PaginationButton
+                  pageSize={businessesPerPage}
+                  total={totalBusinesses}
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  prevPaginate={prevPaginate}
+                  nextPaginate={nextPaginate}
                 />
-              </th>
-            </tr>
-          </thead>
+              )}
+            </WrapperPagination>
+          )}
+        </>
+      )}
+
+      {viewMethod === 'card' && (
+        <BusinessCardContainer>
           {businessList.loading ? (
             [...Array(10).keys()].map(i => (
               <SingleBusiness
@@ -131,6 +177,7 @@ export const BusinessList = (props) => {
             currentBusinessess.map(business => (
               <SingleBusiness
                 key={business.id}
+                viewMethod={viewMethod}
                 allowColumns={allowColumns}
                 businessId={business.id}
                 business={business}
@@ -139,21 +186,7 @@ export const BusinessList = (props) => {
               />
             ))
           )}
-        </BusinessListTable>
-      </BusinessListContainer>
-      {pagination && (
-        <WrapperPagination>
-          {!businessList.loading && totalPages > 0 && (
-            <PaginationButton
-              pageSize={businessesPerPage}
-              total={totalBusinesses}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              prevPaginate={prevPaginate}
-              nextPaginate={nextPaginate}
-            />
-          )}
-        </WrapperPagination>
+        </BusinessCardContainer>
       )}
     </>
   )

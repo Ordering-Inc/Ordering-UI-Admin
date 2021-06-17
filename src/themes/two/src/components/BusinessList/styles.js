@@ -37,3 +37,8 @@ export const BusinessListTable = styled.table`
 export const WrapperPagination = styled.div`
   margin-top: 20px;
 `
+
+export const BusinessCardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`

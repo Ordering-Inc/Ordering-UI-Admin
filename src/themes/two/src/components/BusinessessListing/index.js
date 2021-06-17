@@ -43,14 +43,14 @@ const BusinessessListingUI = (props) => {
         />
         <WrapperView>
           <ViewMethodButton
-            active={viewMethod === 'list'}
-            onClick={() => setViewMethod('list')}
+            active={viewMethod === 'card'}
+            onClick={() => setViewMethod('card')}
           >
             <BsGrid />
           </ViewMethodButton>
           <ViewMethodButton
-            active={viewMethod === 'card'}
-            onClick={() => setViewMethod('card')}
+            active={viewMethod === 'list'}
+            onClick={() => setViewMethod('list')}
           >
             <BsViewList />
           </ViewMethodButton>
@@ -62,6 +62,7 @@ const BusinessessListingUI = (props) => {
         handleChangeBusinessType={handleChangeBusinessType}
       />
       <BusinessList
+        viewMethod={viewMethod}
         businessList={businessList}
         pagination={pagination}
         loadMoreBusinesses={loadMoreBusinesses}
