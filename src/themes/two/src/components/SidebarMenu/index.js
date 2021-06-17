@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BsListCheck from '@meronex/icons/bs/BsListCheck'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
@@ -15,6 +14,10 @@ import { LogoutButton } from '../LogoutButton'
 import IosMenu from '@meronex/icons/ios/IosMenu'
 import MdClose from '@meronex/icons/md/MdClose'
 
+import { useTheme } from 'styled-components'
+import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import {
   Header,
   SidebarContainer,
@@ -24,16 +27,11 @@ import {
   UserInfo,
   CollapseButton,
   IconContent,
-  MenuClose
+  MenuClose,
+  MenuContainer,
+  MenuContent,
+  SubMenu
 } from './styles'
-import { useTheme } from 'styled-components'
-import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import {
-  Image,
-  Button
-} from 'react-bootstrap'
-import { SubMenu } from '../SubMenu'
 
 export const SidebarMenu = (props) => {
   const location = useLocation()
@@ -44,47 +42,72 @@ export const SidebarMenu = (props) => {
   const windowSize = useWindowSize()
 
   const [isCollapse, setIsCollapse] = useState(false)
-  const [showSubmenu, setShowSubmenu] = useState({})
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const ordersSubMenus = {
-    menu: t('ORDERS', 'Orders'),
-    submenus: [
-      {
-        id: 1,
-        title: t('ORDERS_MANAGER', 'Orders manager'),
-        pageName: 'orders'
-      },
-      {
-        id: 2,
-        title: t('DELIVERIES_DASHBOARD', 'Deliveries dashboard'),
-        pageName: 'deliveries'
-      },
-      {
-        id: 3,
-        title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
-        pageName: 'drivers'
-      }
-    ]
-  }
+  const ordersSubMenus = [
+    {
+      id: 1,
+      title: t('ORDERS_MANAGER', 'Orders manager'),
+      pageName: 'orders'
+    },
+    {
+      id: 2,
+      title: t('DELIVERIES_DASHBOARD', 'Deliveries dashboard'),
+      pageName: 'deliveries'
+    },
+    {
+      id: 3,
+      title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
+      pageName: 'drivers'
+    }
+  ]
+
+  const storesSubMenus = [
+    {
+      id: 1,
+      title: t('STORES_LIST', 'Stores list'),
+      pageName: 'businesses'
+    },
+    {
+      id: 2,
+      title: t('DELIVERY_ZONES', 'Delivery zones'),
+      pageName: 'delivery_zones'
+    },
+    {
+      id: 3,
+      title: t('COUPONS', 'Coupons'),
+      pageName: 'coupons'
+    },
+    {
+      id: 4,
+      title: t('DISCOUNTS', 'Discounts'),
+      pageName: 'discounts'
+    },
+    {
+      id: 5,
+      title: t('BUSINESS_SCHEDULE', 'Business schedule'),
+      pageName: 'business_schedule'
+    },
+    {
+      id: 6,
+      title: t('TAXES', 'Taxes'),
+      pageName: 'taxes'
+    },
+    {
+      id: 7,
+      title: t('PAYMENT_METHODS', 'Payment methods'),
+      pageName: 'payment_methods'
+    },
+    {
+      id: 8,
+      title: t('PERSONALIZATION', 'Personalization'),
+      pageName: 'personalization'
+    },
+  ]
 
   const handleGoToPage = (data) => {
     setMenuOpen(false)
     events.emit('go_to_page', data)
-  }
-
-  const handleShowSubmenu = (type) => {
-    setShowSubmenu({
-      ...showSubmenu,
-      [type]: true
-    })
-  }
-
-  const handleCloseSubmenu = (type) => {
-    setShowSubmenu({
-      ...showSubmenu,
-      [type]: false
-    })
   }
 
   useEffect(() => {
@@ -101,14 +124,7 @@ export const SidebarMenu = (props) => {
   }, [menuOpen])
 
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      
+    <>   
       {windowSize.width < 760 && (
         <Header>
           {!menuOpen && (
@@ -167,74 +183,93 @@ export const SidebarMenu = (props) => {
               </IconContent>
             </MenuClose>
           )}
-          <SidebarContent
-            className='d-flex flex-column justify-content-between p-1 pt-0'
-          >
-            {showSubmenu?.orders && (
-              <SubMenu
-                items={ordersSubMenus}
-                handleGoToPage={handleGoToPage}
-                onClose={handleCloseSubmenu}
-              />
-            )}
-            {!showSubmenu?.orders && (
-              <div className='d-flex flex-column'>
-                <Button
-                  variant={(location.pathname === '/home' || location.pathname === '/') && 'primary'}
-                  className='d-flex align-items-center m-1'
-                  onClick={() => handleGoToPage({ page: 'home' })}
-                >
-                  <AiOutlineHome />
-                  {!isCollapse && <span className='mx-2'>{t('HOME', 'Home')}</span>}
-                </Button>
-                <Button
-                  className='d-flex align-items-center m-1'
-                  variant={
-                    (
+          <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
+            <div className='d-flex flex-column'>
+              <Accordion>
+                <MenuContainer>
+                  <ContextAwareToggle eventKey='0'>
+                    <AiOutlineHome />
+                    {!isCollapse && <span className='mx-2'>{t('HOME', 'Home')}</span>}
+                  </ContextAwareToggle>
+                </MenuContainer>
+
+                <MenuContainer>
+                  <ContextAwareToggle
+                    eventKey='1'
+                    active={
                       location.pathname === '/orders' ||
                       location.pathname === '/deliveries' ||
                       location.pathname === '/drivers'
-                    ) && 'primary'
-                  }
-                  onClick={() => handleShowSubmenu('orders')}
-                >
-                  <BsListCheck />
-                  {!isCollapse && <span className='mx-2'>{t('ORDERS', 'Orders')}</span>}
-                </Button>
-                <Button
-                  className='d-flex align-items-center m-1'
-                  variant={location.pathname === '/messages-manager' && 'primary'}
-                  onClick={() => handleGoToPage({ page: 'messages_manager' })}
-                >
-                  <BiMessageRounded />
-                  {!isCollapse && <span className='mx-2'>{t('MESSAGES', 'Messages')}</span>}
-                </Button>
-                <Button
-                  className='d-flex align-items-center m-1'
-                  variant={location.pathname === '/businesses' && 'primary'}
-                  onClick={() => handleGoToPage({ page: 'businesses' })}
-                >
-                  <BiStore />
-                  {!isCollapse && <span className='mx-2'>{t('STORES', 'Stores')}</span>}
-                </Button>
-                <Button
-                  className='d-flex align-items-center m-1'
-                  variant={location.pathname === '/users' && 'primary'}
-                  onClick={() => handleGoToPage({ page: 'users' })}
-                >
-                  <FiUsers />
-                  {!isCollapse && <span className='mx-2'>{t('USERS', 'Users')}</span>}
-                </Button>
-                <Button
-                  className='d-flex align-items-center m-1'
-                  variant={location.pathname === '/analytics' && 'primary'}
-                  onClick={() => handleGoToPage({ page: 'analytics' })}
-                >
-                  <MdcGoogleAnalytics />
-                  {!isCollapse && <span className='mx-2'>{t('ANALYTICS', 'Analytics')}</span>}
-                </Button>
-              </div>
-            )}
+                    }
+                  >
+                    <BsListCheck />
+                    {!isCollapse && <span className='mx-2'>{t('ORDERS', 'Orders')}</span>}
+                  </ContextAwareToggle>
+                  <Accordion.Collapse eventKey='1'>
+                    <MenuContent>
+                      {ordersSubMenus.map(item => (
+                        <SubMenu
+                          key={item.id}
+                          active={location.pathname.includes(item.pageName)}
+                          onClick={() => handleGoToPage({ page: item.pageName })}
+                        >{item.title}</SubMenu>
+                      ))}
+                    </MenuContent>
+                  </Accordion.Collapse>
+                </MenuContainer>
+
+                <MenuContainer>
+                  <ContextAwareToggle eventKey='2'>
+                    <BiMessageRounded />
+                    {!isCollapse && <span className='mx-2'>{t('MESSAGES', 'Messages')}</span>}
+                  </ContextAwareToggle>
+                </MenuContainer>
+
+                <MenuContainer>
+                  <ContextAwareToggle
+                    eventKey='3'
+                    active={
+                      location.pathname === '/businesses'
+                    }
+                  >
+                    <BiStore />
+                    {!isCollapse && <span className='mx-2'>{t('STORES', 'Stores')}</span>}
+                  </ContextAwareToggle>
+                  <Accordion.Collapse eventKey='3'>
+                    <MenuContent>
+                      {storesSubMenus.map(item => (
+                        <SubMenu
+                          key={item.id}
+                          active={location.pathname.includes(item.pageName)}
+                          onClick={() => handleGoToPage({ page: item.pageName })}
+                        >{item.title}</SubMenu>
+                      ))}
+                    </MenuContent>
+                  </Accordion.Collapse>
+                </MenuContainer>
+
+                <MenuContainer>
+                  <ContextAwareToggle
+                    eventKey='4'
+                    page='users'
+                    handleGoToPage={handleGoToPage}
+                    active={
+                      location.pathname === '/users'
+                    }
+                  >
+                    <FiUsers />
+                    {!isCollapse && <span className='mx-2'>{t('USERS', 'Users')}</span>}
+                  </ContextAwareToggle>
+                </MenuContainer>
+
+                <MenuContainer>
+                  <ContextAwareToggle eventKey='5'>
+                    <MdcGoogleAnalytics />
+                    {!isCollapse && <span className='mx-2'>{t('ANALYTICS', 'Analytics')}</span>}
+                  </ContextAwareToggle>
+                </MenuContainer>
+              </Accordion>
+            </div>
             <div className='d-flex flex-column'>
               <Button
                 className='d-flex align-items-center m-1'
@@ -274,13 +309,32 @@ export const SidebarMenu = (props) => {
           </UserInfo>
         </SidebarInnerContainer>
       </SidebarContainer>
-
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
+  )
+}
+
+const ContextAwareToggle = ({ children, eventKey, callback, page, handleGoToPage, active }) => {
+  const currentEventKey = useContext(AccordionContext)
+  const decoratedOnClick = useAccordionToggle(
+    eventKey,
+    () => callback && callback(eventKey),
+  )
+  const isCurrentEventKey = currentEventKey === eventKey
+
+  const handleButtonClick = () => {
+    if (page) {
+      handleGoToPage({ page: page })
+    }
+    decoratedOnClick()
+  }
+  return (
+    <Button
+      variant={ active
+        ? 'primary'
+        : isCurrentEventKey && 'light' }
+      onClick={handleButtonClick}
+    >
+      {children}
+    </Button>
   )
 }

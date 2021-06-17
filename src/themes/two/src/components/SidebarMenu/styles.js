@@ -23,7 +23,7 @@ export const SidebarContainer = styled.div`
     height: inherit;
     overflow: inherit;
     position: relative;
-    width: ${({ isCollapse }) => isCollapse ? '65px' : '230px'} !important;
+    width: ${({ isCollapse }) => isCollapse ? '65px' : '240px'} !important;
   }
 `
 
@@ -145,4 +145,35 @@ export const IconContent = styled.span`
 export const MenuClose = styled.div`
   position: relative;
   height: 60px;
+`
+
+export const MenuContainer = styled.div`
+  margin: 5px 0;
+  > button {
+    width: 100%;
+    text-align: initial;
+  }
+`
+
+export const MenuContent = styled.div`
+  padding: 5px 0;
+`
+
+export const SubMenu = styled.div`
+  cursor: pointer;
+  padding: 5px 0;
+  font-size: 14px;
+  color: ${props => props.theme.colors.headingColor};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  ${({ active }) => active && css`
+    color: ${props => props.theme.colors.primary};
+  `}
+  ${props => props.theme?.rtl ? css`
+    margin-right: 40px;
+  ` : css`
+    margin-left: 40px;
+  `}
 `
