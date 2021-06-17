@@ -83,6 +83,7 @@ export const SingleBusinessCardContainer = styled.div`
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   border-radius: 8px;
+  overflow: hidden;
 
   margin: 10px;
   width: calc(100% - 20px);
@@ -108,7 +109,6 @@ const BusinessHeaderStyled = styled.div`
   object-fit: cover;
   background-position: center;
   height: 75px;
-  border-radius: 8px;
 
   @media (min-width: 768px) {
     height: 100px;
@@ -167,8 +167,13 @@ export const BusinessLogo = (props) => {
 export const BusinessContent = styled.div`
   padding: 40px 10px 10px 10px;
   color: ${props => props.theme.colors.headingColor};
+  h1, p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   h1 {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 5px;
   }
 
@@ -182,4 +187,6 @@ export const BusinessContent = styled.div`
 export const BusinessActionContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
 `

@@ -31,12 +31,12 @@ export const Option = styled.div`
 
 export const PlaceHolder = styled.div`
   border-radius: 8px;
-  padding: 5px 8px;
+  padding: 5px;
   &:hover {
     background: #F8F9FA;
   }
   svg {
-    font-size: 24px;
+    font-size: 16px;
     display: block;
   }
 `
