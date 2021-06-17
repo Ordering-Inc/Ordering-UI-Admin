@@ -16,7 +16,6 @@ const UsersExportCSVUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [popoverOpen, setPopoverOpen] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
 
   const handleExportAll = () => {
     setPopoverOpen(false)
@@ -37,11 +36,6 @@ const UsersExportCSVUI = (props) => {
     document.addEventListener('click', closePopover)
     return () => document.removeEventListener('click', closePopover)
   }, [popoverOpen])
-
-  useEffect(() => {
-    if (!actionStatus?.result || actionStatus?.error) return
-    setModalOpen(true)
-  }, [actionStatus])
 
   return (
     <>

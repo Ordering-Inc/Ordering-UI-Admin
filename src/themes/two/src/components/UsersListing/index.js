@@ -100,7 +100,7 @@ const UsersListingUI = (props) => {
           handleOpenUserDetails={handleOpenUserDetails}
         />
       </UsersListingContainer>
-      
+
       {isOpenUserDetails && (
         <UserDetailsLateralBar
           open={isOpenUserDetails}

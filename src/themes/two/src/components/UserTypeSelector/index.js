@@ -31,13 +31,13 @@ export const UserTypeSelector = (props) => {
       content: <Option>{t('BUSINESS_OWNER', 'Business owner')}</Option>,
       disabled: !isPrimary && defaultUserType === 2
     },
-    { 
+    {
       value: 3,
       content: <Option>{t('USER', 'User')}</Option>,
       disabled: !isPrimary && defaultUserType === 3
     }
   ]
-  const placeholder=<Option>{t('TYPE', 'Type')}</Option>
+  const placeholder = <Option>{t('TYPE', 'Type')}</Option>
 
   const onUpdateUserType = (type) => {
     handleChangeUserType && handleChangeUserType({ id: userId, level: type })

@@ -23,10 +23,10 @@ export const BusinessActionSelector = (props) => {
     { value: 3, content: <Option isColor>{t('DELETE', 'Delete')}</Option> }
   ]
 
-  const placeholder=<PlaceHolder><FiMoreVertical /></PlaceHolder>
+  const placeholder = <PlaceHolder><FiMoreVertical /></PlaceHolder>
 
   const onActionClick = (type) => {
-    switch (type)  {
+    switch (type) {
       case 1:
         handleDuplicateBusiness()
         break

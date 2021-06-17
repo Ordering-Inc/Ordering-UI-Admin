@@ -17,7 +17,7 @@ export const OrderStatusSubFilter = (props) => {
   const statues = {
     pending: [
       { key: 0, value: 'Pending' },
-      { key: 13, value: 'Preorder' },
+      { key: 13, value: 'Preorder' }
     ],
     inProgress: [
       { key: 7, value: 'Accepted by business' },
@@ -48,9 +48,12 @@ export const OrderStatusSubFilter = (props) => {
   }
 
   const handleChange = (status) => {
+    let pendingStatuses = [...selectedSubOrderStatus?.pending]
+    let inProgressStatuses = [...selectedSubOrderStatus?.inProgress]
+    let completedStatuses = [...selectedSubOrderStatus?.completed]
+    let cancelledStatuses = [...selectedSubOrderStatus?.cancelled]
     switch (ordersStatusGroup) {
       case 'pending':
-        let pendingStatuses = [...selectedSubOrderStatus?.pending]
         if (pendingStatuses.includes(status)) {
           pendingStatuses = pendingStatuses.filter(_status => _status !== status)
         } else {
@@ -62,7 +65,6 @@ export const OrderStatusSubFilter = (props) => {
         })
         break
       case 'inProgress':
-        let inProgressStatuses = [...selectedSubOrderStatus?.inProgress]
         if (inProgressStatuses.includes(status)) {
           inProgressStatuses = inProgressStatuses.filter(_status => _status !== status)
         } else {
@@ -74,7 +76,6 @@ export const OrderStatusSubFilter = (props) => {
         })
         break
       case 'completed':
-        let completedStatuses = [...selectedSubOrderStatus?.completed]
         if (completedStatuses.includes(status)) {
           completedStatuses = completedStatuses.filter(_status => _status !== status)
         } else {
@@ -86,7 +87,6 @@ export const OrderStatusSubFilter = (props) => {
         })
         break
       case 'cancelled':
-        let cancelledStatuses = [...selectedSubOrderStatus?.cancelled]
         if (cancelledStatuses.includes(status)) {
           cancelledStatuses = cancelledStatuses.filter(_status => _status !== status)
         } else {

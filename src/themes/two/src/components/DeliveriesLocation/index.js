@@ -29,7 +29,6 @@ export const DeliveriesLocation = (props) => {
   const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
   const [mapZoom, setMapZoom] = useState(10)
   const [onlineDrivers, setOnlineDrivers] = useState([])
-  const [offlineDrivers, setOfflineDrivers] = useState([])
   const [mapLoaded, setMapLoaded] = useState(true)
 
   const [interActionOrderDriverLocation, setInterActionOrderDriverLocation] = useState(null)
@@ -43,11 +42,6 @@ export const DeliveriesLocation = (props) => {
       (driver) => driver.enabled && driver.available && !driver.busy
     )
     setOnlineDrivers(_onlineDrivers)
-
-    const _offlineDrivers = driversList.drivers.filter(
-      (driver) => !(driver.enabled && driver.available && !driver.busy)
-    )
-    setOfflineDrivers(_offlineDrivers)
 
     const bounds = new window.google.maps.LatLngBounds()
 
@@ -63,7 +57,6 @@ export const DeliveriesLocation = (props) => {
         bounds.extend(newPoint)
       }
     }
-
 
     if (interActionMapOrder !== null) {
       let marker, newPoint

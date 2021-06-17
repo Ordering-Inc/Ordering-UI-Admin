@@ -29,7 +29,7 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
-  ShowMap,
+  // ShowMap,
   WrapperSkeleton,
   Title,
   CloseButton
@@ -70,7 +70,7 @@ const AddressFormUI = (props) => {
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
-  const [toggleMap, setToggleMap] = useState(false)
+  // const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
@@ -200,7 +200,7 @@ const AddressFormUI = (props) => {
       return
     }
 
-    setToggleMap(false)
+    // setToggleMap(false)
     const arrayList = isEditing
       ? addressesList?.filter(address => address?.id !== addressState?.address?.id) || []
       : addressesList || []

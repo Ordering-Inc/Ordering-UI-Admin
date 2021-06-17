@@ -5,7 +5,6 @@ import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../AddressList'
 import { OrdersManager } from '../OrdersManager'
-import { useTheme } from 'styled-components'
 
 import {
   UserName,
@@ -17,14 +16,12 @@ import { UserMetaFields } from '../UserMetaFields'
 export const UserDetailsUI = (props) => {
   const {
     userState,
-    userId,
     setExtraOpen,
     handleSuccessUpdate,
     handleSuccessAddressesUpdate
   } = props
 
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
-  const theme = useTheme()
 
   useEffect(() => {
     setExtraOpen(false)

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -167,7 +167,7 @@ export const OrdersCards = (props) => {
                   </DriverSelectorWrapper>
                 </CardContent>
               </OrderCard>
-            ))}        
+            ))}
           </>
         )}
       </OrdersListContainer>

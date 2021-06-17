@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { OrdersTable } from '../OrdersTable'
 import { OrdersCards } from '../OrdersCards'
@@ -43,7 +43,7 @@ export const OrdersListing = (props) => {
     <>
       {ordersStatusGroup === groupStatus && (
         <>
-          {!orderList.loading  && orderList.orders.length === 0 ? (
+          {!orderList.loading && orderList.orders.length === 0 ? (
             <WrapperNoneOrders
               small={orderListView === 'small'}
             >

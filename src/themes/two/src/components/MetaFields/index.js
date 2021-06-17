@@ -3,7 +3,7 @@ import { MetaFields as MetaFieldsController, useLanguage } from 'ordering-compon
 import { Alert } from '../Confirm'
 import Skeleton from 'react-loading-skeleton'
 import BsTrash from '@meronex/icons/bs/BsTrash'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare';
+import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { Select } from '../../styles/Select/FirstSelect'
 import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'

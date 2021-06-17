@@ -19,7 +19,6 @@ export const UserFormDetailsUI = (props) => {
     onCancel,
     showField,
     cleanFormState,
-    onCloseProfile,
     isRequiredField,
     validationFields,
     handleChangeInput,

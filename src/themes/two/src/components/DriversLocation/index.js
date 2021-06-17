@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useConfig, useLanguage } from 'ordering-components-admin'
+import { useConfig } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 
@@ -15,7 +15,6 @@ export const DriversLocation = (props) => {
     selectedDriver
   } = props
 
-  const [, t] = useLanguage()
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
@@ -113,7 +112,7 @@ export const DriversLocation = (props) => {
               />
             ))}
         </GoogleMapReact>
-      )}      
+      )}
     </WrapperMap>
   )
 }
