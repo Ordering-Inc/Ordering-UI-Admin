@@ -33,7 +33,7 @@ const DriversManagerUI = (props) => {
 
   const handleChangeDriver = (driver) => {
     if (selectedDriver?.id === driver.id) {
-      setSelectedDriver(null)      
+      setSelectedDriver(null)
     } else {
       setSelectedDriver(driver)
     }
@@ -94,7 +94,7 @@ const DriversManagerUI = (props) => {
 export const DriversManager = (props) => {
   const DriversControlProps = {
     ...props,
-    UIComponent: DriversManagerUI   
+    UIComponent: DriversManagerUI
   }
   return (
     <>

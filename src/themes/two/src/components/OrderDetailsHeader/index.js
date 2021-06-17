@@ -24,7 +24,7 @@ export const OrderDetailsHeader = (props) => {
     <OrderDetailsHeaderContainer>
       <div>
         <h1>{t('ORDER_NO', 'Order No')}. {order?.id}</h1>
-        <p>                  
+        <p>
           <span>{order?.paymethod?.name}</span>
           <EnDotSingle />
           {order?.delivery_type === 1 && (

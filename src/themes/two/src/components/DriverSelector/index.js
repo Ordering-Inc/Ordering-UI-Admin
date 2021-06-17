@@ -60,7 +60,7 @@ const DriverSelectorUI = (props) => {
                 </OptionContent>
               </>
             ) : (
-                t('SELECT_DRIVER', 'Select driver')
+              t('SELECT_DRIVER', 'Select driver')
             )}
           </Option>
         ),

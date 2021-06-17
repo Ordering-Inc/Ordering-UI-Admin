@@ -23,11 +23,11 @@ export const UserTypeFilterUI = (props) => {
   return (
     <UserTypeFilterContainer>
       <InnerContainer>
-        <AutoScroll innerScroll scrollId={`users_subFilter`}>
+        <AutoScroll innerScroll scrollId='users_subFilter'>
           {userTypes && userTypes.length > 0 && userTypes.map(type => (
             <Button
               key={type.value}
-              color={currentTypesSelected.includes(type.value) ? 'primary': 'secundary'}
+              color={currentTypesSelected.includes(type.value) ? 'primary' : 'secundary'}
               onClick={() => handleChangeUserRole(type.value)}
             >
               {type.key}

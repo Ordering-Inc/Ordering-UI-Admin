@@ -9,11 +9,11 @@ import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
-toast.configure()
-
 import {
   ModalContainer
 } from './styles'
+
+toast.configure()
 
 const OrderNotificationUI = (props) => {
   const [configState] = useConfig()

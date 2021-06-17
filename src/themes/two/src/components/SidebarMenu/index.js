@@ -102,7 +102,7 @@ export const SidebarMenu = (props) => {
       id: 8,
       title: t('PERSONALIZATION', 'Personalization'),
       pageName: 'personalization'
-    },
+    }
   ]
 
   const handleGoToPage = (data) => {
@@ -111,7 +111,7 @@ export const SidebarMenu = (props) => {
   }
 
   useEffect(() => {
-    if (windowSize.width >=760 || !isCollapse) return
+    if (windowSize.width >= 760 || !isCollapse) return
     setIsCollapse(false)
   }, [windowSize.width])
 
@@ -124,7 +124,7 @@ export const SidebarMenu = (props) => {
   }, [menuOpen])
 
   return (
-    <>   
+    <>
       {windowSize.width < 760 && (
         <Header>
           {!menuOpen && (
@@ -133,7 +133,7 @@ export const SidebarMenu = (props) => {
             >
               <IosMenu />
             </IconContent>
-          )}              
+          )}
           <LogoWrap
             className='d-flex justify-content-center align-items-center'
             onClick={() => handleGoToPage({ page: 'home' })}
@@ -161,7 +161,7 @@ export const SidebarMenu = (props) => {
                 isCollapse={isCollapse}
               >
                 <MdcArrowLeft />
-              </CollapseButton>            
+              </CollapseButton>
               <LogoWrap
                 className='d-flex justify-content-center align-items-center'
                 onClick={() => handleGoToPage({ page: 'home' })}
@@ -212,7 +212,9 @@ export const SidebarMenu = (props) => {
                           key={item.id}
                           active={location.pathname.includes(item.pageName)}
                           onClick={() => handleGoToPage({ page: item.pageName })}
-                        >{item.title}</SubMenu>
+                        >
+                          {item.title}
+                        </SubMenu>
                       ))}
                     </MenuContent>
                   </Accordion.Collapse>
@@ -242,7 +244,9 @@ export const SidebarMenu = (props) => {
                           key={item.id}
                           active={location.pathname.includes(item.pageName)}
                           onClick={() => handleGoToPage({ page: item.pageName })}
-                        >{item.title}</SubMenu>
+                        >
+                          {item.title}
+                        </SubMenu>
                       ))}
                     </MenuContent>
                   </Accordion.Collapse>
@@ -317,7 +321,7 @@ const ContextAwareToggle = ({ children, eventKey, callback, page, handleGoToPage
   const currentEventKey = useContext(AccordionContext)
   const decoratedOnClick = useAccordionToggle(
     eventKey,
-    () => callback && callback(eventKey),
+    () => callback && callback(eventKey)
   )
   const isCurrentEventKey = currentEventKey === eventKey
 
@@ -329,9 +333,9 @@ const ContextAwareToggle = ({ children, eventKey, callback, page, handleGoToPage
   }
   return (
     <Button
-      variant={ active
+      variant={active
         ? 'primary'
-        : isCurrentEventKey && 'light' }
+        : isCurrentEventKey && 'light'}
       onClick={handleButtonClick}
     >
       {children}

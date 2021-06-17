@@ -43,14 +43,13 @@ export const ColumnAllowSettingPopover = (props) => {
     }
   }, [open])
 
-
   return (
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem
         ref={referenceElement}
         onClick={props.onClick}
       >
-        <BsLayoutThreeColumns  />
+        <BsLayoutThreeColumns />
       </HeaderItem>
       {open && (
         <PopoverBody ref={popperElement}>

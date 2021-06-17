@@ -20,7 +20,6 @@ import {
 
 const OrdersFilterGroupUI = (props) => {
   const {
-    open,
     handleCloseFilterModal,
     filterValues,
     singleDriverIds,

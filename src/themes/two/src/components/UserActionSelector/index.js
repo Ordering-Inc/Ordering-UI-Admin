@@ -18,10 +18,10 @@ export const UserActionSelector = (props) => {
 
   const actionTypes = [
     { value: 1, content: <Option>{t('EDIT', 'Edit')}</Option> },
-    { value: 2, content: <Option isColor>{t('DELETE', 'Delete')}</Option> },
+    { value: 2, content: <Option isColor>{t('DELETE', 'Delete')}</Option> }
   ]
 
-  const placeholder=<PlaceHolder><FiMoreVertical /></PlaceHolder>
+  const placeholder = <PlaceHolder><FiMoreVertical /></PlaceHolder>
 
   const onActionClick = (type) => {
     if (type === 1) {

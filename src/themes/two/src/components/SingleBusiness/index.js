@@ -57,7 +57,7 @@ const SingleBusinessUI = (props) => {
                       <InfoBlock>
                         <p className='bold'><Skeleton width={120} /></p>
                         <p><Skeleton width={80} /></p>
-                      </InfoBlock>                     
+                      </InfoBlock>
                     </BusinessGeneralInfo>
                   </td>
                 )}
@@ -68,7 +68,7 @@ const SingleBusinessUI = (props) => {
                         <InfoBlock>
                           <p className='bold'><Skeleton width={120} /></p>
                           <p><Skeleton width={80} /></p>
-                        </InfoBlock> 
+                        </InfoBlock>
                       )}
                     </td>
                     <td>
@@ -76,7 +76,7 @@ const SingleBusinessUI = (props) => {
                         <InfoBlock>
                           <p className='bold'><Skeleton width={120} /></p>
                           <p><Skeleton width={80} /></p>
-                        </InfoBlock> 
+                        </InfoBlock>
                       )}
                     </td>
                     <td>
@@ -84,7 +84,7 @@ const SingleBusinessUI = (props) => {
                         <InfoBlock>
                           <p className='bold'><Skeleton width={120} /></p>
                           <p><Skeleton width={80} /></p>
-                        </InfoBlock> 
+                        </InfoBlock>
                       )}
                     </td>
                   </>
@@ -111,7 +111,7 @@ const SingleBusinessUI = (props) => {
                       <InfoBlock>
                         <p className='bold'>{businessState?.business?.name}</p>
                         <p>{businessState?.business?.city?.name}</p>
-                      </InfoBlock>                     
+                      </InfoBlock>
                     </BusinessGeneralInfo>
                   </td>
                 )}

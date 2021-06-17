@@ -87,7 +87,7 @@ export const OrderContactInformation = (props) => {
             )}
             {order?.customer?.cellphone && (
               <ButtonLink
-                onClick={() => window.open(`tel:${order?.customer?.cellphone }`)}
+                onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}
               >
                 <HiOutlinePhone />
               </ButtonLink>
@@ -122,7 +122,7 @@ export const OrderContactInformation = (props) => {
                   )}
                   {order?.driver?.cellphone && (
                     <ButtonLink
-                      onClick={() => window.open(`tel:${order?.driver?.cellphone }`)}
+                      onClick={() => window.open(`tel:${order?.driver?.cellphone}`)}
                     >
                       <HiOutlinePhone />
                     </ButtonLink>

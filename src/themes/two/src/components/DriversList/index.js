@@ -24,7 +24,7 @@ export const DriversList = (props) => {
     handleChangeDriver,
     handleOpenDriverOrders
   } = props
-  
+
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -34,7 +34,7 @@ export const DriversList = (props) => {
     if (isInvalid) return
     handleChangeDriver(driver)
   }
-  
+
   return (
     <DriversListContainer>
       {loading ? (

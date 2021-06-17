@@ -3,7 +3,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessDetails } from '../BusinessDetails'
 
 import {
-  BarContainer  
+  BarContainer
 } from './styles'
 
 export const BusinessDetailsLateralBar = (props) => {

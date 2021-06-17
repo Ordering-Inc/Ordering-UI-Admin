@@ -6,6 +6,7 @@ import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BsLifePreserver from '@meronex/icons/bs/BsLifePreserver'
 import { Switch } from '../../styles/Switch'
 import { Button } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
 
 import {
   BusinessDetailsContainer,
@@ -31,6 +32,7 @@ const BusinessDetailsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
+  const theme = useTheme()
 
   const businessConfigs = [
     {

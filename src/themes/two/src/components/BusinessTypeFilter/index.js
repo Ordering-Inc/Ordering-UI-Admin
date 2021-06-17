@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 'ordering-components-admin'
-import { Tabs, Tab } from '../../styles/Tabs'
 import { AutoScroll } from '../AutoScroll'
 import { Button } from '../../styles/Buttons'
 import { TypeContainer, InnerContainer } from './styles'
@@ -28,7 +27,7 @@ const BusinessTypeFilterUI = (props) => {
               {[...Array(6)].map((_, i) => (
                 <Skeleton key={i} height={30} width={100} />
               ))}
-             </AutoScroll>
+            </AutoScroll>
           )}
           {!loading && !error && types && types.length > 0 && (
             <AutoScroll innerScroll scrollId='business_type'>
@@ -47,14 +46,6 @@ const BusinessTypeFilterUI = (props) => {
       </TypeContainer>
     </>
   )
-}
-
-const styles = {
-  wrapperSkeleton: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: 'row'
-  }
 }
 
 export const BusinessTypeFilter = (props) => {

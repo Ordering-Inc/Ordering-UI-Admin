@@ -17,7 +17,7 @@ import {
 } from './styles'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className } = props
+  const { placeholder, options, defaultValue, onChange, notAsync, noSelected } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
   )
@@ -149,4 +149,3 @@ export const Select = (props) => {
     </div>
   )
 }
-

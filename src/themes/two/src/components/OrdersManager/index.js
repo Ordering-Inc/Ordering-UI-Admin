@@ -92,7 +92,7 @@ const OrdersManagerUI = (props) => {
       setIsOpenOrderDetail(true)
     }
   }, [])
-  
+
   return (
     <>
       <OrdersListContainer

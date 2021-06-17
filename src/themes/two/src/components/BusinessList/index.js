@@ -47,7 +47,7 @@ export const BusinessList = (props) => {
     {
       value: 'deliveryTime',
       content: t('DELIVERY TIME', 'Delivery time')
-    }   
+    }
   ]
 
   const handleChangeAllowColumns = (type) => {
@@ -201,6 +201,7 @@ export const BusinessList = (props) => {
                 business={business}
                 handleSucessRemoveBusiness={handleSucessRemoveBusiness}
                 handleSucessAddBusiness={handleSucessAddBusiness}
+                handleOpenBusinessDetails={handleOpenBusinessDetails}
               />
             ))
           )}

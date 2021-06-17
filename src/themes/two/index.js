@@ -65,7 +65,6 @@ import { SearchBar } from './src/components/SearchBar'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SingleBusiness } from './src/components/SingleBusiness'
 import { SpinnerLoader } from './src/components/SpinnerLoader'
-import { SubMenu } from './src/components/SubMenu'
 import { UserActionSelector } from './src/components/UserActionSelector'
 import { UserActiveStateFilter } from './src/components/UserActiveStateFilter'
 import { UserDetails } from './src/components/UserDetails'
@@ -133,7 +132,6 @@ export {
   OrderBill,
   OrderContactInformation,
   OrderDelete,
-  OrderDelete,
   OrderDetailsHeader,
   OrderNotification,
   OrdersCards,
@@ -156,7 +154,6 @@ export {
   SidebarMenu,
   SingleBusiness,
   SpinnerLoader,
-  SubMenu,
   UserActionSelector,
   UserActiveStateFilter,
   UserDetails,

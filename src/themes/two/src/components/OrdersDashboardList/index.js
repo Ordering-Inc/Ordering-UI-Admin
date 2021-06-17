@@ -1,12 +1,11 @@
 import React from 'react'
-import { DashboardOrdersList as OrdersListController, useLanguage } from 'ordering-components-admin'
+import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
 import { OrdersListing } from '../OrdersListing'
 
 export const OrdersDashboardList = (props) => {
   const {
     selectedSubOrderStatus
   } = props
-  const [, t] = useLanguage()
 
   const OrdersCommonControlProps = {
     ...props,

@@ -102,7 +102,7 @@ export const UsersList = (props) => {
                     </td>
                     <td>
                       <UserTypeWrapper>
-                        <Skeleton width={100} style={{ marginBottom: '10px' }}/>
+                        <Skeleton width={100} style={{ marginBottom: '10px' }} />
                         <p><Skeleton width={100} /></p>
                       </UserTypeWrapper>
                     </td>

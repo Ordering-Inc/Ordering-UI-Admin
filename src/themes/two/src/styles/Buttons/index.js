@@ -5,7 +5,7 @@ export const Button = styled.button`
   background: #CCC;
   color: #FFF;
   border: 1px solid #CCC;
-  border-radius: ${({ borderRadius }) => borderRadius ? borderRadius : '30px'};
+  border-radius: ${({ borderRadius }) => !borderRadius ? '30px' : borderRadius};
   line-height: 30px;
   padding-left: 15px;
   padding-right: 15px;
