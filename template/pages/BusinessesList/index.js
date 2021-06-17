@@ -8,7 +8,7 @@ export const BusinessesList = (props) => {
   const businessesProps = {
     ...props,
     onBusinessRedirect: (businessId) => {
-      if (!userId) {
+      if (!businessId) {
         return events.emit('go_to_page', { page: 'businesses', replace: true })
       }
       return events.emit('go_to_page', { page: 'businesses', search: `?id=${businessId}` })

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { BusinessList } from '../BusinessList'
 import { DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import { BusinessListingHeader } from '../BusinessListingHeader'
@@ -13,6 +14,7 @@ import {
   WrapperView,
   ViewMethodButton
 } from './styles'
+import { BusinessDetailsLateralBar } from '../BusinessDetailsLateralBar'
 
 const BusinessessListingUI = (props) => {
   const {
@@ -25,51 +27,90 @@ const BusinessessListingUI = (props) => {
     loadMoreBusinesses,
     handleSucessRemoveBusiness,
     handleSucessAddBusiness,
-    onSearch
+    onSearch,
+    onBusinessRedirect
   } = props
 
+  const query = new URLSearchParams(useLocation().search)
+
   const [viewMethod, setViewMethod] = useState('list')
+  const [openBusinessDetails, setOpenBusinessDetails] = useState(false)
+  const [detailsBusiness, setDetailsBusiness] = useState(null)
+  const [detailsBusinessId, setDetailsBusinessId] = useState(null)
+
+  const handleBackRedirect = () => {
+    setOpenBusinessDetails(false)
+    onBusinessRedirect()
+  }
+
+  const handleOpenBusinessDetails = (business) => {
+    setDetailsBusiness(business)
+    setDetailsBusinessId(business.id)
+    setOpenBusinessDetails(true)
+    onBusinessRedirect(business.id)
+  }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id === null) setOpenBusinessDetails(false)
+    else {
+      setDetailsBusinessId(id)
+      onBusinessRedirect && onBusinessRedirect(id)
+      setOpenBusinessDetails(true)
+    }
+  }, [])
 
   return (
-    <BusinessListingContainer>
-      <BusinessListingHeader
-        searchValue={searchValue}
-        onSearch={onSearch}
-      />
-      <ViewContainer>
-        <BusinessActiveStateFilter
-          selectedBusinessActiveState={selectedBusinessActiveState}
-          handleChangeBusinessActiveState={handleChangeBusinessActiveState}
+    <>
+      <BusinessListingContainer>
+        <BusinessListingHeader
+          searchValue={searchValue}
+          onSearch={onSearch}
         />
-        <WrapperView>
-          <ViewMethodButton
-            active={viewMethod === 'card'}
-            onClick={() => setViewMethod('card')}
-          >
-            <BsGrid />
-          </ViewMethodButton>
-          <ViewMethodButton
-            active={viewMethod === 'list'}
-            onClick={() => setViewMethod('list')}
-          >
-            <BsViewList />
-          </ViewMethodButton>
-        </WrapperView>
-      </ViewContainer>
-      <BusinessTypeFilter
-        businessTypes={props.businessTypes}
-        defaultBusinessType={props.defaultBusinessType}
-        handleChangeBusinessType={handleChangeBusinessType}
-      />
-      <BusinessList
-        viewMethod={viewMethod}
-        businessList={businessList}
-        pagination={pagination}
-        loadMoreBusinesses={loadMoreBusinesses}
-        handleSucessRemoveBusiness={handleSucessRemoveBusiness}
-        handleSucessAddBusiness={handleSucessAddBusiness}
-      />
-    </BusinessListingContainer>
+        <ViewContainer>
+          <BusinessActiveStateFilter
+            selectedBusinessActiveState={selectedBusinessActiveState}
+            handleChangeBusinessActiveState={handleChangeBusinessActiveState}
+          />
+          <WrapperView>
+            <ViewMethodButton
+              active={viewMethod === 'card'}
+              onClick={() => setViewMethod('card')}
+            >
+              <BsGrid />
+            </ViewMethodButton>
+            <ViewMethodButton
+              active={viewMethod === 'list'}
+              onClick={() => setViewMethod('list')}
+            >
+              <BsViewList />
+            </ViewMethodButton>
+          </WrapperView>
+        </ViewContainer>
+        <BusinessTypeFilter
+          businessTypes={props.businessTypes}
+          defaultBusinessType={props.defaultBusinessType}
+          handleChangeBusinessType={handleChangeBusinessType}
+        />
+        <BusinessList
+          viewMethod={viewMethod}
+          businessList={businessList}
+          pagination={pagination}
+          loadMoreBusinesses={loadMoreBusinesses}
+          handleSucessRemoveBusiness={handleSucessRemoveBusiness}
+          handleSucessAddBusiness={handleSucessAddBusiness}
+          handleOpenBusinessDetails={handleOpenBusinessDetails}
+        />
+      </BusinessListingContainer>
+      {openBusinessDetails && (
+        <BusinessDetailsLateralBar
+          open={openBusinessDetails}
+          business={detailsBusiness}
+          businessId={detailsBusinessId}
+          onClose={() => handleBackRedirect()}
+        />
+      )}
+    </>
   )
 }
 

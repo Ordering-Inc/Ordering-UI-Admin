@@ -80,6 +80,9 @@ export const BusinessEnableWrapper = styled.div`
 `
 
 export const SingleBusinessCardContainer = styled.div`
+  ${({ isSkeleton }) => !isSkeleton && css`
+    cursor: pointer;
+  `}
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   border-radius: 8px;
@@ -192,4 +195,7 @@ export const BusinessActionContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+`
+
+export const WrapperBusinessActionSelector = styled.div`
 `

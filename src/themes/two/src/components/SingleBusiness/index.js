@@ -16,7 +16,8 @@ import {
   BusinessHeader,
   BusinessLogo,
   BusinessContent,
-  BusinessActionContainer
+  BusinessActionContainer,
+  WrapperBusinessActionSelector
 } from './styles'
 
 const SingleBusinessUI = (props) => {
@@ -27,12 +28,19 @@ const SingleBusinessUI = (props) => {
     businessState,
     handleChangeActiveBusiness,
     handleDuplicateBusiness,
-    handleDeleteBusiness
+    handleDeleteBusiness,
+    handleOpenBusinessDetails
   } = props
 
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const theme = useTheme()
+
+  const handleClickBusiness = (e) => {
+    const isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.business_actions')
+    if (isInvalid) return
+    handleOpenBusinessDetails(businessState?.business)
+  }
   return (
     <>
       {viewMethod === 'list' && (
@@ -90,7 +98,9 @@ const SingleBusinessUI = (props) => {
               </tr>
             </SingleListBusinessContainer>
           ) : (
-            <SingleListBusinessContainer>
+            <SingleListBusinessContainer
+              onClick={(e) => handleClickBusiness(e)}
+            >
               <tr>
                 {allowColumns?.business && (
                   <td className='business'>
@@ -143,12 +153,14 @@ const SingleBusinessUI = (props) => {
                   </BusinessEnableWrapper>
                 </td>
                 <td>
-                  <BusinessActionSelector
-                    business={businessState?.business}
-                    handleDuplicateBusiness={handleDuplicateBusiness}
-                    handleDeleteBusiness={handleDeleteBusiness}
-                    handleOpenBusinessDetails={() => console.log('open')}
-                  />
+                  <WrapperBusinessActionSelector className='business_actions'>
+                    <BusinessActionSelector
+                      business={businessState?.business}
+                      handleDuplicateBusiness={handleDuplicateBusiness}
+                      handleDeleteBusiness={handleDeleteBusiness}
+                      handleOpenBusinessDetails={handleOpenBusinessDetails}
+                    />
+                  </WrapperBusinessActionSelector>
                 </td>
               </tr>
             </SingleListBusinessContainer>
@@ -159,7 +171,7 @@ const SingleBusinessUI = (props) => {
       {viewMethod === 'card' && (
         <>
           {(businessState?.loading || isSkeleton) ? (
-            <SingleBusinessCardContainer>
+            <SingleBusinessCardContainer isSkeleton>
               <BusinessHeader isSkeleton>
                 <BusinessLogo>
                   <Skeleton width={45} height={45} />
@@ -177,7 +189,9 @@ const SingleBusinessUI = (props) => {
               </BusinessContent>
             </SingleBusinessCardContainer>
           ) : (
-            <SingleBusinessCardContainer>
+            <SingleBusinessCardContainer
+              onClick={(e) => handleClickBusiness(e)}
+            >
               <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
                 <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
               </BusinessHeader>
@@ -192,12 +206,14 @@ const SingleBusinessUI = (props) => {
                       onChange={handleChangeActiveBusiness}
                     />
                   </BusinessEnableWrapper>
-                  <BusinessActionSelector
-                    business={businessState?.business}
-                    handleDuplicateBusiness={handleDuplicateBusiness}
-                    handleDeleteBusiness={handleDeleteBusiness}
-                    handleOpenBusinessDetails={() => console.log('open')}
-                  />
+                  <WrapperBusinessActionSelector className='business_actions'>
+                    <BusinessActionSelector
+                      business={businessState?.business}
+                      handleDuplicateBusiness={handleDuplicateBusiness}
+                      handleDeleteBusiness={handleDeleteBusiness}
+                      handleOpenBusinessDetails={() => console.log('open')}
+                    />
+                  </WrapperBusinessActionSelector>
                 </BusinessActionContainer>
               </BusinessContent>
             </SingleBusinessCardContainer>
