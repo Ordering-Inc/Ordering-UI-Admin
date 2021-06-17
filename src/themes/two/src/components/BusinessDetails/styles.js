@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const BusinessDetailsContainer = styled.div`
-  padding: 10px;
+  padding: 20px;
   position: relative;
 `
 
@@ -120,3 +120,34 @@ export const BusinessLogo = (props) => {
     </BusinessLogoStyled>
   )
 }
+
+export const BusinessDetailsContent = styled.div`
+  margin-top: 60px;
+`
+
+export const BusinessDescription = styled.p`
+  color: ${props => props.theme.colors.headingColor};
+  margin: 25px 0;
+`
+
+export const BusinessConfigsContainer = styled.div`
+  border: 1px solid #E9ECEF;
+  border-radius: 8px;
+  margin-bottom: 50px;
+  > div:last-child {
+    border-bottom: none;
+  }
+`
+
+export const BusinessConfigItem = styled.div`
+  cursor: pointer;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  color: ${props => props.theme.colors.headingColor};
+  border-bottom: 1px solid #E9ECEF;
+  
+  svg {
+    font-size: 20px;
+  }
+`
