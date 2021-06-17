@@ -13,12 +13,15 @@ export const BusinessListTable = styled.table`
   width: calc(100% - 10px);
   min-width: 900px;
   color: ${props => props.theme.colors?.headingColor};
+  transition: all 0.3s;
 
   td, th {
     padding: 10px 0;
-    &:first-child {
-      width: 30%;
-    }
+  }
+
+  th.business,
+  td.business {
+    width: 30%;
   }
 
   thead {

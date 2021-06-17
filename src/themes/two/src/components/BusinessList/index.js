@@ -119,7 +119,7 @@ export const BusinessList = (props) => {
               <thead>
                 <tr>
                   {allowColumns?.business && (
-                    <th>{t('BUSINESS', 'Business')}</th>
+                    <th className='business'>{t('BUSINESS', 'Business')}</th>
                   )}
                   {(allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime) && (
                     <th colSpan={3}>{t('DETAILS', 'Details')}</th>
