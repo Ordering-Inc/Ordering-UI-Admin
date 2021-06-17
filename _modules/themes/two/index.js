@@ -405,12 +405,6 @@ Object.defineProperty(exports, "SpinnerLoader", {
     return _SpinnerLoader.SpinnerLoader;
   }
 });
-Object.defineProperty(exports, "SubMenu", {
-  enumerable: true,
-  get: function get() {
-    return _SubMenu.SubMenu;
-  }
-});
 Object.defineProperty(exports, "UserActionSelector", {
   enumerable: true,
   get: function get() {
@@ -701,8 +695,6 @@ var _SidebarMenu = require("./src/components/SidebarMenu");
 var _SingleBusiness = require("./src/components/SingleBusiness");
 
 var _SpinnerLoader = require("./src/components/SpinnerLoader");
-
-var _SubMenu = require("./src/components/SubMenu");
 
 var _UserActionSelector = require("./src/components/UserActionSelector");
 
