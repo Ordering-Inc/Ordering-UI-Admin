@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { BusinessDetails } from '../BusinessDetails'
 
 import {
-  BarContainer
+  BarContainer  
 } from './styles'
 
 export const BusinessDetailsLateralBar = (props) => {
@@ -54,7 +55,10 @@ export const BusinessDetailsLateralBar = (props) => {
   }, [extraOpen])
   return (
     <BarContainer id='business_details_bar'>
-      business details
+      <BusinessDetails
+        {...props}
+        actionSidebar={actionSidebar}
+      />
     </BarContainer>
   )
 }
