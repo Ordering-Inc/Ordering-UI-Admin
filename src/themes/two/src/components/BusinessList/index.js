@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { PaginationButton } from '../PaginationButton'
 
@@ -96,6 +96,20 @@ export const BusinessList = (props) => {
     setCurrentBusinessess(_currentBusinessess)
   }, [businessList, currentPage, pagination])
 
+  const handleScroll = useCallback(() => {
+    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + 10
+    const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
+    const hasMore = !(pagination.to === pagination.total)
+    if (badScrollPosition || businessList.loading || !hasMore) return
+    loadMoreBusinesses()
+  }, [businessList, pagination])
+
+  useEffect(() => {
+    if (viewMethod !== 'card') return
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll, viewMethod])
+
   return (
     <>
       {viewMethod === 'list' && (
@@ -128,6 +142,7 @@ export const BusinessList = (props) => {
                   <SingleBusiness
                     key={i}
                     isSkeleton
+                    viewMethod={viewMethod}
                     allowColumns={allowColumns}
                   />
                 ))
@@ -166,15 +181,16 @@ export const BusinessList = (props) => {
       {viewMethod === 'card' && (
         <BusinessCardContainer>
           {businessList.loading ? (
-            [...Array(10).keys()].map(i => (
+            [...Array(30).keys()].map(i => (
               <SingleBusiness
                 key={i}
                 isSkeleton
+                viewMethod={viewMethod}
                 allowColumns={allowColumns}
               />
             ))
           ) : (
-            currentBusinessess.map(business => (
+            businessList.businesses.map(business => (
               <SingleBusiness
                 key={business.id}
                 viewMethod={viewMethod}

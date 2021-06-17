@@ -152,7 +152,21 @@ const SingleBusinessUI = (props) => {
         <>
           {(businessState?.loading || isSkeleton) ? (
             <SingleBusinessCardContainer>
-              <Skeleton />
+              <BusinessHeader isSkeleton>
+                <BusinessLogo>
+                  <Skeleton width={45} height={45} />
+                </BusinessLogo>
+              </BusinessHeader>
+              <BusinessContent>
+                <h1><Skeleton width={80} /></h1>
+                <p><Skeleton width={80} /></p>
+                <BusinessActionContainer>
+                  <BusinessEnableWrapper className='business_enable_control'>
+                    <Skeleton width={100} />
+                  </BusinessEnableWrapper>
+                  <Skeleton width={30} />
+                </BusinessActionContainer>
+              </BusinessContent>
             </SingleBusinessCardContainer>
           ) : (
             <SingleBusinessCardContainer>

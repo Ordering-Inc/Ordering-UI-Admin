@@ -89,13 +89,17 @@ export const SingleBusinessCardContainer = styled.div`
   width: calc(100% - 20px);
 
   @media (min-width: 768px) {
+    width: calc(50% - 20px);
+  }
+
+  @media (min-width: 992px) {
     width: calc(33.33% - 20px);
   }
 
   @media (min-width: 1024px) {
     width: calc(25% - 20px);
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1250px) {
     width: calc(20% - 20px);
   }
 `
@@ -109,6 +113,9 @@ const BusinessHeaderStyled = styled.div`
   object-fit: cover;
   background-position: center;
   height: 75px;
+  ${({ isSkeleton }) => isSkeleton && css`
+    background: #E9ECEF;
+  `}
 
   @media (min-width: 768px) {
     height: 100px;
@@ -117,11 +124,7 @@ const BusinessHeaderStyled = styled.div`
 
 export const BusinessHeader = (props) => {
   const style = {}
-  if (props.bgimage && !props.isClosed) {
-    style.backgroundImage = `url(${props.bgimage})`
-  } else {
-    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
-  }
+  style.backgroundImage = `url(${props.bgimage})`
 
   return (
     <BusinessHeaderStyled {...props} style={style}>
