@@ -1,143 +1,107 @@
-import React from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
-import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
-import BsLifePreserver from '@meronex/icons/bs/BsLifePreserver'
-import { Switch } from '../../styles/Switch'
+import React, { useState, useEffect } from 'react'
+import { BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { BusinessSummary } from '../BusinessSummary'
+import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
-import { useTheme } from 'styled-components'
+import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { BusinessSupport } from '../BusinessSupport'
 
 import {
-  BusinessDetailsContainer,
-  DetailsHeader,
-  BusinessName,
-  LeftHeader,
-  RightHeader,
-  SupportButton,
-  CloseButton,
-  BusinessHeader,
-  BusinessLogo,
-  BusinessDetailsContent,
-  BusinessDescription,
-  BusinessConfigsContainer,
-  BusinessConfigItem
+  BarContainer,
+  BusinessDetailsExtraContent
 } from './styles'
 
-const BusinessDetailsUI = (props) => {
+export const BusinessDetailsUI = (props) => {
   const {
+    open,
     businessState,
-    actionSidebar,
     handleChangeActiveBusiness
   } = props
-  const [, t] = useLanguage()
-  const [{ optimizeImage }] = useUtils()
-  const theme = useTheme()
+  const { width } = useWindowSize()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [extraOpen, setExtraOpen] = useState(false)
 
-  const businessConfigs = [
-    {
-      id: 1,
-      value: t('INFORMATION', 'Information')
-    },
-    {
-      id: 2,
-      value: t('Schedule')
-    },
-    {
-      id: 3,
-      value: t('Menu')
-    },
-    {
-      id: 4,
-      value: t('Delivery zones')
-    },
-    {
-      id: 5,
-      value: t('Payment methods')
-    },
-    {
-      id: 6,
-      value: t('Custom fields')
-    },
-    {
-      id: 7,
-      value: t('Personalitazion')
+  const [itemSelected, setItemSelected] = useState(null)
+  const actionSidebar = (value) => {
+    setIsMenuOpen(value)
+
+    if (!value) {
+      props.onClose()
     }
-  ]
+  }
 
+  const toggleMainContent = () => {
+    if (isMenuOpen) {
+      if (width <= 500) {
+        document.getElementById('business_details_bar').style.width = '100vw'
+      } else {
+        if (extraOpen && width >= 1000) {
+          document.getElementById('business_details_bar').style.width = '1000px'
+        } else {
+          document.getElementById('business_details_bar').style.width = '500px'
+        }
+      }
+    }
+  }
+
+  const handleItemSelected = (item) => {
+    setItemSelected(item)
+    setExtraOpen(true)
+  }
+
+  useEffect(() => {
+    toggleMainContent()
+  }, [width])
+
+  useEffect(() => {
+    if (!open) return
+    actionSidebar(true)
+  }, [open])
+
+  useEffect(() => {
+    if (width < 1000) return
+    if (extraOpen) {
+      document.getElementById('business_details_bar').style.width = '1000px'
+    } else {
+      toggleMainContent()
+    }
+  }, [extraOpen])
   return (
-    <BusinessDetailsContainer>
-      <DetailsHeader>
-        <LeftHeader>
-          {businessState?.business?.name ? (
-            <BusinessName>{businessState?.business?.name}</BusinessName>
+    <BarContainer id='business_details_bar'>
+      <BusinessSummary
+        businessState={businessState}
+        handleChangeActiveBusiness={handleChangeActiveBusiness}
+        actionSidebar={actionSidebar}
+        handleItemSelected={handleItemSelected}
+      />
+      {extraOpen && (
+        <>
+          {width >= 1000 ? (
+            <>
+              <BusinessDetailsExtraContent>
+                <Button
+                  borderRadius='5px'
+                  color='secundary'
+                  onClick={() => setExtraOpen(false)}
+                >
+                  <MdcClose />
+                </Button>
+                {itemSelected === 'support' && (
+                  <BusinessSupport
+                    businessState={businessState}
+                  />
+                )}
+              </BusinessDetailsExtraContent>
+            </>
           ) : (
-            <BusinessName>
-              <Skeleton width={100} />
-            </BusinessName>
+            <Modal>
+              modal
+            </Modal>
           )}
-          {businessState?.business?.enabled ? (
-            <Switch
-              defaultChecked={businessState?.business?.enabled}
-              onChange={handleChangeActiveBusiness}
-            />
-          ) : (
-            <Skeleton width={50} />
-          )}
-        </LeftHeader>
-        <RightHeader>
-          <SupportButton>
-            <BsLifePreserver />
-          </SupportButton>
-          <CloseButton
-            onClick={() => actionSidebar(false)}
-          >
-            <MdcClose />
-          </CloseButton>
-        </RightHeader>
-      </DetailsHeader>
-      {businessState?.loading ? (
-        <BusinessHeader isSkeleton>
-          <BusinessLogo>
-            <Skeleton width={60} height={60} />
-          </BusinessLogo>
-        </BusinessHeader>
-      ) : (
-        <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
-          <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-        </BusinessHeader>
+        </>
       )}
-
-      <BusinessDetailsContent>
-        <Button
-          color='lightPrimary'
-          borderRadius='5px'
-        >
-          {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
-        </Button>
-        <BusinessDescription>
-          {businessState?.business?.loading ? (
-            <Skeleton height={50} />
-          ) : (
-            businessState?.business?.description
-          )}
-        </BusinessDescription>
-        <BusinessConfigsContainer>
-          {businessConfigs.map(config => (
-            <BusinessConfigItem key={config.id}>
-              <span>{config.value}</span>
-              <BsChevronRight />
-            </BusinessConfigItem>
-          ))}
-        </BusinessConfigsContainer>
-        <Button
-          color='secundary'
-          borderRadius='5px'
-        >
-          {t('EDIT', 'Edit')}
-        </Button>
-      </BusinessDetailsContent>
-    </BusinessDetailsContainer>
+    </BarContainer>
   )
 }
 

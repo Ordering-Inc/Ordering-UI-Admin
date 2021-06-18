@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -24,7 +24,7 @@ import {
   StatusBarContainer,
   StatusBar,
   AdvancedLogistic,
-  OrderProducts,
+  OrderProducts
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -34,13 +34,7 @@ const OrderDetailsUI = (props) => {
     driversList,
     handleBackRedirect,
     handleUpdateOrderStatus,
-    messageDashboardView,
-    handleMessageOrderDetail,
-    messageType,
-    handleOpenMessage,
     handleUpdateOrderForUnreadCount,
-    handleOpenOrderDetail,
-    actionStatus,
     messages
   } = props
   const [, t] = useLanguage()
@@ -50,7 +44,6 @@ const OrderDetailsUI = (props) => {
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
 
-  const orderDetail = useRef(null)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
@@ -212,12 +205,12 @@ const OrderDetailsUI = (props) => {
     >
       {loading && (
         <SkeletonWrapper>
-          <Skeleton height={75} count={3} style={{ marginBottom: '10px'}} />
-          <Skeleton height={200} style={{ marginBottom: '10px'}} />
-          <Skeleton height={30} style={{ marginBottom: '10px'}}  />
-          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
-          <Skeleton height={200} style={{ marginBottom: '10px'}} />
-          <Skeleton height={50} style={{ marginBottom: '10px'}}  />
+          <Skeleton height={75} count={3} style={{ marginBottom: '10px' }} />
+          <Skeleton height={200} style={{ marginBottom: '10px' }} />
+          <Skeleton height={30} style={{ marginBottom: '10px' }} />
+          <Skeleton height={50} style={{ marginBottom: '10px' }} />
+          <Skeleton height={200} style={{ marginBottom: '10px' }} />
+          <Skeleton height={50} style={{ marginBottom: '10px' }} />
         </SkeletonWrapper>
       )}
       {order && Object.keys(order).length > 0 && !loading && (

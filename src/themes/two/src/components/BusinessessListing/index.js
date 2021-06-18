@@ -14,7 +14,7 @@ import {
   WrapperView,
   ViewMethodButton
 } from './styles'
-import { BusinessDetailsLateralBar } from '../BusinessDetailsLateralBar'
+import { BusinessDetails } from '../BusinessDetails'
 
 const BusinessessListingUI = (props) => {
   const {
@@ -27,6 +27,7 @@ const BusinessessListingUI = (props) => {
     loadMoreBusinesses,
     handleSucessRemoveBusiness,
     handleSucessAddBusiness,
+    handleSucessUpdateBusiness,
     onSearch,
     onBusinessRedirect
   } = props
@@ -99,14 +100,18 @@ const BusinessessListingUI = (props) => {
           loadMoreBusinesses={loadMoreBusinesses}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessAddBusiness={handleSucessAddBusiness}
+          handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleOpenBusinessDetails={handleOpenBusinessDetails}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (
-        <BusinessDetailsLateralBar
+        <BusinessDetails
           open={openBusinessDetails}
           business={detailsBusiness}
           businessId={detailsBusinessId}
+          handleSucessAddBusiness={handleSucessAddBusiness}
+          handleSucessRemoveBusiness={handleSucessRemoveBusiness}
+          handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           onClose={() => handleBackRedirect()}
         />
       )}
