@@ -313,7 +313,7 @@ const MetaFieldsUI = (props) => {
   )
 }
 
-export const MetaFields = (props) => {
+export const OrderMetaFields = (props) => {
   const MetaFieldsProps = {
     ...props,
     asDashboard: true,

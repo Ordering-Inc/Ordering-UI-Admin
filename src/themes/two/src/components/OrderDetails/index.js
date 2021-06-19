@@ -5,7 +5,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { Messages } from '../Messages'
-import { MetaFields } from '../MetaFields'
+import { OrderMetaFields } from '../OrderMetaFields'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { OrderDetailsHeader } from '../OrderDetailsHeader'
@@ -313,7 +313,7 @@ const OrderDetailsUI = (props) => {
               )}
 
               {openMetaFields && (
-                <MetaFields
+                <OrderMetaFields
                   orderId={order?.id}
                 />
               )}
@@ -364,7 +364,7 @@ const OrderDetailsUI = (props) => {
                 open={openMetaFields}
                 onClose={() => setOpenMetaFields(false)}
               >
-                <MetaFields
+                <OrderMetaFields
                   orderId={order?.id}
                 />
               </Modal>
