@@ -7,6 +7,8 @@ import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
+import { BusinessDetails } from '../BusinessDetails'
+import { AddBusinessSidebar } from '../AddBusinessSidebar'
 
 import {
   BusinessListingContainer,
@@ -14,7 +16,6 @@ import {
   WrapperView,
   ViewMethodButton
 } from './styles'
-import { BusinessDetails } from '../BusinessDetails'
 
 const BusinessessListingUI = (props) => {
   const {
@@ -68,7 +69,7 @@ const BusinessessListingUI = (props) => {
         <BusinessListingHeader
           searchValue={searchValue}
           onSearch={onSearch}
-          setOpenAddBusiness={setOpenBusinessDetails}
+          setOpenAddBusiness={setOpenAddBusiness}
         />
         <ViewContainer>
           <BusinessActiveStateFilter
@@ -115,6 +116,13 @@ const BusinessessListingUI = (props) => {
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           onClose={() => handleBackRedirect()}
+        />
+      )}
+      {openAddBusiness && (
+        <AddBusinessSidebar
+          open={openAddBusiness}
+          handleSucessAddBusiness={handleSucessAddBusiness}
+          onClose={() => setOpenAddBusiness(false)}
         />
       )}
     </>
