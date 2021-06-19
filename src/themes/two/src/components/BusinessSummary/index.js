@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
@@ -7,6 +7,7 @@ import BsLifePreserver from '@meronex/icons/bs/BsLifePreserver'
 import { Switch } from '../../styles/Switch'
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
+import { BusinessFormDetails } from '../BusinessFormDetails'
 
 import {
   BusinessDetailsContainer,
@@ -34,6 +35,7 @@ export const BusinessSummary = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
+  const [isEdit, setIsEdit] = useState(false)
 
   const businessConfigs = [
     {
@@ -67,79 +69,92 @@ export const BusinessSummary = (props) => {
   ]
 
   return (
-    <BusinessDetailsContainer>
-      <DetailsHeader>
-        <LeftHeader>
-          {businessState?.business?.name ? (
-            <BusinessName>{businessState?.business?.name}</BusinessName>
-          ) : (
-            <BusinessName>
-              <Skeleton width={100} />
-            </BusinessName>
-          )}
-          {businessState?.business?.enabled ? (
-            <Switch
-              defaultChecked={businessState?.business?.enabled}
-              onChange={handleChangeActiveBusiness}
-            />
-          ) : (
-            <Skeleton width={50} />
-          )}
-        </LeftHeader>
-        <RightHeader>
-          <SupportButton
-            onClick={() => handleItemSelected('support')}
-          >
-            <BsLifePreserver />
-          </SupportButton>
-          <CloseButton
-            onClick={() => actionSidebar(false)}
-          >
-            <MdcClose />
-          </CloseButton>
-        </RightHeader>
-      </DetailsHeader>
-      {businessState?.loading ? (
-        <BusinessHeader isSkeleton>
-          <BusinessLogo>
-            <Skeleton width={60} height={60} />
-          </BusinessLogo>
-        </BusinessHeader>
-      ) : (
-        <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
-          <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-        </BusinessHeader>
-      )}
+    <>
+      <BusinessDetailsContainer>
+        <DetailsHeader>
+          <LeftHeader>
+            {businessState?.business?.name ? (
+              <BusinessName>{businessState?.business?.name}</BusinessName>
+            ) : (
+              <BusinessName>
+                <Skeleton width={100} />
+              </BusinessName>
+            )}
+            {businessState?.business?.enabled ? (
+              <Switch
+                defaultChecked={businessState?.business?.enabled}
+                onChange={handleChangeActiveBusiness}
+              />
+            ) : (
+              <Skeleton width={50} />
+            )}
+          </LeftHeader>
+          <RightHeader>
+            <SupportButton
+              onClick={() => handleItemSelected('support')}
+            >
+              <BsLifePreserver />
+            </SupportButton>
+            <CloseButton
+              onClick={() => actionSidebar(false)}
+            >
+              <MdcClose />
+            </CloseButton>
+          </RightHeader>
+        </DetailsHeader>
+        {!isEdit ? (
+          <>
+            {businessState?.loading ? (
+              <BusinessHeader isSkeleton>
+                <BusinessLogo>
+                  <Skeleton width={60} height={60} />
+                </BusinessLogo>
+              </BusinessHeader>
+            ) : (
+              <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
+                <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+              </BusinessHeader>
+            )}
 
-      <BusinessDetailsContent>
-        <Button
-          color='lightPrimary'
-          borderRadius='5px'
-        >
-          {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
-        </Button>
-        <BusinessDescription>
-          {businessState?.business?.loading ? (
-            <Skeleton height={50} />
-          ) : (
-            businessState?.business?.description
-          )}
-        </BusinessDescription>
-        <BusinessConfigsContainer>
-          {businessConfigs.map(config => (
-            <BusinessConfigItem key={config.id}>
-              <span>{config.value}</span>
-              <BsChevronRight />
-            </BusinessConfigItem>
-          ))}
-        </BusinessConfigsContainer>
-        <Button
-          color='secundary'
-          borderRadius='5px'
-        >
-          {t('EDIT', 'Edit')}
-        </Button>
-      </BusinessDetailsContent>
-    </BusinessDetailsContainer>
+            <BusinessDetailsContent>
+              <Button
+                color='lightPrimary'
+                borderRadius='5px'
+              >
+                {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
+              </Button>
+              <BusinessDescription>
+                {businessState?.business?.loading ? (
+                  <Skeleton height={50} />
+                ) : (
+                  businessState?.business?.description
+                )}
+              </BusinessDescription>
+              <BusinessConfigsContainer>
+                {businessConfigs.map(config => (
+                  <BusinessConfigItem key={config.id}>
+                    <span>{config.value}</span>
+                    <BsChevronRight />
+                  </BusinessConfigItem>
+                ))}
+              </BusinessConfigsContainer>
+              <Button
+                color='secundary'
+                borderRadius='5px'
+                disabled={businessState.loading}
+                onClick={() => setIsEdit(true)}
+              >
+                {t('EDIT', 'Edit')}
+              </Button>
+            </BusinessDetailsContent>
+          </>
+        ) : (
+          <BusinessFormDetails
+            business={businessState.business}
+            onCancel={() => setIsEdit(false)}
+          />
+        )}
+      </BusinessDetailsContainer>
+    </>
   )
 }
