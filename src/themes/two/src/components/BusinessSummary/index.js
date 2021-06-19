@@ -74,20 +74,22 @@ export const BusinessSummary = (props) => {
       <BusinessDetailsContainer>
         <DetailsHeader>
           <LeftHeader>
-            {businessState?.business?.name ? (
-              <BusinessName>{businessState?.business?.name}</BusinessName>
-            ) : (
+            {businessState?.loading ? (
               <BusinessName>
                 <Skeleton width={100} />
               </BusinessName>
+            ) : (
+              <BusinessName>
+                {businessState?.business?.name}
+              </BusinessName>
             )}
-            {businessState?.business?.enabled ? (
+            {businessState?.loading ? (
+              <Skeleton width={50} />
+            ) : (
               <Switch
                 defaultChecked={businessState?.business?.enabled}
                 onChange={handleChangeActiveBusiness}
               />
-            ) : (
-              <Skeleton width={50} />
             )}
           </LeftHeader>
           <RightHeader>

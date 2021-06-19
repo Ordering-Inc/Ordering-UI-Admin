@@ -148,7 +148,7 @@ const BusinessFormDetailsUI = (props) => {
           <label>{t('BUSINESS_NAME', 'Business name')}</label>
           <Input
             name='name'
-            placeholder={t('Business name')}
+            placeholder={t('Name', 'name')}
             defaultValue={
               formState?.result?.result
                 ? formState?.result?.result?.name
@@ -167,7 +167,7 @@ const BusinessFormDetailsUI = (props) => {
           <TextArea
             rows={4}
             name='description'
-            placeholder={t('Business description')}
+            placeholder={t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description')}
             defaultValue={
               formState?.result?.result
                 ? formState?.result?.result?.description

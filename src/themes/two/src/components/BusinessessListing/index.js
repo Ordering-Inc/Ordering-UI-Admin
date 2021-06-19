@@ -38,6 +38,7 @@ const BusinessessListingUI = (props) => {
   const [openBusinessDetails, setOpenBusinessDetails] = useState(false)
   const [detailsBusiness, setDetailsBusiness] = useState(null)
   const [detailsBusinessId, setDetailsBusinessId] = useState(null)
+  const [openAddBusiness, setOpenAddBusiness] = useState(false)
 
   const handleBackRedirect = () => {
     setOpenBusinessDetails(false)
@@ -67,6 +68,7 @@ const BusinessessListingUI = (props) => {
         <BusinessListingHeader
           searchValue={searchValue}
           onSearch={onSearch}
+          setOpenAddBusiness={setOpenBusinessDetails}
         />
         <ViewContainer>
           <BusinessActiveStateFilter

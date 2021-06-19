@@ -97,9 +97,17 @@ export const BusinessDetailsUI = (props) => {
               </BusinessDetailsExtraContent>
             </>
           ) : (
-            <Modal>
-              modal
-            </Modal>
+            <>
+              {itemSelected === 'support' && (
+                <Modal
+                  open={itemSelected === 'support'}
+                >
+                  <BusinessSupport
+                    businessState={businessState}
+                  />
+                </Modal>
+              )}
+            </>
           )}
         </>
       )}

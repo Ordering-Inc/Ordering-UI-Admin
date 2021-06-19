@@ -1,14 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  > h1 {
-    font-size: 24px;
-    margin: 0px;
-    font-weight: 600;
-    color: ${props => props.theme.colors.headingColor};
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    > h1 {
+      font-size: 24px;
+      margin: 0px;
+      font-weight: 600;
+      color: ${props => props.theme.colors.headingColor};
+    }
   }
 
   input {
@@ -21,4 +25,18 @@ export const HeaderContainer = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+`
+
+export const AddButton = styled.span`
+  cursor: pointer;
+  svg {
+    font-size: 24px;
+    color: ${props => props.theme.colors.primary};
+  }
+
+  ${props => props.theme.rtl ? css`
+    margin-right: 10px;
+  ` : css`
+    margin-left: 10px;
+  `}
 `
