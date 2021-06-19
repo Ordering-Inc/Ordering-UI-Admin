@@ -104,14 +104,14 @@ const BusinessFormDetailsUI = (props) => {
                   : formState?.changes?.header &&
                     <img src={formState?.changes?.header} alt='header image' loading='lazy' />
                 )}
+              <UploadImageIconContainer>
+                <UploadImageIcon>
+                  <BiImage />
+                  <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
+                </UploadImageIcon>
+              </UploadImageIconContainer>
             </DragAndDrop>
           </ExamineClick>
-          <UploadImageIconContainer>
-            <UploadImageIcon>
-              <BiImage />
-              <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
-            </UploadImageIcon>
-          </UploadImageIconContainer>
         </HeaderImage>
 
         <LogoImage
@@ -136,13 +136,13 @@ const BusinessFormDetailsUI = (props) => {
                   : formState?.changes?.logo &&
                     <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
                 )}
+              <UploadImageIconContainer small>
+                <UploadImageIcon small>
+                  <BiImage />
+                </UploadImageIcon>
+              </UploadImageIconContainer>
             </DragAndDrop>
           </ExamineClick>
-          <UploadImageIconContainer small>
-            <UploadImageIcon small>
-              <BiImage />
-            </UploadImageIcon>
-          </UploadImageIconContainer>
         </LogoImage>
         <InputWrapper>
           <label>{t('BUSINESS_NAME', 'Business name')}</label>

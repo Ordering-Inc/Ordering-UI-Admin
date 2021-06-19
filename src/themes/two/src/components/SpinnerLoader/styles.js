@@ -30,6 +30,7 @@ export const Content = styled.h1`
   padding-bottom: 50px;
   font-size: 24px;
   text-align: center;
+  color: ${props => props.theme.colors.headingColor};
 
   @media (min-width: 768px) {
     font-size: 32px;
