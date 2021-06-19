@@ -30,7 +30,8 @@ export const BusinessSummary = (props) => {
     businessState,
     actionSidebar,
     handleChangeActiveBusiness,
-    handleItemSelected
+    handleItemSelected,
+    handleSucessUpdateBusiness
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -152,6 +153,7 @@ export const BusinessSummary = (props) => {
           <BusinessFormDetails
             business={businessState.business}
             onCancel={() => setIsEdit(false)}
+            handleSuccessUpdate={handleSucessUpdateBusiness}
           />
         )}
       </BusinessDetailsContainer>

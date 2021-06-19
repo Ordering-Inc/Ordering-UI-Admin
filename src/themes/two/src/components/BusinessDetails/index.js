@@ -16,7 +16,8 @@ export const BusinessDetailsUI = (props) => {
   const {
     open,
     businessState,
-    handleChangeActiveBusiness
+    handleChangeActiveBusiness,
+    handleSucessUpdateBusiness
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -74,6 +75,7 @@ export const BusinessDetailsUI = (props) => {
         handleChangeActiveBusiness={handleChangeActiveBusiness}
         actionSidebar={actionSidebar}
         handleItemSelected={handleItemSelected}
+        handleSucessUpdateBusiness={handleSucessUpdateBusiness}
       />
       {extraOpen && (
         <>
