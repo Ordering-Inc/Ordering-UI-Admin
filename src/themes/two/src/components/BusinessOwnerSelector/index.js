@@ -7,6 +7,7 @@ import { Option } from './styles'
 const BusinessOwnerSelectorUI = (props) => {
   const {
     usersList,
+    selectedOwnerIds,
     handleSelectBusinessOwner
   } = props
 
@@ -29,11 +30,12 @@ const BusinessOwnerSelectorUI = (props) => {
           <Option>
             {user.id}. {user?.name} {user?.lastname}
           </Option>
-        )
+        ),
+        showDisable: selectedOwnerIds.includes(user.id)
       }
     })
     setUsersListOptions(_usersListOptions)
-  }, [usersList])
+  }, [usersList, selectedOwnerIds])
   return (
     <Select
       options={usersListOptions}
