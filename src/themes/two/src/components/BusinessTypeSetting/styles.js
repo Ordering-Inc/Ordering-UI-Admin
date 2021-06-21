@@ -8,7 +8,11 @@ export const BusinessType = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #E9ECEF;
-  padding: 15px 0;
+  padding: 15px;
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
 
   svg {
     color: ${props => props.theme.colors.primary};

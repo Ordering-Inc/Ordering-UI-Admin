@@ -52,6 +52,7 @@ export const BusinessTypeSetting = (props) => {
         businessType.id && (
           <BusinessType
             key={businessType.id}
+            disabled={formState?.loading}
             onClick={() => handleSelectBusinessTypes(businessType.id)}
           >
             {selectedBusinessTypes.includes(businessType.id) ? (
