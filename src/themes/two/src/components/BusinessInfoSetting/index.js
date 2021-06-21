@@ -3,6 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
 import { BusinessOwnerSetting } from '../BusinessOwnerSetting'
 import { BusinessTypeSetting } from '../BusinessTypeSetting'
+import { BusinessLocationSetting } from '../BusinessLocationSetting'
 import {
   InfoConatiner
 } from './styles'
@@ -40,6 +41,11 @@ export const BusinessInfoSetting = (props) => {
           formState={formState}
           setFormState={setFormState}
           handleUpdateBusinessClick={handleUpdateBusinessClick}
+        />
+      )}
+      {selectedInfoItem === 'location' && (
+        <BusinessLocationSetting
+          business={business}
         />
       )}
     </InfoConatiner>
