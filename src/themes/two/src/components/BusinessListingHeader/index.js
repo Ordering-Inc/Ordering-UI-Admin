@@ -12,7 +12,7 @@ export const BusinessListingHeader = (props) => {
   const {
     searchValue,
     onSearch,
-    setOpenAddBusiness
+    handleOpenAddBusiness
   } = props
   const [, t] = useLanguage()
   return (
@@ -20,7 +20,7 @@ export const BusinessListingHeader = (props) => {
       <div>
         <h1>{t('STORES_LIST', 'Stores list')}</h1>
         <AddButton
-          onClick={() => setOpenAddBusiness(true)}
+          onClick={() => handleOpenAddBusiness()}
         >
           <BsPlusSquare />
         </AddButton>

@@ -70,7 +70,7 @@ export const HeaderImage = styled.div`
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 
-  ${({ isEdit }) => !isEdit && css`
+  ${({ disabled }) => !disabled && css`
     pointer-event: none;
   `}
 
@@ -171,7 +171,7 @@ export const LogoImage = styled.div`
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 
-  ${({ isEdit }) => !isEdit && css`
+  ${({ disabled }) => !disabled && css`
     pointer-event: none;
   `}
 

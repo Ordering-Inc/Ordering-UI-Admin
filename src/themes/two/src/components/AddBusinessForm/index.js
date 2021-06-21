@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import BsLifePreserver from '@meronex/icons/bs/BsLifePreserver'
 import { Switch } from '../../styles/Switch'
-import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -37,14 +37,13 @@ const AddBusinessFormUI = (props) => {
     formState,
     handlechangeImage,
     handleChangeInput,
-    handleButtonUpdateClick
+    handleAddBusiness
   } = props
   const [, t] = useLanguage()
   const formMethods = useForm()
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const emailInput = useRef(null)
 
   const handleClickImage = (type) => {
     if (type === 'header') {
@@ -78,12 +77,6 @@ const AddBusinessFormUI = (props) => {
     }
   }
 
-  const handleChangeInputEmail = (e) => {
-    handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
-    formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
-  }
-
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -93,9 +86,20 @@ const AddBusinessFormUI = (props) => {
 
   const onSubmit = () => {
     if (Object.keys(formState.changes).length > 0) {
-      handleButtonUpdateClick()
+      handleAddBusiness()
     }
   }
+
+  useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
+      const content = Object.values(formMethods.errors).map(error => error.message)
+      setAlertState({
+        open: true,
+        content
+      })
+    }
+  }, [formMethods.errors])
+
   return (
     <>
       <BusinessDetailsContainer>
@@ -139,10 +143,10 @@ const AddBusinessFormUI = (props) => {
               >
                 {formState.loading
                   ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                  : ((!formState.changes?.header || formState.result?.result === 'Network Error' || formState.result.error)
-                    ? <div />
-                    : formState?.changes?.header &&
-                      <img src={formState?.changes?.header} alt='header image' loading='lazy' />
+                  : (!formState.changes?.header
+                    ? formState?.result?.result?.header &&
+                      <img src={formState?.result?.result?.header} alt='header' loading='lazy' />
+                    : <img src={formState?.changes?.header} alt='header image' loading='lazy' />
                   )}
                 <UploadImageIconContainer>
                   <UploadImageIcon>
@@ -170,10 +174,10 @@ const AddBusinessFormUI = (props) => {
               >
                 {formState.loading
                   ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                  : ((!formState.changes?.header || formState.result?.result === 'Network Error' || formState.result.error)
-                    ? <div />
-                    : formState?.changes?.logo &&
-                      <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
+                  : (!formState.changes?.logo
+                    ? formState?.result?.result?.logo &&
+                      <img src={formState?.result?.result?.logo} alt='logo image' loading='lazy' />
+                    : <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
                   )}
                 <UploadImageIconContainer small>
                   <UploadImageIcon small>
@@ -187,6 +191,7 @@ const AddBusinessFormUI = (props) => {
             <label>{t('BUSINESS_NAME', 'Business name')}</label>
             <Input
               name='name'
+              type='text'
               placeholder={t('NAME', 'name')}
               defaultValue={
                 formState?.result?.result
@@ -205,16 +210,27 @@ const AddBusinessFormUI = (props) => {
             <label>{t('BUSINESS_EMAIL', 'Business email')}</label>
             <Input
               name='email'
+              type='email'
               placeholder={t('EMAIL', 'email')}
               defaultValue={
                 formState?.result?.result
                   ? formState?.result?.result?.email
                   : formState?.changes?.email
               }
-              onChange={handleChangeInputEmail}
-              ref={(e) => {
-                emailInput.current = e
-              }}
+              onChange={handleChangeInput}
+              ref={formMethods.register({
+                required: t(
+                  'VALIDATION_ERROR_REQUIRED',
+                  'Email is required'
+                ).replace('_attribute_', t('EMAIL', 'Email')),
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: t(
+                    'VALIDATION_ERROR_EMAIL',
+                    'Invalid email address'
+                  ).replace('_attribute_', t('EMAIL', 'Email'))
+                }
+              })}
               disabled={formState.loading}
               autoComplete='off'
             />
@@ -260,7 +276,7 @@ const AddBusinessFormUI = (props) => {
               borderRadius='5px'
               disabled={!(Object.keys(formState?.changes).length > 0) || formState?.loading}
             >
-              {t('SAVE', 'Save')}
+              {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
             </Button>
           </ActionsForm>
         </FormInput>

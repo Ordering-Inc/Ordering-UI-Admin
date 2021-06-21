@@ -53,6 +53,20 @@ const BusinessessListingUI = (props) => {
     onBusinessRedirect(business.id)
   }
 
+  const handleOpenAddBusiness = () => {
+    const id = query.get('id')
+    if (id) {
+      handleBackRedirect()
+    }
+    setOpenAddBusiness(true)
+  }
+
+  const onhandleSuccessAddBusiness = (business) => {
+    handleSucessAddBusiness(business)
+    setOpenAddBusiness(false)
+    handleOpenBusinessDetails(business)
+  }
+
   useEffect(() => {
     const id = query.get('id')
     if (id === null) setOpenBusinessDetails(false)
@@ -69,7 +83,7 @@ const BusinessessListingUI = (props) => {
         <BusinessListingHeader
           searchValue={searchValue}
           onSearch={onSearch}
-          setOpenAddBusiness={setOpenAddBusiness}
+          handleOpenAddBusiness={handleOpenAddBusiness}
         />
         <ViewContainer>
           <BusinessActiveStateFilter
@@ -121,8 +135,8 @@ const BusinessessListingUI = (props) => {
       {openAddBusiness && (
         <AddBusinessSidebar
           open={openAddBusiness}
-          handleSucessAddBusiness={handleSucessAddBusiness}
           onClose={() => setOpenAddBusiness(false)}
+          handleSucessAddBusiness={onhandleSuccessAddBusiness}
         />
       )}
     </>

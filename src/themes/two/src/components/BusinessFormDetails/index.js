@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
@@ -79,6 +79,16 @@ const BusinessFormDetailsUI = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
+      const content = Object.values(formMethods.errors).map(error => error.message)
+      setAlertState({
+        open: true,
+        content
+      })
+    }
+  }, [formMethods.errors])
+
   return (
     <>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -131,7 +141,7 @@ const BusinessFormDetailsUI = (props) => {
               {formState.loading
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                 : ((!formState.changes?.logo || formState.result?.result === 'Network Error' || formState.result.error)
-                  ? businessState?.business?.header &&
+                  ? businessState?.business?.logo &&
                     (<img src={businessState?.business?.logo} alt='logo image' loading='lazy' />)
                   : formState?.changes?.logo &&
                     <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
