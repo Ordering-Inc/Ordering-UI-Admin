@@ -8,7 +8,9 @@ import {
 
 export const BusinessInfoSetting = (props) => {
   const {
-    business
+    business,
+    handleDeleteBusinessOwner,
+    handleAddBusinessOwner
   } = props
   const [, t] = useLanguage()
   const [selectedInfoItem, setSelctedInfoItem] = useState('owner')
@@ -22,6 +24,8 @@ export const BusinessInfoSetting = (props) => {
       {selectedInfoItem === 'owner' && (
         <BusinessOwnerSetting
           business={business}
+          handleDeleteBusinessOwner={handleDeleteBusinessOwner}
+          handleAddBusinessOwner={handleAddBusinessOwner}
         />
       )}
     </InfoConatiner>

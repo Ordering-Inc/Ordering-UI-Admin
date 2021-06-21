@@ -15,6 +15,11 @@ const BusinessOwnerSelectorUI = (props) => {
 
   const placeholder = <Option>{t('SELECT_BUSINESS_OWNER', 'Select business owner')}</Option>
 
+  const onSelectBusinessOwner = (id) => {
+    const selectedOwner = usersList?.users.find(user => user.id === id)
+    handleSelectBusinessOwner(selectedOwner)
+  }
+
   useEffect(() => {
     if (usersList?.loading) return
     const _usersListOptions = usersList?.users.map(user => {
@@ -33,7 +38,7 @@ const BusinessOwnerSelectorUI = (props) => {
     <Select
       options={usersListOptions}
       placeholder={placeholder}
-      onChange={handleSelectBusinessOwner}
+      onChange={onSelectBusinessOwner}
     />
   )
 }

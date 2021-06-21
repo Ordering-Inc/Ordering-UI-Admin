@@ -20,6 +20,10 @@ export const OwnerItem = styled.div`
 export const WrapperOwnerSelector = styled(OwnerItem)`
   border-bottom: none;
 
+  > svg {
+    color: ${props => props.theme.colors.primary};
+  }
+
   > div:first-child {
     width: calc(100% - 50px);
     background: #F8F9FA;

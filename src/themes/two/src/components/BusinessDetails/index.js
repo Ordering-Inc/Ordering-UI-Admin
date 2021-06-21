@@ -18,7 +18,9 @@ export const BusinessDetailsUI = (props) => {
     open,
     businessState,
     handleChangeActiveBusiness,
-    handleSucessUpdateBusiness
+    handleSucessUpdateBusiness,
+    handleDeleteBusinessOwner,
+    handleAddBusinessOwner
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -74,6 +76,7 @@ export const BusinessDetailsUI = (props) => {
       toggleMainContent()
     }
   }, [extraOpen])
+
   return (
     <BarContainer id='business_details_bar'>
       <BusinessSummary
@@ -104,6 +107,8 @@ export const BusinessDetailsUI = (props) => {
                 {selectedItem === 'information' && (
                   <BusinessInfoSetting
                     business={businessState?.business}
+                    handleDeleteBusinessOwner={handleDeleteBusinessOwner}
+                    handleAddBusinessOwner={handleAddBusinessOwner}
                   />
                 )}
               </BusinessDetailsExtraContent>
