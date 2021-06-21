@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GoogleMapsMap, useConfig, useLanguage } from 'ordering-components-admin'
 import { CitySelector } from '../CitySelector'
 import {
@@ -11,7 +11,10 @@ import {
 
 export const BusinessLocationSetting = (props) => {
   const {
-    business
+    business,
+    formState,
+    setFormState,
+    handleUpdateBusinessClick
   } = props
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
@@ -26,6 +29,20 @@ export const BusinessLocationSetting = (props) => {
       mapTypeIds: ['roadmap', 'satellite']
     }
   }
+
+  const handleChangeBusinessCity = (cityId) => {
+    setFormState({ ...formState, changes: { city_id: cityId } })
+  }
+
+  useEffect(() => {
+    if (formState.loading || Object.keys(formState?.changes).length === 0) return
+    handleUpdateBusinessClick()
+  }, [formState])
+
+  useEffect(() => {
+    setFormState({ ...formState, changes: {} })
+  }, [])
+
   return (
     <Container>
       {business?.location && (
@@ -42,6 +59,8 @@ export const BusinessLocationSetting = (props) => {
           <p>{t('CITY', 'City')}</p>
           <CitySelector
             isDefault
+            defaultValue={business?.city_id}
+            handleChangeCity={handleChangeBusinessCity}
           />
         </WrapperCitySelector>
         <WrapperTimezone>

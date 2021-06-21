@@ -4,9 +4,10 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
 
   ${({ isDefault }) => isDefault ? css`
-    padding: 0px 15px;
+    padding: 5px 15px;
   ` : css`
     padding: 10px 15px;
   `}
@@ -21,5 +22,9 @@ export const Option = styled.div`
 `
 
 export const PlaceholderTitle = styled(Option)`
-  padding: 5px 15px;
+  ${({ isDefault }) => isDefault ? css`
+    padding: 5px 15px;
+    ` : css`
+    padding: 10px 15px;
+  `}
 `

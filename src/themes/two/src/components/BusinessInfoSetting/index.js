@@ -46,6 +46,9 @@ export const BusinessInfoSetting = (props) => {
       {selectedInfoItem === 'location' && (
         <BusinessLocationSetting
           business={business}
+          formState={formState}
+          setFormState={setFormState}
+          handleUpdateBusinessClick={handleUpdateBusinessClick}
         />
       )}
     </InfoConatiner>

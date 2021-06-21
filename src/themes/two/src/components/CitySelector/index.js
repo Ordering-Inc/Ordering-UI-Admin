@@ -12,6 +12,7 @@ const CitySelectorUI = (props) => {
     citiesList,
     isDefault,
     filterValues,
+    defaultValue,
     handleChangeCity
   } = props
 
@@ -35,6 +36,7 @@ const CitySelectorUI = (props) => {
       {isDefault ? (
         <Select
           placeholder={placeholder}
+          defaultValue={defaultValue}
           options={cityOptions}
           onChange={(city) => handleChangeCity(city)}
         />

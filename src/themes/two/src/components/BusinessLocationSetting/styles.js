@@ -42,9 +42,10 @@ export const WrapperTimezone = styled.div`
   p {
     &:first-child {
       color: ${props => props.theme.colors.headingColor};
+      margin-bottom: 5px;
     }
     &:last-child {
-      margin: 0 0 5px 0;
+      margin: 0;
       padding: 10px 0;
     }
   }
