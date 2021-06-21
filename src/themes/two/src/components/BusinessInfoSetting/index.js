@@ -1,4 +1,5 @@
 import React from 'react'
+import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
 import {
   InfoConatiner
 } from './styles'
@@ -6,7 +7,7 @@ import {
 export const BusinessInfoSetting = (props) => {
   return (
     <InfoConatiner>
-      info
+      <BusinessInfoSettingList />
     </InfoConatiner>
   )
 }

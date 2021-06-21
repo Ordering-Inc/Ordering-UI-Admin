@@ -147,8 +147,12 @@ export const BusinessConfigItem = styled.div`
   padding: 10px 15px;
   display: flex;
   justify-content: space-between;
-  color: ${props => props.theme.colors.headingColor};
+  color: ${props => props.theme.colors.lightGray};
   border-bottom: 1px solid #E9ECEF;
+
+  ${({ active }) => active && css`
+    color: ${props => props.theme.colors.headingColor};
+  `}
   
   svg {
     font-size: 20px;

@@ -1,15 +1,14 @@
 import styled, { css } from 'styled-components'
 
-export const OrderStatusFilterContainer = styled.div`
-  display: flex;
+export const SettingListConatiner = styled.div`
   width: 100%;
-  border-bottom: 1px solid #CCC;
+  padding: 20px 0;
+  display: flex;
   overflow-x: auto;
   @media (min-width: 1025px) {
     overflow-x: hidden;
   }
 `
-
 export const InnerContainer = styled.div`
   display: flex;
 `

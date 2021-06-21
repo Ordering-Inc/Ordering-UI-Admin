@@ -6,6 +6,7 @@ import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { BusinessSupport } from '../BusinessSupport'
+import { BusinessInfoSetting } from '../BusinessInfoSetting'
 
 import {
   BarContainer,
@@ -23,7 +24,7 @@ export const BusinessDetailsUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
 
-  const [itemSelected, setItemSelected] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null)
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
 
@@ -46,8 +47,8 @@ export const BusinessDetailsUI = (props) => {
     }
   }
 
-  const handleItemSelected = (item) => {
-    setItemSelected(item)
+  const handleSelectedItem = (item) => {
+    setSelectedItem(item)
     setExtraOpen(true)
   }
 
@@ -74,7 +75,8 @@ export const BusinessDetailsUI = (props) => {
         businessState={businessState}
         handleChangeActiveBusiness={handleChangeActiveBusiness}
         actionSidebar={actionSidebar}
-        handleItemSelected={handleItemSelected}
+        selectedItem={selectedItem}
+        handleSelectedItem={handleSelectedItem}
         handleSucessUpdateBusiness={handleSucessUpdateBusiness}
       />
       {extraOpen && (
@@ -89,18 +91,21 @@ export const BusinessDetailsUI = (props) => {
                 >
                   <MdcClose />
                 </Button>
-                {itemSelected === 'support' && (
+                {selectedItem === 'support' && (
                   <BusinessSupport
                     businessState={businessState}
                   />
+                )}
+                {selectedItem === 'information' && (
+                  <BusinessInfoSetting />
                 )}
               </BusinessDetailsExtraContent>
             </>
           ) : (
             <>
-              {itemSelected === 'support' && (
+              {selectedItem === 'support' && (
                 <Modal
-                  open={itemSelected === 'support'}
+                  open={selectedItem === 'support'}
                 >
                   <BusinessSupport
                     businessState={businessState}

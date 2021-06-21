@@ -30,7 +30,8 @@ export const BusinessSummary = (props) => {
     businessState,
     actionSidebar,
     handleChangeActiveBusiness,
-    handleItemSelected,
+    selectedItem,
+    handleSelectedItem,
     handleSucessUpdateBusiness
   } = props
   const [, t] = useLanguage()
@@ -40,32 +41,32 @@ export const BusinessSummary = (props) => {
 
   const businessConfigs = [
     {
-      id: 1,
+      key: 'information',
       value: t('INFORMATION', 'Information')
     },
     {
-      id: 2,
-      value: t('Schedule')
+      key: 'schedule',
+      value: t('SCHEDULE', 'Schedule')
     },
     {
-      id: 3,
-      value: t('Menu')
+      key: 'menu',
+      value: t('MENU', 'Menu')
     },
     {
-      id: 4,
-      value: t('Delivery zones')
+      key: 'delivery_zones',
+      value: t('DELIVERY_ZONES', 'Delivery zones')
     },
     {
-      id: 5,
-      value: t('Payment methods')
+      key: 'payment_methods',
+      value: t('PAYMENS_METHODS', 'Payment methods')
     },
     {
-      id: 6,
-      value: t('Custom fields')
+      key: 'custom_fields',
+      value: t('CUSTOM_FIELDS', 'Custom fields')
     },
     {
-      id: 7,
-      value: t('Personalitazion')
+      key: 'personalization',
+      value: t('PERSONALIZATION', 'Personalization')
     }
   ]
 
@@ -94,7 +95,7 @@ export const BusinessSummary = (props) => {
           </LeftHeader>
           <RightHeader>
             <SupportButton
-              onClick={() => handleItemSelected('support')}
+              onClick={() => handleSelectedItem('support')}
             >
               <BsLifePreserver />
             </SupportButton>
@@ -135,7 +136,11 @@ export const BusinessSummary = (props) => {
               </BusinessDescription>
               <BusinessConfigsContainer>
                 {businessConfigs.map(config => (
-                  <BusinessConfigItem key={config.id}>
+                  <BusinessConfigItem
+                    key={config.key}
+                    active={selectedItem === config.key}
+                    onClick={() => handleSelectedItem(config.key)}
+                  >
                     <span>{config.value}</span>
                     <BsChevronRight />
                   </BusinessConfigItem>

@@ -20,6 +20,7 @@ export const BarContainer = styled.div`
 `
 
 export const BusinessDetailsExtraContent = styled.div`
+  max-width: 500px;
   position: relative;
   padding: 20px;
   box-sizing: border-box;

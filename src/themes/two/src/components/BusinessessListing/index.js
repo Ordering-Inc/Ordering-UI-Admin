@@ -47,6 +47,7 @@ const BusinessessListingUI = (props) => {
   }
 
   const handleOpenBusinessDetails = (business) => {
+    setOpenAddBusiness(false)
     setDetailsBusiness(business)
     setDetailsBusinessId(business.id)
     setOpenBusinessDetails(true)
