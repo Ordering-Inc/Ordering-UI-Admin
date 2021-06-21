@@ -40,6 +40,7 @@ const BusinessessListingUI = (props) => {
   const [detailsBusiness, setDetailsBusiness] = useState(null)
   const [detailsBusinessId, setDetailsBusinessId] = useState(null)
   const [openAddBusiness, setOpenAddBusiness] = useState(false)
+  const [businessTypes, setBusinessTypes] = useState([])
 
   const handleBackRedirect = () => {
     setOpenBusinessDetails(false)
@@ -110,6 +111,7 @@ const BusinessessListingUI = (props) => {
           businessTypes={props.businessTypes}
           defaultBusinessType={props.defaultBusinessType}
           handleChangeBusinessType={handleChangeBusinessType}
+          setBusinessTypes={setBusinessTypes}
         />
         <BusinessList
           viewMethod={viewMethod}
@@ -126,6 +128,7 @@ const BusinessessListingUI = (props) => {
         <BusinessDetails
           open={openBusinessDetails}
           business={detailsBusiness}
+          businessTypes={businessTypes}
           businessId={detailsBusinessId}
           handleSucessAddBusiness={handleSucessAddBusiness}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
