@@ -52,6 +52,11 @@ export const BusinessDetailsUI = (props) => {
     setExtraOpen(true)
   }
 
+  const handleCloseExtraOpen = () => {
+    setExtraOpen(false)
+    setSelectedItem(null)
+  }
+
   useEffect(() => {
     toggleMainContent()
   }, [width])
@@ -87,7 +92,7 @@ export const BusinessDetailsUI = (props) => {
                 <Button
                   borderRadius='5px'
                   color='secundary'
-                  onClick={() => setExtraOpen(false)}
+                  onClick={() => handleCloseExtraOpen()}
                 >
                   <MdcClose />
                 </Button>
@@ -97,7 +102,9 @@ export const BusinessDetailsUI = (props) => {
                   />
                 )}
                 {selectedItem === 'information' && (
-                  <BusinessInfoSetting />
+                  <BusinessInfoSetting
+                    business={businessState?.business}
+                  />
                 )}
               </BusinessDetailsExtraContent>
             </>

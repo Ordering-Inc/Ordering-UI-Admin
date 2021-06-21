@@ -9,8 +9,8 @@ import {
 
 export const BusinessInfoSettingList = (props) => {
   const {
-    selectedItem,
-    handleSelectItem
+    selectedInfoItem,
+    handleSelectInfoItem
   } = props
   const [, t] = useLanguage()
   const listOptions = [
@@ -30,8 +30,8 @@ export const BusinessInfoSettingList = (props) => {
             {listOptions.map(option => (
               <Tab
                 key={option.key}
-                active={selectedItem === option.key}
-                onClick={() => handleSelectItem(option.key)}
+                active={selectedInfoItem === option.key}
+                onClick={() => handleSelectInfoItem(option.key)}
               >
                 {option.content}
               </Tab>

@@ -5,6 +5,7 @@ export const SettingListConatiner = styled.div`
   padding: 20px 0;
   display: flex;
   overflow-x: auto;
+  border-bottom: 1px solid #E9ECEF;
   @media (min-width: 1025px) {
     overflow-x: hidden;
   }
