@@ -59,6 +59,7 @@ export const CloseButton = styled.span`
 `
 
 const BusinessHeaderStyled = styled.div`
+  background: #CCC;
   width: 100%;
   box-sizing: border-box;
   position: relative;
