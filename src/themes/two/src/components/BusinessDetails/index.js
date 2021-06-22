@@ -143,6 +143,7 @@ export const BusinessDetailsUI = (props) => {
 export const BusinessDetails = (props) => {
   const businessDetailsProps = {
     ...props,
+    asDashboard: true,
     UIComponent: BusinessDetailsUI
   }
 
