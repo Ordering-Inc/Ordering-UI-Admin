@@ -4,6 +4,7 @@ import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
 import { BusinessOwnerSetting } from '../BusinessOwnerSetting'
 import { BusinessTypeSetting } from '../BusinessTypeSetting'
 import { BusinessLocationSetting } from '../BusinessLocationSetting'
+import { BusinessDescriptionSetting } from '../BusinessDescriptionSetting'
 import {
   InfoConatiner
 } from './styles'
@@ -47,6 +48,14 @@ export const BusinessInfoSetting = (props) => {
       )}
       {selectedInfoItem === 'location' && (
         <BusinessLocationSetting
+          business={business}
+          formState={formState}
+          setFormState={setFormState}
+          handleUpdateBusinessClick={handleUpdateBusinessClick}
+        />
+      )}
+      {selectedInfoItem === 'description' && (
+        <BusinessDescriptionSetting
           business={business}
           formState={formState}
           setFormState={setFormState}
