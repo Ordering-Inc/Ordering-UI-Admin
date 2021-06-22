@@ -83,6 +83,8 @@ import orderStatus19 from './template/assets/images/order/status-19.svg'
 import orderStatus20 from './template/assets/images/order/status-20.svg'
 import orderStatus21 from './template/assets/images/order/status-21.svg'
 
+import categoryAll from './template/assets/images/categories/category-all.png'
+
 Sentry.init({
   environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
   dsn: 'https://136774353f6d423da02589e771165836@o460529.ingest.sentry.io/5681485',
@@ -136,6 +138,9 @@ theme.images = {
     status19: orderStatus19,
     status20: orderStatus20,
     status21: orderStatus21
+  },
+  categories: {
+    all: categoryAll
   },
   orderStatus: {
     pending: orderPending,

@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { useLanguage } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { Container, BusinessType } from './styles'
+import { BusinessTypeForm } from '../BusinessTypeForm'
+import { useTheme } from 'styled-components'
+import {
+  Container,
+  BusinessType,
+  AddNewBusinessTypeContainer,
+  AddNewBusinessTypeTitle
+} from './styles'
 
 export const BusinessTypeSetting = (props) => {
   const {
@@ -9,10 +17,14 @@ export const BusinessTypeSetting = (props) => {
     business,
     formState,
     setFormState,
-    handleUpdateBusinessClick
+    handleUpdateBusinessClick,
+    setBusinessTypes
   } = props
 
+  const [, t] = useLanguage()
+  const theme = useTheme()
   const [selectedBusinessTypes, setSelectedBusinessTypes] = useState([])
+  const [isAdd, setIsAdd] = useState(false)
 
   const handleSelectBusinessTypes = (typeId) => {
     let _selectedBusinessTypes = [...selectedBusinessTypes]
@@ -26,6 +38,11 @@ export const BusinessTypeSetting = (props) => {
       ...formState,
       changes: { types: _selectedBusinessTypes }
     })
+  }
+
+  const handleSuccessAddBusinessType = (result) => {
+    setIsAdd(false)
+    setBusinessTypes([...businessTypes, result])
   }
 
   useEffect(() => {
@@ -60,11 +77,31 @@ export const BusinessTypeSetting = (props) => {
             ) : (
               <RiCheckboxBlankLine />
             )}
+            <img
+              src={businessType?.image || theme.images?.categories?.all}
+              alt={businessType.name.toLowerCase()}
+              width='30px'
+              height='30px'
+              loading='lazy'
+            />
             <span>{businessType?.name}</span>
           </BusinessType>
         )
       ))}
-
+      <AddNewBusinessTypeContainer>
+        {isAdd ? (
+          <BusinessTypeForm
+            businessTypes={businessTypes}
+            handleSuccessAddBusinessType={handleSuccessAddBusinessType}
+          />
+        ) : (
+          <AddNewBusinessTypeTitle
+            onClick={() => setIsAdd(true)}
+          >
+            {t('ADD_NEW_BUSINESS_TYPE', 'Add new business type')}
+          </AddNewBusinessTypeTitle>
+        )}
+      </AddNewBusinessTypeContainer>
     </Container>
   )
 }

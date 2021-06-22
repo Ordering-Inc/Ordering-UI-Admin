@@ -133,6 +133,7 @@ const BusinessessListingUI = (props) => {
           handleSucessAddBusiness={handleSucessAddBusiness}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+          setBusinessTypes={setBusinessTypes}
           onClose={() => handleBackRedirect()}
         />
       )}

@@ -24,7 +24,8 @@ export const BusinessDetailsUI = (props) => {
     businessTypes,
     formState,
     setFormState,
-    handleUpdateBusinessClick
+    handleUpdateBusinessClick,
+    setBusinessTypes
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -117,6 +118,7 @@ export const BusinessDetailsUI = (props) => {
                     setFormState={setFormState}
                     businessTypes={businessTypes}
                     handleUpdateBusinessClick={handleUpdateBusinessClick}
+                    setBusinessTypes={setBusinessTypes}
                   />
                 )}
               </BusinessDetailsExtraContent>

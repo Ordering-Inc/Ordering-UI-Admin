@@ -16,7 +16,8 @@ export const BusinessInfoSetting = (props) => {
     formState,
     setFormState,
     handleUpdateBusinessClick,
-    businessTypes
+    businessTypes,
+    setBusinessTypes
   } = props
   const [, t] = useLanguage()
   const [selectedInfoItem, setSelctedInfoItem] = useState('owner')
@@ -41,6 +42,7 @@ export const BusinessInfoSetting = (props) => {
           formState={formState}
           setFormState={setFormState}
           handleUpdateBusinessClick={handleUpdateBusinessClick}
+          setBusinessTypes={setBusinessTypes}
         />
       )}
       {selectedInfoItem === 'location' && (
