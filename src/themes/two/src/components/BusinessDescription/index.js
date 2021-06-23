@@ -8,7 +8,7 @@ import {
   WrapperDescription
 } from './styles'
 
-export const BusinessDescriptionSetting = (props) => {
+export const BusinessDescription = (props) => {
   const {
     business,
     formState,

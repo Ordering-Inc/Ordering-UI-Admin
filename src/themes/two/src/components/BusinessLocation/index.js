@@ -13,7 +13,7 @@ import {
   WrapperAddressnotes
 } from './styles'
 
-export const BusinessLocationSetting = (props) => {
+export const BusinessLocation = (props) => {
   const {
     business,
     formState,

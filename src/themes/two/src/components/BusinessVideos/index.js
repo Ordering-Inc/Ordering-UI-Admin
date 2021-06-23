@@ -12,7 +12,7 @@ import {
   AddButton
 } from './styles'
 
-const BusinessVideosSettingUI = (props) => {
+const BusinessVideosUI = (props) => {
   const {
     businessVideos,
     formState,
@@ -106,10 +106,10 @@ const BusinessVideosSettingUI = (props) => {
   )
 }
 
-export const BusinessVideosSetting = (props) => {
+export const BusinessVideos = (props) => {
   const businessGalleryProps = {
     ...props,
-    UIComponent: BusinessVideosSettingUI
+    UIComponent: BusinessVideosUI
   }
   return <BusinessGalleryController {...businessGalleryProps} />
 }

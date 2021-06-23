@@ -20,7 +20,7 @@ import {
   DeleteButton
 } from './styles'
 
-const BusinessImagesSettingUI = (props) => {
+const BusinessImagesUI = (props) => {
   const {
     businessPhotos,
     formState,
@@ -172,10 +172,10 @@ const BusinessImagesSettingUI = (props) => {
   )
 }
 
-export const BusinessImagesSetting = (props) => {
+export const BusinessImages = (props) => {
   const businessGalleryProps = {
     ...props,
-    UIComponent: BusinessImagesSettingUI
+    UIComponent: BusinessImagesUI
   }
   return <BusinessGalleryController {...businessGalleryProps} />
 }

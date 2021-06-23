@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
-import { BusinessOwnerSetting } from '../BusinessOwnerSetting'
-import { BusinessTypeSetting } from '../BusinessTypeSetting'
-import { BusinessLocationSetting } from '../BusinessLocationSetting'
-import { BusinessDescriptionSetting } from '../BusinessDescriptionSetting'
-import { BusinessImagesSetting } from '../BusinessImagesSetting'
-import { BusinessVideosSetting } from '../BusinessVideosSetting'
+import { BusinessOwners } from '../BusinessOwners'
+import { BusinessTypes } from '../BusinessTypes'
+import { BusinessLocation } from '../BusinessLocation'
+import { BusinessDescription } from '../BusinessDescription'
+import { BusinessImages } from '../BusinessImages'
+import { BusinessVideos } from '../BusinessVideos'
 import { BusinessCustomFields } from '../BusinessCustomFields'
 import {
   InfoConatiner
 } from './styles'
 
-export const BusinessInfoSetting = (props) => {
+export const BusinessInformation = (props) => {
   const {
     business,
     handleDeleteBusinessOwner,
@@ -36,14 +36,14 @@ export const BusinessInfoSetting = (props) => {
         handleSelectInfoItem={setSelctedInfoItem}
       />
       {selectedInfoItem === 'owner' && (
-        <BusinessOwnerSetting
+        <BusinessOwners
           business={business}
           handleDeleteBusinessOwner={handleDeleteBusinessOwner}
           handleAddBusinessOwner={handleAddBusinessOwner}
         />
       )}
       {selectedInfoItem === 'type' && (
-        <BusinessTypeSetting
+        <BusinessTypes
           business={business}
           businessTypes={businessTypes}
           formState={formState}
@@ -53,7 +53,7 @@ export const BusinessInfoSetting = (props) => {
         />
       )}
       {selectedInfoItem === 'location' && (
-        <BusinessLocationSetting
+        <BusinessLocation
           business={business}
           formState={formState}
           setFormState={setFormState}
@@ -61,7 +61,7 @@ export const BusinessInfoSetting = (props) => {
         />
       )}
       {selectedInfoItem === 'description' && (
-        <BusinessDescriptionSetting
+        <BusinessDescription
           business={business}
           formState={formState}
           setFormState={setFormState}
@@ -69,14 +69,14 @@ export const BusinessInfoSetting = (props) => {
         />
       )}
       {selectedInfoItem === 'images' && (
-        <BusinessImagesSetting
+        <BusinessImages
           business={business}
           handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
           handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
         />
       )}
       {selectedInfoItem === 'videos' && (
-        <BusinessVideosSetting
+        <BusinessVideos
           business={business}
           handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
           handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}

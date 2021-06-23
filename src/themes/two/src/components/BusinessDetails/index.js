@@ -6,7 +6,7 @@ import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { BusinessSupport } from '../BusinessSupport'
-import { BusinessInfoSetting } from '../BusinessInfoSetting'
+import { BusinessInformation } from '../BusinessInformation'
 
 import {
   BarContainer,
@@ -112,7 +112,7 @@ export const BusinessDetailsUI = (props) => {
                   />
                 )}
                 {selectedItem === 'information' && (
-                  <BusinessInfoSetting
+                  <BusinessInformation
                     business={businessState?.business}
                     handleDeleteBusinessOwner={handleDeleteBusinessOwner}
                     handleAddBusinessOwner={handleAddBusinessOwner}

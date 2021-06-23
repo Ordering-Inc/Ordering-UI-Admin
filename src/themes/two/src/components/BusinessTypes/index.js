@@ -11,7 +11,7 @@ import {
   AddNewBusinessTypeTitle
 } from './styles'
 
-export const BusinessTypeSetting = (props) => {
+export const BusinessTypes = (props) => {
   const {
     businessTypes,
     business,

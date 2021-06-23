@@ -11,7 +11,7 @@ import {
   WrapperOwnerSelector
 } from './styles'
 
-export const BusinessOwnerSetting = (props) => {
+export const BusinessOwners = (props) => {
   const {
     business,
     handleDeleteBusinessOwner,
