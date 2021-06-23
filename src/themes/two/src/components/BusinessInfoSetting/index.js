@@ -7,6 +7,7 @@ import { BusinessLocationSetting } from '../BusinessLocationSetting'
 import { BusinessDescriptionSetting } from '../BusinessDescriptionSetting'
 import { BusinessImagesSetting } from '../BusinessImagesSetting'
 import { BusinessVideosSetting } from '../BusinessVideosSetting'
+import { BusinessCustomFields } from '../BusinessCustomFields'
 import {
   InfoConatiner
 } from './styles'
@@ -21,8 +22,8 @@ export const BusinessInfoSetting = (props) => {
     handleUpdateBusinessClick,
     businessTypes,
     setBusinessTypes,
-    handleSucessAddBusinessGallery,
-    handleSucessDeleteBusinessGallery
+    handleSuccessAddBusinessItem,
+    handleSuccessDeleteBusinessItem
   } = props
   const [, t] = useLanguage()
   const [selectedInfoItem, setSelctedInfoItem] = useState('owner')
@@ -70,15 +71,23 @@ export const BusinessInfoSetting = (props) => {
       {selectedInfoItem === 'images' && (
         <BusinessImagesSetting
           business={business}
-          handleSucessAddBusinessGallery={handleSucessAddBusinessGallery}
-          handleSucessDeleteBusinessGallery={handleSucessDeleteBusinessGallery}
+          handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
+          handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
         />
       )}
       {selectedInfoItem === 'videos' && (
         <BusinessVideosSetting
           business={business}
-          handleSucessAddBusinessGallery={handleSucessAddBusinessGallery}
-          handleSucessDeleteBusinessGallery={handleSucessDeleteBusinessGallery}
+          handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
+          handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
+        />
+      )}
+      {selectedInfoItem === 'custom_fields' && (
+        <BusinessCustomFields
+          businessId={business.id}
+          metafields={business?.metafields}
+          handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
+          handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}
         />
       )}
     </InfoConatiner>
