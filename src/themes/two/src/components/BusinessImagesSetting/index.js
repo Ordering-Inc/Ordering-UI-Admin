@@ -22,17 +22,16 @@ import {
 
 const BusinessImagesSettingUI = (props) => {
   const {
-    business,
+    businessPhotos,
     formState,
     handlechangeImage,
     cleanFormState,
     handleUpdateBusinessGallery,
-    handleDeleteBusinessImage
+    handleDeleteBusinessGallery
   } = props
 
   const [, t] = useLanguage()
 
-  const [businessPhotos, setBusinessPhotos] = useState([])
   const imageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -69,7 +68,7 @@ const BusinessImagesSettingUI = (props) => {
       content: t('QUESTION_DELETE_IMAGE', 'Are you sure that you want to delete this image?'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
-        handleDeleteBusinessImage(id)
+        handleDeleteBusinessGallery(id)
       }
     })
   }
@@ -82,9 +81,13 @@ const BusinessImagesSettingUI = (props) => {
   }
 
   useEffect(() => {
-    const photos = business?.gallery?.filter(item => item.file)
-    setBusinessPhotos(photos)
-  }, [business])
+    if (formState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState?.result?.result
+      })
+    }
+  }, [formState])
 
   useEffect(() => {
     if (formState.changes?.file) {
