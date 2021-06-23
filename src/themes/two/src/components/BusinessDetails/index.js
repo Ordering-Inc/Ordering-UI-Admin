@@ -7,6 +7,7 @@ import { Button } from '../../styles/Buttons'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { BusinessSupport } from '../BusinessSupport'
 import { BusinessInformation } from '../BusinessInformation'
+import { BusinessSchedule } from '../BusinessSchedule'
 
 import {
   BarContainer,
@@ -125,6 +126,11 @@ export const BusinessDetailsUI = (props) => {
                     handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
                   />
                 )}
+                {selectedItem === 'schedule' && (
+                  <BusinessSchedule
+                    business={businessState?.business}
+                  />
+                )}
               </BusinessDetailsExtraContent>
             </>
           ) : (
@@ -135,6 +141,24 @@ export const BusinessDetailsUI = (props) => {
                 >
                   <BusinessSupport
                     businessState={businessState}
+                  />
+                </Modal>
+              )}
+              {selectedItem === 'information' && (
+                <Modal
+                  open={selectedItem === 'information'}
+                >
+                  <BusinessInformation
+                    business={businessState?.business}
+                    handleDeleteBusinessOwner={handleDeleteBusinessOwner}
+                    handleAddBusinessOwner={handleAddBusinessOwner}
+                    formState={formState}
+                    setFormState={setFormState}
+                    businessTypes={businessTypes}
+                    handleUpdateBusinessClick={handleUpdateBusinessClick}
+                    setBusinessTypes={setBusinessTypes}
+                    handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
+                    handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
                   />
                 </Modal>
               )}
