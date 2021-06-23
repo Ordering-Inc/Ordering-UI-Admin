@@ -4,7 +4,8 @@ import { Alert } from '../Confirm'
 import Skeleton from 'react-loading-skeleton'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
-import { Select } from '../../styles/Select/FirstSelect'
+import { Select } from '../../styles/Select'
+import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
@@ -266,7 +267,7 @@ const BusinessCustomFieldsUI = (props) => {
                   />
                 )}
                 {selectedMetaKey === 'boolean' && (
-                  <Select
+                  <FirstSelect
                     className='select-input'
                     defaultValue={selectedBoolean || '1'}
                     options={booleanOptions}
