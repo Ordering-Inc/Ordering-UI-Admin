@@ -5,6 +5,7 @@ import { BusinessOwnerSetting } from '../BusinessOwnerSetting'
 import { BusinessTypeSetting } from '../BusinessTypeSetting'
 import { BusinessLocationSetting } from '../BusinessLocationSetting'
 import { BusinessDescriptionSetting } from '../BusinessDescriptionSetting'
+import { BusinessImagesSetting } from '../BusinessImagesSetting'
 import {
   InfoConatiner
 } from './styles'
@@ -18,10 +19,14 @@ export const BusinessInfoSetting = (props) => {
     setFormState,
     handleUpdateBusinessClick,
     businessTypes,
-    setBusinessTypes
+    setBusinessTypes,
+    handleSucessAddBusinessGallery,
+    handleSucessDeleteBusinessGallery
   } = props
   const [, t] = useLanguage()
   const [selectedInfoItem, setSelctedInfoItem] = useState('owner')
+
+  console.log(business)
   return (
     <InfoConatiner>
       <h1>{t('INFORMATION', 'Information')}</h1>
@@ -60,6 +65,13 @@ export const BusinessInfoSetting = (props) => {
           formState={formState}
           setFormState={setFormState}
           handleUpdateBusinessClick={handleUpdateBusinessClick}
+        />
+      )}
+      {selectedInfoItem === 'images' && (
+        <BusinessImagesSetting
+          business={business}
+          handleSucessAddBusinessGallery={handleSucessAddBusinessGallery}
+          handleSucessDeleteBusinessGallery={handleSucessDeleteBusinessGallery}
         />
       )}
     </InfoConatiner>
