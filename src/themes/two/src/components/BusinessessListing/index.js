@@ -152,6 +152,7 @@ export const BusinessessListing = (props) => {
   const businessListingProps = {
     ...props,
     UIComponent: BusinessessListingUI,
+    asDashboard: true,
     initialPageSize: 50,
     loadMorePageSize: 10,
     isSearchByBusinessName: true,

@@ -8,6 +8,7 @@ import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { BusinessSupport } from '../BusinessSupport'
 import { BusinessInformation } from '../BusinessInformation'
 import { BusinessSchedule } from '../BusinessSchedule'
+import { BusinessMenu } from '../BusinessMenu'
 
 import {
   BarContainer,
@@ -132,6 +133,11 @@ export const BusinessDetailsUI = (props) => {
                     business={businessState?.business}
                     handleUpdateBusinessState={handleUpdateBusinessState}
                     handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
+                  />
+                )}
+                {selectedItem === 'menu' && (
+                  <BusinessMenu
+                    business={businessState?.business}
                   />
                 )}
               </BusinessDetailsExtraContent>
