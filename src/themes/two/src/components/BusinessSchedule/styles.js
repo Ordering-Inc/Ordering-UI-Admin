@@ -15,7 +15,6 @@ export const Title = styled.h1`
 
 export const ScheduleBlock = styled.div`
   display: flex;
-  align-items; center;
   padding: 15px;
   border-bottom: 1px solid #E9ECEF;
 `
@@ -34,8 +33,8 @@ export const CheckBoxWrapper = styled.span`
 
 export const CheckboxContainer = styled.div`
   display: flex;
-  align-items: center;
   width: 20%;
+  margin-top: 10px;
 
   h4 {
     color: ${props => props.theme.colors.headingColor};
@@ -49,8 +48,14 @@ export const CheckboxContainer = styled.div`
   }
 `
 
-export const TimeSection = styled.div`
+export const TimeSectionContainer = styled.div`
   flex: 1;
+  > div:not(:last-child) {
+    margin-bottom: 10px;
+  }
+`
+
+export const TimeSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,7 +94,7 @@ export const DeleteButton = styled.div`
 
 export const ScheduleActionBlock = styled.div`
   display: flex;
-  align-items: center;
+  margin-top: 10px;
 
   svg {
     cursor: pointer;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { BusinessSchedule as BusinessScheduleController } from './naked'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import BsTrash from '@meronex/icons/bs/BsTrash'
@@ -13,6 +14,7 @@ import {
   ScheduleBlock,
   CheckBoxWrapper,
   CheckboxContainer,
+  TimeSectionContainer,
   TimeSection,
   TimeSelect,
   TimeSelectContainer,
@@ -20,9 +22,12 @@ import {
   ScheduleActionBlock
 } from './styles'
 
-export const BusinessSchedule = (props) => {
+const BusinessScheduleUI = (props) => {
   const {
-    business
+    business,
+    handleChangeTime,
+    handleAddScheduleTime,
+    handleDeleteScheduleTime
   } = props
   const [, t] = useLanguage()
   const daysOfWeek = [
@@ -39,82 +44,94 @@ export const BusinessSchedule = (props) => {
       <ScheduleContainer>
         <Title>{t('SCHEDULE', 'Schedule')}</Title>
         <ScheduleSection>
-          {business?.schedule.map((schedule, i) => (
-            <ScheduleBlock key={i}>
+          {business?.schedule.map((schedule, daysOfWeekIndex) => (
+            <ScheduleBlock key={daysOfWeekIndex}>
               <CheckboxContainer>
                 <CheckBoxWrapper active={schedule?.enabled}>
                   {schedule?.enabled ? <RiCheckboxFill /> : <RiCheckboxBlankLine />}
                 </CheckBoxWrapper>
-                <h4>{daysOfWeek[i]}</h4>
+                <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
               </CheckboxContainer>
-              <TimeSection>
+              <TimeSectionContainer>
                 {schedule?.enabled ? (
                   <>
-                    <TimeSelectContainer>
-                      <TimeSelect
-                        value={schedule.lapses[0].open.hour}
-                      >
-                        {[...Array(24)].map((v, i) => (
-                          <option
-                            key={i}
-                            value={i}
+                    {schedule.lapses.map((laps, index) => (
+                      <TimeSection key={index}>
+                        <TimeSelectContainer>
+                          <TimeSelect
+                            defaultValue={laps.open.hour}
+                            onChange={(e) => handleChangeTime(daysOfWeekIndex, true, true, index, e.target.value)}
                           >
-                            {i < 10 ? `0${i}` : i}
-                          </option>
-                        ))}
-                      </TimeSelect>
-                      :
-                      <TimeSelect
-                        value={schedule.lapses[0].open.minute}
-                      >
-                        {[...Array(24)].map((v, i) => (
-                          <option
-                            key={i}
-                            value={i}
+                            {[...Array(24)].map((v, i) => (
+                              <option
+                                key={i}
+                                value={i}
+                              >
+                                {i < 10 ? `0${i}` : i}
+                              </option>
+                            ))}
+                          </TimeSelect>
+                          :
+                          <TimeSelect
+                            defaultValue={laps.open.minute}
+                            onChange={(e) => handleChangeTime(daysOfWeekIndex, true, false, index, e.target.value)}
                           >
-                            {i < 10 ? `0${i}` : i}
-                          </option>
-                        ))}
-                      </TimeSelect>
-                    </TimeSelectContainer>
-                    <BiMinus />
-                    <TimeSelectContainer>
-                      <TimeSelect
-                        value={schedule.lapses[0].close.hour}
-                      >
-                        {[...Array(24)].map((v, i) => (
-                          <option
-                            key={i}
-                            value={i}
+                            {[...Array(60)].map((v, i) => (
+                              <option
+                                key={i}
+                                value={i}
+                              >
+                                {i < 10 ? `0${i}` : i}
+                              </option>
+                            ))}
+                          </TimeSelect>
+                        </TimeSelectContainer>
+                        <BiMinus />
+                        <TimeSelectContainer>
+                          <TimeSelect
+                            defaultValue={laps.close.hour}
+                            onChange={(e) => handleChangeTime(daysOfWeekIndex, false, true, index, e.target.value)}
                           >
-                            {i < 10 ? `0${i}` : i}
-                          </option>
-                        ))}
-                      </TimeSelect>
-                      :
-                      <TimeSelect
-                        value={schedule.lapses[0].close.minute}
-                      >
-                        {[...Array(24)].map((v, i) => (
-                          <option
-                            key={i}
-                            value={i}
+                            {[...Array(24)].map((v, i) => (
+                              <option
+                                key={i}
+                                value={i}
+                              >
+                                {i < 10 ? `0${i}` : i}
+                              </option>
+                            ))}
+                          </TimeSelect>
+                          :
+                          <TimeSelect
+                            defaultValue={laps.close.minute}
+                            onChange={(e) => handleChangeTime(daysOfWeekIndex, false, false, index, e.target.value)}
                           >
-                            {i < 10 ? `0${i}` : i}
-                          </option>
-                        ))}
-                      </TimeSelect>
-                    </TimeSelectContainer>
-                    <DeleteButton>
-                      <BsTrash />
-                    </DeleteButton>
+                            {[...Array(60)].map((v, i) => (
+                              <option
+                                key={i}
+                                value={i}
+                              >
+                                {i < 10 ? `0${i}` : i}
+                              </option>
+                            ))}
+                          </TimeSelect>
+                        </TimeSelectContainer>
+                        <DeleteButton>
+                          <BsTrash
+                            onClick={() => handleDeleteScheduleTime(daysOfWeekIndex, index)}
+                          />
+                        </DeleteButton>
+                      </TimeSection>
+                    ))}
                   </>
                 ) : (
                   <span>{t('UNAVAILABLE', 'Unavailable')}</span>
                 )}
-              </TimeSection>
+              </TimeSectionContainer>
               <ScheduleActionBlock>
-                <BsPlusSquare />
+                <BsPlusSquare
+                  onClick={() => handleAddScheduleTime(daysOfWeekIndex)}
+                />
                 <MdcContentCopy />
               </ScheduleActionBlock>
             </ScheduleBlock>
@@ -123,4 +140,12 @@ export const BusinessSchedule = (props) => {
       </ScheduleContainer>
     </>
   )
+}
+
+export const BusinessSchedule = (props) => {
+  const businessScheduleProps = {
+    ...props,
+    UIComponent: BusinessScheduleUI
+  }
+  return <BusinessScheduleController {...businessScheduleProps} />
 }

@@ -28,7 +28,8 @@ export const BusinessDetailsUI = (props) => {
     handleUpdateBusinessClick,
     setBusinessTypes,
     handleSuccessAddBusinessItem,
-    handleSuccessDeleteBusinessItem
+    handleSuccessDeleteBusinessItem,
+    handleUpdateBusinessState
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -129,6 +130,8 @@ export const BusinessDetailsUI = (props) => {
                 {selectedItem === 'schedule' && (
                   <BusinessSchedule
                     business={businessState?.business}
+                    handleUpdateBusinessState={handleUpdateBusinessState}
+                    handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
                   />
                 )}
               </BusinessDetailsExtraContent>
