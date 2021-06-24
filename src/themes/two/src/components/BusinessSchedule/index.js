@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { BusinessSchedule as BusinessScheduleController } from './naked'
+import { useLanguage, BusinessSchedule as BusinessScheduleController } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import BsTrash from '@meronex/icons/bs/BsTrash'
