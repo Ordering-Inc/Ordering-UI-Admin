@@ -58,9 +58,9 @@ export const OrderDetailsExtraContent = styled.div`
   width: 100%;
 
   ${props => props.theme?.rtl ? css`
-    border-right: 1px solid ${props => props.theme.colors?.secundary};
+    border-right: 1px solid #E9ECEF;
   ` : css`
-    border-left: 1px solid ${props => props.theme.colors?.secundary};
+    border-left: 1px solid #E9ECEF;
   `}
 
   > button {
