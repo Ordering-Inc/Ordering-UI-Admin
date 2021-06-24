@@ -50,6 +50,12 @@ export const CheckboxContainer = styled.div`
 
 export const TimeSectionContainer = styled.div`
   flex: 1;
+  text-align: center;
+  > p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: ${props => props.theme.colors.lightGray};
+  }
   > div:not(:last-child) {
     margin-bottom: 10px;
   }
@@ -81,7 +87,12 @@ export const TimeSelectContainer = styled.div`
 `
 
 export const DeleteButton = styled.div`
-  cursor: pointer;
+  ${({ disabled }) => disabled ? css`
+    pointer-events: none;
+    opacity: 0.6;
+  ` : css`
+    cursor: pointer;
+  `}
   ${props => props.theme?.rtl ? css`
     margin-right: 15px;
   ` : css`
@@ -96,18 +107,14 @@ export const ScheduleActionBlock = styled.div`
   display: flex;
   margin-top: 10px;
 
-  svg {
+  > svg {
     cursor: pointer;
     &:first-child {
       color: ${props => props.theme.colors.primary};
-    }
-    &:last-child {
-      font-size: 18px;
-      color: ${props => props.theme.colors.headingColor};
       ${props => props.theme?.rtl ? css`
-        margin-right: 10px;
+        margin-left: 5px;
       ` : css`
-        margin-left: 10px;
+        margin-right: 5px;
       `}
     }
   }

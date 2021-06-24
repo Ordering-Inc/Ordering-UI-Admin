@@ -14,6 +14,14 @@ export const BusinessSchedule = (props) => {
   const [session] = useSession()
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
   const [schedule, setSchedule] = useState([])
+  const [selectedCopyDays, setSelectedCopyDays] = useState([])
+
+  /**
+   * Clean selectedCopyDays
+   */
+
+  const cleanSelectedCopyDays = () => setSelectedCopyDays([])
+
   /**
    * Update schedule time
    * @param {Number} daysOfWeekIndex index of week days
@@ -84,6 +92,22 @@ export const BusinessSchedule = (props) => {
   }
 
   /**
+   * Method to control the business schedule time enable state
+   * @param {Number} daysOfWeekIndex index of week days
+   */
+  const handleScheduleTimeActiveState = (daysOfWeekIndex) => {
+    const _schedule = [...schedule]
+    _schedule[daysOfWeekIndex].enabled = !_schedule[daysOfWeekIndex].enabled
+    setSchedule(_schedule)
+    setFormState({
+      ...formState,
+      changes: {
+        schedule: _schedule
+      }
+    })
+  }
+
+  /**
    * Method to update the business from the API
    */
   const handleUpdateBusinessClick = async () => {
@@ -114,6 +138,38 @@ export const BusinessSchedule = (props) => {
     }
   }
 
+  /**
+   * Method to copy times
+   * @param {Number} index selected index
+   * @param {Number} daysOfWeekIndex index of week days
+   */
+  const handleSelectCopyTimes = (index, daysOfWeekIndex) => {
+    let _selectedCopyDays = [...selectedCopyDays]
+    if (!_selectedCopyDays.includes(index)) {
+      _selectedCopyDays.push(index)
+    } else {
+      _selectedCopyDays = _selectedCopyDays.filter(el => el !== index)
+    }
+    setSelectedCopyDays(_selectedCopyDays)
+
+    const _schedule = [...schedule]
+
+    if (_selectedCopyDays.length) {
+      for (const copyDay of _selectedCopyDays) {
+        for (const laps of _schedule[copyDay].lapses) {
+          _schedule[daysOfWeekIndex].lapses.push(laps)
+        }
+      }
+      setSchedule(_schedule)
+      setFormState({
+        ...formState,
+        changes: {
+          schedule: _schedule
+        }
+      })
+    }
+  }
+
   useEffect(() => {
     if (Object.keys(formState.changes).length === 0) return
     handleUpdateBusinessClick()
@@ -130,9 +186,13 @@ export const BusinessSchedule = (props) => {
           <UIComponent
             {...props}
             formState={formState}
+            selectedCopyDays={selectedCopyDays}
+            cleanSelectedCopyDays={cleanSelectedCopyDays}
             handleChangeTime={handleChangeTime}
             handleAddScheduleTime={handleAddScheduleTime}
             handleDeleteScheduleTime={handleDeleteScheduleTime}
+            handleScheduleTimeActiveState={handleScheduleTimeActiveState}
+            handleSelectCopyTimes={handleSelectCopyTimes}
           />
         )
       }

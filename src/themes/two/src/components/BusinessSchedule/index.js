@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessSchedule as BusinessScheduleController } from './naked'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
@@ -6,7 +6,6 @@ import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import BiMinus from '@meronex/icons/bi/BiMinus'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
-import MdcContentCopy from '@meronex/icons/mdc/MdcContentCopy'
 import {
   ScheduleContainer,
   Title,
@@ -21,15 +20,21 @@ import {
   DeleteButton,
   ScheduleActionBlock
 } from './styles'
+import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
 
 const BusinessScheduleUI = (props) => {
   const {
     business,
     handleChangeTime,
     handleAddScheduleTime,
-    handleDeleteScheduleTime
+    handleDeleteScheduleTime,
+    handleScheduleTimeActiveState,
+    selectedCopyDays,
+    handleSelectCopyTimes,
+    cleanSelectedCopyDays
   } = props
   const [, t] = useLanguage()
+  const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
   const daysOfWeek = [
     t('SUNDAY_ABBREVIATION', 'Sun'),
     t('MONDAY_ABBREVIATION', 'Mon'),
@@ -39,6 +44,7 @@ const BusinessScheduleUI = (props) => {
     t('FRIDAY_ABBREVIATION', 'Fri'),
     t('SATURDAY_ABBREVIATION', 'Sat')
   ]
+
   return (
     <>
       <ScheduleContainer>
@@ -47,7 +53,10 @@ const BusinessScheduleUI = (props) => {
           {business?.schedule.map((schedule, daysOfWeekIndex) => (
             <ScheduleBlock key={daysOfWeekIndex}>
               <CheckboxContainer>
-                <CheckBoxWrapper active={schedule?.enabled}>
+                <CheckBoxWrapper
+                  active={schedule?.enabled}
+                  onClick={() => handleScheduleTimeActiveState(daysOfWeekIndex)}
+                >
                   {schedule?.enabled ? <RiCheckboxFill /> : <RiCheckboxBlankLine />}
                 </CheckBoxWrapper>
                 <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
@@ -116,23 +125,32 @@ const BusinessScheduleUI = (props) => {
                             ))}
                           </TimeSelect>
                         </TimeSelectContainer>
-                        <DeleteButton>
-                          <BsTrash
-                            onClick={() => handleDeleteScheduleTime(daysOfWeekIndex, index)}
-                          />
+                        <DeleteButton
+                          disabled={schedule.lapses.length === 1}
+                          onClick={() => handleDeleteScheduleTime(daysOfWeekIndex, index)}
+                        >
+                          <BsTrash />
                         </DeleteButton>
                       </TimeSection>
                     ))}
                   </>
                 ) : (
-                  <span>{t('UNAVAILABLE', 'Unavailable')}</span>
+                  <p>{t('UNAVAILABLE', 'Unavailable')}</p>
                 )}
               </TimeSectionContainer>
               <ScheduleActionBlock>
                 <BsPlusSquare
                   onClick={() => handleAddScheduleTime(daysOfWeekIndex)}
                 />
-                <MdcContentCopy />
+                <BusinessScheduleCopyTimes
+                  cleanSelectedCopyDays={cleanSelectedCopyDays}
+                  open={isOpenCopytimes === daysOfWeekIndex}
+                  daysOfWeekIndex={daysOfWeekIndex}
+                  onClick={setIsOpenCopytimes}
+                  onClose={() => setIsOpenCopytimes(null)}
+                  selectedCopyDays={selectedCopyDays}
+                  handleSelectDays={(value) => handleSelectCopyTimes(value, daysOfWeekIndex)}
+                />
               </ScheduleActionBlock>
             </ScheduleBlock>
           ))}

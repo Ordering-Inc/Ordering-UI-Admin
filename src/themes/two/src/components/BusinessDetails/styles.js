@@ -26,6 +26,7 @@ export const BusinessDetailsExtraContent = styled.div`
   box-sizing: border-box;
   width: 100%;
   transition: 0.3s;
+  overflow-x: hidden;
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid ${props => props.theme.colors?.secundary};
   ` : css`
