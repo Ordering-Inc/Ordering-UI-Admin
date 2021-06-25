@@ -20,9 +20,7 @@ export const BarContainer = styled.div`
 `
 
 export const BusinessDetailsExtraContent = styled.div`
-  max-width: 500px;
   position: relative;
-  padding: 20px;
   box-sizing: border-box;
   width: 100%;
   transition: 0.3s;
@@ -38,9 +36,9 @@ export const BusinessDetailsExtraContent = styled.div`
     position: absolute;
     top: 20px;
     ${props => props.theme?.rtl ? css`
-      left: 20px;
+      left: ${({ isExtendExtraOpen }) => isExtendExtraOpen ? '520px' : '20px'};
     ` : css`
-      right: 20px;
+      right: ${({ isExtendExtraOpen }) => isExtendExtraOpen ? '520px' : '20px'};
     `}
   }
 `

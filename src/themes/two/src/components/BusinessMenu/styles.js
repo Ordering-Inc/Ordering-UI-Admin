@@ -1,10 +1,36 @@
 import styled, { css } from 'styled-components'
 
-export const MenuContainer = styled.div`
+export const MainContainer = styled.div`
+  display: flex;
 `
+
+export const MenuContainer = styled.div`
+  flex: 1;
+  padding: 20px;
+`
+
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  svg {
+    cursor: pointer;
+    font-size: 20px;
+    color: ${props => props.theme.colors.primary};
+
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
+`
+
 export const Title = styled.h1`
   font-size: 24px;
   color: ${props => props.theme.colors.headingColor};
+  margin: 0px;
 `
 
 export const MeunItem = styled.div`
@@ -54,4 +80,12 @@ export const ActionsWrapper = styled.div`
       display: none;
     }
   }
+`
+
+export const AddMenuButton = styled.a`
+  cursor: pointer;
+  color: ${props => props.theme.colors.lightGray};
+  margin: 15px 0;
+  display: inline-block;
+  text-decoration: none;
 `

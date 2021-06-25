@@ -35,6 +35,7 @@ export const BusinessDetailsUI = (props) => {
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
+  const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
 
   const [selectedItem, setSelectedItem] = useState(null)
   const actionSidebar = (value) => {
@@ -60,11 +61,13 @@ export const BusinessDetailsUI = (props) => {
   }
 
   const handleSelectedItem = (item) => {
+    setIsExtendExtraOpen(false)
     setSelectedItem(item)
     setExtraOpen(true)
   }
 
   const handleCloseExtraOpen = () => {
+    setIsExtendExtraOpen(false)
     setExtraOpen(false)
     setSelectedItem(null)
   }
@@ -89,19 +92,23 @@ export const BusinessDetailsUI = (props) => {
 
   return (
     <BarContainer id='business_details_bar'>
-      <BusinessSummary
-        businessState={businessState}
-        handleChangeActiveBusiness={handleChangeActiveBusiness}
-        actionSidebar={actionSidebar}
-        selectedItem={selectedItem}
-        handleSelectedItem={handleSelectedItem}
-        handleSucessUpdateBusiness={handleSucessUpdateBusiness}
-      />
+      {!isExtendExtraOpen && (
+        <BusinessSummary
+          businessState={businessState}
+          handleChangeActiveBusiness={handleChangeActiveBusiness}
+          actionSidebar={actionSidebar}
+          selectedItem={selectedItem}
+          handleSelectedItem={handleSelectedItem}
+          handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+        />
+      )}
       {extraOpen && (
         <>
           {width >= 1000 ? (
             <>
-              <BusinessDetailsExtraContent>
+              <BusinessDetailsExtraContent
+                isExtendExtraOpen={isExtendExtraOpen}
+              >
                 <Button
                   borderRadius='5px'
                   color='secundary'
@@ -138,6 +145,8 @@ export const BusinessDetailsUI = (props) => {
                 {selectedItem === 'menu' && (
                   <BusinessMenu
                     business={businessState?.business}
+                    handleSuccessBusinessMenu={handleUpdateBusinessState}
+                    setIsExtendExtraOpen={setIsExtendExtraOpen}
                   />
                 )}
               </BusinessDetailsExtraContent>
