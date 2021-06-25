@@ -5,6 +5,7 @@ import MdcShareVariantOutline from '@meronex/icons/mdc/MdcShareVariantOutline'
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
+import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { BusinessSchedule } from '../BusinessSchedule'
 
@@ -19,7 +20,11 @@ import {
   FieldName,
   OrderType,
   BusinessScheduleWrapper,
-  CategoryProductsContainer
+  CategoryProductsContainer,
+  CheckBoxWrapper,
+  BusinessCategoryContainer,
+  CheckboxContainer,
+  ProductContainer
 } from './styles'
 import { AutoScroll } from '../AutoScroll'
 
@@ -31,6 +36,14 @@ export const BusinessMenuOptions = (props) => {
   } = props
   const [, t] = useLanguage()
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
+  const [openCategoryProduct, setOpenCategoryProduct] = useState({})
+
+  const handleTogglePopover = (type) => {
+    setOpenCategoryProduct({
+      ...openCategoryProduct,
+      [type]: !openCategoryProduct[type]
+    })
+  }
   const orderTypes = [
     { value: 1, content: t('DELIVERY', 'Delivery') },
     { value: 2, content: t('PICKUP', 'Pickup') },
@@ -104,8 +117,34 @@ export const BusinessMenuOptions = (props) => {
           />
           <FieldName isBorderBottom>{t('PRODUCTS', 'Products')}</FieldName>
           {business?.categories.map(category => (
-            <CategoryProductsContainer>
-
+            <CategoryProductsContainer key={category.id}>
+              <BusinessCategoryContainer
+                active={openCategoryProduct[category?.name]}
+              >
+                <CheckboxContainer>
+                  <CheckBoxWrapper>
+                    <RiCheckboxFill />
+                  </CheckBoxWrapper>
+                  <span className='bold'>{category?.name}</span>
+                </CheckboxContainer>
+                <GoTriangleDown
+                  onClick={() => handleTogglePopover(category?.name)}
+                />
+              </BusinessCategoryContainer>
+              {openCategoryProduct[category?.name] && (
+                <>
+                  {category?.products.map(product => (
+                    <ProductContainer key={product.id}>
+                      <CheckboxContainer>
+                        <CheckBoxWrapper>
+                          <RiCheckboxFill />
+                        </CheckBoxWrapper>
+                        <span>{product?.name}</span>
+                      </CheckboxContainer>
+                    </ProductContainer>
+                  ))}
+                </>
+              )}
             </CategoryProductsContainer>
           ))}
         </BusinessMenuBasicContainer>

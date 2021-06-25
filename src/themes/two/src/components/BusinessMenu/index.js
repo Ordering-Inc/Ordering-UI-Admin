@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { BusinessMenu as BusinessMenuController } from './naked'
+import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
 import { Switch } from '../../styles/Switch'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
@@ -27,14 +26,17 @@ const BusinessMenuUI = (props) => {
     businessMenusState,
     handleChangeBusinessMenuActiveState,
     handleDeleteBusinessMenu,
-    handleSuccessBusinessMenu
+    handleSuccessBusinessMenu,
+    currentMenu,
+    setCurrentMenu
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const [showOptions, setShowOptions] = useState(null)
   const ActionIcon = <FiMoreVertical />
 
-  const handleOpenOptions = (name) => {
+  const handleOpenOptions = (name, menu) => {
+    setCurrentMenu(menu)
     setIsExtendExtraOpen(true)
     setShowOptions(name)
   }
@@ -88,6 +90,7 @@ const BusinessMenuUI = (props) => {
       {showOptions === 'add' && (
         <BusinessMenuOptions
           business={business}
+          currentMenu={currentMenu}
           onClose={() => handleCloseOption()}
           handleUpdateBusinessState={handleSuccessBusinessMenu}
         />
