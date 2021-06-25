@@ -138,7 +138,6 @@ export const BusinessDetailsUI = (props) => {
                 {selectedItem === 'schedule' && (
                   <BusinessSchedule
                     business={businessState?.business}
-                    handleUpdateBusinessState={handleUpdateBusinessState}
                     handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
                   />
                 )}

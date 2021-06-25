@@ -22,10 +22,12 @@ import {
 
 const BusinessMenuUI = (props) => {
   const {
+    business,
     setIsExtendExtraOpen,
     businessMenusState,
     handleChangeBusinessMenuActiveState,
-    handleDeleteBusinessMenu
+    handleDeleteBusinessMenu,
+    handleSuccessBusinessMenu
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -85,7 +87,9 @@ const BusinessMenuUI = (props) => {
       </MenuContainer>
       {showOptions === 'add' && (
         <BusinessMenuOptions
+          business={business}
           onClose={() => handleCloseOption()}
+          handleUpdateBusinessState={handleSuccessBusinessMenu}
         />
       )}
     </MainContainer>

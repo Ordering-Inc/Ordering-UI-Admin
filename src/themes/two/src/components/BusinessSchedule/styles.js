@@ -16,7 +16,7 @@ export const Title = styled.h1`
 
 export const ScheduleBlock = styled.div`
   display: flex;
-  padding: 15px;
+  padding: 15px 0;
   border-bottom: 1px solid #E9ECEF;
 `
 
