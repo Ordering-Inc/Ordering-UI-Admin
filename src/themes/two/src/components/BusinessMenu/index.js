@@ -26,23 +26,22 @@ const BusinessMenuUI = (props) => {
     businessMenusState,
     handleChangeBusinessMenuActiveState,
     handleDeleteBusinessMenu,
-    handleSuccessBusinessMenu,
-    currentMenu,
-    setCurrentMenu
+    handleSuccessBusinessMenu
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [showOptions, setShowOptions] = useState(null)
+  const [showOption, setShowOption] = useState(null)
+  const [currentMenu, setCurrentMenu] = useState(null)
   const ActionIcon = <FiMoreVertical />
 
   const handleOpenOptions = (name, menu) => {
     setCurrentMenu(menu)
     setIsExtendExtraOpen(true)
-    setShowOptions(name)
+    setShowOption(name)
   }
 
   const handleCloseOption = () => {
-    setShowOptions(null)
+    setShowOption(null)
     setIsExtendExtraOpen(false)
   }
   return (
@@ -51,7 +50,7 @@ const BusinessMenuUI = (props) => {
         <Header>
           <Title>{t('MENU', 'Menu')}</Title>
           <BsPlusSquare
-            onClick={() => handleOpenOptions('add')}
+            onClick={() => handleOpenOptions('option', {})}
           />
         </Header>
         {businessMenusState?.menus.map(menu => (
@@ -70,7 +69,7 @@ const BusinessMenuUI = (props) => {
                 title={ActionIcon}
                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
-                <Dropdown.Item onClick={() => console.log('edit')}>{t('EDIT', 'Edit')}</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleOpenOptions('option', menu)}>{t('EDIT', 'Edit')}</Dropdown.Item>
                 <Dropdown.Item>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => handleDeleteBusinessMenu(menu.id)}
@@ -82,15 +81,15 @@ const BusinessMenuUI = (props) => {
           </MeunItem>
         ))}
         <AddMenuButton
-          onClick={() => handleOpenOptions('add')}
+          onClick={() => handleOpenOptions('option', {})}
         >
           {t('ADD_MENU', 'Add menu')}
         </AddMenuButton>
       </MenuContainer>
-      {showOptions === 'add' && (
+      {showOption === 'option' && (
         <BusinessMenuOptions
           business={business}
-          currentMenu={currentMenu}
+          menu={currentMenu}
           onClose={() => handleCloseOption()}
           handleUpdateBusinessState={handleSuccessBusinessMenu}
         />

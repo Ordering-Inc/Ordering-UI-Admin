@@ -18,6 +18,7 @@ import {
 export const BusinessDetailsUI = (props) => {
   const {
     open,
+    businessId,
     businessState,
     handleChangeActiveBusiness,
     handleSucessUpdateBusiness,
@@ -89,6 +90,11 @@ export const BusinessDetailsUI = (props) => {
       toggleMainContent()
     }
   }, [extraOpen])
+
+  useEffect(() => {
+    setExtraOpen(false)
+    setIsExtendExtraOpen(false)
+  }, [businessId])
 
   return (
     <BarContainer id='business_details_bar'>

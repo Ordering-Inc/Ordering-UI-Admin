@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { BusinessMenuOptions as BusinessMenuOptionsController } from './naked'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import MdcShareVariantOutline from '@meronex/icons/mdc/MdcShareVariantOutline'
 import { Button } from '../../styles/Buttons'
@@ -28,15 +29,20 @@ import {
 } from './styles'
 import { AutoScroll } from '../AutoScroll'
 
-export const BusinessMenuOptions = (props) => {
+const BusinessMenuOptionsUI = (props) => {
   const {
     business,
+    businessMenuState,
+    formState,
     onClose,
+    handleChangeInput,
+    handleCheckOrderType,
     handleUpdateBusinessState
   } = props
   const [, t] = useLanguage()
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
   const [openCategoryProduct, setOpenCategoryProduct] = useState({})
+  const isEdit = Object.keys(businessMenuState?.menu).length
 
   const handleTogglePopover = (type) => {
     setOpenCategoryProduct({
@@ -45,12 +51,26 @@ export const BusinessMenuOptions = (props) => {
     })
   }
   const orderTypes = [
-    { value: 1, content: t('DELIVERY', 'Delivery') },
-    { value: 2, content: t('PICKUP', 'Pickup') },
-    { value: 3, content: t('EAT_IN', 'Eat in') },
-    { value: 4, content: t('CURBSIDE', 'Curbside') },
-    { value: 5, content: t('DRIVE_THRU', 'Drive thru') }
+    { value: 1, key: 'delivery', content: t('DELIVERY', 'Delivery') },
+    { value: 2, key: 'pickup', content: t('PICKUP', 'Pickup') },
+    { value: 3, key: 'eatin', content: t('EAT_IN', 'Eat in') },
+    { value: 4, key: 'curbside', content: t('CURBSIDE', 'Curbside') },
+    { value: 5, key: 'driver_thru', content: t('DRIVE_THRU', 'Drive thru') }
   ]
+
+  const isCheckedCategory = (categoryId) => {
+    if (!isEdit) return false
+    const businessCategory = business?.categories.find(category => category.id === categoryId)
+    const menuProducts = businessMenuState?.menu?.products.filter(product => product?.category_id === categoryId)
+    return businessCategory?.products.length === menuProducts.length
+  }
+
+  const isCheckedProduct = (categoryId, productId) => {
+    if (!isEdit) return false
+    const found = businessMenuState?.menu?.products.find(product => product?.category_id === categoryId && product.id === productId)
+    return found
+  }
+
   return (
     <Container>
       <Header>
@@ -92,14 +112,32 @@ export const BusinessMenuOptions = (props) => {
           <Input
             name='name'
             placeholder={t('NAME', 'Name')}
+            defaultValue={
+              formState?.result?.result
+                ? formState?.result?.result?.name
+                : formState?.changes?.name ?? businessMenuState?.menu?.name ?? ''
+            }
+            onChange={(e) => handleChangeInput(e)}
           />
           <FieldName isBorderBottom>{t('DELIVERY_TYPE', 'Delivery type')}</FieldName>
           {orderTypes.map(orderType => (
             <OrderType
               key={orderType.value}
-              active
+              active={(formState?.result?.result
+                ? formState?.result?.result[orderType.key]
+                : formState?.changes[orderType.key] ?? businessMenuState.menu[orderType.key])}
+              onClick={() => handleCheckOrderType(orderType.key)}
             >
-              <RiCheckboxFill />
+              {
+                (formState?.result?.result
+                  ? formState?.result?.result[orderType.key]
+                  : formState?.changes[orderType.key] ?? businessMenuState.menu[orderType.key])
+                  ? (
+                    <RiCheckboxFill />
+                  ) : (
+                    <RiCheckboxBlankLine />
+                  )
+              }
               <span>{orderType.content}</span>
             </OrderType>
           ))}
@@ -113,7 +151,13 @@ export const BusinessMenuOptions = (props) => {
           <TextArea
             rows={4}
             name='comment'
+            defaultValue={
+              formState?.result?.result
+                ? formState?.result?.result?.comment
+                : formState?.changes?.comment ?? businessMenuState?.menu?.comment ?? ''
+            }
             placeholder={t('WRITE_HERE', 'Write here')}
+            onChange={(e) => handleChangeInput(e)}
           />
           <FieldName isBorderBottom>{t('PRODUCTS', 'Products')}</FieldName>
           {business?.categories.map(category => (
@@ -122,8 +166,14 @@ export const BusinessMenuOptions = (props) => {
                 active={openCategoryProduct[category?.name]}
               >
                 <CheckboxContainer>
-                  <CheckBoxWrapper>
-                    <RiCheckboxFill />
+                  <CheckBoxWrapper
+                    active={isCheckedCategory(category.id)}
+                  >
+                    {isCheckedCategory(category.id) ? (
+                      <RiCheckboxFill />
+                    ) : (
+                      <RiCheckboxBlankLine />
+                    )}
                   </CheckBoxWrapper>
                   <span className='bold'>{category?.name}</span>
                 </CheckboxContainer>
@@ -136,8 +186,14 @@ export const BusinessMenuOptions = (props) => {
                   {category?.products.map(product => (
                     <ProductContainer key={product.id}>
                       <CheckboxContainer>
-                        <CheckBoxWrapper>
-                          <RiCheckboxFill />
+                        <CheckBoxWrapper
+                          active={isCheckedProduct(product?.category_id, product?.id)}
+                        >
+                          {isCheckedProduct(product?.category_id, product?.id) ? (
+                            <RiCheckboxFill />
+                          ) : (
+                            <RiCheckboxBlankLine />
+                          )}
                         </CheckBoxWrapper>
                         <span>{product?.name}</span>
                       </CheckboxContainer>
@@ -151,4 +207,12 @@ export const BusinessMenuOptions = (props) => {
       )}
     </Container>
   )
+}
+
+export const BusinessMenuOptions = (props) => {
+  const businessMenuOptionFormProps = {
+    ...props,
+    UIComponent: BusinessMenuOptionsUI
+  }
+  return <BusinessMenuOptionsController {...businessMenuOptionFormProps} />
 }
