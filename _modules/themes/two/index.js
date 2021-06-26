@@ -243,12 +243,6 @@ Object.defineProperty(exports, "Messages", {
     return _Messages.Messages;
   }
 });
-Object.defineProperty(exports, "MetaFields", {
-  enumerable: true,
-  get: function get() {
-    return _MetaFields.MetaFields;
-  }
-});
 Object.defineProperty(exports, "Modal", {
   enumerable: true,
   get: function get() {
@@ -641,8 +635,6 @@ var _Logistics = require("./src/components/Logistics");
 var _LogoutButton = require("./src/components/LogoutButton");
 
 var _Messages = require("./src/components/Messages");
-
-var _MetaFields = require("./src/components/MetaFields");
 
 var _Modal = require("./src/components/Modal");
 
