@@ -45,12 +45,6 @@ Object.defineProperty(exports, "BusinessDetails", {
     return _BusinessDetails.BusinessDetails;
   }
 });
-Object.defineProperty(exports, "BusinessDetailsLateralBar", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessDetailsLateralBar.BusinessDetailsLateralBar;
-  }
-});
 Object.defineProperty(exports, "BusinessesSelector", {
   enumerable: true,
   get: function get() {
@@ -581,8 +575,6 @@ var _BusinessActionSelector = require("./src/components/BusinessActionSelector")
 var _BusinessActiveStateFilter = require("./src/components/BusinessActiveStateFilter");
 
 var _BusinessDetails = require("./src/components/BusinessDetails");
-
-var _BusinessDetailsLateralBar = require("./src/components/BusinessDetailsLateralBar");
 
 var _BusinessesSelector = require("./src/components/BusinessesSelector");
 

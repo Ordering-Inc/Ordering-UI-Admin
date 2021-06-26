@@ -5,7 +5,6 @@ import { BasicSettings } from './src/components/BasicSettings'
 import { BusinessActionSelector } from './src/components/BusinessActionSelector'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
 import { BusinessDetails } from './src/components/BusinessDetails'
-import { BusinessDetailsLateralBar } from './src/components/BusinessDetailsLateralBar'
 import { BusinessesSelector } from './src/components/BusinessesSelector'
 import { BusinessessListing } from './src/components/BusinessessListing'
 import { BusinessList } from './src/components/BusinessList'
@@ -95,7 +94,6 @@ export {
   BusinessActiveStateFilter,
   BasicSettings,
   BusinessDetails,
-  BusinessDetailsLateralBar,
   BusinessesSelector,
   BusinessessListing,
   BusinessList,
