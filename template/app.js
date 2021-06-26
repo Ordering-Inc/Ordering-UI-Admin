@@ -21,6 +21,7 @@ import { DeliveriesManager } from './pages/DeliveriesManager'
 import { DriversList } from './pages/DriversList'
 import { UsersList } from './pages/UsersList'
 import { BusinessesList } from './pages/BusinessesList'
+import { BasicSettings } from './pages/BasicSettings'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -129,6 +130,13 @@ export const App = () => {
                       {
                         auth
                           ? <BusinessesList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/basicSettings'>
+                      {
+                        auth
+                          ? <BasicSettings />
                           : <Redirect to='/login' />
                       }
                     </Route>

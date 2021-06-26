@@ -15,7 +15,8 @@ export const ListenPageChanges = ({ children }) => {
     drivers: '/drivers',
     users: '/users',
     login: '/login',
-    businesses: '/businesses'
+    basicSettings: '/basicSettings',
+
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

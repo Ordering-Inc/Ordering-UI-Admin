@@ -40,5 +40,12 @@
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
+  },
+  "basicSettings": {
+    "title": "basicSettings",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
   }
 }

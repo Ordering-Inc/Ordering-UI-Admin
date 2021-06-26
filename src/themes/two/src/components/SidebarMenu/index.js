@@ -105,6 +105,19 @@ export const SidebarMenu = (props) => {
     }
   ]
 
+  const settingsSubMenus = [
+    {
+      id: 1,
+      title: t('BASIC_SETTINGS', 'Basic settings'),
+      pageName: 'basicSettings'
+    },
+    {
+      id: 2,
+      title: t('OPERATION_SETTINGS', 'Operation settings'),
+      pageName: 'operationSettings'
+    }
+  ]
+
   const handleGoToPage = (data) => {
     setMenuOpen(false)
     events.emit('go_to_page', data)
@@ -275,16 +288,36 @@ export const SidebarMenu = (props) => {
               </Accordion>
             </div>
             <div className='d-flex flex-column'>
+              <Accordion>
+                <MenuContainer>
+                  <ContextAwareToggle
+                    eventKey='5'
+                    active={
+                      location.pathname === '/basicSettings' ||
+                      location.pathname === '/operationSettings'
+                    }
+                  >
+                    <FiSettings />
+                    {!isCollapse && <span className='mx-2'>{t('SETTINGS', 'Settings')}</span>}
+                  </ContextAwareToggle>
+                  <Accordion.Collapse eventKey='5'>
+                    <MenuContent>
+                      {settingsSubMenus.map(item => (
+                        <SubMenu
+                          key={item.id}
+                          active={location.pathname.includes(item.pageName)}
+                          onClick={() => handleGoToPage({ page: item.pageName })}
+                        >
+                          {item.title}
+                        </SubMenu>
+                      ))}
+                    </MenuContent>
+                  </Accordion.Collapse>
+                </MenuContainer>
+              </Accordion>
+
               <Button
-                className='d-flex align-items-center m-1'
-                variant={location.pathname === '/settings' && 'primary'}
-                onClick={() => handleGoToPage({ page: 'settings' })}
-              >
-                <FiSettings />
-                {!isCollapse && <span className='mx-2'>{t('SETTINGS', 'Settings')}</span>}
-              </Button>
-              <Button
-                className='d-flex align-items-center m-1'
+                className='d-flex align-items-center'
                 variant={location.pathname === '/support' && 'primary'}
                 onClick={() => handleGoToPage({ page: 'support' })}
               >
@@ -298,7 +331,7 @@ export const SidebarMenu = (props) => {
             className='d-flex flex-column px-1'
           >
             <Button
-              className='d-flex align-items-center m-1'
+              className='d-flex align-items-center'
               onClick={() => handleGoToPage({ page: 'profile' })}
               variant={location.pathname === '/profile' && 'primary'}
             >
