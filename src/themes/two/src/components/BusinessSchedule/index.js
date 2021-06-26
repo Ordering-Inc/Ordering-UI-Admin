@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
-import { useLanguage, BusinessSchedule as BusinessScheduleController } from 'ordering-components-admin'
+import React, { useEffect, useState } from 'react'
+import { useLanguage } from 'ordering-components-admin'
+import { BusinessSchedule as BusinessScheduleController } from './naked'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import BiMinus from '@meronex/icons/bi/BiMinus'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
+import { Alert } from '../Confirm'
+
 import {
   ScheduleContainer,
   Title,
@@ -23,6 +26,7 @@ import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
 
 const BusinessScheduleUI = (props) => {
   const {
+    formState,
     business,
     handleChangeTime,
     handleAddScheduleTime,
@@ -30,10 +34,14 @@ const BusinessScheduleUI = (props) => {
     handleScheduleTimeActiveState,
     selectedCopyDays,
     handleSelectCopyTimes,
-    cleanSelectedCopyDays
+    cleanSelectedCopyDays,
+    isConflict,
+    setIsConflict
   } = props
   const [, t] = useLanguage()
   const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const daysOfWeek = [
     t('SUNDAY_ABBREVIATION', 'Sun'),
     t('MONDAY_ABBREVIATION', 'Mon'),
@@ -43,6 +51,22 @@ const BusinessScheduleUI = (props) => {
     t('FRIDAY_ABBREVIATION', 'Fri'),
     t('SATURDAY_ABBREVIATION', 'Sat')
   ]
+
+  const closeAlert = () => {
+    setIsConflict(false)
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  useEffect(() => {
+    if (!isConflict) return
+    setAlertState({
+      open: true,
+      content: [t('SCHEDULE_CONFLICT', 'There is an schedule conflict')]
+    })
+  }, [isConflict])
 
   return (
     <>
@@ -67,7 +91,13 @@ const BusinessScheduleUI = (props) => {
                       <TimeSection key={index}>
                         <TimeSelectContainer>
                           <TimeSelect
-                            defaultValue={laps.open.hour}
+                            value={
+                              formState?.result?.result
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].open.hour
+                                : formState?.changes?.schedule
+                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open.hour
+                                  : laps.open.hour
+                            }
                             onChange={(e) => handleChangeTime(daysOfWeekIndex, true, true, index, e.target.value)}
                           >
                             {[...Array(24)].map((v, i) => (
@@ -81,7 +111,13 @@ const BusinessScheduleUI = (props) => {
                           </TimeSelect>
                           :
                           <TimeSelect
-                            defaultValue={laps.open.minute}
+                            value={
+                              formState?.result?.result
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].open.minute
+                                : formState?.changes?.schedule
+                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open.minute
+                                  : laps.open.minute
+                            }
                             onChange={(e) => handleChangeTime(daysOfWeekIndex, true, false, index, e.target.value)}
                           >
                             {[...Array(60)].map((v, i) => (
@@ -97,7 +133,13 @@ const BusinessScheduleUI = (props) => {
                         <BiMinus />
                         <TimeSelectContainer>
                           <TimeSelect
-                            defaultValue={laps.close.hour}
+                            value={
+                              formState?.result?.result
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].close.hour
+                                : formState?.changes?.schedule
+                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.close.hour
+                                  : laps.close.hour
+                            }
                             onChange={(e) => handleChangeTime(daysOfWeekIndex, false, true, index, e.target.value)}
                           >
                             {[...Array(24)].map((v, i) => (
@@ -111,7 +153,13 @@ const BusinessScheduleUI = (props) => {
                           </TimeSelect>
                           :
                           <TimeSelect
-                            defaultValue={laps.close.minute}
+                            value={
+                              formState?.result?.result
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].close.minute
+                                : formState?.changes?.schedule
+                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.close.minute
+                                  : laps.close.minute
+                            }
                             onChange={(e) => handleChangeTime(daysOfWeekIndex, false, false, index, e.target.value)}
                           >
                             {[...Array(60)].map((v, i) => (
@@ -155,6 +203,15 @@ const BusinessScheduleUI = (props) => {
           ))}
         </ScheduleSection>
       </ScheduleContainer>
+      <Alert
+        title={t('ORDERING', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

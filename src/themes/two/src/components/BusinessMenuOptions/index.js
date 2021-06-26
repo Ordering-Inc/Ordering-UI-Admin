@@ -43,7 +43,9 @@ const BusinessMenuOptionsUI = (props) => {
     handleUpdateBusinessState,
     handleCheckProduct,
     handleClickCategory,
-    handleCheckCategory
+    handleCheckCategory,
+    handleUpdateBusinessMenuOption,
+    handleAddBusinessMenuOption
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -178,12 +180,12 @@ const BusinessMenuOptionsUI = (props) => {
               <span>{orderType.content}</span>
             </OrderType>
           ))}
-          <BusinessScheduleWrapper>
+          {/* <BusinessScheduleWrapper>
             <BusinessSchedule
               business={business}
               handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
             />
-          </BusinessScheduleWrapper>
+          </BusinessScheduleWrapper> */}
           <FieldName>{t('COMMENTS', 'Comments')}</FieldName>
           <TextArea
             rows={4}
@@ -272,6 +274,24 @@ const BusinessMenuOptionsUI = (props) => {
             </CategoryProductsContainer>
           ))}
         </BusinessMenuBasicContainer>
+      )}
+      {Object.keys(formState?.changes).length > 0 && (
+        <Button
+          color='primary'
+          borderRadius='5px'
+          disabled={formState.loading}
+          onClick={() => isEdit ? handleUpdateBusinessMenuOption() : handleAddBusinessMenuOption()}
+        >
+          {formState.loading ? (
+            t('LOADING', 'Loading')
+          ) : (
+            isEdit ? (
+              t('UPDATE', 'Update')
+            ) : (
+              t('ADD', 'Add')
+            )
+          )}
+        </Button>
       )}
     </Container>
   )

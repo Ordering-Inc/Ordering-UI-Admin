@@ -10,6 +10,10 @@ export const Container = styled.div`
   ` : css`
     border-left: 1px solid #E9ECEF;
   `}
+
+  > button {
+    margin: 20px 0;
+  }
 `
 
 export const Header = styled.div`

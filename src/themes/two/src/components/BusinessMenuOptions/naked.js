@@ -11,7 +11,7 @@ export const BusinessMenuOptions = (props) => {
     UIComponent
   } = props
   const [ordering] = useApi()
-  const [session] = useSession()
+  const [{ token }] = useSession()
   const [businessMenuState, setBusinessMenuState] = useState({ loading: false, error: null, menu: menu || {} })
   const [formState, setFormState] = useState({ loading: false, changes: {}, error: null })
   const [orderTypeState, setOrderTypeSate] = useState({})
@@ -112,11 +112,77 @@ export const BusinessMenuOptions = (props) => {
     })
   }
 
+  /**
+   * Method to update the busienss menu option from API
+   */
+  const handleUpdateBusinessMenuOption = async () => {
+    try {
+      setFormState({ ...formState, loading: true })
+      const requestOptions = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(formState?.changes)
+      }
+      const response = await fetch(`${ordering.root}/business/${business.id}/menus/${menu?.id}`, requestOptions)
+      const content = await response.json()
+
+      setFormState({
+        ...formState,
+        changes: content.error ? formState.changes : {},
+        result: {
+          error: false,
+          result: content.result
+        },
+        loading: false
+      })
+
+      if (!content.error) {
+      }
+    } catch (err) {
+      setFormState({ ...formState, loading: false, result: { error: true, result: err.message } })
+    }
+  }
+
+  /**
+   * Method to add the busienss menu option from API
+   */
+  const handleAddBusinessMenuOption = async () => {
+    try {
+      setFormState({ ...formState, loading: true })
+      const requestOptions = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(formState?.changes)
+      }
+      const response = await fetch(`${ordering.root}/business/${business.id}/menus`, requestOptions)
+      const content = await response.json()
+
+      setFormState({
+        ...formState,
+        changes: content.error ? formState.changes : {},
+        result: {
+          error: false,
+          result: content.result
+        },
+        loading: false
+      })
+
+      if (!content.error) {
+      }
+    } catch (err) {
+      setFormState({ ...formState, loading: false, result: { error: true, result: err.message } })
+    }
+  }
+
   useEffect(() => {
-    if (!Object.keys(menu).length) return
-    setBusinessMenuState({ ...businessMenuState, menu: menu })
-    const _selectedProductsIds = menu.products.reduce((ids, product) => [...ids, product.id], [])
-    setSelectedProductsIds(_selectedProductsIds)
+    setFormState({ ...formState, changes: {} })
+    setBusinessMenuState({ ...businessMenuState, menu: menu || {} })
     setOrderTypeSate({
       delivery: menu?.delivery,
       pickup: menu?.pickup,
@@ -124,6 +190,12 @@ export const BusinessMenuOptions = (props) => {
       curbside: menu?.curbside,
       driver_thru: menu?.driver_thru
     })
+    if (Object.keys(menu).length) {
+      const _selectedProductsIds = menu.products.reduce((ids, product) => [...ids, product.id], [])
+      setSelectedProductsIds(_selectedProductsIds)
+    } else {
+      setSelectedProductsIds([])
+    }
   }, [menu])
   return (
     <>
@@ -138,6 +210,8 @@ export const BusinessMenuOptions = (props) => {
             handleCheckCategory={handleCheckCategory}
             handleClickCategory={handleClickCategory}
             handleCheckProduct={handleCheckProduct}
+            handleUpdateBusinessMenuOption={handleUpdateBusinessMenuOption}
+            handleAddBusinessMenuOption={handleAddBusinessMenuOption}
           />
         )
       }
