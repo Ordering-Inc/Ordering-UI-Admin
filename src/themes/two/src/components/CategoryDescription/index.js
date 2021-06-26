@@ -31,7 +31,9 @@ import {
 const CategoryDescriptionUI = (props) => {
   const {
     open,
-    onClose
+    onClose,
+    configId,
+    onBasicSettingsRedirect
   } = props
 
   const {
@@ -45,6 +47,10 @@ const CategoryDescriptionUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraInfoOpen, setExtraInfoOpen] = useState(false)
   const [extraSubCatOpen, setExtraSubCatOpen] = useState(false)
+
+  useEffect(() => {
+    if (configId) setExtraSubCatOpen(true)
+  }, [configId])
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -105,8 +111,13 @@ const CategoryDescriptionUI = (props) => {
     } else {
       setExtraInfoOpen(false)
       setExtraSubCatOpen(true)
+      onBasicSettingsRedirect({ category: category.id, config: category.id })
     }
+  }
 
+  const onCloseSubCat = () => {
+    setExtraSubCatOpen(false)
+    onBasicSettingsRedirect({ category: category.id, config: null })
   }
 
   return (
@@ -193,12 +204,16 @@ const CategoryDescriptionUI = (props) => {
               <Button
                 borderRadius='5px'
                 color='secundary'
-                onClick={() => setExtraSubCatOpen(false)}
+                onClick={onCloseSubCat}
               >
                 <MdcClose />
               </Button>
               <SubCategoryWrapper>
-                <SubCategory categoryId={category?.id} />
+                <SubCategory
+                  categoryId={category?.id}
+                  onCloseSubCat={onCloseSubCat}
+                  configId={configId}
+                />
               </SubCategoryWrapper>
             </CategoryDescriptionExtraContent>
           ) : (
@@ -207,10 +222,14 @@ const CategoryDescriptionUI = (props) => {
                 width='70%'
                 height='90vh'
                 open
-                onClose={() => setExtraSubCatOpen(false)}
+                onClose={onCloseSubCat}
               >
                 <SubCategoryWrapper>
-                  <SubCategory categoryId={category?.id} />
+                  <SubCategory
+                    categoryId={category?.id}
+                    onCloseSubCat={onCloseSubCat}
+                    configId={configId}
+                  />
                 </SubCategoryWrapper>
               </Modal>
             </>

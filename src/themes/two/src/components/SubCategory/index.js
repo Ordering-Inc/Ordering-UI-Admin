@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
 import { useLanguage, SubCategory as SubCategoryController } from 'ordering-components-admin'
+import Skeleton from 'react-loading-skeleton'
+import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { SubCategoryMenu } from '../SubCategoryMenu'
 import { Button } from '../../../../../styles/Buttons'
 import {
@@ -26,7 +27,8 @@ export const SubCategoryUI = (props) => {
 
   const {
     subCategoryState,
-    saveConfiguartion
+    saveConfiguartion,
+    onCloseSubCat
   } = props
 
   const [, t] = useLanguage()
@@ -90,7 +92,7 @@ export const SubCategoryUI = (props) => {
         handleChangeMenu={handleChangeCategory}
       />
       {
-        subCategoryState.loading && (
+        !subCategoryState.error && subCategoryState.loading && (
           <SkeletonWrapper>
             <Skeleton height={20} width={50} />
             <Skeleton height={40} />
@@ -103,7 +105,7 @@ export const SubCategoryUI = (props) => {
         )
       }
       {
-        !subCategoryState.loading && selectedCategory === 'general' && subCategoryState.subCategory && (
+        !subCategoryState.error && !subCategoryState.loading && selectedCategory === 'general' && subCategoryState.subCategory && (
           <GeneralContainer>
             <GeneralTitle>
               <p>{t('GENERAL', 'General')}</p>
@@ -173,6 +175,15 @@ export const SubCategoryUI = (props) => {
               }
             </FormContainer>
           </GeneralContainer>
+        )
+      }
+      {
+        !subCategoryState.loading && subCategoryState.error && (
+          <NotFoundSource
+            content={t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.')}
+            btnTitle={t('PROFILE_CATEGORY_REDIRECT', 'Go to Category Description')}
+            onClickButton={onCloseSubCat}
+          />
         )
       }
     </SubCategoryContainer>

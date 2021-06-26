@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, BasicSettings as BasicSettingsController } from 'ordering-components-admin'
+import { useLanguage, useEvent, BasicSettings as BasicSettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { CategoryDescription } from '../CategoryDescription'
 
@@ -13,37 +13,69 @@ import {
 const BasicSettingsUI = (props) => {
 
   const {
-    categoryList,
-    onBasicSettingsRedirect
+    categoryList
   } = props
 
   const [, t] = useLanguage()
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
-  const [categoryId, setCategoryId] = useState(null)
-  const query = new URLSearchParams(useLocation().search)
+  const { search } = useLocation()
+
+  let category
+  let config
+
+  if (search) {
+    const data = search.substring(1).split('&')
+    category = data[0]
+    config = data[1]
+  }
+
+  const categoryId = category && category.split('=')[1]
+  const configId = config && config.split('=')[1]
+  const [events] = useEvent()
 
   useEffect(() => {
-    const id = query.get('category')
-    if (id === null) setIsOpenDescription(false)
-    else {
-      setCategoryId(id)
-      onBasicSettingsRedirect && onBasicSettingsRedirect(id)
+    if (categoryId && configId) {
+      onBasicSettingsRedirect({ category: categoryId, config: configId })
       setIsOpenDescription(true)
+    } else if (categoryId) {
+      onBasicSettingsRedirect({ category: categoryId })
+      setIsOpenDescription(true)
+    } else {
+      setIsOpenDescription(false)
     }
   }, [])
+
+  const onBasicSettingsRedirect = ({ category, config }) => {
+    if (!category && !config) {
+      return events.emit('go_to_page', { page: 'basicSettings', replace: true })
+    }
+    if (!config && category) {
+      events.emit('go_to_page', {
+        page: 'basicSettings',
+        search: `?category=${category}`,
+        replace: true
+      })
+    }
+    if (category && config) {
+      events.emit('go_to_page', {
+        page: 'basicSettings',
+        search: `?category=${category}&config=${config}`,
+        replace: true
+      })
+    }
+  }
 
   const handleOpenDescription = (category) => {
     setIsOpenDescription(true)
     setSelectedCategory(category)
-    setCategoryId(category.id)
-    onBasicSettingsRedirect(category.id)
+    onBasicSettingsRedirect({ category: category.id })
   }
 
   const handleBackRedirect = () => {
     setIsOpenDescription(false)
     setSelectedCategory(null)
-    onBasicSettingsRedirect()
+    onBasicSettingsRedirect({ category: null, config: null })
   }
 
   return (
@@ -74,7 +106,9 @@ const BasicSettingsUI = (props) => {
             open={isOpenDescription}
             category={selectedCategory}
             categoryId={categoryId}
+            configId={configId}
             onClose={handleBackRedirect}
+            onBasicSettingsRedirect={onBasicSettingsRedirect}
           />
         )
       }
