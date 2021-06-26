@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessMenuOptions as BusinessMenuOptionsController } from './naked'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
@@ -6,9 +6,11 @@ import MdcShareVariantOutline from '@meronex/icons/mdc/MdcShareVariantOutline'
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
+import AiFillMinusSquare from '@meronex/icons/ai/AiFillMinusSquare'
 import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { BusinessSchedule } from '../BusinessSchedule'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   Container,
@@ -31,15 +33,21 @@ import { AutoScroll } from '../AutoScroll'
 
 const BusinessMenuOptionsUI = (props) => {
   const {
+    open,
     business,
     businessMenuState,
     formState,
     onClose,
     handleChangeInput,
     handleCheckOrderType,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    handleCheckProduct,
+    handleClickCategory,
+    handleCheckCategory
   } = props
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
   const [openCategoryProduct, setOpenCategoryProduct] = useState({})
   const isEdit = Object.keys(businessMenuState?.menu).length
@@ -59,10 +67,14 @@ const BusinessMenuOptionsUI = (props) => {
   ]
 
   const isCheckedCategory = (categoryId) => {
-    if (!isEdit) return false
+    if (!isEdit) return 'nothing'
     const businessCategory = business?.categories.find(category => category.id === categoryId)
     const menuProducts = businessMenuState?.menu?.products.filter(product => product?.category_id === categoryId)
-    return businessCategory?.products.length === menuProducts.length
+    let result = ''
+    if (businessCategory?.products.length === menuProducts.length) result = 'all'
+    else if (menuProducts.length) result = 'some'
+    else result = 'nothing'
+    return result
   }
 
   const isCheckedProduct = (categoryId, productId) => {
@@ -71,8 +83,33 @@ const BusinessMenuOptionsUI = (props) => {
     return found
   }
 
+  const actionSidebar = (value) => {
+    if (!value) {
+      props.onClose()
+    }
+    setIsMenuOpen(value)
+    document.getElementById('menu_options').style.width = value
+      ? width > 489 ? '500px' : '100vw'
+      : '0'
+  }
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      if (width <= 500) {
+        document.getElementById('menu_options').style.width = '100vw'
+      } else {
+        document.getElementById('menu_options').style.width = '500px'
+      }
+    }
+  }, [width])
+
+  useEffect(() => {
+    if (!open) return
+    actionSidebar(true)
+  }, [open])
+
   return (
-    <Container>
+    <Container id='menu_options'>
       <Header>
         <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
         <ActionBlock>
@@ -165,15 +202,32 @@ const BusinessMenuOptionsUI = (props) => {
               <BusinessCategoryContainer
                 active={openCategoryProduct[category?.name]}
               >
-                <CheckboxContainer>
+                <CheckboxContainer
+                  onClick={() => handleClickCategory(category.id)}
+                >
                   <CheckBoxWrapper
-                    active={isCheckedCategory(category.id)}
+                    active={
+                      (handleCheckCategory(category.id) === 'all' ?? isCheckedCategory(category.id) === 'all') ||
+                      (handleCheckCategory(category.id) === 'some' ?? isCheckedCategory(category.id) === 'some')
+                    }
                   >
-                    {isCheckedCategory(category.id) ? (
-                      <RiCheckboxFill />
-                    ) : (
-                      <RiCheckboxBlankLine />
-                    )}
+                    {
+                      ((formState?.result?.result?.products || formState?.changes?.products)
+                        ? handleCheckCategory(category.id) === 'all'
+                        : isCheckedCategory(category.id) === 'all')
+                        ? (
+                          <RiCheckboxFill />
+                        ) : (
+                          ((formState?.result?.result?.products || formState?.changes?.products)
+                            ? handleCheckCategory(category.id) === 'some'
+                            : isCheckedCategory(category.id) === 'some')
+                            ? (
+                              <AiFillMinusSquare />
+                            ) : (
+                              <RiCheckboxBlankLine />
+                            )
+                        )
+                    }
                   </CheckBoxWrapper>
                   <span className='bold'>{category?.name}</span>
                 </CheckboxContainer>
@@ -184,16 +238,30 @@ const BusinessMenuOptionsUI = (props) => {
               {openCategoryProduct[category?.name] && (
                 <>
                   {category?.products.map(product => (
-                    <ProductContainer key={product.id}>
+                    <ProductContainer
+                      key={product.id}
+                      onClick={() => handleCheckProduct(product.id)}
+                    >
                       <CheckboxContainer>
                         <CheckBoxWrapper
-                          active={isCheckedProduct(product?.category_id, product?.id)}
+                          active={(formState?.result?.result
+                            ? formState?.result?.products.includes(product?.id)
+                            : formState?.changes?.products
+                              ? formState?.changes?.products.includes(product?.id)
+                              : isCheckedProduct(product?.category_id, product?.id))}
                         >
-                          {isCheckedProduct(product?.category_id, product?.id) ? (
-                            <RiCheckboxFill />
-                          ) : (
-                            <RiCheckboxBlankLine />
-                          )}
+                          {
+                            (formState?.result?.result
+                              ? formState?.result?.products.includes(product?.id)
+                              : formState?.changes?.products
+                                ? formState?.changes?.products.includes(product?.id)
+                                : isCheckedProduct(product?.category_id, product?.id))
+                              ? (
+                                <RiCheckboxFill />
+                              ) : (
+                                <RiCheckboxBlankLine />
+                              )
+                          }
                         </CheckBoxWrapper>
                         <span>{product?.name}</span>
                       </CheckboxContainer>

@@ -88,6 +88,7 @@ const BusinessMenuUI = (props) => {
       </MenuContainer>
       {showOption === 'option' && (
         <BusinessMenuOptions
+          open={showOption === 'option'}
           business={business}
           menu={currentMenu}
           onClose={() => handleCloseOption()}

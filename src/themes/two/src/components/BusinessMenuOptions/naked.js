@@ -15,11 +15,8 @@ export const BusinessMenuOptions = (props) => {
   const [businessMenuState, setBusinessMenuState] = useState({ loading: false, error: null, menu: menu || {} })
   const [formState, setFormState] = useState({ loading: false, changes: {}, error: null })
   const [orderTypeState, setOrderTypeSate] = useState({})
+  const [selectedProductsIds, setSelectedProductsIds] = useState([])
 
-  /**
-   * Clean formState
-   */
-  const cleanFormState = (values) => setFormState({ ...formState, ...values })
   /**
    * Update business menu name and comment
    * @param {EventTarget} e Related HTML event
@@ -36,7 +33,7 @@ export const BusinessMenuOptions = (props) => {
   }
 
   /**
-   * Method to contol order type checkbox
+   * Method to contol order type selection
    * @param {String} orderType params key of order type
    */
   const handleCheckOrderType = (orderType) => {
@@ -50,8 +47,76 @@ export const BusinessMenuOptions = (props) => {
     setOrderTypeSate({ ...orderTypeState, [orderType]: !orderTypeState[orderType] })
   }
 
+  /**
+   * Method to control category selection
+   * @param {*} categoryId category id
+   */
+  const handleClickCategory = (categoryId) => {
+    const businessCategoryProducts = business.categories.find(category => category.id === categoryId).products
+    const businessCategoryProductsIds = businessCategoryProducts.reduce((ids, product) => [...ids, product.id], [])
+    let _selectedProductsIds = [...selectedProductsIds]
+    if (businessCategoryProductsIds.every(elem => selectedProductsIds.includes(elem))) {
+      _selectedProductsIds = _selectedProductsIds.filter(el => !businessCategoryProductsIds.includes(el))
+    } else if (businessCategoryProductsIds.some(elem => selectedProductsIds.includes(elem))) {
+      _selectedProductsIds = [...selectedProductsIds, ...businessCategoryProductsIds]
+      _selectedProductsIds = [...new Set(_selectedProductsIds)]
+    } else {
+      _selectedProductsIds = [...selectedProductsIds, ...businessCategoryProductsIds]
+    }
+    setSelectedProductsIds(_selectedProductsIds)
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState.changes,
+        products: _selectedProductsIds
+      }
+    })
+  }
+
+  /**
+   * Method to control category selection
+   * @param {Number} categoryId category id
+   */
+  const handleCheckCategory = (categoryId) => {
+    const businessCategoryProducts = business.categories.find(category => category.id === categoryId).products
+    const businessCategoryProductsIds = businessCategoryProducts.reduce((ids, product) => [...ids, product.id], [])
+    let result
+    if (businessCategoryProductsIds.every(elem => selectedProductsIds.includes(elem))) {
+      result = 'all'
+    } else if (businessCategoryProductsIds.some(elem => selectedProductsIds.includes(elem))) {
+      result = 'some'
+    } else {
+      result = 'nothing'
+    }
+    return result
+  }
+
+  /**
+   * Method to control prodcut selection
+   * @param {Number} productId product id
+   */
+  const handleCheckProduct = (productId) => {
+    let _selectedProductsIds = [...selectedProductsIds]
+    if (_selectedProductsIds.includes(productId)) {
+      _selectedProductsIds = _selectedProductsIds.filter(id => id !== productId)
+    } else {
+      _selectedProductsIds.push(productId)
+    }
+    setSelectedProductsIds(_selectedProductsIds)
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState.changes,
+        products: _selectedProductsIds
+      }
+    })
+  }
+
   useEffect(() => {
-    setBusinessMenuState({ ...businessMenuState, menu: menu || {} })
+    if (!Object.keys(menu).length) return
+    setBusinessMenuState({ ...businessMenuState, menu: menu })
+    const _selectedProductsIds = menu.products.reduce((ids, product) => [...ids, product.id], [])
+    setSelectedProductsIds(_selectedProductsIds)
     setOrderTypeSate({
       delivery: menu?.delivery,
       pickup: menu?.pickup,
@@ -70,6 +135,9 @@ export const BusinessMenuOptions = (props) => {
             formState={formState}
             handleChangeInput={handleChangeInput}
             handleCheckOrderType={handleCheckOrderType}
+            handleCheckCategory={handleCheckCategory}
+            handleClickCategory={handleClickCategory}
+            handleCheckProduct={handleCheckProduct}
           />
         )
       }

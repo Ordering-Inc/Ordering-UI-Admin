@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  flex: 1;
   padding: 20px;
   overflow: auto;
+  transition: 0.3s;
+  width: 0;
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid #E9ECEF;
   ` : css`
