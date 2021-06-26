@@ -11,6 +11,7 @@ import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { BusinessSchedule } from '../BusinessSchedule'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { BusinessShareMenu } from '../BusinessShareMenu'
 
 import {
   Container,
@@ -52,6 +53,7 @@ const BusinessMenuOptionsUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
   const [openCategoryProduct, setOpenCategoryProduct] = useState({})
+  const [openShareMenu, setOpenShareMenu] = useState(false)
   const isEdit = Object.keys(businessMenuState?.menu).length
 
   const handleTogglePopover = (type) => {
@@ -115,12 +117,11 @@ const BusinessMenuOptionsUI = (props) => {
       <Header>
         <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
         <ActionBlock>
-          <Button
-            color='secundary'
-            borderRadius='5px'
-          >
-            <MdcShareVariantOutline />
-          </Button>
+          <BusinessShareMenu
+            open={openShareMenu}
+            onClick={() => setOpenShareMenu(true)}
+            onClose={() => setOpenShareMenu(false)}
+          />
           <MdcClose
             onClick={() => onClose()}
           />

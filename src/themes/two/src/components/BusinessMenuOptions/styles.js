@@ -27,10 +27,17 @@ export const Header = styled.div`
 `
 
 export const ActionBlock = styled.div`
+  display: flex;
+  align-items: center;
   > svg {
     cursor: pointer;
     font-size: 24px;
     color: ${props => props.theme.colors.headingColor};
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
   }
 `
 
