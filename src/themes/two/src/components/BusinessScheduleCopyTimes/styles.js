@@ -7,11 +7,15 @@ export const HeaderItem = styled.div`
     ` : css`
     text-align: right;
   `}
+  cursor: pointer;
   svg {
-    cursor: pointer;
     color: ${props => props.theme.colors?.headingColor};
     font-size: 20px;
   }
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    opacity: 0.6;
+  `}
 `
 
 export const PopoverBody = styled.div`

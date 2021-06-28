@@ -277,6 +277,7 @@ const BusinessScheduleUI = (props) => {
                   <BsPlusSquare />
                 </AddScheduleButton>
                 <BusinessScheduleCopyTimes
+                  disabled={!schedule?.enabled}
                   cleanSelectedCopyDays={cleanSelectedCopyDays}
                   open={isOpenCopytimes === daysOfWeekIndex}
                   daysOfWeekIndex={daysOfWeekIndex}

@@ -14,6 +14,7 @@ import {
 
 export const BusinessScheduleCopyTimes = (props) => {
   const {
+    disabled,
     open,
     daysOfWeekIndex,
     selectedCopyDays,
@@ -67,6 +68,7 @@ export const BusinessScheduleCopyTimes = (props) => {
     <div style={{ position: 'relative' }}>
       <HeaderItem
         ref={referenceElement}
+        disabled={disabled}
         onClick={() => props.onClick(daysOfWeekIndex)}
       >
         <MdcContentCopy />
