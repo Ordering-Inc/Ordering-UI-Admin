@@ -104,19 +104,43 @@ export const DeleteButton = styled.div`
   }
 `
 
+export const AddButton = styled.div`
+  ${({ disabled }) => disabled ? css`
+    pointer-events: none;
+    opacity: 0.6;
+  ` : css`
+    cursor: pointer;
+  `}
+  ${props => props.theme?.rtl ? css`
+    margin-right: 15px;
+  ` : css`
+    margin-left: 15px;
+  `}
+  svg {
+    color: ${props => props.theme.colors.primary};
+    font-size: 20px;
+  }
+`
+
 export const ScheduleActionBlock = styled.div`
   display: flex;
   margin-top: 10px;
+`
 
-  > svg {
+export const AddScheduleButton = styled.div`
+  ${({ disabled }) => disabled ? css`
+    pointer-events: none;
+    opacity: 0.6;
+  ` : css`
     cursor: pointer;
-    &:first-child {
-      color: ${props => props.theme.colors.primary};
-      ${props => props.theme?.rtl ? css`
-        margin-left: 5px;
-      ` : css`
-        margin-right: 5px;
-      `}
-    }
+  `}
+  ${props => props.theme?.rtl ? css`
+    margin-left: 5px;
+  ` : css`
+    margin-right: 5px;
+  `}
+
+  svg {
+    color: ${props => props.theme.colors.primary};
   }
 `
