@@ -9,6 +9,7 @@ import { BusinessSupport } from '../BusinessSupport'
 import { BusinessInformation } from '../BusinessInformation'
 import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
+import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
 
 import {
   BarContainer,
@@ -152,6 +153,11 @@ export const BusinessDetailsUI = (props) => {
                     business={businessState?.business}
                     handleSuccessBusinessMenu={handleUpdateBusinessState}
                     setIsExtendExtraOpen={setIsExtendExtraOpen}
+                  />
+                )}
+                {selectedItem === 'delivery_zones' && (
+                  <BusinessDeliveryZone
+                    business={businessState?.business}
                   />
                 )}
               </BusinessDetailsExtraContent>
