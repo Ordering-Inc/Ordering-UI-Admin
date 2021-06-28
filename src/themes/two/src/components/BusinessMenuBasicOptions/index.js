@@ -139,6 +139,14 @@ export const BusinessMenuBasicOptions = (props) => {
     })
   }, [isConflict])
 
+  useEffect(() => {
+    if (!formState?.result?.error) return
+    setAlertState({
+      open: true,
+      content: formState?.result?.result
+    })
+  }, [formState?.result?.error])
+
   return (
     <>
       <BusinessMenuBasicContainer>
@@ -147,7 +155,7 @@ export const BusinessMenuBasicOptions = (props) => {
           name='name'
           placeholder={t('NAME', 'Name')}
           value={
-            formState?.result?.result
+            formState?.result?.result?.name
               ? formState?.result?.result?.name
               : formState?.changes?.name ?? businessMenuState?.menu?.name ?? ''
           }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { BusinessMenuOptions as BusinessMenuOptionsController } from './naked'
+import { useLanguage, BusinessMenuOptions as BusinessMenuOptionsController } from 'ordering-components-admin'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessShareMenu } from '../BusinessShareMenu'
