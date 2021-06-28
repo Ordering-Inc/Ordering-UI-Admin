@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, BusinessMenuOptions as BusinessMenuOptionsController } from 'ordering-components-admin'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { BusinessShareMenu } from '../BusinessShareMenu'
-import { BusinessMenuBasicOptions } from '../BusinessMenuBasicOptions'
 import { AutoScroll } from '../AutoScroll'
+import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import {
   Container,
   Header,
-  ActionBlock,
   TabContainer,
   TabInnerContainer,
-  Tab
+  Tab,
+  ActionBlock
 } from './styles'
 
-const BusinessMenuOptionsUI = (props) => {
+export const BusinessDeliveryZoneSetting = (props) => {
   const {
     open,
     onClose
@@ -24,14 +22,13 @@ const BusinessMenuOptionsUI = (props) => {
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
-  const [openShareMenu, setOpenShareMenu] = useState(false)
 
   const actionSidebar = (value) => {
     if (!value) {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById('menu_options').style.width = value
+    document.getElementById('zone_setting').style.width = value
       ? width > 489 ? '500px' : '100vw'
       : '0'
   }
@@ -39,9 +36,9 @@ const BusinessMenuOptionsUI = (props) => {
   useEffect(() => {
     if (isMenuOpen) {
       if (width <= 500) {
-        document.getElementById('menu_options').style.width = '100vw'
+        document.getElementById('zone_setting').style.width = '100vw'
       } else {
-        document.getElementById('menu_options').style.width = '500px'
+        document.getElementById('zone_setting').style.width = '500px'
       }
     }
   }, [width])
@@ -52,15 +49,10 @@ const BusinessMenuOptionsUI = (props) => {
   }, [open])
 
   return (
-    <Container id='menu_options'>
+    <Container id='zone_setting'>
       <Header>
-        <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
+        <h1>{t('ZONE_DELIVERY_SETTINGS', 'Zone delivery settings')}</h1>
         <ActionBlock>
-          <BusinessShareMenu
-            open={openShareMenu}
-            onClick={() => setOpenShareMenu(true)}
-            onClose={() => setOpenShareMenu(false)}
-          />
           <MdcClose
             onClick={() => onClose()}
           />
@@ -68,7 +60,7 @@ const BusinessMenuOptionsUI = (props) => {
       </Header>
       <TabContainer>
         <TabInnerContainer>
-          <AutoScroll innerScroll scrollId='menu_options'>
+          <AutoScroll innerScroll scrollId='zone_setting'>
             <Tab
               active={selectedMenuOption === 'basic'}
               onClick={() => setSelectedMenuOption('basic')}
@@ -84,20 +76,6 @@ const BusinessMenuOptionsUI = (props) => {
           </AutoScroll>
         </TabInnerContainer>
       </TabContainer>
-
-      {selectedMenuOption === 'basic' && (
-        <BusinessMenuBasicOptions
-          {...props}
-        />
-      )}
     </Container>
   )
-}
-
-export const BusinessMenuOptions = (props) => {
-  const businessMenuOptionFormProps = {
-    ...props,
-    UIComponent: BusinessMenuOptionsUI
-  }
-  return <BusinessMenuOptionsController {...businessMenuOptionFormProps} />
 }

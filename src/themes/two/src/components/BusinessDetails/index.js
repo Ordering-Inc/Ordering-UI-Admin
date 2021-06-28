@@ -158,6 +158,8 @@ export const BusinessDetailsUI = (props) => {
                 {selectedItem === 'delivery_zones' && (
                   <BusinessDeliveryZone
                     business={businessState?.business}
+                    setIsExtendExtraOpen={setIsExtendExtraOpen}
+                    handleSuccessUpdate={handleUpdateBusinessState}
                   />
                 )}
               </BusinessDetailsExtraContent>

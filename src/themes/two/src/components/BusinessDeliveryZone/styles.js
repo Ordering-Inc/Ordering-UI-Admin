@@ -1,7 +1,13 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+export const MainContainer = styled.div`
+  display: flex;
+  height: 100%;
+`
+
+export const ZoneContainer = styled.div`
   padding: 20px;
+  flex: 1;
 `
 
 export const Header = styled.div`
@@ -50,6 +56,15 @@ export const DeliveryZoneWrapper = styled.div`
       &:focus {
         border: 1px dashed ${props => props.theme.colors.primary};
       }
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
     }
   }
 `
