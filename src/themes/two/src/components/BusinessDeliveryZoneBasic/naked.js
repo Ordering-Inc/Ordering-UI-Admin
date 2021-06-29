@@ -5,7 +5,11 @@ export const DrawingGoogleMaps = (props) => {
   const {
     apiKey,
     mapControls,
-    fixedLocation
+    clearState,
+    location,
+    type,
+    data,
+    fillStyle
   } = props
 
   if (!apiKey) {
@@ -15,7 +19,8 @@ export const DrawingGoogleMaps = (props) => {
   const divRef = useRef()
   const [googleMap, setGoogleMap] = useState(null)
   const [googleMapMarker, setGoogleMapMarker] = useState(null)
-  const location = fixedLocation || props.location
+  const [circleZone, setCircleZone] = useState(null)
+  const [polygonZone, setPolygonZone] = useState(null)
   const center = { lat: location?.lat, lng: location?.lng }
   const [googleReady, setGoogleReady] = useState(false)
 
@@ -45,28 +50,69 @@ export const DrawingGoogleMaps = (props) => {
       })
       setGoogleMapMarker(marker)
 
-      const drawingManager = new window.google.maps.drawing.DrawingManager({
-        drawingMode: window.google.maps.drawing.OverlayType.CIRCLE,
-        drawingControl: true,
-        drawingControlOptions: {
-          position: window.google.maps.ControlPosition.TOP_CENTER,
-          drawingModes: [
-            window.google.maps.drawing.OverlayType.CIRCLE,
-            window.google.maps.drawing.OverlayType.POLYGON
-          ]
-        },
-        circleOptions: {
-          fillColor: '#ffff00',
-          fillOpacity: 1,
-          strokeWeight: 5,
-          clickable: false,
-          editable: true,
-          zIndex: 1
-        }
-      })
-      drawingManager.setMap(map)
+      // const drawingManager = new window.google.maps.drawing.DrawingManager({
+      //   drawingMode: window.google.maps.drawing.OverlayType.CIRCLE,
+      //   drawingControl: true,
+      //   drawingControlOptions: {
+      //     position: window.google.maps.ControlPosition.TOP_CENTER,
+      //     drawingModes: [
+      //       window.google.maps.drawing.OverlayType.CIRCLE,
+      //       window.google.maps.drawing.OverlayType.POLYGON
+      //     ]
+      //   },
+      //   circleOptions: {
+      //     fillColor: '#2C7BE5',
+      //     strokeColor: '#03459E',
+      //     fillOpacity: 0.2,
+      //     strokeWeight: 2,
+      //     clickable: false,
+      //     editable: true,
+      //     draggable: true,
+      //     zIndex: 1
+      //   },
+      //   polygonOptions: {
+      //     fillColor: '#2C7BE5',
+      //     strokeColor: '#03459E',
+      //     fillOpacity: 0.2,
+      //     strokeWeight: 2,
+      //     clickable: false,
+      //     editable: true,
+      //     draggable: true,
+      //     zIndex: 1
+      //   }
+      // })
+      // drawingManager.setMap(map)
     }
   }, [googleReady])
+
+  useEffect(() => {
+    if (googleReady && googleMap) {
+      if (type === 1) {
+        const circle = new window.google.maps.Circle({
+          ...fillStyle,
+          map: googleMap,
+          center: data.center,
+          radius: data.radio * 1000
+        })
+        setCircleZone(circle)
+      }
+      if (type === 2) {
+        const polygon = new window.google.maps.Polygon({
+          ...fillStyle,
+          map: googleMap,
+          paths: data
+        })
+        setPolygonZone(polygon)
+      }
+    }
+  }, [type, data, googleReady, googleMap])
+
+  useEffect(() => {
+    if (clearState) {
+      if (type === 1) circleZone.setMap(null)
+      if (type === 2) polygonZone.setMap(null)
+    }
+  }, [clearState, type])
 
   useEffect(() => {
     if (googleReady) {

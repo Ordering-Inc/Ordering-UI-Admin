@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useConfig, useLanguage } from 'ordering-components-admin'
 import { DrawingGoogleMaps } from './naked'
 
 import { Select } from '../../styles/Select/FirstSelect'
 import { Input } from '../../styles/Inputs'
+import { Button } from '../../styles/Buttons'
 
 import {
   BasicContainer,
@@ -19,6 +20,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
   } = props
   const [, t] = useLanguage()
   const [configState] = useConfig()
+  const [clearState, setClearState] = useState(false)
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -38,6 +40,15 @@ export const BusinessDeliveryZoneBasic = (props) => {
     isMarkerDraggable: false
   }
 
+  const fillStyle = {
+    fillColor: '#2C7BE5',
+    strokeColor: '#03459E',
+    fillOpacity: 0.2,
+    strokeWeight: 2,
+    editable: true,
+    draggable: true
+  }
+
   return (
     <>
       <BasicContainer>
@@ -55,12 +66,20 @@ export const BusinessDeliveryZoneBasic = (props) => {
           defaultValue={zone?.address}
           disabled
         />
+        <Button
+          onClick={() => setClearState(true)}
+        >
+          {t('CLEAR', 'Clear')}
+        </Button>
         <WrapperMap>
           <DrawingGoogleMaps
             apiKey={configState?.configs?.google_maps_api_key?.value}
             mapControls={googleMapsControls}
             location={business?.location}
-            businessMap
+            clearState={clearState}
+            type={zone.type}
+            data={zone.data}
+            fillStyle={fillStyle}
           />
         </WrapperMap>
       </BasicContainer>
