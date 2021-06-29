@@ -3,6 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { AutoScroll } from '../AutoScroll'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { BusinessDeliveryZoneBasic } from '../BusinessDeliveryZoneBasic'
 
 import {
   Container,
@@ -16,7 +17,9 @@ import {
 export const BusinessDeliveryZoneSetting = (props) => {
   const {
     open,
-    onClose
+    onClose,
+    business,
+    zone
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -76,6 +79,13 @@ export const BusinessDeliveryZoneSetting = (props) => {
           </AutoScroll>
         </TabInnerContainer>
       </TabContainer>
+
+      {selectedMenuOption === 'basic' && (
+        <BusinessDeliveryZoneBasic
+          business={business}
+          zone={zone}
+        />
+      )}
     </Container>
   )
 }

@@ -17,6 +17,7 @@ export const BusinessDeliveryZone = (props) => {
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
   const [zoneId, setZoneId] = useState(null)
   const [businessZones, setBusinessZones] = useState([])
+  const [errors, setErrors] = useState({})
   /**
    * Method to update the business delivery zone from API
    */
@@ -137,7 +138,7 @@ export const BusinessDeliveryZone = (props) => {
   const handleChangeInput = (e, zoneId) => {
     const _businessZones = businessZones.filter(zone => {
       if (zone.id === zoneId) {
-        zone = { ...zone, [e.target.name]: e.target.value }
+        zone[e.target.name] = e.target.value
       }
       return true
     })
@@ -156,7 +157,16 @@ export const BusinessDeliveryZone = (props) => {
 
   useEffect(() => {
     if (!Object.keys(formState.changes).length) return
-    handleUpdateBusinessDeliveryZone()
+    const businessZone = businessZones.find(zone => zone.id === zoneId)
+    if (businessZone?.name === '' || businessZone?.minimum === '' || businessZone?.price === '') {
+      setErrors({
+        name: businessZone?.name === '',
+        minimum: businessZone?.minimum === '',
+        price: businessZone?.price === ''
+      })
+    } else {
+      handleUpdateBusinessDeliveryZone()
+    }
   }, [formState.changes])
 
   useEffect(() => {
@@ -176,6 +186,8 @@ export const BusinessDeliveryZone = (props) => {
             handleChangeInput={handleChangeInput}
             handleChangeActiveState={handleChangeActiveState}
             handleDeleteBusinessDeliveryZone={handleDeleteBusinessDeliveryZone}
+            errors={errors}
+            cleanErrors={() => setErrors({})}
           />
         )
       }

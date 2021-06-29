@@ -14,6 +14,7 @@ export const Header = styled.div`
   display: flex;
   h1 {
     font-size: 24px;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   svg {

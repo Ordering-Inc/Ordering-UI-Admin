@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { BusinessDeliveryZone as BusinessDeliveryZoneController } from './naked'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
@@ -8,6 +8,7 @@ import { Switch } from '../../styles/Switch'
 import { useTheme } from 'styled-components'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { BusinessDeliveryZoneSetting } from '../BusinessDeliveryZoneSetting'
+import { Alert } from '../Confirm'
 
 import {
   MainContainer,
@@ -27,12 +28,15 @@ import {
 
 const BusinessDeliveryZoneUI = (props) => {
   const {
+    business,
     formState,
     businessDeliveryZonesState,
     handleChangeInput,
     handleChangeActiveState,
     handleDeleteBusinessDeliveryZone,
-    setIsExtendExtraOpen
+    setIsExtendExtraOpen,
+    errors,
+    cleanErrors
   } = props
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
@@ -40,6 +44,8 @@ const BusinessDeliveryZoneUI = (props) => {
   const [openAddDeliveryZone, setOpenAddDeliveryZone] = useState(false)
   const [openSetting, setOpenSetting] = useState(false)
   const [curZone, setCurZone] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const ActionIcon = <FiMoreVertical />
 
   const handleOpenSetting = (zone) => {
@@ -53,128 +59,161 @@ const BusinessDeliveryZoneUI = (props) => {
     setIsExtendExtraOpen(false)
   }
 
+  const closeAlert = () => {
+    cleanErrors()
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  useEffect(() => {
+    if (Object.keys(errors).length) {
+      const errorContent = []
+      if (errors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
+      if (errors?.minimum) errorContent.push(t('MINIMUN_PURCHASED_REQUIRED', 'The minimum purchase is required.'))
+      if (errors?.price) errorContent.push(t('DELIVERY_PRICE_REQUIRED', 'The delivery price is required.'))
+      setAlertState({
+        open: true,
+        content: errorContent
+      })
+    }
+  }, [errors])
+
   return (
-    <MainContainer>
-      <ZoneContainer>
-        <Header>
-          <h1>{t('DELIVERY_ZONE', 'Delivery zones')}</h1>
-          <BsPlusSquare />
-        </Header>
-        <DeliveryZonesContainer>
-          <DeliveryZoneWrapper>
-            <ZoneName>{t('NAME', 'Name')}</ZoneName>
-            <ZoneMin>{t('MIN', 'Min')}</ZoneMin>
-            <ZonePrice>{t('PRICE', 'Price')}</ZonePrice>
-            <ZoneActions>{t('ACTIONS', 'Actions')}</ZoneActions>
-          </DeliveryZoneWrapper>
-          {businessDeliveryZonesState?.zones?.map(zone => (
-            <DeliveryZoneWrapper key={zone.id}>
+    <>
+      <MainContainer>
+        <ZoneContainer>
+          <Header>
+            <h1>{t('DELIVERY_ZONE', 'Delivery zones')}</h1>
+            <BsPlusSquare />
+          </Header>
+          <DeliveryZonesContainer>
+            <DeliveryZoneWrapper>
+              <ZoneName>{t('NAME', 'Name')}</ZoneName>
+              <ZoneMin>{t('MIN', 'Min')}</ZoneMin>
+              <ZonePrice>{t('PRICE', 'Price')}</ZonePrice>
+              <ZoneActions>{t('ACTIONS', 'Actions')}</ZoneActions>
+            </DeliveryZoneWrapper>
+            {businessDeliveryZonesState?.zones?.map(zone => (
+              <DeliveryZoneWrapper key={zone.id}>
+                <ZoneName>
+                  <input
+                    name='name'
+                    defaultValue={zone?.name ?? ''}
+                    onChange={(e) => handleChangeInput(e, zone.id)}
+                  />
+                </ZoneName>
+                <ZoneMin>
+                  <input
+                    name='minimum'
+                    type='number'
+                    defaultValue={
+                      formState.result?.result?.minimum
+                        ? formState.result?.result?.minimum
+                        : formState?.changes?.minimum
+                          ? parseNumber(formState.changes?.minimum, { separator: '.' })
+                          : parseNumber(zone?.minimum, { separator: '.' }) ?? ''
+                    }
+                    onChange={(e) => handleChangeInput(e, zone.id)}
+                  />
+                </ZoneMin>
+                <ZonePrice>
+                  <input
+                    name='price'
+                    type='number'
+                    defaultValue={
+                      formState.result?.result?.price
+                        ? formState.result?.result?.price
+                        : formState.changes?.price
+                          ? parseNumber(formState.changes?.price, { separator: '.' })
+                          : parseNumber(zone?.price, { separator: '.' }) ?? ''
+                    }
+                    onChange={(e) => handleChangeInput(e, zone.id)}
+                  />
+                </ZonePrice>
+                <ZoneActions>
+                  <EnableWrapper className='business_enable_control'>
+                    <span>{t('ENABLE', 'Enable')}</span>
+                    <Switch
+                      defaultChecked={zone?.enabled}
+                      onChange={() => handleChangeActiveState(zone.id)}
+                    />
+                  </EnableWrapper>
+                  <DropDownWrapper>
+                    <DropdownButton
+                      menuAlign={theme?.rtl ? 'left' : 'right'}
+                      title={ActionIcon}
+                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                    >
+                      <Dropdown.Item
+                        onClick={() => handleOpenSetting(zone)}
+                      >
+                        {t('EDIT', 'Edit')}
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleDeleteBusinessDeliveryZone(zone.id)}
+                      >
+                        {t('DELETE', 'Delete')}
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </DropDownWrapper>
+                </ZoneActions>
+              </DeliveryZoneWrapper>
+            ))}
+          </DeliveryZonesContainer>
+          {!openAddDeliveryZone ? (
+            <AddDeliveryZoneButton
+              onClick={() => setOpenAddDeliveryZone(true)}
+            >
+              {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
+            </AddDeliveryZoneButton>
+          ) : (
+            <DeliveryZoneWrapper>
               <ZoneName>
                 <input
-                  name='name'
-                  defaultValue={zone?.name ?? ''}
-                  onChange={(e) => handleChangeInput(e, zone.id)}
+                  placeholder={t('ZONE_NAME', 'Zone name')}
                 />
               </ZoneName>
               <ZoneMin>
                 <input
-                  name='minimum'
-                  type='number'
-                  defaultValue={
-                    formState.result?.result?.minimum
-                      ? formState.result?.result?.minimum
-                      : formState?.changes?.minimum
-                        ? parseNumber(formState.changes?.minimum, { separator: '.' })
-                        : parseNumber(zone?.minimum, { separator: '.' }) ?? ''
-                  }
-                  onChange={(e) => handleChangeInput(e, zone.id)}
+                  placeholder={t('MIN', 'Min')}
                 />
               </ZoneMin>
               <ZonePrice>
                 <input
-                  name='price'
-                  type='number'
-                  defaultValue={
-                    formState.result?.result?.price
-                      ? formState.result?.result?.price
-                      : formState.changes?.price
-                        ? parseNumber(formState.changes?.price, { separator: '.' })
-                        : parseNumber(zone?.price, { separator: '.' }) ?? ''
-                  }
-                  onChange={(e) => handleChangeInput(e, zone.id)}
+                  placeholder={t('PRICE', 'Price')}
                 />
               </ZonePrice>
               <ZoneActions>
-                <EnableWrapper className='business_enable_control'>
-                  <span>{t('ENABLE', 'Enable')}</span>
-                  <Switch
-                    defaultChecked={zone?.enabled}
-                    onChange={() => handleChangeActiveState(zone.id)}
-                  />
-                </EnableWrapper>
-                <DropDownWrapper>
-                  <DropdownButton
-                    menuAlign={theme?.rtl ? 'left' : 'right'}
-                    title={ActionIcon}
-                    id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                  >
-                    <Dropdown.Item
-                      onClick={() => handleOpenSetting(zone)}
-                    >
-                      {t('EDIT', 'Edit')}
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => handleDeleteBusinessDeliveryZone(zone.id)}
-                    >
-                      {t('DELETE', 'Delete')}
-                    </Dropdown.Item>
-                  </DropdownButton>
-                </DropDownWrapper>
+                <AddButton
+                  onClick={() => handleOpenSetting({})}
+                >
+                  <AiFillPlusCircle /> <span>{t('ADD', 'Add')}</span>
+                </AddButton>
               </ZoneActions>
             </DeliveryZoneWrapper>
-          ))}
-        </DeliveryZonesContainer>
-        {!openAddDeliveryZone ? (
-          <AddDeliveryZoneButton
-            onClick={() => setOpenAddDeliveryZone(true)}
-          >
-            {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
-          </AddDeliveryZoneButton>
-        ) : (
-          <DeliveryZoneWrapper>
-            <ZoneName>
-              <input
-                placeholder={t('ZONE_NAME', 'Zone name')}
-              />
-            </ZoneName>
-            <ZoneMin>
-              <input
-                placeholder={t('MIN', 'Min')}
-              />
-            </ZoneMin>
-            <ZonePrice>
-              <input
-                placeholder={t('PRICE', 'Price')}
-              />
-            </ZonePrice>
-            <ZoneActions>
-              <AddButton
-                onClick={() => handleOpenSetting({})}
-              >
-                <AiFillPlusCircle /> <span>{t('ADD', 'Add')}</span>
-              </AddButton>
-            </ZoneActions>
-          </DeliveryZoneWrapper>
+          )}
+        </ZoneContainer>
+        {openSetting && (
+          <BusinessDeliveryZoneSetting
+            open={openSetting}
+            onClose={() => handleCloseOption()}
+            zone={curZone}
+            business={business}
+          />
         )}
-      </ZoneContainer>
-      {openSetting && (
-        <BusinessDeliveryZoneSetting
-          open={openSetting}
-          zone={curZone}
-          onClose={() => handleCloseOption()}
-        />
-      )}
-    </MainContainer>
+      </MainContainer>
+      <Alert
+        title={t('ORDERING', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+    </>
   )
 }
 
