@@ -29,6 +29,7 @@ export const BusinessDeliveryZoneSetting = (props) => {
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
 
   const actionSidebar = (value) => {
