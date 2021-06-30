@@ -9,7 +9,8 @@ export const DrawingGoogleMaps = (props) => {
     location,
     type,
     data,
-    fillStyle
+    fillStyle,
+    infoContentString
   } = props
 
   if (!apiKey) {
@@ -21,6 +22,7 @@ export const DrawingGoogleMaps = (props) => {
   const [googleMapMarker, setGoogleMapMarker] = useState(null)
   const [circleZone, setCircleZone] = useState(null)
   const [polygonZone, setPolygonZone] = useState(null)
+  const [infoWindow, setInfoWindow] = useState(null)
   const center = { lat: location?.lat, lng: location?.lng }
   const [googleReady, setGoogleReady] = useState(false)
 
@@ -85,20 +87,32 @@ export const DrawingGoogleMaps = (props) => {
     }
   }, [googleReady])
 
+  /**
+   * Draw init shap
+   */
   useEffect(() => {
     if (googleReady && googleMap) {
       if (type === 1) {
         const circle = new window.google.maps.Circle({
           ...fillStyle,
+          draggable: true,
           map: googleMap,
           center: data.center,
           radius: data.radio * 1000
         })
         setCircleZone(circle)
+
+        const _infoWindow = new window.google.maps.InfoWindow({
+          content: infoContentString,
+          position: data.center
+        })
+        setInfoWindow(_infoWindow)
+        _infoWindow.open(googleMap)
       }
       if (type === 2) {
         const polygon = new window.google.maps.Polygon({
           ...fillStyle,
+          draggable: false,
           map: googleMap,
           paths: data
         })
@@ -107,12 +121,71 @@ export const DrawingGoogleMaps = (props) => {
     }
   }, [type, data, googleReady, googleMap])
 
+  const onCircleCenterChanged = () => {
+    console.log('radius', circleZone.getRadius())
+    console.log('lat', circleZone.getCenter().lat())
+    console.log('lng', circleZone.getCenter().lng())
+  }
+
+  const onCircleRadiusChanged = () => {
+    console.log('radius', circleZone.getRadius())
+  }
+
+  const onPoygonPathChanged = () => {
+    const data = []
+    for (const pos of polygonZone.getPath().getArray()) {
+      const position = {
+        lat: pos.lat(),
+        lng: pos.lng()
+      }
+      data.push(position)
+    }
+    console.log(data)
+  }
+
+  useEffect(() => {
+    if (circleZone) {
+      window.google.maps.event.addListener(circleZone, 'center_changed', onCircleCenterChanged)
+      window.google.maps.event.addListener(circleZone, 'radius_changed', onCircleRadiusChanged)
+    }
+  }, [circleZone])
+
+  useEffect(() => {
+    if (polygonZone) {
+      window.google.maps.event.addListener(polygonZone, 'mouseup', onPoygonPathChanged)
+    }
+  }, [polygonZone])
+
+  /**
+   * clear all the shapes
+   */
   useEffect(() => {
     if (clearState) {
-      if (type === 1) circleZone.setMap(null)
+      if (type === 1) {
+        circleZone.setMap(null)
+        infoWindow.close()
+      }
       if (type === 2) polygonZone.setMap(null)
     }
   }, [clearState, type])
+
+  /**
+   * Fit map
+   */
+  useEffect(() => {
+    if (!googleReady) return
+    const bounds = new window.google.maps.LatLngBounds()
+    if (type === 1 && circleZone) {
+      bounds.union(circleZone.getBounds())
+      googleMap.fitBounds(bounds)
+    }
+    if (type === 2 && polygonZone) {
+      for (const position of data) {
+        bounds.extend(position)
+      }
+      googleMap.fitBounds(bounds)
+    }
+  }, [googleReady, data, type, center, googleMap, circleZone, polygonZone])
 
   useEffect(() => {
     if (googleReady) {
@@ -123,12 +196,15 @@ export const DrawingGoogleMaps = (props) => {
     }
   }, [location])
 
+  /**
+   * append google map script
+   */
   useEffect(() => {
     if (!apiKey) {
       return
     }
     let checker = null
-    if (window.document.getElementById('google-maps-sdk')) {
+    if (window.document.getElementById('google-maps-sdk-shap')) {
       if (typeof google !== 'undefined') {
         setGoogleReady(true)
       } else {
@@ -147,7 +223,7 @@ export const DrawingGoogleMaps = (props) => {
     }
 
     const js = window.document.createElement('script')
-    js.id = 'google-maps-sdk'
+    js.id = 'google-maps-sdk-shap'
     js.async = true
     js.defer = true
     js.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=drawing&callback=googleAsyncInit`

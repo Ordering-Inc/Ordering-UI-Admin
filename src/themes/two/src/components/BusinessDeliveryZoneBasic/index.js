@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useConfig, useLanguage } from 'ordering-components-admin'
 import { DrawingGoogleMaps } from './naked'
 
@@ -21,6 +21,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const [clearState, setClearState] = useState(false)
+  const [infoContentString, setInfoContentString] = useState('')
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -45,9 +46,19 @@ export const BusinessDeliveryZoneBasic = (props) => {
     strokeColor: '#03459E',
     fillOpacity: 0.2,
     strokeWeight: 2,
-    editable: true,
-    draggable: true
+    editable: true
   }
+
+  useEffect(() => {
+    if (zone.type !== 1) return
+    const content =
+      '<div style="width: 90px; height: 30px">' +
+      '<span>Radius: </span>' +
+      zone.data?.radio.toFixed(2) +
+      '<span>km</span>' +
+      '</div>'
+    setInfoContentString(content)
+  }, [zone])
 
   return (
     <>
@@ -80,6 +91,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
             type={zone.type}
             data={zone.data}
             fillStyle={fillStyle}
+            infoContentString={infoContentString}
           />
         </WrapperMap>
       </BasicContainer>
