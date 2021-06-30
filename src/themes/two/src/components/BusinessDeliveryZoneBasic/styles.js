@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BasicContainer = styled.div`
   display: flex;
@@ -32,10 +32,31 @@ export const WrapperMap = styled.div`
   justify-content: center;
   box-sizing: border-box;
   margin: 20px 0;
+  position: relative;
   > div {
     position: relative !important; 
     width: 100% !important;
     height: 100% !important;
     border-radius: 8px;
+  }
+
+  > button {
+    position: absolute;
+    font-size: 14px;
+    padding: 0 5px;
+    background: #FFF;
+    top: 10px;
+    z-index: 10;
+    border: none;
+    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px;
+    color: ${props => props.theme.colors.headingColor};
+    ${props => props.theme?.rtl ? css`
+      right: 10px;
+    ` : css`
+      left: 10px;
+    `}
+    &:hover {
+      background: #eee;
+    }
   }
 `

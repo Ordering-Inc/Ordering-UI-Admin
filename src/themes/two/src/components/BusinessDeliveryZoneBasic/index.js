@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useConfig, useLanguage } from 'ordering-components-admin'
+import { useConfig, useLanguage, useUtils } from 'ordering-components-admin'
 import { DrawingGoogleMaps } from './naked'
 
 import { Select } from '../../styles/Select/FirstSelect'
@@ -16,12 +16,18 @@ import {
 export const BusinessDeliveryZoneBasic = (props) => {
   const {
     business,
-    zone
+    zone,
+    handleZoneType,
+    handleChangeZoneData,
+    handleUpdateBusinessDeliveryZone
   } = props
   const [, t] = useLanguage()
+  const [{ parseNumber }] = useUtils()
   const [configState] = useConfig()
   const [clearState, setClearState] = useState(false)
   const [infoContentString, setInfoContentString] = useState('')
+  const [zoneType, setZoneType] = useState(zone.type)
+  const [zoneData, setZoneData] = useState(zone.data)
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -49,16 +55,30 @@ export const BusinessDeliveryZoneBasic = (props) => {
     editable: true
   }
 
+  const handleChangeType = (type) => {
+    handleZoneType(type, zone.id)
+    setClearState(true)
+    setZoneType(type)
+  }
+
+  const handleZoneData = (data) => {
+    setZoneData(data)
+    handleChangeZoneData(data, zone.id)
+  }
+
   useEffect(() => {
-    if (zone.type !== 1) return
-    const content =
-      '<div style="width: 90px; height: 30px">' +
-      '<span>Radius: </span>' +
-      zone.data?.radio.toFixed(2) +
-      '<span>km</span>' +
-      '</div>'
+    if (clearState) {
+      handleZoneData(null)
+    }
+  }, [clearState])
+
+  useEffect(() => {
+    if (zoneType !== 1) return
+    let content = '<div style="width: 90px; height: 30px">' + '<span>Radius: </span>'
+    content += parseNumber(zoneData?.radio)
+    content += '<span>km</span>' + '</div>'
     setInfoContentString(content)
-  }, [zone])
+  }, [zoneData, zoneType])
 
   return (
     <>
@@ -66,34 +86,43 @@ export const BusinessDeliveryZoneBasic = (props) => {
         <FieldName>{t('TYPE', 'Type')}</FieldName>
         <TypeSelectWrapper>
           <Select
-            defaultValue={parseInt(zone.type)}
+            defaultValue={parseInt(zoneType)}
             options={typeOptions}
-            onChange={id => console.log(id)}
+            onChange={handleChangeType}
           />
         </TypeSelectWrapper>
         <FieldName>{t('BUSINESS_ADDRESS', 'Business address')}</FieldName>
         <Input
           name='address'
-          defaultValue={zone?.address}
+          defaultValue={business?.address}
           disabled
         />
-        <Button
-          onClick={() => setClearState(true)}
-        >
-          {t('CLEAR', 'Clear')}
-        </Button>
         <WrapperMap>
+          <button
+            onClick={() => setClearState(true)}
+          >
+            {t('CLEAR', 'Clear')}
+          </button>
           <DrawingGoogleMaps
             apiKey={configState?.configs?.google_maps_api_key?.value}
             mapControls={googleMapsControls}
             location={business?.location}
             clearState={clearState}
-            type={zone.type}
-            data={zone.data}
+            setClearState={setClearState}
+            type={zoneType}
+            data={zoneData}
+            handleData={handleZoneData}
             fillStyle={fillStyle}
             infoContentString={infoContentString}
           />
         </WrapperMap>
+        <Button
+          color='primary'
+          borderRadius='5px'
+          onClick={() => handleUpdateBusinessDeliveryZone()}
+        >
+          {t('SAVE', 'Save')}
+        </Button>
       </BasicContainer>
     </>
   )

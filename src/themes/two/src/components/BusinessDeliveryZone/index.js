@@ -36,26 +36,39 @@ const BusinessDeliveryZoneUI = (props) => {
     handleDeleteBusinessDeliveryZone,
     setIsExtendExtraOpen,
     errors,
-    cleanErrors
+    setErrors,
+    cleanErrors,
+    handleZoneType,
+    handleChangeZoneData,
+    isEdit,
+    setIsEdit,
+    handleUpdateBusinessDeliveryZone
   } = props
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
   const theme = useTheme()
   const [openAddDeliveryZone, setOpenAddDeliveryZone] = useState(false)
-  const [openSetting, setOpenSetting] = useState(false)
   const [curZone, setCurZone] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const ActionIcon = <FiMoreVertical />
 
   const handleOpenSetting = (zone) => {
-    setCurZone(zone)
-    setIsExtendExtraOpen(true)
-    setOpenSetting(true)
+    if (formState.changes?.name === '' || formState.changes?.minimum === '' || formState.changes?.price === '') {
+      setErrors({
+        name: formState.changes?.name === '',
+        minimum: formState.changes?.minimum === '',
+        price: formState.changes?.price === ''
+      })
+    } else {
+      setIsEdit(true)
+      setCurZone(zone)
+      setIsExtendExtraOpen(true)
+    }
   }
 
   const handleCloseOption = () => {
-    setOpenSetting(false)
+    setIsEdit(false)
     setIsExtendExtraOpen(false)
   }
 
@@ -73,10 +86,13 @@ const BusinessDeliveryZoneUI = (props) => {
       if (errors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
       if (errors?.minimum) errorContent.push(t('MINIMUN_PURCHASED_REQUIRED', 'The minimum purchase is required.'))
       if (errors?.price) errorContent.push(t('DELIVERY_PRICE_REQUIRED', 'The delivery price is required.'))
-      setAlertState({
-        open: true,
-        content: errorContent
-      })
+      if (errors?.data) errorContent.push(t('REQUIRED_POLYGON_CIRCLE', 'Polygon or circle must be drawn.'))
+      if (errorContent.length) {
+        setAlertState({
+          open: true,
+          content: errorContent
+        })
+      }
     }
   }, [errors])
 
@@ -102,6 +118,7 @@ const BusinessDeliveryZoneUI = (props) => {
                     name='name'
                     defaultValue={zone?.name ?? ''}
                     onChange={(e) => handleChangeInput(e, zone.id)}
+                    disabled={isEdit}
                   />
                 </ZoneName>
                 <ZoneMin>
@@ -116,6 +133,7 @@ const BusinessDeliveryZoneUI = (props) => {
                           : parseNumber(zone?.minimum, { separator: '.' }) ?? ''
                     }
                     onChange={(e) => handleChangeInput(e, zone.id)}
+                    disabled={isEdit}
                   />
                 </ZoneMin>
                 <ZonePrice>
@@ -130,6 +148,7 @@ const BusinessDeliveryZoneUI = (props) => {
                           : parseNumber(zone?.price, { separator: '.' }) ?? ''
                     }
                     onChange={(e) => handleChangeInput(e, zone.id)}
+                    disabled={isEdit}
                   />
                 </ZonePrice>
                 <ZoneActions>
@@ -195,12 +214,15 @@ const BusinessDeliveryZoneUI = (props) => {
             </DeliveryZoneWrapper>
           )}
         </ZoneContainer>
-        {openSetting && (
+        {isEdit && (
           <BusinessDeliveryZoneSetting
-            open={openSetting}
+            open={isEdit}
             onClose={() => handleCloseOption()}
             zone={curZone}
             business={business}
+            handleZoneType={handleZoneType}
+            handleChangeZoneData={handleChangeZoneData}
+            handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
           />
         )}
       </MainContainer>

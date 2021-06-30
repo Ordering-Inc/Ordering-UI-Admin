@@ -16,13 +16,26 @@ export const BusinessDeliveryZone = (props) => {
   const [businessDeliveryZonesState, setBusinessDeliveryZonesState] = useState({ zones: [], loading: false, error: null })
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
   const [zoneId, setZoneId] = useState(null)
-  const [businessZones, setBusinessZones] = useState([])
   const [errors, setErrors] = useState({})
+  const [isEdit, setIsEdit] = useState(false)
   /**
    * Method to update the business delivery zone from API
    */
   const handleUpdateBusinessDeliveryZone = async () => {
     try {
+      let currentChanges = { ...formState.changes }
+      if (!formState.changes?.data) {
+        setErrors({
+          ...errors,
+          data: !formState.changes?.data
+        })
+        return
+      } else {
+        currentChanges = {
+          ...currentChanges,
+          data: JSON.stringify(formState.changes.data)
+        }
+      }
       setFormState({ ...formState, loading: true })
       const requestOptions = {
         method: 'PUT',
@@ -30,7 +43,7 @@ export const BusinessDeliveryZone = (props) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formState.changes)
+        body: JSON.stringify(currentChanges)
       }
       const response = await fetch(`${ordering.root}/business/${business.id}/deliveryzones/${zoneId}`, requestOptions)
       const content = await response.json()
@@ -136,15 +149,6 @@ export const BusinessDeliveryZone = (props) => {
    * @param {Number} zoneId id of business dleivery zone
    */
   const handleChangeInput = (e, zoneId) => {
-    const _businessZones = businessZones.filter(zone => {
-      if (zone.id === zoneId) {
-        zone[e.target.name] = e.target.value
-      }
-      return true
-    })
-
-    setBusinessZones(_businessZones)
-
     setZoneId(zoneId)
     setFormState({
       ...formState,
@@ -155,24 +159,54 @@ export const BusinessDeliveryZone = (props) => {
     })
   }
 
+  /**
+   * Method to change the zone type
+   * @param {Number} type zone type
+   * @param {Number} zoneId id of business dleivery zone
+   */
+  const handleZoneType = (type, zoneId) => {
+    setZoneId(zoneId)
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState.changes,
+        type: type
+      }
+    })
+  }
+
+  /**
+   * Method to change the zone type
+   * @param {Object || Array} data zone type
+   * @param {Number} zoneId id of business dleivery zone
+   */
+  const handleChangeZoneData = (data, zoneId) => {
+    setZoneId(zoneId)
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState.changes,
+        data: data
+      }
+    })
+  }
+
   useEffect(() => {
-    if (!Object.keys(formState.changes).length) return
-    const businessZone = businessZones.find(zone => zone.id === zoneId)
-    if (businessZone?.name === '' || businessZone?.minimum === '' || businessZone?.price === '') {
+    if (!Object.keys(formState.changes).length || isEdit) return
+    if (formState.changes?.name === '' || formState.changes?.minimum === '' || formState.changes?.price === '') {
       setErrors({
-        name: businessZone?.name === '',
-        minimum: businessZone?.minimum === '',
-        price: businessZone?.price === ''
+        name: formState.changes?.name === '',
+        minimum: formState.changes?.minimum === '',
+        price: formState.changes?.price === ''
       })
     } else {
       handleUpdateBusinessDeliveryZone()
     }
-  }, [formState.changes])
+  }, [formState.changes, isEdit])
 
   useEffect(() => {
     if (business?.zones) {
       setBusinessDeliveryZonesState({ ...businessDeliveryZonesState, zones: business?.zones })
-      setBusinessZones(business?.zones)
     }
   }, [business])
   return (
@@ -187,7 +221,13 @@ export const BusinessDeliveryZone = (props) => {
             handleChangeActiveState={handleChangeActiveState}
             handleDeleteBusinessDeliveryZone={handleDeleteBusinessDeliveryZone}
             errors={errors}
+            setErrors={setErrors}
             cleanErrors={() => setErrors({})}
+            handleZoneType={handleZoneType}
+            handleChangeZoneData={handleChangeZoneData}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+            handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
           />
         )
       }

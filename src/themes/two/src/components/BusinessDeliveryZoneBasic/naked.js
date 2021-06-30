@@ -10,7 +10,9 @@ export const DrawingGoogleMaps = (props) => {
     type,
     data,
     fillStyle,
-    infoContentString
+    infoContentString,
+    handleData,
+    setClearState
   } = props
 
   if (!apiKey) {
@@ -23,8 +25,176 @@ export const DrawingGoogleMaps = (props) => {
   const [circleZone, setCircleZone] = useState(null)
   const [polygonZone, setPolygonZone] = useState(null)
   const [infoWindow, setInfoWindow] = useState(null)
+  const [drawingManager, setDrawingManager] = useState(null)
   const center = { lat: location?.lat, lng: location?.lng }
   const [googleReady, setGoogleReady] = useState(false)
+
+  /**
+   * Method to control the data when center of circle is changed.
+   */
+  const onCircleCenterChanged = () => {
+    handleData({
+      center: {
+        lat: circleZone.getCenter().lat(),
+        lng: circleZone.getCenter().lng()
+      },
+      radio: circleZone.getRadius() / 1000
+    })
+  }
+
+  /**
+   * Method to control the data when radius of circle is changed.
+   */
+  const onCircleRadiusChanged = () => {
+    handleData({
+      ...data,
+      radio: circleZone.getRadius() / 1000
+    })
+  }
+
+  /**
+   * Method to control the data when polygon is changed.
+   */
+  const onPoygonPathChanged = () => {
+    const data = []
+    for (const pos of polygonZone.getPath().getArray()) {
+      const position = {
+        lat: pos.lat(),
+        lng: pos.lng()
+      }
+      data.push(position)
+    }
+    handleData(data)
+  }
+
+  /**
+   * Listening method when overlay is completed.
+   * @param {EventTarget} event
+   */
+  const overlayCompleteListener = (event) => {
+    setClearState(false)
+    drawingManager.setMap(null)
+    if (type === 1) {
+      setCircleZone(event.overlay)
+      infoWindow.open(googleMap)
+    } else {
+      setPolygonZone(event.overlay)
+    }
+  }
+
+  /**
+   * listening info string change
+   */
+  useEffect(() => {
+    if (googleReady && infoWindow) {
+      infoWindow.setContent(infoContentString)
+      if (data?.center) {
+        infoWindow.setPosition(data.center)
+      }
+    }
+  }, [infoWindow, infoContentString, data, googleReady])
+
+  useEffect(() => {
+    if (circleZone) {
+      handleData({
+        center: {
+          lat: circleZone.getCenter().lat(),
+          lng: circleZone.getCenter().lng()
+        },
+        radio: circleZone.getRadius() / 1000
+      })
+      window.google.maps.event.addListener(circleZone, 'center_changed', onCircleCenterChanged)
+      window.google.maps.event.addListener(circleZone, 'radius_changed', onCircleRadiusChanged)
+    }
+  }, [circleZone])
+
+  useEffect(() => {
+    if (polygonZone) {
+      const data = []
+      for (const pos of polygonZone.getPath().getArray()) {
+        const position = {
+          lat: pos.lat(),
+          lng: pos.lng()
+        }
+        data.push(position)
+      }
+      handleData(data)
+      window.google.maps.event.addListener(polygonZone, 'mouseup', onPoygonPathChanged)
+    }
+  }, [polygonZone])
+
+  useEffect(() => {
+    if (drawingManager) {
+      drawingManager.addListener('overlaycomplete', overlayCompleteListener)
+    }
+  }, [drawingManager])
+
+  /**
+   * clear all the shapes
+   */
+  useEffect(() => {
+    if (clearState) {
+      if (circleZone) {
+        circleZone.setMap(null)
+        setCircleZone(null)
+        infoWindow.close()
+      }
+      if (polygonZone) {
+        polygonZone.setMap(null)
+        setPolygonZone(null)
+      }
+
+      if (drawingManager) {
+        drawingManager.setMap(null)
+      }
+      const _drawingManager = new window.google.maps.drawing.DrawingManager({
+        drawingControl: true,
+        drawingControlOptions: {
+          position: window.google.maps.ControlPosition.TOP_CENTER,
+          drawingModes: type === 1
+            ? [window.google.maps.drawing.OverlayType.CIRCLE]
+            : [window.google.maps.drawing.OverlayType.POLYGON]
+        },
+        circleOptions: {
+          ...fillStyle,
+          draggable: true
+        },
+        polygonOptions: {
+          ...fillStyle,
+          draggable: false
+        }
+      })
+      setDrawingManager(_drawingManager)
+      _drawingManager.setMap(googleMap)
+    }
+  }, [clearState, type])
+
+  /**
+   * Fit map
+   */
+  useEffect(() => {
+    if (!googleReady) return
+    const bounds = new window.google.maps.LatLngBounds()
+    if (circleZone) {
+      bounds.union(circleZone.getBounds())
+      googleMap.fitBounds(bounds)
+    }
+    if (polygonZone && Array.isArray(data)) {
+      for (const position of data) {
+        bounds.extend(position)
+      }
+      googleMap.fitBounds(bounds)
+    }
+  }, [googleReady, data, type, center, googleMap, circleZone, polygonZone])
+
+  useEffect(() => {
+    if (googleReady) {
+      center.lat = location?.lat
+      center.lng = location?.lng
+      googleMapMarker && googleMapMarker.setPosition(new window.google.maps.LatLng(center?.lat, center?.lng))
+      googleMap && googleMap.panTo(new window.google.maps.LatLng(center?.lat, center?.lng))
+    }
+  }, [location])
 
   useEffect(() => {
     if (googleReady) {
@@ -52,149 +222,34 @@ export const DrawingGoogleMaps = (props) => {
       })
       setGoogleMapMarker(marker)
 
-      // const drawingManager = new window.google.maps.drawing.DrawingManager({
-      //   drawingMode: window.google.maps.drawing.OverlayType.CIRCLE,
-      //   drawingControl: true,
-      //   drawingControlOptions: {
-      //     position: window.google.maps.ControlPosition.TOP_CENTER,
-      //     drawingModes: [
-      //       window.google.maps.drawing.OverlayType.CIRCLE,
-      //       window.google.maps.drawing.OverlayType.POLYGON
-      //     ]
-      //   },
-      //   circleOptions: {
-      //     fillColor: '#2C7BE5',
-      //     strokeColor: '#03459E',
-      //     fillOpacity: 0.2,
-      //     strokeWeight: 2,
-      //     clickable: false,
-      //     editable: true,
-      //     draggable: true,
-      //     zIndex: 1
-      //   },
-      //   polygonOptions: {
-      //     fillColor: '#2C7BE5',
-      //     strokeColor: '#03459E',
-      //     fillOpacity: 0.2,
-      //     strokeWeight: 2,
-      //     clickable: false,
-      //     editable: true,
-      //     draggable: true,
-      //     zIndex: 1
-      //   }
-      // })
-      // drawingManager.setMap(map)
-    }
-  }, [googleReady])
+      const _infoWindow = new window.google.maps.InfoWindow({
+        content: infoContentString,
+        position: data.center
+      })
+      setInfoWindow(_infoWindow)
 
-  /**
-   * Draw init shap
-   */
-  useEffect(() => {
-    if (googleReady && googleMap) {
       if (type === 1) {
         const circle = new window.google.maps.Circle({
           ...fillStyle,
           draggable: true,
-          map: googleMap,
+          map: map,
           center: data.center,
           radius: data.radio * 1000
         })
         setCircleZone(circle)
-
-        const _infoWindow = new window.google.maps.InfoWindow({
-          content: infoContentString,
-          position: data.center
-        })
-        setInfoWindow(_infoWindow)
-        _infoWindow.open(googleMap)
+        _infoWindow.open(map)
       }
       if (type === 2) {
         const polygon = new window.google.maps.Polygon({
           ...fillStyle,
           draggable: false,
-          map: googleMap,
+          map: map,
           paths: data
         })
         setPolygonZone(polygon)
       }
     }
-  }, [type, data, googleReady, googleMap])
-
-  const onCircleCenterChanged = () => {
-    console.log('radius', circleZone.getRadius())
-    console.log('lat', circleZone.getCenter().lat())
-    console.log('lng', circleZone.getCenter().lng())
-  }
-
-  const onCircleRadiusChanged = () => {
-    console.log('radius', circleZone.getRadius())
-  }
-
-  const onPoygonPathChanged = () => {
-    const data = []
-    for (const pos of polygonZone.getPath().getArray()) {
-      const position = {
-        lat: pos.lat(),
-        lng: pos.lng()
-      }
-      data.push(position)
-    }
-    console.log(data)
-  }
-
-  useEffect(() => {
-    if (circleZone) {
-      window.google.maps.event.addListener(circleZone, 'center_changed', onCircleCenterChanged)
-      window.google.maps.event.addListener(circleZone, 'radius_changed', onCircleRadiusChanged)
-    }
-  }, [circleZone])
-
-  useEffect(() => {
-    if (polygonZone) {
-      window.google.maps.event.addListener(polygonZone, 'mouseup', onPoygonPathChanged)
-    }
-  }, [polygonZone])
-
-  /**
-   * clear all the shapes
-   */
-  useEffect(() => {
-    if (clearState) {
-      if (type === 1) {
-        circleZone.setMap(null)
-        infoWindow.close()
-      }
-      if (type === 2) polygonZone.setMap(null)
-    }
-  }, [clearState, type])
-
-  /**
-   * Fit map
-   */
-  useEffect(() => {
-    if (!googleReady) return
-    const bounds = new window.google.maps.LatLngBounds()
-    if (type === 1 && circleZone) {
-      bounds.union(circleZone.getBounds())
-      googleMap.fitBounds(bounds)
-    }
-    if (type === 2 && polygonZone) {
-      for (const position of data) {
-        bounds.extend(position)
-      }
-      googleMap.fitBounds(bounds)
-    }
-  }, [googleReady, data, type, center, googleMap, circleZone, polygonZone])
-
-  useEffect(() => {
-    if (googleReady) {
-      center.lat = location?.lat
-      center.lng = location?.lng
-      googleMapMarker && googleMapMarker.setPosition(new window.google.maps.LatLng(center?.lat, center?.lng))
-      googleMap && googleMap.panTo(new window.google.maps.LatLng(center?.lat, center?.lng))
-    }
-  }, [location])
+  }, [googleReady])
 
   /**
    * append google map script

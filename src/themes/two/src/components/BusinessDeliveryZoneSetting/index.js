@@ -19,7 +19,10 @@ export const BusinessDeliveryZoneSetting = (props) => {
     open,
     onClose,
     business,
-    zone
+    zone,
+    handleZoneType,
+    handleChangeZoneData,
+    handleUpdateBusinessDeliveryZone
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -84,6 +87,9 @@ export const BusinessDeliveryZoneSetting = (props) => {
         <BusinessDeliveryZoneBasic
           business={business}
           zone={zone}
+          handleZoneType={handleZoneType}
+          handleChangeZoneData={handleChangeZoneData}
+          handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
         />
       )}
     </Container>
