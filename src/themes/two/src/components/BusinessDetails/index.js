@@ -159,6 +159,7 @@ export const BusinessDetailsUI = (props) => {
                   <BusinessDeliveryZone
                     business={businessState?.business}
                     setIsExtendExtraOpen={setIsExtendExtraOpen}
+                    onClose={() => setIsExtendExtraOpen(false)}
                     handleSuccessUpdate={handleUpdateBusinessState}
                   />
                 )}

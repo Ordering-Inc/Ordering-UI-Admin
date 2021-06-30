@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
-import { BusinessDeliveryZone as BusinessDeliveryZoneController } from './naked'
+import { useLanguage, useUtils, BusinessDeliveryZone as BusinessDeliveryZoneController } from 'ordering-components-admin'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
@@ -9,6 +8,7 @@ import { useTheme } from 'styled-components'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { BusinessDeliveryZoneSetting } from '../BusinessDeliveryZoneSetting'
 import { Alert } from '../Confirm'
+import { useForm } from 'react-hook-form'
 
 import {
   MainContainer,
@@ -23,7 +23,8 @@ import {
   EnableWrapper,
   DropDownWrapper,
   AddDeliveryZoneButton,
-  AddButton
+  AddButton,
+  DeliveryZoneFormWrapper
 } from './styles'
 
 const BusinessDeliveryZoneUI = (props) => {
@@ -42,14 +43,20 @@ const BusinessDeliveryZoneUI = (props) => {
     handleChangeZoneData,
     isEdit,
     setIsEdit,
-    handleUpdateBusinessDeliveryZone
+    openAddDeliveryZone,
+    setOpenAddDeliveryZone,
+    isAddValid,
+    setIsAddValid,
+    handleUpdateBusinessDeliveryZone,
+    handleAddBusinessDeliveryZone
   } = props
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
   const theme = useTheme()
-  const [openAddDeliveryZone, setOpenAddDeliveryZone] = useState(false)
   const [curZone, setCurZone] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const formMethods = useForm()
 
   const ActionIcon = <FiMoreVertical />
 
@@ -61,14 +68,17 @@ const BusinessDeliveryZoneUI = (props) => {
         price: formState.changes?.price === ''
       })
     } else {
-      setIsEdit(true)
+      if (Object.keys(zone).length) {
+        setIsEdit(true)
+        setIsExtendExtraOpen(true)
+      }
       setCurZone(zone)
-      setIsExtendExtraOpen(true)
     }
   }
 
   const handleCloseOption = () => {
     setIsEdit(false)
+    setIsAddValid(false)
     setIsExtendExtraOpen(false)
   }
 
@@ -80,13 +90,35 @@ const BusinessDeliveryZoneUI = (props) => {
     })
   }
 
+  const onSubmit = () => {
+    setIsExtendExtraOpen(true)
+    setIsAddValid(true)
+  }
+
   useEffect(() => {
+    if (openAddDeliveryZone) {
+      setIsExtendExtraOpen(false)
+      setIsEdit(false)
+    }
+  }, [openAddDeliveryZone])
+
+  useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
+      const content = Object.values(formMethods.errors).map(error => error.message)
+      setAlertState({
+        open: true,
+        content
+      })
+    }
+  }, [formMethods.errors])
+
+  useEffect(() => {
+    if (openAddDeliveryZone && !isAddValid) return
     if (Object.keys(errors).length) {
       const errorContent = []
       if (errors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
       if (errors?.minimum) errorContent.push(t('MINIMUN_PURCHASED_REQUIRED', 'The minimum purchase is required.'))
       if (errors?.price) errorContent.push(t('DELIVERY_PRICE_REQUIRED', 'The delivery price is required.'))
-      if (errors?.data) errorContent.push(t('REQUIRED_POLYGON_CIRCLE', 'Polygon or circle must be drawn.'))
       if (errorContent.length) {
         setAlertState({
           open: true,
@@ -94,7 +126,7 @@ const BusinessDeliveryZoneUI = (props) => {
         })
       }
     }
-  }, [errors])
+  }, [errors, isAddValid])
 
   return (
     <>
@@ -188,41 +220,61 @@ const BusinessDeliveryZoneUI = (props) => {
               {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
             </AddDeliveryZoneButton>
           ) : (
-            <DeliveryZoneWrapper>
+            <DeliveryZoneFormWrapper onSubmit={formMethods.handleSubmit(onSubmit)}>
               <ZoneName>
                 <input
+                  name='name'
                   placeholder={t('ZONE_NAME', 'Zone name')}
+                  onChange={(e) => handleChangeInput(e, null)}
+                  ref={formMethods.register({
+                    required: t('NAME_REQUIRED', 'The name is required.')
+                  })}
                 />
               </ZoneName>
               <ZoneMin>
                 <input
+                  name='minimum'
+                  type='number'
                   placeholder={t('MIN', 'Min')}
+                  onChange={(e) => handleChangeInput(e, null)}
+                  ref={formMethods.register({
+                    required: t('MINIMUN_PURCHASED_REQUIRED', 'The minimum purchase is required.')
+                  })}
                 />
               </ZoneMin>
               <ZonePrice>
                 <input
+                  name='price'
+                  type='number'
                   placeholder={t('PRICE', 'Price')}
+                  onChange={(e) => handleChangeInput(e, null)}
+                  ref={formMethods.register({
+                    required: t('DELIVERY_PRICE_REQUIRED', 'The delivery price is required.')
+                  })}
                 />
               </ZonePrice>
               <ZoneActions>
                 <AddButton
+                  type='submit'
                   onClick={() => handleOpenSetting({})}
                 >
                   <AiFillPlusCircle /> <span>{t('ADD', 'Add')}</span>
                 </AddButton>
               </ZoneActions>
-            </DeliveryZoneWrapper>
+            </DeliveryZoneFormWrapper>
           )}
         </ZoneContainer>
-        {isEdit && (
+        {(isEdit || isAddValid) && (
           <BusinessDeliveryZoneSetting
-            open={isEdit}
+            open={isEdit || isAddValid}
+            isAddValid={isAddValid}
             onClose={() => handleCloseOption()}
             zone={curZone}
             business={business}
             handleZoneType={handleZoneType}
             handleChangeZoneData={handleChangeZoneData}
             handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
+            handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
           />
         )}
       </MainContainer>

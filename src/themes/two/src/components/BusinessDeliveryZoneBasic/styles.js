@@ -3,9 +3,16 @@ import styled, { css } from 'styled-components'
 export const BasicContainer = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: calc(100% - 90px);
 
   > input {
     color: ${props => props.theme.colors.headingColor};
+  }
+
+  > button {
+    width: fit-content;
+    position: sticky;
+    top: 100%;
   }
 `
 
@@ -27,7 +34,7 @@ export const TypeSelectWrapper = styled.div`
 
 export const WrapperMap = styled.div`
   width: 100%;
-  height: 250px;
+  height: 300px;
   display: flex;
   justify-content: center;
   box-sizing: border-box;

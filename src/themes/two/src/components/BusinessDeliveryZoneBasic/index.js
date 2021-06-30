@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useConfig, useLanguage, useUtils } from 'ordering-components-admin'
-import { DrawingGoogleMaps } from './naked'
-
+import { useConfig, useLanguage, useUtils, BusinessZoneGoogleMaps } from 'ordering-components-admin'
 import { Select } from '../../styles/Select/FirstSelect'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { Alert } from '../Confirm'
 
 import {
   BasicContainer,
@@ -19,15 +18,18 @@ export const BusinessDeliveryZoneBasic = (props) => {
     zone,
     handleZoneType,
     handleChangeZoneData,
-    handleUpdateBusinessDeliveryZone
+    handleUpdateBusinessDeliveryZone,
+    isAddValid,
+    handleAddBusinessDeliveryZone
   } = props
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
   const [configState] = useConfig()
   const [clearState, setClearState] = useState(false)
   const [infoContentString, setInfoContentString] = useState('')
-  const [zoneType, setZoneType] = useState(zone.type)
-  const [zoneData, setZoneData] = useState(zone.data)
+  const [zoneType, setZoneType] = useState(zone?.type || 2)
+  const [zoneData, setZoneData] = useState(zone?.data)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -56,14 +58,33 @@ export const BusinessDeliveryZoneBasic = (props) => {
   }
 
   const handleChangeType = (type) => {
-    handleZoneType(type, zone.id)
+    handleZoneType(type, zone?.id || null)
     setClearState(true)
     setZoneType(type)
   }
 
   const handleZoneData = (data) => {
     setZoneData(data)
-    handleChangeZoneData(data, zone.id)
+    handleChangeZoneData(data, zone?.id || null)
+  }
+
+  const handleSave = () => {
+    if (!zoneData) {
+      setAlertState({
+        open: true,
+        content: t('REQUIRED_POLYGON_CIRCLE', 'Polygon or circle must be drawn.')
+      })
+    } else {
+      if (isAddValid) handleAddBusinessDeliveryZone()
+      else handleUpdateBusinessDeliveryZone()
+    }
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   useEffect(() => {
@@ -103,7 +124,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
           >
             {t('CLEAR', 'Clear')}
           </button>
-          <DrawingGoogleMaps
+          <BusinessZoneGoogleMaps
             apiKey={configState?.configs?.google_maps_api_key?.value}
             mapControls={googleMapsControls}
             location={business?.location}
@@ -119,11 +140,20 @@ export const BusinessDeliveryZoneBasic = (props) => {
         <Button
           color='primary'
           borderRadius='5px'
-          onClick={() => handleUpdateBusinessDeliveryZone()}
+          onClick={() => handleSave()}
         >
-          {t('SAVE', 'Save')}
+          {isAddValid ? t('SAVE', 'Save') : t('UPDATE', 'Update')}
         </Button>
       </BasicContainer>
+      <Alert
+        title={t('ORDERING', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

@@ -70,6 +70,39 @@ export const DeliveryZoneWrapper = styled.div`
   }
 `
 
+export const DeliveryZoneFormWrapper = styled.form`
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #E9ECEF;
+  > div {
+    color: ${props => props.theme.colors.headingColor};
+    font-size: 14px;
+    padding: 10px 0;
+    >input{
+      width: 100%;
+      color: ${props => props.theme.colors.headingColor};
+      border: 1px dashed ${props => props.theme.colors.lightGray};
+      outline: none;
+      &::placeholder,
+      &::-webkit-input-placeholder {
+        color: #c9c9c9;
+      }
+      &:focus {
+        border: 1px dashed ${props => props.theme.colors.primary};
+      }
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+`
+
 export const ZoneName = styled.div`
   flex: 1;
   overflow: hidden;
@@ -159,8 +192,11 @@ export const AddDeliveryZoneButton = styled.div`
   width: fit-content;
 `
 
-export const AddButton = styled.div`
+export const AddButton = styled.button`
   cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: unset;
   svg {
     font-size: 20px;
     color: ${props => props.theme.colors.primary};
