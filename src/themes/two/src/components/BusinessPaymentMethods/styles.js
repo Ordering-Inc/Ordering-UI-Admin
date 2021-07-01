@@ -1,9 +1,15 @@
 import styled, { css } from 'styled-components'
 
+export const MainContainer = styled.div`
+  display: flex;
+  height: 100%;
+`
+
 export const PaymentMethodsContainer = styled.div`
   height: 100%;
   overflow-x: hidden;
   padding: 20px;
+  flex: 1;
   h1 {
     color: ${props => props.theme.colors.headingColor};
     font-size: 24px;
@@ -69,5 +75,12 @@ export const DropDownWrapper = styled.div`
         color: #E63757;
       }
     }
+  }
+`
+
+export const WrapperSpinnerLoader = styled.div`
+  > div {
+    position: absolute;
+    top: 0px;
   }
 `

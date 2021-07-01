@@ -8,20 +8,39 @@ export const BusinessPaymentMethods = (props) => {
   const {
     business,
     UIComponent,
-    defaultSandboxRequiredGateways,
-    handleSuccessUpdate
+    defaultSandboxRequiredGateways
   } = props
   const [ordering] = useApi()
   const [{ token }] = useSession()
 
+  const [businessPaymethodsState, setBusinessPaymethodsState] = useState({ paymethods: [], loading: true, error: null })
   const [paymethodsList, setPaymethodsList] = useState({ paymethods: [], loading: true, error: null })
   const sandboxRequiredGateways = defaultSandboxRequiredGateways || ['paypal', 'stripe_direct', 'paypal_express', 'stripe_connect', 'stripe_redirect', 'carlos_payment', 'ivr']
   const [actionState, setActionState] = useState({ loading: false, result: { error: false } })
+  const [changesState, setChangesState] = useState({})
+
+  /**
+   * Clean formState
+   */
+  const cleanChangesState = (values) => setChangesState({ ...values })
 
   /**
    * Method to get paymethods from API
    */
-  const getPaymethods = async () => {
+  const getBusinessPaymethods = async () => {
+    try {
+      const response = await fetch(`${ordering.root}/business/${business.id}/paymethods`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
+      const { result } = await response.json()
+      setBusinessPaymethodsState({ ...paymethodsList, loading: false, paymethods: result })
+    } catch (err) {
+      setBusinessPaymethodsState({ ...paymethodsList, loading: false, error: err.message })
+    }
+  }
+
+  /**
+   * Method to get paymethods from API
+   */
+  const getAllPaymethods = async () => {
     try {
       const response = await fetch(`${ordering.root}/paymethods?where=[{%22attribute%22:%22enabled%22,%22value%22:true}]`, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
       const { result } = await response.json()
@@ -38,7 +57,6 @@ export const BusinessPaymentMethods = (props) => {
   const handleCreateBusinessPaymentOption = async (paymethodId) => {
     const paymethod = paymethodsList.paymethods.find(_paymethod => _paymethod.id === paymethodId)
     const params = {
-      business_id: business.id,
       enabled: true,
       paymethod_id: paymethodId,
       sandbox: sandboxRequiredGateways.includes(paymethod.gateway)
@@ -56,14 +74,13 @@ export const BusinessPaymentMethods = (props) => {
       const response = await fetch(`${ordering.root}/business/${business.id}/paymethods`, requestOptions)
       const content = await response.json()
       if (!content.error) {
-        const newBusiness = {
-          ...business,
+        setBusinessPaymethodsState({
+          ...businessPaymethodsState,
           paymethods: [
             ...business.paymethods,
             { ...content.result, paymethod: paymethod }
           ]
-        }
-        handleSuccessUpdate && handleSuccessUpdate(newBusiness)
+        })
         setActionState({ loading: false, result: { error: false } })
       }
     } catch (err) {
@@ -89,16 +106,16 @@ export const BusinessPaymentMethods = (props) => {
       }
       const response = await fetch(`${ordering.root}/business/${business.id}/paymethods/${paymethodId}`, requestOptions)
       const content = await response.json()
+      setChangesState(content.error ? changesState : {})
       if (!content.error) {
-        setActionState({ ...actionState, loading: true })
+        setActionState({ ...actionState, loading: false })
         const updatedPaymethods = business.paymethods.filter(paymethod => {
           if (paymethod.id === paymethodId) {
             Object.assign(paymethod, content.result)
           }
           return true
         })
-        const updatedBusiness = { ...business, paymethods: updatedPaymethods }
-        handleSuccessUpdate && handleSuccessUpdate(updatedBusiness)
+        setBusinessPaymethodsState({ ...businessPaymethodsState, paymethods: updatedPaymethods })
       }
     } catch (err) {
       setActionState({ result: { error: true, result: err.message }, loading: false })
@@ -123,10 +140,9 @@ export const BusinessPaymentMethods = (props) => {
       const response = await fetch(`${ordering.root}/business/${business.id}/paymethods/${businessPaymethodId}`, requestOptions)
       const content = await response.json()
       if (!content.error) {
-        setActionState({ ...actionState, loading: true })
+        setActionState({ ...actionState, loading: false })
         const updatedPaymethods = business.paymethods.filter(paymethod => paymethod.paymethod_id !== paymethodId)
-        const updatedBusiness = { ...business, paymethods: updatedPaymethods }
-        handleSuccessUpdate && handleSuccessUpdate(updatedBusiness)
+        setBusinessPaymethodsState({ ...businessPaymethodsState, paymethods: updatedPaymethods })
       }
     } catch (err) {
       setActionState({ result: { error: true, result: err.message }, loading: false })
@@ -142,7 +158,6 @@ export const BusinessPaymentMethods = (props) => {
     if (found) {
       const businessPaymethod = business.paymethods.find(paymethod => paymethod.paymethod.id === paymethodId)
       handleUpdateBusinessPaymethodOpton(businessPaymethod.id, {
-        business_id: business.id,
         enabled: !businessPaymethod.enabled
       })
     } else {
@@ -150,8 +165,58 @@ export const BusinessPaymentMethods = (props) => {
     }
   }
 
+  /**
+   * Update credential data
+   * @param {EventTarget} e Related HTML event
+   * @param {Boolean} sandbox value if sandbox data is or not
+   */
+  const handleChangeInput = (e, sandbox) => {
+    if (sandbox) {
+      setChangesState({
+        ...changesState,
+        data_sandbox: {
+          ...changesState?.data_sandbox,
+          [e.target.name]: e.target.value
+        }
+      })
+    } else {
+      setChangesState({
+        ...changesState,
+        data: {
+          ...changesState?.data,
+          [e.target.name]: e.target.value
+        }
+      })
+    }
+  }
+  /**
+   * Method to control the sanbox enable state
+   */
+  const handleChangeSandbox = () => {
+    setChangesState({
+      ...changesState,
+      sandbox: !changesState?.sandbox
+    })
+  }
+
+  /**
+   * Method to save the form state
+   * @param {Number} paymethodId id to save the change state
+   */
+  const handleSaveClick = (paymethodId) => {
+    let changes = { ...changesState }
+    if (changes?.data) {
+      changes = { ...changes, data: JSON.stringify(changes.data) }
+    }
+    if (changes?.data_sandbox) {
+      changes = { ...changes, data_sandbox: JSON.stringify(changes.data_sandbox) }
+    }
+    handleUpdateBusinessPaymethodOpton(paymethodId, changes)
+  }
+
   useEffect(() => {
-    getPaymethods()
+    getAllPaymethods()
+    getBusinessPaymethods()
   }, [])
 
   return (
@@ -159,9 +224,16 @@ export const BusinessPaymentMethods = (props) => {
       {UIComponent && (
         <UIComponent
           {...props}
+          businessPaymethodsState={businessPaymethodsState}
           paymethodsList={paymethodsList}
           handleClickPayment={handleClickPayment}
+          actionState={actionState}
           handleDeleteBusinessPaymethodOption={handleDeleteBusinessPaymethodOption}
+          changesState={changesState}
+          cleanChangesState={cleanChangesState}
+          handleChangeSandbox={handleChangeSandbox}
+          handleChangeInput={handleChangeInput}
+          handleSaveClick={handleSaveClick}
         />
       )}
     </>
