@@ -32,7 +32,7 @@ export const Table = styled.table`
   th,
   td {
     padding: 15px;
-    border-bottom: solid 1px #B1BCCC;
+    border-bottom: solid 1px #E9ECEF;
     box-sizing: border-box;
 
     &:first-child {
@@ -93,12 +93,16 @@ export const Table = styled.table`
   div.info {
     p {
       margin: 0px;
-      color: ${props => props.theme.colors?.headingColor};
+      color: ${props => props.theme.colors?.lightGray};
       font-size: 12px;
+    }
+    p.date {
+      color: ${props => props.theme.colors?.headingColor};
     }
     p.bold {
       font-size: 14px;
       font-weight: 600;
+      color: ${props => props.theme.colors?.headingColor};
     }
   }
 `
@@ -123,7 +127,7 @@ export const OrderNumberContainer = styled.div`
 export const CheckBox = styled.span`
   svg {
     font-size: 24px;
-    color: ${props => props.theme.colors?.headingColor};
+    color: #B1BCCC;
 
     ${props => props.theme?.rtl ? css`
       margin-left: 10px;
@@ -213,19 +217,27 @@ export const Image = (props) => {
 }
 
 export const OrderType = styled.div`
-  width: 25px;
-  height: 30px;
+  display: flex;
+  align-items: center;
+
+  img, svg {
+    width: 25px;
+    height: 30px;
+  }
 
   img {
-    width: 100%;
-    height: 100%;
     border-radius: unset;
     border: none;
   }
 
-  svg {
-    width: 100%;
-    height: 100%;
+  span {
+    color: ${props => props.theme.colors.headingColor};
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      marign-right: 5px;
+    ` : css`
+      margin-left: 5px;
+    `}
   }
 `
 

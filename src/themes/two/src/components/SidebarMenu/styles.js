@@ -163,7 +163,7 @@ export const SubMenu = styled.div`
   cursor: pointer;
   padding: 5px 0;
   font-size: 14px;
-  color: ${props => props.theme.colors.headingColor};
+  color: ${props => props.theme.colors.lightGray};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

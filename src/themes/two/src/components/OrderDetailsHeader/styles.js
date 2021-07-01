@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const OrderDetailsHeaderContainer = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ export const OrderDetailsHeaderContainer = styled.div`
     h1 {
       font-size: 24px;
       margin: 0px;
+      font-weight: 700;
     }
 
     p {
@@ -50,4 +51,3 @@ export const ButtonLink = styled.div`
     font-size: 24px;
   }
 `
-

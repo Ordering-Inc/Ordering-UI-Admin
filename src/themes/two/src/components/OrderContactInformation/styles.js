@@ -12,11 +12,10 @@ export const ButtonLink = styled.div`
   }
 
   svg {
-    color: ${props => props.theme.colors?.secundaryContrast};
+    color: ${props => props.theme.colors?.lightGray};
     font-size: 24px;
   }
 `
-
 
 export const BusinessInfo = styled.div`
   display: flex;
