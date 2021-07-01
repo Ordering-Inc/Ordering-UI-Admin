@@ -91,7 +91,7 @@ const BusinessPaymentMethodsUI = (props) => {
       )}
       <PaymentMethodsContainer>
         <h1>{t('PAYMETHODS', 'Payment methods')}</h1>
-        {(paymethodsList.loading || businessPaymethodsState.loading) && (
+        {(paymethodsList.loading || businessPaymethodsState.loading) ? (
           [...Array(10).keys()].map(i => (
             <PaymethodOptionContainer key={i}>
               <PaymethodOption>
@@ -102,50 +102,51 @@ const BusinessPaymentMethodsUI = (props) => {
               </PaymethodOption>
             </PaymethodOptionContainer>
           ))
-        )}
-        <PaymethodListWrapper>
-          {paymethodsList.paymethods.map(paymethod => (
-            <PaymethodOptionContainer key={paymethod.id}>
-              <PaymethodOption
-                onClick={() => handleClickPayment(paymethod.id)}
-              >
-                {isCheckEnableSate(paymethod.id) ? (
-                  <RiCheckboxFill className='fill' />
-                ) : (
-                  <RiCheckboxBlankLine />
-                )}
-                <PaymethodName>{paymethod?.name}</PaymethodName>
-              </PaymethodOption>
-              {isCheckFoundBusinessPaymethod(paymethod.id) && (
-                <DropDownWrapper>
-                  <DropdownButton
-                    menuAlign={theme?.rtl ? 'left' : 'right'}
-                    title={ActionIcon}
-                    id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                  >
-                    {editablePaymethods.includes(paymethod.gateway) && (
+        ) : (
+          <PaymethodListWrapper>
+            {paymethodsList.paymethods.map(paymethod => (
+              <PaymethodOptionContainer key={paymethod.id}>
+                <PaymethodOption
+                  onClick={() => handleClickPayment(paymethod.id)}
+                >
+                  {isCheckEnableSate(paymethod.id) ? (
+                    <RiCheckboxFill className='fill' />
+                  ) : (
+                    <RiCheckboxBlankLine />
+                  )}
+                  <PaymethodName>{paymethod?.name}</PaymethodName>
+                </PaymethodOption>
+                {isCheckFoundBusinessPaymethod(paymethod.id) && (
+                  <DropDownWrapper>
+                    <DropdownButton
+                      menuAlign={theme?.rtl ? 'left' : 'right'}
+                      title={ActionIcon}
+                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                    >
+                      {editablePaymethods.includes(paymethod.gateway) && (
+                        <Dropdown.Item
+                          onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
+                        >
+                          {t('EDIT', 'Edit')}
+                        </Dropdown.Item>
+                      )}
                       <Dropdown.Item
-                        onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
+                        onClick={() => console.log('custom')}
                       >
-                        {t('EDIT', 'Edit')}
+                        {t('CUSTOM_FIELDS', 'Custom fields')}
                       </Dropdown.Item>
-                    )}
-                    <Dropdown.Item
-                      onClick={() => console.log('custom')}
-                    >
-                      {t('CUSTOM_FIELDS', 'Custom fields')}
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => handleDeleteBusinessPaymethodOption(paymethod.id)}
-                    >
-                      {t('DELETE', 'Delete')}
-                    </Dropdown.Item>
-                  </DropdownButton>
-                </DropDownWrapper>
-              )}
-            </PaymethodOptionContainer>
-          ))}
-        </PaymethodListWrapper>
+                      <Dropdown.Item
+                        onClick={() => handleDeleteBusinessPaymethodOption(paymethod.id)}
+                      >
+                        {t('DELETE', 'Delete')}
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </DropDownWrapper>
+                )}
+              </PaymethodOptionContainer>
+            ))}
+          </PaymethodListWrapper>
+        )}
       </PaymentMethodsContainer>
       {isEdit && (
         <>
