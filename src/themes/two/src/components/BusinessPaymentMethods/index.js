@@ -8,8 +8,10 @@ import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
 import { SpinnerLoader } from '../SpinnerLoader'
+import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
+import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
+import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
 
 import {
   MainContainer,
@@ -40,6 +42,7 @@ const BusinessPaymentMethodsUI = (props) => {
   const theme = useTheme()
   const [isEdit, setIsEdit] = useState(false)
   const [selectedBusinessPaymethod, setSelectedBusinessPaymethod] = useState(null)
+  const [selectedPaymethodGateway, setSelectedPaymethodGateway] = useState(null)
   const ActionIcon = <FiMoreVertical />
 
   const isCheckEnableSate = (id) => {
@@ -56,7 +59,8 @@ const BusinessPaymentMethodsUI = (props) => {
     return found
   }
 
-  const handleOpenEdit = (paymethodId) => {
+  const handleOpenEdit = (paymethodId, paymethodGateway) => {
+    setSelectedPaymethodGateway(paymethodGateway)
     const businessPaymethod = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === paymethodId)
     setSelectedBusinessPaymethod(businessPaymethod)
     setIsEdit(true)
@@ -67,6 +71,12 @@ const BusinessPaymentMethodsUI = (props) => {
     setIsExtendExtraOpen(false)
     setIsEdit(false)
   }
+
+  useEffect(() => {
+    if (!selectedBusinessPaymethod) return
+    const updatedPaymethod = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === selectedBusinessPaymethod.paymethod_id)
+    setSelectedBusinessPaymethod(updatedPaymethod)
+  }, [businessPaymethodsState?.paymethods, selectedBusinessPaymethod])
 
   return (
     <MainContainer>
@@ -110,7 +120,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                   >
                     <Dropdown.Item
-                      onClick={() => handleOpenEdit(paymethod.id)}
+                      onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
                     >
                       {t('EDIT', 'Edit')}
                     </Dropdown.Item>
@@ -133,18 +143,45 @@ const BusinessPaymentMethodsUI = (props) => {
       </PaymentMethodsContainer>
       {isEdit && (
         <>
-          <PaymentOptionStripeDirect
-            open={isEdit}
-            businessPaymethodsState={businessPaymethodsState}
-            onClose={() => handleCloseEdit()}
-            businessPaymethod={selectedBusinessPaymethod}
-            changesState={changesState}
-            cleanChangesState={cleanChangesState}
-            actionState={actionState}
-            handleChangeSandbox={handleChangeSandbox}
-            handleChangeInput={handleChangeInput}
-            handleSaveClick={handleSaveClick}
-          />
+          {selectedPaymethodGateway === 'stripe_direct' && (
+            <PaymentOptionStripeDirect
+              open={isEdit}
+              onClose={() => handleCloseEdit()}
+              businessPaymethod={selectedBusinessPaymethod}
+              changesState={changesState}
+              cleanChangesState={cleanChangesState}
+              actionState={actionState}
+              handleChangeSandbox={handleChangeSandbox}
+              handleChangeInput={handleChangeInput}
+              handleSaveClick={handleSaveClick}
+            />
+          )}
+          {selectedPaymethodGateway === 'paypal_express' && (
+            <PaymethodOptionPaypalExpress
+              open={isEdit}
+              onClose={() => handleCloseEdit()}
+              businessPaymethod={selectedBusinessPaymethod}
+              changesState={changesState}
+              cleanChangesState={cleanChangesState}
+              actionState={actionState}
+              handleChangeSandbox={handleChangeSandbox}
+              handleChangeInput={handleChangeInput}
+              handleSaveClick={handleSaveClick}
+            />
+          )}
+          {selectedPaymethodGateway === 'stripe_redirect' && (
+            <PaymethodOptionStripeRedirect
+              open={isEdit}
+              onClose={() => handleCloseEdit()}
+              businessPaymethod={selectedBusinessPaymethod}
+              changesState={changesState}
+              cleanChangesState={cleanChangesState}
+              actionState={actionState}
+              handleChangeSandbox={handleChangeSandbox}
+              handleChangeInput={handleChangeInput}
+              handleSaveClick={handleSaveClick}
+            />
+          )}
         </>
       )}
     </MainContainer>

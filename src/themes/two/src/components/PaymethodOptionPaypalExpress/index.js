@@ -16,7 +16,7 @@ import {
   CloseButton
 } from './styles'
 
-export const PaymentOptionStripeDirect = (props) => {
+export const PaymethodOptionPaypalExpress = (props) => {
   const {
     open,
     onClose,
@@ -36,7 +36,7 @@ export const PaymentOptionStripeDirect = (props) => {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById('stripe_direct').style.width = value
+    document.getElementById('paypal_express').style.width = value
       ? width > 489 ? '500px' : '100vw'
       : '0'
   }
@@ -44,9 +44,9 @@ export const PaymentOptionStripeDirect = (props) => {
   useEffect(() => {
     if (isMenuOpen) {
       if (width <= 500) {
-        document.getElementById('stripe_direct').style.width = '100vw'
+        document.getElementById('paypal_express').style.width = '100vw'
       } else {
-        document.getElementById('stripe_direct').style.width = '500px'
+        document.getElementById('paypal_express').style.width = '500px'
       }
     }
   }, [width])
@@ -62,9 +62,9 @@ export const PaymentOptionStripeDirect = (props) => {
     })
   }, [businessPaymethod?.sandbox])
   return (
-    <Container id='stripe_direct'>
+    <Container id='paypal_express'>
       <Header>
-        <h1>{t('STRIPE_DIRECT', 'Stripe direct')}</h1>
+        <h1>{t('PAYPAL_EXPRESS', 'Paypal express')}</h1>
         <CloseButton>
           <MdcClose
             onClick={() => onClose()}
@@ -81,48 +81,26 @@ export const PaymentOptionStripeDirect = (props) => {
         )}
         <span>{t('SANDBOX', 'Sandbox')}</span>
       </SandboxWrapper>
-      <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')}</FieldName>
+      <FieldName>{t('CLIENT_ID', 'Client ID')}</FieldName>
       <Input
-        name='publishable'
+        name='client_id'
         defaultValue={
-          changesState?.data?.publishable
-            ? changesState?.data?.publishable
-            : businessPaymethod?.data?.publishable
+          changesState?.data?.client_id
+            ? changesState?.data?.client_id
+            : businessPaymethod?.data?.client_id
         }
-        placeholder={t('PUBLISHABLE_KEY', 'Publishable key')}
+        placeholder={t('CLIENT_ID', 'Client ID')}
         onChange={e => handleChangeInput(e, false)}
       />
-      <FieldName>{t('SECRET_KEY', 'Secret key')}</FieldName>
+      <FieldName>{t('CLIENT_ID', 'Client ID')} ({t('SANDBOX', 'Sandbox')})</FieldName>
       <Input
-        name='secret'
+        name='client_id'
         defaultValue={
-          changesState?.data?.secret
-            ? changesState?.data?.secret
-            : businessPaymethod?.data?.secret
+          changesState?.data_sandbox?.client_id
+            ? changesState?.data_sandbox?.client_id
+            : businessPaymethod?.data_sandbox?.client_id
         }
-        placeholder={t('SECRET_KEY', 'Secret key')}
-        onChange={e => handleChangeInput(e, false)}
-      />
-      <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')} ({t('SANDBOX', 'Sandbox')})</FieldName>
-      <Input
-        name='publishable'
-        defaultValue={
-          changesState?.data_sandbox?.publishable
-            ? changesState?.data_sandbox?.publishable
-            : businessPaymethod?.data_sandbox?.publishable
-        }
-        placeholder={`${t('PUBLISHABLE_KEY', 'Publishable key')} (${t('SANDBOX', 'Sandbox')})`}
-        onChange={e => handleChangeInput(e, true)}
-      />
-      <FieldName>{t('SECRECT_KEY', 'Secret key')} ({t('SANDBOX', 'Sandbox')})</FieldName>
-      <Input
-        name='secret'
-        defaultValue={
-          changesState?.data_sandbox?.secret
-            ? changesState?.data_sandbox?.secret
-            : businessPaymethod?.data_sandbox?.secret
-        }
-        placeholder={`${t('SECRECT_KEY', 'Secret key')} (${t('SANDBOX', 'Sandbox')})`}
+        placeholder={`${t('CLIENT_ID', 'Client ID')} (${t('SANDBOX', 'Sandbox')}`}
         onChange={e => handleChangeInput(e, true)}
       />
       <Button
