@@ -11,11 +11,13 @@ import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
 import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
 import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
+import { BusinessCustomFields } from '../BusinessCustomFields'
 
 import {
   BarContainer,
   BusinessDetailsExtraContent
 } from './styles'
+import { Personalization } from '../Personalization'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -169,6 +171,19 @@ export const BusinessDetailsUI = (props) => {
                     business={businessState?.business}
                     setIsExtendExtraOpen={setIsExtendExtraOpen}
                     handleSuccessUpdate={handleUpdateBusinessState}
+                  />
+                )}
+                {selectedItem === 'custom_fields' && (
+                  <BusinessCustomFields
+                    businessId={businessState?.business.id}
+                    metafields={businessState?.business?.metafields}
+                    handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
+                    handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}
+                  />
+                )}
+                {selectedItem === 'personalization' && (
+                  <Personalization
+                    isShowTitle
                   />
                 )}
               </BusinessDetailsExtraContent>
