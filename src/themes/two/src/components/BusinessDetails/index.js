@@ -10,6 +10,7 @@ import { BusinessInformation } from '../BusinessInformation'
 import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
 import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
+import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
 
 import {
   BarContainer,
@@ -160,6 +161,13 @@ export const BusinessDetailsUI = (props) => {
                     business={businessState?.business}
                     setIsExtendExtraOpen={setIsExtendExtraOpen}
                     onClose={() => setIsExtendExtraOpen(false)}
+                    handleSuccessUpdate={handleUpdateBusinessState}
+                  />
+                )}
+                {selectedItem === 'payment_methods' && (
+                  <BusinessPaymentMethods
+                    business={businessState?.business}
+                    setIsExtendExtraOpen={setIsExtendExtraOpen}
                     handleSuccessUpdate={handleUpdateBusinessState}
                   />
                 )}
