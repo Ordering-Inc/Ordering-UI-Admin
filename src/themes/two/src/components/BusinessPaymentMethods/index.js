@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage } from 'ordering-components-admin'
-import { BusinessPaymentMethods as BusinessPaymentMethodsController } from './naked'
+import { useLanguage, BusinessPaymethods as BusinessPaymentMethodsController } from 'ordering-components-admin'
 
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -12,6 +11,7 @@ import { SpinnerLoader } from '../SpinnerLoader'
 import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
 import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
 import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
+import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
 
 import {
   MainContainer,
@@ -44,6 +44,10 @@ const BusinessPaymentMethodsUI = (props) => {
   const [selectedBusinessPaymethod, setSelectedBusinessPaymethod] = useState(null)
   const [selectedPaymethodGateway, setSelectedPaymethodGateway] = useState(null)
   const ActionIcon = <FiMoreVertical />
+
+  const editablePaymethods = [
+    'stripe_direct', 'paypal_express', 'stripe_redirect', 'stripe_connect'
+  ]
 
   const isCheckEnableSate = (id) => {
     const found = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === id)
@@ -119,13 +123,15 @@ const BusinessPaymentMethodsUI = (props) => {
                     title={ActionIcon}
                     id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                   >
+                    {editablePaymethods.includes(paymethod.gateway) && (
+                      <Dropdown.Item
+                        onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
+                      >
+                        {t('EDIT', 'Edit')}
+                      </Dropdown.Item>
+                    )}
                     <Dropdown.Item
-                      onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
-                    >
-                      {t('EDIT', 'Edit')}
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => console.log('edit')}
+                      onClick={() => console.log('custom')}
                     >
                       {t('CUSTOM_FIELDS', 'Custom fields')}
                     </Dropdown.Item>
@@ -178,6 +184,18 @@ const BusinessPaymentMethodsUI = (props) => {
               cleanChangesState={cleanChangesState}
               actionState={actionState}
               handleChangeSandbox={handleChangeSandbox}
+              handleChangeInput={handleChangeInput}
+              handleSaveClick={handleSaveClick}
+            />
+          )}
+          {selectedPaymethodGateway === 'stripe_connect' && (
+            <PaymethodOptionStripeConnect
+              open={isEdit}
+              onClose={() => handleCloseEdit()}
+              businessPaymethod={selectedBusinessPaymethod}
+              changesState={changesState}
+              cleanChangesState={cleanChangesState}
+              actionState={actionState}
               handleChangeInput={handleChangeInput}
               handleSaveClick={handleSaveClick}
             />
