@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 
 export const WrapMetaFields = styled.div`
-  padding-top: 10px;
   box-sizing: border-box;
+  padding: 20px;
 `
 export const MetaTitle = styled.p`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   color: ${props => props.theme.colors?.headingColor};
+  margin-bottom: 30px;
 `
 export const MetaContainer = styled.div`
   display: flex;
