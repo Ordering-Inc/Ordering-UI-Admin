@@ -64,7 +64,7 @@ export const Options = styled.div`
   border-width: 1px;
   border-style: solid;
   border-color: #1C202E;
-  border-radius: 10px;
+  border-radius: 7.6px;
   overflow: hidden;
 
   ${({ position }) => position?.toLowerCase() === 'left' && css`
@@ -131,7 +131,7 @@ export const Selected = styled.div`
 
 export const Select = styled.div`
   display: inline-block;
-  border-radius: 8px;
+  border-radius: 7.6px;
   line-height: 34px;
   border-width: 1px;
   border-style: solid;
@@ -147,7 +147,7 @@ export const Select = styled.div`
     background: ${props => props.theme.colors.btnPrimary};
     color: ${props => props.theme.colors.btnPrimaryContrast};
     border-color: ${props => props.theme.colors.btnPrimary};
-    border-radius: 6px;
+    border-radius: 7.6px;
   `}
 `
 

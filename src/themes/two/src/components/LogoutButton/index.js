@@ -1,7 +1,7 @@
 import React from 'react'
 import { LogoutAction, useLanguage } from 'ordering-components-admin'
 
-import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
+import { BoxArrowRight } from 'react-bootstrap-icons'
 import { Button } from 'react-bootstrap'
 
 const LogoutButtonUI = (props) => {
@@ -17,7 +17,7 @@ const LogoutButtonUI = (props) => {
       variant=''
       onClick={props.handleLogoutClick}
     >
-      <FaSignOutAlt />
+      <BoxArrowRight size={20} />
       {!isCollapse && (
         <span className='mx-2'>
           {t('LOGOUT', 'Logout')}

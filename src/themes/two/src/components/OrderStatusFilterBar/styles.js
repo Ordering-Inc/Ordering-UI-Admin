@@ -15,10 +15,15 @@ export const InnerContainer = styled.div`
 `
 
 export const Tab = styled.div`
-  padding: 10px 15px;
+  padding: 10px 0px;
   cursor: pointer;
   color: ${props => props.theme.colors?.headingColor};
   white-space: nowrap;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 30px;
+  ` : css`
+    margin-right: 30px;
+  `}
 
   ${({ active }) => active && css`
     border-bottom: 3px solid;

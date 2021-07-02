@@ -79,7 +79,7 @@ const OrderDeleteUI = (props) => {
           )}
           <Button
             color='primary'
-            borderRadius='5px'
+            borderRadius='7.6px'
             onClick={() => getCheckPassword()}
           >
             {t('CONFIRM', 'Confirm')}

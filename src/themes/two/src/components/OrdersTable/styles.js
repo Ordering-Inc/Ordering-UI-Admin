@@ -36,11 +36,8 @@ export const Table = styled.table`
     box-sizing: border-box;
 
     &:first-child {
-      ${props => props.theme?.rtl ? css`
-        padding-left: 0px;
-      ` : css`
-        padding-right: 0px;
-      `}
+      padding-left: 0px;
+      padding-right: 0px;
     }
   }
 
@@ -181,8 +178,8 @@ export const WrapperImage = styled.div`
   max-height: 45px;
   height: 45px;
   width: 45px;
-  border: 1px solid #E3E3E3;
-  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 7.6px;
 
   svg {
     width: 100%;
@@ -203,7 +200,7 @@ const ImageStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 7.6px;
 `
 export const Image = (props) => {
   return (

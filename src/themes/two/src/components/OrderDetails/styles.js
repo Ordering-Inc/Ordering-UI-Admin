@@ -160,7 +160,8 @@ export const AdvancedLogistic = styled.div`
         font-weight: 600;
       }
       &:not(:first-child) {
-        font-size: 14px;
+        font-size: 12px;
+        color: ${props => props.theme.colors.lightGray};
       }
     }
   }

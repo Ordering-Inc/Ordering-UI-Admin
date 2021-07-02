@@ -1,11 +1,7 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import MdcDotsVertical from '@meronex/icons/mdc/MdcDotsVertical'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
-import AiOutlinePrinter from '@meronex/icons/ai/AiOutlinePrinter'
-import AiOutlineApartment from '@meronex/icons/ai/AiOutlineApartment'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
-import { Button } from '../../styles/Buttons'
+import { Printer, Diagram3, ThreeDotsVertical, XLg as CloseIcon } from 'react-bootstrap-icons'
 import {
   OrderDetailsHeaderContainer,
   ButtonLink
@@ -56,25 +52,24 @@ export const OrderDetailsHeader = (props) => {
       </div>
       <div>
         <ButtonLink onClick={() => window.print()}>
-          <AiOutlinePrinter />
+          <Printer />
         </ButtonLink>
         <ButtonLink
           onClick={() => handleOpenMessages('history')}
         >
-          <AiOutlineApartment />
+          <Diagram3 />
         </ButtonLink>
         <ButtonLink
           onClick={() => handleOpenMetaFields()}
         >
-          <MdcDotsVertical />
+          <ThreeDotsVertical />
         </ButtonLink>
-        <Button
-          borderRadius='5px'
-          color='secundary'
+        <ButtonLink
+          className='close'
           onClick={() => actionSidebar(false)}
         >
-          <MdcClose />
-        </Button>
+          <CloseIcon />
+        </ButtonLink>
       </div>
     </OrderDetailsHeaderContainer>
   )

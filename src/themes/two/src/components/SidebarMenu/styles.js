@@ -57,6 +57,7 @@ export const SidebarContent = styled.div`
   box-sizing: border-box;
   transition: 0.1s;
   button {
+    display: flex;
     font-size: 14px;
     box-sizing: border-box;
     svg {
