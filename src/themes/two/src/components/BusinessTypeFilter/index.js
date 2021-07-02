@@ -18,7 +18,6 @@ const BusinessTypeFilterUI = (props) => {
   const handleChangeCategory = (category) => {
     handleChangeBusinessType && handleChangeBusinessType(category)
   }
-
   useEffect(() => {
     if (loading) return
     setBusinessTypes(types)

@@ -117,7 +117,6 @@ export const SidebarMenu = (props) => {
       pageName: 'operationSettings'
     }
   ]
-
   const handleGoToPage = (data) => {
     setMenuOpen(false)
     events.emit('go_to_page', data)
