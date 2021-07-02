@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
-
+import BilStripe from '@meronex/icons/bi/BilStripe'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -12,18 +12,21 @@ import {
   Header,
   CloseButton,
   InputGroup,
-  InputWrapper
+  InputWrapper,
+  StripeConnectButton
 } from './styles'
 
 export const PaymethodOptionStripeConnect = (props) => {
   const {
+    business,
     open,
     onClose,
     changesState,
     cleanChangesState,
     actionState,
-    handleChangeInput,
-    handleSaveClick,
+    handleStripeConnect,
+    handleChangeStripeInput,
+    handleStripeSave,
     businessPaymethod
   } = props
   const [, t] = useLanguage()
@@ -55,10 +58,8 @@ export const PaymethodOptionStripeConnect = (props) => {
   }, [open])
 
   useEffect(() => {
-    cleanChangesState({
-      sandbox: businessPaymethod?.sandbox
-    })
-  }, [businessPaymethod?.sandbox])
+    cleanChangesState({})
+  }, [])
   return (
     <Container id='stripe_connect'>
       <Header>
@@ -69,16 +70,22 @@ export const PaymethodOptionStripeConnect = (props) => {
           />
         </CloseButton>
       </Header>
+      <StripeConnectButton
+        onClick={() => handleStripeConnect()}
+      >
+        <span><BilStripe /></span>
+        <span>{t('CONNECT_WITH_STRIPE', 'Connect with stripe')}</span>
+      </StripeConnectButton>
       <FieldName>{t('ACCESS_TOKEN_ID', 'Access token ID')}</FieldName>
       <Input
-        name='secret'
+        name='token'
         defaultValue={
-          changesState?.data?.secret
-            ? changesState?.data?.secret
-            : businessPaymethod?.data?.secret
+          changesState?.data?.token
+            ? changesState?.data?.token
+            : businessPaymethod?.data?.token
         }
         placeholder={t('ACCESS_TOKEN_ID', 'Access token ID')}
-        onChange={e => handleChangeInput(e, false)}
+        disabled
       />
 
       <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')}</FieldName>
@@ -90,59 +97,61 @@ export const PaymethodOptionStripeConnect = (props) => {
             : businessPaymethod?.data?.publishable
         }
         placeholder={t('PUBLISHABLE_KEY', 'Publishable key')}
-        onChange={e => handleChangeInput(e, false)}
+        disabled
       />
 
       <FieldName>{t('ID_USER', 'User ID')}</FieldName>
       <Input
-        name='secret'
+        name='user'
         defaultValue={
-          changesState?.data?.secret
-            ? changesState?.data?.secret
-            : businessPaymethod?.data?.secret
+          changesState?.data?.user
+            ? changesState?.data?.user
+            : businessPaymethod?.data?.user
         }
         placeholder={t('ID_USER', 'User ID')}
-        onChange={e => handleChangeInput(e, false)}
+        disabled
       />
 
       <FieldName>{t('REFRESH_TOKEN', 'Refresh token')}</FieldName>
       <Input
-        name='publishable'
+        name='refresh_token'
         defaultValue={
-          changesState?.data_sandbox?.publishable
-            ? changesState?.data_sandbox?.publishable
-            : businessPaymethod?.data_sandbox?.publishable
+          changesState?.data_sandbox?.refresh_token
+            ? changesState?.data_sandbox?.refresh_token
+            : businessPaymethod?.data_sandbox?.refresh_token
         }
         placeholder={t('REFRESH_TOKEN', 'Refresh token')}
-        onChange={e => handleChangeInput(e, true)}
+        disabled
       />
 
       <InputGroup>
         <InputWrapper>
           <FieldName>{t('FIXED_FEE', 'Fixed fee')}</FieldName>
           <Input
-            name='secret'
+            type='number'
+            name='fixed_usage_fee'
             defaultValue={
-              changesState?.data_sandbox?.secret
-                ? changesState?.data_sandbox?.secret
-                : businessPaymethod?.data_sandbox?.secret
+              changesState?.fixed_usage_fee
+                ? changesState?.fixed_usage_fee
+                : business?.fixed_usage_fee
             }
             placeholder={t('FIXED_FEE', 'Fixed fee')}
-            onChange={e => handleChangeInput(e, true)}
+            onChange={e => handleChangeStripeInput(e)}
           />
         </InputWrapper>
 
         <InputWrapper>
           <FieldName>{t('PERCENTAGE_FEE', 'Percentage fee')}</FieldName>
           <Input
-            name='secret'
+            type='number'
+            name='percentage_usage_fee'
             defaultValue={
-              changesState?.data_sandbox?.secret
-                ? changesState?.data_sandbox?.secret
-                : businessPaymethod?.data_sandbox?.secret
+              changesState?.percentage_usage_fee
+                ? changesState?.percentage_usage_fee
+                : business?.percentage_usage_fee
             }
             placeholder={t('PERCENTAGE_FEE', 'Percentage fee')}
-            onChange={e => handleChangeInput(e, true)}
+            onChange={e => handleChangeStripeInput(e)}
           />
         </InputWrapper>
       </InputGroup>
@@ -151,7 +160,7 @@ export const PaymethodOptionStripeConnect = (props) => {
         borderRadius='5px'
         color='primary'
         disabled={actionState.loading || Object.keys(changesState).length === 0}
-        onClick={() => handleSaveClick(businessPaymethod.id)}
+        onClick={() => handleStripeSave(businessPaymethod.id)}
       >
         {actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
       </Button>

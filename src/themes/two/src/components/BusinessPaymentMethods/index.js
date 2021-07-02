@@ -26,6 +26,7 @@ import {
 
 const BusinessPaymentMethodsUI = (props) => {
   const {
+    business,
     businessPaymethodsState,
     paymethodsList,
     handleClickPayment,
@@ -36,7 +37,10 @@ const BusinessPaymentMethodsUI = (props) => {
     cleanChangesState,
     handleChangeSandbox,
     handleChangeInput,
-    handleSaveClick
+    handleSaveClick,
+    handleStripeConnect,
+    handleChangeStripeInput,
+    handleStripeSave
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -192,13 +196,15 @@ const BusinessPaymentMethodsUI = (props) => {
           {selectedPaymethodGateway === 'stripe_connect' && (
             <PaymethodOptionStripeConnect
               open={isEdit}
+              business={business}
               onClose={() => handleCloseEdit()}
               businessPaymethod={selectedBusinessPaymethod}
               changesState={changesState}
               cleanChangesState={cleanChangesState}
               actionState={actionState}
-              handleChangeInput={handleChangeInput}
-              handleSaveClick={handleSaveClick}
+              handleStripeConnect={handleStripeConnect}
+              handleChangeStripeInput={handleChangeStripeInput}
+              handleStripeSave={handleStripeSave}
             />
           )}
         </>

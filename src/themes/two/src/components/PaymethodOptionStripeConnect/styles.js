@@ -14,12 +14,16 @@ export const Container = styled.div`
     border-left: 1px solid #E9ECEF;
   `}
 
-  > button {
+  > button:last-child {
     position: sticky;
     top: 100%;
     width: fit-content;
     height: 42px;
     margin-bottom: 20px;
+  }
+
+  > input {
+    background: ${props => props.theme.colors.secundary};
   }
 `
 
@@ -61,4 +65,49 @@ export const InputGroup = styled.div`
 
 export const InputWrapper = styled.div`
   width: 48%;
+`
+
+export const StripeConnectButton = styled.button`
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #D4F2FF;
+  border-radius: 7.6px;
+  color: #27BCFD;
+  width: fit-content;
+  padding: 7px 15px;
+  display: flex;
+  align-items: center;
+
+  &:active {
+    background: #258cb9;
+    color: #FFF;
+    span {
+      &:first-child {
+        background: #FFF;
+        svg {
+          color: #27BCFD;
+        }
+      }
+    }
+  }
+
+  span {
+    &:first-child {
+      background: #27BCFD;
+      padding: 2px;
+      border-radius: 5px;
+      svg {
+        font-size: 20px;
+        color: #FFF;
+      }
+    }
+    &:last-child {
+      ${props => props.theme?.rtl ? css`
+        margin-right: 15px;
+      ` : css`
+        margin-left: 15px;
+      `}
+    }
+  }
 `
