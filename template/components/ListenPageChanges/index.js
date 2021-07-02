@@ -11,9 +11,12 @@ export const ListenPageChanges = ({ children }) => {
 
   const routes = {
     orders: '/orders',
-    delivery_dashboard: '/delivery-dashboard',
-    order_detail: '/orders/:orderId',
-    login: '/login'
+    deliveries: '/deliveries',
+    drivers: '/drivers',
+    users: '/users',
+    login: '/login',
+    basicSettings: '/basicSettings',
+
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
@@ -69,7 +72,7 @@ export const ListenPageChanges = ({ children }) => {
       events.off('go_to_page', handleGoToPage)
       events.off('get_current_view', handleGetCurrentView)
     }
-  }, [])
+  }, [events])
 
   useEffect(() => {
     if (theme.rtl !== languageState?.language?.rtl) {

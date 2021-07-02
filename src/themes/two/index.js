@@ -1,10 +1,10 @@
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AutoScroll } from './src/components/AutoScroll'
+import { BasicSettings } from './src/components/BasicSettings'
 import { BusinessActionSelector } from './src/components/BusinessActionSelector'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
 import { BusinessDetails } from './src/components/BusinessDetails'
-import { BusinessDetailsLateralBar } from './src/components/BusinessDetailsLateralBar'
 import { BusinessesSelector } from './src/components/BusinessesSelector'
 import { BusinessessListing } from './src/components/BusinessessListing'
 import { BusinessList } from './src/components/BusinessList'
@@ -38,7 +38,6 @@ import { LogisticInformation } from './src/components/LogisticInformation'
 import { Logistics } from './src/components/Logistics'
 import { LogoutButton } from './src/components/LogoutButton'
 import { Messages } from './src/components/Messages'
-import { MetaFields } from './src/components/MetaFields'
 import { Modal } from './src/components/Modal'
 import { OrderBill } from './src/components/OrderBill'
 import { OrderContactInformation } from './src/components/OrderContactInformation'
@@ -92,8 +91,8 @@ export {
   AutoScroll,
   BusinessActionSelector,
   BusinessActiveStateFilter,
+  BasicSettings,
   BusinessDetails,
-  BusinessDetailsLateralBar,
   BusinessesSelector,
   BusinessessListing,
   BusinessList,
@@ -127,7 +126,6 @@ export {
   Logistics,
   LogoutButton,
   Messages,
-  MetaFields,
   Modal,
   OrderBill,
   OrderContactInformation,

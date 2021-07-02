@@ -6,6 +6,7 @@ export const AutoscrollContainer = styled.span`
    
   .right-autoscroll,
   .left-autoscroll {
+    z-index: 10;
     width: 25px;
     min-width: 25px;
     height: 25px;

@@ -13,7 +13,7 @@ const LogoutButtonUI = (props) => {
 
   return (
     <Button
-      className='d-flex align-items-center m-1'
+      className='d-flex align-items-center'
       variant=''
       onClick={props.handleLogoutClick}
     >

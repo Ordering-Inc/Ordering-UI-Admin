@@ -10,8 +10,17 @@
     }
   },
   "colors": {
-    "primary": "#FAFAFA",
+    "primary": "#0d6efd",
     "disabled": "#CBCBCB",
+    "primaryContrast": "#FFF",
+    "secundary": "#F8F9FA",
+    "secundaryContrast": "#748194",
+    "disabledContrast": "#000",
+    "backgroundPage": "#FFFF",
+    "colorPage": "#333",
+    "headingColor": "#344050",
+    "lightGray": "#909BA9",
+
     "offline": "#9D9B9B",
 
     "textGray": "#C3C3C3",
