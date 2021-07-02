@@ -7,7 +7,6 @@ import { BusinessLocation } from '../BusinessLocation'
 import { BusinessDescription } from '../BusinessDescription'
 import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
-import { BusinessCustomFields } from '../BusinessCustomFields'
 import {
   InfoConatiner
 } from './styles'
@@ -80,14 +79,6 @@ export const BusinessInformation = (props) => {
           business={business}
           handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
           handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
-        />
-      )}
-      {selectedInfoItem === 'custom_fields' && (
-        <BusinessCustomFields
-          businessId={business.id}
-          metafields={business?.metafields}
-          handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
-          handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}
         />
       )}
     </InfoConatiner>
