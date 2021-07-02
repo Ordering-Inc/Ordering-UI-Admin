@@ -192,6 +192,7 @@ export const BusinessDetailsUI = (props) => {
             <>
               {selectedItem === 'support' && (
                 <Modal
+                  width='80%'
                   open={selectedItem === 'support'}
                 >
                   <BusinessSupport
@@ -201,6 +202,7 @@ export const BusinessDetailsUI = (props) => {
               )}
               {selectedItem === 'information' && (
                 <Modal
+                  width='80%'
                   open={selectedItem === 'information'}
                 >
                   <BusinessInformation
@@ -214,6 +216,77 @@ export const BusinessDetailsUI = (props) => {
                     setBusinessTypes={setBusinessTypes}
                     handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
                     handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
+                  />
+                </Modal>
+              )}
+              {selectedItem === 'schedule' && (
+                <Modal
+                  width='80%'
+                  open={selectedItem === 'schedule'}
+                >
+                  <BusinessSchedule
+                    business={businessState?.business}
+                    handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
+                  />
+                </Modal>
+              )}
+              {selectedItem === 'menu' && (
+                <Modal
+                  width='80%'
+                  open={selectedItem === 'menu'}
+                >
+                  <BusinessMenu
+                    business={businessState?.business}
+                    handleSuccessBusinessMenu={handleUpdateBusinessState}
+                    setIsExtendExtraOpen={setIsExtendExtraOpen}
+                  />
+                </Modal>
+              )}
+              {selectedItem === 'delivery_zones' && (
+                <Modal
+                  width='80%'
+                  open={selectedItem === 'delivery_zones'}
+                >
+                  <BusinessDeliveryZone
+                    business={businessState?.business}
+                    setIsExtendExtraOpen={setIsExtendExtraOpen}
+                    onClose={() => setIsExtendExtraOpen(false)}
+                    handleSuccessUpdate={handleUpdateBusinessState}
+                  />
+                </Modal>
+              )}
+              {selectedItem === 'payment_methods' && (
+                <Modal
+                  width='80%'
+                  open={selectedItem === 'payment_methods'}
+                >
+                  <BusinessPaymentMethods
+                    business={businessState?.business}
+                    setIsExtendExtraOpen={setIsExtendExtraOpen}
+                    handleSuccessUpdate={handleUpdateBusinessState}
+                  />
+                </Modal>
+              )}
+              {selectedItem === 'custom_fields' && (
+                <Modal
+                  width='80%'
+                  open={selectedItem === 'custom_fields'}
+                >
+                  <BusinessCustomFields
+                    businessId={businessState?.business.id}
+                    metafields={businessState?.business?.metafields}
+                    handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
+                    handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}
+                  />
+                </Modal>
+              )}
+              {selectedItem === 'personalization' && (
+                <Modal
+                  width='80%'
+                  open={selectedItem === 'personalization'}
+                >
+                  <Personalization
+                    isShowTitle
                   />
                 </Modal>
               )}
