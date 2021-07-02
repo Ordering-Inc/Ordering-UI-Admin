@@ -1,20 +1,30 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SearchBar } from '../SearchBar'
+import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 
 import {
-  HeaderContainer
+  HeaderContainer,
+  AddButton
 } from './styles'
 
 export const BusinessListingHeader = (props) => {
   const {
     searchValue,
-    onSearch
+    onSearch,
+    handleOpenAddBusiness
   } = props
   const [, t] = useLanguage()
   return (
     <HeaderContainer>
-      <h1>{t('STORES_LIST', 'Stores list')}</h1>
+      <div>
+        <h1>{t('STORES_LIST', 'Stores list')}</h1>
+        <AddButton
+          onClick={() => handleOpenAddBusiness()}
+        >
+          <BsPlusSquare />
+        </AddButton>
+      </div>
       <SearchBar
         isCustomLayout
         onSearch={onSearch}

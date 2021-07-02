@@ -7,6 +7,8 @@ import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
+import { BusinessDetails } from '../BusinessDetails'
+import { AddBusinessSidebar } from '../AddBusinessSidebar'
 
 import {
   BusinessListingContainer,
@@ -14,7 +16,6 @@ import {
   WrapperView,
   ViewMethodButton
 } from './styles'
-import { BusinessDetailsLateralBar } from '../BusinessDetailsLateralBar'
 
 const BusinessessListingUI = (props) => {
   const {
@@ -27,6 +28,7 @@ const BusinessessListingUI = (props) => {
     loadMoreBusinesses,
     handleSucessRemoveBusiness,
     handleSucessAddBusiness,
+    handleSucessUpdateBusiness,
     onSearch,
     onBusinessRedirect
   } = props
@@ -37,6 +39,8 @@ const BusinessessListingUI = (props) => {
   const [openBusinessDetails, setOpenBusinessDetails] = useState(false)
   const [detailsBusiness, setDetailsBusiness] = useState(null)
   const [detailsBusinessId, setDetailsBusinessId] = useState(null)
+  const [openAddBusiness, setOpenAddBusiness] = useState(false)
+  const [businessTypes, setBusinessTypes] = useState([])
 
   const handleBackRedirect = () => {
     setOpenBusinessDetails(false)
@@ -44,10 +48,25 @@ const BusinessessListingUI = (props) => {
   }
 
   const handleOpenBusinessDetails = (business) => {
+    setOpenAddBusiness(false)
     setDetailsBusiness(business)
     setDetailsBusinessId(business.id)
     setOpenBusinessDetails(true)
     onBusinessRedirect(business.id)
+  }
+
+  const handleOpenAddBusiness = () => {
+    const id = query.get('id')
+    if (id) {
+      handleBackRedirect()
+    }
+    setOpenAddBusiness(true)
+  }
+
+  const onhandleSuccessAddBusiness = (business) => {
+    handleSucessAddBusiness(business)
+    setOpenAddBusiness(false)
+    handleOpenBusinessDetails(business)
   }
 
   useEffect(() => {
@@ -66,6 +85,7 @@ const BusinessessListingUI = (props) => {
         <BusinessListingHeader
           searchValue={searchValue}
           onSearch={onSearch}
+          handleOpenAddBusiness={handleOpenAddBusiness}
         />
         <ViewContainer>
           <BusinessActiveStateFilter
@@ -91,6 +111,7 @@ const BusinessessListingUI = (props) => {
           businessTypes={props.businessTypes}
           defaultBusinessType={props.defaultBusinessType}
           handleChangeBusinessType={handleChangeBusinessType}
+          setBusinessTypes={setBusinessTypes}
         />
         <BusinessList
           viewMethod={viewMethod}
@@ -99,15 +120,28 @@ const BusinessessListingUI = (props) => {
           loadMoreBusinesses={loadMoreBusinesses}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessAddBusiness={handleSucessAddBusiness}
+          handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleOpenBusinessDetails={handleOpenBusinessDetails}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (
-        <BusinessDetailsLateralBar
+        <BusinessDetails
           open={openBusinessDetails}
           business={detailsBusiness}
+          businessTypes={businessTypes}
           businessId={detailsBusinessId}
+          handleSucessAddBusiness={handleSucessAddBusiness}
+          handleSucessRemoveBusiness={handleSucessRemoveBusiness}
+          handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+          setBusinessTypes={setBusinessTypes}
           onClose={() => handleBackRedirect()}
+        />
+      )}
+      {openAddBusiness && (
+        <AddBusinessSidebar
+          open={openAddBusiness}
+          onClose={() => setOpenAddBusiness(false)}
+          handleSucessAddBusiness={onhandleSuccessAddBusiness}
         />
       )}
     </>

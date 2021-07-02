@@ -5,7 +5,7 @@ export const OrderStatusFilterContainer = styled.div`
   width: 100%;
   border-bottom: 1px solid #CCC;
   overflow-x: auto;
-  @media (min-width: 992px) {
+  @media (min-width: 1025px) {
     overflow-x: hidden;
   }
 `

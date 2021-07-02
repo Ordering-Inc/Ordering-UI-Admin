@@ -160,7 +160,7 @@ export const OrdersDashboardList = (props) => {
   const [cancelledOrdersLoaded, setCancelledOrdersLoaded] = useState(false)
 
   useEffect(() => {
-    if (!activeSwitch.orders) return
+    if (!activeSwitch?.orders) return
     if (ordersStatusGroup === 'inProgress') setInProgressOrdersLoaded(true)
     if (ordersStatusGroup === 'completed') setCompletedOrdersLoaded(true)
     if (ordersStatusGroup === 'cancelled') setCancelledOrdersLoaded(true)

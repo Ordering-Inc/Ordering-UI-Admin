@@ -115,3 +115,40 @@ export const getAgoMinutes = (time) => {
     return `-${hours}:${minutes} hrs`
   } else return `-00:${minutes} hrs`
 }
+
+/**
+ * Function to transform bytes to kb
+ * @param {number} bytes for transform
+ *
+ */
+ export const bytesConverter = bytes => {
+  return Math.floor(bytes / 1024)
+}
+/**
+ * List of fields with correct order
+ */
+ export const fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email']
+
+/**
+  * Function to return a array sorted by certain fields
+  * @param fields Array with right order
+  * @param array Array to sort
+  */
+ export const sortInputFields = ({ fields, values }) => {
+  let fieldsBase = fields
+  const fieldsSorted = []
+  const fieldsArray = Array.isArray(values) ? values : Object.values(values)
+
+  if (!fieldsBase) {
+    fieldsBase = fieldsToSort
+  }
+
+  fieldsBase.forEach(f => {
+    fieldsArray.forEach(field => {
+      if (f === field.code) {
+        fieldsSorted.push(field)
+      }
+    })
+  })
+  return fieldsSorted
+}

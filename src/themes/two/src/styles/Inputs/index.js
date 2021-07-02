@@ -120,9 +120,9 @@ export const InputGroupPrimary = styled(InputGroup)`
 
 export const TextArea = styled.textarea`
   background: #FFF;
-  color: #010300;
+  color: #707070;
   border: 1px solid #DBDCDB;
-  border-radius: 16px;
+  border-radius: 8px;
   font-size: 16px;
   padding: 7px 15px;
   outline: none;

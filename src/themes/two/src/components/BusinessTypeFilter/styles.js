@@ -5,7 +5,7 @@ export const TypeContainer = styled.div`
   padding: 20px 0;
   display: flex;
   overflow-x: auto;
-  @media (min-width: 992px) {
+  @media (min-width: 1025px) {
     overflow-x: hidden;
   }
 `

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 'ordering-components-admin'
 import { AutoScroll } from '../AutoScroll'
@@ -9,7 +9,8 @@ const BusinessTypeFilterUI = (props) => {
   const {
     typesState,
     currentTypeSelected,
-    handleChangeBusinessType
+    handleChangeBusinessType,
+    setBusinessTypes
   } = props
   const { loading, error, types } = typesState
   const [, t] = useLanguage()
@@ -17,6 +18,10 @@ const BusinessTypeFilterUI = (props) => {
   const handleChangeCategory = (category) => {
     handleChangeBusinessType && handleChangeBusinessType(category)
   }
+  useEffect(() => {
+    if (loading) return
+    setBusinessTypes(types)
+  }, [types])
 
   return (
     <>

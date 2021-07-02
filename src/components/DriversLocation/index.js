@@ -4,7 +4,7 @@ import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 import { InterActOrderMarker } from '../InterActOrderMarker'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { AutoScroll } from '../AutoScroll'
+import { AutoScroll } from '../../components/AutoScroll'
 
 import {
   WrapperMap,
@@ -135,7 +135,6 @@ export const DriversLocation = (props) => {
       width: mapRef.current.clientWidth,
       height: mapRef.current.clientHeight
     }
-
     const { center, zoom } = fitBounds(newBounds, mapSize)
     setMapZoom(zoom)
     setMapCenter(center)
@@ -153,17 +152,17 @@ export const DriversLocation = (props) => {
     } else {
       mapFit()
     }
-  }, [driversList, driverAvailable, mapLoaded])
+  }, [driversList, driverAvailable, interActionMapOrder, mapLoaded])
 
   useEffect(() => {
-    if (mapLoaded) return
+    if (mapLoaded || interActionMapOrder === null) return
     if (driverAvailable === 'online' || driverAvailable === 'offline') return
     setInterActionOrderDriverLocation(interActionMapOrder?.driver?.location)
     mapFit()
   }, [interActionMapOrder, mapLoaded])
 
   useEffect(() => {
-    if (mapLoaded) return
+    if (mapLoaded || interActionOrderDriverLocation === null) return
     mapFit()
   }, [interActionOrderDriverLocation, mapLoaded])
 
