@@ -37,14 +37,14 @@ export const PaymethodOptionPaypalExpress = (props) => {
     }
     setIsMenuOpen(value)
     document.getElementById('paypal_express').style.width = value
-      ? width > 489 ? '500px' : '100vw'
+      ? width > 1000 ? '500px' : '100%'
       : '0'
   }
 
   useEffect(() => {
     if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('paypal_express').style.width = '100vw'
+      if (width < 1000) {
+        document.getElementById('paypal_express').style.width = '100%'
       } else {
         document.getElementById('paypal_express').style.width = '500px'
       }

@@ -6,6 +6,8 @@ import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { useTheme } from 'styled-components'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
+import { Modal } from '../Modal'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   MainContainer,
@@ -30,6 +32,7 @@ const BusinessMenuUI = (props) => {
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [showOption, setShowOption] = useState(null)
   const [currentMenu, setCurrentMenu] = useState(null)
   const ActionIcon = <FiMoreVertical />
@@ -86,14 +89,36 @@ const BusinessMenuUI = (props) => {
           {t('ADD_MENU', 'Add menu')}
         </AddMenuButton>
       </MenuContainer>
-      {showOption === 'option' && (
-        <BusinessMenuOptions
-          open={showOption === 'option'}
-          business={business}
-          menu={currentMenu}
-          onClose={() => handleCloseOption()}
-          handleUpdateBusinessState={handleSuccessBusinessMenu}
-        />
+      {width >= 1000 ? (
+        <>
+          {showOption === 'option' && (
+            <BusinessMenuOptions
+              open={showOption === 'option'}
+              business={business}
+              menu={currentMenu}
+              onClose={() => handleCloseOption()}
+              handleUpdateBusinessState={handleSuccessBusinessMenu}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          {showOption === 'option' && (
+            <Modal
+              width='80%'
+              open={showOption === 'option'}
+              onClose={() => handleCloseOption()}
+            >
+              <BusinessMenuOptions
+                open={showOption === 'option'}
+                business={business}
+                menu={currentMenu}
+                onClose={() => handleCloseOption()}
+                handleUpdateBusinessState={handleSuccessBusinessMenu}
+              />
+            </Modal>
+          )}
+        </>
       )}
     </MainContainer>
   )

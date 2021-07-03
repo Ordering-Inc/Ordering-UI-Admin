@@ -38,14 +38,14 @@ export const BusinessDeliveryZoneSetting = (props) => {
     }
     setIsMenuOpen(value)
     document.getElementById('zone_setting').style.width = value
-      ? width > 489 ? '500px' : '100vw'
+      ? width > 1000 ? '500px' : '100%'
       : '0'
   }
 
   useEffect(() => {
     if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('zone_setting').style.width = '100vw'
+      if (width < 1000) {
+        document.getElementById('zone_setting').style.width = '100%'
       } else {
         document.getElementById('zone_setting').style.width = '500px'
       }

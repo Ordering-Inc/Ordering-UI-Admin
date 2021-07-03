@@ -9,7 +9,8 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { BusinessDeliveryZoneSetting } from '../BusinessDeliveryZoneSetting'
 import { Alert } from '../Confirm'
 import { useForm } from 'react-hook-form'
-
+import { Modal } from '../Modal'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import {
   MainContainer,
   ZoneContainer,
@@ -53,6 +54,8 @@ const BusinessDeliveryZoneUI = (props) => {
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
   const theme = useTheme()
+  const { width } = useWindowSize()
+
   const [curZone, setCurZone] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -264,18 +267,44 @@ const BusinessDeliveryZoneUI = (props) => {
             </DeliveryZoneFormWrapper>
           )}
         </ZoneContainer>
-        {(isEdit || isAddValid) && (
-          <BusinessDeliveryZoneSetting
-            open={isEdit || isAddValid}
-            isAddValid={isAddValid}
-            onClose={() => handleCloseOption()}
-            zone={curZone}
-            business={business}
-            handleZoneType={handleZoneType}
-            handleChangeZoneData={handleChangeZoneData}
-            handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
-            handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
-          />
+        {width >= 1000 ? (
+          <>
+            {(isEdit || isAddValid) && (
+              <BusinessDeliveryZoneSetting
+                open={isEdit || isAddValid}
+                isAddValid={isAddValid}
+                onClose={() => handleCloseOption()}
+                zone={curZone}
+                business={business}
+                handleZoneType={handleZoneType}
+                handleChangeZoneData={handleChangeZoneData}
+                handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
+                handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            {(isEdit || isAddValid) && (
+              <Modal
+                width='80%'
+                open={isEdit || isAddValid}
+                onClose={() => handleCloseOption()}
+              >
+                <BusinessDeliveryZoneSetting
+                  open={isEdit || isAddValid}
+                  isAddValid={isAddValid}
+                  onClose={() => handleCloseOption()}
+                  zone={curZone}
+                  business={business}
+                  handleZoneType={handleZoneType}
+                  handleChangeZoneData={handleChangeZoneData}
+                  handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
+                  handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
+                />
+              </Modal>
+            )}
+          </>
         )}
       </MainContainer>
       <Alert

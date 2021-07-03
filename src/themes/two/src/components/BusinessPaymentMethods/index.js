@@ -12,6 +12,8 @@ import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
 import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
 import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
 import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
+import { Modal } from '../Modal'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   MainContainer,
@@ -44,6 +46,7 @@ const BusinessPaymentMethodsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
+  const { width } = useWindowSize()
   const [isEdit, setIsEdit] = useState(false)
   const [selectedBusinessPaymethod, setSelectedBusinessPaymethod] = useState(null)
   const [selectedPaymethodGateway, setSelectedPaymethodGateway] = useState(null)
@@ -152,60 +155,130 @@ const BusinessPaymentMethodsUI = (props) => {
           </PaymethodListWrapper>
         )}
       </PaymentMethodsContainer>
-      {isEdit && (
+      {width >= 1000 ? (
         <>
-          {selectedPaymethodGateway === 'stripe_direct' && (
-            <PaymentOptionStripeDirect
-              open={isEdit}
-              onClose={() => handleCloseEdit()}
-              businessPaymethod={selectedBusinessPaymethod}
-              changesState={changesState}
-              cleanChangesState={cleanChangesState}
-              actionState={actionState}
-              handleChangeSandbox={handleChangeSandbox}
-              handleChangeInput={handleChangeInput}
-              handleSaveClick={handleSaveClick}
-            />
+          {isEdit && (
+            <>
+              {selectedPaymethodGateway === 'stripe_direct' && (
+                <PaymentOptionStripeDirect
+                  open={isEdit}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                />
+              )}
+              {selectedPaymethodGateway === 'paypal_express' && (
+                <PaymethodOptionPaypalExpress
+                  open={isEdit}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                />
+              )}
+              {selectedPaymethodGateway === 'stripe_redirect' && (
+                <PaymethodOptionStripeRedirect
+                  open={isEdit}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                />
+              )}
+              {selectedPaymethodGateway === 'stripe_connect' && (
+                <PaymethodOptionStripeConnect
+                  open={isEdit}
+                  business={business}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleStripeConnect={handleStripeConnect}
+                  handleChangeStripeInput={handleChangeStripeInput}
+                  handleStripeSave={handleStripeSave}
+                />
+              )}
+            </>
           )}
-          {selectedPaymethodGateway === 'paypal_express' && (
-            <PaymethodOptionPaypalExpress
-              open={isEdit}
-              onClose={() => handleCloseEdit()}
-              businessPaymethod={selectedBusinessPaymethod}
-              changesState={changesState}
-              cleanChangesState={cleanChangesState}
-              actionState={actionState}
-              handleChangeSandbox={handleChangeSandbox}
-              handleChangeInput={handleChangeInput}
-              handleSaveClick={handleSaveClick}
-            />
-          )}
-          {selectedPaymethodGateway === 'stripe_redirect' && (
-            <PaymethodOptionStripeRedirect
-              open={isEdit}
-              onClose={() => handleCloseEdit()}
-              businessPaymethod={selectedBusinessPaymethod}
-              changesState={changesState}
-              cleanChangesState={cleanChangesState}
-              actionState={actionState}
-              handleChangeSandbox={handleChangeSandbox}
-              handleChangeInput={handleChangeInput}
-              handleSaveClick={handleSaveClick}
-            />
-          )}
-          {selectedPaymethodGateway === 'stripe_connect' && (
-            <PaymethodOptionStripeConnect
-              open={isEdit}
-              business={business}
-              onClose={() => handleCloseEdit()}
-              businessPaymethod={selectedBusinessPaymethod}
-              changesState={changesState}
-              cleanChangesState={cleanChangesState}
-              actionState={actionState}
-              handleStripeConnect={handleStripeConnect}
-              handleChangeStripeInput={handleChangeStripeInput}
-              handleStripeSave={handleStripeSave}
-            />
+        </>
+      ) : (
+        <>
+          {isEdit && (
+            <>
+              <Modal
+                width='80%'
+                open={isEdit}
+                onClose={() => handleCloseEdit()}
+              >
+                {selectedPaymethodGateway === 'stripe_direct' && (
+                  <PaymentOptionStripeDirect
+                    open={isEdit}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleChangeSandbox={handleChangeSandbox}
+                    handleChangeInput={handleChangeInput}
+                    handleSaveClick={handleSaveClick}
+                  />
+                )}
+                {selectedPaymethodGateway === 'paypal_express' && (
+                  <PaymethodOptionPaypalExpress
+                    open={isEdit}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleChangeSandbox={handleChangeSandbox}
+                    handleChangeInput={handleChangeInput}
+                    handleSaveClick={handleSaveClick}
+                  />
+                )}
+                {selectedPaymethodGateway === 'stripe_redirect' && (
+                  <PaymethodOptionStripeRedirect
+                    open={isEdit}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleChangeSandbox={handleChangeSandbox}
+                    handleChangeInput={handleChangeInput}
+                    handleSaveClick={handleSaveClick}
+                  />
+                )}
+                {selectedPaymethodGateway === 'stripe_connect' && (
+                  <PaymethodOptionStripeConnect
+                    open={isEdit}
+                    business={business}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleStripeConnect={handleStripeConnect}
+                    handleChangeStripeInput={handleChangeStripeInput}
+                    handleStripeSave={handleStripeSave}
+                  />
+                )}
+              </Modal>
+            </>
           )}
         </>
       )}

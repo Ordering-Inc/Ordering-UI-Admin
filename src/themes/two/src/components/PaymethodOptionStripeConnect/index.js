@@ -38,14 +38,14 @@ export const PaymethodOptionStripeConnect = (props) => {
     }
     setIsMenuOpen(value)
     document.getElementById('stripe_connect').style.width = value
-      ? width > 489 ? '500px' : '100vw'
+      ? width > 1000 ? '500px' : '100%'
       : '0'
   }
 
   useEffect(() => {
     if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('stripe_connect').style.width = '100vw'
+      if (width < 1000) {
+        document.getElementById('stripe_connect').style.width = '100%'
       } else {
         document.getElementById('stripe_connect').style.width = '500px'
       }

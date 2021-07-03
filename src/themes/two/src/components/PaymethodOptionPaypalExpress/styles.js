@@ -5,21 +5,25 @@ export const Container = styled.div`
   overflow: auto;
   transition: 0.3s;
   box-sizing: border-box;
-  width: 0;
   display: flex;
   flex-direction: column;
-  ${props => props.theme?.rtl ? css`
-    border-right: 1px solid #E9ECEF;
-  ` : css`
-    border-left: 1px solid #E9ECEF;
-  `}
 
   > button {
+    margin-top: 20px;
     position: sticky;
     top: 100%;
     width: fit-content;
     height: 42px;
     margin-bottom: 20px;
+  }
+
+  @media (min-width: 1000px) {
+    width: 0;
+    ${props => props.theme?.rtl ? css`
+      border-right: 1px solid #E9ECEF;
+    ` : css`
+      border-left: 1px solid #E9ECEF;
+    `}
   }
 `
 
@@ -64,16 +68,19 @@ export const Header = styled.div`
 `
 
 export const CloseButton = styled.div`
-  display: flex;
-  align-items: center;
-  > svg {
-    cursor: pointer;
-    font-size: 24px;
-    color: ${props => props.theme.colors.headingColor};
-    ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
-    ` : css`
-      margin-left: 10px;
-    `}
+  display: none;
+  @media (min-width: 1000px) {
+    display: flex;
+    align-items: center;
+    > svg {
+      cursor: pointer;
+      font-size: 24px;
+      color: ${props => props.theme.colors.headingColor};
+      ${props => props.theme?.rtl ? css`
+        margin-right: 10px;
+      ` : css`
+        margin-left: 10px;
+      `}
+    }
   }
 `

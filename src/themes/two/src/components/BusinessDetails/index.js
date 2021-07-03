@@ -102,7 +102,7 @@ export const BusinessDetailsUI = (props) => {
 
   return (
     <BarContainer id='business_details_bar'>
-      {!isExtendExtraOpen && (
+      {(!isExtendExtraOpen || width < 1000) && (
         <BusinessSummary
           businessState={businessState}
           handleChangeActiveBusiness={handleChangeActiveBusiness}
@@ -194,6 +194,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'support'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <BusinessSupport
                     businessState={businessState}
@@ -204,6 +205,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'information'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <BusinessInformation
                     business={businessState?.business}
@@ -223,6 +225,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'schedule'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <BusinessSchedule
                     business={businessState?.business}
@@ -234,6 +237,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'menu'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <BusinessMenu
                     business={businessState?.business}
@@ -246,6 +250,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'delivery_zones'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <BusinessDeliveryZone
                     business={businessState?.business}
@@ -259,6 +264,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'payment_methods'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <BusinessPaymentMethods
                     business={businessState?.business}
@@ -271,6 +277,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'custom_fields'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <BusinessCustomFields
                     businessId={businessState?.business.id}
@@ -284,6 +291,7 @@ export const BusinessDetailsUI = (props) => {
                 <Modal
                   width='80%'
                   open={selectedItem === 'personalization'}
+                  onClose={() => handleCloseExtraOpen()}
                 >
                   <Personalization
                     isShowTitle
