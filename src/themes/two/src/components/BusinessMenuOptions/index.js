@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, BusinessMenuOptions as BusinessMenuOptionsController } from 'ordering-components-admin'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { BusinessShareMenu } from '../BusinessShareMenu'
+import { BusinessMenuShare } from '../BusinessMenuShare'
 import { BusinessMenuBasicOptions } from '../BusinessMenuBasicOptions'
 import { AutoScroll } from '../AutoScroll'
 
@@ -18,7 +18,10 @@ import {
 const BusinessMenuOptionsUI = (props) => {
   const {
     open,
-    onClose
+    onClose,
+    menu,
+    business,
+    handleUpdateBusinessState
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -56,10 +59,13 @@ const BusinessMenuOptionsUI = (props) => {
       <Header>
         <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
         <ActionBlock>
-          <BusinessShareMenu
+          <BusinessMenuShare
             open={openShareMenu}
+            menu={menu}
+            business={business}
             onClick={() => setOpenShareMenu(true)}
             onClose={() => setOpenShareMenu(false)}
+            handleUpdateBusinessState={handleUpdateBusinessState}
           />
           <MdcClose
             onClick={() => onClose()}

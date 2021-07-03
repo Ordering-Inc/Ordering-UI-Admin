@@ -127,7 +127,7 @@ const BusinessessListingUI = (props) => {
       {openBusinessDetails && (
         <BusinessDetails
           open={openBusinessDetails}
-          business={detailsBusiness}
+          // business={detailsBusiness}
           businessTypes={businessTypes}
           businessId={detailsBusinessId}
           handleSucessAddBusiness={handleSucessAddBusiness}
