@@ -18,28 +18,3 @@ export const BarContainer = styled.div`
     right: 0;
   `}
 `
-
-export const BusinessDetailsExtraContent = styled.div`
-  max-width: 500px;
-  position: relative;
-  padding: 20px;
-  box-sizing: border-box;
-  width: 100%;
-  transition: 0.3s;
-  ${props => props.theme?.rtl ? css`
-    border-right: 1px solid ${props => props.theme.colors?.secundary};
-  ` : css`
-    border-left: 1px solid ${props => props.theme.colors?.secundary};
-  `}
-
-  > button {
-    z-index: 100;
-    position: absolute;
-    top: 20px;
-    ${props => props.theme?.rtl ? css`
-      left: 20px;
-    ` : css`
-      right: 20px;
-    `}
-  }
-`

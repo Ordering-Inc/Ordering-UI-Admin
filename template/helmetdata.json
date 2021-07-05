@@ -42,7 +42,7 @@
     "canonicalUrl": ""
   },
   "basicSettings": {
-    "title": "basicSettings",
+    "title": "Basic settings",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

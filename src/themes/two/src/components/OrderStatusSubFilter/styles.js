@@ -13,7 +13,14 @@ export const SubFilterContainer = styled.div`
 export const InnerContainer = styled.div`
   display: flex;
   button {
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
+    `}
+    font-size: 14px;
     white-space: nowrap;
 
     svg {

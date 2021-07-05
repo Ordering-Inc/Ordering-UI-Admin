@@ -14,7 +14,7 @@ export const OrdersSearch = styled.div`
     border: 1px solid #1C202E;
     border-radius: 22px;
     outline: none;
-    padding: 8px;
+    padding: 10px 8px;
     padding-left: 40px;
     font-size: 15px;
 

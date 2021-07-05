@@ -58,9 +58,9 @@ export const OrderDetailsExtraContent = styled.div`
   width: 100%;
 
   ${props => props.theme?.rtl ? css`
-    border-right: 1px solid ${props => props.theme.colors?.secundary};
+    border-right: 1px solid #E9ECEF;
   ` : css`
-    border-left: 1px solid ${props => props.theme.colors?.secundary};
+    border-left: 1px solid #E9ECEF;
   `}
 
   > button {
@@ -160,13 +160,15 @@ export const AdvancedLogistic = styled.div`
         font-weight: 600;
       }
       &:not(:first-child) {
-        font-size: 14px;
+        font-size: 12px;
+        color: ${props => props.theme.colors.lightGray};
       }
     }
   }
 `
 export const OrderProducts = styled.div`
-  margin-top: 20px;
+  padding: 20px 0 10px 0;
+  border-bottom: 1px solid #E9ECEF;
   h2 {
     color: ${props => props.theme.colors?.headingColor};
     font-size: 18px;

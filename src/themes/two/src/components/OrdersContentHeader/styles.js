@@ -28,7 +28,7 @@ export const HeaderSection = styled.div`
 export const HeaderTitle = styled.p`
   color: ${(props) => props.theme.colors.headingColor};
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 700;
   margin: 0px;
   text-transform: capitalize;
   white-space: nowrap;

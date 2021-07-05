@@ -127,7 +127,7 @@ const BusinessessListingUI = (props) => {
       {openBusinessDetails && (
         <BusinessDetails
           open={openBusinessDetails}
-          business={detailsBusiness}
+          // business={detailsBusiness}
           businessTypes={businessTypes}
           businessId={detailsBusinessId}
           handleSucessAddBusiness={handleSucessAddBusiness}
@@ -152,6 +152,7 @@ export const BusinessessListing = (props) => {
   const businessListingProps = {
     ...props,
     UIComponent: BusinessessListingUI,
+    asDashboard: true,
     initialPageSize: 50,
     loadMorePageSize: 10,
     isSearchByBusinessName: true,

@@ -6,6 +6,7 @@ export const BusinessDetailsContainer = styled.div`
   box-sizing: border-box;
   padding: 20px;
   position: relative;
+  overflow-x: hidden;
 `
 
 export const DetailsHeader = styled.div`

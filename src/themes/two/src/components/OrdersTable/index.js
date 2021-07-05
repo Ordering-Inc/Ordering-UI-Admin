@@ -356,7 +356,7 @@ export const OrdersTable = (props) => {
                             <p className='bold'>{t('ORDER_NO', 'Order No.')} {order?.id}</p>
                           )}
                           {allowColumns?.dateTime && (
-                            <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
+                            <p className='date'>{parseDate(order?.delivery_datetime, { utc: false })}</p>
                           )}
                         </div>
                       </OrderNumberContainer>
@@ -410,25 +410,40 @@ export const OrdersTable = (props) => {
                       <td className='orderType'>
                         <OrderType>
                           {order?.delivery_type === 1 && (
-                            <img
-                              src={theme?.images?.icons?.driverDelivery}
-                              alt='Delivery'
-                            />
+                            <>
+                              <img
+                                src={theme?.images?.icons?.driverDelivery}
+                                alt='Delivery'
+                              />
+                              <span>{t('DELIVERY', 'Delivery')}</span>
+                            </>
                           )}
                           {order?.delivery_type === 2 && (
-                            <img
-                              src={theme?.images?.icons?.pickUp}
-                              alt='pick up'
-                            />
+                            <>
+                              <img
+                                src={theme?.images?.icons?.pickUp}
+                                alt='pick up'
+                              />
+                              <span>{t('PICK_UP', 'Pick up')}</span>
+                            </>
                           )}
                           {order?.delivery_type === 3 && (
-                            <AiFillShop />
+                            <>
+                              <AiFillShop />
+                              <span>{t('EAT_IN', 'Eat In')}</span>
+                            </>
                           )}
                           {order?.delivery_type === 4 && (
-                            <GiFoodTruck />
+                            <>
+                              <GiFoodTruck />
+                              <span>{t('CURBSIDE', 'Curbside')}</span>
+                            </>
                           )}
                           {order?.delivery_type === 5 && (
-                            <FaCarSide />
+                            <>
+                              <FaCarSide />
+                              <span>{t('DRIVER_THRU', 'Driver thru')}</span>
+                            </>
                           )}
                         </OrderType>
                       </td>

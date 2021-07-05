@@ -6,7 +6,6 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
-  border-bottom: 1px solid ${props => props.theme.colors?.secundary};
   color: #191919;
 `
 
