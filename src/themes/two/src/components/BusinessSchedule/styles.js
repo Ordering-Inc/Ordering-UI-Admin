@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const ScheduleContainer = styled.div`
-  padding: 20px;
+  @media (min-width: 1000px) {
+    padding: 20px;
+  }
 `
 
 export const ScheduleSection = styled.div`

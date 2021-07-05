@@ -8,11 +8,13 @@ export const MainContainer = styled.div`
 export const PaymentMethodsContainer = styled.div`
   height: 100%;
   overflow-x: hidden;
-  padding: 20px;
   flex: 1;
   h1 {
     color: ${props => props.theme.colors.headingColor};
     font-size: 24px;
+  }
+  @media (min-width: 576px) {
+    padding: 20px;
   }
 `
 

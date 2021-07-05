@@ -7,7 +7,10 @@ export const MainContainer = styled.div`
 
 export const MenuContainer = styled.div`
   flex: 1;
-  padding: 20px;
+  
+  @media (min-width: 576px) {
+    padding: 20px;
+  }
 `
 
 export const Header = styled.div`

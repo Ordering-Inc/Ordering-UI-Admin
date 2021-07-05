@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 export const WrapMetaFields = styled.div`
   box-sizing: border-box;
-  padding: 20px;
+  @media (min-width: 576px) {
+    padding: 20px;
+  }
 `
 export const MetaTitle = styled.p`
   font-size: 24px;

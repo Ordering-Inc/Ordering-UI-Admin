@@ -6,8 +6,10 @@ export const MainContainer = styled.div`
 `
 
 export const ZoneContainer = styled.div`
-  padding: 20px;
   flex: 1;
+  @media (min-width: 576px) {
+    padding: 20px;
+  }
 `
 
 export const Header = styled.div`
