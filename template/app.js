@@ -22,6 +22,7 @@ import { DriversList } from './pages/DriversList'
 import { UsersList } from './pages/UsersList'
 import { BusinessesList } from './pages/BusinessesList'
 import { BasicSettings } from './pages/BasicSettings'
+import { BusinessProductsList } from './pages/BusinessProductsList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -133,10 +134,17 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/basicSettings'>
+                    <Route exact path='/settings/basic'>
                       {
                         auth
                           ? <BasicSettings />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/store/:store'>
+                      {
+                        auth
+                          ? <BusinessProductsList />
                           : <Redirect to='/login' />
                       }
                     </Route>

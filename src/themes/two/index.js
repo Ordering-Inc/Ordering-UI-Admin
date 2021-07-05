@@ -5,6 +5,7 @@ import { BasicSettings } from './src/components/BasicSettings'
 import { BusinessActionSelector } from './src/components/BusinessActionSelector'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
 import { BusinessDetails } from './src/components/BusinessDetails'
+import { BusinessProductsListing } from './src/components/BusinessProductsListing'
 import { BusinessesSelector } from './src/components/BusinessesSelector'
 import { BusinessessListing } from './src/components/BusinessessListing'
 import { BusinessList } from './src/components/BusinessList'
@@ -106,6 +107,7 @@ export {
   BusinessMenu,
   BusinessMenuCustomFields,
   BusinessOwners,
+  BusinessProductsListing,
   BusinessTypeFilter,
   BusinessTypes,
   BusinessTypeForm,

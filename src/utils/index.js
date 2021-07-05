@@ -26,6 +26,12 @@ export const getIconCard = (brand = '') => {
   }
 }
 
+/**
+ * Function to convert a string in string capitalized
+ * @param {string} str string to capitalize
+ */
+export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+
 export const DriverTipsOptions = [0, 10, 15, 20, 25]
 
 /**
@@ -124,6 +130,7 @@ export const getAgoMinutes = (time) => {
 export const bytesConverter = bytes => {
   return Math.floor(bytes / 1024)
 }
+
 /**
  * List of fields with correct order
  */
