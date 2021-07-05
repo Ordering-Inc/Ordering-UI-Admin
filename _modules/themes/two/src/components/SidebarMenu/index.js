@@ -87,7 +87,8 @@ var SidebarMenu = function SidebarMenu(props) {
   var storesSubMenus = [{
     id: 1,
     title: t('STORES_LIST', 'Stores list'),
-    pageName: 'businesses'
+    pageName: 'businesses',
+    url: '/store'
   }, {
     id: 2,
     title: t('DELIVERY_ZONES', 'Delivery zones'),
@@ -120,11 +121,13 @@ var SidebarMenu = function SidebarMenu(props) {
   var settingsSubMenus = [{
     id: 1,
     title: t('BASIC_SETTINGS', 'Basic settings'),
-    pageName: 'basicSettings'
+    pageName: 'basicSettings',
+    url: '/settings/basic'
   }, {
     id: 2,
     title: t('OPERATION_SETTINGS', 'Operation settings'),
-    pageName: 'operationSettings'
+    pageName: 'operationSettings',
+    url: '/settings/operation'
   }];
 
   var handleGoToPage = function handleGoToPage(data) {
@@ -228,7 +231,7 @@ var SidebarMenu = function SidebarMenu(props) {
     className: "mx-2"
   }, t('MESSAGES', 'Messages')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "3",
-    active: location.pathname === '/businesses'
+    active: location.pathname === '/businesses' || location.pathname.includes('/store/')
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('STORES', 'Stores'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -236,7 +239,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, storesSubMenus.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
-      active: location.pathname.includes(item.pageName),
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
       onClick: function onClick() {
         return handleGoToPage({
           page: item.pageName
@@ -258,7 +261,7 @@ var SidebarMenu = function SidebarMenu(props) {
     className: "d-flex flex-column"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/basicSettings' || location.pathname === '/operationSettings'
+    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -266,7 +269,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, settingsSubMenus.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
-      active: location.pathname.includes(item.pageName),
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
       onClick: function onClick() {
         return handleGoToPage({
           page: item.pageName

@@ -9,6 +9,8 @@ exports.BusinessSummary = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouter = require("react-router");
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -72,6 +74,12 @@ var BusinessSummary = function BusinessSummary(props) {
       isEdit = _useState2[0],
       setIsEdit = _useState2[1];
 
+  var history = (0, _reactRouter.useHistory)();
+
+  var handleOpenCategory = function handleOpenCategory() {
+    history.push("/store/".concat(businessState.business.slug));
+  };
+
   var businessConfigs = [{
     key: 'information',
     value: t('INFORMATION', 'Information')
@@ -120,7 +128,8 @@ var BusinessSummary = function BusinessSummary(props) {
     bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    onClick: handleOpenCategory
   }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), /*#__PURE__*/_react.default.createElement(_styles.BusinessDescription, null, (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.loading) ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50
   }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.description), /*#__PURE__*/_react.default.createElement(_styles.BusinessConfigsContainer, null, businessConfigs.map(function (config) {

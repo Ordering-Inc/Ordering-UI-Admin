@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
+exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.capitalize = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -58,8 +58,19 @@ var getIconCard = function getIconCard() {
       return /*#__PURE__*/_react.default.createElement(_FaCreditCard.default, null);
   }
 };
+/**
+ * Function to convert a string in string capitalized
+ * @param {string} str string to capitalize
+ */
+
 
 exports.getIconCard = getIconCard;
+
+var capitalize = function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+exports.capitalize = capitalize;
 var DriverTipsOptions = [0, 10, 15, 20, 25];
 /**
  * Function to calculate time to scroll element
