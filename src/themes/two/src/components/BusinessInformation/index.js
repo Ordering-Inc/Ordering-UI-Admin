@@ -7,7 +7,6 @@ import { BusinessLocation } from '../BusinessLocation'
 import { BusinessDescription } from '../BusinessDescription'
 import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
-
 import {
   InfoConatiner
 } from './styles'

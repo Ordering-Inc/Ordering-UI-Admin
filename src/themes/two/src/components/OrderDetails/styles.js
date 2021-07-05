@@ -167,7 +167,7 @@ export const AdvancedLogistic = styled.div`
   }
 `
 export const OrderProducts = styled.div`
-  padding: 20px 0 10px 0
+  padding: 20px 0 10px 0;
   border-bottom: 1px solid #E9ECEF;
   h2 {
     color: ${props => props.theme.colors?.headingColor};
