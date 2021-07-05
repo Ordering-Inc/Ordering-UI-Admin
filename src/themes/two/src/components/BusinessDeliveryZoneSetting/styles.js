@@ -38,6 +38,7 @@ export const ActionBlock = styled.div`
 
   @media (min-width: 1000px) {
     > svg {
+      display: block;
       cursor: pointer;
       font-size: 24px;
       color: ${props => props.theme.colors.headingColor};

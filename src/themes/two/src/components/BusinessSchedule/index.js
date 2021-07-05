@@ -7,6 +7,7 @@ import BiMinus from '@meronex/icons/bi/BiMinus'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import { Alert } from '../Confirm'
+import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
 
 import {
   ScheduleContainer,
@@ -24,7 +25,6 @@ import {
   AddButton,
   AddScheduleButton
 } from './styles'
-import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
 
 const BusinessScheduleUI = (props) => {
   const {

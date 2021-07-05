@@ -58,6 +58,10 @@ export const AllowItem = styled.div`
     font-size: 24px;
   }
   span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     white-space: nowrap;
     font-size: 14px;
     font-weight: 400;

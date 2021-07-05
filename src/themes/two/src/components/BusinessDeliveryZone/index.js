@@ -267,9 +267,9 @@ const BusinessDeliveryZoneUI = (props) => {
             </DeliveryZoneFormWrapper>
           )}
         </ZoneContainer>
-        {width >= 1000 ? (
+        {(isEdit || isAddValid) && (
           <>
-            {(isEdit || isAddValid) && (
+            {width >= 1000 ? (
               <BusinessDeliveryZoneSetting
                 open={isEdit || isAddValid}
                 isAddValid={isAddValid}
@@ -281,11 +281,7 @@ const BusinessDeliveryZoneUI = (props) => {
                 handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
                 handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
               />
-            )}
-          </>
-        ) : (
-          <>
-            {(isEdit || isAddValid) && (
+            ) : (
               <Modal
                 width='80%'
                 open={isEdit || isAddValid}

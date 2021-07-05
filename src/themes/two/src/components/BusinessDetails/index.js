@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
-import { Modal } from '../Modal'
-import { Button } from '../../styles/Buttons'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { BusinessSupport } from '../BusinessSupport'
 import { BusinessInformation } from '../BusinessInformation'
 import { BusinessSchedule } from '../BusinessSchedule'
@@ -12,10 +9,9 @@ import { BusinessMenu } from '../BusinessMenu'
 import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
 import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
 import { BusinessCustomFields } from '../BusinessCustomFields'
-
+import { MoreSidebarLayout } from '../MoreSidebarLayout'
 import {
-  BarContainer,
-  BusinessDetailsExtraContent
+  BarContainer
 } from './styles'
 import { Personalization } from '../Personalization'
 
@@ -78,6 +74,9 @@ export const BusinessDetailsUI = (props) => {
   }
 
   useEffect(() => {
+    if (width > 1000) {
+      setIsExtendExtraOpen(false)
+    }
     toggleMainContent()
   }, [width])
 
@@ -113,194 +112,71 @@ export const BusinessDetailsUI = (props) => {
         />
       )}
       {extraOpen && (
-        <>
-          {width >= 1000 ? (
-            <>
-              <BusinessDetailsExtraContent
-                isExtendExtraOpen={isExtendExtraOpen}
-              >
-                <Button
-                  borderRadius='5px'
-                  color='secundary'
-                  onClick={() => handleCloseExtraOpen()}
-                >
-                  <MdcClose />
-                </Button>
-                {selectedItem === 'support' && (
-                  <BusinessSupport
-                    businessState={businessState}
-                  />
-                )}
-                {selectedItem === 'information' && (
-                  <BusinessInformation
-                    business={businessState?.business}
-                    handleDeleteBusinessOwner={handleDeleteBusinessOwner}
-                    handleAddBusinessOwner={handleAddBusinessOwner}
-                    formState={formState}
-                    setFormState={setFormState}
-                    businessTypes={businessTypes}
-                    handleUpdateBusinessClick={handleUpdateBusinessClick}
-                    setBusinessTypes={setBusinessTypes}
-                    handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
-                    handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
-                  />
-                )}
-                {selectedItem === 'schedule' && (
-                  <BusinessSchedule
-                    business={businessState?.business}
-                    handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
-                  />
-                )}
-                {selectedItem === 'menu' && (
-                  <BusinessMenu
-                    business={businessState?.business}
-                    handleSuccessBusinessMenu={handleUpdateBusinessState}
-                    setIsExtendExtraOpen={setIsExtendExtraOpen}
-                  />
-                )}
-                {selectedItem === 'delivery_zones' && (
-                  <BusinessDeliveryZone
-                    business={businessState?.business}
-                    setIsExtendExtraOpen={setIsExtendExtraOpen}
-                    onClose={() => setIsExtendExtraOpen(false)}
-                    handleSuccessUpdate={handleUpdateBusinessState}
-                  />
-                )}
-                {selectedItem === 'payment_methods' && (
-                  <BusinessPaymentMethods
-                    business={businessState?.business}
-                    setIsExtendExtraOpen={setIsExtendExtraOpen}
-                    handleSuccessUpdate={handleUpdateBusinessState}
-                  />
-                )}
-                {selectedItem === 'custom_fields' && (
-                  <BusinessCustomFields
-                    businessId={businessState?.business.id}
-                    metafields={businessState?.business?.metafields}
-                    handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
-                    handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}
-                  />
-                )}
-                {selectedItem === 'personalization' && (
-                  <Personalization
-                    isShowTitle
-                  />
-                )}
-              </BusinessDetailsExtraContent>
-            </>
-          ) : (
-            <>
-              {selectedItem === 'support' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'support'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <BusinessSupport
-                    businessState={businessState}
-                  />
-                </Modal>
-              )}
-              {selectedItem === 'information' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'information'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <BusinessInformation
-                    business={businessState?.business}
-                    handleDeleteBusinessOwner={handleDeleteBusinessOwner}
-                    handleAddBusinessOwner={handleAddBusinessOwner}
-                    formState={formState}
-                    setFormState={setFormState}
-                    businessTypes={businessTypes}
-                    handleUpdateBusinessClick={handleUpdateBusinessClick}
-                    setBusinessTypes={setBusinessTypes}
-                    handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
-                    handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
-                  />
-                </Modal>
-              )}
-              {selectedItem === 'schedule' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'schedule'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <BusinessSchedule
-                    business={businessState?.business}
-                    handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
-                  />
-                </Modal>
-              )}
-              {selectedItem === 'menu' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'menu'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <BusinessMenu
-                    business={businessState?.business}
-                    handleSuccessBusinessMenu={handleUpdateBusinessState}
-                    setIsExtendExtraOpen={setIsExtendExtraOpen}
-                  />
-                </Modal>
-              )}
-              {selectedItem === 'delivery_zones' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'delivery_zones'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <BusinessDeliveryZone
-                    business={businessState?.business}
-                    setIsExtendExtraOpen={setIsExtendExtraOpen}
-                    onClose={() => setIsExtendExtraOpen(false)}
-                    handleSuccessUpdate={handleUpdateBusinessState}
-                  />
-                </Modal>
-              )}
-              {selectedItem === 'payment_methods' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'payment_methods'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <BusinessPaymentMethods
-                    business={businessState?.business}
-                    setIsExtendExtraOpen={setIsExtendExtraOpen}
-                    handleSuccessUpdate={handleUpdateBusinessState}
-                  />
-                </Modal>
-              )}
-              {selectedItem === 'custom_fields' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'custom_fields'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <BusinessCustomFields
-                    businessId={businessState?.business.id}
-                    metafields={businessState?.business?.metafields}
-                    handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
-                    handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}
-                  />
-                </Modal>
-              )}
-              {selectedItem === 'personalization' && (
-                <Modal
-                  width='80%'
-                  open={selectedItem === 'personalization'}
-                  onClose={() => handleCloseExtraOpen()}
-                >
-                  <Personalization
-                    isShowTitle
-                  />
-                </Modal>
-              )}
-            </>
+        <MoreSidebarLayout
+          isExtendExtraOpen={isExtendExtraOpen}
+          onClose={handleCloseExtraOpen}
+        >
+          {selectedItem === 'support' && (
+            <BusinessSupport
+              businessState={businessState}
+            />
           )}
-        </>
+          {selectedItem === 'information' && (
+            <BusinessInformation
+              business={businessState?.business}
+              handleDeleteBusinessOwner={handleDeleteBusinessOwner}
+              handleAddBusinessOwner={handleAddBusinessOwner}
+              formState={formState}
+              setFormState={setFormState}
+              businessTypes={businessTypes}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              setBusinessTypes={setBusinessTypes}
+              handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
+              handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
+            />
+          )}
+          {selectedItem === 'schedule' && (
+            <BusinessSchedule
+              business={businessState?.business}
+              handleSuccessBusinessScheduleUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'menu' && (
+            <BusinessMenu
+              business={businessState?.business}
+              handleSuccessBusinessMenu={handleUpdateBusinessState}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+            />
+          )}
+          {selectedItem === 'delivery_zones' && (
+            <BusinessDeliveryZone
+              business={businessState?.business}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+              onClose={() => setIsExtendExtraOpen(false)}
+              handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'payment_methods' && (
+            <BusinessPaymentMethods
+              business={businessState?.business}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+              handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'custom_fields' && (
+            <BusinessCustomFields
+              businessId={businessState?.business.id}
+              metafields={businessState?.business?.metafields}
+              handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
+              handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}
+            />
+          )}
+          {selectedItem === 'personalization' && (
+            <Personalization
+              isShowTitle
+            />
+          )}
+        </MoreSidebarLayout>
       )}
     </BarContainer>
   )
