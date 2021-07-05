@@ -19,17 +19,17 @@ var _InterActOrderMarker = require("../InterActOrderMarker");
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
-var _AutoScroll = require("../AutoScroll");
+var _AutoScroll = require("../../components/AutoScroll");
 
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -39,7 +39,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -177,7 +177,7 @@ var DriversLocation = function DriversLocation(props) {
       _marker2 = (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$ = interActionMapOrder.business) === null || _interActionMapOrder$ === void 0 ? void 0 : _interActionMapOrder$.location) !== null ? interActionMapOrder.business.location : defaultCenter;
       _newPoint2 = new window.google.maps.LatLng(_marker2.lat, _marker2.lng);
       bounds.extend(_newPoint2);
-      _marker2 = (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$2 = interActionMapOrder.customer) === null || _interActionMapOrder$2 === void 0 ? void 0 : _interActionMapOrder$2.location) !== null && interActionMapOrder !== null && interActionMapOrder !== void 0 && (_interActionMapOrder$3 = interActionMapOrder.customer) !== null && _interActionMapOrder$3 !== void 0 && (_interActionMapOrder$4 = _interActionMapOrder$3.location) !== null && _interActionMapOrder$4 !== void 0 && _interActionMapOrder$4.lat ? interActionMapOrder.customer.location : defaultCenter;
+      _marker2 = (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$2 = interActionMapOrder.customer) === null || _interActionMapOrder$2 === void 0 ? void 0 : _interActionMapOrder$2.location) !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$3 = interActionMapOrder.customer) === null || _interActionMapOrder$3 === void 0 ? void 0 : (_interActionMapOrder$4 = _interActionMapOrder$3.location) === null || _interActionMapOrder$4 === void 0 ? void 0 : _interActionMapOrder$4.lat) ? interActionMapOrder.customer.location : defaultCenter;
       _newPoint2 = new window.google.maps.LatLng(_marker2.lat, _marker2.lng);
       bounds.extend(_newPoint2);
 
@@ -274,17 +274,17 @@ var DriversLocation = function DriversLocation(props) {
     } else {
       mapFit();
     }
-  }, [driversList, driverAvailable, mapLoaded]);
+  }, [driversList, driverAvailable, interActionMapOrder, mapLoaded]);
   (0, _react.useEffect)(function () {
     var _interActionMapOrder$6;
 
-    if (mapLoaded) return;
+    if (mapLoaded || interActionMapOrder === null) return;
     if (driverAvailable === 'online' || driverAvailable === 'offline') return;
     setInterActionOrderDriverLocation(interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$6 = interActionMapOrder.driver) === null || _interActionMapOrder$6 === void 0 ? void 0 : _interActionMapOrder$6.location);
     mapFit();
   }, [interActionMapOrder, mapLoaded]);
   (0, _react.useEffect)(function () {
-    if (mapLoaded) return;
+    if (mapLoaded || interActionOrderDriverLocation === null) return;
     mapFit();
   }, [interActionOrderDriverLocation, mapLoaded]);
 
@@ -342,8 +342,8 @@ var DriversLocation = function DriversLocation(props) {
     image: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$11 = interActionMapOrder.business) === null || _interActionMapOrder$11 === void 0 ? void 0 : _interActionMapOrder$11.logo
   }), !(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     customer: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.customer,
-    lat: interActionMapOrder !== null && interActionMapOrder !== void 0 && (_interActionMapOrder$12 = interActionMapOrder.customer) !== null && _interActionMapOrder$12 !== void 0 && (_interActionMapOrder$13 = _interActionMapOrder$12.location) !== null && _interActionMapOrder$13 !== void 0 && _interActionMapOrder$13.lat ? interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$14 = interActionMapOrder.customer) === null || _interActionMapOrder$14 === void 0 ? void 0 : (_interActionMapOrder$15 = _interActionMapOrder$14.location) === null || _interActionMapOrder$15 === void 0 ? void 0 : _interActionMapOrder$15.lat : defaultCenter.lat,
-    lng: interActionMapOrder !== null && interActionMapOrder !== void 0 && (_interActionMapOrder$16 = interActionMapOrder.customer) !== null && _interActionMapOrder$16 !== void 0 && (_interActionMapOrder$17 = _interActionMapOrder$16.location) !== null && _interActionMapOrder$17 !== void 0 && _interActionMapOrder$17.lng ? interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$18 = interActionMapOrder.customer) === null || _interActionMapOrder$18 === void 0 ? void 0 : (_interActionMapOrder$19 = _interActionMapOrder$18.location) === null || _interActionMapOrder$19 === void 0 ? void 0 : _interActionMapOrder$19.lng : defaultCenter.lng,
+    lat: (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$12 = interActionMapOrder.customer) === null || _interActionMapOrder$12 === void 0 ? void 0 : (_interActionMapOrder$13 = _interActionMapOrder$12.location) === null || _interActionMapOrder$13 === void 0 ? void 0 : _interActionMapOrder$13.lat) ? interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$14 = interActionMapOrder.customer) === null || _interActionMapOrder$14 === void 0 ? void 0 : (_interActionMapOrder$15 = _interActionMapOrder$14.location) === null || _interActionMapOrder$15 === void 0 ? void 0 : _interActionMapOrder$15.lat : defaultCenter.lat,
+    lng: (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$16 = interActionMapOrder.customer) === null || _interActionMapOrder$16 === void 0 ? void 0 : (_interActionMapOrder$17 = _interActionMapOrder$16.location) === null || _interActionMapOrder$17 === void 0 ? void 0 : _interActionMapOrder$17.lng) ? interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$18 = interActionMapOrder.customer) === null || _interActionMapOrder$18 === void 0 ? void 0 : (_interActionMapOrder$19 = _interActionMapOrder$18.location) === null || _interActionMapOrder$19 === void 0 ? void 0 : _interActionMapOrder$19.lng : defaultCenter.lng,
     image: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$20 = interActionMapOrder.customer) === null || _interActionMapOrder$20 === void 0 ? void 0 : _interActionMapOrder$20.photo
   }), !(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) !== null && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     driver: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver,
@@ -355,7 +355,7 @@ var DriversLocation = function DriversLocation(props) {
   }, onlineDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onlineDrivers.map(function (driver) {
     return /*#__PURE__*/_react.default.createElement(_styles.WrapDriverInfo, {
       key: driver.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, null, driver !== null && driver !== void 0 && driver.photo ? /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, null, (driver === null || driver === void 0 ? void 0 : driver.photo) ? /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
       bgimage: driver === null || driver === void 0 ? void 0 : driver.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))));
   }))))));

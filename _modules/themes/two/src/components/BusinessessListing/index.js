@@ -25,17 +25,19 @@ var _BsGrid = _interopRequireDefault(require("@meronex/icons/bs/BsGrid"));
 
 var _BsViewList = _interopRequireDefault(require("@meronex/icons/bs/BsViewList"));
 
-var _styles = require("./styles");
+var _BusinessDetails = require("../BusinessDetails");
 
-var _BusinessDetailsLateralBar = require("../BusinessDetailsLateralBar");
+var _AddBusinessSidebar = require("../AddBusinessSidebar");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -49,7 +51,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -63,6 +65,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       loadMoreBusinesses = props.loadMoreBusinesses,
       handleSucessRemoveBusiness = props.handleSucessRemoveBusiness,
       handleSucessAddBusiness = props.handleSucessAddBusiness,
+      handleSucessUpdateBusiness = props.handleSucessUpdateBusiness,
       onSearch = props.onSearch,
       onBusinessRedirect = props.onBusinessRedirect;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
@@ -87,16 +90,43 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       detailsBusinessId = _useState8[0],
       setDetailsBusinessId = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      openAddBusiness = _useState10[0],
+      setOpenAddBusiness = _useState10[1];
+
+  var _useState11 = (0, _react.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      businessTypes = _useState12[0],
+      setBusinessTypes = _useState12[1];
+
   var handleBackRedirect = function handleBackRedirect() {
     setOpenBusinessDetails(false);
     onBusinessRedirect();
   };
 
   var handleOpenBusinessDetails = function handleOpenBusinessDetails(business) {
+    setOpenAddBusiness(false);
     setDetailsBusiness(business);
     setDetailsBusinessId(business.id);
     setOpenBusinessDetails(true);
     onBusinessRedirect(business.id);
+  };
+
+  var handleOpenAddBusiness = function handleOpenAddBusiness() {
+    var id = query.get('id');
+
+    if (id) {
+      handleBackRedirect();
+    }
+
+    setOpenAddBusiness(true);
+  };
+
+  var onhandleSuccessAddBusiness = function onhandleSuccessAddBusiness(business) {
+    handleSucessAddBusiness(business);
+    setOpenAddBusiness(false);
+    handleOpenBusinessDetails(business);
   };
 
   (0, _react.useEffect)(function () {
@@ -109,7 +139,8 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListingContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessListingHeader.BusinessListingHeader, {
     searchValue: searchValue,
-    onSearch: onSearch
+    onSearch: onSearch,
+    handleOpenAddBusiness: handleOpenAddBusiness
   }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState
@@ -126,7 +157,8 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
-    handleChangeBusinessType: handleChangeBusinessType
+    handleChangeBusinessType: handleChangeBusinessType,
+    setBusinessTypes: setBusinessTypes
   }), /*#__PURE__*/_react.default.createElement(_BusinessList.BusinessList, {
     viewMethod: viewMethod,
     businessList: businessList,
@@ -134,20 +166,33 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     loadMoreBusinesses: loadMoreBusinesses,
     handleSucessRemoveBusiness: handleSucessRemoveBusiness,
     handleSucessAddBusiness: handleSucessAddBusiness,
+    handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleOpenBusinessDetails: handleOpenBusinessDetails
-  })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetailsLateralBar.BusinessDetailsLateralBar, {
-    open: openBusinessDetails,
-    business: detailsBusiness,
+  })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
+    open: openBusinessDetails // business={detailsBusiness}
+    ,
+    businessTypes: businessTypes,
     businessId: detailsBusinessId,
+    handleSucessAddBusiness: handleSucessAddBusiness,
+    handleSucessRemoveBusiness: handleSucessRemoveBusiness,
+    handleSucessUpdateBusiness: handleSucessUpdateBusiness,
+    setBusinessTypes: setBusinessTypes,
     onClose: function onClose() {
       return handleBackRedirect();
     }
+  }), openAddBusiness && /*#__PURE__*/_react.default.createElement(_AddBusinessSidebar.AddBusinessSidebar, {
+    open: openAddBusiness,
+    onClose: function onClose() {
+      return setOpenAddBusiness(false);
+    },
+    handleSucessAddBusiness: onhandleSuccessAddBusiness
   }));
 };
 
 var BusinessessListing = function BusinessessListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessessListingUI,
+    asDashboard: true,
     initialPageSize: 50,
     loadMorePageSize: 10,
     isSearchByBusinessName: true,

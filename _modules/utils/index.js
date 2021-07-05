@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
+exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -25,7 +25,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -172,5 +172,52 @@ var getAgoMinutes = function getAgoMinutes(time) {
     return "-".concat(hours, ":").concat(minutes, " hrs");
   } else return "-00:".concat(minutes, " hrs");
 };
+/**
+ * Function to transform bytes to kb
+ * @param {number} bytes for transform
+ *
+ */
+
 
 exports.getAgoMinutes = getAgoMinutes;
+
+var bytesConverter = function bytesConverter(bytes) {
+  return Math.floor(bytes / 1024);
+};
+/**
+ * List of fields with correct order
+ */
+
+
+exports.bytesConverter = bytesConverter;
+var fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
+/**
+  * Function to return a array sorted by certain fields
+  * @param fields Array with right order
+  * @param array Array to sort
+  */
+
+exports.fieldsToSort = fieldsToSort;
+
+var sortInputFields = function sortInputFields(_ref) {
+  var fields = _ref.fields,
+      values = _ref.values;
+  var fieldsBase = fields;
+  var fieldsSorted = [];
+  var fieldsArray = Array.isArray(values) ? values : Object.values(values);
+
+  if (!fieldsBase) {
+    fieldsBase = fieldsToSort;
+  }
+
+  fieldsBase.forEach(function (f) {
+    fieldsArray.forEach(function (field) {
+      if (f === field.code) {
+        fieldsSorted.push(field);
+      }
+    });
+  });
+  return fieldsSorted;
+};
+
+exports.sortInputFields = sortInputFields;

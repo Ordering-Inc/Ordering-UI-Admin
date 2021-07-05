@@ -1406,15 +1406,15 @@
 }
 
 .jsoneditor .autocomplete.dropdown .item {
-  color: #1a1a1a;
+  color: #333;
 }
 
 .jsoneditor .autocomplete.dropdown .item.hover {
-  background-color: #ebebeb;
+  background-color: #ddd;
 }
 
 .jsoneditor .autocomplete.hint {
-  color: #a1a1a1;
+  color: #aaa;
   top: 4px;
   left: 4px;
 }
@@ -1512,8 +1512,7 @@
   height: 24px;
   padding: 0;
   margin: 0 4px 0 0;
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
-  background-position: 0 -72px;
+  background: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg) 0 -72px;
 }
 
 .jsoneditor-contextmenu .jsoneditor-icon {
@@ -2040,8 +2039,7 @@ div.jsoneditor-tree button.jsoneditor-button {
   margin: 0;
   border: none;
   cursor: pointer;
-  background-color: transparent;
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
+  background: transparent url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
 }
 
 div.jsoneditor-tree button.jsoneditor-button:focus {
@@ -2067,8 +2065,7 @@ div.jsoneditor-tree button.jsoneditor-invisible {
 }
 
 div.jsoneditor-tree button.jsoneditor-dragarea {
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
-  background-position: -72px -72px;
+  background: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg) -72px -72px;
   cursor: move;
 }
 
@@ -2122,9 +2119,7 @@ div.jsoneditor-tree .jsoneditor-button.jsoneditor-schema-error {
   height: 24px;
   padding: 0;
   margin: 0 4px 0 0;
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
-  background-position: -168px -48px;
-  background-color: transparent;
+  background: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg) -168px -48px;
 }
 
 div.jsoneditor-outer {
@@ -2479,15 +2474,11 @@ pre.jsoneditor-preview,
 }
 
 .jsoneditor-text-errors tr .jsoneditor-schema-error {
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
-  background-position: -168px -48px;
-  background-color: transparent;
+  background: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg) -168px -48px;
 }
 
 .jsoneditor-text-errors tr.parse-error .jsoneditor-schema-error {
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
-  background-position: -25px 0px;
-  background-color: transparent;
+  background: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg) -25px 0px;
 }
 
 .jsoneditor-anchor {
@@ -2549,8 +2540,7 @@ pre.jsoneditor-preview,
   padding: 0;
   border-radius: 2px;
   border: 1px solid transparent;
-  background-color: transparent;
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
+  background: transparent url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
   color: #ffffff;
   opacity: 0.8;
   font-family: arial, sans-serif;
@@ -2781,8 +2771,7 @@ pre.jsoneditor-preview,
   height: 24px;
   padding: 0;
   margin-top: 1px;
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
-  background-position: -168px -48px;
+  background: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg) -168px -48px;
   cursor: pointer;
 }
 
@@ -2798,8 +2787,7 @@ pre.jsoneditor-preview,
   height: 24px;
   padding: 0;
   margin: 1px;
-  background-image: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg);
-  background-position: -25px 0px;
+  background: url(/_bundles/15f2789dd231f36d43a4839306b3a2cb.svg) -25px 0px;
 }
 
 .jsoneditor-statusbar .jsoneditor-array-info a {
@@ -3270,16 +3258,16 @@ div.jsoneditor-statusbar > .jsoneditor-size-info {
   -moz-transform-origin: 50% 0 0;
   -webkit-transform-origin: 50% 0 0;
   transform-origin: 50% 0 0;
-  -moz-animation: 500ms linear 0s normal forwards infinite running selectr-spin;
-  -webkit-animation: 500ms linear 0s normal forwards infinite running selectr-spin;
-  animation: 500ms linear 0s normal forwards infinite running selectr-spin;
+  -moz-animation: 500ms linear 0s normal forwards infinite running spin;
+  -webkit-animation: 500ms linear 0s normal forwards infinite running spin;
+  animation: 500ms linear 0s normal forwards infinite running spin;
   border-width: 3px;
   border-style: solid;
   border-color: #aaa #ddd #ddd;
   border-radius: 50%;
 }
 
-@-webkit-keyframes selectr-spin {
+@-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg) translate3d(0px, -50%, 0px);
     transform: rotate(0deg) translate3d(0px, -50%, 0px);
@@ -3291,7 +3279,7 @@ div.jsoneditor-statusbar > .jsoneditor-size-info {
   }
 }
 
-@keyframes selectr-spin {
+@keyframes spin {
   0% {
     -webkit-transform: rotate(0deg) translate3d(0px, -50%, 0px);
     transform: rotate(0deg) translate3d(0px, -50%, 0px);

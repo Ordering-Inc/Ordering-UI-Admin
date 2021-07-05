@@ -11,31 +11,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _AiOutlineHome = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineHome"));
-
-var _BsListCheck = _interopRequireDefault(require("@meronex/icons/bs/BsListCheck"));
-
-var _BiMessageRounded = _interopRequireDefault(require("@meronex/icons/bi/BiMessageRounded"));
-
-var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
-
-var _FiUsers = _interopRequireDefault(require("@meronex/icons/fi/FiUsers"));
-
-var _MdcGoogleAnalytics = _interopRequireDefault(require("@meronex/icons/mdc/MdcGoogleAnalytics"));
-
-var _FiSettings = _interopRequireDefault(require("@meronex/icons/fi/FiSettings"));
-
-var _BiSupport = _interopRequireDefault(require("@meronex/icons/bi/BiSupport"));
-
-var _MdcArrowLeft = _interopRequireDefault(require("@meronex/icons/mdc/MdcArrowLeft"));
-
-var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
-
 var _LogoutButton = require("../LogoutButton");
 
-var _IosMenu = _interopRequireDefault(require("@meronex/icons/ios/IosMenu"));
-
-var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styledComponents = require("styled-components");
 
@@ -47,11 +25,9 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _styles = require("./styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -61,7 +37,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -141,6 +117,15 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('PERSONALIZATION', 'Personalization'),
     pageName: 'personalization'
   }];
+  var settingsSubMenus = [{
+    id: 1,
+    title: t('BASIC_SETTINGS', 'Basic settings'),
+    pageName: 'basicSettings'
+  }, {
+    id: 2,
+    title: t('OPERATION_SETTINGS', 'Operation settings'),
+    pageName: 'operationSettings'
+  }];
 
   var handleGoToPage = function handleGoToPage(data) {
     setMenuOpen(false);
@@ -162,7 +147,7 @@ var SidebarMenu = function SidebarMenu(props) {
     onClick: function onClick() {
       return setMenuOpen(true);
     }
-  }, /*#__PURE__*/_react.default.createElement(_IosMenu.default, null)), /*#__PURE__*/_react.default.createElement(_styles.LogoWrap, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles.LogoWrap, {
     className: "d-flex justify-content-center align-items-center",
     onClick: function onClick() {
       return handleGoToPage({
@@ -190,7 +175,7 @@ var SidebarMenu = function SidebarMenu(props) {
       return setIsCollapse(!isCollapse);
     },
     isCollapse: isCollapse
-  }, /*#__PURE__*/_react.default.createElement(_MdcArrowLeft.default, null)), /*#__PURE__*/_react.default.createElement(_styles.LogoWrap, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowBarLeft, null)), /*#__PURE__*/_react.default.createElement(_styles.LogoWrap, {
     className: "d-flex justify-content-center align-items-center",
     onClick: function onClick() {
       return handleGoToPage({
@@ -212,18 +197,18 @@ var SidebarMenu = function SidebarMenu(props) {
     onClick: function onClick() {
       return setMenuOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
     className: "d-flex flex-column justify-content-between p-1 pt-0"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "0"
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1",
     active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers'
-  }, /*#__PURE__*/_react.default.createElement(_BsListCheck.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListCheck, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
@@ -239,12 +224,12 @@ var SidebarMenu = function SidebarMenu(props) {
     }, item.title);
   })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "2"
-  }, /*#__PURE__*/_react.default.createElement(_BiMessageRounded.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('MESSAGES', 'Messages')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "3",
     active: location.pathname === '/businesses'
-  }, /*#__PURE__*/_react.default.createElement(_BiStore.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('STORES', 'Stores'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "3"
@@ -263,33 +248,40 @@ var SidebarMenu = function SidebarMenu(props) {
     page: "users",
     handleGoToPage: handleGoToPage,
     active: location.pathname === '/users'
-  }, /*#__PURE__*/_react.default.createElement(_FiUsers.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5"
-  }, /*#__PURE__*/_react.default.createElement(_MdcGoogleAnalytics.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('ANALYTICS', 'Analytics')))))), /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
-    className: "d-flex align-items-center m-1",
-    variant: location.pathname === '/settings' && 'primary',
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'settings'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_FiSettings.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    eventKey: "5",
+    active: location.pathname === '/basicSettings' || location.pathname === '/operationSettings'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
-  }, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
-    className: "d-flex align-items-center m-1",
+  }, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "5"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, settingsSubMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.pageName),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
+  }))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+    className: "d-flex align-items-center",
     variant: location.pathname === '/support' && 'primary',
     onClick: function onClick() {
       return handleGoToPage({
         page: 'support'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_BiSupport.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('SUPPORT', 'Support'))))), /*#__PURE__*/_react.default.createElement(_styles.UserInfo, {
     id: "user_info",
@@ -302,12 +294,12 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     },
     variant: location.pathname === '/profile' && 'primary'
-  }, sessionState !== null && sessionState !== void 0 && (_sessionState$user = sessionState.user) !== null && _sessionState$user !== void 0 && _sessionState$user.photo ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
+  }, (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo) ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
     width: "30px",
     height: "30px",
     roundedCircle: true
-  }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.name)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     isCollapse: isCollapse
