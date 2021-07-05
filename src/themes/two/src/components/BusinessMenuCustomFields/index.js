@@ -11,9 +11,11 @@ import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
 import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import {
   WrapMetaFields,
+  Header,
   MetaTitle,
   MetaContainer,
   RoundBorder,
@@ -31,7 +33,8 @@ const BusinessMenuCustomFieldsUI = (props) => {
     metaFieldsList,
     actionState,
     handleDeleteMetaField,
-    handeAddMetaField
+    handeAddMetaField,
+    onClose
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -178,9 +181,14 @@ const BusinessMenuCustomFieldsUI = (props) => {
         ))
       ) : (
         <>
-          <MetaTitle>
-            {t('CUSTOM_FEILDS', 'Custom Fields')}
-          </MetaTitle>
+          <Header>
+            <MetaTitle>
+              {t('CUSTOM_FEILDS', 'Custom Fields')}
+            </MetaTitle>
+            <MdcClose
+              onClick={() => onClose()}
+            />
+          </Header>
           {metaFieldsList.metaFields.length > 0 ? (
             <>
               {metaFieldsList.metaFields.map(metaField => (

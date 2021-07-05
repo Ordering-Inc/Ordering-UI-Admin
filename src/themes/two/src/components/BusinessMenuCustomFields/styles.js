@@ -19,11 +19,31 @@ export const WrapMetaFields = styled.div`
     `}
   }
 `
+
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  > svg {
+    display: none;
+  }
+
+  @media (min-width: 1000px) {
+    > svg {
+      display: block;
+      cursor: pointer;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  }
+`
+
 export const MetaTitle = styled.p`
   font-size: 24px;
   font-weight: 600;
   color: ${props => props.theme.colors?.headingColor};
-  margin-bottom: 30px;
+  margin: 0;
 `
 export const MetaContainer = styled.div`
   display: flex;

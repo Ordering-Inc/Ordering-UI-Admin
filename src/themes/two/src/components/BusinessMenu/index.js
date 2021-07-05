@@ -103,6 +103,8 @@ const BusinessMenuUI = (props) => {
           )}
           {showOption === 'customFields' && (
             <BusinessMenuCustomFields
+              open={showOption === 'option'}
+              onClose={() => handleCloseOption()}
               businessId={business?.id}
               menuId={currentMenu.id}
             />
@@ -122,6 +124,20 @@ const BusinessMenuUI = (props) => {
                 menu={currentMenu}
                 onClose={() => handleCloseOption()}
                 handleUpdateBusinessState={handleSuccessBusinessMenu}
+              />
+            </Modal>
+          )}
+          {showOption === 'customFields' && (
+            <Modal
+              width='80%'
+              open={showOption === 'customFields'}
+              onClose={() => handleCloseOption()}
+            >
+              <BusinessMenuCustomFields
+                open={showOption === 'option'}
+                onClose={() => handleCloseOption()}
+                businessId={business?.id}
+                menuId={currentMenu.id}
               />
             </Modal>
           )}
