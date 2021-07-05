@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const OrderBillContainer = styled.div`
   color: #191919;
-  padding: 20px 0;
+  padding: 15px 0 20px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,7 +18,7 @@ export const OrderBillContainer = styled.div`
   }
 
   table.total {
-    border-top: 1px solid #BFBFBF;
+  border-top: 1px solid #E9ECEF;
     margin-top: 15px;
     tr {
       font-size: 16px;

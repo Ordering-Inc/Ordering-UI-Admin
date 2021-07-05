@@ -57,6 +57,7 @@ export const SidebarContent = styled.div`
   box-sizing: border-box;
   transition: 0.1s;
   button {
+    display: flex;
     font-size: 14px;
     box-sizing: border-box;
     svg {
@@ -163,7 +164,7 @@ export const SubMenu = styled.div`
   cursor: pointer;
   padding: 5px 0;
   font-size: 14px;
-  color: ${props => props.theme.colors.headingColor};
+  color: ${props => props.theme.colors.lightGray};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const OrderDetailsHeaderContainer = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ export const OrderDetailsHeaderContainer = styled.div`
     h1 {
       font-size: 24px;
       margin: 0px;
+      font-weight: 700;
     }
 
     p {
@@ -40,14 +41,19 @@ export const ButtonLink = styled.div`
   padding: 5px;
   margin: 0 5px;
 
+  
   &:hover {
     background-color: ${props => props.theme.colors?.secundary};
     border-radius: 5px;
   }
-
+  
   svg {
     color: ${props => props.theme.colors?.secundaryContrast};
     font-size: 24px;
   }
+  &.close {
+    svg {
+      color: ${props => props.theme.colors?.headingColor};
+    }
+  }
 `
-

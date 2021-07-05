@@ -39,3 +39,6 @@ export const AddButton = styled.span`
     margin-left: 10px;
   `}
 `
+
+export const WrapperSearchBar = styled.div`
+`

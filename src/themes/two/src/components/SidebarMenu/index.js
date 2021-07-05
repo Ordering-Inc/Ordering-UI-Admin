@@ -1,19 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
-import BsListCheck from '@meronex/icons/bs/BsListCheck'
-import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
-import BiStore from '@meronex/icons/bi/BiStore'
-import FiUsers from '@meronex/icons/fi/FiUsers'
-import MdcGoogleAnalytics from '@meronex/icons/mdc/MdcGoogleAnalytics'
-import FiSettings from '@meronex/icons/fi/FiSettings'
-import BiSupport from '@meronex/icons/bi/BiSupport'
-import MdcArrowLeft from '@meronex/icons/mdc/MdcArrowLeft'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { LogoutButton } from '../LogoutButton'
-import IosMenu from '@meronex/icons/ios/IosMenu'
-import MdClose from '@meronex/icons/md/MdClose'
-
+import {
+  XLg,
+  List as MenuIcon,
+  ArrowBarLeft,
+  ListCheck,
+  HouseDoor,
+  PersonFill,
+  Chat as ChatIcon,
+  Shop as ShopIcon,
+  People as PeopleIcon,
+  BarChartLine as BarChartLineIcon,
+  Gear as GearIcon,
+  Headset as HeadsetIcon
+} from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -143,7 +144,7 @@ export const SidebarMenu = (props) => {
             <IconContent
               onClick={() => setMenuOpen(true)}
             >
-              <IosMenu />
+              <MenuIcon />
             </IconContent>
           )}
           <LogoWrap
@@ -172,7 +173,7 @@ export const SidebarMenu = (props) => {
                 onClick={() => setIsCollapse(!isCollapse)}
                 isCollapse={isCollapse}
               >
-                <MdcArrowLeft />
+                <ArrowBarLeft />
               </CollapseButton>
               <LogoWrap
                 className='d-flex justify-content-center align-items-center'
@@ -191,7 +192,7 @@ export const SidebarMenu = (props) => {
                 isClose
                 onClick={() => setMenuOpen(false)}
               >
-                <MdClose />
+                <XLg />
               </IconContent>
             </MenuClose>
           )}
@@ -200,7 +201,7 @@ export const SidebarMenu = (props) => {
               <Accordion>
                 <MenuContainer>
                   <ContextAwareToggle eventKey='0'>
-                    <AiOutlineHome />
+                    <HouseDoor />
                     {!isCollapse && <span className='mx-2'>{t('HOME', 'Home')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
@@ -214,7 +215,7 @@ export const SidebarMenu = (props) => {
                       location.pathname === '/drivers'
                     }
                   >
-                    <BsListCheck />
+                    <ListCheck />
                     {!isCollapse && <span className='mx-2'>{t('ORDERS', 'Orders')}</span>}
                   </ContextAwareToggle>
                   <Accordion.Collapse eventKey='1'>
@@ -234,7 +235,7 @@ export const SidebarMenu = (props) => {
 
                 <MenuContainer>
                   <ContextAwareToggle eventKey='2'>
-                    <BiMessageRounded />
+                    <ChatIcon />
                     {!isCollapse && <span className='mx-2'>{t('MESSAGES', 'Messages')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
@@ -246,7 +247,7 @@ export const SidebarMenu = (props) => {
                       location.pathname === '/businesses'
                     }
                   >
-                    <BiStore />
+                    <ShopIcon />
                     {!isCollapse && <span className='mx-2'>{t('STORES', 'Stores')}</span>}
                   </ContextAwareToggle>
                   <Accordion.Collapse eventKey='3'>
@@ -273,14 +274,14 @@ export const SidebarMenu = (props) => {
                       location.pathname === '/users'
                     }
                   >
-                    <FiUsers />
+                    <PeopleIcon />
                     {!isCollapse && <span className='mx-2'>{t('USERS', 'Users')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
 
                 <MenuContainer>
                   <ContextAwareToggle eventKey='5'>
-                    <MdcGoogleAnalytics />
+                    <BarChartLineIcon />
                     {!isCollapse && <span className='mx-2'>{t('ANALYTICS', 'Analytics')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
@@ -296,7 +297,7 @@ export const SidebarMenu = (props) => {
                       location.pathname === '/operationSettings'
                     }
                   >
-                    <FiSettings />
+                    <GearIcon />
                     {!isCollapse && <span className='mx-2'>{t('SETTINGS', 'Settings')}</span>}
                   </ContextAwareToggle>
                   <Accordion.Collapse eventKey='5'>
@@ -320,7 +321,7 @@ export const SidebarMenu = (props) => {
                 variant={location.pathname === '/support' && 'primary'}
                 onClick={() => handleGoToPage({ page: 'support' })}
               >
-                <BiSupport />
+                <HeadsetIcon />
                 {!isCollapse && <span className='mx-2'>{t('SUPPORT', 'Support')}</span>}
               </Button>
             </div>
@@ -330,14 +331,14 @@ export const SidebarMenu = (props) => {
             className='d-flex flex-column px-1'
           >
             <Button
-              className='d-flex align-items-center'
+              className='d-flex align-items-center m-1'
               onClick={() => handleGoToPage({ page: 'profile' })}
               variant={location.pathname === '/profile' && 'primary'}
             >
               {sessionState?.user?.photo ? (
                 <Image src={sessionState?.user?.photo} width='30px' height='30px' roundedCircle />
               ) : (
-                <FaUserAlt />
+                <PersonFill />
               )}
               {!isCollapse && <span className='mx-2'>{sessionState?.user?.name}</span>}
             </Button>

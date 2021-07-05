@@ -75,7 +75,7 @@ export const DriverText = styled.span`
 export const WrapperDriverImage = styled.div`
   width: 45px;
   height: 45px;
-  border: 1px solid #E3E3E3;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   display: flex;
 

@@ -4,8 +4,8 @@ import { Button } from '../Buttons'
 
 export const Input = styled.input`
   background: #FFF;
-  color: #707070;
-  border: 1px solid #707070;
+  color: #344050;
+  border: 1px solid #DEE2E6;
   border-radius: 8px;
   font-size: 16px;
   padding: 7px 15px;
@@ -21,10 +21,10 @@ export const Input = styled.input`
 
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: #959595;
+    color: #B1BCCC;
   }
   &:-ms-input-placeholder {
-    color: #959595;
+    color: #B1BCCC;
   }
 `
 

@@ -24,7 +24,7 @@ import {
 
 const BusinessCustomFieldsUI = (props) => {
   const {
-    orderId,
+    businessId,
     metaFieldsList,
     actionState,
     handleDeleteMetaField,
@@ -93,7 +93,7 @@ const BusinessCustomFieldsUI = (props) => {
     }
     handeAddMetaField({
       key: metaKey,
-      order_id: orderId,
+      business_id: businessId,
       value: value,
       value_type: selectedMetaKey
     })

@@ -17,7 +17,7 @@ export const PopoverBody = styled.div`
   position: absolute;
   background-color: #FFF;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 7.6px;
   max-width: 250px;
   z-index: 1001;
   border: 1px solid ${props => props.theme.colors?.headingColor};

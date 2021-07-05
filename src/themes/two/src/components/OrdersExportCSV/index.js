@@ -3,7 +3,7 @@ import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-componen
 import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
-import ZoDownload from '@meronex/icons/zo/ZoDownload'
+import { Download } from 'react-bootstrap-icons'
 import { Modal } from '../Modal'
 import {
   ExportContainer,
@@ -51,13 +51,13 @@ const ExportCSVUI = (props) => {
     <>
       <ExportContainer>
         <Button
-          borderRadius='5px'
+          borderRadius='7.6px'
           color='secundary'
           disabled={actionStatus.loading}
           onClick={() => setPopoverOpen(!popoverOpen)}
         >
           {width > 600 && t('CSV', 'CSV')}
-          <ZoDownload />
+          <Download />
         </Button>
         {popoverOpen && (
           <PopoverContainer>
