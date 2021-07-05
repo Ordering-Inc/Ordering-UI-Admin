@@ -16,7 +16,7 @@ export const ListenPageChanges = ({ children }) => {
     users: '/users',
     login: '/login',
     businesses: '/businesses',
-    basicSettings: '/basicSettings'
+    basicSettings: '/settings/basic'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
