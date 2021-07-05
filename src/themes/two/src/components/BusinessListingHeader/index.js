@@ -5,7 +5,8 @@ import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 
 import {
   HeaderContainer,
-  AddButton
+  AddButton,
+  WrapperSearchBar
 } from './styles'
 
 export const BusinessListingHeader = (props) => {
@@ -25,12 +26,14 @@ export const BusinessListingHeader = (props) => {
           <BsPlusSquare />
         </AddButton>
       </div>
-      <SearchBar
-        isCustomLayout
-        onSearch={onSearch}
-        search={searchValue}
-        placeholder={t('SEARCH', 'Search')}
-      />
+      <WrapperSearchBar>
+        <SearchBar
+          isCustomLayout
+          onSearch={onSearch}
+          search={searchValue}
+          placeholder={t('SEARCH', 'Search')}
+        />
+      </WrapperSearchBar>
     </HeaderContainer>
   )
 }
