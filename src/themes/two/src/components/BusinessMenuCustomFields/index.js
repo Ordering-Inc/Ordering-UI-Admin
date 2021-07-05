@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, BusinessMetaFields as BusinessMetaFieldsController } from 'ordering-components-admin'
+import { useLanguage, BusinessMenuMetaFields as BusinessMenuMetaFieldsController } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import Skeleton from 'react-loading-skeleton'
 import BsTrash from '@meronex/icons/bs/BsTrash'
@@ -10,6 +10,8 @@ import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
 import { SpinnerLoader } from '../SpinnerLoader'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+
 import {
   WrapMetaFields,
   MetaTitle,
@@ -22,15 +24,18 @@ import {
   WrapperSpinnerLoader
 } from './styles'
 
-const BusinessCustomFieldsUI = (props) => {
+const BusinessMenuCustomFieldsUI = (props) => {
   const {
     businessId,
+    menuId,
     metaFieldsList,
     actionState,
     handleDeleteMetaField,
     handeAddMetaField
   } = props
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { handleSubmit, register, errors } = useForm()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -94,6 +99,7 @@ const BusinessCustomFieldsUI = (props) => {
     handeAddMetaField({
       key: metaKey,
       business_id: businessId,
+      menu_id: menuId,
       value: value,
       value_type: selectedMetaKey
     })
@@ -134,21 +140,44 @@ const BusinessCustomFieldsUI = (props) => {
     }
   }, [errors])
 
+  const actionSidebar = (value) => {
+    if (!value) {
+      props.onClose()
+    }
+    setIsMenuOpen(value)
+    document.getElementById('menu_meta_fields').style.width = value
+      ? width > 1000 ? '500px' : '100%'
+      : '0'
+  }
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      if (width < 1000) {
+        document.getElementById('menu_meta_fields').style.width = '100%'
+      } else {
+        document.getElementById('menu_meta_fields').style.width = '500px'
+      }
+    }
+  }, [width])
+
+  useEffect(() => {
+    if (!open) return
+    actionSidebar(true)
+  }, [open])
+
   return (
-    <>
+    <WrapMetaFields id='menu_meta_fields'>
       {metaFieldsList.loading ? (
-        <WrapMetaFields>
-          {[...Array(10).keys()].map(i => (
-            <SkeletonItem key={i}>
-              <Skeleton width={50} height={30} />
-              <Skeleton width={50} height={30} />
-              <Skeleton width={150} height={30} />
-              <Skeleton width={25} height={30} />
-            </SkeletonItem>
-          ))}
-        </WrapMetaFields>
+        [...Array(10).keys()].map(i => (
+          <SkeletonItem key={i}>
+            <Skeleton width={50} height={30} />
+            <Skeleton width={50} height={30} />
+            <Skeleton width={150} height={30} />
+            <Skeleton width={25} height={30} />
+          </SkeletonItem>
+        ))
       ) : (
-        <WrapMetaFields>
+        <>
           <MetaTitle>
             {t('CUSTOM_FEILDS', 'Custom Fields')}
           </MetaTitle>
@@ -295,7 +324,7 @@ const BusinessCustomFieldsUI = (props) => {
               <SpinnerLoader />
             </WrapperSpinnerLoader>
           )}
-        </WrapMetaFields>
+        </>
       )}
       <Alert
         title={t('ERROR')}
@@ -306,15 +335,16 @@ const BusinessCustomFieldsUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-    </>
+    </WrapMetaFields>
   )
 }
 
-export const BusinessCustomFields = (props) => {
-  const MetaFieldsProps = {
+export const BusinessMenuCustomFields = (props) => {
+  const businessMenuMetaFieldsProps = {
     ...props,
-    asDashboard: true,
-    UIComponent: BusinessCustomFieldsUI
+    UIComponent: BusinessMenuCustomFieldsUI
   }
-  return <BusinessMetaFieldsController {...MetaFieldsProps} />
+  return (
+    <BusinessMenuMetaFieldsController {...businessMenuMetaFieldsProps} />
+  )
 }

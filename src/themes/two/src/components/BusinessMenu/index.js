@@ -6,6 +6,7 @@ import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { useTheme } from 'styled-components'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
+import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
@@ -73,7 +74,7 @@ const BusinessMenuUI = (props) => {
                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
                 <Dropdown.Item onClick={() => handleOpenOptions('option', menu)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                <Dropdown.Item>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleOpenOptions('customFields', menu)}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => handleDeleteBusinessMenu(menu.id)}
                 >
@@ -98,6 +99,12 @@ const BusinessMenuUI = (props) => {
               menu={currentMenu}
               onClose={() => handleCloseOption()}
               handleUpdateBusinessState={handleSuccessBusinessMenu}
+            />
+          )}
+          {showOption === 'customFields' && (
+            <BusinessMenuCustomFields
+              businessId={business?.id}
+              menuId={currentMenu.id}
             />
           )}
         </>
