@@ -67,7 +67,8 @@ export const SidebarMenu = (props) => {
     {
       id: 1,
       title: t('STORES_LIST', 'Stores list'),
-      pageName: 'businesses'
+      pageName: 'businesses',
+      url: '/store'
     },
     {
       id: 2,
@@ -110,12 +111,14 @@ export const SidebarMenu = (props) => {
     {
       id: 1,
       title: t('BASIC_SETTINGS', 'Basic settings'),
-      pageName: 'basicSettings'
+      pageName: 'basicSettings',
+      url: '/settings/basic'
     },
     {
       id: 2,
       title: t('OPERATION_SETTINGS', 'Operation settings'),
-      pageName: 'operationSettings'
+      pageName: 'operationSettings',
+      url: '/settings/operation'
     }
   ]
   const handleGoToPage = (data) => {
@@ -244,7 +247,8 @@ export const SidebarMenu = (props) => {
                   <ContextAwareToggle
                     eventKey='3'
                     active={
-                      location.pathname === '/businesses'
+                      location.pathname === '/businesses' ||
+                      location.pathname.includes('/store/')
                     }
                   >
                     <ShopIcon />
@@ -255,7 +259,7 @@ export const SidebarMenu = (props) => {
                       {storesSubMenus.map(item => (
                         <SubMenu
                           key={item.id}
-                          active={location.pathname.includes(item.pageName)}
+                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                           onClick={() => handleGoToPage({ page: item.pageName })}
                         >
                           {item.title}
@@ -293,8 +297,8 @@ export const SidebarMenu = (props) => {
                   <ContextAwareToggle
                     eventKey='5'
                     active={
-                      location.pathname === '/basicSettings' ||
-                      location.pathname === '/operationSettings'
+                      location.pathname === '/settings/basic' ||
+                      location.pathname === '/settings/operation'
                     }
                   >
                     <GearIcon />
@@ -305,7 +309,7 @@ export const SidebarMenu = (props) => {
                       {settingsSubMenus.map(item => (
                         <SubMenu
                           key={item.id}
-                          active={location.pathname.includes(item.pageName)}
+                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                           onClick={() => handleGoToPage({ page: item.pageName })}
                         >
                           {item.title}

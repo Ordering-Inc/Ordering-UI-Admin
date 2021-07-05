@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
@@ -38,6 +39,11 @@ export const BusinessSummary = (props) => {
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
   const [isEdit, setIsEdit] = useState(false)
+  const history = useHistory()
+
+  const handleOpenCategory = () => {
+    history.push(`/store/${businessState.business.slug}`)
+  }
 
   const businessConfigs = [
     {
@@ -124,6 +130,7 @@ export const BusinessSummary = (props) => {
               <Button
                 color='lightPrimary'
                 borderRadius='5px'
+                onClick={handleOpenCategory}
               >
                 {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
               </Button>
