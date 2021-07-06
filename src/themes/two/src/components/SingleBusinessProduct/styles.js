@@ -113,3 +113,34 @@ export const InputName = styled.input`
   outline: none;
   width: 100%;
 `
+
+export const ActionSelectorWrapper = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-right: 35px;
+    ` : css`
+    margin-left: 35px;
+  `}
+  button {
+    background: #F8F9FA !important;
+    border: none;
+    padding: 0px;
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  > div {
+    border: 1px solid #E9ECEF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    > div {
+      a:last-child {
+        color: #E63757;
+      }
+    }
+  }
+`

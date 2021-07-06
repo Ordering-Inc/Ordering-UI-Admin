@@ -8,6 +8,7 @@ import {
 export const ProductDetails = (props) => {
   const {
     open,
+    business,
     onClose,
     product
   } = props
@@ -65,7 +66,10 @@ export const ProductDetails = (props) => {
 
   return (
     <Container id='product_details'>
-      <ProductMainDetails />
+      <ProductMainDetails
+        {...props}
+        actionSidebar={actionSidebar}
+      />
     </Container>
   )
 }

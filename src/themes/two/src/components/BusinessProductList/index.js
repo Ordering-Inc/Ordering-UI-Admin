@@ -20,7 +20,8 @@ export const BusinessProductList = (props) => {
     searchValue,
     errorQuantityProducts,
     handleSearchRedirect,
-    handleChangeSearch
+    handleChangeSearch,
+    handleOpenProductDetails
   } = props
   const [, t] = useLanguage()
 
@@ -102,6 +103,7 @@ export const BusinessProductList = (props) => {
                         key={i}
                         product={product}
                         allowColumns={allowColumns}
+                        handleOpenProductDetails={handleOpenProductDetails}
                       />
                     ))
                   }
