@@ -7,6 +7,9 @@ export const PropertiesContainer = styled.div`
     color: ${props => props.theme.colors.headingColor};
     font-size: 24px;
     font-weight: 600;
+    padding-bottom: 30px;
+    margin: 0px;
+    border-bottom: 1px solid #E9ECEF;
   }
 
   > input {
