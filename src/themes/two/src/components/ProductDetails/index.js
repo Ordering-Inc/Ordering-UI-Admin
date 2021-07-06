@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { ProductMainDetails } from '../ProductMainDetails'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { MoreSidebarLayout } from '../MoreSidebarLayout'
+import { ProductProperties } from '../ProductProperties'
 
 import {
   Container
@@ -10,18 +12,32 @@ export const ProductDetails = (props) => {
     open,
     business,
     onClose,
-    product
+    product,
+    handleUpdateBusinessState
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
+  const [showOption, setShowOption] = useState(null)
+
+  const handleShowOption = (option) => {
+    setIsExtendExtraOpen(false)
+    setShowOption(option)
+    setExtraOpen(true)
+  }
+
+  const handleCloseExtraOpen = () => {
+    setIsExtendExtraOpen(false)
+    setExtraOpen(false)
+    setShowOption(null)
+  }
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
 
     if (!value) {
-      props.onClose()
+      onClose()
     }
   }
 
@@ -69,7 +85,23 @@ export const ProductDetails = (props) => {
       <ProductMainDetails
         {...props}
         actionSidebar={actionSidebar}
+        showOption={showOption}
+        handleShowOption={handleShowOption}
       />
+      {extraOpen && (
+        <MoreSidebarLayout
+          isExtendExtraOpen={isExtendExtraOpen}
+          onClose={handleCloseExtraOpen}
+        >
+          {showOption === 'properties' && (
+            <ProductProperties
+              business={business}
+              product={product}
+              handleUpdateBusinessState={handleUpdateBusinessState}
+            />
+          )}
+        </MoreSidebarLayout>
+      )}
     </Container>
   )
 }

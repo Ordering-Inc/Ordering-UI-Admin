@@ -24,8 +24,8 @@ import {
 const ProductMainDetailsUI = (props) => {
   const {
     actionSidebar,
-    selectedConfigOption,
-    handleClickOption,
+    showOption,
+    handleShowOption,
     handleChangeProductActiveState,
     productState,
     formState,
@@ -91,8 +91,8 @@ const ProductMainDetailsUI = (props) => {
                 {configsOptions.map(config => (
                   <ProductConfigOption
                     key={config.key}
-                    active={selectedConfigOption === config.key}
-                    onClick={() => handleClickOption(config.key)}
+                    active={showOption === config.key}
+                    onClick={() => handleShowOption(config.key)}
                   >
                     <span>{config.value}</span>
                     <BsChevronRight />
