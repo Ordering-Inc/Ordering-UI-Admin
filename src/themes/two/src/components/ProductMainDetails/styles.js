@@ -21,6 +21,7 @@ export const DetailsHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 30px;
 `
 
 export const ProductName = styled.h1`
@@ -65,7 +66,6 @@ const ProductImageStyled = styled.div`
   object-fit: cover;
   background-position: center;
   border-radius: 8px;
-  margin-top: 20px;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 `
 

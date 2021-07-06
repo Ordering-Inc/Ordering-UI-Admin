@@ -75,7 +75,7 @@ const ProductMainDetailsUI = (props) => {
           </LeftHeader>
           <RightHeader>
             <CloseButton
-              onClick={() => actionSidebar(false)}
+              onClick={() => isEditMode ? setIsEditMode(false) : actionSidebar(false)}
             >
               <MdcClose />
             </CloseButton>
