@@ -38,7 +38,7 @@ const ProductIngredientUI = (props) => {
     <IngredientContainer>
       <Header>
         <h1>{t('INGREDIENTS', 'Ingredients')}</h1>
-        <PlusSquare />
+        <PlusSquare onClick={() => handleOpenAddForm()} />
       </Header>
       {productState?.product?.ingredients.map(ingredient => (
         <IngredientOption
