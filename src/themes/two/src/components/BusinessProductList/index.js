@@ -4,6 +4,8 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { SingleBusinessProduct } from '../SingleBusinessProduct'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { CreateBusinessProduct } from '../CreateBusinessProduct'
+import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
+
 import {
   ListContent,
   ProductListContainer,
@@ -45,6 +47,14 @@ export const BusinessProductList = (props) => {
       value: 'description',
       content: t('DESCRIPTION', 'Description')
     }
+  ]
+
+  const spreadSheetHeaderItems = [
+    { title: t('ID', 'Id'), code: 'id', readOnly: true },
+    { title: t('NAME', 'Name'), code: 'name', readOnly: false },
+    { title: t('DESCRIPTION', 'Description'), code: 'description', readOnly: false },
+    { title: t('PRICE', 'Price'), code: 'price', readOnly: false },
+    { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false }
   ]
 
   const handleChangeAllowColumns = (type) => {
@@ -142,41 +152,22 @@ export const BusinessProductList = (props) => {
         viewMethod === 'spreedsheet' && (
           <>
             <ProductListContainer>
-              <BusinessProductListTable>
-                <thead>
-                  <tr>
-                    <th className='id'>{t('ID', 'ID')}</th>
-                    <th>{t('NAME', 'Name')}</th>
-                    <th className='description'>{t('DESCRIPTION', 'Description')}</th>
-                    <th>{t('PRICE', 'Price')}</th>
-                    <th>{t('QUANTITY', 'Quantity')}</th>
-                  </tr>
-                </thead>
-                {(categoryState.loading || businessState.loading) ? (
-                  [...Array(30).keys()].map(i => (
-                    <SingleBusinessProduct
-                      key={i}
-                      isSkeleton
-                      viewMethod={viewMethod}
-                    />
-                  ))
-                ) : (
-                  <>
-                    {
-                      categoryState.products.map((product, i) => (
-                        <SingleBusinessProduct
-                          {...props}
-                          key={i}
-                          product={product}
-                          viewMethod={viewMethod}
-                        />
-                      ))
-                    }
-                  </>
-                )}
-              </BusinessProductListTable>
+              {(categoryState.loading || businessState.loading) ? (
+                [...Array(30).keys()].map(i => (
+                  <SingleBusinessProduct
+                    key={i}
+                    isSkeleton
+                    viewMethod={viewMethod}
+                    allowColumns={allowColumns}
+                  />
+                ))
+              ) : (
+                <BusinessSpreadSheet
+                  headerItems={spreadSheetHeaderItems}
+                  hotTableData={categoryState.products}
+                />
+              )}
             </ProductListContainer>
-
             {
               !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
                 <WrapperNotFound>
