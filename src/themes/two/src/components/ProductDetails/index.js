@@ -3,6 +3,7 @@ import { ProductMainDetails } from '../ProductMainDetails'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { MoreSidebarLayout } from '../MoreSidebarLayout'
 import { ProductProperties } from '../ProductProperties'
+import { ProductIngredient } from '../ProductIngredient'
 
 import {
   Container
@@ -95,6 +96,13 @@ export const ProductDetails = (props) => {
         >
           {showOption === 'properties' && (
             <ProductProperties
+              business={business}
+              product={product}
+              handleUpdateBusinessState={handleUpdateBusinessState}
+            />
+          )}
+          {showOption === 'ingredients' && (
+            <ProductIngredient
               business={business}
               product={product}
               handleUpdateBusinessState={handleUpdateBusinessState}
