@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { ProductMetaFields as ProductMetaFieldsController } from './naked'
+import { useLanguage, ProductMetaFields as ProductMetaFieldsController } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import Skeleton from 'react-loading-skeleton'
 import BsTrash from '@meronex/icons/bs/BsTrash'

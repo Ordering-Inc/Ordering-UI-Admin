@@ -4,6 +4,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { MoreSidebarLayout } from '../MoreSidebarLayout'
 import { ProductProperties } from '../ProductProperties'
 import { ProductIngredient } from '../ProductIngredient'
+import { ProductMetaFields } from '../ProductMetaFields'
 
 import {
   Container
@@ -106,6 +107,13 @@ export const ProductDetails = (props) => {
               business={business}
               product={product}
               handleUpdateBusinessState={handleUpdateBusinessState}
+            />
+          )}
+          {showOption === 'custom_fields' && (
+            <ProductMetaFields
+              businessId={business.id}
+              categoryId={product.category_id}
+              productId={product.id}
             />
           )}
         </MoreSidebarLayout>

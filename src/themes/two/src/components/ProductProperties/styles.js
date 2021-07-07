@@ -26,24 +26,14 @@ export const PropertyOption = styled.div`
   padding: 12px 0;
   display: flex;
   align-items: center;
-
-  svg {
-    font-size: 20px;
-    color: ${props => props.theme.colors.lightGray};
-  }
-
-  ${({ active }) => active && css`
-    svg {
-      color: ${props => props.theme.colors.primary};
-    }
-  `}
-
-  span {
+  
+  label {
+    cursor: pointer;
     color: ${props => props.theme.colors.headingColor};
     ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
+      padding-right: 10px;
     ` : css`
-      margin-left: 10px;
+      padding-left: 10px;
     `}
   }
 `

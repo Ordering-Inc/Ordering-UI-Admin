@@ -40,33 +40,38 @@ const ProductPropertiesUI = (props) => {
         <Checkbox
           defaultChecked={productState?.featured}
           onClick={(e) => handleClickProperty('featured', e.target.checked)}
+          id='featured'
         />
-        <span>{t('FEATURED', 'Featured')}</span>
+        <label for='featured'>{t('FEATURED', 'Featured')}</label>
       </PropertyOption>
       <PropertyOption>
         <Checkbox
           defaultChecked={productState?.upselling}
           onClick={(e) => handleClickProperty('upselling', e.target.checked)}
+          id='upselling'
         />
-        <span>{t('UPSELLING', 'Upselling')}</span>
+        <label for='upselling'>{t('UPSELLING', 'Upselling')}</label>
       </PropertyOption>
       <PropertyOption>
         <Checkbox
           defaultChecked={productState?.inventoried}
           onClick={(e) => handleClickProperty('inventoried', e.target.checked)}
+          id='inventoried'
         />
-        <span>{t('INVENTORIED', 'Limit product quantity')}</span>
+        <label for='inventoried'>{t('INVENTORIED', 'Limit product quantity')}</label>
       </PropertyOption>
       <PropertyOption>
         <Checkbox
           defaultChecked={(productState?.sku && parseInt(productState?.sku) !== -1)}
           onClick={(e) => handleClickSku(e)}
+          id='sku'
         />
-        <span>{t('SKU', 'Stock Keeping Unit (SKU)')}</span>
+        <label for='sku'>{t('SKU', 'Stock Keeping Unit (SKU)')}</label>
       </PropertyOption>
       {isShowSku && (
         <Input
           name='sku'
+          placeholder={t('SKU', 'Stock Keeping Unit (SKU)')}
           defaultValue={parseInt(productState?.sku) !== -1 ? productState?.sku : ''}
           onChange={(e) => handleClickProperty('sku', e.target.value)}
         />
