@@ -6,6 +6,7 @@ import { ProductProperties } from '../ProductProperties'
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductMetaFields } from '../ProductMetaFields'
 import { Personalization } from '../Personalization'
+import { ProductExtras } from '../ProductExtras'
 
 import {
   Container
@@ -105,6 +106,13 @@ export const ProductDetails = (props) => {
           )}
           {showOption === 'ingredients' && (
             <ProductIngredient
+              business={business}
+              product={product}
+              handleUpdateBusinessState={handleUpdateBusinessState}
+            />
+          )}
+          {showOption === 'product_extras' && (
+            <ProductExtras
               business={business}
               product={product}
               handleUpdateBusinessState={handleUpdateBusinessState}

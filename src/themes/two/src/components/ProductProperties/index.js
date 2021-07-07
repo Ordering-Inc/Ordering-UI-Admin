@@ -42,7 +42,7 @@ const ProductPropertiesUI = (props) => {
           onClick={(e) => handleClickProperty('featured', e.target.checked)}
           id='featured'
         />
-        <label for='featured'>{t('FEATURED', 'Featured')}</label>
+        <label htmlFor='featured'>{t('FEATURED', 'Featured')}</label>
       </PropertyOption>
       <PropertyOption>
         <Checkbox
@@ -50,7 +50,7 @@ const ProductPropertiesUI = (props) => {
           onClick={(e) => handleClickProperty('upselling', e.target.checked)}
           id='upselling'
         />
-        <label for='upselling'>{t('UPSELLING', 'Upselling')}</label>
+        <label htmlFor='upselling'>{t('UPSELLING', 'Upselling')}</label>
       </PropertyOption>
       <PropertyOption>
         <Checkbox
@@ -58,7 +58,7 @@ const ProductPropertiesUI = (props) => {
           onClick={(e) => handleClickProperty('inventoried', e.target.checked)}
           id='inventoried'
         />
-        <label for='inventoried'>{t('INVENTORIED', 'Limit product quantity')}</label>
+        <label htmlFor='inventoried'>{t('INVENTORIED', 'Limit product quantity')}</label>
       </PropertyOption>
       <PropertyOption>
         <Checkbox
@@ -66,7 +66,7 @@ const ProductPropertiesUI = (props) => {
           onClick={(e) => handleClickSku(e)}
           id='sku'
         />
-        <label for='sku'>{t('SKU', 'Stock Keeping Unit (SKU)')}</label>
+        <label htmlFor='sku'>{t('SKU', 'Stock Keeping Unit (SKU)')}</label>
       </PropertyOption>
       {isShowSku && (
         <Input
