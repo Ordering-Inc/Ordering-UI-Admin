@@ -20,6 +20,9 @@ export const MetaContainer = styled.div`
   .meta_type {
     width: 25%;
     font-size: 14px;
+    .select {
+      background: ${props => props.theme.colors.secundary};
+    }
   }
   .meta_key {
     width: 25%;
