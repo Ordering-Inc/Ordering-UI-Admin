@@ -1,37 +1,90 @@
-import React from 'react'
-import { HotTable, HotColumn } from '@handsontable/react'
-import 'handsontable/dist/handsontable.full.css'
+import React, { useEffect, useState } from 'react'
+import { useLanguage } from 'ordering-components-admin'
+import { SpreadSheetEditor } from '../SpreadSheetEditor'
+import { BusinessSpreadSheet as BusinessSpreadSheetController } from './naked'
+import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify'
+import { Alert } from '../Confirm'
 import {
-  SpreadSheetContainer
+  BusinessSpreadSheetContainer
 } from './styles'
 
-export const BusinessSpreadSheet = (props) => {
+const BusinessSpreadSheetUI = (props) => {
   const {
-    headerItems,
-    hotTableData
+    handleItemChange,
+    spreadSheetState
   } = props
 
+  const [, t] = useLanguage()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const spreadSheetHeaderItems = [
+    { title: t('ID', 'Id'), code: 'id', readOnly: true, type: 'numeric' },
+    { title: t('NAME', 'Name'), code: 'name', readOnly: false, type: 'text' },
+    { title: t('DESCRIPTION', 'Description'), code: 'description', readOnly: false, type: 'text' },
+    { title: t('PRICE', 'Price'), code: 'price', readOnly: false, type: 'numeric' },
+    { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false, type: 'numeric' }
+  ]
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  useEffect(() => {
+    if (spreadSheetState.products && !spreadSheetState.result.error && !spreadSheetState.loading) {
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = 'product saved.'
+      toast.dark(content, toastConfigure)
+    }
+  }, [spreadSheetState?.loading])
+
+  useEffect(() => {
+    if (spreadSheetState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: spreadSheetState?.result?.result
+      })
+    }
+  }, [spreadSheetState?.result])
+
   return (
-    <SpreadSheetContainer>
-      <HotTable
-        data={hotTableData}
-        width='100vw'
-        licenseKey='non-commercial-and-evaluation'
-        autoRowSize='false'
-        autoColumnSize='false'
-        afterChange={(changes) => console.log(changes)}
-      >
-        {
-          headerItems && headerItems.length > 0 && headerItems.map((item, i) => (
-            <HotColumn
-              key={i}
-              title={item.title}
-              readOnly={item.readOnly}
-              data={item.code}
-            />
-          ))
-        }
-      </HotTable>
-    </SpreadSheetContainer>
+    <>
+      <BusinessSpreadSheetContainer>
+        <SpreadSheetEditor
+          {...props}
+          hotTableData={spreadSheetState.products}
+          headerItems={spreadSheetHeaderItems}
+          handleItemChange={handleItemChange}
+        />
+      </BusinessSpreadSheetContainer>
+      <Alert
+        title={t('PRODUCT EDIT', 'Product Edit')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+    </>
   )
+}
+
+export const BusinessSpreadSheet = (props) => {
+  const businessSpreadSheetProps = {
+    ...props,
+    UIComponent: BusinessSpreadSheetUI
+  }
+  return <BusinessSpreadSheetController {...businessSpreadSheetProps} />
 }

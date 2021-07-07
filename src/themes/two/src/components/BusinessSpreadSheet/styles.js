@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const SpreadSheetContainer = styled.div`
+export const BusinessSpreadSheetContainer = styled.div`
   .wtHolder {
     height: auto;
   }

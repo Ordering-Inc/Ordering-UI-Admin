@@ -49,14 +49,6 @@ export const BusinessProductList = (props) => {
     }
   ]
 
-  const spreadSheetHeaderItems = [
-    { title: t('ID', 'Id'), code: 'id', readOnly: true },
-    { title: t('NAME', 'Name'), code: 'name', readOnly: false },
-    { title: t('DESCRIPTION', 'Description'), code: 'description', readOnly: false },
-    { title: t('PRICE', 'Price'), code: 'price', readOnly: false },
-    { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false }
-  ]
-
   const handleChangeAllowColumns = (type) => {
     setAllowColumns({
       ...allowColumns,
@@ -163,8 +155,7 @@ export const BusinessProductList = (props) => {
                 ))
               ) : (
                 <BusinessSpreadSheet
-                  headerItems={spreadSheetHeaderItems}
-                  hotTableData={categoryState.products}
+                  {...props}
                 />
               )}
             </ProductListContainer>
