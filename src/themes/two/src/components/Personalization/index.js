@@ -16,7 +16,10 @@ export const Personalization = (props) => {
       {isShowTitle && (
         <h1>{t('PERSONALIZATION', 'Personalization')}</h1>
       )}
-      <p>{t('PERSONALIZATION_TITLE', 'If you are looking for something  special for your Ordering Solution, send us your special wish.')}</p>
+      <p>
+        {t('PERSONALIZATION_TITLE', 'If you are looking for something  special for your Ordering Solution')},
+        <a href=''>{t('SEND_US_SPECIAL_WISH', 'send us your special wish.')}</a>
+      </p>
       <img src={theme?.images.general?.personalization} loading='lazy' />
     </Container>
   )

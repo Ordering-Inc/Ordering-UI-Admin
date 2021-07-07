@@ -5,6 +5,7 @@ import { MoreSidebarLayout } from '../MoreSidebarLayout'
 import { ProductProperties } from '../ProductProperties'
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductMetaFields } from '../ProductMetaFields'
+import { Personalization } from '../Personalization'
 
 import {
   Container
@@ -114,6 +115,11 @@ export const ProductDetails = (props) => {
               businessId={business.id}
               categoryId={product.category_id}
               productId={product.id}
+            />
+          )}
+          {showOption === 'personalization' && (
+            <Personalization
+              isShowTitle
             />
           )}
         </MoreSidebarLayout>
