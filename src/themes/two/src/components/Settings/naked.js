@@ -7,9 +7,10 @@ import { useSession, useApi } from 'ordering-components-admin'
 /**
  * Component to manage Checkout page behavior without UI component
  */
-export const BasicSettings = (props) => {
+export const Settings = (props) => {
   const {
-    UIComponent
+    UIComponent,
+    settingsType
   } = props
 
   const [categoryList, setCategoryList] = useState({ categories: [], loading: false, error: null })
@@ -40,10 +41,16 @@ export const BasicSettings = (props) => {
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
       if (!error) {
+        let categories
+        if (settingsType === 'basic') {
+          categories = result.filter(item => (item.parent_category_id === 1) || (item.key === 'key_basic'))
+        } else if (settingsType === 'operation') {
+          categories = result.filter(item => (item.parent_category_id === 2) || (item.key === 'key_operation'))
+        }
         setCategoryList({
           ...categoryList,
           loading: false,
-          categories: result
+          categories: categories
         })
       } else {
         setCategoryList({
@@ -73,15 +80,11 @@ export const BasicSettings = (props) => {
   )
 }
 
-BasicSettings.propTypes = {
+Settings.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
-  // /**
-  //  * handler values from other components
-  //  */
-  // handlerValues: PropTypes.func,
   /**
    * Components types before Checkout
    * Array of type components, the parent props will pass to these components
@@ -104,7 +107,7 @@ BasicSettings.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-BasicSettings.defaultProps = {
+Settings.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

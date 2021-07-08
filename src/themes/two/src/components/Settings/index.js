@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, useEvent } from 'ordering-components-admin'
-import { BasicSettings as BasicSettingsController } from './naked'
+import { Settings as SettingsController } from './naked'
 import { SettingItemUI } from '../SettingItemUI'
 import { CategoryDescription } from '../CategoryDescription'
 
@@ -11,9 +11,10 @@ import {
   ContentWrapper
 } from './styles'
 
-const BasicSettingsUI = (props) => {
+const SettingsUI = (props) => {
   const {
-    categoryList
+    categoryList,
+    settingsType
   } = props
 
   const [, t] = useLanguage()
@@ -48,18 +49,19 @@ const BasicSettingsUI = (props) => {
 
   const onBasicSettingsRedirect = ({ category, config }) => {
     if (!category && !config) {
-      return events.emit('go_to_page', { page: 'basicSettings', replace: true })
+      if (settingsType === 'basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
+      if (settingsType === 'operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
     }
     if (!config && category) {
       events.emit('go_to_page', {
-        page: 'basicSettings',
+        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: `?category=${category}`,
         replace: true
       })
     }
     if (category && config) {
       events.emit('go_to_page', {
-        page: 'basicSettings',
+        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: `?category=${category}&config=${config}`,
         replace: true
       })
@@ -81,7 +83,11 @@ const BasicSettingsUI = (props) => {
   return (
     <>
       <BasicSettingsContainer>
-        <Title>{t('BASIC_SETTINGS', 'Basic settings ')}</Title>
+        <Title>
+          {
+            settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
+          }
+        </Title>
         <ContentWrapper className='row'>
           {
             categoryList.loading ? (
@@ -117,12 +123,12 @@ const BasicSettingsUI = (props) => {
   )
 }
 
-export const BasicSettings = (props) => {
-  const basicSettingsProps = {
+export const Settings = (props) => {
+  const settingsProps = {
     ...props,
-    UIComponent: BasicSettingsUI
+    UIComponent: SettingsUI
   }
   return (
-    <BasicSettingsController {...basicSettingsProps} />
+    <SettingsController {...settingsProps} />
   )
 }
