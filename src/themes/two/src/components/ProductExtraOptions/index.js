@@ -235,7 +235,7 @@ const ProductExtraOptionsUI = (props) => {
                     <input
                       name='name'
                       defaultValue={option.name}
-                      onChange={(e) => handleChangeInput(e, option)}
+                      onChange={(e) => handleChangeInput(e, option.id)}
                     />
                   </OptionNameContainer>
                 </td>
