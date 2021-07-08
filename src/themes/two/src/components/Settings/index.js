@@ -112,7 +112,7 @@ const SettingsUI = (props) => {
             open={isOpenDescription}
             category={selectedCategory}
             categoryId={categoryId}
-            configId={configId}
+            configId={parseInt(configId)}
             onClose={handleBackRedirect}
             onBasicSettingsRedirect={onBasicSettingsRedirect}
           />
