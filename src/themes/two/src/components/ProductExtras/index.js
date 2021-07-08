@@ -147,6 +147,7 @@ const ProductExtrasUI = (props) => {
               open={openExtraDetails}
               onClose={() => handleCloseExtraDetails()}
               business={business}
+              businessId={business.id}
               extra={currentExtra}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
@@ -163,8 +164,8 @@ const ProductExtrasUI = (props) => {
               <ProductExtraOptions
                 open={openExtraDetails}
                 onClose={() => handleCloseExtraDetails()}
-                product={productState.product}
                 business={business}
+                businessId={business.id}
                 extra={currentExtra}
                 handleUpdateBusinessState={handleUpdateBusinessState}
               />

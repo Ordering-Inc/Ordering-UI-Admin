@@ -11,6 +11,7 @@ import BiImage from '@meronex/icons/bi/BiImage'
 import { bytesConverter } from '../../../../../utils'
 import { Alert, Confirm } from '../Confirm'
 import Skeleton from 'react-loading-skeleton'
+import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
 
 import {
   MainContainer,
@@ -41,7 +42,8 @@ const ProductExtraOptionsUI = (props) => {
     addChangesState,
     handleAddOption,
     handleChangeAddOptionEnable,
-    handleDeteteOption
+    handleDeteteOption,
+    businessId
   } = props
 
   const theme = useTheme()
@@ -330,6 +332,10 @@ const ProductExtraOptionsUI = (props) => {
           </tbody>
         </OptionsTable>
       </OptionsContainer>
+      <ProductExtraMetaFields
+        businessId={businessId}
+        extraId={extraState.extra.id}
+      />
       <Alert
         title={t('ORDERING', 'Ordering')}
         content={alertState.content}
