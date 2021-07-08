@@ -29,6 +29,7 @@ export const Header = styled.div`
   justify-content: space-between;
   h1 {
     font-size: 24px;
+    font-weight: 600;
     color: ${props => props.theme.colors.headingColor};
   }
 
@@ -85,6 +86,9 @@ export const OptionsTable = styled.table`
   thead, tbody {
     border-bottom: 1px solid #E9ECEF;
   }
+  tbody.add_option {
+    border-top: 13px solid #E9ECEF;
+  }
 `
 
 export const OptionNameContainer = styled.div`
@@ -138,13 +142,9 @@ export const UploadImageIconContainer = styled.div`
     padding: 8px;
   `}
   svg {
-    ${({ small }) => small ? css`
-      width: 25px;
-      height: 25px;
-    ` : css`
-      width: 45px;
-      height: 45px;
-    `}
+    color: #FFF;
+    width: 25px;
+    height: 25px;
   }
 `
 
@@ -159,6 +159,12 @@ export const SkeletonWrapper = styled.div`
 export const ActionsContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  > svg {
+    color: ${props => props.theme.colors.primary};
+    font-size: 20px;
+    cursor: pointer;
+  }
 `
 
 export const EnableWrapper = styled.div`
