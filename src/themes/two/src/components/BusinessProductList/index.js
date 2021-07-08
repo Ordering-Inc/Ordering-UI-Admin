@@ -99,12 +99,14 @@ export const BusinessProductList = (props) => {
                 <>
                   {
                     categoryState.products.map((product, i) => (
-                      <SingleBusinessProduct
-                        {...props}
-                        key={i}
-                        product={product}
-                        allowColumns={allowColumns}
-                      />
+                      product.id && (
+                        <SingleBusinessProduct
+                          {...props}
+                          key={i}
+                          product={product}
+                          allowColumns={allowColumns}
+                        />
+                      )
                     ))
                   }
                   {

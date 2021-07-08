@@ -11,7 +11,9 @@ export const SpreadSheetEditor = (props) => {
     headerItems,
     hotTableData,
     handleItemChange,
-    handleRowRemove
+    handleRowRemove,
+    handleAfterSectionEnd,
+    handleoutsideClickDeselects
   } = props
   const [, t] = useLanguage()
   const [cache, setCache] = useState(null)
@@ -25,6 +27,7 @@ export const SpreadSheetEditor = (props) => {
     autoColumnSize: false,
     width: '100%',
     minSpareRows: 1,
+    stretchH: 'all',
     copyPaste: true,
     undo: true,
     contextMenu: {
@@ -34,12 +37,6 @@ export const SpreadSheetEditor = (props) => {
         },
         remove_row: {
           name: t('SPREADSHEET_REMOVE_ROW')
-        },
-        undo: {
-          name: t('SPREADSHEET_UNDO')
-        },
-        redo: {
-          name: t('SPREADSHEET_REDO')
         },
         paste: {
           key: 'paste',
@@ -61,17 +58,6 @@ export const SpreadSheetEditor = (props) => {
     }
   }
 
-  useEffect(() => {
-    const interVal = setInterval(() => {
-      if (navigator.clipboard) {
-        navigator.clipboard.readText().then(function (clipboardData) {
-          if (clipboardData) setCache(clipboardData)
-        }).catch(function (e) { })
-      }
-    }, 500)
-    return () => clearInterval(interVal)
-  }, [cache])
-
   const handleAfterChange = (changes, accionHanson) => {
     if (hotTableRef?.current?.hotInstance) {
       const hotTableObj = hotTableRef?.current?.hotInstance
@@ -86,6 +72,36 @@ export const SpreadSheetEditor = (props) => {
     }
   }
 
+  const afterSelectionEnd = (row, col, row1, col1) => {
+    if (hotTableRef?.current?.hotInstance) {
+      const hotTableObj = hotTableRef?.current?.hotInstance
+      handleAfterSectionEnd && handleAfterSectionEnd(row, col, row1, col1, hotTableObj)
+    }
+  }
+
+  const outsideClickDeselects = (event) => {
+    if (hotTableRef?.current?.hotInstance) {
+      handleoutsideClickDeselects && handleoutsideClickDeselects(event)
+    }
+  }
+
+  useEffect(() => {
+    if (hotTableRef?.current?.hotInstance) {
+      const hotTableObj = hotTableRef?.current?.hotInstance
+      hotTableObj.loadData(hotTableData)
+    }
+  }, [hotTableData])
+  useEffect(() => {
+    const interVal = setInterval(() => {
+      if (navigator.clipboard) {
+        navigator.clipboard.readText().then(function (clipboardData) {
+          if (clipboardData) setCache(clipboardData)
+        }).catch(function (e) { })
+      }
+    }, 500)
+    return () => clearInterval(interVal)
+  }, [cache])
+
   return (
     <SpreadSheetContainer>
       <HotTable
@@ -93,6 +109,8 @@ export const SpreadSheetEditor = (props) => {
         afterChange={(changes, accionHanson) => handleAfterChange(changes, accionHanson)}
         ref={hotTableRef}
         beforeRemoveRow={(index, amount, physicalRows) => handleBeforeRemoveRow(index, amount, physicalRows)}
+        afterSelectionEnd={(row, col, row1, col1) => afterSelectionEnd(row, col, row1, col1)}
+        outsideClickDeselects={(event) => outsideClickDeselects(event)}
       >
         {
           headerItems && headerItems.length > 0 && headerItems.map((item, i) => (

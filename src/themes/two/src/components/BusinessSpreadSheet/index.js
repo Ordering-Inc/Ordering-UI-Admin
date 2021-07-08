@@ -4,7 +4,7 @@ import { SpreadSheetEditor } from '../SpreadSheetEditor'
 import { BusinessSpreadSheet as BusinessSpreadSheetController } from './naked'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
-import { Alert, Confirm } from '../Confirm'
+import { Alert } from '../Confirm'
 import {
   BusinessSpreadSheetContainer
 } from './styles'
@@ -13,12 +13,13 @@ const BusinessSpreadSheetUI = (props) => {
   const {
     handleItemChange,
     spreadSheetState,
-    handleRowRemove
+    handleRowRemove,
+    handleAfterSectionEnd,
+    handleoutsideClickDeselects
   } = props
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [confirmState, setConfirmState] = useState({ open: false, content: [] })
 
   const spreadSheetHeaderItems = [
     { title: t('ID', 'Id'), code: 'id', readOnly: true, type: 'numeric' },
@@ -32,13 +33,6 @@ const BusinessSpreadSheetUI = (props) => {
     setAlertState({
       open: false,
       content: []
-    })
-  }
-
-  const closeConfrim = () => {
-    setConfirmState({
-      open: false,
-      content: ''
     })
   }
 
@@ -60,7 +54,6 @@ const BusinessSpreadSheetUI = (props) => {
 
   useEffect(() => {
     if (spreadSheetState?.result?.error) {
-      console.log(spreadSheetState?.result?.result)
       setAlertState({
         open: true,
         content: spreadSheetState?.result?.result
@@ -77,6 +70,8 @@ const BusinessSpreadSheetUI = (props) => {
           headerItems={spreadSheetHeaderItems}
           handleItemChange={handleItemChange}
           handleRowRemove={handleRowRemove}
+          handleAfterSectionEnd={handleAfterSectionEnd}
+          handleoutsideClickDeselects={handleoutsideClickDeselects}
         />
       </BusinessSpreadSheetContainer>
       <Alert
@@ -86,15 +81,6 @@ const BusinessSpreadSheetUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-      <Confirm
-        title={t('PRODUCT', 'Product')}
-        content={confirmState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirmState.open}
-        onClose={() => closeConfrim()}
-        onAccept={() => closeConfrim()}
         closeOnBackdrop={false}
       />
     </>

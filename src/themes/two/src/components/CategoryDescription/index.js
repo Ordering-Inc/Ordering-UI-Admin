@@ -153,9 +153,9 @@ const CategoryDescriptionUI = (props) => {
             }
             <VideoContainer>
               <MdcPlayCircle onClick={playVideo} />
-              <video muted id="categoryVideo" className="w-100 custom-video" playsInline>
-                <source src={category.video} type="video/mp4" />
-                <source src={category.video} type="video/webm" />
+              <video muted id='categoryVideo' className='w-100 custom-video' playsInline>
+                <source src={category.video} type='video/mp4' />
+                <source src={category.video} type='video/webm' />
               </video>
             </VideoContainer>
             <AllSetting onClick={() => handleExtraOpen(false)}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, BasicSettings as BasicSettingsController } from 'ordering-components-admin'
+import { useLanguage, useEvent } from 'ordering-components-admin'
+import { BasicSettings as BasicSettingsController } from './naked'
 import { SettingItemUI } from '../SettingItemUI'
 import { CategoryDescription } from '../CategoryDescription'
 
@@ -11,7 +12,6 @@ import {
 } from './styles'
 
 const BasicSettingsUI = (props) => {
-
   const {
     categoryList
   } = props
@@ -82,17 +82,17 @@ const BasicSettingsUI = (props) => {
     <>
       <BasicSettingsContainer>
         <Title>{t('BASIC_SETTINGS', 'Basic settings ')}</Title>
-        <ContentWrapper className="row">
+        <ContentWrapper className='row'>
           {
             categoryList.loading ? (
               [...Array(12).keys()].map(i => (
-                <div className="col-md-4 col-sm-6" key={i}>
+                <div className='col-md-4 col-sm-6' key={i}>
                   <SettingItemUI isSkeleton />
                 </div>
               ))
             ) : (
               categoryList.categories.map((category, i) => (
-                <div className="col-md-4 col-sm-6 category" key={i} onClick={() => handleOpenDescription(category)}>
+                <div className='col-md-4 col-sm-6 category' key={i} onClick={() => handleOpenDescription(category)}>
                   <SettingItemUI category={category} />
                 </div>
               ))
@@ -120,7 +120,7 @@ const BasicSettingsUI = (props) => {
 export const BasicSettings = (props) => {
   const basicSettingsProps = {
     ...props,
-    UIComponent: BasicSettingsUI,
+    UIComponent: BasicSettingsUI
   }
   return (
     <BasicSettingsController {...basicSettingsProps} />

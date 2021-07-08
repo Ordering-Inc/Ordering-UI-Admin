@@ -19,6 +19,38 @@ export const BusinessSpreadSheet = (props) => {
   const [formState, setFormState] = useState({ products: null, loading: false, result: { error: false } })
   const [removingWithSupr, setRemovingWithSupr] = useState(false)
   const [undo, setUndo] = useState(false)
+  const [curCell, setCurCell] = useState({
+    row: -1,
+    col: -1
+  })
+
+  /**
+   * Method to remove a row from spreadSheet table
+   * @param {Number} row Number of selected row
+   * @param {Number} col Number of selected col
+   * @param {Number} row1 Number of selected row
+   * @param {Number} col1 Number of selected col
+   * @param {Object} hotTableObj Object for spreadSheet mode table
+   */
+  const handleAfterSectionEnd = (row, col, row1, col1, hotTableObj) => {
+    if ((curCell.row === row && curCell.col === col) || (row !== row1 || col !== col1)) return
+    curCell.row = row
+    curCell.col = col
+    setCurCell({
+      row: row,
+      col: col
+    })
+    hotTableObj.deselectCell()
+    hotTableObj.selectCell(row, col)
+  }
+
+  const handleoutsideClickDeselects = () => {
+    setCurCell({
+      row: -1,
+      col: -1
+    })
+    return false
+  }
 
   /**
    * Method to remove a row from spreadSheet table
@@ -28,16 +60,17 @@ export const BusinessSpreadSheet = (props) => {
    * @param {Object} hotTableObj Object for spreadSheet mode table
    */
   const handleRowRemove = (row, amount, dataRows, hotTableObj) => {
+    if (!hotTableObj) return
     const toRemove = []
     for (const dataRow of dataRows) {
-      toRemove.push(hotTableObj.getSourceDataAtRow(dataRow).id)
+      toRemove.push(hotTableObj?.getSourceDataAtRow(dataRow).id)
     }
     if (removingWithSupr) {
       setRemovingWithSupr(false)
-      deleteProducts(toRemove)
-      return
     }
-    deleteProducts(toRemove)
+    setTimeout(() => {
+      deleteProducts(toRemove)
+    }, 1)
   }
 
   const handleItemChange = (changeItems, accionHanson, hotTableObj) => {
@@ -67,7 +100,7 @@ export const BusinessSpreadSheet = (props) => {
           }
           if (valid) {
             changes.push(item[0])
-            var row = hotTableObj.getSourceDataAtRow(item[0])
+            const row = hotTableObj.getSourceDataAtRow(item[0])
             hotTableObj.validateRows(changes, function (res) { })
             if (!row.name) {
               error.name = true
@@ -80,7 +113,7 @@ export const BusinessSpreadSheet = (props) => {
               })
             }
             if (row.price && typeof (row.price) !== 'number') {
-              var price = parseFloat(row.price)
+              const price = parseFloat(row.price)
               if (!price) {
                 error.price = true
                 setFormState({
@@ -120,7 +153,7 @@ export const BusinessSpreadSheet = (props) => {
               } else {
                 if (!(error.price || error.name || error.quantity)) {
                   if (!row.description) row.description = null
-                  var _update = {
+                  const _update = {
                     id: row.id,
                     name: row.name,
                     description: row.description ? row.description : ' ',
@@ -141,11 +174,10 @@ export const BusinessSpreadSheet = (props) => {
       })
 
       if (itemToAdd.length > 0) {
-        console.log(itemToAdd, 'this is itemToAdd')
         editProducts(itemToAdd, true, hotTableObj)
       }
+
       if (itemToUpdate.length > 0) {
-        console.log(itemToUpdate, 'this is itemToUpdate')
         editProducts(itemToUpdate, false, hotTableObj)
       }
 
@@ -182,7 +214,7 @@ export const BusinessSpreadSheet = (props) => {
             result: isPost ? t('PRODUCT_ADD', 'Product added') : t('PRODUCT_ADD', 'Product updated')
           }
         })
-        getProductsByCategoryId(hotTableObj)
+        getProductsByCategoryId()
       } else {
         setFormState({
           ...formState,
@@ -208,7 +240,7 @@ export const BusinessSpreadSheet = (props) => {
   /**
    * Method to edit a product
    */
-  const getProductsByCategoryId = async (hotTableObj) => {
+  const getProductsByCategoryId = async () => {
     if (loading) return
     try {
       const id = categoryId || categorySelected.id
@@ -218,15 +250,6 @@ export const BusinessSpreadSheet = (props) => {
       }
       const { content: { error, result } } = await ordering.businesses(businessState?.business.id).categories(parseInt(id)).products().parameters(params).get()
       if (!error) {
-        setFormState({
-          ...formState,
-          products: result,
-          loading: false,
-          result: {
-            error: false,
-            result: t('PRODUCT_SAVED', 'Product saved')
-          }
-        })
         if (setBusinessState) {
           const _categories = businessState.business.categories.map(item => {
             if (parseInt(item.id) === parseInt(id)) {
@@ -242,7 +265,15 @@ export const BusinessSpreadSheet = (props) => {
             business: { ...businessState.business, categories: _categories }
           })
         }
-        hotTableObj.loadData(result)
+        setFormState({
+          ...formState,
+          products: result,
+          loading: false,
+          result: {
+            error: false,
+            result: t('PRODUCT_SAVED', 'Product saved')
+          }
+        })
       } else {
         setFormState({
           ...formState,
@@ -291,6 +322,7 @@ export const BusinessSpreadSheet = (props) => {
             result: t('PRODUCT_DELETE', 'Product deleted')
           }
         })
+        getProductsByCategoryId()
       } else {
         setFormState({
           ...formState,
@@ -314,7 +346,11 @@ export const BusinessSpreadSheet = (props) => {
   }
 
   useEffect(() => {
-    setFormState({ ...formState, products: categoryState.products })
+    const spreadProducts = []
+    for (const product of categoryState.products) {
+      spreadProducts.push(product)
+    }
+    setFormState({ ...formState, products: spreadProducts })
   }, [categoryState?.products])
 
   return (
@@ -325,6 +361,8 @@ export const BusinessSpreadSheet = (props) => {
           handleItemChange={handleItemChange}
           spreadSheetState={formState}
           handleRowRemove={handleRowRemove}
+          handleAfterSectionEnd={handleAfterSectionEnd}
+          handleoutsideClickDeselects={handleoutsideClickDeselects}
         />
       )}
     </>
@@ -337,9 +375,17 @@ BusinessSpreadSheet.propTypes = {
    */
   UIComponent: PropTypes.elementType,
   /**
-   * Components types before single business card
-   * Array of type components, the parent props will pass to these components
+   * Object for a business
    */
+  businessState: PropTypes.object,
+  /**
+    * Function to set a business state
+    */
+  setBusinessState: PropTypes.func,
+  /**
+    * Components types before single business card
+    * Array of type components, the parent props will pass to these components
+    */
   beforeComponents: PropTypes.arrayOf(PropTypes.elementType),
   /**
    * Components types after single business card
