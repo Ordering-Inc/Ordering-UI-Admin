@@ -12,6 +12,8 @@ import { bytesConverter } from '../../../../../utils'
 import { Alert, Confirm } from '../Confirm'
 import Skeleton from 'react-loading-skeleton'
 import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
+import { Modal } from '../Modal'
+import { ProductExtraOptionDetails } from '../ProductExtraOptionDetails'
 
 import {
   MainContainer,
@@ -43,7 +45,7 @@ const ProductExtraOptionsUI = (props) => {
     handleAddOption,
     handleChangeAddOptionEnable,
     handleDeteteOption,
-    businessId
+    business
   } = props
 
   const theme = useTheme()
@@ -54,6 +56,8 @@ const ProductExtraOptionsUI = (props) => {
   const ActionIcon = <FiMoreVertical />
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [curOption, setCurOption] = useState(null)
+  const [openModal, setOpenModal] = useState({})
 
   const closeAlert = () => {
     cleanEditErrors()
@@ -153,6 +157,11 @@ const ProductExtraOptionsUI = (props) => {
     })
   }
 
+  const handleOpenOption = (option) => {
+    setCurOption(option)
+    setOpenModal({ ...openModal, edit: true })
+  }
+
   useEffect(() => {
     if (isMenuOpen) {
       if (width < 1000) {
@@ -187,7 +196,7 @@ const ProductExtraOptionsUI = (props) => {
     <MainContainer id='extra_options'>
       <OptionsContainer>
         <Header>
-          <h1>{t('OPTIONS', 'Options')}</h1>
+          <h1>{extraState.extra.name}</h1>
           <MdcClose
             onClick={() => onClose()}
           />
@@ -278,7 +287,7 @@ const ProductExtraOptionsUI = (props) => {
                         title={ActionIcon}
                         id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                       >
-                        <Dropdown.Item>{t('EDIT', 'Edit')}</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleOpenOption(option)}>{t('EDIT', 'Edit')}</Dropdown.Item>
                         <Dropdown.Item onClick={() => console.log()}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleDeteteClick(option.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
                       </DropdownButton>
@@ -333,7 +342,7 @@ const ProductExtraOptionsUI = (props) => {
         </OptionsTable>
       </OptionsContainer>
       <ProductExtraMetaFields
-        businessId={businessId}
+        businessId={business.id}
         extraId={extraState.extra.id}
       />
       <Alert
@@ -355,6 +364,20 @@ const ProductExtraOptionsUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      {openModal?.edit && (
+        <Modal
+          width='70%'
+          open={openModal?.edit}
+          onClose={() => setOpenModal({ ...openModal, edit: false })}
+        >
+          <ProductExtraOptionDetails
+            business={business}
+            extra={extraState.extra}
+            option={curOption}
+            formState={formState}
+          />
+        </Modal>
+      )}
     </MainContainer>
   )
 }
