@@ -11,7 +11,8 @@ import {
   ProductListContainer,
   BusinessProductListTable,
   WrapperNotFound,
-  AddProductBtn
+  AddProductBtn,
+  ProductListSpreadContainer
 } from './styles'
 
 export const BusinessProductList = (props) => {
@@ -145,7 +146,7 @@ export const BusinessProductList = (props) => {
       {
         viewMethod === 'spreedsheet' && (
           <>
-            <ProductListContainer>
+            <ProductListSpreadContainer>
               {(categoryState.loading || businessState.loading) ? (
                 [...Array(30).keys()].map(i => (
                   <SingleBusinessProduct
@@ -160,7 +161,7 @@ export const BusinessProductList = (props) => {
                   {...props}
                 />
               )}
-            </ProductListContainer>
+            </ProductListSpreadContainer>
             {
               !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
                 <WrapperNotFound>

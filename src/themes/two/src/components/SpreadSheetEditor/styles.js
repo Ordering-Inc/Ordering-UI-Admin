@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const SpreadSheetContainer = styled.div`
+  .ht_clone_top {
+    height: auto !important;
+  }
   .wtHider {
     width: 100% !important;
     .wtSpreader {
@@ -14,7 +17,7 @@ export const SpreadSheetContainer = styled.div`
   }
 
   table {
-    width: 100% !important;
+    min-width: 900px;
 
     td {
       padding: 15px;

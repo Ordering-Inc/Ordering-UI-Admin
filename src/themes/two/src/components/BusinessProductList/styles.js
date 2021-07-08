@@ -2,6 +2,12 @@ import styled, { css } from 'styled-components'
 
 export const ListContent = styled.div`
   margin-top: 35px;
+  height: 100%;
+  border: none;
+  
+  @media (min-width: 768px) {
+    border-left: 1px solid #E9ECEF;
+  }
 `
 
 export const ProductListContainer = styled.div`
@@ -14,6 +20,25 @@ export const ProductListContainer = styled.div`
     max-height: calc(100vh - 230px);
   }
   
+  @media (min-width: 576px) {
+    ${props => props.theme.rtl ? css`
+    margin-right: 30px;
+    ` : css`
+    margin-left: 30px;
+    `}
+  }
+`
+
+export const ProductListSpreadContainer = styled.div`
+  margin: 0;
+  max-height: calc(100vh - 380px);
+  min-height: 200px;
+  overflow: auto;
+
+  @media (min-width: 768px) {
+    max-height: calc(100vh - 230px);
+  }
+
   @media (min-width: 576px) {
     ${props => props.theme.rtl ? css`
     margin-right: 30px;

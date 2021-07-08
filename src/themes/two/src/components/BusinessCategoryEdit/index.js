@@ -3,9 +3,9 @@ import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick,
-  BusinessCategoryEdit as BusinessCategoryEditController
+  ExamineClick
 } from 'ordering-components-admin'
+import { BusinessCategoryEdit as BusinessCategoryEditController } from './naked'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { bytesConverter } from '../../../../../utils'
 import { Alert } from '../Confirm'

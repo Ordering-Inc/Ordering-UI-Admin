@@ -1,4 +1,3 @@
-
 import React from 'react'
 import styled, { css } from 'styled-components'
 
@@ -16,7 +15,6 @@ export const SingleListBusinessContainer = styled.tbody`
   .business {
     padding-right: 20px;
   }
-
   &:hover {
     background: #E9F2FE;
   }
@@ -30,7 +28,6 @@ export const BusinessGeneralInfo = styled.div`
 ` : css`
   border-right: 1px solid #E9ECEF;
 `}
-
   p {
     margin: 0;
     font-weight: 500;
@@ -46,7 +43,6 @@ export const WrapperImage = styled.div`
   width: 38px;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
   border-radius: 10px;
-
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
   ` : css`
@@ -60,7 +56,6 @@ export const InfoBlock = styled.div`
     font-size: 12px;
     color: ${props => props.theme.colors.headingColor};
   }
-
   &.description{
     p {
       font-size: 10px;
@@ -73,10 +68,8 @@ export const BusinessEnableWrapper = styled.div`
   display: flex;
   align-items: center;
   width: fit-content;
-
   span {
     font-size: 14px;
-
     ${props => props.theme?.rtl ? css`
       padding-left: 10px;
     ` : css`

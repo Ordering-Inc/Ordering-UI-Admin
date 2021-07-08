@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, BusinessProductListing as BusinessProductListingController } from 'ordering-components-admin'
+import Skeleton from 'react-loading-skeleton'
+import { useLanguage } from 'ordering-components-admin'
+import { BusinessProductListing as BusinessProductListingController } from './naked'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
@@ -68,7 +70,15 @@ const BusinessProductsListingUI = (props) => {
       <CategoryProductsContainer>
         <HeaderContainer>
           <div>
-            <h1>{t('STORES_LIST', 'Stores list')}</h1>
+            {
+              businessState.loading ? (
+                <h1><Skeleton width={200} height={30} /></h1>
+              ) : (
+                businessState?.business?.name && (
+                  <h1>{businessState?.business?.name}</h1>
+                )
+              )
+            }
           </div>
           <SearchBar
             isCustomLayout

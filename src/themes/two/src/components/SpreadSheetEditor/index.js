@@ -26,6 +26,7 @@ export const SpreadSheetEditor = (props) => {
     autoRowSize: false,
     autoColumnSize: false,
     width: '100%',
+    height: '100%',
     minSpareRows: 1,
     stretchH: 'all',
     copyPaste: true,
