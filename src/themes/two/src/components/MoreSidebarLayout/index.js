@@ -21,10 +21,9 @@ export const MoreSidebarLayout = (props) => {
   return (
     <>
       {width > 1000 ? (
-        <MainContainer
-          isExtendExtraOpen={isExtendExtraOpen}
-        >
+        <MainContainer>
           <CloseButton
+            isExtendExtraOpen={isExtendExtraOpen}
             onClick={() => props.onClose()}
           >
             <MdcClose />

@@ -1,8 +1,14 @@
 import styled, { css } from 'styled-components'
 
+export const MainContainer = styled.div`
+  display: flex;
+  height: 100%;
+`
+
 export const ProductExtrasContainer = styled.div`
   height: 100%;
   overflow-x: hidden;
+  flex: 1;
 
   @media (min-width: 1000px) {
     padding: 20px;
@@ -52,6 +58,7 @@ export const CheckboxContainer = styled.div`
     padding: 5px 10px;
     outline: none;
     border: none;
+    font-size: 14px;
   }
 `
 
@@ -67,6 +74,7 @@ export const MoreContainer = styled.div`
 
 export const Details = styled.div`
   cursor: pointer;
+  font-size: 14px;
   color: ${props => props.theme.colors.primary};
   ${props => props.theme?.rtl ? css`
     margin-left: 15px;

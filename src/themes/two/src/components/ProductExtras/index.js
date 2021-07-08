@@ -3,8 +3,11 @@ import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-
 import { PlusSquare, Trash } from 'react-bootstrap-icons'
 import { Checkbox } from '../../styles/Checkbox'
 import { Alert, Confirm } from '../Confirm'
+import { Modal } from '../Modal'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
+  MainContainer,
   ProductExtrasContainer,
   Header,
   ExtraOption,
@@ -14,6 +17,7 @@ import {
   ExtraAddContainer,
   AddButton
 } from './styles'
+import { ProductExtraOptions } from '../ProductExtraOptions'
 
 const ProductExtrasUI = (props) => {
   const {
@@ -26,12 +30,30 @@ const ProductExtrasUI = (props) => {
     handleDeteteExtra,
     handleAddExtra,
     handleClickExtra,
-    handleChangeAddExtraInput
+    handleChangeAddExtraInput,
+    setIsExtendExtraOpen,
+    business,
+    handleUpdateBusinessState
   } = props
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const conatinerRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
+  const [openExtraDetails, setOpenExtraDetails] = useState(false)
+  const [currentExtra, setCurrentExtra] = useState(null)
+
+  const handleOpenExtraDetails = (extra) => {
+    setIsExtendExtraOpen(true)
+    setCurrentExtra(extra)
+    setOpenExtraDetails(true)
+  }
+
+  const handleCloseExtraDetails = () => {
+    setOpenExtraDetails(false)
+    setIsExtendExtraOpen(false)
+  }
 
   const isCheckState = (extraId) => {
     const found = productState?.product?.extras.find(extra => extra?.id === extraId)
@@ -72,7 +94,7 @@ const ProductExtrasUI = (props) => {
   }, [productState, extrasState])
 
   return (
-    <>
+    <MainContainer>
       <ProductExtrasContainer>
         <Header>
           <h1>{t('PRODUCT_EXTRAS', 'Product extras')}</h1>
@@ -92,7 +114,7 @@ const ProductExtrasUI = (props) => {
               />
             </CheckboxContainer>
             <MoreContainer>
-              <Details>
+              <Details onClick={() => handleOpenExtraDetails(extra)}>
                 {t('DETAILS', 'Details')}
               </Details>
               <Trash
@@ -118,6 +140,38 @@ const ProductExtrasUI = (props) => {
           {t('ADD_INGREDIENT', 'Add ingredient')}
         </AddButton>
       </ProductExtrasContainer>
+      {width >= 1000 ? (
+        <>
+          {openExtraDetails && (
+            <ProductExtraOptions
+              open={openExtraDetails}
+              onClose={() => handleCloseExtraDetails()}
+              business={business}
+              extra={currentExtra}
+              handleUpdateBusinessState={handleUpdateBusinessState}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          {openExtraDetails && (
+            <Modal
+              width='80%'
+              open={openExtraDetails}
+              onClose={() => handleCloseExtraDetails()}
+            >
+              <ProductExtraOptions
+                open={openExtraDetails}
+                onClose={() => handleCloseExtraDetails()}
+                product={productState.product}
+                business={business}
+                extra={currentExtra}
+                handleUpdateBusinessState={handleUpdateBusinessState}
+              />
+            </Modal>
+          )}
+        </>
+      )}
       <Alert
         title={t('ORDERING', 'Ordering')}
         content={alertState.content}
@@ -137,7 +191,7 @@ const ProductExtrasUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
-    </>
+    </MainContainer>
   )
 }
 

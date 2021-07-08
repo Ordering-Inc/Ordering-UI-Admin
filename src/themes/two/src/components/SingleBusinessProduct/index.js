@@ -172,7 +172,6 @@ const SingleBusinessProductUI = (props) => {
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                      <Dropdown.Item onClick={() => console.log()}>{t('DUPLICATE', 'Duplicate')}</Dropdown.Item>
                       <Dropdown.Item onClick={deleteProduct}>{t('DELETE', 'Delete')}</Dropdown.Item>
                     </DropdownButton>
                   </ActionSelectorWrapper>

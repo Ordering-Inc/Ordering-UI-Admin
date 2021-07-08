@@ -59,9 +59,9 @@ export const ProductDetails = (props) => {
     }
   }
   useEffect(() => {
-    if (width > 1000) {
-      setIsExtendExtraOpen(false)
-    }
+    // if (width > 1000) {
+    //   setIsExtendExtraOpen(false)
+    // }
     toggleMainContent()
   }, [width])
 
@@ -86,12 +86,14 @@ export const ProductDetails = (props) => {
 
   return (
     <Container id='product_details'>
-      <ProductMainDetails
-        {...props}
-        actionSidebar={actionSidebar}
-        showOption={showOption}
-        handleShowOption={handleShowOption}
-      />
+      {(!isExtendExtraOpen || width < 1000) && (
+        <ProductMainDetails
+          {...props}
+          actionSidebar={actionSidebar}
+          showOption={showOption}
+          handleShowOption={handleShowOption}
+        />
+      )}
       {extraOpen && (
         <MoreSidebarLayout
           isExtendExtraOpen={isExtendExtraOpen}
@@ -115,6 +117,7 @@ export const ProductDetails = (props) => {
             <ProductExtras
               business={business}
               product={product}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
