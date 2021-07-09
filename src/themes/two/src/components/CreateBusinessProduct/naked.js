@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useSession, useApi } from 'ordering-components-admin'
+import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 
 /**
  * Component to manage Checkout page behavior without UI component
@@ -18,7 +18,8 @@ export const CreateBusinessProduct = (props) => {
 
   const [{ loading }] = useSession()
   const [ordering] = useApi()
-  const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
+  const [, t] = useLanguage()
+  const [formState, setFormState] = useState({ loading: false, changes: { enabled: true }, result: { error: false } })
 
   /**
   * Update credential data
@@ -77,12 +78,19 @@ export const CreateBusinessProduct = (props) => {
       } else {
         categoryId = parseInt(categorySelected.id)
       }
+      setFormState({
+        ...formState,
+        loading: true
+      })
       const { content } = await ordering.businesses(parseInt(businessState?.business.id)).categories(categoryId).products().save(formState.changes)
       if (!content.error) {
         setFormState({
           ...formState,
           changes: {},
-          result: content,
+          result: {
+            error: false,
+            result: t('PRODUCT_ADD', 'Product added')
+          },
           loading: false
         })
         const _categories = businessState.business.categories.map(item => {

@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const BusinessActionContainer = styled.div`
@@ -15,8 +14,12 @@ export const SingleListBusinessContainer = styled.tbody`
   .business {
     padding-right: 20px;
   }
+
   &:hover {
     background: #E9F2FE;
+    input {
+      background: #E9F2FE;
+    }
   }
 `
 
@@ -28,11 +31,23 @@ export const BusinessGeneralInfo = styled.div`
 ` : css`
   border-right: 1px solid #E9ECEF;
 `}
-  p {
-    margin: 0;
+
+  input {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 13px;
     color: ${props => props.theme.colors.headingColor};
+    border: 1px solid transparent;
+    outline: none;
+    transition: all 0.3s;
+    border-radius: 3px;
+    padding: 5px;
+  }
+
+  &:hover {
+    input {
+      border: 1px solid ${props => props.theme.colors.lightGray};
+      background: white;
+    }
   }
 `
 export const WrapperImage = styled.div`
@@ -51,15 +66,26 @@ export const WrapperImage = styled.div`
 `
 
 export const InfoBlock = styled.div`
-  p {
-    margin: 0;
-    font-size: 12px;
+  input {
+    font-weight: 500;
+    font-size: 13px;
     color: ${props => props.theme.colors.headingColor};
-  }
-  &.description{
-    p {
-      font-size: 10px;
+    border: 1px solid transparent;
+    outline: none;
+    transition: all 0.3s;
+    border-radius: 3px;
+    padding: 5px;
+
+    &.description{
+      font-size: 11px;
       color: ${props => props.theme.colors.lightGray};
+    }
+  }
+
+  &:hover {
+    > input {
+      border: 1px solid ${props => props.theme.colors.lightGray};
+      background: white;
     }
   }
 `
@@ -76,35 +102,6 @@ export const BusinessEnableWrapper = styled.div`
       padding-right: 10px;
     `}
   }
-`
-
-const ImageStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  border-radius: 10px;
-`
-export const Image = (props) => {
-  return (
-    <ImageStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </ImageStyled>
-  )
-}
-
-export const InputName = styled.input`
-  border: none;
-  outline: none;
-  width: 100%;
 `
 
 export const ActionSelectorWrapper = styled.div`
@@ -133,5 +130,50 @@ export const ActionSelectorWrapper = styled.div`
         color: #E63757;
       }
     }
+  }
+`
+
+export const ProductTypeImage = styled.div`
+  min-height: 38px;
+  min-width: 38px;
+  height: 38px;
+  width: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: -webkit-grab;
+  cursor: grab;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+
+  ${props => props.theme?.rtl ? css`
+  maring-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
+  img,
+  div {
+    width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    overflow: hidden;
+  };
+
+  img{
+    object-fit: cover;
+  }
+`
+
+export const UploadWrapper = styled.div`
+  border-radius: 5px;
+  background: ${props => props.theme.colors.lightGray};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    color: white;
   }
 `

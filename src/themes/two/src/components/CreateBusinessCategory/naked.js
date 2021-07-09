@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useSession, useApi } from 'ordering-components-admin'
+import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 
 /**
  * Component to manage Checkout page behavior without UI component
@@ -17,8 +17,9 @@ export const CreateBusinessCategory = (props) => {
 
   const [{ loading }] = useSession()
   const [ordering] = useApi()
+  const [, t] = useLanguage()
 
-  const [categoryState, setCategoryState] = useState({ loading: false, category: {}, result: { error: false } })
+  const [categoryState, setCategoryState] = useState({ loading: false, category: { enabled: true }, result: { error: false } })
 
   /**
  * Update credential data
@@ -67,12 +68,19 @@ export const CreateBusinessCategory = (props) => {
   const handleUpdateClick = async () => {
     if (loading) return
     try {
+      setCategoryState({
+        ...categoryState,
+        loading: true
+      })
       const { content } = await ordering.businesses(parseInt(businessState.business.id)).categories().save(categoryState.category)
       if (!content.error) {
         setCategoryState({
           ...categoryState,
           category: {},
-          result: content,
+          result: {
+            error: false,
+            result: t('CATEGORY_ADD', 'Category added')
+          },
           loading: false
         })
         const _categories = businessState.business.categories.map(item => {

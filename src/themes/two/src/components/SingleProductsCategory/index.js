@@ -1,22 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage } from 'ordering-components-admin'
+import { toast } from 'react-toastify'
+import {
+  useLanguage,
+  DragAndDrop,
+  ExamineClick
+} from 'ordering-components-admin'
 import { SingleProductsCategory as SingleProductsCategoryController } from './naked'
 import { Alert } from '../Confirm'
+import { bytesConverter } from '../../../../../utils'
 import { Switch } from '../../styles/Switch'
 import { useTheme } from 'styled-components'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import BiImage from '@meronex/icons/bi/BiImage'
 import {
   SingleCategoryContainer,
   CategoryContent,
   CategoryActionContainer,
   CategoryEnableWrapper,
-  CategoryImage,
-  DefaultImgWrapper,
   ActionSelectorWrapper
 } from './styles'
-import { InputName } from '../SingleBusinessProduct/styles'
+import {
+  ProductTypeImage,
+  UploadWrapper
+} from '../SingleBusinessProduct/styles'
 
 export const SingleProductsCategoryUI = (props) => {
   const {
@@ -27,34 +35,22 @@ export const SingleProductsCategoryUI = (props) => {
     handelChangeCategoryActive,
     handleUpdateClick,
     deleteCategory,
-    handleOpenCategoryDetails
+    handleOpenCategoryDetails,
+    categoryFormState,
+    handlechangeImage,
+    handleInputChange,
+    isEditMode
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const categoryNameEditRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [isEditMode, setIsEditMode] = useState(false)
+  const conatinerRef = useRef(null)
+  const ProductTypeImgRef = useRef(null)
   const ActionIcon = <FiMoreVertical />
 
-  const closeEditMode = (e) => {
-    if (isEditMode && !e.target.closest('.category-name-edit') && !e.target.closest('.popup-component')) {
-      const inputValue = categoryNameEditRef.current.value
-      if (inputValue === '') {
-        setAlertState({
-          open: true,
-          content: [t('CATEGORY_NAME_IS_REQUIRED', 'Category name is Required')]
-        })
-      } else {
-        setIsEditMode(false)
-        handleUpdateClick(inputValue)
-      }
-    }
+  const handleClickImage = () => {
+    ProductTypeImgRef.current.click()
   }
-
-  useEffect(() => {
-    document.addEventListener('click', closeEditMode)
-    return () => document.removeEventListener('click', closeEditMode)
-  }, [isEditMode])
 
   const closeAlert = () => {
     setAlertState({
@@ -63,19 +59,110 @@ export const SingleProductsCategoryUI = (props) => {
     })
   }
 
+  const handleFiles = (files) => {
+    if (files.length === 1) {
+      const type = files[0].type.split('/')[0]
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        })
+        return
+      }
+
+      if (bytesConverter(files[0]?.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        })
+        return
+      }
+      handlechangeImage(files[0])
+    }
+  }
+
+  const closeProductEdit = (e) => {
+    const outsideDropdown = !conatinerRef.current?.contains(e.target)
+    if (outsideDropdown) {
+      if (!e.target.closest('.popup-component')) {
+        if (isEditMode && Object.keys(categoryFormState?.changes).length > 0 && !categoryFormState?.loading) {
+          handleUpdateClick()
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (categoryFormState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: categoryFormState?.result?.result
+      })
+    }
+  }, [categoryFormState?.result])
+
+  useEffect(() => {
+    document.addEventListener('click', closeProductEdit)
+    return () => document.removeEventListener('click', closeProductEdit)
+  }, [categoryFormState])
+
+  useEffect(() => {
+    if (categoryFormState?.changes && !categoryFormState?.result?.error && !categoryFormState?.loading) {
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = categoryFormState?.result?.result
+      toast.dark(content, toastConfigure)
+    }
+  }, [categoryFormState?.loading])
+
   return (
     <>
       <SingleCategoryContainer
         active={!isSkeleton && (category?.id === categorySelected?.id)}
         onClick={(e) => handleChangeCategory(e, category)}
+        ref={conatinerRef}
       >
         {
           isSkeleton
             ? <Skeleton width={41} height={41} />
             : (
-              category?.image
-                ? <CategoryImage src={category?.image} alt={category?.name} />
-                : <DefaultImgWrapper />
+              <ProductTypeImage
+                onClick={() => handleClickImage()}
+                disabled={categoryFormState?.loading}
+                className='img-section'
+              >
+                <ExamineClick
+                  onFiles={files => handleFiles(files)}
+                  childRef={(e) => { ProductTypeImgRef.current = e }}
+                  accept='image/png, image/jpeg, image/jpg'
+                  disabled={categoryFormState?.loading}
+                >
+                  <DragAndDrop
+                    onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                    accept='image/png, image/jpeg, image/jpg'
+                    disabled={categoryFormState?.loading}
+                  >
+                    {
+                      categoryFormState?.changes?.image
+                        ? (
+                          <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
+                        )
+                        : (
+                          <UploadWrapper>
+                            <BiImage />
+                          </UploadWrapper>
+                        )
+                    }
+                  </DragAndDrop>
+                </ExamineClick>
+              </ProductTypeImage>
             )
         }
 
@@ -84,15 +171,12 @@ export const SingleProductsCategoryUI = (props) => {
             isSkeleton
               ? <Skeleton height={15} />
               : (
-                isEditMode
-                  ? (
-                    <InputName
-                      className='category-name-edit'
-                      defaultValue={category?.name}
-                      ref={categoryNameEditRef}
-                    />
-                  )
-                  : <h2 onClick={() => setIsEditMode(true)}>{category?.name}</h2>
+                <input
+                  type='text'
+                  name='name'
+                  value={categoryFormState?.changes?.name || ''}
+                  onChange={handleInputChange}
+                />
               )
           }
           <CategoryActionContainer>

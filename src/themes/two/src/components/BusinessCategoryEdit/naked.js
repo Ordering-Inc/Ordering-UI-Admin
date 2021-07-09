@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useSession, useApi } from 'ordering-components-admin'
+import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 
 /**
  * Component to manage Checkout page behavior without UI component
@@ -18,7 +18,8 @@ export const BusinessCategoryEdit = (props) => {
 
   const [{ loading }] = useSession()
   const [ordering] = useApi()
-  const [formState, setFormState] = useState({ loading: false, changes: { enabled: false }, result: { error: false } })
+  const [, t] = useLanguage()
+  const [formState, setFormState] = useState({ loading: false, changes: { enabled: true }, result: { error: false } })
 
   useEffect(() => {
     if (!category) return
@@ -85,12 +86,19 @@ export const BusinessCategoryEdit = (props) => {
     const id = category?.id || categoryId
     if (loading) return
     try {
+      setFormState({
+        ...formState,
+        loading: true
+      })
       const { content } = await ordering.businesses(businessState?.business.id).categories(parseInt(id)).save(formState.changes)
       if (!content.error) {
         setFormState({
           ...formState,
           changes: content.result,
-          result: content,
+          result: {
+            error: false,
+            result: t('CATEGORY_UPDATE', 'Category Updated')
+          },
           loading: false
         })
         if (handleUpdateBusinessState) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { toast } from 'react-toastify'
 import {
   useLanguage,
   DragAndDrop,
@@ -24,8 +25,7 @@ import {
   BtnWrapper,
   UploadImageIconContainer,
   UploadImageIcon,
-  CategoryNameWrapper,
-  SkeletonWrapper
+  CategoryNameWrapper
 } from './styles'
 
 const BusinessCategoryEditUI = (props) => {
@@ -116,6 +116,22 @@ const BusinessCategoryEditUI = (props) => {
     actionSidebar(true)
   }, [open])
 
+  useEffect(() => {
+    if (formState?.changes && !formState?.result.error && !formState?.loading) {
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = formState?.result?.result
+      toast.dark(content, toastConfigure)
+    }
+  }, [formState?.loading])
+
   return (
     <>
       <Container id='editCategory'>
@@ -178,14 +194,11 @@ const BusinessCategoryEditUI = (props) => {
                       accept='image/png, image/jpeg, image/jpg'
                       disabled={formState?.loading}
                     >
-                      {formState?.loading
-                        ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                        : ((!formState?.changes?.image || formState?.result?.result === 'Network Error' || formState?.result?.error)
-                          ? <div />
-                          : formState?.changes?.image &&
-                            (
-                              <img src={formState?.changes?.image} alt='business type image' loading='lazy' />
-                            ))}
+                      {
+                      formState?.changes?.image
+                        ? <img src={formState?.changes?.image} alt='business type image' loading='lazy' />
+                        : <div />
+                      }
                       <UploadImageIconContainer>
                         <UploadImageIcon>
                           <FiCamera />

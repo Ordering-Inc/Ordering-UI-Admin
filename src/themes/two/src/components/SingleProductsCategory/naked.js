@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useSession, useApi } from 'ordering-components-admin'
+import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 
 /**
  * Component to manage Checkout page behavior without UI component
@@ -19,35 +19,53 @@ export const SingleProductsCategory = (props) => {
 
   const [{ loading }] = useSession()
   const [ordering] = useApi()
+  const [, t] = useLanguage()
 
-  const [createCategory, setCreateCategory] = useState({ category: {}, loading: false, error: null })
+  const [categoryFormState, setCategoryFormState] = useState({ changes: {}, loading: false, error: null })
+  const [isEditMode, setIsEditMode] = useState(false)
 
   const handelChangeCategoryActive = (isChecked) => {
     const params = { enabled: isChecked }
     editCategory(params)
   }
 
-  const handleUpdateClick = (value) => {
-    const params = { name: value }
+  const handleUpdateClick = () => {
+    const params = {
+      name: categoryFormState?.changes?.name,
+      image: categoryFormState?.changes?.image
+    }
     editCategory(params)
   }
   /**
- * Update business photo data
- * @param {File} file Image to change business photo
+ * Update category photo data
+ * @param {File} file Image to change category photo
  */
-  const handlechangeImage = (file, name) => {
+  const handlechangeImage = (file) => {
     const reader = new window.FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
-      setCreateCategory({
-        ...createCategory,
-        category: {
-          ...createCategory.category,
-          [name]: reader.result
+      setCategoryFormState({
+        ...categoryFormState,
+        changes: {
+          ...categoryFormState.changes,
+          image: reader.result
         }
       })
     }
     reader.onerror = error => console.log(error)
+    setIsEditMode(true)
+  }
+
+  /**
+   * Set properties of a category
+   * @param {EventTarget} evt Related Html element
+   */
+  const handleInputChange = (evt) => {
+    setCategoryFormState({
+      ...categoryFormState,
+      changes: { ...categoryFormState.changes, [evt.target.name]: evt.target.value }
+    })
+    setIsEditMode(true)
   }
 
   /**
@@ -56,31 +74,54 @@ export const SingleProductsCategory = (props) => {
   const editCategory = async (params) => {
     if (loading) return
     try {
+      setCategoryFormState({
+        ...categoryFormState,
+        loading: true
+      })
       const { content: { error, result } } = await ordering.businesses(parseInt(businessState?.business.id)).categories(parseInt(category.id)).save(params)
       if (!error) {
-        const _categories = businessState.business.categories.map(item => {
-          if (item.id === category.id) {
-            return {
-              ...item,
-              ...params
-            }
+        setCategoryFormState({
+          ...categoryFormState,
+          loading: false,
+          result: {
+            error: false,
+            result: t('CATEGORY_UPDATED', 'Category updated')
           }
-          return item
         })
-        setBusinessState({
-          ...businessState,
-          business: { ...businessState.business, categories: _categories }
-        })
+        setIsEditMode(false)
+        if (setBusinessState) {
+          const _categories = businessState.business.categories.map(item => {
+            if (item.id === category.id) {
+              return {
+                ...item,
+                ...params
+              }
+            }
+            return item
+          })
+          setBusinessState({
+            ...businessState,
+            business: { ...businessState.business, categories: _categories }
+          })
+        }
       } else {
-        setBusinessState({
-          ...businessState,
-          error: result
+        setCategoryFormState({
+          ...categoryFormState,
+          loading: false,
+          result: {
+            error: true,
+            result: result
+          }
         })
       }
     } catch (err) {
-      setBusinessState({
-        ...businessState,
-        error: err
+      setCategoryFormState({
+        ...categoryFormState,
+        loading: false,
+        result: {
+          error: true,
+          result: err
+        }
       })
     }
   }
@@ -91,8 +132,20 @@ export const SingleProductsCategory = (props) => {
   const deleteCategory = async () => {
     if (loading) return
     try {
+      setCategoryFormState({
+        ...categoryFormState,
+        loading: true
+      })
       const { content: { error, result } } = await ordering.businesses(parseInt(businessState?.business.id)).categories(parseInt(category.id)).delete()
       if (!error) {
+        setCategoryFormState({
+          ...categoryFormState,
+          loading: false,
+          result: {
+            error: false,
+            result: t('CATEGORY_DELETE', 'Category deleted')
+          }
+        })
         const _categories = businessState.business.categories.map(item => {
           return item
         })
@@ -105,18 +158,35 @@ export const SingleProductsCategory = (props) => {
         })
         if (category.id === categorySelected.id) setCategorySelected(_categories[0])
       } else {
-        setBusinessState({
-          ...businessState,
-          error: result
+        setCategoryFormState({
+          ...categoryFormState,
+          loading: false,
+          result: {
+            error: true,
+            result: result
+          }
         })
       }
     } catch (err) {
-      setBusinessState({
-        ...businessState,
-        error: err
+      setCategoryFormState({
+        ...categoryFormState,
+        loading: false,
+        result: {
+          error: true,
+          result: err
+        }
       })
     }
   }
+
+  useEffect(() => {
+    if (category) {
+      setCategoryFormState({
+        ...categoryFormState,
+        changes: { ...category }
+      })
+    }
+  }, [category])
 
   return (
     <>
@@ -124,11 +194,12 @@ export const SingleProductsCategory = (props) => {
         <UIComponent
           {...props}
           handelChangeCategoryActive={handelChangeCategoryActive}
-          createCategory={createCategory}
-          setCreateCategory={setCreateCategory}
+          categoryFormState={categoryFormState}
           handlechangeImage={handlechangeImage}
           handleUpdateClick={handleUpdateClick}
           deleteCategory={deleteCategory}
+          handleInputChange={handleInputChange}
+          isEditMode={isEditMode}
         />
       )}
     </>

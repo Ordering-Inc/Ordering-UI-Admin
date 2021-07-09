@@ -12,12 +12,21 @@ export const SingleCategoryContainer = styled.div`
 
   &:hover {
     background: #E9F2FE;
+
+    input {
+      border: 1px solid ${props => props.theme.colors.lightGray};
+    }
   }
 
   ${({ active }) => active && css`
   border: 1px solid #2C7BE5;
   box-sizing: border-box;
   `}
+
+  .img-section {
+    min-width: 41px !important;
+    min-height: 41px !important;
+  }
 `
 
 export const CategoryContent = styled.div`
@@ -28,12 +37,17 @@ export const CategoryContent = styled.div`
     ` : css`
       padding-left: 13px;
     `}
-  h2 {
+  input {
+    width: 100%;
+    outline: none;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 12px;
-    margin: 0px;
+    border-radius: 3px;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    padding: 5px;
   }
 `
 
@@ -60,19 +74,6 @@ export const CategoryEnableWrapper = styled.div`
       padding-right: 10px;
     `}
   }
-`
-
-export const CategoryImage = styled.img`
-  width: 41px;
-  height: 41px;
-  border-radius: 7.5px;
-`
-
-export const DefaultImgWrapper = styled.div`
-  width: 41px;
-  height: 41px;
-  border-radius: 7.5px;
-  background: ${props => props.theme.colors.lightGray};
 `
 
 export const ActionSelectorWrapper = styled.div`

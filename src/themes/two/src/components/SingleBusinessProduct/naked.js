@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useSession, useApi } from 'ordering-components-admin'
+import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 
 /**
  * Component to manage Checkout page behavior without UI component
@@ -16,7 +16,10 @@ export const SingleBusinessProduct = (props) => {
   } = props
 
   const [{ loading }] = useSession()
+  const [, t] = useLanguage()
   const [ordering] = useApi()
+  const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
+  const [isEditMode, setIsEditMode] = useState(false)
 
   /**
    * Set enabled property of a product
@@ -28,12 +31,49 @@ export const SingleBusinessProduct = (props) => {
   }
 
   /**
+   * Set properties of a product
+   * @param {EventTarget} evt Related Html element
+   */
+  const handleChangeInput = (evt) => {
+    setFormState({
+      ...formState,
+      changes: { ...formState.changes, [evt.target.name]: evt.target.value }
+    })
+    setIsEditMode(true)
+  }
+
+  /**
+ * Update business photo data
+ * @param {File} file Image to change business photo
+ */
+  const handlechangeImage = (file) => {
+    const reader = new window.FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      setFormState({
+        ...formState,
+        changes: {
+          ...formState.changes,
+          images: reader.result
+        }
+      })
+    }
+    reader.onerror = error => console.log(error)
+    setIsEditMode(true)
+  }
+
+  /**
    * Set name property of a product
    * @param {String} value
    */
-  const handleUpdateClick = (value) => {
-    const params = { name: value }
-    editProduct(params)
+  const handleUpdateClick = () => {
+    const prarms = {
+      images: formState?.changes?.images,
+      name: formState?.changes?.name,
+      description: formState?.changes?.description,
+      price: formState?.changes?.price
+    }
+    editProduct(prarms)
   }
 
   /**
@@ -42,40 +82,63 @@ export const SingleBusinessProduct = (props) => {
   const editProduct = async (params) => {
     if (loading) return
     try {
+      setFormState({
+        ...formState,
+        loading: true
+      })
       const { content: { error, result } } = await ordering.businesses(parseInt(businessState?.business.id)).categories(parseInt(product?.category_id)).products(product?.id).save(params)
       if (!error) {
-        const _categories = businessState.business.categories.map(item => {
-          if (item.id === product?.category_id) {
-            const _products = item.products.map(prod => {
-              if (prod.id === product.id) {
-                return {
-                  ...prod,
-                  ...params
-                }
-              }
-              return prod
-            })
-            return {
-              ...item,
-              products: _products
-            }
+        setFormState({
+          ...formState,
+          loading: false,
+          result: {
+            error: false,
+            result: t('PRODUCT_ADD', 'Product updated')
           }
-          return item
         })
-        setBusinessState({
-          ...businessState,
-          business: { ...businessState.business, categories: _categories }
-        })
+        if (setBusinessState) {
+          const _categories = businessState.business.categories.map(item => {
+            if (item.id === product?.category_id) {
+              const _products = item.products.map(prod => {
+                if (prod.id === product.id) {
+                  return {
+                    ...prod,
+                    ...params
+                  }
+                }
+                return prod
+              })
+              return {
+                ...item,
+                products: _products
+              }
+            }
+            return item
+          })
+          setBusinessState({
+            ...businessState,
+            business: { ...businessState.business, categories: _categories }
+          })
+        }
+        setIsEditMode(false)
       } else {
-        setBusinessState({
-          ...businessState,
-          error: result
+        setFormState({
+          ...formState,
+          loading: false,
+          result: {
+            error: true,
+            result: result
+          }
         })
       }
     } catch (err) {
-      setBusinessState({
-        ...businessState,
-        error: err
+      setFormState({
+        ...formState,
+        loading: false,
+        result: {
+          error: true,
+          result: err
+        }
       })
     }
   }
@@ -86,38 +149,69 @@ export const SingleBusinessProduct = (props) => {
   const deleteProduct = async () => {
     if (loading) return
     try {
+      setFormState({
+        ...formState,
+        loading: true
+      })
       const { content: { error, result } } = await ordering.businesses(parseInt(businessState?.business.id)).categories(parseInt(product?.category_id)).products(product?.id).delete()
       if (!error) {
-        const _categories = businessState.business.categories.map(item => {
-          if (item.id === product?.category_id) {
-            const _products = [...item.products]
-            const filterItem = item.products.filter(prod => prod.id === product.id)[0]
-            const index = item.products.indexOf(filterItem)
-            if (index > -1) _products.splice(index, 1)
-            return {
-              ...item,
-              products: _products
-            }
+        setFormState({
+          ...formState,
+          loading: false,
+          result: {
+            error: false,
+            result: t('PRODUCT_DELETE', 'Product deleted')
           }
-          return item
         })
-        setBusinessState({
-          ...businessState,
-          business: { ...businessState.business, categories: _categories }
-        })
+        if (setBusinessState) {
+          const _categories = businessState.business.categories.map(item => {
+            if (item.id === product?.category_id) {
+              const _products = [...item.products]
+              const filterItem = item.products.filter(prod => prod.id === product.id)[0]
+              const index = item.products.indexOf(filterItem)
+              if (index > -1) _products.splice(index, 1)
+              return {
+                ...item,
+                products: _products
+              }
+            }
+            return item
+          })
+          setBusinessState({
+            ...businessState,
+            business: { ...businessState.business, categories: _categories }
+          })
+        }
       } else {
-        setBusinessState({
-          ...businessState,
-          error: result
+        setFormState({
+          ...formState,
+          loading: false,
+          result: {
+            error: true,
+            result: result
+          }
         })
       }
     } catch (err) {
-      setBusinessState({
-        ...businessState,
-        error: err
+      setFormState({
+        ...formState,
+        loading: false,
+        result: {
+          error: true,
+          result: err
+        }
       })
     }
   }
+
+  useEffect(() => {
+    if (product) {
+      setFormState({
+        ...formState,
+        changes: { ...product }
+      })
+    }
+  }, [product])
 
   return (
     <>
@@ -127,6 +221,10 @@ export const SingleBusinessProduct = (props) => {
           handleChangeProductActive={handleChangeProductActive}
           handleUpdateClick={handleUpdateClick}
           deleteProduct={deleteProduct}
+          productFormState={formState}
+          handleChangeInput={handleChangeInput}
+          handlechangeImage={handlechangeImage}
+          isEditMode={isEditMode}
         />
       )}
     </>

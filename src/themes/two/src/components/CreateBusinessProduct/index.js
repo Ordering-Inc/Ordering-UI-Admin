@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
@@ -80,7 +81,7 @@ const CreateBusinessProductUI = (props) => {
     const outsideDropdown = !conatinerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState?.changes).length > 0 && !formState?.loading) {
+        if (Object.keys(formState?.changes).length > 1 && !formState?.loading) {
           handleUpdateClick()
         } else {
           setIsAddProduct(false)
@@ -102,6 +103,22 @@ const CreateBusinessProductUI = (props) => {
     document.addEventListener('click', CloseAddBusinessTypeForm)
     return () => document.removeEventListener('click', CloseAddBusinessTypeForm)
   }, [formState])
+
+  useEffect(() => {
+    if (!formState?.result.error && !formState?.loading && formState?.result?.result) {
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = formState?.result?.result
+      toast.dark(content, toastConfigure)
+    }
+  }, [formState?.loading])
 
   return (
     <>
