@@ -525,6 +525,12 @@ Object.defineProperty(exports, "UserTypeSelector", {
     return _UserTypeSelector.UserTypeSelector;
   }
 });
+Object.defineProperty(exports, "capitalize", {
+  enumerable: true,
+  get: function get() {
+    return _utils.capitalize;
+  }
+});
 Object.defineProperty(exports, "Button", {
   enumerable: true,
   get: function get() {
@@ -771,6 +777,8 @@ var _UsersListing = require("./src/components/UsersListing");
 var _UserTypeFilter = require("./src/components/UserTypeFilter");
 
 var _UserTypeSelector = require("./src/components/UserTypeSelector");
+
+var _utils = require("../../utils");
 
 var _Buttons = require("./src/styles/Buttons");
 

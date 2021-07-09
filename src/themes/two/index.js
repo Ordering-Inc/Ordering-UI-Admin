@@ -85,6 +85,7 @@ import { UsersList } from './src/components/UsersList'
 import { UsersListing } from './src/components/UsersListing'
 import { UserTypeFilter } from './src/components/UserTypeFilter'
 import { UserTypeSelector } from './src/components/UserTypeSelector'
+import { capitalize } from '../../utils'
 
 // styles
 import { Button } from './src/styles/Buttons'
@@ -180,6 +181,7 @@ export {
   UsersListing,
   UserTypeFilter,
   UserTypeSelector,
+  capitalize,
 
   // styles
   Button,
