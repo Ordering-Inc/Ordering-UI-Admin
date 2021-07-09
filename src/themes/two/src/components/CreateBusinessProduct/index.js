@@ -165,6 +165,7 @@ const CreateBusinessProductUI = (props) => {
                   defaultValue={formState?.changes?.name || ''}
                   onChange={handleChangeInput}
                   placeholder={t('WRITE_A_NAME', 'Write a name')}
+                  autoComplete='off'
                 />
               </BusinessGeneralInfo>
             </td>
@@ -178,6 +179,7 @@ const CreateBusinessProductUI = (props) => {
                   defaultValue={formState?.changes?.price || ''}
                   onChange={handleChangeInput}
                   placeholder={t('WRITE_PRICE', 'Write price')}
+                  autoComplete='off'
                 />
               </GeneralInfo>
             </td>
@@ -191,6 +193,7 @@ const CreateBusinessProductUI = (props) => {
                   defaultValue={formState?.changes?.description || ''}
                   onChange={handleChangeInput}
                   placeholder={t('WRITE_DESCRIPTION', 'Write description')}
+                  autoComplete='off'
                 />
               </GeneralInfo>
             </td>

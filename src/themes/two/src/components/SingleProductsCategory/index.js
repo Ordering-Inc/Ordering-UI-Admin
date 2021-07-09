@@ -176,6 +176,7 @@ export const SingleProductsCategoryUI = (props) => {
                   name='name'
                   value={categoryFormState?.changes?.name || ''}
                   onChange={handleInputChange}
+                  autoComplete='off'
                 />
               )
           }

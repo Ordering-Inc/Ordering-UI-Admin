@@ -106,6 +106,7 @@ export const BusinessProductList = (props) => {
                           key={i}
                           product={product}
                           allowColumns={allowColumns}
+                          business={businessState?.business}
                         />
                       )
                     ))
@@ -116,6 +117,7 @@ export const BusinessProductList = (props) => {
                         {...props}
                         allowColumns={allowColumns}
                         setIsAddProduct={setIsAddProduct}
+                        business={businessState?.business}
                       />
                     )
                   }
@@ -159,6 +161,7 @@ export const BusinessProductList = (props) => {
               ) : (
                 <BusinessSpreadSheet
                   {...props}
+                  business={businessState?.business}
                 />
               )}
             </ProductListSpreadContainer>

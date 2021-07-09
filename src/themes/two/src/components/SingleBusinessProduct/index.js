@@ -205,6 +205,7 @@ const SingleBusinessProductUI = (props) => {
                             name='name'
                             value={productFormState?.changes?.name || ''}
                             onChange={handleChangeInput}
+                            autoComplete='off'
                           />
                         )
                       }
@@ -220,6 +221,7 @@ const SingleBusinessProductUI = (props) => {
                           name='price'
                           value={productFormState?.changes?.price || ''}
                           onChange={handleChangeInput}
+                          autoComplete='off'
                         />
                       </InfoBlock>
                     }
@@ -229,11 +231,12 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <input
-                          type='text'
+                        <textarea
                           name='description'
                           value={productFormState?.changes?.description || ''}
                           onChange={handleChangeInput}
+                          autoComplete='off'
+                          className='description'
                         />
                       </InfoBlock>
                     }

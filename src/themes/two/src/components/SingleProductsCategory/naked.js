@@ -10,8 +10,8 @@ import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 export const SingleProductsCategory = (props) => {
   const {
     UIComponent,
-    setBusinessState,
-    businessState,
+    handleUpdateBusinessState,
+    business,
     category,
     categorySelected,
     setCategorySelected
@@ -78,7 +78,7 @@ export const SingleProductsCategory = (props) => {
         ...categoryFormState,
         loading: true
       })
-      const { content: { error, result } } = await ordering.businesses(parseInt(businessState?.business.id)).categories(parseInt(category.id)).save(params)
+      const { content: { error, result } } = await ordering.businesses(parseInt(business?.id)).categories(parseInt(category.id)).save(params)
       if (!error) {
         setCategoryFormState({
           ...categoryFormState,
@@ -89,8 +89,8 @@ export const SingleProductsCategory = (props) => {
           }
         })
         setIsEditMode(false)
-        if (setBusinessState) {
-          const _categories = businessState.business.categories.map(item => {
+        if (handleUpdateBusinessState) {
+          const _categories = business?.categories.map(item => {
             if (item.id === category.id) {
               return {
                 ...item,
@@ -99,10 +99,7 @@ export const SingleProductsCategory = (props) => {
             }
             return item
           })
-          setBusinessState({
-            ...businessState,
-            business: { ...businessState.business, categories: _categories }
-          })
+          handleUpdateBusinessState({ ...business, categories: _categories })
         }
       } else {
         setCategoryFormState({
@@ -136,7 +133,7 @@ export const SingleProductsCategory = (props) => {
         ...categoryFormState,
         loading: true
       })
-      const { content: { error, result } } = await ordering.businesses(parseInt(businessState?.business.id)).categories(parseInt(category.id)).delete()
+      const { content: { error, result } } = await ordering.businesses(parseInt(business?.id)).categories(parseInt(category.id)).delete()
       if (!error) {
         setCategoryFormState({
           ...categoryFormState,
@@ -146,17 +143,16 @@ export const SingleProductsCategory = (props) => {
             result: t('CATEGORY_DELETE', 'Category deleted')
           }
         })
-        const _categories = businessState.business.categories.map(item => {
-          return item
-        })
-        const filterItem = businessState.business.categories.filter(cat => cat.id === category.id)[0]
-        const index = businessState.business.categories.indexOf(filterItem)
-        if (index > -1) _categories.splice(index, 1)
-        setBusinessState({
-          ...businessState,
-          business: { ...businessState.business, categories: _categories }
-        })
-        if (category.id === categorySelected.id) setCategorySelected(_categories[0])
+        if (handleUpdateBusinessState) {
+          const _categories = business.categories.map(item => {
+            return item
+          })
+          const filterItem = business.categories.filter(cat => cat.id === category.id)[0]
+          const index = business.categories.indexOf(filterItem)
+          if (index > -1) _categories.splice(index, 1)
+          handleUpdateBusinessState({ ...business, categories: _categories })
+          if (category.id === categorySelected.id) setCategorySelected(_categories[0])
+        }
       } else {
         setCategoryFormState({
           ...categoryFormState,
@@ -214,11 +210,11 @@ SingleProductsCategory.propTypes = {
   /**
    * Object for a business
    */
-  businessState: PropTypes.object,
+  business: PropTypes.object,
   /**
    * Function to set a business state
    */
-  setBusinessState: PropTypes.func,
+  handleUpdateBusinessState: PropTypes.func,
   /**
    * Object for a product
    */

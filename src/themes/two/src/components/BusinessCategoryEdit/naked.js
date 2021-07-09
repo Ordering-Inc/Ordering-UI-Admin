@@ -104,10 +104,16 @@ export const BusinessCategoryEdit = (props) => {
         if (handleUpdateBusinessState) {
           const _categories = businessState.business.categories.map(item => {
             if (item.id === parseInt(id)) {
-              return { ...item, ...content.result }
+              return {
+                ...item,
+                name: content?.result?.name,
+                enabled: content?.result?.enabled,
+                image: content?.result?.image
+              }
             }
             return item
           })
+          console.log(_categories)
           const _business = { ...businessState.business, categories: _categories }
           handleUpdateBusinessState(_business)
         }

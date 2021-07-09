@@ -31,6 +31,9 @@ export const BusinessGeneralInfo = styled.div`
 ` : css`
   border-right: 1px solid #E9ECEF;
 `}
+  p {
+    margin: 0;
+  }
 
   input {
     font-weight: 500;
@@ -66,7 +69,7 @@ export const WrapperImage = styled.div`
 `
 
 export const InfoBlock = styled.div`
-  input {
+  input, textarea {
     font-weight: 500;
     font-size: 13px;
     color: ${props => props.theme.colors.headingColor};
@@ -76,14 +79,16 @@ export const InfoBlock = styled.div`
     border-radius: 3px;
     padding: 5px;
 
-    &.description{
-      font-size: 11px;
+    &.description {
+      font-size: 12px;
       color: ${props => props.theme.colors.lightGray};
+      resize: none;
+      width: 100%;
     }
   }
 
   &:hover {
-    > input {
+    > input, textarea {
       border: 1px solid ${props => props.theme.colors.lightGray};
       background: white;
     }

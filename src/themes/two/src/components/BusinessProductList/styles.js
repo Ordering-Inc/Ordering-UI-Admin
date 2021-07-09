@@ -55,6 +55,10 @@ export const BusinessProductListTable = styled.table`
     width: 50px;
   }
 
+  th.description {
+    width: 30%;
+  }
+
   th.id,
   td.id {
     width: 10%;

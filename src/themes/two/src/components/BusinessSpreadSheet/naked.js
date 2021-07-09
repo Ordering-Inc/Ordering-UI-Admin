@@ -8,8 +8,8 @@ export const BusinessSpreadSheet = (props) => {
   const {
     UIComponent,
     categoryState,
-    businessState,
-    setBusinessState,
+    business,
+    handleUpdateBusinessState,
     categoryId,
     categorySelected
   } = props
@@ -138,7 +138,7 @@ export const BusinessSpreadSheet = (props) => {
                   description: row.description ? row.description : ' ',
                   price: row.price ? row.price : 0,
                   category_id: id,
-                  business_id: businessState?.business.id
+                  business_id: business?.id
                 }
                 if ((row.quantity && row.quantity !== 'NA') || row.quantity === 0) {
                   _add.quantity = row.quantity
@@ -159,7 +159,7 @@ export const BusinessSpreadSheet = (props) => {
                     description: row.description ? row.description : ' ',
                     price: row.price ? row.price : 0,
                     category_id: id,
-                    business_id: businessState?.business.id
+                    business_id: business?.id
                   }
                   if ((row.quantity && row.quantity !== 'NA') || row.quantity === 0) {
                     _update.quantity = row.quantity
@@ -245,13 +245,13 @@ export const BusinessSpreadSheet = (props) => {
     try {
       const id = categoryId || categorySelected.id
       const params = {
-        business_id: businessState?.business.id,
+        business_id: business?.id,
         category_id: parseInt(id)
       }
-      const { content: { error, result } } = await ordering.businesses(businessState?.business.id).categories(parseInt(id)).products().parameters(params).get()
+      const { content: { error, result } } = await ordering.businesses(business?.id).categories(parseInt(id)).products().parameters(params).get()
       if (!error) {
-        if (setBusinessState) {
-          const _categories = businessState.business.categories.map(item => {
+        if (handleUpdateBusinessState) {
+          const _categories = business?.categories.map(item => {
             if (parseInt(item.id) === parseInt(id)) {
               return {
                 ...item,
@@ -260,10 +260,7 @@ export const BusinessSpreadSheet = (props) => {
             }
             return item
           })
-          setBusinessState({
-            ...businessState,
-            business: { ...businessState.business, categories: _categories }
-          })
+          handleUpdateBusinessState({ ...business, categories: _categories })
         }
         setFormState({
           ...formState,

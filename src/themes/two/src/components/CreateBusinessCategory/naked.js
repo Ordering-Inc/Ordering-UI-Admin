@@ -10,9 +10,9 @@ import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 export const CreateBusinessCategory = (props) => {
   const {
     UIComponent,
-    setBusinessState,
-    businessState,
-    setIsAddCategory
+    setIsAddCategory,
+    business,
+    handleUpdateBusinessState
   } = props
 
   const [{ loading }] = useSession()
@@ -72,7 +72,7 @@ export const CreateBusinessCategory = (props) => {
         ...categoryState,
         loading: true
       })
-      const { content } = await ordering.businesses(parseInt(businessState.business.id)).categories().save(categoryState.category)
+      const { content } = await ordering.businesses(parseInt(business?.id)).categories().save(categoryState.category)
       if (!content.error) {
         setCategoryState({
           ...categoryState,
@@ -83,14 +83,13 @@ export const CreateBusinessCategory = (props) => {
           },
           loading: false
         })
-        const _categories = businessState.business.categories.map(item => {
-          return item
-        })
-        _categories.push(content.result)
-        setBusinessState({
-          ...businessState,
-          business: { ...businessState.business, categories: _categories }
-        })
+        if (handleUpdateBusinessState) {
+          const _categories = business.categories.map(item => {
+            return item
+          })
+          _categories.push(content.result)
+          handleUpdateBusinessState({ ...business, categories: _categories })
+        }
         setIsAddCategory(false)
       } else {
         setCategoryState({
@@ -136,11 +135,11 @@ CreateBusinessCategory.propTypes = {
   /**
    * Object for a business
    */
-  businessState: PropTypes.object,
+  business: PropTypes.object,
   /**
    * Function to set a business state
    */
-  setBusinessState: PropTypes.func,
+  handleUpdateBusinessState: PropTypes.func,
   /**
    * Function to set category creation mode
    */

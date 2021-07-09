@@ -10,8 +10,8 @@ import { useSession, useApi, useLanguage } from 'ordering-components-admin'
 export const CreateBusinessProduct = (props) => {
   const {
     UIComponent,
-    businessState,
-    setBusinessState,
+    business,
+    handleUpdateBusinessState,
     setIsAddProduct,
     categorySelected
   } = props
@@ -74,7 +74,7 @@ export const CreateBusinessProduct = (props) => {
     try {
       let categoryId
       if (categorySelected.id === null && categorySelected.id === 'featured') {
-        categoryId = parseInt(businessState.business.categories[0])
+        categoryId = parseInt(business?.categories[0])
       } else {
         categoryId = parseInt(categorySelected.id)
       }
@@ -82,7 +82,7 @@ export const CreateBusinessProduct = (props) => {
         ...formState,
         loading: true
       })
-      const { content } = await ordering.businesses(parseInt(businessState?.business.id)).categories(categoryId).products().save(formState.changes)
+      const { content } = await ordering.businesses(parseInt(business?.id)).categories(categoryId).products().save(formState.changes)
       if (!content.error) {
         setFormState({
           ...formState,
@@ -93,26 +93,25 @@ export const CreateBusinessProduct = (props) => {
           },
           loading: false
         })
-        const _categories = businessState.business.categories.map(item => {
-          if (item.id === categoryId) {
-            let _products = []
-            if (item.products && item.products.length > 0) {
-              _products = item.products.map(prod => {
-                return prod
-              })
+        if (handleUpdateBusinessState) {
+          const _categories = business?.categories.map(item => {
+            if (item.id === categoryId) {
+              let _products = []
+              if (item.products && item.products.length > 0) {
+                _products = item.products.map(prod => {
+                  return prod
+                })
+              }
+              _products.push(content.result)
+              return {
+                ...item,
+                products: _products
+              }
             }
-            _products.push(content.result)
-            return {
-              ...item,
-              products: _products
-            }
-          }
-          return item
-        })
-        setBusinessState({
-          ...businessState,
-          business: { ...businessState.business, categories: _categories }
-        })
+            return item
+          })
+          handleUpdateBusinessState({ ...business, categories: _categories })
+        }
         setIsAddProduct(false)
       } else {
         setFormState({
@@ -159,11 +158,11 @@ CreateBusinessProduct.propTypes = {
   /**
    * Object for a business
    */
-  businessState: PropTypes.object,
+  business: PropTypes.object,
   /**
    * Function to set a business state
    */
-  setBusinessState: PropTypes.func,
+  handleUpdateBusinessState: PropTypes.func,
   /**
    * Function to set product creation mode
    */
