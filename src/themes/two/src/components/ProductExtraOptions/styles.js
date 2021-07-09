@@ -148,14 +148,6 @@ export const UploadImageIconContainer = styled.div`
   }
 `
 
-export const SkeletonWrapper = styled.div`
-  span{
-    height: 100%;
-    position: relative;
-    top: -2.5px;
-  }
-`
-
 export const ActionsContainer = styled.div`
   display: flex;
   align-items: center;

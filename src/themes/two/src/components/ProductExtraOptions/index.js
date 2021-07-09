@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, DragAndDrop, ExamineClick, ProductExtraOptions as ProductExtraOptionsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
@@ -10,7 +10,6 @@ import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { bytesConverter } from '../../../../../utils'
 import { Alert, Confirm } from '../Confirm'
-import Skeleton from 'react-loading-skeleton'
 import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
 import { Modal } from '../Modal'
 import { ProductExtraOptionDetails } from '../ProductExtraOptionDetails'
@@ -23,7 +22,6 @@ import {
   OptionNameContainer,
   OptionImage,
   UploadImageIconContainer,
-  SkeletonWrapper,
   ActionsContainer,
   EnableWrapper,
   DropDownWrapper
@@ -36,8 +34,8 @@ const ProductExtraOptionsUI = (props) => {
     editErrors,
     cleanEditErrors,
     extraState,
-    formState,
-    handlechangeImage,
+    changesState,
+    handleChangeImage,
     handleChangeInput,
     handleChangeOptionEnable,
     handleChangeAddOption,
@@ -45,14 +43,15 @@ const ProductExtraOptionsUI = (props) => {
     handleAddOption,
     handleChangeAddOptionEnable,
     handleDeteteOption,
-    business
+    business,
+    cleanChangesState,
+    editOptionId
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const optionImageInputRef = useRef(null)
   const ActionIcon = <FiMoreVertical />
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -71,10 +70,10 @@ const ProductExtraOptionsUI = (props) => {
     const regexp = /^[0-9.\b]+$/
     if (e.target.value === '' || regexp.test(e.target.value)) {
       if (min) {
-        const max = formState?.changes?.max ? formState?.changes?.max : option?.max
+        const max = changesState?.changes?.max ? changesState?.changes?.max : option?.max
         if (parseInt(e.target.value) > parseInt(max)) return
       } else {
-        const min = formState?.changes?.min ? formState?.changes?.min : option?.min
+        const min = changesState?.changes?.min ? changesState?.changes?.min : option?.min
         if (parseInt(e.target.value) < parseInt(min)) return
       }
       handleChangeInput(e, option.id)
@@ -93,8 +92,8 @@ const ProductExtraOptionsUI = (props) => {
     }
   }
 
-  const handleClickImage = () => {
-    optionImageInputRef.current.click()
+  const handleClickImage = (idName) => {
+    document.getElementById(idName).click()
   }
 
   const handleFiles = (files, optionId) => {
@@ -115,7 +114,7 @@ const ProductExtraOptionsUI = (props) => {
         })
         return
       }
-      handlechangeImage(files[0], optionId)
+      handleChangeImage(files[0], optionId)
     }
   }
 
@@ -158,6 +157,7 @@ const ProductExtraOptionsUI = (props) => {
   }
 
   const handleOpenOption = (option) => {
+    cleanChangesState({ ...changesState, changes: {} })
     setCurOption(option)
     setOpenModal({ ...openModal, edit: true })
   }
@@ -216,27 +216,26 @@ const ProductExtraOptionsUI = (props) => {
                 <td>
                   <OptionNameContainer>
                     <OptionImage
-                      onClick={() => handleClickImage()}
+                      onClick={() => handleClickImage(`option_image_${option.id}`)}
                     >
                       <ExamineClick
                         onFiles={files => handleFiles(files, option.id)}
-                        childRef={(e) => { optionImageInputRef.current = e }}
+                        childId={`option_image_${option.id}`}
                         accept='image/png, image/jpeg, image/jpg'
                         disabled={extraState.loading}
                       >
                         <DragAndDrop
                           onDrop={dataTransfer => handleFiles(dataTransfer.files, option.id)}
                           accept='image/png, image/jpeg, image/jpg'
-                          disabled={formState.loading}
+                          disabled={extraState.loading}
                         >
-                          {extraState.loading
-                            ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                            : ((!formState.changes?.image || formState.result?.result === 'Network Error' || formState.result.error)
-                              ? option?.image &&
-                                (<img src={option?.image} alt='product image' loading='lazy' />)
-                              : formState?.changes?.image &&
-                                <img src={formState?.changes?.image} alt='product image' loading='lazy' />
-                            )}
+                          {
+                            (changesState?.result?.image && editOptionId === option.id)
+                              ? (<img src={changesState?.result?.image} alt='option image' loading='lazy' />)
+                              : (changesState?.changes?.image && editOptionId === option.id)
+                                ? (<img src={changesState?.changes?.image} alt='option image' loading='lazy' />)
+                                : option?.image && (<img src={option?.image} alt='option image' loading='lazy' />)
+                          }
                           <UploadImageIconContainer>
                             <BiImage />
                           </UploadImageIconContainer>
@@ -254,9 +253,9 @@ const ProductExtraOptionsUI = (props) => {
                   <input
                     name='min'
                     value={
-                      formState?.result?.result
-                        ? formState?.result?.result?.min
-                        : formState?.changes?.min ?? option?.min
+                      (editOptionId === option.id)
+                        ? changesState?.changes?.min ?? option?.min
+                        : option?.min
                     }
                     onChange={(e) => handleChangeOptionInput(e, option, true)}
                   />
@@ -265,9 +264,9 @@ const ProductExtraOptionsUI = (props) => {
                   <input
                     name='max'
                     value={
-                      formState?.result?.result
-                        ? formState?.result?.result?.max
-                        : formState?.changes?.max ?? option?.max
+                      (editOptionId === option.id)
+                        ? changesState?.changes?.max ?? option?.max
+                        : option?.max
                     }
                     onChange={(e) => handleChangeOptionInput(e, option, false)}
                   />
@@ -374,7 +373,11 @@ const ProductExtraOptionsUI = (props) => {
             business={business}
             extra={extraState.extra}
             option={curOption}
-            formState={formState}
+            optionChangesState={editOptionId === curOption.id ? changesState : {}}
+            handleOptionFiles={handleFiles}
+            handleChangeOptionInput={handleChangeInput}
+            handleChangeNumberInput={handleChangeOptionInput}
+            handleChangeOptionEnable={handleChangeOptionEnable}
           />
         </Modal>
       )}

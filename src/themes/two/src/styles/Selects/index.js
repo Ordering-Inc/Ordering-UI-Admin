@@ -135,8 +135,8 @@ export const Select = styled.div`
   line-height: 34px;
   border-width: 1px;
   border-style: solid;
-  border-color: #1C202E;
-  color: #1C202E;
+  border-color: #DEE2E6;
+  color: #344050;
   position: relative;
 
   ${props => props.open && css`
