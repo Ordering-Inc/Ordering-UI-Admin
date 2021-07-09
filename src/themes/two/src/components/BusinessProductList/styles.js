@@ -90,4 +90,5 @@ export const AddProductBtn = styled.div`
   color: #909BA9;
   margin-top: 12px;
   cursor: pointer;
+  margin-bottom: 15px;
 `

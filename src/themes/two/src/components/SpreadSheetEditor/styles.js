@@ -6,6 +6,7 @@ export const SpreadSheetContainer = styled.div`
   }
   .wtHider {
     width: 100% !important;
+    margin-bottom: 20px;
     .wtSpreader {
       width: 100% !important;
     }
