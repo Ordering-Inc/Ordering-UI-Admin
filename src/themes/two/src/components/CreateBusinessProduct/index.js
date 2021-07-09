@@ -5,9 +5,9 @@ import { bytesConverter } from '../../../../../utils'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick,
-  CreateBusinessProduct as CreateBusinessProductController
+  ExamineClick
 } from 'ordering-components-admin'
+import { CreateBusinessProduct as CreateBusinessProductController } from './naked'
 import { Switch } from '../../styles/Switch'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -24,7 +24,7 @@ import {
   GeneralInfo
 } from './styles'
 import {
-  WrapperBusinessActionSelector
+  ActionSelectorWrapper
 } from '../SingleProductsCategory/styles'
 
 const CreateBusinessProductUI = (props) => {
@@ -34,7 +34,8 @@ const CreateBusinessProductUI = (props) => {
     handleChangeCheckBox,
     handleChangeInput,
     handleUpdateClick,
-    handlechangeImage
+    handlechangeImage,
+    setIsAddProduct
   } = props
 
   const [, t] = useLanguage()
@@ -79,8 +80,10 @@ const CreateBusinessProductUI = (props) => {
     const outsideDropdown = !conatinerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState?.changes).length > 0 || !formState?.loading) {
+        if (Object.keys(formState?.changes).length > 0 && !formState?.loading) {
           handleUpdateClick()
+        } else {
+          setIsAddProduct(false)
         }
       }
     }
@@ -189,9 +192,9 @@ const CreateBusinessProductUI = (props) => {
             </BusinessEnableWrapper>
           </td>
           <td>
-            <WrapperBusinessActionSelector className='business_actions'>
+            <ActionSelectorWrapper className='business_actions'>
               <FiMoreVertical />
-            </WrapperBusinessActionSelector>
+            </ActionSelectorWrapper>
           </td>
         </tr>
       </CreateBusinessProductContainer>

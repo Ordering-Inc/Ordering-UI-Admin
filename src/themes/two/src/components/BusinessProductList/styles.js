@@ -31,13 +31,6 @@ export const ProductListContainer = styled.div`
 
 export const ProductListSpreadContainer = styled.div`
   margin: 0;
-  max-height: calc(100vh - 380px);
-  min-height: 200px;
-  overflow: auto;
-
-  @media (min-width: 768px) {
-    max-height: calc(100vh - 230px);
-  }
 
   @media (min-width: 576px) {
     ${props => props.theme.rtl ? css`

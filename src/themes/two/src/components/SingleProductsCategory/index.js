@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, SingleProductsCategory as SingleProductsCategoryController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { SingleProductsCategory as SingleProductsCategoryController } from './naked'
 import { Alert } from '../Confirm'
 import { Switch } from '../../styles/Switch'
-import { BusinessActionSelector } from '../BusinessActionSelector'
+import { useTheme } from 'styled-components'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import {
   SingleCategoryContainer,
   CategoryContent,
@@ -11,7 +14,7 @@ import {
   CategoryEnableWrapper,
   CategoryImage,
   DefaultImgWrapper,
-  WrapperBusinessActionSelector
+  ActionSelectorWrapper
 } from './styles'
 import { InputName } from '../SingleBusinessProduct/styles'
 
@@ -23,13 +26,15 @@ export const SingleProductsCategoryUI = (props) => {
     isSkeleton,
     handelChangeCategoryActive,
     handleUpdateClick,
-    deleteCategory
+    deleteCategory,
+    handleOpenCategoryDetails
   } = props
   const [, t] = useLanguage()
-
+  const theme = useTheme()
   const categoryNameEditRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isEditMode, setIsEditMode] = useState(false)
+  const ActionIcon = <FiMoreVertical />
 
   const closeEditMode = (e) => {
     if (isEditMode && !e.target.closest('.category-name-edit') && !e.target.closest('.popup-component')) {
@@ -110,20 +115,22 @@ export const SingleProductsCategoryUI = (props) => {
                   )
               }
             </CategoryEnableWrapper>
-            <WrapperBusinessActionSelector className='business_actions'>
+            <ActionSelectorWrapper className='business_actions'>
               {
                 isSkeleton
                   ? <Skeleton height={15} width={15} />
                   : (
-                    <BusinessActionSelector
-                      business={category}
-                      handleDuplicateBusiness={() => console.log('copy')}
-                      handleDeleteBusiness={deleteCategory}
-                      handleOpenBusinessDetails={() => console.log('open')}
-                    />
+                    <DropdownButton
+                      menuAlign={theme?.rtl ? 'left' : 'right'}
+                      title={ActionIcon}
+                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                    >
+                      <Dropdown.Item onClick={() => handleOpenCategoryDetails(category)}>{t('EDIT', 'Edit')}</Dropdown.Item>
+                      <Dropdown.Item onClick={deleteCategory}>{t('DELETE', 'Delete')}</Dropdown.Item>
+                    </DropdownButton>
                   )
               }
-            </WrapperBusinessActionSelector>
+            </ActionSelectorWrapper>
           </CategoryActionContainer>
         </CategoryContent>
       </SingleCategoryContainer>

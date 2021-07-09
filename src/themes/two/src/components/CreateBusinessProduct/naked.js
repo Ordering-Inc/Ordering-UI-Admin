@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
@@ -7,31 +7,18 @@ import { useSession, useApi } from 'ordering-components-admin'
 /**
  * Component to manage Checkout page behavior without UI component
  */
-export const BusinessCategoryEdit = (props) => {
+export const CreateBusinessProduct = (props) => {
   const {
     UIComponent,
     businessState,
-    handleUpdateBusinessState,
-    category,
-    categoryId
+    setBusinessState,
+    setIsAddProduct,
+    categorySelected
   } = props
 
   const [{ loading }] = useSession()
   const [ordering] = useApi()
-  const [formState, setFormState] = useState({ loading: false, changes: { enabled: false }, result: { error: false } })
-
-  useEffect(() => {
-    if (!category) return
-    setFormState({ ...formState, changes: category })
-  }, [category])
-
-  useEffect(() => {
-    if (businessState?.business?.id && !category && categoryId) {
-      const _category = businessState.business.categories.filter(item => parseInt(item.id) === parseInt(categoryId))[0]
-
-      if (_category) setFormState({ ...formState, changes: _category })
-    }
-  }, [businessState])
+  const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
 
   /**
   * Update credential data
@@ -71,7 +58,7 @@ export const BusinessCategoryEdit = (props) => {
         ...formState,
         changes: {
           ...formState.changes,
-          image: reader.result
+          images: reader.result
         }
       })
     }
@@ -79,30 +66,46 @@ export const BusinessCategoryEdit = (props) => {
   }
 
   /**
-  * Default fuction for business profile workflow
+  * Function to create Business product
   */
   const handleUpdateClick = async () => {
-    const id = category?.id || categoryId
     if (loading) return
     try {
-      const { content } = await ordering.businesses(businessState?.business.id).categories(parseInt(id)).save(formState.changes)
+      let categoryId
+      if (categorySelected.id === null && categorySelected.id === 'featured') {
+        categoryId = parseInt(businessState.business.categories[0])
+      } else {
+        categoryId = parseInt(categorySelected.id)
+      }
+      const { content } = await ordering.businesses(parseInt(businessState?.business.id)).categories(categoryId).products().save(formState.changes)
       if (!content.error) {
         setFormState({
           ...formState,
-          changes: content.result,
+          changes: {},
           result: content,
           loading: false
         })
-        if (handleUpdateBusinessState) {
-          const _categories = businessState.business.categories.map(item => {
-            if (item.id === parseInt(id)) {
-              return { ...item, ...content.result }
+        const _categories = businessState.business.categories.map(item => {
+          if (item.id === categoryId) {
+            let _products = []
+            if (item.products && item.products.length > 0) {
+              _products = item.products.map(prod => {
+                return prod
+              })
             }
-            return item
-          })
-          const _business = { ...businessState.business, categories: _categories }
-          handleUpdateBusinessState(_business)
-        }
+            _products.push(content.result)
+            return {
+              ...item,
+              products: _products
+            }
+          }
+          return item
+        })
+        setBusinessState({
+          ...businessState,
+          business: { ...businessState.business, categories: _categories }
+        })
+        setIsAddProduct(false)
       } else {
         setFormState({
           ...formState,
@@ -140,7 +143,7 @@ export const BusinessCategoryEdit = (props) => {
   )
 }
 
-BusinessCategoryEdit.propTypes = {
+CreateBusinessProduct.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -152,7 +155,7 @@ BusinessCategoryEdit.propTypes = {
   /**
    * Function to set a business state
    */
-  handleUpdateBusinessState: PropTypes.func,
+  setBusinessState: PropTypes.func,
   /**
    * Function to set product creation mode
    */
@@ -179,7 +182,7 @@ BusinessCategoryEdit.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-BusinessCategoryEdit.defaultProps = {
+CreateBusinessProduct.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

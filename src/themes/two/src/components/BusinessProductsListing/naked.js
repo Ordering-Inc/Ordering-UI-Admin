@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-// import { useLanguage } from '../../contexts/LanguageContext'
-import { useLanguage } from 'ordering-components-admin'
-
-dayjs.extend(utc)
 
 export const BusinessProductListing = (props) => {
   const {
@@ -19,15 +13,12 @@ export const BusinessProductListing = (props) => {
     UIComponent
   } = props
 
-  const [, t] = useLanguage()
-
-  const [categorySelected, setCategorySelected] = useState({ id: null, name: t('ALL', 'All') })
+  const [categorySelected, setCategorySelected] = useState(null)
   const [searchValue, setSearchValue] = useState(null)
   const [businessState, setBusinessState] = useState({ business: {}, menus: null, loading: true, error: null })
   const [categoriesState, setCategoriesState] = useState({})
   const [requestsState, setRequestsState] = useState({})
   const [productModal, setProductModal] = useState({ product: null, loading: false, error: null })
-  const [featuredProducts, setFeaturedProducts] = useState(false)
 
   const categoryStateDefault = {
     loading: true,
@@ -63,43 +54,17 @@ export const BusinessProductListing = (props) => {
       (description && (description.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByDescription))
   }
 
-  /**
-   * Change search value
-   * @param {Object} product search Object
-   */
-  const isFeaturedSearch = (product) => {
-    if (product.featured) {
-      if (!searchValue) return true
-      return (product.name && (product.name.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByName)) ||
-        (product.description && (product.description.toLowerCase().includes(searchValue.toLowerCase()) && isSearchByDescription))
-    }
-    return false
-  }
-
   const getProducts = async (newFetch) => {
     if (!businessState?.business?.lazy_load_products_recommended) {
-      const isFeatured = !!businessState?.business?.categories?.find(
-        category => category
-      )?.products?.filter(
-        product => product.featured
-      ).length
-      setFeaturedProducts(isFeatured)
       const categoryState = {
         ...categoryStateDefault,
         loading: false
       }
-      if (categorySelected.id !== 'featured' && categorySelected.id !== null) {
+      if (categorySelected) {
         const productsFiltered = businessState?.business?.categories?.find(
           category => category.id === categorySelected.id
         )?.products?.filter(
           product => isMatchSearch(product.name, product.description)
-        )
-        categoryState.products = productsFiltered || []
-      } else if (categorySelected.id === 'featured') {
-        const productsFiltered = businessState?.business?.categories?.reduce(
-          (products, category) => [...products, ...category.products], []
-        ).filter(
-          product => isFeaturedSearch(product)
         )
         categoryState.products = productsFiltered || []
       } else {
@@ -175,23 +140,6 @@ export const BusinessProductListing = (props) => {
       conector: 'OR'
     }
 
-    if (categorySelected.id === 'featured') {
-      parameters.params = 'features'
-    }
-
-    if (categorySelected.id === 'featured' && searchValue) {
-      parameters.params = 'features'
-      where = {
-        conditions: [
-          {
-            conditions: searchConditions,
-            conector: 'OR'
-          }
-        ],
-        conector: 'AND'
-      }
-    }
-
     try {
       const functionFetch = categorySelected.id && categorySelected.id !== 'featured'
         ? ordering.businesses(businessState.business.id).categories(categorySelected.id).products()
@@ -218,7 +166,6 @@ export const BusinessProductListing = (props) => {
         categoriesState[categoryKey] = newcategoryState
         setCategoryState({ ...newcategoryState })
         setCategoriesState({ ...categoriesState })
-        setFeaturedProducts(!!categoriesState.all.products.find(product => product.featured))
       } else {
         setErrors(result)
       }
@@ -304,22 +251,23 @@ export const BusinessProductListing = (props) => {
   }
 
   useEffect(() => {
-    if (!businessState.loading) {
+    if (!businessState.loading && categorySelected) {
       getProducts(true)
+    } else if (businessState?.business?.categories) {
+      setCategorySelected(businessState?.business?.categories[0])
     }
   }, [businessState])
 
   useEffect(() => {
-    getProducts(!!searchValue)
+    if (searchValue !== null) getProducts(!!searchValue)
   }, [searchValue])
 
   useEffect(() => {
     getProducts(!!searchValue)
-  }, [categorySelected.id])
+  }, [categorySelected?.id])
 
   useEffect(() => {
     getBusiness()
-    getProducts()
   }, [slug])
 
   /**
@@ -353,12 +301,12 @@ export const BusinessProductListing = (props) => {
           categoryState={categoryState}
           businessState={businessState}
           productModal={productModal}
-          featuredProducts={featuredProducts}
           errorQuantityProducts={errorQuantityProducts}
           handleChangeCategory={handleChangeCategory}
           handleChangeSearch={handleChangeSearch}
           getNextProducts={getProducts}
           setCategorySelected={setCategorySelected}
+          setBusinessState={setBusinessState}
           handleUpdateBusinessState={handleUpdateBusinessState}
           updateProductModal={(val) => setProductModal({ ...productModal, product: val })}
         />

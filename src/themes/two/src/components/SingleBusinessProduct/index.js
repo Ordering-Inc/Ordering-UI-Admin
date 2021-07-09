@@ -3,7 +3,10 @@ import Skeleton from 'react-loading-skeleton'
 import { useUtils, useLanguage, SingleBusinessProduct as SingleBusinessProductController } from 'ordering-components-admin'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
-import { BusinessActionSelector } from '../BusinessActionSelector'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import { useTheme } from 'styled-components'
+import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+
 import {
   SingleListBusinessContainer,
   BusinessGeneralInfo,
@@ -11,11 +14,9 @@ import {
   InfoBlock,
   BusinessEnableWrapper,
   Image,
-  InputName
+  InputName,
+  ActionSelectorWrapper
 } from './styles'
-import {
-  WrapperBusinessActionSelector
-} from '../SingleProductsCategory/styles'
 
 const SingleBusinessProductUI = (props) => {
   const {
@@ -28,11 +29,13 @@ const SingleBusinessProductUI = (props) => {
     deleteProduct
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, optimizeImage }] = useUtils()
   const [isEditMode, setIsEditMode] = useState(false)
   const productNameEditRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const ActionIcon = <FiMoreVertical />
 
   const closeEditMode = (e) => {
     if (isEditMode && !e.target.closest('.product-name-edit') && !e.target.closest('.popup-component')) {
@@ -130,7 +133,7 @@ const SingleBusinessProductUI = (props) => {
                     {
                       product?.price && (
                         <InfoBlock>
-                          <p>{parsePrice(product?.price)}</p>
+                          <p>{product?.price}</p>
                         </InfoBlock>
                       )
                     }
@@ -161,14 +164,16 @@ const SingleBusinessProductUI = (props) => {
                   </BusinessEnableWrapper>
                 </td>
                 <td>
-                  <WrapperBusinessActionSelector className='business_actions'>
-                    <BusinessActionSelector
-                      business={product}
-                      handleDuplicateBusiness={() => console.log('copy')}
-                      handleDeleteBusiness={deleteProduct}
-                      handleOpenBusinessDetails={() => console.log('open')}
-                    />
-                  </WrapperBusinessActionSelector>
+                  <ActionSelectorWrapper>
+                    <DropdownButton
+                      menuAlign={theme?.rtl ? 'left' : 'right'}
+                      title={ActionIcon}
+                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                    >
+                      <Dropdown.Item onClick={() => console.log('handleOpenProductDetails(product)')}>{t('EDIT', 'Edit')}</Dropdown.Item>
+                      <Dropdown.Item onClick={deleteProduct}>{t('DELETE', 'Delete')}</Dropdown.Item>
+                    </DropdownButton>
+                  </ActionSelectorWrapper>
                 </td>
               </tr>
             </SingleListBusinessContainer>

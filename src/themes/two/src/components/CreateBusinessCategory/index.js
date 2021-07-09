@@ -3,9 +3,9 @@ import { bytesConverter } from '../../../../../utils'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick,
-  CreateBusinessCategory as CreateBusinessCategoryController
+  ExamineClick
 } from 'ordering-components-admin'
+import { CreateBusinessCategory as CreateBusinessCategoryController } from './naked'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
@@ -21,7 +21,7 @@ import {
   CategoryContent,
   CategoryActionContainer,
   CategoryEnableWrapper,
-  WrapperBusinessActionSelector
+  ActionSelectorWrapper
 } from '../SingleProductsCategory/styles'
 
 const CreateBusinessCategoryUI = (props) => {
@@ -29,7 +29,8 @@ const CreateBusinessCategoryUI = (props) => {
     categoryState,
     handleChangeInput,
     handlechangeImage,
-    handleUpdateClick
+    handleUpdateClick,
+    setIsAddCategory
   } = props
   const [, t] = useLanguage()
 
@@ -74,8 +75,10 @@ const CreateBusinessCategoryUI = (props) => {
     const outsideDropdown = !conatinerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(categoryState?.category).length > 0 || !categoryState?.loading) {
+        if (Object.keys(categoryState?.category).length > 0 && !categoryState?.loading) {
           handleUpdateClick()
+        } else {
+          setIsAddCategory(false)
         }
       }
     }
@@ -143,9 +146,9 @@ const CreateBusinessCategoryUI = (props) => {
                 onChange={handleChangeInput}
               />
             </CategoryEnableWrapper>
-            <WrapperBusinessActionSelector className='business_actions'>
+            <ActionSelectorWrapper className='business_actions'>
               <FiMoreVertical />
-            </WrapperBusinessActionSelector>
+            </ActionSelectorWrapper>
           </CategoryActionContainer>
         </CategoryContent>
       </CreateBusinessCategoryContainer>

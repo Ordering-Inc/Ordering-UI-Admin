@@ -11,6 +11,12 @@ export const SpreadSheetContainer = styled.div`
     }
   }
 
+  .ht_master .wtHolder {
+    @media (min-width: 768px) {
+      max-height: calc(100vh - 230px);
+    }
+  }
+
   .wtHolder {
     width: 100% !important;
     height: 100% !important;

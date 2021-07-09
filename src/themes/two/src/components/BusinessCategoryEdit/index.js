@@ -149,7 +149,11 @@ const BusinessCategoryEditUI = (props) => {
               <>
                 <HeaderContainer>
                   <BusinessEnableWrapper className='business_enable_control'>
-                    <span>{t('CATEGORY_NAME', 'Category name')}</span>
+                    {
+                      formState?.changes?.name && (
+                        <span>{formState?.changes?.name}</span>
+                      )
+                    }
                     <Switch
                       defaultChecked={formState?.changes?.enabled || false}
                       onChange={handleChangeCheckBox}
