@@ -5,10 +5,10 @@ import {
   useUtils,
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  SingleBusinessProduct as SingleBusinessProductController
 } from 'ordering-components-admin'
 import { bytesConverter } from '../../../../../utils'
-import { SingleBusinessProduct as SingleBusinessProductController } from './naked'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
 import { DropdownButton, Dropdown } from 'react-bootstrap'

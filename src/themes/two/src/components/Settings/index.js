@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent } from 'ordering-components-admin'
-import { Settings as SettingsController } from './naked'
+import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { CategoryDescription } from '../CategoryDescription'
 

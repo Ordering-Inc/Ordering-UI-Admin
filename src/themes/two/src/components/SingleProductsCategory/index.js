@@ -4,9 +4,9 @@ import { toast } from 'react-toastify'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  SingleProductsCategory as SingleProductsCategoryController
 } from 'ordering-components-admin'
-import { SingleProductsCategory as SingleProductsCategoryController } from './naked'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
 import { Switch } from '../../styles/Switch'

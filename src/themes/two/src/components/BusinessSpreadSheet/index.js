@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, BusinessSpreadSheet as BusinessSpreadSheetController } from 'ordering-components-admin'
 import { SpreadSheetEditor } from '../SpreadSheetEditor'
-import { BusinessSpreadSheet as BusinessSpreadSheetController } from './naked'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
 import { Alert } from '../Confirm'

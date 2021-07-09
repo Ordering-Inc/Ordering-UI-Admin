@@ -4,9 +4,9 @@ import { toast } from 'react-toastify'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  BusinessCategoryEdit as BusinessCategoryEditController
 } from 'ordering-components-admin'
-import { BusinessCategoryEdit as BusinessCategoryEditController } from './naked'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { bytesConverter } from '../../../../../utils'
 import { Alert } from '../Confirm'

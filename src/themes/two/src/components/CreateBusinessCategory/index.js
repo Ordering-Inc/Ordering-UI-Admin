@@ -4,9 +4,9 @@ import { bytesConverter } from '../../../../../utils'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  CreateBusinessCategory as CreateBusinessCategoryController
 } from 'ordering-components-admin'
-import { CreateBusinessCategory as CreateBusinessCategoryController } from './naked'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'

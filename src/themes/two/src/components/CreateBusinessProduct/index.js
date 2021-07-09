@@ -6,9 +6,9 @@ import { bytesConverter } from '../../../../../utils'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  CreateBusinessProduct as CreateBusinessProductController
 } from 'ordering-components-admin'
-import { CreateBusinessProduct as CreateBusinessProductController } from './naked'
 import { Switch } from '../../styles/Switch'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'

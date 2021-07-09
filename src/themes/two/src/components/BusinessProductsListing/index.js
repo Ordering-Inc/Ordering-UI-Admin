@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage } from 'ordering-components-admin'
-import { BusinessProductListing as BusinessProductListingController } from './naked'
+import { useLanguage, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
@@ -164,6 +163,6 @@ export const BusinessProductsListing = (props) => {
     handleUpdateInitialRender: (val) => setIsInitialRender(val)
   }
   return (
-    <BusinessProductListingController {...businessProductslistingProps} />
+    <BusinessProductsListingController {...businessProductslistingProps} />
   )
 }
