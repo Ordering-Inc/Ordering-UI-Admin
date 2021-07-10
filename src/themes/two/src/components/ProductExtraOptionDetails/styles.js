@@ -70,12 +70,22 @@ export const OptionInfoContainer = styled.div`
 
 export const OptionContent = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+  }
 `
 
 export const RightOptionContent = styled.div`
   display: flex;
+  align-items: center;
+  margin-top: 10px;
   > div:not(:last-child) {
     width: 100px;
+  }
+  @media (min-width: 1200px) {
+    margin-top: 0px;
   }
 `
 
@@ -105,9 +115,14 @@ export const ActionsContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 27px;
-
+  padding-top: 6px;
+  padding-bottom: 6px;
+  
   ${({ primary }) => !primary && css`
     margin-top: 0px;
+  `}
+  ${({ top }) => top && css`
+    margin-top: 30px;
   `}
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid #E9ECEF;
@@ -169,6 +184,11 @@ export const DropDownWrapper = styled.div`
 export const OptionSettings = styled.div`
   display: flex;
   margin: 20px 0;
+  flex-direction: column;
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+  }
 `
 
 export const OptionSettingItem = styled.div`
@@ -194,10 +214,11 @@ export const CheckboxWrapper = styled.div`
 export const Dvider = styled.div`
   height: 13px;
   background: #F8F9FA;
-  margin: 30px 0;
+  margin: 10px 0 30px;
 `
 
 export const ModifierOptionsContainer = styled.div`
+  margin-bottom: 20px;
   h2 {
     font-size: 18px;
     font-weight: 600;
@@ -251,6 +272,7 @@ export const LeftSubOptionContent = styled.div`
 
 export const RightSubOptionContent = styled.div`
   display: flex;
+  align-items: center;
   input {
     max-width: 100px;
     ${props => props.theme?.rtl ? css`
@@ -264,11 +286,16 @@ export const RightSubOptionContent = styled.div`
 export const SelectboxGroup = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 50%;
   
   > div {
     background: #F8F9FA;
     &:first-child {
       margin-bottom: 20px;
     }
+  }
+
+  @media (min-width: 1200px) {
+    max-width: initial;
   }
 `

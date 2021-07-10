@@ -166,7 +166,7 @@ const ProductExtraOptionDetailsUI = (props) => {
         </OptionImage>
         <OptionInfoContainer>
           <OptionContent>
-            <InputWrapper>
+            <InputWrapper primary>
               <label>{t('OPTION_NAME', 'Option name')}</label>
               <Input
                 name='name'
@@ -176,7 +176,7 @@ const ProductExtraOptionDetailsUI = (props) => {
               />
             </InputWrapper>
             <RightOptionContent>
-              <InputWrapper>
+              <InputWrapper primary>
                 <label>{t('MIN', 'Min')}</label>
                 <Input
                   name='min'
@@ -184,7 +184,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, true)}
                 />
               </InputWrapper>
-              <InputWrapper>
+              <InputWrapper primary>
                 <label>{t('MAX', 'Max')}</label>
                 <Input
                   name='max'
@@ -192,7 +192,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, false)}
                 />
               </InputWrapper>
-              <ActionsContainer>
+              <ActionsContainer top>
                 <EnableWrapper>
                   <span>{t('ENABLE', 'Enable')}</span>
                   <Switch
