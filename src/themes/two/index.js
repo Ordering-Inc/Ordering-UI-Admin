@@ -1,7 +1,6 @@
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AutoScroll } from './src/components/AutoScroll'
-import { BasicSettings } from './src/components/BasicSettings'
 import { BusinessActionSelector } from './src/components/BusinessActionSelector'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
 import { BusinessDetails } from './src/components/BusinessDetails'
@@ -68,6 +67,7 @@ import { PaymethodTypeSelector } from './src/components/PaymethodTypeSelector'
 import { Personalization } from './src/components/Personalization'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { SearchBar } from './src/components/SearchBar'
+import { Settings } from './src/components/Settings'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SingleBusiness } from './src/components/SingleBusiness'
 import { SpinnerLoader } from './src/components/SpinnerLoader'
@@ -85,6 +85,7 @@ import { UsersList } from './src/components/UsersList'
 import { UsersListing } from './src/components/UsersListing'
 import { UserTypeFilter } from './src/components/UserTypeFilter'
 import { UserTypeSelector } from './src/components/UserTypeSelector'
+import { capitalize } from '../../utils'
 
 // styles
 import { Button } from './src/styles/Buttons'
@@ -98,7 +99,6 @@ export {
   AutoScroll,
   BusinessActionSelector,
   BusinessActiveStateFilter,
-  BasicSettings,
   BusinessDetails,
   BusinessesSelector,
   BusinessessListing,
@@ -163,6 +163,7 @@ export {
   Personalization,
   ProductItemAccordion,
   SearchBar,
+  Settings,
   SidebarMenu,
   SingleBusiness,
   SpinnerLoader,
@@ -180,6 +181,7 @@ export {
   UsersListing,
   UserTypeFilter,
   UserTypeSelector,
+  capitalize,
 
   // styles
   Button,

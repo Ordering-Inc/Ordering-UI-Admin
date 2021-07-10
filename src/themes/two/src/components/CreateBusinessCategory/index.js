@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 import { bytesConverter } from '../../../../../utils'
 import {
   useLanguage,
@@ -21,7 +22,7 @@ import {
   CategoryContent,
   CategoryActionContainer,
   CategoryEnableWrapper,
-  WrapperBusinessActionSelector
+  ActionSelectorWrapper
 } from '../SingleProductsCategory/styles'
 
 const CreateBusinessCategoryUI = (props) => {
@@ -29,7 +30,8 @@ const CreateBusinessCategoryUI = (props) => {
     categoryState,
     handleChangeInput,
     handlechangeImage,
-    handleUpdateClick
+    handleUpdateClick,
+    setIsAddCategory
   } = props
   const [, t] = useLanguage()
 
@@ -74,8 +76,10 @@ const CreateBusinessCategoryUI = (props) => {
     const outsideDropdown = !conatinerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(categoryState?.category).length > 0 || !categoryState?.loading) {
+        if (Object.keys(categoryState?.category).length > 1 && !categoryState?.loading) {
           handleUpdateClick()
+        } else {
+          setIsAddCategory(false)
         }
       }
     }
@@ -94,6 +98,22 @@ const CreateBusinessCategoryUI = (props) => {
     document.addEventListener('click', CloseAddBusinessTypeForm)
     return () => document.removeEventListener('click', CloseAddBusinessTypeForm)
   }, [categoryState])
+
+  useEffect(() => {
+    if (categoryState?.category && !categoryState?.result.error && !categoryState?.loading) {
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = categoryState?.result?.result
+      toast.dark(content, toastConfigure)
+    }
+  }, [categoryState?.loading])
 
   return (
     <>
@@ -143,9 +163,9 @@ const CreateBusinessCategoryUI = (props) => {
                 onChange={handleChangeInput}
               />
             </CategoryEnableWrapper>
-            <WrapperBusinessActionSelector className='business_actions'>
+            <ActionSelectorWrapper className='business_actions'>
               <FiMoreVertical />
-            </WrapperBusinessActionSelector>
+            </ActionSelectorWrapper>
           </CategoryActionContainer>
         </CategoryContent>
       </CreateBusinessCategoryContainer>

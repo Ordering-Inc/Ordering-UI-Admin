@@ -46,13 +46,14 @@ export const BusinessProductsCategories = (props) => {
                 category={category}
                 categorySelected={categorySelected}
                 handleChangeCategory={onClickCategory}
+                business={businessState?.business}
               />
             ))
           }
           {
             !businessState.loading && (
               isAddCategory
-                ? <CreateBusinessCategory {...props} setIsAddCategory={setIsAddCategory} />
+                ? <CreateBusinessCategory {...props} setIsAddCategory={setIsAddCategory} business={businessState?.business} />
                 : <AddCategory onClick={() => setIsAddCategory(true)}>{t('ADD_NEW_CATEGORY', 'Add new Category')}</AddCategory>
             )
           }
