@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, BusinessProductListing as BusinessProductListingController } from 'ordering-components-admin'
+import Skeleton from 'react-loading-skeleton'
+import { useLanguage, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
@@ -28,7 +29,6 @@ const BusinessProductsListingUI = (props) => {
     handleChangeSearch,
     featuredProducts,
     businessState,
-    setBusinessState,
     onProductRedirect,
     slug,
     categoryId
@@ -36,22 +36,28 @@ const BusinessProductsListingUI = (props) => {
   const [, t] = useLanguage()
 
   const [viewMethod, setViewMethod] = useState('list')
-  const [isCategoryEdit, setIsCategoryEdit] = useState(false)
+  const [categoryToEdit, setCategoryToEdit] = useState({ open: false, category: null })
 
   useEffect(() => {
     if (categoryId) {
-      setIsCategoryEdit(true)
+      setCategoryToEdit({
+        ...categoryToEdit,
+        open: true
+      })
     }
   }, [categoryId])
 
-  const handleOpenEdit = () => {
-    if (categorySelected?.id === null) return
+  const handleOpenCategoryDetails = (category) => {
+    if (category?.id === null) return
     onProductRedirect && onProductRedirect({
       slug: slug,
-      category: categorySelected?.id,
+      category: category?.id,
       product: null
     })
-    setIsCategoryEdit(true)
+    setCategoryToEdit({
+      open: true,
+      category: { ...category }
+    })
   }
 
   const handleCloseEdit = () => {
@@ -60,7 +66,10 @@ const BusinessProductsListingUI = (props) => {
       category: null,
       product: null
     })
-    setIsCategoryEdit(false)
+    setCategoryToEdit({
+      open: false,
+      category: null
+    })
   }
 
   return (
@@ -68,7 +77,15 @@ const BusinessProductsListingUI = (props) => {
       <CategoryProductsContainer>
         <HeaderContainer>
           <div>
-            <h1>{t('STORES_LIST', 'Stores list')}</h1>
+            {
+              businessState.loading ? (
+                <h1><Skeleton width={200} height={30} /></h1>
+              ) : (
+                businessState?.business?.name && (
+                  <h1>{businessState?.business?.name}</h1>
+                )
+              )
+            }
           </div>
           <SearchBar
             isCustomLayout
@@ -86,6 +103,7 @@ const BusinessProductsListingUI = (props) => {
                 categorySelected={categorySelected}
                 onClickCategory={handleChangeCategory}
                 featured={featuredProducts}
+                handleOpenCategoryDetails={handleOpenCategoryDetails}
               />
             }
           </CategoryListContainer>
@@ -93,7 +111,7 @@ const BusinessProductsListingUI = (props) => {
             <ProductHeader>
               <div className='d-flex align-items-center'>
                 <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-                <AddButton onClick={handleOpenEdit}>
+                <AddButton onClick={() => handleOpenCategoryDetails(categorySelected)}>
                   <BsPlusSquare />
                 </AddButton>
               </div>
@@ -121,14 +139,13 @@ const BusinessProductsListingUI = (props) => {
         </CategoryProductsContent>
       </CategoryProductsContainer>
       {
-        isCategoryEdit && (
+        categoryToEdit?.open && (
           <BusinessCategoryEdit
             {...props}
-            open={isCategoryEdit}
+            open={categoryToEdit?.open}
             onClose={handleCloseEdit}
-            category={categorySelected}
+            category={categoryToEdit?.category}
             businessState={businessState}
-            setBusinessState={setBusinessState}
           />
         )
       }
@@ -146,6 +163,6 @@ export const BusinessProductsListing = (props) => {
     handleUpdateInitialRender: (val) => setIsInitialRender(val)
   }
   return (
-    <BusinessProductListingController {...businessProductslistingProps} />
+    <BusinessProductsListingController {...businessProductslistingProps} />
   )
 }

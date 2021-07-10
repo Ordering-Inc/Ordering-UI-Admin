@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
@@ -24,7 +25,7 @@ import {
   GeneralInfo
 } from './styles'
 import {
-  WrapperBusinessActionSelector
+  ActionSelectorWrapper
 } from '../SingleProductsCategory/styles'
 
 const CreateBusinessProductUI = (props) => {
@@ -34,7 +35,8 @@ const CreateBusinessProductUI = (props) => {
     handleChangeCheckBox,
     handleChangeInput,
     handleUpdateClick,
-    handlechangeImage
+    handlechangeImage,
+    setIsAddProduct
   } = props
 
   const [, t] = useLanguage()
@@ -79,8 +81,10 @@ const CreateBusinessProductUI = (props) => {
     const outsideDropdown = !conatinerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState?.changes).length > 0 || !formState?.loading) {
+        if (Object.keys(formState?.changes).length > 1 && !formState?.loading) {
           handleUpdateClick()
+        } else {
+          setIsAddProduct(false)
         }
       }
     }
@@ -99,6 +103,22 @@ const CreateBusinessProductUI = (props) => {
     document.addEventListener('click', CloseAddBusinessTypeForm)
     return () => document.removeEventListener('click', CloseAddBusinessTypeForm)
   }, [formState])
+
+  useEffect(() => {
+    if (!formState?.result.error && !formState?.loading && formState?.result?.result) {
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = formState?.result?.result
+      toast.dark(content, toastConfigure)
+    }
+  }, [formState?.loading])
 
   return (
     <>
@@ -145,6 +165,7 @@ const CreateBusinessProductUI = (props) => {
                   defaultValue={formState?.changes?.name || ''}
                   onChange={handleChangeInput}
                   placeholder={t('WRITE_A_NAME', 'Write a name')}
+                  autoComplete='off'
                 />
               </BusinessGeneralInfo>
             </td>
@@ -158,6 +179,7 @@ const CreateBusinessProductUI = (props) => {
                   defaultValue={formState?.changes?.price || ''}
                   onChange={handleChangeInput}
                   placeholder={t('WRITE_PRICE', 'Write price')}
+                  autoComplete='off'
                 />
               </GeneralInfo>
             </td>
@@ -171,6 +193,7 @@ const CreateBusinessProductUI = (props) => {
                   defaultValue={formState?.changes?.description || ''}
                   onChange={handleChangeInput}
                   placeholder={t('WRITE_DESCRIPTION', 'Write description')}
+                  autoComplete='off'
                 />
               </GeneralInfo>
             </td>
@@ -189,9 +212,9 @@ const CreateBusinessProductUI = (props) => {
             </BusinessEnableWrapper>
           </td>
           <td>
-            <WrapperBusinessActionSelector className='business_actions'>
+            <ActionSelectorWrapper className='business_actions'>
               <FiMoreVertical />
-            </WrapperBusinessActionSelector>
+            </ActionSelectorWrapper>
           </td>
         </tr>
       </CreateBusinessProductContainer>

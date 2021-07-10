@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components'
 
 export const CategoryListContainer = styled.div``
 
@@ -34,7 +34,6 @@ export const HeaderContainer = styled.div`
 
 export const ListContent = styled.div`
   margin-top: 35px;
-  border-right: 1px solid #E9ECEF;
   max-height: calc(100vh - 380px);
   overflow: auto;
 
@@ -45,7 +44,6 @@ export const ListContent = styled.div`
   }
 
   @media (max-width: 576px) {
-    border: none;
     padding: 0px;
   }
 

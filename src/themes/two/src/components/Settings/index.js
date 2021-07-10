@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, BasicSettings as BasicSettingsController } from 'ordering-components-admin'
+import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { CategoryDescription } from '../CategoryDescription'
 
@@ -10,10 +10,10 @@ import {
   ContentWrapper
 } from './styles'
 
-const BasicSettingsUI = (props) => {
-
+const SettingsUI = (props) => {
   const {
-    categoryList
+    categoryList,
+    settingsType
   } = props
 
   const [, t] = useLanguage()
@@ -48,18 +48,19 @@ const BasicSettingsUI = (props) => {
 
   const onBasicSettingsRedirect = ({ category, config }) => {
     if (!category && !config) {
-      return events.emit('go_to_page', { page: 'basicSettings', replace: true })
+      if (settingsType === 'basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
+      if (settingsType === 'operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
     }
     if (!config && category) {
       events.emit('go_to_page', {
-        page: 'basicSettings',
+        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: `?category=${category}`,
         replace: true
       })
     }
     if (category && config) {
       events.emit('go_to_page', {
-        page: 'basicSettings',
+        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: `?category=${category}&config=${config}`,
         replace: true
       })
@@ -81,18 +82,22 @@ const BasicSettingsUI = (props) => {
   return (
     <>
       <BasicSettingsContainer>
-        <Title>{t('BASIC_SETTINGS', 'Basic settings ')}</Title>
-        <ContentWrapper className="row">
+        <Title>
+          {
+            settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
+          }
+        </Title>
+        <ContentWrapper className='row'>
           {
             categoryList.loading ? (
               [...Array(12).keys()].map(i => (
-                <div className="col-md-4 col-sm-6" key={i}>
+                <div className='col-md-4 col-sm-6' key={i}>
                   <SettingItemUI isSkeleton />
                 </div>
               ))
             ) : (
               categoryList.categories.map((category, i) => (
-                <div className="col-md-4 col-sm-6 category" key={i} onClick={() => handleOpenDescription(category)}>
+                <div className='col-md-4 col-sm-6 category' key={i} onClick={() => handleOpenDescription(category)}>
                   <SettingItemUI category={category} />
                 </div>
               ))
@@ -106,7 +111,7 @@ const BasicSettingsUI = (props) => {
             open={isOpenDescription}
             category={selectedCategory}
             categoryId={categoryId}
-            configId={configId}
+            configId={parseInt(configId)}
             onClose={handleBackRedirect}
             onBasicSettingsRedirect={onBasicSettingsRedirect}
           />
@@ -117,12 +122,12 @@ const BasicSettingsUI = (props) => {
   )
 }
 
-export const BasicSettings = (props) => {
-  const basicSettingsProps = {
+export const Settings = (props) => {
+  const settingsProps = {
     ...props,
-    UIComponent: BasicSettingsUI,
+    UIComponent: SettingsUI
   }
   return (
-    <BasicSettingsController {...basicSettingsProps} />
+    <SettingsController {...settingsProps} />
   )
 }

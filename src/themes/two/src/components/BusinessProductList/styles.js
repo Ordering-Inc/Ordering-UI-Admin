@@ -2,6 +2,12 @@ import styled, { css } from 'styled-components'
 
 export const ListContent = styled.div`
   margin-top: 35px;
+  height: 100%;
+  border: none;
+  
+  @media (min-width: 768px) {
+    border-left: 1px solid #E9ECEF;
+  }
 `
 
 export const ProductListContainer = styled.div`
@@ -23,6 +29,18 @@ export const ProductListContainer = styled.div`
   }
 `
 
+export const ProductListSpreadContainer = styled.div`
+  margin: 0;
+
+  @media (min-width: 576px) {
+    ${props => props.theme.rtl ? css`
+    margin-right: 30px;
+    ` : css`
+    margin-left: 30px;
+    `}
+  }
+`
+
 export const BusinessProductListTable = styled.table`
   width: calc(100% - 10px);
   min-width: 900px;
@@ -35,6 +53,10 @@ export const BusinessProductListTable = styled.table`
 
   th.more {
     width: 50px;
+  }
+
+  th.description {
+    width: 30%;
   }
 
   th.id,
@@ -68,4 +90,5 @@ export const AddProductBtn = styled.div`
   color: #909BA9;
   margin-top: 12px;
   cursor: pointer;
+  margin-bottom: 15px;
 `
