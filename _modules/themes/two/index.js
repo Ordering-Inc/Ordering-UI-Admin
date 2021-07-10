@@ -21,12 +21,6 @@ Object.defineProperty(exports, "AutoScroll", {
     return _AutoScroll.AutoScroll;
   }
 });
-Object.defineProperty(exports, "BasicSettings", {
-  enumerable: true,
-  get: function get() {
-    return _BasicSettings.BasicSettings;
-  }
-});
 Object.defineProperty(exports, "BusinessActionSelector", {
   enumerable: true,
   get: function get() {
@@ -423,6 +417,12 @@ Object.defineProperty(exports, "SearchBar", {
     return _SearchBar.SearchBar;
   }
 });
+Object.defineProperty(exports, "Settings", {
+  enumerable: true,
+  get: function get() {
+    return _Settings.Settings;
+  }
+});
 Object.defineProperty(exports, "SidebarMenu", {
   enumerable: true,
   get: function get() {
@@ -525,6 +525,12 @@ Object.defineProperty(exports, "UserTypeSelector", {
     return _UserTypeSelector.UserTypeSelector;
   }
 });
+Object.defineProperty(exports, "capitalize", {
+  enumerable: true,
+  get: function get() {
+    return _utils.capitalize;
+  }
+});
 Object.defineProperty(exports, "Button", {
   enumerable: true,
   get: function get() {
@@ -603,8 +609,6 @@ var _AddressForm = require("./src/components/AddressForm");
 var _AddressList = require("./src/components/AddressList");
 
 var _AutoScroll = require("./src/components/AutoScroll");
-
-var _BasicSettings = require("./src/components/BasicSettings");
 
 var _BusinessActionSelector = require("./src/components/BusinessActionSelector");
 
@@ -738,6 +742,8 @@ var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
 
 var _SearchBar = require("./src/components/SearchBar");
 
+var _Settings = require("./src/components/Settings");
+
 var _SidebarMenu = require("./src/components/SidebarMenu");
 
 var _SingleBusiness = require("./src/components/SingleBusiness");
@@ -771,6 +777,8 @@ var _UsersListing = require("./src/components/UsersListing");
 var _UserTypeFilter = require("./src/components/UserTypeFilter");
 
 var _UserTypeSelector = require("./src/components/UserTypeSelector");
+
+var _utils = require("../../utils");
 
 var _Buttons = require("./src/styles/Buttons");
 

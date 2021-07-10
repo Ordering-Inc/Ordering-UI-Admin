@@ -84,7 +84,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  flex-grow: 1;\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex-grow: 1;\n  width: 100%;\n\n  @media (min-width: 769px) {\n    width: calc(100% - 250px);\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;

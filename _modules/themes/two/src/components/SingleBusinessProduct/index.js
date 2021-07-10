@@ -9,19 +9,27 @@ exports.SingleBusinessProduct = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactToastify = require("react-toastify");
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _utils = require("../../../../../utils");
 
 var _Switch = require("../../styles/Switch");
 
 var _Confirm = require("../Confirm");
 
-var _BusinessActionSelector = require("../BusinessActionSelector");
+var _reactBootstrap = require("react-bootstrap");
+
+var _styledComponents = require("styled-components");
+
+var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
+
+var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("./styles");
-
-var _styles2 = require("../SingleProductsCategory/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,13 +56,20 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
+  var _productFormState$cha, _productFormState$cha2, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5;
+
   var isSkeleton = props.isSkeleton,
       viewMethod = props.viewMethod,
       product = props.product,
       allowColumns = props.allowColumns,
       handleChangeProductActive = props.handleChangeProductActive,
       handleUpdateClick = props.handleUpdateClick,
-      deleteProduct = props.deleteProduct;
+      deleteProduct = props.deleteProduct,
+      productFormState = props.productFormState,
+      handleChangeInput = props.handleChangeInput,
+      handlechangeImage = props.handlechangeImage,
+      isEditMode = props.isEditMode;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -62,47 +77,24 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parsePrice = _useUtils2$.parsePrice,
-      optimizeImage = _useUtils2$.optimizeImage;
+      parsePrice = _useUtils2[0].parsePrice;
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isEditMode = _useState2[0],
-      setIsEditMode = _useState2[1];
-
-  var productNameEditRef = (0, _react.useRef)(null);
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
-  var closeEditMode = function closeEditMode(e) {
-    if (isEditMode && !e.target.closest('.product-name-edit') && !e.target.closest('.popup-component')) {
-      var inputValue = productNameEditRef.current.value;
+  var conatinerRef = (0, _react.useRef)(null);
+  var ProductTypeImgRef = (0, _react.useRef)(null);
 
-      if (inputValue === '') {
-        setAlertState({
-          open: true,
-          content: [t('NAME_IS_REQUIRED', 'Product name is Required')]
-        });
-      } else {
-        setIsEditMode(false);
-        handleUpdateClick(inputValue);
-      }
-    }
+  var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
+
+  var handleClickImage = function handleClickImage() {
+    ProductTypeImgRef.current.click();
   };
-
-  (0, _react.useEffect)(function () {
-    document.addEventListener('click', closeEditMode);
-    return function () {
-      return document.removeEventListener('click', closeEditMode);
-    };
-  }, [isEditMode]);
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -111,6 +103,82 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     });
   };
 
+  var handleFiles = function handleFiles(files) {
+    if (files.length === 1) {
+      var _files$;
+
+      var type = files[0].type.split('/')[0];
+
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        });
+        return;
+      }
+
+      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        });
+        return;
+      }
+
+      handlechangeImage(files[0]);
+    }
+  };
+
+  var closeProductEdit = function closeProductEdit(e) {
+    var _conatinerRef$current;
+
+    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) === null || _conatinerRef$current === void 0 ? void 0 : _conatinerRef$current.contains(e.target));
+
+    if (outsideDropdown) {
+      if (!e.target.closest('.popup-component')) {
+        if (isEditMode && Object.keys(productFormState === null || productFormState === void 0 ? void 0 : productFormState.changes).length > 0 && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading)) {
+          handleUpdateClick();
+        }
+      }
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    var _productFormState$res;
+
+    if (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res = productFormState.result) === null || _productFormState$res === void 0 ? void 0 : _productFormState$res.error) {
+      var _productFormState$res2;
+
+      setAlertState({
+        open: true,
+        content: productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res2 = productFormState.result) === null || _productFormState$res2 === void 0 ? void 0 : _productFormState$res2.result
+      });
+    }
+  }, [productFormState === null || productFormState === void 0 ? void 0 : productFormState.result]);
+  (0, _react.useEffect)(function () {
+    document.addEventListener('click', closeProductEdit);
+    return function () {
+      return document.removeEventListener('click', closeProductEdit);
+    };
+  }, [productFormState]);
+  (0, _react.useEffect)(function () {
+    if ((productFormState === null || productFormState === void 0 ? void 0 : productFormState.changes) && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.result.error) && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading)) {
+      var _productFormState$res3;
+
+      var toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      };
+      var content = productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res3 = productFormState.result) === null || _productFormState$res3 === void 0 ? void 0 : _productFormState$res3.result;
+
+      _reactToastify.toast.dark(content, toastConfigure);
+    }
+  }, [productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -129,35 +197,68 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     width: 100
   })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30
-  })))) : /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
+  })))) : /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, {
+    ref: conatinerRef
+  }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-    bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images)
-  })), (product === null || product === void 0 ? void 0 : product.name) && (isEditMode ? /*#__PURE__*/_react.default.createElement(_styles.InputName, {
-    className: "product-name-edit",
-    defaultValue: product === null || product === void 0 ? void 0 : product.name,
-    ref: productNameEditRef
-  }) : /*#__PURE__*/_react.default.createElement("p", {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
     onClick: function onClick() {
-      return setIsEditMode(true);
-    }
-  }, product === null || product === void 0 ? void 0 : product.name)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, (product === null || product === void 0 ? void 0 : product.price) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("td", null, (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
+      return handleClickImage();
+    },
+    disabled: productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: function onFiles(files) {
+      return handleFiles(files);
+    },
+    childRef: function childRef(e) {
+      ProductTypeImgRef.current = e;
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+    onDrop: function onDrop(dataTransfer) {
+      return handleFiles(dataTransfer.files);
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading
+  }, (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha = productFormState.changes) === null || _productFormState$cha === void 0 ? void 0 : _productFormState$cha.images) ? /*#__PURE__*/_react.default.createElement("img", {
+    src: productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha2 = productFormState.changes) === null || _productFormState$cha2 === void 0 ? void 0 : _productFormState$cha2.images,
+    alt: "business type image",
+    loading: "lazy"
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))), (product === null || product === void 0 ? void 0 : product.name) && /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "name",
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha3 = productFormState.changes) === null || _productFormState$cha3 === void 0 ? void 0 : _productFormState$cha3.name) || '',
+    onChange: handleChangeInput,
+    autoComplete: "off"
+  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "price",
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha4 = productFormState.changes) === null || _productFormState$cha4 === void 0 ? void 0 : _productFormState$cha4.price) || '',
+    onChange: handleChangeInput,
+    autoComplete: "off"
+  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("textarea", {
+    name: "description",
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha5 = productFormState.changes) === null || _productFormState$cha5 === void 0 ? void 0 : _productFormState$cha5.description) || '',
+    onChange: handleChangeInput,
+    autoComplete: "off",
+    className: "description"
+  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     className: "business_enable_control"
   }, (product === null || product === void 0 ? void 0 : product.enabled) ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (product === null || product === void 0 ? void 0 : product.enabled) || false,
     onChange: handleChangeProductActive
-  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessActionSelector, {
-    className: "business_actions"
-  }, /*#__PURE__*/_react.default.createElement(_BusinessActionSelector.BusinessActionSelector, {
-    business: product,
-    handleDuplicateBusiness: function handleDuplicateBusiness() {
-      return console.log('copy');
-    },
-    handleDeleteBusiness: deleteProduct,
-    handleOpenBusinessDetails: function handleOpenBusinessDetails() {
-      return console.log('open');
+  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+    title: ActionIcon,
+    id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return console.log('handleOpenProductDetails(product)');
     }
-  })))))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: deleteProduct
+  }, t('DELETE', 'Delete')))))))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
   }, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30

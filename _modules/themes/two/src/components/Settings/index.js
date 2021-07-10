@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BasicSettings = void 0;
+exports.Settings = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -49,8 +49,9 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var BasicSettingsUI = function BasicSettingsUI(props) {
-  var categoryList = props.categoryList;
+var SettingsUI = function SettingsUI(props) {
+  var categoryList = props.categoryList,
+      settingsType = props.settingsType;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -107,15 +108,19 @@ var BasicSettingsUI = function BasicSettingsUI(props) {
         config = _ref.config;
 
     if (!category && !config) {
-      return events.emit('go_to_page', {
+      if (settingsType === 'basic') return events.emit('go_to_page', {
         page: 'basicSettings',
+        replace: true
+      });
+      if (settingsType === 'operation') return events.emit('go_to_page', {
+        page: 'operationSettings',
         replace: true
       });
     }
 
     if (!config && category) {
       events.emit('go_to_page', {
-        page: 'basicSettings',
+        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: "?category=".concat(category),
         replace: true
       });
@@ -123,7 +128,7 @@ var BasicSettingsUI = function BasicSettingsUI(props) {
 
     if (category && config) {
       events.emit('go_to_page', {
-        page: 'basicSettings',
+        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: "?category=".concat(category, "&config=").concat(config),
         replace: true
       });
@@ -147,7 +152,7 @@ var BasicSettingsUI = function BasicSettingsUI(props) {
     });
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('BASIC_SETTINGS', 'Basic settings ')), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     className: "row"
   }, categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("div", {
@@ -170,18 +175,18 @@ var BasicSettingsUI = function BasicSettingsUI(props) {
     open: isOpenDescription,
     category: selectedCategory,
     categoryId: categoryId,
-    configId: configId,
+    configId: parseInt(configId),
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
   }));
 };
 
-var BasicSettings = function BasicSettings(props) {
-  var basicSettingsProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BasicSettingsUI
+var Settings = function Settings(props) {
+  var settingsProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: SettingsUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BasicSettings, basicSettingsProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.Settings, settingsProps);
 };
 
-exports.BasicSettings = BasicSettings;
+exports.Settings = Settings;

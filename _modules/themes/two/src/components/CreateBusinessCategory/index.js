@@ -9,6 +9,8 @@ exports.CreateBusinessCategory = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactToastify = require("react-toastify");
+
 var _utils = require("../../../../../utils");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -50,12 +52,13 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
-  var _categoryState$catego, _categoryState$result3, _categoryState$catego2, _categoryState$catego3, _categoryState$catego4, _categoryState$catego5;
+  var _categoryState$catego, _categoryState$result4, _categoryState$catego2, _categoryState$catego3, _categoryState$catego4, _categoryState$catego5;
 
   var categoryState = props.categoryState,
       handleChangeInput = props.handleChangeInput,
       handlechangeImage = props.handlechangeImage,
-      handleUpdateClick = props.handleUpdateClick;
+      handleUpdateClick = props.handleUpdateClick,
+      setIsAddCategory = props.setIsAddCategory;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -116,8 +119,10 @@ var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
 
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(categoryState === null || categoryState === void 0 ? void 0 : categoryState.category).length > 0 || !(categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading)) {
+        if (Object.keys(categoryState === null || categoryState === void 0 ? void 0 : categoryState.category).length > 1 && !(categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading)) {
           handleUpdateClick();
+        } else {
+          setIsAddCategory(false);
         }
       }
     }
@@ -141,6 +146,24 @@ var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
       return document.removeEventListener('click', CloseAddBusinessTypeForm);
     };
   }, [categoryState]);
+  (0, _react.useEffect)(function () {
+    if ((categoryState === null || categoryState === void 0 ? void 0 : categoryState.category) && !(categoryState === null || categoryState === void 0 ? void 0 : categoryState.result.error) && !(categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading)) {
+      var _categoryState$result3;
+
+      var toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      };
+      var content = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$result3 = categoryState.result) === null || _categoryState$result3 === void 0 ? void 0 : _categoryState$result3.result;
+
+      _reactToastify.toast.dark(content, toastConfigure);
+    }
+  }, [categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CreateBusinessCategoryContainer, {
     ref: conatinerRef
   }, /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, {
@@ -160,7 +183,7 @@ var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: categoryState.loading
-  }, !categoryState.loading && ((_categoryState$catego = categoryState.category) === null || _categoryState$catego === void 0 ? void 0 : _categoryState$catego.image) && ((_categoryState$result3 = categoryState.result) === null || _categoryState$result3 === void 0 ? void 0 : _categoryState$result3.result) !== 'Network Error' ? /*#__PURE__*/_react.default.createElement("img", {
+  }, !categoryState.loading && ((_categoryState$catego = categoryState.category) === null || _categoryState$catego === void 0 ? void 0 : _categoryState$catego.image) && ((_categoryState$result4 = categoryState.result) === null || _categoryState$result4 === void 0 ? void 0 : _categoryState$result4.result) !== 'Network Error' ? /*#__PURE__*/_react.default.createElement("img", {
     src: categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$catego2 = categoryState.category) === null || _categoryState$catego2 === void 0 ? void 0 : _categoryState$catego2.image,
     alt: "header image",
     loading: "lazy"
@@ -182,7 +205,7 @@ var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
   }, ((_categoryState$catego4 = categoryState.category) === null || _categoryState$catego4 === void 0 ? void 0 : _categoryState$catego4.enabled) ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: ((_categoryState$catego5 = categoryState.category) === null || _categoryState$catego5 === void 0 ? void 0 : _categoryState$catego5.enabled) || false,
     onChange: handleChangeInput
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessActionSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, {
     className: "business_actions"
   }, /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CATEGORY', 'Category'),

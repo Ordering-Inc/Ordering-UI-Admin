@@ -9,6 +9,8 @@ exports.CreateBusinessProduct = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactToastify = require("react-toastify");
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _Confirm = require("../Confirm");
@@ -59,7 +61,8 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
       handleChangeCheckBox = props.handleChangeCheckBox,
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
-      handlechangeImage = props.handlechangeImage;
+      handlechangeImage = props.handlechangeImage,
+      setIsAddProduct = props.setIsAddProduct;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -120,8 +123,10 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
 
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 || !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
+        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 1 && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
           handleUpdateClick();
+        } else {
+          setIsAddProduct(false);
         }
       }
     }
@@ -145,6 +150,26 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
       return document.removeEventListener('click', CloseAddBusinessTypeForm);
     };
   }, [formState]);
+  (0, _react.useEffect)(function () {
+    var _formState$result3;
+
+    if (!(formState === null || formState === void 0 ? void 0 : formState.result.error) && !(formState === null || formState === void 0 ? void 0 : formState.loading) && (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result)) {
+      var _formState$result4;
+
+      var toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      };
+      var content = formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result;
+
+      _reactToastify.toast.dark(content, toastConfigure);
+    }
+  }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CreateBusinessProductContainer, {
     ref: conatinerRef
   }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
@@ -178,25 +203,28 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
     name: "name",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) || '',
     onChange: handleChangeInput,
-    placeholder: t('WRITE_A_NAME', 'Write a name')
+    placeholder: t('WRITE_A_NAME', 'Write a name'),
+    autoComplete: "off"
   }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.GeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInput, {
     type: "number",
     name: "price",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.price) || '',
     onChange: handleChangeInput,
-    placeholder: t('WRITE_PRICE', 'Write price')
+    placeholder: t('WRITE_PRICE', 'Write price'),
+    autoComplete: "off"
   }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.GeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInput, {
     type: "text",
     name: "description",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.description) || '',
     onChange: handleChangeInput,
-    placeholder: t('WRITE_DESCRIPTION', 'Write description')
+    placeholder: t('WRITE_DESCRIPTION', 'Write description'),
+    autoComplete: "off"
   }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     className: "business_enable_control"
   }, (formState === null || formState === void 0 ? void 0 : formState.changes.enabled) ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (formState === null || formState === void 0 ? void 0 : formState.changes.enabled) || false,
     onChange: handleChangeCheckBox
-  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessActionSelector, {
+  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, {
     className: "business_actions"
   }, /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CREATE_PRODUCT', 'Create Product'),

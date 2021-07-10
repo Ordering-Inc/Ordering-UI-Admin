@@ -11,13 +11,23 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _reactToastify = require("react-toastify");
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Confirm = require("../Confirm");
 
+var _utils = require("../../../../../utils");
+
 var _Switch = require("../../styles/Switch");
 
-var _BusinessActionSelector = require("../BusinessActionSelector");
+var _styledComponents = require("styled-components");
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
+
+var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("./styles");
 
@@ -48,19 +58,26 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
+  var _categoryFormState$ch, _categoryFormState$ch2, _categoryFormState$ch3;
+
   var category = props.category,
       categorySelected = props.categorySelected,
       handleChangeCategory = props.handleChangeCategory,
       isSkeleton = props.isSkeleton,
       handelChangeCategoryActive = props.handelChangeCategoryActive,
       handleUpdateClick = props.handleUpdateClick,
-      deleteCategory = props.deleteCategory;
+      deleteCategory = props.deleteCategory,
+      handleOpenCategoryDetails = props.handleOpenCategoryDetails,
+      categoryFormState = props.categoryFormState,
+      handlechangeImage = props.handlechangeImage,
+      handleInputChange = props.handleInputChange,
+      isEditMode = props.isEditMode;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var categoryNameEditRef = (0, _react.useRef)(null);
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -70,33 +87,14 @@ var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isEditMode = _useState4[0],
-      setIsEditMode = _useState4[1];
+  var conatinerRef = (0, _react.useRef)(null);
+  var ProductTypeImgRef = (0, _react.useRef)(null);
 
-  var closeEditMode = function closeEditMode(e) {
-    if (isEditMode && !e.target.closest('.category-name-edit') && !e.target.closest('.popup-component')) {
-      var inputValue = categoryNameEditRef.current.value;
+  var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
 
-      if (inputValue === '') {
-        setAlertState({
-          open: true,
-          content: [t('CATEGORY_NAME_IS_REQUIRED', 'Category name is Required')]
-        });
-      } else {
-        setIsEditMode(false);
-        handleUpdateClick(inputValue);
-      }
-    }
+  var handleClickImage = function handleClickImage() {
+    ProductTypeImgRef.current.click();
   };
-
-  (0, _react.useEffect)(function () {
-    document.addEventListener('click', closeEditMode);
-    return function () {
-      return document.removeEventListener('click', closeEditMode);
-    };
-  }, [isEditMode]);
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -105,28 +103,127 @@ var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
     });
   };
 
+  var handleFiles = function handleFiles(files) {
+    if (files.length === 1) {
+      var _files$;
+
+      var type = files[0].type.split('/')[0];
+
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        });
+        return;
+      }
+
+      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        });
+        return;
+      }
+
+      handlechangeImage(files[0]);
+    }
+  };
+
+  var closeProductEdit = function closeProductEdit(e) {
+    var _conatinerRef$current;
+
+    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) === null || _conatinerRef$current === void 0 ? void 0 : _conatinerRef$current.contains(e.target));
+
+    if (outsideDropdown) {
+      if (!e.target.closest('.popup-component')) {
+        if (isEditMode && Object.keys(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.changes).length > 0 && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading)) {
+          handleUpdateClick();
+        }
+      }
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    var _categoryFormState$re;
+
+    if (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re = categoryFormState.result) === null || _categoryFormState$re === void 0 ? void 0 : _categoryFormState$re.error) {
+      var _categoryFormState$re2;
+
+      setAlertState({
+        open: true,
+        content: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re2 = categoryFormState.result) === null || _categoryFormState$re2 === void 0 ? void 0 : _categoryFormState$re2.result
+      });
+    }
+  }, [categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.result]);
+  (0, _react.useEffect)(function () {
+    document.addEventListener('click', closeProductEdit);
+    return function () {
+      return document.removeEventListener('click', closeProductEdit);
+    };
+  }, [categoryFormState]);
+  (0, _react.useEffect)(function () {
+    var _categoryFormState$re3;
+
+    if ((categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.changes) && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re3 = categoryFormState.result) === null || _categoryFormState$re3 === void 0 ? void 0 : _categoryFormState$re3.error) && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading)) {
+      var _categoryFormState$re4;
+
+      var toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      };
+      var content = categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re4 = categoryFormState.result) === null || _categoryFormState$re4 === void 0 ? void 0 : _categoryFormState$re4.result;
+
+      _reactToastify.toast.dark(content, toastConfigure);
+    }
+  }, [categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SingleCategoryContainer, {
     active: !isSkeleton && (category === null || category === void 0 ? void 0 : category.id) === (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id),
     onClick: function onClick(e) {
       return handleChangeCategory(e, category);
-    }
+    },
+    ref: conatinerRef
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 41,
     height: 41
-  }) : (category === null || category === void 0 ? void 0 : category.image) ? /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, {
-    src: category === null || category === void 0 ? void 0 : category.image,
-    alt: category === null || category === void 0 ? void 0 : category.name
-  }) : /*#__PURE__*/_react.default.createElement(_styles.DefaultImgWrapper, null), /*#__PURE__*/_react.default.createElement(_styles.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 15
-  }) : isEditMode ? /*#__PURE__*/_react.default.createElement(_styles2.InputName, {
-    className: "category-name-edit",
-    defaultValue: category === null || category === void 0 ? void 0 : category.name,
-    ref: categoryNameEditRef
-  }) : /*#__PURE__*/_react.default.createElement("h2", {
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.ProductTypeImage, {
     onClick: function onClick() {
-      return setIsEditMode(true);
-    }
-  }, category === null || category === void 0 ? void 0 : category.name), /*#__PURE__*/_react.default.createElement(_styles.CategoryActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryEnableWrapper, {
+      return handleClickImage();
+    },
+    disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading,
+    className: "img-section"
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: function onFiles(files) {
+      return handleFiles(files);
+    },
+    childRef: function childRef(e) {
+      ProductTypeImgRef.current = e;
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+    onDrop: function onDrop(dataTransfer) {
+      return handleFiles(dataTransfer.files);
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading
+  }, (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch = categoryFormState.changes) === null || _categoryFormState$ch === void 0 ? void 0 : _categoryFormState$ch.image) ? /*#__PURE__*/_react.default.createElement("img", {
+    src: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image,
+    alt: "business type image",
+    loading: "lazy"
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))), /*#__PURE__*/_react.default.createElement(_styles.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 15
+  }) : /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "name",
+    value: (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch3 = categoryFormState.changes) === null || _categoryFormState$ch3 === void 0 ? void 0 : _categoryFormState$ch3.name) || '',
+    onChange: handleInputChange,
+    autoComplete: "off"
+  }), /*#__PURE__*/_react.default.createElement(_styles.CategoryActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryEnableWrapper, {
     className: "business_enable_control"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15,
@@ -134,21 +231,22 @@ var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (category === null || category === void 0 ? void 0 : category.enabled) ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: category === null || category === void 0 ? void 0 : category.enabled,
     onChange: handelChangeCategoryActive
-  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessActionSelector, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, {
     className: "business_actions"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15,
     width: 15
-  }) : /*#__PURE__*/_react.default.createElement(_BusinessActionSelector.BusinessActionSelector, {
-    business: category,
-    handleDuplicateBusiness: function handleDuplicateBusiness() {
-      return console.log('copy');
-    },
-    handleDeleteBusiness: deleteCategory,
-    handleOpenBusinessDetails: function handleOpenBusinessDetails() {
-      return console.log('open');
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+    title: ActionIcon,
+    id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleOpenCategoryDetails(category);
     }
-  }))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: deleteCategory
+  }, t('DELETE', 'Delete'))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CATEGORY', 'Category'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

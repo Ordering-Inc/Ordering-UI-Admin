@@ -44,7 +44,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  margin-top: 35px;\n  border-right: 1px solid #E9ECEF;\n  max-height: calc(100vh - 380px);\n  overflow: auto;\n\n  ", "\n\n  @media (max-width: 576px) {\n    border: none;\n    padding: 0px;\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 230px);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-top: 35px;\n  max-height: calc(100vh - 380px);\n  overflow: auto;\n\n  ", "\n\n  @media (max-width: 576px) {\n    padding: 0px;\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 230px);\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;

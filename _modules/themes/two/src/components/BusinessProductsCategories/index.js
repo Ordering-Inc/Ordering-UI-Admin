@@ -71,10 +71,12 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       key: i,
       category: category,
       categorySelected: categorySelected,
-      handleChangeCategory: onClickCategory
+      handleChangeCategory: onClickCategory,
+      business: businessState === null || businessState === void 0 ? void 0 : businessState.business
     }));
   })), !businessState.loading && (isAddCategory ? /*#__PURE__*/_react.default.createElement(_CreateBusinessCategory.CreateBusinessCategory, _extends({}, props, {
-    setIsAddCategory: setIsAddCategory
+    setIsAddCategory: setIsAddCategory,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
   })) : /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
     onClick: function onClick() {
       return setIsAddCategory(true);

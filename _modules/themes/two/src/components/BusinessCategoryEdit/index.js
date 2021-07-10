@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _reactToastify = require("react-toastify");
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
@@ -56,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
-  var _formState$changes, _formState$changes2, _formState$result3, _formState$result4, _formState$changes3, _formState$changes4;
+  var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5;
 
   var open = props.open,
       onClose = props.onClose,
@@ -165,6 +167,24 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
+  (0, _react.useEffect)(function () {
+    if ((formState === null || formState === void 0 ? void 0 : formState.changes) && !(formState === null || formState === void 0 ? void 0 : formState.result.error) && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
+      var _formState$result3;
+
+      var toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      };
+      var content = formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result;
+
+      _reactToastify.toast.dark(content, toastConfigure);
+    }
+  }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "editCategory"
   }, /*#__PURE__*/_react.default.createElement(_styles.EditCategoryContent, null, businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
@@ -190,8 +210,8 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     height: 30
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     className: "business_enable_control"
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.enabled) || false,
+  }, (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) && /*#__PURE__*/_react.default.createElement("span", null, formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+    defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) || false,
     onChange: handleChangeCheckBox
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleClose
@@ -215,11 +235,11 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, (formState === null || formState === void 0 ? void 0 : formState.loading) ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.image) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' || (formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.error) ? /*#__PURE__*/_react.default.createElement("div", null) : (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.image) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.image,
+  }, (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.image) ? /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.image,
     alt: "business type image",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }) : /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: t('Enter_CATEGORY_NAME', 'Enter a category name'),
     name: "name",
     defaultValue: formState === null || formState === void 0 ? void 0 : formState.changes.name,

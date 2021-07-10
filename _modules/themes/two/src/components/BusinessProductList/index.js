@@ -19,6 +19,8 @@ var _ColumnAllowSettingPopover = require("../ColumnAllowSettingPopover");
 
 var _CreateBusinessProduct = require("../CreateBusinessProduct");
 
+var _BusinessSpreadSheet = require("../BusinessSpreadSheet");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -127,14 +129,16 @@ var BusinessProductList = function BusinessProductList(props) {
       allowColumns: allowColumns
     });
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categoryState.products.map(function (product, i) {
-    return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
+    return product.id && /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
       key: i,
       product: product,
-      allowColumns: allowColumns
+      allowColumns: allowColumns,
+      business: businessState === null || businessState === void 0 ? void 0 : businessState.business
     }));
   }), isAddProduct && /*#__PURE__*/_react.default.createElement(_CreateBusinessProduct.CreateBusinessProduct, _extends({}, props, {
     allowColumns: allowColumns,
-    setIsAddProduct: setIsAddProduct
+    setIsAddProduct: setIsAddProduct,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
   })))), !businessState.loading && !isAddProduct && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
     onClick: function onClick() {
       return setIsAddProduct(true);
@@ -145,23 +149,16 @@ var BusinessProductList = function BusinessProductList(props) {
     onClickButton: function onClickButton() {
       return !searchValue ? handleSearchRedirect() : handleChangeSearch('');
     }
-  }))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
-    className: "id"
-  }, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", {
-    className: "description"
-  }, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("th", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement("th", null, t('QUANTITY', 'Quantity')))), categoryState.loading || businessState.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
+  }))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListSpreadContainer, null, categoryState.loading || businessState.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, {
       key: i,
       isSkeleton: true,
-      viewMethod: viewMethod
+      viewMethod: viewMethod,
+      allowColumns: allowColumns
     });
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categoryState.products.map(function (product, i) {
-    return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
-      key: i,
-      product: product,
-      viewMethod: viewMethod
-    }));
-  })))), !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }) : /*#__PURE__*/_react.default.createElement(_BusinessSpreadSheet.BusinessSpreadSheet, _extends({}, props, {
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
+  }))), !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
     btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
     onClickButton: function onClickButton() {
