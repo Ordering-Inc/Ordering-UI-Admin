@@ -121,9 +121,11 @@ export const ActionsContainer = styled.div`
   ${({ primary }) => !primary && css`
     margin-top: 0px;
   `}
+
   ${({ top }) => top && css`
     margin-top: 30px;
   `}
+
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid #E9ECEF;
     padding-right: 20px;
@@ -131,6 +133,16 @@ export const ActionsContainer = styled.div`
     border-left: 1px solid #E9ECEF;
     padding-left: 20px;
   `}
+
+  > svg {
+    cursor: pointer;
+    font-size: 16px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 35px;
+    ` : css`
+      margin-left: 35px;
+    `}
+  }
 `
 
 export const EnableWrapper = styled.div`

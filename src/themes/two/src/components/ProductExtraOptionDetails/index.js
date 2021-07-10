@@ -10,6 +10,8 @@ import { Checkbox } from '../../styles/Checkbox'
 import { Select } from '../../styles/Select/FirstSelect'
 import { Alert, Confirm } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
+import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
+import { Modal } from '../Modal'
 
 import {
   MainContainer,
@@ -59,7 +61,10 @@ const ProductExtraOptionDetailsUI = (props) => {
     conditionalOptionId,
     conditionalSubOptionId,
     handleChangeConditionalOption,
-    handleChangeConditionalSubOption
+    handleChangeConditionalSubOption,
+
+    business,
+    extra
   } = props
 
   const [, t] = useLanguage()
@@ -68,6 +73,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const ActionIcon = <FiMoreVertical />
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [openModal, setOpenModal] = useState({})
 
   const handleClickImage = () => {
     optionImageInputRef.current.click()
@@ -200,15 +206,9 @@ const ProductExtraOptionDetailsUI = (props) => {
                     onChange={enabled => handleChangeOptionEnable(enabled, optionState.option?.id)}
                   />
                 </EnableWrapper>
-                <DropDownWrapper>
-                  <DropdownButton
-                    menuAlign={theme?.rtl ? 'left' : 'right'}
-                    title={ActionIcon}
-                    id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                  >
-                    <Dropdown.Item onClick={() => console.log()}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
-                  </DropdownButton>
-                </DropDownWrapper>
+                <FiMoreVertical
+                  onClick={() => setOpenModal({ ...openModal, option: true })}
+                />
               </ActionsContainer>
             </RightOptionContent>
           </OptionContent>
@@ -405,6 +405,19 @@ const ProductExtraOptionDetailsUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      {openModal?.option && (
+        <Modal
+          width='70%'
+          open={openModal?.option}
+          onClose={() => setOpenModal({ ...openModal, option: false })}
+        >
+          <ProductExtraOptionMetaFields
+            businessId={business.id}
+            extraId={extra.id}
+            optionId={optionState.option.id}
+          />
+        </Modal>
+      )}
     </MainContainer>
   )
 }
