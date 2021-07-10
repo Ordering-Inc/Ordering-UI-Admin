@@ -13,6 +13,7 @@ import { Alert, Confirm } from '../Confirm'
 import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
 import { Modal } from '../Modal'
 import { ProductExtraOptionDetails } from '../ProductExtraOptionDetails'
+import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 
 import {
   MainContainer,
@@ -156,10 +157,10 @@ const ProductExtraOptionsUI = (props) => {
     })
   }
 
-  const handleOpenOption = (option) => {
+  const handleOpenModal = (option, name) => {
     cleanChangesState({ ...changesState, changes: {} })
     setCurOption(option)
-    setOpenModal({ ...openModal, edit: true })
+    setOpenModal({ ...openModal, [name]: true })
   }
 
   useEffect(() => {
@@ -286,8 +287,8 @@ const ProductExtraOptionsUI = (props) => {
                         title={ActionIcon}
                         id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                       >
-                        <Dropdown.Item onClick={() => handleOpenOption(option)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                        <Dropdown.Item onClick={() => console.log()}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleOpenModal(option, 'edit')}>{t('EDIT', 'Edit')}</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleOpenModal(option, 'metaFields')}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleDeteteClick(option.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
                       </DropdownButton>
                     </DropDownWrapper>
@@ -378,6 +379,19 @@ const ProductExtraOptionsUI = (props) => {
             handleChangeOptionInput={handleChangeInput}
             handleChangeNumberInput={handleChangeOptionInput}
             handleChangeOptionEnable={handleChangeOptionEnable}
+          />
+        </Modal>
+      )}
+      {openModal?.metaFields && (
+        <Modal
+          width='70%'
+          open={openModal?.metaFields}
+          onClose={() => setOpenModal({ ...openModal, metaFields: false })}
+        >
+          <ProductExtraOptionMetaFields
+            businessId={business.id}
+            extraId={extraState.extra.id}
+            optionId={curOption.id}
           />
         </Modal>
       )}
