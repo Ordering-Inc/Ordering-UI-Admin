@@ -36,6 +36,7 @@ const SingleBusinessProductUI = (props) => {
     handleChangeProductActive,
     handleUpdateClick,
     deleteProduct,
+    handleOpenProductDetails,
     productFormState,
     handleChangeInput,
     handlechangeImage,
@@ -262,7 +263,7 @@ const SingleBusinessProductUI = (props) => {
                       title={ActionIcon}
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
-                      <Dropdown.Item onClick={() => console.log('handleOpenProductDetails(product)')}>{t('EDIT', 'Edit')}</Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>
                       <Dropdown.Item onClick={deleteProduct}>{t('DELETE', 'Delete')}</Dropdown.Item>
                     </DropdownButton>
                   </ActionSelectorWrapper>

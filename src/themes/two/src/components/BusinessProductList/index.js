@@ -23,7 +23,8 @@ export const BusinessProductList = (props) => {
     searchValue,
     errorQuantityProducts,
     handleSearchRedirect,
-    handleChangeSearch
+    handleChangeSearch,
+    handleOpenProductDetails
   } = props
   const [, t] = useLanguage()
 
@@ -100,15 +101,14 @@ export const BusinessProductList = (props) => {
                 <>
                   {
                     categoryState.products.map((product, i) => (
-                      product.id && (
-                        <SingleBusinessProduct
-                          {...props}
-                          key={i}
-                          product={product}
-                          allowColumns={allowColumns}
-                          business={businessState?.business}
-                        />
-                      )
+                      <SingleBusinessProduct
+                        {...props}
+                        key={i}
+                        product={product}
+                        allowColumns={allowColumns}
+                        business={businessState?.business}
+                        handleOpenProductDetails={handleOpenProductDetails}
+                      />
                     ))
                   }
                   {
