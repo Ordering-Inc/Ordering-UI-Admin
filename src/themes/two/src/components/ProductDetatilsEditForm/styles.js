@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const FormInput = styled.form`
   margin-top: 20px;
-  height: calc(100% - 50px);
+  height: calc(100% - 60px);
   overflow: auto;
 `
 
