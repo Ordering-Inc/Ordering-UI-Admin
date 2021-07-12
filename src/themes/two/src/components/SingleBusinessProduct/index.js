@@ -1,11 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton'
-import { useUtils, useLanguage, SingleBusinessProduct as SingleBusinessProductController } from 'ordering-components-admin'
+import {
+  useUtils,
+  useLanguage,
+  DragAndDrop,
+  ExamineClick,
+  SingleBusinessProduct as SingleBusinessProductController
+} from 'ordering-components-admin'
+import { bytesConverter } from '../../../../../utils'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import BiImage from '@meronex/icons/bi/BiImage'
 
 import {
   SingleListBusinessContainer,
@@ -13,9 +22,9 @@ import {
   WrapperImage,
   InfoBlock,
   BusinessEnableWrapper,
-  Image,
-  InputName,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  ProductTypeImage,
+  UploadWrapper
 } from './styles'
 
 const SingleBusinessProductUI = (props) => {
@@ -27,36 +36,24 @@ const SingleBusinessProductUI = (props) => {
     handleChangeProductActive,
     handleUpdateClick,
     deleteProduct,
-    handleOpenProductDetails
+    handleOpenProductDetails,
+    productFormState,
+    handleChangeInput,
+    handlechangeImage,
+    isEditMode
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ parsePrice, optimizeImage }] = useUtils()
-  const [isEditMode, setIsEditMode] = useState(false)
-  const productNameEditRef = useRef(null)
+  const [{ parsePrice }] = useUtils()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const conatinerRef = useRef(null)
+  const ProductTypeImgRef = useRef(null)
   const ActionIcon = <FiMoreVertical />
 
-  const closeEditMode = (e) => {
-    if (isEditMode && !e.target.closest('.product-name-edit') && !e.target.closest('.popup-component')) {
-      const inputValue = productNameEditRef.current.value
-      if (inputValue === '') {
-        setAlertState({
-          open: true,
-          content: [t('NAME_IS_REQUIRED', 'Product name is Required')]
-        })
-      } else {
-        setIsEditMode(false)
-        handleUpdateClick(inputValue)
-      }
-    }
+  const handleClickImage = () => {
+    ProductTypeImgRef.current.click()
   }
-
-  useEffect(() => {
-    document.addEventListener('click', closeEditMode)
-    return () => document.removeEventListener('click', closeEditMode)
-  }, [isEditMode])
 
   const closeAlert = () => {
     setAlertState({
@@ -64,6 +61,69 @@ const SingleBusinessProductUI = (props) => {
       content: []
     })
   }
+
+  const handleFiles = (files) => {
+    if (files.length === 1) {
+      const type = files[0].type.split('/')[0]
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        })
+        return
+      }
+
+      if (bytesConverter(files[0]?.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        })
+        return
+      }
+      handlechangeImage(files[0])
+    }
+  }
+
+  const closeProductEdit = (e) => {
+    const outsideDropdown = !conatinerRef.current?.contains(e.target)
+    if (outsideDropdown) {
+      if (!e.target.closest('.popup-component')) {
+        if (isEditMode && Object.keys(productFormState?.changes).length > 0 && !productFormState?.loading) {
+          handleUpdateClick()
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (productFormState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: productFormState?.result?.result
+      })
+    }
+  }, [productFormState?.result])
+
+  useEffect(() => {
+    document.addEventListener('click', closeProductEdit)
+    return () => document.removeEventListener('click', closeProductEdit)
+  }, [productFormState])
+
+  useEffect(() => {
+    if (productFormState?.changes && !productFormState?.result.error && !productFormState?.loading) {
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = productFormState?.result?.result
+      toast.dark(content, toastConfigure)
+    }
+  }, [productFormState?.loading])
 
   return (
     <>
@@ -105,25 +165,49 @@ const SingleBusinessProductUI = (props) => {
               </tr>
             </SingleListBusinessContainer>
           ) : (
-            <SingleListBusinessContainer>
+            <SingleListBusinessContainer ref={conatinerRef}>
               <tr>
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
-                      <WrapperImage>
-                        <Image bgimage={optimizeImage(product?.images)} />
-                      </WrapperImage>
+                      <ProductTypeImage
+                        onClick={() => handleClickImage()}
+                        disabled={productFormState?.loading}
+                      >
+                        <ExamineClick
+                          onFiles={files => handleFiles(files)}
+                          childRef={(e) => { ProductTypeImgRef.current = e }}
+                          accept='image/png, image/jpeg, image/jpg'
+                          disabled={productFormState?.loading}
+                        >
+                          <DragAndDrop
+                            onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                            accept='image/png, image/jpeg, image/jpg'
+                            disabled={productFormState?.loading}
+                          >
+                            {
+                              productFormState?.changes?.images
+                                ? (
+                                  <img src={productFormState?.changes?.images} alt='business type image' loading='lazy' />
+                                )
+                                : (
+                                  <UploadWrapper>
+                                    <BiImage />
+                                  </UploadWrapper>
+                                )
+                            }
+                          </DragAndDrop>
+                        </ExamineClick>
+                      </ProductTypeImage>
                       {
                         product?.name && (
-                          isEditMode
-                            ? (
-                              <InputName
-                                className='product-name-edit'
-                                defaultValue={product?.name}
-                                ref={productNameEditRef}
-                              />
-                            )
-                            : <p onClick={() => setIsEditMode(true)}>{product?.name}</p>
+                          <input
+                            type='text'
+                            name='name'
+                            value={productFormState?.changes?.name || ''}
+                            onChange={handleChangeInput}
+                            autoComplete='off'
+                          />
                         )
                       }
                     </BusinessGeneralInfo>
@@ -132,22 +216,30 @@ const SingleBusinessProductUI = (props) => {
                 {allowColumns?.price && (
                   <td>
                     {
-                      product?.price && (
-                        <InfoBlock>
-                          <p>{parsePrice(product?.price)}</p>
-                        </InfoBlock>
-                      )
+                      <InfoBlock>
+                        <input
+                          type='text'
+                          name='price'
+                          value={productFormState?.changes?.price || ''}
+                          onChange={handleChangeInput}
+                          autoComplete='off'
+                        />
+                      </InfoBlock>
                     }
                   </td>
                 )}
                 {allowColumns?.description && (
                   <td>
                     {
-                      product?.description && (
-                        <InfoBlock>
-                          <p>{product?.description}</p>
-                        </InfoBlock>
-                      )
+                      <InfoBlock>
+                        <textarea
+                          name='description'
+                          value={productFormState?.changes?.description || ''}
+                          onChange={handleChangeInput}
+                          autoComplete='off'
+                          className='description'
+                        />
+                      </InfoBlock>
                     }
                   </td>
                 )}

@@ -12,12 +12,21 @@ export const SingleCategoryContainer = styled.div`
 
   &:hover {
     background: #E9F2FE;
+
+    input {
+      border: 1px solid ${props => props.theme.colors.lightGray};
+    }
   }
 
   ${({ active }) => active && css`
   border: 1px solid #2C7BE5;
   box-sizing: border-box;
   `}
+
+  .img-section {
+    min-width: 41px !important;
+    min-height: 41px !important;
+  }
 `
 
 export const CategoryContent = styled.div`
@@ -28,12 +37,17 @@ export const CategoryContent = styled.div`
     ` : css`
       padding-left: 13px;
     `}
-  h2 {
+  input {
+    width: 100%;
+    outline: none;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 12px;
-    margin: 0px;
+    border-radius: 3px;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    padding: 5px;
   }
 `
 
@@ -62,17 +76,31 @@ export const CategoryEnableWrapper = styled.div`
   }
 `
 
-export const CategoryImage = styled.img`
-  width: 41px;
-  height: 41px;
-  border-radius: 7.5px;
+export const ActionSelectorWrapper = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-right: 35px;
+    ` : css`
+    margin-left: 35px;
+  `}
+  button {
+    background: #F8F9FA !important;
+    border: none;
+    padding: 0px;
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+    }
+    &:after {
+      display: none;
+    }
+  }
+  > div {
+    border: 1px solid #E9ECEF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    > div {
+      a:last-child {
+        color: #E63757;
+      }
+    }
+  }
 `
-
-export const DefaultImgWrapper = styled.div`
-  width: 41px;
-  height: 41px;
-  border-radius: 7.5px;
-  background: ${props => props.theme.colors.lightGray};
-`
-
-export const WrapperBusinessActionSelector = styled.div``

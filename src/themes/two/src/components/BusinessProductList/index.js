@@ -4,12 +4,15 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { SingleBusinessProduct } from '../SingleBusinessProduct'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { CreateBusinessProduct } from '../CreateBusinessProduct'
+import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
+
 import {
   ListContent,
   ProductListContainer,
   BusinessProductListTable,
   WrapperNotFound,
-  AddProductBtn
+  AddProductBtn,
+  ProductListSpreadContainer
 } from './styles'
 
 export const BusinessProductList = (props) => {
@@ -103,6 +106,7 @@ export const BusinessProductList = (props) => {
                         key={i}
                         product={product}
                         allowColumns={allowColumns}
+                        business={businessState?.business}
                         handleOpenProductDetails={handleOpenProductDetails}
                       />
                     ))
@@ -113,6 +117,7 @@ export const BusinessProductList = (props) => {
                         {...props}
                         allowColumns={allowColumns}
                         setIsAddProduct={setIsAddProduct}
+                        business={businessState?.business}
                       />
                     )
                   }
@@ -143,42 +148,23 @@ export const BusinessProductList = (props) => {
       {
         viewMethod === 'spreedsheet' && (
           <>
-            <ProductListContainer>
-              <BusinessProductListTable>
-                <thead>
-                  <tr>
-                    <th className='id'>{t('ID', 'ID')}</th>
-                    <th>{t('NAME', 'Name')}</th>
-                    <th className='description'>{t('DESCRIPTION', 'Description')}</th>
-                    <th>{t('PRICE', 'Price')}</th>
-                    <th>{t('QUANTITY', 'Quantity')}</th>
-                  </tr>
-                </thead>
-                {(categoryState.loading || businessState.loading) ? (
-                  [...Array(30).keys()].map(i => (
-                    <SingleBusinessProduct
-                      key={i}
-                      isSkeleton
-                      viewMethod={viewMethod}
-                    />
-                  ))
-                ) : (
-                  <>
-                    {
-                      categoryState.products.map((product, i) => (
-                        <SingleBusinessProduct
-                          {...props}
-                          key={i}
-                          product={product}
-                          viewMethod={viewMethod}
-                        />
-                      ))
-                    }
-                  </>
-                )}
-              </BusinessProductListTable>
-            </ProductListContainer>
-
+            <ProductListSpreadContainer>
+              {(categoryState.loading || businessState.loading) ? (
+                [...Array(30).keys()].map(i => (
+                  <SingleBusinessProduct
+                    key={i}
+                    isSkeleton
+                    viewMethod={viewMethod}
+                    allowColumns={allowColumns}
+                  />
+                ))
+              ) : (
+                <BusinessSpreadSheet
+                  {...props}
+                  business={businessState?.business}
+                />
+              )}
+            </ProductListSpreadContainer>
             {
               !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
                 <WrapperNotFound>

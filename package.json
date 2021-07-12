@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
+    "@handsontable/react": "^9.0.1",
     "@meronex/icons": "^4.0.0",
     "@popperjs/core": "^2.5.4",
     "@sentry/react": "^5.27.4",
@@ -67,6 +68,7 @@
     "@stripe/stripe-js": "^1.11.0",
     "bootstrap": "^5.0.1",
     "google-map-react": "^2.1.9",
+    "handsontable": "^9.0.1",
     "jsoneditor": "^9.3.0",
     "jsoneditor-react": "^3.1.1",
     "libphonenumber-js": "^1.9.19",

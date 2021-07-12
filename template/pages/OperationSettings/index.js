@@ -2,15 +2,16 @@ import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { Settings as SettingsController } from '../../../src/themes/two/src/components/Settings'
 
-export const BasicSettings = (props) => {
-  const basicSettingsProps = {
+export const OperationSettings = (props) => {
+  const operationSettingsProps = {
     ...props,
-    settingsType: 'basic'
+    settingsType: 'operation'
   }
+
   return (
     <>
-      <HelmetTags page='basicSettings' />
-      <SettingsController {...basicSettingsProps} />
+      <HelmetTags page='operationSettings' />
+      <SettingsController {...operationSettingsProps} />
     </>
   )
 }

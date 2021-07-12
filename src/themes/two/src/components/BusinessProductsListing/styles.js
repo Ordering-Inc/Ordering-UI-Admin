@@ -60,6 +60,11 @@ export const CategoryListContainer = styled.div`
 
 export const ProductListContainer = styled.div`
   flex-grow: 1;
+  width: 100%;
+
+  @media (min-width: 769px) {
+    width: calc(100% - 250px);
+  }
 `
 export const AddButton = styled.span`
   cursor: pointer;
