@@ -292,33 +292,35 @@ export const SidebarMenu = (props) => {
               </Accordion>
             </div>
             <div className='d-flex flex-column'>
-              <Accordion>
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='5'
-                    active={
-                      location.pathname === '/settings/basic' ||
-                      location.pathname === '/settings/operation'
-                    }
-                  >
-                    <GearIcon />
-                    {!isCollapse && <span className='mx-2'>{t('SETTINGS', 'Settings')}</span>}
-                  </ContextAwareToggle>
-                  <Accordion.Collapse eventKey='5'>
-                    <MenuContent>
-                      {settingsSubMenus.map(item => (
-                        <SubMenu
-                          key={item.id}
-                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                          onClick={() => handleGoToPage({ page: item.pageName })}
-                        >
-                          {item.title}
-                        </SubMenu>
-                      ))}
-                    </MenuContent>
-                  </Accordion.Collapse>
-                </MenuContainer>
-              </Accordion>
+              {sessionState?.user?.level === 0 && (
+                <Accordion>
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='5'
+                      active={
+                        location.pathname === '/settings/basic' ||
+                        location.pathname === '/settings/operation'
+                      }
+                    >
+                      <GearIcon />
+                      {!isCollapse && <span className='mx-2'>{t('SETTINGS', 'Settings')}</span>}
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='5'>
+                      <MenuContent>
+                        {settingsSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
+                </Accordion>
+              )}
 
               <Button
                 className='d-flex align-items-center'
