@@ -86,7 +86,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  display: inline-block;\n  border-radius: 7.6px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #1C202E;\n  color: #1C202E;\n  position: relative;\n\n  ", "\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: inline-block;\n  border-radius: 7.6px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #DEE2E6;\n  color: #344050;\n  position: relative;\n\n  ", "\n\n  ", "\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;

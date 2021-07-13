@@ -37,7 +37,9 @@ var Personalization = function Personalization(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, isShowTitle && /*#__PURE__*/_react.default.createElement("h1", null, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement("p", null, t('PERSONALIZATION_TITLE', 'If you are looking for something  special for your Ordering Solution, send us your special wish.')), /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, isShowTitle && /*#__PURE__*/_react.default.createElement("h1", null, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement("p", null, t('PERSONALIZATION_TITLE', 'If you are looking for something  special for your Ordering Solution'), ",", /*#__PURE__*/_react.default.createElement("a", {
+    href: ""
+  }, t('SEND_US_SPECIAL_WISH', 'send us your special wish.'))), /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images$general = theme.images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.personalization,
     loading: "lazy"
   }));

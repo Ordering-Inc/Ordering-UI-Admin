@@ -13,8 +13,6 @@ var _Modal = require("../Modal");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
-var _Buttons = require("../../styles/Buttons");
-
 var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
 
 var _styles = require("./styles");
@@ -51,11 +49,8 @@ var MoreSidebarLayout = function MoreSidebarLayout(props) {
   (0, _react.useEffect)(function () {
     if (width > 1000) setIsModalOpen(false);else setIsModalOpen(true);
   }, [width]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width > 1000 ? /*#__PURE__*/_react.default.createElement(_styles.MainContainer, {
-    isExtendExtraOpen: isExtendExtraOpen
-  }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    borderRadius: "5px",
-    color: "secundary",
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width > 1000 ? /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+    isExtendExtraOpen: isExtendExtraOpen,
     onClick: function onClick() {
       return props.onClose();
     }

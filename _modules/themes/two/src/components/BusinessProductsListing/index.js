@@ -27,6 +27,8 @@ var _BusinessProductsCategories = require("../BusinessProductsCategories");
 
 var _BusinessProductList = require("../BusinessProductList");
 
+var _ProductDetails = require("../ProductDetails");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -66,7 +68,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       businessState = props.businessState,
       onProductRedirect = props.onProductRedirect,
       slug = props.slug,
-      categoryId = props.categoryId;
+      categoryId = props.categoryId,
+      handleUpdateBusinessState = props.handleUpdateBusinessState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -84,6 +87,16 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       categoryToEdit = _useState4[0],
       setCategoryToEdit = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      openProductDetails = _useState6[0],
+      setOpenProductDetails = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      selectedProduct = _useState8[0],
+      setSelectedProduct = _useState8[1];
 
   (0, _react.useEffect)(function () {
     if (categoryId) {
@@ -118,6 +131,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     });
   };
 
+  var handleOpenProductDetails = function handleOpenProductDetails(product) {
+    setSelectedProduct(product);
+    setOpenProductDetails(true);
+  };
+
+  var handleCloseProductDetails = function handleCloseProductDetails() {
+    setOpenProductDetails(false);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, businessState.loading ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 30
@@ -149,20 +171,27 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return setViewMethod('spreedsheet');
     }
   }, /*#__PURE__*/_react.default.createElement(_BsTable.default, null)))), /*#__PURE__*/_react.default.createElement(_BusinessProductList.BusinessProductList, _extends({}, props, {
-    viewMethod: viewMethod
+    viewMethod: viewMethod,
+    handleOpenProductDetails: handleOpenProductDetails
   }))))), (categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open) && /*#__PURE__*/_react.default.createElement(_BusinessCategoryEdit.BusinessCategoryEdit, _extends({}, props, {
     open: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open,
     onClose: handleCloseEdit,
     category: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.category,
     businessState: businessState
-  })));
+  })), openProductDetails && /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
+    open: openProductDetails,
+    onClose: handleCloseProductDetails,
+    product: selectedProduct,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    handleUpdateBusinessState: handleUpdateBusinessState
+  }));
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isInitialRender = _useState6[0],
-      setIsInitialRender = _useState6[1];
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isInitialRender = _useState10[0],
+      setIsInitialRender = _useState10[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

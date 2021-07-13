@@ -65,6 +65,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       handleChangeProductActive = props.handleChangeProductActive,
       handleUpdateClick = props.handleUpdateClick,
       deleteProduct = props.deleteProduct,
+      handleOpenProductDetails = props.handleOpenProductDetails,
       productFormState = props.productFormState,
       handleChangeInput = props.handleChangeInput,
       handlechangeImage = props.handlechangeImage,
@@ -254,7 +255,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
-      return console.log('handleOpenProductDetails(product)');
+      return handleOpenProductDetails(product);
     }
   }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: deleteProduct

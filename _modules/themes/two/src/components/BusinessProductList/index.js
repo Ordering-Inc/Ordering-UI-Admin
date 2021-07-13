@@ -62,7 +62,8 @@ var BusinessProductList = function BusinessProductList(props) {
       searchValue = props.searchValue,
       errorQuantityProducts = props.errorQuantityProducts,
       handleSearchRedirect = props.handleSearchRedirect,
-      handleChangeSearch = props.handleChangeSearch;
+      handleChangeSearch = props.handleChangeSearch,
+      handleOpenProductDetails = props.handleOpenProductDetails;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -129,11 +130,12 @@ var BusinessProductList = function BusinessProductList(props) {
       allowColumns: allowColumns
     });
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categoryState.products.map(function (product, i) {
-    return product.id && /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
+    return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
       key: i,
       product: product,
       allowColumns: allowColumns,
-      business: businessState === null || businessState === void 0 ? void 0 : businessState.business
+      business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+      handleOpenProductDetails: handleOpenProductDetails
     }));
   }), isAddProduct && /*#__PURE__*/_react.default.createElement(_CreateBusinessProduct.CreateBusinessProduct, _extends({}, props, {
     allowColumns: allowColumns,
