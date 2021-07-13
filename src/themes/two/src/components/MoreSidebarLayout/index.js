@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { Button } from '../../styles/Buttons'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import {
-  MainContainer
+  MainContainer,
+  CloseButton
 } from './styles'
 export const MoreSidebarLayout = (props) => {
   const {
@@ -21,16 +21,13 @@ export const MoreSidebarLayout = (props) => {
   return (
     <>
       {width > 1000 ? (
-        <MainContainer
-          isExtendExtraOpen={isExtendExtraOpen}
-        >
-          <Button
-            borderRadius='5px'
-            color='secundary'
+        <MainContainer>
+          <CloseButton
+            isExtendExtraOpen={isExtendExtraOpen}
             onClick={() => props.onClose()}
           >
             <MdcClose />
-          </Button>
+          </CloseButton>
           {props.children}
         </MainContainer>
       ) : (

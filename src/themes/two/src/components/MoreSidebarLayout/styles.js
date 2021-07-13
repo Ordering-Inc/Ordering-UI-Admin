@@ -15,16 +15,21 @@ export const MainContainer = styled.div`
     ` : css`
       border-left: 1px solid #E9ECEF;
     `}
-  
-    > button {
-      z-index: 100;
-      position: absolute;
-      top: 20px;
-      ${props => props.theme?.rtl ? css`
-        left: ${({ isExtendExtraOpen }) => isExtendExtraOpen ? '520px' : '20px'};
-      ` : css`
-        right: ${({ isExtendExtraOpen }) => isExtendExtraOpen ? '520px' : '20px'};
-      `}
-    }
+  }
+`
+
+export const CloseButton = styled.span`
+  cursor: pointer;
+  z-index: 100;
+  position: absolute;
+  top: 20px;
+  ${props => props.theme?.rtl ? css`
+    left: ${({ isExtendExtraOpen }) => isExtendExtraOpen ? '520px' : '20px'};
+  ` : css`
+    right: ${({ isExtendExtraOpen }) => isExtendExtraOpen ? '520px' : '20px'};
+  `}
+  svg {
+    color: ${props => props.theme.colors.headingColor};
+    font-size: 24px;
   }
 `

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   padding: 20px;
@@ -16,6 +16,15 @@ export const Container = styled.div`
 
   p {
     color: ${props => props.theme.colors.headingColor};
+    a {
+      color: ${props => props.theme.colors.primary};
+      text-decoration: none;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 10px;
+      ` : css`
+        margin-left: 10px;
+      `}
+    }
   }
 
   img {

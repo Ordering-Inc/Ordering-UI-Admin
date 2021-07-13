@@ -8,6 +8,7 @@ import BsViewList from '@meronex/icons/bs/BsViewList'
 import BsTable from '@meronex/icons/bs/BsTable'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductList } from '../BusinessProductList'
+import { ProductDetails } from '../ProductDetails'
 
 import {
   CategoryProductsContainer,
@@ -31,12 +32,15 @@ const BusinessProductsListingUI = (props) => {
     businessState,
     onProductRedirect,
     slug,
-    categoryId
+    categoryId,
+    handleUpdateBusinessState
   } = props
   const [, t] = useLanguage()
 
   const [viewMethod, setViewMethod] = useState('list')
   const [categoryToEdit, setCategoryToEdit] = useState({ open: false, category: null })
+  const [openProductDetails, setOpenProductDetails] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState(null)
 
   useEffect(() => {
     if (categoryId) {
@@ -70,6 +74,15 @@ const BusinessProductsListingUI = (props) => {
       open: false,
       category: null
     })
+  }
+
+  const handleOpenProductDetails = (product) => {
+    setSelectedProduct(product)
+    setOpenProductDetails(true)
+  }
+
+  const handleCloseProductDetails = () => {
+    setOpenProductDetails(false)
   }
 
   return (
@@ -134,6 +147,7 @@ const BusinessProductsListingUI = (props) => {
             <BusinessProductList
               {...props}
               viewMethod={viewMethod}
+              handleOpenProductDetails={handleOpenProductDetails}
             />
           </ProductListContainer>
         </CategoryProductsContent>
@@ -149,6 +163,16 @@ const BusinessProductsListingUI = (props) => {
           />
         )
       }
+
+      {openProductDetails && (
+        <ProductDetails
+          open={openProductDetails}
+          onClose={handleCloseProductDetails}
+          product={selectedProduct}
+          business={businessState?.business}
+          handleUpdateBusinessState={handleUpdateBusinessState}
+        />
+      )}
     </>
   )
 }
