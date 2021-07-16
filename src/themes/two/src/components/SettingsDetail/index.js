@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, CategoryDescription as CategoryDescriptionController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Modal } from '../Modal'
-import { SubCategory } from '../SubCategory'
+import { SettingsList } from '../SettingsList'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
@@ -28,18 +28,13 @@ import {
   SkeletonWrapper
 } from './styles'
 
-const CategoryDescriptionUI = (props) => {
+export const SettingsDetail = (props) => {
   const {
     open,
     onClose,
-    configId,
-    onBasicSettingsRedirect
+    onBasicSettingsRedirect,
+    category
   } = props
-
-  const {
-    category,
-    loading
-  } = props.category
 
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -47,10 +42,6 @@ const CategoryDescriptionUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraInfoOpen, setExtraInfoOpen] = useState(false)
   const [extraSubCatOpen, setExtraSubCatOpen] = useState(false)
-
-  useEffect(() => {
-    if (configId) setExtraSubCatOpen(true)
-  }, [configId])
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -111,14 +102,20 @@ const CategoryDescriptionUI = (props) => {
     } else {
       setExtraInfoOpen(false)
       setExtraSubCatOpen(true)
-      onBasicSettingsRedirect({ category: category.id, config: category.id })
     }
   }
 
-  const onCloseSubCat = () => {
+  const onCloseSettingsList = () => {
     setExtraSubCatOpen(false)
-    onBasicSettingsRedirect({ category: category.id, config: null })
+    onBasicSettingsRedirect({ category: category.id })
   }
+
+  useEffect(() => {
+    if (category) {
+      setExtraInfoOpen(false)
+      setExtraSubCatOpen(false)
+    }
+  }, [category])
 
   return (
     <Container
@@ -132,7 +129,7 @@ const CategoryDescriptionUI = (props) => {
           </HeaderIcons>
         </DescriptionHeader>
         {
-          loading && (
+          !category && (
             <SkeletonWrapper>
               <Skeleton width={100} height={30} />
               <Skeleton height={20} />
@@ -142,7 +139,7 @@ const CategoryDescriptionUI = (props) => {
             </SkeletonWrapper>
           )
         }
-        {!loading && category && Object.keys(category).length > 0 && (
+        {category && Object.keys(category).length > 0 && (
           <Content>
             <CategoryName>
               <p>{category.name}</p>
@@ -176,9 +173,7 @@ const CategoryDescriptionUI = (props) => {
               >
                 <MdcClose />
               </Button>
-              <IframeWrapper>
-                <iframe src={category.support_url} style={{ width: '100%', height: '100%' }}></iframe>
-              </IframeWrapper>
+              <IframeWrapper dangerouslySetInnerHTML={{ __html: `<iframe src=${category.support_url} style="width: 100%; height: 100%;" />` }} />
             </CategoryDescriptionExtraContent>
           ) : (
             <>
@@ -188,9 +183,7 @@ const CategoryDescriptionUI = (props) => {
                 open
                 onClose={() => setExtraInfoOpen(false)}
               >
-                <IframeWrapper>
-                  <iframe src={category.support_url} style={{ width: '100%', height: '100%' }}></iframe>
-                </IframeWrapper>
+                <IframeWrapper dangerouslySetInnerHTML={{ __html: `<iframe src=${category.support_url} style="width: 100%; height: 100%;" />` }} />
               </Modal>
             </>
           )}
@@ -204,15 +197,14 @@ const CategoryDescriptionUI = (props) => {
               <Button
                 borderRadius='5px'
                 color='secundary'
-                onClick={onCloseSubCat}
+                onClick={onCloseSettingsList}
               >
                 <MdcClose />
               </Button>
               <SubCategoryWrapper>
-                <SubCategory
-                  categoryId={category?.id}
-                  onCloseSubCat={onCloseSubCat}
-                  configId={configId}
+                <SettingsList
+                  category={category}
+                  onCloseSettingsList={onCloseSettingsList}
                 />
               </SubCategoryWrapper>
             </CategoryDescriptionExtraContent>
@@ -222,13 +214,12 @@ const CategoryDescriptionUI = (props) => {
                 width='70%'
                 height='90vh'
                 open
-                onClose={onCloseSubCat}
+                onClose={onCloseSettingsList}
               >
                 <SubCategoryWrapper>
-                  <SubCategory
-                    categoryId={category?.id}
-                    onCloseSubCat={onCloseSubCat}
-                    configId={configId}
+                  <SettingsList
+                    category={category}
+                    onCloseSettingsList={onCloseSettingsList}
                   />
                 </SubCategoryWrapper>
               </Modal>
@@ -245,15 +236,5 @@ const CategoryDescriptionUI = (props) => {
         />
       )}
     </Container>
-  )
-}
-export const CategoryDescription = (props) => {
-  const categoryDescroptionProps = {
-    ...props,
-    UIComponent: CategoryDescriptionUI
-  }
-
-  return (
-    <CategoryDescriptionController {...categoryDescroptionProps} />
   )
 }

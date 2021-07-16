@@ -16,7 +16,7 @@ export const SingleListBusinessContainer = styled.tbody`
   }
   &:hover {
     background: #E9F2FE;
-    input {
+    input, textarea {
       background: #E9F2FE;
     }
   }
