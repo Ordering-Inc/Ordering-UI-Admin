@@ -194,7 +194,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  cursor: pointer;\n  transition: all 0.3s;\n  .business {\n    padding-right: 20px;\n  }\n  &:hover {\n    background: #E9F2FE;\n    input {\n      background: #E9F2FE;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  cursor: pointer;\n  transition: all 0.3s;\n  .business {\n    padding-right: 20px;\n  }\n  &:hover {\n    background: #E9F2FE;\n    input, textarea {\n      background: #E9F2FE;\n    }\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
