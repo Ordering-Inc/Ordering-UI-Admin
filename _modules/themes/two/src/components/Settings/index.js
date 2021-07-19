@@ -15,7 +15,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _SettingItemUI = require("../SettingItemUI");
 
-var _CategoryDescription = require("../CategoryDescription");
+var _SettingsDetail = require("../SettingsDetail");
 
 var _styles = require("./styles");
 
@@ -71,43 +71,22 @@ var SettingsUI = function SettingsUI(props) {
       search = _useLocation.search;
 
   var category;
-  var config;
 
   if (search) {
     var data = search.substring(1).split('&');
     category = data[0];
-    config = data[1];
   }
 
   var categoryId = category && category.split('=')[1];
-  var configId = config && config.split('=')[1];
 
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
-  (0, _react.useEffect)(function () {
-    if (categoryId && configId) {
-      onBasicSettingsRedirect({
-        category: categoryId,
-        config: configId
-      });
-      setIsOpenDescription(true);
-    } else if (categoryId) {
-      onBasicSettingsRedirect({
-        category: categoryId
-      });
-      setIsOpenDescription(true);
-    } else {
-      setIsOpenDescription(false);
-    }
-  }, []);
-
   var onBasicSettingsRedirect = function onBasicSettingsRedirect(_ref) {
-    var category = _ref.category,
-        config = _ref.config;
+    var category = _ref.category;
 
-    if (!category && !config) {
+    if (!category) {
       if (settingsType === 'basic') return events.emit('go_to_page', {
         page: 'basicSettings',
         replace: true
@@ -118,18 +97,10 @@ var SettingsUI = function SettingsUI(props) {
       });
     }
 
-    if (!config && category) {
+    if (category) {
       events.emit('go_to_page', {
         page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: "?category=".concat(category),
-        replace: true
-      });
-    }
-
-    if (category && config) {
-      events.emit('go_to_page', {
-        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
-        search: "?category=".concat(category, "&config=").concat(config),
         replace: true
       });
     }
@@ -147,35 +118,53 @@ var SettingsUI = function SettingsUI(props) {
     setIsOpenDescription(false);
     setSelectedCategory(null);
     onBasicSettingsRedirect({
-      category: null,
-      config: null
+      category: null
     });
   };
 
+  (0, _react.useEffect)(function () {
+    if (categoryId) {
+      onBasicSettingsRedirect({
+        category: categoryId
+      });
+      setIsOpenDescription(true);
+    } else {
+      setIsOpenDescription(false);
+    }
+  }, []);
+  (0, _react.useEffect)(function () {
+    var _categoryList$categor;
+
+    if (categoryId && (categoryList === null || categoryList === void 0 ? void 0 : (_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.length) > 0) {
+      var categorySelected = categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories.find(function (item) {
+        return item.id === parseInt(categoryId);
+      });
+      setSelectedCategory(categorySelected);
+    }
+  }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     className: "row"
   }, categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
+    return /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
       key: i
     }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
       isSkeleton: true
     }));
   }) : categoryList.categories.map(function (category, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      className: "col-md-4 col-sm-6 category",
+    return /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
       key: i,
+      className: "col-md-4 col-sm-6",
       onClick: function onClick() {
         return handleOpenDescription(category);
       }
     }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
-      category: category
+      category: category,
+      active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     }));
-  }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_CategoryDescription.CategoryDescription, {
+  }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, {
     open: isOpenDescription,
     category: selectedCategory,
-    categoryId: categoryId,
-    configId: parseInt(configId),
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
   }));

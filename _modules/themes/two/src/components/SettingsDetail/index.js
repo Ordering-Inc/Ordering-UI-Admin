@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CategoryDescription = void 0;
+exports.SettingsDetail = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -17,7 +17,7 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _Modal = require("../Modal");
 
-var _SubCategory = require("../SubCategory");
+var _SettingsList = require("../SettingsList");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
@@ -39,12 +39,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -57,14 +51,11 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CategoryDescriptionUI = function CategoryDescriptionUI(props) {
+var SettingsDetail = function SettingsDetail(props) {
   var open = props.open,
       onClose = props.onClose,
-      configId = props.configId,
-      onBasicSettingsRedirect = props.onBasicSettingsRedirect;
-  var _props$category = props.category,
-      category = _props$category.category,
-      loading = _props$category.loading;
+      onBasicSettingsRedirect = props.onBasicSettingsRedirect,
+      category = props.category;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -87,10 +78,6 @@ var CategoryDescriptionUI = function CategoryDescriptionUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       extraSubCatOpen = _useState6[0],
       setExtraSubCatOpen = _useState6[1];
-
-  (0, _react.useEffect)(function () {
-    if (configId) setExtraSubCatOpen(true);
-  }, [configId]);
 
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
@@ -150,26 +137,27 @@ var CategoryDescriptionUI = function CategoryDescriptionUI(props) {
     } else {
       setExtraInfoOpen(false);
       setExtraSubCatOpen(true);
-      onBasicSettingsRedirect({
-        category: category.id,
-        config: category.id
-      });
     }
   };
 
-  var onCloseSubCat = function onCloseSubCat() {
+  var onCloseSettingsList = function onCloseSettingsList() {
     setExtraSubCatOpen(false);
     onBasicSettingsRedirect({
-      category: category.id,
-      config: null
+      category: category.id
     });
   };
 
+  (0, _react.useEffect)(function () {
+    if (category) {
+      setExtraInfoOpen(false);
+      setExtraSubCatOpen(false);
+    }
+  }, [category]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "catDescription"
   }, /*#__PURE__*/_react.default.createElement(_styles.DescriptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderIcons, null, /*#__PURE__*/_react.default.createElement(_BsLifePreserver.default, null), /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
     onClick: handleClose
-  }))), loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }))), !category && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 30
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -181,7 +169,7 @@ var CategoryDescriptionUI = function CategoryDescriptionUI(props) {
     height: 150
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20
-  })), !loading && category && Object.keys(category).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, /*#__PURE__*/_react.default.createElement("p", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.Description, null, category === null || category === void 0 ? void 0 : category.description), (category === null || category === void 0 ? void 0 : category.support_url) && /*#__PURE__*/_react.default.createElement(_styles.MoreInfo, {
+  })), category && Object.keys(category).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, /*#__PURE__*/_react.default.createElement("p", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.Description, null, category === null || category === void 0 ? void 0 : category.description), (category === null || category === void 0 ? void 0 : category.support_url) && /*#__PURE__*/_react.default.createElement(_styles.MoreInfo, {
     onClick: function onClick() {
       return handleExtraOpen(true);
     }
@@ -208,42 +196,36 @@ var CategoryDescriptionUI = function CategoryDescriptionUI(props) {
     onClick: function onClick() {
       return setExtraInfoOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, null, /*#__PURE__*/_react.default.createElement("iframe", {
-    src: category.support_url,
-    style: {
-      width: '100%',
-      height: '100%'
+  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, {
+    dangerouslySetInnerHTML: {
+      __html: "<iframe src=".concat(category.support_url, " style=\"width: 100%; height: 100%;\" />")
     }
-  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     height: "90vh",
     open: true,
     onClose: function onClose() {
       return setExtraInfoOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, null, /*#__PURE__*/_react.default.createElement("iframe", {
-    src: category.support_url,
-    style: {
-      width: '100%',
-      height: '100%'
+  }, /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, {
+    dangerouslySetInnerHTML: {
+      __html: "<iframe src=".concat(category.support_url, " style=\"width: 100%; height: 100%;\" />")
     }
-  }))))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "5px",
     color: "secundary",
-    onClick: onCloseSubCat
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SubCategory.SubCategory, {
-    categoryId: category === null || category === void 0 ? void 0 : category.id,
-    onCloseSubCat: onCloseSubCat,
-    configId: configId
+    onClick: onCloseSettingsList
+  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, {
+    category: category,
+    onCloseSettingsList: onCloseSettingsList
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     height: "90vh",
     open: true,
-    onClose: onCloseSubCat
-  }, /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SubCategory.SubCategory, {
-    categoryId: category === null || category === void 0 ? void 0 : category.id,
-    onCloseSubCat: onCloseSubCat,
-    configId: configId
+    onClose: onCloseSettingsList
+  }, /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, {
+    category: category,
+    onCloseSettingsList: onCloseSettingsList
   }))))), extraInfoOpen && !category.support_url && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_SUPPORTURL', 'Sorry, we couldn\'t find the support url.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category'),
@@ -251,12 +233,4 @@ var CategoryDescriptionUI = function CategoryDescriptionUI(props) {
   }));
 };
 
-var CategoryDescription = function CategoryDescription(props) {
-  var categoryDescroptionProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: CategoryDescriptionUI
-  });
-
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CategoryDescription, categoryDescroptionProps);
-};
-
-exports.CategoryDescription = CategoryDescription;
+exports.SettingsDetail = SettingsDetail;

@@ -3,14 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ContentWrapper = exports.Title = exports.BasicSettingsContainer = void 0;
+exports.SettingItemWrapper = exports.ContentWrapper = exports.Title = exports.BasicSettingsContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject4() {
+  var data = _taggedTemplateLiteral([""]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  .category {\n    transition: all 0.3s;\n    border-radius: 20px;\n    cursor: pointer;\n    &:hover {\n      background: #eae9f1;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral([""]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -52,3 +62,7 @@ exports.Title = Title;
 var ContentWrapper = _styledComponents.default.div(_templateObject3());
 
 exports.ContentWrapper = ContentWrapper;
+
+var SettingItemWrapper = _styledComponents.default.div(_templateObject4());
+
+exports.SettingItemWrapper = SettingItemWrapper;
