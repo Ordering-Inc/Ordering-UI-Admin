@@ -11,7 +11,6 @@ import BiMinus from '@meronex/icons/bi/BiMinus'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
-
 import { Alert } from '../Confirm'
 
 import {
@@ -102,7 +101,7 @@ export const BusinessMenuBasicOptions = (props) => {
     const businessCategory = business?.categories.find(category => category.id === categoryId)
     const menuProducts = businessMenuState?.menu?.products.filter(product => product?.category_id === categoryId)
     let result = ''
-    if (businessCategory?.products.length === menuProducts.length) result = 'all'
+    if (businessCategory?.products.length !== 0 && businessCategory?.products.length === menuProducts.length) result = 'all'
     else if (menuProducts.length) result = 'some'
     else result = 'nothing'
     return result
@@ -155,9 +154,7 @@ export const BusinessMenuBasicOptions = (props) => {
           name='name'
           placeholder={t('NAME', 'Name')}
           value={
-            formState?.result?.result?.name
-              ? formState?.result?.result?.name
-              : formState?.changes?.name ?? businessMenuState?.menu?.name ?? ''
+            formState?.changes?.name ?? businessMenuState?.menu?.name ?? ''
           }
           onChange={(e) => handleChangeInput(e)}
         />
@@ -165,15 +162,11 @@ export const BusinessMenuBasicOptions = (props) => {
         {orderTypes.map(orderType => (
           <OrderType
             key={orderType.value}
-            active={(formState?.result?.result
-              ? formState?.result?.result[orderType.key]
-              : formState?.changes[orderType.key] ?? businessMenuState.menu[orderType.key])}
+            active={(formState?.changes[orderType.key] ?? businessMenuState.menu[orderType.key])}
             onClick={() => handleCheckOrderType(orderType.key)}
           >
             {
-              (formState?.result?.result
-                ? formState?.result?.result[orderType.key]
-                : formState?.changes[orderType.key] ?? businessMenuState.menu[orderType.key])
+              (formState?.changes[orderType.key] ?? businessMenuState.menu[orderType.key])
                 ? (
                   <RiCheckboxFill />
                 ) : (
@@ -369,9 +362,7 @@ export const BusinessMenuBasicOptions = (props) => {
           rows={4}
           name='comment'
           defaultValue={
-            formState?.result?.result
-              ? formState?.result?.result?.comment
-              : formState?.changes?.comment ?? businessMenuState?.menu?.comment ?? ''
+            formState?.changes?.comment ?? businessMenuState?.menu?.comment ?? ''
           }
           placeholder={t('WRITE_HERE', 'Write here')}
           onChange={(e) => handleChangeInput(e)}
@@ -387,8 +378,8 @@ export const BusinessMenuBasicOptions = (props) => {
               >
                 <CheckBoxWrapper
                   active={
-                    (handleCheckCategory(category.id) === 'all' ?? isCheckedCategory(category.id) === 'all') ||
-                    (handleCheckCategory(category.id) === 'some' ?? isCheckedCategory(category.id) === 'some')
+                    (formState?.changes?.products ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') ||
+                    (formState?.changes?.products ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some')
                   }
                 >
                   {
