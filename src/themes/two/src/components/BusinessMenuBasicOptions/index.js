@@ -402,9 +402,11 @@ export const BusinessMenuBasicOptions = (props) => {
                 </CheckBoxWrapper>
                 <span className='bold'>{category?.name}</span>
               </CheckboxContainer>
-              <GoTriangleDown
-                onClick={() => handleTogglePopover(category?.name)}
-              />
+              {category?.products.length > 0 && (
+                <GoTriangleDown
+                  onClick={() => handleTogglePopover(category?.name)}
+                />
+              )}
             </BusinessCategoryContainer>
             {openCategoryProduct[category?.name] && (
               <>
