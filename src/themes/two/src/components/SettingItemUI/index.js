@@ -1,5 +1,5 @@
 import React from 'react'
-import FiSettings from '@meronex/icons/fi/FiSettings'
+import AiFillSetting from '@meronex/icons/ai/AiFillSetting'
 import Skeleton from 'react-loading-skeleton'
 import {
   SettingItemContainer,
@@ -13,16 +13,17 @@ import {
 export const SettingItemUI = (props) => {
   const {
     category,
-    isSkeleton
+    isSkeleton,
+    active
   } = props
 
   return (
-    <SettingItemContainer>
+    <SettingItemContainer active={!isSkeleton && active}>
       <IconWrapper>
         {
           isSkeleton
             ? <Skeleton width={24} height={24} />
-            : (category.image ? <img src={category.image} /> : <FiSettings />)
+            : (category.image ? <img src={category.image} /> : <AiFillSetting />)
         }
       </IconWrapper>
       <SettingItemContent>
@@ -37,7 +38,7 @@ export const SettingItemUI = (props) => {
         }
         {
           isSkeleton
-            ? <Skeleton />
+            ? <Skeleton height={50} />
             : (
               <SettingItemDescription>{category?.description}</SettingItemDescription>
             )

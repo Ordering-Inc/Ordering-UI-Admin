@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
-import { CategoryDescription } from '../CategoryDescription'
+import { SettingsDetail } from '../SettingsDetail'
 
 import {
   BasicSettingsContainer,
   Title,
-  ContentWrapper
+  ContentWrapper,
+  SettingItemWrapper
 } from './styles'
 
 const SettingsUI = (props) => {
@@ -22,46 +23,24 @@ const SettingsUI = (props) => {
   const { search } = useLocation()
 
   let category
-  let config
 
   if (search) {
     const data = search.substring(1).split('&')
     category = data[0]
-    config = data[1]
   }
 
   const categoryId = category && category.split('=')[1]
-  const configId = config && config.split('=')[1]
   const [events] = useEvent()
 
-  useEffect(() => {
-    if (categoryId && configId) {
-      onBasicSettingsRedirect({ category: categoryId, config: configId })
-      setIsOpenDescription(true)
-    } else if (categoryId) {
-      onBasicSettingsRedirect({ category: categoryId })
-      setIsOpenDescription(true)
-    } else {
-      setIsOpenDescription(false)
-    }
-  }, [])
-
-  const onBasicSettingsRedirect = ({ category, config }) => {
-    if (!category && !config) {
+  const onBasicSettingsRedirect = ({ category }) => {
+    if (!category) {
       if (settingsType === 'basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
       if (settingsType === 'operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
     }
-    if (!config && category) {
+    if (category) {
       events.emit('go_to_page', {
         page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
         search: `?category=${category}`,
-        replace: true
-      })
-    }
-    if (category && config) {
-      events.emit('go_to_page', {
-        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
-        search: `?category=${category}&config=${config}`,
         replace: true
       })
     }
@@ -76,8 +55,24 @@ const SettingsUI = (props) => {
   const handleBackRedirect = () => {
     setIsOpenDescription(false)
     setSelectedCategory(null)
-    onBasicSettingsRedirect({ category: null, config: null })
+    onBasicSettingsRedirect({ category: null })
   }
+
+  useEffect(() => {
+    if (categoryId) {
+      onBasicSettingsRedirect({ category: categoryId })
+      setIsOpenDescription(true)
+    } else {
+      setIsOpenDescription(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (categoryId && categoryList?.categories?.length > 0) {
+      const categorySelected = categoryList?.categories.find(item => item.id === parseInt(categoryId))
+      setSelectedCategory(categorySelected)
+    }
+  }, [categoryList?.categories])
 
   return (
     <>
@@ -91,15 +86,22 @@ const SettingsUI = (props) => {
           {
             categoryList.loading ? (
               [...Array(12).keys()].map(i => (
-                <div className='col-md-4 col-sm-6' key={i}>
+                <SettingItemWrapper className='col-md-4 col-sm-6' key={i}>
                   <SettingItemUI isSkeleton />
-                </div>
+                </SettingItemWrapper>
               ))
             ) : (
               categoryList.categories.map((category, i) => (
-                <div className='col-md-4 col-sm-6 category' key={i} onClick={() => handleOpenDescription(category)}>
-                  <SettingItemUI category={category} />
-                </div>
+                <SettingItemWrapper
+                  key={i}
+                  className='col-md-4 col-sm-6'
+                  onClick={() => handleOpenDescription(category)}
+                >
+                  <SettingItemUI
+                    category={category}
+                    active={selectedCategory?.id === category?.id}
+                  />
+                </SettingItemWrapper>
               ))
             )
           }
@@ -107,17 +109,14 @@ const SettingsUI = (props) => {
       </BasicSettingsContainer>
       {
         isOpenDescription && (
-          <CategoryDescription
+          <SettingsDetail
             open={isOpenDescription}
             category={selectedCategory}
-            categoryId={categoryId}
-            configId={parseInt(configId)}
             onClose={handleBackRedirect}
             onBasicSettingsRedirect={onBasicSettingsRedirect}
           />
         )
       }
-
     </>
   )
 }

@@ -24,13 +24,6 @@ export const Title = styled.h1`
   margin-top: 20px;
 `
 
-export const ContentWrapper = styled.div`
-  .category {
-    transition: all 0.3s;
-    border-radius: 20px;
-    cursor: pointer;
-    &:hover {
-      background: #eae9f1;
-    }
-  }
-`
+export const ContentWrapper = styled.div``
+
+export const SettingItemWrapper = styled.div``
