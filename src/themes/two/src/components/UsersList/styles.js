@@ -28,6 +28,7 @@ export const UsersTable = styled.table`
     }
 
     &:nth-child(4),
+    
     &:nth-child(5) {
       width: 10%;
     }
