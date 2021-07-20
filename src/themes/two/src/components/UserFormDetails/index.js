@@ -238,7 +238,6 @@ export const UserFormDetailsUI = (props) => {
                       type={field.type}
                       name={field.code}
                       className='form'
-                      disabled={!isEdit}
                       placeholder={t(field.code.toUpperCase(), field?.name)}
                       defaultValue={
                       formState?.result?.result
@@ -257,7 +256,6 @@ export const UserFormDetailsUI = (props) => {
                       type={field.type}
                       name={field.code}
                       className='form'
-                      disabled={!isEdit}
                       placeholder={t(field.code.toUpperCase(), field?.name)}
                       defaultValue={
                       formState?.result?.result
@@ -283,7 +281,6 @@ export const UserFormDetailsUI = (props) => {
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
-                disabled={!isEdit}
               />
             )}
             {!isCheckout && (
@@ -291,7 +288,6 @@ export const UserFormDetailsUI = (props) => {
                 type='password'
                 name='password'
                 className='form'
-                disabled={!isEdit}
                 placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
                 onChange={handleChangeInput}
                 ref={formMethods.register({
