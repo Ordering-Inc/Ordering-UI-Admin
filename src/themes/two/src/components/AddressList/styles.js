@@ -10,7 +10,7 @@ export const AddressListContainer = styled.div`
   `}
 
   button.add {
-    height: 50px;
+    height: 42px;
   }
 `
 
