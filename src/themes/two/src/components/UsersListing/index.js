@@ -112,6 +112,7 @@ const UsersListingUI = (props) => {
           selectedUsers={selectedUsers}
           handleSelectedUsers={handleSelectedUsers}
           handleOpenUserDetails={handleOpenUserDetails}
+          handleOpenUserAddForm={handleOpenUserAddForm}
         />
       </UsersListingContainer>
 

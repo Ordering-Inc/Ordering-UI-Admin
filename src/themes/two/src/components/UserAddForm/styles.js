@@ -8,6 +8,7 @@ export const FormContainer = styled.div`
     font-weight: 600;
     width: 100%;
     margin-bottom: 0px;
+    color: ${props => props.theme.colors.headingColor};
   }
 `
 

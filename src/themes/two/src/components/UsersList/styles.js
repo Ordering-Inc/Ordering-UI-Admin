@@ -5,11 +5,11 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
-  max-height: calc(100vh - 380px);
+  max-height: calc(100vh - 415px);
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 280px);
+    max-height: calc(100vh - 300px);
   }
 `
 
@@ -125,11 +125,13 @@ export const InfoBlock = styled.div`
   p {
     margin: 5px 0 0 0;
     font-size: 12px;
+    color: ${props => props.theme.colors.lightGray};
   }
   p.bold {
     margin: 0px;
     font-size: 14px;
     font-weight: 600;
+    color: ${props => props.theme.colors.headingColor};
   }
 `
 export const UserTypeWrapper = styled.div`
@@ -154,9 +156,10 @@ export const UserTypeWrapper = styled.div`
       }
     }
   }
-  p {
+  > p {
     margin: 5px 0 0 0;
     font-size: 12px;
+    color: ${props => props.theme.colors.lightGray};
   }
 `
 
@@ -236,4 +239,11 @@ export const WrapperUserActionSelector = styled.div`
       }
     }
   }
+`
+
+export const AddNewUserButton = styled.div`
+  cursor: pointer;
+  color: ${props => props.theme.colors.lightGray};
+  width: fit-content;
+  margin-top: 10px;
 `

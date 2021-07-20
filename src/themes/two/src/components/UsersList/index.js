@@ -26,7 +26,8 @@ import {
   WrapperPagination,
   WrapperPageState,
   PageButton,
-  WrapperUserActionSelector
+  WrapperUserActionSelector,
+  AddNewUserButton
 } from './styles'
 
 export const UsersList = (props) => {
@@ -40,7 +41,8 @@ export const UsersList = (props) => {
     handleDeleteUser,
     selectedUsers,
     handleSelectedUsers,
-    handleOpenUserDetails
+    handleOpenUserDetails,
+    handleOpenUserAddForm
   } = props
 
   const [, t] = useLanguage()
@@ -197,6 +199,9 @@ export const UsersList = (props) => {
             )}
           </UsersTable>
         </UserTableWrapper>
+        <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
+          {t('ADD_NEW_USER', 'Add new user')}
+        </AddNewUserButton>
 
         {usersList?.users.length > 0 && (
           <WrapperPagination>
