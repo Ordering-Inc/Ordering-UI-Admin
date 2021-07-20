@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
+  height: 100%;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -29,5 +30,15 @@ export const Container = styled.div`
 
   img {
     width: 300px;
+  }
+`
+
+export const WrapperButton = styled.div`
+  position: sticky;
+  top: 100%;
+  width: 100%;
+
+  button {
+    height: 44px;
   }
 `

@@ -208,4 +208,32 @@ export const WrapperPageState = styled.div`
 `
 
 export const WrapperUserActionSelector = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: #F8F9FA !important;
+    border: none;
+    padding: 0px;
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+    }
+    &:after {
+      display: none;
+    }
+  }
+  > div {
+    border: 1px solid #E9ECEF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 5px;
+    ` : css`
+      margin-right: 5px;
+    `}
+    > div {
+      a:last-child {
+        color: #E63757;
+      }
+    }
+  }
 `
