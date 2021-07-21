@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { SettingsList as SettingsListController } from './naked'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Button } from '../../../../../styles/Buttons'
@@ -153,10 +154,11 @@ export const SettingsListUI = (props) => {
                                       <input
                                         type='checkbox'
                                         name={item?.value}
-                                        defaultChecked={config?.value.includes(item?.value)}
+                                        data-id={config?.id}
+                                        defaultChecked={JSON.parse(config?.value).includes(parseInt(item?.value))}
                                         onChange={(e) => handleCheckBoxChange(e, false, config?.value)}
                                       />
-                                      {item}
+                                      {item.text}
                                     </label>
                                   </FormGroupCheck>
                                 </FormGroupWrapper>
