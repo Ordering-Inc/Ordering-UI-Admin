@@ -33,7 +33,8 @@ const BusinessProductsListingUI = (props) => {
     onProductRedirect,
     slug,
     categoryId,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    setCategorySelected
   } = props
   const [, t] = useLanguage()
 
@@ -50,6 +51,7 @@ const BusinessProductsListingUI = (props) => {
         category: category?.id,
         product: null
       })
+      setCategorySelected(category)
       setCategoryToEdit({
         open: true,
         category: { ...category }
