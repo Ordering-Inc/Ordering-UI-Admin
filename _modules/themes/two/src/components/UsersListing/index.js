@@ -23,6 +23,10 @@ var _UserActiveStateFilter = require("../UserActiveStateFilter");
 
 var _UserDetailsLateralBar = require("../UserDetailsLateralBar");
 
+var _SideBar = require("../SideBar");
+
+var _UserAddForm = require("../UserAddForm");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -66,7 +70,8 @@ var UsersListingUI = function UsersListingUI(props) {
       deleteUsersActionState = props.deleteUsersActionState,
       handleDeleteSeveralUsers = props.handleDeleteSeveralUsers,
       onUserRedirect = props.onUserRedirect,
-      handleSuccessUpdate = props.handleSuccessUpdate;
+      handleSuccessUpdate = props.handleSuccessUpdate,
+      handleSuccessAddUser = props.handleSuccessAddUser;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -89,6 +94,11 @@ var UsersListingUI = function UsersListingUI(props) {
       openUser = _useState6[0],
       setOpenUser = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      openUserAddForm = _useState8[0],
+      setOpenUserAddForm = _useState8[1];
+
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
     onUserRedirect();
@@ -97,7 +107,19 @@ var UsersListingUI = function UsersListingUI(props) {
   var handleOpenUserDetails = function handleOpenUserDetails(user) {
     onUserRedirect(user === null || user === void 0 ? void 0 : user.id);
     setOpenUser(user);
+    setOpenUserAddForm(false);
     setIsOpenUserDetails(true);
+  };
+
+  var handleOpenUserAddForm = function handleOpenUserAddForm() {
+    var id = query.get('id');
+
+    if (id) {
+      handleBackRedirect();
+    }
+
+    setIsOpenUserDetails(false);
+    setOpenUserAddForm(true);
   };
 
   (0, _react.useEffect)(function () {
@@ -125,7 +147,8 @@ var UsersListingUI = function UsersListingUI(props) {
     deleteUsersActionState: deleteUsersActionState,
     searchValue: searchValue,
     onSearch: onSearch,
-    handleDeleteSeveralUsers: handleDeleteSeveralUsers
+    handleDeleteSeveralUsers: handleDeleteSeveralUsers,
+    handleOpenUserAddForm: handleOpenUserAddForm
   }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
@@ -141,7 +164,8 @@ var UsersListingUI = function UsersListingUI(props) {
     handleDeleteUser: handleDeleteUser,
     selectedUsers: selectedUsers,
     handleSelectedUsers: handleSelectedUsers,
-    handleOpenUserDetails: handleOpenUserDetails
+    handleOpenUserDetails: handleOpenUserDetails,
+    handleOpenUserAddForm: handleOpenUserAddForm
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     open: isOpenUserDetails,
     user: openUser,
@@ -150,7 +174,18 @@ var UsersListingUI = function UsersListingUI(props) {
       return handleBackRedirect();
     },
     handleSuccessUpdate: handleSuccessUpdate
-  }));
+  }), openUserAddForm && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+    sidebarId: "userAddForm",
+    open: openUserAddForm,
+    onClose: function onClose() {
+      return setOpenUserAddForm(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_UserAddForm.UserAddForm, {
+    handleSuccessAdd: handleSuccessAddUser,
+    onClose: function onClose() {
+      return setOpenUserAddForm(false);
+    }
+  })));
 };
 
 var UsersListing = function UsersListing(props) {

@@ -187,10 +187,6 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       }
     }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
-        return console.log('custom');
-      }
-    }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
         return handleDeleteBusinessPaymethodOption(paymethod.id);
       }
     }, t('DELETE', 'Delete')))));

@@ -18,7 +18,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject21() {
-  var data = _taggedTemplateLiteral(["\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  button {\n    background: #F8F9FA !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n  }\n\n  > div {\n    > div {\n      border: 1px solid #E9ECEF;\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n      border-radius: 8px;\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"]);
 
   _templateObject21 = function _templateObject21() {
     return data;
@@ -108,7 +108,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  ", "\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  border-radius: 8px;\n  overflow: hidden;\n\n  margin: 10px;\n  width: calc(100% - 20px);\n\n  @media (min-width: 768px) {\n    width: calc(50% - 20px);\n  }\n\n  @media (min-width: 992px) {\n    width: calc(33.33% - 20px);\n  }\n\n  @media (min-width: 1024px) {\n    width: calc(25% - 20px);\n  }\n  @media (min-width: 1250px) {\n    width: calc(20% - 20px);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  ", "\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  border-radius: 8px;\n\n  margin: 10px;\n  width: calc(100% - 20px);\n\n  @media (min-width: 768px) {\n    width: calc(50% - 20px);\n  }\n\n  @media (min-width: 992px) {\n    width: calc(33.33% - 20px);\n  }\n\n  @media (min-width: 1024px) {\n    width: calc(25% - 20px);\n  }\n  @media (min-width: 1250px) {\n    width: calc(20% - 20px);\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -328,6 +328,8 @@ var BusinessActionContainer = _styledComponents.default.div(_templateObject20())
 
 exports.BusinessActionContainer = BusinessActionContainer;
 
-var WrapperBusinessActionSelector = _styledComponents.default.div(_templateObject21());
+var WrapperBusinessActionSelector = _styledComponents.default.div(_templateObject21(), function (props) {
+  return props.theme.colors.headingColor;
+});
 
 exports.WrapperBusinessActionSelector = WrapperBusinessActionSelector;

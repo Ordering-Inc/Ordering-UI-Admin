@@ -15,6 +15,8 @@ var _UsersExportCSV = require("../UsersExportCSV");
 
 var _SearchBar = require("../SearchBar");
 
+var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39,13 +41,18 @@ var UsersListingHeader = function UsersListingHeader(props) {
       userTypesSelected = props.userTypesSelected,
       selectedUserActiveState = props.selectedUserActiveState,
       searchValue = props.searchValue,
-      onSearch = props.onSearch;
+      onSearch = props.onSearch,
+      handleOpenUserAddForm = props.handleOpenUserAddForm;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_UsersDeleteButton.UsersDeleteButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, {
+    onClick: function onClick() {
+      return handleOpenUserAddForm();
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_UsersDeleteButton.UsersDeleteButton, {
     selectedUsers: selectedUsers,
     deleteUsersActionState: deleteUsersActionState,
     handleDeleteSeveralUsers: handleDeleteSeveralUsers

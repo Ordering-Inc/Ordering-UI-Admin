@@ -5,29 +5,31 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserFormDetailsUI = void 0;
+exports.UserAddForm = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
-var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _reactHookForm = require("react-hook-form");
 
-var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
-
-var _UserTypeSelector = require("../UserTypeSelector");
+var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _InputPhoneNumber = require("../InputPhoneNumber");
-
 var _Confirm = require("../Confirm");
 
+var _UserTypeSelector = require("../UserTypeSelector");
+
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+
+var _InputPhoneNumber = require("../InputPhoneNumber");
+
 var _utils = require("../../../../../utils");
+
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
+var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("./styles");
 
@@ -36,6 +38,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -59,22 +67,19 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _formState$changes6, _props$afterComponent, _props$afterElements;
+var UserAddFormUI = function UserAddFormUI(props) {
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie5, _props$afterMidElemen, _props$afterMidCompon, _formState$changes5;
 
-  var isEdit = props.isEdit,
-      formState = props.formState,
-      onCancel = props.onCancel,
+  var formState = props.formState,
       showField = props.showField,
       cleanFormState = props.cleanFormState,
       isRequiredField = props.isRequiredField,
       validationFields = props.validationFields,
       handleChangeInput = props.handleChangeInput,
-      handleButtonUpdateClick = props.handleButtonUpdateClick,
+      handleButtonAddClick = props.handleButtonAddClick,
       isCheckout = props.isCheckout,
-      userData = props.userData,
-      isCustomerMode = props.isCustomerMode,
-      handleChangeUserType = props.handleChangeUserType;
+      handleChangeUserType = props.handleChangeUserType,
+      handlechangeImage = props.handlechangeImage;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -99,20 +104,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       alertState = _useState6[0],
       setAlertState = _useState6[1];
 
-  var _useCustomer = (0, _orderingComponentsAdmin.useCustomer)(),
-      _useCustomer2 = _slicedToArray(_useCustomer, 2),
-      setUserCustomer = _useCustomer2[1].setUserCustomer;
-
   var emailInput = (0, _react.useRef)(null);
-
-  var _useState7 = (0, _react.useState)(userData),
-      _useState8 = _slicedToArray(_useState7, 2),
-      user = _useState8[0],
-      setUser = _useState8[1];
-
-  (0, _react.useEffect)(function () {
-    setUser(userData);
-  }, [userData]);
+  var inputRef = (0, _react.useRef)(null);
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -128,62 +121,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
 
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
 
-  var setUserCellPhone = function setUserCellPhone() {
-    var isEdit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-    if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
-      setUserPhoneNumber(userPhoneNumber);
-      return;
-    }
-
-    if (user === null || user === void 0 ? void 0 : user.cellphone) {
-      var _formState$changes, _formState$changes2;
-
-      var phone = null;
-
-      if (formState.result.error && ((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.cellphone) && ((_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.country_phone_code)) {
-        var _formState$changes3, _formState$changes4;
-
-        phone = "+".concat((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.country_phone_code, " ").concat((_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.cellphone);
-        setUserPhoneNumber(phone);
-        return;
-      }
-
-      if (user === null || user === void 0 ? void 0 : user.country_phone_code) {
-        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
-      } else {
-        phone = user === null || user === void 0 ? void 0 : user.cellphone;
-      }
-
-      setUserPhoneNumber(phone);
-      return;
-    }
-
-    setUserPhoneNumber((user === null || user === void 0 ? void 0 : user.cellphone) || '');
-  };
-
   var onSubmit = function onSubmit() {
-    var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10;
-
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
 
-    if (!userPhoneNumber && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.checkout) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.cellphone) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : (_validationFields$fie9 = _validationFields$fie8.checkout) === null || _validationFields$fie9 === void 0 ? void 0 : (_validationFields$fie10 = _validationFields$fie9.cellphone) === null || _validationFields$fie10 === void 0 ? void 0 : _validationFields$fie10.required)) {
-      setAlertState({
-        open: true,
-        content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
-      });
-      return;
-    }
-
     if (!isPhoneNumberValid && userPhoneNumber) {
-      if (user === null || user === void 0 ? void 0 : user.country_phone_code) {
-        setAlertState({
-          open: true,
-          content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
-        });
-        return;
-      }
-
       setAlertState({
         open: true,
         content: [t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')]
@@ -192,20 +133,37 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
 
     if (Object.keys(formState.changes).length > 0 && isPhoneNumberValid) {
-      var changes = null;
+      handleButtonAddClick();
+    }
+  };
 
-      if ((user === null || user === void 0 ? void 0 : user.cellphone) && !userPhoneNumber) {
-        changes = {
-          country_phone_code: '',
-          cellphone: ''
-        };
+  var handleClickImage = function handleClickImage() {
+    inputRef.current.click();
+  };
+
+  var handleFiles = function handleFiles(files) {
+    if (files.length === 1) {
+      var _files$;
+
+      var type = files[0].type.split('/')[0];
+
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        });
+        return;
       }
 
-      if (isCustomerMode) {
-        setUserCustomer(formState.result.result, true);
+      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        });
+        return;
       }
 
-      handleButtonUpdateClick(changes);
+      handlechangeImage(files[0]);
     }
   };
 
@@ -283,22 +241,15 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   (0, _react.useEffect)(function () {
-    if ((user || !isEdit) && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
-      setUserCellPhone();
-
-      if (!isEdit && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
-        cleanFormState && cleanFormState({
-          changes: {}
-        });
-        setUserCellPhone(true);
-      }
-    }
-  }, [user, isEdit]);
+    cleanFormState && cleanFormState({
+      changes: {}
+    });
+  }, []);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && emailInput.current) {
-      var _formState$result3, _formState$result4, _formState$result4$re, _ref, _formState$changes$em, _formState$changes5;
+      var _formState$result3, _formState$result4, _formState$result4$re, _formState$changes$em, _formState$changes;
 
-      formMethods.setValue('email', (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.email : (_ref = (_formState$changes$em = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : user && (user === null || user === void 0 ? void 0 : user.email)) !== null && _ref !== void 0 ? _ref : '');
+      formMethods.setValue('email', (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.email : (_formState$changes$em = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : '');
     }
   }, [validationFields, emailInput.current]);
   (0, _react.useEffect)(function () {
@@ -310,29 +261,37 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }
     });
   }, [formMethods]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_styles.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout
-  }, !(validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeMidElements);
-  }), (_props$beforeMidCompo = props.beforeMidComponents) === null || _props$beforeMidCompo === void 0 ? void 0 : _props$beforeMidCompo.map(function (BeforeMidComponents, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
-      key: i
-    }, props));
-  }), (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('USERS_REGISTER', 'New user')), /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
+    className: "user-image"
+  }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    onClick: function onClick() {
+      return handleClickImage();
+    },
+    isImage: (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo) && !formState.result.error
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: handleFiles,
+    childRef: function childRef(e) {
+      inputRef.current = e;
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+    onDrop: function onDrop(dataTransfer) {
+      return handleFiles(dataTransfer.files);
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.photo,
+    alt: "user image",
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), !(validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
+    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout
   }).map(function (field) {
-    var _formState$result5, _formState$result6, _ref2, _formState$changes$fi, _formState$result7, _formState$result8, _ref3, _formState$changes$fi2;
+    var _formState$result5, _formState$result6, _formState$changes$fi, _formState$result7, _formState$result8, _formState$changes$fi2;
 
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
@@ -342,7 +301,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       name: field.code,
       className: "form",
       placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result[field.code] : (_ref2 = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref2 !== void 0 ? _ref2 : '',
+      defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result[field.code] : (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : '',
       onChange: handleChangeInputEmail,
       ref: function ref(e) {
         emailInput.current = e;
@@ -354,7 +313,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       name: field.code,
       className: "form",
       placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : _formState$result7.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.result[field.code] : (_ref3 = (_formState$changes$fi2 = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : user && user[field.code]) !== null && _ref3 !== void 0 ? _ref3 : '',
+      defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : _formState$result7.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.result[field.code] : (_formState$changes$fi2 = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : '',
       onChange: handleChangeInput,
       ref: formMethods.register({
         required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field === null || field === void 0 ? void 0 : field.name, " is required")).replace('_attribute_', t(field === null || field === void 0 ? void 0 : field.name, field.code)) : null
@@ -362,7 +321,6 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       autoComplete: "off"
     }));
   }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
-    user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
@@ -389,24 +347,14 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
-    userId: user.id,
-    defaultUserType: (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.level) || (user === null || user === void 0 ? void 0 : user.level),
+    defaultUserType: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.level,
     handleChangeUserType: handleChangeUserType
-  })), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    outline: true,
-    borderRadius: "5px",
-    type: "button",
-    onClick: function onClick() {
-      return onCancel(false);
-    },
-    disabled: formState.loading
-  }, t('CANCEL', 'Cancel')), (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && isEdit || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    id: "form-btn",
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    borderRadius: "5px",
+    borderRadius: "8px",
     type: "submit",
-    disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
+    disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || formState.loading
+  }, formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i
     });
@@ -422,15 +370,16 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 
-exports.UserFormDetailsUI = UserFormDetailsUI;
+var UserAddForm = function UserAddForm(props) {
+  var UserAddProps = _objectSpread(_objectSpread({}, props), {}, {
+    useSessionUser: false,
+    UIComponent: UserAddFormUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UserFormDetails, UserAddProps);
+};
+
+exports.UserAddForm = UserAddForm;

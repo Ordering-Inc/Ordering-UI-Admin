@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserActionSelector = exports.WrapperPageState = exports.PageButton = exports.WrapperPagination = exports.UserEnableWrapper = exports.UserTypeWrapper = exports.InfoBlock = exports.CheckBoxWrapper = exports.UserMainInfo = exports.Image = exports.WrapperImage = exports.UsersTable = exports.UserTableWrapper = exports.UsersConatiner = void 0;
+exports.AddNewUserButton = exports.WrapperUserActionSelector = exports.WrapperPageState = exports.PageButton = exports.WrapperPagination = exports.UserEnableWrapper = exports.UserTypeWrapper = exports.InfoBlock = exports.CheckBoxWrapper = exports.UserMainInfo = exports.Image = exports.WrapperImage = exports.UsersTable = exports.UserTableWrapper = exports.UsersConatiner = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,8 +17,38 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject25() {
+  var data = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  width: fit-content;\n  margin-top: 10px;\n"]);
+
+  _templateObject25 = function _templateObject25() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject24() {
+  var data = _taggedTemplateLiteral(["\n      margin-right: 5px;\n    "]);
+
+  _templateObject24 = function _templateObject24() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject23() {
+  var data = _taggedTemplateLiteral(["\n      margin-left: 5px;\n    "]);
+
+  _templateObject23 = function _templateObject23() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  button {\n    background: #F8F9FA !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n    &:after {\n      display: none;\n    }\n  }\n  > div {\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 8px;\n    ", "\n    > div {\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -88,7 +118,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  width: fit-content;\n  > div {\n    display: flex;\n\n    .select {\n      border: none;\n      padding: 0px;\n\n      > div {\n        padding: 0px;\n      }\n    }\n\n    .list {\n      .options {\n        border: 1px solid #E9ECEF;\n        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n        border-radius: 8px;\n      }\n    }\n  }\n  p {\n    margin: 5px 0 0 0;\n    font-size: 12px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: fit-content;\n  > div {\n    display: flex;\n\n    .select {\n      border: none;\n      padding: 0px;\n\n      > div {\n        padding: 0px;\n      }\n    }\n\n    .list {\n      .options {\n        border: 1px solid #E9ECEF;\n        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n        border-radius: 8px;\n      }\n    }\n  }\n  > p {\n    margin: 5px 0 0 0;\n    font-size: 12px;\n    color: ", ";\n  }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -98,7 +128,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  p {\n    margin: 5px 0 0 0;\n    font-size: 12px;\n  }\n  p.bold {\n    margin: 0px;\n    font-size: 14px;\n    font-weight: 600;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  p {\n    margin: 5px 0 0 0;\n    font-size: 12px;\n    color: ", ";\n  }\n  p.bold {\n    margin: 0px;\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -210,7 +240,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n\n  td, th {\n    padding: 10px 0;\n    &:first-child {\n      width: 30%;\n    }\n    &:nth-child(2) {\n      width: 20%;\n    }\n\n    &:nth-child(4),\n    &:nth-child(5) {\n      width: 10%;\n    }\n  }\n\n  thead {\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n        border-bottom: 1px solid #B1BCCC;\n      }\n    }\n  }\n\n  tbody {\n    border-bottom: 1px solid #E9ECEF;\n    cursor: pointer;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n\n  td, th {\n    padding: 10px 0;\n    &:first-child {\n      width: 30%;\n    }\n    &:nth-child(2) {\n      width: 20%;\n    }\n\n    &:nth-child(4),\n    \n    &:nth-child(5) {\n      width: 10%;\n    }\n  }\n\n  thead {\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n        border-bottom: 1px solid #B1BCCC;\n      }\n    }\n  }\n\n  tbody {\n    border-bottom: 1px solid #E9ECEF;\n    cursor: pointer;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -220,7 +250,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 380px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 280px);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 415px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 300px);\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -303,11 +333,17 @@ var CheckBoxWrapper = _styledComponents.default.div(_templateObject10(), functio
 
 exports.CheckBoxWrapper = CheckBoxWrapper;
 
-var InfoBlock = _styledComponents.default.div(_templateObject14());
+var InfoBlock = _styledComponents.default.div(_templateObject14(), function (props) {
+  return props.theme.colors.lightGray;
+}, function (props) {
+  return props.theme.colors.headingColor;
+});
 
 exports.InfoBlock = InfoBlock;
 
-var UserTypeWrapper = _styledComponents.default.div(_templateObject15());
+var UserTypeWrapper = _styledComponents.default.div(_templateObject15(), function (props) {
+  return props.theme.colors.lightGray;
+});
 
 exports.UserTypeWrapper = UserTypeWrapper;
 
@@ -331,6 +367,18 @@ var WrapperPageState = _styledComponents.default.div(_templateObject21());
 
 exports.WrapperPageState = WrapperPageState;
 
-var WrapperUserActionSelector = _styledComponents.default.div(_templateObject22());
+var WrapperUserActionSelector = _styledComponents.default.div(_templateObject22(), function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  var _props$theme4;
+
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) ? (0, _styledComponents.css)(_templateObject23()) : (0, _styledComponents.css)(_templateObject24());
+});
 
 exports.WrapperUserActionSelector = WrapperUserActionSelector;
+
+var AddNewUserButton = _styledComponents.default.div(_templateObject25(), function (props) {
+  return props.theme.colors.lightGray;
+});
+
+exports.AddNewUserButton = AddNewUserButton;

@@ -17,7 +17,9 @@ var _utils = require("../../../../../utils");
 
 var _Switch = require("../../styles/Switch");
 
-var _BusinessActionSelector = require("../BusinessActionSelector");
+var _reactBootstrap = require("react-bootstrap");
+
+var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
 
 var _styles = require("./styles");
 
@@ -128,12 +130,23 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     onChange: handleChangeActiveBusiness
   }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessActionSelector, {
     className: "business_actions"
-  }, /*#__PURE__*/_react.default.createElement(_BusinessActionSelector.BusinessActionSelector, {
-    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    handleDuplicateBusiness: handleDuplicateBusiness,
-    handleDeleteBusiness: handleDeleteBusiness,
-    handleOpenBusinessDetails: handleOpenBusinessDetails
-  })))))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (businessState === null || businessState === void 0 ? void 0 : businessState.loading) || isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessCardContainer, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
+    id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDuplicateBusiness();
+    }
+  }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleOpenBusinessDetails(businessState === null || businessState === void 0 ? void 0 : businessState.business);
+    }
+  }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDeleteBusiness();
+    }
+  }, t('DELETE', 'Delete')))))))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (businessState === null || businessState === void 0 ? void 0 : businessState.loading) || isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessCardContainer, {
     isSkeleton: true
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
     isSkeleton: true
@@ -165,14 +178,23 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     onChange: handleChangeActiveBusiness
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessActionSelector, {
     className: "business_actions"
-  }, /*#__PURE__*/_react.default.createElement(_BusinessActionSelector.BusinessActionSelector, {
-    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    handleDuplicateBusiness: handleDuplicateBusiness,
-    handleDeleteBusiness: handleDeleteBusiness,
-    handleOpenBusinessDetails: function handleOpenBusinessDetails() {
-      return console.log('open');
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
+    id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDuplicateBusiness();
     }
-  })))))));
+  }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleOpenBusinessDetails(businessState === null || businessState === void 0 ? void 0 : businessState.business);
+    }
+  }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDeleteBusiness();
+    }
+  }, t('DELETE', 'Delete')))))))));
 };
 
 var SingleBusiness = function SingleBusiness(props) {

@@ -90,6 +90,7 @@ var BusinessMenuShareUI = function BusinessMenuShareUI(props) {
   };
 
   var isCheckedBusiness = function isCheckedBusiness(id) {
+    if (Object.keys(menu).length === 0) return false;
     var found = menu === null || menu === void 0 ? void 0 : menu.businesses.find(function (business) {
       return (business === null || business === void 0 ? void 0 : business.id) === id;
     });

@@ -64,7 +64,7 @@ function _templateObject39() {
 }
 
 function _templateObject38() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n"]);
 
   _templateObject38 = function _templateObject38() {
     return data;
@@ -204,7 +204,7 @@ function _templateObject25() {
 }
 
 function _templateObject24() {
-  var data = _taggedTemplateLiteral(["\n  flex: 1;\n  text-align: center;\n  > p {\n    margin-top: 10px;\n    margin-bottom: 0px;\n    color: ", ";\n  }\n  > div:not(:last-child) {\n    margin-bottom: 10px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex: 1;\n  text-align: center;\n  > p {\n    margin: 0px;\n    color: ", ";\n  }\n  > div:not(:last-child) {\n    margin-bottom: 10px;\n  }\n"]);
 
   _templateObject24 = function _templateObject24() {
     return data;
@@ -214,7 +214,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 15px 0;\n  border-bottom: 1px solid #E9ECEF;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 15px 0;\n  border-bottom: 1px solid #E9ECEF;\n"]);
 
   _templateObject23 = function _templateObject23() {
     return data;
@@ -314,7 +314,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 20%;\n  margin-top: 10px;\n\n  h4 {\n    color: ", ";\n    font-size: 18px;\n    font-weight: 600;\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  width: 20%;\n\n  h4 {\n    color: ", ";\n    font-size: 18px;\n    font-weight: 600;\n    ", "\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;

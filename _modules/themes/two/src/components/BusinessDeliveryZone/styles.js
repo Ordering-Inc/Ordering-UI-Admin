@@ -234,7 +234,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  h1 {\n    font-size: 24px;\n    color: ", ";\n  }\n\n  svg {\n    color: ", ";\n    font-size: 24px;\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  h1 {\n    font-size: 24px;\n    color: ", ";\n  }\n\n  svg {\n    cursor: pointer;\n    color: ", ";\n    font-size: 24px;\n    ", "\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

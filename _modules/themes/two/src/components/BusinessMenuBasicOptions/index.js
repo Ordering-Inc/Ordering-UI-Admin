@@ -70,7 +70,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
-  var _formState$result3, _formState$result4, _formState$result4$re, _formState$result5, _formState$result5$re, _ref, _formState$changes$na, _formState$changes, _businessMenuState$me3, _formState$result10, _formState$result11, _formState$result11$r, _ref2, _formState$changes$co, _formState$changes2, _businessMenuState$me4;
+  var _formState$result3, _ref, _formState$changes$na, _formState$changes, _businessMenuState$me3, _ref2, _formState$changes$co, _formState$changes2, _businessMenuState$me4;
 
   var business = props.business,
       businessMenuState = props.businessMenuState,
@@ -160,7 +160,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === categoryId;
     });
     var result = '';
-    if ((businessCategory === null || businessCategory === void 0 ? void 0 : businessCategory.products.length) === menuProducts.length) result = 'all';else if (menuProducts.length) result = 'some';else result = 'nothing';
+    if ((businessCategory === null || businessCategory === void 0 ? void 0 : businessCategory.products.length) !== 0 && (businessCategory === null || businessCategory === void 0 ? void 0 : businessCategory.products.length) === menuProducts.length) result = 'all';else if (menuProducts.length) result = 'some';else result = 'nothing';
     return result;
   };
 
@@ -216,22 +216,22 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessMenuBasicContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('BUSINESS_NAME', 'Business name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "name",
     placeholder: t('NAME', 'Name'),
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.name) ? formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : (_formState$result5$re = _formState$result5.result) === null || _formState$result5$re === void 0 ? void 0 : _formState$result5$re.name : (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me3 = businessMenuState.menu) === null || _businessMenuState$me3 === void 0 ? void 0 : _businessMenuState$me3.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me3 = businessMenuState.menu) === null || _businessMenuState$me3 === void 0 ? void 0 : _businessMenuState$me3.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, {
     isBorderBottom: true
   }, t('DELIVERY_TYPE', 'Delivery type')), orderTypes.map(function (orderType) {
-    var _formState$result6, _formState$result7, _formState$changes$or, _formState$result8, _formState$result9, _formState$changes$or2;
+    var _formState$changes$or, _formState$changes$or2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderType, {
       key: orderType.value,
-      active: (formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : _formState$result7.result[orderType.key] : (_formState$changes$or = formState === null || formState === void 0 ? void 0 : formState.changes[orderType.key]) !== null && _formState$changes$or !== void 0 ? _formState$changes$or : businessMenuState.menu[orderType.key],
+      active: (_formState$changes$or = formState === null || formState === void 0 ? void 0 : formState.changes[orderType.key]) !== null && _formState$changes$or !== void 0 ? _formState$changes$or : businessMenuState.menu[orderType.key],
       onClick: function onClick() {
         return handleCheckOrderType(orderType.key);
       }
-    }, ((formState === null || formState === void 0 ? void 0 : (_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result9 = formState.result) === null || _formState$result9 === void 0 ? void 0 : _formState$result9.result[orderType.key] : (_formState$changes$or2 = formState === null || formState === void 0 ? void 0 : formState.changes[orderType.key]) !== null && _formState$changes$or2 !== void 0 ? _formState$changes$or2 : businessMenuState.menu[orderType.key]) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, orderType.content));
+    }, ((_formState$changes$or2 = formState === null || formState === void 0 ? void 0 : formState.changes[orderType.key]) !== null && _formState$changes$or2 !== void 0 ? _formState$changes$or2 : businessMenuState.menu[orderType.key]) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, orderType.content));
   }), /*#__PURE__*/_react.default.createElement(_styles.ScheduleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('SCHEDULE', 'Schedule')), /*#__PURE__*/_react.default.createElement(_styles.ScheduleSection, null, scheduleTimes.map(function (schedule, daysOfWeekIndex) {
     return /*#__PURE__*/_react.default.createElement(_styles.ScheduleBlock, {
       key: daysOfWeekIndex
@@ -355,7 +355,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('COMMENTS', 'Comments')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     name: "comment",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$result10 = formState.result) === null || _formState$result10 === void 0 ? void 0 : _formState$result10.result) ? formState === null || formState === void 0 ? void 0 : (_formState$result11 = formState.result) === null || _formState$result11 === void 0 ? void 0 : (_formState$result11$r = _formState$result11.result) === null || _formState$result11$r === void 0 ? void 0 : _formState$result11$r.comment : (_ref2 = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.comment) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me4 = businessMenuState.menu) === null || _businessMenuState$me4 === void 0 ? void 0 : _businessMenuState$me4.comment) !== null && _ref2 !== void 0 ? _ref2 : '',
+    defaultValue: (_ref2 = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.comment) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me4 = businessMenuState.menu) === null || _businessMenuState$me4 === void 0 ? void 0 : _businessMenuState$me4.comment) !== null && _ref2 !== void 0 ? _ref2 : '',
     placeholder: t('WRITE_HERE', 'Write here'),
     onChange: function onChange(e) {
       return handleChangeInput(e);
@@ -363,7 +363,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, {
     isBorderBottom: true
   }, t('PRODUCTS', 'Products')), business === null || business === void 0 ? void 0 : business.categories.map(function (category) {
-    var _ref3, _ref4, _formState$changes3, _formState$changes4;
+    var _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes6;
 
     return /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, {
       key: category.id
@@ -374,10 +374,10 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
         return handleClickCategory(category.id);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
-      active: ((_ref3 = handleCheckCategory(category.id) === 'all') !== null && _ref3 !== void 0 ? _ref3 : isCheckedCategory(category.id) === 'all') || ((_ref4 = handleCheckCategory(category.id) === 'some') !== null && _ref4 !== void 0 ? _ref4 : isCheckedCategory(category.id) === 'some')
-    }, ((formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.products) ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : ((formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.products) ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some') ? /*#__PURE__*/_react.default.createElement(_AiFillMinusSquare.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", {
+      active: ((formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.products) ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') || ((formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.products) ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some')
+    }, ((formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.products) ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : ((formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.products) ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some') ? /*#__PURE__*/_react.default.createElement(_AiFillMinusSquare.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", {
       className: "bold"
-    }, category === null || category === void 0 ? void 0 : category.name)), /*#__PURE__*/_react.default.createElement(_GoTriangleDown.default, {
+    }, category === null || category === void 0 ? void 0 : category.name)), (category === null || category === void 0 ? void 0 : category.products.length) > 0 && /*#__PURE__*/_react.default.createElement(_GoTriangleDown.default, {
       onClick: function onClick() {
         return handleTogglePopover(category === null || category === void 0 ? void 0 : category.name);
       }

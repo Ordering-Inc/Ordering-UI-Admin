@@ -11,6 +11,8 @@ var _styledComponents = require("styled-components");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _Buttons = require("../../styles/Buttons");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -42,7 +44,13 @@ var Personalization = function Personalization(props) {
   }, t('SEND_US_SPECIAL_WISH', 'send us your special wish.'))), /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images$general = theme.images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.personalization,
     loading: "lazy"
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "primary",
+    onClick: function onClick() {
+      return window.open('https://orderingco.typeform.com/to/qHPQtU');
+    }
+  }, t('CONTACT_US', 'Contact us'))));
 };
 
 exports.Personalization = Personalization;

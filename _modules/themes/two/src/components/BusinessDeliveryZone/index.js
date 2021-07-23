@@ -76,8 +76,8 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
       handleChangeZoneData = props.handleChangeZoneData,
       isEdit = props.isEdit,
       setIsEdit = props.setIsEdit,
-      openAddDeliveryZone = props.openAddDeliveryZone,
-      setOpenAddDeliveryZone = props.setOpenAddDeliveryZone,
+      isAddMode = props.isAddMode,
+      setIsAddMode = props.setIsAddMode,
       isAddValid = props.isAddValid,
       setIsAddValid = props.setIsAddValid,
       handleUpdateBusinessDeliveryZone = props.handleUpdateBusinessDeliveryZone,
@@ -115,6 +115,11 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
 
   var handleOpenSetting = function handleOpenSetting(zone) {
     var _formState$changes, _formState$changes2, _formState$changes3;
+
+    if (Object.keys(formState.changes).length === 0) {
+      setIsAddMode(false);
+      return;
+    }
 
     if (((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) === '' || ((_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.minimum) === '' || ((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.price) === '') {
       var _formState$changes4, _formState$changes5, _formState$changes6;
@@ -154,11 +159,11 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (openAddDeliveryZone) {
+    if (isAddMode) {
       setIsExtendExtraOpen(false);
       setIsEdit(false);
     }
-  }, [openAddDeliveryZone]);
+  }, [isAddMode]);
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
@@ -171,7 +176,7 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
     }
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
-    if (openAddDeliveryZone && !isAddValid) return;
+    if (isAddMode && !isAddValid) return;
 
     if (Object.keys(errors).length) {
       var errorContent = [];
@@ -187,7 +192,11 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
       }
     }
   }, [errors, isAddValid]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_ZONE', 'Delivery zones')), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)), /*#__PURE__*/_react.default.createElement(_styles.DeliveryZonesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneName, null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.ZoneMin, null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement(_styles.ZonePrice, null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.ZoneActions, null, t('ACTIONS', 'Actions'))), businessDeliveryZonesState === null || businessDeliveryZonesState === void 0 ? void 0 : (_businessDeliveryZone = businessDeliveryZonesState.zones) === null || _businessDeliveryZone === void 0 ? void 0 : _businessDeliveryZone.map(function (zone) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_ZONE', 'Delivery zones')), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, {
+    onClick: function onClick() {
+      return setIsAddMode(true);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.DeliveryZonesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneName, null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.ZoneMin, null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement(_styles.ZonePrice, null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.ZoneActions, null, t('ACTIONS', 'Actions'))), businessDeliveryZonesState === null || businessDeliveryZonesState === void 0 ? void 0 : (_businessDeliveryZone = businessDeliveryZonesState.zones) === null || _businessDeliveryZone === void 0 ? void 0 : _businessDeliveryZone.map(function (zone) {
     var _zone$name, _formState$result, _formState$result$res, _formState$result2, _formState$result2$re, _formState$changes7, _formState$changes8, _parseNumber, _formState$result3, _formState$result3$re, _formState$result4, _formState$result4$re, _formState$changes9, _formState$changes10, _parseNumber2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.DeliveryZoneWrapper, {
@@ -243,11 +252,7 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
         return handleDeleteBusinessDeliveryZone(zone.id);
       }
     }, t('DELETE', 'Delete'))))));
-  })), !openAddDeliveryZone ? /*#__PURE__*/_react.default.createElement(_styles.AddDeliveryZoneButton, {
-    onClick: function onClick() {
-      return setOpenAddDeliveryZone(true);
-    }
-  }, t('ADD_DELIVERY_ZONE', 'Add delivery zone')) : /*#__PURE__*/_react.default.createElement(_styles.DeliveryZoneFormWrapper, {
+  })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles.DeliveryZoneFormWrapper, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.ZoneName, null, /*#__PURE__*/_react.default.createElement("input", {
     name: "name",
@@ -283,7 +288,11 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
     onClick: function onClick() {
       return handleOpenSetting({});
     }
-  }, /*#__PURE__*/_react.default.createElement(_AiFillPlusCircle.default, null), " ", /*#__PURE__*/_react.default.createElement("span", null, t('ADD', 'Add')))))), (isEdit || isAddValid) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneSetting.BusinessDeliveryZoneSetting, {
+  }, /*#__PURE__*/_react.default.createElement(_AiFillPlusCircle.default, null), " ", /*#__PURE__*/_react.default.createElement("span", null, t('ADD', 'Add'))))), /*#__PURE__*/_react.default.createElement(_styles.AddDeliveryZoneButton, {
+    onClick: function onClick() {
+      return setIsAddMode(true);
+    }
+  }, t('ADD_DELIVERY_ZONE', 'Add delivery zone'))), (isEdit || isAddValid) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneSetting.BusinessDeliveryZoneSetting, {
     open: isEdit || isAddValid,
     isAddValid: isAddValid,
     onClose: function onClose() {

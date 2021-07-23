@@ -129,7 +129,8 @@ var BusinessSummary = function BusinessSummary(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
     borderRadius: "5px",
-    onClick: handleOpenCategory
+    onClick: handleOpenCategory,
+    disabled: businessState === null || businessState === void 0 ? void 0 : businessState.loading
   }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), /*#__PURE__*/_react.default.createElement(_styles.BusinessDescription, null, (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.loading) ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50
   }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.description), /*#__PURE__*/_react.default.createElement(_styles.BusinessConfigsContainer, null, businessConfigs.map(function (config) {

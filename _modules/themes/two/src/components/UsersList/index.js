@@ -23,9 +23,13 @@ var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/Md
 
 var _Switch = require("../../styles/Switch");
 
-var _UserActionSelector = require("../UserActionSelector");
-
 var _UserTypeSelector = require("../UserTypeSelector");
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _styledComponents = require("styled-components");
+
+var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
 
 var _styles = require("./styles");
 
@@ -61,11 +65,14 @@ var UsersList = function UsersList(props) {
       handleDeleteUser = props.handleDeleteUser,
       selectedUsers = props.selectedUsers,
       handleSelectedUsers = props.handleSelectedUsers,
-      handleOpenUserDetails = props.handleOpenUserDetails;
+      handleOpenUserDetails = props.handleOpenUserDetails,
+      handleOpenUserAddForm = props.handleOpenUserAddForm;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var getUserType = function getUserType(type) {
     var userTypes = [{
@@ -172,12 +179,24 @@ var UsersList = function UsersList(props) {
       handleChangeActiveUser: handleChangeActiveUser
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserActionSelector, {
       className: "user_action"
-    }, /*#__PURE__*/_react.default.createElement(_UserActionSelector.UserActionSelector, {
-      user: user,
-      handleDeleteUser: handleDeleteUser,
-      handleOpenUserDetails: handleOpenUserDetails
-    })))));
-  }))), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperPageState, null, "".concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.from, " - ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.to, " of ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.total)), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+      menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+      title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
+      id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+      onClick: function onClick() {
+        return handleOpenUserDetails(user);
+      }
+    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+      onClick: function onClick() {
+        return handleDeleteUser(user === null || user === void 0 ? void 0 : user.id);
+      }
+    }, t('DELETE', 'Delete')))))));
+  }))), /*#__PURE__*/_react.default.createElement(_styles.AddNewUserButton, {
+    onClick: function onClick() {
+      return handleOpenUserAddForm();
+    }
+  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperPageState, null, "".concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.from, " - ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.to, " of ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.total)), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
     disabled: (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) === 1 || usersList.loading,
     onClick: function onClick() {
       return prevNextPage(false);

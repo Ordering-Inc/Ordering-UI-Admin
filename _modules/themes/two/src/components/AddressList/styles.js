@@ -174,7 +174,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 0px 10px;\n\n  ", "\n\n  button.add {\n    height: 50px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 0px 10px;\n\n  ", "\n\n  button.add {\n    height: 42px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

@@ -117,13 +117,14 @@ var BusinessScheduleCopyTimes = function BusinessScheduleCopyTimes(props) {
   }, /*#__PURE__*/_react.default.createElement(_MdcContentCopy.default, null)), open && /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, {
     ref: popperElement
   }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('Copy times to')), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, daysOptions.map(function (option) {
-    return /*#__PURE__*/_react.default.createElement(_styles.CopyItem, {
-      key: option.value,
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: option.value
+    }, option.value !== daysOfWeekIndex && /*#__PURE__*/_react.default.createElement(_styles.CopyItem, {
       isChecked: selectedCopyDays.includes(option.value),
       onClick: function onClick() {
         return handleSelectDays(option.value);
       }
-    }, selectedCopyDays.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content));
+    }, selectedCopyDays.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content)));
   }))));
 };
 

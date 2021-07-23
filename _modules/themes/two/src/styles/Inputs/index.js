@@ -28,7 +28,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #707070;\n  border: 1px solid #DBDCDB;\n  border-radius: 8px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #344050;\n  border: 1px solid #DBDCDB;\n  border-radius: 8px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
