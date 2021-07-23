@@ -37,7 +37,8 @@ const BusinessCategoryEditUI = (props) => {
     handleChangeInput,
     handleUpdateClick,
     handleChangeCheckBox,
-    businessState
+    businessState,
+    category
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -117,7 +118,7 @@ const BusinessCategoryEditUI = (props) => {
   }, [open])
 
   useEffect(() => {
-    if (formState?.changes && !formState?.result.error && !formState?.loading) {
+    if (!formState?.result.error && formState?.result?.result && !formState?.loading) {
       const toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -127,7 +128,7 @@ const BusinessCategoryEditUI = (props) => {
         draggable: true,
         progress: undefined
       }
-      const content = formState?.result?.result
+      const content = t('CATEOGORY_UPDATED', 'Category updated')
       toast.dark(content, toastConfigure)
     }
   }, [formState?.loading])
@@ -218,7 +219,7 @@ const BusinessCategoryEditUI = (props) => {
                   />
                 </CategoryNameWrapper>
                 <BtnWrapper>
-                  <Button onClick={handleUpdateClick}>{t('SAVE', 'Save')}</Button>
+                  <Button onClick={handleUpdateClick}>{category ? t('SAVE', 'Save') : t('ADD', 'Add')}</Button>
                 </BtnWrapper>
               </>
             )

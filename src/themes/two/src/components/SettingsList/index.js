@@ -153,10 +153,11 @@ export const SettingsListUI = (props) => {
                                       <input
                                         type='checkbox'
                                         name={item?.value}
-                                        defaultChecked={config?.value.includes(item?.value)}
+                                        data-id={config?.id}
+                                        defaultChecked={JSON.parse(config?.value).includes(parseInt(item?.value))}
                                         onChange={(e) => handleCheckBoxChange(e, false, config?.value)}
                                       />
-                                      {item}
+                                      {item.text}
                                     </label>
                                   </FormGroupCheck>
                                 </FormGroupWrapper>
