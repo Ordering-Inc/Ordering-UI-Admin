@@ -70,7 +70,6 @@ import { Settings } from './src/components/Settings'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SingleBusiness } from './src/components/SingleBusiness'
 import { SpinnerLoader } from './src/components/SpinnerLoader'
-import { UserActionSelector } from './src/components/UserActionSelector'
 import { UserActiveStateFilter } from './src/components/UserActiveStateFilter'
 import { UserDetails } from './src/components/UserDetails'
 import { UserDetailsLateralBar } from './src/components/UserDetailsLateralBar'
@@ -165,7 +164,6 @@ export {
   SidebarMenu,
   SingleBusiness,
   SpinnerLoader,
-  UserActionSelector,
   UserActiveStateFilter,
   UserDetails,
   UserDetailsLateralBar,
