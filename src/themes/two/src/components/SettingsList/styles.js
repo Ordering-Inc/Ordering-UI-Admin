@@ -26,7 +26,7 @@ export const FormContainer = styled.div`
     color: white;
     border-radius: 8px;
     font-size: 14px;
-    margin-bottom: 25px;
+    margin: 20px 0;
   }
 `
 

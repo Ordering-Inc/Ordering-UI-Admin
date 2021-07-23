@@ -5,7 +5,7 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  SingleProductsCategory as SingleProductsCategoryController
+  SingleBusinessCategory as SingleBusinessCategoryController
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
@@ -26,7 +26,7 @@ import {
   UploadWrapper
 } from '../SingleBusinessProduct/styles'
 
-export const SingleProductsCategoryUI = (props) => {
+export const SingleBusinessCategoryUI = (props) => {
   const {
     category,
     categorySelected,
@@ -107,7 +107,9 @@ export const SingleProductsCategoryUI = (props) => {
   }, [categoryFormState])
 
   useEffect(() => {
-    if (categoryFormState?.changes && !categoryFormState?.result?.error && !categoryFormState?.loading) {
+    if (!categoryFormState?.loading &&
+      !categoryFormState?.result?.error &&
+      categoryFormState?.result?.result) {
       const toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -117,7 +119,21 @@ export const SingleProductsCategoryUI = (props) => {
         draggable: true,
         progress: undefined
       }
-      const content = categoryFormState?.result?.result
+      let content = ''
+      switch (categoryFormState?.status) {
+        case 'update':
+          content = t('CATEGORY_UPDATED', 'Category updated')
+          break
+        case 'delete':
+          content = t('CATEGORY_DELETE', 'Category deleted')
+          break
+        case 'add':
+          content = t('CATEGORY_ADD', 'Category added')
+          break
+        default:
+          content = t('CATEGORY_SAVED', 'Category saved')
+          break
+      }
       toast.dark(content, toastConfigure)
     }
   }, [categoryFormState?.loading])
@@ -208,6 +224,7 @@ export const SingleProductsCategoryUI = (props) => {
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
                       title={ActionIcon}
+                      className='actions-btn'
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item onClick={() => handleOpenCategoryDetails(category)}>{t('EDIT', 'Edit')}</Dropdown.Item>
@@ -233,18 +250,18 @@ export const SingleProductsCategoryUI = (props) => {
   )
 }
 
-export const SingleProductsCategory = (props) => {
+export const SingleBusinessCategory = (props) => {
   const { isSkeleton } = props
-  const singleProductsCategoryProps = {
+  const singleBusinessCategoryProps = {
     ...props,
-    UIComponent: SingleProductsCategoryUI
+    UIComponent: SingleBusinessCategoryUI
   }
   return (
     <>
       {isSkeleton ? (
-        <SingleProductsCategoryUI {...props} />
+        <SingleBusinessCategoryUI {...props} />
       ) : (
-        <SingleProductsCategoryController {...singleProductsCategoryProps} />
+        <SingleBusinessCategoryController {...singleBusinessCategoryProps} />
       )}
     </>
   )

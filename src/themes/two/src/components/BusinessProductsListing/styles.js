@@ -22,8 +22,9 @@ export const HeaderContainer = styled.div`
   flex-direction: column;
 
   h1 {
+    text-align: center;
     font-size: 24px;
-    margin: 0px;
+    margin: 0 0 15px 0;
     font-weight: 600;
     color: ${props => props.theme.colors.headingColor};
   }
@@ -37,6 +38,11 @@ export const HeaderContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    h1 {
+      margin: 0 5px 0 0;
+      text-align: left;
+    }
   }
 `
 

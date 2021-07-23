@@ -7,7 +7,7 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  CreateBusinessProduct as CreateBusinessProductController
+  BusinessProductCreator as BusinessProductCreatorController
 } from 'ordering-components-admin'
 import { Switch } from '../../styles/Switch'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
@@ -26,9 +26,9 @@ import {
 } from './styles'
 import {
   ActionSelectorWrapper
-} from '../SingleProductsCategory/styles'
+} from '../SingleBusinessCategory/styles'
 
-const CreateBusinessProductUI = (props) => {
+const BusinessProductCreatorUI = (props) => {
   const {
     allowColumns,
     formState,
@@ -36,7 +36,8 @@ const CreateBusinessProductUI = (props) => {
     handleChangeInput,
     handleUpdateClick,
     handlechangeImage,
-    setIsAddProduct
+    setIsAddProduct,
+    handleParentProductAdd
   } = props
 
   const [, t] = useLanguage()
@@ -85,6 +86,7 @@ const CreateBusinessProductUI = (props) => {
           handleUpdateClick()
         } else {
           setIsAddProduct(false)
+          handleParentProductAdd && handleParentProductAdd(false)
         }
       }
     }
@@ -105,7 +107,7 @@ const CreateBusinessProductUI = (props) => {
   }, [formState])
 
   useEffect(() => {
-    if (!formState?.result.error && !formState?.loading && formState?.result?.result) {
+    if (!formState?.loading && !formState?.result.error && formState?.result?.result) {
       const toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -115,7 +117,7 @@ const CreateBusinessProductUI = (props) => {
         draggable: true,
         progress: undefined
       }
-      const content = formState?.result?.result
+      const content = t('PRODUCT_ADD', 'Product added')
       toast.dark(content, toastConfigure)
     }
   }, [formState?.loading])
@@ -231,12 +233,12 @@ const CreateBusinessProductUI = (props) => {
   )
 }
 
-export const CreateBusinessProduct = (props) => {
-  const createBusinessProductProps = {
+export const BusinessProductCreator = (props) => {
+  const businessProductCreatorProps = {
     ...props,
-    UIComponent: CreateBusinessProductUI
+    UIComponent: BusinessProductCreatorUI
   }
   return (
-    <CreateBusinessProductController {...createBusinessProductProps} />
+    <BusinessProductCreatorController {...businessProductCreatorProps} />
   )
 }

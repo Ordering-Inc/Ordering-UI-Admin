@@ -14,10 +14,17 @@ export const SingleListBusinessContainer = styled.tbody`
   .business {
     padding-right: 20px;
   }
+
+  .action-btn {
+    display: none;
+  }
   &:hover {
     background: #E9F2FE;
     input, textarea {
       background: #E9F2FE;
+    }
+    .action-btn {
+      display: block;
     }
   }
 `
@@ -105,11 +112,9 @@ export const BusinessEnableWrapper = styled.div`
 `
 
 export const ActionSelectorWrapper = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 35px;
-    ` : css`
-    margin-left: 35px;
-  `}
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
   button {
     background: #F8F9FA !important;
     border: none;
