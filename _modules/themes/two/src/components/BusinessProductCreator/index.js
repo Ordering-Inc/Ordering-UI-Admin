@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CreateBusinessProduct = void 0;
+exports.BusinessProductCreator = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -27,7 +27,7 @@ var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("./styles");
 
-var _styles2 = require("../SingleProductsCategory/styles");
+var _styles2 = require("../SingleBusinessCategory/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,7 +53,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
+var BusinessProductCreatorUI = function BusinessProductCreatorUI(props) {
   var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes6;
 
   var allowColumns = props.allowColumns,
@@ -62,7 +62,8 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
       handlechangeImage = props.handlechangeImage,
-      setIsAddProduct = props.setIsAddProduct;
+      setIsAddProduct = props.setIsAddProduct,
+      handleParentProductAdd = props.handleParentProductAdd;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -127,6 +128,7 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
           handleUpdateClick();
         } else {
           setIsAddProduct(false);
+          handleParentProductAdd && handleParentProductAdd(false);
         }
       }
     }
@@ -153,9 +155,7 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result3;
 
-    if (!(formState === null || formState === void 0 ? void 0 : formState.result.error) && !(formState === null || formState === void 0 ? void 0 : formState.loading) && (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result)) {
-      var _formState$result4;
-
+    if (!(formState === null || formState === void 0 ? void 0 : formState.loading) && !(formState === null || formState === void 0 ? void 0 : formState.result.error) && (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result)) {
       var toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -165,7 +165,7 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
         draggable: true,
         progress: undefined
       };
-      var content = formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result;
+      var content = t('PRODUCT_ADD', 'Product added');
 
       _reactToastify.toast.dark(content, toastConfigure);
     }
@@ -241,12 +241,12 @@ var CreateBusinessProductUI = function CreateBusinessProductUI(props) {
   }));
 };
 
-var CreateBusinessProduct = function CreateBusinessProduct(props) {
-  var createBusinessProductProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: CreateBusinessProductUI
+var BusinessProductCreator = function BusinessProductCreator(props) {
+  var businessProductCreatorProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: BusinessProductCreatorUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CreateBusinessProduct, createBusinessProductProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessProductCreator, businessProductCreatorProps);
 };
 
-exports.CreateBusinessProduct = CreateBusinessProduct;
+exports.BusinessProductCreator = BusinessProductCreator;

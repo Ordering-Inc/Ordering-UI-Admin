@@ -70,7 +70,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  margin-top: 20px;\n\n  button {\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin-bottom: 25px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-top: 20px;\n\n  button {\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px 0;\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;

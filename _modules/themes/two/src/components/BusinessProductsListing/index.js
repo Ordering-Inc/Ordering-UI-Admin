@@ -69,7 +69,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       onProductRedirect = props.onProductRedirect,
       slug = props.slug,
       categoryId = props.categoryId,
-      handleUpdateBusinessState = props.handleUpdateBusinessState;
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      setCategorySelected = props.setCategorySelected;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -98,25 +99,31 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       selectedProduct = _useState8[0],
       setSelectedProduct = _useState8[1];
 
-  (0, _react.useEffect)(function () {
-    if (categoryId) {
-      setCategoryToEdit(_objectSpread(_objectSpread({}, categoryToEdit), {}, {
-        open: true
-      }));
-    }
-  }, [categoryId]);
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isProductAdd = _useState10[0],
+      setIsProductAdd = _useState10[1];
 
-  var handleOpenCategoryDetails = function handleOpenCategoryDetails(category) {
-    if ((category === null || category === void 0 ? void 0 : category.id) === null) return;
-    onProductRedirect && onProductRedirect({
-      slug: slug,
-      category: category === null || category === void 0 ? void 0 : category.id,
-      product: null
-    });
-    setCategoryToEdit({
-      open: true,
-      category: _objectSpread({}, category)
-    });
+  var handleOpenCategoryDetails = function handleOpenCategoryDetails() {
+    var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+    if (category && (category === null || category === void 0 ? void 0 : category.id) !== null) {
+      onProductRedirect && onProductRedirect({
+        slug: slug,
+        category: category === null || category === void 0 ? void 0 : category.id,
+        product: null
+      });
+      setCategorySelected(category);
+      setCategoryToEdit({
+        open: true,
+        category: _objectSpread({}, category)
+      });
+    } else {
+      setCategoryToEdit({
+        open: true,
+        category: null
+      });
+    }
   };
 
   var handleCloseEdit = function handleCloseEdit() {
@@ -140,6 +147,18 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setOpenProductDetails(false);
   };
 
+  var handleProductAdd = function handleProductAdd(status) {
+    if (viewMethod !== 'list') return;
+    setIsProductAdd(status);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (categoryId) {
+      setCategoryToEdit(_objectSpread(_objectSpread({}, categoryToEdit), {}, {
+        open: true
+      }));
+    }
+  }, [categoryId]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, businessState.loading ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 30
@@ -158,7 +177,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     className: "d-flex align-items-center"
   }, /*#__PURE__*/_react.default.createElement("h1", null, (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) || t('ALL', 'All')), /*#__PURE__*/_react.default.createElement(_styles.AddButton, {
     onClick: function onClick() {
-      return handleOpenCategoryDetails(categorySelected);
+      return handleProductAdd(true);
     }
   }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ActionIconList, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
     active: viewMethod === 'list',
@@ -172,7 +191,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_BsTable.default, null)))), /*#__PURE__*/_react.default.createElement(_BusinessProductList.BusinessProductList, _extends({}, props, {
     viewMethod: viewMethod,
-    handleOpenProductDetails: handleOpenProductDetails
+    handleOpenProductDetails: handleOpenProductDetails,
+    handleParentProductAdd: handleProductAdd,
+    isParentProductAdd: isProductAdd
   }))))), (categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open) && /*#__PURE__*/_react.default.createElement(_BusinessCategoryEdit.BusinessCategoryEdit, _extends({}, props, {
     open: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open,
     onClose: handleCloseEdit,
@@ -188,10 +209,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState9 = (0, _react.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      isInitialRender = _useState10[0],
-      setIsInitialRender = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isInitialRender = _useState12[0],
+      setIsInitialRender = _useState12[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

@@ -13,9 +13,9 @@ var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSqua
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _SingleProductsCategory = require("../SingleProductsCategory");
+var _SingleBusinessCategory = require("../SingleBusinessCategory");
 
-var _CreateBusinessCategory = require("../CreateBusinessCategory");
+var _BusinessCategoryCreator = require("../BusinessCategoryCreator");
 
 var _styles = require("./styles");
 
@@ -50,7 +50,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsCategories = function BusinessProductsCategories(props) {
   var businessState = props.businessState,
       categorySelected = props.categorySelected,
-      onClickCategory = props.onClickCategory;
+      onClickCategory = props.onClickCategory,
+      handleOpenCategoryDetails = props.handleOpenCategoryDetails;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -61,20 +62,24 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       isAddCategory = _useState2[0],
       setIsAddCategory = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category')), /*#__PURE__*/_react.default.createElement(_styles.AddButton, null, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_SingleProductsCategory.SingleProductsCategory, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category')), /*#__PURE__*/_react.default.createElement(_styles.AddButton, {
+    onClick: function onClick() {
+      return handleOpenCategoryDetails();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_SingleBusinessCategory.SingleBusinessCategory, {
       key: i,
       isSkeleton: true
     });
   }), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.map(function (category, i) {
-    return /*#__PURE__*/_react.default.createElement(_SingleProductsCategory.SingleProductsCategory, _extends({}, props, {
+    return /*#__PURE__*/_react.default.createElement(_SingleBusinessCategory.SingleBusinessCategory, _extends({}, props, {
       key: i,
       category: category,
       categorySelected: categorySelected,
       handleChangeCategory: onClickCategory,
       business: businessState === null || businessState === void 0 ? void 0 : businessState.business
     }));
-  })), !businessState.loading && (isAddCategory ? /*#__PURE__*/_react.default.createElement(_CreateBusinessCategory.CreateBusinessCategory, _extends({}, props, {
+  })), !businessState.loading && (isAddCategory ? /*#__PURE__*/_react.default.createElement(_BusinessCategoryCreator.BusinessCategoryCreator, _extends({}, props, {
     setIsAddCategory: setIsAddCategory,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business
   })) : /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {

@@ -17,7 +17,7 @@ var _SingleBusinessProduct = require("../SingleBusinessProduct");
 
 var _ColumnAllowSettingPopover = require("../ColumnAllowSettingPopover");
 
-var _CreateBusinessProduct = require("../CreateBusinessProduct");
+var _BusinessProductCreator = require("../BusinessProductCreator");
 
 var _BusinessSpreadSheet = require("../BusinessSpreadSheet");
 
@@ -63,7 +63,8 @@ var BusinessProductList = function BusinessProductList(props) {
       errorQuantityProducts = props.errorQuantityProducts,
       handleSearchRedirect = props.handleSearchRedirect,
       handleChangeSearch = props.handleChangeSearch,
-      handleOpenProductDetails = props.handleOpenProductDetails;
+      handleOpenProductDetails = props.handleOpenProductDetails,
+      isParentProductAdd = props.isParentProductAdd;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -137,7 +138,7 @@ var BusinessProductList = function BusinessProductList(props) {
       business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
       handleOpenProductDetails: handleOpenProductDetails
     }));
-  }), isAddProduct && /*#__PURE__*/_react.default.createElement(_CreateBusinessProduct.CreateBusinessProduct, _extends({}, props, {
+  }), (isAddProduct || isParentProductAdd) && /*#__PURE__*/_react.default.createElement(_BusinessProductCreator.BusinessProductCreator, _extends({}, props, {
     allowColumns: allowColumns,
     setIsAddProduct: setIsAddProduct,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business

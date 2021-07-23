@@ -67,7 +67,8 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
       handleChangeCheckBox = props.handleChangeCheckBox,
-      businessState = props.businessState;
+      businessState = props.businessState,
+      category = props.category;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -168,9 +169,9 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     actionSidebar(true);
   }, [open]);
   (0, _react.useEffect)(function () {
-    if ((formState === null || formState === void 0 ? void 0 : formState.changes) && !(formState === null || formState === void 0 ? void 0 : formState.result.error) && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
-      var _formState$result3;
+    var _formState$result3;
 
+    if (!(formState === null || formState === void 0 ? void 0 : formState.result.error) && (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) && !(formState === null || formState === void 0 ? void 0 : formState.loading)) {
       var toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -180,7 +181,7 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
         draggable: true,
         progress: undefined
       };
-      var content = formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result;
+      var content = t('CATEOGORY_UPDATED', 'Category updated');
 
       _reactToastify.toast.dark(content, toastConfigure);
     }
@@ -247,7 +248,7 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.BtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleUpdateClick
-  }, t('SAVE', 'Save')))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, category ? t('SAVE', 'Save') : t('ADD', 'Add')))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_TYPE', 'Business type'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

@@ -163,8 +163,10 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     };
   }, [productFormState]);
   (0, _react.useEffect)(function () {
-    if ((productFormState === null || productFormState === void 0 ? void 0 : productFormState.changes) && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.result.error) && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading)) {
-      var _productFormState$res3;
+    var _productFormState$res3;
+
+    if (!(productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading) && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.result.error) && (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res3 = productFormState.result) === null || _productFormState$res3 === void 0 ? void 0 : _productFormState$res3.result)) {
+      var _productFormState$res4, _productFormState$res5;
 
       var toastConfigure = {
         position: 'bottom-right',
@@ -175,7 +177,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
         draggable: true,
         progress: undefined
       };
-      var content = productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res3 = productFormState.result) === null || _productFormState$res3 === void 0 ? void 0 : _productFormState$res3.result;
+      var content = (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res4 = productFormState.result) === null || _productFormState$res4 === void 0 ? void 0 : (_productFormState$res5 = _productFormState$res4.result) === null || _productFormState$res5 === void 0 ? void 0 : _productFormState$res5.id) ? t('PRODUCT_UPDATE', 'Product updated') : t('PRODUCT_DELETE', 'Product deleted');
 
       _reactToastify.toast.dark(content, toastConfigure);
     }
@@ -249,9 +251,12 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   }, (product === null || product === void 0 ? void 0 : product.enabled) ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (product === null || product === void 0 ? void 0 : product.enabled) || false,
     onChange: handleChangeProductActive
-  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }))), /*#__PURE__*/_react.default.createElement("td", {
+    className: "actions"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
     title: ActionIcon,
+    className: "action-btn",
     id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {

@@ -13,28 +13,8 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _templateObject20() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 5px;\n  background: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  svg {\n    color: white;\n  }\n"]);
-
-  _templateObject20 = function _templateObject20() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "]);
-
-  _templateObject19 = function _templateObject19() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "]);
+  var data = _taggedTemplateLiteral(["\n  border-radius: 5px;\n  background: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  svg {\n    color: white;\n  }\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -44,7 +24,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  maring-left: 10px;\n  "]);
+  var data = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -54,7 +34,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n  min-height: 38px;\n  min-width: 38px;\n  height: 38px;\n  width: 38px;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  ", "\n  ", "\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n  img{\n    object-fit: cover;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -64,7 +44,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n    margin-left: 35px;\n  "]);
+  var data = _taggedTemplateLiteral(["\n  maring-left: 10px;\n  "]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -74,7 +54,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n    margin-right: 35px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n  min-height: 38px;\n  min-width: 38px;\n  height: 38px;\n  width: 38px;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  ", "\n  ", "\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n  img{\n    object-fit: cover;\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -84,7 +64,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  ", "\n  button {\n    background: #F8F9FA !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n    &:after {\n      display: none;\n    }\n  }\n  > div {\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 8px;\n    > div {\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  width: 100px;\n  button {\n    background: #F8F9FA !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n    &:after {\n      display: none;\n    }\n  }\n  > div {\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 8px;\n    > div {\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -194,7 +174,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  cursor: pointer;\n  transition: all 0.3s;\n  .business {\n    padding-right: 20px;\n  }\n  &:hover {\n    background: #E9F2FE;\n    input, textarea {\n      background: #E9F2FE;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  cursor: pointer;\n  transition: all 0.3s;\n  .business {\n    padding-right: 20px;\n  }\n\n  .action-btn {\n    display: none;\n  }\n  &:hover {\n    background: #E9F2FE;\n    input, textarea {\n      background: #E9F2FE;\n    }\n    .action-btn {\n      display: block;\n    }\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -262,27 +242,23 @@ var BusinessEnableWrapper = _styledComponents.default.div(_templateObject10(), f
 exports.BusinessEnableWrapper = BusinessEnableWrapper;
 
 var ActionSelectorWrapper = _styledComponents.default.div(_templateObject13(), function (props) {
-  var _props$theme4;
-
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) ? (0, _styledComponents.css)(_templateObject14()) : (0, _styledComponents.css)(_templateObject15());
-}, function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.ActionSelectorWrapper = ActionSelectorWrapper;
 
-var ProductTypeImage = _styledComponents.default.div(_templateObject16(), function (props) {
-  var _props$theme5;
+var ProductTypeImage = _styledComponents.default.div(_templateObject14(), function (props) {
+  var _props$theme4;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) ? (0, _styledComponents.css)(_templateObject17()) : (0, _styledComponents.css)(_templateObject18());
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) ? (0, _styledComponents.css)(_templateObject15()) : (0, _styledComponents.css)(_templateObject16());
 }, function (_ref) {
   var disabled = _ref.disabled;
-  return disabled && (0, _styledComponents.css)(_templateObject19());
+  return disabled && (0, _styledComponents.css)(_templateObject17());
 });
 
 exports.ProductTypeImage = ProductTypeImage;
 
-var UploadWrapper = _styledComponents.default.div(_templateObject20(), function (props) {
+var UploadWrapper = _styledComponents.default.div(_templateObject18(), function (props) {
   return props.theme.colors.lightGray;
 });
 

@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SingleProductsCategory = exports.SingleProductsCategoryUI = void 0;
+exports.SingleBusinessCategory = exports.SingleBusinessCategoryUI = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -57,7 +57,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
+var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
   var _categoryFormState$ch, _categoryFormState$ch2, _categoryFormState$ch3;
 
   var category = props.category,
@@ -162,11 +162,9 @@ var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
     };
   }, [categoryFormState]);
   (0, _react.useEffect)(function () {
-    var _categoryFormState$re3;
+    var _categoryFormState$re3, _categoryFormState$re4;
 
-    if ((categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.changes) && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re3 = categoryFormState.result) === null || _categoryFormState$re3 === void 0 ? void 0 : _categoryFormState$re3.error) && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading)) {
-      var _categoryFormState$re4;
-
+    if (!(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading) && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re3 = categoryFormState.result) === null || _categoryFormState$re3 === void 0 ? void 0 : _categoryFormState$re3.error) && (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re4 = categoryFormState.result) === null || _categoryFormState$re4 === void 0 ? void 0 : _categoryFormState$re4.result)) {
       var toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -176,7 +174,25 @@ var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
         draggable: true,
         progress: undefined
       };
-      var content = categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re4 = categoryFormState.result) === null || _categoryFormState$re4 === void 0 ? void 0 : _categoryFormState$re4.result;
+      var content = '';
+
+      switch (categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.status) {
+        case 'update':
+          content = t('CATEGORY_UPDATED', 'Category updated');
+          break;
+
+        case 'delete':
+          content = t('CATEGORY_DELETE', 'Category deleted');
+          break;
+
+        case 'add':
+          content = t('CATEGORY_ADD', 'Category added');
+          break;
+
+        default:
+          content = t('CATEGORY_SAVED', 'Category saved');
+          break;
+      }
 
       _reactToastify.toast.dark(content, toastConfigure);
     }
@@ -239,6 +255,7 @@ var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
     title: ActionIcon,
+    className: "actions-btn",
     id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
@@ -261,16 +278,16 @@ var SingleProductsCategoryUI = function SingleProductsCategoryUI(props) {
   }));
 };
 
-exports.SingleProductsCategoryUI = SingleProductsCategoryUI;
+exports.SingleBusinessCategoryUI = SingleBusinessCategoryUI;
 
-var SingleProductsCategory = function SingleProductsCategory(props) {
+var SingleBusinessCategory = function SingleBusinessCategory(props) {
   var isSkeleton = props.isSkeleton;
 
-  var singleProductsCategoryProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: SingleProductsCategoryUI
+  var singleBusinessCategoryProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: SingleBusinessCategoryUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(SingleProductsCategoryUI, props) : /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.SingleProductsCategory, singleProductsCategoryProps));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(SingleBusinessCategoryUI, props) : /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.SingleBusinessCategory, singleBusinessCategoryProps));
 };
 
-exports.SingleProductsCategory = SingleProductsCategory;
+exports.SingleBusinessCategory = SingleBusinessCategory;

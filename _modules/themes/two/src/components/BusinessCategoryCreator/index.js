@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CreateBusinessCategory = void 0;
+exports.BusinessCategoryCreator = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -25,7 +25,7 @@ var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("./styles");
 
-var _styles2 = require("../SingleProductsCategory/styles");
+var _styles2 = require("../SingleBusinessCategory/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51,7 +51,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
+var BusinessCategoryCreatorUI = function BusinessCategoryCreatorUI(props) {
   var _categoryState$catego, _categoryState$result4, _categoryState$catego2, _categoryState$catego3, _categoryState$catego4, _categoryState$catego5;
 
   var categoryState = props.categoryState,
@@ -147,9 +147,9 @@ var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
     };
   }, [categoryState]);
   (0, _react.useEffect)(function () {
-    if ((categoryState === null || categoryState === void 0 ? void 0 : categoryState.category) && !(categoryState === null || categoryState === void 0 ? void 0 : categoryState.result.error) && !(categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading)) {
-      var _categoryState$result3;
+    var _categoryState$result3;
 
+    if (!(categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading) && !(categoryState === null || categoryState === void 0 ? void 0 : categoryState.result.error) && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$result3 = categoryState.result) === null || _categoryState$result3 === void 0 ? void 0 : _categoryState$result3.result)) {
       var toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -159,7 +159,7 @@ var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
         draggable: true,
         progress: undefined
       };
-      var content = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$result3 = categoryState.result) === null || _categoryState$result3 === void 0 ? void 0 : _categoryState$result3.result;
+      var content = t('CATEGORY_ADD', 'Category added');
 
       _reactToastify.toast.dark(content, toastConfigure);
     }
@@ -222,12 +222,12 @@ var CreateBusinessCategoryUI = function CreateBusinessCategoryUI(props) {
   }));
 };
 
-var CreateBusinessCategory = function CreateBusinessCategory(props) {
-  var createBusinessCategoryProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: CreateBusinessCategoryUI
+var BusinessCategoryCreator = function BusinessCategoryCreator(props) {
+  var businessCategoryCreatorProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: BusinessCategoryCreatorUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CreateBusinessCategory, createBusinessCategoryProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessCategoryCreator, businessCategoryCreatorProps);
 };
 
-exports.CreateBusinessCategory = CreateBusinessCategory;
+exports.BusinessCategoryCreator = BusinessCategoryCreator;

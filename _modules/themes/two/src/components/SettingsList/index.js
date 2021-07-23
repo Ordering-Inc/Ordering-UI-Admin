@@ -174,11 +174,12 @@ var SettingsListUI = function SettingsListUI(props) {
       }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
         type: "checkbox",
         name: item === null || item === void 0 ? void 0 : item.value,
-        defaultChecked: config === null || config === void 0 ? void 0 : config.value.includes(item === null || item === void 0 ? void 0 : item.value),
+        "data-id": config === null || config === void 0 ? void 0 : config.id,
+        defaultChecked: JSON.parse(config === null || config === void 0 ? void 0 : config.value).includes(parseInt(item === null || item === void 0 ? void 0 : item.value)),
         onChange: function onChange(e) {
           return handleCheckBoxChange(e, false, config === null || config === void 0 ? void 0 : config.value);
         }
-      }), item)));
+      }), item.text)));
     }))));
   }), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
