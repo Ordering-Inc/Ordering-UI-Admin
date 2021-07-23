@@ -208,6 +208,7 @@ export const SingleProductsCategoryUI = (props) => {
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
                       title={ActionIcon}
+                      className='actions-btn'
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item onClick={() => handleOpenCategoryDetails(category)}>{t('EDIT', 'Edit')}</Dropdown.Item>

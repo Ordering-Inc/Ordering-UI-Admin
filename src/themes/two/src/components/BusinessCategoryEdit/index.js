@@ -4,9 +4,9 @@ import { toast } from 'react-toastify'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick,
-  BusinessCategoryEdit as BusinessCategoryEditController
+  ExamineClick
 } from 'ordering-components-admin'
+import { BusinessCategoryEdit as BusinessCategoryEditController } from './naked'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { bytesConverter } from '../../../../../utils'
 import { Alert } from '../Confirm'
@@ -37,7 +37,8 @@ const BusinessCategoryEditUI = (props) => {
     handleChangeInput,
     handleUpdateClick,
     handleChangeCheckBox,
-    businessState
+    businessState,
+    category
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -218,7 +219,7 @@ const BusinessCategoryEditUI = (props) => {
                   />
                 </CategoryNameWrapper>
                 <BtnWrapper>
-                  <Button onClick={handleUpdateClick}>{t('SAVE', 'Save')}</Button>
+                  <Button onClick={handleUpdateClick}>{category ? t('SAVE', 'Save') : t('ADD', 'Add')}</Button>
                 </BtnWrapper>
               </>
             )

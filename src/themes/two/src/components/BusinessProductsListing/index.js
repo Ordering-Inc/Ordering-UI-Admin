@@ -41,27 +41,25 @@ const BusinessProductsListingUI = (props) => {
   const [categoryToEdit, setCategoryToEdit] = useState({ open: false, category: null })
   const [openProductDetails, setOpenProductDetails] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [isProductAdd, setIsProductAdd] = useState(false)
 
-  useEffect(() => {
-    if (categoryId) {
+  const handleOpenCategoryDetails = (category = null) => {
+    if (category && category?.id !== null) {
+      onProductRedirect && onProductRedirect({
+        slug: slug,
+        category: category?.id,
+        product: null
+      })
       setCategoryToEdit({
-        ...categoryToEdit,
-        open: true
+        open: true,
+        category: { ...category }
+      })
+    } else {
+      setCategoryToEdit({
+        open: true,
+        category: null
       })
     }
-  }, [categoryId])
-
-  const handleOpenCategoryDetails = (category) => {
-    if (category?.id === null) return
-    onProductRedirect && onProductRedirect({
-      slug: slug,
-      category: category?.id,
-      product: null
-    })
-    setCategoryToEdit({
-      open: true,
-      category: { ...category }
-    })
   }
 
   const handleCloseEdit = () => {
@@ -84,6 +82,20 @@ const BusinessProductsListingUI = (props) => {
   const handleCloseProductDetails = () => {
     setOpenProductDetails(false)
   }
+
+  const handleProductAdd = (status) => {
+    if (viewMethod !== 'list') return
+    setIsProductAdd(status)
+  }
+
+  useEffect(() => {
+    if (categoryId) {
+      setCategoryToEdit({
+        ...categoryToEdit,
+        open: true
+      })
+    }
+  }, [categoryId])
 
   return (
     <>
@@ -124,7 +136,7 @@ const BusinessProductsListingUI = (props) => {
             <ProductHeader>
               <div className='d-flex align-items-center'>
                 <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-                <AddButton onClick={() => handleOpenCategoryDetails(categorySelected)}>
+                <AddButton onClick={() => handleProductAdd(true)}>
                   <BsPlusSquare />
                 </AddButton>
               </div>
@@ -148,6 +160,8 @@ const BusinessProductsListingUI = (props) => {
               {...props}
               viewMethod={viewMethod}
               handleOpenProductDetails={handleOpenProductDetails}
+              handleParentProductAdd={handleProductAdd}
+              isParentProductAdd={isProductAdd}
             />
           </ProductListContainer>
         </CategoryProductsContent>

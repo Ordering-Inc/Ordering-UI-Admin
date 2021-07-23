@@ -24,7 +24,8 @@ export const BusinessProductList = (props) => {
     errorQuantityProducts,
     handleSearchRedirect,
     handleChangeSearch,
-    handleOpenProductDetails
+    handleOpenProductDetails,
+    isParentProductAdd
   } = props
   const [, t] = useLanguage()
 
@@ -112,7 +113,7 @@ export const BusinessProductList = (props) => {
                     ))
                   }
                   {
-                    isAddProduct && (
+                    (isAddProduct || isParentProductAdd) && (
                       <CreateBusinessProduct
                         {...props}
                         allowColumns={allowColumns}

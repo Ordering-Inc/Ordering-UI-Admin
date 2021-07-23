@@ -6,9 +6,9 @@ import { bytesConverter } from '../../../../../utils'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick,
-  CreateBusinessProduct as CreateBusinessProductController
+  ExamineClick
 } from 'ordering-components-admin'
+import { CreateBusinessProduct as CreateBusinessProductController } from './naked'
 import { Switch } from '../../styles/Switch'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -36,7 +36,8 @@ const CreateBusinessProductUI = (props) => {
     handleChangeInput,
     handleUpdateClick,
     handlechangeImage,
-    setIsAddProduct
+    setIsAddProduct,
+    handleParentProductAdd
   } = props
 
   const [, t] = useLanguage()
@@ -85,6 +86,7 @@ const CreateBusinessProductUI = (props) => {
           handleUpdateClick()
         } else {
           setIsAddProduct(false)
+          handleParentProductAdd && handleParentProductAdd(false)
         }
       }
     }

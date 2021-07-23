@@ -256,11 +256,12 @@ const SingleBusinessProductUI = (props) => {
                     />
                   </BusinessEnableWrapper>
                 </td>
-                <td>
+                <td className='actions'>
                   <ActionSelectorWrapper>
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
                       title={ActionIcon}
+                      className='action-btn'
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>

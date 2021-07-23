@@ -91,4 +91,5 @@ export const AddProductBtn = styled.div`
   margin-top: 12px;
   cursor: pointer;
   margin-bottom: 15px;
+  display: inline-block;
 `

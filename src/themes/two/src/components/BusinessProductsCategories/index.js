@@ -15,7 +15,8 @@ export const BusinessProductsCategories = (props) => {
   const {
     businessState,
     categorySelected,
-    onClickCategory
+    onClickCategory,
+    handleOpenCategoryDetails
   } = props
 
   const [, t] = useLanguage()
@@ -26,7 +27,7 @@ export const BusinessProductsCategories = (props) => {
       <CategoryListContainer>
         <HeaderContainer>
           <h1>{t('BUSINESS_CATEGORY', 'Business category')}</h1>
-          <AddButton>
+          <AddButton onClick={() => handleOpenCategoryDetails()}>
             <BsPlusSquare />
           </AddButton>
         </HeaderContainer>
