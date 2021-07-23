@@ -78,20 +78,23 @@ export const BusinessScheduleCopyTimes = (props) => {
           <Title>{t('Copy times to')}</Title>
           <PopoverList>
             {daysOptions.map(option => (
-              <CopyItem
-                key={option.value}
-                isChecked={selectedCopyDays.includes(option.value)}
-                onClick={() => handleSelectDays(option.value)}
-              >
-                {selectedCopyDays.includes(option.value) ? (
-                  <RiCheckboxFill />
-                ) : (
-                  <RiCheckboxBlankLine />
+              <React.Fragment key={option.value}>
+                {option.value !== daysOfWeekIndex && (
+                  <CopyItem
+                    isChecked={selectedCopyDays.includes(option.value)}
+                    onClick={() => handleSelectDays(option.value)}
+                  >
+                    {selectedCopyDays.includes(option.value) ? (
+                      <RiCheckboxFill />
+                    ) : (
+                      <RiCheckboxBlankLine />
+                    )}
+                    <span>
+                      {option.content}
+                    </span>
+                  </CopyItem>
                 )}
-                <span>
-                  {option.content}
-                </span>
-              </CopyItem>
+              </React.Fragment>
             ))}
           </PopoverList>
         </PopoverBody>

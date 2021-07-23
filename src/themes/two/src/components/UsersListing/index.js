@@ -6,6 +6,8 @@ import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
+import { SideBar } from '../SideBar'
+import { UserAddForm } from '../UserAddForm'
 
 import {
   UsersListingContainer
@@ -31,15 +33,16 @@ const UsersListingUI = (props) => {
     deleteUsersActionState,
     handleDeleteSeveralUsers,
     onUserRedirect,
-    handleSuccessUpdate
+    handleSuccessUpdate,
+    handleSuccessAddUser
   } = props
 
   const [, t] = useLanguage()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
-
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
+  const [openUserAddForm, setOpenUserAddForm] = useState(false)
 
   const handleBackRedirect = () => {
     setIsOpenUserDetails(false)
@@ -49,7 +52,17 @@ const UsersListingUI = (props) => {
   const handleOpenUserDetails = (user) => {
     onUserRedirect(user?.id)
     setOpenUser(user)
+    setOpenUserAddForm(false)
     setIsOpenUserDetails(true)
+  }
+
+  const handleOpenUserAddForm = () => {
+    const id = query.get('id')
+    if (id) {
+      handleBackRedirect()
+    }
+    setIsOpenUserDetails(false)
+    setOpenUserAddForm(true)
   }
 
   useEffect(() => {
@@ -79,6 +92,7 @@ const UsersListingUI = (props) => {
           searchValue={searchValue}
           onSearch={onSearch}
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
+          handleOpenUserAddForm={handleOpenUserAddForm}
         />
         <UserActiveStateFilter
           selectedUserActiveState={selectedUserActiveState}
@@ -98,6 +112,7 @@ const UsersListingUI = (props) => {
           selectedUsers={selectedUsers}
           handleSelectedUsers={handleSelectedUsers}
           handleOpenUserDetails={handleOpenUserDetails}
+          handleOpenUserAddForm={handleOpenUserAddForm}
         />
       </UsersListingContainer>
 
@@ -109,6 +124,18 @@ const UsersListingUI = (props) => {
           onClose={() => handleBackRedirect()}
           handleSuccessUpdate={handleSuccessUpdate}
         />
+      )}
+      {openUserAddForm && (
+        <SideBar
+          sidebarId='userAddForm'
+          open={openUserAddForm}
+          onClose={() => setOpenUserAddForm(false)}
+        >
+          <UserAddForm
+            handleSuccessAdd={handleSuccessAddUser}
+            onClose={() => setOpenUserAddForm(false)}
+          />
+        </SideBar>
       )}
     </>
   )

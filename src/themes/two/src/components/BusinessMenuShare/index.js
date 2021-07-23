@@ -43,6 +43,7 @@ const BusinessMenuShareUI = (props) => {
   }
 
   const isCheckedBusiness = (id) => {
+    if (Object.keys(menu).length === 0) return false
     const found = menu?.businesses.find(business => business?.id === id)
     return found
   }

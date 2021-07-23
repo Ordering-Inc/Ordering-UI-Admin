@@ -138,11 +138,6 @@ const BusinessPaymentMethodsUI = (props) => {
                         </Dropdown.Item>
                       )}
                       <Dropdown.Item
-                        onClick={() => console.log('custom')}
-                      >
-                        {t('CUSTOM_FIELDS', 'Custom fields')}
-                      </Dropdown.Item>
-                      <Dropdown.Item
                         onClick={() => handleDeleteBusinessPaymethodOption(paymethod.id)}
                       >
                         {t('DELETE', 'Delete')}

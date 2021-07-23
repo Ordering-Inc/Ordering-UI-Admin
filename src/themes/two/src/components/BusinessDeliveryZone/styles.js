@@ -20,6 +20,7 @@ export const Header = styled.div`
   }
 
   svg {
+    cursor: pointer;
     color: ${props => props.theme.colors.primary};
     font-size: 24px;
     ${props => props.theme?.rtl ? css`
