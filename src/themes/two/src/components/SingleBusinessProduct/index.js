@@ -110,7 +110,7 @@ const SingleBusinessProductUI = (props) => {
   }, [productFormState])
 
   useEffect(() => {
-    if (productFormState?.changes && !productFormState?.result.error && !productFormState?.loading) {
+    if (!productFormState?.loading && !productFormState?.result.error && productFormState?.result?.result) {
       const toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -120,7 +120,9 @@ const SingleBusinessProductUI = (props) => {
         draggable: true,
         progress: undefined
       }
-      const content = productFormState?.result?.result
+      const content = productFormState?.result?.result?.id
+        ? t('PRODUCT_UPDATE', 'Product updated')
+        : t('PRODUCT_DELETE', 'Product deleted')
       toast.dark(content, toastConfigure)
     }
   }, [productFormState?.loading])

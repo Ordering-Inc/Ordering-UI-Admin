@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { SingleBusinessProduct } from '../SingleBusinessProduct'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
-import { CreateBusinessProduct } from '../CreateBusinessProduct'
+import { BusinessProductCreator } from '../BusinessProductCreator'
 import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
 
 import {
@@ -114,7 +114,7 @@ export const BusinessProductList = (props) => {
                   }
                   {
                     (isAddProduct || isParentProductAdd) && (
-                      <CreateBusinessProduct
+                      <BusinessProductCreator
                         {...props}
                         allowColumns={allowColumns}
                         setIsAddProduct={setIsAddProduct}

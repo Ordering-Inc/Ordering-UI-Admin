@@ -4,9 +4,9 @@ import { toast } from 'react-toastify'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  BusinessCategoryEdit as BusinessCategoryEditController
 } from 'ordering-components-admin'
-import { BusinessCategoryEdit as BusinessCategoryEditController } from './naked'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { bytesConverter } from '../../../../../utils'
 import { Alert } from '../Confirm'
@@ -118,7 +118,7 @@ const BusinessCategoryEditUI = (props) => {
   }, [open])
 
   useEffect(() => {
-    if (formState?.changes && !formState?.result.error && !formState?.loading) {
+    if (!formState?.result.error && formState?.result?.result && !formState?.loading) {
       const toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -128,7 +128,7 @@ const BusinessCategoryEditUI = (props) => {
         draggable: true,
         progress: undefined
       }
-      const content = formState?.result?.result
+      const content = t('CATEOGORY_UPDATED', 'Category updated')
       toast.dark(content, toastConfigure)
     }
   }, [formState?.loading])
