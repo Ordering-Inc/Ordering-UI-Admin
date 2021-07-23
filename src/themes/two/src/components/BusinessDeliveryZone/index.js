@@ -44,8 +44,8 @@ const BusinessDeliveryZoneUI = (props) => {
     handleChangeZoneData,
     isEdit,
     setIsEdit,
-    openAddDeliveryZone,
-    setOpenAddDeliveryZone,
+    isAddMode,
+    setIsAddMode,
     isAddValid,
     setIsAddValid,
     handleUpdateBusinessDeliveryZone,
@@ -64,6 +64,10 @@ const BusinessDeliveryZoneUI = (props) => {
   const ActionIcon = <FiMoreVertical />
 
   const handleOpenSetting = (zone) => {
+    if (Object.keys(formState.changes).length === 0) {
+      setIsAddMode(false)
+      return
+    }
     if (formState.changes?.name === '' || formState.changes?.minimum === '' || formState.changes?.price === '') {
       setErrors({
         name: formState.changes?.name === '',
@@ -99,11 +103,11 @@ const BusinessDeliveryZoneUI = (props) => {
   }
 
   useEffect(() => {
-    if (openAddDeliveryZone) {
+    if (isAddMode) {
       setIsExtendExtraOpen(false)
       setIsEdit(false)
     }
-  }, [openAddDeliveryZone])
+  }, [isAddMode])
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -116,7 +120,7 @@ const BusinessDeliveryZoneUI = (props) => {
   }, [formMethods.errors])
 
   useEffect(() => {
-    if (openAddDeliveryZone && !isAddValid) return
+    if (isAddMode && !isAddValid) return
     if (Object.keys(errors).length) {
       const errorContent = []
       if (errors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
@@ -137,7 +141,9 @@ const BusinessDeliveryZoneUI = (props) => {
         <ZoneContainer>
           <Header>
             <h1>{t('DELIVERY_ZONE', 'Delivery zones')}</h1>
-            <BsPlusSquare />
+            <BsPlusSquare
+              onClick={() => setIsAddMode(true)}
+            />
           </Header>
           <DeliveryZonesContainer>
             <DeliveryZoneWrapper>
@@ -216,13 +222,8 @@ const BusinessDeliveryZoneUI = (props) => {
               </DeliveryZoneWrapper>
             ))}
           </DeliveryZonesContainer>
-          {!openAddDeliveryZone ? (
-            <AddDeliveryZoneButton
-              onClick={() => setOpenAddDeliveryZone(true)}
-            >
-              {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
-            </AddDeliveryZoneButton>
-          ) : (
+
+          {isAddMode && (
             <DeliveryZoneFormWrapper onSubmit={formMethods.handleSubmit(onSubmit)}>
               <ZoneName>
                 <input
@@ -266,6 +267,11 @@ const BusinessDeliveryZoneUI = (props) => {
               </ZoneActions>
             </DeliveryZoneFormWrapper>
           )}
+          <AddDeliveryZoneButton
+            onClick={() => setIsAddMode(true)}
+          >
+            {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
+          </AddDeliveryZoneButton>
         </ZoneContainer>
         {(isEdit || isAddValid) && (
           <>

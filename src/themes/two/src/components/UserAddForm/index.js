@@ -1,48 +1,55 @@
-import React, { useEffect, useState, useRef } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useCustomer } from 'ordering-components-admin'
+import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import parsePhoneNumber from 'libphonenumber-js'
-import { UserTypeSelector } from '../UserTypeSelector'
+import {
+  useLanguage,
+  DragAndDrop,
+  ExamineClick,
+  UserFormDetails as UserFormDetailsController
+} from 'ordering-components-admin'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
-import { sortInputFields } from '../../../../../utils'
+import { UserTypeSelector } from '../UserTypeSelector'
+import parsePhoneNumber from 'libphonenumber-js'
+import { InputPhoneNumber } from '../InputPhoneNumber'
+import { sortInputFields, bytesConverter } from '../../../../../utils'
+import Skeleton from 'react-loading-skeleton'
+import BiImage from '@meronex/icons/bi/BiImage'
 
-import { FormInput, ActionsForm, SkeletonForm, WrapperUserTypeSelector } from './styles'
+import {
+  FormContainer,
+  UserImage,
+  Image,
+  UploadImageIconContainer,
+  UploadImageIcon,
+  SkeletonWrapper,
+  FormInput,
+  ActionsForm,
+  SkeletonForm,
+  WrapperUserTypeSelector
+} from './styles'
 
-export const UserFormDetailsUI = (props) => {
+const UserAddFormUI = (props) => {
   const {
-    isEdit,
     formState,
-    onCancel,
     showField,
     cleanFormState,
     isRequiredField,
     validationFields,
     handleChangeInput,
-    handleButtonUpdateClick,
+    handleButtonAddClick,
     isCheckout,
-    userData,
-    isCustomerMode,
-    handleChangeUserType
+    handleChangeUserType,
+    handlechangeImage
   } = props
-
   const formMethods = useForm()
   const [, t] = useLanguage()
 
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, { setUserCustomer }] = useCustomer()
   const emailInput = useRef(null)
-
-  const [user, setUser] = useState(userData)
-
-  useEffect(() => {
-    setUser(userData)
-  }, [userData])
+  const inputRef = useRef(null)
 
   const closeAlert = () => {
     setAlertState({
@@ -54,49 +61,9 @@ export const UserFormDetailsUI = (props) => {
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
-  const setUserCellPhone = (isEdit = false) => {
-    if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
-      setUserPhoneNumber(userPhoneNumber)
-      return
-    }
-    if (user?.cellphone) {
-      let phone = null
-      if (formState.result.error && formState.changes?.cellphone && formState.changes?.country_phone_code) {
-        phone = `+${formState.changes?.country_phone_code} ${formState.changes?.cellphone}`
-        setUserPhoneNumber(phone)
-        return
-      }
-      if (user?.country_phone_code) {
-        phone = `+${user?.country_phone_code} ${user?.cellphone}`
-      } else {
-        phone = user?.cellphone
-      }
-      setUserPhoneNumber(phone)
-      return
-    }
-    setUserPhoneNumber(user?.cellphone || '')
-  }
-
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    if (!userPhoneNumber &&
-      validationFields?.fields?.checkout?.cellphone?.enabled &&
-      validationFields?.fields?.checkout?.cellphone?.required
-    ) {
-      setAlertState({
-        open: true,
-        content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
-      })
-      return
-    }
     if (!isPhoneNumberValid && userPhoneNumber) {
-      if (user?.country_phone_code) {
-        setAlertState({
-          open: true,
-          content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
-        })
-        return
-      }
       setAlertState({
         open: true,
         content: [t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')]
@@ -104,17 +71,33 @@ export const UserFormDetailsUI = (props) => {
       return
     }
     if (Object.keys(formState.changes).length > 0 && isPhoneNumberValid) {
-      let changes = null
-      if (user?.cellphone && !userPhoneNumber) {
-        changes = {
-          country_phone_code: '',
-          cellphone: ''
-        }
+      handleButtonAddClick()
+    }
+  }
+
+  const handleClickImage = () => {
+    inputRef.current.click()
+  }
+
+  const handleFiles = (files) => {
+    if (files.length === 1) {
+      const type = files[0].type.split('/')[0]
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        })
+        return
       }
-      if (isCustomerMode) {
-        setUserCustomer(formState.result.result, true)
+
+      if (bytesConverter(files[0]?.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        })
+        return
       }
-      handleButtonUpdateClick(changes)
+      handlechangeImage(files[0])
     }
   }
 
@@ -179,20 +162,14 @@ export const UserFormDetailsUI = (props) => {
   }, [formState?.loading])
 
   useEffect(() => {
-    if ((user || !isEdit) && !formState?.loading) {
-      setUserCellPhone()
-      if (!isEdit && !formState?.loading) {
-        cleanFormState && cleanFormState({ changes: {} })
-        setUserCellPhone(true)
-      }
-    }
-  }, [user, isEdit])
+    cleanFormState && cleanFormState({ changes: {} })
+  }, [])
 
   useEffect(() => {
     if (!validationFields.loading && emailInput.current) {
       formMethods.setValue('email', formState?.result?.result
         ? formState?.result?.result?.email
-        : formState?.changes?.email ?? (user && user?.email) ?? '')
+        : formState?.changes?.email ?? '')
     }
   }, [validationFields, emailInput.current])
 
@@ -207,28 +184,30 @@ export const UserFormDetailsUI = (props) => {
       }
     })
   }, [formMethods])
-
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
+    <FormContainer>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout}>
+        <h1>{t('USERS_REGISTER', 'New user')}</h1>
+        <UserImage className='user-image'>
+          <Image onClick={() => handleClickImage()} isImage={formState?.changes?.photo && !formState.result.error}>
+            <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+              <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                {
+                  formState.loading
+                    ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
+                    : formState?.changes?.photo && <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
+                }
+                <UploadImageIconContainer>
+                  <UploadImageIcon>
+                    <BiImage />
+                  </UploadImageIcon>
+                </UploadImageIconContainer>
+              </DragAndDrop>
+            </ExamineClick>
+          </Image>
+        </UserImage>
         {!validationFields?.loading ? (
           <>
-            {
-            props.beforeMidElements?.map((BeforeMidElements, i) => (
-              <React.Fragment key={i}>
-                {BeforeMidElements}
-              </React.Fragment>))
-            }
-            {
-            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-              <BeforeMidComponents key={i} {...props} />))
-            }
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
@@ -242,7 +221,7 @@ export const UserFormDetailsUI = (props) => {
                       defaultValue={
                       formState?.result?.result
                         ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                        : formState?.changes[field.code] ?? ''
                       }
                       onChange={handleChangeInputEmail}
                       ref={(e) => {
@@ -260,7 +239,7 @@ export const UserFormDetailsUI = (props) => {
                       defaultValue={
                       formState?.result?.result
                         ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                        : formState?.changes[field.code] ?? ''
                       }
                       onChange={handleChangeInput}
                       ref={formMethods.register({
@@ -277,7 +256,6 @@ export const UserFormDetailsUI = (props) => {
             )}
             {!!showInputPhoneNumber && (
               <InputPhoneNumber
-                user={user}
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
@@ -314,35 +292,19 @@ export const UserFormDetailsUI = (props) => {
             <WrapperUserTypeSelector>
               <UserTypeSelector
                 isPrimary
-                userId={user.id}
-                defaultUserType={formState?.changes?.level || user?.level}
+                defaultUserType={formState?.changes?.level}
                 handleChangeUserType={handleChangeUserType}
               />
             </WrapperUserTypeSelector>
             <ActionsForm>
-              {onCancel && (
-                <Button
-                  outline
-                  borderRadius='5px'
-                  type='button'
-                  onClick={() => onCancel(false)}
-                  disabled={formState.loading}
-                >
-                  {t('CANCEL', 'Cancel')}
-                </Button>
-              )}
-
-              {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
-                <Button
-                  id='form-btn'
-                  color='primary'
-                  borderRadius='5px'
-                  type='submit'
-                  disabled={formState.loading}
-                >
-                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
-                </Button>
-              )}
+              <Button
+                color='primary'
+                borderRadius='8px'
+                type='submit'
+                disabled={Object.keys(formState?.changes).length === 0 || formState.loading}
+              >
+                {formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')}
+              </Button>
             </ActionsForm>
           </>
         ) : (
@@ -362,12 +324,17 @@ export const UserFormDetailsUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </>
+    </FormContainer>
+  )
+}
+
+export const UserAddForm = (props) => {
+  const UserAddProps = {
+    ...props,
+    useSessionUser: false,
+    UIComponent: UserAddFormUI
+  }
+  return (
+    <UserFormDetailsController {...UserAddProps} />
   )
 }

@@ -86,7 +86,6 @@ export const SingleBusinessCardContainer = styled.div`
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   border-radius: 8px;
-  overflow: hidden;
 
   margin: 10px;
   width: calc(100% - 20px);
@@ -198,4 +197,29 @@ export const BusinessActionContainer = styled.div`
 `
 
 export const WrapperBusinessActionSelector = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: #F8F9FA !important;
+    border: none;
+    padding: 0px;
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  > div {
+    > div {
+      border: 1px solid #E9ECEF;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      a:last-child {
+        color: #E63757;
+      }
+    }
+  }
 `

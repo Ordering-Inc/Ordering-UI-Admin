@@ -5,11 +5,11 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
-  max-height: calc(100vh - 380px);
+  max-height: calc(100vh - 415px);
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 280px);
+    max-height: calc(100vh - 300px);
   }
 `
 
@@ -28,6 +28,7 @@ export const UsersTable = styled.table`
     }
 
     &:nth-child(4),
+    
     &:nth-child(5) {
       width: 10%;
     }
@@ -125,11 +126,13 @@ export const InfoBlock = styled.div`
   p {
     margin: 5px 0 0 0;
     font-size: 12px;
+    color: ${props => props.theme.colors.lightGray};
   }
   p.bold {
     margin: 0px;
     font-size: 14px;
     font-weight: 600;
+    color: ${props => props.theme.colors.headingColor};
   }
 `
 export const UserTypeWrapper = styled.div`
@@ -154,9 +157,10 @@ export const UserTypeWrapper = styled.div`
       }
     }
   }
-  p {
+  > p {
     margin: 5px 0 0 0;
     font-size: 12px;
+    color: ${props => props.theme.colors.lightGray};
   }
 `
 
@@ -208,4 +212,39 @@ export const WrapperPageState = styled.div`
 `
 
 export const WrapperUserActionSelector = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: #F8F9FA !important;
+    border: none;
+    padding: 0px;
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+    }
+    &:after {
+      display: none;
+    }
+  }
+  > div {
+    border: 1px solid #E9ECEF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 5px;
+    ` : css`
+      margin-right: 5px;
+    `}
+    > div {
+      a:last-child {
+        color: #E63757;
+      }
+    }
+  }
+`
+
+export const AddNewUserButton = styled.div`
+  cursor: pointer;
+  color: ${props => props.theme.colors.lightGray};
+  width: fit-content;
+  margin-top: 10px;
 `

@@ -4,9 +4,26 @@ export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  > h1 {
-    font-size: 24px;
-    margin: 0px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > h1 {
+      font-size: 24px;
+      margin: 0px;
+    }
+
+    > svg {
+      cursor: pointer;
+      font-size: 24px;
+      color: ${props => props.theme.colors.primary};
+      ${props => props.theme?.rtl ? css`
+        margin-right: 10px;
+      ` : css`
+        margin-left: 10px;
+      `}
+    }
   }
 
   @media (min-width: 768px) {
