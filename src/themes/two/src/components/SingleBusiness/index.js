@@ -4,7 +4,9 @@ import { useUtils, useLanguage, BusinessDetails as BusinessController } from 'or
 import { useTheme } from 'styled-components'
 import { convertHoursToMinutes } from '../../../../../utils'
 import { Switch } from '../../styles/Switch'
-import { BusinessActionSelector } from '../BusinessActionSelector'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
+import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+
 import {
   SingleListBusinessContainer,
   WrapperImage,
@@ -154,12 +156,27 @@ const SingleBusinessUI = (props) => {
                 </td>
                 <td>
                   <WrapperBusinessActionSelector className='business_actions'>
-                    <BusinessActionSelector
-                      business={businessState?.business}
-                      handleDuplicateBusiness={handleDuplicateBusiness}
-                      handleDeleteBusiness={handleDeleteBusiness}
-                      handleOpenBusinessDetails={handleOpenBusinessDetails}
-                    />
+                    <DropdownButton
+                      menuAlign={theme?.rtl ? 'left' : 'right'}
+                      title={<FiMoreVertical />}
+                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                    >
+                      <Dropdown.Item
+                        onClick={() => handleDuplicateBusiness()}
+                      >
+                        {t('DUPLICATE', 'Duplicate')}
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleOpenBusinessDetails(businessState?.business)}
+                      >
+                        {t('EDIT', 'Edit')}
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleDeleteBusiness()}
+                      >
+                        {t('DELETE', 'Delete')}
+                      </Dropdown.Item>
+                    </DropdownButton>
                   </WrapperBusinessActionSelector>
                 </td>
               </tr>
@@ -207,12 +224,27 @@ const SingleBusinessUI = (props) => {
                     />
                   </BusinessEnableWrapper>
                   <WrapperBusinessActionSelector className='business_actions'>
-                    <BusinessActionSelector
-                      business={businessState?.business}
-                      handleDuplicateBusiness={handleDuplicateBusiness}
-                      handleDeleteBusiness={handleDeleteBusiness}
-                      handleOpenBusinessDetails={() => console.log('open')}
-                    />
+                    <DropdownButton
+                      menuAlign={theme?.rtl ? 'left' : 'right'}
+                      title={<FiMoreVertical />}
+                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                    >
+                      <Dropdown.Item
+                        onClick={() => handleDuplicateBusiness()}
+                      >
+                        {t('DUPLICATE', 'Duplicate')}
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleOpenBusinessDetails(businessState?.business)}
+                      >
+                        {t('EDIT', 'Edit')}
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleDeleteBusiness()}
+                      >
+                        {t('DELETE', 'Delete')}
+                      </Dropdown.Item>
+                    </DropdownButton>
                   </WrapperBusinessActionSelector>
                 </BusinessActionContainer>
               </BusinessContent>

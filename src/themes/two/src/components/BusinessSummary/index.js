@@ -131,6 +131,7 @@ export const BusinessSummary = (props) => {
                 color='lightPrimary'
                 borderRadius='5px'
                 onClick={handleOpenCategory}
+                disabled={businessState?.loading}
               >
                 {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
               </Button>

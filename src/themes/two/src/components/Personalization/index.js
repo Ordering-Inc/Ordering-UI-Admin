@@ -1,8 +1,10 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage } from 'ordering-components-admin'
+import { Button } from '../../styles/Buttons'
 import {
-  Container
+  Container,
+  WrapperButton
 } from './styles'
 
 export const Personalization = (props) => {
@@ -21,6 +23,15 @@ export const Personalization = (props) => {
         <a href=''>{t('SEND_US_SPECIAL_WISH', 'send us your special wish.')}</a>
       </p>
       <img src={theme?.images.general?.personalization} loading='lazy' />
+      <WrapperButton>
+        <Button
+          borderRadius='8px'
+          color='primary'
+          onClick={() => window.open('https://orderingco.typeform.com/to/qHPQtU')}
+        >
+          {t('CONTACT_US', 'Contact us')}
+        </Button>
+      </WrapperButton>
     </Container>
   )
 }

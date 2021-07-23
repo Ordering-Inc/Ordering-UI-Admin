@@ -7,8 +7,10 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import Prev from '@meronex/icons/md/MdKeyboardArrowLeft'
 import Next from '@meronex/icons/md/MdKeyboardArrowRight'
 import { Switch } from '../../styles/Switch'
-import { UserActionSelector } from '../UserActionSelector'
 import { UserTypeSelector } from '../UserTypeSelector'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import { useTheme } from 'styled-components'
+import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 
 import {
   UsersConatiner,
@@ -24,7 +26,8 @@ import {
   WrapperPagination,
   WrapperPageState,
   PageButton,
-  WrapperUserActionSelector
+  WrapperUserActionSelector,
+  AddNewUserButton
 } from './styles'
 
 export const UsersList = (props) => {
@@ -38,9 +41,12 @@ export const UsersList = (props) => {
     handleDeleteUser,
     selectedUsers,
     handleSelectedUsers,
-    handleOpenUserDetails
+    handleOpenUserDetails,
+    handleOpenUserAddForm
   } = props
+
   const [, t] = useLanguage()
+  const theme = useTheme()
 
   const getUserType = (type) => {
     const userTypes = [
@@ -177,11 +183,14 @@ export const UsersList = (props) => {
                     </td>
                     <td>
                       <WrapperUserActionSelector className='user_action'>
-                        <UserActionSelector
-                          user={user}
-                          handleDeleteUser={handleDeleteUser}
-                          handleOpenUserDetails={handleOpenUserDetails}
-                        />
+                        <DropdownButton
+                          menuAlign={theme?.rtl ? 'left' : 'right'}
+                          title={<FiMoreVertical />}
+                          id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                        >
+                          <Dropdown.Item onClick={() => handleOpenUserDetails(user)}>{t('EDIT', 'Edit')}</Dropdown.Item>
+                          <Dropdown.Item onClick={() => handleDeleteUser(user?.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
+                        </DropdownButton>
                       </WrapperUserActionSelector>
                     </td>
                   </tr>
@@ -190,6 +199,9 @@ export const UsersList = (props) => {
             )}
           </UsersTable>
         </UserTableWrapper>
+        <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
+          {t('ADD_NEW_USER', 'Add new user')}
+        </AddNewUserButton>
 
         {usersList?.users.length > 0 && (
           <WrapperPagination>

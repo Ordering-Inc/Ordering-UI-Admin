@@ -3,6 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { SearchBar } from '../SearchBar'
+import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 
 import {
   HeaderContainer,
@@ -18,14 +19,18 @@ export const UsersListingHeader = (props) => {
     userTypesSelected,
     selectedUserActiveState,
     searchValue,
-    onSearch
+    onSearch,
+    handleOpenUserAddForm
   } = props
 
   const [, t] = useLanguage()
 
   return (
     <HeaderContainer>
-      <h1>{title}</h1>
+      <div>
+        <h1>{title}</h1>
+        <BsPlusSquare onClick={() => handleOpenUserAddForm()} />
+      </div>
       <ActionContainer>
         <UsersDeleteButton
           selectedUsers={selectedUsers}

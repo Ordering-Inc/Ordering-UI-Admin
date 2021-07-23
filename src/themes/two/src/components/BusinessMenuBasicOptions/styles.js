@@ -82,7 +82,6 @@ export const CheckboxContainer = styled.div`
 export const ScheduleCheckboxContainer = styled.div`
   display: flex;
   width: 20%;
-  margin-top: 10px;
 
   h4 {
     color: ${props => props.theme.colors.headingColor};
@@ -127,6 +126,7 @@ export const ScheduleSection = styled.div`
 
 export const ScheduleBlock = styled.div`
   display: flex;
+  align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid #E9ECEF;
 `
@@ -135,8 +135,7 @@ export const TimeSectionContainer = styled.div`
   flex: 1;
   text-align: center;
   > p {
-    margin-top: 10px;
-    margin-bottom: 0px;
+    margin: 0px;
     color: ${props => props.theme.colors.lightGray};
   }
   > div:not(:last-child) {
@@ -206,7 +205,6 @@ export const AddButton = styled.div`
 
 export const ScheduleActionBlock = styled.div`
   display: flex;
-  margin-top: 10px;
 `
 
 export const AddScheduleButton = styled.div`
