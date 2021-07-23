@@ -1,7 +1,6 @@
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AutoScroll } from './src/components/AutoScroll'
-import { BusinessActionSelector } from './src/components/BusinessActionSelector'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
 import { BusinessDetails } from './src/components/BusinessDetails'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
@@ -97,7 +96,6 @@ export {
   AddressForm,
   AddressList,
   AutoScroll,
-  BusinessActionSelector,
   BusinessActiveStateFilter,
   BusinessDetails,
   BusinessesSelector,
