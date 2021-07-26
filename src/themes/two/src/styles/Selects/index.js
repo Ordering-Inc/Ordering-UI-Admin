@@ -63,7 +63,7 @@ export const Options = styled.div`
   z-index: 10000;
   border-width: 1px;
   border-style: solid;
-  border-color: #1C202E;
+  border-color: #E9ECEF;
   border-radius: 7.6px;
   overflow: hidden;
 

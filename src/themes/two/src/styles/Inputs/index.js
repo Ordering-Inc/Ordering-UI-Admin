@@ -4,11 +4,11 @@ import { Button } from '../Buttons'
 
 export const Input = styled.input`
   background: #FFF;
-  color: #344050;
+  color: ${props => props.theme.colors.headingColor};
   border: 1px solid #DEE2E6;
   border-radius: 8px;
-  font-size: 16px;
-  padding: 7px 15px;
+  font-size: 14px;
+  padding: 10px 15px;
   outline: none;
 
   &:focus {
@@ -52,7 +52,7 @@ export const InputGroupLeft = styled.div`
   line-height: 34px;
   padding-left: 7px;
   padding-right: 7px;
-  font-size: 16px;
+  font-size: 14px;
   border-width: 1px;
   height: 34px;
   border-style: solid;
@@ -120,11 +120,11 @@ export const InputGroupPrimary = styled(InputGroup)`
 
 export const TextArea = styled.textarea`
   background: #FFF;
-  color: #344050;
-  border: 1px solid #DBDCDB;
+  color: ${props => props.theme.colors.headingColor};
+  border: 1px solid #DEE2E6;
   border-radius: 8px;
-  font-size: 16px;
-  padding: 7px 15px;
+  font-size: 14px;
+  padding: 10px 15px;
   outline: none;
   resize: none;
   &:focus {
@@ -135,9 +135,9 @@ export const TextArea = styled.textarea`
   `}
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: #DBDCDB;
+    color: #B1BCCC;
   }
   &:-ms-input-placeholder {
-    color: #DBDCDB;
+    color: #B1BCCC;
   }
 `

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
+import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
 
 import {
   Select as SelectInput,
@@ -68,7 +68,7 @@ export const Select = (props) => {
         <Selected onClick={handleSelectClick}>
           {placeholder || ''}
           <Chevron>
-            <GoTriangleDown />
+            <FiChevronDown />
           </Chevron>
         </Selected>
       )}
@@ -78,7 +78,7 @@ export const Select = (props) => {
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>
           <Chevron>
-            <GoTriangleDown />
+            <FiChevronDown />
           </Chevron>
         </Selected>
       )}
