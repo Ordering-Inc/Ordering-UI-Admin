@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessListContainer = styled.div`
-  max-height: calc(100vh - 380px);
+  max-height: calc(100vh - 400px);
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 280px);
+    max-height: calc(100vh - 300px);
   }
 `
 
@@ -55,4 +55,12 @@ export const BusinessCardContainer = styled.div`
   ` : css`
     transform: translateX(-10px);
   `}
+`
+
+export const AddNewButtonLink = styled.div`
+  width: fit-content;
+  cursor: pointer;
+  color: ${props => props.theme.colors.lightGray};
+  font-size: 14px;
+  margin-top: 15px;
 `

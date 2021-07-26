@@ -30,4 +30,5 @@ export const PageButton = styled.button`
 export const WrapperPageState = styled.div`
   display: flex;
   min-width: 140px;
+  color: ${props => props.theme.colors.headingColor};
 `

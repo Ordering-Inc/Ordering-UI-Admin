@@ -6,7 +6,8 @@ import {
   BusinessListContainer,
   BusinessListTable,
   WrapperPagination,
-  BusinessCardContainer
+  BusinessCardContainer,
+  AddNewButtonLink
 } from './styles'
 import { SingleBusiness } from '../SingleBusiness'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
@@ -20,7 +21,8 @@ export const BusinessList = (props) => {
     handleSucessRemoveBusiness,
     handleSucessAddBusiness,
     handleSucessUpdateBusiness,
-    handleOpenBusinessDetails
+    handleOpenBusinessDetails,
+    handleOpenAddBusiness
   } = props
   const [, t] = useLanguage()
 
@@ -179,6 +181,11 @@ export const BusinessList = (props) => {
               )}
             </WrapperPagination>
           )}
+          <AddNewButtonLink
+            onClick={() => handleOpenAddBusiness()}
+          >
+            {t('ADD_NEW_STORE', 'Add new store')}
+          </AddNewButtonLink>
         </>
       )}
 

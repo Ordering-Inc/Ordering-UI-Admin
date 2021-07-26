@@ -5,7 +5,7 @@ export const OrdersSearch = styled.div`
 
   svg {
     position: absolute;
-    top: 11px;
+    top: 10px;
     ${props => props.theme?.rtl ? css`
       right: 15px;
     ` : css`
@@ -22,7 +22,7 @@ export const OrdersSearch = styled.div`
     outline: none;
     padding: 10px 8px;
     padding-left: 40px;
-    font-size: 15px;
+    font-size: 14px;
 
     &::placeholder {
       color: #909BA9;

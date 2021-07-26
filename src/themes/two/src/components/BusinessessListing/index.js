@@ -122,6 +122,7 @@ const BusinessessListingUI = (props) => {
           handleSucessAddBusiness={handleSucessAddBusiness}
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleOpenBusinessDetails={handleOpenBusinessDetails}
+          handleOpenAddBusiness={handleOpenAddBusiness}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (
