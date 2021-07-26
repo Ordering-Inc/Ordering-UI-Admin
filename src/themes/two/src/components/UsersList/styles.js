@@ -20,6 +20,7 @@ export const UsersTable = styled.table`
 
   td, th {
     padding: 10px 0;
+    font-size: 14px;
     &:first-child {
       width: 30%;
     }
@@ -114,12 +115,14 @@ export const CheckBoxWrapper = styled.div`
   `}
   svg {
     font-size: 24px;
-    color: ${props => props.theme.colors?.headingColor};
-
-    ${({ isChecked }) => isChecked && css`
-      color: ${props => props.theme.colors?.primary};
-    `}
+    color: #B1BCCC;
   }
+
+  ${({ isChecked }) => isChecked && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+`}
 `
 
 export const InfoBlock = styled.div`
@@ -238,6 +241,9 @@ export const WrapperUserActionSelector = styled.div`
       a:last-child {
         color: #E63757;
       }
+    }
+    .dropdown-item {
+      font-size: 14px;
     }
   }
 `

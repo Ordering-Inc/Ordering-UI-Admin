@@ -13,6 +13,7 @@ export const WrapperImage = styled.div`
   width: 45px;
   ${({ isSkeleton }) => !isSkeleton && css`
     border: 1px solid #E3E3E3;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   `}
   border-radius: 10px;
 
@@ -55,6 +56,7 @@ export const InfoBlock = styled.div`
   p {
     margin: 5px 0 0 0;
     font-size: 12px;
+    color: ${props => props.theme.colors.lightGray};
   }
   p.bold {
     margin: 0px;
@@ -223,12 +225,13 @@ export const WrapperBusinessActionSelector = styled.div`
       border: 1px solid #E9ECEF;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
       border-radius: 8px;
-      a:last-child {
+      .dropdown-item {
+        font-size: 14px;
+        color: ${props => props.theme.colors.headingColor};
+      }
+      .dropdown-item:last-child {
         color: #E63757;
       }
     }
-  }
-  .dropdown-item {
-    font-size: 14px;
   }
 `

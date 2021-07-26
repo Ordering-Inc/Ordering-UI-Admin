@@ -134,6 +134,7 @@ export const UsersList = (props) => {
                       <UserMainInfo>
                         <CheckBoxWrapper
                           className='user_checkbox'
+                          isChecked={selectedUsers.includes(user.id)}
                           onClick={() => handleSelectedUsers(user.id)}
                         >
                           {selectedUsers.includes(user.id) ? (

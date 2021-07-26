@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BusinessListContainer = styled.div`
   max-height: calc(100vh - 380px);
@@ -21,6 +21,7 @@ export const BusinessListTable = styled.table`
 
   th {
     font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   th.business,
@@ -49,5 +50,9 @@ export const BusinessCardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: calc(100% + 20px);
-  transform: translateX(-10px);
+  ${props => props.theme?.rtl ? css`
+    transform: translateX(10px);
+  ` : css`
+    transform: translateX(-10px);
+  `}
 `
