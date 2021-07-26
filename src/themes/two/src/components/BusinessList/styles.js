@@ -19,6 +19,10 @@ export const BusinessListTable = styled.table`
     padding: 10px 0;
   }
 
+  th {
+    font-size: 14px;
+  }
+
   th.business,
   td.business {
     width: 30%;
@@ -44,4 +48,6 @@ export const WrapperPagination = styled.div`
 export const BusinessCardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: calc(100% + 20px);
+  transform: translateX(-10px);
 `

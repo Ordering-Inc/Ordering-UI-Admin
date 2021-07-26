@@ -26,11 +26,11 @@ const BusinessTypeFilterUI = (props) => {
   return (
     <>
       <TypeContainer id='container'>
-        <InnerContainer>
+        <InnerContainer isSkeleton={loading}>
           {loading && (
             <AutoScroll innerScroll scrollId='business_type'>
               {[...Array(6)].map((_, i) => (
-                <Skeleton key={i} height={30} width={100} />
+                <Skeleton key={i} height={30} width={100} style={{ margin: '0 5px' }} />
               ))}
             </AutoScroll>
           )}

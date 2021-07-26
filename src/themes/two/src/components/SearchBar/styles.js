@@ -1,12 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const OrdersSearch = styled.div`
   position: relative;
 
-  img {
+  svg {
     position: absolute;
-    top: 13px;
-    left: 14px;
+    top: 11px;
+    ${props => props.theme?.rtl ? css`
+      right: 15px;
+    ` : css`
+      left: 15px;
+    `}
+    font-size: 20px;
+    color: ${props => props.theme.colors.lightGray};
   }
 
   input {

@@ -53,7 +53,7 @@ const SingleBusinessUI = (props) => {
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
-                      <WrapperImage>
+                      <WrapperImage isSkeleton={businessState?.loading || isSkeleton}>
                         <Skeleton width={45} height={45} />
                       </WrapperImage>
                       <InfoBlock>

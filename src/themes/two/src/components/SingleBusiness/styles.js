@@ -60,6 +60,7 @@ export const InfoBlock = styled.div`
     margin: 0px;
     font-size: 14px;
     font-weight: 600;
+    color: ${props => props.theme.colors.headingColor};
   }
 `
 
@@ -70,6 +71,7 @@ export const BusinessEnableWrapper = styled.div`
 
   span {
     font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
 
     ${props => props.theme?.rtl ? css`
       padding-left: 10px;
@@ -115,6 +117,8 @@ const BusinessHeaderStyled = styled.div`
   object-fit: cover;
   background-position: center;
   height: 75px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
   ${({ isSkeleton }) => isSkeleton && css`
     background: #E9ECEF;
   `}
@@ -171,7 +175,6 @@ export const BusinessLogo = (props) => {
 
 export const BusinessContent = styled.div`
   padding: 40px 10px 10px 10px;
-  color: ${props => props.theme.colors.headingColor};
   h1, p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -180,6 +183,7 @@ export const BusinessContent = styled.div`
   h1 {
     font-size: 14px;
     margin-bottom: 5px;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   p {
@@ -190,10 +194,12 @@ export const BusinessContent = styled.div`
 `
 
 export const BusinessActionContainer = styled.div`
+  border-top: 1px solid ${props => props.theme.colors.secundary};
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+  padding-top: 10px;
 `
 
 export const WrapperBusinessActionSelector = styled.div`
@@ -221,5 +227,8 @@ export const WrapperBusinessActionSelector = styled.div`
         color: #E63757;
       }
     }
+  }
+  .dropdown-item {
+    font-size: 14px;
   }
 `
