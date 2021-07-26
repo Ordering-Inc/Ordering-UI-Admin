@@ -12,7 +12,6 @@ export const HeaderContainer = styled.div`
     > h1 {
       font-size: 24px;
       margin: 0px;
-      color: ${props => props.theme.colors.headingColor};
     }
 
     > svg {

@@ -211,7 +211,6 @@ export const WrapperBusinessActionSelector = styled.div`
     background: #F8F9FA !important;
     border: none;
     padding: 0px;
-
     svg {
       color: ${props => props.theme.colors.headingColor};
     }

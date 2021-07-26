@@ -1,7 +1,6 @@
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AutoScroll } from './src/components/AutoScroll'
-import { BusinessActionSelector } from './src/components/BusinessActionSelector'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
 import { BusinessDetails } from './src/components/BusinessDetails'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
@@ -71,7 +70,6 @@ import { Settings } from './src/components/Settings'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SingleBusiness } from './src/components/SingleBusiness'
 import { SpinnerLoader } from './src/components/SpinnerLoader'
-import { UserActionSelector } from './src/components/UserActionSelector'
 import { UserActiveStateFilter } from './src/components/UserActiveStateFilter'
 import { UserDetails } from './src/components/UserDetails'
 import { UserDetailsLateralBar } from './src/components/UserDetailsLateralBar'
@@ -97,7 +95,6 @@ export {
   AddressForm,
   AddressList,
   AutoScroll,
-  BusinessActionSelector,
   BusinessActiveStateFilter,
   BusinessDetails,
   BusinessesSelector,
@@ -167,7 +164,6 @@ export {
   SidebarMenu,
   SingleBusiness,
   SpinnerLoader,
-  UserActionSelector,
   UserActiveStateFilter,
   UserDetails,
   UserDetailsLateralBar,

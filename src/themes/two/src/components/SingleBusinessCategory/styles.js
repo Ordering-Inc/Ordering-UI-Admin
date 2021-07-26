@@ -8,19 +8,28 @@ export const SingleCategoryContainer = styled.div`
   margin-bottom: 15px;
   transition: all 0.3s;
   cursor: pointer;
-  height: 70px;
+  height: 75px;
 
+  .actions-btn {
+    display: none;
+  }
   &:hover {
     background: #E9F2FE;
 
     input {
       border: 1px solid ${props => props.theme.colors.lightGray};
     }
+    .actions-btn {
+      display: block;
+    }
   }
 
   ${({ active }) => active && css`
-  border: 1px solid #2C7BE5;
-  box-sizing: border-box;
+    border: 1px solid #2C7BE5;
+    box-sizing: border-box;
+    .actions-btn {
+      display: block;
+    }
   `}
 
   .img-section {
@@ -77,6 +86,7 @@ export const CategoryEnableWrapper = styled.div`
 `
 
 export const ActionSelectorWrapper = styled.div`
+  height: 26px;
   ${props => props.theme?.rtl ? css`
     margin-right: 35px;
     ` : css`

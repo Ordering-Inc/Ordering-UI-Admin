@@ -5,7 +5,7 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  CreateBusinessCategory as CreateBusinessCategoryController
+  BusinessCategoryCreator as BusinessCategoryCreatorController
 } from 'ordering-components-admin'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
@@ -23,9 +23,9 @@ import {
   CategoryActionContainer,
   CategoryEnableWrapper,
   ActionSelectorWrapper
-} from '../SingleProductsCategory/styles'
+} from '../SingleBusinessCategory/styles'
 
-const CreateBusinessCategoryUI = (props) => {
+const BusinessCategoryCreatorUI = (props) => {
   const {
     categoryState,
     handleChangeInput,
@@ -100,7 +100,7 @@ const CreateBusinessCategoryUI = (props) => {
   }, [categoryState])
 
   useEffect(() => {
-    if (categoryState?.category && !categoryState?.result.error && !categoryState?.loading) {
+    if (!categoryState?.loading && !categoryState?.result.error && categoryState?.result?.result) {
       const toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -110,7 +110,7 @@ const CreateBusinessCategoryUI = (props) => {
         draggable: true,
         progress: undefined
       }
-      const content = categoryState?.result?.result
+      const content = t('CATEGORY_ADD', 'Category added')
       toast.dark(content, toastConfigure)
     }
   }, [categoryState?.loading])
@@ -182,12 +182,12 @@ const CreateBusinessCategoryUI = (props) => {
   )
 }
 
-export const CreateBusinessCategory = (props) => {
-  const createBusinessCategoryProps = {
+export const BusinessCategoryCreator = (props) => {
+  const businessCategoryCreatorProps = {
     ...props,
-    UIComponent: CreateBusinessCategoryUI
+    UIComponent: BusinessCategoryCreatorUI
   }
   return (
-    <CreateBusinessCategoryController {...createBusinessCategoryProps} />
+    <BusinessCategoryCreatorController {...businessCategoryCreatorProps} />
   )
 }
