@@ -200,10 +200,6 @@ export const UsersList = (props) => {
             )}
           </UsersTable>
         </UserTableWrapper>
-        <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
-          {t('ADD_NEW_USER', 'Add new user')}
-        </AddNewUserButton>
-
         {usersList?.users.length > 0 && (
           <WrapperPagination>
             <WrapperPageState>
@@ -223,6 +219,9 @@ export const UsersList = (props) => {
             </PageButton>
           </WrapperPagination>
         )}
+        <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
+          {t('ADD_NEW_USER', 'Add new user')}
+        </AddNewUserButton>
       </UsersConatiner>
     </>
   )

@@ -9,7 +9,7 @@ export const LateralBarContainer = styled.div`
   overflow-x: hidden;
   transition: 0.3s;
   height: 100vh;
-  box-shadow: -4px 0px 7px #ccc;
+  box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
 
   ${props => props.theme?.rtl ? css`
     left: 0;

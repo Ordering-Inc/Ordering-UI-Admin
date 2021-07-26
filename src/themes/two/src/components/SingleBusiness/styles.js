@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const SingleListBusinessContainer = styled.tbody`
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
 `
 
@@ -211,12 +211,20 @@ export const WrapperBusinessActionSelector = styled.div`
     background: #F8F9FA !important;
     border: none;
     padding: 0px;
+
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
 
     &:after {
       display: none;
+    }
+  }
+  .show {
+    button {
+      background: transparent !important;
+      border-color: unset !important;
+      box-shadow: none !important;
     }
   }
 

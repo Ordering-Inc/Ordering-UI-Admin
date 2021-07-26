@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   width: 0;
   position: fixed;
-  box-shadow: -4px 0px 7px #ccc;
+  box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
 
   ${({ isDriverOrders }) => isDriverOrders && css`
     position: absolute;
