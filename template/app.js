@@ -24,6 +24,7 @@ import { BusinessesList } from './pages/BusinessesList'
 import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
+import { BusinessAnalytics } from './pages/BusinessAnalytics'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -153,6 +154,13 @@ export const App = () => {
                       {
                         auth
                           ? <BusinessProductsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/analytics/business'>
+                      {
+                        auth
+                          ? <BusinessAnalytics />
                           : <Redirect to='/login' />
                       }
                     </Route>

@@ -61,5 +61,12 @@
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
+  },
+  "businessAnalytics": {
+    "title": "Business Analytics",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
   }
 }
