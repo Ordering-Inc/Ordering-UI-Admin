@@ -189,6 +189,7 @@ export const OrdersTable = (props) => {
         isSelectedOrders={isSelectedOrders}
       >
         <Table
+          className='orders_table'
           isSelectedOrders={isSelectedOrders}
         >
           <thead>

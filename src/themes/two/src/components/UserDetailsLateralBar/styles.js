@@ -22,6 +22,34 @@ export const LateralBarContainer = styled.div`
     border: 1px solid ${props => props.theme.colors.borderColor};
     border-radius: 8px;
   }
+
+  table.orders_table {
+    thead {
+      display: none;
+    }
+    border-collapse: separate;
+    border-spacing: 0 18px;
+    td {
+      border-top: 1px solid ${props => props.theme.colors.borderColor};
+      &:first-child {
+        padding: 15px;
+        border-radius: 8px;
+        ${props => props.theme?.rtl ? css`
+          border-right: 1px solid ${props => props.theme.colors.borderColor};
+        ` : css`
+          border-left: 1px solid ${props => props.theme.colors.borderColor};
+        `}
+      }
+      &:last-child {
+        border-radius: 8px;
+        ${props => props.theme?.rtl ? css`
+          border-left: 1px solid ${props => props.theme.colors.borderColor};
+        ` : css`
+          border-right: 1px solid ${props => props.theme.colors.borderColor};
+        `}
+      }
+    }
+  }
 `
 
 export const WrapUserDetails = styled.div`
