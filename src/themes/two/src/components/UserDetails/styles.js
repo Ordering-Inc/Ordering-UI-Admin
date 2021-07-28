@@ -52,3 +52,10 @@ export const SavedPlaces = styled.div`
     }
   }
 `
+
+export const PersonalizationWrapper = styled.div`
+  height: calc(100% - 60px);
+  > div {
+    padding: 35px 0px 25px;
+  }
+`

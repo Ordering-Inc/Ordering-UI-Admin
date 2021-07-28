@@ -64,10 +64,9 @@ export const AddressItem = styled.li`
     display: flex;
     flex-direction: column;
     line-height: 1.5;
-  }
-
-  &:last-child {
-    border-bottom: 1px solid #00000029;
+    span {
+      text-align: initial;
+    }
   }
 `
 
@@ -82,14 +81,14 @@ export const AddressItemActions = styled.div`
 
     &:nth-child(1) {
       svg {
-        font-size: 14px;
+        font-size: 16px;
         color: #03459E;
       }
     }
 
     &:nth-child(2) {
       svg {
-        font-size: 14px;
+        font-size: 16px;
         color: #D81212;
       }
     }

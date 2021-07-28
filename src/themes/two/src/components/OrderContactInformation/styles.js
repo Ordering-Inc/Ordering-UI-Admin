@@ -25,10 +25,10 @@ export const BusinessInfo = styled.div`
 `
 
 export const PhotoWrapper = styled.div`
-  max-width: 60px;
-  max-height: 60px;
-  height: 60px;
-  width: 60px;
+  max-width: 48px;
+  max-height: 48px;
+  height: 48px;
+  width: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,8 +36,8 @@ export const PhotoWrapper = styled.div`
   border-radius: 7.6px;
 
   svg {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
   }
 
@@ -91,7 +91,7 @@ export const InfoContent = styled.div`
   }
 
   > p {
-    color: ${props => props.theme.colors?.headingColor};
+    color: ${props => props.theme.colors?.lightGray};
     font-size: 14px;
     margin: 0px;
   }
@@ -122,9 +122,9 @@ export const DriverSelectorContainer = styled.div`
   min-width: 40%;
   > div {
     width: 100%;
+    border-radius: 8px;
+    border-color: ${props => props.theme.colors?.secundary};
     > div {
-      border-radius: 8px;
-      border-color: ${props => props.theme.colors?.secundary};
       background-color: ${props => props.theme.colors?.secundary};
       > div:first-child {
         color: ${props => props.theme.colors?.headingColor};

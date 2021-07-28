@@ -228,6 +228,7 @@ const OrderDetailsUI = (props) => {
               <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
             </div>
             <OrderStatusTypeSelector
+              isFirstSelect
               orderId={order.id}
               deliveryType={order?.delivery_type}
               defaultValue={parseInt(order.status)}

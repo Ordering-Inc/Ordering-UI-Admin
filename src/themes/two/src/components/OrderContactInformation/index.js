@@ -140,6 +140,7 @@ export const OrderContactInformation = (props) => {
           </DriverInfo>
           <DriverSelectorContainer>
             <DriverSelector
+              isFirstSelect
               drivers={driversList.drivers}
               isPhoneView
               defaultValue={order?.driver?.id ? order.driver.id : 'default'}

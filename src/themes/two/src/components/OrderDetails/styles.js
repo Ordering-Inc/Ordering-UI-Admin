@@ -118,9 +118,9 @@ export const OrderStatus = styled.div`
 
   > div:not(:first-child) {
     min-width: 40%;
+    border-color: ${props => props.theme.colors?.secundary};
+    border-radius: 8px;
     > div {
-      border-radius: 8px;
-      border-color: ${props => props.theme.colors?.secundary};
       background-color: ${props => props.theme.colors?.secundary};
     }
   }

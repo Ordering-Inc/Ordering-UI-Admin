@@ -63,7 +63,7 @@ export const Select = (props) => {
   }
 
   return (
-    <SelectInput type={type} className={className}>
+    <SelectInput type={type} className={className || 'select'}>
       {!selectedOption && (
         <Selected onClick={handleSelectClick}>
           {placeholder || ''}
