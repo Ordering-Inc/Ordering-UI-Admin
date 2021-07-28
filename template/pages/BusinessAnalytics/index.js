@@ -5,7 +5,7 @@ import { BusinessAnalytics as BusinessAnalyticsController } from '../../../src/t
 export const BusinessAnalytics = (props) => {
   return (
     <>
-      <HelmetTags page='businessAnalytics' />
+      <HelmetTags page='business_analytics' />
       <BusinessAnalyticsController {...props} />
     </>
   )

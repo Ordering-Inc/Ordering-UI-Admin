@@ -62,7 +62,7 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "businessAnalytics": {
+  "business_analytics": {
     "title": "Business Analytics",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
