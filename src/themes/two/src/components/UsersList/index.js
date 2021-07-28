@@ -1,8 +1,8 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
+import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import Prev from '@meronex/icons/md/MdKeyboardArrowLeft'
 import Next from '@meronex/icons/md/MdKeyboardArrowRight'
@@ -138,9 +138,9 @@ export const UsersList = (props) => {
                           onClick={() => handleSelectedUsers(user.id)}
                         >
                           {selectedUsers.includes(user.id) ? (
-                            <RiCheckboxFill />
+                            <MdCheckBox />
                           ) : (
-                            <RiCheckboxBlankLine />
+                            <MdCheckBoxOutlineBlank />
                           )}
                         </CheckBoxWrapper>
                         <WrapperImage>

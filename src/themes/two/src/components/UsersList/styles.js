@@ -104,6 +104,14 @@ export const Image = (props) => {
 export const UserMainInfo = styled.div`
   display: flex;
   align-items: center;
+
+  ${props => props.theme?.rtl ? css`
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+    margin-left: 20px;
+  ` : css`
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+    margin-right: 20px;
+  `}
 `
 
 export const CheckBoxWrapper = styled.div`
@@ -139,7 +147,13 @@ export const InfoBlock = styled.div`
   }
 `
 export const UserTypeWrapper = styled.div`
-  width: fit-content;
+  ${props => props.theme?.rtl ? css`
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+    margin-left: 20px;
+  ` : css`
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+    margin-right: 20px;
+  `}
   > div {
     display: flex;
 
@@ -218,9 +232,14 @@ export const WrapperUserActionSelector = styled.div`
   display: flex;
   justify-content: flex-end;
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
@@ -228,9 +247,18 @@ export const WrapperUserActionSelector = styled.div`
       display: none;
     }
   }
+  .show {
+    button {
+      background: #F8F9FA !important;
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    >div {
+      border: 1px solid #E9ECEF;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
   > div {
-    border: 1px solid #E9ECEF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     ${props => props.theme?.rtl ? css`
       margin-left: 5px;

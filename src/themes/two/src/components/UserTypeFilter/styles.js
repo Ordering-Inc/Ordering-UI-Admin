@@ -14,7 +14,6 @@ export const InnerContainer = styled.div`
   display: flex;
   button {
     white-space: nowrap;
-    font-size: 14px;
     ${props => props.theme?.rtl ? css`
       margin-left: 12px;
     ` : css`

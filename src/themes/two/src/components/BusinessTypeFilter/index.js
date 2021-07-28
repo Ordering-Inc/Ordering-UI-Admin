@@ -39,7 +39,7 @@ const BusinessTypeFilterUI = (props) => {
               {types.map((type, i) => type.enabled && (
                 <Button
                   key={type.id}
-                  color={type.id === currentTypeSelected ? 'primary' : 'secundary'}
+                  color={type.id === currentTypeSelected ? 'primary' : 'secundaryDark'}
                   onClick={() => handleChangeCategory(type.id)}
                 >
                   {t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)}

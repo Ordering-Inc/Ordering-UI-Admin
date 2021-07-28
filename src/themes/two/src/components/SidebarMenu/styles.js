@@ -10,6 +10,9 @@ export const SidebarContainer = styled.div`
   @media print {
     display: none;
   }
+  button.btn-primary {
+    background-color: ${props => props.theme.colors.primary};
+  }
   transition: width 0.4s ease;
   position: fixed;
   z-index: 1000;

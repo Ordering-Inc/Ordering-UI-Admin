@@ -10,11 +10,13 @@
     }
   },
   "colors": {
-    "primary": "#0d6efd",
+    "primary": "#2C7BE5",
     "disabled": "#B1BCCC",
     "primaryContrast": "#FFF",
     "secundary": "#F8F9FA",
     "secundaryContrast": "#748194",
+    "secundaryDark": "#414954",
+    "secundaryDarkContrast": "#E9ECEF",
     "disabledContrast": "#000",
     "backgroundPage": "#FFFF",
     "colorPage": "#333",

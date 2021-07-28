@@ -32,14 +32,14 @@ export const UsersListingHeader = (props) => {
         <BsPlusSquare onClick={() => handleOpenUserAddForm()} />
       </div>
       <ActionContainer>
+        <UsersExportCSV
+          userTypesSelected={userTypesSelected}
+          selectedUserActiveState={selectedUserActiveState}
+        />
         <UsersDeleteButton
           selectedUsers={selectedUsers}
           deleteUsersActionState={deleteUsersActionState}
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
-        />
-        <UsersExportCSV
-          userTypesSelected={userTypesSelected}
-          selectedUserActiveState={selectedUserActiveState}
         />
         <SearchBar
           isCustomLayout

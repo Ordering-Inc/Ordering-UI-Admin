@@ -51,6 +51,10 @@ export const ActionContainer = styled.div`
     border: none;
   }
 
+  button {
+    height: 41px;
+  }
+
   @media (min-width: 768px) {
     margin-top: 0px;
   }

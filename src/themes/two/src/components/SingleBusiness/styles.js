@@ -208,9 +208,14 @@ export const WrapperBusinessActionSelector = styled.div`
   display: flex;
   justify-content: flex-end;
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
@@ -219,18 +224,21 @@ export const WrapperBusinessActionSelector = styled.div`
       display: none;
     }
   }
+
   .show {
     button {
-      background: transparent !important;
+      background: #F8F9FA !important;
       border-color: unset !important;
       box-shadow: none !important;
+    }
+    >div {
+      border: 1px solid #E9ECEF;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     }
   }
 
   > div {
     > div {
-      border: 1px solid #E9ECEF;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
       border-radius: 8px;
       .dropdown-item {
         font-size: 14px;

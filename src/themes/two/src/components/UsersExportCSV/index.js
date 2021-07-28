@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, UsersExportCSV as UsersExportCSVController } from 'ordering-components-admin'
 import { SpinnerLoader } from '../SpinnerLoader'
 import { Button } from '../../styles/Buttons'
-import ZoDownload from '@meronex/icons/zo/ZoDownload'
+import { Download as DownloadIcon } from 'react-bootstrap-icons'
 import {
   ExportContainer,
   PopoverContainer,
@@ -47,7 +47,7 @@ const UsersExportCSVUI = (props) => {
           onClick={() => setPopoverOpen(!popoverOpen)}
         >
           {t('CSV', 'CSV')}
-          <ZoDownload />
+          <DownloadIcon />
         </Button>
         {popoverOpen && (
           <PopoverContainer>
