@@ -19,25 +19,29 @@ export const UserTypeSelector = (props) => {
     {
       value: 0,
       content: <Option>{t('ADMINISTRATOR', 'Administrator')}</Option>,
+      showOnSelected: <Option padding>{t('ADMINISTRATOR', 'Administrator')}</Option>,
       disabled: !isPrimary && defaultUserType === 0
     },
     {
       value: 1,
       content: <Option>{t('CITY_MANAGER', 'City manager')}</Option>,
+      showOnSelected: <Option padding>{t('CITY_MANAGER', 'City manager')}</Option>,
       disabled: !isPrimary && defaultUserType === 1
     },
     {
       value: 2,
       content: <Option>{t('BUSINESS_OWNER', 'Business owner')}</Option>,
+      showOnSelected: <Option padding>{t('BUSINESS_OWNER', 'Business owner')}</Option>,
       disabled: !isPrimary && defaultUserType === 2
     },
     {
       value: 3,
       content: <Option>{t('USER', 'User')}</Option>,
+      showOnSelected: <Option padding>{t('USER', 'User')}</Option>,
       disabled: !isPrimary && defaultUserType === 3
     }
   ]
-  const placeholder = <Option>{t('TYPE', 'Type')}</Option>
+  const placeholder = <Option isWeight>{t('TYPE', 'Type')}</Option>
 
   const onUpdateUserType = (type) => {
     handleChangeUserType && handleChangeUserType({ id: userId, level: type })

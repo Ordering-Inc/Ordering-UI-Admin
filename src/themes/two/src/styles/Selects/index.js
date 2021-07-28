@@ -152,7 +152,7 @@ export const Select = styled.div`
 `
 
 export const Chevron = styled.div`
-  font-size: 18px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   margin-left: 5px;

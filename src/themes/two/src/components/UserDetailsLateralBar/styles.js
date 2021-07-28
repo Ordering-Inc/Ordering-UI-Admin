@@ -16,20 +16,24 @@ export const LateralBarContainer = styled.div`
   ` : css`
     right: 0;
   `}
+
+  div.order_status_filter {
+    margin-top: 30px;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    border-radius: 8px;
+  }
 `
 
 export const WrapUserDetails = styled.div`
   max-width: 500px;
   height: 100%;
-  padding: 20px;
+  padding: 35px 20px;
   position: relative;
 `
 
 export const CloseButton = styled.div`
   position: absolute;
-  top: 10px;
-  background: #E9ECEF;
-  padding: 5px;
+  top: 30px;
   cursor: pointer;
 
   ${props => props.theme?.rtl ? css`
@@ -39,6 +43,6 @@ export const CloseButton = styled.div`
   `}
 
   svg {
-    font-size: 24px;
+    font-size: 30px;
   }
 `

@@ -10,15 +10,14 @@ export const OrdersContainer = styled.div`
   }
 
   @media (min-width: 992px) {
-    max-height: calc(100vh - 290px);
+    max-height: calc(100vh - 305px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
       max-height: calc(100vh - 345px);
     `}
   }
 
   @media (min-width: 1200px) {
-    max-height: calc(100vh - 280px);
-
+    max-height: calc(100vh - 275px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
       max-height: calc(100vh - 345px);
     `}
@@ -32,8 +31,9 @@ export const Table = styled.table`
   th,
   td {
     padding: 15px;
-    border-bottom: solid 1px #E9ECEF;
+    border-bottom: solid 1px ${props => props.theme.colors.borderColor};
     box-sizing: border-box;
+    font-size: 14px;
 
     &:first-child {
       padding-left: 0px;
@@ -64,7 +64,6 @@ export const Table = styled.table`
 
     tr {
       width: 100%;
-      height: 99px;
       cursor: pointer;
     }
   }
@@ -162,11 +161,19 @@ export const DriversInfo = styled.div`
   > div {
     > div {
       border: none;
+      padding: 0px;
       > div:first-child {
         padding: 0px 10px;
         p {
           color: ${props => props.theme.colors?.headingColor};
           font-size: 14px;
+        }
+      }
+      > div {
+        > div {
+          > div {
+            padding: 0px;
+          }
         }
       }
     }
@@ -253,5 +260,5 @@ export const WrapOrderStatusSelector = styled.div`
 `
 
 export const WrapperPagination = styled.div`
-  margin-top: 10px;
+  padding: 10px 0;
 `

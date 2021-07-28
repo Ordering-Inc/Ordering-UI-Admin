@@ -8,28 +8,7 @@ export const FormActions = styled.div`
   justify-content: space-between;
   width: 100%;
   button {
-    height: 45px;
-    flex: 1;
-
-    &:last-child#submit-btn {
-      margin-left: 10px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 10px;
-      `}
-    }
-  }
-
-  @media (min-width: 769px) {
-    button {
-      &:last-child#submit-btn {
-        margin-left: 25px;
-        ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 25px;
-      `}
-      }
-    }
+    height: 42px;
   }
 `
 
@@ -41,48 +20,36 @@ export const FormControl = styled.form`
 
   input {
     box-sizing: border-box;
-    margin: 10px 0px;
     height: 43px;
     width: 100%;
-    &.internal_number,
-    &.zipcode {
-      width: 100%;
-    }
     &::placeholder{
-      color: #CBCBCB
-    }
-
-    @media (min-width: 621px) {
-      &.internal_number,
-      &.zipcode  {
-        width: 48%;
-      }
+      color: #B1BCCC;
     }
   }
 
   textarea {
     width: 100%;
-    margin: 10px 0;
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
-    border: 1px solid #BBB;
-    border-radius: 30px;
-    font-size: 16px;
+    border: 1px solid #DEE2E6;
+    border-radius: 8px;
+    font-size: 14px;
     padding: 7px 15px;
     outline: none;
+    color: ${props => props.theme.colors.headingColor};
     ::placeholder {
-      color: #DBDCDB;
+      color: #B1BCCC;
     }
 
     &:-ms-input-placeholder {
-      color: #DBDCDB;
+      color: #B1BCCC;
     }
 
     &::-ms-input-placeholder { /* Microsoft Edge */
-      color: #DBDCDB;
+      color: #B1BCCC;
     }
     &:focus {
       border-color: ${() => darken(0.07, '#CCC')};
@@ -90,7 +57,7 @@ export const FormControl = styled.form`
   }
 
   @media (min-width: 481px) {
-    padding: 10px;
+    padding: 10px 0;
   }
 `
 
@@ -113,7 +80,7 @@ export const WrapAddressInput = styled.div`
   svg {
     position: absolute;
     color: #9A9A9A;
-    top: 21px;
+    top: 11px;
     left: 10px;
     font-size: 20px;
     ${props => props.theme?.rtl && css`
@@ -135,50 +102,21 @@ export const WrapAddressInput = styled.div`
 
 export const AddressTagSection = styled.div`
   width: 100%;
-  margin: 10px 0px;
+  margin: 30px 0px;
   display: flex;
   justify-content: space-between;
-
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    img {
-      width: 22px;
-      height: 22px;
-    }
-
-    svg {
-      font-size: 20px;
-    }
-  }
-
-  button.active {
-    border: 1px solid ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primary};
-  }
 `
 
 export const WrapperMap = styled.div`
   width: 100%;
-  height: 250px;
+  height: 200px;
   margin-bottom: 20px;
   > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
-    border-radius: 15px;
+    border-radius: 8px;
   }
-`
-
-export const ShowMap = styled.p`
-  text-align: center;
-  color: #000;
-  width: 100%;
-  font-weight: 600;
-  cursor: pointer
 `
 
 export const WrapperSkeleton = styled.div`
@@ -192,8 +130,8 @@ export const WrapperSkeleton = styled.div`
 `
 
 export const Title = styled.div`
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
   color: ${props => props.theme.colors.headingColor};
   text-align: initial;
   text-transform: capitalize;
@@ -203,15 +141,63 @@ export const Title = styled.div`
 export const CloseButton = styled.span`
   position: fixed;
   cursor: pointer;
-  background: #E9ECEF;
-  padding: 5px;
-  top: 10px;
+  top: 30px;
   ${props => props.theme?.rtl ? css`
     left: 10px;
   ` : css`
     right: 10px;
   `}
   svg {
-    font-size: 24px;
+    font-size: 30px;
+  }
+`
+
+export const WrapInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &.address_notes {
+    width: 100%;
+  }
+
+  &.internal_number,
+  &.zipcode {
+    width: 100%;
+  }
+  @media (min-width: 621px) {
+    &.internal_number,
+    &.zipcode  {
+      width: 48%;
+    }
+  }
+`
+
+export const InputText = styled.label`
+  color: ${props => props.theme.colors.headingColor};
+  font-size: 14px;
+  margin: 30px 0 7px 0;
+`
+
+export const TagButton = styled.button`
+  color: ${props => props.theme.colors.disabled};
+  border-radius: 8px;
+  outline: none;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  padding: 10px 15px;
+
+  ${({ active }) => active && css`
+    background: ${props => props.theme.colors.secundaryDarkContrast};
+    color: ${props => props.theme.colors.secundaryDark};
+  `}
+
+  svg {
+    font-size: 16px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
+    `}
   }
 `

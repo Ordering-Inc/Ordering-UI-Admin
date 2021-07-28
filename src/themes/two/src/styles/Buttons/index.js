@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { darken, lighten } from 'polished'
+import { darken } from 'polished'
 
 export const Button = styled.button`
   background: #CCC;
@@ -140,11 +140,11 @@ export const Button = styled.button`
   `}
 
   ${({ color }) => color === 'lightPrimary' && css`
-    background: ${props => lighten(0.4, props.theme.colors.primary)};
+    background: #E9F2FE;
     color: ${props => props.theme.colors.primary};
-    border-color: ${props => lighten(0.4, props.theme.colors.primary)};
+    border-color: #E9F2FE;
     &:active {
-      background: ${props => lighten(0.2, props.theme.colors.primary)};
+      background: ${props => darken(0.07, '#E9F2FE')};
     }
   `}
   ${({ color }) => color === 'secundaryDark' && css`

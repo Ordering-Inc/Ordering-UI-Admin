@@ -5,9 +5,9 @@ export const ExportContainer = styled.div`
   button {
     svg {
       ${props => props.theme?.rtl ? css`
-        margin-right: 10px;
+        margin-right: 8px;
       ` : css`
-        margin-left: 10px;
+        margin-left: 8px;
       `}
     }
   }
