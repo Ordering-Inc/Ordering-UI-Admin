@@ -132,7 +132,7 @@ export const StatusBarContainer = styled.div`
 const StatusBarStyled = styled.div`
   height: 10px;
   border-radius: 10px;
-  background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
+  background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.borderColor} ${props.percentage}%)`};
 `
 
 export const StatusBar = (props) => {
@@ -157,7 +157,8 @@ export const AdvancedLogistic = styled.div`
       margin: 0px;
 
       &:first-child {
-        font-weight: 600;
+        font-weight: 500;
+        font-size: 14px;
       }
       &:not(:first-child) {
         font-size: 12px;

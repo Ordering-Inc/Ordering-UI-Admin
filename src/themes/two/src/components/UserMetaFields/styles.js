@@ -3,6 +3,16 @@ import styled, { css } from 'styled-components'
 export const WrapMetaFields = styled.div`
   padding-top: 10px;
   box-sizing: border-box;
+  input {
+    color: ${props => props.theme.colors.headingColor};
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: ${props => props.theme.colors.lightGray};
+    }
+    &:-ms-input-placeholder {
+      color: ${props => props.theme.colors.lightGray};
+    }
+  }
 `
 
 export const MetaContainer = styled.div`

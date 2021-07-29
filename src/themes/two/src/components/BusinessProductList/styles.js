@@ -49,6 +49,11 @@ export const BusinessProductListTable = styled.table`
 
   td, th {
     padding: 15px;
+    font-size: 14px;
+    &:first-child {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
   }
 
   th.more {

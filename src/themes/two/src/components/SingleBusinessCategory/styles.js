@@ -65,6 +65,9 @@ export const CategoryActionContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+  > div:first-child {
+    padding: 0 5px;
+  }
 `
 
 export const CategoryEnableWrapper = styled.div`

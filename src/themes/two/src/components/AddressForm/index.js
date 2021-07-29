@@ -534,7 +534,7 @@ const AddressFormUI = (props) => {
             >
               {!formState.loading ? (
                 isEditing || (!auth && orderState.options?.address?.address)
-                  ? t('UPDATE', 'Update')
+                  ? t('SAVE', 'SAVE')
                   : t('ADD', 'Add')
               ) : (
                 t('LOADING', 'Loading')

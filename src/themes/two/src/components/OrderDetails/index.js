@@ -260,7 +260,7 @@ const OrderDetailsUI = (props) => {
             handleOpenMessages={handleOpenMessages}
           />
           <OrderProducts>
-            <h2>{t('ORDER_DETAILS', 'Order details')}</h2>
+            <h2>{t('SUMMARY', 'Summary')}</h2>
             {order?.products?.length && order?.products.map((product) => (
               <ProductItemAccordion
                 key={product.id}
