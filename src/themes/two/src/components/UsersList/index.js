@@ -32,6 +32,7 @@ import {
 
 export const UsersList = (props) => {
   const {
+    userDetailsId,
     usersList,
     paginationDetail,
     paginationProps,
@@ -126,7 +127,7 @@ export const UsersList = (props) => {
               ))
             ) : (
               usersList?.users.map(user => (
-                <tbody key={user.id}>
+                <tbody key={user.id} className={user.id === parseInt(userDetailsId) ? 'active' : null}>
                   <tr
                     onClick={(e) => onChangeUserDetails(e, user)}
                   >

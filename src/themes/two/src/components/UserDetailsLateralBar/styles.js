@@ -32,9 +32,14 @@ export const LateralBarContainer = styled.div`
     border-spacing: 0 18px;
     td {
       border-top: 1px solid ${props => props.theme.colors.borderColor};
+      border-bottom: 1px solid ${props => props.theme.colors.borderColor};
       &:first-child {
         padding: 15px;
-        border-radius: 8px;
+        ${props => props.theme?.rtl ? css`
+          border-radius: 0 8px 8px 0;
+        ` : css`
+          border-radius: 8px 0 0 8px;
+        `}
         ${props => props.theme?.rtl ? css`
           border-right: 1px solid ${props => props.theme.colors.borderColor};
         ` : css`
@@ -42,7 +47,11 @@ export const LateralBarContainer = styled.div`
         `}
       }
       &:last-child {
-        border-radius: 8px;
+        ${props => props.theme?.rtl ? css`
+          border-radius: 8px 0 0 8px;
+        ` : css`
+          border-radius: 0 8px 8px 0;
+        `}
         ${props => props.theme?.rtl ? css`
           border-left: 1px solid ${props => props.theme.colors.borderColor};
         ` : css`

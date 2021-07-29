@@ -11,15 +11,12 @@ export const SingleCategoryContainer = styled.div`
   height: 75px;
 
   &:hover {
-    background: #E9F2FE;
-
-    input {
-      background-color: #E9F2FE;
-    }
+    background: ${props => props.theme.colors.lightPrimary};
   }
 
   ${({ active }) => active && css`
-    border: 1px solid #2C7BE5;
+    background: ${props => props.theme.colors.lightPrimary};
+    border: 1px solid ${props => props.theme.colors.primary};
     box-sizing: border-box;
     .actions-btn {
       display: block;

@@ -117,6 +117,7 @@ const BusinessessListingUI = (props) => {
           viewMethod={viewMethod}
           businessList={businessList}
           pagination={pagination}
+          detailsBusinessId={detailsBusinessId}
           loadMoreBusinesses={loadMoreBusinesses}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessAddBusiness={handleSucessAddBusiness}

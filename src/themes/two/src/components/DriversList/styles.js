@@ -14,8 +14,13 @@ export const DriverCard = styled.div`
   border-radius: 8px;
   margin-bottom: 20px;
   padding: 10px 15px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
   
   ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
     border: 1px solid ${props => props.theme.colors.primary};
   `}
 `

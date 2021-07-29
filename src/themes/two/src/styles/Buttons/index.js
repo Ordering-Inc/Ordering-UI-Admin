@@ -140,11 +140,11 @@ export const Button = styled.button`
   `}
 
   ${({ color }) => color === 'lightPrimary' && css`
-    background: #E9F2FE;
+    background: ${props => props.theme.colors.lightPrimary};
     color: ${props => props.theme.colors.primary};
-    border-color: #E9F2FE;
+    border-color: ${props => props.theme.colors.lightPrimary};
     &:active {
-      background: ${props => darken(0.07, '#E9F2FE')};
+      background: ${props => darken(0.07, props.theme.colors.lightPrimary)};
     }
   `}
   ${({ color }) => color === 'secundaryDark' && css`

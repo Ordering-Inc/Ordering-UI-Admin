@@ -31,7 +31,6 @@ export const Table = styled.table`
   th,
   td {
     padding: 15px;
-    border-bottom: solid 1px ${props => props.theme.colors.borderColor};
     box-sizing: border-box;
     font-size: 14px;
 
@@ -48,6 +47,7 @@ export const Table = styled.table`
   thead {
     tr {
       width: 100%;
+      border-bottom: solid 1px ${props => props.theme.colors.disabled};
       th {
         color: ${props => props.theme.colors?.headingColor};
         white-space: nowrap;
@@ -60,11 +60,18 @@ export const Table = styled.table`
   }
 
   tbody {
-    padding-bottom: 10px;
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+    cursor: pointer;
 
-    tr {
-      width: 100%;
-      cursor: pointer;
+    &:hover {
+      background-color: ${props => props.theme.colors.lightPrimary};
+    }
+    &.active {
+      background-color: ${props => props.theme.colors.lightPrimary};
+      td {
+        border-top: 1px solid ${props => props.theme.colors.primary};
+        border-bottom: 1px solid ${props => props.theme.colors.primary};
+      }
     }
   }
 

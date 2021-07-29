@@ -8,16 +8,25 @@ export const BusinessActionContainer = styled.div`
 `
 
 export const SingleListBusinessContainer = styled.tbody`
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
   transition: all 0.3s;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.primary};
+      border-bottom: 1px solid ${props => props.theme.colors.primary};
+    }
+  `}
   .business {
     padding-right: 20px;
   }
 
-  .action-btn {
-    display: none;
-  }
   &:hover {
     background: #E9F2FE;
     input, textarea {
@@ -116,9 +125,14 @@ export const ActionSelectorWrapper = styled.div`
   justify-content: flex-end;
   width: 100px;
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
@@ -126,9 +140,20 @@ export const ActionSelectorWrapper = styled.div`
       display: none;
     }
   }
+
+  .show {
+    button {
+      background: ${props => props.theme.colors.secundary} !important;
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
   > div {
-    border: 1px solid #E9ECEF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     > div {
       a:last-child {

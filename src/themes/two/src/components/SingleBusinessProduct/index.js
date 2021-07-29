@@ -40,7 +40,8 @@ const SingleBusinessProductUI = (props) => {
     productFormState,
     handleChangeInput,
     handlechangeImage,
-    isEditMode
+    isEditMode,
+    productDetailsId
   } = props
 
   const theme = useTheme()
@@ -167,7 +168,7 @@ const SingleBusinessProductUI = (props) => {
               </tr>
             </SingleListBusinessContainer>
           ) : (
-            <SingleListBusinessContainer ref={conatinerRef}>
+            <SingleListBusinessContainer active={productFormState?.changes.id === productDetailsId} ref={conatinerRef}>
               <tr>
                 {allowColumns?.business && (
                   <td className='business'>
@@ -263,7 +264,6 @@ const SingleBusinessProductUI = (props) => {
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
                       title={ActionIcon}
-                      className='action-btn'
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>

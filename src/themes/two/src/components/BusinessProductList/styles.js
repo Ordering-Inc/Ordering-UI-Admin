@@ -70,13 +70,13 @@ export const BusinessProductListTable = styled.table`
   }
 
   thead {
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
     tr {
       th {
         position: sticky;
         top: 0px;
         z-index: 100;
         background: #FFF;
-        border-bottom: 1px solid #B1BCCC;
       }
     }
   }

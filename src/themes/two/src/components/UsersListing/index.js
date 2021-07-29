@@ -104,6 +104,7 @@ const UsersListingUI = (props) => {
         <UsersList
           usersList={usersList}
           getUsers={getUsers}
+          userDetailsId={openUser?.id || queryId}
           paginationProps={paginationProps}
           paginationDetail={paginationDetail}
           handleChangeUserType={handleChangeUserType}

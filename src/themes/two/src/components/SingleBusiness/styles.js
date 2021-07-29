@@ -1,9 +1,19 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const SingleListBusinessContainer = styled.tbody`
+export const SingleBusinessContainer = styled.tbody`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.primary};
+      border-bottom: 1px solid ${props => props.theme.colors.primary};
+    }
+  `}
 `
 
 export const WrapperImage = styled.div`
@@ -227,12 +237,12 @@ export const WrapperBusinessActionSelector = styled.div`
 
   .show {
     button {
-      background: #F8F9FA !important;
+      background: ${props => props.theme.colors.secundary} !important;
       border-color: unset !important;
       box-shadow: none !important;
     }
     >div {
-      border: 1px solid #E9ECEF;
+      border: 1px solid ${props => props.theme.colors.borderColor};
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     }
   }

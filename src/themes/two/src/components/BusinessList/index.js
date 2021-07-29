@@ -22,7 +22,8 @@ export const BusinessList = (props) => {
     handleSucessAddBusiness,
     handleSucessUpdateBusiness,
     handleOpenBusinessDetails,
-    handleOpenAddBusiness
+    handleOpenAddBusiness,
+    detailsBusinessId
   } = props
   const [, t] = useLanguage()
 
@@ -154,6 +155,7 @@ export const BusinessList = (props) => {
                 currentBusinessess.map(business => (
                   <SingleBusiness
                     key={business.id}
+                    detailsBusinessId={detailsBusinessId}
                     viewMethod={viewMethod}
                     allowColumns={allowColumns}
                     businessId={business.id}

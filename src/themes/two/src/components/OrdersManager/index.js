@@ -138,6 +138,7 @@ const OrdersManagerUI = (props) => {
                 ordersStatusGroup={ordersStatusGroup}
                 selectedSubOrderStatus={selectedSubOrderStatus}
                 handleSelectedOrderIds={handleSelectedOrderIds}
+                orderDetailId={orderDetailId}
                 handleOpenOrderDetail={handleOpenOrderDetail}
               />
             </WrapItemView>
