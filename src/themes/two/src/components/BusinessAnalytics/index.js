@@ -16,6 +16,7 @@ import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
+import { AnalyticsMap } from '../AnalyticsMap'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
@@ -62,10 +63,9 @@ const BusinessAnalyticsUI = (props) => {
           </BusinessCalendarWrapper>
         </BusinessFilterCalendar>
       </BusinessAnalyticsHeader>
-      <AnalyticsStatusFilterBar
-        {...props}
-      />
+      <AnalyticsStatusFilterBar {...props} />
       <AnalyticsStatusSubFilter {...props} />
+      <AnalyticsMap />
       <Modal
         width='50%'
         height='80vh'
