@@ -142,7 +142,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
           borderRadius='5px'
           onClick={() => handleSave()}
         >
-          {isAddValid ? t('SAVE', 'Save') : t('UPDATE', 'Update')}
+          {isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </BasicContainer>
       <Alert
