@@ -7,6 +7,7 @@ export const BusinessAnalytics = (props) => {
   } = props
 
   const [analyticsStatus, setAnalyticsStatus] = useState('today')
+  const [analyticsSubStatus, setAnalyticsSubStatus] = useState('all')
 
   const changeAnalyticsStatus = (status) => {
     setAnalyticsStatus(status)
@@ -18,7 +19,9 @@ export const BusinessAnalytics = (props) => {
         <UIComponent
           {...props}
           selectedAnalyticsStatus={analyticsStatus}
+          selectedAnalyticsSubStatus={analyticsSubStatus}
           changeAnalyticsStatus={changeAnalyticsStatus}
+          changeAnalyticsSubStatus={setAnalyticsSubStatus}
         />
       )}
     </>

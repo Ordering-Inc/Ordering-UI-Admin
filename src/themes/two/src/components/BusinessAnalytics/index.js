@@ -15,6 +15,7 @@ import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
+import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
@@ -64,8 +65,9 @@ const BusinessAnalyticsUI = (props) => {
       <AnalyticsStatusFilterBar
         {...props}
       />
+      <AnalyticsStatusSubFilter {...props} />
       <Modal
-        width='80%'
+        width='50%'
         height='80vh'
         padding='30px'
         title={t('BUSINESSES', 'Businesses')}
