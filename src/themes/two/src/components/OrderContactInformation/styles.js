@@ -102,10 +102,6 @@ export const InfoContent = styled.div`
     margin-left: 15px;
   `}
 `
-export const NotificationIcon = styled.div`
-  color: ${props => props.theme.colors.primary};
-  font-size: 20px;
-`
 
 export const CustomerInfo = styled(BusinessInfo)``
 

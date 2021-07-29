@@ -45,7 +45,7 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const OrderDetailsContent = styled.div`
-  padding: 20px;
+  padding: 30px 20px;
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
@@ -53,7 +53,7 @@ export const OrderDetailsContent = styled.div`
 
 export const OrderDetailsExtraContent = styled.div`
   position: relative;
-  padding: 20px;
+  padding: 30px 20px;
   box-sizing: border-box;
   width: 100%;
 
@@ -62,24 +62,14 @@ export const OrderDetailsExtraContent = styled.div`
   ` : css`
     border-left: 1px solid #E9ECEF;
   `}
-
-  > button {
-    z-index: 100;
-    position: absolute;
-    top: 20px;
-    ${props => props.theme?.rtl ? css`
-      left: 20px;
-    ` : css`
-      right: 20px;
-    `}
-  }
 `
 
 export const ChatContainer = styled.div`
-  border: 1px solid ${props => props.theme.colors.secundary};
+  border: 1px solid ${props => props.theme.colors.borderColor};
   border-radius: 8px;
   margin-top: 40px;
   height: calc(100% - 40px);
+  overflow: hidden;
 `
 
 export const ButtonLink = styled.div`
@@ -176,5 +166,23 @@ export const OrderProducts = styled.div`
   h2 {
     color: ${props => props.theme.colors?.headingColor};
     font-size: 18px;
+  }
+`
+
+export const CloseButton = styled.div`
+  width: fit-content;
+  cursor: pointer;
+  z-index: 100;
+  position: absolute;
+  top: 30px;
+  ${props => props.theme?.rtl ? css`
+    left: 20px;
+  ` : css`
+    right: 20px;
+  `}
+
+  svg {
+    font-size: 28px;
+    color: ${props => props.theme.colors.headingColor};
   }
 `

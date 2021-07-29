@@ -11,7 +11,6 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { OrderDetailsHeader } from '../OrderDetailsHeader'
 import { OrderBill } from '../OrderBill'
 import { OrderContactInformation } from '../OrderContactInformation'
-import { Button } from '../../styles/Buttons'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import {
@@ -24,7 +23,8 @@ import {
   StatusBarContainer,
   StatusBar,
   AdvancedLogistic,
-  OrderProducts
+  OrderProducts,
+  CloseButton
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -39,7 +39,7 @@ const OrderDetailsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
-  const [openMessages, setOpenMessages] = useState({ customer: false, business: false, driver: false, history: false })
+  const [openMessages, setOpenMessages] = useState({ chat: false, history: false })
   const [openMetaFields, setOpenMetaFields] = useState(false)
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
@@ -124,27 +124,19 @@ const OrderDetailsUI = (props) => {
   }
 
   const handleOpenMessages = (openMessage) => {
-    if (openMessage === 'customer') {
-      setOpenMessages({ customer: true, business: false, driver: false, history: false })
+    if (openMessage === 'chat') {
+      setOpenMessages({ chat: true, history: false })
       setUnreadAlert({ ...unreadAlert, customer: false })
     }
-    if (openMessage === 'business') {
-      setOpenMessages({ customer: false, business: true, driver: false, history: false })
-      setUnreadAlert({ ...unreadAlert, business: false })
-    }
-    if (openMessage === 'driver') {
-      setOpenMessages({ customer: false, business: false, driver: true, history: false })
-      setUnreadAlert({ ...unreadAlert, driver: false })
-    }
     if (openMessage === 'history') {
-      setOpenMessages({ customer: false, business: false, driver: false, history: true })
+      setOpenMessages({ chat: false, history: true })
     }
     setOpenMetaFields(false)
     setExtraOpen(true)
   }
 
   const handleCloseMessages = () => {
-    setOpenMessages({ customer: false, business: false, driver: false, history: false })
+    setOpenMessages({ chat: false, history: false })
   }
 
   const handleOpenMetaFields = () => {
@@ -257,7 +249,6 @@ const OrderDetailsUI = (props) => {
             extraOpen={extraOpen}
             unreadAlert={unreadAlert}
             driversList={driversList}
-            handleOpenMessages={handleOpenMessages}
           />
           <OrderProducts>
             <h2>{t('SUMMARY', 'Summary')}</h2>
@@ -278,21 +269,17 @@ const OrderDetailsUI = (props) => {
         <>
           {width >= 1000 ? (
             <OrderDetailsExtraContent>
-              <Button
-                borderRadius='5px'
-                color='secundary'
+              <CloseButton
                 onClick={() => setExtraOpen(false)}
               >
                 <MdcClose />
-              </Button>
-              {(openMessages.driver || openMessages.business || openMessages.customer) && (
+              </CloseButton>
+              {(openMessages?.chat) && (
                 <ChatContainer>
                   <Messages
                     orderId={order?.id}
                     order={order}
-                    customer={openMessages.customer}
-                    business={openMessages.business}
-                    driver={openMessages.driver}
+                    isChat={openMessages?.chat}
                     history={openMessages.history}
                     handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                     onClose={() => handleCloseMessages()}
@@ -301,7 +288,7 @@ const OrderDetailsUI = (props) => {
                 </ChatContainer>
               )}
 
-              {openMessages.history && (
+              {openMessages?.history && (
                 <ChatContainer>
                   <Messages
                     orderId={order?.id}

@@ -17,12 +17,13 @@ export const OrdersSearch = styled.div`
 
   input {
     width: 250px;
-    border: 1px solid #1C202E;
+    border: 1px solid ${props => props.theme.colors.borderColor};
     border-radius: 22px;
     outline: none;
     padding: 10px 8px;
     padding-left: 40px;
     font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
 
     &::placeholder {
       color: #909BA9;

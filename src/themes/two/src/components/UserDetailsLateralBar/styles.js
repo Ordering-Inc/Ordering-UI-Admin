@@ -21,6 +21,7 @@ export const LateralBarContainer = styled.div`
     margin-top: 30px;
     border: 1px solid ${props => props.theme.colors.borderColor};
     border-radius: 8px;
+    padding: 0 10px;
   }
 
   table.orders_table {
