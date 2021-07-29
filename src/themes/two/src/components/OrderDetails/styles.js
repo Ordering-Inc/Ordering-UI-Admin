@@ -107,7 +107,7 @@ export const OrderStatus = styled.div`
   h2 {
     color: ${props => props.theme.colors?.headingColor};
     margin: 0px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   p {
@@ -120,8 +120,11 @@ export const OrderStatus = styled.div`
     min-width: 40%;
     border-color: ${props => props.theme.colors?.secundary};
     border-radius: 8px;
-    > div {
+    > div:first-child {
       background-color: ${props => props.theme.colors?.secundary};
+      p {
+        color: ${props => props.theme.colors.secundaryContrast};
+      }
     }
   }
 `

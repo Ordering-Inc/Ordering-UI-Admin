@@ -92,7 +92,7 @@ export const InfoContent = styled.div`
 
   > p {
     color: ${props => props.theme.colors?.lightGray};
-    font-size: 14px;
+    font-size: 12px;
     margin: 0px;
   }
 

@@ -10,17 +10,11 @@ export const SingleCategoryContainer = styled.div`
   cursor: pointer;
   height: 75px;
 
-  .actions-btn {
-    display: none;
-  }
   &:hover {
     background: #E9F2FE;
 
     input {
-      border: 1px solid ${props => props.theme.colors.lightGray};
-    }
-    .actions-btn {
-      display: block;
+      background-color: #E9F2FE;
     }
   }
 
@@ -56,7 +50,12 @@ export const CategoryContent = styled.div`
     border-radius: 3px;
     transition: all 0.3s;
     border: 1px solid transparent;
-    padding: 5px;
+    padding: 2px 5px;
+    color: ${props => props.theme.colors.headingColor};
+    &:focus {
+      background-color: #FFF;
+      border: 1px solid ${props => props.theme.colors.headingColor};
+    }
   }
 `
 
@@ -64,7 +63,7 @@ export const CategoryActionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 4px;
   > div:first-child {
     padding: 0 5px;
   }
@@ -96,9 +95,14 @@ export const ActionSelectorWrapper = styled.div`
     margin-left: 35px;
   `}
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
@@ -106,9 +110,20 @@ export const ActionSelectorWrapper = styled.div`
       display: none;
     }
   }
+
+  .show {
+    button {
+      background: #F8F9FA !important;
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    > div {
+      border: 1px solid #E9ECEF;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
   > div {
-    border: 1px solid #E9ECEF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     > div {
       a:last-child {
