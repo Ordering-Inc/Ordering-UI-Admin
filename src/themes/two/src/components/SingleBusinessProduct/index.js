@@ -96,6 +96,14 @@ const SingleBusinessProductUI = (props) => {
     }
   }
 
+  const handleProductClick = (e) => {
+    const isInvalid = e.target.closest('.product_info') ||
+    e.target.closest('.product_price') || e.target.closest('.product_description') ||
+    e.target.closest('.product_enable_control') || e.target.closest('.product_actions')
+    if (isInvalid) return
+    handleOpenProductDetails(product)
+  }
+
   useEffect(() => {
     if (productFormState?.result?.error) {
       setAlertState({
@@ -168,11 +176,15 @@ const SingleBusinessProductUI = (props) => {
               </tr>
             </SingleListBusinessContainer>
           ) : (
-            <SingleListBusinessContainer active={productFormState?.changes.id === productDetailsId} ref={conatinerRef}>
+            <SingleListBusinessContainer
+              ref={conatinerRef}
+              active={product.id === productDetailsId}
+              onClick={(e) => handleProductClick(e)}
+            >
               <tr>
                 {allowColumns?.business && (
                   <td className='business'>
-                    <BusinessGeneralInfo>
+                    <BusinessGeneralInfo className='product_info'>
                       <ProductTypeImage
                         onClick={() => handleClickImage()}
                         disabled={productFormState?.loading}
@@ -223,6 +235,7 @@ const SingleBusinessProductUI = (props) => {
                         <input
                           type='text'
                           name='price'
+                          className='product_price'
                           value={productFormState?.changes?.price || ''}
                           onChange={handleChangeInput}
                           autoComplete='off'
@@ -240,14 +253,14 @@ const SingleBusinessProductUI = (props) => {
                           value={productFormState?.changes?.description || ''}
                           onChange={handleChangeInput}
                           autoComplete='off'
-                          className='description'
+                          className='product_description'
                         />
                       </InfoBlock>
                     }
                   </td>
                 )}
                 <td>
-                  <BusinessEnableWrapper className='business_enable_control'>
+                  <BusinessEnableWrapper className='product_enable_control'>
                     {
                       product?.enabled
                         ? <span>{t('ENABLE', 'Enable')}</span>
@@ -262,6 +275,7 @@ const SingleBusinessProductUI = (props) => {
                 <td className='actions'>
                   <ActionSelectorWrapper>
                     <DropdownButton
+                      className='product_actions'
                       menuAlign={theme?.rtl ? 'left' : 'right'}
                       title={ActionIcon}
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}

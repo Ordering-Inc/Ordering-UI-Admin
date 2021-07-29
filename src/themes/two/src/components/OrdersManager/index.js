@@ -50,6 +50,8 @@ const OrdersManagerUI = (props) => {
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
+    setDetailsOrder(null)
+    setOrderDetailId(null)
     if (!isSelectedOrders) {
       onOrderRedirect()
     } else {

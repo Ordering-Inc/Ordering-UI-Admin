@@ -165,7 +165,7 @@ export const OrdersTable = (props) => {
   }
 
   const handleClickOrder = (order, e) => {
-    const inValid = !isSelectedOrders && (e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'))
+    const inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'))
     if (inValid) return
     handleOpenOrderDetail(order)
   }
@@ -349,6 +349,7 @@ export const OrdersTable = (props) => {
                           <CheckBox
                             isChecked={selectedOrderIds.includes(order?.id)}
                             onClick={() => handleSelectedOrderIds(order.id)}
+                            className='orderCheckBox'
                           >
                             {selectedOrderIds.includes(order?.id) ? (
                               <RiCheckboxFill />

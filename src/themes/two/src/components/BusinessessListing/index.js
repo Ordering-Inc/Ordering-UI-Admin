@@ -44,6 +44,8 @@ const BusinessessListingUI = (props) => {
 
   const handleBackRedirect = () => {
     setOpenBusinessDetails(false)
+    setDetailsBusiness(null)
+    setDetailsBusinessId(null)
     onBusinessRedirect()
   }
 

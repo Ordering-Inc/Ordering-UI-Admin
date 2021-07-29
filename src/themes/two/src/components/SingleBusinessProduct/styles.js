@@ -91,7 +91,7 @@ export const InfoBlock = styled.div`
     transition: all 0.3s;
     border-radius: 3px;
     padding: 5px;
-    &.description {
+    &.product_description {
       font-size: 12px;
       color: ${props => props.theme.colors.lightGray};
       resize: none;

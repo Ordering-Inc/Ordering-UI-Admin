@@ -46,6 +46,8 @@ const UsersListingUI = (props) => {
 
   const handleBackRedirect = () => {
     setIsOpenUserDetails(false)
+    setOpenUser(null)
+    setQueryId(null)
     onUserRedirect()
   }
 

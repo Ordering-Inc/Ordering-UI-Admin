@@ -128,15 +128,15 @@ export const OrderNumberContainer = styled.div`
 `
 
 export const CheckBox = styled.span`
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
   svg {
     font-size: 24px;
     color: #B1BCCC;
 
-    ${props => props.theme?.rtl ? css`
-      margin-left: 10px;
-    ` : css`
-      margin-right: 10px;
-    `}
     ${({ isChecked }) => isChecked && css`
       color: ${props => props.theme.colors?.primary};
     `}
