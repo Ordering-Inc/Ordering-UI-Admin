@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 export const BusinessAnalytics = (props) => {
@@ -6,11 +6,19 @@ export const BusinessAnalytics = (props) => {
     UIComponent
   } = props
 
+  const [analyticsStatus, setAnalyticsStatus] = useState('today')
+
+  const changeAnalyticsStatus = (status) => {
+    setAnalyticsStatus(status)
+  }
+
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
+          selectedAnalyticsStatus={analyticsStatus}
+          changeAnalyticsStatus={changeAnalyticsStatus}
         />
       )}
     </>

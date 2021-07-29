@@ -1,19 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { BusinessAnalytics as BusinessAnalyticsController } from './naked'
 import { useLanguage } from 'ordering-components-admin'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
   BusinessFilterCalendar,
-  BusinessFilterWrapper
+  BusinessFilterWrapper,
+  BusinessCalendarWrapper,
+  CalendarContainer
 } from './styles'
+import FiCalendar from '@meronex/icons/fi/FiCalendar'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
+import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
+import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
   const [businessFilterModal, setBusinessFilterModal] = useState(false)
+  const [isShowCalendar, setIsShowCalendar] = useState(false)
+  const calendarRef = useRef()
+
+  const handleClickOutside = (e) => {
+    console.log(isShowCalendar)
+    if (!isShowCalendar) return
+    const outsideCalendar = !calendarRef.current?.contains(e.target)
+    if (outsideCalendar) {
+      setIsShowCalendar(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => window.removeEventListener('mouseup', handleClickOutside)
+  }, [isShowCalendar])
 
   return (
     <BusinessAnalyticsContainer>
@@ -25,9 +46,24 @@ const BusinessAnalyticsUI = (props) => {
               {t('BUSINESS', 'Business')} (All)
             </Button>
           </BusinessFilterWrapper>
+          <BusinessCalendarWrapper>
+            <Button onClick={() => setIsShowCalendar(true)}>
+              <FiCalendar />
+              {t('BUSINESS', 'Business')}
+            </Button>
+            {
+              isShowCalendar && (
+                <CalendarContainer ref={calendarRef}>
+                  <AnalyticsCalendar />
+                </CalendarContainer>
+              )
+            }
+          </BusinessCalendarWrapper>
         </BusinessFilterCalendar>
       </BusinessAnalyticsHeader>
-
+      <AnalyticsStatusFilterBar
+        {...props}
+      />
       <Modal
         width='80%'
         height='80vh'

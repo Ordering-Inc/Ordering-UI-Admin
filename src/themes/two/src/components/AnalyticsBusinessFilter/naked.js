@@ -45,12 +45,13 @@ export const AnalyticsBusinessFilter = (props) => {
           businesses: result,
           pagination
         })
+      } else {
+        setBusinessList({
+          ...businessList,
+          loading: false,
+          error: result
+        })
       }
-      setBusinessList({
-        ...businessList,
-        loading: false,
-        error: result
-      })
     } catch (error) {
       setBusinessList({
         ...businessList,

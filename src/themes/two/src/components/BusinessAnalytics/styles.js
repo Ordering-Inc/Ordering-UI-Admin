@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BusinessAnalyticsContainer = styled.div`
   width: 100%;
@@ -30,7 +30,7 @@ export const BusinessFilterCalendar = styled.div`
 `
 
 export const BusinessFilterWrapper = styled.div`
-  Button {
+  button {
     background: #F8F9FA;
     border-radius: 7.6px;
     padding: 10px 16px;
@@ -38,4 +38,30 @@ export const BusinessFilterWrapper = styled.div`
     color: #748194;
     border: none;
   }
+`
+
+export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
+  position: relative;
+  margin-left: 25px;
+  ${props => props.theme.rtl && css`
+    margin-right: 25px;
+    margin-left: 0;
+  `}
+
+  button {
+    svg {
+      font-size: 16px;
+      margin-right: 12px;
+      ${props => props.theme.rtl && css`
+        margin-right: 12px;
+        margin-left: 0;
+      `}
+    }
+  }
+`
+export const CalendarContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
 `

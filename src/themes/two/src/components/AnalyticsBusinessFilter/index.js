@@ -4,16 +4,22 @@ import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './
 import {
   AnalyticsBusinessFilterContainer,
   BusinessFilterOption,
-  BusinessName
+  BusinessName,
+  FilterBtnWrapper
 } from './styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import { Button } from '../../styles/Buttons'
+import { useLanguage } from 'ordering-components-admin'
 
 const AnalyticsBusinessFilterUI = (props) => {
   const {
     businessList,
-    businessIds
+    businessIds,
+    handleChangeBusinessId
   } = props
+
+  const [, t] = useLanguage()
 
   const isCheckEnableSate = (id) => {
     const found = businessIds?.find(businessId => businessId === id)
@@ -39,6 +45,7 @@ const AnalyticsBusinessFilterUI = (props) => {
           {businessList?.businesses.map((business, i) => (
             <BusinessFilterOption
               key={i}
+              onClick={() => handleChangeBusinessId(business?.id)}
             >
               {isCheckEnableSate(business.id) ? (
                 <RiCheckboxFill className='fill' />
@@ -50,6 +57,15 @@ const AnalyticsBusinessFilterUI = (props) => {
           ))}
         </div>
       )}
+      <FilterBtnWrapper>
+        <Button
+          borderRadius='7.6px'
+          color='primary'
+          disabled={businessList.loading}
+        >
+          {t('FILTER', 'Filter')}
+        </Button>
+      </FilterBtnWrapper>
     </AnalyticsBusinessFilterContainer>
   )
 }
