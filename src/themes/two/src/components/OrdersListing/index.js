@@ -29,7 +29,9 @@ export const OrdersListing = (props) => {
     loadMoreOrders,
     ordersStatusGroup,
     groupStatus,
-    orderDetailId
+    orderDetailId,
+
+    isMessagesView
   } = props
 
   const theme = useTheme()
@@ -42,7 +44,7 @@ export const OrdersListing = (props) => {
 
   return (
     <>
-      {ordersStatusGroup === groupStatus && (
+      {((ordersStatusGroup === groupStatus) || isMessagesView) && (
         <>
           {!orderList.loading && orderList.orders.length === 0 ? (
             <WrapperNoneOrders

@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
-  height: 100%;
+  height: calc(100% - 200px);
   padding: 0 12px 15px 12px;
   box-sizing: border-box;
   overflow-x: hidden;
