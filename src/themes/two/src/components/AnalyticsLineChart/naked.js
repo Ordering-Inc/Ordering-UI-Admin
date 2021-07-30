@@ -4,7 +4,8 @@ import { useSession, useApi } from 'ordering-components-admin'
 
 export const AnalyticsLineChart = (props) => {
   const {
-    UIComponent
+    UIComponent,
+    isOrders
   } = props
   const [{ token, loading }] = useSession()
   const [ordering] = useApi()
@@ -25,8 +26,8 @@ export const AnalyticsLineChart = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-
-      const functionFetch = `${ordering.root}/reports/orders?lapse=today`
+      const rootUrl = isOrders ? `${ordering.root}/reports/orders` : `${ordering.root}/reports/sales`
+      const functionFetch = `${rootUrl}?lapse=yesterday&app_id=ordering-react`
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -73,6 +74,10 @@ AnalyticsLineChart.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
+  /**
+   * Flag to check orders
+   */
+  isOrders: PropTypes.bool,
   /**
    * Components types before Business Controller
    * Array of type components, the parent props will pass to these components

@@ -70,6 +70,9 @@ const BusinessAnalyticsUI = (props) => {
       <AnalyticsMap />
       <AnalyticsChartWrapper className='row'>
         <div className='col-md-6'>
+          <AnalyticsLineChart isOrders />
+        </div>
+        <div className='col-md-6'>
           <AnalyticsLineChart />
         </div>
       </AnalyticsChartWrapper>
