@@ -123,6 +123,12 @@ Object.defineProperty(exports, "Confirm", {
     return _Confirm.Confirm;
   }
 });
+Object.defineProperty(exports, "Alert", {
+  enumerable: true,
+  get: function get() {
+    return _Confirm.Alert;
+  }
+});
 Object.defineProperty(exports, "DateTypeSelector", {
   enumerable: true,
   get: function get() {
