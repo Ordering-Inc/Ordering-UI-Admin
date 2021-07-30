@@ -10,6 +10,7 @@ import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
 import { AnalyticsMap } from '../AnalyticsMap'
 import { AnalyticsLineChart } from '../AnalyticsLineChart'
+import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
@@ -74,6 +75,12 @@ const BusinessAnalyticsUI = (props) => {
         </div>
         <div className='col-md-6'>
           <AnalyticsLineChart />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsProductCategories isProducts />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsProductCategories />
         </div>
       </AnalyticsChartWrapper>
       <Modal
