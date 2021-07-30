@@ -18,34 +18,34 @@ export const OrderBill = (props) => {
         <tbody>
           <tr>
             <td>{t('SUBTOTAL', 'Subtotal')}</td>
-            <td>{parsePrice(order?.summary?.subtotal)}</td>
+            <td>{parsePrice(order?.summary?.subtotal, { currencyPosition: 'left' })}</td>
           </tr>
           {order?.summary?.discount > 0 && (
             <tr>
               <td>{t('DISCOUNT', 'Discount')}</td>
-              <td>-{parsePrice(order?.summary?.discount)}</td>
+              <td>-{parsePrice(order?.summary?.discount, { currencyPosition: 'left' })}</td>
             </tr>
           )}
           {order?.summary?.tax > 0 && (
             <tr>
               <td>{t('TAX', 'Tax')} ({parseNumber(order?.tax)}%)</td>
-              <td>{parsePrice(order?.summary?.tax)}</td>
+              <td>{parsePrice(order?.summary?.tax, { currencyPosition: 'left' })}</td>
             </tr>
           )}
           {(order?.summary?.delivery_price > 0) && (
             <tr>
               <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-              <td>{parsePrice(order?.summary?.delivery_price)}</td>
+              <td>{parsePrice(order?.summary?.delivery_price, { currencyPosition: 'left' })}</td>
             </tr>
           )}
           <tr>
             <td>{t('DRIVER_TIP', 'Driver tip')}</td>
-            <td>{parsePrice(order?.summary?.driver_tip)}</td>
+            <td>{parsePrice(order?.summary?.driver_tip, { currencyPosition: 'left' })}</td>
           </tr>
           {order?.summary?.service_fee > 0 && (
             <tr>
               <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-              <td>{parsePrice(order?.summary?.service_fee)}</td>
+              <td>{parsePrice(order?.summary?.service_fee, { currencyPosition: 'left' })}</td>
             </tr>
           )}
         </tbody>
@@ -54,7 +54,7 @@ export const OrderBill = (props) => {
         <tbody>
           <tr>
             <td>{t('TOTAL', 'Total')}</td>
-            <td>{parsePrice(order?.summary?.total)}</td>
+            <td>{parsePrice(order?.summary?.total, { currencyPosition: 'left' })}</td>
           </tr>
         </tbody>
       </table>

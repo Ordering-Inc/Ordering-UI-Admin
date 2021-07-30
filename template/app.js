@@ -29,6 +29,7 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
+import { Toast } from '../src/themes/two/src/components/Toast'
 
 export const App = () => {
   const [{ auth, loading }] = useSession()
@@ -163,6 +164,7 @@ export const App = () => {
                   </Switch>
                 </ScrollToTop>
               )}
+              <Toast />
             </Layout>
           </>
         )

@@ -149,6 +149,9 @@ export const BusinessConfigItem = styled.div`
   justify-content: space-between;
   color: ${props => props.theme.colors.lightGray};
   border-bottom: 1px solid #E9ECEF;
+  span {
+    font-size: 14px;
+  }
 
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.headingColor};

@@ -96,6 +96,12 @@ export const ProductHeader = styled.div`
   justify-content: space-between;
   padding: 0 10px;
 
+  ${props => props.theme?.rtl ? css`
+    margin-right: 20px;
+  ` : css`
+    margin-left: 20px;
+  `}
+
   h1 {
     font-weight: 600;
     font-size: 14px;

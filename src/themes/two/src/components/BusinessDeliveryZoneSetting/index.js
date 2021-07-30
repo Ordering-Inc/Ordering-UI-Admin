@@ -24,7 +24,8 @@ export const BusinessDeliveryZoneSetting = (props) => {
     handleChangeZoneData,
     handleUpdateBusinessDeliveryZone,
     handleAddBusinessDeliveryZone,
-    isAddValid
+    isAddValid,
+    loading
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -95,6 +96,7 @@ export const BusinessDeliveryZoneSetting = (props) => {
           handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
           handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
           isAddValid={isAddValid}
+          loading={loading}
         />
       )}
     </Container>

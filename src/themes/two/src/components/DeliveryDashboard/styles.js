@@ -19,6 +19,7 @@ export const FilterContainer = styled.div`
   position: sticky;
   top: 0px;
   background: #FFF;
+  padding: 0 12px;
   z-index: 100;
 `
 

@@ -63,50 +63,6 @@ export const SidebarMenu = (props) => {
     }
   ]
 
-  const storesSubMenus = [
-    {
-      id: 1,
-      title: t('STORES_LIST', 'Stores list'),
-      pageName: 'businesses',
-      url: '/store'
-    },
-    {
-      id: 2,
-      title: t('DELIVERY_ZONES', 'Delivery zones'),
-      pageName: 'delivery_zones'
-    },
-    {
-      id: 3,
-      title: t('COUPONS', 'Coupons'),
-      pageName: 'coupons'
-    },
-    {
-      id: 4,
-      title: t('DISCOUNTS', 'Discounts'),
-      pageName: 'discounts'
-    },
-    {
-      id: 5,
-      title: t('BUSINESS_SCHEDULE', 'Business schedule'),
-      pageName: 'business_schedule'
-    },
-    {
-      id: 6,
-      title: t('TAXES', 'Taxes'),
-      pageName: 'taxes'
-    },
-    {
-      id: 7,
-      title: t('PAYMENT_METHODS', 'Payment methods'),
-      pageName: 'payment_methods'
-    },
-    {
-      id: 8,
-      title: t('PERSONALIZATION', 'Personalization'),
-      pageName: 'personalization'
-    }
-  ]
-
   const settingsSubMenus = [
     {
       id: 1,
@@ -246,6 +202,8 @@ export const SidebarMenu = (props) => {
                 <MenuContainer>
                   <ContextAwareToggle
                     eventKey='3'
+                    page='businesses'
+                    handleGoToPage={handleGoToPage}
                     active={
                       location.pathname === '/businesses' ||
                       location.pathname.includes('/store/')
@@ -254,19 +212,6 @@ export const SidebarMenu = (props) => {
                     <ShopIcon />
                     {!isCollapse && <span className='mx-2'>{t('STORES', 'Stores')}</span>}
                   </ContextAwareToggle>
-                  <Accordion.Collapse eventKey='3'>
-                    <MenuContent>
-                      {storesSubMenus.map(item => (
-                        <SubMenu
-                          key={item.id}
-                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                          onClick={() => handleGoToPage({ page: item.pageName })}
-                        >
-                          {item.title}
-                        </SubMenu>
-                      ))}
-                    </MenuContent>
-                  </Accordion.Collapse>
                 </MenuContainer>
 
                 <MenuContainer>

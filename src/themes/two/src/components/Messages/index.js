@@ -9,12 +9,10 @@ import {
   WrapperContainer,
   HeaderProfile,
   WrapperHeader,
-  Image,
+  ImageContainer,
   Chat,
   BubbleCustomer,
   MessageCustomer,
-  MyName,
-  PartnerName,
   MessageBusiness,
   BubbleBusines,
   SkeletonBubbleCustomer,
@@ -29,7 +27,7 @@ import {
   BubbleConsole,
   WrapperDeleteImage,
   WrapperSendMessageButton,
-  HeaderOnline,
+  OrderNumber,
   WrapperHitoryHeader,
   TabItem,
   SkeletonHitory,
@@ -38,10 +36,14 @@ import {
   HeaderInfo,
   SearchAndDetailControlContainer,
   MessagesSearch,
-  OrderDetailIconButton
+  OrderDetailIconButton,
+  ChatHeader,
+  ChatContactInfoContainer,
+  InfoBlock,
+  SendToContainer
 } from './styles'
 import { Image as ImageWithFallback } from '../../../../../components/Image'
-import { Input } from '../../../../../styles/Inputs'
+import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import IosSend from '@meronex/icons/ios/IosSend'
@@ -53,6 +55,7 @@ import { Logistics } from '../Logistics'
 import { LogisticInformation } from '../LogisticInformation'
 export const MessagesUI = (props) => {
   const {
+    isChat,
     order,
     messages,
     handleSend,
@@ -61,12 +64,12 @@ export const MessagesUI = (props) => {
     sendMessage,
     setImage,
     setMessage,
+    canRead,
     setCanRead,
     history,
     messageDashboardView,
     handleMessageOrderDetail,
-    handleReadMessages,
-    handleSetMessageType
+    handleReadMessages
   } = props
 
   const [, t] = useLanguage()
@@ -77,15 +80,10 @@ export const MessagesUI = (props) => {
   const buttonRef = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [messageLevel, setMessageLevel] = useState(null)
   const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
-  const [driverNoneCase, setDriverNoneCase] = useState(false)
   const [load, setLoad] = useState(0)
-  const [business, setBusiness] = useState(props.business)
-  const [customer, setCustomer] = useState(props.customer)
-  const [driver, setDriver] = useState(props.driver)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -132,7 +130,7 @@ export const MessagesUI = (props) => {
       const chat = document.getElementById('chat')
       chat.scrollTop = chat.scrollHeight
     }, 10)
-  }, [customer, business, driver])
+  }, [isChat])
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value)
@@ -206,19 +204,6 @@ export const MessagesUI = (props) => {
     }
   }
 
-  const getLevel = (level) => {
-    switch (level) {
-      case 0:
-        return 'admin'
-      case 2:
-        return 'business'
-      case 4:
-        return 'driver'
-      case 3:
-        return 'customer'
-    }
-  }
-
   const clearInputs = () => {
     const input = document.getElementById('message')
     if (input) {
@@ -246,6 +231,15 @@ export const MessagesUI = (props) => {
   }
 
   useEffect(() => {
+    if (!isChat) return
+    if (order?.driver) {
+      setCanRead({ administrator: true, business: true, customer: true, driver: true })
+    } else {
+      setCanRead({ administrator: true, business: true, customer: true, driver: false })
+    }
+  }, [isChat, order])
+
+  useEffect(() => {
     if (messages.loading) return
     const _filteredMessages = messages.messages.filter(message => {
       if (message.type === 2) {
@@ -256,78 +250,6 @@ export const MessagesUI = (props) => {
     setFilteredMessages(_filteredMessages)
   }, [messages, messageSearchValue])
 
-  useEffect(() => {
-    if (customer) {
-      setMessageLevel(3)
-      setCanRead({ business: false, administrator: true, driver: false, customer: true })
-    }
-    if (business || driverNoneCase) {
-      setMessageLevel(2)
-      setCanRead({ business: true, administrator: true, driver: false, customer: false })
-    }
-    if (driver && !driverNoneCase) {
-      setMessageLevel(4)
-      setCanRead({ business: false, administrator: true, driver: true, customer: false })
-    }
-  }, [customer, business, driver, driverNoneCase])
-
-  useEffect(() => {
-    if (driver && order?.driver_id === null) {
-      setDriverNoneCase(true)
-    } else {
-      setDriverNoneCase(false)
-    }
-  }, [order?.driver_id, driver])
-
-  useEffect(() => {
-    if (props.business) {
-      setBusiness(true)
-      setCustomer(false)
-      setDriver(false)
-    }
-    if (props.customer) {
-      setBusiness(false)
-      setCustomer(true)
-      setDriver(false)
-    }
-    if (props.driver) {
-      setBusiness(false)
-      setCustomer(false)
-      setDriver(true)
-    }
-  }, [props.business, props.customer, props.driver])
-
-  useEffect(() => {
-    if (messages.loading || (props.business || props.customer || props.driver || history)) return
-    const _messages = messages.messages.filter(_message => (_message.type !== 1 && _message.type !== 0 && _message?.author?.level !== 0))
-    if (_messages.length > 0) {
-      const level = _messages[_messages.length - 1].author?.level
-      if (level === 2) {
-        setBusiness(true)
-        setCustomer(false)
-        setDriver(false)
-        handleSetMessageType('business')
-      }
-      if (level === 3) {
-        setBusiness(false)
-        setCustomer(true)
-        setDriver(false)
-        handleSetMessageType('customer')
-      }
-      if (level === 4) {
-        setBusiness(false)
-        setCustomer(false)
-        setDriver(true)
-        handleSetMessageType('driver')
-      }
-    } else {
-      setBusiness(true)
-      setCustomer(false)
-      setDriver(false)
-      handleSetMessageType('business')
-    }
-  }, [messages.loading])
-
   return (
     <MessagesContainer>
       <WrapperContainer>
@@ -337,51 +259,28 @@ export const MessagesUI = (props) => {
             historyView={history}
           >
             <HeaderInfo>
-              {customer && (
-                <HeaderOnline>
-                  <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                  <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
-                </HeaderOnline>
-              )}
-              {(business || driverNoneCase) && (
-                <HeaderOnline>
-                  <h1>{order.business?.name}</h1>
-                  <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
-                </HeaderOnline>
-              )}
-              {driver && !driverNoneCase && (
-                <HeaderOnline>
-                  <h1>{order.driver?.name}</h1>
-                  <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
-                </HeaderOnline>
-              )}
-              {!history && (
-                <Image>
-                  {
-                    customer && (
-                      <ImageWithFallback
-                        src={order.customer?.photo}
-                        fallback={<FaUserAlt />}
-                      />
-                    )
-                  }
-                  {
-                    (business || driverNoneCase) && (
-                      <ImageWithFallback
-                        src={order.business?.logo}
-                        fallback={<BisBusiness />}
-                      />
-                    )
-                  }
-                  {
-                    driver && !driverNoneCase && (
+              {isChat && (
+                <ChatHeader>
+                  <OrderNumber>
+                    {t('ORDER_NO', 'Order No')}. {order.id}
+                  </OrderNumber>
+                  <ImageContainer>
+                    <ImageWithFallback
+                      src={order.business?.logo}
+                      fallback={<BisBusiness />}
+                    />
+                    <ImageWithFallback
+                      src={order.customer?.photo}
+                      fallback={<FaUserAlt />}
+                    />
+                    {order?.driver && (
                       <ImageWithFallback
                         src={order.driver?.photo}
                         fallback={<RiUser2Fill />}
                       />
-                    )
-                  }
-                </Image>
+                    )}
+                  </ImageContainer>
+                </ChatHeader>
               )}
               {history && (
                 <WrapperHitoryHeader>
@@ -531,7 +430,7 @@ export const MessagesUI = (props) => {
                         )}
                       </>
                     )}
-                    {!history && (message?.author?.level === 0 || message?.author?.level === 2 || message?.author?.level === messageLevel) && (
+                    {isChat && (
                       <>
                         {message.type === 1 && message.change?.attribute !== 'comment' && (
                           <MessageConsole key={message.id}>
@@ -574,157 +473,140 @@ export const MessagesUI = (props) => {
                         )}
                         {message.type === 2 && user.id === message.author_id && (
                           <MessageCustomer>
-                            {customer && message.can_see.includes(3) && (
-                              <>
-                                <BubbleCustomer>
-                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
-                                  {message.comment}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleCustomer>
-                              </>
-                            )}
-                            {(business || driverNoneCase) && message.can_see.includes(2) && (
-                              <>
-                                <BubbleCustomer>
-                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
-                                  {message.comment}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleCustomer>
-                              </>
-                            )}
-                            {driver && !driverNoneCase && message.can_see.includes(4) && (
-                              <>
-                                <BubbleCustomer>
-                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
-                                  {message.comment}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleCustomer>
-                              </>
-                            )}
-
+                            <BubbleCustomer>
+                              {message.comment}
+                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                            </BubbleCustomer>
+                            <SendToContainer>
+                              <p>{t('SEND_TO', 'Send to')}:</p>
+                              <ImageContainer isCircle>
+                                {message.can_see.includes(2) && (
+                                  <ImageWithFallback
+                                    src={order.business?.logo}
+                                    fallback={<BisBusiness />}
+                                  />
+                                )}
+                                {message.can_see.includes(3) && (
+                                  <ImageWithFallback
+                                    src={order.customer?.photo}
+                                    fallback={<FaUserAlt />}
+                                  />
+                                )}
+                                {message.can_see.includes(4) && (
+                                  <>
+                                    {order?.driver && (
+                                      <ImageWithFallback
+                                        src={order.driver?.photo}
+                                        fallback={<RiUser2Fill />}
+                                      />
+                                    )}
+                                  </>
+                                )}
+                              </ImageContainer>
+                            </SendToContainer>
                           </MessageCustomer>
                         )}
                         {message.type === 3 && user.id === message.author_id && (
                           <MessageCustomer>
-                            {customer && message.can_see.includes(3) && (
-                              <>
-                                <BubbleCustomer name='image'>
-                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
-                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
-                                  {message.comment && (
-                                    <>
-                                      {message.comment}
-                                    </>
-                                  )}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleCustomer>
-                              </>
-                            )}
-                            {(business || driverNoneCase) && message.can_see.includes(2) && (
-                              <>
-                                <BubbleCustomer name='image'>
-                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
-                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
-                                  {message.comment && (
-                                    <>
-                                      {message.comment}
-                                    </>
-                                  )}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleCustomer>
-                              </>
-                            )}
-                            {driver && !driverNoneCase && message.can_see.includes(4) && (
-                              <>
-                                <BubbleCustomer name='image'>
-                                  <strong><MyName>{message?.author?.name} ({getLevel(message?.author?.level)})</MyName></strong>
-                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
-                                  {message.comment && (
-                                    <>
-                                      {message.comment}
-                                    </>
-                                  )}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleCustomer>
-                              </>
-                            )}
+                            <BubbleCustomer name='image'>
+                              <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                              {message.comment && (
+                                <>
+                                  {message.comment}
+                                </>
+                              )}
+                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                            </BubbleCustomer>
+                            <SendToContainer>
+                              <p>{t('SEND_TO', 'Send to')}:</p>
+                              <ImageContainer isCircle>
+                                {message.can_see.includes(2) && (
+                                  <ImageWithFallback
+                                    src={order.business?.logo}
+                                    fallback={<BisBusiness />}
+                                  />
+                                )}
+                                {message.can_see.includes(3) && (
+                                  <ImageWithFallback
+                                    src={order.customer?.photo}
+                                    fallback={<FaUserAlt />}
+                                  />
+                                )}
+                                {message.can_see.includes(4) && (
+                                  <>
+                                    {order?.driver && (
+                                      <ImageWithFallback
+                                        src={order.driver?.photo}
+                                        fallback={<RiUser2Fill />}
+                                      />
+                                    )}
+                                  </>
+                                )}
+                              </ImageContainer>
+                            </SendToContainer>
                           </MessageCustomer>
                         )}
                         {message.type === 2 && user.id !== message.author_id && (
                           <MessageBusiness>
-                            {customer && message.can_see.includes(3) && (
-                              <>
-                                <BubbleBusines>
-                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
-                                  {message.comment}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleBusines>
-                              </>
-                            )}
-                            {(business || driverNoneCase) && message.can_see.includes(2) && (
-                              <>
-                                <BubbleBusines>
-                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
-                                  {message.comment}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleBusines>
-                              </>
-                            )}
-                            {driver && !driverNoneCase && message.can_see.includes(4) && (
-                              <>
-                                <BubbleBusines>
-                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
-                                  {message.comment}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleBusines>
-                              </>
-                            )}
+                            <BubbleBusines>
+                              {message.comment}
+                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                            </BubbleBusines>
+                            <SendToContainer isReceived>
+                              <p>{t('SEND_TO', 'Send to')}:</p>
+                              <ImageContainer isCircle isReceived>
+                                {message.can_see.includes(2) && (
+                                  <ImageWithFallback
+                                    src={order.business?.logo}
+                                    fallback={<BisBusiness />}
+                                  />
+                                )}
+                                {message.can_see.includes(4) && (
+                                  <>
+                                    {order?.driver && (
+                                      <ImageWithFallback
+                                        src={order.driver?.photo}
+                                        fallback={<RiUser2Fill />}
+                                      />
+                                    )}
+                                  </>
+                                )}
+                              </ImageContainer>
+                            </SendToContainer>
                           </MessageBusiness>
                         )}
                         {message.type === 3 && user.id !== message.author_id && (
                           <MessageBusiness>
-                            {customer && message.can_see.includes(3) && (
-                              <>
-                                <BubbleBusines name='image'>
-                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
-                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
-                                  {message.comment && (
-                                    <>
-                                      {message.comment}
-                                    </>
-                                  )}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleBusines>
-                              </>
-                            )}
-                            {(business || driverNoneCase) && message.can_see.includes(2) && (
-                              <>
-                                <BubbleBusines name='image'>
-                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
-                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
-                                  {message.comment && (
-                                    <>
-                                      {message.comment}
-                                    </>
-                                  )}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleBusines>
-                              </>
-                            )}
-                            {driver && !driverNoneCase && message.can_see.includes(4) && (
-                              <>
-                                <BubbleBusines name='image'>
-                                  <strong><PartnerName>{message?.author?.name} ({getLevel(message?.author?.level)})</PartnerName></strong>
-                                  <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
-                                  {message.comment && (
-                                    <>
-                                      {message.comment}
-                                    </>
-                                  )}
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </BubbleBusines>
-                              </>
-                            )}
+                            <BubbleBusines name='image'>
+                              <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
+                              {message.comment && (
+                                <>
+                                  {message.comment}
+                                </>
+                              )}
+                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                            </BubbleBusines>
+                            <SendToContainer isReceived>
+                              <p>{t('SEND_TO', 'Send to')}:</p>
+                              <ImageContainer isCircle isReceived>
+                                {message.can_see.includes(2) && (
+                                  <ImageWithFallback
+                                    src={order.business?.logo}
+                                    fallback={<BisBusiness />}
+                                  />
+                                )}
+                                {message.can_see.includes(4) && (
+                                  <>
+                                    {order?.driver && (
+                                      <ImageWithFallback
+                                        src={order.driver?.photo}
+                                        fallback={<RiUser2Fill />}
+                                      />
+                                    )}
+                                  </>
+                                )}
+                              </ImageContainer>
+                            </SendToContainer>
                           </MessageBusiness>
                         )}
                       </>
@@ -738,7 +620,50 @@ export const MessagesUI = (props) => {
 
         {!history && (
           <SendForm>
-            <Send onSubmit={handleSubmit(onSubmit)} noValidate messageDashboardView={messageDashboardView}>
+            <ImageContainer>
+              <ChatContactInfoContainer
+                disabled={!canRead?.business}
+                onClick={() => setCanRead({ ...canRead, business: !canRead?.business })}
+              >
+                <ImageWithFallback
+                  src={order.business?.logo}
+                  fallback={<BisBusiness />}
+                />
+                <InfoBlock>
+                  <p>{order.business?.name}</p>
+                  <p>{t('BUSINESS', 'Business')}</p>
+                </InfoBlock>
+              </ChatContactInfoContainer>
+              <ChatContactInfoContainer
+                disabled={!canRead?.customer}
+                onClick={() => setCanRead({ ...canRead, customer: !canRead?.customer })}
+              >
+                <ImageWithFallback
+                  src={order.customer?.photo}
+                  fallback={<FaUserAlt />}
+                />
+                <InfoBlock>
+                  <p>{order.customer?.name} {order.customer?.lastname}</p>
+                  <p>{t('CUSTOMER', 'Customer')}</p>
+                </InfoBlock>
+              </ChatContactInfoContainer>
+              {order?.driver && (
+                <ChatContactInfoContainer
+                  disabled={!canRead?.driver}
+                  onClick={() => setCanRead({ ...canRead, driver: !canRead?.driver })}
+                >
+                  <ImageWithFallback
+                    src={order.driver?.photo}
+                    fallback={<RiUser2Fill />}
+                  />
+                  <InfoBlock>
+                    <p>{order.driver?.name} {order.driver?.lastname}</p>
+                    <p>{t('DRIVER', 'Driver')}</p>
+                  </InfoBlock>
+                </ChatContactInfoContainer>
+              )}
+            </ImageContainer>
+            <Send onSubmit={handleSubmit(onSubmit)} noValidate>
               <WrapperSendInput>
                 <Input
                   placeholder={t('WRITE_A_MESSAGE', 'Write a message...')}
@@ -776,6 +701,7 @@ export const MessagesUI = (props) => {
               </WrapperSendInput>
               <WrapperSendMessageButton>
                 <Button
+                  borderRadius='8px'
                   color='primary'
                   type='submit'
                   disabled={sendMessage.loading || (message === '' && !image) || messages.loading}

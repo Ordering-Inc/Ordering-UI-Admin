@@ -1,8 +1,8 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
+import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import Prev from '@meronex/icons/md/MdKeyboardArrowLeft'
 import Next from '@meronex/icons/md/MdKeyboardArrowRight'
@@ -32,6 +32,7 @@ import {
 
 export const UsersList = (props) => {
   const {
+    userDetailsId,
     usersList,
     paginationDetail,
     paginationProps,
@@ -126,7 +127,7 @@ export const UsersList = (props) => {
               ))
             ) : (
               usersList?.users.map(user => (
-                <tbody key={user.id}>
+                <tbody key={user.id} className={user.id === parseInt(userDetailsId) ? 'active' : null}>
                   <tr
                     onClick={(e) => onChangeUserDetails(e, user)}
                   >
@@ -134,12 +135,13 @@ export const UsersList = (props) => {
                       <UserMainInfo>
                         <CheckBoxWrapper
                           className='user_checkbox'
+                          isChecked={selectedUsers.includes(user.id)}
                           onClick={() => handleSelectedUsers(user.id)}
                         >
                           {selectedUsers.includes(user.id) ? (
-                            <RiCheckboxFill />
+                            <MdCheckBox />
                           ) : (
-                            <RiCheckboxBlankLine />
+                            <MdCheckBoxOutlineBlank />
                           )}
                         </CheckBoxWrapper>
                         <WrapperImage>
@@ -199,10 +201,6 @@ export const UsersList = (props) => {
             )}
           </UsersTable>
         </UserTableWrapper>
-        <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
-          {t('ADD_NEW_USER', 'Add new user')}
-        </AddNewUserButton>
-
         {usersList?.users.length > 0 && (
           <WrapperPagination>
             <WrapperPageState>
@@ -222,6 +220,9 @@ export const UsersList = (props) => {
             </PageButton>
           </WrapperPagination>
         )}
+        <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
+          {t('ADD_NEW_USER', 'Add new user')}
+        </AddNewUserButton>
       </UsersConatiner>
     </>
   )

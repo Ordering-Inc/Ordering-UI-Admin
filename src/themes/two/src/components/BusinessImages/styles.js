@@ -85,7 +85,10 @@ export const SkeletonWrapper = styled.div`
 export const UploadImageIconContainer = styled.div`
   position: absolute;
   top: 0px;
-  background: rgba(0,0,0,0.2);
+  background-color: ${props => props.theme.colors.borderColor};
+  ${({ isImage }) => isImage && css`
+    opacity: 0.2;
+  `}
   ${({ small }) => small ? css`
     padding: 4px;
   ` : css`
@@ -93,24 +96,44 @@ export const UploadImageIconContainer = styled.div`
   `}
 `
 
+export const CameraWrapper = styled.span`
+  background-color: #FFF;
+  border-radius: 8px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  position: absolute;
+  ${props => props.theme?.rtl ? css`
+    left: 8px;
+  ` : css`
+    right: 8px;
+  `}
+  svg {
+    font-size: 18px;
+    color: ${props => props.theme.colors.secundaryContrast};
+  }
+`
+
 export const UploadImageIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: #FFF;
-  border: 1px dashed #fff;
+  color: #ADB5BD;
   span {
     margin: 0;
   }
 
-  svg {   
+  svg {
+    color: #CED4DA;
     ${({ small }) => small ? css`
       width: 25px;
       height: 25px;
     ` : css`
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 35px;
     `}
   }
 `

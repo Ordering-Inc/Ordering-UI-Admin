@@ -14,13 +14,20 @@ export const InnerContainer = styled.div`
 `
 
 export const Tab = styled.div`
-  padding: 10px 15px;
+  padding: 10px 0px;
   cursor: pointer;
   color: ${props => props.theme.colors?.headingColor};
   white-space: nowrap;
+  font-size: 14px;
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 30px;
+  ` : css`
+    margin-right: 30px;
+  `}
 
   ${({ active }) => active && css`
-    border-bottom: 3px solid;
+    border-bottom: 2px solid;
     font-weight: 500;
   `}
 

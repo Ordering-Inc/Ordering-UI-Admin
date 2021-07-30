@@ -1,22 +1,29 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const OrdersSearch = styled.div`
   position: relative;
 
-  img {
+  svg {
     position: absolute;
-    top: 13px;
-    left: 14px;
+    top: 10px;
+    ${props => props.theme?.rtl ? css`
+      right: 15px;
+    ` : css`
+      left: 15px;
+    `}
+    font-size: 20px;
+    color: ${props => props.theme.colors.lightGray};
   }
 
   input {
     width: 250px;
-    border: 1px solid #1C202E;
+    border: 1px solid ${props => props.theme.colors.borderColor};
     border-radius: 22px;
     outline: none;
     padding: 10px 8px;
     padding-left: 40px;
-    font-size: 15px;
+    font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
 
     &::placeholder {
       color: #909BA9;

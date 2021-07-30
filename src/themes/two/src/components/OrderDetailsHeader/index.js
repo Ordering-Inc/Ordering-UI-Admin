@@ -1,10 +1,11 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
-import { Printer, Diagram3, ThreeDotsVertical, XLg as CloseIcon } from 'react-bootstrap-icons'
+import { Printer, Diagram3, ThreeDotsVertical, XLg as CloseIcon, Chat as ChatIcon, Dot } from 'react-bootstrap-icons'
 import {
   OrderDetailsHeaderContainer,
-  ButtonLink
+  ButtonLink,
+  UreadMessageAlert
 } from './styles'
 
 export const OrderDetailsHeader = (props) => {
@@ -51,6 +52,16 @@ export const OrderDetailsHeader = (props) => {
         </p>
       </div>
       <div>
+        <ButtonLink
+          onClick={() => handleOpenMessages('chat')}
+        >
+          <ChatIcon />
+          {order?.unread_count > 0 && (
+            <UreadMessageAlert>
+              <Dot />
+            </UreadMessageAlert>
+          )}
+        </ButtonLink>
         <ButtonLink onClick={() => window.print()}>
           <Printer />
         </ButtonLink>

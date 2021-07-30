@@ -17,6 +17,7 @@ import {
 
 export const BusinessProductList = (props) => {
   const {
+    productDetailsId,
     categoryState,
     viewMethod,
     businessState,
@@ -105,6 +106,7 @@ export const BusinessProductList = (props) => {
                       <SingleBusinessProduct
                         {...props}
                         key={i}
+                        productDetailsId={productDetailsId}
                         product={product}
                         allowColumns={allowColumns}
                         business={businessState?.business}

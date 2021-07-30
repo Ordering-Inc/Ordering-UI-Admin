@@ -57,7 +57,7 @@ export const FilterButton = styled.button`
   display: flex;
   font-size: 24px;
   padding: 0px;
-  color: #1C202E;
+  color: ${props => props.theme.colors.secundaryContrast};
 
   &:active {
     opacity: 0.5;

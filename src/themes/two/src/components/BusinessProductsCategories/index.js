@@ -55,7 +55,7 @@ export const BusinessProductsCategories = (props) => {
             !businessState.loading && (
               isAddCategory
                 ? <BusinessCategoryCreator {...props} setIsAddCategory={setIsAddCategory} business={businessState?.business} />
-                : <AddCategory onClick={() => setIsAddCategory(true)}>{t('ADD_NEW_CATEGORY', 'Add new Category')}</AddCategory>
+                : <AddCategory onClick={() => setIsAddCategory(true)}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
             )
           }
         </ListContent>

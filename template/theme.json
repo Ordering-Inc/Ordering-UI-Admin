@@ -10,16 +10,20 @@
     }
   },
   "colors": {
-    "primary": "#0d6efd",
-    "disabled": "#CBCBCB",
+    "primary": "#2C7BE5",
+    "disabled": "#B1BCCC",
     "primaryContrast": "#FFF",
     "secundary": "#F8F9FA",
     "secundaryContrast": "#748194",
+    "secundaryDark": "#414954",
+    "secundaryDarkContrast": "#E9ECEF",
     "disabledContrast": "#000",
     "backgroundPage": "#FFFF",
     "colorPage": "#333",
     "headingColor": "#344050",
     "lightGray": "#909BA9",
+    "borderColor": "#E9ECEF",
+    "lightPrimary": "#E9F2FE",
 
     "offline": "#9D9B9B",
 
