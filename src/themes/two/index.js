@@ -17,7 +17,7 @@ import { BusinessTypeForm } from './src/components/BusinessTypeForm'
 import { BusinessVideos } from './src/components/BusinessVideos'
 import { CitySelector } from './src/components/CitySelector'
 import { ColumnAllowSettingPopover } from './src/components/ColumnAllowSettingPopover'
-import { Confirm } from './src/components/Confirm'
+import { Confirm, Alert } from './src/components/Confirm'
 import { DateTypeSelector } from './src/components/DateTypeSelector'
 import { DeliveriesLocation } from './src/components/DeliveriesLocation'
 import { DeliveriesManager } from './src/components/DeliveriesManager'
@@ -92,6 +92,7 @@ import { Select } from './src/styles/Select'
 import { Tab, Tabs } from './src/styles/Tabs'
 
 export {
+  Alert,
   AddressForm,
   AddressList,
   AutoScroll,
