@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { BusinessAnalytics as BusinessAnalyticsController } from './naked'
 import { useLanguage } from 'ordering-components-admin'
-import {
-  BusinessAnalyticsContainer,
-  BusinessAnalyticsHeader,
-  BusinessFilterCalendar,
-  BusinessFilterWrapper,
-  BusinessCalendarWrapper,
-  CalendarContainer
-} from './styles'
 import FiCalendar from '@meronex/icons/fi/FiCalendar'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -17,6 +9,16 @@ import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
 import { AnalyticsMap } from '../AnalyticsMap'
+import { AnalyticsLineChart } from '../AnalyticsLineChart'
+import {
+  BusinessAnalyticsContainer,
+  BusinessAnalyticsHeader,
+  BusinessFilterCalendar,
+  BusinessFilterWrapper,
+  BusinessCalendarWrapper,
+  CalendarContainer,
+  AnalyticsChartWrapper
+} from './styles'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
@@ -66,6 +68,11 @@ const BusinessAnalyticsUI = (props) => {
       <AnalyticsStatusFilterBar {...props} />
       <AnalyticsStatusSubFilter {...props} />
       <AnalyticsMap />
+      <AnalyticsChartWrapper className='row'>
+        <div className='col-md-6'>
+          <AnalyticsLineChart />
+        </div>
+      </AnalyticsChartWrapper>
       <Modal
         width='50%'
         height='80vh'

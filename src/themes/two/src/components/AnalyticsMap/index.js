@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoogleMapsMap, useConfig } from 'ordering-components-admin'
+import { GoogleMapsMap, useConfig, useSession } from 'ordering-components-admin'
 import { AnalyticsMap as AnalyticsMapController } from './naked'
 import {
   Container,
@@ -12,6 +12,7 @@ const AnalyticsMapUI = (props) => {
     locationList
   } = props
   const [configState] = useConfig()
+  const [{ user }] = useSession()
 
   const googleMapsControls = {
     defaultZoom: 15,
@@ -33,7 +34,7 @@ const AnalyticsMapUI = (props) => {
         <WrapperMap>
           <GoogleMapsMap
             apiKey={configState?.configs?.google_maps_api_key?.value}
-            location={locationList?.locations[0]}
+            location={user?.location}
             locations={locationList?.locations}
             mapControls={googleMapsControls}
           />

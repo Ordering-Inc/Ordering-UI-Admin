@@ -65,3 +65,9 @@ export const CalendarContainer = styled.div`
   right: 0;
   width: 300px;
 `
+
+export const AnalyticsChartWrapper = styled.div`
+  > div {
+    margin-top: 35px;
+  }
+`
