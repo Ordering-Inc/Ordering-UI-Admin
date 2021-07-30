@@ -23,7 +23,7 @@ var _styles = require("./styles");
 
 var _Image = require("../../../../../components/Image");
 
-var _Inputs = require("../../../../../styles/Inputs");
+var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -45,11 +45,11 @@ var _LogisticInformation = require("../LogisticInformation");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -59,7 +59,7 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -71,14 +71,15 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MessagesUI = function MessagesUI(props) {
-  var _order$customer, _order$customer2, _order$business, _order$driver, _order$customer3, _order$business2, _order$driver2, _theme$images, _theme$images$icons;
+  var _order$business, _order$customer, _order$driver, _theme$images, _theme$images$icons, _order$business6, _order$business7, _order$customer4, _order$customer5, _order$customer6, _order$driver6, _order$driver7, _order$driver8;
 
-  var order = props.order,
+  var isChat = props.isChat,
+      order = props.order,
       messages = props.messages,
       handleSend = props.handleSend,
       image = props.image,
@@ -86,12 +87,12 @@ var MessagesUI = function MessagesUI(props) {
       sendMessage = props.sendMessage,
       setImage = props.setImage,
       setMessage = props.setMessage,
+      canRead = props.canRead,
       setCanRead = props.setCanRead,
       history = props.history,
       messageDashboardView = props.messageDashboardView,
       handleMessageOrderDetail = props.handleMessageOrderDetail,
-      handleReadMessages = props.handleReadMessages,
-      handleSetMessageType = props.handleSetMessageType;
+      handleReadMessages = props.handleReadMessages;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -124,54 +125,29 @@ var MessagesUI = function MessagesUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      messageLevel = _useState4[0],
-      setMessageLevel = _useState4[1];
-
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     orderHistory: true,
     logistics: false,
     logistic_information: false
   }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      tabActive = _useState4[0],
+      setTabActive = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      tabActive = _useState6[0],
-      setTabActive = _useState6[1];
+      messageSearchValue = _useState6[0],
+      setMessageSearchValue = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(''),
+  var _useState7 = (0, _react.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      messageSearchValue = _useState8[0],
-      setMessageSearchValue = _useState8[1];
+      filteredMessages = _useState8[0],
+      setFilteredMessages = _useState8[1];
 
-  var _useState9 = (0, _react.useState)([]),
+  var _useState9 = (0, _react.useState)(0),
       _useState10 = _slicedToArray(_useState9, 2),
-      filteredMessages = _useState10[0],
-      setFilteredMessages = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      driverNoneCase = _useState12[0],
-      setDriverNoneCase = _useState12[1];
-
-  var _useState13 = (0, _react.useState)(0),
-      _useState14 = _slicedToArray(_useState13, 2),
-      load = _useState14[0],
-      setLoad = _useState14[1];
-
-  var _useState15 = (0, _react.useState)(props.business),
-      _useState16 = _slicedToArray(_useState15, 2),
-      business = _useState16[0],
-      setBusiness = _useState16[1];
-
-  var _useState17 = (0, _react.useState)(props.customer),
-      _useState18 = _slicedToArray(_useState17, 2),
-      customer = _useState18[0],
-      setCustomer = _useState18[1];
-
-  var _useState19 = (0, _react.useState)(props.driver),
-      _useState20 = _slicedToArray(_useState19, 2),
-      driver = _useState20[0],
-      setDriver = _useState20[1];
+      load = _useState10[0],
+      setLoad = _useState10[1];
 
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
@@ -187,7 +163,7 @@ var MessagesUI = function MessagesUI(props) {
     setMessageSearchValue('');
   }, [order.id]);
   (0, _react.useEffect)(function () {
-    if (!sendMessage.loading && (sendMessage === null || sendMessage === void 0 ? void 0 : sendMessage.error)) {
+    if (!sendMessage.loading && sendMessage !== null && sendMessage !== void 0 && sendMessage.error) {
       setAlertState({
         open: true,
         content: sendMessage.error || [t('ERROR')]
@@ -217,7 +193,7 @@ var MessagesUI = function MessagesUI(props) {
       var chat = document.getElementById('chat');
       chat.scrollTop = chat.scrollHeight;
     }, 10);
-  }, [customer, business, driver]);
+  }, [isChat]);
 
   var onChangeMessage = function onChangeMessage(e) {
     setMessage(e.target.value);
@@ -315,22 +291,6 @@ var MessagesUI = function MessagesUI(props) {
     }
   };
 
-  var getLevel = function getLevel(level) {
-    switch (level) {
-      case 0:
-        return 'admin';
-
-      case 2:
-        return 'business';
-
-      case 4:
-        return 'driver';
-
-      case 3:
-        return 'customer';
-    }
-  };
-
   var clearInputs = function clearInputs() {
     var input = document.getElementById('message');
 
@@ -360,6 +320,25 @@ var MessagesUI = function MessagesUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    if (!isChat) return;
+
+    if (order !== null && order !== void 0 && order.driver) {
+      setCanRead({
+        administrator: true,
+        business: true,
+        customer: true,
+        driver: true
+      });
+    } else {
+      setCanRead({
+        administrator: true,
+        business: true,
+        customer: true,
+        driver: false
+      });
+    }
+  }, [isChat, order]);
+  (0, _react.useEffect)(function () {
     if (messages.loading) return;
 
     var _filteredMessages = messages.messages.filter(function (message) {
@@ -372,117 +351,19 @@ var MessagesUI = function MessagesUI(props) {
 
     setFilteredMessages(_filteredMessages);
   }, [messages, messageSearchValue]);
-  (0, _react.useEffect)(function () {
-    if (customer) {
-      setMessageLevel(3);
-      setCanRead({
-        business: false,
-        administrator: true,
-        driver: false,
-        customer: true
-      });
-    }
-
-    if (business || driverNoneCase) {
-      setMessageLevel(2);
-      setCanRead({
-        business: true,
-        administrator: true,
-        driver: false,
-        customer: false
-      });
-    }
-
-    if (driver && !driverNoneCase) {
-      setMessageLevel(4);
-      setCanRead({
-        business: false,
-        administrator: true,
-        driver: true,
-        customer: false
-      });
-    }
-  }, [customer, business, driver, driverNoneCase]);
-  (0, _react.useEffect)(function () {
-    if (driver && (order === null || order === void 0 ? void 0 : order.driver_id) === null) {
-      setDriverNoneCase(true);
-    } else {
-      setDriverNoneCase(false);
-    }
-  }, [order === null || order === void 0 ? void 0 : order.driver_id, driver]);
-  (0, _react.useEffect)(function () {
-    if (props.business) {
-      setBusiness(true);
-      setCustomer(false);
-      setDriver(false);
-    }
-
-    if (props.customer) {
-      setBusiness(false);
-      setCustomer(true);
-      setDriver(false);
-    }
-
-    if (props.driver) {
-      setBusiness(false);
-      setCustomer(false);
-      setDriver(true);
-    }
-  }, [props.business, props.customer, props.driver]);
-  (0, _react.useEffect)(function () {
-    if (messages.loading || props.business || props.customer || props.driver || history) return;
-
-    var _messages = messages.messages.filter(function (_message) {
-      var _message$author;
-
-      return _message.type !== 1 && _message.type !== 0 && (_message === null || _message === void 0 ? void 0 : (_message$author = _message.author) === null || _message$author === void 0 ? void 0 : _message$author.level) !== 0;
-    });
-
-    if (_messages.length > 0) {
-      var _messages$author;
-
-      var level = (_messages$author = _messages[_messages.length - 1].author) === null || _messages$author === void 0 ? void 0 : _messages$author.level;
-
-      if (level === 2) {
-        setBusiness(true);
-        setCustomer(false);
-        setDriver(false);
-        handleSetMessageType('business');
-      }
-
-      if (level === 3) {
-        setBusiness(false);
-        setCustomer(true);
-        setDriver(false);
-        handleSetMessageType('customer');
-      }
-
-      if (level === 4) {
-        setBusiness(false);
-        setCustomer(false);
-        setDriver(true);
-        handleSetMessageType('driver');
-      }
-    } else {
-      setBusiness(true);
-      setCustomer(false);
-      setDriver(false);
-      handleSetMessageType('business');
-    }
-  }, [messages.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
     messageDashboardView: messageDashboardView,
     historyView: history
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, customer && /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.name, " ", order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.lastname), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_NO', 'Order No'), ". ", order.id)), (business || driverNoneCase) && /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.name), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_NO', 'Order No'), ". ", order.id)), driver && !driverNoneCase && /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.name), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_NO', 'Order No'), ". ", order.id)), !history && /*#__PURE__*/_react.default.createElement(_styles.Image, null, customer && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.photo,
-    fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), (business || driverNoneCase) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo,
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, isChat && /*#__PURE__*/_react.default.createElement(_styles.ChatHeader, null, /*#__PURE__*/_react.default.createElement(_styles.OrderNumber, null, t('ORDER_NO', 'Order No'), ". ", order.id), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
     fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
-  }), driver && !driverNoneCase && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo,
+  }), /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo,
+    fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
+  }), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
-  })), history && /*#__PURE__*/_react.default.createElement(_styles.WrapperHitoryHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
+  }))), history && /*#__PURE__*/_react.default.createElement(_styles.WrapperHitoryHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
     active: tabActive.orderHistory,
     onClick: function onClick() {
       return setTabActive({
@@ -562,7 +443,7 @@ var MessagesUI = function MessagesUI(props) {
   })), tabActive.logistic_information && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_LogisticInformation.LogisticInformation, {
     orderId: order.id
   }))), filteredMessages.length > 0 && filteredMessages.map(function (message) {
-    var _message$change, _message$change2, _message$change3, _message$driver, _message$driver2, _message$author2, _message$author3, _message$author4, _message$change4, _message$change5, _message$change6, _message$change7, _message$driver3, _message$driver4, _message$author5, _message$author6, _message$author7, _message$author8, _message$author9, _message$author10, _message$author11, _message$author12, _message$author13, _message$author14, _message$author15, _message$author16, _message$author17, _message$author18, _message$author19, _message$author20, _message$author21, _message$author22, _message$author23, _message$author24, _message$author25, _message$author26, _message$author27, _message$author28;
+    var _message$change, _message$change2, _message$change3, _message$driver, _message$driver2, _message$change4, _message$change5, _message$change6, _message$change7, _message$driver3, _message$driver4, _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$driver4, _order$business5, _order$driver5;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: message.id
@@ -571,61 +452,102 @@ var MessagesUI = function MessagesUI(props) {
       style: {
         display: "".concat(tabActive.orderHistory ? 'inline-flex' : 'none')
       }
-    }, ((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, getStatus(parseInt(message.change.old, 10))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))), (message === null || message === void 0 ? void 0 : (_message$change2 = message.change) === null || _message$change2 === void 0 ? void 0 : _message$change2.comment) ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change3 = message.change) === null || _message$change3 === void 0 ? void 0 : _message$change3.comment, "'") : ''), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver = message.driver) === null || _message$driver === void 0 ? void 0 : _message$driver.name, " ", ' ', " ", ((_message$driver2 = message.driver) === null || _message$driver2 === void 0 ? void 0 : _message$driver2.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), !history && ((message === null || message === void 0 ? void 0 : (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.level) === 0 || (message === null || message === void 0 ? void 0 : (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.level) === 2 || (message === null || message === void 0 ? void 0 : (_message$author4 = message.author) === null || _message$author4 === void 0 ? void 0 : _message$author4.level) === messageLevel) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && ((_message$change4 = message.change) === null || _message$change4 === void 0 ? void 0 : _message$change4.attribute) !== 'comment' && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+    }, ((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, getStatus(parseInt(message.change.old, 10))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))), message !== null && message !== void 0 && (_message$change2 = message.change) !== null && _message$change2 !== void 0 && _message$change2.comment ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change3 = message.change) === null || _message$change3 === void 0 ? void 0 : _message$change3.comment, "'") : ''), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver = message.driver) === null || _message$driver === void 0 ? void 0 : _message$driver.name, " ", ' ', " ", ((_message$driver2 = message.driver) === null || _message$driver2 === void 0 ? void 0 : _message$driver2.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), isChat && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && ((_message$change4 = message.change) === null || _message$change4 === void 0 ? void 0 : _message$change4.attribute) !== 'comment' && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id
-    }, ((_message$change5 = message.change) === null || _message$change5 === void 0 ? void 0 : _message$change5.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, t(getStatus(parseInt(message.change.old, 10)))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))), (message === null || message === void 0 ? void 0 : (_message$change6 = message.change) === null || _message$change6 === void 0 ? void 0 : _message$change6.comment) ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change7 = message.change) === null || _message$change7 === void 0 ? void 0 : _message$change7.comment, "'") : ''), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver3 = message.driver) === null || _message$driver3 === void 0 ? void 0 : _message$driver3.name, " ", ' ', " ", ((_message$driver4 = message.driver) === null || _message$driver4 === void 0 ? void 0 : _message$driver4.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), message.type === 2 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author5 = message.author) === null || _message$author5 === void 0 ? void 0 : _message$author5.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author6 = message.author) === null || _message$author6 === void 0 ? void 0 : _message$author6.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), (business || driverNoneCase) && message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author7 = message.author) === null || _message$author7 === void 0 ? void 0 : _message$author7.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author8 = message.author) === null || _message$author8 === void 0 ? void 0 : _message$author8.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), driver && !driverNoneCase && message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author9 = message.author) === null || _message$author9 === void 0 ? void 0 : _message$author9.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author10 = message.author) === null || _message$author10 === void 0 ? void 0 : _message$author10.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), message.type === 3 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
+    }, ((_message$change5 = message.change) === null || _message$change5 === void 0 ? void 0 : _message$change5.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, t(getStatus(parseInt(message.change.old, 10)))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))), message !== null && message !== void 0 && (_message$change6 = message.change) !== null && _message$change6 !== void 0 && _message$change6.comment ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change7 = message.change) === null || _message$change7 === void 0 ? void 0 : _message$change7.comment, "'") : ''), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver3 = message.driver) === null || _message$driver3 === void 0 ? void 0 : _message$driver3.name, " ", ' ', " ", ((_message$driver4 = message.driver) === null || _message$driver4 === void 0 ? void 0 : _message$driver4.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), message.type === 2 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))), /*#__PURE__*/_react.default.createElement(_styles.SendToContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('SEND_TO', 'Send to'), ":"), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
+      isCircle: true
+    }, message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo,
+      fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
+    }), message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
+    }), message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
+    }))))), message.type === 3 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
       name: "image"
-    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author11 = message.author) === null || _message$author11 === void 0 ? void 0 : _message$author11.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author12 = message.author) === null || _message$author12 === void 0 ? void 0 : _message$author12.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
       src: message.source,
       onLoad: function onLoad() {
         return setLoad(load + 1);
       },
       alt: "chat-image"
-    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), (business || driverNoneCase) && message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
+    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))), /*#__PURE__*/_react.default.createElement(_styles.SendToContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('SEND_TO', 'Send to'), ":"), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
+      isCircle: true
+    }, message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo,
+      fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
+    }), message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
+    }), message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
+    }))))), message.type === 2 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, null, message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))), /*#__PURE__*/_react.default.createElement(_styles.SendToContainer, {
+      isReceived: true
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('SEND_TO', 'Send to'), ":"), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
+      isCircle: true,
+      isReceived: true
+    }, message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo,
+      fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
+    }), message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
+    }))))), message.type === 3 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, {
       name: "image"
-    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author13 = message.author) === null || _message$author13 === void 0 ? void 0 : _message$author13.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author14 = message.author) === null || _message$author14 === void 0 ? void 0 : _message$author14.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
       src: message.source,
       onLoad: function onLoad() {
         return setLoad(load + 1);
       },
       alt: "chat-image"
-    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), driver && !driverNoneCase && message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
-      name: "image"
-    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message === null || message === void 0 ? void 0 : (_message$author15 = message.author) === null || _message$author15 === void 0 ? void 0 : _message$author15.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author16 = message.author) === null || _message$author16 === void 0 ? void 0 : _message$author16.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: message.source,
-      onLoad: function onLoad() {
-        return setLoad(load + 1);
-      },
-      alt: "chat-image"
-    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), message.type === 2 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message === null || message === void 0 ? void 0 : (_message$author17 = message.author) === null || _message$author17 === void 0 ? void 0 : _message$author17.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author18 = message.author) === null || _message$author18 === void 0 ? void 0 : _message$author18.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), (business || driverNoneCase) && message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message === null || message === void 0 ? void 0 : (_message$author19 = message.author) === null || _message$author19 === void 0 ? void 0 : _message$author19.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author20 = message.author) === null || _message$author20 === void 0 ? void 0 : _message$author20.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), driver && !driverNoneCase && message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message === null || message === void 0 ? void 0 : (_message$author21 = message.author) === null || _message$author21 === void 0 ? void 0 : _message$author21.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author22 = message.author) === null || _message$author22 === void 0 ? void 0 : _message$author22.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), message.type === 3 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, customer && message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, {
-      name: "image"
-    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message === null || message === void 0 ? void 0 : (_message$author23 = message.author) === null || _message$author23 === void 0 ? void 0 : _message$author23.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author24 = message.author) === null || _message$author24 === void 0 ? void 0 : _message$author24.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: message.source,
-      onLoad: function onLoad() {
-        return setLoad(load + 1);
-      },
-      alt: "chat-image"
-    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), (business || driverNoneCase) && message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, {
-      name: "image"
-    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message === null || message === void 0 ? void 0 : (_message$author25 = message.author) === null || _message$author25 === void 0 ? void 0 : _message$author25.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author26 = message.author) === null || _message$author26 === void 0 ? void 0 : _message$author26.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: message.source,
-      onLoad: function onLoad() {
-        return setLoad(load + 1);
-      },
-      alt: "chat-image"
-    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), driver && !driverNoneCase && message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, {
-      name: "image"
-    }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.PartnerName, null, message === null || message === void 0 ? void 0 : (_message$author27 = message.author) === null || _message$author27 === void 0 ? void 0 : _message$author27.name, " (", getLevel(message === null || message === void 0 ? void 0 : (_message$author28 = message.author) === null || _message$author28 === void 0 ? void 0 : _message$author28.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: message.source,
-      onLoad: function onLoad() {
-        return setLoad(load + 1);
-      },
-      alt: "chat-image"
-    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))))));
-  }))), !history && /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.Send, {
+    })), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.comment), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))), /*#__PURE__*/_react.default.createElement(_styles.SendToContainer, {
+      isReceived: true
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('SEND_TO', 'Send to'), ":"), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
+      isCircle: true,
+      isReceived: true
+    }, message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo,
+      fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
+    }), message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
+    })))))));
+  }))), !history && /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
+    disabled: !(canRead !== null && canRead !== void 0 && canRead.business),
+    onClick: function onClick() {
+      return setCanRead(_objectSpread(_objectSpread({}, canRead), {}, {
+        business: !(canRead !== null && canRead !== void 0 && canRead.business)
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo,
+    fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
+  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.name), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS', 'Business')))), /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
+    disabled: !(canRead !== null && canRead !== void 0 && canRead.customer),
+    onClick: function onClick() {
+      return setCanRead(_objectSpread(_objectSpread({}, canRead), {}, {
+        customer: !(canRead !== null && canRead !== void 0 && canRead.customer)
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.photo,
+    fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
+  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name, " ", (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER', 'Customer')))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
+    disabled: !(canRead !== null && canRead !== void 0 && canRead.driver),
+    onClick: function onClick() {
+      return setCanRead(_objectSpread(_objectSpread({}, canRead), {}, {
+        driver: !(canRead !== null && canRead !== void 0 && canRead.driver)
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.photo,
+    fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
+  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), /*#__PURE__*/_react.default.createElement(_styles.Send, {
     onSubmit: handleSubmit(onSubmit),
-    noValidate: true,
-    messageDashboardView: messageDashboardView
+    noValidate: true
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSendInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: t('WRITE_A_MESSAGE', 'Write a message...'),
     onChange: onChangeMessage,
@@ -648,6 +570,7 @@ var MessagesUI = function MessagesUI(props) {
     onClick: removeImage,
     type: "reset"
   }, t('X', 'X')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperSendMessageButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
     color: "primary",
     type: "submit",
     disabled: sendMessage.loading || message === '' && !image || messages.loading,

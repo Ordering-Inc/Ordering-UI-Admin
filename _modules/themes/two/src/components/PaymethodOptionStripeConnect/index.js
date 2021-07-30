@@ -25,9 +25,9 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -37,7 +37,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -104,28 +104,28 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
     }
   }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BilStripe.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('CONNECT_WITH_STRIPE', 'Connect with stripe'))), /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('ACCESS_TOKEN_ID', 'Access token ID')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "token",
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : (_changesState$data = changesState.data) === null || _changesState$data === void 0 ? void 0 : _changesState$data.token) ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data2 = changesState.data) === null || _changesState$data2 === void 0 ? void 0 : _changesState$data2.token : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.token,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data = changesState.data) !== null && _changesState$data !== void 0 && _changesState$data.token ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data2 = changesState.data) === null || _changesState$data2 === void 0 ? void 0 : _changesState$data2.token : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.token,
     placeholder: t('ACCESS_TOKEN_ID', 'Access token ID'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('PUBLISHABLE_KEY', 'Publishable key')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "publishable",
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : (_changesState$data3 = changesState.data) === null || _changesState$data3 === void 0 ? void 0 : _changesState$data3.publishable) ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data4 = changesState.data) === null || _changesState$data4 === void 0 ? void 0 : _changesState$data4.publishable : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.publishable,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data3 = changesState.data) !== null && _changesState$data3 !== void 0 && _changesState$data3.publishable ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data4 = changesState.data) === null || _changesState$data4 === void 0 ? void 0 : _changesState$data4.publishable : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.publishable,
     placeholder: t('PUBLISHABLE_KEY', 'Publishable key'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('ID_USER', 'User ID')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "user",
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : (_changesState$data5 = changesState.data) === null || _changesState$data5 === void 0 ? void 0 : _changesState$data5.user) ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data6 = changesState.data) === null || _changesState$data6 === void 0 ? void 0 : _changesState$data6.user : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.user,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data5 = changesState.data) !== null && _changesState$data5 !== void 0 && _changesState$data5.user ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data6 = changesState.data) === null || _changesState$data6 === void 0 ? void 0 : _changesState$data6.user : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.user,
     placeholder: t('ID_USER', 'User ID'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('REFRESH_TOKEN', 'Refresh token')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "refresh_token",
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : (_changesState$data_sa = changesState.data_sandbox) === null || _changesState$data_sa === void 0 ? void 0 : _changesState$data_sa.refresh_token) ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data_sa2 = changesState.data_sandbox) === null || _changesState$data_sa2 === void 0 ? void 0 : _changesState$data_sa2.refresh_token : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.refresh_token,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data_sa = changesState.data_sandbox) !== null && _changesState$data_sa !== void 0 && _changesState$data_sa.refresh_token ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data_sa2 = changesState.data_sandbox) === null || _changesState$data_sa2 === void 0 ? void 0 : _changesState$data_sa2.refresh_token : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.refresh_token,
     placeholder: t('REFRESH_TOKEN', 'Refresh token'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('FIXED_FEE', 'Fixed fee')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "number",
     name: "fixed_usage_fee",
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : changesState.fixed_usage_fee) ? changesState === null || changesState === void 0 ? void 0 : changesState.fixed_usage_fee : business === null || business === void 0 ? void 0 : business.fixed_usage_fee,
+    defaultValue: changesState !== null && changesState !== void 0 && changesState.fixed_usage_fee ? changesState === null || changesState === void 0 ? void 0 : changesState.fixed_usage_fee : business === null || business === void 0 ? void 0 : business.fixed_usage_fee,
     placeholder: t('FIXED_FEE', 'Fixed fee'),
     onChange: function onChange(e) {
       return handleChangeStripeInput(e);
@@ -133,7 +133,7 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
   })), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('PERCENTAGE_FEE', 'Percentage fee')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "number",
     name: "percentage_usage_fee",
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : changesState.percentage_usage_fee) ? changesState === null || changesState === void 0 ? void 0 : changesState.percentage_usage_fee : business === null || business === void 0 ? void 0 : business.percentage_usage_fee,
+    defaultValue: changesState !== null && changesState !== void 0 && changesState.percentage_usage_fee ? changesState === null || changesState === void 0 ? void 0 : changesState.percentage_usage_fee : business === null || business === void 0 ? void 0 : business.percentage_usage_fee,
     placeholder: t('PERCENTAGE_FEE', 'Percentage fee'),
     onChange: function onChange(e) {
       return handleChangeStripeInput(e);

@@ -33,19 +33,17 @@ var _OrderBill = require("../OrderBill");
 
 var _OrderContactInformation = require("../OrderContactInformation");
 
-var _Buttons = require("../../styles/Buttons");
-
 var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
 
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -59,7 +57,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -82,9 +80,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       width = _useWindowSize.width;
 
   var _useState = (0, _react.useState)({
-    customer: false,
-    business: false,
-    driver: false,
+    chat: false,
     history: false
   }),
       _useState2 = _slicedToArray(_useState, 2),
@@ -290,7 +286,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     var unreadedMessages = messages === null || messages === void 0 ? void 0 : messages.messages.filter(function (message) {
       var _message$can_see;
 
-      return !(message === null || message === void 0 ? void 0 : message.read) && (message === null || message === void 0 ? void 0 : (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(0)) && (message === null || message === void 0 ? void 0 : message.author_id) !== user.id;
+      return !(message !== null && message !== void 0 && message.read) && (message === null || message === void 0 ? void 0 : (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(0)) && (message === null || message === void 0 ? void 0 : message.author_id) !== user.id;
     });
     var customer = unreadedMessages === null || unreadedMessages === void 0 ? void 0 : unreadedMessages.some(function (message) {
       var _message$author;
@@ -315,11 +311,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   };
 
   var handleOpenMessages = function handleOpenMessages(openMessage) {
-    if (openMessage === 'customer') {
+    if (openMessage === 'chat') {
       setOpenMessages({
-        customer: true,
-        business: false,
-        driver: false,
+        chat: true,
         history: false
       });
       setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
@@ -327,35 +321,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }));
     }
 
-    if (openMessage === 'business') {
-      setOpenMessages({
-        customer: false,
-        business: true,
-        driver: false,
-        history: false
-      });
-      setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
-        business: false
-      }));
-    }
-
-    if (openMessage === 'driver') {
-      setOpenMessages({
-        customer: false,
-        business: false,
-        driver: true,
-        history: false
-      });
-      setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
-        driver: false
-      }));
-    }
-
     if (openMessage === 'history') {
       setOpenMessages({
-        customer: false,
-        business: false,
-        driver: false,
+        chat: false,
         history: true
       });
     }
@@ -366,9 +334,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 
   var handleCloseMessages = function handleCloseMessages() {
     setOpenMessages({
-      customer: false,
-      business: false,
-      driver: false,
+      chat: false,
       history: false
     });
   };
@@ -465,6 +431,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderStatus, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   }))), /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
+    isFirstSelect: true,
     orderId: order.id,
     deliveryType: order === null || order === void 0 ? void 0 : order.delivery_type,
     defaultValue: parseInt(order.status),
@@ -475,34 +442,29 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     extraOpen: extraOpen,
     unreadAlert: unreadAlert,
-    driversList: driversList,
-    handleOpenMessages: handleOpenMessages
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_DETAILS', 'Order details')), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
+    driversList: driversList
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SUMMARY', 'Summary')), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
       product: product
     });
   }))), /*#__PURE__*/_react.default.createElement(_OrderBill.OrderBill, {
     order: order
-  })), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    borderRadius: "5px",
-    color: "secundary",
+  })), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
     onClick: function onClick() {
       return setExtraOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), (openMessages.driver || openMessages.business || openMessages.customer) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), (openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
-    customer: openMessages.customer,
-    business: openMessages.business,
-    driver: openMessages.driver,
+    isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
     history: openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     onClose: function onClose() {
       return handleCloseMessages();
     },
     messages: messages
-  })), openMessages.history && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+  })), (openMessages === null || openMessages === void 0 ? void 0 : openMessages.history) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     history: openMessages.history,

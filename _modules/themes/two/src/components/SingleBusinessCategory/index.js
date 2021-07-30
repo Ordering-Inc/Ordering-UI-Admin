@@ -35,11 +35,11 @@ var _styles2 = require("../SingleBusinessProduct/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -53,7 +53,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -132,11 +132,11 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
   var closeProductEdit = function closeProductEdit(e) {
     var _conatinerRef$current;
 
-    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) === null || _conatinerRef$current === void 0 ? void 0 : _conatinerRef$current.contains(e.target));
+    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) !== null && _conatinerRef$current !== void 0 && _conatinerRef$current.contains(e.target));
 
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (isEditMode && Object.keys(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.changes).length > 0 && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading)) {
+        if (isEditMode && Object.keys(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.changes).length > 0 && !(categoryFormState !== null && categoryFormState !== void 0 && categoryFormState.loading)) {
           handleUpdateClick();
         }
       }
@@ -146,7 +146,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
   (0, _react.useEffect)(function () {
     var _categoryFormState$re;
 
-    if (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re = categoryFormState.result) === null || _categoryFormState$re === void 0 ? void 0 : _categoryFormState$re.error) {
+    if (categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$re = categoryFormState.result) !== null && _categoryFormState$re !== void 0 && _categoryFormState$re.error) {
       var _categoryFormState$re2;
 
       setAlertState({
@@ -164,7 +164,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
   (0, _react.useEffect)(function () {
     var _categoryFormState$re3, _categoryFormState$re4;
 
-    if (!(categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading) && !(categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re3 = categoryFormState.result) === null || _categoryFormState$re3 === void 0 ? void 0 : _categoryFormState$re3.error) && (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re4 = categoryFormState.result) === null || _categoryFormState$re4 === void 0 ? void 0 : _categoryFormState$re4.result)) {
+    if (!(categoryFormState !== null && categoryFormState !== void 0 && categoryFormState.loading) && !(categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$re3 = categoryFormState.result) !== null && _categoryFormState$re3 !== void 0 && _categoryFormState$re3.error) && categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$re4 = categoryFormState.result) !== null && _categoryFormState$re4 !== void 0 && _categoryFormState$re4.result) {
       var toastConfigure = {
         position: 'bottom-right',
         autoClose: 3000,
@@ -227,7 +227,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading
-  }, (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch = categoryFormState.changes) === null || _categoryFormState$ch === void 0 ? void 0 : _categoryFormState$ch.image) ? /*#__PURE__*/_react.default.createElement("img", {
+  }, categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$ch = categoryFormState.changes) !== null && _categoryFormState$ch !== void 0 && _categoryFormState$ch.image ? /*#__PURE__*/_react.default.createElement("img", {
     src: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image,
     alt: "business type image",
     loading: "lazy"
@@ -244,7 +244,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15,
     width: 100
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (category === null || category === void 0 ? void 0 : category.enabled) ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, category !== null && category !== void 0 && category.enabled ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: category === null || category === void 0 ? void 0 : category.enabled,
     onChange: handelChangeCategoryActive
   }))), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, {
@@ -253,10 +253,9 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     height: 15,
     width: 15
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-    menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: ActionIcon,
-    className: "actions-btn",
-    id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleOpenCategoryDetails(category);

@@ -17,9 +17,9 @@ var _OrdersCards = require("../OrdersCards");
 
 var _styles = require("./styles");
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var OrdersListing = function OrdersListing(props) {
   var _theme$images, _theme$images$dummies;
@@ -42,7 +42,8 @@ var OrdersListing = function OrdersListing(props) {
       messageType = props.messageType,
       loadMoreOrders = props.loadMoreOrders,
       ordersStatusGroup = props.ordersStatusGroup,
-      groupStatus = props.groupStatus;
+      groupStatus = props.groupStatus,
+      orderDetailId = props.orderDetailId;
   var theme = (0, _styledComponents.useTheme)();
   (0, _react.useEffect)(function () {
     if (orderList.loading || !messageListView) return;
@@ -62,6 +63,7 @@ var OrdersListing = function OrdersListing(props) {
     driversList: driversList,
     pagination: pagination,
     selectedOrderIds: selectedOrderIds,
+    orderDetailId: orderDetailId,
     loadMoreOrders: loadMoreOrders,
     handleUpdateOrderStatus: handleUpdateOrderStatus,
     handleSelectedOrderIds: handleSelectedOrderIds,

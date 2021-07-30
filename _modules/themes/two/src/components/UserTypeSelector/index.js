@@ -25,7 +25,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -42,22 +42,36 @@ var UserTypeSelector = function UserTypeSelector(props) {
   var userTypes = [{
     value: 0,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('ADMINISTRATOR', 'Administrator')),
+    showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      padding: true
+    }, t('ADMINISTRATOR', 'Administrator')),
     disabled: !isPrimary && defaultUserType === 0
   }, {
     value: 1,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('CITY_MANAGER', 'City manager')),
+    showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      padding: true
+    }, t('CITY_MANAGER', 'City manager')),
     disabled: !isPrimary && defaultUserType === 1
   }, {
     value: 2,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('BUSINESS_OWNER', 'Business owner')),
+    showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      padding: true
+    }, t('BUSINESS_OWNER', 'Business owner')),
     disabled: !isPrimary && defaultUserType === 2
   }, {
     value: 3,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('USER', 'User')),
+    showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      padding: true
+    }, t('USER', 'User')),
     disabled: !isPrimary && defaultUserType === 3
   }];
 
-  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('TYPE', 'Type'));
+  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, {
+    isWeight: true
+  }, t('TYPE', 'Type'));
 
   var onUpdateUserType = function onUpdateUserType(type) {
     handleChangeUserType && handleChangeUserType({

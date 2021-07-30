@@ -9,81 +9,33 @@ exports.AddButton = exports.BusinessAddVideoWrapper = exports.BusinessVideoPathW
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.6;\n  "]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  ", "\n  svg {\n    font-size: 20px;\n  }\n"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 15px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  input {\n    width: calc(100% - 60px);\n  }\n"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  padding: 10px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: ", ";\n  \n  span {\n    max-width: calc(100% - 40px);\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n  }\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject());
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n"])));
 
 exports.Container = Container;
 
-var BusinessVideoPathWrapper = _styledComponents.default.div(_templateObject2(), function (props) {
+var BusinessVideoPathWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  padding: 10px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: ", ";\n  \n  span {\n    max-width: calc(100% - 40px);\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    font-size: 14px;\n  }\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.BusinessVideoPathWrapper = BusinessVideoPathWrapper;
 
-var BusinessAddVideoWrapper = _styledComponents.default.div(_templateObject3());
+var BusinessAddVideoWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 15px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  input {\n    width: calc(100% - 60px);\n  }\n"])));
 
 exports.BusinessAddVideoWrapper = BusinessAddVideoWrapper;
 
-var AddButton = _styledComponents.default.a(_templateObject4(), function (props) {
+var AddButton = _styledComponents.default.a(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  ", "\n  svg {\n    font-size: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (_ref) {
   var disabled = _ref.disabled;
-  return disabled && (0, _styledComponents.css)(_templateObject5());
+  return disabled && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.6;\n  "])));
 });
 
 exports.AddButton = AddButton;

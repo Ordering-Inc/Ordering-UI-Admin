@@ -25,9 +25,9 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _styles = require("./styles");
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -37,7 +37,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -83,40 +83,6 @@ var SidebarMenu = function SidebarMenu(props) {
     id: 3,
     title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
     pageName: 'drivers'
-  }];
-  var storesSubMenus = [{
-    id: 1,
-    title: t('STORES_LIST', 'Stores list'),
-    pageName: 'businesses',
-    url: '/store'
-  }, {
-    id: 2,
-    title: t('DELIVERY_ZONES', 'Delivery zones'),
-    pageName: 'delivery_zones'
-  }, {
-    id: 3,
-    title: t('COUPONS', 'Coupons'),
-    pageName: 'coupons'
-  }, {
-    id: 4,
-    title: t('DISCOUNTS', 'Discounts'),
-    pageName: 'discounts'
-  }, {
-    id: 5,
-    title: t('BUSINESS_SCHEDULE', 'Business schedule'),
-    pageName: 'business_schedule'
-  }, {
-    id: 6,
-    title: t('TAXES', 'Taxes'),
-    pageName: 'taxes'
-  }, {
-    id: 7,
-    title: t('PAYMENT_METHODS', 'Payment methods'),
-    pageName: 'payment_methods'
-  }, {
-    id: 8,
-    title: t('PERSONALIZATION', 'Personalization'),
-    pageName: 'personalization'
   }];
   var settingsSubMenus = [{
     id: 1,
@@ -231,22 +197,12 @@ var SidebarMenu = function SidebarMenu(props) {
     className: "mx-2"
   }, t('MESSAGES', 'Messages')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "3",
+    page: "businesses",
+    handleGoToPage: handleGoToPage,
     active: location.pathname === '/businesses' || location.pathname.includes('/store/')
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
-  }, t('STORES', 'Stores'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
-    eventKey: "3"
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, storesSubMenus.map(function (item) {
-    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
-      key: item.id,
-      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
-      onClick: function onClick() {
-        return handleGoToPage({
-          page: item.pageName
-        });
-      }
-    }, item.title);
-  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, t('STORES', 'Stores')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "4",
     page: "users",
     handleGoToPage: handleGoToPage,
@@ -297,7 +253,7 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     },
     variant: location.pathname === '/profile' && 'primary'
-  }, (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo) ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
+  }, sessionState !== null && sessionState !== void 0 && (_sessionState$user2 = sessionState.user) !== null && _sessionState$user2 !== void 0 && _sessionState$user2.photo ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.photo,
     width: "30px",
     height: "30px",
