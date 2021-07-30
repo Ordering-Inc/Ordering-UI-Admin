@@ -33,11 +33,11 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -51,7 +51,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -69,7 +69,8 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       productFormState = props.productFormState,
       handleChangeInput = props.handleChangeInput,
       handlechangeImage = props.handlechangeImage,
-      isEditMode = props.isEditMode;
+      isEditMode = props.isEditMode,
+      productDetailsId = props.productDetailsId;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -133,21 +134,27 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   var closeProductEdit = function closeProductEdit(e) {
     var _conatinerRef$current;
 
-    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) === null || _conatinerRef$current === void 0 ? void 0 : _conatinerRef$current.contains(e.target));
+    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) !== null && _conatinerRef$current !== void 0 && _conatinerRef$current.contains(e.target));
 
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (isEditMode && Object.keys(productFormState === null || productFormState === void 0 ? void 0 : productFormState.changes).length > 0 && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading)) {
+        if (isEditMode && Object.keys(productFormState === null || productFormState === void 0 ? void 0 : productFormState.changes).length > 0 && !(productFormState !== null && productFormState !== void 0 && productFormState.loading)) {
           handleUpdateClick();
         }
       }
     }
   };
 
+  var handleProductClick = function handleProductClick(e) {
+    var isInvalid = e.target.closest('.product_info') || e.target.closest('.product_price') || e.target.closest('.product_description') || e.target.closest('.product_enable_control') || e.target.closest('.product_actions');
+    if (isInvalid) return;
+    handleOpenProductDetails(product);
+  };
+
   (0, _react.useEffect)(function () {
     var _productFormState$res;
 
-    if (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res = productFormState.result) === null || _productFormState$res === void 0 ? void 0 : _productFormState$res.error) {
+    if (productFormState !== null && productFormState !== void 0 && (_productFormState$res = productFormState.result) !== null && _productFormState$res !== void 0 && _productFormState$res.error) {
       var _productFormState$res2;
 
       setAlertState({
@@ -165,7 +172,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   (0, _react.useEffect)(function () {
     var _productFormState$res3;
 
-    if (!(productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading) && !(productFormState === null || productFormState === void 0 ? void 0 : productFormState.result.error) && (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res3 = productFormState.result) === null || _productFormState$res3 === void 0 ? void 0 : _productFormState$res3.result)) {
+    if (!(productFormState !== null && productFormState !== void 0 && productFormState.loading) && !(productFormState !== null && productFormState !== void 0 && productFormState.result.error) && productFormState !== null && productFormState !== void 0 && (_productFormState$res3 = productFormState.result) !== null && _productFormState$res3 !== void 0 && _productFormState$res3.result) {
       var _productFormState$res4, _productFormState$res5;
 
       var toastConfigure = {
@@ -177,7 +184,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
         draggable: true,
         progress: undefined
       };
-      var content = (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$res4 = productFormState.result) === null || _productFormState$res4 === void 0 ? void 0 : (_productFormState$res5 = _productFormState$res4.result) === null || _productFormState$res5 === void 0 ? void 0 : _productFormState$res5.id) ? t('PRODUCT_UPDATE', 'Product updated') : t('PRODUCT_DELETE', 'Product deleted');
+      var content = productFormState !== null && productFormState !== void 0 && (_productFormState$res4 = productFormState.result) !== null && _productFormState$res4 !== void 0 && (_productFormState$res5 = _productFormState$res4.result) !== null && _productFormState$res5 !== void 0 && _productFormState$res5.id ? t('PRODUCT_UPDATE', 'Product updated') : t('PRODUCT_DELETE', 'Product deleted');
 
       _reactToastify.toast.dark(content, toastConfigure);
     }
@@ -201,10 +208,16 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30
   })))) : /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, {
-    ref: conatinerRef
+    ref: conatinerRef,
+    active: product.id === productDetailsId,
+    onClick: function onClick(e) {
+      return handleProductClick(e);
+    }
   }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, {
+    className: "product_info"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
     onClick: function onClick() {
       return handleClickImage();
     },
@@ -224,7 +237,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading
-  }, (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha = productFormState.changes) === null || _productFormState$cha === void 0 ? void 0 : _productFormState$cha.images) ? /*#__PURE__*/_react.default.createElement("img", {
+  }, productFormState !== null && productFormState !== void 0 && (_productFormState$cha = productFormState.changes) !== null && _productFormState$cha !== void 0 && _productFormState$cha.images ? /*#__PURE__*/_react.default.createElement("img", {
     src: productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha2 = productFormState.changes) === null || _productFormState$cha2 === void 0 ? void 0 : _productFormState$cha2.images,
     alt: "business type image",
     loading: "lazy"
@@ -237,6 +250,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     name: "price",
+    className: "product_price",
     value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha4 = productFormState.changes) === null || _productFormState$cha4 === void 0 ? void 0 : _productFormState$cha4.price) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
@@ -245,19 +259,19 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha5 = productFormState.changes) === null || _productFormState$cha5 === void 0 ? void 0 : _productFormState$cha5.description) || '',
     onChange: handleChangeInput,
     autoComplete: "off",
-    className: "description"
+    className: "product_description"
   }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
-    className: "business_enable_control"
-  }, (product === null || product === void 0 ? void 0 : product.enabled) ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+    className: "product_enable_control"
+  }, product !== null && product !== void 0 && product.enabled ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (product === null || product === void 0 ? void 0 : product.enabled) || false,
     onChange: handleChangeProductActive
   }))), /*#__PURE__*/_react.default.createElement("td", {
     className: "actions"
   }, /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-    menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+    className: "product_actions",
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: ActionIcon,
-    className: "action-btn",
-    id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleOpenProductDetails(product);

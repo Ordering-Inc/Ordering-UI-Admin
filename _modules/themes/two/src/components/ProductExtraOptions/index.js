@@ -43,11 +43,11 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -61,7 +61,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -143,12 +143,12 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       if (min) {
         var _changesState$changes, _changesState$changes2;
 
-        var max = (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.max) ? changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.max : option === null || option === void 0 ? void 0 : option.max;
+        var max = changesState !== null && changesState !== void 0 && (_changesState$changes = changesState.changes) !== null && _changesState$changes !== void 0 && _changesState$changes.max ? changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.max : option === null || option === void 0 ? void 0 : option.max;
         if (parseInt(e.target.value) > parseInt(max)) return;
       } else {
         var _changesState$changes3, _changesState$changes4;
 
-        var _min = (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes3 = changesState.changes) === null || _changesState$changes3 === void 0 ? void 0 : _changesState$changes3.min) ? changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.min : option === null || option === void 0 ? void 0 : option.min;
+        var _min = changesState !== null && changesState !== void 0 && (_changesState$changes3 = changesState.changes) !== null && _changesState$changes3 !== void 0 && _changesState$changes3.min ? changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.min : option === null || option === void 0 ? void 0 : option.min;
 
         if (parseInt(e.target.value) < parseInt(_min)) return;
       }
@@ -211,9 +211,9 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   };
 
   var handleAddOptionClick = function handleAddOptionClick() {
-    if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) === '' || !(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) || (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === '' || (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === '') {
+    if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) === '' || !(addChangesState !== null && addChangesState !== void 0 && addChangesState.name) || (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === '' || (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === '') {
       var errorContent = [];
-      if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) === '' || !(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name)) errorContent.push(t('NAME_REQUIRED', 'The name is required.'));
+      if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) === '' || !(addChangesState !== null && addChangesState !== void 0 && addChangesState.name)) errorContent.push(t('NAME_REQUIRED', 'The name is required.'));
       if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === '') errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'));
       if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === '') errorContent.push(t('MAX_PURCHASED_REQUIRED', 'The max is required.'));
 
@@ -265,9 +265,9 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   (0, _react.useEffect)(function () {
     if (Object.keys(editErrors).length) {
       var errorContent = [];
-      if (editErrors === null || editErrors === void 0 ? void 0 : editErrors.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'));
-      if (editErrors === null || editErrors === void 0 ? void 0 : editErrors.min) errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'));
-      if (editErrors === null || editErrors === void 0 ? void 0 : editErrors.max) errorContent.push(t('MAX_PURCHASED_REQUIRED', 'The max is required.'));
+      if (editErrors !== null && editErrors !== void 0 && editErrors.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'));
+      if (editErrors !== null && editErrors !== void 0 && editErrors.min) errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'));
+      if (editErrors !== null && editErrors !== void 0 && editErrors.max) errorContent.push(t('MAX_PURCHASED_REQUIRED', 'The max is required.'));
 
       if (errorContent.length) {
         setAlertState({
@@ -305,11 +305,11 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       },
       accept: "image/png, image/jpeg, image/jpg",
       disabled: extraState.loading
-    }, (changesState === null || changesState === void 0 ? void 0 : (_changesState$result = changesState.result) === null || _changesState$result === void 0 ? void 0 : _changesState$result.image) && editOptionId === option.id ? /*#__PURE__*/_react.default.createElement("img", {
+    }, changesState !== null && changesState !== void 0 && (_changesState$result = changesState.result) !== null && _changesState$result !== void 0 && _changesState$result.image && editOptionId === option.id ? /*#__PURE__*/_react.default.createElement("img", {
       src: changesState === null || changesState === void 0 ? void 0 : (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
       alt: "option image",
       loading: "lazy"
-    }) : (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes5 = changesState.changes) === null || _changesState$changes5 === void 0 ? void 0 : _changesState$changes5.image) && editOptionId === option.id ? /*#__PURE__*/_react.default.createElement("img", {
+    }) : changesState !== null && changesState !== void 0 && (_changesState$changes5 = changesState.changes) !== null && _changesState$changes5 !== void 0 && _changesState$changes5.image && editOptionId === option.id ? /*#__PURE__*/_react.default.createElement("img", {
       src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes6 = changesState.changes) === null || _changesState$changes6 === void 0 ? void 0 : _changesState$changes6.image,
       alt: "option image",
       loading: "lazy"
@@ -341,9 +341,9 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
         return handleChangeOptionEnable(enabled, option.id);
       }
     })), /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
       title: ActionIcon,
-      id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
         return handleOpenModal(option, 'edit');

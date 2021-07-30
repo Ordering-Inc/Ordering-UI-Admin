@@ -39,19 +39,19 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -65,7 +65,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -75,6 +75,7 @@ var OrdersTable = function OrdersTable(props) {
       driversList = props.driversList,
       pagination = props.pagination,
       selectedOrderIds = props.selectedOrderIds,
+      orderDetailId = props.orderDetailId,
       loadMoreOrders = props.loadMoreOrders,
       handleUpdateOrderStatus = props.handleUpdateOrderStatus,
       handleSelectedOrderIds = props.handleSelectedOrderIds,
@@ -234,7 +235,7 @@ var OrdersTable = function OrdersTable(props) {
   };
 
   var handleClickOrder = function handleClickOrder(order, e) {
-    var inValid = !isSelectedOrders && (e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'));
+    var inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'));
     if (inValid) return;
     handleOpenOrderDetail(order);
   };
@@ -244,7 +245,7 @@ var OrdersTable = function OrdersTable(props) {
 
     var _totalPages;
 
-    if (pagination === null || pagination === void 0 ? void 0 : pagination.total) {
+    if (pagination !== null && pagination !== void 0 && pagination.total) {
       _totalPages = Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / ordersPerPage);
     } else if (orderList.orders.length > 0) {
       _totalPages = Math.ceil(orderList.orders.length / ordersPerPage);
@@ -259,9 +260,10 @@ var OrdersTable = function OrdersTable(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
+    className: "orders_table",
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
-    className: !((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime)) ? 'orderNo small' : 'orderNo'
+    className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
   }, t('ORDER', 'Order')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
     className: "businessInfo"
   }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.customer) && /*#__PURE__*/_react.default.createElement("th", {
@@ -288,13 +290,11 @@ var OrdersTable = function OrdersTable(props) {
       return setOpenPopover(false);
     },
     handleChangeAllowColumns: handleChangeAllowColumns
-  })))), /*#__PURE__*/_react.default.createElement("tbody", {
-    id: "orders"
-  }, orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement("tr", {
+  })))), orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("td", {
-      className: !((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime)) ? 'orderNo small' : 'orderNo'
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+      className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 25,
       height: 25,
@@ -395,23 +395,24 @@ var OrdersTable = function OrdersTable(props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    })))));
+    }))))));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentOrders.map(function (order) {
     var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _theme$images2, _theme$images2$icons, _theme$images3, _theme$images3$icons, _order$summary;
 
-    return /*#__PURE__*/_react.default.createElement("tr", {
+    return /*#__PURE__*/_react.default.createElement("tbody", {
       key: order.id,
+      className: parseInt(orderDetailId) === order.id ? 'active' : '',
       onClick: function onClick(e) {
         return handleClickOrder(order, e);
       }
-    }, /*#__PURE__*/_react.default.createElement("td", {
-      className: !((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime)) ? 'orderNo small' : 'orderNo'
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+      className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'small' : ''
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
+      isChecked: selectedOrderIds.includes(order === null || order === void 0 ? void 0 : order.id),
       onClick: function onClick() {
         return handleSelectedOrderIds(order.id);
-      }
-    }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
-      isChecked: selectedOrderIds.includes(order === null || order === void 0 ? void 0 : order.id)
+      },
+      className: "orderCheckBox"
     }, selectedOrderIds.includes(order === null || order === void 0 ? void 0 : order.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
     }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) && /*#__PURE__*/_react.default.createElement("p", {
@@ -430,7 +431,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : (_order$business3$city = _order$business3.city) === null || _order$business3$city === void 0 ? void 0 : _order$business3$city.name)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.customer) && /*#__PURE__*/_react.default.createElement("td", {
       className: "customerInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, (order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo) ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
       bgimage: order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -441,7 +442,7 @@ var OrdersTable = function OrdersTable(props) {
     }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, null, /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
       orderView: true,
       padding: "5px 0",
-      defaultValue: (order === null || order === void 0 ? void 0 : order.driver_id) ? order.driver_id : 'default',
+      defaultValue: order !== null && order !== void 0 && order.driver_id ? order.driver_id : 'default',
       drivers: driversList.drivers,
       order: order
     }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryType) && /*#__PURE__*/_react.default.createElement("td", {
@@ -486,8 +487,8 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total)), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement(TimgeAgo, {
       order: order
-    }))));
-  }))))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, !orderList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_PaginationButton.PaginationButton, {
+    })))));
+  })))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, !orderList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_PaginationButton.PaginationButton, {
     pageSize: ordersPerPage,
     total: totalOrders,
     currentPage: currentPage,
@@ -506,7 +507,7 @@ var TimgeAgo = function TimgeAgo(props) {
       _useUtils4 = _slicedToArray(_useUtils3, 1),
       getTimeAgo = _useUtils4[0].getTimeAgo;
 
-  var _useState15 = (0, _react.useState)((order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  var _useState15 = (0, _react.useState)(order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   })),
       _useState16 = _slicedToArray(_useState15, 2),
@@ -517,7 +518,7 @@ var TimgeAgo = function TimgeAgo(props) {
     var deActive = (order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12;
     if (deActive) return;
     var timer = setInterval(function () {
-      var diff = (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+      var diff = order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
         utc: false
       });
       setDiffTime(diff);

@@ -11,9 +11,9 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
+var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
 
-var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
+var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
@@ -39,7 +39,7 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -51,12 +51,13 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UsersList = function UsersList(props) {
-  var usersList = props.usersList,
+  var userDetailsId = props.userDetailsId,
+      usersList = props.usersList,
       paginationDetail = props.paginationDetail,
       paginationProps = props.paginationProps,
       getUsers = props.getUsers,
@@ -149,17 +150,19 @@ var UsersList = function UsersList(props) {
     var _getUserType;
 
     return /*#__PURE__*/_react.default.createElement("tbody", {
-      key: user.id
+      key: user.id,
+      className: user.id === parseInt(userDetailsId) ? 'active' : null
     }, /*#__PURE__*/_react.default.createElement("tr", {
       onClick: function onClick(e) {
         return onChangeUserDetails(e, user);
       }
     }, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
       className: "user_checkbox",
+      isChecked: selectedUsers.includes(user.id),
       onClick: function onClick() {
         return handleSelectedUsers(user.id);
       }
-    }, selectedUsers.includes(user.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, (user === null || user === void 0 ? void 0 : user.photo) ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    }, selectedUsers.includes(user.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
       bgimage: user === null || user === void 0 ? void 0 : user.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
@@ -180,9 +183,9 @@ var UsersList = function UsersList(props) {
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserActionSelector, {
       className: "user_action"
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'left' : 'right',
+      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
       title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
-      id: (theme === null || theme === void 0 ? void 0 : theme.rtl) ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
         return handleOpenUserDetails(user);
@@ -192,11 +195,7 @@ var UsersList = function UsersList(props) {
         return handleDeleteUser(user === null || user === void 0 ? void 0 : user.id);
       }
     }, t('DELETE', 'Delete')))))));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.AddNewUserButton, {
-    onClick: function onClick() {
-      return handleOpenUserAddForm();
-    }
-  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperPageState, null, "".concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.from, " - ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.to, " of ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.total)), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
+  }))), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperPageState, null, "".concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.from, " - ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.to, " of ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.total)), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
     disabled: (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) === 1 || usersList.loading,
     onClick: function onClick() {
       return prevNextPage(false);
@@ -206,7 +205,11 @@ var UsersList = function UsersList(props) {
     onClick: function onClick() {
       return prevNextPage(true);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null)))));
+  }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null))), /*#__PURE__*/_react.default.createElement(_styles.AddNewUserButton, {
+    onClick: function onClick() {
+      return handleOpenUserAddForm();
+    }
+  }, t('ADD_NEW_USER', 'Add new user'))));
 };
 
 exports.UsersList = UsersList;
