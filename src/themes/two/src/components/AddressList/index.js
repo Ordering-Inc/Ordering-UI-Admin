@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import BsPencil from '@meronex/icons/bs/BsPencil'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
-import FaHome from '@meronex/icons/fa/FaHome'
-import FaPlus from '@meronex/icons/fa/FaPlus'
-import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
-import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
+import {
+  Pencil,
+  HouseDoor,
+  Building,
+  SuitHeart,
+  PlusLg
+} from 'react-bootstrap-icons'
 
 import {
   AddressList as AddressListController,
@@ -177,13 +179,13 @@ const AddressListUI = (props) => {
         {
           (!isPopover || !addressOpen) && (
             <Button
-              borderRadius='5px'
+              borderRadius='8px'
               className='add'
               color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'lightPrimary'}
               onClick={() => openAddress({})}
               disabled={orderState?.loading || actionStatus.loading}
             >
-              {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_ADDRESS', 'Add Address')}
+              {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add new address')}
             </Button>
           )
         }
@@ -243,19 +245,18 @@ const AddressListUI = (props) => {
                       </span>
                     )}
                     <span className='tag'>
-                      {address?.tag === 'home' && <FaHome />}
-                      {address?.tag === 'office' && <FaRegBuilding />}
-                      {address?.tag === 'favorite' && <FaRegHeart />}
-                      {address?.tag === 'other' && <FaPlus />}
+                      {address?.tag === 'home' && <HouseDoor />}
+                      {address?.tag === 'office' && <Building />}
+                      {address?.tag === 'favorite' && <SuitHeart />}
+                      {address?.tag === 'other' && <PlusLg />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>
-                      <span>{address.internal_number} {address.zipcode}</span>
                     </div>
                   </div>
                   <AddressItemActions className='form'>
                     <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                      <BsPencil />
+                      <Pencil />
                     </a>
                     <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
                       <VscTrash />

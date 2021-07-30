@@ -13,9 +13,12 @@ export const UserTypeFilterContainer = styled.div`
 export const InnerContainer = styled.div`
   display: flex;
   button {
-    margin: 5px;
     white-space: nowrap;
-
+    ${props => props.theme?.rtl ? css`
+      margin-left: 12px;
+    ` : css`
+      margin-right: 12px;
+    `}
     svg {
       font-size: 20px;
 

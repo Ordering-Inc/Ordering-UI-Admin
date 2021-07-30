@@ -122,20 +122,20 @@ export const Container = styled.div`
 
   input.PhoneInputInput {
     border-radius: 30px;
-    border: 1px solid #DBDCDB;
-    font-size: 16px;
+    border: 1px solid #DEE2E6;
+    font-size: 14px;
     outline: none;
     padding: 10px 15px;
 
     &::placeholder {
-      color: #DBDCDB;
+      color: #B1BCCC;
       opacity: 1;
     }
     &:-ms-input-placeholder {
-      color: #DBDCDB;
+      color: #B1BCCC;
     }
     &::-ms-input-placeholder {
-      color: #DBDCDB;
+      color: #B1BCCC;
     }
 
     ${({ disabled }) => disabled && css`

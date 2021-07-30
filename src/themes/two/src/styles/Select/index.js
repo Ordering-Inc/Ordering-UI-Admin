@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
-import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
+import { CaretDownFill } from 'react-bootstrap-icons'
 import {
   Selected,
   Options,
@@ -108,7 +108,7 @@ export const Select = (props) => {
           <Selected>
             {placeholder || ''}
             <Chevron>
-              <GoTriangleDown />
+              <CaretDownFill />
             </Chevron>
           </Selected>
         )}
@@ -118,7 +118,7 @@ export const Select = (props) => {
               {selectedOption.showOnSelected || selectedOption.content}
             </Header>
             <Chevron>
-              <GoTriangleDown />
+              <CaretDownFill />
             </Chevron>
           </Selected>
         )}

@@ -5,11 +5,16 @@ export const Option = styled.div`
   align-items: center;
   justify-content: space-between;
   white-space: nowrap;
+  font-size: 14px;
 
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
   ` : css`
     padding: 10px 15px;
+  `}
+
+  ${({ noPadding }) => noPadding && css`
+    padding: 0px;
   `}
 
   svg {
@@ -22,6 +27,9 @@ export const Option = styled.div`
 `
 
 export const PlaceholderTitle = styled(Option)`
+  color: ${props => props.theme.colors.secundaryContrast};
+  font-size: 14px;
+
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
     ` : css`

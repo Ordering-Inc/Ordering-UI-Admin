@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
   }
 
   input {
-    background: #E9ECEF;
+    background: ${props => props.theme.colors.secundary};
     border: none;
   }
 

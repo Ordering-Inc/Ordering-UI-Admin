@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const ToggleSwitchContainer = styled.label`
   position: relative;
   display: inline-block;
-  width: 32px;
-  height: 17px;
+  width: 25px;
+  height: 14px;
 
   input {
     opacity: 0;
@@ -18,9 +18,9 @@ export const ToggleSwitchContainer = styled.label`
       box-shadow: 0 0 1px ${props => props.theme.colors.primary};
     }
     &:checked + span:before {
-      -webkit-transform: translateX(15px);
-      -ms-transform: translateX(15px);
-      transform: translateX(15px);
+      -webkit-transform: translateX(11px);
+      -ms-transform: translateX(11px);
+      transform: translateX(11px);
     }
   }
 `
@@ -40,10 +40,10 @@ export const Slider = styled.span`
   &:before {
     position: absolute;
     content: "";
-    height: 13px;
-    width: 13px;
-    left: 2px;
-    bottom: 2px;
+    height: 12px;
+    width: 12px;
+    left: 1px;
+    bottom: 1px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;

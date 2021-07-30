@@ -11,6 +11,10 @@ export const OwnerItem = styled.div`
   border-bottom: 1px solid #E9ECEF;
   padding: 15px 0;
 
+  span {
+    font-size: 14px;
+  }
+
   svg {
     font-size: 20px;
     cursor: pointer;

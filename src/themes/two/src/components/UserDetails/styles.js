@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components'
 
 export const UserName = styled.h1`
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: 700;
   color: ${props => props.theme.colors.headingColor};
 `
 
 export const SavedPlaces = styled.div`
   text-align: center;
   height: calc(100% - 100px);
+  margin-top: 25px;
   padding-bottom: 0px;
   overflow: auto;
   display: flex;
@@ -16,7 +18,6 @@ export const SavedPlaces = styled.div`
     position: relative;
     display: flex;
     box-sizing: border-box;
-    padding: 0px 20px;
     flex: 1;
 
     > button{
@@ -26,15 +27,15 @@ export const SavedPlaces = styled.div`
       bottom: 0px;
 
       ${props => props.theme?.rtl ? css`
-        right: 20px;
+        right: 0px;
       ` : css`
-        left: 20px;
+        left: 0px;
       `}
     }
 
     > ul {
       margin-top: 0px;
-      max-height: calc(100% - 80px);
+      max-height: calc(100% - 70px);
       overflow: auto;
     }
   }
@@ -49,5 +50,12 @@ export const SavedPlaces = styled.div`
         width: 65%;
       }
     }
+  }
+`
+
+export const PersonalizationWrapper = styled.div`
+  height: calc(100% - 60px);
+  > div {
+    padding: 35px 0px 25px;
   }
 `

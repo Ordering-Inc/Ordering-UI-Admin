@@ -16,6 +16,16 @@ export const OrderCard = styled.div`
   border: 1px solid ${props => props.theme.colors?.secundary};
   margin-bottom: 20px;
   padding: 15px 20px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
+
   p,
   h2 {
     color: ${props => props.theme.colors.headingColor};
@@ -25,10 +35,6 @@ export const OrderCard = styled.div`
   h2 {
     font-size: 18px;
   }
-
-  ${({ active }) => active && css`
-    border: 1px solid ${props => props.theme.colors.primary};
-  `}
 `
 
 export const OrderHeader = styled.div`
@@ -82,7 +88,6 @@ export const BusinessInfo = styled.div`
     width: 45%;
   }
 `
-
 
 export const WrapperImage = styled.div`
   max-width: 45px;

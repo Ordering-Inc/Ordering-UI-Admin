@@ -109,7 +109,7 @@ export const OrderStatusSubFilter = (props) => {
               color={(selectedSubOrderStatus?.pending.includes(status.key) ||
                 selectedSubOrderStatus?.inProgress.includes(status.key) ||
                 selectedSubOrderStatus?.completed.includes(status.key) ||
-                selectedSubOrderStatus?.cancelled.includes(status.key)) ? 'primary' : 'secundary'}
+                selectedSubOrderStatus?.cancelled.includes(status.key)) ? 'primary' : 'secundaryDark'}
               onClick={() => handleChange(status.key)}
             >
               {status.value}

@@ -1,9 +1,8 @@
 import React, { useRef, useEffect } from 'react'
-import { useTheme } from 'styled-components'
 import { OrdersSearch } from './styles'
+import IosSearch from '@meronex/icons/ios/IosSearch'
 
 export const SearchBar = ({ onSearch, search, placeholder }) => {
-  const theme = useTheme()
   let timeout = null
 
   const el = useRef()
@@ -28,7 +27,7 @@ export const SearchBar = ({ onSearch, search, placeholder }) => {
 
   return (
     <OrdersSearch>
-      <img src={theme?.images?.icons?.search} alt='search' />
+      <IosSearch />
       <input type='text' ref={el} name='search' placeholder={placeholder} />
     </OrdersSearch>
   )

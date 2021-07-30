@@ -10,8 +10,9 @@ export const HeaderContainer = styled.div`
     align-items: center;
 
     > h1 {
-      font-size: 24px;
+      font-size: 20px;
       margin: 0px;
+      font-weight: 700;
     }
 
     > svg {
@@ -47,8 +48,12 @@ export const ActionContainer = styled.div`
   }
 
   input {
-    background: #E9ECEF;
+    background: ${props => props.theme.colors.secundary};
     border: none;
+  }
+
+  button {
+    height: 41px;
   }
 
   @media (min-width: 768px) {

@@ -1,8 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const WrapMetaFields = styled.div`
   padding-top: 10px;
   box-sizing: border-box;
+  input {
+    color: ${props => props.theme.colors.headingColor};
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: ${props => props.theme.colors.lightGray};
+    }
+    &:-ms-input-placeholder {
+      color: ${props => props.theme.colors.lightGray};
+    }
+  }
 `
 
 export const MetaContainer = styled.div`
@@ -13,6 +23,7 @@ export const MetaContainer = styled.div`
   .meta_type {
     width: 25%;
     font-size: 14px;
+    margin-top: 10px;
   }
   .meta_key {
     width: 25%;
@@ -29,7 +40,8 @@ export const MetaContainer = styled.div`
       width: 100%;
     }
     svg {
-      font-size: 20px;
+      font-size: 16px;
+      margin-top: 14px;
       color: ${props => props.theme.colors?.headingColor};
       cursor: pointer;
     }
@@ -38,13 +50,37 @@ export const MetaContainer = styled.div`
 `
 export const MetaAddContainer = styled(MetaContainer)`
   input {
-    border: 1px solid #c2c2c2;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border: 1px solid #DEE2E6;
+    border-radius: 8px;
+    padding: 10px 15px;
     outline: none;
-    font-size: 16px;
+    font-size: 14px;
     box-sizing: border-box;
     width: 100%;
+  }
+
+  .meta_type {
+    margin-top: 0px;
+    > div:first-child {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    div {
+      color: ${props => props.theme.colors.secundaryContrast};
+    }
+    .select {
+      background-color: ${props => props.theme.colors.secundary};
+      border: none;
+    }
+    ${props => props.theme?.rtl ? css`
+      .list {
+        left: initial;
+      }
+    ` : css`
+      .list {
+        right: initial;
+      }
+    `}
   }
 
   button {
@@ -54,9 +90,9 @@ export const MetaAddContainer = styled(MetaContainer)`
   }
 `
 export const RoundBorder = styled.div`
-  border: 1px solid #c2c2c2;
-  border-radius: 5px;
-  padding: 5px 10px;
+  border: 1px solid #DEE2E6;
+  border-radius: 8px;
+  padding: 10px 15px;
   font-size: 14px;
   color: ${props => props.theme.colors?.headingColor};
   overflow: hidden;
@@ -108,7 +144,7 @@ export const SkeletonItem = styled.div`
   margin: 10px 0;
 
   span {
-    border-radius: 5px;
+    border-radius: 8px;
   }
 `
 

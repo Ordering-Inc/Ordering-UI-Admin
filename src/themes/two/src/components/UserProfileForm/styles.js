@@ -7,7 +7,8 @@ export const Container = styled.div`
   padding: 0 5px;
   > button {
     position: absolute;
-    bottom: 20px;
+    bottom: 35px;
+    height: 44px;
   }
 `
 
@@ -42,6 +43,7 @@ export const UserImage = styled.div`
 `
 
 export const Image = styled.div`
+  position: relative;
   width: 90px;
   height: 90px;
   border-radius: 8px;
@@ -56,7 +58,7 @@ export const Image = styled.div`
   `}
 
   img,
-  div {
+  div:first-child {
     width: 100%;
     border-radius: 8px;
     height: 100%;
@@ -86,10 +88,23 @@ export const SideForm = styled.div`
 `
 
 export const Camera = styled.div`
-  > * {
-    margin-top: 10px;
-    width: 30px;
-    height: 30px;
+  position: absolute;
+  background-color: #FFF;
+  border-radius: 8px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 7px;
+  ${props => props.theme?.rtl ? css`
+    left: 7px;
+  ` : css`
+    right: 7px;
+  `}
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryContrast};
   }
 `
 
@@ -102,7 +117,8 @@ export const UserData = styled.div`
   color: ${props => props.theme.colors.headingColor};
 
   h1 {
-    font-size: 16px
+    font-size: 16px;
+    font-weight: 600;
   }
 
   > * {
@@ -145,7 +161,7 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const WrapperForm = styled.div`
-  padding-bottom: 30px;
+  margin-bottom: 30px;
   @media (min-width: 768px) {
     width: 100%;
   }

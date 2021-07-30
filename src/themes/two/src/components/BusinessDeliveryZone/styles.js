@@ -134,6 +134,9 @@ export const ZonePrice = styled.div`
   `}
 `
 export const ZoneActions = styled.div`
+  ${({ disabled }) => disabled && css`
+     pointer-events: none;
+  `}
   width: 140px;
   display: flex;
   align-items: center;
@@ -157,6 +160,9 @@ export const EnableWrapper = styled.div`
 `
 
 export const DropDownWrapper = styled.div`
+  ${({ disabled }) => disabled && css`
+     pointer-events: none;
+  `}
   button {
     background: #F8F9FA !important;
     border: none;

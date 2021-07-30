@@ -13,21 +13,25 @@ export const BasicContainer = styled.div`
     width: fit-content;
     position: sticky;
     top: 100%;
+    height: 42px;
   }
 `
 
 export const FieldName = styled.p`
   color: ${props => props.theme.colors.headingColor};
   padding-top: 20px;
+  font-size: 14px;
+  margin-bottom: 9px;
 `
 
 export const TypeSelectWrapper = styled.div`
   > div {
-    background: #F8F9FA;
+    background: ${props => props.theme.colors.secundary};
     min-width: 50%;
-    border: 1px solid ${props => props.theme.colors.lightGray};
+    border: none;
     div {
       color: ${props => props.theme.colors.headingColor};
+      font-size: 14px;
     }
   }
 `

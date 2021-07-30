@@ -20,5 +20,5 @@ export const WrapperShortDescription = styled.div`
   }
 `
 export const WrapperDescription = styled(WrapperShortDescription)`
-  margin-top: 25px;
+  margin-top: 35px;
 `

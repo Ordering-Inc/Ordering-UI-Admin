@@ -3,13 +3,15 @@ import styled, { css } from 'styled-components'
 export const Header = styled.div`
   position: fixed;
   width: 100vw;
-  border-bottom: 1px solid #CCC;
   z-index: 1000;
 `
 
 export const SidebarContainer = styled.div`
   @media print {
     display: none;
+  }
+  button.btn-primary {
+    background-color: ${props => props.theme.colors.primary};
   }
   transition: width 0.4s ease;
   position: fixed;
@@ -34,9 +36,9 @@ export const SidebarInnerContainer = styled.div`
     position: sticky;
     top: 0px;
     ${props => props.theme?.rtl ? css`
-      border-left: 1px solid #E9ECEF;
+      border-left: 1px solid ${props => props.theme.colors.borderColor};
     ` : css`
-      border-right: 1px solid #E9ECEF;
+      border-right: 1px solid ${props => props.theme.colors.borderColor};
     `}
   }
 `
@@ -48,7 +50,6 @@ export const LogoWrap = styled.div`
 
   @media (min-width: 760px) {
     height: 80px;
-    border-bottom: 1px solid #CCC;
   }
 `
 
@@ -56,6 +57,8 @@ export const SidebarContent = styled.div`
   flex: 1;
   box-sizing: border-box;
   transition: 0.1s;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   button {
     display: flex;
     font-size: 14px;
@@ -64,27 +67,10 @@ export const SidebarContent = styled.div`
       font-size: 20px;
     }
   }
-
-  @media (min-width: 760px) {
-    ${props => props.theme?.rtl ? css`
-      border-left: 1px solid #E9ECEF;
-    ` : css`
-      border-right: 1px solid #E9ECEF;
-    `}
-  }
 `
 
 export const UserInfo = styled.div`
-  border-top: 1px solid #E9ECEF;
   transition: 0.1s;
-
-  @media (min-width: 760px) {
-    ${props => props.theme?.rtl ? css`
-      border-left: 1px solid #E9ECEF;
-    ` : css`
-      border-right: 1px solid #E9ECEF;
-    `}
-  }
 `
 
 export const CollapseButton = styled.div`
@@ -139,7 +125,7 @@ export const IconContent = styled.span`
 
   svg {
     flex-shrink: 0;
-    font-size: 30px;
+    font-size: 24px;
   }
 `
 

@@ -49,6 +49,11 @@ export const BusinessProductListTable = styled.table`
 
   td, th {
     padding: 15px;
+    font-size: 14px;
+    &:first-child {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
   }
 
   th.more {
@@ -65,13 +70,13 @@ export const BusinessProductListTable = styled.table`
   }
 
   thead {
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
     tr {
       th {
         position: sticky;
         top: 0px;
         z-index: 100;
         background: #FFF;
-        border-bottom: 1px solid #B1BCCC;
       }
     }
   }
