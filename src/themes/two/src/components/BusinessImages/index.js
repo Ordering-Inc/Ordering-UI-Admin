@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { Camera, Image as ImageIcon } from 'react-bootstrap-icons'
 import { DragAndDrop, ExamineClick, useLanguage, BusinessGallery as BusinessGalleryController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { bytesConverter } from '../../../../../utils'
 import { Alert, Confirm } from '../Confirm'
 
 import { AutoScroll } from '../AutoScroll'
-import BiImage from '@meronex/icons/bi/BiImage'
 import MdClose from '@meronex/icons/md/MdClose'
 
 import {
@@ -17,7 +17,8 @@ import {
   SkeletonWrapper,
   UploadImageIconContainer,
   UploadImageIcon,
-  DeleteButton
+  DeleteButton,
+  CameraWrapper
 } from './styles'
 
 const BusinessImagesUI = (props) => {
@@ -119,9 +120,14 @@ const BusinessImagesUI = (props) => {
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                 : formState?.changes?.file &&
                   <img src={formState?.changes?.file} alt='header image' loading='lazy' />}
-              <UploadImageIconContainer>
+              <UploadImageIconContainer
+                isImage={formState?.changes?.file}
+              >
+                <CameraWrapper>
+                  <Camera />
+                </CameraWrapper>
                 <UploadImageIcon>
-                  <BiImage />
+                  <ImageIcon />
                   <span>{t('DRAG_DROP', 'Darg and Drop')}</span>
                 </UploadImageIcon>
               </UploadImageIconContainer>

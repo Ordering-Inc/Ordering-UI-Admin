@@ -8,7 +8,8 @@ import { OrdersManager } from '../OrdersManager'
 
 import {
   UserName,
-  SavedPlaces
+  SavedPlaces,
+  PersonalizationWrapper
 } from './styles'
 import { Personalization } from '../Personalization'
 import { UserMetaFields } from '../UserMetaFields'
@@ -76,7 +77,9 @@ export const UserDetailsUI = (props) => {
             />
           )}
           {currentMenuSelected === 'personalization' && (
-            <Personalization />
+            <PersonalizationWrapper>
+              <Personalization />
+            </PersonalizationWrapper>
           )}
         </>
       )}

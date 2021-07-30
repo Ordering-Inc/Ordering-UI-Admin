@@ -20,6 +20,7 @@ export const UsersTable = styled.table`
 
   td, th {
     padding: 10px 0;
+    font-size: 14px;
     &:first-child {
       width: 30%;
     }
@@ -36,19 +37,30 @@ export const UsersTable = styled.table`
 
   thead {
     tr {
+      border-bottom: solid 1px ${props => props.theme.colors.disabled};
       th {
         position: sticky;
         top: 0px;
         z-index: 100;
         background: #FFF;
-        border-bottom: 1px solid #B1BCCC;
       }
     }
   }
 
   tbody {
-    border-bottom: 1px solid #E9ECEF;
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
     cursor: pointer;
+
+    &:hover {
+      background-color: ${props => props.theme.colors.lightPrimary};
+    }
+    &.active {
+      background-color: ${props => props.theme.colors.lightPrimary};
+      td {
+        border-top: 1px solid ${props => props.theme.colors.primary};
+        border-bottom: 1px solid ${props => props.theme.colors.primary};
+      }
+    }
   }
 `
 
@@ -103,6 +115,14 @@ export const Image = (props) => {
 export const UserMainInfo = styled.div`
   display: flex;
   align-items: center;
+
+  ${props => props.theme?.rtl ? css`
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+    margin-left: 20px;
+  ` : css`
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+    margin-right: 20px;
+  `}
 `
 
 export const CheckBoxWrapper = styled.div`
@@ -114,12 +134,14 @@ export const CheckBoxWrapper = styled.div`
   `}
   svg {
     font-size: 24px;
-    color: ${props => props.theme.colors?.headingColor};
-
-    ${({ isChecked }) => isChecked && css`
-      color: ${props => props.theme.colors?.primary};
-    `}
+    color: #B1BCCC;
   }
+
+  ${({ isChecked }) => isChecked && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+`}
 `
 
 export const InfoBlock = styled.div`
@@ -136,7 +158,13 @@ export const InfoBlock = styled.div`
   }
 `
 export const UserTypeWrapper = styled.div`
-  width: fit-content;
+  ${props => props.theme?.rtl ? css`
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+    margin-left: 20px;
+  ` : css`
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+    margin-right: 20px;
+  `}
   > div {
     display: flex;
 
@@ -215,9 +243,14 @@ export const WrapperUserActionSelector = styled.div`
   display: flex;
   justify-content: flex-end;
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
@@ -225,9 +258,18 @@ export const WrapperUserActionSelector = styled.div`
       display: none;
     }
   }
+  .show {
+    button {
+      background: #F8F9FA !important;
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    >div {
+      border: 1px solid #E9ECEF;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
   > div {
-    border: 1px solid #E9ECEF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     ${props => props.theme?.rtl ? css`
       margin-left: 5px;
@@ -238,6 +280,9 @@ export const WrapperUserActionSelector = styled.div`
       a:last-child {
         color: #E63757;
       }
+    }
+    .dropdown-item {
+      font-size: 14px;
     }
   }
 `

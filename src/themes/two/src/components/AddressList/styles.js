@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0px 10px;
 
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;
@@ -25,8 +24,7 @@ export const AddressItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0px;
-  border-top: 1px solid #00000029;
+  padding: 12px 0px;
 
   label {
     font-size: 15px;
@@ -44,21 +42,20 @@ export const AddressItem = styled.li`
 
     span {
       color: ${props => props.theme.colors.headingColor};
+      svg {
+        color: ${props => props.theme.colors.disabled};
+      }
       font-size: 14px;
       display: flex;
       cursor: pointer;
-      margin-right: 10px;
+      margin-right: 15px;
       ${props => props.theme?.rtl && css`
-        margin-left: 10px;
+        margin-left: 15px;
         margin-right: 0px;
       `}
       &.radio {
         color: ${props => props.theme.colors.primary};
         font-size: 24px;
-      }
-
-      @media (min-width: 768px) {
-        font-size: 16px;
       }
     }
   }
@@ -67,15 +64,9 @@ export const AddressItem = styled.li`
     display: flex;
     flex-direction: column;
     line-height: 1.5;
-
-    span:last-child {
-      opacity: 0.5;
-      font-size: 12px;
+    span {
+      text-align: initial;
     }
-  }
-
-  &:last-child {
-    border-bottom: 1px solid #00000029;
   }
 `
 
@@ -90,12 +81,14 @@ export const AddressItemActions = styled.div`
 
     &:nth-child(1) {
       svg {
+        font-size: 16px;
         color: #03459E;
       }
     }
 
     &:nth-child(2) {
       svg {
+        font-size: 16px;
         color: #D81212;
       }
     }
@@ -186,7 +179,7 @@ export const WrapperAddressForm = styled.div`
   height: 100vh;
   overflow: auto;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 35px 20px;
 
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid #E9ECEF;

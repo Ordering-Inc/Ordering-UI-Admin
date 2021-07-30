@@ -8,7 +8,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 
 import {
-  SingleListBusinessContainer,
+  SingleBusinessContainer,
   WrapperImage,
   Image,
   BusinessGeneralInfo,
@@ -31,7 +31,8 @@ const SingleBusinessUI = (props) => {
     handleChangeActiveBusiness,
     handleDuplicateBusiness,
     handleDeleteBusiness,
-    handleOpenBusinessDetails
+    handleOpenBusinessDetails,
+    detailsBusinessId
   } = props
 
   const [, t] = useLanguage()
@@ -43,17 +44,18 @@ const SingleBusinessUI = (props) => {
     if (isInvalid) return
     handleOpenBusinessDetails(businessState?.business)
   }
+
   return (
     <>
       {viewMethod === 'list' && (
         <>
           {(businessState?.loading || isSkeleton) ? (
-            <SingleListBusinessContainer>
+            <SingleBusinessContainer>
               <tr>
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
-                      <WrapperImage>
+                      <WrapperImage isSkeleton={businessState?.loading || isSkeleton}>
                         <Skeleton width={45} height={45} />
                       </WrapperImage>
                       <InfoBlock>
@@ -98,9 +100,10 @@ const SingleBusinessUI = (props) => {
                   <Skeleton width={30} />
                 </td>
               </tr>
-            </SingleListBusinessContainer>
+            </SingleBusinessContainer>
           ) : (
-            <SingleListBusinessContainer
+            <SingleBusinessContainer
+              active={businessState?.business.id === parseInt(detailsBusinessId)}
               onClick={(e) => handleClickBusiness(e)}
             >
               <tr>
@@ -180,7 +183,7 @@ const SingleBusinessUI = (props) => {
                   </WrapperBusinessActionSelector>
                 </td>
               </tr>
-            </SingleListBusinessContainer>
+            </SingleBusinessContainer>
           )}
         </>
       )}

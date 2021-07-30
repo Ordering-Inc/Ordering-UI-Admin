@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import FiCamera from '@meronex/icons/fi/FiCamera'
+import { Camera as CameraIcon } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import {
@@ -122,10 +122,10 @@ const UserProfileFormUI = (props) => {
                     )}
                 </DragAndDrop>
               </ExamineClick>
+              {edit && (
+                <Camera><CameraIcon /></Camera>
+              )}
             </Image>
-            {edit && (
-              <Camera><FiCamera /></Camera>
-            )}
           </UserImage>
 
           {!edit && (
@@ -162,8 +162,8 @@ const UserProfileFormUI = (props) => {
         )}
         {!edit && (
           <Button
-            color='lightPrimary'
-            borderRadius='5px'
+            color='secundaryDark'
+            borderRadius='8px'
             onClick={() => toggleEditState(true)}
           >
             {t('EDIT', 'Edit')}

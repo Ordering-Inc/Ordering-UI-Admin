@@ -70,6 +70,7 @@ export const BusinessTypes = (props) => {
           <BusinessType
             key={businessType.id}
             disabled={formState?.loading}
+            isChecked={selectedBusinessTypes.includes(businessType.id)}
             onClick={() => handleSelectBusinessTypes(businessType.id)}
           >
             {selectedBusinessTypes.includes(businessType.id) ? (

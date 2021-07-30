@@ -20,7 +20,7 @@ export const PopoverBody = styled.div`
   border-radius: 7.6px;
   max-width: 250px;
   z-index: 1001;
-  border: 1px solid ${props => props.theme.colors?.headingColor};
+  border: 1px solid ${props => props.theme.colors?.borderColor};
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
 
   ${props => props.theme?.rtl ? css`

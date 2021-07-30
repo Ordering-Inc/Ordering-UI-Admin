@@ -28,7 +28,8 @@ export const OrdersListing = (props) => {
     messageType,
     loadMoreOrders,
     ordersStatusGroup,
-    groupStatus
+    groupStatus,
+    orderDetailId
   } = props
 
   const theme = useTheme()
@@ -62,6 +63,7 @@ export const OrdersListing = (props) => {
                   driversList={driversList}
                   pagination={pagination}
                   selectedOrderIds={selectedOrderIds}
+                  orderDetailId={orderDetailId}
                   loadMoreOrders={loadMoreOrders}
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                   handleSelectedOrderIds={handleSelectedOrderIds}

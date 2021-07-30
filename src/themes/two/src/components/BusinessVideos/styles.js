@@ -16,6 +16,7 @@ export const BusinessVideoPathWrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 14px;
   }
   svg {
     font-size: 20px;

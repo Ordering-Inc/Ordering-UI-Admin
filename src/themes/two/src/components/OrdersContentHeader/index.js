@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
-import MdcFilterOutline from '@meronex/icons/mdc/MdcFilterOutline'
+import { Funnel } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
 
@@ -79,7 +79,7 @@ export const OrdersContentHeader = (props) => {
               placeholder={t('SEARCH', 'Search')}
             />
             <FilterButton onClick={() => setFilterModalOpen(true)} name='filter-btn'>
-              {filterApplied ? <MdcFilterOutline /> : <MdcFilterOff />}
+              {filterApplied ? <Funnel /> : <MdcFilterOff />}
             </FilterButton>
           </WrapperSearchAndFilter>
         </TopRightSection>

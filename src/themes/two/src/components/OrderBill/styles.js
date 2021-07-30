@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const OrderBillContainer = styled.div`
-  color: #191919;
+  color: ${props => props.theme.colors.headingColor};
   padding: 15px 0 20px;
   display: flex;
   align-items: center;

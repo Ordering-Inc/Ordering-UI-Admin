@@ -37,6 +37,7 @@ export const OrdersTable = (props) => {
     driversList,
     pagination,
     selectedOrderIds,
+    orderDetailId,
     loadMoreOrders,
     handleUpdateOrderStatus,
     handleSelectedOrderIds,
@@ -164,7 +165,7 @@ export const OrdersTable = (props) => {
   }
 
   const handleClickOrder = (order, e) => {
-    const inValid = !isSelectedOrders && (e.target.closest('.orderNo') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'))
+    const inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'))
     if (inValid) return
     handleOpenOrderDetail(order)
   }
@@ -189,6 +190,7 @@ export const OrdersTable = (props) => {
         isSelectedOrders={isSelectedOrders}
       >
         <Table
+          className='orders_table'
           isSelectedOrders={isSelectedOrders}
         >
           <thead>
@@ -228,10 +230,10 @@ export const OrdersTable = (props) => {
               </th>
             </tr>
           </thead>
-          <tbody id='orders'>
-            {orderList.loading ? (
-              [...Array(10).keys()].map(i => (
-                <tr key={i}>
+          {orderList.loading ? (
+            [...Array(10).keys()].map(i => (
+              <tbody key={i}>
+                <tr>
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                   >
@@ -328,22 +330,27 @@ export const OrdersTable = (props) => {
                     </div>
                   </td>
                 </tr>
-              ))
-            ) : (
-              <>
-                {currentOrders.map(order => (
-                  <tr
-                    key={order.id}
-                    onClick={(e) => handleClickOrder(order, e)}
-                  >
+              </tbody>
+            ))
+          ) : (
+            <>
+              {currentOrders.map(order => (
+                <tbody
+                  key={order.id}
+                  className={parseInt(orderDetailId) === order.id ? 'active' : ''}
+                  onClick={(e) => handleClickOrder(order, e)}
+                >
+                  <tr>
                     <td
-                      className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
+                      className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
                     >
-                      <OrderNumberContainer
-                        onClick={() => handleSelectedOrderIds(order.id)}
-                      >
+                      <OrderNumberContainer>
                         {!isSelectedOrders && (
-                          <CheckBox isChecked={selectedOrderIds.includes(order?.id)}>
+                          <CheckBox
+                            isChecked={selectedOrderIds.includes(order?.id)}
+                            onClick={() => handleSelectedOrderIds(order.id)}
+                            className='orderCheckBox'
+                          >
                             {selectedOrderIds.includes(order?.id) ? (
                               <RiCheckboxFill />
                             ) : (
@@ -496,10 +503,10 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   </tr>
-                ))}
-              </>
-            )}
-          </tbody>
+                </tbody>
+              ))}
+            </>
+          )}
         </Table>
       </OrdersContainer>
 

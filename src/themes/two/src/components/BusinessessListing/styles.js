@@ -21,7 +21,7 @@ export const ViewContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   margin-top: 10px;
 `
 

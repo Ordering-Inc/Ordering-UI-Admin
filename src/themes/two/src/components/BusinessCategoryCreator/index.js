@@ -10,7 +10,7 @@ import {
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import BiImage from '@meronex/icons/bi/BiImage'
+import { Image as ImageIcon } from 'react-bootstrap-icons'
 import {
   CreateBusinessCategoryContainer,
   InputCategoryName,
@@ -133,9 +133,11 @@ const BusinessCategoryCreatorUI = (props) => {
               {(!categoryState.loading && categoryState.category?.image && categoryState.result?.result !== 'Network Error')
                 ? (<img src={categoryState?.category?.image} alt='header image' loading='lazy' />)
                 : (
-                  <UploadImageIconContainer small='true'>
+                  <UploadImageIconContainer
+                    isImage={categoryState?.category?.image}
+                  >
                     <UploadImageIcon>
-                      <BiImage small='true' />
+                      <ImageIcon />
                     </UploadImageIcon>
                   </UploadImageIconContainer>
                 )}

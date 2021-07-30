@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { darken, lighten } from 'polished'
+import { darken } from 'polished'
 
 export const Button = styled.button`
   background: #CCC;
@@ -9,7 +9,7 @@ export const Button = styled.button`
   line-height: 30px;
   padding-left: 15px;
   padding-right: 15px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   outline: none;
   overflow: hidden;
@@ -26,7 +26,7 @@ export const Button = styled.button`
   `}
 
   ${({ bgtransparent }) => bgtransparent && css`
-      background: transparent !important;
+    background: transparent !important;
   `}
   ${({ initialIcon }) => initialIcon && css`
     text-align: left;
@@ -140,11 +140,19 @@ export const Button = styled.button`
   `}
 
   ${({ color }) => color === 'lightPrimary' && css`
-    background: ${props => lighten(0.4, props.theme.colors.primary)};
+    background: ${props => props.theme.colors.lightPrimary};
     color: ${props => props.theme.colors.primary};
-    border-color: ${props => lighten(0.4, props.theme.colors.primary)};
+    border-color: ${props => props.theme.colors.lightPrimary};
     &:active {
-      background: ${props => lighten(0.2, props.theme.colors.primary)};
+      background: ${props => darken(0.07, props.theme.colors.lightPrimary)};
+    }
+  `}
+  ${({ color }) => color === 'secundaryDark' && css`
+    background: ${props => props.theme.colors.secundaryDarkContrast};
+    color: ${props => props.theme.colors.secundaryDark};
+    border-color: ${props => props.theme.colors.secundaryDarkContrast};
+    &:active {
+      background: ${props => darken(0.07, props.theme.colors.secundaryDarkContrast)};
     }
   `}
   ${({ color }) => color === 'secundary' && css`

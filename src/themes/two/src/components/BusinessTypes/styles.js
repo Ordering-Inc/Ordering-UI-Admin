@@ -10,10 +10,6 @@ export const BusinessType = styled.div`
   border-bottom: 1px solid #E9ECEF;
   padding: 15px;
 
-  ${({ disabled }) => disabled && css`
-    pointer-events: none;
-  `}
-
   img {
     width: 32px;
     height: 32px;
@@ -31,6 +27,16 @@ export const BusinessType = styled.div`
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
   }
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
+
+  ${({ isChecked }) => !isChecked && css`
+    svg {
+      color: #B1BCCC;
+    }
+  `}
 `
 
 export const AddNewBusinessTypeContainer = styled.div`

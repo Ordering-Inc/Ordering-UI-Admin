@@ -44,6 +44,8 @@ const BusinessessListingUI = (props) => {
 
   const handleBackRedirect = () => {
     setOpenBusinessDetails(false)
+    setDetailsBusiness(null)
+    setDetailsBusinessId(null)
     onBusinessRedirect()
   }
 
@@ -117,11 +119,13 @@ const BusinessessListingUI = (props) => {
           viewMethod={viewMethod}
           businessList={businessList}
           pagination={pagination}
+          detailsBusinessId={detailsBusinessId}
           loadMoreBusinesses={loadMoreBusinesses}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessAddBusiness={handleSucessAddBusiness}
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleOpenBusinessDetails={handleOpenBusinessDetails}
+          handleOpenAddBusiness={handleOpenAddBusiness}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (

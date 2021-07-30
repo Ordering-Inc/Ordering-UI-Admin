@@ -22,7 +22,7 @@ export const OrderStatusFilterBar = (props) => {
   const [, t] = useLanguage()
   return (
     <>
-      <OrderStatusFilterContainer>
+      <OrderStatusFilterContainer className='order_status_filter'>
         <InnerContainer>
           <AutoScroll innerScroll scrollId='orderStatus'>
             <Tab

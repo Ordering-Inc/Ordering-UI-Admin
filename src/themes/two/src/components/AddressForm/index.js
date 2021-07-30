@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import FaHome from '@meronex/icons/fa/FaHome'
-import FaPlus from '@meronex/icons/fa/FaPlus'
-import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
-import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
+
+import {
+  HouseDoor,
+  Building,
+  SuitHeart,
+  PlusLg
+} from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -22,6 +25,7 @@ import {
 
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../GoogleGpsButton'
+import { Button } from '../../styles/Buttons'
 
 import {
   FormControl,
@@ -30,13 +34,14 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
-  // ShowMap,
   WrapperSkeleton,
   Title,
-  CloseButton
+  CloseButton,
+  InputText,
+  WrapInput,
+  TagButton
 } from './styles'
 
-import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
 const inputNames = [
@@ -405,6 +410,7 @@ const AddressFormUI = (props) => {
           {inputNames.map(field => showField && showField(field.name) && (
             field.name === 'address' ? (
               <React.Fragment key={field.name}>
+                <InputText>{t('ADDRESS', 'Addresss')}</InputText>
                 <AddressWrap className='google-control'>
                   <WrapAddressInput>
                     <HiOutlineLocationMarker />
@@ -437,37 +443,40 @@ const AddressFormUI = (props) => {
                     IconLoadingButton={CgSearchLoading}
                   />
                 </AddressWrap>
-
-                {/* {(addressState?.address?.location || formState?.changes?.location) && !toggleMap && (
-                  <ShowMap onClick={() => setToggleMap(!toggleMap)}>{t('VIEW_MAP', 'View map to modify the exact location')}</ShowMap>
-                )} */}
               </React.Fragment>
             ) : (
               <React.Fragment key={field.name}>
                 {field.name !== 'address_notes' ? (
-                  <Input
+                  <WrapInput
                     className={field.name}
-                    placeholder={t(field.name.toUpperCase(), field.code)}
-                    value={formState.changes?.[field.name] ?? addressState.address?.[field.name] ?? ''}
-                    onChange={(e) => {
-                      formMethods.setValue(field.name, e.target.value)
-                      handleChangeInput({ target: { name: field.name, value: e.target.value } })
-                    }}
-                    autoComplete='new-field'
-                    maxLength={30}
-                  />
+                  >
+                    <InputText>{t(field.name.toUpperCase(), field.code)}</InputText>
+                    <Input
+                      placeholder={t(field.name.toUpperCase(), field.code)}
+                      value={formState.changes?.[field.name] ?? addressState.address?.[field.name] ?? ''}
+                      onChange={(e) => {
+                        formMethods.setValue(field.name, e.target.value)
+                        handleChangeInput({ target: { name: field.name, value: e.target.value } })
+                      }}
+                      autoComplete='new-field'
+                      maxLength={30}
+                    />
+                  </WrapInput>
                 ) : (
-                  <TextArea
-                    rows={4}
-                    placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-                    value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
-                    onChange={(e) => {
-                      formMethods.setValue('address_notes', e.target.value)
-                      handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
-                    }}
-                    autoComplete='new-field'
-                    maxLength={250}
-                  />
+                  <WrapInput className='address_notes'>
+                    <InputText>{t('ADDRESS_NOTES', 'Address Notes')}</InputText>
+                    <TextArea
+                      rows={4}
+                      placeholder={t('ADDRESS_NOTES', 'Address Notes')}
+                      value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
+                      onChange={(e) => {
+                        formMethods.setValue('address_notes', e.target.value)
+                        handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+                      }}
+                      autoComplete='new-field'
+                      maxLength={250}
+                    />
+                  </WrapInput>
                 )}
               </React.Fragment>
             )
@@ -476,18 +485,34 @@ const AddressFormUI = (props) => {
           {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
 
           <AddressTagSection>
-            <Button borderRadius='5px' className={addressTag === 'home' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('home')}>
-              <FaHome />
-            </Button>
-            <Button borderRadius='5px' className={addressTag === 'office' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('office')}>
-              <FaRegBuilding />
-            </Button>
-            <Button borderRadius='5px' className={addressTag === 'favorite' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('favorite')}>
-              <FaRegHeart />
-            </Button>
-            <Button borderRadius='5px' className={addressTag === 'other' ? 'active' : ''} type='button' outline onClick={() => handleAddressTag('other')}>
-              <FaPlus />
-            </Button>
+            <TagButton
+              active={addressTag === 'home' ? 'active' : ''}
+              onClick={() => handleAddressTag('home')}
+            >
+              <HouseDoor />
+              {t('HOME', 'Home')}
+            </TagButton>
+            <TagButton
+              active={addressTag === 'office' ? 'active' : ''}
+              onClick={() => handleAddressTag('office')}
+            >
+              <Building />
+              {t('OFFICE', 'Office')}
+            </TagButton>
+            <TagButton
+              active={addressTag === 'favorite' ? 'active' : ''}
+              onClick={() => handleAddressTag('favorite')}
+            >
+              <SuitHeart />
+              {t('FAVORITE', 'Favorite')}
+            </TagButton>
+            <TagButton
+              active={addressTag === 'other' ? 'active' : ''}
+              onClick={() => handleAddressTag('other')}
+            >
+              <PlusLg />
+              {t('MORE', 'More')}
+            </TagButton>
           </AddressTagSection>
           {
             props.afterMidElements?.map((MidElement, i) => (
@@ -501,31 +526,20 @@ const AddressFormUI = (props) => {
           }
           <FormActions>
             <Button
-              outline
-              type='button'
+              id='submit-btn'
+              type='submit'
               borderRadius='5px'
-              disabled={formState.loading}
-              onClick={() => onCancel()}
+              disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+              color='primary'
             >
-              {t('CANCEL', 'Cancel')}
+              {!formState.loading ? (
+                isEditing || (!auth && orderState.options?.address?.address)
+                  ? t('SAVE', 'SAVE')
+                  : t('ADD', 'Add')
+              ) : (
+                t('LOADING', 'Loading')
+              )}
             </Button>
-            {Object.keys(formState?.changes).length > 0 && (
-              <Button
-                id='submit-btn'
-                type='submit'
-                borderRadius='5px'
-                disabled={formState.loading}
-                color='primary'
-              >
-                {!formState.loading ? (
-                  isEditing || (!auth && orderState.options?.address?.address)
-                    ? t('UPDATE', 'Update')
-                    : t('ADD', 'Add')
-                ) : (
-                  t('LOADING', 'Loading')
-                )}
-              </Button>
-            )}
           </FormActions>
         </FormControl>
       )}
