@@ -20,7 +20,8 @@ export const BusinessDeliveryZoneBasic = (props) => {
     handleChangeZoneData,
     handleUpdateBusinessDeliveryZone,
     isAddValid,
-    handleAddBusinessDeliveryZone
+    handleAddBusinessDeliveryZone,
+    loading
   } = props
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
@@ -141,8 +142,13 @@ export const BusinessDeliveryZoneBasic = (props) => {
           color='primary'
           borderRadius='5px'
           onClick={() => handleSave()}
+          disabled={loading}
         >
-          {isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save')}
+          {
+            loading
+              ? t('LOADING', 'loading')
+              : isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save')
+          }
         </Button>
       </BasicContainer>
       <Alert

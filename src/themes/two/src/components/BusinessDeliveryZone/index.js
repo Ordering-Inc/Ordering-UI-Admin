@@ -127,7 +127,7 @@ const BusinessDeliveryZoneUI = (props) => {
         })
       }
     }
-  }, [errors, isAddValid])
+  }, [errors, isAddValid, isAddMode])
 
   return (
     <>
@@ -147,9 +147,9 @@ const BusinessDeliveryZoneUI = (props) => {
               <ZoneActions>{t('ACTIONS', 'Actions')}</ZoneActions>
             </DeliveryZoneWrapper>
             {businessDeliveryZonesState?.zones?.map(zone => (
-              <>
+              <React.Fragment key={zone.id}>
                 {zone?.type !== 3 && (
-                  <DeliveryZoneWrapper key={zone.id}>
+                  <DeliveryZoneWrapper>
                     <ZoneName>
                       <input
                         name='name'
@@ -196,7 +196,7 @@ const BusinessDeliveryZoneUI = (props) => {
                           onChange={() => handleChangeActiveState(zone.id)}
                         />
                       </EnableWrapper>
-                      <DropDownWrapper>
+                      <DropDownWrapper disabled={isEdit || isAddValid}>
                         <DropdownButton
                           menuAlign={theme?.rtl ? 'left' : 'right'}
                           title={<FiMoreVertical />}
@@ -217,7 +217,7 @@ const BusinessDeliveryZoneUI = (props) => {
                     </ZoneActions>
                   </DeliveryZoneWrapper>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </DeliveryZonesContainer>
 
@@ -255,7 +255,9 @@ const BusinessDeliveryZoneUI = (props) => {
                   })}
                 />
               </ZonePrice>
-              <ZoneActions>
+              <ZoneActions
+                disabled={isEdit || isAddValid}
+              >
                 <AddButton
                   type='submit'
                   onClick={() => handleOpenSetting({})}
@@ -281,6 +283,7 @@ const BusinessDeliveryZoneUI = (props) => {
                 zone={curZone}
                 business={business}
                 handleZoneType={handleZoneType}
+                loading={formState.loading}
                 handleChangeZoneData={handleChangeZoneData}
                 handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
                 handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
@@ -298,6 +301,7 @@ const BusinessDeliveryZoneUI = (props) => {
                   zone={curZone}
                   business={business}
                   handleZoneType={handleZoneType}
+                  loading={formState.loading}
                   handleChangeZoneData={handleChangeZoneData}
                   handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
                   handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
