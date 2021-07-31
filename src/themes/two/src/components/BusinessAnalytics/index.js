@@ -21,6 +21,7 @@ import {
   AnalyticsContentWrapper
 } from './styles'
 import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
+import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
@@ -85,6 +86,9 @@ const BusinessAnalyticsUI = (props) => {
         </div>
         <div className='col-md-12'>
           <AnalyticsOrdersStatus />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsRegisterUsers />
         </div>
       </AnalyticsContentWrapper>
       <Modal
