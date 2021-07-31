@@ -86,10 +86,18 @@ export const ImageContainer = styled.div`
 
   > * {
     ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
-    ` : css`
       margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
     `}
+
+    &:last-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0px;
+      ` : css`
+        margin-right: 0px;
+      `}
+    }
   }
 
   img {
@@ -157,7 +165,6 @@ export const MessageBusiness = styled.div`
   flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
-  max-width: 400px;
   margin: 0 auto;
   margin-bottom: 20px;
 `
@@ -169,7 +176,6 @@ export const MessageCustomer = styled.div`
   flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
-  max-width: 400px;
   margin: 0 auto;
   margin-bottom: 20px;
 `
@@ -178,7 +184,7 @@ export const BubbleConsole = styled.div`
   border-radius: 5px;
   padding: 10px 25px 10px 25px;
   margin-bottom: 8px;
-  background: #EFEFEF;
+  background: ${props => props.theme.colors.secundary};
   text-align: center;
   height: auto;
   overflow: hidden;
@@ -201,7 +207,7 @@ export const BubbleBusines = styled.div`
   max-width: 80%;
   min-width: 80px;
   margin-bottom: 8px;
-  background: #EFEFEF;
+  background: ${props => props.theme.colors.secundary};
   overflow: hidden;
   overflow-wrap: break-word;
   &[name=image]{

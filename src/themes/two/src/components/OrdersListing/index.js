@@ -42,6 +42,13 @@ export const OrdersListing = (props) => {
     handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType)
   }, [orderList.loading, messageListView])
 
+  useEffect(() => {
+    if (!isMessagesView || orderList.loading) return
+    if (orderList?.orders.length > 0) {
+      handleOrderCardClick(orderList.orders[0])
+    }
+  }, [isMessagesView, orderList])
+
   return (
     <>
       {((ordersStatusGroup === groupStatus) || isMessagesView) && (
