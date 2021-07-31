@@ -18,6 +18,7 @@ export const ChartHeaderContainer = styled.div`
     margin: 0;
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
+    text-transform: uppercase;
   }
 `
 

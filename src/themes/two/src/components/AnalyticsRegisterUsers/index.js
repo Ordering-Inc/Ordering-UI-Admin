@@ -15,7 +15,6 @@ import moment from 'moment'
 
 const AnalyticsRegisterUsersUI = (props) => {
   const {
-    isOrders,
     registerUsersList
   } = props
 

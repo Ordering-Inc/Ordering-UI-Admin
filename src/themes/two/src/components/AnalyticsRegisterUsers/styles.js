@@ -4,6 +4,7 @@ export const Container = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
   padding: 20px;
+  height: 100%;
 `
 
 export const RegisterUserChartWrapper = styled.div``
@@ -18,6 +19,7 @@ export const RegisterUsersHeader = styled.div`
     margin: 0;
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
+    text-transform: uppercase;
   }
 `
 

@@ -11,6 +11,9 @@ import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
 import { AnalyticsMap } from '../AnalyticsMap'
 import { AnalyticsLineChart } from '../AnalyticsLineChart'
 import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
+import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
+import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
+import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
@@ -20,8 +23,6 @@ import {
   CalendarContainer,
   AnalyticsContentWrapper
 } from './styles'
-import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
-import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
@@ -30,7 +31,6 @@ const BusinessAnalyticsUI = (props) => {
   const calendarRef = useRef()
 
   const handleClickOutside = (e) => {
-    console.log(isShowCalendar)
     if (!isShowCalendar) return
     const outsideCalendar = !calendarRef.current?.contains(e.target)
     if (outsideCalendar) {
@@ -89,6 +89,9 @@ const BusinessAnalyticsUI = (props) => {
         </div>
         <div className='col-md-6'>
           <AnalyticsRegisterUsers />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsCustomerSatisfaction />
         </div>
       </AnalyticsContentWrapper>
       <Modal
