@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Modal } from '../Modal'
 import { SearchBar } from '../SearchBar'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import { Funnel } from 'react-bootstrap-icons'
@@ -85,25 +84,15 @@ export const OrdersContentHeader = (props) => {
         </TopRightSection>
       </OrderContentHeaderContainer>
 
-      {filterModalOpen && (
-        <Modal
-          title={t('FILTER', 'Filter')}
-          width='80%'
-          padding='30px'
-          open={filterModalOpen}
-          onClose={() => setFilterModalOpen(false)}
-        >
-          <OrdersFilterGroup
-            open={filterModalOpen}
-            handleCloseFilterModal={() => setFilterModalOpen(false)}
-            driverGroupList={driverGroupList}
-            driversList={driversList}
-            paymethodsList={paymethodsList}
-            businessesList={businessesList}
-            handleChangeFilterValues={handleChangeFilterValues}
-          />
-        </Modal>
-      )}
+      <OrdersFilterGroup
+        open={filterModalOpen}
+        handleCloseFilterModal={() => setFilterModalOpen(false)}
+        driverGroupList={driverGroupList}
+        driversList={driversList}
+        paymethodsList={paymethodsList}
+        businessesList={businessesList}
+        handleChangeFilterValues={handleChangeFilterValues}
+      />
     </>
   )
 }

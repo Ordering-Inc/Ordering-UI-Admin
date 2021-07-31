@@ -87,7 +87,7 @@ export const MultiSelect = (props) => {
           <Header>
             {selectedOptions.map((selectedOption) => (
               <React.Fragment key={selectedOption.value}>
-                {selectedOption.content},
+                {selectedOption.showOnSelected || selectedOption.content},
               </React.Fragment>
             ))}
           </Header>

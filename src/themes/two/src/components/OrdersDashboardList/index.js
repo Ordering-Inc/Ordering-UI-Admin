@@ -1,5 +1,6 @@
 import React from 'react'
-import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
+// import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
+import { DashboardOrdersList as OrdersListController } from './naked'
 import { OrdersListing } from '../OrdersListing'
 
 export const OrdersDashboardList = (props) => {
