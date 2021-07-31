@@ -15,11 +15,14 @@ import {
   Image,
   CardContent,
   DriverSelectorWrapper,
-  WrapperPagination
+  WrapperPagination,
+  UnreadMessageCounter
 } from './styles'
 
 export const OrdersCards = (props) => {
   const {
+    isMessagesView,
+
     orderList,
     driversList,
     pagination,
@@ -144,6 +147,11 @@ export const OrdersCards = (props) => {
                     </ViewDetails>
                   </div>
                 </OrderHeader>
+                {isMessagesView && order?.unread_count > 0 && (
+                  <UnreadMessageCounter>
+                    {order?.unread_count}
+                  </UnreadMessageCounter>
+                )}
                 <CardContent>
                   <BusinessInfo>
                     <WrapperImage>

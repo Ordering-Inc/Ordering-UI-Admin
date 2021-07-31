@@ -11,6 +11,7 @@ export const OrderNunberContainer = styled.div`
 
 `
 export const OrderCard = styled.div`
+  position: relative;
   cursor: pointer;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.colors?.secundary};
@@ -170,4 +171,23 @@ export const DriverSelectorWrapper = styled.div`
 
 export const WrapperPagination = styled.div`
   margin: 20px 15px 0 15px;
+`
+
+export const UnreadMessageCounter = styled.div`
+  position: absolute;
+  top: 12px;
+  ${props => props.theme?.rtl ? css`
+    left: 20px;
+  ` : css`
+    right: 20px;
+  `}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => props.theme.colors.lightPrimary};
+  border-radius: 8px;
+  font-size: 12px;
+  height: 24px;
+  color: ${props => props.theme.colors.primary};
+  padding: 0 10px;
 `

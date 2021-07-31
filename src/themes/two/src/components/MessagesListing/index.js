@@ -16,7 +16,8 @@ import {
   MessagesOptionTabs,
   Tab,
   OrdersOrderByOptionContainer,
-  MessageContainer
+  MessageContainer,
+  ContactsContainer
 } from './styles'
 
 const MessagesListingUI = (props) => {
@@ -34,10 +35,12 @@ const MessagesListingUI = (props) => {
   const [, t] = useLanguage()
   const [selectedOption, setSelectedOption] = useState('orders')
   const [orderByOption, setOrderByOption] = useState('last_direct_message_at')
+  const [contactsOption, setContactsOption] = useState('drivers')
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
   const [selectedOrder, setSelectedOrder] = useState(null)
+  const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
 
   const handleOpenOrderDetail = (order) => {
     setDetailsOrder(order)
@@ -81,22 +84,49 @@ const MessagesListingUI = (props) => {
                   {t('CONTACTS', 'Contacts')}
                 </Tab>
               </MessagesOptionTabs>
-              <OrdersOrderByOptionContainer>
-                <Button
-                  color={orderByOption === 'last_direct_message_at' ? 'primary' : 'secundaryDark'}
-                  onClick={() => setOrderByOption('last_direct_message_at')}
-                >
-                  {t('NEWEST', 'Newest')}
-                  {orderByOption === 'last_direct_message_at' && <MdClose />}
-                </Button>
-                <Button
-                  color={orderByOption === 'id' ? 'primary' : 'secundaryDark'}
-                  onClick={() => setOrderByOption('id')}
-                >
-                  {t('ORDER_NUMBER', 'Order number')}
-                  {orderByOption === 'id' && <MdClose />}
-                </Button>
-              </OrdersOrderByOptionContainer>
+              {selectedOption === 'orders' && (
+                <OrdersOrderByOptionContainer>
+                  <Button
+                    color={orderByOption === 'last_direct_message_at' ? 'primary' : 'secundaryDark'}
+                    onClick={() => setOrderByOption('last_direct_message_at')}
+                  >
+                    {t('NEWEST', 'Newest')}
+                    {orderByOption === 'last_direct_message_at' && <MdClose />}
+                  </Button>
+                  <Button
+                    color={orderByOption === 'id' ? 'primary' : 'secundaryDark'}
+                    onClick={() => setOrderByOption('id')}
+                  >
+                    {t('ORDER_NUMBER', 'Order number')}
+                    {orderByOption === 'id' && <MdClose />}
+                  </Button>
+                </OrdersOrderByOptionContainer>
+              )}
+              {selectedOption === 'contacts' && (
+                <ContactsContainer>
+                  <Button
+                    color={contactsOption === 'drivers' ? 'primary' : 'secundaryDark'}
+                    onClick={() => setContactsOption('drivers')}
+                  >
+                    {t('DRIVERS', 'Drivers')}
+                    {contactsOption === 'drivers' && <MdClose />}
+                  </Button>
+                  <Button
+                    color={contactsOption === 'businesses' ? 'primary' : 'secundaryDark'}
+                    onClick={() => setContactsOption('businesses')}
+                  >
+                    {t('BUSINESSES', 'Businesses')}
+                    {contactsOption === 'businesses' && <MdClose />}
+                  </Button>
+                  <Button
+                    color={contactsOption === 'customers' ? 'primary' : 'secundaryDark'}
+                    onClick={() => setContactsOption('customers')}
+                  >
+                    {t('CUSTOMERS', 'Customers')}
+                    {contactsOption === 'customers' && <MdClose />}
+                  </Button>
+                </ContactsContainer>
+              )}
             </FilterContainer>
             <OrdersDashboardList
               isMessagesView
@@ -105,6 +135,7 @@ const MessagesListingUI = (props) => {
               driversList={driversList}
               orderByOption={orderByOption}
               selectedOrderCard={selectedOrder}
+              orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
               handleOpenOrderDetail={handleOpenOrderDetail}
               handleOrderCardClick={handleOrderCardClick}
             />
@@ -115,7 +146,7 @@ const MessagesListingUI = (props) => {
                 isChat
                 orderId={selectedOrder?.id}
                 order={selectedOrder}
-                // handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                handleUpdateOrderForUnreadCount={(orderId) => setOrderIdForUnreadCountUpdate(orderId)}
                 // messages={messages}
               />
             )}

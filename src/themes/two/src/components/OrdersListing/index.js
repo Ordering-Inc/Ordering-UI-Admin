@@ -43,11 +43,11 @@ export const OrdersListing = (props) => {
   }, [orderList.loading, messageListView])
 
   useEffect(() => {
-    if (!isMessagesView || orderList.loading) return
+    if (!isMessagesView || orderList.loading || selectedOrderCard) return
     if (orderList?.orders.length > 0) {
       handleOrderCardClick(orderList.orders[0])
     }
-  }, [isMessagesView, orderList])
+  }, [isMessagesView, orderList, selectedOrderCard])
 
   return (
     <>
@@ -80,6 +80,8 @@ export const OrdersListing = (props) => {
                 />
               ) : (
                 <OrdersCards
+                  isMessagesView={isMessagesView}
+
                   orderList={orderList}
                   driversList={driversList}
                   pagination={pagination}
