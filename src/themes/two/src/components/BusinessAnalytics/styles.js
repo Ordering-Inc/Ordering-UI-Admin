@@ -66,8 +66,8 @@ export const CalendarContainer = styled.div`
   width: 300px;
 `
 
-export const AnalyticsChartWrapper = styled.div`
+export const AnalyticsContentWrapper = styled.div`
   > div {
-    margin-top: 35px;
+    margin-top: 40px;
   }
 `

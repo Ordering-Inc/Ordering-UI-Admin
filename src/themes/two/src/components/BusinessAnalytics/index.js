@@ -18,8 +18,9 @@ import {
   BusinessFilterWrapper,
   BusinessCalendarWrapper,
   CalendarContainer,
-  AnalyticsChartWrapper
+  AnalyticsContentWrapper
 } from './styles'
+import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
@@ -69,7 +70,7 @@ const BusinessAnalyticsUI = (props) => {
       <AnalyticsStatusFilterBar {...props} />
       <AnalyticsStatusSubFilter {...props} />
       <AnalyticsMap />
-      <AnalyticsChartWrapper className='row'>
+      <AnalyticsContentWrapper className='row'>
         <div className='col-md-6'>
           <AnalyticsLineChart isOrders />
         </div>
@@ -82,7 +83,10 @@ const BusinessAnalyticsUI = (props) => {
         <div className='col-md-6'>
           <AnalyticsProductCategories />
         </div>
-      </AnalyticsChartWrapper>
+        <div className='col-md-12'>
+          <AnalyticsOrdersStatus />
+        </div>
+      </AnalyticsContentWrapper>
       <Modal
         width='50%'
         height='80vh'

@@ -1,0 +1,57 @@
+import styled, { css } from 'styled-components'
+
+export const Container = styled.div`
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 7.6px;
+  padding: 20px;
+`
+
+export const ProductCategoryHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: ${props => props.theme?.colors.headingColor};
+    text-transform: uppercase;
+  }
+`
+
+export const ActionBlock = styled.div`
+  svg {
+    font-size: 16px;
+    color: #212121;
+    cursor: pointer;
+  }
+`
+
+export const BarCharWrapper = styled.div`
+  height: 400px;
+
+  @media (min-width: 769px) {
+    height: 550px;
+    ${({ isEmpty }) => isEmpty && css`
+      height: 150px;
+    `}
+  }
+`
+
+export const ProductCategoryFooter = styled.div`
+  margin-top: 25px;
+
+  h2 {
+    font-weight: 500;
+    font-size: 20px;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: #909BA9;
+    margin: 0;
+  }
+`
