@@ -33,7 +33,8 @@ export const OrderCard = styled.div`
   }
   
   h2 {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
   }
 `
 
@@ -42,7 +43,7 @@ export const OrderHeader = styled.div`
     display: flex;
     margin: 10px 0;
     > p {
-      font-size: 14px;
+      font-size: 12px;
     }
   }
 `
@@ -50,7 +51,7 @@ export const OrderHeader = styled.div`
 export const ViewDetails = styled.a`
   cursor: pointer;
   color: ${props => props.theme.colors.primary};
-  font-size: 14px;
+  font-size: 12px;
   text-decoration: underline;
   margin: 0 10px;
 `
@@ -81,7 +82,7 @@ export const BusinessInfo = styled.div`
     }
     p.bold {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
     }
   }
   @media (min-width: 1300px) {

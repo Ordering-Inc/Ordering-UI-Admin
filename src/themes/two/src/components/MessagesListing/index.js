@@ -4,6 +4,9 @@ import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrdersDashboardList } from '../OrdersDashboardList'
 import { Button } from '../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
+import { OrderNotification } from '../OrderNotification'
+import { OrderDetails } from '../OrderDetails'
+import { Messages } from '../Messages'
 
 import {
   MessagesListingContainer,
@@ -12,7 +15,8 @@ import {
   FilterContainer,
   MessagesOptionTabs,
   Tab,
-  OrdersOrderByOptionContainer
+  OrdersOrderByOptionContainer,
+  MessageContainer
 } from './styles'
 
 const MessagesListingUI = (props) => {
@@ -30,6 +34,20 @@ const MessagesListingUI = (props) => {
   const [, t] = useLanguage()
   const [selectedOption, setSelectedOption] = useState('orders')
   const [orderByOption, setOrderByOption] = useState('last_direct_message_at')
+  const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
+  const [orderDetailId, setOrderDetailId] = useState(null)
+  const [detailsOrder, setDetailsOrder] = useState(null)
+  const [selectedOrder, setSelectedOrder] = useState(null)
+
+  const handleOpenOrderDetail = (order) => {
+    setDetailsOrder(order)
+    setOrderDetailId(order.id)
+    setIsOpenOrderDetail(true)
+  }
+
+  const handleOrderCardClick = (order) => {
+    setSelectedOrder({ ...order })
+  }
 
   return (
     <>
@@ -86,10 +104,35 @@ const MessagesListingUI = (props) => {
               filterValues={filterValues}
               driversList={driversList}
               orderByOption={orderByOption}
+              selectedOrderCard={selectedOrder}
+              handleOpenOrderDetail={handleOpenOrderDetail}
+              handleOrderCardClick={handleOrderCardClick}
             />
           </OrdersContainer>
+          <MessageContainer>
+            {selectedOrder && (
+              <Messages
+                isChat
+                orderId={selectedOrder?.id}
+                order={selectedOrder}
+                // handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
+                // messages={messages}
+              />
+            )}
+          </MessageContainer>
         </MessagesContent>
       </MessagesListingContainer>
+
+      {isOpenOrderDetail && (
+        <OrderDetails
+          open={isOpenOrderDetail}
+          order={detailsOrder}
+          orderId={orderDetailId}
+          driversList={driversList}
+          onClose={() => setIsOpenOrderDetail(false)}
+        />
+      )}
+      <OrderNotification />
     </>
   )
 }

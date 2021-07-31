@@ -20,10 +20,10 @@ export const OrdersListing = (props) => {
     pagination,
     handleOpenOrderDetail,
     handleOpenMessage,
-    handleLocation,
+    handleOrderCardClick,
     handleUpdateDriverLocation,
     messageOrder,
-    interActionMapOrder,
+    selectedOrderCard,
     messageListView,
     messageType,
     loadMoreOrders,
@@ -81,8 +81,8 @@ export const OrdersListing = (props) => {
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                   handleSelectedOrderIds={handleSelectedOrderIds}
                   handleOpenOrderDetail={handleOpenOrderDetail}
-                  interActionMapOrder={interActionMapOrder}
-                  handleLocation={handleLocation}
+                  selectedOrderCard={selectedOrderCard}
+                  handleOrderCardClick={handleOrderCardClick}
                   handleUpdateDriverLocation={handleUpdateDriverLocation}
                 />
               )}

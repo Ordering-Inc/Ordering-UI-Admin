@@ -113,3 +113,22 @@ export const OrdersOrderByOptionContainer = styled.div`
     }
   }
 `
+
+export const MessageContainer = styled.div`
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  height: 80vh;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+  
+  @media (min-width: 1024px) {
+    margin-top: 0px;
+    height: 100%;
+    flex: 1;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 15px;
+    ` : css`
+      margin-left: 15px;
+    `}
+  }
+`
