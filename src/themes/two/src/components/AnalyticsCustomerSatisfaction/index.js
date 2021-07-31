@@ -3,9 +3,9 @@ import { useLanguage } from 'ordering-components-admin'
 import { AnalyticsCustomerSatisfaction as AnalyticsCustomerSatisfactionController } from './naked'
 import {
   Container,
-  ProductCategoryHeader,
+  CustomerSatisfactionHeader,
   ActionBlock,
-  ProductCategoryContentWrapper,
+  CustomerSatisfactionWrapper,
   SkeletonContainerWrapper,
   ScoreDiv,
   StarContent
@@ -37,12 +37,12 @@ const AnalyticsCustomerSatisfactionUI = (props) => {
 
   return (
     <Container>
-      <ProductCategoryHeader>
+      <CustomerSatisfactionHeader>
         <p>{t('CUSTOMER_SATISFACTION', 'Customer Safisfaction')}</p>
         <ActionBlock>
           <BsDownload />
         </ActionBlock>
-      </ProductCategoryHeader>
+      </CustomerSatisfactionHeader>
       {
         customerSatisfactionList?.loading ? (
           <SkeletonContainerWrapper>
@@ -55,13 +55,13 @@ const AnalyticsCustomerSatisfactionUI = (props) => {
             }
           </SkeletonContainerWrapper>
         ) : (
-          <ProductCategoryContentWrapper>
+          <CustomerSatisfactionWrapper>
             <Score star={customerSatisfactionList?.data?.general} text={t('GENERAL', 'General')} />
             <Score star={customerSatisfactionList?.data?.quality} text={t('QUANTITY', 'Quality')} />
             <Score star={customerSatisfactionList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />
             <Score star={customerSatisfactionList?.data?.service} text={t('SERVICE', 'Service')} />
             <Score star={customerSatisfactionList?.data?.package} text={t('PACKAGE', 'Package')} />
-          </ProductCategoryContentWrapper>
+          </CustomerSatisfactionWrapper>
         )
       }
 

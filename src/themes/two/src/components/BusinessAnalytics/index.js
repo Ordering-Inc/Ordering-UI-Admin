@@ -23,6 +23,7 @@ import {
   CalendarContainer,
   AnalyticsContentWrapper
 } from './styles'
+import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
@@ -92,6 +93,9 @@ const BusinessAnalyticsUI = (props) => {
         </div>
         <div className='col-md-6'>
           <AnalyticsCustomerSatisfaction />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsOrdersAcceptSpend />
         </div>
       </AnalyticsContentWrapper>
       <Modal

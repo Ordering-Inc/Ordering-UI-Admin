@@ -7,7 +7,7 @@ export const Container = styled.div`
   height: 100%;
 `
 
-export const ProductCategoryHeader = styled.div`
+export const CustomerSatisfactionHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,23 +29,7 @@ export const ActionBlock = styled.div`
   }
 `
 
-export const ProductCategoryContentWrapper = styled.div``
-
-export const ProductCategoryContent = styled.div`
-  padding: 12px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #E9ECEF;
-  margin-bottom: 5px;
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    color: ${props => props.theme?.colors.headingColor};
-    margin-right: 10px;
-  }
-`
+export const CustomerSatisfactionWrapper = styled.div``
 
 export const SkeletonContainerWrapper = styled.div`
   > div {
