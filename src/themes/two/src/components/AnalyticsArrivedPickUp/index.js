@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsOrdersAcceptSpend as AnalyticsOrdersAcceptSpendController } from './naked'
+import { AnalyticsArrivedPickUp as AnalyticsArrivedPickUpController } from './naked'
 import GiAlarmClock from '@meronex/icons/gi/GiAlarmClock'
 import {
   Container,
@@ -8,14 +8,14 @@ import {
   OrdersAcceptSpendContent,
   TimeContentWrapper,
   ReviewContentWrapper,
-  ReviewBlock
+  ReviewBlock,
+  EmptyContent
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
-import { EmptyContent } from '../AnalyticsArrivedPickUp/styles'
 
-const AnalyticsOrdersAcceptSpendUI = (props) => {
+const AnalyticsArrivedPickUpUI = (props) => {
   const {
-    ordersAcceptSpendList
+    arrivedPickUpList
   } = props
 
   const [, t] = useLanguage()
@@ -23,10 +23,10 @@ const AnalyticsOrdersAcceptSpendUI = (props) => {
   return (
     <Container>
       <OrdersAcceptSpendHeader>
-        <p>{t('TIME_SPENT_TO_ACCEPT_ORDER', 'TIME SPENT TO ACCEPT ORDER')}</p>
+        <p>{t('TIME_WAITING_ON_READY_FOR_PICKUP', 'TIME SPENT WAITING ON READY FOR PICKUP')}</p>
       </OrdersAcceptSpendHeader>
       {
-        ordersAcceptSpendList?.loading ? (
+        arrivedPickUpList?.loading ? (
           <OrdersAcceptSpendContent>
             <TimeContentWrapper>
               <Skeleton width={70} height={40} />
@@ -34,15 +34,15 @@ const AnalyticsOrdersAcceptSpendUI = (props) => {
             </TimeContentWrapper>
             <ReviewContentWrapper>
               <Skeleton width={80} height={80} />
-              <Skeleton width={60} height={20} />
+              <Skeleton width={80} height={20} />
             </ReviewContentWrapper>
           </OrdersAcceptSpendContent>
         ) : (
-          ordersAcceptSpendList?.data ? (
+          arrivedPickUpList?.data ? (
             <OrdersAcceptSpendContent>
               <TimeContentWrapper>
-                <h1>{ordersAcceptSpendList?.data && ((parseInt(ordersAcceptSpendList?.data) / 60).toFixed(2))}</h1>
-                <p>{t('MINUTES', 'Minutes')}</p>
+                <h1>{arrivedPickUpList?.data}</h1>
+                <p>{t('SECONDS', 'Seconds')}</p>
               </TimeContentWrapper>
               <ReviewContentWrapper>
                 <ReviewBlock>
@@ -52,24 +52,21 @@ const AnalyticsOrdersAcceptSpendUI = (props) => {
               </ReviewContentWrapper>
             </OrdersAcceptSpendContent>
           ) : (
-            <EmptyContent>
-              {t('NO_DATA', 'No Data')}
-            </EmptyContent>
+            <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )
         )
       }
-
     </Container>
   )
 }
 
-export const AnalyticsOrdersAcceptSpend = (props) => {
-  const analyticsOrdersAcceptSpendProps = {
+export const AnalyticsArrivedPickUp = (props) => {
+  const analyticsArrivedPickUpProps = {
     ...props,
-    UIComponent: AnalyticsOrdersAcceptSpendUI
+    UIComponent: AnalyticsArrivedPickUpUI
   }
 
   return (
-    <AnalyticsOrdersAcceptSpendController {...analyticsOrdersAcceptSpendProps} />
+    <AnalyticsArrivedPickUpController {...analyticsArrivedPickUpProps} />
   )
 }

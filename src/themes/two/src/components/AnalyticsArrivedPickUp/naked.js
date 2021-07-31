@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSession, useApi } from 'ordering-components-admin'
 
-export const AnalyticsOrdersAcceptSpend = (props) => {
+export const AnalyticsArrivedPickUp = (props) => {
   const {
     UIComponent
   } = props
@@ -25,7 +25,7 @@ export const AnalyticsOrdersAcceptSpend = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const functionFetch = `${ordering.root}/reports/orders_accept_spend?lapse=today`
+      const functionFetch = `${ordering.root}/reports/arrived_pickup_spend?lapse=last_30_days`
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -60,14 +60,14 @@ export const AnalyticsOrdersAcceptSpend = (props) => {
       {UIComponent && (
         <UIComponent
           {...props}
-          ordersAcceptSpendList={analyticsDataList}
+          arrivedPickUpList={analyticsDataList}
         />
       )}
     </>
   )
 }
 
-AnalyticsOrdersAcceptSpend.propTypes = {
+AnalyticsArrivedPickUp.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -94,7 +94,7 @@ AnalyticsOrdersAcceptSpend.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-AnalyticsOrdersAcceptSpend.defaultProps = {
+AnalyticsArrivedPickUp.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

@@ -34,7 +34,7 @@ export const ReviewContentWrapper = styled.div`
 export const TimeContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   h1{
     font-weight: 500;
     font-size: 52px;
@@ -71,4 +71,11 @@ export const ReviewBlock = styled.div`
       fill: #FFC700;
     }
   }
+`
+
+export const EmptyContent = styled.div`
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
