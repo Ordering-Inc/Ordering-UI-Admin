@@ -73,7 +73,7 @@ const ChatContactListUI = (props) => {
               <Card
                 key={user.id}
                 // onClick={(e) => handleClickUser(e, user)}
-                // active={user?.id === user.id}
+                active={user?.id === openUser?.id}
               >
                 <WrapperImage>
                   <Image bgimage={optimizeImage(user?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />

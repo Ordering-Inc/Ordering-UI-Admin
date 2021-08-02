@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useUtils, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
+import { useUtils, useLanguage, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
+import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
 import { PaginationButton } from '../PaginationButton'
+import { OrdersLateralBar } from '../OrdersLateralBar'
 
 import {
   Container,
@@ -11,6 +13,7 @@ import {
   WrapperImage,
   Image,
   InfoContainer,
+  AssignedOrdersCount,
   WrapperPagination
 } from './styles'
 
@@ -23,6 +26,10 @@ const ChatBusinessesListUI = (props) => {
 
   const theme = useTheme()
   const [{ optimizeImage }] = useUtils()
+  const [, t] = useLanguage()
+
+  const [isOpenOrders, setIsOpenOrders] = useState(false)
+  const [openBusiness, setOpenBusiness] = useState(null)
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -48,6 +55,11 @@ const ChatBusinessesListUI = (props) => {
       }
       setCurrentPage(currentPage + 1)
     }
+  }
+
+  const handleOpenOrders = (business) => {
+    setOpenBusiness(business)
+    setIsOpenOrders(true)
   }
 
   useEffect(() => {
@@ -91,7 +103,7 @@ const ChatBusinessesListUI = (props) => {
               <Card
                 key={business.id}
                 // onClick={(e) => handleClickUser(e, user)}
-                // active={user?.id === user.id}
+                active={business?.id === openBusiness?.id}
               >
                 <WrapperImage>
                   <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
@@ -99,6 +111,13 @@ const ChatBusinessesListUI = (props) => {
                 <InfoContainer>
                   <div>
                     <p>{business?.name}</p>
+                    <BsDot />
+                    <AssignedOrdersCount
+                      className='driver_orders'
+                      onClick={() => handleOpenOrders(business)}
+                    >
+                      {t('ORDERS', 'Orders')}
+                    </AssignedOrdersCount>
                   </div>
                 </InfoContainer>
               </Card>
@@ -119,6 +138,14 @@ const ChatBusinessesListUI = (props) => {
             />
           )}
         </WrapperPagination>
+      )}
+      {isOpenOrders && openBusiness && (
+        <OrdersLateralBar
+          isBusiness
+          open={isOpenOrders}
+          business={openBusiness}
+          onClose={() => setIsOpenOrders(false)}
+        />
       )}
     </Container>
   )

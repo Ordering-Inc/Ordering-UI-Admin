@@ -19,8 +19,10 @@ export const OrdersLateralBar = (props) => {
   const {
     open,
     user,
+    business,
     isDriver,
-    isCustomer
+    isCustomer,
+    isBusiness
   } = props
 
   const [, t] = useLanguage()
@@ -84,13 +86,24 @@ export const OrdersLateralBar = (props) => {
         </CloseButton>
         <Info>
           <WrapperImage>
-            <Image bgimage={optimizeImage(user?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
+            {isBusiness ? (
+              <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+            ) : (
+              <Image bgimage={optimizeImage(user?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
+            )}
           </WrapperImage>
           <Name>
-            <p>{user?.name} {user?.lastname}</p>
+            <p>
+              {isBusiness ? (
+                business.name
+              ) : (
+                <>{user?.name} {user?.lastname}</>
+              )}
+            </p>
             <p>
               {isDriver && t('DRIVER', 'Driver')}
               {isCustomer && t('CUSTOMER', 'Customer')}
+              {isBusiness && t('BUSINESS', 'Business')}
             </p>
           </Name>
         </Info>
@@ -98,6 +111,7 @@ export const OrdersLateralBar = (props) => {
           isSelectedOrders
           driverId={isDriver ? user.id : null}
           customerId={isCustomer ? user.id : null}
+          businessId={isBusiness ? business.id : null}
           handleCustomOrderDetail={handleCustomOrderDetail}
         />
       </OrdersContainer>
