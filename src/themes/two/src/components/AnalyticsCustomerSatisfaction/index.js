@@ -8,7 +8,8 @@ import {
   CustomerSatisfactionWrapper,
   SkeletonContainerWrapper,
   ScoreDiv,
-  StarContent
+  StarContent,
+  EmptyContent
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
@@ -56,15 +57,23 @@ const AnalyticsCustomerSatisfactionUI = (props) => {
           </SkeletonContainerWrapper>
         ) : (
           <CustomerSatisfactionWrapper>
-            <Score star={customerSatisfactionList?.data?.general} text={t('GENERAL', 'General')} />
-            <Score star={customerSatisfactionList?.data?.quality} text={t('QUANTITY', 'Quality')} />
-            <Score star={customerSatisfactionList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />
-            <Score star={customerSatisfactionList?.data?.service} text={t('SERVICE', 'Service')} />
-            <Score star={customerSatisfactionList?.data?.package} text={t('PACKAGE', 'Package')} />
+            {customerSatisfactionList?.data?.general && <Score star={customerSatisfactionList?.data?.general} text={t('GENERAL', 'General')} />}
+            {customerSatisfactionList?.data?.quality && <Score star={customerSatisfactionList?.data?.quality} text={t('QUANTITY', 'Quality')} />}
+            {customerSatisfactionList?.data?.delivery && <Score star={customerSatisfactionList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />}
+            {customerSatisfactionList?.data?.service && <Score star={customerSatisfactionList?.data?.service} text={t('SERVICE', 'Service')} />}
+            {customerSatisfactionList?.data?.package && <Score star={customerSatisfactionList?.data?.package} text={t('PACKAGE', 'Package')} />}
+            {
+              !customerSatisfactionList?.data?.general &&
+              !customerSatisfactionList?.data?.quality &&
+              !customerSatisfactionList?.data?.delivery &&
+              !customerSatisfactionList?.data?.service &&
+              !customerSatisfactionList?.data?.package && (
+                <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+              )
+            }
           </CustomerSatisfactionWrapper>
         )
       }
-
     </Container>
   )
 }

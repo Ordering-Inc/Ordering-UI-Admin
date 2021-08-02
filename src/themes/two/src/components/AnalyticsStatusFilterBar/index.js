@@ -10,13 +10,13 @@ import {
 
 export const AnalyticsStatusFilterBar = (props) => {
   const {
-    selectedAnalyticsStatus,
-    changeAnalyticsStatus
+    filterList,
+    handleChangeFilterList
   } = props
 
   const changeSelectedAnalyticsStatus = (orderStatus) => {
     window.scrollTo(0, 0)
-    changeAnalyticsStatus(orderStatus)
+    handleChangeFilterList && handleChangeFilterList({ ...filterList, lapse: orderStatus })
   }
 
   const [, t] = useLanguage()
@@ -26,28 +26,28 @@ export const AnalyticsStatusFilterBar = (props) => {
         <InnerContainer>
           <AutoScroll innerScroll scrollId='orderStatus'>
             <Tab
-              active={selectedAnalyticsStatus === 'today'}
+              active={filterList?.lapse === 'today'}
               onClick={() => changeSelectedAnalyticsStatus('today')}
             >
               {t('TODAY', 'Today')}
             </Tab>
 
             <Tab
-              active={selectedAnalyticsStatus === 'yesterday'}
+              active={filterList?.lapse === 'yesterday'}
               onClick={() => changeSelectedAnalyticsStatus('yesterday')}
             >
               {t('YESTERDAY', 'Yesterday')}
             </Tab>
 
             <Tab
-              active={selectedAnalyticsStatus === 'last_7_days'}
+              active={filterList?.lapse === 'last_7_days'}
               onClick={() => changeSelectedAnalyticsStatus('last_7_days')}
             >
               {t('LAST_7_DAYS', 'Last 7 days')}
             </Tab>
 
             <Tab
-              active={selectedAnalyticsStatus === 'last_30_days'}
+              active={filterList?.lapse === 'last_30_days'}
               onClick={() => changeSelectedAnalyticsStatus('last_30_days')}
             >
               {t('LAST_30_DAYS', 'Last 30 days')}

@@ -5,7 +5,8 @@ import { useSession, useApi } from 'ordering-components-admin'
 export const AnalyticsProductCategories = (props) => {
   const {
     UIComponent,
-    isProducts
+    isProducts,
+    filterList
   } = props
   const [{ token, loading }] = useSession()
   const [ordering] = useApi()
@@ -27,7 +28,10 @@ export const AnalyticsProductCategories = (props) => {
         }
       }
       const rootUrl = isProducts ? `${ordering.root}/reports/top_selling` : `${ordering.root}/reports/top_categories`
-      const functionFetch = `${rootUrl}?lapse=yesterday&app_id=ordering-react`
+      let params = `lapse=${filterList?.lapse}`
+      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+      const functionFetch = `${rootUrl}?${params}`
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -55,7 +59,7 @@ export const AnalyticsProductCategories = (props) => {
 
   useEffect(() => {
     getProductOrCategories()
-  }, [])
+  }, [filterList])
 
   return (
     <>

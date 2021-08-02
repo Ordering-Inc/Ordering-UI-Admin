@@ -3,7 +3,8 @@ import {
   Container,
   RegisterUserChartWrapper,
   RegisterUsersHeader,
-  ActionBlock
+  ActionBlock,
+  EmptyContent
 } from './styles'
 import BsArrowsAngleExpand from '@meronex/icons/bs/BsArrowsAngleExpand'
 import BsDownload from '@meronex/icons/bs/BsDownload'
@@ -103,7 +104,9 @@ const AnalyticsRegisterUsersUI = (props) => {
           registerUsersList?.loading ? (
             <Skeleton height={150} />
           ) : (
-            <Line data={defaultData} options={options} />
+            registerUsersList?.users?.length > 0 ? (
+              <Line data={defaultData} options={options} />
+            ) : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )
         }
       </RegisterUserChartWrapper>

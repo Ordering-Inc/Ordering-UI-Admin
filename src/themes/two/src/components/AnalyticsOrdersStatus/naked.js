@@ -4,7 +4,8 @@ import { useSession, useApi } from 'ordering-components-admin'
 
 export const AnalyticsOrdersStatus = (props) => {
   const {
-    UIComponent
+    UIComponent,
+    filterList
   } = props
   const [{ token, loading }] = useSession()
   const [ordering] = useApi()
@@ -25,7 +26,11 @@ export const AnalyticsOrdersStatus = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const functionFetch = `${ordering.root}/reports/orders_status`
+      const rootUrl = `${ordering.root}/reports/orders_status`
+      let params = `lapse=${filterList?.lapse}`
+      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+      const functionFetch = `${rootUrl}?${params}`
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -53,7 +58,7 @@ export const AnalyticsOrdersStatus = (props) => {
 
   useEffect(() => {
     getProductOrCategories()
-  }, [])
+  }, [filterList])
 
   return (
     <>

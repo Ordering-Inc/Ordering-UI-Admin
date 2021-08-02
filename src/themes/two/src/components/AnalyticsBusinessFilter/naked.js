@@ -5,7 +5,9 @@ import { useApi } from 'ordering-components-admin'
 
 export const AnalyticsBusinessFilter = (props) => {
   const {
-    UIComponent
+    UIComponent,
+    filterList,
+    handleChangeFilterList
   } = props
 
   const [ordering] = useApi()
@@ -26,6 +28,12 @@ export const AnalyticsBusinessFilter = (props) => {
       _businessIds.push(id)
       setBusinessIds(_businessIds)
     }
+  }
+
+  const handleClickFilterButton = () => {
+    console.log('businessIds')
+    const _businessIds = [...businessIds]
+    handleChangeFilterList({ ...filterList, businessIds: _businessIds })
   }
 
   /**
@@ -83,6 +91,7 @@ export const AnalyticsBusinessFilter = (props) => {
           businessList={businessList}
           businessIds={businessIds}
           handleChangeBusinessId={handleChangeBusinessId}
+          handleClickFilterButton={handleClickFilterButton}
         />
       )}
     </>

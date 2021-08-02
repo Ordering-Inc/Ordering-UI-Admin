@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import { BusinessAnalytics as BusinessAnalyticsController } from './naked'
 import { useLanguage } from 'ordering-components-admin'
-import FiCalendar from '@meronex/icons/fi/FiCalendar'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button } from '../../styles/Buttons'
@@ -9,7 +8,7 @@ import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
 import { AnalyticsMap } from '../AnalyticsMap'
-import { AnalyticsLineChart } from '../AnalyticsLineChart'
+import { AnalyticsOrdersOrSales } from '../AnalyticsOrdersOrSales'
 import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
 import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
@@ -20,7 +19,6 @@ import {
   BusinessFilterCalendar,
   BusinessFilterWrapper,
   BusinessCalendarWrapper,
-  CalendarContainer,
   AnalyticsContentWrapper
 } from './styles'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
@@ -29,21 +27,6 @@ import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 const BusinessAnalyticsUI = (props) => {
   const [, t] = useLanguage()
   const [businessFilterModal, setBusinessFilterModal] = useState(false)
-  const [isShowCalendar, setIsShowCalendar] = useState(false)
-  const calendarRef = useRef()
-
-  const handleClickOutside = (e) => {
-    if (!isShowCalendar) return
-    const outsideCalendar = !calendarRef.current?.contains(e.target)
-    if (outsideCalendar) {
-      setIsShowCalendar(false)
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('mouseup', handleClickOutside)
-    return () => window.removeEventListener('mouseup', handleClickOutside)
-  }, [isShowCalendar])
 
   return (
     <BusinessAnalyticsContainer>
@@ -56,50 +39,61 @@ const BusinessAnalyticsUI = (props) => {
             </Button>
           </BusinessFilterWrapper>
           <BusinessCalendarWrapper>
-            <Button onClick={() => setIsShowCalendar(true)}>
-              <FiCalendar />
-              {t('BUSINESS', 'Business')}
-            </Button>
-            {
-              isShowCalendar && (
-                <CalendarContainer ref={calendarRef}>
-                  <AnalyticsCalendar />
-                </CalendarContainer>
-              )
-            }
+            <AnalyticsCalendar
+              {...props}
+            />
           </BusinessCalendarWrapper>
         </BusinessFilterCalendar>
       </BusinessAnalyticsHeader>
-      <AnalyticsStatusFilterBar {...props} />
-      <AnalyticsStatusSubFilter {...props} />
+      <AnalyticsStatusFilterBar
+        {...props}
+      />
+      <AnalyticsStatusSubFilter
+        {...props}
+      />
       <AnalyticsMap />
       <AnalyticsContentWrapper className='row'>
         <div className='col-md-6'>
-          <AnalyticsLineChart isOrders />
+          <AnalyticsOrdersOrSales isOrders {...props} />
         </div>
         <div className='col-md-6'>
-          <AnalyticsLineChart />
+          <AnalyticsOrdersOrSales {...props} />
         </div>
         <div className='col-md-6'>
-          <AnalyticsProductCategories isProducts />
+          <AnalyticsProductCategories
+            {...props}
+            isProducts
+          />
         </div>
         <div className='col-md-6'>
-          <AnalyticsProductCategories />
+          <AnalyticsProductCategories
+            {...props}
+          />
         </div>
         <div className='col-md-12'>
-          <AnalyticsOrdersStatus />
+          <AnalyticsOrdersStatus
+            {...props}
+          />
         </div>
         <div className='col-md-6'>
-          <AnalyticsRegisterUsers />
+          <AnalyticsRegisterUsers
+            {...props}
+          />
         </div>
         <div className='col-md-6'>
-          <AnalyticsCustomerSatisfaction />
+          <AnalyticsCustomerSatisfaction
+            {...props}
+          />
         </div>
         <div className='col-md-6'>
-          <AnalyticsOrdersAcceptSpend />
+          <AnalyticsOrdersAcceptSpend
+            {...props}
+          />
         </div>
         <div className='col-md-6'>
-          <AnalyticsArrivedPickUp />
+          <AnalyticsArrivedPickUp
+            {...props}
+          />
         </div>
       </AnalyticsContentWrapper>
       <Modal
@@ -110,7 +104,7 @@ const BusinessAnalyticsUI = (props) => {
         open={businessFilterModal}
         onClose={() => setBusinessFilterModal(false)}
       >
-        <AnalyticsBusinessFilter />
+        <AnalyticsBusinessFilter {...props} />
       </Modal>
     </BusinessAnalyticsContainer>
   )

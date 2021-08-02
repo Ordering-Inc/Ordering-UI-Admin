@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSession, useApi } from 'ordering-components-admin'
 
-export const AnalyticsLineChart = (props) => {
+export const AnalyticsOrdersOrSales = (props) => {
   const {
     UIComponent,
-    isOrders
+    isOrders,
+    filterList
   } = props
   const [{ token, loading }] = useSession()
   const [ordering] = useApi()
@@ -27,7 +28,10 @@ export const AnalyticsLineChart = (props) => {
         }
       }
       const rootUrl = isOrders ? `${ordering.root}/reports/orders` : `${ordering.root}/reports/sales`
-      const functionFetch = `${rootUrl}?lapse=yesterday&app_id=ordering-react`
+      let params = `lapse=${filterList?.lapse}`
+      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+      const functionFetch = `${rootUrl}?${params}`
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -55,7 +59,7 @@ export const AnalyticsLineChart = (props) => {
 
   useEffect(() => {
     getChartData()
-  }, [])
+  }, [filterList])
 
   return (
     <>
@@ -69,7 +73,7 @@ export const AnalyticsLineChart = (props) => {
   )
 }
 
-AnalyticsLineChart.propTypes = {
+AnalyticsOrdersOrSales.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -100,7 +104,7 @@ AnalyticsLineChart.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-AnalyticsLineChart.defaultProps = {
+AnalyticsOrdersOrSales.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

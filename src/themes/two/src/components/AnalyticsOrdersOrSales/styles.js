@@ -57,3 +57,10 @@ export const ChartFooterContainer = styled.div`
     margin: 0;
   }
 `
+
+export const EmptyContent = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

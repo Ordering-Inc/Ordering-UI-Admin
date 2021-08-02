@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
@@ -33,9 +33,6 @@ export const BarCharWrapper = styled.div`
 
   @media (min-width: 769px) {
     height: 550px;
-    ${({ isEmpty }) => isEmpty && css`
-      height: 150px;
-    `}
   }
 `
 
@@ -54,4 +51,11 @@ export const ProductCategoryFooter = styled.div`
     color: #909BA9;
     margin: 0;
   }
+`
+
+export const EmptyContent = styled.div`
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-conent: center;
 `

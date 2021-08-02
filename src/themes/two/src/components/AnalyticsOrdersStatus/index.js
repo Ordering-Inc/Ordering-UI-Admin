@@ -6,7 +6,8 @@ import {
   ProductCategoryHeader,
   ActionBlock,
   BarCharWrapper,
-  ProductCategoryFooter
+  ProductCategoryFooter,
+  EmptyContent
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import { Bar } from 'react-chartjs-2'
@@ -135,9 +136,13 @@ const AnalyticsOrdersStatusUI = (props) => {
         productCategoryList?.loading ? (
           <Skeleton height={150} />
         ) : (
-          <BarCharWrapper isEmpty={productCategoryList?.data.length === 0}>
-            <Bar data={data} options={options} />
-          </BarCharWrapper>
+          productCategoryList?.data.length > 0 ? (
+            <BarCharWrapper>
+              <Bar data={data} options={options} />
+            </BarCharWrapper>
+          ) : (
+            <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+          )
         )
       }
 

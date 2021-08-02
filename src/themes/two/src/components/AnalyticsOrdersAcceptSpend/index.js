@@ -8,10 +8,10 @@ import {
   OrdersAcceptSpendContent,
   TimeContentWrapper,
   ReviewContentWrapper,
-  ReviewBlock
+  ReviewBlock,
+  EmptyContent
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
-import { EmptyContent } from '../AnalyticsArrivedPickUp/styles'
 
 const AnalyticsOrdersAcceptSpendUI = (props) => {
   const {

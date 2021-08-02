@@ -59,12 +59,6 @@ export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
     }
   }
 `
-export const CalendarContainer = styled.div`
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 300px;
-`
 
 export const AnalyticsContentWrapper = styled.div`
   > div {

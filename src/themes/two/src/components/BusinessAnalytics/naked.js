@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 export const BusinessAnalytics = (props) => {
@@ -6,22 +6,19 @@ export const BusinessAnalytics = (props) => {
     UIComponent
   } = props
 
-  const [analyticsStatus, setAnalyticsStatus] = useState('today')
-  const [analyticsSubStatus, setAnalyticsSubStatus] = useState('all')
+  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, app_id: null })
 
-  const changeAnalyticsStatus = (status) => {
-    setAnalyticsStatus(status)
-  }
+  useEffect(() => {
+    console.log(filterList)
+  }, [filterList])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
-          selectedAnalyticsStatus={analyticsStatus}
-          selectedAnalyticsSubStatus={analyticsSubStatus}
-          changeAnalyticsStatus={changeAnalyticsStatus}
-          changeAnalyticsSubStatus={setAnalyticsSubStatus}
+          filterList={filterList}
+          handleChangeFilterList={setFilterList}
         />
       )}
     </>

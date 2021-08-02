@@ -16,7 +16,8 @@ const AnalyticsBusinessFilterUI = (props) => {
   const {
     businessList,
     businessIds,
-    handleChangeBusinessId
+    handleChangeBusinessId,
+    handleClickFilterButton
   } = props
 
   const [, t] = useLanguage()
@@ -62,6 +63,7 @@ const AnalyticsBusinessFilterUI = (props) => {
           borderRadius='7.6px'
           color='primary'
           disabled={businessList.loading}
+          onClick={handleClickFilterButton}
         >
           {t('FILTER', 'Filter')}
         </Button>

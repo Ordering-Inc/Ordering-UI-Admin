@@ -4,17 +4,18 @@ import {
   ChartContentWrapper,
   ChartHeaderContainer,
   ActionBlock,
-  ChartFooterContainer
+  ChartFooterContainer,
+  EmptyContent
 } from './styles'
 import BsArrowsAngleExpand from '@meronex/icons/bs/BsArrowsAngleExpand'
 import BsDownload from '@meronex/icons/bs/BsDownload'
-import { AnalyticsLineChart as AnalyticsLineChartController } from './naked'
+import { AnalyticsOrdersOrSales as AnalyticsOrdersOrSalesController } from './naked'
 import { Line } from 'react-chartjs-2'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 
-const AnalyticsLineChartUI = (props) => {
+const AnalyticsOrdersOrSalesUI = (props) => {
   const {
     isOrders,
     chartDataList
@@ -86,6 +87,22 @@ const AnalyticsLineChartUI = (props) => {
     pointRadius: 0
   }
 
+  const TotalOrders = () => {
+    let orders = 0
+    for (const data of chartDataList?.data) {
+      orders += data.orders
+    }
+    return orders
+  }
+
+  const TotalSales = () => {
+    let sales = 0
+    for (const data of chartDataList?.data) {
+      sales += data.sales
+    }
+    return sales.toFixed(2)
+  }
+
   return (
     <Container>
       <ChartHeaderContainer>
@@ -106,12 +123,12 @@ const AnalyticsLineChartUI = (props) => {
           chartDataList?.loading ? (
             <Skeleton height={150} />
           ) : (
-            <Line data={defaultData} options={options} />
+            chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )
         }
       </ChartContentWrapper>
       <ChartFooterContainer>
-        <h2>{chartDataList?.loading ? <Skeleton width={30} /> : 0}</h2>
+        <h2>{chartDataList?.loading ? <Skeleton width={30} /> : (isOrders ? <TotalOrders /> : <TotalSales />)}</h2>
         {chartDataList?.loading ? (
           <Skeleton width={80} />
         ) : (
@@ -122,12 +139,12 @@ const AnalyticsLineChartUI = (props) => {
   )
 }
 
-export const AnalyticsLineChart = (props) => {
-  const analyticsLineChartProps = {
+export const AnalyticsOrdersOrSales = (props) => {
+  const analyticsOrdersOrSalesProps = {
     ...props,
-    UIComponent: AnalyticsLineChartUI
+    UIComponent: AnalyticsOrdersOrSalesUI
   }
   return (
-    <AnalyticsLineChartController {...analyticsLineChartProps} />
+    <AnalyticsOrdersOrSalesController {...analyticsOrdersOrSalesProps} />
   )
 }

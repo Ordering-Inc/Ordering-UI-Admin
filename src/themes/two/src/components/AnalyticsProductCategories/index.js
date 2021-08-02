@@ -8,7 +8,8 @@ import {
   ProductCategoryContentWrapper,
   ProductCategoryContent,
   SkeletonContainerWrapper,
-  PercentContainer
+  PercentContainer,
+  EmptyContent
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
@@ -49,7 +50,7 @@ const AnalyticsProductCategoriesUI = (props) => {
                   <PercentContainer percent={item?.sales}>{item?.sales}%</PercentContainer>
                 </ProductCategoryContent>
               )) : (
-                <div>{t('NO_DATA', 'No Data')}</div>
+                <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
               )
             }
           </ProductCategoryContentWrapper>

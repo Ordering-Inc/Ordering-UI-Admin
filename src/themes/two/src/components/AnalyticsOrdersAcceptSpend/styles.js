@@ -72,3 +72,10 @@ export const ReviewBlock = styled.div`
     }
   }
 `
+
+export const EmptyContent = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
