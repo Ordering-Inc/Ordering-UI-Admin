@@ -26,6 +26,8 @@ export const WrapperRow = styled.div`
     width: 100%;
     height: 57px;
     margin-bottom: 20px;
+    background-color: ${props => props.theme.colors.secundary};
+    border: none;
   }
 
   .date-filter-container {
@@ -61,6 +63,8 @@ export const WrapperRow = styled.div`
 export const MultiSelectContainer = styled.div`
   > div {
     width: 100%;
+    border: none;
+
     > div:first-child {
       height: 54px;
     }
