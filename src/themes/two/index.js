@@ -43,6 +43,7 @@ import { LogisticInformation } from './src/components/LogisticInformation'
 import { Logistics } from './src/components/Logistics'
 import { LogoutButton } from './src/components/LogoutButton'
 import { Messages } from './src/components/Messages'
+import { MessagesListing } from './src/components/MessagesListing'
 import { Modal } from './src/components/Modal'
 import { OrderBill } from './src/components/OrderBill'
 import { OrderContactInformation } from './src/components/OrderContactInformation'
@@ -138,6 +139,7 @@ export {
   Logistics,
   LogoutButton,
   Messages,
+  MessagesListing,
   Modal,
   OrderBill,
   OrderContactInformation,
