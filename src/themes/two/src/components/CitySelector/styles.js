@@ -9,7 +9,7 @@ export const Option = styled.div`
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
   ` : css`
-    padding: 10px 15px;
+    padding: 10px;
   `}
 
   ${({ noPadding }) => noPadding && css`
@@ -31,6 +31,6 @@ export const PlaceholderTitle = styled(Option)`
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
     ` : css`
-    padding: 10px 15px;
+    padding: 10px;
   `}
 `
