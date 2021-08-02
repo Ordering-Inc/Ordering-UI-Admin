@@ -193,7 +193,12 @@ export const SidebarMenu = (props) => {
                 </MenuContainer>
 
                 <MenuContainer>
-                  <ContextAwareToggle eventKey='2'>
+                  <ContextAwareToggle
+                    eventKey='2'
+                    page='messages'
+                    handleGoToPage={handleGoToPage}
+                    active={location.pathname === '/messages'}
+                  >
                     <ChatIcon />
                     {!isCollapse && <span className='mx-2'>{t('MESSAGES', 'Messages')}</span>}
                   </ContextAwareToggle>

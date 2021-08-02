@@ -10,6 +10,7 @@ import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
 import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { Modal } from '../Modal'
 
 import {
   FilterGroupListContainer,
@@ -20,6 +21,7 @@ import {
 
 const OrdersFilterGroupUI = (props) => {
   const {
+    open,
     handleCloseFilterModal,
     filterValues,
     singleDriverIds,
@@ -55,83 +57,91 @@ const OrdersFilterGroupUI = (props) => {
   }
 
   return (
-    <FilterGroupListContainer className='filter-modal'>
-      <WrapperRow>
-        <Input
-          type='text'
-          placeholder='ID'
-          autoComplete='off'
-          value={filterValues?.orderId || ''}
-          onChange={(e) => handleChangeOrderId(e)}
-        />
-      </WrapperRow>
-      <WrapperRow>
-        <DriversGroupTypeSelector
-          driverGroupList={driverGroupList}
-          handleChangeGroup={handleChangeGroup}
-          filterValues={filterValues}
-        />
-        <DateTypeSelector
-          filterValues={filterValues}
-          handleChangeDateType={handleChangeDateType}
-          handleChangeFromDate={handleChangeFromDate}
-          handleChangeEndDate={handleChangeEndDate}
-        />
-      </WrapperRow>
-      <WrapperRow>
-        <BusinessesSelector
-          filterValues={filterValues}
-          businessesList={businessesList}
-          handleChangeBusinesses={handleChangeBusinesses}
-        />
-        <DriverSelector
-          isFilterView
-          drivers={driversList.drivers}
-          singleDriverIds={singleDriverIds}
-          handleChangeDriver={handleChangeDriver}
-        />
-      </WrapperRow>
-      <WrapperRow>
-        <CitySelector
-          filterValues={filterValues}
-          handleChangeCity={handleChangeCity}
-        />
-        <MultiSelectContainer>
-          <OrderStatusTypeSelector
-            isFilterView
-            filterValues={filterValues}
-            handleChangeOrderStatus={handleChangeOrderStatus}
+    <Modal
+      title={t('FILTER', 'Filter')}
+      width='80%'
+      padding='30px'
+      open={open}
+      onClose={() => handleCloseFilterModal()}
+    >
+      <FilterGroupListContainer className='filter-modal'>
+        <WrapperRow>
+          <Input
+            type='text'
+            placeholder='ID'
+            autoComplete='off'
+            value={filterValues?.orderId || ''}
+            onChange={(e) => handleChangeOrderId(e)}
           />
-        </MultiSelectContainer>
-      </WrapperRow>
-      <WrapperRow>
-        <DeliveryTypeSelector
-          filterValues={filterValues}
-          handleChangeDeliveryType={handleChangeDeliveryType}
-        />
-        <PaymethodTypeSelector
-          paymethodsList={paymethodsList}
-          filterValues={filterValues}
-          handleChangePaymethodType={handleChangePaymethodType}
-        />
-      </WrapperRow>
-      <ButtonGroup>
-        <Button
-          color='primary'
-          borderRadius='5px'
-          onClick={() => handleAcceptFilter()}
-        >
-          {t('ACCEPT', 'Accept')}
-        </Button>
-        <Button
-          color='secundary'
-          borderRadius='5px'
-          onClick={() => handleClearFilter()}
-        >
-          {t('CLEAR', 'Clear')}
-        </Button>
-      </ButtonGroup>
-    </FilterGroupListContainer>
+        </WrapperRow>
+        <WrapperRow>
+          <DriversGroupTypeSelector
+            driverGroupList={driverGroupList}
+            handleChangeGroup={handleChangeGroup}
+            filterValues={filterValues}
+          />
+          <DateTypeSelector
+            filterValues={filterValues}
+            handleChangeDateType={handleChangeDateType}
+            handleChangeFromDate={handleChangeFromDate}
+            handleChangeEndDate={handleChangeEndDate}
+          />
+        </WrapperRow>
+        <WrapperRow>
+          <BusinessesSelector
+            filterValues={filterValues}
+            businessesList={businessesList}
+            handleChangeBusinesses={handleChangeBusinesses}
+          />
+          <DriverSelector
+            isFilterView
+            drivers={driversList.drivers}
+            singleDriverIds={singleDriverIds}
+            handleChangeDriver={handleChangeDriver}
+          />
+        </WrapperRow>
+        <WrapperRow>
+          <CitySelector
+            filterValues={filterValues}
+            handleChangeCity={handleChangeCity}
+          />
+          <MultiSelectContainer>
+            <OrderStatusTypeSelector
+              isFilterView
+              filterValues={filterValues}
+              handleChangeOrderStatus={handleChangeOrderStatus}
+            />
+          </MultiSelectContainer>
+        </WrapperRow>
+        <WrapperRow>
+          <DeliveryTypeSelector
+            filterValues={filterValues}
+            handleChangeDeliveryType={handleChangeDeliveryType}
+          />
+          <PaymethodTypeSelector
+            paymethodsList={paymethodsList}
+            filterValues={filterValues}
+            handleChangePaymethodType={handleChangePaymethodType}
+          />
+        </WrapperRow>
+        <ButtonGroup>
+          <Button
+            color='primary'
+            borderRadius='5px'
+            onClick={() => handleAcceptFilter()}
+          >
+            {t('ACCEPT', 'Accept')}
+          </Button>
+          <Button
+            color='secundary'
+            borderRadius='5px'
+            onClick={() => handleClearFilter()}
+          >
+            {t('CLEAR', 'Clear')}
+          </Button>
+        </ButtonGroup>
+      </FilterGroupListContainer>
+    </Modal>
   )
 }
 

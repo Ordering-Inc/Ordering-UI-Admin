@@ -319,9 +319,7 @@ const OrderDetailsUI = (props) => {
                     <Messages
                       orderId={order?.id}
                       order={order}
-                      customer={openMessages.customer}
-                      business={openMessages.business}
-                      driver={openMessages.driver}
+                      isChat={openMessages?.chat}
                       history={openMessages.history}
                       handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                       onClose={() => handleCloseMessages()}
