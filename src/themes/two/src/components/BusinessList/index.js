@@ -65,7 +65,7 @@ export const BusinessList = (props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [businessesPerPage] = useState(10)
 
-  // Get current orders
+  // Get current businesses
   const indexOfLastPost = currentPage * businessesPerPage
   const indexOfFirstPost = indexOfLastPost - businessesPerPage
   const [currentBusinessess, setCurrentBusinessess] = useState([])

@@ -18,6 +18,7 @@ import { PaginationButton } from '../PaginationButton'
 import {
   OrdersContainer,
   Table,
+  OrderTbody,
   OrderNumberContainer,
   CheckBox,
   WrapperImage,
@@ -232,7 +233,7 @@ export const OrdersTable = (props) => {
           </thead>
           {orderList.loading ? (
             [...Array(10).keys()].map(i => (
-              <tbody key={i}>
+              <OrderTbody key={i}>
                 <tr>
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
@@ -243,7 +244,7 @@ export const OrdersTable = (props) => {
                       </CheckBox>
                       <div className='info'>
                         {allowColumns?.orderNumber && (
-                          <Skeleton width={100} />
+                          <p><Skeleton width={100} /></p>
                         )}
                         {allowColumns?.dateTime && (
                           <Skeleton width={120} />
@@ -330,14 +331,15 @@ export const OrdersTable = (props) => {
                     </div>
                   </td>
                 </tr>
-              </tbody>
+              </OrderTbody>
             ))
           ) : (
             <>
               {currentOrders.map(order => (
-                <tbody
+                <OrderTbody
                   key={order.id}
                   className={parseInt(orderDetailId) === order.id ? 'active' : ''}
+                  isCustomStyle={isSelectedOrders}
                   onClick={(e) => handleClickOrder(order, e)}
                 >
                   <tr>
@@ -503,7 +505,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   </tr>
-                </tbody>
+                </OrderTbody>
               ))}
             </>
           )}

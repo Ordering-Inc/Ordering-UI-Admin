@@ -18,9 +18,46 @@ export const LateralBarContainer = styled.div`
   ` : css`
     right: 0;
   `}
+
+  table.orders_table {
+    thead {
+      display: none;
+    }
+    border-collapse: separate;
+    border-spacing: 0 18px;
+    td {
+      border-top: 1px solid ${props => props.theme.colors.borderColor};
+      border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+      &:first-child {
+        padding: 15px;
+        ${props => props.theme?.rtl ? css`
+          border-radius: 0 8px 8px 0;
+        ` : css`
+          border-radius: 8px 0 0 8px;
+        `}
+        ${props => props.theme?.rtl ? css`
+          border-right: 1px solid ${props => props.theme.colors.borderColor};
+        ` : css`
+          border-left: 1px solid ${props => props.theme.colors.borderColor};
+        `}
+      }
+      &:last-child {
+        ${props => props.theme?.rtl ? css`
+          border-radius: 8px 0 0 8px;
+        ` : css`
+          border-radius: 0 8px 8px 0;
+        `}
+        ${props => props.theme?.rtl ? css`
+          border-left: 1px solid ${props => props.theme.colors.borderColor};
+        ` : css`
+          border-right: 1px solid ${props => props.theme.colors.borderColor};
+        `}
+      }
+    }
+  }
 `
 
-export const DriverOrdersContainer = styled.div`
+export const OrdersContainer = styled.div`
   max-width: 460px;
 `
 
@@ -42,7 +79,7 @@ export const CloseButton = styled.div`
   }
 `
 
-export const DriverInfo = styled.div`
+export const Info = styled.div`
   display: flex;
   align-items: center;
 `
@@ -87,7 +124,7 @@ export const Image = (props) => {
   )
 }
 
-export const DriverName = styled.div`
+export const Name = styled.div`
   ${props => props.theme?.rtl ? css`
     margin-right: 15px;
   ` : css`

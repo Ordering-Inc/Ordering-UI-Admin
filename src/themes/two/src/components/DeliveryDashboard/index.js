@@ -51,8 +51,8 @@ export const DeliveryDashboard = (props) => {
           <OrdersDashboardList
             {...props}
             orderListView='card'
-            interActionMapOrder={interActionMapOrder}
-            handleLocation={handleLocation}
+            selectedOrderCard={interActionMapOrder}
+            handleOrderCardClick={handleLocation}
             handleUpdateDriverLocation={handleUpdateDriverLocation}
           />
         </WrapperOrderlist>

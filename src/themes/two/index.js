@@ -24,7 +24,7 @@ import { DeliveriesManager } from './src/components/DeliveriesManager'
 import { DeliveryDashboard } from './src/components/DeliveryDashboard'
 import { DeliveryTypeSelector } from './src/components/DeliveryTypeSelector'
 import { DriverMapMarkerAndInfo } from './src/components/DriverMapMarkerAndInfo'
-import { DriverOrdersLateralBar } from './src/components/DriverOrdersLateralBar'
+import { OrdersLateralBar } from './src/components/OrdersLateralBar'
 import { DriversBusyStatusFilter } from './src/components/DriversBusyStatusFilter'
 import { DriversDashboard } from './src/components/DriversDashboard'
 import { DriverSelector } from './src/components/DriverSelector'
@@ -43,6 +43,7 @@ import { LogisticInformation } from './src/components/LogisticInformation'
 import { Logistics } from './src/components/Logistics'
 import { LogoutButton } from './src/components/LogoutButton'
 import { Messages } from './src/components/Messages'
+import { MessagesListing } from './src/components/MessagesListing'
 import { Modal } from './src/components/Modal'
 import { OrderBill } from './src/components/OrderBill'
 import { OrderContactInformation } from './src/components/OrderContactInformation'
@@ -119,7 +120,7 @@ export {
   DeliveryDashboard,
   DeliveryTypeSelector,
   DriverMapMarkerAndInfo,
-  DriverOrdersLateralBar,
+  OrdersLateralBar,
   DriversBusyStatusFilter,
   DriversDashboard,
   DriverSelector,
@@ -138,6 +139,7 @@ export {
   Logistics,
   LogoutButton,
   Messages,
+  MessagesListing,
   Modal,
   OrderBill,
   OrderContactInformation,

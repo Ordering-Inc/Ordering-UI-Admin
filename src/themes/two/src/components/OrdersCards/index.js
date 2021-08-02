@@ -15,18 +15,21 @@ import {
   Image,
   CardContent,
   DriverSelectorWrapper,
-  WrapperPagination
+  WrapperPagination,
+  UnreadMessageCounter
 } from './styles'
 
 export const OrdersCards = (props) => {
   const {
+    isMessagesView,
+
     orderList,
     driversList,
     pagination,
     loadMoreOrders,
     handleOpenOrderDetail,
-    interActionMapOrder,
-    handleLocation,
+    selectedOrderCard,
+    handleOrderCardClick,
     handleUpdateDriverLocation
   } = props
   const [, t] = useLanguage()
@@ -62,12 +65,12 @@ export const OrdersCards = (props) => {
   const handleOrderClick = (e, order) => {
     const isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector')
     if (isInvalid) return
-    handleLocation(order)
+    handleOrderCardClick(order)
   }
 
   useEffect(() => {
-    if (orderList.loading || !interActionMapOrder) return
-    const updatedOrder = orderList?.orders.find(order => order.id === interActionMapOrder?.id)
+    if (orderList.loading || !selectedOrderCard) return
+    const updatedOrder = orderList?.orders.find(order => order.id === selectedOrderCard?.id)
     if (updatedOrder) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder)
     }
@@ -129,7 +132,7 @@ export const OrdersCards = (props) => {
             {currentOrders?.map(order => (
               <OrderCard
                 key={order.id}
-                active={interActionMapOrder?.id === order.id}
+                active={selectedOrderCard?.id === order.id}
                 onClick={(e) => handleOrderClick(e, order)}
               >
                 <OrderHeader>
@@ -144,6 +147,11 @@ export const OrdersCards = (props) => {
                     </ViewDetails>
                   </div>
                 </OrderHeader>
+                {isMessagesView && order?.unread_count > 0 && (
+                  <UnreadMessageCounter>
+                    {order?.unread_count}
+                  </UnreadMessageCounter>
+                )}
                 <CardContent>
                   <BusinessInfo>
                     <WrapperImage>
