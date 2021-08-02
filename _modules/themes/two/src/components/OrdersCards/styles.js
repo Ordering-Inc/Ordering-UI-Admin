@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPagination = exports.DriverSelectorWrapper = exports.CardContent = exports.Image = exports.WrapperImage = exports.BusinessInfo = exports.ViewDetails = exports.OrderHeader = exports.OrderCard = exports.OrderNunberContainer = exports.OrdersListContainer = void 0;
+exports.UnreadMessageCounter = exports.WrapperPagination = exports.DriverSelectorWrapper = exports.CardContent = exports.Image = exports.WrapperImage = exports.BusinessInfo = exports.ViewDetails = exports.OrderHeader = exports.OrderCard = exports.OrderNunberContainer = exports.OrdersListContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrdersListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: 100%;\n  padding: 0 12px 15px 12px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n"])));
+var OrdersListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 200px);\n  padding: 0 12px 15px 12px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n"])));
 
 exports.OrdersListContainer = OrdersListContainer;
 
@@ -31,7 +31,7 @@ var OrderNunberContainer = _styledComponents.default.div(_templateObject2 || (_t
 
 exports.OrderNunberContainer = OrderNunberContainer;
 
-var OrderCard = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  border-radius: 8px;\n  border: 1px solid ", ";\n  margin-bottom: 20px;\n  padding: 15px 20px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  p,\n  h2 {\n    color: ", ";\n    margin: 0px;\n  }\n  \n  h2 {\n    font-size: 18px;\n  }\n"])), function (props) {
+var OrderCard = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  border-radius: 8px;\n  border: 1px solid ", ";\n  margin-bottom: 20px;\n  padding: 15px 20px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  p,\n  h2 {\n    color: ", ";\n    margin: 0px;\n  }\n  \n  h2 {\n    font-size: 16px;\n    font-weight: 600;\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.secundary;
@@ -50,17 +50,17 @@ var OrderCard = _styledComponents.default.div(_templateObject3 || (_templateObje
 
 exports.OrderCard = OrderCard;
 
-var OrderHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  > div {\n    display: flex;\n    margin: 10px 0;\n    > p {\n      font-size: 14px;\n    }\n  }\n"])));
+var OrderHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  > div {\n    display: flex;\n    margin: 10px 0;\n    > p {\n      font-size: 12px;\n    }\n  }\n"])));
 
 exports.OrderHeader = OrderHeader;
 
-var ViewDetails = _styledComponents.default.a(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 14px;\n  text-decoration: underline;\n  margin: 0 10px;\n"])), function (props) {
+var ViewDetails = _styledComponents.default.a(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 12px;\n  text-decoration: underline;\n  margin: 0 10px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.ViewDetails = ViewDetails;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  p {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 125px;\n\n  }\n  display: flex;\n  align-items: center;\n\n  div.info {\n    ", "\n    p {\n      margin: 0px;\n      color: ", ";\n      font-size: 12px;\n    }\n    p.bold {\n      font-size: 14px;\n      font-weight: 600;\n    }\n  }\n  @media (min-width: 1300px) {\n    width: 45%;\n  }\n"])), function (props) {
+var BusinessInfo = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  p {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 125px;\n\n  }\n  display: flex;\n  align-items: center;\n\n  div.info {\n    ", "\n    p {\n      margin: 0px;\n      color: ", ";\n      font-size: 12px;\n    }\n    p.bold {\n      font-size: 14px;\n      font-weight: 500;\n    }\n  }\n  @media (min-width: 1300px) {\n    width: 45%;\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
@@ -114,3 +114,15 @@ exports.DriverSelectorWrapper = DriverSelectorWrapper;
 var WrapperPagination = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 20px 15px 0 15px;\n"])));
 
 exports.WrapperPagination = WrapperPagination;
+
+var UnreadMessageCounter = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 12px;\n  ", "\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: ", ";\n  border-radius: 8px;\n  font-size: 12px;\n  height: 24px;\n  color: ", ";\n  padding: 0 10px;\n"])), function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    right: 20px;\n  "])));
+}, function (props) {
+  return props.theme.colors.lightPrimary;
+}, function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.UnreadMessageCounter = UnreadMessageCounter;

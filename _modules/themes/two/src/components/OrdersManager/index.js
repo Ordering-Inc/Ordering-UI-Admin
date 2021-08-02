@@ -174,6 +174,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isSelectedOrders: isSelectedOrders,
     driverId: props.driverId,
     customerId: props.customerId,
+    businessId: props.businessId,
     searchValue: searchValue,
     filterValues: filterValues,
     selectedOrderIds: selectedOrderIds,

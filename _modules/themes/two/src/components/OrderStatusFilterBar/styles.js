@@ -40,7 +40,9 @@ var Tab = _styledComponents.default.div(_templateObject3 || (_templateObject3 = 
   return active && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    border-bottom: 3px solid;\n    font-weight: 500;\n  "])));
 }, function (_ref2) {
   var active = _ref2.active;
-  return !active && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    color: #909BA9;\n  "])));
+  return !active && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+    return props.theme.colors.lightGray;
+  });
 });
 
 exports.Tab = Tab;

@@ -192,7 +192,10 @@ var SidebarMenu = function SidebarMenu(props) {
       }
     }, item.title);
   })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
-    eventKey: "2"
+    eventKey: "2",
+    page: "messages",
+    handleGoToPage: handleGoToPage,
+    active: location.pathname === '/messages'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
     className: "mx-2"
   }, t('MESSAGES', 'Messages')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {

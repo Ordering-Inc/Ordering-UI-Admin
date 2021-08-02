@@ -78,8 +78,8 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
     id: "cardOrders"
   }, /*#__PURE__*/_react.default.createElement(_OrdersDashboardList.OrdersDashboardList, _extends({}, props, {
     orderListView: "card",
-    interActionMapOrder: interActionMapOrder,
-    handleLocation: handleLocation,
+    selectedOrderCard: interActionMapOrder,
+    handleOrderCardClick: handleLocation,
     handleUpdateDriverLocation: handleUpdateDriverLocation
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDeliveriesLocation, null, /*#__PURE__*/_react.default.createElement(_DeliveriesLocation.DeliveriesLocation, {
     driversList: driversList,

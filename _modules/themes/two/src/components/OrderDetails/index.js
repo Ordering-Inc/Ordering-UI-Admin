@@ -482,9 +482,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, (openMessages.driver || openMessages.business || openMessages.customer) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
-    customer: openMessages.customer,
-    business: openMessages.business,
-    driver: openMessages.driver,
+    isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
     history: openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     onClose: function onClose() {

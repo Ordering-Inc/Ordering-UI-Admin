@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _Modal = require("../Modal");
-
 var _SearchBar = require("../SearchBar");
 
 var _OrdersFilterGroup = require("../OrdersFilterGroup");
@@ -103,15 +101,7 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       return setFilterModalOpen(true);
     },
     name: "filter-btn"
-  }, filterApplied ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Funnel, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))))), filterModalOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('FILTER', 'Filter'),
-    width: "80%",
-    padding: "30px",
-    open: filterModalOpen,
-    onClose: function onClose() {
-      return setFilterModalOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_OrdersFilterGroup.OrdersFilterGroup, {
+  }, filterApplied ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Funnel, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))))), /*#__PURE__*/_react.default.createElement(_OrdersFilterGroup.OrdersFilterGroup, {
     open: filterModalOpen,
     handleCloseFilterModal: function handleCloseFilterModal() {
       return setFilterModalOpen(false);
@@ -121,7 +111,7 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     paymethodsList: paymethodsList,
     businessesList: businessesList,
     handleChangeFilterValues: handleChangeFilterValues
-  })));
+  }));
 };
 
 exports.OrdersContentHeader = OrdersContentHeader;

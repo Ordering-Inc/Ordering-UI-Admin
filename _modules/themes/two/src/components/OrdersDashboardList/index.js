@@ -22,13 +22,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var OrdersDashboardList = function OrdersDashboardList(props) {
-  var selectedSubOrderStatus = props.selectedSubOrderStatus;
+  var selectedSubOrderStatus = props.selectedSubOrderStatus,
+      isMessagesView = props.isMessagesView,
+      orderByOption = props.orderByOption;
 
   var OrdersCommonControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: _OrdersListing.OrdersListing,
     useDefualtSessionManager: true,
-    orderBy: 'id',
-    orderDirection: 'desc',
+    orderBy: isMessagesView ? orderByOption : 'id',
+    orderDirection: isMessagesView ? orderByOption === 'id' ? 'desc' : 'asc' : 'desc',
     asDashboard: true,
     initialPageSize: 50,
     loadMorePageSize: 10,
@@ -38,7 +40,11 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     driverId: props.driverId
   });
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isMessagesView ? /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
+    isMessagesView: true
+  }, OrdersCommonControlProps, {
+    orderStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "pending"
   }, OrdersCommonControlProps, {
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending
@@ -54,7 +60,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     groupStatus: "cancelled"
   }, OrdersCommonControlProps, {
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled
-  })));
+  }))));
 };
 
 exports.OrdersDashboardList = OrdersDashboardList;

@@ -29,6 +29,8 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _Modal = require("../Modal");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -52,7 +54,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
-  var handleCloseFilterModal = props.handleCloseFilterModal,
+  var open = props.open,
+      handleCloseFilterModal = props.handleCloseFilterModal,
       filterValues = props.filterValues,
       singleDriverIds = props.singleDriverIds,
       driverGroupList = props.driverGroupList,
@@ -87,7 +90,15 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeFilterValues({});
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.FilterGroupListContainer, {
+  return /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('FILTER', 'Filter'),
+    width: "80%",
+    padding: "30px",
+    open: open,
+    onClose: function onClose() {
+      return handleCloseFilterModal();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.FilterGroupListContainer, {
     className: "filter-modal"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
@@ -141,7 +152,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     onClick: function onClick() {
       return handleClearFilter();
     }
-  }, t('CLEAR', 'Clear'))));
+  }, t('CLEAR', 'Clear')))));
 };
 
 var OrdersFilterGroup = function OrdersFilterGroup(props) {

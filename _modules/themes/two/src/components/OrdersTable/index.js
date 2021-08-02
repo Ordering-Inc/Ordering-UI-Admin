@@ -291,7 +291,7 @@ var OrdersTable = function OrdersTable(props) {
     },
     handleChangeAllowColumns: handleChangeAllowColumns
   })))), orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement("tbody", {
+    return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
       className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
@@ -303,9 +303,9 @@ var OrdersTable = function OrdersTable(props) {
       }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
-    }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
     })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
       className: "businessInfo"
@@ -399,9 +399,10 @@ var OrdersTable = function OrdersTable(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentOrders.map(function (order) {
     var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _theme$images2, _theme$images2$icons, _theme$images3, _theme$images3$icons, _order$summary;
 
-    return /*#__PURE__*/_react.default.createElement("tbody", {
+    return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: order.id,
       className: parseInt(orderDetailId) === order.id ? 'active' : '',
+      isCustomStyle: isSelectedOrders,
       onClick: function onClick(e) {
         return handleClickOrder(order, e);
       }

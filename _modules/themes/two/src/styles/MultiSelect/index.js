@@ -135,7 +135,7 @@ var MultiSelect = function MultiSelect(props) {
   }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOptions.map(function (selectedOption) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: selectedOption.value
-    }, selectedOption.content, ",");
+    }, selectedOption.showOnSelected || selectedOption.content, ",");
   })), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     isAbsolute: true,
     position: "right",

@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DriverOrdersLateralBar = void 0;
+exports.OrdersLateralBar = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -39,11 +39,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var DriverOrdersLateralBar = function DriverOrdersLateralBar(props) {
-  var _theme$images, _theme$images$icons;
+var OrdersLateralBar = function OrdersLateralBar(props) {
+  var _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$icons;
 
   var open = props.open,
-      driver = props.driver;
+      user = props.user,
+      business = props.business,
+      isDriver = props.isDriver,
+      isCustomer = props.isCustomer,
+      isBusiness = props.isBusiness;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -112,17 +116,21 @@ var DriverOrdersLateralBar = function DriverOrdersLateralBar(props) {
   }, [isOpenDriverOrderDetails]);
   return /*#__PURE__*/_react.default.createElement(_styles.LateralBarContainer, {
     id: "driver_lateral_bar"
-  }, /*#__PURE__*/_react.default.createElement(_styles.DriverOrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
     onClick: function onClick() {
       return props.onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-    bgimage: optimizeImage((driver === null || driver === void 0 ? void 0 : driver.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver), 'h_200,c_limit')
-  })), /*#__PURE__*/_react.default.createElement(_styles.DriverName, null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver')))), /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
+  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.Info, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
+  }) : /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.noDriver), 'h_200,c_limit')
+  })), /*#__PURE__*/_react.default.createElement(_styles.Name, null, /*#__PURE__*/_react.default.createElement("p", null, isBusiness ? business.name : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement("p", null, isDriver && t('DRIVER', 'Driver'), isCustomer && t('CUSTOMER', 'Customer'), isBusiness && t('BUSINESS', 'Business')))), /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
-    driverId: driver.id,
+    driverId: isDriver ? user.id : null,
+    customerId: isCustomer ? user.id : null,
+    businessId: isBusiness ? business.id : null,
     handleCustomOrderDetail: handleCustomOrderDetail
   })));
 };
 
-exports.DriverOrdersLateralBar = DriverOrdersLateralBar;
+exports.OrdersLateralBar = OrdersLateralBar;

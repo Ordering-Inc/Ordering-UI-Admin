@@ -106,7 +106,7 @@ var BusinessList = function BusinessList(props) {
 
   var _useState7 = (0, _react.useState)(10),
       _useState8 = _slicedToArray(_useState7, 1),
-      businessesPerPage = _useState8[0]; // Get current orders
+      businessesPerPage = _useState8[0]; // Get current businesses
 
 
   var indexOfLastPost = currentPage * businessesPerPage;

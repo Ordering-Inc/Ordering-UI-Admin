@@ -34,23 +34,31 @@ var OrdersListing = function OrdersListing(props) {
       pagination = props.pagination,
       handleOpenOrderDetail = props.handleOpenOrderDetail,
       handleOpenMessage = props.handleOpenMessage,
-      handleLocation = props.handleLocation,
+      handleOrderCardClick = props.handleOrderCardClick,
       handleUpdateDriverLocation = props.handleUpdateDriverLocation,
       messageOrder = props.messageOrder,
-      interActionMapOrder = props.interActionMapOrder,
+      selectedOrderCard = props.selectedOrderCard,
       messageListView = props.messageListView,
       messageType = props.messageType,
       loadMoreOrders = props.loadMoreOrders,
       ordersStatusGroup = props.ordersStatusGroup,
       groupStatus = props.groupStatus,
-      orderDetailId = props.orderDetailId;
+      orderDetailId = props.orderDetailId,
+      isMessagesView = props.isMessagesView;
   var theme = (0, _styledComponents.useTheme)();
   (0, _react.useEffect)(function () {
     if (orderList.loading || !messageListView) return;
     if (orderList.orders.length === 0 || messageOrder) return;
     handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType);
   }, [orderList.loading, messageListView]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ordersStatusGroup === groupStatus && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !orderList.loading && orderList.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.WrapperNoneOrders, {
+  (0, _react.useEffect)(function () {
+    if (!isMessagesView || orderList.loading || selectedOrderCard) return;
+
+    if ((orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) > 0) {
+      handleOrderCardClick(orderList.orders[0]);
+    }
+  }, [isMessagesView, orderList, selectedOrderCard]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (ordersStatusGroup === groupStatus || isMessagesView) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !orderList.loading && orderList.orders.length === 0 ? /*#__PURE__*/_react.default.createElement(_styles.WrapperNoneOrders, {
     small: orderListView === 'small'
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerNoneOrdersContainer, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.nonOrders,
@@ -69,6 +77,7 @@ var OrdersListing = function OrdersListing(props) {
     handleSelectedOrderIds: handleSelectedOrderIds,
     handleOpenOrderDetail: handleOpenOrderDetail
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
+    isMessagesView: isMessagesView,
     orderList: orderList,
     driversList: driversList,
     pagination: pagination,
@@ -77,8 +86,8 @@ var OrdersListing = function OrdersListing(props) {
     handleUpdateOrderStatus: handleUpdateOrderStatus,
     handleSelectedOrderIds: handleSelectedOrderIds,
     handleOpenOrderDetail: handleOpenOrderDetail,
-    interActionMapOrder: interActionMapOrder,
-    handleLocation: handleLocation,
+    selectedOrderCard: selectedOrderCard,
+    handleOrderCardClick: handleOrderCardClick,
     handleUpdateDriverLocation: handleUpdateDriverLocation
   }))));
 };

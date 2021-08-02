@@ -15,7 +15,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _DriversDashboard = require("../DriversDashboard");
 
-var _DriverOrdersLateralBar = require("../DriverOrdersLateralBar");
+var _OrdersLateralBar = require("../OrdersLateralBar");
 
 var _SearchBar = require("../SearchBar");
 
@@ -115,9 +115,10 @@ var DriversManagerUI = function DriversManagerUI(props) {
     selectedDriver: selectedDriver,
     handleChangeDriver: handleChangeDriver,
     handleOpenDriverOrders: handleOpenDriverOrders
-  }))), isOpenDriverOrders && openDriver && /*#__PURE__*/_react.default.createElement(_DriverOrdersLateralBar.DriverOrdersLateralBar, {
+  }))), isOpenDriverOrders && openDriver && /*#__PURE__*/_react.default.createElement(_OrdersLateralBar.OrdersLateralBar, {
+    isDriver: true,
     open: isOpenDriverOrders,
-    driver: openDriver,
+    user: openDriver,
     onClose: function onClose() {
       return handleBackRedirect();
     }

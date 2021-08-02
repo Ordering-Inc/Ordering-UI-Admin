@@ -165,10 +165,10 @@ Object.defineProperty(exports, "DriverMapMarkerAndInfo", {
     return _DriverMapMarkerAndInfo.DriverMapMarkerAndInfo;
   }
 });
-Object.defineProperty(exports, "DriverOrdersLateralBar", {
+Object.defineProperty(exports, "OrdersLateralBar", {
   enumerable: true,
   get: function get() {
-    return _DriverOrdersLateralBar.DriverOrdersLateralBar;
+    return _OrdersLateralBar.OrdersLateralBar;
   }
 });
 Object.defineProperty(exports, "DriversBusyStatusFilter", {
@@ -277,6 +277,12 @@ Object.defineProperty(exports, "Messages", {
   enumerable: true,
   get: function get() {
     return _Messages.Messages;
+  }
+});
+Object.defineProperty(exports, "MessagesListing", {
+  enumerable: true,
+  get: function get() {
+    return _MessagesListing.MessagesListing;
   }
 });
 Object.defineProperty(exports, "Modal", {
@@ -650,7 +656,7 @@ var _DeliveryTypeSelector = require("./src/components/DeliveryTypeSelector");
 
 var _DriverMapMarkerAndInfo = require("./src/components/DriverMapMarkerAndInfo");
 
-var _DriverOrdersLateralBar = require("./src/components/DriverOrdersLateralBar");
+var _OrdersLateralBar = require("./src/components/OrdersLateralBar");
 
 var _DriversBusyStatusFilter = require("./src/components/DriversBusyStatusFilter");
 
@@ -687,6 +693,8 @@ var _Logistics = require("./src/components/Logistics");
 var _LogoutButton = require("./src/components/LogoutButton");
 
 var _Messages = require("./src/components/Messages");
+
+var _MessagesListing = require("./src/components/MessagesListing");
 
 var _Modal = require("./src/components/Modal");
 
