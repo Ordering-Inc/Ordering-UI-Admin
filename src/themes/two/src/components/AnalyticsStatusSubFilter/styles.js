@@ -35,3 +35,11 @@ export const InnerContainer = styled.div`
     }
   }
 `
+
+export const SkeletonWrapper = styled.div`
+  display: flex;
+  span {
+    margin: 0 5px;
+    border-radius: 50px;
+  }
+`

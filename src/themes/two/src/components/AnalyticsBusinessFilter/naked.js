@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { string } from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 import { useApi } from 'ordering-components-admin'
 
@@ -7,7 +7,9 @@ export const AnalyticsBusinessFilter = (props) => {
   const {
     UIComponent,
     filterList,
-    handleChangeFilterList
+    handleChangeFilterList,
+    propsToFetch,
+    onClose
   } = props
 
   const [ordering] = useApi()
@@ -17,23 +19,39 @@ export const AnalyticsBusinessFilter = (props) => {
    */
   const [businessList, setBusinessList] = useState({ loading: true, error: null, businesses: [], pagination: null })
   const [businessIds, setBusinessIds] = useState(null)
+  const [isAllCheck, setIsAllCheck] = useState(false)
 
   const handleChangeBusinessId = (id) => {
-    const found = businessIds.find(businessId => businessId === id)
+    const found = businessIds?.find(businessId => businessId === id)
     if (found) {
-      const _businessIds = businessIds.filter(businessId => businessId !== id)
+      const _businessIds = businessIds?.filter(businessId => businessId !== id)
       setBusinessIds(_businessIds)
+      setIsAllCheck(false)
     } else {
-      const _businessIds = [...businessIds]
+      const _businessIds = businessIds ? [...businessIds] : []
       _businessIds.push(id)
+      if (_businessIds.length === businessList?.businesses.length) setIsAllCheck(true)
       setBusinessIds(_businessIds)
     }
   }
 
   const handleClickFilterButton = () => {
-    console.log('businessIds')
-    const _businessIds = [...businessIds]
+    const _businessIds = businessIds ? [...businessIds] : null
     handleChangeFilterList({ ...filterList, businessIds: _businessIds })
+    onClose && onClose()
+  }
+
+  const handleChangeAllCheck = () => {
+    if (isAllCheck) {
+      setBusinessIds(null)
+    } else {
+      const _businessIds = []
+      for (const business of businessList.businesses) {
+        _businessIds.push(business.id)
+      }
+      setBusinessIds(_businessIds)
+    }
+    setIsAllCheck(!isAllCheck)
   }
 
   /**
@@ -45,7 +63,7 @@ export const AnalyticsBusinessFilter = (props) => {
         ...businessList,
         loading: true
       })
-      const { content: { error, result, pagination } } = await ordering.businesses().asDashboard().get()
+      const { content: { error, result, pagination } } = await ordering.businesses().asDashboard().select(propsToFetch).get()
       if (!error) {
         setBusinessList({
           ...businessList,
@@ -79,9 +97,14 @@ export const AnalyticsBusinessFilter = (props) => {
       for (const business of businessList.businesses) {
         _businessIds.push(business.id)
       }
-      setBusinessIds(_businessIds)
+      if (filterList?.businessIds) {
+        setBusinessIds([...filterList?.businessIds])
+      } else {
+        setBusinessIds(_businessIds)
+        setIsAllCheck(true)
+      }
     }
-  }, [businessList])
+  }, [businessList?.businesses])
 
   return (
     <>
@@ -92,6 +115,8 @@ export const AnalyticsBusinessFilter = (props) => {
           businessIds={businessIds}
           handleChangeBusinessId={handleChangeBusinessId}
           handleClickFilterButton={handleClickFilterButton}
+          isAllCheck={isAllCheck}
+          handleChangeAllCheck={handleChangeAllCheck}
         />
       )}
     </>
@@ -103,6 +128,10 @@ AnalyticsBusinessFilter.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
+  /**
+   * Array of business props to fetch
+   */
+  propsToFetch: PropTypes.arrayOf(string),
   /**
    * Components types before business type filter
    * Array of type components, the parent props will pass to these components
@@ -129,5 +158,6 @@ AnalyticsBusinessFilter.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],
-  afterElements: []
+  afterElements: [],
+  propsToFetch: ['id', 'name', 'header', 'logo', 'name', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
 }

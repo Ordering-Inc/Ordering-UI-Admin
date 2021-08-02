@@ -25,6 +25,10 @@ import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 
 const BusinessAnalyticsUI = (props) => {
+  const {
+    filterList
+  } = props
+
   const [, t] = useLanguage()
   const [businessFilterModal, setBusinessFilterModal] = useState(false)
 
@@ -35,7 +39,7 @@ const BusinessAnalyticsUI = (props) => {
         <BusinessFilterCalendar>
           <BusinessFilterWrapper>
             <Button onClick={() => setBusinessFilterModal(true)}>
-              {t('BUSINESS', 'Business')} (All)
+              {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
           </BusinessFilterWrapper>
           <BusinessCalendarWrapper>
@@ -104,7 +108,9 @@ const BusinessAnalyticsUI = (props) => {
         open={businessFilterModal}
         onClose={() => setBusinessFilterModal(false)}
       >
-        <AnalyticsBusinessFilter {...props} />
+        <AnalyticsBusinessFilter
+          {...props} onClose={() => setBusinessFilterModal(false)}
+        />
       </Modal>
     </BusinessAnalyticsContainer>
   )

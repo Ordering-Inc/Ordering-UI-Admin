@@ -17,7 +17,9 @@ const AnalyticsBusinessFilterUI = (props) => {
     businessList,
     businessIds,
     handleChangeBusinessId,
-    handleClickFilterButton
+    handleClickFilterButton,
+    isAllCheck,
+    handleChangeAllCheck
   } = props
 
   const [, t] = useLanguage()
@@ -30,6 +32,7 @@ const AnalyticsBusinessFilterUI = (props) => {
     }
     return valid
   }
+
   return (
     <AnalyticsBusinessFilterContainer>
       {businessList.loading ? (
@@ -43,6 +46,16 @@ const AnalyticsBusinessFilterUI = (props) => {
         ))
       ) : (
         <div>
+          <BusinessFilterOption
+            onClick={handleChangeAllCheck}
+          >
+            {isAllCheck ? (
+              <RiCheckboxFill className='fill' />
+            ) : (
+              <RiCheckboxBlankLine />
+            )}
+            <BusinessName>{t('ALL', 'All')}</BusinessName>
+          </BusinessFilterOption>
           {businessList?.businesses.map((business, i) => (
             <BusinessFilterOption
               key={i}
@@ -75,6 +88,7 @@ const AnalyticsBusinessFilterUI = (props) => {
 export const AnalyticsBusinessFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
+    propsToFetch: ['id', 'name', 'slug'],
     UIComponent: AnalyticsBusinessFilterUI
   }
   return <AnalyticsBusinessFilterController {...AnalyticsBusinessFilterProps} />

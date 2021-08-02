@@ -6,7 +6,7 @@ export const BusinessAnalytics = (props) => {
     UIComponent
   } = props
 
-  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, app_id: null })
+  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, app_id: 'all' })
 
   useEffect(() => {
     console.log(filterList)
