@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
 import { DriversDashboard } from '../DriversDashboard'
-import { DriverOrdersLateralBar } from '../DriverOrdersLateralBar'
+import { OrdersLateralBar } from '../OrdersLateralBar'
 import { SearchBar } from '../SearchBar'
 import { OrderNotification } from '../OrderNotification'
 import {
@@ -78,9 +78,10 @@ const DriversManagerUI = (props) => {
         </DriversContent>
 
         {isOpenDriverOrders && openDriver && (
-          <DriverOrdersLateralBar
+          <OrdersLateralBar
+            isDriver
             open={isOpenDriverOrders}
-            driver={openDriver}
+            user={openDriver}
             onClose={() => handleBackRedirect()}
           />
         )}

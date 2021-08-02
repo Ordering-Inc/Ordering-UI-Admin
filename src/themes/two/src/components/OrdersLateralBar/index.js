@@ -7,18 +7,20 @@ import { OrdersManager } from '../OrdersManager'
 
 import {
   LateralBarContainer,
-  DriverOrdersContainer,
+  OrdersContainer,
   CloseButton,
-  DriverInfo,
+  Info,
   WrapperImage,
   Image,
-  DriverName
+  Name
 } from './styles'
 
-export const DriverOrdersLateralBar = (props) => {
+export const OrdersLateralBar = (props) => {
   const {
     open,
-    driver
+    user,
+    isDriver,
+    isCustomer
   } = props
 
   const [, t] = useLanguage()
@@ -74,27 +76,31 @@ export const DriverOrdersLateralBar = (props) => {
 
   return (
     <LateralBarContainer id='driver_lateral_bar'>
-      <DriverOrdersContainer>
+      <OrdersContainer>
         <CloseButton
           onClick={() => props.onClose()}
         >
           <MdcClose />
         </CloseButton>
-        <DriverInfo>
+        <Info>
           <WrapperImage>
-            <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
+            <Image bgimage={optimizeImage(user?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
           </WrapperImage>
-          <DriverName>
-            <p>{driver.name} {driver.lastname}</p>
-            <p>{t('DRIVER', 'Driver')}</p>
-          </DriverName>
-        </DriverInfo>
+          <Name>
+            <p>{user?.name} {user?.lastname}</p>
+            <p>
+              {isDriver && t('DRIVER', 'Driver')}
+              {isCustomer && t('CUSTOMER', 'Customer')}
+            </p>
+          </Name>
+        </Info>
         <OrdersManager
           isSelectedOrders
-          driverId={driver.id}
+          driverId={isDriver ? user.id : null}
+          customerId={isCustomer ? user.id : null}
           handleCustomOrderDetail={handleCustomOrderDetail}
         />
-      </DriverOrdersContainer>
+      </OrdersContainer>
     </LateralBarContainer>
   )
 }

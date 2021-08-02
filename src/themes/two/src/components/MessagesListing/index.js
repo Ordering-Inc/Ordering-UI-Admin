@@ -7,6 +7,8 @@ import MdClose from '@meronex/icons/ios/MdClose'
 import { OrderNotification } from '../OrderNotification'
 import { OrderDetails } from '../OrderDetails'
 import { Messages } from '../Messages'
+import { ChatContactList } from '../ChatContactList'
+import { ChatBusinessesList } from '../ChatBusinessesList'
 
 import {
   MessagesListingContainer,
@@ -17,8 +19,10 @@ import {
   Tab,
   OrdersOrderByOptionContainer,
   MessageContainer,
-  ContactsContainer
+  ContactsContainer,
+  InnerTabsContainer
 } from './styles'
+import { AutoScroll } from '../AutoScroll'
 
 const MessagesListingUI = (props) => {
   const {
@@ -86,59 +90,82 @@ const MessagesListingUI = (props) => {
               </MessagesOptionTabs>
               {selectedOption === 'orders' && (
                 <OrdersOrderByOptionContainer>
-                  <Button
-                    color={orderByOption === 'last_direct_message_at' ? 'primary' : 'secundaryDark'}
-                    onClick={() => setOrderByOption('last_direct_message_at')}
-                  >
-                    {t('NEWEST', 'Newest')}
-                    {orderByOption === 'last_direct_message_at' && <MdClose />}
-                  </Button>
-                  <Button
-                    color={orderByOption === 'id' ? 'primary' : 'secundaryDark'}
-                    onClick={() => setOrderByOption('id')}
-                  >
-                    {t('ORDER_NUMBER', 'Order number')}
-                    {orderByOption === 'id' && <MdClose />}
-                  </Button>
+                  <InnerTabsContainer>
+                    <AutoScroll innerScroll scrollId='orderByOption'>
+                      <Button
+                        color={orderByOption === 'last_direct_message_at' ? 'primary' : 'secundaryDark'}
+                        onClick={() => setOrderByOption('last_direct_message_at')}
+                      >
+                        {t('NEWEST', 'Newest')}
+                        {orderByOption === 'last_direct_message_at' && <MdClose />}
+                      </Button>
+                      <Button
+                        color={orderByOption === 'id' ? 'primary' : 'secundaryDark'}
+                        onClick={() => setOrderByOption('id')}
+                      >
+                        {t('ORDER_NUMBER', 'Order number')}
+                        {orderByOption === 'id' && <MdClose />}
+                      </Button>
+                    </AutoScroll>
+                  </InnerTabsContainer>
                 </OrdersOrderByOptionContainer>
               )}
               {selectedOption === 'contacts' && (
                 <ContactsContainer>
-                  <Button
-                    color={contactsOption === 'drivers' ? 'primary' : 'secundaryDark'}
-                    onClick={() => setContactsOption('drivers')}
-                  >
-                    {t('DRIVERS', 'Drivers')}
-                    {contactsOption === 'drivers' && <MdClose />}
-                  </Button>
-                  <Button
-                    color={contactsOption === 'businesses' ? 'primary' : 'secundaryDark'}
-                    onClick={() => setContactsOption('businesses')}
-                  >
-                    {t('BUSINESSES', 'Businesses')}
-                    {contactsOption === 'businesses' && <MdClose />}
-                  </Button>
-                  <Button
-                    color={contactsOption === 'customers' ? 'primary' : 'secundaryDark'}
-                    onClick={() => setContactsOption('customers')}
-                  >
-                    {t('CUSTOMERS', 'Customers')}
-                    {contactsOption === 'customers' && <MdClose />}
-                  </Button>
+                  <InnerTabsContainer>
+                    <AutoScroll innerScroll scrollId='contactOption'>
+                      <Button
+                        color={contactsOption === 'drivers' ? 'primary' : 'secundaryDark'}
+                        onClick={() => setContactsOption('drivers')}
+                      >
+                        {t('DRIVERS', 'Drivers')}
+                        {contactsOption === 'drivers' && <MdClose />}
+                      </Button>
+                      <Button
+                        color={contactsOption === 'businesses' ? 'primary' : 'secundaryDark'}
+                        onClick={() => setContactsOption('businesses')}
+                      >
+                        {t('BUSINESSES', 'Businesses')}
+                        {contactsOption === 'businesses' && <MdClose />}
+                      </Button>
+                      <Button
+                        color={contactsOption === 'customers' ? 'primary' : 'secundaryDark'}
+                        onClick={() => setContactsOption('customers')}
+                      >
+                        {t('CUSTOMERS', 'Customers')}
+                        {contactsOption === 'customers' && <MdClose />}
+                      </Button>
+                    </AutoScroll>
+                  </InnerTabsContainer>
                 </ContactsContainer>
               )}
             </FilterContainer>
-            <OrdersDashboardList
-              isMessagesView
-              searchValue={searchValue}
-              filterValues={filterValues}
-              driversList={driversList}
-              orderByOption={orderByOption}
-              selectedOrderCard={selectedOrder}
-              orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
-              handleOpenOrderDetail={handleOpenOrderDetail}
-              handleOrderCardClick={handleOrderCardClick}
-            />
+            {selectedOption === 'orders' && (
+              <OrdersDashboardList
+                isMessagesView
+                searchValue={searchValue}
+                filterValues={filterValues}
+                driversList={driversList}
+                orderByOption={orderByOption}
+                selectedOrderCard={selectedOrder}
+                orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
+                handleOpenOrderDetail={handleOpenOrderDetail}
+                handleOrderCardClick={handleOrderCardClick}
+              />
+            )}
+            {selectedOption === 'contacts' && (
+              <>
+                {contactsOption === 'drivers' && (
+                  <ChatContactList isDriver />
+                )}
+                {contactsOption === 'customers' && (
+                  <ChatContactList isCustomer />
+                )}
+                {contactsOption === 'businesses' && (
+                  <ChatBusinessesList />
+                )}
+              </>
+            )}
           </OrdersContainer>
           <MessageContainer>
             {selectedOrder && (
@@ -147,7 +174,6 @@ const MessagesListingUI = (props) => {
                 orderId={selectedOrder?.id}
                 order={selectedOrder}
                 handleUpdateOrderForUnreadCount={(orderId) => setOrderIdForUnreadCountUpdate(orderId)}
-                // messages={messages}
               />
             )}
           </MessageContainer>

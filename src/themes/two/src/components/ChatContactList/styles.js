@@ -1,11 +1,17 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const DriversListContainer = styled.div`
-  padding: 15px 10px;
+export const Container = styled.div`
+  padding: 0px 12px 15px 12px;
+  height: calc(100% - 140px);
 `
 
-export const DriverCard = styled.div`
+export const CustomersListConatainer = styled.div`
+  max-height: calc(100% - 50px);
+  overflow: auto;
+`
+
+export const Card = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -30,7 +36,9 @@ export const WrapperImage = styled.div`
   max-height: 45px;
   height: 45px;
   width: 45px;
-  border: 1px solid ${props => props.theme.colors.borderColor};
+  ${({ isSkeleton }) => !isSkeleton && css`
+    border: 1px solid ${props => props.theme.colors.borderColor};
+  `}
   border-radius: 8px;
 
   svg {
@@ -65,32 +73,7 @@ export const Image = (props) => {
   )
 }
 
-export const WrapperStar = styled.div`
-  unicode-bidi: bidi-override;
-  color: #c5c5c5;
-  font-size: 17px;
-  position: relative;
-  width: fit-content;
-
-  &::before { 
-    content: '★★★★★';
-    opacity: .3;
-  }
-
-  &::after {
-    color: #F9D853;
-    content: '★★★★';
-    position: absolute;
-    z-index: 1;
-    display: block;
-    left: 0;
-    top:0;
-    width: ${({ width }) => width};
-    overflow: hidden;
-  }
-`
-
-export const DriverInfo = styled.div`
+export const InfoContainer = styled.div`
   ${props => props.theme?.rtl ? css`
     margin-right: 15px;
   ` : css`
@@ -122,4 +105,38 @@ export const AssignedOrdersCount = styled.span`
     pointer-events: none;
     opacity: 0.5;
   `}
+`
+
+export const WrapperPagination = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+`
+
+export const PageButton = styled.button`
+  outline: none;
+  border: 1px solid #00000029;
+  border-radius: 100%;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 5px;
+
+  &:active {
+    background: #1c202e;
+    color: #fff;
+  }
+  &:disabled {
+    cursor: no-drop;
+    pointer-events: none;
+  }
+`
+
+export const WrapperPageState = styled.div`
+  display: flex;
+  min-width: 140px;
 `

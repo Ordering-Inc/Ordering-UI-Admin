@@ -59,22 +59,6 @@ export const Table = styled.table`
     }
   }
 
-  tbody {
-    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-    cursor: pointer;
-
-    &:hover {
-      background-color: ${props => props.theme.colors.lightPrimary};
-    }
-    &.active {
-      background-color: ${props => props.theme.colors.lightPrimary};
-      td {
-        border-top: 1px solid ${props => props.theme.colors.primary};
-        border-bottom: 1px solid ${props => props.theme.colors.primary};
-      }
-    }
-  }
-
   p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -106,6 +90,39 @@ export const Table = styled.table`
       font-size: 14px;
       font-weight: 600;
       color: ${props => props.theme.colors?.headingColor};
+    }
+  }
+`
+
+export const OrderTbody = styled.tbody`
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  &.active {
+    background-color: ${props => props.theme.colors.lightPrimary};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.primary} !important;
+      border-bottom: 1px solid ${props => props.theme.colors.primary} !important;
+
+      ${({ isCustomStyle }) => isCustomStyle && css`
+        &:first-child {
+          ${props => props.theme?.rtl ? css`
+            border-right: 1px solid ${props => props.theme.colors.primary} !important;
+          ` : css`
+            border-left: 1px solid ${props => props.theme.colors.primary} !important;
+          `}
+        }
+        &:last-child {
+          ${props => props.theme?.rtl ? css`
+            border-left: 1px solid ${props => props.theme.colors.primary} !important;
+          ` : css`
+            border-right: 1px solid ${props => props.theme.colors.primary} !important;
+          `}
+        }
+      `}
     }
   }
 `
