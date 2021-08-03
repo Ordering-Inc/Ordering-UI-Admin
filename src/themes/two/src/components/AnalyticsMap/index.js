@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useConfig, useSession, useLanguage } from 'ordering-components-admin'
 import { AnalyticsMap as AnalyticsMapController } from './naked'
 import { GoogleMapsMap } from './GoogleMaps'
+import { useTheme } from 'styled-components'
 import {
   Container,
   WrapperMap
@@ -16,6 +17,7 @@ const AnalyticsMapUI = (props) => {
   const [configState] = useConfig()
   const [{ user }] = useSession()
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [isHeat, setIsHeat] = useState(false)
 
   const googleMapsControls = {
@@ -37,7 +39,7 @@ const AnalyticsMapUI = (props) => {
   return (
     <Container>
       {locationList?.loading ? (
-        <Skeleton height={300} />
+        <Skeleton height={320} />
       ) : (
         <WrapperMap>
           {
@@ -50,6 +52,7 @@ const AnalyticsMapUI = (props) => {
                   mapControls={googleMapsControls}
                   isHeatMap
                   isHeat={isHeat}
+                  markerIcon={theme?.images?.icons?.mapMarker}
                 />
                 <Button
                   borderRadius='7.6px'

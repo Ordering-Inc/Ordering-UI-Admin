@@ -51,6 +51,7 @@ import lock from './template/assets/images/icons/lock.svg'
 import cash from './template/assets/images/icons/cash.svg'
 import help from './template/assets/images/icons/help.svg'
 import timeline from './template/assets/images/icons/timeline.svg'
+import mapMarker from './template/assets/images/icons/marker.png'
 
 import orderPending from './template/assets/images/orderStatus/pending.svg'
 import orderInProgress from './template/assets/images/orderStatus/inProgress.svg'
@@ -169,7 +170,8 @@ theme.images = {
     pickUp: pickUp,
     cash: cash,
     help: help,
-    timeline: timeline
+    timeline: timeline,
+    mapMarker: mapMarker
   },
   dummies: {
     nonOrders: nonOrders,

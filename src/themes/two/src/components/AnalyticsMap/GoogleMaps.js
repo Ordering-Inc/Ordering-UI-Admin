@@ -19,7 +19,8 @@ export const GoogleMaps = (props) => {
     businessMap,
     onBusinessClick,
     isHeatMap,
-    isHeat
+    isHeat,
+    markerIcon
   } = props
 
   const [{ optimizeImage }] = useUtils()
@@ -47,6 +48,9 @@ export const GoogleMaps = (props) => {
       if (i === 1 || businessMap) {
         formatUrl = optimizeImage(locations[i]?.icon, 'r_max')
       }
+      if (isHeatMap && markerIcon) {
+        formatUrl = markerIcon
+      }
       const marker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(locations[i]?.lat, locations[i]?.lng),
         map,
@@ -54,7 +58,10 @@ export const GoogleMaps = (props) => {
         icon: locations[i]?.icon ? {
           url: formatUrl || locations[i].icon,
           scaledSize: new window.google.maps.Size(45, 45)
-        } : null
+        } : (isHeatMap ? {
+          url: formatUrl,
+          scaledSize: new window.google.maps.Size(40, 40)
+        } : null)
       })
       if (businessMap) {
         const isNear = validateResult(googleMap, marker, marker.getPosition())
