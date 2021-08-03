@@ -82,7 +82,7 @@ exports.TimeSelectContainer = TimeSelectContainer;
 
 var DeleteButton = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  ", "\n  ", "\n  svg {\n    color: ", ";\n  }\n"])), function (_ref2) {
   var disabled = _ref2.disabled;
-  return disabled ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.6;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    cursor: pointer;\n  "])));
+  return disabled ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.3;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    cursor: pointer;\n  "])));
 }, function (props) {
   var _props$theme2;
 

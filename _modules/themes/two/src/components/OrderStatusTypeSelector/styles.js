@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 3px 0;\n  column-gap: 5px;  \n\n  ", "\n\n  img {\n    width: 15px;\n  }\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n  }\n"])), function (_ref) {
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  column-gap: 5px;  \n\n  ", "\n\n  img {\n    width: 15px;\n  }\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n  }\n"])), function (_ref) {
   var noPadding = _ref.noPadding;
   return noPadding && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding: 0px;\n  "])));
 });

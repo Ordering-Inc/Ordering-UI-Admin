@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var MessagesListingContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  transition: all 0.5s;\n  padding: 0 20px 20px 20px;\n  box-sizing: border-box;\n  margin-top: 60px;\n\n  @media (min-width: 760px) {\n    margin-top: 0px;\n    padding: 24px;\n  }\n\n  @media print {\n    display: none;\n  }\n"])));
+var MessagesListingContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  transition: all 0.5s;\n  padding: 0 20px 20px 20px;\n  box-sizing: border-box;\n  margin-top: 60px;\n\n  @media (min-width: 760px) {\n    margin-top: 0px;\n    padding: 24px;\n  }\n\n  @media print {\n    display: none;\n  }\n"])));
 
 exports.MessagesListingContainer = MessagesListingContainer;
 

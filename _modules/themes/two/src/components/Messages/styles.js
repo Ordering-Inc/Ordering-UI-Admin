@@ -171,11 +171,11 @@ var WrapperSendInput = _styledComponents.default.div(_templateObject40 || (_temp
 
 exports.WrapperSendInput = WrapperSendInput;
 
-var SendImage = _styledComponents.default.label(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  \n  position: absolute;\n  top: 10px;\n  right: 10px;\n\n  input {\n    display: none;\n  }\n\n  svg {\n    color: #CFD0D0;\n    width: 25px;\n    height: 25px;\n    cursor: pointer\n  }\n"])));
+var SendImage = _styledComponents.default.label(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  \n  position: absolute;\n  top: 10px;\n  right: 10px;\n\n  input {\n    display: none;\n  }\n\n  svg {\n    color: #CFD0D0;\n    width: 25px;\n    height: 25px;\n    cursor: pointer;\n  }\n"])));
 
 exports.SendImage = SendImage;
 
-var WrapperDeleteImage = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 7px;\n  right: -10px;\n\n  button{\n    &:disabled {\n    cursor: not-allowed;\n    }\n  }\n"])));
+var WrapperDeleteImage = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 5px;\n  right: 10px;\n\n  img {\n    width: 30px;\n    height: 30px;\n    &:disabled {\n    cursor: not-allowed;\n    }\n    border-radius: 8px;\n  }\n\n  svg {\n    color: black;\n  }\n\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: white;\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n  }\n"])));
 
 exports.WrapperDeleteImage = WrapperDeleteImage;
 

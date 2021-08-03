@@ -13,8 +13,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _MultiSelect = require("../../styles/MultiSelect");
 
-var _styledComponents = require("styled-components");
-
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -36,8 +34,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
-  var _theme$images, _theme$images$icons;
-
   var driverGroupList = props.driverGroupList,
       filterValues = props.filterValues,
       handleChangeGroup = props.handleChangeGroup;
@@ -46,12 +42,7 @@ var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
-
-  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.group,
-    alt: "group"
-  }), t('GROUP', 'Group'));
+  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('DRIVER_GROUP', 'Driver group'));
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),

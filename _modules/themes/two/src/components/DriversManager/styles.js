@@ -19,7 +19,7 @@ var DriversHeader = _styledComponents.default.div(_templateObject || (_templateO
 
 exports.DriversHeader = DriversHeader;
 
-var DriversContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  transition: all 0.5s;\n  padding: 20px;\n  box-sizing: border-box;\n  margin-top: 60px;\n\n  @media (min-width: 760px) {\n    margin-top: 0px;\n  }\n\n  @media print {\n    display: none;\n  }\n"])));
+var DriversContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  flex: 1;\n  transition: all 0.5s;\n  padding: 20px;\n  box-sizing: border-box;\n  margin-top: 60px;\n\n  @media (min-width: 760px) {\n    margin-top: 0px;\n  }\n\n  @media print {\n    display: none;\n  }\n"])));
 
 exports.DriversContainer = DriversContainer;
 

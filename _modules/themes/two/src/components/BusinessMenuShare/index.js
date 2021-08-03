@@ -120,7 +120,8 @@ var BusinessMenuShareUI = function BusinessMenuShareUI(props) {
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secundary",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    disabled: Object.keys(menu).length === 0
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Share, null))), open && /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, {
     ref: popperElement
   }, actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement("p", null, t('SHARE_WITH', 'Share with')), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, businessesState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {

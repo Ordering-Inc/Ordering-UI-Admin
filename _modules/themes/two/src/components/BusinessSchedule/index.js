@@ -96,7 +96,7 @@ var BusinessScheduleUI = function BusinessScheduleUI(props) {
       alertState = _useState4[0],
       setAlertState = _useState4[1];
 
-  var daysOfWeek = [t('SUNDAY_ABBREVIATION', 'Sun'), t('MONDAY_ABBREVIATION', 'Mon'), t('TUESDAY_ABBREVIATION', 'Tues'), t('WEDNESDAY_ABBREVIATION', 'Wed'), t('THURSDAY_ABBREVIATION', 'Thur'), t('FRIDAY_ABBREVIATION', 'Fri'), t('SATURDAY_ABBREVIATION', 'Sat')];
+  var daysOfWeek = [t('SUNDAY_ABBREVIATION', 'Sun'), t('MONDAY_ABBREVIATION', 'Mon'), t('TUESDAY_ABBREVIATION', 'Tue'), t('WEDNESDAY_ABBREVIATION', 'Wed'), t('THURSDAY_ABBREVIATION', 'Thu'), t('FRIDAY_ABBREVIATION', 'Fri'), t('SATURDAY_ABBREVIATION', 'Sat')];
 
   var closeAlert = function closeAlert() {
     setIsConflict(false);
@@ -182,7 +182,7 @@ var BusinessScheduleUI = function BusinessScheduleUI(props) {
           value: i
         }, i < 10 ? "0".concat(i) : i);
       }))), /*#__PURE__*/_react.default.createElement(_styles.DeleteButton, {
-        disabled: schedule.lapses.length === 1,
+        disabled: schedule.lapses.length === 1 || formState.loading,
         onClick: function onClick() {
           return handleDeleteScheduleTime(daysOfWeekIndex, index);
         }

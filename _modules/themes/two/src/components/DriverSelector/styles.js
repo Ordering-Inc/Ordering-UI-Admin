@@ -86,5 +86,5 @@ var DriverImage = function DriverImage(props) {
 };
 
 exports.DriverImage = DriverImage;
-var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n"])));
+var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  padding: 10px;\n"])));
 exports.PlaceholderTitle = PlaceholderTitle;

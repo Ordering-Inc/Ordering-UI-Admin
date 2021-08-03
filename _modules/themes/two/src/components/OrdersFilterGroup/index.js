@@ -142,13 +142,13 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangePaymethodType: handleChangePaymethodType
   })), /*#__PURE__*/_react.default.createElement(_styles.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    borderRadius: "5px",
+    borderRadius: "8px",
     onClick: function onClick() {
       return handleAcceptFilter();
     }
   }, t('ACCEPT', 'Accept')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secundary",
-    borderRadius: "5px",
+    color: "secundaryDark",
+    borderRadius: "8px",
     onClick: function onClick() {
       return handleClearFilter();
     }

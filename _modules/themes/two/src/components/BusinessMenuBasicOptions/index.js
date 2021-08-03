@@ -284,7 +284,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
           value: i
         }, i < 10 ? "0".concat(i) : i);
       }))), /*#__PURE__*/_react.default.createElement(_styles.DeleteButton, {
-        disabled: schedule.lapses.length === 1,
+        disabled: schedule.lapses.length === 1 || formState.loading,
         onClick: function onClick() {
           return handleDeleteScheduleTime(daysOfWeekIndex, index);
         }
