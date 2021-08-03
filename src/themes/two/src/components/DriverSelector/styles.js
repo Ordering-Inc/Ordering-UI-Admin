@@ -50,7 +50,7 @@ export const DriverName = styled.p`
   font-size: 14px;
   font-weight: 600;
   line-height: 1.3;
-  color: #000;
+  color: ${props => props.theme.colors.headingColor};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -76,7 +76,7 @@ export const WrapperDriverImage = styled.div`
   width: 45px;
   height: 45px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
 
   svg {
@@ -106,7 +106,7 @@ const DriverImageStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 8px;
   ${({ small }) => small && css`
     border-radius: 3px;
   `}
