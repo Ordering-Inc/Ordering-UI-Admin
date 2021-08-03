@@ -38,9 +38,8 @@ export const BusinessAnalytics = (props) => {
       }
       const rootUrl = `${ordering.root}/reports/orders`
       let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      if (filterList?.timezone) params = `${params}&timezone=${filterList?.timezone}`
+      if (filterList?.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList?.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
       const functionFetch = `${rootUrl}?${params}`
 
       const response = await fetch(functionFetch, requestOptions)
@@ -83,9 +82,8 @@ export const BusinessAnalytics = (props) => {
       }
       const rootUrl = `${ordering.root}/reports/sales`
       let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      if (filterList?.timezone) params = `${params}&timezone=${filterList?.timezone}`
+      if (filterList?.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList?.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
       const functionFetch = `${rootUrl}?${params}`
 
       const response = await fetch(functionFetch, requestOptions)
@@ -492,8 +490,8 @@ export const BusinessAnalytics = (props) => {
           customerSatisfactionList={customerSatisfactionList}
           ordersAcceptSpendList={ordersAcceptSpendList}
           arrivedPickUpSpendList={arrivedPickUpSpendList}
-          handleChangeFilterList={setFilterList}
           orderLocationList={orderLocationList}
+          handleChangeFilterList={setFilterList}
         />
       )}
     </>

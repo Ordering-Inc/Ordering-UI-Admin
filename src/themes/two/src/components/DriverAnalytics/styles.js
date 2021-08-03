@@ -20,12 +20,11 @@ export const BusinessAnalyticsContainer = styled.div`
 export const BusinessAnalyticsHeader = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  align-items: center;
 
-  @media (min-width: 993px) {
+  @media (min-width: 769px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
   }
 
   h1 {
@@ -35,24 +34,12 @@ export const BusinessAnalyticsHeader = styled.div`
   }
 `
 
-export const HeaderFilterContainer = styled.div`
+export const BusinessFilterCalendar = styled.div`
   display: flex;
-  flex-direction: column;
-  > div {
-    margin-top: 10px;
-  }
-
-  @media (min-width: 577px) {
-    flex-direction: row;
-  }
+  align-items: center;
 `
 
 export const BusinessFilterWrapper = styled.div`
-  margin-left: 25px;
-  ${props => props.theme.rtl && css`
-    margin-right: 25px;
-    margin-left: 0;
-  `}
   button {
     background: #F8F9FA;
     border-radius: 7.6px;
@@ -63,8 +50,13 @@ export const BusinessFilterWrapper = styled.div`
   }
 `
 
-export const CalendarWrapper = styled(BusinessFilterWrapper)`
+export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
   position: relative;
+  margin-left: 25px;
+  ${props => props.theme.rtl && css`
+    margin-right: 25px;
+    margin-left: 0;
+  `}
 
   button {
     svg {
@@ -86,8 +78,4 @@ export const AnalyticsContentWrapper = styled.div`
 
 export const MapWrraper = styled.div`
   margin-top: 20px;
-`
-
-export const TimeZoneFilterWrapper = styled(BusinessFilterWrapper)`
-  position: relative;
 `

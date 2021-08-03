@@ -16,20 +16,28 @@ import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
-  HeaderFilterContainer,
+  BusinessFilterCalendar,
   BusinessFilterWrapper,
-  CalendarWrapper,
+  BusinessCalendarWrapper,
   AnalyticsContentWrapper,
-  MapWrraper,
-  TimeZoneFilterWrapper
+  MapWrraper
 } from './styles'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
-import { AnalyticsTimeZone } from '../AnalyticsTimeZone'
 
 const DriverAnalyticsUI = (props) => {
   const {
-    filterList
+    filterList,
+    ordersList,
+    salesList,
+    topProductList,
+    topCategoryList,
+    orderStatusList,
+    registerUsersList,
+    customerSatisfactionList,
+    ordersAcceptSpendList,
+    arrivedPickUpSpendList,
+    orderLocationList
   } = props
 
   const [, t] = useLanguage()
@@ -39,23 +47,18 @@ const DriverAnalyticsUI = (props) => {
     <BusinessAnalyticsContainer>
       <BusinessAnalyticsHeader>
         <h1>{t('DRIVERS_ANALYTICS', 'Drivers analytics')}</h1>
-        <HeaderFilterContainer>
+        <BusinessFilterCalendar>
           <BusinessFilterWrapper>
             <Button onClick={() => setBusinessFilterModal(true)}>
-              {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
+              {t('DRIVERS', 'DRIVERS')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
           </BusinessFilterWrapper>
-          <TimeZoneFilterWrapper>
-            <AnalyticsTimeZone
-              {...props}
-            />
-          </TimeZoneFilterWrapper>
-          <CalendarWrapper>
+          <BusinessCalendarWrapper>
             <AnalyticsCalendar
               {...props}
             />
-          </CalendarWrapper>
-        </HeaderFilterContainer>
+          </BusinessCalendarWrapper>
+        </BusinessFilterCalendar>
       </BusinessAnalyticsHeader>
       <AnalyticsStatusFilterBar
         {...props}
@@ -65,54 +68,65 @@ const DriverAnalyticsUI = (props) => {
       />
       <MapWrraper>
         <AnalyticsMap
-          {...props}
+          locationList={orderLocationList}
         />
       </MapWrraper>
 
       <AnalyticsContentWrapper className='row'>
         <div className='col-md-6'>
-          <AnalyticsOrdersOrSales isOrders {...props} />
+          <AnalyticsOrdersOrSales
+            isOrders
+            filterList={filterList}
+            chartDataList={ordersList}
+          />
         </div>
         <div className='col-md-6'>
-          <AnalyticsOrdersOrSales {...props} />
+          <AnalyticsOrdersOrSales
+            filterList={filterList}
+            chartDataList={salesList}
+          />
         </div>
         <div className='col-md-6'>
           <AnalyticsProductCategories
-            {...props}
+            filterList={filterList}
+            productCategoryList={topProductList}
             isProducts
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsProductCategories
-            {...props}
+            filterList={filterList}
+            productCategoryList={topCategoryList}
           />
         </div>
         <div className='col-md-12'>
           <AnalyticsOrdersStatus
-            {...props}
+            filterList={filterList}
+            orderStatusList={orderStatusList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsRegisterUsers
-            {...props}
+            registerUsersList={registerUsersList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsCustomerSatisfaction
-            {...props}
+            dataList={customerSatisfactionList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsOrdersAcceptSpend
-            {...props}
+            dataList={ordersAcceptSpendList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsArrivedPickUp
-            {...props}
+            dataList={arrivedPickUpSpendList}
           />
         </div>
       </AnalyticsContentWrapper>
+
       <Modal
         width='50%'
         height='80vh'
