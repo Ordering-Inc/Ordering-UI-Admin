@@ -28,8 +28,7 @@ export const ActionBlock = styled.div`
   }
 `
 
-export const BarCharWrapper = styled.div`
-`
+export const BarChartWrapper = styled.div``
 
 export const ProductCategoryFooter = styled.div`
   margin-top: 25px;

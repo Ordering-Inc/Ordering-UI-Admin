@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
-  padding: 20px;
+  padding: 10px;
   height: 100%;
 `
 
@@ -12,6 +12,7 @@ export const ProductCategoryHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  padding: 10px 10px 0 10px;
 
   p {
     margin: 0;
@@ -72,4 +73,8 @@ export const EmptyContent = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
+`
+
+export const ProductCategoryContainer = styled.div`
+  padding: 0 10px 10px 10px;
 `

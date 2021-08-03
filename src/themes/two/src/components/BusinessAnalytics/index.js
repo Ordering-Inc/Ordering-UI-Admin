@@ -19,7 +19,8 @@ import {
   BusinessFilterCalendar,
   BusinessFilterWrapper,
   BusinessCalendarWrapper,
-  AnalyticsContentWrapper
+  AnalyticsContentWrapper,
+  MapWrraper
 } from './styles'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
@@ -55,9 +56,12 @@ const BusinessAnalyticsUI = (props) => {
       <AnalyticsStatusSubFilter
         {...props}
       />
-      <AnalyticsMap
-        {...props}
-      />
+      <MapWrraper>
+        <AnalyticsMap
+          {...props}
+        />
+      </MapWrraper>
+
       <AnalyticsContentWrapper className='row'>
         <div className='col-md-6'>
           <AnalyticsOrdersOrSales isOrders {...props} />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
   Container,
   ChartContentWrapper,
@@ -24,6 +24,7 @@ const AnalyticsOrdersOrSalesUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const chartRef = useRef(null)
 
   const generateLabels = () => {
     const labels = []
@@ -111,13 +112,22 @@ const AnalyticsOrdersOrSalesUI = (props) => {
     return parsePrice(sales.toFixed(2), { separator: '.' })
   }
 
+  const downloadImage = () => {
+    if (!chartRef?.current) return
+    const a = document.createElement('a')
+    a.href = chartRef?.current?.toBase64Image()
+    a.download = `${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}.png`
+    // Trigger the download
+    a.click()
+  }
+
   return (
     <Container>
       <ChartHeaderContainer>
         <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}</p>
         <ActionBlock>
           <BsArrowsAngleExpand />
-          <BsDownload className='download-view' />
+          <BsDownload className='download-view' onClick={downloadImage} />
         </ActionBlock>
       </ChartHeaderContainer>
       <ChartContentWrapper>
@@ -125,7 +135,7 @@ const AnalyticsOrdersOrSalesUI = (props) => {
           chartDataList?.loading ? (
             <Skeleton height={150} />
           ) : (
-            chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )
         }
       </ChartContentWrapper>

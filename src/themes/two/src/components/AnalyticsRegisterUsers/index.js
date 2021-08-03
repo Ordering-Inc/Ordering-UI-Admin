@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
   Container,
   RegisterUserChartWrapper,
@@ -20,6 +20,7 @@ const AnalyticsRegisterUsersUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const chartRef = useRef(null)
 
   const generateLabels = () => {
     const labels = []
@@ -35,6 +36,15 @@ const AnalyticsRegisterUsersUI = (props) => {
       values.push(label.users)
     }
     return values
+  }
+
+  const downloadImage = () => {
+    if (!chartRef?.current) return
+    const a = document.createElement('a')
+    a.href = chartRef?.current?.toBase64Image()
+    a.download = `${t('REGISTER_USERS', 'Register Users')}.png`
+    // Trigger the download
+    a.click()
   }
 
   const defaultData = {
@@ -87,16 +97,10 @@ const AnalyticsRegisterUsersUI = (props) => {
   return (
     <Container>
       <RegisterUsersHeader>
-        {
-          registerUsersList?.loading ? (
-            <Skeleton width={50} />
-          ) : (
-            <p>{t('REGISTER_USERS', 'Register Users')}</p>
-          )
-        }
+        <p>{t('REGISTER_USERS', 'Register Users')}</p>
         <ActionBlock>
-          {registerUsersList?.loading ? <Skeleton width={20} height={20} style={{ marginLeft: '5px', marginRight: '5px' }} /> : <BsArrowsAngleExpand />}
-          {registerUsersList?.loading ? <Skeleton width={20} height={20} /> : <BsDownload className='download-view' />}
+          <BsArrowsAngleExpand />
+          <BsDownload className='download-view' onClick={downloadImage} />
         </ActionBlock>
       </RegisterUsersHeader>
       <RegisterUserChartWrapper>
@@ -105,7 +109,7 @@ const AnalyticsRegisterUsersUI = (props) => {
             <Skeleton height={150} />
           ) : (
             registerUsersList?.users?.length > 0 ? (
-              <Line data={defaultData} options={options} />
+              <Line data={defaultData} options={options} ref={chartRef} />
             ) : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )
         }

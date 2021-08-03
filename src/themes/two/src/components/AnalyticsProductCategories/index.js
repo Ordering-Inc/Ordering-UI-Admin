@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { AnalyticsProductCategories as AnalyticsProductCategoriesController } from './naked'
 import {
@@ -9,10 +9,12 @@ import {
   ProductCategoryContent,
   SkeletonContainerWrapper,
   PercentContainer,
-  EmptyContent
+  EmptyContent,
+  ProductCategoryContainer
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
+import * as htmlToImage from 'html-to-image'
 
 const AnalyticsProductCategoriesUI = (props) => {
   const {
@@ -21,13 +23,29 @@ const AnalyticsProductCategoriesUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const downloadElementRef = useRef(null)
+
+  const downloadImage = () => {
+    if (!downloadElementRef?.current) return
+    htmlToImage.toPng(downloadElementRef?.current)
+      .then(function (dataUrl) {
+        const a = document.createElement('a')
+        a.href = dataUrl
+        a.download = `${isProducts ? t('TOP_PRODUCTS', 'Top Products') : t('TOP_CATEGORIES', 'Top Categories')}.png`
+        // Trigger the download
+        a.click()
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error)
+      })
+  }
 
   return (
     <Container>
       <ProductCategoryHeader>
         <p>{isProducts ? t('TOP_PRODUCTS', 'Top Products') : t('TOP_CATEGORIES', 'Top Categories')}</p>
         <ActionBlock>
-          <BsDownload />
+          <BsDownload onClick={downloadImage} />
         </ActionBlock>
       </ProductCategoryHeader>
       {
@@ -44,12 +62,18 @@ const AnalyticsProductCategoriesUI = (props) => {
         ) : (
           <ProductCategoryContentWrapper>
             {
-              productCategoryList?.data.length > 0 ? productCategoryList?.data.map((item, i) => (
-                <ProductCategoryContent key={i}>
-                  <p>{item?.name}</p>
-                  <PercentContainer percent={item?.sales}>{item?.sales}%</PercentContainer>
-                </ProductCategoryContent>
-              )) : (
+              productCategoryList?.data.length > 0 ? (
+                <ProductCategoryContainer ref={downloadElementRef}>
+                  {
+                    productCategoryList?.data.map((item, i) => (
+                      <ProductCategoryContent key={i}>
+                        <p>{item?.name}</p>
+                        <PercentContainer percent={item?.sales}>{item?.sales}%</PercentContainer>
+                      </ProductCategoryContent>
+                    ))
+                  }
+                </ProductCategoryContainer>
+              ) : (
                 <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
               )
             }

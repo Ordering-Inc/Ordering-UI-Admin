@@ -70,6 +70,7 @@
     "chart.js": "^3.5.0",
     "google-map-react": "^2.1.9",
     "handsontable": "^9.0.1",
+    "html-to-image": "^1.7.0",
     "jsoneditor": "^9.3.0",
     "jsoneditor-react": "^3.1.1",
     "libphonenumber-js": "^1.9.19",

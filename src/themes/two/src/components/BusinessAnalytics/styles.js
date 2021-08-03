@@ -75,3 +75,7 @@ export const AnalyticsContentWrapper = styled.div`
     margin-top: 40px;
   }
 `
+
+export const MapWrraper = styled.div`
+  margin-top: 20px;
+`

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { AnalyticsOrdersStatus as AnalyticsOrdersStatusController } from './naked'
 import {
   Container,
   ProductCategoryHeader,
   ActionBlock,
-  BarCharWrapper,
+  BarChartWrapper,
   ProductCategoryFooter,
   EmptyContent
 } from './styles'
@@ -19,6 +19,7 @@ const AnalyticsOrdersStatusUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const chartRef = useRef(null)
 
   const orderStatus = [
     { key: 0, value: t('PENDING', 'Pending') },
@@ -70,6 +71,15 @@ const AnalyticsOrdersStatusUI = (props) => {
     return value
   }
 
+  const downloadImage = () => {
+    if (!chartRef?.current) return
+    const a = document.createElement('a')
+    a.href = chartRef?.current?.toBase64Image()
+    a.download = `${t('ORDERS_STATUS', 'ORDERS STATUS')}.png`
+    // Trigger the download
+    a.click()
+  }
+
   const data = {
     labels: generateLabels(),
     datasets: [
@@ -88,7 +98,7 @@ const AnalyticsOrdersStatusUI = (props) => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    // maintainAspectRatio: false,
     indexAxis: 'y',
     scales: {
       x: {
@@ -129,7 +139,7 @@ const AnalyticsOrdersStatusUI = (props) => {
       <ProductCategoryHeader>
         <p>{t('ORDERS_STATUS', 'ORDERS STATUS')}</p>
         <ActionBlock>
-          <BsDownload />
+          <BsDownload onClick={downloadImage} />
         </ActionBlock>
       </ProductCategoryHeader>
       {
@@ -137,9 +147,9 @@ const AnalyticsOrdersStatusUI = (props) => {
           <Skeleton height={150} />
         ) : (
           productCategoryList?.data.length > 0 ? (
-            <BarCharWrapper>
-              <Bar data={data} options={options} />
-            </BarCharWrapper>
+            <BarChartWrapper>
+              <Bar data={data} options={options} ref={chartRef} />
+            </BarChartWrapper>
           ) : (
             <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )
