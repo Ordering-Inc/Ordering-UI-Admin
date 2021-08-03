@@ -91,7 +91,7 @@ export const TimeSelectContainer = styled.div`
 export const DeleteButton = styled.div`
   ${({ disabled }) => disabled ? css`
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.3;
   ` : css`
     cursor: pointer;
   `}
