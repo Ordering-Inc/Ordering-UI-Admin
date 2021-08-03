@@ -401,9 +401,9 @@ export const OrdersTable = (props) => {
                       </td>
                     )}
                     {allowColumns?.driver && (
-                      <td className='driverInfo'>
+                      <td>
                         {order?.delivery_type === 1 && (
-                          <DriversInfo>
+                          <DriversInfo className='driverInfo'>
                             <DriverSelector
                               orderView
                               padding='5px 0'
