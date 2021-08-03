@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsOrdersStatus as AnalyticsOrdersStatusController } from './naked'
 import {
   Container,
   ProductCategoryHeader,
@@ -13,9 +12,9 @@ import BsDownload from '@meronex/icons/bs/BsDownload'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
 
-const AnalyticsOrdersStatusUI = (props) => {
+export const AnalyticsOrdersStatus = (props) => {
   const {
-    productCategoryList
+    orderStatusList
   } = props
 
   const [, t] = useLanguage()
@@ -48,7 +47,7 @@ const AnalyticsOrdersStatusUI = (props) => {
 
   const generateLabels = () => {
     const labels = [t('ALL', 'All')]
-    for (const label of productCategoryList?.data) {
+    for (const label of orderStatusList?.data) {
       labels.push(orderStatus[label.status].value)
     }
     return labels
@@ -57,7 +56,7 @@ const AnalyticsOrdersStatusUI = (props) => {
   const generateData = () => {
     const todalValue = TotalOrders()
     const datasets = [todalValue]
-    for (const data of productCategoryList?.data) {
+    for (const data of orderStatusList?.data) {
       datasets.push(data.orders)
     }
     return datasets
@@ -65,7 +64,7 @@ const AnalyticsOrdersStatusUI = (props) => {
 
   const TotalOrders = () => {
     let value = 0
-    for (const data of productCategoryList?.data) {
+    for (const data of orderStatusList?.data) {
       value = value + data.orders
     }
     return value
@@ -143,10 +142,10 @@ const AnalyticsOrdersStatusUI = (props) => {
         </ActionBlock>
       </ProductCategoryHeader>
       {
-        productCategoryList?.loading ? (
+        orderStatusList?.loading ? (
           <Skeleton height={150} />
         ) : (
-          productCategoryList?.data.length > 0 ? (
+          orderStatusList?.data.length > 0 ? (
             <BarChartWrapper>
               <Bar data={data} options={options} ref={chartRef} />
             </BarChartWrapper>
@@ -157,24 +156,13 @@ const AnalyticsOrdersStatusUI = (props) => {
       }
 
       <ProductCategoryFooter>
-        <h2>{productCategoryList?.loading ? <Skeleton width={30} /> : <TotalOrders />}</h2>
-        {productCategoryList?.loading ? (
+        <h2>{orderStatusList?.loading ? <Skeleton width={30} /> : <TotalOrders />}</h2>
+        {orderStatusList?.loading ? (
           <Skeleton width={80} />
         ) : (
           <p>{t('ORDERS_TOTALS', 'Orders totals')}</p>
         )}
       </ProductCategoryFooter>
     </Container>
-  )
-}
-
-export const AnalyticsOrdersStatus = (props) => {
-  const analyticsOrdersStatusProps = {
-    ...props,
-    UIComponent: AnalyticsOrdersStatusUI
-  }
-
-  return (
-    <AnalyticsOrdersStatusController {...analyticsOrdersStatusProps} />
   )
 }

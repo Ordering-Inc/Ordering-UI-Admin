@@ -1,6 +1,5 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsArrivedPickUp as AnalyticsArrivedPickUpController } from './naked'
 import GiAlarmClock from '@meronex/icons/gi/GiAlarmClock'
 import {
   Container,
@@ -13,9 +12,9 @@ import {
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
-const AnalyticsArrivedPickUpUI = (props) => {
+export const AnalyticsArrivedPickUp = (props) => {
   const {
-    arrivedPickUpList
+    dataList
   } = props
 
   const [, t] = useLanguage()
@@ -26,7 +25,7 @@ const AnalyticsArrivedPickUpUI = (props) => {
         <p>{t('TIME_WAITING_ON_READY_FOR_PICKUP', 'TIME SPENT WAITING ON READY FOR PICKUP')}</p>
       </OrdersAcceptSpendHeader>
       {
-        arrivedPickUpList?.loading ? (
+        dataList?.loading ? (
           <OrdersAcceptSpendContent>
             <TimeContentWrapper>
               <Skeleton width={70} height={40} />
@@ -38,10 +37,10 @@ const AnalyticsArrivedPickUpUI = (props) => {
             </ReviewContentWrapper>
           </OrdersAcceptSpendContent>
         ) : (
-          arrivedPickUpList?.data ? (
+          dataList?.data ? (
             <OrdersAcceptSpendContent>
               <TimeContentWrapper>
-                <h1>{arrivedPickUpList?.data}</h1>
+                <h1>{dataList?.data}</h1>
                 <p>{t('SECONDS', 'Seconds')}</p>
               </TimeContentWrapper>
               <ReviewContentWrapper>
@@ -57,16 +56,5 @@ const AnalyticsArrivedPickUpUI = (props) => {
         )
       }
     </Container>
-  )
-}
-
-export const AnalyticsArrivedPickUp = (props) => {
-  const analyticsArrivedPickUpProps = {
-    ...props,
-    UIComponent: AnalyticsArrivedPickUpUI
-  }
-
-  return (
-    <AnalyticsArrivedPickUpController {...analyticsArrivedPickUpProps} />
   )
 }

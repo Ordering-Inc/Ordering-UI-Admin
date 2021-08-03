@@ -8,13 +8,12 @@ import {
 } from './styles'
 import BsArrowsAngleExpand from '@meronex/icons/bs/BsArrowsAngleExpand'
 import BsDownload from '@meronex/icons/bs/BsDownload'
-import { AnalyticsRegisterUsers as AnalyticsRegisterUsersController } from './naked'
 import { Line } from 'react-chartjs-2'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 
-const AnalyticsRegisterUsersUI = (props) => {
+export const AnalyticsRegisterUsers = (props) => {
   const {
     registerUsersList
   } = props
@@ -24,7 +23,7 @@ const AnalyticsRegisterUsersUI = (props) => {
 
   const generateLabels = () => {
     const labels = []
-    for (const label of registerUsersList?.users) {
+    for (const label of registerUsersList?.data) {
       labels.push(moment(label.time).format('LT'))
     }
     return labels
@@ -32,7 +31,7 @@ const AnalyticsRegisterUsersUI = (props) => {
 
   const generateData = () => {
     const values = []
-    for (const label of registerUsersList?.users) {
+    for (const label of registerUsersList?.data) {
       values.push(label.users)
     }
     return values
@@ -108,22 +107,12 @@ const AnalyticsRegisterUsersUI = (props) => {
           registerUsersList?.loading ? (
             <Skeleton height={150} />
           ) : (
-            registerUsersList?.users?.length > 0 ? (
+            registerUsersList?.data?.length > 0 ? (
               <Line data={defaultData} options={options} ref={chartRef} />
             ) : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )
         }
       </RegisterUserChartWrapper>
     </Container>
-  )
-}
-
-export const AnalyticsRegisterUsers = (props) => {
-  const analyticsRegisterUsersProps = {
-    ...props,
-    UIComponent: AnalyticsRegisterUsersUI
-  }
-  return (
-    <AnalyticsRegisterUsersController {...analyticsRegisterUsersProps} />
   )
 }

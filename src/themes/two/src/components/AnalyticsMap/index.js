@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useConfig, useSession, useLanguage } from 'ordering-components-admin'
-import { AnalyticsMap as AnalyticsMapController } from './naked'
 import { GoogleMapsMap } from './GoogleMaps'
 import { useTheme } from 'styled-components'
 import {
@@ -10,7 +9,7 @@ import {
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 
-const AnalyticsMapUI = (props) => {
+export const AnalyticsMap = (props) => {
   const {
     locationList
   } = props
@@ -68,15 +67,5 @@ const AnalyticsMapUI = (props) => {
         </WrapperMap>
       )}
     </Container>
-  )
-}
-
-export const AnalyticsMap = (props) => {
-  const analyticsMapProps = {
-    ...props,
-    UIComponent: AnalyticsMapUI
-  }
-  return (
-    <AnalyticsMapController {...analyticsMapProps} />
   )
 }

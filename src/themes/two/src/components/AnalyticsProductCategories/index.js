@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsProductCategories as AnalyticsProductCategoriesController } from './naked'
 import {
   Container,
   ProductCategoryHeader,
@@ -16,7 +15,7 @@ import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
 import * as htmlToImage from 'html-to-image'
 
-const AnalyticsProductCategoriesUI = (props) => {
+export const AnalyticsProductCategories = (props) => {
   const {
     isProducts,
     productCategoryList
@@ -82,16 +81,5 @@ const AnalyticsProductCategoriesUI = (props) => {
       }
 
     </Container>
-  )
-}
-
-export const AnalyticsProductCategories = (props) => {
-  const analyticsProductCategoriesProps = {
-    ...props,
-    UIComponent: AnalyticsProductCategoriesUI
-  }
-
-  return (
-    <AnalyticsProductCategoriesController {...analyticsProductCategoriesProps} />
   )
 }

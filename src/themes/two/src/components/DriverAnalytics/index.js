@@ -16,14 +16,16 @@ import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
-  BusinessFilterCalendar,
+  HeaderFilterContainer,
   BusinessFilterWrapper,
-  BusinessCalendarWrapper,
+  CalendarWrapper,
   AnalyticsContentWrapper,
-  MapWrraper
+  MapWrraper,
+  TimeZoneFilterWrapper
 } from './styles'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
+import { AnalyticsTimeZone } from '../AnalyticsTimeZone'
 
 const DriverAnalyticsUI = (props) => {
   const {
@@ -37,18 +39,23 @@ const DriverAnalyticsUI = (props) => {
     <BusinessAnalyticsContainer>
       <BusinessAnalyticsHeader>
         <h1>{t('DRIVERS_ANALYTICS', 'Drivers analytics')}</h1>
-        <BusinessFilterCalendar>
+        <HeaderFilterContainer>
           <BusinessFilterWrapper>
             <Button onClick={() => setBusinessFilterModal(true)}>
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
           </BusinessFilterWrapper>
-          <BusinessCalendarWrapper>
+          <TimeZoneFilterWrapper>
+            <AnalyticsTimeZone
+              {...props}
+            />
+          </TimeZoneFilterWrapper>
+          <CalendarWrapper>
             <AnalyticsCalendar
               {...props}
             />
-          </BusinessCalendarWrapper>
-        </BusinessFilterCalendar>
+          </CalendarWrapper>
+        </HeaderFilterContainer>
       </BusinessAnalyticsHeader>
       <AnalyticsStatusFilterBar
         {...props}

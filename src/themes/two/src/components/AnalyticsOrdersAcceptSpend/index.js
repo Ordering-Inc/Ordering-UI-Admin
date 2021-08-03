@@ -1,6 +1,5 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsOrdersAcceptSpend as AnalyticsOrdersAcceptSpendController } from './naked'
 import GiAlarmClock from '@meronex/icons/gi/GiAlarmClock'
 import {
   Container,
@@ -13,9 +12,9 @@ import {
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
-const AnalyticsOrdersAcceptSpendUI = (props) => {
+export const AnalyticsOrdersAcceptSpend = (props) => {
   const {
-    ordersAcceptSpendList
+    dataList
   } = props
 
   const [, t] = useLanguage()
@@ -26,7 +25,7 @@ const AnalyticsOrdersAcceptSpendUI = (props) => {
         <p>{t('TIME_SPENT_TO_ACCEPT_ORDER', 'TIME SPENT TO ACCEPT ORDER')}</p>
       </OrdersAcceptSpendHeader>
       {
-        ordersAcceptSpendList?.loading ? (
+        dataList?.loading ? (
           <OrdersAcceptSpendContent>
             <TimeContentWrapper>
               <Skeleton width={70} height={40} />
@@ -38,10 +37,10 @@ const AnalyticsOrdersAcceptSpendUI = (props) => {
             </ReviewContentWrapper>
           </OrdersAcceptSpendContent>
         ) : (
-          ordersAcceptSpendList?.data ? (
+          dataList?.data ? (
             <OrdersAcceptSpendContent>
               <TimeContentWrapper>
-                <h1>{ordersAcceptSpendList?.data && ((parseInt(ordersAcceptSpendList?.data) / 60).toFixed(2))}</h1>
+                <h1>{dataList?.data && ((parseInt(dataList?.data) / 60).toFixed(2))}</h1>
                 <p>{t('MINUTES', 'Minutes')}</p>
               </TimeContentWrapper>
               <ReviewContentWrapper>
@@ -60,16 +59,5 @@ const AnalyticsOrdersAcceptSpendUI = (props) => {
       }
 
     </Container>
-  )
-}
-
-export const AnalyticsOrdersAcceptSpend = (props) => {
-  const analyticsOrdersAcceptSpendProps = {
-    ...props,
-    UIComponent: AnalyticsOrdersAcceptSpendUI
-  }
-
-  return (
-    <AnalyticsOrdersAcceptSpendController {...analyticsOrdersAcceptSpendProps} />
   )
 }

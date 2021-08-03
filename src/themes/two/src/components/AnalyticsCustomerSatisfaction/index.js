@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsCustomerSatisfaction as AnalyticsCustomerSatisfactionController } from './naked'
 import * as htmlToImage from 'html-to-image'
 import {
   Container,
@@ -31,9 +30,9 @@ const Score = ({ star, text }) => (
   </ScoreDiv>
 )
 
-const AnalyticsCustomerSatisfactionUI = (props) => {
+export const AnalyticsCustomerSatisfaction = (props) => {
   const {
-    customerSatisfactionList
+    dataList
   } = props
 
   const [, t] = useLanguage()
@@ -63,7 +62,7 @@ const AnalyticsCustomerSatisfactionUI = (props) => {
         </ActionBlock>
       </CustomerSatisfactionHeader>
       {
-        customerSatisfactionList?.loading ? (
+        dataList?.loading ? (
           <SkeletonContainerWrapper>
             {
               [...Array(5).keys()].map(i => (
@@ -75,35 +74,24 @@ const AnalyticsCustomerSatisfactionUI = (props) => {
           </SkeletonContainerWrapper>
         ) : (
           <CustomerSatisfactionWrapper>
-            {(!customerSatisfactionList?.data?.general &&
-              !customerSatisfactionList?.data?.quality &&
-              !customerSatisfactionList?.data?.delivery &&
-              !customerSatisfactionList?.data?.service &&
-              !customerSatisfactionList?.data?.package
+            {(!dataList?.data?.general &&
+              !dataList?.data?.quality &&
+              !dataList?.data?.delivery &&
+              !dataList?.data?.service &&
+              !dataList?.data?.package
             ) ? (<EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
               ) : (
                 <CustomerSatisfactionContent ref={downloadElementRef}>
-                  {customerSatisfactionList?.data?.general && <Score star={customerSatisfactionList?.data?.general} text={t('GENERAL', 'General')} />}
-                  {customerSatisfactionList?.data?.quality && <Score star={customerSatisfactionList?.data?.quality} text={t('QUANTITY', 'Quality')} />}
-                  {customerSatisfactionList?.data?.delivery && <Score star={customerSatisfactionList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />}
-                  {customerSatisfactionList?.data?.service && <Score star={customerSatisfactionList?.data?.service} text={t('SERVICE', 'Service')} />}
-                  {customerSatisfactionList?.data?.package && <Score star={customerSatisfactionList?.data?.package} text={t('PACKAGE', 'Package')} />}
+                  {dataList?.data?.general && <Score star={dataList?.data?.general} text={t('GENERAL', 'General')} />}
+                  {dataList?.data?.quality && <Score star={dataList?.data?.quality} text={t('QUANTITY', 'Quality')} />}
+                  {dataList?.data?.delivery && <Score star={dataList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />}
+                  {dataList?.data?.service && <Score star={dataList?.data?.service} text={t('SERVICE', 'Service')} />}
+                  {dataList?.data?.package && <Score star={dataList?.data?.package} text={t('PACKAGE', 'Package')} />}
                 </CustomerSatisfactionContent>
               )}
           </CustomerSatisfactionWrapper>
         )
       }
     </Container>
-  )
-}
-
-export const AnalyticsCustomerSatisfaction = (props) => {
-  const analyticsCustomerSatisfactionProps = {
-    ...props,
-    UIComponent: AnalyticsCustomerSatisfactionUI
-  }
-
-  return (
-    <AnalyticsCustomerSatisfactionController {...analyticsCustomerSatisfactionProps} />
   )
 }

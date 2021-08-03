@@ -9,13 +9,12 @@ import {
 } from './styles'
 import BsArrowsAngleExpand from '@meronex/icons/bs/BsArrowsAngleExpand'
 import BsDownload from '@meronex/icons/bs/BsDownload'
-import { AnalyticsOrdersOrSales as AnalyticsOrdersOrSalesController } from './naked'
 import { Line } from 'react-chartjs-2'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 
-const AnalyticsOrdersOrSalesUI = (props) => {
+export const AnalyticsOrdersOrSales = (props) => {
   const {
     isOrders,
     chartDataList,
@@ -148,15 +147,5 @@ const AnalyticsOrdersOrSalesUI = (props) => {
         )}
       </ChartFooterContainer>
     </Container>
-  )
-}
-
-export const AnalyticsOrdersOrSales = (props) => {
-  const analyticsOrdersOrSalesProps = {
-    ...props,
-    UIComponent: AnalyticsOrdersOrSalesUI
-  }
-  return (
-    <AnalyticsOrdersOrSalesController {...analyticsOrdersOrSalesProps} />
   )
 }

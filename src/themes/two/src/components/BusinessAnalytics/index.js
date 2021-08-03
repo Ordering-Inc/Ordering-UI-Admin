@@ -27,7 +27,17 @@ import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 
 const BusinessAnalyticsUI = (props) => {
   const {
-    filterList
+    filterList,
+    ordersList,
+    salesList,
+    topProductList,
+    topCategoryList,
+    orderStatusList,
+    registerUsersList,
+    customerSatisfactionList,
+    ordersAcceptSpendList,
+    arrivedPickUpSpendList,
+    orderLocationList
   } = props
 
   const [, t] = useLanguage()
@@ -58,54 +68,65 @@ const BusinessAnalyticsUI = (props) => {
       />
       <MapWrraper>
         <AnalyticsMap
-          {...props}
+          locationList={orderLocationList}
         />
       </MapWrraper>
 
       <AnalyticsContentWrapper className='row'>
         <div className='col-md-6'>
-          <AnalyticsOrdersOrSales isOrders {...props} />
+          <AnalyticsOrdersOrSales
+            isOrders
+            filterList={filterList}
+            chartDataList={ordersList}
+          />
         </div>
         <div className='col-md-6'>
-          <AnalyticsOrdersOrSales {...props} />
+          <AnalyticsOrdersOrSales
+            filterList={filterList}
+            chartDataList={salesList}
+          />
         </div>
         <div className='col-md-6'>
           <AnalyticsProductCategories
-            {...props}
+            filterList={filterList}
+            productCategoryList={topProductList}
             isProducts
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsProductCategories
-            {...props}
+            filterList={filterList}
+            productCategoryList={topCategoryList}
           />
         </div>
         <div className='col-md-12'>
           <AnalyticsOrdersStatus
-            {...props}
+            filterList={filterList}
+            orderStatusList={orderStatusList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsRegisterUsers
-            {...props}
+            registerUsersList={registerUsersList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsCustomerSatisfaction
-            {...props}
+            dataList={customerSatisfactionList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsOrdersAcceptSpend
-            {...props}
+            dataList={ordersAcceptSpendList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsArrivedPickUp
-            {...props}
+            dataList={arrivedPickUpSpendList}
           />
         </div>
       </AnalyticsContentWrapper>
+
       <Modal
         width='50%'
         height='80vh'
