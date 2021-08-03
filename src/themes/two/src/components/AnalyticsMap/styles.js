@@ -20,7 +20,7 @@ export const WrapperMap = styled.div`
 
   button {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
     font-size: 14px;
   }

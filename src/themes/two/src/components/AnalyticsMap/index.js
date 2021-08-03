@@ -20,7 +20,7 @@ const AnalyticsMapUI = (props) => {
 
   const googleMapsControls = {
     defaultZoom: 15,
-    zoomControl: true,
+    zoomControl: false,
     streetViewControl: false,
     fullscreenControl: false,
     mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'

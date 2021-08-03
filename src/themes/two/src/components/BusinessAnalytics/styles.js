@@ -2,9 +2,19 @@ import styled, { css } from 'styled-components'
 
 export const BusinessAnalyticsContainer = styled.div`
   width: 100%;
-  -webkit-transition: all 0.5s;
   transition: all 0.5s;
   padding: 20px;
+  overflow: hidden;
+  box-sizing: borer-box;
+  margin-top: 60px;
+
+  @media print {
+    display: none;
+  }
+
+  @media (min-width: 760px) {
+    margin-top: 0px;
+  }
 `
 
 export const BusinessAnalyticsHeader = styled.div`

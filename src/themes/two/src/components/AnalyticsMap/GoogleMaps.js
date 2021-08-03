@@ -193,7 +193,8 @@ export const GoogleMaps = (props) => {
         generateMarkers(map)
         marker = new window.google.maps.Marker({
           position: new window.google.maps.LatLng(center?.lat, center?.lng),
-          map
+          map,
+          opacity: isHeatMap ? 0 : 1
         })
         setGoogleMapMarker(marker)
       } else {

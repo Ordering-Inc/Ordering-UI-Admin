@@ -29,11 +29,6 @@ export const ActionBlock = styled.div`
 `
 
 export const BarCharWrapper = styled.div`
-  height: 400px;
-
-  @media (min-width: 769px) {
-    height: 550px;
-  }
 `
 
 export const ProductCategoryFooter = styled.div`

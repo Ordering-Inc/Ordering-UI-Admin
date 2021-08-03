@@ -88,7 +88,9 @@ export const AnalyticsBusinessFilter = (props) => {
   }
 
   useEffect(() => {
+    const controller = new AbortController()
     getBusinessTypes()
+    return controller.abort()
   }, [])
 
   useEffect(() => {
