@@ -98,7 +98,7 @@ const AnalyticsOrdersStatusUI = (props) => {
 
   const options = {
     responsive: true,
-    // maintainAspectRatio: false,
+    maintainAspectRatio: false,
     indexAxis: 'y',
     scales: {
       x: {

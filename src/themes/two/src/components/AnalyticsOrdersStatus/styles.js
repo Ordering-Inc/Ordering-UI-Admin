@@ -28,7 +28,9 @@ export const ActionBlock = styled.div`
   }
 `
 
-export const BarChartWrapper = styled.div``
+export const BarChartWrapper = styled.div`
+  min-height: 350px;
+`
 
 export const ProductCategoryFooter = styled.div`
   margin-top: 25px;
