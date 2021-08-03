@@ -19,7 +19,8 @@ export const ListenPageChanges = ({ children }) => {
     store: '/store/:store',
     basicSettings: '/settings/basic',
     operationSettings: '/settings/operation',
-    business_analytics: '/analytics/business'
+    business_analytics: '/analytics/business',
+    drivers_analytics: '/analytics/drivers'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
