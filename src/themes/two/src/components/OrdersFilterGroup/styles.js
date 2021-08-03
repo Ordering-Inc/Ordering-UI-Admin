@@ -26,6 +26,8 @@ export const WrapperRow = styled.div`
     width: 100%;
     height: 57px;
     margin-bottom: 20px;
+    background-color: ${props => props.theme.colors.secundary};
+    border: none;
   }
 
   .date-filter-container {
@@ -36,6 +38,7 @@ export const WrapperRow = styled.div`
     width: 100%;
     height: 57px;
     margin-bottom: 20px;
+    padding: 10px 25px;
     box-sizing: border-box;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -60,12 +63,10 @@ export const WrapperRow = styled.div`
 export const MultiSelectContainer = styled.div`
   > div {
     width: 100%;
-  }
-  > div:last-child {
-    > div {
-      > div {
-        padding: 10px 15px;
-      }
+    border: none;
+
+    > div:first-child {
+      height: 54px;
     }
   }
 `

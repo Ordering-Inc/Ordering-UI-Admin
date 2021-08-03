@@ -127,14 +127,14 @@ const OrdersFilterGroupUI = (props) => {
         <ButtonGroup>
           <Button
             color='primary'
-            borderRadius='5px'
+            borderRadius='8px'
             onClick={() => handleAcceptFilter()}
           >
             {t('ACCEPT', 'Accept')}
           </Button>
           <Button
-            color='secundary'
-            borderRadius='5px'
+            color='secundaryDark'
+            borderRadius='8px'
             onClick={() => handleClearFilter()}
           >
             {t('CLEAR', 'Clear')}

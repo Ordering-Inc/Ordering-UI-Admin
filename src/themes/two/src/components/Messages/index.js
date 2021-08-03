@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
+import MdClose from '@meronex/icons/md/MdClose'
+
 import {
   MessagesContainer,
   WrapperContainer,
@@ -694,8 +696,12 @@ export const MessagesUI = (props) => {
                       onClick={removeImage}
                       type='reset'
                     >
-                      {t('X', 'X')}
+                      <MdClose />
                     </Button>
+                    <img
+                      src={image}
+                      loading='lazy'
+                    />
                   </WrapperDeleteImage>
                 )}
               </WrapperSendInput>

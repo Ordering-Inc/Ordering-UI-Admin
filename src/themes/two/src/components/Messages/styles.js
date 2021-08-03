@@ -353,19 +353,37 @@ export const SendImage = styled.label`
     color: #CFD0D0;
     width: 25px;
     height: 25px;
-    cursor: pointer
+    cursor: pointer;
   }
 `
 
 export const WrapperDeleteImage = styled.div`
   position: absolute;
-  top: 7px;
-  right: -10px;
+  top: 5px;
+  right: 10px;
 
-  button{
+  img {
+    width: 30px;
+    height: 30px;
     &:disabled {
     cursor: not-allowed;
     }
+    border-radius: 8px;
+  }
+
+  svg {
+    color: black;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: white;
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
   }
 `
 

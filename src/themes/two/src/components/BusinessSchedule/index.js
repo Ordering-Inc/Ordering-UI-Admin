@@ -52,9 +52,9 @@ const BusinessScheduleUI = (props) => {
   const daysOfWeek = [
     t('SUNDAY_ABBREVIATION', 'Sun'),
     t('MONDAY_ABBREVIATION', 'Mon'),
-    t('TUESDAY_ABBREVIATION', 'Tues'),
+    t('TUESDAY_ABBREVIATION', 'Tue'),
     t('WEDNESDAY_ABBREVIATION', 'Wed'),
-    t('THURSDAY_ABBREVIATION', 'Thur'),
+    t('THURSDAY_ABBREVIATION', 'Thu'),
     t('FRIDAY_ABBREVIATION', 'Fri'),
     t('SATURDAY_ABBREVIATION', 'Sat')
   ]
@@ -189,7 +189,7 @@ const BusinessScheduleUI = (props) => {
                           </TimeSelect>
                         </TimeSelectContainer>
                         <DeleteButton
-                          disabled={schedule.lapses.length === 1}
+                          disabled={schedule.lapses.length === 1 || formState.loading}
                           onClick={() => handleDeleteScheduleTime(daysOfWeekIndex, index)}
                         >
                           <BsTrash />

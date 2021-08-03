@@ -70,6 +70,7 @@ const BusinessMenuShareUI = (props) => {
         <Button
           color='secundary'
           borderRadius='5px'
+          disabled={Object.keys(menu).length === 0}
         >
           <Share />
         </Button>

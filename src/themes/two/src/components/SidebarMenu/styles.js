@@ -26,6 +26,11 @@ export const SidebarContainer = styled.div`
     overflow: inherit;
     position: relative;
     width: ${({ isCollapse }) => isCollapse ? '65px' : '240px'} !important;
+    ${({ isCollapse }) => isCollapse && css`
+      .collapse.show {
+        display: none;
+      }
+    `}
   }
 `
 
