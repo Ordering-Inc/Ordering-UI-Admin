@@ -10,11 +10,19 @@ export const Container = styled.div`
 export const WrapperMap = styled.div`
   width: 100%;
   height: 250px;
+  position: relative;
   > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
     border-radius: 8px;
+  }
+
+  button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 14px;
   }
 
   @media (min-width: 768px) {

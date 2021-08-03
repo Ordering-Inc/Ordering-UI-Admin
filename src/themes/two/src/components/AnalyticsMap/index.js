@@ -1,11 +1,13 @@
-import React from 'react'
-import { GoogleMapsMap, useConfig, useSession } from 'ordering-components-admin'
+import React, { useState, useEffect } from 'react'
+import { useConfig, useSession, useLanguage } from 'ordering-components-admin'
 import { AnalyticsMap as AnalyticsMapController } from './naked'
+import { GoogleMapsMap } from './GoogleMaps'
 import {
   Container,
   WrapperMap
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
+import { Button } from '../../styles/Buttons'
 
 const AnalyticsMapUI = (props) => {
   const {
@@ -13,6 +15,8 @@ const AnalyticsMapUI = (props) => {
   } = props
   const [configState] = useConfig()
   const [{ user }] = useSession()
+  const [, t] = useLanguage()
+  const [isHeat, setIsHeat] = useState(false)
 
   const googleMapsControls = {
     defaultZoom: 15,
@@ -26,18 +30,38 @@ const AnalyticsMapUI = (props) => {
     }
   }
 
+  useEffect(() => {
+    setIsHeat(false)
+  }, [locationList])
+
   return (
     <Container>
       {locationList?.loading ? (
-        <Skeleton height={200} />
+        <Skeleton height={300} />
       ) : (
         <WrapperMap>
-          <GoogleMapsMap
-            apiKey={configState?.configs?.google_maps_api_key?.value}
-            location={user?.location}
-            locations={locationList?.locations}
-            mapControls={googleMapsControls}
-          />
+          {
+            configState?.configs?.google_maps_api_key?.value && (
+              <>
+                <GoogleMapsMap
+                  apiKey={configState?.configs?.google_maps_api_key?.value}
+                  location={user?.location}
+                  locations={locationList?.locations}
+                  mapControls={googleMapsControls}
+                  isHeatMap
+                  isHeat={isHeat}
+                />
+                <Button
+                  borderRadius='7.6px'
+                  color='primary'
+                  disabled={locationList.loading}
+                  onClick={() => setIsHeat(!isHeat)}
+                >
+                  {isHeat ? t('GROUPED', 'Grouped') : t('HEAT_MAP', 'Heatmap')}
+                </Button>
+              </>
+            )
+          }
         </WrapperMap>
       )}
     </Container>

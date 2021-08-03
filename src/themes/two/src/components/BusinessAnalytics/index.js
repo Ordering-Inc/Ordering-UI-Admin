@@ -55,7 +55,9 @@ const BusinessAnalyticsUI = (props) => {
       <AnalyticsStatusSubFilter
         {...props}
       />
-      <AnalyticsMap />
+      <AnalyticsMap
+        {...props}
+      />
       <AnalyticsContentWrapper className='row'>
         <div className='col-md-6'>
           <AnalyticsOrdersOrSales isOrders {...props} />
