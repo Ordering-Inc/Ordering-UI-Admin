@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { AnalyticsCustomerSatisfaction as AnalyticsCustomerSatisfactionController } from './naked'
+import * as htmlToImage from 'html-to-image'
 import {
   Container,
   CustomerSatisfactionHeader,
@@ -9,7 +10,8 @@ import {
   SkeletonContainerWrapper,
   ScoreDiv,
   StarContent,
-  EmptyContent
+  EmptyContent,
+  CustomerSatisfactionContent
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
@@ -35,13 +37,29 @@ const AnalyticsCustomerSatisfactionUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const downloadElementRef = useRef(null)
+
+  const downloadImage = () => {
+    if (!downloadElementRef?.current) return
+    htmlToImage.toPng(downloadElementRef?.current)
+      .then(function (dataUrl) {
+        const a = document.createElement('a')
+        a.href = dataUrl
+        a.download = `${t('CUSTOMER_SATISFACTION', 'Customer Safisfaction')}.png`
+        // Trigger the download
+        a.click()
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error)
+      })
+  }
 
   return (
     <Container>
       <CustomerSatisfactionHeader>
         <p>{t('CUSTOMER_SATISFACTION', 'Customer Safisfaction')}</p>
         <ActionBlock>
-          <BsDownload />
+          <BsDownload onClick={downloadImage} />
         </ActionBlock>
       </CustomerSatisfactionHeader>
       {
@@ -57,20 +75,21 @@ const AnalyticsCustomerSatisfactionUI = (props) => {
           </SkeletonContainerWrapper>
         ) : (
           <CustomerSatisfactionWrapper>
-            {customerSatisfactionList?.data?.general && <Score star={customerSatisfactionList?.data?.general} text={t('GENERAL', 'General')} />}
-            {customerSatisfactionList?.data?.quality && <Score star={customerSatisfactionList?.data?.quality} text={t('QUANTITY', 'Quality')} />}
-            {customerSatisfactionList?.data?.delivery && <Score star={customerSatisfactionList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />}
-            {customerSatisfactionList?.data?.service && <Score star={customerSatisfactionList?.data?.service} text={t('SERVICE', 'Service')} />}
-            {customerSatisfactionList?.data?.package && <Score star={customerSatisfactionList?.data?.package} text={t('PACKAGE', 'Package')} />}
-            {
-              !customerSatisfactionList?.data?.general &&
+            {(!customerSatisfactionList?.data?.general &&
               !customerSatisfactionList?.data?.quality &&
               !customerSatisfactionList?.data?.delivery &&
               !customerSatisfactionList?.data?.service &&
-              !customerSatisfactionList?.data?.package && (
-                <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
-              )
-            }
+              !customerSatisfactionList?.data?.package
+            ) ? (<EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+              ) : (
+                <CustomerSatisfactionContent ref={downloadElementRef}>
+                  {customerSatisfactionList?.data?.general && <Score star={customerSatisfactionList?.data?.general} text={t('GENERAL', 'General')} />}
+                  {customerSatisfactionList?.data?.quality && <Score star={customerSatisfactionList?.data?.quality} text={t('QUANTITY', 'Quality')} />}
+                  {customerSatisfactionList?.data?.delivery && <Score star={customerSatisfactionList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />}
+                  {customerSatisfactionList?.data?.service && <Score star={customerSatisfactionList?.data?.service} text={t('SERVICE', 'Service')} />}
+                  {customerSatisfactionList?.data?.package && <Score star={customerSatisfactionList?.data?.package} text={t('PACKAGE', 'Package')} />}
+                </CustomerSatisfactionContent>
+              )}
           </CustomerSatisfactionWrapper>
         )
       }

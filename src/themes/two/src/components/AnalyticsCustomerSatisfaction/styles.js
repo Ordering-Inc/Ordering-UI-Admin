@@ -69,3 +69,5 @@ export const EmptyContent = styled.div`
   justify-content: center;
   padding: 10px;
 `
+
+export const CustomerSatisfactionContent = styled.div``
