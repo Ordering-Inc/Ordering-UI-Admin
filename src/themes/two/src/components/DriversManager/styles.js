@@ -29,7 +29,7 @@ export const DriversHeader = styled.div`
 `
 
 export const DriversContainer = styled.div`
-  width: 100%;
+  flex: 1;
   transition: all 0.5s;
   padding: 20px;
   box-sizing: border-box;

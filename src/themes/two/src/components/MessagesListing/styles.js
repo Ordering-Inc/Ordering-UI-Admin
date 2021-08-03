@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const MessagesListingContainer = styled.div`
-  width: 100%;
+  flex: 1;
   transition: all 0.5s;
   padding: 0 20px 20px 20px;
   box-sizing: border-box;

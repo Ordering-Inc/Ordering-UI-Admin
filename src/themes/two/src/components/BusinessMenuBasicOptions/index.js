@@ -255,7 +255,7 @@ export const BusinessMenuBasicOptions = (props) => {
                             </TimeSelect>
                           </TimeSelectContainer>
                           <DeleteButton
-                            disabled={schedule.lapses.length === 1}
+                            disabled={schedule.lapses.length === 1 || formState.loading}
                             onClick={() => handleDeleteScheduleTime(daysOfWeekIndex, index)}
                           >
                             <BsTrash />

@@ -74,7 +74,7 @@ export const Options = styled.div`
         margin-right: -1px;
         margin-left: 0px;
         right: 0;
-        left: initial
+        left: initial;
     `}
   `}
   ${({ position }) => position?.toLowerCase() === 'right' && css`
@@ -164,7 +164,7 @@ export const Chevron = styled.div`
 
 export const Header = styled.div`
   flex: 1;
-  overflow: hidden;
+  overflow: auto;
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -178,12 +178,28 @@ export const SelectImage = styled.div`
   overflow: hidden;
 
   ${props => props.theme?.rtl && css`
-        margin-left: 5px;
-        margin-right: 0;
+    margin-left: 5px;
+    margin-right: 0;
   `}
 
   img {
     width: 100%;
     height: 100%;
+  }
+`
+
+export const MultiSelectOption = styled.div`
+  position: relative;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: white;
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
+    top: 11px;
+    right: 15px;
   }
 `

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessListingContainer = styled.div`
-  width: 100%;
+  flex: 1;
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
