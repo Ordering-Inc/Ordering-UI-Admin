@@ -10,7 +10,7 @@ export const DriverAnalytics = (props) => {
   const [{ token, loading }] = useSession()
   const [ordering] = useApi()
 
-  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, app_id: 'all', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
+  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
   const [ordersList, setOrdersList] = useState({ loading: false, data: [], error: null })
   const [salesList, setSalesList] = useState({ loading: false, data: [], error: null })
   const [topProductList, setTopProductList] = useState({ loading: false, data: [], error: null })
@@ -18,6 +18,7 @@ export const DriverAnalytics = (props) => {
   const [orderStatusList, setOrderStatusList] = useState({ loading: false, data: [], error: null })
   const [topOrdersList, setTopOrdersList] = useState({ loading: false, data: [], error: null })
   const [spendTimesList, setSpendTimesList] = useState({ loading: false, data: [], error: null })
+  const [availableTimesList, setAvailableTimesList] = useState({ loading: false, data: [], error: null })
   const [customerSatisfactionList, setCustomerSatisfactionList] = useState({ loading: false, data: [], error: null })
   const [ordersAcceptSpendList, setOrdersAcceptSpendList] = useState({ loading: false, data: [], error: null })
   const [arrivedPickUpSpendList, setArrivedPickUpSpendList] = useState({ loading: false, data: [], error: null })
@@ -378,6 +379,49 @@ export const DriverAnalytics = (props) => {
   /**
    * Method to get orders accept spend list
    */
+  const getAvailableTimes = async () => {
+    if (loading) return
+    try {
+      setAvailableTimesList({ ...availableTimesList, loading: true })
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const rootUrl = `${ordering.root}/reports/orders_accept_spend`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
+      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+      const functionFetch = `${rootUrl}?${params}`
+
+      const response = await fetch(functionFetch, requestOptions)
+      const { error, result } = await response.json()
+      if (!error) {
+        setAvailableTimesList({
+          ...availableTimesList,
+          loading: false,
+          data: result
+        })
+      } else {
+        setAvailableTimesList({
+          ...availableTimesList,
+          loading: true,
+          error: result
+        })
+      }
+    } catch (err) {
+      setAvailableTimesList({
+        ...availableTimesList,
+        loading: false,
+        error: err
+      })
+    }
+  }
+  /**
+   * Method to get orders accept spend list
+   */
   const getOrdersAcceptSpend = async () => {
     if (loading) return
     try {
@@ -515,6 +559,7 @@ export const DriverAnalytics = (props) => {
     getOrderStatus()
     getTopOrders()
     getSpendTimes()
+    getAvailableTimes()
     getCustomerSatisfaction()
     getOrdersAcceptSpend()
     getArrivedPickeUpSpend()
@@ -538,6 +583,7 @@ export const DriverAnalytics = (props) => {
           arrivedPickUpSpendList={arrivedPickUpSpendList}
           orderLocationList={orderLocationList}
           spendTimesList={spendTimesList}
+          availableTimesList={availableTimesList}
           handleChangeFilterList={setFilterList}
         />
       )}

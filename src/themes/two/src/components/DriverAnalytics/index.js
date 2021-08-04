@@ -6,7 +6,6 @@ import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
-import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
 import { AnalyticsMap } from '../AnalyticsMap'
 import { AnalyticsOrdersOrSales } from '../AnalyticsOrdersOrSales'
 import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
@@ -16,6 +15,8 @@ import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import { AnalyticsTopOrders } from '../AnalyticsTopOrders'
+import { AnalyticsSpendTimes } from '../AnalyticsSpendTimes'
+import { AnalyticsAvailableTimes } from '../AnalyticsAvailableTimes'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
@@ -69,9 +70,6 @@ const DriverAnalyticsUI = (props) => {
       <AnalyticsStatusFilterBar
         {...props}
       />
-      <AnalyticsStatusSubFilter
-        {...props}
-      />
       <MapWrraper>
         <AnalyticsMap
           locationList={orderLocationList}
@@ -118,6 +116,17 @@ const DriverAnalyticsUI = (props) => {
         </div>
         <div className='col-md-12'>
           <AnalyticsOrdersStatus
+            filterList={filterList}
+            orderStatusList={orderStatusList}
+          />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsSpendTimes
+            chartDataList={ordersList}
+          />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsAvailableTimes
             filterList={filterList}
             orderStatusList={orderStatusList}
           />

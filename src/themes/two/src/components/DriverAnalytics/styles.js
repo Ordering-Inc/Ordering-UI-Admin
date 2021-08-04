@@ -94,5 +94,5 @@ export const AnalyticsContentWrapper = styled.div`
 `
 
 export const MapWrraper = styled.div`
-  margin-top: 20px;
+  margin-top: 30px;
 `
