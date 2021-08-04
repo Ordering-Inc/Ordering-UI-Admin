@@ -11,11 +11,11 @@ import { AnalyticsMap } from '../AnalyticsMap'
 import { AnalyticsOrdersOrSales } from '../AnalyticsOrdersOrSales'
 import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
 import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
-import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 import { AnalyticsTimeZone } from '../AnalyticsTimeZone'
+import { AnalyticsTopOrders } from '../AnalyticsTopOrders'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
@@ -35,11 +35,12 @@ const DriverAnalyticsUI = (props) => {
     topProductList,
     topCategoryList,
     orderStatusList,
-    registerUsersList,
+    topOrdersList,
     customerSatisfactionList,
     ordersAcceptSpendList,
     arrivedPickUpSpendList,
-    orderLocationList
+    orderLocationList,
+    spendTimesList
   } = props
 
   const [, t] = useLanguage()
@@ -104,20 +105,21 @@ const DriverAnalyticsUI = (props) => {
             productCategoryList={topCategoryList}
           />
         </div>
-        <div className='col-md-12'>
-          <AnalyticsOrdersStatus
-            filterList={filterList}
-            orderStatusList={orderStatusList}
-          />
-        </div>
         <div className='col-md-6'>
-          <AnalyticsRegisterUsers
-            registerUsersList={registerUsersList}
+          <AnalyticsTopOrders
+            dataList={topOrdersList}
           />
+
         </div>
         <div className='col-md-6'>
           <AnalyticsCustomerSatisfaction
             dataList={customerSatisfactionList}
+          />
+        </div>
+        <div className='col-md-12'>
+          <AnalyticsOrdersStatus
+            filterList={filterList}
+            orderStatusList={orderStatusList}
           />
         </div>
         <div className='col-md-6'>

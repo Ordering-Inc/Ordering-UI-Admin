@@ -26,8 +26,8 @@ const AnalyticsTimeZoneUI = (props) => {
   const timeZoneRef = useRef(null)
 
   const filterTimeZone = (evt) => {
-    const filterList = timezones
-    const _timeZoneList = filterList?.filter(item => item.tzCode?.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase()))
+    const timeZoneToFilter = timezones
+    const _timeZoneList = timeZoneToFilter?.filter(item => item.tzCode?.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase()))
     setTimeZoneList(_timeZoneList)
     setSearchVal(evt.target.value)
   }
