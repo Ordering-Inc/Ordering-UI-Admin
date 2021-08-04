@@ -164,7 +164,7 @@ const SingleBusinessProductUI = (props) => {
         const updatedProducts = []
         let counter
         for (let i = 0; i < item.products.length; i++) {
-          if (item.products[i].id === product.id) {
+          if (item.products[i].id === product?.id) {
             counter = i
           }
           if (item.products[i].id !== transferProductId) {

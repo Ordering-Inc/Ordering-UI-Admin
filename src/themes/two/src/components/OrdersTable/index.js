@@ -15,6 +15,7 @@ import { DriverSelector } from '../DriverSelector'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { PaginationButton } from '../PaginationButton'
+import { Pagination } from '../Pagination'
 import {
   OrdersContainer,
   Table,
@@ -511,6 +512,12 @@ export const OrdersTable = (props) => {
           )}
         </Table>
       </OrdersContainer>
+      {pagination && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
+      )}
 
       {pagination && (
         <WrapperPagination>

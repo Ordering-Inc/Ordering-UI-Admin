@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { PaginationButton } from '../PaginationButton'
+import { Pagination } from '../Pagination'
 
 import {
   BusinessListContainer,
@@ -169,6 +170,12 @@ export const BusinessList = (props) => {
               )}
             </BusinessListTable>
           </BusinessListContainer>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+
           {pagination && (
             <WrapperPagination>
               {!businessList.loading && totalPages > 0 && (

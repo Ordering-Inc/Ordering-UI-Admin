@@ -165,7 +165,7 @@ export const SingleBusinessCategoryUI = (props) => {
     const transferCategory = _categories.find(_category => _category.id === transferCategoryId)
 
     for (let i = 0; i < _categories.length; i++) {
-      if (_categories[i].id === category.id) {
+      if (_categories[i].id === category?.id) {
         counter = i
       }
       if (_categories[i].id !== transferCategoryId) {
