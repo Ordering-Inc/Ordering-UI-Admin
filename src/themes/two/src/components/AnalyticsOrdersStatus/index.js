@@ -90,7 +90,9 @@ export const AnalyticsOrdersStatus = (props) => {
         backgroundColor: '#2C7BE5',
         borderWidth: 2,
         borderRadius: 50,
-        borderSkipped: true
+        borderSkipped: true,
+        barThickness: 13,
+        maxBarThickness: 25
       }
     ]
   }
@@ -122,7 +124,8 @@ export const AnalyticsOrdersStatus = (props) => {
             size: 12,
             color: '#B1BCCC'
           }
-        }
+        },
+        height: 10
       }
     },
     plugins: {

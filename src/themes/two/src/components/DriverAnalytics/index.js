@@ -17,6 +17,7 @@ import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import { AnalyticsTopOrders } from '../AnalyticsTopOrders'
 import { AnalyticsSpendTimes } from '../AnalyticsSpendTimes'
 import { AnalyticsAvailableTimes } from '../AnalyticsAvailableTimes'
+import { AnalyticsBusyTimes } from '../AnalyticsBusyTimes'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
@@ -41,7 +42,9 @@ const DriverAnalyticsUI = (props) => {
     ordersAcceptSpendList,
     arrivedPickUpSpendList,
     orderLocationList,
-    spendTimesList
+    availableTimesList,
+    spendTimesList,
+    busyTimesList
   } = props
 
   const [, t] = useLanguage()
@@ -129,6 +132,12 @@ const DriverAnalyticsUI = (props) => {
           <AnalyticsAvailableTimes
             filterList={filterList}
             orderStatusList={orderStatusList}
+          />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsBusyTimes
+            filterList={filterList}
+            busyTimesList={busyTimesList}
           />
         </div>
         <div className='col-md-6'>
