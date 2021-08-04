@@ -2,7 +2,18 @@ import styled, { css } from 'styled-components'
 
 export const PaginationContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+`
+
+export const PaginationButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 20px;
+  ` : css`
+    margin-right: 20px;
+  `}
 `
 
 export const PageButton = styled.button`
@@ -19,7 +30,6 @@ export const PageButton = styled.button`
   justify-content: center;
   padding: 0px;
 
-
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
@@ -29,4 +39,35 @@ export const PageButton = styled.button`
     cursor: not-allowed;
     opacity: 0.5;
   }
+`
+
+export const PageSizeContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  .select {
+    border-color: ${props => props.theme.colors.lightGray};
+    padding: 5px 0;
+
+    > div:first-child {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+`
+
+export const PageSizeTitle = styled.p`
+  margin: 0px;
+  color: ${props => props.theme.colors.lightGray};
+  font-size: 14px;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
+`
+
+export const Option = styled.div`
+  font-size: 14px;
+  color: ${props => props.theme.colors.lightGray};
 `

@@ -1,17 +1,42 @@
 import React, { useState, useEffect } from 'react'
+import { useLanguage } from 'ordering-components-admin'
+import { Select } from '../../styles/Select'
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons'
 
 import {
   PaginationContainer,
-  PageButton
+  PaginationButtonContainer,
+  PageButton,
+  PageSizeContainer,
+  PageSizeTitle,
+  Option
 } from './styles'
 
 export const Pagination = (props) => {
   const {
     currentPage,
     totalPages,
-    handleChangePage
+    handleChangePage,
+    defaultPageSize,
+    handleChangePageSize
   } = props
+
+  const [, t] = useLanguage()
+  const pageSizeOptions = [
+    {
+      value: 10,
+      content: <Option>10</Option>
+    },
+    {
+      value: 25,
+      content: <Option>25</Option>
+    },
+    {
+      value: 50,
+      content: <Option>50</Option>
+    }
+  ]
+
   const [visiblePages, setVisiblePages] = useState([])
   const [activePage, setActivePage] = useState(currentPage)
 
@@ -50,44 +75,58 @@ export const Pagination = (props) => {
 
   return (
     <PaginationContainer>
-      <PageButton
-        disabled={activePage === 1}
-        onClick={() => (activePage !== 1) && changePage(activePage - 1)}
-      >
-        <ChevronLeft />
-      </PageButton>
+      <PaginationButtonContainer>
+        <PageButton
+          disabled={activePage === 1}
+          onClick={() => (activePage !== 1) && changePage(activePage - 1)}
+        >
+          <ChevronLeft />
+        </PageButton>
 
-      {visiblePages.map((page, index, array) => (
-        <React.Fragment key={page}>
-          {array[index - 1] + 2 <= page ? (
-            <>
-              <PageButton>
-                ...
-              </PageButton>
+        {visiblePages.map((page, index, array) => (
+          <React.Fragment key={page}>
+            {array[index - 1] + 2 <= page ? (
+              <>
+                <PageButton>
+                  ...
+                </PageButton>
+                <PageButton
+                  active={activePage === page}
+                  onClick={() => changePage(page)}
+                >
+                  {page}
+                </PageButton>
+              </>
+            ) : (
               <PageButton
                 active={activePage === page}
                 onClick={() => changePage(page)}
               >
                 {page}
               </PageButton>
-            </>
-          ) : (
-            <PageButton
-              active={activePage === page}
-              onClick={() => changePage(page)}
-            >
-              {page}
-            </PageButton>
-          )}
-        </React.Fragment>
-      ))}
+            )}
+          </React.Fragment>
+        ))}
 
-      <PageButton
-        disabled={activePage === totalPages}
-        onClick={() => (activePage !== totalPages) && changePage(activePage + 1)}
-      >
-        <ChevronRight />
-      </PageButton>
+        <PageButton
+          disabled={activePage === totalPages}
+          onClick={() => (activePage !== totalPages) && changePage(activePage + 1)}
+        >
+          <ChevronRight />
+        </PageButton>
+      </PaginationButtonContainer>
+      <PageSizeContainer>
+        <PageSizeTitle>
+          {t('ITEMS_PER_PAGE', 'Items per page')}
+        </PageSizeTitle>
+        <Select
+          isSecondIcon
+          minWidth='70px'
+          defaultValue={defaultPageSize || 10}
+          options={pageSizeOptions}
+          onChange={size => handleChangePageSize(size)}
+        />
+      </PageSizeContainer>
     </PaginationContainer>
   )
 }
