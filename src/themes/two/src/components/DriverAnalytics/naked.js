@@ -10,7 +10,7 @@ export const DriverAnalytics = (props) => {
   const [{ token, loading }] = useSession()
   const [ordering] = useApi()
 
-  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, app_id: 'all', timezone: Intl.DateTimeFormat().resolvedOptions().timeZone })
+  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, app_id: 'all', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
   const [ordersList, setOrdersList] = useState({ loading: false, data: [], error: null })
   const [salesList, setSalesList] = useState({ loading: false, data: [], error: null })
   const [topProductList, setTopProductList] = useState({ loading: false, data: [], error: null })
@@ -37,7 +37,7 @@ export const DriverAnalytics = (props) => {
         }
       }
       const rootUrl = `${ordering.root}/reports/orders`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timezone}`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
       if (filterList?.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
       if (filterList?.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
       const functionFetch = `${rootUrl}?${params}`

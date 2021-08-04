@@ -13,17 +13,17 @@ import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
 import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
+import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
+import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
-  BusinessFilterCalendar,
+  HeaderFilterContainer,
   BusinessFilterWrapper,
   BusinessCalendarWrapper,
   AnalyticsContentWrapper,
   MapWrraper
 } from './styles'
-import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
-import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 
 const BusinessAnalyticsUI = (props) => {
   const {
@@ -47,7 +47,7 @@ const BusinessAnalyticsUI = (props) => {
     <BusinessAnalyticsContainer>
       <BusinessAnalyticsHeader>
         <h1>{t('BUSINESS_ANALYTICS', 'Business Analytics')}</h1>
-        <BusinessFilterCalendar>
+        <HeaderFilterContainer>
           <BusinessFilterWrapper>
             <Button onClick={() => setBusinessFilterModal(true)}>
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
@@ -58,7 +58,7 @@ const BusinessAnalyticsUI = (props) => {
               {...props}
             />
           </BusinessCalendarWrapper>
-        </BusinessFilterCalendar>
+        </HeaderFilterContainer>
       </BusinessAnalyticsHeader>
       <AnalyticsStatusFilterBar
         {...props}

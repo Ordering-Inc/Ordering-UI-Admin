@@ -21,6 +21,7 @@ export const BusinessAnalyticsHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 15px;
 
   @media (min-width: 769px) {
     flex-direction: row;
@@ -34,7 +35,7 @@ export const BusinessAnalyticsHeader = styled.div`
   }
 `
 
-export const BusinessFilterCalendar = styled.div`
+export const HeaderFilterContainer = styled.div`
   display: flex;
   align-items: center;
 `

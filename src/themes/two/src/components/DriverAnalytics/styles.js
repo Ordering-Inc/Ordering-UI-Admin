@@ -20,11 +20,12 @@ export const BusinessAnalyticsContainer = styled.div`
 export const BusinessAnalyticsHeader = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin-bottom: 15px;
 
-  @media (min-width: 769px) {
+  @media (min-width: 993px) {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 
   h1 {
@@ -34,12 +35,31 @@ export const BusinessAnalyticsHeader = styled.div`
   }
 `
 
-export const BusinessFilterCalendar = styled.div`
+export const HeaderFilterContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
+
+  > div {
+    margin-top: 10px;
+  }
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+
+    > div {
+      margin-top: 0;
+    }
+  }
 `
 
 export const BusinessFilterWrapper = styled.div`
+  margin-left: 25px;
+  ${props => props.theme.rtl && css`
+    margin-right: 25px;
+    margin-left: 0;
+  `}
+
   button {
     background: #F8F9FA;
     border-radius: 7.6px;
@@ -52,11 +72,6 @@ export const BusinessFilterWrapper = styled.div`
 
 export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
   position: relative;
-  margin-left: 25px;
-  ${props => props.theme.rtl && css`
-    margin-right: 25px;
-    margin-left: 0;
-  `}
 
   button {
     svg {
@@ -69,6 +84,8 @@ export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
     }
   }
 `
+
+export const AnalyticsTimeZoneWrapper = styled(BusinessFilterWrapper)``
 
 export const AnalyticsContentWrapper = styled.div`
   > div {
