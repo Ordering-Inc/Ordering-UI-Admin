@@ -14,7 +14,7 @@ import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
-import { AnalyticsTimeZone } from '../AnalyticsTimeZone'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import { AnalyticsTopOrders } from '../AnalyticsTopOrders'
 import {
   BusinessAnalyticsContainer,
@@ -57,7 +57,7 @@ const DriverAnalyticsUI = (props) => {
             </Button>
           </BusinessFilterWrapper>
           <AnalyticsTimeZoneWrapper>
-            <AnalyticsTimeZone {...props} />
+            <AnalyticsFilterTimeZone {...props} />
           </AnalyticsTimeZoneWrapper>
           <BusinessCalendarWrapper>
             <AnalyticsCalendar

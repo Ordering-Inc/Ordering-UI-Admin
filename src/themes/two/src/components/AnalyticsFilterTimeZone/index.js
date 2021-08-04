@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { AnalyticsTimeZone as AnalyticsTimeZoneController } from './naked'
 import { Button } from '../../styles/Buttons'
 import timezones from 'timezones-list'
 import GoSearch from '@meronex/icons/go/GoSearch'
@@ -14,7 +13,7 @@ import {
   TimezoneListItem
 } from './styles'
 
-const AnalyticsTimeZoneUI = (props) => {
+export const AnalyticsFilterTimeZone = (props) => {
   const {
     filterList,
     handleChangeFilterList
@@ -90,12 +89,4 @@ const AnalyticsTimeZoneUI = (props) => {
 
     </AnalyticsTimeZoneContainer>
   )
-}
-
-export const AnalyticsTimeZone = (props) => {
-  const analyticsTimeZoneProps = {
-    ...props,
-    UIComponent: AnalyticsTimeZoneUI
-  }
-  return <AnalyticsTimeZoneController {...analyticsTimeZoneProps} />
 }
