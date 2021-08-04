@@ -206,12 +206,6 @@ export const UploadWrapper = styled.div`
 export const DragableContainer = styled.div`
   display: flex;
   align-items: center;
-  &:hover {
-    cursor: grab;
-  }
-  &:active {
-    cursor: grabbing;
-  }
 `
 
 export const DragImageWrapper = styled.div`
@@ -221,5 +215,8 @@ export const DragImageWrapper = styled.div`
     ` : css`
       margin-right: 14px;
     `}
+    &:hover {
+      cursor: grab;
+    }
   }
 `

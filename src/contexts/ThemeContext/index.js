@@ -78,7 +78,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       border-radius: 8px;
       background-color: #FFF;
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-      border: 1px solid ${props => props.theme.colors.borderColor};
+      border: 1px solid ${props => props.theme.colors?.borderColor};
       font-size: 14px;
       padding: 10px 19px;
       width: fit-content;

@@ -8,6 +8,7 @@ import {
   ExamineClick,
   SingleBusinessProduct as SingleBusinessProductController
 } from 'ordering-components-admin'
+
 import { bytesConverter } from '../../../../../utils'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
@@ -232,22 +233,20 @@ const SingleBusinessProductUI = (props) => {
               ref={containerRef}
               active={product.id === productDetailsId}
               onClick={(e) => handleProductClick(e)}
-              draggable
-              onDragStart={e => handleDrag(e, product.id)}
               onDragOver={e => handleAllowDrop(e)}
               onDrop={e => handleDrop(e)}
               onDragEnd={e => handleDragEnd(e)}
             >
               <tr>
                 {allowColumns?.business && (
-                  <td
-                    className='business'
-                  >
+                  <td className='business'>
                     <DragableContainer className='product_info'>
                       <DragImageWrapper>
                         <img
                           src={theme.images.icons?.sixDots}
                           alt='six dots'
+                          draggable
+                          onDragStart={e => handleDrag(e, product.id)}
                         />
                       </DragImageWrapper>
                       <BusinessGeneralInfo>
