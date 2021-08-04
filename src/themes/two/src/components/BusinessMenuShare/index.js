@@ -19,6 +19,7 @@ const BusinessMenuShareUI = (props) => {
   const {
     open,
     menu,
+    businessId,
     businessesState,
     actionState,
     handleShareBusinessMenuClick
@@ -111,20 +112,23 @@ const BusinessMenuShareUI = (props) => {
                   </span>
                 </AllowItem>
                 {businessesState.businesses.map(business => (
-                  <AllowItem
-                    key={business.id}
-                    isChecked={isCheckedBusiness(business.id)}
-                    onClick={() => handleShareBusinessMenuClick(business.id)}
-                  >
-                    {isCheckedBusiness(business.id) ? (
-                      <RiCheckboxFill />
-                    ) : (
-                      <RiCheckboxBlankLine />
+                  <React.Fragment key={business.id}>
+                    {business.id !== businessId && (
+                      <AllowItem
+                        isChecked={isCheckedBusiness(business.id)}
+                        onClick={() => handleShareBusinessMenuClick(business.id)}
+                      >
+                        {isCheckedBusiness(business.id) ? (
+                          <RiCheckboxFill />
+                        ) : (
+                          <RiCheckboxBlankLine />
+                        )}
+                        <span>
+                          {business?.name}
+                        </span>
+                      </AllowItem>
                     )}
-                    <span>
-                      {business?.name}
-                    </span>
-                  </AllowItem>
+                  </React.Fragment>
                 ))}
               </>
             )}

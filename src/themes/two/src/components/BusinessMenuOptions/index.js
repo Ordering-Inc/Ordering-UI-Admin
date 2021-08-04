@@ -62,6 +62,7 @@ const BusinessMenuOptionsUI = (props) => {
           <BusinessMenuShare
             open={openShareMenu}
             menu={menu}
+            businessId={business?.id}
             business={business}
             onClick={() => setOpenShareMenu(true)}
             onClose={() => setOpenShareMenu(false)}

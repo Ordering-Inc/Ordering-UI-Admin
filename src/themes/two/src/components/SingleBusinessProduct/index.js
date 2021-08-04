@@ -24,7 +24,9 @@ import {
   BusinessEnableWrapper,
   ActionSelectorWrapper,
   ProductTypeImage,
-  UploadWrapper
+  UploadWrapper,
+  DragableContainer,
+  DragImageWrapper
 } from './styles'
 
 const SingleBusinessProductUI = (props) => {
@@ -41,14 +43,16 @@ const SingleBusinessProductUI = (props) => {
     handleChangeInput,
     handlechangeImage,
     isEditMode,
-    productDetailsId
+    productDetailsId,
+    businessState,
+    handleUpdateBusinessState
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const conatinerRef = useRef(null)
+  const containerRef = useRef(null)
   const ProductTypeImgRef = useRef(null)
   const ActionIcon = <FiMoreVertical />
 
@@ -86,7 +90,7 @@ const SingleBusinessProductUI = (props) => {
   }
 
   const closeProductEdit = (e) => {
-    const outsideDropdown = !conatinerRef.current?.contains(e.target)
+    const outsideDropdown = !containerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
         if (isEditMode && Object.keys(productFormState?.changes).length > 0 && !productFormState?.loading) {
@@ -136,6 +140,54 @@ const SingleBusinessProductUI = (props) => {
     }
   }, [productFormState?.loading])
 
+  const handleDrag = (event, productId) => {
+    event.dataTransfer.setData('transferProductId', productId)
+
+    const ghostEle = document.createElement('div')
+    ghostEle.classList.add('ghostDragging')
+    ghostEle.innerHTML = productFormState?.changes?.name
+    document.body.appendChild(ghostEle)
+    event.dataTransfer.setDragImage(ghostEle, 0, 0)
+  }
+
+  const handleAllowDrop = (event) => {
+    event.preventDefault()
+  }
+
+  const handleDrop = (event) => {
+    event.preventDefault()
+    const transferProductId = parseInt(event.dataTransfer.getData('transferProductId'))
+    const _categories = businessState?.business?.categories.map(item => {
+      if (item.id === product?.category_id) {
+        const transferProduct = item.products.find(_product => _product.id === transferProductId)
+        const updatedProducts = []
+        let counter
+        for (let i = 0; i < item.products.length; i++) {
+          if (item.products[i].id === product.id) {
+            counter = i
+          }
+          if (item.products[i].id !== transferProductId) {
+            updatedProducts.push(item.products[i])
+          }
+        }
+        updatedProducts.splice(counter, 0, transferProduct)
+        return {
+          ...item,
+          products: updatedProducts
+        }
+      }
+      return item
+    })
+    handleUpdateBusinessState({ ...businessState?.business, categories: _categories })
+  }
+
+  const handleDragEnd = () => {
+    const elements = document.getElementsByClassName('ghostDragging')
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0])
+    }
+  }
+
   return (
     <>
       {viewMethod === 'list' && (
@@ -177,55 +229,71 @@ const SingleBusinessProductUI = (props) => {
             </SingleListBusinessContainer>
           ) : (
             <SingleListBusinessContainer
-              ref={conatinerRef}
+              ref={containerRef}
               active={product.id === productDetailsId}
               onClick={(e) => handleProductClick(e)}
+              draggable
+              onDragStart={e => handleDrag(e, product.id)}
+              onDragOver={e => handleAllowDrop(e)}
+              onDrop={e => handleDrop(e)}
+              onDragEnd={e => handleDragEnd(e)}
             >
               <tr>
                 {allowColumns?.business && (
-                  <td className='business'>
-                    <BusinessGeneralInfo className='product_info'>
-                      <ProductTypeImage
-                        onClick={() => handleClickImage()}
-                        disabled={productFormState?.loading}
-                      >
-                        <ExamineClick
-                          onFiles={files => handleFiles(files)}
-                          childRef={(e) => { ProductTypeImgRef.current = e }}
-                          accept='image/png, image/jpeg, image/jpg'
+                  <td
+                    className='business'
+                  >
+                    <DragableContainer className='product_info'>
+                      <DragImageWrapper>
+                        <img
+                          src={theme.images.icons?.sixDots}
+                          alt='six dots'
+                        />
+                      </DragImageWrapper>
+                      <BusinessGeneralInfo>
+                        <ProductTypeImage
+                          onClick={() => handleClickImage()}
                           disabled={productFormState?.loading}
                         >
-                          <DragAndDrop
-                            onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                          <ExamineClick
+                            onFiles={files => handleFiles(files)}
+                            childRef={(e) => { ProductTypeImgRef.current = e }}
                             accept='image/png, image/jpeg, image/jpg'
                             disabled={productFormState?.loading}
                           >
-                            {
-                              productFormState?.changes?.images
-                                ? (
-                                  <img src={productFormState?.changes?.images} alt='business type image' loading='lazy' />
-                                )
-                                : (
-                                  <UploadWrapper>
-                                    <BiImage />
-                                  </UploadWrapper>
-                                )
-                            }
-                          </DragAndDrop>
-                        </ExamineClick>
-                      </ProductTypeImage>
-                      {
-                        product?.name && (
-                          <input
-                            type='text'
-                            name='name'
-                            value={productFormState?.changes?.name || ''}
-                            onChange={handleChangeInput}
-                            autoComplete='off'
-                          />
-                        )
-                      }
-                    </BusinessGeneralInfo>
+                            <DragAndDrop
+                              onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                              accept='image/png, image/jpeg, image/jpg'
+                              disabled={productFormState?.loading}
+                            >
+                              {
+                                productFormState?.changes?.images
+                                  ? (
+                                    <img src={productFormState?.changes?.images} alt='business type image' loading='lazy' />
+                                  )
+                                  : (
+                                    <UploadWrapper>
+                                      <BiImage />
+                                    </UploadWrapper>
+                                  )
+                              }
+                            </DragAndDrop>
+                          </ExamineClick>
+                        </ProductTypeImage>
+                        {
+                          product?.name && (
+                            <input
+                              type='text'
+                              name='name'
+                              value={productFormState?.changes?.name || ''}
+                              onChange={handleChangeInput}
+                              autoComplete='off'
+                            />
+                          )
+                        }
+                      </BusinessGeneralInfo>
+
+                    </DragableContainer>
                   </td>
                 )}
                 {allowColumns?.price && (
