@@ -131,7 +131,7 @@ const DriverAnalyticsUI = (props) => {
         <div className='col-md-6'>
           <AnalyticsAvailableTimes
             filterList={filterList}
-            orderStatusList={orderStatusList}
+            availableTimesList={busyTimesList}
           />
         </div>
         <div className='col-md-6'>

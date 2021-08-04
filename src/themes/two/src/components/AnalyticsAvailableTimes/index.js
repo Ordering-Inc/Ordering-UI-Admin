@@ -11,70 +11,60 @@ import BsDownload from '@meronex/icons/bs/BsDownload'
 import BsArrowsAngleExpand from '@meronex/icons/bs/BsArrowsAngleExpand'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
+import moment from 'moment'
 
 export const AnalyticsAvailableTimes = (props) => {
   const {
-    orderStatusList
+    filterList,
+    availableTimesList
   } = props
 
   const [, t] = useLanguage()
   const chartRef = useRef(null)
 
-  const orderStatus = [
-    { key: 0, value: t('PENDING', 'Pending') },
-    { key: 1, value: t('COMPLETED', 'Completed') },
-    { key: 2, value: t('REJECTED', 'Rejected') },
-    { key: 3, value: t('DRIVER_IN_BUSINESS', 'Driver in business') },
-    { key: 4, value: t('PREPARATION_COMPLETED', 'Preparation Completed') },
-    { key: 5, value: t('REJECTED_BY_BUSINESS', 'Rejected by business') },
-    { key: 6, value: t('REJECTED_BY_DRIVER', 'Rejected by Driver') },
-    { key: 7, value: t('ACCEPTED_BY_BUSINESS', 'Accepted by business') },
-    { key: 8, value: t('ACCEPTED_BY_DRIVER', 'Accepted by driver') },
-    { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver') },
-    { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', 'Pick up Failed by driver') },
-    { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver') },
-    { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver') },
-    { key: 13, value: t('PREORDER', 'PreOrder') },
-    { key: 14, value: t('ORDER_NOT_READY', 'Order not ready') },
-    { key: 15, value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Order picked up completed by customer') },
-    { key: 16, value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Order cancelled by customer') },
-    { key: 17, value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Order not picked up by customer') },
-    { key: 18, value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business') },
-    { key: 19, value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer') },
-    { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business') },
-    { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business') }
-  ]
-
   const generateLabels = () => {
-    const labels = [t('ALL', 'All')]
-    for (const label of orderStatusList?.data) {
-      labels.push(orderStatus[label.status].value)
+    const labels = []
+    if (availableTimesList?.data?.busy) {
+      for (const label of availableTimesList?.data?.busy) {
+        const timeConvert = (filterList?.lapse === 'today' || filterList?.lapse === 'yesterday')
+          ? moment(label.at).format('LT')
+          : moment(label.at).format('MMM DD')
+        labels.push(timeConvert)
+      }
     }
+
     return labels
   }
 
-  const generateData = () => {
-    const todalValue = TotalOrders()
-    const datasets = [todalValue]
-    for (const data of orderStatusList?.data) {
-      datasets.push(data.orders)
+  const generateAvailableData = () => {
+    const datasets = []
+    if (availableTimesList?.data?.busy) {
+      for (const data of availableTimesList?.data?.busy) {
+        const _time = (data.time / 3600).toFixed(2)
+        datasets.push(_time)
+      }
     }
+
     return datasets
   }
 
-  const TotalOrders = () => {
-    let value = 0
-    for (const data of orderStatusList?.data) {
-      value = value + data.orders
+  const generateNotAvailableData = () => {
+    const datasets = []
+    if (availableTimesList?.data?.not_busy) {
+      for (const data of availableTimesList?.data?.not_busy) {
+        const _time = (data.time / 3600).toFixed(2)
+        datasets.push(_time)
+      }
     }
-    return value
+
+    return datasets
   }
 
   const downloadImage = () => {
     if (!chartRef?.current) return
     const a = document.createElement('a')
     a.href = chartRef?.current?.toBase64Image()
-    a.download = `${t('ORDERS_STATUS', 'ORDERS STATUS')}.png`
+    a.download = `${t('AVAILABLE_TIMES', 'Available Times')}.png`
     // Trigger the download
     a.click()
   }
@@ -83,13 +73,22 @@ export const AnalyticsAvailableTimes = (props) => {
     labels: generateLabels(),
     datasets: [
       {
-        label: t('ORDERS', 'Orders'),
-        data: generateData(),
+        label: t('AVAILABLE', 'Available'),
+        data: generateAvailableData(),
         fill: true,
         borderColor: '#2C7BE5',
         backgroundColor: '#2C7BE5',
         borderWidth: 2,
-        borderRadius: 50,
+        borderRadius: { topRight: 7.6, topLeft: 7.6 }
+      },
+      {
+        label: t('NOT_AVAILABLE', 'Not Available'),
+        data: generateNotAvailableData(),
+        fill: true,
+        borderColor: '#E9F2FE',
+        backgroundColor: '#E9F2FE',
+        borderWidth: 2,
+        borderRadius: { topRight: 7.6, topLeft: 7.6 },
         borderSkipped: true
       }
     ]
@@ -98,7 +97,6 @@ export const AnalyticsAvailableTimes = (props) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    indexAxis: 'y',
     scales: {
       x: {
         grid: {
@@ -114,8 +112,7 @@ export const AnalyticsAvailableTimes = (props) => {
       },
       y: {
         grid: {
-          drawBorder: false,
-          display: false
+          drawBorder: false
         },
         ticks: {
           font: {
@@ -127,7 +124,8 @@ export const AnalyticsAvailableTimes = (props) => {
     },
     plugins: {
       legend: {
-        display: false
+        position: 'bottom',
+        borderRadius: 7.6
       }
     },
     pointRadius: 0
@@ -143,10 +141,10 @@ export const AnalyticsAvailableTimes = (props) => {
         </ActionBlock>
       </ChartHeaderContainer>
       {
-        orderStatusList?.loading ? (
+        availableTimesList?.loading ? (
           <Skeleton height={150} />
         ) : (
-          orderStatusList?.data.length > 0 ? (
+          (availableTimesList?.data?.busy?.length > 0 || availableTimesList?.data?.not_busy?.length > 0) ? (
             <BarChartWrapper>
               <Bar data={data} options={options} ref={chartRef} />
             </BarChartWrapper>

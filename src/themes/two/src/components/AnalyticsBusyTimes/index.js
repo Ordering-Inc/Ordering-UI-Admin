@@ -21,7 +21,7 @@ export const AnalyticsBusyTimes = (props) => {
 
   const [, t] = useLanguage()
   const chartRef = useRef(null)
-  console.log(busyTimesList, 'this is busytime list')
+
   const generateLabels = () => {
     const labels = []
     if (busyTimesList?.data?.busy) {
