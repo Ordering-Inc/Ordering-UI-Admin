@@ -123,9 +123,11 @@ export const SettingsDetail = (props) => {
       <DescriptionContent>
         <DescriptionHeader>
           <HeaderIcons>
-            <IconButton>
-              <LifePreserver />
-            </IconButton>
+            {category?.support_url && (
+              <IconButton onClick={() => handleExtraOpen(true)}>
+                <LifePreserver />
+              </IconButton>
+            )}
             <IconButton
               color='black'
               onClick={handleClose}
@@ -152,15 +154,17 @@ export const SettingsDetail = (props) => {
             </CategoryName>
             <Description>{category?.description}</Description>
             {
-              category?.support_url && <MoreInfo onClick={() => handleExtraOpen(true)}>{t('MORE_INFO', 'More info')}</MoreInfo>
+              category?.more_info && <MoreInfo>{t('MORE_INFO', 'More info')}</MoreInfo>
             }
-            <VideoContainer>
-              <MdcPlayCircle onClick={playVideo} />
-              <video muted id='categoryVideo' className='w-100 custom-video' playsInline>
-                <source src={category.video} type='video/mp4' />
-                <source src={category.video} type='video/webm' />
-              </video>
-            </VideoContainer>
+            {category?.video && (
+              <VideoContainer>
+                <MdcPlayCircle onClick={playVideo} />
+                <video muted id='categoryVideo' className='w-100 custom-video' playsInline>
+                  <source src={category.video} type='video/mp4' />
+                  <source src={category.video} type='video/webm' />
+                </video>
+              </VideoContainer>
+            )}
             <AllSetting onClick={() => handleExtraOpen(false)}>
               <span>{t('ALL_SETTINGS', 'All settings')}</span>
               <BsArrowRight />
