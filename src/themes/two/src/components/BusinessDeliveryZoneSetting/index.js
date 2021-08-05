@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { AutoScroll } from '../AutoScroll'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { BusinessDeliveryZoneBasic } from '../BusinessDeliveryZoneBasic'
+import { XLg } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   Container,
@@ -63,9 +64,12 @@ export const BusinessDeliveryZoneSetting = (props) => {
       <Header>
         <h1>{t('ZONE_DELIVERY_SETTINGS', 'Zone delivery settings')}</h1>
         <ActionBlock>
-          <MdcClose
+          <IconButton
+            color='black'
             onClick={() => onClose()}
-          />
+          >
+            <XLg />
+          </IconButton>
         </ActionBlock>
       </Header>
       <TabContainer>

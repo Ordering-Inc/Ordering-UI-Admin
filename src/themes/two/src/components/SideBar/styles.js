@@ -18,8 +18,7 @@ export const BarContainer = styled.div`
     right: 0;
   `}
 
-  > svg {
-    cursor: pointer;
+  > button {
     position: absolute;
     top: 20px;
     ${props => props.theme?.rtl ? css`
@@ -27,7 +26,5 @@ export const BarContainer = styled.div`
     ` : css`
       right: 20px;
     `}
-    font-size: 30px;
-    color: ${props => props.theme.colors.headingColor};
   }
 `

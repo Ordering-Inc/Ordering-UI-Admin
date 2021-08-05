@@ -47,16 +47,13 @@ export const DescriptionHeader = styled.div`
 `
 
 export const HeaderIcons = styled.div`
-  svg {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    color: #344050;
-
-    &:first-child {
-      color: #B1BCCC;
-      margin-right: 20px;
-    }
+  display: flex;
+  > button:first-child {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+    ` : css`
+      margin-right: 8px;
+    `}
   }
 `
 
@@ -93,11 +90,6 @@ export const CategoryDescriptionExtraContent = styled.div`
     ` : css`
       right: 20px;
     `}
-    svg {
-      width: 24px;
-      height: 24px;
-      color: #344050;
-    }
   }
 `
 

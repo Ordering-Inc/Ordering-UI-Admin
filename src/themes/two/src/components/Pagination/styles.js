@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const PaginationContainer = styled.div`
   display: flex;
@@ -30,15 +31,45 @@ export const PageButton = styled.button`
   justify-content: center;
   padding: 0px;
 
-  ${({ active }) => active && css`
-    background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primaryContrast};
+  ${props => props.theme?.rtl ? css`
+    margin-left: 3px;
+  ` : css`
+    margin-right: 3px;
   `}
+
+  &:hover {
+    background-color: #1507260a;
+  }
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
+
+  &:active {
+    background-color: #1507261a;
+  }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primaryContrast};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.primary)};
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.primary)};
+    }
+  `}
+
+  ${({ noEffect }) => noEffect && css`
+    cursor: initial;
+    &:hover {
+      background-color: transparent;
+    }
+    &:active {
+      background-color: transparent;
+    }
+  `}
 `
 
 export const PageSizeContainer = styled.div`

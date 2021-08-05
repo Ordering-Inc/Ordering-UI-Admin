@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useLanguage, useUtils, ProductDetatils as ProductDetatilsController } from 'ordering-components-admin'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
+import { XLg } from 'react-bootstrap-icons'
 import { Switch } from '../../styles/Switch'
-import { Button } from '../../styles/Buttons'
 import { ProductDetatilsEditForm } from '../ProductDetatilsEditForm'
+import { Button, IconButton } from '../../styles/Buttons'
 
 import {
   ProductDetailsContainer,
@@ -12,7 +12,6 @@ import {
   LeftHeader,
   RightHeader,
   ProductName,
-  CloseButton,
   ProductImage,
   ProductDetailsContent,
   ProductPrice,
@@ -74,11 +73,12 @@ const ProductMainDetailsUI = (props) => {
             />
           </LeftHeader>
           <RightHeader>
-            <CloseButton
+            <IconButton
+              color='black'
               onClick={() => isEditMode ? setIsEditMode(false) : actionSidebar(false)}
             >
-              <MdcClose />
-            </CloseButton>
+              <XLg />
+            </IconButton>
           </RightHeader>
         </DetailsHeader>
         {!isEditMode ? (
@@ -101,7 +101,7 @@ const ProductMainDetailsUI = (props) => {
               </ProductConfigsContainer>
             </ProductDetailsContent>
             <Button
-              color='secundary'
+              color='secundaryDark'
               borderRadius='7.6px'
               onClick={() => setIsEditMode(true)}
             >

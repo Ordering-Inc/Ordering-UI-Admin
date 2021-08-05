@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import AiFillShop from '@meronex/icons/ai/AiFillShop'
-import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
-import FaCarSide from '@meronex/icons/fa/FaCarSide'
+// import AiFillShop from '@meronex/icons/ai/AiFillShop'
+// import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+// import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -12,7 +12,7 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { DriverSelector } from '../DriverSelector'
-import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
+// import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { Pagination } from '../Pagination'
 import {
@@ -40,7 +40,7 @@ export const OrdersTable = (props) => {
     selectedOrderIds,
     orderDetailId,
     getPageOrders,
-    handleUpdateOrderStatus,
+    // handleUpdateOrderStatus,
     handleSelectedOrderIds,
     handleOpenOrderDetail
   } = props
@@ -68,9 +68,9 @@ export const OrdersTable = (props) => {
     customer: true,
     driver: true,
     advanced: true,
-    total: true,
-    status: true,
-    deliveryType: true
+    total: true
+    // status: true,
+    // deliveryType: true
   })
 
   const optionsDefault = [
@@ -101,15 +101,15 @@ export const OrdersTable = (props) => {
     {
       value: 'total',
       content: t('TOTAL', 'Total')
-    },
-    {
-      value: 'status',
-      content: t('STATUS', 'Status')
-    },
-    {
-      value: 'deliveryType',
-      content: t('DELIVERY_TYPE', 'Delivery type')
     }
+    // {
+    //   value: 'status',
+    //   content: t('STATUS', 'Status')
+    // },
+    // {
+    //   value: 'deliveryType',
+    //   content: t('DELIVERY_TYPE', 'Delivery type')
+    // }
   ]
 
   const getLogisticTag = (status) => {
@@ -182,12 +182,12 @@ export const OrdersTable = (props) => {
               {allowColumns?.driver && (
                 <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
               )}
-              {allowColumns?.deliveryType && (
+              {/* {allowColumns?.deliveryType && (
                 <th className='orderType'>{t('DELIVERY_TYPE', 'Delivery type')}</th>
               )}
               {allowColumns?.status && (
                 <th className='orderStatusTitle'>{t('ORDER_STATUS', 'Order status')}</th>
-              )}
+              )} */}
               {allowColumns?.advanced && (
                 <th colSpan={3} className='advanced'>{t('ADVANCE_LOGISTICS', 'Advance logistics')}</th>
               )}
@@ -386,7 +386,7 @@ export const OrdersTable = (props) => {
                       )}
                     </td>
                   )}
-                  {allowColumns?.deliveryType && (
+                  {/* {allowColumns?.deliveryType && (
                     <td className='orderType'>
                       <OrderType>
                         {order?.delivery_type === 1 && (
@@ -440,7 +440,7 @@ export const OrdersTable = (props) => {
                         />
                       </WrapOrderStatusSelector>
                     </td>
-                  )}
+                  )} */}
                   {allowColumns?.advanced && (
                     <td className='logistic'>
                       <div className='info'>

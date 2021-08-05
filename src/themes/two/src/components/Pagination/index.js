@@ -93,7 +93,7 @@ export const Pagination = (props) => {
           <React.Fragment key={page}>
             {array[index - 1] + 2 <= page ? (
               <>
-                <PageButton>
+                <PageButton noEffect>
                   ...
                 </PageButton>
                 <PageButton

@@ -15,6 +15,7 @@
     "primaryContrast": "#FFF",
     "secundary": "#F8F9FA",
     "secundaryContrast": "#748194",
+    "secundaryLight": "#B1BCCC",
     "secundaryDark": "#414954",
     "secundaryDarkContrast": "#E9ECEF",
     "disabledContrast": "#000",

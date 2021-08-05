@@ -61,11 +61,9 @@ export const OrdersContainer = styled.div`
   max-width: 460px;
 `
 
-export const CloseButton = styled.div`
+export const CloseButtonWrapper = styled.div`
   position: absolute;
-  top: 10px;
-  background: #E9ECEF;
-  padding: 5px;
+  top: 20px;
   cursor: pointer;
 
   ${props => props.theme?.rtl ? css`
@@ -73,10 +71,6 @@ export const CloseButton = styled.div`
   ` : css`
     right: 10px;
   `}
-
-  svg {
-    font-size: 24px;
-  }
 `
 
 export const Info = styled.div`

@@ -21,6 +21,17 @@ export const SidebarContainer = styled.div`
   height: 100vh;
   overflow: hidden;
 
+  button {
+    &:hover {
+      background-color: ${props => props.theme.colors.lightPrimary};
+    }
+    &.btn-primary {
+      &:hover {
+        background-color: ${props => props.theme.colors.primary};
+      }
+    }
+  }
+
   @media (min-width: 760px) {
     height: inherit;
     overflow: inherit;
@@ -160,12 +171,16 @@ export const SubMenu = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.primary};
   `}
   ${props => props.theme?.rtl ? css`
-    margin-right: 40px;
+    padding-right: 40px;
   ` : css`
-    margin-left: 40px;
+    padding-left: 40px;
   `}
 `
