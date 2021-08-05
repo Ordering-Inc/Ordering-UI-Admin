@@ -12,8 +12,9 @@ export const IngredientContainer = styled.div`
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #E9ECEF;
-  padding-bottom: 30px;
+  justify-content: space-between;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  padding-bottom: 20px;
   width: 100%;
   h1 {
     color: ${props => props.theme.colors.headingColor};
@@ -22,14 +23,12 @@ export const Header = styled.div`
     margin: 0px;
   }
 
-  svg {
-    font-size: 24px;
-    color: ${props => props.theme.colors.primary};
-    cursor: pointer;
+  button {
+    height: 42px;
     ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
+      margin-left: 40px;
     ` : css`
-      margin-left: 10px;
+      margin-right: 40px;
     `}
   }
 `

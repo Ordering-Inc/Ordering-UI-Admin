@@ -3,12 +3,12 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import BsTable from '@meronex/icons/bs/BsTable'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductList } from '../BusinessProductList'
 import { ProductDetails } from '../ProductDetails'
+import { Button } from '../../styles/Buttons'
 
 import {
   CategoryProductsContainer,
@@ -17,9 +17,9 @@ import {
   CategoryListContainer,
   ProductListContainer,
   ProductHeader,
-  AddButton,
   ActionIconList,
-  ViewMethodButton
+  ViewMethodButton,
+  ActionsGroup
 } from './styles'
 
 const BusinessProductsListingUI = (props) => {
@@ -114,12 +114,28 @@ const BusinessProductsListingUI = (props) => {
               )
             }
           </div>
-          <SearchBar
-            isCustomLayout
-            search={searchValue}
-            onSearch={handleChangeSearch}
-            placeholder={t('SEARCH', 'Search')}
-          />
+          <ActionsGroup>
+            <Button
+              borderRadius='8px'
+              color='lightPrimary'
+              onClick={() => handleOpenCategoryDetails()}
+            >
+              {t('ADD_CATEGORY', 'Add category')}
+            </Button>
+            <Button
+              borderRadius='8px'
+              color='lightPrimary'
+              onClick={() => handleProductAdd(true)}
+            >
+              {t('ADD_PRODUCT', 'Add product')}
+            </Button>
+            <SearchBar
+              isCustomLayout
+              search={searchValue}
+              onSearch={handleChangeSearch}
+              placeholder={t('SEARCH', 'Search')}
+            />
+          </ActionsGroup>
         </HeaderContainer>
         <CategoryProductsContent>
           <CategoryListContainer>
@@ -138,9 +154,6 @@ const BusinessProductsListingUI = (props) => {
             <ProductHeader>
               <div className='d-flex align-items-center'>
                 <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-                <AddButton onClick={() => handleProductAdd(true)}>
-                  <BsPlusSquare />
-                </AddButton>
               </div>
 
               <ActionIconList>

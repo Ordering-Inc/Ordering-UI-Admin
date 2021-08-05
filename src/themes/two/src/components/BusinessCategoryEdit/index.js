@@ -12,9 +12,9 @@ import { bytesConverter } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { Switch } from '../../styles/Switch'
 import { Input } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { Button, IconButton } from '../../styles/Buttons'
 import FiCamera from '@meronex/icons/fi/FiCamera'
+import { XLg } from 'react-bootstrap-icons'
 
 import {
   Container,
@@ -176,9 +176,12 @@ const BusinessCategoryEditUI = (props) => {
                       onChange={handleChangeCheckBox}
                     />
                   </BusinessEnableWrapper>
-                  <Button onClick={handleClose}>
-                    <MdcClose />
-                  </Button>
+                  <IconButton
+                    color='black'
+                    onClick={handleClose}
+                  >
+                    <XLg />
+                  </IconButton>
                 </HeaderContainer>
                 <CategoryTypeImage
                   onClick={() => handleClickImage()}
@@ -219,7 +222,13 @@ const BusinessCategoryEditUI = (props) => {
                   />
                 </CategoryNameWrapper>
                 <BtnWrapper>
-                  <Button onClick={handleUpdateClick}>{category ? t('SAVE', 'Save') : t('ADD', 'Add')}</Button>
+                  <Button
+                    borderRadius='8px'
+                    color='primary'
+                    onClick={handleUpdateClick}
+                  >
+                    {category ? t('SAVE', 'Save') : t('ADD', 'Add')}
+                  </Button>
                 </BtnWrapper>
               </>
             )

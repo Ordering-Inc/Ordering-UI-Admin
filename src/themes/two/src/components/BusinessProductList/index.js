@@ -163,7 +163,7 @@ export const BusinessProductList = (props) => {
           </ProductListContainer>
           <ProductListBottom>
             {
-              !businessState.loading && !isAddProduct && (
+              !businessState.loading && (
                 <AddProductBtn onClick={() => setIsAddProduct(true)}>{t('ADD_NEW_PRODUCT', 'Add new product')}</AddProductBtn>
               )
             }

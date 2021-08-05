@@ -54,16 +54,6 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  button {
-    background: transparent;
-    border: none;
-
-    svg {
-      color: ${props => props.theme.colors?.headingColor};
-      font-size: 16px;
-    }
-  }
 `
 
 export const BusinessEnableWrapper = styled.div`
@@ -114,9 +104,7 @@ export const BtnWrapper = styled.div`
   bottom: 50px;
 
   button {
-    background: ${props => props.theme.colors.primary};
-    border-radius: 8px;
-    font-size: 14px;
+    height: 42px;
   }
 `
 
