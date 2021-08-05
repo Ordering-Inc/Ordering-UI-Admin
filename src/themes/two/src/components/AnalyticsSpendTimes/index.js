@@ -33,10 +33,34 @@ export const AnalyticsSpendTimes = (props) => {
     return labels
   }
 
-  const generateData = () => {
+  const generateAcceptData = () => {
     const values = []
     for (const label of chartDataList?.data) {
-      values.push(label.orders)
+      values.push(label.accept_spend)
+    }
+    return values
+  }
+
+  const generatePickUPData = () => {
+    const values = []
+    for (const label of chartDataList?.data) {
+      values.push(label.pickup_spend)
+    }
+    return values
+  }
+
+  const generateDeliveryData = () => {
+    const values = []
+    for (const label of chartDataList?.data) {
+      values.push(label.delivery_spend)
+    }
+    return values
+  }
+
+  const generateCompletedData = () => {
+    const values = []
+    for (const label of chartDataList?.data) {
+      values.push(label.complete_spend)
     }
     return values
   }
@@ -45,13 +69,36 @@ export const AnalyticsSpendTimes = (props) => {
     labels: generateLabels(),
     datasets: [
       {
-        label: t('ORDERS', 'Orders'),
-        data: generateData(),
+        label: t('ACCEPT', 'Accept'),
+        data: generateAcceptData(),
         fill: false,
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: '#2C7BE5',
-        tension: 0.4,
-        borderWidth: 3
+        backgroundColor: '#FFC700',
+        borderColor: '#FFC700',
+        tension: 0.4
+      },
+      {
+        label: t('PICKUP', 'PickUP'),
+        data: generatePickUPData(),
+        fill: false,
+        backgroundColor: '#F0879A',
+        borderColor: '#F0879A',
+        tension: 0.4
+      },
+      {
+        label: t('DELIVERY', 'Delivery'),
+        data: generateDeliveryData(),
+        fill: false,
+        backgroundColor: '#52C9FD',
+        borderColor: '#52C9FD',
+        tension: 0.4
+      },
+      {
+        label: t('COMPLETED', 'Completed'),
+        data: generateCompletedData(),
+        fill: false,
+        backgroundColor: '#00D27A',
+        borderColor: '#00D27A',
+        tension: 0.4
       }
     ]
   }
@@ -85,7 +132,7 @@ export const AnalyticsSpendTimes = (props) => {
     },
     plugins: {
       legend: {
-        display: false
+        position: 'bottom'
       }
     },
     pointRadius: 0

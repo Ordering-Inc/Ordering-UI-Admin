@@ -24,6 +24,9 @@ export const DriverAnalytics = (props) => {
   const [ordersAcceptSpendList, setOrdersAcceptSpendList] = useState({ loading: false, data: [], error: null })
   const [arrivedPickUpSpendList, setArrivedPickUpSpendList] = useState({ loading: false, data: [], error: null })
   const [orderLocationList, setOrderLocationList] = useState({ loading: false, data: [], error: null })
+  const [completeSpendList, setCompleteSpendList] = useState({ loading: false, data: [], error: null })
+  const [pickUpSpendList, setPickUpSpendList] = useState({ loading: false, data: [], error: null })
+  const [deliverySpendList, setDeliverySpendList] = useState({ loading: false, data: [], error: null })
 
   /**
    * Method to get orders list
@@ -290,7 +293,7 @@ export const DriverAnalytics = (props) => {
   }
 
   /**
-   * Method to get customer satisfaction List
+   * Method to get complete spend List
    */
   const getCustomerSatisfaction = async () => {
     if (loading) return
@@ -327,6 +330,50 @@ export const DriverAnalytics = (props) => {
     } catch (err) {
       setCustomerSatisfactionList({
         ...customerSatisfactionList,
+        loading: false,
+        error: err
+      })
+    }
+  }
+
+  /**
+   * Method to get complete spend List
+   */
+  const getCompleteSpend = async () => {
+    if (loading) return
+    try {
+      setCompleteSpendList({ ...completeSpendList, loading: true })
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const rootUrl = `${ordering.root}/reports/drivers_complete_spend`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
+      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+      const functionFetch = `${rootUrl}?${params}`
+
+      const response = await fetch(functionFetch, requestOptions)
+      const { error, result } = await response.json()
+      if (!error) {
+        setCompleteSpendList({
+          ...completeSpendList,
+          loading: false,
+          data: result
+        })
+      } else {
+        setCompleteSpendList({
+          ...completeSpendList,
+          loading: true,
+          error: result
+        })
+      }
+    } catch (err) {
+      setCompleteSpendList({
+        ...completeSpendList,
         loading: false,
         error: err
       })
@@ -391,7 +438,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/orders_accept_spend`
+      const rootUrl = `${ordering.root}/reports/drivers_available_times`
       let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
       if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
       if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
@@ -479,8 +526,8 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/orders_accept_spend`
-      let params = `lapse=${filterList?.lapse}`
+      const rootUrl = `${ordering.root}/reports/drivers_accept_spend`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
       if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
       if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
       const functionFetch = `${rootUrl}?${params}`
@@ -510,7 +557,7 @@ export const DriverAnalytics = (props) => {
   }
 
   /**
-   * Method to get arrived pickup spend list
+   * Method to get drivers arrived pickup spend list
    */
   const getArrivedPickeUpSpend = async () => {
     if (loading) return
@@ -523,8 +570,8 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/arrived_pickup_spend`
-      let params = `lapse=${filterList?.lapse}`
+      const rootUrl = `${ordering.root}/reports/drivers_arrived_pickup_spend`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
       if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
       if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
       const functionFetch = `${rootUrl}?${params}`
@@ -567,8 +614,8 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/order_location`
-      let params = `lapse=${filterList?.lapse}`
+      const rootUrl = `${ordering.root}/reports/drivers_order_location`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
       if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
       if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
       const functionFetch = `${rootUrl}?${params}`
@@ -597,6 +644,94 @@ export const DriverAnalytics = (props) => {
     }
   }
 
+  /**
+   * Method to get arrived pickup spend list
+   */
+  const getPickUpSpend = async () => {
+    if (loading) return
+    try {
+      setPickUpSpendList({ ...pickUpSpendList, loading: true })
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const rootUrl = `${ordering.root}/reports/drivers_pickup_spend`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
+      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+      const functionFetch = `${rootUrl}?${params}`
+
+      const response = await fetch(functionFetch, requestOptions)
+      const { error, result } = await response.json()
+      if (!error) {
+        setPickUpSpendList({
+          ...pickUpSpendList,
+          loading: false,
+          data: result
+        })
+      } else {
+        setPickUpSpendList({
+          ...pickUpSpendList,
+          loading: true,
+          error: result
+        })
+      }
+    } catch (err) {
+      setPickUpSpendList({
+        ...pickUpSpendList,
+        loading: false,
+        error: err
+      })
+    }
+  }
+
+  /**
+   * Method to get arrived pickup spend list
+   */
+  const getDeliverySpend = async () => {
+    if (loading) return
+    try {
+      setDeliverySpendList({ ...deliverySpendList, loading: true })
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const rootUrl = `${ordering.root}/reports/drivers_delivery_spend`
+      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
+      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+      const functionFetch = `${rootUrl}?${params}`
+
+      const response = await fetch(functionFetch, requestOptions)
+      const { error, result } = await response.json()
+      if (!error) {
+        setDeliverySpendList({
+          ...deliverySpendList,
+          loading: false,
+          data: result
+        })
+      } else {
+        setDeliverySpendList({
+          ...deliverySpendList,
+          loading: true,
+          error: result
+        })
+      }
+    } catch (err) {
+      setDeliverySpendList({
+        ...deliverySpendList,
+        loading: false,
+        error: err
+      })
+    }
+  }
+
   useEffect(() => {
     getOrders()
     getSales()
@@ -609,8 +744,11 @@ export const DriverAnalytics = (props) => {
     getBusyTimes()
     getCustomerSatisfaction()
     getOrdersAcceptSpend()
+    getCompleteSpend()
     getArrivedPickeUpSpend()
+    getPickUpSpend()
     getLocations()
+    getDeliverySpend()
   }, [filterList])
 
   return (
@@ -632,6 +770,9 @@ export const DriverAnalytics = (props) => {
           spendTimesList={spendTimesList}
           availableTimesList={availableTimesList}
           busyTimesList={busyTimesList}
+          completeSpendList={completeSpendList}
+          pickUpSpendList={pickUpSpendList}
+          deliverySpendList={deliverySpendList}
           handleChangeFilterList={setFilterList}
         />
       )}

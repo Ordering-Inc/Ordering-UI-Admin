@@ -12,12 +12,12 @@ import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
 import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
-import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
 import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import { AnalyticsTopOrders } from '../AnalyticsTopOrders'
 import { AnalyticsSpendTimes } from '../AnalyticsSpendTimes'
 import { AnalyticsAvailableTimes } from '../AnalyticsAvailableTimes'
 import { AnalyticsBusyTimes } from '../AnalyticsBusyTimes'
+import { AnalyticsSpendList } from '../AnalyticsSpendList'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
@@ -44,7 +44,10 @@ const DriverAnalyticsUI = (props) => {
     orderLocationList,
     availableTimesList,
     spendTimesList,
-    busyTimesList
+    busyTimesList,
+    completeSpendList,
+    pickUpSpendList,
+    deliverySpendList
   } = props
 
   const [, t] = useLanguage()
@@ -125,13 +128,13 @@ const DriverAnalyticsUI = (props) => {
         </div>
         <div className='col-md-6'>
           <AnalyticsSpendTimes
-            chartDataList={ordersList}
+            chartDataList={spendTimesList}
           />
         </div>
         <div className='col-md-6'>
           <AnalyticsAvailableTimes
             filterList={filterList}
-            availableTimesList={busyTimesList}
+            availableTimesList={availableTimesList}
           />
         </div>
         <div className='col-md-6'>
@@ -146,7 +149,26 @@ const DriverAnalyticsUI = (props) => {
           />
         </div>
         <div className='col-md-6'>
-          <AnalyticsArrivedPickUp
+          <AnalyticsSpendList
+            title={t('TIME_SPENT_IN_BUSINESS_WAITING_FOR_ORDER', 'Time spent in business waiting for order')}
+            dataList={completeSpendList}
+          />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsSpendList
+            title={t('TIME_SPENT_TO_PICKUP_ORDER', 'Time spent to pickup order')}
+            dataList={pickUpSpendList}
+          />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsSpendList
+            title={t('TIME_SPENT_TO_DELIVER_ORDER', 'Time spent to deliver order')}
+            dataList={deliverySpendList}
+          />
+        </div>
+        <div className='col-md-6'>
+          <AnalyticsSpendList
+            title={t('TIME_SPENT_SINCE_ORDER_ACCEPTED_TO_PICKUP_AND_DELIVER_THE_ORDER', 'Time spent since order accepted to pickup and deliver the order')}
             dataList={arrivedPickUpSpendList}
           />
         </div>

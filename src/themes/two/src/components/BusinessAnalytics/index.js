@@ -14,7 +14,7 @@ import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
-import { AnalyticsArrivedPickUp } from '../AnalyticsArrivedPickUp'
+import { AnalyticsSpendList } from '../AnalyticsSpendList'
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
@@ -121,8 +121,9 @@ const BusinessAnalyticsUI = (props) => {
           />
         </div>
         <div className='col-md-6'>
-          <AnalyticsArrivedPickUp
+          <AnalyticsSpendList
             dataList={arrivedPickUpSpendList}
+            title={t('TIME_WAITING_ON_READY_FOR_PICKUP', 'TIME SPENT WAITING ON READY FOR PICKUP')}
           />
         </div>
       </AnalyticsContentWrapper>

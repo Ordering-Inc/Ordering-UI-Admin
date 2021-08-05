@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import {
   Container,
   ChartHeaderContainer,
@@ -20,6 +20,7 @@ export const AnalyticsAvailableTimes = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ parseNumber }] = useUtils()
   const chartRef = useRef(null)
 
   const generateLabels = () => {
@@ -40,7 +41,7 @@ export const AnalyticsAvailableTimes = (props) => {
     const datasets = []
     if (availableTimesList?.data?.busy) {
       for (const data of availableTimesList?.data?.busy) {
-        const _time = (data.time / 3600).toFixed(2)
+        const _time = parseNumber((data.time / 3600), { separator: '.' })
         datasets.push(_time)
       }
     }
@@ -52,7 +53,7 @@ export const AnalyticsAvailableTimes = (props) => {
     const datasets = []
     if (availableTimesList?.data?.not_busy) {
       for (const data of availableTimesList?.data?.not_busy) {
-        const _time = (data.time / 3600).toFixed(2)
+        const _time = parseNumber((data.time / 3600), { separator: '.' })
         datasets.push(_time)
       }
     }
