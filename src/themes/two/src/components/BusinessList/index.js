@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { PaginationButton } from '../PaginationButton'
 import { Pagination } from '../Pagination'
 
 import {
@@ -64,28 +63,37 @@ export const BusinessList = (props) => {
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
-  const [businessesPerPage] = useState(10)
+  const [businessesPerPage, setBusinessesPerPage] = useState(10)
 
   // Get current businesses
   const indexOfLastPost = currentPage * businessesPerPage
   const indexOfFirstPost = indexOfLastPost - businessesPerPage
   const [currentBusinessess, setCurrentBusinessess] = useState([])
   const [totalPages, setTotalPages] = useState(null)
-  const [totalBusinesses, setTotalBusinesses] = useState(null)
+  // const [totalBusinesses, setTotalBusinesses] = useState(null)
 
-  // Change page
-  const prevPaginate = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
-    }
+  // // Change page
+  // const prevPaginate = () => {
+  //   if (currentPage !== 1) {
+  //     setCurrentPage(currentPage - 1)
+  //   }
+  // }
+  // const nextPaginate = () => {
+  //   if (currentPage !== totalPages) {
+  //     if (businessList.businesses.length < businessesPerPage * currentPage + 1) {
+  //       loadMoreBusinesses()
+  //     }
+  //     setCurrentPage(currentPage + 1)
+  //   }
+  // }
+
+  const handleChangePage = (page) => {
+    setCurrentPage(page)
   }
-  const nextPaginate = () => {
-    if (currentPage !== totalPages) {
-      if (businessList.businesses.length < businessesPerPage * currentPage + 1) {
-        loadMoreBusinesses()
-      }
-      setCurrentPage(currentPage + 1)
-    }
+
+  const handleChangePageSize = (pageSize) => {
+    setCurrentPage(1)
+    setBusinessesPerPage(pageSize)
   }
 
   useEffect(() => {
@@ -97,10 +105,10 @@ export const BusinessList = (props) => {
       _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage)
     }
     const _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalBusinesses(pagination?.total)
+    // setTotalBusinesses(pagination?.total)
     setTotalPages(_totalPages)
     setCurrentBusinessess(_currentBusinessess)
-  }, [businessList, currentPage, pagination])
+  }, [businessList, currentPage, pagination, businessesPerPage])
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + 10
@@ -171,21 +179,15 @@ export const BusinessList = (props) => {
             </BusinessListTable>
           </BusinessListContainer>
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
-
           {pagination && (
             <WrapperPagination>
               {!businessList.loading && totalPages > 0 && (
-                <PaginationButton
-                  pageSize={businessesPerPage}
-                  total={totalBusinesses}
+                <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  prevPaginate={prevPaginate}
-                  nextPaginate={nextPaginate}
+                  handleChangePage={handleChangePage}
+                  defaultPageSize={businessesPerPage}
+                  handleChangePageSize={handleChangePageSize}
                 />
               )}
             </WrapperPagination>

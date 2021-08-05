@@ -73,6 +73,10 @@ export const Pagination = (props) => {
     setVisiblePages(getVisiblePages(null, totalPages))
   }, [totalPages])
 
+  useEffect(() => {
+    setActivePage(currentPage)
+  }, [currentPage])
+
   return (
     <PaginationContainer>
       <PaginationButtonContainer>
@@ -121,6 +125,7 @@ export const Pagination = (props) => {
         </PageSizeTitle>
         <Select
           isSecondIcon
+          notAsync
           minWidth='70px'
           defaultValue={defaultPageSize || 10}
           options={pageSizeOptions}

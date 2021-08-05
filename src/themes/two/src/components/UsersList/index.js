@@ -4,13 +4,12 @@ import { useLanguage } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import Prev from '@meronex/icons/md/MdKeyboardArrowLeft'
-import Next from '@meronex/icons/md/MdKeyboardArrowRight'
 import { Switch } from '../../styles/Switch'
 import { UserTypeSelector } from '../UserTypeSelector'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import { Pagination } from '../Pagination'
 
 import {
   UsersConatiner,
@@ -24,17 +23,15 @@ import {
   UserTypeWrapper,
   UserEnableWrapper,
   WrapperPagination,
-  WrapperPageState,
-  PageButton,
   WrapperUserActionSelector,
-  AddNewUserButton
+  AddNewUserButton,
+  UsersBottomContainer
 } from './styles'
 
 export const UsersList = (props) => {
   const {
     userDetailsId,
     usersList,
-    paginationDetail,
     paginationProps,
     getUsers,
     handleChangeUserType,
@@ -61,14 +58,19 @@ export const UsersList = (props) => {
     return objectStatus && objectStatus
   }
 
-  const prevNextPage = (isNextPage) => {
-    getUsers && getUsers(false, isNextPage)
-  }
-
   const onChangeUserDetails = (e, user) => {
     const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
     if (isInvalid) return
     handleOpenUserDetails(user)
+  }
+
+  const handleChangePage = (page) => {
+    getUsers(page, 10)
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(paginationProps.from / pageSize)
+    getUsers(expectedPage, pageSize)
   }
 
   return (
@@ -201,28 +203,21 @@ export const UsersList = (props) => {
             )}
           </UsersTable>
         </UserTableWrapper>
-        {usersList?.users.length > 0 && (
-          <WrapperPagination>
-            <WrapperPageState>
-              {`${paginationDetail?.from} - ${paginationDetail?.to} of ${paginationDetail?.total}`}
-            </WrapperPageState>
-            <PageButton
-              disabled={paginationProps?.currentPage === 1 || usersList.loading}
-              onClick={() => prevNextPage(false)}
-            >
-              <Prev />
-            </PageButton>
-            <PageButton
-              disabled={usersList.loading || paginationProps?.totalPages === paginationProps?.currentPage || paginationProps?.totalPages === 1}
-              onClick={() => prevNextPage(true)}
-            >
-              <Next />
-            </PageButton>
-          </WrapperPagination>
-        )}
-        <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
-          {t('ADD_NEW_USER', 'Add new user')}
-        </AddNewUserButton>
+        <UsersBottomContainer>
+          <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
+            {t('ADD_NEW_USER', 'Add new user')}
+          </AddNewUserButton>
+          {usersList?.users.length > 0 && (
+            <WrapperPagination>
+              <Pagination
+                currentPage={paginationProps.currentPage}
+                totalPages={paginationProps.totalPages}
+                handleChangePage={handleChangePage}
+                handleChangePageSize={handleChangePageSize}
+              />
+            </WrapperPagination>
+          )}
+        </UsersBottomContainer>
       </UsersConatiner>
     </>
   )
