@@ -43,7 +43,6 @@ export const BusinessListTable = styled.table`
 `
 
 export const WrapperPagination = styled.div`
-  margin-top: 20px;
 `
 
 export const BusinessCardContainer = styled.div`
@@ -62,5 +61,12 @@ export const AddNewButtonLink = styled.div`
   cursor: pointer;
   color: ${props => props.theme.colors.lightGray};
   font-size: 14px;
-  margin-top: 15px;
+`
+
+export const BusinessListBottomContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 `

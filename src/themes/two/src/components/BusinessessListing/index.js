@@ -30,7 +30,8 @@ const BusinessessListingUI = (props) => {
     handleSucessAddBusiness,
     handleSucessUpdateBusiness,
     onSearch,
-    onBusinessRedirect
+    onBusinessRedirect,
+    getPageBusinesses
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -121,6 +122,7 @@ const BusinessessListingUI = (props) => {
           pagination={pagination}
           detailsBusinessId={detailsBusinessId}
           loadMoreBusinesses={loadMoreBusinesses}
+          getPageBusinesses={getPageBusinesses}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessAddBusiness={handleSucessAddBusiness}
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
