@@ -75,6 +75,8 @@ export const Pagination = (props) => {
 
   useEffect(() => {
     setActivePage(currentPage)
+    const _visiblePages = getVisiblePages(currentPage, totalPages)
+    setVisiblePages(filterPages(_visiblePages, totalPages))
   }, [currentPage])
 
   return (

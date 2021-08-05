@@ -27,6 +27,7 @@ export const OrdersListing = (props) => {
     messageListView,
     messageType,
     loadMoreOrders,
+    getPageOrders,
     ordersStatusGroup,
     groupStatus,
     orderDetailId,
@@ -74,6 +75,7 @@ export const OrdersListing = (props) => {
                   selectedOrderIds={selectedOrderIds}
                   orderDetailId={orderDetailId}
                   loadMoreOrders={loadMoreOrders}
+                  getPageOrders={getPageOrders}
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                   handleSelectedOrderIds={handleSelectedOrderIds}
                   handleOpenOrderDetail={handleOpenOrderDetail}
@@ -87,6 +89,7 @@ export const OrdersListing = (props) => {
                   pagination={pagination}
                   selectedOrderIds={selectedOrderIds}
                   loadMoreOrders={loadMoreOrders}
+                  getPageOrders={getPageOrders}
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                   handleSelectedOrderIds={handleSelectedOrderIds}
                   handleOpenOrderDetail={handleOpenOrderDetail}
