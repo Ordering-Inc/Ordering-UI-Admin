@@ -10,7 +10,7 @@ export const DriverAnalytics = (props) => {
   const [{ token, loading }] = useSession()
   const [ordering] = useApi()
 
-  const [filterList, setFilterList] = useState({ lapse: 'today', businessIds: null, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
+  const [filterList, setFilterList] = useState({ lapse: 'today', userIds: null, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
   const [ordersList, setOrdersList] = useState({ loading: false, data: [], error: null })
   const [salesList, setSalesList] = useState({ loading: false, data: [], error: null })
   const [topProductList, setTopProductList] = useState({ loading: false, data: [], error: null })

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DriverAnalytics as DriverAnalyticsController } from './naked'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
+import { AnalyticsDriversFilter } from '../AnalyticsDriversFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
@@ -51,7 +51,7 @@ const DriverAnalyticsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [businessFilterModal, setBusinessFilterModal] = useState(false)
+  const [driversFilterModal, setDriversFilterModal] = useState(false)
 
   return (
     <BusinessAnalyticsContainer>
@@ -59,7 +59,7 @@ const DriverAnalyticsUI = (props) => {
         <h1>{t('DRIVERS_ANALYTICS', 'Drivers analytics')}</h1>
         <HeaderFilterContainer>
           <BusinessFilterWrapper>
-            <Button onClick={() => setBusinessFilterModal(true)}>
+            <Button onClick={() => setDriversFilterModal(true)}>
               {t('DRIVERS', 'DRIVERS')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
           </BusinessFilterWrapper>
@@ -178,12 +178,12 @@ const DriverAnalyticsUI = (props) => {
         width='50%'
         height='80vh'
         padding='30px'
-        title={t('BUSINESSES', 'Businesses')}
-        open={businessFilterModal}
-        onClose={() => setBusinessFilterModal(false)}
+        title={t('DRIVERS', 'Drivers')}
+        open={driversFilterModal}
+        onClose={() => setDriversFilterModal(false)}
       >
-        <AnalyticsBusinessFilter
-          {...props} onClose={() => setBusinessFilterModal(false)}
+        <AnalyticsDriversFilter
+          {...props} onClose={() => setDriversFilterModal(false)}
         />
       </Modal>
     </BusinessAnalyticsContainer>
