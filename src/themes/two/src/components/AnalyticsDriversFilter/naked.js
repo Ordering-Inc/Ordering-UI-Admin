@@ -125,7 +125,8 @@ export const AnalyticsDriversFilter = (props) => {
   }
 
   const handleClickFilterButton = () => {
-    handleChangeFilterList && handleChangeFilterList({ ...filterList, userIds: userIds })
+    const _userIds = (userIds && (userIds.length > 0)) ? [...userIds] : null
+    handleChangeFilterList && handleChangeFilterList({ ...filterList, userIds: _userIds })
     onClose && onClose()
   }
 

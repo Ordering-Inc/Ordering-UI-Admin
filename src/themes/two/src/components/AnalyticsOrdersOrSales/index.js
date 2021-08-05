@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Container,
   ChartContentWrapper,
@@ -13,6 +13,7 @@ import { Line } from 'react-chartjs-2'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
+import { Modal } from '../Modal'
 
 export const AnalyticsOrdersOrSales = (props) => {
   const {
@@ -24,6 +25,7 @@ export const AnalyticsOrdersOrSales = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const chartRef = useRef(null)
+  const [isShowPreview, setIsShowPreview] = useState(false)
 
   const generateLabels = () => {
     const labels = []
@@ -120,32 +122,51 @@ export const AnalyticsOrdersOrSales = (props) => {
     a.click()
   }
 
+  const previewChart = () => {
+    if (chartDataList?.data.length === 0) return
+    setIsShowPreview(true)
+  }
+
   return (
-    <Container>
-      <ChartHeaderContainer>
-        <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}</p>
-        <ActionBlock>
-          <BsArrowsAngleExpand />
-          <BsDownload className='download-view' onClick={downloadImage} />
-        </ActionBlock>
-      </ChartHeaderContainer>
-      <ChartContentWrapper>
-        {
-          chartDataList?.loading ? (
-            <Skeleton height={150} />
+    <>
+      <Container>
+        <ChartHeaderContainer>
+          <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}</p>
+          <ActionBlock>
+            <BsArrowsAngleExpand onClick={previewChart} />
+            <BsDownload className='download-view' onClick={downloadImage} />
+          </ActionBlock>
+        </ChartHeaderContainer>
+        <ChartContentWrapper>
+          {
+            chartDataList?.loading ? (
+              <Skeleton height={150} />
+            ) : (
+              chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            )
+          }
+        </ChartContentWrapper>
+        <ChartFooterContainer>
+          <h2>{chartDataList?.loading ? <Skeleton width={30} /> : (isOrders ? <TotalOrders /> : <TotalSales />)}</h2>
+          {chartDataList?.loading ? (
+            <Skeleton width={80} />
           ) : (
-            chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
-          )
-        }
-      </ChartContentWrapper>
-      <ChartFooterContainer>
-        <h2>{chartDataList?.loading ? <Skeleton width={30} /> : (isOrders ? <TotalOrders /> : <TotalSales />)}</h2>
-        {chartDataList?.loading ? (
-          <Skeleton width={80} />
-        ) : (
-          <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')} {t('TOTALS', 'totals')}</p>
-        )}
-      </ChartFooterContainer>
-    </Container>
+            <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')} {t('TOTALS', 'totals')}</p>
+          )}
+        </ChartFooterContainer>
+      </Container>
+      <Modal
+        width='70%'
+        height='80vh'
+        padding='30px'
+        title={isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}
+        open={isShowPreview}
+        onClose={() => setIsShowPreview(false)}
+      >
+        <ChartContentWrapper>
+          <Line data={defaultData} options={options} />
+        </ChartContentWrapper>
+      </Modal>
+    </>
   )
 }

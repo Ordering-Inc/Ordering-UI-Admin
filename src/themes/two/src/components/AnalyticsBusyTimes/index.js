@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import {
   Container,
@@ -12,6 +12,7 @@ import BsArrowsAngleExpand from '@meronex/icons/bs/BsArrowsAngleExpand'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
+import { Modal } from '../Modal'
 
 export const AnalyticsBusyTimes = (props) => {
   const {
@@ -22,6 +23,7 @@ export const AnalyticsBusyTimes = (props) => {
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
   const chartRef = useRef(null)
+  const [isShowPreview, setIsShowPreview] = useState(false)
 
   const generateLabels = () => {
     const labels = []
@@ -132,28 +134,46 @@ export const AnalyticsBusyTimes = (props) => {
     pointRadius: 0
   }
 
+  const previewChart = () => {
+    if ((busyTimesList?.data?.busy?.length > 0 || busyTimesList?.data?.not_busy?.length > 0)) setIsShowPreview(true)
+  }
+
   return (
-    <Container>
-      <ChartHeaderContainer>
-        <p>{t('BUSY_TIMES', 'Busy Times')}</p>
-        <ActionBlock>
-          <BsArrowsAngleExpand />
-          <BsDownload className='download-view' onClick={downloadImage} />
-        </ActionBlock>
-      </ChartHeaderContainer>
-      {
-        busyTimesList?.loading ? (
-          <Skeleton height={150} />
-        ) : (
-          (busyTimesList?.data?.busy?.length > 0 || busyTimesList?.data?.not_busy?.length > 0) ? (
-            <BarChartWrapper>
-              <Bar data={data} options={options} ref={chartRef} />
-            </BarChartWrapper>
+    <>
+      <Container>
+        <ChartHeaderContainer>
+          <p>{t('BUSY_TIMES', 'Busy Times')}</p>
+          <ActionBlock>
+            <BsArrowsAngleExpand onClick={previewChart} />
+            <BsDownload className='download-view' onClick={downloadImage} />
+          </ActionBlock>
+        </ChartHeaderContainer>
+        {
+          busyTimesList?.loading ? (
+            <Skeleton height={150} />
           ) : (
-            <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            (busyTimesList?.data?.busy?.length > 0 || busyTimesList?.data?.not_busy?.length > 0) ? (
+              <BarChartWrapper>
+                <Bar data={data} options={options} ref={chartRef} />
+              </BarChartWrapper>
+            ) : (
+              <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            )
           )
-        )
-      }
-    </Container>
+        }
+      </Container>
+      <Modal
+        width='70%'
+        height='80vh'
+        padding='30px'
+        title={t('BUSY_TIMES', 'Busy Times')}
+        open={isShowPreview}
+        onClose={() => setIsShowPreview(false)}
+      >
+        <BarChartWrapper>
+          <Bar data={data} options={options} />
+        </BarChartWrapper>
+      </Modal>
+    </>
   )
 }

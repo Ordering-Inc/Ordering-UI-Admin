@@ -3,8 +3,6 @@ import Skeleton from 'react-loading-skeleton'
 import { AnalyticsDriversFilter as AnalyticsDriversFilterController } from './naked'
 import {
   AnalyticsBusinessFilterContainer,
-  BusinessFilterOption,
-  BusinessName,
   FilterBtnWrapper,
   TreeViewItemContainer,
   TreeViewParentItem,
@@ -48,14 +46,25 @@ const AnalyticsDriversFilterUI = (props) => {
   return (
     <AnalyticsBusinessFilterContainer>
       {usersList.loading ? (
-        [...Array(10).keys()].map(i => (
-          <BusinessFilterOption key={i}>
-            <Skeleton width={15} height={15} />
-            <BusinessName>
-              <Skeleton width={120} height={24} />
-            </BusinessName>
-          </BusinessFilterOption>
-        ))
+        <>
+          <SelectBtnWrapper>
+            {
+              [...Array(2).keys()].map(i => (
+                <Skeleton width={70} key={i} height={30} />
+              ))
+            }
+          </SelectBtnWrapper>
+          {
+            [...Array(10).keys()].map(i => (
+              <TreeViewParentItem key={i}>
+                <Skeleton width={15} height={15} />
+                <TreeViewParentLabel>
+                  <Skeleton width={120} height={24} />
+                </TreeViewParentLabel>
+              </TreeViewParentItem>
+            ))
+          }
+        </>
       ) : (
         <div>
           <SelectBtnWrapper>

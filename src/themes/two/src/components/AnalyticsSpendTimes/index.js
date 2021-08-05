@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Container,
   ChartContentWrapper,
@@ -12,6 +12,7 @@ import { Line } from 'react-chartjs-2'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
+import { Modal } from '../Modal'
 
 export const AnalyticsSpendTimes = (props) => {
   const {
@@ -21,6 +22,7 @@ export const AnalyticsSpendTimes = (props) => {
 
   const [, t] = useLanguage()
   const chartRef = useRef(null)
+  const [isShowPreview, setIsShowPreview] = useState(false)
 
   const generateLabels = () => {
     const labels = []
@@ -147,24 +149,42 @@ export const AnalyticsSpendTimes = (props) => {
     a.click()
   }
 
+  const previewChart = () => {
+    if (chartDataList?.data.length > 0) setIsShowPreview(true)
+  }
+
   return (
-    <Container>
-      <ChartHeaderContainer>
-        <p>{t('TIMES', 'Times')}</p>
-        <ActionBlock>
-          <BsArrowsAngleExpand />
-          <BsDownload className='download-view' onClick={downloadImage} />
-        </ActionBlock>
-      </ChartHeaderContainer>
-      <ChartContentWrapper>
-        {
-          chartDataList?.loading ? (
-            <Skeleton height={150} />
-          ) : (
-            chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
-          )
-        }
-      </ChartContentWrapper>
-    </Container>
+    <>
+      <Container>
+        <ChartHeaderContainer>
+          <p>{t('TIMES', 'Times')}</p>
+          <ActionBlock>
+            <BsArrowsAngleExpand onClick={previewChart} />
+            <BsDownload className='download-view' onClick={downloadImage} />
+          </ActionBlock>
+        </ChartHeaderContainer>
+        <ChartContentWrapper>
+          {
+            chartDataList?.loading ? (
+              <Skeleton height={150} />
+            ) : (
+              chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            )
+          }
+        </ChartContentWrapper>
+      </Container>
+      <Modal
+        width='70%'
+        height='80vh'
+        padding='30px'
+        title={t('TIMES', 'Times')}
+        open={isShowPreview}
+        onClose={() => setIsShowPreview(false)}
+      >
+        <ChartContentWrapper>
+          <Line data={defaultData} options={options} />
+        </ChartContentWrapper>
+      </Modal>
+    </>
   )
 }

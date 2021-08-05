@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Container,
   RegisterUserChartWrapper,
@@ -12,6 +12,7 @@ import { Line } from 'react-chartjs-2'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
+import { Modal } from '../Modal'
 
 export const AnalyticsRegisterUsers = (props) => {
   const {
@@ -20,6 +21,7 @@ export const AnalyticsRegisterUsers = (props) => {
 
   const [, t] = useLanguage()
   const chartRef = useRef(null)
+  const [isShowPreview, setIsShowPreview] = useState(false)
 
   const generateLabels = () => {
     const labels = []
@@ -93,26 +95,44 @@ export const AnalyticsRegisterUsers = (props) => {
     pointRadius: 0
   }
 
+  const previewChart = () => {
+    if (registerUsersList?.data?.length > 0) setIsShowPreview(true)
+  }
+
   return (
-    <Container>
-      <RegisterUsersHeader>
-        <p>{t('REGISTER_USERS', 'Register Users')}</p>
-        <ActionBlock>
-          <BsArrowsAngleExpand />
-          <BsDownload className='download-view' onClick={downloadImage} />
-        </ActionBlock>
-      </RegisterUsersHeader>
-      <RegisterUserChartWrapper>
-        {
-          registerUsersList?.loading ? (
-            <Skeleton height={150} />
-          ) : (
-            registerUsersList?.data?.length > 0 ? (
-              <Line data={defaultData} options={options} ref={chartRef} />
-            ) : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
-          )
-        }
-      </RegisterUserChartWrapper>
-    </Container>
+    <>
+      <Container>
+        <RegisterUsersHeader>
+          <p>{t('REGISTER_USERS', 'Register Users')}</p>
+          <ActionBlock>
+            <BsArrowsAngleExpand onClick={previewChart} />
+            <BsDownload className='download-view' onClick={downloadImage} />
+          </ActionBlock>
+        </RegisterUsersHeader>
+        <RegisterUserChartWrapper>
+          {
+            registerUsersList?.loading ? (
+              <Skeleton height={150} />
+            ) : (
+              registerUsersList?.data?.length > 0 ? (
+                <Line data={defaultData} options={options} ref={chartRef} />
+              ) : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            )
+          }
+        </RegisterUserChartWrapper>
+      </Container>
+      <Modal
+        width='70%'
+        height='80vh'
+        padding='30px'
+        title={t('REGISTER_USERS', 'Register Users')}
+        open={isShowPreview}
+        onClose={() => setIsShowPreview(false)}
+      >
+        <RegisterUserChartWrapper>
+          <Line data={defaultData} options={options} />
+        </RegisterUserChartWrapper>
+      </Modal>
+    </>
   )
 }

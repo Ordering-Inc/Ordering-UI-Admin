@@ -2,33 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const AnalyticsBusinessFilterContainer = styled.div``
 
-export const BusinessFilterOption = styled.div`
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #E9ECEF;
-  padding: 10px 0;
-  cursor: pointer;
-
-  svg {
-    font-size: 24px;
-    color: #B1BCCC;
-
-    &.fill {
-      color: ${props => props.theme.colors.primary};
-    }
-  }
-`
-
-export const BusinessName = styled.span`
-  margin-left: 10px;
-  ${props => props.theme?.rtl && css`
-    margin-right: 10px;
-    margin-left: 0;
-  `}
-  font-size: 15px;
-  color: ${props => props.theme?.colors.headingColor};
-`
-
 export const FilterBtnWrapper = styled.div`
   margin-top: 20px;
   display: flex;
@@ -106,6 +79,10 @@ export const TreeViewChildrenContainer = styled.div`
 
 export const SelectBtnWrapper = styled.div`
   display: flex;
+  span {
+    margin: 0 5px;
+    border-radius: 50px;
+  }
   button {
     margin-top: 5px;
     margin-bottom: 5px;

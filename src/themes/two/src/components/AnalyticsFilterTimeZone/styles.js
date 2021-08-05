@@ -8,15 +8,19 @@ export const TimeZoneSelectWrapper = styled.div`
   position: absolute;
   width: 300px;
   top: 100%;
-  right: 0;
+  right: -60px;
   padding: 25px;
   background: #FFFFFF;
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
-  z-index: 10;
+  z-index: 100;
   margin-top: 18px;
+
+  @media (min-width: 576px) {
+    right: 0;
+  }
 `
 export const TimeZoneSearchWrapper = styled.div`
   position: relative;

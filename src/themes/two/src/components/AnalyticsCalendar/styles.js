@@ -9,8 +9,13 @@ export const AnalyticsCalendarContainer = styled.div`
   z-index: 100;
   position: absolute;
   top: 100%;
-  right: 0;
+  right: -50px;
   width: 300px;
+  margin-top: 18px;
+
+  @media (min-width: 576px) {
+    right: 0;
+  }
 
   table {
     border-collapse: collapse;

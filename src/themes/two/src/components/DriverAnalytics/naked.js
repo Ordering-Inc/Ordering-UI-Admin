@@ -28,6 +28,12 @@ export const DriverAnalytics = (props) => {
   const [pickUpSpendList, setPickUpSpendList] = useState({ loading: false, data: [], error: null })
   const [deliverySpendList, setDeliverySpendList] = useState({ loading: false, data: [], error: null })
 
+  const paramsForAPI = (type) => {
+    const rootUrl = `${ordering.root}/reports/${type}`
+    let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
+    if (filterList?.userIds) params = `${params}&drivers=${filterList?.userIds?.toString()}`
+    return `${rootUrl}?${params}`
+  }
   /**
    * Method to get orders list
    */
@@ -42,11 +48,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/orders_drivers`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList?.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList?.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('orders_drivers')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -86,11 +88,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_sales`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_sales')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -130,11 +128,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_top_selling`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_top_selling')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -174,11 +168,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_top_categories`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_top_categories')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -218,11 +208,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_orders_status`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_orders_status')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -262,11 +248,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_top_orders`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_top_orders')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -306,11 +288,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/customer_satisfaction`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('customer_satisfaction')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -350,11 +328,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_complete_spend`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_complete_spend')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -394,11 +368,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_spend_times`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_spend_times')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -438,11 +408,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_available_times`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_available_times')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -482,11 +448,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_busy_times`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_busy_times')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -526,11 +488,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_accept_spend`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_accept_spend')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -570,11 +528,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_arrived_pickup_spend`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_arrived_pickup_spend')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -614,11 +568,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_order_location`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_order_location')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -658,11 +608,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_pickup_spend`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_pickup_spend')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -702,11 +648,7 @@ export const DriverAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/drivers_delivery_spend`
-      let params = `lapse=${filterList?.lapse}&timezone=${filterList?.timeZone}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('drivers_delivery_spend')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
