@@ -12,12 +12,12 @@ export const ListContent = styled.div`
 
 export const ProductListContainer = styled.div`
   margin: 0;
-  max-height: calc(100vh - 380px);
+  max-height: calc(100vh - 410px);
   min-height: 200px;
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 230px);
+    max-height: calc(100vh - 260px);
   }
   
   @media (min-width: 576px) {
@@ -97,4 +97,18 @@ export const AddProductBtn = styled.div`
   cursor: pointer;
   margin-bottom: 15px;
   display: inline-block;
+`
+
+export const ProductListBottom = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  ${props => props.theme?.rtl ? css`
+    margin-right: 30px;
+  ` : css`
+    margin-left: 30px;
+  `}
 `
