@@ -13,7 +13,12 @@ export const TypeContainer = styled.div`
 export const InnerContainer = styled.div`
   display: flex;
   button {
-    margin: 5px;
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 12px;
+    ` : css`
+      margin-right: 12px;
+    `}
     white-space: nowrap;
 
     svg {
@@ -27,8 +32,9 @@ export const InnerContainer = styled.div`
     }
   }
 
-  span {
-    border-radius: 20px;
-    margin: 0 5px;
-  }
+  ${({ isSkeleton }) => isSkeleton && css`
+    span {
+      border-radius: 20px;
+    }
+  `}
 `

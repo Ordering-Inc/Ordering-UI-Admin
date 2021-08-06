@@ -11,24 +11,59 @@ export const LateralBarContainer = styled.div`
   overflow-x: hidden;
   transition: 0.3s;
   height: 100vh;
-  box-shadow: -4px 0px 7px #ccc;
+  box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
 
   ${props => props.theme?.rtl ? css`
     left: 0;
   ` : css`
     right: 0;
   `}
+
+  table.orders_table {
+    thead {
+      display: none;
+    }
+    border-collapse: separate;
+    border-spacing: 0 18px;
+    td {
+      border-top: 1px solid ${props => props.theme.colors.borderColor};
+      border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+      &:first-child {
+        padding: 15px;
+        ${props => props.theme?.rtl ? css`
+          border-radius: 0 8px 8px 0;
+        ` : css`
+          border-radius: 8px 0 0 8px;
+        `}
+        ${props => props.theme?.rtl ? css`
+          border-right: 1px solid ${props => props.theme.colors.borderColor};
+        ` : css`
+          border-left: 1px solid ${props => props.theme.colors.borderColor};
+        `}
+      }
+      &:last-child {
+        ${props => props.theme?.rtl ? css`
+          border-radius: 8px 0 0 8px;
+        ` : css`
+          border-radius: 0 8px 8px 0;
+        `}
+        ${props => props.theme?.rtl ? css`
+          border-left: 1px solid ${props => props.theme.colors.borderColor};
+        ` : css`
+          border-right: 1px solid ${props => props.theme.colors.borderColor};
+        `}
+      }
+    }
+  }
 `
 
-export const DriverOrdersContainer = styled.div`
+export const OrdersContainer = styled.div`
   max-width: 460px;
 `
 
-export const CloseButton = styled.div`
+export const CloseButtonWrapper = styled.div`
   position: absolute;
-  top: 10px;
-  background: #E9ECEF;
-  padding: 5px;
+  top: 20px;
   cursor: pointer;
 
   ${props => props.theme?.rtl ? css`
@@ -36,13 +71,9 @@ export const CloseButton = styled.div`
   ` : css`
     right: 10px;
   `}
-
-  svg {
-    font-size: 24px;
-  }
 `
 
-export const DriverInfo = styled.div`
+export const Info = styled.div`
   display: flex;
   align-items: center;
 `
@@ -87,7 +118,7 @@ export const Image = (props) => {
   )
 }
 
-export const DriverName = styled.div`
+export const Name = styled.div`
   ${props => props.theme?.rtl ? css`
     margin-right: 15px;
   ` : css`
@@ -104,4 +135,3 @@ export const DriverName = styled.div`
     }
   }
 `
- 

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Option = styled.div`
   display: flex;
   align-items: center;
-  padding: 3px 0;
+  padding: 5px 10px;
   column-gap: 5px;  
 
   ${({ noPadding }) => noPadding && css`

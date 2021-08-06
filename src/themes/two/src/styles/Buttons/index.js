@@ -1,5 +1,54 @@
 import styled, { css } from 'styled-components'
-import { darken, lighten } from 'polished'
+import { darken } from 'polished'
+
+export const IconButton = styled.button`
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease-in;
+
+  > svg {
+    width: 20px;
+    height: 20px;
+    color: #B1BCCC;
+  }
+
+  &:hover {
+    background-color: #1507260a;
+
+    > svg {
+      color:  #151b26;
+    }
+  }
+
+  &:active {
+    background-color: #1507261a;
+  }
+
+  ${({ color }) => color === 'black' && css`
+    > svg {
+      color: #344050;
+    }
+  `}
+
+  ${({ color }) => color === 'primary' && css`
+    > svg {
+      color: ${props => props.theme.colors.primary};
+    }
+    &:hover {
+      background-color: #1507260a;
+      > svg {
+        color: ${props => props.theme.colors.primary};
+      }
+    }
+  `}
+
+`
 
 export const Button = styled.button`
   background: #CCC;
@@ -9,11 +58,13 @@ export const Button = styled.button`
   line-height: 30px;
   padding-left: 15px;
   padding-right: 15px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   outline: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all .2s ease-in;
+
   &:active {
     background: ${() => darken(0.07, '#CCC')};
   }
@@ -26,7 +77,7 @@ export const Button = styled.button`
   `}
 
   ${({ bgtransparent }) => bgtransparent && css`
-      background: transparent !important;
+    background: transparent !important;
   `}
   ${({ initialIcon }) => initialIcon && css`
     text-align: left;
@@ -91,8 +142,11 @@ export const Button = styled.button`
     background: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
     border-color: ${props => props.theme.colors.primary};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.primary)};
+    }
     &:active {
-      background: ${props => darken(0.07, props.theme.colors.primary)};
+      background: ${props => darken(0.1, props.theme.colors.primary)};
     }
     ${({ outline }) => outline && css`
       background: #FFF;
@@ -140,19 +194,36 @@ export const Button = styled.button`
   `}
 
   ${({ color }) => color === 'lightPrimary' && css`
-    background: ${props => lighten(0.4, props.theme.colors.primary)};
+    background: ${props => props.theme.colors.lightPrimary};
     color: ${props => props.theme.colors.primary};
-    border-color: ${props => lighten(0.4, props.theme.colors.primary)};
+    border-color: ${props => props.theme.colors.lightPrimary};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.lightPrimary)};
+    }
     &:active {
-      background: ${props => lighten(0.2, props.theme.colors.primary)};
+      background: ${props => darken(0.1, props.theme.colors.lightPrimary)};
+    }
+  `}
+  ${({ color }) => color === 'secundaryDark' && css`
+    background: ${props => props.theme.colors.secundaryDarkContrast};
+    color: ${props => props.theme.colors.secundaryDark};
+    border-color: ${props => props.theme.colors.secundaryDarkContrast};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundaryDarkContrast)};
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundaryDarkContrast)};
     }
   `}
   ${({ color }) => color === 'secundary' && css`
     background: ${props => props.theme.colors.secundary};
     color: ${props => props.theme.colors.secundaryContrast};
     border-color: ${props => props.theme.colors.secundary};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)};
+    }
     &:active {
-      background: ${props => darken(0.07, props.theme.colors.secundary)};
+      background: ${props => darken(0.1, props.theme.colors.secundary)};
     }
     ${({ outline }) => outline && css`
       background: #FFF;

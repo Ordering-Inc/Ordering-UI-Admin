@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, BusinessMenuOptions as BusinessMenuOptionsController } from 'ordering-components-admin'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { XLg } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessMenuShare } from '../BusinessMenuShare'
 import { BusinessMenuBasicOptions } from '../BusinessMenuBasicOptions'
 import { AutoScroll } from '../AutoScroll'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   Container,
@@ -62,14 +63,18 @@ const BusinessMenuOptionsUI = (props) => {
           <BusinessMenuShare
             open={openShareMenu}
             menu={menu}
+            businessId={business?.id}
             business={business}
             onClick={() => setOpenShareMenu(true)}
             onClose={() => setOpenShareMenu(false)}
             handleUpdateBusinessState={handleUpdateBusinessState}
           />
-          <MdcClose
+          <IconButton
+            color='black'
             onClick={() => onClose()}
-          />
+          >
+            <XLg />
+          </IconButton>
         </ActionBlock>
       </Header>
       <TabContainer>

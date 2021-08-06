@@ -30,7 +30,8 @@ const BusinessessListingUI = (props) => {
     handleSucessAddBusiness,
     handleSucessUpdateBusiness,
     onSearch,
-    onBusinessRedirect
+    onBusinessRedirect,
+    getPageBusinesses
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -44,6 +45,8 @@ const BusinessessListingUI = (props) => {
 
   const handleBackRedirect = () => {
     setOpenBusinessDetails(false)
+    setDetailsBusiness(null)
+    setDetailsBusinessId(null)
     onBusinessRedirect()
   }
 
@@ -117,11 +120,14 @@ const BusinessessListingUI = (props) => {
           viewMethod={viewMethod}
           businessList={businessList}
           pagination={pagination}
+          detailsBusinessId={detailsBusinessId}
           loadMoreBusinesses={loadMoreBusinesses}
+          getPageBusinesses={getPageBusinesses}
           handleSucessRemoveBusiness={handleSucessRemoveBusiness}
           handleSucessAddBusiness={handleSucessAddBusiness}
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleOpenBusinessDetails={handleOpenBusinessDetails}
+          handleOpenAddBusiness={handleOpenAddBusiness}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (

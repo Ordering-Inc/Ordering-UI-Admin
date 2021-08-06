@@ -58,18 +58,11 @@ export const WrapperProductImage = styled.div`
   width: 55px;
   border-radius: 7.6px;
 
-  @media (min-width: 361px) {
-    max-width: 65px;
-    max-height: 65px;
-    height: 65px;
-    width: 65px;
-  }
-
-  @media (min-width: 411px) {
-    max-width: 70px;
-    max-height: 70px;
-    height: 70px;
-    width: 70px;
+  @media (min-width: 768px) {
+    max-width: 62px;
+    max-height: 62px;
+    height: 62px;
+    width: 62px;
   }
 `
 
@@ -117,8 +110,8 @@ export const ContentInfo = styled.div`
   h3 {
     font-size: 14px;
     margin: 0px;
-    font-weight: 600;
-    color: #263238;
+    font-weight: 400;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   span {
@@ -292,6 +285,7 @@ export const ProductPrice = styled.div`
   p,
   span {
     font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   span {
@@ -304,13 +298,6 @@ export const ProductPrice = styled.div`
 
   svg {
     cursor: pointer;
-  }
-
-  @media (min-width: 512px) {
-    span,
-    p {
-      font-size: 15px;
-    }
   }
 `
 
@@ -351,10 +338,13 @@ export const ProductOptionsList = styled.ul`
   p {
     font-weight: 400;
     margin: 0px;
+    color: ${props => props.theme.colors.lightGray};
+    font-size: 12px;
   }
 
   li span {
-    font-weight: 300;
+    color: ${props => props.theme.colors.lightGray};
+    font-size: 12px;
   }
 
   li.ingredient {

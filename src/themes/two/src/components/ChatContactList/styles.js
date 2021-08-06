@@ -1,0 +1,142 @@
+import React from 'react'
+import styled, { css } from 'styled-components'
+
+export const Container = styled.div`
+  padding: 0px 12px 15px 12px;
+  height: calc(100% - 140px);
+`
+
+export const CustomersListConatainer = styled.div`
+  max-height: calc(100% - 50px);
+  overflow: auto;
+`
+
+export const Card = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
+`
+
+export const WrapperImage = styled.div`
+  max-width: 45px;
+  max-height: 45px;
+  height: 45px;
+  width: 45px;
+  ${({ isSkeleton }) => !isSkeleton && css`
+    border: 1px solid ${props => props.theme.colors.borderColor};
+  `}
+  border-radius: 8px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 50%;
+  }
+`
+
+const ImageStyled = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 10px;
+`
+export const Image = (props) => {
+  return (
+    <ImageStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </ImageStyled>
+  )
+}
+
+export const InfoContainer = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-right: 15px;
+  ` : css`
+    margin-left: 15px;
+  `}
+  > div:first-child {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin: 0 5px;
+    }
+    
+    p {
+      font-size: 14px;
+      color: ${props => props.theme.colors?.headingColor};
+      font-weight: 600;
+      margin: 0px;
+    }
+  }
+`
+
+export const AssignedOrdersCount = styled.span`
+  font-size: 14px;
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    opacity: 0.5;
+  `}
+`
+
+export const WrapperPagination = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+`
+
+export const PageButton = styled.button`
+  outline: none;
+  border: 1px solid #00000029;
+  border-radius: 100%;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 5px;
+
+  &:active {
+    background: #1c202e;
+    color: #fff;
+  }
+  &:disabled {
+    cursor: no-drop;
+    pointer-events: none;
+  }
+`
+
+export const WrapperPageState = styled.div`
+  display: flex;
+  min-width: 140px;
+`

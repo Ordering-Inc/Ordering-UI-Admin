@@ -27,9 +27,9 @@ export const InnerContainer = styled.div`
       font-size: 20px;
 
       ${props => props.theme?.rtl ? css`
-        margin-right: 10px;
+        margin-right: 5px;
       ` : css`
-        margin-left: 10px;
+        margin-left: 5px;
       `}
     }
   }

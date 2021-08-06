@@ -50,6 +50,8 @@ const OrdersManagerUI = (props) => {
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
+    setDetailsOrder(null)
+    setOrderDetailId(null)
     if (!isSelectedOrders) {
       onOrderRedirect()
     } else {
@@ -130,6 +132,7 @@ const OrdersManagerUI = (props) => {
                 isSelectedOrders={isSelectedOrders}
                 driverId={props.driverId}
                 customerId={props.customerId}
+                businessId={props.businessId}
                 searchValue={searchValue}
                 filterValues={filterValues}
                 selectedOrderIds={selectedOrderIds}
@@ -138,6 +141,7 @@ const OrdersManagerUI = (props) => {
                 ordersStatusGroup={ordersStatusGroup}
                 selectedSubOrderStatus={selectedSubOrderStatus}
                 handleSelectedOrderIds={handleSelectedOrderIds}
+                orderDetailId={orderDetailId}
                 handleOpenOrderDetail={handleOpenOrderDetail}
               />
             </WrapItemView>

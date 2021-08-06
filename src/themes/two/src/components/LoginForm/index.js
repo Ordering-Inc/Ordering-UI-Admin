@@ -154,6 +154,7 @@ const LoginFormUI = (props) => {
                 })}
                 onChange={(e) => hanldeChangeProject(e)}
                 autoComplete='off'
+                autoCapitalize='off'
               />
               <MdExitToApp />
             </InputWithIcon>
@@ -180,6 +181,7 @@ const LoginFormUI = (props) => {
                   })}
                   onChange={(e) => handleChangeInput(e)}
                   autoComplete='off'
+                  autoCapitalize='off'
                 />
                 <HiOutlineMail />
               </InputWithIcon>
@@ -224,6 +226,7 @@ const LoginFormUI = (props) => {
                 })}
                 onChange={(e) => handleChangeInput(e)}
                 autoComplete='off'
+                autoCapitalize='off'
               />
               <RiLockPasswordLine />
             </InputWithIcon>

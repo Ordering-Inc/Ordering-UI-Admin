@@ -9,7 +9,11 @@ export const Option = styled.div`
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
   ` : css`
-    padding: 10px 15px;
+    padding: 10px;
+  `}
+
+  ${({ noPadding }) => noPadding && css`
+    padding: 0px;
   `}
 
   svg {
@@ -22,9 +26,11 @@ export const Option = styled.div`
 `
 
 export const PlaceholderTitle = styled(Option)`
+  color: ${props => props.theme.colors.headingColor};
+
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
     ` : css`
-    padding: 10px 15px;
+    padding: 10px;
   `}
 `

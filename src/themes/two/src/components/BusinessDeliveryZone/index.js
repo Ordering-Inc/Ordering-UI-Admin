@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, BusinessDeliveryZone as BusinessDeliveryZoneController } from 'ordering-components-admin'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import { Switch } from '../../styles/Switch'
@@ -11,6 +10,8 @@ import { Alert } from '../Confirm'
 import { useForm } from 'react-hook-form'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { Button } from '../../styles/Buttons'
+
 import {
   MainContainer,
   ZoneContainer,
@@ -61,13 +62,7 @@ const BusinessDeliveryZoneUI = (props) => {
 
   const formMethods = useForm()
 
-  const ActionIcon = <FiMoreVertical />
-
   const handleOpenSetting = (zone) => {
-    if (Object.keys(formState.changes).length === 0) {
-      setIsAddMode(false)
-      return
-    }
     if (formState.changes?.name === '' || formState.changes?.minimum === '' || formState.changes?.price === '') {
       setErrors({
         name: formState.changes?.name === '',
@@ -133,7 +128,7 @@ const BusinessDeliveryZoneUI = (props) => {
         })
       }
     }
-  }, [errors, isAddValid])
+  }, [errors, isAddValid, isAddMode])
 
   return (
     <>
@@ -141,9 +136,13 @@ const BusinessDeliveryZoneUI = (props) => {
         <ZoneContainer>
           <Header>
             <h1>{t('DELIVERY_ZONE', 'Delivery zones')}</h1>
-            <BsPlusSquare
+            <Button
+              borderRadius='8px'
+              color='lightPrimary'
               onClick={() => setIsAddMode(true)}
-            />
+            >
+              {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
+            </Button>
           </Header>
           <DeliveryZonesContainer>
             <DeliveryZoneWrapper>
@@ -153,73 +152,77 @@ const BusinessDeliveryZoneUI = (props) => {
               <ZoneActions>{t('ACTIONS', 'Actions')}</ZoneActions>
             </DeliveryZoneWrapper>
             {businessDeliveryZonesState?.zones?.map(zone => (
-              <DeliveryZoneWrapper key={zone.id}>
-                <ZoneName>
-                  <input
-                    name='name'
-                    defaultValue={zone?.name ?? ''}
-                    onChange={(e) => handleChangeInput(e, zone.id)}
-                    disabled={isEdit}
-                  />
-                </ZoneName>
-                <ZoneMin>
-                  <input
-                    name='minimum'
-                    type='number'
-                    defaultValue={
-                      formState.result?.result?.minimum
-                        ? formState.result?.result?.minimum
-                        : formState?.changes?.minimum
-                          ? parseNumber(formState.changes?.minimum, { separator: '.' })
-                          : parseNumber(zone?.minimum, { separator: '.' }) ?? ''
-                    }
-                    onChange={(e) => handleChangeInput(e, zone.id)}
-                    disabled={isEdit}
-                  />
-                </ZoneMin>
-                <ZonePrice>
-                  <input
-                    name='price'
-                    type='number'
-                    defaultValue={
-                      formState.result?.result?.price
-                        ? formState.result?.result?.price
-                        : formState.changes?.price
-                          ? parseNumber(formState.changes?.price, { separator: '.' })
-                          : parseNumber(zone?.price, { separator: '.' }) ?? ''
-                    }
-                    onChange={(e) => handleChangeInput(e, zone.id)}
-                    disabled={isEdit}
-                  />
-                </ZonePrice>
-                <ZoneActions>
-                  <EnableWrapper className='business_enable_control'>
-                    <span>{t('ENABLE', 'Enable')}</span>
-                    <Switch
-                      defaultChecked={zone?.enabled}
-                      onChange={() => handleChangeActiveState(zone.id)}
-                    />
-                  </EnableWrapper>
-                  <DropDownWrapper>
-                    <DropdownButton
-                      menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={ActionIcon}
-                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                    >
-                      <Dropdown.Item
-                        onClick={() => handleOpenSetting(zone)}
-                      >
-                        {t('EDIT', 'Edit')}
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => handleDeleteBusinessDeliveryZone(zone.id)}
-                      >
-                        {t('DELETE', 'Delete')}
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </DropDownWrapper>
-                </ZoneActions>
-              </DeliveryZoneWrapper>
+              <React.Fragment key={zone.id}>
+                {zone?.type !== 3 && (
+                  <DeliveryZoneWrapper>
+                    <ZoneName>
+                      <input
+                        name='name'
+                        defaultValue={zone?.name ?? ''}
+                        onChange={(e) => handleChangeInput(e, zone.id)}
+                        disabled={isEdit}
+                      />
+                    </ZoneName>
+                    <ZoneMin>
+                      <input
+                        name='minimum'
+                        type='number'
+                        defaultValue={
+                          formState.result?.result?.minimum
+                            ? formState.result?.result?.minimum
+                            : formState?.changes?.minimum
+                              ? parseNumber(formState.changes?.minimum, { separator: '.' })
+                              : parseNumber(zone?.minimum, { separator: '.' }) ?? ''
+                        }
+                        onChange={(e) => handleChangeInput(e, zone.id)}
+                        disabled={isEdit}
+                      />
+                    </ZoneMin>
+                    <ZonePrice>
+                      <input
+                        name='price'
+                        type='number'
+                        defaultValue={
+                          formState.result?.result?.price
+                            ? formState.result?.result?.price
+                            : formState.changes?.price
+                              ? parseNumber(formState.changes?.price, { separator: '.' })
+                              : parseNumber(zone?.price, { separator: '.' }) ?? ''
+                        }
+                        onChange={(e) => handleChangeInput(e, zone.id)}
+                        disabled={isEdit}
+                      />
+                    </ZonePrice>
+                    <ZoneActions>
+                      <EnableWrapper className='business_enable_control'>
+                        <span>{t('ENABLE', 'Enable')}</span>
+                        <Switch
+                          defaultChecked={zone?.enabled}
+                          onChange={() => handleChangeActiveState(zone.id)}
+                        />
+                      </EnableWrapper>
+                      <DropDownWrapper disabled={isEdit || isAddValid}>
+                        <DropdownButton
+                          menuAlign={theme?.rtl ? 'left' : 'right'}
+                          title={<FiMoreVertical />}
+                          id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                        >
+                          <Dropdown.Item
+                            onClick={() => handleOpenSetting(zone)}
+                          >
+                            {t('EDIT', 'Edit')}
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            onClick={() => handleDeleteBusinessDeliveryZone(zone.id)}
+                          >
+                            {t('DELETE', 'Delete')}
+                          </Dropdown.Item>
+                        </DropdownButton>
+                      </DropDownWrapper>
+                    </ZoneActions>
+                  </DeliveryZoneWrapper>
+                )}
+              </React.Fragment>
             ))}
           </DeliveryZonesContainer>
 
@@ -257,7 +260,9 @@ const BusinessDeliveryZoneUI = (props) => {
                   })}
                 />
               </ZonePrice>
-              <ZoneActions>
+              <ZoneActions
+                disabled={isEdit || isAddValid}
+              >
                 <AddButton
                   type='submit'
                   onClick={() => handleOpenSetting({})}
@@ -283,6 +288,7 @@ const BusinessDeliveryZoneUI = (props) => {
                 zone={curZone}
                 business={business}
                 handleZoneType={handleZoneType}
+                loading={formState.loading}
                 handleChangeZoneData={handleChangeZoneData}
                 handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
                 handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
@@ -300,6 +306,7 @@ const BusinessDeliveryZoneUI = (props) => {
                   zone={curZone}
                   business={business}
                   handleZoneType={handleZoneType}
+                  loading={formState.loading}
                   handleChangeZoneData={handleChangeZoneData}
                   handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
                   handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}

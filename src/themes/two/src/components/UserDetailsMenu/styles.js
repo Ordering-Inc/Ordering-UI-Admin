@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components'
 export const UserDetailsMenuContainer = styled.div`
   display: flex;
   width: 100%;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   overflow-x: auto;
+  margin-top: 15px;
   @media (min-width: 992px) {
     overflow-x: hidden;
   }
@@ -15,17 +16,22 @@ export const InnerContainer = styled.div`
 `
 
 export const Tab = styled.div`
-  padding: 10px 15px;
+  padding: 10px 0px;
   cursor: pointer;
-  color: ${props => props.theme.colors?.headingColor};
+  color: ${props => props.theme.colors?.lightGray};
   white-space: nowrap;
+  font-size: 12px;
 
-  ${({ active }) => active && css`
-    border-bottom: 3px solid;
-    font-weight: 500;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 30px;
+  ` : css`
+    margin-right: 30px;
   `}
 
-  ${({ active }) => !active && css`
-    color: #909BA9;
+  ${({ active }) => active && css`
+    color: ${props => props.theme.colors.headingColor};
+    border-bottom: 2px solid ${props => props.theme.colors.headingColor};
+    font-weight: 500;
+    font-size: 14px;
   `}
 `

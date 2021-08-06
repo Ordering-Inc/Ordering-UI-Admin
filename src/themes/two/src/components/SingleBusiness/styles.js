@@ -1,9 +1,19 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const SingleListBusinessContainer = styled.tbody`
-  border-bottom: 1px solid #E9ECEF;
+export const SingleBusinessContainer = styled.tbody`
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.primary};
+      border-bottom: 1px solid ${props => props.theme.colors.primary};
+    }
+  `}
 `
 
 export const WrapperImage = styled.div`
@@ -13,6 +23,7 @@ export const WrapperImage = styled.div`
   width: 45px;
   ${({ isSkeleton }) => !isSkeleton && css`
     border: 1px solid #E3E3E3;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   `}
   border-radius: 10px;
 
@@ -55,11 +66,13 @@ export const InfoBlock = styled.div`
   p {
     margin: 5px 0 0 0;
     font-size: 12px;
+    color: ${props => props.theme.colors.lightGray};
   }
   p.bold {
     margin: 0px;
     font-size: 14px;
     font-weight: 600;
+    color: ${props => props.theme.colors.headingColor};
   }
 `
 
@@ -70,6 +83,7 @@ export const BusinessEnableWrapper = styled.div`
 
   span {
     font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
 
     ${props => props.theme?.rtl ? css`
       padding-left: 10px;
@@ -115,6 +129,8 @@ const BusinessHeaderStyled = styled.div`
   object-fit: cover;
   background-position: center;
   height: 75px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
   ${({ isSkeleton }) => isSkeleton && css`
     background: #E9ECEF;
   `}
@@ -171,7 +187,6 @@ export const BusinessLogo = (props) => {
 
 export const BusinessContent = styled.div`
   padding: 40px 10px 10px 10px;
-  color: ${props => props.theme.colors.headingColor};
   h1, p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -180,6 +195,7 @@ export const BusinessContent = styled.div`
   h1 {
     font-size: 14px;
     margin-bottom: 5px;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   p {
@@ -190,19 +206,26 @@ export const BusinessContent = styled.div`
 `
 
 export const BusinessActionContainer = styled.div`
+  border-top: 1px solid ${props => props.theme.colors.secundary};
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+  padding-top: 10px;
 `
 
 export const WrapperBusinessActionSelector = styled.div`
   display: flex;
   justify-content: flex-end;
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
@@ -212,12 +235,26 @@ export const WrapperBusinessActionSelector = styled.div`
     }
   }
 
+  .show {
+    button {
+      background: ${props => props.theme.colors.secundary} !important;
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
   > div {
     > div {
-      border: 1px solid #E9ECEF;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
       border-radius: 8px;
-      a:last-child {
+      .dropdown-item {
+        font-size: 14px;
+        color: ${props => props.theme.colors.headingColor};
+      }
+      .dropdown-item:last-child {
         color: #E63757;
       }
     }

@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
-import BsLifePreserver from '@meronex/icons/bs/BsLifePreserver'
 import { Switch } from '../../styles/Switch'
-import { Button } from '../../styles/Buttons'
+import { Button, IconButton } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
 import { BusinessFormDetails } from '../BusinessFormDetails'
+import { XLg, LifePreserver } from 'react-bootstrap-icons'
 
 import {
   BusinessDetailsContainer,
@@ -16,8 +15,6 @@ import {
   BusinessName,
   LeftHeader,
   RightHeader,
-  SupportButton,
-  CloseButton,
   BusinessHeader,
   BusinessLogo,
   BusinessDetailsContent,
@@ -100,16 +97,17 @@ export const BusinessSummary = (props) => {
             )}
           </LeftHeader>
           <RightHeader>
-            <SupportButton
+            <IconButton
               onClick={() => handleSelectedItem('support')}
             >
-              <BsLifePreserver />
-            </SupportButton>
-            <CloseButton
+              <LifePreserver />
+            </IconButton>
+            <IconButton
+              color='black'
               onClick={() => actionSidebar(false)}
             >
-              <MdcClose />
-            </CloseButton>
+              <XLg />
+            </IconButton>
           </RightHeader>
         </DetailsHeader>
         {!isEdit ? (
@@ -129,7 +127,7 @@ export const BusinessSummary = (props) => {
             <BusinessDetailsContent>
               <Button
                 color='lightPrimary'
-                borderRadius='5px'
+                borderRadius='8px'
                 onClick={handleOpenCategory}
                 disabled={businessState?.loading}
               >
@@ -155,8 +153,8 @@ export const BusinessSummary = (props) => {
                 ))}
               </BusinessConfigsContainer>
               <Button
-                color='secundary'
-                borderRadius='5px'
+                color='secundaryDark'
+                borderRadius='8px'
                 disabled={businessState.loading}
                 onClick={() => setIsEdit(true)}
               >

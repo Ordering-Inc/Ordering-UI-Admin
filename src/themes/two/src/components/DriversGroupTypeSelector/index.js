@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { MultiSelect } from '../../styles/MultiSelect'
-import { useTheme } from 'styled-components'
 
 import { PlaceholderTitle, Option } from './styles'
 
@@ -13,12 +12,10 @@ export const DriversGroupTypeSelector = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
 
   const placeholder = (
     <PlaceholderTitle>
-      <img src={theme?.images?.icons?.group} alt='group' />
-      {t('GROUP', 'Group')}
+      {t('DRIVER_GROUP', 'Driver group')}
     </PlaceholderTitle>
   )
   const [groupTypes, setGroupTypes] = useState([])

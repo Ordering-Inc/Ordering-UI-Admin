@@ -14,19 +14,21 @@ export const ZoneContainer = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
   h1 {
     font-size: 24px;
     color: ${props => props.theme.colors.headingColor};
+    margin: 0px;
   }
 
-  svg {
-    cursor: pointer;
-    color: ${props => props.theme.colors.primary};
-    font-size: 24px;
+  button {
+    height: 42px;
     ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
+      margin-left: 40px;
     ` : css`
-      margin-left: 10px;
+      margin-right: 40px;
     `}
   }
 `
@@ -134,6 +136,9 @@ export const ZonePrice = styled.div`
   `}
 `
 export const ZoneActions = styled.div`
+  ${({ disabled }) => disabled && css`
+     pointer-events: none;
+  `}
   width: 140px;
   display: flex;
   align-items: center;
@@ -157,6 +162,9 @@ export const EnableWrapper = styled.div`
 `
 
 export const DropDownWrapper = styled.div`
+  ${({ disabled }) => disabled && css`
+     pointer-events: none;
+  `}
   button {
     background: #F8F9FA !important;
     border: none;

@@ -8,6 +8,7 @@ import {
   ExamineClick,
   SingleBusinessProduct as SingleBusinessProductController
 } from 'ordering-components-admin'
+
 import { bytesConverter } from '../../../../../utils'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
@@ -24,7 +25,9 @@ import {
   BusinessEnableWrapper,
   ActionSelectorWrapper,
   ProductTypeImage,
-  UploadWrapper
+  UploadWrapper,
+  DragableContainer,
+  DragImageWrapper
 } from './styles'
 
 const SingleBusinessProductUI = (props) => {
@@ -40,14 +43,17 @@ const SingleBusinessProductUI = (props) => {
     productFormState,
     handleChangeInput,
     handlechangeImage,
-    isEditMode
+    isEditMode,
+    productDetailsId,
+    businessState,
+    handleUpdateBusinessState
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const conatinerRef = useRef(null)
+  const containerRef = useRef(null)
   const ProductTypeImgRef = useRef(null)
   const ActionIcon = <FiMoreVertical />
 
@@ -85,7 +91,7 @@ const SingleBusinessProductUI = (props) => {
   }
 
   const closeProductEdit = (e) => {
-    const outsideDropdown = !conatinerRef.current?.contains(e.target)
+    const outsideDropdown = !containerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
         if (isEditMode && Object.keys(productFormState?.changes).length > 0 && !productFormState?.loading) {
@@ -93,6 +99,14 @@ const SingleBusinessProductUI = (props) => {
         }
       }
     }
+  }
+
+  const handleProductClick = (e) => {
+    const isInvalid = e.target.closest('.product_info') ||
+    e.target.closest('.product_price') || e.target.closest('.product_description') ||
+    e.target.closest('.product_enable_control') || e.target.closest('.product_actions')
+    if (isInvalid) return
+    handleOpenProductDetails(product)
   }
 
   useEffect(() => {
@@ -126,6 +140,54 @@ const SingleBusinessProductUI = (props) => {
       toast.dark(content, toastConfigure)
     }
   }, [productFormState?.loading])
+
+  const handleDrag = (event, productId) => {
+    event.dataTransfer.setData('transferProductId', productId)
+
+    const ghostEle = document.createElement('div')
+    ghostEle.classList.add('ghostDragging')
+    ghostEle.innerHTML = productFormState?.changes?.name
+    document.body.appendChild(ghostEle)
+    event.dataTransfer.setDragImage(ghostEle, 0, 0)
+  }
+
+  const handleAllowDrop = (event) => {
+    event.preventDefault()
+  }
+
+  const handleDrop = (event) => {
+    event.preventDefault()
+    const transferProductId = parseInt(event.dataTransfer.getData('transferProductId'))
+    const _categories = businessState?.business?.categories.map(item => {
+      if (item.id === product?.category_id) {
+        const transferProduct = item.products.find(_product => _product.id === transferProductId)
+        const updatedProducts = []
+        let counter
+        for (let i = 0; i < item.products.length; i++) {
+          if (item.products[i].id === product?.id) {
+            counter = i
+          }
+          if (item.products[i].id !== transferProductId) {
+            updatedProducts.push(item.products[i])
+          }
+        }
+        updatedProducts.splice(counter, 0, transferProduct)
+        return {
+          ...item,
+          products: updatedProducts
+        }
+      }
+      return item
+    })
+    handleUpdateBusinessState({ ...businessState?.business, categories: _categories })
+  }
+
+  const handleDragEnd = () => {
+    const elements = document.getElementsByClassName('ghostDragging')
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0])
+    }
+  }
 
   return (
     <>
@@ -167,52 +229,70 @@ const SingleBusinessProductUI = (props) => {
               </tr>
             </SingleListBusinessContainer>
           ) : (
-            <SingleListBusinessContainer ref={conatinerRef}>
+            <SingleListBusinessContainer
+              ref={containerRef}
+              active={product.id === productDetailsId}
+              onClick={(e) => handleProductClick(e)}
+              onDragOver={e => handleAllowDrop(e)}
+              onDrop={e => handleDrop(e)}
+              onDragEnd={e => handleDragEnd(e)}
+            >
               <tr>
                 {allowColumns?.business && (
                   <td className='business'>
-                    <BusinessGeneralInfo>
-                      <ProductTypeImage
-                        onClick={() => handleClickImage()}
-                        disabled={productFormState?.loading}
-                      >
-                        <ExamineClick
-                          onFiles={files => handleFiles(files)}
-                          childRef={(e) => { ProductTypeImgRef.current = e }}
-                          accept='image/png, image/jpeg, image/jpg'
+                    <DragableContainer className='product_info'>
+                      <DragImageWrapper>
+                        <img
+                          src={theme.images.icons?.sixDots}
+                          alt='six dots'
+                          draggable
+                          onDragStart={e => handleDrag(e, product.id)}
+                        />
+                      </DragImageWrapper>
+                      <BusinessGeneralInfo>
+                        <ProductTypeImage
+                          onClick={() => handleClickImage()}
                           disabled={productFormState?.loading}
                         >
-                          <DragAndDrop
-                            onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                          <ExamineClick
+                            onFiles={files => handleFiles(files)}
+                            childRef={(e) => { ProductTypeImgRef.current = e }}
                             accept='image/png, image/jpeg, image/jpg'
                             disabled={productFormState?.loading}
                           >
-                            {
-                              productFormState?.changes?.images
-                                ? (
-                                  <img src={productFormState?.changes?.images} alt='business type image' loading='lazy' />
-                                )
-                                : (
-                                  <UploadWrapper>
-                                    <BiImage />
-                                  </UploadWrapper>
-                                )
-                            }
-                          </DragAndDrop>
-                        </ExamineClick>
-                      </ProductTypeImage>
-                      {
-                        product?.name && (
-                          <input
-                            type='text'
-                            name='name'
-                            value={productFormState?.changes?.name || ''}
-                            onChange={handleChangeInput}
-                            autoComplete='off'
-                          />
-                        )
-                      }
-                    </BusinessGeneralInfo>
+                            <DragAndDrop
+                              onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                              accept='image/png, image/jpeg, image/jpg'
+                              disabled={productFormState?.loading}
+                            >
+                              {
+                                productFormState?.changes?.images
+                                  ? (
+                                    <img src={productFormState?.changes?.images} alt='business type image' loading='lazy' />
+                                  )
+                                  : (
+                                    <UploadWrapper>
+                                      <BiImage />
+                                    </UploadWrapper>
+                                  )
+                              }
+                            </DragAndDrop>
+                          </ExamineClick>
+                        </ProductTypeImage>
+                        {
+                          product?.name && (
+                            <input
+                              type='text'
+                              name='name'
+                              value={productFormState?.changes?.name || ''}
+                              onChange={handleChangeInput}
+                              autoComplete='off'
+                            />
+                          )
+                        }
+                      </BusinessGeneralInfo>
+
+                    </DragableContainer>
                   </td>
                 )}
                 {allowColumns?.price && (
@@ -222,6 +302,7 @@ const SingleBusinessProductUI = (props) => {
                         <input
                           type='text'
                           name='price'
+                          className='product_price'
                           value={productFormState?.changes?.price || ''}
                           onChange={handleChangeInput}
                           autoComplete='off'
@@ -239,14 +320,14 @@ const SingleBusinessProductUI = (props) => {
                           value={productFormState?.changes?.description || ''}
                           onChange={handleChangeInput}
                           autoComplete='off'
-                          className='description'
+                          className='product_description'
                         />
                       </InfoBlock>
                     }
                   </td>
                 )}
                 <td>
-                  <BusinessEnableWrapper className='business_enable_control'>
+                  <BusinessEnableWrapper className='product_enable_control'>
                     {
                       product?.enabled
                         ? <span>{t('ENABLE', 'Enable')}</span>
@@ -261,9 +342,9 @@ const SingleBusinessProductUI = (props) => {
                 <td className='actions'>
                   <ActionSelectorWrapper>
                     <DropdownButton
+                      className='product_actions'
                       menuAlign={theme?.rtl ? 'left' : 'right'}
                       title={ActionIcon}
-                      className='action-btn'
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>

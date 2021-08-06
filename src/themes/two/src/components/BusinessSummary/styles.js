@@ -35,26 +35,13 @@ export const LeftHeader = styled.div`
 export const RightHeader = styled.div`
   display: flex;
   align-items: center;
-`
 
-export const SupportButton = styled.span`
-  cursor: pointer;
-  ${props => props.theme?.rlt ? css`
-    margin-left: 10px;
-  ` : css`
-    margin-right: 10px;
-  `}
-  svg {
-    color: ${props => props.theme.colors.lightGray};
-    font-size: 24px;
-  }
-`
-
-export const CloseButton = styled.span`
-  cursor: pointer;
-  svg {
-    color: ${props => props.theme.colors.headingColor};
-    font-size: 24px;
+  > button:first-child {
+    ${props => props.theme?.rlt ? css`
+      margin-left: 8px;
+    ` : css`
+      margin-right: 8px;
+    `}
   }
 `
 
@@ -126,6 +113,10 @@ export const BusinessLogo = (props) => {
 
 export const BusinessDetailsContent = styled.div`
   margin-top: 60px;
+
+  > button {
+    height: 42px;
+  }
 `
 
 export const BusinessDescription = styled.p`
@@ -134,9 +125,10 @@ export const BusinessDescription = styled.p`
 `
 
 export const BusinessConfigsContainer = styled.div`
-  border: 1px solid #E9ECEF;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   border-radius: 8px;
   margin-bottom: 50px;
+  overflow: hidden;
   > div:last-child {
     border-bottom: none;
   }
@@ -148,10 +140,20 @@ export const BusinessConfigItem = styled.div`
   display: flex;
   justify-content: space-between;
   color: ${props => props.theme.colors.lightGray};
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  span {
+    font-size: 14px;
+  }
 
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.headingColor};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary} !important;
+    background-color: ${props => props.theme.colors.lightPrimary};
   `}
   
   svg {

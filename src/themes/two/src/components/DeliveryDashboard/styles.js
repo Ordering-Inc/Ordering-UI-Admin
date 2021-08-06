@@ -11,7 +11,7 @@ export const DeliveryDashboardContainer = styled.div`
 
   @media (min-width: 1024px) {
     flex-direction: row;
-    height: calc(100vh - 95px);
+    height: calc(100vh - 100px);
   }
 `
 
@@ -19,11 +19,12 @@ export const FilterContainer = styled.div`
   position: sticky;
   top: 0px;
   background: #FFF;
+  padding: 0 12px;
   z-index: 100;
 `
 
 export const OrdersContainer = styled.div`
-  border: 1px solid #E9ECEF;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   border-radius: 8px;
   height: 100%;
   overflow: hidden;
@@ -42,7 +43,7 @@ export const OrdersContainer = styled.div`
 `
 
 export const WrapperOrderlist = styled.div`
-  height: calc(100% - 200px);
+  height: 100%;
 `
 
 export const WrapperDeliveriesLocation = styled.div`

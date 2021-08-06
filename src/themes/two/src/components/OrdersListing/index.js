@@ -20,15 +20,19 @@ export const OrdersListing = (props) => {
     pagination,
     handleOpenOrderDetail,
     handleOpenMessage,
-    handleLocation,
+    handleOrderCardClick,
     handleUpdateDriverLocation,
     messageOrder,
-    interActionMapOrder,
+    selectedOrderCard,
     messageListView,
     messageType,
     loadMoreOrders,
+    getPageOrders,
     ordersStatusGroup,
-    groupStatus
+    groupStatus,
+    orderDetailId,
+
+    isMessagesView
   } = props
 
   const theme = useTheme()
@@ -39,9 +43,16 @@ export const OrdersListing = (props) => {
     handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType)
   }, [orderList.loading, messageListView])
 
+  useEffect(() => {
+    if (!isMessagesView || orderList.loading || selectedOrderCard) return
+    if (orderList?.orders.length > 0) {
+      handleOrderCardClick(orderList.orders[0])
+    }
+  }, [isMessagesView, orderList, selectedOrderCard])
+
   return (
     <>
-      {ordersStatusGroup === groupStatus && (
+      {((ordersStatusGroup === groupStatus) || isMessagesView) && (
         <>
           {!orderList.loading && orderList.orders.length === 0 ? (
             <WrapperNoneOrders
@@ -62,23 +73,28 @@ export const OrdersListing = (props) => {
                   driversList={driversList}
                   pagination={pagination}
                   selectedOrderIds={selectedOrderIds}
+                  orderDetailId={orderDetailId}
                   loadMoreOrders={loadMoreOrders}
+                  getPageOrders={getPageOrders}
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                   handleSelectedOrderIds={handleSelectedOrderIds}
                   handleOpenOrderDetail={handleOpenOrderDetail}
                 />
               ) : (
                 <OrdersCards
+                  isMessagesView={isMessagesView}
+
                   orderList={orderList}
                   driversList={driversList}
                   pagination={pagination}
                   selectedOrderIds={selectedOrderIds}
                   loadMoreOrders={loadMoreOrders}
+                  getPageOrders={getPageOrders}
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                   handleSelectedOrderIds={handleSelectedOrderIds}
                   handleOpenOrderDetail={handleOpenOrderDetail}
-                  interActionMapOrder={interActionMapOrder}
-                  handleLocation={handleLocation}
+                  selectedOrderCard={selectedOrderCard}
+                  handleOrderCardClick={handleOrderCardClick}
                   handleUpdateDriverLocation={handleUpdateDriverLocation}
                 />
               )}

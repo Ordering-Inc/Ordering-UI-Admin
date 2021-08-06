@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { XLg } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { OrdersManager } from '../OrdersManager'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   LateralBarContainer,
-  DriverOrdersContainer,
-  CloseButton,
-  DriverInfo,
+  OrdersContainer,
+  CloseButtonWrapper,
+  Info,
   WrapperImage,
   Image,
-  DriverName
+  Name
 } from './styles'
 
-export const DriverOrdersLateralBar = (props) => {
+export const OrdersLateralBar = (props) => {
   const {
     open,
-    driver
+    user,
+    business,
+    isDriver,
+    isCustomer,
+    isBusiness
   } = props
 
   const [, t] = useLanguage()
@@ -74,27 +79,46 @@ export const DriverOrdersLateralBar = (props) => {
 
   return (
     <LateralBarContainer id='driver_lateral_bar'>
-      <DriverOrdersContainer>
-        <CloseButton
-          onClick={() => props.onClose()}
-        >
-          <MdcClose />
-        </CloseButton>
-        <DriverInfo>
+      <OrdersContainer>
+        <CloseButtonWrapper>
+          <IconButton
+            color='black'
+            onClick={() => props.onClose()}
+          >
+            <XLg />
+          </IconButton>
+        </CloseButtonWrapper>
+        <Info>
           <WrapperImage>
-            <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
+            {isBusiness ? (
+              <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+            ) : (
+              <Image bgimage={optimizeImage(user?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
+            )}
           </WrapperImage>
-          <DriverName>
-            <p>{driver.name} {driver.lastname}</p>
-            <p>{t('DRIVER', 'Driver')}</p>
-          </DriverName>
-        </DriverInfo>
+          <Name>
+            <p>
+              {isBusiness ? (
+                business.name
+              ) : (
+                <>{user?.name} {user?.lastname}</>
+              )}
+            </p>
+            <p>
+              {isDriver && t('DRIVER', 'Driver')}
+              {isCustomer && t('CUSTOMER', 'Customer')}
+              {isBusiness && t('BUSINESS', 'Business')}
+            </p>
+          </Name>
+        </Info>
         <OrdersManager
           isSelectedOrders
-          driverId={driver.id}
+          driverId={isDriver ? user.id : null}
+          customerId={isCustomer ? user.id : null}
+          businessId={isBusiness ? business.id : null}
           handleCustomOrderDetail={handleCustomOrderDetail}
         />
-      </DriverOrdersContainer>
+      </OrdersContainer>
     </LateralBarContainer>
   )
 }

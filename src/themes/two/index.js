@@ -18,14 +18,14 @@ import { BusinessTypeForm } from './src/components/BusinessTypeForm'
 import { BusinessVideos } from './src/components/BusinessVideos'
 import { CitySelector } from './src/components/CitySelector'
 import { ColumnAllowSettingPopover } from './src/components/ColumnAllowSettingPopover'
-import { Confirm } from './src/components/Confirm'
+import { Confirm, Alert } from './src/components/Confirm'
 import { DateTypeSelector } from './src/components/DateTypeSelector'
 import { DeliveriesLocation } from './src/components/DeliveriesLocation'
 import { DeliveriesManager } from './src/components/DeliveriesManager'
 import { DeliveryDashboard } from './src/components/DeliveryDashboard'
 import { DeliveryTypeSelector } from './src/components/DeliveryTypeSelector'
 import { DriverMapMarkerAndInfo } from './src/components/DriverMapMarkerAndInfo'
-import { DriverOrdersLateralBar } from './src/components/DriverOrdersLateralBar'
+import { OrdersLateralBar } from './src/components/OrdersLateralBar'
 import { DriversBusyStatusFilter } from './src/components/DriversBusyStatusFilter'
 import { DriverAnalytics } from './src/components/DriverAnalytics'
 import { DriversDashboard } from './src/components/DriversDashboard'
@@ -45,6 +45,7 @@ import { LogisticInformation } from './src/components/LogisticInformation'
 import { Logistics } from './src/components/Logistics'
 import { LogoutButton } from './src/components/LogoutButton'
 import { Messages } from './src/components/Messages'
+import { MessagesListing } from './src/components/MessagesListing'
 import { Modal } from './src/components/Modal'
 import { OrderBill } from './src/components/OrderBill'
 import { OrderContactInformation } from './src/components/OrderContactInformation'
@@ -94,6 +95,7 @@ import { Select } from './src/styles/Select'
 import { Tab, Tabs } from './src/styles/Tabs'
 
 export {
+  Alert,
   AddressForm,
   AddressList,
   AutoScroll,
@@ -122,7 +124,7 @@ export {
   DeliveryTypeSelector,
   DriverAnalytics,
   DriverMapMarkerAndInfo,
-  DriverOrdersLateralBar,
+  OrdersLateralBar,
   DriversBusyStatusFilter,
   DriversDashboard,
   DriverSelector,
@@ -141,6 +143,7 @@ export {
   Logistics,
   LogoutButton,
   Messages,
+  MessagesListing,
   Modal,
   OrderBill,
   OrderContactInformation,

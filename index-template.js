@@ -52,6 +52,7 @@ import cash from './template/assets/images/icons/cash.svg'
 import help from './template/assets/images/icons/help.svg'
 import timeline from './template/assets/images/icons/timeline.svg'
 import mapMarker from './template/assets/images/icons/marker.png'
+import sixDots from './template/assets/images/icons/sixDots.svg'
 
 import orderPending from './template/assets/images/orderStatus/pending.svg'
 import orderInProgress from './template/assets/images/orderStatus/inProgress.svg'
@@ -171,7 +172,8 @@ theme.images = {
     cash: cash,
     help: help,
     timeline: timeline,
-    mapMarker: mapMarker
+    mapMarker: mapMarker,
+    sixDots: sixDots
   },
   dummies: {
     nonOrders: nonOrders,

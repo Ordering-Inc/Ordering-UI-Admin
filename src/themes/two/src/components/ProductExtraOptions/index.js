@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, DragAndDrop, ExamineClick, ProductExtraOptions as ProductExtraOptionsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { Switch } from '../../styles/Switch'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
-import { PlusCircle } from 'react-bootstrap-icons'
+import { PlusCircle, XLg } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -14,6 +13,7 @@ import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
 import { Modal } from '../Modal'
 import { ProductExtraOptionDetails } from '../ProductExtraOptionDetails'
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   MainContainer,
@@ -198,9 +198,12 @@ const ProductExtraOptionsUI = (props) => {
       <OptionsContainer>
         <Header>
           <h1>{extraState.extra.name}</h1>
-          <MdcClose
+          <IconButton
+            color='black'
             onClick={() => onClose()}
-          />
+          >
+            <XLg />
+          </IconButton>
         </Header>
         <OptionsTable>
           <thead>

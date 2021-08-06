@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import MdClose from '@meronex/icons/md/MdClose'
+import { XLg } from 'react-bootstrap-icons'
 import { Popup, useLanguage } from 'ordering-components-admin'
-import { Button } from '../../styles/Buttons'
+import { Button, IconButton } from '../../styles/Buttons'
 import {
   ModalDialog,
   ModalActions,
@@ -45,7 +45,12 @@ const ModalUI = (props) => {
     >
       {!hideCloseDefault && (
         <ModalIcon className='modal-close-icon'>
-          <MdClose onClick={() => onClose()} />
+          <IconButton
+            color='black'
+            onClick={() => onClose()}
+          >
+            <XLg />
+          </IconButton>
         </ModalIcon>
       )}
       <ModalHeader>

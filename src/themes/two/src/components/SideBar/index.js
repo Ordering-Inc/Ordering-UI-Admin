@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
-
+import { XLg } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
 import {
   BarContainer
 } from './styles'
@@ -43,7 +43,12 @@ export const SideBar = (props) => {
 
   return (
     <BarContainer id={id}>
-      <MdcClose onClick={() => props.onClose()} />
+      <IconButton
+        color='black'
+        onClick={() => props.onClose()}
+      >
+        <XLg />
+      </IconButton>
       {props.children}
     </BarContainer>
   )

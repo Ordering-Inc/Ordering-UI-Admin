@@ -2,6 +2,15 @@ import styled, { css } from 'styled-components'
 
 export const ExportContainer = styled.div`
   position: relative;
+  button {
+    svg {
+      ${props => props.theme?.rtl ? css`
+        margin-right: 8px;
+      ` : css`
+        margin-left: 8px;
+      `}
+    }
+  }
 `
 
 export const PopoverContainer = styled.div`

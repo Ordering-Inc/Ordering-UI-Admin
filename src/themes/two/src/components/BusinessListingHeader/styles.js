@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
   }
 
   input {
-    background: #E9ECEF;
+    background: ${props => props.theme.colors.secundary};
     border: none;
   }
 
@@ -26,19 +26,16 @@ export const HeaderContainer = styled.div`
   }
 `
 
-export const AddButton = styled.span`
-  cursor: pointer;
-  svg {
-    font-size: 24px;
-    color: ${props => props.theme.colors.primary};
+export const ActionsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > button {
+    height: 41px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 15px;
+    ` : css`
+      margin-right: 15px;
+    `}
   }
-
-  ${props => props.theme.rtl ? css`
-    margin-right: 10px;
-  ` : css`
-    margin-left: 10px;
-  `}
-`
-
-export const WrapperSearchBar = styled.div`
 `

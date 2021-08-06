@@ -25,12 +25,14 @@ import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
+import { MessagesList } from './pages/MessagesList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
 import { DriverAnalytics } from './pages/DriverAnalytics'
+import { Toast } from '../src/themes/two/src/components/Toast'
 
 export const App = () => {
   const [{ auth, loading }] = useSession()
@@ -123,6 +125,13 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
+                    <Route exact path='/messages'>
+                      {
+                        auth
+                          ? <MessagesList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route exact path='/users'>
                       {
                         auth
@@ -179,6 +188,7 @@ export const App = () => {
                   </Switch>
                 </ScrollToTop>
               )}
+              <Toast />
             </Layout>
           </>
         )

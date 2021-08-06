@@ -19,7 +19,7 @@ const LogoutButtonUI = (props) => {
     >
       <BoxArrowRight size={20} />
       {!isCollapse && (
-        <span className='mx-2'>
+        <span>
           {t('LOGOUT', 'Logout')}
         </span>
       )}

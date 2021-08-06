@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
-import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
+import { CaretDownFill } from 'react-bootstrap-icons'
+import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
+
 import {
   Selected,
   Options,
@@ -17,7 +19,7 @@ import {
 } from './styles'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, noSelected } = props
+  const { placeholder, options, defaultValue, onChange, notAsync, noSelected, minWidth, isSecondIcon } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
   )
@@ -93,7 +95,7 @@ export const Select = (props) => {
     onChange && onChange(option.value)
   }
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', minWidth: '100px' }
+  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', minWidth: minWidth || '100px' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
@@ -108,7 +110,7 @@ export const Select = (props) => {
           <Selected>
             {placeholder || ''}
             <Chevron>
-              <GoTriangleDown />
+              {isSecondIcon ? <FiChevronDown /> : <CaretDownFill />}
             </Chevron>
           </Selected>
         )}
@@ -118,7 +120,7 @@ export const Select = (props) => {
               {selectedOption.showOnSelected || selectedOption.content}
             </Header>
             <Chevron>
-              <GoTriangleDown />
+              {isSecondIcon ? <FiChevronDown /> : <CaretDownFill />}
             </Chevron>
           </Selected>
         )}
@@ -132,6 +134,7 @@ export const Select = (props) => {
             {options.map((option, i) => (
               <Option
                 key={i}
+                minWidth={minWidth}
                 selected={value === option.value}
                 color={option.color}
                 onClick={(e) => handleChangeOption(e, option)}

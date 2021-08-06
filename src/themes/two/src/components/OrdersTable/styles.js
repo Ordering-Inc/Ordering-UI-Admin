@@ -10,15 +10,14 @@ export const OrdersContainer = styled.div`
   }
 
   @media (min-width: 992px) {
-    max-height: calc(100vh - 290px);
+    max-height: calc(100vh - 305px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
       max-height: calc(100vh - 345px);
     `}
   }
 
   @media (min-width: 1200px) {
-    max-height: calc(100vh - 280px);
-
+    max-height: calc(100vh - 275px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
       max-height: calc(100vh - 345px);
     `}
@@ -32,8 +31,8 @@ export const Table = styled.table`
   th,
   td {
     padding: 15px;
-    border-bottom: solid 1px #E9ECEF;
     box-sizing: border-box;
+    font-size: 14px;
 
     &:first-child {
       padding-left: 0px;
@@ -48,6 +47,7 @@ export const Table = styled.table`
   thead {
     tr {
       width: 100%;
+      border-bottom: solid 1px ${props => props.theme.colors.disabled};
       th {
         color: ${props => props.theme.colors?.headingColor};
         white-space: nowrap;
@@ -56,16 +56,6 @@ export const Table = styled.table`
         z-index: 100;
         background: #FFF;
       }
-    }
-  }
-
-  tbody {
-    padding-bottom: 10px;
-
-    tr {
-      width: 100%;
-      height: 99px;
-      cursor: pointer;
     }
   }
 
@@ -104,6 +94,39 @@ export const Table = styled.table`
   }
 `
 
+export const OrderTbody = styled.tbody`
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  &.active {
+    background-color: ${props => props.theme.colors.lightPrimary};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.primary} !important;
+      border-bottom: 1px solid ${props => props.theme.colors.primary} !important;
+
+      ${({ isCustomStyle }) => isCustomStyle && css`
+        &:first-child {
+          ${props => props.theme?.rtl ? css`
+            border-right: 1px solid ${props => props.theme.colors.primary} !important;
+          ` : css`
+            border-left: 1px solid ${props => props.theme.colors.primary} !important;
+          `}
+        }
+        &:last-child {
+          ${props => props.theme?.rtl ? css`
+            border-left: 1px solid ${props => props.theme.colors.primary} !important;
+          ` : css`
+            border-right: 1px solid ${props => props.theme.colors.primary} !important;
+          `}
+        }
+      `}
+    }
+  }
+`
+
 export const OrderNumberContainer = styled.div`
   display: flex;
   align-items: center;
@@ -122,15 +145,15 @@ export const OrderNumberContainer = styled.div`
 `
 
 export const CheckBox = styled.span`
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
   svg {
     font-size: 24px;
     color: #B1BCCC;
 
-    ${props => props.theme?.rtl ? css`
-      margin-left: 10px;
-    ` : css`
-      margin-right: 10px;
-    `}
     ${({ isChecked }) => isChecked && css`
       color: ${props => props.theme.colors?.primary};
     `}
@@ -162,11 +185,19 @@ export const DriversInfo = styled.div`
   > div {
     > div {
       border: none;
+      padding: 0px;
       > div:first-child {
         padding: 0px 10px;
         p {
           color: ${props => props.theme.colors?.headingColor};
           font-size: 14px;
+        }
+      }
+      > div {
+        > div {
+          > div {
+            padding: 0px;
+          }
         }
       }
     }
@@ -253,5 +284,5 @@ export const WrapOrderStatusSelector = styled.div`
 `
 
 export const WrapperPagination = styled.div`
-  margin-top: 10px;
+  padding: 10px 0;
 `

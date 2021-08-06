@@ -80,63 +80,62 @@ export const Status = styled.p`
   font-size: 0.7em;
 `
 
-export const Image = styled.div`
-  width: 40px;
-  height: 40px;
+export const ImageContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);
-  border-radius: 7.6px;
-  box-sizing: border-box;
-  overflow: hidden;
 
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
+  > * {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
+    `}
+
+    &:last-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0px;
+      ` : css`
+        margin-right: 0px;
+      `}
+    }
   }
 
-  img[name]{
-    border: 1px solid #182964;
-    border-radius: 50%;
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);
   }
 
   svg {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 8px;
     padding: 6px;
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);
   }
+  ${({ isCircle }) => isCircle && css`
+    img, svg {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    svg {
+      padding: 3px;
+    }
+
+    ${({ isReceived }) => !isReceived && css`
+      justify-content: flex-end;
+    `}
+  `}
+
 `
 
-export const HeaderOnline = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 60px;
-  line-height: 1.5;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  h1,
-  span {
-    margin: 0px;
-    max-width: 150px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-  }
-
-  span {
-    font-size: 15px;
-    font-weight: 300;
-  }
+export const OrderNumber = styled.div`
+  color: ${props => props.theme.colors.headingColor};
+  font-size: 16px;
+  font-weight: 600;
 `
 
 export const Chat = styled.div`
@@ -156,15 +155,18 @@ export const MessageConsole = styled.div`
   display: inline-flex;
   justify-content: center;
   font-size: 0.8em;
+  margin-bottom: 20px;
 `
 
 export const MessageBusiness = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
-  max-width: 400px;
-  margin: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
 `
 
 export const MessageCustomer = styled.div`
@@ -174,15 +176,15 @@ export const MessageCustomer = styled.div`
   flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
-  max-width: 400px;
-  margin: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
 `
 
 export const BubbleConsole = styled.div`
   border-radius: 5px;
   padding: 10px 25px 10px 25px;
-  margin-bottom: 15px;
-  background: #EFEFEF;
+  margin-bottom: 8px;
+  background: ${props => props.theme.colors.secundary};
   text-align: center;
   height: auto;
   overflow: hidden;
@@ -195,12 +197,17 @@ export const BubbleConsole = styled.div`
 `
 
 export const BubbleBusines = styled.div`
-  border-radius: 5px;
+  border-radius: 8px;
+  ${props => props.theme?.rtl ? css`
+    border-bottom-right-radius: 0;
+  ` : css`
+    border-bottom-left-radius: 0;
+  `}
   padding: 10px 25px 10px 25px;
   max-width: 80%;
   min-width: 80px;
-  margin-bottom: 10px;
-  background: #EFEFEF;
+  margin-bottom: 8px;
+  background: ${props => props.theme.colors.secundary};
   overflow: hidden;
   overflow-wrap: break-word;
   &[name=image]{
@@ -209,7 +216,12 @@ export const BubbleBusines = styled.div`
 `
 
 export const BubbleCustomer = styled.div`
-  border-radius: 5px;
+  border-radius: 8px;
+  ${props => props.theme?.rtl ? css`
+    border-bottom-left-radius: 0;
+  ` : css`
+    border-bottom-right-radius: 0;
+  `}
   padding: 10px 25px 10px 25px;
   max-width: 80%;
   min-width: 80px;
@@ -225,7 +237,6 @@ export const BubbleCustomer = styled.div`
   }
 
   &[name=image]{
-    border-radius: 40px 40px 0px 40px;
     width: 100%;
   }
 
@@ -293,45 +304,37 @@ export const TimeofSent = styled.p`
 
 export const SendForm = styled.div`
   display: flex;
-  background: #FAFAFA;
-  border-top: 1px solid #EEEEEE;
-  height: 70px;
-
-  @media (min-width: 768px) {
-    height: 90px;
-  }
+  flex-direction: column;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
+  padding: 13px;
 `
 
 export const Send = styled.form`
   align-items: center;
   display: flex;
-  margin-top: 3px;
+  margin-top: 20px;
   height: auto;
-  width: 91%;
   max-width: 1200px;
-  margin: auto;
   justify-content: space-between;
-  column-gap: 20px;
+  column-gap: 10px;
+  width: 100%;
   input {
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
     flex: 1;
   }
-
-  @media (max-width: 576px) {
-    width: 90%;
-  }
-
-  ${({ messageDashboardView }) => messageDashboardView && css`
-    width: 92%;
-  `}
 `
 
 export const WrapperSendInput = styled.div`
   flex: 1;
   position: relative;
   box-sizing: border-box;
+
+  > input {
+    background-color: ${props => props.theme.colors.secundary};
+    border: none;
+  }
 `
 
 export const SendImage = styled.label`
@@ -350,19 +353,37 @@ export const SendImage = styled.label`
     color: #CFD0D0;
     width: 25px;
     height: 25px;
-    cursor: pointer
+    cursor: pointer;
   }
 `
 
 export const WrapperDeleteImage = styled.div`
   position: absolute;
-  top: 7px;
-  right: -10px;
+  top: 5px;
+  right: 10px;
 
-  button{
+  img {
+    width: 30px;
+    height: 30px;
     &:disabled {
     cursor: not-allowed;
     }
+    border-radius: 8px;
+  }
+
+  svg {
+    color: black;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: white;
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
   }
 `
 
@@ -370,9 +391,8 @@ export const WrapperSendMessageButton = styled.div`
   white-space: nowrap;
   width: fit-content;
 
-  button{
-    padding-top: 7px;
-    padding-bottom: 7px;
+  button {
+    height: 43px;
     svg {
        width: 1.5em;
        height: 1.5em; 
@@ -381,7 +401,7 @@ export const WrapperSendMessageButton = styled.div`
        ${props => props.theme?.rtl && css`
         margin-left: 10px;
         margin-right: 0px;
-        transform: rotate(270deg)
+        transform: rotate(270deg);
       `}
     }
 
@@ -395,8 +415,8 @@ export const WrapperSendMessageButton = styled.div`
     }
   }
 
-  @media (min-width: 480px){
-    button{
+  @media (min-width: 480px) {
+    button {
       svg {
         margin-right: 10px;
       }
@@ -443,14 +463,25 @@ export const SkeletonHitory = styled.div`
   }
 `
 export const WrapperLogistics = styled.div``
+
 export const WrapperLogisticInformation = styled.div``
+
 export const HeaderInfo = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  border-bottom: 1px solid ${props => props.theme.colors.secundary};
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 `
+
+export const ChatHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 15px;
+`
+
 export const SearchAndDetailControlContainer = styled.div`
   display: flex;
   column-gap: 10px;
@@ -496,4 +527,49 @@ export const OrderDetailIconButton = styled.button`
   svg {
     font-size: 30px;
   }
+`
+
+export const ChatContactInfoContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  ${({ disabled }) => disabled && css`
+    opacity: 0.2;
+  `}
+`
+
+export const InfoBlock = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-right: 10px;
+  ` : css`
+    margin-left: 10px;
+  `}
+  > p {
+    margin: 0px;
+
+    &:first-child {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 14px;
+      font-weight: 500;
+    }
+    &:last-child {
+      color: ${props => props.theme.colors.lightGray};
+      font-size: 12px;
+    }
+  }
+`
+
+export const SendToContainer = styled.div`
+  p {
+    color: ${props => props.theme.colors.secundaryContrast};
+    margin-bottom: 2px;
+    text-align: end;
+    font-size: 12px;
+  }
+
+  ${({ isReceived }) => isReceived && css`
+    text-align: initial;
+  `}
 `

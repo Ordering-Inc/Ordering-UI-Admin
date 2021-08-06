@@ -9,13 +9,18 @@ export const DriverCard = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  border: 1px solid #E9ECEF;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   box-sizing: border-box;
   border-radius: 8px;
   margin-bottom: 20px;
   padding: 10px 15px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
   
   ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
     border: 1px solid ${props => props.theme.colors.primary};
   `}
 `
@@ -25,8 +30,8 @@ export const WrapperImage = styled.div`
   max-height: 45px;
   height: 45px;
   width: 45px;
-  border: 1px solid #E3E3E3;
-  border-radius: 10px;
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  border-radius: 8px;
 
   svg {
     width: 100%;

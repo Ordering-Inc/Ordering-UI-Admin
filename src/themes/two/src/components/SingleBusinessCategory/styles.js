@@ -10,22 +10,13 @@ export const SingleCategoryContainer = styled.div`
   cursor: pointer;
   height: 75px;
 
-  .actions-btn {
-    display: none;
-  }
   &:hover {
-    background: #E9F2FE;
-
-    input {
-      border: 1px solid ${props => props.theme.colors.lightGray};
-    }
-    .actions-btn {
-      display: block;
-    }
+    background: ${props => props.theme.colors.lightPrimary};
   }
 
   ${({ active }) => active && css`
-    border: 1px solid #2C7BE5;
+    background: ${props => props.theme.colors.lightPrimary};
+    border: 1px solid ${props => props.theme.colors.primary};
     box-sizing: border-box;
     .actions-btn {
       display: block;
@@ -42,9 +33,9 @@ export const CategoryContent = styled.div`
   flex-grow: 1;
   color: ${props => props.theme.colors.headingColor};
   ${props => props.theme?.rtl ? css`
-      padding-right: 13px;
+      padding-right: 10px;
     ` : css`
-      padding-left: 13px;
+      padding-left: 10px;
     `}
   input {
     width: 100%;
@@ -56,7 +47,12 @@ export const CategoryContent = styled.div`
     border-radius: 3px;
     transition: all 0.3s;
     border: 1px solid transparent;
-    padding: 5px;
+    padding: 2px 5px;
+    color: ${props => props.theme.colors.headingColor};
+    &:focus {
+      background-color: #FFF;
+      border: 1px solid ${props => props.theme.colors.headingColor};
+    }
   }
 `
 
@@ -64,7 +60,10 @@ export const CategoryActionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 4px;
+  > div:first-child {
+    padding: 0 5px;
+  }
 `
 
 export const CategoryEnableWrapper = styled.div`
@@ -87,15 +86,15 @@ export const CategoryEnableWrapper = styled.div`
 
 export const ActionSelectorWrapper = styled.div`
   height: 26px;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 35px;
-    ` : css`
-    margin-left: 35px;
-  `}
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
     }
@@ -103,14 +102,41 @@ export const ActionSelectorWrapper = styled.div`
       display: none;
     }
   }
+
+  .show {
+    button {
+      background: #F8F9FA !important;
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    > div {
+      border: 1px solid #E9ECEF;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
   > div {
-    border: 1px solid #E9ECEF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     > div {
       a:last-child {
         color: #E63757;
       }
+    }
+  }
+`
+
+export const DraggableContainer = styled.div`
+  display: flex;
+  align-items: center;
+  > img {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
+    `}
+
+    &:hover {
+      cursor: grab;
     }
   }
 `

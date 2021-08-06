@@ -46,7 +46,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
       margin: 0;
       background-color: #FFFFFF;
-      color: #000;
+      color: ${props => props.theme.colors?.headingColor || '#000'};
 
       ${theme.rtl && css`
         direction: rtl;
@@ -72,6 +72,17 @@ export const ThemeProvider = ({ children, ...props }) => {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .ghostDragging {
+      border-radius: 8px;
+      background-color: #FFF;
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+      border: 1px solid ${props => props.theme.colors?.borderColor};
+      font-size: 14px;
+      padding: 10px 19px;
+      width: fit-content;
+      min-width: 200px;
     }
   `
 

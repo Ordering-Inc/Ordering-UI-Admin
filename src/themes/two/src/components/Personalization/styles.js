@@ -17,6 +17,7 @@ export const Container = styled.div`
 
   p {
     color: ${props => props.theme.colors.headingColor};
+    font-size: 14px;
     a {
       color: ${props => props.theme.colors.primary};
       text-decoration: none;

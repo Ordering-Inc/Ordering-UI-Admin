@@ -3,7 +3,7 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { DriverSelector } from '../DriverSelector'
-import { OrdersPagination } from '../../../../../components/OrdersPagination'
+import { Pagination } from '../Pagination'
 
 import {
   OrdersListContainer,
@@ -15,77 +15,52 @@ import {
   Image,
   CardContent,
   DriverSelectorWrapper,
-  WrapperPagination
+  WrapperPagination,
+  UnreadMessageCounter
 } from './styles'
 
 export const OrdersCards = (props) => {
   const {
+    isMessagesView,
+
     orderList,
     driversList,
     pagination,
-    loadMoreOrders,
+    getPageOrders,
     handleOpenOrderDetail,
-    interActionMapOrder,
-    handleLocation,
+    selectedOrderCard,
+    handleOrderCardClick,
     handleUpdateDriverLocation
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
 
-  // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [ordersPerPage] = useState(10)
+  const [ordersPerPage, setOrdersPerPage] = useState(10)
 
-  // Get current orders
-  const indexOfLastPost = currentPage * ordersPerPage
-  const indexOfFirstPost = indexOfLastPost - ordersPerPage
-  const [currentOrders, setCurrentOrders] = useState([])
-  const [totalPages, setTotalPages] = useState(null)
-  const [totalOrders, setTotalOrders] = useState(null)
-
-  // Change page
-  const prevPaginate = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
-    }
+  const handleChangePage = (page) => {
+    getPageOrders(ordersPerPage, page)
   }
-  const nextPaginate = () => {
-    if (currentPage !== totalPages) {
-      if (orderList.orders.length < ordersPerPage * currentPage + 1) {
-        loadMoreOrders()
-      }
-      setCurrentPage(currentPage + 1)
-    }
+
+  const handleChangePageSize = (pageSize) => {
+    setOrdersPerPage(pageSize)
+    const expectedPage = Math.ceil(pagination.from / pageSize)
+    getPageOrders(pageSize, expectedPage)
   }
 
   const handleOrderClick = (e, order) => {
     const isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector')
     if (isInvalid) return
-    handleLocation(order)
+    handleOrderCardClick(order)
   }
 
   useEffect(() => {
-    if (orderList.loading || !interActionMapOrder) return
-    const updatedOrder = orderList?.orders.find(order => order.id === interActionMapOrder?.id)
+    if (orderList.loading || !selectedOrderCard) return
+    const updatedOrder = orderList?.orders.find(order => order.id === selectedOrderCard?.id)
     if (updatedOrder) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder)
     }
   }, [orderList?.orders])
-
-  useEffect(() => {
-    if (orderList.loading) return
-    let _totalPages
-    if (pagination?.total) {
-      _totalPages = Math.ceil(pagination?.total / ordersPerPage)
-    } else if (orderList.orders.length > 0) {
-      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
-    }
-    const _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalOrders(pagination?.total)
-    setTotalPages(_totalPages)
-    setCurrentOrders(_currentOrders)
-  }, [orderList, currentPage, pagination])
 
   return (
     <>
@@ -126,10 +101,10 @@ export const OrdersCards = (props) => {
           ))
         ) : (
           <>
-            {currentOrders?.map(order => (
+            {orderList.orders?.map(order => (
               <OrderCard
                 key={order.id}
-                active={interActionMapOrder?.id === order.id}
+                active={selectedOrderCard?.id === order.id}
                 onClick={(e) => handleOrderClick(e, order)}
               >
                 <OrderHeader>
@@ -144,6 +119,11 @@ export const OrdersCards = (props) => {
                     </ViewDetails>
                   </div>
                 </OrderHeader>
+                {isMessagesView && order?.unread_count > 0 && (
+                  <UnreadMessageCounter>
+                    {order?.unread_count}
+                  </UnreadMessageCounter>
+                )}
                 <CardContent>
                   <BusinessInfo>
                     <WrapperImage>
@@ -173,16 +153,13 @@ export const OrdersCards = (props) => {
       </OrdersListContainer>
       {pagination && (
         <WrapperPagination>
-          {!orderList.loading && totalPages > 0 && (
-            <OrdersPagination
-              ordersPerPage={ordersPerPage}
-              totalOrders={totalOrders}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              prevPaginate={prevPaginate}
-              nextPaginate={nextPaginate}
-            />
-          )}
+          <Pagination
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            handleChangePage={handleChangePage}
+            defaultPageSize={ordersPerPage}
+            handleChangePageSize={handleChangePageSize}
+          />
         </WrapperPagination>
       )}
     </>

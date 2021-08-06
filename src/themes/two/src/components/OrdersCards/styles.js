@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
-  height: 100%;
+  height: calc(100% - 200px);
   padding: 0 12px 15px 12px;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -11,11 +11,22 @@ export const OrderNunberContainer = styled.div`
 
 `
 export const OrderCard = styled.div`
+  position: relative;
   cursor: pointer;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.colors?.secundary};
   margin-bottom: 20px;
   padding: 15px 20px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
+
   p,
   h2 {
     color: ${props => props.theme.colors.headingColor};
@@ -23,12 +34,9 @@ export const OrderCard = styled.div`
   }
   
   h2 {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
   }
-
-  ${({ active }) => active && css`
-    border: 1px solid ${props => props.theme.colors.primary};
-  `}
 `
 
 export const OrderHeader = styled.div`
@@ -36,7 +44,7 @@ export const OrderHeader = styled.div`
     display: flex;
     margin: 10px 0;
     > p {
-      font-size: 14px;
+      font-size: 12px;
     }
   }
 `
@@ -44,7 +52,7 @@ export const OrderHeader = styled.div`
 export const ViewDetails = styled.a`
   cursor: pointer;
   color: ${props => props.theme.colors.primary};
-  font-size: 14px;
+  font-size: 12px;
   text-decoration: underline;
   margin: 0 10px;
 `
@@ -75,14 +83,13 @@ export const BusinessInfo = styled.div`
     }
     p.bold {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
     }
   }
   @media (min-width: 1300px) {
     width: 45%;
   }
 `
-
 
 export const WrapperImage = styled.div`
   max-width: 45px;
@@ -164,4 +171,23 @@ export const DriverSelectorWrapper = styled.div`
 
 export const WrapperPagination = styled.div`
   margin: 20px 15px 0 15px;
+`
+
+export const UnreadMessageCounter = styled.div`
+  position: absolute;
+  top: 12px;
+  ${props => props.theme?.rtl ? css`
+    left: 20px;
+  ` : css`
+    right: 20px;
+  `}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => props.theme.colors.lightPrimary};
+  border-radius: 8px;
+  font-size: 12px;
+  height: 24px;
+  color: ${props => props.theme.colors.primary};
+  padding: 0 10px;
 `

@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { useLanguage } from 'ordering-components-admin'
 import { SingleBusinessCategory } from '../SingleBusinessCategory'
 import { BusinessCategoryCreator } from '../BusinessCategoryCreator'
 import {
   CategoryListContainer,
   HeaderContainer,
-  AddButton,
   ListContent,
   AddCategory
 } from './styles'
@@ -15,8 +13,7 @@ export const BusinessProductsCategories = (props) => {
   const {
     businessState,
     categorySelected,
-    onClickCategory,
-    handleOpenCategoryDetails
+    onClickCategory
   } = props
 
   const [, t] = useLanguage()
@@ -27,9 +24,6 @@ export const BusinessProductsCategories = (props) => {
       <CategoryListContainer>
         <HeaderContainer>
           <h1>{t('BUSINESS_CATEGORY', 'Business category')}</h1>
-          <AddButton onClick={() => handleOpenCategoryDetails()}>
-            <BsPlusSquare />
-          </AddButton>
         </HeaderContainer>
         <ListContent>
           {
@@ -55,7 +49,7 @@ export const BusinessProductsCategories = (props) => {
             !businessState.loading && (
               isAddCategory
                 ? <BusinessCategoryCreator {...props} setIsAddCategory={setIsAddCategory} business={businessState?.business} />
-                : <AddCategory onClick={() => setIsAddCategory(true)}>{t('ADD_NEW_CATEGORY', 'Add new Category')}</AddCategory>
+                : <AddCategory onClick={() => setIsAddCategory(true)}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
             )
           }
         </ListContent>

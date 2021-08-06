@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Select } from '../../styles/Select'
+import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { MultiSelect } from '../../styles/MultiSelect'
 
@@ -21,6 +22,7 @@ toast.configure()
 
 const DriverSelectorUI = (props) => {
   const {
+    isFirstSelect,
     order,
     driversList,
     defaultValue,
@@ -211,22 +213,37 @@ const DriverSelectorUI = (props) => {
     return (
       <>
         {!driversList.loading ? (
-          <Select
-            defaultValue={defaultOption || 'default'}
-            options={driversOptionList}
-            optionInnerMargin='10px'
-            optionInnerMaxHeight='200px'
-            optionBottomBorder
-            onChange={(driverId) => changeDriver(driverId)}
-          />
+          <>
+            {isFirstSelect ? (
+              <FirstSelect
+                defaultValue={defaultOption || 'default'}
+                options={driversOptionList}
+                optionInnerMargin='10px'
+                optionInnerMaxHeight='200px'
+                optionBottomBorder
+                onChange={(driverId) => changeDriver(driverId)}
+              />
+            ) : (
+              <Select
+                defaultValue={defaultOption || 'default'}
+                options={driversOptionList}
+                optionInnerMargin='10px'
+                optionInnerMaxHeight='200px'
+                optionBottomBorder
+                onChange={(driverId) => changeDriver(driverId)}
+              />
+            )}
+          </>
         ) : (
-          <Select
-            defaultValue='default'
-            options={driversLoading}
-            optionInnerMargin='10px'
-            optionInnerMaxHeight='200px'
-            optionBottomBorder
-          />
+          <>
+            <Select
+              defaultValue='default'
+              options={driversLoading}
+              optionInnerMargin='10px'
+              optionInnerMaxHeight='200px'
+              optionBottomBorder
+            />
+          </>
         )}
       </>
     )

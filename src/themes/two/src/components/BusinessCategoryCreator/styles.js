@@ -45,12 +45,11 @@ export const CategoryImage = styled.div`
 export const UploadImageIconContainer = styled.div`
   position: absolute;
   top: 0px;
-  background: rgba(0,0,0,0.2);
-  ${({ small }) => small ? css`
-    padding: 4px;
-  ` : css`
-    padding: 8px;
+  background-color: ${props => props.theme.colors.borderColor};
+  ${({ isImage }) => isImage && css`
+    opacity: 0.2;
   `}
+  padding: 4px;
 `
 
 export const UploadImageIcon = styled.div`
@@ -58,18 +57,12 @@ export const UploadImageIcon = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: #FFF;
+  color: #ADB5BD;
   span {
     margin: 0;
   }
 
   svg {   
-    ${({ small }) => small ? css`
-      width: 25px;
-      height: 25px;
-    ` : css`
-      width: 45px;
-      height: 45px;
-    `}
+    width: 16px;
   }
 `

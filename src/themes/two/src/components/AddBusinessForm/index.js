@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
-import BsLifePreserver from '@meronex/icons/bs/BsLifePreserver'
+import { XLg, LifePreserver } from 'react-bootstrap-icons'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Input, TextArea } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
+import { Button, IconButton } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
 
 import {
@@ -17,8 +16,6 @@ import {
   BusinessName,
   LeftHeader,
   RightHeader,
-  SupportButton,
-  CloseButton,
   FormInput,
   HeaderImage,
   SkeletonWrapper,
@@ -114,16 +111,17 @@ const AddBusinessFormUI = (props) => {
             />
           </LeftHeader>
           <RightHeader>
-            <SupportButton
+            <IconButton
               onClick={() => handleItemSelected('support')}
             >
-              <BsLifePreserver />
-            </SupportButton>
-            <CloseButton
+              <LifePreserver />
+            </IconButton>
+            <IconButton
+              color='black'
               onClick={() => actionSidebar(false)}
             >
-              <MdcClose />
-            </CloseButton>
+              <XLg />
+            </IconButton>
           </RightHeader>
         </DetailsHeader>
         <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>

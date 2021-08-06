@@ -1,12 +1,11 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SearchBar } from '../SearchBar'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
+import { Button } from '../../styles/Buttons'
 
 import {
   HeaderContainer,
-  AddButton,
-  WrapperSearchBar
+  ActionsWrapper
 } from './styles'
 
 export const BusinessListingHeader = (props) => {
@@ -20,20 +19,22 @@ export const BusinessListingHeader = (props) => {
     <HeaderContainer>
       <div>
         <h1>{t('STORES_LIST', 'Stores list')}</h1>
-        <AddButton
+      </div>
+      <ActionsWrapper>
+        <Button
+          color='lightPrimary'
+          borderRadius='8px'
           onClick={() => handleOpenAddBusiness()}
         >
-          <BsPlusSquare />
-        </AddButton>
-      </div>
-      <WrapperSearchBar>
+          {t('ADD_NEW_STORE', 'Add new store')}
+        </Button>
         <SearchBar
           isCustomLayout
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}
         />
-      </WrapperSearchBar>
+      </ActionsWrapper>
     </HeaderContainer>
   )
 }

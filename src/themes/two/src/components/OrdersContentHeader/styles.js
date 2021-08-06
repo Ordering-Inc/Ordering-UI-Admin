@@ -49,26 +49,7 @@ export const TopRightSection = styled.div`
     align-items: center;
   }
 `
-export const FilterButton = styled.button`
-  border: none;
-  outline: none;
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  font-size: 24px;
-  padding: 0px;
-  color: #1C202E;
 
-  &:active {
-    opacity: 0.5;
-  }
-
-  ${props => props.theme?.rtl ? css`
-    margin-right: 10px;
-  ` : css`
-    margin-left: 10px;
-  `}
-`
 export const WrapperSearchAndFilter = styled.div`
   display: flex;
   align-items: center;
@@ -88,6 +69,14 @@ export const WrapperSearchAndFilter = styled.div`
   input {
     background: ${props => props.theme.colors.secundary};
     border: none;
+  }
+
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 8px;
+    ` : css`
+      margin-left: 8px;
+    `}
   }
 
   @media (min-width: 760px) {

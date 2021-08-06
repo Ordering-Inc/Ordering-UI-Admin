@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessListingContainer = styled.div`
-  width: 100%;
+  flex: 1;
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
@@ -21,7 +21,7 @@ export const ViewContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   margin-top: 10px;
 `
 
@@ -42,9 +42,16 @@ export const ViewMethodButton = styled.span`
 
   svg {
     font-size: 20px;
+    transition: all .2s ease-in;
   }
 
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.primary};
   `}
+
+  &:hover {
+    svg {
+      font-size: 24px;
+    }
+  }
 `

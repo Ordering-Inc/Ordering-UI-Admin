@@ -10,19 +10,9 @@ export const HeaderContainer = styled.div`
     align-items: center;
 
     > h1 {
-      font-size: 24px;
+      font-size: 20px;
       margin: 0px;
-    }
-
-    > svg {
-      cursor: pointer;
-      font-size: 24px;
-      color: ${props => props.theme.colors.primary};
-      ${props => props.theme?.rtl ? css`
-        margin-right: 10px;
-      ` : css`
-        margin-left: 10px;
-      `}
+      font-weight: 700;
     }
   }
 
@@ -47,8 +37,12 @@ export const ActionContainer = styled.div`
   }
 
   input {
-    background: #E9ECEF;
+    background: ${props => props.theme.colors.secundary};
     border: none;
+  }
+
+  button {
+    height: 41px;
   }
 
   @media (min-width: 768px) {

@@ -2,21 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const CategoryListContainer = styled.div``
 
-export const AddButton = styled.span`
-  cursor: pointer;
-
-  svg {
-    font-size: 24px;
-    color: ${props => props.theme.colors.primary};
-  }
-
-  ${props => props.theme.rtl ? css`
-    margin-right: 10px;
-  ` : css`
-    margin-left: 10px;
-  `}
-`
-
 export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
@@ -26,12 +11,7 @@ export const HeaderContainer = styled.div`
     font-size: 14px;
     margin: 0;
   }
-
-  svg {
-    font-size: 16px;
-  }
 `
-
 export const ListContent = styled.div`
   margin-top: 35px;
   max-height: calc(100vh - 380px);

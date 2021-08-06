@@ -1,31 +1,26 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import BsBell from '@meronex/icons/bs/BsBell'
-import BsChat from '@meronex/icons/bs/BsChat'
-import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
+import { IconButton } from '../../styles/Buttons'
+import { Telephone } from 'react-bootstrap-icons'
 
 import {
   BusinessInfo,
   PhotoWrapper,
   Photo,
   InfoContent,
-  NotificationIcon,
   CustomerInfo,
   DriverInfoContainer,
   DriverInfo,
-  DriverSelectorContainer,
-  ButtonLink
+  DriverSelectorContainer
 } from './styles'
 
 export const OrderContactInformation = (props) => {
   const {
     order,
-    driversList,
-    unreadAlert,
-    handleOpenMessages
+    driversList
   } = props
 
   const [, t] = useLanguage()
@@ -43,22 +38,12 @@ export const OrderContactInformation = (props) => {
         <InfoContent>
           <div>
             <p>{order?.business?.name}</p>
-            <ButtonLink
-              onClick={() => handleOpenMessages('business')}
-            >
-              <BsChat />
-            </ButtonLink>
-            {order?.unread_count > 0 && unreadAlert.business && (
-              <NotificationIcon>
-                <BsBell />
-              </NotificationIcon>
-            )}
             {order?.business?.phone && (
-              <ButtonLink
+              <IconButton
                 onClick={() => window.open(`tel:${order.business.phone}`)}
               >
-                <HiOutlinePhone />
-              </ButtonLink>
+                <Telephone />
+              </IconButton>
             )}
           </div>
           <p>{order?.business?.address}</p>
@@ -75,22 +60,12 @@ export const OrderContactInformation = (props) => {
         <InfoContent>
           <div>
             <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-            <ButtonLink
-              onClick={() => handleOpenMessages('customer')}
-            >
-              <BsChat />
-            </ButtonLink>
-            {order?.unread_count > 0 && unreadAlert.customer && (
-              <NotificationIcon>
-                <BsBell />
-              </NotificationIcon>
-            )}
             {order?.customer?.cellphone && (
-              <ButtonLink
+              <IconButton
                 onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}
               >
-                <HiOutlinePhone />
-              </ButtonLink>
+                <Telephone />
+              </IconButton>
             )}
           </div>
           <p>{order?.customer?.cellphone}</p>
@@ -110,22 +85,12 @@ export const OrderContactInformation = (props) => {
               <InfoContent>
                 <div>
                   <p>{order?.driver?.name} {order?.driver?.lastname}</p>
-                  <ButtonLink
-                    onClick={() => handleOpenMessages('driver')}
-                  >
-                    <BsChat />
-                  </ButtonLink>
-                  {order?.unread_count > 0 && unreadAlert.driver && (
-                    <NotificationIcon>
-                      <BsBell />
-                    </NotificationIcon>
-                  )}
                   {order?.driver?.cellphone && (
-                    <ButtonLink
+                    <IconButton
                       onClick={() => window.open(`tel:${order?.driver?.cellphone}`)}
                     >
-                      <HiOutlinePhone />
-                    </ButtonLink>
+                      <Telephone />
+                    </IconButton>
                   )}
                 </div>
                 <p>{t('DRIVER', 'Driver')}</p>
@@ -140,6 +105,7 @@ export const OrderContactInformation = (props) => {
           </DriverInfo>
           <DriverSelectorContainer>
             <DriverSelector
+              isFirstSelect
               drivers={driversList.drivers}
               isPhoneView
               defaultValue={order?.driver?.id ? order.driver.id : 'default'}
