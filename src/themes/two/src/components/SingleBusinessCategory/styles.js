@@ -33,9 +33,9 @@ export const CategoryContent = styled.div`
   flex-grow: 1;
   color: ${props => props.theme.colors.headingColor};
   ${props => props.theme?.rtl ? css`
-      padding-right: 13px;
+      padding-right: 10px;
     ` : css`
-      padding-left: 13px;
+      padding-left: 10px;
     `}
   input {
     width: 100%;
@@ -86,11 +86,6 @@ export const CategoryEnableWrapper = styled.div`
 
 export const ActionSelectorWrapper = styled.div`
   height: 26px;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 35px;
-    ` : css`
-    margin-left: 35px;
-  `}
   button {
     background: transparent !important;
     border: none;
@@ -126,6 +121,22 @@ export const ActionSelectorWrapper = styled.div`
       a:last-child {
         color: #E63757;
       }
+    }
+  }
+`
+
+export const DraggableContainer = styled.div`
+  display: flex;
+  align-items: center;
+  > img {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
+    `}
+
+    &:hover {
+      cursor: grab;
     }
   }
 `

@@ -19,7 +19,8 @@ import {
   CategoryContent,
   CategoryActionContainer,
   CategoryEnableWrapper,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  DraggableContainer
 } from './styles'
 import {
   ProductTypeImage,
@@ -39,7 +40,9 @@ export const SingleBusinessCategoryUI = (props) => {
     categoryFormState,
     handlechangeImage,
     handleInputChange,
-    isEditMode
+    isEditMode,
+    businessState,
+    handleUpdateBusinessState
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -138,49 +141,105 @@ export const SingleBusinessCategoryUI = (props) => {
     }
   }, [categoryFormState?.loading])
 
+  const handleDrag = (event, categoryId) => {
+    event.dataTransfer.setData('transferCategoryId', categoryId)
+
+    const ghostEle = document.createElement('div')
+    ghostEle.classList.add('ghostDragging')
+    ghostEle.innerHTML = categoryFormState?.changes?.name
+    document.body.appendChild(ghostEle)
+    event.dataTransfer.setDragImage(ghostEle, 0, 0)
+  }
+
+  const handleAllowDrop = (event) => {
+    event.preventDefault()
+  }
+
+  const handleDrop = (event) => {
+    event.preventDefault()
+    const transferCategoryId = parseInt(event.dataTransfer.getData('transferCategoryId'))
+    let counter
+    const _categories = [...businessState?.business?.categories]
+    const updatedCategories = []
+
+    const transferCategory = _categories.find(_category => _category.id === transferCategoryId)
+
+    for (let i = 0; i < _categories.length; i++) {
+      if (_categories[i].id === category?.id) {
+        counter = i
+      }
+      if (_categories[i].id !== transferCategoryId) {
+        updatedCategories.push(_categories[i])
+      }
+    }
+    updatedCategories.splice(counter, 0, transferCategory)
+
+    handleUpdateBusinessState({ ...businessState?.business, categories: updatedCategories })
+  }
+
+  const handleDragEnd = () => {
+    const elements = document.getElementsByClassName('ghostDragging')
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0])
+    }
+  }
+
   return (
     <>
       <SingleCategoryContainer
         active={!isSkeleton && (category?.id === categorySelected?.id)}
         onClick={(e) => handleChangeCategory(e, category)}
         ref={conatinerRef}
+        onDrop={e => handleDrop(e)}
+        onDragOver={e => handleAllowDrop(e)}
+        onDragEnd={e => handleDragEnd(e)}
       >
-        {
-          isSkeleton
-            ? <Skeleton width={41} height={41} />
-            : (
-              <ProductTypeImage
-                onClick={() => handleClickImage()}
-                disabled={categoryFormState?.loading}
-                className='img-section'
-              >
-                <ExamineClick
-                  onFiles={files => handleFiles(files)}
-                  childRef={(e) => { ProductTypeImgRef.current = e }}
-                  accept='image/png, image/jpeg, image/jpg'
-                  disabled={categoryFormState?.loading}
-                >
-                  <DragAndDrop
-                    onDrop={dataTransfer => handleFiles(dataTransfer.files)}
-                    accept='image/png, image/jpeg, image/jpg'
+        <DraggableContainer>
+          {
+            isSkeleton
+              ? <Skeleton width={41} height={41} />
+              : (
+                <>
+                  <img
+                    src={theme.images.icons?.sixDots}
+                    alt='six dots'
+                    draggable
+                    onDragStart={e => handleDrag(e, category.id)}
+                  />
+                  <ProductTypeImage
+                    onClick={() => handleClickImage()}
                     disabled={categoryFormState?.loading}
+                    className='img-section'
                   >
-                    {
-                      categoryFormState?.changes?.image
-                        ? (
-                          <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
-                        )
-                        : (
-                          <UploadWrapper>
-                            <BiImage />
-                          </UploadWrapper>
-                        )
-                    }
-                  </DragAndDrop>
-                </ExamineClick>
-              </ProductTypeImage>
-            )
-        }
+                    <ExamineClick
+                      onFiles={files => handleFiles(files)}
+                      childRef={(e) => { ProductTypeImgRef.current = e }}
+                      accept='image/png, image/jpeg, image/jpg'
+                      disabled={categoryFormState?.loading}
+                    >
+                      <DragAndDrop
+                        onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                        accept='image/png, image/jpeg, image/jpg'
+                        disabled={categoryFormState?.loading}
+                      >
+                        {
+                          categoryFormState?.changes?.image
+                            ? (
+                              <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
+                            )
+                            : (
+                              <UploadWrapper>
+                                <BiImage />
+                              </UploadWrapper>
+                            )
+                        }
+                      </DragAndDrop>
+                    </ExamineClick>
+                  </ProductTypeImage>
+                </>
+              )
+          }
+        </DraggableContainer>
 
         <CategoryContent>
           {

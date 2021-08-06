@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { SingleBusinessProduct } from '../SingleBusinessProduct'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { BusinessProductCreator } from '../BusinessProductCreator'
 import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
+import { Pagination } from '../Pagination'
 
 import {
   ListContent,
@@ -12,7 +13,8 @@ import {
   BusinessProductListTable,
   WrapperNotFound,
   AddProductBtn,
-  ProductListSpreadContainer
+  ProductListSpreadContainer,
+  ProductListBottom
 } from './styles'
 
 export const BusinessProductList = (props) => {
@@ -60,6 +62,37 @@ export const BusinessProductList = (props) => {
     })
   }
 
+  // Change page
+  const [currentPage, setCurrentPage] = useState(1)
+  const [productsPerPage, setProductsPerPage] = useState(10)
+
+  // Get current products
+  const [currentProducts, setCurrentProducts] = useState([])
+  const [totalPages, setTotalPages] = useState(null)
+
+  const handleChangePage = (page) => {
+    setCurrentPage(page)
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((currentPage - 1) * productsPerPage + 1) / pageSize)
+    setCurrentPage(expectedPage)
+    setProductsPerPage(pageSize)
+  }
+
+  useEffect(() => {
+    if (categoryState.loading) return
+    let _totalPages
+    if (categoryState.products.length > 0) {
+      _totalPages = Math.ceil(categoryState.products.length / productsPerPage)
+    }
+    const indexOfLastPost = currentPage * productsPerPage
+    const indexOfFirstPost = indexOfLastPost - productsPerPage
+    const _currentProducts = categoryState.products.slice(indexOfFirstPost, indexOfLastPost)
+    setTotalPages(_totalPages)
+    setCurrentProducts(_currentProducts)
+  }, [categoryState, currentPage, productsPerPage])
+
   return (
     <ListContent>
       {viewMethod === 'list' && (
@@ -102,7 +135,7 @@ export const BusinessProductList = (props) => {
               ) : (
                 <>
                   {
-                    categoryState.products.map((product, i) => (
+                    currentProducts.map((product, i) => (
                       <SingleBusinessProduct
                         {...props}
                         key={i}
@@ -127,12 +160,26 @@ export const BusinessProductList = (props) => {
                 </>
               )}
             </BusinessProductListTable>
+          </ProductListContainer>
+          <ProductListBottom>
             {
-              !businessState.loading && !isAddProduct && (
+              !businessState.loading && (
                 <AddProductBtn onClick={() => setIsAddProduct(true)}>{t('ADD_NEW_PRODUCT', 'Add new product')}</AddProductBtn>
               )
             }
-          </ProductListContainer>
+
+            {
+              !businessState.loading && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  handleChangePage={handleChangePage}
+                  defaultPageSize={productsPerPage}
+                  handleChangePageSize={handleChangePageSize}
+                />
+              )
+            }
+          </ProductListBottom>
 
           {
             !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (

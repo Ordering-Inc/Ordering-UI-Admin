@@ -10,9 +10,7 @@ export const SidebarContainer = styled.div`
   @media print {
     display: none;
   }
-  button.btn-primary {
-    background-color: ${props => props.theme.colors.primary};
-  }
+
   transition: width 0.4s ease;
   position: fixed;
   z-index: 1000;
@@ -20,6 +18,38 @@ export const SidebarContainer = styled.div`
   width: 0px;
   height: 100vh;
   overflow: hidden;
+
+  button.btn-primary {
+    background-color: ${props => props.theme.colors.primary};
+  }
+
+  button {
+    display: flex;
+    font-size: 14px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-weight: 500;
+    &:hover {
+      background-color: ${props => props.theme.colors.lightPrimary};
+    }
+    &.btn-primary {
+      &:hover {
+        background-color: ${props => props.theme.colors.primary};
+      }
+    }
+
+    span {
+      ${props => props.theme?.rtl ? css`
+        margin-right: 15px;
+      ` : css`
+        margin-left: 15px;
+      `}
+    }
+
+    svg {
+      font-size: 20px;
+    }
+  }
 
   @media (min-width: 760px) {
     height: inherit;
@@ -64,18 +94,31 @@ export const SidebarContent = styled.div`
   transition: 0.1s;
   border-top: 1px solid ${props => props.theme.colors.borderColor};
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  button {
-    display: flex;
-    font-size: 14px;
-    box-sizing: border-box;
-    svg {
-      font-size: 20px;
-    }
-  }
 `
 
 export const UserInfo = styled.div`
   transition: 0.1s;
+  > button:first-child {
+    margin: 5px 0;
+    ${props => props.theme?.rtl ? css`
+      padding-right: 8px;
+    ` : css`
+      padding-left: 8px;
+    `}
+    span {
+      max-width: calc(100% - 40px);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 10px;
+      ` : css`
+        margin-left: 10px;
+      `}
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
 `
 
 export const CollapseButton = styled.div`
@@ -160,12 +203,61 @@ export const SubMenu = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.primary};
   `}
   ${props => props.theme?.rtl ? css`
-    margin-right: 40px;
+    padding-right: 40px;
   ` : css`
-    margin-left: 40px;
+    padding-left: 40px;
   `}
+`
+
+export const LanguageSelectorContainer = styled.div`
+  position: relative;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
+  > svg {
+    position: absolute;
+    top: 7px;
+    ${props => props.theme?.rtl ? css`
+      right: 0.75rem;
+    ` : css`
+      left: 0.75rem;
+    `}
+    width: 20px;
+    height: 20px;
+  }
+
+  .select {
+    border: none;
+    > div:first-child {
+      justify-content: flex-start;
+      font-size: 14px;
+      font-weight: 500;
+      ${props => props.theme?.rtl ? css`
+        padding-right: 48px;
+      ` : css`
+        padding-left: 48px;
+      `}
+
+      > div:first-child {
+        flex: unset;
+      }
+    }
+  }
+
+  .options {
+    > div {
+      font-size: 14px;
+    }
+  }
 `

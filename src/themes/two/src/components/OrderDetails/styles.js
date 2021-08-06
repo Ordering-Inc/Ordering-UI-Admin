@@ -169,7 +169,7 @@ export const OrderProducts = styled.div`
   }
 `
 
-export const CloseButton = styled.div`
+export const CloseButtonWrapper = styled.div`
   width: fit-content;
   cursor: pointer;
   z-index: 100;
@@ -180,9 +180,4 @@ export const CloseButton = styled.div`
   ` : css`
     right: 20px;
   `}
-
-  svg {
-    font-size: 28px;
-    color: ${props => props.theme.colors.headingColor};
-  }
 `

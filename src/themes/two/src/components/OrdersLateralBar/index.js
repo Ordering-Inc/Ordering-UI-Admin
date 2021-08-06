@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { XLg } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { OrdersManager } from '../OrdersManager'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   LateralBarContainer,
   OrdersContainer,
-  CloseButton,
+  CloseButtonWrapper,
   Info,
   WrapperImage,
   Image,
@@ -79,11 +80,14 @@ export const OrdersLateralBar = (props) => {
   return (
     <LateralBarContainer id='driver_lateral_bar'>
       <OrdersContainer>
-        <CloseButton
-          onClick={() => props.onClose()}
-        >
-          <MdcClose />
-        </CloseButton>
+        <CloseButtonWrapper>
+          <IconButton
+            color='black'
+            onClick={() => props.onClose()}
+          >
+            <XLg />
+          </IconButton>
+        </CloseButtonWrapper>
         <Info>
           <WrapperImage>
             {isBusiness ? (

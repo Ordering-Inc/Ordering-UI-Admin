@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 
 import {
   HouseDoor,
   Building,
   SuitHeart,
-  PlusLg
+  PlusLg,
+  XLg
 } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 
@@ -25,7 +25,7 @@ import {
 
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../GoogleGpsButton'
-import { Button } from '../../styles/Buttons'
+import { Button, IconButton } from '../../styles/Buttons'
 
 import {
   FormControl,
@@ -36,7 +36,7 @@ import {
   WrapperMap,
   WrapperSkeleton,
   Title,
-  CloseButton,
+  CloseButtonWrapper,
   InputText,
   WrapInput,
   TagButton
@@ -369,11 +369,14 @@ const AddressFormUI = (props) => {
               t('EDIT_ADDRESS', 'Edit address')
             )}
           </Title>
-          <CloseButton
-            onClick={() => onCancel()}
-          >
-            <MdcClose />
-          </CloseButton>
+          <CloseButtonWrapper>
+            <IconButton
+              color='black'
+              onClick={() => onCancel()}
+            >
+              <XLg />
+            </IconButton>
+          </CloseButtonWrapper>
         </>
       )}
 

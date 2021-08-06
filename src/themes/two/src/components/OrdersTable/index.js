@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import AiFillShop from '@meronex/icons/ai/AiFillShop'
-import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
-import FaCarSide from '@meronex/icons/fa/FaCarSide'
+// import AiFillShop from '@meronex/icons/ai/AiFillShop'
+// import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
+// import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -12,9 +12,9 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { DriverSelector } from '../DriverSelector'
-import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
+// import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
-import { PaginationButton } from '../PaginationButton'
+import { Pagination } from '../Pagination'
 import {
   OrdersContainer,
   Table,
@@ -39,8 +39,8 @@ export const OrdersTable = (props) => {
     pagination,
     selectedOrderIds,
     orderDetailId,
-    loadMoreOrders,
-    handleUpdateOrderStatus,
+    getPageOrders,
+    // handleUpdateOrderStatus,
     handleSelectedOrderIds,
     handleOpenOrderDetail
   } = props
@@ -48,30 +48,16 @@ export const OrdersTable = (props) => {
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
 
-  // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [ordersPerPage] = useState(10)
+  const [ordersPerPage, setOrdersPerPage] = useState(10)
 
-  // Get current orders
-  const indexOfLastPost = currentPage * ordersPerPage
-  const indexOfFirstPost = indexOfLastPost - ordersPerPage
-  const [currentOrders, setCurrentOrders] = useState([])
-  const [totalPages, setTotalPages] = useState(null)
-  const [totalOrders, setTotalOrders] = useState(null)
-
-  // Change page
-  const prevPaginate = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
-    }
+  const handleChangePage = (page) => {
+    getPageOrders(ordersPerPage, page)
   }
-  const nextPaginate = () => {
-    if (currentPage !== totalPages) {
-      if (orderList.orders.length < ordersPerPage * currentPage + 1) {
-        loadMoreOrders()
-      }
-      setCurrentPage(currentPage + 1)
-    }
+
+  const handleChangePageSize = (pageSize) => {
+    setOrdersPerPage(pageSize)
+    const expectedPage = Math.ceil(pagination.from / pageSize)
+    getPageOrders(pageSize, expectedPage)
   }
 
   const [openPopover, setOpenPopover] = useState(false)
@@ -82,9 +68,9 @@ export const OrdersTable = (props) => {
     customer: true,
     driver: true,
     advanced: true,
-    total: true,
-    status: true,
-    deliveryType: true
+    total: true
+    // status: true,
+    // deliveryType: true
   })
 
   const optionsDefault = [
@@ -115,15 +101,15 @@ export const OrdersTable = (props) => {
     {
       value: 'total',
       content: t('TOTAL', 'Total')
-    },
-    {
-      value: 'status',
-      content: t('STATUS', 'Status')
-    },
-    {
-      value: 'deliveryType',
-      content: t('DELIVERY_TYPE', 'Delivery type')
     }
+    // {
+    //   value: 'status',
+    //   content: t('STATUS', 'Status')
+    // },
+    // {
+    //   value: 'deliveryType',
+    //   content: t('DELIVERY_TYPE', 'Delivery type')
+    // }
   ]
 
   const getLogisticTag = (status) => {
@@ -171,20 +157,6 @@ export const OrdersTable = (props) => {
     handleOpenOrderDetail(order)
   }
 
-  useEffect(() => {
-    if (orderList.loading) return
-    let _totalPages
-    if (pagination?.total) {
-      _totalPages = Math.ceil(pagination?.total / ordersPerPage)
-    } else if (orderList.orders.length > 0) {
-      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage)
-    }
-    const _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalOrders(pagination?.total)
-    setTotalPages(_totalPages)
-    setCurrentOrders(_currentOrders)
-  }, [orderList, currentPage, pagination])
-
   return (
     <>
       <OrdersContainer
@@ -210,12 +182,12 @@ export const OrdersTable = (props) => {
               {allowColumns?.driver && (
                 <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
               )}
-              {allowColumns?.deliveryType && (
+              {/* {allowColumns?.deliveryType && (
                 <th className='orderType'>{t('DELIVERY_TYPE', 'Delivery type')}</th>
               )}
               {allowColumns?.status && (
                 <th className='orderStatusTitle'>{t('ORDER_STATUS', 'Order status')}</th>
-              )}
+              )} */}
               {allowColumns?.advanced && (
                 <th colSpan={3} className='advanced'>{t('ADVANCE_LOGISTICS', 'Advance logistics')}</th>
               )}
@@ -334,196 +306,191 @@ export const OrdersTable = (props) => {
               </OrderTbody>
             ))
           ) : (
-            <>
-              {currentOrders.map(order => (
-                <OrderTbody
-                  key={order.id}
-                  className={parseInt(orderDetailId) === order.id ? 'active' : ''}
-                  isCustomStyle={isSelectedOrders}
-                  onClick={(e) => handleClickOrder(order, e)}
-                >
-                  <tr>
-                    <td
-                      className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
-                    >
-                      <OrderNumberContainer>
-                        {!isSelectedOrders && (
-                          <CheckBox
-                            isChecked={selectedOrderIds.includes(order?.id)}
-                            onClick={() => handleSelectedOrderIds(order.id)}
-                            className='orderCheckBox'
-                          >
-                            {selectedOrderIds.includes(order?.id) ? (
-                              <RiCheckboxFill />
-                            ) : (
-                              <RiCheckboxBlankLine />
-                            )}
-                          </CheckBox>
-                        )}
-                        <div className='info'>
-                          {allowColumns?.orderNumber && (
-                            <p className='bold'>{t('ORDER_NO', 'Order No.')} {order?.id}</p>
+            orderList.orders.map(order => (
+              <OrderTbody
+                key={order.id}
+                className={parseInt(orderDetailId) === order.id ? 'active' : ''}
+                isCustomStyle={isSelectedOrders}
+                onClick={(e) => handleClickOrder(order, e)}
+              >
+                <tr>
+                  <td
+                    className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
+                  >
+                    <OrderNumberContainer>
+                      {!isSelectedOrders && (
+                        <CheckBox
+                          isChecked={selectedOrderIds.includes(order?.id)}
+                          onClick={() => handleSelectedOrderIds(order.id)}
+                          className='orderCheckBox'
+                        >
+                          {selectedOrderIds.includes(order?.id) ? (
+                            <RiCheckboxFill />
+                          ) : (
+                            <RiCheckboxBlankLine />
                           )}
-                          {allowColumns?.dateTime && (
-                            <p className='date'>{parseDate(order?.delivery_datetime, { utc: false })}</p>
-                          )}
-                        </div>
-                      </OrderNumberContainer>
-                    </td>
-                    {allowColumns?.business && (
-                      <td className='businessInfo'>
-                        <BusinessInfo>
-                          <WrapperImage>
-                            <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-                          </WrapperImage>
-                          <div className='info'>
-                            <p className='bold'>{order?.business?.name}</p>
-                            <p>{order?.business?.city?.name}</p>
-                          </div>
-                        </BusinessInfo>
-                      </td>
-                    )}
-                    {allowColumns?.customer && (
-                      <td className='customerInfo'>
-                        <CustomerInfo>
-                          <WrapperImage>
-                            {order?.customer?.photo ? (
-                              <Image bgimage={order?.customer?.photo} />
-                            ) : (
-                              <FaUserAlt />
-                            )}
-                          </WrapperImage>
-                          <div className='info'>
-                            <p className='bold'>{order?.customer?.name}</p>
-                            <p>{order?.customer?.cellphone}</p>
-                          </div>
-                        </CustomerInfo>
-                      </td>
-                    )}
-                    {allowColumns?.driver && (
-                      <td>
-                        {order?.delivery_type === 1 && (
-                          <DriversInfo className='driverInfo'>
-                            <DriverSelector
-                              orderView
-                              padding='5px 0'
-                              defaultValue={order?.driver_id ? order.driver_id : 'default'}
-                              drivers={driversList.drivers}
-                              order={order}
-                            />
-                          </DriversInfo>
-                        )}
-                      </td>
-                    )}
-                    {allowColumns?.deliveryType && (
-                      <td className='orderType'>
-                        <OrderType>
-                          {order?.delivery_type === 1 && (
-                            <>
-                              <img
-                                src={theme?.images?.icons?.driverDelivery}
-                                alt='Delivery'
-                              />
-                              <span>{t('DELIVERY', 'Delivery')}</span>
-                            </>
-                          )}
-                          {order?.delivery_type === 2 && (
-                            <>
-                              <img
-                                src={theme?.images?.icons?.pickUp}
-                                alt='pick up'
-                              />
-                              <span>{t('PICK_UP', 'Pick up')}</span>
-                            </>
-                          )}
-                          {order?.delivery_type === 3 && (
-                            <>
-                              <AiFillShop />
-                              <span>{t('EAT_IN', 'Eat In')}</span>
-                            </>
-                          )}
-                          {order?.delivery_type === 4 && (
-                            <>
-                              <GiFoodTruck />
-                              <span>{t('CURBSIDE', 'Curbside')}</span>
-                            </>
-                          )}
-                          {order?.delivery_type === 5 && (
-                            <>
-                              <FaCarSide />
-                              <span>{t('DRIVER_THRU', 'Driver thru')}</span>
-                            </>
-                          )}
-                        </OrderType>
-                      </td>
-                    )}
-                    {allowColumns?.status && (
-                      <td className='orderStatusTitle'>
-                        <WrapOrderStatusSelector>
-                          <OrderStatusTypeSelector
-                            defaultValue={parseInt(order.status)}
-                            orderId={order.id}
-                            deliveryType={order?.delivery_type}
-                            noPadding
-                            handleUpdateOrderStatus={handleUpdateOrderStatus}
-                          />
-                        </WrapOrderStatusSelector>
-                      </td>
-                    )}
-                    {allowColumns?.advanced && (
-                      <td className='logistic'>
-                        <div className='info'>
-                          <p className='bold'>{t('LOGISTIC', 'Logistic')}</p>
-                          <p>{getLogisticTag(order?.logistic_status)}</p>
-                        </div>
-                      </td>
-                    )}
-                    {allowColumns?.advanced && (
-                      <td className='attempts'>
-                        <div className='info'>
-                          <p className='bold'>{t('ATTEMPTS', 'Attempts')}</p>
-                          <p>{order?.logistic_attemps}</p>
-                        </div>
-                      </td>
-                    )}
-                    {allowColumns?.advanced && (
-                      <td className='priority'>
-                        <div className='info'>
-                          <p className='bold'>{t('PRIORITY', 'Priority')}</p>
-                          <p>{getPriorityTag(order?.priority)}</p>
-                        </div>
-                      </td>
-                    )}
-                    <td className='orderPrice'>
+                        </CheckBox>
+                      )}
                       <div className='info'>
-                        {allowColumns?.total && (
-                          <p className='bold'>{parsePrice(order?.summary?.total)}</p>
+                        {allowColumns?.orderNumber && (
+                          <p className='bold'>{t('ORDER_NO', 'Order No.')} {order?.id}</p>
                         )}
-                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                          <TimgeAgo order={order} />
+                        {allowColumns?.dateTime && (
+                          <p className='date'>{parseDate(order?.delivery_datetime, { utc: false })}</p>
                         )}
                       </div>
+                    </OrderNumberContainer>
+                  </td>
+                  {allowColumns?.business && (
+                    <td className='businessInfo'>
+                      <BusinessInfo>
+                        <WrapperImage>
+                          <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                        </WrapperImage>
+                        <div className='info'>
+                          <p className='bold'>{order?.business?.name}</p>
+                          <p>{order?.business?.city?.name}</p>
+                        </div>
+                      </BusinessInfo>
                     </td>
-                  </tr>
-                </OrderTbody>
-              ))}
-            </>
+                  )}
+                  {allowColumns?.customer && (
+                    <td className='customerInfo'>
+                      <CustomerInfo>
+                        <WrapperImage>
+                          {order?.customer?.photo ? (
+                            <Image bgimage={order?.customer?.photo} />
+                          ) : (
+                            <FaUserAlt />
+                          )}
+                        </WrapperImage>
+                        <div className='info'>
+                          <p className='bold'>{order?.customer?.name}</p>
+                          <p>{order?.customer?.cellphone}</p>
+                        </div>
+                      </CustomerInfo>
+                    </td>
+                  )}
+                  {allowColumns?.driver && (
+                    <td>
+                      {order?.delivery_type === 1 && (
+                        <DriversInfo className='driverInfo'>
+                          <DriverSelector
+                            orderView
+                            padding='5px 0'
+                            defaultValue={order?.driver_id ? order.driver_id : 'default'}
+                            drivers={driversList.drivers}
+                            order={order}
+                          />
+                        </DriversInfo>
+                      )}
+                    </td>
+                  )}
+                  {/* {allowColumns?.deliveryType && (
+                    <td className='orderType'>
+                      <OrderType>
+                        {order?.delivery_type === 1 && (
+                          <>
+                            <img
+                              src={theme?.images?.icons?.driverDelivery}
+                              alt='Delivery'
+                            />
+                            <span>{t('DELIVERY', 'Delivery')}</span>
+                          </>
+                        )}
+                        {order?.delivery_type === 2 && (
+                          <>
+                            <img
+                              src={theme?.images?.icons?.pickUp}
+                              alt='pick up'
+                            />
+                            <span>{t('PICK_UP', 'Pick up')}</span>
+                          </>
+                        )}
+                        {order?.delivery_type === 3 && (
+                          <>
+                            <AiFillShop />
+                            <span>{t('EAT_IN', 'Eat In')}</span>
+                          </>
+                        )}
+                        {order?.delivery_type === 4 && (
+                          <>
+                            <GiFoodTruck />
+                            <span>{t('CURBSIDE', 'Curbside')}</span>
+                          </>
+                        )}
+                        {order?.delivery_type === 5 && (
+                          <>
+                            <FaCarSide />
+                            <span>{t('DRIVER_THRU', 'Driver thru')}</span>
+                          </>
+                        )}
+                      </OrderType>
+                    </td>
+                  )}
+                  {allowColumns?.status && (
+                    <td className='orderStatusTitle'>
+                      <WrapOrderStatusSelector>
+                        <OrderStatusTypeSelector
+                          defaultValue={parseInt(order.status)}
+                          orderId={order.id}
+                          deliveryType={order?.delivery_type}
+                          noPadding
+                          handleUpdateOrderStatus={handleUpdateOrderStatus}
+                        />
+                      </WrapOrderStatusSelector>
+                    </td>
+                  )} */}
+                  {allowColumns?.advanced && (
+                    <td className='logistic'>
+                      <div className='info'>
+                        <p className='bold'>{t('LOGISTIC', 'Logistic')}</p>
+                        <p>{getLogisticTag(order?.logistic_status)}</p>
+                      </div>
+                    </td>
+                  )}
+                  {allowColumns?.advanced && (
+                    <td className='attempts'>
+                      <div className='info'>
+                        <p className='bold'>{t('ATTEMPTS', 'Attempts')}</p>
+                        <p>{order?.logistic_attemps}</p>
+                      </div>
+                    </td>
+                  )}
+                  {allowColumns?.advanced && (
+                    <td className='priority'>
+                      <div className='info'>
+                        <p className='bold'>{t('PRIORITY', 'Priority')}</p>
+                        <p>{getPriorityTag(order?.priority)}</p>
+                      </div>
+                    </td>
+                  )}
+                  <td className='orderPrice'>
+                    <div className='info'>
+                      {allowColumns?.total && (
+                        <p className='bold'>{parsePrice(order?.summary?.total)}</p>
+                      )}
+                      {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                        <TimgeAgo order={order} />
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              </OrderTbody>
+            ))
           )}
         </Table>
       </OrdersContainer>
 
       {pagination && (
         <WrapperPagination>
-          {!orderList.loading && totalPages > 0 && (
-            <PaginationButton
-              pageSize={ordersPerPage}
-              total={totalOrders}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              prevPaginate={prevPaginate}
-              nextPaginate={nextPaginate}
-            />
-          )}
+          <Pagination
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            handleChangePage={handleChangePage}
+            defaultPageSize={ordersPerPage}
+            handleChangePageSize={handleChangePageSize}
+          />
         </WrapperPagination>
       )}
     </>

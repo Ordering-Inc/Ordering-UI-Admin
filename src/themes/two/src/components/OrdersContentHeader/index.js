@@ -5,13 +5,13 @@ import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import { Funnel } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
+import { IconButton as FilterButton } from '../../styles/Buttons'
 
 import {
   OrderContentHeaderContainer,
   HeaderSection,
   HeaderTitle,
   TopRightSection,
-  FilterButton,
   WrapperSearchAndFilter
 } from './styles'
 
@@ -77,7 +77,11 @@ export const OrdersContentHeader = (props) => {
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}
             />
-            <FilterButton onClick={() => setFilterModalOpen(true)} name='filter-btn'>
+            <FilterButton
+              color='black'
+              onClick={() => setFilterModalOpen(true)}
+              name='filter-btn'
+            >
               {filterApplied ? <Funnel /> : <MdcFilterOff />}
             </FilterButton>
           </WrapperSearchAndFilter>

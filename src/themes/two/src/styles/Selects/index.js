@@ -6,7 +6,7 @@ export const Option = styled.div`
   align-items: center;
   padding: 5px 10px;
   box-sizing: border-box;
-  min-width: 100px;
+  min-width: ${({ minWidth }) => minWidth || '100px'};
   color: #333;
   cursor: pointer;
 

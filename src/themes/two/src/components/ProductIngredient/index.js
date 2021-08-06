@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useLanguage, ProductIngredient as ProductIngredientController } from 'ordering-components-admin'
-import { PlusSquare, Trash } from 'react-bootstrap-icons'
+import { Trash } from 'react-bootstrap-icons'
+import { Button } from '../../styles/Buttons'
 import {
   IngredientContainer,
   Header,
@@ -38,7 +39,13 @@ const ProductIngredientUI = (props) => {
     <IngredientContainer>
       <Header>
         <h1>{t('INGREDIENTS', 'Ingredients')}</h1>
-        <PlusSquare onClick={() => handleOpenAddForm()} />
+        <Button
+          borderRadius='8px'
+          color='lightPrimary'
+          onClick={() => handleOpenAddForm()}
+        >
+          {t('ADD_INGREDIENT', 'Add ingredient')}
+        </Button>
       </Header>
       {productState?.product?.ingredients.map(ingredient => (
         <IngredientOption

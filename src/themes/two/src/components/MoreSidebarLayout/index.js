@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { XLg } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   MainContainer,
-  CloseButton
+  CloseButtonWrapper
 } from './styles'
 export const MoreSidebarLayout = (props) => {
   const {
@@ -22,12 +23,16 @@ export const MoreSidebarLayout = (props) => {
     <>
       {width > 1000 ? (
         <MainContainer>
-          <CloseButton
+          <CloseButtonWrapper
             isExtendExtraOpen={isExtendExtraOpen}
-            onClick={() => props.onClose()}
           >
-            <MdcClose />
-          </CloseButton>
+            <IconButton
+              color='black'
+              onClick={() => props.onClose()}
+            >
+              <XLg />
+            </IconButton>
+          </CloseButtonWrapper>
           {props.children}
         </MainContainer>
       ) : (

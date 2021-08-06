@@ -13,12 +13,14 @@ import {
   People as PeopleIcon,
   BarChartLine as BarChartLineIcon,
   Gear as GearIcon,
-  Headset as HeadsetIcon
+  Headset as HeadsetIcon,
+  Globe2
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
+import { LanguageSelector } from '../LanguageSelector'
 import {
   Header,
   SidebarContainer,
@@ -31,7 +33,8 @@ import {
   MenuClose,
   MenuContainer,
   MenuContent,
-  SubMenu
+  SubMenu,
+  LanguageSelectorContainer
 } from './styles'
 
 export const SidebarMenu = (props) => {
@@ -161,7 +164,7 @@ export const SidebarMenu = (props) => {
                 <MenuContainer>
                   <ContextAwareToggle eventKey='0'>
                     <HouseDoor />
-                    {!isCollapse && <span className='mx-2'>{t('HOME', 'Home')}</span>}
+                    {!isCollapse && <span>{t('HOME', 'Home')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
 
@@ -175,7 +178,7 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <ListCheck />
-                    {!isCollapse && <span className='mx-2'>{t('ORDERS', 'Orders')}</span>}
+                    {!isCollapse && <span>{t('ORDERS', 'Orders')}</span>}
                   </ContextAwareToggle>
                   <Accordion.Collapse eventKey='1'>
                     <MenuContent>
@@ -200,7 +203,7 @@ export const SidebarMenu = (props) => {
                     active={location.pathname === '/messages'}
                   >
                     <ChatIcon />
-                    {!isCollapse && <span className='mx-2'>{t('MESSAGES', 'Messages')}</span>}
+                    {!isCollapse && <span>{t('MESSAGES', 'Messages')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
 
@@ -215,7 +218,7 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <ShopIcon />
-                    {!isCollapse && <span className='mx-2'>{t('STORES', 'Stores')}</span>}
+                    {!isCollapse && <span>{t('STORES', 'Stores')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
 
@@ -229,19 +232,23 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <PeopleIcon />
-                    {!isCollapse && <span className='mx-2'>{t('USERS', 'Users')}</span>}
+                    {!isCollapse && <span>{t('USERS', 'Users')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
 
                 <MenuContainer>
                   <ContextAwareToggle eventKey='5'>
                     <BarChartLineIcon />
-                    {!isCollapse && <span className='mx-2'>{t('ANALYTICS', 'Analytics')}</span>}
+                    {!isCollapse && <span>{t('ANALYTICS', 'Analytics')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
               </Accordion>
             </div>
             <div className='d-flex flex-column'>
+              <LanguageSelectorContainer>
+                <Globe2 />
+                <LanguageSelector />
+              </LanguageSelectorContainer>
               {sessionState?.user?.level === 0 && (
                 <Accordion>
                   <MenuContainer>
@@ -253,7 +260,7 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       <GearIcon />
-                      {!isCollapse && <span className='mx-2'>{t('SETTINGS', 'Settings')}</span>}
+                      {!isCollapse && <span>{t('SETTINGS', 'Settings')}</span>}
                     </ContextAwareToggle>
                     <Accordion.Collapse eventKey='5'>
                       <MenuContent>
@@ -278,7 +285,7 @@ export const SidebarMenu = (props) => {
                 onClick={() => handleGoToPage({ page: 'support' })}
               >
                 <HeadsetIcon />
-                {!isCollapse && <span className='mx-2'>{t('SUPPORT', 'Support')}</span>}
+                {!isCollapse && <span>{t('SUPPORT', 'Support')}</span>}
               </Button>
             </div>
           </SidebarContent>
@@ -287,7 +294,7 @@ export const SidebarMenu = (props) => {
             className='d-flex flex-column px-1'
           >
             <Button
-              className='d-flex align-items-center m-1'
+              className='d-flex align-items-center'
               onClick={() => handleGoToPage({ page: 'profile' })}
               variant={location.pathname === '/profile' && 'primary'}
             >
@@ -296,7 +303,7 @@ export const SidebarMenu = (props) => {
               ) : (
                 <PersonFill />
               )}
-              {!isCollapse && <span className='mx-2'>{sessionState?.user?.name}</span>}
+              {!isCollapse && <span>{sessionState?.user?.name} {sessionState?.user?.lastname}</span>}
             </Button>
             <LogoutButton isCollapse={isCollapse} />
           </UserInfo>

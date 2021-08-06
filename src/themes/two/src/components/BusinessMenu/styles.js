@@ -16,17 +16,14 @@ export const MenuContainer = styled.div`
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-
-  svg {
-    cursor: pointer;
-    font-size: 20px;
-    color: ${props => props.theme.colors.primary};
-
+  justify-content: space-between;
+  margin-bottom: 20px;
+  button {
+    height: 42px;
     ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
+      margin-left: 40px;
     ` : css`
-      margin-left: 10px;
+      margin-right: 40px;
     `}
   }
 `

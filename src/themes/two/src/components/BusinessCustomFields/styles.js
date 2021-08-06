@@ -35,11 +35,6 @@ export const MetaContainer = styled.div`
     > div {
       width: 100%;
     }
-    svg {
-      font-size: 20px;
-      color: ${props => props.theme.colors?.headingColor};
-      cursor: pointer;
-    }
   }
 
 `
@@ -52,12 +47,6 @@ export const MetaAddContainer = styled(MetaContainer)`
     font-size: 16px;
     box-sizing: border-box;
     width: 100%;
-  }
-
-  button {
-    svg {
-      color: ${props => props.theme.colors.primary} !important;
-    }
   }
 `
 export const RoundBorder = styled.div`
@@ -72,14 +61,6 @@ export const NoMetaField = styled.p`
   font-size: 14px;
 `
 export const MetaAddForm = styled.form`
-  button[type='submit'] {
-    outline: none;
-    background: transparent;
-    border: none;
-    padding: 0px;
-    height: fit-content
-  }
-
   .select-input {
     width: 100%;
 

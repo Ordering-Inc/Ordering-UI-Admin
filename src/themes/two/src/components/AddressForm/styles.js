@@ -138,7 +138,7 @@ export const Title = styled.div`
   margin-bottom: 10px;
 `
 
-export const CloseButton = styled.span`
+export const CloseButtonWrapper = styled.span`
   position: fixed;
   cursor: pointer;
   top: 30px;
@@ -147,9 +147,6 @@ export const CloseButton = styled.span`
   ` : css`
     right: 10px;
   `}
-  svg {
-    font-size: 30px;
-  }
 `
 
 export const WrapInput = styled.div`

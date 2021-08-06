@@ -3,12 +3,12 @@ import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-co
 import { Switch } from '../../styles/Switch'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { useTheme } from 'styled-components'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
 import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { Button } from '../../styles/Buttons'
 
 import {
   MainContainer,
@@ -53,9 +53,13 @@ const BusinessMenuUI = (props) => {
       <MenuContainer>
         <Header>
           <Title>{t('MENU', 'Menu')}</Title>
-          <BsPlusSquare
+          <Button
+            borderRadius='8px'
+            color='lightPrimary'
             onClick={() => handleOpenOptions('option', {})}
-          />
+          >
+            {t('ADD_MENU', 'Add menu')}
+          </Button>
         </Header>
         {businessMenusState?.menus.map(menu => (
           <MeunItem key={menu.id}>

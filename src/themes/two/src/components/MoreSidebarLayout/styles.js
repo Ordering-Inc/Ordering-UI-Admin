@@ -18,8 +18,7 @@ export const MainContainer = styled.div`
   }
 `
 
-export const CloseButton = styled.span`
-  cursor: pointer;
+export const CloseButtonWrapper = styled.span`
   z-index: 100;
   position: absolute;
   top: 20px;
@@ -28,8 +27,4 @@ export const CloseButton = styled.span`
   ` : css`
     right: ${({ isExtendExtraOpen }) => isExtendExtraOpen ? '520px' : '20px'};
   `}
-  svg {
-    color: ${props => props.theme.colors.headingColor};
-    font-size: 24px;
-  }
 `
