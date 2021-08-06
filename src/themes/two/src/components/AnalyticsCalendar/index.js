@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsCalendar as AnalyticsCalendarController } from './naked'
 import { Button } from '../../styles/Buttons'
 import {
   AnalyticsCalendarContainer
@@ -9,7 +8,7 @@ import DateRangePicker from 'react-daterange-picker'
 import FiCalendar from '@meronex/icons/fi/FiCalendar'
 import 'react-daterange-picker/dist/css/react-calendar.css'
 
-const AnalyticsCalendarUI = (props) => {
+export const AnalyticsCalendar = (props) => {
   const {
     filterList,
     handleChangeFilterList
@@ -59,16 +58,5 @@ const AnalyticsCalendarUI = (props) => {
         )
       }
     </>
-  )
-}
-
-export const AnalyticsCalendar = (props) => {
-  const analyticsCalendarProps = {
-    ...props,
-    UIComponent: AnalyticsCalendarUI
-  }
-
-  return (
-    <AnalyticsCalendarController {...analyticsCalendarProps} />
   )
 }

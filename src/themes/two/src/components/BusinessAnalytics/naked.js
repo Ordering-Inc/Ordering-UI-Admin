@@ -22,6 +22,14 @@ export const BusinessAnalytics = (props) => {
   const [arrivedPickUpSpendList, setArrivedPickUpSpendList] = useState({ loading: false, data: [], error: null })
   const [orderLocationList, setOrderLocationList] = useState({ loading: false, data: [], error: null })
 
+  const paramsForAPI = (type) => {
+    const rootUrl = `${ordering.root}/reports/${type}`
+    let params = `lapse=${filterList?.lapse}`
+    if (filterList?.businessIds && filterList?.businessIds.length > 0) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
+    if (filterList?.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
+    return `${rootUrl}?${params}`
+  }
+
   /**
    * Method to get orders list
    */
@@ -36,11 +44,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/orders`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList?.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList?.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('orders')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -80,11 +84,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/sales`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList?.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList?.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('sales')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -124,11 +124,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/top_selling`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('top_selling')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -168,11 +164,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/top_categories`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('top_categories')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -212,11 +204,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/orders_status`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('orders_status')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -256,11 +244,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/users`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('users')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -300,11 +284,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/customer_satisfaction`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('customer_satisfaction')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -344,11 +324,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/orders_accept_spend`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('orders_accept_spend')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -388,11 +364,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/arrived_pickup_spend`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('arrived_pickup_spend')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -432,11 +404,7 @@ export const BusinessAnalytics = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const rootUrl = `${ordering.root}/reports/order_location`
-      let params = `lapse=${filterList?.lapse}`
-      if (filterList.businessIds) params = `${params}&businesses=${filterList?.businessIds?.toString()}`
-      if (filterList.app_id && filterList.app_id !== 'all') params = `${params}&app_id=${filterList?.app_id}`
-      const functionFetch = `${rootUrl}?${params}`
+      const functionFetch = paramsForAPI('order_location')
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()

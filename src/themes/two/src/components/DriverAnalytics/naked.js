@@ -34,6 +34,7 @@ export const DriverAnalytics = (props) => {
     if (filterList?.userIds) params = `${params}&drivers=${filterList?.userIds?.toString()}`
     return `${rootUrl}?${params}`
   }
+
   /**
    * Method to get orders list
    */

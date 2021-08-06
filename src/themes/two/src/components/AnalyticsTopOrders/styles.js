@@ -7,7 +7,7 @@ export const Container = styled.div`
   height: 100%;
 `
 
-export const ProductCategoryHeader = styled.div`
+export const AnalyticsTopOrdersHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -37,9 +37,9 @@ export const ActionBlock = styled.div`
   `}
 `
 
-export const ProductCategoryContentWrapper = styled.div``
+export const TopOrdersContainerWrapper = styled.div``
 
-export const ProductCategoryContent = styled.div`
+export const TopOrdersContent = styled.div`
   padding: 12px 0;
   display: flex;
   justify-content: space-between;

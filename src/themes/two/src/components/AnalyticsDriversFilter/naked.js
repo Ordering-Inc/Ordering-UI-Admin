@@ -15,13 +15,16 @@ export const AnalyticsDriversFilter = (props) => {
   const [ordering] = useApi()
 
   /**
-   * This state save the business type info from API
+   * This state save the user info from API
    */
   const [usersList, setUsersList] = useState({ loading: true, error: null, users: [], pagination: null })
   const [groupList, setGroupList] = useState(null)
   const [userIds, setUserIds] = useState(null)
   const [isAllCheck, setIsAllCheck] = useState('all')
 
+  /**
+   * Method to set group list
+   */
   const getGroupList = () => {
     const _groupList = []
     const _userIds = []
@@ -43,6 +46,10 @@ export const AnalyticsDriversFilter = (props) => {
     setGroupList(groups)
   }
 
+  /**
+   * Method to change user id
+   * @param {number} id
+   */
   const handleChangeUserId = (id) => {
     const found = userIds?.find(businessId => businessId === id)
     if (found) {
@@ -57,6 +64,10 @@ export const AnalyticsDriversFilter = (props) => {
     }
   }
 
+  /**
+   * Method to check if a group collapse
+   * @param {number} groupId
+   */
   const handleChangeCollapse = (groupId) => {
     const _groupList = groupList?.map((group) => {
       if (group.id === groupId) {
@@ -67,6 +78,10 @@ export const AnalyticsDriversFilter = (props) => {
     setGroupList(_groupList)
   }
 
+  /**
+   * Method to check if a group checked
+   * @param {number} groupId
+   */
   const isParentCheck = (groupId) => {
     let isChecked = false
     let isUnChecked = false
@@ -85,6 +100,10 @@ export const AnalyticsDriversFilter = (props) => {
     return completedCheck
   }
 
+  /**
+   * Method to change group status
+   * @param {number} groupId
+   */
   const parentClick = (groupId) => {
     const checkStatus = isParentCheck(groupId)
     const selectedGroup = groupList?.find(group => group.id === groupId)
@@ -100,6 +119,11 @@ export const AnalyticsDriversFilter = (props) => {
     setUserIds(_userIds)
   }
 
+  /**
+   * Method to check if a user match with group
+   * @param {number} userId
+   * @param {number} groupId
+   */
   const isIncluded = (userId, groupId) => {
     let ischecked = false
     for (const user of usersList?.users) {
@@ -110,6 +134,10 @@ export const AnalyticsDriversFilter = (props) => {
     return ischecked
   }
 
+  /**
+   * Method to change all check status
+   * @param {string} status
+   */
   const changeAllCheckStatus = (status) => {
     if (status === isAllCheck) return
     setIsAllCheck(status)
@@ -188,13 +216,13 @@ export const AnalyticsDriversFilter = (props) => {
           {...props}
           usersList={usersList}
           groupList={groupList}
-          handleChangeCollapse={handleChangeCollapse}
           userIds={userIds}
+          isAllCheck={isAllCheck}
+          handleChangeCollapse={handleChangeCollapse}
           handleChangeUserId={handleChangeUserId}
           isParentCheck={isParentCheck}
           parentClick={parentClick}
           isIncluded={isIncluded}
-          isAllCheck={isAllCheck}
           changeAllCheckStatus={changeAllCheckStatus}
           handleClickFilterButton={handleClickFilterButton}
         />
@@ -208,6 +236,18 @@ AnalyticsDriversFilter.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
+  /**
+   * filterList, this must be contains an object with filter list
+   */
+  filterList: PropTypes.object,
+  /**
+   * Method to change filter list
+   */
+  handleChangeFilterList: PropTypes.func,
+  /**
+   * Method to close DriversFilter Modal
+   */
+  onClose: PropTypes.func,
   /**
    * Array of business props to fetch
    */

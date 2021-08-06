@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { AnalyticsDriversFilter as AnalyticsDriversFilterController } from './naked'
+// import { AnalyticsDriversFilter as AnalyticsDriversFilterController } from './naked'
 import {
   AnalyticsDriversFilterContainer,
   FilterBtnWrapper,
@@ -16,7 +16,7 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import AiFillMinusSquare from '@meronex/icons/ai/AiFillMinusSquare'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, AnalyticsDriversFilter as AnalyticsDriversFilterController } from 'ordering-components-admin'
 
 const AnalyticsDriversFilterUI = (props) => {
   const {

@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding: 20px;
 `
 
-export const ProductCategoryHeader = styled.div`
+export const OrderStatusHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,7 +39,7 @@ export const BarChartWrapper = styled.div`
   min-height: 350px;
 `
 
-export const ProductCategoryFooter = styled.div`
+export const OrderStatusFooter = styled.div`
   margin-top: 25px;
 
   h2 {

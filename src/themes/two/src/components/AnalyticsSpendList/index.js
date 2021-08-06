@@ -3,8 +3,8 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import GiAlarmClock from '@meronex/icons/gi/GiAlarmClock'
 import {
   Container,
-  OrdersAcceptSpendHeader,
-  OrdersAcceptSpendContent,
+  AnalyticsSpendListHeader,
+  AnalyticsSpendListContent,
   TimeContentWrapper,
   ReviewContentWrapper,
   ReviewBlock,
@@ -23,12 +23,12 @@ export const AnalyticsSpendList = (props) => {
 
   return (
     <Container>
-      <OrdersAcceptSpendHeader>
+      <AnalyticsSpendListHeader>
         <p>{title}</p>
-      </OrdersAcceptSpendHeader>
+      </AnalyticsSpendListHeader>
       {
         dataList?.loading ? (
-          <OrdersAcceptSpendContent>
+          <AnalyticsSpendListContent>
             <TimeContentWrapper>
               <Skeleton width={70} height={40} />
               <Skeleton width={70} height={20} />
@@ -37,10 +37,10 @@ export const AnalyticsSpendList = (props) => {
               <Skeleton width={80} height={80} />
               <Skeleton width={80} height={20} />
             </ReviewContentWrapper>
-          </OrdersAcceptSpendContent>
+          </AnalyticsSpendListContent>
         ) : (
           dataList?.data ? (
-            <OrdersAcceptSpendContent>
+            <AnalyticsSpendListContent>
               <TimeContentWrapper>
                 <h1>{parseNumber((dataList?.data * 1), { separator: '.' })}</h1>
                 <p>{t('SECONDS', 'Seconds')}</p>
@@ -51,7 +51,7 @@ export const AnalyticsSpendList = (props) => {
                 </ReviewBlock>
                 <p>{t('REGULAR', 'Regular')}</p>
               </ReviewContentWrapper>
-            </OrdersAcceptSpendContent>
+            </AnalyticsSpendListContent>
           ) : (
             <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
           )

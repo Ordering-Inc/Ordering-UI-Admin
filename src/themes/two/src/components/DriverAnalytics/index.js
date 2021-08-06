@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { DriverAnalytics as DriverAnalyticsController } from './naked'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, DriverAnalytics as DriverAnalyticsController } from 'ordering-components-admin'
 import { AnalyticsDriversFilter } from '../AnalyticsDriversFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button } from '../../styles/Buttons'

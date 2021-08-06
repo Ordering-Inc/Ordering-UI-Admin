@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './naked'
+// import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './naked'
 import {
   AnalyticsBusinessFilterContainer,
   BusinessFilterOption,
@@ -10,7 +10,7 @@ import {
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
 
 const AnalyticsBusinessFilterUI = (props) => {
   const {

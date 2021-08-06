@@ -2,10 +2,10 @@ import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import {
   Container,
-  ProductCategoryHeader,
+  OrderStatusHeader,
   ActionBlock,
   BarChartWrapper,
-  ProductCategoryFooter,
+  OrderStatusFooter,
   EmptyContent
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
@@ -138,12 +138,12 @@ export const AnalyticsOrdersStatus = (props) => {
 
   return (
     <Container>
-      <ProductCategoryHeader>
+      <OrderStatusHeader>
         <p>{t('ORDERS_STATUS', 'ORDERS STATUS')}</p>
         <ActionBlock disabled={orderStatusList?.data.length === 0}>
           <BsDownload onClick={downloadImage} />
         </ActionBlock>
-      </ProductCategoryHeader>
+      </OrderStatusHeader>
       {
         orderStatusList?.loading ? (
           <Skeleton height={150} />
@@ -158,14 +158,14 @@ export const AnalyticsOrdersStatus = (props) => {
         )
       }
 
-      <ProductCategoryFooter>
+      <OrderStatusFooter>
         <h2>{orderStatusList?.loading ? <Skeleton width={30} /> : <TotalOrders />}</h2>
         {orderStatusList?.loading ? (
           <Skeleton width={80} />
         ) : (
           <p>{t('ORDERS_TOTALS', 'Orders totals')}</p>
         )}
-      </ProductCategoryFooter>
+      </OrderStatusFooter>
     </Container>
   )
 }

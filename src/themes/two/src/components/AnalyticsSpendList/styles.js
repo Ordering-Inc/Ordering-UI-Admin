@@ -7,7 +7,7 @@ export const Container = styled.div`
   height: 100%;
 `
 
-export const OrdersAcceptSpendHeader = styled.div`
+export const AnalyticsSpendListHeader = styled.div`
   margin-bottom: 10px;
 
   p {
@@ -48,7 +48,7 @@ export const TimeContentWrapper = styled.div`
   }
 `
 
-export const OrdersAcceptSpendContent = styled.div`
+export const AnalyticsSpendListContent = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;

@@ -21,6 +21,10 @@ export const AnalyticsBusinessFilter = (props) => {
   const [businessIds, setBusinessIds] = useState(null)
   const [isAllCheck, setIsAllCheck] = useState(false)
 
+  /**
+   * Method to change business id
+   * @param {number} id
+   */
   const handleChangeBusinessId = (id) => {
     const found = businessIds?.find(businessId => businessId === id)
     if (found) {
@@ -35,12 +39,18 @@ export const AnalyticsBusinessFilter = (props) => {
     }
   }
 
+  /**
+   * Method to change filter list
+   */
   const handleClickFilterButton = () => {
     const _businessIds = businessIds ? [...businessIds] : null
     handleChangeFilterList({ ...filterList, businessIds: _businessIds })
     onClose && onClose()
   }
 
+  /**
+   * Method to change all check status
+   */
   const handleChangeAllCheck = () => {
     if (isAllCheck) {
       setBusinessIds(null)
@@ -115,9 +125,9 @@ export const AnalyticsBusinessFilter = (props) => {
           {...props}
           businessList={businessList}
           businessIds={businessIds}
+          isAllCheck={isAllCheck}
           handleChangeBusinessId={handleChangeBusinessId}
           handleClickFilterButton={handleClickFilterButton}
-          isAllCheck={isAllCheck}
           handleChangeAllCheck={handleChangeAllCheck}
         />
       )}
@@ -130,6 +140,18 @@ AnalyticsBusinessFilter.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
+  /**
+   * filterList, this must be contains an object with filter list
+   */
+  filterList: PropTypes.object,
+  /**
+  * Method to change filter list
+  */
+  handleChangeFilterList: PropTypes.func,
+  /**
+  * Method to close business filter Modal
+  */
+  onClose: PropTypes.func,
   /**
    * Array of business props to fetch
    */

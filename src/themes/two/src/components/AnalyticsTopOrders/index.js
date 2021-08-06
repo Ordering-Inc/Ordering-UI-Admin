@@ -2,10 +2,10 @@ import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import {
   Container,
-  ProductCategoryHeader,
+  AnalyticsTopOrdersHeader,
   ActionBlock,
-  ProductCategoryContentWrapper,
-  ProductCategoryContent,
+  TopOrdersContainerWrapper,
+  TopOrdersContent,
   SkeletonContainerWrapper,
   PercentContainer,
   EmptyContent,
@@ -40,12 +40,12 @@ export const AnalyticsTopOrders = (props) => {
 
   return (
     <Container>
-      <ProductCategoryHeader>
+      <AnalyticsTopOrdersHeader>
         <p>{t('TOP_ORDERS', 'Top Orders')}</p>
         <ActionBlock disabled={dataList?.data.length === 0}>
           <BsDownload onClick={downloadImage} />
         </ActionBlock>
-      </ProductCategoryHeader>
+      </AnalyticsTopOrdersHeader>
       {
         dataList?.loading ? (
           <SkeletonContainerWrapper>
@@ -58,16 +58,16 @@ export const AnalyticsTopOrders = (props) => {
             }
           </SkeletonContainerWrapper>
         ) : (
-          <ProductCategoryContentWrapper>
+          <TopOrdersContainerWrapper>
             {
               dataList?.data.length > 0 ? (
                 <ProductCategoryContainer ref={downloadElementRef}>
                   {
                     dataList?.data.map((item, i) => (
-                      <ProductCategoryContent key={i}>
+                      <TopOrdersContent key={i}>
                         <p>{item?.name}</p>
                         <PercentContainer percent={item?.orders_count}>{item?.orders_count}%</PercentContainer>
-                      </ProductCategoryContent>
+                      </TopOrdersContent>
                     ))
                   }
                 </ProductCategoryContainer>
@@ -75,7 +75,7 @@ export const AnalyticsTopOrders = (props) => {
                 <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
               )
             }
-          </ProductCategoryContentWrapper>
+          </TopOrdersContainerWrapper>
         )
       }
 
