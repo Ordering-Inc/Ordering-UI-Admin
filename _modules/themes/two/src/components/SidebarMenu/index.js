@@ -97,6 +97,27 @@ var SidebarMenu = function SidebarMenu(props) {
     pageName: 'operationSettings',
     url: '/settings/operation'
   }];
+  var analyticsSubMenus = [{
+    id: 1,
+    title: t('CONTROL_PANEL_BUSINESS', 'Business'),
+    pageName: 'business_analytics',
+    url: '/analytics/business'
+  }, {
+    id: 2,
+    title: t('DRIVERS', 'Drivers'),
+    pageName: 'drivers_analytics',
+    url: '/analytics/drivers'
+  }, {
+    id: 3,
+    title: t('PROMOTIONS', 'Promotions'),
+    pageName: 'promotions_analytics',
+    url: '/analytics/promotions'
+  }, {
+    id: 4,
+    title: t('BUSINESS_INTELLIGENCE', 'Business Intelligence'),
+    pageName: 'intelligence_analytics',
+    url: '/analytics/business_intelligence'
+  }];
 
   var handleGoToPage = function handleGoToPage(data) {
     setMenuOpen(false);
@@ -205,8 +226,21 @@ var SidebarMenu = function SidebarMenu(props) {
     handleGoToPage: handleGoToPage,
     active: location.pathname === '/users'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    eventKey: "5",
+    active: location.pathname === '/analytics/business' || location.pathname === '/analytics/drivers' || location.pathname === '/analytics/promotions' || location.pathname === '/analytics/business_intelligence'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('ANALYTICS', 'Analytics'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('ANALYTICS', 'Analytics')))))), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, analyticsSubMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
+  })))))), /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column"
   }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",

@@ -27,6 +27,12 @@ Object.defineProperty(exports, "BusinessActiveStateFilter", {
     return _BusinessActiveStateFilter.BusinessActiveStateFilter;
   }
 });
+Object.defineProperty(exports, "BusinessAnalytics", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessAnalytics.BusinessAnalytics;
+  }
+});
 Object.defineProperty(exports, "BusinessDetails", {
   enumerable: true,
   get: function get() {
@@ -175,6 +181,12 @@ Object.defineProperty(exports, "DriversBusyStatusFilter", {
   enumerable: true,
   get: function get() {
     return _DriversBusyStatusFilter.DriversBusyStatusFilter;
+  }
+});
+Object.defineProperty(exports, "DriverAnalytics", {
+  enumerable: true,
+  get: function get() {
+    return _DriverAnalytics.DriverAnalytics;
   }
 });
 Object.defineProperty(exports, "DriversDashboard", {
@@ -612,6 +624,8 @@ var _AutoScroll = require("./src/components/AutoScroll");
 
 var _BusinessActiveStateFilter = require("./src/components/BusinessActiveStateFilter");
 
+var _BusinessAnalytics = require("./src/components/BusinessAnalytics");
+
 var _BusinessDetails = require("./src/components/BusinessDetails");
 
 var _BusinessProductsListing = require("./src/components/BusinessProductsListing");
@@ -659,6 +673,8 @@ var _DriverMapMarkerAndInfo = require("./src/components/DriverMapMarkerAndInfo")
 var _OrdersLateralBar = require("./src/components/OrdersLateralBar");
 
 var _DriversBusyStatusFilter = require("./src/components/DriversBusyStatusFilter");
+
+var _DriverAnalytics = require("./src/components/DriverAnalytics");
 
 var _DriversDashboard = require("./src/components/DriversDashboard");
 
