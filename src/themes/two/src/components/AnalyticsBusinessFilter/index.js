@@ -1,6 +1,5 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-// import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './naked'
 import {
   AnalyticsBusinessFilterContainer,
   BusinessFilterOption,

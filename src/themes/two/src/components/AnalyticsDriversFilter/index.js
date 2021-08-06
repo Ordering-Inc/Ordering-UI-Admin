@@ -1,6 +1,5 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-// import { AnalyticsDriversFilter as AnalyticsDriversFilterController } from './naked'
 import {
   AnalyticsDriversFilterContainer,
   FilterBtnWrapper,

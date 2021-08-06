@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useConfig, useSession, useLanguage, GoogleMapsMap } from 'ordering-components-admin'
-// import { GoogleMapsMap } from './GoogleMaps'
 import { useTheme } from 'styled-components'
 import {
   Container,
