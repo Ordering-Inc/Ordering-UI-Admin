@@ -62,8 +62,22 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "business_analytics": {
+    "title": "Business Analytics",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "drivers_analytics": {
+    "title": "Drivers Analytics",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "messages": {
-    "title": "Store",
+    "title": "Messages",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

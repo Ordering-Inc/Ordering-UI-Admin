@@ -2,6 +2,7 @@ import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AutoScroll } from './src/components/AutoScroll'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
+import { BusinessAnalytics } from './src/components/BusinessAnalytics'
 import { BusinessDetails } from './src/components/BusinessDetails'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
 import { BusinessesSelector } from './src/components/BusinessesSelector'
@@ -26,6 +27,7 @@ import { DeliveryTypeSelector } from './src/components/DeliveryTypeSelector'
 import { DriverMapMarkerAndInfo } from './src/components/DriverMapMarkerAndInfo'
 import { OrdersLateralBar } from './src/components/OrdersLateralBar'
 import { DriversBusyStatusFilter } from './src/components/DriversBusyStatusFilter'
+import { DriverAnalytics } from './src/components/DriverAnalytics'
 import { DriversDashboard } from './src/components/DriversDashboard'
 import { DriverSelector } from './src/components/DriverSelector'
 import { DriversGroupTypeSelector } from './src/components/DriversGroupTypeSelector'
@@ -98,6 +100,7 @@ export {
   AddressList,
   AutoScroll,
   BusinessActiveStateFilter,
+  BusinessAnalytics,
   BusinessDetails,
   BusinessesSelector,
   BusinessessListing,
@@ -119,6 +122,7 @@ export {
   DeliveriesManager,
   DeliveryDashboard,
   DeliveryTypeSelector,
+  DriverAnalytics,
   DriverMapMarkerAndInfo,
   OrdersLateralBar,
   DriversBusyStatusFilter,

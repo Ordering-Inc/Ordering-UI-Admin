@@ -80,6 +80,33 @@ export const SidebarMenu = (props) => {
       url: '/settings/operation'
     }
   ]
+
+  const analyticsSubMenus = [
+    {
+      id: 1,
+      title: t('CONTROL_PANEL_BUSINESS', 'Business'),
+      pageName: 'business_analytics',
+      url: '/analytics/business'
+    },
+    {
+      id: 2,
+      title: t('DRIVERS', 'Drivers'),
+      pageName: 'drivers_analytics',
+      url: '/analytics/drivers'
+    },
+    {
+      id: 3,
+      title: t('PROMOTIONS', 'Promotions'),
+      pageName: 'promotions_analytics',
+      url: '/analytics/promotions'
+    },
+    {
+      id: 4,
+      title: t('BUSINESS_INTELLIGENCE', 'Business Intelligence'),
+      pageName: 'intelligence_analytics',
+      url: '/analytics/business_intelligence'
+    }
+  ]
   const handleGoToPage = (data) => {
     setMenuOpen(false)
     events.emit('go_to_page', data)
@@ -237,10 +264,31 @@ export const SidebarMenu = (props) => {
                 </MenuContainer>
 
                 <MenuContainer>
-                  <ContextAwareToggle eventKey='5'>
+                  <ContextAwareToggle
+                    eventKey='5'
+                    active={
+                      location.pathname === '/analytics/business' ||
+                      location.pathname === '/analytics/drivers' ||
+                      location.pathname === '/analytics/promotions' ||
+                      location.pathname === '/analytics/business_intelligence'
+                    }
+                  >
                     <BarChartLineIcon />
                     {!isCollapse && <span>{t('ANALYTICS', 'Analytics')}</span>}
                   </ContextAwareToggle>
+                  <Accordion.Collapse eventKey='5'>
+                    <MenuContent>
+                      {analyticsSubMenus.map(item => (
+                        <SubMenu
+                          key={item.id}
+                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                          onClick={() => handleGoToPage({ page: item.pageName })}
+                        >
+                          {item.title}
+                        </SubMenu>
+                      ))}
+                    </MenuContent>
+                  </Accordion.Collapse>
                 </MenuContainer>
               </Accordion>
             </div>
