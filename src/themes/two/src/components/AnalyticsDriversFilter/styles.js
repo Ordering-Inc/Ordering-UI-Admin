@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const AnalyticsBusinessFilterContainer = styled.div``
+export const AnalyticsDriversFilterContainer = styled.div``
 
 export const FilterBtnWrapper = styled.div`
   margin-top: 20px;

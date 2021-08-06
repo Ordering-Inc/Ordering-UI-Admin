@@ -2,7 +2,7 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { AnalyticsDriversFilter as AnalyticsDriversFilterController } from './naked'
 import {
-  AnalyticsBusinessFilterContainer,
+  AnalyticsDriversFilterContainer,
   FilterBtnWrapper,
   TreeViewItemContainer,
   TreeViewParentItem,
@@ -44,7 +44,7 @@ const AnalyticsDriversFilterUI = (props) => {
   }
 
   return (
-    <AnalyticsBusinessFilterContainer>
+    <AnalyticsDriversFilterContainer>
       {usersList.loading ? (
         <>
           <SelectBtnWrapper>
@@ -131,7 +131,7 @@ const AnalyticsDriversFilterUI = (props) => {
           {t('FILTER', 'Filter')}
         </Button>
       </FilterBtnWrapper>
-    </AnalyticsBusinessFilterContainer>
+    </AnalyticsDriversFilterContainer>
   )
 }
 
