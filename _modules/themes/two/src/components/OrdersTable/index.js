@@ -9,12 +9,6 @@ exports.OrdersTable = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _AiFillShop = _interopRequireDefault(require("@meronex/icons/ai/AiFillShop"));
-
-var _GiFoodTruck = _interopRequireDefault(require("@meronex/icons/gi/GiFoodTruck"));
-
-var _FaCarSide = _interopRequireDefault(require("@meronex/icons/fa/FaCarSide"));
-
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
 
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
@@ -29,11 +23,9 @@ var _styledComponents = require("styled-components");
 
 var _DriverSelector = require("../DriverSelector");
 
-var _OrderStatusTypeSelector = require("../OrderStatusTypeSelector");
-
 var _ColumnAllowSettingPopover = require("../ColumnAllowSettingPopover");
 
-var _PaginationButton = require("../PaginationButton");
+var _Pagination = require("../Pagination");
 
 var _styles = require("./styles");
 
@@ -76,8 +68,7 @@ var OrdersTable = function OrdersTable(props) {
       pagination = props.pagination,
       selectedOrderIds = props.selectedOrderIds,
       orderDetailId = props.orderDetailId,
-      loadMoreOrders = props.loadMoreOrders,
-      handleUpdateOrderStatus = props.handleUpdateOrderStatus,
+      getPageOrders = props.getPageOrders,
       handleSelectedOrderIds = props.handleSelectedOrderIds,
       handleOpenOrderDetail = props.handleOpenOrderDetail;
 
@@ -92,73 +83,42 @@ var OrdersTable = function OrdersTable(props) {
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate,
-      optimizeImage = _useUtils2$.optimizeImage; // Change page
+      optimizeImage = _useUtils2$.optimizeImage;
 
-
-  var _useState = (0, _react.useState)(1),
+  var _useState = (0, _react.useState)(10),
       _useState2 = _slicedToArray(_useState, 2),
-      currentPage = _useState2[0],
-      setCurrentPage = _useState2[1];
+      ordersPerPage = _useState2[0],
+      setOrdersPerPage = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(10),
-      _useState4 = _slicedToArray(_useState3, 1),
-      ordersPerPage = _useState4[0]; // Get current orders
-
-
-  var indexOfLastPost = currentPage * ordersPerPage;
-  var indexOfFirstPost = indexOfLastPost - ordersPerPage;
-
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      currentOrders = _useState6[0],
-      setCurrentOrders = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      totalPages = _useState8[0],
-      setTotalPages = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      totalOrders = _useState10[0],
-      setTotalOrders = _useState10[1]; // Change page
-
-
-  var prevPaginate = function prevPaginate() {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
+  var handleChangePage = function handleChangePage(page) {
+    getPageOrders(ordersPerPage, page);
   };
 
-  var nextPaginate = function nextPaginate() {
-    if (currentPage !== totalPages) {
-      if (orderList.orders.length < ordersPerPage * currentPage + 1) {
-        loadMoreOrders();
-      }
-
-      setCurrentPage(currentPage + 1);
-    }
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    setOrdersPerPage(pageSize);
+    var expectedPage = Math.ceil(pagination.from / pageSize);
+    getPageOrders(pageSize, expectedPage);
   };
 
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      openPopover = _useState12[0],
-      setOpenPopover = _useState12[1];
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      openPopover = _useState4[0],
+      setOpenPopover = _useState4[1];
 
-  var _useState13 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     orderNumber: true,
     dateTime: true,
     business: true,
     customer: true,
     driver: true,
     advanced: true,
-    total: true,
-    status: true,
-    deliveryType: true
+    total: true // status: true,
+    // deliveryType: true
+
   }),
-      _useState14 = _slicedToArray(_useState13, 2),
-      allowColumns = _useState14[0],
-      setAllowColumns = _useState14[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      allowColumns = _useState6[0],
+      setAllowColumns = _useState6[1];
 
   var optionsDefault = [{
     value: 'orderNumber',
@@ -181,13 +141,15 @@ var OrdersTable = function OrdersTable(props) {
   }, {
     value: 'total',
     content: t('TOTAL', 'Total')
-  }, {
-    value: 'status',
-    content: t('STATUS', 'Status')
-  }, {
-    value: 'deliveryType',
-    content: t('DELIVERY_TYPE', 'Delivery type')
-  }];
+  } // {
+  //   value: 'status',
+  //   content: t('STATUS', 'Status')
+  // },
+  // {
+  //   value: 'deliveryType',
+  //   content: t('DELIVERY_TYPE', 'Delivery type')
+  // }
+  ];
 
   var getLogisticTag = function getLogisticTag(status) {
     switch (parseInt(status)) {
@@ -240,23 +202,6 @@ var OrdersTable = function OrdersTable(props) {
     handleOpenOrderDetail(order);
   };
 
-  (0, _react.useEffect)(function () {
-    if (orderList.loading) return;
-
-    var _totalPages;
-
-    if (pagination !== null && pagination !== void 0 && pagination.total) {
-      _totalPages = Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / ordersPerPage);
-    } else if (orderList.orders.length > 0) {
-      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage);
-    }
-
-    var _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost);
-
-    setTotalOrders(pagination === null || pagination === void 0 ? void 0 : pagination.total);
-    setTotalPages(_totalPages);
-    setCurrentOrders(_currentOrders);
-  }, [orderList, currentPage, pagination]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
@@ -270,11 +215,7 @@ var OrdersTable = function OrdersTable(props) {
     className: "customerInfo"
   }, t('CUSTOMER', 'Customer')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("th", {
     className: "driverInfo"
-  }, t('DRIVER', 'Driver')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryType) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "orderType"
-  }, t('DELIVERY_TYPE', 'Delivery type')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "orderStatusTitle"
-  }, t('ORDER_STATUS', 'Order status')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("th", {
+  }, t('DRIVER', 'Driver')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("th", {
     colSpan: 3,
     className: "advanced"
   }, t('ADVANCE_LOGISTICS', 'Advance logistics')), /*#__PURE__*/_react.default.createElement("th", {
@@ -396,8 +337,8 @@ var OrdersTable = function OrdersTable(props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentOrders.map(function (order) {
-    var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _theme$images2, _theme$images2$icons, _theme$images3, _theme$images3$icons, _order$summary;
+  }) : orderList.orders.map(function (order) {
+    var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$summary;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: order.id,
@@ -446,22 +387,6 @@ var OrdersTable = function OrdersTable(props) {
       defaultValue: order !== null && order !== void 0 && order.driver_id ? order.driver_id : 'default',
       drivers: driversList.drivers,
       order: order
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryType) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "orderType"
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.driverDelivery,
-      alt: "Delivery"
-    }), /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery'))), (order === null || order === void 0 ? void 0 : order.delivery_type) === 2 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$icons = _theme$images3.icons) === null || _theme$images3$icons === void 0 ? void 0 : _theme$images3$icons.pickUp,
-      alt: "pick up"
-    }), /*#__PURE__*/_react.default.createElement("span", null, t('PICK_UP', 'Pick up'))), (order === null || order === void 0 ? void 0 : order.delivery_type) === 3 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_AiFillShop.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('EAT_IN', 'Eat In'))), (order === null || order === void 0 ? void 0 : order.delivery_type) === 4 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CURBSIDE', 'Curbside'))), (order === null || order === void 0 ? void 0 : order.delivery_type) === 5 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER_THRU', 'Driver thru'))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "orderStatusTitle"
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
-      defaultValue: parseInt(order.status),
-      orderId: order.id,
-      deliveryType: order === null || order === void 0 ? void 0 : order.delivery_type,
-      noPadding: true,
-      handleUpdateOrderStatus: handleUpdateOrderStatus
     }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
       className: "logistic"
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -489,13 +414,12 @@ var OrdersTable = function OrdersTable(props) {
     }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total)), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement(TimgeAgo, {
       order: order
     })))));
-  })))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, !orderList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_PaginationButton.PaginationButton, {
-    pageSize: ordersPerPage,
-    total: totalOrders,
-    currentPage: currentPage,
-    totalPages: totalPages,
-    prevPaginate: prevPaginate,
-    nextPaginate: nextPaginate
+  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    currentPage: pagination.currentPage,
+    totalPages: pagination.totalPages,
+    handleChangePage: handleChangePage,
+    defaultPageSize: ordersPerPage,
+    handleChangePageSize: handleChangePageSize
   })));
 };
 
@@ -508,12 +432,12 @@ var TimgeAgo = function TimgeAgo(props) {
       _useUtils4 = _slicedToArray(_useUtils3, 1),
       getTimeAgo = _useUtils4[0].getTimeAgo;
 
-  var _useState15 = (0, _react.useState)(order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  var _useState7 = (0, _react.useState)(order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   })),
-      _useState16 = _slicedToArray(_useState15, 2),
-      diffTime = _useState16[0],
-      setDiffTime = _useState16[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      diffTime = _useState8[0],
+      setDiffTime = _useState8[1];
 
   (0, _react.useEffect)(function () {
     var deActive = (order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12;

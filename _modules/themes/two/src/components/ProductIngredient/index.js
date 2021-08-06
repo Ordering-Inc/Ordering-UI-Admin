@@ -13,6 +13,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _Buttons = require("../../styles/Buttons");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -71,11 +73,13 @@ var ProductIngredientUI = function ProductIngredientUI(props) {
       return document.removeEventListener('click', addIngredient);
     };
   }, [isAddMode, changesState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.IngredientContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, {
+  return /*#__PURE__*/_react.default.createElement(_styles.IngredientContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  })), productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.ingredients.map(function (ingredient) {
+  }, t('ADD_INGREDIENT', 'Add ingredient'))), productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_styles.IngredientOption, {
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("input", {

@@ -9,7 +9,7 @@ exports.SkeletonWrapper = exports.SubCategoryWrapper = exports.IframeWrapper = e
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -40,43 +40,47 @@ var DescriptionHeader = _styledComponents.default.div(_templateObject8 || (_temp
 
 exports.DescriptionHeader = DescriptionHeader;
 
-var HeaderIcons = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  svg {\n    width: 24px;\n    height: 24px;\n    cursor: pointer;\n    color: #344050;\n\n    &:first-child {\n      color: #B1BCCC;\n      margin-right: 20px;\n    }\n  }\n"])));
+var HeaderIcons = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  > button:first-child {\n    ", "\n  }\n"])), function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n    "])));
+});
 
 exports.HeaderIcons = HeaderIcons;
 
-var Content = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 28px;\n"])));
+var Content = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-top: 28px;\n"])));
 
 exports.Content = Content;
 
-var CategoryName = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  p {\n    font-weight: bold;\n    font-size: 20px;\n    color: #344050;\n    margin-bottom: 6px;\n  }\n"])));
+var CategoryName = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  p {\n    font-weight: bold;\n    font-size: 20px;\n    color: #344050;\n    margin-bottom: 6px;\n  }\n"])));
 
 exports.CategoryName = CategoryName;
 
-var CategoryDescriptionExtraContent = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 26px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n\n  > button {\n    z-index: 100;\n    position: absolute;\n    top: 20px;\n    ", "\n    svg {\n      width: 24px;\n      height: 24px;\n      color: #344050;\n    }\n  }\n"])), function (props) {
-  var _props$theme3;
-
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "])));
-}, function (props) {
+var CategoryDescriptionExtraContent = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 26px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n\n  > button {\n    z-index: 100;\n    position: absolute;\n    top: 20px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme4;
 
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      right: 20px;\n    "])));
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "])));
+}, function (props) {
+  var _props$theme5;
+
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      right: 20px;\n    "])));
 });
 
 exports.CategoryDescriptionExtraContent = CategoryDescriptionExtraContent;
 
-var Description = _styledComponents.default.p(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin-top: 40px;\n  font-size: 14px;\n  color: #344050;\n  margin-bottom: 0px;\n"])));
+var Description = _styledComponents.default.p(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-top: 40px;\n  font-size: 14px;\n  color: #344050;\n  margin-bottom: 0px;\n"])));
 
 exports.Description = Description;
 
-var VideoContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-top: 48px;\n  height: 300px;\n  background: #E9ECEF;\n  border-radius: 7.6px;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  video {\n    object-fit: cover;\n    height: 100%;\n    background: #E9ECEF;\n  }\n\n  svg {\n    top: 45%;\n    left: 45%;\n    position: absolute;\n    color: #748194;\n    font-size: 34px;\n  }\n"])));
+var VideoContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-top: 48px;\n  height: 300px;\n  background: #E9ECEF;\n  border-radius: 7.6px;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  video {\n    object-fit: cover;\n    height: 100%;\n    background: #E9ECEF;\n  }\n\n  svg {\n    top: 45%;\n    left: 45%;\n    position: absolute;\n    color: #748194;\n    font-size: 34px;\n  }\n"])));
 
 exports.VideoContainer = VideoContainer;
 
-var AllSetting = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  user-select: none;\n  cursor: pointer;\n  margin-top: 36px;\n  span {\n    font-weight: 600;\n    font-size: 14px;\n    color: #03459E;\n  }\n  svg {\n    color: #03459E;\n  }\n"])));
+var AllSetting = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  user-select: none;\n  cursor: pointer;\n  margin-top: 36px;\n  span {\n    font-weight: 600;\n    font-size: 14px;\n    color: #03459E;\n  }\n  svg {\n    color: #03459E;\n  }\n"])));
 
 exports.AllSetting = AllSetting;
 
-var MoreInfo = _styledComponents.default.span(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  user-selected: none;\n  color: ", ";\n  text-decoration: underline;\n  margin-top: 40px;\n  font-size: 14px;\n"])), function (props) {
+var MoreInfo = _styledComponents.default.span(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  user-selected: none;\n  color: ", ";\n  text-decoration: underline;\n  margin-top: 40px;\n  font-size: 14px;\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
@@ -84,14 +88,14 @@ var MoreInfo = _styledComponents.default.span(_templateObject20 || (_templateObj
 
 exports.MoreInfo = MoreInfo;
 
-var IframeWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  padding-top: 35px;\n"])));
+var IframeWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  padding-top: 35px;\n"])));
 
 exports.IframeWrapper = IframeWrapper;
 
-var SubCategoryWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n"])));
+var SubCategoryWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n"])));
 
 exports.SubCategoryWrapper = SubCategoryWrapper;
 
-var SkeletonWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n"])));
+var SkeletonWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n"])));
 
 exports.SkeletonWrapper = SkeletonWrapper;

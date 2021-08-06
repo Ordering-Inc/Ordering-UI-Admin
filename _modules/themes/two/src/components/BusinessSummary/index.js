@@ -15,11 +15,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
-
-var _BsLifePreserver = _interopRequireDefault(require("@meronex/icons/bs/BsLifePreserver"));
 
 var _Switch = require("../../styles/Switch");
 
@@ -28,6 +24,8 @@ var _Buttons = require("../../styles/Buttons");
 var _styledComponents = require("styled-components");
 
 var _BusinessFormDetails = require("../BusinessFormDetails");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("./styles");
 
@@ -109,15 +107,16 @@ var BusinessSummary = function BusinessSummary(props) {
   }) : /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.enabled,
     onChange: handleChangeActiveBusiness
-  })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.SupportButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     onClick: function onClick() {
       return handleSelectedItem('support');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsLifePreserver.default, null)), /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)))), !isEdit ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), !isEdit ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
     isSkeleton: true
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 60,
@@ -128,7 +127,7 @@ var BusinessSummary = function BusinessSummary(props) {
     bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
-    borderRadius: "5px",
+    borderRadius: "8px",
     onClick: handleOpenCategory,
     disabled: businessState === null || businessState === void 0 ? void 0 : businessState.loading
   }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), /*#__PURE__*/_react.default.createElement(_styles.BusinessDescription, null, businessState !== null && businessState !== void 0 && (_businessState$busine5 = businessState.business) !== null && _businessState$busine5 !== void 0 && _businessState$busine5.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -142,8 +141,8 @@ var BusinessSummary = function BusinessSummary(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, config.value), /*#__PURE__*/_react.default.createElement(_BsChevronRight.default, null));
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secundary",
-    borderRadius: "5px",
+    color: "secundaryDark",
+    borderRadius: "8px",
     disabled: businessState.loading,
     onClick: function onClick() {
       return setIsEdit(true);

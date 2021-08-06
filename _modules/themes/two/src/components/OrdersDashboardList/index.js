@@ -32,7 +32,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     orderBy: isMessagesView ? orderByOption : 'id',
     orderDirection: isMessagesView ? orderByOption === 'id' ? 'desc' : 'asc' : 'desc',
     asDashboard: true,
-    initialPageSize: 50,
+    initialPageSize: 10,
     loadMorePageSize: 10,
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,

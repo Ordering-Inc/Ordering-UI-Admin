@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddProductBtn = exports.WrapperNotFound = exports.BusinessProductListTable = exports.ProductListSpreadContainer = exports.ProductListContainer = exports.ListContent = void 0;
+exports.ProductListBottom = exports.AddProductBtn = exports.WrapperNotFound = exports.BusinessProductListTable = exports.ProductListSpreadContainer = exports.ProductListContainer = exports.ListContent = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,7 +21,7 @@ var ListContent = _styledComponents.default.div(_templateObject || (_templateObj
 
 exports.ListContent = ListContent;
 
-var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 380px);\n  min-height: 200px;\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 230px);\n  }\n  \n  @media (min-width: 576px) {\n    ", "\n  }\n"])), function (props) {
+var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 410px);\n  min-height: 200px;\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 290px);\n  }\n  \n  @media (min-width: 576px) {\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n    "])));
 });
 
@@ -50,3 +50,11 @@ exports.WrapperNotFound = WrapperNotFound;
 var AddProductBtn = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 12px;\n  color: #909BA9;\n  margin-top: 12px;\n  cursor: pointer;\n  margin-bottom: 15px;\n  display: inline-block;\n"])));
 
 exports.AddProductBtn = AddProductBtn;
+
+var ProductListBottom = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 20px;\n\n  ", "\n"])), function (props) {
+  var _props$theme;
+
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "])));
+});
+
+exports.ProductListBottom = ProductListBottom;

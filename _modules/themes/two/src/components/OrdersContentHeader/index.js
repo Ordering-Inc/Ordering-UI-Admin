@@ -21,6 +21,8 @@ var _MdcFilterOff = _interopRequireDefault(require("@meronex/icons/mdc/MdcFilter
 
 var _OrdersDashboardControls = require("../OrdersDashboardControls");
 
+var _Buttons = require("../../styles/Buttons");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -96,7 +98,8 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
-  }), /*#__PURE__*/_react.default.createElement(_styles.FilterButton, {
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return setFilterModalOpen(true);
     },

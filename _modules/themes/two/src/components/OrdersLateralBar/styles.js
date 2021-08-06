@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Name = exports.Image = exports.WrapperImage = exports.Info = exports.CloseButton = exports.OrdersContainer = exports.LateralBarContainer = void 0;
+exports.Name = exports.Image = exports.WrapperImage = exports.Info = exports.CloseButtonWrapper = exports.OrdersContainer = exports.LateralBarContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -63,13 +63,13 @@ var OrdersContainer = _styledComponents.default.div(_templateObject12 || (_templ
 
 exports.OrdersContainer = OrdersContainer;
 
-var CloseButton = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  background: #E9ECEF;\n  padding: 5px;\n  cursor: pointer;\n\n  ", "\n\n  svg {\n    font-size: 24px;\n  }\n"])), function (props) {
+var CloseButtonWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 20px;\n  cursor: pointer;\n\n  ", "\n"])), function (props) {
   var _props$theme6;
 
   return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    right: 10px;\n  "])));
 });
 
-exports.CloseButton = CloseButton;
+exports.CloseButtonWrapper = CloseButtonWrapper;
 
 var Info = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 

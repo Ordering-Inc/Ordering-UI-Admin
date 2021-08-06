@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddCategory = exports.ListContent = exports.HeaderContainer = exports.AddButton = exports.CategoryListContainer = void 0;
+exports.AddCategory = exports.ListContent = exports.HeaderContainer = exports.CategoryListContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,25 +21,17 @@ var CategoryListContainer = _styledComponents.default.div(_templateObject || (_t
 
 exports.CategoryListContainer = CategoryListContainer;
 
-var AddButton = _styledComponents.default.span(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.primary;
-}, function (props) {
-  return props.theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "])));
-});
-
-exports.AddButton = AddButton;
-
-var HeaderContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  h1 {\n    font-weight: 600;\n    font-size: 14px;\n    margin: 0;\n  }\n\n  svg {\n    font-size: 16px;\n  }\n"])));
+var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  h1 {\n    font-weight: 600;\n    font-size: 14px;\n    margin: 0;\n  }\n"])));
 
 exports.HeaderContainer = HeaderContainer;
 
-var ListContent = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 35px;\n  max-height: calc(100vh - 380px);\n  overflow: auto;\n\n  ", "\n\n  @media (max-width: 576px) {\n    padding: 0px;\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 230px);\n  }\n"])), function (props) {
-  return props.theme.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      padding-left: 18px;"]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      padding-right: 18px;"])));
+var ListContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-top: 35px;\n  max-height: calc(100vh - 380px);\n  overflow: auto;\n\n  ", "\n\n  @media (max-width: 576px) {\n    padding: 0px;\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 230px);\n  }\n"])), function (props) {
+  return props.theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      padding-left: 18px;"]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      padding-right: 18px;"])));
 });
 
 exports.ListContent = ListContent;
 
-var AddCategory = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 12px;\n  color: ", ";\n  cursor: pointer;\n  padding: 10px;\n"])), function (props) {
+var AddCategory = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 12px;\n  color: ", ";\n  cursor: pointer;\n  padding: 10px;\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.lightGray;

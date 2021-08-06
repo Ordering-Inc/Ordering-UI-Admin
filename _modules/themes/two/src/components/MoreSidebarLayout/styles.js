@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CloseButton = exports.MainContainer = void 0;
+exports.CloseButtonWrapper = exports.MainContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -25,7 +25,7 @@ var MainContainer = _styledComponents.default.div(_templateObject || (_templateO
 
 exports.MainContainer = MainContainer;
 
-var CloseButton = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  z-index: 100;\n  position: absolute;\n  top: 20px;\n  ", "\n  svg {\n    color: ", ";\n    font-size: 24px;\n  }\n"])), function (props) {
+var CloseButtonWrapper = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  z-index: 100;\n  position: absolute;\n  top: 20px;\n  ", "\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    left: ", ";\n  "])), function (_ref) {
@@ -35,8 +35,6 @@ var CloseButton = _styledComponents.default.span(_templateObject4 || (_templateO
     var isExtendExtraOpen = _ref2.isExtendExtraOpen;
     return isExtendExtraOpen ? '520px' : '20px';
   });
-}, function (props) {
-  return props.theme.colors.headingColor;
 });
 
-exports.CloseButton = CloseButton;
+exports.CloseButtonWrapper = CloseButtonWrapper;

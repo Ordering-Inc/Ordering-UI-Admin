@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CloseButton = exports.OrderProducts = exports.AdvancedLogistic = exports.StatusBar = exports.StatusBarContainer = exports.OrderStatus = exports.ButtonLink = exports.ChatContainer = exports.OrderDetailsExtraContent = exports.OrderDetailsContent = exports.SkeletonWrapper = exports.Container = void 0;
+exports.CloseButtonWrapper = exports.OrderProducts = exports.AdvancedLogistic = exports.StatusBar = exports.StatusBarContainer = exports.OrderStatus = exports.ButtonLink = exports.ChatContainer = exports.OrderDetailsExtraContent = exports.OrderDetailsContent = exports.SkeletonWrapper = exports.Container = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -124,12 +124,10 @@ var OrderProducts = _styledComponents.default.div(_templateObject18 || (_templat
 
 exports.OrderProducts = OrderProducts;
 
-var CloseButton = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  z-index: 100;\n  position: absolute;\n  top: 30px;\n  ", "\n\n  svg {\n    font-size: 28px;\n    color: ", ";\n  }\n"])), function (props) {
+var CloseButtonWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  z-index: 100;\n  position: absolute;\n  top: 30px;\n  ", "\n"])), function (props) {
   var _props$theme4;
 
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    right: 20px;\n  "])));
-}, function (props) {
-  return props.theme.colors.headingColor;
 });
 
-exports.CloseButton = CloseButton;
+exports.CloseButtonWrapper = CloseButtonWrapper;

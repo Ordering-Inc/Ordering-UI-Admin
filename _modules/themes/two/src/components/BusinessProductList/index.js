@@ -21,6 +21,8 @@ var _BusinessProductCreator = require("../BusinessProductCreator");
 
 var _BusinessSpreadSheet = require("../BusinessSpreadSheet");
 
+var _Pagination = require("../Pagination");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -103,8 +105,57 @@ var BusinessProductList = function BusinessProductList(props) {
 
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, !allowColumns[type])));
+  }; // Change page
+
+
+  var _useState7 = (0, _react.useState)(1),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentPage = _useState8[0],
+      setCurrentPage = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(10),
+      _useState10 = _slicedToArray(_useState9, 2),
+      productsPerPage = _useState10[0],
+      setProductsPerPage = _useState10[1]; // Get current products
+
+
+  var _useState11 = (0, _react.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      currentProducts = _useState12[0],
+      setCurrentProducts = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      totalPages = _useState14[0],
+      setTotalPages = _useState14[1];
+
+  var handleChangePage = function handleChangePage(page) {
+    setCurrentPage(page);
   };
 
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    var expectedPage = Math.ceil(((currentPage - 1) * productsPerPage + 1) / pageSize);
+    setCurrentPage(expectedPage);
+    setProductsPerPage(pageSize);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (categoryState.loading) return;
+
+    var _totalPages;
+
+    if (categoryState.products.length > 0) {
+      _totalPages = Math.ceil(categoryState.products.length / productsPerPage);
+    }
+
+    var indexOfLastPost = currentPage * productsPerPage;
+    var indexOfFirstPost = indexOfLastPost - productsPerPage;
+
+    var _currentProducts = categoryState.products.slice(indexOfFirstPost, indexOfLastPost);
+
+    setTotalPages(_totalPages);
+    setCurrentProducts(_currentProducts);
+  }, [categoryState, currentPage, productsPerPage]);
   return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
     className: "business"
   }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("th", {
@@ -131,7 +182,7 @@ var BusinessProductList = function BusinessProductList(props) {
       viewMethod: viewMethod,
       allowColumns: allowColumns
     });
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categoryState.products.map(function (product, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentProducts.map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
       key: i,
       productDetailsId: productDetailsId,
@@ -144,11 +195,17 @@ var BusinessProductList = function BusinessProductList(props) {
     allowColumns: allowColumns,
     setIsAddProduct: setIsAddProduct,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business
-  })))), !businessState.loading && !isAddProduct && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
     onClick: function onClick() {
       return setIsAddProduct(true);
     }
-  }, t('ADD_NEW_PRODUCT', 'Add new product'))), !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }, t('ADD_NEW_PRODUCT', 'Add new product')), !businessState.loading && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    currentPage: currentPage,
+    totalPages: totalPages,
+    handleChangePage: handleChangePage,
+    defaultPageSize: productsPerPage,
+    handleChangePageSize: handleChangePageSize
+  })), !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
     btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
     onClickButton: function onClickButton() {

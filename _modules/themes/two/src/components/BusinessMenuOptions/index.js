@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
@@ -21,9 +21,9 @@ var _BusinessMenuBasicOptions = require("../BusinessMenuBasicOptions");
 
 var _AutoScroll = require("../AutoScroll");
 
-var _styles = require("./styles");
+var _Buttons = require("../../styles/Buttons");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -103,6 +103,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
     open: openShareMenu,
     menu: menu,
+    businessId: business === null || business === void 0 ? void 0 : business.id,
     business: business,
     onClick: function onClick() {
       return setOpenShareMenu(true);
@@ -111,11 +112,12 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       return setOpenShareMenu(false);
     },
     handleUpdateBusinessState: handleUpdateBusinessState
-  }), /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return onClose();
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TabInnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TabInnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     innerScroll: true,
     scrollId: "menu_options"
   }, /*#__PURE__*/_react.default.createElement(_styles.Tab, {

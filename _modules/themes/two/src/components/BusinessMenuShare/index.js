@@ -60,6 +60,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessMenuShareUI = function BusinessMenuShareUI(props) {
   var open = props.open,
       menu = props.menu,
+      businessId = props.businessId,
       businessesState = props.businessesState,
       actionState = props.actionState,
       handleShareBusinessMenuClick = props.handleShareBusinessMenuClick;
@@ -139,13 +140,14 @@ var BusinessMenuShareUI = function BusinessMenuShareUI(props) {
       return handleShareBusinessMenuClick();
     }
   }, isCheckedAllBusiness() ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('ALL', 'All'))), businessesState.businesses.map(function (business) {
-    return /*#__PURE__*/_react.default.createElement(_styles.AllowItem, {
-      key: business.id,
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: business.id
+    }, business.id !== businessId && /*#__PURE__*/_react.default.createElement(_styles.AllowItem, {
       isChecked: isCheckedBusiness(business.id),
       onClick: function onClick() {
         return handleShareBusinessMenuClick(business.id);
       }
-    }, isCheckedBusiness(business.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : business.name));
+    }, isCheckedBusiness(business.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : business.name)));
   })))));
 };
 

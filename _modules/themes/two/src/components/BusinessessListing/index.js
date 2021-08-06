@@ -67,7 +67,8 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       handleSucessAddBusiness = props.handleSucessAddBusiness,
       handleSucessUpdateBusiness = props.handleSucessUpdateBusiness,
       onSearch = props.onSearch,
-      onBusinessRedirect = props.onBusinessRedirect;
+      onBusinessRedirect = props.onBusinessRedirect,
+      getPageBusinesses = props.getPageBusinesses;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
 
   var _useState = (0, _react.useState)('list'),
@@ -167,6 +168,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     pagination: pagination,
     detailsBusinessId: detailsBusinessId,
     loadMoreBusinesses: loadMoreBusinesses,
+    getPageBusinesses: getPageBusinesses,
     handleSucessRemoveBusiness: handleSucessRemoveBusiness,
     handleSucessAddBusiness: handleSucessAddBusiness,
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,

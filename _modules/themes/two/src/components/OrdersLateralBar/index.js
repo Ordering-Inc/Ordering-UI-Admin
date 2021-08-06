@@ -13,15 +13,15 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styledComponents = require("styled-components");
 
 var _OrdersManager = require("../OrdersManager");
 
-var _styles = require("./styles");
+var _Buttons = require("../../styles/Buttons");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -116,11 +116,12 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
   }, [isOpenDriverOrderDetails]);
   return /*#__PURE__*/_react.default.createElement(_styles.LateralBarContainer, {
     id: "driver_lateral_bar"
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return props.onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.Info, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.Info, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_styles.Image, {
     bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.noDriver), 'h_200,c_limit')

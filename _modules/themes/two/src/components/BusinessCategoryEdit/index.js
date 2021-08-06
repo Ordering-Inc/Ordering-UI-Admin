@@ -27,9 +27,9 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("./styles");
 
@@ -214,9 +214,10 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
   }, (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) && /*#__PURE__*/_react.default.createElement("span", null, formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) || false,
     onChange: handleChangeCheckBox
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: handleClose
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null))), /*#__PURE__*/_react.default.createElement(_styles.CategoryTypeImage, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.CategoryTypeImage, {
     onClick: function onClick() {
       return handleClickImage();
     },
@@ -247,6 +248,8 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     onChange: handleChangeInput,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.BtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "primary",
     onClick: handleUpdateClick
   }, category ? t('SAVE', 'Save') : t('ADD', 'Add')))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_TYPE', 'Business type'),

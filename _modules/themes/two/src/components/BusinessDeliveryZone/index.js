@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
-
 var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
 
 var _AiFillPlusCircle = _interopRequireDefault(require("@meronex/icons/ai/AiFillPlusCircle"));
@@ -32,6 +30,8 @@ var _reactHookForm = require("react-hook-form");
 var _Modal = require("../Modal");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
+
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -185,11 +185,13 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
       }
     }
   }, [errors, isAddValid, isAddMode]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_ZONE', 'Delivery zones')), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_ZONE', 'Delivery zones')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
     onClick: function onClick() {
       return setIsAddMode(true);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.DeliveryZonesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneName, null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.ZoneMin, null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement(_styles.ZonePrice, null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.ZoneActions, null, t('ACTIONS', 'Actions'))), businessDeliveryZonesState === null || businessDeliveryZonesState === void 0 ? void 0 : (_businessDeliveryZone = businessDeliveryZonesState.zones) === null || _businessDeliveryZone === void 0 ? void 0 : _businessDeliveryZone.map(function (zone) {
+  }, t('ADD_DELIVERY_ZONE', 'Add delivery zone'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryZonesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneName, null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.ZoneMin, null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement(_styles.ZonePrice, null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.ZoneActions, null, t('ACTIONS', 'Actions'))), businessDeliveryZonesState === null || businessDeliveryZonesState === void 0 ? void 0 : (_businessDeliveryZone = businessDeliveryZonesState.zones) === null || _businessDeliveryZone === void 0 ? void 0 : _businessDeliveryZone.map(function (zone) {
     var _zone$name, _formState$result, _formState$result$res, _formState$result2, _formState$result2$re, _formState$changes7, _formState$changes8, _parseNumber, _formState$result3, _formState$result3$re, _formState$result4, _formState$result4$re, _formState$changes9, _formState$changes10, _parseNumber2;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

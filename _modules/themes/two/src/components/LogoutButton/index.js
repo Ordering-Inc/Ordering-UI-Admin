@@ -45,9 +45,7 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     onClick: props.handleLogoutClick
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowRight, {
     size: 20
-  }), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('LOGOUT', 'Logout')));
+  }), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('LOGOUT', 'Logout')));
 };
 
 var LogoutButton = function LogoutButton(props) {

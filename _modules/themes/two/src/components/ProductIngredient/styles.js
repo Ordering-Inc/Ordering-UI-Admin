@@ -21,14 +21,14 @@ var IngredientContainer = _styledComponents.default.div(_templateObject || (_tem
 
 exports.IngredientContainer = IngredientContainer;
 
-var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #E9ECEF;\n  padding-bottom: 30px;\n  width: 100%;\n  h1 {\n    color: ", ";\n    font-size: 24px;\n    font-weight: 600;\n    margin: 0px;\n  }\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n    cursor: pointer;\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
+var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  padding-bottom: 20px;\n  width: 100%;\n  h1 {\n    color: ", ";\n    font-size: 24px;\n    font-weight: 600;\n    margin: 0px;\n  }\n\n  button {\n    height: 42px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-left: 40px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-right: 40px;\n    "])));
 });
 
 exports.Header = Header;

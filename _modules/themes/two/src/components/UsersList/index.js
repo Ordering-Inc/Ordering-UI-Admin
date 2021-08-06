@@ -17,10 +17,6 @@ var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox")
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
-var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowLeft"));
-
-var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
-
 var _Switch = require("../../styles/Switch");
 
 var _UserTypeSelector = require("../UserTypeSelector");
@@ -30,6 +26,8 @@ var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
 
 var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
+
+var _Pagination = require("../Pagination");
 
 var _styles = require("./styles");
 
@@ -58,7 +56,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UsersList = function UsersList(props) {
   var userDetailsId = props.userDetailsId,
       usersList = props.usersList,
-      paginationDetail = props.paginationDetail,
       paginationProps = props.paginationProps,
       getUsers = props.getUsers,
       handleChangeUserType = props.handleChangeUserType,
@@ -95,14 +92,19 @@ var UsersList = function UsersList(props) {
     return objectStatus && objectStatus;
   };
 
-  var prevNextPage = function prevNextPage(isNextPage) {
-    getUsers && getUsers(false, isNextPage);
-  };
-
   var onChangeUserDetails = function onChangeUserDetails(e, user) {
     var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action');
     if (isInvalid) return;
     handleOpenUserDetails(user);
+  };
+
+  var handleChangePage = function handleChangePage(page) {
+    getUsers(page, 10);
+  };
+
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    var expectedPage = Math.ceil(paginationProps.from / pageSize);
+    getUsers(expectedPage, pageSize);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", {
@@ -195,21 +197,16 @@ var UsersList = function UsersList(props) {
         return handleDeleteUser(user === null || user === void 0 ? void 0 : user.id);
       }
     }, t('DELETE', 'Delete')))))));
-  }))), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperPageState, null, "".concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.from, " - ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.to, " of ").concat(paginationDetail === null || paginationDetail === void 0 ? void 0 : paginationDetail.total)), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
-    disabled: (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) === 1 || usersList.loading,
-    onClick: function onClick() {
-      return prevNextPage(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null)), /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
-    disabled: usersList.loading || (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) === (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) || (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) === 1,
-    onClick: function onClick() {
-      return prevNextPage(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null))), /*#__PURE__*/_react.default.createElement(_styles.AddNewUserButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.UsersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewUserButton, {
     onClick: function onClick() {
       return handleOpenUserAddForm();
     }
-  }, t('ADD_NEW_USER', 'Add new user'))));
+  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    currentPage: paginationProps.currentPage,
+    totalPages: paginationProps.totalPages,
+    handleChangePage: handleChangePage,
+    handleChangePageSize: handleChangePageSize
+  })))));
 };
 
 exports.UsersList = UsersList;

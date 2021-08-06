@@ -9,15 +9,15 @@ exports.UserDetailsLateralBar = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
 var _UserDetails = require("../UserDetails");
 
-var _styles = require("./styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Buttons = require("../../styles/Buttons");
+
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -93,11 +93,12 @@ var UserDetailsLateralBar = function UserDetailsLateralBar(props) {
   }, [extraOpen]);
   return /*#__PURE__*/_react.default.createElement(_styles.LateralBarContainer, {
     id: "user_lateral_bar"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapUserDetails, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapUserDetails, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return props.onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, _extends({}, props, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, _extends({}, props, {
     setExtraOpen: setExtraOpen
   }))));
 };

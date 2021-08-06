@@ -21,11 +21,9 @@ var _SettingsList = require("../SettingsList");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _Buttons = require("../../styles/Buttons");
-
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
-var _BsLifePreserver = _interopRequireDefault(require("@meronex/icons/bs/BsLifePreserver"));
 
 var _MdcPlayCircle = _interopRequireDefault(require("@meronex/icons/mdc/MdcPlayCircle"));
 
@@ -155,9 +153,14 @@ var SettingsDetail = function SettingsDetail(props) {
   }, [category]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "catDescription"
-  }, /*#__PURE__*/_react.default.createElement(_styles.DescriptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderIcons, null, /*#__PURE__*/_react.default.createElement(_BsLifePreserver.default, null), /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.DescriptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderIcons, null, (category === null || category === void 0 ? void 0 : category.support_url) && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    onClick: function onClick() {
+      return handleExtraOpen(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: handleClose
-  }))), !category && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), !category && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 30
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -169,11 +172,7 @@ var SettingsDetail = function SettingsDetail(props) {
     height: 150
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20
-  })), category && Object.keys(category).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, /*#__PURE__*/_react.default.createElement("p", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.Description, null, category === null || category === void 0 ? void 0 : category.description), (category === null || category === void 0 ? void 0 : category.support_url) && /*#__PURE__*/_react.default.createElement(_styles.MoreInfo, {
-    onClick: function onClick() {
-      return handleExtraOpen(true);
-    }
-  }, t('MORE_INFO', 'More info')), /*#__PURE__*/_react.default.createElement(_styles.VideoContainer, null, /*#__PURE__*/_react.default.createElement(_MdcPlayCircle.default, {
+  })), category && Object.keys(category).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, /*#__PURE__*/_react.default.createElement("p", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.Description, null, category === null || category === void 0 ? void 0 : category.description), (category === null || category === void 0 ? void 0 : category.more_info) && /*#__PURE__*/_react.default.createElement(_styles.MoreInfo, null, t('MORE_INFO', 'More info')), (category === null || category === void 0 ? void 0 : category.video) && /*#__PURE__*/_react.default.createElement(_styles.VideoContainer, null, /*#__PURE__*/_react.default.createElement(_MdcPlayCircle.default, {
     onClick: playVideo
   }), /*#__PURE__*/_react.default.createElement("video", {
     muted: true,
@@ -190,13 +189,12 @@ var SettingsDetail = function SettingsDetail(props) {
     onClick: function onClick() {
       return handleExtraOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('ALL_SETTINGS', 'All settings')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), extraInfoOpen && category.support_url && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    borderRadius: "5px",
-    color: "secundary",
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('ALL_SETTINGS', 'All settings')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), extraInfoOpen && category.support_url && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return setExtraInfoOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, {
     dangerouslySetInnerHTML: {
       __html: "<iframe src=".concat(category.support_url, " style=\"width: 100%; height: 100%;\" />")
     }
@@ -211,11 +209,10 @@ var SettingsDetail = function SettingsDetail(props) {
     dangerouslySetInnerHTML: {
       __html: "<iframe src=".concat(category.support_url, " style=\"width: 100%; height: 100%;\" />")
     }
-  })))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    borderRadius: "5px",
-    color: "secundary",
+  })))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: onCloseSettingsList
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, {
     category: category,
     onCloseSettingsList: onCloseSettingsList
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {

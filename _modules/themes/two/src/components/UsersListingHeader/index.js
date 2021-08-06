@@ -15,7 +15,7 @@ var _UsersExportCSV = require("../UsersExportCSV");
 
 var _SearchBar = require("../SearchBar");
 
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -48,11 +48,13 @@ var UsersListingHeader = function UsersListingHeader(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenUserAddForm();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_UsersExportCSV.UsersExportCSV, {
+  }, t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_UsersExportCSV.UsersExportCSV, {
     userTypesSelected: userTypesSelected,
     selectedUserActiveState: selectedUserActiveState
   }), /*#__PURE__*/_react.default.createElement(_UsersDeleteButton.UsersDeleteButton, {

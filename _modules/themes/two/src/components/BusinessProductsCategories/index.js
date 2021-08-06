@@ -9,8 +9,6 @@ exports.BusinessProductsCategories = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _SingleBusinessCategory = require("../SingleBusinessCategory");
@@ -18,8 +16,6 @@ var _SingleBusinessCategory = require("../SingleBusinessCategory");
 var _BusinessCategoryCreator = require("../BusinessCategoryCreator");
 
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -50,8 +46,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsCategories = function BusinessProductsCategories(props) {
   var businessState = props.businessState,
       categorySelected = props.categorySelected,
-      onClickCategory = props.onClickCategory,
-      handleOpenCategoryDetails = props.handleOpenCategoryDetails;
+      onClickCategory = props.onClickCategory;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -62,11 +57,7 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       isAddCategory = _useState2[0],
       setIsAddCategory = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category')), /*#__PURE__*/_react.default.createElement(_styles.AddButton, {
-    onClick: function onClick() {
-      return handleOpenCategoryDetails();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessCategory.SingleBusinessCategory, {
       key: i,
       isSkeleton: true

@@ -33,7 +33,9 @@ var _OrderBill = require("../OrderBill");
 
 var _OrderContactInformation = require("../OrderContactInformation");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -450,11 +452,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
   }))), /*#__PURE__*/_react.default.createElement(_OrderBill.OrderBill, {
     order: order
-  })), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  })), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return setExtraOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), (openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), (openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,

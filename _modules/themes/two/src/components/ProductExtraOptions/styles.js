@@ -31,9 +31,7 @@ var OptionsContainer = _styledComponents.default.div(_templateObject4 || (_templ
 
 exports.OptionsContainer = OptionsContainer;
 
-var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  h1 {\n    font-size: 24px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  > svg {\n    display: none;\n  }\n\n  @media (min-width: 1000px) {\n    > svg {\n      display: block;\n      cursor: pointer;\n      font-size: 24px;\n      color: ", ";\n      ", "\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-}, function (props) {
+var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  h1 {\n    font-size: 24px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  > button {\n    display: none;\n  }\n\n  @media (min-width: 1000px) {\n    > button {\n      display: block;\n      cursor: pointer;\n      ", "\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme2;

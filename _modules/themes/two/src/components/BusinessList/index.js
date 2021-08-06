@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _PaginationButton = require("../PaginationButton");
+var _Pagination = require("../Pagination");
 
 var _styles = require("./styles");
 
@@ -59,7 +59,8 @@ var BusinessList = function BusinessList(props) {
       handleSucessUpdateBusiness = props.handleSucessUpdateBusiness,
       handleOpenBusinessDetails = props.handleOpenBusinessDetails,
       handleOpenAddBusiness = props.handleOpenAddBusiness,
-      detailsBusinessId = props.detailsBusinessId;
+      detailsBusinessId = props.detailsBusinessId,
+      getPageBusinesses = props.getPageBusinesses;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -105,12 +106,10 @@ var BusinessList = function BusinessList(props) {
       setCurrentPage = _useState6[1];
 
   var _useState7 = (0, _react.useState)(10),
-      _useState8 = _slicedToArray(_useState7, 1),
-      businessesPerPage = _useState8[0]; // Get current businesses
+      _useState8 = _slicedToArray(_useState7, 2),
+      businessesPerPage = _useState8[0],
+      setBusinessesPerPage = _useState8[1]; // Get current businesses
 
-
-  var indexOfLastPost = currentPage * businessesPerPage;
-  var indexOfFirstPost = indexOfLastPost - businessesPerPage;
 
   var _useState9 = (0, _react.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
@@ -122,25 +121,23 @@ var BusinessList = function BusinessList(props) {
       totalPages = _useState12[0],
       setTotalPages = _useState12[1];
 
-  var _useState13 = (0, _react.useState)(null),
-      _useState14 = _slicedToArray(_useState13, 2),
-      totalBusinesses = _useState14[0],
-      setTotalBusinesses = _useState14[1]; // Change page
-
-
-  var prevPaginate = function prevPaginate() {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
+  var handleChangePage = function handleChangePage(page) {
+    if (pagination.from <= page * businessesPerPage && page * businessesPerPage <= pagination.to || pagination.from <= page * businessesPerPage && page * businessesPerPage > pagination.total) {
+      setCurrentPage(page);
+    } else {
+      getPageBusinesses(businessesPerPage, page);
     }
   };
 
-  var nextPaginate = function nextPaginate() {
-    if (currentPage !== totalPages) {
-      if (businessList.businesses.length < businessesPerPage * currentPage + 1) {
-        loadMoreBusinesses();
-      }
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    setBusinessesPerPage(pageSize);
+    var expectedPage = Math.ceil(pagination.from / pageSize);
 
-      setCurrentPage(currentPage + 1);
+    if (pagination.from <= expectedPage * pageSize && expectedPage * pageSize <= pagination.to || pagination.from <= expectedPage * pageSize && expectedPage * pageSize > pagination.total) {
+      setCurrentPage(expectedPage);
+    } else {
+      setCurrentPage(expectedPage);
+      getPageBusinesses(pageSize, expectedPage);
     }
   };
 
@@ -155,12 +152,14 @@ var BusinessList = function BusinessList(props) {
       _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage);
     }
 
+    var indexOfLastPost = currentPage * businessesPerPage;
+    var indexOfFirstPost = indexOfLastPost - businessesPerPage;
+
     var _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost);
 
-    setTotalBusinesses(pagination === null || pagination === void 0 ? void 0 : pagination.total);
     setTotalPages(_totalPages);
     setCurrentBusinessess(_currentBusinessess);
-  }, [businessList, currentPage, pagination]);
+  }, [businessList, currentPage, pagination, businessesPerPage]);
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2;
 
@@ -212,18 +211,17 @@ var BusinessList = function BusinessList(props) {
       handleSucessUpdateBusiness: handleSucessUpdateBusiness,
       handleOpenBusinessDetails: handleOpenBusinessDetails
     });
-  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, !businessList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_PaginationButton.PaginationButton, {
-    pageSize: businessesPerPage,
-    total: totalBusinesses,
-    currentPage: currentPage,
-    totalPages: totalPages,
-    prevPaginate: prevPaginate,
-    nextPaginate: nextPaginate
-  })), /*#__PURE__*/_react.default.createElement(_styles.AddNewButtonLink, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewButtonLink, {
     onClick: function onClick() {
       return handleOpenAddBusiness();
     }
-  }, t('ADD_NEW_STORE', 'Add new store'))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_styles.BusinessCardContainer, null, businessList.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
+  }, t('ADD_NEW_STORE', 'Add new store')), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, !businessList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    currentPage: currentPage,
+    totalPages: totalPages,
+    handleChangePage: handleChangePage,
+    defaultPageSize: businessesPerPage,
+    handleChangePageSize: handleChangePageSize
+  })))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_styles.BusinessCardContainer, null, businessList.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusiness.SingleBusiness, {
       key: i,
       isSkeleton: true,

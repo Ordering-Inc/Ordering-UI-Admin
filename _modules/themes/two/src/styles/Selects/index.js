@@ -19,57 +19,60 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  box-sizing: border-box;\n  min-width: 100px;\n  color: #333;\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  svg {\n    vertical-align: text-top;\n  }\n\n  ", "\n\n  ", "\n"])), function (_ref) {
-  var disabled = _ref.disabled;
-  return disabled && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    cursor: no-drop;\n    opacity: 0.6;\n  "])));
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  box-sizing: border-box;\n  min-width: ", ";\n  color: #333;\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  svg {\n    vertical-align: text-top;\n  }\n\n  ", "\n\n  ", "\n"])), function (_ref) {
+  var minWidth = _ref.minWidth;
+  return minWidth || '100px';
 }, function (_ref2) {
-  var showDisable = _ref2.showDisable;
-  return showDisable && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: none;\n  "])));
+  var disabled = _ref2.disabled;
+  return disabled && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    cursor: no-drop;\n    opacity: 0.6;\n  "])));
 }, function (_ref3) {
-  var optionBottomBorder = _ref3.optionBottomBorder;
+  var showDisable = _ref3.showDisable;
+  return showDisable && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: none;\n  "])));
+}, function (_ref4) {
+  var optionBottomBorder = _ref4.optionBottomBorder;
   return optionBottomBorder && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid #D8D8D8;\n  "])));
 }, (0, _polished.darken)(0.03, '#fafafa'), function (props) {
   return props.selected && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  \n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#fafafa'), (0, _polished.darken)(0.07, '#fafafa'));
-}, function (_ref4) {
-  var withIcons = _ref4.withIcons;
+}, function (_ref5) {
+  var withIcons = _ref5.withIcons;
   return withIcons && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      display: flex;\n      align-items: center;\n      justify-content: flex-start;\n      svg {\n        margin-right: 3px;\n        ", "\n      }\n  "])), function (props) {
     var _props$theme;
 
     return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n          margin-left: 3px;\n          margin-right: 0px;\n       "])));
   });
-}, function (_ref5) {
-  var color = _ref5.color;
+}, function (_ref6) {
+  var color = _ref6.color;
   return color === 'primary' && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    color: #C3C3C3;\n  "])));
 });
 
 exports.Option = Option;
 
-var Options = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  min-width: 100%;\n  background-color: #fff;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #E9ECEF;\n  border-radius: 7.6px;\n  overflow: hidden;\n\n  ", "\n  ", "\n\n  ", "\n"])), function (_ref6) {
-  var position = _ref6.position;
+var Options = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  min-width: 100%;\n  background-color: #fff;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #E9ECEF;\n  border-radius: 7.6px;\n  overflow: hidden;\n\n  ", "\n  ", "\n\n  ", "\n"])), function (_ref7) {
+  var position = _ref7.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'left' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    left: 0;\n    margin-left: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme2;
 
     return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        margin-right: -1px;\n        margin-left: 0px;\n        right: 0;\n        left: initial;\n    "])));
   });
-}, function (_ref7) {
-  var position = _ref7.position;
+}, function (_ref8) {
+  var position = _ref8.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'right' && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    right: 0;\n    margin-right: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme3;
 
     return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        margin-left: -1px;\n        margin-right: 0px;\n        left: 0;\n        right: initial;\n    "])));
   });
-}, function (_ref8) {
-  var isAbsolute = _ref8.isAbsolute;
+}, function (_ref9) {
+  var isAbsolute = _ref9.isAbsolute;
   return isAbsolute && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    position: absolute;\n    margin-top: 7px;\n  "])));
 });
 
 exports.Options = Options;
 
-var OptionsInner = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin: ", ";\n  max-height: ", ";\n  overscroll-behavior: contain;\n"])), function (_ref9) {
-  var optionInnerMargin = _ref9.optionInnerMargin;
+var OptionsInner = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin: ", ";\n  max-height: ", ";\n  overscroll-behavior: contain;\n"])), function (_ref10) {
+  var optionInnerMargin = _ref10.optionInnerMargin;
   return optionInnerMargin;
-}, function (_ref10) {
-  var optionInnerMaxHeight = _ref10.optionInnerMaxHeight;
+}, function (_ref11) {
+  var optionInnerMaxHeight = _ref11.optionInnerMaxHeight;
   return optionInnerMaxHeight;
 });
 
@@ -81,8 +84,8 @@ exports.Selected = Selected;
 
 var Select = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: inline-block;\n  border-radius: 7.6px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #DEE2E6;\n  color: #344050;\n  position: relative;\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.open && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), (0, _polished.darken)(0.07, '#CCC'));
-}, function (_ref11) {
-  var type = _ref11.type;
+}, function (_ref12) {
+  var type = _ref12.type;
   return type === 'primary' && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    border-radius: 7.6px;\n  "])), function (props) {
     return props.theme.colors.btnPrimary;
   }, function (props) {

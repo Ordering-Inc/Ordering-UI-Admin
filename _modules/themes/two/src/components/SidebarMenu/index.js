@@ -23,6 +23,8 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _LanguageSelector = require("../LanguageSelector");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -42,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4;
+  var _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4, _sessionState$user5;
 
   var location = (0, _reactRouterDom.useLocation)();
   var theme = (0, _styledComponents.useTheme)();
@@ -172,14 +174,10 @@ var SidebarMenu = function SidebarMenu(props) {
     className: "d-flex flex-column"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "0"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1",
     active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListCheck, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListCheck, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ordersSubMenus.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
@@ -196,34 +194,24 @@ var SidebarMenu = function SidebarMenu(props) {
     page: "messages",
     handleGoToPage: handleGoToPage,
     active: location.pathname === '/messages'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('MESSAGES', 'Messages')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('MESSAGES', 'Messages')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "3",
     page: "businesses",
     handleGoToPage: handleGoToPage,
     active: location.pathname === '/businesses' || location.pathname.includes('/store/')
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('STORES', 'Stores')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('STORES', 'Stores')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "4",
     page: "users",
     handleGoToPage: handleGoToPage,
     active: location.pathname === '/users'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('ANALYTICS', 'Analytics')))))), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('ANALYTICS', 'Analytics')))))), /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column"
-  }, (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
     active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, settingsSubMenus.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
@@ -243,13 +231,11 @@ var SidebarMenu = function SidebarMenu(props) {
         page: 'support'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, t('SUPPORT', 'Support'))))), /*#__PURE__*/_react.default.createElement(_styles.UserInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('SUPPORT', 'Support'))))), /*#__PURE__*/_react.default.createElement(_styles.UserInfo, {
     id: "user_info",
     className: "d-flex flex-column px-1"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
-    className: "d-flex align-items-center m-1",
+    className: "d-flex align-items-center",
     onClick: function onClick() {
       return handleGoToPage({
         page: 'profile'
@@ -261,9 +247,7 @@ var SidebarMenu = function SidebarMenu(props) {
     width: "30px",
     height: "30px",
     roundedCircle: true
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", {
-    className: "mx-2"
-  }, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.name)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user5 = sessionState.user) === null || _sessionState$user5 === void 0 ? void 0 : _sessionState$user5.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     isCollapse: isCollapse
   })))));
 };

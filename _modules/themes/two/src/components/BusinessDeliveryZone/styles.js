@@ -25,14 +25,12 @@ var ZoneContainer = _styledComponents.default.div(_templateObject2 || (_template
 
 exports.ZoneContainer = ZoneContainer;
 
-var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  h1 {\n    font-size: 24px;\n    color: ", ";\n  }\n\n  svg {\n    cursor: pointer;\n    color: ", ";\n    font-size: 24px;\n    ", "\n  }\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  h1 {\n    font-size: 24px;\n    color: ", ";\n    margin: 0px;\n  }\n\n  button {\n    height: 42px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
-}, function (props) {
-  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-left: 40px;\n    "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 40px;\n    "])));
 });
 
 exports.Header = Header;

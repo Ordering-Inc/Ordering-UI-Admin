@@ -41,6 +41,7 @@ var OrdersListing = function OrdersListing(props) {
       messageListView = props.messageListView,
       messageType = props.messageType,
       loadMoreOrders = props.loadMoreOrders,
+      getPageOrders = props.getPageOrders,
       ordersStatusGroup = props.ordersStatusGroup,
       groupStatus = props.groupStatus,
       orderDetailId = props.orderDetailId,
@@ -73,6 +74,7 @@ var OrdersListing = function OrdersListing(props) {
     selectedOrderIds: selectedOrderIds,
     orderDetailId: orderDetailId,
     loadMoreOrders: loadMoreOrders,
+    getPageOrders: getPageOrders,
     handleUpdateOrderStatus: handleUpdateOrderStatus,
     handleSelectedOrderIds: handleSelectedOrderIds,
     handleOpenOrderDetail: handleOpenOrderDetail
@@ -83,6 +85,7 @@ var OrdersListing = function OrdersListing(props) {
     pagination: pagination,
     selectedOrderIds: selectedOrderIds,
     loadMoreOrders: loadMoreOrders,
+    getPageOrders: getPageOrders,
     handleUpdateOrderStatus: handleUpdateOrderStatus,
     handleSelectedOrderIds: handleSelectedOrderIds,
     handleOpenOrderDetail: handleOpenOrderDetail,

@@ -197,7 +197,8 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return hanldeChangeProject(e);
     },
-    autoComplete: "off"
+    autoComplete: "off",
+    autoCapitalize: "off"
   }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
@@ -213,7 +214,8 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    autoComplete: "off"
+    autoComplete: "off",
+    autoCapitalize: "off"
   }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "tel",
     name: "cellphone",
@@ -241,7 +243,8 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    autoComplete: "off"
+    autoComplete: "off",
+    autoCapitalize: "off"
   }), /*#__PURE__*/_react.default.createElement(_RiLockPasswordLine.default, null)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "primary",

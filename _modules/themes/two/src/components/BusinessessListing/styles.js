@@ -35,7 +35,7 @@ var WrapperView = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.WrapperView = WrapperView;
 
-var ViewMethodButton = _styledComponents.default.span(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n\n  svg {\n    font-size: 20px;\n  }\n\n  ", "\n"])), function (props) {
+var ViewMethodButton = _styledComponents.default.span(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n\n  svg {\n    font-size: 20px;\n    transition: all .2s ease-in;\n  }\n\n  ", "\n\n  &:hover {\n    svg {\n      font-size: 24px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (_ref) {
   var active = _ref.active;

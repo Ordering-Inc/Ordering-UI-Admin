@@ -17,8 +17,6 @@ var _BiCurrentLocation = _interopRequireDefault(require("@meronex/icons/bi/BiCur
 
 var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _CgSearchLoading = _interopRequireDefault(require("@meronex/icons/cg/CgSearchLoading"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -524,11 +522,12 @@ var AddressFormUI = function AddressFormUI(props) {
     style: {
       marginBottom: '10px'
     }
-  })), isSeletectedUserAddresses && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, Object.keys(props === null || props === void 0 ? void 0 : props.address).length === 0 ? t('ADD_ADDRESS', 'Add address') : t('EDIT_ADDRESS', 'Edit address')), /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  })), isSeletectedUserAddresses && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, Object.keys(props === null || props === void 0 ? void 0 : props.address).length === 0 ? t('ADD_ADDRESS', 'Add address') : t('EDIT_ADDRESS', 'Edit address')), /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return onCancel();
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null))), !configState.loading && !addressState.loading && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), !configState.loading && !addressState.loading && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     onKeyDown: function onKeyDown(e) {
       return checkKeyDown(e);

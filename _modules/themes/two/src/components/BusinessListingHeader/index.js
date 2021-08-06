@@ -11,7 +11,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _SearchBar = require("../SearchBar");
 
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -38,11 +38,13 @@ var BusinessListingHeader = function BusinessListingHeader(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('STORES_LIST', 'Stores list')), /*#__PURE__*/_react.default.createElement(_styles.AddButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('STORES_LIST', 'Stores list'))), /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "lightPrimary",
+    borderRadius: "8px",
     onClick: function onClick() {
       return handleOpenAddBusiness();
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearchBar, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }, t('ADD_NEW_STORE', 'Add new store')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
     onSearch: onSearch,
     search: searchValue,

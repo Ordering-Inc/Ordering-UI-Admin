@@ -11,15 +11,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _Switch = require("../../styles/Switch");
 
-var _Buttons = require("../../styles/Buttons");
-
 var _ProductDetatilsEditForm = require("../ProductDetatilsEditForm");
+
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -94,11 +94,12 @@ var ProductMainDetailsUI = function ProductMainDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.enabled) || false,
     onChange: handleChangeProductActiveState
-  })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return isEditMode ? setIsEditMode(false) : actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)))), !isEditMode ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), !isEditMode ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.images, 'h_400,c_limit')
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.price)), /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.description), /*#__PURE__*/_react.default.createElement(_styles.ProductConfigsContainer, null, configsOptions.map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles.ProductConfigOption, {
@@ -109,7 +110,7 @@ var ProductMainDetailsUI = function ProductMainDetailsUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, config.value), /*#__PURE__*/_react.default.createElement(_BsChevronRight.default, null));
   }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secundary",
+    color: "secundaryDark",
     borderRadius: "7.6px",
     onClick: function onClick() {
       return setIsEditMode(true);

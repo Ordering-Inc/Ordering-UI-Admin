@@ -40,11 +40,7 @@ var EditCategoryContent = _styledComponents.default.div(_templateObject8 || (_te
 
 exports.EditCategoryContent = EditCategoryContent;
 
-var HeaderContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  button {\n    background: transparent;\n    border: none;\n\n    svg {\n      color: ", ";\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
-  var _props$theme$colors;
-
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
-});
+var HeaderContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n"])));
 
 exports.HeaderContainer = HeaderContainer;
 
@@ -63,9 +59,7 @@ var CategoryTypeImage = _styledComponents.default.div(_templateObject13 || (_tem
 
 exports.CategoryTypeImage = CategoryTypeImage;
 
-var BtnWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 50px;\n\n  button {\n    background: ", ";\n    border-radius: 8px;\n    font-size: 14px;\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
-});
+var BtnWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 50px;\n\n  button {\n    height: 42px;\n  }\n"])));
 
 exports.BtnWrapper = BtnWrapper;
 

@@ -13,9 +13,7 @@ var _reactHookForm = require("react-hook-form");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
-var _BsLifePreserver = _interopRequireDefault(require("@meronex/icons/bs/BsLifePreserver"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _Switch = require("../../styles/Switch");
 
@@ -147,15 +145,16 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, t('BUSIENSS_NAME', 'Business name')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: false,
     onChange: handleChangeActiveBusiness
-  })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.SupportButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     onClick: function onClick() {
       return handleItemSelected('support');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsLifePreserver.default, null)), /*#__PURE__*/_react.default.createElement(_styles.CloseButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderImage, {
     onClick: function onClick() {

@@ -11,11 +11,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -71,11 +71,12 @@ var SideBar = function SideBar(props) {
   }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
     id: id
-  }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return props.onClose();
     }
-  }), props.children);
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), props.children);
 };
 
 exports.SideBar = SideBar;

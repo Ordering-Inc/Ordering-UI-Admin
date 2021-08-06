@@ -31,6 +31,8 @@ require("jsoneditor-react/es/editor.min.css");
 
 var _SpinnerLoader = require("../SpinnerLoader");
 
+var _Buttons = require("../../styles/Buttons");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -234,11 +236,11 @@ var BusinessCustomFieldsUI = function BusinessCustomFieldsUI(props) {
       className: "meta_key"
     }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.key)), /*#__PURE__*/_react.default.createElement("div", {
       className: "meta_value"
-    }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.value_type === 'boolean' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value)), /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.value_type === 'boolean' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
       onClick: function onClick() {
         return handleDeleteMetaField(metaField.id);
       }
-    })));
+    }, /*#__PURE__*/_react.default.createElement(_BsTrash.default, null))));
   })) : /*#__PURE__*/_react.default.createElement(_styles.NoMetaField, null, t('NO_METAFIELD', 'No MetaField')), /*#__PURE__*/_react.default.createElement(_styles.MetaAddForm, {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.MetaAddContainer, null, /*#__PURE__*/_react.default.createElement("div", {
@@ -317,7 +319,8 @@ var BusinessCustomFieldsUI = function BusinessCustomFieldsUI(props) {
     onChange: function onChange(v) {
       return handleChangeJson(v);
     }
-  })), /*#__PURE__*/_react.default.createElement("button", {
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "primary",
     type: "submit"
   }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))))), actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR'),

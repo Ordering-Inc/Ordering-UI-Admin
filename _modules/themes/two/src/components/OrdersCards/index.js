@@ -17,7 +17,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _DriverSelector = require("../DriverSelector");
 
-var _OrdersPagination = require("../../../../../components/OrdersPagination");
+var _Pagination = require("../Pagination");
 
 var _styles = require("./styles");
 
@@ -48,11 +48,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersCards = function OrdersCards(props) {
+  var _orderList$orders;
+
   var isMessagesView = props.isMessagesView,
       orderList = props.orderList,
       driversList = props.driversList,
       pagination = props.pagination,
-      loadMoreOrders = props.loadMoreOrders,
+      getPageOrders = props.getPageOrders,
       handleOpenOrderDetail = props.handleOpenOrderDetail,
       selectedOrderCard = props.selectedOrderCard,
       handleOrderCardClick = props.handleOrderCardClick,
@@ -68,52 +70,21 @@ var OrdersCards = function OrdersCards(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parseDate = _useUtils2$.parseDate,
-      optimizeImage = _useUtils2$.optimizeImage; // Change page
+      optimizeImage = _useUtils2$.optimizeImage;
 
-
-  var _useState = (0, _react.useState)(1),
+  var _useState = (0, _react.useState)(10),
       _useState2 = _slicedToArray(_useState, 2),
-      currentPage = _useState2[0],
-      setCurrentPage = _useState2[1];
+      ordersPerPage = _useState2[0],
+      setOrdersPerPage = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(10),
-      _useState4 = _slicedToArray(_useState3, 1),
-      ordersPerPage = _useState4[0]; // Get current orders
-
-
-  var indexOfLastPost = currentPage * ordersPerPage;
-  var indexOfFirstPost = indexOfLastPost - ordersPerPage;
-
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      currentOrders = _useState6[0],
-      setCurrentOrders = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      totalPages = _useState8[0],
-      setTotalPages = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      totalOrders = _useState10[0],
-      setTotalOrders = _useState10[1]; // Change page
-
-
-  var prevPaginate = function prevPaginate() {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
+  var handleChangePage = function handleChangePage(page) {
+    getPageOrders(ordersPerPage, page);
   };
 
-  var nextPaginate = function nextPaginate() {
-    if (currentPage !== totalPages) {
-      if (orderList.orders.length < ordersPerPage * currentPage + 1) {
-        loadMoreOrders();
-      }
-
-      setCurrentPage(currentPage + 1);
-    }
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    setOrdersPerPage(pageSize);
+    var expectedPage = Math.ceil(pagination.from / pageSize);
+    getPageOrders(pageSize, expectedPage);
   };
 
   var handleOrderClick = function handleOrderClick(e, order) {
@@ -132,23 +103,6 @@ var OrdersCards = function OrdersCards(props) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder);
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
-  (0, _react.useEffect)(function () {
-    if (orderList.loading) return;
-
-    var _totalPages;
-
-    if (pagination !== null && pagination !== void 0 && pagination.total) {
-      _totalPages = Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / ordersPerPage);
-    } else if (orderList.orders.length > 0) {
-      _totalPages = Math.ceil(orderList.orders.length / ordersPerPage);
-    }
-
-    var _currentOrders = orderList.orders.slice(indexOfFirstPost, indexOfLastPost);
-
-    setTotalOrders(pagination === null || pagination === void 0 ? void 0 : pagination.total);
-    setTotalPages(_totalPages);
-    setCurrentOrders(_currentOrders);
-  }, [orderList, currentPage, pagination]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, null, orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: i
@@ -182,7 +136,7 @@ var OrdersCards = function OrdersCards(props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentOrders === null || currentOrders === void 0 ? void 0 : currentOrders.map(function (order) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.map(function (order) {
     var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
@@ -213,13 +167,12 @@ var OrdersCards = function OrdersCards(props) {
       drivers: driversList.drivers,
       order: order
     }))));
-  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, !orderList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_OrdersPagination.OrdersPagination, {
-    ordersPerPage: ordersPerPage,
-    totalOrders: totalOrders,
-    currentPage: currentPage,
-    totalPages: totalPages,
-    prevPaginate: prevPaginate,
-    nextPaginate: nextPaginate
+  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    currentPage: pagination.currentPage,
+    totalPages: pagination.totalPages,
+    handleChangePage: handleChangePage,
+    defaultPageSize: ordersPerPage,
+    handleChangePageSize: handleChangePageSize
   })));
 };
 

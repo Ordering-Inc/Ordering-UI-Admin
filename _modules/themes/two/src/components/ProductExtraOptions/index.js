@@ -13,8 +13,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _Switch = require("../../styles/Switch");
 
 var _reactBootstrap = require("react-bootstrap");
@@ -38,6 +36,8 @@ var _Modal = require("../Modal");
 var _ProductExtraOptionDetails = require("../ProductExtraOptionDetails");
 
 var _ProductExtraOptionMetaFields = require("../ProductExtraOptionMetaFields");
+
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -279,11 +279,12 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   }, [editErrors]);
   return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, {
     id: "extra_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, extraState.extra.name), /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, extraState.extra.name), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return onClose();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.OptionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement("th", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), (_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options.map(function (option) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.OptionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement("th", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), (_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options.map(function (option) {
     var _changesState$result, _changesState$result2, _changesState$changes5, _changesState$changes6, _changesState$changes7, _changesState$changes8, _changesState$changes9, _changesState$changes10;
 
     return /*#__PURE__*/_react.default.createElement("tbody", {

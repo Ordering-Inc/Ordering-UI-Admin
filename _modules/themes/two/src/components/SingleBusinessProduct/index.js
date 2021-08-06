@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
-  var _productFormState$cha, _productFormState$cha2, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5;
+  var _theme$images$icons, _productFormState$cha2, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5, _productFormState$cha6;
 
   var isSkeleton = props.isSkeleton,
       viewMethod = props.viewMethod,
@@ -70,7 +70,9 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       handleChangeInput = props.handleChangeInput,
       handlechangeImage = props.handlechangeImage,
       isEditMode = props.isEditMode,
-      productDetailsId = props.productDetailsId;
+      productDetailsId = props.productDetailsId,
+      businessState = props.businessState,
+      handleUpdateBusinessState = props.handleUpdateBusinessState;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -89,7 +91,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var conatinerRef = (0, _react.useRef)(null);
+  var containerRef = (0, _react.useRef)(null);
   var ProductTypeImgRef = (0, _react.useRef)(null);
 
   var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
@@ -132,9 +134,9 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   };
 
   var closeProductEdit = function closeProductEdit(e) {
-    var _conatinerRef$current;
+    var _containerRef$current;
 
-    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) !== null && _conatinerRef$current !== void 0 && _conatinerRef$current.contains(e.target));
+    var outsideDropdown = !((_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target));
 
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
@@ -189,6 +191,68 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       _reactToastify.toast.dark(content, toastConfigure);
     }
   }, [productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading]);
+
+  var handleDrag = function handleDrag(event, productId) {
+    var _productFormState$cha;
+
+    event.dataTransfer.setData('transferProductId', productId);
+    var ghostEle = document.createElement('div');
+    ghostEle.classList.add('ghostDragging');
+    ghostEle.innerHTML = productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha = productFormState.changes) === null || _productFormState$cha === void 0 ? void 0 : _productFormState$cha.name;
+    document.body.appendChild(ghostEle);
+    event.dataTransfer.setDragImage(ghostEle, 0, 0);
+  };
+
+  var handleAllowDrop = function handleAllowDrop(event) {
+    event.preventDefault();
+  };
+
+  var handleDrop = function handleDrop(event) {
+    var _businessState$busine;
+
+    event.preventDefault();
+    var transferProductId = parseInt(event.dataTransfer.getData('transferProductId'));
+
+    var _categories = businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories.map(function (item) {
+      if (item.id === (product === null || product === void 0 ? void 0 : product.category_id)) {
+        var transferProduct = item.products.find(function (_product) {
+          return _product.id === transferProductId;
+        });
+        var updatedProducts = [];
+        var counter;
+
+        for (var i = 0; i < item.products.length; i++) {
+          if (item.products[i].id === (product === null || product === void 0 ? void 0 : product.id)) {
+            counter = i;
+          }
+
+          if (item.products[i].id !== transferProductId) {
+            updatedProducts.push(item.products[i]);
+          }
+        }
+
+        updatedProducts.splice(counter, 0, transferProduct);
+        return _objectSpread(_objectSpread({}, item), {}, {
+          products: updatedProducts
+        });
+      }
+
+      return item;
+    });
+
+    handleUpdateBusinessState(_objectSpread(_objectSpread({}, businessState === null || businessState === void 0 ? void 0 : businessState.business), {}, {
+      categories: _categories
+    }));
+  };
+
+  var handleDragEnd = function handleDragEnd() {
+    var elements = document.getElementsByClassName('ghostDragging');
+
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -208,16 +272,32 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30
   })))) : /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, {
-    ref: conatinerRef,
+    ref: containerRef,
     active: product.id === productDetailsId,
     onClick: function onClick(e) {
       return handleProductClick(e);
+    },
+    onDragOver: function onDragOver(e) {
+      return handleAllowDrop(e);
+    },
+    onDrop: function onDrop(e) {
+      return handleDrop(e);
+    },
+    onDragEnd: function onDragEnd(e) {
+      return handleDragEnd(e);
     }
   }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.DragableContainer, {
     className: "product_info"
-  }, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.DragImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
+    alt: "six dots",
+    draggable: true,
+    onDragStart: function onDragStart(e) {
+      return handleDrag(e, product.id);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
     onClick: function onClick() {
       return handleClickImage();
     },
@@ -237,26 +317,26 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading
-  }, productFormState !== null && productFormState !== void 0 && (_productFormState$cha = productFormState.changes) !== null && _productFormState$cha !== void 0 && _productFormState$cha.images ? /*#__PURE__*/_react.default.createElement("img", {
-    src: productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha2 = productFormState.changes) === null || _productFormState$cha2 === void 0 ? void 0 : _productFormState$cha2.images,
+  }, productFormState !== null && productFormState !== void 0 && (_productFormState$cha2 = productFormState.changes) !== null && _productFormState$cha2 !== void 0 && _productFormState$cha2.images ? /*#__PURE__*/_react.default.createElement("img", {
+    src: productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha3 = productFormState.changes) === null || _productFormState$cha3 === void 0 ? void 0 : _productFormState$cha3.images,
     alt: "business type image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement(_styles.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))), (product === null || product === void 0 ? void 0 : product.name) && /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     name: "name",
-    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha3 = productFormState.changes) === null || _productFormState$cha3 === void 0 ? void 0 : _productFormState$cha3.name) || '',
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha4 = productFormState.changes) === null || _productFormState$cha4 === void 0 ? void 0 : _productFormState$cha4.name) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
-  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("input", {
+  })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     name: "price",
     className: "product_price",
-    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha4 = productFormState.changes) === null || _productFormState$cha4 === void 0 ? void 0 : _productFormState$cha4.price) || '',
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha5 = productFormState.changes) === null || _productFormState$cha5 === void 0 ? void 0 : _productFormState$cha5.price) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
   }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("textarea", {
     name: "description",
-    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha5 = productFormState.changes) === null || _productFormState$cha5 === void 0 ? void 0 : _productFormState$cha5.description) || '',
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha6 = productFormState.changes) === null || _productFormState$cha6 === void 0 ? void 0 : _productFormState$cha6.description) || '',
     onChange: handleChangeInput,
     autoComplete: "off",
     className: "product_description"

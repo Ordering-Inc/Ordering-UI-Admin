@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddNewButtonLink = exports.BusinessCardContainer = exports.WrapperPagination = exports.BusinessListTable = exports.BusinessListContainer = void 0;
+exports.BusinessListBottomContainer = exports.AddNewButtonLink = exports.BusinessCardContainer = exports.WrapperPagination = exports.BusinessListTable = exports.BusinessListContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -33,7 +33,7 @@ var BusinessListTable = _styledComponents.default.table(_templateObject2 || (_te
 
 exports.BusinessListTable = BusinessListTable;
 
-var WrapperPagination = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n"])));
+var WrapperPagination = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n"])));
 
 exports.WrapperPagination = WrapperPagination;
 
@@ -45,8 +45,12 @@ var BusinessCardContainer = _styledComponents.default.div(_templateObject4 || (_
 
 exports.BusinessCardContainer = BusinessCardContainer;
 
-var AddNewButtonLink = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  color: ", ";\n  font-size: 14px;\n  margin-top: 15px;\n"])), function (props) {
+var AddNewButtonLink = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  color: ", ";\n  font-size: 14px;\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 
 exports.AddNewButtonLink = AddNewButtonLink;
+
+var BusinessListBottomContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 20px;\n"])));
+
+exports.BusinessListBottomContainer = BusinessListBottomContainer;

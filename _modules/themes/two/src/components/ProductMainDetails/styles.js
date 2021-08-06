@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProductConfigOption = exports.ProductConfigsContainer = exports.ProductDescription = exports.ProductPrice = exports.ProductDetailsContent = exports.ProductImage = exports.CloseButton = exports.RightHeader = exports.LeftHeader = exports.ProductName = exports.DetailsHeader = exports.ProductDetailsContainer = void 0;
+exports.ProductConfigOption = exports.ProductConfigsContainer = exports.ProductDescription = exports.ProductPrice = exports.ProductDetailsContent = exports.ProductImage = exports.RightHeader = exports.LeftHeader = exports.ProductName = exports.DetailsHeader = exports.ProductDetailsContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductDetailsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  padding: 20px;\n  position: relative;\n  overflow-x: hidden;\n\n  > button {\n    position: sticky;\n    top: 100%;\n    margin: 30px 0;\n    background: #E9ECEF;\n    height: 42px;\n  }\n"])));
+var ProductDetailsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  padding: 20px;\n  position: relative;\n  overflow-x: hidden;\n\n  > button {\n    position: sticky;\n    top: 100%;\n    margin: 30px 0;\n    height: 42px;\n  }\n"])));
 
 exports.ProductDetailsContainer = ProductDetailsContainer;
 
@@ -49,13 +49,7 @@ var RightHeader = _styledComponents.default.div(_templateObject7 || (_templateOb
 
 exports.RightHeader = RightHeader;
 
-var CloseButton = _styledComponents.default.span(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg {\n    color: ", ";\n    font-size: 24px;\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-});
-
-exports.CloseButton = CloseButton;
-
-var ProductImageStyled = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: #CCC;\n  width: 200px;\n  height: 200px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  border-radius: 8px;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n"])));
+var ProductImageStyled = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  background: #CCC;\n  width: 200px;\n  height: 200px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  border-radius: 8px;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n"])));
 
 var ProductImage = function ProductImage(props) {
   var style = {};
@@ -67,32 +61,44 @@ var ProductImage = function ProductImage(props) {
 
 exports.ProductImage = ProductImage;
 
-var ProductDetailsContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin: 20px 0;\n"])));
+var ProductDetailsContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 20px 0;\n"])));
 
 exports.ProductDetailsContent = ProductDetailsContent;
 
-var ProductPrice = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 600;\n  margin: 30px 0 15px;\n  color: ", ";\n"])), function (props) {
+var ProductPrice = _styledComponents.default.p(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 600;\n  margin: 30px 0 15px;\n  color: ", ";\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.ProductPrice = ProductPrice;
 
-var ProductDescription = _styledComponents.default.p(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  color: ", ";\n  margin: 25px 0;\n"])), function (props) {
+var ProductDescription = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  color: ", ";\n  margin: 25px 0;\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.ProductDescription = ProductDescription;
 
-var ProductConfigsContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  border: 1px solid #E9ECEF;\n  border-radius: 8px;\n  margin-bottom: 50px;\n  > div:last-child {\n    border-bottom: none;\n  }\n"])));
+var ProductConfigsContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-bottom: 50px;\n  overflow: hidden;\n  > div:last-child {\n    border-bottom: none;\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
 
 exports.ProductConfigsContainer = ProductConfigsContainer;
 
-var ProductConfigOption = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 10px 15px;\n  display: flex;\n  justify-content: space-between;\n  color: ", ";\n  border-bottom: 1px solid #E9ECEF;\n\n  ", "\n  \n  svg {\n    font-size: 20px;\n  }\n"])), function (props) {
+var ProductConfigOption = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 10px 15px;\n  display: flex;\n  justify-content: space-between;\n  color: ", ";\n  border-bottom: 1px solid ", ";\n\n  &:hover {\n    background-color: ", ";\n  }\n  \n  ", "\n\n  svg {\n    font-size: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
+}, function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.lightPrimary;
 }, function (_ref) {
   var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    color: ", ";\n    background-color: ", ";\n    border-bottom: 1px solid ", " !important;\n    border-top: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.headingColor;
+  }, function (props) {
+    return props.theme.colors.lightPrimary;
+  }, function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.primary;
   });
 });
 

@@ -21,6 +21,8 @@ var _Modal = require("../Modal");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
+var _Buttons = require("../../styles/Buttons");
+
 var _styles = require("./styles");
 
 var _ProductExtraOptions = require("../ProductExtraOptions");
@@ -160,11 +162,13 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       });
     }
   }, [productState, extrasState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductExtrasContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_EXTRAS', 'Product extras')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, {
+  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductExtrasContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_EXTRAS', 'Product extras')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  })), extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
+  }, t('ADD_PRODUCT_EXTRA', 'Add product extra'))), extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
     return /*#__PURE__*/_react.default.createElement(_styles.ExtraOption, {
       key: extra.id
     }, /*#__PURE__*/_react.default.createElement(_styles.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {

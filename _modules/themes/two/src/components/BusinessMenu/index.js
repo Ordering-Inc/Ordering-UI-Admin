@@ -17,8 +17,6 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
 
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
-
 var _styledComponents = require("styled-components");
 
 var _BusinessMenuOptions = require("../BusinessMenuOptions");
@@ -28,6 +26,8 @@ var _BusinessMenuCustomFields = require("../BusinessMenuCustomFields");
 var _Modal = require("../Modal");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
+
+var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
 
@@ -94,11 +94,13 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     setIsExtendExtraOpen(false);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MENU', 'Menu')), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MENU', 'Menu')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenOptions('option', {});
     }
-  })), businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus.map(function (menu) {
+  }, t('ADD_MENU', 'Add menu'))), businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.MeunItem, {
       key: menu.id
     }, /*#__PURE__*/_react.default.createElement(_styles.MenuName, null, menu === null || menu === void 0 ? void 0 : menu.name), /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {

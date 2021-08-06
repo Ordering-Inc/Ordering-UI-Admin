@@ -9,15 +9,13 @@ exports.Modal = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -77,11 +75,12 @@ var ModalUI = function ModalUI(props) {
     isTransparent: isTransparent
   }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
     className: "modal-close-icon"
-  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return onClose();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, null, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onAccept && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, null, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onAccept && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "darkBlue",
     onClick: function onClick() {
       return onAccept();

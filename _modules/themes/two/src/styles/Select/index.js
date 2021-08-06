@@ -15,9 +15,13 @@ var _reactPopper = require("react-popper");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _FiChevronDown = _interopRequireDefault(require("@meronex/icons/fi/FiChevronDown"));
+
 var _Selects = require("../Selects");
 
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -49,7 +53,9 @@ var Select = function Select(props) {
       defaultValue = props.defaultValue,
       onChange = props.onChange,
       notAsync = props.notAsync,
-      noSelected = props.noSelected;
+      noSelected = props.noSelected,
+      minWidth = props.minWidth,
+      isSecondIcon = props.isSecondIcon;
   var defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
     return option.value === defaultValue;
   });
@@ -148,7 +154,7 @@ var Select = function Select(props) {
 
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
     visibility: open ? 'visible' : 'hidden',
-    minWidth: '100px'
+    minWidth: minWidth || '100px'
   });
 
   if (!open) {
@@ -165,7 +171,7 @@ var Select = function Select(props) {
     onClick: function onClick() {
       return setOpen(!open);
     }
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null)))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null)))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "list",
     ref: popperElement,
     style: popStyle
@@ -177,6 +183,7 @@ var Select = function Select(props) {
   }, options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       key: i,
+      minWidth: minWidth,
       selected: value === option.value,
       color: option.color,
       onClick: function onClick(e) {

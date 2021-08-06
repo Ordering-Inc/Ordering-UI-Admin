@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddNewUserButton = exports.WrapperUserActionSelector = exports.WrapperPageState = exports.PageButton = exports.WrapperPagination = exports.UserEnableWrapper = exports.UserTypeWrapper = exports.InfoBlock = exports.CheckBoxWrapper = exports.UserMainInfo = exports.Image = exports.WrapperImage = exports.UsersTable = exports.UserTableWrapper = exports.UsersConatiner = void 0;
+exports.UsersBottomContainer = exports.AddNewUserButton = exports.WrapperUserActionSelector = exports.WrapperPagination = exports.UserEnableWrapper = exports.UserTypeWrapper = exports.InfoBlock = exports.CheckBoxWrapper = exports.UserMainInfo = exports.Image = exports.WrapperImage = exports.UsersTable = exports.UserTableWrapper = exports.UsersConatiner = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -131,30 +131,26 @@ var UserEnableWrapper = _styledComponents.default.div(_templateObject20 || (_tem
 
 exports.UserEnableWrapper = UserEnableWrapper;
 
-var WrapperPagination = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 20px;\n"])));
+var WrapperPagination = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 
 exports.WrapperPagination = WrapperPagination;
 
-var PageButton = _styledComponents.default.button(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  outline: none;\n  border: 1px solid #00000029;\n  border-radius: 100%;\n  background: transparent;\n  width: 30px;\n  height: 30px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  margin: 0 5px;\n\n  &:active {\n    background: #1c202e;\n    color: #fff;\n  }\n  &:disabled {\n    cursor: no-drop;\n    pointer-events: none;\n  }\n"])));
-
-exports.PageButton = PageButton;
-
-var WrapperPageState = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  min-width: 140px;\n"])));
-
-exports.WrapperPageState = WrapperPageState;
-
-var WrapperUserActionSelector = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  button {\n    background: transparent !important;\n    border: none;\n    padding: 0px;\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n    }\n    &:after {\n      display: none;\n    }\n  }\n  .show {\n    button {\n      background: #F8F9FA !important;\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    >div {\n      border: 1px solid #E9ECEF;\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n  > div {\n    border-radius: 8px;\n    ", "\n    > div {\n      a:last-child {\n        color: #E63757;\n      }\n    }\n    .dropdown-item {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
+var WrapperUserActionSelector = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  button {\n    background: transparent !important;\n    border: none;\n    padding: 0px;\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n    }\n    &:after {\n      display: none;\n    }\n  }\n  .show {\n    button {\n      background: #F8F9FA !important;\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    >div {\n      border: 1px solid #E9ECEF;\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n  > div {\n    border-radius: 8px;\n    ", "\n    > div {\n      a:last-child {\n        color: #E63757;\n      }\n    }\n    .dropdown-item {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme6;
 
-  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n    "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n      margin-right: 5px;\n    "])));
+  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n    "]))) : (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      margin-right: 5px;\n    "])));
 });
 
 exports.WrapperUserActionSelector = WrapperUserActionSelector;
 
-var AddNewUserButton = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  width: fit-content;\n  margin-top: 10px;\n"])), function (props) {
+var AddNewUserButton = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  width: fit-content;\n  font-size: 14px;\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 
 exports.AddNewUserButton = AddNewUserButton;
+
+var UsersBottomContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 20px;\n"])));
+
+exports.UsersBottomContainer = UsersBottomContainer;
