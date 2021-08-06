@@ -14,7 +14,8 @@ import {
   BarChartLine as BarChartLineIcon,
   Gear as GearIcon,
   Headset as HeadsetIcon,
-  Globe2
+  Globe2,
+  GraphUp
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -63,6 +64,35 @@ export const SidebarMenu = (props) => {
       id: 3,
       title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
       pageName: 'drivers'
+    }
+  ]
+
+  const marketingSubMenus = [
+    {
+      id: 1,
+      title: t('MARKET_SUITE', 'Market suite'),
+      pageName: 'marketSuite'
+    },
+    {
+      id: 2,
+      title: t('ANALYTICS', 'Analytics'),
+      pageName: 'marketAnalytics'
+    },
+    {
+      id: 3,
+      title: t('PROMOTIONS', 'Promotions'),
+      pageName: 'promotions',
+      url: '/marketing/promotions'
+    },
+    {
+      id: 4,
+      title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
+      pageName: 'promotionsEnterprise'
+    },
+    {
+      id: 5,
+      title: t('CAMPAIGN', 'Campaign'),
+      pageName: 'campaign'
     }
   ]
 
@@ -242,12 +272,37 @@ export const SidebarMenu = (props) => {
                     {!isCollapse && <span>{t('ANALYTICS', 'Analytics')}</span>}
                   </ContextAwareToggle>
                 </MenuContainer>
+
+                <MenuContainer>
+                  <ContextAwareToggle
+                    eventKey='6'
+                    active={
+                      location.pathname === '/marketing/promotions'
+                    }
+                  >
+                    <GraphUp />
+                    {!isCollapse && <span>{t('MARKETING', 'Marketing')}</span>}
+                  </ContextAwareToggle>
+                  <Accordion.Collapse eventKey='6'>
+                    <MenuContent>
+                      {marketingSubMenus.map(item => (
+                        <SubMenu
+                          key={item.id}
+                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                          onClick={() => handleGoToPage({ page: item.pageName })}
+                        >
+                          {item.title}
+                        </SubMenu>
+                      ))}
+                    </MenuContent>
+                  </Accordion.Collapse>
+                </MenuContainer>
               </Accordion>
             </div>
             <div className='d-flex flex-column'>
               <LanguageSelectorContainer>
                 <Globe2 />
-                <LanguageSelector />
+                {!isCollapse && <LanguageSelector />}
               </LanguageSelectorContainer>
               {sessionState?.user?.level === 0 && (
                 <Accordion>

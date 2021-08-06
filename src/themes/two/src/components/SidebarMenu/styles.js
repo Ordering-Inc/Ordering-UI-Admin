@@ -220,6 +220,7 @@ export const SubMenu = styled.div`
 export const LanguageSelectorContainer = styled.div`
   position: relative;
   border-radius: 8px;
+  min-height: 35px;
 
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
