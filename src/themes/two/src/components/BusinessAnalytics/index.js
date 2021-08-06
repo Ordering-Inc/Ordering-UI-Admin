@@ -108,6 +108,7 @@ const BusinessAnalyticsUI = (props) => {
         <div className='col-md-6'>
           <AnalyticsRegisterUsers
             registerUsersList={registerUsersList}
+            filterList={filterList}
           />
         </div>
         <div className='col-md-6'>

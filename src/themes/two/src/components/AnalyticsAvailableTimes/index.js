@@ -29,14 +29,46 @@ export const AnalyticsAvailableTimes = (props) => {
     const labels = []
     if (availableTimesList?.data?.busy) {
       for (const label of availableTimesList?.data?.busy) {
-        const timeConvert = (filterList?.lapse === 'today' || filterList?.lapse === 'yesterday')
-          ? moment(label.at).format('LT')
-          : moment(label.at).format('MMM DD')
+        const timeConvert = getTimeFormat(label.at, filterList?.lapse)
         labels.push(timeConvert)
       }
     }
 
     return labels
+  }
+
+  const getTimeFormat = (date, lapse) => {
+    let newDate
+    switch (lapse) {
+      case 'today':
+      case 'yesterday':
+        newDate = moment(date).format('HH:00')
+        break
+      case 'last_7_days':
+      case 'last_30_days':
+        newDate = moment(date).format('MMM DD')
+        break
+      default: {
+        const _lapse = lapse.split(',')
+        const from = moment(_lapse[0] + ' 00:00:00')
+        const to = moment(_lapse[1] + ' 24:00:00')
+        const duration = moment.duration(from.diff(to))
+        const hours = Math.abs(duration.asHours())
+        const days = Math.abs(duration.asDays())
+        const months = Math.abs(duration.asMonths())
+        if (hours <= 24) {
+          newDate = moment(date).format('HH:MM:SS')
+        } else if (days <= 30) {
+          newDate = moment(date).format('MMM DD')
+        } else if (months <= 12) {
+          newDate = moment(date).format('YYYY-MM')
+        } else {
+          newDate = moment(date).format('YYYY-MM')
+        }
+        break
+      }
+    }
+    return newDate
   }
 
   const generateAvailableData = () => {

@@ -1,4 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import 'chartjs-adapter-moment'
+import moment from 'moment'
 import {
   Container,
   ChartContentWrapper,
@@ -11,7 +13,6 @@ import BsDownload from '@meronex/icons/bs/BsDownload'
 import { Line } from 'react-chartjs-2'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import moment from 'moment'
 import { Modal } from '../Modal'
 
 export const AnalyticsSpendTimes = (props) => {
@@ -23,52 +24,156 @@ export const AnalyticsSpendTimes = (props) => {
   const [, t] = useLanguage()
   const chartRef = useRef(null)
   const [isShowPreview, setIsShowPreview] = useState(false)
-
-  const generateLabels = () => {
-    const labels = []
-    for (const label of chartDataList?.data) {
-      const timeConvert = (filterList?.lapse === 'today' || filterList?.lapse === 'yesterday')
-        ? moment(label.time).format('LT')
-        : moment(label.time).format('MMM DD')
-      labels.push(timeConvert)
-    }
-    return labels
-  }
+  const [timeAxes, setTimeAxes] = useState([])
 
   const generateAcceptData = () => {
     const values = []
-    for (const label of chartDataList?.data) {
-      values.push(label.accept_spend)
-    }
+    timeAxes.forEach(function (axe) {
+      const index = chartDataList?.data?.findIndex(history => {
+        return axe === history?.time
+      })
+      if (index !== -1) {
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.accept_spend })
+      } else {
+        values.push({ x: axe, y: 0 })
+      }
+    })
     return values
   }
 
   const generatePickUPData = () => {
     const values = []
-    for (const label of chartDataList?.data) {
-      values.push(label.pickup_spend)
-    }
+    timeAxes.forEach(function (axe) {
+      const index = chartDataList?.data?.findIndex(history => {
+        return axe === history?.time
+      })
+      if (index !== -1) {
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.pickup_spend })
+      } else {
+        values.push({ x: axe, y: 0 })
+      }
+    })
     return values
   }
 
   const generateDeliveryData = () => {
     const values = []
-    for (const label of chartDataList?.data) {
-      values.push(label.delivery_spend)
-    }
+    timeAxes.forEach(function (axe) {
+      const index = chartDataList?.data?.findIndex(history => {
+        return axe === history?.time
+      })
+      if (index !== -1) {
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.delivery_spend })
+      } else {
+        values.push({ x: axe, y: 0 })
+      }
+    })
     return values
   }
 
   const generateCompletedData = () => {
     const values = []
-    for (const label of chartDataList?.data) {
-      values.push(label.complete_spend)
-    }
+    timeAxes.forEach(function (axe) {
+      const index = chartDataList?.data?.findIndex(history => {
+        return axe === history?.time
+      })
+      if (index !== -1) {
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.complete_spend })
+      } else {
+        values.push({ x: axe, y: 0 })
+      }
+    })
     return values
   }
 
+  const getTimeAxes = (lapse) => {
+    const xAxes = {
+      type: 'time',
+      grid: {
+        display: false
+      },
+      time: {
+        stepSize: 1,
+        displayFormats: {
+          hour: 'LT'
+        }
+      },
+      ticks: {
+        fontSize: 12,
+        fontColor: '#CED4DA'
+      }
+    }
+    switch (lapse) {
+      case 'today':
+      case 'yesterday':
+        xAxes.time.unit = 'hour'
+        xAxes.time.min = moment().subtract(lapse === 'today' ? 0 : 1, 'days').format('YYYY-MM-DD 00:00:00')
+        xAxes.time.max = moment().subtract(lapse === 'today' ? 0 : 1, 'days').format('YYYY-MM-DD 24:00:00')
+        break
+      case 'last_7_days':
+      case 'last_30_days':
+        xAxes.time.unit = 'day'
+        xAxes.time.min = moment().subtract(lapse === 'last_7_days' ? 7 : 30, 'days').format('YYYY-MM-DD')
+        xAxes.time.max = moment().format('YYYY-MM-DD')
+        break
+      default: {
+        const _lapse = lapse.split(',')
+        const from = moment(_lapse[0] + ' 00:00:00')
+        const to = moment(_lapse[1] + ' 24:00:00')
+        const duration = moment.duration(from.diff(to))
+        const hours = Math.abs(duration.asHours())
+        const days = Math.abs(duration.asDays())
+        const months = Math.abs(duration.asMonths())
+        if (hours <= 24) {
+          xAxes.time.unit = 'hour'
+          xAxes.time.min = from.format('YYYY-MM-DD HH:mm:ss')
+          xAxes.time.max = to.format('YYYY-MM-DD HH:mm:ss')
+        } else if (days <= 30) {
+          xAxes.time.unit = 'day'
+          xAxes.time.min = from.format('YYYY-MM-DD HH:mm:ss')
+          xAxes.time.max = to.format('YYYY-MM-DD HH:mm:ss')
+        } else if (months <= 12) {
+          xAxes.time.unit = 'month'
+          xAxes.time.min = from.format('YYYY-MM-DD HH:mm:ss')
+          xAxes.time.max = to.format('YYYY-MM-DD HH:mm:ss')
+        } else {
+          xAxes.time.unit = 'year'
+          xAxes.time.min = from.format('YYYY-MM-DD HH:mm:ss')
+          xAxes.time.max = to.format('YYYY-MM-DD HH:mm:ss')
+        }
+        break
+      }
+    }
+    return xAxes
+  }
+
+  const updateTimeAxes = () => {
+    var unitdate = getTimeAxes(filterList?.lapse).time.unit
+    var maxdate = moment(getTimeAxes(filterList?.lapse).time.max).endOf(unitdate)
+    var mindate = moment(getTimeAxes(filterList?.lapse).time.min).startOf(unitdate)
+    var curDate = mindate
+    var newTimeAxes = []
+    var adder = 'd'
+    switch (unitdate) {
+      case 'day': adder = 'd'
+        break
+      case 'month': adder = 'M'
+        break
+      case 'year': adder = 'y'
+        break
+      case 'hour': adder = 'h'
+        break
+      default: break
+    }
+    do {
+      newTimeAxes.push(moment(curDate._d.getTime()).format('YYYY-MM-DD HH:mm:ss'))
+      curDate = curDate.clone().add(1, adder)
+    }
+    while (curDate <= maxdate)
+    setTimeAxes(newTimeAxes)
+  }
+
   const defaultData = {
-    labels: generateLabels(),
     datasets: [
       {
         label: t('ACCEPT', 'Accept'),
@@ -107,18 +212,7 @@ export const AnalyticsSpendTimes = (props) => {
 
   const options = {
     scales: {
-      x: {
-        grid: {
-          display: false
-        },
-        ticks: {
-          font: {
-            size: 12,
-            color: '#CED4DA'
-          }
-        },
-        beginAtZero: true
-      },
+      x: getTimeAxes(filterList?.lapse),
       y: {
         beginAtZero: true,
         grid: {
@@ -152,6 +246,10 @@ export const AnalyticsSpendTimes = (props) => {
   const previewChart = () => {
     if (chartDataList?.data.length > 0) setIsShowPreview(true)
   }
+
+  useEffect(() => {
+    updateTimeAxes()
+  }, [filterList])
 
   return (
     <>

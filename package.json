@@ -68,6 +68,7 @@
     "@stripe/stripe-js": "^1.11.0",
     "bootstrap": "^5.0.1",
     "chart.js": "^3.5.0",
+    "chartjs-adapter-moment": "^1.0.0",
     "google-map-react": "^2.1.9",
     "handsontable": "^9.0.1",
     "html-to-image": "^1.7.0",

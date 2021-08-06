@@ -129,6 +129,7 @@ const DriverAnalyticsUI = (props) => {
         <div className='col-md-6'>
           <AnalyticsSpendTimes
             chartDataList={spendTimesList}
+            filterList={filterList}
           />
         </div>
         <div className='col-md-6'>
