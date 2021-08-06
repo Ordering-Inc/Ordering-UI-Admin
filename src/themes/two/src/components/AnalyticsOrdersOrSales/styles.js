@@ -39,6 +39,13 @@ export const ActionBlock = styled.div`
       `}
     }
   }
+
+  ${({ disabled }) => disabled && css`
+    svg {
+      color: ${props => props.theme?.colors.disabled};
+      cursor: not-allowed;
+    }
+  `}
 `
 
 export const ChartFooterContainer = styled.div`

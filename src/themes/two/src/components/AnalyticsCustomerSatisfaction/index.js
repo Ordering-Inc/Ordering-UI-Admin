@@ -57,7 +57,14 @@ export const AnalyticsCustomerSatisfaction = (props) => {
     <Container>
       <CustomerSatisfactionHeader>
         <p>{t('CUSTOMER_SATISFACTION', 'Customer Safisfaction')}</p>
-        <ActionBlock>
+        <ActionBlock
+          disabled={(!dataList?.data?.general &&
+              !dataList?.data?.quality &&
+              !dataList?.data?.delivery &&
+              !dataList?.data?.service &&
+              !dataList?.data?.package
+          )}
+        >
           <BsDownload onClick={downloadImage} />
         </ActionBlock>
       </CustomerSatisfactionHeader>

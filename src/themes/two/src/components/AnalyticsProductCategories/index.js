@@ -43,7 +43,7 @@ export const AnalyticsProductCategories = (props) => {
     <Container>
       <ProductCategoryHeader>
         <p>{isProducts ? t('TOP_PRODUCTS', 'Top Products') : t('TOP_CATEGORIES', 'Top Categories')}</p>
-        <ActionBlock>
+        <ActionBlock disabled={productCategoryList?.data.length === 0}>
           <BsDownload onClick={downloadImage} />
         </ActionBlock>
       </ProductCategoryHeader>

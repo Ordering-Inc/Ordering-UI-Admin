@@ -27,8 +27,8 @@ export const AnalyticsAvailableTimes = (props) => {
 
   const generateLabels = () => {
     const labels = []
-    if (availableTimesList?.data?.busy) {
-      for (const label of availableTimesList?.data?.busy) {
+    if (availableTimesList?.data?.available) {
+      for (const label of availableTimesList?.data?.available) {
         const timeConvert = getTimeFormat(label.at, filterList?.lapse)
         labels.push(timeConvert)
       }
@@ -73,8 +73,8 @@ export const AnalyticsAvailableTimes = (props) => {
 
   const generateAvailableData = () => {
     const datasets = []
-    if (availableTimesList?.data?.busy) {
-      for (const data of availableTimesList?.data?.busy) {
+    if (availableTimesList?.data?.available) {
+      for (const data of availableTimesList?.data?.available) {
         const _time = parseNumber((data.time / 3600), { separator: '.' })
         datasets.push(_time)
       }
@@ -85,8 +85,8 @@ export const AnalyticsAvailableTimes = (props) => {
 
   const generateNotAvailableData = () => {
     const datasets = []
-    if (availableTimesList?.data?.not_busy) {
-      for (const data of availableTimesList?.data?.not_busy) {
+    if (availableTimesList?.data?.not_available) {
+      for (const data of availableTimesList?.data?.not_available) {
         const _time = parseNumber((data.time / 3600), { separator: '.' })
         datasets.push(_time)
       }
@@ -167,7 +167,7 @@ export const AnalyticsAvailableTimes = (props) => {
   }
 
   const previewChart = () => {
-    if (availableTimesList?.data?.busy?.length > 0 || availableTimesList?.data?.not_busy?.length > 0) setIsShowPreview(true)
+    if (availableTimesList?.data?.available?.length > 0 || availableTimesList?.data?.not_available?.length > 0) setIsShowPreview(true)
   }
 
   return (
@@ -175,7 +175,7 @@ export const AnalyticsAvailableTimes = (props) => {
       <Container>
         <ChartHeaderContainer>
           <p>{t('AVAILABLE_TIMES', 'Available Times')}</p>
-          <ActionBlock>
+          <ActionBlock disabled={!(availableTimesList?.data?.available?.length > 0 || availableTimesList?.data?.not_available?.length > 0)}>
             <BsArrowsAngleExpand onClick={previewChart} />
             <BsDownload className='download-view' onClick={downloadImage} />
           </ActionBlock>
@@ -184,7 +184,7 @@ export const AnalyticsAvailableTimes = (props) => {
           availableTimesList?.loading ? (
             <Skeleton height={150} />
           ) : (
-            (availableTimesList?.data?.busy?.length > 0 || availableTimesList?.data?.not_busy?.length > 0) ? (
+            (availableTimesList?.data?.available?.length > 0 || availableTimesList?.data?.not_available?.length > 0) ? (
               <BarChartWrapper>
                 <Bar data={data} options={options} ref={chartRef} />
               </BarChartWrapper>

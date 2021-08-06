@@ -140,7 +140,7 @@ export const AnalyticsOrdersStatus = (props) => {
     <Container>
       <ProductCategoryHeader>
         <p>{t('ORDERS_STATUS', 'ORDERS STATUS')}</p>
-        <ActionBlock>
+        <ActionBlock disabled={orderStatusList?.data.length === 0}>
           <BsDownload onClick={downloadImage} />
         </ActionBlock>
       </ProductCategoryHeader>

@@ -175,7 +175,7 @@ export const AnalyticsBusyTimes = (props) => {
       <Container>
         <ChartHeaderContainer>
           <p>{t('BUSY_TIMES', 'Busy Times')}</p>
-          <ActionBlock>
+          <ActionBlock disabled={!(busyTimesList?.data?.busy?.length > 0 || busyTimesList?.data?.not_busy?.length > 0)}>
             <BsArrowsAngleExpand onClick={previewChart} />
             <BsDownload className='download-view' onClick={downloadImage} />
           </ActionBlock>

@@ -208,7 +208,7 @@ export const AnalyticsOrdersOrSales = (props) => {
       <Container>
         <ChartHeaderContainer>
           <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}</p>
-          <ActionBlock>
+          <ActionBlock disabled={chartDataList?.data.length === 0}>
             <BsArrowsAngleExpand onClick={previewChart} />
             <BsDownload className='download-view' onClick={downloadImage} />
           </ActionBlock>

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
@@ -26,6 +26,13 @@ export const ActionBlock = styled.div`
     color: #212121;
     cursor: pointer;
   }
+
+  ${({ disabled }) => disabled && css`
+    svg {
+      color: ${props => props.theme?.colors.disabled};
+      cursor: not-allowed;
+    }
+  `}
 `
 
 export const BarChartWrapper = styled.div`

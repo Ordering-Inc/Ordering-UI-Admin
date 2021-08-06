@@ -42,7 +42,7 @@ export const AnalyticsTopOrders = (props) => {
     <Container>
       <ProductCategoryHeader>
         <p>{t('TOP_ORDERS', 'Top Orders')}</p>
-        <ActionBlock>
+        <ActionBlock disabled={dataList?.data.length === 0}>
           <BsDownload onClick={downloadImage} />
         </ActionBlock>
       </ProductCategoryHeader>

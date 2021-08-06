@@ -256,7 +256,7 @@ export const AnalyticsSpendTimes = (props) => {
       <Container>
         <ChartHeaderContainer>
           <p>{t('TIMES', 'Times')}</p>
-          <ActionBlock>
+          <ActionBlock disabled={chartDataList?.data.length === 0}>
             <BsArrowsAngleExpand onClick={previewChart} />
             <BsDownload className='download-view' onClick={downloadImage} />
           </ActionBlock>

@@ -28,6 +28,13 @@ export const ActionBlock = styled.div`
     color: #212121;
     cursor: pointer;
   }
+
+  ${({ disabled }) => disabled && css`
+    svg {
+      color: ${props => props.theme?.colors.disabled};
+      cursor: not-allowed;
+    }
+  `}
 `
 
 export const ProductCategoryContentWrapper = styled.div``
