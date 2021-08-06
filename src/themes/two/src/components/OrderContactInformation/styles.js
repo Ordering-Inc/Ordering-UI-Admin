@@ -1,22 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const ButtonLink = styled.div`
-  cursor: pointer;
-  padding: 3px;
-  margin: 0 5px;
-
-  &:hover {
-    background-color: ${props => props.theme.colors?.secundary};
-    border-radius: 5px;
-  }
-
-  svg {
-    color: ${props => props.theme.colors?.lightGray};
-    font-size: 24px;
-  }
-`
-
 export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
@@ -76,9 +60,6 @@ export const InfoContent = styled.div`
     display: flex;
     align-items: center;
 
-    svg {
-      font-size: 20px;
-    }
     > p {
       margin: 0px;
       font-weight: 600;
@@ -87,6 +68,14 @@ export const InfoContent = styled.div`
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
+    }
+
+    > button {
+      ${props => props.theme?.rtl ? css`
+        margin-right: 8px;
+      ` : css`
+        margin-left: 8px;
+      `}
     }
   }
 

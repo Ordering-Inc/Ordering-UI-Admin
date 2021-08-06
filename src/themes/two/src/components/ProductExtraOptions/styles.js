@@ -33,16 +33,14 @@ export const Header = styled.div`
     color: ${props => props.theme.colors.headingColor};
   }
 
-  > svg {
+  > button {
     display: none;
   }
 
   @media (min-width: 1000px) {
-    > svg {
+    > button {
       display: block;
       cursor: pointer;
-      font-size: 24px;
-      color: ${props => props.theme.colors.headingColor};
       ${props => props.theme?.rtl ? css`
         margin-right: 10px;
       ` : css`

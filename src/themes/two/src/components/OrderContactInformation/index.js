@@ -1,9 +1,10 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import HiOutlinePhone from '@meronex/icons/hi/HiOutlinePhone'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
+import { IconButton } from '../../styles/Buttons'
+import { Telephone } from 'react-bootstrap-icons'
 
 import {
   BusinessInfo,
@@ -13,8 +14,7 @@ import {
   CustomerInfo,
   DriverInfoContainer,
   DriverInfo,
-  DriverSelectorContainer,
-  ButtonLink
+  DriverSelectorContainer
 } from './styles'
 
 export const OrderContactInformation = (props) => {
@@ -39,11 +39,11 @@ export const OrderContactInformation = (props) => {
           <div>
             <p>{order?.business?.name}</p>
             {order?.business?.phone && (
-              <ButtonLink
+              <IconButton
                 onClick={() => window.open(`tel:${order.business.phone}`)}
               >
-                <HiOutlinePhone />
-              </ButtonLink>
+                <Telephone />
+              </IconButton>
             )}
           </div>
           <p>{order?.business?.address}</p>
@@ -61,11 +61,11 @@ export const OrderContactInformation = (props) => {
           <div>
             <p>{order?.customer?.name} {order?.customer?.lastname}</p>
             {order?.customer?.cellphone && (
-              <ButtonLink
+              <IconButton
                 onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}
               >
-                <HiOutlinePhone />
-              </ButtonLink>
+                <Telephone />
+              </IconButton>
             )}
           </div>
           <p>{order?.customer?.cellphone}</p>
@@ -86,11 +86,11 @@ export const OrderContactInformation = (props) => {
                 <div>
                   <p>{order?.driver?.name} {order?.driver?.lastname}</p>
                   {order?.driver?.cellphone && (
-                    <ButtonLink
+                    <IconButton
                       onClick={() => window.open(`tel:${order?.driver?.cellphone}`)}
                     >
-                      <HiOutlinePhone />
-                    </ButtonLink>
+                      <Telephone />
+                    </IconButton>
                   )}
                 </div>
                 <p>{t('DRIVER', 'Driver')}</p>

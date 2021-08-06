@@ -5,9 +5,8 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Modal } from '../Modal'
 import { SettingsList } from '../SettingsList'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { Button } from '../../styles/Buttons'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
-import BsLifePreserver from '@meronex/icons/bs/BsLifePreserver'
+import { XLg, LifePreserver } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
 import MdcPlayCircle from '@meronex/icons/mdc/MdcPlayCircle'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 
@@ -124,8 +123,17 @@ export const SettingsDetail = (props) => {
       <DescriptionContent>
         <DescriptionHeader>
           <HeaderIcons>
-            <BsLifePreserver />
-            <MdcClose onClick={handleClose} />
+            {category?.support_url && (
+              <IconButton onClick={() => handleExtraOpen(true)}>
+                <LifePreserver />
+              </IconButton>
+            )}
+            <IconButton
+              color='black'
+              onClick={handleClose}
+            >
+              <XLg />
+            </IconButton>
           </HeaderIcons>
         </DescriptionHeader>
         {
@@ -146,15 +154,17 @@ export const SettingsDetail = (props) => {
             </CategoryName>
             <Description>{category?.description}</Description>
             {
-              category?.support_url && <MoreInfo onClick={() => handleExtraOpen(true)}>{t('MORE_INFO', 'More info')}</MoreInfo>
+              category?.more_info && <MoreInfo>{t('MORE_INFO', 'More info')}</MoreInfo>
             }
-            <VideoContainer>
-              <MdcPlayCircle onClick={playVideo} />
-              <video muted id='categoryVideo' className='w-100 custom-video' playsInline>
-                <source src={category.video} type='video/mp4' />
-                <source src={category.video} type='video/webm' />
-              </video>
-            </VideoContainer>
+            {category?.video && (
+              <VideoContainer>
+                <MdcPlayCircle onClick={playVideo} />
+                <video muted id='categoryVideo' className='w-100 custom-video' playsInline>
+                  <source src={category.video} type='video/mp4' />
+                  <source src={category.video} type='video/webm' />
+                </video>
+              </VideoContainer>
+            )}
             <AllSetting onClick={() => handleExtraOpen(false)}>
               <span>{t('ALL_SETTINGS', 'All settings')}</span>
               <BsArrowRight />
@@ -166,13 +176,12 @@ export const SettingsDetail = (props) => {
         <>
           {width >= 1000 ? (
             <CategoryDescriptionExtraContent>
-              <Button
-                borderRadius='5px'
-                color='secundary'
+              <IconButton
+                color='black'
                 onClick={() => setExtraInfoOpen(false)}
               >
-                <MdcClose />
-              </Button>
+                <XLg />
+              </IconButton>
               <IframeWrapper dangerouslySetInnerHTML={{ __html: `<iframe src=${category.support_url} style="width: 100%; height: 100%;" />` }} />
             </CategoryDescriptionExtraContent>
           ) : (
@@ -194,13 +203,12 @@ export const SettingsDetail = (props) => {
         <>
           {width >= 1000 ? (
             <CategoryDescriptionExtraContent>
-              <Button
-                borderRadius='5px'
-                color='secundary'
+              <IconButton
+                color='black'
                 onClick={onCloseSettingsList}
               >
-                <MdcClose />
-              </Button>
+                <XLg />
+              </IconButton>
               <SubCategoryWrapper>
                 <SettingsList
                   category={category}

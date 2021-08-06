@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, BusinessDeliveryZone as BusinessDeliveryZoneController } from 'ordering-components-admin'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import { Switch } from '../../styles/Switch'
@@ -11,6 +10,8 @@ import { Alert } from '../Confirm'
 import { useForm } from 'react-hook-form'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { Button } from '../../styles/Buttons'
+
 import {
   MainContainer,
   ZoneContainer,
@@ -135,9 +136,13 @@ const BusinessDeliveryZoneUI = (props) => {
         <ZoneContainer>
           <Header>
             <h1>{t('DELIVERY_ZONE', 'Delivery zones')}</h1>
-            <BsPlusSquare
+            <Button
+              borderRadius='8px'
+              color='lightPrimary'
               onClick={() => setIsAddMode(true)}
-            />
+            >
+              {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
+            </Button>
           </Header>
           <DeliveryZonesContainer>
             <DeliveryZoneWrapper>

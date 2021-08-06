@@ -42,9 +42,16 @@ export const ViewMethodButton = styled.span`
 
   svg {
     font-size: 20px;
+    transition: all .2s ease-in;
   }
 
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.primary};
   `}
+
+  &:hover {
+    svg {
+      font-size: 24px;
+    }
+  }
 `

@@ -11,7 +11,8 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { OrderDetailsHeader } from '../OrderDetailsHeader'
 import { OrderBill } from '../OrderBill'
 import { OrderContactInformation } from '../OrderContactInformation'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
+import { XLg } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   Container,
@@ -24,7 +25,7 @@ import {
   StatusBar,
   AdvancedLogistic,
   OrderProducts,
-  CloseButton
+  CloseButtonWrapper
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -269,11 +270,11 @@ const OrderDetailsUI = (props) => {
         <>
           {width >= 1000 ? (
             <OrderDetailsExtraContent>
-              <CloseButton
-                onClick={() => setExtraOpen(false)}
-              >
-                <MdcClose />
-              </CloseButton>
+              <CloseButtonWrapper>
+                <IconButton color='black' onClick={() => setExtraOpen(false)}>
+                  <XLg />
+                </IconButton>
+              </CloseButtonWrapper>
               {(openMessages?.chat) && (
                 <ChatContainer>
                   <Messages

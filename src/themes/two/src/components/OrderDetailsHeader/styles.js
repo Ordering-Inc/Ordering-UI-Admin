@@ -35,25 +35,20 @@ export const OrderDetailsHeaderContainer = styled.div`
   }
 `
 
-export const ButtonLink = styled.div`
-  position: relative;
-  cursor: pointer;
-  padding: 5px;
-
-  ${props => props.theme?.rtl ? css`
-    margin-left: 5px;
-  ` : css`
-    margin-right: 5px;
-  `}
-  
-  > svg {
-    color: ${props => props.theme.colors?.secundaryContrast};
-    font-size: 22px;
-  }
-  &.close {
-    > svg {
-      font-size: 18px;
-      color: ${props => props.theme.colors?.headingColor};
+export const ButtonGroup = styled.div`
+  > button {
+    position: relative;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+    ` : css`
+      margin-right: 8px;
+    `}
+    &:last-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 0px;
+      ` : css`
+        margin-right: 0px;
+      `}
     }
   }
 `

@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
 import { SpinnerLoader } from '../SpinnerLoader'
+import { IconButton } from '../../styles/Buttons'
 import {
   WrapMetaFields,
   MetaTitle,
@@ -174,7 +175,9 @@ const BusinessCustomFieldsUI = (props) => {
                         </>
                       )}
                     </RoundBorder>
-                    <BsTrash onClick={() => handleDeleteMetaField(metaField.id)} />
+                    <IconButton onClick={() => handleDeleteMetaField(metaField.id)}>
+                      <BsTrash />
+                    </IconButton>
                   </div>
                 </MetaContainer>
               ))}
@@ -282,11 +285,12 @@ const BusinessCustomFieldsUI = (props) => {
                     />
                   </div>
                 )}
-                <button
+                <IconButton
+                  color='primary'
                   type='submit'
                 >
                   <BsPlusSquare />
-                </button>
+                </IconButton>
               </div>
             </MetaAddContainer>
           </MetaAddForm>

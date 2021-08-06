@@ -56,7 +56,7 @@ export const PaymethodName = styled.span`
 
 export const DropDownWrapper = styled.div`
   button {
-    background: #F8F9FA !important;
+    background: transparent !important;
     border: none;
     padding: 0px;
     svg {
@@ -65,6 +65,9 @@ export const DropDownWrapper = styled.div`
 
     &:after {
       display: none;
+    }
+    &:hover {
+      background: ${props => props.theme.colors.secundary} !important;
     }
   }
 

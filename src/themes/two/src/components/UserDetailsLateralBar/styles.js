@@ -69,10 +69,9 @@ export const WrapUserDetails = styled.div`
   position: relative;
 `
 
-export const CloseButton = styled.div`
+export const CloseButtonWrapper = styled.div`
   position: absolute;
   top: 30px;
-  cursor: pointer;
 
   ${props => props.theme?.rtl ? css`
     left: 10px;
@@ -80,7 +79,4 @@ export const CloseButton = styled.div`
     right: 10px;
   `}
 
-  svg {
-    font-size: 30px;
-  }
 `

@@ -14,17 +14,6 @@ export const HeaderContainer = styled.div`
       margin: 0px;
       font-weight: 700;
     }
-
-    > svg {
-      cursor: pointer;
-      font-size: 24px;
-      color: ${props => props.theme.colors.primary};
-      ${props => props.theme?.rtl ? css`
-        margin-right: 10px;
-      ` : css`
-        margin-left: 10px;
-      `}
-    }
   }
 
   @media (min-width: 768px) {

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UserDetails } from '../UserDetails'
+import { XLg } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   LateralBarContainer,
-  CloseButton,
+  CloseButtonWrapper,
   WrapUserDetails
 } from './styles'
 
@@ -61,11 +62,14 @@ export const UserDetailsLateralBar = (props) => {
   return (
     <LateralBarContainer id='user_lateral_bar'>
       <WrapUserDetails>
-        <CloseButton
-          onClick={() => props.onClose()}
-        >
-          <MdcClose />
-        </CloseButton>
+        <CloseButtonWrapper>
+          <IconButton
+            color='black'
+            onClick={() => props.onClose()}
+          >
+            <XLg />
+          </IconButton>
+        </CloseButtonWrapper>
         <UserDetails
           {...props}
           setExtraOpen={setExtraOpen}

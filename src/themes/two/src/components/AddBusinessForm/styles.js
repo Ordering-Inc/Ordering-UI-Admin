@@ -34,26 +34,13 @@ export const LeftHeader = styled.div`
 export const RightHeader = styled.div`
   display: flex;
   align-items: center;
-`
 
-export const SupportButton = styled.span`
-  cursor: pointer;
-  ${props => props.theme?.rlt ? css`
-    margin-left: 10px;
-  ` : css`
-    margin-right: 10px;
-  `}
-  svg {
-    color: ${props => props.theme.colors.lightGray};
-    font-size: 24px;
-  }
-`
-
-export const CloseButton = styled.span`
-  cursor: pointer;
-  svg {
-    color: ${props => props.theme.colors.headingColor};
-    font-size: 24px;
+  > button:first-child {
+    ${props => props.theme?.rlt ? css`
+      margin-left: 8px;
+    ` : css`
+      margin-right: 8px;
+    `}
   }
 `
 
@@ -151,11 +138,12 @@ export const InputWrapper = styled.div`
 export const ActionsForm = styled.div`
   margin-top: 50px;
   > button {
+    height: 42px;
     &:first-child {
       ${props => props.theme?.rtl ? css`
-        margin-left: 10px
+        margin-left: 10px;
       ` : css`
-        margin-right: 10px
+        margin-right: 10px;
       `}
     }
   }

@@ -12,7 +12,6 @@ export const ProductDetailsContainer = styled.div`
     position: sticky;
     top: 100%;
     margin: 30px 0;
-    background: #E9ECEF;
     height: 42px;
   }
 `
@@ -45,14 +44,6 @@ export const LeftHeader = styled.div`
 export const RightHeader = styled.div`
   display: flex;
   align-items: center;
-`
-
-export const CloseButton = styled.span`
-  cursor: pointer;
-  svg {
-    color: ${props => props.theme.colors.headingColor};
-    font-size: 24px;
-  }
 `
 
 const ProductImageStyled = styled.div`
@@ -97,9 +88,10 @@ export const ProductDescription = styled.p`
 `
 
 export const ProductConfigsContainer = styled.div`
-  border: 1px solid #E9ECEF;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   border-radius: 8px;
   margin-bottom: 50px;
+  overflow: hidden;
   > div:last-child {
     border-bottom: none;
   }
@@ -111,12 +103,19 @@ export const ProductConfigOption = styled.div`
   display: flex;
   justify-content: space-between;
   color: ${props => props.theme.colors.lightGray};
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.headingColor};
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary} !important;
+    border-top: 1px solid ${props => props.theme.colors.primary};
   `}
-  
+
   svg {
     font-size: 20px;
   }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-components-admin'
-import { PlusSquare, Trash } from 'react-bootstrap-icons'
+import { Trash } from 'react-bootstrap-icons'
 import { Checkbox } from '../../styles/Checkbox'
 import { Alert, Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { Button } from '../../styles/Buttons'
 
 import {
   MainContainer,
@@ -98,7 +99,13 @@ const ProductExtrasUI = (props) => {
       <ProductExtrasContainer>
         <Header>
           <h1>{t('PRODUCT_EXTRAS', 'Product extras')}</h1>
-          <PlusSquare onClick={() => handleOpenAddForm()} />
+          <Button
+            borderRadius='8px'
+            color='lightPrimary'
+            onClick={() => handleOpenAddForm()}
+          >
+            {t('ADD_PRODUCT_EXTRA', 'Add product extra')}
+          </Button>
         </Header>
         {extrasState?.extras.map(extra => (
           <ExtraOption key={extra.id}>

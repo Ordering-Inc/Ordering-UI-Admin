@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const CategoryProductsContainer = styled.div`
-  width: 100%;
+  flex: 1;
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
@@ -22,9 +22,8 @@ export const HeaderContainer = styled.div`
   flex-direction: column;
 
   h1 {
-    text-align: center;
     font-size: 24px;
-    margin: 0 0 15px 0;
+    margin: 0;
     font-weight: 600;
     color: ${props => props.theme.colors.headingColor};
   }
@@ -34,15 +33,30 @@ export const HeaderContainer = styled.div`
     border: none;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+`
 
-    h1 {
-      margin: 0 5px 0 0;
-      text-align: left;
-    }
+export const ActionsGroup = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  flex-wrap: wrap;
+
+  > button {
+    height: 41px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+  }
+
+  @media (min-width: 992px) {
+    margin-top: 0px;
   }
 `
 
@@ -70,23 +84,6 @@ export const ProductListContainer = styled.div`
 
   @media (min-width: 769px) {
     width: calc(100% - 250px);
-  }
-`
-export const AddButton = styled.span`
-  cursor: pointer;
-  svg {
-    font-size: 24px;
-    color: ${props => props.theme.colors.primary};
-  }
-
-  ${props => props.theme.rtl ? css`
-    margin-right: 10px;
-  ` : css`
-    margin-left: 10px;
-  `}
-
-  @media (max-width: 576px) {
-    margin: 0;
   }
 `
 

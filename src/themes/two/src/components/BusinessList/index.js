@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { PaginationButton } from '../PaginationButton'
+import { Pagination } from '../Pagination'
 
 import {
   BusinessListContainer,
   BusinessListTable,
   WrapperPagination,
   BusinessCardContainer,
-  AddNewButtonLink
+  AddNewButtonLink,
+  BusinessListBottomContainer
 } from './styles'
 import { SingleBusiness } from '../SingleBusiness'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
@@ -23,7 +24,8 @@ export const BusinessList = (props) => {
     handleSucessUpdateBusiness,
     handleOpenBusinessDetails,
     handleOpenAddBusiness,
-    detailsBusinessId
+    detailsBusinessId,
+    getPageBusinesses
   } = props
   const [, t] = useLanguage()
 
@@ -63,27 +65,32 @@ export const BusinessList = (props) => {
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
-  const [businessesPerPage] = useState(10)
+  const [businessesPerPage, setBusinessesPerPage] = useState(10)
 
   // Get current businesses
-  const indexOfLastPost = currentPage * businessesPerPage
-  const indexOfFirstPost = indexOfLastPost - businessesPerPage
   const [currentBusinessess, setCurrentBusinessess] = useState([])
   const [totalPages, setTotalPages] = useState(null)
-  const [totalBusinesses, setTotalBusinesses] = useState(null)
 
-  // Change page
-  const prevPaginate = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
+  const handleChangePage = (page) => {
+    if ((pagination.from <= page * businessesPerPage && page * businessesPerPage <= pagination.to) ||
+      (pagination.from <= page * businessesPerPage && page * businessesPerPage > pagination.total)
+    ) {
+      setCurrentPage(page)
+    } else {
+      getPageBusinesses(businessesPerPage, page)
     }
   }
-  const nextPaginate = () => {
-    if (currentPage !== totalPages) {
-      if (businessList.businesses.length < businessesPerPage * currentPage + 1) {
-        loadMoreBusinesses()
-      }
-      setCurrentPage(currentPage + 1)
+
+  const handleChangePageSize = (pageSize) => {
+    setBusinessesPerPage(pageSize)
+    const expectedPage = Math.ceil(pagination.from / pageSize)
+    if ((pagination.from <= expectedPage * pageSize && expectedPage * pageSize <= pagination.to) ||
+      (pagination.from <= expectedPage * pageSize && expectedPage * pageSize > pagination.total)
+    ) {
+      setCurrentPage(expectedPage)
+    } else {
+      setCurrentPage(expectedPage)
+      getPageBusinesses(pageSize, expectedPage)
     }
   }
 
@@ -95,11 +102,12 @@ export const BusinessList = (props) => {
     } else if (businessList.businesses.length > 0) {
       _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage)
     }
+    const indexOfLastPost = currentPage * businessesPerPage
+    const indexOfFirstPost = indexOfLastPost - businessesPerPage
     const _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalBusinesses(pagination?.total)
     setTotalPages(_totalPages)
     setCurrentBusinessess(_currentBusinessess)
-  }, [businessList, currentPage, pagination])
+  }, [businessList, currentPage, pagination, businessesPerPage])
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + 10
@@ -169,25 +177,27 @@ export const BusinessList = (props) => {
               )}
             </BusinessListTable>
           </BusinessListContainer>
-          {pagination && (
-            <WrapperPagination>
-              {!businessList.loading && totalPages > 0 && (
-                <PaginationButton
-                  pageSize={businessesPerPage}
-                  total={totalBusinesses}
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  prevPaginate={prevPaginate}
-                  nextPaginate={nextPaginate}
-                />
-              )}
-            </WrapperPagination>
-          )}
-          <AddNewButtonLink
-            onClick={() => handleOpenAddBusiness()}
-          >
-            {t('ADD_NEW_STORE', 'Add new store')}
-          </AddNewButtonLink>
+
+          <BusinessListBottomContainer>
+            <AddNewButtonLink
+              onClick={() => handleOpenAddBusiness()}
+            >
+              {t('ADD_NEW_STORE', 'Add new store')}
+            </AddNewButtonLink>
+            {pagination && (
+              <WrapperPagination>
+                {!businessList.loading && totalPages > 0 && (
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    handleChangePage={handleChangePage}
+                    defaultPageSize={businessesPerPage}
+                    handleChangePageSize={handleChangePageSize}
+                  />
+                )}
+              </WrapperPagination>
+            )}
+          </BusinessListBottomContainer>
         </>
       )}
 

@@ -28,9 +28,8 @@ export const SingleListBusinessContainer = styled.tbody`
   }
 
   &:hover {
-    background: #E9F2FE;
     input, textarea {
-      background: #E9F2FE;
+      background: ${props => props.theme.colors.lightPrimary};
     }
     .action-btn {
       display: block;
@@ -201,5 +200,23 @@ export const UploadWrapper = styled.div`
   align-items: center;
   svg {
     color: white;
+  }
+`
+
+export const DragableContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const DragImageWrapper = styled.div`
+  img {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 14px;
+    ` : css`
+      margin-right: 14px;
+    `}
+    &:hover {
+      cursor: grab;
+    }
   }
 `
