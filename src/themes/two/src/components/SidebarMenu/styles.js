@@ -227,7 +227,7 @@ export const LanguageSelectorContainer = styled.div`
 
   > svg {
     position: absolute;
-    top: 8px;
+    top: 7px;
     ${props => props.theme?.rtl ? css`
       right: 0.75rem;
     ` : css`
