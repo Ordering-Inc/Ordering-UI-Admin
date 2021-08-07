@@ -75,6 +75,7 @@ export const PageButton = styled.button`
 export const PageSizeContainer = styled.div`
   display: flex;
   align-items: center;
+  margin: 10px 0;
 
   .select {
     border-color: ${props => props.theme.colors.lightGray};

@@ -5,8 +5,12 @@ export const OrderDashboardControlsContainer = styled.div`
   margin-top: 10px;
 
   button {
-    margin: 0 7px;
     height: 42px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 14px;
+    ` : css`
+      margin-right: 14px;
+    `}
 
     svg {
       ${props => props.theme?.rtl ? css`

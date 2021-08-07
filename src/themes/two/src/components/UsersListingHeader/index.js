@@ -3,10 +3,13 @@ import { useLanguage } from 'ordering-components-admin'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { SearchBar } from '../SearchBar'
-import { Button } from '../../styles/Buttons'
+import { List as MenuIcon } from 'react-bootstrap-icons'
+import { Button, IconButton } from '../../styles/Buttons'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 
 import {
   HeaderContainer,
+  HeaderTitleContainer,
   ActionContainer
 } from './styles'
 
@@ -24,12 +27,21 @@ export const UsersListingHeader = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   return (
     <HeaderContainer>
-      <div>
+      <HeaderTitleContainer>
+        {isCollapse && (
+          <IconButton
+            color='black'
+            onClick={() => handleMenuCollapse(false)}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
         <h1>{title}</h1>
-      </div>
+      </HeaderTitleContainer>
       <ActionContainer>
         <Button
           borderRadius='8px'

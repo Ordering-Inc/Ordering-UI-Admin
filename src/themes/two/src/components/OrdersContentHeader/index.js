@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SearchBar } from '../SearchBar'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
-import { Funnel } from 'react-bootstrap-icons'
+import { Funnel, List as MenuIcon } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
-import { IconButton as FilterButton } from '../../styles/Buttons'
+import { IconButton } from '../../styles/Buttons'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 
 import {
   OrderContentHeaderContainer,
@@ -32,7 +33,10 @@ export const OrdersContentHeader = (props) => {
     handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus
   } = props
+
   const [, t] = useLanguage()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [filterApplied, setFilterApplied] = useState(false)
 
@@ -54,6 +58,14 @@ export const OrdersContentHeader = (props) => {
       >
         {!isDisableTitle && (
           <HeaderSection>
+            {isCollapse && (
+              <IconButton
+                color='black'
+                onClick={() => handleMenuCollapse(false)}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             <HeaderTitle>
               {title}
             </HeaderTitle>
@@ -77,13 +89,13 @@ export const OrdersContentHeader = (props) => {
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}
             />
-            <FilterButton
+            <IconButton
               color='black'
               onClick={() => setFilterModalOpen(true)}
               name='filter-btn'
             >
               {filterApplied ? <Funnel /> : <MdcFilterOff />}
-            </FilterButton>
+            </IconButton>
           </WrapperSearchAndFilter>
         </TopRightSection>
       </OrderContentHeaderContainer>

@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LogoutButton } from '../LogoutButton'
 import {
-  XLg,
-  List as MenuIcon,
-  ArrowBarLeft,
   ListCheck,
   HouseDoor,
   PersonFill,
@@ -22,16 +19,14 @@ import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 import {
-  Header,
   SidebarContainer,
   SidebarInnerContainer,
-  LogoWrap,
+  SidebarHeader,
+  BurgerButton,
   SidebarContent,
   UserInfo,
-  CollapseButton,
-  IconContent,
-  MenuClose,
   MenuContainer,
   MenuContent,
   SubMenu,
@@ -44,10 +39,8 @@ export const SidebarMenu = (props) => {
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [sessionState] = useSession()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
-
-  const [isCollapse, setIsCollapse] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
 
   const ordersSubMenus = [
     {
@@ -138,46 +131,20 @@ export const SidebarMenu = (props) => {
     }
   ]
   const handleGoToPage = (data) => {
-    setMenuOpen(false)
+    if (windowSize.width < 768) {
+      handleMenuCollapse(true)
+    }
     events.emit('go_to_page', data)
   }
 
   useEffect(() => {
-    if (windowSize.width >= 760 || !isCollapse) return
-    setIsCollapse(false)
-  }, [windowSize.width])
-
-  useEffect(() => {
-    if (menuOpen) {
-      document.getElementById('side_bar').style.width = '100vw'
-    } else {
-      document.getElementById('side_bar').style.width = '0px'
+    if (windowSize.width < 1024) {
+      handleMenuCollapse(true)
     }
-  }, [menuOpen])
+  }, [windowSize.width])
 
   return (
     <>
-      {windowSize.width < 760 && (
-        <Header>
-          {!menuOpen && (
-            <IconContent
-              onClick={() => setMenuOpen(true)}
-            >
-              <MenuIcon />
-            </IconContent>
-          )}
-          <LogoWrap
-            className='d-flex justify-content-center align-items-center'
-            onClick={() => handleGoToPage({ page: 'home' })}
-          >
-            {isCollapse ? (
-              <Image src={theme?.images?.logos?.isotype} fluid width='35px' height='45px' />
-            ) : (
-              <Image src={theme?.images?.logos?.logotype} fluid width='150px' height='45px' />
-            )}
-          </LogoWrap>
-        </Header>
-      )}
       <SidebarContainer
         id='side_bar'
         isCollapse={isCollapse}
@@ -185,43 +152,30 @@ export const SidebarMenu = (props) => {
         <SidebarInnerContainer
           className='d-flex flex-column'
         >
-          {windowSize.width >= 760 ? (
-            <>
-              <CollapseButton
-                className='position-absolute bg-white p-1'
-                onClick={() => setIsCollapse(!isCollapse)}
-                isCollapse={isCollapse}
-              >
-                <ArrowBarLeft />
-              </CollapseButton>
-              <LogoWrap
-                className='d-flex justify-content-center align-items-center'
-                onClick={() => handleGoToPage({ page: 'home' })}
-              >
-                {isCollapse ? (
-                  <Image src={theme?.images?.logos?.isotype} fluid width='35px' height='45px' />
-                ) : (
-                  <Image src={theme?.images?.logos?.logotype} fluid width='150px' height='45px' />
-                )}
-              </LogoWrap>
-            </>
-          ) : (
-            <MenuClose>
-              <IconContent
-                isClose
-                onClick={() => setMenuOpen(false)}
-              >
-                <XLg />
-              </IconContent>
-            </MenuClose>
-          )}
+          <SidebarHeader
+            className='p-1'
+            onClick={() => handleGoToPage({ page: 'home' })}
+          >
+            <Image src={theme?.images?.logos?.logotype} fluid width='150px' height='45px' />
+            <BurgerButton
+              onClick={() => handleMenuCollapse(true)}
+            >
+              <svg viewBox='0 0 50 32'>
+                <path d='M49,4H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,4,49,4z' />
+                <path d='M49,16H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,16,49,16z' />
+                <path d='M49,28H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,28,49,28z' />
+                <path d='M8.1,22.8c-0.3,0-0.5-0.1-0.7-0.3L0.7,15l6.7-7.8c0.4-0.4,1-0.5,1.4-0.1c0.4,0.4,0.5,1,0.1,1.4L3.3,15l5.5,6.2 c0.4,0.4,0.3,1-0.1,1.4C8.6,22.7,8.4,22.8,8.1,22.8z' />
+              </svg>
+            </BurgerButton>
+          </SidebarHeader>
+
           <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
             <div className='d-flex flex-column'>
               <Accordion>
                 <MenuContainer>
                   <ContextAwareToggle eventKey='0'>
                     <HouseDoor />
-                    {!isCollapse && <span>{t('HOME', 'Home')}</span>}
+                    <span>{t('HOME', 'Home')}</span>
                   </ContextAwareToggle>
                 </MenuContainer>
 
@@ -235,7 +189,7 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <ListCheck />
-                    {!isCollapse && <span>{t('ORDERS', 'Orders')}</span>}
+                    <span>{t('ORDERS', 'Orders')}</span>
                   </ContextAwareToggle>
                   <Accordion.Collapse eventKey='1'>
                     <MenuContent>
@@ -260,7 +214,7 @@ export const SidebarMenu = (props) => {
                     active={location.pathname === '/messages'}
                   >
                     <ChatIcon />
-                    {!isCollapse && <span>{t('MESSAGES', 'Messages')}</span>}
+                    <span>{t('MESSAGES', 'Messages')}</span>
                   </ContextAwareToggle>
                 </MenuContainer>
 
@@ -275,7 +229,7 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <ShopIcon />
-                    {!isCollapse && <span>{t('STORES', 'Stores')}</span>}
+                    <span>{t('STORES', 'Stores')}</span>
                   </ContextAwareToggle>
                 </MenuContainer>
 
@@ -289,7 +243,7 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <PeopleIcon />
-                    {!isCollapse && <span>{t('USERS', 'Users')}</span>}
+                    <span>{t('USERS', 'Users')}</span>
                   </ContextAwareToggle>
                 </MenuContainer>
 
@@ -304,7 +258,7 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <BarChartLineIcon />
-                    {!isCollapse && <span>{t('ANALYTICS', 'Analytics')}</span>}
+                    <span>{t('ANALYTICS', 'Analytics')}</span>
                   </ContextAwareToggle>
                   <Accordion.Collapse eventKey='5'>
                     <MenuContent>
@@ -329,7 +283,7 @@ export const SidebarMenu = (props) => {
                     }
                   >
                     <GraphUp />
-                    {!isCollapse && <span>{t('MARKETING', 'Marketing')}</span>}
+                    <span>{t('MARKETING', 'Marketing')}</span>
                   </ContextAwareToggle>
                   <Accordion.Collapse eventKey='6'>
                     <MenuContent>
@@ -350,7 +304,7 @@ export const SidebarMenu = (props) => {
             <div className='d-flex flex-column'>
               <LanguageSelectorContainer>
                 <Globe2 />
-                {!isCollapse && <LanguageSelector />}
+                <LanguageSelector />
               </LanguageSelectorContainer>
               {sessionState?.user?.level === 0 && (
                 <Accordion>
@@ -363,7 +317,7 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       <GearIcon />
-                      {!isCollapse && <span>{t('SETTINGS', 'Settings')}</span>}
+                      <span>{t('SETTINGS', 'Settings')}</span>
                     </ContextAwareToggle>
                     <Accordion.Collapse eventKey='5'>
                       <MenuContent>
@@ -388,7 +342,7 @@ export const SidebarMenu = (props) => {
                 onClick={() => handleGoToPage({ page: 'support' })}
               >
                 <HeadsetIcon />
-                {!isCollapse && <span>{t('SUPPORT', 'Support')}</span>}
+                <span>{t('SUPPORT', 'Support')}</span>
               </Button>
             </div>
           </SidebarContent>
@@ -406,9 +360,9 @@ export const SidebarMenu = (props) => {
               ) : (
                 <PersonFill />
               )}
-              {!isCollapse && <span>{sessionState?.user?.name} {sessionState?.user?.lastname}</span>}
+              <span>{sessionState?.user?.name} {sessionState?.user?.lastname}</span>
             </Button>
-            <LogoutButton isCollapse={isCollapse} />
+            <LogoutButton />
           </UserInfo>
         </SidebarInnerContainer>
       </SidebarContainer>

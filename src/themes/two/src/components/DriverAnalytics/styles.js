@@ -5,16 +5,7 @@ export const BusinessAnalyticsContainer = styled.div`
   transition: all 0.5s;
   padding: 20px;
   overflow: hidden;
-  box-sizing: borer-box;
-  margin-top: 60px;
-
-  @media print {
-    display: none;
-  }
-
-  @media (min-width: 760px) {
-    margin-top: 0px;
-  }
+  box-sizing: border-box;
 `
 
 export const BusinessAnalyticsHeader = styled.div`
@@ -27,11 +18,34 @@ export const BusinessAnalyticsHeader = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+`
+
+export const HeaderTitleContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
 
   h1 {
     font-weight: bold;
     font-size: 20px;
     color: ${props => props.theme.colors.headingColor};
+    margin: 0px;
+  }
+
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+      margin-right: -8px;
+    ` : css`
+      margin-right: 8px;
+      margin-left: -8px;
+    `}
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 `
 

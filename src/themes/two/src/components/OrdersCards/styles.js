@@ -6,6 +6,10 @@ export const OrdersListContainer = styled.div`
   padding: 0 12px 15px 12px;
   box-sizing: border-box;
   overflow-x: hidden;
+
+  @media (min-width: 1024px) and (max-width: 1300px) {
+    height: calc(100% - 230px);
+  }
 `
 export const OrderNunberContainer = styled.div`
 
@@ -170,7 +174,7 @@ export const DriverSelectorWrapper = styled.div`
 `
 
 export const WrapperPagination = styled.div`
-  margin: 20px 15px 0 15px;
+  margin: 10px 15px 0 15px;
 `
 
 export const UnreadMessageCounter = styled.div`

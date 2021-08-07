@@ -1,23 +1,29 @@
 import styled, { css } from 'styled-components'
 
-export const Header = styled.div`
-  position: fixed;
-  width: 100vw;
-  z-index: 1000;
-`
-
 export const SidebarContainer = styled.div`
   @media print {
     display: none;
   }
 
-  transition: width 0.4s ease;
   position: fixed;
+  background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
-  background-color: #FFF;
-  width: 0px;
+  transition: all 0.25s ease;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
+  width: 100vw;
+  ${({ isCollapse }) => isCollapse && css`
+    margin-left: -100vw;
+  `}
+
+  @media (min-width: 768px) {
+    overflow: hidden;
+    position: relative;
+    width: 240px;
+    ${({ isCollapse }) => isCollapse && css`
+      margin-left: -240px;
+    `}
+  }
 
   button.btn-primary {
     background-color: ${props => props.theme.colors.primary};
@@ -51,17 +57,6 @@ export const SidebarContainer = styled.div`
     }
   }
 
-  @media (min-width: 760px) {
-    height: inherit;
-    overflow: inherit;
-    position: relative;
-    width: ${({ isCollapse }) => isCollapse ? '65px' : '240px'} !important;
-    ${({ isCollapse }) => isCollapse && css`
-      .collapse.show {
-        display: none;
-      }
-    `}
-  }
 `
 
 export const SidebarInnerContainer = styled.div`
@@ -78,13 +73,45 @@ export const SidebarInnerContainer = styled.div`
   }
 `
 
-export const LogoWrap = styled.div`
-  height: 60px;
-  box-sizing: border-box;
-  background-color: #FFF;
+export const SidebarHeader = styled.div`
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  ${props => props.theme?.rtl ? css`
+    margin-right: 0.75rem;
+  ` : css`
+    margin-left: 0.75rem;
+  `}
+`
 
-  @media (min-width: 760px) {
-    height: 80px;
+export const BurgerButton = styled.button`
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease-in;
+
+  > svg {
+    width: 25px;
+    height: 16px;
+    color: #B1BCCC;
+  }
+
+  &:hover {
+    background-color: #1507260a !important;
+
+    > svg {
+      color:  #151b26;
+    }
+  }
+
+  &:active {
+    background-color: #1507261a !important;
   }
 `
 
@@ -120,68 +147,6 @@ export const UserInfo = styled.div`
     }
   }
 `
-
-export const CollapseButton = styled.div`
-  top: 25px;
-  ${props => props.theme?.rtl ? css`
-    left: -15px;
-  ` : css`
-    right: -15px;
-  `}
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-  border-radius: 7.6px;
-  cursor: pointer;
-  svg {
-    font-size: 18px;
-    transition: transform 0.4s ease;
-  }
-
-  ${({ isCollapse }) => isCollapse && css`
-    svg {
-      transform: rotate(180deg);
-    }
-  `}
-`
-
-export const IconContent = styled.span`
-  position: absolute;
-  cursor: pointer;
-  top: 9px;
-  ${props => props.theme?.rtl ? css`
-    right: 10px;
-  ` : css`
-    left: 10px;
-  `}
-
-  ${({ isClose }) => isClose && css`
-    ${props => props.theme?.rtl ? css`
-      right: initial;
-      left: 10px;
-    ` : css`
-      left: initial;
-      right: 10px;
-    `}
-  `}
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  background-color: rgb(247, 247, 247);
-  box-shadow: transparent 0px 0px 0px 1px inset;
-
-  svg {
-    flex-shrink: 0;
-    font-size: 24px;
-  }
-`
-
-export const MenuClose = styled.div`
-  position: relative;
-  height: 60px;
-`
-
 export const MenuContainer = styled.div`
   margin: 5px 0;
   > button {

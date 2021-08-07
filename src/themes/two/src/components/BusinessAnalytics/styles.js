@@ -5,33 +5,49 @@ export const BusinessAnalyticsContainer = styled.div`
   transition: all 0.5s;
   padding: 20px;
   overflow: hidden;
-  box-sizing: borer-box;
-  margin-top: 60px;
+  box-sizing: border-box;
 
   @media print {
     display: none;
-  }
-
-  @media (min-width: 760px) {
-    margin-top: 0px;
   }
 `
 
 export const BusinessAnalyticsHeader = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 15px;
 
   @media (min-width: 769px) {
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
   }
+`
+
+export const HeaderTitleContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
 
   h1 {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 20px;
     color: ${props => props.theme.colors.headingColor};
+    margin: 0px;
+  }
+
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+      margin-right: -8px;
+    ` : css`
+      margin-right: 8px;
+      margin-left: -8px;
+    `}
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 `
 

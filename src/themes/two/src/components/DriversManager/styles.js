@@ -1,20 +1,29 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+export const DriversContainer = styled.div`
+  flex: 1;
+  transition: all 0.5s;
+  padding: 20px;
+  box-sizing: border-box;
+  max-height: 100vh;
+  overflow: auto;
+
+  @media print {
+    display: none;
+  }
+`
 
 export const DriversHeader = styled.div`
   display: flex;
   flex-direction: column;
 
-  h1 {
-    flex: 1;
-    color: ${(props) => props.theme.colors.headingColor};
-    font-size: 24px;
-    font-weight: 500;
-    margin: 0px;
-    text-transform: capitalize;
+  > div:last-child {
+    margin-top: 20px;
   }
 
-  > div {
-    margin-top: 20px;
+  input {
+    background: ${props => props.theme.colors.secundary};
+    border: none;
   }
 
   @media (min-width: 768px) {
@@ -22,26 +31,40 @@ export const DriversHeader = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    > div {
+    > div:last-child {
       margin-top: 0px;
     }
   }
 `
 
-export const DriversContainer = styled.div`
+export const HeaderTitleContainer = styled.div`
   flex: 1;
-  transition: all 0.5s;
-  padding: 20px;
-  box-sizing: border-box;
-  margin-top: 60px;
+  display: flex;
+  align-items: center;
 
-  @media (min-width: 760px) {
-    margin-top: 0px;
+  h1 {
+    color: ${(props) => props.theme.colors.headingColor};
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0px;
+    text-transform: capitalize;
   }
 
-  @media print {
-    display: none;
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+      margin-right: -8px;
+    ` : css`
+      margin-right: 8px;
+      margin-left: -8px;
+    `}
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 `
+
 export const DriversContent = styled.div`
 `
