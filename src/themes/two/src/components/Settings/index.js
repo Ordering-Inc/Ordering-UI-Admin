@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
+import { useLanguage, useEvent } from 'ordering-components-admin'
+import { Settings as SettingsController } from './naked'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
 
@@ -14,7 +15,8 @@ import {
 const SettingsUI = (props) => {
   const {
     categoryList,
-    settingsType
+    settingsType,
+    handChangeConfig
   } = props
 
   const [, t] = useLanguage()
@@ -50,6 +52,7 @@ const SettingsUI = (props) => {
     setIsOpenDescription(true)
     setSelectedCategory(category)
     onBasicSettingsRedirect({ category: category.id })
+    handChangeConfig && handChangeConfig(false)
   }
 
   const handleBackRedirect = () => {
@@ -110,6 +113,7 @@ const SettingsUI = (props) => {
       {
         isOpenDescription && (
           <SettingsDetail
+            {...props}
             open={isOpenDescription}
             category={selectedCategory}
             onClose={handleBackRedirect}
