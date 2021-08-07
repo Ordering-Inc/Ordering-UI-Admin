@@ -72,27 +72,27 @@ const BusinessAnalyticsUI = (props) => {
       </MapWrraper>
 
       <AnalyticsContentWrapper className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsOrdersOrSales
             isOrders
             filterList={filterList}
             chartDataList={ordersList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsOrdersOrSales
             filterList={filterList}
             chartDataList={salesList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsProductCategories
             filterList={filterList}
             productCategoryList={topProductList}
             isProducts
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsProductCategories
             filterList={filterList}
             productCategoryList={topCategoryList}
@@ -104,23 +104,23 @@ const BusinessAnalyticsUI = (props) => {
             orderStatusList={orderStatusList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsRegisterUsers
             registerUsersList={registerUsersList}
             filterList={filterList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsCustomerSatisfaction
             dataList={customerSatisfactionList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsOrdersAcceptSpend
             dataList={ordersAcceptSpendList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendList
             dataList={arrivedPickUpSpendList}
             title={t('TIME_WAITING_ON_READY_FOR_PICKUP', 'TIME SPENT WAITING ON READY FOR PICKUP')}

@@ -218,6 +218,14 @@ SettingsList.propTypes = {
   */
   category: PropTypes.object,
   /**
+  * Object for a category
+  */
+  categoryList: PropTypes.object,
+  /**
+  * Function to set a category list
+  */
+  handleUpdateCategoryList: PropTypes.func,
+  /**
    * Array of drivers props to fetch
    */
   propsToFetch: PropTypes.arrayOf(string),

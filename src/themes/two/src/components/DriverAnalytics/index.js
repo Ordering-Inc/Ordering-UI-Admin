@@ -82,39 +82,39 @@ const DriverAnalyticsUI = (props) => {
       </MapWrraper>
 
       <AnalyticsContentWrapper className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsOrdersOrSales
             isOrders
             filterList={filterList}
             chartDataList={ordersList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsOrdersOrSales
             filterList={filterList}
             chartDataList={salesList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsProductCategories
             filterList={filterList}
             productCategoryList={topProductList}
             isProducts
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsProductCategories
             filterList={filterList}
             productCategoryList={topCategoryList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsTopOrders
             dataList={topOrdersList}
           />
 
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsCustomerSatisfaction
             dataList={customerSatisfactionList}
           />
@@ -125,48 +125,48 @@ const DriverAnalyticsUI = (props) => {
             orderStatusList={orderStatusList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendTimes
             chartDataList={spendTimesList}
             filterList={filterList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsAvailableTimes
             filterList={filterList}
             availableTimesList={availableTimesList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsBusyTimes
             filterList={filterList}
             busyTimesList={busyTimesList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsOrdersAcceptSpend
             dataList={ordersAcceptSpendList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendList
             title={t('TIME_SPENT_IN_BUSINESS_WAITING_FOR_ORDER', 'Time spent in business waiting for order')}
             dataList={completeSpendList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendList
             title={t('TIME_SPENT_TO_PICKUP_ORDER', 'Time spent to pickup order')}
             dataList={pickUpSpendList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendList
             title={t('TIME_SPENT_TO_DELIVER_ORDER', 'Time spent to deliver order')}
             dataList={deliverySpendList}
           />
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendList
             title={t('TIME_SPENT_SINCE_ORDER_ACCEPTED_TO_PICKUP_AND_DELIVER_THE_ORDER', 'Time spent since order accepted to pickup and deliver the order')}
             dataList={arrivedPickUpSpendList}
