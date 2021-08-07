@@ -4,8 +4,9 @@ export const BusinessAnalyticsContainer = styled.div`
   flex: 1;
   transition: all 0.5s;
   padding: 20px;
-  overflow: hidden;
   box-sizing: border-box;
+  max-height: 100vh;
+  overflow: auto;
 `
 
 export const BusinessAnalyticsHeader = styled.div`
