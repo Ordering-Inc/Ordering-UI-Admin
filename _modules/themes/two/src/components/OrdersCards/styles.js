@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrdersListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 200px);\n  padding: 0 12px 15px 12px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n"])));
+var OrdersListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 200px);\n  padding: 0 12px 15px 12px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n\n  @media (min-width: 1024px) and (max-width: 1300px) {\n    height: calc(100% - 230px);\n  }\n"])));
 
 exports.OrdersListContainer = OrdersListContainer;
 
@@ -111,7 +111,7 @@ var DriverSelectorWrapper = _styledComponents.default.div(_templateObject14 || (
 
 exports.DriverSelectorWrapper = DriverSelectorWrapper;
 
-var WrapperPagination = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 20px 15px 0 15px;\n"])));
+var WrapperPagination = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 10px 15px 0 15px;\n"])));
 
 exports.WrapperPagination = WrapperPagination;
 

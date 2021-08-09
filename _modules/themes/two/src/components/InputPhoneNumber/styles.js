@@ -28,7 +28,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var ErrorMsg = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: 0;\n  color: ", ";\n  font-weight: 400;\n  font-size: 16px;\n"])), function (props) {
+var ErrorMsg = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: 0;\n  color: ", ";\n  font-weight: 400;\n  font-size: 14px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

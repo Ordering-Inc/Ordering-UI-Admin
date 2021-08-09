@@ -151,6 +151,6 @@ var AddNewUserButton = _styledComponents.default.div(_templateObject27 || (_temp
 
 exports.AddNewUserButton = AddNewUserButton;
 
-var UsersBottomContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 20px;\n"])));
+var UsersBottomContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n"])));
 
 exports.UsersBottomContainer = UsersBottomContainer;

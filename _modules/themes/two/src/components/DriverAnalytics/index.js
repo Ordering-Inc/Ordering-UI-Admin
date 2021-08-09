@@ -45,6 +45,10 @@ var _AnalyticsBusyTimes = require("../AnalyticsBusyTimes");
 
 var _AnalyticsSpendList = require("../AnalyticsSpendList");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _InfoShareContext = require("../../../../../contexts/InfoShareContext");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -94,12 +98,22 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
+      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+      isCollapse = _useInfoShare2[0].isCollapse,
+      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       driversFilterModal = _useState2[0],
       setDriversFilterModal = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_ANALYTICS', 'Drivers analytics')), /*#__PURE__*/_react.default.createElement(_styles.HeaderFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleMenuCollapse(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_ANALYTICS', 'Drivers analytics'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setDriversFilterModal(true);
     }

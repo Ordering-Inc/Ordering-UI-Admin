@@ -69,6 +69,10 @@ var SkeletonForm = _styledComponents.default.div(_templateObject11 || (_template
 
 exports.SkeletonForm = SkeletonForm;
 
-var WrapperUserTypeSelector = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 10px;\n  > div {\n    width: 100%;\n  }\n"])));
+var WrapperUserTypeSelector = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 10px;\n\n  div.select {\n    border: none;\n    background-color: ", ";\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n    }\n  }\n\n  > div {\n    width: 100%;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.secundaryContrast;
+});
 
 exports.WrapperUserTypeSelector = WrapperUserTypeSelector;

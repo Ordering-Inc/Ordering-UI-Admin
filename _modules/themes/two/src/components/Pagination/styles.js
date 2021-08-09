@@ -55,7 +55,7 @@ var PageButton = _styledComponents.default.button(_templateObject5 || (_template
 
 exports.PageButton = PageButton;
 
-var PageSizeContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  .select {\n    border-color: ", ";\n    padding: 5px 0;\n\n    > div:first-child {\n      padding-left: 10px;\n      padding-right: 10px;\n    }\n  }\n"])), function (props) {
+var PageSizeContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin: 10px 0;\n\n  .select {\n    border-color: ", ";\n    padding: 5px 0;\n\n    > div:first-child {\n      padding-left: 10px;\n      padding-right: 10px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 

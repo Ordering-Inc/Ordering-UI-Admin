@@ -38,14 +38,13 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var isCollapse = props.isCollapse;
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center m-1",
     variant: "",
     onClick: props.handleLogoutClick
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowRight, {
     size: 20
-  }), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('LOGOUT', 'Logout')));
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('LOGOUT', 'Logout')));
 };
 
 var LogoutButton = function LogoutButton(props) {

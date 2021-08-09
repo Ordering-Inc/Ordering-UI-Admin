@@ -23,6 +23,8 @@ var _OrdersDashboardControls = require("../OrdersDashboardControls");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _InfoShareContext = require("../../../../../contexts/InfoShareContext");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -63,6 +65,11 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
+      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+      isCollapse = _useInfoShare2[0].isCollapse,
+      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       filterModalOpen = _useState2[0],
@@ -86,7 +93,12 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
   }, [filterValues]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderContentHeaderContainer, {
     isDisableControl: isDisableControl
-  }, !isDisableTitle && /*#__PURE__*/_react.default.createElement(_styles.HeaderSection, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, title)), /*#__PURE__*/_react.default.createElement(_styles.TopRightSection, null, !isDisableControl && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
+  }, !isDisableTitle && /*#__PURE__*/_react.default.createElement(_styles.HeaderSection, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleMenuCollapse(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, title)), /*#__PURE__*/_react.default.createElement(_styles.TopRightSection, null, !isDisableControl && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,

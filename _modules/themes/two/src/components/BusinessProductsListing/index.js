@@ -27,7 +27,11 @@ var _BusinessProductList = require("../BusinessProductList");
 
 var _ProductDetails = require("../ProductDetails");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _Buttons = require("../../styles/Buttons");
+
+var _InfoShareContext = require("../../../../../contexts/InfoShareContext");
 
 var _styles = require("./styles");
 
@@ -75,6 +79,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
+      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+      isCollapse = _useInfoShare2[0].isCollapse,
+      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
   var _useState = (0, _react.useState)('list'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -159,7 +168,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       }));
     }
   }, [categoryId]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, businessState.loading ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleMenuCollapse(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), businessState.loading ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 30
   })) : (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.name) && /*#__PURE__*/_react.default.createElement("h1", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.name)), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

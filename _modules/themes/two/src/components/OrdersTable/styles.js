@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrdersContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 410px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 370px);\n  }\n\n  @media (min-width: 992px) {\n    max-height: calc(100vh - 305px);\n    ", "\n  }\n\n  @media (min-width: 1200px) {\n    max-height: calc(100vh - 275px);\n    ", "\n  }\n"])), function (_ref) {
+var OrdersContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 410px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 385px);\n  }\n\n  @media (min-width: 992px) {\n    max-height: calc(100vh - 305px);\n    ", "\n  }\n\n  @media (min-width: 1200px) {\n    max-height: calc(100vh - 275px);\n    ", "\n  }\n"])), function (_ref) {
   var isSelectedOrders = _ref.isSelectedOrders;
   return isSelectedOrders && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      max-height: calc(100vh - 345px);\n    "])));
 }, function (_ref2) {
@@ -167,6 +167,6 @@ var WrapOrderStatusSelector = _styledComponents.default.div(_templateObject30 ||
 
 exports.WrapOrderStatusSelector = WrapOrderStatusSelector;
 
-var WrapperPagination = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  padding: 10px 0;\n"])));
+var WrapperPagination = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  padding-top: 5px;\n"])));
 
 exports.WrapperPagination = WrapperPagination;

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MapWrraper = exports.AnalyticsContentWrapper = exports.BusinessCalendarWrapper = exports.BusinessFilterWrapper = exports.HeaderFilterContainer = exports.BusinessAnalyticsHeader = exports.BusinessAnalyticsContainer = void 0;
+exports.MapWrraper = exports.AnalyticsContentWrapper = exports.BusinessCalendarWrapper = exports.BusinessFilterWrapper = exports.HeaderFilterContainer = exports.HeaderTitleContainer = exports.BusinessAnalyticsHeader = exports.BusinessAnalyticsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,34 +17,42 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessAnalyticsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  transition: all 0.5s;\n  padding: 20px;\n  overflow: hidden;\n  box-sizing: borer-box;\n  margin-top: 60px;\n\n  @media print {\n    display: none;\n  }\n\n  @media (min-width: 760px) {\n    margin-top: 0px;\n  }\n"])));
+var BusinessAnalyticsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  transition: all 0.5s;\n  padding: 20px;\n  box-sizing: border-box;\n  max-height: 100vh;\n  overflow: auto;\n"])));
 
 exports.BusinessAnalyticsContainer = BusinessAnalyticsContainer;
 
-var BusinessAnalyticsHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin-bottom: 15px;\n\n  @media (min-width: 769px) {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n\n  h1 {\n    font-weight: bold;\n    font-size: 20px;\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-});
+var BusinessAnalyticsHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 769px) {\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n"])));
 
 exports.BusinessAnalyticsHeader = BusinessAnalyticsHeader;
 
-var HeaderFilterContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+var HeaderTitleContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n\n  h1 {\n    font-weight: 700;\n    font-size: 20px;\n    color: ", ";\n    margin: 0px;\n  }\n\n  > button {\n    ", "\n\n    svg {\n      width: 25px;\n      height: 25px;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  var _props$theme;
+
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n      margin-right: -8px;\n    "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n      margin-left: -8px;\n    "])));
+});
+
+exports.HeaderTitleContainer = HeaderTitleContainer;
+
+var HeaderFilterContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 
 exports.HeaderFilterContainer = HeaderFilterContainer;
 
-var BusinessFilterWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  button {\n    background: #F8F9FA;\n    border-radius: 7.6px;\n    padding: 7px 12px;\n    font-size: 14px;\n    color: #748194;\n    border: none;\n  }\n"])));
+var BusinessFilterWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  button {\n    background: #F8F9FA;\n    border-radius: 7.6px;\n    padding: 7px 12px;\n    font-size: 14px;\n    color: #748194;\n    border: none;\n  }\n"])));
 
 exports.BusinessFilterWrapper = BusinessFilterWrapper;
-var BusinessCalendarWrapper = (0, _styledComponents.default)(BusinessFilterWrapper)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-left: 25px;\n  ", "\n\n  button {\n    svg {\n      font-size: 16px;\n      margin-right: 12px;\n      ", "\n    }\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    margin-right: 25px;\n    margin-left: 0;\n  "])));
+var BusinessCalendarWrapper = (0, _styledComponents.default)(BusinessFilterWrapper)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-left: 25px;\n  ", "\n\n  button {\n    svg {\n      font-size: 16px;\n      margin-right: 12px;\n      ", "\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    margin-right: 25px;\n    margin-left: 0;\n  "])));
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-right: 12px;\n        margin-left: 0;\n      "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-right: 12px;\n        margin-left: 0;\n      "])));
 });
 exports.BusinessCalendarWrapper = BusinessCalendarWrapper;
 
-var AnalyticsContentWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  > div {\n    margin-top: 40px;\n  }\n"])));
+var AnalyticsContentWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  > div {\n    margin-top: 40px;\n  }\n"])));
 
 exports.AnalyticsContentWrapper = AnalyticsContentWrapper;
 
-var MapWrraper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n"])));
+var MapWrraper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n"])));
 
 exports.MapWrraper = MapWrraper;

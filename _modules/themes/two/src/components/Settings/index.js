@@ -17,6 +17,12 @@ var _SettingItemUI = require("../SettingItemUI");
 
 var _SettingsDetail = require("../SettingsDetail");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _Buttons = require("../../styles/Buttons");
+
+var _InfoShareContext = require("../../../../../contexts/InfoShareContext");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -56,6 +62,11 @@ var SettingsUI = function SettingsUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
+      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+      isCollapse = _useInfoShare2[0].isCollapse,
+      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -142,7 +153,12 @@ var SettingsUI = function SettingsUI(props) {
       setSelectedCategory(categorySelected);
     }
   }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleMenuCollapse(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     className: "row"
   }, categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {

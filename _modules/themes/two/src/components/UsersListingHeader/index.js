@@ -15,7 +15,11 @@ var _UsersExportCSV = require("../UsersExportCSV");
 
 var _SearchBar = require("../SearchBar");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _Buttons = require("../../styles/Buttons");
+
+var _InfoShareContext = require("../../../../../contexts/InfoShareContext");
 
 var _styles = require("./styles");
 
@@ -48,7 +52,17 @@ var UsersListingHeader = function UsersListingHeader(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
+      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+      isCollapse = _useInfoShare2[0].isCollapse,
+      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+
+  return /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleMenuCollapse(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {

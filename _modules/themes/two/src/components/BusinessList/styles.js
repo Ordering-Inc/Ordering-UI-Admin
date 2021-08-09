@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 400px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 300px);\n  }\n"])));
+var BusinessListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 330px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 300px);\n  }\n"])));
 
 exports.BusinessListContainer = BusinessListContainer;
 
@@ -51,6 +51,6 @@ var AddNewButtonLink = _styledComponents.default.div(_templateObject7 || (_templ
 
 exports.AddNewButtonLink = AddNewButtonLink;
 
-var BusinessListBottomContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 20px;\n"])));
+var BusinessListBottomContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n"])));
 
 exports.BusinessListBottomContainer = BusinessListBottomContainer;
