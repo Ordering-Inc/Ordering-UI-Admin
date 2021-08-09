@@ -18,8 +18,7 @@ export const BusinessLocation = (props) => {
     business,
     formState,
     setFormState,
-    handleUpdateBusinessClick,
-    handleUpdateBusinessState
+    handleUpdateBusinessClick
   } = props
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
@@ -70,7 +69,6 @@ export const BusinessLocation = (props) => {
         timezone: result?.timeZoneId
       }
     })
-    handleUpdateBusinessState({ ...business, timezone: result?.timeZoneId })
   }
 
   const handleChangeCenter = (address) => {
