@@ -73,6 +73,17 @@ export const BusinessLocation = (props) => {
     handleUpdateBusinessState({ ...business, timezone: result?.timeZoneId })
   }
 
+  const handleChangeCenter = (address) => {
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState?.changes,
+        address: business?.address,
+        location: { ...business?.location, lat: address?.lat(), lng: address?.lng(), zoom: 15 }
+      }
+    })
+  }
+
   useEffect(() => {
     setFormState({ ...formState, changes: {} })
   }, [])
@@ -85,6 +96,8 @@ export const BusinessLocation = (props) => {
             apiKey={configs?.google_maps_api_key?.value}
             location={business.location}
             mapControls={googleMapsControls}
+            handleChangeCenter={handleChangeCenter}
+            isFitCenter
           />
         </WrapperMap>
       )}
