@@ -87,32 +87,30 @@ export const DriversLocation = (props) => {
 
   return (
     <WrapperMap ref={mapRef} className='drivers-location'>
-      {googleMapsApiKey && (
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: googleMapsApiKey
-          }}
-          onGoogleApiLoaded={() => setMapLoaded(false)}
-          defaultCenter={defaultCenter}
-          center={mapCenter}
-          defaultZoom={defaultZoom}
-          zoom={mapZoom}
-          options={{ fullscreenControl: true }}
-          className='map'
-          onChange={(data) => handleMapChange(data)}
-          yesIWantToUseGoogleMapApiInternals
-        >
-          {showDrivers.length !== 0 &&
-            showDrivers.map((driver) => (
-              <DriverMapMarkerAndInfo
-                key={driver.id}
-                driver={driver}
-                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
-              />
-            ))}
-        </GoogleMapReact>
-      )}
+      <GoogleMapReact
+        bootstrapURLKeys={{
+          key: googleMapsApiKey
+        }}
+        onGoogleApiLoaded={() => setMapLoaded(false)}
+        defaultCenter={defaultCenter}
+        center={mapCenter}
+        defaultZoom={defaultZoom}
+        zoom={mapZoom}
+        options={{ fullscreenControl: true }}
+        className='map'
+        onChange={(data) => handleMapChange(data)}
+        yesIWantToUseGoogleMapApiInternals
+      >
+        {showDrivers.length !== 0 &&
+          showDrivers.map((driver) => (
+            <DriverMapMarkerAndInfo
+              key={driver.id}
+              driver={driver}
+              lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
+              lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
+            />
+          ))}
+      </GoogleMapReact>
     </WrapperMap>
   )
 }
