@@ -33,7 +33,6 @@ export const HeaderTitleContainer = styled.div`
     color: ${props => props.theme.colors.headingColor};
     margin: 0px;
   }
-
   > button {
     ${props => props.theme?.rtl ? css`
       margin-left: 8px;
