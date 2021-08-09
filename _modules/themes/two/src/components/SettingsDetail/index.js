@@ -37,6 +37,8 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -53,7 +55,8 @@ var SettingsDetail = function SettingsDetail(props) {
   var open = props.open,
       onClose = props.onClose,
       onBasicSettingsRedirect = props.onBasicSettingsRedirect,
-      category = props.category;
+      category = props.category,
+      isUpdateConfig = props.isUpdateConfig;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -146,7 +149,7 @@ var SettingsDetail = function SettingsDetail(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (category) {
+    if (category && !isUpdateConfig) {
       setExtraInfoOpen(false);
       setExtraSubCatOpen(false);
     }
@@ -212,18 +215,18 @@ var SettingsDetail = function SettingsDetail(props) {
   })))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: onCloseSettingsList
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, _extends({}, props, {
     category: category,
     onCloseSettingsList: onCloseSettingsList
-  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     height: "90vh",
     open: true,
     onClose: onCloseSettingsList
-  }, /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, _extends({}, props, {
     category: category,
     onCloseSettingsList: onCloseSettingsList
-  }))))), extraInfoOpen && !category.support_url && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })))))), extraInfoOpen && !category.support_url && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_SUPPORTURL', 'Sorry, we couldn\'t find the support url.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category'),
     onClickButton: handleClose

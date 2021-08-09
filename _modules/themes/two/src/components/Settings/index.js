@@ -35,6 +35,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -57,7 +59,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SettingsUI = function SettingsUI(props) {
   var categoryList = props.categoryList,
-      settingsType = props.settingsType;
+      settingsType = props.settingsType,
+      handChangeConfig = props.handChangeConfig;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -123,6 +126,7 @@ var SettingsUI = function SettingsUI(props) {
     onBasicSettingsRedirect({
       category: category.id
     });
+    handChangeConfig && handChangeConfig(false);
   };
 
   var handleBackRedirect = function handleBackRedirect() {
@@ -178,12 +182,12 @@ var SettingsUI = function SettingsUI(props) {
       category: category,
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     }));
-  }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, {
+  }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
     open: isOpenDescription,
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
-  }));
+  })));
 };
 
 var Settings = function Settings(props) {

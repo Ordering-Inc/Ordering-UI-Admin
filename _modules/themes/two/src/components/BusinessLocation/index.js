@@ -155,6 +155,19 @@ var BusinessLocation = function BusinessLocation(props) {
     };
   }();
 
+  var handleChangeCenter = function handleChangeCenter(address) {
+    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+      changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
+        address: business === null || business === void 0 ? void 0 : business.address,
+        location: _objectSpread(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location), {}, {
+          lat: address === null || address === void 0 ? void 0 : address.lat(),
+          lng: address === null || address === void 0 ? void 0 : address.lng(),
+          zoom: 15
+        })
+      })
+    }));
+  };
+
   (0, _react.useEffect)(function () {
     setFormState(_objectSpread(_objectSpread({}, formState), {}, {
       changes: {}
@@ -163,7 +176,9 @@ var BusinessLocation = function BusinessLocation(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, (business === null || business === void 0 ? void 0 : business.location) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
     location: business.location,
-    mapControls: googleMapsControls
+    mapControls: googleMapsControls,
+    handleChangeCenter: handleChangeCenter,
+    isFitCenter: true
   })), /*#__PURE__*/_react.default.createElement(_styles.Section, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperCitySelector, null, /*#__PURE__*/_react.default.createElement("p", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_CitySelector.CitySelector, {
     isDefault: true,
     defaultValue: business === null || business === void 0 ? void 0 : business.city_id,

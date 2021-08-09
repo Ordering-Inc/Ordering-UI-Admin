@@ -110,24 +110,24 @@ var BusinessAnalyticsUI = function BusinessAnalyticsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.AnalyticsContentWrapper, {
     className: "row"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
     isOrders: true,
     filterList: filterList,
     chartDataList: ordersList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
     filterList: filterList,
     chartDataList: salesList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsProductCategories.AnalyticsProductCategories, {
     filterList: filterList,
     productCategoryList: topProductList,
     isProducts: true
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsProductCategories.AnalyticsProductCategories, {
     filterList: filterList,
     productCategoryList: topCategoryList
@@ -137,20 +137,20 @@ var BusinessAnalyticsUI = function BusinessAnalyticsUI(props) {
     filterList: filterList,
     orderStatusList: orderStatusList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsRegisterUsers.AnalyticsRegisterUsers, {
     registerUsersList: registerUsersList,
     filterList: filterList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsCustomerSatisfaction.AnalyticsCustomerSatisfaction, {
     dataList: customerSatisfactionList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersAcceptSpend.AnalyticsOrdersAcceptSpend, {
     dataList: ordersAcceptSpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
     dataList: arrivedPickUpSpendList,
     title: t('TIME_WAITING_ON_READY_FOR_PICKUP', 'TIME SPENT WAITING ON READY FOR PICKUP')

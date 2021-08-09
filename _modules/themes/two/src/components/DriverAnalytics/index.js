@@ -122,33 +122,33 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.AnalyticsContentWrapper, {
     className: "row"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
     isOrders: true,
     filterList: filterList,
     chartDataList: ordersList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
     filterList: filterList,
     chartDataList: salesList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsProductCategories.AnalyticsProductCategories, {
     filterList: filterList,
     productCategoryList: topProductList,
     isProducts: true
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsProductCategories.AnalyticsProductCategories, {
     filterList: filterList,
     productCategoryList: topCategoryList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsTopOrders.AnalyticsTopOrders, {
     dataList: topOrdersList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsCustomerSatisfaction.AnalyticsCustomerSatisfaction, {
     dataList: customerSatisfactionList
   })), /*#__PURE__*/_react.default.createElement("div", {
@@ -157,41 +157,41 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
     filterList: filterList,
     orderStatusList: orderStatusList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendTimes.AnalyticsSpendTimes, {
     chartDataList: spendTimesList,
     filterList: filterList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsAvailableTimes.AnalyticsAvailableTimes, {
     filterList: filterList,
     availableTimesList: availableTimesList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsBusyTimes.AnalyticsBusyTimes, {
     filterList: filterList,
     busyTimesList: busyTimesList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersAcceptSpend.AnalyticsOrdersAcceptSpend, {
     dataList: ordersAcceptSpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
     title: t('TIME_SPENT_IN_BUSINESS_WAITING_FOR_ORDER', 'Time spent in business waiting for order'),
     dataList: completeSpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
     title: t('TIME_SPENT_TO_PICKUP_ORDER', 'Time spent to pickup order'),
     dataList: pickUpSpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
     title: t('TIME_SPENT_TO_DELIVER_ORDER', 'Time spent to deliver order'),
     dataList: deliverySpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-6"
+    className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
     title: t('TIME_SPENT_SINCE_ORDER_ACCEPTED_TO_PICKUP_AND_DELIVER_THE_ORDER', 'Time spent since order accepted to pickup and deliver the order'),
     dataList: arrivedPickUpSpendList
