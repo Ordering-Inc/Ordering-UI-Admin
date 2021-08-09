@@ -133,6 +133,7 @@ export const BusinessDetailsUI = (props) => {
               setBusinessTypes={setBusinessTypes}
               handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
               handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
+              handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {selectedItem === 'schedule' && (

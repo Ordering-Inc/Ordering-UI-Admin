@@ -22,7 +22,8 @@ export const BusinessInformation = (props) => {
     businessTypes,
     setBusinessTypes,
     handleSuccessAddBusinessItem,
-    handleSuccessDeleteBusinessItem
+    handleSuccessDeleteBusinessItem,
+    handleUpdateBusinessState
   } = props
 
   const [, t] = useLanguage()
@@ -58,6 +59,7 @@ export const BusinessInformation = (props) => {
             formState={formState}
             setFormState={setFormState}
             handleUpdateBusinessClick={handleUpdateBusinessClick}
+            handleUpdateBusinessState={handleUpdateBusinessState}
           />
         )}
         {selectedInfoItem === 'description' && (
