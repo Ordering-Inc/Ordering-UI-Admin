@@ -3,10 +3,13 @@ import { useLocation } from 'react-router-dom'
 import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
+import { List as MenuIcon } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 
 import {
   BasicSettingsContainer,
-  Title,
+  HeaderTitleContainer,
   ContentWrapper,
   SettingItemWrapper
 } from './styles'
@@ -19,6 +22,8 @@ const SettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const { search } = useLocation()
@@ -79,11 +84,21 @@ const SettingsUI = (props) => {
   return (
     <>
       <BasicSettingsContainer>
-        <Title>
-          {
-            settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
-          }
-        </Title>
+        <HeaderTitleContainer>
+          {isCollapse && (
+            <IconButton
+              color='black'
+              onClick={() => handleMenuCollapse(false)}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <h1>
+            {
+              settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
+            }
+          </h1>
+        </HeaderTitleContainer>
         <ContentWrapper className='row'>
           {
             categoryList.loading ? (

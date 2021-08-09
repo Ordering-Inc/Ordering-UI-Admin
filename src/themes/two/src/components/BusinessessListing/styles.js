@@ -6,14 +6,9 @@ export const BusinessListingContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
-  margin-top: 60px;
 
   @media print {
     display: none;
-  }
-
-  @media (min-width: 760px) {
-    margin-top: 0px;
   }
 `
 

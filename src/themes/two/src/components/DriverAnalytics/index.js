@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage, DriverAnalytics as DriverAnalyticsController } from 'ordering-components-admin'
 import { AnalyticsDriversFilter } from '../AnalyticsDriversFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
-import { Button } from '../../styles/Buttons'
+import { Button, IconButton } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsMap } from '../AnalyticsMap'
@@ -17,9 +17,13 @@ import { AnalyticsSpendTimes } from '../AnalyticsSpendTimes'
 import { AnalyticsAvailableTimes } from '../AnalyticsAvailableTimes'
 import { AnalyticsBusyTimes } from '../AnalyticsBusyTimes'
 import { AnalyticsSpendList } from '../AnalyticsSpendList'
+import { List as MenuIcon } from 'react-bootstrap-icons'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
+
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
+  HeaderTitleContainer,
   HeaderFilterContainer,
   BusinessFilterWrapper,
   BusinessCalendarWrapper,
@@ -50,12 +54,24 @@ const DriverAnalyticsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
   const [driversFilterModal, setDriversFilterModal] = useState(false)
 
   return (
     <BusinessAnalyticsContainer>
       <BusinessAnalyticsHeader>
-        <h1>{t('DRIVERS_ANALYTICS', 'Drivers analytics')}</h1>
+        <HeaderTitleContainer>
+          {isCollapse && (
+            <IconButton
+              color='black'
+              onClick={() => handleMenuCollapse(false)}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <h1>{t('DRIVERS_ANALYTICS', 'Drivers analytics')}</h1>
+        </HeaderTitleContainer>
         <HeaderFilterContainer>
           <BusinessFilterWrapper>
             <Button onClick={() => setDriversFilterModal(true)}>

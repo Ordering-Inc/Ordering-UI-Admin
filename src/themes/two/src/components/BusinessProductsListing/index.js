@@ -8,11 +8,14 @@ import BsTable from '@meronex/icons/bs/BsTable'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductList } from '../BusinessProductList'
 import { ProductDetails } from '../ProductDetails'
-import { Button } from '../../styles/Buttons'
+import { List as MenuIcon } from 'react-bootstrap-icons'
+import { Button, IconButton } from '../../styles/Buttons'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 
 import {
   CategoryProductsContainer,
   HeaderContainer,
+  HeaderTitleContainer,
   CategoryProductsContent,
   CategoryListContainer,
   ProductListContainer,
@@ -36,7 +39,9 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateBusinessState,
     setCategorySelected
   } = props
+
   const [, t] = useLanguage()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const [viewMethod, setViewMethod] = useState('list')
   const [categoryToEdit, setCategoryToEdit] = useState({ open: false, category: null })
@@ -103,7 +108,15 @@ const BusinessProductsListingUI = (props) => {
     <>
       <CategoryProductsContainer>
         <HeaderContainer>
-          <div>
+          <HeaderTitleContainer>
+            {isCollapse && (
+              <IconButton
+                color='black'
+                onClick={() => handleMenuCollapse(false)}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             {
               businessState.loading ? (
                 <h1><Skeleton width={200} height={30} /></h1>
@@ -113,7 +126,7 @@ const BusinessProductsListingUI = (props) => {
                 )
               )
             }
-          </div>
+          </HeaderTitleContainer>
           <ActionsGroup>
             <Button
               borderRadius='8px'

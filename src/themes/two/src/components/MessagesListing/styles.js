@@ -3,14 +3,9 @@ import styled, { css } from 'styled-components'
 export const MessagesListingContainer = styled.div`
   flex: 1;
   transition: all 0.5s;
-  padding: 0 20px 20px 20px;
+  padding: 20px;
   box-sizing: border-box;
-  margin-top: 60px;
 
-  @media (min-width: 760px) {
-    margin-top: 0px;
-    padding: 24px;
-  }
 
   @media print {
     display: none;

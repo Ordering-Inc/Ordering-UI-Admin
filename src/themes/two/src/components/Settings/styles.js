@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BasicSettingsContainer = styled.div`
   flex: 1;
@@ -6,22 +6,36 @@ export const BasicSettingsContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
-  margin-top: 60px;
-
-  @media print {
-    display: none;
-  }
-
-  @media (min-width: 760px) {
-    margin-top: 0px;
-  }
+  max-height: 100vh;
+  overflow: auto;
 `
 
-export const Title = styled.h1`
-  font-weight: bold;
-  font-size: 20px;
-  color: #344050;
-  margin-top: 20px;
+export const HeaderTitleContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  > h1 {
+    font-weight: 700;
+    font-size: 20px;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0px;
+  }
+
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+      margin-right: -8px;
+    ` : css`
+      margin-right: 8px;
+      margin-left: -8px;
+    `}
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
 `
 
 export const ContentWrapper = styled.div``

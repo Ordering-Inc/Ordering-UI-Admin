@@ -5,8 +5,13 @@ import { DriversDashboard } from '../DriversDashboard'
 import { OrdersLateralBar } from '../OrdersLateralBar'
 import { SearchBar } from '../SearchBar'
 import { OrderNotification } from '../OrderNotification'
+import { List as MenuIcon } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
+
 import {
   DriversHeader,
+  HeaderTitleContainer,
   DriversContainer,
   DriversContent
 } from './styles'
@@ -21,6 +26,8 @@ const DriversManagerUI = (props) => {
   const { drivers, loading } = props.driversList
 
   const [, t] = useLanguage()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
   const query = new URLSearchParams(useLocation().search)
   const [isOpenDriverOrders, setIsOpenDriverOrders] = useState(false)
   const [selectedDriver, setSelectedDriver] = useState(null)
@@ -60,7 +67,17 @@ const DriversManagerUI = (props) => {
     <>
       <DriversContainer>
         <DriversHeader>
-          <h1>{t('DRIVERS_DASHBOARD', 'Drivers dashboard')}</h1>
+          <HeaderTitleContainer>
+            {isCollapse && (
+              <IconButton
+                color='black'
+                onClick={() => handleMenuCollapse(false)}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+            <h1>{t('DRIVERS_DASHBOARD', 'Drivers dashboard')}</h1>
+          </HeaderTitleContainer>
           <SearchBar
             isCustomLayout
             onSearch={handleChangeSearch}
