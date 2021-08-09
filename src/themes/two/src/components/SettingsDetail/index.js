@@ -32,7 +32,8 @@ export const SettingsDetail = (props) => {
     open,
     onClose,
     onBasicSettingsRedirect,
-    category
+    category,
+    isUpdateConfig
   } = props
 
   const [, t] = useLanguage()
@@ -110,7 +111,7 @@ export const SettingsDetail = (props) => {
   }
 
   useEffect(() => {
-    if (category) {
+    if (category && !isUpdateConfig) {
       setExtraInfoOpen(false)
       setExtraSubCatOpen(false)
     }
@@ -211,6 +212,7 @@ export const SettingsDetail = (props) => {
               </IconButton>
               <SubCategoryWrapper>
                 <SettingsList
+                  {...props}
                   category={category}
                   onCloseSettingsList={onCloseSettingsList}
                 />
@@ -226,6 +228,7 @@ export const SettingsDetail = (props) => {
               >
                 <SubCategoryWrapper>
                   <SettingsList
+                    {...props}
                     category={category}
                     onCloseSettingsList={onCloseSettingsList}
                   />
