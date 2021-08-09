@@ -17,7 +17,8 @@ import {
 const SettingsUI = (props) => {
   const {
     categoryList,
-    settingsType
+    settingsType,
+    handChangeConfig
   } = props
 
   const [, t] = useLanguage()
@@ -55,6 +56,7 @@ const SettingsUI = (props) => {
     setIsOpenDescription(true)
     setSelectedCategory(category)
     onBasicSettingsRedirect({ category: category.id })
+    handChangeConfig && handChangeConfig(false)
   }
 
   const handleBackRedirect = () => {
@@ -125,6 +127,7 @@ const SettingsUI = (props) => {
       {
         isOpenDescription && (
           <SettingsDetail
+            {...props}
             open={isOpenDescription}
             category={selectedCategory}
             onClose={handleBackRedirect}
