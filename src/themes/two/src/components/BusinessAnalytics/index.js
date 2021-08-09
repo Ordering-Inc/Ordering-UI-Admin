@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage, BusinessAnalytics as BusinessAnalyticsController } from 'ordering-components-admin'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
-import { Button } from '../../styles/Buttons'
+import { Button, IconButton } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
@@ -14,9 +14,13 @@ import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsSpendList } from '../AnalyticsSpendList'
+import { List as MenuIcon } from 'react-bootstrap-icons'
+import { useInfoShare } from '../../../../../contexts/InfoShareContext'
+
 import {
   BusinessAnalyticsContainer,
   BusinessAnalyticsHeader,
+  HeaderTitleContainer,
   HeaderFilterContainer,
   BusinessFilterWrapper,
   BusinessCalendarWrapper,
@@ -40,12 +44,24 @@ const BusinessAnalyticsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
   const [businessFilterModal, setBusinessFilterModal] = useState(false)
 
   return (
     <BusinessAnalyticsContainer>
       <BusinessAnalyticsHeader>
-        <h1>{t('BUSINESS_ANALYTICS', 'Business Analytics')}</h1>
+        <HeaderTitleContainer>
+          {isCollapse && (
+            <IconButton
+              color='black'
+              onClick={() => handleMenuCollapse(false)}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <h1>{t('BUSINESS_ANALYTICS', 'Business Analytics')}</h1>
+        </HeaderTitleContainer>
         <HeaderFilterContainer>
           <BusinessFilterWrapper>
             <Button onClick={() => setBusinessFilterModal(true)}>

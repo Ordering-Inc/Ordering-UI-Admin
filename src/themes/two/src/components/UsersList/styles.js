@@ -272,5 +272,5 @@ export const UsersBottomContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 10px;
 `
