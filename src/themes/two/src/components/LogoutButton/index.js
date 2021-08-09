@@ -7,10 +7,6 @@ import { Button } from 'react-bootstrap'
 const LogoutButtonUI = (props) => {
   const [, t] = useLanguage()
 
-  const {
-    isCollapse
-  } = props
-
   return (
     <Button
       className='d-flex align-items-center m-1'
@@ -18,11 +14,9 @@ const LogoutButtonUI = (props) => {
       onClick={props.handleLogoutClick}
     >
       <BoxArrowRight size={20} />
-      {!isCollapse && (
-        <span>
-          {t('LOGOUT', 'Logout')}
-        </span>
-      )}
+      <span>
+        {t('LOGOUT', 'Logout')}
+      </span>
     </Button>
   )
 }

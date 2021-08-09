@@ -20,9 +20,21 @@ export const HeaderSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: fit-content;
 
-  @media (max-width: 560px) {
-    flex-direction: column;
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+      margin-right: -8px;
+    ` : css`
+      margin-right: 8px;
+      margin-left: -8px;
+    `}
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 `
 export const HeaderTitle = styled.p`
@@ -34,8 +46,7 @@ export const HeaderTitle = styled.p`
   white-space: nowrap;
 
   @media (max-width: 560px) {
-    width: 100%;
-    margin-bottom: 10px;
+    width: calc(100% - 50px);
   }
 `
 export const TopRightSection = styled.div`

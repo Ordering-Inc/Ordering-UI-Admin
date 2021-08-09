@@ -7,6 +7,7 @@ import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { ConfigFileContext } from './src/contexts/ConfigFileContext'
+import { InfoShareProvider } from './src/contexts/InfoShareContext'
 import theme from './template/theme.json'
 
 /**
@@ -198,7 +199,9 @@ const RouteApp = () => {
     <ConfigFileContext.Provider value={[configFile, setConfigFile]}>
       <ThemeProvider theme={theme}>
         <OrderingProvider Alert={Alert} settings={configFile}>
-          <Router />
+          <InfoShareProvider>
+            <Router />
+          </InfoShareProvider>
         </OrderingProvider>
       </ThemeProvider>
     </ConfigFileContext.Provider>

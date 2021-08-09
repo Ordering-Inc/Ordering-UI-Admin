@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessListContainer = styled.div`
-  max-height: calc(100vh - 400px);
+  max-height: calc(100vh - 330px);
   overflow: auto;
 
   @media (min-width: 768px) {
@@ -68,5 +68,5 @@ export const BusinessListBottomContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 10px;
 `

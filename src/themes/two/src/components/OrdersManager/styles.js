@@ -6,17 +6,12 @@ export const OrdersListContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
-  margin-top: 60px;
   ${({ isSelectedOrders }) => isSelectedOrders && css`
     margin-top: 0px;
     padding: 20px 0 0 0;
   `}
   @media print {
     display: none;
-  }
-
-  @media (min-width: 760px) {
-    margin-top: 0px;
   }
 `
 export const OrdersContent = styled.div`

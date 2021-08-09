@@ -4,22 +4,37 @@ export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    > h1 {
-      font-size: 20px;
-      margin: 0px;
-      font-weight: 700;
-    }
-  }
-
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+`
+
+export const HeaderTitleContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  > h1 {
+    font-size: 20px;
+    margin: 0px;
+    font-weight: 700;
+  }
+
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+      margin-right: -8px;
+    ` : css`
+      margin-right: 8px;
+      margin-left: -8px;
+    `}
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 `
 

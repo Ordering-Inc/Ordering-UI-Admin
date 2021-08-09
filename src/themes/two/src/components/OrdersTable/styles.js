@@ -6,7 +6,7 @@ export const OrdersContainer = styled.div`
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 370px);
+    max-height: calc(100vh - 385px);
   }
 
   @media (min-width: 992px) {
@@ -284,5 +284,5 @@ export const WrapOrderStatusSelector = styled.div`
 `
 
 export const WrapperPagination = styled.div`
-  padding: 10px 0;
+  padding-top: 5px;
 `
