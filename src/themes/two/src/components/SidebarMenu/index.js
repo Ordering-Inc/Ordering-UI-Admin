@@ -158,6 +158,7 @@ export const SidebarMenu = (props) => {
             <Image
               src={theme?.images?.logos?.logotype}
               fluid
+              onClick={() => handleGoToPage({ page: 'home' })}
               width='150px'
               height='45px'
             />
