@@ -33,7 +33,7 @@ var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3
 
 exports.Header = Header;
 
-var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  color: ", ";\n  margin: 0px;\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 700;\n  color: ", ";\n  margin: 0px;\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

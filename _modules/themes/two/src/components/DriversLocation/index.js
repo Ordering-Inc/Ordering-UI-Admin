@@ -151,7 +151,7 @@ var DriversLocation = function DriversLocation(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     ref: mapRef,
     className: "drivers-location"
-  }, googleMapsApiKey && /*#__PURE__*/_react.default.createElement(_googleMapReact.default, {
+  }, /*#__PURE__*/_react.default.createElement(_googleMapReact.default, {
     bootstrapURLKeys: {
       key: googleMapsApiKey
     },

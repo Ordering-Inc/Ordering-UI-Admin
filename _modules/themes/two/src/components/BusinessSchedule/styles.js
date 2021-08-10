@@ -25,7 +25,7 @@ var ScheduleSection = _styledComponents.default.div(_templateObject2 || (_templa
 
 exports.ScheduleSection = ScheduleSection;
 
-var Title = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  color: ", ";\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 700;\n  color: ", ";\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

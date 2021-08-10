@@ -64,6 +64,7 @@ var MessagesListingUI = function MessagesListingUI(props) {
       paymethodsList = props.paymethodsList,
       businessesList = props.businessesList,
       filterValues = props.filterValues,
+      selectedSubOrderStatus = props.selectedSubOrderStatus,
       handleChangeSearch = props.handleChangeSearch,
       handleChangeFilterValues = props.handleChangeFilterValues;
 
@@ -180,6 +181,7 @@ var MessagesListingUI = function MessagesListingUI(props) {
     driversList: driversList,
     orderByOption: orderByOption,
     selectedOrderCard: selectedOrder,
+    selectedSubOrderStatus: selectedSubOrderStatus,
     orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate,
     handleOpenOrderDetail: handleOpenOrderDetail,
     handleOrderCardClick: handleOrderCardClick

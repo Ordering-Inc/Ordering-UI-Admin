@@ -31,7 +31,7 @@ var DetailsHeader = _styledComponents.default.div(_templateObject2 || (_template
 
 exports.DetailsHeader = DetailsHeader;
 
-var BusinessName = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 24px;\n  margin: 0px;\n\n  ", "\n"])), function (props) {
+var BusinessName = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 20px;\n  margin: 0px;\n  font-weight: 700;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme;

@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: 100%;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  h1 {\n    font-size: 24px;\n    font-weight: 600;\n    color: ", ";\n    margin-bottom: 30px;\n    width: 100%;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    a {\n      color: ", ";\n      text-decoration: none;\n      ", "\n    }\n  }\n\n  img {\n    width: 300px;\n  }\n"])), function (props) {
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: 100%;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    color: ", ";\n    margin-bottom: 30px;\n    width: 100%;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    a {\n      color: ", ";\n      text-decoration: none;\n      ", "\n    }\n  }\n\n  img {\n    width: 300px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.headingColor;

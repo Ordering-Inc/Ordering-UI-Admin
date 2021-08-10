@@ -27,6 +27,8 @@ var _BusinessDeliveryZone = require("../BusinessDeliveryZone");
 
 var _BusinessPaymentMethods = require("../BusinessPaymentMethods");
 
+var _BusinessPromotionList = require("../BusinessPromotionList");
+
 var _BusinessCustomFields = require("../BusinessCustomFields");
 
 var _MoreSidebarLayout = require("../MoreSidebarLayout");
@@ -58,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessDetailsUI = function BusinessDetailsUI(props) {
-  var _businessState$busine;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3;
 
   var open = props.open,
       businessId = props.businessId,
@@ -200,9 +202,15 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleSuccessUpdate: handleUpdateBusinessState
+  }), selectedItem === 'promotions' && /*#__PURE__*/_react.default.createElement(_BusinessPromotionList.BusinessPromotionList, {
+    promotions: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.offers,
+    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.id,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    setIsExtendExtraOpen: setIsExtendExtraOpen,
+    handleSuccessUpdate: handleUpdateBusinessState
   }), selectedItem === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_BusinessCustomFields.BusinessCustomFields, {
     businessId: businessState === null || businessState === void 0 ? void 0 : businessState.business.id,
-    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.metafields,
+    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.metafields,
     handleSuccessAddMetaFields: function handleSuccessAddMetaFields(result) {
       return handleSuccessAddBusinessItem('metafields', result);
     },

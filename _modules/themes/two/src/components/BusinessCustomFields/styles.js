@@ -17,7 +17,7 @@ var WrapMetaFields = _styledComponents.default.div(_templateObject || (_template
 
 exports.WrapMetaFields = WrapMetaFields;
 
-var MetaTitle = _styledComponents.default.p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  font-weight: 600;\n  color: ", ";\n  margin-bottom: 30px;\n"])), function (props) {
+var MetaTitle = _styledComponents.default.p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 700;\n  color: ", ";\n  margin-bottom: 30px;\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
