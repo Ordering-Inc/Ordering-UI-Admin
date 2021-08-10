@@ -3,9 +3,10 @@ import { useLanguage } from 'ordering-components-admin'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { SingleBusinessProduct } from '../SingleBusinessProduct'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
-import { BusinessProductCreator } from '../BusinessProductCreator'
 import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
 import { Pagination } from '../Pagination'
+import { SideBar } from '../SideBar'
+import { BusinessProductAddForm } from '../BusinessProductAddForm'
 
 import {
   ListContent,
@@ -28,7 +29,8 @@ export const BusinessProductList = (props) => {
     handleSearchRedirect,
     handleChangeSearch,
     handleOpenProductDetails,
-    isParentProductAdd
+    isParentProductAdd,
+    handleParentProductAdd
   } = props
   const [, t] = useLanguage()
 
@@ -147,16 +149,6 @@ export const BusinessProductList = (props) => {
                       />
                     ))
                   }
-                  {
-                    (isAddProduct || isParentProductAdd) && (
-                      <BusinessProductCreator
-                        {...props}
-                        allowColumns={allowColumns}
-                        setIsAddProduct={setIsAddProduct}
-                        business={businessState?.business}
-                      />
-                    )
-                  }
                 </>
               )}
             </BusinessProductListTable>
@@ -227,6 +219,24 @@ export const BusinessProductList = (props) => {
               )
             }
           </>
+        )
+      }
+      {
+        (isAddProduct || isParentProductAdd) && (
+          <SideBar
+            sidebarId='productAddForm'
+            open={isAddProduct || isParentProductAdd}
+            onClose={() => {
+              setIsAddProduct(false)
+              handleParentProductAdd && handleParentProductAdd(false)
+            }}
+          >
+            <BusinessProductAddForm
+              {...props}
+              business={businessState?.business}
+              setIsAddProduct={setIsAddProduct}
+            />
+          </SideBar>
         )
       }
     </ListContent>
