@@ -7,7 +7,7 @@ import {
   DashSquare,
   PlusSquare
 } from 'react-bootstrap-icons'
-import { HomeReportsUI as HomeReports } from '../HomeReportsUI'
+import { HomeReports } from '../HomeReports'
 import { HomeSingleTask } from '../HomeSingleTask'
 import {
   HomeContainer,

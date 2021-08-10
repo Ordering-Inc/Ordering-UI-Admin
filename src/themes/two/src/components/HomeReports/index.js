@@ -21,7 +21,7 @@ import {
 } from 'react-bootstrap-icons'
 import { useLanguage, useUtils, useEvent } from 'ordering-components-admin'
 
-export const HomeReportsUI = (props) => {
+export const HomeReports = (props) => {
   const {
     isShowVideo,
     ordersList,
