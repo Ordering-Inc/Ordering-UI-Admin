@@ -38,6 +38,7 @@ import { AdminLayout } from './layouts/AdminLayout'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { ConfigFileContext } from './contexts/ConfigFileContext'
+import { InfoShareContext, InfoShareProvider, useInfoShare } from './contexts/InfoShareContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 import { Button } from './styles/Buttons'
@@ -88,6 +89,9 @@ export {
   ThemeProvider,
   useTheme,
   ConfigFileContext,
+  InfoShareContext,
+  InfoShareProvider,
+  useInfoShare,
 
   // Hooks
   useOnlineStatus,
