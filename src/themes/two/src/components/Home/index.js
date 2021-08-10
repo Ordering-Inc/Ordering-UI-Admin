@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useLanguage, Home as HomeController } from 'ordering-components-admin'
-// import { Home as HomeController } from './naked'
 import { IconButton, Button } from '../../styles/Buttons'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 import {
