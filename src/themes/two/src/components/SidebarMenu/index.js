@@ -154,9 +154,14 @@ export const SidebarMenu = (props) => {
         >
           <SidebarHeader
             className='p-1'
-            onClick={() => handleGoToPage({ page: 'home' })}
           >
-            <Image src={theme?.images?.logos?.logotype} fluid width='150px' height='45px' />
+            <Image
+              src={theme?.images?.logos?.logotype}
+              fluid
+              onClick={() => handleGoToPage({ page: 'home' })}
+              width='150px'
+              height='45px'
+            />
             <BurgerButton
               onClick={() => handleMenuCollapse(true)}
             >
@@ -173,7 +178,14 @@ export const SidebarMenu = (props) => {
             <div className='d-flex flex-column'>
               <Accordion>
                 <MenuContainer>
-                  <ContextAwareToggle eventKey='0'>
+                  <ContextAwareToggle
+                    eventKey='0'
+                    active={
+                      location.pathname === '/home'
+                    }
+                    page='home'
+                    handleGoToPage={handleGoToPage}
+                  >
                     <HouseDoor />
                     <span>{t('HOME', 'Home')}</span>
                   </ContextAwareToggle>

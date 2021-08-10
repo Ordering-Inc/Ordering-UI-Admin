@@ -10,6 +10,7 @@ export const ListenPageChanges = ({ children }) => {
   const [theme, { merge }] = useTheme()
 
   const routes = {
+    home: '/home',
     orders: '/orders',
     deliveries: '/deliveries',
     drivers: '/drivers',

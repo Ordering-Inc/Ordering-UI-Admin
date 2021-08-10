@@ -13,6 +13,7 @@ import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { SidebarMenu } from '../src/themes/two/src/components/SidebarMenu'
 import { Layout } from '../src/themes/two/src/components/Layout'
 
+import { Home } from './pages/Home'
 import { PageNotFound } from './pages/PageNotFound'
 import { Login } from './pages/Login'
 import { ForgotPassword } from './pages/ForgotPassword'
@@ -75,7 +76,7 @@ export const App = () => {
                   <Switch>
                     <Route exact path='/'>
                       {
-                        auth ? <Redirect to='/orders' /> : <Redirect to='/login' />
+                        auth ? <Redirect to='/home' /> : <Redirect to='/login' />
                       }
                     </Route>
 
@@ -89,7 +90,7 @@ export const App = () => {
                             />
                           )
                           : (
-                            <Redirect to='/orders' />
+                            <Redirect to='/home' />
                           )
                       }
                     </Route>
@@ -101,7 +102,14 @@ export const App = () => {
                             elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                           />
                         )
-                          : <Redirect to='/orders' />
+                          : <Redirect to='/home' />
+                      }
+                    </Route>
+                    <Route exact path='/home'>
+                      {
+                        auth
+                          ? <Home />
+                          : <Redirect to='/login' />
                       }
                     </Route>
                     <Route exact path='/orders'>
