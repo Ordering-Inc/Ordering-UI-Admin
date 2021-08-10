@@ -102,7 +102,7 @@ export const DetailsContent = styled.div`
     text-transform: uppercase;
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
-    magin-bottom: 8px;
+    margin-bottom: 8px;
   }
 
   h2 {
