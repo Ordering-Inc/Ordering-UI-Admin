@@ -8,8 +8,8 @@ export const Container = styled.div`
   align-items: center;
 
   h1 {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     color: ${props => props.theme.colors.headingColor};
     margin-bottom: 30px;
     width: 100%;

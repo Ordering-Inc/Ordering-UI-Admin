@@ -32,6 +32,7 @@ const MessagesListingUI = (props) => {
     paymethodsList,
     businessesList,
     filterValues,
+    selectedSubOrderStatus,
     handleChangeSearch,
     handleChangeFilterValues
   } = props
@@ -148,6 +149,7 @@ const MessagesListingUI = (props) => {
                 driversList={driversList}
                 orderByOption={orderByOption}
                 selectedOrderCard={selectedOrder}
+                selectedSubOrderStatus={selectedSubOrderStatus}
                 orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
                 handleOpenOrderDetail={handleOpenOrderDetail}
                 handleOrderCardClick={handleOrderCardClick}
