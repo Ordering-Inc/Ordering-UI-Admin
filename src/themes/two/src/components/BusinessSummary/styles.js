@@ -17,8 +17,9 @@ export const DetailsHeader = styled.div`
 
 export const BusinessName = styled.h1`
   color: ${props => props.theme.colors.headingColor};
-  font-size: 24px;
+  font-size: 20px;
   margin: 0px;
+  font-weight: 700;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;

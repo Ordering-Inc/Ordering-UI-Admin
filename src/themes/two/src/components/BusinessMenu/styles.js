@@ -29,7 +29,8 @@ export const Header = styled.div`
 `
 
 export const Title = styled.h1`
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: 700;
   color: ${props => props.theme.colors.headingColor};
   margin: 0px;
 `

@@ -8,6 +8,7 @@ import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
 import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
 import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
+import { BusinessPromotionList } from '../BusinessPromotionList'
 import { BusinessCustomFields } from '../BusinessCustomFields'
 import { MoreSidebarLayout } from '../MoreSidebarLayout'
 import {
@@ -158,6 +159,15 @@ export const BusinessDetailsUI = (props) => {
           )}
           {selectedItem === 'payment_methods' && (
             <BusinessPaymentMethods
+              business={businessState?.business}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+              handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'promotions' && (
+            <BusinessPromotionList
+              promotions={businessState?.business?.offers}
+              businessId={businessState?.business?.id}
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleSuccessUpdate={handleUpdateBusinessState}
