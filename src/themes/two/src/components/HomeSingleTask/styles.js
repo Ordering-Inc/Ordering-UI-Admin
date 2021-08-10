@@ -37,7 +37,9 @@ export const BoxNumberWrapper = styled.div`
   `}
 `
 
-export const StoreContent = styled.div``
+export const StoreContent = styled.div`
+    width: 100%;
+`
 
 export const TitleContainer = styled.div`
   display: flex;
@@ -67,4 +69,12 @@ export const Description = styled.p`
   color: #909BA9;
   margin-top: 7px;
   margin-bottom: 0;
+`
+
+export const ThatsIt = styled.p`
+  margin-bottom: 0;
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  color: ${props => props.theme?.colors.headingColor};
 `
