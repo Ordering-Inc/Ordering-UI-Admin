@@ -63,7 +63,7 @@ const HomeUI = (props) => {
             isShowVideo && (
               <VideoOnBoardingContainer>
                 <IframeWrapper
-                  dangerouslySetInnerHTML={{ __html: '<iframe src="https://www.youtube-nocookie.com/embed/WmyiXqGPvgg" style="width: 100%; height: 100%;" loading="lazy" allowfullscreen />' }}
+                  dangerouslySetInnerHTML={{ __html: '<iframe src="https://www.youtube-nocookie.com/embed/WmyiXqGPvgg" frameborder="0" loading="lazy" allowfullscreen />' }}
                 />
               </VideoOnBoardingContainer>
             )

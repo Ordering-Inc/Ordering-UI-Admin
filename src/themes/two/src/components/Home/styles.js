@@ -115,6 +115,11 @@ export const VideoOnBoardingContainer = styled.div`
 export const IframeWrapper = styled.div`
   width: 100%;
   height: 100%;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 export const FirstStoreToSellWrapper = styled.div`

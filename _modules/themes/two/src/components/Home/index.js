@@ -92,7 +92,7 @@ var HomeUI = function HomeUI(props) {
     }
   }, isShowVideo ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.DashSquare, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, null))), isShowVideo && /*#__PURE__*/_react.default.createElement(_styles.VideoOnBoardingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, {
     dangerouslySetInnerHTML: {
-      __html: '<iframe src="https://www.youtube-nocookie.com/embed/WmyiXqGPvgg" style="width: 100%; height: 100%;" loading="lazy" allowfullscreen />'
+      __html: '<iframe src="https://www.youtube-nocookie.com/embed/WmyiXqGPvgg" frameborder="0" loading="lazy" allowfullscreen />'
     }
   }))), /*#__PURE__*/_react.default.createElement(_HomeReportsUI.HomeReportsUI, _extends({}, props, {
     isShowVideo: isShowVideo

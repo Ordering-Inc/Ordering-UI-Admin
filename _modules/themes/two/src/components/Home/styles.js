@@ -76,7 +76,7 @@ var VideoOnBoardingContainer = _styledComponents.default.div(_templateObject14 |
 
 exports.VideoOnBoardingContainer = VideoOnBoardingContainer;
 
-var IframeWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n"])));
+var IframeWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n\n  iframe {\n    width: 100%;\n    height: 100%;\n  }\n"])));
 
 exports.IframeWrapper = IframeWrapper;
 
