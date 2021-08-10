@@ -243,6 +243,12 @@ Object.defineProperty(exports, "GoogleGpsButton", {
     return _GoogleGpsButton.GoogleGpsButton;
   }
 });
+Object.defineProperty(exports, "Home", {
+  enumerable: true,
+  get: function get() {
+    return _Home.Home;
+  }
+});
 Object.defineProperty(exports, "InputPhoneNumber", {
   enumerable: true,
   get: function get() {
@@ -693,6 +699,8 @@ var _DriversOnlineOfflineFilter = require("./src/components/DriversOnlineOffline
 var _ForgotPasswordForm = require("./src/components/ForgotPasswordForm");
 
 var _GoogleGpsButton = require("./src/components/GoogleGpsButton");
+
+var _Home = require("./src/components/Home");
 
 var _InputPhoneNumber = require("./src/components/InputPhoneNumber");
 

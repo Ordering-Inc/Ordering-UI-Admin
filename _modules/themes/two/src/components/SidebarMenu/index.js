@@ -156,15 +156,15 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.SidebarInnerContainer, {
     className: "d-flex flex-column"
   }, /*#__PURE__*/_react.default.createElement(_styles.SidebarHeader, {
-    className: "p-1",
+    className: "p-1"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
+    fluid: true,
     onClick: function onClick() {
       return handleGoToPage({
         page: 'home'
       });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
-    fluid: true,
+    },
     width: "150px",
     height: "45px"
   }), /*#__PURE__*/_react.default.createElement(_styles.BurgerButton, {
@@ -186,7 +186,10 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
-    eventKey: "0"
+    eventKey: "0",
+    active: location.pathname === '/home',
+    page: "home",
+    handleGoToPage: handleGoToPage
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1",
     active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers'
