@@ -11,7 +11,8 @@ export const PaymentMethodsContainer = styled.div`
   flex: 1;
   h1 {
     color: ${props => props.theme.colors.headingColor};
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 700;
   }
   @media (min-width: 576px) {
     padding: 20px;

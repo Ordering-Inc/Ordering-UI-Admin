@@ -66,7 +66,7 @@ export const InputGroupLeft = styled.div`
     margin-left: -7px;
     ${props => props.theme?.rtl && css`
         margin-right: -7px;
-        margin-left: 0
+        margin-left: 0;
     `}
   }
 `
@@ -87,7 +87,7 @@ export const InputGroupRight = styled(InputGroupLeft)`
     margin-right: -7px;
     ${props => props.theme?.rtl && css`
         margin-left: -7px;
-        margin-right: 0
+        margin-right: 0;
     `}
   }
 `

@@ -30,6 +30,7 @@ import personalization from './template/assets/images/personalization.svg'
  */
 import storeDummy from './template/assets/images/dummies/store.png'
 import nonOrders from './template/assets/images/dummies/nonOrders.svg'
+import promotionDummy from './template/assets/images/dummies/promotion.png'
 
 /**
  * icons
@@ -178,7 +179,8 @@ theme.images = {
   },
   dummies: {
     nonOrders: nonOrders,
-    businessLogo: storeDummy
+    businessLogo: storeDummy,
+    promotionDummy: promotionDummy
   }
 }
 
