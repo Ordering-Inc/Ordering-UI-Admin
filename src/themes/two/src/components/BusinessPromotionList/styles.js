@@ -167,9 +167,13 @@ export const AddNewPromotionText = styled.div`
 export const PromotionEditFormContainer = styled.div`
   flex: 1;
   position: relative;
+  transition: 0.3s;
 
   @media (min-width: 576px) {
     padding: 20px;
+  }
+
+  @media (min-width: 1000px) {
     ${props => props.theme?.rtl ? css`
       border-right: 1px solid ${props => props.theme.colors.borderColor};
     ` : css`

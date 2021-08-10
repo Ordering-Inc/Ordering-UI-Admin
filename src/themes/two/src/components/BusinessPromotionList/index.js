@@ -7,9 +7,11 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Switch } from '../../styles/Switch'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { BusinessPromotionGeneralForm } from '../BusinessPromotionGeneralForm'
 import { AutoScroll } from '../AutoScroll'
 import { Confirm } from '../Confirm'
+import { Modal } from '../Modal'
+import { BusinessPromotionGeneralForm } from '../BusinessPromotionGeneralForm'
+import { BusinessPromotionCustomFields } from '../BusinessPromotionCustomFields'
 
 import {
   MainContainer,
@@ -52,9 +54,7 @@ const BusinessPromotionListUI = (props) => {
 
   const handleOpenForm = (promotion) => {
     setCurPromotion(promotion)
-    if (Object.keys(promotion).length === 0) {
-      setSelectedTab('general')
-    }
+    setSelectedTab('general')
     setIsShowForm(true)
     setIsExtendExtraOpen(true)
   }
@@ -161,6 +161,7 @@ const BusinessPromotionListUI = (props) => {
         <>
           {width >= 1000 ? (
             <BusinessPromotion
+              isCloseButtonShow
               curPromotion={curPromotion}
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
@@ -175,10 +176,42 @@ const BusinessPromotionListUI = (props) => {
                   handleSuccessUpdate={handleSuccessUpdate}
                 />
               )}
+              {selectedTab === 'custom' && (
+                <BusinessPromotionCustomFields
+                  businessId={business?.id}
+                  offerId={curPromotion?.id}
+                />
+              )}
             </BusinessPromotion>
           ) : (
-            <>
-            </>
+            <Modal
+              width='80%'
+              open={isShowForm}
+              onClose={() => handleCloseForm()}
+            >
+              <BusinessPromotion
+                curPromotion={curPromotion}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+                handleCloseForm={handleCloseForm}
+                handleChangePromotionActiveState={handleChangePromotionActiveState}
+              >
+                {selectedTab === 'general' && (
+                  <BusinessPromotionGeneralForm
+                    promotion={curPromotion}
+                    business={business}
+                    handleCloseAddForm={handleCloseForm}
+                    handleSuccessUpdate={handleSuccessUpdate}
+                  />
+                )}
+                {selectedTab === 'custom' && (
+                  <BusinessPromotionCustomFields
+                    businessId={business?.id}
+                    offerId={curPromotion?.id}
+                  />
+                )}
+              </BusinessPromotion>
+            </Modal>
           )}
         </>
       )}
@@ -199,6 +232,7 @@ const BusinessPromotionListUI = (props) => {
 
 const BusinessPromotion = (props) => {
   const {
+    isCloseButtonShow,
     curPromotion,
     selectedTab,
     setSelectedTab,
@@ -210,14 +244,16 @@ const BusinessPromotion = (props) => {
 
   return (
     <PromotionEditFormContainer>
-      <CloseButtonWrapper>
-        <IconButton
-          color='black'
-          onClick={() => handleCloseForm()}
-        >
-          <XLg />
-        </IconButton>
-      </CloseButtonWrapper>
+      {isCloseButtonShow && (
+        <CloseButtonWrapper>
+          <IconButton
+            color='black'
+            onClick={() => handleCloseForm()}
+          >
+            <XLg />
+          </IconButton>
+        </CloseButtonWrapper>
+      )}
       {Object.keys(curPromotion).length > 0 && (
         <>
           <EditHeader>
