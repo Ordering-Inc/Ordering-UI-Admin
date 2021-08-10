@@ -140,3 +140,32 @@ export const FirstStoreToSellContent = styled.div`
     }
   }
 `
+
+export const OrderingHelpButton = styled.div`
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 12px;
+    color: ${props => props.theme?.colors.headingColor};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  button {
+    white-space: nowrap;
+    margin-left: 15px;
+    width: 105px;
+    min-width: 105px;
+    height: 44px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 15px;
+      margin-left: 0;
+    `}
+  }
+`

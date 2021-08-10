@@ -28,6 +28,7 @@ export const HomeReportsHeader = styled.div`
 
   button {
     border-radius: 7.6px;
+    height: 44px;
   }
 `
 
@@ -101,7 +102,7 @@ export const DetailsContent = styled.div`
     text-transform: uppercase;
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
-    margin: 0;
+    magin-bottom: 8px;
   }
 
   h2 {

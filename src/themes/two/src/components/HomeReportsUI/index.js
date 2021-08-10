@@ -19,7 +19,7 @@ import {
   Basket as OrdersIcon,
   Cash as SalesIcon
 } from 'react-bootstrap-icons'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent } from 'ordering-components-admin'
 
 export const HomeReportsUI = (props) => {
   const {
@@ -32,7 +32,12 @@ export const HomeReportsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [events] = useEvent()
   const [timeAxes, setTimeAxes] = useState([])
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+  }
 
   const generateData = () => {
     const values = []
@@ -153,7 +158,12 @@ export const HomeReportsUI = (props) => {
     <HomeReportsContainer isDirection={isShowVideo}>
       <HomeReportsHeader>
         <p>{t('REPORTS', 'Reports')}</p>
-        <Button color='lightPrimary'>{t('SEE_MORE_REPORTS', 'See more reports')}</Button>
+        <Button
+          color='lightPrimary'
+          onClick={() => handleGoToPage({ page: 'business_analytics' })}
+        >
+          {t('SEE_MORE_REPORTS', 'See more reports')}
+        </Button>
       </HomeReportsHeader>
       <ReportsContent isDirection={isShowVideo}>
         <OrdersAndSalesWrapper isDirection={isShowVideo}>

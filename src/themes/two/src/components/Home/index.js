@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Home as HomeController } from './naked'
-import { IconButton } from '../../styles/Buttons'
+import { IconButton, Button } from '../../styles/Buttons'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 import {
   List as MenuIcon,
@@ -21,7 +21,8 @@ import {
   VideoOnBoardingContainer,
   IframeWrapper,
   FirstStoreToSellWrapper,
-  FirstStoreToSellContent
+  FirstStoreToSellContent,
+  OrderingHelpButton
 } from './styles'
 
 const HomeUI = (props) => {
@@ -61,7 +62,9 @@ const HomeUI = (props) => {
           {
             isShowVideo && (
               <VideoOnBoardingContainer>
-                <IframeWrapper dangerouslySetInnerHTML={{ __html: '<iframe src="https://www.youtube-nocookie.com/embed/anVWESDOaZQ" style="width: 100%; height: 100%;" />' }} />
+                <IframeWrapper
+                  dangerouslySetInnerHTML={{ __html: '<iframe src="https://www.youtube-nocookie.com/embed/anVWESDOaZQ" style="width: 100%; height: 100%;" loading="lazy" allowfullscreen />' }}
+                />
               </VideoOnBoardingContainer>
             )
           }
@@ -92,6 +95,10 @@ const HomeUI = (props) => {
                   />
                 ))
               }
+              <OrderingHelpButton>
+                <p>{t('ORDERING_HELP_CONDITION_LINK', 'If you need anything else from your Ordering Team..')}</p>
+                <Button color='lightPrimary' borderRadius='7.6px'>{t('CLICK_HERE', 'Click here')}!</Button>
+              </OrderingHelpButton>
             </FirstStoreToSellContent>
           )
         }
