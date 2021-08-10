@@ -87,13 +87,30 @@ const HomeUI = (props) => {
           isShowStore && (
             <FirstStoreToSellContent>
               {
-                taskList?.data?.length > 0 && taskList?.data.map((task, i) => (
-                  <HomeSingleTask
-                    {...props}
-                    key={i}
-                    task={task}
-                  />
-                ))
+                taskList?.loading ? (
+                  <>
+                    {
+                      [...Array(5).keys()].map(i => (
+                        <HomeSingleTask
+                          key={i}
+                          isSkeleton
+                        />
+                      ))
+                    }
+                  </>
+                ) : (
+                  <>
+                    {
+                      taskList?.data?.length > 0 && taskList?.data.map((task, i) => (
+                        <HomeSingleTask
+                          {...props}
+                          key={i}
+                          task={task}
+                        />
+                      ))
+                    }
+                  </>
+                )
               }
               <OrderingHelpButton>
                 <p>{t('ORDERING_HELP_CONDITION_LINK', 'If you need anything else from your Ordering Team..')}</p>
