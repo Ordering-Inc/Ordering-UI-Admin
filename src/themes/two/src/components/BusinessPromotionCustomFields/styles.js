@@ -2,16 +2,8 @@ import styled from 'styled-components'
 
 export const WrapMetaFields = styled.div`
   box-sizing: border-box;
-  @media (min-width: 576px) {
-    padding: 20px;
-  }
 `
-export const MetaTitle = styled.p`
-  font-size: 20px;
-  font-weight: 700;
-  color: ${props => props.theme.colors?.headingColor};
-  margin-bottom: 30px;
-`
+
 export const MetaContainer = styled.div`
   display: flex;
   margin-bottom: 20px;
@@ -20,6 +12,11 @@ export const MetaContainer = styled.div`
   .meta_type {
     width: 25%;
     font-size: 14px;
+
+    .select {
+      border: none;
+      background-color: ${props => props.theme.colors.secundary};
+    }
   }
   .meta_key {
     width: 25%;
@@ -40,17 +37,18 @@ export const MetaContainer = styled.div`
 `
 export const MetaAddContainer = styled(MetaContainer)`
   input {
-    border: 1px solid #c2c2c2;
+    border: 1px solid ${props => props.theme.colors.borderColor};
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 6px 10px;
     outline: none;
-    font-size: 16px;
+    font-size: 14px;
     box-sizing: border-box;
     width: 100%;
+    height: 35px;
   }
 `
 export const RoundBorder = styled.div`
-  border: 1px solid #c2c2c2;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   border-radius: 5px;
   padding: 5px 10px;
   font-size: 14px;
