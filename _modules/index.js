@@ -249,6 +249,24 @@ Object.defineProperty(exports, "ConfigFileContext", {
     return _ConfigFileContext.ConfigFileContext;
   }
 });
+Object.defineProperty(exports, "InfoShareContext", {
+  enumerable: true,
+  get: function get() {
+    return _InfoShareContext.InfoShareContext;
+  }
+});
+Object.defineProperty(exports, "InfoShareProvider", {
+  enumerable: true,
+  get: function get() {
+    return _InfoShareContext.InfoShareProvider;
+  }
+});
+Object.defineProperty(exports, "useInfoShare", {
+  enumerable: true,
+  get: function get() {
+    return _InfoShareContext.useInfoShare;
+  }
+});
 Object.defineProperty(exports, "useOnlineStatus", {
   enumerable: true,
   get: function get() {
@@ -403,6 +421,8 @@ var _AdminLayout = require("./layouts/AdminLayout");
 var _ThemeContext = require("./contexts/ThemeContext");
 
 var _ConfigFileContext = require("./contexts/ConfigFileContext");
+
+var _InfoShareContext = require("./contexts/InfoShareContext");
 
 var _useOnlineStatus = require("./hooks/useOnlineStatus");
 
