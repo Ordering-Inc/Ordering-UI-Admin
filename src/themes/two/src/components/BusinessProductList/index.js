@@ -155,13 +155,13 @@ export const BusinessProductList = (props) => {
           </ProductListContainer>
           <ProductListBottom>
             {
-              !businessState.loading && (
+              !businessState.loading && businessState?.business?.categories?.length > 0 && (
                 <AddProductBtn onClick={() => setIsAddProduct(true)}>{t('ADD_NEW_PRODUCT', 'Add new product')}</AddProductBtn>
               )
             }
 
             {
-              !businessState.loading && (
+              !businessState.loading && categoryState?.products?.length > 0 && (
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
@@ -174,13 +174,9 @@ export const BusinessProductList = (props) => {
           </ProductListBottom>
 
           {
-            !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
+            !businessState.loading && businessState?.business?.categories?.length === 0 && (
               <WrapperNotFound>
-                <NotFoundSource
-                  content={!searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
-                  btnTitle={!searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters')}
-                  onClickButton={() => !searchValue ? handleSearchRedirect() : handleChangeSearch('')}
-                />
+                {t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.')}
               </WrapperNotFound>
             )
           }
