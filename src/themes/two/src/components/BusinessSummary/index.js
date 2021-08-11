@@ -102,7 +102,8 @@ export const BusinessSummary = (props) => {
           </LeftHeader>
           <RightHeader>
             <IconButton
-              onClick={() => handleSelectedItem('support')}
+              disabled
+              // onClick={() => handleSelectedItem('support')}
             >
               <LifePreserver />
             </IconButton>

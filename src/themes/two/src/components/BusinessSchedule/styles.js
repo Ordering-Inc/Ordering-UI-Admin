@@ -81,6 +81,11 @@ export const TimeSelect = styled.select`
   -webkit-appearance: none;
   -ms-progress-appearance: none;
   color: ${props => props.theme.colors.lightGray};
+
+  option:focus {
+    min-width: 150px;
+    width: auto;
+  }
 `
 
 export const TimeSelectContainer = styled.div`
