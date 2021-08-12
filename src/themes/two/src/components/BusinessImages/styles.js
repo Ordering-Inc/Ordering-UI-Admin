@@ -4,16 +4,7 @@ export const Container = styled.div`
 `
 
 export const BusinessImagesContainer = styled.div`
-  display: flex;
   width: 100%;
-  overflow-x: auto;
-  @media (min-width: 1025px) {
-    overflow-x: hidden;
-  }
-`
-
-export const InnerContainer = styled.div`
-  display: flex;
 `
 
 export const Tab = styled.div`

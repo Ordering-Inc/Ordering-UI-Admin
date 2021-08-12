@@ -1,12 +1,11 @@
 import React from 'react'
 import { UserTypeFilter as UserTypeFilterController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
-import { AutoScroll } from '../AutoScroll'
+import { DragScroll } from '../DragScroll'
 import MdClose from '@meronex/icons/ios/MdClose'
 
 import {
-  UserTypeFilterContainer,
-  InnerContainer
+  UserTypeFilterContainer
 } from './styles'
 
 export const UserTypeFilterUI = (props) => {
@@ -22,20 +21,18 @@ export const UserTypeFilterUI = (props) => {
 
   return (
     <UserTypeFilterContainer>
-      <InnerContainer>
-        <AutoScroll innerScroll scrollId='users_subFilter'>
-          {userTypes && userTypes.length > 0 && userTypes.map(type => (
-            <Button
-              key={type.value}
-              color={currentTypesSelected.includes(type.value) ? 'primary' : 'secundaryDark'}
-              onClick={() => handleChangeUserRole(type.value)}
-            >
-              {type.key}
-              {currentTypesSelected.includes(type.value) && <MdClose />}
-            </Button>
-          ))}
-        </AutoScroll>
-      </InnerContainer>
+      <DragScroll>
+        {userTypes && userTypes.length > 0 && userTypes.map(type => (
+          <Button
+            key={type.value}
+            color={currentTypesSelected.includes(type.value) ? 'primary' : 'secundaryDark'}
+            onClick={() => handleChangeUserRole(type.value)}
+          >
+            {type.key}
+            {currentTypesSelected.includes(type.value) && <MdClose />}
+          </Button>
+        ))}
+      </DragScroll>
     </UserTypeFilterContainer>
   )
 }
