@@ -11,7 +11,10 @@ export const IconButton = styled.button`
   align-items: center;
   justify-content: center;
   transition: all .2s ease-in;
-
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   > svg {
     width: 20px;
     height: 20px;

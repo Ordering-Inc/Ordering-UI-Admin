@@ -6,14 +6,9 @@ export const CategoryProductsContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
-  margin-top: 60px;
 
   @media print {
     display: none;
-  }
-
-  @media (min-width: 760px) {
-    margin-top: 0px;
   }
 `
 
@@ -83,6 +78,7 @@ export const CategoryProductsContent = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 50px;
+  min-height: calc(100% - 150px);
 
   @media (max-width: 768px) {
     flex-direction: column;

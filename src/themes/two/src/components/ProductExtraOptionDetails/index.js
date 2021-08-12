@@ -12,6 +12,8 @@ import { Alert, Confirm } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { Modal } from '../Modal'
+import { PlusCircle } from 'react-bootstrap-icons'
+import { IconButton } from '../../styles/Buttons'
 
 import {
   MainContainer,
@@ -64,7 +66,9 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleChangeConditionalSubOption,
 
     business,
-    extra
+    extra,
+
+    handleAddOption
   } = props
 
   const [, t] = useLanguage()
@@ -105,10 +109,10 @@ const ProductExtraOptionDetailsUI = (props) => {
     }
   }
 
-  const handleChangeSubOptionInput = (e, subOption) => {
+  const handleChangeSubOptionInput = (e, subOptionId) => {
     const regexp = /^[0-9.\b]+$/
     if (e.target.value === '' || regexp.test(e.target.value)) {
-      handleChangeInput(e, subOption.id)
+      handleChangeInput(e, subOptionId)
     }
   }
 
@@ -127,7 +131,7 @@ const ProductExtraOptionDetailsUI = (props) => {
     if (Object.keys(editErrors).length) {
       const errorContent = []
       if (editErrors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
-      if (editErrors?.price) errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'))
+      if (editErrors?.price) errorContent.push(t('PRICE_REQUIRED', 'The price is required.'))
       if (errorContent.length) {
         setAlertState({
           open: true,
@@ -332,7 +336,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                       ? changesState?.changes?.price ?? subOption?.price
                       : subOption?.price
                   }
-                  onChange={(e) => handleChangeSubOptionInput(e, subOption)}
+                  onChange={(e) => handleChangeSubOptionInput(e, subOption.id)}
                 />
               </InputWrapper>
               {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
@@ -345,7 +349,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                         ? changesState?.changes?.half_price ?? subOption?.half_price
                         : subOption?.half_price ?? ''
                     }
-                    onChange={(e) => handleChangeSubOptionInput(e, subOption)}
+                    onChange={(e) => handleChangeSubOptionInput(e, subOption.id)}
                   />
                 </InputWrapper>
               )}
@@ -359,7 +363,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                         ? changesState?.changes?.max ?? subOption?.max
                         : subOption?.max
                     }
-                    onChange={(e) => handleChangeSubOptionInput(e, subOption)}
+                    onChange={(e) => handleChangeSubOptionInput(e, subOption.id)}
                   />
                 </InputWrapper>
               )}
@@ -385,6 +389,94 @@ const ProductExtraOptionDetailsUI = (props) => {
             </RightSubOptionContent>
           </SubOptionContainer>
         ))}
+
+        <SubOptionContainer className='add-product-option'>
+          <LeftSubOptionContent>
+            <SubOptionImage
+              onClick={() => handleClickSubOptionImage('add_suboption_image')}
+            >
+              <ExamineClick
+                onFiles={files => handleSubOptionFiles(files, null)}
+                childId='add_suboption_image'
+                accept='image/png, image/jpeg, image/jpg'
+                disabled={optionState.loading}
+              >
+                <DragAndDrop
+                  onDrop={dataTransfer => handleSubOptionFiles(dataTransfer.files, 'add_suboption_image')}
+                  accept='image/png, image/jpeg, image/jpg'
+                  disabled={optionState.loading}
+                >
+                  {
+                    (changesState?.result?.image && editSubOptionId === null)
+                      ? (<img src={changesState?.result?.image} alt='sub option image' loading='lazy' />)
+                      : (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
+                  }
+                  <UploadImageIconContainer>
+                    <UploadImageIcon small>
+                      <BiImage />
+                    </UploadImageIcon>
+                  </UploadImageIconContainer>
+                </DragAndDrop>
+              </ExamineClick>
+            </SubOptionImage>
+            <InputWrapper>
+              <label>{t('NAME', 'Name')}</label>
+              <Input
+                name='name'
+                autoComplete='off'
+                value={
+                  ((editSubOptionId === null) && changesState?.changes?.name) || ''
+                }
+                onChange={(e) => handleChangeInput(e, null)}
+              />
+            </InputWrapper>
+          </LeftSubOptionContent>
+          <RightSubOptionContent>
+            <InputWrapper>
+              <label>{t('PRICE', 'Price')}</label>
+              <Input
+                name='price'
+                value={
+                  ((editSubOptionId === null) && changesState?.changes?.price) || ''
+                }
+                onChange={(e) => handleChangeSubOptionInput(e, null)}
+              />
+            </InputWrapper>
+            {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
+              <InputWrapper>
+                <label>{t('HALF_PRICE', 'Half price')}</label>
+                <Input
+                  name='half_price'
+                  value={
+                    ((editSubOptionId === null) && changesState?.changes?.half_price) || ''
+                  }
+                  onChange={(e) => handleChangeSubOptionInput(e, null)}
+                />
+              </InputWrapper>
+            )}
+            {(typeof settingChangeState?.changes?.allow_suboption_quantity !== 'undefined' ? settingChangeState?.changes?.allow_suboption_quantity : optionState?.option?.allow_suboption_quantity) && (
+              <InputWrapper>
+                <label>{t('MAX', 'Max')}</label>
+                <Input
+                  name='max'
+                  value={
+                    ((editSubOptionId === null) && changesState?.changes?.max) || ''
+                  }
+                  onChange={(e) => handleChangeSubOptionInput(e, null)}
+                />
+              </InputWrapper>
+            )}
+            <ActionsContainer>
+              <IconButton
+                color='primary'
+                onClick={() => handleAddOption()}
+              >
+                <PlusCircle />
+              </IconButton>
+            </ActionsContainer>
+          </RightSubOptionContent>
+        </SubOptionContainer>
+
       </ModifierOptionsContainer>
       <Alert
         title={t('ORDERING', 'Ordering')}

@@ -13,7 +13,6 @@ export const ListContent = styled.div`
 export const ProductListContainer = styled.div`
   margin: 0;
   max-height: calc(100vh - 410px);
-  min-height: 200px;
   overflow: auto;
 
   @media (min-width: 768px) {
@@ -83,10 +82,10 @@ export const BusinessProductListTable = styled.table`
 `
 
 export const WrapperNotFound = styled.div`
-  height: 500px;
-  > div{
-    height: 100%;
-  }
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+  margin: 20px;
 `
 
 export const AddProductBtn = styled.div`

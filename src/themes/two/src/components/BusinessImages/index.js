@@ -5,13 +5,12 @@ import Skeleton from 'react-loading-skeleton'
 import { bytesConverter } from '../../../../../utils'
 import { Alert, Confirm } from '../Confirm'
 
-import { AutoScroll } from '../AutoScroll'
+import { DragScroll } from '../DragScroll'
 import MdClose from '@meronex/icons/md/MdClose'
 
 import {
   Container,
   BusinessImagesContainer,
-  InnerContainer,
   Tab,
   BusinessNewImage,
   SkeletonWrapper,
@@ -135,24 +134,22 @@ const BusinessImagesUI = (props) => {
           </ExamineClick>
         </BusinessNewImage>
         <BusinessImagesContainer>
-          <InnerContainer>
-            <AutoScroll innerScroll scrollId='business_images'>
-              {businessPhotos.map(photo => (
-                <Tab
-                  key={photo.id}
+          <DragScroll>
+            {businessPhotos.map(photo => (
+              <Tab
+                key={photo.id}
+              >
+                <img
+                  src={photo.file}
+                />
+                <DeleteButton
+                  onClick={() => handleDeleteClick(photo.id)}
                 >
-                  <img
-                    src={photo.file}
-                  />
-                  <DeleteButton
-                    onClick={() => handleDeleteClick(photo.id)}
-                  >
-                    <MdClose />
-                  </DeleteButton>
-                </Tab>
-              ))}
-            </AutoScroll>
-          </InnerContainer>
+                  <MdClose />
+                </DeleteButton>
+              </Tab>
+            ))}
+          </DragScroll>
         </BusinessImagesContainer>
       </Container>
       <Alert

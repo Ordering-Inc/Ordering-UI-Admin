@@ -3,9 +3,10 @@ import { useLanguage } from 'ordering-components-admin'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { SingleBusinessProduct } from '../SingleBusinessProduct'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
-import { BusinessProductCreator } from '../BusinessProductCreator'
 import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
 import { Pagination } from '../Pagination'
+import { SideBar } from '../SideBar'
+import { BusinessProductAddForm } from '../BusinessProductAddForm'
 
 import {
   ListContent,
@@ -28,7 +29,8 @@ export const BusinessProductList = (props) => {
     handleSearchRedirect,
     handleChangeSearch,
     handleOpenProductDetails,
-    isParentProductAdd
+    isParentProductAdd,
+    handleParentProductAdd
   } = props
   const [, t] = useLanguage()
 
@@ -147,29 +149,19 @@ export const BusinessProductList = (props) => {
                       />
                     ))
                   }
-                  {
-                    (isAddProduct || isParentProductAdd) && (
-                      <BusinessProductCreator
-                        {...props}
-                        allowColumns={allowColumns}
-                        setIsAddProduct={setIsAddProduct}
-                        business={businessState?.business}
-                      />
-                    )
-                  }
                 </>
               )}
             </BusinessProductListTable>
           </ProductListContainer>
           <ProductListBottom>
             {
-              !businessState.loading && (
+              !businessState.loading && businessState?.business?.categories?.length > 0 && (
                 <AddProductBtn onClick={() => setIsAddProduct(true)}>{t('ADD_NEW_PRODUCT', 'Add new product')}</AddProductBtn>
               )
             }
 
             {
-              !businessState.loading && (
+              !businessState.loading && categoryState?.products?.length > 0 && (
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
@@ -182,13 +174,9 @@ export const BusinessProductList = (props) => {
           </ProductListBottom>
 
           {
-            !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
+            !businessState.loading && businessState?.business?.categories?.length === 0 && (
               <WrapperNotFound>
-                <NotFoundSource
-                  content={!searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
-                  btnTitle={!searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters')}
-                  onClickButton={() => !searchValue ? handleSearchRedirect() : handleChangeSearch('')}
-                />
+                {t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.')}
               </WrapperNotFound>
             )
           }
@@ -227,6 +215,24 @@ export const BusinessProductList = (props) => {
               )
             }
           </>
+        )
+      }
+      {
+        (isAddProduct || isParentProductAdd) && (
+          <SideBar
+            sidebarId='productAddForm'
+            open={isAddProduct || isParentProductAdd}
+            onClose={() => {
+              setIsAddProduct(false)
+              handleParentProductAdd && handleParentProductAdd(false)
+            }}
+          >
+            <BusinessProductAddForm
+              {...props}
+              business={businessState?.business}
+              setIsAddProduct={setIsAddProduct}
+            />
+          </SideBar>
         )
       }
     </ListContent>

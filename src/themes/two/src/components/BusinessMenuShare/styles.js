@@ -11,7 +11,6 @@ export const HeaderItem = styled.div`
     display: flex;
   }
   svg {
-    cursor: pointer;
     color: ${props => props.theme.colors?.headingColor};
     font-size: 20px;
   }

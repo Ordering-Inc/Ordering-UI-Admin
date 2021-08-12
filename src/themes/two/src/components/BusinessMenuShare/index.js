@@ -66,11 +66,11 @@ const BusinessMenuShareUI = (props) => {
     <div style={{ position: 'relative' }}>
       <HeaderItem
         ref={referenceElement}
-        onClick={props.onClick}
       >
         <Button
           color='secundary'
           borderRadius='5px'
+          onClick={props.onClick}
           disabled={Object.keys(menu).length === 0}
         >
           <Share />

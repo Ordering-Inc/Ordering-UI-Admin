@@ -1,18 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const UserDetailsMenuContainer = styled.div`
-  display: flex;
   width: 100%;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  overflow-x: auto;
   margin-top: 15px;
-  @media (min-width: 992px) {
-    overflow-x: hidden;
-  }
-`
-
-export const InnerContainer = styled.div`
-  display: flex;
 `
 
 export const Tab = styled.div`

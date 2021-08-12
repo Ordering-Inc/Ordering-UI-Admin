@@ -3,15 +3,6 @@ import styled, { css } from 'styled-components'
 export const TypeContainer = styled.div`
   width: 100%;
   padding: 20px 0;
-  display: flex;
-  overflow-x: auto;
-  @media (min-width: 1025px) {
-    overflow-x: hidden;
-  }
-`
-
-export const InnerContainer = styled.div`
-  display: flex;
   button {
     font-size: 14px;
     ${props => props.theme?.rtl ? css`

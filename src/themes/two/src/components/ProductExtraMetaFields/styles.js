@@ -22,6 +22,7 @@ export const MetaContainer = styled.div`
     width: 25%;
     font-size: 14px;
     .select {
+      border: none;
       background: ${props => props.theme.colors.secundary};
     }
   }
@@ -49,7 +50,9 @@ export const MetaContainer = styled.div`
 `
 export const MetaAddContainer = styled(MetaContainer)`
   input {
-    border: 1px solid #c2c2c2;
+    font-size: 14px;
+    height: 35px;
+    border: 1px solid ${props => props.theme.colors.borderColor};
     border-radius: 5px;
     padding: 5px 10px;
     outline: none;
