@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _businessState$busine, _businessState$busine2;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4;
 
   var categorySelected = props.categorySelected,
       searchValue = props.searchValue,
@@ -187,7 +187,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     color: "lightPrimary",
     onClick: function onClick() {
       return handleProductAdd(true);
-    }
+    },
+    disabled: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.categories) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.length) === 0
   }, t('ADD_PRODUCT', 'Add product')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
     search: searchValue,

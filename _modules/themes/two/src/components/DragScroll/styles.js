@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tab = exports.UserDetailsMenuContainer = void 0;
+exports.ArrowButton = exports.ScrollBoxContainer = exports.ScrollBoxWrapper = exports.ScrollBox = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -17,27 +17,21 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var UserDetailsMenuContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  border-bottom: 1px solid ", ";\n  margin-top: 15px;\n"])), function (props) {
-  return props.theme.colors.borderColor;
+var ScrollBox = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  overflow: hidden;\n"])));
+
+exports.ScrollBox = ScrollBox;
+
+var ScrollBoxWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  overflow-y: hidden;\n  overflow-x: scroll;\n  -ms-overflow-style: none; /* IE */\n  overflow: -moz-scrollbars-none; /* Firefox */\n\n  &::-webkit-scrollbar {\n   display: none; /* Chrome and Safari */\n }\n"])));
+
+exports.ScrollBoxWrapper = ScrollBoxWrapper;
+
+var ScrollBoxContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  height: 100%;\n  display: inline-flex;\n"])));
+
+exports.ScrollBoxContainer = ScrollBoxContainer;
+
+var ArrowButton = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: none;\n  @media (min-width: 1025px) {\n    position: absolute;\n    cursor: pointer;\n    z-index: 10;\n    width: 25px;\n    min-width: 25px;\n    height: 25px;\n    border-radius: 50%;\n    background: #D9D9D9;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border: 1px solid #D9D9D9;\n    opacity: 0.8;\n\n    ", "\n\n    svg {\n      color: #000000;\n      font-size: 24px;\n    }\n  }\n"])), function (_ref) {
+  var isRight = _ref.isRight;
+  return isRight && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      right: 0px;\n    "])));
 });
 
-exports.UserDetailsMenuContainer = UserDetailsMenuContainer;
-
-var Tab = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 10px 0px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n  font-size: 12px;\n\n  ", "\n\n  ", "\n"])), function (props) {
-  var _props$theme$colors;
-
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.lightGray;
-}, function (props) {
-  var _props$theme;
-
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "])));
-}, function (_ref) {
-  var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    color: ", ";\n    border-bottom: 2px solid ", ";\n    font-weight: 500;\n    font-size: 14px;\n  "])), function (props) {
-    return props.theme.colors.headingColor;
-  }, function (props) {
-    return props.theme.colors.headingColor;
-  });
-});
-
-exports.Tab = Tab;
+exports.ArrowButton = ArrowButton;

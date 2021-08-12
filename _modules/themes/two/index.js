@@ -165,6 +165,12 @@ Object.defineProperty(exports, "DeliveryTypeSelector", {
     return _DeliveryTypeSelector.DeliveryTypeSelector;
   }
 });
+Object.defineProperty(exports, "DragScroll", {
+  enumerable: true,
+  get: function get() {
+    return _DragScroll.DragScroll;
+  }
+});
 Object.defineProperty(exports, "DriverMapMarkerAndInfo", {
   enumerable: true,
   get: function get() {
@@ -673,6 +679,8 @@ var _DeliveriesManager = require("./src/components/DeliveriesManager");
 var _DeliveryDashboard = require("./src/components/DeliveryDashboard");
 
 var _DeliveryTypeSelector = require("./src/components/DeliveryTypeSelector");
+
+var _DragScroll = require("./src/components/DragScroll");
 
 var _DriverMapMarkerAndInfo = require("./src/components/DriverMapMarkerAndInfo");
 

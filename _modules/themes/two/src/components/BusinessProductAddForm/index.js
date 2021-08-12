@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessProductCreator = void 0;
+exports.BusinessProductAddForm = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -17,17 +17,15 @@ var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
 
-var _orderingComponentsAdmin = require("ordering-components-admin");
-
-var _Switch = require("../../styles/Switch");
-
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
-var _styles = require("./styles");
+var _Inputs = require("../../styles/Inputs");
 
-var _styles2 = require("../SingleBusinessCategory/styles");
+var _Buttons = require("../../styles/Buttons");
+
+var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,21 +51,19 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var BusinessProductCreatorUI = function BusinessProductCreatorUI(props) {
+var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes6;
 
-  var allowColumns = props.allowColumns,
-      formState = props.formState,
-      handleChangeCheckBox = props.handleChangeCheckBox,
+  var formState = props.formState,
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
-      handlechangeImage = props.handlechangeImage,
-      setIsAddProduct = props.setIsAddProduct,
-      handleParentProductAdd = props.handleParentProductAdd;
+      handlechangeImage = props.handlechangeImage;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var productImageInputRef = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -77,11 +73,8 @@ var BusinessProductCreatorUI = function BusinessProductCreatorUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var conatinerRef = (0, _react.useRef)(null);
-  var ProductTypeImgRef = (0, _react.useRef)(null);
-
   var handleClickImage = function handleClickImage() {
-    ProductTypeImgRef.current.click();
+    productImageInputRef.current.click();
   };
 
   var handleFiles = function handleFiles(files) {
@@ -117,23 +110,6 @@ var BusinessProductCreatorUI = function BusinessProductCreatorUI(props) {
     });
   };
 
-  var CloseAddBusinessTypeForm = function CloseAddBusinessTypeForm(e) {
-    var _conatinerRef$current;
-
-    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) !== null && _conatinerRef$current !== void 0 && _conatinerRef$current.contains(e.target));
-
-    if (outsideDropdown) {
-      if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 1 && !(formState !== null && formState !== void 0 && formState.loading)) {
-          handleUpdateClick();
-        } else {
-          setIsAddProduct(false);
-          handleParentProductAdd && handleParentProductAdd(false);
-        }
-      }
-    }
-  };
-
   (0, _react.useEffect)(function () {
     var _formState$result;
 
@@ -146,12 +122,6 @@ var BusinessProductCreatorUI = function BusinessProductCreatorUI(props) {
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
-  (0, _react.useEffect)(function () {
-    document.addEventListener('click', CloseAddBusinessTypeForm);
-    return function () {
-      return document.removeEventListener('click', CloseAddBusinessTypeForm);
-    };
-  }, [formState]);
   (0, _react.useEffect)(function () {
     var _formState$result3;
 
@@ -170,64 +140,60 @@ var BusinessProductCreatorUI = function BusinessProductCreatorUI(props) {
       _reactToastify.toast.dark(content, toastConfigure);
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CreateBusinessProductContainer, {
-    ref: conatinerRef
-  }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
-    className: "business"
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     onClick: function onClick() {
       return handleClickImage();
-    },
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
+    }
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
     onFiles: function onFiles(files) {
       return handleFiles(files);
     },
     childRef: function childRef(e) {
-      ProductTypeImgRef.current = e;
+      productImageInputRef.current = e;
     },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
+    disabled: formState.loading
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
     onDrop: function onDrop(dataTransfer) {
       return handleFiles(dataTransfer.files);
     },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
+    disabled: formState.loading
   }, formState !== null && formState !== void 0 && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.images) ? /*#__PURE__*/_react.default.createElement("div", null) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.images) && /*#__PURE__*/_react.default.createElement("img", {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.images,
     alt: "business type image",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles.ProductInput, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRODUCT_NAME', 'Product name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     name: "name",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     autoComplete: "off"
-  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.GeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInput, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "number",
     name: "price",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.price) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_PRICE', 'Write price'),
     autoComplete: "off"
-  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.GeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInput, {
-    type: "text",
+  })), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+    rows: 4,
     name: "description",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.description) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_DESCRIPTION', 'Write description'),
     autoComplete: "off"
-  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
-    className: "business_enable_control"
-  }, formState !== null && formState !== void 0 && formState.changes.enabled ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: (formState === null || formState === void 0 ? void 0 : formState.changes.enabled) || false,
-    onChange: handleChangeCheckBox
-  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, {
-    className: "business_actions"
-  }, /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('CREATE_PRODUCT', 'Create Product'),
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    type: "submit",
+    color: "primary",
+    borderRadius: "7.6px",
+    disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 1,
+    onClick: function onClick() {
+      return Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 1 && handleUpdateClick();
+    }
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('ORDERING', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -241,12 +207,12 @@ var BusinessProductCreatorUI = function BusinessProductCreatorUI(props) {
   }));
 };
 
-var BusinessProductCreator = function BusinessProductCreator(props) {
-  var businessProductCreatorProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessProductCreatorUI
+var BusinessProductAddForm = function BusinessProductAddForm(props) {
+  var businessProductAddProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: BusinessProductAddFormUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessProductCreator, businessProductCreatorProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessProductCreator, businessProductAddProps);
 };
 
-exports.BusinessProductCreator = BusinessProductCreator;
+exports.BusinessProductAddForm = BusinessProductAddForm;

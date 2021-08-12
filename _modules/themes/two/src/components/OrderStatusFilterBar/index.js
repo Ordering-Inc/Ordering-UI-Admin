@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -42,10 +42,7 @@ var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterContainer, {
     className: "order_status_filter"
-  }, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "orderStatus"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'pending',
     onClick: function onClick() {
       return changeSelectedOrderStatus('pending');
@@ -65,7 +62,7 @@ var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
     onClick: function onClick() {
       return changeSelectedOrderStatus('cancelled');
     }
-  }, t('CANCELLED', 'cancelled'))))));
+  }, t('CANCELLED', 'cancelled')))));
 };
 
 exports.OrderStatusFilterBar = OrderStatusFilterBar;

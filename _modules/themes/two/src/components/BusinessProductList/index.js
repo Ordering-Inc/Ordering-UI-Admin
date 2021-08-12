@@ -17,11 +17,13 @@ var _SingleBusinessProduct = require("../SingleBusinessProduct");
 
 var _ColumnAllowSettingPopover = require("../ColumnAllowSettingPopover");
 
-var _BusinessProductCreator = require("../BusinessProductCreator");
-
 var _BusinessSpreadSheet = require("../BusinessSpreadSheet");
 
 var _Pagination = require("../Pagination");
+
+var _SideBar = require("../SideBar");
+
+var _BusinessProductAddForm = require("../BusinessProductAddForm");
 
 var _styles = require("./styles");
 
@@ -58,6 +60,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductList = function BusinessProductList(props) {
+  var _businessState$busine, _businessState$busine2, _categoryState$produc, _businessState$busine3, _businessState$busine4;
+
   var productDetailsId = props.productDetailsId,
       categoryState = props.categoryState,
       viewMethod = props.viewMethod,
@@ -67,7 +71,8 @@ var BusinessProductList = function BusinessProductList(props) {
       handleSearchRedirect = props.handleSearchRedirect,
       handleChangeSearch = props.handleChangeSearch,
       handleOpenProductDetails = props.handleOpenProductDetails,
-      isParentProductAdd = props.isParentProductAdd;
+      isParentProductAdd = props.isParentProductAdd,
+      handleParentProductAdd = props.handleParentProductAdd;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -191,27 +196,17 @@ var BusinessProductList = function BusinessProductList(props) {
       business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
       handleOpenProductDetails: handleOpenProductDetails
     }));
-  }), (isAddProduct || isParentProductAdd) && /*#__PURE__*/_react.default.createElement(_BusinessProductCreator.BusinessProductCreator, _extends({}, props, {
-    allowColumns: allowColumns,
-    setIsAddProduct: setIsAddProduct,
-    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
     onClick: function onClick() {
       return setIsAddProduct(true);
     }
-  }, t('ADD_NEW_PRODUCT', 'Add new product')), !businessState.loading && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  }, t('ADD_NEW_PRODUCT', 'Add new product')), !businessState.loading && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,
     defaultPageSize: productsPerPage,
     handleChangePageSize: handleChangePageSize
-  })), !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
-    btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
-    onClickButton: function onClickButton() {
-      return !searchValue ? handleSearchRedirect() : handleChangeSearch('');
-    }
-  }))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListSpreadContainer, null, categoryState.loading || businessState.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
+  })), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.categories) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.'))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListSpreadContainer, null, categoryState.loading || businessState.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, {
       key: i,
       isSkeleton: true,
@@ -226,6 +221,16 @@ var BusinessProductList = function BusinessProductList(props) {
     onClickButton: function onClickButton() {
       return !searchValue ? handleSearchRedirect() : handleChangeSearch('');
     }
+  }))), (isAddProduct || isParentProductAdd) && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+    sidebarId: "productAddForm",
+    open: isAddProduct || isParentProductAdd,
+    onClose: function onClose() {
+      setIsAddProduct(false);
+      handleParentProductAdd && handleParentProductAdd(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessProductAddForm.BusinessProductAddForm, _extends({}, props, {
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    setIsAddProduct: setIsAddProduct
   }))));
 };
 

@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -54,10 +54,7 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
     key: 'videos',
     content: t('VIDEOS', 'Videos')
   }];
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingListConatiner, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "info_list"
-  }, listOptions.map(function (option) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingListConatiner, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, listOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: option.key,
       active: selectedInfoItem === option.key,
@@ -65,7 +62,7 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
         return handleSelectInfoItem(option.key);
       }
     }, option.content);
-  })))));
+  }))));
 };
 
 exports.BusinessInfoSettingList = BusinessInfoSettingList;

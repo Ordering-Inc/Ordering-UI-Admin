@@ -13,9 +13,9 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _AutoScroll = require("../AutoScroll");
-
 var _Buttons = require("../../styles/Buttons");
+
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -73,13 +73,9 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     setBusinessTypes(types);
   }, [types]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
-    id: "container"
-  }, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, {
+    id: "container",
     isSkeleton: loading
-  }, loading && /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "business_type"
-  }, _toConsumableArray(Array(6)).map(function (_, i) {
+  }, loading && /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, _toConsumableArray(Array(6)).map(function (_, i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i,
       height: 30,
@@ -88,10 +84,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         margin: '0 5px'
       }
     });
-  })), !loading && !error && types && types.length > 0 && /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "business_type"
-  }, types.map(function (type, i) {
+  })), !loading && !error && types && types.length > 0 && /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, types.map(function (type, i) {
     return type.enabled && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: type.id,
       color: type.id === currentTypeSelected ? 'primary' : 'secundaryDark',
@@ -99,7 +92,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
         return handleChangeCategory(type.id);
       }
     }, t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name));
-  })))));
+  }))));
 };
 
 var BusinessTypeFilter = function BusinessTypeFilter(props) {

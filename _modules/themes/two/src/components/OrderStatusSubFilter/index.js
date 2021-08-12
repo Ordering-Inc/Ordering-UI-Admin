@@ -11,7 +11,7 @@ var _Buttons = require("../../styles/Buttons");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -180,10 +180,7 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.SubFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "".concat(ordersStatusGroup + 'subFilter')
-  }, statues[ordersStatusGroup].map(function (status) {
+  return /*#__PURE__*/_react.default.createElement(_styles.SubFilterContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, statues[ordersStatusGroup].map(function (status) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: status.key,
       color: selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.pending.includes(status.key) || selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.inProgress.includes(status.key) || selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.completed.includes(status.key) || selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.cancelled.includes(status.key) ? 'primary' : 'secundaryDark',
@@ -191,7 +188,7 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
         return handleChange(status.key);
       }
     }, status.value, ((selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled.includes(status.key))) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  }))));
+  })));
 };
 
 exports.OrderStatusSubFilter = OrderStatusSubFilter;

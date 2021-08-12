@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -35,10 +35,7 @@ var UserActiveStateFilter = function UserActiveStateFilter(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserActiveStateFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "userActiveState"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserActiveStateFilterContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedUserActiveState,
     onClick: function onClick() {
       return handleChangeUserActiveState();
@@ -48,7 +45,7 @@ var UserActiveStateFilter = function UserActiveStateFilter(props) {
     onClick: function onClick() {
       return handleChangeUserActiveState();
     }
-  }, t('INACTIVE', 'Inactive'))))));
+  }, t('INACTIVE', 'Inactive')))));
 };
 
 exports.UserActiveStateFilter = UserActiveStateFilter;

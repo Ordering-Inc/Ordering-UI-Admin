@@ -71,7 +71,7 @@ var ProductPrice = _styledComponents.default.p(_templateObject10 || (_templateOb
 
 exports.ProductPrice = ProductPrice;
 
-var ProductDescription = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  color: ", ";\n  margin: 25px 0;\n"])), function (props) {
+var ProductDescription = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: ", ";\n  margin: 25px 0;\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
@@ -83,7 +83,7 @@ var ProductConfigsContainer = _styledComponents.default.div(_templateObject12 ||
 
 exports.ProductConfigsContainer = ProductConfigsContainer;
 
-var ProductConfigOption = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 10px 15px;\n  display: flex;\n  justify-content: space-between;\n  color: ", ";\n  border-bottom: 1px solid ", ";\n\n  &:hover {\n    background-color: ", ";\n  }\n  \n  ", "\n\n  svg {\n    font-size: 20px;\n  }\n"])), function (props) {
+var ProductConfigOption = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 10px 15px;\n  display: flex;\n  justify-content: space-between;\n  color: ", ";\n  border-bottom: 1px solid ", ";\n\n  &:hover {\n    background-color: ", ";\n  }\n  \n  ", "\n\n  span {\n    font-size: 14px;\n  }\n  svg {\n    font-size: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.borderColor;

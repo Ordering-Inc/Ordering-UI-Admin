@@ -19,7 +19,7 @@ var _utils = require("../../../../../utils");
 
 var _Confirm = require("../Confirm");
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
@@ -181,10 +181,7 @@ var BusinessImagesUI = function BusinessImagesUI(props) {
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, {
     isImage: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.file
-  }, /*#__PURE__*/_react.default.createElement(_styles.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Darg and Drop'))))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessImagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "business_images"
-  }, businessPhotos.map(function (photo) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Darg and Drop'))))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessImagesContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, businessPhotos.map(function (photo) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: photo.id
     }, /*#__PURE__*/_react.default.createElement("img", {
@@ -194,7 +191,7 @@ var BusinessImagesUI = function BusinessImagesUI(props) {
         return handleDeleteClick(photo.id);
       }
     }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)));
-  }))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS', 'Business'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

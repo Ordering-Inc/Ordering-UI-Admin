@@ -41,7 +41,7 @@ var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5
 
 exports.Header = Header;
 
-var OptionsTable = _styledComponents.default.table(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n  th, td {\n    font-size: 14px;\n    color: ", ";\n    padding: 12px 0;\n    &:last-child {\n      width: 160px;\n    }\n\n    > input {\n      width: 60px;\n      padding: 5px;\n      ", "\n      border: none;\n      outline: none;\n      &:focus {\n        border: 1px dashed ", ";\n      }\n    }\n  }\n\n  th {\n    font-weight: 700;\n  }\n\n  thead, tbody {\n    border-bottom: 1px solid #E9ECEF;\n  }\n  tbody.add_option {\n    border-top: 13px solid #E9ECEF;\n  }\n"])), function (props) {
+var OptionsTable = _styledComponents.default.table(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n  th, td {\n    font-size: 12px;\n    color: ", ";\n    padding: 12px 0;\n\n    &:last-child {\n      width: 160px;\n    }\n\n    > input {\n      width: 60px;\n      padding: 5px;\n      ", "\n      border: none;\n      outline: none;\n      &:focus {\n        border: 1px dashed ", ";\n      }\n    }\n  }\n\n  th {\n    font-weight: 700;\n  }\n\n  thead, tbody {\n    border-bottom: 1px solid ", ";\n  }\n  tbody.add_option {\n    border-top: 13px solid ", ";\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme3;
@@ -49,6 +49,10 @@ var OptionsTable = _styledComponents.default.table(_templateObject8 || (_templat
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n      "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n      "])));
 }, function (props) {
   return props.theme.colors.lightGray;
+}, function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.borderColor;
 });
 
 exports.OptionsTable = OptionsTable;
@@ -84,7 +88,7 @@ var EnableWrapper = _styledComponents.default.div(_templateObject17 || (_templat
 
 exports.EnableWrapper = EnableWrapper;
 
-var DropDownWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  ", "\n  button {\n    background: #F8F9FA !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n  }\n\n  > div {\n    > div {\n      border: 1px solid #E9ECEF;\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n      border-radius: 8px;\n\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"])), function (props) {
+var DropDownWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  ", "\n  button {\n    background: #F8F9FA !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n  }\n\n  > div {\n    > div {\n      border: 1px solid #E9ECEF;\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n      border-radius: 8px;\n\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n\n  .dropdown-item {\n    font-size: 14px;\n  }\n"])), function (props) {
   var _props$theme5;
 
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    margin-right: 35px;\n    "]))) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    margin-left: 35px;\n  "])));

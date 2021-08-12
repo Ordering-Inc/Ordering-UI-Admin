@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -48,10 +48,7 @@ var AnalyticsStatusFilterBar = function AnalyticsStatusFilterBar(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "orderStatus"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: (filterList === null || filterList === void 0 ? void 0 : filterList.lapse) === 'today',
     onClick: function onClick() {
       return changeSelectedAnalyticsStatus('today');
@@ -71,7 +68,7 @@ var AnalyticsStatusFilterBar = function AnalyticsStatusFilterBar(props) {
     onClick: function onClick() {
       return changeSelectedAnalyticsStatus('last_30_days');
     }
-  }, t('LAST_30_DAYS', 'Last 30 days'))))));
+  }, t('LAST_30_DAYS', 'Last 30 days')))));
 };
 
 exports.AnalyticsStatusFilterBar = AnalyticsStatusFilterBar;

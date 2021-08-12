@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -51,10 +51,7 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
     key: 'personalization',
     content: t('PERSONALIZATION', 'Personalization')
   }];
-  return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsMenuContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "userDetailsMenu"
-  }, menuItems.map(function (menu) {
+  return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsMenuContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, menuItems.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: menu.key,
       active: menu.key === currentMenuSelected,
@@ -62,7 +59,7 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
         return handleChangeMenu(menu.key);
       }
     }, menu.content);
-  }))));
+  })));
 };
 
 exports.UserDetailsMenu = UserDetailsMenu;

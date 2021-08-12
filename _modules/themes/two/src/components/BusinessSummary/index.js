@@ -111,9 +111,8 @@ var BusinessSummary = function BusinessSummary(props) {
     defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.enabled,
     onChange: handleChangeActiveBusiness
   })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
-    onClick: function onClick() {
-      return handleSelectedItem('support');
-    }
+    disabled: true // onClick={() => handleSelectedItem('support')}
+
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {

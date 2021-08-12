@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CategoryProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 20px;\n  box-sizing: border-box;\n  transition: all 0.5s;\n  overflow: hidden;\n  margin-top: 60px;\n\n  @media print {\n    display: none;\n  }\n\n  @media (min-width: 760px) {\n    margin-top: 0px;\n  }\n"])));
+var CategoryProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 20px;\n  box-sizing: border-box;\n  transition: all 0.5s;\n  overflow: hidden;\n\n  @media print {\n    display: none;\n  }\n"])));
 
 exports.CategoryProductsContainer = CategoryProductsContainer;
 
@@ -45,7 +45,7 @@ var ActionsGroup = _styledComponents.default.div(_templateObject6 || (_templateO
 
 exports.ActionsGroup = ActionsGroup;
 
-var CategoryProductsContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 50px;\n\n  @media (max-width: 768px) {\n    flex-direction: column;\n  }\n"])));
+var CategoryProductsContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 50px;\n  min-height: calc(100% - 150px);\n\n  @media (max-width: 768px) {\n    flex-direction: column;\n  }\n"])));
 
 exports.CategoryProductsContent = CategoryProductsContent;
 

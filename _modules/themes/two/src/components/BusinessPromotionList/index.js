@@ -134,7 +134,10 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessPromotionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
-    color: "lightPrimary"
+    color: "lightPrimary",
+    onClick: function onClick() {
+      return handleOpenForm({});
+    }
   }, t('ADD_PROMOTION', 'Add promotion'))), /*#__PURE__*/_react.default.createElement(_styles.PromotionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", null, t('DATE_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LayoutThreeColumns, null))))), promotionListState.promotions.map(function (promotion) {
     var _theme$images$dummies;
 

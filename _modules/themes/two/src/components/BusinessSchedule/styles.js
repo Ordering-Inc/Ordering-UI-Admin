@@ -68,7 +68,7 @@ var TimeSection = _styledComponents.default.div(_templateObject11 || (_templateO
 
 exports.TimeSection = TimeSection;
 
-var TimeSelect = _styledComponents.default.select(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  border: none;\n  background-color: transparent;\n  outline: none;\n  cursor: pointer;\n  -moz-appearance: none;\n  -webkit-appearance: none;\n  -ms-progress-appearance: none;\n  color: ", ";\n"])), function (props) {
+var TimeSelect = _styledComponents.default.select(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  border: none;\n  background-color: transparent;\n  outline: none;\n  cursor: pointer;\n  -moz-appearance: none;\n  -webkit-appearance: none;\n  -ms-progress-appearance: none;\n  color: ", ";\n\n  option:focus {\n    min-width: 150px;\n    width: auto;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 

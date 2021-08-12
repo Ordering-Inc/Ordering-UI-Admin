@@ -11,7 +11,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
 
@@ -34,10 +34,7 @@ var UserTypeFilterUI = function UserTypeFilterUI(props) {
     handleChangeUserType && handleChangeUserType(type);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.UserTypeFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "users_subFilter"
-  }, userTypes && userTypes.length > 0 && userTypes.map(function (type) {
+  return /*#__PURE__*/_react.default.createElement(_styles.UserTypeFilterContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, userTypes && userTypes.length > 0 && userTypes.map(function (type) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: type.value,
       color: currentTypesSelected.includes(type.value) ? 'primary' : 'secundaryDark',
@@ -45,7 +42,7 @@ var UserTypeFilterUI = function UserTypeFilterUI(props) {
         return handleChangeUserRole(type.value);
       }
     }, type.key, currentTypesSelected.includes(type.value) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  }))));
+  })));
 };
 
 exports.UserTypeFilterUI = UserTypeFilterUI;

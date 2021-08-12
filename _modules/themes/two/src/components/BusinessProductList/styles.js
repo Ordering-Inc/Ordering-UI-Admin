@@ -21,7 +21,7 @@ var ListContent = _styledComponents.default.div(_templateObject || (_templateObj
 
 exports.ListContent = ListContent;
 
-var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 410px);\n  min-height: 200px;\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 290px);\n  }\n  \n  @media (min-width: 576px) {\n    ", "\n  }\n"])), function (props) {
+var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 410px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 290px);\n  }\n  \n  @media (min-width: 576px) {\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n    "])));
 });
 
@@ -43,7 +43,7 @@ var BusinessProductListTable = _styledComponents.default.table(_templateObject8 
 
 exports.BusinessProductListTable = BusinessProductListTable;
 
-var WrapperNotFound = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: 500px;\n  > div{\n    height: 100%;\n  }\n"])));
+var WrapperNotFound = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  text-align: center;\n  font-weight: 500;\n  margin: 20px;\n"])));
 
 exports.WrapperNotFound = WrapperNotFound;
 

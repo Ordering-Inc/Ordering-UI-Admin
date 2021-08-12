@@ -117,11 +117,11 @@ var BusinessMenuShareUI = function BusinessMenuShareUI(props) {
       position: 'relative'
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
-    ref: referenceElement,
-    onClick: props.onClick
+    ref: referenceElement
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secundary",
     borderRadius: "5px",
+    onClick: props.onClick,
     disabled: Object.keys(menu).length === 0
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Share, null))), open && /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, {
     ref: popperElement

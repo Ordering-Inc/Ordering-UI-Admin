@@ -25,7 +25,7 @@ var MetaTitle = _styledComponents.default.p(_templateObject2 || (_templateObject
 
 exports.MetaTitle = MetaTitle;
 
-var MetaContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 20px;\n  color: ", ";\n\n  .meta_type {\n    width: 25%;\n    font-size: 14px;\n    .select {\n      background: ", ";\n    }\n  }\n  .meta_key {\n    width: 25%;\n    padding: 0 10px;\n    box-sizing: border-box;\n  }\n\n  .meta_value {\n    flex: 1;\n    word-break: break-all;\n    display: flex;\n    column-gap: 10px;\n    > div {\n      width: 100%;\n    }\n    svg {\n      font-size: 20px;\n      color: ", ";\n      cursor: pointer;\n    }\n  }\n\n"])), function (props) {
+var MetaContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 20px;\n  color: ", ";\n\n  .meta_type {\n    width: 25%;\n    font-size: 14px;\n    .select {\n      border: none;\n      background: ", ";\n    }\n  }\n  .meta_key {\n    width: 25%;\n    padding: 0 10px;\n    box-sizing: border-box;\n  }\n\n  .meta_value {\n    flex: 1;\n    word-break: break-all;\n    display: flex;\n    column-gap: 10px;\n    > div {\n      width: 100%;\n    }\n    svg {\n      font-size: 20px;\n      color: ", ";\n      cursor: pointer;\n    }\n  }\n\n"])), function (props) {
   var _props$theme$colors2;
 
   return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
@@ -38,7 +38,9 @@ var MetaContainer = _styledComponents.default.div(_templateObject3 || (_template
 });
 
 exports.MetaContainer = MetaContainer;
-var MetaAddContainer = (0, _styledComponents.default)(MetaContainer)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  input {\n    border: 1px solid #c2c2c2;\n    border-radius: 5px;\n    padding: 5px 10px;\n    outline: none;\n    font-size: 16px;\n    box-sizing: border-box;\n    width: 100%;\n  }\n\n  button {\n    margin-top: 6px;\n    svg {\n      color: ", " !important;\n    }\n  }\n"])), function (props) {
+var MetaAddContainer = (0, _styledComponents.default)(MetaContainer)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  input {\n    font-size: 14px;\n    height: 35px;\n    border: 1px solid ", ";\n    border-radius: 5px;\n    padding: 5px 10px;\n    outline: none;\n    font-size: 16px;\n    box-sizing: border-box;\n    width: 100%;\n  }\n\n  button {\n    margin-top: 6px;\n    svg {\n      color: ", " !important;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
   return props.theme.colors.primary;
 });
 exports.MetaAddContainer = MetaAddContainer;

@@ -13,7 +13,7 @@ var _Buttons = require("../../styles/Buttons");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
 
-var _AutoScroll = require("../AutoScroll");
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -52,10 +52,7 @@ var AnalyticsStatusSubFilterUI = function AnalyticsStatusSubFilterUI(props) {
     }));
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.SubFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    innerScroll: true,
-    scrollId: "analyticsSubFilter"
-  }, appIdList.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, _toConsumableArray(Array(5).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_styles.SubFilterContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, appIdList.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 70,
       key: i,
@@ -69,7 +66,7 @@ var AnalyticsStatusSubFilterUI = function AnalyticsStatusSubFilterUI(props) {
         return changeAnalyticsSubStatus(appId);
       }
     }, appId, (filterList === null || filterList === void 0 ? void 0 : filterList.app_id) === appId && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  }))));
+  })));
 };
 
 exports.AnalyticsStatusSubFilterUI = AnalyticsStatusSubFilterUI;
