@@ -175,6 +175,7 @@ export const SubMenu = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  border-radius: 8px;
 
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};

@@ -24,6 +24,7 @@ import { UsersList } from './pages/UsersList'
 import { BusinessesList } from './pages/BusinessesList'
 import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
+import { AdvancedSettings } from './pages/AdvancedSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
@@ -165,6 +166,13 @@ export const App = () => {
                       {
                         auth
                           ? <OperationSettings />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/settings/advanced'>
+                      {
+                        auth
+                          ? <AdvancedSettings />
                           : <Redirect to='/login' />
                       }
                     </Route>

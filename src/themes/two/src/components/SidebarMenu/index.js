@@ -102,6 +102,12 @@ export const SidebarMenu = (props) => {
       title: t('OPERATION_SETTINGS', 'Operation settings'),
       pageName: 'operationSettings',
       url: '/settings/operation'
+    },
+    {
+      id: 3,
+      title: t('ADVANCED_SETTINGS', 'Advanced settings'),
+      pageName: 'advancedSettings',
+      url: '/settings/advanced'
     }
   ]
 
@@ -326,7 +332,8 @@ export const SidebarMenu = (props) => {
                         eventKey='5'
                         active={
                           location.pathname === '/settings/basic' ||
-                          location.pathname === '/settings/operation'
+                          location.pathname === '/settings/operation' ||
+                          location.pathname === '/settings/advanced'
                         }
                       >
                         <GearIcon />
