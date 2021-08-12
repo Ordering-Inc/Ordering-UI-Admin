@@ -54,9 +54,10 @@ export const OptionsTable = styled.table`
   width: 100%;
   overflow: auto;
   th, td {
-    font-size: 14px;
+    font-size: 12px;
     color: ${props => props.theme.colors.headingColor};
     padding: 12px 0;
+
     &:last-child {
       width: 160px;
     }
@@ -82,10 +83,10 @@ export const OptionsTable = styled.table`
   }
 
   thead, tbody {
-    border-bottom: 1px solid #E9ECEF;
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   }
   tbody.add_option {
-    border-top: 13px solid #E9ECEF;
+    border-top: 13px solid ${props => props.theme.colors.borderColor};
   }
 `
 
@@ -202,5 +203,9 @@ export const DropDownWrapper = styled.div`
         color: #E63757;
       }
     }
+  }
+
+  .dropdown-item {
+    font-size: 14px;
   }
 `

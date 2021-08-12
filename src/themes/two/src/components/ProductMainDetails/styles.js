@@ -83,6 +83,7 @@ export const ProductPrice = styled.p`
 `
 
 export const ProductDescription = styled.p`
+  font-size: 14px;
   color: ${props => props.theme.colors.headingColor};
   margin: 25px 0;
 `
@@ -116,6 +117,9 @@ export const ProductConfigOption = styled.div`
     border-top: 1px solid ${props => props.theme.colors.primary};
   `}
 
+  span {
+    font-size: 14px;
+  }
   svg {
     font-size: 20px;
   }

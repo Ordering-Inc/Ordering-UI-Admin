@@ -108,9 +108,9 @@ const BusinessScheduleUI = (props) => {
                         <TimeSelectContainer>
                           <TimeSelect
                             value={
-                              // formState?.result?.result
-                              //   ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].open.hour
-                                formState?.changes?.schedule
+                              formState?.result?.result
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].open.hour
+                                : formState?.changes?.schedule
                                   ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open.hour
                                   : laps.open.hour
                             }
