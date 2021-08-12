@@ -1,10 +1,9 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AutoScroll } from '../AutoScroll'
+import { DragScroll } from '../DragScroll'
 
 import {
   UserDetailsMenuContainer,
-  InnerContainer,
   Tab
 } from './styles'
 
@@ -24,19 +23,17 @@ export const UserDetailsMenu = (props) => {
   ]
   return (
     <UserDetailsMenuContainer>
-      <InnerContainer>
-        <AutoScroll innerScroll scrollId='userDetailsMenu'>
-          {menuItems.map(menu => (
-            <Tab
-              key={menu.key}
-              active={menu.key === currentMenuSelected}
-              onClick={() => handleChangeMenu(menu.key)}
-            >
-              {menu.content}
-            </Tab>
-          ))}
-        </AutoScroll>
-      </InnerContainer>
+      <DragScroll>
+        {menuItems.map(menu => (
+          <Tab
+            key={menu.key}
+            active={menu.key === currentMenuSelected}
+            onClick={() => handleChangeMenu(menu.key)}
+          >
+            {menu.content}
+          </Tab>
+        ))}
+      </DragScroll>
     </UserDetailsMenuContainer>
   )
 }

@@ -139,6 +139,7 @@ const BusinessProductsListingUI = (props) => {
               borderRadius='8px'
               color='lightPrimary'
               onClick={() => handleProductAdd(true)}
+              disabled={businessState?.business?.categories?.length === 0}
             >
               {t('ADD_PRODUCT', 'Add product')}
             </Button>

@@ -1,17 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const OrderStatusFilterContainer = styled.div`
-  display: flex;
-  width: 100%;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  overflow-x: auto;
-  @media (min-width: 1025px) {
-    overflow-x: hidden;
-  }
-`
-
-export const InnerContainer = styled.div`
-  display: flex;
 `
 
 export const Tab = styled.div`

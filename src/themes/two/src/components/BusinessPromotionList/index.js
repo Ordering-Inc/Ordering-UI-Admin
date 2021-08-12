@@ -84,6 +84,7 @@ const BusinessPromotionListUI = (props) => {
           <Button
             borderRadius='8px'
             color='lightPrimary'
+            onClick={() => handleOpenForm({})}
           >
             {t('ADD_PROMOTION', 'Add promotion')}
           </Button>

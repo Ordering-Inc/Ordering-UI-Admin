@@ -1,9 +1,8 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { AutoScroll } from '../AutoScroll'
+import { DragScroll } from '../DragScroll'
 import {
   SettingListConatiner,
-  InnerContainer,
   Tab
 } from './styles'
 
@@ -24,19 +23,17 @@ export const BusinessInfoSettingList = (props) => {
   return (
     <>
       <SettingListConatiner>
-        <InnerContainer>
-          <AutoScroll innerScroll scrollId='info_list'>
-            {listOptions.map(option => (
-              <Tab
-                key={option.key}
-                active={selectedInfoItem === option.key}
-                onClick={() => handleSelectInfoItem(option.key)}
-              >
-                {option.content}
-              </Tab>
-            ))}
-          </AutoScroll>
-        </InnerContainer>
+        <DragScroll>
+          {listOptions.map(option => (
+            <Tab
+              key={option.key}
+              active={selectedInfoItem === option.key}
+              onClick={() => handleSelectInfoItem(option.key)}
+            >
+              {option.content}
+            </Tab>
+          ))}
+        </DragScroll>
       </SettingListConatiner>
     </>
   )

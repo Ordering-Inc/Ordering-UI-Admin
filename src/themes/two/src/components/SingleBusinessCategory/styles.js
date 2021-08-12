@@ -123,6 +123,10 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
+
+  .dropdown-item {
+    font-size: 14px;
+  }
 `
 
 export const DraggableContainer = styled.div`

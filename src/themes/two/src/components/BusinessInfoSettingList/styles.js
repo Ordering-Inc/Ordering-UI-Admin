@@ -3,15 +3,6 @@ import styled, { css } from 'styled-components'
 export const SettingListConatiner = styled.div`
   width: 100%;
   padding: 20px 0;
-  display: flex;
-  overflow-x: auto;
-  @media (min-width: 1025px) {
-    overflow-x: hidden;
-  }
-`
-
-export const InnerContainer = styled.div`
-  display: flex;
   border-bottom: 1px solid #E9ECEF;
 `
 
