@@ -117,6 +117,7 @@ export const ActionsContainer = styled.div`
   margin-top: 27px;
   padding-top: 6px;
   padding-bottom: 6px;
+  width: 150px;
   
   ${({ primary }) => !primary && css`
     margin-top: 0px;
@@ -163,11 +164,6 @@ export const EnableWrapper = styled.div`
 `
 
 export const DropDownWrapper = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 35px;
-    ` : css`
-    margin-left: 35px;
-  `}
   button {
     background: #F8F9FA !important;
     border: none;
@@ -191,6 +187,10 @@ export const DropDownWrapper = styled.div`
         color: #E63757;
       }
     }
+  }
+
+  .dropdown-item {
+    font-size: 14px;
   }
 `
 export const OptionSettings = styled.div`
