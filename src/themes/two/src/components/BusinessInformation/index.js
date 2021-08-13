@@ -7,6 +7,7 @@ import { BusinessLocation } from '../BusinessLocation'
 import { BusinessDescription } from '../BusinessDescription'
 import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
+import { BusinessBrands } from '../BusinessBrands'
 import {
   InfoConatiner
 } from './styles'
@@ -50,6 +51,14 @@ export const BusinessInformation = (props) => {
             setFormState={setFormState}
             handleUpdateBusinessClick={handleUpdateBusinessClick}
             setBusinessTypes={setBusinessTypes}
+          />
+        )}
+        {selectedInfoItem === 'brand' && (
+          <BusinessBrands
+            business={business}
+            formState={formState}
+            setFormState={setFormState}
+            handleUpdateBusinessClick={handleUpdateBusinessClick}
           />
         )}
         {selectedInfoItem === 'location' && (
