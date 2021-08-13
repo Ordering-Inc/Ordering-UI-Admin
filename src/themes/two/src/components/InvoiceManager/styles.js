@@ -35,3 +35,72 @@ export const HeaderContainer = styled.div`
     }
   }
 `
+
+export const InvoiceListContainer = styled.div`
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export const InvoiceItemContainer = styled.div`
+  cursor: pointer;
+  display: flex;
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 7.6px;
+  width: 100%;
+  transition: background 0.3s;
+
+  &: hover {
+    background: ${props => props.theme?.colors.lightPrimary};
+  }
+
+  @media (min-width: 768px) {
+    width: 45%;
+    ${props => props.theme?.rtl ? css`
+    margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+  }
+
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
+`
+
+export const IconWrapper = styled.div`
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  background: #F8F9FA;
+  border-radius: 7.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 15px;
+  ` : css`
+    margin-right: 15px;
+  `}
+
+  svg {
+    font-size: 24px;
+    color: ${props => props.theme?.colors.secundaryLight};
+  }
+`
+
+export const InvoiceListDetailsWrapper = styled.div`
+  h2 {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 12px;
+    color: ${props => props.theme?.colors.lightGray};
+    margin: 0;
+  }
+`

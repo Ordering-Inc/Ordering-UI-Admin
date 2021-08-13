@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
@@ -7,7 +7,6 @@ export const InvoiceManager = (props) => {
   const {
     UIComponent
   } = props
-  const [invoiceList, setInvoiceList ] = useState({ loading: false, invoices: [], error: null })
 
   return (
     <>
