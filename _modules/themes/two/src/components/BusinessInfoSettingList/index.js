@@ -42,6 +42,9 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
     key: 'type',
     content: t('TYPE', 'Type')
   }, {
+    key: 'brand',
+    content: t('BRAND', 'Brand')
+  }, {
     key: 'location',
     content: t('LOCATION', 'Location')
   }, {
