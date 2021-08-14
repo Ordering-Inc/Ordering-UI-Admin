@@ -10,8 +10,7 @@ import 'react-daterange-picker/dist/css/react-calendar.css'
 
 export const AnalyticsCalendar = (props) => {
   const {
-    filterList,
-    handleChangeFilterList
+    handleChangeDate
   } = props
   const [, t] = useLanguage()
   const [dates, setDates] = useState(null)
@@ -28,6 +27,11 @@ export const AnalyticsCalendar = (props) => {
     }
   }
 
+  const handleOpenCalendar = (evt) => {
+    evt.preventDefault()
+    setIsShowCalendar(true)
+  }
+
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
     return () => window.removeEventListener('mouseup', handleClickOutside)
@@ -35,13 +39,13 @@ export const AnalyticsCalendar = (props) => {
 
   useEffect(() => {
     if (dates) {
-      handleChangeFilterList({ ...filterList, lapse: `${dates?.start?.format('YYYY-MM-DD')},${dates?.end?.format('YYYY-MM-DD')}` })
+      handleChangeDate(dates?.start?.format('YYYY-MM-DD'), dates?.end?.format('YYYY-MM-DD'))
     }
   }, [dates])
 
   return (
     <>
-      <Button onClick={() => setIsShowCalendar(true)}>
+      <Button onClick={handleOpenCalendar}>
         <FiCalendar />
         {
           dates ? `${dates?.start?.format('YYYY-MM-DD')}~${dates?.end?.format('YYYY-MM-DD')}` : t('SELECT_DATE_RANGE', 'Select Date Range')
