@@ -15,6 +15,7 @@ export const InvoiceBusiness = (props) => {
 
   const [businessList, setBusinessList] = useState({ loading: false, businesses: [], error: null })
   const [payMethodsList, setPayMethodsList] = useState({ loading: false, data: [], error: null })
+  const [orderType, setOrderType] = useState(null)
   const [businessInvocing, setBusinessInvocing] = useState({
     type: 'charge',
     from: '',
@@ -121,6 +122,8 @@ export const InvoiceBusiness = (props) => {
           businessList={businessList}
           invocing={businessInvocing}
           payMethodsList={payMethodsList}
+          orderType={orderType}
+          handleChangeOrderType={setOrderType}
           handleChangeInvocing={setBusinessInvocing}
           handleChangePayMethods={handleChangePayMethods}
         />

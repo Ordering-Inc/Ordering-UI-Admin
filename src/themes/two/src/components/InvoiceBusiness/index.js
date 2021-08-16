@@ -24,7 +24,19 @@ const InvoiceBusinessUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+
+  const orderTypeList = [
+    { value: 1, name: t('DELIVERY', 'Delivery'), enabled: false },
+    { value: 2, name: t('PICKUP', 'Pickup'), enabled: false },
+    { value: 3, name: t('EAT_IN', 'Eat in'), enabled: false },
+    { value: 4, name: t('CURBSIDE', 'Curbside'), enabled: false },
+    { value: 5, name: t('DRIVE_THRU', 'Drive thru'), enabled: false },
+    { value: 6, name: t('INCLUDE_CANCELED_ORDERS', 'Include canceled orders'), enabled: false },
+    { value: 7, name: t('INCLUDE_DISCOUNTS_BY_PLATFORM', 'Include discounts done by platform'), enabled: false }
+  ]
+
   const [selectedDetailType, setSelectedDetailType] = useState('general')
+  const [orderTypes, setOrderTypes] = useState(orderTypeList)
 
   const changeSelectedAnalyticsStatus = (detailType) => {
     window.scrollTo(0, 0)
@@ -78,7 +90,13 @@ const InvoiceBusinessUI = (props) => {
         selectedDetailType === 'payment_methods' && <InvoicePaymentMethods {...props} />
       }
       {
-        selectedDetailType === 'order_type' && <InvoiceOrderType />
+        selectedDetailType === 'order_type' && (
+          <InvoiceOrderType
+            {...props}
+            orderTypes={orderTypes}
+            handleChangeOrderTypes={setOrderTypes}
+          />
+        )
       }
     </InvoiceDriversContainer>
   )
