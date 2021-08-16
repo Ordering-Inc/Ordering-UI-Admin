@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { InvoiceDrivers as InvoiceDriversController } from './naked'
+import { InvoiceBusiness as InvoiceBusinessController } from './naked'
 import { DragScroll } from '../DragScroll'
 import {
   InvoiceDriversContainer,
@@ -18,7 +18,7 @@ import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePaymentMethods } from '../InvoicePaymentMethods'
 import { InvoiceOrderType } from '../InvoiceOrdertype'
 
-const InvoiceDriversUI = (props) => {
+const InvoiceBusinessUI = (props) => {
   const {
     actionSidebar
   } = props
@@ -34,7 +34,7 @@ const InvoiceDriversUI = (props) => {
   return (
     <InvoiceDriversContainer>
       <DetailsHeader>
-        <h2>{t('DRIVERS_INVOICE', 'Drivers invoice')}</h2>
+        <h2>{t('BUSINESS_INVOICE', 'Business invoice')}</h2>
         <HeaderActionBtnWrapper>
           <IconButton>
             <Download />
@@ -62,6 +62,13 @@ const InvoiceDriversUI = (props) => {
           >
             {t('PAYMENT_METHODS', 'Payment methods')}
           </Tab>
+
+          <Tab
+            active={selectedDetailType === 'order_type'}
+            onClick={() => changeSelectedAnalyticsStatus('order_type')}
+          >
+            {t('ORDER_TYPE', 'Order type')}
+          </Tab>
         </DragScroll>
       </DetailsList>
       {
@@ -77,11 +84,11 @@ const InvoiceDriversUI = (props) => {
   )
 }
 
-export const InvoiceDrivers = (props) => {
-  const invoiceDriversProps = {
+export const InvoiceBusiness = (props) => {
+  const invoiceBusinessProps = {
     ...props,
-    propsToFetch: ['id', 'name'],
-    UIComponent: InvoiceDriversUI
+    propsToFetch: ['name'],
+    UIComponent: InvoiceBusinessUI
   }
-  return <InvoiceDriversController {...invoiceDriversProps} />
+  return <InvoiceBusinessController {...invoiceBusinessProps} />
 }

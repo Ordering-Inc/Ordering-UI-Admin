@@ -4,7 +4,7 @@ import PropTypes, { string } from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 import { useApi, useSession } from 'ordering-components-admin'
 
-export const InvoiceDrivers = (props) => {
+export const InvoiceBusiness = (props) => {
   const {
     UIComponent,
     propsToFetch
@@ -12,58 +12,55 @@ export const InvoiceDrivers = (props) => {
 
   const [ordering] = useApi()
   const [{ token, loading }] = useSession()
-  const [driverList, setDriverList] = useState({ loading: false, drivers: [], error: null })
+
+  const [businessList, setBusinessList] = useState({ loading: false, businesses: [], error: null })
   const [payMethodsList, setPayMethodsList] = useState({ loading: false, data: [], error: null })
-  const [driverInvocing, setDriverInvocing] = useState({
+  const [businessInvocing, setBusinessInvocing] = useState({
+    type: 'charge',
     from: '',
     to: '',
-    driver: '',
+    business: '',
     cancelled: false,
+    discounts: false,
     notes: '',
     percentage_fee: 0,
     fixed_fee: 0,
-    percentage_delivery_price: 0,
-    percentage_driver_tip: 0,
     tax: 0,
     misc_amount: 0,
     misc_description: ''
   })
 
-  /**
-   * Method to update payMethod List
-   */
   const handleChangePayMethods = (payMethods) => {
     setPayMethodsList({ ...payMethodsList, data: payMethods })
   }
 
   /**
-   * Method to get drivers from API
+   * Method to get business list
    */
-  const getDrivers = async () => {
+  const getBusiness = async () => {
     try {
-      setDriverList({
-        ...driverList,
+      setBusinessList({
+        ...businessList,
         loading: true
       })
-      const where = [{ attribute: 'level', value: '4' }]
-      const { content: { error, result, pagination } } = await ordering.users().asDashboard().select(propsToFetch).where(where).get()
+      const { content: { error, result, pagination } } = await ordering.businesses().asDashboard().select(propsToFetch).get()
       if (!error) {
-        setDriverList({
-          ...driverList,
+        setBusinessList({
+          ...businessList,
           loading: false,
-          drivers: result,
+          businesses: result,
           pagination
         })
       } else {
-        setDriverList({
-          ...driverList,
+        setBusinessList({
+          ...businessList,
           loading: false,
           error: result
         })
       }
     } catch (error) {
-      setDriverList({
-        ...driverList,
+      setBusinessList({
+        ...businessList,
         loading: false,
         error: [error || error?.toString() || error?.message]
       })
@@ -113,7 +110,7 @@ export const InvoiceDrivers = (props) => {
   }
 
   useEffect(() => {
-    getDrivers()
+    getBusiness()
     getPaymentMethod()
   }, [])
   return (
@@ -121,10 +118,10 @@ export const InvoiceDrivers = (props) => {
       {UIComponent && (
         <UIComponent
           {...props}
-          driverList={driverList}
-          invocing={driverInvocing}
+          businessList={businessList}
+          invocing={businessInvocing}
           payMethodsList={payMethodsList}
-          handleChangeInvocing={setDriverInvocing}
+          handleChangeInvocing={setBusinessInvocing}
           handleChangePayMethods={handleChangePayMethods}
         />
       )}
@@ -132,7 +129,7 @@ export const InvoiceDrivers = (props) => {
   )
 }
 
-InvoiceDrivers.propTypes = {
+InvoiceBusiness.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -163,7 +160,7 @@ InvoiceDrivers.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-InvoiceDrivers.defaultProps = {
+InvoiceBusiness.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

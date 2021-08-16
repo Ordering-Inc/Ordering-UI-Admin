@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components'
 
-export const InvoiceGeneralDetailContainer = styled.div``
+export const InvoiceGeneralDetailContainer = styled.div`
+  margin-top: 30px;
+`
 
 export const FormControl = styled.div`
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 
   input, textarea {
     background: #FFFFFF;
@@ -13,6 +15,7 @@ export const FormControl = styled.div`
     font-size: 14px;
     padding: 10px 15px;
     outline: none;
+    width: 100%;
   }
 
   textarea {
@@ -83,4 +86,30 @@ export const CalendarWrapper = styled.div`
 export const ActionBtnWrapper = styled.div`
   padding-top: 30px;
   margin-bottom: 20px;
+`
+
+export const CheckBoxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  cursor: pointer;
+  user-select: none;
+
+  svg {
+    font-size: 16px;
+    color: #B1BCCC;
+    &.fill {
+      color: ${props => props.theme?.colors.primary};
+    }
+  }
+
+  span {
+    font-size: 14px;
+    color: ${props => props.theme?.colors.headingColor};
+    margin-left: 15px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 15px;
+      margin-left: 0;
+    `}
+  }
 `

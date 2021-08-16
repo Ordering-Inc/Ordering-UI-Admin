@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { InvoiceDrivers } from '../InvoiceDrivers'
+import { InvoiceBusiness } from '../InvoiceBusiness'
 
 import {
   Container
@@ -34,7 +35,7 @@ export const InvoiceDetails = (props) => {
         if (extraDetailOpen && width >= 1000) {
           document.getElementById('invoiceDetailList').style.width = '1000px'
         } else {
-          document.getElementById('invoiceDetailList').style.width = '500px'
+          document.getElementById('invoiceDetailList').style.width = '520px'
         }
       }
     }
@@ -65,6 +66,14 @@ export const InvoiceDetails = (props) => {
       {
         selectedInvoice === 'driver' && (
           <InvoiceDrivers
+            {...props}
+            actionSidebar={actionSidebar}
+          />
+        )
+      }
+      {
+        selectedInvoice === 'business' && (
+          <InvoiceBusiness
             {...props}
             actionSidebar={actionSidebar}
           />

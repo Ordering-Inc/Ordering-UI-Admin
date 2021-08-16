@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, BusinessBrands as BusinessBrandsController } from 'ordering-components-admin'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import BiImage from '@meronex/icons/bi/BiImage'
+import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { BusinessBrandForm } from '../BusinessBrandForm'
 import Skeleton from 'react-loading-skeleton'
