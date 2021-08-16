@@ -17,7 +17,6 @@ export const InvoiceDetails = (props) => {
   const { width } = useWindowSize()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [extraDetailOpen, setExtraDetailOpen] = useState(false)
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -32,11 +31,7 @@ export const InvoiceDetails = (props) => {
       if (width <= 500) {
         document.getElementById('invoiceDetailList').style.width = '100vw'
       } else {
-        if (extraDetailOpen && width >= 1000) {
-          document.getElementById('invoiceDetailList').style.width = '1000px'
-        } else {
-          document.getElementById('invoiceDetailList').style.width = '520px'
-        }
+        document.getElementById('invoiceDetailList').style.width = '520px'
       }
     }
   }
@@ -49,15 +44,6 @@ export const InvoiceDetails = (props) => {
     if (!open) return
     actionSidebar(true)
   }, [open])
-
-  useEffect(() => {
-    if (width < 1000) return
-    if (extraDetailOpen) {
-      document.getElementById('invoiceDetailList').style.width = '1000px'
-    } else {
-      toggleMainContent()
-    }
-  }, [extraDetailOpen])
 
   return (
     <Container
