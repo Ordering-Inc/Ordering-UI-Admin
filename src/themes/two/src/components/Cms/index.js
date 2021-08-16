@@ -96,6 +96,7 @@ const CmsUI = (props) => {
             <Button
               borderRadius='8px'
               color='lightPrimary'
+              onClick={() => handleEditPage(null)}
             >
               {t('ADD_PAGE', 'Add page')}
             </Button>
