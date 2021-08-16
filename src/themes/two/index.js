@@ -95,6 +95,7 @@ import { Button } from './src/styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
 import { Tab, Tabs } from './src/styles/Tabs'
+import { Toast } from './src/styles/Toast'
 
 export {
   Alert,
@@ -202,5 +203,6 @@ export {
   Select,
   Tab,
   Tabs,
-  TextArea
+  TextArea,
+  Toast
 }

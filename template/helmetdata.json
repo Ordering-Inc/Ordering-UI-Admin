@@ -62,13 +62,6 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "advancedSettings": {
-    "title": "Advanced settings",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
   "store": {
     "title": "Store",
     "description": "a dummy description about this page",
@@ -92,6 +85,13 @@
   },
   "messages": {
     "title": "Messages",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "pages": {
+    "title": "Pages",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

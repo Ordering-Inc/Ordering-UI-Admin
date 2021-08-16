@@ -5,6 +5,7 @@ export const ToggleSwitchContainer = styled.label`
   display: inline-block;
   width: 25px;
   height: 14px;
+  margin-bottom: 0px;
 
   input {
     opacity: 0;

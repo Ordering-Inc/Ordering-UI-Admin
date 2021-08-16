@@ -24,17 +24,16 @@ import { UsersList } from './pages/UsersList'
 import { BusinessesList } from './pages/BusinessesList'
 import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
-import { AdvancedSettings } from './pages/AdvancedSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
+import { Cms } from './pages/Cms'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
 import { DriverAnalytics } from './pages/DriverAnalytics'
-import { Toast } from '../src/themes/two/src/components/Toast'
 
 export const App = () => {
   const [{ auth, loading }] = useSession()
@@ -169,12 +168,8 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/settings/advanced'>
-                      {
-                        auth
-                          ? <AdvancedSettings />
-                          : <Redirect to='/login' />
-                      }
+                    <Route exact path='/settings/pages'>
+                      <Cms />
                     </Route>
                     <Route exact path='/store/:store'>
                       {
@@ -204,7 +199,6 @@ export const App = () => {
                   </Switch>
                 </ScrollToTop>
               )}
-              <Toast />
             </Layout>
           </>
         )

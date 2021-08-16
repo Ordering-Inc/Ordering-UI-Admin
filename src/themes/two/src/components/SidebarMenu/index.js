@@ -105,9 +105,9 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 3,
-      title: t('ADVANCED_SETTINGS', 'Advanced settings'),
-      pageName: 'advancedSettings',
-      url: '/settings/advanced'
+      title: t('CMS', 'CMS'),
+      pageName: 'pages',
+      url: '/settings/pages'
     }
   ]
 
