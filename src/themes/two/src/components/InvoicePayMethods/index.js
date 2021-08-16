@@ -9,7 +9,7 @@ import {
   ActionBtnWrapper
 } from './styles'
 
-export const InvoicePaymentMethods = (props) => {
+export const InvoicePayMethods = (props) => {
   const {
     payMethodsList,
     handleChangePayMethods

@@ -59,3 +59,7 @@ export const Tab = styled.div`
     color: #909BA9;
   `}
 `
+
+export const Form = styled.form`
+  display: none;
+`

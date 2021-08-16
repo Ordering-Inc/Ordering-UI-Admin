@@ -16,6 +16,7 @@ export const InvoiceBusiness = (props) => {
   const [businessList, setBusinessList] = useState({ loading: false, businesses: [], error: null })
   const [payMethodsList, setPayMethodsList] = useState({ loading: false, data: [], error: null })
   const [orderType, setOrderType] = useState(null)
+  const [orderList, setOrderList] = useState({ loading: false, orders: [], error: null })
   const [businessInvocing, setBusinessInvocing] = useState({
     type: 'charge',
     from: '',
@@ -110,6 +111,63 @@ export const InvoiceBusiness = (props) => {
     }
   }
 
+  /**
+   * Method to get order list from API
+   */
+  const getOrders = async () => {
+    try {
+      setOrderList({
+        ...orderList,
+        loading: true
+      })
+      const where = [
+        {
+          attribute: 'business_id',
+          value: businessInvocing.business
+        }
+      ]
+      if (businessInvocing.from) {
+        where.push({
+          attribute: 'delivery_datetime',
+          value: {
+            condition: '>=',
+            value: `${businessInvocing.from} 00:00:00`
+          }
+        })
+      }
+      if (businessInvocing.to) {
+        where.push({
+          attribute: 'delivery_datetime',
+          value: {
+            condition: '<=',
+            value: `${businessInvocing.to} 23:59:59`
+          }
+        })
+      }
+      const { content: { error, result, pagination } } = await ordering.orders().asDashboard().where(where).get()
+      if (!error) {
+        setOrderList({
+          ...orderList,
+          loading: false,
+          orders: result,
+          pagination
+        })
+      } else {
+        setOrderList({
+          ...orderList,
+          loading: false,
+          error: result
+        })
+      }
+    } catch (error) {
+      setOrderList({
+        ...orderList,
+        loading: false,
+        error: [error || error?.toString() || error?.message]
+      })
+    }
+  }
+
   useEffect(() => {
     getBusiness()
     getPaymentMethod()
@@ -126,6 +184,7 @@ export const InvoiceBusiness = (props) => {
           handleChangeOrderType={setOrderType}
           handleChangeInvocing={setBusinessInvocing}
           handleChangePayMethods={handleChangePayMethods}
+          getOrders={getOrders}
         />
       )}
     </>

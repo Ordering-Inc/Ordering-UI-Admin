@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import ReactDOMServer from 'react-dom/server'
 import { useLanguage } from 'ordering-components-admin'
 import { InvoiceBusiness as InvoiceBusinessController } from './naked'
 import { DragScroll } from '../DragScroll'
@@ -7,7 +8,8 @@ import {
   DetailsHeader,
   HeaderActionBtnWrapper,
   DetailsList,
-  Tab
+  Tab,
+  Form
 } from './styles'
 import { IconButton } from '../../styles/Buttons'
 import {
@@ -17,13 +19,18 @@ import {
 import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceOrderType } from '../InvoiceOrdertype'
+import { InvoiceBusinessPdf } from '../InvoiceBusinessPdf'
 
 const InvoiceBusinessUI = (props) => {
   const {
-    actionSidebar
+    actionSidebar,
+    getOrders,
+    invocing
   } = props
 
   const [, t] = useLanguage()
+  const inputRef = useRef(null)
+  const submitBtnRef = useRef(null)
 
   const orderTypeList = [
     { value: 1, name: t('DELIVERY', 'Delivery'), enabled: false },
@@ -43,12 +50,21 @@ const InvoiceBusinessUI = (props) => {
     setSelectedDetailType(detailType)
   }
 
+  const download = () => {
+    // getOrders()
+    inputRef.current.value = ReactDOMServer.renderToString(<InvoiceBusinessPdf />)
+    submitBtnRef.current.click()
+  }
+
   return (
     <InvoiceDriversContainer>
       <DetailsHeader>
         <h2>{t('BUSINESS_INVOICE', 'Business invoice')}</h2>
         <HeaderActionBtnWrapper>
-          <IconButton>
+          <IconButton
+            onClick={download}
+            disabled={!invocing?.business || invocing?.business === ''}
+          >
             <Download />
           </IconButton>
           <IconButton
@@ -98,6 +114,11 @@ const InvoiceBusinessUI = (props) => {
           />
         )
       }
+      <Form target='_blank' action='https://apiv4.ordering.co/v400/en/luisv4/pdf/html' method='POST'>
+        <input ref={inputRef} type='hidden' name='html' />
+        <button ref={submitBtnRef} type='submit' />
+      </Form>
+      <InvoiceBusinessPdf />
     </InvoiceDriversContainer>
   )
 }

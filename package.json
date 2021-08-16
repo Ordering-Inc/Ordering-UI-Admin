@@ -74,8 +74,6 @@
     "html-to-image": "^1.7.0",
     "jsoneditor": "^9.3.0",
     "jsoneditor-react": "^3.1.1",
-    "jspdf": "^2.3.1",
-    "jspdf-autotable": "^3.5.15",
     "libphonenumber-js": "^1.9.19",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
