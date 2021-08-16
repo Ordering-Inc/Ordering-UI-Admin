@@ -95,15 +95,7 @@ export const CheckBoxWrapper = styled.div`
   cursor: pointer;
   user-select: none;
 
-  svg {
-    font-size: 16px;
-    color: #B1BCCC;
-    &.fill {
-      color: ${props => props.theme?.colors.primary};
-    }
-  }
-
-  span {
+  label {
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
     margin-left: 15px;

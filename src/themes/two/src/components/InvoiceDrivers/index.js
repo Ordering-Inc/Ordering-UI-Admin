@@ -15,7 +15,7 @@ import {
   XLg as CloseIcon
 } from 'react-bootstrap-icons'
 import { InvoiceGeneral } from '../InvoiceGeneral'
-import { InvoicePaymentMethods } from '../InvoicePaymentMethods'
+import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceOrderType } from '../InvoiceOrdertype'
 
 const InvoiceDriversUI = (props) => {
@@ -68,7 +68,7 @@ const InvoiceDriversUI = (props) => {
         selectedDetailType === 'general' && <InvoiceGeneral {...props} />
       }
       {
-        selectedDetailType === 'payment_methods' && <InvoicePaymentMethods {...props} />
+        selectedDetailType === 'payment_methods' && <InvoicePayMethods {...props} />
       }
       {
         selectedDetailType === 'order_type' && <InvoiceOrderType />
