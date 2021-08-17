@@ -1,15 +1,84 @@
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import React, { useState } from 'react'
+import React from 'react'
 import { Image } from 'react-bootstrap'
-import {
-  PdfContainer,
-  PdfInvoice
-} from './styles'
 
 export const InvoiceBusinessPdf = (props) => {
+  const {
+    exportInvoice,
+    getSubtotal,
+    getTotal
+  } = props
   const [, t] = useLanguage()
   const [{ parseDate, parsePrice }] = useUtils()
-  const [exportInvoice, setExportInvoice] = useState(null)
+
+  const styles = {
+    root: {
+      fontFamily: 'Helvetica, Arial, sans-serif',
+      color: '#333'
+    },
+    table: {
+      width: '100%',
+      marginTop: '15px',
+      marginBottom: '15px',
+      borderCollapse: 'collapse',
+      thead: {
+        trFirst: {
+          color: '#fff',
+          fontWeight: 'bold',
+          border: '1px solid #222434',
+          backgroundColor: '#222434'
+        },
+        trLast: {
+          color: '#fff',
+          fontWeight: 'bold',
+          border: '1px solid #393d57',
+          backgroundColor: '#393d57'
+        },
+        th: {
+          textAlign: 'center',
+          fontSize: '16px'
+        }
+      },
+      tbody: {
+        tr: {
+          td: {
+            border: '1px solid #ccc',
+            color: '#333',
+            fontSize: '15px',
+            padding: '3px 10px'
+          },
+          tdNumber: {
+            border: '1px solid #ccc',
+            color: '#333',
+            fontSize: '15px',
+            padding: '3px 10px',
+            textAlign: 'right'
+          }
+        }
+      },
+      tfoot: {
+        tr: {
+          border: '1px solid #ccc',
+          backgroundColor: '#ddd',
+          td: {
+            fontSize: '15px',
+            border: '1px solid #ccc',
+            textAlign: 'right',
+            padding: '3px 10px'
+          }
+        }
+      },
+      number: {
+        textAlign: 'right'
+      }
+    },
+    notes: {
+      padding: '10px',
+      whiteSpace: 'normal',
+      fontSize: '14px',
+      backgroundColor: '#eee'
+    }
+  }
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -43,104 +112,131 @@ export const InvoiceBusinessPdf = (props) => {
   }
 
   return (
-    <PdfContainer>
-      <PdfInvoice>
-        <Image
-          src='https://reactdemo.ordering.co/ac950c6a4d2521f00bfc442ebfa83f77.svg'
-          fluid
-          height='45px'
-          width='150px'
-        />
-        <span>{t('INVOICE_FOR', 'Invoice for')} <b>{exportInvoice?.business?.name}</b></span>
-        <table>
-          <thead>
-            <tr>
-              <th colSpan='5'>{t('ORDERS', 'Orders')}</th>
-            </tr>
-            <tr>
-              <th>Number</th>
-              <th>Datetime</th>
-              <th>Status</th>
-              <th>Subtotal</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              exportInvoice?.orders && exportInvoice?.orders?.map((order, i) => (
-                <tr key={i}>
-                  <td>{order.id}</td>
-                  <td>{parseDate(order.delivery_datetime)}</td>
-                  <td>{getOrderStatus(order.status).value}</td>
-                  <td class='number'>{parsePrice(Order.getSubtotal(order))}</td>
-                  <td class='number'>{parsePrice(Order.getTotal(order))}</td>
-                </tr>
-              ))
-            }
-
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan='4'>translate('SUBTOTAL')</td>
-              <td class='number'>parsePrice(export_invoice.orders_subtotal)</td>
-            </tr>
-            <tr>
-              <td colspan='4'>translate('TOTAL')</td>
-              <td class='number'>parsePrice(export_invoice.orders_total)</td>
-            </tr>
-          </tfoot>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <th colspan='2'>translate('TOTALS')</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td> translate('ORDERS') (translate('SUBTOTAL'))</td>
-              <td class='number'>parsePrice(export_invoice.orders_subtotal)</td>
-            </tr>
-            <tr data-ng-if='export_invoice.inlcude_discounts != 0'>
-              <td>translate('DISCOUNTS_BY_PLATFORM')</td>
-              <td class='number'>parsePrice(export_invoice.discounts)</td>
-            </tr>
-            <tr>
-              <td> translate('PRODUCTS') (translate('TAX'))</td>
-              <td class='number'>parsePrice(export_invoice.tax_products)</td>
-            </tr>
-            <tr>
-              <td>translate('PERCENTAGE_FEE') (export_invoice.percentage_fee%)</td>
-              <td class='number'>parsePrice(export_invoice.percentage_fee_total)</td>
-            </tr>
-            <tr>
-              <td>translate('FIXED_FEE')</td>
-              <td class='number'>parsePrice(export_invoice.fixed_fee_total)</td>
-            </tr>
-            <tr data-ng-if='export_invoice.misc_amount != 0'>
-              <td>translate('MISC') <small data-ng-if='export_invoice.misc_description'>(export_invoice.misc_description)</small></td>
-              <td class='number'>parsePrice(export_invoice.misc_amount)</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>translate('SUBTOTAL')</td>
-              <td class='number'>parsePrice(export_invoice.subtotal)</td>
-            </tr>
-            <tr>
-              <td>translate('TAX') (export_invoice.tax%)</td>
-              <td class='number'>parsePrice(export_invoice.tax_total)</td>
-            </tr>
-            <tr>
-              <td>translate('TOTAL')</td>
-              <td class='number'>parsePrice(export_invoice.total)</td>
-            </tr>
-          </tfoot>
-        </table>
-        <p class='notes' ng-bind-html='export_invoice.notes'>
-          translate('NOTES'): export_invoice.notes
-        </p>
-      </PdfInvoice>
-    </PdfContainer>
+    <div style={styles.root}>
+      <Image
+        src='https://reactdemo.ordering.co/ac950c6a4d2521f00bfc442ebfa83f77.svg'
+        fluid
+        height='45px'
+        width='150px'
+      />
+      <br />
+      <span>{t('INVOICE_FOR', 'Invoice for')} <b>{exportInvoice?.business?.name}</b></span><br />
+      {
+        exportInvoice?.from && exportInvoice?.to && (
+          <>
+            <span>{t('FROM', 'From')} <b>{exportInvoice?.from}</b> {t('TO', 'To')} <b>{exportInvoice?.to}</b></span><br />
+          </>
+        )
+      }
+      <span>{t('AMOUNT_TO_ORDERS', 'Amount to orders')}: {exportInvoice?.orders.length}</span>
+      <table style={styles.table}>
+        <thead>
+          <tr style={styles.table.thead.trFirst}>
+            <th style={styles.table.thead.th} colSpan='5'>{t('ORDERS', 'Orders')}</th>
+          </tr>
+          <tr style={styles.table.thead.trLast}>
+            <th style={styles.table.thead.th}>Number</th>
+            <th style={styles.table.thead.th}>Datetime</th>
+            <th style={styles.table.thead.th}>Status</th>
+            <th style={styles.table.thead.th}>Subtotal</th>
+            <th style={styles.table.thead.th}>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            exportInvoice?.orders && exportInvoice?.orders?.map((order, i) => (
+              <tr key={i}>
+                <td style={styles.table.tbody.tr.td}>{order.id}</td>
+                <td style={styles.table.tbody.tr.td}>{parseDate(order.delivery_datetime, { utc: false })}</td>
+                <td style={styles.table.tbody.tr.td}>{getOrderStatus(order.status).value}</td>
+                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(getSubtotal(order))}</td>
+                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(getTotal(order))}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+        <tfoot style={styles.table.tfoot}>
+          <tr style={styles.table.tfoot.tr}>
+            <td style={styles.table.tfoot.tr.td} colSpan='4'>{t('SUBTOTAL', 'Subtotal')}</td>
+            <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoice?.orders_subtotal)}</td>
+          </tr>
+          <tr style={styles.table.tfoot.tr}>
+            <td style={styles.table.tfoot.tr.td} colSpan='4'>{t('TOTAL', 'Total')}</td>
+            <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoice?.orders_total)}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <table style={styles.table}>
+        <thead>
+          <tr style={styles.table.thead.trLast}>
+            <th style={styles.table.thead.th} colSpan='2'>{t('TOTALS', 'Totals')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            exportInvoice?.type === 'payout' && (
+              <tr>
+                <td style={styles.table.tbody.tr.td}>{t('ORDERS', 'Orders')} {t('SUBTOTAL', 'Subtotal')}</td>
+                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoice?.orders_subtotal)}</td>
+              </tr>
+            )
+          }
+          {
+            exportInvoice?.inlcude_discounts !== 0 && (
+              <tr>
+                <td style={styles.table.tbody.tr.td}>{t('DISCOUNTS_BY_PLATFORM', 'Discounts by platform')}</td>
+                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoice?.discounts)}</td>
+              </tr>
+            )
+          }
+          {
+            exportInvoice?.type === 'payout' && exportInvoice?.tax_products !== 0 && (
+              <tr>
+                <td style={styles.table.tbody.tr.td}>{t('PRODUCTS', 'Products')} {t('TAX', 'Tax')}</td>
+                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoice?.tax_products)}</td>
+              </tr>
+            )
+          }
+          <tr>
+            <td style={styles.table.tbody.tr.td}>{t('PERCENTAGE_FEE', 'Percentage Fee')} ({exportInvoice?.percentage_fee}%)</td>
+            <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoice?.percentage_fee_total)}</td>
+          </tr>
+          <tr>
+            <td style={styles.table.tbody.tr.td}>{t('FIXED_FEE', 'Fixed Fee')}</td>
+            <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoice?.fixed_fee_total)}</td>
+          </tr>
+          {
+            exportInvoice?.misc_amount !== 0 && (
+              <tr>
+                <td style={styles.table.tbody.tr.td}>{t('MISC', 'Misc')} {exportInvoice?.misc_description && (
+                  <small>({exportInvoice?.misc_description})</small>
+                )}
+                </td>
+                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoice?.misc_amount)}</td>
+              </tr>
+            )
+          }
+        </tbody>
+        <tfoot style={styles.table.tfoot}>
+          <tr style={styles.table.tfoot.tr}>
+            <td style={styles.table.tfoot.tr.td}>{t('SUBTOTAL', 'Subtotal')}</td>
+            <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoice?.subtotal)}</td>
+          </tr>
+          <tr style={styles.table.tfoot.tr}>
+            <td style={styles.table.tfoot.tr.td}>{t('TAX', 'Tax')} ({exportInvoice?.tax}%)</td>
+            <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoice?.tax_total)}</td>
+          </tr>
+          <tr style={styles.table.tfoot.tr}>
+            <td style={styles.table.tfoot.tr.td}>{t('TOTAL', 'Total')}</td>
+            <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoice?.total)}</td>
+          </tr>
+        </tfoot>
+      </table>
+      {
+        exportInvoice?.notes && (
+          <p style={styles.notes} dangerouslySetInnerHTML={{ __html: exportInvoice?.notes }} />
+        )
+      }
+    </div>
   )
 }

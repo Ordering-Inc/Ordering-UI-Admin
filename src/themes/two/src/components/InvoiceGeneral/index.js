@@ -213,19 +213,19 @@ export const InvoiceGeneral = (props) => {
           />
         </FormControl>
         <FormControl className='col-md-12'>
-          <Label>{t('NOTES', 'Notes')}</Label>
-          <textarea
-            placeholder={t('WRITE_A_NOTES', 'Write a Notes')}
-            defaultValue={formState?.notes}
-            onChange={(e) => handleChangeFormState('notes', e.target.value)}
-          />
-        </FormControl>
-        <FormControl className='col-md-12'>
           <Label>{t('MISC_DESCRIPTION', 'MISC description')}</Label>
           <textarea
             placeholder={t('WRITE_MISC_DESCRIPTION', 'Write a MISC description')}
             defaultValue={formState?.misc_description}
             onChange={(e) => handleChangeFormState('misc_description', e.target.value)}
+          />
+        </FormControl>
+        <FormControl className='col-md-12'>
+          <Label>{t('NOTES', 'Notes')}</Label>
+          <textarea
+            placeholder={t('WRITE_A_NOTES', 'Write a Notes')}
+            defaultValue={formState?.notes}
+            onChange={(e) => handleChangeFormState('notes', e.target.value)}
           />
         </FormControl>
         <ActionBtnWrapper className='col-md-12'>

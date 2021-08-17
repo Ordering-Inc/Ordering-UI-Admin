@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react'
-import ReactDOMServer from 'react-dom/server'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { InvoiceBusiness as InvoiceBusinessController } from './naked'
 import { DragScroll } from '../DragScroll'
@@ -25,25 +24,16 @@ const InvoiceBusinessUI = (props) => {
   const {
     actionSidebar,
     getOrders,
-    invocing
+    invocing,
+    exportInvoice
   } = props
 
   const [, t] = useLanguage()
   const inputRef = useRef(null)
   const submitBtnRef = useRef(null)
-
-  const orderTypeList = [
-    { value: 1, name: t('DELIVERY', 'Delivery'), enabled: false },
-    { value: 2, name: t('PICKUP', 'Pickup'), enabled: false },
-    { value: 3, name: t('EAT_IN', 'Eat in'), enabled: false },
-    { value: 4, name: t('CURBSIDE', 'Curbside'), enabled: false },
-    { value: 5, name: t('DRIVE_THRU', 'Drive thru'), enabled: false },
-    { value: 6, name: t('INCLUDE_CANCELED_ORDERS', 'Include canceled orders'), enabled: false },
-    { value: 7, name: t('INCLUDE_DISCOUNTS_BY_PLATFORM', 'Include discounts done by platform'), enabled: false }
-  ]
+  const invoicePdfRef = useRef(null)
 
   const [selectedDetailType, setSelectedDetailType] = useState('general')
-  const [orderTypes, setOrderTypes] = useState(orderTypeList)
 
   const changeSelectedAnalyticsStatus = (detailType) => {
     window.scrollTo(0, 0)
@@ -51,10 +41,15 @@ const InvoiceBusinessUI = (props) => {
   }
 
   const download = () => {
-    // getOrders()
-    inputRef.current.value = ReactDOMServer.renderToString(<InvoiceBusinessPdf />)
-    submitBtnRef.current.click()
+    getOrders()
   }
+
+  useEffect(() => {
+    if (exportInvoice) {
+      inputRef.current.value = invoicePdfRef?.current.innerHTML
+      submitBtnRef.current.click()
+    }
+  }, [exportInvoice])
 
   return (
     <InvoiceDriversContainer>
@@ -109,8 +104,6 @@ const InvoiceBusinessUI = (props) => {
         selectedDetailType === 'order_type' && (
           <InvoiceOrderType
             {...props}
-            orderTypes={orderTypes}
-            handleChangeOrderTypes={setOrderTypes}
           />
         )
       }
@@ -118,7 +111,9 @@ const InvoiceBusinessUI = (props) => {
         <input ref={inputRef} type='hidden' name='html' />
         <button ref={submitBtnRef} type='submit' />
       </Form>
-      <InvoiceBusinessPdf />
+      <div ref={invoicePdfRef}>
+        <InvoiceBusinessPdf {...props} />
+      </div>
     </InvoiceDriversContainer>
   )
 }
