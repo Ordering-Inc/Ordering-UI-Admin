@@ -22,6 +22,7 @@ export const ListenPageChanges = ({ children }) => {
     basicSettings: '/settings/basic',
     operationSettings: '/settings/operation',
     pages: '/settings/pages',
+    integrations: '/settings/integrations',
     business_analytics: '/analytics/business',
     drivers_analytics: '/analytics/drivers'
   }

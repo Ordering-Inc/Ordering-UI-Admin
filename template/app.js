@@ -28,6 +28,7 @@ import { BusinessProductsList } from './pages/BusinessProductsList'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
 import { Cms } from './pages/Cms'
+import { Integrations } from './pages/Integrations'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -169,7 +170,18 @@ export const App = () => {
                       }
                     </Route>
                     <Route exact path='/settings/pages'>
-                      <Cms />
+                      {
+                        auth
+                          ? <Cms />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/settings/integrations'>
+                      {
+                        auth
+                          ? <Integrations />
+                          : <Redirect to='/login' />
+                      }
                     </Route>
                     <Route exact path='/store/:store'>
                       {

@@ -42,14 +42,18 @@ export const SideBar = (props) => {
   }, [open])
 
   return (
-    <BarContainer id={id}>
-      <IconButton
-        color='black'
-        onClick={() => props.onClose()}
-      >
-        <XLg />
-      </IconButton>
-      {props.children}
-    </BarContainer>
+    <>
+      {open && (
+        <BarContainer id={id}>
+          <IconButton
+            color='black'
+            onClick={() => props.onClose()}
+          >
+            <XLg />
+          </IconButton>
+          {props.children}
+        </BarContainer>
+      )}
+    </>
   )
 }

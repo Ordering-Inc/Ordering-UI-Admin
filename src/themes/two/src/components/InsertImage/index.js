@@ -150,7 +150,7 @@ export const InsertImage = (props) => {
         ))}
       </ImageListContainer>
       <Alert
-        title={t('BUSINESS', 'Business')}
+        title={t('ORDERING', 'ORDERING')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

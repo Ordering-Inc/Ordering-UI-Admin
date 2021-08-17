@@ -108,6 +108,12 @@ export const SidebarMenu = (props) => {
       title: t('CMS', 'CMS'),
       pageName: 'pages',
       url: '/settings/pages'
+    },
+    {
+      id: 4,
+      title: t('INTEGRATIONS', 'Integrations'),
+      pageName: 'integrations',
+      url: '/settings/integrations'
     }
   ]
 

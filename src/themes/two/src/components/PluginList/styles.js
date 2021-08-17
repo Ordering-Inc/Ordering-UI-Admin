@@ -1,69 +1,37 @@
 import styled, { css } from 'styled-components'
 
-export const StaticPageListContainer = styled.div`
-  flex: 1;
+export const PluginListContainer = styled.div`
+  width: 100%;
   padding: 20px;
   box-sizing: border-box;
-  transition: all 0.5s;
-  max-height: 100vh;
-  overflow: auto;
 `
 
 export const Header = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 35px;
-  flex-wrap: wrap;
-  row-gap: 20px;
-`
-
-export const HeaderLeft = styled.div`
-  display: flex;
   align-items: center;
+  margin-bottom: 30px;
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 35px;
+  ` : css`
+    margin-right: 35px;
+  `}
+
   h1 {
     font-size: 20px;
     font-weight: 700;
-    color: ${props => props.theme.colors.headingColor};
     margin: 0px;
   }
-  > button {
-    ${props => props.theme?.rtl ? css`
-      margin-left: 8px;
-      margin-right: -8px;
-    ` : css`
-      margin-right: 8px;
-      margin-left: -8px;
-    `}
 
-    svg {
-      width: 25px;
-      height: 25px;
-    }
-  }
-`
-
-export const HeaderRight = styled.div`
-  display: flex;
-  align-items: center;
   button {
-    height: 41px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 11px;
-    ` : css`
-      margin-right: 11px;
-    `}
-  }
-
-  input {
-    border: none;
-    background-color: ${props => props.theme.colors.secundary};
+    height: 42px;
   }
 `
 
-export const PageListTable = styled.table`
+export const PluginsTable = styled.table`
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
 
   thead {
     border-bottom: 1px solid ${props => props.theme.colors.secundaryLight};
@@ -79,42 +47,39 @@ export const PageListTable = styled.table`
     th, td {
       &:first-child {
         flex: 1;
-      }
-      &:last-child {
-        min-width: 200px;
+        > input {
+          outline: none;
+          border: 1px dashed ${props => props.theme.colors.borderColor};
+          padding: 3px;
+          width: 96%;
+        }
       }
     }
-  }
 
-  th:last-child {
-    ${props => props.theme.colors.rtl ? css`
-      padding-right: 15px;
-    ` : css`
-      padding-left: 15px;
-    `}
+    th:last-child {
+      min-width: 130px;
+      ${props => props.theme.colors.rtl ? css`
+        padding-right: 15px;
+      ` : css`
+        padding-left: 15px;
+      `}
+    }
   }
 `
 
-export const PageTbody = styled.tbody`
+export const PluginTbody = styled.tbody`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
   td {
     padding: 7px 0;
     font-size: 12px;
-    input {
-      border: none;
-      width: 100%;
-      padding: 3px 0;
-      outline: none;
-      &:focus {
-        border: 1px solid ${props => props.theme.colors.borderColor};
-      }      
-    }
   }
 
-  &:hover {
-    background-color: ${props => props.theme.colors.lightPrimary};
-  }
+  ${({ isAddMode }) => !isAddMode && css`
+    &:hover {
+      background-color: ${props => props.theme.colors.lightPrimary};
+    }
+  `}
 
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.lightPrimary};
@@ -155,6 +120,11 @@ export const EnableWrapper = styled.div`
 `
 
 export const ActionSelectorWrapper = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-right: 20px;
+  ` : css`
+    margin-left: 20px;
+  `}
   button {
     background: transparent !important;
     border: none;
