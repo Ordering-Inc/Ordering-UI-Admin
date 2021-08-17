@@ -8,7 +8,8 @@ import {
   HeaderActionBtnWrapper,
   DetailsList,
   Tab,
-  Form
+  Form,
+  InvoicePdfWrapper
 } from './styles'
 import { IconButton } from '../../styles/Buttons'
 import {
@@ -25,7 +26,8 @@ const InvoiceBusinessUI = (props) => {
     actionSidebar,
     getOrders,
     invocing,
-    exportInvoice
+    exportInvoice,
+    handleChnageExportInvoice
   } = props
 
   const [, t] = useLanguage()
@@ -48,6 +50,7 @@ const InvoiceBusinessUI = (props) => {
     if (exportInvoice) {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
       submitBtnRef.current.click()
+      handleChnageExportInvoice(null)
     }
   }, [exportInvoice])
 
@@ -111,9 +114,9 @@ const InvoiceBusinessUI = (props) => {
         <input ref={inputRef} type='hidden' name='html' />
         <button ref={submitBtnRef} type='submit' />
       </Form>
-      <div ref={invoicePdfRef}>
+      <InvoicePdfWrapper ref={invoicePdfRef}>
         <InvoiceBusinessPdf {...props} />
-      </div>
+      </InvoicePdfWrapper>
     </InvoiceDriversContainer>
   )
 }

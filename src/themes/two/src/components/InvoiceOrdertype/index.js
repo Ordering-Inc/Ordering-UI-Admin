@@ -29,7 +29,7 @@ export const InvoiceOrderType = (props) => {
 
   const saveFormData = () => {
     handleChangeOrderTypes(orderStatus)
-    handleChangeInvocing({ ...invocing, ...invoiceState })
+    handleChangeInvocing(invoiceState)
   }
 
   const handleChangeCheckBox = (value, checked) => {

@@ -48,7 +48,7 @@ export const InvoiceGeneral = (props) => {
         content: t('SELECTED_DRIVER_INVALID', 'The selected Driver is invalid')
       })
     } else {
-      handleChangeInvocing({ ...invocing, ...formState })
+      handleChangeInvocing(formState)
     }
   }
 
@@ -85,7 +85,7 @@ export const InvoiceGeneral = (props) => {
 
   useEffect(() => {
     setformState(invocing)
-  }, [])
+  }, [invocing])
 
   return (
     <>
@@ -216,7 +216,7 @@ export const InvoiceGeneral = (props) => {
           <Label>{t('MISC_DESCRIPTION', 'MISC description')}</Label>
           <textarea
             placeholder={t('WRITE_MISC_DESCRIPTION', 'Write a MISC description')}
-            defaultValue={formState?.misc_description}
+            value={formState?.misc_description || ''}
             onChange={(e) => handleChangeFormState('misc_description', e.target.value)}
           />
         </FormControl>
@@ -224,7 +224,7 @@ export const InvoiceGeneral = (props) => {
           <Label>{t('NOTES', 'Notes')}</Label>
           <textarea
             placeholder={t('WRITE_A_NOTES', 'Write a Notes')}
-            defaultValue={formState?.notes}
+            value={formState?.notes || ''}
             onChange={(e) => handleChangeFormState('notes', e.target.value)}
           />
         </FormControl>

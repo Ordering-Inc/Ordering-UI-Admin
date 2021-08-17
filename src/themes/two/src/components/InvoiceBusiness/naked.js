@@ -349,6 +349,7 @@ export const InvoiceBusiness = (props) => {
     getBusiness()
     getPaymentMethod()
   }, [])
+
   return (
     <>
       {UIComponent && (
@@ -359,6 +360,7 @@ export const InvoiceBusiness = (props) => {
           payMethodsList={payMethodsList}
           orderTypes={orderTypes}
           exportInvoice={exportInvoice}
+          handleChnageExportInvoice={setExportInvoice}
           handleChangeOrderTypes={setOrderTypes}
           handleChangeInvocing={setBusinessInvocing}
           handleChangePayMethods={handleChangePayMethods}

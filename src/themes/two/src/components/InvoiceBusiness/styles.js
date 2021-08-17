@@ -63,3 +63,7 @@ export const Tab = styled.div`
 export const Form = styled.form`
   display: none;
 `
+
+export const InvoicePdfWrapper = styled.div`
+  display: none;
+`
