@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, BusinessBrands as BusinessBrandsController } from 'ordering-components-admin'
-import BiImage from '@meronex/icons/bi/BiImage'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { BusinessBrandForm } from '../BusinessBrandForm'
 import Skeleton from 'react-loading-skeleton'
 import {
   Container,
   BusinessBrand,
   AddNewBusinessBrandContainer,
-  AddNewBusinessBrandTitle,
-  DumyLogo
+  AddNewBusinessBrandTitle
 } from './styles'
 
 const BusinessBrandsUI = (props) => {
@@ -63,34 +59,16 @@ const BusinessBrandsUI = (props) => {
           ))
         ) : (
           brandList?.brands?.length > 0 && brandList?.brands.map((brand, i) => (
-            <BusinessBrand
+            <BusinessBrandForm
               key={i}
-              disabled={formState?.loading}
-              isChecked={business?.franchise_id === brand.id}
-              onClick={() => handleSelectBusinessBrand(brand.id)}
-            >
-              {(business?.franchise_id === brand.id) ? (
-                <RiCheckboxFill className='fill' />
-              ) : (
-                <RiCheckboxBlankLine />
-              )}
-              {
-                brand?.logo ? (
-                  <img
-                    src={brand?.logo}
-                    alt={brand?.name?.toLowerCase()}
-                    width='30px'
-                    height='30px'
-                    loading='lazy'
-                  />
-                ) : (
-                  <DumyLogo>
-                    <BiImage />
-                  </DumyLogo>
-                )
-              }
-              <span>{brand?.name}</span>
-            </BusinessBrand>
+              brand={brand}
+              handleSelectBusinessBrand={handleSelectBusinessBrand}
+              handleSuccessAddBusinessBrand={handleSuccessAddBusinessBrand}
+              business={business}
+              brandList={brandList}
+              handleUpdateBrandList={handleUpdateBrandList}
+              editMode
+            />
           ))
         )
       }

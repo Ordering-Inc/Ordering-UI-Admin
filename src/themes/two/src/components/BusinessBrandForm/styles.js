@@ -4,23 +4,41 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #E9ECEF;
-  padding: 9px 0;
+  padding: 15px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: ${props => props.theme?.colors.lightPrimary};
+    > input {
+      border: 1px solid ${props => props.theme?.colors.lightGray};
+    }
+  }
+
+  span {
+    svg {
+      color: #B1BCCC;
+      font-size: 22px;
+      &.fill {
+        color: ${props => props.theme.colors.primary};
+        font-size: 22px;
+      }
+    }
+  }
+
+  > div {
+    margin: 0 10px;
+  }
 
   > input {
     flex: 1;
     height: 100%;
-    border: none;
+    border: 1px solid transparent;
     outline: unset;
     background: transparent;
-    ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
-    ` : css`
-      margin-left: 10px;
-    `}
-
-    &:focust {
-      border: none;
-    }
+    font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
+    transition: all 0.3s;
+    border-radius: 3px;
   }
 `
 
@@ -78,4 +96,18 @@ export const UploadImageIcon = styled.div`
     height: 25px;
     color: #ADB5BD;
   }
+`
+
+export const CheckBoxWrapper = styled.span`
+  cursor: pointer;
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
+`
+
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
 `
