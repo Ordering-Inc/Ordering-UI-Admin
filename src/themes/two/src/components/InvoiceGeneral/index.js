@@ -126,6 +126,7 @@ export const InvoiceGeneral = (props) => {
           <CalendarWrapper>
             <AnalyticsCalendar
               handleChangeDate={handleChangeDate}
+              defaultValue={invocing}
             />
           </CalendarWrapper>
         </FormControl>

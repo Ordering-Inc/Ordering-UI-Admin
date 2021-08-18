@@ -6,12 +6,16 @@ import {
 } from './styles'
 import DateRangePicker from 'react-daterange-picker'
 import FiCalendar from '@meronex/icons/fi/FiCalendar'
+import { extendMoment } from 'moment-range'
+import Moment from 'moment'
 import 'react-daterange-picker/dist/css/react-calendar.css'
 
 export const AnalyticsCalendar = (props) => {
   const {
-    handleChangeDate
+    handleChangeDate,
+    defaultValue
   } = props
+  const moment = extendMoment(Moment)
   const [, t] = useLanguage()
   const [dates, setDates] = useState(null)
   const [isShowCalendar, setIsShowCalendar] = useState(false)
@@ -42,6 +46,12 @@ export const AnalyticsCalendar = (props) => {
       handleChangeDate(dates?.start?.format('YYYY-MM-DD'), dates?.end?.format('YYYY-MM-DD'))
     }
   }, [dates])
+
+  useEffect(() => {
+    if (defaultValue && defaultValue?.from !== '' && defaultValue?.to !== '') {
+      setDates((moment.range(moment(defaultValue?.from), moment(defaultValue?.to))))
+    }
+  }, [])
 
   return (
     <>
