@@ -98,6 +98,7 @@ export const CheckBoxWrapper = styled.div`
   label {
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
+    margin-bottom: 0;
     margin-left: 15px;
     ${props => props.theme?.rtl && css`
       margin-right: 15px;

@@ -47,7 +47,7 @@ var ActionBtnWrapper = _styledComponents.default.div(_templateObject7 || (_templ
 
 exports.ActionBtnWrapper = ActionBtnWrapper;
 
-var CheckBoxWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 30px;\n  cursor: pointer;\n  user-select: none;\n\n  label {\n    font-size: 14px;\n    color: ", ";\n    margin-left: 15px;\n    ", "\n  }\n"])), function (props) {
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 30px;\n  cursor: pointer;\n  user-select: none;\n\n  label {\n    font-size: 14px;\n    color: ", ";\n    margin-bottom: 0;\n    margin-left: 15px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.headingColor;
