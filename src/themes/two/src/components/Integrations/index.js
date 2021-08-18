@@ -5,6 +5,7 @@ import { List as MenuIcon, PuzzleFill, Display } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 import { SideBar } from '../SideBar'
 import { PluginList } from '../PluginList'
+import { WebhookList } from '../WebhookList'
 
 import {
   IntegrationsContainer,
@@ -60,15 +61,28 @@ export const Integrations = (props) => {
         </SettingListContainer>
       </IntegrationsContainer>
 
-      <SideBar
-        sidebarId='settings-integrations'
-        open={showOption === 'plugins' || showOption === 'webhooks'}
-        onClose={() => setShowOption(null)}
-      >
-        {showOption === 'plugins' && (
+      {showOption === 'plugins' && (
+        <SideBar
+          sidebarId='settings-integrations'
+          defaultSideBarWidth={600}
+          open={showOption === 'plugins'}
+          onClose={() => setShowOption(null)}
+        >
           <PluginList />
-        )}
-      </SideBar>
+        </SideBar>
+      )}
+
+      {showOption === 'webhooks' && (
+        <SideBar
+          sidebarId='settings-integrations'
+          defaultSideBarWidth={768}
+          open={showOption === 'webhooks'}
+          onClose={() => setShowOption(null)}
+        >
+          <WebhookList />
+        </SideBar>
+      )}
+
     </>
   )
 }

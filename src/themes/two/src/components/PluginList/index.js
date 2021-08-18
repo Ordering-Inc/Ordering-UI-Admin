@@ -45,7 +45,7 @@ const PluginListUI = (props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pluginsPerPage, setPluginsPerPage] = useState(10)
 
-  // Get current products
+  // Get current plugins
   const [currentPlugins, setCurrentPlugins] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 

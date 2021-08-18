@@ -81,6 +81,7 @@ export const IconWrapper = styled.div`
 
   svg {
     font-size: 24px;
+    color: ${props => props.theme.colors.secundaryLight};
   }
 `
 

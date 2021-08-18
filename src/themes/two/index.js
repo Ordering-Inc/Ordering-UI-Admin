@@ -17,6 +17,7 @@ import { BusinessTypes } from './src/components/BusinessTypes'
 import { BusinessTypeForm } from './src/components/BusinessTypeForm'
 import { BusinessVideos } from './src/components/BusinessVideos'
 import { CitySelector } from './src/components/CitySelector'
+import { Cms } from './src/components/Cms'
 import { ColumnAllowSettingPopover } from './src/components/ColumnAllowSettingPopover'
 import { Confirm, Alert } from './src/components/Confirm'
 import { DateTypeSelector } from './src/components/DateTypeSelector'
@@ -40,6 +41,7 @@ import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleGpsButton } from './src/components/GoogleGpsButton'
 import { Home } from './src/components/Home'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
+import { Integrations } from './src/components/Integrations'
 import { InterActOrderMarker } from './src/components/InterActOrderMarker'
 import { Layout } from './src/components/Layout'
 import { LoginForm } from './src/components/LoginForm'
@@ -118,6 +120,7 @@ export {
   BusinessTypeForm,
   BusinessVideos,
   CitySelector,
+  Cms,
   ColumnAllowSettingPopover,
   Confirm,
   DateTypeSelector,
@@ -141,6 +144,7 @@ export {
   GoogleGpsButton,
   Home,
   InputPhoneNumber,
+  Integrations,
   InterActOrderMarker,
   Layout,
   LoginForm,
