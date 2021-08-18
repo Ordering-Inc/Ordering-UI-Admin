@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useLanguage, useApi } from 'ordering-components-admin'
-import { InvoiceBusiness as InvoiceBusinessController } from './naked'
+import React, { useState, useRef, useEffect } from 'react'
+import { useLanguage, useApi, InvoiceDriverManager as InvoiceDriverManagerController } from 'ordering-components-admin'
 import { DragScroll } from '../DragScroll'
+import { SpinnerLoader } from '../SpinnerLoader'
 import {
   InvoiceDriversContainer,
   DetailsHeader,
@@ -19,25 +19,22 @@ import {
 } from 'react-bootstrap-icons'
 import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
-import { InvoiceOrderType } from '../InvoiceOrdertype'
-import { InvoiceBusinessPdf } from '../InvoiceBusinessPdf'
-import { SpinnerLoader } from '../SpinnerLoader'
+import { InvoiceDriverPdf } from '../InvoiceDriverPdf'
 
-const InvoiceBusinessUI = (props) => {
+const InvoiceDriverManagerUI = (props) => {
   const {
     actionSidebar,
-    getOrders,
+    exportInvoiceList,
     invocing,
-    exportInvoiceList
+    getOrders
   } = props
 
   const [, t] = useLanguage()
   const [ordering] = useApi()
+  const [selectedDetailType, setSelectedDetailType] = useState('general')
   const inputRef = useRef(null)
   const submitBtnRef = useRef(null)
   const invoicePdfRef = useRef(null)
-
-  const [selectedDetailType, setSelectedDetailType] = useState('general')
 
   const changeSelectedAnalyticsStatus = (detailType) => {
     window.scrollTo(0, 0)
@@ -58,11 +55,11 @@ const InvoiceBusinessUI = (props) => {
   return (
     <InvoiceDriversContainer>
       <DetailsHeader>
-        <h2>{t('BUSINESS_INVOICE', 'Business invoice')}</h2>
+        <h2>{t('DRIVERS_INVOICE', 'Drivers invoice')}</h2>
         <HeaderActionBtnWrapper>
           <IconButton
             onClick={pdfDownload}
-            disabled={!invocing?.business || invocing?.business === ''}
+            disabled={!invocing?.driver || invocing?.driver === ''}
           >
             <Download />
           </IconButton>
@@ -89,13 +86,6 @@ const InvoiceBusinessUI = (props) => {
           >
             {t('PAYMENT_METHODS', 'Payment methods')}
           </Tab>
-
-          <Tab
-            active={selectedDetailType === 'order_type'}
-            onClick={() => changeSelectedAnalyticsStatus('order_type')}
-          >
-            {t('ORDER_TYPE', 'Order type')}
-          </Tab>
         </DragScroll>
       </DetailsList>
       {
@@ -104,19 +94,12 @@ const InvoiceBusinessUI = (props) => {
       {
         selectedDetailType === 'payment_methods' && <InvoicePayMethods {...props} />
       }
-      {
-        selectedDetailType === 'order_type' && (
-          <InvoiceOrderType
-            {...props}
-          />
-        )
-      }
       <Form target='_blank' action={`${ordering.root}/pdf/html`} method='POST'>
         <input ref={inputRef} type='hidden' name='html' />
         <button ref={submitBtnRef} type='submit' />
       </Form>
       <InvoicePdfWrapper ref={invoicePdfRef}>
-        <InvoiceBusinessPdf {...props} />
+        <InvoiceDriverPdf {...props} />
       </InvoicePdfWrapper>
       {
         exportInvoiceList?.loading && (
@@ -129,11 +112,11 @@ const InvoiceBusinessUI = (props) => {
   )
 }
 
-export const InvoiceBusiness = (props) => {
-  const invoiceBusinessProps = {
+export const InvoiceDriverManager = (props) => {
+  const invoiceDriverManagerProps = {
     ...props,
-    propsToFetch: ['name'],
-    UIComponent: InvoiceBusinessUI
+    propsToFetch: ['id', 'name'],
+    UIComponent: InvoiceDriverManagerUI
   }
-  return <InvoiceBusinessController {...invoiceBusinessProps} />
+  return <InvoiceDriverManagerController {...invoiceDriverManagerProps} />
 }

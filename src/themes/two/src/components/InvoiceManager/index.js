@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { InvoiceManager as InvoiceManagerController } from './naked'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 import { IconButton } from '../../styles/Buttons'
 import { InvoiceDetails } from '../InvoiceDetails'
@@ -18,7 +17,7 @@ import {
   InvoiceListDetailsWrapper
 } from './styles'
 
-const InvoiceManagerUI = (props) => {
+export const InvoiceManager = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openInvoiceDetail, setOpenInvoiceDetail] = useState(false)
@@ -81,13 +80,4 @@ const InvoiceManagerUI = (props) => {
       }
     </>
   )
-}
-
-export const InvoiceManager = (props) => {
-  const invoiceManagerProps = {
-    ...props,
-    UIComponent: InvoiceManagerUI
-  }
-
-  return <InvoiceManagerController {...invoiceManagerProps} />
 }

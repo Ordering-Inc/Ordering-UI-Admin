@@ -4,7 +4,7 @@ import PropTypes, { string } from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 import { useApi, useSession, useConfig } from 'ordering-components-admin'
 
-export const InvoiceBusiness = (props) => {
+export const InvoiceBusinessManager = (props) => {
   const {
     UIComponent,
     propsToFetch
@@ -398,7 +398,7 @@ export const InvoiceBusiness = (props) => {
   )
 }
 
-InvoiceBusiness.propTypes = {
+InvoiceBusinessManager.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -429,7 +429,7 @@ InvoiceBusiness.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-InvoiceBusiness.defaultProps = {
+InvoiceBusinessManager.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

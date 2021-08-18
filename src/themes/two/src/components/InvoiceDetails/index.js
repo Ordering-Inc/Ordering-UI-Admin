@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { InvoiceDrivers } from '../InvoiceDrivers'
-import { InvoiceBusiness } from '../InvoiceBusiness'
+import { InvoiceDriverManager } from '../InvoiceDriverManager'
+import { InvoiceBusinessManager } from '../InvoiceBusinessManager'
 
 import {
   Container
@@ -51,7 +51,7 @@ export const InvoiceDetails = (props) => {
     >
       {
         selectedInvoice === 'driver' && (
-          <InvoiceDrivers
+          <InvoiceDriverManager
             {...props}
             actionSidebar={actionSidebar}
           />
@@ -59,7 +59,7 @@ export const InvoiceDetails = (props) => {
       }
       {
         selectedInvoice === 'business' && (
-          <InvoiceBusiness
+          <InvoiceBusinessManager
             {...props}
             actionSidebar={actionSidebar}
           />

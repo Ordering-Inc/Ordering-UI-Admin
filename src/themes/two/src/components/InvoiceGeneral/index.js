@@ -281,7 +281,7 @@ export const InvoiceGeneral = (props) => {
         </ActionBtnWrapper>
       </InvoiceGeneralDetailContainer>
       <Alert
-        title={t('GENERAL', 'General')}
+        title={selectedInvoice === 'business' ? t('BUSINESS_INVOICE', 'Business invoice') : t('DRIVER_INVOICE', 'Driver invoice')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
