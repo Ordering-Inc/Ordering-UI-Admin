@@ -114,6 +114,12 @@ export const SidebarMenu = (props) => {
       title: t('INTEGRATIONS', 'Integrations'),
       pageName: 'integrations',
       url: '/settings/integrations'
+    },
+    {
+      id: 5,
+      title: t('COUNTRIES_CITIES', 'Countries/Cities'),
+      pageName: 'places',
+      url: '/settings/places'
     }
   ]
 

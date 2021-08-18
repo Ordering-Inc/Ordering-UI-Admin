@@ -16,7 +16,7 @@ import {
   SettingItemContent
 } from './styles'
 
-export const Integrations = (props) => {
+export const IntegrationListing = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showOption, setShowOption] = useState(null)
@@ -82,7 +82,6 @@ export const Integrations = (props) => {
           <WebhookList />
         </SideBar>
       )}
-
     </>
   )
 }

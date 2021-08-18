@@ -28,7 +28,8 @@ import { BusinessProductsList } from './pages/BusinessProductsList'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
 import { Cms } from './pages/Cms'
-import { Integrations } from './pages/Integrations'
+import { IntegrationsList } from './pages/IntegrationsList'
+import { PlacesList } from './pages/PlacesList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -176,10 +177,17 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
+                    <Route exact path='/settings/places'>
+                      {
+                        auth
+                          ? <PlacesList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route exact path='/settings/integrations'>
                       {
                         auth
-                          ? <Integrations />
+                          ? <IntegrationsList />
                           : <Redirect to='/login' />
                       }
                     </Route>
