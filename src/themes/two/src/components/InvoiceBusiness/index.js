@@ -9,7 +9,8 @@ import {
   DetailsList,
   Tab,
   Form,
-  InvoicePdfWrapper
+  InvoicePdfWrapper,
+  LoadingWrapper
 } from './styles'
 import { IconButton } from '../../styles/Buttons'
 import {
@@ -20,14 +21,14 @@ import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceOrderType } from '../InvoiceOrdertype'
 import { InvoiceBusinessPdf } from '../InvoiceBusinessPdf'
+import { SpinnerLoader } from '../SpinnerLoader'
 
 const InvoiceBusinessUI = (props) => {
   const {
     actionSidebar,
     getOrders,
     invocing,
-    exportInvoice,
-    handleChnageExportInvoice
+    exportInvoiceList
   } = props
 
   const [, t] = useLanguage()
@@ -42,17 +43,16 @@ const InvoiceBusinessUI = (props) => {
     setSelectedDetailType(detailType)
   }
 
-  const download = () => {
+  const pdfDownload = () => {
     getOrders()
   }
 
   useEffect(() => {
-    if (exportInvoice) {
+    if (!exportInvoiceList?.loading && exportInvoiceList?.invoice) {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
       submitBtnRef.current.click()
-      handleChnageExportInvoice(null)
     }
-  }, [exportInvoice])
+  }, [exportInvoiceList?.loading])
 
   return (
     <InvoiceDriversContainer>
@@ -60,7 +60,7 @@ const InvoiceBusinessUI = (props) => {
         <h2>{t('BUSINESS_INVOICE', 'Business invoice')}</h2>
         <HeaderActionBtnWrapper>
           <IconButton
-            onClick={download}
+            onClick={pdfDownload}
             disabled={!invocing?.business || invocing?.business === ''}
           >
             <Download />
@@ -117,6 +117,13 @@ const InvoiceBusinessUI = (props) => {
       <InvoicePdfWrapper ref={invoicePdfRef}>
         <InvoiceBusinessPdf {...props} />
       </InvoicePdfWrapper>
+      {
+        exportInvoiceList?.loading && (
+          <LoadingWrapper>
+            <SpinnerLoader />
+          </LoadingWrapper>
+        )
+      }
     </InvoiceDriversContainer>
   )
 }

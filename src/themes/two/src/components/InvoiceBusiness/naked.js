@@ -17,8 +17,7 @@ export const InvoiceBusiness = (props) => {
   const [businessList, setBusinessList] = useState({ loading: false, businesses: [], error: null })
   const [payMethodsList, setPayMethodsList] = useState({ loading: false, data: [], error: null })
   const [orderTypes, setOrderTypes] = useState(null)
-  const [orderList, setOrderList] = useState({ loading: false, orders: [], error: null })
-  const [exportInvoice, setExportInvoice] = useState(null)
+  const [exportInvoiceList, setExportInvoiceList] = useState({ loading: false, invoice: null, error: null })
   const [businessInvocing, setBusinessInvocing] = useState({
     type: 'charge',
     from: '',
@@ -118,8 +117,8 @@ export const InvoiceBusiness = (props) => {
    */
   const getOrders = async () => {
     try {
-      setOrderList({
-        ...orderList,
+      setExportInvoiceList({
+        ...exportInvoiceList,
         loading: true
       })
       const where = [
@@ -148,23 +147,23 @@ export const InvoiceBusiness = (props) => {
       }
       const { content: { error, result, pagination } } = await ordering.orders().asDashboard().where(where).get()
       if (!error) {
-        setOrderList({
-          ...orderList,
+        const invoice = getExportInvoice(result)
+        setExportInvoiceList({
+          ...exportInvoiceList,
           loading: false,
-          orders: result,
+          invoice: invoice,
           pagination
         })
-        getExportInvoice(result)
       } else {
-        setOrderList({
-          ...orderList,
+        setExportInvoiceList({
+          ...exportInvoiceList,
           loading: false,
           error: result
         })
       }
     } catch (error) {
-      setOrderList({
-        ...orderList,
+      setExportInvoiceList({
+        ...exportInvoiceList,
         loading: false,
         error: [error || error?.toString() || error?.message]
       })
@@ -242,7 +241,7 @@ export const InvoiceBusiness = (props) => {
         _exportInvoice.business = business
       }
     })
-    setExportInvoice(_exportInvoice)
+    return _exportInvoice
   }
 
   const getSuboptionTotal = (option, suboption) => {
@@ -359,8 +358,7 @@ export const InvoiceBusiness = (props) => {
           invocing={businessInvocing}
           payMethodsList={payMethodsList}
           orderTypes={orderTypes}
-          exportInvoice={exportInvoice}
-          handleChnageExportInvoice={setExportInvoice}
+          exportInvoiceList={exportInvoiceList}
           handleChangeOrderTypes={setOrderTypes}
           handleChangeInvocing={setBusinessInvocing}
           handleChangePayMethods={handleChangePayMethods}

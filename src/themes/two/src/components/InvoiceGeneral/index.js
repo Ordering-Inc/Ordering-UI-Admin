@@ -3,6 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select/FirstSelect'
 import { Checkbox } from '../../styles/Checkbox'
 import { Alert } from '../Confirm'
+import { toast } from 'react-toastify'
 import {
   InvoiceGeneralDetailContainer,
   FormControl,
@@ -49,6 +50,17 @@ export const InvoiceGeneral = (props) => {
       })
     } else {
       handleChangeInvocing(formState)
+      const toastConfigure = {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+      const content = t('INVOICE_DATA_SAVED', 'Invoice data saved')
+      toast.dark(content, toastConfigure)
     }
   }
 
@@ -192,6 +204,34 @@ export const InvoiceGeneral = (props) => {
             onChange={(e) => handleChangeFormState('fixed_fee', e.target.value)}
           />
         </FormControl>
+        {
+          selectedInvoice === 'driver' && (
+            <FormControl className='col-md-6'>
+              <Label>{t('DELIVERY_PRICE', 'Delivery price')} ({t('PERCENTAGE', 'Percentage')})</Label>
+              <input
+                type='number'
+                placeholder='0%'
+                min='0'
+                defaultValue={formState?.percentage_delivery_price}
+                onChange={(e) => handleChangeFormState('percentage_delivery_price', e.target.value)}
+              />
+            </FormControl>
+          )
+        }
+        {
+          selectedInvoice === 'driver' && (
+            <FormControl className='col-md-6'>
+              <Label>{t('DRIVER_TIP', 'Driver tip')} ({t('PERCENTAGE', 'Percentage')})</Label>
+              <input
+                type='number'
+                placeholder='0%'
+                min='0'
+                defaultValue={formState?.percentage_driver_tip}
+                onChange={(e) => handleChangeFormState('percentage_driver_tip', e.target.value)}
+              />
+            </FormControl>
+          )
+        }
         <FormControl className='col-md-6'>
           <Label>{t('TAX', 'Tax')}</Label>
           <input

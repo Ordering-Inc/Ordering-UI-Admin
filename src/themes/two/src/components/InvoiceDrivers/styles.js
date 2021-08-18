@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const InvoiceDriversContainer = styled.div`
+  position: relative;
   padding: 20px;
   width: 100%;
 `
@@ -58,4 +59,20 @@ export const Tab = styled.div`
   ${({ active }) => !active && css`
     color: #909BA9;
   `}
+`
+
+export const Form = styled.form`
+  display: none;
+`
+
+export const InvoicePdfWrapper = styled.div`
+  display: none;
+`
+
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 `

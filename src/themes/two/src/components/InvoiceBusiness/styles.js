@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const InvoiceDriversContainer = styled.div`
+  position: relative;
   padding: 20px;
   width: 100%;
 `
@@ -66,4 +67,12 @@ export const Form = styled.form`
 
 export const InvoicePdfWrapper = styled.div`
   display: none;
+`
+
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 `

@@ -2,7 +2,7 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import React from 'react'
 import { Image } from 'react-bootstrap'
 
-export const InvoiceBusinessPdf = (props) => {
+export const InvoiceDriverPdf = (props) => {
   const {
     exportInvoiceList,
     getSubtotal,
@@ -120,7 +120,7 @@ export const InvoiceBusinessPdf = (props) => {
         width='150px'
       />
       <br />
-      <span>{t('INVOICE_FOR', 'Invoice for')} <b>{exportInvoiceList?.invoice?.business?.name}</b></span><br />
+      <span>{t('INVOICE_FOR', 'Invoice for')} <b>{exportInvoiceList?.invoice?.driver?.name}</b></span><br />
       {
         exportInvoiceList?.invoice?.from && exportInvoiceList?.invoice?.to && (
           <>
@@ -173,30 +173,14 @@ export const InvoiceBusinessPdf = (props) => {
           </tr>
         </thead>
         <tbody>
-          {
-            exportInvoiceList?.invoice?.type === 'payout' && (
-              <tr>
-                <td style={styles.table.tbody.tr.td}>{t('ORDERS', 'Orders')} ({t('SUBTOTAL', 'Subtotal')})</td>
-                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.orders_subtotal)}</td>
-              </tr>
-            )
-          }
-          {
-            exportInvoiceList?.invoice?.inlcude_discounts && (
-              <tr>
-                <td style={styles.table.tbody.tr.td}>{t('DISCOUNTS_BY_PLATFORM', 'Discounts by platform')}</td>
-                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.discounts)}</td>
-              </tr>
-            )
-          }
-          {
-            exportInvoiceList?.invoice?.type === 'payout' && exportInvoiceList?.invoice?.tax_products !== 0 && (
-              <tr>
-                <td style={styles.table.tbody.tr.td}>{t('PRODUCTS', 'Products')} {t('TAX', 'Tax')}</td>
-                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.tax_products)}</td>
-              </tr>
-            )
-          }
+          <tr>
+            <td style={styles.table.tbody.tr.td}>{t('ORDERS', 'Orders')} ({t('SUBTOTAL', 'Subtotal')})</td>
+            <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.orders_subtotal)}</td>
+          </tr>
+          <tr>
+            <td style={styles.table.tbody.tr.td}>{t('DISCOUNT', 'Discount')}</td>
+            <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.discounts)}</td>
+          </tr>
           <tr>
             <td style={styles.table.tbody.tr.td}>{t('PERCENTAGE_FEE', 'Percentage Fee')} ({exportInvoiceList?.invoice?.percentage_fee}%)</td>
             <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.percentage_fee_total)}</td>
@@ -205,17 +189,21 @@ export const InvoiceBusinessPdf = (props) => {
             <td style={styles.table.tbody.tr.td}>{t('FIXED_FEE', 'Fixed Fee')}</td>
             <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.fixed_fee_total)}</td>
           </tr>
-          {
-            exportInvoiceList?.invoice?.misc_amount !== 0 && (
-              <tr>
-                <td style={styles.table.tbody.tr.td}>{t('MISC', 'Misc')} {exportInvoiceList?.invoice?.misc_description && (
-                  <small>({exportInvoiceList?.invoice?.misc_description})</small>
-                )}
-                </td>
-                <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.misc_amount)}</td>
-              </tr>
-            )
-          }
+          <tr>
+            <td style={styles.table.tbody.tr.td}>{t('DELIVERY_PRICE', 'Delivery price')} {t('PERCENTAGE', 'Percentage')}</td>
+            <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.percentage_delivery_price_total)}</td>
+          </tr>
+          <tr>
+            <td style={styles.table.tbody.tr.td}>{t('DRIVER_TIP', 'Driver tip')} {t('PERCENTAGE', 'Percentage')}</td>
+            <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.percentage_driver_tip_total)}</td>
+          </tr>
+          <tr>
+            <td style={styles.table.tbody.tr.td}>{t('MISC', 'Misc')} {exportInvoiceList?.invoice?.misc_description && (
+              <small>({exportInvoiceList?.invoice?.misc_description})</small>
+            )}
+            </td>
+            <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(exportInvoiceList?.invoice?.misc_amount)}</td>
+          </tr>
         </tbody>
         <tfoot style={styles.table.tfoot}>
           <tr style={styles.table.tfoot.tr}>
