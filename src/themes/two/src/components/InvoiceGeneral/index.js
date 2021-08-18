@@ -174,7 +174,7 @@ export const InvoiceGeneral = (props) => {
         }
         {
           selectedInvoice === 'driver' && (
-            <CheckBoxWrapper>
+            <CheckBoxWrapper className='col-md-12'>
               <Checkbox
                 id='cancelled'
                 defaultChecked={formState?.cancelled || false}

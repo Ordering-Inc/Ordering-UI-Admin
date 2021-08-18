@@ -214,7 +214,9 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     onChange: function onChange(value) {
       return handleChangeFormState('driver', value);
     }
-  }))), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+  }))), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+    className: "col-md-12"
+  }, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     id: "cancelled",
     defaultChecked: (formState === null || formState === void 0 ? void 0 : formState.cancelled) || false,
     onClick: function onClick(e) {
