@@ -244,6 +244,9 @@ export const InvoiceDrivers = (props) => {
     return _exportInvoice
   }
 
+  /**
+   * Method to get sub option total
+   */
   const getSuboptionTotal = (option, suboption) => {
     let suboptionQuantity = 1
     let suboptionPrice = suboption.price
@@ -256,6 +259,9 @@ export const InvoiceDrivers = (props) => {
     return suboptionPrice * suboptionQuantity
   }
 
+  /**
+   * Method to get product total
+   */
   const getProductsTotal = (product) => {
     let total = 0
     if (product.options) {
@@ -272,6 +278,9 @@ export const InvoiceDrivers = (props) => {
     return (total + product.price) * product.quantity
   }
 
+  /**
+   * Method to get order sub total
+   */
   const getSubtotal = (order) => {
     if (!order.summary) {
       let subtotal = 0
@@ -291,6 +300,9 @@ export const InvoiceDrivers = (props) => {
     }
   }
 
+  /**
+   * Method to get order tax
+   */
   const getTax = (order) => {
     if (!order.summary) {
       const tax = (order.tax_type === 2) ? order.tax * (getSubtotal(order) - order.discount) / 100 : 0
@@ -300,6 +312,9 @@ export const InvoiceDrivers = (props) => {
     }
   }
 
+  /**
+   * Method to get order discount
+   */
   const getDiscount = (order) => {
     if (!order.summary) {
       return roundPrice(order.discount)
@@ -308,12 +323,18 @@ export const InvoiceDrivers = (props) => {
     }
   }
 
+  /**
+   * Method to get converted number
+   */
   const roundPrice = (value) => {
     const power = Math.pow(10, configs?.format_number_decimal_length?.value)
     const poweredVal = Math.round(value * power)
     return poweredVal / power
   }
 
+  /**
+   * Method to get order total
+   */
   const getTotal = (order) => {
     if (!order.summary) {
       const subtotal = getSubtotal(order)
@@ -326,6 +347,9 @@ export const InvoiceDrivers = (props) => {
     }
   }
 
+  /**
+   * Method to get order service fee
+   */
   const getServiceFee = (order) => {
     if (!order.summary) {
       const subtotal = (getSubtotal(order) - order.discount) * order.service_fee / 100
@@ -335,6 +359,9 @@ export const InvoiceDrivers = (props) => {
     }
   }
 
+  /**
+   * Method to get order driver tip
+   */
   const getDriverTip = (order) => {
     if (!order.summary) {
       const tip = (getSubtotal(order) - order.discount) * order.driver_tip / 100

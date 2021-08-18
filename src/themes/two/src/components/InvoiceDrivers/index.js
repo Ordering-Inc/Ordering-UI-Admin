@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useApi } from 'ordering-components-admin'
 import { InvoiceDrivers as InvoiceDriversController } from './naked'
 import { DragScroll } from '../DragScroll'
 import { SpinnerLoader } from '../SpinnerLoader'
@@ -31,6 +31,7 @@ const InvoiceDriversUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [ordering] = useApi()
   const [selectedDetailType, setSelectedDetailType] = useState('general')
   const inputRef = useRef(null)
   const submitBtnRef = useRef(null)
@@ -94,7 +95,7 @@ const InvoiceDriversUI = (props) => {
       {
         selectedDetailType === 'payment_methods' && <InvoicePayMethods {...props} />
       }
-      <Form target='_blank' action='https://apiv4.ordering.co/v400/en/luisv4/pdf/html' method='POST'>
+      <Form target='_blank' action={`${ordering.root}/pdf/html`} method='POST'>
         <input ref={inputRef} type='hidden' name='html' />
         <button ref={submitBtnRef} type='submit' />
       </Form>
