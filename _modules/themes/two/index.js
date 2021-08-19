@@ -273,10 +273,10 @@ Object.defineProperty(exports, "InputPhoneNumber", {
     return _InputPhoneNumber.InputPhoneNumber;
   }
 });
-Object.defineProperty(exports, "Integrations", {
+Object.defineProperty(exports, "IntegrationListing", {
   enumerable: true,
   get: function get() {
-    return _Integrations.Integrations;
+    return _IntegrationListing.IntegrationListing;
   }
 });
 Object.defineProperty(exports, "InterActOrderMarker", {
@@ -451,6 +451,12 @@ Object.defineProperty(exports, "Personalization", {
   enumerable: true,
   get: function get() {
     return _Personalization.Personalization;
+  }
+});
+Object.defineProperty(exports, "PlaceListing", {
+  enumerable: true,
+  get: function get() {
+    return _PlaceListing.PlaceListing;
   }
 });
 Object.defineProperty(exports, "ProductItemAccordion", {
@@ -740,7 +746,7 @@ var _InvoiceManager = require("./src/components/InvoiceManager");
 
 var _InputPhoneNumber = require("./src/components/InputPhoneNumber");
 
-var _Integrations = require("./src/components/Integrations");
+var _IntegrationListing = require("./src/components/IntegrationListing");
 
 var _InterActOrderMarker = require("./src/components/InterActOrderMarker");
 
@@ -799,6 +805,8 @@ var _OrderStatusSubFilter = require("./src/components/OrderStatusSubFilter");
 var _PaymethodTypeSelector = require("./src/components/PaymethodTypeSelector");
 
 var _Personalization = require("./src/components/Personalization");
+
+var _PlaceListing = require("./src/components/PlaceListing");
 
 var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
 
