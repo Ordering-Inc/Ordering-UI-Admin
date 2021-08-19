@@ -78,7 +78,7 @@
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "moment-range": "^4.0.2",
-    "ordering-components-admin": "github:Ordering-Inc/ordering-components-admin#invoice-manager",
+    "ordering-components-admin": "github:Ordering-Inc/ordering-components-admin#release",
     "polished": "^3.6.7",
     "prop-types": "^15.7.2",
     "react-bootstrap": "^1.6.0",
