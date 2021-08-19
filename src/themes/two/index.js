@@ -42,7 +42,7 @@ import { GoogleGpsButton } from './src/components/GoogleGpsButton'
 import { Home } from './src/components/Home'
 import { InvoiceManager } from './src/components/InvoiceManager'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
-import { Integrations } from './src/components/Integrations'
+import { IntegrationListing } from './src/components/IntegrationListing'
 import { InterActOrderMarker } from './src/components/InterActOrderMarker'
 import { Layout } from './src/components/Layout'
 import { LoginForm } from './src/components/LoginForm'
@@ -72,6 +72,7 @@ import { OrderStatusFilterBar } from './src/components/OrderStatusFilterBar'
 import { OrderStatusSubFilter } from './src/components/OrderStatusSubFilter'
 import { PaymethodTypeSelector } from './src/components/PaymethodTypeSelector'
 import { Personalization } from './src/components/Personalization'
+import { PlaceListing } from './src/components/PlaceListing'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { SearchBar } from './src/components/SearchBar'
 import { Settings } from './src/components/Settings'
@@ -146,7 +147,7 @@ export {
   Home,
   InvoiceManager,
   InputPhoneNumber,
-  Integrations,
+  IntegrationListing,
   InterActOrderMarker,
   Layout,
   LoginForm,
@@ -176,6 +177,7 @@ export {
   OrderStatusSubFilter,
   PaymethodTypeSelector,
   Personalization,
+  PlaceListing,
   ProductItemAccordion,
   SearchBar,
   Settings,
