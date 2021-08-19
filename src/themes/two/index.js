@@ -17,6 +17,7 @@ import { BusinessTypes } from './src/components/BusinessTypes'
 import { BusinessTypeForm } from './src/components/BusinessTypeForm'
 import { BusinessVideos } from './src/components/BusinessVideos'
 import { CitySelector } from './src/components/CitySelector'
+import { Cms } from './src/components/Cms'
 import { ColumnAllowSettingPopover } from './src/components/ColumnAllowSettingPopover'
 import { Confirm, Alert } from './src/components/Confirm'
 import { DateTypeSelector } from './src/components/DateTypeSelector'
@@ -41,6 +42,7 @@ import { GoogleGpsButton } from './src/components/GoogleGpsButton'
 import { Home } from './src/components/Home'
 import { InvoiceManager } from './src/components/InvoiceManager'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
+import { Integrations } from './src/components/Integrations'
 import { InterActOrderMarker } from './src/components/InterActOrderMarker'
 import { Layout } from './src/components/Layout'
 import { LoginForm } from './src/components/LoginForm'
@@ -96,6 +98,7 @@ import { Button } from './src/styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
 import { Tab, Tabs } from './src/styles/Tabs'
+import { Toast } from './src/styles/Toast'
 
 export {
   Alert,
@@ -118,6 +121,7 @@ export {
   BusinessTypeForm,
   BusinessVideos,
   CitySelector,
+  Cms,
   ColumnAllowSettingPopover,
   Confirm,
   DateTypeSelector,
@@ -142,6 +146,7 @@ export {
   Home,
   InvoiceManager,
   InputPhoneNumber,
+  Integrations,
   InterActOrderMarker,
   Layout,
   LoginForm,
@@ -204,5 +209,6 @@ export {
   Select,
   Tab,
   Tabs,
-  TextArea
+  TextArea,
+  Toast
 }

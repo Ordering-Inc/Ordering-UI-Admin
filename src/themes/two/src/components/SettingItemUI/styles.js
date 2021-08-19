@@ -8,7 +8,7 @@ export const SettingItemContainer = styled.div`
   margin: 15px 0;
   padding: 20px 10px;
   transition: all 0.3s;
-  border-radius: 20px;
+  border-radius: 8px;
   cursor: pointer;
   border: 1px solid transparent;
 

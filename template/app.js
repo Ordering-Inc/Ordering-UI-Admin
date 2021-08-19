@@ -27,6 +27,9 @@ import { OperationSettings } from './pages/OperationSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
+import { Cms } from './pages/Cms'
+import { IntegrationsList } from './pages/IntegrationsList'
+import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -34,7 +37,6 @@ import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
 import { DriverAnalytics } from './pages/DriverAnalytics'
-import { Toast } from '../src/themes/two/src/components/Toast'
 
 export const App = () => {
   const [{ auth, loading }] = useSession()
@@ -169,6 +171,27 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
+                    <Route exact path='/settings/pages'>
+                      {
+                        auth
+                          ? <Cms />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/settings/places'>
+                      {
+                        auth
+                          ? <PlacesList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/settings/integrations'>
+                      {
+                        auth
+                          ? <IntegrationsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route exact path='/store/:store'>
                       {
                         auth
@@ -204,7 +227,6 @@ export const App = () => {
                   </Switch>
                 </ScrollToTop>
               )}
-              <Toast />
             </Layout>
           </>
         )

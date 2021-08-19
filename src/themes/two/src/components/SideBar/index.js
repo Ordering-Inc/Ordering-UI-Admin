@@ -9,10 +9,12 @@ import {
 export const SideBar = (props) => {
   const {
     open,
-    sidebarId
+    sidebarId,
+    defaultSideBarWidth
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const sideBarWidth = defaultSideBarWidth || 500
 
   const id = sidebarId || 'sideBar'
 
@@ -22,16 +24,16 @@ export const SideBar = (props) => {
     }
     setIsMenuOpen(value)
     document.getElementById(id).style.width = value
-      ? width > 489 ? '500px' : '100vw'
+      ? width >= sideBarWidth ? `${sideBarWidth}px` : '100vw'
       : '0'
   }
 
   useEffect(() => {
     if (isMenuOpen) {
-      if (width <= 500) {
+      if (width <= sideBarWidth) {
         document.getElementById(id).style.width = '100vw'
       } else {
-        document.getElementById(id).style.width = '500px'
+        document.getElementById(id).style.width = `${sideBarWidth}px`
       }
     }
   }, [width])
@@ -42,14 +44,16 @@ export const SideBar = (props) => {
   }, [open])
 
   return (
-    <BarContainer id={id}>
-      <IconButton
-        color='black'
-        onClick={() => props.onClose()}
-      >
-        <XLg />
-      </IconButton>
-      {props.children}
-    </BarContainer>
+    <>
+      <BarContainer id={id}>
+        <IconButton
+          color='black'
+          onClick={() => props.onClose()}
+        >
+          <XLg />
+        </IconButton>
+        {props.children}
+      </BarContainer>
+    </>
   )
 }

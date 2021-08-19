@@ -95,7 +95,7 @@ export const Select = (props) => {
     onChange && onChange(option.value)
   }
 
-  const popStyle = { ...styles.popper, visibility: open ? 'visible' : 'hidden', minWidth: minWidth || '100px' }
+  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: minWidth || '100px' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react'
-import { OrdersSearch } from './styles'
+import { SearchContainer } from './styles'
 import IosSearch from '@meronex/icons/ios/IosSearch'
 
-export const SearchBar = ({ onSearch, search, placeholder }) => {
+export const SearchBar = ({ onSearch, search, placeholder, isCustomLayout }) => {
   let timeout = null
 
   const el = useRef()
@@ -26,9 +26,9 @@ export const SearchBar = ({ onSearch, search, placeholder }) => {
   }, [search])
 
   return (
-    <OrdersSearch>
+    <SearchContainer isCustomLayout={isCustomLayout}>
       <IosSearch />
       <input type='text' ref={el} name='search' placeholder={placeholder} />
-    </OrdersSearch>
+    </SearchContainer>
   )
 }

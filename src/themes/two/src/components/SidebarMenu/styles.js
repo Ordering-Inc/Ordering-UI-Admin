@@ -115,6 +115,14 @@ export const BurgerButton = styled.button`
   }
 `
 
+export const SidebarMainContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: calc(100% - 80px);
+`
+
 export const SidebarContent = styled.div`
   flex: 1;
   box-sizing: border-box;
@@ -167,6 +175,7 @@ export const SubMenu = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  border-radius: 8px;
 
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
