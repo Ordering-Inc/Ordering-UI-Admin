@@ -30,6 +30,7 @@ import { MessagesList } from './pages/MessagesList'
 import { Cms } from './pages/Cms'
 import { IntegrationsList } from './pages/IntegrationsList'
 import { PlacesList } from './pages/PlacesList'
+import { InvoiceManager } from './pages/InvoiceManager'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -209,6 +210,13 @@ export const App = () => {
                       {
                         auth
                           ? <DriverAnalytics />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/analytics/invoice'>
+                      {
+                        auth
+                          ? <InvoiceManager />
                           : <Redirect to='/login' />
                       }
                     </Route>

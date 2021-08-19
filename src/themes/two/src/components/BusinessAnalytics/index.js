@@ -30,6 +30,7 @@ import {
 
 const BusinessAnalyticsUI = (props) => {
   const {
+    handleChangeFilterList,
     filterList,
     ordersList,
     salesList,
@@ -47,6 +48,10 @@ const BusinessAnalyticsUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const [businessFilterModal, setBusinessFilterModal] = useState(false)
+
+  const handleChangeDate = (date1, date2) => {
+    handleChangeFilterList({ ...filterList, lapse: `${date1},${date2}` })
+  }
 
   return (
     <BusinessAnalyticsContainer>
@@ -71,6 +76,7 @@ const BusinessAnalyticsUI = (props) => {
           <BusinessCalendarWrapper>
             <AnalyticsCalendar
               {...props}
+              handleChangeDate={handleChangeDate}
             />
           </BusinessCalendarWrapper>
         </HeaderFilterContainer>

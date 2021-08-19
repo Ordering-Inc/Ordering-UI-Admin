@@ -25,7 +25,8 @@ export const ListenPageChanges = ({ children }) => {
     places: '/settings/places',
     integrations: '/settings/integrations',
     business_analytics: '/analytics/business',
-    drivers_analytics: '/analytics/drivers'
+    drivers_analytics: '/analytics/drivers',
+    invoice: '/analytics/invoice'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

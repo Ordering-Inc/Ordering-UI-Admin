@@ -40,6 +40,7 @@ import { DriversOnlineOfflineFilter } from './src/components/DriversOnlineOfflin
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleGpsButton } from './src/components/GoogleGpsButton'
 import { Home } from './src/components/Home'
+import { InvoiceManager } from './src/components/InvoiceManager'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { Integrations } from './src/components/Integrations'
 import { InterActOrderMarker } from './src/components/InterActOrderMarker'
@@ -143,6 +144,7 @@ export {
   ForgotPasswordForm,
   GoogleGpsButton,
   Home,
+  InvoiceManager,
   InputPhoneNumber,
   Integrations,
   InterActOrderMarker,

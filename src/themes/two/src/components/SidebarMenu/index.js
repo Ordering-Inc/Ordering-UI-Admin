@@ -147,6 +147,12 @@ export const SidebarMenu = (props) => {
       title: t('BUSINESS_INTELLIGENCE', 'Business Intelligence'),
       pageName: 'intelligence_analytics',
       url: '/analytics/business_intelligence'
+    },
+    {
+      id: 5,
+      title: t('INVOICE_MANAGER', 'Invoice manager'),
+      pageName: 'invoice',
+      url: '/analytics/invoice'
     }
   ]
   const handleGoToPage = (data) => {
@@ -276,6 +282,35 @@ export const SidebarMenu = (props) => {
                       <PeopleIcon />
                       <span>{t('USERS', 'Users')}</span>
                     </ContextAwareToggle>
+                  </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='5'
+                      active={
+                        location.pathname === '/analytics/business' ||
+                        location.pathname === '/analytics/drivers' ||
+                        location.pathname === '/analytics/promotions' ||
+                        location.pathname === '/analytics/business_intelligence' ||
+                        location.pathname === '/analytics/invoice'
+                      }
+                    >
+                      <BarChartLineIcon />
+                      <span>{t('ANALYTICS', 'Analytics')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='5'>
+                      <MenuContent>
+                        {analyticsSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
                   </MenuContainer>
 
                   <MenuContainer>
