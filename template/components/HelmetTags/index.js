@@ -10,7 +10,7 @@ export const HelmetTags = (props) => {
   const metaTag = page ? helmetData[page] : helmetData.app
   return (
     <Helmet titleTemplate={!page ? '' : 'Ordering - %s'}>
-      <title>{props.helmetTitle || metaTag.title}</title>
+      <title>{props?.helmetTitle || metaTag?.title}</title>
       <meta name='description' content={props.description || metaTag.description} />
       <meta name='keywords' content={props.keywords || metaTag.keywords} />
       {props.robots ? (
