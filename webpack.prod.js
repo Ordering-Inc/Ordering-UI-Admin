@@ -75,13 +75,24 @@ module.exports = {
         ]
       },
       {
-        test: /\.(svg|png|jpe?g|gif|webp|mp3|ogg|otf|eot|ttf|woff|woff2)$/i,
+        test: /\.(svg|png|jpe?g|gif|webp|mp3|ogg)$/i,
         use: [
           {
             loader: 'url-loader',
             options: {
               esModule: false,
               limit: 4096
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(otf|eot|svg|ttf|woff|woff2)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              esModule: false
             }
           }
         ]
