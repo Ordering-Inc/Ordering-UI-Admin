@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DumyLogo = exports.AddNewBusinessBrandTitle = exports.AddNewBusinessBrandContainer = exports.BusinessBrand = exports.Container = void 0;
+exports.AddNewBusinessBrandTitle = exports.AddNewBusinessBrandContainer = exports.BusinessBrand = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -44,7 +44,3 @@ var AddNewBusinessBrandTitle = _styledComponents.default.div(_templateObject6 ||
 });
 
 exports.AddNewBusinessBrandTitle = AddNewBusinessBrandTitle;
-
-var DumyLogo = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 32px;\n  height: 32px;\n  min-width: 32px;\n  min-height: 32px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0 10px;\n\n  svg {\n    font-size: 28px;\n    color: #ADB5BD;\n  }\n"])));
-
-exports.DumyLogo = DumyLogo;

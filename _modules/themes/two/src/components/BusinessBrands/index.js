@@ -11,12 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
-
-var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
-
-var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
-
 var _BusinessBrandForm = require("../BusinessBrandForm");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -115,24 +109,16 @@ var BusinessBrandsUI = function BusinessBrandsUI(props) {
       height: 20
     }));
   }) : (brandList === null || brandList === void 0 ? void 0 : (_brandList$brands = brandList.brands) === null || _brandList$brands === void 0 ? void 0 : _brandList$brands.length) > 0 && (brandList === null || brandList === void 0 ? void 0 : brandList.brands.map(function (brand, i) {
-    var _brand$name;
-
-    return /*#__PURE__*/_react.default.createElement(_styles.BusinessBrand, {
+    return /*#__PURE__*/_react.default.createElement(_BusinessBrandForm.BusinessBrandForm, {
       key: i,
-      disabled: formState === null || formState === void 0 ? void 0 : formState.loading,
-      isChecked: (business === null || business === void 0 ? void 0 : business.franchise_id) === brand.id,
-      onClick: function onClick() {
-        return handleSelectBusinessBrand(brand.id);
-      }
-    }, (business === null || business === void 0 ? void 0 : business.franchise_id) === brand.id ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
-      className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), brand !== null && brand !== void 0 && brand.logo ? /*#__PURE__*/_react.default.createElement("img", {
-      src: brand === null || brand === void 0 ? void 0 : brand.logo,
-      alt: brand === null || brand === void 0 ? void 0 : (_brand$name = brand.name) === null || _brand$name === void 0 ? void 0 : _brand$name.toLowerCase(),
-      width: "30px",
-      height: "30px",
-      loading: "lazy"
-    }) : /*#__PURE__*/_react.default.createElement(_styles.DumyLogo, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)), /*#__PURE__*/_react.default.createElement("span", null, brand === null || brand === void 0 ? void 0 : brand.name));
+      brand: brand,
+      handleSelectBusinessBrand: handleSelectBusinessBrand,
+      handleSuccessAddBusinessBrand: handleSuccessAddBusinessBrand,
+      business: business,
+      brandList: brandList,
+      handleUpdateBrandList: handleUpdateBrandList,
+      editMode: true
+    });
   })), /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessBrandContainer, null, isAdd ? /*#__PURE__*/_react.default.createElement(_BusinessBrandForm.BusinessBrandForm, {
     onClose: function onClose() {
       return setIsAdd(false);
