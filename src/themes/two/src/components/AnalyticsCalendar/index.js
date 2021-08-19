@@ -6,13 +6,16 @@ import {
 } from './styles'
 import DateRangePicker from 'react-daterange-picker'
 import FiCalendar from '@meronex/icons/fi/FiCalendar'
+import { extendMoment } from 'moment-range'
+import Moment from 'moment'
 import 'react-daterange-picker/dist/css/react-calendar.css'
 
 export const AnalyticsCalendar = (props) => {
   const {
-    filterList,
-    handleChangeFilterList
+    handleChangeDate,
+    defaultValue
   } = props
+  const moment = extendMoment(Moment)
   const [, t] = useLanguage()
   const [dates, setDates] = useState(null)
   const [isShowCalendar, setIsShowCalendar] = useState(false)
@@ -28,6 +31,11 @@ export const AnalyticsCalendar = (props) => {
     }
   }
 
+  const handleOpenCalendar = (evt) => {
+    evt.preventDefault()
+    setIsShowCalendar(true)
+  }
+
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
     return () => window.removeEventListener('mouseup', handleClickOutside)
@@ -35,13 +43,19 @@ export const AnalyticsCalendar = (props) => {
 
   useEffect(() => {
     if (dates) {
-      handleChangeFilterList({ ...filterList, lapse: `${dates?.start?.format('YYYY-MM-DD')},${dates?.end?.format('YYYY-MM-DD')}` })
+      handleChangeDate(dates?.start?.format('YYYY-MM-DD'), dates?.end?.format('YYYY-MM-DD'))
     }
   }, [dates])
 
+  useEffect(() => {
+    if (defaultValue && defaultValue?.from !== '' && defaultValue?.to !== '') {
+      setDates((moment.range(moment(defaultValue?.from), moment(defaultValue?.to))))
+    }
+  }, [])
+
   return (
     <>
-      <Button onClick={() => setIsShowCalendar(true)}>
+      <Button onClick={handleOpenCalendar}>
         <FiCalendar />
         {
           dates ? `${dates?.start?.format('YYYY-MM-DD')}~${dates?.end?.format('YYYY-MM-DD')}` : t('SELECT_DATE_RANGE', 'Select Date Range')

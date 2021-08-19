@@ -27,6 +27,7 @@ import { OperationSettings } from './pages/OperationSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
+import { InvoiceManager } from './pages/InvoiceManager'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -186,6 +187,13 @@ export const App = () => {
                       {
                         auth
                           ? <DriverAnalytics />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/analytics/invoice'>
+                      {
+                        auth
+                          ? <InvoiceManager />
                           : <Redirect to='/login' />
                       }
                     </Route>
