@@ -9,13 +9,11 @@ exports.Toast = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactToastify = require("react-toastify");
-
-require("react-toastify/dist/ReactToastify.min.css");
-
-var _styles = require("./styles");
+var _templateObject, _templateObject2, _templateObject3;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -33,44 +31,66 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var ToastBar = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  visibility: hidden;\n  min-width: 250px;\n  background-color: ", ";\n  color: #fff;\n  text-align: center;\n  border-radius: 2px;\n  padding: 16px;\n  position: fixed;\n  z-index: 9999;\n  bottom: 30px;\n  border-radius: 8px;\n\n  ", "\n\n  /* Animations to fade the snackbar in and out */\n  @-webkit-keyframes fadein {\n    from {bottom: 0; opacity: 0;}\n    to {bottom: 30px; opacity: 1;}\n  }\n\n  @keyframes fadein {\n    from {bottom: 0; opacity: 0;}\n    to {bottom: 30px; opacity: 1;}\n  }\n\n  @-webkit-keyframes fadeout {\n    from {bottom: 30px; opacity: 1;}\n    to {bottom: 0; opacity: 0;}\n  }\n\n  @keyframes fadeout {\n    from {bottom: 30px; opacity: 1;}\n    to {bottom: 0; opacity: 0;}\n  }\n"])), function (_ref) {
+  var backgroundColor = _ref.backgroundColor;
+  return backgroundColor;
+}, function (props) {
+  var _props$theme;
+
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    left: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    right: 30px;\n  "])));
+});
+
 var Toast = function Toast() {
   var _useToast = (0, _orderingComponentsAdmin.useToast)(),
       _useToast2 = _slicedToArray(_useToast, 2),
       toastConfig = _useToast2[0],
       hideToast = _useToast2[1].hideToast;
 
+  var toastRef = (0, _react.useRef)();
   (0, _react.useEffect)(function () {
-    if (!toastConfig) {
+    if (!toastConfig && !toastRef.current) {
       return;
     }
 
-    switch (toastConfig === null || toastConfig === void 0 ? void 0 : toastConfig.type) {
-      case _orderingComponentsAdmin.ToastType.Info:
-        _reactToastify.toast.info(toastConfig === null || toastConfig === void 0 ? void 0 : toastConfig.message);
-
-        break;
-
-      case _orderingComponentsAdmin.ToastType.Error:
-        _reactToastify.toast.error(toastConfig === null || toastConfig === void 0 ? void 0 : toastConfig.message);
-
-        break;
-
-      case _orderingComponentsAdmin.ToastType.Success:
-        _reactToastify.toast.success(toastConfig === null || toastConfig === void 0 ? void 0 : toastConfig.message);
-
-        break;
-    }
-
-    hideToast();
+    var toast = document.getElementById('toast-bar');
+    toast.style.visibility = 'visible';
+    toast.style.animation = 'fadein 0.5s, fadeout 0.5s 2.5s';
+    setTimeout(function () {
+      toast.style.visibility = 'hidden';
+      hideToast();
+    }, duration);
   }, [toastConfig]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_reactToastify.ToastContainer, {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true
-  }));
+
+  if (!toastConfig) {
+    return null;
+  }
+
+  var type = toastConfig.type,
+      message = toastConfig.message,
+      duration = toastConfig.duration;
+  var backgroundColor = '#6ba4ff';
+
+  switch (type) {
+    case _orderingComponentsAdmin.ToastType.Info:
+      backgroundColor = '#6ba4ff';
+      break;
+
+    case _orderingComponentsAdmin.ToastType.Error:
+      backgroundColor = '#D83520';
+      break;
+
+    case _orderingComponentsAdmin.ToastType.Success:
+      backgroundColor = '#73bd24';
+      break;
+  }
+
+  return /*#__PURE__*/_react.default.createElement(ToastBar, {
+    backgroundColor: backgroundColor,
+    id: "toast-bar",
+    ref: toastRef
+  }, message);
 };
 
 exports.Toast = Toast;

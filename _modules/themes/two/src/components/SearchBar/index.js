@@ -22,7 +22,8 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 var SearchBar = function SearchBar(_ref) {
   var onSearch = _ref.onSearch,
       search = _ref.search,
-      placeholder = _ref.placeholder;
+      placeholder = _ref.placeholder,
+      isCustomLayout = _ref.isCustomLayout;
   var timeout = null;
   var el = (0, _react.useRef)();
 
@@ -41,7 +42,9 @@ var SearchBar = function SearchBar(_ref) {
       el.current.value = '';
     }
   }, [search]);
-  return /*#__PURE__*/_react.default.createElement(_styles.OrdersSearch, null, /*#__PURE__*/_react.default.createElement(_IosSearch.default, null), /*#__PURE__*/_react.default.createElement("input", {
+  return /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, {
+    isCustomLayout: isCustomLayout
+  }, /*#__PURE__*/_react.default.createElement(_IosSearch.default, null), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     ref: el,
     name: "search",

@@ -153,7 +153,7 @@ var Select = function Select(props) {
   };
 
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
-    visibility: open ? 'visible' : 'hidden',
+    display: open ? 'block' : 'none',
     minWidth: minWidth || '100px'
   });
 

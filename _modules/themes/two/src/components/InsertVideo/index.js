@@ -5,15 +5,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SideBar = void 0;
+exports.InsertVideo = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
+var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
+
+var _utils = require("../../../../../utils");
 
 var _styles = require("./styles");
 
@@ -33,52 +35,45 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var SideBar = function SideBar(props) {
-  var open = props.open,
-      sidebarId = props.sidebarId,
-      defaultSideBarWidth = props.defaultSideBarWidth;
+var InsertVideo = function InsertVideo(props) {
+  var editorContext = props.editorContext,
+      onClose = props.onClose,
+      handleRestoreEditor = props.handleRestoreEditor;
 
-  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      isMenuOpen = _useState2[0],
-      setIsMenuOpen = _useState2[1];
+      videoUrl = _useState2[0],
+      setVideoUrl = _useState2[1];
 
-  var sideBarWidth = defaultSideBarWidth || 500;
-  var id = sidebarId || 'sideBar';
-
-  var actionSidebar = function actionSidebar(value) {
-    if (!value) {
-      props.onClose();
+  var getVideoEmbedded = function getVideoEmbedded(video) {
+    if (video.indexOf('youtube')) {
+      return '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + (0, _utils.formatUrlVideo)(video) + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
     }
-
-    setIsMenuOpen(value);
-    document.getElementById(id).style.width = value ? width >= sideBarWidth ? "".concat(sideBarWidth, "px") : '100vw' : '0';
   };
 
-  (0, _react.useEffect)(function () {
-    if (isMenuOpen) {
-      if (width <= sideBarWidth) {
-        document.getElementById(id).style.width = '100vw';
-      } else {
-        document.getElementById(id).style.width = "".concat(sideBarWidth, "px");
-      }
+  var handleInsertClick = function handleInsertClick() {
+    var HTMLstring = getVideoEmbedded(videoUrl);
+    handleRestoreEditor();
+    editorContext.invoke('editor.pasteHTML', HTMLstring);
+    onClose();
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.InsertLinkContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INSERT_VIDEO', 'Insert video')), /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('VIDEO_URL', 'Video url')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "text",
+    onChange: function onChange(e) {
+      return setVideoUrl(e.target.value);
     }
-  }, [width]);
-  (0, _react.useEffect)(function () {
-    if (!open) return;
-    actionSidebar(true);
-  }, [open]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
-    id: id
-  }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
-    color: "black",
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "primary",
     onClick: function onClick() {
-      return props.onClose();
+      return handleInsertClick();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), props.children));
+  }, t('INSERT', 'Insert')));
 };
 
-exports.SideBar = SideBar;
+exports.InsertVideo = InsertVideo;

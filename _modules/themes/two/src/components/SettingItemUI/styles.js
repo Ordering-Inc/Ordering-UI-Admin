@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SettingItemContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  margin: 15px 0;\n  padding: 20px 10px;\n  transition: all 0.3s;\n  border-radius: 20px;\n  cursor: pointer;\n  border: 1px solid transparent;\n\n  ", "\n\n  &:hover {\n    background: #E9F2FE;\n  }\n\n  @media (max-width: 576px) {\n    flex-direction: column;\n  }\n"])), function (_ref) {
+var SettingItemContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  margin: 15px 0;\n  padding: 20px 10px;\n  transition: all 0.3s;\n  border-radius: 8px;\n  cursor: pointer;\n  border: 1px solid transparent;\n\n  ", "\n\n  &:hover {\n    background: #E9F2FE;\n  }\n\n  @media (max-width: 576px) {\n    flex-direction: column;\n  }\n"])), function (_ref) {
   var active = _ref.active;
   return active && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border: 1px solid #2C7BE5 !important;\n  "])));
 });

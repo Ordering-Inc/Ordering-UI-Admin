@@ -114,6 +114,21 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('OPERATION_SETTINGS', 'Operation settings'),
     pageName: 'operationSettings',
     url: '/settings/operation'
+  }, {
+    id: 3,
+    title: t('CMS', 'CMS'),
+    pageName: 'pages',
+    url: '/settings/pages'
+  }, {
+    id: 4,
+    title: t('INTEGRATIONS', 'Integrations'),
+    pageName: 'integrations',
+    url: '/settings/integrations'
+  }, {
+    id: 5,
+    title: t('COUNTRIES_CITIES', 'Countries/Cities'),
+    pageName: 'places',
+    url: '/settings/places'
   }];
   var analyticsSubMenus = [{
     id: 1,
@@ -186,7 +201,7 @@ var SidebarMenu = function SidebarMenu(props) {
     d: "M49,28H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,28,49,28z"
   }), /*#__PURE__*/_react.default.createElement("path", {
     d: "M8.1,22.8c-0.3,0-0.5-0.1-0.7-0.3L0.7,15l6.7-7.8c0.4-0.4,1-0.5,1.4-0.1c0.4,0.4,0.5,1,0.1,1.4L3.3,15l5.5,6.2 c0.4,0.4,0.3,1-0.1,1.4C8.6,22.7,8.4,22.8,8.1,22.8z"
-  })))), /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.SidebarMainContent, null, /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
     className: "d-flex flex-column justify-content-between p-1 pt-0"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column"
@@ -241,6 +256,21 @@ var SidebarMenu = function SidebarMenu(props) {
       }
     }, item.title);
   })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    eventKey: "5",
+    active: location.pathname === '/analytics/business' || location.pathname === '/analytics/drivers' || location.pathname === '/analytics/promotions' || location.pathname === '/analytics/business_intelligence'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, t('ANALYTICS', 'Analytics'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "5"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, analyticsSubMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "6",
     active: location.pathname === '/marketing/promotions'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GraphUp, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETING', 'Marketing'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -256,10 +286,10 @@ var SidebarMenu = function SidebarMenu(props) {
       }
     }, item.title);
   })))))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "d-flex flex-column"
+    className: "d-flex flex-column mt-4"
   }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation'
+    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/advanced'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, settingsSubMenus.map(function (item) {
@@ -296,7 +326,7 @@ var SidebarMenu = function SidebarMenu(props) {
     width: "30px",
     height: "30px",
     roundedCircle: true
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user5 = sessionState.user) === null || _sessionState$user5 === void 0 ? void 0 : _sessionState$user5.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null)))));
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user5 = sessionState.user) === null || _sessionState$user5 === void 0 ? void 0 : _sessionState$user5.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))))));
 };
 
 exports.SidebarMenu = SidebarMenu;
