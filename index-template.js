@@ -96,6 +96,13 @@ Sentry.init({
     new Integrations.BrowserTracing()
   ],
   release: process.env.npm_package_version ? 'ordering-ui-admin@' + process.env.npm_package_version : 'ordering-ui-admin@' + '0.0.2',
+  ignoreErrors: [
+    'is not defined',
+    'is not a function',
+    'can\'t find variable',
+    'objects are not valid',
+    'element type is invalid'
+  ],
 
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
