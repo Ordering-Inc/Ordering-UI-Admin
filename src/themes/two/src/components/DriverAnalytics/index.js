@@ -34,6 +34,7 @@ import {
 
 const DriverAnalyticsUI = (props) => {
   const {
+    handleChangeFilterList,
     filterList,
     ordersList,
     salesList,
@@ -55,6 +56,10 @@ const DriverAnalyticsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
+  const handleChangeDate = (date1, date2) => {
+    handleChangeFilterList({ ...filterList, lapse: `${date1},${date2}` })
+  }
 
   const [driversFilterModal, setDriversFilterModal] = useState(false)
 
@@ -84,6 +89,7 @@ const DriverAnalyticsUI = (props) => {
           <BusinessCalendarWrapper>
             <AnalyticsCalendar
               {...props}
+              handleChangeDate={handleChangeDate}
             />
           </BusinessCalendarWrapper>
         </HeaderFilterContainer>

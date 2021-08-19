@@ -49,21 +49,3 @@ export const AddNewBusinessBrandTitle = styled.div`
   font-size: 14px;
   padding: 15px;
 `
-
-export const DumyLogo = styled.div`
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 7.6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px;
-
-  svg {
-    font-size: 28px;
-    color: #ADB5BD;
-  }
-`

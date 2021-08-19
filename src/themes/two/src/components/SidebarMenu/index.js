@@ -128,6 +128,12 @@ export const SidebarMenu = (props) => {
       title: t('BUSINESS_INTELLIGENCE', 'Business Intelligence'),
       pageName: 'intelligence_analytics',
       url: '/analytics/business_intelligence'
+    },
+    {
+      id: 5,
+      title: t('INVOICE_MANAGER', 'Invoice manager'),
+      pageName: 'invoice',
+      url: '/analytics/invoice'
     }
   ]
   const handleGoToPage = (data) => {
@@ -266,7 +272,8 @@ export const SidebarMenu = (props) => {
                       location.pathname === '/analytics/business' ||
                       location.pathname === '/analytics/drivers' ||
                       location.pathname === '/analytics/promotions' ||
-                      location.pathname === '/analytics/business_intelligence'
+                      location.pathname === '/analytics/business_intelligence' ||
+                      location.pathname === '/analytics/invoice'
                     }
                   >
                     <BarChartLineIcon />
