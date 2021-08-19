@@ -59,6 +59,12 @@ const CmsUI = (props) => {
     setPagesPerPage(pageSize)
   }
 
+  const onClickPage = (e, pageId) => {
+    const isInvalid = e.target.closest('.page-enabled') || e.target.closest('.page-actions')
+    if (isInvalid) return
+    handleEditPage(pageId)
+  }
+
   useEffect(() => {
     if (pagesListState.loading) return
     let _totalPages
@@ -132,21 +138,24 @@ const CmsUI = (props) => {
             ))
           ) : (
             currentPages.map(page => (
-              <PageTbody key={page.id}>
+              <PageTbody
+                key={page.id}
+                onClick={e => onClickPage(e, page.id)}
+              >
                 <tr>
                   <td>
                     {page?.name}
                   </td>
                   <td>
                     <ActionsContainer>
-                      <EnableWrapper>
+                      <EnableWrapper calssName='page-enabled'>
                         <span>{t('ENABLE', 'Enable')}</span>
                         <Switch
                           defaultChecked={page?.enabled}
                           onChange={(enabled) => handleChangeState(page.id, 'enabled', enabled)}
                         />
                       </EnableWrapper>
-                      <ActionSelectorWrapper>
+                      <ActionSelectorWrapper className='page-actions'>
                         <DropdownButton
                           menuAlign={theme?.rtl ? 'left' : 'right'}
                           title={<FiMoreVertical />}

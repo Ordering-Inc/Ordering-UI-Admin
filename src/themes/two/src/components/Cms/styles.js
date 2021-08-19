@@ -96,6 +96,7 @@ export const PageListTable = styled.table`
 `
 
 export const PageTbody = styled.tbody`
+  cursor: pointer;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
   td {

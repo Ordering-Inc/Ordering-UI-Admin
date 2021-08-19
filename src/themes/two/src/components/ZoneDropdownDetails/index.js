@@ -28,7 +28,7 @@ export const ZoneDropdownDetails = (props) => {
     <>
       <ZoneDropdownDetailsContainer>
         <Header>
-          <h1>{t('CITY_SETTINGS', 'City settings')}</h1>
+          <h1>{t('NEIGHBORHOOD_SETTINGS', 'Zones settings')}</h1>
           {zoneDropdown && (
             <Switch
               defaultChecked={zoneDropdown.enabled}
