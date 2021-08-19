@@ -315,34 +315,6 @@ export const SidebarMenu = (props) => {
 
                   <MenuContainer>
                     <ContextAwareToggle
-                      eventKey='5'
-                      active={
-                        location.pathname === '/analytics/business' ||
-                        location.pathname === '/analytics/drivers' ||
-                        location.pathname === '/analytics/promotions' ||
-                        location.pathname === '/analytics/business_intelligence'
-                      }
-                    >
-                      <BarChartLineIcon />
-                      <span>{t('ANALYTICS', 'Analytics')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='5'>
-                      <MenuContent>
-                        {analyticsSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
-
-                  <MenuContainer>
-                    <ContextAwareToggle
                       eventKey='6'
                       active={
                         location.pathname === '/marketing/promotions'
