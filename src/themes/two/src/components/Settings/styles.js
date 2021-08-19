@@ -2,16 +2,14 @@ import styled, { css } from 'styled-components'
 
 export const BasicSettingsContainer = styled.div`
   flex: 1;
-  padding: 20px;
+  padding: 25px 20px;
   box-sizing: border-box;
   transition: all 0.5s;
-  overflow: hidden;
   max-height: 100vh;
   overflow: auto;
 `
 
 export const HeaderTitleContainer = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
 
@@ -20,6 +18,7 @@ export const HeaderTitleContainer = styled.div`
     font-size: 20px;
     color: ${props => props.theme.colors.headingColor};
     margin: 0px;
+    line-height: 32px;
   }
 
   > button {

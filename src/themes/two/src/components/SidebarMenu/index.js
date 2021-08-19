@@ -25,6 +25,7 @@ import {
   SidebarInnerContainer,
   SidebarHeader,
   BurgerButton,
+  SidebarMainContent,
   SidebarContent,
   UserInfo,
   MenuContainer,
@@ -101,6 +102,24 @@ export const SidebarMenu = (props) => {
       title: t('OPERATION_SETTINGS', 'Operation settings'),
       pageName: 'operationSettings',
       url: '/settings/operation'
+    },
+    {
+      id: 3,
+      title: t('CMS', 'CMS'),
+      pageName: 'pages',
+      url: '/settings/pages'
+    },
+    {
+      id: 4,
+      title: t('INTEGRATIONS', 'Integrations'),
+      pageName: 'integrations',
+      url: '/settings/integrations'
+    },
+    {
+      id: 5,
+      title: t('COUNTRIES_CITIES', 'Countries/Cities'),
+      pageName: 'places',
+      url: '/settings/places'
     }
   ]
 
@@ -179,168 +198,162 @@ export const SidebarMenu = (props) => {
               </svg>
             </BurgerButton>
           </SidebarHeader>
-
-          <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
-            <div className='d-flex flex-column'>
-              <Accordion>
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='0'
-                    active={
-                      location.pathname === '/home'
-                    }
-                    page='home'
-                    handleGoToPage={handleGoToPage}
-                  >
-                    <HouseDoor />
-                    <span>{t('HOME', 'Home')}</span>
-                  </ContextAwareToggle>
-                </MenuContainer>
-
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='1'
-                    active={
-                      location.pathname === '/orders' ||
-                      location.pathname === '/deliveries' ||
-                      location.pathname === '/drivers'
-                    }
-                  >
-                    <ListCheck />
-                    <span>{t('ORDERS', 'Orders')}</span>
-                  </ContextAwareToggle>
-                  <Accordion.Collapse eventKey='1'>
-                    <MenuContent>
-                      {ordersSubMenus.map(item => (
-                        <SubMenu
-                          key={item.id}
-                          active={location.pathname.includes(item.pageName)}
-                          onClick={() => handleGoToPage({ page: item.pageName })}
-                        >
-                          {item.title}
-                        </SubMenu>
-                      ))}
-                    </MenuContent>
-                  </Accordion.Collapse>
-                </MenuContainer>
-
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='2'
-                    page='messages'
-                    handleGoToPage={handleGoToPage}
-                    active={location.pathname === '/messages'}
-                  >
-                    <ChatIcon />
-                    <span>{t('MESSAGES', 'Messages')}</span>
-                  </ContextAwareToggle>
-                </MenuContainer>
-
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='3'
-                    page='businesses'
-                    handleGoToPage={handleGoToPage}
-                    active={
-                      location.pathname === '/businesses' ||
-                      location.pathname.includes('/store/')
-                    }
-                  >
-                    <ShopIcon />
-                    <span>{t('STORES', 'Stores')}</span>
-                  </ContextAwareToggle>
-                </MenuContainer>
-
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='4'
-                    page='users'
-                    handleGoToPage={handleGoToPage}
-                    active={
-                      location.pathname === '/users'
-                    }
-                  >
-                    <PeopleIcon />
-                    <span>{t('USERS', 'Users')}</span>
-                  </ContextAwareToggle>
-                </MenuContainer>
-
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='5'
-                    active={
-                      location.pathname === '/analytics/business' ||
-                      location.pathname === '/analytics/drivers' ||
-                      location.pathname === '/analytics/promotions' ||
-                      location.pathname === '/analytics/business_intelligence' ||
-                      location.pathname === '/analytics/invoice'
-                    }
-                  >
-                    <BarChartLineIcon />
-                    <span>{t('ANALYTICS', 'Analytics')}</span>
-                  </ContextAwareToggle>
-                  <Accordion.Collapse eventKey='5'>
-                    <MenuContent>
-                      {analyticsSubMenus.map(item => (
-                        <SubMenu
-                          key={item.id}
-                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                          onClick={() => handleGoToPage({ page: item.pageName })}
-                        >
-                          {item.title}
-                        </SubMenu>
-                      ))}
-                    </MenuContent>
-                  </Accordion.Collapse>
-                </MenuContainer>
-
-                <MenuContainer>
-                  <ContextAwareToggle
-                    eventKey='6'
-                    active={
-                      location.pathname === '/marketing/promotions'
-                    }
-                  >
-                    <GraphUp />
-                    <span>{t('MARKETING', 'Marketing')}</span>
-                  </ContextAwareToggle>
-                  <Accordion.Collapse eventKey='6'>
-                    <MenuContent>
-                      {marketingSubMenus.map(item => (
-                        <SubMenu
-                          key={item.id}
-                          active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                          onClick={() => handleGoToPage({ page: item.pageName })}
-                        >
-                          {item.title}
-                        </SubMenu>
-                      ))}
-                    </MenuContent>
-                  </Accordion.Collapse>
-                </MenuContainer>
-              </Accordion>
-            </div>
-            <div className='d-flex flex-column'>
-              <LanguageSelectorContainer>
-                <Globe2 />
-                <LanguageSelector />
-              </LanguageSelectorContainer>
-              {sessionState?.user?.level === 0 && (
+          <SidebarMainContent>
+            <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
+              <div className='d-flex flex-column'>
                 <Accordion>
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='0'
+                      active={
+                        location.pathname === '/home'
+                      }
+                      page='home'
+                      handleGoToPage={handleGoToPage}
+                    >
+                      <HouseDoor />
+                      <span>{t('HOME', 'Home')}</span>
+                    </ContextAwareToggle>
+                  </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='1'
+                      active={
+                        location.pathname === '/orders' ||
+                        location.pathname === '/deliveries' ||
+                        location.pathname === '/drivers'
+                      }
+                    >
+                      <ListCheck />
+                      <span>{t('ORDERS', 'Orders')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='1'>
+                      <MenuContent>
+                        {ordersSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='2'
+                      page='messages'
+                      handleGoToPage={handleGoToPage}
+                      active={location.pathname === '/messages'}
+                    >
+                      <ChatIcon />
+                      <span>{t('MESSAGES', 'Messages')}</span>
+                    </ContextAwareToggle>
+                  </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='3'
+                      page='businesses'
+                      handleGoToPage={handleGoToPage}
+                      active={
+                        location.pathname === '/businesses' ||
+                        location.pathname.includes('/store/')
+                      }
+                    >
+                      <ShopIcon />
+                      <span>{t('STORES', 'Stores')}</span>
+                    </ContextAwareToggle>
+                  </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='4'
+                      page='users'
+                      handleGoToPage={handleGoToPage}
+                      active={
+                        location.pathname === '/users'
+                      }
+                    >
+                      <PeopleIcon />
+                      <span>{t('USERS', 'Users')}</span>
+                    </ContextAwareToggle>
+                  </MenuContainer>
+
                   <MenuContainer>
                     <ContextAwareToggle
                       eventKey='5'
                       active={
-                        location.pathname === '/settings/basic' ||
-                        location.pathname === '/settings/operation'
+                        location.pathname === '/analytics/business' ||
+                        location.pathname === '/analytics/drivers' ||
+                        location.pathname === '/analytics/promotions' ||
+                        location.pathname === '/analytics/business_intelligence' ||
+                        location.pathname === '/analytics/invoice'
                       }
                     >
-                      <GearIcon />
-                      <span>{t('SETTINGS', 'Settings')}</span>
+                      <BarChartLineIcon />
+                      <span>{t('ANALYTICS', 'Analytics')}</span>
                     </ContextAwareToggle>
                     <Accordion.Collapse eventKey='5'>
                       <MenuContent>
-                        {settingsSubMenus.map(item => (
+                        {analyticsSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='5'
+                      active={
+                        location.pathname === '/analytics/business' ||
+                        location.pathname === '/analytics/drivers' ||
+                        location.pathname === '/analytics/promotions' ||
+                        location.pathname === '/analytics/business_intelligence'
+                      }
+                    >
+                      <BarChartLineIcon />
+                      <span>{t('ANALYTICS', 'Analytics')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='5'>
+                      <MenuContent>
+                        {analyticsSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='6'
+                      active={
+                        location.pathname === '/marketing/promotions'
+                      }
+                    >
+                      <GraphUp />
+                      <span>{t('MARKETING', 'Marketing')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='6'>
+                      <MenuContent>
+                        {marketingSubMenus.map(item => (
                           <SubMenu
                             key={item.id}
                             active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
@@ -353,36 +366,72 @@ export const SidebarMenu = (props) => {
                     </Accordion.Collapse>
                   </MenuContainer>
                 </Accordion>
-              )}
+              </div>
+              <div className='d-flex flex-column mt-4'>
+                <LanguageSelectorContainer>
+                  <Globe2 />
+                  <LanguageSelector />
+                </LanguageSelectorContainer>
+                {sessionState?.user?.level === 0 && (
+                  <Accordion>
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='5'
+                        active={
+                          location.pathname === '/settings/basic' ||
+                          location.pathname === '/settings/operation' ||
+                          location.pathname === '/settings/advanced'
+                        }
+                      >
+                        <GearIcon />
+                        <span>{t('SETTINGS', 'Settings')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='5'>
+                        <MenuContent>
+                          {settingsSubMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  </Accordion>
+                )}
 
+                <Button
+                  className='d-flex align-items-center'
+                  variant={location.pathname === '/support' && 'primary'}
+                  onClick={() => handleGoToPage({ page: 'support' })}
+                >
+                  <HeadsetIcon />
+                  <span>{t('SUPPORT', 'Support')}</span>
+                </Button>
+              </div>
+            </SidebarContent>
+            <UserInfo
+              id='user_info'
+              className='d-flex flex-column px-1'
+            >
               <Button
                 className='d-flex align-items-center'
-                variant={location.pathname === '/support' && 'primary'}
-                onClick={() => handleGoToPage({ page: 'support' })}
+                onClick={() => handleGoToPage({ page: 'profile' })}
+                variant={location.pathname === '/profile' && 'primary'}
               >
-                <HeadsetIcon />
-                <span>{t('SUPPORT', 'Support')}</span>
+                {sessionState?.user?.photo ? (
+                  <Image src={sessionState?.user?.photo} width='30px' height='30px' roundedCircle />
+                ) : (
+                  <PersonFill />
+                )}
+                <span>{sessionState?.user?.name} {sessionState?.user?.lastname}</span>
               </Button>
-            </div>
-          </SidebarContent>
-          <UserInfo
-            id='user_info'
-            className='d-flex flex-column px-1'
-          >
-            <Button
-              className='d-flex align-items-center'
-              onClick={() => handleGoToPage({ page: 'profile' })}
-              variant={location.pathname === '/profile' && 'primary'}
-            >
-              {sessionState?.user?.photo ? (
-                <Image src={sessionState?.user?.photo} width='30px' height='30px' roundedCircle />
-              ) : (
-                <PersonFill />
-              )}
-              <span>{sessionState?.user?.name} {sessionState?.user?.lastname}</span>
-            </Button>
-            <LogoutButton />
-          </UserInfo>
+              <LogoutButton />
+            </UserInfo>
+          </SidebarMainContent>
         </SidebarInnerContainer>
       </SidebarContainer>
     </>

@@ -58,7 +58,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(svg|png|jpe?g|gif|webp|mp3|ogg)$/i,
+        test: /\.(svg|png|jpe?g|gif|webp|mp3|ogg|otf|eot|ttf|woff|woff2)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -79,6 +79,10 @@ module.exports = {
       patterns: [
         { from: 'public' }
       ]
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
     }),
     new webpack.HotModuleReplacementPlugin()
   ]
