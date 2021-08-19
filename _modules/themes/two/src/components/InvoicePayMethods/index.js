@@ -5,15 +5,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessBrands = void 0;
+exports.InvoicePayMethods = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BusinessBrandForm = require("../BusinessBrandForm");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
+var _Checkbox = require("../../styles/Checkbox");
+
+var _Buttons = require("../../styles/Buttons");
+
+var _reactToastify = require("react-toastify");
 
 var _styles = require("./styles");
 
@@ -49,94 +53,80 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var BusinessBrandsUI = function BusinessBrandsUI(props) {
-  var _brandList$brands;
-
-  var business = props.business,
-      formState = props.formState,
-      setFormState = props.setFormState,
-      handleUpdateBusinessClick = props.handleUpdateBusinessClick,
-      brandList = props.brandList,
-      handleUpdateBrandList = props.handleUpdateBrandList;
+var InvoicePayMethods = function InvoicePayMethods(props) {
+  var payMethodsList = props.payMethodsList,
+      handleChangePayMethods = props.handleChangePayMethods;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      isAdd = _useState2[0],
-      setIsAdd = _useState2[1];
+      checkBoxList = _useState2[0],
+      setCheckBoxList = _useState2[1];
 
-  var handleSelectBusinessBrand = function handleSelectBusinessBrand(id) {
-    if ((business === null || business === void 0 ? void 0 : business.franchise_id) === id) return;
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: {
-        franchise_id: id
-      }
-    }));
+  var saveFormData = function saveFormData() {
+    handleChangePayMethods(checkBoxList);
+    var toastConfigure = {
+      position: 'bottom-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    };
+    var content = t('INVOICE_DATA_SAVED', 'Invoice data saved');
+
+    _reactToastify.toast.dark(content, toastConfigure);
   };
 
-  var handleSuccessAddBusinessBrand = function handleSuccessAddBusinessBrand(result) {
-    setIsAdd(false);
-    handleUpdateBrandList([].concat(_toConsumableArray(brandList === null || brandList === void 0 ? void 0 : brandList.brands), [result]));
-  };
-
-  (0, _react.useEffect)(function () {
-    if (formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) return;
-    handleUpdateBusinessClick();
-  }, [formState]);
-  (0, _react.useEffect)(function () {
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: {}
-    }));
-  }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, brandList !== null && brandList !== void 0 && brandList.loading ? _toConsumableArray(Array(5).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.BusinessBrand, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 16,
-      height: 16
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 32,
-      height: 32,
-      style: {
-        marginLeft: '10px',
-        marginRight: '10px'
+  var handleChangeCheckBox = function handleChangeCheckBox(id, checked) {
+    var _checkBoxList = checkBoxList.map(function (payment) {
+      if (id === payment.id) {
+        return _objectSpread(_objectSpread({}, payment), {}, {
+          enabled: checked
+        });
       }
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100,
-      height: 20
-    }));
-  }) : (brandList === null || brandList === void 0 ? void 0 : (_brandList$brands = brandList.brands) === null || _brandList$brands === void 0 ? void 0 : _brandList$brands.length) > 0 && (brandList === null || brandList === void 0 ? void 0 : brandList.brands.map(function (brand, i) {
-    return /*#__PURE__*/_react.default.createElement(_BusinessBrandForm.BusinessBrandForm, {
-      key: i,
-      brand: brand,
-      handleSelectBusinessBrand: handleSelectBusinessBrand,
-      handleSuccessAddBusinessBrand: handleSuccessAddBusinessBrand,
-      business: business,
-      brandList: brandList,
-      handleUpdateBrandList: handleUpdateBrandList,
-      editMode: true
+
+      return payment;
     });
-  })), /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessBrandContainer, null, isAdd ? /*#__PURE__*/_react.default.createElement(_BusinessBrandForm.BusinessBrandForm, {
-    onClose: function onClose() {
-      return setIsAdd(false);
-    },
-    handleSuccessAddBusinessBrand: handleSuccessAddBusinessBrand
-  }) : /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessBrandTitle, {
-    onClick: function onClick() {
-      return setIsAdd(true);
+
+    setCheckBoxList(_checkBoxList);
+  };
+
+  (0, _react.useEffect)(function () {
+    if ((payMethodsList === null || payMethodsList === void 0 ? void 0 : payMethodsList.data.length) > 0) {
+      setCheckBoxList(payMethodsList === null || payMethodsList === void 0 ? void 0 : payMethodsList.data);
     }
-  }, t('ADD_NEW_BRAND', 'Add new brand'))));
+  }, [payMethodsList === null || payMethodsList === void 0 ? void 0 : payMethodsList.data]);
+  return /*#__PURE__*/_react.default.createElement(_styles.InvoicePayMethodsContainer, null, payMethodsList !== null && payMethodsList !== void 0 && payMethodsList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      key: i,
+      height: 35,
+      style: {
+        marginBottom: '15px'
+      }
+    });
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, checkBoxList.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement(_styles.CheckboxWrapper, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+      defaultChecked: item.enabled,
+      id: item.id,
+      onClick: function onClick(e) {
+        return handleChangeCheckBox(item.id, e.target.checked);
+      }
+    }), /*#__PURE__*/_react.default.createElement("label", {
+      htmlFor: item.id
+    }, item.name));
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "7.6px",
+    color: "primary",
+    disabled: payMethodsList === null || payMethodsList === void 0 ? void 0 : payMethodsList.loading,
+    onClick: saveFormData
+  }, t('SAVE', 'Save'))));
 };
 
-var BusinessBrands = function BusinessBrands(props) {
-  var businessBrandsProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessBrandsUI
-  });
-
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessBrands, businessBrandsProps);
-};
-
-exports.BusinessBrands = BusinessBrands;
+exports.InvoicePayMethods = InvoicePayMethods;

@@ -135,6 +135,11 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('BUSINESS_INTELLIGENCE', 'Business Intelligence'),
     pageName: 'intelligence_analytics',
     url: '/analytics/business_intelligence'
+  }, {
+    id: 5,
+    title: t('INVOICE_MANAGER', 'Invoice manager'),
+    pageName: 'invoice',
+    url: '/analytics/invoice'
   }];
 
   var handleGoToPage = function handleGoToPage(data) {
@@ -222,7 +227,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: location.pathname === '/users'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/analytics/business' || location.pathname === '/analytics/drivers' || location.pathname === '/analytics/promotions' || location.pathname === '/analytics/business_intelligence'
+    active: location.pathname === '/analytics/business' || location.pathname === '/analytics/drivers' || location.pathname === '/analytics/promotions' || location.pathname === '/analytics/business_intelligence' || location.pathname === '/analytics/invoice'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, t('ANALYTICS', 'Analytics'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, analyticsSubMenus.map(function (item) {

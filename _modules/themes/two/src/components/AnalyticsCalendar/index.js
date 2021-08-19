@@ -19,6 +19,10 @@ var _reactDaterangePicker = _interopRequireDefault(require("react-daterange-pick
 
 var _FiCalendar = _interopRequireDefault(require("@meronex/icons/fi/FiCalendar"));
 
+var _momentRange = require("moment-range");
+
+var _moment = _interopRequireDefault(require("moment"));
+
 require("react-daterange-picker/dist/css/react-calendar.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26,12 +30,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -48,8 +46,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsCalendar = function AnalyticsCalendar(props) {
   var _dates$start2, _dates$end2;
 
-  var filterList = props.filterList,
-      handleChangeFilterList = props.handleChangeFilterList;
+  var handleChangeDate = props.handleChangeDate,
+      defaultValue = props.defaultValue;
+  var moment = (0, _momentRange.extendMoment)(_moment.default);
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -82,6 +81,11 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     }
   };
 
+  var handleOpenCalendar = function handleOpenCalendar(evt) {
+    evt.preventDefault();
+    setIsShowCalendar(true);
+  };
+
   (0, _react.useEffect)(function () {
     window.addEventListener('mouseup', handleClickOutside);
     return function () {
@@ -92,15 +96,16 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     if (dates) {
       var _dates$start, _dates$end;
 
-      handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
-        lapse: "".concat(dates === null || dates === void 0 ? void 0 : (_dates$start = dates.start) === null || _dates$start === void 0 ? void 0 : _dates$start.format('YYYY-MM-DD'), ",").concat(dates === null || dates === void 0 ? void 0 : (_dates$end = dates.end) === null || _dates$end === void 0 ? void 0 : _dates$end.format('YYYY-MM-DD'))
-      }));
+      handleChangeDate(dates === null || dates === void 0 ? void 0 : (_dates$start = dates.start) === null || _dates$start === void 0 ? void 0 : _dates$start.format('YYYY-MM-DD'), dates === null || dates === void 0 ? void 0 : (_dates$end = dates.end) === null || _dates$end === void 0 ? void 0 : _dates$end.format('YYYY-MM-DD'));
     }
   }, [dates]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    onClick: function onClick() {
-      return setIsShowCalendar(true);
+  (0, _react.useEffect)(function () {
+    if (defaultValue && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from) !== '' && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.to) !== '') {
+      setDates(moment.range(moment(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from), moment(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.to)));
     }
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: handleOpenCalendar
   }, /*#__PURE__*/_react.default.createElement(_FiCalendar.default, null), dates ? "".concat(dates === null || dates === void 0 ? void 0 : (_dates$start2 = dates.start) === null || _dates$start2 === void 0 ? void 0 : _dates$start2.format('YYYY-MM-DD'), "~").concat(dates === null || dates === void 0 ? void 0 : (_dates$end2 = dates.end) === null || _dates$end2 === void 0 ? void 0 : _dates$end2.format('YYYY-MM-DD')) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles.AnalyticsCalendarContainer, {
     ref: calendarRef
   }, /*#__PURE__*/_react.default.createElement(_reactDaterangePicker.default, {

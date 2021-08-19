@@ -19,6 +19,10 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
+var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
+
+var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
+
 var _styles = require("./styles");
 
 var _SpinnerLoader = require("../SpinnerLoader");
@@ -48,13 +52,17 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessBrandFormUI = function BusinessBrandFormUI(props) {
-  var _formState$changes, _formState$result3, _formState$result4, _formState$changes2, _formState$changes3, _formState$result5, _formState$result6, _formState$result6$re, _formState$changes4;
+  var _formState$changes, _formState$result3, _formState$result4, _formState$changes2, _formState$changes3, _formState$result5, _formState$result6, _formState$result6$re, _brand$name, _formState$changes4;
 
   var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
       handleUpdateClick = props.handleUpdateClick,
       handleChangeInput = props.handleChangeInput,
-      onClose = props.onClose;
+      onClose = props.onClose,
+      business = props.business,
+      brand = props.brand,
+      handleSelectBusinessBrand = props.handleSelectBusinessBrand,
+      editMode = props.editMode;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -115,9 +123,15 @@ var BusinessBrandFormUI = function BusinessBrandFormUI(props) {
 
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || formState !== null && formState !== void 0 && formState.loading) onClose();else handleUpdateClick();
+        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || formState !== null && formState !== void 0 && formState.loading) {
+          onClose && onClose();
+        } else handleUpdateClick();
       }
     }
+  };
+
+  var checkBoxClick = function checkBoxClick(id) {
+    handleSelectBusinessBrand && handleSelectBusinessBrand(id);
   };
 
   (0, _react.useEffect)(function () {
@@ -139,8 +153,15 @@ var BusinessBrandFormUI = function BusinessBrandFormUI(props) {
     };
   }, [formState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    ref: conatinerRef
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessBrandImage, {
+    ref: conatinerRef,
+    isChecked: editMode && (business === null || business === void 0 ? void 0 : business.franchise_id) === brand.id
+  }, editMode ? /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+    onClick: function onClick() {
+      return checkBoxClick(brand === null || brand === void 0 ? void 0 : brand.id);
+    }
+  }, (business === null || business === void 0 ? void 0 : business.franchise_id) === (brand === null || brand === void 0 ? void 0 : brand.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    className: "fill"
+  }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)) : /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement(_styles.BusinessBrandImage, {
     onClick: function onClick() {
       return handleClickImage();
     },
@@ -160,14 +181,18 @@ var BusinessBrandFormUI = function BusinessBrandFormUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, formState !== null && formState !== void 0 && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.logo) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' || formState !== null && formState !== void 0 && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.error ? /*#__PURE__*/_react.default.createElement("div", null) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.logo) && /*#__PURE__*/_react.default.createElement("img", {
+  }, formState !== null && formState !== void 0 && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.logo) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' || formState !== null && formState !== void 0 && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.error ? brand !== null && brand !== void 0 && brand.logo ? /*#__PURE__*/_react.default.createElement("img", {
+    src: brand === null || brand === void 0 ? void 0 : brand.logo,
+    alt: "business brand logo",
+    loading: "lazy"
+  }) : /*#__PURE__*/_react.default.createElement("div", null) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.logo) && /*#__PURE__*/_react.default.createElement("img", {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.logo,
     alt: "business brand logo",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement("input", {
+  }), !(brand !== null && brand !== void 0 && brand.logo) && /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement("input", {
     name: "name",
     placeholder: t('WRITE_A_NAME', 'Write a name'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.name : formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name,
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.name : (_brand$name = brand === null || brand === void 0 ? void 0 : brand.name) !== null && _brand$name !== void 0 ? _brand$name : formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -183,7 +208,7 @@ var BusinessBrandFormUI = function BusinessBrandFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }), (formState === null || formState === void 0 ? void 0 : formState.loading) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null));
+  }), (formState === null || formState === void 0 ? void 0 : formState.loading) && /*#__PURE__*/_react.default.createElement(_styles.LoadingWrapper, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)));
 };
 
 var BusinessBrandForm = function BusinessBrandForm(props) {
