@@ -2,36 +2,36 @@ import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Switch } from '../../styles/Switch'
 import { Input } from '../../styles/Inputs'
-import { CityAdministratorSelector } from '../CityAdministratorSelector'
+import { CitySelector } from '../CitySelector'
 import { CountrySelector } from '../CountrySelector'
 import { Button } from '../../styles/Buttons'
 
 import {
-  CityDetailsContainer,
+  ZoneDropdownDetailsContainer,
   Header,
   InputWrapper
 } from './styles'
 
-export const CityDetails = (props) => {
+export const ZoneDropdownDetails = (props) => {
   const {
-    city,
-    cityManagers,
+    zoneDropdown,
+    cities,
     countries,
     handleChangesState,
-    handleSaveCity,
+    handleSaveZone,
     changesState,
-    handleAddCity
+    handleAddZone
   } = props
   const [, t] = useLanguage()
 
   return (
     <>
-      <CityDetailsContainer>
+      <ZoneDropdownDetailsContainer>
         <Header>
           <h1>{t('CITY_SETTINGS', 'City settings')}</h1>
-          {city && (
+          {zoneDropdown && (
             <Switch
-              defaultChecked={city.enabled}
+              defaultChecked={zoneDropdown.enabled}
               onChange={enabled => handleChangesState('enabled', enabled)}
             />
           )}
@@ -39,38 +39,39 @@ export const CityDetails = (props) => {
         <InputWrapper>
           <label>{t('NAME', 'Name')}</label>
           <Input
-            value={changesState?.name || city?.name || ''}
+            value={changesState?.name || zoneDropdown?.name || ''}
             placeholder={t('NAME', 'Name')}
             onChange={e => handleChangesState('name', e.target.value)}
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('ADMINISTRATOR', 'Administrator')}</label>
-          <CityAdministratorSelector
-            defaultValue={changesState?.administrator_id || city?.administrator_id}
-            cityManagers={cityManagers}
-            handleChangeAdministrator={val => handleChangesState('administrator_id', val)}
-          />
-        </InputWrapper>
-        <InputWrapper>
           <label>{t('COUNTRY', 'Country')}</label>
           <CountrySelector
-            defaultValue={changesState?.country_id || parseInt(city?.country_id)}
+            defaultValue={changesState?.country_id || parseInt(zoneDropdown?.city?.country_id)}
             countries={countries}
             handleChangeCountry={val => handleChangesState('country_id', val)}
+          />
+        </InputWrapper>
+        <InputWrapper isCity>
+          <label>{t('CITY', 'City')}</label>
+          <CitySelector
+            isDefault
+            defaultValue={parseInt(zoneDropdown?.city_id)}
+            cities={cities}
+            handleChangeCity={val => handleChangesState('city_id', val)}
           />
         </InputWrapper>
         <Button
           borderRadius='8px'
           color='primary'
           disabled={Object.keys(changesState).length === 0}
-          onClick={() => city ? handleSaveCity() : handleAddCity()}
+          onClick={() => zoneDropdown ? handleSaveZone() : handleAddZone()}
         >
           {
-            city ? t('SAVE', 'Save') : t('ADD', 'Add')
+            zoneDropdown ? t('SAVE', 'Save') : t('ADD', 'Add')
           }
         </Button>
-      </CityDetailsContainer>
+      </ZoneDropdownDetailsContainer>
     </>
   )
 }

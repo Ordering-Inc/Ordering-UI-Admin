@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { PlaceList as PlaceListController } from './naked'
+import { useLanguage, PlaceList as PlaceListController } from 'ordering-components-admin'
 import { Button, IconButton } from '../../styles/Buttons'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
@@ -19,6 +18,8 @@ import { SideBar } from '../SideBar'
 import { CityDetails } from '../CityDetails'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+
+import { DropdownOptionList } from '../DropdownOptionList'
 
 import {
   PlaceListContainer,
@@ -61,7 +62,22 @@ const PlaceListingUI = (props) => {
     selectedCityList,
     handleCheckboxClick,
     handleAllCheckboxClick,
-    handleSeveralDeleteCities
+    handleSeveralDeleteCities,
+
+    dropdownOptionsState,
+    handleUpdateDropdown,
+    openZoneDropdown,
+    setOpenZonedropdown,
+    selectedZoneDropdown,
+    setSelectedZoneDropdown,
+    cleanChagesState,
+    handleSaveZone,
+    handleAddZone,
+    handleDeleteZone,
+    selectedZoneList,
+    handleCheckboxZoneClick,
+    handleAllCheckboxZoneClick,
+    handleSeveralDeleteZones
   } = props
 
   const [, t] = useLanguage()
@@ -96,7 +112,7 @@ const PlaceListingUI = (props) => {
     let _totalPages
     let cities = []
     if (searchValue) {
-      cities = _cities.filter(plugin => plugin.name.toLowerCase().includes(searchValue.toLowerCase()))
+      cities = _cities.filter(city => city.name.toLowerCase().includes(searchValue.toLowerCase()))
     } else {
       cities = [..._cities]
     }
@@ -105,9 +121,9 @@ const PlaceListingUI = (props) => {
     }
     const indexOfLastPost = currentPage * citiesPerPage
     const indexOfFirstPost = indexOfLastPost - citiesPerPage
-    const _currentPlugins = cities.slice(indexOfFirstPost, indexOfLastPost)
+    const _currentCities = cities.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
-    setCurrentCities(_currentPlugins)
+    setCurrentCities(_currentCities)
   }, [countriesState, currentPage, citiesPerPage, searchValue])
 
   let timeout = null
@@ -140,6 +156,11 @@ const PlaceListingUI = (props) => {
     handleOpenCityDetails(city)
   }
 
+  const handleOpenZoneDropdownDetails = (zone) => {
+    setSelectedZoneDropdown(zone)
+    setOpenZonedropdown(true)
+  }
+
   useEffect(() => {
     if (!actionState?.error) return
     setAlertState({
@@ -147,6 +168,11 @@ const PlaceListingUI = (props) => {
       content: actionState?.error
     })
   }, [actionState?.error])
+
+  useEffect(() => {
+    setSearchValue(null)
+    cleanChagesState()
+  }, [showOption])
 
   return (
     <>
@@ -164,21 +190,44 @@ const PlaceListingUI = (props) => {
             <h1>{t('COUNTRIES_CITIES', 'Countries/Cities')}</h1>
           </HeaderLeft>
           <HeaderRight>
-            <Button
-              borderRadius='8px'
-              color='lightPrimary'
-              onClick={() => handleOpenCityDetails(null)}
-            >
-              {t('ADD_CITY', 'Add city')}
-            </Button>
-            <Button
-              borderRadius='8px'
-              color='secundary'
-              disabled={selectedCityList.length === 0}
-              onClick={() => handleSeveralDeleteCities()}
-            >
-              {t('DELETE', 'Delete')}
-            </Button>
+            {showOption === 'cities' && (
+              <Button
+                borderRadius='8px'
+                color='lightPrimary'
+                onClick={() => handleOpenCityDetails(null)}
+              >
+                {t('ADD_CITY', 'Add city')}
+              </Button>
+            )}
+            {showOption === 'zones' && (
+              <Button
+                borderRadius='8px'
+                color='lightPrimary'
+                onClick={() => handleOpenZoneDropdownDetails(null)}
+              >
+                {t('ADD_ZONE_DROPDOWN', 'Add zone dropdown')}
+              </Button>
+            )}
+            {showOption === 'cities' && (
+              <Button
+                borderRadius='8px'
+                color='secundary'
+                disabled={selectedCityList.length === 0}
+                onClick={() => handleSeveralDeleteCities()}
+              >
+                {t('DELETE', 'Delete')}
+              </Button>
+            )}
+            {showOption === 'zones' && (
+              <Button
+                borderRadius='8px'
+                color='secundary'
+                disabled={selectedZoneList.length === 0}
+                onClick={() => handleSeveralDeleteZones()}
+              >
+                {t('DELETE', 'Delete')}
+              </Button>
+            )}
             <SearchBar
               placeholder={t('SEARCH', 'Search')}
               searchValue={searchValue}
@@ -220,13 +269,9 @@ const PlaceListingUI = (props) => {
               <CityName>
                 <CheckboxWrapper
                   onClick={() => handleAllCheckboxClick()}
-                  active={
-                    countriesState.loading
-                      ? false
-                      : selectedCityList.length === countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], []).length
-                  }
+                  active={!countriesState.loading && selectedCityList.length === countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], []).length}
                 >
-                  {selectedCityList.length === countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], []).length ? (
+                  {!countriesState.loading && selectedCityList.length === countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], []).length ? (
                     <RiCheckboxFill />
                   ) : (
                     <RiCheckboxBlankLine />
@@ -336,6 +381,27 @@ const PlaceListingUI = (props) => {
               </PagesBottomContainer>
             )}
           </CitiesListContainer>
+        )}
+        {showOption === 'zones' && (
+          <DropdownOptionList
+            dropdownOptionsState={dropdownOptionsState}
+            searchValue={searchValue}
+            countriesState={countriesState}
+            handleUpdateDropdown={handleUpdateDropdown}
+            openZoneDropdown={openZoneDropdown}
+            setOpenZonedropdown={setOpenZonedropdown}
+            selectedZoneDropdown={selectedZoneDropdown}
+            setSelectedZoneDropdown={setSelectedZoneDropdown}
+            changesState={changesState}
+            handleChangesState={handleChangesState}
+            handleSaveZone={handleSaveZone}
+            handleAddZone={handleAddZone}
+            handleDeleteZone={handleDeleteZone}
+            handleOpenZoneDropdownDetails={handleOpenZoneDropdownDetails}
+            selectedZoneList={selectedZoneList}
+            handleCheckboxZoneClick={handleCheckboxZoneClick}
+            handleAllCheckboxZoneClick={handleAllCheckboxZoneClick}
+          />
         )}
       </PlaceListContainer>
       <Alert
