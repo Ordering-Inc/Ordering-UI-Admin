@@ -17,6 +17,7 @@ export const BusinessReviewsList = (props) => {
   const [, t] = useLanguage()
 
   const [reviewsListState, setReviewsListState] = useState({ reviews: [], loading: false, error: null })
+  const [actionState, setActionState] = useState({ loading: false, error: null })
 
   /**
    * Method to get business reviews from API
@@ -34,6 +35,7 @@ export const BusinessReviewsList = (props) => {
         const reviews = []
         for (let i = 0; i < result.length; i++) {
           for (let j = 0; j < result[i].reviews.reviews.length; j++) {
+            result[i].reviews.reviews[j].business_id = result[i].id
             result[i].reviews.reviews[j].business_name = result[i].name
             result[i].reviews.reviews[j].business_logo = result[i].logo
             result[i].reviews.reviews[j].city_name = result[i].city?.name
@@ -50,6 +52,65 @@ export const BusinessReviewsList = (props) => {
     }
   }
 
+  /**
+   * Method to update the business review from API
+   */
+  const handleUpdateReview = async (businessId, reviewId, changes) => {
+    try {
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
+
+      setActionState({ ...actionState, loading: true })
+      const requestOptions = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(changes)
+      }
+      const response = await fetch(`${ordering.root}/business/${businessId}/reviews/${reviewId}`, requestOptions)
+      const content = await response.json()
+      if (!content.error) {
+        const reviews = reviewsListState.reviews.filter(review => {
+          if (review.id === reviewId) {
+            Object.assign(review, content.result)
+          }
+          return true
+        })
+        setReviewsListState({ ...reviewsListState, reviews: reviews })
+        showToast(ToastType.Success, t('REVIEW_UPDATED', 'Review updated'))
+      }
+    } catch (err) {
+      setActionState({ loading: false, error: [err.message] })
+    }
+  }
+
+  /**
+   * Method to update the business review from API
+   */
+  const handleDeleteReview = async (businessId, reviewId) => {
+    try {
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
+      setActionState({ ...actionState, loading: true })
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const response = await fetch(`${ordering.root}/business/${businessId}/reviews/${reviewId}`, requestOptions)
+      const content = await response.json()
+      if (!content.error) {
+        const reviews = reviewsListState.reviews.filter(review => review.id !== reviewId)
+        setReviewsListState({ ...reviewsListState, reviews: reviews })
+        showToast(ToastType.Success, t('REVIEW_REMOVED', 'Review removed'))
+      }
+    } catch (err) {
+      setActionState({ loading: false, error: [err.message] })
+    }
+  }
+
   useEffect(() => {
     getBusinessReviews()
   }, [])
@@ -60,6 +121,9 @@ export const BusinessReviewsList = (props) => {
         <UIComponent
           {...props}
           reviewsListState={reviewsListState}
+          actionState={actionState}
+          handleUpdateReview={handleUpdateReview}
+          handleDeleteReview={handleDeleteReview}
         />
       )}
     </>

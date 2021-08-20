@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
@@ -18,6 +18,8 @@ import {
 export const ReviewsListing = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+  const [showOption, setShowOption] = useState('business')
+  const [searchValue, setSearchValue] = useState(null)
 
   return (
     <>
@@ -28,6 +30,7 @@ export const ReviewsListing = (props) => {
               <IconButton
                 color='black'
                 onClick={() => handleMenuCollapse(false)}
+                onSearch={val => setSearchValue(val)}
               >
                 <MenuIcon />
               </IconButton>
@@ -37,13 +40,14 @@ export const ReviewsListing = (props) => {
           <HeaderRight>
             <SearchBar
               placeholder={t('SEARCH', 'Search')}
+              searchValue={searchValue}
             />
           </HeaderRight>
         </Header>
         <Tabs>
           <Tab
-            // active={showOption === 'cities'}
-            // onClick={() => setShowOption('cities')}
+            active={showOption === 'business'}
+            onClick={() => setShowOption('business')}
           >
             {t('BUSINESS', 'Business')}
           </Tab>
@@ -60,7 +64,9 @@ export const ReviewsListing = (props) => {
             {t('WAITERS', 'Waiters')}
           </Tab>
         </Tabs>
-        <BusinessReviewList />
+        {showOption === 'business' && (
+          <BusinessReviewList searchValue={searchValue} />
+        )}
       </ReviewsListingContainer>
     </>
   )

@@ -35,32 +35,6 @@ export const ReviewTbody = styled.tbody`
   `}
 `
 
-export const ReviewRowWrapper = styled.div`
-  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-
-  ${({ isHeader }) => isHeader ? css`
-    border-bottom: 1px solid ${props => props.theme.colors.secundaryLight};
-    > div {
-      font-weight: 700;
-    }
-  ` : css`
-    cursor: pointer;
-    &:hover {
-      background-color: ${props => props.theme.colors.borderColor};
-    }
-  `}
-
-  ${({ active }) => active && css`
-    background-color: ${props => props.theme.colors.lightPrimary};
-    border-top: 1px solid ${props => props.theme.colors.primary};
-    border-bottom: 1px solid ${props => props.theme.colors.primary};
-  `}
-`
-
 export const WrapperImage = styled.div`
   max-width: 45px;
   max-height: 45px;
@@ -89,7 +63,7 @@ const ImageStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 8px;
 `
 export const Image = (props) => {
   return (
@@ -120,9 +94,12 @@ export const InfoBlock = styled.div`
   p {
     font-size: 11px;
     margin: 0px;
+    color: ${props => props.theme.colors.lightGray};
+
     &.bold {
       font-size: 12px;
       font-weight: 500;
+      color: ${props => props.theme.colors.headingColor};
     }
   }
 `
@@ -157,13 +134,25 @@ export const ReviewMarkerWrapper = styled.div`
   ${({ isHeader }) => !isHeader && css`
     height: 40px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     ${props => props.theme.colors.rtl ? css`
       border-right: 1px solid ${props => props.theme.colors.borderColor};
     ` : css`
       border-left: 1px solid ${props => props.theme.colors.borderColor};
     `}
   `}
+
+  svg {
+    color: ${props => props.theme.colors.primary};
+    font-size: 20px;
+  }
+
+  p {
+    margin: 0px;
+    color: ${props => props.theme.colors.lightGray};
+  }
 `
 export const CommentsWrapper = styled.div`
   font-size: 12px;
@@ -183,6 +172,11 @@ export const CommentsWrapper = styled.div`
       border-left: 1px solid ${props => props.theme.colors.borderColor};
     `}
   `}
+
+  p {
+    color: ${props => props.theme.colors.lightGray};
+    margin: 0px;
+  }
 `
 export const ActionsWrapper = styled.div`
   display: flex;

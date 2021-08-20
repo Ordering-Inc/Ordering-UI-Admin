@@ -1,6 +1,6 @@
 import { Button, IconButton } from './Buttons'
 import { Checkbox } from './Checkbox'
-import { Input } from './Inputs'
+import { Input, TextArea } from './Inputs'
 import { MultiSelect } from './MultiSelect'
 import { Select as SecondSelect } from './Select'
 import { Select as DefaultSelect } from './Select/FirstSelect'
@@ -14,5 +14,6 @@ export {
   MultiSelect,
   Switch,
   SecondSelect,
-  DefaultSelect
+  DefaultSelect,
+  TextArea
 }

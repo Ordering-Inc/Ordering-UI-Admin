@@ -6,12 +6,14 @@ import Skeleton from 'react-loading-skeleton'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Pagination } from '../Pagination'
-import { ThreeDotsVertical } from 'react-bootstrap-icons'
+import { ThreeDotsVertical, StarFill } from 'react-bootstrap-icons'
+import { Confirm } from '../Confirm'
+import { SideBar } from '../SideBar'
+import { ReviewDetails } from '../ReviewDetails'
 
 import {
   ReviewsTable,
   ReviewTbody,
-  ReviewRowWrapper,
   ReviewObject,
   InfoBlock,
   CustomerWrapper,
@@ -28,11 +30,16 @@ import {
 const BusinessReviewsListingUI = (props) => {
   const {
     reviewsListState,
-    searchValue
+    searchValue,
+    handleUpdateReview,
+    handleDeleteReview
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ optimizeImage }] = useUtils()
+  const [{ optimizeImage, parseNumber }] = useUtils()
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [openReview, setOpenReview] = useState(false)
+  const [curReview, setCurReview] = useState(null)
 
   const [currentPage, setCurrentPage] = useState(1)
   const [reviewssPerPage, setReviewsPerPage] = useState(10)
@@ -65,16 +72,38 @@ const BusinessReviewsListingUI = (props) => {
     setCurrentReviews(_currentReviews)
   }, [reviewsListState, currentPage, reviewssPerPage, searchValue])
 
+  const onClickDeleteReview = (businessId, reviewId) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_REVIEW', 'Are you sure to delete this review?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteReview(businessId, reviewId)
+      }
+    })
+  }
+
+  const handleOpenReview = (review) => {
+    setCurReview(review)
+    setOpenReview(true)
+  }
+
+  const handleClickReview = (e, review) => {
+    const isInvalid = e.target.closest('.review-enabled') || e.target.closest('.review-actions')
+    if (isInvalid) return
+    handleOpenReview(review)
+  }
+
   return (
     <>
       <ReviewsTable>
         <thead>
           <tr>
-            <th><ReviewObject>{t('BUSINESS', 'Business')}</ReviewObject></th>
-            <th><CustomerWrapper>{t('CUSTOMER', 'Customer')}</CustomerWrapper></th>
-            <th><ReviewMarkerWrapper>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
-            <th><CommentsWrapper>{t('COMMENTS', 'Comments')}</CommentsWrapper></th>
-            <th><ActionsWrapper>{t('ACTIONS', 'Actions')}</ActionsWrapper></th>
+            <th><ReviewObject isHeader>{t('BUSINESS', 'Business')}</ReviewObject></th>
+            <th><CustomerWrapper isHeader>{t('CUSTOMER', 'Customer')}</CustomerWrapper></th>
+            <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
+            <th><CommentsWrapper isHeader>{t('COMMENTS', 'Comments')}</CommentsWrapper></th>
+            <th><ActionsWrapper isHeader>{t('ACTIONS', 'Actions')}</ActionsWrapper></th>
           </tr>
         </thead>
         {reviewsListState.loading ? (
@@ -91,7 +120,7 @@ const BusinessReviewsListingUI = (props) => {
           ))
         ) : (
           currentReviews.map(review => (
-            <ReviewTbody key={review.id}>
+            <ReviewTbody key={review.id} onClick={e => handleClickReview(e, review)}>
               <tr>
                 <td>
                   <ReviewObject>
@@ -116,12 +145,15 @@ const BusinessReviewsListingUI = (props) => {
                 </td>
                 <td>
                   <ReviewMarkerWrapper>
-                    {review?.total}
+                    <StarFill />
+                    <p>{parseNumber(review?.total)}</p>
                   </ReviewMarkerWrapper>
                 </td>
                 <td>
                   <CommentsWrapper>
-                    {review?.comment}
+                    <p>
+                      {review?.comment}
+                    </p>
                   </CommentsWrapper>
                 </td>
                 <td>
@@ -130,7 +162,7 @@ const BusinessReviewsListingUI = (props) => {
                       <span>{t('ENABLE', 'Enable')}</span>
                       <Switch
                         defaultChecked={review?.enabled}
-                        // onChange={enabled => handleUpdateCity(city.country_id, city.id, { enabled: enabled })}
+                        onChange={enabled => handleUpdateReview(review?.business_id, review.id, { enabled: enabled })}
                       />
                     </EnableWrapper>
                     <ActionSelectorWrapper className='review-actions'>
@@ -140,12 +172,12 @@ const BusinessReviewsListingUI = (props) => {
                         id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                       >
                         <Dropdown.Item
-                          // onClick={() => handleOpenCityDetails(city)}
+                          onClick={() => handleOpenReview(review)}
                         >
-                          {t('EDIT', 'Edit')}
+                          {t('DETAILS', 'Details')}
                         </Dropdown.Item>
                         <Dropdown.Item
-                          // onClick={() => onDeleteCity(city.country_id, city.id)}
+                          onClick={() => onClickDeleteReview(review?.business_id, review.id)}
                         >
                           {t('DELETE', 'Delete')}
                         </Dropdown.Item>
@@ -171,6 +203,32 @@ const BusinessReviewsListingUI = (props) => {
           )}
         </PagesBottomContainer>
       )}
+      {openReview && (
+        <SideBar
+          sidebarId='review-details'
+          defaultSideBarWidth={550}
+          open={openReview}
+          onClose={() => {
+            setCurReview(null)
+            setOpenReview(false)
+          }}
+        >
+          <ReviewDetails
+            review={curReview}
+            handleUpdateReview={handleUpdateReview}
+          />
+        </SideBar>
+      )}
+      <Confirm
+        title={t('ORDERING', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
