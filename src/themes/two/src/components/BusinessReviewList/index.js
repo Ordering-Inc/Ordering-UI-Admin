@@ -60,7 +60,7 @@ const BusinessReviewsListingUI = (props) => {
     if (reviewsListState.loading) return
     let reviews = []
     if (searchValue) {
-      reviews = reviewsListState.reviews.filter(city => city.name.toLowerCase().includes(searchValue.toLowerCase()))
+      reviews = reviewsListState.reviews.filter(review => review?.business_name.toLowerCase().includes(searchValue.toLowerCase()))
     } else {
       reviews = [...reviewsListState.reviews]
     }

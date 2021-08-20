@@ -30,7 +30,6 @@ export const ReviewsListing = (props) => {
               <IconButton
                 color='black'
                 onClick={() => handleMenuCollapse(false)}
-                onSearch={val => setSearchValue(val)}
               >
                 <MenuIcon />
               </IconButton>
@@ -41,6 +40,7 @@ export const ReviewsListing = (props) => {
             <SearchBar
               placeholder={t('SEARCH', 'Search')}
               searchValue={searchValue}
+              onSearch={val => setSearchValue(val)}
             />
           </HeaderRight>
         </Header>

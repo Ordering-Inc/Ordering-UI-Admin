@@ -13,7 +13,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
   row-gap: 20px;
 `

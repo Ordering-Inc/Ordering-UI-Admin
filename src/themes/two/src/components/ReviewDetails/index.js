@@ -25,7 +25,7 @@ export const ReviewDetails = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ optimizeImage, parseNumber }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
 
   const getReviewPercent = (quality) => {
     return quality / 5 * 100
