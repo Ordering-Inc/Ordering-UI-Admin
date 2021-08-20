@@ -71,3 +71,8 @@ export const WrapperMap = styled.div`
     }
   }
 `
+
+export const ErrorText = styled.div`
+  font-size: 14px;
+  color: ${props => props.theme.colors.lightGray};
+`

@@ -9,7 +9,8 @@ import {
   BasicContainer,
   FieldName,
   TypeSelectWrapper,
-  WrapperMap
+  WrapperMap,
+  ErrorText
 } from './styles'
 
 export const BusinessDeliveryZoneBasic = (props) => {
@@ -119,25 +120,29 @@ export const BusinessDeliveryZoneBasic = (props) => {
           defaultValue={business?.address}
           disabled
         />
-        <WrapperMap>
-          <button
-            onClick={() => setClearState(true)}
-          >
-            {t('CLEAR', 'Clear')}
-          </button>
-          <BusinessZoneGoogleMaps
-            apiKey={configState?.configs?.google_maps_api_key?.value}
-            mapControls={googleMapsControls}
-            location={business?.location}
-            clearState={clearState}
-            setClearState={setClearState}
-            type={zoneType}
-            data={zoneData}
-            handleData={handleZoneData}
-            fillStyle={fillStyle}
-            infoContentString={infoContentString}
-          />
-        </WrapperMap>
+        {configState?.configs?.google_maps_api_key?.value ? (
+          <WrapperMap>
+            <button
+              onClick={() => setClearState(true)}
+            >
+              {t('CLEAR', 'Clear')}
+            </button>
+            <BusinessZoneGoogleMaps
+              apiKey={configState?.configs?.google_maps_api_key?.value}
+              mapControls={googleMapsControls}
+              location={business?.location}
+              clearState={clearState}
+              setClearState={setClearState}
+              type={zoneType}
+              data={zoneData}
+              handleData={handleZoneData}
+              fillStyle={fillStyle}
+              infoContentString={infoContentString}
+            />
+          </WrapperMap>
+        ) : (
+          <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is requuired')}</ErrorText>
+        )}
         <Button
           color='primary'
           borderRadius='5px'

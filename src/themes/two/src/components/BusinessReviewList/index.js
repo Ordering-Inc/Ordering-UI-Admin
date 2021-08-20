@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
-import { BusinessReviewsList as BusinessReviewsListController } from './naked'
+import { useLanguage, useUtils, BusinessReviewsList as BusinessReviewsListController } from 'ordering-components-admin'
 import { Switch } from '../../styles/Switch'
 import Skeleton from 'react-loading-skeleton'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
