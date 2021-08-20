@@ -4,6 +4,8 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { BusinessTypeForm } from '../BusinessTypeForm'
 import { useTheme } from 'styled-components'
+import { Alert } from '../Confirm'
+
 import {
   Container,
   BusinessType,
@@ -23,6 +25,8 @@ export const BusinessTypes = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const [selectedBusinessTypes, setSelectedBusinessTypes] = useState([])
   const [isAdd, setIsAdd] = useState(false)
 
@@ -33,7 +37,15 @@ export const BusinessTypes = (props) => {
     } else {
       _selectedBusinessTypes.push(typeId)
     }
-    setSelectedBusinessTypes(_selectedBusinessTypes)
+    if (_selectedBusinessTypes.length > 0) {
+      setSelectedBusinessTypes(_selectedBusinessTypes)
+    } else {
+      setAlertState({
+        open: true,
+        content: t('ERROR_TYPES_ITEM_MINIMUM', 'The types must have at least 1 items.')
+      })
+      return
+    }
     setFormState({
       ...formState,
       changes: { types: _selectedBusinessTypes }
@@ -104,6 +116,15 @@ export const BusinessTypes = (props) => {
           </AddNewBusinessTypeTitle>
         )}
       </AddNewBusinessTypeContainer>
+      <Alert
+        title={t('ORDERING', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }
