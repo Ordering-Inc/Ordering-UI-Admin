@@ -75,4 +75,6 @@ export const WrapperMap = styled.div`
 export const ErrorText = styled.div`
   font-size: 14px;
   color: ${props => props.theme.colors.lightGray};
+  text-align: center;
+  margin: 20px 0;
 `

@@ -94,6 +94,7 @@ export const BusinessTypes = (props) => {
           <BusinessTypeForm
             businessTypes={businessTypes}
             handleSuccessAddBusinessType={handleSuccessAddBusinessType}
+            handleCloseAddForm={() => setIsAdd(false)}
           />
         ) : (
           <AddNewBusinessTypeTitle

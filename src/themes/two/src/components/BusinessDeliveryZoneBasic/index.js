@@ -141,7 +141,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
             />
           </WrapperMap>
         ) : (
-          <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is requuired')}</ErrorText>
+          <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
         )}
         <Button
           color='primary'
