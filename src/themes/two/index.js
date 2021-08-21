@@ -74,6 +74,7 @@ import { PaymethodTypeSelector } from './src/components/PaymethodTypeSelector'
 import { Personalization } from './src/components/Personalization'
 import { PlaceListing } from './src/components/PlaceListing'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
+import { ReviewsListing } from './src/components/ReviewsListing'
 import { SearchBar } from './src/components/SearchBar'
 import { Settings } from './src/components/Settings'
 import { SidebarMenu } from './src/components/SidebarMenu'
@@ -179,6 +180,7 @@ export {
   Personalization,
   PlaceListing,
   ProductItemAccordion,
+  ReviewsListing,
   SearchBar,
   Settings,
   SidebarMenu,
