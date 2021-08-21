@@ -116,14 +116,14 @@ const BusinessPromotionGeneralFormUI = (props) => {
   }
 
   const onButtonClick = () => {
-    if ((!formState.changes?.name || formState.changes?.name === '')) {
+    if ((!formState.changes?.name && !promotionState?.promotion?.name) || formState.changes?.name === '') {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_NAME_REQUIRED', 'The field Name is required')
       })
       return
     }
-    if (formState?.changes?.type === 2 && (!formState.changes?.coupon || formState.changes?.coupon === '')) {
+    if (formState?.changes?.type === 2 && ((!formState.changes?.coupon && !promotionState?.promotion?.coupon) || formState.changes?.coupon === '')) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_COUPON_REQUIRED', 'The field Coupon is required')
