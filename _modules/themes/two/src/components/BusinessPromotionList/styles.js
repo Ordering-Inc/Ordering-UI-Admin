@@ -93,7 +93,7 @@ var AddNewPromotionText = _styledComponents.default.div(_templateObject19 || (_t
 
 exports.AddNewPromotionText = AddNewPromotionText;
 
-var PromotionEditFormContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  transition: 0.3s;\n\n  @media (min-width: 576px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1000px) {\n    ", "\n  }\n"])), function (props) {
+var PromotionEditFormContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  transition: 0.3s;\n  overflow: auto;\n\n  @media (min-width: 576px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1000px) {\n    ", "\n  }\n"])), function (props) {
   var _props$theme6;
 
   return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {

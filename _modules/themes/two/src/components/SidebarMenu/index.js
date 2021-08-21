@@ -130,31 +130,26 @@ var SidebarMenu = function SidebarMenu(props) {
     pageName: 'places',
     url: '/settings/places'
   }];
-  var analyticsSubMenus = [{
+  var businessIntelligenceSubMenus = [{
     id: 1,
-    title: t('CONTROL_PANEL_BUSINESS', 'Business'),
+    title: t('BUSINESS_ANALYTICS', 'Business analytics'),
     pageName: 'business_analytics',
-    url: '/analytics/business'
+    url: '/intelligence/business'
   }, {
     id: 2,
-    title: t('DRIVERS', 'Drivers'),
+    title: t('DRIVERS_ANALYTICS', 'Drivers analytics'),
     pageName: 'drivers_analytics',
-    url: '/analytics/drivers'
+    url: '/intelligence/drivers'
   }, {
     id: 3,
-    title: t('PROMOTIONS', 'Promotions'),
-    pageName: 'promotions_analytics',
-    url: '/analytics/promotions'
+    title: t('REVIEWS_MANAGER', 'Reviews manager'),
+    pageName: 'reviews',
+    url: '/intelligence/reviews'
   }, {
     id: 4,
-    title: t('BUSINESS_INTELLIGENCE', 'Business Intelligence'),
-    pageName: 'intelligence_analytics',
-    url: '/analytics/business_intelligence'
-  }, {
-    id: 5,
     title: t('INVOICE_MANAGER', 'Invoice manager'),
     pageName: 'invoice',
-    url: '/analytics/invoice'
+    url: '/intelligence/invoice'
   }];
 
   var handleGoToPage = function handleGoToPage(data) {
@@ -243,9 +238,9 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
     active: location.pathname === '/analytics/business' || location.pathname === '/analytics/drivers' || location.pathname === '/analytics/promotions' || location.pathname === '/analytics/business_intelligence' || location.pathname === '/analytics/invoice'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, t('ANALYTICS', 'Analytics'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, t('BUSINESS_INTELLIGENCE', 'Business Intelligence'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, analyticsSubMenus.map(function (item) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, businessIntelligenceSubMenus.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
       active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),

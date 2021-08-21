@@ -80,7 +80,7 @@ var InputGroupPrimary = (0, _styledComponents.default)(InputGroup)(_templateObje
 });
 exports.InputGroupPrimary = InputGroupPrimary;
 
-var TextArea = _styledComponents.default.textarea(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border: 1px solid #DEE2E6;\n  border-radius: 8px;\n  font-size: 14px;\n  padding: 10px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #B1BCCC;\n  }\n  &:-ms-input-placeholder {\n    color: #B1BCCC;\n  }\n"])), function (props) {
+var TextArea = _styledComponents.default.textarea(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border: 1px solid #DEE2E6;\n  border-radius: 8px;\n  font-size: 14px;\n  padding: 10px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #B1BCCC;\n  }\n  &:-ms-input-placeholder {\n    color: #B1BCCC;\n  }\n  &:read-only {\n    background-color: #F8F9FA;\n    cursor: not-allowed;\n    border-color: #DEE2E6;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');

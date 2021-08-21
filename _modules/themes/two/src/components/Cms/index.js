@@ -70,8 +70,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CmsUI = function CmsUI(props) {
-  var _pagesListState$pages;
-
   var pagesListState = props.pagesListState,
       handleChangeState = props.handleChangeState,
       handleUpdatePageList = props.handleUpdatePageList,
@@ -88,37 +86,42 @@ var CmsUI = function CmsUI(props) {
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      openModal = _useState2[0],
-      setOpenModal = _useState2[1];
+      searchValue = _useState2[0],
+      setSearchValue = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(null),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      curPageId = _useState4[0],
-      setCurPageId = _useState4[1]; // Change page
+      openModal = _useState4[0],
+      setOpenModal = _useState4[1];
 
-
-  var _useState5 = (0, _react.useState)(1),
+  var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      currentPage = _useState6[0],
-      setCurrentPage = _useState6[1];
+      curPageId = _useState6[0],
+      setCurPageId = _useState6[1]; // Change page
 
-  var _useState7 = (0, _react.useState)(10),
+
+  var _useState7 = (0, _react.useState)(1),
       _useState8 = _slicedToArray(_useState7, 2),
-      pagesPerPage = _useState8[0],
-      setPagesPerPage = _useState8[1]; // Get current products
+      currentPage = _useState8[0],
+      setCurrentPage = _useState8[1];
 
-
-  var _useState9 = (0, _react.useState)([]),
+  var _useState9 = (0, _react.useState)(10),
       _useState10 = _slicedToArray(_useState9, 2),
-      currentPages = _useState10[0],
-      setCurrentPages = _useState10[1];
+      pagesPerPage = _useState10[0],
+      setPagesPerPage = _useState10[1]; // Get current products
 
-  var _useState11 = (0, _react.useState)(null),
+
+  var _useState11 = (0, _react.useState)([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      totalPages = _useState12[0],
-      setTotalPages = _useState12[1];
+      currentPages = _useState12[0],
+      setCurrentPages = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      totalPages = _useState14[0],
+      setTotalPages = _useState14[1];
 
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
@@ -138,21 +141,26 @@ var CmsUI = function CmsUI(props) {
 
   (0, _react.useEffect)(function () {
     if (pagesListState.loading) return;
+    var pages = [];
 
-    var _totalPages;
-
-    if (pagesListState.pages.length > 0) {
-      _totalPages = Math.ceil(pagesListState.pages.length / pagesPerPage);
+    if (searchValue) {
+      pages = pagesListState.pages.filter(function (page) {
+        return page.name.toLowerCase().includes(searchValue.toLowerCase());
+      });
+    } else {
+      pages = _toConsumableArray(pagesListState.pages);
     }
+
+    var _totalPages = Math.ceil(pages.length / pagesPerPage);
 
     var indexOfLastPost = currentPage * pagesPerPage;
     var indexOfFirstPost = indexOfLastPost - pagesPerPage;
 
-    var _currentProducts = pagesListState.pages.slice(indexOfFirstPost, indexOfLastPost);
+    var _currentProducts = pages.slice(indexOfFirstPost, indexOfLastPost);
 
     setTotalPages(_totalPages);
     setCurrentPages(_currentProducts);
-  }, [pagesListState, currentPage, pagesPerPage]);
+  }, [pagesListState, currentPage, pagesPerPage, searchValue]);
 
   var handleEditPage = function handleEditPage(pageId) {
     setCurPageId(pageId);
@@ -171,7 +179,11 @@ var CmsUI = function CmsUI(props) {
       return handleEditPage(null);
     }
   }, t('ADD_PAGE', 'Add page')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    placeholder: t('SEARCH', 'Search')
+    placeholder: t('SEARCH', 'Search'),
+    searchValue: searchValue,
+    onSearch: function onSearch(val) {
+      return setSearchValue(val);
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles.PageListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('STATIC_PAGE', 'Static page')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), pagesListState.loading ? _toConsumableArray(Array(pagesPerPage).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PageTbody, {
       key: i
@@ -214,7 +226,7 @@ var CmsUI = function CmsUI(props) {
     onClick: function onClick() {
       return handleEditPage(null);
     }
-  }, t('ADD_NEW_STATIC_PAGE', 'Add new static page')), (pagesListState === null || pagesListState === void 0 ? void 0 : (_pagesListState$pages = pagesListState.pages) === null || _pagesListState$pages === void 0 ? void 0 : _pagesListState$pages.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  }, t('ADD_NEW_STATIC_PAGE', 'Add new static page')), (currentPages === null || currentPages === void 0 ? void 0 : currentPages.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,

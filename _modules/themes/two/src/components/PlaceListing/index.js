@@ -194,8 +194,6 @@ var PlaceListingUI = function PlaceListingUI(props) {
       return [].concat(_toConsumableArray(_cities), _toConsumableArray(country === null || country === void 0 ? void 0 : country.cities));
     }, []);
 
-    var _totalPages;
-
     var cities = [];
 
     if (searchValue) {
@@ -206,9 +204,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
       cities = _toConsumableArray(_cities);
     }
 
-    if (cities.length > 0) {
-      _totalPages = Math.ceil(cities.length / citiesPerPage);
-    }
+    var _totalPages = Math.ceil(cities.length / citiesPerPage);
 
     var indexOfLastPost = currentPage * citiesPerPage;
     var indexOfFirstPost = indexOfLastPost - citiesPerPage;

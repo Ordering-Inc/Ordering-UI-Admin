@@ -5,21 +5,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AnalyticsMap = void 0;
+exports.ReviewsListing = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _styledComponents = require("styled-components");
+var _InfoShareContext = require("../../../../../contexts/InfoShareContext");
 
-var _styles = require("./styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _SearchBar = require("../SearchBar");
 
-var _Buttons = require("../../styles/Buttons");
+var _styles = require("../../styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _BusinessReviewList = require("../BusinessReviewList");
+
+var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -37,67 +39,47 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var AnalyticsMap = function AnalyticsMap(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _theme$images, _theme$images$icons;
-
-  var locationList = props.locationList;
-
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
-  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
-
+var ReviewsListing = function ReviewsListing(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
+  var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
+      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+      isCollapse = _useInfoShare2[0].isCollapse,
+      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)('business'),
       _useState2 = _slicedToArray(_useState, 2),
-      isHeat = _useState2[0],
-      setIsHeat = _useState2[1];
+      showOption = _useState2[0],
+      setShowOption = _useState2[1];
 
-  var defaultCenter = {
-    lat: 37.775,
-    lng: -122.434
-  };
-  var googleMapsControls = {
-    defaultZoom: 15,
-    zoomControl: false,
-    streetViewControl: false,
-    fullscreenControl: false,
-    mapTypeId: 'roadmap',
-    // 'roadmap', 'satellite', 'hybrid', 'terrain'
-    mapTypeControl: false,
-    mapTypeControlOptions: {
-      mapTypeIds: ['roadmap', 'satellite']
-    }
-  };
-  (0, _react.useEffect)(function () {
-    setIsHeat(false);
-  }, [locationList]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, locationList !== null && locationList !== void 0 && locationList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 320
-  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
-    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value,
-    location: (user === null || user === void 0 ? void 0 : user.location) || defaultCenter,
-    locations: locationList === null || locationList === void 0 ? void 0 : locationList.locations,
-    mapControls: googleMapsControls,
-    isHeatMap: true,
-    isHeat: isHeat,
-    markerIcon: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.mapMarker
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    borderRadius: "7.6px",
-    color: "primary",
-    disabled: locationList.loading,
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      searchValue = _useState4[0],
+      setSearchValue = _useState4[1];
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ReviewsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLeft, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
     onClick: function onClick() {
-      return setIsHeat(!isHeat);
+      return handleMenuCollapse(false);
     }
-  }, isHeat ? t('GROUPED', 'Grouped') : t('HEAT_MAP', 'Heatmap')))));
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('REVIEWS_MANAGER', 'Reviews manager'))), /*#__PURE__*/_react.default.createElement(_styles2.HeaderRight, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    placeholder: t('SEARCH', 'Search'),
+    searchValue: searchValue,
+    onSearch: function onSearch(val) {
+      return setSearchValue(val);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: showOption === 'business',
+    onClick: function onClick() {
+      return setShowOption('business');
+    }
+  }, t('BUSINESS', 'Business')), /*#__PURE__*/_react.default.createElement(_styles2.Tab // active={showOption === 'zones'}
+  // onClick={() => setShowOption('zones')}
+  , null, t('PRODUCTS', 'Products')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, null, t('DRIVERS', 'Drivers')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, null, t('WAITERS', 'Waiters'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
+    searchValue: searchValue
+  })));
 };
 
-exports.AnalyticsMap = AnalyticsMap;
+exports.ReviewsListing = ReviewsListing;

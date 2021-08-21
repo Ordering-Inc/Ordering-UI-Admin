@@ -19,6 +19,8 @@ var _BusinessTypeForm = require("../BusinessTypeForm");
 
 var _styledComponents = require("styled-components");
 
+var _Confirm = require("../Confirm");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -69,15 +71,23 @@ var BusinessTypes = function BusinessTypes(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
       _useState2 = _slicedToArray(_useState, 2),
-      selectedBusinessTypes = _useState2[0],
-      setSelectedBusinessTypes = _useState2[1];
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      isAdd = _useState4[0],
-      setIsAdd = _useState4[1];
+      selectedBusinessTypes = _useState4[0],
+      setSelectedBusinessTypes = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isAdd = _useState6[0],
+      setIsAdd = _useState6[1];
 
   var handleSelectBusinessTypes = function handleSelectBusinessTypes(typeId) {
     var _selectedBusinessTypes = _toConsumableArray(selectedBusinessTypes);
@@ -90,7 +100,16 @@ var BusinessTypes = function BusinessTypes(props) {
       _selectedBusinessTypes.push(typeId);
     }
 
-    setSelectedBusinessTypes(_selectedBusinessTypes);
+    if (_selectedBusinessTypes.length > 0) {
+      setSelectedBusinessTypes(_selectedBusinessTypes);
+    } else {
+      setAlertState({
+        open: true,
+        content: t('ERROR_TYPES_ITEM_MINIMUM', 'The types must have at least 1 items.')
+      });
+      return;
+    }
+
     setFormState(_objectSpread(_objectSpread({}, formState), {}, {
       changes: {
         types: _selectedBusinessTypes
@@ -152,12 +171,33 @@ var BusinessTypes = function BusinessTypes(props) {
     }), /*#__PURE__*/_react.default.createElement("span", null, businessType === null || businessType === void 0 ? void 0 : businessType.name));
   }), /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessTypeContainer, null, isAdd ? /*#__PURE__*/_react.default.createElement(_BusinessTypeForm.BusinessTypeForm, {
     businessTypes: businessTypes,
-    handleSuccessAddBusinessType: handleSuccessAddBusinessType
+    handleSuccessAddBusinessType: handleSuccessAddBusinessType,
+    handleCloseAddForm: function handleCloseAddForm() {
+      return setIsAdd(false);
+    }
   }) : /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessTypeTitle, {
     onClick: function onClick() {
       return setIsAdd(true);
     }
-  }, t('ADD_NEW_BUSINESS_TYPE', 'Add new business type'))));
+  }, t('ADD_NEW_BUSINESS_TYPE', 'Add new business type'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('ORDERING', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 exports.BusinessTypes = BusinessTypes;

@@ -465,6 +465,12 @@ Object.defineProperty(exports, "ProductItemAccordion", {
     return _ProductItemAccordion.ProductItemAccordion;
   }
 });
+Object.defineProperty(exports, "ReviewsListing", {
+  enumerable: true,
+  get: function get() {
+    return _ReviewsListing.ReviewsListing;
+  }
+});
 Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
@@ -809,6 +815,8 @@ var _Personalization = require("./src/components/Personalization");
 var _PlaceListing = require("./src/components/PlaceListing");
 
 var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
+
+var _ReviewsListing = require("./src/components/ReviewsListing");
 
 var _SearchBar = require("./src/components/SearchBar");
 

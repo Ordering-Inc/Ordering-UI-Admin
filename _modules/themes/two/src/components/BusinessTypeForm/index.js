@@ -51,7 +51,8 @@ var BusinessTypeFormUI = function BusinessTypeFormUI(props) {
   var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
       handleUpdateClick = props.handleUpdateClick,
-      handleChangeInput = props.handleChangeInput;
+      handleChangeInput = props.handleChangeInput,
+      handleCloseAddForm = props.handleCloseAddForm;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -112,7 +113,9 @@ var BusinessTypeFormUI = function BusinessTypeFormUI(props) {
 
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 || !(formState !== null && formState !== void 0 && formState.loading)) {
+        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) handleCloseAddForm();
+
+        if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && !(formState !== null && formState !== void 0 && formState.loading)) {
           handleUpdateClick();
         }
       }

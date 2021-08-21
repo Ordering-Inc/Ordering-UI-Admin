@@ -558,7 +558,8 @@ var MessagesUI = function MessagesUI(props) {
     id: "message",
     ref: register({
       required: !image
-    })
+    }),
+    autoComplete: "off"
   }), !image && /*#__PURE__*/_react.default.createElement(_styles.SendImage, {
     htmlFor: "chat_image"
   }, /*#__PURE__*/_react.default.createElement("input", {

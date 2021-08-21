@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
-  var _configState$configs, _configState$configs$;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3;
 
   var business = props.business,
       zone = props.zone,
@@ -166,12 +166,12 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
     name: "address",
     defaultValue: business === null || business === void 0 ? void 0 : business.address,
     disabled: true
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement("button", {
+  }), configState !== null && configState !== void 0 && (_configState$configs = configState.configs) !== null && _configState$configs !== void 0 && (_configState$configs$ = _configState$configs.google_maps_api_key) !== null && _configState$configs$ !== void 0 && _configState$configs$.value ? /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       return setClearState(true);
     }
   }, t('CLEAR', 'Clear')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessZoneGoogleMaps, {
-    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value,
+    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value,
     mapControls: googleMapsControls,
     location: business === null || business === void 0 ? void 0 : business.location,
     clearState: clearState,
@@ -181,7 +181,7 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
     handleData: handleZoneData,
     fillStyle: fillStyle,
     infoContentString: infoContentString
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     borderRadius: "5px",
     onClick: function onClick() {

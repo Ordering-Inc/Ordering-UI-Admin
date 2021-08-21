@@ -478,11 +478,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     height: "90vh",
-    open: openMessages.driver || openMessages.business || openMessages.customer,
+    open: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
     onClose: function onClose() {
       return setExtraOpen(false);
     }
-  }, (openMessages.driver || openMessages.business || openMessages.customer) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+  }, (openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat) && /*#__PURE__*/_react.default.createElement(_styles.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
