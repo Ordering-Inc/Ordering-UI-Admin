@@ -24,9 +24,10 @@ export const ListenPageChanges = ({ children }) => {
     pages: '/settings/pages',
     places: '/settings/places',
     integrations: '/settings/integrations',
-    business_analytics: '/analytics/business',
-    drivers_analytics: '/analytics/drivers',
-    invoice: '/analytics/invoice'
+    business_analytics: '/intelligence/business',
+    drivers_analytics: '/intelligence/drivers',
+    invoice: '/intelligence/invoice',
+    reviews: '/intelligence/reviews'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

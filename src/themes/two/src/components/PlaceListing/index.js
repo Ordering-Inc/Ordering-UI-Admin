@@ -109,16 +109,13 @@ const PlaceListingUI = (props) => {
   useEffect(() => {
     if (countriesState.loading) return
     const _cities = countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], [])
-    let _totalPages
     let cities = []
     if (searchValue) {
       cities = _cities.filter(city => city.name.toLowerCase().includes(searchValue.toLowerCase()))
     } else {
       cities = [..._cities]
     }
-    if (cities.length > 0) {
-      _totalPages = Math.ceil(cities.length / citiesPerPage)
-    }
+    const _totalPages = Math.ceil(cities.length / citiesPerPage)
     const indexOfLastPost = currentPage * citiesPerPage
     const indexOfFirstPost = indexOfLastPost - citiesPerPage
     const _currentCities = cities.slice(indexOfFirstPost, indexOfLastPost)

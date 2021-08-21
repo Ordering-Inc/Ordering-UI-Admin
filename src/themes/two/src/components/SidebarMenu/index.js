@@ -123,36 +123,30 @@ export const SidebarMenu = (props) => {
     }
   ]
 
-  const analyticsSubMenus = [
+  const businessIntelligenceSubMenus = [
     {
       id: 1,
-      title: t('CONTROL_PANEL_BUSINESS', 'Business'),
+      title: t('BUSINESS_ANALYTICS', 'Business analytics'),
       pageName: 'business_analytics',
-      url: '/analytics/business'
+      url: '/intelligence/business'
     },
     {
       id: 2,
-      title: t('DRIVERS', 'Drivers'),
+      title: t('DRIVERS_ANALYTICS', 'Drivers analytics'),
       pageName: 'drivers_analytics',
-      url: '/analytics/drivers'
+      url: '/intelligence/drivers'
     },
     {
       id: 3,
-      title: t('PROMOTIONS', 'Promotions'),
-      pageName: 'promotions_analytics',
-      url: '/analytics/promotions'
+      title: t('REVIEWS_MANAGER', 'Reviews manager'),
+      pageName: 'reviews',
+      url: '/intelligence/reviews'
     },
     {
       id: 4,
-      title: t('BUSINESS_INTELLIGENCE', 'Business Intelligence'),
-      pageName: 'intelligence_analytics',
-      url: '/analytics/business_intelligence'
-    },
-    {
-      id: 5,
       title: t('INVOICE_MANAGER', 'Invoice manager'),
       pageName: 'invoice',
-      url: '/analytics/invoice'
+      url: '/intelligence/invoice'
     }
   ]
   const handleGoToPage = (data) => {
@@ -296,11 +290,11 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       <BarChartLineIcon />
-                      <span>{t('ANALYTICS', 'Analytics')}</span>
+                      <span>{t('BUSINESS_INTELLIGENCE', 'Business Intelligence')}</span>
                     </ContextAwareToggle>
                     <Accordion.Collapse eventKey='5'>
                       <MenuContent>
-                        {analyticsSubMenus.map(item => (
+                        {businessIntelligenceSubMenus.map(item => (
                           <SubMenu
                             key={item.id}
                             active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}

@@ -54,7 +54,7 @@ export const Image = styled.div`
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 
   ${({ isEdit }) => !isEdit && css`
-    pointer-event: none;
+    pointer-events: none;
   `}
 
   img,
@@ -64,6 +64,9 @@ export const Image = styled.div`
     height: 100%;
     border: none;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   };
 
   img{

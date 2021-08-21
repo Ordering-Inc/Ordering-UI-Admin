@@ -115,6 +115,24 @@ const BusinessPromotionGeneralFormUI = (props) => {
     })
   }
 
+  const onButtonClick = () => {
+    if ((!formState.changes?.name && !promotionState?.promotion?.name) || formState.changes?.name === '') {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_NAME_REQUIRED', 'The field Name is required')
+      })
+      return
+    }
+    if (formState?.changes?.type === 2 && ((!formState.changes?.coupon && !promotionState?.promotion?.coupon) || formState.changes?.coupon === '')) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_COUPON_REQUIRED', 'The field Coupon is required')
+      })
+      return
+    }
+    isAddMode ? handleAddClick() : handleUpdateClick()
+  }
+
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
     return () => window.removeEventListener('mouseup', handleClickOutside)
@@ -172,6 +190,17 @@ const BusinessPromotionGeneralFormUI = (props) => {
           onChange={e => handleChangeInput(e)}
         />
       </ItemWrapper>
+      {(formState?.changes?.type === 2 || (!formState?.changes?.type && promotionState?.promotion?.type === 2)) && (
+        <ItemWrapper>
+          <Label>{t('COUPON', 'Coupon')}</Label>
+          <Input
+            name='coupon'
+            value={formState.changes?.coupon ?? promotionState?.promotion?.coupon ?? ''}
+            placeholder={t('COUPON_CODE', 'Coupon code')}
+            onChange={e => handleChangeInput(e)}
+          />
+        </ItemWrapper>
+      )}
       <ItemWrapper>
         <Label>{t('DESCRIPTION', 'Description')}</Label>
         <TextArea
@@ -282,7 +311,7 @@ const BusinessPromotionGeneralFormUI = (props) => {
       <Button
         borderRadius='8px'
         color='primary'
-        onClick={() => isAddMode ? handleAddClick() : handleUpdateClick()}
+        onClick={() => onButtonClick()}
         disabled={formState.loading || Object.keys(formState.changes).length === 0}
       >
         {formState.loading ? (
