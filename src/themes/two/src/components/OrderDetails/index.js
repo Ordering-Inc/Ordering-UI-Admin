@@ -312,10 +312,10 @@ const OrderDetailsUI = (props) => {
               <Modal
                 width='70%'
                 height='90vh'
-                open={(openMessages.driver || openMessages.business || openMessages.customer)}
+                open={openMessages?.chat}
                 onClose={() => setExtraOpen(false)}
               >
-                {(openMessages.driver || openMessages.business || openMessages.customer) && (
+                {openMessages?.chat && (
                   <ChatContainer>
                     <Messages
                       orderId={order?.id}

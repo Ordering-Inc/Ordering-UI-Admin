@@ -18,7 +18,8 @@ const BusinessTypeFormUI = (props) => {
     formState,
     handlechangeImage,
     handleUpdateClick,
-    handleChangeInput
+    handleChangeInput,
+    handleCloseAddForm
   } = props
 
   const [, t] = useLanguage()
@@ -63,7 +64,8 @@ const BusinessTypeFormUI = (props) => {
     const outsideDropdown = !conatinerRef.current?.contains(e.target)
     if (outsideDropdown) {
       if (!e.target.closest('.popup-component')) {
-        if (Object.keys(formState?.changes).length > 0 || !formState?.loading) {
+        if (Object.keys(formState?.changes).length === 0) handleCloseAddForm()
+        if (Object.keys(formState?.changes).length > 0 && !formState?.loading) {
           handleUpdateClick()
         }
       }
