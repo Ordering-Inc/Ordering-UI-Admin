@@ -29,7 +29,8 @@ export const ListenPageChanges = ({ children }) => {
     invoice: '/intelligence/invoice',
     reviews: '/intelligence/reviews',
     delivery_drivers: '/delivery/drivers-list',
-    drivers_managers: '/delivery/drivers-managers'
+    drivers_managers: '/delivery/drivers-managers',
+    drivers_companies: '/delivery/drivers-companies'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

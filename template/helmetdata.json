@@ -140,14 +140,21 @@
     "canonicalUrl": ""
   },
   "delivery_drivers": {
-    "title": "Delivery drivers",
+    "title": "Drivers",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "driver_managers": {
+  "drivers_managers": {
     "title": "Driver managers",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "drivers_companies": {
+    "title": "Driver companies",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",
