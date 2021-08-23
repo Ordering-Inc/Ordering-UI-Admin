@@ -34,6 +34,7 @@ import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { ReviewsList } from './pages/ReviewsList'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
+import { DriversManagersList } from './pages/DriversManagersList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -229,10 +230,17 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/delivery/drivers'>
+                    <Route exact path='/delivery/drivers-list'>
                       {
                         auth
                           ? <DeliveryDriversList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/delivery/drivers-managers'>
+                      {
+                        auth
+                          ? <DriversManagersList />
                           : <Redirect to='/login' />
                       }
                     </Route>

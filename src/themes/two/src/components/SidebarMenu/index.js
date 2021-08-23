@@ -156,7 +156,7 @@ export const SidebarMenu = (props) => {
       id: 1,
       title: t('DRIVERS', 'Drivers'),
       pageName: 'delivery_drivers',
-      url: '/delivery/drivers'
+      url: '/delivery/drivers-list'
     },
     {
       id: 2,
@@ -364,7 +364,7 @@ export const SidebarMenu = (props) => {
                     <ContextAwareToggle
                       eventKey='7'
                       active={
-                        location.pathname === '/delivery/drivers' ||
+                        location.pathname === '/delivery/drivers-list' ||
                         location.pathname === '/delivery/drivers-managers' ||
                         location.pathname === '/delivery/drivers-companies' ||
                         location.pathname === '/delivery/drivers-groups'

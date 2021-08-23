@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage } from 'ordering-components-admin'
-import { UsersList as UsersListController } from './naked'
+import { UsersList as UsersListController } from 'ordering-components-admin'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
@@ -16,7 +15,9 @@ import {
 
 const UsersListingUI = (props) => {
   const {
-    isDelivery,
+    headerTitle,
+    isDriversPage,
+    isDriversManagersPage,
     usersList,
     handleSelectedUserTypes,
     paginationProps,
@@ -39,7 +40,6 @@ const UsersListingUI = (props) => {
     handleSuccessAddUser
   } = props
 
-  const [, t] = useLanguage()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
@@ -88,7 +88,9 @@ const UsersListingUI = (props) => {
     <>
       <UsersListingContainer>
         <UsersListingHeader
-          title={t('USERS', 'Users')}
+          isDriversPage={isDriversPage}
+          isDriversManagersPage={isDriversManagersPage}
+          title={headerTitle}
           selectedUsers={selectedUsers}
           userTypesSelected={userTypesSelected}
           selectedUserActiveState={selectedUserActiveState}
@@ -98,7 +100,7 @@ const UsersListingUI = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
           handleOpenUserAddForm={handleOpenUserAddForm}
         />
-        {!isDelivery && (
+        {!(isDriversPage || isDriversManagersPage) && (
           <>
             <UserActiveStateFilter
               selectedUserActiveState={selectedUserActiveState}
@@ -110,7 +112,8 @@ const UsersListingUI = (props) => {
           </>
         )}
         <UsersList
-          isDelivery={isDelivery}
+          isDriversPage={isDriversPage}
+          isDriversManagersPage={isDriversManagersPage}
           usersList={usersList}
           getUsers={getUsers}
           paginationProps={paginationProps}
@@ -128,7 +131,7 @@ const UsersListingUI = (props) => {
 
       {isOpenUserDetails && (
         <UserDetailsLateralBar
-          isDelivery={isDelivery}
+          isDeliveryPage={isDriversPage || isDriversManagersPage}
           open={isOpenUserDetails}
           user={openUser}
           userId={openUser?.id || queryId}
@@ -143,6 +146,8 @@ const UsersListingUI = (props) => {
           onClose={() => setOpenUserAddForm(false)}
         >
           <UserAddForm
+            isDriversPage={isDriversPage}
+            isDriversManagersPage={isDriversManagersPage}
             handleSuccessAdd={handleSuccessAddUser}
             onClose={() => setOpenUserAddForm(false)}
           />

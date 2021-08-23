@@ -41,7 +41,8 @@ export const UsersList = (props) => {
     handleSelectedUsers,
     handleOpenUserDetails,
     handleOpenUserAddForm,
-    isDelivery
+    isDriversPage,
+    isDriversManagersPage
   } = props
 
   const [, t] = useLanguage()
@@ -77,7 +78,7 @@ export const UsersList = (props) => {
   return (
     <>
       <UsersConatiner>
-        <UserTableWrapper isDelivery={isDelivery}>
+        <UserTableWrapper isDeliveryPage={isDriversPage || isDriversManagersPage}>
           <UsersTable>
             <thead>
               <tr>
@@ -112,7 +113,7 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      {!isDelivery && (
+                      {!(isDriversPage || isDriversManagersPage) && (
                         <UserTypeWrapper>
                           <Skeleton width={100} style={{ marginBottom: '10px' }} />
                           <p><Skeleton width={100} /></p>
@@ -170,7 +171,7 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      {!isDelivery && (
+                      {!(isDriversPage || isDriversManagersPage) && (
                         <UserTypeWrapper className='user_type_selector'>
                           <UserTypeSelector
                             userId={user.id}
@@ -210,7 +211,13 @@ export const UsersList = (props) => {
         </UserTableWrapper>
         <UsersBottomContainer>
           <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
-            {isDelivery ? t('ADD_NEW_DRIVER', 'Add new driver') : t('ADD_NEW_USER', 'Add new user')}
+            {
+              isDriversPage
+                ? t('ADD_NEW_DRIVER', 'Add new driver')
+                : isDriversManagersPage
+                  ? t('ADD_NEW_DRIVER_MANAGER', 'Add new driver manager')
+                  : t('ADD_NEW_USER', 'Add new user')
+            }
           </AddNewUserButton>
           {usersList?.users.length > 0 && (
             <WrapperPagination>

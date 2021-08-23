@@ -23,7 +23,9 @@ export const UsersListingHeader = (props) => {
     selectedUserActiveState,
     searchValue,
     onSearch,
-    handleOpenUserAddForm
+    handleOpenUserAddForm,
+    isDriversPage,
+    isDriversManagersPage
   } = props
 
   const [, t] = useLanguage()
@@ -48,7 +50,13 @@ export const UsersListingHeader = (props) => {
           color='lightPrimary'
           onClick={() => handleOpenUserAddForm()}
         >
-          {t('ADD_USER', 'Add user')}
+          {
+            isDriversPage
+              ? t('ADD_DRIVER', 'Add driver')
+              : isDriversManagersPage
+                ? t('ADD_DRIVER_MANAGER', 'Add driver manager')
+                : t('ADD_USER', 'Add user')
+          }
         </Button>
         <UsersExportCSV
           userTypesSelected={userTypesSelected}

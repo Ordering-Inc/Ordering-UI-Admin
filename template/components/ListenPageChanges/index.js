@@ -28,7 +28,8 @@ export const ListenPageChanges = ({ children }) => {
     drivers_analytics: '/intelligence/drivers',
     invoice: '/intelligence/invoice',
     reviews: '/intelligence/reviews',
-    delivery_drivers: '/delivery/drivers'
+    delivery_drivers: '/delivery/drivers-list',
+    drivers_managers: '/delivery/drivers-managers'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

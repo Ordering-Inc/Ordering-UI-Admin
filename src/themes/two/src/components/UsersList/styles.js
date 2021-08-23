@@ -6,11 +6,11 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
-  max-height: ${({ isDelivery }) => isDelivery ? 'calc(100vh - 335px)' : 'calc(100vh - 415px)'};
+  max-height: ${({ isDeliveryPage }) => isDeliveryPage ? 'calc(100vh - 335px)' : 'calc(100vh - 415px)'};
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: ${({ isDelivery }) => isDelivery ? 'calc(100vh - 220px)' : 'calc(100vh - 300px)'};
+    max-height: ${({ isDeliveryPage }) => isDeliveryPage ? 'calc(100vh - 220px)' : 'calc(100vh - 300px)'};
   }
 `
 
