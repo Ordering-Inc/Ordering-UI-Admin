@@ -25,6 +25,7 @@ import { BusinessesList } from './pages/BusinessesList'
 import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
+import { DriverAnalytics } from './pages/DriverAnalytics'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
 import { Cms } from './pages/Cms'
@@ -32,12 +33,12 @@ import { IntegrationsList } from './pages/IntegrationsList'
 import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { ReviewsList } from './pages/ReviewsList'
+import { DeliveryDriversList } from './pages/DeliveryDriversList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
-import { DriverAnalytics } from './pages/DriverAnalytics'
 
 export const App = () => {
   const [{ auth, loading }] = useSession()
@@ -225,6 +226,13 @@ export const App = () => {
                       {
                         auth
                           ? <ReviewsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/delivery/drivers'>
+                      {
+                        auth
+                          ? <DeliveryDriversList />
                           : <Redirect to='/login' />
                       }
                     </Route>

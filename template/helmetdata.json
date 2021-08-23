@@ -27,6 +27,13 @@
     "robots": "",
     "canonicalUrl": ""
   },
+  "drivers_dashboard": {
+    "title": "Drivers Dashboard",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
   "login": {
     "title": "Login",
     "description": "a dummy description about this page",
@@ -120,6 +127,20 @@
   },
   "places": {
     "title": "Places",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "users": {
+    "title": "Users",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "delivery_drivers": {
+    "title": "Delivery drivers",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

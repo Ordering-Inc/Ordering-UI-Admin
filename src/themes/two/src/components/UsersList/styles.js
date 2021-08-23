@@ -2,14 +2,15 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const UsersConatiner = styled.div`
+  margin-top: 20px;
 `
 
 export const UserTableWrapper = styled.div`
-  max-height: calc(100vh - 415px);
+  max-height: ${({ isDelivery }) => isDelivery ? 'calc(100vh - 335px)' : 'calc(100vh - 415px)'};
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 300px);
+    max-height: ${({ isDelivery }) => isDelivery ? 'calc(100vh - 220px)' : 'calc(100vh - 300px)'};
   }
 `
 

@@ -113,6 +113,8 @@ export const WrapperUserTypeSelector = styled.div`
   div.select {
     border: none;
     background-color: ${props => props.theme.colors.secundary};
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 
   > div {

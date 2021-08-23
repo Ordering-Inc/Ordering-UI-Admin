@@ -20,7 +20,7 @@ export const DriversList = (props) => {
 
   return (
     <>
-      <HelmetTags page='deliveries' />
+      <HelmetTags page='drivers_dashboard' />
       <DriversManagerController {...driversListProps} />
     </>
   )

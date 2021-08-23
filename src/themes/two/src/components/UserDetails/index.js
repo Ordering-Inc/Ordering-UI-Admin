@@ -16,6 +16,7 @@ import { UserMetaFields } from '../UserMetaFields'
 
 export const UserDetailsUI = (props) => {
   const {
+    isDelivery,
     userState,
     setExtraOpen,
     handleSuccessUpdate,
@@ -38,6 +39,7 @@ export const UserDetailsUI = (props) => {
         )}
       </UserName>
       <UserDetailsMenu
+        isDelivery={isDelivery}
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={setCurrentMenuSelected}
       />

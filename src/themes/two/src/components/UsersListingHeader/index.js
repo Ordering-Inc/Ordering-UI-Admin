@@ -60,7 +60,6 @@ export const UsersListingHeader = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
         />
         <SearchBar
-          isCustomLayout
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}

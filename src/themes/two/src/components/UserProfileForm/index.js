@@ -144,6 +144,13 @@ const UserProfileFormUI = (props) => {
                   {(userData?.cellphone || userState?.result?.result?.cellphone) && (
                     <p>{(userData?.country_phone_code || userState?.result?.result?.country_phone_code) && `+${(userData?.country_phone_code || userState?.result?.result?.country_phone_code)} `}{(userData?.cellphone || userState?.result?.result?.cellphone)}</p>
                   )}
+                  {(userData?.birthdate || userState?.result?.result?.birthdate) && (
+                    <p>
+                      <span>{t('BIRTHDATE', 'Birthdate')}</span>
+                      <span>: </span>
+                      <span>{userData?.birthdate || userState?.result?.result?.birthdate}</span>
+                    </p>
+                  )}
                 </UserData>
               )}
             </SideForm>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { UsersList as UsersListController } from './naked'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
@@ -15,6 +16,7 @@ import {
 
 const UsersListingUI = (props) => {
   const {
+    isDelivery,
     usersList,
     handleSelectedUserTypes,
     paginationProps,
@@ -96,17 +98,21 @@ const UsersListingUI = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
           handleOpenUserAddForm={handleOpenUserAddForm}
         />
-        <UserActiveStateFilter
-          selectedUserActiveState={selectedUserActiveState}
-          handleChangeUserActiveState={handleChangeUserActiveState}
-        />
-        <UserTypeFilter
-          handleChangeUserType={handleSelectedUserTypes}
-        />
+        {!isDelivery && (
+          <>
+            <UserActiveStateFilter
+              selectedUserActiveState={selectedUserActiveState}
+              handleChangeUserActiveState={handleChangeUserActiveState}
+            />
+            <UserTypeFilter
+              handleChangeUserType={handleSelectedUserTypes}
+            />
+          </>
+        )}
         <UsersList
+          isDelivery={isDelivery}
           usersList={usersList}
           getUsers={getUsers}
-          userDetailsId={openUser?.id || queryId}
           paginationProps={paginationProps}
           paginationDetail={paginationDetail}
           handleChangeUserType={handleChangeUserType}
@@ -114,6 +120,7 @@ const UsersListingUI = (props) => {
           handleDeleteUser={handleDeleteUser}
           selectedUsers={selectedUsers}
           handleSelectedUsers={handleSelectedUsers}
+          userDetailsId={openUser?.id || queryId}
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
         />
@@ -121,6 +128,7 @@ const UsersListingUI = (props) => {
 
       {isOpenUserDetails && (
         <UserDetailsLateralBar
+          isDelivery={isDelivery}
           open={isOpenUserDetails}
           user={openUser}
           userId={openUser?.id || queryId}

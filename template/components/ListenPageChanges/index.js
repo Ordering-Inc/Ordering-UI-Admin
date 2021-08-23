@@ -27,7 +27,8 @@ export const ListenPageChanges = ({ children }) => {
     business_analytics: '/intelligence/business',
     drivers_analytics: '/intelligence/drivers',
     invoice: '/intelligence/invoice',
-    reviews: '/intelligence/reviews'
+    reviews: '/intelligence/reviews',
+    delivery_drivers: '/delivery/drivers'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
