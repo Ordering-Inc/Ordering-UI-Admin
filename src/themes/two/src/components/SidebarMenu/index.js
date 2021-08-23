@@ -12,7 +12,8 @@ import {
   Gear as GearIcon,
   Headset as HeadsetIcon,
   Globe2,
-  GraphUp
+  GraphUp,
+  WindowDock
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -374,6 +375,14 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
+                <Button
+                  className='d-flex align-items-center'
+                  variant={location.pathname === '/ordering-products' && 'primary'}
+                  onClick={() => handleGoToPage({ page: 'ordering_products' })}
+                >
+                  <WindowDock />
+                  {!isCollapse && <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>}
+                </Button>
 
                 <Button
                   className='d-flex align-items-center'

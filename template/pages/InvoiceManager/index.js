@@ -6,7 +6,7 @@ export const InvoiceManager = (props) => {
   return (
     <>
       <HelmetTags page='invoice' />
-      <InvoiceManagerController />
+      <InvoiceManagerController {...props} />
     </>
   )
 }

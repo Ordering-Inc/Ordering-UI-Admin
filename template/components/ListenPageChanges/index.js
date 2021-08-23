@@ -26,7 +26,8 @@ export const ListenPageChanges = ({ children }) => {
     integrations: '/settings/integrations',
     business_analytics: '/analytics/business',
     drivers_analytics: '/analytics/drivers',
-    invoice: '/analytics/invoice'
+    invoice: '/analytics/invoice',
+    ordering_products: '/ordering-products'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
