@@ -80,7 +80,7 @@ export const ActionsGroup = styled.div`
   }
 `
 
-export const PageListTable = styled.table`
+export const ProductListTable = styled.table`
   width: 100%;
   margin-top: 20px;
 

@@ -16,7 +16,7 @@ import {
   HeaderContainer,
   ActionsGroup,
   HeaderTitleContainer,
-  PageListTable,
+  ProductListTable,
   PageTbody,
   ActionsContainer,
   EnableWrapper,
@@ -108,14 +108,13 @@ export const OrderingProducts = (props) => {
             {t('ADD_PRODUCT', 'Add product')}
           </Button>
           <SearchBar
-            isCustomLayout
             // search={searchValue}
             // onSearch={handleChangeSearch}
             placeholder={t('SEARCH', 'Search')}
           />
         </ActionsGroup>
       </HeaderContainer>
-      <PageListTable>
+      <ProductListTable>
         <thead>
           <tr>
             <th className='product'>{t('PRODUCT', 'Product')}</th>
@@ -154,7 +153,7 @@ export const OrderingProducts = (props) => {
                 </td>
                 <td className='description'>
                   <div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat id turpis tortor, vulputate tristique faucibus vitae. Faucibus odio in.
+                    {product?.description}
                   </div>
                 </td>
                 <td className='action'>
@@ -190,13 +189,13 @@ export const OrderingProducts = (props) => {
             </PageTbody>
           ))
         )}
-      </PageListTable>
+      </ProductListTable>
       {!orderingProductsList.loading && (
         <PagesBottomContainer>
           <AddNewPageButton onClick={() => handleEditPage(null)}>
             {t('ADD_PRODUCT', 'Add product')}
           </AddNewPageButton>
-          {orderingProductsList?.pages?.length > 0 && (
+          {orderingProductsList?.products?.length > 0 && (
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
