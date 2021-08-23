@@ -91,6 +91,27 @@ export const SidebarMenu = (props) => {
     }
   ]
 
+  const usersSubMenus = [
+    {
+      id: 1,
+      title: t('CUSTOMERS', 'Customers'),
+      pageName: 'customers',
+      url: '/users/customers'
+    },
+    {
+      id: 2,
+      title: t('MANAGERS', 'Managers'),
+      pageName: 'managers',
+      url: '/users/managers'
+    },
+    {
+      id: 3,
+      title: t('OPERATION', 'Operation'),
+      pageName: 'usersOperation',
+      url: '/users/operation'
+    }
+  ]
+
   const settingsSubMenus = [
     {
       id: 1,
@@ -296,15 +317,28 @@ export const SidebarMenu = (props) => {
                   <MenuContainer>
                     <ContextAwareToggle
                       eventKey='4'
-                      page='users'
-                      handleGoToPage={handleGoToPage}
                       active={
-                        location.pathname === '/users'
+                        location.pathname === '/users/customers' ||
+                        location.pathname === '/users/managers' ||
+                        location.pathname === '/users/operation'
                       }
                     >
                       <PeopleIcon />
                       <span>{t('USERS', 'Users')}</span>
                     </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='4'>
+                      <MenuContent>
+                        {usersSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
                   </MenuContainer>
 
                   <MenuContainer>

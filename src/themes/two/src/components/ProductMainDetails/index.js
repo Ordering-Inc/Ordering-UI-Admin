@@ -55,6 +55,10 @@ const ProductMainDetailsUI = (props) => {
       value: t('CUSTOM_FIELDS', 'Custom fields')
     },
     {
+      key: 'reviews',
+      value: t('REVIEWS', 'Reviews')
+    },
+    {
       key: 'personalization',
       value: t('PERSONALIZATION', 'Personalization')
     }

@@ -6,12 +6,6 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
-  max-height: ${({ isDeliveryPage }) => isDeliveryPage ? 'calc(100vh - 335px)' : 'calc(100vh - 415px)'};
-  overflow: auto;
-
-  @media (min-width: 768px) {
-    max-height: ${({ isDeliveryPage }) => isDeliveryPage ? 'calc(100vh - 220px)' : 'calc(100vh - 300px)'};
-  }
 `
 
 export const UsersTable = styled.table`
@@ -39,12 +33,6 @@ export const UsersTable = styled.table`
   thead {
     tr {
       border-bottom: solid 1px ${props => props.theme.colors.disabled};
-      th {
-        position: sticky;
-        top: 0px;
-        z-index: 100;
-        background: #FFF;
-      }
     }
   }
 

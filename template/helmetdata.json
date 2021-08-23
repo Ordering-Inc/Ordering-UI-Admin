@@ -132,8 +132,15 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "users": {
-    "title": "Users",
+  "customers": {
+    "title": "Customers",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "managers": {
+    "title": "Managers",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

@@ -20,7 +20,8 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import { OrdersList } from './pages/OrdersList'
 import { DeliveriesManager } from './pages/DeliveriesManager'
 import { DriversList } from './pages/DriversList'
-import { UsersList } from './pages/UsersList'
+import { CustomersList } from './pages/CustomersList'
+import { ManagersList } from './pages/ManagersList'
 import { BusinessesList } from './pages/BusinessesList'
 import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
@@ -147,10 +148,17 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/users'>
+                    <Route exact path='/users/customers'>
                       {
                         auth
-                          ? <UsersList />
+                          ? <CustomersList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/users/managers'>
+                      {
+                        auth
+                          ? <ManagersList />
                           : <Redirect to='/login' />
                       }
                     </Route>

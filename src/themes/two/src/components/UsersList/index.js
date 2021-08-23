@@ -78,7 +78,7 @@ export const UsersList = (props) => {
   return (
     <>
       <UsersConatiner>
-        <UserTableWrapper isDeliveryPage={isDriversPage || isDriversManagersPage}>
+        <UserTableWrapper>
           <UsersTable>
             <thead>
               <tr>

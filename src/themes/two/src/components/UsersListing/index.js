@@ -16,8 +16,12 @@ import {
 const UsersListingUI = (props) => {
   const {
     headerTitle,
+    isShowActiveStateFilter,
+    isShowUserTypeFilter,
+
     isDriversPage,
     isDriversManagersPage,
+
     usersList,
     handleSelectedUserTypes,
     paginationProps,
@@ -100,16 +104,16 @@ const UsersListingUI = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
           handleOpenUserAddForm={handleOpenUserAddForm}
         />
-        {!(isDriversPage || isDriversManagersPage) && (
-          <>
-            <UserActiveStateFilter
-              selectedUserActiveState={selectedUserActiveState}
-              handleChangeUserActiveState={handleChangeUserActiveState}
-            />
-            <UserTypeFilter
-              handleChangeUserType={handleSelectedUserTypes}
-            />
-          </>
+        {isShowActiveStateFilter && (
+          <UserActiveStateFilter
+            selectedUserActiveState={selectedUserActiveState}
+            handleChangeUserActiveState={handleChangeUserActiveState}
+          />
+        )}
+        {isShowUserTypeFilter && (
+          <UserTypeFilter
+            handleChangeUserType={handleSelectedUserTypes}
+          />
         )}
         <UsersList
           isDriversPage={isDriversPage}
