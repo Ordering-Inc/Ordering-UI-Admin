@@ -676,6 +676,7 @@ export const MessagesUI = (props) => {
                   ref={register({
                     required: !image
                   })}
+                  autoComplete='off'
                 />
                 {!image && (
                   <SendImage htmlFor='chat_image'>

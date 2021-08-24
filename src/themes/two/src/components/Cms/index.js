@@ -38,6 +38,8 @@ const CmsUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+  const [searchValue, setSearchValue] = useState(null)
+
   const [openModal, setOpenModal] = useState(false)
   const [curPageId, setCurPageId] = useState(null)
 
@@ -67,16 +69,19 @@ const CmsUI = (props) => {
 
   useEffect(() => {
     if (pagesListState.loading) return
-    let _totalPages
-    if (pagesListState.pages.length > 0) {
-      _totalPages = Math.ceil(pagesListState.pages.length / pagesPerPage)
+    let pages = []
+    if (searchValue) {
+      pages = pagesListState.pages.filter(page => page.name.toLowerCase().includes(searchValue.toLowerCase()))
+    } else {
+      pages = [...pagesListState.pages]
     }
+    const _totalPages = Math.ceil(pages.length / pagesPerPage)
     const indexOfLastPost = currentPage * pagesPerPage
     const indexOfFirstPost = indexOfLastPost - pagesPerPage
-    const _currentProducts = pagesListState.pages.slice(indexOfFirstPost, indexOfLastPost)
+    const _currentProducts = pages.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
     setCurrentPages(_currentProducts)
-  }, [pagesListState, currentPage, pagesPerPage])
+  }, [pagesListState, currentPage, pagesPerPage, searchValue])
 
   const handleEditPage = (pageId) => {
     setCurPageId(pageId)
@@ -108,6 +113,8 @@ const CmsUI = (props) => {
             </Button>
             <SearchBar
               placeholder={t('SEARCH', 'Search')}
+              searchValue={searchValue}
+              onSearch={val => setSearchValue(val)}
             />
           </HeaderRight>
         </Header>
@@ -185,7 +192,7 @@ const CmsUI = (props) => {
             <AddNewPageButton onClick={() => handleEditPage(null)}>
               {t('ADD_NEW_STATIC_PAGE', 'Add new static page')}
             </AddNewPageButton>
-            {pagesListState?.pages?.length > 0 && (
+            {currentPages?.length > 0 && (
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}

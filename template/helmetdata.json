@@ -90,6 +90,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "reviews": {
+    "title": "Reviews Manager",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "messages": {
     "title": "Messages",
     "description": "a dummy description about this page",

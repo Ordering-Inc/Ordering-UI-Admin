@@ -32,6 +32,7 @@ import { IntegrationsList } from './pages/IntegrationsList'
 import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { OrderingProducts } from './pages/OrderingProducts'
+import { ReviewsList } from './pages/ReviewsList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -200,24 +201,31 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/analytics/business'>
+                    <Route exact path='/intelligence/business'>
                       {
                         auth
                           ? <BusinessAnalytics />
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/analytics/drivers'>
+                    <Route exact path='/intelligence/drivers'>
                       {
                         auth
                           ? <DriverAnalytics />
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/analytics/invoice'>
+                    <Route exact path='/intelligence/invoice'>
                       {
                         auth
                           ? <InvoiceManager />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/intelligence/reviews'>
+                      {
+                        auth
+                          ? <ReviewsList />
                           : <Redirect to='/login' />
                       }
                     </Route>
