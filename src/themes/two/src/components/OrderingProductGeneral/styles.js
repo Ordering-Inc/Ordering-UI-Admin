@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const GeneralContainer = styled.div`
+export const GeneralContainer = styled.form`
   margin-top: 25px;
 `
 

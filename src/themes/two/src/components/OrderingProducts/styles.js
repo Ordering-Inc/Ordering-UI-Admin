@@ -6,14 +6,9 @@ export const OrderingProductsContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
-  margin-top: 60px;
 
   @media print {
     display: none;
-  }
-
-  @media (min-width: 760px) {
-    margin-top: 0px;
   }
 `
 
@@ -79,10 +74,15 @@ export const ActionsGroup = styled.div`
     margin-top: 0px;
   }
 `
+export const ProductListTableWrapper = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  overflow: auto;
+`
 
 export const ProductListTable = styled.table`
   width: 100%;
-  margin-top: 20px;
+  min-width: 800px;
 
   thead {
     border-bottom: 1px solid ${props => props.theme.colors.secundaryLight};

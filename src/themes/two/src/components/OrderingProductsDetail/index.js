@@ -63,8 +63,8 @@ export const OrderingProductsDetail = (props) => {
           <TitleWrapper>
             <h2>{product?.name}</h2>
             <Switch
-              defaultChecked={product?.enabled}
-              onChange={(enabled) => handleChangeState(product.id, 'enabled', enabled)}
+              defaultChecked={product?.enabled || false}
+              onChange={(enabled) => handleChangeState(product?.id, 'enabled', enabled)}
             />
           </TitleWrapper>
           <IconButton onClick={() => actionSidebar(null)}>

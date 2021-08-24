@@ -23,7 +23,8 @@ import {
   EnableWrapper,
   ActionSelectorWrapper,
   PagesBottomContainer,
-  AddNewPageButton
+  AddNewPageButton,
+  ProductListTableWrapper
 } from './styles'
 
 export const OrderingProducts = (props) => {
@@ -59,19 +60,39 @@ export const OrderingProducts = (props) => {
   }
 
   const handleEditProduct = (id) => {
+    setOpenProductDetail(true)
     if (id) {
-      setOpenProductDetail(true)
       const product = orderingProductsList?.products.find(product => product.id === id)
       setSelectedProduct(product)
+    } else {
+      setSelectedProduct(null)
     }
   }
 
-  const handleChangeState = () => {
-    console.log('this is change')
+  const handleChangeState = (id, type, value) => {
+    const products = orderingProductsList?.products.map(product => {
+      if (id === product.id) {
+        return {
+          ...product,
+          [type]: value
+        }
+      }
+      return product
+    })
+    handleUpdateOrderingProducts(products)
   }
 
-  const handleDeleteProduct = () => {
-    console.log('this is delete product')
+  const handleDeleteProduct = (id) => {
+    const products = orderingProductsList?.products.filter(product => product.id !== id)
+    setorderingProductsList({ ...orderingProductsList, products: products })
+  }
+
+  const handleUpdateOrderingProducts = (products) => {
+    setorderingProductsList({ ...orderingProductsList, products: products })
+    if (selectedProduct) {
+      const product = products.find(item => item.id === selectedProduct.id)
+      setSelectedProduct(product)
+    }
   }
 
   useEffect(() => {
@@ -111,7 +132,7 @@ export const OrderingProducts = (props) => {
             <Button
               borderRadius='8px'
               color='lightPrimary'
-              // onClick={() => handleProductAdd(true)}
+              onClick={() => handleEditProduct()}
             >
               {t('ADD_PRODUCT', 'Add product')}
             </Button>
@@ -122,82 +143,86 @@ export const OrderingProducts = (props) => {
             />
           </ActionsGroup>
         </HeaderContainer>
-        <ProductListTable>
-          <thead>
-            <tr>
-              <th className='product'>{t('PRODUCT', 'Product')}</th>
-              <th className='description'>{t('DESCRIPTION', 'Description')}</th>
-              <th className='action'>{t('ACTIONS', 'Actions')}</th>
-            </tr>
-          </thead>
-          {orderingProductsList.loading ? (
-            [...Array(pagesPerPage).keys()].map(i => (
-              <PageTbody key={i}>
-                <tr>
-                  <td className='product'><Skeleton width={100} /></td>
-                  <td className='description'><Skeleton width={150} /></td>
-                  <td className='action'>
-                    <ActionsContainer>
-                      <EnableWrapper>
-                        <Skeleton width={50} />
-                      </EnableWrapper>
-                      <ActionSelectorWrapper>
-                        <Skeleton width={15} />
-                      </ActionSelectorWrapper>
-                    </ActionsContainer>
-                  </td>
-                </tr>
-              </PageTbody>
-            ))
-          ) : (
-            currentPages.map(product => (
-              <PageTbody
-                key={product.id}
-                onClick={e => onClickPage(e, product.id)}
-              >
-                <tr>
-                  <td className='product'>
-                    {product?.name}
-                  </td>
-                  <td className='description'>
-                    <div>
-                      {product?.description}
-                    </div>
-                  </td>
-                  <td className='action'>
-                    <ActionsContainer>
-                      <EnableWrapper calssName='page-enabled'>
-                        <span>{t('ENABLE', 'Enable')}</span>
-                        <Switch
-                          defaultChecked={product?.enabled}
-                          onChange={(enabled) => handleChangeState(product.id, 'enabled', enabled)}
-                        />
-                      </EnableWrapper>
-                      <ActionSelectorWrapper className='page-actions'>
-                        <DropdownButton
-                          menuAlign={theme?.rtl ? 'left' : 'right'}
-                          title={<FiMoreVertical />}
-                          id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                        >
-                          <Dropdown.Item
-                            onClick={() => handleEditProduct(product.id)}
+        <ProductListTableWrapper>
+          <ProductListTable>
+            <thead>
+              <tr>
+                <th className='product'>{t('PRODUCT', 'Product')}</th>
+                <th className='description'>{t('DESCRIPTION', 'Description')}</th>
+                <th className='action'>{t('ACTIONS', 'Actions')}</th>
+              </tr>
+            </thead>
+            {orderingProductsList.loading ? (
+              [...Array(pagesPerPage).keys()].map(i => (
+                <PageTbody key={i}>
+                  <tr>
+                    <td className='product'><Skeleton width={100} /></td>
+                    <td className='description'><Skeleton width={150} /></td>
+                    <td className='action'>
+                      <ActionsContainer>
+                        <EnableWrapper>
+                          <Skeleton width={50} />
+                        </EnableWrapper>
+                        <ActionSelectorWrapper>
+                          <Skeleton width={15} />
+                        </ActionSelectorWrapper>
+                      </ActionsContainer>
+                    </td>
+                  </tr>
+                </PageTbody>
+              ))
+            ) : (
+              currentPages.map(product => (
+                <PageTbody
+                  key={product.id}
+                  onClick={e => onClickPage(e, product.id)}
+                  active={selectedProduct?.id === product.id}
+                >
+                  <tr>
+                    <td className='product'>
+                      {product?.name}
+                    </td>
+                    <td className='description'>
+                      <div>
+                        {product?.description}
+                      </div>
+                    </td>
+                    <td className='action'>
+                      <ActionsContainer>
+                        <EnableWrapper calssName='page-enabled'>
+                          <span>{t('ENABLE', 'Enable')}</span>
+                          <Switch
+                            defaultChecked={product?.enabled}
+                            onChange={(enabled) => handleChangeState(product.id, 'enabled', enabled)}
+                          />
+                        </EnableWrapper>
+                        <ActionSelectorWrapper className='page-actions'>
+                          <DropdownButton
+                            menuAlign={theme?.rtl ? 'left' : 'right'}
+                            title={<FiMoreVertical />}
+                            id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                           >
-                            {t('EDIT', 'Edit')}
-                          </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => handleDeleteProduct(product.id)}
-                          >
-                            {t('DELETE', 'Delete')}
-                          </Dropdown.Item>
-                        </DropdownButton>
-                      </ActionSelectorWrapper>
-                    </ActionsContainer>
-                  </td>
-                </tr>
-              </PageTbody>
-            ))
-          )}
-        </ProductListTable>
+                            <Dropdown.Item
+                              onClick={() => handleEditProduct(product.id)}
+                            >
+                              {t('EDIT', 'Edit')}
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() => handleDeleteProduct(product.id)}
+                            >
+                              {t('DELETE', 'Delete')}
+                            </Dropdown.Item>
+                          </DropdownButton>
+                        </ActionSelectorWrapper>
+                      </ActionsContainer>
+                    </td>
+                  </tr>
+                </PageTbody>
+              ))
+            )}
+          </ProductListTable>
+        </ProductListTableWrapper>
+
         {!orderingProductsList.loading && (
           <PagesBottomContainer>
             <AddNewPageButton onClick={() => handleEditProduct(null)}>
@@ -222,6 +247,8 @@ export const OrderingProducts = (props) => {
             onClose={() => setOpenProductDetail(false)}
             product={selectedProduct}
             handleChangeState={handleChangeState}
+            orderingProductsList={orderingProductsList}
+            handleUpdateOrderingProducts={handleUpdateOrderingProducts}
           />
         )
       }

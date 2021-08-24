@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { bytesConverter } from '../../../../../utils'
 import { Select } from '../../styles/Select/FirstSelect'
 import { Button } from '../../styles/Buttons'
@@ -26,12 +27,16 @@ import {
 
 export const OrderingProductGeneral = (props) => {
   const {
-    product
+    product,
+    handleUpdateOrderingProducts,
+    orderingProductsList
   } = props
 
   const [, t] = useLanguage()
+  const formMethods = useForm()
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: null } })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [productType, setProductType] = useState(null)
 
   const businessImageInputRef = useRef(null)
   const socialImageInputRef = useRef(null)
@@ -41,6 +46,20 @@ export const OrderingProductGeneral = (props) => {
     { value: 'website', content: <Option>{t('WEBSITE', 'Website')}</Option> },
     { value: 'app', content: <Option>{t('APP', 'App')}</Option> }
   ]
+  const defaultProduct = {
+    id: 1,
+    name: null,
+    enabled: true,
+    code: null,
+    image: null,
+    logo: null,
+    type: null,
+    description: null,
+    url: null,
+    reset_password_url: null,
+    track_order_url: null,
+    social: null
+  }
 
   const handleClickImage = (type) => {
     if (type === 'image') {
@@ -107,6 +126,30 @@ export const OrderingProductGeneral = (props) => {
     reader.onerror = error => console.log(error)
   }
 
+  const onSubmit = () => {
+    if (product) {
+      const found = orderingProductsList?.products?.find(item => item.id === product.id)
+      if (found) {
+        const products = orderingProductsList?.products?.map(item => {
+          if (item.id === product.id) {
+            return {
+              ...item,
+              ...formState?.changes,
+              type: productType
+            }
+          }
+          return item
+        })
+        handleUpdateOrderingProducts && handleUpdateOrderingProducts(products)
+      }
+    } else {
+      const products = [...orderingProductsList?.products]
+      const id = products.length > 0 ? (products[products.length - 1].id + 1) : 1
+      products.push({ ...defaultProduct, ...formState?.changes, id: id, type: productType })
+      handleUpdateOrderingProducts && handleUpdateOrderingProducts(products)
+    }
+  }
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -114,9 +157,14 @@ export const OrderingProductGeneral = (props) => {
     })
   }
 
+  useEffect(() => {
+    if (product) setFormState({ ...formState, changes: product })
+    else setFormState({ ...formState, changes: {} })
+  }, [product])
+
   return (
     <>
-      <GeneralContainer>
+      <GeneralContainer onSubmit={formMethods.handleSubmit(onSubmit)}>
         <BusinessImg
           onClick={() => handleClickImage('image')}
         >
@@ -188,7 +236,7 @@ export const OrderingProductGeneral = (props) => {
             <input
               type='text'
               placeholder={t('NAME', 'Name')}
-              defaultValue={product?.name}
+              value={formState?.changes?.name || ''}
               onChange={(e) => handleChangeFormState('name', e.target.value)}
             />
           </FormControl>
@@ -197,9 +245,9 @@ export const OrderingProductGeneral = (props) => {
             <Select
               options={productOptions}
               className='select'
-              defaultValue={product?.type}
+              defaultValue={productType}
               placeholder={t('PRODUCT_TYPE', 'Product type')}
-              onChange={(value) => handleChangeFormState('type', value)}
+              onChange={(value) => setProductType(value)}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -207,7 +255,7 @@ export const OrderingProductGeneral = (props) => {
             <input
               type='text'
               placeholder={t('CODE', 'Code')}
-              defaultValue={product?.code}
+              value={formState?.changes?.code || ''}
               onChange={(e) => handleChangeFormState('code', e.target.value)}
             />
           </FormControl>
@@ -216,7 +264,7 @@ export const OrderingProductGeneral = (props) => {
             <input
               type='text'
               placeholder={t('URL', 'Url')}
-              defaultValue={product?.url}
+              value={formState?.changes?.url || ''}
               onChange={(e) => handleChangeFormState('url', e.target.value)}
             />
           </FormControl>
@@ -224,8 +272,8 @@ export const OrderingProductGeneral = (props) => {
             <Label>{t('DESCRIPTION', 'Description')}</Label>
             <textarea
               placeholder={t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description')}
-              value={formState?.misc_description || ''}
-              onChange={(e) => handleChangeFormState('misc_description', e.target.value)}
+              value={formState?.changes?.description || ''}
+              onChange={(e) => handleChangeFormState('description', e.target.value)}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -233,7 +281,7 @@ export const OrderingProductGeneral = (props) => {
             <input
               type='text'
               placeholder={t('URL', 'Url')}
-              defaultValue={product?.reset_password_url}
+              value={formState?.changes?.reset_password_url || ''}
               onChange={(e) => handleChangeFormState('reset_password_url', e.target.value)}
             />
           </FormControl>
@@ -242,7 +290,7 @@ export const OrderingProductGeneral = (props) => {
             <input
               type='text'
               placeholder={t('URL', 'Url')}
-              defaultValue={product?.reset_password_url}
+              value={formState?.changes?.track_order_url || ''}
               onChange={(e) => handleChangeFormState('track_order_url', e.target.value)}
             />
           </FormControl>
@@ -288,6 +336,8 @@ export const OrderingProductGeneral = (props) => {
           <Button
             borderRadius='7.6px'
             color='primary'
+            type='submit'
+            disabled={formState.loading}
           >
             {t('SAVE', 'Save')}
           </Button>
