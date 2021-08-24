@@ -37,6 +37,7 @@ import { ReviewsList } from './pages/ReviewsList'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
 import { DriversManagersList } from './pages/DriversManagersList'
 import { DriversCompaniesList } from './pages/DriversCompaniesList'
+import { DriversGroupsList } from './pages/DriversGroupsList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -257,6 +258,13 @@ export const App = () => {
                       {
                         auth
                           ? <DriversCompaniesList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/delivery/drivers-groups'>
+                      {
+                        auth
+                          ? <DriversGroupsList />
                           : <Redirect to='/login' />
                       }
                     </Route>

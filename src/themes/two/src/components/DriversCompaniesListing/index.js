@@ -88,10 +88,6 @@ const DriversCompaniesListingUI = (props) => {
           >
             {t('ADD_DRIVER_COMPANY', 'Add driver company')}
           </Button>
-          {/* <UsersExportCSV
-            userTypesSelected={userTypesSelected}
-            selectedUserActiveState={selectedUserActiveState}
-          /> */}
           <Button
             borderRadius='8px'
             color='secundary'

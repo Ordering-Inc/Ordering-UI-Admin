@@ -88,7 +88,7 @@ const ImageStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  border-radius: 10px;
+  border-radius: 8px;
 `
 export const Image = (props) => {
   return (
@@ -108,9 +108,11 @@ export const UserMainInfo = styled.div`
   ${props => props.theme?.rtl ? css`
     border-left: 1px solid ${props => props.theme.colors.borderColor};
     margin-left: 20px;
+    padding-left: 10px;
   ` : css`
     border-right: 1px solid ${props => props.theme.colors.borderColor};
     margin-right: 20px;
+    padding-right: 10px;
   `}
 `
 

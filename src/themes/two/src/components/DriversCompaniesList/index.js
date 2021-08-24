@@ -47,7 +47,7 @@ export const DriversCompaniesList = (props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [companiesPerPage, setCompaniesPerPage] = useState(10)
 
-  // Get current plugins
+  // Get current companies
   const [currentCompanies, setCurrentCompanies] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
@@ -273,7 +273,7 @@ export const DriversCompaniesList = (props) => {
             <AddNewCompanyButton
               onClick={() => handleOpenDetails(null)}
             >
-              {t('ADD_NEW_DRIVER_COMPANY ', 'Add new driver company')}
+              {t('ADD_NEW_DRIVER_COMPANY', 'Add new driver company')}
             </AddNewCompanyButton>
             {currentCompanies?.length > 0 && (
               <Pagination

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const DriversCompaniesListContainer = styled.div`
+export const DriversGroupsListingContainer = styled.div`
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
@@ -8,7 +8,6 @@ export const DriversCompaniesListContainer = styled.div`
   max-height: 100vh;
   overflow: auto;
 `
-
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -67,7 +67,7 @@ export const DriversCompanyDetailsForm = (props) => {
   return (
     <DetailsContainer>
       <Header>
-        <h1>{t('CITY_SETTINGS', 'City settings')}</h1>
+        <h1>{t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')}</h1>
       </Header>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <GroupContainer>
