@@ -58,6 +58,7 @@ import { OrderDelete } from './src/components/OrderDelete'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrderDetailsHeader } from './src/components/OrderDetailsHeader'
 import { OrderNotification } from './src/components/OrderNotification'
+import { OrderingProducts } from './src/components/OrderingProducts'
 import { OrdersCards } from './src/components/OrdersCards'
 import { OrdersContentHeader } from './src/components/OrdersContentHeader'
 import { OrdersDashboard } from './src/components/OrdersDashboard'
@@ -158,6 +159,7 @@ export {
   Messages,
   MessagesListing,
   Modal,
+  OrderingProducts,
   OrderBill,
   OrderContactInformation,
   OrderDelete,
