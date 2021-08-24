@@ -5,6 +5,7 @@ import { XLg as CloseIcon } from 'react-bootstrap-icons'
 import { IconButton } from '../../styles/Buttons'
 import { useLanguage } from 'ordering-components-admin'
 import { OrderingProductGeneral } from '../OrderingProductGeneral'
+import { OrderingProductSEO } from '../OrderingProductSEO'
 
 import {
   DetailContainerWrapper,
@@ -87,6 +88,13 @@ export const OrderingProductsDetail = (props) => {
         {
           detailType === 'general' && (
             <OrderingProductGeneral
+              {...props}
+            />
+          )
+        }
+        {
+          detailType === 'seo' && (
+            <OrderingProductSEO
               {...props}
             />
           )
