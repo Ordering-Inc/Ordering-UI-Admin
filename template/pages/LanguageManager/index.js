@@ -1,12 +1,12 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { InvoiceManager as InvoiceManagerController } from '../../../src/themes/two/src/components/InvoiceManager'
+import { LanguageManager as LanguageManagerController } from '../../../src/themes/two/src/components/LanguageManager'
 
 export const LanguageManager = (props) => {
   return (
     <>
       <HelmetTags page='language' />
-      <InvoiceManagerController {...props} />
+      <LanguageManagerController {...props} />
     </>
   )
 }
