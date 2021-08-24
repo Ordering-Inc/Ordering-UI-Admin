@@ -31,6 +31,7 @@ import { Cms } from './pages/Cms'
 import { IntegrationsList } from './pages/IntegrationsList'
 import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
+import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -225,6 +226,13 @@ export const App = () => {
                       {
                         auth
                           ? <ReviewsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/ordering-products'>
+                      {
+                        auth
+                          ? <OrderingProducts />
                           : <Redirect to='/login' />
                       }
                     </Route>
