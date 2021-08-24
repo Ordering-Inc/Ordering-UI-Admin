@@ -34,6 +34,7 @@ export const OrderingProducts = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openProductDetail, setOpenProductDetail] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [searchValue, setSearchValue] = useState(null)
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -109,9 +110,17 @@ export const OrderingProducts = (props) => {
   }, [orderingProductsList, currentPage, pagesPerPage])
 
   useEffect(() => {
-    setorderingProductsList({ ...orderingProductsList, loading: true })
-    setorderingProductsList({ ...orderingProductsList, loading: false, products: productsList })
+    setorderingProductsList({ ...orderingProductsList, products: productsList })
   }, [])
+
+  useEffect(() => {
+    if (searchValue) {
+      const products = productsList.filter(item => item.name.toLowerCase().includes(searchValue.toLowerCase()))
+      setorderingProductsList({ ...orderingProductsList, products: products })
+    } else {
+      setorderingProductsList({ ...orderingProductsList, products: productsList })
+    }
+  }, [searchValue])
 
   return (
     <>
@@ -137,8 +146,8 @@ export const OrderingProducts = (props) => {
               {t('ADD_PRODUCT', 'Add product')}
             </Button>
             <SearchBar
-              // search={searchValue}
-              // onSearch={handleChangeSearch}
+              search={searchValue}
+              onSearch={(value) => setSearchValue(value)}
               placeholder={t('SEARCH', 'Search')}
             />
           </ActionsGroup>
