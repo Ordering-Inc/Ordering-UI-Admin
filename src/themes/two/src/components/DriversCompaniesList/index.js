@@ -8,6 +8,8 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Switch } from '../../styles'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { useTheme } from 'styled-components'
+import { Confirm } from '../Confirm'
+
 import {
   DriversCompaniesContainer,
   TableWrapper,
@@ -18,17 +20,28 @@ import {
   CheckBoxWrapper,
   ActionsContainer,
   EnableWrapper,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  TimezoneWrapper,
+  PriorityWrapper,
+  LimitWrapper
 } from './styles'
 
 export const DriversCompaniesList = (props) => {
   const {
     driversCompaniesState,
-    searchValue
+    searchValue,
+    handleOpenDetails,
+    curDriversCompany,
+    handleUpdateDriversCompany,
+    handleDeleteDriversCompany,
+    handleSelectCompany,
+    selectedCompanyList,
+    handleAllSelectCompany
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -67,6 +80,38 @@ export const DriversCompaniesList = (props) => {
     setCurrentCompanies(_currentCompanies)
   }, [driversCompaniesState, currentPage, companiesPerPage, searchValue])
 
+  const getPriorityTag = (priority) => {
+    switch (parseInt(priority)) {
+      case -1:
+        return t('LOW', 'Low')
+      case 0:
+        return t('NORMAL', 'Normal')
+      case 1:
+        return t('HIGH', 'High')
+      case 2:
+        return t('URGENT', 'Urgent')
+      default:
+        return t('UNKNOWN', 'Unknown')
+    }
+  }
+
+  const handleClickCompany = (e, company) => {
+    const isInvalid = e.target.closest('.company-checkbox') || e.target.closest('.company-enabled') || e.target.closest('.company-actions')
+    if (isInvalid) return
+    handleOpenDetails(company)
+  }
+
+  const onDeleteCompany = (driversCompanyId) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_DRIVER_COMPANY', 'Are you sure to remove this driver company?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteDriversCompany(driversCompanyId)
+      }
+    })
+  }
+
   return (
     <>
       <DriversCompaniesContainer>
@@ -74,68 +119,142 @@ export const DriversCompaniesList = (props) => {
           <CompaniesTable>
             <thead>
               <tr>
-                <th>{t('COMPANY', 'Company')}</th>
-                <th>{t('LIMIT', 'Limit')}</th>
-                <th>{t('PRIORITY', 'Priority')}</th>
-                <th>{t('TIMEZONE', 'Timezone')}</th>
-                <th>{t('ACTIONS', 'Actions')}</th>
+                <th>
+                  <CompanyNameContainer isHeader>
+                    <CheckBoxWrapper
+                      className='company-checkbox'
+                      onClick={() => handleAllSelectCompany()}
+                      isChecked={!driversCompaniesState.loading && (selectedCompanyList.length === driversCompaniesState.companies.length)}
+                    >
+                      {
+                        !driversCompaniesState.loading && (selectedCompanyList.length === driversCompaniesState.companies.length)
+                          ? <MdCheckBox />
+                          : <MdCheckBoxOutlineBlank />
+                      }
+                    </CheckBoxWrapper>
+                    <p>{t('COMPANY', 'Company')}</p>
+                  </CompanyNameContainer>
+                </th>
+                <th>
+                  <LimitWrapper isHeader>
+                    {t('LIMIT', 'Limit')}
+                  </LimitWrapper>
+                </th>
+                <th>
+                  <PriorityWrapper isHeader>
+                    {t('PRIORITY', 'Priority')}
+                  </PriorityWrapper>
+                </th>
+                <th>
+                  <TimezoneWrapper isHeader>
+                    {t('TIMEZONE', 'Timezone')}
+                  </TimezoneWrapper>
+                </th>
+                <th>
+                  <ActionsContainer>
+                    {t('ACTIONS', 'Actions')}
+                  </ActionsContainer>
+                </th>
               </tr>
             </thead>
             {driversCompaniesState.loading ? (
               [...Array(companiesPerPage).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
-                    <td><Skeleton /></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                      <CompanyNameContainer isHeader>
+                        <Skeleton width={100} />
+                      </CompanyNameContainer>
+                    </td>
+                    <td>
+                      <LimitWrapper isHeader>
+                        <Skeleton width={20} />
+                      </LimitWrapper>
+                    </td>
+                    <td>
+                      <PriorityWrapper isHeader>
+                        <Skeleton width={70} />
+                      </PriorityWrapper>
+                    </td>
+                    <td>
+                      <TimezoneWrapper isHeader>
+                        <Skeleton width={80} />
+                      </TimezoneWrapper>
+                    </td>
+                    <td>
+                      <ActionsContainer>
+                        <EnableWrapper>
+                          <Skeleton width={50} />
+                        </EnableWrapper>
+                        <ActionSelectorWrapper>
+                          <Skeleton width={20} />
+                        </ActionSelectorWrapper>
+                      </ActionsContainer>
+                    </td>
                   </tr>
                 </tbody>
               ))
             ) : (
               currentCompanies.map(company => (
-                <tbody key={company.id}>
+                <tbody
+                  key={company.id}
+                  className={company.id === parseInt(curDriversCompany?.id) ? 'active' : null}
+                  onClick={e => handleClickCompany(e, company)}
+                >
                   <tr>
                     <td>
                       <CompanyNameContainer>
-                        <CheckBoxWrapper>
-                          <MdCheckBoxOutlineBlank />
+                        <CheckBoxWrapper
+                          className='company-checkbox'
+                          onClick={() => handleSelectCompany(company.id)}
+                          isChecked={selectedCompanyList.includes(company.id)}
+                        >
+                          {
+                            selectedCompanyList.includes(company.id)
+                              ? <MdCheckBox />
+                              : <MdCheckBoxOutlineBlank />
+                          }
                         </CheckBoxWrapper>
                         <p>{company?.name}</p>
                       </CompanyNameContainer>
                     </td>
                     <td>
-                      {company?.limit}
+                      <LimitWrapper>
+                        {company?.limit}
+                      </LimitWrapper>
                     </td>
                     <td>
-                      {company?.priority}
+                      <PriorityWrapper>
+                        {getPriorityTag(company?.priority)}
+                      </PriorityWrapper>
                     </td>
                     <td>
-                      {company?.timezone}
+                      <TimezoneWrapper>
+                        {company?.timezone}
+                      </TimezoneWrapper>
                     </td>
                     <td>
                       <ActionsContainer>
-                        <EnableWrapper>
+                        <EnableWrapper className='company-enabled'>
                           <span>{t('ENABLE', 'Enable')}</span>
                           <Switch
                             defaultChecked={company?.enabled}
-                            // onChange={enabled => handleUpdatePlugin(plugin.id, { enabled: enabled })}
+                            onChange={enabled => handleUpdateDriversCompany(company.id, { enabled: enabled })}
                           />
                         </EnableWrapper>
-                        <ActionSelectorWrapper>
+                        <ActionSelectorWrapper className='company-actions'>
                           <DropdownButton
                             menuAlign={theme?.rtl ? 'left' : 'right'}
                             title={<FiMoreVertical />}
                             id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                           >
                             <Dropdown.Item
-                              // onClick={() => handleUpdatePlugin(plugin.id, { root: plugin.root })}
+                              onClick={() => handleOpenDetails(company)}
                             >
-                              {t('UPDATE', 'Update')}
+                              {t('EDIT', 'Edit')}
                             </Dropdown.Item>
                             <Dropdown.Item
-                              // onClick={() => onClickDeletePlugin(plugin.id)}
+                              onClick={() => onDeleteCompany(company.id)}
                             >
                               {t('DELETE', 'Delete')}
                             </Dropdown.Item>
@@ -152,7 +271,7 @@ export const DriversCompaniesList = (props) => {
         {!driversCompaniesState.loading && (
           <PagesBottomContainer>
             <AddNewCompanyButton
-              // onClick={() => setIsAddMode(true)}
+              onClick={() => handleOpenDetails(null)}
             >
               {t('ADD_NEW_DRIVER_COMPANY ', 'Add new driver company')}
             </AddNewCompanyButton>
@@ -168,6 +287,16 @@ export const DriversCompaniesList = (props) => {
           </PagesBottomContainer>
         )}
       </DriversCompaniesContainer>
+      <Confirm
+        title={t('ORDERING', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

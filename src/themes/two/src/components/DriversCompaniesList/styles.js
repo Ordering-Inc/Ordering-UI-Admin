@@ -5,12 +5,7 @@ export const DriversCompaniesContainer = styled.div`
 `
 
 export const TableWrapper = styled.div`
-  max-height: calc(100vh - 335px);
-  overflow: auto;
-
-  @media (min-width: 768px) {
-    max-height: calc(100vh - 220px);
-  }
+  overflow-y: hidden;
 `
 
 export const CompaniesTable = styled.table`
@@ -20,30 +15,21 @@ export const CompaniesTable = styled.table`
 
   td, th {
     padding: 10px 0;
-    font-size: 14px;
+    font-size: 12px;
     &:first-child {
       width: 30%;
     }
-    &:nth-child(2) {
-      width: 20%;
-    }
 
-    &:nth-child(4),
-    
-    &:nth-child(5) {
-      width: 10%;
+    &:nth-child(2),    
+    &:nth-child(3),    
+    &:nth-child(4) {
+      width: 18%;
     }
   }
 
   thead {
     tr {
       border-bottom: solid 1px ${props => props.theme.colors.disabled};
-      th {
-        position: sticky;
-        top: 0px;
-        z-index: 100;
-        background: #FFF;
-      }
     }
   }
 
@@ -64,7 +50,32 @@ export const CompaniesTable = styled.table`
   }
 `
 
-export const CompanyNameContainer = styled.div`
+export const TimezoneWrapper = styled.div`
+  font-size: 12px;
+  ${({ isHeader }) => isHeader ? css`
+    font-weight: 700;
+  ` : css`
+    height: 40px;
+    display: flex;
+    align-items: center;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+      padding-left: 10px;
+      border-left: 1px solid ${props => props.theme.colors.borderColor};
+    ` : css`
+      margin-right: 20px;
+      padding-right: 10px;
+      border-right: 1px solid ${props => props.theme.colors.borderColor};
+    `}
+  
+  `}
+`
+
+export const PriorityWrapper = styled(TimezoneWrapper)``
+
+export const LimitWrapper = styled(TimezoneWrapper)``
+
+export const CompanyNameContainer = styled(TimezoneWrapper)`
   display: flex;
   align-items: center;
 
@@ -99,14 +110,6 @@ export const ActionsContainer = styled.div`
   justify-content: space-between;
   padding-top: 8px;
   padding-bottom: 8px;
-
-  ${props => props.theme.colors.rtl ? css`
-    border-right: 1px solid ${props => props.theme.colors.borderColor};
-    padding-right: 15px;
-  ` : css`
-    border-left: 1px solid ${props => props.theme.colors.borderColor};
-    padding-left: 15px;
-  `}
 `
 
 export const EnableWrapper = styled.div`
