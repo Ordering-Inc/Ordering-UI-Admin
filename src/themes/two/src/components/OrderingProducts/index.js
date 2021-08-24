@@ -96,6 +96,11 @@ export const OrderingProducts = (props) => {
     }
   }
 
+  const handleCloseDetail = () => {
+    setOpenProductDetail(false)
+    setSelectedProduct(null)
+  }
+
   useEffect(() => {
     if (orderingProductsList.loading) return
     let _totalPages
@@ -253,7 +258,7 @@ export const OrderingProducts = (props) => {
         openProductDetail && (
           <OrderingProductsDetail
             open={openProductDetail}
-            onClose={() => setOpenProductDetail(false)}
+            onClose={handleCloseDetail}
             product={selectedProduct}
             handleChangeState={handleChangeState}
             orderingProductsList={orderingProductsList}

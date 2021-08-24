@@ -127,6 +127,13 @@ export const OrderingProductGeneral = (props) => {
   }
 
   const onSubmit = () => {
+    if (!formState?.changes.name) {
+      setAlertState({
+        open: true,
+        content: [t('FIELD_NAME_REQUIRED', 'The field name is required.')]
+      })
+      return
+    }
     if (product) {
       const found = orderingProductsList?.products?.find(item => item.id === product.id)
       if (found) {
