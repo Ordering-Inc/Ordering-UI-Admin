@@ -94,3 +94,43 @@ export const Tab = styled.div`
     font-size: 12px;
   `}
 `
+export const TranslationManagerContainer = styled.div`
+  margin-top: 20px;
+`
+
+export const ActionGroupWrapper = styled.div`
+  display: flex;
+  ${props => props.theme?.rtl ? css`
+    justify-content: flex-start;
+  ` : css`
+    justify-content: flex-end;
+  `}
+`
+
+export const ActionGroup = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const ViewIconWrapper = styled.span`
+  cursor: pointer;
+
+  &.table-mode {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 12px;
+    ` : css`
+      margin-right: 12px;
+    `}
+  }
+
+  > svg {
+    font-size: 16px;
+    color: ${props => props.theme?.colors.secundaryContrast};
+  }
+
+  ${({ active }) => active && css`
+    > svg {
+      color: ${props => props.theme?.colors.primary};
+    }
+  `}
+`

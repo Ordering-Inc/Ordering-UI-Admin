@@ -4,23 +4,31 @@ import { LanguageManager as LanguageManagerController } from './naked'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 
 import { IconButton } from '../../styles/Buttons'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import {
+  ViewList,
+  Table,
+  List as MenuIcon
+} from 'react-bootstrap-icons'
 import {
   LanguageManagerContainer,
   HeaderContainer,
   HeaderTitleContainer,
   ActionsGroup,
   TabContainer,
-  Tab
+  Tab,
+  TranslationManagerContainer,
+  ActionGroup,
+  ViewIconWrapper,
+  ActionGroupWrapper
 } from './styles'
 import { SearchBar } from '../SearchBar'
 import { LanguageMainManager } from '../LanguageMainManager'
-import { LanguageTranslationManager } from '../LanguageTranslationManager'
 
 const LanguageManagerUI = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [selectedType, setSelectedType] = useState('main')
+  const [viewMode, setViewMode] = useState('table')
 
   return (
     <LanguageManagerContainer>
@@ -67,9 +75,35 @@ const LanguageManagerUI = (props) => {
       }
       {
         selectedType === 'translations' && (
-          <LanguageTranslationManager
-            {...props}
-          />
+          <TranslationManagerContainer>
+            <ActionGroupWrapper>
+              <ActionGroup>
+                <ViewIconWrapper
+                  className='table-mode'
+                  active={viewMode === 'table'}
+                  onClick={() => setViewMode('table')}
+                >
+                  <ViewList />
+                </ViewIconWrapper>
+                <ViewIconWrapper
+                  active={viewMode === 'spread'}
+                  onClick={() => setViewMode('spread')}
+                >
+                  <Table />
+                </ViewIconWrapper>
+              </ActionGroup>
+            </ActionGroupWrapper>
+            {
+              viewMode === 'table' && (
+                <div>Table mode</div>
+              )
+            }
+            {
+              viewMode === 'spread' && (
+                <div>Spread mode</div>
+              )
+            }
+          </TranslationManagerContainer>
         )
       }
     </LanguageManagerContainer>
