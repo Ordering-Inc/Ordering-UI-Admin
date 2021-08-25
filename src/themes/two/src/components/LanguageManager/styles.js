@@ -101,7 +101,6 @@ export const TranslationManagerContainer = styled.div`
 
 export const ActionGroupWrapper = styled.div`
   display: flex;
-  margin-bottom: -30px;
   ${props => props.theme?.rtl ? css`
     justify-content: flex-start;
   ` : css`

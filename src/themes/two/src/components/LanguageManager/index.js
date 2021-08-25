@@ -24,6 +24,7 @@ import {
 import { SearchBar } from '../SearchBar'
 import { LanguageMainManager } from '../LanguageMainManager'
 import { LanguageTransTable } from '../LanguageTransTable'
+import { LanguageTransSpread } from '../LanguageTransSpread'
 
 const LanguageManagerUI = (props) => {
   const [, t] = useLanguage()
@@ -103,7 +104,7 @@ const LanguageManagerUI = (props) => {
             }
             {
               viewMode === 'spread' && (
-                <div>Spread mode</div>
+                <LanguageTransSpread {...props} />
               )
             }
           </TranslationManagerContainer>
