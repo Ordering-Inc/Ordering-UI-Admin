@@ -32,14 +32,21 @@ import {
 
 export const DriversGroupsList = (props) => {
   const {
+    curDriversGroup,
     driversGroupsState,
     searchValue,
     handleOpenDetails,
-    handleUpdateDriversGroup
+    handleUpdateDriversGroup,
+    handleDeleteDriversGroup,
+    selectedGroupList,
+
+    handleSelectGroup,
+    handleAllSelectGroup
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -84,6 +91,26 @@ export const DriversGroupsList = (props) => {
     handleOpenDetails(group)
   }
 
+  const onDeleteGroup = (driversGroupId) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_DRIVER_GROUP', 'Are you sure to remove this driver group?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteDriversGroup(driversGroupId)
+      }
+    })
+  }
+
+  const getTypeTag = (type) => {
+    switch (parseInt(type)) {
+      case 0:
+        return t('IN_HOUSE_DRIVERS', 'In house drivers')
+      case 1:
+        return t('DRIVER_COMPANIES', 'Driver companies')
+    }
+  }
+
   return (
     <>
       <DriversGroupsContainer>
@@ -93,8 +120,15 @@ export const DriversGroupsList = (props) => {
               <tr>
                 <th>
                   <GroupNameContainer isHeader>
-                    <CheckBoxWrapper>
-                      <MdCheckBoxOutlineBlank />
+                    <CheckBoxWrapper
+                      onClick={() => handleAllSelectGroup()}
+                      isChecked={!driversGroupsState.loading && (selectedGroupList.length === driversGroupsState.groups.length)}
+                    >
+                      {
+                        !driversGroupsState.loading && (selectedGroupList.length === driversGroupsState.groups.length)
+                          ? <MdCheckBox />
+                          : <MdCheckBoxOutlineBlank />
+                      }
                     </CheckBoxWrapper>
                     <p>{t('GROUP', 'Group')}</p>
                   </GroupNameContainer>
@@ -148,7 +182,7 @@ export const DriversGroupsList = (props) => {
                         </EnableWrapper>
                         <ActionSelectorWrapper>
                           <Skeleton width={20} />
-                        </ActionSelectorWrapper> 
+                        </ActionSelectorWrapper>
                       </ActionsContainer>
                     </td>
                   </tr>
@@ -158,6 +192,7 @@ export const DriversGroupsList = (props) => {
               currentGroups.map(group => (
                 <tbody
                   key={group.id}
+                  className={group.id === parseInt(curDriversGroup?.id) ? 'active' : null}
                   onClick={e => handleClickDriverGroup(e, group)}
                 >
                   <tr>
@@ -165,10 +200,14 @@ export const DriversGroupsList = (props) => {
                       <GroupNameContainer>
                         <CheckBoxWrapper
                           className='group-checkbox'
-                          // onClick={() => handleSelectCompany(company.id)}
-                          // isChecked={selectedCompanyList.includes(company.id)}
+                          onClick={() => handleSelectGroup(group.id)}
+                          isChecked={selectedGroupList.includes(group.id)}
                         >
-                          <MdCheckBoxOutlineBlank />
+                          {
+                            selectedGroupList.includes(group.id)
+                              ? <MdCheckBox />
+                              : <MdCheckBoxOutlineBlank />
+                          }
                         </CheckBoxWrapper>
                         <p>{group?.name}</p>
                       </GroupNameContainer>
@@ -194,7 +233,7 @@ export const DriversGroupsList = (props) => {
                     </td>
                     <td>
                       <DriverGroupTypeContainer>
-                        {group?.type}
+                        {getTypeTag(group?.type)}
                       </DriverGroupTypeContainer>
                     </td>
                     <td>
@@ -218,7 +257,7 @@ export const DriversGroupsList = (props) => {
                               {t('EDIT', 'Edit')}
                             </Dropdown.Item>
                             <Dropdown.Item
-                              // onClick={() => onDeleteCompany(company.id)}
+                              onClick={() => onDeleteGroup(group.id)}
                             >
                               {t('DELETE', 'Delete')}
                             </Dropdown.Item>
@@ -235,7 +274,7 @@ export const DriversGroupsList = (props) => {
         {!driversGroupsState.loading && (
           <PagesBottomContainer>
             <AddNewGroupButton
-              // onClick={() => handleOpenDetails(null)}
+              onClick={() => handleOpenDetails(null)}
             >
               {t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')}
             </AddNewGroupButton>
@@ -251,6 +290,16 @@ export const DriversGroupsList = (props) => {
           </PagesBottomContainer>
         )}
       </DriversGroupsContainer>
+      <Confirm
+        title={t('ORDERING', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

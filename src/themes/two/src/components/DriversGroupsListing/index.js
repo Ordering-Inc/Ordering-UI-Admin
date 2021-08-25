@@ -22,6 +22,14 @@ const DriversGroupsListingUI = (props) => {
     driversGroupsState,
     driversManagersList,
     businessesList,
+    paymethodsList,
+    driversList,
+    selectedGroupList,
+    handleSelectGroup,
+    handleAllSelectGroup,
+    handleDeleteSelectedGroups,
+    handleAddDriversGroup,
+
     openDetails,
     setOpenDetails,
     cleanChagesState,
@@ -29,11 +37,23 @@ const DriversGroupsListingUI = (props) => {
     actionState,
     handleChangesState,
     handleUpdateDriversGroup,
+    handleDeleteDriversGroup,
     curDriversGroup,
     setCurDriversGroup,
     handleSelectBusiness,
     handleSelectAllBusiness,
-    selectedBusinessIds
+    selectedBusinessIds,
+    selectedPaymethodIds,
+    handleSelectPaymethod,
+    handleSelectAllPaymethod,
+    selectedDriverIds,
+    handleSelectAllDriver,
+    handleSelectDriver,
+
+    driversCompanyList,
+    selectedDriversCompanyIds,
+    handleSelectDriversCompany,
+    handleSelectAllDriversCompany
   } = props
 
   const [, t] = useLanguage()
@@ -55,6 +75,17 @@ const DriversGroupsListingUI = (props) => {
       content: actionState?.error
     })
   }, [actionState?.error])
+
+  const onClickSelectedGroupsDelete = () => {
+    setConfirm({
+      open: true,
+      content: t('CONFIRM_DELETE', 'Are you sure to delete?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteSelectedGroups()
+      }
+    })
+  }
 
   return (
     <>
@@ -82,8 +113,8 @@ const DriversGroupsListingUI = (props) => {
             <Button
               borderRadius='8px'
               color='secundary'
-              // disabled={selectedCompanyList.length === 0}
-              // onClick={() => onClickSelectedCompaniesDelete()}
+              disabled={selectedGroupList.length === 0}
+              onClick={() => onClickSelectedGroupsDelete()}
             >
               {t('DELETE', 'Delete')}
             </Button>
@@ -95,10 +126,15 @@ const DriversGroupsListingUI = (props) => {
           </HeaderRightContainer>
         </HeaderContainer>
         <DriversGroupsList
+          curDriversGroup={curDriversGroup}
           driversGroupsState={driversGroupsState}
           searchValue={searchValue}
           handleOpenDetails={handleOpenDetails}
           handleUpdateDriversGroup={handleUpdateDriversGroup}
+          handleDeleteDriversGroup={handleDeleteDriversGroup}
+          selectedGroupList={selectedGroupList}
+          handleSelectGroup={handleSelectGroup}
+          handleAllSelectGroup={handleAllSelectGroup}
         />
       </DriversGroupsListingContainer>
       {openDetails && (
@@ -115,6 +151,9 @@ const DriversGroupsListingUI = (props) => {
             driversGroup={curDriversGroup}
             driversManagers={driversManagersList?.managers}
             businesses={businessesList?.businesses}
+            paymethods={paymethodsList?.paymethods}
+            drivers={driversList?.drivers}
+            companies={driversCompanyList?.companies}
             changesState={changesState}
             actionState={actionState}
             handleChangesState={handleChangesState}
@@ -122,7 +161,16 @@ const DriversGroupsListingUI = (props) => {
             handleSelectBusiness={handleSelectBusiness}
             handleSelectAllBusiness={handleSelectAllBusiness}
             selectedBusinessIds={selectedBusinessIds}
-            // handleAddDriversCompany={handleAddDriversCompany}
+            selectedPaymethodIds={selectedPaymethodIds}
+            handleSelectPaymethod={handleSelectPaymethod}
+            handleSelectAllPaymethod={handleSelectAllPaymethod}
+            selectedDriverIds={selectedDriverIds}
+            handleSelectDriver={handleSelectDriver}
+            handleSelectAllDriver={handleSelectAllDriver}
+            selectedDriversCompanyIds={selectedDriversCompanyIds}
+            handleSelectDriversCompany={handleSelectDriversCompany}
+            handleSelectAllDriversCompany={handleSelectAllDriversCompany}
+            handleAddDriversGroup={handleAddDriversGroup}
           />
         </SideBar>
       )}

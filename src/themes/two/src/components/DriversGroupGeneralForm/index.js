@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, DefaultSelect, Checkbox, Button } from '../../styles'
-import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
+import { DriversGroupDrivers } from '../DriversGroupDrivers'
+import { DriversGroupCompanies } from '../DriversGroupCompanies'
 
 import {
   Container,
@@ -18,10 +19,10 @@ export const DriversGroupGeneralForm = (props) => {
     handleChangesState,
     useAdvanced,
     setUseAdvanced,
-    handleUpdateDriversGroup
+    handleUpdateDriversGroup,
+    handleAddDriversGroup
   } = props
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const typeOptions = [
@@ -43,21 +44,8 @@ export const DriversGroupGeneralForm = (props) => {
     { value: 2, content: t('URGENT', 'Urgent') }
   ]
 
-  const onSubmit = () => {
-    handleUpdateDriversGroup(driversGroup.id, changesState)
-  }
-
-  useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(errors).map(error => error.message)
-      })
-    }
-  }, [errors])
-
   return (
-    <Container onSubmit={handleSubmit(onSubmit)}>
+    <Container>
       <InputWrapper>
         <label>{t('NAME', 'Name')}</label>
         <Input
@@ -65,12 +53,6 @@ export const DriversGroupGeneralForm = (props) => {
           value={changesState?.name ?? driversGroup?.name ?? ''}
           onChange={e => handleChangesState('name', e.target.value)}
           placeholder={t('NAME', 'Name')}
-          ref={register({
-            required: t(
-              'VALIDATION_ERROR_REQUIRED',
-              'Name is required'
-            ).replace('_attribute_', t('NAME', 'Name'))
-          })}
         />
       </InputWrapper>
       <InputWrapper>
@@ -92,6 +74,13 @@ export const DriversGroupGeneralForm = (props) => {
           onChange={val => handleChangesState('type', val)}
         />
       </InputWrapper>
+
+      {
+        (changesState?.type ? changesState?.type === 0 : driversGroup?.type === 0)
+          ? <DriversGroupDrivers {...props} />
+          : <DriversGroupCompanies {...props} />
+      }
+
       <InputWrapper>
         <label>{t('PRIORITY', 'Priority')}</label>
         <DefaultSelect
@@ -101,7 +90,6 @@ export const DriversGroupGeneralForm = (props) => {
           onChange={val => handleChangesState('priority', val)}
         />
       </InputWrapper>
-
       <CheckboxContainer>
         <Checkbox
           defaultChecked={useAdvanced}
@@ -112,10 +100,10 @@ export const DriversGroupGeneralForm = (props) => {
       <Button
         borderRadius='8px'
         color='primary'
-        type='submit'
         disabled={Object.keys(changesState).length === 0}
+        onClick={() => driversGroup ? handleUpdateDriversGroup(driversGroup.id, changesState) : handleAddDriversGroup()}
       >
-        {t('SAVE', 'Save')}
+        {driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
       </Button>
       <Alert
         title={t('ORDERING', 'Ordering')}

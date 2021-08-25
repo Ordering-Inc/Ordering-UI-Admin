@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Checkbox, Button } from '../../styles'
 import { SearchBar } from '../SearchBar'
@@ -26,6 +26,18 @@ export const DriversGroupBusinesses = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [searchValue, setSearchValue] = useState(null)
+  const [filteredBusinesses, setFilteredBusinesses] = useState([])
+
+  useEffect(() => {
+    let _filteredBusinesses = []
+    if (searchValue) {
+      _filteredBusinesses = businesses.filter(business => business?.name.toLowerCase().includes(searchValue.toLowerCase()))
+    } else {
+      _filteredBusinesses = [...businesses]
+    }
+    setFilteredBusinesses(_filteredBusinesses)
+  }, [searchValue])
 
   return (
     <Container>
@@ -33,6 +45,8 @@ export const DriversGroupBusinesses = (props) => {
         <SearchBar
           placeholder={t('SEARCH', 'Search')}
           isCustomLayout
+          search={searchValue}
+          onSearch={val => setSearchValue(val)}
         />
       </SearchBarWrapper>
       <ButtonGroup>
@@ -50,7 +64,7 @@ export const DriversGroupBusinesses = (props) => {
         </Button>
       </ButtonGroup>
       <BusinessesContainer>
-        {businesses.map(business => (
+        {filteredBusinesses.map(business => (
           <BusinessWrapper
             key={business.id}
             isDisabed={actionState.loading}

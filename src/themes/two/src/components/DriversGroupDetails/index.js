@@ -4,6 +4,7 @@ import { Switch } from '../../styles'
 import { DragScroll } from '../DragScroll'
 import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
 import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
+import { DriversGroupPaymethods } from '../DriversGroupPaymethods'
 
 import {
   DetailsContainer,
@@ -25,16 +26,14 @@ export const DriversGroupDetails = (props) => {
     const _driversGroupMenus = useAdvanced
       ? [
         { key: 'general', value: t('GENERAL', 'General') },
-        { key: 'drivers', value: t('DRIVERS', 'Drivers') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
-        { key: 'payment_methods', value: t('PAYMENT_METHODS', 'Payment methods') },
+        { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
         { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') }
       ]
       : [
         { key: 'general', value: t('GENERAL', 'General') },
-        { key: 'drivers', value: t('DRIVERS', 'Drivers') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
-        { key: 'payment_methods', value: t('PAYMENT_METHODS', 'Payment methods') }
+        { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') }
       ]
     setDriversGroupMenus(_driversGroupMenus)
   }, [useAdvanced])
@@ -43,10 +42,16 @@ export const DriversGroupDetails = (props) => {
     <>
       <DetailsContainer>
         <Header>
-          <h1>{driversGroup?.name}</h1>
-          <Switch
-            defaultChecked={driversGroup?.enabled}
-          />
+          {driversGroup ? (
+            <>
+              <h1>{driversGroup?.name}</h1>
+              <Switch
+                defaultChecked={driversGroup?.enabled}
+              />
+            </>
+          ) : (
+            <h1>{t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')}</h1>
+          )}
         </Header>
         <MenusContainer>
           <DragScroll>
@@ -70,6 +75,9 @@ export const DriversGroupDetails = (props) => {
         )}
         {showMenu === 'businesses' && (
           <DriversGroupBusinesses {...props} />
+        )}
+        {showMenu === 'paymethods' && (
+          <DriversGroupPaymethods {...props} />
         )}
       </DetailsContainer>
     </>

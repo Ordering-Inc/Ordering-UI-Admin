@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.form`
+export const Container = styled.div`
   min-height: calc(100% - 160px);
 
-  button[type='submit'] {
+  button {
     position: sticky;
     top: 100%;
     height: 42px;
+    margin: 30px 0 20px;
   }
 `
 export const InputWrapper = styled.div`
