@@ -14,6 +14,8 @@ import {
   Tab
 } from './styles'
 import { SearchBar } from '../SearchBar'
+import { LanguageMainManager } from '../LanguageMainManager'
+import { LanguageTranslationManager } from '../LanguageTranslationManager'
 
 const LanguageManagerUI = (props) => {
   const [, t] = useLanguage()
@@ -56,6 +58,20 @@ const LanguageManagerUI = (props) => {
           {t('TRANSLATIONS', 'Translations')}
         </Tab>
       </TabContainer>
+      {
+        selectedType === 'main' && (
+          <LanguageMainManager
+            {...props}
+          />
+        )
+      }
+      {
+        selectedType === 'translations' && (
+          <LanguageTranslationManager
+            {...props}
+          />
+        )
+      }
     </LanguageManagerContainer>
   )
 }
