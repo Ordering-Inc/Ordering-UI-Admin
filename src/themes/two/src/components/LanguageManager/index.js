@@ -23,6 +23,7 @@ import {
 } from './styles'
 import { SearchBar } from '../SearchBar'
 import { LanguageMainManager } from '../LanguageMainManager'
+import { LanguageTransTable } from '../LanguageTransTable'
 
 const LanguageManagerUI = (props) => {
   const [, t] = useLanguage()
@@ -95,7 +96,9 @@ const LanguageManagerUI = (props) => {
             </ActionGroupWrapper>
             {
               viewMode === 'table' && (
-                <div>Table mode</div>
+                <LanguageTransTable
+                  {...props}
+                />
               )
             }
             {

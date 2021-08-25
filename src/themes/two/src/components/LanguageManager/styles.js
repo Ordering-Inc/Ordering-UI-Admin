@@ -5,7 +5,8 @@ export const LanguageManagerContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
-  overflow: hidden;
+  overflow: auto;
+  max-height: 100vh;
 
   @media print {
     display: none;
@@ -100,6 +101,7 @@ export const TranslationManagerContainer = styled.div`
 
 export const ActionGroupWrapper = styled.div`
   display: flex;
+  margin-bottom: -30px;
   ${props => props.theme?.rtl ? css`
     justify-content: flex-start;
   ` : css`
