@@ -17,7 +17,7 @@ import {
 
 export const DriversGroupOrders = (props) => {
   const {
-    driversGroup,
+    curDriversGroup,
     changesState,
     handleChangesState
   } = props
@@ -30,29 +30,29 @@ export const DriversGroupOrders = (props) => {
   const [maxTimeBetweenDelivery, setMaxTimeBetweenDelivery] = useState({})
 
   useEffect(() => {
-    if (driversGroup) {
+    if (curDriversGroup) {
       const _maxTimeBetweenOrder = {
-        hour: getHours(driversGroup?.orders_group_max_time_between),
-        minute: getMinutes(driversGroup?.orders_group_max_time_between),
-        second: getSeconds(driversGroup?.orders_group_max_time_between)
+        hour: getHours(curDriversGroup?.orders_group_max_time_between),
+        minute: getMinutes(curDriversGroup?.orders_group_max_time_between),
+        second: getSeconds(curDriversGroup?.orders_group_max_time_between)
       }
       setMaxTimeBetweenOrder(_maxTimeBetweenOrder)
 
       const _maxTimeBetweenBusiness = {
-        hour: getHours(driversGroup?.orders_group_max_time_between_pickup),
-        minute: getMinutes(driversGroup?.orders_group_max_time_between_pickup),
-        second: getSeconds(driversGroup?.orders_group_max_time_between_pickup)
+        hour: getHours(curDriversGroup?.orders_group_max_time_between_pickup),
+        minute: getMinutes(curDriversGroup?.orders_group_max_time_between_pickup),
+        second: getSeconds(curDriversGroup?.orders_group_max_time_between_pickup)
       }
       setMaxTimeBetweenBusiness(_maxTimeBetweenBusiness)
 
       const _maxTimeBetweenDelivery = {
-        hour: getHours(driversGroup?.orders_group_max_time_between_delivery),
-        minute: getMinutes(driversGroup?.orders_group_max_time_between_delivery),
-        second: getSeconds(driversGroup?.orders_group_max_time_between_delivery)
+        hour: getHours(curDriversGroup?.orders_group_max_time_between_delivery),
+        minute: getMinutes(curDriversGroup?.orders_group_max_time_between_delivery),
+        second: getSeconds(curDriversGroup?.orders_group_max_time_between_delivery)
       }
       setMaxTimeBetweenDelivery(_maxTimeBetweenDelivery)
     }
-  }, [driversGroup])
+  }, [curDriversGroup])
 
   const handleChangeMaxTimeBetweenOrder = (value, option) => {
     const regExp = /^[0-9\b]+$/
@@ -79,7 +79,7 @@ export const DriversGroupOrders = (props) => {
       }
 
       const maxTimeBetweenOrderChanges = _maxTimeBetweenOrder?.hour * 3600 + _maxTimeBetweenOrder?.minute * 60 + _maxTimeBetweenOrder?.second
-      handleChangesState('orders_group_max_time_between', maxTimeBetweenOrderChanges)
+      handleChangesState({ orders_group_max_time_between: maxTimeBetweenOrderChanges })
     }
   }
 
@@ -108,7 +108,7 @@ export const DriversGroupOrders = (props) => {
       }
 
       const maxTimeBetweenBusinessChanges = _maxTimeBetweenBusiness?.hour * 3600 + _maxTimeBetweenBusiness?.minute * 60 + _maxTimeBetweenBusiness?.second
-      handleChangesState('orders_group_max_time_between_pickup', maxTimeBetweenBusinessChanges)
+      handleChangesState({ orders_group_max_time_between_pickup: maxTimeBetweenBusinessChanges })
     }
   }
 
@@ -137,14 +137,14 @@ export const DriversGroupOrders = (props) => {
       }
 
       const maxTimeBetweenDeliveryChanges = _maxTimeBetweenDelivery?.hour * 3600 + _maxTimeBetweenDelivery?.minute * 60 + _maxTimeBetweenDelivery?.second
-      handleChangesState('orders_group_max_time_between_delivery', maxTimeBetweenDeliveryChanges)
+      handleChangesState({ orders_group_max_time_between_delivery: maxTimeBetweenDeliveryChanges })
     }
   }
 
   const onChangeNumberInput = (name, change) => {
     const regExp = /^[0-9\b]+$/
     if (change === '' || regExp.test(change)) {
-      handleChangesState(name, change)
+      handleChangesState({ [name]: change })
     }
   }
 
@@ -154,7 +154,7 @@ export const DriversGroupOrders = (props) => {
       <FieldWrapper>
         <label>{t('MAX_NUMBER_ORDERS', 'Maxiumum number of orders')}</label>
         <Input
-          value={changesState?.orders_group_max_orders ?? driversGroup?.orders_group_max_orders}
+          value={changesState?.orders_group_max_orders ?? curDriversGroup?.orders_group_max_orders}
           onChange={e => onChangeNumberInput('orders_group_max_orders', e.target.value)}
         />
       </FieldWrapper>
@@ -198,7 +198,7 @@ export const DriversGroupOrders = (props) => {
             url={theme.images?.icons?.shopToShop}
           />
           <Input
-            value={changesState?.orders_group_max_distance_between_pickup ?? driversGroup?.orders_group_max_distance_between_pickup ?? ''}
+            value={changesState?.orders_group_max_distance_between_pickup ?? curDriversGroup?.orders_group_max_distance_between_pickup ?? ''}
             onChange={e => onChangeNumberInput('orders_group_max_distance_between_pickup', e.target.value)}
           />
         </MaxTimeBusinessInputContainer>
@@ -210,7 +210,7 @@ export const DriversGroupOrders = (props) => {
             url={theme.images?.icons?.homeToHome}
           />
           <Input
-            value={changesState?.orders_group_max_distance_between_delivery ?? driversGroup?.orders_group_max_distance_between_delivery ?? ''}
+            value={changesState?.orders_group_max_distance_between_delivery ?? curDriversGroup?.orders_group_max_distance_between_delivery ?? ''}
             onChange={e => onChangeNumberInput('orders_group_max_distance_between_delivery', e.target.value)}
           />
         </MaxTimeBusinessInputContainer>
@@ -218,8 +218,8 @@ export const DriversGroupOrders = (props) => {
       <FieldWrapper>
         <UseMapsApiCheckboxContainer>
           <Checkbox
-            checked={changesState?.orders_group_use_maps_api ?? driversGroup?.orders_group_use_maps_api}
-            onChange={e => handleChangesState('orders_group_use_maps_api', e.target.checked)}
+            checked={changesState?.orders_group_use_maps_api ?? curDriversGroup?.orders_group_use_maps_api}
+            onChange={e => handleChangesState({ orders_group_use_maps_api: e.target.checked })}
           />
           <MapsApiDescriptionContainer>
             <p>
@@ -235,7 +235,7 @@ export const DriversGroupOrders = (props) => {
         </UseMapsApiCheckboxContainer>
       </FieldWrapper>
       {/* (changesState?.type === 0 || (typeof changesState?.type === 'undefined' && driversGroup?.type === 0)) */}
-      {(changesState?.orders_group_use_maps_api || (typeof changesState?.orders_group_use_maps_api === 'undefined' && driversGroup?.orders_group_use_maps_api)) && (
+      {(changesState?.orders_group_use_maps_api || (typeof changesState?.orders_group_use_maps_api === 'undefined' && curDriversGroup?.orders_group_use_maps_api)) && (
         <>
           <FieldWrapper>
             <label>{t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maxiumum distance between businesses in meters')}</label>

@@ -15,7 +15,7 @@ import {
 
 export const DriversGroupBusinesses = (props) => {
   const {
-    driversGroup,
+    curDriversGroup,
     businesses,
     handleSelectBusiness,
     actionState,
@@ -84,7 +84,7 @@ export const DriversGroupBusinesses = (props) => {
         borderRadius='8px'
         color='primary'
         disabled={Object.keys(changesState).length === 0}
-        onClick={() => handleUpdateDriversGroup(driversGroup.id, changesState)}
+        onClick={() => handleUpdateDriversGroup(curDriversGroup.id, changesState)}
       >
         {t('SAVE', 'Save')}
       </Button>

@@ -13,7 +13,7 @@ import {
 
 export const DriversGroupPaymethods = (props) => {
   const {
-    driversGroup,
+    curDriversGroup,
     paymethods,
     actionState,
     changesState,
@@ -79,7 +79,7 @@ export const DriversGroupPaymethods = (props) => {
           borderRadius='8px'
           color='primary'
           disabled={Object.keys(changesState).length === 0}
-          onClick={() => handleUpdateDriversGroup(driversGroup.id, changesState)}
+          onClick={() => handleUpdateDriversGroup(curDriversGroup.id, changesState)}
         >
           {t('SAVE', 'Save')}
         </Button>

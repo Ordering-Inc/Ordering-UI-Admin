@@ -58,6 +58,11 @@ import mapMarker from './template/assets/images/icons/marker.png'
 import sixDots from './template/assets/images/icons/sixDots.svg'
 import shopToShop from './template/assets/images/icons/shopToShop.svg'
 import homeToHome from './template/assets/images/icons/homeToHome.svg'
+import oneByOne from './template/assets/images/icons/one-by-one.svg'
+import sendToAll from './template/assets/images/icons/send-to-all.svg'
+import nearestAvailable from './template/assets/images/icons/nearest-available.svg'
+import batchWise from './template/assets/images/icons/batch-wise.svg'
+import roundRobin from './template/assets/images/icons/round-robin.svg'
 
 import orderPending from './template/assets/images/orderStatus/pending.svg'
 import orderInProgress from './template/assets/images/orderStatus/inProgress.svg'
@@ -187,7 +192,12 @@ theme.images = {
     mapMarker: mapMarker,
     sixDots: sixDots,
     shopToShop: shopToShop,
-    homeToHome: homeToHome
+    homeToHome: homeToHome,
+    oneByOne: oneByOne,
+    sendToAll: sendToAll,
+    nearestAvailable: nearestAvailable,
+    batchWise: batchWise,
+    roundRobin: roundRobin
   },
   dummies: {
     nonOrders: nonOrders,

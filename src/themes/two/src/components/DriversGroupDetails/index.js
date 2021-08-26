@@ -16,7 +16,8 @@ import {
 
 export const DriversGroupDetails = (props) => {
   const {
-    driversGroup
+    curDriversGroup,
+    handleParentSidebarMove
   } = props
 
   const [, t] = useLanguage()
@@ -41,18 +42,22 @@ export const DriversGroupDetails = (props) => {
   }, [useAdvanced])
 
   useEffect(() => {
-    setUseAdvanced(!(driversGroup?.autoassign_amount_drivers === 0 && driversGroup?.orders_group_max_orders === 0))
-  }, [driversGroup])
+    setUseAdvanced(!(curDriversGroup?.autoassign_amount_drivers === 0 && curDriversGroup?.orders_group_max_orders === 0))
+  }, [curDriversGroup])
+
+  useEffect(() => {
+    handleParentSidebarMove(0)
+  }, [showMenu])
 
   return (
     <>
       <DetailsContainer>
         <Header>
-          {driversGroup ? (
+          {curDriversGroup ? (
             <>
-              <h1>{driversGroup?.name}</h1>
+              <h1>{curDriversGroup?.name}</h1>
               <Switch
-                defaultChecked={driversGroup?.enabled}
+                defaultChecked={curDriversGroup?.enabled}
               />
             </>
           ) : (

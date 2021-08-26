@@ -13,7 +13,7 @@ import {
 
 export const DriversGroupGeneralForm = (props) => {
   const {
-    driversGroup,
+    curDriversGroup,
     driversManagers,
     changesState,
     handleChangesState,
@@ -51,8 +51,8 @@ export const DriversGroupGeneralForm = (props) => {
       autoassign_amount_drivers: 0,
       orders_group_max_orders: 0
     }
-    if (!driversGroup) return
-    handleUpdateDriversGroup(driversGroup.id, changes)
+    if (!curDriversGroup) return
+    handleUpdateDriversGroup(curDriversGroup.id, changes)
   }
 
   return (
@@ -61,8 +61,8 @@ export const DriversGroupGeneralForm = (props) => {
         <label>{t('NAME', 'Name')}</label>
         <Input
           name='name'
-          value={changesState?.name ?? driversGroup?.name ?? ''}
-          onChange={e => handleChangesState('name', e.target.value)}
+          value={changesState?.name ?? curDriversGroup?.name ?? ''}
+          onChange={e => handleChangesState({ name: e.target.value })}
           placeholder={t('NAME', 'Name')}
         />
       </InputWrapper>
@@ -71,9 +71,9 @@ export const DriversGroupGeneralForm = (props) => {
         <DefaultSelect
           placeholder={t('SELECT_MANAGER', 'Select driver manager')}
           options={driversManagersOptions}
-          defaultValue={changesState?.administrator_id ?? driversGroup?.administrator_id}
+          defaultValue={changesState?.administrator_id ?? curDriversGroup?.administrator_id}
           optionInnerMaxHeight='60vh'
-          onChange={val => handleChangesState('administrator_id', val)}
+          onChange={val => handleChangesState({ administrator_id: val })}
         />
       </InputWrapper>
       <InputWrapper>
@@ -81,13 +81,13 @@ export const DriversGroupGeneralForm = (props) => {
         <DefaultSelect
           placeholder={t('SELECT_TYPE', 'Select type')}
           options={typeOptions}
-          defaultValue={changesState?.type ?? driversGroup?.type}
-          onChange={val => handleChangesState('type', val)}
+          defaultValue={changesState?.type ?? curDriversGroup?.type}
+          onChange={val => handleChangesState({ type: val })}
         />
       </InputWrapper>
 
       {
-        (changesState?.type === 0 || (typeof changesState?.type === 'undefined' && driversGroup?.type === 0))
+        (changesState?.type === 0 || (typeof changesState?.type === 'undefined' && curDriversGroup?.type === 0))
           ? <DriversGroupDrivers {...props} />
           : <DriversGroupCompanies {...props} />
       }
@@ -97,8 +97,8 @@ export const DriversGroupGeneralForm = (props) => {
         <DefaultSelect
           placeholder={t('SELECT_PRIORITY', 'Select priority')}
           options={priorityOptions}
-          defaultValue={changesState?.priority ?? driversGroup?.priority}
-          onChange={val => handleChangesState('priority', val)}
+          defaultValue={changesState?.priority ?? curDriversGroup?.priority}
+          onChange={val => handleChangesState({ priority: val })}
         />
       </InputWrapper>
       <CheckboxContainer>
@@ -112,9 +112,9 @@ export const DriversGroupGeneralForm = (props) => {
         borderRadius='8px'
         color='primary'
         disabled={Object.keys(changesState).length === 0}
-        onClick={() => driversGroup ? handleUpdateDriversGroup(driversGroup.id, changesState) : handleAddDriversGroup()}
+        onClick={() => curDriversGroup ? handleUpdateDriversGroup(curDriversGroup.id, changesState) : handleAddDriversGroup()}
       >
-        {driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
+        {curDriversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
       </Button>
       <Alert
         title={t('ORDERING', 'Ordering')}

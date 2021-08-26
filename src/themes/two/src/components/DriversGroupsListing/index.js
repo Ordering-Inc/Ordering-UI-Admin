@@ -151,7 +151,7 @@ const DriversGroupsListingUI = (props) => {
           }}
         >
           <DriversGroupDetails
-            driversGroup={curDriversGroup}
+            curDriversGroup={curDriversGroup}
             driversManagers={driversManagersList?.managers}
             businesses={businessesList?.businesses}
             paymethods={paymethodsList?.paymethods}

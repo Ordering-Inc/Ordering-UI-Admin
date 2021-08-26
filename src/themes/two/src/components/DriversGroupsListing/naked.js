@@ -296,11 +296,8 @@ export const DriversGroupsList = (props) => {
     }
   }
 
-  const handleChangesState = (key, val) => {
-    setChangesState({
-      ...changesState,
-      [key]: val
-    })
+  const handleChangesState = (changes) => {
+    setChangesState({ ...changesState, ...changes })
   }
 
   const handleSelectGroup = (groupId) => {
