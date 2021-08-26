@@ -7,6 +7,7 @@ import { Modal } from '../Modal'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { DriversGroupOrders } from '../DriversGroupOrders'
 import { DriversGroupAutoassign } from '../DriversGroupAutoassign'
+import { DriversMarkAsBusy } from '../DriversMarkAsBusy'
 
 import {
   LogisticsContainer,
@@ -152,6 +153,9 @@ export const DriversGroupLogistics = (props) => {
               {showConfig === 'AUTOASSIGN_SETTINGS' && (
                 <DriversGroupAutoassign {...props} />
               )}
+              {showConfig === 'MARK_DRIVER_BUSY' && (
+                <DriversMarkAsBusy {...props} />
+              )}
             </SideBar>
           )}
         </>
@@ -167,6 +171,9 @@ export const DriversGroupLogistics = (props) => {
           )}
           {showConfig === 'AUTOASSIGN_SETTINGS' && (
             <DriversGroupAutoassign {...props} />
+          )}
+          {showConfig === 'MARK_DRIVER_BUSY' && (
+            <DriversMarkAsBusy {...props} />
           )}
         </Modal>
       )}

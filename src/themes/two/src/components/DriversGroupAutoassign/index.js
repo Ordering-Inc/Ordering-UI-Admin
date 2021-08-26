@@ -119,8 +119,9 @@ const DriversGroupAutoassignUI = (props) => {
           <FieldContainer>
             <label>{t('AUTO_ASSIGN_GROUP_ORDERS_TO_DRIVERS', 'Auto assign the order of group to this amount of drivers')}</label>
             <Input
+              name='autoassign_amount_drivers'
               value={changesState?.autoassign_amount_drivers ?? curDriversGroup?.autoassign_amount_drivers ?? ''}
-              onChange={e => onChangeSave({ autoassign_amount_drivers: e.target.value })}
+              onChange={e => handleChangeInput(e)}
               readOnly={(changesState?.type === 0 || (typeof changesState?.type === 'undefined' && curDriversGroup?.type === 0)) && autoAssign <= 3}
             />
           </FieldContainer>
@@ -168,26 +169,29 @@ const DriversGroupAutoassignUI = (props) => {
             <FieldContainer isBlue={curArea === 1}>
               <label>{t('INITIAL_RADIUS', 'Initial radius in meters')}</label>
               <Input
+                name='autoassign_initial_radius'
                 value={changesState?.autoassign_initial_radius ?? curDriversGroup?.autoassign_initial_radius ?? ''}
                 readOnly={autoAssign === 3}
                 onFocus={() => setCurArea(1)}
-                onChange={e => onChangeSave({ autoassign_initial_radius: e.target.value })}
+                onChange={e => handleChangeInput(e)}
               />
             </FieldContainer>
             <FieldContainer isGreen={curArea === 2}>
               <label>{t('INCREMENT_RADIUS', 'Radius increase in meters')}</label>
               <Input
+                name='autoassign_increment_radius'
                 value={changesState?.autoassign_increment_radius ?? curDriversGroup?.autoassign_increment_radius ?? ''}
                 readOnly={autoAssign === 3}
                 onFocus={() => setCurArea(2)}
-                onChange={e => onChangeSave({ autoassign_increment_radius: e.target.value })}
+                onChange={e => handleChangeInput(e)}
               />
             </FieldContainer>
             <FieldContainer isPink={curArea === 3}>
               <label>{t('MAX_RADIUS', 'Maximum radius in meters')}</label>
               <Input
+                name='autoassign_max_radius'
                 value={changesState?.autoassign_max_radius ?? curDriversGroup?.autoassign_max_radius ?? ''}
-                onChange={e => onChangeSave({ autoassign_max_radius: e.target.value })}
+                onChange={e => handleChangeInput(e)}
                 onFocus={() => setCurArea(3)}
               />
             </FieldContainer>
