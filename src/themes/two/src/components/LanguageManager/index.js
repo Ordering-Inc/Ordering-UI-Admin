@@ -27,6 +27,11 @@ import { LanguageTransTable } from '../LanguageTransTable'
 import { LanguageTransSpread } from '../LanguageTransSpread'
 
 const LanguageManagerUI = (props) => {
+  const {
+    searchValue,
+    onSearch
+  } = props
+
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [selectedType, setSelectedType] = useState('main')
@@ -48,8 +53,8 @@ const LanguageManagerUI = (props) => {
         </HeaderTitleContainer>
         <ActionsGroup>
           <SearchBar
-            // search={searchValue}
-            // onSearch={(value) => setSearchValue(value)}
+            search={searchValue}
+            onSearch={(value) => onSearch(value)}
             placeholder={t('SEARCH', 'Search')}
           />
         </ActionsGroup>

@@ -16,26 +16,27 @@ import {
 const LanguageTransTableUI = (props) => {
   const {
     translationList,
-    searchValue
+    searchValue,
+    handleChangeText
   } = props
   const [, t] = useLanguage()
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
-  const [pagesPerPage, setPagesPerPage] = useState(10)
+  const [translationPerPage, setTranslationPerPage] = useState(10)
 
   // Get current products
   const [currentPages, setCurrentPages] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
-  const handleChangePage = (page) => {
-    setCurrentPage(page)
+  const handleChangePage = (translation) => {
+    setCurrentPage(translation)
   }
 
   const handleChangePageSize = (pageSize) => {
-    const expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize)
+    const expectedPage = Math.ceil(((currentPage - 1) * translationPerPage + 1) / pageSize)
     setCurrentPage(expectedPage)
-    setPagesPerPage(pageSize)
+    setTranslationPerPage(pageSize)
   }
 
   const handleNewTranslation = () => {
@@ -44,19 +45,19 @@ const LanguageTransTableUI = (props) => {
 
   useEffect(() => {
     if (translationList.loading) return
-    let pages = []
+    let translations = []
     if (searchValue) {
-      pages = translationList.translations.filter(page => page.name.toLowerCase().includes(searchValue.toLowerCase()))
+      translations = translationList.translations.filter(translation => (translation.key.toLowerCase().includes(searchValue.toLowerCase()) || translation.text.toLowerCase().includes(searchValue.toLowerCase())))
     } else {
-      pages = [...translationList.translations]
+      translations = [...translationList.translations]
     }
-    const _totalPages = Math.ceil(pages.length / pagesPerPage)
-    const indexOfLastPost = currentPage * pagesPerPage
-    const indexOfFirstPost = indexOfLastPost - pagesPerPage
-    const _currentProducts = pages.slice(indexOfFirstPost, indexOfLastPost)
+    const _totalPages = Math.ceil(translations.length / translationPerPage)
+    const indexOfLastPost = currentPage * translationPerPage
+    const indexOfFirstPost = indexOfLastPost - translationPerPage
+    const _currentProducts = translations.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
     setCurrentPages(_currentProducts)
-  }, [translationList, currentPage, pagesPerPage, searchValue])
+  }, [translationList, currentPage, translationPerPage, searchValue])
 
   return (
     <TranslationTableContainer>
@@ -89,8 +90,9 @@ const LanguageTransTableUI = (props) => {
                   <td>
                     <input
                       type='text'
-                      defaultValue={translation.text}
+                      value={translation.text}
                       placeholder={t('WRITE_A_TEXT', 'Write a text')}
+                      onChange={(e) => handleChangeText(translation.id, translation.key, e.target.value)}
                     />
                   </td>
                 </tr>
@@ -109,7 +111,7 @@ const LanguageTransTableUI = (props) => {
               currentPage={currentPage}
               totalPages={totalPages}
               handleChangePage={handleChangePage}
-              defaultPageSize={pagesPerPage}
+              defaultPageSize={translationPerPage}
               handleChangePageSize={handleChangePageSize}
             />
           )}

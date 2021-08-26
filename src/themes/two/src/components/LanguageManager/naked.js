@@ -13,6 +13,7 @@ export const LanguageManager = (props) => {
   const [{ token, loading }] = useSession()
   const [translationList, setTranslationList] = useState({ loading: false, translations: [], result: { error: null } })
   const [mainTransList, setMainTransList] = useState(null)
+  const [searchValue, setSearchValue] = useState(null)
 
   const handleUpdateTranslationList = (translations) => {
     setTranslationList({ ...translationList, translations: translations })
@@ -127,6 +128,8 @@ export const LanguageManager = (props) => {
           translationList={translationList}
           handleUpdateTranslationList={handleUpdateTranslationList}
           mainTransList={mainTransList}
+          searchValue={searchValue}
+          onSearch={setSearchValue}
         />
       )}
     </>

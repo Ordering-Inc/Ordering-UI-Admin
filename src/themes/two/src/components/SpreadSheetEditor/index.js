@@ -92,6 +92,7 @@ export const SpreadSheetEditor = (props) => {
       hotTableObj.loadData(hotTableData)
     }
   }, [hotTableData])
+
   useEffect(() => {
     const interVal = setInterval(() => {
       if (navigator.clipboard) {
