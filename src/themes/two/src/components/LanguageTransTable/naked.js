@@ -1,89 +1,102 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 import { useApi } from 'ordering-components-admin'
 
+/**
+ * Component to manage LanguageTransTable behavior without UI component
+ */
 export const LanguageTransTable = (props) => {
   const {
-    UIComponent,
-    translationList,
-    handleUpdateTranslationList
+    UIComponent
+    // translationList,
+    // handleUpdateTranslationList
   } = props
 
   const [ordering] = useApi()
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: null } })
 
-  /**
-   * Method to update translation text
-   * @param {number} id translation id
-   * @param {String} key translation key
-   * @param {String} text translation text
-   */
-  const handleChangeText = (id, key, text) => {
-    const translations = translationList?.translations.map(translation => {
-      if (translation.key === key) {
-        return {
-          ...translation,
-          text: text
-        }
-      }
-      return translation
-    })
-    handleUpdateTranslationList && handleUpdateTranslationList(translations)
-    setFormState({ ...formState, changes: { id: id, key: key, text: text } })
+  const handleChangeInput = (type, evt) => {
+    setFormState({ ...formState, changes: { ...formState?.changes, [type]: evt.target.value } })
   }
+
+  const handleUpdateClick = () => {
+    createTranslation()
+  }
+
+  // /**
+  //  * Method to update translation text
+  //  * @param {number} id translation id
+  //  * @param {String} key translation key
+  //  * @param {String} text translation text
+  //  */
+  // const handleChangeText = (id, key, text) => {
+  //   const translations = translationList?.translations.map(translation => {
+  //     if (translation.key === key) {
+  //       return {
+  //         ...translation,
+  //         text: text
+  //       }
+  //     }
+  //     return translation
+  //   })
+
+  //   handleUpdateTranslationList && handleUpdateTranslationList(translations)
+  //   setFormState({ ...formState, changes: { id: id, key: key, text: text } })
+  // }
 
   /**
    * Method to update translation from API
    */
-  const updateTranslation = async () => {
+  const createTranslation = async () => {
     try {
       setFormState({
         ...formState,
         loading: true
       })
-      const changes = {
-        key: formState?.changes?.key,
-        text: formState?.changes?.text
-      }
 
-      const { content: { error, result, pagination } } = await ordering.translations(formState?.changes?.id).save(changes)
+      const { content: { error, result } } = await ordering.translations().save(formState?.changes)
       if (!error) {
         setFormState({
           ...formState,
           loading: false,
           changes: {},
-          pagination
+          result: {
+            error: false,
+            result: result
+          }
         })
       } else {
         setFormState({
           ...formState,
           loading: false,
-          error: result
+          result: {
+            error: true,
+            result: result
+          }
         })
       }
-    } catch (error) {
+    } catch (err) {
       setFormState({
         ...formState,
         loading: false,
-        error: [error || error?.toString() || error?.message]
+        result: {
+          error: true,
+          result: err
+        }
       })
     }
   }
-
-  useEffect(() => {
-    if (Object.keys(formState?.changes).length > 0) {
-      updateTranslation()
-    }
-  }, [formState?.changes])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
-          handleChangeText={handleChangeText}
+          creationFormState={formState}
+          handleChangeInput={handleChangeInput}
+          handleUpdateClick={handleUpdateClick}
         />
       )}
     </>
@@ -95,6 +108,14 @@ LanguageTransTable.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
+  /**
+   * Object for translations
+   */
+  translationList: PropTypes.object,
+  /**
+    * Function to update translations
+    */
+  handleUpdateTranslationList: PropTypes.func,
   /**
    * Components types before Business Controller
    * Array of type components, the parent props will pass to these components

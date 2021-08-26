@@ -4,19 +4,82 @@ import PropTypes from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 import { useSession, useApi } from 'ordering-components-admin'
 
+/**
+ * Component to manage LanguageManager behavior without UI component
+ */
 export const LanguageManager = (props) => {
   const {
     UIComponent
   } = props
 
   const [ordering] = useApi()
-  const [{ token, loading }] = useSession()
+  const [{ loading }] = useSession()
+
   const [translationList, setTranslationList] = useState({ loading: false, translations: [], result: { error: null } })
   const [mainTransList, setMainTransList] = useState(null)
   const [searchValue, setSearchValue] = useState(null)
+  const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: null } })
+
+  /**
+   * Method to update translation text
+   * @param {number} id translation id
+   * @param {String} key translation key
+   * @param {String} text translation text
+   */
+  const handleChangeText = (id, key, text) => {
+    const translations = translationList?.translations.map(translation => {
+      if (translation.key === key) {
+        return {
+          ...translation,
+          text: text
+        }
+      }
+      return translation
+    })
+
+    handleUpdateTranslationList && handleUpdateTranslationList(translations)
+    setFormState({ ...formState, changes: { id: id, key: key, text: text } })
+  }
 
   const handleUpdateTranslationList = (translations) => {
     setTranslationList({ ...translationList, translations: translations })
+  }
+
+  /**
+   * Method to update translation from API
+   */
+  const updateTranslation = async () => {
+    try {
+      setFormState({
+        ...formState,
+        loading: true
+      })
+      const changes = {
+        key: formState?.changes?.key,
+        text: formState?.changes?.text
+      }
+
+      const { content: { error, result } } = await ordering.translations(formState?.changes?.id).save(changes)
+      if (!error) {
+        setFormState({
+          ...formState,
+          loading: false,
+          changes: {}
+        })
+      } else {
+        setFormState({
+          ...formState,
+          loading: false,
+          error: result
+        })
+      }
+    } catch (error) {
+      setFormState({
+        ...formState,
+        loading: false,
+        error: [error || error?.toString() || error?.message]
+      })
+    }
   }
 
   /**
@@ -26,18 +89,8 @@ export const LanguageManager = (props) => {
     if (loading) return
     try {
       setTranslationList({ ...translationList, loading: true })
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
 
-      const functionFetch = `${ordering.root}/translations`
-
-      const response = await fetch(functionFetch, requestOptions)
-      const { error, result } = await response.json()
+      const { content: { error, result } } = await ordering.translations().get()
       if (!error) {
         setTranslationList({
           ...translationList,
@@ -63,6 +116,12 @@ export const LanguageManager = (props) => {
   useEffect(() => {
     getTranslations()
   }, [])
+
+  useEffect(() => {
+    if (Object.keys(formState?.changes).length > 0) {
+      updateTranslation()
+    }
+  }, [formState?.changes])
 
   useEffect(() => {
     if (translationList?.translations?.length > 0) {
@@ -130,6 +189,7 @@ export const LanguageManager = (props) => {
           mainTransList={mainTransList}
           searchValue={searchValue}
           onSearch={setSearchValue}
+          handleChangeText={handleChangeText}
         />
       )}
     </>

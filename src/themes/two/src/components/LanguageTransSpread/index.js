@@ -5,6 +5,7 @@ import {
   TransSpreadContainer
 } from './styles'
 import { SpreadSheetEditor } from '../SpreadSheetEditor'
+import Skeleton from 'react-loading-skeleton'
 
 const LanguageTransSpreadUI = (props) => {
   const {
@@ -21,7 +22,7 @@ const LanguageTransSpreadUI = (props) => {
     <TransSpreadContainer>
       {
         translationList?.loading ? (
-          <div>loading...</div>
+          <Skeleton height={200} />
         ) : (
           <SpreadSheetEditor
             headerItems={spreadSheetHeaderItems}

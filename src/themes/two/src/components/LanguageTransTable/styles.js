@@ -46,8 +46,11 @@ export const TableBody = styled.tbody`
       ` : css`
         padding-right: 20px;
       `}
+      > input {
+        border: none;
+        padding: 10px 0;
+      }
     }
-
 
     > input {
       border: none;

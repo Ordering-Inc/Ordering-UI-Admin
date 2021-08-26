@@ -12,10 +12,10 @@ import Skeleton from 'react-loading-skeleton'
 export const LanguageMainManager = (props) => {
   const {
     mainTransList,
-    translationList
+    translationList,
+    handleChangeText
   } = props
   const [, t] = useLanguage()
-  console.log(mainTransList)
 
   return (
     <MainManagerContainer>
@@ -49,7 +49,8 @@ export const LanguageMainManager = (props) => {
                   <td>
                     <input
                       type='text'
-                      defaultValue={translation.text}
+                      value={translation.text}
+                      onChange={(e) => handleChangeText(translation.id, translation.key, e.target.value)}
                       placeholder={t('WRITE_A_TEXT', 'Write a text')}
                     />
                   </td>
