@@ -5,6 +5,7 @@ import { DragScroll } from '../DragScroll'
 import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
 import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
 import { DriversGroupPaymethods } from '../DriversGroupPaymethods'
+import { DriversGroupLogistics } from '../DriversGroupLogistics'
 
 import {
   DetailsContainer,
@@ -20,7 +21,8 @@ export const DriversGroupDetails = (props) => {
 
   const [, t] = useLanguage()
   const [showMenu, setShowMenu] = useState('general')
-  const [useAdvanced, setUseAdvanced] = useState(true)
+  const [useAdvanced, setUseAdvanced] = useState(false)
+
   const [driversGroupMenus, setDriversGroupMenus] = useState([])
   useEffect(() => {
     const _driversGroupMenus = useAdvanced
@@ -37,6 +39,10 @@ export const DriversGroupDetails = (props) => {
       ]
     setDriversGroupMenus(_driversGroupMenus)
   }, [useAdvanced])
+
+  useEffect(() => {
+    setUseAdvanced(!(driversGroup?.autoassign_amount_drivers === 0 && driversGroup?.orders_group_max_orders === 0))
+  }, [driversGroup])
 
   return (
     <>
@@ -78,6 +84,9 @@ export const DriversGroupDetails = (props) => {
         )}
         {showMenu === 'paymethods' && (
           <DriversGroupPaymethods {...props} />
+        )}
+        {showMenu === 'advanced_logistics' && (
+          <DriversGroupLogistics {...props} />
         )}
       </DetailsContainer>
     </>

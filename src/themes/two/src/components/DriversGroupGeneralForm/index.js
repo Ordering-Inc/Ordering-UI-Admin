@@ -44,6 +44,17 @@ export const DriversGroupGeneralForm = (props) => {
     { value: 2, content: t('URGENT', 'Urgent') }
   ]
 
+  const handleLogistic = (checked) => {
+    setUseAdvanced(checked)
+    if (checked) return
+    const changes = {
+      autoassign_amount_drivers: 0,
+      orders_group_max_orders: 0
+    }
+    if (!driversGroup) return
+    handleUpdateDriversGroup(driversGroup.id, changes)
+  }
+
   return (
     <Container>
       <InputWrapper>
@@ -76,7 +87,7 @@ export const DriversGroupGeneralForm = (props) => {
       </InputWrapper>
 
       {
-        (changesState?.type ? changesState?.type === 0 : driversGroup?.type === 0)
+        (changesState?.type === 0 || (typeof changesState?.type === 'undefined' && driversGroup?.type === 0))
           ? <DriversGroupDrivers {...props} />
           : <DriversGroupCompanies {...props} />
       }
@@ -92,8 +103,8 @@ export const DriversGroupGeneralForm = (props) => {
       </InputWrapper>
       <CheckboxContainer>
         <Checkbox
-          defaultChecked={useAdvanced}
-          onChange={e => setUseAdvanced(e.target.checked)}
+          checked={useAdvanced}
+          onChange={e => handleLogistic(e.target.checked)}
         />
         <p>{t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic')}</p>
       </CheckboxContainer>

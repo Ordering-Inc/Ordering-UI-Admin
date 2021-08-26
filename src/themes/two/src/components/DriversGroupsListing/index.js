@@ -61,8 +61,10 @@ const DriversGroupsListingUI = (props) => {
   const [searchValue, setSearchValue] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [moveDistance, setMoveDistance] = useState(0)
 
   const handleOpenDetails = (driverGroup) => {
+    setMoveDistance(0)
     cleanChagesState()
     setCurDriversGroup(driverGroup)
     setOpenDetails(true)
@@ -140,8 +142,9 @@ const DriversGroupsListingUI = (props) => {
       {openDetails && (
         <SideBar
           sidebarId='city-details'
-          defaultSideBarWidth={550}
+          defaultSideBarWidth={550 + moveDistance}
           open={openDetails}
+          moveDistance={moveDistance}
           onClose={() => {
             setCurDriversGroup(null)
             setOpenDetails(false)
@@ -171,6 +174,7 @@ const DriversGroupsListingUI = (props) => {
             handleSelectDriversCompany={handleSelectDriversCompany}
             handleSelectAllDriversCompany={handleSelectAllDriversCompany}
             handleAddDriversGroup={handleAddDriversGroup}
+            handleParentSidebarMove={val => setMoveDistance(val)}
           />
         </SideBar>
       )}

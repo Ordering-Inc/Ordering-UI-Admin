@@ -56,6 +56,8 @@ import help from './template/assets/images/icons/help.svg'
 import timeline from './template/assets/images/icons/timeline.svg'
 import mapMarker from './template/assets/images/icons/marker.png'
 import sixDots from './template/assets/images/icons/sixDots.svg'
+import shopToShop from './template/assets/images/icons/shopToShop.svg'
+import homeToHome from './template/assets/images/icons/homeToHome.svg'
 
 import orderPending from './template/assets/images/orderStatus/pending.svg'
 import orderInProgress from './template/assets/images/orderStatus/inProgress.svg'
@@ -183,7 +185,9 @@ theme.images = {
     help: help,
     timeline: timeline,
     mapMarker: mapMarker,
-    sixDots: sixDots
+    sixDots: sixDots,
+    shopToShop: shopToShop,
+    homeToHome: homeToHome
   },
   dummies: {
     nonOrders: nonOrders,

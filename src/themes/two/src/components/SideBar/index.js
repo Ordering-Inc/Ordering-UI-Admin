@@ -10,7 +10,9 @@ export const SideBar = (props) => {
   const {
     open,
     sidebarId,
-    defaultSideBarWidth
+    defaultSideBarWidth,
+    moveDistance,
+    isBorderShow
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -41,11 +43,15 @@ export const SideBar = (props) => {
   useEffect(() => {
     if (!open) return
     actionSidebar(true)
-  }, [open])
+  }, [open, defaultSideBarWidth])
 
   return (
     <>
-      <BarContainer id={id}>
+      <BarContainer
+        id={id}
+        isBorderShow={isBorderShow}
+        moveDistance={moveDistance}
+      >
         <IconButton
           color='black'
           onClick={() => props.onClose()}
