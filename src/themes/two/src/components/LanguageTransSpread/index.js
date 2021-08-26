@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { LanguageTransSpread as LanguageTransSpreadController } from './naked'
 import {
@@ -6,32 +6,68 @@ import {
 } from './styles'
 import { SpreadSheetEditor } from '../SpreadSheetEditor'
 import Skeleton from 'react-loading-skeleton'
+import { Alert } from '../Confirm'
 
 const LanguageTransSpreadUI = (props) => {
   const {
-    translationList
+    translationList,
+    creationFormState,
+    handleItemChange,
+    handleAfterSectionEnd,
+    handleoutsideClickDeselects
   } = props
+
   const [, t] = useLanguage()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const spreadSheetHeaderItems = [
     { title: t('KEY', 'Key'), code: 'key', readOnly: true, type: 'text' },
     { title: t('TEXT', 'Text'), code: 'text', readOnly: false, type: 'text' }
   ]
 
-  return (
-    <TransSpreadContainer>
-      {
-        translationList?.loading ? (
-          <Skeleton height={200} />
-        ) : (
-          <SpreadSheetEditor
-            headerItems={spreadSheetHeaderItems}
-            hotTableData={translationList?.translations}
-          />
-        )
-      }
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
-    </TransSpreadContainer>
+  useEffect(() => {
+    if (creationFormState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: creationFormState?.result?.result
+      })
+    }
+  }, [creationFormState?.result])
+
+  return (
+    <>
+      <TransSpreadContainer>
+        {
+          translationList?.loading ? (
+            <Skeleton height={200} />
+          ) : (
+            <SpreadSheetEditor
+              headerItems={spreadSheetHeaderItems}
+              hotTableData={translationList?.translations}
+              handleItemChange={handleItemChange}
+              handleAfterSectionEnd={handleAfterSectionEnd}
+              handleoutsideClickDeselects={handleoutsideClickDeselects}
+            />
+          )
+        }
+      </TransSpreadContainer>
+      <Alert
+        title={t('TRANSLATIONS', 'Translations')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+    </>
   )
 }
 

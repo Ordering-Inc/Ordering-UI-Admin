@@ -10,13 +10,16 @@ import { useApi } from 'ordering-components-admin'
 export const LanguageTransTable = (props) => {
   const {
     UIComponent
-    // translationList,
-    // handleUpdateTranslationList
   } = props
 
   const [ordering] = useApi()
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: null } })
 
+  /**
+   * Method to save Updated new translation key and text
+   * @param {string} type translation field name
+   * @param {EventTarget} evt Related HTML event
+   */
   const handleChangeInput = (type, evt) => {
     setFormState({ ...formState, changes: { ...formState?.changes, [type]: evt.target.value } })
   }
@@ -24,27 +27,6 @@ export const LanguageTransTable = (props) => {
   const handleUpdateClick = () => {
     createTranslation()
   }
-
-  // /**
-  //  * Method to update translation text
-  //  * @param {number} id translation id
-  //  * @param {String} key translation key
-  //  * @param {String} text translation text
-  //  */
-  // const handleChangeText = (id, key, text) => {
-  //   const translations = translationList?.translations.map(translation => {
-  //     if (translation.key === key) {
-  //       return {
-  //         ...translation,
-  //         text: text
-  //       }
-  //     }
-  //     return translation
-  //   })
-
-  //   handleUpdateTranslationList && handleUpdateTranslationList(translations)
-  //   setFormState({ ...formState, changes: { id: id, key: key, text: text } })
-  // }
 
   /**
    * Method to update translation from API

@@ -74,12 +74,12 @@ const LanguageTransTableUI = (props) => {
   }, [isShowCreation, creationFormState])
 
   useEffect(() => {
-    if (translationList.loading) return
+    if (translationList?.loading) return
     let translations = []
     if (searchValue) {
-      translations = translationList.translations.filter(translation => (translation.key.toLowerCase().includes(searchValue.toLowerCase()) || translation.text.toLowerCase().includes(searchValue.toLowerCase())))
+      translations = translationList?.translations?.filter(translation => (translation.key.toLowerCase().includes(searchValue.toLowerCase()) || translation.text.toLowerCase().includes(searchValue.toLowerCase())))
     } else {
-      translations = [...translationList.translations]
+      translations = [...translationList?.translations]
     }
     const _totalPages = Math.ceil(translations.length / translationPerPage)
     const indexOfLastPost = currentPage * translationPerPage
