@@ -22,7 +22,7 @@ export const LanguageTransSpread = (props) => {
   const [removing, setRemoving] = useState(false)
 
   /**
-   * Method to remove a row from spreadSheet table
+   * Method to select and deselect a row from spreadSheet table
    * @param {Number} row Number of selected row
    * @param {Number} col Number of selected col
    * @param {Number} row1 Number of selected row
@@ -47,6 +47,9 @@ export const LanguageTransSpread = (props) => {
     return false
   }
 
+  /**
+   * Method to update and add translations
+   */
   const handleItemChange = (b, accionHanson, hotTableObj) => {
     if (removing) {
       setRemoving(false)
@@ -199,6 +202,18 @@ LanguageTransSpread.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
+  /**
+   * Object for translations
+   */
+  translationList: PropTypes.object,
+  /**
+   * Function to update translations
+   */
+  handleUpdateTranslationList: PropTypes.func,
+  /**
+   * Function to get translation list
+   */
+  getTranslations: PropTypes.func,
   /**
    * Components types before Business Controller
    * Array of type components, the parent props will pass to these components

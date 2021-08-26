@@ -97,13 +97,9 @@ LanguageTransTable.propTypes = {
    */
   UIComponent: PropTypes.elementType,
   /**
-   * Object for translations
+   * Function to get translation list
    */
-  translationList: PropTypes.object,
-  /**
-    * Function to update translations
-    */
-  handleUpdateTranslationList: PropTypes.func,
+  getTranslations: PropTypes.func,
   /**
    * Components types before Business Controller
    * Array of type components, the parent props will pass to these components
