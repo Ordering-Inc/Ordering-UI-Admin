@@ -140,7 +140,7 @@ const DriversGroupAutoassignUI = (props) => {
       </RowGroupContainer>
 
       {((changesState?.autoassign_autoaccept_by_driver === 0 || (typeof changesState?.autoassign_autoaccept_by_driver === 'undefined' && curDriversGroup?.autoassign_autoaccept_by_driver === 0)) ||
-      (changesState?.type === 1 || (typeof changesState?.type === 'undefined' && curDriversGroup.type === 1))) && (
+      (changesState?.type === 1 || (typeof changesState?.type === 'undefined' && curDriversGroup?.type === 1))) && (
         <FieldContainer>
           <label>{t('AUTO_REJECT_ORDER_GROUP_AFTER', 'Auto reject Orders After')}</label>
           <InputsGroup>
@@ -173,6 +173,7 @@ const DriversGroupAutoassignUI = (props) => {
                 value={changesState?.autoassign_initial_radius ?? curDriversGroup?.autoassign_initial_radius ?? ''}
                 readOnly={autoAssign === 3}
                 onFocus={() => setCurArea(1)}
+                onBlur={() => setCurArea(0)}
                 onChange={e => handleChangeInput(e)}
               />
             </FieldContainer>
@@ -183,6 +184,7 @@ const DriversGroupAutoassignUI = (props) => {
                 value={changesState?.autoassign_increment_radius ?? curDriversGroup?.autoassign_increment_radius ?? ''}
                 readOnly={autoAssign === 3}
                 onFocus={() => setCurArea(2)}
+                onBlur={() => setCurArea(0)}
                 onChange={e => handleChangeInput(e)}
               />
             </FieldContainer>
@@ -193,6 +195,7 @@ const DriversGroupAutoassignUI = (props) => {
                 value={changesState?.autoassign_max_radius ?? curDriversGroup?.autoassign_max_radius ?? ''}
                 onChange={e => handleChangeInput(e)}
                 onFocus={() => setCurArea(3)}
+                onBlur={() => setCurArea(0)}
               />
             </FieldContainer>
           </div>

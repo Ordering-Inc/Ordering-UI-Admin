@@ -87,13 +87,14 @@ export const DriversGroupAutoassign = (props) => {
   }
 
   const onChangeAutoRejectOrderGroup = (value, option) => {
-    const changeValue = value === '' ? 0 : parseInt(value)
     const _autoRejectOrderGroup = { ...autoRejectOrderGroup }
     const regExp = /^[0-9\b]+$/
-    if (changeValue === '' || regExp.test(changeValue)) {
-      _autoRejectOrderGroup[option] = value
+    if (value === '' || regExp.test(value)) {
+      const changeValue = value === '' ? 0 : parseInt(value)
+      _autoRejectOrderGroup[option] = changeValue
       setAutoRejectOrderGroup(_autoRejectOrderGroup)
-      handleChangesState({ autoassign_autoreject_time: _autoRejectOrderGroup })
+      const autoRejectOrderGroupChanges = _autoRejectOrderGroup?.hour * 3600 + _autoRejectOrderGroup?.minute * 60 + _autoRejectOrderGroup?.second
+      handleChangesState({ autoassign_autoreject_time: autoRejectOrderGroupChanges })
     }
   }
 

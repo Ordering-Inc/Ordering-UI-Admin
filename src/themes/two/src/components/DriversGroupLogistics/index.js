@@ -54,6 +54,10 @@ export const DriversGroupLogistics = (props) => {
     }
   }, [width, openConfig])
 
+  useEffect(() => {
+    setOpenConfig(false)
+  }, [curDriversGroup])
+
   return (
     <LogisticsContainer>
       <OrderStatusWrapper

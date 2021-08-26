@@ -4,6 +4,7 @@ import { Input, DefaultSelect, Checkbox, Button } from '../../styles'
 import { Alert } from '../Confirm'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
+import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
 
 import {
   Container,
@@ -101,13 +102,18 @@ export const DriversGroupGeneralForm = (props) => {
           onChange={val => handleChangesState({ priority: val })}
         />
       </InputWrapper>
-      <CheckboxContainer>
-        <Checkbox
-          checked={useAdvanced}
-          onChange={e => handleLogistic(e.target.checked)}
-        />
-        <p>{t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic')}</p>
-      </CheckboxContainer>
+      {!curDriversGroup && (
+        <DriversGroupBusinesses {...props} />
+      )}
+      {curDriversGroup && (
+        <CheckboxContainer>
+          <Checkbox
+            checked={useAdvanced}
+            onChange={e => handleLogistic(e.target.checked)}
+          />
+          <p>{t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic')}</p>
+        </CheckboxContainer>
+      )}
       <Button
         borderRadius='8px'
         color='primary'

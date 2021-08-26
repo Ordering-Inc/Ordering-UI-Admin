@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, Checkbox } from '../../styles'
-import { getHours, getMinutes, getSeconds } from '../../../../../utils'
 import { useTheme } from 'styled-components'
 
 import {
@@ -19,134 +18,18 @@ export const DriversGroupOrders = (props) => {
   const {
     curDriversGroup,
     changesState,
-    handleChangesState
+    handleChangesState,
+    maxTimeBetweenOrder,
+    maxTimeBetweenBusiness,
+    maxTimeBetweenDelivery,
+    handleChangeMaxTimeBetweenOrder,
+    handleChangeMaxTimeBetweenBusiness,
+    handleChangeMaxTimeBetweenDelivery,
+    onChangeNumberInput
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-
-  const [maxTimeBetweenOrder, setMaxTimeBetweenOrder] = useState({})
-  const [maxTimeBetweenBusiness, setMaxTimeBetweenBusiness] = useState({})
-  const [maxTimeBetweenDelivery, setMaxTimeBetweenDelivery] = useState({})
-
-  useEffect(() => {
-    if (curDriversGroup) {
-      const _maxTimeBetweenOrder = {
-        hour: getHours(curDriversGroup?.orders_group_max_time_between),
-        minute: getMinutes(curDriversGroup?.orders_group_max_time_between),
-        second: getSeconds(curDriversGroup?.orders_group_max_time_between)
-      }
-      setMaxTimeBetweenOrder(_maxTimeBetweenOrder)
-
-      const _maxTimeBetweenBusiness = {
-        hour: getHours(curDriversGroup?.orders_group_max_time_between_pickup),
-        minute: getMinutes(curDriversGroup?.orders_group_max_time_between_pickup),
-        second: getSeconds(curDriversGroup?.orders_group_max_time_between_pickup)
-      }
-      setMaxTimeBetweenBusiness(_maxTimeBetweenBusiness)
-
-      const _maxTimeBetweenDelivery = {
-        hour: getHours(curDriversGroup?.orders_group_max_time_between_delivery),
-        minute: getMinutes(curDriversGroup?.orders_group_max_time_between_delivery),
-        second: getSeconds(curDriversGroup?.orders_group_max_time_between_delivery)
-      }
-      setMaxTimeBetweenDelivery(_maxTimeBetweenDelivery)
-    }
-  }, [curDriversGroup])
-
-  const handleChangeMaxTimeBetweenOrder = (value, option) => {
-    const regExp = /^[0-9\b]+$/
-    if (value === '' || regExp.test(value)) {
-      const changeValue = value === '' ? 0 : parseInt(value)
-      let _maxTimeBetweenOrder
-      if (typeof changesState?.orders_group_max_time_between !== 'undefined') {
-        _maxTimeBetweenOrder = {
-          hour: getHours(changesState?.orders_group_max_time_between),
-          minute: getMinutes(changesState?.orders_group_max_time_between),
-          second: getSeconds(changesState?.orders_group_max_time_between)
-        }
-      } else {
-        _maxTimeBetweenOrder = { ...maxTimeBetweenOrder }
-      }
-      if (option === 'hour') {
-        _maxTimeBetweenOrder.hour = changeValue
-      }
-      if (option === 'minute') {
-        _maxTimeBetweenOrder.minute = changeValue
-      }
-      if (option === 'second') {
-        _maxTimeBetweenOrder.second = changeValue
-      }
-
-      const maxTimeBetweenOrderChanges = _maxTimeBetweenOrder?.hour * 3600 + _maxTimeBetweenOrder?.minute * 60 + _maxTimeBetweenOrder?.second
-      handleChangesState({ orders_group_max_time_between: maxTimeBetweenOrderChanges })
-    }
-  }
-
-  const handleChangeMaxTimeBetweenBusiness = (value, option) => {
-    const regExp = /^[0-9\b]+$/
-    if (value === '' || regExp.test(value)) {
-      const changeValue = value === '' ? 0 : parseInt(value)
-      let _maxTimeBetweenBusiness
-      if (typeof changesState?.orders_group_max_time_between_pickup !== 'undefined') {
-        _maxTimeBetweenBusiness = {
-          hour: getHours(changesState?.orders_group_max_time_between_pickup),
-          minute: getMinutes(changesState?.orders_group_max_time_between_pickup),
-          second: getSeconds(changesState?.orders_group_max_time_between_pickup)
-        }
-      } else {
-        _maxTimeBetweenBusiness = { ...maxTimeBetweenOrder }
-      }
-      if (option === 'hour') {
-        _maxTimeBetweenBusiness.hour = changeValue
-      }
-      if (option === 'minute') {
-        _maxTimeBetweenBusiness.minute = changeValue
-      }
-      if (option === 'second') {
-        _maxTimeBetweenBusiness.second = changeValue
-      }
-
-      const maxTimeBetweenBusinessChanges = _maxTimeBetweenBusiness?.hour * 3600 + _maxTimeBetweenBusiness?.minute * 60 + _maxTimeBetweenBusiness?.second
-      handleChangesState({ orders_group_max_time_between_pickup: maxTimeBetweenBusinessChanges })
-    }
-  }
-
-  const handleChangeMaxTimeBetweenDelivery = (value, option) => {
-    const regExp = /^[0-9\b]+$/
-    if (value === '' || regExp.test(value)) {
-      const changeValue = value === '' ? 0 : parseInt(value)
-      let _maxTimeBetweenDelivery
-      if (typeof changesState?.orders_group_max_time_between_pickup !== 'undefined') {
-        _maxTimeBetweenDelivery = {
-          hour: getHours(changesState?.orders_group_max_time_between_pickup),
-          minute: getMinutes(changesState?.orders_group_max_time_between_pickup),
-          second: getSeconds(changesState?.orders_group_max_time_between_pickup)
-        }
-      } else {
-        _maxTimeBetweenDelivery = { ...maxTimeBetweenOrder }
-      }
-      if (option === 'hour') {
-        _maxTimeBetweenDelivery.hour = changeValue
-      }
-      if (option === 'minute') {
-        _maxTimeBetweenDelivery.minute = changeValue
-      }
-      if (option === 'second') {
-        _maxTimeBetweenDelivery.second = changeValue
-      }
-
-      const maxTimeBetweenDeliveryChanges = _maxTimeBetweenDelivery?.hour * 3600 + _maxTimeBetweenDelivery?.minute * 60 + _maxTimeBetweenDelivery?.second
-      handleChangesState({ orders_group_max_time_between_delivery: maxTimeBetweenDeliveryChanges })
-    }
-  }
-
-  const onChangeNumberInput = (name, change) => {
-    const regExp = /^[0-9\b]+$/
-    if (change === '' || regExp.test(change)) {
-      handleChangesState({ [name]: change })
-    }
-  }
 
   return (
     <GroupOrdersContainer>
@@ -162,30 +45,18 @@ export const DriversGroupOrders = (props) => {
         <label>{t('MAX_TIME_BETWEEN_ORDER', 'Maxiumum time between orders')}</label>
         <MaxTimeInputsContainer>
           <Input
-            value={
-              changesState?.orders_group_max_time_between
-                ? getHours(changesState?.orders_group_max_time_between)
-                : maxTimeBetweenOrder?.hour ?? ''
-            }
+            value={maxTimeBetweenOrder?.hour ?? ''}
             onChange={e => handleChangeMaxTimeBetweenOrder(e.target.value, 'hour')}
           />
           <strong>&#8282;</strong>
           <Input
-            value={
-              changesState?.orders_group_max_time_between
-                ? getMinutes(changesState?.orders_group_max_time_between)
-                : maxTimeBetweenOrder?.minute ?? ''
-            }
+            value={maxTimeBetweenOrder?.minute ?? ''}
             onChange={e => handleChangeMaxTimeBetweenOrder(e.target.value, 'minute')}
             maxlength='2'
           />
           <strong>&#8282;</strong>
           <Input
-            value={
-              changesState?.orders_group_max_time_between
-                ? getSeconds(changesState?.orders_group_max_time_between)
-                : maxTimeBetweenOrder?.second ?? ''
-            }
+            value={maxTimeBetweenOrder?.second ?? ''}
             onChange={e => handleChangeMaxTimeBetweenOrder(e.target.value, 'second')}
             maxlength='2'
           />
@@ -245,30 +116,18 @@ export const DriversGroupOrders = (props) => {
               />
               <MaxTimeInputsContainer>
                 <Input
-                  value={
-                    changesState?.orders_group_max_time_between_pickup
-                      ? getHours(changesState?.orders_group_max_time_between_pickup)
-                      : maxTimeBetweenBusiness?.hour ?? ''
-                  }
+                  value={maxTimeBetweenBusiness?.hour ?? ''}
                   onChange={e => handleChangeMaxTimeBetweenBusiness(e.target.value, 'hour')}
                 />
                 <strong>&#8282;</strong>
                 <Input
-                  value={
-                    changesState?.orders_group_max_time_between_pickup
-                      ? getMinutes(changesState?.orders_group_max_time_between_pickup)
-                      : maxTimeBetweenBusiness?.minute ?? ''
-                  }
+                  value={maxTimeBetweenBusiness?.minute ?? ''}
                   onChange={e => handleChangeMaxTimeBetweenBusiness(e.target.value, 'minute')}
                   maxlength='2'
                 />
                 <strong>&#8282;</strong>
                 <Input
-                  value={
-                    changesState?.orders_group_max_time_between_pickup
-                      ? getSeconds(changesState?.orders_group_max_time_between_pickup)
-                      : maxTimeBetweenBusiness?.second ?? ''
-                  }
+                  value={maxTimeBetweenBusiness?.second ?? ''}
                   onChange={e => handleChangeMaxTimeBetweenBusiness(e.target.value, 'second')}
                   maxlength='2'
                 />
@@ -283,30 +142,18 @@ export const DriversGroupOrders = (props) => {
               />
               <MaxTimeInputsContainer>
                 <Input
-                  value={
-                    changesState?.orders_group_max_time_between_delivery
-                      ? getHours(changesState?.orders_group_max_time_between_delivery)
-                      : maxTimeBetweenDelivery?.hour ?? ''
-                  }
+                  value={maxTimeBetweenDelivery?.hour ?? ''}
                   onChange={e => handleChangeMaxTimeBetweenDelivery(e.target.value, 'hour')}
                 />
                 <strong>&#8282;</strong>
                 <Input
-                  value={
-                    changesState?.orders_group_max_time_between_delivery
-                      ? getMinutes(changesState?.orders_group_max_time_between_delivery)
-                      : maxTimeBetweenDelivery?.minute ?? ''
-                  }
+                  value={maxTimeBetweenDelivery?.minute ?? ''}
                   onChange={e => handleChangeMaxTimeBetweenDelivery(e.target.value, 'minute')}
                   maxlength='2'
                 />
                 <strong>&#8282;</strong>
                 <Input
-                  value={
-                    changesState?.orders_group_max_time_between_delivery
-                      ? getSeconds(changesState?.orders_group_max_time_between_delivery)
-                      : maxTimeBetweenDelivery?.second ?? ''
-                  }
+                  value={maxTimeBetweenDelivery?.second ?? ''}
                   onChange={e => handleChangeMaxTimeBetweenDelivery(e.target.value, 'second')}
                   maxlength='2'
                 />

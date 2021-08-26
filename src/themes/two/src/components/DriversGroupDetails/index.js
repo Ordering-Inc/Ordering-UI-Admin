@@ -64,20 +64,22 @@ export const DriversGroupDetails = (props) => {
             <h1>{t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')}</h1>
           )}
         </Header>
-        <MenusContainer>
-          <DragScroll>
-            {driversGroupMenus.map(menu => (
-              <Tab
-                key={menu.key}
-                active={menu.key === showMenu}
-                onClick={() => setShowMenu(menu.key)}
-              >
-                {menu.value}
-              </Tab>
-            ))}
-          </DragScroll>
-        </MenusContainer>
-        {showMenu === 'general' && (
+        {curDriversGroup && (
+          <MenusContainer>
+            <DragScroll>
+              {driversGroupMenus.map(menu => (
+                <Tab
+                  key={menu.key}
+                  active={menu.key === showMenu}
+                  onClick={() => setShowMenu(menu.key)}
+                >
+                  {menu.value}
+                </Tab>
+              ))}
+            </DragScroll>
+          </MenusContainer>
+        )}
+        {(showMenu === 'general' || !curDriversGroup) && (
           <DriversGroupGeneralForm
             {...props}
             useAdvanced={useAdvanced}

@@ -80,14 +80,16 @@ export const DriversGroupBusinesses = (props) => {
           </BusinessWrapper>
         ))}
       </BusinessesContainer>
-      <Button
-        borderRadius='8px'
-        color='primary'
-        disabled={Object.keys(changesState).length === 0}
-        onClick={() => handleUpdateDriversGroup(curDriversGroup.id, changesState)}
-      >
-        {t('SAVE', 'Save')}
-      </Button>
+      {curDriversGroup && (
+        <Button
+          borderRadius='8px'
+          color='primary'
+          disabled={Object.keys(changesState).length === 0}
+          onClick={() => handleUpdateDriversGroup(curDriversGroup.id, changesState)}
+        >
+          {t('SAVE', 'Save')}
+        </Button>
+      )}
     </Container>
   )
 }
