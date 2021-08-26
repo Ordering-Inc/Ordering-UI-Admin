@@ -9,7 +9,8 @@ import { useApi, useToast, ToastType, useLanguage } from 'ordering-components-ad
  */
 export const LanguageTransTable = (props) => {
   const {
-    UIComponent
+    UIComponent,
+    getTranslations
   } = props
 
   const [ordering] = useApi()
@@ -52,6 +53,7 @@ export const LanguageTransTable = (props) => {
             result: result
           }
         })
+        getTranslations && getTranslations()
         showToast(ToastType.Success, t('WEB_APP_LANG_ADDED', 'Language item added'))
       } else {
         setFormState({

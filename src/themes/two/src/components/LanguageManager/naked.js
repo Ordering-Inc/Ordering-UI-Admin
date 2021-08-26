@@ -194,6 +194,7 @@ export const LanguageManager = (props) => {
           searchValue={searchValue}
           onSearch={setSearchValue}
           handleChangeText={handleChangeText}
+          getTranslations={getTranslations}
         />
       )}
     </>

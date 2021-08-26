@@ -71,6 +71,7 @@ const BusinessSpreadSheetUI = (props) => {
           handleRowRemove={handleRowRemove}
           handleAfterSectionEnd={handleAfterSectionEnd}
           handleoutsideClickDeselects={handleoutsideClickDeselects}
+          isRemove
         />
       </BusinessSpreadSheetContainer>
       <Alert

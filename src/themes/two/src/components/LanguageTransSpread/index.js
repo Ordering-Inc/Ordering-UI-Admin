@@ -18,6 +18,7 @@ const LanguageTransSpreadUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [hotTableData, setHotTableData] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const spreadSheetHeaderItems = [
@@ -31,6 +32,13 @@ const LanguageTransSpreadUI = (props) => {
       content: []
     })
   }
+
+  useEffect(() => {
+    if (translationList?.translations.length > 0) {
+      const translations = [...translationList?.translations]
+      setHotTableData(translations)
+    }
+  }, [translationList?.translations])
 
   useEffect(() => {
     if (creationFormState?.result?.error) {
@@ -50,7 +58,7 @@ const LanguageTransSpreadUI = (props) => {
           ) : (
             <SpreadSheetEditor
               headerItems={spreadSheetHeaderItems}
-              hotTableData={translationList?.translations}
+              hotTableData={hotTableData}
               handleItemChange={handleItemChange}
               handleAfterSectionEnd={handleAfterSectionEnd}
               handleoutsideClickDeselects={handleoutsideClickDeselects}

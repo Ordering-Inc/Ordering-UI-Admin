@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-// import { useSession } from '../../contexts/SessionContext'
-// import { useApi } from '../../contexts/ApiContext'
 import { useApi, useLanguage, useSession, useToast, ToastType } from 'ordering-components-admin'
 
 export const LanguageTransSpread = (props) => {
   const {
     UIComponent,
     translationList,
-    handleUpdateTranslationList
+    handleUpdateTranslationList,
+    getTranslations
   } = props
 
   const [ordering] = useApi()
@@ -20,21 +19,6 @@ export const LanguageTransSpread = (props) => {
     row: -1,
     col: -1
   })
-
-  /**
-   * Method to save Updated new translation key and text
-   * @param {string} type translation field name
-   * @param {EventTarget} evt Related HTML event
-   */
-  // const handleChangeInput = (type, evt) => {
-  //   setFormState({ ...formState, changes: { ...formState?.changes, [type]: evt.target.value } })
-  // }
-
-  // const handleItemChange = (changeItems, accionHanson, hotTableObj) => {
-  //   console.log(changeItems, 'this is changeItems')
-  //   console.log(accionHanson, 'this is accionHanson')
-  //   console.log(hotTableObj, 'hotTableObj')
-  // }
 
   const handleItemChange = (b, accionHanson, hotTableObj) => {
     // if (removing) {
@@ -65,11 +49,11 @@ export const LanguageTransSpread = (props) => {
           hotTableObj.validateRows(changes, function (res) {})
           if (!row.key) {
             error.key = true
-            if (errors.indexOf(t('KEY_REQUIRED')) === -1 && b.length !== 1) errors.push(t('KEY_REQUIRED'))
+            if (errors.indexOf(t('KEY_REQUIRED')) === -1) errors.push(t('KEY_REQUIRED'))
           }
           if (!row.text) {
             error.text = true
-            if (errors.indexOf(t('TEXT_REQUIRED')) === -1 && b.length !== 1) errors.push(t('TEXT_REQUIRED'))
+            if (errors.indexOf(t('TEXT_REQUIRED')) === -1) errors.push(t('TEXT_REQUIRED'))
           }
           if (!row.id) {
             if (error.key || error.text) continue
@@ -86,46 +70,21 @@ export const LanguageTransSpread = (props) => {
       setFormState({ ...formState, result: { error: true, result: errors } })
     }
     if (itemToUpdate.length > 0) {
-      createBulkTranslations(itemToUpdate, false)
+      createBulkTranslations(itemToUpdate, false, hotTableObj)
     }
     if (itemToAdd.length > 0) {
-      console.log(itemToAdd)
-    //   MyAlert.confirm($scope.translate('QUESTION_ADD_LANGUAGE')).then(function (res) {
-    //     if (res) {
-    //       MyLoading.toast($scope.translate('LOADING') + '...')
-    //       Ordering.bulks_translations.add({
-    //         translations: JSON.stringify(itemToAdd)
-    //       }, function (res) {
-    //         MyLoading.hide()
-    //         if (!res.error) {
-    //           Ordering.translations.all({},function(res){
-    //             if(!res.error) {
-    //               $scope.dataTable = res.result
-    //               $scope.translations = res.result
-    //             } else MyAlert.show(res.result)
-    //           })
-    //           MyLoading.success($scope.translate('WEB_APP_LANG_ADDED'), 1500)
-    //         } else MyAlert.show(res.result)
-    //       })
-    //     }
-    //   }).catch(function (err) {
-    //     if (err) {
-    //       for (var i = itemToAdd.length - 1; i >= 0; i--) {
-    //         hotTableObj.alter('remove_row', itemToAdd[i].row)
-    //       }
-    //     }
-    //   })
+      createBulkTranslations(itemToAdd, true, hotTableObj)
     }
   }
 
   /**
- * Method to remove a row from spreadSheet table
- * @param {Number} row Number of selected row
- * @param {Number} col Number of selected col
- * @param {Number} row1 Number of selected row
- * @param {Number} col1 Number of selected col
- * @param {Object} hotTableObj Object for spreadSheet mode table
- */
+   * Method to remove a row from spreadSheet table
+   * @param {Number} row Number of selected row
+   * @param {Number} col Number of selected col
+   * @param {Number} row1 Number of selected row
+   * @param {Number} col1 Number of selected col
+   * @param {Object} hotTableObj Object for spreadSheet mode table
+   */
   const handleAfterSectionEnd = (row, col, row1, col1, hotTableObj) => {
     if ((curCell.row === row && curCell.col === col) || (row !== row1 || col !== col1)) return
     setCurCell({
@@ -147,7 +106,7 @@ export const LanguageTransSpread = (props) => {
   /**
    * Method to update translation from API
    */
-  const createBulkTranslations = async (params, isPost) => {
+  const createBulkTranslations = async (params, isPost, hotTableObj) => {
     if (loading) return
     try {
       setFormState({ ...formState, loading: true })
@@ -188,6 +147,8 @@ export const LanguageTransSpread = (props) => {
             return translation
           })
           handleUpdateTranslationList(translations)
+        } else {
+          getTranslations()
         }
         showToast(ToastType.Success, isPost ? t('WEB_APP_LANG_ADDED', 'Language item added') : t('WEB_APP_LANG_SAVED', 'Language change saved'))
       } else {
@@ -209,6 +170,11 @@ export const LanguageTransSpread = (props) => {
         },
         loading: false
       })
+      if (isPost) {
+        for (var i = params.length - 1; i >= 0; i--) {
+          hotTableObj.alter('remove_row', params[i].row)
+        }
+      }
     }
   }
 

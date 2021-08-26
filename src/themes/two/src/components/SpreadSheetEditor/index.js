@@ -13,7 +13,8 @@ export const SpreadSheetEditor = (props) => {
     handleItemChange,
     handleRowRemove,
     handleAfterSectionEnd,
-    handleoutsideClickDeselects
+    handleoutsideClickDeselects,
+    isRemove
   } = props
   const [, t] = useLanguage()
   const [cache, setCache] = useState(null)
@@ -36,9 +37,7 @@ export const SpreadSheetEditor = (props) => {
         copy: {
           name: t('SPREADSHEET_COPY')
         },
-        remove_row: {
-          name: t('SPREADSHEET_REMOVE_ROW')
-        },
+        ...(isRemove && { remove_row: { name: t('SPREADSHEET_REMOVE_ROW') } }),
         paste: {
           key: 'paste',
           name: t('SPREADSHEET_PASTE'),
