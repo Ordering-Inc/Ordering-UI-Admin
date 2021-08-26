@@ -90,6 +90,15 @@ export const SpreadSheetEditor = (props) => {
     if (hotTableRef?.current?.hotInstance) {
       const hotTableObj = hotTableRef?.current?.hotInstance
       hotTableObj.loadData(hotTableData)
+      hotTableObj.updateSettings({
+        cells (row, col) {
+          const cellProperties = {}
+          if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
+            cellProperties.readOnly = false
+          }
+          return cellProperties
+        }
+      })
     }
   }, [hotTableData])
 

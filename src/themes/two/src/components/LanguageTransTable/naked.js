@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useApi } from 'ordering-components-admin'
+import { useApi, useToast, ToastType, useLanguage } from 'ordering-components-admin'
 
 /**
  * Component to manage LanguageTransTable behavior without UI component
@@ -13,6 +13,8 @@ export const LanguageTransTable = (props) => {
   } = props
 
   const [ordering] = useApi()
+  const [, { showToast }] = useToast()
+  const [, t] = useLanguage()
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: null } })
 
   /**
@@ -37,6 +39,7 @@ export const LanguageTransTable = (props) => {
         ...formState,
         loading: true
       })
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
 
       const { content: { error, result } } = await ordering.translations().save(formState?.changes)
       if (!error) {
@@ -49,6 +52,7 @@ export const LanguageTransTable = (props) => {
             result: result
           }
         })
+        showToast(ToastType.Success, t('WEB_APP_LANG_ADDED', 'Language item added'))
       } else {
         setFormState({
           ...formState,

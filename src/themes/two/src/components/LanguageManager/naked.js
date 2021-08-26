@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useSession, useApi } from 'ordering-components-admin'
+import { useSession, useApi, useToast, ToastType, useLanguage } from 'ordering-components-admin'
 
 /**
  * Component to manage LanguageManager behavior without UI component
@@ -13,7 +13,9 @@ export const LanguageManager = (props) => {
   } = props
 
   const [ordering] = useApi()
+  const [, t] = useLanguage()
   const [{ loading }] = useSession()
+  const [, { showToast }] = useToast()
 
   const [translationList, setTranslationList] = useState({ loading: false, translations: [], result: { error: null } })
   const [mainTransList, setMainTransList] = useState(null)
@@ -54,6 +56,7 @@ export const LanguageManager = (props) => {
         ...formState,
         loading: true
       })
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
       const changes = {
         key: formState?.changes?.key,
         text: formState?.changes?.text
@@ -66,6 +69,7 @@ export const LanguageManager = (props) => {
           loading: false,
           changes: {}
         })
+        showToast(ToastType.Success, t('WEB_APP_LANG_SAVED', 'Language change saved'))
       } else {
         setFormState({
           ...formState,

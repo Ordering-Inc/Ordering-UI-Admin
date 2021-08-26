@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useApi, useLanguage, useSession } from 'ordering-components-admin'
+import { useApi, useLanguage, useSession, useToast, ToastType } from 'ordering-components-admin'
 
 export const LanguageTransSpread = (props) => {
   const {
@@ -14,6 +14,7 @@ export const LanguageTransSpread = (props) => {
   const [ordering] = useApi()
   const [{ token, loading }] = useSession()
   const [, t] = useLanguage()
+  const [, { showToast }] = useToast()
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: null } })
   const [curCell, setCurCell] = useState({
     row: -1,
@@ -150,6 +151,7 @@ export const LanguageTransSpread = (props) => {
     if (loading) return
     try {
       setFormState({ ...formState, loading: true })
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
       const requestOptions = {
         method: isPost ? 'POST' : 'PUT',
         headers: {
@@ -187,6 +189,7 @@ export const LanguageTransSpread = (props) => {
           })
           handleUpdateTranslationList(translations)
         }
+        showToast(ToastType.Success, isPost ? t('WEB_APP_LANG_ADDED', 'Language item added') : t('WEB_APP_LANG_SAVED', 'Language change saved'))
       } else {
         setFormState({
           ...formState,

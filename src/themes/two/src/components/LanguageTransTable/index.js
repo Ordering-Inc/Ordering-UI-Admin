@@ -23,7 +23,6 @@ const LanguageTransTableUI = (props) => {
     handleChangeInput,
     handleUpdateClick
   } = props
-  console.log(creationFormState?.changes)
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
