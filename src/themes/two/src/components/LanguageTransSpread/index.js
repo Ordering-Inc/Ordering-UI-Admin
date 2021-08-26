@@ -14,7 +14,8 @@ const LanguageTransSpreadUI = (props) => {
     creationFormState,
     handleItemChange,
     handleAfterSectionEnd,
-    handleoutsideClickDeselects
+    handleoutsideClickDeselects,
+    searchValue
   } = props
 
   const [, t] = useLanguage()
@@ -34,11 +35,15 @@ const LanguageTransSpreadUI = (props) => {
   }
 
   useEffect(() => {
-    if (translationList?.translations.length > 0) {
-      const translations = [...translationList?.translations]
-      setHotTableData(translations)
+    if (translationList?.loading) return
+    let translations = []
+    if (searchValue) {
+      translations = translationList?.translations?.filter(translation => (translation.key?.toLowerCase().includes(searchValue.toLowerCase()) || translation.text.toLowerCase().includes(searchValue.toLowerCase())))
+    } else {
+      translations = [...translationList?.translations]
     }
-  }, [translationList?.translations])
+    setHotTableData(translations)
+  }, [translationList, searchValue])
 
   useEffect(() => {
     if (creationFormState?.result?.error) {
@@ -53,7 +58,7 @@ const LanguageTransSpreadUI = (props) => {
     <>
       <TransSpreadContainer>
         {
-          translationList?.loading ? (
+          (translationList?.loading && !creationFormState?.result) ? (
             <Skeleton height={200} />
           ) : (
             <SpreadSheetEditor

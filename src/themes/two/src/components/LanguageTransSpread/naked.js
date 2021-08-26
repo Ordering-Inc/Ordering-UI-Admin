@@ -19,12 +19,39 @@ export const LanguageTransSpread = (props) => {
     row: -1,
     col: -1
   })
+  const [removing, setRemoving] = useState(false)
+
+  /**
+   * Method to remove a row from spreadSheet table
+   * @param {Number} row Number of selected row
+   * @param {Number} col Number of selected col
+   * @param {Number} row1 Number of selected row
+   * @param {Number} col1 Number of selected col
+   * @param {Object} hotTableObj Object for spreadSheet mode table
+   */
+  const handleAfterSectionEnd = (row, col, row1, col1, hotTableObj) => {
+    if ((curCell.row === row && curCell.col === col) || (row !== row1 || col !== col1)) return
+    setCurCell({
+      row: row,
+      col: col
+    })
+    hotTableObj.deselectCell()
+    hotTableObj.selectCell(row, col)
+  }
+
+  const handleoutsideClickDeselects = () => {
+    setCurCell({
+      row: -1,
+      col: -1
+    })
+    return false
+  }
 
   const handleItemChange = (b, accionHanson, hotTableObj) => {
-    // if (removing) {
-    //   removing = false
-    //   return
-    // }
+    if (removing) {
+      setRemoving(false)
+      return
+    }
     b = !b ? [] : b
     const changes = []
     const itemToAdd = []
@@ -75,32 +102,6 @@ export const LanguageTransSpread = (props) => {
     if (itemToAdd.length > 0) {
       createBulkTranslations(itemToAdd, true, hotTableObj)
     }
-  }
-
-  /**
-   * Method to remove a row from spreadSheet table
-   * @param {Number} row Number of selected row
-   * @param {Number} col Number of selected col
-   * @param {Number} row1 Number of selected row
-   * @param {Number} col1 Number of selected col
-   * @param {Object} hotTableObj Object for spreadSheet mode table
-   */
-  const handleAfterSectionEnd = (row, col, row1, col1, hotTableObj) => {
-    if ((curCell.row === row && curCell.col === col) || (row !== row1 || col !== col1)) return
-    setCurCell({
-      row: row,
-      col: col
-    })
-    hotTableObj.deselectCell()
-    hotTableObj.selectCell(row, col)
-  }
-
-  const handleoutsideClickDeselects = () => {
-    setCurCell({
-      row: -1,
-      col: -1
-    })
-    return false
   }
 
   /**

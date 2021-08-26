@@ -108,7 +108,7 @@ const LanguageTransTableUI = (props) => {
             </tr>
           </TableHeader>
           {
-            translationList?.loading ? (
+            (translationList?.loading && !creationFormState?.result) ? (
               [...Array(5).keys()].map(i => (
                 <TableBody key={i}>
                   <tr>

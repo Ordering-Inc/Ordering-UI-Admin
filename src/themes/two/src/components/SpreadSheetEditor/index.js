@@ -14,7 +14,9 @@ export const SpreadSheetEditor = (props) => {
     handleRowRemove,
     handleAfterSectionEnd,
     handleoutsideClickDeselects,
-    isRemove
+    isRemove,
+    isUndo,
+    isRedo
   } = props
   const [, t] = useLanguage()
   const [cache, setCache] = useState(null)
@@ -37,6 +39,8 @@ export const SpreadSheetEditor = (props) => {
         copy: {
           name: t('SPREADSHEET_COPY')
         },
+        ...(isUndo && { undo: { name: t('SPREADSHEET_UNDO') } }),
+        ...(isRedo && { redo: { name: t('SPREADSHEET_REDO') } }),
         ...(isRemove && { remove_row: { name: t('SPREADSHEET_REMOVE_ROW') } }),
         paste: {
           key: 'paste',

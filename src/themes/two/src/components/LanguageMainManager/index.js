@@ -40,7 +40,6 @@ export const LanguageMainManager = (props) => {
                 </tr>
               </TableBody>
             ))
-
           ) : (
             mainTransList?.length > 0 && mainTransList.map((translation, i) => (
               <TableBody key={i}>
