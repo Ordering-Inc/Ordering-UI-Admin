@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { LanguageTransTable as LanguageTransTableController } from './naked'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, LanguageTransTable as LanguageTransTableController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Pagination } from '../Pagination'
 import { Alert } from '../Confirm'

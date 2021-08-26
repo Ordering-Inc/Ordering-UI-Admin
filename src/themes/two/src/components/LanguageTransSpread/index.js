@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { LanguageTransSpread as LanguageTransSpreadController } from './naked'
+import { useLanguage, LanguageTransSpread as LanguageTransSpreadController } from 'ordering-components-admin'
 import {
   TransSpreadContainer
 } from './styles'
