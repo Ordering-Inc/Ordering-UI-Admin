@@ -40,7 +40,9 @@ export const UsersList = (props) => {
     selectedUsers,
     handleSelectedUsers,
     handleOpenUserDetails,
-    handleOpenUserAddForm
+    handleOpenUserAddForm,
+    isDriversPage,
+    isDriversManagersPage
   } = props
 
   const [, t] = useLanguage()
@@ -81,7 +83,8 @@ export const UsersList = (props) => {
             <thead>
               <tr>
                 <th>{t('USER', 'User')}</th>
-                <th colSpan={2}>{t('DETAILS', 'Details')}</th>
+                <th>{t('DETAILS', 'Details')}</th>
+                <th />
                 <th colSpan={2}>{t('ACTION', 'Action')}</th>
               </tr>
             </thead>
@@ -110,10 +113,12 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      <UserTypeWrapper>
-                        <Skeleton width={100} style={{ marginBottom: '10px' }} />
-                        <p><Skeleton width={100} /></p>
-                      </UserTypeWrapper>
+                      {!(isDriversPage || isDriversManagersPage) && (
+                        <UserTypeWrapper>
+                          <Skeleton width={100} style={{ marginBottom: '10px' }} />
+                          <p><Skeleton width={100} /></p>
+                        </UserTypeWrapper>
+                      )}
                     </td>
                     <td>
                       <UserEnableWrapper>
@@ -166,22 +171,23 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      <UserTypeWrapper className='user_type_selector'>
-                        <UserTypeSelector
-                          userId={user.id}
-                          defaultUserType={user?.level}
-                          handleChangeUserType={handleChangeUserType}
-                        />
-                        <p>{getUserType(user?.level)?.value}</p>
-                      </UserTypeWrapper>
+                      {!(isDriversPage || isDriversManagersPage) && (
+                        <UserTypeWrapper className='user_type_selector'>
+                          <UserTypeSelector
+                            userId={user.id}
+                            defaultUserType={user?.level}
+                            handleChangeUserType={handleChangeUserType}
+                          />
+                          <p>{getUserType(user?.level)?.value}</p>
+                        </UserTypeWrapper>
+                      )}
                     </td>
                     <td>
                       <UserEnableWrapper className='user_enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>
-                        <UserActiveControlSwitch
-                          userId={user.id}
+                        <Switch
                           defaultChecked={user?.enabled}
-                          handleChangeActiveUser={handleChangeActiveUser}
+                          onChange={enabled => handleChangeActiveUser({ id: user.id, enabled: enabled })}
                         />
                       </UserEnableWrapper>
                     </td>
@@ -205,7 +211,13 @@ export const UsersList = (props) => {
         </UserTableWrapper>
         <UsersBottomContainer>
           <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
-            {t('ADD_NEW_USER', 'Add new user')}
+            {
+              isDriversPage
+                ? t('ADD_NEW_DRIVER', 'Add new driver')
+                : isDriversManagersPage
+                  ? t('ADD_NEW_DRIVER_MANAGER', 'Add new driver manager')
+                  : t('ADD_NEW_USER', 'Add new user')
+            }
           </AddNewUserButton>
           {usersList?.users.length > 0 && (
             <WrapperPagination>
@@ -220,22 +232,5 @@ export const UsersList = (props) => {
         </UsersBottomContainer>
       </UsersConatiner>
     </>
-  )
-}
-
-const UserActiveControlSwitch = (props) => {
-  const {
-    defaultChecked,
-    userId,
-    handleChangeActiveUser
-  } = props
-  const onChangeActiveUser = (enabled) => {
-    handleChangeActiveUser({ id: userId, enabled: enabled })
-  }
-  return (
-    <Switch
-      defaultChecked={defaultChecked}
-      onChange={onChangeActiveUser}
-    />
   )
 }

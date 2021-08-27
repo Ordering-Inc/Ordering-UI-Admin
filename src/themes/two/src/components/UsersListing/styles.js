@@ -5,7 +5,8 @@ export const UsersListingContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
-  overflow: hidden;
+  max-height: 100vh;
+  overflow: auto;
 
   @media print {
     display: none;

@@ -15,7 +15,8 @@ export const ListenPageChanges = ({ children }) => {
     deliveries: '/deliveries',
     drivers: '/drivers',
     messages: '/messages',
-    users: '/users',
+    customers: '/users/customers',
+    managers: '/users/managers',
     login: '/login',
     businesses: '/stores/list',
     brand: '/stores/brand',
@@ -30,6 +31,10 @@ export const ListenPageChanges = ({ children }) => {
     drivers_analytics: '/intelligence/drivers',
     invoice: '/intelligence/invoice',
     reviews: '/intelligence/reviews',
+    delivery_drivers: '/delivery/drivers-list',
+    drivers_managers: '/delivery/drivers-managers',
+    drivers_companies: '/delivery/drivers-companies',
+    drivers_groups: '/delivery/drivers-groups',
     ordering_products: '/ordering-products'
   }
 
