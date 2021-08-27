@@ -3,16 +3,16 @@ import styled, { css } from 'styled-components'
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   position: relative;
   cursor: pointer;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border: none;
 
   &:before {
     content: "";
     display: block;
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     top: 0;
     left: 0;
     border: 1px solid #B1BCCC;
@@ -24,8 +24,8 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     content: "";
     display: block;
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     top: 0;
     ${props => props.theme?.rtl ? css`
       right: 0;
@@ -46,11 +46,11 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     position: absolute;
-    top: 4px;
+    top: 3px;
     ${props => props.theme?.rtl ? css`
-      right: 8px;
+      right: 7px;
     ` : css`
-      left: 8px;
+      left: 7px;
     `}
   }
 `

@@ -10,17 +10,25 @@ import {
 export const UserDetailsMenu = (props) => {
   const {
     currentMenuSelected,
-    handleChangeMenu
+    handleChangeMenu,
+    isDelivery
   } = props
 
   const [, t] = useLanguage()
-  const menuItems = [
-    { key: 'profile', content: t('PROFILE', 'Profile') },
-    { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
-    { key: 'orders', content: t('ORDERS', 'Orders') },
-    { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
-    { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
-  ]
+  const menuItems = isDelivery
+    ? [
+      { key: 'profile', content: t('PROFILE', 'Profile') },
+      { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
+      { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
+      { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
+    ]
+    : [
+      { key: 'profile', content: t('PROFILE', 'Profile') },
+      { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
+      { key: 'orders', content: t('ORDERS', 'Orders') },
+      { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
+      { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
+    ]
   return (
     <UserDetailsMenuContainer>
       <DragScroll>

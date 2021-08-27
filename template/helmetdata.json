@@ -27,6 +27,13 @@
     "robots": "",
     "canonicalUrl": ""
   },
+  "drivers_dashboard": {
+    "title": "Drivers Dashboard",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
   "login": {
     "title": "Login",
     "description": "a dummy description about this page",
@@ -127,6 +134,48 @@
   },
   "places": {
     "title": "Places",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "customers": {
+    "title": "Customers",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "managers": {
+    "title": "Managers",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "delivery_drivers": {
+    "title": "Drivers",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "drivers_managers": {
+    "title": "Driver managers",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "drivers_companies": {
+    "title": "Driver companies",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "drivers_groups": {
+    "title": "Driver groups",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

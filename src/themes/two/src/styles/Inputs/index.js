@@ -26,6 +26,12 @@ export const Input = styled.input`
   &:-ms-input-placeholder {
     color: #B1BCCC;
   }
+
+  &:read-only {
+    background-color: #F8F9FA;
+    cursor: not-allowed;
+    border-color: #DEE2E6;
+  }
 `
 
 export const InputGroup = styled.div`
