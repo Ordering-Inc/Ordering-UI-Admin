@@ -10,6 +10,7 @@ import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { useTheme } from 'styled-components'
 import { Switch } from '../../styles/Switch'
 import { SearchBar } from '../SearchBar'
+import { Alert } from '../Confirm'
 import {
   BrandListingContainer,
   HeaderContainer,
@@ -32,7 +33,10 @@ const BusinessBrandListingUI = (props) => {
   const {
     searchValue,
     onSearch,
-    brandListState
+    brandListState,
+    handleChangeState,
+    brandFormState,
+    handleDeleteBrand
   } = props
 
   const [, t] = useLanguage()
@@ -40,139 +44,171 @@ const BusinessBrandListingUI = (props) => {
   const [{ optimizeImage }] = useUtils()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [brandList, setBrandList] = useState([])
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   const handleEditPage = () => {
     console.log('edit')
   }
 
-  const handleDeletePage = () => {
-    console.log('delete')
-  }
+  useEffect(() => {
+    if (brandListState?.brands?.length > 0) {
+      let brands = []
+      if (searchValue) {
+        brands = brandListState?.brands?.filter(brand => (brand.name?.toLowerCase().includes(searchValue.toLowerCase())))
+      } else {
+        brands = [...brandListState?.brands]
+      }
+      setBrandList(brands)
+    }
+  }, [brandListState, searchValue])
 
   useEffect(() => {
-    if (brandListState?.brands?.length > 0) setBrandList([...brandListState?.brands])
-  }, [brandListState])
+    if (brandFormState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: brandFormState?.result?.result
+      })
+    }
+  }, [brandFormState?.result])
 
   return (
-    <BrandListingContainer>
-      <HeaderContainer>
-        <HeaderTitleContainer>
-          {isCollapse && (
-            <IconButton
-              color='black'
-              onClick={() => handleMenuCollapse(false)}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-          <h1>{t('BRAND_MANAGER', 'Brand manager')}</h1>
-        </HeaderTitleContainer>
-        <ActionsGroup>
-          <Button
-            borderRadius='8px'
-            color='lightPrimary'
-            // onClick={() => handleEditProduct()}
-          >
-            {t('ADD_Brand', 'Add brand')}
-          </Button>
-          <SearchBar
-            search={searchValue}
-            onSearch={(value) => onSearch(value)}
-            placeholder={t('SEARCH', 'Search')}
-          />
-        </ActionsGroup>
-      </HeaderContainer>
-      <BrandListTableWrapper>
-        <BrandListTable>
-          <thead>
-            <tr>
-              <th>{t('NAME', 'Name')}</th>
-              <th>{t('ACTIONS', 'Actions')}</th>
-            </tr>
-          </thead>
-          {brandListState.loading ? (
-            [...Array(8).keys()].map(i => (
-              <BrandBody key={i}>
-                <tr>
-                  <td>
-                    <BrandGeneralInfo>
-                      <WrapperImage isSkeleton={brandListState?.loading}>
-                        <Skeleton width={32} height={32} />
-                      </WrapperImage>
-                      <InfoBlock>
-                        <p><Skeleton width={80} height={20} /></p>
-                      </InfoBlock>
-                    </BrandGeneralInfo>
-                  </td>
-                  <td>
-                    <ActionsContainer>
-                      <EnableWrapper>
-                        <Skeleton width={50} height={20} />
-                      </EnableWrapper>
-                      <ActionSelectorWrapper>
-                        <Skeleton width={15} height={20} />
-                      </ActionSelectorWrapper>
-                    </ActionsContainer>
-                  </td>
-                </tr>
-              </BrandBody>
-            ))
-          ) : (
-            brandList.map(brand => (
-              <BrandBody
-                key={brand.id}
-                // onClick={e => onClickPage(e, page.id)}
+    <>
+      <BrandListingContainer>
+        <HeaderContainer>
+          <HeaderTitleContainer>
+            {isCollapse && (
+              <IconButton
+                color='black'
+                onClick={() => handleMenuCollapse(false)}
               >
-                <tr>
-                  <td>
-                    <BrandGeneralInfo>
-                      <WrapperImage>
-                        <Image bgimage={optimizeImage(brand?.logo || theme.images?.dummies?.businessLogo)} />
-                      </WrapperImage>
-                      <InfoBlock>
-                        <p>{brand?.name}</p>
-                      </InfoBlock>
-                    </BrandGeneralInfo>
-                  </td>
-                  <td>
-                    <ActionsContainer>
-                      <EnableWrapper calssName='page-enabled'>
-                        <span>{t('ENABLE', 'Enable')}</span>
-                        <Switch
-                          defaultChecked={brand?.enabled}
-                          // onChange={(enabled) => handleChangeState(page.id, 'enabled', enabled)}
-                        />
-                      </EnableWrapper>
-                      <ActionSelectorWrapper className='page-actions'>
-                        <DropdownButton
-                          menuAlign={theme?.rtl ? 'left' : 'right'}
-                          title={<FiMoreVertical />}
-                          id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                        >
-                          <Dropdown.Item
-                            onClick={() => handleEditPage(brand.id)}
+                <MenuIcon />
+              </IconButton>
+            )}
+            <h1>{t('BRAND_MANAGER', 'Brand manager')}</h1>
+          </HeaderTitleContainer>
+          <ActionsGroup>
+            <Button
+              borderRadius='8px'
+              color='lightPrimary'
+              // onClick={() => handleEditProduct()}
+            >
+              {t('ADD_Brand', 'Add brand')}
+            </Button>
+            <SearchBar
+              search={searchValue}
+              onSearch={(value) => onSearch(value)}
+              placeholder={t('SEARCH', 'Search')}
+            />
+          </ActionsGroup>
+        </HeaderContainer>
+        <BrandListTableWrapper>
+          <BrandListTable>
+            <thead>
+              <tr>
+                <th>{t('NAME', 'Name')}</th>
+                <th>{t('ACTIONS', 'Actions')}</th>
+              </tr>
+            </thead>
+            {brandListState.loading ? (
+              [...Array(8).keys()].map(i => (
+                <BrandBody key={i}>
+                  <tr>
+                    <td>
+                      <BrandGeneralInfo>
+                        <WrapperImage isSkeleton={brandListState?.loading}>
+                          <Skeleton width={32} height={32} />
+                        </WrapperImage>
+                        <InfoBlock>
+                          <p><Skeleton width={80} height={20} /></p>
+                        </InfoBlock>
+                      </BrandGeneralInfo>
+                    </td>
+                    <td>
+                      <ActionsContainer>
+                        <EnableWrapper>
+                          <Skeleton width={50} height={20} />
+                        </EnableWrapper>
+                        <ActionSelectorWrapper>
+                          <Skeleton width={15} height={20} />
+                        </ActionSelectorWrapper>
+                      </ActionsContainer>
+                    </td>
+                  </tr>
+                </BrandBody>
+              ))
+            ) : (
+              brandList.map(brand => (
+                <BrandBody
+                  key={brand.id}
+                  // onClick={e => onClickPage(e, page.id)}
+                >
+                  <tr>
+                    <td>
+                      <BrandGeneralInfo>
+                        <WrapperImage>
+                          <Image bgimage={optimizeImage(brand?.logo || theme.images?.dummies?.businessLogo)} />
+                        </WrapperImage>
+                        <InfoBlock>
+                          <p>{brand?.name}</p>
+                        </InfoBlock>
+                      </BrandGeneralInfo>
+                    </td>
+                    <td>
+                      <ActionsContainer>
+                        <EnableWrapper calssName='page-enabled'>
+                          <span>{t('ENABLE', 'Enable')}</span>
+                          <Switch
+                            defaultChecked={brand?.enabled}
+                            onChange={(enabled) => handleChangeState(brand.id, 'enabled', enabled)}
+                          />
+                        </EnableWrapper>
+                        <ActionSelectorWrapper className='page-actions'>
+                          <DropdownButton
+                            menuAlign={theme?.rtl ? 'left' : 'right'}
+                            title={<FiMoreVertical />}
+                            id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                           >
-                            {t('EDIT', 'Edit')}
-                          </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => handleDeletePage(brand.id)}
-                          >
-                            {t('DELETE', 'Delete')}
-                          </Dropdown.Item>
-                        </DropdownButton>
-                      </ActionSelectorWrapper>
-                    </ActionsContainer>
-                  </td>
-                </tr>
-              </BrandBody>
-            ))
-          )}
-        </BrandListTable>
-      </BrandListTableWrapper>
-      <BrandListBottomContainer>
-        <span>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
-      </BrandListBottomContainer>
-    </BrandListingContainer>
+                            <Dropdown.Item
+                              onClick={() => handleEditPage(brand.id)}
+                            >
+                              {t('EDIT', 'Edit')}
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() => handleDeleteBrand(brand.id)}
+                            >
+                              {t('DELETE', 'Delete')}
+                            </Dropdown.Item>
+                          </DropdownButton>
+                        </ActionSelectorWrapper>
+                      </ActionsContainer>
+                    </td>
+                  </tr>
+                </BrandBody>
+              ))
+            )}
+          </BrandListTable>
+        </BrandListTableWrapper>
+        <BrandListBottomContainer>
+          <span>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
+        </BrandListBottomContainer>
+      </BrandListingContainer>
+      <Alert
+        title={t('TRANSLATIONS', 'Translations')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+    </>
   )
 }
 
