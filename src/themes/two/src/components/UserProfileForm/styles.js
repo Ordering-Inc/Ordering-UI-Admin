@@ -7,7 +7,8 @@ export const Container = styled.div`
   padding: 0 5px;
   > button {
     height: 44px;
-    margin-top: 40px;
+    margin: 40px 0;
+    display: block;
   }
 `
 
@@ -34,7 +35,6 @@ export const UserImage = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
 
   @media (min-width: 768px){
     width: auto;
@@ -51,6 +51,7 @@ export const Image = styled.div`
   cursor: -webkit-grab;
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+  border: 1px solid ${props => props.theme.colors.borderColor};
 
   ${({ isEdit }) => !isEdit && css`
     pointer-events: none;

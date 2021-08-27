@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { Camera as CameraIcon } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import { DriverGroupSetting } from '../DriverGroupSetting'
 
 import {
   UserFormDetails as UserProfileController,
@@ -37,7 +38,8 @@ const UserProfileFormUI = (props) => {
     cleanFormState,
     toggleIsEdit,
     isHiddenAddress,
-    userState
+    userState,
+    isDriversPage
   } = props
 
   const [, t] = useLanguage()
@@ -175,6 +177,10 @@ const UserProfileFormUI = (props) => {
           >
             {t('EDIT', 'Edit')}
           </Button>
+        )}
+
+        {isDriversPage && !edit && (
+          <DriverGroupSetting userId={userData?.id || userState?.result?.result?.id} />
         )}
       </Container>
       <Alert

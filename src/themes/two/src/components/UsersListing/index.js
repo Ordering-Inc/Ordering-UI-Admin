@@ -135,7 +135,8 @@ const UsersListingUI = (props) => {
 
       {isOpenUserDetails && (
         <UserDetailsLateralBar
-          isDeliveryPage={isDriversPage || isDriversManagersPage}
+          isDriversPage={isDriversPage}
+          isDriversManagersPage={isDriversManagersPage}
           open={isOpenUserDetails}
           user={openUser}
           userId={openUser?.id || queryId}
