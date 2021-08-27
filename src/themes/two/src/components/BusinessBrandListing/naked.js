@@ -120,7 +120,8 @@ export const BusinessBrandListing = (props) => {
               return {
                 ...item,
                 name: content.result.name,
-                logo: content.result.logo
+                logo: content.result.logo,
+                enabled: content.result.enabled
               }
             }
             return item

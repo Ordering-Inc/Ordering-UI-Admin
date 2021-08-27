@@ -46,6 +46,7 @@ export const OrderingProductGeneral = (props) => {
     { value: 'website', content: <Option>{t('WEBSITE', 'Website')}</Option> },
     { value: 'app', content: <Option>{t('APP', 'App')}</Option> }
   ]
+
   const defaultProduct = {
     id: 1,
     name: null,

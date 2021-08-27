@@ -53,14 +53,19 @@ const BusinessBrandListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [openDetail, setOpenDetail] = useState(false)
   const [selectedType, setSelectedType] = useState('general')
+  const [selectedBrand, setSelectedBrand] = useState(null)
 
   const handleCloseSidebar = () => {
     setOpenDetail(false)
   }
 
   const handleOpenSideBar = (id) => {
-    if (id) console.log('edit')
-    else console.log('create')
+    if (id) {
+      const brand = brandListState?.brands.find(item => item.id === id)
+      setSelectedBrand(brand)
+    } else {
+      setSelectedBrand(null)
+    }
     setOpenDetail(true)
   }
 
@@ -82,6 +87,13 @@ const BusinessBrandListingUI = (props) => {
       setBrandList(brands)
     }
   }, [brandListState, searchValue])
+
+  useEffect(() => {
+    if (brandList?.length > 0 && selectedBrand) {
+      const brand = brandListState?.brands?.find(item => item.id === selectedBrand?.id)
+      setSelectedBrand(brand)
+    }
+  }, [brandList])
 
   useEffect(() => {
     if (brandFormState?.result?.error) {
@@ -209,7 +221,7 @@ const BusinessBrandListingUI = (props) => {
           </BrandListTable>
         </BrandListTableWrapper>
         <BrandListBottomContainer>
-          <span>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
+          <span onClick={handleOpenSideBar}>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
         </BrandListBottomContainer>
         {openDetail && (
           <SideBar
@@ -220,10 +232,14 @@ const BusinessBrandListingUI = (props) => {
           >
             <BrandDetailContainer>
               <DetailHeder>
-                <span>Brand name</span>
+                {
+                  selectedBrand?.name && (
+                    <span>{selectedBrand?.name}</span>
+                  )
+                }
                 <Switch
-                  defaultChecked={false}
-                  // onChange={(enabled) => handleChangeState(brand.id, 'enabled', enabled)}
+                  defaultChecked={selectedBrand?.enabled || false}
+                  onChange={(enabled) => handleChangeState(selectedBrand?.id, 'enabled', enabled)}
                 />
               </DetailHeder>
               <TabContainer>
@@ -242,7 +258,10 @@ const BusinessBrandListingUI = (props) => {
               </TabContainer>
               {
                 selectedType === 'general' && (
-                  <BusinessBrandGENDetail {...props} />
+                  <BusinessBrandGENDetail
+                    {...props}
+                    brand={selectedBrand}
+                  />
                 )
               }
               {
