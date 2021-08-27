@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, DriversGroupOrders as DriversGroupOrdersController } from 'ordering-components-admin'
 import { Input, Checkbox } from '../../styles'
 import { useTheme } from 'styled-components'
 
@@ -14,7 +14,7 @@ import {
   FieldRowContainer
 } from './styles'
 
-export const DriversGroupOrders = (props) => {
+const DriversGroupOrdersUI = (props) => {
   const {
     curDriversGroup,
     changesState,
@@ -164,4 +164,12 @@ export const DriversGroupOrders = (props) => {
       )}
     </GroupOrdersContainer>
   )
+}
+
+export const DriversGroupOrders = (props) => {
+  const drivesGroupOrdersProps = {
+    ...props,
+    UIComponent: DriversGroupOrdersUI
+  }
+  return <DriversGroupOrdersController {...drivesGroupOrdersProps} />
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { DriversGroupsList as DriversGroupsListController } from './naked'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
 import { Button, IconButton } from '../../styles/Buttons'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'

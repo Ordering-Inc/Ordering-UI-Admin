@@ -61,7 +61,7 @@ export const DriversGroupLogistics = (props) => {
   return (
     <LogisticsContainer>
       <OrderStatusWrapper
-        onClick={() => handleChangesState('orders_group_start_in_status', 7)}
+        onClick={() => handleChangesState({ orders_group_start_in_status: 7 })}
       >
         <RadioButton
           active={
@@ -83,7 +83,7 @@ export const DriversGroupLogistics = (props) => {
         <span>{t('ACCEPT_BY_BUSINESS', 'Accepted by Business.')}</span>
       </OrderStatusWrapper>
       <OrderStatusWrapper
-        onClick={() => handleChangesState('orders_group_start_in_status', 4)}
+        onClick={() => handleChangesState({ orders_group_start_in_status: 4 })}
       >
         <RadioButton
           active={
