@@ -20,11 +20,13 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import { OrdersList } from './pages/OrdersList'
 import { DeliveriesManager } from './pages/DeliveriesManager'
 import { DriversList } from './pages/DriversList'
-import { UsersList } from './pages/UsersList'
+import { CustomersList } from './pages/CustomersList'
+import { ManagersList } from './pages/ManagersList'
 import { BusinessesList } from './pages/BusinessesList'
 import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
+import { DriverAnalytics } from './pages/DriverAnalytics'
 import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
 import { Cms } from './pages/Cms'
@@ -34,12 +36,15 @@ import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
+import { DeliveryDriversList } from './pages/DeliveryDriversList'
+import { DriversManagersList } from './pages/DriversManagersList'
+import { DriversCompaniesList } from './pages/DriversCompaniesList'
+import { DriversGroupsList } from './pages/DriversGroupsList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
-import { DriverAnalytics } from './pages/DriverAnalytics'
 
 export const App = () => {
   const [{ auth, loading }] = useSession()
@@ -146,10 +151,17 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/users'>
+                    <Route exact path='/users/customers'>
                       {
                         auth
-                          ? <UsersList />
+                          ? <CustomersList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/users/managers'>
+                      {
+                        auth
+                          ? <ManagersList />
                           : <Redirect to='/login' />
                       }
                     </Route>
@@ -234,6 +246,34 @@ export const App = () => {
                       {
                         auth
                           ? <ReviewsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/delivery/drivers-list'>
+                      {
+                        auth
+                          ? <DeliveryDriversList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/delivery/drivers-managers'>
+                      {
+                        auth
+                          ? <DriversManagersList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/delivery/drivers-companies'>
+                      {
+                        auth
+                          ? <DriversCompaniesList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/delivery/drivers-groups'>
+                      {
+                        auth
+                          ? <DriversGroupsList />
                           : <Redirect to='/login' />
                       }
                     </Route>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserTypeFilter as UserTypeFilterController } from 'ordering-components-admin'
+import { useLanguage, UserTypeFilter as UserTypeFilterController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { DragScroll } from '../DragScroll'
 import MdClose from '@meronex/icons/ios/MdClose'
@@ -19,17 +19,24 @@ export const UserTypeFilterUI = (props) => {
     handleChangeUserType && handleChangeUserType(type)
   }
 
+  const checkIsActive = (subTypes) => {
+    const isSame = (subTypes.length === currentTypesSelected.length) && subTypes.every((element, index) => {
+      return element === currentTypesSelected[index]
+    })
+    return isSame
+  }
+
   return (
     <UserTypeFilterContainer>
       <DragScroll>
         {userTypes && userTypes.length > 0 && userTypes.map(type => (
           <Button
-            key={type.value}
-            color={currentTypesSelected.includes(type.value) ? 'primary' : 'secundaryDark'}
+            key={type.id}
+            color={checkIsActive(type.value) ? 'primary' : 'secundaryDark'}
             onClick={() => handleChangeUserRole(type.value)}
           >
-            {type.key}
-            {currentTypesSelected.includes(type.value) && <MdClose />}
+            {type.title}
+            {checkIsActive(type.value) && <MdClose />}
           </Button>
         ))}
       </DragScroll>
@@ -38,16 +45,18 @@ export const UserTypeFilterUI = (props) => {
 }
 
 export const UserTypeFilter = (props) => {
+  const [, t] = useLanguage()
+
   const userTypeFilterProps = {
     ...props,
     UIComponent: UserTypeFilterUI,
     userTypes: props.userTypes || [
-      { key: 'Users', value: 3 },
-      { key: 'Business owner', value: 2 },
-      { key: 'City manager', value: 1 },
-      { key: 'Administrators', value: 0 }
+      { id: 1, title: t('ALL', 'All'), value: [0, 1, 2] },
+      { id: 2, title: t('BUSINESS_OWNER', 'Business owner'), value: [2] },
+      { id: 3, title: t('CITY_MANAGER', 'City manager'), value: [1] },
+      { id: 4, title: t('ADMINISTRATORS', 'Administrators'), value: [0] }
     ],
-    defaultUserTypes: props.defaultUserTypes || [0, 1, 2, 3],
+    defaultUserTypes: props.defaultUserTypes || [0, 1, 2],
     onChangeUserType: props.handleChangeUserType
   }
 

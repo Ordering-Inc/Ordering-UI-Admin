@@ -13,6 +13,7 @@ import {
   Headset as HeadsetIcon,
   Globe2,
   GraphUp,
+  Truck,
   WindowDock
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
@@ -91,6 +92,27 @@ export const SidebarMenu = (props) => {
     }
   ]
 
+  const usersSubMenus = [
+    {
+      id: 1,
+      title: t('CUSTOMERS', 'Customers'),
+      pageName: 'customers',
+      url: '/users/customers'
+    },
+    {
+      id: 2,
+      title: t('MANAGERS', 'Managers'),
+      pageName: 'managers',
+      url: '/users/managers'
+    },
+    {
+      id: 3,
+      title: t('OPERATION', 'Operation'),
+      pageName: 'usersOperation',
+      url: '/users/operation'
+    }
+  ]
+
   const settingsSubMenus = [
     {
       id: 1,
@@ -156,6 +178,34 @@ export const SidebarMenu = (props) => {
       url: '/intelligence/invoice'
     }
   ]
+
+  const deliverySubmenus = [
+    {
+      id: 1,
+      title: t('DRIVERS', 'Drivers'),
+      pageName: 'delivery_drivers',
+      url: '/delivery/drivers-list'
+    },
+    {
+      id: 2,
+      title: t('DRIVERS_MANAGER', 'Drivers manager'),
+      pageName: 'drivers_managers',
+      url: '/delivery/drivers-managers'
+    },
+    {
+      id: 3,
+      title: t('DRIVERS_COMPANIES', 'Drivers companies'),
+      pageName: 'drivers_companies',
+      url: '/delivery/drivers-companies'
+    },
+    {
+      id: 4,
+      title: t('DRIVERS_GROUPS', 'Drivers groups'),
+      pageName: 'drivers_groups',
+      url: '/delivery/drivers-groups'
+    }
+  ]
+
   const handleGoToPage = (data) => {
     if (windowSize.width < 768) {
       handleMenuCollapse(true)
@@ -274,26 +324,38 @@ export const SidebarMenu = (props) => {
                   <MenuContainer>
                     <ContextAwareToggle
                       eventKey='4'
-                      page='users'
-                      handleGoToPage={handleGoToPage}
                       active={
-                        location.pathname === '/users'
+                        location.pathname === '/users/customers' ||
+                        location.pathname === '/users/managers' ||
+                        location.pathname === '/users/operation'
                       }
                     >
                       <PeopleIcon />
                       <span>{t('USERS', 'Users')}</span>
                     </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='4'>
+                      <MenuContent>
+                        {usersSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
                   </MenuContainer>
 
                   <MenuContainer>
                     <ContextAwareToggle
                       eventKey='5'
                       active={
-                        location.pathname === '/analytics/business' ||
-                        location.pathname === '/analytics/drivers' ||
-                        location.pathname === '/analytics/promotions' ||
-                        location.pathname === '/analytics/business_intelligence' ||
-                        location.pathname === '/analytics/invoice'
+                        location.pathname === '/intelligence/business' ||
+                        location.pathname === '/intelligence/drivers' ||
+                        location.pathname === '/intelligence/reviews' ||
+                        location.pathname === '/intelligence/invoice'
                       }
                     >
                       <BarChartLineIcon />
@@ -338,6 +400,34 @@ export const SidebarMenu = (props) => {
                       </MenuContent>
                     </Accordion.Collapse>
                   </MenuContainer>
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='7'
+                      active={
+                        location.pathname === '/delivery/drivers-list' ||
+                        location.pathname === '/delivery/drivers-managers' ||
+                        location.pathname === '/delivery/drivers-companies' ||
+                        location.pathname === '/delivery/drivers-groups'
+                      }
+                    >
+                      <Truck />
+                      <span>{t('DELIVERY', 'Delivery')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='7'>
+                      <MenuContent>
+                        {deliverySubmenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
                 </Accordion>
               </div>
               <div className='d-flex flex-column mt-4'>
@@ -353,6 +443,9 @@ export const SidebarMenu = (props) => {
                         active={
                           location.pathname === '/settings/basic' ||
                           location.pathname === '/settings/operation' ||
+                          location.pathname === '/settings/pages' ||
+                          location.pathname === '/settings/integrations' ||
+                          location.pathname === '/settings/places' ||
                           location.pathname === '/settings/advanced' ||
                           location.pathname === '/settings/language'
                         }

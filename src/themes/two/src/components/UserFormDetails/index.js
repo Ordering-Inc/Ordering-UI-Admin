@@ -14,6 +14,7 @@ import { FormInput, ActionsForm, SkeletonForm, WrapperUserTypeSelector } from '.
 
 export const UserFormDetailsUI = (props) => {
   const {
+    isDelivery,
     isEdit,
     formState,
     onCancel,
@@ -311,14 +312,16 @@ export const UserFormDetailsUI = (props) => {
              props.afterMidComponents?.map((MidComponent, i) => (
                <MidComponent key={i} {...props} />))
             }
-            <WrapperUserTypeSelector>
-              <UserTypeSelector
-                isPrimary
-                userId={user.id}
-                defaultUserType={formState?.changes?.level || user?.level}
-                handleChangeUserType={handleChangeUserType}
-              />
-            </WrapperUserTypeSelector>
+            {!isDelivery && (
+              <WrapperUserTypeSelector>
+                <UserTypeSelector
+                  isPrimary
+                  userId={user.id}
+                  defaultUserType={formState?.changes?.level || user?.level}
+                  handleChangeUserType={handleChangeUserType}
+                />
+              </WrapperUserTypeSelector>
+            )}
             <ActionsForm>
               {onCancel && (
                 <Button

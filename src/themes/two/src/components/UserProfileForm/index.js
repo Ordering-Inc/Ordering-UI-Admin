@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { Camera as CameraIcon } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import { DriverGroupSetting } from '../DriverGroupSetting'
 
 import {
   UserFormDetails as UserProfileController,
@@ -37,7 +38,8 @@ const UserProfileFormUI = (props) => {
     cleanFormState,
     toggleIsEdit,
     isHiddenAddress,
-    userState
+    userState,
+    isDriversPage
   } = props
 
   const [, t] = useLanguage()
@@ -144,6 +146,13 @@ const UserProfileFormUI = (props) => {
                   {(userData?.cellphone || userState?.result?.result?.cellphone) && (
                     <p>{(userData?.country_phone_code || userState?.result?.result?.country_phone_code) && `+${(userData?.country_phone_code || userState?.result?.result?.country_phone_code)} `}{(userData?.cellphone || userState?.result?.result?.cellphone)}</p>
                   )}
+                  {(userData?.birthdate || userState?.result?.result?.birthdate) && (
+                    <p>
+                      <span>{t('BIRTHDATE', 'Birthdate')}</span>
+                      <span>: </span>
+                      <span>{userData?.birthdate || userState?.result?.result?.birthdate}</span>
+                    </p>
+                  )}
                 </UserData>
               )}
             </SideForm>
@@ -168,6 +177,10 @@ const UserProfileFormUI = (props) => {
           >
             {t('EDIT', 'Edit')}
           </Button>
+        )}
+
+        {isDriversPage && !edit && (
+          <DriverGroupSetting userId={userData?.id || userState?.result?.result?.id} />
         )}
       </Container>
       <Alert

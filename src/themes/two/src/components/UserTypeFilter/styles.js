@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const UserTypeFilterContainer = styled.div`
   width: 100%;
-  padding: 20px 0;
+  margin-top: 20px;
   button {
     white-space: nowrap;
     ${props => props.theme?.rtl ? css`

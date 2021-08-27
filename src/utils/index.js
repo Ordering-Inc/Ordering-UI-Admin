@@ -159,3 +159,28 @@ export const sortInputFields = ({ fields, values }) => {
   })
   return fieldsSorted
 }
+
+/**
+ * Function to covert seconds into remain hours
+ * @param {Number} seconds
+ */
+export const getHours = (seconds) => {
+  return (seconds * 1) / 3600 > 1 ? Math.floor((seconds * 1) / 3600) : 0
+}
+
+/**
+ * Function to covert seconds into remain Minutes
+ * @param {Number} seconds
+ */
+export const getMinutes = (seconds) => {
+  return Math.floor((seconds - Math.floor(seconds / 3600) * 3600) / 60)
+}
+
+/**
+ * Function to covert seconds into remain Seconds
+ * @param {Number} seconds
+ */
+export const getSeconds = (seconds) => {
+  const remain = seconds - Math.floor(seconds / 3600) * 3600
+  return Math.floor(remain - Math.floor(remain / 60) * 60)
+}
