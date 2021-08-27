@@ -287,3 +287,53 @@ export const BrandListBottomContainer = styled.div`
     color: ${props => props.theme.colors?.lightGray};
   }
 `
+
+export const BrandDetailContainer = styled.div`
+  padding: 20px;
+  width: 100%;
+`
+
+export const DetailHeder = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+
+  > span {
+    font-weight: bold;
+    font-size: 20px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+  }
+`
+
+export const TabContainer = styled.div`
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid ${props => props.theme?.colors.borderColor};
+`
+
+export const Tab = styled.div`
+  padding: 10px 0px;
+  font-size: 14px;
+  cursor: pointer;
+  color: ${props => props.theme.colors?.headingColor};
+  white-space: nowrap;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 30px;
+  ` : css`
+    margin-right: 30px;
+  `}
+
+  ${({ active }) => active && css`
+    border-bottom: 1px solid;
+    font-weight: 500;
+  `}
+
+  ${({ active }) => !active && css`
+    color: ${props => props.theme?.colors.lightGray};
+    font-size: 12px;
+  `}
+`

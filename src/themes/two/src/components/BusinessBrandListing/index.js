@@ -11,6 +11,7 @@ import { useTheme } from 'styled-components'
 import { Switch } from '../../styles/Switch'
 import { SearchBar } from '../SearchBar'
 import { Alert } from '../Confirm'
+import { SideBar } from '../SideBar'
 import {
   BrandListingContainer,
   HeaderContainer,
@@ -26,7 +27,11 @@ import {
   BrandGeneralInfo,
   InfoBlock,
   BrandListTableWrapper,
-  BrandListBottomContainer
+  BrandListBottomContainer,
+  BrandDetailContainer,
+  DetailHeder,
+  TabContainer,
+  Tab
 } from './styles'
 
 const BusinessBrandListingUI = (props) => {
@@ -45,16 +50,24 @@ const BusinessBrandListingUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [brandList, setBrandList] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [openDetail, setOpenDetail] = useState(false)
+  const [selectedType, setSelectedType] = useState('general')
+
+  const handleCloseSidebar = () => {
+    setOpenDetail(false)
+  }
+
+  const handleOpenSideBar = (id) => {
+    if (id) console.log('edit')
+    else console.log('create')
+    setOpenDetail(true)
+  }
 
   const closeAlert = () => {
     setAlertState({
       open: false,
       content: []
     })
-  }
-
-  const handleEditPage = () => {
-    console.log('edit')
   }
 
   useEffect(() => {
@@ -97,7 +110,7 @@ const BusinessBrandListingUI = (props) => {
             <Button
               borderRadius='8px'
               color='lightPrimary'
-              // onClick={() => handleEditProduct()}
+              onClick={handleOpenSideBar}
             >
               {t('ADD_Brand', 'Add brand')}
             </Button>
@@ -147,7 +160,6 @@ const BusinessBrandListingUI = (props) => {
               brandList.map(brand => (
                 <BrandBody
                   key={brand.id}
-                  // onClick={e => onClickPage(e, page.id)}
                 >
                   <tr>
                     <td>
@@ -176,7 +188,7 @@ const BusinessBrandListingUI = (props) => {
                             id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                           >
                             <Dropdown.Item
-                              onClick={() => handleEditPage(brand.id)}
+                              onClick={() => handleOpenSideBar(brand.id)}
                             >
                               {t('EDIT', 'Edit')}
                             </Dropdown.Item>
@@ -198,6 +210,48 @@ const BusinessBrandListingUI = (props) => {
         <BrandListBottomContainer>
           <span>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
         </BrandListBottomContainer>
+        {openDetail && (
+          <SideBar
+            sidebarId='brand-details'
+            defaultSideBarWidth={500}
+            open={openDetail}
+            onClose={() => handleCloseSidebar()}
+          >
+            <BrandDetailContainer>
+              <DetailHeder>
+                <span>Brand name</span>
+                <Switch
+                  defaultChecked={false}
+                  // onChange={(enabled) => handleChangeState(brand.id, 'enabled', enabled)}
+                />
+              </DetailHeder>
+              <TabContainer>
+                <Tab
+                  active={selectedType === 'general'}
+                  onClick={() => setSelectedType('general')}
+                >
+                  {t('GENERAL', 'General')}
+                </Tab>
+                <Tab
+                  active={selectedType === 'businesses'}
+                  onClick={() => setSelectedType('businesses')}
+                >
+                  {t('BUSINESSES', 'Businesses')}
+                </Tab>
+              </TabContainer>
+              {
+                selectedType === 'general' && (
+                  <div>General</div>
+                )
+              }
+              {
+                selectedType === 'businesses' && (
+                  <div>Businesses</div>
+                )
+              }
+            </BrandDetailContainer>
+          </SideBar>
+        )}
       </BrandListingContainer>
       <Alert
         title={t('TRANSLATIONS', 'Translations')}
