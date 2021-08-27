@@ -44,6 +44,7 @@ import { InvoiceManager } from './src/components/InvoiceManager'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { IntegrationListing } from './src/components/IntegrationListing'
 import { InterActOrderMarker } from './src/components/InterActOrderMarker'
+import { LanguageManager } from './src/components/LanguageManager'
 import { Layout } from './src/components/Layout'
 import { LoginForm } from './src/components/LoginForm'
 import { LogisticInformation } from './src/components/LogisticInformation'
@@ -151,6 +152,7 @@ export {
   InputPhoneNumber,
   IntegrationListing,
   InterActOrderMarker,
+  LanguageManager,
   Layout,
   LoginForm,
   LogisticInformation,
