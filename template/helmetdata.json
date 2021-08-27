@@ -48,6 +48,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "brand": {
+    "title": "Businesse Brand",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "basicSettings": {
     "title": "Basic settings",
     "description": "a dummy description about this page",

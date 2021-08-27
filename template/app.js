@@ -22,6 +22,7 @@ import { DeliveriesManager } from './pages/DeliveriesManager'
 import { DriversList } from './pages/DriversList'
 import { UsersList } from './pages/UsersList'
 import { BusinessesList } from './pages/BusinessesList'
+import { BrandManager } from './pages/BrandManager'
 import { BasicSettings } from './pages/BasicSettings'
 import { OperationSettings } from './pages/OperationSettings'
 import { BusinessProductsList } from './pages/BusinessProductsList'
@@ -153,10 +154,17 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/businesses'>
+                    <Route exact path='/stores/list'>
                       {
                         auth
                           ? <BusinessesList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/stores/brand'>
+                      {
+                        auth
+                          ? <BrandManager />
                           : <Redirect to='/login' />
                       }
                     </Route>
