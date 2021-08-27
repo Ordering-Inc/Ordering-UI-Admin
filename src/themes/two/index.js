@@ -27,6 +27,8 @@ import { DeliveryDashboard } from './src/components/DeliveryDashboard'
 import { DeliveryTypeSelector } from './src/components/DeliveryTypeSelector'
 import { DragScroll } from './src/components/DragScroll'
 import { DriverMapMarkerAndInfo } from './src/components/DriverMapMarkerAndInfo'
+import { DriversCompaniesListing } from './src/components/DriversCompaniesListing'
+import { DriversGroupsListing } from './src/components/DriversGroupsListing'
 import { OrdersLateralBar } from './src/components/OrdersLateralBar'
 import { DriversBusyStatusFilter } from './src/components/DriversBusyStatusFilter'
 import { DriverAnalytics } from './src/components/DriverAnalytics'
@@ -136,10 +138,12 @@ export {
   DragScroll,
   DriverAnalytics,
   DriverMapMarkerAndInfo,
+  DriversCompaniesListing,
   OrdersLateralBar,
   DriversBusyStatusFilter,
   DriversDashboard,
   DriverSelector,
+  DriversGroupsListing,
   DriversGroupTypeSelector,
   DriversList,
   DriversLocation,
