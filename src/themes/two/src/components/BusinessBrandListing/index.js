@@ -12,6 +12,7 @@ import { Switch } from '../../styles/Switch'
 import { SearchBar } from '../SearchBar'
 import { Alert } from '../Confirm'
 import { SideBar } from '../SideBar'
+import { BusinessBrandGENDetail } from '../BusinessBrandGENDetail'
 import {
   BrandListingContainer,
   HeaderContainer,
@@ -241,7 +242,7 @@ const BusinessBrandListingUI = (props) => {
               </TabContainer>
               {
                 selectedType === 'general' && (
-                  <div>General</div>
+                  <BusinessBrandGENDetail {...props} />
                 )
               }
               {
