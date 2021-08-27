@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.capitalize = exports.getIconCard = exports.optimizeImage = void 0;
+exports.getSeconds = exports.getMinutes = exports.getHours = exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.capitalize = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -230,5 +230,39 @@ var sortInputFields = function sortInputFields(_ref) {
   });
   return fieldsSorted;
 };
+/**
+ * Function to covert seconds into remain hours
+ * @param {Number} seconds
+ */
+
 
 exports.sortInputFields = sortInputFields;
+
+var getHours = function getHours(seconds) {
+  return seconds * 1 / 3600 > 1 ? Math.floor(seconds * 1 / 3600) : 0;
+};
+/**
+ * Function to covert seconds into remain Minutes
+ * @param {Number} seconds
+ */
+
+
+exports.getHours = getHours;
+
+var getMinutes = function getMinutes(seconds) {
+  return Math.floor((seconds - Math.floor(seconds / 3600) * 3600) / 60);
+};
+/**
+ * Function to covert seconds into remain Seconds
+ * @param {Number} seconds
+ */
+
+
+exports.getMinutes = getMinutes;
+
+var getSeconds = function getSeconds(seconds) {
+  var remain = seconds - Math.floor(seconds / 3600) * 3600;
+  return Math.floor(remain - Math.floor(remain / 60) * 60);
+};
+
+exports.getSeconds = getSeconds;

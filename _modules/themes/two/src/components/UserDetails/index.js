@@ -54,7 +54,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsUI = function UserDetailsUI(props) {
   var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7;
 
-  var userState = props.userState,
+  var isDriversPage = props.isDriversPage,
+      isDriversManagersPage = props.isDriversManagersPage,
+      userState = props.userState,
       setExtraOpen = props.setExtraOpen,
       handleSuccessUpdate = props.handleSuccessUpdate,
       handleSuccessAddressesUpdate = props.handleSuccessAddressesUpdate;
@@ -70,9 +72,12 @@ var UserDetailsUI = function UserDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserName, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", null, userState === null || userState === void 0 ? void 0 : (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.name, " ", userState === null || userState === void 0 ? void 0 : (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.lastname)), /*#__PURE__*/_react.default.createElement(_UserDetailsMenu.UserDetailsMenu, {
+    isDelivery: isDriversPage || isDriversManagersPage,
     currentMenuSelected: currentMenuSelected,
     handleChangeMenu: setCurrentMenuSelected
   }), !(userState !== null && userState !== void 0 && userState.loading) && (userState === null || userState === void 0 ? void 0 : userState.user) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentMenuSelected === 'profile' && /*#__PURE__*/_react.default.createElement(_UserProfileForm.UserProfileForm, {
+    isDriversPage: isDriversPage,
+    isDriversManagersPage: isDriversManagersPage,
     user: userState.user,
     handleSuccessUpdate: handleSuccessUpdate
   }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 ? void 0 : (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.addresses) && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {

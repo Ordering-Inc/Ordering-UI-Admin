@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 100px);\n  overflow: auto;\n  padding-bottom: 20px;\n  padding: 0 5px;\n  > button {\n    position: absolute;\n    bottom: 35px;\n    height: 44px;\n  }\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 100px);\n  overflow: auto;\n  padding-bottom: 20px;\n  padding: 0 5px;\n  > button {\n    height: 44px;\n    margin: 40px 0;\n    display: block;\n  }\n"])));
 
 exports.Container = Container;
 
@@ -25,14 +25,16 @@ var UserProfileContainer = _styledComponents.default.div(_templateObject2 || (_t
 
 exports.UserProfileContainer = UserProfileContainer;
 
-var UserImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n  margin: 0 auto;\n\n  @media (min-width: 768px){\n    width: auto;\n  }\n"])));
+var UserImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n  width: 100%;\n\n  @media (min-width: 768px){\n    width: auto;\n  }\n"])));
 
 exports.UserImage = UserImage;
 
-var Image = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 90px;\n  height: 90px;\n  border-radius: 8px;\n  overflow: hidden;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  ", "\n\n  img,\n  div:first-child {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])), function (_ref) {
+var Image = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 90px;\n  height: 90px;\n  border-radius: 8px;\n  overflow: hidden;\n  background: ", ";\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  border: 1px solid ", ";\n\n  ", "\n\n  img,\n  div:first-child {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    border: none;\n    overflow: hidden;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])), function (_ref) {
   var isImage = _ref.isImage,
       theme = _ref.theme;
   return isImage ? '#FFF' : "".concat(theme.colors.backgroundPage);
+}, function (props) {
+  return props.theme.colors.borderColor;
 }, function (_ref2) {
   var isEdit = _ref2.isEdit;
   return !isEdit && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));

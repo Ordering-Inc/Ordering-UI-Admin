@@ -25,6 +25,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var UserTypeFilterUI = function UserTypeFilterUI(props) {
   var handleChangeUserType = props.handleChangeUserType,
       userTypes = props.userTypes,
@@ -34,36 +46,51 @@ var UserTypeFilterUI = function UserTypeFilterUI(props) {
     handleChangeUserType && handleChangeUserType(type);
   };
 
+  var checkIsActive = function checkIsActive(subTypes) {
+    var isSame = subTypes.length === currentTypesSelected.length && subTypes.every(function (element, index) {
+      return element === currentTypesSelected[index];
+    });
+    return isSame;
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.UserTypeFilterContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, userTypes && userTypes.length > 0 && userTypes.map(function (type) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      key: type.value,
-      color: currentTypesSelected.includes(type.value) ? 'primary' : 'secundaryDark',
+      key: type.id,
+      color: checkIsActive(type.value) ? 'primary' : 'secundaryDark',
       onClick: function onClick() {
         return handleChangeUserRole(type.value);
       }
-    }, type.key, currentTypesSelected.includes(type.value) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
+    }, type.title, checkIsActive(type.value) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
   })));
 };
 
 exports.UserTypeFilterUI = UserTypeFilterUI;
 
 var UserTypeFilter = function UserTypeFilter(props) {
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var userTypeFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserTypeFilterUI,
     userTypes: props.userTypes || [{
-      key: 'Users',
-      value: 3
+      id: 1,
+      title: t('ALL', 'All'),
+      value: [0, 1, 2]
     }, {
-      key: 'Business owner',
-      value: 2
+      id: 2,
+      title: t('BUSINESS_OWNER', 'Business owner'),
+      value: [2]
     }, {
-      key: 'City manager',
-      value: 1
+      id: 3,
+      title: t('CITY_MANAGER', 'City manager'),
+      value: [1]
     }, {
-      key: 'Administrators',
-      value: 0
+      id: 4,
+      title: t('ADMINISTRATORS', 'Administrators'),
+      value: [0]
     }],
-    defaultUserTypes: props.defaultUserTypes || [0, 1, 2, 3],
+    defaultUserTypes: props.defaultUserTypes || [0, 1, 2],
     onChangeUserType: props.handleChangeUserType
   });
 

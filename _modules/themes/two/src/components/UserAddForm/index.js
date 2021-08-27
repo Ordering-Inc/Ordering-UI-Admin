@@ -79,7 +79,9 @@ var UserAddFormUI = function UserAddFormUI(props) {
       handleButtonAddClick = props.handleButtonAddClick,
       isCheckout = props.isCheckout,
       handleChangeUserType = props.handleChangeUserType,
-      handlechangeImage = props.handlechangeImage;
+      handlechangeImage = props.handlechangeImage,
+      isDriversPage = props.isDriversPage,
+      isDriversManagersPage = props.isDriversManagersPage;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -241,10 +243,26 @@ var UserAddFormUI = function UserAddFormUI(props) {
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   (0, _react.useEffect)(function () {
-    cleanFormState && cleanFormState({
-      changes: {}
-    });
-  }, []);
+    if (isDriversPage) {
+      cleanFormState && cleanFormState({
+        changes: {
+          level: 4
+        }
+      });
+    } else if (isDriversManagersPage) {
+      cleanFormState && cleanFormState({
+        changes: {
+          level: 5
+        }
+      });
+    } else {
+      cleanFormState && cleanFormState({
+        changes: {
+          level: 3
+        }
+      });
+    }
+  }, [isDriversPage, isDriversManagersPage]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && emailInput.current) {
       var _formState$result3, _formState$result4, _formState$result4$re, _formState$changes$em, _formState$changes;
@@ -264,7 +282,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('USERS_REGISTER', 'New user')), /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, isDriversPage ? t('NEW_DRIVER', 'New driver') : isDriversManagersPage ? t('NEW_DRIVER_MANAGER', 'New driver manager') : t('USERS_REGISTER', 'New user')), /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     onClick: function onClick() {
@@ -345,7 +363,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
+  }), !(isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_styles.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
     defaultUserType: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.level,
     handleChangeUserType: handleChangeUserType

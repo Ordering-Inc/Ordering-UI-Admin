@@ -104,6 +104,22 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('CAMPAIGN', 'Campaign'),
     pageName: 'campaign'
   }];
+  var usersSubMenus = [{
+    id: 1,
+    title: t('CUSTOMERS', 'Customers'),
+    pageName: 'customers',
+    url: '/users/customers'
+  }, {
+    id: 2,
+    title: t('MANAGERS', 'Managers'),
+    pageName: 'managers',
+    url: '/users/managers'
+  }, {
+    id: 3,
+    title: t('OPERATION', 'Operation'),
+    pageName: 'usersOperation',
+    url: '/users/operation'
+  }];
   var settingsSubMenus = [{
     id: 1,
     title: t('BASIC_SETTINGS', 'Basic settings'),
@@ -155,6 +171,27 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('INVOICE_MANAGER', 'Invoice manager'),
     pageName: 'invoice',
     url: '/intelligence/invoice'
+  }];
+  var deliverySubmenus = [{
+    id: 1,
+    title: t('DRIVERS', 'Drivers'),
+    pageName: 'delivery_drivers',
+    url: '/delivery/drivers-list'
+  }, {
+    id: 2,
+    title: t('DRIVERS_MANAGER', 'Drivers manager'),
+    pageName: 'drivers_managers',
+    url: '/delivery/drivers-managers'
+  }, {
+    id: 3,
+    title: t('DRIVERS_COMPANIES', 'Drivers companies'),
+    pageName: 'drivers_companies',
+    url: '/delivery/drivers-companies'
+  }, {
+    id: 4,
+    title: t('DRIVERS_GROUPS', 'Drivers groups'),
+    pageName: 'drivers_groups',
+    url: '/delivery/drivers-groups'
   }];
 
   var handleGoToPage = function handleGoToPage(data) {
@@ -237,12 +274,22 @@ var SidebarMenu = function SidebarMenu(props) {
     active: location.pathname === '/businesses' || location.pathname.includes('/store/')
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), /*#__PURE__*/_react.default.createElement("span", null, t('STORES', 'Stores')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "4",
-    page: "users",
-    handleGoToPage: handleGoToPage,
-    active: location.pathname === '/users'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    active: location.pathname === '/users/customers' || location.pathname === '/users/managers' || location.pathname === '/users/operation'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "4"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, usersSubMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/analytics/business' || location.pathname === '/analytics/drivers' || location.pathname === '/analytics/promotions' || location.pathname === '/analytics/business_intelligence' || location.pathname === '/analytics/invoice'
+    active: location.pathname === '/intelligence/business' || location.pathname === '/intelligence/drivers' || location.pathname === '/intelligence/reviews' || location.pathname === '/intelligence/invoice'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, t('BUSINESS_INTELLIGENCE', 'Business Intelligence'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, businessIntelligenceSubMenus.map(function (item) {
@@ -270,11 +317,26 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    eventKey: "7",
+    active: location.pathname === '/delivery/drivers-list' || location.pathname === '/delivery/drivers-managers' || location.pathname === '/delivery/drivers-companies' || location.pathname === '/delivery/drivers-groups'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Truck, null), /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "7"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, deliverySubmenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
   })))))), /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column mt-4"
   }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/advanced' || location.pathname === '/settings/language'
+    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/pages' || location.pathname === '/settings/integrations' || location.pathname === '/settings/places' || location.pathname === '/settings/advanced' || location.pathname === '/settings/language'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, settingsSubMenus.map(function (item) {

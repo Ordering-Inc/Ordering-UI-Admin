@@ -25,6 +25,8 @@ var _Personalization = require("../Personalization");
 
 var _ProductExtras = require("../ProductExtras");
 
+var _ProductReviews = require("../ProductReviews");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -157,6 +159,9 @@ var ProductDetails = function ProductDetails(props) {
   }), showOption === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_ProductMetaFields.ProductMetaFields, {
     businessId: business.id,
     categoryId: product.category_id,
+    productId: product.id
+  }), showOption === 'reviews' && /*#__PURE__*/_react.default.createElement(_ProductReviews.ProductReviews, {
+    businessId: business.id,
     productId: product.id
   }), showOption === 'personalization' && /*#__PURE__*/_react.default.createElement(_Personalization.Personalization, {
     isShowTitle: true

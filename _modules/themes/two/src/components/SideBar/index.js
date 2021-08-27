@@ -36,7 +36,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SideBar = function SideBar(props) {
   var open = props.open,
       sidebarId = props.sidebarId,
-      defaultSideBarWidth = props.defaultSideBarWidth;
+      defaultSideBarWidth = props.defaultSideBarWidth,
+      moveDistance = props.moveDistance,
+      isBorderShow = props.isBorderShow;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -70,9 +72,11 @@ var SideBar = function SideBar(props) {
   (0, _react.useEffect)(function () {
     if (!open) return;
     actionSidebar(true);
-  }, [open]);
+  }, [open, defaultSideBarWidth]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
-    id: id
+    id: id,
+    isBorderShow: isBorderShow,
+    moveDistance: moveDistance
   }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {

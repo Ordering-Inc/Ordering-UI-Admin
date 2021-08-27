@@ -62,7 +62,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
   var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _formState$changes6, _props$afterComponent, _props$afterElements;
 
-  var isEdit = props.isEdit,
+  var isDelivery = props.isDelivery,
+      isEdit = props.isEdit,
       formState = props.formState,
       onCancel = props.onCancel,
       showField = props.showField,
@@ -387,7 +388,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
+  }), !isDelivery && /*#__PURE__*/_react.default.createElement(_styles.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
     userId: user.id,
     defaultUserType: (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.level) || (user === null || user === void 0 ? void 0 : user.level),

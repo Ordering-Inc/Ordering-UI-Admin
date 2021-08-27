@@ -87,7 +87,11 @@ var ProductMainDetailsUI = function ProductMainDetailsUI(props) {
   }, {
     key: 'custom_fields',
     value: t('CUSTOM_FIELDS', 'Custom fields')
-  }, {
+  }, // {
+  //   key: 'reviews',
+  //   value: t('REVIEWS', 'Reviews')
+  // },
+  {
     key: 'personalization',
     value: t('PERSONALIZATION', 'Personalization')
   }];

@@ -29,13 +29,26 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsMenu = function UserDetailsMenu(props) {
   var currentMenuSelected = props.currentMenuSelected,
-      handleChangeMenu = props.handleChangeMenu;
+      handleChangeMenu = props.handleChangeMenu,
+      isDelivery = props.isDelivery;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var menuItems = [{
+  var menuItems = isDelivery ? [{
+    key: 'profile',
+    content: t('PROFILE', 'Profile')
+  }, {
+    key: 'saved_places',
+    content: t('SAVED_PLACES', 'Saved places')
+  }, {
+    key: 'metafields',
+    content: t('METAFIELDS', 'Metafields')
+  }, {
+    key: 'personalization',
+    content: t('PERSONALIZATION', 'Personalization')
+  }] : [{
     key: 'profile',
     content: t('PROFILE', 'Profile')
   }, {

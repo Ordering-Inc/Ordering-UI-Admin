@@ -21,7 +21,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border: 1px solid #DEE2E6;\n  border-radius: 8px;\n  font-size: 14px;\n  padding: 10px 15px;\n  outline: none;\n\n  &:focus {\n    border-color: ", ";\n  }\n\n  ", "\n\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #B1BCCC;\n  }\n  &:-ms-input-placeholder {\n    color: #B1BCCC;\n  }\n"])), function (props) {
+var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border: 1px solid #DEE2E6;\n  border-radius: 8px;\n  font-size: 14px;\n  padding: 10px 15px;\n  outline: none;\n\n  &:focus {\n    border-color: ", ";\n  }\n\n  ", "\n\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #B1BCCC;\n  }\n  &:-ms-input-placeholder {\n    color: #B1BCCC;\n  }\n\n  &:read-only {\n    background-color: #F8F9FA;\n    cursor: not-allowed;\n    border-color: #DEE2E6;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');

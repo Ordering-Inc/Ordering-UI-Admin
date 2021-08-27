@@ -64,7 +64,9 @@ var UsersList = function UsersList(props) {
       selectedUsers = props.selectedUsers,
       handleSelectedUsers = props.handleSelectedUsers,
       handleOpenUserDetails = props.handleOpenUserDetails,
-      handleOpenUserAddForm = props.handleOpenUserAddForm;
+      handleOpenUserAddForm = props.handleOpenUserAddForm,
+      isDriversPage = props.isDriversPage,
+      isDriversManagersPage = props.isDriversManagersPage;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -107,9 +109,7 @@ var UsersList = function UsersList(props) {
     getUsers(expectedPage, pageSize);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", {
-    colSpan: 2
-  }, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", null), /*#__PURE__*/_react.default.createElement("th", {
     colSpan: 2
   }, t('ACTION', 'Action')))), usersList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
@@ -134,7 +134,7 @@ var UsersList = function UsersList(props) {
       width: 100
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })))), /*#__PURE__*/_react.default.createElement("td", null, !(isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_styles.UserTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
       style: {
         marginBottom: '10px'
@@ -170,7 +170,7 @@ var UsersList = function UsersList(props) {
       className: "bold"
     }, user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserTypeWrapper, {
+    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, !(isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_styles.UserTypeWrapper, {
       className: "user_type_selector"
     }, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
       userId: user.id,
@@ -178,10 +178,14 @@ var UsersList = function UsersList(props) {
       handleChangeUserType: handleChangeUserType
     }), /*#__PURE__*/_react.default.createElement("p", null, (_getUserType = getUserType(user === null || user === void 0 ? void 0 : user.level)) === null || _getUserType === void 0 ? void 0 : _getUserType.value))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserEnableWrapper, {
       className: "user_enable_control"
-    }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(UserActiveControlSwitch, {
-      userId: user.id,
+    }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
       defaultChecked: user === null || user === void 0 ? void 0 : user.enabled,
-      handleChangeActiveUser: handleChangeActiveUser
+      onChange: function onChange(enabled) {
+        return handleChangeActiveUser({
+          id: user.id,
+          enabled: enabled
+        });
+      }
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserActionSelector, {
       className: "user_action"
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
@@ -201,7 +205,7 @@ var UsersList = function UsersList(props) {
     onClick: function onClick() {
       return handleOpenUserAddForm();
     }
-  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  }, isDriversPage ? t('ADD_NEW_DRIVER', 'Add new driver') : isDriversManagersPage ? t('ADD_NEW_DRIVER_MANAGER', 'Add new driver manager') : t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
@@ -210,21 +214,3 @@ var UsersList = function UsersList(props) {
 };
 
 exports.UsersList = UsersList;
-
-var UserActiveControlSwitch = function UserActiveControlSwitch(props) {
-  var defaultChecked = props.defaultChecked,
-      userId = props.userId,
-      handleChangeActiveUser = props.handleChangeActiveUser;
-
-  var onChangeActiveUser = function onChangeActiveUser(enabled) {
-    handleChangeActiveUser({
-      id: userId,
-      enabled: enabled
-    });
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: defaultChecked,
-    onChange: onChangeActiveUser
-  });
-};

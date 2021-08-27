@@ -52,7 +52,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UsersListingUI = function UsersListingUI(props) {
-  var usersList = props.usersList,
+  var headerTitle = props.headerTitle,
+      isShowActiveStateFilter = props.isShowActiveStateFilter,
+      isShowUserTypeFilter = props.isShowUserTypeFilter,
+      isDriversPage = props.isDriversPage,
+      isDriversManagersPage = props.isDriversManagersPage,
+      usersList = props.usersList,
       handleSelectedUserTypes = props.handleSelectedUserTypes,
       paginationProps = props.paginationProps,
       getUsers = props.getUsers,
@@ -72,11 +77,6 @@ var UsersListingUI = function UsersListingUI(props) {
       onUserRedirect = props.onUserRedirect,
       handleSuccessUpdate = props.handleSuccessUpdate,
       handleSuccessAddUser = props.handleSuccessAddUser;
-
-  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
 
   var _useState = (0, _react.useState)(null),
@@ -142,7 +142,9 @@ var UsersListingUI = function UsersListingUI(props) {
     }
   }, [usersList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
-    title: t('USERS', 'Users'),
+    isDriversPage: isDriversPage,
+    isDriversManagersPage: isDriversManagersPage,
+    title: headerTitle,
     selectedUsers: selectedUsers,
     userTypesSelected: userTypesSelected,
     selectedUserActiveState: selectedUserActiveState,
@@ -151,15 +153,16 @@ var UsersListingUI = function UsersListingUI(props) {
     onSearch: onSearch,
     handleDeleteSeveralUsers: handleDeleteSeveralUsers,
     handleOpenUserAddForm: handleOpenUserAddForm
-  }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
+  }), isShowActiveStateFilter && /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
-  }), /*#__PURE__*/_react.default.createElement(_UserTypeFilter.UserTypeFilter, {
+  }), isShowUserTypeFilter && /*#__PURE__*/_react.default.createElement(_UserTypeFilter.UserTypeFilter, {
     handleChangeUserType: handleSelectedUserTypes
   }), /*#__PURE__*/_react.default.createElement(_UsersList.UsersList, {
+    isDriversPage: isDriversPage,
+    isDriversManagersPage: isDriversManagersPage,
     usersList: usersList,
     getUsers: getUsers,
-    userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     paginationProps: paginationProps,
     paginationDetail: paginationDetail,
     handleChangeUserType: handleChangeUserType,
@@ -167,9 +170,12 @@ var UsersListingUI = function UsersListingUI(props) {
     handleDeleteUser: handleDeleteUser,
     selectedUsers: selectedUsers,
     handleSelectedUsers: handleSelectedUsers,
+    userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
+    isDriversPage: isDriversPage,
+    isDriversManagersPage: isDriversManagersPage,
     open: isOpenUserDetails,
     user: openUser,
     userId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
@@ -184,6 +190,8 @@ var UsersListingUI = function UsersListingUI(props) {
       return setOpenUserAddForm(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_UserAddForm.UserAddForm, {
+    isDriversPage: isDriversPage,
+    isDriversManagersPage: isDriversManagersPage,
     handleSuccessAdd: handleSuccessAddUser,
     onClose: function onClose() {
       return setOpenUserAddForm(false);

@@ -9,7 +9,7 @@ exports.BarContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,14 +17,37 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  width: 0;\n  position: fixed;\n  z-index: 1005;\n  top: 0;\n  background: #FFF;\n  overflow-x: hidden;\n  transition: 0.3s;\n  height: 100vh;\n  box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);\n\n  ", "\n\n  > button {\n    position: absolute;\n    top: 20px;\n    ", "\n  }\n"])), function (props) {
-  var _props$theme;
+var BarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  width: 0;\n  position: fixed;\n  z-index: 1005;\n  top: 0;\n  background: #FFF;\n  overflow-x: hidden;\n  transition: 0.3s;\n  height: 100vh;\n  ", "\n\n  ", "\n\n  > button {\n    position: absolute;\n    top: 20px;\n    ", "\n  }\n"])), function (_ref) {
+  var isBorderShow = _ref.isBorderShow;
+  return isBorderShow ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    ", "\n  "])), function (props) {
+    var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    left: 0;\n  "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    right: 0;\n  "])));
+    return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
+      return props.theme.colors.borderColor;
+    }) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
+      return props.theme.colors.borderColor;
+    });
+  }) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);\n  "])));
 }, function (props) {
   var _props$theme2;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      right: 20px;\n    "])));
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    left: 0;\n    padding-left: ", ";\n  "])), function (_ref2) {
+    var moveDistance = _ref2.moveDistance;
+    return moveDistance ? "".concat(moveDistance, "px") : '0px';
+  }) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    right: 0;\n    padding-right: ", ";\n  "])), function (_ref3) {
+    var moveDistance = _ref3.moveDistance;
+    return moveDistance ? "".concat(moveDistance, "px") : '0px';
+  });
+}, function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      left: ", ";\n    "])), function (_ref4) {
+    var moveDistance = _ref4.moveDistance;
+    return moveDistance ? "".concat(moveDistance + 20, "px") : '20px';
+  }) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      right: ", ";\n    "])), function (_ref5) {
+    var moveDistance = _ref5.moveDistance;
+    return moveDistance ? "".concat(moveDistance + 20, "px") : '20px';
+  });
 });
 
 exports.BarContainer = BarContainer;

@@ -38,7 +38,7 @@ var SkeletonForm = _styledComponents.default.div(_templateObject5 || (_templateO
 
 exports.SkeletonForm = SkeletonForm;
 
-var WrapperUserTypeSelector = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 10px;\n\n  div.select {\n    border: none;\n    background-color: ", ";\n  }\n\n  > div {\n    width: 100%;\n    color: ", ";\n  }\n"])), function (props) {
+var WrapperUserTypeSelector = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 10px;\n\n  div.select {\n    border: none;\n    background-color: ", ";\n    padding-top: 4px;\n    padding-bottom: 4px;\n  }\n\n  > div {\n    width: 100%;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 }, function (props) {
   return props.theme.colors.secundaryContrast;
