@@ -31,8 +31,10 @@ import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
 import { Cms } from './pages/Cms'
 import { IntegrationsList } from './pages/IntegrationsList'
+import { LanguageManager } from './pages/LanguageManager'
 import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
+import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
 import { DriversManagersList } from './pages/DriversManagersList'
@@ -205,6 +207,13 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
+                    <Route exact path='/settings/language'>
+                      {
+                        auth
+                          ? <LanguageManager />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route exact path='/store/:store'>
                       {
                         auth
@@ -265,6 +274,13 @@ export const App = () => {
                       {
                         auth
                           ? <DriversGroupsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/ordering-products'>
+                      {
+                        auth
+                          ? <OrderingProducts />
                           : <Redirect to='/login' />
                       }
                     </Route>

@@ -125,6 +125,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "language": {
+    "title": "Language",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "places": {
     "title": "Places",
     "description": "a dummy description about this page",
@@ -169,6 +176,13 @@
   },
   "drivers_groups": {
     "title": "Driver groups",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "ordering_products": {
+    "title": "Ordering Products",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

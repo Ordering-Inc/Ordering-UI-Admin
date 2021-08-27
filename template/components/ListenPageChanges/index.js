@@ -25,6 +25,7 @@ export const ListenPageChanges = ({ children }) => {
     pages: '/settings/pages',
     places: '/settings/places',
     integrations: '/settings/integrations',
+    language: '/settings/language',
     business_analytics: '/intelligence/business',
     drivers_analytics: '/intelligence/drivers',
     invoice: '/intelligence/invoice',
@@ -32,7 +33,8 @@ export const ListenPageChanges = ({ children }) => {
     delivery_drivers: '/delivery/drivers-list',
     drivers_managers: '/delivery/drivers-managers',
     drivers_companies: '/delivery/drivers-companies',
-    drivers_groups: '/delivery/drivers-groups'
+    drivers_groups: '/delivery/drivers-groups',
+    ordering_products: '/ordering-products'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

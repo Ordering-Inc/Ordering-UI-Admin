@@ -44,6 +44,7 @@ import { InvoiceManager } from './src/components/InvoiceManager'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { IntegrationListing } from './src/components/IntegrationListing'
 import { InterActOrderMarker } from './src/components/InterActOrderMarker'
+import { LanguageManager } from './src/components/LanguageManager'
 import { Layout } from './src/components/Layout'
 import { LoginForm } from './src/components/LoginForm'
 import { LogisticInformation } from './src/components/LogisticInformation'
@@ -58,6 +59,7 @@ import { OrderDelete } from './src/components/OrderDelete'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrderDetailsHeader } from './src/components/OrderDetailsHeader'
 import { OrderNotification } from './src/components/OrderNotification'
+import { OrderingProducts } from './src/components/OrderingProducts'
 import { OrdersCards } from './src/components/OrdersCards'
 import { OrdersContentHeader } from './src/components/OrdersContentHeader'
 import { OrdersDashboard } from './src/components/OrdersDashboard'
@@ -150,6 +152,7 @@ export {
   InputPhoneNumber,
   IntegrationListing,
   InterActOrderMarker,
+  LanguageManager,
   Layout,
   LoginForm,
   LogisticInformation,
@@ -158,6 +161,7 @@ export {
   Messages,
   MessagesListing,
   Modal,
+  OrderingProducts,
   OrderBill,
   OrderContactInformation,
   OrderDelete,

@@ -13,7 +13,8 @@ import {
   Headset as HeadsetIcon,
   Globe2,
   GraphUp,
-  Truck
+  Truck,
+  WindowDock
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -142,6 +143,12 @@ export const SidebarMenu = (props) => {
       title: t('COUNTRIES_CITIES', 'Countries/Cities'),
       pageName: 'places',
       url: '/settings/places'
+    },
+    {
+      id: 6,
+      title: t('LANGUAGE_MANAGER', 'Language manager'),
+      pageName: 'language',
+      url: '/settings/language'
     }
   ]
 
@@ -438,7 +445,9 @@ export const SidebarMenu = (props) => {
                           location.pathname === '/settings/operation' ||
                           location.pathname === '/settings/pages' ||
                           location.pathname === '/settings/integrations' ||
-                          location.pathname === '/settings/places'
+                          location.pathname === '/settings/places' ||
+                          location.pathname === '/settings/advanced' ||
+                          location.pathname === '/settings/language'
                         }
                       >
                         <GearIcon />
@@ -460,6 +469,14 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
+                <Button
+                  className='d-flex align-items-center'
+                  variant={location.pathname === '/ordering-products' && 'primary'}
+                  onClick={() => handleGoToPage({ page: 'ordering_products' })}
+                >
+                  <WindowDock />
+                  {!isCollapse && <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>}
+                </Button>
 
                 <Button
                   className='d-flex align-items-center'
