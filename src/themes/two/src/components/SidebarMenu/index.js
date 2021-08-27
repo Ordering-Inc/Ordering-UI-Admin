@@ -121,6 +121,12 @@ export const SidebarMenu = (props) => {
       title: t('COUNTRIES_CITIES', 'Countries/Cities'),
       pageName: 'places',
       url: '/settings/places'
+    },
+    {
+      id: 6,
+      title: t('LANGUAGE_MANAGER', 'Language manager'),
+      pageName: 'language',
+      url: '/settings/language'
     }
   ]
 
@@ -347,7 +353,8 @@ export const SidebarMenu = (props) => {
                         active={
                           location.pathname === '/settings/basic' ||
                           location.pathname === '/settings/operation' ||
-                          location.pathname === '/settings/advanced'
+                          location.pathname === '/settings/advanced' ||
+                          location.pathname === '/settings/language'
                         }
                       >
                         <GearIcon />

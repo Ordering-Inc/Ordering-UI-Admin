@@ -29,6 +29,7 @@ import { BusinessAnalytics } from './pages/BusinessAnalytics'
 import { MessagesList } from './pages/MessagesList'
 import { Cms } from './pages/Cms'
 import { IntegrationsList } from './pages/IntegrationsList'
+import { LanguageManager } from './pages/LanguageManager'
 import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { OrderingProducts } from './pages/OrderingProducts'
@@ -191,6 +192,13 @@ export const App = () => {
                       {
                         auth
                           ? <IntegrationsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/settings/language'>
+                      {
+                        auth
+                          ? <LanguageManager />
                           : <Redirect to='/login' />
                       }
                     </Route>

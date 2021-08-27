@@ -13,7 +13,10 @@ export const SpreadSheetEditor = (props) => {
     handleItemChange,
     handleRowRemove,
     handleAfterSectionEnd,
-    handleoutsideClickDeselects
+    handleoutsideClickDeselects,
+    isRemove,
+    isUndo,
+    isRedo
   } = props
   const [, t] = useLanguage()
   const [cache, setCache] = useState(null)
@@ -36,9 +39,9 @@ export const SpreadSheetEditor = (props) => {
         copy: {
           name: t('SPREADSHEET_COPY')
         },
-        remove_row: {
-          name: t('SPREADSHEET_REMOVE_ROW')
-        },
+        ...(isUndo && { undo: { name: t('SPREADSHEET_UNDO') } }),
+        ...(isRedo && { redo: { name: t('SPREADSHEET_REDO') } }),
+        ...(isRemove && { remove_row: { name: t('SPREADSHEET_REMOVE_ROW') } }),
         paste: {
           key: 'paste',
           name: t('SPREADSHEET_PASTE'),
@@ -90,8 +93,18 @@ export const SpreadSheetEditor = (props) => {
     if (hotTableRef?.current?.hotInstance) {
       const hotTableObj = hotTableRef?.current?.hotInstance
       hotTableObj.loadData(hotTableData)
+      hotTableObj.updateSettings({
+        cells (row, col) {
+          const cellProperties = {}
+          if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
+            cellProperties.readOnly = false
+          }
+          return cellProperties
+        }
+      })
     }
   }, [hotTableData])
+
   useEffect(() => {
     const interVal = setInterval(() => {
       if (navigator.clipboard) {
