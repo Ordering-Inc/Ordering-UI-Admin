@@ -36,18 +36,6 @@ export const ProductReviewsList = (props) => {
       const response = await fetch(`${ordering.root}/business/${businessId}/product_reviews/${productId}/reviews`, requestOptions)
       const content = await response.json()
 
-      // setReviewsListState({ ...reviewsListState, loading: true })
-      // const requestOptions = {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Authorization: `Bearer ${token}`
-      //   },
-      //   body: JSON.stringify({ qualification: 4, comment: 'good product' })
-      // }
-      // const response = await fetch(`${ordering.root}/orders/821/product_reviews/1318`, requestOptions)
-      // const content = await response.json()
-
       if (!content.error) {
         setReviewsListState({ ...reviewsListState, loading: false, reviews: content.result })
       }
