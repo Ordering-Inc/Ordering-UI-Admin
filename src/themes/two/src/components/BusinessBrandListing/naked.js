@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useLanguage } from '../../contexts/LanguageContext'
 // import { useToast, ToastType } from '../../contexts/ToastContext'
+import { useApi, useSession } from 'ordering-components-admin'
 
 /**
  * Component to manage BusinessBrandListing behavior without UI component
@@ -17,43 +18,72 @@ export const BusinessBrandListing = (props) => {
   // const [, t] = useLanguage()
   // const [{ loading }] = useSession()
   // const [, { showToast }] = useToast()
+  const [searchValue, setSearchValue] = useState(null)
+  const [{ token, loading }] = useSession()
+  const [ordering] = useApi()
+
+  const [brandListState, setBrandListState] = useState({ loading: false, brands: [], error: null })
 
   /**
-   * Method to get translation list from API
+   * Method to update brand list
    */
-  // const getTranslations = async () => {
-  //   if (loading) return
-  //   try {
-  //     setTranslationList({ ...translationList, loading: true })
+  const handleUpdateBrandList = (brands) => {
+    setBrandListState({ ...brandListState, brands: brands })
+  }
 
-  //     const { content: { error, result } } = await ordering.translations().get()
-  //     if (!error) {
-  //       setTranslationList({
-  //         ...translationList,
-  //         loading: false,
-  //         translations: result
-  //       })
-  //     } else {
-  //       setTranslationList({
-  //         ...translationList,
-  //         loading: false,
-  //         error: result
-  //       })
-  //     }
-  //   } catch (err) {
-  //     setTranslationList({
-  //       ...translationList,
-  //       loading: false,
-  //       error: err
-  //     })
-  //   }
-  // }
+  /**
+   * Method to get brand list
+   */
+  const getBrands = async () => {
+    if (loading) return
+    try {
+      setBrandListState({ ...brandListState, loading: true })
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const functionFetch = `${ordering.root}/franchises`
+
+      const response = await fetch(functionFetch, requestOptions)
+      const { error, result } = await response.json()
+      if (!error) {
+        setBrandListState({
+          ...brandListState,
+          loading: false,
+          brands: result
+        })
+      } else {
+        setBrandListState({
+          ...brandListState,
+          loading: false,
+          error: result
+        })
+      }
+    } catch (err) {
+      setBrandListState({
+        ...brandListState,
+        loading: false,
+        error: err
+      })
+    }
+  }
+
+  useEffect(() => {
+    getBrands()
+  }, [])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
+          searchValue={searchValue}
+          onSearch={setSearchValue}
+          handleUpdateBrandList={handleUpdateBrandList}
+          brandListState={brandListState}
         />
       )}
     </>

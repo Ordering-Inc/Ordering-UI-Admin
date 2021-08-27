@@ -5,7 +5,8 @@ export const OrderingProductsContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
-  overflow: hidden;
+  overflow: auto;
+  max-height: 100vh;
 
   @media print {
     display: none;
