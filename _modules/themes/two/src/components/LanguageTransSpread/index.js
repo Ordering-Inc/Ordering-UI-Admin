@@ -5,21 +5,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessSpreadSheet = void 0;
+exports.LanguageTransSpread = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _styles = require("./styles");
+
 var _SpreadSheetEditor = require("../SpreadSheetEditor");
 
-require("react-toastify/dist/ReactToastify.css");
-
-var _reactToastify = require("react-toastify");
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _Confirm = require("../Confirm");
 
-var _styles = require("./styles");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -31,7 +31,13 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -45,50 +51,41 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
-  var handleItemChange = props.handleItemChange,
-      spreadSheetState = props.spreadSheetState,
-      handleRowRemove = props.handleRowRemove,
+var LanguageTransSpreadUI = function LanguageTransSpreadUI(props) {
+  var translationList = props.translationList,
+      creationFormState = props.creationFormState,
+      handleItemChange = props.handleItemChange,
       handleAfterSectionEnd = props.handleAfterSectionEnd,
-      handleoutsideClickDeselects = props.handleoutsideClickDeselects;
+      handleoutsideClickDeselects = props.handleoutsideClickDeselects,
+      searchValue = props.searchValue;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      hotTableData = _useState2[0],
+      setHotTableData = _useState2[1];
+
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
 
   var spreadSheetHeaderItems = [{
-    title: t('ID', 'Id'),
-    code: 'id',
+    title: t('KEY', 'Key'),
+    code: 'key',
     readOnly: true,
-    type: 'numeric'
-  }, {
-    title: t('NAME', 'Name'),
-    code: 'name',
-    readOnly: false,
     type: 'text'
   }, {
-    title: t('DESCRIPTION', 'Description'),
-    code: 'description',
+    title: t('TEXT', 'Text'),
+    code: 'text',
     readOnly: false,
     type: 'text'
-  }, {
-    title: t('PRICE', 'Price'),
-    code: 'price',
-    readOnly: false,
-    type: 'numeric'
-  }, {
-    title: t('QUANTITY', 'Quantity'),
-    code: 'quantity',
-    readOnly: false,
-    type: 'numeric'
   }];
 
   var closeAlert = function closeAlert() {
@@ -99,43 +96,45 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (spreadSheetState.products && !spreadSheetState.result.error && !spreadSheetState.loading) {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result.result;
+    if (translationList !== null && translationList !== void 0 && translationList.loading) return;
+    var translations = [];
 
-      _reactToastify.toast.dark(content, toastConfigure);
+    if (searchValue) {
+      var _translationList$tran;
+
+      translations = translationList === null || translationList === void 0 ? void 0 : (_translationList$tran = translationList.translations) === null || _translationList$tran === void 0 ? void 0 : _translationList$tran.filter(function (translation) {
+        var _translation$key;
+
+        return ((_translation$key = translation.key) === null || _translation$key === void 0 ? void 0 : _translation$key.toLowerCase().includes(searchValue.toLowerCase())) || translation.text.toLowerCase().includes(searchValue.toLowerCase());
+      });
+    } else {
+      translations = _toConsumableArray(translationList === null || translationList === void 0 ? void 0 : translationList.translations);
     }
-  }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.loading]);
-  (0, _react.useEffect)(function () {
-    var _spreadSheetState$res;
 
-    if (spreadSheetState !== null && spreadSheetState !== void 0 && (_spreadSheetState$res = spreadSheetState.result) !== null && _spreadSheetState$res !== void 0 && _spreadSheetState$res.error) {
-      var _spreadSheetState$res2;
+    setHotTableData(translations);
+  }, [translationList, searchValue]);
+  (0, _react.useEffect)(function () {
+    var _creationFormState$re;
+
+    if (creationFormState !== null && creationFormState !== void 0 && (_creationFormState$re = creationFormState.result) !== null && _creationFormState$re !== void 0 && _creationFormState$re.error) {
+      var _creationFormState$re2;
 
       setAlertState({
         open: true,
-        content: spreadSheetState === null || spreadSheetState === void 0 ? void 0 : (_spreadSheetState$res2 = spreadSheetState.result) === null || _spreadSheetState$res2 === void 0 ? void 0 : _spreadSheetState$res2.result
+        content: creationFormState === null || creationFormState === void 0 ? void 0 : (_creationFormState$re2 = creationFormState.result) === null || _creationFormState$re2 === void 0 ? void 0 : _creationFormState$re2.result
       });
     }
-  }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessSpreadSheetContainer, null, /*#__PURE__*/_react.default.createElement(_SpreadSheetEditor.SpreadSheetEditor, _extends({}, props, {
-    hotTableData: spreadSheetState.products,
+  }, [creationFormState === null || creationFormState === void 0 ? void 0 : creationFormState.result]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.TransSpreadContainer, null, translationList !== null && translationList !== void 0 && translationList.loading && !(creationFormState !== null && creationFormState !== void 0 && creationFormState.result) ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 200
+  }) : /*#__PURE__*/_react.default.createElement(_SpreadSheetEditor.SpreadSheetEditor, {
     headerItems: spreadSheetHeaderItems,
+    hotTableData: hotTableData,
     handleItemChange: handleItemChange,
-    handleRowRemove: handleRowRemove,
     handleAfterSectionEnd: handleAfterSectionEnd,
-    handleoutsideClickDeselects: handleoutsideClickDeselects,
-    isRemove: true
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('PRODUCT EDIT', 'Product Edit'),
+    handleoutsideClickDeselects: handleoutsideClickDeselects
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('TRANSLATIONS', 'Translations'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -149,12 +148,12 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
   }));
 };
 
-var BusinessSpreadSheet = function BusinessSpreadSheet(props) {
-  var businessSpreadSheetProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessSpreadSheetUI
+var LanguageTransSpread = function LanguageTransSpread(props) {
+  var languageTransSpreadProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: LanguageTransSpreadUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessSpreadSheet, businessSpreadSheetProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LanguageTransSpread, languageTransSpreadProps);
 };
 
-exports.BusinessSpreadSheet = BusinessSpreadSheet;
+exports.LanguageTransSpread = LanguageTransSpread;

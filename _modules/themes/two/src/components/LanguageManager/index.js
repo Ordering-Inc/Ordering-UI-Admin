@@ -5,21 +5,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessSpreadSheet = void 0;
+exports.LanguageManager = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _SpreadSheetEditor = require("../SpreadSheetEditor");
+var _InfoShareContext = require("../../../../../contexts/InfoShareContext");
 
-require("react-toastify/dist/ReactToastify.css");
+var _Buttons = require("../../styles/Buttons");
 
-var _reactToastify = require("react-toastify");
-
-var _Confirm = require("../Confirm");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("./styles");
+
+var _SearchBar = require("../SearchBar");
+
+var _LanguageMainManager = require("../LanguageMainManager");
+
+var _LanguageTransTable = require("../LanguageTransTable");
+
+var _LanguageTransSpread = require("../LanguageTransSpread");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -30,8 +36,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -45,116 +49,70 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
-  var handleItemChange = props.handleItemChange,
-      spreadSheetState = props.spreadSheetState,
-      handleRowRemove = props.handleRowRemove,
-      handleAfterSectionEnd = props.handleAfterSectionEnd,
-      handleoutsideClickDeselects = props.handleoutsideClickDeselects;
+var LanguageManagerUI = function LanguageManagerUI(props) {
+  var searchValue = props.searchValue,
+      _onSearch = props.onSearch;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
+  var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
+      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+      isCollapse = _useInfoShare2[0].isCollapse,
+      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+
+  var _useState = (0, _react.useState)('main'),
       _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
+      selectedType = _useState2[0],
+      setSelectedType = _useState2[1];
 
-  var spreadSheetHeaderItems = [{
-    title: t('ID', 'Id'),
-    code: 'id',
-    readOnly: true,
-    type: 'numeric'
-  }, {
-    title: t('NAME', 'Name'),
-    code: 'name',
-    readOnly: false,
-    type: 'text'
-  }, {
-    title: t('DESCRIPTION', 'Description'),
-    code: 'description',
-    readOnly: false,
-    type: 'text'
-  }, {
-    title: t('PRICE', 'Price'),
-    code: 'price',
-    readOnly: false,
-    type: 'numeric'
-  }, {
-    title: t('QUANTITY', 'Quantity'),
-    code: 'quantity',
-    readOnly: false,
-    type: 'numeric'
-  }];
+  var _useState3 = (0, _react.useState)('table'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      viewMode = _useState4[0],
+      setViewMode = _useState4[1];
 
-  var closeAlert = function closeAlert() {
-    setAlertState({
-      open: false,
-      content: []
-    });
-  };
-
-  (0, _react.useEffect)(function () {
-    if (spreadSheetState.products && !spreadSheetState.result.error && !spreadSheetState.loading) {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result.result;
-
-      _reactToastify.toast.dark(content, toastConfigure);
+  return /*#__PURE__*/_react.default.createElement(_styles.LanguageManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleMenuCollapse(false);
     }
-  }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.loading]);
-  (0, _react.useEffect)(function () {
-    var _spreadSheetState$res;
-
-    if (spreadSheetState !== null && spreadSheetState !== void 0 && (_spreadSheetState$res = spreadSheetState.result) !== null && _spreadSheetState$res !== void 0 && _spreadSheetState$res.error) {
-      var _spreadSheetState$res2;
-
-      setAlertState({
-        open: true,
-        content: spreadSheetState === null || spreadSheetState === void 0 ? void 0 : (_spreadSheetState$res2 = spreadSheetState.result) === null || _spreadSheetState$res2 === void 0 ? void 0 : _spreadSheetState$res2.result
-      });
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LANGUAGE_MANAGER', 'Language Manager'))), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    search: searchValue,
+    onSearch: function onSearch(value) {
+      return _onSearch(value);
+    },
+    placeholder: t('SEARCH', 'Search')
+  }))), /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+    active: selectedType === 'main',
+    onClick: function onClick() {
+      return setSelectedType('main');
     }
-  }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessSpreadSheetContainer, null, /*#__PURE__*/_react.default.createElement(_SpreadSheetEditor.SpreadSheetEditor, _extends({}, props, {
-    hotTableData: spreadSheetState.products,
-    headerItems: spreadSheetHeaderItems,
-    handleItemChange: handleItemChange,
-    handleRowRemove: handleRowRemove,
-    handleAfterSectionEnd: handleAfterSectionEnd,
-    handleoutsideClickDeselects: handleoutsideClickDeselects,
-    isRemove: true
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('PRODUCT EDIT', 'Product Edit'),
-    content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: alertState.open,
-    onClose: function onClose() {
-      return closeAlert();
-    },
-    onAccept: function onAccept() {
-      return closeAlert();
-    },
-    closeOnBackdrop: false
-  }));
+  }, t('MAIN', 'Main')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+    active: selectedType === 'translations',
+    onClick: function onClick() {
+      return setSelectedType('translations');
+    }
+  }, t('TRANSLATIONS', 'Translations'))), selectedType === 'main' && /*#__PURE__*/_react.default.createElement(_LanguageMainManager.LanguageMainManager, props), selectedType === 'translations' && /*#__PURE__*/_react.default.createElement(_styles.TranslationManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroupWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_styles.ViewIconWrapper, {
+    className: "table-mode",
+    active: viewMode === 'table',
+    onClick: function onClick() {
+      return setViewMode('table');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ViewList, null)), /*#__PURE__*/_react.default.createElement(_styles.ViewIconWrapper, {
+    active: viewMode === 'spread',
+    onClick: function onClick() {
+      return setViewMode('spread');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Table, null)))), viewMode === 'table' && /*#__PURE__*/_react.default.createElement(_LanguageTransTable.LanguageTransTable, props), viewMode === 'spread' && /*#__PURE__*/_react.default.createElement(_LanguageTransSpread.LanguageTransSpread, props)));
 };
 
-var BusinessSpreadSheet = function BusinessSpreadSheet(props) {
-  var businessSpreadSheetProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessSpreadSheetUI
+var LanguageManager = function LanguageManager(props) {
+  var languageManagerProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: LanguageManagerUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessSpreadSheet, businessSpreadSheetProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LanguageManager, languageManagerProps);
 };
 
-exports.BusinessSpreadSheet = BusinessSpreadSheet;
+exports.LanguageManager = LanguageManager;

@@ -129,6 +129,11 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('COUNTRIES_CITIES', 'Countries/Cities'),
     pageName: 'places',
     url: '/settings/places'
+  }, {
+    id: 6,
+    title: t('LANGUAGE_MANAGER', 'Language manager'),
+    pageName: 'language',
+    url: '/settings/language'
   }];
   var businessIntelligenceSubMenus = [{
     id: 1,
@@ -269,7 +274,7 @@ var SidebarMenu = function SidebarMenu(props) {
     className: "d-flex flex-column mt-4"
   }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/advanced'
+    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/advanced' || location.pathname === '/settings/language'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, settingsSubMenus.map(function (item) {

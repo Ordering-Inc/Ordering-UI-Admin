@@ -285,6 +285,12 @@ Object.defineProperty(exports, "InterActOrderMarker", {
     return _InterActOrderMarker.InterActOrderMarker;
   }
 });
+Object.defineProperty(exports, "LanguageManager", {
+  enumerable: true,
+  get: function get() {
+    return _LanguageManager.LanguageManager;
+  }
+});
 Object.defineProperty(exports, "Layout", {
   enumerable: true,
   get: function get() {
@@ -761,6 +767,8 @@ var _InputPhoneNumber = require("./src/components/InputPhoneNumber");
 var _IntegrationListing = require("./src/components/IntegrationListing");
 
 var _InterActOrderMarker = require("./src/components/InterActOrderMarker");
+
+var _LanguageManager = require("./src/components/LanguageManager");
 
 var _Layout = require("./src/components/Layout");
 
