@@ -24,7 +24,7 @@ export const BusinessBrandGENDetail = (props) => {
   const [formState, setFormState] = useState({ loading: false, changes: {}, result: { error: false } })
 
   /**
-   * Default fuction for business profile workflow
+   * Method to update or create a brand
    */
   const handleUpdateClick = async () => {
     if (brand) {
@@ -35,7 +35,7 @@ export const BusinessBrandGENDetail = (props) => {
   }
 
   /**
-   * Method to create brand
+   * Method to create brand from API
    */
   const createBrand = async () => {
     try {
@@ -207,6 +207,10 @@ BusinessBrandGENDetail.propTypes = {
   * Function to set a business state
   */
   handleUpdateBrandList: PropTypes.func,
+  /**
+   * Function to set selected brand
+   */
+  onSelectedBrand: PropTypes.func,
   /**
    * Components types before business type filter
    * Array of type components, the parent props will pass to these components

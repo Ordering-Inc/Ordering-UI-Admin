@@ -14,9 +14,7 @@ export const BusinessBrandListing = (props) => {
     UIComponent
   } = props
 
-  // const [ordering] = useApi()
   const [, t] = useLanguage()
-  // const [{ loading }] = useSession()
   const [, { showToast }] = useToast()
   const [searchValue, setSearchValue] = useState(null)
   const [{ token, loading }] = useSession()
@@ -39,12 +37,8 @@ export const BusinessBrandListing = (props) => {
     updateBrand(id, changes)
   }
 
-  const handleDeleteBrand = (id) => {
-    deleteBrand(id)
-  }
-
   /**
-   * Method to delete a brand
+   * Method to delete a brand from API
    */
   const deleteBrand = async (id) => {
     try {
@@ -91,7 +85,7 @@ export const BusinessBrandListing = (props) => {
   }
 
   /**
-   * Method to update a brand
+   * Method to update a brand from API
    */
   const updateBrand = async (id, changes) => {
     try {
@@ -203,7 +197,7 @@ export const BusinessBrandListing = (props) => {
           brandListState={brandListState}
           handleChangeState={handleChangeState}
           brandFormState={formState}
-          handleDeleteBrand={handleDeleteBrand}
+          handleDeleteBrand={deleteBrand}
         />
       )}
     </>

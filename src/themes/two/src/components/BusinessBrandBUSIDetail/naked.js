@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { string } from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useSession } from '../../contexts/SessionContext'
 import { useApi, useToast, ToastType, useLanguage } from 'ordering-components-admin'
@@ -107,17 +107,9 @@ BusinessBrandBUSIDetail.propTypes = {
    */
   UIComponent: PropTypes.elementType,
   /**
-   * Object for a brand
+   * Array of business props to fetch
    */
-  brand: PropTypes.object,
-  /**
-   * Object for brand list
-   */
-  brandListState: PropTypes.object,
-  /**
-  * Function to set a business state
-  */
-  handleUpdateBrandList: PropTypes.func,
+  propsToFetch: PropTypes.arrayOf(string),
   /**
    * Components types before business type filter
    * Array of type components, the parent props will pass to these components
