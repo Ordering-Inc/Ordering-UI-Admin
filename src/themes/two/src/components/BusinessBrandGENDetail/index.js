@@ -141,7 +141,7 @@ const BusinessBrandGENDetailUI = (props) => {
         </SaveBtnWrapper>
       </BrandGeneralDetail>
       <Alert
-        title={t('ORDERING_PRODUCTS', 'Ordering products')}
+        title={t('BUSINESS_BRAND', 'Business Brand')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

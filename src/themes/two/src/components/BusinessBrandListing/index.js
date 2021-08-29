@@ -13,6 +13,7 @@ import { SearchBar } from '../SearchBar'
 import { Alert } from '../Confirm'
 import { SideBar } from '../SideBar'
 import { BusinessBrandGENDetail } from '../BusinessBrandGENDetail'
+import { BusinessBrandBUSIDetail } from '../BusinessBrandBUSIDetail'
 import {
   BrandListingContainer,
   HeaderContainer,
@@ -173,6 +174,7 @@ const BusinessBrandListingUI = (props) => {
               brandList.map(brand => (
                 <BrandBody
                   key={brand.id}
+                  active={brand.id === selectedBrand?.id}
                 >
                   <tr>
                     <td>
@@ -261,12 +263,16 @@ const BusinessBrandListingUI = (props) => {
                   <BusinessBrandGENDetail
                     {...props}
                     brand={selectedBrand}
+                    onSelectedBrand={setSelectedBrand}
                   />
                 )
               }
               {
                 selectedType === 'businesses' && (
-                  <div>Businesses</div>
+                  <BusinessBrandBUSIDetail
+                    {...props}
+                    brand={selectedBrand}
+                  />
                 )
               }
             </BrandDetailContainer>

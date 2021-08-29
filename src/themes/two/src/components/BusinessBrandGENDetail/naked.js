@@ -12,7 +12,8 @@ export const BusinessBrandGENDetail = (props) => {
     UIComponent,
     brand,
     handleUpdateBrandList,
-    brandListState
+    brandListState,
+    onSelectedBrand
   } = props
 
   const [ordering] = useApi()
@@ -60,6 +61,7 @@ export const BusinessBrandGENDetail = (props) => {
         if (handleUpdateBrandList) {
           handleUpdateBrandList([...brandListState?.brands, content.result])
         }
+        onSelectedBrand && onSelectedBrand(content.result)
         showToast(ToastType.Success, t('BRAND_ADDED', 'Brand added'))
       } else {
         setFormState({

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const BrandGeneralDetail = styled.div`
   margin-top: 30px;
-  height: calc(100vh - 168px);
+  min-height: calc(100vh - 168px);
 `
 
 export const BrandLogo = styled.div`
