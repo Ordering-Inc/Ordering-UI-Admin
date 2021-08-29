@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import {
+  useLanguage,
+  useUtils,
+  BusinessBrandListing as BusinessBrandListingController
+} from 'ordering-components-admin'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import Skeleton from 'react-loading-skeleton'
-import { BusinessBrandListing as BusinessBrandListingController } from './naked'
 import { useInfoShare } from '../../../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'

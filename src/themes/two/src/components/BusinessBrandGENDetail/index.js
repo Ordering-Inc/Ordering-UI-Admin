@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { BusinessBrandGENDetail as BusinessBrandGENDetailContorller } from './naked'
-import { useLanguage, DragAndDrop, ExamineClick } from 'ordering-components-admin'
+import {
+  useLanguage,
+  DragAndDrop,
+  ExamineClick,
+  BusinessBrandGENDetail as BusinessBrandGENDetailContorller
+} from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../../../../utils'

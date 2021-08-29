@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { SearchBar } from '../SearchBar'
-import { useLanguage, useUtils } from 'ordering-components-admin'
-import { BusinessBrandBUSIDetail as BusinessBrandBUSIDetailController } from './naked'
+import {
+  useLanguage,
+  useUtils,
+  BusinessBrandBUSIDetail as BusinessBrandBUSIDetailController
+} from 'ordering-components-admin'
 import { Checkbox } from '../../styles'
 import { useTheme } from 'styled-components'
 import {
