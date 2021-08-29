@@ -33,6 +33,12 @@ Object.defineProperty(exports, "BusinessAnalytics", {
     return _BusinessAnalytics.BusinessAnalytics;
   }
 });
+Object.defineProperty(exports, "BusinessBrandListing", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessBrandListing.BusinessBrandListing;
+  }
+});
 Object.defineProperty(exports, "BusinessDetails", {
   enumerable: true,
   get: function get() {
@@ -697,6 +703,8 @@ var _AutoScroll = require("./src/components/AutoScroll");
 var _BusinessActiveStateFilter = require("./src/components/BusinessActiveStateFilter");
 
 var _BusinessAnalytics = require("./src/components/BusinessAnalytics");
+
+var _BusinessBrandListing = require("./src/components/BusinessBrandListing");
 
 var _BusinessDetails = require("./src/components/BusinessDetails");
 
