@@ -7,15 +7,15 @@ exports.Alert = exports.Confirm = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
-var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,11 +55,12 @@ var ConfirmUI = function ConfirmUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.PopupDialog, {
     className: "popup-dialog"
-  }, /*#__PURE__*/_react.default.createElement(_styles.PopupIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.PopupIcon, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return onClose();
     }
-  })), title && /*#__PURE__*/_react.default.createElement(_styles.PopupTitle, null, title), /*#__PURE__*/_react.default.createElement(_styles.PopupContent, null, content && typeof content === 'string' && content, content && _typeof(content) === 'object' && Array.isArray(content) && /*#__PURE__*/_react.default.createElement("ul", null, content.map(function (item, i) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), title && /*#__PURE__*/_react.default.createElement(_styles.PopupTitle, null, title), /*#__PURE__*/_react.default.createElement(_styles.PopupContent, null, content && typeof content === 'string' && content, content && _typeof(content) === 'object' && Array.isArray(content) && /*#__PURE__*/_react.default.createElement("ul", null, content.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
     }, item);
@@ -69,7 +70,7 @@ var ConfirmUI = function ConfirmUI(props) {
       return onCancel();
     }
   }, cancelText || t('CANCEL')), onAccept && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "darkBlue",
+    color: "primary",
     onClick: function onClick() {
       return onAccept();
     }

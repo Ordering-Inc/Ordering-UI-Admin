@@ -41,7 +41,8 @@ var AutoScroll = function AutoScroll(_ref) {
   var children = _ref.children,
       modal = _ref.modal,
       special = _ref.special,
-      innerScroll = _ref.innerScroll;
+      innerScroll = _ref.innerScroll,
+      scrollId = _ref.scrollId;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -60,12 +61,20 @@ var AutoScroll = function AutoScroll(_ref) {
       _useTheme2 = _slicedToArray(_useTheme, 1),
       theme = _useTheme2[0];
 
+  var autoScrollId = scrollId || 'autoscroll';
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      parentWidth = _useState6[0],
+      setParentWidth = _useState6[1];
+
   (0, _react.useLayoutEffect)(function () {
     var _document, _document$getElementB;
 
-    var element = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById('autoscroll')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.parentNode;
+    var element = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById("".concat(autoScrollId))) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.parentNode;
     element && element.parentNode.addEventListener('scroll', handleScroll);
     var containerElement = element === null || element === void 0 ? void 0 : element.parentNode;
+    setParentWidth(element === null || element === void 0 ? void 0 : element.offsetWidth);
     setParentElement(element);
     setContainerElement(containerElement);
     return function () {
@@ -79,8 +88,11 @@ var AutoScroll = function AutoScroll(_ref) {
   });
 
   var handleScroll = function handleScroll() {
-    var botonRight = document.getElementById('right-autoscroll');
-    var botonLeft = document.getElementById('left-autoscroll');
+    var _document2;
+
+    var autoScrollContainer = (_document2 = document) === null || _document2 === void 0 ? void 0 : _document2.getElementById("".concat(autoScrollId));
+    var botonRight = autoScrollContainer === null || autoScrollContainer === void 0 ? void 0 : autoScrollContainer.querySelector('.right-autoscroll');
+    var botonLeft = autoScrollContainer === null || autoScrollContainer === void 0 ? void 0 : autoScrollContainer.querySelector('.left-autoscroll');
 
     if (botonLeft || botonRight) {
       if (theme !== null && theme !== void 0 && theme.rtl) {
@@ -102,7 +114,7 @@ var AutoScroll = function AutoScroll(_ref) {
           botonLeft && botonLeft.classList.remove('hidden');
         }
 
-        if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) > (parentElement === null || parentElement === void 0 ? void 0 : parentElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 20) {
+        if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) > (parentElement === null || parentElement === void 0 ? void 0 : parentElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 40) {
           botonRight && botonRight.classList.add('hidden');
         } else {
           botonRight && botonRight.classList.remove('hidden');
@@ -127,16 +139,24 @@ var AutoScroll = function AutoScroll(_ref) {
     }
   };
 
+  (0, _react.useEffect)(function () {
+    var _document3, _document3$getElement;
+
+    if (!scrollId) return;
+    var element = (_document3 = document) === null || _document3 === void 0 ? void 0 : (_document3$getElement = _document3.getElementById("".concat(autoScrollId))) === null || _document3$getElement === void 0 ? void 0 : _document3$getElement.parentNode;
+    setParentWidth(element.width);
+    setParentElement(element);
+  }, [scrollId]);
   return /*#__PURE__*/_react.default.createElement(_styles.AutoscrollContainer, {
     modal: modal,
-    id: "autoscroll"
-  }, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) || (!special && innerScroll ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, {
-    id: "left-autoscroll",
+    id: "".concat(autoScrollId)
+  }, (!special ? width < parentWidth + 50 : width < parentWidth) || (!special && innerScroll ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < parentWidth + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < parentWidth) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, {
+    className: "left-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling(true);
     }
-  }) : '', children, (!special ? width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : width < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) || (!special && innerScroll ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, {
-    id: "right-autoscroll",
+  }) : '', children, (!special ? width < parentWidth + 50 : width < parentWidth) || (!special && innerScroll ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < parentWidth + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < parentWidth) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, {
+    className: "right-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling();
     }

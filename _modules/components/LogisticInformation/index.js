@@ -125,7 +125,8 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
       height: 40
     }));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.error === null ? /*#__PURE__*/_react.default.createElement(_styles.WraaperLogs, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "darkBlue",
+    rectangle: true,
+    color: "primary",
     onClick: function onClick() {
       return getLogistics();
     }

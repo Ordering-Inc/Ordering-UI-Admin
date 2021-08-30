@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Button = void 0;
+exports.Button = exports.IconButton = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -19,74 +19,184 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Button = _styledComponents.default.button(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #151824;\n\n  border: 1px solid #1C202E;\n  border-radius: ", ";\n  line-height: 30px;\n  padding: 5px 15px;\n  font-size: 15px;\n  cursor: pointer;\n  outline: none;\n\n  &:active {\n    background: ", ";\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n\n  ", "\n\n  ", "\n\n", "\n\n"])), function (_ref) {
-  var borderRadius = _ref.borderRadius;
-  return borderRadius || '40px';
+var IconButton = _styledComponents.default.button(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background-color: transparent;\n  border: none;\n  border-radius: 6px;\n  height: 32px;\n  padding: 0 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all .2s ease-in;\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n  > svg {\n    width: 20px;\n    height: 20px;\n    color: #B1BCCC;\n  }\n\n  &:hover {\n    background-color: #1507260a;\n\n    > svg {\n      color:  #151b26;\n    }\n  }\n\n  &:active {\n    background-color: #1507261a;\n  }\n\n  ", "\n\n  ", "\n\n"])), function (_ref) {
+  var color = _ref.color;
+  return color === 'black' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    > svg {\n      color: #344050;\n    }\n  "])));
+}, function (_ref2) {
+  var color = _ref2.color;
+  return color === 'primary' && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    > svg {\n      color: ", ";\n    }\n    &:hover {\n      background-color: #1507260a;\n      > svg {\n        color: ", ";\n      }\n    }\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.primary;
+  });
+});
+
+exports.IconButton = IconButton;
+
+var Button = _styledComponents.default.button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #FFF;\n  border: 1px solid #CCC;\n  border-radius: ", ";\n  line-height: 30px;\n  padding-left: 15px;\n  padding-right: 15px;\n  font-size: 14px;\n  cursor: pointer;\n  outline: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  transition: all .2s ease-in;\n\n  &:active {\n    background: ", ";\n  }\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n  ", "\n\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n\n  ", "\n  ", "\n  ", "\n"])), function (_ref3) {
+  var borderRadius = _ref3.borderRadius;
+  return !borderRadius ? '30px' : borderRadius;
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');
-}, function (_ref2) {
-  var withIcon = _ref2.withIcon;
-  return withIcon && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    column-gap: 5px;\n  "])));
-}, function (_ref3) {
-  var color = _ref3.color;
-  return color === 'primary' && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
-    return props.theme.colors.btnPrimary;
-  }, function (props) {
-    return props.theme.colors.btnPrimaryContrast;
-  }, function (props) {
-    return props.theme.colors.btnPrimary;
-  }, function (props) {
-    return (0, _polished.darken)(0.07, props.theme.colors.btnPrimary);
-  });
 }, function (_ref4) {
-  var color = _ref4.color;
-  return color === 'secondary' && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
-    return props.theme.colors.btnSecondary;
-  }, function (props) {
-    return props.theme.colors.btnSecondaryContrast;
-  }, function (props) {
-    return props.theme.colors.btnSecondary;
-  }, function (props) {
-    return (0, _polished.darken)(0.07, props.theme.colors.btnSecondary);
-  });
+  var rectangle = _ref4.rectangle;
+  return rectangle && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    border-radius: unset;\n  "])));
 }, function (_ref5) {
-  var color = _ref5.color;
-  return color === 'darkBlue' && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
-    return props.theme.colors.btnDarkBlue;
-  }, function (props) {
-    return props.theme.colors.btnDarkBlueContrast;
-  }, function (props) {
-    return props.theme.colors.btnDarkBlue;
-  }, function (props) {
-    return (0, _polished.darken)(0.07, props.theme.colors.btnDarkBlue);
-  });
+  var bgtransparent = _ref5.bgtransparent;
+  return bgtransparent && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: transparent !important;\n  "])));
 }, function (_ref6) {
-  var color = _ref6.color;
-  return color === 'offline' && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #fff;\n    border-color: ", ";\n\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
-    return props.theme.colors.offline;
+  var initialIcon = _ref6.initialIcon;
+  return initialIcon && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    text-align: left;\n    ", "\n    img{\n      vertical-align: middle;\n    }\n    span {\n      padding-left: 15%\n      ", "\n    }\n  "])), function (props) {
+    var _props$theme;
+
+    return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      text-align: right;\n    "])));
   }, function (props) {
-    return props.theme.colors.offline;
-  }, function (props) {
-    return (0, _polished.darken)(0.07, props.theme.colors.offline);
+    var _props$theme2;
+
+    return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        padding-right: 15%;\n        padding-left: 0\n    "])));
   });
 }, function (_ref7) {
-  var color = _ref7.color;
-  return color === 'modalAccept' && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: #182964;\n    color: #FFFFFF;\n    font-size: 16px;\n    padding: 15px 0;\n    margin-top: 30px;\n    \n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
-    return (0, _polished.darken)(0.07, '#182964');
-  });
+  var outline = _ref7.outline;
+  return outline && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    background: #FFF;\n    color: #CCC;\n    border-color: #CCC;\n    &:active {\n      color: #FFF;\n      background: ", ";\n    }\n    &:hover {\n      background: ", ";\n      color: #FFF;\n    }\n  "])), (0, _polished.darken)(0.07, '#CCC'), (0, _polished.darken)(0.07, '#CCC'));
 }, function (_ref8) {
-  var outline = _ref8.outline;
-  return outline && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: #FFF;\n    color: #151824;\n    border-color: #CCC;\n\n    &:active {\n      background: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#FFF'));
+  var circle = _ref8.circle;
+  return circle && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background: #CCC;\n    color: #FFF;\n    border-color: #CCC;\n    padding: 0;\n    width: 34px;\n    height: 34px;\n    line-height: 34px;\n    text-align: center;\n    border-radius: 50%;\n    &:active {\n      color: #FFF;\n      background: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#CCC'));
 }, function (_ref9) {
-  var circle = _ref9.circle;
-  return circle && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #FFF;\n  border-color: #CCC;\n  padding: 0;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  border-radius: 50%;\n\n  &:active {\n    color: #FFF;\n    background: ", ";\n  }\n"])), (0, _polished.darken)(0.07, '#CCC'));
+  var circle = _ref9.circle,
+      outline = _ref9.outline;
+  return circle && outline && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background: #FFF;\n    color: #CCC;\n    border-color: #CCC;\n    padding: 0;\n    width: 34px;\n    height: 34px;\n    line-height: 34px;\n    text-align: center;\n    border-radius: 50%;\n    &:active {\n      color: #FFF;\n      background: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#CCC'));
 }, function (_ref10) {
-  var circle = _ref10.circle,
-      outline = _ref10.outline;
-  return circle && outline && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #CCC;\n  border-color: #CCC;\n  padding: 0;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  border-radius: 50%;\n\n  ", "\n\n  &:active {\n    color: #FFF;\n    background: ", ";\n  }\n"])), function (_ref11) {
-    var active = _ref11.active;
-    return active && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background-color: #000;\n  "])));
-  }, (0, _polished.darken)(0.07, '#CCC'));
+  var color = _ref10.color;
+  return color === 'primary' && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:hover {\n      background: ", ";\n    }\n    &:active {\n      background: ", ";\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.primaryContrast;
+  }, function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return (0, _polished.darken)(0.04, props.theme.colors.primary);
+  }, function (props) {
+    return (0, _polished.darken)(0.1, props.theme.colors.primary);
+  }, function (_ref11) {
+    var outline = _ref11.outline;
+    return outline && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n      &:active {\n        color: ", ";\n        background: ", ";\n      }\n      &:hover {\n        background: ", ";\n        color: #FFF;\n      }\n    "])), function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return props.theme.colors.primaryContrast;
+    }, function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.primary);
+    });
+  }, function (_ref12) {
+    var circle = _ref12.circle;
+    return circle && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      background: ", ";\n      color: ", ";\n      border-color: ", ";\n      padding: 0;\n      width: 34px;\n      height: 34px;\n      line-height: 34px;\n      text-align: center;\n      border-radius: 50%;\n      &:active {\n        border-color: ", ";\n        background: ", ";\n      }\n    "])), function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return props.theme.colors.primaryContrast;
+    }, function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.primary);
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.primary);
+    });
+  }, function (_ref13) {
+    var circle = _ref13.circle,
+        outline = _ref13.outline;
+    return circle && outline && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n      padding: 0;\n      width: 34px;\n      height: 34px;\n      line-height: 34px;\n      text-align: center;\n      border-radius: 50%;\n      &:active {\n        border-color: ", ";\n        background: ", ";\n      }\n    "])), function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return props.theme.colors.primary;
+    }, function (props) {
+      return props.theme.colors.primary;
+    });
+  });
+}, function (_ref14) {
+  var color = _ref14.color;
+  return color === 'lightPrimary' && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:hover {\n      background: ", ";\n    }\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
+    return props.theme.colors.lightPrimary;
+  }, function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.lightPrimary;
+  }, function (props) {
+    return (0, _polished.darken)(0.04, props.theme.colors.lightPrimary);
+  }, function (props) {
+    return (0, _polished.darken)(0.1, props.theme.colors.lightPrimary);
+  });
+}, function (_ref15) {
+  var color = _ref15.color;
+  return color === 'secundaryDark' && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:hover {\n      background: ", ";\n    }\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
+    return props.theme.colors.secundaryDarkContrast;
+  }, function (props) {
+    return props.theme.colors.secundaryDark;
+  }, function (props) {
+    return props.theme.colors.secundaryDarkContrast;
+  }, function (props) {
+    return (0, _polished.darken)(0.04, props.theme.colors.secundaryDarkContrast);
+  }, function (props) {
+    return (0, _polished.darken)(0.1, props.theme.colors.secundaryDarkContrast);
+  });
+}, function (_ref16) {
+  var color = _ref16.color;
+  return color === 'secundary' && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:hover {\n      background: ", ";\n    }\n    &:active {\n      background: ", ";\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
+    return props.theme.colors.secundary;
+  }, function (props) {
+    return props.theme.colors.secundaryContrast;
+  }, function (props) {
+    return props.theme.colors.secundary;
+  }, function (props) {
+    return (0, _polished.darken)(0.04, props.theme.colors.secundary);
+  }, function (props) {
+    return (0, _polished.darken)(0.1, props.theme.colors.secundary);
+  }, function (_ref17) {
+    var outline = _ref17.outline;
+    return outline && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n      &:active {\n        color: ", ";\n        background: ", ";\n      }\n      &:hover {\n        background: ", ";\n        color: #FFF;\n      }\n    "])), function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundaryContrast;
+    }, function (props) {
+      return (0, _polished.darken)(0.05, props.theme.colors.secundary);
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.secundary);
+    });
+  }, function (_ref18) {
+    var circle = _ref18.circle;
+    return circle && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      background: ", ";\n      color: ", ";\n      border-color: ", ";\n      padding: 0;\n      width: 34px;\n      height: 34px;\n      line-height: 34px;\n      text-align: center;\n      border-radius: 50%;\n      &:active {\n        color: ", ";\n        border-color: ", ";\n        background: ", ";\n      }\n    "])), function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundaryContrast;
+    }, function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundaryContrast;
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.secundary);
+    }, function (props) {
+      return (0, _polished.darken)(0.07, props.theme.colors.secundary);
+    });
+  }, function (_ref19) {
+    var circle = _ref19.circle,
+        outline = _ref19.outline;
+    return circle && outline && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n      background: #FFF;\n      color: ", ";\n      border-color: ", ";\n      padding: 0;\n      width: 34px;\n      height: 34px;\n      line-height: 34px;\n      text-align: center;\n      border-radius: 50%;\n      &:active {\n        border-color: ", ";\n        background: ", ";\n        color: ", ";\n      }\n    "])), function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundary;
+    }, function (props) {
+      return props.theme.colors.secundaryContrast;
+    });
+  });
 });
 
 exports.Button = Button;

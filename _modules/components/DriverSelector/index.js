@@ -19,9 +19,9 @@ require("react-toastify/dist/ReactToastify.css");
 
 var _Select = require("../../styles/Select");
 
-var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
+var _FirstSelect = require("../../styles/Select/FirstSelect");
 
-var _FiPhone = _interopRequireDefault(require("@meronex/icons/fi/FiPhone"));
+var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
 var _MultiSelect = require("../../styles/MultiSelect");
 
@@ -56,7 +56,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 
 var DriverSelectorUI = function DriverSelectorUI(props) {
-  var order = props.order,
+  var isFirstSelect = props.isFirstSelect,
+      order = props.order,
       driversList = props.driversList,
       defaultValue = props.defaultValue,
       isPhoneView = props.isPhoneView,
@@ -99,7 +100,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     value: 'default',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       small: small
-    }, t('DRIVERS_LOADING', 'Drivers loading'), "...")
+    }, t('LOADING', 'loading'), "...")
   }];
   (0, _react.useEffect)(function () {
     var _theme$images, _theme$images$icons;
@@ -150,7 +151,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
             small: small
           }, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement(_styles.DriverText, {
             small: small
-          }, t('DRIVER', 'Driver'))), isPhoneView && driver.cellphone && /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_FiPhone.default, null), driver.cellphone)))
+          }, t('DRIVER', 'Driver')))))
         };
       });
 
@@ -268,7 +269,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     setDefaultOption(defaultValue);
   }, [defaultValue]);
 
-  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SELECT_DRIVER', 'Select driver'));
+  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_DRIVER', 'Select driver'));
 
   if (isFilterView) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
@@ -289,22 +290,31 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       optionBottomBorder: true
     }));
   } else {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isFirstSelect ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
       defaultValue: defaultOption || 'default',
       options: driversOptionList,
       optionInnerMargin: "10px",
-      optionInnerMaxHeight: "150px",
+      optionInnerMaxHeight: "200px",
       optionBottomBorder: true,
       onChange: function onChange(driverId) {
         return changeDriver(driverId);
       }
     }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
+      defaultValue: defaultOption || 'default',
+      options: driversOptionList,
+      optionInnerMargin: "10px",
+      optionInnerMaxHeight: "200px",
+      optionBottomBorder: true,
+      onChange: function onChange(driverId) {
+        return changeDriver(driverId);
+      }
+    })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
       defaultValue: "default",
       options: driversLoading,
       optionInnerMargin: "10px",
-      optionInnerMaxHeight: "150px",
+      optionInnerMaxHeight: "200px",
       optionBottomBorder: true
-    }));
+    })));
   }
 };
 

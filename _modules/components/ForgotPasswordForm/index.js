@@ -11,6 +11,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ConfigFileContext = require("../../contexts/ConfigFileContext");
 
+var _MdExitToApp = _interopRequireDefault(require("@meronex/icons/md/MdExitToApp"));
+
+var _HiOutlineMail = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineMail"));
+
 var _reactHookForm = require("react-hook-form");
 
 var _Confirm = require("../Confirm");
@@ -24,6 +28,8 @@ var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -173,7 +179,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     name: "project",
     "aria-label": "project",
@@ -185,7 +191,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       return hanldeChangeProject(e);
     },
     autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     name: "email",
     "aria-label": "email",
@@ -202,8 +208,9 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }
     }),
     autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "darkBlue",
+  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "primary",
     type: "submit",
     disabled: formState.loading || alertState.success
   }, formState.loading ? t('LOADING', 'Loading...') : alertState.success && formState.result.result ? t('LINK_SEND_FORGOT_PASSWORD', 'Link Sent') : t('FRONT_RECOVER_PASSWORD', 'Recover Password')), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {

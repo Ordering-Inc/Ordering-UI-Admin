@@ -31,6 +31,10 @@ var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
 
+var _HiOutlineMail = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineMail"));
+
+var _RiLockPasswordLine = _interopRequireDefault(require("@meronex/icons/ri/RiLockPasswordLine"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -56,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$icons, _theme$images4, _theme$images4$icons;
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -193,7 +197,8 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return hanldeChangeProject(e);
     },
-    autoComplete: "off"
+    autoComplete: "off",
+    autoCapitalize: "off"
   }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
@@ -209,11 +214,9 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$icons = _theme$images3.icons) === null || _theme$images3$icons === void 0 ? void 0 : _theme$images3$icons.email,
-    alt: "email"
-  })), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    autoComplete: "off",
+    autoCapitalize: "off"
+  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "tel",
     name: "cellphone",
     "aria-label": "cellphone",
@@ -240,12 +243,11 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$icons = _theme$images4.icons) === null || _theme$images4$icons === void 0 ? void 0 : _theme$images4$icons.lock,
-    alt: "lock"
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "darkBlue",
+    autoComplete: "off",
+    autoCapitalize: "off"
+  }), /*#__PURE__*/_react.default.createElement(_RiLockPasswordLine.default, null)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "primary",
     type: "submit",
     disabled: formState.loading
   }, formState.loading ? t('LOADING') + '...' : t('LOGIN'), /*#__PURE__*/_react.default.createElement(_BsArrowRightShort.default, null)), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {

@@ -17,7 +17,7 @@ require("react-datepicker/dist/react-datepicker.css");
 
 var _dayjs = _interopRequireDefault(require("dayjs"));
 
-var _Select = require("../../styles/Select");
+var _FirstSelect = require("../../styles/Select/FirstSelect");
 
 var _styles = require("./styles");
 
@@ -61,7 +61,7 @@ var DateTypeSelector = function DateTypeSelector(props) {
 
   var dateTypes = [{
     value: 'default',
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SELECT_DATE', 'Select date'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_DATE', 'Select date'))
   }, {
     value: 'today',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('TODAY', 'Today'))
@@ -131,7 +131,7 @@ var DateTypeSelector = function DateTypeSelector(props) {
       setEndDate(new Date(filterValues.deliveryEndDatetime));
     }
   }, [filterValues]);
-  return /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  return /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     defaultValue: filterValues.dateType || 'default',
     options: dateTypes,
     onChange: function onChange(dateType) {

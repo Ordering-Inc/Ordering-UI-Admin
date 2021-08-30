@@ -17,14 +17,12 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 5px 10px;\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n"])), function (props) {
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 10px;\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));
 });
 
 exports.Option = Option;
-
-var PlaceholderTitle = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 5px;\n  padding: 5px 10px;\n\n  svg {\n    width: 20px;\n    height: 20px;\n  }\n"])));
-
+var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n"])));
 exports.PlaceholderTitle = PlaceholderTitle;

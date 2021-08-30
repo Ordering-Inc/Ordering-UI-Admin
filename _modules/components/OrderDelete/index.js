@@ -90,21 +90,16 @@ var OrderDeleteUI = function OrderDeleteUI(props) {
     }
   }, [checkPasswordStatus]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    borderRadius: "6px",
-    withIcon: true,
+    borderRadius: "8px",
+    color: "secundary",
     onClick: function onClick() {
       return handleModalOpen();
     }
   }, width > 600 && t('DELETE', 'Delete'), /*#__PURE__*/_react.default.createElement(_FaTrash.default, null)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
     open: checkPasswordModalOpen,
+    width: "600px",
     onClose: function onClose() {
       return setCheckPasswordModalOpen(false);
-    },
-    acceptText: t('DELETE', 'Delete'),
-    onAccept: function onAccept() {
-      return getCheckPassword();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperCheckPassword, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONFIRM_PASSWORD', 'Confirm password')), /*#__PURE__*/_react.default.createElement("p", null, t('TYPE_YOUR_PASSWORD_TO_CONFIRM_DELETE', 'Type your password to confirm delete.')), /*#__PURE__*/_react.default.createElement("input", {
     autoComplete: "new-password",
@@ -114,7 +109,15 @@ var OrderDeleteUI = function OrderDeleteUI(props) {
     onChange: function onChange(e) {
       return handlePassword(e);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, checkPasswordStatus.error))));
+  }), (checkPasswordStatus === null || checkPasswordStatus === void 0 ? void 0 : checkPasswordStatus.error) && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, {
+    className: "text-danger"
+  }, checkPasswordStatus.error), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    borderRadius: "7.6px",
+    onClick: function onClick() {
+      return getCheckPassword();
+    }
+  }, t('CONFIRM', 'Confirm')))));
 };
 
 var OrderDelete = function OrderDelete(props) {

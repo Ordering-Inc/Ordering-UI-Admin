@@ -21,11 +21,11 @@ var WraaperLogs = _styledComponents.default.div(_templateObject || (_templateObj
 
 exports.WraaperLogs = WraaperLogs;
 
-var SkeletonHitory = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  column-gap: 20px;\n\n  span {\n    border-radius: 30px;\n  }\n\n  @media (max-width: 576px) {\n    span {\n      width: 250px !important;\n    }\n  }\n"])));
+var SkeletonHitory = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  column-gap: 20px;\n\n  span {\n    border-radius: 5px;\n  }\n\n  @media (max-width: 576px) {\n    span {\n      width: 250px !important;\n    }\n  }\n"])));
 
 exports.SkeletonHitory = SkeletonHitory;
 
-var BubbleConsole = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-radius: 50px;\n  padding: 5px 15px;\n  max-width: 90%;\n  margin-bottom: 15px;\n  background: #EFEFEF;\n  text-align: center;\n  height: auto;\n  overflow: hidden;\n  overflow-wrap: break-word;\n\n  @media (min-width: 1024px){\n    max-width: 60%\n  }\n"])));
+var BubbleConsole = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-radius: 5px;\n  padding: 5px 15px;\n  max-width: 90%;\n  margin-bottom: 15px;\n  background: #EFEFEF;\n  text-align: center;\n  height: auto;\n  overflow: hidden;\n  overflow-wrap: break-word;\n\n  @media (min-width: 1024px){\n    max-width: 60%\n  }\n"])));
 
 exports.BubbleConsole = BubbleConsole;
 

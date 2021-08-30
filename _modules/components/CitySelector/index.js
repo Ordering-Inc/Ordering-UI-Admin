@@ -1,19 +1,31 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CitySelector = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _FirstSelect = require("../../styles/Select/FirstSelect");
 
 var _MultiSelect = require("../../styles/MultiSelect");
 
 var _styles = require("./styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -27,35 +39,66 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CitySelector = function CitySelector(props) {
-  var filterValues = props.filterValues,
+var CitySelectorUI = function CitySelectorUI(props) {
+  var citiesList = props.citiesList,
+      isDefault = props.isDefault,
+      filterValues = props.filterValues,
+      defaultValue = props.defaultValue,
       handleChangeCity = props.handleChangeCity;
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      cityOptions = _useState2[0],
+      setCityOptions = _useState2[1];
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var cityTypes = [{
-    value: 1,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('AUSTIN', 'Austin'))
-  }, {
-    value: 2,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('NEW_YORK', 'New York'))
-  }, {
-    value: 3,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SAN_FRANCISCO', 'San Francisco'))
-  }];
+  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, {
+    isDefault: isDefault
+  }, t('SELECT_CITY', 'Select City'));
 
-  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_CITY', 'Select City'));
+  (0, _react.useEffect)(function () {
+    if (citiesList !== null && citiesList !== void 0 && citiesList.loading) return;
 
-  return /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
+    var _cityOptions = citiesList === null || citiesList === void 0 ? void 0 : citiesList.cities.map(function (city) {
+      return {
+        value: city.id,
+        content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+          noPadding: true
+        }, city === null || city === void 0 ? void 0 : city.name),
+        showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+          isDefault: isDefault
+        }, city === null || city === void 0 ? void 0 : city.name)
+      };
+    });
+
+    setCityOptions(_cityOptions);
+  }, [citiesList, isDefault]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isDefault ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     placeholder: placeholder,
-    defaultValue: filterValues.cityIds,
-    options: cityTypes,
+    defaultValue: defaultValue,
+    options: cityOptions,
     onChange: function onChange(city) {
       return handleChangeCity(city);
     }
+  }) : /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
+    placeholder: placeholder,
+    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.cityIds,
+    options: cityOptions,
+    onChange: function onChange(city) {
+      return handleChangeCity(city);
+    }
+  }));
+};
+
+var CitySelector = function CitySelector(props) {
+  var cityListProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: CitySelectorUI
   });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CityList, cityListProps);
 };
 
 exports.CitySelector = CitySelector;

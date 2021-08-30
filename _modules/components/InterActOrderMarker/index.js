@@ -67,7 +67,7 @@ var InterActOrderMarker = function InterActOrderMarker(props) {
 
   (0, _react.useEffect)(function () {
     if (!infoShow) return;
-    setInfoTop("-".concat(infoRef.current.scrollHeight + 30, "px"));
+    setInfoTop("-".concat(infoRef.current.scrollHeight + 55, "px"));
   }, [infoShow]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, infoShow && /*#__PURE__*/_react.default.createElement(_styles.InfoContainer, {
     ref: infoRef,
@@ -104,7 +104,7 @@ var InterActOrderMarker = function InterActOrderMarker(props) {
     fontWeight: "bold"
   }, t('LAST_LOCATION', 'Last location'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, parseDate(driver.last_location_at, {
     utc: false
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.RoundMarker, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperMapMarker, {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperMapMarker, {
     onMouseOver: function onMouseOver() {
       return setInfoShow(true);
     },
@@ -115,7 +115,7 @@ var InterActOrderMarker = function InterActOrderMarker(props) {
     bgimage: image
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, customer && /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), driver && /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
     bgimage: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver
-  })))));
+  }))));
 };
 
 exports.InterActOrderMarker = InterActOrderMarker;

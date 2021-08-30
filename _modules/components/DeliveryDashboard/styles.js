@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperOrderlist = exports.OrderAndDriverListContainer = exports.WrapperQuickShow = exports.Tab = exports.WrapperTab = exports.WrapperOrdersAndDriver = exports.OrdersCloseButton = exports.OrdersOpenButton = exports.DeliveryDashboardContainer = void 0;
+exports.WrapperDeliveriesLocation = exports.WrapperOrderlist = exports.OrdersContainer = exports.FilterContainer = exports.DeliveryDashboardContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,45 +17,28 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var DeliveryDashboardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  height: calc(100% - 20px);\n  background: #FAFAFA;\n  position: relative;\n  border-radius: 10px;\n  overflow: hidden;\n\n  @media (max-width: 1200px) {\n    height: calc(100% - 30px);\n  }\n\n  @media (max-width: 576px) {\n    height: calc(100vh - 65px);\n  }\n"])));
+var DeliveryDashboardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  margin-top: 0px;\n\n  @media (min-width: 760px) {\n    margin-top: 15px\n  }\n\n  @media (min-width: 1024px) {\n    flex-direction: row;\n    height: calc(100vh - 100px);\n  }\n"])));
 
 exports.DeliveryDashboardContainer = DeliveryDashboardContainer;
 
-var OrdersOpenButton = _styledComponents.default.button(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: block;\n  position: absolute;\n  right: 10px;\n  top: 20px;\n  border: none;\n  outline: none;\n  background: transparent;\n  z-index: 100;\n  cursor: pointer;\n\n  svg {\n    font-size: 30px;\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.btnDarkBlue;
+var FilterContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: #FFF;\n  padding: 0 12px;\n  z-index: 100;\n"])));
+
+exports.FilterContainer = FilterContainer;
+
+var OrdersContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  height: 100%;\n  overflow: hidden;\n  margin-top: 20px;\n\n  @media (min-width: 1024px) {\n    width: 330px;\n    max-width: 330px;\n    margin-top: 0px;\n  }\n\n  @media (min-width: 1300px) {\n    max-width: 500px;\n    width: 500px;\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
 });
 
-exports.OrdersOpenButton = OrdersOpenButton;
+exports.OrdersContainer = OrdersContainer;
 
-var OrdersCloseButton = _styledComponents.default.button(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: block;\n  position: absolute;\n  right: 10px;\n  top: 20px;\n  border: none;\n  outline: none;\n  background: transparent;\n  z-index: 100;\n  cursor: pointer;\n\n  svg {\n    font-size: 30px;\n    color: ", ";\n  }\n\n  @media (max-width: 576px) {\n    position: fixed;\n    z-index: 200;\n    top: 80px;\n  }\n"])), function (props) {
-  return props.theme.colors.btnDarkBlue;
-});
-
-exports.OrdersCloseButton = OrdersCloseButton;
-
-var WrapperOrdersAndDriver = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 350px;\n  box-shadow: 0px 3px 6px #00000029;\n  border-radius: 12px;\n  position: absolute;\n  background: #fff;\n  right: 10px;\n  top: 15px;\n  height: calc(100% - 30px);\n  overflow: hidden;\n\n  @media (max-width: 576px) {\n    position: fixed;\n    z-index: 100;\n    top: 75px;\n    height: calc(100vh - 80px);\n  }\n"])));
-
-exports.WrapperOrdersAndDriver = WrapperOrdersAndDriver;
-
-var WrapperTab = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 350px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 0;\n  border-bottom: 1px solid #F2F2F2;\n"])));
-
-exports.WrapperTab = WrapperTab;
-
-var Tab = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 50%;\n  text-align: center;\n  color: #C3C3C3;\n  cursor: pointer;\n  font-weight: 500;\n\n  ", "\n"])), function (_ref) {
-  var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    color: #1C202E;\n  "])));
-});
-
-exports.Tab = Tab;
-
-var WrapperQuickShow = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 56px;\n  padding: 5px 20px;\n  justify-content: flex-end;\n  column-gap: 10px;\n\n  svg {\n    width: 25px;\n    height: 25px;\n    cursor: pointer;\n  }\n"])));
-
-exports.WrapperQuickShow = WrapperQuickShow;
-
-var OrderAndDriverListContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  overflow: auto;\n  height: calc(100% - 91px);\n"])));
-
-exports.OrderAndDriverListContainer = OrderAndDriverListContainer;
-
-var WrapperOrderlist = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n"])));
+var WrapperOrderlist = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  height: 100%;\n"])));
 
 exports.WrapperOrderlist = WrapperOrderlist;
+
+var WrapperDeliveriesLocation = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  height: 80vh;\n  border-radius: 8px;\n  overflow: hidden;\n  margin-top: 20px;\n  \n  @media (min-width: 1024px) {\n    margin-top: 0px;\n    height: 100%;\n    flex: 1;\n    ", "\n  }\n"])), function (props) {
+  var _props$theme;
+
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "])));
+});
+
+exports.WrapperDeliveriesLocation = WrapperDeliveriesLocation;

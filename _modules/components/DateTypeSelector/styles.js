@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DateContainer = exports.Option = void 0;
+exports.DateContainer = exports.PlaceholderTitle = exports.Option = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,14 +17,16 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 10px;\n  padding: 5px 10px;\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n"])), function (props) {
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 10px;\n  padding: 10px 15px;\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));
 });
 
 exports.Option = Option;
+var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 10px;\n"])));
+exports.PlaceholderTitle = PlaceholderTitle;
 
-var DateContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 10px;\n\n  input {\n    border-radius: 20px;\n    width: 140px;\n    outline: none;\n    padding: 3px 10px;\n    border: 1px solid #F2F2F2;\n  }\n"])));
+var DateContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 10px;\n\n  input {\n    border-radius: 20px;\n    width: 140px;\n    outline: none;\n    padding: 3px 10px;\n    border: 1px solid #F2F2F2;\n  }\n"])));
 
 exports.DateContainer = DateContainer;

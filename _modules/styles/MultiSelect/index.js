@@ -15,6 +15,10 @@ var _RiCheckboxBlankCircleLine = _interopRequireDefault(require("@meronex/icons/
 
 var _RiCheckboxCircleLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxCircleLine"));
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
+var _Buttons = require("../Buttons");
+
 var _Selects = require("../Selects");
 
 var _styles = require("./styles");
@@ -69,6 +73,8 @@ var MultiSelect = function MultiSelect(props) {
   var dropdownReference = (0, _react.useRef)();
 
   var handleSelectClick = function handleSelectClick(e) {
+    var isInvalid = e.target.closest('.remove_option');
+    if (isInvalid) return;
     setOpen(!open);
   };
 
@@ -129,14 +135,28 @@ var MultiSelect = function MultiSelect(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, null, selectedOptions.length === 0 ? /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
-    onClick: handleSelectClick
+    onClick: function onClick(e) {
+      return handleSelectClick(e);
+    }
   }, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))) : /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
-    onClick: handleSelectClick
+    onClick: function onClick(e) {
+      return handleSelectClick(e);
+    }
   }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOptions.map(function (selectedOption) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: selectedOption.value
-    }, selectedOption.content, ",");
+    }, /*#__PURE__*/_react.default.createElement(_Selects.MultiSelectOption, null, selectedOption.showOnSelected || selectedOption.content, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      circle: true,
+      outline: true,
+      color: "primary",
+      type: "reset",
+      className: "remove_option",
+      onClick: function onClick() {
+        return onChange && onChange(selectedOption.value);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null))));
   })), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+    isAbsolute: true,
     position: "right",
     ref: dropdownReference
   }, /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {

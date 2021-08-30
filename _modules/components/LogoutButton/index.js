@@ -9,9 +9,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _FaSignOutAlt = _interopRequireDefault(require("@meronex/icons/fa/FaSignOutAlt"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _styles = require("../MobileSidebarMenu/styles");
+var _reactBootstrap = require("react-bootstrap");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,9 +38,13 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+    className: "d-flex align-items-center m-1",
+    variant: "",
     onClick: props.handleLogoutClick
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, null, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, null, t('LOGOUT', 'Logout'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowRight, {
+    size: 20
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('LOGOUT', 'Logout')));
 };
 
 var LogoutButton = function LogoutButton(props) {

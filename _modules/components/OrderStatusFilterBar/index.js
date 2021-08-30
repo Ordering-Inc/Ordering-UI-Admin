@@ -7,9 +7,9 @@ exports.OrderStatusFilterBar = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _styledComponents = require("styled-components");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _DragScroll = require("../DragScroll");
 
 var _styles = require("./styles");
 
@@ -28,8 +28,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
-  var _theme$images, _theme$images$orderSt, _theme$images2, _theme$images2$orderS, _theme$images3, _theme$images3$orderS, _theme$images4, _theme$images4$orderS;
-
   var selectedOrderStatus = props.selectedOrderStatus,
       changeOrderStatus = props.changeOrderStatus;
 
@@ -38,43 +36,33 @@ var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
     changeOrderStatus(orderStatus);
   };
 
-  var theme = (0, _styledComponents.useTheme)();
-
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterBarContainer, {
-    className: "order-status-filterbar"
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterInner, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStautsFilterItemContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterItem, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterContainer, {
+    className: "order_status_filter"
+  }, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'pending',
     onClick: function onClick() {
       return changeSelectedOrderStatus('pending');
     }
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$orderSt = _theme$images.orderStatus) === null || _theme$images$orderSt === void 0 ? void 0 : _theme$images$orderSt.pending
-  }), /*#__PURE__*/_react.default.createElement("span", null, t('PENDING', 'pending'))), /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterItem, {
+  }, t('PENDING', 'pending')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'inProgress',
     onClick: function onClick() {
       return changeSelectedOrderStatus('inProgress');
     }
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$orderS = _theme$images2.orderStatus) === null || _theme$images2$orderS === void 0 ? void 0 : _theme$images2$orderS.inProgress
-  }), /*#__PURE__*/_react.default.createElement("span", null, t('IN_PROGRESS', 'in progress'))), /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterItem, {
+  }, t('IN_PROGRESS', 'in progress')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'completed',
     onClick: function onClick() {
       return changeSelectedOrderStatus('completed');
     }
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$orderS = _theme$images3.orderStatus) === null || _theme$images3$orderS === void 0 ? void 0 : _theme$images3$orderS.completed
-  }), /*#__PURE__*/_react.default.createElement("span", null, t('COMPLETED', 'completed'))), /*#__PURE__*/_react.default.createElement(_styles.OrderStatusFilterItem, {
+  }, t('COMPLETED', 'completed')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'cancelled',
     onClick: function onClick() {
       return changeSelectedOrderStatus('cancelled');
     }
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$orderS = _theme$images4.orderStatus) === null || _theme$images4$orderS === void 0 ? void 0 : _theme$images4$orderS.cancelled
-  }), /*#__PURE__*/_react.default.createElement("span", null, t('CANCELLED', 'cancelled'))))));
+  }, t('CANCELLED', 'cancelled')))));
 };
 
 exports.OrderStatusFilterBar = OrderStatusFilterBar;

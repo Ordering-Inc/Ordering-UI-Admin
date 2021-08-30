@@ -9,29 +9,21 @@ exports.DeliveryDashboard = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _orderingComponentsAdmin = require("ordering-components-admin");
+var _DeliveriesLocation = require("../DeliveriesLocation");
 
-var _AiFillPlusCircle = _interopRequireDefault(require("@meronex/icons/ai/AiFillPlusCircle"));
+var _OrdersDashboardList = require("../OrdersDashboardList");
 
-var _FaRegTimesCircle = _interopRequireDefault(require("@meronex/icons/fa/FaRegTimesCircle"));
+var _OrderStatusFilterBar = require("../OrderStatusFilterBar");
 
-var _RiCheckboxBlankCircleLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankCircleLine"));
-
-var _RiCheckboxCircleLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxCircleLine"));
-
-var _DriversLocation = require("../DriversLocation");
-
-var _DeliveryDashboardOrdersList = require("../DeliveryDashboardOrdersList");
-
-var _DriversModal = require("../DriversModal");
+var _OrderStatusSubFilter = require("../OrderStatusSubFilter");
 
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -52,58 +44,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DeliveryDashboard = function DeliveryDashboard(props) {
-  var searchValue = props.searchValue,
-      filterValues = props.filterValues,
-      driversList = props.driversList,
-      deletedOrderId = props.deletedOrderId,
+  var driversList = props.driversList,
       ordersStatusGroup = props.ordersStatusGroup,
-      handleSelectedOrderIds = props.handleSelectedOrderIds,
-      activeSwitch = props.activeSwitch,
-      handleOpenOrderDetail = props.handleOpenOrderDetail;
+      selectedSubOrderStatus = props.selectedSubOrderStatus,
+      handleOrdersStatusGroupFilter = props.handleOrdersStatusGroupFilter,
+      handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus;
 
-  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
-  var _useState = (0, _react.useState)(true),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      openOrderAndDriver = _useState2[0],
-      setOpenOrderAndDriver = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
-    order: true,
-    driver: false
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      openTab = _useState4[0],
-      setOpenTab = _useState4[1];
-
-  var _useState5 = (0, _react.useState)('all'),
-      _useState6 = _slicedToArray(_useState5, 2),
-      driverAvailable = _useState6[0],
-      setDriverAvailable = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      interActionMapOrder = _useState8[0],
-      setInterActionMapOrder = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(true),
-      _useState10 = _slicedToArray(_useState9, 2),
-      isOnlyDelivery = _useState10[0],
-      setIsOnlyDelivery = _useState10[1];
-
-  var handleChangeDriverAvailable = function handleChangeDriverAvailable(available) {
-    setDriverAvailable(available);
-  };
-
-  var handleChangeOrderAndDriver = function handleChangeOrderAndDriver() {
-    setOpenTab({
-      order: true,
-      driver: false
-    });
-    setDriverAvailable('all');
-  };
+      interActionMapOrder = _useState2[0],
+      setInterActionMapOrder = _useState2[1];
 
   var handleUpdateDriverLocation = function handleUpdateDriverLocation(order) {
     setInterActionMapOrder(_objectSpread({}, order));
@@ -117,68 +67,24 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_DriversLocation.DriversLocation, {
-    driversList: driversList,
-    driverAvailable: driverAvailable,
-    interActionMapOrder: interActionMapOrder
-  }), !openOrderAndDriver ? /*#__PURE__*/_react.default.createElement(_styles.OrdersOpenButton, {
-    onClick: function onClick() {
-      return setOpenOrderAndDriver(true);
-    },
-    name: "order-open"
-  }, /*#__PURE__*/_react.default.createElement(_AiFillPlusCircle.default, null)) : /*#__PURE__*/_react.default.createElement(_styles.OrdersCloseButton, {
-    onClick: function onClick() {
-      return setOpenOrderAndDriver(false);
-    },
-    name: "order-close"
-  }, /*#__PURE__*/_react.default.createElement(_FaRegTimesCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.WrapperOrdersAndDriver, {
-    style: {
-      display: "".concat(openOrderAndDriver ? 'block' : 'none')
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperTab, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
-    active: openTab.order,
-    onClick: function onClick() {
-      return handleChangeOrderAndDriver();
-    }
-  }, t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
-    active: openTab.driver,
-    onClick: function onClick() {
-      return setOpenTab({
-        order: false,
-        driver: true
-      });
-    }
-  }, t('DRIVERS', 'Drivers'))), /*#__PURE__*/_react.default.createElement(_styles.WrapperQuickShow, null, !isOnlyDelivery ? /*#__PURE__*/_react.default.createElement(_RiCheckboxCircleLine.default, {
-    onClick: function onClick() {
-      return setIsOnlyDelivery(!isOnlyDelivery);
-    }
-  }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankCircleLine.default, {
-    onClick: function onClick() {
-      return setIsOnlyDelivery(!isOnlyDelivery);
-    }
-  }), t('SHOW_ALL', 'Show all')), /*#__PURE__*/_react.default.createElement(_styles.OrderAndDriverListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderlist, {
-    style: {
-      display: "".concat(openTab.order ? 'block' : 'none')
-    }
-  }, /*#__PURE__*/_react.default.createElement(_DeliveryDashboardOrdersList.DeliveryDashboardOrdersList, {
-    orderListView: "small",
-    searchValue: searchValue,
-    filterValues: filterValues,
-    deletedOrderId: deletedOrderId,
-    driversList: driversList,
+  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+    selectedOrderStatus: ordersStatusGroup,
+    changeOrderStatus: handleOrdersStatusGroupFilter
+  }), /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
-    activeSwitch: activeSwitch,
-    isOnlyDelivery: isOnlyDelivery,
-    interActionMapOrder: interActionMapOrder,
-    handleOpenOrderDetail: handleOpenOrderDetail,
-    handleLocation: handleLocation,
+    selectedSubOrderStatus: selectedSubOrderStatus,
+    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderlist, {
+    id: "cardOrders"
+  }, /*#__PURE__*/_react.default.createElement(_OrdersDashboardList.OrdersDashboardList, _extends({}, props, {
+    orderListView: "card",
+    selectedOrderCard: interActionMapOrder,
+    handleOrderCardClick: handleLocation,
     handleUpdateDriverLocation: handleUpdateDriverLocation
-  })), openTab.driver && /*#__PURE__*/_react.default.createElement(_DriversModal.DriversModal, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDeliveriesLocation, null, /*#__PURE__*/_react.default.createElement(_DeliveriesLocation.DeliveriesLocation, {
     driversList: driversList,
-    handleChangeDriverAvailable: handleChangeDriverAvailable,
-    handleSelectedOrderIds: handleSelectedOrderIds,
-    handleOpenOrderDetail: handleOpenOrderDetail
-  }))));
+    interActionMapOrder: interActionMapOrder
+  })));
 };
 
 exports.DeliveryDashboard = DeliveryDashboard;

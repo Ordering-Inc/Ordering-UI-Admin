@@ -13,11 +13,13 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Select = require("../../styles/Select");
 
-var _styles = require("./styles");
+var _FirstSelect = require("../../styles/Select/FirstSelect");
 
 var _styledComponents = require("styled-components");
 
 var _MultiSelect = require("../../styles/MultiSelect");
+
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -46,7 +48,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
   var _theme$images, _theme$images$orderSt, _theme$images2, _theme$images2$orderS, _theme$images3, _theme$images3$orderS, _theme$images4, _theme$images4$orderS;
 
-  var defaultValue = props.defaultValue,
+  var isFirstSelect = props.isFirstSelect,
+      defaultValue = props.defaultValue,
       deliveryType = props.deliveryType,
       mutiOrdersChange = props.mutiOrdersChange,
       orderId = props.orderId,
@@ -275,7 +278,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       } else if (deliveryType === 1) {
         var _filteredOrderStatues = [];
         var extractOrderStatus = [];
-        extractOrderStatus = orderStatuses.slice(0, 12);
+        extractOrderStatus = orderStatuses.slice(0, 13);
         _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
         extractOrderStatus = orderStatuses.slice(15, 18);
         _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
@@ -343,7 +346,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       }
     });
   } else {
-    return /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isFirstSelect ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
       type: type,
       optionInnerMaxHeight: "50vh",
       noSelected: noSelected,
@@ -353,7 +356,17 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
         return changeOrderStatus(orderStatus);
       },
       className: "orderStatus"
-    });
+    }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
+      type: type,
+      optionInnerMaxHeight: "50vh",
+      noSelected: noSelected,
+      defaultValue: defaultOptionValue,
+      options: filteredOrderStatuses,
+      onChange: function onChange(orderStatus) {
+        return changeOrderStatus(orderStatus);
+      },
+      className: "orderStatus"
+    }));
   }
 };
 

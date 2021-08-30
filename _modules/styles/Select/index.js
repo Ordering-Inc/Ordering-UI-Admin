@@ -9,15 +9,31 @@ exports.Select = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _EnChevronDown = _interopRequireDefault(require("@meronex/icons/en/EnChevronDown"));
+var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _reactPopper = require("react-popper");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _FiChevronDown = _interopRequireDefault(require("@meronex/icons/fi/FiChevronDown"));
 
 var _Selects = require("../Selects");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -37,53 +53,80 @@ var Select = function Select(props) {
       defaultValue = props.defaultValue,
       onChange = props.onChange,
       notAsync = props.notAsync,
-      type = props.type,
       noSelected = props.noSelected,
-      className = props.className;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      open = _useState2[0],
-      setOpen = _useState2[1];
-
+      minWidth = props.minWidth,
+      isSecondIcon = props.isSecondIcon;
   var defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
     return option.value === defaultValue;
   });
 
-  var _useState3 = (0, _react.useState)(defaultOption),
+  var _useState = (0, _react.useState)(defaultOption),
+      _useState2 = _slicedToArray(_useState, 2),
+      selectedOption = _useState2[0],
+      setSelectedOption = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(defaultValue),
       _useState4 = _slicedToArray(_useState3, 2),
-      selectedOption = _useState4[0],
-      setSelectedOption = _useState4[1];
+      value = _useState4[0],
+      setValue = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(defaultValue),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      value = _useState6[0],
-      setValue = _useState6[1];
+      open = _useState6[0],
+      setOpen = _useState6[1];
 
-  var dropdownReference = (0, _react.useRef)();
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      sessionState = _useSession2[0];
 
-  var handleSelectClick = function handleSelectClick(e) {
-    if (e.target.closest('.react-datepicker-wrapper') || e.target.closest('.react-datepicker')) return;
-    setOpen(!open);
+  var referenceElement = (0, _react.useRef)();
+  var popperElement = (0, _react.useRef)();
+  var arrowElement = (0, _react.useRef)();
+  var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
+    placement: 'bottom',
+    modifiers: [{
+      name: 'arrow',
+      options: {
+        element: arrowElement.current
+      }
+    }, {
+      name: 'offset',
+      options: {
+        offset: [0, 12]
+      }
+    }]
+  });
+  var styles = popper.styles,
+      attributes = popper.attributes,
+      forceUpdate = popper.forceUpdate;
+  (0, _react.useEffect)(function () {
+    forceUpdate && forceUpdate();
+  }, [open, sessionState]);
+
+  var handleClickOutside = function handleClickOutside(e) {
+    var _popperElement$curren, _referenceElement$cur;
+
+    if (!open) return;
+    var outsidePopover = !((_popperElement$curren = popperElement.current) !== null && _popperElement$curren !== void 0 && _popperElement$curren.contains(e.target));
+    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
+
+    if (outsidePopover && outsidePopoverMenu) {
+      setOpen(false);
+    }
   };
 
-  var closeSelect = function closeSelect(e) {
-    if (open) {
-      var _dropdownReference$cu;
-
-      var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target));
-
-      if (outsideDropdown) {
-        setOpen(false);
-      }
+  var handleKeyDown = function handleKeyDown(e) {
+    if (e.keyCode === 27) {
+      setOpen(false);
     }
   };
 
   (0, _react.useEffect)(function () {
-    if (!open) return;
-    document.addEventListener('click', closeSelect);
+    window.addEventListener('mouseup', handleClickOutside);
+    window.addEventListener('keydown', handleKeyDown);
     return function () {
-      return document.removeEventListener('click', closeSelect);
+      window.removeEventListener('mouseup', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
   (0, _react.useEffect)(function () {
@@ -109,22 +152,38 @@ var Select = function Select(props) {
     onChange && onChange(option.value);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
-    type: type,
-    className: className
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
-    onClick: handleSelectClick
-  }, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
-    onClick: handleSelectClick
-  }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
-    position: "right",
-    ref: dropdownReference
+  var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
+    display: open ? 'block' : 'none',
+    minWidth: minWidth || '100px'
+  });
+
+  if (!open) {
+    popStyle.transform = 'translate3d(0px, 0px, 0px)';
+  }
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+    className: "select",
+    ref: referenceElement,
+    onClick: function onClick() {
+      return setOpen(!open);
+    }
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null)))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+    className: "list",
+    ref: popperElement,
+    style: popStyle
+  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+    className: "options"
   }, /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
   }, options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       key: i,
+      minWidth: minWidth,
       selected: value === option.value,
       color: option.color,
       onClick: function onClick(e) {
@@ -135,7 +194,7 @@ var Select = function Select(props) {
       showDisable: option === null || option === void 0 ? void 0 : option.showDisable,
       className: option.disabled ? 'disabled' : null
     }, option.content);
-  }))));
+  })))));
 };
 
 exports.Select = Select;

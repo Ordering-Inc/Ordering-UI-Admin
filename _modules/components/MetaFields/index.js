@@ -13,19 +13,21 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Confirm = require("../Confirm");
 
-var _SpinnerLoader = require("../SpinnerLoader");
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _FaTrash = _interopRequireDefault(require("@meronex/icons/fa/FaTrash"));
+var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
 
-var _IosAddCircle = _interopRequireDefault(require("@meronex/icons/ios/IosAddCircle"));
+var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
 
-var _Select = require("../../styles/Select");
+var _FirstSelect = require("../../styles/Select/FirstSelect");
 
 var _reactHookForm = require("react-hook-form");
 
 var _jsoneditorReact = require("jsoneditor-react");
 
 require("jsoneditor-react/es/editor.min.css");
+
+var _SpinnerLoader = require("../SpinnerLoader");
 
 var _styles = require("./styles");
 
@@ -40,6 +42,14 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -197,9 +207,23 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
       });
     }
   }, [errors]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.loading ? /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
-    primary: true
-  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FEILDS', 'Custom Fields')), metaFieldsList.metaFields.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.metaFields.map(function (metaField) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.loading ? /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, _toConsumableArray(Array(10).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 50,
+      height: 30
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 50,
+      height: 30
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 150,
+      height: 30
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 25,
+      height: 30
+    }));
+  })) : /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FEILDS', 'Custom Fields')), metaFieldsList.metaFields.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.metaFields.map(function (metaField) {
     return /*#__PURE__*/_react.default.createElement(_styles.MetaContainer, {
       key: metaField.id
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -208,7 +232,7 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
       className: "meta_key"
     }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.key)), /*#__PURE__*/_react.default.createElement("div", {
       className: "meta_value"
-    }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.value_type === 'boolean' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value)), /*#__PURE__*/_react.default.createElement(_FaTrash.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.value_type === 'boolean' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value)), /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
       onClick: function onClick() {
         return handleDeleteMetaField(metaField.id);
       }
@@ -217,7 +241,7 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.MetaAddContainer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "meta_type"
-  }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     defaultValue: selectedMetaKey || 'text',
     options: metaTypeOptions,
     onChange: function onChange(key) {
@@ -281,7 +305,7 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
         message: t('VALIDATION_ERROR_DECIMAL', 'Invalid decimal').replace('_attribute_', t('VALUE', 'Vlue'))
       }
     })
-  }), selectedMetaKey === 'boolean' && /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }), selectedMetaKey === 'boolean' && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     className: "select-input",
     defaultValue: selectedBoolean || '1',
     options: booleanOptions,
@@ -297,9 +321,7 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement("button", {
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_IosAddCircle.default, null))))), actionState.loading && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
-    primary: true
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))))), actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR'),
     content: alertState.content,
     acceptText: t('ACCEPT'),

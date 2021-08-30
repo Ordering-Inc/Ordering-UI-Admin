@@ -47,7 +47,7 @@ var BusinessesSelector = function BusinessesSelector(props) {
       businessTypes = _useState2[0],
       setBusinessTypes = _useState2[1];
 
-  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SELECT_BUSINESS', 'Select business'));
+  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_BUSINESS', 'Select business'));
 
   var businessesLoading = [{
     value: 'default',

@@ -13,6 +13,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CheckBox = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  color: #182964;\n  svg {\n    width: 25px;\n    height: 25px;\n  }\n"])));
+var CheckBox = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  color: ", ";\n  svg {\n    width: 25px;\n    height: 25px;\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+});
 
 exports.CheckBox = CheckBox;
