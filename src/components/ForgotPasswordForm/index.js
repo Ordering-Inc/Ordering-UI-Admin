@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { ConfigFileContext } from '../../contexts/ConfigFileContext'
+import MdExitToApp from '@meronex/icons/md/MdExitToApp'
+import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
 
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
@@ -14,7 +16,8 @@ import {
   HeroContainer,
   FormInput,
   TitleFormSide,
-  RedirectLink
+  RedirectLink,
+  InputWithIcon
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -113,37 +116,48 @@ const ForgotPasswordUI = (props) => {
           isPopup={isPopup}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Input
-            type='text'
-            name='project'
-            aria-label='project'
-            placeholder={t('PROJECT', 'Project')}
-            ref={register({
-              required: t(
-                'VALIDATION_ERROR_REQUIRED',
-                'The project field is required'
-              ).replace('_attribute_', t('PROJECT', 'Project'))
-            })}
-            onChange={(e) => hanldeChangeProject(e)}
-            autoComplete='off'
-          />
-          <Input
-            type='text'
-            name='email'
-            aria-label='email'
-            spellcheck='false'
-            placeholder={t('EMAIL', 'Email')}
-            onChange={(e) => hanldeChangeInput(e)}
-            ref={register({
-              required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-              }
-            })}
-            autoComplete='off'
-          />
-          <Button color='darkBlue' type='submit' disabled={formState.loading || alertState.success}>
+          <InputWithIcon>
+            <Input
+              type='text'
+              name='project'
+              aria-label='project'
+              placeholder={t('PROJECT', 'Project')}
+              ref={register({
+                required: t(
+                  'VALIDATION_ERROR_REQUIRED',
+                  'The project field is required'
+                ).replace('_attribute_', t('PROJECT', 'Project'))
+              })}
+              onChange={(e) => hanldeChangeProject(e)}
+              autoComplete='off'
+            />
+            <MdExitToApp />
+          </InputWithIcon>
+          <InputWithIcon>
+            <Input
+              type='text'
+              name='email'
+              aria-label='email'
+              spellcheck='false'
+              placeholder={t('EMAIL', 'Email')}
+              onChange={(e) => hanldeChangeInput(e)}
+              ref={register({
+                required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+                }
+              })}
+              autoComplete='off'
+            />
+            <HiOutlineMail />
+          </InputWithIcon>
+          <Button
+            borderRadius='8px'
+            color='primary'
+            type='submit'
+            disabled={formState.loading || alertState.success}
+          >
             {formState.loading
               ? t('LOADING', 'Loading...')
               : alertState.success && formState.result.result

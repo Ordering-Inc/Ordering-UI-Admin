@@ -110,12 +110,12 @@ export const FormInput = styled.form`
   button {
     position: relative;
     margin-top: 40px;
-    padding: 12px 5px;
+    padding: 9px 5px;
 
     svg {
       position: absolute;
       right: 35px;
-      top: 15px;
+      top: 12px;
       font-size: 24px;
       padding: 0px;
     }
@@ -132,7 +132,7 @@ export const RedirectLink = styled.div`
   font-size: 17px;
 
   span {
-    color: #4C6CDB;
+    color: #FFF;
     margin-right: 5px;
 
     ${props => props.theme?.rtl && css`

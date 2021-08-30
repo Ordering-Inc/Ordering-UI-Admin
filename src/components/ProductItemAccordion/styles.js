@@ -6,7 +6,7 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
-  border-bottom: 1px solid #D9D9D9;
+  color: #191919;
 `
 
 const AccordionStyled = styled.div`
@@ -16,7 +16,6 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: pointer;
   transition: background-color 0.6s ease;
-  margin: 0px 10px;
 
   .rotate {
     transform: rotate(180deg);
@@ -57,21 +56,13 @@ export const WrapperProductImage = styled.div`
   max-height: 55px;
   height: 55px;
   width: 55px;
+  border-radius: 7.6px;
 
-  border-radius: 12px;
-
-  @media (min-width: 361px) {
-    max-width: 65px;
-    max-height: 65px;
-    height: 65px;
-    width: 65px;
-  }
-
-  @media (min-width: 411px) {
-    max-width: 70px;
-    max-height: 70px;
-    height: 70px;
-    width: 70px;
+  @media (min-width: 768px) {
+    max-width: 62px;
+    max-height: 62px;
+    height: 62px;
+    width: 62px;
   }
 `
 
@@ -119,8 +110,8 @@ export const ContentInfo = styled.div`
   h3 {
     font-size: 14px;
     margin: 0px;
-    font-weight: 600;
-    color: #263238;
+    font-weight: 400;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   span {
@@ -188,11 +179,15 @@ export const ProductComment = styled.div`
   }
 
   h3 {
+    font-size: 14px;
     font-weight: normal;
     text-transform: capitalize;
     margin: 0px 20px 0px 40px;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.5;
     overflow: hidden;
     ${props => props.theme?.rtl && css`
       margin: 0px 40px 0px 20px
@@ -290,6 +285,7 @@ export const ProductPrice = styled.div`
   p,
   span {
     font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
   }
 
   span {
@@ -303,13 +299,6 @@ export const ProductPrice = styled.div`
   svg {
     cursor: pointer;
   }
-
-  @media (min-width: 512px) {
-    span,
-    p {
-      font-size: 15px;
-    }
-  }
 `
 
 export const ProductSelect = styled.select`
@@ -319,11 +308,11 @@ export const ProductSelect = styled.select`
   background-color: transparent;
   font-size: 17px;
   outline: none;
-  margin-right: 5px;
+  margin-left: 5px;
 
   ${props => props.theme?.rtl && css`
-    margin-left: 5px;
-    margin-right: 0px;
+    margin-right: 5px;
+    margin-left: 0px;
   `}
 `
 
@@ -349,10 +338,13 @@ export const ProductOptionsList = styled.ul`
   p {
     font-weight: 400;
     margin: 0px;
+    color: ${props => props.theme.colors.lightGray};
+    font-size: 12px;
   }
 
   li span {
-    font-weight: 300;
+    color: ${props => props.theme.colors.lightGray};
+    font-size: 12px;
   }
 
   li.ingredient {
@@ -366,14 +358,12 @@ export const ProductOptionsList = styled.ul`
 
 export const ProductQuantity = styled.span`
   display: flex;
-
   p {
     margin: 0px 5px;
   }
+  margin: 0 10px 0 20px;
 
-  margin-right: 5px;
   ${props => props.theme?.rtl && css`
-    margin-left: 5px;
-    margin-right: 0px;
+    margin: 0 20px 0 10px;
   `}
 `

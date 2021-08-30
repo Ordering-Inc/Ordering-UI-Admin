@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
-import EnChevronDown from '@meronex/icons/en/EnChevronDown'
+import React, { useRef, useEffect, useState } from 'react'
+import { useSession } from 'ordering-components-admin'
+import { usePopper } from 'react-popper'
+import { CaretDownFill } from 'react-bootstrap-icons'
+import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
 
 import {
-  Select as SelectInput,
   Selected,
   Options,
   OptionsInner,
@@ -11,35 +13,66 @@ import {
   Header
 } from '../Selects'
 
-export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className } = props
+import {
+  HeaderItem,
+  PopoverBody
+} from './styles'
 
-  const [open, setOpen] = useState(false)
+export const Select = (props) => {
+  const { placeholder, options, defaultValue, onChange, notAsync, noSelected, minWidth, isSecondIcon } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
   )
   const [selectedOption, setSelectedOption] = useState(defaultOption)
   const [value, setValue] = useState(defaultValue)
-  const dropdownReference = useRef()
 
-  const handleSelectClick = (e) => {
-    if (e.target.closest('.react-datepicker-wrapper') || e.target.closest('.react-datepicker')) return
-    setOpen(!open)
+  const [open, setOpen] = useState(false)
+  const [sessionState] = useSession()
+  const referenceElement = useRef()
+  const popperElement = useRef()
+  const arrowElement = useRef()
+
+  const popper = usePopper(referenceElement.current, popperElement.current, {
+    placement: 'bottom',
+    modifiers: [
+      { name: 'arrow', options: { element: arrowElement.current } },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 12]
+        }
+      }
+    ]
+  })
+
+  const { styles, attributes, forceUpdate } = popper
+
+  useEffect(() => {
+    forceUpdate && forceUpdate()
+  }, [open, sessionState])
+
+  const handleClickOutside = (e) => {
+    if (!open) return
+    const outsidePopover = !popperElement.current?.contains(e.target)
+    const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
+    if (outsidePopover && outsidePopoverMenu) {
+      setOpen(false)
+    }
   }
 
-  const closeSelect = (e) => {
-    if (open) {
-      const outsideDropdown = !dropdownReference.current?.contains(e.target)
-      if (outsideDropdown) {
-        setOpen(false)
-      }
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      setOpen(false)
     }
   }
 
   useEffect(() => {
-    if (!open) return
-    document.addEventListener('click', closeSelect)
-    return () => document.removeEventListener('click', closeSelect)
+    window.addEventListener('mouseup', handleClickOutside)
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   useEffect(() => {
@@ -62,28 +95,38 @@ export const Select = (props) => {
     onChange && onChange(option.value)
   }
 
+  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: minWidth || '100px' }
+  if (!open) {
+    popStyle.transform = 'translate3d(0px, 0px, 0px)'
+  }
   return (
-    <SelectInput type={type} className={className}>
-      {!selectedOption && (
-        <Selected onClick={handleSelectClick}>
-          {placeholder || ''}
-          <Chevron>
-            <EnChevronDown />
-          </Chevron>
-        </Selected>
-      )}
-      {selectedOption && (
-        <Selected onClick={handleSelectClick}>
-          <Header>
-            {selectedOption.showOnSelected || selectedOption.content}
-          </Header>
-          <Chevron>
-            <EnChevronDown />
-          </Chevron>
-        </Selected>
-      )}
-      {open && options && (
-        <Options position='right' ref={dropdownReference}>
+    <div style={{ overflow: 'hidden' }}>
+      <HeaderItem
+        className='select'
+        ref={referenceElement}
+        onClick={() => setOpen(!open)}
+      >
+        {!selectedOption && (
+          <Selected>
+            {placeholder || ''}
+            <Chevron>
+              {isSecondIcon ? <FiChevronDown /> : <CaretDownFill />}
+            </Chevron>
+          </Selected>
+        )}
+        {selectedOption && (
+          <Selected>
+            <Header>
+              {selectedOption.showOnSelected || selectedOption.content}
+            </Header>
+            <Chevron>
+              {isSecondIcon ? <FiChevronDown /> : <CaretDownFill />}
+            </Chevron>
+          </Selected>
+        )}
+      </HeaderItem>
+      <PopoverBody className='list' ref={popperElement} style={popStyle} {...attributes.popper}>
+        <Options className='options'>
           <OptionsInner
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}
@@ -91,6 +134,7 @@ export const Select = (props) => {
             {options.map((option, i) => (
               <Option
                 key={i}
+                minWidth={minWidth}
                 selected={value === option.value}
                 color={option.color}
                 onClick={(e) => handleChangeOption(e, option)}
@@ -104,7 +148,7 @@ export const Select = (props) => {
             ))}
           </OptionsInner>
         </Options>
-      )}
-    </SelectInput>
+      </PopoverBody>
+    </div>
   )
 }

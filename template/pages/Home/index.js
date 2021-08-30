@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { Home as HomeController } from '../../../src/themes/two/src/components/Home'
+import { Home as HomeController } from '../../../src/components/Home'
 
 export const Home = (props) => {
   return (
