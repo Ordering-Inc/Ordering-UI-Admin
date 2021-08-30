@@ -1,6 +1,8 @@
 import React from 'react'
-import MdClose from '@meronex/icons/md/MdClose'
 import { Popup, useLanguage } from 'ordering-components-admin'
+import { Button, IconButton } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
+import { XLg } from 'react-bootstrap-icons'
 import {
   PopupDialog,
   PopupActions,
@@ -8,9 +10,6 @@ import {
   PopupContent,
   PopupIcon
 } from './styles'
-
-import { Button } from '../../styles/Buttons'
-import { useTheme } from 'styled-components'
 
 const ConfirmUI = (props) => {
   const {
@@ -27,7 +26,9 @@ const ConfirmUI = (props) => {
   return (
     <PopupDialog className='popup-dialog'>
       <PopupIcon>
-        <MdClose onClick={() => onClose()} />
+        <IconButton color='black' onClick={() => onClose()}>
+          <XLg />
+        </IconButton>
       </PopupIcon>
       {title && <PopupTitle>{title}</PopupTitle>}
       <PopupContent>
@@ -44,7 +45,7 @@ const ConfirmUI = (props) => {
       {(onCancel || onAccept || onClose) && (
         <PopupActions>
           {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-          {onAccept && <Button color='darkBlue' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+          {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
         </PopupActions>)}
     </PopupDialog>
   )

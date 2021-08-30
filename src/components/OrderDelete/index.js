@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CheckPassword as CheckPasswordController, useLanguage } from 'ordering-components-admin'
+import { useLanguage, CheckPassword as CheckPasswordController } from 'ordering-components-admin'
 import FaTrash from '@meronex/icons/fa/FaTrash'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
@@ -47,9 +47,8 @@ const OrderDeleteUI = (props) => {
   return (
     <>
       <Button
-        color='primary'
-        borderRadius='6px'
-        withIcon
+        borderRadius='8px'
+        color='secundary'
         onClick={() => handleModalOpen()}
       >
         {width > 600 && t('DELETE', 'Delete')}
@@ -57,11 +56,9 @@ const OrderDeleteUI = (props) => {
       </Button>
 
       <Modal
-        width='70%'
         open={checkPasswordModalOpen}
+        width='600px'
         onClose={() => setCheckPasswordModalOpen(false)}
-        acceptText={t('DELETE', 'Delete')}
-        onAccept={() => getCheckPassword()}
       >
         <WrapperCheckPassword>
           <h3>{t('CONFIRM_PASSWORD', 'Confirm password')}</h3>
@@ -73,9 +70,20 @@ const OrderDeleteUI = (props) => {
             placeholder={t('PASSWORD', 'password')}
             onChange={(e) => handlePassword(e)}
           />
-          <ErrorText>
-            {checkPasswordStatus.error}
-          </ErrorText>
+          {checkPasswordStatus?.error && (
+            <ErrorText
+              className='text-danger'
+            >
+              {checkPasswordStatus.error}
+            </ErrorText>
+          )}
+          <Button
+            color='primary'
+            borderRadius='7.6px'
+            onClick={() => getCheckPassword()}
+          >
+            {t('CONFIRM', 'Confirm')}
+          </Button>
         </WrapperCheckPassword>
       </Modal>
     </>

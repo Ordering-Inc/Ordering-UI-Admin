@@ -21,10 +21,11 @@ import {
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
-
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
+import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
+import RiLockPasswordLine from '@meronex/icons/ri/RiLockPasswordLine'
 
 const LoginFormUI = (props) => {
   const {
@@ -153,6 +154,7 @@ const LoginFormUI = (props) => {
                 })}
                 onChange={(e) => hanldeChangeProject(e)}
                 autoComplete='off'
+                autoCapitalize='off'
               />
               <MdExitToApp />
             </InputWithIcon>
@@ -179,8 +181,9 @@ const LoginFormUI = (props) => {
                   })}
                   onChange={(e) => handleChangeInput(e)}
                   autoComplete='off'
+                  autoCapitalize='off'
                 />
-                <img src={theme?.images?.icons?.email} alt='email' />
+                <HiOutlineMail />
               </InputWithIcon>
             )}
             {useLoginByCellphone && loginTab === 'cellphone' && (
@@ -223,10 +226,16 @@ const LoginFormUI = (props) => {
                 })}
                 onChange={(e) => handleChangeInput(e)}
                 autoComplete='off'
+                autoCapitalize='off'
               />
-              <img src={theme?.images?.icons?.lock} alt='lock' />
+              <RiLockPasswordLine />
             </InputWithIcon>
-            <Button color='darkBlue' type='submit' disabled={formState.loading}>
+            <Button
+              borderRadius='8px'
+              color='primary'
+              type='submit'
+              disabled={formState.loading}
+            >
               {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
               <BsArrowRightShort />
             </Button>

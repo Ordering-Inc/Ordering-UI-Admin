@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { MetaFields as MetaFieldsController, useLanguage } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
-import { SpinnerLoader } from '../SpinnerLoader'
-import FaTrash from '@meronex/icons/fa/FaTrash'
-import IosAddCircle from '@meronex/icons/ios/IosAddCircle'
-import { Select } from '../../styles/Select'
+import Skeleton from 'react-loading-skeleton'
+import BsTrash from '@meronex/icons/bs/BsTrash'
+import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
+import { Select } from '../../styles/Select/FirstSelect'
 import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
-
+import { SpinnerLoader } from '../SpinnerLoader'
 import {
   WrapMetaFields,
   MetaTitle,
@@ -16,7 +16,9 @@ import {
   RoundBorder,
   NoMetaField,
   MetaAddForm,
-  MetaAddContainer
+  MetaAddContainer,
+  SkeletonItem,
+  WrapperSpinnerLoader
 } from './styles'
 
 const MetaFieldsUI = (props) => {
@@ -134,7 +136,16 @@ const MetaFieldsUI = (props) => {
   return (
     <>
       {metaFieldsList.loading ? (
-        <SpinnerLoader primary />
+        <WrapMetaFields>
+          {[...Array(10).keys()].map(i => (
+            <SkeletonItem key={i}>
+              <Skeleton width={50} height={30} />
+              <Skeleton width={50} height={30} />
+              <Skeleton width={150} height={30} />
+              <Skeleton width={25} height={30} />
+            </SkeletonItem>
+          ))}
+        </WrapMetaFields>
       ) : (
         <WrapMetaFields>
           <MetaTitle>
@@ -162,7 +173,7 @@ const MetaFieldsUI = (props) => {
                         </>
                       )}
                     </RoundBorder>
-                    <FaTrash onClick={() => handleDeleteMetaField(metaField.id)} />
+                    <BsTrash onClick={() => handleDeleteMetaField(metaField.id)} />
                   </div>
                 </MetaContainer>
               ))}
@@ -277,13 +288,15 @@ const MetaFieldsUI = (props) => {
                 <button
                   type='submit'
                 >
-                  <IosAddCircle />
+                  <BsPlusSquare />
                 </button>
               </div>
             </MetaAddContainer>
           </MetaAddForm>
           {actionState.loading && (
-            <SpinnerLoader primary />
+            <WrapperSpinnerLoader>
+              <SpinnerLoader />
+            </WrapperSpinnerLoader>
           )}
         </WrapMetaFields>
       )}

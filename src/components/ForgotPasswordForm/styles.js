@@ -123,7 +123,7 @@ export const FormInput = styled.form`
   button {
     position: relative;
     margin-top: 40px;
-    padding: 12px 5px;
+    padding: 9px 5px;
 
     svg {
       position: absolute;
@@ -144,7 +144,7 @@ export const RedirectLink = styled.div`
   font-size: 17px;
 
   span {
-    color: #4C6CDB;
+    color: #FFF;
     margin-right: 5px;
 
     ${props => props.theme?.rtl && css`
@@ -188,5 +188,30 @@ export const RedirectLink = styled.div`
     ${({ isPopup }) => isPopup && css`
       font-size: 16px;
     `};
+  }
+`
+
+export const InputWithIcon = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+  }
+
+  img {
+    position: absolute;
+    width: 20px;
+    padding: 0px;
+    margin: 0 20px;
+  }
+
+  svg {
+    position: absolute;
+    font-size: 24px;
+    color: #707070;
+    padding: 0px;
+    margin: 0 20px;
   }
 `

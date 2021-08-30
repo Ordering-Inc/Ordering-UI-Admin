@@ -6,7 +6,6 @@ import {
   InfoContainer,
   TextContainer,
   Text,
-  RoundMarker,
   WrapperMapMarker,
   MapMarkerImg
 } from './styles'
@@ -28,7 +27,7 @@ export const InterActOrderMarker = (props) => {
 
   useEffect(() => {
     if (!infoShow) return
-    setInfoTop(`-${infoRef.current.scrollHeight + 30}px`)
+    setInfoTop(`-${infoRef.current.scrollHeight + 55}px`)
   }, [infoShow])
 
   return (
@@ -141,23 +140,21 @@ export const InterActOrderMarker = (props) => {
           )}
         </InfoContainer>
       )}
-      <RoundMarker>
-        <WrapperMapMarker
-          onMouseOver={() => setInfoShow(true)}
-          onMouseLeave={() => setInfoShow(false)}
-        >
-          {image ? (
-            <MapMarkerImg bgimage={image} />
-          ) : (
-            <>
-              {customer && <FaUserAlt />}
-              {driver && (
-                <MapMarkerImg bgimage={theme?.images?.icons?.noDriver} />
-              )}
-            </>
-          )}
-        </WrapperMapMarker>
-      </RoundMarker>
+      <WrapperMapMarker
+        onMouseOver={() => setInfoShow(true)}
+        onMouseLeave={() => setInfoShow(false)}
+      >
+        {image ? (
+          <MapMarkerImg bgimage={image} />
+        ) : (
+          <>
+            {customer && <FaUserAlt />}
+            {driver && (
+              <MapMarkerImg bgimage={theme?.images?.icons?.noDriver} />
+            )}
+          </>
+        )}
+      </WrapperMapMarker>
     </>
   )
 }

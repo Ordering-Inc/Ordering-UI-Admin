@@ -1,19 +1,36 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+
 export const WrapperMapMarker = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background: #fff;
-  border: 5px solid #F79B16;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 6px;
+  border: 3px solid #F79B16;
+  border-radius: 100%;
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -100%);
   z-index: 1;
 
   ${({ offline }) => offline && css`
-    border: 5px solid #9D9B9B;
+    border: 3px solid #9D9B9B;
   `}
+
+  &:after {
+    content:'';
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    margin-left: -22px;
+    width: 0;
+    height: 0;
+    border-top: solid 22px #F79B16;
+    ${({ offline }) => offline && css`
+      border-top: solid 22px #9D9B9B;
+    `}
+    border-left: solid 22px transparent;
+    border-right: solid 22px transparent;
+    z-index: 10;
+  }
 `
 const MapMarkerImgStyled = styled.div`
   display: flex;
@@ -25,7 +42,8 @@ const MapMarkerImgStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  border-radius: 5px;
+  border-radius: 100%;
+  z-index: 100;
 `
 export const MapMarkerImg = (props) => {
   return (
@@ -44,7 +62,7 @@ export const DriverInfo = styled.div`
   border-radius: 5px;
   padding: 10px;
   row-gap: 5px;
-  z-index: 2;
+  z-index: 200;
   box-shadow: 0px 2px 2px #00000029;
   display: flex;
   flex-direction: column;

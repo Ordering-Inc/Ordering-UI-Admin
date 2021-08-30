@@ -1,6 +1,7 @@
-import React from 'react'
-import MdClose from '@meronex/icons/md/MdClose'
+import React, { useEffect } from 'react'
+import { XLg } from 'react-bootstrap-icons'
 import { Popup, useLanguage } from 'ordering-components-admin'
+import { Button, IconButton } from '../../styles/Buttons'
 import {
   ModalDialog,
   ModalActions,
@@ -8,8 +9,6 @@ import {
   ModalIcon,
   ModalHeader
 } from './styles'
-
-import { Button } from '../../styles/Buttons'
 
 const ModalUI = (props) => {
   const {
@@ -24,6 +23,18 @@ const ModalUI = (props) => {
     hideCloseDefault
   } = props
   const [, t] = useLanguage()
+
+  const onCloseModal = (e) => {
+    if (e.code === 'Escape') {
+      onClose && onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (!props.open) return
+    document.addEventListener('keydown', onCloseModal)
+    return () => document.removeEventListener('keydown', onCloseModal)
+  }, [props.open])
   return (
     <ModalDialog
       className='popup-dialog'
@@ -34,7 +45,12 @@ const ModalUI = (props) => {
     >
       {!hideCloseDefault && (
         <ModalIcon className='modal-close-icon'>
-          <MdClose onClick={() => onClose()} />
+          <IconButton
+            color='black'
+            onClick={() => onClose()}
+          >
+            <XLg />
+          </IconButton>
         </ModalIcon>
       )}
       <ModalHeader>

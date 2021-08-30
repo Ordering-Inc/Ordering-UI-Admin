@@ -30,6 +30,7 @@ export const Content = styled.h1`
   padding-bottom: 50px;
   font-size: 24px;
   text-align: center;
+  color: ${props => props.theme.colors.headingColor};
 
   @media (min-width: 768px) {
     font-size: 32px;
@@ -51,7 +52,7 @@ export const Spinner = styled.div`
     height: 108px;
     border-radius: 50%;
     border: 8px solid #000;
-    border-color: ${props => `${props.theme.colors.btnDarkBlue} transparent ${props.theme.colors.btnDarkBlue} transparent`};
+    border-color: ${props => `${props.theme.colors.primary} transparent ${props.theme.colors.primary} transparent`};
     animation: spinner-content 1.8518518518518516s linear infinite;
   }
 

@@ -1,12 +1,10 @@
 import React from 'react'
-import { useTheme } from 'styled-components'
 import { useLanguage } from 'ordering-components-admin'
+import { DragScroll } from '../DragScroll'
 
 import {
-  OrderStatusFilterBarContainer,
-  OrderStatusFilterInner,
-  OrderStautsFilterItemContent,
-  OrderStatusFilterItem
+  OrderStatusFilterContainer,
+  Tab
 } from './styles'
 
 export const OrderStatusFilterBar = (props) => {
@@ -20,45 +18,40 @@ export const OrderStatusFilterBar = (props) => {
     changeOrderStatus(orderStatus)
   }
 
-  const theme = useTheme()
   const [, t] = useLanguage()
   return (
-    <OrderStatusFilterBarContainer className='order-status-filterbar'>
-      <OrderStatusFilterInner>
-        <OrderStautsFilterItemContent>
-          <OrderStatusFilterItem
+    <>
+      <OrderStatusFilterContainer className='order_status_filter'>
+        <DragScroll>
+          <Tab
             active={selectedOrderStatus === 'pending'}
             onClick={() => changeSelectedOrderStatus('pending')}
           >
-            <img src={theme?.images?.orderStatus?.pending} />
-            <span>{t('PENDING', 'pending')}</span>
-          </OrderStatusFilterItem>
+            {t('PENDING', 'pending')}
+          </Tab>
 
-          <OrderStatusFilterItem
+          <Tab
             active={selectedOrderStatus === 'inProgress'}
             onClick={() => changeSelectedOrderStatus('inProgress')}
           >
-            <img src={theme?.images?.orderStatus?.inProgress} />
-            <span>{t('IN_PROGRESS', 'in progress')}</span>
-          </OrderStatusFilterItem>
+            {t('IN_PROGRESS', 'in progress')}
+          </Tab>
 
-          <OrderStatusFilterItem
+          <Tab
             active={selectedOrderStatus === 'completed'}
             onClick={() => changeSelectedOrderStatus('completed')}
           >
-            <img src={theme?.images?.orderStatus?.completed} />
-            <span>{t('COMPLETED', 'completed')}</span>
-          </OrderStatusFilterItem>
+            {t('COMPLETED', 'completed')}
+          </Tab>
 
-          <OrderStatusFilterItem
+          <Tab
             active={selectedOrderStatus === 'cancelled'}
             onClick={() => changeSelectedOrderStatus('cancelled')}
           >
-            <img src={theme?.images?.orderStatus?.cancelled} />
-            <span>{t('CANCELLED', 'cancelled')}</span>
-          </OrderStatusFilterItem>
-        </OrderStautsFilterItemContent>
-      </OrderStatusFilterInner>
-    </OrderStatusFilterBarContainer>
+            {t('CANCELLED', 'cancelled')}
+          </Tab>
+        </DragScroll>
+      </OrderStatusFilterContainer>
+    </>
   )
 }

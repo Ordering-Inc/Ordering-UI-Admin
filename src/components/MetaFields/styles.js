@@ -1,19 +1,22 @@
 import styled from 'styled-components'
 
 export const WrapMetaFields = styled.div`
-  padding: 10px;
+  padding-top: 10px;
   box-sizing: border-box;
 `
 export const MetaTitle = styled.p`
-  font-size: 18px;
-  font-weight: 600;  
+  font-size: 20px;
+  font-weight: 600;
+  color: ${props => props.theme.colors?.headingColor};
 `
 export const MetaContainer = styled.div`
   display: flex;
   margin-bottom: 20px;
+  color: ${props => props.theme.colors?.headingColor};
 
   .meta_type {
-    width: 20%;
+    width: 25%;
+    font-size: 14px;
   }
   .meta_key {
     width: 25%;
@@ -30,8 +33,8 @@ export const MetaContainer = styled.div`
       width: 100%;
     }
     svg {
-      font-size: 24px;
-      color: darkRed;
+      font-size: 20px;
+      color: ${props => props.theme.colors?.headingColor};
       cursor: pointer;
     }
   }
@@ -40,18 +43,27 @@ export const MetaContainer = styled.div`
 export const MetaAddContainer = styled(MetaContainer)`
   input {
     border: 1px solid #c2c2c2;
-    border-radius: 20px;
-    padding: 5px 15px;
+    border-radius: 5px;
+    padding: 5px 10px;
     outline: none;
     font-size: 16px;
     box-sizing: border-box;
     width: 100%;
   }
+
+  button {
+    svg {
+      color: ${props => props.theme.colors.primary} !important;
+    }
+  }
 `
 export const RoundBorder = styled.div`
   border: 1px solid #c2c2c2;
-  border-radius: 20px;
-  padding: 5px 15px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: ${props => props.theme.colors?.headingColor};
+  overflow: hidden;
 `
 export const NoMetaField = styled.p`
   font-size: 14px;
@@ -80,14 +92,33 @@ export const MetaAddForm = styled.form`
       height: 100%;
     }
     .jsoneditor {
-      border: 1px solid #182964;
+      border: 1px solid ${props => props.theme.colors.primary};
       > div.jsoneditor-menu {
-        background-color: #182964;
-        border-bottom: 1px solid #182964;
+        background-color: ${props => props.theme.colors.primary};
+        border-bottom: 1px solid ${props => props.theme.colors.primary};
       }
     }
     .jsoneditor-search {
       display: none;
     }
+  }
+`
+
+export const SkeletonItem = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+
+  span {
+    border-radius: 5px;
+  }
+`
+
+export const WrapperSpinnerLoader = styled.div`
+  > div {
+    position: absolute;
+    top: 0px;
   }
 `

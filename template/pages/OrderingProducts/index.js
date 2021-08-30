@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { OrderingProducts as OrderingProductsController } from '../../../src/themes/two/src/components/OrderingProducts'
+import { OrderingProducts as OrderingProductsController } from '../../../src/components/OrderingProducts'
 
 export const OrderingProducts = (props) => {
   return (

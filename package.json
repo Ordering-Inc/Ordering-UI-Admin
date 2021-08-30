@@ -4,8 +4,7 @@
   "description": "Ordering UI Admin Components",
   "main": "./_modules/index.js",
   "exports": {
-    ".": "./_modules/index.js",
-    "./theme_two": "./_modules/themes/two/index.js"
+    ".": "./_modules/index.js"
   },
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",

@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
-import { BusinessessListing } from '../../../src/themes/two/src/components/BusinessessListing'
+import { BusinessessListing } from '../../../src/components/BusinessessListing'
 
 export const BusinessesList = (props) => {
   const [events] = useEvent()

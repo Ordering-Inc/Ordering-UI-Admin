@@ -3,14 +3,16 @@ import styled, { css } from 'styled-components'
 export const AutoscrollContainer = styled.span`
   display: ${props => props.modal ? 'flex' : 'inherit'};
   width: ${props => props.modal ? '300vw' : 'initial'};
-  
-  svg{
+   
+  .right-autoscroll,
+  .left-autoscroll {
+    z-index: 10;
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
     background: #D9D9D9;
     display: inline-block;
     border-radius: 50%;
-    width: 16px;
-    min-width: 16px;
-    height: 16px;
     align-self: center;
     top: ${props => props.modal ? '35%' : '0'};
     position: sticky;
@@ -19,14 +21,14 @@ export const AutoscrollContainer = styled.span`
     opacity: 0.8;
   }
 
-  #right-autoscroll{
+  .right-autoscroll{
     ${props => props.theme?.rtl ? css`
       left: 91%;
     ` : css`
       right: 1%;
     `}
   }
-  #left-autoscroll{
+  .left-autoscroll{
     ${props => props.theme?.rtl ? css`
       right: 91%;
     ` : css`
@@ -37,16 +39,16 @@ export const AutoscrollContainer = styled.span`
     border: 0
   }
   svg.hidden{
-    opacity: 0;
+    display: none;
   }
 
   @media (min-width: 480px){
-    #right-autoscroll{
+    .right-autoscroll{
     ${props => props.theme?.rtl && css`
       left: 94%;
     `}
    }
-    #left-autoscroll{
+    .left-autoscroll{
       ${props => props.theme?.rtl && css`
         right: 94%;
       `
@@ -58,22 +60,22 @@ export const AutoscrollContainer = styled.span`
     width: ${props => props.modal && '100%'};
     display: inherit;
     ${props => props.modal && css`
-      #left-autoscroll{
+      .left-autoscroll{
         opacity: 0;
       }
-      #right-autoscroll{
+      .right-autoscroll{
         opacity: 0;
       }
     `}
   }
 
   @media (min-width: 1024px){
-    #right-autoscroll{
+    .right-autoscroll{
     ${props => props.theme?.rtl && css`
       left: 97%;
     `}
    }
-    #left-autoscroll{
+    .left-autoscroll{
       ${props => props.theme?.rtl && css`
         right: 97%;
       `

@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const Option = styled.div`
-  color: #000;
   display: flex;
   align-items: center;
-  padding: 3px 0;
+  padding: 5px 10px;
   column-gap: 5px;  
 
   ${({ noPadding }) => noPadding && css`
@@ -20,14 +19,7 @@ export const Option = styled.div`
     white-space: nowrap;
   }
 `
-export const PlaceholderTitle = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 5px;
-  padding: 5px 10px;
 
-  svg {
-    width: 20px;
-    height: 20px;
-  }
+export const PlaceholderTitle = styled(Option)`
+  padding: 10px;
 `
