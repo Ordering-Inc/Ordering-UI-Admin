@@ -13,10 +13,6 @@ export const BusinessImg = styled.div`
   background: #E9ECEF;
   border-radius: 7.6px;
 
-  ${({ isEdit }) => !isEdit && css`
-    pointer-event: none;
-  `}
-
   img,
   div {
     width: 100%;
@@ -94,10 +90,6 @@ export const LogoImage = styled.div`
   background: #E9ECEF;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
-
-  ${({ isEdit }) => !isEdit && css`
-    pointer-event: none;
-  `}
 
   img,
   div {

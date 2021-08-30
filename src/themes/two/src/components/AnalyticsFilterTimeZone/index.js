@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Button } from '../../styles/Buttons'
-import timezones from 'timezones-list'
+import { timezones } from '../../config/constants'
 import GoSearch from '@meronex/icons/go/GoSearch'
 import { useLanguage } from 'ordering-components-admin'
 import {
@@ -26,7 +26,7 @@ export const AnalyticsFilterTimeZone = (props) => {
 
   const filterTimeZone = (evt) => {
     const timeZoneToFilter = timezones
-    const _timeZoneList = timeZoneToFilter?.filter(item => item.tzCode?.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase()))
+    const _timeZoneList = timeZoneToFilter?.filter(item => item?.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase()))
     setTimeZoneList(_timeZoneList)
     setSearchVal(evt.target.value)
   }
@@ -76,9 +76,9 @@ export const AnalyticsFilterTimeZone = (props) => {
                 timeZoneList && timeZoneList.map((timezone, i) => (
                   <TimezoneListItem
                     key={i}
-                    onClick={() => handleChangeTimeZone(timezone.tzCode)}
+                    onClick={() => handleChangeTimeZone(timezone)}
                   >
-                    {timezone?.tzCode}
+                    {timezone}
                   </TimezoneListItem>
                 ))
               }
