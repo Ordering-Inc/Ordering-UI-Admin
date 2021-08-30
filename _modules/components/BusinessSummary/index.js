@@ -75,7 +75,7 @@ var BusinessSummary = function BusinessSummary(props) {
   var history = (0, _reactRouter.useHistory)();
 
   var handleOpenCategory = function handleOpenCategory() {
-    history.push("/stores/".concat(businessState.business.slug));
+    history.push("/stores/list/".concat(businessState.business.slug));
   };
 
   var businessConfigs = [{
