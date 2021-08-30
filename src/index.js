@@ -77,6 +77,7 @@ import { OrdersManager } from './components/OrdersManager'
 import { OrdersTable } from './components/OrdersTable'
 import { OrderStatusFilterBar } from './components/OrderStatusFilterBar'
 import { OrderStatusSubFilter } from './components/OrderStatusSubFilter'
+import { PageNotFound } from './components/PageNotFound'
 import { PaymethodTypeSelector } from './components/PaymethodTypeSelector'
 import { Personalization } from './components/Personalization'
 import { PlaceListing } from './components/PlaceListing'
@@ -199,6 +200,7 @@ export {
   OrdersTable,
   OrderStatusFilterBar,
   OrderStatusSubFilter,
+  PageNotFound,
   PaymethodTypeSelector,
   Personalization,
   PlaceListing,
