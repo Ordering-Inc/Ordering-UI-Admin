@@ -44,7 +44,7 @@ export const SkeletonHitory = styled.div`
   column-gap: 20px;
 
   span {
-    border-radius: 30px;
+    border-radius: 5px;
   }
 
   @media (max-width: 576px) {

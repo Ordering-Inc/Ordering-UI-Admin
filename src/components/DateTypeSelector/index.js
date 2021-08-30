@@ -4,8 +4,8 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
 
-import { Select } from '../../styles/Select'
-import { Option, DateContainer } from './styles'
+import { Select } from '../../styles/Select/FirstSelect'
+import { Option, DateContainer, PlaceholderTitle } from './styles'
 
 export const DateTypeSelector = (props) => {
   const {
@@ -20,7 +20,7 @@ export const DateTypeSelector = (props) => {
   const [endDate, setEndDate] = useState(null)
 
   const dateTypes = [
-    { value: 'default', content: <Option>{t('SELECT_DATE', 'Select date')}</Option> },
+    { value: 'default', content: <PlaceholderTitle>{t('SELECT_DATE', 'Select date')}</PlaceholderTitle> },
     { value: 'today', content: <Option>{t('TODAY', 'Today')}</Option> },
     { value: 'yesterday', content: <Option>{t('YESTERDAY', 'Yesterday')}</Option> },
     { value: 'last7', content: <Option>{t('LAST_7_DAYS', 'Last 7 dyas')}</Option> },

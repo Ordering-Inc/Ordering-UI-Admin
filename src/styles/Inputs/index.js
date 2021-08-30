@@ -4,11 +4,11 @@ import { Button } from '../Buttons'
 
 export const Input = styled.input`
   background: #FFF;
-  color: #707070;
-  border: 1px solid #707070;
-  border-radius: 30px;
-  font-size: 16px;
-  padding: 7px 15px;
+  color: ${props => props.theme.colors.headingColor};
+  border: 1px solid #DEE2E6;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px 15px;
   outline: none;
 
   &:focus {
@@ -21,10 +21,16 @@ export const Input = styled.input`
 
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: #959595;
+    color: #B1BCCC;
   }
   &:-ms-input-placeholder {
-    color: #959595;
+    color: #B1BCCC;
+  }
+
+  &:read-only {
+    background-color: #F8F9FA;
+    cursor: not-allowed;
+    border-color: #DEE2E6;
   }
 `
 
@@ -52,7 +58,7 @@ export const InputGroupLeft = styled.div`
   line-height: 34px;
   padding-left: 7px;
   padding-right: 7px;
-  font-size: 16px;
+  font-size: 14px;
   border-width: 1px;
   height: 34px;
   border-style: solid;
@@ -66,7 +72,7 @@ export const InputGroupLeft = styled.div`
     margin-left: -7px;
     ${props => props.theme?.rtl && css`
         margin-right: -7px;
-        margin-left: 0
+        margin-left: 0;
     `}
   }
 `
@@ -87,7 +93,7 @@ export const InputGroupRight = styled(InputGroupLeft)`
     margin-right: -7px;
     ${props => props.theme?.rtl && css`
         margin-left: -7px;
-        margin-right: 0
+        margin-right: 0;
     `}
   }
 `
@@ -115,5 +121,34 @@ export const InputGroupPrimary = styled(InputGroup)`
   & > ${InputGroupLeft} {
     color: ${props => props.theme.colors.primary};
     border-color: ${props => props.theme.colors.primary};
+  }
+`
+
+export const TextArea = styled.textarea`
+  background: #FFF;
+  color: ${props => props.theme.colors.headingColor};
+  border: 1px solid #DEE2E6;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px 15px;
+  outline: none;
+  resize: none;
+  &:focus {
+    border-color: ${() => darken(0.07, '#CCC')};
+  }
+  ${({ w }) => w && css`
+    width: 20%;
+  `}
+  &::placeholder,
+  &::-webkit-input-placeholder {
+    color: #B1BCCC;
+  }
+  &:-ms-input-placeholder {
+    color: #B1BCCC;
+  }
+  &:read-only {
+    background-color: #F8F9FA;
+    cursor: not-allowed;
+    border-color: #DEE2E6;
   }
 `

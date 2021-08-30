@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import CheckboxBlankCircle from '@meronex/icons/ri/RiCheckboxBlankCircleLine'
 import CheckboxMarkedCircle from '@meronex/icons/ri/RiCheckboxCircleLine'
+import MdClose from '@meronex/icons/md/MdClose'
+import { Button } from '../Buttons'
 
 import {
   Select as SelectInput,
@@ -10,7 +12,8 @@ import {
   OptionsInner,
   Option,
   Chevron,
-  Header
+  Header,
+  MultiSelectOption
 } from '../Selects'
 
 import {
@@ -26,6 +29,8 @@ export const MultiSelect = (props) => {
   const dropdownReference = useRef()
 
   const handleSelectClick = (e) => {
+    const isInvalid = e.target.closest('.remove_option')
+    if (isInvalid) return
     setOpen(!open)
   }
 
@@ -76,18 +81,30 @@ export const MultiSelect = (props) => {
   return (
     <SelectInput>
       {selectedOptions.length === 0 ? (
-        <Selected onClick={handleSelectClick}>
+        <Selected onClick={(e) => handleSelectClick(e)}>
           {placeholder || ''}
           <Chevron>
             <EnChevronDown />
           </Chevron>
         </Selected>
       ) : (
-        <Selected onClick={handleSelectClick}>
+        <Selected onClick={(e) => handleSelectClick(e)}>
           <Header>
             {selectedOptions.map((selectedOption) => (
               <React.Fragment key={selectedOption.value}>
-                {selectedOption.content},
+                <MultiSelectOption>
+                  {selectedOption.showOnSelected || selectedOption.content}
+                  <Button
+                    circle
+                    outline
+                    color='primary'
+                    type='reset'
+                    className='remove_option'
+                    onClick={() => onChange && onChange(selectedOption.value)}
+                  >
+                    <MdClose />
+                  </Button>
+                </MultiSelectOption>
               </React.Fragment>
             ))}
           </Header>
@@ -97,7 +114,11 @@ export const MultiSelect = (props) => {
         </Selected>
       )}
       {open && options && (
-        <Options position='right' ref={dropdownReference}>
+        <Options
+          isAbsolute
+          position='right'
+          ref={dropdownReference}
+        >
           <OptionsInner
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}

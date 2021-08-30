@@ -10,8 +10,8 @@ import { useSession, useOrder, useLanguage } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 
-import { SidebarMenu } from '../src/themes/two/src/components/SidebarMenu'
-import { Layout } from '../src/themes/two/src/components/Layout'
+import { SidebarMenu } from '../src/components/SidebarMenu'
+import { Layout } from '../src/components/Layout'
 
 import { Home } from './pages/Home'
 import { PageNotFound } from './pages/PageNotFound'
@@ -44,7 +44,7 @@ import { DriversGroupsList } from './pages/DriversGroupsList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
-import { SpinnerLoader } from '../src/themes/two/src/components/SpinnerLoader'
+import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {
@@ -180,6 +180,13 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
+                    <Route exact path='/stores/list/:store'>
+                      {
+                        auth
+                          ? <BusinessProductsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route exact path='/settings/basic'>
                       {
                         auth
@@ -219,13 +226,6 @@ export const App = () => {
                       {
                         auth
                           ? <LanguageManager />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/store/:store'>
-                      {
-                        auth
-                          ? <BusinessProductsList />
                           : <Redirect to='/login' />
                       }
                     </Route>

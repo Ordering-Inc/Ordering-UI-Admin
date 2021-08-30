@@ -4,10 +4,9 @@ import { darken } from 'polished'
 export const Option = styled.div`
   display: flex;
   align-items: center;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 5px 10px;
   box-sizing: border-box;
-  min-width: 100px;
+  min-width: ${({ minWidth }) => minWidth || '100px'};
   color: #333;
   cursor: pointer;
 
@@ -59,15 +58,13 @@ export const Option = styled.div`
 `
 
 export const Options = styled.div`
-  position: absolute;
   min-width: 100%;
   background-color: #fff;
-  margin-top: 7px;
   z-index: 10000;
   border-width: 1px;
   border-style: solid;
-  border-color: #1C202E;
-  border-radius: 10px;
+  border-color: #E9ECEF;
+  border-radius: 7.6px;
   overflow: hidden;
 
   ${({ position }) => position?.toLowerCase() === 'left' && css`
@@ -77,7 +74,7 @@ export const Options = styled.div`
         margin-right: -1px;
         margin-left: 0px;
         right: 0;
-        left: initial
+        left: initial;
     `}
   `}
   ${({ position }) => position?.toLowerCase() === 'right' && css`
@@ -89,6 +86,11 @@ export const Options = styled.div`
         left: 0;
         right: initial;
     `}
+  `}
+
+  ${({ isAbsolute }) => isAbsolute && css`
+    position: absolute;
+    margin-top: 7px;
   `}
 `
 
@@ -129,12 +131,12 @@ export const Selected = styled.div`
 
 export const Select = styled.div`
   display: inline-block;
-  border-radius: 40px;
+  border-radius: 7.6px;
   line-height: 34px;
   border-width: 1px;
   border-style: solid;
-  border-color: #1C202E;
-  color: #1C202E;
+  border-color: #DEE2E6;
+  color: #344050;
   position: relative;
 
   ${props => props.open && css`
@@ -145,28 +147,27 @@ export const Select = styled.div`
     background: ${props => props.theme.colors.btnPrimary};
     color: ${props => props.theme.colors.btnPrimaryContrast};
     border-color: ${props => props.theme.colors.btnPrimary};
-    border-radius: 6px;
+    border-radius: 7.6px;
   `}
 `
 
 export const Chevron = styled.div`
-  font-size: 18px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   margin-left: 5px;
-  margin-right: -5px;
   ${props => props.theme?.rtl && css`
-        margin-right: 5px;
-        margin-left: -5px;
-    `}
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
 `
 
 export const Header = styled.div`
   flex: 1;
-  overflow: hidden;
+  overflow: auto;
   white-space: nowrap;
   display: flex;
-  align-items: baseline;
+  align-items: center;
 `
 
 export const SelectImage = styled.div`
@@ -177,12 +178,28 @@ export const SelectImage = styled.div`
   overflow: hidden;
 
   ${props => props.theme?.rtl && css`
-        margin-left: 5px;
-        margin-right: 0;
+    margin-left: 5px;
+    margin-right: 0;
   `}
 
   img {
     width: 100%;
     height: 100%;
+  }
+`
+
+export const MultiSelectOption = styled.div`
+  position: relative;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: white;
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
+    top: 11px;
+    right: 15px;
   }
 `

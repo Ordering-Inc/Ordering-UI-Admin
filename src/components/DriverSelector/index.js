@@ -4,24 +4,25 @@ import { useTheme } from 'styled-components'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Select } from '../../styles/Select'
+import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import FiPhone from '@meronex/icons/fi/FiPhone'
 import { MultiSelect } from '../../styles/MultiSelect'
 
 import {
   Option,
   OptionContent,
   DriverNameContainer,
-  PhoneContainer,
   WrapperDriverImage,
   DriverImage,
   DriverName,
-  DriverText
+  DriverText,
+  PlaceholderTitle
 } from './styles'
 toast.configure()
 
 const DriverSelectorUI = (props) => {
   const {
+    isFirstSelect,
     order,
     driversList,
     defaultValue,
@@ -42,7 +43,7 @@ const DriverSelectorUI = (props) => {
   const [driversOptionList, setDriversOptionList] = useState([])
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
   const [isRemoveAction, setIsRemoveAction] = useState(false)
-  const driversLoading = [{ value: 'default', content: <Option small={small}>{t('DRIVERS_LOADING', 'Drivers loading')}...</Option> }]
+  const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
   useEffect(() => {
     const _driversOptionList = [
       {
@@ -97,12 +98,6 @@ const DriverSelectorUI = (props) => {
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
                   <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
                 </DriverNameContainer>
-                {isPhoneView && driver.cellphone && (
-                  <PhoneContainer>
-                    <FiPhone />
-                    {driver.cellphone}
-                  </PhoneContainer>
-                )}
               </OptionContent>
             </Option>
           )
@@ -188,7 +183,7 @@ const DriverSelectorUI = (props) => {
     setDefaultOption(defaultValue)
   }, [defaultValue])
 
-  const Placeholder = <Option>{t('SELECT_DRIVER', 'Select driver')}</Option>
+  const Placeholder = <PlaceholderTitle>{t('SELECT_DRIVER', 'Select driver')}</PlaceholderTitle>
 
   if (isFilterView) {
     return (
@@ -218,22 +213,37 @@ const DriverSelectorUI = (props) => {
     return (
       <>
         {!driversList.loading ? (
-          <Select
-            defaultValue={defaultOption || 'default'}
-            options={driversOptionList}
-            optionInnerMargin='10px'
-            optionInnerMaxHeight='150px'
-            optionBottomBorder
-            onChange={(driverId) => changeDriver(driverId)}
-          />
+          <>
+            {isFirstSelect ? (
+              <FirstSelect
+                defaultValue={defaultOption || 'default'}
+                options={driversOptionList}
+                optionInnerMargin='10px'
+                optionInnerMaxHeight='200px'
+                optionBottomBorder
+                onChange={(driverId) => changeDriver(driverId)}
+              />
+            ) : (
+              <Select
+                defaultValue={defaultOption || 'default'}
+                options={driversOptionList}
+                optionInnerMargin='10px'
+                optionInnerMaxHeight='200px'
+                optionBottomBorder
+                onChange={(driverId) => changeDriver(driverId)}
+              />
+            )}
+          </>
         ) : (
-          <Select
-            defaultValue='default'
-            options={driversLoading}
-            optionInnerMargin='10px'
-            optionInnerMaxHeight='150px'
-            optionBottomBorder
-          />
+          <>
+            <Select
+              defaultValue='default'
+              options={driversLoading}
+              optionInnerMargin='10px'
+              optionInnerMaxHeight='200px'
+              optionBottomBorder
+            />
+          </>
         )}
       </>
     )

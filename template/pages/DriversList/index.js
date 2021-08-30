@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
-import { DriversManager as DriversManagerController } from '../../../src/themes/two/src/components/DriversManager'
+import { DriversManager as DriversManagerController } from '../../../src/components/DriversManager'
 
 export const DriversList = (props) => {
   const [events] = useEvent()

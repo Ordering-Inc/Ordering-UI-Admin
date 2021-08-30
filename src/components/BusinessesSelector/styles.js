@@ -5,13 +5,17 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   column-gap: 10px;
-  padding: 15px 10px;
+  padding: 5px 10px;
 
   img {
     width: 45px;
   }
-
 `
+
+export const PlaceholderTitle = styled(Option)`
+  padding: 10px;
+`
+
 export const OptionContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,6 +46,7 @@ export const WrapperBusinessImage = styled.div`
     border-radius: 50%;
   }
 `
+
 const BusinessImageStyled = styled.div`
   display: flex;
   width: 100%;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { DriverAnalytics as DriverAnalyticsController } from '../../../src/themes/two/src/components/DriverAnalytics'
+import { DriverAnalytics as DriverAnalyticsController } from '../../../src/components/DriverAnalytics'
 
 export const DriverAnalytics = (props) => {
   return (

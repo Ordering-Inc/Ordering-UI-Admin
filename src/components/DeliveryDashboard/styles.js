@@ -1,113 +1,65 @@
 import styled, { css } from 'styled-components'
 
 export const DeliveryDashboardContainer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 0px;
+
+  @media (min-width: 760px) {
+    margin-top: 15px
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    height: calc(100vh - 100px);
+  }
+`
+
+export const FilterContainer = styled.div`
+  position: sticky;
+  top: 0px;
+  background: #FFF;
+  padding: 0 12px;
+  z-index: 100;
+`
+
+export const OrdersContainer = styled.div`
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  border-radius: 8px;
+  height: 100%;
+  overflow: hidden;
   margin-top: 20px;
-  height: calc(100% - 20px);
-  background: #FAFAFA;
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
 
-  @media (max-width: 1200px) {
-    height: calc(100% - 30px);
+  @media (min-width: 1024px) {
+    width: 330px;
+    max-width: 330px;
+    margin-top: 0px;
   }
 
-  @media (max-width: 576px) {
-    height: calc(100vh - 65px);
+  @media (min-width: 1300px) {
+    max-width: 500px;
+    width: 500px;
   }
 `
-export const OrdersOpenButton = styled.button`
-  display: block;
-  position: absolute;
-  right: 10px;
-  top: 20px;
-  border: none;
-  outline: none;
-  background: transparent;
-  z-index: 100;
-  cursor: pointer;
 
-  svg {
-    font-size: 30px;
-    color: ${props => props.theme.colors.btnDarkBlue};
-  }
-`
-export const OrdersCloseButton = styled.button`
-  display: block;
-  position: absolute;
-  right: 10px;
-  top: 20px;
-  border: none;
-  outline: none;
-  background: transparent;
-  z-index: 100;
-  cursor: pointer;
-
-  svg {
-    font-size: 30px;
-    color: ${props => props.theme.colors.btnDarkBlue};
-  }
-
-  @media (max-width: 576px) {
-    position: fixed;
-    z-index: 200;
-    top: 80px;
-  }
-`
-export const WrapperOrdersAndDriver = styled.div`
-  width: 350px;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 12px;
-  position: absolute;
-  background: #fff;
-  right: 10px;
-  top: 15px;
-  height: calc(100% - 30px);
-  overflow: hidden;
-
-  @media (max-width: 576px) {
-    position: fixed;
-    z-index: 100;
-    top: 75px;
-    height: calc(100vh - 80px);
-  }
-`
-export const WrapperTab = styled.div`
-  position: absolute;
-  width: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 0;
-  border-bottom: 1px solid #F2F2F2;
-`
-export const Tab = styled.div`
-  width: 50%;
-  text-align: center;
-  color: #C3C3C3;
-  cursor: pointer;
-  font-weight: 500;
-
-  ${({ active }) => active && css`
-    color: #1C202E;
-  `}
-`
-export const WrapperQuickShow = styled.div`
-  display: flex;
-  margin-top: 56px;
-  padding: 5px 20px;
-  justify-content: flex-end;
-  column-gap: 10px;
-
-  svg {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-  }
-`
-export const OrderAndDriverListContainer = styled.div`
-  overflow: auto;
-  height: calc(100% - 91px);
-`
 export const WrapperOrderlist = styled.div`
+  height: 100%;
+`
+
+export const WrapperDeliveriesLocation = styled.div`
+  height: 80vh;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+  
+  @media (min-width: 1024px) {
+    margin-top: 0px;
+    height: 100%;
+    flex: 1;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 15px;
+    ` : css`
+      margin-left: 15px;
+    `}
+  }
 `

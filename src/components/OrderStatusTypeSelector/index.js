@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select'
-import { Option, PlaceholderTitle } from './styles'
+import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import { useTheme } from 'styled-components'
 import { MultiSelect } from '../../styles/MultiSelect'
+import { Option, PlaceholderTitle } from './styles'
 
 export const OrderStatusTypeSelector = (props) => {
   const {
+    isFirstSelect,
     defaultValue,
     deliveryType,
     mutiOrdersChange,
@@ -293,7 +295,7 @@ export const OrderStatusTypeSelector = (props) => {
       } else if (deliveryType === 1) {
         let _filteredOrderStatues = []
         let extractOrderStatus = []
-        extractOrderStatus = orderStatuses.slice(0, 12)
+        extractOrderStatus = orderStatuses.slice(0, 13)
         _filteredOrderStatues = [...extractOrderStatus]
 
         extractOrderStatus = orderStatuses.slice(15, 18)
@@ -371,15 +373,29 @@ export const OrderStatusTypeSelector = (props) => {
     )
   } else {
     return (
-      <Select
-        type={type}
-        optionInnerMaxHeight='50vh'
-        noSelected={noSelected}
-        defaultValue={defaultOptionValue}
-        options={filteredOrderStatuses}
-        onChange={(orderStatus) => changeOrderStatus(orderStatus)}
-        className='orderStatus'
-      />
+      <>
+        {isFirstSelect ? (
+          <FirstSelect
+            type={type}
+            optionInnerMaxHeight='50vh'
+            noSelected={noSelected}
+            defaultValue={defaultOptionValue}
+            options={filteredOrderStatuses}
+            onChange={(orderStatus) => changeOrderStatus(orderStatus)}
+            className='orderStatus'
+          />
+        ) : (
+          <Select
+            type={type}
+            optionInnerMaxHeight='50vh'
+            noSelected={noSelected}
+            defaultValue={defaultOptionValue}
+            options={filteredOrderStatuses}
+            onChange={(orderStatus) => changeOrderStatus(orderStatus)}
+            className='orderStatus'
+          />
+        )}
+      </>
     )
   }
 }

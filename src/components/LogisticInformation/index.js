@@ -65,7 +65,11 @@ const LogisticInformationUI = (props) => {
         <>
           {logisticInformation.error === null ? (
             <WraaperLogs>
-              <Button color='darkBlue' onClick={() => getLogistics()}>
+              <Button
+                rectangle
+                color='primary'
+                onClick={() => getLogistics()}
+              >
                 {t('RELOAD', 'Reload')}
               </Button>
               <BubbleConsole>

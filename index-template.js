@@ -8,7 +8,7 @@ import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { ConfigFileContext } from './src/contexts/ConfigFileContext'
 import { InfoShareProvider } from './src/contexts/InfoShareContext'
-import { Toast } from './src/themes/two/src/styles/Toast'
+import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
 
 /**

@@ -1,38 +1,23 @@
 import React from 'react'
 import { LogoutAction, useLanguage } from 'ordering-components-admin'
 
-import FaSignOutAlt from '@meronex/icons/fa/FaSignOutAlt'
-
-import {
-  MenuLink,
-  WrappContent,
-  MenuLinkIcon,
-  MenuLinkText,
-  TextInfo,
-  MenuLinkSeparator
-} from '../MobileSidebarMenu/styles'
+import { BoxArrowRight } from 'react-bootstrap-icons'
+import { Button } from 'react-bootstrap'
 
 const LogoutButtonUI = (props) => {
   const [, t] = useLanguage()
 
   return (
-    <MenuLink onClick={props.handleLogoutClick}>
-      <WrappContent>
-        <MenuLinkIcon>
-          <FaSignOutAlt />
-        </MenuLinkIcon>
-        <MenuLinkText>
-          <TextInfo>
-            {t('LOGOUT', 'Logout')}
-          </TextInfo>
-        </MenuLinkText>
-        <MenuLinkSeparator>
-          <div>
-            <hr />
-          </div>
-        </MenuLinkSeparator>
-      </WrappContent>
-    </MenuLink>
+    <Button
+      className='d-flex align-items-center m-1'
+      variant=''
+      onClick={props.handleLogoutClick}
+    >
+      <BoxArrowRight size={20} />
+      <span>
+        {t('LOGOUT', 'Logout')}
+      </span>
+    </Button>
   )
 }
 

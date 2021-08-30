@@ -1,51 +1,25 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
-import FaRegTimesCircle from '@meronex/icons/fa/FaRegTimesCircle'
-import BlankCheckbox from '@meronex/icons/ri/RiCheckboxBlankCircleLine'
-import Checkbox from '@meronex/icons/ri/RiCheckboxCircleLine'
-import { DriversLocation } from '../DriversLocation'
-import { DeliveryDashboardOrdersList } from '../DeliveryDashboardOrdersList'
-import { DriversModal } from '../DriversModal'
+import { DeliveriesLocation } from '../DeliveriesLocation'
+import { OrdersDashboardList } from '../OrdersDashboardList'
+import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
+import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import {
   DeliveryDashboardContainer,
-  OrdersOpenButton,
-  OrdersCloseButton,
-  WrapperOrdersAndDriver,
-  WrapperTab,
-  Tab,
-  WrapperQuickShow,
-  OrderAndDriverListContainer,
-  WrapperOrderlist
+  OrdersContainer,
+  FilterContainer,
+  WrapperOrderlist,
+  WrapperDeliveriesLocation
 } from './styles'
 export const DeliveryDashboard = (props) => {
   const {
-    searchValue,
-    filterValues,
     driversList,
-    deletedOrderId,
     ordersStatusGroup,
-    handleSelectedOrderIds,
-    activeSwitch,
-    handleOpenOrderDetail
+    selectedSubOrderStatus,
+    handleOrdersStatusGroupFilter,
+    handleSelectedSubOrderStatus
   } = props
 
-  const [, t] = useLanguage()
-
-  const [openOrderAndDriver, setOpenOrderAndDriver] = useState(true)
-  const [openTab, setOpenTab] = useState({ order: true, driver: false })
-  const [driverAvailable, setDriverAvailable] = useState('all')
   const [interActionMapOrder, setInterActionMapOrder] = useState(null)
-  const [isOnlyDelivery, setIsOnlyDelivery] = useState(true)
-
-  const handleChangeDriverAvailable = (available) => {
-    setDriverAvailable(available)
-  }
-
-  const handleChangeOrderAndDriver = () => {
-    setOpenTab({ order: true, driver: false })
-    setDriverAvailable('all')
-  }
 
   const handleUpdateDriverLocation = (order) => {
     setInterActionMapOrder({ ...order })
@@ -61,72 +35,34 @@ export const DeliveryDashboard = (props) => {
 
   return (
     <DeliveryDashboardContainer>
-      <DriversLocation
-        driversList={driversList}
-        driverAvailable={driverAvailable}
-        interActionMapOrder={interActionMapOrder}
-      />
-      {!openOrderAndDriver ? (
-        <OrdersOpenButton onClick={() => setOpenOrderAndDriver(true)} name='order-open'>
-          <AiFillPlusCircle />
-        </OrdersOpenButton>
-      ) : (
-        <OrdersCloseButton onClick={() => setOpenOrderAndDriver(false)} name='order-close'>
-          <FaRegTimesCircle />
-        </OrdersCloseButton>
-      )}
-      <WrapperOrdersAndDriver
-        style={{ display: `${openOrderAndDriver ? 'block' : 'none'}` }}
-      >
-        <WrapperTab>
-          <Tab
-            active={openTab.order}
-            onClick={() => handleChangeOrderAndDriver()}
-          >
-            {t('ORDERS', 'Orders')}
-          </Tab>
-          <Tab
-            active={openTab.driver}
-            onClick={() => setOpenTab({ order: false, driver: true })}
-          >
-            {t('DRIVERS', 'Drivers')}
-          </Tab>
-        </WrapperTab>
-        <WrapperQuickShow>
-          {!isOnlyDelivery ? (
-            <Checkbox onClick={() => setIsOnlyDelivery(!isOnlyDelivery)} />
-          ) : (
-            <BlankCheckbox onClick={() => setIsOnlyDelivery(!isOnlyDelivery)} />
-          )}
-          {t('SHOW_ALL', 'Show all')}
-        </WrapperQuickShow>
-        <OrderAndDriverListContainer>
-          <WrapperOrderlist style={{ display: `${openTab.order ? 'block' : 'none'}` }}>
-            <DeliveryDashboardOrdersList
-              orderListView='small'
-              searchValue={searchValue}
-              filterValues={filterValues}
-              deletedOrderId={deletedOrderId}
-              driversList={driversList}
-              ordersStatusGroup={ordersStatusGroup}
-              activeSwitch={activeSwitch}
-              isOnlyDelivery={isOnlyDelivery}
-              interActionMapOrder={interActionMapOrder}
-              handleOpenOrderDetail={handleOpenOrderDetail}
-              handleLocation={handleLocation}
-              handleUpdateDriverLocation={handleUpdateDriverLocation}
-            />
-          </WrapperOrderlist>
-          {openTab.driver && (
-            <DriversModal
-              driversList={driversList}
-              handleChangeDriverAvailable={handleChangeDriverAvailable}
-              handleSelectedOrderIds={handleSelectedOrderIds}
-              handleOpenOrderDetail={handleOpenOrderDetail}
-            />
-          )}
-        </OrderAndDriverListContainer>
-      </WrapperOrdersAndDriver>
+      <OrdersContainer>
+        <FilterContainer>
+          <OrderStatusFilterBar
+            selectedOrderStatus={ordersStatusGroup}
+            changeOrderStatus={handleOrdersStatusGroupFilter}
+          />
+          <OrderStatusSubFilter
+            ordersStatusGroup={ordersStatusGroup}
+            selectedSubOrderStatus={selectedSubOrderStatus}
+            handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
+          />
+        </FilterContainer>
+        <WrapperOrderlist id='cardOrders'>
+          <OrdersDashboardList
+            {...props}
+            orderListView='card'
+            selectedOrderCard={interActionMapOrder}
+            handleOrderCardClick={handleLocation}
+            handleUpdateDriverLocation={handleUpdateDriverLocation}
+          />
+        </WrapperOrderlist>
+      </OrdersContainer>
+      <WrapperDeliveriesLocation>
+        <DeliveriesLocation
+          driversList={driversList}
+          interActionMapOrder={interActionMapOrder}
+        />
+      </WrapperDeliveriesLocation>
     </DeliveryDashboardContainer>
   )
 }

@@ -1,25 +1,14 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const RoundMarker = styled.div`
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    background: rgba(14, 155, 85, 0.2);
-    border-radius: 100%;
-`
 export const WrapperMapMarker = styled.div`
-  width: 40px;
-  height: 40px;
-  background: #fff;
-  border: 5px solid #0E9B55;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 6px;
+  width: 50px;
+  height: 50px;
+  background: #FFF;
+  border: 3px solid ${props => props.theme.colors.primary};
+  border-radius: 100%;
+  position: absolute;
+  transform: translate(-50%, -100%);
 
   svg {
     width: 100%;
@@ -27,9 +16,26 @@ export const WrapperMapMarker = styled.div`
     border-radius: 100%;
     padding: 3px;
     box-sizing: border-box;
+    background: #FFF;
+    z-index: 1;
+  }
+
+  &:after {
+    content:'';
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    margin-left: -22px;
+    width: 0;
+    height: 0;
+    border-top: solid 22px ${props => props.theme.colors.primary};
+    border-left: solid 22px transparent;
+    border-right: solid 22px transparent;
+    z-index: -1;
   }
 `
 const MapMarkerImgStyled = styled.div`
+  background-color: #FFF;
   display: flex;
   width: 100%;
   height: 100%;
@@ -39,8 +45,8 @@ const MapMarkerImgStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  border-radius: 5px;
-  overflow: hidden;
+  border-radius: 100%;
+  z-index: 100;
 `
 export const MapMarkerImg = (props) => {
   return (
@@ -59,7 +65,7 @@ export const InfoContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
   row-gap: 5px;
-  z-index: 2;
+  z-index: 200;
   box-shadow: 0px 2px 2px #00000029;
   display: flex;
   flex-direction: column;

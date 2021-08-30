@@ -5,6 +5,7 @@ import {
 import { MultiSelect } from '../../styles/MultiSelect'
 import {
   Option,
+  PlaceholderTitle,
   OptionContent,
   OptionName,
   OptionCategory,
@@ -22,7 +23,7 @@ export const BusinessesSelector = (props) => {
   const [, t] = useLanguage()
   const [businessTypes, setBusinessTypes] = useState([])
 
-  const Placeholder = <Option>{t('SELECT_BUSINESS', 'Select business')}</Option>
+  const Placeholder = <PlaceholderTitle>{t('SELECT_BUSINESS', 'Select business')}</PlaceholderTitle>
   const businessesLoading = [{ value: 'default', content: <Option>{t('BUSINESSES_LOADING', 'Businesses loading')}...</Option> }]
 
   useEffect(() => {

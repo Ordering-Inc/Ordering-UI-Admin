@@ -21,7 +21,7 @@ export const SkeletonHitory = styled.div`
   column-gap: 20px;
 
   span {
-    border-radius: 30px;
+    border-radius: 5px;
   }
 
   @media (max-width: 576px) {
@@ -31,7 +31,7 @@ export const SkeletonHitory = styled.div`
   }
 `
 export const BubbleConsole = styled.div`
-  border-radius: 50px;
+  border-radius: 5px;
   padding: 5px 15px;
   max-width: 90%;
   margin-bottom: 15px;

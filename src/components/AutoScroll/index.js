@@ -5,16 +5,20 @@ import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
 import { useTheme } from '../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, modal, special, innerScroll }) => {
+export const AutoScroll = ({ children, modal, special, innerScroll, scrollId }) => {
   const { width } = useWindowSize()
   const [parentElement, setParentElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
   const [theme] = useTheme()
 
+  const autoScrollId = scrollId || 'autoscroll'
+  const [parentWidth, setParentWidth] = useState(null)
+
   useLayoutEffect(() => {
-    const element = document?.getElementById('autoscroll')?.parentNode
+    const element = document?.getElementById(`${autoScrollId}`)?.parentNode
     element && element.parentNode.addEventListener('scroll', handleScroll)
     const containerElement = element?.parentNode
+    setParentWidth(element?.offsetWidth)
     setParentElement(element)
     setContainerElement(containerElement)
 
@@ -30,8 +34,9 @@ export const AutoScroll = ({ children, modal, special, innerScroll }) => {
   })
 
   const handleScroll = () => {
-    const botonRight = document.getElementById('right-autoscroll')
-    const botonLeft = document.getElementById('left-autoscroll')
+    const autoScrollContainer = document?.getElementById(`${autoScrollId}`)
+    const botonRight = autoScrollContainer?.querySelector('.right-autoscroll')
+    const botonLeft = autoScrollContainer?.querySelector('.left-autoscroll')
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
         if ((containerElement?.scrollLeft * -1) < 40) {
@@ -50,7 +55,7 @@ export const AutoScroll = ({ children, modal, special, innerScroll }) => {
         } else {
           botonLeft && botonLeft.classList.remove('hidden')
         }
-        if (containerElement?.scrollLeft > parentElement?.scrollWidth - containerElement?.offsetWidth - 20) {
+        if (containerElement?.scrollLeft > parentElement?.scrollWidth - containerElement?.offsetWidth - 40) {
           botonRight && botonRight.classList.add('hidden')
         } else {
           botonRight && botonRight.classList.remove('hidden')
@@ -75,14 +80,21 @@ export const AutoScroll = ({ children, modal, special, innerScroll }) => {
     }
   }
 
+  useEffect(() => {
+    if (!scrollId) return
+    const element = document?.getElementById(`${autoScrollId}`)?.parentNode
+    setParentWidth(element.width)
+    setParentElement(element)
+  }, [scrollId])
+
   return (
-    <AutoscrollContainer modal={modal} id='autoscroll'>
+    <AutoscrollContainer modal={modal} id={`${autoScrollId}`}>
       {
-        ((!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth)) ? <MdKeyboardArrowLeft id='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        ((!special ? width < parentWidth + 50 : width < parentWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentWidth + 50 : containerElement?.offsetWidth < parentWidth)) ? <MdKeyboardArrowLeft className='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        ((!special ? width < parentElement?.offsetWidth + 50 : width < parentElement?.offsetWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth)) ? <MdKeyboardArrowRight id='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        ((!special ? width < parentWidth + 50 : width < parentWidth) || (!special && innerScroll ? containerElement?.offsetWidth < parentWidth + 50 : containerElement?.offsetWidth < parentWidth)) ? <MdKeyboardArrowRight className='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
 
