@@ -39,7 +39,7 @@ export const BusinessSummary = (props) => {
   const history = useHistory()
 
   const handleOpenCategory = () => {
-    history.push(`/stores/${businessState.business.slug}`)
+    history.push(`/stores/list/${businessState.business.slug}`)
   }
 
   const businessConfigs = [

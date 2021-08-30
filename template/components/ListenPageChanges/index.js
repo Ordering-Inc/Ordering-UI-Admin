@@ -20,7 +20,7 @@ export const ListenPageChanges = ({ children }) => {
     login: '/login',
     businesses: '/stores/list',
     brand: '/stores/brand',
-    store: '/stores/:store',
+    store: '/stores/list/:store',
     basicSettings: '/settings/basic',
     operationSettings: '/settings/operation',
     pages: '/settings/pages',

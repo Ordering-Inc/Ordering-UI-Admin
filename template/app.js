@@ -180,6 +180,13 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
+                    <Route exact path='/stores/list/:store'>
+                      {
+                        auth
+                          ? <BusinessProductsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route exact path='/settings/basic'>
                       {
                         auth
@@ -219,13 +226,6 @@ export const App = () => {
                       {
                         auth
                           ? <LanguageManager />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/stores/:store'>
-                      {
-                        auth
-                          ? <BusinessProductsList />
                           : <Redirect to='/login' />
                       }
                     </Route>
