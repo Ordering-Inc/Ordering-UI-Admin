@@ -25,8 +25,6 @@ var _BusinessImages = require("../BusinessImages");
 
 var _BusinessVideos = require("../BusinessVideos");
 
-var _BusinessBrands = require("../BusinessBrands");
-
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -80,11 +78,6 @@ var BusinessInformation = function BusinessInformation(props) {
     setFormState: setFormState,
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     setBusinessTypes: setBusinessTypes
-  }), selectedInfoItem === 'brand' && /*#__PURE__*/_react.default.createElement(_BusinessBrands.BusinessBrands, {
-    business: business,
-    formState: formState,
-    setFormState: setFormState,
-    handleUpdateBusinessClick: handleUpdateBusinessClick
   }), selectedInfoItem === 'location' && /*#__PURE__*/_react.default.createElement(_BusinessLocation.BusinessLocation, {
     business: business,
     formState: formState,

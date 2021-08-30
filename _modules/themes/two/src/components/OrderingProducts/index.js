@@ -140,7 +140,7 @@ var OrderingProducts = function OrderingProducts(props) {
   };
 
   var onClickPage = function onClickPage(e, pageId) {
-    var isInvalid = e.target.closest('.page-enabled') || e.target.closest('.page-actions');
+    var isInvalid = e.target.closest('.product-enabled') || e.target.closest('.product-actions');
     if (isInvalid) return;
     handleEditProduct(pageId);
   };
@@ -288,14 +288,14 @@ var OrderingProducts = function OrderingProducts(props) {
     }, /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement("td", {
       className: "action"
     }, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {
-      calssName: "page-enabled"
+      className: "product-enabled"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
       defaultChecked: product === null || product === void 0 ? void 0 : product.enabled,
       onChange: function onChange(enabled) {
         return handleChangeState(product.id, 'enabled', enabled);
       }
     })), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, {
-      className: "page-actions"
+      className: "product-actions"
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
       menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
       title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),

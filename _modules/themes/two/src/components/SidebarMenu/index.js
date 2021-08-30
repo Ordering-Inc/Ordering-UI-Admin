@@ -82,6 +82,17 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
     pageName: 'drivers'
   }];
+  var storesSubMenus = [{
+    id: 1,
+    title: t('STORES_LIST', 'Stores list'),
+    pageName: 'businesses',
+    url: '/stores/list'
+  }, {
+    id: 2,
+    title: t('BRAND_MANAGER', 'Brand manager'),
+    pageName: 'brand',
+    url: '/stores/brand'
+  }];
   var marketingSubMenus = [{
     id: 1,
     title: t('MARKET_SUITE', 'Market suite'),
@@ -269,10 +280,20 @@ var SidebarMenu = function SidebarMenu(props) {
     active: location.pathname === '/messages'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), /*#__PURE__*/_react.default.createElement("span", null, t('MESSAGES', 'Messages')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "3",
-    page: "businesses",
-    handleGoToPage: handleGoToPage,
-    active: location.pathname === '/businesses' || location.pathname.includes('/store/')
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), /*#__PURE__*/_react.default.createElement("span", null, t('STORES', 'Stores')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    active: location.pathname === '/stores/list' || location.pathname === '/stores/brand'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), /*#__PURE__*/_react.default.createElement("span", null, t('STORES', 'Stores'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "3"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, storesSubMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "4",
     active: location.pathname === '/users/customers' || location.pathname === '/users/managers' || location.pathname === '/users/operation'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {

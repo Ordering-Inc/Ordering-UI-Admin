@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Buttons = require("../../styles/Buttons");
 
-var _timezonesList = _interopRequireDefault(require("timezones-list"));
+var _constants = require("../../config/constants");
 
 var _GoSearch = _interopRequireDefault(require("@meronex/icons/go/GoSearch"));
 
@@ -51,7 +51,7 @@ var AnalyticsFilterTimeZone = function AnalyticsFilterTimeZone(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(_timezonesList.default),
+  var _useState = (0, _react.useState)(_constants.timezones),
       _useState2 = _slicedToArray(_useState, 2),
       timeZoneList = _useState2[0],
       setTimeZoneList = _useState2[1];
@@ -69,12 +69,10 @@ var AnalyticsFilterTimeZone = function AnalyticsFilterTimeZone(props) {
   var timeZoneRef = (0, _react.useRef)(null);
 
   var filterTimeZone = function filterTimeZone(evt) {
-    var timeZoneToFilter = _timezonesList.default;
+    var timeZoneToFilter = _constants.timezones;
 
     var _timeZoneList = timeZoneToFilter === null || timeZoneToFilter === void 0 ? void 0 : timeZoneToFilter.filter(function (item) {
-      var _item$tzCode;
-
-      return (_item$tzCode = item.tzCode) === null || _item$tzCode === void 0 ? void 0 : _item$tzCode.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase());
+      return item === null || item === void 0 ? void 0 : item.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase());
     });
 
     setTimeZoneList(_timeZoneList);
@@ -121,9 +119,9 @@ var AnalyticsFilterTimeZone = function AnalyticsFilterTimeZone(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimezoneListItem, {
       key: i,
       onClick: function onClick() {
-        return handleChangeTimeZone(timezone.tzCode);
+        return handleChangeTimeZone(timezone);
       }
-    }, timezone === null || timezone === void 0 ? void 0 : timezone.tzCode);
+    }, timezone);
   }))));
 };
 
