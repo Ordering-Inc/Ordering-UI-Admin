@@ -3,6 +3,7 @@ import { AddressList } from './src/components/AddressList'
 import { AutoScroll } from './src/components/AutoScroll'
 import { BusinessActiveStateFilter } from './src/components/BusinessActiveStateFilter'
 import { BusinessAnalytics } from './src/components/BusinessAnalytics'
+import { BusinessBrandListing } from './src/components/BusinessBrandListing'
 import { BusinessDetails } from './src/components/BusinessDetails'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
 import { BusinessesSelector } from './src/components/BusinessesSelector'
@@ -113,6 +114,7 @@ export {
   AutoScroll,
   BusinessActiveStateFilter,
   BusinessAnalytics,
+  BusinessBrandListing,
   BusinessDetails,
   BusinessesSelector,
   BusinessessListing,

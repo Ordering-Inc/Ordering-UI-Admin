@@ -55,7 +55,7 @@ export const OrderingProducts = (props) => {
   }
 
   const onClickPage = (e, pageId) => {
-    const isInvalid = e.target.closest('.page-enabled') || e.target.closest('.page-actions')
+    const isInvalid = e.target.closest('.product-enabled') || e.target.closest('.product-actions')
     if (isInvalid) return
     handleEditProduct(pageId)
   }
@@ -203,14 +203,14 @@ export const OrderingProducts = (props) => {
                     </td>
                     <td className='action'>
                       <ActionsContainer>
-                        <EnableWrapper calssName='page-enabled'>
+                        <EnableWrapper className='product-enabled'>
                           <span>{t('ENABLE', 'Enable')}</span>
                           <Switch
                             defaultChecked={product?.enabled}
                             onChange={(enabled) => handleChangeState(product.id, 'enabled', enabled)}
                           />
                         </EnableWrapper>
-                        <ActionSelectorWrapper className='page-actions'>
+                        <ActionSelectorWrapper className='product-actions'>
                           <DropdownButton
                             menuAlign={theme?.rtl ? 'left' : 'right'}
                             title={<FiMoreVertical />}

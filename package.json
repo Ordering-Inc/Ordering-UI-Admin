@@ -94,8 +94,7 @@
     "react-popper": "^2.2.4",
     "react-summernote": "^2.0.2",
     "react-toastify": "^6.1.0",
-    "styled-components": "^5.2.1",
-    "timezones-list": "^3.0.1"
+    "styled-components": "^5.2.1"
   },
   "peerDependencies": {
     "react": ">=16.13.1",

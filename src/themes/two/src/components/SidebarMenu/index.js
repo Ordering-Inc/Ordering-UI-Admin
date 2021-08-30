@@ -63,6 +63,21 @@ export const SidebarMenu = (props) => {
     }
   ]
 
+  const storesSubMenus = [
+    {
+      id: 1,
+      title: t('STORES_LIST', 'Stores list'),
+      pageName: 'businesses',
+      url: '/stores/list'
+    },
+    {
+      id: 2,
+      title: t('BRAND_MANAGER', 'Brand manager'),
+      pageName: 'brand',
+      url: '/stores/brand'
+    }
+  ]
+
   const marketingSubMenus = [
     {
       id: 1,
@@ -309,16 +324,27 @@ export const SidebarMenu = (props) => {
                   <MenuContainer>
                     <ContextAwareToggle
                       eventKey='3'
-                      page='businesses'
-                      handleGoToPage={handleGoToPage}
                       active={
-                        location.pathname === '/businesses' ||
-                        location.pathname.includes('/store/')
+                        location.pathname === '/stores/list' ||
+                        location.pathname === '/stores/brand'
                       }
                     >
                       <ShopIcon />
                       <span>{t('STORES', 'Stores')}</span>
                     </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='3'>
+                      <MenuContent>
+                        {storesSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
                   </MenuContainer>
 
                   <MenuContainer>

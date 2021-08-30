@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
+import React from 'react'
 
-export const OrderingProductsContainer = styled.div`
+export const BrandListingContainer = styled.div`
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
@@ -75,15 +76,10 @@ export const ActionsGroup = styled.div`
     margin-top: 0px;
   }
 `
-export const ProductListTableWrapper = styled.div`
-  margin-top: 20px;
-  width: 100%;
-  overflow: auto;
-`
 
-export const ProductListTable = styled.table`
+export const BrandListTable = styled.table`
   width: 100%;
-  min-width: 800px;
+  min-width: 500px;
 
   thead {
     border-bottom: 1px solid ${props => props.theme.colors.secundaryLight};
@@ -97,40 +93,25 @@ export const ProductListTable = styled.table`
     display: flex;
     align-items: center;
     th, td {
-      &.product {
-        width: 25%
+      &:first-child {
+        flex: 1;
       }
-      &.description {
-        width: 55%
-      }
-      &.action {
-        width: 20%;
+      &:last-child {
+        min-width: 200px;
       }
     }
   }
 
-  th.description,
-  th.action,
-  td.description,
-  td.action {
+  th:last-child {
     ${props => props.theme.colors.rtl ? css`
       padding-right: 15px;
     ` : css`
       padding-left: 15px;
     `}
   }
-
-  td.product,
-  td.description {
-    ${props => props.theme.colors.rtl ? css`
-    border-left: 1px solid ${props => props.theme.colors.borderColor};
-    ` : css`
-      border-right: 1px solid ${props => props.theme.colors.borderColor};
-    `}
-  }
 `
 
-export const PageTbody = styled.tbody`
+export const BrandBody = styled.tbody`
   cursor: pointer;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
@@ -163,6 +144,14 @@ export const ActionsContainer = styled.div`
   justify-content: space-between;
   padding-top: 8px;
   padding-bottom: 8px;
+
+  ${props => props.theme.colors.rtl ? css`
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+    padding-right: 15px;
+  ` : css`
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+    padding-left: 15px;
+  `}
 `
 
 export const EnableWrapper = styled.div`
@@ -227,17 +216,124 @@ export const ActionSelectorWrapper = styled.div`
   }
 `
 
-export const PagesBottomContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  margin: 15px 0;
+export const WrapperImage = styled.div`
+  max-width: 32px;
+  max-height: 32px;
+  height: 32px;
+  width: 32px;
+  ${({ isSkeleton }) => !isSkeleton && css`
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  `}
+  border-radius: 7.6px;
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 20px;
+  ` : css`
+    margin-right: 20px;
+  `}
 `
 
-export const AddNewPageButton = styled.div`
+const ImageStyled = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 7.6px;
+`
+export const Image = (props) => {
+  return (
+    <ImageStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </ImageStyled>
+  )
+}
+
+export const BrandGeneralInfo = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const InfoBlock = styled.div`
+  p {
+    font-size: 14px;
+    margin: 0;
+    color: ${props => props.theme?.colors.headingColor};
+  }
+`
+
+export const BrandListTableWrapper = styled.div`
+  overflow: auto;
+  margin-top: 20px;
+  width: 100%;
+`
+
+export const BrandListBottomContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+
+  span {
+    cursor: pointer;
+    user-select: none;
+    font-size: 12px;
+    color: ${props => props.theme.colors?.lightGray};
+  }
+`
+
+export const BrandDetailContainer = styled.div`
+  padding: 20px;
+  width: 100%;
+`
+
+export const DetailHeder = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+
+  > span {
+    font-weight: bold;
+    font-size: 20px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+  }
+`
+
+export const TabContainer = styled.div`
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid ${props => props.theme?.colors.borderColor};
+`
+
+export const Tab = styled.div`
+  padding: 10px 0px;
+  font-size: 14px;
   cursor: pointer;
-  font-size: 12px;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors?.headingColor};
+  white-space: nowrap;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 30px;
+  ` : css`
+    margin-right: 30px;
+  `}
+
+  ${({ active }) => active && css`
+    border-bottom: 1px solid;
+    font-weight: 500;
+  `}
+
+  ${({ active }) => !active && css`
+    color: ${props => props.theme?.colors.lightGray};
+    font-size: 12px;
+  `}
 `
