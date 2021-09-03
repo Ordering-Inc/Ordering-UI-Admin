@@ -138,8 +138,8 @@ export const DropdownOptionList = (props) => {
           [...Array(10).keys()].map(i => (
             <DropdownOptionWrapper key={i}>
               <DropdownOptionName><Skeleton width={100} /></DropdownOptionName>
-              <CityName><Skeleton width={100} /></CityName>
               <CountryName><Skeleton width={100} /></CountryName>
+              <CityName><Skeleton width={100} /></CityName>
               <ActionsContainer><Skeleton width={100} /></ActionsContainer>
             </DropdownOptionWrapper>
           ))
