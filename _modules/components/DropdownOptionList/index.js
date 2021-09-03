@@ -205,20 +205,20 @@ var DropdownOptionList = function DropdownOptionList(props) {
       return handleAllCheckboxZoneClick();
     },
     active: !dropdownOptionsState.loading && selectedZoneList.length === dropdownOptionsState.options.length
-  }, !dropdownOptionsState.loading && selectedZoneList.length === dropdownOptionsState.options.length ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ZONE', 'Zone'))), /*#__PURE__*/_react.default.createElement(_styles.CityAdministrator, {
+  }, !dropdownOptionsState.loading && selectedZoneList.length === dropdownOptionsState.options.length ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ZONE', 'Zone'))), /*#__PURE__*/_react.default.createElement(_styles.CountryName, {
     isHeader: true
-  }, t('ADMINISTRATOR', 'Administrator')), /*#__PURE__*/_react.default.createElement(_styles.CountryName, {
+  }, t('COUNTRY', 'Country')), /*#__PURE__*/_react.default.createElement(_styles.CityName, {
     isHeader: true
-  }, t('COUNTRY', 'Country')), /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, {
+  }, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, {
     isHeader: true
   }, t('ACTIONS', 'Actions'))), dropdownOptionsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.DropdownOptionWrapper, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.DropdownOptionName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    })), /*#__PURE__*/_react.default.createElement(_styles.CityAdministrator, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
     })), /*#__PURE__*/_react.default.createElement(_styles.CountryName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100
+    })), /*#__PURE__*/_react.default.createElement(_styles.CityName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })), /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
@@ -242,13 +242,13 @@ var DropdownOptionList = function DropdownOptionList(props) {
       })
     }, selectedZoneList.find(function (_zone) {
       return (_zone === null || _zone === void 0 ? void 0 : _zone.id) === dropdownOption.id;
-    }) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, dropdownOption === null || dropdownOption === void 0 ? void 0 : dropdownOption.name)), /*#__PURE__*/_react.default.createElement(_styles.CityAdministrator, null, /*#__PURE__*/_react.default.createElement(_CitySelector.CitySelector, {
+    }) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, dropdownOption === null || dropdownOption === void 0 ? void 0 : dropdownOption.name)), /*#__PURE__*/_react.default.createElement(_styles.CountryName, null, /*#__PURE__*/_react.default.createElement(_CountrySelector.CountrySelector, {
+      defaultValue: parseInt(dropdownOption === null || dropdownOption === void 0 ? void 0 : (_dropdownOption$city = dropdownOption.city) === null || _dropdownOption$city === void 0 ? void 0 : _dropdownOption$city.country_id),
+      countries: countriesState === null || countriesState === void 0 ? void 0 : countriesState.countries
+    })), /*#__PURE__*/_react.default.createElement(_styles.CityName, null, /*#__PURE__*/_react.default.createElement(_CitySelector.CitySelector, {
       isDefault: true,
       defaultValue: parseInt(dropdownOption === null || dropdownOption === void 0 ? void 0 : dropdownOption.city_id),
       cities: cities
-    })), /*#__PURE__*/_react.default.createElement(_styles.CountryName, null, /*#__PURE__*/_react.default.createElement(_CountrySelector.CountrySelector, {
-      defaultValue: parseInt(dropdownOption === null || dropdownOption === void 0 ? void 0 : (_dropdownOption$city = dropdownOption.city) === null || _dropdownOption$city === void 0 ? void 0 : _dropdownOption$city.country_id),
-      countries: countriesState === null || countriesState === void 0 ? void 0 : countriesState.countries
     })), /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {
       className: "zone-enabled"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {

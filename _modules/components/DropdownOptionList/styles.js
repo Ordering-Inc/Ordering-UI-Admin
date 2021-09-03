@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddNewPageButton = exports.PagesBottomContainer = exports.CheckboxWrapper = exports.ActionSelectorWrapper = exports.EnableWrapper = exports.ActionsContainer = exports.CountryName = exports.CityAdministrator = exports.DropdownOptionName = exports.DropdownOptionWrapper = exports.DropdownOptionsContainer = void 0;
+exports.AddNewPageButton = exports.PagesBottomContainer = exports.CheckboxWrapper = exports.ActionSelectorWrapper = exports.EnableWrapper = exports.ActionsContainer = exports.CountryName = exports.CityName = exports.DropdownOptionName = exports.DropdownOptionWrapper = exports.DropdownOptionsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -47,7 +47,7 @@ var DropdownOptionName = _styledComponents.default.div(_templateObject6 || (_tem
 
 exports.DropdownOptionName = DropdownOptionName;
 
-var CityAdministrator = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 20%;\n  font-size: 12px;\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  div {\n    border: none;\n    padding: 0px;\n    pointer-events: none;\n    svg {\n      display: none;\n    }\n  }\n"])), function (props) {
+var CityName = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 30%;\n  font-size: 12px;\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  div {\n    border: none;\n    padding: 0px;\n    pointer-events: none;\n    svg {\n      display: none;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n  "])));
 }, function (_ref3) {
   var isHeader = _ref3.isHeader;
@@ -60,9 +60,9 @@ var CityAdministrator = _styledComponents.default.div(_templateObject7 || (_temp
   });
 });
 
-exports.CityAdministrator = CityAdministrator;
+exports.CityName = CityName;
 
-var CountryName = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  width: 30%;\n  box-sizing: border-box;\n  div {\n    border: none;\n    padding: 0px;\n    pointer-events: none;\n    svg {\n      display: none;\n    }\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
+var CountryName = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  width: 20%;\n  box-sizing: border-box;\n  div {\n    border: none;\n    padding: 0px;\n    pointer-events: none;\n    svg {\n      display: none;\n    }\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n  "])));
 }, function (_ref4) {
   var isHeader = _ref4.isHeader;
