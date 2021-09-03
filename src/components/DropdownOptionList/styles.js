@@ -36,8 +36,8 @@ export const DropdownOptionName = styled.div`
   align-items: center;
 `
 
-export const CityAdministrator = styled.div`
-  width: 20%;
+export const CityName = styled.div`
+  width: 30%;
   font-size: 12px;
   box-sizing: border-box;
 
@@ -70,7 +70,7 @@ export const CityAdministrator = styled.div`
 
 export const CountryName = styled.div`
   font-size: 12px;
-  width: 30%;
+  width: 20%;
   box-sizing: border-box;
   div {
     border: none;
