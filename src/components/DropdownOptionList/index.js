@@ -21,7 +21,7 @@ import {
   ActionSelectorWrapper,
   DropdownOptionWrapper,
   DropdownOptionName,
-  CityAdministrator,
+  CityName,
   CountryName,
   CheckboxWrapper,
   PagesBottomContainer,
@@ -130,16 +130,16 @@ export const DropdownOptionList = (props) => {
             </CheckboxWrapper>
             <span>{t('ZONE', 'Zone')}</span>
           </DropdownOptionName>
-          <CityAdministrator isHeader>{t('ADMINISTRATOR', 'Administrator')}</CityAdministrator>
           <CountryName isHeader>{t('COUNTRY', 'Country')}</CountryName>
+          <CityName isHeader>{t('CITY', 'City')}</CityName>
           <ActionsContainer isHeader>{t('ACTIONS', 'Actions')}</ActionsContainer>
         </DropdownOptionWrapper>
         {dropdownOptionsState.loading ? (
           [...Array(10).keys()].map(i => (
             <DropdownOptionWrapper key={i}>
               <DropdownOptionName><Skeleton width={100} /></DropdownOptionName>
-              <CityAdministrator><Skeleton width={100} /></CityAdministrator>
               <CountryName><Skeleton width={100} /></CountryName>
+              <CityName><Skeleton width={100} /></CityName>
               <ActionsContainer><Skeleton width={100} /></ActionsContainer>
             </DropdownOptionWrapper>
           ))
@@ -167,19 +167,19 @@ export const DropdownOptionList = (props) => {
                       </CheckboxWrapper>
                       <span>{dropdownOption?.name}</span>
                     </DropdownOptionName>
-                    <CityAdministrator>
-                      <CitySelector
-                        isDefault
-                        defaultValue={parseInt(dropdownOption?.city_id)}
-                        cities={cities}
-                      />
-                    </CityAdministrator>
                     <CountryName>
                       <CountrySelector
                         defaultValue={parseInt(dropdownOption?.city?.country_id)}
                         countries={countriesState?.countries}
                       />
                     </CountryName>
+                    <CityName>
+                      <CitySelector
+                        isDefault
+                        defaultValue={parseInt(dropdownOption?.city_id)}
+                        cities={cities}
+                      />
+                    </CityName>
                     <ActionsContainer>
                       <EnableWrapper className='zone-enabled'>
                         <span>{t('ENABLE', 'Enable')}</span>
