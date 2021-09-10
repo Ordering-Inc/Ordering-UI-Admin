@@ -43,8 +43,7 @@ const PageFormUI = (props) => {
     setSelectedImageUrl,
     handleCancel,
     isAddMode,
-    handleAddPage,
-    setBodyContent
+    handleAddPage
   } = props
   const [, t] = useLanguage()
   const [openModal, setOpenModal] = useState(null)
@@ -186,7 +185,7 @@ const PageFormUI = (props) => {
                 insertVideo: insertVideo
               }
             }}
-            onChange={content => setBodyContent(content)}
+            onChange={content => handleChangeFormState('body', content)}
           />
         </WrapperEditor>
         <ButtonGroupWrapper>
