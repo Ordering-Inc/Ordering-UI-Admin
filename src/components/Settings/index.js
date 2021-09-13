@@ -9,6 +9,7 @@ import { useInfoShare } from '../../contexts/InfoShareContext'
 import { SideBar } from '../SideBar'
 import { CheckoutFieldsSetting } from '../CheckoutFieldsSetting'
 import { AddressFieldsSetting } from '../AddressFieldsSetting'
+import { LanguageSetting } from '../LanguageSetting'
 
 import {
   BasicSettingsContainer,
@@ -193,6 +194,9 @@ const SettingsUI = (props) => {
             )}
             {isOpenSettingDetails === 'address' && (
               <AddressFieldsSetting />
+            )}
+            {isOpenSettingDetails === 'language' && (
+              <LanguageSetting />
             )}
           </SideBar>
         )

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const AddressFieldsDetailsContainer = styled.div`
+export const LanguageDetailsContainer = styled.div`
   padding: 26px 40px;
   box-sizing: border-box;
   width: 100%;
@@ -31,11 +31,22 @@ export const FieldContainer = styled.div`
     font-size: 14px;
   }
 
-  .required {
+  .default {
     width: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    svg {
+      cursor: pointer;
+      font-size: 20px;
+    }
+  }
+
+  .checked {
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
   }
 
   .status {

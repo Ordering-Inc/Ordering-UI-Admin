@@ -4,7 +4,7 @@ import { Switch } from '../../styles'
 import Skeleton from 'react-loading-skeleton'
 
 import {
-  CheckoutFieldsDetailsContainer,
+  AddressFieldsDetailsContainer,
   FieldContainer
 } from './styles'
 
@@ -18,8 +18,8 @@ const AddressFieldsSettingUI = (props) => {
 
   return (
     <>
-      <CheckoutFieldsDetailsContainer>
-        <h1>{t('CHECKOUT_FIELDS', 'Checkout fields')}</h1>
+      <AddressFieldsDetailsContainer>
+        <h1>{t('ADDRESS_FIELDS', 'Address fields')}</h1>
         <FieldContainer isHeader>
           <div className='name'>{t('FIELD', 'Field')}</div>
           <div className='required'>{t('REQUIRED', 'Required')}</div>
@@ -60,7 +60,7 @@ const AddressFieldsSettingUI = (props) => {
             ))}
           </>
         )}
-      </CheckoutFieldsDetailsContainer>
+      </AddressFieldsDetailsContainer>
     </>
   )
 }
