@@ -155,7 +155,7 @@ const CmsUI = (props) => {
                   </td>
                   <td>
                     <ActionsContainer>
-                      <EnableWrapper calssName='page-enabled'>
+                      <EnableWrapper className='page-enabled'>
                         <span>{t('ENABLE', 'Enable')}</span>
                         <Switch
                           defaultChecked={page?.enabled}

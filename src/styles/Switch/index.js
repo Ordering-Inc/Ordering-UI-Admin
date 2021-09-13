@@ -6,7 +6,7 @@ import {
 } from './styles'
 
 export const Switch = (props) => {
-  const { defaultChecked, onChange, className } = props
+  const { defaultChecked, disabled, onChange, className } = props
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const Switch = (props) => {
   }
 
   return (
-    <ToggleSwitchContainer className={className}>
+    <ToggleSwitchContainer className={className} disabled={disabled}>
       <input
         type='checkbox'
         checked={checked}

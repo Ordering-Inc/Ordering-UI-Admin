@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ToggleSwitchContainer = styled.label`
   position: relative;
@@ -6,6 +6,11 @@ export const ToggleSwitchContainer = styled.label`
   width: 25px;
   height: 14px;
   margin-bottom: 0px;
+
+  ${({ disabled }) => disabled && css`
+    opacity: 0.6;
+    pointer-events: none;
+  `}
 
   input {
     opacity: 0;

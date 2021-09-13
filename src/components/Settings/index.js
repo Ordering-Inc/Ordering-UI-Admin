@@ -3,9 +3,13 @@ import { useLocation } from 'react-router-dom'
 import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, Gear, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
 import { IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { SideBar } from '../SideBar'
+import { CheckoutFieldsSetting } from '../CheckoutFieldsSetting'
+import { AddressFieldsSetting } from '../AddressFieldsSetting'
+import { LanguageSetting } from '../LanguageSetting'
 
 import {
   BasicSettingsContainer,
@@ -26,6 +30,7 @@ const SettingsUI = (props) => {
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
   const { search } = useLocation()
 
   let category
@@ -53,10 +58,16 @@ const SettingsUI = (props) => {
   }
 
   const handleOpenDescription = (category) => {
+    setIsOpenSettingDetails(null)
     setIsOpenDescription(true)
     setSelectedCategory(category)
     onBasicSettingsRedirect({ category: category.id })
     handChangeConfig && handChangeConfig(false)
+  }
+
+  const handleOpenSettingDetails = (item) => {
+    setIsOpenDescription(false)
+    setIsOpenSettingDetails(item)
   }
 
   const handleBackRedirect = () => {
@@ -100,6 +111,39 @@ const SettingsUI = (props) => {
           </h1>
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
+          <SettingItemWrapper
+            className='col-md-4 col-sm-6'
+            onClick={() => handleOpenSettingDetails('language')}
+          >
+            <SettingItemUI
+              title={t('LANGUAGE_SETTINGS', 'Language settings')}
+              description={t('LANGUAGE_SETTINGS_DESC')}
+              icon={<MegaphoneFill />}
+              active={isOpenSettingDetails === 'language'}
+            />
+          </SettingItemWrapper>
+          <SettingItemWrapper
+            className='col-md-4 col-sm-6'
+            onClick={() => handleOpenSettingDetails('checkout')}
+          >
+            <SettingItemUI
+              title={t('CHECKOUT_FIELDS', 'Checkout fields')}
+              description={t('CHECKOUT_FIELDS_DESC')}
+              icon={<CheckCircleFill />}
+              active={isOpenSettingDetails === 'checkout'}
+            />
+          </SettingItemWrapper>
+          <SettingItemWrapper
+            className='col-md-4 col-sm-6'
+            onClick={() => handleOpenSettingDetails('address')}
+          >
+            <SettingItemUI
+              title={t('ADDRESS_FIELDS', 'Address fields')}
+              description={t('ADDRESS_FIELDS_DESC')}
+              icon={<GeoAltFill />}
+              active={isOpenSettingDetails === 'address'}
+            />
+          </SettingItemWrapper>
           {
             categoryList.loading ? (
               [...Array(12).keys()].map(i => (
@@ -115,7 +159,9 @@ const SettingsUI = (props) => {
                   onClick={() => handleOpenDescription(category)}
                 >
                   <SettingItemUI
-                    category={category}
+                    title={category?.name}
+                    description={category?.description}
+                    icon={category?.image ? <img src={category?.image} /> : <Gear />}
                     active={selectedCategory?.id === category?.id}
                   />
                 </SettingItemWrapper>
@@ -133,6 +179,26 @@ const SettingsUI = (props) => {
             onClose={handleBackRedirect}
             onBasicSettingsRedirect={onBasicSettingsRedirect}
           />
+        )
+      }
+      {
+        isOpenSettingDetails && (
+          <SideBar
+            sidebarId='setting-details'
+            defaultSideBarWidth={550}
+            open={isOpenSettingDetails}
+            onClose={() => setIsOpenSettingDetails(null)}
+          >
+            {isOpenSettingDetails === 'checkout' && (
+              <CheckoutFieldsSetting />
+            )}
+            {isOpenSettingDetails === 'address' && (
+              <AddressFieldsSetting />
+            )}
+            {isOpenSettingDetails === 'language' && (
+              <LanguageSetting />
+            )}
+          </SideBar>
         )
       }
     </>
