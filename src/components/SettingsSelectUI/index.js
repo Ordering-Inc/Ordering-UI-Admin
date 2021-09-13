@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select/FirstSelect'
 
 import {
@@ -14,12 +15,14 @@ export const SettingsSelectUI = (props) => {
     handleSelectChange
   } = props
 
+  const [, t] = useLanguage()
+
   const [options, setOptions] = useState(null)
 
   useEffect(() => {
     if (config) {
       const selectedTypes = config?.options?.map(item => {
-        return { value: item.value, content: <Option>{item.text}</Option> }
+        return { value: item.value, content: <Option>{t(item.text.toUpperCase())}</Option> }
       })
       setOptions(selectedTypes)
     }
