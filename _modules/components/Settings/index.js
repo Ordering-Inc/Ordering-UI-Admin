@@ -23,6 +23,14 @@ var _Buttons = require("../../styles/Buttons");
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
+var _SideBar = require("../SideBar");
+
+var _CheckoutFieldsSetting = require("../CheckoutFieldsSetting");
+
+var _AddressFieldsSetting = require("../AddressFieldsSetting");
+
+var _LanguageSetting = require("../LanguageSetting");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -81,6 +89,11 @@ var SettingsUI = function SettingsUI(props) {
       selectedCategory = _useState4[0],
       setSelectedCategory = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isOpenSettingDetails = _useState6[0],
+      setIsOpenSettingDetails = _useState6[1];
+
   var _useLocation = (0, _reactRouterDom.useLocation)(),
       search = _useLocation.search;
 
@@ -121,12 +134,18 @@ var SettingsUI = function SettingsUI(props) {
   };
 
   var handleOpenDescription = function handleOpenDescription(category) {
+    setIsOpenSettingDetails(null);
     setIsOpenDescription(true);
     setSelectedCategory(category);
     onBasicSettingsRedirect({
       category: category.id
     });
     handChangeConfig && handChangeConfig(false);
+  };
+
+  var handleOpenSettingDetails = function handleOpenSettingDetails(item) {
+    setIsOpenDescription(false);
+    setIsOpenSettingDetails(item);
   };
 
   var handleBackRedirect = function handleBackRedirect() {
@@ -164,7 +183,37 @@ var SettingsUI = function SettingsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     className: "row"
-  }, categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
+      return handleOpenSettingDetails('language');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('LANGUAGE_SETTINGS', 'Language settings'),
+    description: t('LANGUAGE_SETTINGS_DESC'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.MegaphoneFill, null),
+    active: isOpenSettingDetails === 'language'
+  })), /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
+      return handleOpenSettingDetails('checkout');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('CHECKOUT_FIELDS', 'Checkout fields'),
+    description: t('CHECKOUT_FIELDS_DESC'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckCircleFill, null),
+    active: isOpenSettingDetails === 'checkout'
+  })), /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
+      return handleOpenSettingDetails('address');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('ADDRESS_FIELDS', 'Address fields'),
+    description: t('ADDRESS_FIELDS_DESC'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
+    active: isOpenSettingDetails === 'address'
+  })), categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
       key: i
@@ -179,7 +228,11 @@ var SettingsUI = function SettingsUI(props) {
         return handleOpenDescription(category);
       }
     }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
-      category: category,
+      title: category === null || category === void 0 ? void 0 : category.name,
+      description: category === null || category === void 0 ? void 0 : category.description,
+      icon: category !== null && category !== void 0 && category.image ? /*#__PURE__*/_react.default.createElement("img", {
+        src: category === null || category === void 0 ? void 0 : category.image
+      }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null),
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     }));
   }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
@@ -187,7 +240,14 @@ var SettingsUI = function SettingsUI(props) {
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
-  })));
+  })), isOpenSettingDetails && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+    sidebarId: "setting-details",
+    defaultSideBarWidth: 550,
+    open: isOpenSettingDetails,
+    onClose: function onClose() {
+      return setIsOpenSettingDetails(null);
+    }
+  }, isOpenSettingDetails === 'checkout' && /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));
 };
 
 var Settings = function Settings(props) {

@@ -84,8 +84,7 @@ var PageFormUI = function PageFormUI(props) {
       setSelectedImageUrl = props.setSelectedImageUrl,
       handleCancel = props.handleCancel,
       isAddMode = props.isAddMode,
-      handleAddPage = props.handleAddPage,
-      setBodyContent = props.setBodyContent;
+      handleAddPage = props.handleAddPage;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -205,7 +204,7 @@ var PageFormUI = function PageFormUI(props) {
       }
     },
     onChange: function onChange(content) {
-      return setBodyContent(content);
+      return handleChangeFormState('body', content);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ButtonGroupWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",

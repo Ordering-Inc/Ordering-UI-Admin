@@ -29,6 +29,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Switch = function Switch(props) {
   var defaultChecked = props.defaultChecked,
+      disabled = props.disabled,
       onChange = props.onChange,
       className = props.className;
 
@@ -47,7 +48,8 @@ var Switch = function Switch(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.ToggleSwitchContainer, {
-    className: className
+    className: className,
+    disabled: disabled
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
     checked: checked,

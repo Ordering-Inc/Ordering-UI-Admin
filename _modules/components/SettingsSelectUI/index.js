@@ -9,6 +9,8 @@ exports.SettingsSelectUI = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _orderingComponentsAdmin = require("ordering-components-admin");
+
 var _FirstSelect = require("../../styles/Select/FirstSelect");
 
 var _styles = require("./styles");
@@ -33,6 +35,10 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
   var config = props.config,
       handleSelectChange = props.handleSelectChange;
 
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       options = _useState2[0],
@@ -45,7 +51,7 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
       var selectedTypes = config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.map(function (item) {
         return {
           value: item.value,
-          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, item.text)
+          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t(item.text.toUpperCase()))
         };
       });
       setOptions(selectedTypes);

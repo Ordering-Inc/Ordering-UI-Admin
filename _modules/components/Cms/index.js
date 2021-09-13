@@ -201,7 +201,7 @@ var CmsUI = function CmsUI(props) {
         return onClickPage(e, page.id);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, page === null || page === void 0 ? void 0 : page.name), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {
-      calssName: "page-enabled"
+      className: "page-enabled"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
       defaultChecked: page === null || page === void 0 ? void 0 : page.enabled,
       onChange: function onChange(enabled) {
