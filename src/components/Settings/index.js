@@ -67,6 +67,7 @@ const SettingsUI = (props) => {
 
   const handleOpenSettingDetails = (item) => {
     setIsOpenDescription(false)
+    setSelectedCategory(null)
     setIsOpenSettingDetails(item)
   }
 
@@ -111,39 +112,43 @@ const SettingsUI = (props) => {
           </h1>
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
-          <SettingItemWrapper
-            className='col-md-4 col-sm-6'
-            onClick={() => handleOpenSettingDetails('language')}
-          >
-            <SettingItemUI
-              title={t('LANGUAGE_SETTINGS', 'Language settings')}
-              description={t('LANGUAGE_SETTINGS_DESC')}
-              icon={<MegaphoneFill />}
-              active={isOpenSettingDetails === 'language'}
-            />
-          </SettingItemWrapper>
-          <SettingItemWrapper
-            className='col-md-4 col-sm-6'
-            onClick={() => handleOpenSettingDetails('checkout')}
-          >
-            <SettingItemUI
-              title={t('CHECKOUT_FIELDS', 'Checkout fields')}
-              description={t('CHECKOUT_FIELDS_DESC')}
-              icon={<CheckCircleFill />}
-              active={isOpenSettingDetails === 'checkout'}
-            />
-          </SettingItemWrapper>
-          <SettingItemWrapper
-            className='col-md-4 col-sm-6'
-            onClick={() => handleOpenSettingDetails('address')}
-          >
-            <SettingItemUI
-              title={t('ADDRESS_FIELDS', 'Address fields')}
-              description={t('ADDRESS_FIELDS_DESC')}
-              icon={<GeoAltFill />}
-              active={isOpenSettingDetails === 'address'}
-            />
-          </SettingItemWrapper>
+          {settingsType === 'basic' && (
+            <>
+              <SettingItemWrapper
+                className='col-md-4 col-sm-6'
+                onClick={() => handleOpenSettingDetails('language')}
+              >
+                <SettingItemUI
+                  title={t('LANGUAGE_SETTINGS', 'Language settings')}
+                  description={t('LANGUAGE_SETTINGS_DESC')}
+                  icon={<MegaphoneFill />}
+                  active={isOpenSettingDetails === 'language'}
+                />
+              </SettingItemWrapper>
+              <SettingItemWrapper
+                className='col-md-4 col-sm-6'
+                onClick={() => handleOpenSettingDetails('checkout')}
+              >
+                <SettingItemUI
+                  title={t('CHECKOUT_FIELDS', 'Checkout fields')}
+                  description={t('CHECKOUT_FIELDS_DESC')}
+                  icon={<CheckCircleFill />}
+                  active={isOpenSettingDetails === 'checkout'}
+                />
+              </SettingItemWrapper>
+              <SettingItemWrapper
+                className='col-md-4 col-sm-6'
+                onClick={() => handleOpenSettingDetails('address')}
+              >
+                <SettingItemUI
+                  title={t('ADDRESS_FIELDS', 'Address fields')}
+                  description={t('ADDRESS_FIELDS_DESC')}
+                  icon={<GeoAltFill />}
+                  active={isOpenSettingDetails === 'address'}
+                />
+              </SettingItemWrapper>
+            </>
+          )}
           {
             categoryList.loading ? (
               [...Array(12).keys()].map(i => (
