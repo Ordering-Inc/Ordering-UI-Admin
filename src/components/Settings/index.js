@@ -8,6 +8,7 @@ import { IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { SideBar } from '../SideBar'
 import { CheckoutFieldsSetting } from '../CheckoutFieldsSetting'
+import { AddressFieldsSetting } from '../AddressFieldsSetting'
 
 import {
   BasicSettingsContainer,
@@ -189,6 +190,9 @@ const SettingsUI = (props) => {
           >
             {isOpenSettingDetails === 'checkout' && (
               <CheckoutFieldsSetting />
+            )}
+            {isOpenSettingDetails === 'address' && (
+              <AddressFieldsSetting />
             )}
           </SideBar>
         )

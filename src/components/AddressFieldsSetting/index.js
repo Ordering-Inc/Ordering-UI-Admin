@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, CheckoutFieldsSetting as CheckoutFieldsSettingController } from 'ordering-components-admin'
+import { useLanguage, AddressFieldsSetting as AddressFieldsSettingController } from 'ordering-components-admin'
 import { Switch } from '../../styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -8,10 +8,10 @@ import {
   FieldContainer
 } from './styles'
 
-const CheckoutFieldsSettingUI = (props) => {
+const AddressFieldsSettingUI = (props) => {
   const {
-    checkoutFieldsState,
-    handleChangeCheckoutFieldSetting
+    addressFieldsState,
+    handleChangeFieldSetting
   } = props
 
   const [, t] = useLanguage()
@@ -25,7 +25,7 @@ const CheckoutFieldsSettingUI = (props) => {
           <div className='required'>{t('REQUIRED', 'Required')}</div>
           <div className='status'>{t('STATE', 'Status')}</div>
         </FieldContainer>
-        {checkoutFieldsState?.loading ? (
+        {addressFieldsState?.loading ? (
           [...Array(10).keys()].map(i => (
             <FieldContainer key={i}>
               <div className='name'><Skeleton width={120} /></div>
@@ -39,21 +39,21 @@ const CheckoutFieldsSettingUI = (props) => {
           ))
         ) : (
           <>
-            {checkoutFieldsState.fields.map(field => (
+            {addressFieldsState.fields.map(field => (
               <FieldContainer key={field.id}>
                 <div className='name'>{t(field.code.toUpperCase())}</div>
                 <div className='required'>
                   <Switch
                     defaultChecked={field.required}
                     disabled={field.code === 'email'}
-                    onChange={(val) => handleChangeCheckoutFieldSetting(field.id, { required: val })}
+                    onChange={(val) => handleChangeFieldSetting(field.id, { required: val })}
                   />
                 </div>
                 <div className='status'>
                   <Switch
                     defaultChecked={field.enabled}
                     disabled={field.code === 'email'}
-                    onChange={(val) => handleChangeCheckoutFieldSetting(field.id, { enabled: val })}
+                    onChange={(val) => handleChangeFieldSetting(field.id, { enabled: val })}
                   />
                 </div>
               </FieldContainer>
@@ -64,10 +64,10 @@ const CheckoutFieldsSettingUI = (props) => {
     </>
   )
 }
-export const CheckoutFieldsSetting = (props) => {
-  const checkoutFieldsProps = {
+export const AddressFieldsSetting = (props) => {
+  const addressFieldsProps = {
     ...props,
-    UIComponent: CheckoutFieldsSettingUI
+    UIComponent: AddressFieldsSettingUI
   }
-  return <CheckoutFieldsSettingController {...checkoutFieldsProps} />
+  return <AddressFieldsSettingController {...addressFieldsProps} />
 }
