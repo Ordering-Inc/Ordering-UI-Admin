@@ -145,6 +145,7 @@ var SettingsUI = function SettingsUI(props) {
 
   var handleOpenSettingDetails = function handleOpenSettingDetails(item) {
     setIsOpenDescription(false);
+    setSelectedCategory(null);
     setIsOpenSettingDetails(item);
   };
 
@@ -183,7 +184,7 @@ var SettingsUI = function SettingsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     className: "row"
-  }, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
+  }, settingsType === 'basic' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
       return handleOpenSettingDetails('language');
@@ -213,7 +214,7 @@ var SettingsUI = function SettingsUI(props) {
     description: t('ADDRESS_FIELDS_DESC'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
     active: isOpenSettingDetails === 'address'
-  })), categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
+  }))), categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
       key: i
