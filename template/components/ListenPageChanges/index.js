@@ -35,7 +35,8 @@ export const ListenPageChanges = ({ children }) => {
     drivers_managers: '/delivery/drivers-managers',
     drivers_companies: '/delivery/drivers-companies',
     drivers_groups: '/delivery/drivers-groups',
-    ordering_products: '/ordering-products'
+    ordering_products: '/ordering-products',
+    support: '/support'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
