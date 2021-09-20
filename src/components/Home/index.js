@@ -33,6 +33,10 @@ const HomeUI = (props) => {
   const [isShowVideo, setIsShowVideo] = useState(true)
   const [isShowStore, setIsShowStore] = useState(true)
 
+  const goToContactUs = () => {
+    window.open('https://www.ordering.co/en-us/contact-us', '_blank')
+  }
+
   return (
     <HomeContainer>
       <HeaderContainer>
@@ -113,7 +117,7 @@ const HomeUI = (props) => {
               }
               <OrderingHelpButton>
                 <p>{t('ORDERING_HELP_CONDITION_LINK', 'If you need anything else from your Ordering Team..')}</p>
-                <Button color='lightPrimary' borderRadius='7.6px'>{t('CLICK_HERE', 'Click here')}!</Button>
+                <Button color='lightPrimary' borderRadius='7.6px' onClick={goToContactUs}>{t('CLICK_HERE', 'Click here')}!</Button>
               </OrderingHelpButton>
             </FirstStoreToSellContent>
           )
