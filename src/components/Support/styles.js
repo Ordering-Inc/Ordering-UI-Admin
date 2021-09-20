@@ -30,7 +30,7 @@ export const HeaderTitleContainer = styled.div`
 `
 
 export const HeaderContentWrapper = styled.div`
-  margin-top: 150px;
+  margin-top: 50px;
 
   h1 {
     font-weight: bold;
@@ -39,6 +39,10 @@ export const HeaderContentWrapper = styled.div`
     margin-top: 0;
     margin-bottom: 5px;
     text-align: center;
+    
+    span {
+      color: ${props => props.theme?.colors.primary};
+    }
   }
 
   p {
@@ -46,6 +50,10 @@ export const HeaderContentWrapper = styled.div`
     font-weight: 500;
     font-size: 16px;
     margin: 0;
+  }
+
+  @media (min-width: 769px) {
+    margin-top: 150px;
   }
 `
 
@@ -72,6 +80,11 @@ export const SupportContent = styled.div`
     text-align: center;
     margin-top: 0;
     margin-bottom: 10px;
+
+    span {
+      text-transform: capitalize;
+      text-decoration: underline;
+    }
   }
 
   p {
@@ -91,8 +104,12 @@ export const ActionBtnWrapper = styled.div`
   margin-top: 25px;
 
   button {
-    min-width: 290px;
+    min-width: 100%;
     height: 44px;
+
+    @media (min-width: 576px) {
+      min-width: 290px;
+    }
   }
 
   @media (min-width: 769px) {
