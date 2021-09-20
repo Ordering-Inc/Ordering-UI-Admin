@@ -79,6 +79,10 @@ var HomeUI = function HomeUI(props) {
       isShowStore = _useState4[0],
       setIsShowStore = _useState4[1];
 
+  var goToContactUs = function goToContactUs() {
+    window.open('https://www.ordering.co/en-us/contact-us', '_blank');
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.HomeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -114,7 +118,8 @@ var HomeUI = function HomeUI(props) {
     }));
   }))), /*#__PURE__*/_react.default.createElement(_styles.OrderingHelpButton, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING_HELP_CONDITION_LINK', 'If you need anything else from your Ordering Team..')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
-    borderRadius: "7.6px"
+    borderRadius: "7.6px",
+    onClick: goToContactUs
   }, t('CLICK_HERE', 'Click here'), "!")))));
 };
 
