@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoogleMapsMap, GoogleAutocompleteInput, useConfig, useLanguage } from 'ordering-components-admin'
 import { CitySelector } from '../CitySelector'
 import { Button } from '../../styles/Buttons'
@@ -22,6 +22,7 @@ export const BusinessLocation = (props) => {
   } = props
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
+  const [businessTimeZone, setBusinessTimeZone] = useState(null)
   const googleMapsApiKey = configs?.google_maps_api_key?.value
 
   const googleMapsControls = {
@@ -83,6 +84,12 @@ export const BusinessLocation = (props) => {
   }
 
   useEffect(() => {
+    if (business?.timezone) {
+      setBusinessTimeZone(business?.timezone)
+    }
+  }, [business?.timezone])
+
+  useEffect(() => {
     setFormState({ ...formState, changes: {} })
   }, [])
 
@@ -110,7 +117,7 @@ export const BusinessLocation = (props) => {
         </WrapperCitySelector>
         <WrapperTimezone>
           <p>{t('TIMEZONE', 'Timezone')}</p>
-          <p>{business?.timezone}</p>
+          <p>{businessTimeZone}</p>
         </WrapperTimezone>
       </Section>
 
