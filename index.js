@@ -48,6 +48,7 @@ import { SignupForm } from './src/components/SignupForm'
 import { SingleBusinessCard } from './src/components/SingleBusinessCard'
 import { SingleOrderCard } from './src/components/SingleOrderCard'
 import { SingleProductCard } from './src/components/SingleProductCard'
+import { Support } from './src/components/Support'
 import { UserDetails } from './src/components/UserDetails'
 import { UserProfileForm } from './src/components/UserProfileForm'
 import { WrapperGoogleMaps } from './src/components/WrapperGoogleMaps'
@@ -109,6 +110,7 @@ export {
   SingleBusinessCard,
   SingleOrderCard,
   SingleProductCard,
+  Support,
   UserDetails,
   UserProfileForm,
   WrapperGoogleMaps,

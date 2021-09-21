@@ -87,6 +87,7 @@ import { SearchBar } from './components/SearchBar'
 import { Settings } from './components/Settings'
 import { SidebarMenu } from './components/SidebarMenu'
 import { SingleBusiness } from './components/SingleBusiness'
+import { Support } from './components/Support'
 import { SpinnerLoader } from './components/SpinnerLoader'
 import { UserActiveStateFilter } from './components/UserActiveStateFilter'
 import { UserDetails } from './components/UserDetails'
@@ -211,6 +212,7 @@ export {
   SidebarMenu,
   SingleBusiness,
   SpinnerLoader,
+  Support,
   UserActiveStateFilter,
   UserDetails,
   UserDetailsLateralBar,
