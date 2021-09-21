@@ -41,6 +41,7 @@ import { DeliveryDriversList } from './pages/DeliveryDriversList'
 import { DriversManagersList } from './pages/DriversManagersList'
 import { DriversCompaniesList } from './pages/DriversCompaniesList'
 import { DriversGroupsList } from './pages/DriversGroupsList'
+import { Support } from './pages/Support'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -226,6 +227,13 @@ export const App = () => {
                       {
                         auth
                           ? <LanguageManager />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/support'>
+                      {
+                        auth
+                          ? <Support />
                           : <Redirect to='/login' />
                       }
                     </Route>
