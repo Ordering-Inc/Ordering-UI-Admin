@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const SettingListConatiner = styled.div`
   width: 100%;
-  padding: 20px 0;
+  margin: 20px 0;
   border-bottom: 1px solid #E9ECEF;
 `
 
