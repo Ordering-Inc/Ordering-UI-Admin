@@ -153,11 +153,19 @@ export const CalendarWrapper = styled.div`
     }
 
     button {
-      .rdrStartEdge,
-      .rdrEndEdge,
-      .rdrInRange {
-        color: ${props => props.theme.colors.lightPrimary} !important;
-      }
+      ${({ notSelected }) => notSelected ? css`
+        .rdrStartEdge,
+        .rdrEndEdge,
+        .rdrInRange {
+          color: transparent !important;
+        }
+      ` : css`
+        .rdrStartEdge,
+        .rdrEndEdge,
+        .rdrInRange {
+          color: ${props => props.theme.colors.lightPrimary} !important;
+        }
+      `}
     }
 
     .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {

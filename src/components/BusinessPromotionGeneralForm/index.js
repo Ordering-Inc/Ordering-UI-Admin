@@ -251,7 +251,7 @@ const BusinessPromotionGeneralFormUI = (props) => {
           </Button>
           {
             isShowCalendar && (
-              <CalendarWrapper ref={calendarRef}>
+              <CalendarWrapper ref={calendarRef} notSelected={!dateRange[0].startDate}>
                 <DateRange
                   editableDateInputs
                   onChange={item => handleChangeDates(item)}
