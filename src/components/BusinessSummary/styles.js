@@ -133,6 +133,10 @@ export const BusinessConfigsContainer = styled.div`
   > div:last-child {
     border-bottom: none;
   }
+
+  ${({ isLoading }) => isLoading && css`
+    pointer-events: none;
+  `}
 `
 
 export const BusinessConfigItem = styled.div`
