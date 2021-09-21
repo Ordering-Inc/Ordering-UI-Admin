@@ -543,6 +543,12 @@ Object.defineProperty(exports, "SingleBusiness", {
     return _SingleBusiness.SingleBusiness;
   }
 });
+Object.defineProperty(exports, "Support", {
+  enumerable: true,
+  get: function get() {
+    return _Support.Support;
+  }
+});
 Object.defineProperty(exports, "SpinnerLoader", {
   enumerable: true,
   get: function get() {
@@ -943,6 +949,8 @@ var _Settings = require("./components/Settings");
 var _SidebarMenu = require("./components/SidebarMenu");
 
 var _SingleBusiness = require("./components/SingleBusiness");
+
+var _Support = require("./components/Support");
 
 var _SpinnerLoader = require("./components/SpinnerLoader");
 
