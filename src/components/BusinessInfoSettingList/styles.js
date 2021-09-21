@@ -7,6 +7,7 @@ export const SettingListConatiner = styled.div`
 `
 
 export const Tab = styled.div`
+  user-select: none;
   padding: 10px 0px;
   cursor: pointer;
   color: ${props => props.theme.colors?.headingColor};
