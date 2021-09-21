@@ -1,6 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  DragAndDrop,
+  ExamineClick,
+  useConfig,
+  GoogleAutocompleteInput,
+  GoogleMapsMap,
+  BusinessFormDetails as BusinessFormDetailsController
+} from 'ordering-components-admin'
 import { XLg, LifePreserver } from 'react-bootstrap-icons'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
@@ -8,6 +16,7 @@ import { bytesConverter } from '../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Input, TextArea } from '../../styles/Inputs'
 import { Button, IconButton } from '../../styles/Buttons'
+import { CitySelector } from '../CitySelector'
 import Skeleton from 'react-loading-skeleton'
 
 import {
@@ -23,7 +32,8 @@ import {
   InputWrapper,
   ActionsForm,
   UploadImageIconContainer,
-  LogoImage
+  LogoImage,
+  WrapperMap
 } from './styles'
 
 const AddBusinessFormUI = (props) => {
@@ -32,15 +42,35 @@ const AddBusinessFormUI = (props) => {
     handleChangeActiveBusiness,
     handleItemSelected,
     formState,
+    setFormState,
     handlechangeImage,
     handleChangeInput,
     handleAddBusiness
   } = props
+
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+
   const formMethods = useForm()
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  let timeout = null
+
+  const googleMapsApiKey = configs?.google_maps_api_key?.value
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  }
+
+  const defaultPosition = { lat: 40.77473399999999, lng: -73.9653844 }
 
   const handleClickImage = (type) => {
     if (type === 'header') {
@@ -85,6 +115,54 @@ const AddBusinessFormUI = (props) => {
     if (Object.keys(formState.changes).length > 0) {
       handleAddBusiness()
     }
+  }
+
+  const getTimeZone = async (lat, lng) => {
+    const date = new Date()
+    const timestamp = Math.floor(date.getTime() / 1000)
+    const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${timestamp}&key=${googleMapsApiKey}`
+    const response = await fetch(url, {
+      method: 'GET'
+    })
+    const result = await response.json()
+    return result?.timeZoneId
+  }
+
+  const handleChangeAddress = (address) => {
+    const timezone = getTimeZone(address?.location?.lat, address?.location?.lng)
+
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState?.changes,
+        address: address?.address,
+        location: { ...address?.location, zipcode: address?.zipcode ? address.zipcode : -1, zoom: 15 },
+        timezone: timezone
+      }
+    })
+  }
+
+  const handleChangeCenter = (address) => {
+    let timezone
+
+    clearTimeout(timeout)
+    timeout = setTimeout(function () {
+      timezone = getTimeZone(address?.lat(), address?.lng())
+    }, 200)
+
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState?.changes,
+        location: {
+          zipcode: formState?.changes?.location?.zipcode ? formState?.changes?.location.zipcode : -1,
+          lat: address?.lat(),
+          lng: address?.lng(),
+          zoom: 15
+        },
+        timezone: timezone
+      }
+    })
   }
 
   useEffect(() => {
@@ -267,6 +345,53 @@ const AddBusinessFormUI = (props) => {
               autoComplete='off'
             />
           </InputWrapper>
+          <InputWrapper>
+            <label>{t('CITY', 'City')}</label>
+            <CitySelector
+              isDefault
+              defaultValue={
+                formState?.result?.result
+                  ? formState?.result?.result?.city_id
+                  : formState?.changes?.city_id ?? ''
+              }
+              handleChangeCity={cityId => setFormState({ ...formState, changes: { ...formState.changes, city_id: cityId } })}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>{t('ADDRESS', 'Address')}</label>
+            <GoogleAutocompleteInput
+              name='address'
+              className='input-autocomplete'
+              apiKey={googleMapsApiKey}
+              placeholder={t('ADDRESS', 'Address')}
+              onChangeAddress={(e) => {
+                handleChangeAddress(e)
+              }}
+              onChange={(e) => {
+                handleChangeInput(e)
+              }}
+              defaultValue={
+                formState?.result?.result
+                  ? formState?.result?.result?.address
+                  : formState?.changes?.address ?? ''
+              }
+              autoComplete='new-field'
+              countryCode={configs?.country_autocomplete?.value || '*'}
+            />
+          </InputWrapper>
+          <WrapperMap>
+            <GoogleMapsMap
+              apiKey={configs?.google_maps_api_key?.value}
+              location={
+                formState?.result?.result
+                  ? formState?.result?.result?.location
+                  : formState?.changes?.location ?? defaultPosition
+              }
+              mapControls={googleMapsControls}
+              handleChangeCenter={handleChangeCenter}
+              isFitCenter
+            />
+          </WrapperMap>
           <ActionsForm>
             <Button
               type='submit'
