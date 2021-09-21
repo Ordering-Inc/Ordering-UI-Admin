@@ -317,7 +317,7 @@ export const UserFormDetailsUI = (props) => {
                 <UserTypeSelector
                   isPrimary
                   userId={user.id}
-                  defaultUserType={formState?.changes?.level || user?.level}
+                  defaultUserType={formState?.changes?.level ?? user?.level}
                   handleChangeUserType={handleChangeUserType}
                 />
               </WrapperUserTypeSelector>
