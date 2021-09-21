@@ -84,6 +84,7 @@
     "react-bootstrap": "^1.6.0",
     "react-bootstrap-icons": "^1.5.0",
     "react-chartjs-2": "^3.0.4",
+    "react-date-range": "^1.4.0",
     "react-datepicker": "^3.7.0",
     "react-daterange-picker": "^2.0.1",
     "react-helmet": "^6.1.0",

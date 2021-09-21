@@ -7,14 +7,18 @@ import { Alert } from '../Confirm'
 
 import {
   BusinessPromotionForm as BusinessPromotionFormController,
-  useUtils,
   ExamineClick,
   DragAndDrop,
   useLanguage
 } from 'ordering-components-admin'
 import { Camera as CameraIcon, CardImage, Calendar4, Circle, RecordCircleFill } from 'react-bootstrap-icons'
 import { bytesConverter } from '../../utils'
-import DateRangePicker from 'react-daterange-picker'
+// import DateRangePicker from 'react-daterange-picker'
+
+import { DateRange } from 'react-date-range'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
+
 import moment from 'moment'
 
 import {
@@ -48,11 +52,16 @@ const BusinessPromotionGeneralFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ parseDate }] = useUtils()
   const inputRef = useRef(null)
   const calendarRef = useRef()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [dateRange, setDateRange] = useState(null)
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: null,
+      endDate: null,
+      key: 'selection'
+    }
+  ])
   const [isShowCalendar, setIsShowCalendar] = useState(false)
 
   const discountTypes = [
@@ -100,12 +109,12 @@ const BusinessPromotionGeneralFormUI = (props) => {
     }
   }
 
-  const handleDates = (dates) => {
-    setDateRange(dates)
+  const handleChangeDates = (item) => {
     handleChangeItem({
-      start: dates?.start?.format('YYYY-MM-DD'),
-      end: dates?.end?.format('YYYY-MM-DD')
+      start: moment(item.selection.startDate).format('YYYY-MM-DD'),
+      end: item.selection.endDate ? moment(item.selection.endDate).format('YYYY-MM-DD') : null
     })
+    setDateRange([item.selection])
   }
 
   const closeAlert = () => {
@@ -139,20 +148,32 @@ const BusinessPromotionGeneralFormUI = (props) => {
   }, [isShowCalendar])
 
   useEffect(() => {
-    if (Object.keys(promotionState?.promotion).length) {
-      setDateRange(moment.range(promotionState?.promotion?.start, promotionState?.promotion?.end))
-    } else {
-      setDateRange(null)
-    }
-  }, [promotionState])
-
-  useEffect(() => {
     if (!formState?.result?.error) return
     setAlertState({
       open: true,
       content: formState?.result?.result
     })
   }, [formState?.result?.error])
+
+  useEffect(() => {
+    if (Object.keys(promotionState?.promotion).length) {
+      setDateRange([
+        {
+          startDate: new Date(promotionState?.promotion?.start),
+          endDate: new Date(promotionState?.promotion?.end),
+          key: 'selection'
+        }
+      ])
+    } else {
+      setDateRange([
+        {
+          startDate: null,
+          endDate: null,
+          key: 'selection'
+        }
+      ])
+    }
+  }, [promotionState])
 
   return (
     <Container>
@@ -222,8 +243,8 @@ const BusinessPromotionGeneralFormUI = (props) => {
             <Calendar4 />
             <span>
               {
-                dateRange
-                  ? `${parseDate(dateRange?.start, { utc: false, outputFormat: 'YYYY/MM/DD' })} - ${parseDate(dateRange?.end, { utc: false, outputFormat: 'YYYY/MM/DD' })}`
+                dateRange[0].startDate
+                  ? `${moment(dateRange[0].startDate).format('YYYY/MM/DD')} - ${moment(dateRange[0].endDate).format('YYYY/MM/DD')}`
                   : t('SELECT_DATE_RANGE', 'Select Date Range')
               }
             </span>
@@ -231,9 +252,11 @@ const BusinessPromotionGeneralFormUI = (props) => {
           {
             isShowCalendar && (
               <CalendarWrapper ref={calendarRef}>
-                <DateRangePicker
-                  onSelect={dates => handleDates(dates)}
-                  value={dateRange}
+                <DateRange
+                  editableDateInputs
+                  onChange={item => handleChangeDates(item)}
+                  moveRangeOnFirstSelection={false}
+                  ranges={dateRange}
                 />
               </CalendarWrapper>
             )
