@@ -6,7 +6,8 @@ import {
   SettingsSelectContainer,
   SelectHeader,
   SelectContent,
-  Option
+  Option,
+  OptionsError
 } from './styles'
 
 export const SettingsSelectUI = (props) => {
@@ -32,23 +33,27 @@ export const SettingsSelectUI = (props) => {
     <SettingsSelectContainer>
       <SelectHeader>
         {
-          config?.name && options && (
+          config?.name && (
             <p>{config?.name}</p>
           )
         }
       </SelectHeader>
-      <SelectContent>
-        {
-          options && (
+      {
+        options ? (
+          <SelectContent>
             <Select
               defaultValue={config?.value}
               options={options}
               className='select'
               onChange={(typeValue) => handleSelectChange(typeValue)}
+              placeholder={t('SELECT_A_OPTION', 'Select a option')}
             />
-          )
-        }
-      </SelectContent>
+          </SelectContent>
+        ) : (
+          <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>
+        )
+      }
+
     </SettingsSelectContainer>
   )
 }
