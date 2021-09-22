@@ -28,6 +28,7 @@ export const OrderDashboardControlsContainer = styled.div`
 
 export const InnerContnet = styled.div`
   display: flex;
+  align-items: center;
 `
 
 export const WrapOrderStatusTypeSelector = styled.div`
@@ -39,6 +40,16 @@ export const WrapOrderStatusTypeSelector = styled.div`
       p {
         color: ${props => props.theme.colors.secundaryContrast};
       }
+    }
+  }
+
+  div.select {
+    background-color: ${props => props.theme.colors.secundary};
+    border: none;
+    padding: 5px 0;
+    p {
+      font-size: 14px;
+      color: ${props => props.theme.colors.secundaryContrast};
     }
   }
 `
