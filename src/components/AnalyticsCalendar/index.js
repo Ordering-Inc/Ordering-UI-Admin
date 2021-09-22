@@ -19,8 +19,8 @@ export const AnalyticsCalendar = (props) => {
   const [, t] = useLanguage()
   const [dateRange, setDateRange] = useState([
     {
-      startDate: null,
-      endDate: null,
+      startDate: new Date(),
+      endDate: new Date(),
       key: 'selection'
     }
   ])
@@ -74,7 +74,7 @@ export const AnalyticsCalendar = (props) => {
       </Button>
       {
         isShowCalendar && (
-          <AnalyticsCalendarContainer ref={calendarRef} notSelected={!dateRange[0]?.startDate}>
+          <AnalyticsCalendarContainer ref={calendarRef}>
             <DateRange
               editableDateInputs
               onChange={item => handleChangeDates(item)}
