@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton'
 import {
   useUtils,
   useLanguage,
   DragAndDrop,
   ExamineClick,
+  useToast,
+  ToastType,
   SingleBusinessProduct as SingleBusinessProductController
 } from 'ordering-components-admin'
 
@@ -52,6 +53,8 @@ const SingleBusinessProductUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [, { showToast }] = useToast()
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const containerRef = useRef(null)
   const ProductTypeImgRef = useRef(null)
@@ -125,19 +128,9 @@ const SingleBusinessProductUI = (props) => {
 
   useEffect(() => {
     if (!productFormState?.loading && !productFormState?.result.error && productFormState?.result?.result) {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = productFormState?.result?.result?.id
-        ? t('PRODUCT_UPDATE', 'Product updated')
-        : t('PRODUCT_DELETE', 'Product deleted')
-      toast.dark(content, toastConfigure)
+      productFormState?.result?.result?.id
+        ? showToast(ToastType.Success, t('PRODUCT_UPDATE', 'Product updated'))
+        : showToast(ToastType.Success, t('PRODUCT_DELETE', 'Product deleted'))
     }
   }, [productFormState?.loading])
 

@@ -139,13 +139,13 @@ export const BusinessSummary = (props) => {
                 {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
               </Button>
               <BusinessDescription>
-                {businessState?.business?.loading ? (
-                  <Skeleton height={50} />
+                {businessState?.loading ? (
+                  <Skeleton width={300} />
                 ) : (
                   businessState?.business?.description
                 )}
               </BusinessDescription>
-              <BusinessConfigsContainer>
+              <BusinessConfigsContainer isLoading={businessState?.loading}>
                 {businessConfigs.map(config => (
                   <BusinessConfigItem
                     key={config.key}

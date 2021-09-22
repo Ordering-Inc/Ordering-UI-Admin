@@ -2,10 +2,11 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
-  min-height: calc(100% - 130px);
+  min-height: calc(100% - 150px);
   > button {
     position: sticky;
     top: 100%;
+    height: 42px;
   }
 `
 
@@ -37,12 +38,12 @@ export const WrapperCitySelector = styled.div`
   > p {
     color: ${props => props.theme.colors.headingColor};
     margin-bottom: 5px;
-    font-size: 14px;
   }
   > div {
     background: #F8F9FA;
     border: none;
   }
+  font-size: 14px;
 `
 
 export const WrapperTimezone = styled.div`

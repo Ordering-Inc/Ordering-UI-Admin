@@ -214,7 +214,7 @@ const ProductExtraOptionsUI = (props) => {
               <th>{t('ACTIONS', 'Actions')}</th>
             </tr>
           </thead>
-          {extraState.extra?.options.map(option => (
+          {extraState.extra?.options && extraState.extra?.options.map(option => (
             <tbody key={option.id}>
               <tr>
                 <td>

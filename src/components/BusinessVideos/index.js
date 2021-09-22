@@ -28,7 +28,7 @@ const BusinessVideosUI = (props) => {
   const handleDeleteClick = (id) => {
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_IMAGE', 'Are you sure that you want to delete this image?'),
+      content: t('QUESTION_DELETE_VIDEO', 'Are you sure that you want to delete this video?'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
         handleDeleteBusinessGallery(id)
@@ -70,7 +70,7 @@ const BusinessVideosUI = (props) => {
         <BusinessAddVideoWrapper>
           <Input
             placeholder={t('VIDEO_URL', 'Video url')}
-            defaultValue={formState?.changes?.video ?? ''}
+            value={formState?.changes?.video ?? ''}
             onChange={(e) => handleChangeBusinessVideo(e)}
             disabled={formState?.loading}
             autoComplete='off'
@@ -109,6 +109,7 @@ const BusinessVideosUI = (props) => {
 export const BusinessVideos = (props) => {
   const businessGalleryProps = {
     ...props,
+    isVideoGallery: true,
     UIComponent: BusinessVideosUI
   }
   return <BusinessGalleryController {...businessGalleryProps} />

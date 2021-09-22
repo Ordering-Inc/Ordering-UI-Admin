@@ -368,7 +368,7 @@ export const BusinessMenuBasicOptions = (props) => {
           onChange={(e) => handleChangeInput(e)}
         />
         <FieldName isBorderBottom>{t('PRODUCTS', 'Products')}</FieldName>
-        {business?.categories.map(category => (
+        {business?.categories.filter(_category => _category.products.length > 0).map(category => (
           <CategoryProductsContainer key={category.id}>
             <BusinessCategoryContainer
               active={openCategoryProduct[category?.name]}

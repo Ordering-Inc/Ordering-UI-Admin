@@ -32,6 +32,11 @@ export const WrapperOwnerSelector = styled(OwnerItem)`
     width: calc(100% - 50px);
     background: #F8F9FA;
     border: none;
+    .list {
+      > div {
+        max-height: 300px;
+      }
+    }
 
     > div:first-child {
       padding-top: 5px;

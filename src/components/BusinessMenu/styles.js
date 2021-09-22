@@ -87,7 +87,12 @@ export const ActionsWrapper = styled.div`
     border: 1px solid #E9ECEF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
+    .dropdown-item {
+      font-size: 14px;
+    }
     > div {
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
       a:last-child {
         color: #E63757;
       }

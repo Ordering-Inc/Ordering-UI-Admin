@@ -20,14 +20,14 @@ export const Personalization = (props) => {
       )}
       <p>
         {t('PERSONALIZATION_TITLE', 'If you are looking for something  special for your Ordering Solution')},
-        <a href=''>{t('SEND_US_SPECIAL_WISH', 'send us your special wish.')}</a>
+        <a href='https://orderingco.typeform.com/to/qHPQtU' target='_blank'>{t('SEND_US_SPECIAL_WISH', 'send us your special wish.')}</a>
       </p>
       <img src={theme?.images.general?.personalization} loading='lazy' />
       <WrapperButton>
         <Button
           borderRadius='8px'
           color='primary'
-          onClick={() => window.open('https://orderingco.typeform.com/to/qHPQtU')}
+          onClick={() => window.open('https://orderingco.typeform.com/to/qHPQtU', '_blank')}
         >
           {t('CONTACT_US', 'Contact us')}
         </Button>
