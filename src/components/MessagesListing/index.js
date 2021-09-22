@@ -82,12 +82,12 @@ const MessagesListingUI = (props) => {
                 >
                   {t('ORDERS', 'Orders')}
                 </Tab>
-                <Tab
+                {/* <Tab
                   active={selectedOption === 'contacts'}
                   onClick={() => setSelectedOption('contacts')}
                 >
                   {t('CONTACTS', 'Contacts')}
-                </Tab>
+                </Tab> */}
               </MessagesOptionTabs>
               {selectedOption === 'orders' && (
                 <OrdersOrderByOptionContainer>

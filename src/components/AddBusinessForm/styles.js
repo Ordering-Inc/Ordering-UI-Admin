@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const BusinessDetailsContainer = styled.div`
   width: 100%;
@@ -133,10 +134,38 @@ export const InputWrapper = styled.div`
   textarea {
     color: ${props => props.theme.colors.headingColor};
   }
+
+  .select {
+    font-size: 14px;
+  }
+
+  .input-autocomplete {
+    width: 100%;
+    background: #FFF;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px 15px;
+    outline: none;
+    ::placeholder {
+      color: #B1BCCC;
+    }
+
+    &:-ms-input-placeholder {
+      color: #B1BCCC;
+    }
+
+    &::-ms-input-placeholder { /* Microsoft Edge */
+      color: #B1BCCC;
+    }
+    &:focus {
+      border-color: ${() => darken(0.07, '#CCC')};
+    }
+  }
 `
 
 export const ActionsForm = styled.div`
-  margin-top: 50px;
+  padding: 50px 0;
   > button {
     height: 42px;
     &:first-child {
@@ -173,5 +202,22 @@ export const LogoImage = styled.div`
 
   img{
     object-fit: cover;
+  }
+`
+
+export const WrapperMap = styled.div`
+  width: 100%;
+  height: 150px;
+  margin-top: 10px;
+
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 768px) {
+    height: 200px;
   }
 `

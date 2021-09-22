@@ -178,6 +178,7 @@ const BusinessImagesUI = (props) => {
 export const BusinessImages = (props) => {
   const businessGalleryProps = {
     ...props,
+    isImageGallery: true,
     UIComponent: BusinessImagesUI
   }
   return <BusinessGalleryController {...businessGalleryProps} />

@@ -187,6 +187,9 @@ export const DropDownWrapper = styled.div`
       a:last-child {
         color: #E63757;
       }
+      a.dropdown-item {
+        font-size: 14px;
+      }
     }
   }
 `
