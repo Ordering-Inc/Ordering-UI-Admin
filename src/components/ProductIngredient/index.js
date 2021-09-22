@@ -47,7 +47,7 @@ const ProductIngredientUI = (props) => {
           {t('ADD_INGREDIENT', 'Add ingredient')}
         </Button>
       </Header>
-      {productState?.product?.ingredients.map(ingredient => (
+      {productState?.product?.ingredients && productState?.product?.ingredients.map(ingredient => (
         <IngredientOption
           key={ingredient.id}
         >

@@ -57,8 +57,12 @@ const ProductExtrasUI = (props) => {
   }
 
   const isCheckState = (extraId) => {
-    const found = productState?.product?.extras.find(extra => extra?.id === extraId)
-    return found
+    if (productState?.product?.extras) {
+      const found = productState?.product?.extras.find(extra => extra?.id === extraId)
+      return found
+    } else {
+      return false
+    }
   }
 
   const addExtraListener = (e) => {
@@ -94,6 +98,8 @@ const ProductExtrasUI = (props) => {
     }
   }, [productState, extrasState])
 
+  console.log(productState)
+
   return (
     <MainContainer>
       <ProductExtrasContainer>
@@ -107,7 +113,7 @@ const ProductExtrasUI = (props) => {
             {t('ADD_PRODUCT_EXTRA', 'Add product extra')}
           </Button>
         </Header>
-        {extrasState?.extras.map(extra => (
+        {extrasState?.extras && extrasState?.extras.map(extra => (
           <ExtraOption key={extra.id}>
             <CheckboxContainer>
               <Checkbox
@@ -144,7 +150,7 @@ const ProductExtrasUI = (props) => {
         <AddButton
           onClick={() => handleOpenAddForm()}
         >
-          {t('ADD_INGREDIENT', 'Add ingredient')}
+          {t('ADD_PRODUCT_EXTRA', 'Add product extra')}
         </AddButton>
       </ProductExtrasContainer>
       {width >= 1000 ? (

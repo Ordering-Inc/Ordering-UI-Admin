@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
@@ -11,6 +10,8 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
+  useToast,
+  ToastType,
   BusinessProductCreator as BusinessProductCreatorController
 } from 'ordering-components-admin'
 
@@ -33,6 +34,8 @@ const BusinessProductAddFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [, { showToast }] = useToast()
+
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -80,17 +83,7 @@ const BusinessProductAddFormUI = (props) => {
 
   useEffect(() => {
     if (!formState?.loading && !formState?.result.error && formState?.result?.result) {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = t('PRODUCT_ADD', 'Product added')
-      toast.dark(content, toastConfigure)
+      showToast(ToastType.Success, t('PRODUCT_ADD', 'Product added'))
     }
   }, [formState?.loading])
 

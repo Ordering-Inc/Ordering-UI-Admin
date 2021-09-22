@@ -2,11 +2,12 @@ import styled, { css } from 'styled-components'
 
 export const SettingListConatiner = styled.div`
   width: 100%;
-  padding: 20px 0;
+  margin: 20px 0;
   border-bottom: 1px solid #E9ECEF;
 `
 
 export const Tab = styled.div`
+  user-select: none;
   padding: 10px 0px;
   cursor: pointer;
   color: ${props => props.theme.colors?.headingColor};

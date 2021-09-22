@@ -39,7 +39,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
   ]
 
   const googleMapsControls = {
-    defaultZoom: 15,
+    defaultZoom: 8,
     zoomControl: true,
     streetViewControl: false,
     fullscreenControl: false,
@@ -48,7 +48,8 @@ export const BusinessDeliveryZoneBasic = (props) => {
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
     },
-    isMarkerDraggable: false
+    isMarkerDraggable: false,
+    defaultPosition: { lat: 40.77473399999999, lng: -73.9653844 }
   }
 
   const fillStyle = {

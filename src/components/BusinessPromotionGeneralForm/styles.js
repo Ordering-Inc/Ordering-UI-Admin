@@ -128,7 +128,6 @@ export const CalendarContainer = styled.div`
 `
 
 export const CalendarWrapper = styled.div`
-  padding-top: 15px;
   background: #FFFFFF;
   border: 1px solid ${props => props.theme.colors.borderColor};
   box-sizing: border-box;
@@ -136,70 +135,43 @@ export const CalendarWrapper = styled.div`
   border-radius: 7.6px;
   z-index: 100;
   position: absolute;
-  top: 100%;
-  width: 300px;
   margin-top: 18px;
+  overflow: hidden;
   ${props => props.theme?.rtl ? css`
     right: 0px;
   ` : css`
     left: 0px;
   `}
-
-  .DateRangePicker__PaginationArrow:hover {
-    background: none;
-    > div {
-      transition: all 0.3s;
-      transform: scale(1.1);
-    }
-    .DateRangePicker__PaginationArrowIcon--previous {
-      border-right: 8px solid ${props => props.theme?.colors.headingColor};
-    }
-    .DateRangePicker__PaginationArrowIcon--next {
-      border-left: 8px solid ${props => props.theme?.colors.headingColor};
-    }
-  }
-
-  .DateRangePicker__MonthHeader {
-    color: #748194;
-  }
-
-  table {
-    border-collapse: collapse;
-    border: none;
-
-    thead {
-      th {
-        border: none;
-      }
+  .rdrDateRangeWrapper {
+    .rdrDateDisplayWrapper {
+      background-color: transparent;
     }
 
-    tbody {
-      td {
-        color: ${props => props.theme.colors.headingColor};
-        .DateRangePicker__CalendarHighlight {
-          border: 1px solid ${props => props.theme?.colors.primary};
+    .rdrDateDisplayItem {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: none;
+    }
+
+    button {
+      ${({ notSelected }) => notSelected ? css`
+        .rdrStartEdge,
+        .rdrEndEdge,
+        .rdrInRange {
+          color: transparent !important;
         }
-      }
+      ` : css`
+        .rdrStartEdge,
+        .rdrEndEdge,
+        .rdrInRange {
+          color: ${props => props.theme.colors.lightPrimary} !important;
+        }
+      `}
     }
 
-    .DateRangePicker__Date {
-      border: none;
-    }
-
-    .DateRangePicker__CalendarSelection {
-      background: #E9F2FE;
+    .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
       color: ${props => props.theme.colors.headingColor};
-      border: none;
     }
-
-    .DateRangePicker__Date--weekend {
-      background-color: #FFFFFF;
-    }
-
-    .DateRangePicker__WeekdayHeading abbr[title] {
-      color: #909BA9;
-    }
-  }
+  }  
 `
 
 export const PromotionTypeContainer = styled.div`
