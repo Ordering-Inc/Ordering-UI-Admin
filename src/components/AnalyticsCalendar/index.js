@@ -40,16 +40,17 @@ export const AnalyticsCalendar = (props) => {
     setIsShowCalendar(true)
   }
 
+  const handleChangeDates = (item) => {
+    if (item.selection?.startDate && item.selection?.endDate) {
+      handleChangeDate(moment(item.selection.startDate).format('YYYY-MM-DD'), moment(item.selection.endDate).format('YYYY-MM-DD'))
+    }
+    setDateRange([item.selection])
+  }
+
   useEffect(() => {
     window.addEventListener('click', handleClickOutside)
     return () => window.removeEventListener('click', handleClickOutside)
   }, [isShowCalendar])
-
-  useEffect(() => {
-    if (dateRange[0].startDate && dateRange[0].endDate) {
-      handleChangeDate(moment(dateRange[0].startDate).format('YYYY-MM-DD'), moment(dateRange[0].endDate).format('YYYY-MM-DD'))
-    }
-  }, [dateRange])
 
   useEffect(() => {
     if (defaultValue && defaultValue?.from !== '' && defaultValue?.to !== '') {
@@ -76,7 +77,7 @@ export const AnalyticsCalendar = (props) => {
           <AnalyticsCalendarContainer ref={calendarRef} notSelected={!dateRange[0]?.startDate}>
             <DateRange
               editableDateInputs
-              onChange={item => setDateRange([item.selection])}
+              onChange={item => handleChangeDates(item)}
               moveRangeOnFirstSelection={false}
               ranges={dateRange}
             />
