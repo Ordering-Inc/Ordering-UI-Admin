@@ -40,7 +40,8 @@ var Personalization = function Personalization(props) {
       t = _useLanguage2[1];
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, isShowTitle && /*#__PURE__*/_react.default.createElement("h1", null, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement("p", null, t('PERSONALIZATION_TITLE', 'If you are looking for something  special for your Ordering Solution'), ",", /*#__PURE__*/_react.default.createElement("a", {
-    href: ""
+    href: "https://orderingco.typeform.com/to/qHPQtU",
+    target: "_blank"
   }, t('SEND_US_SPECIAL_WISH', 'send us your special wish.'))), /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images$general = theme.images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.personalization,
     loading: "lazy"
@@ -48,7 +49,7 @@ var Personalization = function Personalization(props) {
     borderRadius: "8px",
     color: "primary",
     onClick: function onClick() {
-      return window.open('https://orderingco.typeform.com/to/qHPQtU');
+      return window.open('https://orderingco.typeform.com/to/qHPQtU', '_blank');
     }
   }, t('CONTACT_US', 'Contact us'))));
 };

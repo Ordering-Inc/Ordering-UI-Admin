@@ -22,7 +22,7 @@ var OwnerItem = _styledComponents.default.div(_templateObject2 || (_templateObje
 });
 
 exports.OwnerItem = OwnerItem;
-var WrapperOwnerSelector = (0, _styledComponents.default)(OwnerItem)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-bottom: none;\n\n  > svg {\n    color: ", ";\n  }\n\n  > div:first-child {\n    width: calc(100% - 50px);\n    background: #F8F9FA;\n    border: none;\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n    }\n  }\n"])), function (props) {
+var WrapperOwnerSelector = (0, _styledComponents.default)(OwnerItem)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-bottom: none;\n\n  > svg {\n    color: ", ";\n  }\n\n  > div:first-child {\n    width: calc(100% - 50px);\n    background: #F8F9FA;\n    border: none;\n    .list {\n      > div {\n        max-height: 300px;\n      }\n    }\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.WrapperOwnerSelector = WrapperOwnerSelector;

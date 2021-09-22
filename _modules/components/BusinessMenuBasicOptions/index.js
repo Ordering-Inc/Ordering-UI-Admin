@@ -362,7 +362,9 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, {
     isBorderBottom: true
-  }, t('PRODUCTS', 'Products')), business === null || business === void 0 ? void 0 : business.categories.map(function (category) {
+  }, t('PRODUCTS', 'Products')), business === null || business === void 0 ? void 0 : business.categories.filter(function (_category) {
+    return _category.products.length > 0;
+  }).map(function (category) {
     var _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes6;
 
     return /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, {

@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: calc(100% - 130px);\n  > button {\n    position: sticky;\n    top: 100%;\n  }\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: calc(100% - 150px);\n  > button {\n    position: sticky;\n    top: 100%;\n    height: 42px;\n  }\n"])));
 
 exports.Container = Container;
 
@@ -27,7 +27,7 @@ var Section = _styledComponents.default.div(_templateObject3 || (_templateObject
 
 exports.Section = Section;
 
-var WrapperCitySelector = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  > p {\n    color: ", ";\n    margin-bottom: 5px;\n    font-size: 14px;\n  }\n  > div {\n    background: #F8F9FA;\n    border: none;\n  }\n"])), function (props) {
+var WrapperCitySelector = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  > p {\n    color: ", ";\n    margin-bottom: 5px;\n  }\n  > div {\n    background: #F8F9FA;\n    border: none;\n  }\n  font-size: 14px;\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

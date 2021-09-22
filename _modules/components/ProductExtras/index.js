@@ -114,10 +114,16 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
   var isCheckState = function isCheckState(extraId) {
     var _productState$product;
 
-    var found = productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.extras.find(function (extra) {
-      return (extra === null || extra === void 0 ? void 0 : extra.id) === extraId;
-    });
-    return found;
+    if (productState !== null && productState !== void 0 && (_productState$product = productState.product) !== null && _productState$product !== void 0 && _productState$product.extras) {
+      var _productState$product2;
+
+      var found = productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.extras.find(function (extra) {
+        return (extra === null || extra === void 0 ? void 0 : extra.id) === extraId;
+      });
+      return found;
+    } else {
+      return false;
+    }
   };
 
   var addExtraListener = function addExtraListener(e) {
@@ -151,24 +157,25 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     };
   }, [isAddMode, changesState]);
   (0, _react.useEffect)(function () {
-    var _productState$product2, _extrasState$extras;
+    var _productState$product3, _extrasState$extras;
 
-    if (productState !== null && productState !== void 0 && (_productState$product2 = productState.product) !== null && _productState$product2 !== void 0 && _productState$product2.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
-      var _productState$product3, _extrasState$extras2;
+    if (productState !== null && productState !== void 0 && (_productState$product3 = productState.product) !== null && _productState$product3 !== void 0 && _productState$product3.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
+      var _productState$product4, _extrasState$extras2;
 
       setAlertState({
         open: true,
-        content: (productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.error) || (extrasState === null || extrasState === void 0 ? void 0 : (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
+        content: (productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.error) || (extrasState === null || extrasState === void 0 ? void 0 : (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
       });
     }
   }, [productState, extrasState]);
+  console.log(productState);
   return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductExtrasContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_EXTRAS', 'Product extras')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_PRODUCT_EXTRA', 'Add product extra'))), extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
+  }, t('ADD_PRODUCT_EXTRA', 'Add product extra'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
     return /*#__PURE__*/_react.default.createElement(_styles.ExtraOption, {
       key: extra.id
     }, /*#__PURE__*/_react.default.createElement(_styles.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
@@ -191,7 +198,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
         return handleDeteteClick(extra.id);
       }
     })));
-  }), isAddMode && /*#__PURE__*/_react.default.createElement(_styles.ExtraAddContainer, {
+  })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles.ExtraAddContainer, {
     ref: conatinerRef
   }, /*#__PURE__*/_react.default.createElement("input", {
     name: "name",
@@ -203,7 +210,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_INGREDIENT', 'Add ingredient'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_ProductExtraOptions.ProductExtraOptions, {
+  }, t('ADD_PRODUCT_EXTRA', 'Add product extra'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_ProductExtraOptions.ProductExtraOptions, {
     open: openExtraDetails,
     onClose: function onClose() {
       return handleCloseExtraDetails();

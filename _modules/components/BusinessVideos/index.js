@@ -79,7 +79,7 @@ var BusinessVideosUI = function BusinessVideosUI(props) {
   var handleDeleteClick = function handleDeleteClick(id) {
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_IMAGE', 'Are you sure that you want to delete this image?'),
+      content: t('QUESTION_DELETE_VIDEO', 'Are you sure that you want to delete this video?'),
       handleOnAccept: function handleOnAccept() {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
@@ -123,7 +123,7 @@ var BusinessVideosUI = function BusinessVideosUI(props) {
     }));
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessAddVideoWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: t('VIDEO_URL', 'Video url'),
-    defaultValue: (_formState$changes$vi = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.video) !== null && _formState$changes$vi !== void 0 ? _formState$changes$vi : '',
+    value: (_formState$changes$vi = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.video) !== null && _formState$changes$vi !== void 0 ? _formState$changes$vi : '',
     onChange: function onChange(e) {
       return handleChangeBusinessVideo(e);
     },
@@ -168,6 +168,7 @@ var BusinessVideosUI = function BusinessVideosUI(props) {
 
 var BusinessVideos = function BusinessVideos(props) {
   var businessGalleryProps = _objectSpread(_objectSpread({}, props), {}, {
+    isVideoGallery: true,
     UIComponent: BusinessVideosUI
   });
 

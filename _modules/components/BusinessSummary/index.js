@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessSummary = function BusinessSummary(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _theme$images, _theme$images$dummies, _businessState$busine5, _businessState$busine6;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _theme$images, _theme$images$dummies, _businessState$busine5;
 
   var businessState = props.businessState,
       actionSidebar = props.actionSidebar,
@@ -132,9 +132,11 @@ var BusinessSummary = function BusinessSummary(props) {
     borderRadius: "8px",
     onClick: handleOpenCategory,
     disabled: businessState === null || businessState === void 0 ? void 0 : businessState.loading
-  }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), /*#__PURE__*/_react.default.createElement(_styles.BusinessDescription, null, businessState !== null && businessState !== void 0 && (_businessState$busine5 = businessState.business) !== null && _businessState$busine5 !== void 0 && _businessState$busine5.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 50
-  }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.description), /*#__PURE__*/_react.default.createElement(_styles.BusinessConfigsContainer, null, businessConfigs.map(function (config) {
+  }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), /*#__PURE__*/_react.default.createElement(_styles.BusinessDescription, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 300
+  }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.description), /*#__PURE__*/_react.default.createElement(_styles.BusinessConfigsContainer, {
+    isLoading: businessState === null || businessState === void 0 ? void 0 : businessState.loading
+  }, businessConfigs.map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessConfigItem, {
       key: config.key,
       active: selectedItem === config.key,

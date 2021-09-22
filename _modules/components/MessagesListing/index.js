@@ -138,12 +138,7 @@ var MessagesListingUI = function MessagesListingUI(props) {
     onClick: function onClick() {
       return setSelectedOption('orders');
     }
-  }, t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
-    active: selectedOption === 'contacts',
-    onClick: function onClick() {
-      return setSelectedOption('contacts');
-    }
-  }, t('CONTACTS', 'Contacts'))), selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_styles.OrdersOrderByOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerTabsContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+  }, t('ORDERS', 'Orders'))), selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_styles.OrdersOrderByOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerTabsContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     innerScroll: true,
     scrollId: "orderByOption"
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

@@ -97,7 +97,7 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
     content: t('POLYGON', 'Polygon')
   }];
   var googleMapsControls = {
-    defaultZoom: 15,
+    defaultZoom: 8,
     zoomControl: true,
     streetViewControl: false,
     fullscreenControl: false,
@@ -107,7 +107,11 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
     },
-    isMarkerDraggable: false
+    isMarkerDraggable: false,
+    defaultPosition: {
+      lat: 40.77473399999999,
+      lng: -73.9653844
+    }
   };
   var fillStyle = {
     fillColor: '#2C7BE5',

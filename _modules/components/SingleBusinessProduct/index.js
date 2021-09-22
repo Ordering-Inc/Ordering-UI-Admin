@@ -9,8 +9,6 @@ exports.SingleBusinessProduct = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactToastify = require("react-toastify");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -82,6 +80,10 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
+
+  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
+      _useToast2 = _slicedToArray(_useToast, 2),
+      showToast = _useToast2[1].showToast;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -177,18 +179,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     if (!(productFormState !== null && productFormState !== void 0 && productFormState.loading) && !(productFormState !== null && productFormState !== void 0 && productFormState.result.error) && productFormState !== null && productFormState !== void 0 && (_productFormState$res3 = productFormState.result) !== null && _productFormState$res3 !== void 0 && _productFormState$res3.result) {
       var _productFormState$res4, _productFormState$res5;
 
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = productFormState !== null && productFormState !== void 0 && (_productFormState$res4 = productFormState.result) !== null && _productFormState$res4 !== void 0 && (_productFormState$res5 = _productFormState$res4.result) !== null && _productFormState$res5 !== void 0 && _productFormState$res5.id ? t('PRODUCT_UPDATE', 'Product updated') : t('PRODUCT_DELETE', 'Product deleted');
-
-      _reactToastify.toast.dark(content, toastConfigure);
+      productFormState !== null && productFormState !== void 0 && (_productFormState$res4 = productFormState.result) !== null && _productFormState$res4 !== void 0 && (_productFormState$res5 = _productFormState$res4.result) !== null && _productFormState$res5 !== void 0 && _productFormState$res5.id ? showToast(_orderingComponentsAdmin.ToastType.Success, t('PRODUCT_UPDATE', 'Product updated')) : showToast(_orderingComponentsAdmin.ToastType.Success, t('PRODUCT_DELETE', 'Product deleted'));
     }
   }, [productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading]);
 

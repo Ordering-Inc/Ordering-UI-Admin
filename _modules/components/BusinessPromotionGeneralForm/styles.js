@@ -9,7 +9,7 @@ exports.MinimumLimitContainer = exports.DiscountContainer = exports.PromotionTyp
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -69,71 +69,64 @@ var CalendarContainer = _styledComponents.default.div(_templateObject12 || (_tem
 
 exports.CalendarContainer = CalendarContainer;
 
-var CalendarWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  background: #FFFFFF;\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  z-index: 100;\n  position: absolute;\n  top: 100%;\n  width: 300px;\n  margin-top: 18px;\n  ", "\n\n  .DateRangePicker__PaginationArrow:hover {\n    background: none;\n    > div {\n      transition: all 0.3s;\n      transform: scale(1.1);\n    }\n    .DateRangePicker__PaginationArrowIcon--previous {\n      border-right: 8px solid ", ";\n    }\n    .DateRangePicker__PaginationArrowIcon--next {\n      border-left: 8px solid ", ";\n    }\n  }\n\n  .DateRangePicker__MonthHeader {\n    color: #748194;\n  }\n\n  table {\n    border-collapse: collapse;\n    border: none;\n\n    thead {\n      th {\n        border: none;\n      }\n    }\n\n    tbody {\n      td {\n        color: ", ";\n        .DateRangePicker__CalendarHighlight {\n          border: 1px solid ", ";\n        }\n      }\n    }\n\n    .DateRangePicker__Date {\n      border: none;\n    }\n\n    .DateRangePicker__CalendarSelection {\n      background: #E9F2FE;\n      color: ", ";\n      border: none;\n    }\n\n    .DateRangePicker__Date--weekend {\n      background-color: #FFFFFF;\n    }\n\n    .DateRangePicker__WeekdayHeading abbr[title] {\n      color: #909BA9;\n    }\n  }\n"])), function (props) {
+var CalendarWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  background: #FFFFFF;\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  z-index: 100;\n  position: absolute;\n  margin-top: 18px;\n  overflow: hidden;\n  ", "\n  .rdrDateRangeWrapper {\n    .rdrDateDisplayWrapper {\n      background-color: transparent;\n    }\n\n    .rdrDateDisplayItem {\n      border: 1px solid ", ";\n      box-shadow: none;\n    }\n\n    button {\n      ", "\n    }\n\n    .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span, .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {\n      color: ", ";\n    }\n  }  \n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    right: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    left: 0px;\n  "])));
 }, function (props) {
-  var _props$theme4;
-
-  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.colors.headingColor;
-}, function (props) {
-  var _props$theme5;
-
-  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.headingColor;
-}, function (props) {
-  return props.theme.colors.headingColor;
-}, function (props) {
-  var _props$theme6;
-
-  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.colors.primary;
+  return props.theme.colors.borderColor;
+}, function (_ref) {
+  var notSelected = _ref.notSelected;
+  return notSelected ? (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n        .rdrStartEdge,\n        .rdrEndEdge,\n        .rdrInRange {\n          color: transparent !important;\n        }\n      "]))) : (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n        .rdrStartEdge,\n        .rdrEndEdge,\n        .rdrInRange {\n          color: ", " !important;\n        }\n      "])), function (props) {
+    return props.theme.colors.lightPrimary;
+  });
 }, function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.CalendarWrapper = CalendarWrapper;
 
-var PromotionTypeContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin: 40px 0 25px 0;\n  > div {\n    &:first-child {\n      ", "\n    }\n  }\n"])), function (props) {
-  var _props$theme7;
+var PromotionTypeContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin: 40px 0 25px 0;\n  > div {\n    &:first-child {\n      ", "\n    }\n  }\n"])), function (props) {
+  var _props$theme4;
 
-  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
 });
 
 exports.PromotionTypeContainer = PromotionTypeContainer;
 
-var PromotionTypeWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  flex: 1;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n\n  svg {\n    color: ", ";\n\n    ", "\n  }\n\n  span {\n    color: ", ";\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
+var PromotionTypeWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  flex: 1;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n\n  svg {\n    color: ", ";\n\n    ", "\n  }\n\n  span {\n    color: ", ";\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.secundaryLight;
-}, function (_ref) {
-  var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
+}, function (_ref2) {
+  var active = _ref2.active;
+  return active && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
     return props.theme.colors.primary;
   });
 }, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
-  var _props$theme8;
+  var _props$theme5;
 
-  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
 });
 
 exports.PromotionTypeWrapper = PromotionTypeWrapper;
 
-var DiscountContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 30px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }\n    \n    &:first-child {\n      ", "\n\n      .select {\n        padding-top: 4px;\n        padding-bottom: 4px;\n        font-size: 14px;\n        border: none;\n        background-color: ", ";\n      }\n    }\n  }\n"])), function (props) {
-  var _props$theme9;
+var DiscountContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 30px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }\n    \n    &:first-child {\n      ", "\n\n      .select {\n        padding-top: 4px;\n        padding-bottom: 4px;\n        font-size: 14px;\n        border: none;\n        background-color: ", ";\n      }\n    }\n  }\n"])), function (props) {
+  var _props$theme6;
 
-  return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
+  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
 }, function (props) {
   return props.theme.colors.secundary;
 });
 
 exports.DiscountContainer = DiscountContainer;
 
-var MinimumLimitContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 30px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }\n    \n    &:first-child {\n      ", "\n    }\n  }\n"])), function (props) {
-  var _props$theme10;
+var MinimumLimitContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 30px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }\n    \n    &:first-child {\n      ", "\n    }\n  }\n"])), function (props) {
+  var _props$theme7;
 
-  return (_props$theme10 = props.theme) !== null && _props$theme10 !== void 0 && _props$theme10.rtl ? (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
+  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
 });
 
 exports.MinimumLimitContainer = MinimumLimitContainer;

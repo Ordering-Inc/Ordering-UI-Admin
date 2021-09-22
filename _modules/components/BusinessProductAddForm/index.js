@@ -9,8 +9,6 @@ exports.BusinessProductAddForm = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactToastify = require("react-toastify");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _Confirm = require("../Confirm");
@@ -62,6 +60,10 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
+      _useToast2 = _slicedToArray(_useToast, 2),
+      showToast = _useToast2[1].showToast;
 
   var productImageInputRef = (0, _react.useRef)(null);
 
@@ -126,18 +128,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     var _formState$result3;
 
     if (!(formState !== null && formState !== void 0 && formState.loading) && !(formState !== null && formState !== void 0 && formState.result.error) && formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result) {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = t('PRODUCT_ADD', 'Product added');
-
-      _reactToastify.toast.dark(content, toastConfigure);
+      showToast(_orderingComponentsAdmin.ToastType.Success, t('PRODUCT_ADD', 'Product added'));
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {

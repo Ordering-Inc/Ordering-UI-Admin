@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
-  var _extraState$extra;
+  var _extraState$extra, _extraState$extra2;
 
   var open = props.open,
       onClose = props.onClose,
@@ -284,7 +284,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.OptionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement("th", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), (_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options.map(function (option) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.OptionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement("th", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), ((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options) && ((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.options.map(function (option) {
     var _changesState$result, _changesState$result2, _changesState$changes5, _changesState$changes6, _changesState$changes7, _changesState$changes8, _changesState$changes9, _changesState$changes10;
 
     return /*#__PURE__*/_react.default.createElement("tbody", {
@@ -358,7 +358,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
         return handleDeteteClick(option.id);
       }
     }, t('DELETE', 'Delete'))))))));
-  }), /*#__PURE__*/_react.default.createElement("tbody", {
+  })), /*#__PURE__*/_react.default.createElement("tbody", {
     className: "add_option"
   }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement("input", {
     name: "name",

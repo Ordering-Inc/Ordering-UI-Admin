@@ -40,7 +40,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductIngredientUI = function ProductIngredientUI(props) {
-  var _productState$product;
+  var _productState$product, _productState$product2;
 
   var changesState = props.changesState,
       isAddMode = props.isAddMode,
@@ -79,7 +79,7 @@ var ProductIngredientUI = function ProductIngredientUI(props) {
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_INGREDIENT', 'Add ingredient'))), productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.ingredients.map(function (ingredient) {
+  }, t('ADD_INGREDIENT', 'Add ingredient'))), (productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.ingredients) && (productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_styles.IngredientOption, {
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("input", {
@@ -93,7 +93,7 @@ var ProductIngredientUI = function ProductIngredientUI(props) {
         return handleDeleteIngredient(ingredient.id);
       }
     }));
-  }), isAddMode && /*#__PURE__*/_react.default.createElement(_styles.IngredientAddContainer, {
+  })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles.IngredientAddContainer, {
     ref: conatinerRef
   }, /*#__PURE__*/_react.default.createElement("input", {
     name: "name",

@@ -225,6 +225,7 @@ var BusinessImagesUI = function BusinessImagesUI(props) {
 
 var BusinessImages = function BusinessImages(props) {
   var businessGalleryProps = _objectSpread(_objectSpread({}, props), {}, {
+    isImageGallery: true,
     UIComponent: BusinessImagesUI
   });
 
