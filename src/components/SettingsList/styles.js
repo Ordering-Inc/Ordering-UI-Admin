@@ -30,6 +30,11 @@ export const FormContainer = styled.div`
   }
 `
 
+export const OptionsError = styled.span`
+  font-size: 12px;
+  color: #d83520;
+`
+
 export const FormGroupText = styled.div`
   margin-bottom: 20px;
 

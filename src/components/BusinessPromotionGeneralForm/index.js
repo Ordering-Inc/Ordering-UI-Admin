@@ -13,7 +13,6 @@ import {
 } from 'ordering-components-admin'
 import { Camera as CameraIcon, CardImage, Calendar4, Circle, RecordCircleFill } from 'react-bootstrap-icons'
 import { bytesConverter } from '../../utils'
-// import DateRangePicker from 'react-daterange-picker'
 
 import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
