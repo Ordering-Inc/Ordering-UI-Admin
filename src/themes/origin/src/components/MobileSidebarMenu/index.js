@@ -40,10 +40,8 @@ export const MobileSidebarMenu = (props) => {
   useEffect(() => {
     if (isMenuOpen) {
       if (width <= 489) {
-        console.log('in')
         document.getElementById('sidebar_menu').style.width = '100vh'
       } else {
-        console.log('in2')
         document.getElementById('sidebar_menu').style.width = '340px'
       }
     }

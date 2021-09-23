@@ -14,7 +14,8 @@ import {
   FormGroupCheck,
   FormGroupWrapper,
   SkeletonWrapper,
-  CheckBoxWrapper
+  CheckBoxWrapper,
+  OptionsError
 } from './styles'
 
 export const SettingsListUI = (props) => {
@@ -98,7 +99,7 @@ export const SettingsListUI = (props) => {
                       {
                         config.type === 3 && (
                           <CheckBoxWrapper>
-                            {config?.name && config?.options && (
+                            {config?.name && (
                               <p>{config?.name}</p>
                             )}
                             {
@@ -119,13 +120,16 @@ export const SettingsListUI = (props) => {
                                 </FormGroupWrapper>
                               ))
                             }
+                            {
+                              !config?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>
+                            }
                           </CheckBoxWrapper>
                         )
                       }
                       {
                         config.type === 4 && (
                           <CheckBoxWrapper>
-                            {config?.name && config?.options && (
+                            {config?.name && (
                               <p>{config?.name}</p>
                             )}
                             {
@@ -146,6 +150,7 @@ export const SettingsListUI = (props) => {
                                 </FormGroupWrapper>
                               ))
                             }
+                            {!config?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>}
                           </CheckBoxWrapper>
                         )
                       }
