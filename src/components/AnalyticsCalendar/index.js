@@ -1,27 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
+import FiCalendar from '@meronex/icons/fi/FiCalendar'
+import moment from 'moment'
+import { DateRange } from 'react-date-range'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
 import {
   AnalyticsCalendarContainer
 } from './styles'
-import DateRangePicker from 'react-daterange-picker'
-import FiCalendar from '@meronex/icons/fi/FiCalendar'
-import { extendMoment } from 'moment-range'
-import Moment from 'moment'
-import 'react-daterange-picker/dist/css/react-calendar.css'
 
 export const AnalyticsCalendar = (props) => {
   const {
     handleChangeDate,
     defaultValue
   } = props
-  const moment = extendMoment(Moment)
+
   const [, t] = useLanguage()
-  const [dates, setDates] = useState(null)
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ])
   const [isShowCalendar, setIsShowCalendar] = useState(false)
   const calendarRef = useRef()
-
-  const onSelect = dates => setDates(dates)
 
   const handleClickOutside = (e) => {
     if (!isShowCalendar) return
@@ -36,20 +40,27 @@ export const AnalyticsCalendar = (props) => {
     setIsShowCalendar(true)
   }
 
+  const handleChangeDates = (item) => {
+    if (item.selection?.startDate && item.selection?.endDate) {
+      handleChangeDate(moment(item.selection.startDate).format('YYYY-MM-DD'), moment(item.selection.endDate).format('YYYY-MM-DD'))
+    }
+    setDateRange([item.selection])
+  }
+
   useEffect(() => {
-    window.addEventListener('mouseup', handleClickOutside)
-    return () => window.removeEventListener('mouseup', handleClickOutside)
+    window.addEventListener('click', handleClickOutside)
+    return () => window.removeEventListener('click', handleClickOutside)
   }, [isShowCalendar])
 
   useEffect(() => {
-    if (dates) {
-      handleChangeDate(dates?.start?.format('YYYY-MM-DD'), dates?.end?.format('YYYY-MM-DD'))
-    }
-  }, [dates])
-
-  useEffect(() => {
     if (defaultValue && defaultValue?.from !== '' && defaultValue?.to !== '') {
-      setDates((moment.range(moment(defaultValue?.from), moment(defaultValue?.to))))
+      setDateRange([
+        {
+          startDate: new Date(defaultValue?.from),
+          endDate: new Date(defaultValue?.to),
+          key: 'selection'
+        }
+      ])
     }
   }, [])
 
@@ -58,15 +69,17 @@ export const AnalyticsCalendar = (props) => {
       <Button onClick={handleOpenCalendar}>
         <FiCalendar />
         {
-          dates ? `${dates?.start?.format('YYYY-MM-DD')}~${dates?.end?.format('YYYY-MM-DD')}` : t('SELECT_DATE_RANGE', 'Select Date Range')
+          dateRange[0].startDate ? `${moment(dateRange[0].startDate).format('YYYY-MM-DD')}~${moment(dateRange[0].endDate).format('YYYY-MM-DD')}` : t('SELECT_DATE_RANGE', 'Select Date Range')
         }
       </Button>
       {
         isShowCalendar && (
           <AnalyticsCalendarContainer ref={calendarRef}>
-            <DateRangePicker
-              onSelect={onSelect}
-              value={dates}
+            <DateRange
+              editableDateInputs
+              onChange={item => handleChangeDates(item)}
+              moveRangeOnFirstSelection={false}
+              ranges={dateRange}
             />
           </AnalyticsCalendarContainer>
         )

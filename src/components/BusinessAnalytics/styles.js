@@ -54,7 +54,7 @@ export const HeaderFilterContainer = styled.div`
 `
 
 export const BusinessFilterWrapper = styled.div`
-  button {
+  > button {
     background: #F8F9FA;
     border-radius: 7.6px;
     padding: 7px 12px;
@@ -72,13 +72,13 @@ export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
     margin-left: 0;
   `}
 
-  button {
+  > button {
     svg {
       font-size: 16px;
       margin-right: 12px;
       ${props => props.theme.rtl && css`
-        margin-right: 12px;
-        margin-left: 0;
+        margin-left: 12px;
+        margin-right: 0;
       `}
     }
   }

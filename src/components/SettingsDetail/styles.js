@@ -140,7 +140,7 @@ export const AllSetting = styled.div`
 
 export const MoreInfo = styled.span`
   cursor: pointer;
-  user-selected: none;
+  user-select: none;
   color: ${props => props.theme.colors?.primary};
   text-decoration: underline;
   margin-top: 40px;

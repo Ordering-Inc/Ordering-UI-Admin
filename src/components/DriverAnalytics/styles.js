@@ -87,13 +87,13 @@ export const BusinessFilterWrapper = styled.div`
 export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
   position: relative;
 
-  button {
+  > button {
     svg {
       font-size: 16px;
       margin-right: 12px;
       ${props => props.theme.rtl && css`
-        margin-right: 12px;
-        margin-left: 0;
+        margin-left: 12px;
+        margin-right: 0;
       `}
     }
   }

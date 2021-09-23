@@ -98,8 +98,6 @@ const ProductExtrasUI = (props) => {
     }
   }, [productState, extrasState])
 
-  console.log(productState)
-
   return (
     <MainContainer>
       <ProductExtrasContainer>
