@@ -168,7 +168,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       });
     }
   }, [productState, extrasState]);
-  console.log(productState);
   return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductExtrasContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_EXTRAS', 'Product extras')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",

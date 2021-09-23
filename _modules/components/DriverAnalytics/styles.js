@@ -44,8 +44,8 @@ var BusinessFilterWrapper = _styledComponents.default.div(_templateObject7 || (_
 });
 
 exports.BusinessFilterWrapper = BusinessFilterWrapper;
-var BusinessCalendarWrapper = (0, _styledComponents.default)(BusinessFilterWrapper)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  position: relative;\n\n  button {\n    svg {\n      font-size: 16px;\n      margin-right: 12px;\n      ", "\n    }\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-right: 12px;\n        margin-left: 0;\n      "])));
+var BusinessCalendarWrapper = (0, _styledComponents.default)(BusinessFilterWrapper)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  position: relative;\n\n  > button {\n    svg {\n      font-size: 16px;\n      margin-right: 12px;\n      ", "\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-left: 12px;\n        margin-right: 0;\n      "])));
 });
 exports.BusinessCalendarWrapper = BusinessCalendarWrapper;
 var AnalyticsTimeZoneWrapper = (0, _styledComponents.default)(BusinessFilterWrapper)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral([""])));

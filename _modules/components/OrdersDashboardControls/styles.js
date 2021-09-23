@@ -29,11 +29,15 @@ var OrderDashboardControlsContainer = _styledComponents.default.div(_templateObj
 
 exports.OrderDashboardControlsContainer = OrderDashboardControlsContainer;
 
-var InnerContnet = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
+var InnerContnet = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 
 exports.InnerContnet = InnerContnet;
 
-var WrapOrderStatusTypeSelector = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0 7px;\n  div.orderStatus {\n    > div:first-child {\n      background-color: ", ";\n  \n      p {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
+var WrapOrderStatusTypeSelector = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0 7px;\n  div.orderStatus {\n    > div:first-child {\n      background-color: ", ";\n  \n      p {\n        color: ", ";\n      }\n    }\n  }\n\n  div.select {\n    background-color: ", ";\n    border: none;\n    padding: 5px 0;\n    p {\n      font-size: 14px;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.secundaryContrast;
+}, function (props) {
   return props.theme.colors.secundary;
 }, function (props) {
   return props.theme.colors.secundaryContrast;

@@ -13,17 +13,17 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _styles = require("./styles");
-
-var _reactDaterangePicker = _interopRequireDefault(require("react-daterange-picker"));
-
 var _FiCalendar = _interopRequireDefault(require("@meronex/icons/fi/FiCalendar"));
-
-var _momentRange = require("moment-range");
 
 var _moment = _interopRequireDefault(require("moment"));
 
-require("react-daterange-picker/dist/css/react-calendar.css");
+var _reactDateRange = require("react-date-range");
+
+require("react-date-range/dist/styles.css");
+
+require("react-date-range/dist/theme/default.css");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,20 +44,21 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AnalyticsCalendar = function AnalyticsCalendar(props) {
-  var _dates$start2, _dates$end2;
-
   var handleChangeDate = props.handleChangeDate,
       defaultValue = props.defaultValue;
-  var moment = (0, _momentRange.extendMoment)(_moment.default);
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(null),
+  var _useState = (0, _react.useState)([{
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection'
+  }]),
       _useState2 = _slicedToArray(_useState, 2),
-      dates = _useState2[0],
-      setDates = _useState2[1];
+      dateRange = _useState2[0],
+      setDateRange = _useState2[1];
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -65,10 +66,6 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
       setIsShowCalendar = _useState4[1];
 
   var calendarRef = (0, _react.useRef)();
-
-  var onSelect = function onSelect(dates) {
-    return setDates(dates);
-  };
 
   var handleClickOutside = function handleClickOutside(e) {
     var _calendarRef$current;
@@ -86,31 +83,42 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     setIsShowCalendar(true);
   };
 
+  var handleChangeDates = function handleChangeDates(item) {
+    var _item$selection, _item$selection2;
+
+    if ((_item$selection = item.selection) !== null && _item$selection !== void 0 && _item$selection.startDate && (_item$selection2 = item.selection) !== null && _item$selection2 !== void 0 && _item$selection2.endDate) {
+      handleChangeDate((0, _moment.default)(item.selection.startDate).format('YYYY-MM-DD'), (0, _moment.default)(item.selection.endDate).format('YYYY-MM-DD'));
+    }
+
+    setDateRange([item.selection]);
+  };
+
   (0, _react.useEffect)(function () {
-    window.addEventListener('mouseup', handleClickOutside);
+    window.addEventListener('click', handleClickOutside);
     return function () {
-      return window.removeEventListener('mouseup', handleClickOutside);
+      return window.removeEventListener('click', handleClickOutside);
     };
   }, [isShowCalendar]);
   (0, _react.useEffect)(function () {
-    if (dates) {
-      var _dates$start, _dates$end;
-
-      handleChangeDate(dates === null || dates === void 0 ? void 0 : (_dates$start = dates.start) === null || _dates$start === void 0 ? void 0 : _dates$start.format('YYYY-MM-DD'), dates === null || dates === void 0 ? void 0 : (_dates$end = dates.end) === null || _dates$end === void 0 ? void 0 : _dates$end.format('YYYY-MM-DD'));
-    }
-  }, [dates]);
-  (0, _react.useEffect)(function () {
     if (defaultValue && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from) !== '' && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.to) !== '') {
-      setDates(moment.range(moment(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from), moment(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.to)));
+      setDateRange([{
+        startDate: new Date(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from),
+        endDate: new Date(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.to),
+        key: 'selection'
+      }]);
     }
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleOpenCalendar
-  }, /*#__PURE__*/_react.default.createElement(_FiCalendar.default, null), dates ? "".concat(dates === null || dates === void 0 ? void 0 : (_dates$start2 = dates.start) === null || _dates$start2 === void 0 ? void 0 : _dates$start2.format('YYYY-MM-DD'), "~").concat(dates === null || dates === void 0 ? void 0 : (_dates$end2 = dates.end) === null || _dates$end2 === void 0 ? void 0 : _dates$end2.format('YYYY-MM-DD')) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles.AnalyticsCalendarContainer, {
+  }, /*#__PURE__*/_react.default.createElement(_FiCalendar.default, null), dateRange[0].startDate ? "".concat((0, _moment.default)(dateRange[0].startDate).format('YYYY-MM-DD'), "~").concat((0, _moment.default)(dateRange[0].endDate).format('YYYY-MM-DD')) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsCalendarContainer, {
     ref: calendarRef
-  }, /*#__PURE__*/_react.default.createElement(_reactDaterangePicker.default, {
-    onSelect: onSelect,
-    value: dates
+  }, /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
+    editableDateInputs: true,
+    onChange: function onChange(item) {
+      return handleChangeDates(item);
+    },
+    moveRangeOnFirstSelection: false,
+    ranges: dateRange
   })));
 };
 

@@ -152,7 +152,7 @@ var SettingsListUI = function SettingsListUI(props) {
       handleSelectChange: function handleSelectChange(value) {
         return handleInputChange(value, config === null || config === void 0 ? void 0 : config.id);
       }
-    }), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && (config === null || config === void 0 ? void 0 : config.options) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
+    }), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles.FormGroupCheck, {
@@ -166,7 +166,7 @@ var SettingsListUI = function SettingsListUI(props) {
           return handleCheckBoxChange(e, true, config === null || config === void 0 ? void 0 : config.value);
         }
       }), item.text)));
-    }))), config.type === 4 && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && (config === null || config === void 0 ? void 0 : config.options) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.map(function (item, j) {
+    })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))), config.type === 4 && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles.FormGroupCheck, {
@@ -180,7 +180,7 @@ var SettingsListUI = function SettingsListUI(props) {
           return handleCheckBoxChange(e, false, config === null || config === void 0 ? void 0 : config.value);
         }
       }), item.text)));
-    }))));
+    })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))));
   }), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: handleClickUpdate
