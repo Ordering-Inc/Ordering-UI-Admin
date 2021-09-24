@@ -9,14 +9,11 @@ export const ReportsContainer = styled.div`
   overflow: auto;
 `
 
-export const Header = styled.div`
-  margin-top: 6px;
-`
-
 export const HeaderTitleContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  margin-top: 7px;
 
   h1 {
     font-weight: 700;
@@ -39,4 +36,8 @@ export const HeaderTitleContainer = styled.div`
       height: 25px;
     }
   }
+`
+
+export const ReportsList = styled.div`
+  margin-top: 10px;
 `
