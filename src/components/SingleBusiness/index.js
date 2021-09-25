@@ -19,7 +19,8 @@ import {
   BusinessLogo,
   BusinessContent,
   BusinessActionContainer,
-  WrapperBusinessActionSelector
+  WrapperBusinessActionSelector,
+  BusinessHeaderContent
 } from './styles'
 
 const SingleBusinessUI = (props) => {
@@ -213,7 +214,10 @@ const SingleBusinessUI = (props) => {
               onClick={(e) => handleClickBusiness(e)}
             >
               <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
-                <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                <BusinessHeaderContent>
+                  <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                  <span>{t('ID', 'ID')} {businessState?.business?.id}</span>
+                </BusinessHeaderContent>
               </BusinessHeader>
               <BusinessContent>
                 <h1>{businessState?.business?.name}</h1>
