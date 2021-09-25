@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import * as htmlToImage from 'html-to-image'
 import { ReportsBusinessDistance as ReportsBusinessDistanceController } from './naked'
@@ -6,11 +6,11 @@ import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Download } from 'react-bootstrap-icons'
-import { Bar } from 'react-chartjs-2'
 import { lighten } from 'polished'
 import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { ReportsBarChart } from '../ReportsBarChart'
 import {
   ReportsDistanceContainer,
   Title,
@@ -23,7 +23,6 @@ import {
   Thead,
   Tbody,
   Tfoot,
-  ChartWrapper,
   TableWrapper,
   EmptyContent
 } from './styles'
@@ -32,24 +31,24 @@ const ReportsBusinessDistanceUI = (props) => {
   const {
     filterList,
     handleChangeFilterList,
-    averageDistanceList
+    businessDistanceList
   } = props
 
   const [, t] = useLanguage()
-  const barChartRef = useRef(null)
   const tableRef = useRef(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [chartData, setChartData] = useState(null)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
   }
 
   const generateChartValues = () => {
-    if (averageDistanceList?.distances?.header?.rows[0]?.length > 0) {
+    if (businessDistanceList?.distances?.header?.rows[0]?.length > 0) {
       const chartValues = []
-      for (let i = 0; i < averageDistanceList?.distances?.header?.rows[0]?.length - 1; i++) {
-        const values = averageDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[i + 2].value], [])
+      for (let i = 0; i < businessDistanceList?.distances?.header?.rows[0]?.length - 1; i++) {
+        const values = businessDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[i + 2].value], [])
         chartValues.push([...values])
       }
       return chartValues
@@ -58,8 +57,8 @@ const ReportsBusinessDistanceUI = (props) => {
 
   const generateChartLabels = () => {
     let labels = []
-    if (averageDistanceList?.distances?.header?.rows[0]?.length > 0) {
-      labels = [...averageDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[1].value], [])]
+    if (businessDistanceList?.distances?.header?.rows[0]?.length > 0) {
+      labels = [...businessDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[1].value], [])]
     }
     return labels
   }
@@ -69,7 +68,7 @@ const ReportsBusinessDistanceUI = (props) => {
     const chartData = []
     chartValues && chartValues.forEach((value, i) => {
       chartData.push({
-        label: averageDistanceList?.distances?.header?.rows[0][i + 1].value ?? '',
+        label: businessDistanceList?.distances?.header?.rows[0][i + 1].value ?? '',
         data: value,
         fill: true,
         borderColor: lighten(i / 10, '#2C7BE5'),
@@ -80,66 +79,6 @@ const ReportsBusinessDistanceUI = (props) => {
       })
     })
     return chartData
-  }
-
-  const data = {
-    labels: generateChartLabels(),
-    datasets: generateDataSets()
-  }
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        grid: {
-          drawBorder: false,
-          display: false
-        },
-        ticks: {
-          font: {
-            size: 12,
-            color: '#B1BCCC'
-          }
-        }
-      },
-      y: {
-        grid: {
-          drawBorder: false
-        },
-        ticks: {
-          font: {
-            size: 12,
-            color: '#B1BCCC'
-          }
-        }
-      }
-    },
-    plugins: {
-      legend: {
-        position: 'bottom',
-        align: 'start',
-        borderRadius: 7,
-        labels: {
-          boxWidth: 12,
-          boxHeight: 12,
-          font: {
-            size: 12,
-            color: '#909BA9'
-          }
-        }
-      }
-    },
-    pointRadius: 0
-  }
-
-  const downloadChart = () => {
-    if (!barChartRef?.current) return
-    const a = document.createElement('a')
-    a.href = barChartRef?.current?.toBase64Image()
-    a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
-    // Trigger the download
-    a.click()
   }
 
   const downloadTable = () => {
@@ -156,6 +95,14 @@ const ReportsBusinessDistanceUI = (props) => {
         console.error('oops, something went wrong!', error)
       })
   }
+
+  useEffect(() => {
+    const data = {
+      labels: generateChartLabels(),
+      datasets: generateDataSets()
+    }
+    setChartData({ ...data })
+  }, [businessDistanceList])
 
   return (
     <ReportsDistanceContainer>
@@ -185,7 +132,7 @@ const ReportsBusinessDistanceUI = (props) => {
           <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>
-        {averageDistanceList?.loading ? (
+        {businessDistanceList?.loading ? (
           <div className='row'>
             {[...Array(20).keys()].map(i => (
               <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
@@ -193,12 +140,12 @@ const ReportsBusinessDistanceUI = (props) => {
           </div>
         ) : (
           <TableWrapper>
-            {averageDistanceList?.distances?.body?.rows?.length > 0 ? (
+            {businessDistanceList?.distances?.body?.rows?.length > 0 ? (
               <DistanceTable ref={tableRef}>
-                {averageDistanceList?.distances?.header?.rows.length > 0 && (
+                {businessDistanceList?.distances?.header?.rows.length > 0 && (
                   <Thead>
                     {
-                      averageDistanceList?.distances?.header?.rows.map((tr, i) => (
+                      businessDistanceList?.distances?.header?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((th, j) => (
                             <th key={j} colSpan={th.colspan}>{th.value}</th>
@@ -208,7 +155,7 @@ const ReportsBusinessDistanceUI = (props) => {
                     }
                   </Thead>
                 )}
-                {averageDistanceList?.distances?.body?.rows.map((tbody, i) => (
+                {businessDistanceList?.distances?.body?.rows.map((tbody, i) => (
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
@@ -217,10 +164,10 @@ const ReportsBusinessDistanceUI = (props) => {
                     </tr>
                   </Tbody>
                 ))}
-                {averageDistanceList?.distances?.footer?.rows.length > 0 && (
+                {businessDistanceList?.distances?.footer?.rows.length > 0 && (
                   <Tfoot>
                     {
-                      averageDistanceList?.distances?.footer?.rows.map((tr, i) => (
+                      businessDistanceList?.distances?.footer?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((td, j) => (
                             <td key={j} colSpan={td.colspan}>{td.value}</td>
@@ -238,33 +185,7 @@ const ReportsBusinessDistanceUI = (props) => {
         )}
       </DistancePerBrandWrapper>
       <DistancePerBrandWrapper>
-        <DistanceTitleBlock>
-          <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
-          <Download onClick={() => downloadChart()} />
-        </DistanceTitleBlock>
-        {averageDistanceList?.loading ? (
-          <div className='row'>
-            {[...Array(12).keys()].map(i => (
-              <div
-                key={i}
-                className='col-md-1 col-sm-1 col-1'
-                style={{ transform: 'rotateX(180deg)' }}
-              >
-                <Skeleton height={Math.random() * 300} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <>
-            {averageDistanceList?.distances?.body?.rows?.length > 0 ? (
-              <ChartWrapper>
-                <Bar data={data} options={options} ref={barChartRef} />
-              </ChartWrapper>
-            ) : (
-              <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
-            )}
-          </>
-        )}
+        <ReportsBarChart chartDataList={businessDistanceList} chartData={chartData} />
       </DistancePerBrandWrapper>
       <Modal
         width='50%'

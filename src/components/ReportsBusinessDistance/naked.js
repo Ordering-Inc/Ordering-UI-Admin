@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { useApi, useSession } from 'ordering-components-admin'
 
 /**
- * Component to manage Reports Distance page behavior without UI component
+ * Component to manage Reports Business Distance page behavior without UI component
  */
 export const ReportsBusinessDistance = (props) => {
   const {
@@ -14,13 +14,13 @@ export const ReportsBusinessDistance = (props) => {
 
   const [ordering] = useApi()
   const [{ token, loading }] = useSession()
-  const [averageDistanceList, setAverageDistanceList] = useState({ distances: [], loading: false, error: null })
+  const [businessDistanceList, setBusinessDistanceList] = useState({ distances: [], loading: false, error: null })
   const [filterList, setFilterList] = useState({ from: '', to: '', businessIds: null, drivers_ids: null, franchises_id: null, driver_companies_ids: null })
 
-  const getAverageDistanceList = async () => {
+  const getBusinessDistanceList = async () => {
     if (loading) return
     try {
-      setAverageDistanceList({ ...averageDistanceList, loading: true })
+      setBusinessDistanceList({ ...businessDistanceList, loading: true })
       const requestOptions = {
         method: 'GET',
         headers: {
@@ -40,21 +40,21 @@ export const ReportsBusinessDistance = (props) => {
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
       if (!error) {
-        setAverageDistanceList({
-          ...averageDistanceList,
+        setBusinessDistanceList({
+          ...businessDistanceList,
           loading: false,
           distances: result
         })
       } else {
-        setAverageDistanceList({
-          ...averageDistanceList,
+        setBusinessDistanceList({
+          ...businessDistanceList,
           loading: true,
           error: result
         })
       }
     } catch (err) {
-      setAverageDistanceList({
-        ...averageDistanceList,
+      setBusinessDistanceList({
+        ...businessDistanceList,
         loading: false,
         error: err
       })
@@ -62,7 +62,7 @@ export const ReportsBusinessDistance = (props) => {
   }
 
   useEffect(() => {
-    getAverageDistanceList()
+    getBusinessDistanceList()
   }, [filterList])
 
   return (
@@ -72,7 +72,7 @@ export const ReportsBusinessDistance = (props) => {
           {...props}
           filterList={filterList}
           handleChangeFilterList={setFilterList}
-          averageDistanceList={averageDistanceList}
+          businessDistanceList={businessDistanceList}
         />
       )}
     </>

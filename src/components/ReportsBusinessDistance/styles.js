@@ -150,10 +150,6 @@ export const Tfoot = styled.tfoot`
   }
 `
 
-export const ChartWrapper = styled.div`
-  min-height: 300px;
-`
-
 export const TableWrapper = styled.div`
   width: 100%;
   overflow: auto;

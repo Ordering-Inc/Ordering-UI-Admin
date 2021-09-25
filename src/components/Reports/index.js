@@ -25,6 +25,7 @@ const ReportsUI = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedReport, setSelectedReport] = useState(0)
 
   const advancedReportsList = [
     { id: 1, name: t('DISTANCE', 'Distance'), description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.', icon: <Rulers /> },
@@ -37,6 +38,11 @@ const ReportsUI = (props) => {
 
   const handleCloseSidebar = () => {
     setIsOpen(false)
+  }
+
+  const handleOpenSlider = (index) => {
+    setSelectedReport(index)
+    setIsOpen(true)
   }
 
   return (
@@ -57,7 +63,7 @@ const ReportsUI = (props) => {
           <div
             key={i}
             className='col-md-6 col-lg-4'
-            onClick={() => setIsOpen(true)}
+            onClick={() => handleOpenSlider(report.id)}
           >
             <SettingItemUI
               title={report.name}
@@ -76,7 +82,7 @@ const ReportsUI = (props) => {
           open={isOpen}
           onClose={() => handleCloseSidebar()}
         >
-          <ReportsBusinessDistance />
+          {selectedReport === 1 && <ReportsBusinessDistance />}
         </SideBar>
       )}
     </ReportsContainer>
