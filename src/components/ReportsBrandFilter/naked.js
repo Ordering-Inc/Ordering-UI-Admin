@@ -114,18 +114,10 @@ export const ReportsBrandFilter = (props) => {
   }, [])
 
   useEffect(() => {
-    if (brandList?.brands?.length > 0) {
-      const _brandIds = []
-      for (const brand of brandList.brands) {
-        _brandIds.push(brand.id)
-      }
-      if (filterList?.franchises_id) {
-        setBrandIds([...filterList?.franchises_id])
-      } else {
-        setBrandIds(_brandIds)
-        setIsAllCheck(true)
-      }
-    }
+    if (brandList?.brands?.length === 0) return
+    const _brandIds = brandList.brands.reduce((prev, cur) => [...prev, cur.id], [])
+    setBrandIds([...filterList?.franchises_id || _brandIds])
+    if (!filterList?.franchises_id || filterList?.franchises_id?.length === brandList?.brands.length) setIsAllCheck(true)
   }, [brandList?.brands])
 
   return (

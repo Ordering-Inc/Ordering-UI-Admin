@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import * as htmlToImage from 'html-to-image'
 import { ReportsBusinessDistance as ReportsBusinessDistanceController } from './naked'
 import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
@@ -20,7 +22,10 @@ import {
   DistanceTable,
   Thead,
   Tbody,
-  Tfoot
+  Tfoot,
+  ChartWrapper,
+  TableWrapper,
+  EmptyContent
 } from './styles'
 
 const ReportsBusinessDistanceUI = (props) => {
@@ -32,6 +37,7 @@ const ReportsBusinessDistanceUI = (props) => {
 
   const [, t] = useLanguage()
   const barChartRef = useRef(null)
+  const tableRef = useRef(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
 
@@ -69,7 +75,8 @@ const ReportsBusinessDistanceUI = (props) => {
         borderColor: lighten(i / 10, '#2C7BE5'),
         backgroundColor: lighten(i / 10, '#2C7BE5'),
         borderWidth: 2,
-        borderRadius: 16
+        borderRadius: 16,
+        borderSkipped: false
       })
     })
     return chartData
@@ -111,10 +118,43 @@ const ReportsBusinessDistanceUI = (props) => {
     plugins: {
       legend: {
         position: 'bottom',
-        borderRadius: 7.6
+        align: 'start',
+        borderRadius: 7,
+        labels: {
+          boxWidth: 12,
+          boxHeight: 12,
+          font: {
+            size: 12,
+            color: '#909BA9'
+          }
+        }
       }
     },
     pointRadius: 0
+  }
+
+  const downloadChart = () => {
+    if (!barChartRef?.current) return
+    const a = document.createElement('a')
+    a.href = barChartRef?.current?.toBase64Image()
+    a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
+    // Trigger the download
+    a.click()
+  }
+
+  const downloadTable = () => {
+    if (!tableRef?.current) return
+    htmlToImage.toPng(tableRef?.current)
+      .then(function (dataUrl) {
+        const a = document.createElement('a')
+        a.href = dataUrl
+        a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
+        // Trigger the download
+        a.click()
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error)
+      })
   }
 
   return (
@@ -143,60 +183,88 @@ const ReportsBusinessDistanceUI = (props) => {
       <DistancePerBrandWrapper>
         <DistanceTitleBlock>
           <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
-          <Download />
+          <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>
-        <DistanceTable>
-          {
-            averageDistanceList?.distances?.header?.rows.length > 0 && (
-              <Thead>
-                {
-                  averageDistanceList?.distances?.header?.rows.map((tr, i) => (
-                    <tr key={i}>
-                      {tr?.map((th, j) => (
-                        <th key={j} colSpan={th.colspan}>{th.value}</th>
-                      ))}
-                    </tr>
-                  ))
-                }
-              </Thead>
-            )
-          }
-          {
-            averageDistanceList?.distances?.body?.rows.length > 0 && averageDistanceList?.distances?.body?.rows.map((tbody, i) => (
-              <Tbody key={i}>
-                <tr>
-                  {tbody.map((td, j) => (
-                    <td key={j} colSpan={td.colspan}>{td.value}</td>
-                  ))}
-                </tr>
-              </Tbody>
-            ))
-          }
-          {
-            averageDistanceList?.distances?.footer?.rows.length > 0 && (
-              <Tfoot>
-                {
-                  averageDistanceList?.distances?.footer?.rows.map((tr, i) => (
-                    <tr key={i}>
-                      {tr?.map((td, j) => (
+        {averageDistanceList?.loading ? (
+          <div className='row'>
+            {[...Array(20).keys()].map(i => (
+              <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
+            ))}
+          </div>
+        ) : (
+          <TableWrapper>
+            {averageDistanceList?.distances?.body?.rows?.length > 0 ? (
+              <DistanceTable ref={tableRef}>
+                {averageDistanceList?.distances?.header?.rows.length > 0 && (
+                  <Thead>
+                    {
+                      averageDistanceList?.distances?.header?.rows.map((tr, i) => (
+                        <tr key={i}>
+                          {tr?.map((th, j) => (
+                            <th key={j} colSpan={th.colspan}>{th.value}</th>
+                          ))}
+                        </tr>
+                      ))
+                    }
+                  </Thead>
+                )}
+                {averageDistanceList?.distances?.body?.rows.map((tbody, i) => (
+                  <Tbody key={i}>
+                    <tr>
+                      {tbody.map((td, j) => (
                         <td key={j} colSpan={td.colspan}>{td.value}</td>
                       ))}
                     </tr>
-                  ))
-                }
-              </Tfoot>
-            )
-          }
-        </DistanceTable>
+                  </Tbody>
+                ))}
+                {averageDistanceList?.distances?.footer?.rows.length > 0 && (
+                  <Tfoot>
+                    {
+                      averageDistanceList?.distances?.footer?.rows.map((tr, i) => (
+                        <tr key={i}>
+                          {tr?.map((td, j) => (
+                            <td key={j} colSpan={td.colspan}>{td.value}</td>
+                          ))}
+                        </tr>
+                      ))
+                    }
+                  </Tfoot>
+                )}
+              </DistanceTable>
+            ) : (
+              <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            )}
+          </TableWrapper>
+        )}
       </DistancePerBrandWrapper>
       <DistancePerBrandWrapper>
         <DistanceTitleBlock>
           <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
-          <Download />
+          <Download onClick={() => downloadChart()} />
         </DistanceTitleBlock>
-        <div>
-          <Bar data={data} options={options} ref={barChartRef} />
-        </div>
+        {averageDistanceList?.loading ? (
+          <div className='row'>
+            {[...Array(12).keys()].map(i => (
+              <div
+                key={i}
+                className='col-md-1 col-sm-1 col-1'
+                style={{ transform: 'rotateX(180deg)' }}
+              >
+                <Skeleton height={Math.random() * 300} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            {averageDistanceList?.distances?.body?.rows?.length > 0 ? (
+              <ChartWrapper>
+                <Bar data={data} options={options} ref={barChartRef} />
+              </ChartWrapper>
+            ) : (
+              <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+            )}
+          </>
+        )}
       </DistancePerBrandWrapper>
       <Modal
         width='50%'

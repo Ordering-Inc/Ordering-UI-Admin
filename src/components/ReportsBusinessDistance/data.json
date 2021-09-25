@@ -1,0 +1,160 @@
+{
+  "header": {
+      "rows": [
+          [
+              {
+                  "value": "BUSINESS",
+                  "colspan": 2
+              },
+              {
+                  "value": "WEEK_2021-37",
+                  "colspan": 1
+              },
+              {
+                  "value": "WEEK_2021-38",
+                  "colspan": 1
+              },
+              {
+                  "value": "WEEK_2021-35",
+                  "colspan": 1
+              }
+          ],
+          [
+              {
+                  "value": "ID",
+                  "colspan": 1
+              },
+              {
+                  "value": "NAME",
+                  "colspan": 1
+              },
+              {
+                  "value": "AVG_DISTANCE",
+                  "colspan": 1
+              },
+              {
+                  "value": "AVG_DISTANCE",
+                  "colspan": 1
+              },
+              {
+                  "value": "AVG_DISTANCE",
+                  "colspan": 1
+              }
+          ]
+      ]
+  },
+  "body": {
+      "rows": [
+          [
+              {
+                  "value": 41,
+                  "colspan": 1
+              },
+              {
+                  "value": "McBonalds",
+                  "colspan": 1
+              },
+              {
+                  "value": 1.2,
+                  "colspan": 1
+              },
+              {
+                  "value": 1.2,
+                  "colspan": 1
+              },
+              {
+                  "value": 1.56,
+                  "colspan": 1
+              }
+          ],
+          [
+              {
+                  "value": 47,
+                  "colspan": 1
+              },
+              {
+                  "value": "DakotaWine",
+                  "colspan": 1
+              },
+              {
+                  "value": 1.34,
+                  "colspan": 1
+              },
+              {
+                  "value": 1.23,
+                  "colspan": 1
+              },
+              {
+                  "value": null,
+                  "colspan": 1
+              }
+          ],
+          [
+              {
+                  "value": 1.1,
+                  "colspan": 1
+              },
+              {
+                  "value": "The Cellar",
+                  "colspan": 1
+              },
+              {
+                  "value": 0.67,
+                  "colspan": 1
+              },
+              {
+                  "value": null,
+                  "colspan": 1
+              },
+              {
+                  "value": 1.99,
+                  "colspan": 1
+              }
+          ],
+          [
+              {
+                  "value": 37,
+                  "colspan": 1
+              },
+              {
+                  "value": "Salami Restaurant",
+                  "colspan": 1
+              },
+              {
+                  "value": 1,
+                  "colspan": 1
+              },
+              {
+                  "value": 1.21,
+                  "colspan": 1
+              },
+              {
+                  "value": 0.2,
+                  "colspan": 1
+              }
+          ]
+      ]
+  },
+  "footer": {
+      "rows": [
+          [
+              {
+                  "value": "TOTAL",
+                  "colspan": 2
+              },
+              {
+                  "value": 0,
+                  "colspan": 1
+              },
+              {
+                  "value": 0,
+                  "colspan": 1
+              },
+              {
+                  "value": 0,
+                  "colspan": 1
+              }
+          ]
+      ]
+  }
+}

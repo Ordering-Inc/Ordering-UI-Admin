@@ -1,8 +1,12 @@
 import styled, { css } from 'styled-components'
 
 export const ReportsDistanceContainer = styled.div`
-  padding: 35px 45px;
+  padding: 35px 15px;
   width: 100%;
+
+  @media (min-width: 700px) {
+    padding: 35px;
+  }
 `
 
 export const Title = styled.h2`
@@ -75,7 +79,7 @@ export const DistanceTitleBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 
   h2 {
     font-weight: 600;
@@ -93,6 +97,7 @@ export const DistanceTitleBlock = styled.div`
 
 export const DistanceTable = styled.table`
   width: 100%;
+  min-width: 500px;
 `
 
 export const Thead = styled.thead`
@@ -143,4 +148,20 @@ export const Tfoot = styled.tfoot`
       }
     }
   }
+`
+
+export const ChartWrapper = styled.div`
+  min-height: 300px;
+`
+
+export const TableWrapper = styled.div`
+  width: 100%;
+  overflow: auto;
+`
+
+export const EmptyContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 `
