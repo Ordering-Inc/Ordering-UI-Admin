@@ -12,9 +12,10 @@ export const ReportsBusinessDistance = (props) => {
     UIComponent
   } = props
 
-  const [averageDistanceList, setAverageDistanceList] = useState({ distances: [], loading: false, error: null })
-  const [{ token, loading }] = useSession()
   const [ordering] = useApi()
+  const [{ token, loading }] = useSession()
+  const [averageDistanceList, setAverageDistanceList] = useState({ distances: [], loading: false, error: null })
+  const [filterList, setFilterList] = useState({ from: '', to: '', businessIds: null, drivers_ids: null, franchises_id: null, driver_companies_ids: null })
 
   const getAverageDistanceList = async () => {
     if (loading) return
@@ -27,8 +28,14 @@ export const ReportsBusinessDistance = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
+      let params = ''
+      if (filterList?.from !== '' && filterList?.to !== '') params = `from=${filterList?.from} 00:00:00&to=${filterList?.to} 00:00:00`
+      if (filterList?.businessIds && filterList?.businessIds.length > 0) params = `${params}&businesses_ids=${JSON.stringify(filterList?.businessIds)}`
+      if (filterList?.drivers_ids && filterList?.drivers_ids.length > 0) params = `${params}&drivers_ids=${JSON.stringify(filterList?.drivers_ids)}`
+      if (filterList?.franchises_id && filterList?.franchises_id.length > 0) params = `${params}&franchises_id=${JSON.stringify(filterList?.franchises_id)}`
+      if (filterList?.driver_companies_ids && filterList?.drivers_ids.length > 0) params = `${params}&driver_companies_ids=${JSON.stringify(filterList?.driver_companies_ids)}`
 
-      const functionFetch = `${ordering.root}/reports/business_distance_average`
+      const functionFetch = `${ordering.root}/reports/business_distance_average?${params}`
 
       const response = await fetch(functionFetch, requestOptions)
       const { error, result } = await response.json()
@@ -56,13 +63,16 @@ export const ReportsBusinessDistance = (props) => {
 
   useEffect(() => {
     getAverageDistanceList()
-  }, [])
+  }, [filterList])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
+          filterList={filterList}
+          handleChangeFilterList={setFilterList}
+          averageDistanceList={averageDistanceList}
         />
       )}
     </>

@@ -99,13 +99,8 @@ export const Thead = styled.thead`
       font-weight: 500;
       font-size: 12px;
 
-      &:first-child {
-        vertical-align: bottom;
-      }
-
-      p {
+      &:not(:first-child) {
         text-align: center;
-        margin: 0;
       }
     }
   }
@@ -116,18 +111,19 @@ export const Tbody = styled.tbody`
 
   tr {
     td {
-      padding: 12px 0;
+      padding: 12px 5px;
       font-size: 12px;
+      text-align: center;
+      color: ${props => props.theme?.colors.lightGray};
 
-      &:nth-child(2) {
+      &:not(:first-child):not(:last-child) {
         border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
         border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
       }
 
-      p {
-        text-align: center;
-        color: ${props => props.theme?.colors.lightGray};
-        margin: 0 5px;
+      &:first-child {
+        text-align: left;
+        color: ${props => props.theme?.colors.headingColor};
       }
     }
   }
@@ -145,10 +141,4 @@ export const Tfoot = styled.tfoot`
       }
     }
   }
-`
-
-export const DistanceBarChartWrapper = styled.div`
-  margin-top: 35px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 7.6px;
 `
