@@ -17,11 +17,9 @@ export const ReviewsTable = styled.table`
 
   th, td {
     padding: 10px 0;
-    &:first-child {
-      width: 50%;
-    }
-    &:nth-child(2) {
-      width: 30%;
+    &:not(:last-child) {
+      width: 40%;
+      box-sizing: border-box;
     }
   }
 `
@@ -57,6 +55,11 @@ export const WrapperImage = styled.div`
   ` : css`
     margin-right: 10px;
   `}
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const ImageStyled = styled.div`
@@ -97,14 +100,10 @@ export const ReviewObject = styled.div`
 `
 
 export const InfoBlock = styled.div`
-  max-width: calc(100% - 60px);
   p {
     font-size: 11px;
     margin: 0px;
     color: ${props => props.theme.colors.lightGray};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 
     &.bold {
       font-size: 12px;
@@ -146,6 +145,7 @@ export const ReviewMarkerWrapper = styled.div`
     color: ${props => props.theme.colors.lightGray};
   }
 `
+
 export const ActionsWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -167,12 +167,6 @@ export const ActionsWrapper = styled.div`
       border-left: 1px solid ${props => props.theme.colors.borderColor};
     `}
   `}
-`
-
-export const PagesBottomContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
 `
 
 export const EnableWrapper = styled.div`
@@ -240,4 +234,9 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
+`
+export const PagesBottomContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 `

@@ -5,6 +5,7 @@ import { List as MenuIcon } from 'react-bootstrap-icons'
 import { SearchBar } from '../SearchBar'
 import { IconButton } from '../../styles'
 import { BusinessReviewList } from '../BusinessReviewList'
+import { DriversReviewList } from '../DriversReviewList'
 
 import {
   ReviewsListingContainer,
@@ -57,7 +58,10 @@ export const ReviewsListing = (props) => {
           >
             {t('PRODUCTS', 'Products')}
           </Tab>
-          <Tab>
+          <Tab
+            active={showOption === 'drivers'}
+            onClick={() => setShowOption('drivers')}
+          >
             {t('DRIVERS', 'Drivers')}
           </Tab>
           <Tab>
@@ -66,6 +70,9 @@ export const ReviewsListing = (props) => {
         </Tabs>
         {showOption === 'business' && (
           <BusinessReviewList searchValue={searchValue} />
+        )}
+        {showOption === 'drivers' && (
+          <DriversReviewList parentSearchValue={searchValue} />
         )}
       </ReviewsListingContainer>
     </>
