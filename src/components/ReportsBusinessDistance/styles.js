@@ -21,6 +21,8 @@ export const ButtonActionList = styled.div`
 `
 
 export const CalendarWrapper = styled.div`
+  position: relative;
+
   > button {
     margin-top: 5px;
     padding: 7px 15px;

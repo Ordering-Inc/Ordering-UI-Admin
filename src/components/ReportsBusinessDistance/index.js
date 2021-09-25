@@ -8,6 +8,7 @@ import { Bar } from 'react-chartjs-2'
 import { lighten } from 'polished'
 import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
+import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import {
   ReportsDistanceContainer,
   Title,
@@ -32,6 +33,7 @@ const ReportsBusinessDistanceUI = (props) => {
   const [, t] = useLanguage()
   const barChartRef = useRef(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
+  const [isBrandFilter, setIsBrandFilter] = useState(false)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -120,7 +122,11 @@ const ReportsBusinessDistanceUI = (props) => {
       <Title>{t('DISTANCE', 'Distance')}</Title>
       <ButtonActionList>
         <BrandBusinessWrapper>
-          <Button>{t('BRAND', 'Brand')}(All)</Button>
+          <Button
+            onClick={() => setIsBrandFilter(true)}
+          >
+            {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
+          </Button>
           <Button
             onClick={() => setIsBusinessFilter(true)}
           >
@@ -202,6 +208,18 @@ const ReportsBusinessDistanceUI = (props) => {
       >
         <AnalyticsBusinessFilter
           {...props} onClose={() => setIsBusinessFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('BRAND', 'Brand')}
+        open={isBrandFilter}
+        onClose={() => setIsBrandFilter(false)}
+      >
+        <ReportsBrandFilter
+          {...props} onClose={() => setIsBrandFilter(false)}
         />
       </Modal>
     </ReportsDistanceContainer>

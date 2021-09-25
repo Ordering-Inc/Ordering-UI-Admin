@@ -33,43 +33,45 @@ const AnalyticsBusinessFilterUI = (props) => {
   }
 
   return (
-    <AnalyticsBusinessFilterContainer>
-      {businessList.loading ? (
-        [...Array(10).keys()].map(i => (
-          <BusinessFilterOption key={i}>
-            <Skeleton width={15} height={15} />
-            <BusinessName>
-              <Skeleton width={120} height={24} />
-            </BusinessName>
-          </BusinessFilterOption>
-        ))
-      ) : (
-        <div>
-          <BusinessFilterOption
-            onClick={handleChangeAllCheck}
-          >
-            {isAllCheck ? (
-              <RiCheckboxFill className='fill' />
-            ) : (
-              <RiCheckboxBlankLine />
-            )}
-            <BusinessName>{t('ALL', 'All')}</BusinessName>
-          </BusinessFilterOption>
-          {businessList?.businesses.map((business, i) => (
+    <>
+      <AnalyticsBusinessFilterContainer>
+        {businessList.loading ? (
+          [...Array(10).keys()].map(i => (
+            <BusinessFilterOption key={i}>
+              <Skeleton width={15} height={15} />
+              <BusinessName>
+                <Skeleton width={120} height={24} />
+              </BusinessName>
+            </BusinessFilterOption>
+          ))
+        ) : (
+          <div>
             <BusinessFilterOption
-              key={i}
-              onClick={() => handleChangeBusinessId(business?.id)}
+              onClick={handleChangeAllCheck}
             >
-              {isCheckEnableSate(business.id) ? (
+              {isAllCheck ? (
                 <RiCheckboxFill className='fill' />
               ) : (
                 <RiCheckboxBlankLine />
               )}
-              <BusinessName>{business?.name}</BusinessName>
+              <BusinessName>{t('ALL', 'All')}</BusinessName>
             </BusinessFilterOption>
-          ))}
-        </div>
-      )}
+            {businessList?.businesses.map((business, i) => (
+              <BusinessFilterOption
+                key={i}
+                onClick={() => handleChangeBusinessId(business?.id)}
+              >
+                {isCheckEnableSate(business.id) ? (
+                  <RiCheckboxFill className='fill' />
+                ) : (
+                  <RiCheckboxBlankLine />
+                )}
+                <BusinessName>{business?.name}</BusinessName>
+              </BusinessFilterOption>
+            ))}
+          </div>
+        )}
+      </AnalyticsBusinessFilterContainer>
       <FilterBtnWrapper>
         <Button
           borderRadius='7.6px'
@@ -80,7 +82,7 @@ const AnalyticsBusinessFilterUI = (props) => {
           {t('FILTER', 'Filter')}
         </Button>
       </FilterBtnWrapper>
-    </AnalyticsBusinessFilterContainer>
+    </>
   )
 }
 

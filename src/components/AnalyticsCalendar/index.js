@@ -53,7 +53,7 @@ export const AnalyticsCalendar = (props) => {
     let formattedDate = `${moment(date1).format('YYYY-MM-DD')}~${moment(date2).format('YYYY-MM-DD')}`
     if (moment(date1).format('YYYY') === moment(date2).format('YYYY')) {
       if (moment(date1).format('MM') === moment(date2).format('MM')) formattedDate = `${moment(date1).format('DD')} - ${moment(date2).format('DD')} ${moment(date2).format('MMM')}, ${moment(date1).format('YYYY')}`
-      else formattedDate = `${moment(date1).format('MM-DD')}~${moment(date2).format('MM-DD')}, ${moment(date1).format('YYYY')}`
+      else formattedDate = `${moment(date1).format('MM-DD')} ~ ${moment(date2).format('MM-DD')}, ${moment(date1).format('YYYY')}`
     }
     return formattedDate
   }
