@@ -23,6 +23,7 @@ import {
 import { ReportsOrderDistance } from '../ReportsOrderDistance'
 import { ReportsBusinessSpend } from '../ReportsBusinessSpend'
 import { ReportsDriverSpend } from '../ReportsDriverSpend'
+import { ReportsDriverOrder } from '../ReportsDriverOrder'
 
 const ReportsUI = (props) => {
   const [, t] = useLanguage()
@@ -89,6 +90,7 @@ const ReportsUI = (props) => {
           {selectedReport === 2 && <ReportsOrderDistance />}
           {selectedReport === 3 && <ReportsBusinessSpend />}
           {selectedReport === 5 && <ReportsDriverSpend />}
+          {selectedReport === 6 && <ReportsDriverOrder />}
         </SideBar>
       )}
     </ReportsContainer>
