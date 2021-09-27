@@ -74,6 +74,11 @@ export const InfoBlock = styled.div`
     font-weight: 600;
     color: ${props => props.theme.colors.headingColor};
   }
+  p.star {
+    color: ${props => props.theme.colors.primary};
+    margin: 0px;
+    font-size: 14px;
+  }
 `
 
 export const BusinessEnableWrapper = styled.div`
