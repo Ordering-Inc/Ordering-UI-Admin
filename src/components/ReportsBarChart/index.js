@@ -16,7 +16,8 @@ export const ReportsBarChart = (props) => {
     chartData,
     title,
     suggestedMax,
-    yUnit
+    yUnit,
+    isLegend
   } = props
 
   const [, t] = useLanguage()
@@ -56,6 +57,7 @@ export const ReportsBarChart = (props) => {
     },
     plugins: {
       legend: {
+        display: isLegend ?? false,
         position: 'bottom',
         align: 'start',
         borderRadius: 7,

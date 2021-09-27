@@ -24,7 +24,10 @@ import {
   Tbody,
   Tfoot,
   TableWrapper,
-  EmptyContent
+  EmptyContent,
+  CustomerLegend,
+  LegendItem,
+  LegendContent
 } from './styles'
 
 const ReportsBusinessDistanceUI = (props) => {
@@ -191,6 +194,26 @@ const ReportsBusinessDistanceUI = (props) => {
           title={t('DISTANCE_PER_BRAND', 'Distance per brand')}
           yUnit='km'
         />
+        <CustomerLegend>
+          {
+            businessDistanceList?.distances?.header?.rows[0]?.map((item, i) => (
+              i !== 0 && (
+                <LegendItem key={i}>
+                  {
+                    businessDistanceList?.distances?.footer?.rows[0]?.length > 1 && (
+                      <p>{businessDistanceList?.distances?.footer?.rows[0][i].value} km</p>
+                    )
+                  }
+                  <LegendContent>
+                    <div style={{ backgroundColor: lighten((i - 1) / 10, '#2C7BE5') }} />
+                    <span>{item.value}</span>
+                  </LegendContent>
+                </LegendItem>
+              )
+
+            ))
+          }
+        </CustomerLegend>
       </DistancePerBrandWrapper>
       <Modal
         width='50%'

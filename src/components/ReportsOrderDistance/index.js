@@ -190,6 +190,7 @@ const ReportsOrderDistanceUI = (props) => {
           chartData={chartData}
           title={t('ORDERS_DELIVERY', 'Orders delivery')}
           suggestedMax={10}
+          isLegend
         />
       </DistancePerBrandWrapper>
       <Modal

@@ -169,3 +169,49 @@ export const EmptyContent = styled.div`
   justify-content: center;
   padding: 10px;
 `
+
+export const CustomerLegend = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export const LegendItem = styled.div`
+  margin-top: 20px;
+  margin-right: 20px;
+
+  ${props => props.theme?.rtl && css`
+    margin-right: 0;
+    margin-left: 20px;
+  `}
+
+  p {
+    font-weight: 500;
+    font-size: 17px;
+    margin: 0;
+  }
+`
+
+export const LegendContent = styled.div`
+  display: flex;
+  align-items: center;
+
+  > div {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+    border-radius: 1px;
+    margin-right: 3px;
+    background: red;
+
+    ${props => props.theme.rtl && css`
+      margin-right: 0;
+      margin-left: 3px;
+    `}
+  }
+
+  > span {
+    font-size: 12px;
+    color: ${props => props.theme?.colors.lightGray};
+  }
+`
