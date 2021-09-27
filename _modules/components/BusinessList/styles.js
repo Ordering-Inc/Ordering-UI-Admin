@@ -21,7 +21,7 @@ var BusinessListContainer = _styledComponents.default.div(_templateObject || (_t
 
 exports.BusinessListContainer = BusinessListContainer;
 
-var BusinessListTable = _styledComponents.default.table(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n  transition: all 0.3s;\n\n  td, th {\n    padding: 10px 0;\n  }\n\n  th {\n    font-size: 14px;\n    color: ", ";\n  }\n\n  th.business,\n  td.business {\n    width: 30%;\n  }\n\n  thead {\n    border-bottom: 1px solid ", ";\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n      }\n    }\n  }\n"])), function (props) {
+var BusinessListTable = _styledComponents.default.table(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 950px;\n  color: ", ";\n  transition: all 0.3s;\n\n  td, th {\n    padding: 10px 0;\n  }\n\n  th {\n    font-size: 14px;\n    color: ", ";\n  }\n\n  th.business,\n  td.business {\n    width: 25%;\n  }\n\n  td.business-id {\n    font-size: 13px;\n    font-weight: 500;\n  }\n\n  thead {\n    border-bottom: 1px solid ", ";\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;

@@ -19,8 +19,6 @@ var _Buttons = require("../../styles/Buttons");
 
 var _SettingsSelectUI = require("../SettingsSelectUI");
 
-var _reactToastify = require("react-toastify");
-
 var _Confirm = require("../Confirm");
 
 var _styles = require("./styles");
@@ -98,24 +96,6 @@ var SettingsListUI = function SettingsListUI(props) {
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
-  (0, _react.useEffect)(function () {
-    var _settingsState$result3;
-
-    if (!(settingsState !== null && settingsState !== void 0 && settingsState.result.error) && !(settingsState !== null && settingsState !== void 0 && settingsState.loading) && (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$result3 = settingsState.result) === null || _settingsState$result3 === void 0 ? void 0 : _settingsState$result3.result) === 'ok') {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = t('SETTINGS_UPDATE', 'Settings Updated');
-
-      _reactToastify.toast.dark(content, toastConfigure);
-    }
-  }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingsListContainer, null, !settingsState.error && settingsState.loading && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 40,
     width: 250,

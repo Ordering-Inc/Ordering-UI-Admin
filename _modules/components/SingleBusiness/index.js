@@ -19,7 +19,7 @@ var _Switch = require("../../styles/Switch");
 
 var _reactBootstrap = require("react-bootstrap");
 
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("./styles");
 
@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessUI = function SingleBusinessUI(props) {
-  var _businessState$busine, _theme$images, _theme$images$dummies, _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5, _businessState$busine6, _businessState$busine7, _businessState$busine8, _businessState$busine9, _businessState$busine10, _theme$images2, _theme$images2$dummie, _businessState$busine11, _businessState$busine12, _businessState$busine13, _businessState$busine14;
+  var _businessState$busine, _businessState$busine2, _theme$images, _theme$images$dummies, _businessState$busine3, _businessState$busine4, _businessState$busine5, _businessState$busine6, _businessState$busine7, _businessState$busine8, _businessState$busine9, _businessState$busine10, _businessState$busine11, _businessState$busine12, _businessState$busine13, _businessState$busine14, _businessState$busine15, _businessState$busine16, _businessState$busine17, _businessState$busine18, _businessState$busine19, _theme$images2, _theme$images2$dummie, _businessState$busine20, _businessState$busine21, _businessState$busine22, _businessState$busine23, _businessState$busine24;
 
   var isSkeleton = props.isSkeleton,
       viewMethod = props.viewMethod,
@@ -75,7 +75,11 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     handleOpenBusinessDetails(businessState === null || businessState === void 0 ? void 0 : businessState.business);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && businessState.loading || isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && businessState.loading || isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.id) && /*#__PURE__*/_react.default.createElement("td", {
+    className: "business-id"
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 30
+  })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, {
     isSkeleton: (businessState === null || businessState === void 0 ? void 0 : businessState.loading) || isSkeleton
@@ -88,24 +92,40 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     width: 120
   })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
-  }))))), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+  }))))), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.minimum) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.minimum) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 120
-  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
+  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 60
+  })))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "bold"
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 80
+  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 60
   })))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 120
-  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
+  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 60
   })))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 120
-  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
+  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 60
+  })))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "bold"
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 60
+  })))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "bold"
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 30
+  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 50
   }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -115,28 +135,34 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     onClick: function onClick(e) {
       return handleClickBusiness(e);
     }
-  }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
+  }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.id) && /*#__PURE__*/_react.default.createElement("td", {
+    className: "business-id"
+  }, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.id), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
+    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
   })), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
-  }, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.name), /*#__PURE__*/_react.default.createElement("p", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.city) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.name)))), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+  }, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.name), /*#__PURE__*/_react.default.createElement("p", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : (_businessState$busine5 = _businessState$busine4.city) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.name)))), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.minimum) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.minimum) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
-  }, t('DELIVERY_FEE', 'Delivery fee')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.delivery_price)))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+  }, t('MINIMUM_ORDER', 'Minimum order')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.minimum)))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
-  }, t('DISTANCE', 'Distance')), /*#__PURE__*/_react.default.createElement("p", null, parseDistance(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.distance)))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+  }, t('DELIVERY_FEE', 'Delivery fee')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.delivery_price)))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
-  }, t('DELIVERY_TIME', 'Delivery time')), /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.delivery_time))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
+  }, t('DISTANCE', 'Distance')), /*#__PURE__*/_react.default.createElement("p", null, parseDistance(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine8 = businessState.business) === null || _businessState$busine8 === void 0 ? void 0 : _businessState$busine8.distance)))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "bold"
+  }, t('DELIVERY_TIME', 'Delivery time')), /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine9 = businessState.business) === null || _businessState$busine9 === void 0 ? void 0 : _businessState$busine9.delivery_time)))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine10 = businessState.business) === null || _businessState$busine10 === void 0 ? void 0 : _businessState$busine10.featured) && /*#__PURE__*/_react.default.createElement("p", null, t('FEATURE', 'Featured')))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine11 = businessState.business) === null || _businessState$busine11 === void 0 ? void 0 : (_businessState$busine12 = _businessState$busine11.reviews) === null || _businessState$busine12 === void 0 ? void 0 : _businessState$busine12.total) > 0 && /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "star"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, null)), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine13 = businessState.business) === null || _businessState$busine13 === void 0 ? void 0 : (_businessState$busine14 = _businessState$busine13.reviews) === null || _businessState$busine14 === void 0 ? void 0 : _businessState$busine14.total) && /*#__PURE__*/_react.default.createElement("p", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine15 = businessState.business) === null || _businessState$busine15 === void 0 ? void 0 : (_businessState$busine16 = _businessState$busine15.reviews) === null || _businessState$busine16 === void 0 ? void 0 : _businessState$busine16.total)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     className: "business_enable_control"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine8 = businessState.business) === null || _businessState$busine8 === void 0 ? void 0 : _businessState$busine8.enabled,
+    defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine17 = businessState.business) === null || _businessState$busine17 === void 0 ? void 0 : _businessState$busine17.enabled,
     onChange: handleChangeActiveBusiness
   }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessActionSelector, {
     className: "business_actions"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-    title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
@@ -154,9 +180,11 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     isSkeleton: true
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
     isSkeleton: true
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeaderContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 45,
     height: 45
+  })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 50
   }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
   })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -172,19 +200,19 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
       return handleClickBusiness(e);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
-    bgimage: optimizeImage(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine9 = businessState.business) === null || _businessState$busine9 === void 0 ? void 0 : _businessState$busine9.header, 'h_400,c_limit')
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine10 = businessState.business) === null || _businessState$busine10 === void 0 ? void 0 : _businessState$busine10.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit')
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement("h1", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine11 = businessState.business) === null || _businessState$busine11 === void 0 ? void 0 : _businessState$busine11.name), /*#__PURE__*/_react.default.createElement("p", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine12 = businessState.business) === null || _businessState$busine12 === void 0 ? void 0 : (_businessState$busine13 = _businessState$busine12.city) === null || _businessState$busine13 === void 0 ? void 0 : _businessState$busine13.name), /*#__PURE__*/_react.default.createElement(_styles.BusinessActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
+    bgimage: optimizeImage(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine18 = businessState.business) === null || _businessState$busine18 === void 0 ? void 0 : _businessState$busine18.header, 'h_400,c_limit')
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeaderContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine19 = businessState.business) === null || _businessState$busine19 === void 0 ? void 0 : _businessState$busine19.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit')
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('ID', 'ID'), " ", businessState === null || businessState === void 0 ? void 0 : (_businessState$busine20 = businessState.business) === null || _businessState$busine20 === void 0 ? void 0 : _businessState$busine20.id))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement("h1", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine21 = businessState.business) === null || _businessState$busine21 === void 0 ? void 0 : _businessState$busine21.name), /*#__PURE__*/_react.default.createElement("p", null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine22 = businessState.business) === null || _businessState$busine22 === void 0 ? void 0 : (_businessState$busine23 = _businessState$busine22.city) === null || _businessState$busine23 === void 0 ? void 0 : _businessState$busine23.name), /*#__PURE__*/_react.default.createElement(_styles.BusinessActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     className: "business_enable_control"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine14 = businessState.business) === null || _businessState$busine14 === void 0 ? void 0 : _businessState$busine14.enabled,
+    defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine24 = businessState.business) === null || _businessState$busine24 === void 0 ? void 0 : _businessState$busine24.enabled,
     onChange: handleChangeActiveBusiness
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessActionSelector, {
     className: "business_actions"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-    title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {

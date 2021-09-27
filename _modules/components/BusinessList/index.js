@@ -72,18 +72,28 @@ var BusinessList = function BusinessList(props) {
       setOpenPopover = _useState2[1];
 
   var _useState3 = (0, _react.useState)({
+    id: true,
     business: true,
+    minimum: true,
     deliveryFee: true,
     distance: true,
-    deliveryTime: true
+    deliveryTime: true,
+    featured: true,
+    ratings: true
   }),
       _useState4 = _slicedToArray(_useState3, 2),
       allowColumns = _useState4[0],
       setAllowColumns = _useState4[1];
 
   var optionsDefault = [{
+    value: 'id',
+    content: t('ID', 'ID')
+  }, {
     value: 'business',
     content: t('BUSINESS', 'Business')
+  }, {
+    value: 'minimum',
+    content: t('MINIMUM_ORDER', 'Minimum order')
   }, {
     value: 'deliveryFee',
     content: t('DELIVERY_FEE', 'Delivery fee')
@@ -93,6 +103,12 @@ var BusinessList = function BusinessList(props) {
   }, {
     value: 'deliveryTime',
     content: t('DELIVERY TIME', 'Delivery time')
+  }, {
+    value: 'featured',
+    content: t('FEATURE', 'Featured')
+  }, {
+    value: 'ratings',
+    content: t('RATINGS', 'Ratings')
   }];
 
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
@@ -176,10 +192,10 @@ var BusinessList = function BusinessList(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll, viewMethod]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.id) && /*#__PURE__*/_react.default.createElement("th", null, t('ID', 'ID')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
     className: "business"
-  }, t('BUSINESS', 'Business')), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime)) && /*#__PURE__*/_react.default.createElement("th", {
-    colSpan: 3
+  }, t('BUSINESS', 'Business')), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.minimum) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings)) && /*#__PURE__*/_react.default.createElement("th", {
+    colSpan: 6
   }, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_ColumnAllowSettingPopover.ColumnAllowSettingPopover, {
     open: openPopover,
     allowColumns: allowColumns,

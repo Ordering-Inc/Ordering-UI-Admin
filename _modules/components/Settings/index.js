@@ -114,11 +114,11 @@ var SettingsUI = function SettingsUI(props) {
     var category = _ref.category;
 
     if (!category) {
-      if (settingsType === 'basic') return events.emit('go_to_page', {
+      if (settingsType === 1) return events.emit('go_to_page', {
         page: 'basicSettings',
         replace: true
       });
-      if (settingsType === 'operation') return events.emit('go_to_page', {
+      if (settingsType === 2) return events.emit('go_to_page', {
         page: 'operationSettings',
         replace: true
       });
@@ -126,7 +126,7 @@ var SettingsUI = function SettingsUI(props) {
 
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
+        page: settingsType === 1 ? 'basicSettings' : 'operationSettings',
         search: "?category=".concat(category),
         replace: true
       });
@@ -182,9 +182,9 @@ var SettingsUI = function SettingsUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 1 ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     className: "row"
-  }, settingsType === 'basic' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
+  }, settingsType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
       return handleOpenSettingDetails('language');

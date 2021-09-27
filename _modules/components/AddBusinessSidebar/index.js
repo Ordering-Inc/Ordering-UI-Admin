@@ -117,7 +117,10 @@ var AddBusinessSidebar = function AddBusinessSidebar(props) {
       return setExtraOpen(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_MdcClose.default, null)), itemSelected === 'support' && /*#__PURE__*/_react.default.createElement("div", null, "business support"))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, itemSelected === 'support' && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: itemSelected === 'support'
+    open: itemSelected === 'support',
+    onClose: function onClose() {
+      return setExtraOpen(false);
+    }
   }, "business support"))));
 };
 
