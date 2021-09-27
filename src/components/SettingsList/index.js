@@ -4,7 +4,6 @@ import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../../components/NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { SettingsSelectUI } from '../SettingsSelectUI'
-import { toast } from 'react-toastify'
 import { Alert } from '../Confirm'
 import {
   SettingsListContainer,
@@ -47,22 +46,6 @@ export const SettingsListUI = (props) => {
       })
     }
   }, [settingsState?.result])
-
-  useEffect(() => {
-    if (!settingsState?.result.error && !settingsState?.loading && settingsState?.result?.result === 'ok') {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = t('SETTINGS_UPDATE', 'Settings Updated')
-      toast.dark(content, toastConfigure)
-    }
-  }, [settingsState?.loading])
 
   return (
     <>
