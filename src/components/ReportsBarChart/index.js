@@ -14,7 +14,9 @@ export const ReportsBarChart = (props) => {
   const {
     chartDataList,
     chartData,
-    title
+    title,
+    suggestedMax,
+    yUnit
   } = props
 
   const [, t] = useLanguage()
@@ -44,8 +46,12 @@ export const ReportsBarChart = (props) => {
           font: {
             size: 12,
             color: '#B1BCCC'
+          },
+          callback: function (label) {
+            return yUnit ? `${label} ${yUnit}` : label
           }
-        }
+        },
+        ...(suggestedMax && { suggestedMax: suggestedMax })
       }
     },
     plugins: {

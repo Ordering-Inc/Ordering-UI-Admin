@@ -185,7 +185,12 @@ const ReportsOrderDistanceUI = (props) => {
         )}
       </DistancePerBrandWrapper>
       <DistancePerBrandWrapper>
-        <ReportsBarChart chartDataList={orderDistanceList} chartData={chartData} title={t('ORDERS_DELIVERY', 'Orders delivery')} />
+        <ReportsBarChart
+          chartDataList={orderDistanceList}
+          chartData={chartData}
+          title={t('ORDERS_DELIVERY', 'Orders delivery')}
+          suggestedMax={10}
+        />
       </DistancePerBrandWrapper>
       <Modal
         width='50%'
