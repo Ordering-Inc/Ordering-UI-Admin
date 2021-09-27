@@ -20,6 +20,7 @@ import {
   HeaderTitleContainer,
   ReportsList
 } from './styles'
+import { ReportsOrderDistance } from '../ReportsOrderDistance'
 
 const ReportsUI = (props) => {
   const [, t] = useLanguage()
@@ -83,6 +84,7 @@ const ReportsUI = (props) => {
           onClose={() => handleCloseSidebar()}
         >
           {selectedReport === 1 && <ReportsBusinessDistance />}
+          {selectedReport === 2 && <ReportsOrderDistance />}
         </SideBar>
       )}
     </ReportsContainer>
