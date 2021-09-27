@@ -198,7 +198,7 @@ const SingleBusinessUI = (props) => {
                       )}
                     </td>
                     <td>
-                      {allowColumns?.ratings && (
+                      {allowColumns?.ratings && businessState?.business?.reviews?.total > 0 && (
                         <InfoBlock>
                           <p className='star'><StarFill /></p>
                           {businessState?.business?.reviews?.total && (

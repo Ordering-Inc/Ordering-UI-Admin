@@ -60,9 +60,17 @@ export const Image = (props) => {
 export const BusinessGeneralInfo = styled.div`
   display: flex;
   align-items: center;
+  > div:last-child {
+    flex: 1;
+  }
 `
 
 export const InfoBlock = styled.div`
+  ${props => props.theme?.rtl ? css`
+    padding-left: 10px;
+  ` : css`
+    padding-right: 10px;
+  `}
   p {
     margin: 5px 0 0 0;
     font-size: 12px;
