@@ -129,7 +129,7 @@ const ReportsOrderDistanceUI = (props) => {
       </ButtonActionList>
       <DistancePerBrandWrapper>
         <DistanceTitleBlock>
-          <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
+          <h2>{t('ORDERS_DELIVERY', 'Orders delivery')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>
         {orderDistanceList?.loading ? (
@@ -185,7 +185,7 @@ const ReportsOrderDistanceUI = (props) => {
         )}
       </DistancePerBrandWrapper>
       <DistancePerBrandWrapper>
-        <ReportsBarChart chartDataList={orderDistanceList} chartData={chartData} />
+        <ReportsBarChart chartDataList={orderDistanceList} chartData={chartData} title={t('ORDERS_DELIVERY', 'Orders delivery')} />
       </DistancePerBrandWrapper>
       <Modal
         width='50%'

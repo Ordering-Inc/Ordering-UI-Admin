@@ -13,7 +13,8 @@ import {
 export const ReportsBarChart = (props) => {
   const {
     chartDataList,
-    chartData
+    chartData,
+    title
   } = props
 
   const [, t] = useLanguage()
@@ -77,7 +78,7 @@ export const ReportsBarChart = (props) => {
   return (
     <ReportsBarChartContainer>
       <TitleBlock>
-        <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
+        <h2>{title}</h2>
         <Download onClick={() => downloadChart()} />
       </TitleBlock>
       {chartDataList?.loading ? (

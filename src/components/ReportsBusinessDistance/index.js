@@ -185,7 +185,7 @@ const ReportsBusinessDistanceUI = (props) => {
         )}
       </DistancePerBrandWrapper>
       <DistancePerBrandWrapper>
-        <ReportsBarChart chartDataList={businessDistanceList} chartData={chartData} />
+        <ReportsBarChart chartDataList={businessDistanceList} chartData={chartData} title={t('DISTANCE_PER_BRAND', 'Distance per brand')} />
       </DistancePerBrandWrapper>
       <Modal
         width='50%'
