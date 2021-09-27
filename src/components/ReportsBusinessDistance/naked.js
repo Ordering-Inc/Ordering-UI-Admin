@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 import { useApi, useSession } from 'ordering-components-admin'
+import data from './data.json'
 
 /**
  * Component to manage Reports Business Distance page behavior without UI component
@@ -43,7 +44,7 @@ export const ReportsBusinessDistance = (props) => {
         setBusinessDistanceList({
           ...businessDistanceList,
           loading: false,
-          distances: result
+          distances: data
         })
       } else {
         setBusinessDistanceList({

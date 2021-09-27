@@ -45,9 +45,10 @@ export const CalendarWrapper = styled.div`
     svg {
       font-size: 16px;
       margin-right: 12px;
+
       ${props => props.theme.rtl && css`
-        margin-right: 12px;
-        margin-left: 0;
+        margin-left: 12px;
+        margin-right: 0;
       `}
     }
   }
@@ -105,9 +106,16 @@ export const Thead = styled.thead`
     th {
       font-weight: 500;
       font-size: 12px;
+      padding: 8px 5px;
 
       &:not(:first-child) {
         text-align: center;
+      }
+    }
+
+    &:nth-child(2) {
+      th:nth-child(2) {
+        text-align: left;
       }
     }
   }
@@ -128,7 +136,7 @@ export const Tbody = styled.tbody`
         border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
       }
 
-      &:first-child {
+      &:first-child, &:nth-child(2) {
         text-align: left;
         color: ${props => props.theme?.colors.headingColor};
       }

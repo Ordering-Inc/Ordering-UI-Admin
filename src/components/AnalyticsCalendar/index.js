@@ -1,16 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
-import {
-  Calendar4
-} from 'react-bootstrap-icons'
 import moment from 'moment'
 import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-import {
-  AnalyticsCalendarContainer
-} from './styles'
+import { Calendar4 } from 'react-bootstrap-icons'
+import { AnalyticsCalendarContainer } from './styles'
 
 export const AnalyticsCalendar = (props) => {
   const {

@@ -45,9 +45,10 @@ export const CalendarWrapper = styled.div`
     svg {
       font-size: 16px;
       margin-right: 12px;
+
       ${props => props.theme.rtl && css`
-        margin-right: 12px;
-        margin-left: 0;
+        margin-left: 12px;
+        margin-right: 0;
       `}
     }
   }
