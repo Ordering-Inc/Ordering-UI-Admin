@@ -31,16 +31,28 @@ export const BusinessList = (props) => {
 
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
+    id: true,
     business: true,
+    minimum: true,
     deliveryFee: true,
     distance: true,
-    deliveryTime: true
+    deliveryTime: true,
+    featured: true,
+    ratings: true
   })
 
   const optionsDefault = [
     {
+      value: 'id',
+      content: t('ID', 'ID')
+    },
+    {
       value: 'business',
       content: t('BUSINESS', 'Business')
+    },
+    {
+      value: 'minimum',
+      content: t('MINIMUM_ORDER', 'Minimum order')
     },
     {
       value: 'deliveryFee',
@@ -53,6 +65,14 @@ export const BusinessList = (props) => {
     {
       value: 'deliveryTime',
       content: t('DELIVERY TIME', 'Delivery time')
+    },
+    {
+      value: 'featured',
+      content: t('FEATURE', 'Featured')
+    },
+    {
+      value: 'ratings',
+      content: t('RATINGS', 'Ratings')
     }
   ]
 
@@ -131,11 +151,14 @@ export const BusinessList = (props) => {
             <BusinessListTable>
               <thead>
                 <tr>
+                  {allowColumns?.id && (
+                    <th>{t('ID', 'ID')}</th>
+                  )}
                   {allowColumns?.business && (
                     <th className='business'>{t('BUSINESS', 'Business')}</th>
                   )}
-                  {(allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime) && (
-                    <th colSpan={3}>{t('DETAILS', 'Details')}</th>
+                  {(allowColumns?.minimum || allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime || allowColumns?.featured || allowColumns?.ratings) && (
+                    <th colSpan={6}>{t('DETAILS', 'Details')}</th>
                   )}
                   <th>{t('ACTIONS', 'Actions')}</th>
                   <th>

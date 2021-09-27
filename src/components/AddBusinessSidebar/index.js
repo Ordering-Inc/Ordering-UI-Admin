@@ -91,6 +91,7 @@ export const AddBusinessSidebar = (props) => {
               {itemSelected === 'support' && (
                 <Modal
                   open={itemSelected === 'support'}
+                  onClose={() => setExtraOpen(false)}
                 >
                   business support
                 </Modal>
