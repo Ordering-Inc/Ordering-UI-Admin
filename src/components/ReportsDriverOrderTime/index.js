@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import * as htmlToImage from 'html-to-image'
 import { ReportsDriverOrderTime as ReportsDriverOrderTimeController } from './naked'
@@ -35,6 +35,7 @@ const ReportsDriverOrderTimeUI = (props) => {
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [{ parseDate }] = useUtils()
 
   const tableRef = useRef(null)
 
@@ -112,7 +113,15 @@ const ReportsDriverOrderTimeUI = (props) => {
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
-                        <td key={j} colSpan={td.colspan}>{td.value}</td>
+                        <>
+                          {
+                            j === 0 ? (
+                              <td key={j} colSpan={td.colspan}>{td.value}</td>
+                            ) : (
+                              <td key={j} colSpan={td.colspan}>{td.value ? parseDate(new Date(td.value), { outputFormat: 'HH:mm:ss' }) : ''}</td>
+                            )
+                          }
+                        </>
                       ))}
                     </tr>
                   </Tbody>

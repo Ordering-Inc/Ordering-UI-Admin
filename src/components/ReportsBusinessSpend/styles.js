@@ -109,27 +109,25 @@ export const Thead = styled.thead`
       padding: 12px 5px;
       font-weight: 500;
       font-size: 12px;
-      text-align: center;
     }
 
     &:first-child {
       th {
-        &:first-child {
-          text-align: left;
-          border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+        &:not(:first-child) {
+          text-align: center;
+          border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
         }
       }
     }
 
     &:nth-child(2) {
       th {
-        &:first-child {
+        &:first-child, &:nth-child(2) {
           text-align: left;
         }
 
-        &:nth-child(2) {
-          text-align: left;
-          border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+        &:nth-child(4n-1) {
+          border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
         }
       }
     }
@@ -146,15 +144,13 @@ export const Tbody = styled.tbody`
       text-align: center;
       color: ${props => props.theme?.colors.lightGray};
 
-      &:first-child {
+      &:first-child, &:nth-child(2) {
         text-align: left;
         color: ${props => props.theme?.colors.headingColor};
       }
 
-      &:nth-child(2) {
-        text-align: left;
-        color: ${props => props.theme?.colors.headingColor};
-        border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+      &:nth-child(4n-1) {
+        border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
       }
     }
   }
