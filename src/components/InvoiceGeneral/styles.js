@@ -61,9 +61,15 @@ export const CalendarWrapper = styled.div`
 
   > div {
     left: 0 !important;
+    right: initial !important;
+
+    ${props => props.theme?.rtl && css`
+      left: initial;
+      right: 0 !important;
+    `}
   }
 
-  button {
+  > button {
     padding: 7px 15px;
     width: 100%;
     color: #748194;
