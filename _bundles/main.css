@@ -1719,7 +1719,7 @@ pre.jsoneditor-preview,
 
 .jsoneditor .jsoneditor-text-errors td pre {
   margin: 0;
-  white-space: normal;
+  white-space: pre-wrap;
 }
 
 .jsoneditor .jsoneditor-text-errors tr {

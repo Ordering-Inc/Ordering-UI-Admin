@@ -29,6 +29,10 @@ var _BusinessDetails = require("../BusinessDetails");
 
 var _AddBusinessSidebar = require("../AddBusinessSidebar");
 
+var _SideBar = require("../SideBar");
+
+var _ImportCustomCSVForm = require("../ImportCustomCSVForm");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -96,10 +100,15 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       openAddBusiness = _useState10[0],
       setOpenAddBusiness = _useState10[1];
 
-  var _useState11 = (0, _react.useState)([]),
+  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      businessTypes = _useState12[0],
-      setBusinessTypes = _useState12[1];
+      openImportCsvForm = _useState12[0],
+      setOpenImportCsvForm = _useState12[1];
+
+  var _useState13 = (0, _react.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      businessTypes = _useState14[0],
+      setBusinessTypes = _useState14[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setOpenBusinessDetails(false);
@@ -126,6 +135,10 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     setOpenAddBusiness(true);
   };
 
+  var handleOpenImportCSV = function handleOpenImportCSV() {
+    setOpenImportCsvForm(true);
+  };
+
   var onhandleSuccessAddBusiness = function onhandleSuccessAddBusiness(business) {
     handleSucessAddBusiness(business);
     setOpenAddBusiness(false);
@@ -143,7 +156,8 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListingContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessListingHeader.BusinessListingHeader, {
     searchValue: searchValue,
     onSearch: onSearch,
-    handleOpenAddBusiness: handleOpenAddBusiness
+    handleOpenAddBusiness: handleOpenAddBusiness,
+    handleOpenImportCSV: handleOpenImportCSV
   }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState
@@ -192,7 +206,17 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       return setOpenAddBusiness(false);
     },
     handleSucessAddBusiness: onhandleSuccessAddBusiness
-  }));
+  }), openImportCsvForm && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+    sidebarId: "importCsvForm",
+    open: openImportCsvForm,
+    onClose: function onClose() {
+      return setOpenImportCsvForm(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ImportCustomCSVForm.ImportCustomCSVForm, {
+    onClose: function onClose() {
+      return setOpenImportCsvForm(false);
+    }
+  })));
 };
 
 var BusinessessListing = function BusinessessListing(props) {

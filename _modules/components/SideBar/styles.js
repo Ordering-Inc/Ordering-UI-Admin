@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  width: 0;\n  position: fixed;\n  z-index: 1005;\n  top: 0;\n  background: #FFF;\n  overflow-x: hidden;\n  transition: 0.3s;\n  height: 100vh;\n  ", "\n\n  ", "\n\n  > button {\n    position: absolute;\n    top: 20px;\n    ", "\n  }\n"])), function (_ref) {
+var BarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  width: 0;\n  position: fixed;\n  z-index: 1005;\n  top: 0;\n  background: #FFF;\n  overflow-x: hidden;\n  transition: 0.3s;\n  height: 100vh;\n  ", "\n\n  ", "\n\n  > button {\n    position: absolute;\n    z-index: 10;\n    top: 20px;\n    ", "\n  }\n"])), function (_ref) {
   var isBorderShow = _ref.isBorderShow;
   return isBorderShow ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    ", "\n  "])), function (props) {
     var _props$theme;
