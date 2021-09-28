@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import * as htmlToImage from 'html-to-image'
-import { ReportsBusinessDistance as ReportsBusinessDistanceController } from './naked'
-import { useLanguage } from 'ordering-components-admin'
+// import { AdvancedReports as AdvancedReportsController } from './naked'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Download } from 'react-bootstrap-icons'
@@ -34,7 +34,7 @@ const ReportsBusinessDistanceUI = (props) => {
   const {
     filterList,
     handleChangeFilterList,
-    businessDistanceList
+    reportData
   } = props
 
   const [, t] = useLanguage()
@@ -48,10 +48,10 @@ const ReportsBusinessDistanceUI = (props) => {
   }
 
   const generateChartValues = () => {
-    if (businessDistanceList?.distances?.header?.rows[0]?.length > 0) {
+    if (reportData?.content?.header?.rows[0]?.length > 0) {
       const chartValues = []
-      for (let i = 0; i < businessDistanceList?.distances?.header?.rows[0]?.length - 1; i++) {
-        const values = businessDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[i + 2].value], [])
+      for (let i = 0; i < reportData?.content?.header?.rows[0]?.length - 1; i++) {
+        const values = reportData?.content?.body?.rows?.reduce((prev, cur) => [...prev, cur[i + 2].value], [])
         chartValues.push([...values])
       }
       return chartValues
@@ -60,8 +60,8 @@ const ReportsBusinessDistanceUI = (props) => {
 
   const generateChartLabels = () => {
     let labels = []
-    if (businessDistanceList?.distances?.header?.rows[0]?.length > 0) {
-      labels = [...businessDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[1].value], [])]
+    if (reportData?.content?.header?.rows[0]?.length > 0) {
+      labels = [...reportData?.content?.body?.rows?.reduce((prev, cur) => [...prev, cur[1].value], [])]
     }
     return labels
   }
@@ -71,7 +71,7 @@ const ReportsBusinessDistanceUI = (props) => {
     const chartData = []
     chartValues && chartValues.forEach((value, i) => {
       chartData.push({
-        label: businessDistanceList?.distances?.header?.rows[0][i + 1].value ?? '',
+        label: reportData?.content?.header?.rows[0][i + 1].value ?? '',
         data: value,
         fill: true,
         borderColor: lighten(i / 10, '#2C7BE5'),
@@ -105,7 +105,7 @@ const ReportsBusinessDistanceUI = (props) => {
       datasets: generateDataSets()
     }
     setChartData({ ...data })
-  }, [businessDistanceList])
+  }, [reportData])
 
   return (
     <ReportsDistanceContainer>
@@ -131,11 +131,11 @@ const ReportsBusinessDistanceUI = (props) => {
         </CalendarWrapper>
       </ButtonActionList>
       <DistancePerBrandWrapper>
-        <DistanceTitleBlock active={businessDistanceList?.distances?.body?.rows?.length > 0}>
+        <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
           <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>
-        {businessDistanceList?.loading ? (
+        {reportData?.loading ? (
           <div className='row'>
             {[...Array(20).keys()].map(i => (
               <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
@@ -143,12 +143,12 @@ const ReportsBusinessDistanceUI = (props) => {
           </div>
         ) : (
           <TableWrapper>
-            {businessDistanceList?.distances?.body?.rows?.length > 0 ? (
+            {reportData?.content?.body?.rows?.length > 0 ? (
               <DistanceTable ref={tableRef}>
-                {businessDistanceList?.distances?.header?.rows.length > 0 && (
+                {reportData?.content?.header?.rows.length > 0 && (
                   <Thead>
                     {
-                      businessDistanceList?.distances?.header?.rows.map((tr, i) => (
+                      reportData?.content?.header?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((th, j) => (
                             <th key={j} colSpan={th.colspan}>{th.value}</th>
@@ -158,7 +158,7 @@ const ReportsBusinessDistanceUI = (props) => {
                     }
                   </Thead>
                 )}
-                {businessDistanceList?.distances?.body?.rows.map((tbody, i) => (
+                {reportData?.content?.body?.rows.map((tbody, i) => (
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
@@ -167,10 +167,10 @@ const ReportsBusinessDistanceUI = (props) => {
                     </tr>
                   </Tbody>
                 ))}
-                {businessDistanceList?.distances?.footer?.rows.length > 0 && (
+                {reportData?.content?.footer?.rows.length > 0 && (
                   <Tfoot>
                     {
-                      businessDistanceList?.distances?.footer?.rows.map((tr, i) => (
+                      reportData?.content?.footer?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((td, j) => (
                             <td key={j} colSpan={td.colspan}>{td.value}</td>
@@ -189,19 +189,19 @@ const ReportsBusinessDistanceUI = (props) => {
       </DistancePerBrandWrapper>
       <DistancePerBrandWrapper>
         <ReportsBarChart
-          chartDataList={businessDistanceList}
+          chartDataList={reportData}
           chartData={chartData}
           title={t('DISTANCE_PER_BRAND', 'Distance per brand')}
           yUnit='km'
         />
         <CustomerLegend>
           {
-            businessDistanceList?.distances?.header?.rows[0]?.map((item, i) => (
+            reportData?.content?.header?.rows[0]?.map((item, i) => (
               i !== 0 && (
                 <LegendItem key={i}>
                   {
-                    businessDistanceList?.distances?.footer?.rows[0]?.length > 1 && (
-                      <p>{businessDistanceList?.distances?.footer?.rows[0][i].value} km</p>
+                    reportData?.content?.footer?.rows[0]?.length > 1 && (
+                      <p>{reportData?.content?.footer?.rows[0][i].value} km</p>
                     )
                   }
                   <LegendContent>
@@ -246,7 +246,8 @@ const ReportsBusinessDistanceUI = (props) => {
 export const ReportsBusinessDistance = (props) => {
   const reportsBusinessDistanceProps = {
     ...props,
-    UIComponent: ReportsBusinessDistanceUI
+    UIComponent: ReportsBusinessDistanceUI,
+    endpoint: 'business_distance_average'
   }
-  return <ReportsBusinessDistanceController {...reportsBusinessDistanceProps} />
+  return <AdvancedReportsController {...reportsBusinessDistanceProps} />
 }

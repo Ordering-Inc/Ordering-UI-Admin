@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import * as htmlToImage from 'html-to-image'
-import { ReportsOrderDistance as ReportsOrderDistanceController } from './naked'
-import { useLanguage } from 'ordering-components-admin'
+// import { ReportsOrderDistance as ReportsOrderDistanceController } from './naked'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Download } from 'react-bootstrap-icons'
@@ -31,7 +31,7 @@ const ReportsOrderDistanceUI = (props) => {
   const {
     filterList,
     handleChangeFilterList,
-    orderDistanceList
+    reportData
   } = props
 
   const [, t] = useLanguage()
@@ -45,10 +45,10 @@ const ReportsOrderDistanceUI = (props) => {
   }
 
   const generateChartValues = () => {
-    if (orderDistanceList?.distances?.header?.rows[0]?.length > 1) {
+    if (reportData?.content?.header?.rows[0]?.length > 1) {
       const chartValues = []
-      for (let i = 1; i < orderDistanceList?.distances?.header?.rows[0]?.length; i++) {
-        const values = orderDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[i * 2].value], [])
+      for (let i = 1; i < reportData?.content?.header?.rows[0]?.length; i++) {
+        const values = reportData?.content?.body?.rows?.reduce((prev, cur) => [...prev, cur[i * 2].value], [])
         chartValues.push([...values])
       }
       return chartValues
@@ -57,8 +57,8 @@ const ReportsOrderDistanceUI = (props) => {
 
   const generateChartLabels = () => {
     let labels = []
-    if (orderDistanceList?.distances?.header?.rows[0]?.length > 1) {
-      labels = [...orderDistanceList?.distances?.body?.rows?.reduce((prev, cur) => [...prev, cur[0].value], [])]
+    if (reportData?.content?.header?.rows[0]?.length > 1) {
+      labels = [...reportData?.content?.body?.rows?.reduce((prev, cur) => [...prev, cur[0].value], [])]
     }
     return labels
   }
@@ -68,7 +68,7 @@ const ReportsOrderDistanceUI = (props) => {
     const chartData = []
     chartValues && chartValues.forEach((value, i) => {
       chartData.push({
-        label: orderDistanceList?.distances?.header?.rows[0][i + 1].value ?? '',
+        label: reportData?.content?.header?.rows[0][i + 1].value ?? '',
         data: value,
         fill: true,
         borderColor: lighten(i / 10, '#2C7BE5'),
@@ -102,7 +102,7 @@ const ReportsOrderDistanceUI = (props) => {
       datasets: generateDataSets()
     }
     setChartData({ ...data })
-  }, [orderDistanceList])
+  }, [reportData])
 
   return (
     <ReportsDistanceContainer>
@@ -128,11 +128,11 @@ const ReportsOrderDistanceUI = (props) => {
         </CalendarWrapper>
       </ButtonActionList>
       <DistancePerBrandWrapper>
-        <DistanceTitleBlock active={orderDistanceList?.distances?.body?.rows?.length > 0}>
+        <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
           <h2>{t('ORDERS_DELIVERY', 'Orders delivery')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>
-        {orderDistanceList?.loading ? (
+        {reportData?.loading ? (
           <div className='row'>
             {[...Array(20).keys()].map(i => (
               <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
@@ -140,12 +140,12 @@ const ReportsOrderDistanceUI = (props) => {
           </div>
         ) : (
           <TableWrapper>
-            {orderDistanceList?.distances?.body?.rows?.length > 0 ? (
+            {reportData?.content?.body?.rows?.length > 0 ? (
               <DistanceTable ref={tableRef}>
-                {orderDistanceList?.distances?.header?.rows.length > 0 && (
+                {reportData?.content?.header?.rows.length > 0 && (
                   <Thead>
                     {
-                      orderDistanceList?.distances?.header?.rows.map((tr, i) => (
+                      reportData?.content?.header?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((th, j) => (
                             <th key={j} colSpan={th.colspan}>{(i === 0 && j === 0) ? '' : th.value}</th>
@@ -155,7 +155,7 @@ const ReportsOrderDistanceUI = (props) => {
                     }
                   </Thead>
                 )}
-                {orderDistanceList?.distances?.body?.rows.map((tbody, i) => (
+                {reportData?.content?.body?.rows.map((tbody, i) => (
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
@@ -164,10 +164,10 @@ const ReportsOrderDistanceUI = (props) => {
                     </tr>
                   </Tbody>
                 ))}
-                {orderDistanceList?.distances?.footer?.rows.length > 0 && (
+                {reportData?.content?.footer?.rows.length > 0 && (
                   <Tfoot>
                     {
-                      orderDistanceList?.distances?.footer?.rows.map((tr, i) => (
+                      reportData?.content?.footer?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((td, j) => (
                             <td key={j} colSpan={td.colspan}>{td.value}</td>
@@ -186,7 +186,7 @@ const ReportsOrderDistanceUI = (props) => {
       </DistancePerBrandWrapper>
       <DistancePerBrandWrapper>
         <ReportsBarChart
-          chartDataList={orderDistanceList}
+          chartDataList={reportData}
           chartData={chartData}
           title={t('ORDERS_DELIVERY', 'Orders delivery')}
           suggestedMax={10}
@@ -224,7 +224,8 @@ const ReportsOrderDistanceUI = (props) => {
 export const ReportsOrderDistance = (props) => {
   const reportsOrderDistanceProps = {
     ...props,
-    UIComponent: ReportsOrderDistanceUI
+    UIComponent: ReportsOrderDistanceUI,
+    endpoint: 'order_distance_ranges'
   }
-  return <ReportsOrderDistanceController {...reportsOrderDistanceProps} />
+  return <AdvancedReportsController {...reportsOrderDistanceProps} />
 }

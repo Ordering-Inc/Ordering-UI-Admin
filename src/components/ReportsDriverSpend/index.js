@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import * as htmlToImage from 'html-to-image'
-import { ReportsDriverSpend as ReportsDriverSpendController } from './naked'
+// import { ReportsDriverSpend as ReportsDriverSpendController } from './naked'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -29,7 +29,7 @@ const ReportsDriverSpendUI = (props) => {
   const {
     filterList,
     handleChangeFilterList,
-    orderDistanceList
+    reportData
   } = props
 
   const [, t] = useLanguage()
@@ -81,11 +81,11 @@ const ReportsDriverSpendUI = (props) => {
         </CalendarWrapper>
       </ButtonActionList>
       <DistancePerBrandWrapper>
-        <DistanceTitleBlock active={orderDistanceList?.distances?.body?.rows?.length > 0}>
+        <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
           <h2>{t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>
-        {orderDistanceList?.loading ? (
+        {reportData?.loading ? (
           <div className='row'>
             {[...Array(20).keys()].map(i => (
               <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
@@ -93,12 +93,12 @@ const ReportsDriverSpendUI = (props) => {
           </div>
         ) : (
           <TableWrapper>
-            {orderDistanceList?.distances?.body?.rows?.length > 0 ? (
+            {reportData?.content?.body?.rows?.length > 0 ? (
               <DistanceTable ref={tableRef}>
-                {orderDistanceList?.distances?.header?.rows.length > 0 && (
+                {reportData?.content?.header?.rows.length > 0 && (
                   <Thead>
                     {
-                      orderDistanceList?.distances?.header?.rows.map((tr, i) => (
+                      reportData?.content?.header?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((th, j) => (
                             <th key={j} colSpan={th.colspan}>{th.value}</th>
@@ -108,7 +108,7 @@ const ReportsDriverSpendUI = (props) => {
                     }
                   </Thead>
                 )}
-                {orderDistanceList?.distances?.body?.rows.map((tbody, i) => (
+                {reportData?.content?.body?.rows.map((tbody, i) => (
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
@@ -117,10 +117,10 @@ const ReportsDriverSpendUI = (props) => {
                     </tr>
                   </Tbody>
                 ))}
-                {orderDistanceList?.distances?.footer?.rows.length > 0 && (
+                {reportData?.content?.footer?.rows.length > 0 && (
                   <Tfoot>
                     {
-                      orderDistanceList?.distances?.footer?.rows.map((tr, i) => (
+                      reportData?.content?.footer?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((td, j) => (
                             <td key={j} colSpan={td.colspan}>{td.value}</td>
@@ -168,7 +168,8 @@ const ReportsDriverSpendUI = (props) => {
 export const ReportsDriverSpend = (props) => {
   const reportsBusinessSpendProps = {
     ...props,
-    UIComponent: ReportsDriverSpendUI
+    UIComponent: ReportsDriverSpendUI,
+    endpoint: 'driver_companies_spend_times'
   }
-  return <ReportsDriverSpendController {...reportsBusinessSpendProps} />
+  return <AdvancedReportsController {...reportsBusinessSpendProps} />
 }
