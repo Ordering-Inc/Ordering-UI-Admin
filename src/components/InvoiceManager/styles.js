@@ -49,9 +49,9 @@ export const InvoiceItemContainer = styled.div`
   padding: 10px;
   border-radius: 7.6px;
   width: 100%;
-  transition: background 0.3s;
+  transition: all 0.3s;
 
-  &: hover {
+  &:hover {
     background: ${props => props.theme?.colors.lightPrimary};
   }
 

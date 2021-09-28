@@ -74,7 +74,7 @@ export const BusinessFilterWrapper = styled.div`
     margin-left: 0;
   `}
 
-  button {
+  > button {
     background: #F8F9FA;
     border-radius: 7.6px;
     padding: 7px 12px;
