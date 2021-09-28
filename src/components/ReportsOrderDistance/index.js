@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import * as htmlToImage from 'html-to-image'
-// import { ReportsOrderDistance as ReportsOrderDistanceController } from './naked'
 import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
