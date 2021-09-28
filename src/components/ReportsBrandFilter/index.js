@@ -1,16 +1,15 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useLanguage, ReportsBrandFilter as ReportsBrandFilterController } from 'ordering-components-admin'
+import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
+import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import { Button } from '../../styles/Buttons'
 import {
   ReportsBrandFilterContainer,
   BrandFilterOption,
   BusinessName,
   FilterBtnWrapper
 } from './styles'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { Button } from '../../styles/Buttons'
-import { useLanguage } from 'ordering-components-admin'
-import { ReportsBrandFilter as ReportsBrandFilterController } from './naked'
 
 const ReportsBrandFilterUI = (props) => {
   const {
