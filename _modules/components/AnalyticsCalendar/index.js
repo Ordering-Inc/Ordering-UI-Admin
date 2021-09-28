@@ -13,8 +13,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _FiCalendar = _interopRequireDefault(require("@meronex/icons/fi/FiCalendar"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
 var _reactDateRange = require("react-date-range");
@@ -22,6 +20,8 @@ var _reactDateRange = require("react-date-range");
 require("react-date-range/dist/styles.css");
 
 require("react-date-range/dist/theme/default.css");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles2 = require("./styles");
 
@@ -52,8 +52,8 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
       t = _useLanguage2[1];
 
   var _useState = (0, _react.useState)([{
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: null,
+    endDate: null,
     key: 'selection'
   }]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -93,6 +93,16 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     setDateRange([item.selection]);
   };
 
+  var dateFormat = function dateFormat(date1, date2) {
+    var formattedDate = "".concat((0, _moment.default)(date1).format('YYYY-MM-DD'), "~").concat((0, _moment.default)(date2).format('YYYY-MM-DD'));
+
+    if ((0, _moment.default)(date1).format('YYYY') === (0, _moment.default)(date2).format('YYYY')) {
+      if ((0, _moment.default)(date1).format('MM') === (0, _moment.default)(date2).format('MM')) formattedDate = "".concat((0, _moment.default)(date1).format('DD'), " - ").concat((0, _moment.default)(date2).format('DD'), " ").concat((0, _moment.default)(date2).format('MMM'), ", ").concat((0, _moment.default)(date1).format('YYYY'));else formattedDate = "".concat((0, _moment.default)(date1).format('MM-DD'), " ~ ").concat((0, _moment.default)(date2).format('MM-DD'), ", ").concat((0, _moment.default)(date1).format('YYYY'));
+    }
+
+    return formattedDate;
+  };
+
   (0, _react.useEffect)(function () {
     window.addEventListener('click', handleClickOutside);
     return function () {
@@ -107,10 +117,10 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
         key: 'selection'
       }]);
     }
-  }, []);
+  }, [defaultValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleOpenCalendar
-  }, /*#__PURE__*/_react.default.createElement(_FiCalendar.default, null), dateRange[0].startDate ? "".concat((0, _moment.default)(dateRange[0].startDate).format('YYYY-MM-DD'), "~").concat((0, _moment.default)(dateRange[0].endDate).format('YYYY-MM-DD')) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsCalendarContainer, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsCalendarContainer, {
     ref: calendarRef
   }, /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
     editableDateInputs: true,

@@ -35,7 +35,7 @@ var InvoiceListContainer = _styledComponents.default.div(_templateObject5 || (_t
 
 exports.InvoiceListContainer = InvoiceListContainer;
 
-var InvoiceItemContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  margin-top: 15px;\n  padding: 10px;\n  border-radius: 7.6px;\n  width: 100%;\n  transition: background 0.3s;\n\n  &: hover {\n    background: ", ";\n  }\n\n  @media (min-width: 768px) {\n    width: 45%;\n    ", "\n  }\n\n  @media (min-width: 1200px) {\n    width: 30%;\n  }\n"])), function (props) {
+var InvoiceItemContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  margin-top: 15px;\n  padding: 10px;\n  border-radius: 7.6px;\n  width: 100%;\n  transition: all 0.3s;\n\n  &:hover {\n    background: ", ";\n  }\n\n  @media (min-width: 768px) {\n    width: 45%;\n    ", "\n  }\n\n  @media (min-width: 1200px) {\n    width: 30%;\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.lightPrimary;

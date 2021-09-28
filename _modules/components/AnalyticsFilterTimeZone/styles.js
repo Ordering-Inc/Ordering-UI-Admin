@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var AnalyticsTimeZoneContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n"])));
+var AnalyticsTimeZoneContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n\n  > button {\n    background: #F8F9FA;\n    border-radius: 7.6px;\n    padding: 7px 12px;\n    font-size: 14px;\n    color: #748194;\n    border: none;\n  }\n"])));
 
 exports.AnalyticsTimeZoneContainer = AnalyticsTimeZoneContainer;
 
@@ -49,7 +49,7 @@ var TimeZoneListContainer = _styledComponents.default.div(_templateObject9 || (_
 
 exports.TimeZoneListContainer = TimeZoneListContainer;
 
-var TimezoneListItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  padding: 10px 3px;\n  border-bottom: 1px solid #E9ECEF;\n  font-size: 13px;\n  color: ", ";\n  cursor: pointer;\n  transition: all 0.3s;\n  &: hover {\n    background: #E9ECEF;\n  }\n"])), function (props) {
+var TimezoneListItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  padding: 10px 3px;\n  border-bottom: 1px solid #E9ECEF;\n  font-size: 13px;\n  color: ", ";\n  cursor: pointer;\n  transition: all 0.3s;\n  &:hover {\n    background: #E9ECEF;\n  }\n"])), function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.headingColor;

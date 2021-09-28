@@ -39,7 +39,7 @@ var HeaderFilterContainer = _styledComponents.default.div(_templateObject6 || (_
 
 exports.HeaderFilterContainer = HeaderFilterContainer;
 
-var BusinessFilterWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-left: 25px;\n  ", "\n\n  button {\n    background: #F8F9FA;\n    border-radius: 7.6px;\n    padding: 7px 12px;\n    font-size: 14px;\n    color: #748194;\n    border: none;\n  }\n"])), function (props) {
+var BusinessFilterWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-left: 25px;\n  ", "\n\n  > button {\n    background: #F8F9FA;\n    border-radius: 7.6px;\n    padding: 7px 12px;\n    font-size: 14px;\n    color: #748194;\n    border: none;\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    margin-right: 25px;\n    margin-left: 0;\n  "])));
 });
 

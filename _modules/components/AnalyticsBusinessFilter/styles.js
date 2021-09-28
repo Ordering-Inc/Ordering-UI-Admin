@@ -39,6 +39,6 @@ var BusinessName = _styledComponents.default.span(_templateObject3 || (_template
 
 exports.BusinessName = BusinessName;
 
-var FilterBtnWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  justify-content: flex-end;  \n"])));
+var FilterBtnWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  justify-content: flex-end;\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 42px;\n  }\n"])));
 
 exports.FilterBtnWrapper = FilterBtnWrapper;

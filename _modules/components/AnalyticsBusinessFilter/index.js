@@ -72,7 +72,7 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
     return valid;
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.AnalyticsBusinessFilterContainer, null, businessList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsBusinessFilterContainer, null, businessList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterOption, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -95,7 +95,7 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
     }, isCheckEnableSate(business.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name));
-  })), /*#__PURE__*/_react.default.createElement(_styles.FilterBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.FilterBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "7.6px",
     color: "primary",
     disabled: businessList.loading,
