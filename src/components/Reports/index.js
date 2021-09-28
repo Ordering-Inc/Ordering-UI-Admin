@@ -42,6 +42,7 @@ export const Reports = (props) => {
 
   const handleCloseSidebar = () => {
     setIsOpen(false)
+    setSelectedReport(0)
   }
 
   const handleOpenSlider = (index) => {
@@ -74,7 +75,7 @@ export const Reports = (props) => {
               // description={t('DISTANCE_DESC')}
               description={report.description}
               icon={report.icon}
-              // active={isOpenSettingDetails === 'checkout'}
+              active={selectedReport === report.id}
             />
           </div>
         ))}
