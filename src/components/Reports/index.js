@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Reports as ReportsController } from './naked'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { IconButton } from '../../styles/Buttons'
 import {
@@ -26,7 +25,7 @@ import { ReportsDriverSpend } from '../ReportsDriverSpend'
 import { ReportsDriverOrder } from '../ReportsDriverOrder'
 import { ReportsDriverOrderTime } from '../ReportsDriverOrderTime'
 
-const ReportsUI = (props) => {
+export const Reports = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [isOpen, setIsOpen] = useState(false)
@@ -97,12 +96,4 @@ const ReportsUI = (props) => {
       )}
     </ReportsContainer>
   )
-}
-
-export const Reports = (props) => {
-  const reportsProps = {
-    ...props,
-    UIComponent: ReportsUI
-  }
-  return <ReportsController {...reportsProps} />
 }
