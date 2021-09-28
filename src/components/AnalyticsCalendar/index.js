@@ -17,8 +17,8 @@ export const AnalyticsCalendar = (props) => {
   const [, t] = useLanguage()
   const [dateRange, setDateRange] = useState([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: null,
+      endDate: null,
       key: 'selection'
     }
   ])
