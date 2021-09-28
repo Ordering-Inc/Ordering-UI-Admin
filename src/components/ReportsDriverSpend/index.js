@@ -48,7 +48,7 @@ const ReportsDriverSpendUI = (props) => {
       .then(function (dataUrl) {
         const a = document.createElement('a')
         a.href = dataUrl
-        a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
+        a.download = `${t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency')}.png`
         // Trigger the download
         a.click()
       })
@@ -81,7 +81,7 @@ const ReportsDriverSpendUI = (props) => {
         </CalendarWrapper>
       </ButtonActionList>
       <DistancePerBrandWrapper>
-        <DistanceTitleBlock>
+        <DistanceTitleBlock active={orderDistanceList?.distances?.body?.rows?.length > 0}>
           <h2>{t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>

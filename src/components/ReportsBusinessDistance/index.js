@@ -131,7 +131,7 @@ const ReportsBusinessDistanceUI = (props) => {
         </CalendarWrapper>
       </ButtonActionList>
       <DistancePerBrandWrapper>
-        <DistanceTitleBlock>
+        <DistanceTitleBlock active={businessDistanceList?.distances?.body?.rows?.length > 0}>
           <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>

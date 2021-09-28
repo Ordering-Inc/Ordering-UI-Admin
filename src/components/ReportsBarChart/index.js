@@ -78,14 +78,14 @@ export const ReportsBarChart = (props) => {
     if (!barChartRef?.current) return
     const a = document.createElement('a')
     a.href = barChartRef?.current?.toBase64Image()
-    a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
+    a.download = `${title}.png`
     // Trigger the download
     a.click()
   }
 
   return (
     <ReportsBarChartContainer>
-      <TitleBlock>
+      <TitleBlock active={chartData?.datasets?.length > 0}>
         <h2>{title}</h2>
         <Download onClick={() => downloadChart()} />
       </TitleBlock>

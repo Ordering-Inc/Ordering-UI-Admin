@@ -94,6 +94,12 @@ export const DistanceTitleBlock = styled.div`
     color: #212121;
     cursor: pointer;
   }
+
+  ${({ active }) => !active && css`
+    svg {
+      cursor: not-allowed;
+    }
+  `}
 `
 
 export const DistanceTable = styled.table`

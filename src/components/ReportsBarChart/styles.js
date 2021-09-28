@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ReportsBarChartContainer = styled.div``
 
@@ -31,4 +31,10 @@ export const TitleBlock = styled.div`
     color: #212121;
     cursor: pointer;
   }
+
+  ${({ active }) => !active && css`
+    svg {
+      cursor: not-allowed;
+    }
+  `}
 `

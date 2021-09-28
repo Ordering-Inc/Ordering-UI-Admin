@@ -48,7 +48,7 @@ const ReportsDriverOrderTimeUI = (props) => {
       .then(function (dataUrl) {
         const a = document.createElement('a')
         a.href = dataUrl
-        a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
+        a.download = `${t('SERVICE_TIMES', 'Service Times')}.png`
         // Trigger the download
         a.click()
       })
@@ -81,7 +81,7 @@ const ReportsDriverOrderTimeUI = (props) => {
         </CalendarWrapper>
       </ButtonActionList>
       <DistancePerBrandWrapper>
-        <DistanceTitleBlock>
+        <DistanceTitleBlock active={orderDistanceList?.distances?.body?.rows?.length > 0}>
           <h2>{t('SERVICE_TIMES', 'Service Times')}</h2>
           <Download onClick={() => downloadTable()} />
         </DistanceTitleBlock>
