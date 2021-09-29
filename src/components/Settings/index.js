@@ -174,9 +174,8 @@ const SettingsUI = (props) => {
               ))
             ) : (
               categoryList.categories.map((category, i) => (
-                <>
+                <React.Fragment key={i}>
                   <SettingItemWrapper
-                    key={i}
                     className='col-md-4 col-sm-6'
                     onClick={() => handleOpenDescription(category)}
                   >
@@ -200,7 +199,7 @@ const SettingsUI = (props) => {
                       />
                     </SettingItemWrapper>
                   )}
-                </>
+                </React.Fragment>
               ))
             )
           }
