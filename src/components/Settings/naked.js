@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { useSession, useApi } from 'ordering-components-admin'
 
 const categoryHideList = ['cloudinary', 'tookan', 'order_type', 'others']
-const configHideList = ['search_by_address']
+const configHideList = ['search_by_address', 'stripe_connect_sandbox']
 
 /**
  * Component to manage Settings page behavior without UI component

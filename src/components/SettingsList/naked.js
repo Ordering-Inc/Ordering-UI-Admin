@@ -14,7 +14,9 @@ export const SettingsList = (props) => {
     UIComponent,
     category,
     handleUpdateCategoryList,
-    categoryList
+    categoryList,
+    staticConfigs,
+    handleChangeStaic
   } = props
 
   const [configs, setConfigs] = useState(null)
@@ -154,6 +156,7 @@ export const SettingsList = (props) => {
             })
             handleUpdateCategoryList(_categories)
           }
+          handleChangeStaic && handleChangeStaic([..._configs])
         }
       } else {
         setFormState({
@@ -189,6 +192,16 @@ export const SettingsList = (props) => {
       })
     }
   }, [category?.configs])
+
+  useEffect(() => {
+    if (staticConfigs) {
+      setConfigs([...staticConfigs])
+      setFormState({
+        ...formState,
+        finalResult: [...staticConfigs]
+      })
+    }
+  }, [staticConfigs])
 
   useEffect(() => {
     if (formState?.API && formState?.changes?.length > 0) {

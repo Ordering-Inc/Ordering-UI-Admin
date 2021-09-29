@@ -40,3 +40,8 @@ export const HeaderTitleContainer = styled.div`
 export const ContentWrapper = styled.div``
 
 export const SettingItemWrapper = styled.div``
+
+export const SettingsListWrapper = styled.div`
+  padding: 20px;
+  width: 100%;
+`

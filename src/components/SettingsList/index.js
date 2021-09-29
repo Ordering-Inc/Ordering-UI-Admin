@@ -32,6 +32,8 @@ export const SettingsListUI = (props) => {
     handleChangeFormState
   } = props
 
+  console.log(configs)
+
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
