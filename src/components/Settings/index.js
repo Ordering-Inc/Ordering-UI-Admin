@@ -46,12 +46,12 @@ const SettingsUI = (props) => {
 
   const onBasicSettingsRedirect = ({ category }) => {
     if (!category) {
-      if (settingsType === 1) return events.emit('go_to_page', { page: 'basicSettings', replace: true })
-      if (settingsType === 2) return events.emit('go_to_page', { page: 'operationSettings', replace: true })
+      if (settingsType === 'key_basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
+      if (settingsType === 'key_operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
     }
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 1 ? 'basicSettings' : 'operationSettings',
+        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
         search: `?category=${category}`,
         replace: true
       })
@@ -108,12 +108,12 @@ const SettingsUI = (props) => {
           )}
           <h1>
             {
-              settingsType === 1 ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
+              settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
             }
           </h1>
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
-          {settingsType === 1 && (
+          {settingsType === 'key_basic' && (
             <>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
