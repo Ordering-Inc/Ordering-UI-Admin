@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
-export const AnalyticsBusinessFilterContainer = styled.div``
+export const ReportsBrandFilterContainer = styled.div``
 
-export const BusinessFilterOption = styled.div`
+export const BrandFilterOption = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #E9ECEF;
