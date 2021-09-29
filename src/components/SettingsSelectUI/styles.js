@@ -34,6 +34,11 @@ export const SelectContent = styled.div`
       border: 1px solid #DEE2E6;
       font-size: 14px;
     }
+
+    .list {
+      max-height: 300px;
+      overflow: auto;
+    }
   }
 `
 

@@ -5,6 +5,7 @@ import { NotFoundSource } from '../../components/NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 import { Alert } from '../Confirm'
+import { SettingsCountryFilter } from '../SettingsCountryFilter'
 import {
   SettingsListContainer,
   GeneralContainer,
@@ -89,11 +90,19 @@ export const SettingsListUI = (props) => {
                       }
                       {
                         config.type === 2 && (
-                          <SettingsSelectUI
-                            config={config}
-                            defaultValue={config?.value}
-                            handleSelectChange={(value) => handleInputChange(value, config?.id)}
-                          />
+                          config.key === 'country_autocomplete' ? (
+                            <SettingsCountryFilter
+                              defaultValue={config?.value}
+                              handleSelectChange={(value) => handleInputChange(value, config?.id)}
+                              label={config?.name}
+                            />
+                          ) : (
+                            <SettingsSelectUI
+                              config={config}
+                              defaultValue={config?.value}
+                              handleSelectChange={(value) => handleInputChange(value, config?.id)}
+                            />
+                          )
                         )
                       }
                       {
