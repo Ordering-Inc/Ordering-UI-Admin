@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const TimeZoneSelectWrapper = styled.div`
+export const CountrySelectWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
   z-index: 100;
@@ -15,7 +15,7 @@ export const TimeZoneSelectWrapper = styled.div`
     color: ${props => props.theme?.colors.headingColor};
   }
 `
-export const TimeZoneSearchWrapper = styled.div`
+export const CountrySearchWrapper = styled.div`
   position: relative;
 `
 
@@ -38,7 +38,7 @@ export const SearchIconWrapper = styled.div`
   }
 `
 
-export const TimeZoneSearchInput = styled.input`
+export const CountrySearchInput = styled.input`
   border: 1px solid #DEE2E6;
   box-sizing: border-box;
   border-radius: 7.6px;
@@ -52,7 +52,7 @@ export const TimeZoneSearchInput = styled.input`
   `}
 `
 
-export const TimeZoneListContainer = styled.div`
+export const CountryListContainer = styled.div`
   margin-top: 7px;
   max-height: 250px;
   overflow: auto;
@@ -67,7 +67,7 @@ export const TimeZoneListContainer = styled.div`
   box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
 `
 
-export const TimezoneListItem = styled.div`
+export const CountryListItem = styled.div`
   padding: 10px 7px;
   border-bottom: 1px solid ${props => props.theme?.colors.borderColor};
   font-size: 13px;

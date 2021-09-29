@@ -55,8 +55,9 @@ export const FormGroupText = styled.div`
 `
 
 export const FormGroupCheck = styled.div`
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #E9ECEF;
+  margin-bottom: 10px;
 
   input {
     width: 16px;
@@ -74,7 +75,7 @@ export const FormGroupCheck = styled.div`
 `
 
 export const FormGroupWrapper = styled.div`
-  padding-top: 20px;
+  padding-top: 10px;
 `
 
 export const Required = styled.span`
@@ -92,6 +93,8 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const CheckBoxWrapper = styled.div`
+  margin-bottom: 20px;
+
   p {
     font-weight: 600;
     margin: 20px 0 0;

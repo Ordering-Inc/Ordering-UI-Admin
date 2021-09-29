@@ -12,6 +12,7 @@ export const SelectHeader = styled.div`
 
   p {
     font-size: 14px;
+    font-weight: 600;
     color: ${props => props.theme.colors.headingColor};
     margin: 0;
   }

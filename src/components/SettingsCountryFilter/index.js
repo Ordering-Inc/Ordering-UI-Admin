@@ -3,12 +3,12 @@ import { countryList } from '../../config/constants'
 import GoSearch from '@meronex/icons/go/GoSearch'
 import { useLanguage } from 'ordering-components-admin'
 import {
-  TimeZoneSelectWrapper,
-  TimeZoneSearchInput,
-  TimeZoneSearchWrapper,
+  CountrySelectWrapper,
+  CountrySearchInput,
+  CountrySearchWrapper,
   SearchIconWrapper,
-  TimeZoneListContainer,
-  TimezoneListItem
+  CountryListContainer,
+  CountryListItem
 } from './styles'
 
 export const SettingsCountryFilter = (props) => {
@@ -20,8 +20,8 @@ export const SettingsCountryFilter = (props) => {
   const [, t] = useLanguage()
   const [timeZoneList, setTimeZoneList] = useState(countryList)
   const [searchVal, setSearchVal] = useState(defaultValue)
-  const [isShowTimeZone, setIsShowTimeZone] = useState(false)
-  const timeZoneRef = useRef(null)
+  const [isShowCountryList, setIsShowCountryList] = useState(false)
+  const countryRef = useRef(null)
 
   const filterTimeZone = (evt) => {
     const timeZoneToFilter = [...countryList]
@@ -36,52 +36,52 @@ export const SettingsCountryFilter = (props) => {
   }
 
   const handleClickOutside = (e) => {
-    if (!isShowTimeZone) return
-    const outsideTimeZone = !timeZoneRef.current?.contains(e.target)
+    if (!isShowCountryList) return
+    const outsideTimeZone = !countryRef.current?.contains(e.target)
     if (outsideTimeZone) {
-      setIsShowTimeZone(false)
+      setIsShowCountryList(false)
     }
   }
 
   useEffect(() => {
     window.addEventListener('click', handleClickOutside)
     return () => window.removeEventListener('click', handleClickOutside)
-  }, [isShowTimeZone])
+  }, [isShowCountryList])
 
   return (
-    <TimeZoneSelectWrapper>
+    <CountrySelectWrapper>
       {label && (
         <p>{label}</p>
       )}
-      <TimeZoneSearchWrapper ref={timeZoneRef}>
-        <TimeZoneSearchInput
+      <CountrySearchWrapper ref={countryRef}>
+        <CountrySearchInput
           type='text'
-          placeholder={t('TIMEZONE', 'Timezone')}
+          placeholder={t('SELECT_A_OPTION', 'Select a option')}
           value={searchVal}
           onChange={filterTimeZone}
-          onClick={() => setIsShowTimeZone(true)}
+          onClick={() => setIsShowCountryList(true)}
         />
         <SearchIconWrapper>
           <GoSearch />
         </SearchIconWrapper>
-      </TimeZoneSearchWrapper>
+      </CountrySearchWrapper>
       {
-        isShowTimeZone && (
-          <TimeZoneListContainer>
+        isShowCountryList && (
+          <CountryListContainer>
             {
               timeZoneList && timeZoneList?.map((timezone, i) => (
-                <TimezoneListItem
+                <CountryListItem
                   key={i}
                   onClick={() => handleChangeTimeZone(timezone.code.toLocaleLowerCase())}
                   active={timezone.code.toLocaleLowerCase() === searchVal}
                 >
                   {timezone.name} ({timezone.code})
-                </TimezoneListItem>
+                </CountryListItem>
               ))
             }
-          </TimeZoneListContainer>
+          </CountryListContainer>
         )
       }
-    </TimeZoneSelectWrapper>
+    </CountrySelectWrapper>
   )
 }
