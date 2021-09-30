@@ -36,7 +36,7 @@ var IconWrapper = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.IconWrapper = IconWrapper;
 
-var SettingItemContent = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral([""])));
+var SettingItemContent = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 
 exports.SettingItemContent = SettingItemContent;
 

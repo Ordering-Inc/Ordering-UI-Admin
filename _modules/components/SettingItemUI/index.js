@@ -25,7 +25,7 @@ var SettingItemUI = function SettingItemUI(props) {
     width: 24,
     height: 24
   }) : icon), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null) : /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, title)), isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 50
+    height: 35
   }) : /*#__PURE__*/_react.default.createElement(_styles.SettingItemDescription, null, description)));
 };
 
