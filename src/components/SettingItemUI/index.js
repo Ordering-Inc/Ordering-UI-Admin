@@ -39,7 +39,7 @@ export const SettingItemUI = (props) => {
         }
         {
           isSkeleton
-            ? <Skeleton height={50} />
+            ? <Skeleton height={35} />
             : (
               <SettingItemDescription>{description}</SettingItemDescription>
             )

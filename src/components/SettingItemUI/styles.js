@@ -52,7 +52,9 @@ export const IconWrapper = styled.div`
   }
 `
 
-export const SettingItemContent = styled.div``
+export const SettingItemContent = styled.div`
+  width: 100%;
+`
 
 export const TitleContainer = styled.div`
   display: flex;

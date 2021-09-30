@@ -12,6 +12,7 @@ export const SelectHeader = styled.div`
 
   p {
     font-size: 14px;
+    font-weight: 600;
     color: ${props => props.theme.colors.headingColor};
     margin: 0;
   }
@@ -33,6 +34,11 @@ export const SelectContent = styled.div`
       border-radius: 7.6px;
       border: 1px solid #DEE2E6;
       font-size: 14px;
+    }
+
+    .list {
+      max-height: 300px;
+      overflow: auto;
     }
   }
 `
