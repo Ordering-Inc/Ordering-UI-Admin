@@ -30,6 +30,7 @@ export const BarContainer = styled.div`
 
   > button {
     position: absolute;
+    z-index: 10;
     top: 20px;
     ${props => props.theme?.rtl ? css`
       left: ${({ moveDistance }) => moveDistance ? `${moveDistance + 20}px` : '20px'};
