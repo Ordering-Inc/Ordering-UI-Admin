@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { SettingsList as SettingsListController } from './naked'
+import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../../components/NotFoundSource'
 import { Button } from '../../styles/Buttons'

@@ -2,9 +2,7 @@ import styled from 'styled-components'
 
 export const SettingsListContainer = styled.div``
 
-export const GeneralContainer = styled.div`
-  margin-top: 53px;
-`
+export const GeneralContainer = styled.div``
 
 export const GeneralTitle = styled.div`
   display: flex;

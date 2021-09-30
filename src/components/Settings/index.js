@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, useConfig } from 'ordering-components-admin'
-import { Settings as SettingsController } from './naked'
+import { useLanguage, useEvent, useConfig, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
 import { List as MenuIcon, Gear, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
