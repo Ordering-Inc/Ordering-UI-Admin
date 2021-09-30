@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { SettingsList as SettingsListController } from '../SettingsList/naked'
+import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { Button } from '../../styles/Buttons'
