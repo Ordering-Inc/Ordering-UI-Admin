@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SettingItemWrapper = exports.ContentWrapper = exports.HeaderTitleContainer = exports.BasicSettingsContainer = void 0;
+exports.SettingsListWrapper = exports.SettingItemWrapper = exports.ContentWrapper = exports.HeaderTitleContainer = exports.BasicSettingsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -38,3 +38,7 @@ exports.ContentWrapper = ContentWrapper;
 var SettingItemWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral([""])));
 
 exports.SettingItemWrapper = SettingItemWrapper;
+
+var SettingsListWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding: 20px;\n  width: 100%;\n"])));
+
+exports.SettingsListWrapper = SettingsListWrapper;

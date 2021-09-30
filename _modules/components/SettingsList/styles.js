@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CheckBoxWrapper = exports.SkeletonWrapper = exports.Required = exports.FormGroupWrapper = exports.FormGroupCheck = exports.FormGroupText = exports.OptionsError = exports.FormContainer = exports.GeneralTitle = exports.GeneralContainer = exports.SettingsListContainer = void 0;
+exports.SubmitBtnWrapper = exports.CheckBoxWrapper = exports.SkeletonWrapper = exports.Required = exports.FormGroupWrapper = exports.FormGroupCheck = exports.FormGroupText = exports.OptionsError = exports.FormContainer = exports.GeneralTitle = exports.GeneralContainer = exports.SettingsListContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17,7 +17,7 @@ var SettingsListContainer = _styledComponents.default.div(_templateObject || (_t
 
 exports.SettingsListContainer = SettingsListContainer;
 
-var GeneralContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin-top: 53px;\n"])));
+var GeneralContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral([""])));
 
 exports.GeneralContainer = GeneralContainer;
 
@@ -27,9 +27,7 @@ var GeneralTitle = _styledComponents.default.div(_templateObject3 || (_templateO
 
 exports.GeneralTitle = GeneralTitle;
 
-var FormContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n\n  button {\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px 0;\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
-});
+var FormContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n"])));
 
 exports.FormContainer = FormContainer;
 
@@ -43,13 +41,13 @@ var FormGroupText = _styledComponents.default.div(_templateObject6 || (_template
 
 exports.FormGroupText = FormGroupText;
 
-var FormGroupCheck = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding-bottom: 20px;\n  border-bottom: 1px solid #E9ECEF;\n\n  input {\n    width: 16px;\n    height: 16px;\n    box-sizing: border-box;\n    border-radius: 2px;\n    margin-right: 10px;\n  }\n  label {\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    color: ", ";\n  }\n"])), function (props) {
+var FormGroupCheck = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding-bottom: 10px;\n  border-bottom: 1px solid #E9ECEF;\n  margin-bottom: 10px;\n\n  input {\n    width: 16px;\n    height: 16px;\n    box-sizing: border-box;\n    border-radius: 2px;\n    margin-right: 10px;\n  }\n  label {\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.FormGroupCheck = FormGroupCheck;
 
-var FormGroupWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding-top: 20px;\n"])));
+var FormGroupWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding-top: 10px;\n"])));
 
 exports.FormGroupWrapper = FormGroupWrapper;
 
@@ -61,8 +59,14 @@ var SkeletonWrapper = _styledComponents.default.div(_templateObject10 || (_templ
 
 exports.SkeletonWrapper = SkeletonWrapper;
 
-var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  p {\n    font-weight: 600;\n    margin: 20px 0 0;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  p {\n    font-weight: 600;\n    margin: 20px 0 0;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.CheckBoxWrapper = CheckBoxWrapper;
+
+var SubmitBtnWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n\n  button {\n    height: 44px;\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px 0;\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.SubmitBtnWrapper = SubmitBtnWrapper;

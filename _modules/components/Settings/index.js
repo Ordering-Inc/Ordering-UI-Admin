@@ -31,17 +31,13 @@ var _AddressFieldsSetting = require("../AddressFieldsSetting");
 
 var _LanguageSetting = require("../LanguageSetting");
 
+var _SettingsList = require("../SettingsList");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -52,6 +48,12 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -74,6 +76,10 @@ var SettingsUI = function SettingsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
@@ -93,6 +99,11 @@ var SettingsUI = function SettingsUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       isOpenSettingDetails = _useState6[0],
       setIsOpenSettingDetails = _useState6[1];
+
+  var _useState7 = (0, _react.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      stripeConnectConfigs = _useState8[0],
+      setStripeConnectConfigs = _useState8[1];
 
   var _useLocation = (0, _reactRouterDom.useLocation)(),
       search = _useLocation.search;
@@ -114,11 +125,11 @@ var SettingsUI = function SettingsUI(props) {
     var category = _ref.category;
 
     if (!category) {
-      if (settingsType === 1) return events.emit('go_to_page', {
+      if (settingsType === 'key_basic') return events.emit('go_to_page', {
         page: 'basicSettings',
         replace: true
       });
-      if (settingsType === 2) return events.emit('go_to_page', {
+      if (settingsType === 'key_operation') return events.emit('go_to_page', {
         page: 'operationSettings',
         replace: true
       });
@@ -126,7 +137,7 @@ var SettingsUI = function SettingsUI(props) {
 
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 1 ? 'basicSettings' : 'operationSettings',
+        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
         search: "?category=".concat(category),
         replace: true
       });
@@ -177,14 +188,24 @@ var SettingsUI = function SettingsUI(props) {
       setSelectedCategory(categorySelected);
     }
   }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]);
+  (0, _react.useEffect)(function () {
+    if (Object.keys(configs).length > 0) {
+      var _configs = [configs === null || configs === void 0 ? void 0 : configs.stripe_connect_sandbox, _objectSpread(_objectSpread({}, configs === null || configs === void 0 ? void 0 : configs.stripe_connect_client_id), {}, {
+        name: t('CLIENT_ID_SANDBOX')
+      }), _objectSpread(_objectSpread({}, configs === null || configs === void 0 ? void 0 : configs.stripe_connect_client_id_sandbox), {}, {
+        name: t('CLIENT_ID_PRODUCTION')
+      })];
+      setStripeConnectConfigs([].concat(_configs));
+    }
+  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 1 ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     className: "row"
-  }, settingsType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
+  }, settingsType === 'key_basic' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
       return handleOpenSettingDetails('language');
@@ -222,8 +243,9 @@ var SettingsUI = function SettingsUI(props) {
       isSkeleton: true
     }));
   }) : categoryList.categories.map(function (category, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
-      key: i,
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
       onClick: function onClick() {
         return handleOpenDescription(category);
@@ -235,7 +257,17 @@ var SettingsUI = function SettingsUI(props) {
         src: category === null || category === void 0 ? void 0 : category.image
       }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null),
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
-    }));
+    })), category.key === 'stripe' && /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
+      className: "col-md-4 col-sm-6",
+      onClick: function onClick() {
+        return handleOpenSettingDetails('stripe_connect');
+      }
+    }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+      title: t('STRIPE_CONNECT_SETTINGS', 'Stripe connect settings'),
+      description: t('STRIPE_CONNECT_SETTINGS_DESC'),
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null),
+      active: isOpenSettingDetails === 'stripe_connect'
+    })));
   }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
     open: isOpenDescription,
     category: selectedCategory,
@@ -248,7 +280,10 @@ var SettingsUI = function SettingsUI(props) {
     onClose: function onClose() {
       return setIsOpenSettingDetails(null);
     }
-  }, isOpenSettingDetails === 'checkout' && /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));
+  }, isOpenSettingDetails === 'checkout' && /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null), isOpenSettingDetails === 'stripe_connect' && stripeConnectConfigs.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.SettingsListWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, {
+    staticConfigs: stripeConnectConfigs,
+    handleChangeStaic: setStripeConnectConfigs
+  }))));
 };
 
 var Settings = function Settings(props) {

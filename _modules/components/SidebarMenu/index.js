@@ -182,6 +182,11 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('INVOICE_MANAGER', 'Invoice manager'),
     pageName: 'invoice',
     url: '/intelligence/invoice'
+  }, {
+    id: 5,
+    title: t('ADVANCED_REPORTS', 'Advanced Reports'),
+    pageName: 'reports',
+    url: '/intelligence/reports'
   }];
   var deliverySubmenus = [{
     id: 1,

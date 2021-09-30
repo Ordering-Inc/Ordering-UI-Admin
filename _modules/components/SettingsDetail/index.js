@@ -31,6 +31,10 @@ var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRig
 
 var _styles = require("./styles");
 
+var _EmailSetting = require("../EmailSetting");
+
+var _NotificationSetting = require("../NotificationSetting");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -215,7 +219,13 @@ var SettingsDetail = function SettingsDetail(props) {
   })))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: onCloseSettingsList
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, _extends({}, props, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, (category === null || category === void 0 ? void 0 : category.key) === 'email_configs' && /*#__PURE__*/_react.default.createElement(_EmailSetting.EmailSetting, _extends({}, props, {
+    category: category,
+    onCloseSettingsList: onCloseSettingsList
+  })), (category === null || category === void 0 ? void 0 : category.key) === 'notification' && /*#__PURE__*/_react.default.createElement(_NotificationSetting.NotificationSetting, _extends({}, props, {
+    category: category,
+    onCloseSettingsList: onCloseSettingsList
+  })), (category === null || category === void 0 ? void 0 : category.key) !== 'email_configs' && (category === null || category === void 0 ? void 0 : category.key) !== 'notification' && /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, _extends({}, props, {
     category: category,
     onCloseSettingsList: onCloseSettingsList
   })))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
