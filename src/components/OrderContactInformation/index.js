@@ -46,6 +46,7 @@ export const OrderContactInformation = (props) => {
               </IconButton>
             )}
           </div>
+          <p>{order?.business?.phone || order?.business?.cellphone}</p>
           <p>{order?.business?.address}</p>
         </InfoContent>
       </BusinessInfo>
