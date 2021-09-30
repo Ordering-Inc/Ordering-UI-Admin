@@ -227,7 +227,7 @@ export const SettingsDetail = (props) => {
                     onCloseSettingsList={onCloseSettingsList}
                   />
                 )}
-                {(category?.key === 'email_configs' && category?.key === 'notification') && (
+                {(category?.key !== 'email_configs' && category?.key !== 'notification') && (
                   <SettingsList
                     {...props}
                     category={category}

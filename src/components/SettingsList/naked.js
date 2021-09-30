@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes, { string } from 'prop-types'
+import PropTypes, { object, string } from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useToast, ToastType } from '../../contexts/ToastContext'
@@ -238,6 +238,10 @@ SettingsList.propTypes = {
   */
   category: PropTypes.object,
   /**
+   * Array of config
+   */
+  staticConfigs: PropTypes.arrayOf(object),
+  /**
   * Object for a category
   */
   categoryList: PropTypes.object,
@@ -245,6 +249,10 @@ SettingsList.propTypes = {
   * Function to set a category list
   */
   handleUpdateCategoryList: PropTypes.func,
+  /**
+   * Function to set a config
+   */
+  handleChangeStaic: PropTypes.func,
   /**
    * Array of drivers props to fetch
    */
