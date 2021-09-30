@@ -6,6 +6,7 @@ export const OrdersContainer = styled.div`
   overflow: auto;
 
   @media (min-width: 768px) {
+    min-height: 350px;
     max-height: calc(100vh - 385px);
   }
 

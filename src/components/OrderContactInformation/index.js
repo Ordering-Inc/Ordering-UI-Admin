@@ -14,7 +14,9 @@ import {
   CustomerInfo,
   DriverInfoContainer,
   DriverInfo,
-  DriverSelectorContainer
+  DriverSelectorContainer,
+  CutsomerDetail,
+  CustomerInfoTable
 } from './styles'
 
 export const OrderContactInformation = (props) => {
@@ -22,6 +24,8 @@ export const OrderContactInformation = (props) => {
     order,
     driversList
   } = props
+
+  console.log(order?.customer)
 
   const [, t] = useLanguage()
 
@@ -71,6 +75,42 @@ export const OrderContactInformation = (props) => {
           <p>{order?.customer?.cellphone}</p>
         </InfoContent>
       </CustomerInfo>
+      <CutsomerDetail>
+        <CustomerInfoTable>
+          <tbody>
+            {order?.customer?.email && (
+              <tr>
+                <td>{t('EMAIL', 'Email')}</td>
+                <td>{order?.customer?.email}</td>
+              </tr>
+            )}
+            {order?.customer?.address && (
+              <tr>
+                <td>{t('FULL_ADDRESS', 'Full address')}</td>
+                <td>{order?.customer?.address}</td>
+              </tr>
+            )}
+            {order?.customer?.internal_number && (
+              <tr>
+                <td>{t('INTERNAL_NUMBER', 'Internal number')}</td>
+                <td>{order?.customer?.internal_number}</td>
+              </tr>
+            )}
+            {order?.customer?.address_notes && (
+              <tr>
+                <td>{t('NOTES', 'Notes')}</td>
+                <td>{order?.customer?.address_notes}</td>
+              </tr>
+            )}
+            {order?.customer?.zipcode && (
+              <tr>
+                <td>{t('ZIPCODE', 'Zipcode')}</td>
+                <td>{order?.customer?.zipcode}</td>
+              </tr>
+            )}
+          </tbody>
+        </CustomerInfoTable>
+      </CutsomerDetail>
       {order?.delivery_type === 1 && (
         <DriverInfoContainer>
           <DriverInfo>

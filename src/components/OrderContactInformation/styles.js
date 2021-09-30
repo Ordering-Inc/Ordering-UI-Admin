@@ -92,7 +92,9 @@ export const InfoContent = styled.div`
   `}
 `
 
-export const CustomerInfo = styled(BusinessInfo)``
+export const CustomerInfo = styled(BusinessInfo)`
+  border: none;
+`
 
 export const DriverInfoContainer = styled.div`
   display: flex;
@@ -112,6 +114,28 @@ export const DriverSelectorContainer = styled.div`
     > div {
       background-color: ${props => props.theme.colors?.secundary};
       > div:first-child {
+        color: ${props => props.theme.colors?.headingColor};
+      }
+    }
+  }
+`
+export const CutsomerDetail = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors?.secundary};
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+`
+
+export const CustomerInfoTable = styled.table`
+  width: 100%;
+
+  tr {
+    td {
+      color: ${props => props.theme.colors?.lightGray};
+      font-size: 12px;
+      margin: 0px;
+
+      &:first-child {
         color: ${props => props.theme.colors?.headingColor};
       }
     }
