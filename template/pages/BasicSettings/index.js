@@ -5,7 +5,7 @@ import { Settings as SettingsController } from '../../../src/components/Settings
 export const BasicSettings = (props) => {
   const basicSettingsProps = {
     ...props,
-    settingsType: 1
+    settingsType: 'key_basic'
   }
   return (
     <>

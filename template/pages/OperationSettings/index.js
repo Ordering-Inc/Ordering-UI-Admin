@@ -5,7 +5,7 @@ import { Settings as SettingsController } from '../../../src/components/Settings
 export const OperationSettings = (props) => {
   const operationSettingsProps = {
     ...props,
-    settingsType: 2
+    settingsType: 'key_operation'
   }
 
   return (

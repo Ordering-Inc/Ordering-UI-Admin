@@ -2,9 +2,7 @@ import styled from 'styled-components'
 
 export const SettingsListContainer = styled.div``
 
-export const GeneralContainer = styled.div`
-  margin-top: 53px;
-`
+export const GeneralContainer = styled.div``
 
 export const GeneralTitle = styled.div`
   display: flex;
@@ -20,14 +18,6 @@ export const GeneralTitle = styled.div`
 
 export const FormContainer = styled.div`
   margin-top: 20px;
-
-  button {
-    background: ${props => props.theme.colors.primary};
-    color: white;
-    border-radius: 8px;
-    font-size: 14px;
-    margin: 20px 0;
-  }
 `
 
 export const OptionsError = styled.span`
@@ -55,8 +45,9 @@ export const FormGroupText = styled.div`
 `
 
 export const FormGroupCheck = styled.div`
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #E9ECEF;
+  margin-bottom: 10px;
 
   input {
     width: 16px;
@@ -74,7 +65,7 @@ export const FormGroupCheck = styled.div`
 `
 
 export const FormGroupWrapper = styled.div`
-  padding-top: 20px;
+  padding-top: 10px;
 `
 
 export const Required = styled.span`
@@ -92,10 +83,26 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const CheckBoxWrapper = styled.div`
+  margin-bottom: 20px;
+
   p {
     font-weight: 600;
     margin: 20px 0 0;
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
+  }
+`
+
+export const SubmitBtnWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    height: 44px;
+    background: ${props => props.theme.colors.primary};
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 20px 0;
   }
 `
