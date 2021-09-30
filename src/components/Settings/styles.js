@@ -42,6 +42,6 @@ export const ContentWrapper = styled.div``
 export const SettingItemWrapper = styled.div``
 
 export const SettingsListWrapper = styled.div`
-  padding: 20px;
+  padding: 25px;
   width: 100%;
 `
