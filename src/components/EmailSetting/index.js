@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingsList as SettingsListController } from '../SettingsList/naked'
 import { SettingsSelectUI } from '../SettingsSelectUI'
-import Accordion from 'react-bootstrap/Accordion'
+import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { Button } from '../../styles/Buttons'
 import { Alert } from '../Confirm'
-import { EmailSettingsContainer, AccordionTitle, GeneralWrapper } from './styles'
+import { EmailSettingsContainer, AccordionTitle, GeneralWrapper, ToggleItemWrapper } from './styles'
 import {
   FormGroupText,
   CheckBoxWrapper,
@@ -84,9 +84,9 @@ const EmailSettingUI = (props) => {
           <p>{t('All_SETTINGS', 'All Settings')}</p>
         </GeneralTitle>
         <Accordion>
-          <Accordion.Toggle eventKey='0' as='div'>
+          <ContextAwareToggle eventKey='0'>
             <AccordionTitle>{t('GENERAL', 'General')}</AccordionTitle>
-          </Accordion.Toggle>
+          </ContextAwareToggle>
           <Accordion.Collapse eventKey='0'>
             <GeneralWrapper>
               {
@@ -120,9 +120,9 @@ const EmailSettingUI = (props) => {
               }
             </GeneralWrapper>
           </Accordion.Collapse>
-          <Accordion.Toggle eventKey='1' as='div'>
+          <ContextAwareToggle eventKey='1'>
             <AccordionTitle>{t('ADMINISTRATOR', 'Administrator')}</AccordionTitle>
-          </Accordion.Toggle>
+          </ContextAwareToggle>
           <Accordion.Collapse eventKey='1'>
             <CheckBoxWrapper>
               {
@@ -148,9 +148,9 @@ const EmailSettingUI = (props) => {
               }
             </CheckBoxWrapper>
           </Accordion.Collapse>
-          <Accordion.Toggle eventKey='2' as='div'>
+          <ContextAwareToggle eventKey='2'>
             <AccordionTitle>{t('BUSINESS', 'Business')}</AccordionTitle>
-          </Accordion.Toggle>
+          </ContextAwareToggle>
           <Accordion.Collapse eventKey='2'>
             <CheckBoxWrapper>
               {
@@ -176,9 +176,9 @@ const EmailSettingUI = (props) => {
               }
             </CheckBoxWrapper>
           </Accordion.Collapse>
-          <Accordion.Toggle eventKey='3' as='div'>
+          <ContextAwareToggle eventKey='3' as='div'>
             <AccordionTitle>{t('CUSTOMER', 'Customer')}</AccordionTitle>
-          </Accordion.Toggle>
+          </ContextAwareToggle>
           <Accordion.Collapse eventKey='3'>
             <CheckBoxWrapper>
               {
@@ -204,9 +204,9 @@ const EmailSettingUI = (props) => {
               }
             </CheckBoxWrapper>
           </Accordion.Collapse>
-          <Accordion.Toggle eventKey='4' as='div'>
+          <ContextAwareToggle eventKey='4' as='div'>
             <AccordionTitle>{t('CITY_MANAGER', 'City manager')}</AccordionTitle>
-          </Accordion.Toggle>
+          </ContextAwareToggle>
           <Accordion.Collapse eventKey='4'>
             <CheckBoxWrapper>
               {
@@ -260,4 +260,25 @@ export const EmailSetting = (props) => {
     UIComponent: EmailSettingUI
   }
   return <SettingsListController {...emailSettingProps} />
+}
+
+const ContextAwareToggle = ({ children, eventKey, callback }) => {
+  const currentEventKey = useContext(AccordionContext)
+  const decoratedOnClick = useAccordionToggle(
+    eventKey,
+    () => callback && callback(eventKey)
+  )
+  const isCurrentEventKey = currentEventKey === eventKey
+
+  const handleButtonClick = () => {
+    decoratedOnClick()
+  }
+  return (
+    <ToggleItemWrapper
+      active={isCurrentEventKey}
+      onClick={handleButtonClick}
+    >
+      {children}
+    </ToggleItemWrapper>
+  )
 }
