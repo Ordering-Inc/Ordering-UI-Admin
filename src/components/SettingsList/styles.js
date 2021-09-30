@@ -102,3 +102,12 @@ export const CheckBoxWrapper = styled.div`
     color: ${props => props.theme.colors.headingColor};
   }
 `
+
+export const SubmitBtnWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    height: 44px;
+  }
+`

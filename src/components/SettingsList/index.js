@@ -17,7 +17,8 @@ import {
   FormGroupWrapper,
   SkeletonWrapper,
   CheckBoxWrapper,
-  OptionsError
+  OptionsError,
+  SubmitBtnWrapper
 } from './styles'
 
 export const SettingsListUI = (props) => {
@@ -220,7 +221,9 @@ export const SettingsListUI = (props) => {
                 }
                 {
                   settingsState?.changes?.length > 0 && (
-                    <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
+                    <SubmitBtnWrapper>
+                      <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
+                    </SubmitBtnWrapper>
                   )
                 }
               </FormContainer>
