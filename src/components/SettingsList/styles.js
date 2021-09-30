@@ -20,14 +20,6 @@ export const GeneralTitle = styled.div`
 
 export const FormContainer = styled.div`
   margin-top: 20px;
-
-  button {
-    background: ${props => props.theme.colors.primary};
-    color: white;
-    border-radius: 8px;
-    font-size: 14px;
-    margin: 20px 0;
-  }
 `
 
 export const OptionsError = styled.span`
@@ -109,5 +101,10 @@ export const SubmitBtnWrapper = styled.div`
 
   button {
     height: 44px;
+    background: ${props => props.theme.colors.primary};
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 20px 0;
   }
 `

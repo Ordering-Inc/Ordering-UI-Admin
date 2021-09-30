@@ -26,6 +26,7 @@ import {
   SubCategoryWrapper,
   SkeletonWrapper
 } from './styles'
+import { EmailSetting } from '../EmailSetting'
 
 export const SettingsDetail = (props) => {
   const {
@@ -211,11 +212,19 @@ export const SettingsDetail = (props) => {
                 <XLg />
               </IconButton>
               <SubCategoryWrapper>
-                <SettingsList
-                  {...props}
-                  category={category}
-                  onCloseSettingsList={onCloseSettingsList}
-                />
+                {(category?.key === 'email_configs') ? (
+                  <EmailSetting
+                    {...props}
+                    category={category}
+                    onCloseSettingsList={onCloseSettingsList}
+                  />
+                ) : (
+                  <SettingsList
+                    {...props}
+                    category={category}
+                    onCloseSettingsList={onCloseSettingsList}
+                  />
+                )}
               </SubCategoryWrapper>
             </CategoryDescriptionExtraContent>
           ) : (
