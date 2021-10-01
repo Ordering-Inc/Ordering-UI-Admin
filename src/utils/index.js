@@ -184,3 +184,17 @@ export const getSeconds = (seconds) => {
   const remain = seconds - Math.floor(seconds / 3600) * 3600
   return Math.floor(remain - Math.floor(remain / 60) * 60)
 }
+
+/**
+ * Function to check if a number is decimal or not
+ * @param {*} value number to check if decimal or not
+ * @param {*} parser function fallback when is decimal
+ * @returns string
+ */
+export const verifyDecimals = (value, parser) => {
+  if (value % 1 === 0) {
+    return value
+  } else {
+    return parser(value)
+  }
+}

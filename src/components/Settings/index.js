@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
+import { useLanguage, useEvent, useConfig, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
 import { List as MenuIcon, Gear, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
@@ -10,12 +10,14 @@ import { SideBar } from '../SideBar'
 import { CheckoutFieldsSetting } from '../CheckoutFieldsSetting'
 import { AddressFieldsSetting } from '../AddressFieldsSetting'
 import { LanguageSetting } from '../LanguageSetting'
+import { SettingsList } from '../SettingsList'
 
 import {
   BasicSettingsContainer,
   HeaderTitleContainer,
   ContentWrapper,
-  SettingItemWrapper
+  SettingItemWrapper,
+  SettingsListWrapper
 } from './styles'
 
 const SettingsUI = (props) => {
@@ -26,11 +28,13 @@ const SettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
+  const [stripeConnectConfigs, setStripeConnectConfigs] = useState([])
   const { search } = useLocation()
 
   let category
@@ -45,12 +49,12 @@ const SettingsUI = (props) => {
 
   const onBasicSettingsRedirect = ({ category }) => {
     if (!category) {
-      if (settingsType === 'basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
-      if (settingsType === 'operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
+      if (settingsType === 'key_basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
+      if (settingsType === 'key_operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
     }
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 'basic' ? 'basicSettings' : 'operationSettings',
+        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
         search: `?category=${category}`,
         replace: true
       })
@@ -93,6 +97,17 @@ const SettingsUI = (props) => {
     }
   }, [categoryList?.categories])
 
+  useEffect(() => {
+    if (Object.keys(configs).length > 0) {
+      const _configs = [
+        configs?.stripe_connect_sandbox,
+        { ...configs?.stripe_connect_client_id, name: t('CLIENT_ID_SANDBOX') },
+        { ...configs?.stripe_connect_client_id_sandbox, name: t('CLIENT_ID_PRODUCTION') }
+      ]
+      setStripeConnectConfigs([..._configs])
+    }
+  }, [configs])
+
   return (
     <>
       <BasicSettingsContainer>
@@ -107,12 +122,12 @@ const SettingsUI = (props) => {
           )}
           <h1>
             {
-              settingsType === 'basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
+              settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
             }
           </h1>
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
-          {settingsType === 'basic' && (
+          {settingsType === 'key_basic' && (
             <>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
@@ -158,18 +173,32 @@ const SettingsUI = (props) => {
               ))
             ) : (
               categoryList.categories.map((category, i) => (
-                <SettingItemWrapper
-                  key={i}
-                  className='col-md-4 col-sm-6'
-                  onClick={() => handleOpenDescription(category)}
-                >
-                  <SettingItemUI
-                    title={category?.name}
-                    description={category?.description}
-                    icon={category?.image ? <img src={category?.image} /> : <Gear />}
-                    active={selectedCategory?.id === category?.id}
-                  />
-                </SettingItemWrapper>
+                <React.Fragment key={i}>
+                  <SettingItemWrapper
+                    className='col-md-4 col-sm-6'
+                    onClick={() => handleOpenDescription(category)}
+                  >
+                    <SettingItemUI
+                      title={category?.name}
+                      description={category?.description}
+                      icon={category?.image ? <img src={category?.image} /> : <Gear />}
+                      active={selectedCategory?.id === category?.id}
+                    />
+                  </SettingItemWrapper>
+                  {category.key === 'stripe' && (
+                    <SettingItemWrapper
+                      className='col-md-4 col-sm-6'
+                      onClick={() => handleOpenSettingDetails('stripe_connect')}
+                    >
+                      <SettingItemUI
+                        title={t('STRIPE_CONNECT_SETTINGS', 'Stripe connect settings')}
+                        description={t('STRIPE_CONNECT_SETTINGS_DESC')}
+                        icon={<Gear />}
+                        active={isOpenSettingDetails === 'stripe_connect'}
+                      />
+                    </SettingItemWrapper>
+                  )}
+                </React.Fragment>
               ))
             )
           }
@@ -202,6 +231,11 @@ const SettingsUI = (props) => {
             )}
             {isOpenSettingDetails === 'language' && (
               <LanguageSetting />
+            )}
+            {isOpenSettingDetails === 'stripe_connect' && stripeConnectConfigs.length > 0 && (
+              <SettingsListWrapper>
+                <SettingsList staticConfigs={stripeConnectConfigs} handleChangeStaic={setStripeConnectConfigs} />
+              </SettingsListWrapper>
             )}
           </SideBar>
         )

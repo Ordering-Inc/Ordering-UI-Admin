@@ -11,7 +11,7 @@ export const BusinessListContainer = styled.div`
 
 export const BusinessListTable = styled.table`
   width: calc(100% - 10px);
-  min-width: 900px;
+  min-width: 950px;
   color: ${props => props.theme.colors?.headingColor};
   transition: all 0.3s;
 
@@ -26,7 +26,12 @@ export const BusinessListTable = styled.table`
 
   th.business,
   td.business {
-    width: 30%;
+    width: 25%;
+  }
+
+  td.business-id {
+    font-size: 13px;
+    font-weight: 500;
   }
 
   thead {

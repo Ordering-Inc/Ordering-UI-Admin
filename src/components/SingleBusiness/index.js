@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components'
 import { convertHoursToMinutes } from '../../utils'
 import { Switch } from '../../styles/Switch'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import { StarFill, ThreeDotsVertical } from 'react-bootstrap-icons'
 
 import {
   SingleBusinessContainer,
@@ -19,7 +19,8 @@ import {
   BusinessLogo,
   BusinessContent,
   BusinessActionContainer,
-  WrapperBusinessActionSelector
+  WrapperBusinessActionSelector,
+  BusinessHeaderContent
 } from './styles'
 
 const SingleBusinessUI = (props) => {
@@ -52,6 +53,11 @@ const SingleBusinessUI = (props) => {
           {(businessState?.loading || isSkeleton) ? (
             <SingleBusinessContainer>
               <tr>
+                {allowColumns?.id && (
+                  <td className='business-id'>
+                    <Skeleton width={30} />
+                  </td>
+                )}
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
@@ -65,29 +71,52 @@ const SingleBusinessUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {(allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime) && (
+                {(allowColumns?.minimum || allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime || allowColumns?.featured || allowColumns?.ratings) && (
                   <>
+                    <td>
+                      {allowColumns?.minimum && (
+                        <InfoBlock>
+                          <p className='bold'><Skeleton width={80} /></p>
+                          <p><Skeleton width={60} /></p>
+                        </InfoBlock>
+                      )}
+                    </td>
                     <td>
                       {allowColumns?.deliveryFee && (
                         <InfoBlock>
-                          <p className='bold'><Skeleton width={120} /></p>
-                          <p><Skeleton width={80} /></p>
+                          <p className='bold'><Skeleton width={80} /></p>
+                          <p><Skeleton width={60} /></p>
                         </InfoBlock>
                       )}
                     </td>
                     <td>
                       {allowColumns?.distance && (
                         <InfoBlock>
-                          <p className='bold'><Skeleton width={120} /></p>
-                          <p><Skeleton width={80} /></p>
+                          <p className='bold'><Skeleton width={80} /></p>
+                          <p><Skeleton width={60} /></p>
                         </InfoBlock>
                       )}
                     </td>
                     <td>
                       {allowColumns?.deliveryTime && (
                         <InfoBlock>
-                          <p className='bold'><Skeleton width={120} /></p>
-                          <p><Skeleton width={80} /></p>
+                          <p className='bold'><Skeleton width={80} /></p>
+                          <p><Skeleton width={60} /></p>
+                        </InfoBlock>
+                      )}
+                    </td>
+                    <td>
+                      {allowColumns?.featured && (
+                        <InfoBlock>
+                          <p className='bold'><Skeleton width={60} /></p>
+                        </InfoBlock>
+                      )}
+                    </td>
+                    <td>
+                      {allowColumns?.ratings && (
+                        <InfoBlock>
+                          <p className='bold'><Skeleton width={30} /></p>
+                          <p><Skeleton width={50} /></p>
                         </InfoBlock>
                       )}
                     </td>
@@ -107,6 +136,11 @@ const SingleBusinessUI = (props) => {
               onClick={(e) => handleClickBusiness(e)}
             >
               <tr>
+                {allowColumns?.id && (
+                  <td className='business-id'>
+                    {businessState?.business?.id}
+                  </td>
+                )}
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
@@ -120,8 +154,16 @@ const SingleBusinessUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {(allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime) && (
+                {(allowColumns?.minimum || allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime || allowColumns?.featured || allowColumns?.ratings) && (
                   <>
+                    <td>
+                      {allowColumns?.minimum && (
+                        <InfoBlock>
+                          <p className='bold'>{t('MINIMUM_ORDER', 'Minimum order')}</p>
+                          <p>{parsePrice(businessState?.business?.minimum)}</p>
+                        </InfoBlock>
+                      )}
+                    </td>
                     <td>
                       {allowColumns?.deliveryFee && (
                         <InfoBlock>
@@ -146,6 +188,25 @@ const SingleBusinessUI = (props) => {
                         </InfoBlock>
                       )}
                     </td>
+                    <td>
+                      {allowColumns?.featured && (
+                        <InfoBlock>
+                          {businessState?.business?.featured && (
+                            <p>{t('FEATURE', 'Featured')}</p>
+                          )}
+                        </InfoBlock>
+                      )}
+                    </td>
+                    <td>
+                      {allowColumns?.ratings && businessState?.business?.reviews?.total > 0 && (
+                        <InfoBlock>
+                          <p className='star'><StarFill /></p>
+                          {businessState?.business?.reviews?.total && (
+                            <p>{businessState?.business?.reviews?.total}</p>
+                          )}
+                        </InfoBlock>
+                      )}
+                    </td>
                   </>
                 )}
                 <td>
@@ -161,7 +222,7 @@ const SingleBusinessUI = (props) => {
                   <WrapperBusinessActionSelector className='business_actions'>
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={<FiMoreVertical />}
+                      title={<ThreeDotsVertical />}
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item
@@ -193,9 +254,12 @@ const SingleBusinessUI = (props) => {
           {(businessState?.loading || isSkeleton) ? (
             <SingleBusinessCardContainer isSkeleton>
               <BusinessHeader isSkeleton>
-                <BusinessLogo>
-                  <Skeleton width={45} height={45} />
-                </BusinessLogo>
+                <BusinessHeaderContent>
+                  <BusinessLogo>
+                    <Skeleton width={45} height={45} />
+                  </BusinessLogo>
+                  <Skeleton width={50} />
+                </BusinessHeaderContent>
               </BusinessHeader>
               <BusinessContent>
                 <h1><Skeleton width={80} /></h1>
@@ -213,7 +277,10 @@ const SingleBusinessUI = (props) => {
               onClick={(e) => handleClickBusiness(e)}
             >
               <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
-                <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                <BusinessHeaderContent>
+                  <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                  <span>{t('ID', 'ID')} {businessState?.business?.id}</span>
+                </BusinessHeaderContent>
               </BusinessHeader>
               <BusinessContent>
                 <h1>{businessState?.business?.name}</h1>
@@ -229,7 +296,7 @@ const SingleBusinessUI = (props) => {
                   <WrapperBusinessActionSelector className='business_actions'>
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={<FiMoreVertical />}
+                      title={<ThreeDotsVertical />}
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item

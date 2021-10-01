@@ -2,6 +2,15 @@ import styled, { css } from 'styled-components'
 
 export const AnalyticsTimeZoneContainer = styled.div`
   position: relative;
+
+  > button {
+    background: #F8F9FA;
+    border-radius: 7.6px;
+    padding: 7px 12px;
+    font-size: 14px;
+    color: #748194;
+    border: none;
+  }
 `
 
 export const TimeZoneSelectWrapper = styled.div`
@@ -72,7 +81,7 @@ export const TimezoneListItem = styled.div`
   color: ${props => props.theme?.colors.headingColor};
   cursor: pointer;
   transition: all 0.3s;
-  &: hover {
+  &:hover {
     background: #E9ECEF;
   }
 `

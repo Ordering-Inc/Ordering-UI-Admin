@@ -32,5 +32,11 @@ export const BusinessName = styled.span`
 export const FilterBtnWrapper = styled.div`
   margin-top: 20px;
   display: flex;
-  justify-content: flex-end;  
+  justify-content: flex-end;
+  position: sticky;
+  top: 100%;
+
+  button {
+    height: 42px;
+  }
 `

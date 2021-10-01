@@ -9,6 +9,8 @@ import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import { BusinessDetails } from '../BusinessDetails'
 import { AddBusinessSidebar } from '../AddBusinessSidebar'
+import { SideBar } from '../SideBar'
+import { ImportCustomCSVForm } from '../ImportCustomCSVForm'
 
 import {
   BusinessListingContainer,
@@ -41,6 +43,7 @@ const BusinessessListingUI = (props) => {
   const [detailsBusiness, setDetailsBusiness] = useState(null)
   const [detailsBusinessId, setDetailsBusinessId] = useState(null)
   const [openAddBusiness, setOpenAddBusiness] = useState(false)
+  const [openImportCsvForm, setOpenImportCsvForm] = useState(false)
   const [businessTypes, setBusinessTypes] = useState([])
 
   const handleBackRedirect = () => {
@@ -66,6 +69,10 @@ const BusinessessListingUI = (props) => {
     setOpenAddBusiness(true)
   }
 
+  const handleOpenImportCSV = () => {
+    setOpenImportCsvForm(true)
+  }
+
   const onhandleSuccessAddBusiness = (business) => {
     handleSucessAddBusiness(business)
     setOpenAddBusiness(false)
@@ -89,6 +96,7 @@ const BusinessessListingUI = (props) => {
           searchValue={searchValue}
           onSearch={onSearch}
           handleOpenAddBusiness={handleOpenAddBusiness}
+          handleOpenImportCSV={handleOpenImportCSV}
         />
         <ViewContainer>
           <BusinessActiveStateFilter
@@ -149,6 +157,17 @@ const BusinessessListingUI = (props) => {
           onClose={() => setOpenAddBusiness(false)}
           handleSucessAddBusiness={onhandleSuccessAddBusiness}
         />
+      )}
+      {openImportCsvForm && (
+        <SideBar
+          sidebarId='importCsvForm'
+          open={openImportCsvForm}
+          onClose={() => setOpenImportCsvForm(false)}
+        >
+          <ImportCustomCSVForm
+            onClose={() => setOpenImportCsvForm(false)}
+          />
+        </SideBar>
       )}
     </>
   )

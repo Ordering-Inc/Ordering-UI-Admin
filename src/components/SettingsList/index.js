@@ -4,8 +4,8 @@ import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../../components/NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { SettingsSelectUI } from '../SettingsSelectUI'
-import { toast } from 'react-toastify'
 import { Alert } from '../Confirm'
+import { SettingsCountryFilter } from '../SettingsCountryFilter'
 import {
   SettingsListContainer,
   GeneralContainer,
@@ -16,17 +16,20 @@ import {
   FormGroupWrapper,
   SkeletonWrapper,
   CheckBoxWrapper,
-  OptionsError
+  OptionsError,
+  SubmitBtnWrapper
 } from './styles'
 
 export const SettingsListUI = (props) => {
   const {
     settingsState,
     configs,
+    formState,
     onCloseSettingsList,
     handleCheckBoxChange,
     handleInputChange,
-    handleClickUpdate
+    handleClickUpdate,
+    handleChangeFormState
   } = props
 
   const [, t] = useLanguage()
@@ -39,6 +42,42 @@ export const SettingsListUI = (props) => {
     })
   }
 
+  const transformArray = (values) => {
+    return '[' + values + ']'
+  }
+
+  const formatArray = (values) => {
+    values = values.replace('[', '')
+    values = values.replace(']', '')
+    return values
+  }
+
+  const handleSubmit = () => {
+    for (const item of formState.changes) {
+      if (item.key === 'driver_tip_options') {
+        if (!/^((\d)+,)*(\d)+$/.test(item.value)) {
+          setAlertState({ open: true, content: t('DRIVER_TIP_OPTIONS_ERROR') })
+          return
+        }
+        updateFormState(item.key, transformArray(item.value))
+      }
+    }
+    handleClickUpdate && handleClickUpdate()
+  }
+
+  const updateFormState = (key, value) => {
+    const _changes = formState?.changes.map(item => {
+      if (item.key === key) {
+        return {
+          ...item,
+          value: value
+        }
+      }
+      return item
+    })
+    handleChangeFormState({ ...formState, changes: _changes })
+  }
+
   useEffect(() => {
     if (settingsState?.result?.error) {
       setAlertState({
@@ -47,22 +86,6 @@ export const SettingsListUI = (props) => {
       })
     }
   }, [settingsState?.result])
-
-  useEffect(() => {
-    if (!settingsState?.result.error && !settingsState?.loading && settingsState?.result?.result === 'ok') {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = t('SETTINGS_UPDATE', 'Settings Updated')
-      toast.dark(content, toastConfigure)
-    }
-  }, [settingsState?.loading])
 
   return (
     <>
@@ -106,11 +129,19 @@ export const SettingsListUI = (props) => {
                       }
                       {
                         config.type === 2 && (
-                          <SettingsSelectUI
-                            config={config}
-                            defaultValue={config?.value}
-                            handleSelectChange={(value) => handleInputChange(value, config?.id)}
-                          />
+                          config.key === 'country_autocomplete' ? (
+                            <SettingsCountryFilter
+                              defaultValue={config?.value}
+                              handleSelectChange={(value) => handleInputChange(value, config?.id)}
+                              label={config?.name}
+                            />
+                          ) : (
+                            <SettingsSelectUI
+                              config={config}
+                              defaultValue={config?.value}
+                              handleSelectChange={(value) => handleInputChange(value, config?.id)}
+                            />
+                          )
                         )
                       }
                       {
@@ -145,30 +176,43 @@ export const SettingsListUI = (props) => {
                       }
                       {
                         config.type === 4 && (
-                          <CheckBoxWrapper>
-                            {config?.name && (
-                              <p>{config?.name}</p>
-                            )}
-                            {
-                              config?.options?.length > 0 && config?.options?.map((item, j) => (
-                                <FormGroupWrapper key={j}>
-                                  <FormGroupCheck className='checkbox'>
-                                    <label>
-                                      <input
-                                        type='checkbox'
-                                        name={item?.value}
-                                        data-id={config?.id}
-                                        defaultChecked={JSON.parse(config?.value).includes(parseInt(item?.value))}
-                                        onChange={(e) => handleCheckBoxChange(e, false, config?.value)}
-                                      />
-                                      {item.text}
-                                    </label>
-                                  </FormGroupCheck>
-                                </FormGroupWrapper>
-                              ))
-                            }
-                            {!config?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>}
-                          </CheckBoxWrapper>
+                          config.key === 'driver_tip_options' ? (
+                            <FormGroupText className='form-group'>
+                              <label>{config?.name}</label>
+                              <input
+                                type='text'
+                                defaultValue={formatArray(config?.value)}
+                                onChange={(e) => handleInputChange(e.target.value, config?.id)}
+                                className='form-control'
+                                placeholder='placeholder'
+                              />
+                            </FormGroupText>
+                          ) : (
+                            <CheckBoxWrapper>
+                              {config?.name && (
+                                <p>{config?.name}</p>
+                              )}
+                              {
+                                config?.options?.length > 0 && config?.options?.map((item, j) => (
+                                  <FormGroupWrapper key={j}>
+                                    <FormGroupCheck className='checkbox'>
+                                      <label>
+                                        <input
+                                          type='checkbox'
+                                          name={item?.value}
+                                          data-id={config?.id}
+                                          defaultChecked={JSON.parse(config?.value).includes(parseInt(item?.value))}
+                                          onChange={(e) => handleCheckBoxChange(e, false, config?.value)}
+                                        />
+                                        {item.text}
+                                      </label>
+                                    </FormGroupCheck>
+                                  </FormGroupWrapper>
+                                ))
+                              }
+                              {!config?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>}
+                            </CheckBoxWrapper>
+                          )
                         )
                       }
                     </div>
@@ -176,7 +220,9 @@ export const SettingsListUI = (props) => {
                 }
                 {
                   settingsState?.changes?.length > 0 && (
-                    <Button color='primary' onClick={handleClickUpdate}>{t('SAVE', 'Save')}</Button>
+                    <SubmitBtnWrapper>
+                      <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
+                    </SubmitBtnWrapper>
                   )
                 }
               </FormContainer>

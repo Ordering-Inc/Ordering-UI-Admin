@@ -42,6 +42,7 @@ import { DriversManagersList } from './pages/DriversManagersList'
 import { DriversCompaniesList } from './pages/DriversCompaniesList'
 import { DriversGroupsList } from './pages/DriversGroupsList'
 import { Support } from './pages/Support'
+import { AdvancedReports } from './pages/AdvancedReports'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -262,6 +263,13 @@ export const App = () => {
                       {
                         auth
                           ? <ReviewsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/intelligence/reports'>
+                      {
+                        auth
+                          ? <AdvancedReports />
                           : <Redirect to='/login' />
                       }
                     </Route>

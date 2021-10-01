@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const SettingItemContainer = styled.div`
   cursor: pointer;
   display: flex;
-  align-items: center;
   flex-direction: row;
   margin: 15px 0;
   padding: 20px 10px;
@@ -24,21 +23,32 @@ export const SettingItemContainer = styled.div`
     flex-direction: column;
   }
 `
-
 export const IconWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 64px;
   height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  background: #F8F9FA;
+  border-radius: 7.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 10px;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 15px;
+  ` : css`
+    margin-right: 15px;
+  `}
 
-  img {
-    width: 24px;
-    height: 24px;
+  @media (min-width: 577px) {
+    align-self: flex-start;
+    margin-bottom: 0;
   }
+
   svg {
     font-size: 24px;
-    color: #B1BCCC;
+    color: ${props => props.theme?.colors.secundaryLight};
   }
 `
 
@@ -55,11 +65,18 @@ export const Title = styled.p`
   font-weight: 500;
   font-size: 13px;
   color: #344050;
-  margin-right: 14px;
+  margin-bottom: 8px;
 `
 
 export const SettingItemDescription = styled.div`
   font-weight: normal;
   font-size: 12px;
   color: #909BA9;
+
+  @media (min-width: 577px) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
 `
