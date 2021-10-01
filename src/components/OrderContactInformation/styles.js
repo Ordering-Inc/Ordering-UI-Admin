@@ -5,7 +5,14 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   padding: 15px 0;
-  border-bottom: 1px solid ${props => props.theme.colors?.secundary};
+  position: relative;
+
+  > svg {
+    position: absolute;
+    top: 32px;
+    right: 10px;
+    transition: all 0.3s;
+  }
 `
 
 export const PhotoWrapper = styled.div`
@@ -92,18 +99,14 @@ export const InfoContent = styled.div`
   `}
 `
 
-export const CustomerInfo = styled(BusinessInfo)`
-  border: none;
-`
+export const CustomerInfo = styled(BusinessInfo)``
 
 export const DriverInfoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `
-export const DriverInfo = styled(BusinessInfo)`
-  border-bottom: none;
-`
+export const DriverInfo = styled(BusinessInfo)``
 
 export const DriverSelectorContainer = styled.div`
   min-width: 40%;
@@ -140,4 +143,15 @@ export const CustomerInfoTable = styled.table`
       }
     }
   }
+`
+
+export const ToggleItemWrapper = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors?.secundary};
+
+  ${({ active }) => active && css`
+    border-bottom: none;
+    .down-arrow {
+      transform: rotateZ(180deg);
+    }
+  `}
 `
