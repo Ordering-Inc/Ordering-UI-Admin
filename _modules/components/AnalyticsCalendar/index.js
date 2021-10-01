@@ -117,7 +117,7 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
         key: 'selection'
       }]);
     }
-  }, [defaultValue]);
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleOpenCalendar
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsCalendarContainer, {

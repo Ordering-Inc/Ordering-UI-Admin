@@ -31,7 +31,7 @@ var SearchWrapper = _styledComponents.default.div(_templateObject2 || (_template
 
 exports.SearchWrapper = SearchWrapper;
 
-var BusinessListWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-top: 24px;\n  margin-bottom: 20px;\n"])));
+var BusinessListWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-top: 24px;\n  margin-bottom: 20px;\n\n  #not-found-source {\n    height: 100%;\n  }\n"])));
 
 exports.BusinessListWrapper = BusinessListWrapper;
 

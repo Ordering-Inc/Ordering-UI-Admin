@@ -13,6 +13,8 @@ var _SearchBar = require("../SearchBar");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _Pagination = require("../Pagination");
+
 var _styles = require("../../styles");
 
 var _styledComponents = require("styled-components");
@@ -20,6 +22,8 @@ var _styledComponents = require("styled-components");
 var _styles2 = require("./styles");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
+var _NotFoundSource = require("../NotFoundSource");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,6 +58,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
+  var _businessList$busines;
+
   var searchValue = props.searchValue,
       _onSearch = props.onSearch,
       businessList = props.businessList,
@@ -68,34 +74,59 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       optimizeImage = _useUtils2[0].optimizeImage;
 
-  var theme = (0, _styledComponents.useTheme)();
+  var theme = (0, _styledComponents.useTheme)(); // Change page
 
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)(1),
       _useState2 = _slicedToArray(_useState, 2),
-      businesses = _useState2[0],
-      setBusinesses = _useState2[1];
+      currentPage = _useState2[0],
+      setCurrentPage = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(10),
+      _useState4 = _slicedToArray(_useState3, 2),
+      pagesPerPage = _useState4[0],
+      setPagesPerPage = _useState4[1]; // Get current products
+
+
+  var _useState5 = (0, _react.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentPages = _useState6[0],
+      setCurrentPages = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      totalPages = _useState8[0],
+      setTotalPages = _useState8[1];
+
+  var handleChangePage = function handleChangePage(page) {
+    setCurrentPage(page);
+  };
+
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    var expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize);
+    setCurrentPage(expectedPage);
+    setPagesPerPage(pageSize);
+  };
 
   (0, _react.useEffect)(function () {
-    var _businessList$busines;
+    if (businessList.loading) return;
 
-    if ((businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) > 0) {
-      var _businesses = [];
+    var _totalPages;
 
-      if (searchValue) {
-        var _businessList$busines2;
-
-        _businesses = businessList === null || businessList === void 0 ? void 0 : (_businessList$busines2 = businessList.businesses) === null || _businessList$busines2 === void 0 ? void 0 : _businessList$busines2.filter(function (business) {
-          var _business$name;
-
-          return (_business$name = business.name) === null || _business$name === void 0 ? void 0 : _business$name.toLowerCase().includes(searchValue.toLowerCase());
-        });
-      } else {
-        _businesses = _toConsumableArray(businessList === null || businessList === void 0 ? void 0 : businessList.businesses);
-      }
-
-      setBusinesses(_businesses);
+    if (businessList.businesses.length > 0) {
+      _totalPages = Math.ceil(businessList.businesses.length / pagesPerPage);
     }
-  }, [businessList === null || businessList === void 0 ? void 0 : businessList.businesses, searchValue]);
+
+    var indexOfLastPost = currentPage * pagesPerPage;
+    var indexOfFirstPost = indexOfLastPost - pagesPerPage;
+
+    var _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost);
+
+    setTotalPages(_totalPages);
+    setCurrentPages(_currentProducts);
+  }, [businessList, currentPage, pagesPerPage]);
+  (0, _react.useEffect)(function () {
+    if (searchValue) setCurrentPage(1);
+  }, [searchValue]);
   return /*#__PURE__*/_react.default.createElement(_styles2.BrandBUSIDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     search: searchValue,
     isCustomLayout: true,
@@ -116,7 +147,7 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessListWrapper, null, businesses.length > 0 && businesses.map(function (business, i) {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessListWrapper, null, (currentPages === null || currentPages === void 0 ? void 0 : currentPages.length) > 0 ? currentPages.map(function (business, i) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessItemContainer, {
@@ -132,13 +163,20 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, business === null || business === void 0 ? void 0 : business.name)));
+  }) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, null), (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    currentPage: currentPage,
+    totalPages: totalPages,
+    handleChangePage: handleChangePage,
+    defaultPageSize: pagesPerPage,
+    handleChangePageSize: handleChangePageSize
   })) : /*#__PURE__*/_react.default.createElement(_styles2.NoSelectedBrand, null, t('NO_SELECTED_BRAND', 'There is no selected brand')));
 };
 
 var BusinessBrandBUSIDetail = function BusinessBrandBUSIDetail(props) {
   var businessBrandBUSIDetailProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessBrandBUSIDetailUI,
-    propsToFetch: ['id', 'name', 'logo', 'franchise_id']
+    propsToFetch: ['id', 'name', 'logo', 'franchise_id'],
+    isSearchByName: true
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessBrandBUSIDetail, businessBrandBUSIDetailProps);
