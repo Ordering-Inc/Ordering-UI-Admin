@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   AnalyticsBusinessFilterContainer,
@@ -9,6 +9,7 @@ import {
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
+import { Pagination } from '../Pagination'
 import { useLanguage, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
 
 const AnalyticsBusinessFilterUI = (props) => {
@@ -23,6 +24,24 @@ const AnalyticsBusinessFilterUI = (props) => {
 
   const [, t] = useLanguage()
 
+  // Change page
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pagesPerPage, setPagesPerPage] = useState(10)
+
+  // Get current products
+  const [currentPages, setCurrentPages] = useState([])
+  const [totalPages, setTotalPages] = useState(null)
+
+  const handleChangePage = (page) => {
+    setCurrentPage(page)
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize)
+    setCurrentPage(expectedPage)
+    setPagesPerPage(pageSize)
+  }
+
   const isCheckEnableSate = (id) => {
     const found = businessIds?.find(businessId => businessId === id)
     let valid = false
@@ -31,6 +50,19 @@ const AnalyticsBusinessFilterUI = (props) => {
     }
     return valid
   }
+
+  useEffect(() => {
+    if (businessList.loading) return
+    let _totalPages
+    if (businessList.businesses.length > 0) {
+      _totalPages = Math.ceil(businessList.businesses.length / pagesPerPage)
+    }
+    const indexOfLastPost = currentPage * pagesPerPage
+    const indexOfFirstPost = indexOfLastPost - pagesPerPage
+    const _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
+    setTotalPages(_totalPages)
+    setCurrentPages(_currentProducts)
+  }, [businessList, currentPage, pagesPerPage])
 
   return (
     <>
@@ -56,7 +88,7 @@ const AnalyticsBusinessFilterUI = (props) => {
               )}
               <BusinessName>{t('ALL', 'All')}</BusinessName>
             </BusinessFilterOption>
-            {businessList?.businesses.map((business, i) => (
+            {currentPages.map((business, i) => (
               <BusinessFilterOption
                 key={i}
                 onClick={() => handleChangeBusinessId(business?.id)}
@@ -69,6 +101,15 @@ const AnalyticsBusinessFilterUI = (props) => {
                 <BusinessName>{business?.name}</BusinessName>
               </BusinessFilterOption>
             ))}
+            {businessList?.businesses?.length > 0 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                handleChangePage={handleChangePage}
+                defaultPageSize={pagesPerPage}
+                handleChangePageSize={handleChangePageSize}
+              />
+            )}
           </div>
         )}
       </AnalyticsBusinessFilterContainer>
