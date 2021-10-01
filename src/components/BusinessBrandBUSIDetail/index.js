@@ -5,6 +5,7 @@ import {
   useUtils,
   BusinessBrandBUSIDetail as BusinessBrandBUSIDetailController
 } from 'ordering-components-admin'
+import { Pagination } from '../Pagination'
 import { Checkbox } from '../../styles'
 import { useTheme } from 'styled-components'
 import {
@@ -18,6 +19,7 @@ import {
   NoSelectedBrand
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
+import { NotFoundSource } from '../NotFoundSource'
 
 const BusinessBrandBUSIDetailUI = (props) => {
   const {
@@ -30,19 +32,41 @@ const BusinessBrandBUSIDetailUI = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
-  const [businesses, setBusinesses] = useState([])
+
+  // Change page
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pagesPerPage, setPagesPerPage] = useState(10)
+
+  // Get current products
+  const [currentPages, setCurrentPages] = useState([])
+  const [totalPages, setTotalPages] = useState(null)
+
+  const handleChangePage = (page) => {
+    setCurrentPage(page)
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize)
+    setCurrentPage(expectedPage)
+    setPagesPerPage(pageSize)
+  }
 
   useEffect(() => {
-    if (businessList?.businesses?.length > 0) {
-      let _businesses = []
-      if (searchValue) {
-        _businesses = businessList?.businesses?.filter(business => (business.name?.toLowerCase().includes(searchValue.toLowerCase())))
-      } else {
-        _businesses = [...businessList?.businesses]
-      }
-      setBusinesses(_businesses)
+    if (businessList.loading) return
+    let _totalPages
+    if (businessList.businesses.length > 0) {
+      _totalPages = Math.ceil(businessList.businesses.length / pagesPerPage)
     }
-  }, [businessList?.businesses, searchValue])
+    const indexOfLastPost = currentPage * pagesPerPage
+    const indexOfFirstPost = indexOfLastPost - pagesPerPage
+    const _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
+    setTotalPages(_totalPages)
+    setCurrentPages(_currentProducts)
+  }, [businessList, currentPage, pagesPerPage])
+
+  useEffect(() => {
+    if (searchValue) setCurrentPage(1)
+  }, [searchValue])
 
   return (
     <BrandBUSIDetailContainer>
@@ -77,7 +101,7 @@ const BusinessBrandBUSIDetailUI = (props) => {
           ) : (
             <BusinessListWrapper>
               {
-                businesses.length > 0 && businesses.map((business, i) => (
+                currentPages?.length > 0 ? currentPages.map((business, i) => (
                   <BusinessItemContainer key={i}>
                     <Checkbox
                       id={business?.id}
@@ -91,8 +115,19 @@ const BusinessBrandBUSIDetailUI = (props) => {
                       <BusinessName>{business?.name}</BusinessName>
                     </label>
                   </BusinessItemContainer>
-                ))
+                )) : (
+                  <NotFoundSource />
+                )
               }
+              {businessList?.businesses?.length > 0 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  handleChangePage={handleChangePage}
+                  defaultPageSize={pagesPerPage}
+                  handleChangePageSize={handleChangePageSize}
+                />
+              )}
             </BusinessListWrapper>
           )
         ) : (
@@ -107,7 +142,8 @@ export const BusinessBrandBUSIDetail = (props) => {
   const businessBrandBUSIDetailProps = {
     ...props,
     UIComponent: BusinessBrandBUSIDetailUI,
-    propsToFetch: ['id', 'name', 'logo', 'franchise_id']
+    propsToFetch: ['id', 'name', 'logo', 'franchise_id'],
+    isSearchByName: true
   }
   return <BusinessBrandBUSIDetailController {...businessBrandBUSIDetailProps} />
 }
