@@ -46,6 +46,7 @@ export const OrderContactInformation = (props) => {
               </IconButton>
             )}
           </div>
+          <p>{order?.business?.phone || order?.business?.cellphone}</p>
           <p>{order?.business?.address}</p>
         </InfoContent>
       </BusinessInfo>
@@ -59,7 +60,7 @@ export const OrderContactInformation = (props) => {
         </PhotoWrapper>
         <InfoContent>
           <div>
-            <p>{order?.customer?.name} {order?.customer?.lastname}</p>
+            <p>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
             {order?.customer?.cellphone && (
               <IconButton
                 onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}
@@ -84,7 +85,7 @@ export const OrderContactInformation = (props) => {
             {order.driver_id ? (
               <InfoContent>
                 <div>
-                  <p>{order?.driver?.name} {order?.driver?.lastname}</p>
+                  <p>{order?.driver?.name} {order?.driver?.middle_name} {order?.driver?.lastname} {order?.driver?.second_lastname}</p>
                   {order?.driver?.cellphone && (
                     <IconButton
                       onClick={() => window.open(`tel:${order?.driver?.cellphone}`)}
