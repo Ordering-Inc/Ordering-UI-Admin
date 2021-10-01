@@ -29,8 +29,6 @@ export const OrderContactInformation = (props) => {
 
   const [, t] = useLanguage()
 
-  console.log(order?.business)
-
   return (
     <>
       <Accordion>
@@ -74,7 +72,9 @@ export const OrderContactInformation = (props) => {
                 {order?.business?.address && (
                   <tr>
                     <td>{t('FULL_ADDRESS', 'Full address')}</td>
-                    <td>{order?.business?.address}</td>
+                    <td>
+                      <a href={`http://maps.google.com/?q=${order?.business?.address}`} rel='noopener noreferrer' target='_blank'>{order?.business?.address}</a>
+                    </td>
                   </tr>
                 )}
                 {order?.business?.address_notes && (
@@ -133,7 +133,9 @@ export const OrderContactInformation = (props) => {
                 {order?.customer?.address && (
                   <tr>
                     <td>{t('FULL_ADDRESS', 'Full address')}</td>
-                    <td>{order?.customer?.address}</td>
+                    <td>
+                      <a href={`http://maps.google.com/?q=${order?.customer?.address}`} rel='noopener noreferrer' target='_blank'>{order?.customer?.address}</a>
+                    </td>
                   </tr>
                 )}
                 {order?.customer?.internal_number && (

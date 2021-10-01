@@ -141,6 +141,14 @@ export const CustomerInfoTable = styled.table`
       &:first-child {
         color: ${props => props.theme.colors?.headingColor};
       }
+
+      > a {
+        color: ${props => props.theme.colors?.primary};
+        transition: all 0.3s linear;
+        &:hover {
+          color: ${props => props.theme.colors?.headingColor};
+        }
+      }
     }
   }
 `
