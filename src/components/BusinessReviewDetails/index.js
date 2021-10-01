@@ -1,6 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
-import { BusinessReviewDetails as BusinessReviewDetailsController } from './naked'
+import { useLanguage, useUtils, useEvent, BusinessReviews as BusinessReviewsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { PersonFill } from 'react-bootstrap-icons'
@@ -19,22 +18,26 @@ import {
   ReviewBarContainer,
   ReviewBar,
   ReviewQualityTextContainer,
-  Comment  
+  Comment
 } from './styles'
 
 const BusinessReviewDetailsUI = (props) => {
   const {
     business,
-    businessReviewState,
-    handleUpdateReview
+    reviewsList
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage, parseDate }] = useUtils()
+  const [events] = useEvent()
 
   const getReviewPercent = (quality) => {
     return quality / 5 * 100
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   return (
@@ -45,6 +48,7 @@ const BusinessReviewDetailsUI = (props) => {
           <Button
             color='lightPrimary'
             borderRadius='8px'
+            onClick={() => handleGoToPage({ page: 'reviewProducts', params: { store: business?.slug } })}
           >
             {t('PRODUCT_REVIEW', 'Product review')}
           </Button>
@@ -54,7 +58,7 @@ const BusinessReviewDetailsUI = (props) => {
             <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo)} />
           </WrapperImage>
         </BusinessLogoContainer>
-        {businessReviewState?.loading ? (
+        {reviewsList?.loading ? (
           [...Array(10).keys()].map(i => (
             <ReviewItemContatiner key={i}>
               <UserInfoContainer>
@@ -85,7 +89,7 @@ const BusinessReviewDetailsUI = (props) => {
             </ReviewItemContatiner>
           ))
         ) : (
-          businessReviewState?.reviews.map(review => (
+          reviewsList?.reviews.map(review => (
             <ReviewItemContatiner key={review?.id}>
               <UserInfoContainer>
                 <WrapperImage isSmall>
@@ -130,5 +134,5 @@ export const BusinessReviewDetails = (props) => {
     ...props,
     UIComponent: BusinessReviewDetailsUI
   }
-  return <BusinessReviewDetailsController {...businessReviewDetailsProps} />
+  return <BusinessReviewsController {...businessReviewDetailsProps} />
 }

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
-import { Switch } from '../../styles/Switch'
 import Skeleton from 'react-loading-skeleton'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Pagination } from '../Pagination'
-import { ThreeDotsVertical, StarFill } from 'react-bootstrap-icons'
+import { StarFill } from 'react-bootstrap-icons'
 import { Confirm } from '../Confirm'
 import { SideBar } from '../SideBar'
 import { BusinessReviewDetails } from '../BusinessReviewDetails'
@@ -28,7 +26,7 @@ const BusinessReviewsListingUI = (props) => {
     searchValue,
     getPageBusinesses,
     handleUpdateReview,
-    handleDeleteReview
+    onSearch
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -91,6 +89,11 @@ const BusinessReviewsListingUI = (props) => {
     handleOpenReview(business)
   }
 
+  useEffect(() => {
+    if (searchValue === null) return
+    onSearch(searchValue)
+  }, [searchValue])
+
   return (
     <>
       <ReviewsTable>
@@ -101,7 +104,7 @@ const BusinessReviewsListingUI = (props) => {
           </tr>
         </thead>
         {businessList.loading ? (
-          [...Array(10).keys()].map(i => (
+          [...Array(businessesPerPage).keys()].map(i => (
             <ReviewTbody key={i}>
               <tr>
                 <td>
@@ -173,7 +176,7 @@ const BusinessReviewsListingUI = (props) => {
           <BusinessReviewDetails
             business={curBusiness}
             businessId={curBusiness?.id}
-            businessReviews={curBusiness?.reviews?.reviews}
+            reviews={curBusiness?.reviews?.reviews}
             handleUpdateReview={handleUpdateReview}
           />
         </SideBar>
@@ -201,7 +204,7 @@ export const BusinessReviewList = (props) => {
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
     isSearchByBusinessPhone: true,
-    propsToFetch: ['name', 'logo', 'address', 'reviews'],
+    propsToFetch: ['name', 'logo', 'address', 'reviews', 'slug'],
     UIComponent: BusinessReviewsListingUI
   }
   return <BusinessListController {...reviewsProps} />
