@@ -16,10 +16,7 @@ import {
   ReviewObject,
   InfoBlock,
   ReviewMarkerWrapper,
-  ActionsWrapper,
   PagesBottomContainer,
-  EnableWrapper,
-  ActionSelectorWrapper,
   WrapperImage,
   Image
 } from './styles'
@@ -35,7 +32,7 @@ const BusinessReviewsListingUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ optimizeImage, parseNumber }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openReview, setOpenReview] = useState(false)
   const [curBusiness, setCurBusiness] = useState(null)
@@ -83,17 +80,6 @@ const BusinessReviewsListingUI = (props) => {
     setCurrentBusinessess(_currentBusinessess)
   }, [businessList, currentPage, pagination, businessesPerPage])
 
-  const onClickDeleteReview = (businessId, reviewId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_REVIEW', 'Are you sure to delete this review?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeleteReview(businessId, reviewId)
-      }
-    })
-  }
-
   const handleOpenReview = (business) => {
     setCurBusiness(business)
     setOpenReview(true)
@@ -112,7 +98,6 @@ const BusinessReviewsListingUI = (props) => {
           <tr>
             <th><ReviewObject isHeader>{t('BUSINESS', 'Business')}</ReviewObject></th>
             <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
-            <th><ActionsWrapper isHeader>{t('ACTIONS', 'Actions')}</ActionsWrapper></th>
           </tr>
         </thead>
         {businessList.loading ? (
@@ -131,7 +116,6 @@ const BusinessReviewsListingUI = (props) => {
                   </ReviewObject>
                 </td>
                 <td><ReviewMarkerWrapper><Skeleton width={20} /></ReviewMarkerWrapper></td>
-                <td><ActionsWrapper><Skeleton width={100} /></ActionsWrapper></td>
               </tr>
             </ReviewTbody>
           ))
@@ -157,37 +141,8 @@ const BusinessReviewsListingUI = (props) => {
                 <td>
                   <ReviewMarkerWrapper>
                     <StarFill />
-                    <p>{parseNumber(business?.reviews?.total)}</p>
+                    <p>{business?.reviews?.total}</p>
                   </ReviewMarkerWrapper>
-                </td>
-                <td>
-                  <ActionsWrapper>
-                    <EnableWrapper className='review-enabled'>
-                      <span>{t('ENABLE', 'Enable')}</span>
-                      <Switch
-                        defaultChecked
-                        // onChange={enabled => handleUpdateReview(review?.business_id, review.id, { enabled: enabled })}
-                      />
-                    </EnableWrapper>
-                    <ActionSelectorWrapper className='review-actions'>
-                      <DropdownButton
-                        menuAlign={theme?.rtl ? 'left' : 'right'}
-                        title={<ThreeDotsVertical />}
-                        id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                      >
-                        <Dropdown.Item
-                          // onClick={() => handleOpenReview(review)}
-                        >
-                          {t('DETAILS', 'Details')}
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          // onClick={() => onClickDeleteReview(review?.business_id, review.id)}
-                        >
-                          {t('DELETE', 'Delete')}
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </ActionSelectorWrapper>
-                  </ActionsWrapper>
                 </td>
               </tr>
             </ReviewTbody>
@@ -218,6 +173,7 @@ const BusinessReviewsListingUI = (props) => {
           <BusinessReviewDetails
             business={curBusiness}
             businessId={curBusiness?.id}
+            businessReviews={curBusiness?.reviews?.reviews}
             handleUpdateReview={handleUpdateReview}
           />
         </SideBar>

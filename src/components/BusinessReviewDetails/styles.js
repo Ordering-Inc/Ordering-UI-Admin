@@ -10,18 +10,20 @@ export const ReviewDetailsContainer = styled.div`
 `
 
 export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   h1 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 0;
+    margin-bottom: 12px;
     ${props => props.theme?.rtl ? css`
       margin-left: 15px;
     ` : css`
       margin-right: 15px;
     `}
+  }
+
+  > button {
+    height: 42px;
   }
 `
 
@@ -96,13 +98,6 @@ export const ReviewQualityContainer = styled.div`
   flex-direction: column;
 `
 
-export const QualityWrapper = styled.div`
-  p {
-    font-size: 14px;
-    margin: 0px;
-  }
-`
-
 export const ReviewBarContainer = styled.div`
   margin: 15px 0;
 `
@@ -161,13 +156,4 @@ export const InfoBlock = styled.div`
 export const Comment = styled.div`
   font-size: 12px;
   margin: 25px 0;
-`
-
-export const RespondContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  label {
-    font-size: 14px;
-    font-weight: 500;
-  }
 `

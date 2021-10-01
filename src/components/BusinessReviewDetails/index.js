@@ -2,10 +2,9 @@ import React from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { BusinessReviewDetails as BusinessReviewDetailsController } from './naked'
 import Skeleton from 'react-loading-skeleton'
-import { Switch } from '../../styles/Switch'
 import { useTheme } from 'styled-components'
-import { Input } from '../../styles'
 import { PersonFill } from 'react-bootstrap-icons'
+import { Button } from '../../styles'
 
 import {
   ReviewDetailsContainer,
@@ -17,12 +16,10 @@ import {
   InfoBlock,
   UserInfoContainer,
   ReviewQualityContainer,
-  QualityWrapper,
   ReviewBarContainer,
   ReviewBar,
   ReviewQualityTextContainer,
-  Comment,
-  RespondContainer
+  Comment  
 } from './styles'
 
 const BusinessReviewDetailsUI = (props) => {
@@ -34,7 +31,7 @@ const BusinessReviewDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ optimizeImage }] = useUtils()
+  const [{ optimizeImage, parseDate }] = useUtils()
 
   const getReviewPercent = (quality) => {
     return quality / 5 * 100
@@ -45,10 +42,12 @@ const BusinessReviewDetailsUI = (props) => {
       <ReviewDetailsContainer>
         <Header>
           <h1>{business?.name}</h1>
-          <Switch
-            defaultChecked
-            // onChange={enabled => handleUpdateReview(review?.business_id, review.id, { enabled: enabled })}
-          />
+          <Button
+            color='lightPrimary'
+            borderRadius='8px'
+          >
+            {t('PRODUCT_REVIEW', 'Product review')}
+          </Button>
         </Header>
         <BusinessLogoContainer>
           <WrapperImage>
@@ -83,10 +82,6 @@ const BusinessReviewDetailsUI = (props) => {
                 <div><Skeleton width={300} /></div>
                 <div><Skeleton width={200} /></div>
               </Comment>
-              <RespondContainer>
-                <label><Skeleton width={80} /></label>
-                <Skeleton height={40} />
-              </RespondContainer>
             </ReviewItemContatiner>
           ))
         ) : (
@@ -102,7 +97,9 @@ const BusinessReviewDetailsUI = (props) => {
                 </WrapperImage>
                 <InfoBlock>
                   <p className='bold'>{review?.user?.name} {review?.user?.lastname}</p>
-                  <p>{review?.created_at}</p>
+                  {review?.created_at && (
+                    <p>{parseDate(review?.created_at, { utc: false })}</p>
+                  )}
                 </InfoBlock>
               </UserInfoContainer>
               <ReviewQualityContainer>
@@ -120,10 +117,6 @@ const BusinessReviewDetailsUI = (props) => {
                 </ReviewQualityTextContainer>
               </ReviewQualityContainer>
               <Comment>{review?.comment}</Comment>
-              <RespondContainer>
-                <label>{t('RESPOND', 'Respond')}</label>
-                <Input />
-              </RespondContainer>
             </ReviewItemContatiner>
           ))
         )}

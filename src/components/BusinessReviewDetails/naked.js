@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-// import { useLanguage } from '../../contexts/LanguageContext'
-// import { useToast, ToastType } from '../../contexts/ToastContext'
-import { useSession, useApi, useLanguage, useToast, ToastType } from 'ordering-components-admin'
+import { useSession, useApi } from 'ordering-components-admin'
 
 export const BusinessReviewDetails = (props) => {
   const {
     businessId,
+    businessReviews,
     propsToFetch,
     UIComponent
   } = props
 
-  const [, t] = useLanguage()
   const [ordering] = useApi()
   const [{ token }] = useSession()
-  const [, { showToast }] = useToast()
 
   const [businessReviewState, setBusinessReviewState] = useState({ reviews: [], loading: false, error: null })
 
@@ -49,9 +46,15 @@ export const BusinessReviewDetails = (props) => {
   }
 
   useEffect(() => {
-    if (!businessId) return
-    getBusinessReviews()
-  }, [businessId])
+    if (businessReviews) {
+      setBusinessReviewState({
+        ...businessReviewState,
+        reviews: businessReviews
+      })
+    } else {
+      getBusinessReviews()
+    }
+  }, [businessId, businessReviews])
 
   return (
     <>

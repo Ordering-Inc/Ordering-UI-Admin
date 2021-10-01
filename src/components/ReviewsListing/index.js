@@ -53,12 +53,6 @@ export const ReviewsListing = (props) => {
             {t('BUSINESS', 'Business')}
           </Tab>
           <Tab
-            // active={showOption === 'zones'}
-            // onClick={() => setShowOption('zones')}
-          >
-            {t('PRODUCTS', 'Products')}
-          </Tab>
-          <Tab
             active={showOption === 'drivers'}
             onClick={() => setShowOption('drivers')}
           >

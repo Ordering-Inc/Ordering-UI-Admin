@@ -17,12 +17,6 @@ export const ReviewsTable = styled.table`
 
   th, td {
     padding: 10px 0;
-    &:first-child {
-      width: 50%;
-    }
-    &:nth-child(2) {
-      width: 30%;
-    }
   }
 `
 
@@ -146,98 +140,8 @@ export const ReviewMarkerWrapper = styled.div`
     color: ${props => props.theme.colors.lightGray};
   }
 `
-export const ActionsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  ${props => props.theme.colors.rtl ? css`
-    padding-right: 15px;
-  ` : css`
-    padding-left: 15px;
-  `}
-
-  ${({ isHeader }) => !isHeader && css`
-    height: 40px;
-    display: flex;
-    align-items: center;
-    ${props => props.theme.colors.rtl ? css`
-      border-right: 1px solid ${props => props.theme.colors.borderColor};
-    ` : css`
-      border-left: 1px solid ${props => props.theme.colors.borderColor};
-    `}
-  `}
-`
-
 export const PagesBottomContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
-`
-
-export const EnableWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: fit-content;
-
-  span {
-    font-size: 12px;
-    color: ${props => props.theme.colors.headingColor};
-
-    ${props => props.theme?.rtl ? css`
-      padding-left: 10px;
-    ` : css`
-      padding-right: 10px;
-    `}
-  }
-`
-
-export const ActionSelectorWrapper = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
-  ` : css`
-    margin-left: 20px;
-  `}
-  button {
-    background: transparent !important;
-    border: none;
-    padding: 0px;
-    &:active,
-    &:focus {
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  .show {
-    button {
-      background: ${props => props.theme.colors.secundary} !important;
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    >div {
-      border: 1px solid ${props => props.theme.colors.borderColor};
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-    }
-  }
-
-  > div {
-    > div {
-      border-radius: 8px;
-      .dropdown-item {
-        font-size: 12px;
-        color: ${props => props.theme.colors.headingColor};
-      }
-      .dropdown-item:last-child {
-        color: #E63757;
-      }
-    }
-  }
 `
