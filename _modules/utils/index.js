@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getSeconds = exports.getMinutes = exports.getHours = exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.capitalize = exports.getIconCard = exports.optimizeImage = void 0;
+exports.verifyDecimals = exports.getSeconds = exports.getMinutes = exports.getHours = exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.capitalize = exports.getIconCard = exports.optimizeImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -264,5 +264,22 @@ var getSeconds = function getSeconds(seconds) {
   var remain = seconds - Math.floor(seconds / 3600) * 3600;
   return Math.floor(remain - Math.floor(remain / 60) * 60);
 };
+/**
+ * Function to check if a number is decimal or not
+ * @param {*} value number to check if decimal or not
+ * @param {*} parser function fallback when is decimal
+ * @returns string
+ */
+
 
 exports.getSeconds = getSeconds;
+
+var verifyDecimals = function verifyDecimals(value, parser) {
+  if (value % 1 === 0) {
+    return value;
+  } else {
+    return parser(value);
+  }
+};
+
+exports.verifyDecimals = verifyDecimals;
