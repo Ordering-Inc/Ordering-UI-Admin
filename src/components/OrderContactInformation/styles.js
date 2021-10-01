@@ -5,7 +5,14 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   padding: 15px 0;
-  border-bottom: 1px solid ${props => props.theme.colors?.secundary};
+  position: relative;
+
+  > svg {
+    position: absolute;
+    top: 32px;
+    right: 10px;
+    transition: all 0.3s;
+  }
 `
 
 export const PhotoWrapper = styled.div`
@@ -99,9 +106,7 @@ export const DriverInfoContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 `
-export const DriverInfo = styled(BusinessInfo)`
-  border-bottom: none;
-`
+export const DriverInfo = styled(BusinessInfo)``
 
 export const DriverSelectorContainer = styled.div`
   min-width: 40%;
@@ -116,4 +121,45 @@ export const DriverSelectorContainer = styled.div`
       }
     }
   }
+`
+export const CutsomerDetail = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors?.secundary};
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+`
+
+export const CustomerInfoTable = styled.table`
+  width: 100%;
+
+  tr {
+    td {
+      color: ${props => props.theme.colors?.lightGray};
+      font-size: 12px;
+      margin: 0px;
+
+      &:first-child {
+        color: ${props => props.theme.colors?.headingColor};
+      }
+
+      > a {
+        color: ${props => props.theme.colors?.primary};
+        transition: all 0.3s linear;
+        &:hover {
+          color: ${props => props.theme.colors?.headingColor};
+        }
+      }
+    }
+  }
+`
+
+export const ToggleItemWrapper = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors?.secundary};
+
+  ${({ active }) => active && css`
+    border-bottom: none;
+    .down-arrow {
+      transform: rotateZ(180deg);
+    }
+  `}
 `
