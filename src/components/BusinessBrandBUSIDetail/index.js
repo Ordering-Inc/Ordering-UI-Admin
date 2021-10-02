@@ -8,6 +8,8 @@ import {
 import { Pagination } from '../Pagination'
 import { Checkbox } from '../../styles'
 import { useTheme } from 'styled-components'
+import Skeleton from 'react-loading-skeleton'
+import { NotFoundSource } from '../NotFoundSource'
 import {
   BrandBUSIDetailContainer,
   SearchWrapper,
@@ -18,8 +20,6 @@ import {
   BusinessName,
   NoSelectedBrand
 } from './styles'
-import Skeleton from 'react-loading-skeleton'
-import { NotFoundSource } from '../NotFoundSource'
 
 const BusinessBrandBUSIDetailUI = (props) => {
   const {
@@ -38,7 +38,7 @@ const BusinessBrandBUSIDetailUI = (props) => {
   const [pagesPerPage, setPagesPerPage] = useState(10)
 
   // Get current products
-  const [currentPages, setCurrentPages] = useState([])
+  const [currentBusinesses, setCurrentBusinesses] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
   const handleChangePage = (page) => {
@@ -61,7 +61,7 @@ const BusinessBrandBUSIDetailUI = (props) => {
     const indexOfFirstPost = indexOfLastPost - pagesPerPage
     const _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
-    setCurrentPages(_currentProducts)
+    setCurrentBusinesses(_currentProducts)
   }, [businessList, currentPage, pagesPerPage])
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const BusinessBrandBUSIDetailUI = (props) => {
           ) : (
             <BusinessListWrapper>
               {
-                currentPages?.length > 0 ? currentPages.map((business, i) => (
+                currentBusinesses?.length > 0 ? currentBusinesses.map((business, i) => (
                   <BusinessItemContainer key={i}>
                     <Checkbox
                       id={business?.id}
