@@ -94,8 +94,8 @@ export const CheckBoxWrapper = styled.div`
 `
 
 export const SubmitBtnWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  position: sticky;
+  top: 100%;
 
   button {
     height: 44px;
@@ -103,6 +103,6 @@ export const SubmitBtnWrapper = styled.div`
     color: white;
     border-radius: 8px;
     font-size: 14px;
-    margin: 20px 0;
+    margin: 20px 0 10px 0;
   }
 `

@@ -218,13 +218,6 @@ export const SettingsListUI = (props) => {
                     </div>
                   ))
                 }
-                {
-                  settingsState?.changes?.length > 0 && (
-                    <SubmitBtnWrapper>
-                      <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
-                    </SubmitBtnWrapper>
-                  )
-                }
               </FormContainer>
             </GeneralContainer>
           )
@@ -239,6 +232,13 @@ export const SettingsListUI = (props) => {
           )
         }
       </SettingsListContainer>
+      {
+        settingsState?.changes?.length > 0 && (
+          <SubmitBtnWrapper>
+            <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
+          </SubmitBtnWrapper>
+        )
+      }
       <Alert
         title={t('SETTINGS', 'Settings')}
         content={alertState.content}

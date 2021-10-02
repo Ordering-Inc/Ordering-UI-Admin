@@ -92,6 +92,10 @@ export const CalendarWrapper = styled.div`
 export const ActionBtnWrapper = styled.div`
   padding-top: 30px;
   margin-bottom: 20px;
+
+  > button {
+    height: 44px;
+  }
 `
 
 export const CheckBoxWrapper = styled.div`

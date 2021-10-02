@@ -88,7 +88,7 @@ const BusinessBrandBUSIDetailUI = (props) => {
                     <Skeleton width={16} height={16} />
                     <label>
                       <WrapperImage>
-                        <Skeleton style={{ height: '100%' }} />
+                        <Skeleton className='d-flex h-100' />
                       </WrapperImage>
                       <BusinessName>
                         <Skeleton width={100} />

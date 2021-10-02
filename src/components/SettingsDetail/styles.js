@@ -38,6 +38,7 @@ export const DescriptionContent = styled.div`
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
+  position: relative;
 `
 
 export const DescriptionHeader = styled.div`
@@ -48,6 +49,10 @@ export const DescriptionHeader = styled.div`
 
 export const HeaderIcons = styled.div`
   display: flex;
+  position: absolute;
+  top: 25px;
+  right: 20px;
+
   > button:first-child {
     ${props => props.theme?.rtl ? css`
       margin-left: 8px;
@@ -57,9 +62,8 @@ export const HeaderIcons = styled.div`
   }
 `
 
-export const Content = styled.div`
-  margin-top: 28px;
-`
+export const Content = styled.div``
+
 export const CategoryName = styled.div`
   p {
     font-weight: bold;
@@ -84,7 +88,7 @@ export const CategoryDescriptionExtraContent = styled.div`
   > button {
     z-index: 100;
     position: absolute;
-    top: 20px;
+    top: 25px;
     ${props => props.theme?.rtl ? css`
       left: 20px;
     ` : css`
@@ -154,8 +158,7 @@ export const IframeWrapper = styled.div`
 `
 
 export const SubCategoryWrapper = styled.div`
-  margin-top: 25px;
+  height: 100%;
 `
-export const SkeletonWrapper = styled.div`
-  margin-top: 25px;
-`
+
+export const SkeletonWrapper = styled.div``
