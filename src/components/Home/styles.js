@@ -134,6 +134,13 @@ export const FirstStoreToSellContent = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  transition: max-height 0.6s ease 0s;
+  max-height: 0;
+  overflow: hidden;
+
+  ${({ active }) => active && css`
+    max-height: 1000px;
+  `}
 
   > div {
     width: 100%;
