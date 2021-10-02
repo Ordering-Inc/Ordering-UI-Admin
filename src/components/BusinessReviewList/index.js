@@ -83,12 +83,6 @@ const BusinessReviewsListingUI = (props) => {
     setOpenReview(true)
   }
 
-  const handleClickReview = (e, business) => {
-    const isInvalid = e.target.closest('.review-enabled') || e.target.closest('.review-actions')
-    if (isInvalid) return
-    handleOpenReview(business)
-  }
-
   useEffect(() => {
     if (searchValue === null) return
     onSearch(searchValue)
@@ -127,7 +121,7 @@ const BusinessReviewsListingUI = (props) => {
             <ReviewTbody
               key={business.id}
               active={business.id === curBusiness?.id}
-              onClick={e => handleClickReview(e, business)}
+              onClick={() => handleOpenReview(business)}
             >
               <tr>
                 <td>

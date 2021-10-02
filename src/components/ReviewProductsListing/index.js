@@ -6,6 +6,8 @@ import Skeleton from 'react-loading-skeleton'
 import { SearchBar } from '../SearchBar'
 import { IconButton } from '../../styles'
 import { Pagination } from '../Pagination'
+import { SideBar } from '../SideBar'
+import { ProductReviewDetails } from '../ProductReviewDetails'
 
 import {
   ReviewsListingContainer,
@@ -32,11 +34,11 @@ export const ReviewProductsListingUI = (props) => {
 
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [searchValue, setSearchValue] = useState(null)
+  const [openReview, setOpenReview] = useState(false)
+  const [curProduct, setCurProduct] = useState(null)
 
   const [currentPage, setCurrentPage] = useState(1)
   const [productsPerPage, setProductsPerPage] = useState(10)
-
-  // Get current products
   const [currentProducts, setCurrentProducts] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
@@ -62,6 +64,11 @@ export const ReviewProductsListingUI = (props) => {
     setTotalPages(_totalPages)
     setCurrentProducts(_currentProducts)
   }, [categoryState, currentPage, productsPerPage])
+
+  const handleOpenReview = (product) => {
+    setCurProduct(product)
+    setOpenReview(true)
+  }
 
   return (
     <>
@@ -89,7 +96,7 @@ export const ReviewProductsListingUI = (props) => {
         <ReviewsTable>
           <thead>
             <tr>
-              <th><ReviewObject isHeader>{t('BUSINESS', 'Business')}</ReviewObject></th>
+              <th><ReviewObject isHeader>{t('PRODUCT', 'Product')}</ReviewObject></th>
               <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
             </tr>
           </thead>
@@ -113,8 +120,8 @@ export const ReviewProductsListingUI = (props) => {
             currentProducts.map(product => (
               <ReviewTbody
                 key={product.id}
-                // active={product.id === curProduct?.id}
-                // onClick={e => handleClickReview(e, product)}
+                active={product.id === curProduct?.id}
+                onClick={() => handleOpenReview(product)}
               >
                 <tr>
                   <td>
@@ -155,6 +162,24 @@ export const ReviewProductsListingUI = (props) => {
           )
         }
       </ReviewsListingContainer>
+
+      {openReview && (
+        <SideBar
+          sidebarId='review-details'
+          defaultSideBarWidth={550}
+          open={openReview}
+          onClose={() => {
+            setCurProduct(null)
+            setOpenReview(false)
+          }}
+        >
+          <ProductReviewDetails
+            businessId={businessState?.business?.id}
+            product={curProduct}
+            productId={curProduct?.id}
+          />
+        </SideBar>
+      )}
     </>
   )
 }
@@ -164,6 +189,7 @@ export const ReviewProductsListing = (props) => {
 
   const businessProductslistingProps = {
     ...props,
+    isAllCategoryProducts: true,
     UIComponent: ReviewProductsListingUI,
     isInitialRender,
     handleUpdateInitialRender: (val) => setIsInitialRender(val)

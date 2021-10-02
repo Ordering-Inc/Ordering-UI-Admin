@@ -14,20 +14,16 @@ export const Header = styled.div`
   h1 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 0px;
     ${props => props.theme?.rtl ? css`
       margin-left: 15px;
     ` : css`
       margin-right: 15px;
     `}
   }
-
-  > button {
-    height: 42px;
-  }
 `
 
-export const BusinessLogoContainer = styled.div`
+export const ProductImageContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
@@ -73,6 +69,7 @@ const ImageStyled = styled.div`
   background-position: center;
   border-radius: 8px;
 `
+
 export const Image = (props) => {
   return (
     <ImageStyled
@@ -84,78 +81,40 @@ export const Image = (props) => {
   )
 }
 
-export const ReviewItemContatiner = styled.div`
-  margin-bottom: 50px;
+export const ReviewContentWrapper = styled.div`
 `
 
-export const UserInfoContainer = styled.div`
-  display: flex;
-  align-items: center;
+export const ReviewHeader = styled.div`
 `
 
-export const ReviewQualityContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-export const ReviewBarContainer = styled.div`
-  margin: 15px 0;
-`
-
-const ReviewBarStyled = styled.div`
-  height: 6px;
-  border-radius: 10px;
-  background: ${props => `linear-gradient(to right, ${props.theme.colors.headingColor} ${props.percentage}%, ${props.theme.colors.borderColor} ${props.percentage}%)`};
-`
-
-export const ReviewBar = (props) => {
-  return (
-    <ReviewBarStyled
-      {...props}
-    >
-      {props.children}
-    </ReviewBarStyled>
-  )
-}
-
-export const ReviewQualityTextContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  p {
-    margin: 0px;
-    color: ${props => props.theme.colors.lightGray};
-    font-size: 12px;
-  }
-`
-
-export const InfoBlock = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 9px;
+export const LikeSignWrapper = styled.div`
+  ${({ isLike }) => isLike ? css`
+    > svg:first-child {
+      color: ${props => props.theme.colors.primary};
+    }
   ` : css`
-    margin-left: 9px;
+    > svg:last-child {
+      color: ${props => props.theme.colors.primary};
+    }
   `}
-  max-width: calc(100% - 60px);
-  p {
-    font-size: 12px;
-    margin: 0px;
-    color: ${props => props.theme.colors.lightGray};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 
-    &.bold {
-      font-size: 14px;
-      font-weight: 500;
-      color: ${props => props.theme.colors.headingColor};
+  svg {
+    color: ${props => props.theme.colors.disabled};
+    font-size: 22px;
+
+    &:first-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 10px;
+      ` : css`
+        margin-right: 10px;
+      `}
     }
   }
 `
 
-export const Comment = styled.div`
-  font-size: 12px;
-  margin: 25px 0;
+export const ReviewComment = styled.p`
+  font-size: 14px;
+  margin: 15px 0;
 `
 
 export const NotReviewed = styled.p`

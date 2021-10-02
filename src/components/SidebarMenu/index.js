@@ -385,7 +385,7 @@ export const SidebarMenu = (props) => {
                       active={
                         location.pathname === '/intelligence/business' ||
                         location.pathname === '/intelligence/drivers' ||
-                        location.pathname === '/intelligence/reviews' ||
+                        location.pathname.includes('/intelligence/reviews') ||
                         location.pathname === '/intelligence/invoice'
                       }
                     >

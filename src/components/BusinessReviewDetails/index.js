@@ -18,7 +18,8 @@ import {
   ReviewBarContainer,
   ReviewBar,
   ReviewQualityTextContainer,
-  Comment
+  Comment,
+  NotReviewed
 } from './styles'
 
 const BusinessReviewDetailsUI = (props) => {
@@ -123,6 +124,12 @@ const BusinessReviewDetailsUI = (props) => {
               <Comment>{review?.comment}</Comment>
             </ReviewItemContatiner>
           ))
+        )}
+
+        {!reviewsList?.loading && reviewsList?.reviews.length === 0 && (
+          <NotReviewed>
+            {t('ERROR_REVIEW_FIND', 'The review does not exist.')}
+          </NotReviewed>
         )}
       </ReviewDetailsContainer>
     </>
