@@ -86,42 +86,38 @@ const HomeUI = (props) => {
             }
           </div>
         </HideAndShowWrapper>
-        {
-          isShowStore && (
-            <FirstStoreToSellContent>
-              {
-                taskList?.loading ? (
-                  <>
-                    {
-                      [...Array(5).keys()].map(i => (
-                        <HomeSingleTask
-                          key={i}
-                          isSkeleton
-                        />
-                      ))
-                    }
-                  </>
-                ) : (
-                  <>
-                    {
-                      taskList?.data?.length > 0 && taskList?.data.map((task, i) => (
-                        <HomeSingleTask
-                          {...props}
-                          key={i}
-                          task={task}
-                        />
-                      ))
-                    }
-                  </>
-                )
-              }
-              <OrderingHelpButton>
-                <p>{t('ORDERING_HELP_CONDITION_LINK', 'If you need anything else from your Ordering Team..')}</p>
-                <Button color='lightPrimary' borderRadius='7.6px' onClick={goToContactUs}>{t('CLICK_HERE', 'Click here')}!</Button>
-              </OrderingHelpButton>
-            </FirstStoreToSellContent>
-          )
-        }
+        <FirstStoreToSellContent active={isShowStore}>
+          {
+            taskList?.loading ? (
+              <>
+                {
+                  [...Array(5).keys()].map(i => (
+                    <HomeSingleTask
+                      key={i}
+                      isSkeleton
+                    />
+                  ))
+                }
+              </>
+            ) : (
+              <>
+                {
+                  taskList?.data?.length > 0 && taskList?.data.map((task, i) => (
+                    <HomeSingleTask
+                      {...props}
+                      key={i}
+                      task={task}
+                    />
+                  ))
+                }
+              </>
+            )
+          }
+          <OrderingHelpButton>
+            <p>{t('ORDERING_HELP_CONDITION_LINK', 'If you need anything else from your Ordering Team..')}</p>
+            <Button color='lightPrimary' borderRadius='7.6px' onClick={goToContactUs}>{t('CLICK_HERE', 'Click here')}!</Button>
+          </OrderingHelpButton>
+        </FirstStoreToSellContent>
       </FirstStoreToSellWrapper>
     </HomeContainer>
   )

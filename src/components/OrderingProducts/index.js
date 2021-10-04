@@ -122,6 +122,7 @@ export const OrderingProducts = (props) => {
     if (searchValue) {
       const products = productsList.filter(item => item.name.toLowerCase().includes(searchValue.toLowerCase()))
       setorderingProductsList({ ...orderingProductsList, products: products })
+      setCurrentPage(1)
     } else {
       setorderingProductsList({ ...orderingProductsList, products: productsList })
     }
