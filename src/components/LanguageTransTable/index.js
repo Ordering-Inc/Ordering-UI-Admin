@@ -96,6 +96,10 @@ const LanguageTransTableUI = (props) => {
     }
   }, [creationFormState?.result])
 
+  useEffect(() => {
+    if (searchValue) setCurrentPage(1)
+  }, [searchValue])
+
   return (
     <>
       <TranslationTableContainer>

@@ -23,4 +23,8 @@ export const CheckboxWrapper = styled.div`
 export const ActionBtnWrapper = styled.div`
   position: sticky;
   top: 100%;
+
+  > button {
+    height: 44px;
+  }
 `

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { useLanguage, useEvent, useConfig, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
-import { List as MenuIcon, Gear, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
+import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
 import { IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { SideBar } from '../SideBar'
@@ -181,7 +181,7 @@ const SettingsUI = (props) => {
                     <SettingItemUI
                       title={category?.name}
                       description={category?.description}
-                      icon={category?.image ? <img src={category?.image} /> : <Gear />}
+                      icon={category?.image ? <img src={category?.image} /> : <GearFill />}
                       active={selectedCategory?.id === category?.id}
                     />
                   </SettingItemWrapper>
@@ -193,7 +193,7 @@ const SettingsUI = (props) => {
                       <SettingItemUI
                         title={t('STRIPE_CONNECT_SETTINGS', 'Stripe connect settings')}
                         description={t('STRIPE_CONNECT_SETTINGS_DESC')}
-                        icon={<Gear />}
+                        icon={<GearFill />}
                         active={isOpenSettingDetails === 'stripe_connect'}
                       />
                     </SettingItemWrapper>

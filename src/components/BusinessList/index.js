@@ -25,7 +25,8 @@ export const BusinessList = (props) => {
     handleOpenBusinessDetails,
     handleOpenAddBusiness,
     detailsBusinessId,
-    getPageBusinesses
+    getPageBusinesses,
+    searchValue
   } = props
   const [, t] = useLanguage()
 
@@ -142,6 +143,10 @@ export const BusinessList = (props) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll, viewMethod])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchValue])
 
   return (
     <>
