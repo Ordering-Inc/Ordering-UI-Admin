@@ -29,6 +29,6 @@ var CheckboxWrapper = _styledComponents.default.div(_templateObject2 || (_templa
 
 exports.CheckboxWrapper = CheckboxWrapper;
 
-var ActionBtnWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n"])));
+var ActionBtnWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  > button {\n    height: 44px;\n  }\n"])));
 
 exports.ActionBtnWrapper = ActionBtnWrapper;

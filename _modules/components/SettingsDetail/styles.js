@@ -32,7 +32,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var DescriptionContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding: 26px 40px;\n  box-sizing: border-box;\n  width: 100%;\n  overflow-x: hidden;\n"])));
+var DescriptionContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding: 26px 40px;\n  box-sizing: border-box;\n  width: 100%;\n  overflow-x: hidden;\n  position: relative;\n"])));
 
 exports.DescriptionContent = DescriptionContent;
 
@@ -40,7 +40,7 @@ var DescriptionHeader = _styledComponents.default.div(_templateObject8 || (_temp
 
 exports.DescriptionHeader = DescriptionHeader;
 
-var HeaderIcons = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  > button:first-child {\n    ", "\n  }\n"])), function (props) {
+var HeaderIcons = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  position: absolute;\n  top: 25px;\n  right: 20px;\n\n  > button:first-child {\n    ", "\n  }\n"])), function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n    "])));
@@ -48,7 +48,7 @@ var HeaderIcons = _styledComponents.default.div(_templateObject9 || (_templateOb
 
 exports.HeaderIcons = HeaderIcons;
 
-var Content = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-top: 28px;\n"])));
+var Content = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral([""])));
 
 exports.Content = Content;
 
@@ -56,7 +56,7 @@ var CategoryName = _styledComponents.default.div(_templateObject13 || (_template
 
 exports.CategoryName = CategoryName;
 
-var CategoryDescriptionExtraContent = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 26px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n\n  > button {\n    z-index: 100;\n    position: absolute;\n    top: 20px;\n    ", "\n  }\n"])), function (props) {
+var CategoryDescriptionExtraContent = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 26px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n\n  > button {\n    z-index: 100;\n    position: absolute;\n    top: 25px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme4;
 
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "])));
@@ -92,10 +92,10 @@ var IframeWrapper = _styledComponents.default.div(_templateObject23 || (_templat
 
 exports.IframeWrapper = IframeWrapper;
 
-var SubCategoryWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n"])));
+var SubCategoryWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  height: 100%;\n"])));
 
 exports.SubCategoryWrapper = SubCategoryWrapper;
 
-var SkeletonWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n"])));
+var SkeletonWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral([""])));
 
 exports.SkeletonWrapper = SkeletonWrapper;

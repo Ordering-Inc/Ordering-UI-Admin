@@ -9,7 +9,7 @@ exports.OrderingHelpButton = exports.FirstStoreToSellContent = exports.FirstStor
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -84,18 +84,21 @@ var FirstStoreToSellWrapper = _styledComponents.default.div(_templateObject16 ||
 
 exports.FirstStoreToSellWrapper = FirstStoreToSellWrapper;
 
-var FirstStoreToSellContent = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n\n  > div {\n    width: 100%;\n  }\n\n  @media (min-width: 800px) {\n    > div {\n      width: 45%;\n    }\n  }\n"])));
+var FirstStoreToSellContent = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  transition: max-height 0.6s ease 0s;\n  max-height: 0;\n  overflow: hidden;\n\n  ", "\n\n  > div {\n    width: 100%;\n  }\n\n  @media (min-width: 800px) {\n    > div {\n      width: 45%;\n    }\n  }\n"])), function (_ref2) {
+  var active = _ref2.active;
+  return active && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    max-height: 1000px;\n  "])));
+});
 
 exports.FirstStoreToSellContent = FirstStoreToSellContent;
 
-var OrderingHelpButton = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  p {\n    margin: 0;\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  button {\n    white-space: nowrap;\n    margin-left: 15px;\n    width: 105px;\n    min-width: 105px;\n    height: 44px;\n    ", "\n  }\n"])), function (props) {
+var OrderingHelpButton = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  p {\n    margin: 0;\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  button {\n    white-space: nowrap;\n    margin-left: 15px;\n    width: 105px;\n    min-width: 105px;\n    height: 44px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme5;
 
   return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.headingColor;
 }, function (props) {
   var _props$theme6;
 
-  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n      margin-left: 0;\n    "])));
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n      margin-left: 0;\n    "])));
 });
 
 exports.OrderingHelpButton = OrderingHelpButton;

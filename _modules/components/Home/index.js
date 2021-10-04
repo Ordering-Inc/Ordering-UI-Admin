@@ -106,7 +106,9 @@ var HomeUI = function HomeUI(props) {
     onClick: function onClick() {
       return setIsShowStore(!isShowStore);
     }
-  }, isShowStore ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.DashSquare, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, null))), isShowStore && /*#__PURE__*/_react.default.createElement(_styles.FirstStoreToSellContent, null, taskList !== null && taskList !== void 0 && taskList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
+  }, isShowStore ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.DashSquare, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, null))), /*#__PURE__*/_react.default.createElement(_styles.FirstStoreToSellContent, {
+    active: isShowStore
+  }, taskList !== null && taskList !== void 0 && taskList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_HomeSingleTask.HomeSingleTask, {
       key: i,
       isSkeleton: true

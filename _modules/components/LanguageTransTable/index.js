@@ -177,6 +177,9 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
       });
     }
   }, [creationFormState === null || creationFormState === void 0 ? void 0 : creationFormState.result]);
+  (0, _react.useEffect)(function () {
+    if (searchValue) setCurrentPage(1);
+  }, [searchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.TranslationTableContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TranslationTable, null, /*#__PURE__*/_react.default.createElement(_styles.TableHeader, null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('KEY', 'Key')), /*#__PURE__*/_react.default.createElement("th", null, t('TEXT', 'Text')))), translationList !== null && translationList !== void 0 && translationList.loading && !(creationFormState !== null && creationFormState !== void 0 && creationFormState.result) ? _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TableBody, {
       key: i

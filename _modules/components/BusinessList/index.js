@@ -60,7 +60,8 @@ var BusinessList = function BusinessList(props) {
       handleOpenBusinessDetails = props.handleOpenBusinessDetails,
       handleOpenAddBusiness = props.handleOpenAddBusiness,
       detailsBusinessId = props.detailsBusinessId,
-      getPageBusinesses = props.getPageBusinesses;
+      getPageBusinesses = props.getPageBusinesses,
+      searchValue = props.searchValue;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -192,6 +193,9 @@ var BusinessList = function BusinessList(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll, viewMethod]);
+  (0, _react.useEffect)(function () {
+    setCurrentPage(1);
+  }, [searchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.id) && /*#__PURE__*/_react.default.createElement("th", null, t('ID', 'ID')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
     className: "business"
   }, t('BUSINESS', 'Business')), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.minimum) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryFee) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.distance) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryTime) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings)) && /*#__PURE__*/_react.default.createElement("th", {

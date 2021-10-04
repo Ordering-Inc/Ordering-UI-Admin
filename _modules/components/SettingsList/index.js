@@ -238,14 +238,14 @@ var SettingsListUI = function SettingsListUI(props) {
         }
       }), item.text)));
     })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value')))));
-  }), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    onClick: handleSubmit
-  }, t('SAVE', 'Save'))))), !settingsState.loading && settingsState.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }))), !settingsState.loading && settingsState.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category Description'),
     onClickButton: onCloseSettingsList
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: handleSubmit
+  }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SETTINGS', 'Settings'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

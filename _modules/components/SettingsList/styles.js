@@ -65,7 +65,7 @@ var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.CheckBoxWrapper = CheckBoxWrapper;
 
-var SubmitBtnWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n\n  button {\n    height: 44px;\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px 0;\n  }\n"])), function (props) {
+var SubmitBtnWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 44px;\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px 0 10px 0;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

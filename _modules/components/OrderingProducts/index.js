@@ -227,6 +227,7 @@ var OrderingProducts = function OrderingProducts(props) {
       setorderingProductsList(_objectSpread(_objectSpread({}, orderingProductsList), {}, {
         products: products
       }));
+      setCurrentPage(1);
     } else {
       setorderingProductsList(_objectSpread(_objectSpread({}, orderingProductsList), {}, {
         products: _dumy.productsList

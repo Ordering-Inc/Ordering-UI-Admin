@@ -255,7 +255,7 @@ var SettingsUI = function SettingsUI(props) {
       description: category === null || category === void 0 ? void 0 : category.description,
       icon: category !== null && category !== void 0 && category.image ? /*#__PURE__*/_react.default.createElement("img", {
         src: category === null || category === void 0 ? void 0 : category.image
-      }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null),
+      }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     })), category.key === 'stripe' && /*#__PURE__*/_react.default.createElement(_styles.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
@@ -265,7 +265,7 @@ var SettingsUI = function SettingsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
       title: t('STRIPE_CONNECT_SETTINGS', 'Stripe connect settings'),
       description: t('STRIPE_CONNECT_SETTINGS_DESC'),
-      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null),
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
       active: isOpenSettingDetails === 'stripe_connect'
     })));
   }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {

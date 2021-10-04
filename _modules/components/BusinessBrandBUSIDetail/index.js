@@ -19,11 +19,11 @@ var _styles = require("../../styles");
 
 var _styledComponents = require("styled-components");
 
-var _styles2 = require("./styles");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _NotFoundSource = require("../NotFoundSource");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89,8 +89,8 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
 
   var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      currentPages = _useState6[0],
-      setCurrentPages = _useState6[1];
+      currentBusinesses = _useState6[0],
+      setCurrentBusinesses = _useState6[1];
 
   var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -122,7 +122,7 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
     var _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost);
 
     setTotalPages(_totalPages);
-    setCurrentPages(_currentProducts);
+    setCurrentBusinesses(_currentProducts);
   }, [businessList, currentPage, pagesPerPage]);
   (0, _react.useEffect)(function () {
     if (searchValue) setCurrentPage(1);
@@ -141,13 +141,11 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
       width: 16,
       height: 16
     }), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      style: {
-        height: '100%'
-      }
+      className: "d-flex h-100"
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessListWrapper, null, (currentPages === null || currentPages === void 0 ? void 0 : currentPages.length) > 0 ? currentPages.map(function (business, i) {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessListWrapper, null, (currentBusinesses === null || currentBusinesses === void 0 ? void 0 : currentBusinesses.length) > 0 ? currentBusinesses.map(function (business, i) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessItemContainer, {

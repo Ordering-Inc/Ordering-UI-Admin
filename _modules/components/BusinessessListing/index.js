@@ -187,7 +187,8 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     handleSucessAddBusiness: handleSucessAddBusiness,
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleOpenBusinessDetails: handleOpenBusinessDetails,
-    handleOpenAddBusiness: handleOpenAddBusiness
+    handleOpenAddBusiness: handleOpenAddBusiness,
+    searchValue: searchValue
   })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails // business={detailsBusiness}
     ,

@@ -47,7 +47,7 @@ var CalendarWrapper = _styledComponents.default.div(_templateObject5 || (_templa
 
 exports.CalendarWrapper = CalendarWrapper;
 
-var ActionBtnWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding-top: 30px;\n  margin-bottom: 20px;\n"])));
+var ActionBtnWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding-top: 30px;\n  margin-bottom: 20px;\n\n  > button {\n    height: 44px;\n  }\n"])));
 
 exports.ActionBtnWrapper = ActionBtnWrapper;
 
