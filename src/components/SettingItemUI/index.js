@@ -30,7 +30,7 @@ export const SettingItemUI = (props) => {
       <SettingItemContent>
         {
           isSkeleton
-            ? <Skeleton />
+            ? <Skeleton height={20} style={{ width: '80%', marginBottom: '10px' }} />
             : (
               <TitleContainer>
                 <Title>{title}</Title>
@@ -39,7 +39,7 @@ export const SettingItemUI = (props) => {
         }
         {
           isSkeleton
-            ? <Skeleton height={35} />
+            ? (<><Skeleton height={15} /><Skeleton height={15} /></>)
             : (
               <SettingItemDescription>{description}</SettingItemDescription>
             )

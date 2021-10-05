@@ -28,8 +28,7 @@ export const SettingsListUI = (props) => {
     onCloseSettingsList,
     handleCheckBoxChange,
     handleInputChange,
-    handleClickUpdate,
-    handleChangeFormState
+    handleClickUpdate
   } = props
 
   const [, t] = useLanguage()
@@ -42,10 +41,6 @@ export const SettingsListUI = (props) => {
     })
   }
 
-  const transformArray = (values) => {
-    return '[' + values + ']'
-  }
-
   const formatArray = (values) => {
     values = values.replace('[', '')
     values = values.replace(']', '')
@@ -54,28 +49,12 @@ export const SettingsListUI = (props) => {
 
   const handleSubmit = () => {
     for (const item of formState.changes) {
-      if (item.key === 'driver_tip_options') {
-        if (!/^((\d)+,)*(\d)+$/.test(item.value)) {
-          setAlertState({ open: true, content: t('DRIVER_TIP_OPTIONS_ERROR') })
-          return
-        }
-        updateFormState(item.key, transformArray(item.value))
+      if (item.key === 'driver_tip_options' && !/^((\d)+,)*(\d)+$/.test(item.value)) {
+        setAlertState({ open: true, content: t('DRIVER_TIP_OPTIONS_ERROR') })
+        return
       }
     }
     handleClickUpdate && handleClickUpdate()
-  }
-
-  const updateFormState = (key, value) => {
-    const _changes = formState?.changes.map(item => {
-      if (item.key === key) {
-        return {
-          ...item,
-          value: value
-        }
-      }
-      return item
-    })
-    handleChangeFormState({ ...formState, changes: _changes })
   }
 
   useEffect(() => {
@@ -218,13 +197,6 @@ export const SettingsListUI = (props) => {
                     </div>
                   ))
                 }
-                {
-                  settingsState?.changes?.length > 0 && (
-                    <SubmitBtnWrapper>
-                      <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
-                    </SubmitBtnWrapper>
-                  )
-                }
               </FormContainer>
             </GeneralContainer>
           )
@@ -239,6 +211,13 @@ export const SettingsListUI = (props) => {
           )
         }
       </SettingsListContainer>
+      {
+        settingsState?.changes?.length > 0 && (
+          <SubmitBtnWrapper>
+            <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
+          </SubmitBtnWrapper>
+        )
+      }
       <Alert
         title={t('SETTINGS', 'Settings')}
         content={alertState.content}

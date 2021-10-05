@@ -12,7 +12,6 @@ import {
   Gear as GearIcon,
   Headset as HeadsetIcon,
   Globe2,
-  GraphUp,
   Truck,
   WindowDock
 } from 'react-bootstrap-icons'
@@ -75,35 +74,6 @@ export const SidebarMenu = (props) => {
       title: t('BRAND_MANAGER', 'Brand manager'),
       pageName: 'brand',
       url: '/stores/brand'
-    }
-  ]
-
-  const marketingSubMenus = [
-    {
-      id: 1,
-      title: t('MARKET_SUITE', 'Market suite'),
-      pageName: 'marketSuite'
-    },
-    {
-      id: 2,
-      title: t('ANALYTICS', 'Analytics'),
-      pageName: 'marketAnalytics'
-    },
-    {
-      id: 3,
-      title: t('PROMOTIONS', 'Promotions'),
-      pageName: 'promotions',
-      url: '/marketing/promotions'
-    },
-    {
-      id: 4,
-      title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
-      pageName: 'promotionsEnterprise'
-    },
-    {
-      id: 5,
-      title: t('CAMPAIGN', 'Campaign'),
-      pageName: 'campaign'
     }
   ]
 
@@ -395,31 +365,6 @@ export const SidebarMenu = (props) => {
                     <Accordion.Collapse eventKey='5'>
                       <MenuContent>
                         {businessIntelligenceSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
-
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='6'
-                      active={
-                        location.pathname === '/marketing/promotions'
-                      }
-                    >
-                      <GraphUp />
-                      <span>{t('MARKETING', 'Marketing')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='6'>
-                      <MenuContent>
-                        {marketingSubMenus.map(item => (
                           <SubMenu
                             key={item.id}
                             active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}

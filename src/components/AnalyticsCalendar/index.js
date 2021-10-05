@@ -69,7 +69,7 @@ export const AnalyticsCalendar = (props) => {
         }
       ])
     }
-  }, [defaultValue])
+  }, [])
 
   return (
     <>

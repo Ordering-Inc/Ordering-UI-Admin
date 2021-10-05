@@ -11,6 +11,10 @@ export const SearchWrapper = styled.div``
 export const BusinessListWrapper = styled.div`
   margin-top: 24px;
   margin-bottom: 20px;
+
+  #not-found-source {
+    height: 100%;
+  }
 `
 
 export const BusinessItemContainer = styled.div`
