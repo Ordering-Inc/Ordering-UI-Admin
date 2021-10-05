@@ -336,7 +336,11 @@ export const OrdersTable = (props) => {
                           <p className='bold'>{t('ORDER_NO', 'Order No.')} {order?.id}</p>
                         )}
                         {allowColumns?.dateTime && (
-                          <p className='date'>{parseDate(order?.delivery_datetime, { utc: false })}</p>
+                          <p className='date'>
+                            {order?.delivery_datetime_utc
+                              ? parseDate(order?.delivery_datetime_utc)
+                              : parseDate(order?.delivery_datetime, { utc: false })}
+                          </p>
                         )}
                       </div>
                     </OrderNumberContainer>
