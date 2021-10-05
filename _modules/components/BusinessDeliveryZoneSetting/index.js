@@ -105,12 +105,7 @@ var BusinessDeliveryZoneSetting = function BusinessDeliveryZoneSetting(props) {
     onClick: function onClick() {
       return setSelectedMenuOption('basic');
     }
-  }, t('BASIC', 'Basic')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
-    active: selectedMenuOption === 'enterprise',
-    onClick: function onClick() {
-      return setSelectedMenuOption('enterprise');
-    }
-  }, t('ENTERPRISE', 'Enterprise'))))), selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneBasic.BusinessDeliveryZoneBasic, {
+  }, t('BASIC', 'Basic'))))), selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneBasic.BusinessDeliveryZoneBasic, {
     business: business,
     zone: zone,
     handleZoneType: handleZoneType,

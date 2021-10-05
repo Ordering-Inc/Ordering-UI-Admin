@@ -93,28 +93,6 @@ var SidebarMenu = function SidebarMenu(props) {
     pageName: 'brand',
     url: '/stores/brand'
   }];
-  var marketingSubMenus = [{
-    id: 1,
-    title: t('MARKET_SUITE', 'Market suite'),
-    pageName: 'marketSuite'
-  }, {
-    id: 2,
-    title: t('ANALYTICS', 'Analytics'),
-    pageName: 'marketAnalytics'
-  }, {
-    id: 3,
-    title: t('PROMOTIONS', 'Promotions'),
-    pageName: 'promotions',
-    url: '/marketing/promotions'
-  }, {
-    id: 4,
-    title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
-    pageName: 'promotionsEnterprise'
-  }, {
-    id: 5,
-    title: t('CAMPAIGN', 'Campaign'),
-    pageName: 'campaign'
-  }];
   var usersSubMenus = [{
     id: 1,
     title: t('CUSTOMERS', 'Customers'),
@@ -319,21 +297,6 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, t('BUSINESS_INTELLIGENCE', 'Business Intelligence'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, businessIntelligenceSubMenus.map(function (item) {
-    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
-      key: item.id,
-      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
-      onClick: function onClick() {
-        return handleGoToPage({
-          page: item.pageName
-        });
-      }
-    }, item.title);
-  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
-    eventKey: "6",
-    active: location.pathname === '/marketing/promotions'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GraphUp, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETING', 'Marketing'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
-    eventKey: "6"
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, marketingSubMenus.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
       active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
