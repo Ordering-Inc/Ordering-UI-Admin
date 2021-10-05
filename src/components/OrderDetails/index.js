@@ -218,7 +218,11 @@ const OrderDetailsUI = (props) => {
           <OrderStatus>
             <div>
               <h2>{t('ORDER_STATUS', 'Order status')}</h2>
-              <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
+              <p>
+                {order?.delivery_datetime_utc
+                  ? parseDate(order?.delivery_datetime_utc)
+                  : parseDate(order?.delivery_datetime, { utc: false })}
+              </p>
             </div>
             <OrderStatusTypeSelector
               isFirstSelect

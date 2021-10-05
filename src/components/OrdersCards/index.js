@@ -110,7 +110,11 @@ export const OrdersCards = (props) => {
                 <OrderHeader>
                   <h2>{t('ORDER_NO', 'Order No.')} {order?.id}</h2>
                   <div>
-                    <p>{parseDate(order?.delivery_datetime, { utc: false })}</p>
+                    <p>
+                      {order?.delivery_datetime_utc
+                        ? parseDate(order?.delivery_datetime_utc)
+                        : parseDate(order?.delivery_datetime, { utc: false })}
+                    </p>
                     <ViewDetails
                       className='view-details'
                       onClick={() => handleOpenOrderDetail(order)}
