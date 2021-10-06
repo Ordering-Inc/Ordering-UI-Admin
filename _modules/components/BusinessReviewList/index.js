@@ -11,11 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _Switch = require("../../styles/Switch");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
-var _reactBootstrap = require("react-bootstrap");
 
 var _styledComponents = require("styled-components");
 
@@ -27,7 +23,7 @@ var _Confirm = require("../Confirm");
 
 var _SideBar = require("../SideBar");
 
-var _ReviewDetails = require("../ReviewDetails");
+var _BusinessReviewDetails = require("../BusinessReviewDetails");
 
 var _styles = require("./styles");
 
@@ -64,10 +60,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
-  var reviewsListState = props.reviewsListState,
-      searchValue = props.searchValue,
+  var _curBusiness$reviews;
+
+  var businessList = props.businessList,
+      pagination = props.pagination,
+      parentSearchValue = props.parentSearchValue,
+      getPageBusinesses = props.getPageBusinesses,
       handleUpdateReview = props.handleUpdateReview,
-      handleDeleteReview = props.handleDeleteReview;
+      onSearch = props.onSearch;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -77,9 +77,7 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      optimizeImage = _useUtils2$.optimizeImage,
-      parseNumber = _useUtils2$.parseNumber;
+      optimizeImage = _useUtils2[0].optimizeImage;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -97,8 +95,8 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
 
   var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      curReview = _useState6[0],
-      setCurReview = _useState6[1];
+      curBusiness = _useState6[0],
+      setCurBusiness = _useState6[1];
 
   var _useState7 = (0, _react.useState)(1),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -107,13 +105,13 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
 
   var _useState9 = (0, _react.useState)(10),
       _useState10 = _slicedToArray(_useState9, 2),
-      reviewssPerPage = _useState10[0],
-      setReviewsPerPage = _useState10[1];
+      businessesPerPage = _useState10[0],
+      setBusinessesPerPage = _useState10[1];
 
   var _useState11 = (0, _react.useState)([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      currentReviews = _useState12[0],
-      setCurrentReviews = _useState12[1];
+      currentBusinessess = _useState12[0],
+      setCurrentBusinessess = _useState12[1];
 
   var _useState13 = (0, _react.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
@@ -121,140 +119,106 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
       setTotalPages = _useState14[1];
 
   var handleChangePage = function handleChangePage(page) {
-    setCurrentPage(page);
+    if (pagination.from <= page * businessesPerPage && page * businessesPerPage <= pagination.to || pagination.from <= page * businessesPerPage && page * businessesPerPage > pagination.total) {
+      setCurrentPage(page);
+    } else {
+      getPageBusinesses(businessesPerPage, page);
+    }
   };
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
-    var expectedPage = Math.ceil(((currentPage - 1) * reviewssPerPage + 1) / pageSize);
-    setCurrentPage(expectedPage);
-    setReviewsPerPage(pageSize);
+    setBusinessesPerPage(pageSize);
+    var expectedPage = Math.ceil(pagination.from / pageSize);
+
+    if (pagination.from <= expectedPage * pageSize && expectedPage * pageSize <= pagination.to || pagination.from <= expectedPage * pageSize && expectedPage * pageSize > pagination.total) {
+      setCurrentPage(expectedPage);
+    } else {
+      setCurrentPage(expectedPage);
+      getPageBusinesses(pageSize, expectedPage);
+    }
   };
 
   (0, _react.useEffect)(function () {
-    if (reviewsListState.loading) return;
-    var reviews = [];
+    if (businessList.loading) return;
 
-    if (searchValue) {
-      reviews = reviewsListState.reviews.filter(function (review) {
-        return review === null || review === void 0 ? void 0 : review.business_name.toLowerCase().includes(searchValue.toLowerCase());
-      });
-    } else {
-      reviews = _toConsumableArray(reviewsListState.reviews);
+    var _totalPages;
+
+    if (pagination !== null && pagination !== void 0 && pagination.total) {
+      _totalPages = Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / businessesPerPage);
+    } else if (businessList.businesses.length > 0) {
+      _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage);
     }
 
-    var _totalPages = Math.ceil(reviews.length / reviewssPerPage);
+    var indexOfLastPost = currentPage * businessesPerPage;
+    var indexOfFirstPost = indexOfLastPost - businessesPerPage;
 
-    var indexOfLastPost = currentPage * reviewssPerPage;
-    var indexOfFirstPost = indexOfLastPost - reviewssPerPage;
-
-    var _currentReviews = reviews.slice(indexOfFirstPost, indexOfLastPost);
+    var _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost);
 
     setTotalPages(_totalPages);
-    setCurrentReviews(_currentReviews);
-  }, [reviewsListState, currentPage, reviewssPerPage, searchValue]);
+    setCurrentBusinessess(_currentBusinessess);
+  }, [businessList, currentPage, pagination, businessesPerPage]);
 
-  var onClickDeleteReview = function onClickDeleteReview(businessId, reviewId) {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_REVIEW', 'Are you sure to delete this review?'),
-      handleOnAccept: function handleOnAccept() {
-        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-          open: false
-        }));
-        handleDeleteReview(businessId, reviewId);
-      }
-    });
-  };
-
-  var handleOpenReview = function handleOpenReview(review) {
-    setCurReview(review);
+  var handleOpenReview = function handleOpenReview(business) {
+    setCurBusiness(business);
     setOpenReview(true);
   };
 
-  var handleClickReview = function handleClickReview(e, review) {
-    var isInvalid = e.target.closest('.review-enabled') || e.target.closest('.review-actions');
-    if (isInvalid) return;
-    handleOpenReview(review);
-  };
-
+  (0, _react.useEffect)(function () {
+    if (parentSearchValue === null) return;
+    onSearch(parentSearchValue);
+    setCurrentPage(1);
+  }, [parentSearchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
-  }, t('BUSINESS', 'Business'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.CustomerWrapper, {
+  }, t('BUSINESS', 'Business'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
     isHeader: true
-  }, t('CUSTOMER', 'Customer'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
-    isHeader: true
-  }, t('REVIEWS', 'Reviews'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.CommentsWrapper, {
-    isHeader: true
-  }, t('COMMENTS', 'Comments'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, {
-    isHeader: true
-  }, t('ACTIONS', 'Actions'))))), reviewsListState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }, t('REVIEWS', 'Reviews'))))), businessList.loading ? _toConsumableArray(Array(businessesPerPage).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewTbody, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, {
+      isSkeleton: true
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 45,
+      height: 45
+    })), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 80
+    })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.CustomerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.CommentsWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 150
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
     })))));
-  }) : currentReviews.map(function (review) {
-    var _theme$images, _theme$images$dummies, _review$user, _review$user2, _review$user3;
+  }) : currentBusinessess.map(function (business) {
+    var _theme$images, _theme$images$dummies, _business$reviews, _business$reviews2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewTbody, {
-      key: review.id,
-      onClick: function onClick(e) {
-        return handleClickReview(e, review);
+      key: business.id,
+      active: business.id === (curBusiness === null || curBusiness === void 0 ? void 0 : curBusiness.id),
+      onClick: function onClick() {
+        return handleOpenReview(business);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((review === null || review === void 0 ? void 0 : review.business_logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, review === null || review === void 0 ? void 0 : review.business_name), /*#__PURE__*/_react.default.createElement("p", null, review === null || review === void 0 ? void 0 : review.city_name)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.CustomerWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, review === null || review === void 0 ? void 0 : (_review$user = review.user) === null || _review$user === void 0 ? void 0 : _review$user.name, " ", review === null || review === void 0 ? void 0 : (_review$user2 = review.user) === null || _review$user2 === void 0 ? void 0 : _review$user2.lastname), /*#__PURE__*/_react.default.createElement("p", null, review === null || review === void 0 ? void 0 : (_review$user3 = review.user) === null || _review$user3 === void 0 ? void 0 : _review$user3.email)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, null), /*#__PURE__*/_react.default.createElement("p", null, parseNumber(review === null || review === void 0 ? void 0 : review.total)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.CommentsWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, review === null || review === void 0 ? void 0 : review.comment))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {
-      className: "review-enabled"
-    }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-      defaultChecked: review === null || review === void 0 ? void 0 : review.enabled,
-      onChange: function onChange(enabled) {
-        return handleUpdateReview(review === null || review === void 0 ? void 0 : review.business_id, review.id, {
-          enabled: enabled
-        });
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, {
-      className: "review-actions"
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null),
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleOpenReview(review);
-      }
-    }, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return onClickDeleteReview(review === null || review === void 0 ? void 0 : review.business_id, review.id);
-      }
-    }, t('DELETE', 'Delete'))))))));
-  })), !reviewsListState.loading && /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, (currentReviews === null || currentReviews === void 0 ? void 0 : currentReviews.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.address)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, (business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, null), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total))))));
+  })), /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, !businessList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,
-    defaultPageSize: reviewssPerPage,
+    defaultPageSize: businessesPerPage,
     handleChangePageSize: handleChangePageSize
   })), openReview && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     sidebarId: "review-details",
     defaultSideBarWidth: 550,
     open: openReview,
     onClose: function onClose() {
-      setCurReview(null);
+      setCurBusiness(null);
       setOpenReview(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_ReviewDetails.ReviewDetails, {
-    review: curReview,
+  }, /*#__PURE__*/_react.default.createElement(_BusinessReviewDetails.BusinessReviewDetails, {
+    business: curBusiness,
+    businessId: curBusiness === null || curBusiness === void 0 ? void 0 : curBusiness.id,
+    reviews: curBusiness === null || curBusiness === void 0 ? void 0 : (_curBusiness$reviews = curBusiness.reviews) === null || _curBusiness$reviews === void 0 ? void 0 : _curBusiness$reviews.reviews,
     handleUpdateReview: handleUpdateReview
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('ORDERING', 'Ordering'),
@@ -278,10 +242,17 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
 
 var BusinessReviewList = function BusinessReviewList(props) {
   var reviewsProps = _objectSpread(_objectSpread({}, props), {}, {
+    asDashboard: true,
+    initialPageSize: 50,
+    loadMorePageSize: 10,
+    isSearchByBusinessName: true,
+    isSearchByBusinessEmail: true,
+    isSearchByBusinessPhone: true,
+    propsToFetch: ['name', 'logo', 'address', 'reviews', 'slug'],
     UIComponent: BusinessReviewsListingUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessReviewsList, reviewsProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardBusinessList, reviewsProps);
 };
 
 exports.BusinessReviewList = BusinessReviewList;

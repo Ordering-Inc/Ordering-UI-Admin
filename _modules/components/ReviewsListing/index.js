@@ -21,6 +21,8 @@ var _styles = require("../../styles");
 
 var _BusinessReviewList = require("../BusinessReviewList");
 
+var _DriversReviewList = require("../DriversReviewList");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -75,10 +77,15 @@ var ReviewsListing = function ReviewsListing(props) {
     onClick: function onClick() {
       return setShowOption('business');
     }
-  }, t('BUSINESS', 'Business')), /*#__PURE__*/_react.default.createElement(_styles2.Tab // active={showOption === 'zones'}
-  // onClick={() => setShowOption('zones')}
-  , null, t('PRODUCTS', 'Products')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, null, t('DRIVERS', 'Drivers')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, null, t('WAITERS', 'Waiters'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
-    searchValue: searchValue
+  }, t('BUSINESS', 'Business')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: showOption === 'drivers',
+    onClick: function onClick() {
+      return setShowOption('drivers');
+    }
+  }, t('DRIVERS', 'Drivers'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
+    parentSearchValue: searchValue
+  }), showOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_DriversReviewList.DriversReviewList, {
+    parentSearchValue: searchValue
   })));
 };
 

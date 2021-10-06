@@ -395,14 +395,14 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
         active: (_selectedProductsIds$ = selectedProductsIds.includes(product === null || product === void 0 ? void 0 : product.id)) !== null && _selectedProductsIds$ !== void 0 ? _selectedProductsIds$ : isCheckedProduct(product === null || product === void 0 ? void 0 : product.category_id, product === null || product === void 0 ? void 0 : product.id)
       }, ((_selectedProductsIds$2 = selectedProductsIds.includes(product === null || product === void 0 ? void 0 : product.id)) !== null && _selectedProductsIds$2 !== void 0 ? _selectedProductsIds$2 : isCheckedProduct(product === null || product === void 0 ? void 0 : product.category_id, product === null || product === void 0 ? void 0 : product.id)) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name)));
     })));
-  }), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     borderRadius: "5px",
-    disabled: formState.loading,
+    disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0,
     onClick: function onClick() {
       return isEdit ? handleUpdateBusinessMenuOption() : handleAddBusinessMenuOption();
     }
-  }, formState.loading ? t('LOADING', 'Loading') : isEdit ? t('UPDATE', 'Update') : t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, formState.loading ? t('LOADING', 'Loading') : isEdit ? t('UPDATE', 'Update') : t('ADD', 'Add')), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ORDERING', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

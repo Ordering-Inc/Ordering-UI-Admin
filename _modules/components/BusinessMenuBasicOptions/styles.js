@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessMenuBasicContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  > button {\n    height: 40px;\n    margin-top: 50px;\n  }\n"])));
+var BusinessMenuBasicContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 200px);\n  overflow: auto;\n  padding: 0 5px;\n  input,\n  textarea {\n    width: 100%;\n  }\n  > button {\n    height: 40px;\n    margin-top: 50px;\n  }\n"])));
 
 exports.BusinessMenuBasicContainer = BusinessMenuBasicContainer;
 

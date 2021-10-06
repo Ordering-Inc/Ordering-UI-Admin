@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ActionSelectorWrapper = exports.EnableWrapper = exports.PagesBottomContainer = exports.ActionsWrapper = exports.CommentsWrapper = exports.ReviewMarkerWrapper = exports.CustomerWrapper = exports.InfoBlock = exports.ReviewObject = exports.Image = exports.WrapperImage = exports.ReviewTbody = exports.ReviewsTable = void 0;
+exports.PagesBottomContainer = exports.ReviewMarkerWrapper = exports.InfoBlock = exports.ReviewObject = exports.Image = exports.WrapperImage = exports.ReviewTbody = exports.ReviewsTable = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -35,7 +35,7 @@ var ReviewTbody = _styledComponents.default.tbody(_templateObject2 || (_template
   return props.theme.colors.borderColor;
 }, function (_ref) {
   var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", ";\n      border-bottom: 1px solid ", ";\n    }\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background-color: ", " !important;\n    td {\n      border-top: 1px solid ", ";\n      border-bottom: 1px solid ", ";\n    }\n  "])), function (props) {
     return props.theme.colors.lightPrimary;
   }, function (props) {
     return props.theme.colors.primary;
@@ -77,7 +77,7 @@ var ReviewObject = _styledComponents.default.div(_templateObject9 || (_templateO
 
 exports.ReviewObject = ReviewObject;
 
-var InfoBlock = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  p {\n    font-size: 11px;\n    margin: 0px;\n    color: ", ";\n\n    &.bold {\n      font-size: 12px;\n      font-weight: 500;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var InfoBlock = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  max-width: calc(100% - 60px);\n  p {\n    font-size: 11px;\n    margin: 0px;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n\n    &.bold {\n      font-size: 12px;\n      font-weight: 500;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.headingColor;
@@ -85,29 +85,14 @@ var InfoBlock = _styledComponents.default.div(_templateObject12 || (_templateObj
 
 exports.InfoBlock = InfoBlock;
 
-var CustomerWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  ", "\n\n  ", "\n"])), function (props) {
+var ReviewMarkerWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 12px;\n\n  ", "\n\n  ", "\n\n  svg {\n    color: ", ";\n    font-size: 20px;\n  }\n\n  p {\n    margin: 0px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n  "])));
 }, function (_ref3) {
   var isHeader = _ref3.isHeader;
-  return !isHeader && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    height: 40px;\n    display: flex;\n    align-items: center;\n    ", "\n  "])), function (props) {
+  return !isHeader && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    height: 40px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: center;\n    ", "\n  "])), function (props) {
     return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
       return props.theme.colors.borderColor;
     }) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
-      return props.theme.colors.borderColor;
-    });
-  });
-});
-
-exports.CustomerWrapper = CustomerWrapper;
-
-var ReviewMarkerWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  font-size: 12px;\n\n  ", "\n\n  ", "\n\n  svg {\n    color: ", ";\n    font-size: 20px;\n  }\n\n  p {\n    margin: 0px;\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n  "])));
-}, function (_ref4) {
-  var isHeader = _ref4.isHeader;
-  return !isHeader && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    height: 40px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: center;\n    ", "\n  "])), function (props) {
-    return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
-      return props.theme.colors.borderColor;
-    }) : (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
       return props.theme.colors.borderColor;
     });
   });
@@ -119,64 +104,6 @@ var ReviewMarkerWrapper = _styledComponents.default.div(_templateObject19 || (_t
 
 exports.ReviewMarkerWrapper = ReviewMarkerWrapper;
 
-var CommentsWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  ", "\n\n  ", "\n\n  p {\n    color: ", ";\n    margin: 0px;\n  }\n"])), function (props) {
-  return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n  "])));
-}, function (_ref5) {
-  var isHeader = _ref5.isHeader;
-  return !isHeader && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    height: 40px;\n    display: flex;\n    align-items: center;\n    ", "\n  "])), function (props) {
-    return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
-      return props.theme.colors.borderColor;
-    }) : (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
-      return props.theme.colors.borderColor;
-    });
-  });
-}, function (props) {
-  return props.theme.colors.lightGray;
-});
-
-exports.CommentsWrapper = CommentsWrapper;
-
-var ActionsWrapper = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  font-size: 12px;\n  ", "\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n  "])));
-}, function (_ref6) {
-  var isHeader = _ref6.isHeader;
-  return !isHeader && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    height: 40px;\n    display: flex;\n    align-items: center;\n    ", "\n  "])), function (props) {
-    return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
-      return props.theme.colors.borderColor;
-    }) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
-      return props.theme.colors.borderColor;
-    });
-  });
-});
-
-exports.ActionsWrapper = ActionsWrapper;
-
-var PagesBottomContainer = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 10px;\n"])));
+var PagesBottomContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 10px;\n"])));
 
 exports.PagesBottomContainer = PagesBottomContainer;
-
-var EnableWrapper = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: fit-content;\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-}, function (props) {
-  var _props$theme3;
-
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n      padding-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n      padding-right: 10px;\n    "])));
-});
-
-exports.EnableWrapper = EnableWrapper;
-
-var ActionSelectorWrapper = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  ", "\n  button {\n    background: transparent !important;\n    border: none;\n    padding: 0px;\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n  }\n\n  .show {\n    button {\n      background: ", " !important;\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 12px;\n        color: ", ";\n      }\n      .dropdown-item:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"])), function (props) {
-  var _props$theme4;
-
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n  "])));
-}, function (props) {
-  return props.theme.colors.headingColor;
-}, function (props) {
-  return props.theme.colors.secundary;
-}, function (props) {
-  return props.theme.colors.borderColor;
-}, function (props) {
-  return props.theme.colors.headingColor;
-});
-
-exports.ActionSelectorWrapper = ActionSelectorWrapper;

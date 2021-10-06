@@ -519,6 +519,12 @@ Object.defineProperty(exports, "ReviewsListing", {
     return _ReviewsListing.ReviewsListing;
   }
 });
+Object.defineProperty(exports, "ReviewProductsListing", {
+  enumerable: true,
+  get: function get() {
+    return _ReviewProductsListing.ReviewProductsListing;
+  }
+});
 Object.defineProperty(exports, "Reports", {
   enumerable: true,
   get: function get() {
@@ -947,6 +953,8 @@ var _PlaceListing = require("./components/PlaceListing");
 var _ProductItemAccordion = require("./components/ProductItemAccordion");
 
 var _ReviewsListing = require("./components/ReviewsListing");
+
+var _ReviewProductsListing = require("./components/ReviewProductsListing");
 
 var _Reports = require("./components/Reports");
 

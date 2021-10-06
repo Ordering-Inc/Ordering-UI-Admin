@@ -293,7 +293,7 @@ var SidebarMenu = function SidebarMenu(props) {
     }, item.title);
   })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/intelligence/business' || location.pathname === '/intelligence/drivers' || location.pathname === '/intelligence/reviews' || location.pathname === '/intelligence/invoice'
+    active: location.pathname === '/intelligence/business' || location.pathname === '/intelligence/drivers' || location.pathname.includes('/intelligence/reviews') || location.pathname === '/intelligence/invoice'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, t('BUSINESS_INTELLIGENCE', 'Business Intelligence'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, businessIntelligenceSubMenus.map(function (item) {
