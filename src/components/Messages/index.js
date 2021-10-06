@@ -42,7 +42,8 @@ import {
   ChatHeader,
   ChatContactInfoContainer,
   InfoBlock,
-  SendToContainer
+  SendToContainer,
+  MessageSender
 } from './styles'
 import { Image as ImageWithFallback } from '../../components/Image'
 import { Input } from '../../styles/Inputs'
@@ -80,6 +81,8 @@ export const MessagesUI = (props) => {
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
+  console.log(messages, 'this is messages')
+  console.log(message, 'this is message')
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
@@ -203,6 +206,23 @@ export const MessagesUI = (props) => {
         return t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business')
       default:
         return status
+    }
+  }
+
+  const getLevel = (level) => {
+    switch (level) {
+      case 0:
+        return t('ADMIN', 'Admin')
+      case 1:
+        return t('CITY_MANAGER', 'City Manager')
+      case 2:
+        return t('BUSINESS', 'Business')
+      case 3:
+        return t('CUSTOMER', 'Customer')
+      case 4:
+        return t('DRIVER', 'Driver')
+      case 5:
+        return t('DRIVER_MANAGER', 'Driver Manager')
     }
   }
 
@@ -476,6 +496,7 @@ export const MessagesUI = (props) => {
                         {message.type === 2 && user.id === message.author_id && (
                           <MessageCustomer>
                             <BubbleCustomer>
+                              <MessageSender>{message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})</MessageSender>
                               {message.comment}
                               <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                             </BubbleCustomer>
@@ -511,6 +532,7 @@ export const MessagesUI = (props) => {
                         {message.type === 3 && user.id === message.author_id && (
                           <MessageCustomer>
                             <BubbleCustomer name='image'>
+                              <MessageSender>{message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})</MessageSender>
                               <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                               {message.comment && (
                                 <>
@@ -551,6 +573,7 @@ export const MessagesUI = (props) => {
                         {message.type === 2 && user.id !== message.author_id && (
                           <MessageBusiness>
                             <BubbleBusines>
+                              <MessageSender>{message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})</MessageSender>
                               {message.comment}
                               <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                             </BubbleBusines>
@@ -579,6 +602,7 @@ export const MessagesUI = (props) => {
                         )}
                         {message.type === 3 && user.id !== message.author_id && (
                           <MessageBusiness>
+                            <MessageSender>{message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})</MessageSender>
                             <BubbleBusines name='image'>
                               <ChatImage><img src={message.source} onLoad={() => setLoad(load + 1)} alt='chat-image' /></ChatImage>
                               {message.comment && (
