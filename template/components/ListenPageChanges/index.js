@@ -31,6 +31,7 @@ export const ListenPageChanges = ({ children }) => {
     drivers_analytics: '/intelligence/drivers',
     invoice: '/intelligence/invoice',
     reviews: '/intelligence/reviews',
+    reviewProducts: '/intelligence/reviews/:store',
     reports: '/intelligence/reports',
     delivery_drivers: '/delivery/drivers-list',
     drivers_managers: '/delivery/drivers-managers',

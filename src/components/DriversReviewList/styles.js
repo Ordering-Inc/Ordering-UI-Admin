@@ -51,6 +51,11 @@ export const WrapperImage = styled.div`
   ` : css`
     margin-right: 10px;
   `}
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const ImageStyled = styled.div`
@@ -91,14 +96,10 @@ export const ReviewObject = styled.div`
 `
 
 export const InfoBlock = styled.div`
-  max-width: calc(100% - 60px);
   p {
     font-size: 11px;
     margin: 0px;
     color: ${props => props.theme.colors.lightGray};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 
     &.bold {
       font-size: 12px;
@@ -140,6 +141,7 @@ export const ReviewMarkerWrapper = styled.div`
     color: ${props => props.theme.colors.lightGray};
   }
 `
+
 export const PagesBottomContainer = styled.div`
   display: flex;
   justify-content: flex-end;

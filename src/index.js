@@ -83,6 +83,7 @@ import { Personalization } from './components/Personalization'
 import { PlaceListing } from './components/PlaceListing'
 import { ProductItemAccordion } from './components/ProductItemAccordion'
 import { ReviewsListing } from './components/ReviewsListing'
+import { ReviewProductsListing } from './components/ReviewProductsListing'
 import { Reports } from './components/Reports'
 import { SearchBar } from './components/SearchBar'
 import { Settings } from './components/Settings'
@@ -208,6 +209,7 @@ export {
   PlaceListing,
   ProductItemAccordion,
   ReviewsListing,
+  ReviewProductsListing,
   Reports,
   SearchBar,
   Settings,

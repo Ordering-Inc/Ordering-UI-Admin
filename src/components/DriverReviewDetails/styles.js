@@ -23,17 +23,17 @@ export const Header = styled.div`
   }
 `
 
-export const BusinessLogoContainer = styled.div`
+export const DriverPhotoContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
 `
 
 export const WrapperImage = styled.div`
-  max-width: 125px;
-  max-height: 125px;
-  height: 125px;
-  width: 125px;
+  max-width: 120px;
+  max-height: 120px;
+  height: 120px;
+  width: 120px;
   ${({ isSkeleton }) => !isSkeleton && css`
     border: 1px solid #E3E3E3;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
@@ -45,6 +45,11 @@ export const WrapperImage = styled.div`
   ` : css`
     margin-right: 10px;
   `}
+
+  > svg {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const ImageStyled = styled.div`
@@ -70,19 +75,13 @@ export const Image = (props) => {
   )
 }
 
-export const ReviewQualityContainer = styled.div`
+export const ReviewItemContatiner = styled.div`
   margin-bottom: 40px;
-  
-  display: flex;
-    flex-direction: column;
-
 `
 
-export const QualityWrapper = styled.div`
-  p {
-    font-size: 14px;
-    margin: 0px;
-  }
+export const ReviewQualityContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 export const ReviewBarContainer = styled.div`
@@ -92,7 +91,7 @@ export const ReviewBarContainer = styled.div`
 const ReviewBarStyled = styled.div`
   height: 6px;
   border-radius: 10px;
-  background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.borderColor} ${props.percentage}%)`};
+  background: ${props => `linear-gradient(to right, ${props.theme.colors.headingColor} ${props.percentage}%, ${props.theme.colors.borderColor} ${props.percentage}%)`};
 `
 
 export const ReviewBar = (props) => {
@@ -115,4 +114,13 @@ export const ReviewQualityTextContainer = styled.div`
     color: ${props => props.theme.colors.lightGray};
     font-size: 12px;
   }
+`
+
+export const Comment = styled.div`
+  font-size: 12px;
+  margin: 25px 0;
+`
+
+export const NotReviewed = styled.p`
+  font-size: 14px;
 `

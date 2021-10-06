@@ -1,8 +1,13 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessMenuBasicContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  max-height: calc(100vh - 200px);
+  overflow: auto;
+  padding: 0 5px;
+  input,
+  textarea {
+    width: 100%;
+  }
   > button {
     height: 40px;
     margin-top: 50px;

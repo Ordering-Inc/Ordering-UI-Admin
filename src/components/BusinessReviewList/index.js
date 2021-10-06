@@ -1,97 +1,93 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, BusinessReviewsList as BusinessReviewsListController } from 'ordering-components-admin'
-import { Switch } from '../../styles/Switch'
+import { useLanguage, useUtils, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Pagination } from '../Pagination'
-import { ThreeDotsVertical, StarFill } from 'react-bootstrap-icons'
+import { StarFill } from 'react-bootstrap-icons'
 import { Confirm } from '../Confirm'
 import { SideBar } from '../SideBar'
-import { ReviewDetails } from '../ReviewDetails'
+import { BusinessReviewDetails } from '../BusinessReviewDetails'
 
 import {
   ReviewsTable,
   ReviewTbody,
   ReviewObject,
   InfoBlock,
-  CustomerWrapper,
   ReviewMarkerWrapper,
-  CommentsWrapper,
-  ActionsWrapper,
   PagesBottomContainer,
-  EnableWrapper,
-  ActionSelectorWrapper,
   WrapperImage,
   Image
 } from './styles'
 
 const BusinessReviewsListingUI = (props) => {
   const {
-    reviewsListState,
-    searchValue,
+    businessList,
+    pagination,
+    parentSearchValue,
+    getPageBusinesses,
     handleUpdateReview,
-    handleDeleteReview
+    onSearch
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ optimizeImage, parseNumber }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openReview, setOpenReview] = useState(false)
-  const [curReview, setCurReview] = useState(null)
+  const [curBusiness, setCurBusiness] = useState(null)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [reviewssPerPage, setReviewsPerPage] = useState(10)
-  const [currentReviews, setCurrentReviews] = useState([])
+  const [businessesPerPage, setBusinessesPerPage] = useState(10)
+  const [currentBusinessess, setCurrentBusinessess] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
   const handleChangePage = (page) => {
-    setCurrentPage(page)
+    if ((pagination.from <= page * businessesPerPage && page * businessesPerPage <= pagination.to) ||
+      (pagination.from <= page * businessesPerPage && page * businessesPerPage > pagination.total)
+    ) {
+      setCurrentPage(page)
+    } else {
+      getPageBusinesses(businessesPerPage, page)
+    }
   }
 
   const handleChangePageSize = (pageSize) => {
-    const expectedPage = Math.ceil(((currentPage - 1) * reviewssPerPage + 1) / pageSize)
-    setCurrentPage(expectedPage)
-    setReviewsPerPage(pageSize)
+    setBusinessesPerPage(pageSize)
+    const expectedPage = Math.ceil(pagination.from / pageSize)
+    if ((pagination.from <= expectedPage * pageSize && expectedPage * pageSize <= pagination.to) ||
+      (pagination.from <= expectedPage * pageSize && expectedPage * pageSize > pagination.total)
+    ) {
+      setCurrentPage(expectedPage)
+    } else {
+      setCurrentPage(expectedPage)
+      getPageBusinesses(pageSize, expectedPage)
+    }
   }
 
   useEffect(() => {
-    if (reviewsListState.loading) return
-    let reviews = []
-    if (searchValue) {
-      reviews = reviewsListState.reviews.filter(review => review?.business_name.toLowerCase().includes(searchValue.toLowerCase()))
-    } else {
-      reviews = [...reviewsListState.reviews]
+    if (businessList.loading) return
+    let _totalPages
+    if (pagination?.total) {
+      _totalPages = Math.ceil(pagination?.total / businessesPerPage)
+    } else if (businessList.businesses.length > 0) {
+      _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage)
     }
-    const _totalPages = Math.ceil(reviews.length / reviewssPerPage)
-    const indexOfLastPost = currentPage * reviewssPerPage
-    const indexOfFirstPost = indexOfLastPost - reviewssPerPage
-    const _currentReviews = reviews.slice(indexOfFirstPost, indexOfLastPost)
+    const indexOfLastPost = currentPage * businessesPerPage
+    const indexOfFirstPost = indexOfLastPost - businessesPerPage
+    const _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
-    setCurrentReviews(_currentReviews)
-  }, [reviewsListState, currentPage, reviewssPerPage, searchValue])
+    setCurrentBusinessess(_currentBusinessess)
+  }, [businessList, currentPage, pagination, businessesPerPage])
 
-  const onClickDeleteReview = (businessId, reviewId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_REVIEW', 'Are you sure to delete this review?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeleteReview(businessId, reviewId)
-      }
-    })
-  }
-
-  const handleOpenReview = (review) => {
-    setCurReview(review)
+  const handleOpenReview = (business) => {
+    setCurBusiness(business)
     setOpenReview(true)
   }
 
-  const handleClickReview = (e, review) => {
-    const isInvalid = e.target.closest('.review-enabled') || e.target.closest('.review-actions')
-    if (isInvalid) return
-    handleOpenReview(review)
-  }
+  useEffect(() => {
+    if (parentSearchValue === null) return
+    onSearch(parentSearchValue)
+    setCurrentPage(1)
+  }, [parentSearchValue])
 
   return (
     <>
@@ -99,121 +95,87 @@ const BusinessReviewsListingUI = (props) => {
         <thead>
           <tr>
             <th><ReviewObject isHeader>{t('BUSINESS', 'Business')}</ReviewObject></th>
-            <th><CustomerWrapper isHeader>{t('CUSTOMER', 'Customer')}</CustomerWrapper></th>
             <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
-            <th><CommentsWrapper isHeader>{t('COMMENTS', 'Comments')}</CommentsWrapper></th>
-            <th><ActionsWrapper isHeader>{t('ACTIONS', 'Actions')}</ActionsWrapper></th>
           </tr>
         </thead>
-        {reviewsListState.loading ? (
-          [...Array(10).keys()].map(i => (
+        {businessList.loading ? (
+          [...Array(businessesPerPage).keys()].map(i => (
             <ReviewTbody key={i}>
               <tr>
-                <td><ReviewObject><Skeleton width={100} /></ReviewObject></td>
-                <td><CustomerWrapper><Skeleton width={100} /></CustomerWrapper></td>
+                <td>
+                  <ReviewObject>
+                    <WrapperImage isSkeleton>
+                      <Skeleton width={45} height={45} />
+                    </WrapperImage>
+                    <InfoBlock>
+                      <p><Skeleton width={80} /></p>
+                      <p><Skeleton width={100} /></p>
+                    </InfoBlock>
+                  </ReviewObject>
+                </td>
                 <td><ReviewMarkerWrapper><Skeleton width={20} /></ReviewMarkerWrapper></td>
-                <td><CommentsWrapper><Skeleton width={150} /></CommentsWrapper></td>
-                <td><ActionsWrapper><Skeleton width={100} /></ActionsWrapper></td>
               </tr>
             </ReviewTbody>
           ))
         ) : (
-          currentReviews.map(review => (
-            <ReviewTbody key={review.id} onClick={e => handleClickReview(e, review)}>
+          currentBusinessess.map(business => (
+            <ReviewTbody
+              key={business.id}
+              active={business.id === curBusiness?.id}
+              onClick={() => handleOpenReview(business)}
+            >
               <tr>
                 <td>
                   <ReviewObject>
                     <WrapperImage>
-                      <Image bgimage={optimizeImage(review?.business_logo || theme.images?.dummies?.businessLogo)} />
+                      <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo)} />
                     </WrapperImage>
                     <InfoBlock>
-                      <p className='bold'>{review?.business_name}</p>
-                      <p>{review?.city_name}</p>
+                      <p className='bold'>{business?.name}</p>
+                      <p>{business?.address}</p>
                     </InfoBlock>
                   </ReviewObject>
                 </td>
                 <td>
-                  <CustomerWrapper>
-                    <InfoBlock>
-                      <p className='bold'>
-                        {review?.user?.name} {review?.user?.lastname}
-                      </p>
-                      <p>{review?.user?.email}</p>
-                    </InfoBlock>
-                  </CustomerWrapper>
-                </td>
-                <td>
                   <ReviewMarkerWrapper>
-                    <StarFill />
-                    <p>{parseNumber(review?.total)}</p>
+                    {business?.reviews?.total && (
+                      <>
+                        <StarFill />
+                        <p>{business?.reviews?.total}</p>
+                      </>
+                    )}
                   </ReviewMarkerWrapper>
-                </td>
-                <td>
-                  <CommentsWrapper>
-                    <p>
-                      {review?.comment}
-                    </p>
-                  </CommentsWrapper>
-                </td>
-                <td>
-                  <ActionsWrapper>
-                    <EnableWrapper className='review-enabled'>
-                      <span>{t('ENABLE', 'Enable')}</span>
-                      <Switch
-                        defaultChecked={review?.enabled}
-                        onChange={enabled => handleUpdateReview(review?.business_id, review.id, { enabled: enabled })}
-                      />
-                    </EnableWrapper>
-                    <ActionSelectorWrapper className='review-actions'>
-                      <DropdownButton
-                        menuAlign={theme?.rtl ? 'left' : 'right'}
-                        title={<ThreeDotsVertical />}
-                        id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                      >
-                        <Dropdown.Item
-                          onClick={() => handleOpenReview(review)}
-                        >
-                          {t('DETAILS', 'Details')}
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          onClick={() => onClickDeleteReview(review?.business_id, review.id)}
-                        >
-                          {t('DELETE', 'Delete')}
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </ActionSelectorWrapper>
-                  </ActionsWrapper>
                 </td>
               </tr>
             </ReviewTbody>
           ))
         )}
       </ReviewsTable>
-      {!reviewsListState.loading && (
-        <PagesBottomContainer>
-          {currentReviews?.length > 0 && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              handleChangePage={handleChangePage}
-              defaultPageSize={reviewssPerPage}
-              handleChangePageSize={handleChangePageSize}
-            />
-          )}
-        </PagesBottomContainer>
-      )}
+      <PagesBottomContainer>
+        {!businessList.loading && totalPages > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handleChangePage={handleChangePage}
+            defaultPageSize={businessesPerPage}
+            handleChangePageSize={handleChangePageSize}
+          />
+        )}
+      </PagesBottomContainer>
       {openReview && (
         <SideBar
           sidebarId='review-details'
           defaultSideBarWidth={550}
           open={openReview}
           onClose={() => {
-            setCurReview(null)
+            setCurBusiness(null)
             setOpenReview(false)
           }}
         >
-          <ReviewDetails
-            review={curReview}
+          <BusinessReviewDetails
+            business={curBusiness}
+            businessId={curBusiness?.id}
+            reviews={curBusiness?.reviews?.reviews}
             handleUpdateReview={handleUpdateReview}
           />
         </SideBar>
@@ -235,7 +197,14 @@ const BusinessReviewsListingUI = (props) => {
 export const BusinessReviewList = (props) => {
   const reviewsProps = {
     ...props,
+    asDashboard: true,
+    initialPageSize: 50,
+    loadMorePageSize: 10,
+    isSearchByBusinessName: true,
+    isSearchByBusinessEmail: true,
+    isSearchByBusinessPhone: true,
+    propsToFetch: ['name', 'logo', 'address', 'reviews', 'slug'],
     UIComponent: BusinessReviewsListingUI
   }
-  return <BusinessReviewsListController {...reviewsProps} />
+  return <BusinessListController {...reviewsProps} />
 }
