@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { BusinessTypeForm } from '../BusinessTypeForm'
-import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
+import { BusinessType } from '../BusinessType'
 
 import {
   Container,
-  BusinessType,
   AddNewBusinessTypeContainer,
   AddNewBusinessTypeTitle
 } from './styles'
@@ -24,7 +21,6 @@ export const BusinessTypes = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const [selectedBusinessTypes, setSelectedBusinessTypes] = useState([])
@@ -78,27 +74,14 @@ export const BusinessTypes = (props) => {
   return (
     <Container>
       {businessTypes.map(businessType => (
-        businessType.id && (
+        businessType?.id && (
           <BusinessType
+            {...props}
             key={businessType.id}
-            disabled={formState?.loading}
-            isChecked={selectedBusinessTypes.includes(businessType.id)}
-            onClick={() => handleSelectBusinessTypes(businessType.id)}
-          >
-            {selectedBusinessTypes.includes(businessType.id) ? (
-              <RiCheckboxFill />
-            ) : (
-              <RiCheckboxBlankLine />
-            )}
-            <img
-              src={businessType?.image || theme.images?.categories?.all}
-              alt={businessType.name.toLowerCase()}
-              width='30px'
-              height='30px'
-              loading='lazy'
-            />
-            <span>{businessType?.name}</span>
-          </BusinessType>
+            businessType={businessType}
+            selectedBusinessTypes={selectedBusinessTypes}
+            handleSelectBusinessTypes={handleSelectBusinessTypes}
+          />
         )
       ))}
       <AddNewBusinessTypeContainer>
