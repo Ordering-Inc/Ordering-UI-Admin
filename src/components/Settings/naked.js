@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 import { useSession, useApi } from 'ordering-components-admin'
 
-const categoryHideList = ['cloudinary', 'tookan', 'order_type', 'others', 'apple_login', 'location']
-const configHideList = ['search_by_address', 'stripe_connect_sandbox', 'distance_unit_km', 'google_login_client_id']
+const categoryHideList = ['cloudinary', 'tookan', 'order_type', 'others', 'apple_login', 'location', 'order_messages', 'twilio']
+const configHideList = ['search_by_address', 'distance_unit_km', 'google_login_client_id', 'pickup', 'orders_metafields_strategy', 'order_validate', 'time_format', 'driver_close_distance', 'autoassign_type']
 
 /**
  * Component to manage Settings page behavior without UI component

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, useConfig } from 'ordering-components-admin'
+import { useLanguage, useEvent } from 'ordering-components-admin'
 import { Settings as SettingsController } from './naked'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
@@ -11,14 +11,12 @@ import { SideBar } from '../SideBar'
 import { CheckoutFieldsSetting } from '../CheckoutFieldsSetting'
 import { AddressFieldsSetting } from '../AddressFieldsSetting'
 import { LanguageSetting } from '../LanguageSetting'
-import { SettingsList } from '../SettingsList'
 
 import {
   BasicSettingsContainer,
   HeaderTitleContainer,
   ContentWrapper,
-  SettingItemWrapper,
-  SettingsListWrapper
+  SettingItemWrapper
 } from './styles'
 
 const SettingsUI = (props) => {
@@ -29,13 +27,11 @@ const SettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
-  const [stripeConnectConfigs, setStripeConnectConfigs] = useState([])
   const { search } = useLocation()
 
   let category
@@ -98,16 +94,16 @@ const SettingsUI = (props) => {
     }
   }, [categoryList?.categories])
 
-  useEffect(() => {
-    if (Object.keys(configs).length > 0) {
-      const _configs = [
-        configs?.stripe_connect_sandbox,
-        { ...configs?.stripe_connect_client_id, name: t('CLIENT_ID_SANDBOX') },
-        { ...configs?.stripe_connect_client_id_sandbox, name: t('CLIENT_ID_PRODUCTION') }
-      ]
-      setStripeConnectConfigs([..._configs])
-    }
-  }, [configs])
+  // useEffect(() => {
+  //   if (Object.keys(configs).length > 0) {
+  //     const _configs = [
+  //       configs?.stripe_connect_sandbox,
+  //       { ...configs?.stripe_connect_client_id, name: t('CLIENT_ID_SANDBOX') },
+  //       { ...configs?.stripe_connect_client_id_sandbox, name: t('CLIENT_ID_PRODUCTION') }
+  //     ]
+  //     setStripeConnectConfigs([..._configs])
+  //   }
+  // }, [configs])
 
   return (
     <>
@@ -186,19 +182,6 @@ const SettingsUI = (props) => {
                       active={selectedCategory?.id === category?.id}
                     />
                   </SettingItemWrapper>
-                  {category.key === 'stripe' && (
-                    <SettingItemWrapper
-                      className='col-md-4 col-sm-6'
-                      onClick={() => handleOpenSettingDetails('stripe_connect')}
-                    >
-                      <SettingItemUI
-                        title={t('STRIPE_CONNECT_SETTINGS', 'Stripe connect settings')}
-                        description={t('STRIPE_CONNECT_SETTINGS_DESC')}
-                        icon={<GearFill />}
-                        active={isOpenSettingDetails === 'stripe_connect'}
-                      />
-                    </SettingItemWrapper>
-                  )}
                 </React.Fragment>
               ))
             )
@@ -232,11 +215,6 @@ const SettingsUI = (props) => {
             )}
             {isOpenSettingDetails === 'language' && (
               <LanguageSetting />
-            )}
-            {isOpenSettingDetails === 'stripe_connect' && stripeConnectConfigs.length > 0 && (
-              <SettingsListWrapper>
-                <SettingsList staticConfigs={stripeConnectConfigs} handleChangeStaic={setStripeConnectConfigs} />
-              </SettingsListWrapper>
             )}
           </SideBar>
         )
