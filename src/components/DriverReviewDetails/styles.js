@@ -74,3 +74,53 @@ export const Image = (props) => {
     </ImageStyled>
   )
 }
+
+export const ReviewItemContatiner = styled.div`
+  margin-bottom: 40px;
+`
+
+export const ReviewQualityContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const ReviewBarContainer = styled.div`
+  margin: 15px 0;
+`
+
+const ReviewBarStyled = styled.div`
+  height: 6px;
+  border-radius: 10px;
+  background: ${props => `linear-gradient(to right, ${props.theme.colors.headingColor} ${props.percentage}%, ${props.theme.colors.borderColor} ${props.percentage}%)`};
+`
+
+export const ReviewBar = (props) => {
+  return (
+    <ReviewBarStyled
+      {...props}
+    >
+      {props.children}
+    </ReviewBarStyled>
+  )
+}
+
+export const ReviewQualityTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    margin: 0px;
+    color: ${props => props.theme.colors.lightGray};
+    font-size: 12px;
+  }
+`
+
+export const Comment = styled.div`
+  font-size: 12px;
+  margin: 25px 0;
+`
+
+export const NotReviewed = styled.p`
+  font-size: 14px;
+`

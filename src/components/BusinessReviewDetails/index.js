@@ -34,7 +34,20 @@ const BusinessReviewDetailsUI = (props) => {
   const [events] = useEvent()
 
   const getReviewPercent = (quality) => {
-    return quality / 5 * 100
+    switch (quality) {
+      case 1:
+        return 0
+      case 2:
+        return 25
+      case 3:
+        return 50
+      case 4:
+        return 75
+      case 5:
+        return 100
+      default:
+        return quality / 5 * 100
+    }
   }
 
   const handleGoToPage = (data) => {
@@ -114,11 +127,11 @@ const BusinessReviewDetailsUI = (props) => {
                   />
                 </ReviewBarContainer>
                 <ReviewQualityTextContainer>
-                  <p>{t('Terrible')}</p>
-                  <p>{t('Bad')}</p>
-                  <p>{t('Okay')}</p>
-                  <p>{t('Good')}</p>
-                  <p>{t('Great')}</p>
+                  <p>{t('TERRIBLE', 'Terrible')}</p>
+                  <p>{t('BAD', 'Bad')}</p>
+                  <p>{t('OKAY', 'Okay')}</p>
+                  <p>{t('GOOD', 'Good')}</p>
+                  <p>{t('GREAT', 'Great')}</p>
                 </ReviewQualityTextContainer>
               </ReviewQualityContainer>
               <Comment>{review?.comment}</Comment>

@@ -1,6 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
-import { ProductReview as ProductReviewController } from './naked'
+import { useLanguage, useUtils, ProductReviews as ProductReviewController } from 'ordering-components-admin'
 import { ImageFill, HandThumbsUp, HandThumbsDown } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 
@@ -24,7 +23,7 @@ const ProductReviewDetailsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ optimizeImage, parseDate }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
 
   return (
     <>
@@ -42,7 +41,18 @@ const ProductReviewDetailsUI = (props) => {
           </WrapperImage>
         </ProductImageContainer>
         {productReviewList?.loading ? (
-          <Skeleton />
+          [...Array(10).keys()].map(i => (
+            <ReviewContentWrapper key={i}>
+              <ReviewHeader>
+                <LikeSignWrapper>
+                  <Skeleton width={70} />
+                </LikeSignWrapper>
+              </ReviewHeader>
+              <ReviewComment>
+                <Skeleton />
+              </ReviewComment>
+            </ReviewContentWrapper>
+          ))
         ) : (
           productReviewList.reviews.map(review => (
             <ReviewContentWrapper key={review.id}>

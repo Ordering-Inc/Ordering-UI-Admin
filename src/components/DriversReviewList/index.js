@@ -5,10 +5,7 @@ import {
   UsersList as DriversController
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { useTheme } from 'styled-components'
-import { ThreeDotsVertical, StarFill, PersonFill } from 'react-bootstrap-icons'
-import { Switch } from '../../styles'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
+import { StarFill, PersonFill } from 'react-bootstrap-icons'
 import { Pagination } from '../Pagination'
 import { SideBar } from '../SideBar'
 import { DriverReviewDetails } from '../DriverReviewDetails'
@@ -17,13 +14,10 @@ import {
   ReviewsTable,
   ReviewObject,
   ReviewMarkerWrapper,
-  ActionsWrapper,
   ReviewTbody,
   WrapperImage,
   Image,
   InfoBlock,
-  EnableWrapper,
-  ActionSelectorWrapper,
   PagesBottomContainer
 } from './styles'
 
@@ -38,7 +32,6 @@ const DriversReviewListUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ optimizeImage, parseNumber }] = useUtils()
-  const theme = useTheme()
 
   const [openReview, setOpenReview] = useState(false)
   const [curDriver, setCurDriver] = useState(null)
@@ -75,7 +68,6 @@ const DriversReviewListUI = (props) => {
           <tr>
             <th><ReviewObject isHeader>{t('DRIVER', 'Driver')}</ReviewObject></th>
             <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
-            <th><ActionsWrapper isHeader>{t('ACTIONS', 'Actions')}</ActionsWrapper></th>
           </tr>
         </thead>
         {usersList.loading ? (
@@ -94,7 +86,6 @@ const DriversReviewListUI = (props) => {
                   </ReviewObject>
                 </td>
                 <td><ReviewMarkerWrapper><Skeleton width={20} /></ReviewMarkerWrapper></td>
-                <td><ActionsWrapper><Skeleton width={100} /></ActionsWrapper></td>
               </tr>
             </ReviewTbody>
           ))
@@ -126,35 +117,6 @@ const DriversReviewListUI = (props) => {
                     <StarFill />
                     <p>{parseNumber(user?.qualification)}</p>
                   </ReviewMarkerWrapper>
-                </td>
-                <td>
-                  <ActionsWrapper>
-                    <EnableWrapper className='review-enabled'>
-                      <span>{t('ENABLE', 'Enable')}</span>
-                      <Switch
-                        defaultChecked
-                        // onChange={enabled => handleUpdateReview(review?.business_id, review.id, { enabled: enabled })}
-                      />
-                    </EnableWrapper>
-                    <ActionSelectorWrapper className='review-actions'>
-                      <DropdownButton
-                        menuAlign={theme?.rtl ? 'left' : 'right'}
-                        title={<ThreeDotsVertical />}
-                        id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                      >
-                        <Dropdown.Item
-                          onClick={() => handleOpenReview(user)}
-                        >
-                          {t('DETAILS', 'Details')}
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          // onClick={() => onClickDeleteReview(review?.business_id, review.id)}
-                        >
-                          {t('DELETE', 'Delete')}
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </ActionSelectorWrapper>
-                  </ActionsWrapper>
                 </td>
               </tr>
             </ReviewTbody>
