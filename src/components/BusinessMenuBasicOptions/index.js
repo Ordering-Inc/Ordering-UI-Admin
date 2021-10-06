@@ -436,25 +436,23 @@ export const BusinessMenuBasicOptions = (props) => {
             )}
           </CategoryProductsContainer>
         ))}
-        {Object.keys(formState?.changes).length > 0 && (
-          <Button
-            color='primary'
-            borderRadius='5px'
-            disabled={formState.loading}
-            onClick={() => isEdit ? handleUpdateBusinessMenuOption() : handleAddBusinessMenuOption()}
-          >
-            {formState.loading ? (
-              t('LOADING', 'Loading')
-            ) : (
-              isEdit ? (
-                t('UPDATE', 'Update')
-              ) : (
-                t('ADD', 'Add')
-              )
-            )}
-          </Button>
-        )}
       </BusinessMenuBasicContainer>
+      <Button
+        color='primary'
+        borderRadius='5px'
+        disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+        onClick={() => isEdit ? handleUpdateBusinessMenuOption() : handleAddBusinessMenuOption()}
+      >
+        {formState.loading ? (
+          t('LOADING', 'Loading')
+        ) : (
+          isEdit ? (
+            t('UPDATE', 'Update')
+          ) : (
+            t('ADD', 'Add')
+          )
+        )}
+      </Button>
       <Alert
         title={t('ORDERING', 'Ordering')}
         content={alertState.content}

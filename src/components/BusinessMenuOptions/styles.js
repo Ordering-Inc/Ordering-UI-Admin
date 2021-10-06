@@ -6,7 +6,9 @@ export const Container = styled.div`
   transition: 0.3s;
   
   > button {
-    margin: 20px 0;
+    height: 42px;
+    width: 100%;
+    margin-top: 20px;
   }
   
   @media (min-width: 1000px) {
