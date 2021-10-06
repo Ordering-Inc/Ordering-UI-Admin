@@ -58,12 +58,9 @@ export const ReviewsListing = (props) => {
           >
             {t('DRIVERS', 'Drivers')}
           </Tab>
-          <Tab>
-            {t('WAITERS', 'Waiters')}
-          </Tab>
         </Tabs>
         {showOption === 'business' && (
-          <BusinessReviewList searchValue={searchValue} />
+          <BusinessReviewList parentSearchValue={searchValue} />
         )}
         {showOption === 'drivers' && (
           <DriversReviewList parentSearchValue={searchValue} />

@@ -23,7 +23,7 @@ const BusinessReviewsListingUI = (props) => {
   const {
     businessList,
     pagination,
-    searchValue,
+    parentSearchValue,
     getPageBusinesses,
     handleUpdateReview,
     onSearch
@@ -84,9 +84,10 @@ const BusinessReviewsListingUI = (props) => {
   }
 
   useEffect(() => {
-    if (searchValue === null) return
-    onSearch(searchValue)
-  }, [searchValue])
+    if (parentSearchValue === null) return
+    onSearch(parentSearchValue)
+    setCurrentPage(1)
+  }, [parentSearchValue])
 
   return (
     <>
@@ -137,8 +138,12 @@ const BusinessReviewsListingUI = (props) => {
                 </td>
                 <td>
                   <ReviewMarkerWrapper>
-                    <StarFill />
-                    <p>{business?.reviews?.total}</p>
+                    {business?.reviews?.total && (
+                      <>
+                        <StarFill />
+                        <p>{business?.reviews?.total}</p>
+                      </>
+                    )}
                   </ReviewMarkerWrapper>
                 </td>
               </tr>

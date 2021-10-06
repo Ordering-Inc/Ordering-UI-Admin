@@ -26,14 +26,15 @@ import {
 export const ReviewProductsListingUI = (props) => {
   const {
     businessState,
-    categoryState
+    categoryState,
+    handleChangeSearch,
+    searchValue
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
 
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
-  const [searchValue, setSearchValue] = useState(null)
   const [openReview, setOpenReview] = useState(false)
   const [curProduct, setCurProduct] = useState(null)
 
@@ -70,6 +71,10 @@ export const ReviewProductsListingUI = (props) => {
     setOpenReview(true)
   }
 
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchValue])
+
   return (
     <>
       <ReviewsListingContainer>
@@ -89,7 +94,7 @@ export const ReviewProductsListingUI = (props) => {
             <SearchBar
               placeholder={t('SEARCH', 'Search')}
               searchValue={searchValue}
-              onSearch={val => setSearchValue(val)}
+              onSearch={handleChangeSearch}
             />
           </HeaderRight>
         </Header>
@@ -97,7 +102,7 @@ export const ReviewProductsListingUI = (props) => {
           <thead>
             <tr>
               <th><ReviewObject isHeader>{t('PRODUCT', 'Product')}</ReviewObject></th>
-              <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
+              {/* <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th> */}
             </tr>
           </thead>
           {(businessState?.loading || categoryState?.loading) ? (
@@ -112,7 +117,7 @@ export const ReviewProductsListingUI = (props) => {
                       <p><Skeleton width={80} /></p>
                     </ReviewObject>
                   </td>
-                  <td><ReviewMarkerWrapper><Skeleton width={20} /></ReviewMarkerWrapper></td>
+                  {/* <td><ReviewMarkerWrapper><Skeleton width={20} /></ReviewMarkerWrapper></td> */}
                 </tr>
               </ReviewTbody>
             ))
@@ -136,12 +141,12 @@ export const ReviewProductsListingUI = (props) => {
                       <p>{product?.name}</p>
                     </ReviewObject>
                   </td>
-                  <td>
+                  {/* <td>
                     <ReviewMarkerWrapper>
                       <StarFill />
-                      {/* <p>{product?.reviews?.total}</p> */}
+                      <p>{product?.reviews?.total}</p>
                     </ReviewMarkerWrapper>
-                  </td>
+                  </td> */}
                 </tr>
               </ReviewTbody>
             ))
@@ -192,6 +197,8 @@ export const ReviewProductsListing = (props) => {
     isAllCategoryProducts: true,
     UIComponent: ReviewProductsListingUI,
     isInitialRender,
+    isSearchByName: true,
+    isSearchByDescription: true,
     handleUpdateInitialRender: (val) => setIsInitialRender(val)
   }
   return (

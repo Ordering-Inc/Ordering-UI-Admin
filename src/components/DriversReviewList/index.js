@@ -114,8 +114,12 @@ const DriversReviewListUI = (props) => {
                 </td>
                 <td>
                   <ReviewMarkerWrapper>
-                    <StarFill />
-                    <p>{parseNumber(user?.qualification)}</p>
+                    {user?.qualification && (
+                      <>
+                        <StarFill />
+                        <p>{parseNumber(user?.qualification)}</p>
+                      </>
+                    )}
                   </ReviewMarkerWrapper>
                 </td>
               </tr>

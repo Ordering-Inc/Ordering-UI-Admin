@@ -82,6 +82,7 @@ export const Image = (props) => {
 }
 
 export const ReviewContentWrapper = styled.div`
+  margin-bottom: 40px;
 `
 
 export const ReviewHeader = styled.div`

@@ -146,6 +146,10 @@ export const ReviewObject = styled.div`
       margin-right: 10px;
     `}
   }
+
+  p {
+    margin: 0;
+  }
 `
 export const ReviewMarkerWrapper = styled.div`
   font-size: 12px;

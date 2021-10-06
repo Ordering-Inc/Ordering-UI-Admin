@@ -7,7 +7,6 @@ import { ProductIngredient } from '../ProductIngredient'
 import { ProductMetaFields } from '../ProductMetaFields'
 import { Personalization } from '../Personalization'
 import { ProductExtras } from '../ProductExtras'
-import { ProductReviews } from '../ProductReviews'
 
 import {
   Container
@@ -126,12 +125,6 @@ export const ProductDetails = (props) => {
             <ProductMetaFields
               businessId={business.id}
               categoryId={product.category_id}
-              productId={product.id}
-            />
-          )}
-          {showOption === 'reviews' && (
-            <ProductReviews
-              businessId={business.id}
               productId={product.id}
             />
           )}
