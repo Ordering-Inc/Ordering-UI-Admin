@@ -37,6 +37,7 @@ import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
+import { ReviewProducts } from './pages/ReviewProducts'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
 import { DriversManagersList } from './pages/DriversManagersList'
 import { DriversCompaniesList } from './pages/DriversCompaniesList'
@@ -263,6 +264,13 @@ export const App = () => {
                       {
                         auth
                           ? <ReviewsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/intelligence/reviews/:store'>
+                      {
+                        auth
+                          ? <ReviewProducts />
                           : <Redirect to='/login' />
                       }
                     </Route>

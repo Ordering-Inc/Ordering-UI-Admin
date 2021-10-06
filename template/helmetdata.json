@@ -111,6 +111,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "reviewProducts": {
+    "title": "Review Products",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "reports": {
     "title": "Advanced Reports",
     "description": "a dummy description about this page",
