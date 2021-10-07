@@ -86,12 +86,6 @@ const BusinessMenuOptionsUI = (props) => {
             >
               {t('BASIC', 'Basic')}
             </Tab>
-            {/* <Tab
-              active={selectedMenuOption === 'enterprise'}
-              onClick={() => setSelectedMenuOption('enterprise')}
-            >
-              {t('ENTERPRISE', 'Enterprise')}
-            </Tab> */}
           </AutoScroll>
         </TabInnerContainer>
       </TabContainer>
