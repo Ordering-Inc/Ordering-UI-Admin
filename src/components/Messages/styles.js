@@ -573,3 +573,8 @@ export const SendToContainer = styled.div`
     text-align: initial;
   `}
 `
+
+export const MessageSender = styled.p`
+  margin-bottom: 5px;
+  text-align: center;
+`

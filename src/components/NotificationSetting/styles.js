@@ -12,7 +12,7 @@ export const AccordionTitle = styled.div`
 `
 
 export const GeneralWrapper = styled.div`
-  padding-top: 15px;
+  padding-top: 20px;
 `
 
 export const ToggleItemWrapper = styled.div`

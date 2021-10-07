@@ -190,7 +190,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('MIN', 'Min')}</label>
                 <Input
                   name='min'
-                  value={changesState?.min ?? optionState?.option?.min}
+                  defaultValue={optionState?.option?.min}
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, true)}
                 />
               </InputWrapper>
@@ -198,7 +198,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('MAX', 'Max')}</label>
                 <Input
                   name='max'
-                  value={changesState?.max ?? optionState?.option?.max}
+                  defaultValue={optionState?.option?.max}
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, false)}
                 />
               </InputWrapper>

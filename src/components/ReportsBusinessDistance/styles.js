@@ -108,6 +108,10 @@ export const DistanceTable = styled.table`
 `
 
 export const Thead = styled.thead`
+  position: sticky;
+  top: 0px;
+  background: white;
+
   tr {
     th {
       font-weight: 500;
@@ -167,6 +171,7 @@ export const Tfoot = styled.tfoot`
 export const TableWrapper = styled.div`
   width: 100%;
   overflow: auto;
+  max-height: 350px;
 `
 
 export const EmptyContent = styled.div`

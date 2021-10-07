@@ -11,6 +11,7 @@ import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
 import { BusinessPromotionList } from '../BusinessPromotionList'
 import { BusinessCustomFields } from '../BusinessCustomFields'
 import { MoreSidebarLayout } from '../MoreSidebarLayout'
+import { BusinessWebhooks } from '../BusinessWebhooks'
 import {
   BarContainer
 } from './styles'
@@ -184,6 +185,12 @@ export const BusinessDetailsUI = (props) => {
           {selectedItem === 'personalization' && (
             <Personalization
               isShowTitle
+            />
+          )}
+          {selectedItem === 'webhooks' && (
+            <BusinessWebhooks
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
             />
           )}
         </MoreSidebarLayout>
