@@ -202,6 +202,7 @@ const AddCsvFormUI = (props) => {
                     defaultValue={
                       fileState?.fileName
                     }
+                    pattern='^.+\.(xlsx|xls|csv)$'
                     readOnly
                     ref={formMethods.register({
                       required: t('VALIDATION_ERROR_CSV_FILE_REQUIRED', 'CSV file is required')
