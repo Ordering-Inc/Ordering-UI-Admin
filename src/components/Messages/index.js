@@ -81,8 +81,6 @@ export const MessagesUI = (props) => {
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
-  console.log(messages, 'this is messages')
-  console.log(message, 'this is message')
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
