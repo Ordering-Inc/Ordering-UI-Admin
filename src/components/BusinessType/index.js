@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Alert } from '../Confirm'
-import { useLanguage, DragAndDrop, ExamineClick } from 'ordering-components-admin'
+import { useLanguage, DragAndDrop, ExamineClick, BusinessType as BusinessTypeController } from 'ordering-components-admin'
 import { bytesConverter } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { BusinessType as BusinessTypeController } from './naked'
 import { Trash } from 'react-bootstrap-icons'
 import BiImage from '@meronex/icons/bi/BiImage'
 
