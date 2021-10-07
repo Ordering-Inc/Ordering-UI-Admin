@@ -21,7 +21,14 @@ export const SettingsSelectUI = (props) => {
   const [options, setOptions] = useState(null)
 
   useEffect(() => {
-    if (config) {
+    if (!config) return
+    if (config.key === 'terms_and_conditions') {
+      const selectTypes = [
+        { value: 'true', content: <Option>{t('YES', 'Yes')}</Option> },
+        { value: 'false', content: <Option>{t('NO', 'No')}</Option> }
+      ]
+      setOptions(selectTypes)
+    } else {
       const selectedTypes = config?.options?.map(item => {
         return { value: item.value, content: <Option>{t(item.text.toUpperCase())}</Option> }
       })

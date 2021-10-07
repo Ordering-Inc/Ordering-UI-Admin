@@ -12,6 +12,7 @@ import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
 import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
 import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
 import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
+import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
@@ -53,7 +54,7 @@ const BusinessPaymentMethodsUI = (props) => {
   const ActionIcon = <FiMoreVertical />
 
   const editablePaymethods = [
-    'stripe_direct', 'paypal_express', 'stripe_redirect', 'stripe_connect'
+    'stripe_direct', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'paypal'
   ]
 
   const isCheckEnableSate = (id) => {
@@ -167,6 +168,19 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleSaveClick={handleSaveClick}
                 />
               )}
+              {selectedPaymethodGateway === 'paypal' && (
+                <PaymentOptionPaypal
+                  open={isEdit}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                />
+              )}
               {selectedPaymethodGateway === 'paypal_express' && (
                 <PaymethodOptionPaypalExpress
                   open={isEdit}
@@ -221,6 +235,19 @@ const BusinessPaymentMethodsUI = (props) => {
               >
                 {selectedPaymethodGateway === 'stripe_direct' && (
                   <PaymentOptionStripeDirect
+                    open={isEdit}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleChangeSandbox={handleChangeSandbox}
+                    handleChangeInput={handleChangeInput}
+                    handleSaveClick={handleSaveClick}
+                  />
+                )}
+                {selectedPaymethodGateway === 'paypal' && (
+                  <PaymentOptionPaypal
                     open={isEdit}
                     onClose={() => handleCloseEdit()}
                     businessPaymethod={selectedBusinessPaymethod}
