@@ -101,7 +101,7 @@ export const SettingsListUI = (props) => {
                               defaultValue={config?.value}
                               onChange={(e) => handleInputChange(e.target.value, config?.id)}
                               className='form-control'
-                              placeholder='placeholder'
+                              placeholder={config?.name}
                             />
                           </FormGroupText>
                         )
