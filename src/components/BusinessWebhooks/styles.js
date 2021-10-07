@@ -54,6 +54,17 @@ export const HookSelectWrapper = styled.div`
       cursor: not-allowed;
     }
   `}
+
+  .select {
+    > div {
+      overflow: hidden;
+      > div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
+    }
+  }
 `
 
 export const DelaySelectWrapper = styled.div`
