@@ -11,23 +11,19 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
-
-var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
-
 var _BusinessTypeForm = require("../BusinessTypeForm");
-
-var _styledComponents = require("styled-components");
 
 var _Confirm = require("../Confirm");
 
-var _styles = require("./styles");
+var _BusinessType = require("../BusinessType");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -68,8 +64,6 @@ var BusinessTypes = function BusinessTypes(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -153,22 +147,12 @@ var BusinessTypes = function BusinessTypes(props) {
     }));
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, businessTypes.map(function (businessType) {
-    var _theme$images, _theme$images$categor;
-
-    return businessType.id && /*#__PURE__*/_react.default.createElement(_styles.BusinessType, {
+    return (businessType === null || businessType === void 0 ? void 0 : businessType.id) && /*#__PURE__*/_react.default.createElement(_BusinessType.BusinessType, _extends({}, props, {
       key: businessType.id,
-      disabled: formState === null || formState === void 0 ? void 0 : formState.loading,
-      isChecked: selectedBusinessTypes.includes(businessType.id),
-      onClick: function onClick() {
-        return handleSelectBusinessTypes(businessType.id);
-      }
-    }, selectedBusinessTypes.includes(businessType.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("img", {
-      src: (businessType === null || businessType === void 0 ? void 0 : businessType.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor.all),
-      alt: businessType.name.toLowerCase(),
-      width: "30px",
-      height: "30px",
-      loading: "lazy"
-    }), /*#__PURE__*/_react.default.createElement("span", null, businessType === null || businessType === void 0 ? void 0 : businessType.name));
+      businessType: businessType,
+      selectedBusinessTypes: selectedBusinessTypes,
+      handleSelectBusinessTypes: handleSelectBusinessTypes
+    }));
   }), /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessTypeContainer, null, isAdd ? /*#__PURE__*/_react.default.createElement(_BusinessTypeForm.BusinessTypeForm, {
     businessTypes: businessTypes,
     handleSuccessAddBusinessType: handleSuccessAddBusinessType,

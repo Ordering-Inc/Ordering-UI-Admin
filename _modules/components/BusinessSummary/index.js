@@ -102,6 +102,9 @@ var BusinessSummary = function BusinessSummary(props) {
   }, {
     key: 'personalization',
     value: t('PERSONALIZATION', 'Personalization')
+  }, {
+    key: 'webhooks',
+    value: t('WEBHOOKS', 'Webhooks')
   }];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100

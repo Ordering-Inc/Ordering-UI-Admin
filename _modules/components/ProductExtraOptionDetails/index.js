@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
-  var _optionChangesState$r, _optionChangesState$r2, _optionChangesState$c, _optionChangesState$c2, _optionState$option, _optionState$option2, _changesState$min, _optionState$option4, _changesState$max, _optionState$option5, _optionState$option6, _optionState$option8, _optionState$option9, _optionState$option10, _optionState$option11, _optionState$option12, _optionState$option13, _optionState$option14, _changesState$result3, _changesState$result4, _changesState$changes9, _changesState$changes10, _changesState$changes11, _changesState$changes12, _settingChangeState$c5, _settingChangeState$c6, _optionState$option17, _changesState$changes13, _settingChangeState$c7, _settingChangeState$c8, _optionState$option18, _changesState$changes14;
+  var _optionChangesState$r, _optionChangesState$r2, _optionChangesState$c, _optionChangesState$c2, _optionState$option, _optionState$option2, _optionState$option4, _optionState$option5, _optionState$option6, _optionState$option8, _optionState$option9, _optionState$option10, _optionState$option11, _optionState$option12, _optionState$option13, _optionState$option14, _changesState$result3, _changesState$result4, _changesState$changes9, _changesState$changes10, _changesState$changes11, _changesState$changes12, _settingChangeState$c5, _settingChangeState$c6, _optionState$option17, _changesState$changes13, _settingChangeState$c7, _settingChangeState$c8, _optionState$option18, _changesState$changes14;
 
   var optionState = props.optionState,
       optionChangesState = props.optionChangesState,
@@ -239,7 +239,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     primary: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "min",
-    value: (_changesState$min = changesState === null || changesState === void 0 ? void 0 : changesState.min) !== null && _changesState$min !== void 0 ? _changesState$min : optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.min,
+    defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.min,
     onChange: function onChange(e) {
       return handleChangeNumberInput(e, optionState.option, true);
     }
@@ -247,7 +247,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     primary: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "max",
-    value: (_changesState$max = changesState === null || changesState === void 0 ? void 0 : changesState.max) !== null && _changesState$max !== void 0 ? _changesState$max : optionState === null || optionState === void 0 ? void 0 : (_optionState$option5 = optionState.option) === null || _optionState$option5 === void 0 ? void 0 : _optionState$option5.max,
+    defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option5 = optionState.option) === null || _optionState$option5 === void 0 ? void 0 : _optionState$option5.max,
     onChange: function onChange(e) {
       return handleChangeNumberInput(e, optionState.option, false);
     }

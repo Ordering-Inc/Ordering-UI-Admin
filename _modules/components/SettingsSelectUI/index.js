@@ -45,7 +45,18 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
       setOptions = _useState2[1];
 
   (0, _react.useEffect)(function () {
-    if (config) {
+    if (!config) return;
+
+    if (config.key === 'terms_and_conditions') {
+      var selectTypes = [{
+        value: 'true',
+        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('YES', 'Yes'))
+      }, {
+        value: 'false',
+        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('NO', 'No'))
+      }];
+      setOptions(selectTypes);
+    } else {
       var _config$options;
 
       var selectedTypes = config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.map(function (item) {

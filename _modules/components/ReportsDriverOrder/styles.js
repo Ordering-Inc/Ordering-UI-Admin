@@ -72,7 +72,7 @@ var DistanceTable = _styledComponents.default.table(_templateObject12 || (_templ
 
 exports.DistanceTable = DistanceTable;
 
-var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  tr {\n    th {\n      padding: 12px 5px;\n      font-weight: 500;\n      font-size: 12px;\n      text-align: center;\n\n      &:first-child {\n        text-align: left;\n        border-right: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
+var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n\n  tr {\n    th {\n      padding: 12px 5px;\n      font-weight: 500;\n      font-size: 12px;\n      text-align: center;\n\n      &:first-child {\n        text-align: left;\n        border-right: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme6;
 
   return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.colors.secundaryDarkContrast;
@@ -104,7 +104,7 @@ var Tfoot = _styledComponents.default.tfoot(_templateObject15 || (_templateObjec
 
 exports.Tfoot = Tfoot;
 
-var TableWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n"])));
+var TableWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n  max-height: 650px;\n"])));
 
 exports.TableWrapper = TableWrapper;
 

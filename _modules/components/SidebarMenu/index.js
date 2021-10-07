@@ -340,14 +340,6 @@ var SidebarMenu = function SidebarMenu(props) {
     }, item.title);
   }))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
-    variant: location.pathname === '/ordering-products' && 'primary',
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'ordering_products'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), !isCollapse && /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
-    className: "d-flex align-items-center",
     variant: location.pathname === '/support' && 'primary',
     onClick: function onClick() {
       return handleGoToPage({

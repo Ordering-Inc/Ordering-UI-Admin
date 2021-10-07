@@ -33,6 +33,8 @@ var _PaymethodOptionStripeRedirect = require("../PaymethodOptionStripeRedirect")
 
 var _PaymethodOptionStripeConnect = require("../PaymethodOptionStripeConnect");
 
+var _PaymentOptionPaypal = require("../PaymentOptionPaypal");
+
 var _Modal = require("../Modal");
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
@@ -114,7 +116,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
 
   var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
 
-  var editablePaymethods = ['stripe_direct', 'paypal_express', 'stripe_redirect', 'stripe_connect'];
+  var editablePaymethods = ['stripe_direct', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'paypal'];
 
   var isCheckEnableSate = function isCheckEnableSate(id) {
     var found = businessPaymethodsState.paymethods.find(function (paymethod) {
@@ -202,6 +204,18 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeSandbox: handleChangeSandbox,
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick
+  }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
+    open: isEdit,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick
   }), selectedPaymethodGateway === 'paypal_express' && /*#__PURE__*/_react.default.createElement(_PaymethodOptionPaypalExpress.PaymethodOptionPaypalExpress, {
     open: isEdit,
     onClose: function onClose() {
@@ -246,6 +260,18 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       return handleCloseEdit();
     }
   }, selectedPaymethodGateway === 'stripe_direct' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeDirect.PaymentOptionStripeDirect, {
+    open: isEdit,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick
+  }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
     open: isEdit,
     onClose: function onClose() {
       return handleCloseEdit();

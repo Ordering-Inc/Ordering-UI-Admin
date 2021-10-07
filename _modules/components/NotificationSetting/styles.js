@@ -33,7 +33,7 @@ var AccordionTitle = _styledComponents.default.div(_templateObject2 || (_templat
 
 exports.AccordionTitle = AccordionTitle;
 
-var GeneralWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding-top: 15px;\n"])));
+var GeneralWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding-top: 20px;\n"])));
 
 exports.GeneralWrapper = GeneralWrapper;
 

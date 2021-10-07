@@ -251,6 +251,7 @@ var AddCsvFormUI = function AddCsvFormUI(props) {
     placeholder: t('CVS', 'CVS'),
     autoComplete: "off",
     defaultValue: fileState === null || fileState === void 0 ? void 0 : fileState.fileName,
+    pattern: "^.+\\.(xlsx|xls|csv)$",
     readOnly: true,
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_CSV_FILE_REQUIRED', 'CSV file is required')
