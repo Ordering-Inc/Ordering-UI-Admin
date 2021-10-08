@@ -32,7 +32,7 @@ export const SideBar = (props) => {
 
   useEffect(() => {
     if (isMenuOpen) {
-      if (width <= sideBarWidth) {
+      if (width <= 768 || width <= sideBarWidth) {
         document.getElementById(id).style.width = '100vw'
       } else {
         document.getElementById(id).style.width = `${sideBarWidth}px`
