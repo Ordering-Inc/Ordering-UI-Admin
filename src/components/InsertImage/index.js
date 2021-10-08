@@ -150,7 +150,7 @@ export const InsertImage = (props) => {
         ))}
       </ImageListContainer>
       <Alert
-        title={t('ORDERING', 'ORDERING')}
+        title={t('WEB_APPNAME', 'ORDERING')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
@@ -159,7 +159,7 @@ export const InsertImage = (props) => {
         closeOnBackdrop={false}
       />
       <Confirm
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={confirm.open}

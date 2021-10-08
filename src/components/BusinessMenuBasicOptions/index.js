@@ -454,7 +454,7 @@ export const BusinessMenuBasicOptions = (props) => {
         )}
       </Button>
       <Alert
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

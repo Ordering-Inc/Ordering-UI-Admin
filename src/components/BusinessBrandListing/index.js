@@ -129,7 +129,7 @@ const BusinessBrandListingUI = (props) => {
               color='lightPrimary'
               onClick={handleOpenSideBar}
             >
-              {t('ADD_Brand', 'Add brand')}
+              {t('ADD_BRAND', 'Add brand')}
             </Button>
             <SearchBar
               search={searchValue}

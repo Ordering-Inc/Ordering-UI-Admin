@@ -52,7 +52,7 @@ const BusinessMenuUI = (props) => {
     <MainContainer>
       <MenuContainer>
         <Header>
-          <Title>{t('MENU', 'Menu')}</Title>
+          <Title>{t('MENU_V21', 'Menu')}</Title>
           <Button
             borderRadius='8px'
             color='lightPrimary'

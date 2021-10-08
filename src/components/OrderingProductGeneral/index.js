@@ -279,7 +279,7 @@ export const OrderingProductGeneral = (props) => {
           <FormControl className='col-md-12'>
             <Label>{t('DESCRIPTION', 'Description')}</Label>
             <textarea
-              placeholder={t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description')}
+              placeholder={t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description')}
               value={formState?.changes?.description || ''}
               onChange={(e) => handleChangeFormState('description', e.target.value)}
             />

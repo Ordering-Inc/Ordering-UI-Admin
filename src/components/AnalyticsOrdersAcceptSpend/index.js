@@ -23,7 +23,7 @@ export const AnalyticsOrdersAcceptSpend = (props) => {
   return (
     <Container>
       <OrdersAcceptSpendHeader>
-        <p>{t('TIME_SPENT_TO_ACCEPT_ORDER', 'TIME SPENT TO ACCEPT ORDER')}</p>
+        <p>{t('ORDER_ACCEPT_SPEND', 'TIME SPENT TO ACCEPT ORDER')}</p>
       </OrdersAcceptSpendHeader>
       {
         dataList?.loading ? (

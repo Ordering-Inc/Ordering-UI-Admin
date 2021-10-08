@@ -276,7 +276,7 @@ const AddBusinessFormUI = (props) => {
               }
               onChange={handleChangeInput}
               ref={formMethods.register({
-                required: t('VALIDATION_ERROR_BUSINESS_NAME_REQUIRED', 'Business name is required')
+                required: t('BUSINESS_NAME_REQUIRED', 'Business name is required')
               })}
               disabled={formState.loading}
               autoComplete='off'
@@ -323,7 +323,7 @@ const AddBusinessFormUI = (props) => {
               }
               onChange={handleChangeInput}
               ref={formMethods.register({
-                required: t('VALIDATION_ERROR_BUSINESS_SLUG_REQUIRED', 'Business slug is required')
+                required: t('BUSINESS_SLUG_REQUIRED', 'Business slug is required')
               })}
               disabled={formState.loading}
               autoComplete='off'
@@ -334,7 +334,7 @@ const AddBusinessFormUI = (props) => {
             <TextArea
               rows={4}
               name='description'
-              placeholder={t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description')}
+              placeholder={t('SHORT_BUSINESS_ABOUT', 'Write a little description')}
               defaultValue={
                 formState?.result?.result
                   ? formState?.result?.result?.description

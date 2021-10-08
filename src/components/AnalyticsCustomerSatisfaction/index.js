@@ -90,7 +90,7 @@ export const AnalyticsCustomerSatisfaction = (props) => {
               ) : (
                 <CustomerSatisfactionContent ref={downloadElementRef}>
                   {dataList?.data?.general && <Score star={dataList?.data?.general} text={t('GENERAL', 'General')} />}
-                  {dataList?.data?.quality && <Score star={dataList?.data?.quality} text={t('QUANTITY', 'Quality')} />}
+                  {dataList?.data?.quality && <Score star={dataList?.data?.quality} text={t('QUALITY', 'Quality')} />}
                   {dataList?.data?.delivery && <Score star={dataList?.data?.delivery} text={t('DELIVERY', 'Delivery')} />}
                   {dataList?.data?.service && <Score star={dataList?.data?.service} text={t('SERVICE', 'Service')} />}
                   {dataList?.data?.package && <Score star={dataList?.data?.package} text={t('PACKAGE', 'Package')} />}

@@ -86,7 +86,7 @@ export const SettingsListUI = (props) => {
           !settingsState.error && !settingsState.loading && configs && !settingsState.API && (
             <GeneralContainer>
               <GeneralTitle>
-                <p>{t('All_SETTINGS', 'All Settings')}</p>
+                <p>{t('SETTINGS', 'All Settings')}</p>
               </GeneralTitle>
               <FormContainer>
                 {

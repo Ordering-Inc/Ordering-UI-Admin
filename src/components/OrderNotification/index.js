@@ -96,7 +96,7 @@ const OrderNotificationUI = (props) => {
         onClose={handleCloseNotificationModal}
       >
         <ModalContainer>
-          <p>{t('ORDERING', 'Ordering')}</p>
+          <p>{t('WEB_APPNAME', 'Ordering')}</p>
           {registerOrderIds.map((orderId) =>
             <p key={orderId}>Order <span>#{orderId}</span> has been ordered.</p>
           )}
