@@ -69,7 +69,6 @@ const BusinessWebhooksUI = (props) => {
 
   const onSubmit = () => {
     if (Object.keys(hookFormState?.changes).length > 0) {
-      console.log('ddd')
       handleUpdateAddClick()
     }
   }
@@ -152,6 +151,7 @@ const BusinessWebhooksUI = (props) => {
                     'Value is required'
                   ).replace('_attribute_', t('URL', 'Url'))
                 })}
+                placeholder={t('URL', 'Url')}
               />
             </UrlInputWrapper>
             <DelaySelectWrapper>
