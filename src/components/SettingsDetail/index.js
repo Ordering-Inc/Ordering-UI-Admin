@@ -21,7 +21,7 @@ import {
   VideoContainer,
   AllSetting,
   MoreInfo,
-  CategoryDescriptionExtraContent,
+  CategoryExtraContent,
   IframeWrapper,
   SubCategoryWrapper,
   SkeletonWrapper
@@ -178,7 +178,7 @@ export const SettingsDetail = (props) => {
       {extraInfoOpen && category.support_url && (
         <>
           {width >= 1000 ? (
-            <CategoryDescriptionExtraContent>
+            <CategoryExtraContent>
               <IconButton
                 color='black'
                 onClick={() => setExtraInfoOpen(false)}
@@ -186,7 +186,7 @@ export const SettingsDetail = (props) => {
                 <XLg />
               </IconButton>
               <IframeWrapper dangerouslySetInnerHTML={{ __html: `<iframe src=${category.support_url} style="width: 100%; height: 100%;" />` }} />
-            </CategoryDescriptionExtraContent>
+            </CategoryExtraContent>
           ) : (
             <>
               <Modal
@@ -205,7 +205,7 @@ export const SettingsDetail = (props) => {
       {extraSubCatOpen && (
         <>
           {width >= 1000 ? (
-            <CategoryDescriptionExtraContent>
+            <CategoryExtraContent>
               <IconButton
                 color='black'
                 onClick={onCloseSettingsList}
@@ -235,7 +235,7 @@ export const SettingsDetail = (props) => {
                   />
                 )}
               </SubCategoryWrapper>
-            </CategoryDescriptionExtraContent>
+            </CategoryExtraContent>
           ) : (
             <>
               <Modal

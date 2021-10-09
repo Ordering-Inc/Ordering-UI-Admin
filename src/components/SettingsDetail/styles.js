@@ -73,11 +73,12 @@ export const CategoryName = styled.div`
   }
 `
 
-export const CategoryDescriptionExtraContent = styled.div`
+export const CategoryExtraContent = styled.div`
   position: relative;
   padding: 26px;
   box-sizing: border-box;
   width: 100%;
+  overflow: auto;
 
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid #E9ECEF;
