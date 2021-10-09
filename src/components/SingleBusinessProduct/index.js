@@ -5,11 +5,8 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  useToast,
-  ToastType,
   SingleBusinessProduct as SingleBusinessProductController
 } from 'ordering-components-admin'
-
 import { bytesConverter } from '../../utils'
 import { Switch } from '../../styles/Switch'
 import { Alert } from '../Confirm'
@@ -53,7 +50,6 @@ const SingleBusinessProductUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [, { showToast }] = useToast()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const containerRef = useRef(null)
@@ -125,14 +121,6 @@ const SingleBusinessProductUI = (props) => {
     document.addEventListener('click', closeProductEdit)
     return () => document.removeEventListener('click', closeProductEdit)
   }, [productFormState])
-
-  useEffect(() => {
-    if (!productFormState?.loading && !productFormState?.result.error && productFormState?.result?.result) {
-      productFormState?.result?.result?.id
-        ? showToast(ToastType.Success, t('PRODUCT_UPDATE', 'Product updated'))
-        : showToast(ToastType.Success, t('PRODUCT_DELETE', 'Product deleted'))
-    }
-  }, [productFormState?.loading])
 
   const handleDrag = (event, productId) => {
     event.dataTransfer.setData('transferProductId', productId)
