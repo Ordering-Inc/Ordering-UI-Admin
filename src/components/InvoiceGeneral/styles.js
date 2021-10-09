@@ -38,6 +38,12 @@ export const FormControl = styled.div`
         padding: 1px 0;
       }
     }
+
+    .list {
+      > div {
+        max-height: 250px;
+      }
+    }
   }
 `
 
