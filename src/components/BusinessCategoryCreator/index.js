@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
 import { bytesConverter } from '../../utils'
 import {
   useLanguage,
@@ -98,22 +97,6 @@ const BusinessCategoryCreatorUI = (props) => {
     document.addEventListener('click', CloseAddBusinessTypeForm)
     return () => document.removeEventListener('click', CloseAddBusinessTypeForm)
   }, [categoryState])
-
-  useEffect(() => {
-    if (!categoryState?.loading && !categoryState?.result.error && categoryState?.result?.result) {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = t('CATEGORY_ADD', 'Category added')
-      toast.dark(content, toastConfigure)
-    }
-  }, [categoryState?.loading])
 
   return (
     <>

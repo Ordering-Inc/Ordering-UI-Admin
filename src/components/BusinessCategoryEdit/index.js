@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { toast } from 'react-toastify'
 import {
   useLanguage,
   DragAndDrop,
@@ -40,6 +39,7 @@ const BusinessCategoryEditUI = (props) => {
     businessState,
     category
   } = props
+
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -116,22 +116,6 @@ const BusinessCategoryEditUI = (props) => {
     if (!open) return
     actionSidebar(true)
   }, [open])
-
-  useEffect(() => {
-    if (!formState?.result.error && formState?.result?.result && !formState?.loading) {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = t('CATEOGORY_UPDATED', 'Category updated')
-      toast.dark(content, toastConfigure)
-    }
-  }, [formState?.loading])
 
   return (
     <>
@@ -233,7 +217,6 @@ const BusinessCategoryEditUI = (props) => {
               </>
             )
           }
-
         </EditCategoryContent>
       </Container>
       <Alert
