@@ -53,7 +53,7 @@ export const BusinessSummary = (props) => {
     },
     {
       key: 'menu',
-      value: t('MENU', 'Menu')
+      value: t('MENU_V21', 'Menu')
     },
     {
       key: 'delivery_zones',

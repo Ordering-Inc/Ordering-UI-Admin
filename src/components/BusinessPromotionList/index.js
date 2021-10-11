@@ -94,7 +94,7 @@ const BusinessPromotionListUI = (props) => {
             <tr>
               <th>{t('PROMOTIONS', 'Promotions')}</th>
               <th>{t('TYPE', 'Type')}</th>
-              <th>{t('DATE_RANGE', 'Date range')}</th>
+              <th>{t('DATES_RANGE', 'Date range')}</th>
               <th>
                 <ActionsWrapper>
                   <span>{t('ACTIONS', 'Actions')}</span>
@@ -218,7 +218,7 @@ const BusinessPromotionListUI = (props) => {
       )}
 
       <Confirm
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={confirm.open}

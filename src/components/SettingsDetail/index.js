@@ -169,7 +169,7 @@ export const SettingsDetail = (props) => {
               </VideoContainer>
             )}
             <AllSetting onClick={() => handleExtraOpen(false)}>
-              <span>{t('ALL_SETTINGS', 'All settings')}</span>
+              <span>{t('SETTINGS', 'All settings')}</span>
               <BsArrowRight />
             </AllSetting>
           </Content>

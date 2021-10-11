@@ -257,7 +257,7 @@ export const DropdownOptionList = (props) => {
       )}
 
       <Confirm
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={confirm.open}

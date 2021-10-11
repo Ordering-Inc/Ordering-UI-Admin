@@ -110,7 +110,7 @@ const BusinessCategoryCreatorUI = (props) => {
         draggable: true,
         progress: undefined
       }
-      const content = t('CATEGORY_ADD', 'Category added')
+      const content = t('CATEGORY_ADDED', 'Category added')
       toast.dark(content, toastConfigure)
     }
   }, [categoryState?.loading])

@@ -79,7 +79,7 @@ const ExportCSVUI = (props) => {
         onClose={() => setModalOpen(false)}
       >
         <ExportCSVResult>
-          <h1 className='align-center'>{t('ORDERING', 'Ordering')}</h1>
+          <h1 className='align-center'>{t('WEB_APPNAME', 'Ordering')}</h1>
           {actionStatus?.result?.length > 0 && (
             actionStatus?.result.map((e, i) => (
               <ErrorMessage key={i}>{e?.message || e}</ErrorMessage>

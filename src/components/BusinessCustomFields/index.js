@@ -223,7 +223,7 @@ const BusinessCustomFieldsUI = (props) => {
                       required: t(
                         'VALIDATION_ERROR_REQUIRED',
                         'Value is required'
-                      ).replace('_attribute_', t('VALUE', 'Vlue'))
+                      ).replace('_attribute_', t('VALUE', 'Value'))
                     })}
                   />
                 )}
@@ -237,13 +237,13 @@ const BusinessCustomFieldsUI = (props) => {
                       required: t(
                         'VALIDATION_ERROR_REQUIRED',
                         'Value is required'
-                      ).replace('_attribute_', t('VALUE', 'Vlue')),
+                      ).replace('_attribute_', t('VALUE', 'Value')),
                       pattern: {
                         value: /^\d+$/,
                         message: t(
                           'VALIDATION_ERROR_INTEGER',
                           'Invalid integer'
-                        ).replace('_attribute_', t('VALUE', 'Vlue'))
+                        ).replace('_attribute_', t('VALUE', 'Value'))
                       }
                     })}
                   />

@@ -13,12 +13,12 @@ export const BusinessInfoSettingList = (props) => {
   } = props
   const [, t] = useLanguage()
   const listOptions = [
-    { key: 'owner', content: t('OWNER', 'Owner') },
+    { key: 'owner', content: t('OWNER_ID', 'Owner') },
     { key: 'type', content: t('TYPE', 'Type') },
     { key: 'location', content: t('LOCATION', 'Location') },
     { key: 'description', content: t('DESCRIPTION', 'Description') },
     { key: 'images', content: t('IMAGES', 'Images') },
-    { key: 'videos', content: t('VIDEOS', 'Videos') }
+    { key: 'videos', content: t('BUSINESS_VIDEOS', 'Videos') }
   ]
   return (
     <>

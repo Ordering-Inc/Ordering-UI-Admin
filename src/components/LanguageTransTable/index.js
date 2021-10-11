@@ -149,7 +149,7 @@ const LanguageTransTableUI = (props) => {
                   <td>
                     <input
                       type='text'
-                      placeholder={t('WRITE_A_KEY', 'Write a key')}
+                      placeholder={t('KEY', 'Write a key')}
                       defaultValue={creationFormState?.changes?.key}
                       onChange={(e) => handleChangeInput('key', e)}
                     />

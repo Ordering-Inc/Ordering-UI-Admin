@@ -178,7 +178,7 @@ const DriversGroupsListingUI = (props) => {
         </SideBar>
       )}
       <Alert
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
@@ -187,7 +187,7 @@ const DriversGroupsListingUI = (props) => {
         closeOnBackdrop={false}
       />
       <Confirm
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={confirm.open}
