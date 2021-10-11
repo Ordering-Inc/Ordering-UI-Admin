@@ -47,7 +47,7 @@ export const DriversModal = (props) => {
               <BsArrowUp />
               {driverAvailable === 'online'
                 ? t('ONLINE', 'Online')
-                : t('OFFLINE', 'Offline')}
+                : t('INACTIVE_DRIVERS', 'Offline')}
             </Button>
           </WrapperDriverAvailable>
           {driversList.drivers.map((driver) => (

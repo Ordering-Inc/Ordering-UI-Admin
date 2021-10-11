@@ -23,7 +23,7 @@ export const DriversOnlineOfflineFilter = (props) => {
         active={!driversIsOnline}
         onClick={() => handleChangeDriverIsOnline(false)}
       >
-        {t('OFFLINE', 'Offline')}
+        {t('INACTIVE_DRIVERS', 'Offline')}
       </Tab>
     </Container>
   )

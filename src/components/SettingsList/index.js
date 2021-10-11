@@ -86,7 +86,7 @@ export const SettingsListUI = (props) => {
           !settingsState.error && !settingsState.loading && configs && !settingsState.API && (
             <GeneralContainer>
               <GeneralTitle>
-                <p>{t('All_SETTINGS', 'All Settings')}</p>
+                <p>{t('SETTINGS', 'All Settings')}</p>
               </GeneralTitle>
               <FormContainer>
                 {
@@ -101,7 +101,7 @@ export const SettingsListUI = (props) => {
                               defaultValue={config?.value}
                               onChange={(e) => handleInputChange(e.target.value, config?.id)}
                               className='form-control'
-                              placeholder='placeholder'
+                              placeholder={config?.name}
                             />
                           </FormGroupText>
                         )

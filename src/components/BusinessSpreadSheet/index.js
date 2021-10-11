@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useLanguage, BusinessSpreadSheet as BusinessSpreadSheetController } from 'ordering-components-admin'
 import { SpreadSheetEditor } from '../SpreadSheetEditor'
 import 'react-toastify/dist/ReactToastify.css'
-import { toast } from 'react-toastify'
 import { Alert } from '../Confirm'
 import {
   BusinessSpreadSheetContainer
@@ -34,22 +33,6 @@ const BusinessSpreadSheetUI = (props) => {
       content: []
     })
   }
-
-  useEffect(() => {
-    if (spreadSheetState.products && !spreadSheetState.result.error && !spreadSheetState.loading) {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = spreadSheetState?.result.result
-      toast.dark(content, toastConfigure)
-    }
-  }, [spreadSheetState?.loading])
 
   useEffect(() => {
     if (spreadSheetState?.result?.error) {

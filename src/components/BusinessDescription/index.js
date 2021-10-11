@@ -31,7 +31,7 @@ export const BusinessDescription = (props) => {
   return (
     <Container>
       <WrapperShortDescription>
-        <label>{t('SHORT_BUSINESS_DESCRPTION', 'Short business description')}</label>
+        <label>{t('SHORT_BUSINESS_ABOUT', 'Short business description')}</label>
         <Input
           name='about'
           defaultValue={

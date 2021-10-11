@@ -56,7 +56,7 @@ const AddCsvFormUI = (props) => {
   const handleFiles = (files) => {
     if (files.length === 1) {
       const type = files[0].type
-      if (type !== 'application/vnd.ms-excel') {
+      if (type !== 'application/vnd.ms-excel' && type !== 'text/csv') {
         setAlertState({
           open: true,
           content: [t('ERROR_ONLY_CSV', 'Only CSV can be accepted')]
@@ -197,7 +197,7 @@ const AddCsvFormUI = (props) => {
                   <label>{t('UPLOAD_FILE', 'Upload file')}</label>
                   <Input
                     name='CSVfile'
-                    placeholder={t('CVS', 'CVS')}
+                    placeholder={t('CSV', 'CSV')}
                     autoComplete='off'
                     defaultValue={
                       fileState?.fileName

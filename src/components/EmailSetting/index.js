@@ -80,7 +80,7 @@ const EmailSettingUI = (props) => {
     <>
       <EmailSettingsContainer>
         <GeneralTitle>
-          <p>{t('All_SETTINGS', 'All Settings')}</p>
+          <p>{t('SETTINGS', 'All Settings')}</p>
         </GeneralTitle>
         <Accordion>
           <ContextAwareToggle eventKey='0'>
@@ -100,7 +100,7 @@ const EmailSettingUI = (props) => {
                             defaultValue={config?.value}
                             onChange={(e) => handleInputChange(e.target.value, config?.id)}
                             className='form-control'
-                            placeholder='placeholder'
+                            placeholder={config?.name}
                           />
                         </FormGroupText>
                       )

@@ -122,7 +122,7 @@ export const InvoiceGeneral = (props) => {
           )
         }
         <FormControl className='col-md-6'>
-          <Label>{t('DATE_RANGE', 'Date range')}</Label>
+          <Label>{t('DATES_RANGE', 'Date range')}</Label>
           <CalendarWrapper>
             <AnalyticsCalendar
               handleChangeDate={handleChangeDate}
