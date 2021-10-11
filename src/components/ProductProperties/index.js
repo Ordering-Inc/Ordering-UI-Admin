@@ -15,6 +15,7 @@ const ProductPropertiesUI = (props) => {
 
   const [, t] = useLanguage()
   const [isShowSku, setIsShowSku] = useState(false)
+  const [isShowStock, setIsShowStock] = useState(false)
 
   const handleClickSku = (e) => {
     if (e.target.checked) {
@@ -25,12 +26,24 @@ const ProductPropertiesUI = (props) => {
     }
   }
 
-  useEffect(() => {
-    if (productState?.sku && parseInt(productState?.sku) !== -1) {
-      setIsShowSku(true)
+  const handleClickStock = (e) => {
+    handleClickProperty('inventoried', e.target.checked)
+    if (e.target.checked) {
+      setIsShowStock(true)
     } else {
-      setIsShowSku(false)
+      setIsShowStock(false)
     }
+  }
+
+  const hanldeClickStockInput = (value) => {
+    if (value === '') handleClickProperty('quantity', productState?.quantity)
+    else handleClickProperty('quantity', value)
+  }
+
+  useEffect(() => {
+    if (productState?.sku && parseInt(productState?.sku) !== -1) setIsShowSku(true)
+    else setIsShowSku(false)
+    if (productState?.inventoried) setIsShowStock(true)
   }, [])
 
   return (
@@ -55,7 +68,7 @@ const ProductPropertiesUI = (props) => {
       <PropertyOption>
         <Checkbox
           defaultChecked={productState?.inventoried}
-          onClick={(e) => handleClickProperty('inventoried', e.target.checked)}
+          onClick={(e) => handleClickStock(e)}
           id='inventoried'
         />
         <label htmlFor='inventoried'>{t('INVENTORIED', 'Limit product quantity')}</label>
@@ -74,6 +87,14 @@ const ProductPropertiesUI = (props) => {
           placeholder={t('SKU', 'Stock Keeping Unit (SKU)')}
           defaultValue={parseInt(productState?.sku) !== -1 ? productState?.sku : ''}
           onChange={(e) => handleClickProperty('sku', e.target.value)}
+        />
+      )}
+      {isShowStock && (
+        <Input
+          name='sku'
+          placeholder={t('STOCK', 'Stock')}
+          defaultValue={parseInt(productState?.quantity)}
+          onChange={(e) => hanldeClickStockInput(e.target.value)}
         />
       )}
     </PropertiesContainer>

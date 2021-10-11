@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { toast } from 'react-toastify'
 import {
   useLanguage,
   DragAndDrop,
@@ -108,38 +107,6 @@ export const SingleBusinessCategoryUI = (props) => {
     document.addEventListener('click', closeProductEdit)
     return () => document.removeEventListener('click', closeProductEdit)
   }, [categoryFormState])
-
-  useEffect(() => {
-    if (!categoryFormState?.loading &&
-      !categoryFormState?.result?.error &&
-      categoryFormState?.result?.result) {
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      let content = ''
-      switch (categoryFormState?.status) {
-        case 'update':
-          content = t('CATEGORY_UPDATED', 'Category updated')
-          break
-        case 'delete':
-          content = t('CATEGORY_DELETE', 'Category deleted')
-          break
-        case 'add':
-          content = t('CATEGORY_ADD', 'Category added')
-          break
-        default:
-          content = t('CATEGORY_SAVED', 'Category saved')
-          break
-      }
-      toast.dark(content, toastConfigure)
-    }
-  }, [categoryFormState?.loading])
 
   const handleDrag = (event, categoryId) => {
     event.dataTransfer.setData('transferCategoryId', categoryId)

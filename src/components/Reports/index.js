@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { IconButton } from '../../styles/Buttons'
+import { useWindowSize } from '../../hooks/useWindowSize'
 import {
   List as MenuIcon,
   Rulers,
@@ -30,6 +31,8 @@ export const Reports = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [isOpen, setIsOpen] = useState(false)
   const [selectedReport, setSelectedReport] = useState(0)
+  const { width } = useWindowSize()
+  const sidebarWidth = 240
 
   const advancedReportsList = [
     { id: 1, name: t('DISTANCE', 'Distance'), description: t('DISTANCE_DESCRIPTION', 'Distance'), icon: <Rulers /> },
@@ -83,7 +86,7 @@ export const Reports = (props) => {
       {isOpen && (
         <SideBar
           sidebarId='brand-details'
-          defaultSideBarWidth={700}
+          defaultSideBarWidth={width - sidebarWidth}
           open={isOpen}
           onClose={() => handleCloseSidebar()}
         >

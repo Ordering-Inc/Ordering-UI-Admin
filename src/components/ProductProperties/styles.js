@@ -28,6 +28,7 @@ export const PropertyOption = styled.div`
   align-items: center;
   
   label {
+    margin-bottom: 0;
     cursor: pointer;
     color: ${props => props.theme.colors.headingColor};
     ${props => props.theme?.rtl ? css`
