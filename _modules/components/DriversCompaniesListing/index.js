@@ -180,7 +180,7 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     handleUpdateDriversCompany: handleUpdateDriversCompany,
     handleAddDriversCompany: handleAddDriversCompany
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -198,7 +198,7 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,

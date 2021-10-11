@@ -162,7 +162,7 @@ var BusinessAnalyticsUI = function BusinessAnalyticsUI(props) {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
     dataList: arrivedPickUpSpendList,
-    title: t('TIME_WAITING_ON_READY_FOR_PICKUP', 'TIME SPENT WAITING ON READY FOR PICKUP')
+    title: t('ORDER_ARRIVED_PICKUP_SPEND', 'TIME SPENT WAITING ON READY FOR PICKUP')
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",

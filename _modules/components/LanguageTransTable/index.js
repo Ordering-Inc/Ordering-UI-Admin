@@ -210,7 +210,7 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
     ref: translationCreateRef
   }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    placeholder: t('WRITE_A_KEY', 'Write a key'),
+    placeholder: t('KEY', 'Write a key'),
     defaultValue: creationFormState === null || creationFormState === void 0 ? void 0 : (_creationFormState$ch = creationFormState.changes) === null || _creationFormState$ch === void 0 ? void 0 : _creationFormState$ch.key,
     onChange: function onChange(e) {
       return handleChangeInput('key', e);

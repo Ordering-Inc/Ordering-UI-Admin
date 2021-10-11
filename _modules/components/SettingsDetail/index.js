@@ -196,7 +196,7 @@ var SettingsDetail = function SettingsDetail(props) {
     onClick: function onClick() {
       return handleExtraOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('ALL_SETTINGS', 'All settings')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), extraInfoOpen && category.support_url && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'All settings')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), extraInfoOpen && category.support_url && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return setExtraInfoOpen(false);
@@ -216,7 +216,7 @@ var SettingsDetail = function SettingsDetail(props) {
     dangerouslySetInnerHTML: {
       __html: "<iframe src=".concat(category.support_url, " style=\"width: 100%; height: 100%;\" />")
     }
-  })))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryDescriptionExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  })))), extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles.CategoryExtraContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: onCloseSettingsList
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, (category === null || category === void 0 ? void 0 : category.key) === 'email_configs' && /*#__PURE__*/_react.default.createElement(_EmailSetting.EmailSetting, _extends({}, props, {
@@ -233,7 +233,13 @@ var SettingsDetail = function SettingsDetail(props) {
     height: "90vh",
     open: true,
     onClose: onCloseSettingsList
-  }, /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, _extends({}, props, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.SubCategoryWrapper, null, (category === null || category === void 0 ? void 0 : category.key) === 'email_configs' && /*#__PURE__*/_react.default.createElement(_EmailSetting.EmailSetting, _extends({}, props, {
+    category: category,
+    onCloseSettingsList: onCloseSettingsList
+  })), (category === null || category === void 0 ? void 0 : category.key) === 'notification' && /*#__PURE__*/_react.default.createElement(_NotificationSetting.NotificationSetting, _extends({}, props, {
+    category: category,
+    onCloseSettingsList: onCloseSettingsList
+  })), (category === null || category === void 0 ? void 0 : category.key) !== 'email_configs' && (category === null || category === void 0 ? void 0 : category.key) !== 'notification' && /*#__PURE__*/_react.default.createElement(_SettingsList.SettingsList, _extends({}, props, {
     category: category,
     onCloseSettingsList: onCloseSettingsList
   })))))), extraInfoOpen && !category.support_url && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

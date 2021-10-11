@@ -200,7 +200,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: handleOpenSideBar
-  }, t('ADD_Brand', 'Add brand')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }, t('ADD_BRAND', 'Add brand')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     search: searchValue,
     onSearch: function onSearch(value) {
       return _onSearch(value);

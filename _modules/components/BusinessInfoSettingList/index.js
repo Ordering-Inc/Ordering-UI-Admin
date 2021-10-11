@@ -37,7 +37,7 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
 
   var listOptions = [{
     key: 'owner',
-    content: t('OWNER', 'Owner')
+    content: t('OWNER_ID', 'Owner')
   }, {
     key: 'type',
     content: t('TYPE', 'Type')
@@ -52,7 +52,7 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
     content: t('IMAGES', 'Images')
   }, {
     key: 'videos',
-    content: t('VIDEOS', 'Videos')
+    content: t('BUSINESS_VIDEOS', 'Videos')
   }];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingListConatiner, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, listOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {

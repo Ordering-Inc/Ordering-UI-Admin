@@ -43,7 +43,7 @@ var DriversOnlineOfflineFilter = function DriversOnlineOfflineFilter(props) {
     onClick: function onClick() {
       return handleChangeDriverIsOnline(false);
     }
-  }, t('OFFLINE', 'Offline')));
+  }, t('INACTIVE_DRIVERS', 'Offline')));
 };
 
 exports.DriversOnlineOfflineFilter = DriversOnlineOfflineFilter;

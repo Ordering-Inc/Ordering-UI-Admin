@@ -266,7 +266,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
     defaultPageSize: groupsPerPage,
     handleChangePageSize: handleChangePageSize
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,

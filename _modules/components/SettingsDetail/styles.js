@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SkeletonWrapper = exports.SubCategoryWrapper = exports.IframeWrapper = exports.MoreInfo = exports.AllSetting = exports.VideoContainer = exports.Description = exports.CategoryDescriptionExtraContent = exports.CategoryName = exports.Content = exports.HeaderIcons = exports.DescriptionHeader = exports.DescriptionContent = exports.Container = void 0;
+exports.SkeletonWrapper = exports.SubCategoryWrapper = exports.IframeWrapper = exports.MoreInfo = exports.AllSetting = exports.VideoContainer = exports.Description = exports.CategoryExtraContent = exports.CategoryName = exports.Content = exports.HeaderIcons = exports.DescriptionHeader = exports.DescriptionContent = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -56,7 +56,7 @@ var CategoryName = _styledComponents.default.div(_templateObject13 || (_template
 
 exports.CategoryName = CategoryName;
 
-var CategoryDescriptionExtraContent = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 26px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n\n  > button {\n    z-index: 100;\n    position: absolute;\n    top: 25px;\n    ", "\n  }\n"])), function (props) {
+var CategoryExtraContent = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 26px;\n  box-sizing: border-box;\n  width: 100%;\n  overflow: auto;\n\n  ", "\n\n  > button {\n    z-index: 100;\n    position: absolute;\n    top: 25px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme4;
 
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "])));
@@ -66,7 +66,7 @@ var CategoryDescriptionExtraContent = _styledComponents.default.div(_templateObj
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      right: 20px;\n    "])));
 });
 
-exports.CategoryDescriptionExtraContent = CategoryDescriptionExtraContent;
+exports.CategoryExtraContent = CategoryExtraContent;
 
 var Description = _styledComponents.default.p(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-top: 40px;\n  font-size: 14px;\n  color: #344050;\n  margin-bottom: 0px;\n"])));
 

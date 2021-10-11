@@ -397,7 +397,7 @@ var MainOrdersManagerUI = function MainOrdersManagerUI(props) {
     width: "50%",
     hideCloseDefault: true,
     open: notificationModalOpen
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderNotification, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING', 'Ordering')), registerOrderIds.map(function (orderId) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrderNotification, null, /*#__PURE__*/_react.default.createElement("p", null, t('WEB_APPNAME', 'Ordering')), registerOrderIds.map(function (orderId) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: orderId
     }, "Order ", /*#__PURE__*/_react.default.createElement("span", null, "#", orderId), " has been ordered.");

@@ -23,7 +23,7 @@ var PropertiesContainer = _styledComponents.default.div(_templateObject || (_tem
 
 exports.PropertiesContainer = PropertiesContainer;
 
-var PropertyOption = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  padding: 12px 0;\n  display: flex;\n  align-items: center;\n  \n  label {\n    cursor: pointer;\n    color: ", ";\n    ", "\n  }\n"])), function (props) {
+var PropertyOption = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  padding: 12px 0;\n  display: flex;\n  align-items: center;\n  \n  label {\n    margin-bottom: 0;\n    cursor: pointer;\n    color: ", ";\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme;

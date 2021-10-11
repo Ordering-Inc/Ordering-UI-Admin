@@ -81,10 +81,6 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
-  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
-      _useToast2 = _slicedToArray(_useToast, 2),
-      showToast = _useToast2[1].showToast;
-
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -173,15 +169,6 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       return document.removeEventListener('click', closeProductEdit);
     };
   }, [productFormState]);
-  (0, _react.useEffect)(function () {
-    var _productFormState$res3;
-
-    if (!(productFormState !== null && productFormState !== void 0 && productFormState.loading) && !(productFormState !== null && productFormState !== void 0 && productFormState.result.error) && productFormState !== null && productFormState !== void 0 && (_productFormState$res3 = productFormState.result) !== null && _productFormState$res3 !== void 0 && _productFormState$res3.result) {
-      var _productFormState$res4, _productFormState$res5;
-
-      productFormState !== null && productFormState !== void 0 && (_productFormState$res4 = productFormState.result) !== null && _productFormState$res4 !== void 0 && (_productFormState$res5 = _productFormState$res4.result) !== null && _productFormState$res5 !== void 0 && _productFormState$res5.id ? showToast(_orderingComponentsAdmin.ToastType.Success, t('PRODUCT_UPDATE', 'Product updated')) : showToast(_orderingComponentsAdmin.ToastType.Success, t('PRODUCT_DELETE', 'Product deleted'));
-    }
-  }, [productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading]);
 
   var handleDrag = function handleDrag(event, productId) {
     var _productFormState$cha;

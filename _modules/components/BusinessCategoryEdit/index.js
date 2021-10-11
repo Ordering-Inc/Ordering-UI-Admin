@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _reactToastify = require("react-toastify");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
@@ -168,24 +166,6 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
-  (0, _react.useEffect)(function () {
-    var _formState$result3;
-
-    if (!(formState !== null && formState !== void 0 && formState.result.error) && formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result && !(formState !== null && formState !== void 0 && formState.loading)) {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = t('CATEOGORY_UPDATED', 'Category updated');
-
-      _reactToastify.toast.dark(content, toastConfigure);
-    }
-  }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "editCategory"
   }, /*#__PURE__*/_react.default.createElement(_styles.EditCategoryContent, null, businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {

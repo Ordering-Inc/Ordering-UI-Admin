@@ -9,8 +9,6 @@ exports.BusinessCategoryCreator = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactToastify = require("react-toastify");
-
 var _utils = require("../../utils");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -52,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessCategoryCreatorUI = function BusinessCategoryCreatorUI(props) {
-  var _categoryState$catego, _categoryState$result4, _categoryState$catego2, _categoryState$catego3, _categoryState$catego4, _categoryState$catego5, _categoryState$catego6;
+  var _categoryState$catego, _categoryState$result3, _categoryState$catego2, _categoryState$catego3, _categoryState$catego4, _categoryState$catego5, _categoryState$catego6;
 
   var categoryState = props.categoryState,
       handleChangeInput = props.handleChangeInput,
@@ -146,24 +144,6 @@ var BusinessCategoryCreatorUI = function BusinessCategoryCreatorUI(props) {
       return document.removeEventListener('click', CloseAddBusinessTypeForm);
     };
   }, [categoryState]);
-  (0, _react.useEffect)(function () {
-    var _categoryState$result3;
-
-    if (!(categoryState !== null && categoryState !== void 0 && categoryState.loading) && !(categoryState !== null && categoryState !== void 0 && categoryState.result.error) && categoryState !== null && categoryState !== void 0 && (_categoryState$result3 = categoryState.result) !== null && _categoryState$result3 !== void 0 && _categoryState$result3.result) {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = t('CATEGORY_ADD', 'Category added');
-
-      _reactToastify.toast.dark(content, toastConfigure);
-    }
-  }, [categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CreateBusinessCategoryContainer, {
     ref: conatinerRef
   }, /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, {
@@ -183,7 +163,7 @@ var BusinessCategoryCreatorUI = function BusinessCategoryCreatorUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: categoryState.loading
-  }, !categoryState.loading && (_categoryState$catego = categoryState.category) !== null && _categoryState$catego !== void 0 && _categoryState$catego.image && ((_categoryState$result4 = categoryState.result) === null || _categoryState$result4 === void 0 ? void 0 : _categoryState$result4.result) !== 'Network Error' ? /*#__PURE__*/_react.default.createElement("img", {
+  }, !categoryState.loading && (_categoryState$catego = categoryState.category) !== null && _categoryState$catego !== void 0 && _categoryState$catego.image && ((_categoryState$result3 = categoryState.result) === null || _categoryState$result3 === void 0 ? void 0 : _categoryState$result3.result) !== 'Network Error' ? /*#__PURE__*/_react.default.createElement("img", {
     src: categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$catego2 = categoryState.category) === null || _categoryState$catego2 === void 0 ? void 0 : _categoryState$catego2.image,
     alt: "header image",
     loading: "lazy"

@@ -15,8 +15,6 @@ var _SpreadSheetEditor = require("../SpreadSheetEditor");
 
 require("react-toastify/dist/ReactToastify.css");
 
-var _reactToastify = require("react-toastify");
-
 var _Confirm = require("../Confirm");
 
 var _styles = require("./styles");
@@ -98,22 +96,6 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
     });
   };
 
-  (0, _react.useEffect)(function () {
-    if (spreadSheetState.products && !spreadSheetState.result.error && !spreadSheetState.loading) {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result.result;
-
-      _reactToastify.toast.dark(content, toastConfigure);
-    }
-  }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.loading]);
   (0, _react.useEffect)(function () {
     var _spreadSheetState$res;
 

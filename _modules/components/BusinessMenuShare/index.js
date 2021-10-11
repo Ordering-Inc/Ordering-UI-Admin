@@ -125,7 +125,7 @@ var BusinessMenuShareUI = function BusinessMenuShareUI(props) {
     disabled: Object.keys(menu).length === 0
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Share, null))), open && /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, {
     ref: popperElement
-  }, actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement("p", null, t('SHARE_WITH', 'Share with')), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, businessesState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }, actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement("p", null, t('SHARED_WITH', 'Share with')), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, businessesState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.AllowItem, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

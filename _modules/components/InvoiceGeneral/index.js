@@ -187,7 +187,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('DATE_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('DATES_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: invocing
   }))), selectedInvoice === 'business' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {

@@ -153,7 +153,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     hideCloseDefault: true,
     open: notificationModalOpen,
     onClose: handleCloseNotificationModal
-  }, /*#__PURE__*/_react.default.createElement(_styles.ModalContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING', 'Ordering')), registerOrderIds.map(function (orderId) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ModalContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('WEB_APPNAME', 'Ordering')), registerOrderIds.map(function (orderId) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: orderId
     }, "Order ", /*#__PURE__*/_react.default.createElement("span", null, "#", orderId), " has been ordered.");

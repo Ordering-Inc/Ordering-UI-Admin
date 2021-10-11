@@ -102,7 +102,7 @@ var AnalyticsCustomerSatisfaction = function AnalyticsCustomerSatisfaction(props
     text: t('GENERAL', 'General')
   }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data13 = dataList.data) === null || _dataList$data13 === void 0 ? void 0 : _dataList$data13.quality) && /*#__PURE__*/_react.default.createElement(Score, {
     star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data14 = dataList.data) === null || _dataList$data14 === void 0 ? void 0 : _dataList$data14.quality,
-    text: t('QUANTITY', 'Quality')
+    text: t('QUALITY', 'Quality')
   }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data15 = dataList.data) === null || _dataList$data15 === void 0 ? void 0 : _dataList$data15.delivery) && /*#__PURE__*/_react.default.createElement(Score, {
     star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data16 = dataList.data) === null || _dataList$data16 === void 0 ? void 0 : _dataList$data16.delivery,
     text: t('DELIVERY', 'Delivery')

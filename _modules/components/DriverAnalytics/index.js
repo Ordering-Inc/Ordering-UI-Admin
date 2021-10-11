@@ -187,22 +187,22 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
-    title: t('TIME_SPENT_IN_BUSINESS_WAITING_FOR_ORDER', 'Time spent in business waiting for order'),
+    title: t('ORDER_INBUSINESS_PICKUP_SPEND', 'Time spent in business waiting for order'),
     dataList: completeSpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
-    title: t('TIME_SPENT_TO_PICKUP_ORDER', 'Time spent to pickup order'),
+    title: t('ORDER_PICKUP_SPEND', 'Time spent to pickup order'),
     dataList: pickUpSpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
-    title: t('TIME_SPENT_TO_DELIVER_ORDER', 'Time spent to deliver order'),
+    title: t('ORDER_DELIVERY_SPEND', 'Time spent to deliver order'),
     dataList: deliverySpendList
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsSpendList.AnalyticsSpendList, {
-    title: t('TIME_SPENT_SINCE_ORDER_ACCEPTED_TO_PICKUP_AND_DELIVER_THE_ORDER', 'Time spent since order accepted to pickup and deliver the order'),
+    title: t('ORDER_COMPLETE_SPEND', 'Time spent since order accepted to pickup and deliver the order'),
     dataList: arrivedPickUpSpendList
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "40%",

@@ -184,7 +184,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       return Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 1 && handleUpdateClick();
     }
   }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

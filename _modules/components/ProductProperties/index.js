@@ -52,6 +52,11 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       isShowSku = _useState2[0],
       setIsShowSku = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isShowStock = _useState4[0],
+      setIsShowStock = _useState4[1];
+
   var handleClickSku = function handleClickSku(e) {
     if (e.target.checked) {
       setIsShowSku(true);
@@ -61,12 +66,23 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
     }
   };
 
-  (0, _react.useEffect)(function () {
-    if (productState !== null && productState !== void 0 && productState.sku && parseInt(productState === null || productState === void 0 ? void 0 : productState.sku) !== -1) {
-      setIsShowSku(true);
+  var handleClickStock = function handleClickStock(e) {
+    handleClickProperty('inventoried', e.target.checked);
+
+    if (e.target.checked) {
+      setIsShowStock(true);
     } else {
-      setIsShowSku(false);
+      setIsShowStock(false);
     }
+  };
+
+  var hanldeClickStockInput = function hanldeClickStockInput(value) {
+    if (value === '') handleClickProperty('quantity', productState === null || productState === void 0 ? void 0 : productState.quantity);else handleClickProperty('quantity', value);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (productState !== null && productState !== void 0 && productState.sku && parseInt(productState === null || productState === void 0 ? void 0 : productState.sku) !== -1) setIsShowSku(true);else setIsShowSku(false);
+    if (productState !== null && productState !== void 0 && productState.inventoried) setIsShowStock(true);
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.PropertiesContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PROPERTIES', 'Properties')), /*#__PURE__*/_react.default.createElement(_styles.PropertyOption, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     defaultChecked: productState === null || productState === void 0 ? void 0 : productState.featured,
@@ -87,7 +103,7 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
   }, t('UPSELLING', 'Upselling'))), /*#__PURE__*/_react.default.createElement(_styles.PropertyOption, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     defaultChecked: productState === null || productState === void 0 ? void 0 : productState.inventoried,
     onClick: function onClick(e) {
-      return handleClickProperty('inventoried', e.target.checked);
+      return handleClickStock(e);
     },
     id: "inventoried"
   }), /*#__PURE__*/_react.default.createElement("label", {
@@ -106,6 +122,13 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
     defaultValue: parseInt(productState === null || productState === void 0 ? void 0 : productState.sku) !== -1 ? productState === null || productState === void 0 ? void 0 : productState.sku : '',
     onChange: function onChange(e) {
       return handleClickProperty('sku', e.target.value);
+    }
+  }), isShowStock && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "sku",
+    placeholder: t('STOCK', 'Stock'),
+    defaultValue: parseInt(productState === null || productState === void 0 ? void 0 : productState.quantity),
+    onChange: function onChange(e) {
+      return hanldeClickStockInput(e.target.value);
     }
   }));
 };

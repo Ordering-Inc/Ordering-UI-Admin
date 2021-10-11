@@ -275,7 +275,7 @@ var BusinessCustomFieldsUI = function BusinessCustomFieldsUI(props) {
     },
     placeholder: t('VALUE', 'Vlue'),
     ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Vlue'))
+      required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Value'))
     })
   }), selectedMetaKey === 'integer' && /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
@@ -285,10 +285,10 @@ var BusinessCustomFieldsUI = function BusinessCustomFieldsUI(props) {
     },
     placeholder: t('VALUE', 'Vlue'),
     ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Vlue')),
+      required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Value')),
       pattern: {
         value: /^\d+$/,
-        message: t('VALIDATION_ERROR_INTEGER', 'Invalid integer').replace('_attribute_', t('VALUE', 'Vlue'))
+        message: t('VALIDATION_ERROR_INTEGER', 'Invalid integer').replace('_attribute_', t('VALUE', 'Value'))
       }
     })
   }), selectedMetaKey === 'decimal' && /*#__PURE__*/_react.default.createElement("input", {

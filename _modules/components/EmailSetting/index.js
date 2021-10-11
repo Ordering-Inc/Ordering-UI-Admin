@@ -149,7 +149,7 @@ var EmailSettingUI = function EmailSettingUI(props) {
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.EmailSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('All_SETTINGS', 'All Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.EmailSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('SETTINGS', 'All Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "0"
   }, /*#__PURE__*/_react.default.createElement(_styles.AccordionTitle, null, t('GENERAL', 'General'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "0"
@@ -165,7 +165,7 @@ var EmailSettingUI = function EmailSettingUI(props) {
         return handleInputChange(e.target.value, config === null || config === void 0 ? void 0 : config.id);
       },
       className: "form-control",
-      placeholder: "placeholder"
+      placeholder: config === null || config === void 0 ? void 0 : config.name
     })), config.type === 2 && /*#__PURE__*/_react.default.createElement(_SettingsSelectUI.SettingsSelectUI, {
       config: config,
       defaultValue: config === null || config === void 0 ? void 0 : config.value,

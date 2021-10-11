@@ -138,7 +138,7 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
     onClick: function onClick() {
       return handleOpenForm({});
     }
-  }, t('ADD_PROMOTION', 'Add promotion'))), /*#__PURE__*/_react.default.createElement(_styles.PromotionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", null, t('DATE_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LayoutThreeColumns, null))))), promotionListState.promotions.map(function (promotion) {
+  }, t('ADD_PROMOTION', 'Add promotion'))), /*#__PURE__*/_react.default.createElement(_styles.PromotionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", null, t('DATES_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LayoutThreeColumns, null))))), promotionListState.promotions.map(function (promotion) {
     var _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement("tbody", {
@@ -212,7 +212,7 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
     businessId: business === null || business === void 0 ? void 0 : business.id,
     offerId: curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.id
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,

@@ -193,7 +193,7 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
     },
     disabled: loading
   }, loading ? t('LOADING', 'loading') : isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

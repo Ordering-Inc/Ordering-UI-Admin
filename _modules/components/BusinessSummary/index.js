@@ -86,7 +86,7 @@ var BusinessSummary = function BusinessSummary(props) {
     value: t('SCHEDULE', 'Schedule')
   }, {
     key: 'menu',
-    value: t('MENU', 'Menu')
+    value: t('MENU_V21', 'Menu')
   }, {
     key: 'delivery_zones',
     value: t('DELIVERY_ZONES', 'Delivery zones')

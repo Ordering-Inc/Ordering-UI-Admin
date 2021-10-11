@@ -151,7 +151,7 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       return curDriversGroup ? handleUpdateDriversGroup(curDriversGroup.id, changesState) : handleAddDriversGroup();
     }
   }, curDriversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

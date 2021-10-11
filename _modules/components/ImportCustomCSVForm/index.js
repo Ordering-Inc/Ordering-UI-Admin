@@ -125,7 +125,7 @@ var AddCsvFormUI = function AddCsvFormUI(props) {
 
       var type = files[0].type;
 
-      if (type !== 'application/vnd.ms-excel') {
+      if (type !== 'application/vnd.ms-excel' && type !== 'text/csv') {
         setAlertState({
           open: true,
           content: [t('ERROR_ONLY_CSV', 'Only CSV can be accepted')]
@@ -248,7 +248,7 @@ var AddCsvFormUI = function AddCsvFormUI(props) {
     className: "csvUpload"
   }, /*#__PURE__*/_react.default.createElement(_styles.UploadCsvInputContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('UPLOAD_FILE', 'Upload file')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "CSVfile",
-    placeholder: t('CVS', 'CVS'),
+    placeholder: t('CSV', 'CSV'),
     autoComplete: "off",
     defaultValue: fileState === null || fileState === void 0 ? void 0 : fileState.fileName,
     pattern: "^.+\\.(xlsx|xls|csv)$",

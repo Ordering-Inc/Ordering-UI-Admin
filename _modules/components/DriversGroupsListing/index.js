@@ -221,7 +221,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       return setMoveDistance(val);
     }
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -239,7 +239,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,

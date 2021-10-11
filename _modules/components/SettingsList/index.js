@@ -147,7 +147,7 @@ var SettingsListUI = function SettingsListUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 30
     }));
-  })), !settingsState.error && !settingsState.loading && configs && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles.GeneralContainer, null, /*#__PURE__*/_react.default.createElement(_styles.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('All_SETTINGS', 'All Settings'))), /*#__PURE__*/_react.default.createElement(_styles.FormContainer, null, configs.length > 0 && configs.map(function (config, i) {
+  })), !settingsState.error && !settingsState.loading && configs && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles.GeneralContainer, null, /*#__PURE__*/_react.default.createElement(_styles.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('SETTINGS', 'All Settings'))), /*#__PURE__*/_react.default.createElement(_styles.FormContainer, null, configs.length > 0 && configs.map(function (config, i) {
     var _config$options, _config$options2, _config$options3, _config$options4;
 
     return /*#__PURE__*/_react.default.createElement("div", {
@@ -161,7 +161,7 @@ var SettingsListUI = function SettingsListUI(props) {
         return handleInputChange(e.target.value, config === null || config === void 0 ? void 0 : config.id);
       },
       className: "form-control",
-      placeholder: "placeholder"
+      placeholder: config === null || config === void 0 ? void 0 : config.name
     })), config.type === 2 && (config.key === 'country_autocomplete' ? /*#__PURE__*/_react.default.createElement(_SettingsCountryFilter.SettingsCountryFilter, {
       defaultValue: config === null || config === void 0 ? void 0 : config.value,
       handleSelectChange: function handleSelectChange(value) {

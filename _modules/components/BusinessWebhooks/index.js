@@ -155,7 +155,6 @@ var BusinessWebhooksUI = function BusinessWebhooksUI(props) {
 
   var onSubmit = function onSubmit() {
     if (Object.keys(hookFormState === null || hookFormState === void 0 ? void 0 : hookFormState.changes).length > 0) {
-      console.log('ddd');
       handleUpdateAddClick();
     }
   };
@@ -229,7 +228,8 @@ var BusinessWebhooksUI = function BusinessWebhooksUI(props) {
     },
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('URL', 'Url'))
-    })
+    }),
+    placeholder: t('URL', 'Url')
   })), /*#__PURE__*/_react.default.createElement(_styles.DelaySelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: (hookFormState === null || hookFormState === void 0 ? void 0 : (_hookFormState$change3 = hookFormState.changes) === null || _hookFormState$change3 === void 0 ? void 0 : _hookFormState$change3.delay) || '',
     options: timeList,

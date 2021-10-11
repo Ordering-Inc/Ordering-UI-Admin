@@ -201,7 +201,7 @@ var InsertImage = function InsertImage(props) {
       alt: ""
     }));
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'ORDERING'),
+    title: t('WEB_APPNAME', 'ORDERING'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -219,7 +219,7 @@ var InsertImage = function InsertImage(props) {
     },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,

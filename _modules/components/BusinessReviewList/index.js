@@ -221,7 +221,7 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     reviews: curBusiness === null || curBusiness === void 0 ? void 0 : (_curBusiness$reviews = curBusiness.reviews) === null || _curBusiness$reviews === void 0 ? void 0 : _curBusiness$reviews.reviews,
     handleUpdateReview: handleUpdateReview
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,

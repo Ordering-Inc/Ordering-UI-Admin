@@ -202,7 +202,7 @@ var BusinessLocation = function BusinessLocation(props) {
     onChange: function onChange(e) {
       return handleChangeTextarea(e.target.value);
     },
-    placeholder: t('WRITE_AN_ADDRESS_NOTE', 'Write an address note')
+    placeholder: t('MOBILE_FRONT_VISUALS_APT', 'Write an address note')
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     borderRadius: "5px",

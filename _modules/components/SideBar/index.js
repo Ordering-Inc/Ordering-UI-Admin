@@ -62,7 +62,7 @@ var SideBar = function SideBar(props) {
 
   (0, _react.useEffect)(function () {
     if (isMenuOpen) {
-      if (width <= sideBarWidth) {
+      if (width <= 768 || width <= sideBarWidth) {
         document.getElementById(id).style.width = '100vw';
       } else {
         document.getElementById(id).style.width = "".concat(sideBarWidth, "px");

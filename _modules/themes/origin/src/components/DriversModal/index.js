@@ -74,7 +74,7 @@ var DriversModal = function DriversModal(props) {
     onClick: function onClick() {
       return handleDriverAvailable();
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsArrowUp.default, null), driverAvailable === 'online' ? t('ONLINE', 'Online') : t('OFFLINE', 'Offline'))), driversList.drivers.map(function (driver) {
+  }, /*#__PURE__*/_react.default.createElement(_BsArrowUp.default, null), driverAvailable === 'online' ? t('ONLINE', 'Online') : t('INACTIVE_DRIVERS', 'Offline'))), driversList.drivers.map(function (driver) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: driver.id
     }, driverAvailable === 'online' ? driver.enabled && driver.available && !driver.busy && /*#__PURE__*/_react.default.createElement(_DriverCard.DriverCard, {

@@ -232,7 +232,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     extra: currentExtra,
     handleUpdateBusinessState: handleUpdateBusinessState
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -250,7 +250,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,

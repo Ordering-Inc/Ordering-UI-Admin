@@ -349,7 +349,7 @@ var OrderingProductGeneral = function OrderingProductGeneral(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("textarea", {
-    placeholder: t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description'),
+    placeholder: t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description'),
     value: (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.description) || '',
     onChange: function onChange(e) {
       return handleChangeFormState('description', e.target.value);

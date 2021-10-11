@@ -13,6 +13,8 @@ var _InfoShareContext = require("../../contexts/InfoShareContext");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _useWindowSize2 = require("../../hooks/useWindowSize");
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -71,35 +73,39 @@ var Reports = function Reports(props) {
       selectedReport = _useState4[0],
       setSelectedReport = _useState4[1];
 
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
+
+  var sidebarWidth = 240;
   var advancedReportsList = [{
     id: 1,
     name: t('DISTANCE', 'Distance'),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.',
+    description: t('DISTANCE_DESCRIPTION', 'Distance'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Rulers, null)
   }, {
     id: 2,
     name: t('DISTANCE_STORE_CUSTOMER', 'Distance in KM from the store to customer'),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.',
+    description: t('DISTANCE_STORE_CUSTOMER_DESCRIPTION', 'Distance in KM from the store to customer'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Map, null)
   }, {
     id: 3,
     name: t('DISTANCE_STORE_CUSTOMER_RANGE_KM', 'Distance in KM from the store to customer (Range KM)'),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.',
+    description: t('DISTANCE_STORE_CUSTOMER_RANGE_KM_DESCRIPTION', 'Distance in KM from the store to customer (Range KM)'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.MapFill, null)
   }, {
     id: 4,
     name: t('SERVICE_TIMES', 'Service Times'),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.',
+    description: t('SERVICE_TIMES_DESCRIPTION', 'Service Times'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ClockHistory, null)
   }, {
     id: 5,
     name: t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency'),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.',
+    description: t('DETAIL_COMPLETED_ORDERS_DESCRIPTION', 'Detail of the completed orders of each delivery agency'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.FileRuled, null)
   }, {
     id: 6,
     name: t('NUMBER_ORDERS_SPECIFIC_RANGE', 'Number of orders within a specific range'),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.',
+    description: t('NUMBER_ORDERS_SPECIFIC_RANGE_DESCRIPTION', 'Number of orders within a specific range'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.FileEarmarkRuled, null)
   }];
 
@@ -136,7 +142,7 @@ var Reports = function Reports(props) {
     }));
   })), isOpen && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     sidebarId: "brand-details",
-    defaultSideBarWidth: 700,
+    defaultSideBarWidth: width - sidebarWidth,
     open: isOpen,
     onClose: function onClose() {
       return handleCloseSidebar();

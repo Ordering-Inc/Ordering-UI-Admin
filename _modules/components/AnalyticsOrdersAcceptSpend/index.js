@@ -40,7 +40,7 @@ var AnalyticsOrdersAcceptSpend = function AnalyticsOrdersAcceptSpend(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parseNumber = _useUtils2[0].parseNumber;
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersAcceptSpendHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('TIME_SPENT_TO_ACCEPT_ORDER', 'TIME SPENT TO ACCEPT ORDER'))), dataList !== null && dataList !== void 0 && dataList.loading ? /*#__PURE__*/_react.default.createElement(_styles.OrdersAcceptSpendContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersAcceptSpendHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_ACCEPT_SPEND', 'TIME SPENT TO ACCEPT ORDER'))), dataList !== null && dataList !== void 0 && dataList.loading ? /*#__PURE__*/_react.default.createElement(_styles.OrdersAcceptSpendContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70,
     height: 40
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

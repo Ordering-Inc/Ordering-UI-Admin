@@ -130,7 +130,7 @@ var DriverGroupSettingUI = function DriverGroupSettingUI(props) {
       active: includedGroupIds.includes(group.id)
     }, includedGroupIds.includes(group.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("span", null, group === null || group === void 0 ? void 0 : group.name));
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

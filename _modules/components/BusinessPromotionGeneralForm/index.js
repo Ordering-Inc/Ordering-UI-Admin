@@ -268,8 +268,8 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    placeholder: t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description')
-  })), /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('DATE_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement(_styles2.CalendarContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    placeholder: t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description')
+  })), /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('DATES_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement(_styles2.CalendarContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secundary",
     borderRadius: "8px",
     onClick: function onClick() {
@@ -339,7 +339,7 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
     },
     disabled: formState.loading || Object.keys(formState.changes).length === 0
   }, formState.loading ? t('LOADING', 'Loading') : isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDERING', 'Ordering'),
+    title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

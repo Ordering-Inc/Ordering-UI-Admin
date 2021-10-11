@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _reactToastify = require("react-toastify");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Confirm = require("../Confirm");
@@ -171,42 +169,6 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       return document.removeEventListener('click', closeProductEdit);
     };
   }, [categoryFormState]);
-  (0, _react.useEffect)(function () {
-    var _categoryFormState$re3, _categoryFormState$re4;
-
-    if (!(categoryFormState !== null && categoryFormState !== void 0 && categoryFormState.loading) && !(categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$re3 = categoryFormState.result) !== null && _categoryFormState$re3 !== void 0 && _categoryFormState$re3.error) && categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$re4 = categoryFormState.result) !== null && _categoryFormState$re4 !== void 0 && _categoryFormState$re4.result) {
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = '';
-
-      switch (categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.status) {
-        case 'update':
-          content = t('CATEGORY_UPDATED', 'Category updated');
-          break;
-
-        case 'delete':
-          content = t('CATEGORY_DELETE', 'Category deleted');
-          break;
-
-        case 'add':
-          content = t('CATEGORY_ADD', 'Category added');
-          break;
-
-        default:
-          content = t('CATEGORY_SAVED', 'Category saved');
-          break;
-      }
-
-      _reactToastify.toast.dark(content, toastConfigure);
-    }
-  }, [categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading]);
 
   var handleDrag = function handleDrag(event, categoryId) {
     var _categoryFormState$ch;

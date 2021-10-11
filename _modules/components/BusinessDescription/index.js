@@ -62,7 +62,7 @@ var BusinessDescription = function BusinessDescription(props) {
       changes: {}
     }));
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperShortDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHORT_BUSINESS_DESCRPTION', 'Short business description')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperShortDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHORT_BUSINESS_ABOUT', 'Short business description')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "about",
     defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re.about : (_ref = (_formState$changes$ab = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.about) !== null && _formState$changes$ab !== void 0 ? _formState$changes$ab : business === null || business === void 0 ? void 0 : business.about) !== null && _ref !== void 0 ? _ref : '',
     onChange: function onChange(e) {
