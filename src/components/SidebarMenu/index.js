@@ -52,7 +52,7 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 2,
-      title: t('DELIVERIES_DASHBOARD', 'Deliveries dashboard'),
+      title: t('DELIVERY_DASHBOARD', 'Deliveries dashboard'),
       pageName: 'deliveries'
     },
     {
@@ -113,13 +113,13 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 3,
-      title: t('CMS', 'CMS'),
+      title: t('CMS_HEADING', 'CMS'),
       pageName: 'pages',
       url: '/settings/pages'
     },
     {
       id: 4,
-      title: t('INTEGRATIONS', 'Integrations'),
+      title: t('INTEGRATION', 'Integrations'),
       pageName: 'integrations',
       url: '/settings/integrations'
     },
@@ -179,7 +179,7 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 2,
-      title: t('DRIVERS_MANAGER', 'Drivers manager'),
+      title: t('DRIVER_MANAGERS', 'Drivers manager'),
       pageName: 'drivers_managers',
       url: '/delivery/drivers-managers'
     },

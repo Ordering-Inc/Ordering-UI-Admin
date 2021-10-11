@@ -83,7 +83,7 @@ const BusinessMenuShareUI = (props) => {
               <SpinnerLoader />
             </WrapperSpinnerLoader>
           )}
-          <p>{t('SHARE_WITH', 'Share with')}</p>
+          <p>{t('SHARED_WITH', 'Share with')}</p>
           <PopoverList>
             {businessesState.loading ? (
               [...Array(10).keys()].map(i => (

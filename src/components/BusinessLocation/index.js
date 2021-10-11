@@ -145,7 +145,7 @@ export const BusinessLocation = (props) => {
               : formState?.changes?.address_notes ?? business?.address_notes ?? ''
           }
           onChange={(e) => handleChangeTextarea(e.target.value)}
-          placeholder={t('WRITE_AN_ADDRESS_NOTE', 'Write an address note')}
+          placeholder={t('MOBILE_FRONT_VISUALS_APT', 'Write an address note')}
         />
       </WrapperAddressnotes>
       <Button

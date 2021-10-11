@@ -228,11 +228,11 @@ const BusinessPromotionGeneralFormUI = (props) => {
           name='description'
           value={formState.changes?.description ?? promotionState?.promotion?.description ?? ''}
           onChange={e => handleChangeInput(e)}
-          placeholder={t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description')}
+          placeholder={t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description')}
         />
       </ItemWrapper>
       <DateRangeWrapper>
-        <Label>{t('DATE_RANGE', 'Date range')}</Label>
+        <Label>{t('DATES_RANGE', 'Date range')}</Label>
         <CalendarContainer>
           <Button
             color='secundary'
@@ -348,7 +348,7 @@ const BusinessPromotionGeneralFormUI = (props) => {
       </Button>
 
       <Alert
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

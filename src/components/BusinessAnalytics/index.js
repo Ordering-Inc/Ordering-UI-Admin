@@ -145,7 +145,7 @@ const BusinessAnalyticsUI = (props) => {
         <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendList
             dataList={arrivedPickUpSpendList}
-            title={t('TIME_WAITING_ON_READY_FOR_PICKUP', 'TIME SPENT WAITING ON READY FOR PICKUP')}
+            title={t('ORDER_ARRIVED_PICKUP_SPEND', 'TIME SPENT WAITING ON READY FOR PICKUP')}
           />
         </div>
       </AnalyticsContentWrapper>

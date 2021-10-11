@@ -244,7 +244,7 @@ export const DriversLocation = (props) => {
 
       {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver === null && (
         <WrapperOnlineDrivers>
-          <p>{t('DRIVERS_ONLINE', 'Drivers online')}</p>
+          <p>{t('ACTIVE_DRIVERS', 'Drivers online')}</p>
           <OnlineDrivers>
             <AutoScroll innerScroll>
               {onlineDrivers.length > 0 && (

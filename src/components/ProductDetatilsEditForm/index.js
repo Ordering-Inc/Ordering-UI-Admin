@@ -136,7 +136,7 @@ export const ProductDetatilsEditForm = (props) => {
             }
             onChange={handleChangeInput}
             ref={formMethods.register({
-              required: t('VALIDATION_ERROR_BUSINESS_NAME_REQUIRED', 'Business name is required')
+              required: t('BUSINESS_NAME_REQUIRED', 'Business name is required')
             })}
             disabled={formState.loading}
             autoComplete='off'
@@ -162,7 +162,7 @@ export const ProductDetatilsEditForm = (props) => {
           <TextArea
             rows={4}
             name='description'
-            placeholder={t('WRITE_A_LITTLE_DESCRIPTION', 'Write a little description')}
+            placeholder={t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description')}
             defaultValue={
               formState?.result?.result
                 ? formState?.result?.result?.description
@@ -198,7 +198,7 @@ export const ProductDetatilsEditForm = (props) => {
         </ActionsForm>
       </FormInput>
       <Alert
-        title={t('ORDERING', 'Ordering')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

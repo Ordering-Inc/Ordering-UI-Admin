@@ -35,12 +35,12 @@ export const Reports = (props) => {
   const sidebarWidth = 240
 
   const advancedReportsList = [
-    { id: 1, name: t('DISTANCE', 'Distance'), description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.', icon: <Rulers /> },
-    { id: 2, name: t('DISTANCE_STORE_CUSTOMER', 'Distance in KM from the store to customer'), description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.', icon: <Map /> },
-    { id: 3, name: t('DISTANCE_STORE_CUSTOMER_RANGE_KM', 'Distance in KM from the store to customer (Range KM)'), description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.', icon: <MapFill /> },
-    { id: 4, name: t('SERVICE_TIMES', 'Service Times'), description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.', icon: <ClockHistory /> },
-    { id: 5, name: t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency'), description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.', icon: <FileRuled /> },
-    { id: 6, name: t('NUMBER_ORDERS_SPECIFIC_RANGE', 'Number of orders within a specific range'), description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.', icon: <FileEarmarkRuled /> }
+    { id: 1, name: t('DISTANCE', 'Distance'), description: t('DISTANCE_DESCRIPTION', 'Distance'), icon: <Rulers /> },
+    { id: 2, name: t('DISTANCE_STORE_CUSTOMER', 'Distance in KM from the store to customer'), description: t('DISTANCE_STORE_CUSTOMER_DESCRIPTION', 'Distance in KM from the store to customer'), icon: <Map /> },
+    { id: 3, name: t('DISTANCE_STORE_CUSTOMER_RANGE_KM', 'Distance in KM from the store to customer (Range KM)'), description: t('DISTANCE_STORE_CUSTOMER_RANGE_KM_DESCRIPTION', 'Distance in KM from the store to customer (Range KM)'), icon: <MapFill /> },
+    { id: 4, name: t('SERVICE_TIMES', 'Service Times'), description: t('SERVICE_TIMES_DESCRIPTION', 'Service Times'), icon: <ClockHistory /> },
+    { id: 5, name: t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency'), description: t('DETAIL_COMPLETED_ORDERS_DESCRIPTION', 'Detail of the completed orders of each delivery agency'), icon: <FileRuled /> },
+    { id: 6, name: t('NUMBER_ORDERS_SPECIFIC_RANGE', 'Number of orders within a specific range'), description: t('NUMBER_ORDERS_SPECIFIC_RANGE_DESCRIPTION', 'Number of orders within a specific range'), icon: <FileEarmarkRuled /> }
   ]
 
   const handleCloseSidebar = () => {
