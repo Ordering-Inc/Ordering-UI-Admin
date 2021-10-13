@@ -78,6 +78,10 @@ export const BusinessSummary = (props) => {
     {
       key: 'webhooks',
       value: t('WEBHOOKS', 'Webhooks')
+    },
+    {
+      key: 'more',
+      value: t('MORE', 'More')
     }
   ]
 

@@ -16,6 +16,7 @@ import {
   BarContainer
 } from './styles'
 import { Personalization } from '../Personalization'
+import { BusinessMoreDetail } from '../BusinessMoreDetail'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -192,6 +193,9 @@ export const BusinessDetailsUI = (props) => {
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
             />
+          )}
+          {selectedItem === 'more' && (
+            <BusinessMoreDetail />
           )}
         </MoreSidebarLayout>
       )}
