@@ -29,7 +29,6 @@ export const BusinessMoreDetail = (props) => {
       {UIComponent && (
         <UIComponent
           {...props}
-          formState={formState}
           handleChangeFormState={handleChnageFormState}
         />
       )}

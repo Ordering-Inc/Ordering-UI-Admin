@@ -198,6 +198,9 @@ export const BusinessDetailsUI = (props) => {
             <BusinessMoreDetail
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              formState={formState}
+              setFormState={setFormState}
             />
           )}
         </MoreSidebarLayout>
