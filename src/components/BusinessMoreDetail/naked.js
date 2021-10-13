@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
@@ -11,11 +11,26 @@ export const BusinessMoreDetail = (props) => {
     UIComponent
   } = props
 
+  const [formState, setFormState] = useState({ changes: null, loading: false, result: { error: null } })
+
+  const handleChnageFormState = (changes) => {
+    setFormState({
+      ...formState,
+      changes: { ...changes }
+    })
+  }
+
+  useEffect(() => {
+    console.log(formState, 'this is formState')
+  }, [formState])
+
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
+          formState={formState}
+          handleChangeFormState={handleChnageFormState}
         />
       )}
     </>

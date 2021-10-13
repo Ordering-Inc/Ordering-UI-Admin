@@ -195,7 +195,10 @@ export const BusinessDetailsUI = (props) => {
             />
           )}
           {selectedItem === 'more' && (
-            <BusinessMoreDetail />
+            <BusinessMoreDetail
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+            />
           )}
         </MoreSidebarLayout>
       )}
