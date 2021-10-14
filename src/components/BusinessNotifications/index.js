@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { useLanguage } from 'ordering-components-admin'
-import { BusinessTax } from '../BusinessTax'
 import { BusinessDeliveryPickUp } from '../BusinessDeliveryPickUP'
 
 import {
@@ -10,6 +9,7 @@ import {
   ToggleItemWrapper,
   AccordionTitle
 } from './styles'
+import { BusinessEmailAndPhone } from '../BusinessEmailAndPhone'
 
 export const BusinessNotifications = (props) => {
   const {
@@ -32,7 +32,7 @@ export const BusinessNotifications = (props) => {
           <AccordionTitle>{t('EMAILS_AND_PHONES', 'Emails and phones')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='0'>
-          <BusinessTax {...props} />
+          <BusinessEmailAndPhone {...props} />
         </Accordion.Collapse>
 
         <ContextAwareToggle eventKey='1'>
