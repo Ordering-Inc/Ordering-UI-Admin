@@ -23,6 +23,8 @@ var _PluginList = require("../PluginList");
 
 var _WebhookList = require("../WebhookList");
 
+var _ApiKeysList = require("../ApiKeysList");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -69,21 +71,32 @@ var IntegrationListing = function IntegrationListing(props) {
     onClick: function onClick() {
       return setShowOption('webhooks');
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Display, null)), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('WEBHOOKS', 'Webhooks')), /*#__PURE__*/_react.default.createElement("p", null, t('WEBHOOK_DESCRIPTION', 'Unlike business webhooks, global webhooks listen to the events of the entire project.')))))), showOption === 'plugins' && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
-    sidebarId: "settings-integrations",
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Display, null)), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('WEBHOOKS', 'Webhooks')), /*#__PURE__*/_react.default.createElement("p", null, t('WEBHOOK_DESCRIPTION', 'Unlike business webhooks, global webhooks listen to the events of the entire project.')))), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContainer, {
+    onClick: function onClick() {
+      return setShowOption('apiKeys');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.KeyFill, null)), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('KEYS', 'Api Keys')), /*#__PURE__*/_react.default.createElement("p", null, t('APIKEYS_DESCRIPTION', 'These keys serve to obtain a direct connection to the API without the need for authentication.')))))), showOption === 'plugins' && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+    sidebarId: "plugins-integrations",
     defaultSideBarWidth: 600,
     open: showOption === 'plugins',
     onClose: function onClose() {
       return setShowOption(null);
     }
   }, /*#__PURE__*/_react.default.createElement(_PluginList.PluginList, null)), showOption === 'webhooks' && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
-    sidebarId: "settings-integrations",
+    sidebarId: "webhooks-integrations",
     defaultSideBarWidth: 768,
     open: showOption === 'webhooks',
     onClose: function onClose() {
       return setShowOption(null);
     }
-  }, /*#__PURE__*/_react.default.createElement(_WebhookList.WebhookList, null)));
+  }, /*#__PURE__*/_react.default.createElement(_WebhookList.WebhookList, null)), showOption === 'apiKeys' && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+    sidebarId: "apikeys-integrations",
+    defaultSideBarWidth: 700,
+    open: showOption === 'apiKeys',
+    onClose: function onClose() {
+      return setShowOption(null);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ApiKeysList.ApiKeysList, null)));
 };
 
 exports.IntegrationListing = IntegrationListing;
