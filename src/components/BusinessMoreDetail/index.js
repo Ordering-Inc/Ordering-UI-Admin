@@ -13,6 +13,7 @@ import {
   ContentWrapper
 } from './styles'
 import { BusinessExtension } from '../BusinessExtension'
+import { BusinessLogistic } from '../BusinessLogistic'
 
 const BusinessMoreDetailUI = (props) => {
   const {
@@ -56,9 +57,7 @@ const BusinessMoreDetailUI = (props) => {
           <AccordionTitle>{t('LOGISTIC', 'Logistic')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='3'>
-          <ContentWrapper>
-          LOGISTIC
-          </ContentWrapper>
+          <BusinessLogistic {...props} />
         </Accordion.Collapse>
 
         <ContextAwareToggle eventKey='4'>
