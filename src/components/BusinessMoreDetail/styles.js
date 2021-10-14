@@ -23,11 +23,3 @@ export const ToggleItemWrapper = styled.div`
 export const AccordionTitle = styled.div`
   text-transform: capitalize;
 `
-
-export const ContentWrapper = styled.div`
-  padding: 10px;
-`
-
-export const TaxManagerWrapper = styled.div`
-  padding: 10px;
-`

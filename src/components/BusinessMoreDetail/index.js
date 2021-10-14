@@ -9,11 +9,11 @@ import {
   BusinessMoreDetailContainer,
   Title,
   ToggleItemWrapper,
-  AccordionTitle,
-  ContentWrapper
+  AccordionTitle
 } from './styles'
 import { BusinessExtension } from '../BusinessExtension'
 import { BusinessLogistic } from '../BusinessLogistic'
+import { BusinessPreorder } from '../BusinessPreorder'
 
 const BusinessMoreDetailUI = (props) => {
   const {
@@ -64,9 +64,7 @@ const BusinessMoreDetailUI = (props) => {
           <AccordionTitle>{t('PREORDER', 'Preorder')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='4'>
-          <ContentWrapper>
-          PREORDER
-          </ContentWrapper>
+          <BusinessPreorder {...props} />
         </Accordion.Collapse>
       </Accordion>
     </BusinessMoreDetailContainer>

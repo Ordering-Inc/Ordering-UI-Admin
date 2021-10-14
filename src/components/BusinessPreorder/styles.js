@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const BusinessDeliveryPickUpContainer = styled.div`
+export const BusinessPreorderContainer = styled.div`
   padding: 10px;
 `
 

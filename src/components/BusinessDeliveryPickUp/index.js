@@ -83,12 +83,12 @@ export const BusinessDeliveryPickUp = (props) => {
   useEffect(() => {
     setTimeList()
     setCurDeliveryTime({
-      hour: (business?.delivery_time.split(':')[0] * 1) + '',
-      minute: (business?.delivery_time.split(':')[1] * 1) + ''
+      hour: business?.delivery_time ? (business?.delivery_time?.split(':')[0] * 1) + '' : '0',
+      minute: business?.delivery_time ? (business?.delivery_time?.split(':')[1] * 1) + '' : '0'
     })
     setCurPickupTime({
-      hour: (business?.pickup_time.split(':')[0] * 1) + '',
-      minute: (business?.pickup_time.split(':')[1] * 1) + ''
+      hour: business?.pickup_time ? (business?.pickup_time?.split(':')[0] * 1) + '' : '0',
+      minute: business?.pickup_time ? (business?.pickup_time?.split(':')[1] * 1) + '' : '0'
     })
   }, [])
 
