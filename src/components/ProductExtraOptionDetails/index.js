@@ -283,7 +283,7 @@ const ProductExtraOptionDetailsUI = (props) => {
       <Dvider />
       <ModifierOptionsContainer>
         <h2>{t('MODIFIER_OPTIONS', 'Modifier options')}</h2>
-        {optionState?.option?.suboptions.map((subOption, index) => (
+        {optionState?.option?.suboptions?.map((subOption, index) => (
           <SubOptionContainer key={subOption.id}>
             <LeftSubOptionContent>
               <SubOptionImage
