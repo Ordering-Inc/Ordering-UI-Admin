@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { IconButton } from '../../styles/Buttons'
-import { List as MenuIcon, PuzzleFill, Display } from 'react-bootstrap-icons'
+import { List as MenuIcon, PuzzleFill, Display, KeyFill } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { SideBar } from '../SideBar'
 import { PluginList } from '../PluginList'
 import { WebhookList } from '../WebhookList'
+import { ApiKeysList } from '../ApiKeysList'
 
 import {
   IntegrationsContainer,
@@ -58,12 +59,23 @@ export const IntegrationListing = (props) => {
               <p>{t('WEBHOOK_DESCRIPTION', 'Unlike business webhooks, global webhooks listen to the events of the entire project.')}</p>
             </SettingItemContent>
           </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => setShowOption('apiKeys')}
+          >
+            <IconWrapper>
+              <KeyFill />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('KEYS', 'Api Keys')}</h5>
+              <p>{t('APIKEYS_DESCRIPTION', 'These keys serve to obtain a direct connection to the API without the need for authentication.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
         </SettingListContainer>
       </IntegrationsContainer>
 
       {showOption === 'plugins' && (
         <SideBar
-          sidebarId='settings-integrations'
+          sidebarId='plugins-integrations'
           defaultSideBarWidth={600}
           open={showOption === 'plugins'}
           onClose={() => setShowOption(null)}
@@ -74,12 +86,23 @@ export const IntegrationListing = (props) => {
 
       {showOption === 'webhooks' && (
         <SideBar
-          sidebarId='settings-integrations'
+          sidebarId='webhooks-integrations'
           defaultSideBarWidth={768}
           open={showOption === 'webhooks'}
           onClose={() => setShowOption(null)}
         >
           <WebhookList />
+        </SideBar>
+      )}
+
+      {showOption === 'apiKeys' && (
+        <SideBar
+          sidebarId='apikeys-integrations'
+          defaultSideBarWidth={700}
+          open={showOption === 'apiKeys'}
+          onClose={() => setShowOption(null)}
+        >
+          <ApiKeysList />
         </SideBar>
       )}
     </>
