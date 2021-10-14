@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { BusinessMoreDetail as BusinessMoreDetailController } from './naked'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { BusinessTax } from '../BusinessTax'
 import { BusinessDeliveryPickUp } from '../BusinessDeliveryPickUP'
+import { BusinessExtension } from '../BusinessExtension'
+import { BusinessLogistic } from '../BusinessLogistic'
+import { BusinessPreorder } from '../BusinessPreorder'
 
 import {
   BusinessMoreDetailContainer,
@@ -11,11 +13,8 @@ import {
   ToggleItemWrapper,
   AccordionTitle
 } from './styles'
-import { BusinessExtension } from '../BusinessExtension'
-import { BusinessLogistic } from '../BusinessLogistic'
-import { BusinessPreorder } from '../BusinessPreorder'
 
-const BusinessMoreDetailUI = (props) => {
+export const BusinessMoreDetail = (props) => {
   const {
     formState,
     handleUpdateBusinessClick
@@ -69,14 +68,6 @@ const BusinessMoreDetailUI = (props) => {
       </Accordion>
     </BusinessMoreDetailContainer>
   )
-}
-
-export const BusinessMoreDetail = (props) => {
-  const businessMoreDetailProps = {
-    ...props,
-    UIComponent: BusinessMoreDetailUI
-  }
-  return <BusinessMoreDetailController {...businessMoreDetailProps} />
 }
 
 const ContextAwareToggle = ({ children, eventKey, callback }) => {

@@ -82,7 +82,7 @@ export const BusinessTax = (props) => {
         </FormControl>
       </BusinessTaxContainer>
       <Alert
-        title={t('MORE', 'More')}
+        title={t('TAX_MANAGER', 'Tax manager')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
