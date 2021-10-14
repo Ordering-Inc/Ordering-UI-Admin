@@ -74,7 +74,7 @@ var AddCsvFormUI = function AddCsvFormUI(props) {
 
   var headerCsvInputRef = (0, _react.useRef)(null);
 
-  var _useState3 = (0, _react.useState)(2),
+  var _useState3 = (0, _react.useState)(1),
       _useState4 = _slicedToArray(_useState3, 2),
       importType = _useState4[0],
       setImportType = _useState4[1];
@@ -87,7 +87,7 @@ var AddCsvFormUI = function AddCsvFormUI(props) {
   var importypeOptions = [{
     value: 1,
     content: t('STORE', 'Store'),
-    sync_name: 'sync_stores'
+    sync_name: 'sync_businesses'
   }, {
     value: 2,
     content: t('PRODUCT', 'Product'),
@@ -95,7 +95,7 @@ var AddCsvFormUI = function AddCsvFormUI(props) {
   }, {
     value: 3,
     content: t('CATEGORY', 'Category'),
-    sync_name: 'sync_categorys'
+    sync_name: 'sync_categories'
   }];
   var importSymbolOptions = [{
     value: 1,
