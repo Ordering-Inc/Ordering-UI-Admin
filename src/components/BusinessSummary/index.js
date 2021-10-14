@@ -60,6 +60,10 @@ export const BusinessSummary = (props) => {
       value: t('DELIVERY_ZONES', 'Delivery zones')
     },
     {
+      key: 'notifications',
+      value: t('NOTIFICATIONS', 'Notifications')
+    },
+    {
       key: 'payment_methods',
       value: t('PAYMENS_METHODS', 'Payment methods')
     },
@@ -76,8 +80,16 @@ export const BusinessSummary = (props) => {
       value: t('PERSONALIZATION', 'Personalization')
     },
     {
+      key: 'ordering_channels',
+      value: t('ORDERING_CHANNELS', 'Ordering channels')
+    },
+    {
       key: 'webhooks',
       value: t('WEBHOOKS', 'Webhooks')
+    },
+    {
+      key: 'more',
+      value: t('MORE', 'More')
     }
   ]
 
