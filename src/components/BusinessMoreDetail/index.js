@@ -12,6 +12,7 @@ import {
   AccordionTitle,
   ContentWrapper
 } from './styles'
+import { BusinessExtension } from '../BusinessExtension'
 
 const BusinessMoreDetailUI = (props) => {
   const {
@@ -38,7 +39,7 @@ const BusinessMoreDetailUI = (props) => {
         </Accordion.Collapse>
 
         <ContextAwareToggle eventKey='1'>
-          <AccordionTitle>{t('DELIVERY_PICKUP_TIMES', 'Tax manager')}</AccordionTitle>
+          <AccordionTitle>{t('DELIVERY_PICKUP_TIMES', 'Delivery/Pickup Times')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='1'>
           <BusinessDeliveryPickUp {...props} />
@@ -48,9 +49,7 @@ const BusinessMoreDetailUI = (props) => {
           <AccordionTitle>{t('EXTENSIONS', 'Extensions')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='2'>
-          <ContentWrapper>
-          EXTENSIONS
-          </ContentWrapper>
+          <BusinessExtension {...props} />
         </Accordion.Collapse>
 
         <ContextAwareToggle eventKey='3'>

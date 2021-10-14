@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
+import { BusinessDetails as BusinessDetailsController } from './naked'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
 import { BusinessSupport } from '../BusinessSupport'
