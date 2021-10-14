@@ -10,6 +10,7 @@ import {
   AccordionTitle
 } from './styles'
 import { BusinessEmailAndPhone } from '../BusinessEmailAndPhone'
+import { BusinessGprsPrinters } from '../BusinessGprsPrinters'
 
 export const BusinessNotifications = (props) => {
   const {
@@ -39,7 +40,7 @@ export const BusinessNotifications = (props) => {
           <AccordionTitle>{t('GPRS_PRINTERS', 'Gprs printers')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='1'>
-          <BusinessDeliveryPickUp {...props} />
+          <BusinessGprsPrinters {...props} />
         </Accordion.Collapse>
       </Accordion>
     </BusinessNotificationsContainer>
