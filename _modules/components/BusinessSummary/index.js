@@ -91,6 +91,9 @@ var BusinessSummary = function BusinessSummary(props) {
     key: 'delivery_zones',
     value: t('DELIVERY_ZONES', 'Delivery zones')
   }, {
+    key: 'notifications',
+    value: t('NOTIFICATIONS', 'Notifications')
+  }, {
     key: 'payment_methods',
     value: t('PAYMENS_METHODS', 'Payment methods')
   }, {
@@ -103,8 +106,14 @@ var BusinessSummary = function BusinessSummary(props) {
     key: 'personalization',
     value: t('PERSONALIZATION', 'Personalization')
   }, {
+    key: 'ordering_channels',
+    value: t('ORDERING_CHANNELS', 'Ordering channels')
+  }, {
     key: 'webhooks',
     value: t('WEBHOOKS', 'Webhooks')
+  }, {
+    key: 'more',
+    value: t('MORE', 'More')
   }];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
