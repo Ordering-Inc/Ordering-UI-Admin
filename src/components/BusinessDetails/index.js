@@ -18,6 +18,7 @@ import {
 import { Personalization } from '../Personalization'
 import { BusinessMoreDetail } from '../BusinessMoreDetail'
 import { BusinessNotifications } from '../BusinessNotifications'
+import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -196,6 +197,15 @@ export const BusinessDetailsUI = (props) => {
           {selectedItem === 'personalization' && (
             <Personalization
               isShowTitle
+            />
+          )}
+          {selectedItem === 'ordering_channels' && (
+            <BusinessOrderingChannels
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              formState={formState}
+              setFormState={setFormState}
             />
           )}
           {selectedItem === 'webhooks' && (

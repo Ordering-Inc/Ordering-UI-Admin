@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { useLanguage } from 'ordering-components-admin'
-import { BusinessDeliveryPickUp } from '../BusinessDeliveryPickUP'
 
 import {
   BusinessNotificationsContainer,

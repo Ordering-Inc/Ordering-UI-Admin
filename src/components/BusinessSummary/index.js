@@ -80,6 +80,10 @@ export const BusinessSummary = (props) => {
       value: t('PERSONALIZATION', 'Personalization')
     },
     {
+      key: 'ordering_channels',
+      value: t('ORDERING_CHANNELS', 'Ordering channels')
+    },
+    {
       key: 'webhooks',
       value: t('WEBHOOKS', 'Webhooks')
     },
