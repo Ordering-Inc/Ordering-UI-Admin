@@ -47,6 +47,13 @@ export const RightHeader = styled.div`
 
 export const FormInput = styled.form`
   margin-top: 20px;
+  height: calc(100% - 60px);
+`
+
+export const FormInputInnerContainer = styled.div`
+  height: calc(100% - 60px);
+  padding: 0 5px;
+  overflow: auto;
 `
 
 export const HeaderImage = styled.div`
@@ -165,7 +172,7 @@ export const InputWrapper = styled.div`
 `
 
 export const ActionsForm = styled.div`
-  padding: 50px 0;
+  padding-top: 20px;
   > button {
     height: 42px;
     &:first-child {
