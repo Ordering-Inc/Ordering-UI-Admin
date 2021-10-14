@@ -29,13 +29,13 @@ const AddCsvFormUI = (props) => {
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const headerCsvInputRef = useRef(null)
-  const [importType, setImportType] = useState(2)
+  const [importType, setImportType] = useState(1)
   const [importSymbol, setImportSymbol] = useState(1)
 
   const importypeOptions = [
-    { value: 1, content: t('STORE', 'Store'), sync_name: 'sync_stores' },
+    { value: 1, content: t('STORE', 'Store'), sync_name: 'sync_businesses' },
     { value: 2, content: t('PRODUCT', 'Product'), sync_name: 'sync_products' },
-    { value: 3, content: t('CATEGORY', 'Category'), sync_name: 'sync_categorys' }
+    { value: 3, content: t('CATEGORY', 'Category'), sync_name: 'sync_categories' }
   ]
 
   const importSymbolOptions = [

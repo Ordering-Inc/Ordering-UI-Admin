@@ -60,13 +60,12 @@ export const SettingItemContainer = styled.div`
     background-color: ${props => props.theme.colors.borderColor};
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 576px) {
     width: calc(50% - 20px);
   }
 
-  @media (min-width: 1024px) {
-    width: calc(40% - 20px);
-    max-width: 480px;
+  @media (min-width: 992px) {
+    width: calc(33% - 20px);
   }
 `
 
@@ -101,5 +100,9 @@ export const SettingItemContent = styled.div`
     color: ${props => props.theme.colors.lightGray};
     font-size: 12px;
     margin: 0px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 `
