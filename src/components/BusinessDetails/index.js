@@ -16,6 +16,9 @@ import {
   BarContainer
 } from './styles'
 import { Personalization } from '../Personalization'
+import { BusinessMoreDetail } from '../BusinessMoreDetail'
+import { BusinessNotifications } from '../BusinessNotifications'
+import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -158,6 +161,15 @@ export const BusinessDetailsUI = (props) => {
               handleSuccessUpdate={handleUpdateBusinessState}
             />
           )}
+          {selectedItem === 'notifications' && (
+            <BusinessNotifications
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              formState={formState}
+              setFormState={setFormState}
+            />
+          )}
           {selectedItem === 'payment_methods' && (
             <BusinessPaymentMethods
               business={businessState?.business}
@@ -187,10 +199,28 @@ export const BusinessDetailsUI = (props) => {
               isShowTitle
             />
           )}
+          {selectedItem === 'ordering_channels' && (
+            <BusinessOrderingChannels
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              formState={formState}
+              setFormState={setFormState}
+            />
+          )}
           {selectedItem === 'webhooks' && (
             <BusinessWebhooks
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'more' && (
+            <BusinessMoreDetail
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              formState={formState}
+              setFormState={setFormState}
             />
           )}
         </MoreSidebarLayout>
