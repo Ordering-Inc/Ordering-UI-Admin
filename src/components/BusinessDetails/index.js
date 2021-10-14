@@ -17,6 +17,7 @@ import {
 } from './styles'
 import { Personalization } from '../Personalization'
 import { BusinessMoreDetail } from '../BusinessMoreDetail'
+import { BusinessNotifications } from '../BusinessNotifications'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -157,6 +158,15 @@ export const BusinessDetailsUI = (props) => {
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               onClose={() => setIsExtendExtraOpen(false)}
               handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'notifications' && (
+            <BusinessNotifications
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              formState={formState}
+              setFormState={setFormState}
             />
           )}
           {selectedItem === 'payment_methods' && (

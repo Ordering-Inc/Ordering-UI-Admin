@@ -60,6 +60,10 @@ export const BusinessSummary = (props) => {
       value: t('DELIVERY_ZONES', 'Delivery zones')
     },
     {
+      key: 'notifications',
+      value: t('NOTIFICATIONS', 'Notifications')
+    },
+    {
       key: 'payment_methods',
       value: t('PAYMENS_METHODS', 'Payment methods')
     },

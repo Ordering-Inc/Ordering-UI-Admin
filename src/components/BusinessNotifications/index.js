@@ -3,18 +3,15 @@ import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessTax } from '../BusinessTax'
 import { BusinessDeliveryPickUp } from '../BusinessDeliveryPickUP'
-import { BusinessExtension } from '../BusinessExtension'
-import { BusinessLogistic } from '../BusinessLogistic'
-import { BusinessPreorder } from '../BusinessPreorder'
 
 import {
-  BusinessMoreDetailContainer,
+  BusinessNotificationsContainer,
   Title,
   ToggleItemWrapper,
   AccordionTitle
 } from './styles'
 
-export const BusinessMoreDetail = (props) => {
+export const BusinessNotifications = (props) => {
   const {
     formState,
     handleUpdateBusinessClick
@@ -28,45 +25,24 @@ export const BusinessMoreDetail = (props) => {
   }, [formState])
 
   return (
-    <BusinessMoreDetailContainer>
-      <Title>{t('MORE', 'More')}</Title>
+    <BusinessNotificationsContainer>
+      <Title>{t('NOTIFICATIONS', 'Notifications')}</Title>
       <Accordion>
         <ContextAwareToggle eventKey='0'>
-          <AccordionTitle>{t('TAX_MANAGER', 'Tax manager')}</AccordionTitle>
+          <AccordionTitle>{t('EMAILS_AND_PHONES', 'Emails and phones')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='0'>
           <BusinessTax {...props} />
         </Accordion.Collapse>
 
         <ContextAwareToggle eventKey='1'>
-          <AccordionTitle>{t('DELIVERY_PICKUP_TIMES', 'Delivery/Pickup Times')}</AccordionTitle>
+          <AccordionTitle>{t('GPRS_PRINTERS', 'Gprs printers')}</AccordionTitle>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='1'>
           <BusinessDeliveryPickUp {...props} />
         </Accordion.Collapse>
-
-        <ContextAwareToggle eventKey='2'>
-          <AccordionTitle>{t('EXTENSIONS', 'Extensions')}</AccordionTitle>
-        </ContextAwareToggle>
-        <Accordion.Collapse eventKey='2'>
-          <BusinessExtension {...props} />
-        </Accordion.Collapse>
-
-        <ContextAwareToggle eventKey='3'>
-          <AccordionTitle>{t('LOGISTIC', 'Logistic')}</AccordionTitle>
-        </ContextAwareToggle>
-        <Accordion.Collapse eventKey='3'>
-          <BusinessLogistic {...props} />
-        </Accordion.Collapse>
-
-        <ContextAwareToggle eventKey='4'>
-          <AccordionTitle>{t('PREORDER', 'Preorder')}</AccordionTitle>
-        </ContextAwareToggle>
-        <Accordion.Collapse eventKey='4'>
-          <BusinessPreorder {...props} />
-        </Accordion.Collapse>
       </Accordion>
-    </BusinessMoreDetailContainer>
+    </BusinessNotificationsContainer>
   )
 }
 
