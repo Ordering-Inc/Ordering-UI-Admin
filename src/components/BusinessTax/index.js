@@ -20,6 +20,8 @@ export const BusinessTax = (props) => {
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
+  let timeout = null
+
   const taxTypeList = [
     { value: '1', content: t('TAX_INCLUDED', 'Tax included on price') },
     { value: '2', content: t('TAX_NOT_INCLUDED', 'Tax not included on price') }
@@ -32,18 +34,23 @@ export const BusinessTax = (props) => {
     })
   }
 
-  const handleChangeInput = (evt) => {
-    if (evt.target.value === '') {
-      setAlertState({
-        ...alertState,
-        open: true,
-        content: [t('TAX_REQUIRED')]
+  const handleChangeInput = (e) => {
+    e.persist()
+    clearTimeout(timeout)
+
+    timeout = setTimeout(() => {
+      if (e.target.value === '') {
+        setAlertState({
+          ...alertState,
+          open: true,
+          content: [t('TAX_REQUIRED')]
+        })
+        return
+      }
+      setFormState({
+        ...formState,
+        changes: { [e.target.name]: e.target.value }
       })
-      return
-    }
-    setFormState({
-      ...formState,
-      changes: { [evt.target.name]: evt.target.value }
     })
   }
 

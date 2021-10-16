@@ -23,9 +23,9 @@ export const BusinessMoreDetail = (props) => {
   const [, t] = useLanguage()
 
   useEffect(() => {
-    if (formState.loading || Object.keys(formState?.changes).length === 0) return
+    if (Object.keys(formState?.changes).length === 0) return
     handleUpdateBusinessClick()
-  }, [formState])
+  }, [formState?.changes])
 
   return (
     <BusinessMoreDetailContainer>
