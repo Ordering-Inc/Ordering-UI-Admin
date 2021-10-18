@@ -61,6 +61,7 @@ var BusinessLogistic = function BusinessLogistic(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var timeout = null;
   var priorityList = [{
     value: '2',
     content: t('URGENT', 'Urgent')
@@ -81,11 +82,15 @@ var BusinessLogistic = function BusinessLogistic(props) {
     }));
   };
 
-  var changeExpireOrderAfterMinutes = function changeExpireOrderAfterMinutes(evt) {
-    if (evt.target.value === '') return;
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _defineProperty({}, evt.target.name, parseInt(evt.target.value))
-    }));
+  var changeExpireOrderAfterMinutes = function changeExpireOrderAfterMinutes(e) {
+    e.persist();
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      if (e.target.value === '') return;
+      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        changes: _defineProperty({}, e.target.name, parseInt(e.target.value))
+      }));
+    }, 500);
   };
 
   var closeAlert = function closeAlert() {

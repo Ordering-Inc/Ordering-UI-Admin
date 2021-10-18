@@ -59,42 +59,55 @@ var BusinessEmailAndPhone = function BusinessEmailAndPhone(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var timeout1 = null;
+  var timeout2 = null;
+  var timeout3 = null;
+
   var saveEmailOrders = function saveEmailOrders(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (email.trim() === '' || !re.test(email)) return;
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: {
-        email: email
-      }
-    }));
+    clearTimeout(timeout1);
+    timeout1 = setTimeout(function () {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (email.trim() === '' || !re.test(email)) return;
+      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        changes: {
+          email: email
+        }
+      }));
+    }, 500);
   };
 
   var saveBusinessTel = function saveBusinessTel(phone) {
-    if (phone.trim() === '') {
-      setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-        open: true,
-        content: [t('PHONE_REQUIRED')]
-      }));
-      return;
-    }
+    clearTimeout(timeout2);
+    timeout2 = setTimeout(function () {
+      if (phone.trim() === '') {
+        setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+          open: true,
+          content: [t('PHONE_REQUIRED')]
+        }));
+        return;
+      }
 
-    if (phone.length >= 7) {
-      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-        changes: {
-          phone: phone
-        }
-      }));
-    }
+      if (phone.length >= 7) {
+        setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+          changes: {
+            phone: phone
+          }
+        }));
+      }
+    }, 500);
   };
 
   var saveBusinessCel = function saveBusinessCel(cellphone) {
-    if (cellphone.length >= 10 || cellphone.length === 0) {
-      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-        changes: {
-          cellphone: cellphone || ''
-        }
-      }));
-    }
+    clearTimeout(timeout3);
+    timeout3 = setTimeout(function () {
+      if (cellphone.length >= 10 || cellphone.length === 0) {
+        setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+          changes: {
+            cellphone: cellphone || ''
+          }
+        }));
+      }
+    }, 500);
   };
 
   var closeAlert = function closeAlert() {

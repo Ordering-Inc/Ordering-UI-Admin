@@ -59,37 +59,48 @@ var BusinessExtension = function BusinessExtension(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var changeMinimunPurchased = function changeMinimunPurchased(evt) {
-    if (evt.target.value.trim() === '') {
-      setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-        open: true,
-        content: [t('MINIMUN_PURCHASED_REQUIRED')]
-      }));
-      return;
-    }
+  var timeout1 = null;
+  var timeout2 = null;
 
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _defineProperty({}, evt.target.name, evt.target.value)
-    }));
+  var changeMinimunPurchased = function changeMinimunPurchased(e) {
+    e.persist();
+    clearTimeout(timeout1);
+    timeout1 = setTimeout(function () {
+      if (e.target.value.trim() === '') {
+        setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+          open: true,
+          content: [t('MINIMUN_PURCHASED_REQUIRED')]
+        }));
+        return;
+      }
+
+      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        changes: _defineProperty({}, e.target.name, e.target.value)
+      }));
+    }, 500);
   };
 
-  var changeServiceFee = function changeServiceFee(evt) {
-    if (evt.target.value.trim() === '') {
-      setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-        open: true,
-        content: [t('SERVICE_FEE_REQUIRED')]
-      }));
-      return;
-    }
+  var changeServiceFee = function changeServiceFee(e) {
+    e.persist();
+    clearTimeout(timeout2);
+    timeout2 = setTimeout(function () {
+      if (e.target.value.trim() === '') {
+        setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+          open: true,
+          content: [t('SERVICE_FEE_REQUIRED')]
+        }));
+        return;
+      }
 
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _defineProperty({}, evt.target.name, evt.target.value)
-    }));
+      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        changes: _defineProperty({}, e.target.name, e.target.value)
+      }));
+    }, 500);
   };
 
-  var changeFeature = function changeFeature(evt) {
+  var changeFeature = function changeFeature(e) {
     setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _defineProperty({}, evt.target.name, evt.target.checked)
+      changes: _defineProperty({}, e.target.name, e.target.checked)
     }));
   };
 
@@ -105,7 +116,9 @@ var BusinessExtension = function BusinessExtension(props) {
     name: "minimum",
     defaultValue: business === null || business === void 0 ? void 0 : business.minimum,
     placeholder: t('MINIMUN_PURCHASED', 'Minimum purchase'),
-    onChange: changeMinimunPurchased
+    onChange: function onChange(e) {
+      return changeMinimunPurchased(e);
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SERVICE_FEE_SETTINGS', 'Service fee settings in %')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     name: "service_fee",

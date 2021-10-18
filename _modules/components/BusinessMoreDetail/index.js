@@ -50,9 +50,9 @@ var BusinessMoreDetail = function BusinessMoreDetail(props) {
       t = _useLanguage2[1];
 
   (0, _react.useEffect)(function () {
-    if (formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) return;
+    if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) return;
     handleUpdateBusinessClick();
-  }, [formState]);
+  }, [formState === null || formState === void 0 ? void 0 : formState.changes]);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessMoreDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MORE', 'More')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "0"
   }, /*#__PURE__*/_react.default.createElement(_styles.AccordionTitle, null, t('TAX_MANAGER', 'Tax manager'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {

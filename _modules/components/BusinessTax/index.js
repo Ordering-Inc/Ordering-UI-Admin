@@ -61,6 +61,7 @@ var BusinessTax = function BusinessTax(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var timeout = null;
   var taxTypeList = [{
     value: '1',
     content: t('TAX_INCLUDED', 'Tax included on price')
@@ -75,18 +76,22 @@ var BusinessTax = function BusinessTax(props) {
     }));
   };
 
-  var handleChangeInput = function handleChangeInput(evt) {
-    if (evt.target.value === '') {
-      setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-        open: true,
-        content: [t('TAX_REQUIRED')]
-      }));
-      return;
-    }
+  var handleChangeInput = function handleChangeInput(e) {
+    e.persist();
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      if (e.target.value === '') {
+        setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+          open: true,
+          content: [t('TAX_REQUIRED')]
+        }));
+        return;
+      }
 
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _defineProperty({}, evt.target.name, evt.target.value)
-    }));
+      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        changes: _defineProperty({}, e.target.name, e.target.value)
+      }));
+    });
   };
 
   var closeAlert = function closeAlert() {
