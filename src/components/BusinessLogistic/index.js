@@ -19,7 +19,7 @@ export const BusinessLogistic = (props) => {
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
-
+  let timeout = null
   const priorityList = [
     { value: '2', content: t('URGENT', 'Urgent') },
     { value: '1', content: t('HIGH', 'High') },
@@ -34,12 +34,17 @@ export const BusinessLogistic = (props) => {
     })
   }
 
-  const changeExpireOrderAfterMinutes = (evt) => {
-    if (evt.target.value === '') return
-    setFormState({
-      ...formState,
-      changes: { [evt.target.name]: parseInt(evt.target.value) }
-    })
+  const changeExpireOrderAfterMinutes = (e) => {
+    e.persist()
+    clearTimeout(timeout)
+
+    timeout = setTimeout(() => {
+      if (e.target.value === '') return
+      setFormState({
+        ...formState,
+        changes: { [e.target.name]: parseInt(e.target.value) }
+      })
+    }, 500)
   }
 
   const closeAlert = () => {

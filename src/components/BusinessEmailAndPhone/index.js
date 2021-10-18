@@ -18,39 +18,52 @@ export const BusinessEmailAndPhone = (props) => {
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
+  let timeout1 = null
+  let timeout2 = null
+  let timeout3 = null
+
   const saveEmailOrders = (email) => {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (email.trim() === '' || !re.test(email)) return
-    setFormState({
-      ...formState,
-      changes: { email: email }
-    })
+    clearTimeout(timeout1)
+    timeout1 = setTimeout(() => {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (email.trim() === '' || !re.test(email)) return
+      setFormState({
+        ...formState,
+        changes: { email: email }
+      })
+    }, 500)
   }
 
   const saveBusinessTel = (phone) => {
-    if (phone.trim() === '') {
-      setAlertState({
-        ...alertState,
-        open: true,
-        content: [t('PHONE_REQUIRED')]
-      })
-      return
-    }
-    if (phone.length >= 7) {
-      setFormState({
-        ...formState,
-        changes: { phone: phone }
-      })
-    }
+    clearTimeout(timeout2)
+    timeout2 = setTimeout(() => {
+      if (phone.trim() === '') {
+        setAlertState({
+          ...alertState,
+          open: true,
+          content: [t('PHONE_REQUIRED')]
+        })
+        return
+      }
+      if (phone.length >= 7) {
+        setFormState({
+          ...formState,
+          changes: { phone: phone }
+        })
+      }
+    }, 500)
   }
 
   const saveBusinessCel = (cellphone) => {
-    if (cellphone.length >= 10 || cellphone.length === 0) {
-      setFormState({
-        ...formState,
-        changes: { cellphone: cellphone || '' }
-      })
-    }
+    clearTimeout(timeout3)
+    timeout3 = setTimeout(() => {
+      if (cellphone.length >= 10 || cellphone.length === 0) {
+        setFormState({
+          ...formState,
+          changes: { cellphone: cellphone || '' }
+        })
+      }
+    }, 500)
   }
 
   const closeAlert = () => {
