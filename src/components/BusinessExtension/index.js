@@ -20,40 +20,53 @@ export const BusinessExtension = (props) => {
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
-  const changeMinimunPurchased = (evt) => {
-    if (evt.target.value.trim() === '') {
-      setAlertState({
-        ...alertState,
-        open: true,
-        content: [t('MINIMUN_PURCHASED_REQUIRED')]
+  let timeout1 = null
+  let timeout2 = null
+
+  const changeMinimunPurchased = (e) => {
+    e.persist()
+    clearTimeout(timeout1)
+
+    timeout1 = setTimeout(() => {
+      if (e.target.value.trim() === '') {
+        setAlertState({
+          ...alertState,
+          open: true,
+          content: [t('MINIMUN_PURCHASED_REQUIRED')]
+        })
+        return
+      }
+      setFormState({
+        ...formState,
+        changes: { [e.target.name]: e.target.value }
       })
-      return
-    }
-    setFormState({
-      ...formState,
-      changes: { [evt.target.name]: evt.target.value }
-    })
+    }, 500)
   }
 
-  const changeServiceFee = (evt) => {
-    if (evt.target.value.trim() === '') {
-      setAlertState({
-        ...alertState,
-        open: true,
-        content: [t('SERVICE_FEE_REQUIRED')]
+  const changeServiceFee = (e) => {
+    e.persist()
+    clearTimeout(timeout2)
+
+    timeout2 = setTimeout(() => {
+      if (e.target.value.trim() === '') {
+        setAlertState({
+          ...alertState,
+          open: true,
+          content: [t('SERVICE_FEE_REQUIRED')]
+        })
+        return
+      }
+      setFormState({
+        ...formState,
+        changes: { [e.target.name]: e.target.value }
       })
-      return
-    }
-    setFormState({
-      ...formState,
-      changes: { [evt.target.name]: evt.target.value }
-    })
+    }, 500)
   }
 
-  const changeFeature = (evt) => {
+  const changeFeature = (e) => {
     setFormState({
       ...formState,
-      changes: { [evt.target.name]: evt.target.checked }
+      changes: { [e.target.name]: e.target.checked }
     })
   }
 
@@ -75,7 +88,7 @@ export const BusinessExtension = (props) => {
             name='minimum'
             defaultValue={business?.minimum}
             placeholder={t('MINIMUN_PURCHASED', 'Minimum purchase')}
-            onChange={changeMinimunPurchased}
+            onChange={(e) => changeMinimunPurchased(e)}
           />
         </FormControl>
         <FormControl>
