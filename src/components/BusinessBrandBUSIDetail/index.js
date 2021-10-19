@@ -52,7 +52,6 @@ const BusinessBrandBUSIDetailUI = (props) => {
   }
 
   useEffect(() => {
-    if (businessList.loading) return
     let _totalPages
     if (businessList.businesses.length > 0) {
       _totalPages = Math.ceil(businessList.businesses.length / pagesPerPage)
@@ -62,7 +61,7 @@ const BusinessBrandBUSIDetailUI = (props) => {
     const _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
     setCurrentBusinesses(_currentProducts)
-  }, [businessList, currentPage, pagesPerPage])
+  }, [businessList?.businesses, currentPage, pagesPerPage])
 
   useEffect(() => {
     if (searchValue) setCurrentPage(1)
@@ -105,8 +104,8 @@ const BusinessBrandBUSIDetailUI = (props) => {
                   <BusinessItemContainer key={i}>
                     <Checkbox
                       id={business?.id}
-                      defaultChecked={business?.franchise_id === brand?.id}
-                      onClick={(e) => handleChangeCheckBox(e, business.id, brand?.id)}
+                      checked={business?.franchise_id === brand?.id}
+                      onChange={(e) => handleChangeCheckBox(e, business.id, brand?.id)}
                     />
                     <label htmlFor={business?.id}>
                       <WrapperImage>
