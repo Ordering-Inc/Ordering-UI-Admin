@@ -108,8 +108,6 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (businessList.loading) return;
-
     var _totalPages;
 
     if (businessList.businesses.length > 0) {
@@ -123,7 +121,7 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
 
     setTotalPages(_totalPages);
     setCurrentBusinesses(_currentProducts);
-  }, [businessList, currentPage, pagesPerPage]);
+  }, [businessList === null || businessList === void 0 ? void 0 : businessList.businesses, currentPage, pagesPerPage]);
   (0, _react.useEffect)(function () {
     if (searchValue) setCurrentPage(1);
   }, [searchValue]);
@@ -152,8 +150,8 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       id: business === null || business === void 0 ? void 0 : business.id,
-      defaultChecked: (business === null || business === void 0 ? void 0 : business.franchise_id) === (brand === null || brand === void 0 ? void 0 : brand.id),
-      onClick: function onClick(e) {
+      checked: (business === null || business === void 0 ? void 0 : business.franchise_id) === (brand === null || brand === void 0 ? void 0 : brand.id),
+      onChange: function onChange(e) {
         return handleChangeCheckBox(e, business.id, brand === null || brand === void 0 ? void 0 : brand.id);
       }
     }), /*#__PURE__*/_react.default.createElement("label", {
