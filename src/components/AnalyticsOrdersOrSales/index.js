@@ -197,7 +197,8 @@ export const AnalyticsOrdersOrSales = (props) => {
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
     const fileSuffix = new Date().getTime()
-    downloadLink.download = `${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}_${fileSuffix}.csv`
+    const exportName = isOrders ? 'orders' : 'sales'
+    downloadLink.download = `${exportName}_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)

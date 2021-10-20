@@ -95,7 +95,7 @@ export const AnalyticsBusyTimes = (props) => {
     return datasets
   }
 
-  const downloadImage = () => {
+  const downloadCSV = () => {
     let csv = `${t('TIME', 'Time')}, ${t('BUSY', 'Busy')}(h), ${t('NOT_BUSY', 'Not busy')}(h)\n`
     for (const row of busyTimesList?.data?.busy) {
       csv += `${row.at},`
@@ -188,7 +188,7 @@ export const AnalyticsBusyTimes = (props) => {
           <p>{t('BUSY_TIMES', 'Busy Times')}</p>
           <ActionBlock disabled={!(busyTimesList?.data?.busy?.length > 0 || busyTimesList?.data?.not_busy?.length > 0)}>
             <BsArrowsAngleExpand onClick={previewChart} />
-            <BsDownload className='download-view' onClick={downloadImage} />
+            <BsDownload className='download-view' onClick={downloadCSV} />
           </ActionBlock>
         </ChartHeaderContainer>
         {
