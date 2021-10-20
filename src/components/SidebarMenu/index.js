@@ -89,13 +89,13 @@ export const SidebarMenu = (props) => {
       title: t('MANAGERS', 'Managers'),
       pageName: 'managers',
       url: '/users/managers'
-    },
-    {
-      id: 3,
-      title: t('OPERATION', 'Operation'),
-      pageName: 'usersOperation',
-      url: '/users/operation'
     }
+    // {
+    //   id: 3,
+    //   title: t('OPERATION', 'Operation'),
+    //   pageName: 'usersOperation',
+    //   url: '/users/operation'
+    // }
   ]
 
   const settingsSubMenus = [
