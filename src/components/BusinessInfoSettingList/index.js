@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useSession } from 'ordering-components-admin'
 import { DragScroll } from '../DragScroll'
 import {
   SettingListConatiner,
@@ -12,6 +12,8 @@ export const BusinessInfoSettingList = (props) => {
     handleSelectInfoItem
   } = props
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
+
   const listOptions = [
     { key: 'owner', content: t('OWNER_ID', 'Owner') },
     { key: 'type', content: t('TYPE', 'Type') },
@@ -25,13 +27,15 @@ export const BusinessInfoSettingList = (props) => {
       <SettingListConatiner>
         <DragScroll>
           {listOptions.map(option => (
-            <Tab
-              key={option.key}
-              active={selectedInfoItem === option.key}
-              onClick={() => handleSelectInfoItem(option.key)}
-            >
-              {option.content}
-            </Tab>
+            !(user?.level === 2 && option.key === 'owner') && (
+              <Tab
+                key={option.key}
+                active={selectedInfoItem === option.key}
+                onClick={() => handleSelectInfoItem(option.key)}
+              >
+                {option.content}
+              </Tab>
+            )
           ))}
         </DragScroll>
       </SettingListConatiner>
