@@ -586,6 +586,12 @@ export const MessagesUI = (props) => {
                                     fallback={<BisBusiness />}
                                   />
                                 )}
+                                {message.can_see.includes(3) && (
+                                  <ImageWithFallback
+                                    src={order.customer?.photo}
+                                    fallback={<FaUserAlt />}
+                                  />
+                                )}
                                 {message.can_see.includes(4) && (
                                   <>
                                     {order?.driver && (
@@ -619,6 +625,12 @@ export const MessagesUI = (props) => {
                                   <ImageWithFallback
                                     src={order.business?.logo}
                                     fallback={<BisBusiness />}
+                                  />
+                                )}
+                                {message.can_see.includes(3) && (
+                                  <ImageWithFallback
+                                    src={order.customer?.photo}
+                                    fallback={<FaUserAlt />}
                                   />
                                 )}
                                 {message.can_see.includes(4) && (
