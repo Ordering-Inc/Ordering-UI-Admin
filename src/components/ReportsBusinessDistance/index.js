@@ -83,6 +83,7 @@ const ReportsBusinessDistanceUI = (props) => {
   }
 
   const downloadTable = () => {
+    if (!chartData || (reportData?.content?.body?.rows?.length === 0)) return
     let csv = `${t('NAME', 'Name')},`
     for (const item of chartData?.datasets) {
       csv += `${item.label},`
@@ -100,22 +101,10 @@ const ReportsBusinessDistanceUI = (props) => {
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
     const fileSuffix = new Date().getTime()
-    downloadLink.download = `reports_distance_${fileSuffix}.csv`
+    downloadLink.download = `distance_per_brand_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)
-    // if (!tableRef?.current) return
-    // htmlToImage.toPng(tableRef?.current)
-    //   .then(function (dataUrl) {
-    //     const a = document.createElement('a')
-    //     a.href = dataUrl
-    //     a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
-    //     // Trigger the download
-    //     a.click()
-    //   })
-    //   .catch(function (error) {
-    //     console.error('oops, something went wrong!', error)
-    //   })
   }
 
   useEffect(() => {
@@ -123,7 +112,6 @@ const ReportsBusinessDistanceUI = (props) => {
       labels: generateChartLabels(),
       datasets: generateDataSets()
     }
-    console.log(data)
     setChartData({ ...data })
   }, [reportData])
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import * as htmlToImage from 'html-to-image'
 import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -81,18 +80,28 @@ const ReportsOrderDistanceUI = (props) => {
   }
 
   const downloadTable = () => {
-    if (!tableRef?.current) return
-    htmlToImage.toPng(tableRef?.current)
-      .then(function (dataUrl) {
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `${t('ORDERS_DELIVERY', 'Orders delivery')}.png`
-        // Trigger the download
-        a.click()
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
-      })
+    if (!chartData || (reportData?.content?.body?.rows?.length === 0)) return
+    let csv = `${t('DISTANCE', 'Distance')},`
+    for (const item of chartData?.datasets) {
+      csv += `${item.label}(%),`
+    }
+    csv += '\n'
+    chartData && chartData.labels.forEach(function (label, i) {
+      csv += label + ','
+      for (const item of chartData?.datasets) {
+        csv += item.data[i] + ','
+      }
+      csv += '\n'
+    })
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `orders_delivery_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   useEffect(() => {
