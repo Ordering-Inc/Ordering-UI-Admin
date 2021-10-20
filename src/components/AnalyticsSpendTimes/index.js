@@ -233,12 +233,15 @@ export const AnalyticsSpendTimes = (props) => {
     },
     pointRadius: 0
   }
-  console.log(chartDataList, 'this is time')
-  const downloadImage = () => {
-    let csv = `${t('NAME', 'Name')}, ${t('ORDERS', 'Orders')}\n`
+
+  const downloadCSV = () => {
+    let csv = `${t('TIME', 'Time')}, ${t('ACCEPT', 'Accept')}, ${t('PICKUP', 'PickUP')}, ${t('DELIVERY', 'Delivery')}, ${t('COMPLETED', 'Completed')}\n`
     for (const row of chartDataList?.data) {
-      csv += row.name + ','
-      csv += `${row.orders_count},`
+      csv += `${row.time},`
+      csv += `${row.accept_spend},`
+      csv += `${row.pickup_spend},`
+      csv += `${row.delivery_spend},`
+      csv += `${row.complete_spend},`
       csv += '\n'
     }
     var downloadLink = document.createElement('a')
@@ -246,7 +249,7 @@ export const AnalyticsSpendTimes = (props) => {
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
     const fileSuffix = new Date().getTime()
-    downloadLink.download = `top_orders_${fileSuffix}.csv`
+    downloadLink.download = `times_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)
@@ -267,7 +270,7 @@ export const AnalyticsSpendTimes = (props) => {
           <p>{t('TIMES', 'Times')}</p>
           <ActionBlock disabled={chartDataList?.data.length === 0}>
             <BsArrowsAngleExpand onClick={previewChart} />
-            <BsDownload className='download-view' onClick={downloadImage} />
+            <BsDownload className='download-view' onClick={downloadCSV} />
           </ActionBlock>
         </ChartHeaderContainer>
         <ChartContentWrapper>

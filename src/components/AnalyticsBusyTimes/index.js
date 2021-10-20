@@ -96,12 +96,23 @@ export const AnalyticsBusyTimes = (props) => {
   }
 
   const downloadImage = () => {
-    if (!chartRef?.current) return
-    const a = document.createElement('a')
-    a.href = chartRef?.current?.toBase64Image()
-    a.download = `${t('BUSY_TIMES', 'Busy Times')}.png`
-    // Trigger the download
-    a.click()
+    let csv = `${t('TIME', 'Time')}, ${t('BUSY', 'Busy')}, ${t('NOT_BUSY', 'Not busy')}\n`
+    for (const row of busyTimesList?.data?.busy) {
+      csv += `${row.at},`
+      csv += `${row.time},`
+      const notBusy = busyTimesList?.data?.not_busy.find(item => item.at === row.at)
+      csv += notBusy ? `${notBusy.time},` : null
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `busy_times_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   const data = {
