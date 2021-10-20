@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import * as htmlToImage from 'html-to-image'
 import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -84,18 +83,39 @@ const ReportsBusinessDistanceUI = (props) => {
   }
 
   const downloadTable = () => {
-    if (!tableRef?.current) return
-    htmlToImage.toPng(tableRef?.current)
-      .then(function (dataUrl) {
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
-        // Trigger the download
-        a.click()
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
-      })
+    let csv = `${t('NAME', 'Name')},`
+    for (const item of chartData?.datasets) {
+      csv += `${item.label},`
+    }
+    csv += '\n'
+    chartData && chartData.labels.forEach(function (label, i) {
+      csv += label + ','
+      for (const item of chartData?.datasets) {
+        csv += item.data[i] + ','
+      }
+      csv += '\n'
+    })
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `reports_distance_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
+    // if (!tableRef?.current) return
+    // htmlToImage.toPng(tableRef?.current)
+    //   .then(function (dataUrl) {
+    //     const a = document.createElement('a')
+    //     a.href = dataUrl
+    //     a.download = `${t('DISTANCE_PER_BRAND', 'Distance per brand')}.png`
+    //     // Trigger the download
+    //     a.click()
+    //   })
+    //   .catch(function (error) {
+    //     console.error('oops, something went wrong!', error)
+    //   })
   }
 
   useEffect(() => {
@@ -103,6 +123,7 @@ const ReportsBusinessDistanceUI = (props) => {
       labels: generateChartLabels(),
       datasets: generateDataSets()
     }
+    console.log(data)
     setChartData({ ...data })
   }, [reportData])
 
