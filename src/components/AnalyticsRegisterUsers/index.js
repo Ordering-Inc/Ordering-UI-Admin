@@ -127,14 +127,21 @@ export const AnalyticsRegisterUsers = (props) => {
     }
     return xAxes
   }
-
   const downloadImage = () => {
-    if (!chartRef?.current) return
-    const a = document.createElement('a')
-    a.href = chartRef?.current?.toBase64Image()
-    a.download = `${t('REGISTER_USERS', 'Register Users')}.png`
-    // Trigger the download
-    a.click()
+    let csv = `${t('TIME', 'Time')}, ${t('USERS', 'Users')}\n`
+    for (const row of registerUsersList?.data) {
+      csv += row.time + ','
+      csv += `${row.users},`
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    downloadLink.download = `${t('REGISTER_USERS', 'Register Users')}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   const defaultData = {
