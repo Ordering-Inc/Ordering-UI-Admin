@@ -233,14 +233,23 @@ export const AnalyticsSpendTimes = (props) => {
     },
     pointRadius: 0
   }
-
+  console.log(chartDataList, 'this is time')
   const downloadImage = () => {
-    if (!chartRef?.current) return
-    const a = document.createElement('a')
-    a.href = chartRef?.current?.toBase64Image()
-    a.download = `${t('TIMES', 'Times')}.png`
-    // Trigger the download
-    a.click()
+    let csv = `${t('NAME', 'Name')}, ${t('ORDERS', 'Orders')}\n`
+    for (const row of chartDataList?.data) {
+      csv += row.name + ','
+      csv += `${row.orders_count},`
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `top_orders_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   const previewChart = () => {

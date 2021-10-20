@@ -13,7 +13,6 @@ import {
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
-import * as htmlToImage from 'html-to-image'
 
 export const AnalyticsTopOrders = (props) => {
   const {
@@ -23,19 +22,22 @@ export const AnalyticsTopOrders = (props) => {
   const [, t] = useLanguage()
   const downloadElementRef = useRef(null)
 
-  const downloadImage = () => {
-    if (!downloadElementRef?.current) return
-    htmlToImage.toPng(downloadElementRef?.current)
-      .then(function (dataUrl) {
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `${t('TOP_ORDERS', 'Top Orders')}.png`
-        // Trigger the download
-        a.click()
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
-      })
+  const downloadCSV = () => {
+    let csv = `${t('NAME', 'Name')}, ${t('ORDERS', 'Orders')}\n`
+    for (const row of dataList?.data) {
+      csv += row.name + ','
+      csv += `${row.orders_count},`
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `top_orders_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   return (
@@ -43,7 +45,7 @@ export const AnalyticsTopOrders = (props) => {
       <AnalyticsTopOrdersHeader>
         <p>{t('TOP_ORDERS', 'Top Orders')}</p>
         <ActionBlock disabled={dataList?.data.length === 0}>
-          <BsDownload onClick={downloadImage} />
+          <BsDownload onClick={downloadCSV} />
         </ActionBlock>
       </AnalyticsTopOrdersHeader>
       {
