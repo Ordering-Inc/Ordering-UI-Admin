@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useSession } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
@@ -28,71 +28,76 @@ export const OrderContactInformation = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
 
   return (
     <>
       <Accordion>
-        <ContextAwareToggle eventKey='0'>
-          <BusinessInfo>
-            <PhotoWrapper>
-              {order?.business?.logo ? (
-                <Photo bgimage={order?.business?.logo} />
-              ) : (
-                <BisBusiness />
-              )}
-            </PhotoWrapper>
-            <InfoContent>
-              <div>
-                <p>{order?.business?.name}</p>
-                {order?.business?.phone && (
-                  <IconButton
-                    onClick={() => window.open(`tel:${order.business.phone}`)}
-                  >
-                    <Telephone />
-                  </IconButton>
-                )}
-              </div>
-              <p>{order?.business?.phone}</p>
-            </InfoContent>
-            <ChevronDown className='down-arrow' />
-          </BusinessInfo>
-        </ContextAwareToggle>
-        <Accordion.Collapse eventKey='0'>
-          <CutsomerDetail>
-            <CustomerInfoTable>
-              <tbody>
-                {order?.business?.email && (
-                  <tr>
-                    <td>{t('EMAIL', 'Email')}</td>
-                    <td>
-                      <a href={`mailto: ${order?.business?.email}`}>{order?.business?.email}</a>
-                    </td>
-                  </tr>
-                )}
-                {order?.business?.address && (
-                  <tr>
-                    <td>{t('FULL_ADDRESS', 'Full address')}</td>
-                    <td>
-                      <a href={`http://maps.google.com/?q=${order?.business?.address}`} rel='noopener noreferrer' target='_blank'>{order?.business?.address}</a>
-                    </td>
-                  </tr>
-                )}
-                {order?.business?.address_notes && (
-                  <tr>
-                    <td>{t('NOTES', 'Notes')}</td>
-                    <td>{order?.business?.address_notes}</td>
-                  </tr>
-                )}
-                {order?.business?.zipcode && (
-                  <tr>
-                    <td>{t('ZIPCODE', 'Zipcode')}</td>
-                    <td>{order?.business?.zipcode}</td>
-                  </tr>
-                )}
-              </tbody>
-            </CustomerInfoTable>
-          </CutsomerDetail>
-        </Accordion.Collapse>
+        {user?.level !== 2 && (
+          <>
+            <ContextAwareToggle eventKey='0'>
+              <BusinessInfo>
+                <PhotoWrapper>
+                  {order?.business?.logo ? (
+                    <Photo bgimage={order?.business?.logo} />
+                  ) : (
+                    <BisBusiness />
+                  )}
+                </PhotoWrapper>
+                <InfoContent>
+                  <div>
+                    <p>{order?.business?.name}</p>
+                    {order?.business?.phone && (
+                      <IconButton
+                        onClick={() => window.open(`tel:${order.business.phone}`)}
+                      >
+                        <Telephone />
+                      </IconButton>
+                    )}
+                  </div>
+                  <p>{order?.business?.phone}</p>
+                </InfoContent>
+                <ChevronDown className='down-arrow' />
+              </BusinessInfo>
+            </ContextAwareToggle>
+            <Accordion.Collapse eventKey='0'>
+              <CutsomerDetail>
+                <CustomerInfoTable>
+                  <tbody>
+                    {order?.business?.email && (
+                      <tr>
+                        <td>{t('EMAIL', 'Email')}</td>
+                        <td>
+                          <a href={`mailto: ${order?.business?.email}`}>{order?.business?.email}</a>
+                        </td>
+                      </tr>
+                    )}
+                    {order?.business?.address && (
+                      <tr>
+                        <td>{t('FULL_ADDRESS', 'Full address')}</td>
+                        <td>
+                          <a href={`http://maps.google.com/?q=${order?.business?.address}`} rel='noopener noreferrer' target='_blank'>{order?.business?.address}</a>
+                        </td>
+                      </tr>
+                    )}
+                    {order?.business?.address_notes && (
+                      <tr>
+                        <td>{t('NOTES', 'Notes')}</td>
+                        <td>{order?.business?.address_notes}</td>
+                      </tr>
+                    )}
+                    {order?.business?.zipcode && (
+                      <tr>
+                        <td>{t('ZIPCODE', 'Zipcode')}</td>
+                        <td>{order?.business?.zipcode}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </CustomerInfoTable>
+              </CutsomerDetail>
+            </Accordion.Collapse>
+          </>
+        )}
         <ContextAwareToggle eventKey='1'>
           <CustomerInfo>
             <PhotoWrapper>
