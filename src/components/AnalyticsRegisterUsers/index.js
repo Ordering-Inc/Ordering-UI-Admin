@@ -138,7 +138,8 @@ export const AnalyticsRegisterUsers = (props) => {
     var blob = new Blob(['\ufeff', csv])
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
-    downloadLink.download = `${t('REGISTER_USERS', 'Register Users')}.csv`
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `registers_users_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)

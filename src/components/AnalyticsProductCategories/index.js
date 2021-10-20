@@ -34,7 +34,9 @@ export const AnalyticsProductCategories = (props) => {
     var blob = new Blob(['\ufeff', csv])
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
-    downloadLink.download = `${isProducts ? t('TOP_PRODUCTS', 'Top Products') : t('TOP_CATEGORIES', 'Top Categories')}.csv`
+    const fileSuffix = new Date().getTime()
+    const name = isProducts ? 'top_products' : 'top_categories'
+    downloadLink.download = `${name}_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)

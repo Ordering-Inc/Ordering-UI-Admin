@@ -96,12 +96,12 @@ export const AnalyticsBusyTimes = (props) => {
   }
 
   const downloadImage = () => {
-    let csv = `${t('TIME', 'Time')}, ${t('BUSY', 'Busy')}, ${t('NOT_BUSY', 'Not busy')}\n`
+    let csv = `${t('TIME', 'Time')}, ${t('BUSY', 'Busy')}(h), ${t('NOT_BUSY', 'Not busy')}(h)\n`
     for (const row of busyTimesList?.data?.busy) {
       csv += `${row.at},`
-      csv += `${row.time},`
+      csv += `${parseNumber((row.time / 3600), { separator: '.' })},`
       const notBusy = busyTimesList?.data?.not_busy.find(item => item.at === row.at)
-      csv += notBusy ? `${notBusy.time},` : null
+      csv += notBusy ? `${parseNumber((notBusy.time / 3600), { separator: '.' })},` : 0
       csv += '\n'
     }
     var downloadLink = document.createElement('a')

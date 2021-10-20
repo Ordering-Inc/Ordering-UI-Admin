@@ -188,7 +188,7 @@ export const AnalyticsOrdersOrSales = (props) => {
   const downloadCSV = () => {
     let csv = `${t('TIME', 'Time')}, ${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}\n`
     for (const row of chartDataList?.data) {
-      csv += row.time + ','
+      csv += `${row.time},`
       csv += `${isOrders ? row.orders : row.sales},`
       csv += '\n'
     }
@@ -196,7 +196,8 @@ export const AnalyticsOrdersOrSales = (props) => {
     var blob = new Blob(['\ufeff', csv])
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
-    downloadLink.download = `${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}.csv`
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)

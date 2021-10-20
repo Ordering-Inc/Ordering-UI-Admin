@@ -82,7 +82,8 @@ export const AnalyticsOrdersStatus = (props) => {
     var blob = new Blob(['\ufeff', csv])
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
-    downloadLink.download = `${t('ORDERS_STATUS', 'ORDERS STATUS')}.csv`
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `orders_status_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)

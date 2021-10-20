@@ -96,12 +96,12 @@ export const AnalyticsAvailableTimes = (props) => {
   }
 
   const downloadCSV = () => {
-    let csv = `${t('TIME', 'Time')}, ${t('AVAILABLE', 'Available')}, ${t('NOT_AVAILABLE', 'Not Available')}\n`
+    let csv = `${t('TIME', 'Time')}, ${t('AVAILABLE', 'Available')}(h), ${t('NOT_AVAILABLE', 'Not Available')}(h)\n`
     for (const row of availableTimesList?.data?.available) {
       csv += `${row.at},`
-      csv += `${row.time},`
+      csv += `${parseNumber((row.time / 3600), { separator: '.' })},`
       const notAvailable = availableTimesList?.data?.not_available.find(item => item.at === row.at)
-      csv += notAvailable ? `${notAvailable.time},` : null
+      csv += notAvailable ? `${parseNumber((notAvailable.time / 3600), { separator: '.' })},` : 0
       csv += '\n'
     }
     var downloadLink = document.createElement('a')
