@@ -34,16 +34,18 @@ export const BusinessProductsCategories = (props) => {
             )
           }
           {
-            !businessState.loading && businessState?.business.categories.length > 0 && businessState?.business.categories.map((category, i) => (
-              <SingleBusinessCategory
-                {...props}
-                key={i}
-                category={category}
-                categorySelected={categorySelected}
-                handleChangeCategory={onClickCategory}
-                business={businessState?.business}
-              />
-            ))
+            !businessState.loading && businessState?.business.categories.length > 0 && (
+              businessState?.business.categories.sort((a, b) => a.rank - b.rank).map((category, i) => (
+                <SingleBusinessCategory
+                  {...props}
+                  key={i}
+                  category={category}
+                  categorySelected={categorySelected}
+                  handleChangeCategory={onClickCategory}
+                  business={businessState?.business}
+                />
+              ))
+            )
           }
           {
             !businessState.loading && (
