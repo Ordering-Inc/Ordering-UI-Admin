@@ -285,10 +285,12 @@ export const MessagesUI = (props) => {
                     {t('ORDER_NO', 'Order No')}. {order.id}
                   </OrderNumber>
                   <ImageContainer>
-                    <ImageWithFallback
-                      src={order.business?.logo}
-                      fallback={<BisBusiness />}
-                    />
+                    {user?.level !== 2 && (
+                      <ImageWithFallback
+                        src={order.business?.logo}
+                        fallback={<BisBusiness />}
+                      />
+                    )}
                     <ImageWithFallback
                       src={order.customer?.photo}
                       fallback={<FaUserAlt />}
@@ -584,6 +586,12 @@ export const MessagesUI = (props) => {
                                     fallback={<BisBusiness />}
                                   />
                                 )}
+                                {message.can_see.includes(3) && (
+                                  <ImageWithFallback
+                                    src={order.customer?.photo}
+                                    fallback={<FaUserAlt />}
+                                  />
+                                )}
                                 {message.can_see.includes(4) && (
                                   <>
                                     {order?.driver && (
@@ -619,6 +627,12 @@ export const MessagesUI = (props) => {
                                     fallback={<BisBusiness />}
                                   />
                                 )}
+                                {message.can_see.includes(3) && (
+                                  <ImageWithFallback
+                                    src={order.customer?.photo}
+                                    fallback={<FaUserAlt />}
+                                  />
+                                )}
                                 {message.can_see.includes(4) && (
                                   <>
                                     {order?.driver && (
@@ -645,19 +659,21 @@ export const MessagesUI = (props) => {
         {!history && (
           <SendForm>
             <ImageContainer>
-              <ChatContactInfoContainer
-                disabled={!canRead?.business}
-                onClick={() => setCanRead({ ...canRead, business: !canRead?.business })}
-              >
-                <ImageWithFallback
-                  src={order.business?.logo}
-                  fallback={<BisBusiness />}
-                />
-                <InfoBlock>
-                  <p>{order.business?.name}</p>
-                  <p>{t('BUSINESS', 'Business')}</p>
-                </InfoBlock>
-              </ChatContactInfoContainer>
+              {user?.level !== 2 && (
+                <ChatContactInfoContainer
+                  disabled={!canRead?.business}
+                  onClick={() => setCanRead({ ...canRead, business: !canRead?.business })}
+                >
+                  <ImageWithFallback
+                    src={order.business?.logo}
+                    fallback={<BisBusiness />}
+                  />
+                  <InfoBlock>
+                    <p>{order.business?.name}</p>
+                    <p>{t('BUSINESS', 'Business')}</p>
+                  </InfoBlock>
+                </ChatContactInfoContainer>
+              )}
               <ChatContactInfoContainer
                 disabled={!canRead?.customer}
                 onClick={() => setCanRead({ ...canRead, customer: !canRead?.customer })}

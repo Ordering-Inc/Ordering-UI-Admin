@@ -310,44 +310,48 @@ export const SidebarMenu = (props) => {
                     <Accordion.Collapse eventKey='3'>
                       <MenuContent>
                         {storesSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
+                          !(sessionState?.user?.level === 2 && item.pageName === 'brand') && (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          )
                         ))}
                       </MenuContent>
                     </Accordion.Collapse>
                   </MenuContainer>
 
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='4'
-                      active={
-                        location.pathname === '/users/customers' ||
-                        location.pathname === '/users/managers' ||
-                        location.pathname === '/users/operation'
-                      }
-                    >
-                      <PeopleIcon />
-                      <span>{t('USERS', 'Users')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='4'>
-                      <MenuContent>
-                        {usersSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
+                  {sessionState?.user?.level === 0 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='4'
+                        active={
+                          location.pathname === '/users/customers' ||
+                          location.pathname === '/users/managers' ||
+                          location.pathname === '/users/operation'
+                        }
+                      >
+                        <PeopleIcon />
+                        <span>{t('USERS', 'Users')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='4'>
+                        <MenuContent>
+                          {usersSubMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
 
                   <MenuContainer>
                     <ContextAwareToggle
