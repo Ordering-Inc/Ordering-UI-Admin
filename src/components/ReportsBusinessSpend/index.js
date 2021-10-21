@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import * as htmlToImage from 'html-to-image'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -41,11 +40,11 @@ const ReportsBusinessSpendUI = (props) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
   }
 
-  const downloadTable = () => {
+  const downloadCSV = () => {
     if (reportData?.content?.body?.rows?.length === 0) return
     let csv = ''
-    reportData.content.header.rows.forEach((tr, i) => {
-      tr.forEach((th, j) => {
+    reportData.content.header.rows.forEach((tr) => {
+      tr.forEach((th) => {
         csv += `${th.value},`
         for (let i = 1; i < th.colspan; i++) {
           csv += ' ,'
@@ -64,7 +63,16 @@ const ReportsBusinessSpendUI = (props) => {
       csv += '\n'
     })
     csv += '\n'
-    console.log(csv)
+    reportData.content.footer.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
+      })
+      csv += '\n'
+    })
+    csv += '\n'
     var downloadLink = document.createElement('a')
     var blob = new Blob(['\ufeff', csv])
     var url = URL.createObjectURL(blob)
@@ -102,7 +110,7 @@ const ReportsBusinessSpendUI = (props) => {
       <DistancePerBrandWrapper>
         <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
           <h2>{t('SERVICE_TIMES', 'Service times')}</h2>
-          <Download onClick={() => downloadTable()} />
+          <Download onClick={() => downloadCSV()} />
         </DistanceTitleBlock>
         {reportData?.loading ? (
           <div className='row'>
