@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import AiFillShop from '@meronex/icons/ai/AiFillShop'
-// import GiFoodTruck from '@meronex/icons/gi/GiFoodTruck'
-// import FaCarSide from '@meronex/icons/fa/FaCarSide'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -12,7 +9,6 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { DriverSelector } from '../DriverSelector'
-// import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { Pagination } from '../Pagination'
 import {
@@ -40,15 +36,17 @@ export const OrdersTable = (props) => {
     selectedOrderIds,
     orderDetailId,
     getPageOrders,
-    // handleUpdateOrderStatus,
     handleSelectedOrderIds,
-    handleOpenOrderDetail
+    handleOpenOrderDetail,
+    setSelectedOrderIds
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
 
   const [ordersPerPage, setOrdersPerPage] = useState(10)
+
+  const [isAllChecked, setIsAllChecked] = useState(false)
 
   const handleChangePage = (page) => {
     getPageOrders(ordersPerPage, page)
@@ -69,8 +67,6 @@ export const OrdersTable = (props) => {
     driver: true,
     advanced: true,
     total: true
-    // status: true,
-    // deliveryType: true
   })
 
   const optionsDefault = [
@@ -102,14 +98,6 @@ export const OrdersTable = (props) => {
       value: 'total',
       content: t('TOTAL', 'Total')
     }
-    // {
-    //   value: 'status',
-    //   content: t('STATUS', 'Status')
-    // },
-    // {
-    //   value: 'deliveryType',
-    //   content: t('DELIVERY_TYPE', 'Delivery type')
-    // }
   ]
 
   const getLogisticTag = (status) => {
@@ -157,6 +145,26 @@ export const OrdersTable = (props) => {
     handleOpenOrderDetail(order)
   }
 
+  const handleSelecteAllOrder = () => {
+    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    if (!isAllChecked) {
+      setSelectedOrderIds([...selectedOrderIds, ...orderIds])
+    } else {
+      const orderIdsToDeleteSet = new Set(orderIds)
+      const updatedSelectedOrderIds = selectedOrderIds.filter((name) => {
+        return !orderIdsToDeleteSet.has(name)
+      })
+      setSelectedOrderIds(updatedSelectedOrderIds)
+    }
+  }
+
+  useEffect(() => {
+    if (orderList.loading) return
+    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    const _isAllChecked = orderIds.every(elem => selectedOrderIds.includes(elem))
+    setIsAllChecked(_isAllChecked)
+  }, [orderList.orders, selectedOrderIds])
+
   return (
     <>
       <OrdersContainer
@@ -171,6 +179,17 @@ export const OrdersTable = (props) => {
               <th
                 className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
               >
+                <CheckBox
+                  isChecked={!orderList.loading && isAllChecked}
+                  onClick={() => handleSelecteAllOrder()}
+                  className='orderCheckBox'
+                >
+                  {(!orderList.loading && isAllChecked) ? (
+                    <RiCheckboxFill />
+                  ) : (
+                    <RiCheckboxBlankLine />
+                  )}
+                </CheckBox>
                 {t('ORDER', 'Order')}
               </th>
               {allowColumns?.business && (
@@ -182,12 +201,6 @@ export const OrdersTable = (props) => {
               {allowColumns?.driver && (
                 <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
               )}
-              {/* {allowColumns?.deliveryType && (
-                <th className='orderType'>{t('DELIVERY_TYPE', 'Delivery type')}</th>
-              )}
-              {allowColumns?.status && (
-                <th className='orderStatusTitle'>{t('ORDER_STATUS', 'Order status')}</th>
-              )} */}
               {allowColumns?.advanced && (
                 <th colSpan={3} className='advanced'>{t('ADVANCE_LOGISTICS', 'Advance logistics')}</th>
               )}
@@ -390,61 +403,6 @@ export const OrdersTable = (props) => {
                       )}
                     </td>
                   )}
-                  {/* {allowColumns?.deliveryType && (
-                    <td className='orderType'>
-                      <OrderType>
-                        {order?.delivery_type === 1 && (
-                          <>
-                            <img
-                              src={theme?.images?.icons?.driverDelivery}
-                              alt='Delivery'
-                            />
-                            <span>{t('DELIVERY', 'Delivery')}</span>
-                          </>
-                        )}
-                        {order?.delivery_type === 2 && (
-                          <>
-                            <img
-                              src={theme?.images?.icons?.pickUp}
-                              alt='pick up'
-                            />
-                            <span>{t('PICK_UP', 'Pick up')}</span>
-                          </>
-                        )}
-                        {order?.delivery_type === 3 && (
-                          <>
-                            <AiFillShop />
-                            <span>{t('EAT_IN', 'Eat In')}</span>
-                          </>
-                        )}
-                        {order?.delivery_type === 4 && (
-                          <>
-                            <GiFoodTruck />
-                            <span>{t('CURBSIDE', 'Curbside')}</span>
-                          </>
-                        )}
-                        {order?.delivery_type === 5 && (
-                          <>
-                            <FaCarSide />
-                            <span>{t('DRIVER_THRU', 'Driver thru')}</span>
-                          </>
-                        )}
-                      </OrderType>
-                    </td>
-                  )}
-                  {allowColumns?.status && (
-                    <td className='orderStatusTitle'>
-                      <WrapOrderStatusSelector>
-                        <OrderStatusTypeSelector
-                          defaultValue={parseInt(order.status)}
-                          orderId={order.id}
-                          deliveryType={order?.delivery_type}
-                          noPadding
-                          handleUpdateOrderStatus={handleUpdateOrderStatus}
-                        />
-                      </WrapOrderStatusSelector>
-                    </td>
-                  )} */}
                   {allowColumns?.advanced && (
                     <td className='logistic'>
                       <div className='info'>

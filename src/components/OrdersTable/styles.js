@@ -146,6 +146,7 @@ export const OrderNumberContainer = styled.div`
 `
 
 export const CheckBox = styled.span`
+  cursor: pointer;
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
   ` : css`
