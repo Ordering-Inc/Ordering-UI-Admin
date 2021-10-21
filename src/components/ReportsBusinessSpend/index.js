@@ -42,18 +42,38 @@ const ReportsBusinessSpendUI = (props) => {
   }
 
   const downloadTable = () => {
-    if (!tableRef?.current) return
-    htmlToImage.toPng(tableRef?.current)
-      .then(function (dataUrl) {
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `${t('SERVICE_TIMES', 'Service times')}.png`
-        // Trigger the download
-        a.click()
+    if (reportData?.content?.body?.rows?.length === 0) return
+    let csv = ''
+    reportData.content.header.rows.forEach((tr, i) => {
+      tr.forEach((th, j) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
       })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
+      csv += '\n'
+    })
+    csv += '\n'
+    reportData.content.body.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
       })
+      csv += '\n'
+    })
+    csv += '\n'
+    console.log(csv)
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `service_times_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   return (
