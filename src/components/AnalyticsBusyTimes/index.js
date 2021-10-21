@@ -95,13 +95,24 @@ export const AnalyticsBusyTimes = (props) => {
     return datasets
   }
 
-  const downloadImage = () => {
-    if (!chartRef?.current) return
-    const a = document.createElement('a')
-    a.href = chartRef?.current?.toBase64Image()
-    a.download = `${t('BUSY_TIMES', 'Busy Times')}.png`
-    // Trigger the download
-    a.click()
+  const downloadCSV = () => {
+    let csv = `${t('TIME', 'Time')}, ${t('BUSY', 'Busy')}(h), ${t('NOT_BUSY', 'Not busy')}(h)\n`
+    for (const row of busyTimesList?.data?.busy) {
+      csv += `${row.at},`
+      csv += `${parseNumber((row.time / 3600), { separator: '.' })},`
+      const notBusy = busyTimesList?.data?.not_busy.find(item => item.at === row.at)
+      csv += notBusy ? `${parseNumber((notBusy.time / 3600), { separator: '.' })},` : 0
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `busy_times_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   const data = {
@@ -177,7 +188,7 @@ export const AnalyticsBusyTimes = (props) => {
           <p>{t('BUSY_TIMES', 'Busy Times')}</p>
           <ActionBlock disabled={!(busyTimesList?.data?.busy?.length > 0 || busyTimesList?.data?.not_busy?.length > 0)}>
             <BsArrowsAngleExpand onClick={previewChart} />
-            <BsDownload className='download-view' onClick={downloadImage} />
+            <BsDownload className='download-view' onClick={downloadCSV} />
           </ActionBlock>
         </ChartHeaderContainer>
         {

@@ -24,8 +24,8 @@ export const InvoiceManager = (props) => {
   const [selectedInvoice, setSelectedInvoice] = useState(null)
 
   const InvoiceList = [
-    { id: 1, key: 'business', name: t('BUSINESS_INVOICE', 'Business invoice'), icon: <BusinessIcon />, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus neque aliquet mauris.' },
-    { id: 2, key: 'driver', name: t('DRIVER_INVOICE', 'Driver invoice'), icon: <DriverIcon />, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus neque aliquet mauris.' }
+    { id: 1, key: 'business', name: t('BUSINESS_INVOICE', 'Business invoice'), icon: <BusinessIcon />, description: t('BUSINESS_INVOICE_DESCRIPTION', 'Business invoice description') },
+    { id: 2, key: 'driver', name: t('DRIVER_INVOICE', 'Driver invoice'), icon: <DriverIcon />, description: t('DRIVER_INVOICE_DESCRIPTION', 'Driver invoice description') }
   ]
 
   const handleOpenInvoiceDetail = (index) => {

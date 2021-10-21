@@ -70,13 +70,23 @@ export const AnalyticsOrdersStatus = (props) => {
     return value
   }
 
-  const downloadImage = () => {
-    if (!chartRef?.current) return
-    const a = document.createElement('a')
-    a.href = chartRef?.current?.toBase64Image()
-    a.download = `${t('ORDERS_STATUS', 'ORDERS STATUS')}.png`
-    // Trigger the download
-    a.click()
+  const downloadCSV = () => {
+    let csv = `${t('STATUS', 'Status')}, ${t('ORDERS', 'Orders')}\n`
+    for (const row of orderStatusList?.data) {
+      const selectedStatus = orderStatus.find(order => order.key === row.status)
+      csv += selectedStatus.value + ','
+      csv += `${row.orders},`
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `orders_status_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   const data = {
@@ -141,7 +151,7 @@ export const AnalyticsOrdersStatus = (props) => {
       <OrderStatusHeader>
         <p>{t('ORDERS_STATUS', 'ORDERS STATUS')}</p>
         <ActionBlock disabled={orderStatusList?.data.length === 0}>
-          <BsDownload onClick={downloadImage} />
+          <BsDownload onClick={downloadCSV} />
         </ActionBlock>
       </OrderStatusHeader>
       {

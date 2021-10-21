@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import * as htmlToImage from 'html-to-image'
 import {
   Container,
   CustomerSatisfactionHeader,
@@ -39,18 +38,21 @@ export const AnalyticsCustomerSatisfaction = (props) => {
   const downloadElementRef = useRef(null)
 
   const downloadImage = () => {
-    if (!downloadElementRef?.current) return
-    htmlToImage.toPng(downloadElementRef?.current)
-      .then(function (dataUrl) {
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `${t('CUSTOMER_SATISFACTION', 'Customer Safisfaction')}.png`
-        // Trigger the download
-        a.click()
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
-      })
+    let csv = `${t('TYPE', 'Type')}, ${t('RATE', 'Rate')}\n`
+    for (const row in dataList?.data) {
+      csv += row + ','
+      csv += `${dataList?.data[row]},`
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `customer_satification_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   return (

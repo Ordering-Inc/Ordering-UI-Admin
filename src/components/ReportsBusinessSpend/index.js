@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import * as htmlToImage from 'html-to-image'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -41,19 +40,48 @@ const ReportsBusinessSpendUI = (props) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
   }
 
-  const downloadTable = () => {
-    if (!tableRef?.current) return
-    htmlToImage.toPng(tableRef?.current)
-      .then(function (dataUrl) {
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `${t('SERVICE_TIMES', 'Service times')}.png`
-        // Trigger the download
-        a.click()
+  const downloadCSV = () => {
+    if (reportData?.content?.body?.rows?.length === 0) return
+    let csv = ''
+    reportData.content.header.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
       })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
+      csv += '\n'
+    })
+    csv += '\n'
+    reportData.content.body.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
       })
+      csv += '\n'
+    })
+    csv += '\n'
+    reportData.content.footer.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
+      })
+      csv += '\n'
+    })
+    csv += '\n'
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `service_times_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   return (
@@ -82,7 +110,7 @@ const ReportsBusinessSpendUI = (props) => {
       <DistancePerBrandWrapper>
         <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
           <h2>{t('SERVICE_TIMES', 'Service times')}</h2>
-          <Download onClick={() => downloadTable()} />
+          <Download onClick={() => downloadCSV()} />
         </DistanceTitleBlock>
         {reportData?.loading ? (
           <div className='row'>
