@@ -185,13 +185,23 @@ export const AnalyticsOrdersOrSales = (props) => {
     return parsePrice(sales.toFixed(2), { separator: '.' })
   }
 
-  const downloadImage = () => {
-    if (!chartRef?.current) return
-    const a = document.createElement('a')
-    a.href = chartRef?.current?.toBase64Image()
-    a.download = `${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}.png`
-    // Trigger the download
-    a.click()
+  const downloadCSV = () => {
+    let csv = `${t('TIME', 'Time')}, ${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}\n`
+    for (const row of chartDataList?.data) {
+      csv += `${row.time},`
+      csv += `${isOrders ? row.orders : row.sales},`
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    const exportName = isOrders ? 'orders' : 'sales'
+    downloadLink.download = `${exportName}_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   const previewChart = () => {
@@ -210,7 +220,7 @@ export const AnalyticsOrdersOrSales = (props) => {
           <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}</p>
           <ActionBlock disabled={chartDataList?.data.length === 0}>
             <BsArrowsAngleExpand onClick={previewChart} />
-            <BsDownload className='download-view' onClick={downloadImage} />
+            <BsDownload className='download-view' onClick={downloadCSV} />
           </ActionBlock>
         </ChartHeaderContainer>
         <ChartContentWrapper>
