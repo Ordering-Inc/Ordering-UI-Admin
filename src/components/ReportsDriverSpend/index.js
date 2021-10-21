@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import * as htmlToImage from 'html-to-image'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'

@@ -82,20 +82,39 @@ const ReportsBusinessDistanceUI = (props) => {
     return chartData
   }
 
-  const downloadTable = () => {
-    if (!chartData || (reportData?.content?.body?.rows?.length === 0)) return
-    let csv = `${t('NAME', 'Name')},`
-    for (const item of chartData?.datasets) {
-      csv += `${item.label},`
-    }
-    csv += '\n'
-    chartData && chartData.labels.forEach(function (label, i) {
-      csv += label + ','
-      for (const item of chartData?.datasets) {
-        csv += item.data[i] + ','
-      }
+  const downloadCSV = () => {
+    if (reportData?.content?.body?.rows?.length === 0) return
+    let csv = ''
+    reportData.content.header.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
+      })
       csv += '\n'
     })
+    csv += '\n'
+    reportData.content.body.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
+      })
+      csv += '\n'
+    })
+    csv += '\n'
+    reportData.content.footer.rows.forEach((tr) => {
+      tr.forEach((th) => {
+        csv += `${th.value},`
+        for (let i = 1; i < th.colspan; i++) {
+          csv += ' ,'
+        }
+      })
+      csv += '\n'
+    })
+    csv += '\n'
     var downloadLink = document.createElement('a')
     var blob = new Blob(['\ufeff', csv])
     var url = URL.createObjectURL(blob)
@@ -141,7 +160,7 @@ const ReportsBusinessDistanceUI = (props) => {
       <DistancePerBrandWrapper>
         <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
           <h2>{t('DISTANCE_PER_BRAND', 'Distance per brand')}</h2>
-          <Download onClick={() => downloadTable()} />
+          <Download onClick={() => downloadCSV()} />
         </DistanceTitleBlock>
         {reportData?.loading ? (
           <div className='row'>
