@@ -78,7 +78,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MessagesUI = function MessagesUI(props) {
-  var _order$business, _order$customer, _order$driver, _theme$images, _theme$images$icons, _order$business6, _order$business7, _order$customer4, _order$customer5, _order$customer6, _order$driver6, _order$driver7, _order$driver8;
+  var _order$business, _order$customer, _order$driver, _theme$images, _theme$images$icons, _order$business6, _order$business7, _order$customer6, _order$customer7, _order$customer8, _order$driver6, _order$driver7, _order$driver8;
 
   var isChat = props.isChat,
       order = props.order,
@@ -378,7 +378,7 @@ var MessagesUI = function MessagesUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
     messageDashboardView: messageDashboardView,
     historyView: history
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, isChat && /*#__PURE__*/_react.default.createElement(_styles.ChatHeader, null, /*#__PURE__*/_react.default.createElement(_styles.OrderNumber, null, t('ORDER_NO', 'Order No'), ". ", order.id), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement(_Image.Image, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, isChat && /*#__PURE__*/_react.default.createElement(_styles.ChatHeader, null, /*#__PURE__*/_react.default.createElement(_styles.OrderNumber, null, t('ORDER_NO', 'Order No'), ". ", order.id), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_Image.Image, {
     src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
     fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
   }), /*#__PURE__*/_react.default.createElement(_Image.Image, {
@@ -467,7 +467,7 @@ var MessagesUI = function MessagesUI(props) {
   })), tabActive.logistic_information && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_LogisticInformation.LogisticInformation, {
     orderId: order.id
   }))), filteredMessages.length > 0 && filteredMessages.map(function (message) {
-    var _message$change, _message$change2, _message$change3, _message$driver, _message$driver2, _message$change4, _message$change5, _message$change6, _message$change7, _message$driver3, _message$driver4, _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$driver4, _order$business5, _order$driver5;
+    var _message$change, _message$change2, _message$change3, _message$driver, _message$driver2, _message$change4, _message$change5, _message$change6, _message$change7, _message$driver3, _message$driver4, _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$customer4, _order$driver4, _order$business5, _order$customer5, _order$driver5;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: message.id
@@ -516,6 +516,9 @@ var MessagesUI = function MessagesUI(props) {
     }, message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
       src: (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo,
       fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
+    }), message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
     }), message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
       src: (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.photo,
       fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
@@ -535,11 +538,14 @@ var MessagesUI = function MessagesUI(props) {
     }, message.can_see.includes(2) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
       src: (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo,
       fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
+    }), message.can_see.includes(3) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
+      src: (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.photo,
+      fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
     }), message.can_see.includes(4) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
       src: (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.photo,
       fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
     })))))));
-  }))), !history && /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
+  }))), !history && /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
     disabled: !(canRead !== null && canRead !== void 0 && canRead.business),
     onClick: function onClick() {
       return setCanRead(_objectSpread(_objectSpread({}, canRead), {}, {
@@ -557,9 +563,9 @@ var MessagesUI = function MessagesUI(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.photo,
+    src: (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name, " ", (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER', 'Customer')))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$customer7 = order.customer) === null || _order$customer7 === void 0 ? void 0 : _order$customer7.name, " ", (_order$customer8 = order.customer) === null || _order$customer8 === void 0 ? void 0 : _order$customer8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER', 'Customer')))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
     disabled: !(canRead !== null && canRead !== void 0 && canRead.driver),
     onClick: function onClick() {
       return setCanRead(_objectSpread(_objectSpread({}, canRead), {}, {

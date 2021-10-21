@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
-  var _availableTimesList$d11, _availableTimesList$d12, _availableTimesList$d13, _availableTimesList$d14, _availableTimesList$d15, _availableTimesList$d16, _availableTimesList$d17, _availableTimesList$d18;
+  var _availableTimesList$d13, _availableTimesList$d14, _availableTimesList$d15, _availableTimesList$d16, _availableTimesList$d17, _availableTimesList$d18, _availableTimesList$d19, _availableTimesList$d20;
 
   var filterList = props.filterList,
       availableTimesList = props.availableTimesList;
@@ -199,15 +199,50 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
     return datasets;
   };
 
-  var downloadImage = function downloadImage() {
-    var _chartRef$current;
+  var downloadCSV = function downloadCSV() {
+    var _availableTimesList$d7;
 
-    if (!(chartRef !== null && chartRef !== void 0 && chartRef.current)) return;
-    var a = document.createElement('a');
-    a.href = chartRef === null || chartRef === void 0 ? void 0 : (_chartRef$current = chartRef.current) === null || _chartRef$current === void 0 ? void 0 : _chartRef$current.toBase64Image();
-    a.download = "".concat(t('AVAILABLE_TIMES', 'Available Times'), ".png"); // Trigger the download
+    var csv = "".concat(t('TIME', 'Time'), ", ").concat(t('AVAILABLE', 'Available'), "(h), ").concat(t('NOT_AVAILABLE', 'Not Available'), "(h)\n");
 
-    a.click();
+    var _iterator4 = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d7 = availableTimesList.data) === null || _availableTimesList$d7 === void 0 ? void 0 : _availableTimesList$d7.available),
+        _step4;
+
+    try {
+      var _loop = function _loop() {
+        var _availableTimesList$d8;
+
+        var row = _step4.value;
+        csv += "".concat(row.at, ",");
+        csv += "".concat(parseNumber(row.time / 3600, {
+          separator: '.'
+        }), ",");
+        var notAvailable = availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d8 = availableTimesList.data) === null || _availableTimesList$d8 === void 0 ? void 0 : _availableTimesList$d8.not_available.find(function (item) {
+          return item.at === row.at;
+        });
+        csv += notAvailable ? "".concat(parseNumber(notAvailable.time / 3600, {
+          separator: '.'
+        }), ",") : 0;
+        csv += '\n';
+      };
+
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+
+    var downloadLink = document.createElement('a');
+    var blob = new Blob(["\uFEFF", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    var fileSuffix = new Date().getTime();
+    downloadLink.download = "available_times_".concat(fileSuffix, ".csv");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   var data = {
@@ -275,21 +310,21 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
   };
 
   var previewChart = function previewChart() {
-    var _availableTimesList$d7, _availableTimesList$d8, _availableTimesList$d9, _availableTimesList$d10;
+    var _availableTimesList$d9, _availableTimesList$d10, _availableTimesList$d11, _availableTimesList$d12;
 
-    if ((availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d7 = availableTimesList.data) === null || _availableTimesList$d7 === void 0 ? void 0 : (_availableTimesList$d8 = _availableTimesList$d7.available) === null || _availableTimesList$d8 === void 0 ? void 0 : _availableTimesList$d8.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d9 = availableTimesList.data) === null || _availableTimesList$d9 === void 0 ? void 0 : (_availableTimesList$d10 = _availableTimesList$d9.not_available) === null || _availableTimesList$d10 === void 0 ? void 0 : _availableTimesList$d10.length) > 0) setIsShowPreview(true);
+    if ((availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d9 = availableTimesList.data) === null || _availableTimesList$d9 === void 0 ? void 0 : (_availableTimesList$d10 = _availableTimesList$d9.available) === null || _availableTimesList$d10 === void 0 ? void 0 : _availableTimesList$d10.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d11 = availableTimesList.data) === null || _availableTimesList$d11 === void 0 ? void 0 : (_availableTimesList$d12 = _availableTimesList$d11.not_available) === null || _availableTimesList$d12 === void 0 ? void 0 : _availableTimesList$d12.length) > 0) setIsShowPreview(true);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ChartHeaderContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('AVAILABLE_TIMES', 'Available Times')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
-    disabled: !((availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d11 = availableTimesList.data) === null || _availableTimesList$d11 === void 0 ? void 0 : (_availableTimesList$d12 = _availableTimesList$d11.available) === null || _availableTimesList$d12 === void 0 ? void 0 : _availableTimesList$d12.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d13 = availableTimesList.data) === null || _availableTimesList$d13 === void 0 ? void 0 : (_availableTimesList$d14 = _availableTimesList$d13.not_available) === null || _availableTimesList$d14 === void 0 ? void 0 : _availableTimesList$d14.length) > 0)
+    disabled: !((availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d13 = availableTimesList.data) === null || _availableTimesList$d13 === void 0 ? void 0 : (_availableTimesList$d14 = _availableTimesList$d13.available) === null || _availableTimesList$d14 === void 0 ? void 0 : _availableTimesList$d14.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d15 = availableTimesList.data) === null || _availableTimesList$d15 === void 0 ? void 0 : (_availableTimesList$d16 = _availableTimesList$d15.not_available) === null || _availableTimesList$d16 === void 0 ? void 0 : _availableTimesList$d16.length) > 0)
   }, /*#__PURE__*/_react.default.createElement(_BsArrowsAngleExpand.default, {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
     className: "download-view",
-    onClick: downloadImage
+    onClick: downloadCSV
   }))), availableTimesList !== null && availableTimesList !== void 0 && availableTimesList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }) : (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d15 = availableTimesList.data) === null || _availableTimesList$d15 === void 0 ? void 0 : (_availableTimesList$d16 = _availableTimesList$d15.available) === null || _availableTimesList$d16 === void 0 ? void 0 : _availableTimesList$d16.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d17 = availableTimesList.data) === null || _availableTimesList$d17 === void 0 ? void 0 : (_availableTimesList$d18 = _availableTimesList$d17.not_available) === null || _availableTimesList$d18 === void 0 ? void 0 : _availableTimesList$d18.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }) : (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d17 = availableTimesList.data) === null || _availableTimesList$d17 === void 0 ? void 0 : (_availableTimesList$d18 = _availableTimesList$d17.available) === null || _availableTimesList$d18 === void 0 ? void 0 : _availableTimesList$d18.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d19 = availableTimesList.data) === null || _availableTimesList$d19 === void 0 ? void 0 : (_availableTimesList$d20 = _availableTimesList$d19.not_available) === null || _availableTimesList$d20 === void 0 ? void 0 : _availableTimesList$d20.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options,
     ref: chartRef

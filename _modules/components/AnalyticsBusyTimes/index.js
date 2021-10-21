@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
-  var _busyTimesList$data9, _busyTimesList$data9$, _busyTimesList$data10, _busyTimesList$data11, _busyTimesList$data12, _busyTimesList$data13, _busyTimesList$data14, _busyTimesList$data15;
+  var _busyTimesList$data12, _busyTimesList$data13, _busyTimesList$data14, _busyTimesList$data15, _busyTimesList$data16, _busyTimesList$data17, _busyTimesList$data18, _busyTimesList$data19;
 
   var filterList = props.filterList,
       busyTimesList = props.busyTimesList;
@@ -199,15 +199,50 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     return datasets;
   };
 
-  var downloadImage = function downloadImage() {
-    var _chartRef$current;
+  var downloadCSV = function downloadCSV() {
+    var _busyTimesList$data7;
 
-    if (!(chartRef !== null && chartRef !== void 0 && chartRef.current)) return;
-    var a = document.createElement('a');
-    a.href = chartRef === null || chartRef === void 0 ? void 0 : (_chartRef$current = chartRef.current) === null || _chartRef$current === void 0 ? void 0 : _chartRef$current.toBase64Image();
-    a.download = "".concat(t('BUSY_TIMES', 'Busy Times'), ".png"); // Trigger the download
+    var csv = "".concat(t('TIME', 'Time'), ", ").concat(t('BUSY', 'Busy'), "(h), ").concat(t('NOT_BUSY', 'Not busy'), "(h)\n");
 
-    a.click();
+    var _iterator4 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data7 = busyTimesList.data) === null || _busyTimesList$data7 === void 0 ? void 0 : _busyTimesList$data7.busy),
+        _step4;
+
+    try {
+      var _loop = function _loop() {
+        var _busyTimesList$data8;
+
+        var row = _step4.value;
+        csv += "".concat(row.at, ",");
+        csv += "".concat(parseNumber(row.time / 3600, {
+          separator: '.'
+        }), ",");
+        var notBusy = busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data8 = busyTimesList.data) === null || _busyTimesList$data8 === void 0 ? void 0 : _busyTimesList$data8.not_busy.find(function (item) {
+          return item.at === row.at;
+        });
+        csv += notBusy ? "".concat(parseNumber(notBusy.time / 3600, {
+          separator: '.'
+        }), ",") : 0;
+        csv += '\n';
+      };
+
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+
+    var downloadLink = document.createElement('a');
+    var blob = new Blob(["\uFEFF", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    var fileSuffix = new Date().getTime();
+    downloadLink.download = "busy_times_".concat(fileSuffix, ".csv");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   var data = {
@@ -275,21 +310,21 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
   };
 
   var previewChart = function previewChart() {
-    var _busyTimesList$data7, _busyTimesList$data7$, _busyTimesList$data8, _busyTimesList$data8$;
+    var _busyTimesList$data9, _busyTimesList$data9$, _busyTimesList$data10, _busyTimesList$data11;
 
-    if ((busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data7 = busyTimesList.data) === null || _busyTimesList$data7 === void 0 ? void 0 : (_busyTimesList$data7$ = _busyTimesList$data7.busy) === null || _busyTimesList$data7$ === void 0 ? void 0 : _busyTimesList$data7$.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data8 = busyTimesList.data) === null || _busyTimesList$data8 === void 0 ? void 0 : (_busyTimesList$data8$ = _busyTimesList$data8.not_busy) === null || _busyTimesList$data8$ === void 0 ? void 0 : _busyTimesList$data8$.length) > 0) setIsShowPreview(true);
+    if ((busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data9 = busyTimesList.data) === null || _busyTimesList$data9 === void 0 ? void 0 : (_busyTimesList$data9$ = _busyTimesList$data9.busy) === null || _busyTimesList$data9$ === void 0 ? void 0 : _busyTimesList$data9$.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data10 = busyTimesList.data) === null || _busyTimesList$data10 === void 0 ? void 0 : (_busyTimesList$data11 = _busyTimesList$data10.not_busy) === null || _busyTimesList$data11 === void 0 ? void 0 : _busyTimesList$data11.length) > 0) setIsShowPreview(true);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ChartHeaderContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('BUSY_TIMES', 'Busy Times')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
-    disabled: !((busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data9 = busyTimesList.data) === null || _busyTimesList$data9 === void 0 ? void 0 : (_busyTimesList$data9$ = _busyTimesList$data9.busy) === null || _busyTimesList$data9$ === void 0 ? void 0 : _busyTimesList$data9$.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data10 = busyTimesList.data) === null || _busyTimesList$data10 === void 0 ? void 0 : (_busyTimesList$data11 = _busyTimesList$data10.not_busy) === null || _busyTimesList$data11 === void 0 ? void 0 : _busyTimesList$data11.length) > 0)
+    disabled: !((busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data12 = busyTimesList.data) === null || _busyTimesList$data12 === void 0 ? void 0 : (_busyTimesList$data13 = _busyTimesList$data12.busy) === null || _busyTimesList$data13 === void 0 ? void 0 : _busyTimesList$data13.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data14 = busyTimesList.data) === null || _busyTimesList$data14 === void 0 ? void 0 : (_busyTimesList$data15 = _busyTimesList$data14.not_busy) === null || _busyTimesList$data15 === void 0 ? void 0 : _busyTimesList$data15.length) > 0)
   }, /*#__PURE__*/_react.default.createElement(_BsArrowsAngleExpand.default, {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
     className: "download-view",
-    onClick: downloadImage
+    onClick: downloadCSV
   }))), busyTimesList !== null && busyTimesList !== void 0 && busyTimesList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }) : (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data12 = busyTimesList.data) === null || _busyTimesList$data12 === void 0 ? void 0 : (_busyTimesList$data13 = _busyTimesList$data12.busy) === null || _busyTimesList$data13 === void 0 ? void 0 : _busyTimesList$data13.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data14 = busyTimesList.data) === null || _busyTimesList$data14 === void 0 ? void 0 : (_busyTimesList$data15 = _busyTimesList$data14.not_busy) === null || _busyTimesList$data15 === void 0 ? void 0 : _busyTimesList$data15.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }) : (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data16 = busyTimesList.data) === null || _busyTimesList$data16 === void 0 ? void 0 : (_busyTimesList$data17 = _busyTimesList$data16.busy) === null || _busyTimesList$data17 === void 0 ? void 0 : _busyTimesList$data17.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data18 = busyTimesList.data) === null || _busyTimesList$data18 === void 0 ? void 0 : (_busyTimesList$data19 = _busyTimesList$data18.not_busy) === null || _busyTimesList$data19 === void 0 ? void 0 : _busyTimesList$data19.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options,
     ref: chartRef

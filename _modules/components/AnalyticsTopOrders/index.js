@@ -17,8 +17,6 @@ var _BsDownload = _interopRequireDefault(require("@meronex/icons/bs/BsDownload")
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var htmlToImage = _interopRequireWildcard(require("html-to-image"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -32,6 +30,8 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -54,23 +54,40 @@ var AnalyticsTopOrders = function AnalyticsTopOrders(props) {
 
   var downloadElementRef = (0, _react.useRef)(null);
 
-  var downloadImage = function downloadImage() {
-    if (!(downloadElementRef !== null && downloadElementRef !== void 0 && downloadElementRef.current)) return;
-    htmlToImage.toPng(downloadElementRef === null || downloadElementRef === void 0 ? void 0 : downloadElementRef.current).then(function (dataUrl) {
-      var a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = "".concat(t('TOP_ORDERS', 'Top Orders'), ".png"); // Trigger the download
+  var downloadCSV = function downloadCSV() {
+    var csv = "".concat(t('NAME', 'Name'), ", ").concat(t('ORDERS', 'Orders'), "\n");
 
-      a.click();
-    }).catch(function (error) {
-      console.error('oops, something went wrong!', error);
-    });
+    var _iterator = _createForOfIteratorHelper(dataList === null || dataList === void 0 ? void 0 : dataList.data),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var row = _step.value;
+        csv += row.name + ',';
+        csv += "".concat(row.orders_count, ",");
+        csv += '\n';
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    var downloadLink = document.createElement('a');
+    var blob = new Blob(["\uFEFF", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    var fileSuffix = new Date().getTime();
+    downloadLink.download = "top_orders_".concat(fileSuffix, ".csv");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsTopOrdersHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('TOP_ORDERS', 'Top Orders')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
     disabled: (dataList === null || dataList === void 0 ? void 0 : dataList.data.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
-    onClick: downloadImage
+    onClick: downloadCSV
   }))), dataList !== null && dataList !== void 0 && dataList.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainerWrapper, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i

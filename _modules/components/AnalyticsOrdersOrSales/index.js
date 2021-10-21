@@ -283,15 +283,35 @@ var AnalyticsOrdersOrSales = function AnalyticsOrdersOrSales(props) {
     });
   };
 
-  var downloadImage = function downloadImage() {
-    var _chartRef$current;
+  var downloadCSV = function downloadCSV() {
+    var csv = "".concat(t('TIME', 'Time'), ", ").concat(isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales'), "\n");
 
-    if (!(chartRef !== null && chartRef !== void 0 && chartRef.current)) return;
-    var a = document.createElement('a');
-    a.href = chartRef === null || chartRef === void 0 ? void 0 : (_chartRef$current = chartRef.current) === null || _chartRef$current === void 0 ? void 0 : _chartRef$current.toBase64Image();
-    a.download = "".concat(isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales'), ".png"); // Trigger the download
+    var _iterator3 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 ? void 0 : chartDataList.data),
+        _step3;
 
-    a.click();
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var row = _step3.value;
+        csv += "".concat(row.time, ",");
+        csv += "".concat(isOrders ? row.orders : row.sales, ",");
+        csv += '\n';
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+
+    var downloadLink = document.createElement('a');
+    var blob = new Blob(["\uFEFF", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    var fileSuffix = new Date().getTime();
+    var exportName = isOrders ? 'orders' : 'sales';
+    downloadLink.download = "".concat(exportName, "_").concat(fileSuffix, ".csv");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   var previewChart = function previewChart() {
@@ -308,7 +328,7 @@ var AnalyticsOrdersOrSales = function AnalyticsOrdersOrSales(props) {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
     className: "download-view",
-    onClick: downloadImage
+    onClick: downloadCSV
   }))), /*#__PURE__*/_react.default.createElement(_styles.ChartContentWrapper, null, chartDataList !== null && chartDataList !== void 0 && chartDataList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
   }) : (chartDataList === null || chartDataList === void 0 ? void 0 : chartDataList.data.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {

@@ -176,15 +176,41 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
     return value;
   };
 
-  var downloadImage = function downloadImage() {
-    var _chartRef$current;
+  var downloadCSV = function downloadCSV() {
+    var csv = "".concat(t('STATUS', 'Status'), ", ").concat(t('ORDERS', 'Orders'), "\n");
 
-    if (!(chartRef !== null && chartRef !== void 0 && chartRef.current)) return;
-    var a = document.createElement('a');
-    a.href = chartRef === null || chartRef === void 0 ? void 0 : (_chartRef$current = chartRef.current) === null || _chartRef$current === void 0 ? void 0 : _chartRef$current.toBase64Image();
-    a.download = "".concat(t('ORDERS_STATUS', 'ORDERS STATUS'), ".png"); // Trigger the download
+    var _iterator4 = _createForOfIteratorHelper(orderStatusList === null || orderStatusList === void 0 ? void 0 : orderStatusList.data),
+        _step4;
 
-    a.click();
+    try {
+      var _loop = function _loop() {
+        var row = _step4.value;
+        var selectedStatus = orderStatus.find(function (order) {
+          return order.key === row.status;
+        });
+        csv += selectedStatus.value + ',';
+        csv += "".concat(row.orders, ",");
+        csv += '\n';
+      };
+
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+
+    var downloadLink = document.createElement('a');
+    var blob = new Blob(["\uFEFF", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    var fileSuffix = new Date().getTime();
+    downloadLink.download = "orders_status_".concat(fileSuffix, ".csv");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   var data = {
@@ -243,7 +269,7 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDERS_STATUS', 'ORDERS STATUS')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
     disabled: (orderStatusList === null || orderStatusList === void 0 ? void 0 : orderStatusList.data.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
-    onClick: downloadImage
+    onClick: downloadCSV
   }))), orderStatusList !== null && orderStatusList !== void 0 && orderStatusList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
   }) : (orderStatusList === null || orderStatusList === void 0 ? void 0 : orderStatusList.data.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {

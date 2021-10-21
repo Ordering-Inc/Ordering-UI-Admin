@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var htmlToImage = _interopRequireWildcard(require("html-to-image"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Buttons = require("../../styles/Buttons");
@@ -68,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
-  var _filterList$franchise, _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content9, _reportData$content9$, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13, _reportData$content14, _reportData$content15, _reportData$content16, _reportData$content17;
+  var _filterList$franchise, _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13, _reportData$content14, _reportData$content15, _reportData$content16, _reportData$content17, _reportData$content18, _reportData$content19;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -163,17 +161,53 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     return chartData;
   };
 
-  var downloadTable = function downloadTable() {
-    if (!(tableRef !== null && tableRef !== void 0 && tableRef.current)) return;
-    htmlToImage.toPng(tableRef === null || tableRef === void 0 ? void 0 : tableRef.current).then(function (dataUrl) {
-      var a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = "".concat(t('ORDERS_DELIVERY', 'Orders delivery'), ".png"); // Trigger the download
+  var downloadCSV = function downloadCSV() {
+    var _reportData$content7, _reportData$content7$, _reportData$content7$2;
 
-      a.click();
-    }).catch(function (error) {
-      console.error('oops, something went wrong!', error);
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.body) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.rows) === null || _reportData$content7$2 === void 0 ? void 0 : _reportData$content7$2.length) === 0) return;
+    var csv = '';
+    reportData.content.header.rows.forEach(function (tr) {
+      tr.forEach(function (th) {
+        csv += "".concat(th.value, ",");
+
+        for (var i = 1; i < th.colspan; i++) {
+          csv += ' ,';
+        }
+      });
+      csv += '\n';
     });
+    csv += '\n';
+    reportData.content.body.rows.forEach(function (tr) {
+      tr.forEach(function (th) {
+        csv += "".concat(th.value, ",");
+
+        for (var i = 1; i < th.colspan; i++) {
+          csv += ' ,';
+        }
+      });
+      csv += '\n';
+    });
+    csv += '\n';
+    reportData.content.footer.rows.forEach(function (tr) {
+      tr.forEach(function (th) {
+        csv += "".concat(th.value, ",");
+
+        for (var i = 1; i < th.colspan; i++) {
+          csv += ' ,';
+        }
+      });
+      csv += '\n';
+    });
+    csv += '\n';
+    var downloadLink = document.createElement('a');
+    var blob = new Blob(["\uFEFF", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    var fileSuffix = new Date().getTime();
+    downloadLink.download = "order_delivery_".concat(fileSuffix, ".csv");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   (0, _react.useEffect)(function () {
@@ -195,10 +229,10 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.body) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.rows) === null || _reportData$content7$2 === void 0 ? void 0 : _reportData$content7$2.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.body) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.rows) === null || _reportData$content8$2 === void 0 ? void 0 : _reportData$content8$2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERS_DELIVERY', 'Orders delivery')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
-      return downloadTable();
+      return downloadCSV();
     }
   })), reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement("div", {
     className: "row"
@@ -207,9 +241,9 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
       className: "col-md-3 col-sm-3 col-3",
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.body) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.rows) === null || _reportData$content8$2 === void 0 ? void 0 : _reportData$content8$2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.DistanceTable, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.body) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.rows) === null || _reportData$content9$2 === void 0 ? void 0 : _reportData$content9$2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.DistanceTable, {
     ref: tableRef
-  }, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.header) === null || _reportData$content9$ === void 0 ? void 0 : _reportData$content9$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Thead, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.header) === null || _reportData$content11 === void 0 ? void 0 : _reportData$content11.rows.map(function (tr, i) {
+  }, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.header) === null || _reportData$content11 === void 0 ? void 0 : _reportData$content11.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Thead, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content12 = reportData.content) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.header) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
@@ -218,7 +252,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
         colSpan: th.colspan
       }, i === 0 && j === 0 ? '' : th.value);
     }));
-  })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content12 = reportData.content) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.body) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.rows.map(function (tbody, i) {
+  })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content14 = reportData.content) === null || _reportData$content14 === void 0 ? void 0 : (_reportData$content15 = _reportData$content14.body) === null || _reportData$content15 === void 0 ? void 0 : _reportData$content15.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
@@ -227,7 +261,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
         colSpan: td.colspan
       }, td.value, j !== 0 && j % 2 === 0 && '%');
     })));
-  }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content14 = reportData.content) === null || _reportData$content14 === void 0 ? void 0 : (_reportData$content15 = _reportData$content14.footer) === null || _reportData$content15 === void 0 ? void 0 : _reportData$content15.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content16 = reportData.content) === null || _reportData$content16 === void 0 ? void 0 : (_reportData$content17 = _reportData$content16.footer) === null || _reportData$content17 === void 0 ? void 0 : _reportData$content17.rows.map(function (tr, i) {
+  }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content16 = reportData.content) === null || _reportData$content16 === void 0 ? void 0 : (_reportData$content17 = _reportData$content16.footer) === null || _reportData$content17 === void 0 ? void 0 : _reportData$content17.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content18 = reportData.content) === null || _reportData$content18 === void 0 ? void 0 : (_reportData$content19 = _reportData$content18.footer) === null || _reportData$content19 === void 0 ? void 0 : _reportData$content19.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {

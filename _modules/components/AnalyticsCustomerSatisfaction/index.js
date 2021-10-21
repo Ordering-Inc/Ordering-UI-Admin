@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var htmlToImage = _interopRequireWildcard(require("html-to-image"));
-
 var _styles = require("./styles");
 
 var _BsDownload = _interopRequireDefault(require("@meronex/icons/bs/BsDownload"));
@@ -73,16 +71,23 @@ var AnalyticsCustomerSatisfaction = function AnalyticsCustomerSatisfaction(props
   var downloadElementRef = (0, _react.useRef)(null);
 
   var downloadImage = function downloadImage() {
-    if (!(downloadElementRef !== null && downloadElementRef !== void 0 && downloadElementRef.current)) return;
-    htmlToImage.toPng(downloadElementRef === null || downloadElementRef === void 0 ? void 0 : downloadElementRef.current).then(function (dataUrl) {
-      var a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = "".concat(t('CUSTOMER_SATISFACTION', 'Customer Safisfaction'), ".png"); // Trigger the download
+    var csv = "".concat(t('TYPE', 'Type'), ", ").concat(t('RATE', 'Rate'), "\n");
 
-      a.click();
-    }).catch(function (error) {
-      console.error('oops, something went wrong!', error);
-    });
+    for (var row in dataList === null || dataList === void 0 ? void 0 : dataList.data) {
+      csv += row + ',';
+      csv += "".concat(dataList === null || dataList === void 0 ? void 0 : dataList.data[row], ",");
+      csv += '\n';
+    }
+
+    var downloadLink = document.createElement('a');
+    var blob = new Blob(["\uFEFF", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    var fileSuffix = new Date().getTime();
+    downloadLink.download = "customer_satification_".concat(fileSuffix, ".csv");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerSatisfactionHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER_SATISFACTION', 'Customer Safisfaction')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {

@@ -35,6 +35,10 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
   var listOptions = [{
     key: 'owner',
     content: t('OWNER_ID', 'Owner')
@@ -55,7 +59,7 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
     content: t('BUSINESS_VIDEOS', 'Videos')
   }];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingListConatiner, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, listOptions.map(function (option) {
-    return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+    return !((user === null || user === void 0 ? void 0 : user.level) === 2 && option.key === 'owner') && /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: option.key,
       active: selectedInfoItem === option.key,
       onClick: function onClick() {
