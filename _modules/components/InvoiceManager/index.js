@@ -62,13 +62,13 @@ var InvoiceManager = function InvoiceManager(props) {
     key: 'business',
     name: t('BUSINESS_INVOICE', 'Business invoice'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ShopWindow, null),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus neque aliquet mauris.'
+    description: t('BUSINESS_INVOICE_DESCRIPTION', 'Business invoice description')
   }, {
     id: 2,
     key: 'driver',
     name: t('DRIVER_INVOICE', 'Driver invoice'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Truck, null),
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus neque aliquet mauris.'
+    description: t('DRIVER_INVOICE_DESCRIPTION', 'Driver invoice description')
   }];
 
   var handleOpenInvoiceDetail = function handleOpenInvoiceDetail(index) {
