@@ -13,7 +13,6 @@ import {
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
-import * as htmlToImage from 'html-to-image'
 
 export const AnalyticsProductCategories = (props) => {
   const {
@@ -24,19 +23,23 @@ export const AnalyticsProductCategories = (props) => {
   const [, t] = useLanguage()
   const downloadElementRef = useRef(null)
 
-  const downloadImage = () => {
-    if (!downloadElementRef?.current) return
-    htmlToImage.toPng(downloadElementRef?.current)
-      .then(function (dataUrl) {
-        const a = document.createElement('a')
-        a.href = dataUrl
-        a.download = `${isProducts ? t('TOP_PRODUCTS', 'Top Products') : t('TOP_CATEGORIES', 'Top Categories')}.png`
-        // Trigger the download
-        a.click()
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
-      })
+  const downloadCSV = () => {
+    let csv = `${t('NAME', 'Name')}, ${t('SALES', 'Sales')}(%)\n`
+    for (const row of productCategoryList?.data) {
+      csv += row.name + ','
+      csv += `${row.sales},`
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    const name = isProducts ? 'top_products' : 'top_categories'
+    downloadLink.download = `${name}_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   return (
@@ -44,7 +47,7 @@ export const AnalyticsProductCategories = (props) => {
       <ProductCategoryHeader>
         <p>{isProducts ? t('TOP_PRODUCTS', 'Top Products') : t('TOP_CATEGORIES', 'Top Categories')}</p>
         <ActionBlock disabled={productCategoryList?.data.length === 0}>
-          <BsDownload onClick={downloadImage} />
+          <BsDownload onClick={downloadCSV} />
         </ActionBlock>
       </ProductCategoryHeader>
       {

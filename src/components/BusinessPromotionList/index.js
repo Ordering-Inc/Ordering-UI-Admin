@@ -108,7 +108,7 @@ const BusinessPromotionListUI = (props) => {
               <tr>
                 <td>
                   <PromotionItem>
-                    <img src={promotion.image || theme.images.dummies?.promotionDummy} alt='promotion' />
+                    {/* <img src={promotion.image || theme.images.dummies?.promotionDummy} alt='promotion' /> */}
                     <span>{promotion?.name}</span>
                   </PromotionItem>
                 </td>

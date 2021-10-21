@@ -95,13 +95,24 @@ export const AnalyticsAvailableTimes = (props) => {
     return datasets
   }
 
-  const downloadImage = () => {
-    if (!chartRef?.current) return
-    const a = document.createElement('a')
-    a.href = chartRef?.current?.toBase64Image()
-    a.download = `${t('AVAILABLE_TIMES', 'Available Times')}.png`
-    // Trigger the download
-    a.click()
+  const downloadCSV = () => {
+    let csv = `${t('TIME', 'Time')}, ${t('AVAILABLE', 'Available')}(h), ${t('NOT_AVAILABLE', 'Not Available')}(h)\n`
+    for (const row of availableTimesList?.data?.available) {
+      csv += `${row.at},`
+      csv += `${parseNumber((row.time / 3600), { separator: '.' })},`
+      const notAvailable = availableTimesList?.data?.not_available.find(item => item.at === row.at)
+      csv += notAvailable ? `${parseNumber((notAvailable.time / 3600), { separator: '.' })},` : 0
+      csv += '\n'
+    }
+    var downloadLink = document.createElement('a')
+    var blob = new Blob(['\ufeff', csv])
+    var url = URL.createObjectURL(blob)
+    downloadLink.href = url
+    const fileSuffix = new Date().getTime()
+    downloadLink.download = `available_times_${fileSuffix}.csv`
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
   }
 
   const data = {
@@ -177,7 +188,7 @@ export const AnalyticsAvailableTimes = (props) => {
           <p>{t('AVAILABLE_TIMES', 'Available Times')}</p>
           <ActionBlock disabled={!(availableTimesList?.data?.available?.length > 0 || availableTimesList?.data?.not_available?.length > 0)}>
             <BsArrowsAngleExpand onClick={previewChart} />
-            <BsDownload className='download-view' onClick={downloadImage} />
+            <BsDownload className='download-view' onClick={downloadCSV} />
           </ActionBlock>
         </ChartHeaderContainer>
         {
