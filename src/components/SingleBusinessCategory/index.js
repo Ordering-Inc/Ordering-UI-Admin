@@ -40,9 +40,12 @@ export const SingleBusinessCategoryUI = (props) => {
     handlechangeImage,
     handleInputChange,
     isEditMode,
-    businessState,
-    handleUpdateBusinessState
+    handleDragStart,
+    handleDragOver,
+    handleDrop,
+    handleDragEnd
   } = props
+
   const [, t] = useLanguage()
   const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -108,49 +111,6 @@ export const SingleBusinessCategoryUI = (props) => {
     return () => document.removeEventListener('click', closeProductEdit)
   }, [categoryFormState])
 
-  const handleDrag = (event, categoryId) => {
-    event.dataTransfer.setData('transferCategoryId', categoryId)
-
-    const ghostEle = document.createElement('div')
-    ghostEle.classList.add('ghostDragging')
-    ghostEle.innerHTML = categoryFormState?.changes?.name
-    document.body.appendChild(ghostEle)
-    event.dataTransfer.setDragImage(ghostEle, 0, 0)
-  }
-
-  const handleAllowDrop = (event) => {
-    event.preventDefault()
-  }
-
-  const handleDrop = (event) => {
-    event.preventDefault()
-    const transferCategoryId = parseInt(event.dataTransfer.getData('transferCategoryId'))
-    let counter
-    const _categories = [...businessState?.business?.categories]
-    const updatedCategories = []
-
-    const transferCategory = _categories.find(_category => _category.id === transferCategoryId)
-
-    for (let i = 0; i < _categories.length; i++) {
-      if (_categories[i].id === category?.id) {
-        counter = i
-      }
-      if (_categories[i].id !== transferCategoryId) {
-        updatedCategories.push(_categories[i])
-      }
-    }
-    updatedCategories.splice(counter, 0, transferCategory)
-
-    handleUpdateBusinessState({ ...businessState?.business, categories: updatedCategories })
-  }
-
-  const handleDragEnd = () => {
-    const elements = document.getElementsByClassName('ghostDragging')
-    while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0])
-    }
-  }
-
   return (
     <>
       <SingleCategoryContainer
@@ -158,7 +118,7 @@ export const SingleBusinessCategoryUI = (props) => {
         onClick={(e) => handleChangeCategory(e, category)}
         ref={conatinerRef}
         onDrop={e => handleDrop(e)}
-        onDragOver={e => handleAllowDrop(e)}
+        onDragOver={e => handleDragOver(e)}
         onDragEnd={e => handleDragEnd(e)}
       >
         <DraggableContainer>
@@ -171,7 +131,8 @@ export const SingleBusinessCategoryUI = (props) => {
                     src={theme.images.icons?.sixDots}
                     alt='six dots'
                     draggable
-                    onDragStart={e => handleDrag(e, category.id)}
+                    // onDragStart={e => handleDrag(e, category.id)}
+                    onDragStart={e => handleDragStart(e)}
                   />
                   <ProductTypeImage
                     onClick={() => handleClickImage()}
