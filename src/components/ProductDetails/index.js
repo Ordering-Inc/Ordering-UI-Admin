@@ -7,6 +7,7 @@ import { ProductIngredient } from '../ProductIngredient'
 import { ProductMetaFields } from '../ProductMetaFields'
 import { Personalization } from '../Personalization'
 import { ProductExtras } from '../ProductExtras'
+import { ProductGallery } from '../ProductGallery'
 
 import {
   Container
@@ -119,6 +120,13 @@ export const ProductDetails = (props) => {
               product={product}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleUpdateBusinessState={handleUpdateBusinessState}
+            />
+          )}
+          {showOption === 'product_images' && (
+            <ProductGallery
+              businessId={business.id}
+              categoryId={product.category_id}
+              productId={product.id}
             />
           )}
           {showOption === 'custom_fields' && (

@@ -51,13 +51,13 @@ const ProductMainDetailsUI = (props) => {
       value: t('PRODUCT_EXTRAS', 'Product extras')
     },
     {
+      key: 'product_images',
+      value: t('PRODUCT_IMAGES', 'Product images')
+    },
+    {
       key: 'custom_fields',
       value: t('CUSTOM_FIELDS', 'Custom fields')
     },
-    // {
-    //   key: 'reviews',
-    //   value: t('REVIEWS', 'Reviews')
-    // },
     {
       key: 'personalization',
       value: t('PERSONALIZATION', 'Personalization')
