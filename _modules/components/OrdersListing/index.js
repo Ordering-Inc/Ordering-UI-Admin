@@ -45,7 +45,8 @@ var OrdersListing = function OrdersListing(props) {
       ordersStatusGroup = props.ordersStatusGroup,
       groupStatus = props.groupStatus,
       orderDetailId = props.orderDetailId,
-      isMessagesView = props.isMessagesView;
+      isMessagesView = props.isMessagesView,
+      setSelectedOrderIds = props.setSelectedOrderIds;
   var theme = (0, _styledComponents.useTheme)();
   (0, _react.useEffect)(function () {
     if (orderList.loading || !messageListView) return;
@@ -67,6 +68,7 @@ var OrdersListing = function OrdersListing(props) {
   }))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderListContent, {
     maxHeight: orderListView !== 'table'
   }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
+    setSelectedOrderIds: setSelectedOrderIds,
     isSelectedOrders: isSelectedOrders,
     orderList: orderList,
     driversList: driversList,

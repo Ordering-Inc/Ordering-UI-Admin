@@ -62,7 +62,9 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       key: i,
       isSkeleton: true
     });
-  }), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.map(function (category, i) {
+  }), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (category, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessCategory.SingleBusinessCategory, _extends({}, props, {
       key: i,
       category: category,

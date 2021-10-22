@@ -394,6 +394,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
 var UserAddForm = function UserAddForm(props) {
   var UserAddProps = _objectSpread(_objectSpread({}, props), {}, {
     useSessionUser: false,
+    useValidationFields: true,
     UIComponent: UserAddFormUI
   });
 

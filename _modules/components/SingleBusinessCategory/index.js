@@ -43,14 +43,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -64,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
-  var _theme$images$icons, _categoryFormState$ch2, _categoryFormState$ch3, _categoryFormState$ch4;
+  var _theme$images$icons, _categoryFormState$ch, _categoryFormState$ch2, _categoryFormState$ch3;
 
   var category = props.category,
       categorySelected = props.categorySelected,
@@ -78,8 +70,10 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       handlechangeImage = props.handlechangeImage,
       handleInputChange = props.handleInputChange,
       isEditMode = props.isEditMode,
-      businessState = props.businessState,
-      handleUpdateBusinessState = props.handleUpdateBusinessState;
+      handleDragStart = props.handleDragStart,
+      handleDragOver = props.handleDragOver,
+      handleDrop = props.handleDrop,
+      handleDragEnd = props.handleDragEnd;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -169,61 +163,6 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       return document.removeEventListener('click', closeProductEdit);
     };
   }, [categoryFormState]);
-
-  var handleDrag = function handleDrag(event, categoryId) {
-    var _categoryFormState$ch;
-
-    event.dataTransfer.setData('transferCategoryId', categoryId);
-    var ghostEle = document.createElement('div');
-    ghostEle.classList.add('ghostDragging');
-    ghostEle.innerHTML = categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch = categoryFormState.changes) === null || _categoryFormState$ch === void 0 ? void 0 : _categoryFormState$ch.name;
-    document.body.appendChild(ghostEle);
-    event.dataTransfer.setDragImage(ghostEle, 0, 0);
-  };
-
-  var handleAllowDrop = function handleAllowDrop(event) {
-    event.preventDefault();
-  };
-
-  var handleDrop = function handleDrop(event) {
-    var _businessState$busine;
-
-    event.preventDefault();
-    var transferCategoryId = parseInt(event.dataTransfer.getData('transferCategoryId'));
-    var counter;
-
-    var _categories = _toConsumableArray(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories);
-
-    var updatedCategories = [];
-
-    var transferCategory = _categories.find(function (_category) {
-      return _category.id === transferCategoryId;
-    });
-
-    for (var i = 0; i < _categories.length; i++) {
-      if (_categories[i].id === (category === null || category === void 0 ? void 0 : category.id)) {
-        counter = i;
-      }
-
-      if (_categories[i].id !== transferCategoryId) {
-        updatedCategories.push(_categories[i]);
-      }
-    }
-
-    updatedCategories.splice(counter, 0, transferCategory);
-    handleUpdateBusinessState(_objectSpread(_objectSpread({}, businessState === null || businessState === void 0 ? void 0 : businessState.business), {}, {
-      categories: updatedCategories
-    }));
-  };
-
-  var handleDragEnd = function handleDragEnd() {
-    var elements = document.getElementsByClassName('ghostDragging');
-
-    while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0]);
-    }
-  };
-
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SingleCategoryContainer, {
     active: !isSkeleton && (category === null || category === void 0 ? void 0 : category.id) === (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id),
     onClick: function onClick(e) {
@@ -234,7 +173,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       return handleDrop(e);
     },
     onDragOver: function onDragOver(e) {
-      return handleAllowDrop(e);
+      return handleDragOver(e);
     },
     onDragEnd: function onDragEnd(e) {
       return handleDragEnd(e);
@@ -245,9 +184,10 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
     alt: "six dots",
-    draggable: true,
+    draggable: true // onDragStart={e => handleDrag(e, category.id)}
+    ,
     onDragStart: function onDragStart(e) {
-      return handleDrag(e, category.id);
+      return handleDragStart(e);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles2.ProductTypeImage, {
     onClick: function onClick() {
@@ -270,8 +210,8 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading
-  }, categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$ch2 = categoryFormState.changes) !== null && _categoryFormState$ch2 !== void 0 && _categoryFormState$ch2.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch3 = categoryFormState.changes) === null || _categoryFormState$ch3 === void 0 ? void 0 : _categoryFormState$ch3.image,
+  }, categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$ch = categoryFormState.changes) !== null && _categoryFormState$ch !== void 0 && _categoryFormState$ch.image ? /*#__PURE__*/_react.default.createElement("img", {
+    src: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image,
     alt: "business type image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), /*#__PURE__*/_react.default.createElement(_styles.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -279,7 +219,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
   }) : /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     name: "name",
-    value: (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch4 = categoryFormState.changes) === null || _categoryFormState$ch4 === void 0 ? void 0 : _categoryFormState$ch4.name) || '',
+    value: (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch3 = categoryFormState.changes) === null || _categoryFormState$ch3 === void 0 ? void 0 : _categoryFormState$ch3.name) || '',
     onChange: handleInputChange,
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_styles.CategoryActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryEnableWrapper, {

@@ -100,7 +100,7 @@ var OrderNumberContainer = _styledComponents.default.div(_templateObject13 || (_
 
 exports.OrderNumberContainer = OrderNumberContainer;
 
-var CheckBox = _styledComponents.default.span(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  ", "\n  svg {\n    font-size: 24px;\n    color: #B1BCCC;\n\n    ", "\n  }\n"])), function (props) {
+var CheckBox = _styledComponents.default.span(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  ", "\n  svg {\n    font-size: 24px;\n    color: #B1BCCC;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme5;
 
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "])));

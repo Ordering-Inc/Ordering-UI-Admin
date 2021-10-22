@@ -71,7 +71,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       onOrderRedirect = props.onOrderRedirect,
       selectedSubOrderStatus = props.selectedSubOrderStatus,
       handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
-      handleCustomOrderDetail = props.handleCustomOrderDetail;
+      handleCustomOrderDetail = props.handleCustomOrderDetail,
+      setSelectedOrderIds = props.setSelectedOrderIds;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -184,7 +185,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     selectedSubOrderStatus: selectedSubOrderStatus,
     handleSelectedOrderIds: handleSelectedOrderIds,
     orderDetailId: orderDetailId,
-    handleOpenOrderDetail: handleOpenOrderDetail
+    handleOpenOrderDetail: handleOpenOrderDetail,
+    setSelectedOrderIds: setSelectedOrderIds
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

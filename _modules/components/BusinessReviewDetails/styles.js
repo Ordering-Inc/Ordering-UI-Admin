@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotReviewed = exports.Comment = exports.InfoBlock = exports.ReviewQualityTextContainer = exports.ReviewBar = exports.ReviewBarContainer = exports.ReviewQualityContainer = exports.UserInfoContainer = exports.ReviewItemContatiner = exports.Image = exports.WrapperImage = exports.BusinessLogoContainer = exports.Header = exports.ReviewDetailsContainer = void 0;
+exports.NotReviewed = exports.Comment = exports.InfoBlock = exports.ReviewQualityTextContainer = exports.ReviewBar = exports.ReviewBarContainer = exports.ReviewQualityContainer = exports.UserInfoContainer = exports.ReviewItemHeader = exports.ReviewItemContatiner = exports.Image = exports.WrapperImage = exports.BusinessLogoContainer = exports.Header = exports.ReviewDetailsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65,19 +65,27 @@ var ReviewItemContatiner = _styledComponents.default.div(_templateObject12 || (_
 
 exports.ReviewItemContatiner = ReviewItemContatiner;
 
-var UserInfoContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+var ReviewItemHeader = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
+
+exports.ReviewItemHeader = ReviewItemHeader;
+
+var UserInfoContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  ", "\n"])), function (props) {
+  var _props$theme2;
+
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    padding-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    padding-right: 10px;\n  "])));
+});
 
 exports.UserInfoContainer = UserInfoContainer;
 
-var ReviewQualityContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
+var ReviewQualityContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 
 exports.ReviewQualityContainer = ReviewQualityContainer;
 
-var ReviewBarContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin: 15px 0;\n"])));
+var ReviewBarContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 15px 0;\n"])));
 
 exports.ReviewBarContainer = ReviewBarContainer;
 
-var ReviewBarStyled = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  height: 6px;\n  border-radius: 10px;\n  background: ", ";\n"])), function (props) {
+var ReviewBarStyled = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  height: 6px;\n  border-radius: 10px;\n  background: ", ";\n"])), function (props) {
   return "linear-gradient(to right, ".concat(props.theme.colors.headingColor, " ").concat(props.percentage, "%, ").concat(props.theme.colors.borderColor, " ").concat(props.percentage, "%)");
 });
 
@@ -87,16 +95,16 @@ var ReviewBar = function ReviewBar(props) {
 
 exports.ReviewBar = ReviewBar;
 
-var ReviewQualityTextContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  p {\n    margin: 0px;\n    color: ", ";\n    font-size: 12px;\n  }\n"])), function (props) {
+var ReviewQualityTextContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  p {\n    margin: 0px;\n    color: ", ";\n    font-size: 12px;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 
 exports.ReviewQualityTextContainer = ReviewQualityTextContainer;
 
-var InfoBlock = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  ", "\n  max-width: calc(100% - 60px);\n  p {\n    font-size: 12px;\n    margin: 0px;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n\n    &.bold {\n      font-size: 14px;\n      font-weight: 500;\n      color: ", ";\n    }\n  }\n"])), function (props) {
-  var _props$theme2;
+var InfoBlock = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  ", "\n  max-width: calc(100% - 60px);\n  p {\n    font-size: 12px;\n    margin: 0px;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n\n    &.bold {\n      font-size: 14px;\n      font-weight: 500;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  var _props$theme3;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    margin-right: 9px;\n  "]))) : (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    margin-left: 9px;\n  "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    margin-right: 9px;\n  "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    margin-left: 9px;\n  "])));
 }, function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
@@ -105,10 +113,10 @@ var InfoBlock = _styledComponents.default.div(_templateObject18 || (_templateObj
 
 exports.InfoBlock = InfoBlock;
 
-var Comment = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  margin: 25px 0;\n"])));
+var Comment = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  margin: 25px 0;\n"])));
 
 exports.Comment = Comment;
 
-var NotReviewed = _styledComponents.default.p(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  font-size: 14px;\n"])));
+var NotReviewed = _styledComponents.default.p(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  font-size: 14px;\n"])));
 
 exports.NotReviewed = NotReviewed;
