@@ -18,16 +18,16 @@ export const ProductDetailsContainer = styled.div`
 
 export const DetailsHeader = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
 `
 
 export const ProductName = styled.h1`
+  flex: 1;
   color: ${props => props.theme.colors.headingColor};
-  font-size: 24px;
+  font-size: 20px;
   margin: 0px;
-  font-weight: 600;
+  font-weight: 700;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
