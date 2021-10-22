@@ -25,6 +25,8 @@ var _Personalization = require("../Personalization");
 
 var _ProductExtras = require("../ProductExtras");
 
+var _ProductGallery = require("../ProductGallery");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -154,6 +156,10 @@ var ProductDetails = function ProductDetails(props) {
     product: product,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleUpdateBusinessState: handleUpdateBusinessState
+  }), showOption === 'product_images' && /*#__PURE__*/_react.default.createElement(_ProductGallery.ProductGallery, {
+    businessId: business.id,
+    categoryId: product.category_id,
+    productId: product.id
   }), showOption === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_ProductMetaFields.ProductMetaFields, {
     businessId: business.id,
     categoryId: product.category_id,

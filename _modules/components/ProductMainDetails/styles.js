@@ -27,11 +27,11 @@ var ProductDetailsContainer = _styledComponents.default.div(_templateObject || (
 
 exports.ProductDetailsContainer = ProductDetailsContainer;
 
-var DetailsHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 30px;\n"])));
+var DetailsHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 30px;\n"])));
 
 exports.DetailsHeader = DetailsHeader;
 
-var ProductName = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 24px;\n  margin: 0px;\n  font-weight: 600;\n\n  ", "\n"])), function (props) {
+var ProductName = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  flex: 1;\n  color: ", ";\n  font-size: 20px;\n  margin: 0px;\n  font-weight: 700;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme;
