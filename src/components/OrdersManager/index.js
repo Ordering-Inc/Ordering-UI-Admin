@@ -38,7 +38,8 @@ const OrdersManagerUI = (props) => {
     onOrderRedirect,
     selectedSubOrderStatus,
     handleSelectedSubOrderStatus,
-    handleCustomOrderDetail
+    handleCustomOrderDetail,
+    setSelectedOrderIds
   } = props
 
   const [, t] = useLanguage()
@@ -143,6 +144,7 @@ const OrdersManagerUI = (props) => {
                 handleSelectedOrderIds={handleSelectedOrderIds}
                 orderDetailId={orderDetailId}
                 handleOpenOrderDetail={handleOpenOrderDetail}
+                setSelectedOrderIds={setSelectedOrderIds}
               />
             </WrapItemView>
           </OrdersInnerContent>

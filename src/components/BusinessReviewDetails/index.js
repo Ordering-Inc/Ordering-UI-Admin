@@ -3,7 +3,7 @@ import { useLanguage, useUtils, useEvent, BusinessReviews as BusinessReviewsCont
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { PersonFill } from 'react-bootstrap-icons'
-import { Button } from '../../styles'
+import { Button, Switch } from '../../styles'
 
 import {
   ReviewDetailsContainer,
@@ -13,6 +13,7 @@ import {
   Image,
   ReviewItemContatiner,
   InfoBlock,
+  ReviewItemHeader,
   UserInfoContainer,
   ReviewQualityContainer,
   ReviewBarContainer,
@@ -25,7 +26,8 @@ import {
 const BusinessReviewDetailsUI = (props) => {
   const {
     business,
-    reviewsList
+    reviewsList,
+    handleChangeReviewEnabled
   } = props
 
   const [, t] = useLanguage()
@@ -62,15 +64,18 @@ const BusinessReviewDetailsUI = (props) => {
         {reviewsList?.loading ? (
           [...Array(10).keys()].map(i => (
             <ReviewItemContatiner key={i}>
-              <UserInfoContainer>
-                <WrapperImage isSmall isSkeleton>
-                  <Skeleton width={40} height={40} />
-                </WrapperImage>
-                <InfoBlock>
-                  <p><Skeleton width={80} /></p>
-                  <p><Skeleton width={100} /></p>
-                </InfoBlock>
-              </UserInfoContainer>
+              <ReviewItemHeader>
+                <UserInfoContainer>
+                  <WrapperImage isSmall isSkeleton>
+                    <Skeleton width={40} height={40} />
+                  </WrapperImage>
+                  <InfoBlock>
+                    <p><Skeleton width={80} /></p>
+                    <p><Skeleton width={100} /></p>
+                  </InfoBlock>
+                </UserInfoContainer>
+                <Skeleton width={20} />
+              </ReviewItemHeader>
               <ReviewQualityContainer>
                 <ReviewBarContainer>
                   <Skeleton height={10} />
@@ -92,21 +97,27 @@ const BusinessReviewDetailsUI = (props) => {
         ) : (
           reviewsList?.reviews.map(review => (
             <ReviewItemContatiner key={review?.id}>
-              <UserInfoContainer>
-                <WrapperImage isSmall>
-                  {review?.user?.photo ? (
-                    <Image bgimage={optimizeImage(review?.user?.photo)} />
-                  ) : (
-                    <PersonFill />
-                  )}
-                </WrapperImage>
-                <InfoBlock>
-                  <p className='bold'>{review?.user?.name} {review?.user?.lastname}</p>
-                  {review?.created_at && (
-                    <p>{parseDate(review?.created_at, { utc: false })}</p>
-                  )}
-                </InfoBlock>
-              </UserInfoContainer>
+              <ReviewItemHeader>
+                <UserInfoContainer>
+                  <WrapperImage isSmall>
+                    {review?.user?.photo ? (
+                      <Image bgimage={optimizeImage(review?.user?.photo)} />
+                    ) : (
+                      <PersonFill />
+                    )}
+                  </WrapperImage>
+                  <InfoBlock>
+                    <p className='bold'>{review?.user?.name} {review?.user?.lastname}</p>
+                    {review?.created_at && (
+                      <p>{parseDate(review?.created_at, { utc: false })}</p>
+                    )}
+                  </InfoBlock>
+                </UserInfoContainer>
+                <Switch
+                  defaultChecked={review?.enabled}
+                  onChange={val => handleChangeReviewEnabled(review?.id, val)}
+                />
+              </ReviewItemHeader>
               <ReviewQualityContainer>
                 <ReviewBarContainer>
                   <ReviewBar

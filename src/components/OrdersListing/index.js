@@ -32,7 +32,8 @@ export const OrdersListing = (props) => {
     groupStatus,
     orderDetailId,
 
-    isMessagesView
+    isMessagesView,
+    setSelectedOrderIds
   } = props
 
   const theme = useTheme()
@@ -68,6 +69,7 @@ export const OrdersListing = (props) => {
             >
               {orderListView === 'table' ? (
                 <OrdersTable
+                  setSelectedOrderIds={setSelectedOrderIds}
                   isSelectedOrders={isSelectedOrders}
                   orderList={orderList}
                   driversList={driversList}

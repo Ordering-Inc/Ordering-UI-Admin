@@ -88,9 +88,20 @@ export const ReviewItemContatiner = styled.div`
   margin-bottom: 50px;
 `
 
+export const ReviewItemHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 export const UserInfoContainer = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
+  ${props => props.theme?.rtl ? css`
+    padding-left: 10px;
+  ` : css`
+    padding-right: 10px;
+  `}
 `
 
 export const ReviewQualityContainer = styled.div`

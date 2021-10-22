@@ -350,6 +350,7 @@ export const UserAddForm = (props) => {
   const UserAddProps = {
     ...props,
     useSessionUser: false,
+    useValidationFields: true,
     UIComponent: UserAddFormUI
   }
   return (
