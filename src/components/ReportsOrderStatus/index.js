@@ -10,12 +10,12 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { Alert } from '../Confirm'
 import {
-  DriverScheduleContainer,
+  OrderStatusContainer,
   Title,
   ButtonActionList,
   BrandBusinessWrapper,
   CalendarWrapper,
-  DistancePerBrandWrapper,
+  OrderStatusTableWrapper,
   DistanceTitleBlock,
   DistanceTable,
   Thead,
@@ -25,11 +25,12 @@ import {
   EmptyContent
 } from './styles'
 
-const ReportsDriverScheduleUI = (props) => {
+const ReportsOrderStatusUI = (props) => {
   const {
     filterList,
     handleChangeFilterList,
-    reportData
+    reportData,
+    reportData1
   } = props
 
   const [, t] = useLanguage()
@@ -50,7 +51,7 @@ const ReportsDriverScheduleUI = (props) => {
     })
   }
 
-  const downloadCSV = () => {
+  const downloadCSV = (name) => {
     if (reportData?.content?.body?.rows?.length === 0) return
     let csv = ''
     reportData.content.header.rows.forEach((tr) => {
@@ -88,7 +89,7 @@ const ReportsDriverScheduleUI = (props) => {
     var url = URL.createObjectURL(blob)
     downloadLink.href = url
     const fileSuffix = new Date().getTime()
-    downloadLink.download = `completed_orders_${fileSuffix}.csv`
+    downloadLink.download = `${name}_${fileSuffix}.csv`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)
@@ -105,8 +106,8 @@ const ReportsDriverScheduleUI = (props) => {
 
   return (
     <>
-      <DriverScheduleContainer>
-        <Title>{t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')}</Title>
+      <OrderStatusContainer>
+        <Title>{t('ORDER_STATUS', 'Order status')}</Title>
         <ButtonActionList>
           <BrandBusinessWrapper>
             <Button
@@ -127,9 +128,9 @@ const ReportsDriverScheduleUI = (props) => {
             />
           </CalendarWrapper>
         </ButtonActionList>
-        <DistancePerBrandWrapper>
+        <OrderStatusTableWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
-            <h2>{t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')}</h2>
+            <h2>{t('BUSINESS_ORDERS_COUNT_SALES', 'Business orders count sales')}</h2>
             <Download onClick={() => downloadCSV()} />
           </DistanceTitleBlock>
           {reportData?.loading ? (
@@ -183,7 +184,64 @@ const ReportsDriverScheduleUI = (props) => {
               )}
             </TableWrapper>
           )}
-        </DistancePerBrandWrapper>
+        </OrderStatusTableWrapper>
+        <OrderStatusTableWrapper>
+          <DistanceTitleBlock active={reportData1?.content?.body?.rows?.length > 0}>
+            <h2>{t('FRANCHISE_ORDERS_COUNT_SALES', 'Franchise orders count sales')}</h2>
+            <Download onClick={() => downloadCSV()} />
+          </DistanceTitleBlock>
+          {reportData1?.loading ? (
+            <div className='row'>
+              {[...Array(20).keys()].map(i => (
+                <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
+              ))}
+            </div>
+          ) : (
+            <TableWrapper>
+              {reportData1?.content?.body?.rows?.length > 0 ? (
+                <DistanceTable ref={tableRef}>
+                  {reportData?.content?.header?.rows.length > 0 && (
+                    <Thead>
+                      {
+                        reportData1?.content?.header?.rows.map((tr, i) => (
+                          <tr key={i}>
+                            {tr?.map((th, j) => (
+                              <th key={j} colSpan={th.colspan}>{th.value}</th>
+                            ))}
+                          </tr>
+                        ))
+                      }
+                    </Thead>
+                  )}
+                  {reportData1?.content?.body?.rows.map((tbody, i) => (
+                    <Tbody key={i}>
+                      <tr>
+                        {tbody.map((td, j) => (
+                          <td key={j} colSpan={td.colspan}>{td.value}</td>
+                        ))}
+                      </tr>
+                    </Tbody>
+                  ))}
+                  {reportData1?.content?.footer?.rows.length > 0 && (
+                    <Tfoot>
+                      {
+                        reportData1?.content?.footer?.rows.map((tr, i) => (
+                          <tr key={i}>
+                            {tr?.map((td, j) => (
+                              <td key={j} colSpan={td.colspan}>{td.value}</td>
+                            ))}
+                          </tr>
+                        ))
+                      }
+                    </Tfoot>
+                  )}
+                </DistanceTable>
+              ) : (
+                <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+              )}
+            </TableWrapper>
+          )}
+        </OrderStatusTableWrapper>
         <Modal
           width='50%'
           height='80vh'
@@ -208,7 +266,7 @@ const ReportsDriverScheduleUI = (props) => {
             {...props} onClose={() => setIsBrandFilter(false)}
           />
         </Modal>
-      </DriverScheduleContainer>
+      </OrderStatusContainer>
       <Alert
         title={t('DRIVER_SCHEDULE', 'Driver schedule')}
         content={alertState.content}
@@ -222,11 +280,12 @@ const ReportsDriverScheduleUI = (props) => {
   )
 }
 
-export const ReportsDriverSchedule = (props) => {
+export const ReportsOrderStatus = (props) => {
   const reportsDriverScheduleProps = {
     ...props,
-    UIComponent: ReportsDriverScheduleUI,
-    endpoint: 'drivers_operation_events'
+    UIComponent: ReportsOrderStatusUI,
+    endpoint: 'business_orders_count_sales',
+    endpoint1: 'franchise_orders_count_sales'
   }
   return <AdvancedReportsController {...reportsDriverScheduleProps} />
 }

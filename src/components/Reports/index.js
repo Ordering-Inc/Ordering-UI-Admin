@@ -30,6 +30,7 @@ import { ReportsDriverSpend } from '../ReportsDriverSpend'
 import { ReportsDriverOrder } from '../ReportsDriverOrder'
 import { ReportsDriverOrderTime } from '../ReportsDriverOrderTime'
 import { ReportsDriverSchedule } from '../ReportsDriverSchedule'
+import { ReportsOrderStatus } from '../ReportsOrderStatus'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -106,6 +107,7 @@ export const Reports = (props) => {
           {selectedReport === 5 && <ReportsDriverSpend />}
           {selectedReport === 6 && <ReportsDriverOrder />}
           {selectedReport === 7 && <ReportsDriverSchedule />}
+          {selectedReport === 8 && <ReportsOrderStatus />}
         </SideBar>
       )}
     </ReportsContainer>

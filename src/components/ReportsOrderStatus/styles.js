@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const DriverScheduleContainer = styled.div`
+export const OrderStatusContainer = styled.div`
   padding: 35px 15px;
   width: 100%;
 
@@ -68,7 +68,7 @@ export const BrandBusinessWrapper = styled(CalendarWrapper)`
   }
 `
 
-export const DistancePerBrandWrapper = styled.div`
+export const OrderStatusTableWrapper = styled.div`
   width: 100%;
   margin-top: 25px;
   padding: 20px;
@@ -121,7 +121,18 @@ export const Thead = styled.thead`
 
       &:first-child {
         text-align: left;
-        border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+      }
+    }
+    &:first-child {
+      th:not(:first-child) {
+        border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+      }
+    }
+    &:last-child {
+      th {
+        &:nth-child(4n-1) {
+          border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+        }
       }
     }
   }
@@ -140,7 +151,9 @@ export const Tbody = styled.tbody`
       &:first-child {
         text-align: left;
         color: ${props => props.theme?.colors.headingColor};
-        border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+      }
+      &:nth-child(4n-1) {
+        border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
       }
     }
   }
