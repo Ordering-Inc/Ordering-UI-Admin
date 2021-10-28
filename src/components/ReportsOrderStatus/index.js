@@ -131,7 +131,7 @@ const ReportsOrderStatusUI = (props) => {
         <OrderStatusTableWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
             <h2>{t('BUSINESS_ORDERS_COUNT_SALES', 'Business orders count sales')}</h2>
-            <Download onClick={() => downloadCSV()} />
+            <Download onClick={() => downloadCSV('business_orders_count_sales')} />
           </DistanceTitleBlock>
           {reportData?.loading ? (
             <div className='row'>
@@ -188,7 +188,7 @@ const ReportsOrderStatusUI = (props) => {
         <OrderStatusTableWrapper>
           <DistanceTitleBlock active={reportData1?.content?.body?.rows?.length > 0}>
             <h2>{t('FRANCHISE_ORDERS_COUNT_SALES', 'Franchise orders count sales')}</h2>
-            <Download onClick={() => downloadCSV()} />
+            <Download onClick={() => downloadCSV('franchise_orders_count_sales')} />
           </DistanceTitleBlock>
           {reportData1?.loading ? (
             <div className='row'>

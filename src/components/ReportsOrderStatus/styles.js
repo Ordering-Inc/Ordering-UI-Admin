@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const OrderStatusContainer = styled.div`
   padding: 35px 15px;
   width: 100%;
+  overflow: auto;
 
   @media (min-width: 700px) {
     padding: 35px;
