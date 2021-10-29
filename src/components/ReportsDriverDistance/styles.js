@@ -118,11 +118,16 @@ export const Thead = styled.thead`
       font-weight: 500;
       font-size: 12px;
       text-align: center;
-      border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
 
       &:first-child {
         text-align: left;
         border: none;
+      }
+    }
+
+    &:first-child {
+      th:first-child {
+        text-align: center;
       }
     }
   }

@@ -10,13 +10,14 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
 import { Pagination } from '../Pagination'
-import { useLanguage, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
+import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './naked'
+import { useLanguage } from 'ordering-components-admin'
 
 const ReportsDriverFilterUI = (props) => {
   const {
-    businessList,
-    businessIds,
-    handleChangeBusinessId,
+    driverList,
+    driverIds,
+    handleChangeDriverId,
     handleClickFilterButton,
     isAllCheck,
     handleChangeAllCheck
@@ -43,7 +44,7 @@ const ReportsDriverFilterUI = (props) => {
   }
 
   const isCheckEnableSate = (id) => {
-    const found = businessIds?.find(businessId => businessId === id)
+    const found = driverIds?.find(businessId => businessId === id)
     let valid = false
     if (found) {
       valid = true
@@ -52,22 +53,22 @@ const ReportsDriverFilterUI = (props) => {
   }
 
   useEffect(() => {
-    if (businessList.loading) return
+    if (driverList.loading) return
     let _totalPages
-    if (businessList.businesses.length > 0) {
-      _totalPages = Math.ceil(businessList.businesses.length / pagesPerPage)
+    if (driverList.drivers.length > 0) {
+      _totalPages = Math.ceil(driverList.drivers.length / pagesPerPage)
     }
     const indexOfLastPost = currentPage * pagesPerPage
     const indexOfFirstPost = indexOfLastPost - pagesPerPage
-    const _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
+    const _currentProducts = driverList.drivers.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
     setCurrentPages(_currentProducts)
-  }, [businessList, currentPage, pagesPerPage])
+  }, [driverList, currentPage, pagesPerPage])
 
   return (
     <>
       <AnalyticsBusinessFilterContainer>
-        {businessList.loading ? (
+        {driverList.loading ? (
           [...Array(10).keys()].map(i => (
             <BusinessFilterOption key={i}>
               <Skeleton width={15} height={15} />
@@ -88,20 +89,20 @@ const ReportsDriverFilterUI = (props) => {
               )}
               <BusinessName>{t('ALL', 'All')}</BusinessName>
             </BusinessFilterOption>
-            {currentPages.map((business, i) => (
+            {currentPages.map((driver, i) => (
               <BusinessFilterOption
                 key={i}
-                onClick={() => handleChangeBusinessId(business?.id)}
+                onClick={() => handleChangeDriverId(driver?.id)}
               >
-                {isCheckEnableSate(business.id) ? (
+                {isCheckEnableSate(driver.id) ? (
                   <RiCheckboxFill className='fill' />
                 ) : (
                   <RiCheckboxBlankLine />
                 )}
-                <BusinessName>{business?.name}</BusinessName>
+                <BusinessName>{driver?.name}</BusinessName>
               </BusinessFilterOption>
             ))}
-            {businessList?.businesses?.length > 0 && (
+            {driverList?.drivers?.length > 0 && (
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
@@ -117,7 +118,7 @@ const ReportsDriverFilterUI = (props) => {
         <Button
           borderRadius='7.6px'
           color='primary'
-          disabled={businessList.loading}
+          disabled={driverList.loading}
           onClick={handleClickFilterButton}
         >
           {t('FILTER', 'Filter')}
@@ -130,7 +131,7 @@ const ReportsDriverFilterUI = (props) => {
 export const ReportsDriverFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
-    propsToFetch: ['id', 'name', 'slug'],
+    propsToFetch: ['id', 'name'],
     UIComponent: ReportsDriverFilterUI
   }
   return <AnalyticsBusinessFilterController {...AnalyticsBusinessFilterProps} />

@@ -6,7 +6,6 @@ import { Download } from 'react-bootstrap-icons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
-import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { Alert } from '../Confirm'
 import {
@@ -34,7 +33,6 @@ const ReportsDriverDistanceUI = (props) => {
 
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
-  const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -111,17 +109,12 @@ const ReportsDriverDistanceUI = (props) => {
         <ButtonActionList>
           <BrandBusinessWrapper>
             <Button
-              onClick={() => setIsBrandFilter(true)}
-            >
-              {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
-            </Button>
-            <Button
               onClick={() => setIsBusinessFilter(true)}
             >
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
             <Button
-              onClick={() => setIsBusinessFilter(true)}
+              onClick={() => setIsDriverFilter(true)}
             >
               {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
@@ -200,18 +193,6 @@ const ReportsDriverDistanceUI = (props) => {
         >
           <AnalyticsBusinessFilter
             {...props} onClose={() => setIsBusinessFilter(false)}
-          />
-        </Modal>
-        <Modal
-          width='50%'
-          height='80vh'
-          padding='30px'
-          title={t('BRAND', 'Brand')}
-          open={isBrandFilter}
-          onClose={() => setIsBrandFilter(false)}
-        >
-          <ReportsBrandFilter
-            {...props} onClose={() => setIsBrandFilter(false)}
           />
         </Modal>
         <Modal
