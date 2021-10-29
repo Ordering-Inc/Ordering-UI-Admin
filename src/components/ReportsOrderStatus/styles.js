@@ -124,11 +124,6 @@ export const Thead = styled.thead`
         text-align: left;
       }
     }
-    &:first-child {
-      th:not(:first-child) {
-        border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
-      }
-    }
     &:last-child {
       th {
         &:nth-child(4n-1) {
