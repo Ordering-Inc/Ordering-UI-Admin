@@ -31,6 +31,8 @@ import { ReportsDriverOrder } from '../ReportsDriverOrder'
 import { ReportsDriverOrderTime } from '../ReportsDriverOrderTime'
 import { ReportsDriverSchedule } from '../ReportsDriverSchedule'
 import { ReportsOrderStatus } from '../ReportsOrderStatus'
+import { ReportsHeatMap } from '../ReportsHeatMap'
+import { ReportsDriverDistance } from '../ReportsDriverDistance'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -108,6 +110,8 @@ export const Reports = (props) => {
           {selectedReport === 6 && <ReportsDriverOrder />}
           {selectedReport === 7 && <ReportsDriverSchedule />}
           {selectedReport === 8 && <ReportsOrderStatus />}
+          {selectedReport === 9 && <ReportsHeatMap />}
+          {selectedReport === 10 && <ReportsDriverDistance />}
         </SideBar>
       )}
     </ReportsContainer>
