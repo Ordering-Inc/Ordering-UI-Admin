@@ -130,6 +130,11 @@ export const Thead = styled.thead`
         text-align: center;
       }
     }
+    &:last-child {
+      th:not(:first-child) {
+        border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+      }
+    }
   }
 `
 

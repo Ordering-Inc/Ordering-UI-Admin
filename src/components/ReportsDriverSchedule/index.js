@@ -24,6 +24,7 @@ import {
   TableWrapper,
   EmptyContent
 } from './styles'
+import dumyData from './dumy.json'
 
 const ReportsDriverScheduleUI = (props) => {
   const {
@@ -102,6 +103,10 @@ const ReportsDriverScheduleUI = (props) => {
       })
     }
   }, [reportData?.error])
+
+  useEffect(() => {
+    console.log(dumyData, 'this is dumy data')
+  }, [dumyData])
 
   return (
     <>

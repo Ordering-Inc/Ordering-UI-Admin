@@ -1,0 +1,128 @@
+{
+  "error": false,
+  "result": {
+      "type": "timeline",
+      "from": "2019-03-05 00:00:00",
+      "to": "2019-03-05 23:59:00",
+      "data": [
+          {
+              "label": "1. Name Lastname",
+              "metadata": {
+                  "id": 1,
+                  "name": "Name",
+                  "lastname": "Lastname"
+              },
+              "lines": [
+                  {
+                      "name": "Busy",
+                      "ranges": [
+                          {
+                              "from": "2019-03-05 00:00:00",
+                              "to": "2019-03-05 05:00:00",
+                              "value": false,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 05:00:00",
+                              "to": "2019-03-05 07:00:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 07:00:00",
+                              "to": "2019-03-05 23:59:00",
+                              "value": false,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          }
+                      ]
+                  },
+                  {
+                      "name": "Available",
+                      "ranges": [
+                          {
+                              "from": "2019-03-05 00:00:00",
+                              "to": "2019-03-05 16:32:00",
+                              "value": false,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 16:32:00",
+                              "to": "2019-03-05 16:33:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 16:33:00",
+                              "to": "2019-03-05 16:38:00",
+                              "value": false,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 16:38:00",
+                              "to": "2019-03-05 16:39:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 16:39:00",
+                              "to": "2019-03-05 16:58:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 16:58:00",
+                              "to": "2019-03-05 16:59:00",
+                              "value": false,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 16:59:00",
+                              "to": "2019-03-05 17:14:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 17:14:00",
+                              "to": "2019-03-05 17:15:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 17:15:00",
+                              "to": "2019-03-05 17:16:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 17:16:00",
+                              "to": "2019-03-05 17:17:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          },
+                          {
+                              "from": "2019-03-05 17:17:00",
+                              "to": "2019-03-05 23:59:00",
+                              "value": true,
+                              "value_type": "boolean",
+                              "value_unit": "boolean"
+                          }
+                      ]
+                  }
+              ]
+          }
+      ]
+  }
+}

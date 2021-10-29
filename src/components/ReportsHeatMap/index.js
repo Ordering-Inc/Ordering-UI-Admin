@@ -9,6 +9,7 @@ import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { Alert } from '../Confirm'
+import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import {
   HeatMapContainer,
   Title,
@@ -222,7 +223,7 @@ const ReportsHeatMapUI = (props) => {
           open={isDriverFilter}
           onClose={() => setIsDriverFilter(false)}
         >
-          <ReportsBrandFilter
+          <ReportsDriverFilter
             {...props} onClose={() => setIsDriverFilter(false)}
           />
         </Modal>
