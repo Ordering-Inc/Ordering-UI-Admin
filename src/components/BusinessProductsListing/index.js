@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import { useLanguage, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
@@ -8,10 +9,10 @@ import BsTable from '@meronex/icons/bs/BsTable'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductList } from '../BusinessProductList'
 import { ProductDetails } from '../ProductDetails'
+import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
-
 import {
   CategoryProductsContainer,
   HeaderContainer,
@@ -22,7 +23,9 @@ import {
   ProductHeader,
   ActionIconList,
   ViewMethodButton,
-  ActionsGroup
+  ActionsGroup,
+  BusinessNameWrapper,
+  BusinessSelector
 } from './styles'
 
 const BusinessProductsListingUI = (props) => {
@@ -37,17 +40,19 @@ const BusinessProductsListingUI = (props) => {
     slug,
     categoryId,
     handleUpdateBusinessState,
-    setCategorySelected
+    setCategorySelected,
+    setBusinessSlug
   } = props
 
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
-
   const [viewMethod, setViewMethod] = useState('list')
   const [categoryToEdit, setCategoryToEdit] = useState({ open: false, category: null })
   const [openProductDetails, setOpenProductDetails] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isProductAdd, setIsProductAdd] = useState(false)
+  const [showSelectHeader, setShowSelectHeader] = useState(false)
+  const [businessName, setBusinessName] = useState(null)
 
   const handleOpenCategoryDetails = (category = null) => {
     if (category && category?.id !== null) {
@@ -95,6 +100,21 @@ const BusinessProductsListingUI = (props) => {
     setIsProductAdd(status)
   }
 
+  const handleSelectHeader = () => {
+    setShowSelectHeader(!showSelectHeader)
+  }
+
+  const handleClose = () => {
+    setShowSelectHeader(false)
+  }
+
+  const changBusinessState = (business) => {
+    handleClose()
+    setBusinessName(business?.name)
+    setCategorySelected(null)
+    setBusinessSlug(business?.slug)
+  }
+
   useEffect(() => {
     if (categoryId) {
       setCategoryToEdit({
@@ -117,15 +137,18 @@ const BusinessProductsListingUI = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            {
-              businessState.loading ? (
-                <h1><Skeleton width={200} height={30} /></h1>
-              ) : (
-                businessState?.business?.name && (
-                  <h1>{businessState?.business?.name}</h1>
-                )
-              )
-            }
+            {!businessName && businessState.loading ? (
+              <h1><Skeleton width={200} height={30} /></h1>
+            ) : (
+              <BusinessSelector>
+                <BusinessNameWrapper onClick={() => handleSelectHeader()}>
+                  <h1>{businessName || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
+                </BusinessNameWrapper>
+                {showSelectHeader && (
+                  <BusinessSelectHeader close={handleClose} isOpen={showSelectHeader} changBusinessState={changBusinessState} />
+                )}
+              </BusinessSelector>
+            )}
           </HeaderTitleContainer>
           <ActionsGroup>
             <Button
@@ -169,7 +192,6 @@ const BusinessProductsListingUI = (props) => {
               <div className='d-flex align-items-center'>
                 <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
               </div>
-
               <ActionIconList>
                 <ViewMethodButton
                   active={viewMethod === 'list'}
@@ -207,7 +229,6 @@ const BusinessProductsListingUI = (props) => {
           />
         )
       }
-
       {openProductDetails && (
         <ProductDetails
           open={openProductDetails}

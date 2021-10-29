@@ -34,7 +34,7 @@ export const BusinessProductsCategories = (props) => {
             )
           }
           {
-            !businessState.loading && businessState?.business.categories.length > 0 && (
+            !businessState.loading && businessState?.business?.categories.length > 0 && (
               businessState?.business.categories.sort((a, b) => a.rank - b.rank).map((category, i) => (
                 <SingleBusinessCategory
                   {...props}
