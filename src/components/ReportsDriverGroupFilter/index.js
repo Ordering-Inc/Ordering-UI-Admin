@@ -10,10 +10,10 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
 import { Pagination } from '../Pagination'
-import { ReportsDriverFilter as ReportsDriverFilterController } from './naked'
+import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './naked'
 import { useLanguage } from 'ordering-components-admin'
 
-const ReportsDriverFilterUI = (props) => {
+const RerpotsDriverGroupFilterUI = (props) => {
   const {
     driverList,
     driverIds,
@@ -128,11 +128,11 @@ const ReportsDriverFilterUI = (props) => {
   )
 }
 
-export const ReportsDriverFilter = (props) => {
+export const ReportsDriverGroupFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
     propsToFetch: ['id', 'name'],
-    UIComponent: ReportsDriverFilterUI
+    UIComponent: RerpotsDriverGroupFilterUI
   }
-  return <ReportsDriverFilterController {...AnalyticsBusinessFilterProps} />
+  return <AnalyticsBusinessFilterController {...AnalyticsBusinessFilterProps} />
 }

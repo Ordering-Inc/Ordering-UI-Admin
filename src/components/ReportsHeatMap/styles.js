@@ -102,73 +102,31 @@ export const DistanceTitleBlock = styled.div`
   `}
 `
 
-export const DistanceTable = styled.table`
-  width: 100%;
-  min-width: 500px;
-`
-
-export const Thead = styled.thead`
-  position: sticky;
-  top: 0px;
-  background: white;
-
-  tr {
-    th {
-      padding: 12px 5px;
-      font-weight: 500;
-      font-size: 12px;
-      text-align: center;
-
-      &:first-child {
-        text-align: left;
-        border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
-      }
-    }
-  }
-`
-
-export const Tbody = styled.tbody`
-  border-bottom: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
-
-  tr {
-    td {
-      padding: 12px 5px;
-      font-size: 12px;
-      text-align: center;
-      color: ${props => props.theme?.colors.lightGray};
-
-      &:first-child {
-        text-align: left;
-        color: ${props => props.theme?.colors.headingColor};
-        border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
-      }
-    }
-  }
-`
-
-export const Tfoot = styled.tfoot`
-  tr {
-    td {
-      font-weight: 500;
-      font-size: 12px;
-      padding: 12px 0;
-
-      &:not(:first-child) {
-        text-align: center;
-      }
-    }
-  }
-`
-
 export const TableWrapper = styled.div`
   width: 100%;
   overflow: auto;
   max-height: 650px;
 `
 
-export const EmptyContent = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+export const WrapperMap = styled.div`
+  width: 100%;
+  height: 350px;
+  position: relative;
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 8px;
+  }
+
+  button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 768px) {
+    height: 500px;
+  }
 `

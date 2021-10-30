@@ -3,7 +3,7 @@ import PropTypes, { string } from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 import { useApi } from 'ordering-components-admin'
 
-export const ReportsDriverFilter = (props) => {
+export const ReportsDriverGroupFilter = (props) => {
   const {
     UIComponent,
     filterList,
@@ -129,7 +129,7 @@ export const ReportsDriverFilter = (props) => {
   )
 }
 
-ReportsDriverFilter.propTypes = {
+ReportsDriverGroupFilter.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -172,7 +172,7 @@ ReportsDriverFilter.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-ReportsDriverFilter.defaultProps = {
+ReportsDriverGroupFilter.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

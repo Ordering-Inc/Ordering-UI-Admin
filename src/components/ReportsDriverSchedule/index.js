@@ -9,6 +9,7 @@ import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { Alert } from '../Confirm'
+import Chart from 'react-apexcharts'
 import {
   DriverScheduleContainer,
   Title,
@@ -25,6 +26,7 @@ import {
   EmptyContent
 } from './styles'
 import dumyData from './dumy.json'
+import { forEach } from 'lodash'
 
 const ReportsDriverScheduleUI = (props) => {
   const {
@@ -37,8 +39,7 @@ const ReportsDriverScheduleUI = (props) => {
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
-  const tableRef = useRef(null)
+  const [series, setSeries] = useState([])
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -49,50 +50,6 @@ const ReportsDriverScheduleUI = (props) => {
       open: false,
       content: []
     })
-  }
-
-  const downloadCSV = () => {
-    if (reportData?.content?.body?.rows?.length === 0) return
-    let csv = ''
-    reportData.content.header.rows.forEach((tr) => {
-      tr.forEach((th) => {
-        csv += `${th.value},`
-        for (let i = 1; i < th.colspan; i++) {
-          csv += ' ,'
-        }
-      })
-      csv += '\n'
-    })
-    csv += '\n'
-    reportData.content.body.rows.forEach((tr) => {
-      tr.forEach((th) => {
-        csv += `${th.value},`
-        for (let i = 1; i < th.colspan; i++) {
-          csv += ' ,'
-        }
-      })
-      csv += '\n'
-    })
-    csv += '\n'
-    reportData.content.footer.rows.forEach((tr) => {
-      tr.forEach((th) => {
-        csv += `${th.value},`
-        for (let i = 1; i < th.colspan; i++) {
-          csv += ' ,'
-        }
-      })
-      csv += '\n'
-    })
-    csv += '\n'
-    var downloadLink = document.createElement('a')
-    var blob = new Blob(['\ufeff', csv])
-    var url = URL.createObjectURL(blob)
-    downloadLink.href = url
-    const fileSuffix = new Date().getTime()
-    downloadLink.download = `completed_orders_${fileSuffix}.csv`
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
   }
 
   useEffect(() => {
@@ -106,6 +63,97 @@ const ReportsDriverScheduleUI = (props) => {
 
   useEffect(() => {
     console.log(dumyData, 'this is dumy data')
+  }, [dumyData])
+
+  const options = {
+    chart: {
+      height: 450,
+      type: 'rangeBar'
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        barHeight: '80%'
+      }
+    },
+    xaxis: {
+      type: 'datetime'
+    },
+    stroke: {
+      width: 1
+    },
+    fill: {
+      type: 'solid',
+      opacity: 0.6
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left'
+    }
+  }
+
+  // const series = [
+  //   {
+  //     name: 'Available',
+  //     data: [
+  //       {
+  //         x: 'Design',
+  //         y: [
+  //           new Date('2019-03-05').getTime(),
+  //           new Date('2019-03-08').getTime()
+  //         ]
+  //       },
+  //       {
+  //         x: 'Design',
+  //         y: [
+  //           new Date('2019-03-01').getTime(),
+  //           new Date('2019-03-03').getTime()
+  //         ]
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     name: 'Busy',
+  //     data: [
+  //       {
+  //         x: 'Design',
+  //         y: [
+  //           new Date('2019-03-02').getTime(),
+  //           new Date('2019-03-05').getTime()
+  //         ]
+  //       },
+  //       {
+  //         x: 'Design',
+  //         y: [
+  //           new Date('2019-03-10').getTime(),
+  //           new Date('2019-03-16').getTime()
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // ]
+
+  useEffect(() => {
+    if (dumyData) {
+      const _series = []
+      dumyData.result.data[0].lines.forEach((line) => {
+        const data = []
+        line.ranges.forEach(time => {
+          if (time.value) {
+            const _time = {
+              x: 'data',
+              y: [
+                new Date(time.from).getTime(), new Date(time.to).getTime()
+              ]
+            }
+            data.push(_time)
+          }
+        })
+        const _line = { name: line.name, data: data }
+        _series.push(_line)
+      })
+      setSeries(_series)
+    }
   }, [dumyData])
 
   return (
@@ -135,7 +183,6 @@ const ReportsDriverScheduleUI = (props) => {
         <DistancePerBrandWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
             <h2>{t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')}</h2>
-            <Download onClick={() => downloadCSV()} />
           </DistanceTitleBlock>
           {reportData?.loading ? (
             <div className='row'>
@@ -145,47 +192,11 @@ const ReportsDriverScheduleUI = (props) => {
             </div>
           ) : (
             <TableWrapper>
-              {reportData?.content?.body?.rows?.length > 0 ? (
-                <DistanceTable ref={tableRef}>
-                  {reportData?.content?.header?.rows.length > 0 && (
-                    <Thead>
-                      {
-                        reportData?.content?.header?.rows.map((tr, i) => (
-                          <tr key={i}>
-                            {tr?.map((th, j) => (
-                              <th key={j} colSpan={th.colspan}>{th.value}</th>
-                            ))}
-                          </tr>
-                        ))
-                      }
-                    </Thead>
-                  )}
-                  {reportData?.content?.body?.rows.map((tbody, i) => (
-                    <Tbody key={i}>
-                      <tr>
-                        {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value}</td>
-                        ))}
-                      </tr>
-                    </Tbody>
-                  ))}
-                  {reportData?.content?.footer?.rows.length > 0 && (
-                    <Tfoot>
-                      {
-                        reportData?.content?.footer?.rows.map((tr, i) => (
-                          <tr key={i}>
-                            {tr?.map((td, j) => (
-                              <td key={j} colSpan={td.colspan}>{td.value}</td>
-                            ))}
-                          </tr>
-                        ))
-                      }
-                    </Tfoot>
-                  )}
-                </DistanceTable>
-              ) : (
-                <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
-              )}
+              <Chart
+                options={options}
+                series={series}
+                type='rangeBar'
+              />
             </TableWrapper>
           )}
         </DistancePerBrandWrapper>

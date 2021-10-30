@@ -1,15 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import React, { useState, useEffect } from 'react'
+import { useLanguage, useConfig } from 'ordering-components-admin'
 import { AdvancedReports as AdvancedReportsController } from './naked'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
-import { Download } from 'react-bootstrap-icons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
+import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { Alert } from '../Confirm'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
+import { GoogleMapsMap } from './GoogleMap'
 import {
   HeatMapContainer,
   Title,
@@ -18,12 +19,7 @@ import {
   CalendarWrapper,
   DistancePerBrandWrapper,
   DistanceTitleBlock,
-  DistanceTable,
-  Thead,
-  Tbody,
-  Tfoot,
-  TableWrapper,
-  EmptyContent
+  WrapperMap
 } from './styles'
 
 const ReportsHeatMapUI = (props) => {
@@ -34,12 +30,28 @@ const ReportsHeatMapUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [configState] = useConfig()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isHeat, setIsHeat] = useState(false)
+  const theme = useTheme()
 
-  const tableRef = useRef(null)
+  // const googleMapsApiKey = configs?.google_maps_api_key?.value
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  }
+
+  const defaultPosition = { lat: 40.77473399999999, lng: -73.9653844 }
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -52,50 +64,6 @@ const ReportsHeatMapUI = (props) => {
     })
   }
 
-  const downloadCSV = () => {
-    if (reportData?.content?.body?.rows?.length === 0) return
-    let csv = ''
-    reportData.content.header.rows.forEach((tr) => {
-      tr.forEach((th) => {
-        csv += `${th.value},`
-        for (let i = 1; i < th.colspan; i++) {
-          csv += ' ,'
-        }
-      })
-      csv += '\n'
-    })
-    csv += '\n'
-    reportData.content.body.rows.forEach((tr) => {
-      tr.forEach((th) => {
-        csv += `${th.value},`
-        for (let i = 1; i < th.colspan; i++) {
-          csv += ' ,'
-        }
-      })
-      csv += '\n'
-    })
-    csv += '\n'
-    reportData.content.footer.rows.forEach((tr) => {
-      tr.forEach((th) => {
-        csv += `${th.value},`
-        for (let i = 1; i < th.colspan; i++) {
-          csv += ' ,'
-        }
-      })
-      csv += '\n'
-    })
-    csv += '\n'
-    var downloadLink = document.createElement('a')
-    var blob = new Blob(['\ufeff', csv])
-    var url = URL.createObjectURL(blob)
-    downloadLink.href = url
-    const fileSuffix = new Date().getTime()
-    downloadLink.download = `heat_map_with_${fileSuffix}.csv`
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
-  }
-
   useEffect(() => {
     if (reportData?.error) {
       setAlertState({
@@ -104,6 +72,10 @@ const ReportsHeatMapUI = (props) => {
       })
     }
   }, [reportData?.error])
+
+  useEffect(() => {
+    setIsHeat(false)
+  }, [reportData?.content?.locations])
 
   return (
     <>
@@ -135,60 +107,31 @@ const ReportsHeatMapUI = (props) => {
           </CalendarWrapper>
         </ButtonActionList>
         <DistancePerBrandWrapper>
-          <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
+          <DistanceTitleBlock active={reportData?.content?.locations?.length > 0}>
             <h2>{t('HEAT_MAP_WITH', 'Heat map with')}</h2>
-            <Download onClick={() => downloadCSV()} />
           </DistanceTitleBlock>
           {reportData?.loading ? (
-            <div className='row'>
-              {[...Array(20).keys()].map(i => (
-                <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
-              ))}
-            </div>
+            <Skeleton height={350} />
           ) : (
-            <TableWrapper>
-              {reportData?.content?.body?.rows?.length > 0 ? (
-                <DistanceTable ref={tableRef}>
-                  {reportData?.content?.header?.rows.length > 0 && (
-                    <Thead>
-                      {
-                        reportData?.content?.header?.rows.map((tr, i) => (
-                          <tr key={i}>
-                            {tr?.map((th, j) => (
-                              <th key={j} colSpan={th.colspan}>{th.value}</th>
-                            ))}
-                          </tr>
-                        ))
-                      }
-                    </Thead>
-                  )}
-                  {reportData?.content?.body?.rows.map((tbody, i) => (
-                    <Tbody key={i}>
-                      <tr>
-                        {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value}</td>
-                        ))}
-                      </tr>
-                    </Tbody>
-                  ))}
-                  {reportData?.content?.footer?.rows.length > 0 && (
-                    <Tfoot>
-                      {
-                        reportData?.content?.footer?.rows.map((tr, i) => (
-                          <tr key={i}>
-                            {tr?.map((td, j) => (
-                              <td key={j} colSpan={td.colspan}>{td.value}</td>
-                            ))}
-                          </tr>
-                        ))
-                      }
-                    </Tfoot>
-                  )}
-                </DistanceTable>
-              ) : (
-                <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
-              )}
-            </TableWrapper>
+            <WrapperMap>
+              <GoogleMapsMap
+                apiKey={configState?.configs?.google_maps_api_key?.value}
+                location={defaultPosition}
+                locations={reportData?.content?.locations}
+                mapControls={googleMapsControls}
+                isHeatMap
+                isHeat={isHeat}
+                markerIcon={theme?.images?.icons?.mapMarker}
+              />
+              <Button
+                borderRadius='7.6px'
+                color='primary'
+                disabled={reportData.loading}
+                onClick={() => setIsHeat(!isHeat)}
+              >
+                {isHeat ? t('GROUPED', 'Grouped') : t('HEAT_MAP', 'Heatmap')}
+              </Button>
+            </WrapperMap>
           )}
         </DistancePerBrandWrapper>
         <Modal
