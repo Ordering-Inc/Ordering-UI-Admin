@@ -143,3 +143,19 @@ export const ViewMethodButton = styled.span`
     color: ${props => props.theme.colors.primary};
   `}
 `
+
+export const BusinessSelector = styled.div`
+  position: relative;
+`
+export const BusinessNameWrapper = styled.div`
+  cursor: pointer;
+  h1 {
+    svg {
+      font-size: 0.7em;
+      transition: 0.2s ease-in-out;
+    }
+    svg.rotate-arrow {
+      transform: rotate(180deg);
+    }
+  }
+`
