@@ -12,7 +12,7 @@ import {
 } from '../../Selects'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className } = props
+  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className, disabled } = props
 
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(
@@ -63,13 +63,15 @@ export const Select = (props) => {
   }
 
   return (
-    <SelectInput type={type} className={className || 'select'}>
+    <SelectInput disabled={disabled} type={type} className={className || 'select'}>
       {!selectedOption && (
         <Selected onClick={handleSelectClick}>
           {placeholder || ''}
-          <Chevron>
-            <FiChevronDown />
-          </Chevron>
+          {!disabled && (
+            <Chevron>
+              <FiChevronDown />
+            </Chevron>
+          )}
         </Selected>
       )}
       {selectedOption && (
@@ -77,9 +79,11 @@ export const Select = (props) => {
           <Header>
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>
-          <Chevron>
-            <FiChevronDown />
-          </Chevron>
+          {!disabled && (
+            <Chevron>
+              <FiChevronDown />
+            </Chevron>
+          )}
         </Selected>
       )}
       {open && options && (

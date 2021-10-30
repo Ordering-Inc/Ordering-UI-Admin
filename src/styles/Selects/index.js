@@ -143,6 +143,10 @@ export const Select = styled.div`
     background-color: ${darken(0.07, '#CCC')};
   `}
 
+  ${props => props.disabled && css`
+    pointer-events: none;
+  `}
+
   ${({ type }) => type === 'primary' && css`
     background: ${props => props.theme.colors.btnPrimary};
     color: ${props => props.theme.colors.btnPrimaryContrast};

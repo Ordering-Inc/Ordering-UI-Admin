@@ -19,7 +19,7 @@ import {
 } from './styles'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, noSelected, minWidth, isSecondIcon } = props
+  const { placeholder, options, defaultValue, onChange, notAsync, noSelected, minWidth, isSecondIcon, disabled, iconColor } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
   )
@@ -100,7 +100,7 @@ export const Select = (props) => {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div style={{ overflow: 'hidden', pointerEvents: disabled ? 'none' : 'auto' }}>
       <HeaderItem
         className='select'
         ref={referenceElement}
@@ -109,9 +109,11 @@ export const Select = (props) => {
         {!selectedOption && (
           <Selected>
             {placeholder || ''}
-            <Chevron>
-              {isSecondIcon ? <FiChevronDown /> : <CaretDownFill />}
-            </Chevron>
+            {!disabled && (
+              <Chevron>
+                {isSecondIcon ? <FiChevronDown color={iconColor} /> : <CaretDownFill color={iconColor} />}
+              </Chevron>
+            )}
           </Selected>
         )}
         {selectedOption && (
@@ -119,9 +121,11 @@ export const Select = (props) => {
             <Header>
               {selectedOption.showOnSelected || selectedOption.content}
             </Header>
-            <Chevron>
-              {isSecondIcon ? <FiChevronDown /> : <CaretDownFill />}
-            </Chevron>
+            {!disabled && (
+              <Chevron>
+                {isSecondIcon ? <FiChevronDown color={iconColor} /> : <CaretDownFill color={iconColor} />}
+              </Chevron>
+            )}
           </Selected>
         )}
       </HeaderItem>

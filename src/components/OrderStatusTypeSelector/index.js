@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select'
 import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import { useTheme } from 'styled-components'
 import { MultiSelect } from '../../styles/MultiSelect'
 import { Option, PlaceholderTitle } from './styles'
+import { ConfigFileContext } from '../../contexts/ConfigFileContext'
 
 export const OrderStatusTypeSelector = (props) => {
   const {
@@ -26,11 +27,10 @@ export const OrderStatusTypeSelector = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [configFile] = useContext(ConfigFileContext)
   const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
-
   const placeholder = <PlaceholderTitle>{t('SELECT_STATUS', 'Select Status')}</PlaceholderTitle>
-
   const orderStatuses = [
     {
       value: 'default',
@@ -383,6 +383,7 @@ export const OrderStatusTypeSelector = (props) => {
             options={filteredOrderStatuses}
             onChange={(orderStatus) => changeOrderStatus(orderStatus)}
             className='orderStatus'
+            disabled={configFile.onlyViewMode}
           />
         ) : (
           <Select
@@ -393,6 +394,7 @@ export const OrderStatusTypeSelector = (props) => {
             options={filteredOrderStatuses}
             onChange={(orderStatus) => changeOrderStatus(orderStatus)}
             className='orderStatus'
+            disabled={configFile.onlyViewMode}
           />
         )}
       </>

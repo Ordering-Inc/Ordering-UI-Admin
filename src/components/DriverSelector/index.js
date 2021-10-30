@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { toast } from 'react-toastify'
@@ -18,6 +18,7 @@ import {
   DriverText,
   PlaceholderTitle
 } from './styles'
+import { ConfigFileContext } from '../../contexts/ConfigFileContext'
 toast.configure()
 
 const DriverSelectorUI = (props) => {
@@ -39,6 +40,7 @@ const DriverSelectorUI = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [configFile] = useContext(ConfigFileContext)
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
@@ -222,6 +224,7 @@ const DriverSelectorUI = (props) => {
                 optionInnerMaxHeight='200px'
                 optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
+                disabled={configFile.onlyViewMode}
               />
             ) : (
               <Select
@@ -231,6 +234,7 @@ const DriverSelectorUI = (props) => {
                 optionInnerMaxHeight='200px'
                 optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
+                disabled={configFile.onlyViewMode}
               />
             )}
           </>
@@ -242,6 +246,7 @@ const DriverSelectorUI = (props) => {
               optionInnerMargin='10px'
               optionInnerMaxHeight='200px'
               optionBottomBorder
+              onlyViewMode={configFile.onlyViewMode}
             />
           </>
         )}
