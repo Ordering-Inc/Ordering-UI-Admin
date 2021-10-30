@@ -380,34 +380,35 @@ export const SidebarMenu = (props) => {
                       </MenuContent>
                     </Accordion.Collapse>
                   </MenuContainer>
-
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='7'
-                      active={
-                        location.pathname === '/delivery/drivers-list' ||
-                        location.pathname === '/delivery/drivers-managers' ||
-                        location.pathname === '/delivery/drivers-companies' ||
-                        location.pathname === '/delivery/drivers-groups'
-                      }
-                    >
-                      <Truck />
-                      <span>{t('DELIVERY', 'Delivery')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='7'>
-                      <MenuContent>
-                        {deliverySubmenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
+                  {!(sessionState?.user?.level === 2) && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='7'
+                        active={
+                          location.pathname === '/delivery/drivers-list' ||
+                          location.pathname === '/delivery/drivers-managers' ||
+                          location.pathname === '/delivery/drivers-companies' ||
+                          location.pathname === '/delivery/drivers-groups'
+                        }
+                      >
+                        <Truck />
+                        <span>{t('DELIVERY', 'Delivery')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='7'>
+                        <MenuContent>
+                          {deliverySubmenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
                 </Accordion>
               </div>
               <div className='d-flex flex-column mt-4'>
@@ -457,15 +458,16 @@ export const SidebarMenu = (props) => {
                   <WindowDock />
                   {!isCollapse && <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>}
                 </Button> */}
-
-                <Button
-                  className='d-flex align-items-center'
-                  variant={location.pathname === '/support' && 'primary'}
-                  onClick={() => handleGoToPage({ page: 'support' })}
-                >
-                  <HeadsetIcon />
-                  <span>{t('SUPPORT', 'Support')}</span>
-                </Button>
+                {!(sessionState?.user?.level === 2) && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={location.pathname === '/support' && 'primary'}
+                    onClick={() => handleGoToPage({ page: 'support' })}
+                  >
+                    <HeadsetIcon />
+                    <span>{t('SUPPORT', 'Support')}</span>
+                  </Button>
+                )}
               </div>
             </SidebarContent>
             <UserInfo
