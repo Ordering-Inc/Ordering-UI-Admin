@@ -18,7 +18,8 @@ export const Pagination = (props) => {
     totalPages,
     handleChangePage,
     defaultPageSize,
-    handleChangePageSize
+    handleChangePageSize,
+    isHidePagecontrol
   } = props
 
   const [, t] = useLanguage()
@@ -121,19 +122,21 @@ export const Pagination = (props) => {
           <ChevronRight />
         </PageButton>
       </PaginationButtonContainer>
-      <PageSizeContainer>
-        <PageSizeTitle>
-          {t('ITEMS_PER_PAGE', 'Items per page')}
-        </PageSizeTitle>
-        <Select
-          isSecondIcon
-          notAsync
-          minWidth='70px'
-          defaultValue={defaultPageSize || 10}
-          options={pageSizeOptions}
-          onChange={size => handleChangePageSize(size)}
-        />
-      </PageSizeContainer>
+      {!isHidePagecontrol && (
+        <PageSizeContainer>
+          <PageSizeTitle>
+            {t('ITEMS_PER_PAGE', 'Items per page')}
+          </PageSizeTitle>
+          <Select
+            isSecondIcon
+            notAsync
+            minWidth='70px'
+            defaultValue={defaultPageSize || 10}
+            options={pageSizeOptions}
+            onChange={size => handleChangePageSize(size)}
+          />
+        </PageSizeContainer>
+      )}
     </PaginationContainer>
   )
 }
