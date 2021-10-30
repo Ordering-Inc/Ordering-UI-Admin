@@ -1,15 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { AdvancedReports as AdvancedReportsController } from './naked'
+import React, { useState, useEffect } from 'react'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
-import { Download } from 'react-bootstrap-icons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Modal } from '../Modal'
-import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
-import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { Alert } from '../Confirm'
 import Chart from 'react-apexcharts'
+import moment from 'moment'
 import {
   DriverScheduleContainer,
   Title,
@@ -18,15 +16,9 @@ import {
   CalendarWrapper,
   DistancePerBrandWrapper,
   DistanceTitleBlock,
-  DistanceTable,
-  Thead,
-  Tbody,
-  Tfoot,
   TableWrapper,
   EmptyContent
 } from './styles'
-import dumyData from './dumy.json'
-import { forEach } from 'lodash'
 
 const ReportsDriverScheduleUI = (props) => {
   const {
@@ -36,10 +28,9 @@ const ReportsDriverScheduleUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [isBusinessFilter, setIsBusinessFilter] = useState(false)
-  const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [series, setSeries] = useState([])
+  const [isDriverFilter, setIsDriverFilter] = useState(false)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -61,23 +52,26 @@ const ReportsDriverScheduleUI = (props) => {
     }
   }, [reportData?.error])
 
-  useEffect(() => {
-    console.log(dumyData, 'this is dumy data')
-  }, [dumyData])
-
   const options = {
     chart: {
-      height: 450,
-      type: 'rangeBar'
+      height: '100%',
+      type: 'rangeBar',
+      redrawOnParentResize: true
     },
     plotOptions: {
       bar: {
         horizontal: true,
-        barHeight: '80%'
+        barHeight: '20%'
       }
     },
     xaxis: {
-      type: 'datetime'
+      min: new Date(reportData.content?.from ?? '2019-03-05 00:00:00').getTime(),
+      type: 'datetime',
+      labels: {
+        formatter: function (value, timestamp, opts) {
+          return moment(value).format('MM-DD HH:mm')
+        }
+      }
     },
     stroke: {
       width: 1
@@ -88,60 +82,43 @@ const ReportsDriverScheduleUI = (props) => {
     },
     legend: {
       position: 'top',
-      horizontalAlign: 'left'
+      horizontalAlign: 'center'
+    },
+    tooltip: {
+      custom: function (opts) {
+        const from = moment(opts.y1).format('MM-DD HH:mm')
+        const to = moment(opts.y2).format('MM-DD HH:mm')
+        const values = opts.ctx.rangeBar.getTooltipValues(opts)
+
+        return (
+          '<div class="apexcharts-tooltip-rangebar">' +
+          '<div> <span class="series-name" style="color: ' +
+          values.color +
+          '">' +
+          (values.seriesName ? values.seriesName : '') +
+          '</span></div>' +
+          '<div> <span class="category">' +
+          values.ylabel +
+          ' </span> <span class="value start-value">' +
+          from +
+          '</span> <span class="separator">-</span> <span class="value end-value">' +
+          to +
+          '</span></div>' +
+          '</div>'
+        )
+      }
     }
   }
 
-  // const series = [
-  //   {
-  //     name: 'Available',
-  //     data: [
-  //       {
-  //         x: 'Design',
-  //         y: [
-  //           new Date('2019-03-05').getTime(),
-  //           new Date('2019-03-08').getTime()
-  //         ]
-  //       },
-  //       {
-  //         x: 'Design',
-  //         y: [
-  //           new Date('2019-03-01').getTime(),
-  //           new Date('2019-03-03').getTime()
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     name: 'Busy',
-  //     data: [
-  //       {
-  //         x: 'Design',
-  //         y: [
-  //           new Date('2019-03-02').getTime(),
-  //           new Date('2019-03-05').getTime()
-  //         ]
-  //       },
-  //       {
-  //         x: 'Design',
-  //         y: [
-  //           new Date('2019-03-10').getTime(),
-  //           new Date('2019-03-16').getTime()
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // ]
-
   useEffect(() => {
-    if (dumyData) {
+    if (reportData?.content?.data?.length > 0) {
       const _series = []
-      dumyData.result.data[0].lines.forEach((line) => {
+      reportData.content.data[0].lines.forEach((line) => {
         const data = []
         line.ranges.forEach(time => {
           if (time.value) {
             const _time = {
-              x: 'data',
+              x: line.name,
               y: [
                 new Date(time.from).getTime(), new Date(time.to).getTime()
               ]
@@ -154,7 +131,7 @@ const ReportsDriverScheduleUI = (props) => {
       })
       setSeries(_series)
     }
-  }, [dumyData])
+  }, [reportData?.content])
 
   return (
     <>
@@ -163,14 +140,9 @@ const ReportsDriverScheduleUI = (props) => {
         <ButtonActionList>
           <BrandBusinessWrapper>
             <Button
-              onClick={() => setIsBrandFilter(true)}
+              onClick={() => setIsDriverFilter(true)}
             >
-              {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
-            </Button>
-            <Button
-              onClick={() => setIsBusinessFilter(true)}
-            >
-              {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
+              {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -186,17 +158,23 @@ const ReportsDriverScheduleUI = (props) => {
           </DistanceTitleBlock>
           {reportData?.loading ? (
             <div className='row'>
-              {[...Array(20).keys()].map(i => (
-                <div className='col-md-3 col-sm-3 col-3' key={i}><Skeleton /></div>
+              {[...Array(5).keys()].map(i => (
+                <div className='col-md-12' key={i}><Skeleton height={100} /></div>
               ))}
             </div>
           ) : (
             <TableWrapper>
-              <Chart
-                options={options}
-                series={series}
-                type='rangeBar'
-              />
+              {reportData?.content?.data?.length > 0 ? (
+                <Chart
+                  options={options}
+                  series={series}
+                  type='rangeBar'
+                  height='450'
+                />
+              ) : (
+                <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+              )}
+
             </TableWrapper>
           )}
         </DistancePerBrandWrapper>
@@ -204,24 +182,12 @@ const ReportsDriverScheduleUI = (props) => {
           width='50%'
           height='80vh'
           padding='30px'
-          title={t('BUSINESSES', 'Businesses')}
-          open={isBusinessFilter}
-          onClose={() => setIsBusinessFilter(false)}
+          title={t('DRIVER', 'Driver')}
+          open={isDriverFilter}
+          onClose={() => setIsDriverFilter(false)}
         >
-          <AnalyticsBusinessFilter
-            {...props} onClose={() => setIsBusinessFilter(false)}
-          />
-        </Modal>
-        <Modal
-          width='50%'
-          height='80vh'
-          padding='30px'
-          title={t('BRAND', 'Brand')}
-          open={isBrandFilter}
-          onClose={() => setIsBrandFilter(false)}
-        >
-          <ReportsBrandFilter
-            {...props} onClose={() => setIsBrandFilter(false)}
+          <ReportsDriverFilter
+            {...props} onClose={() => setIsDriverFilter(false)}
           />
         </Modal>
       </DriverScheduleContainer>

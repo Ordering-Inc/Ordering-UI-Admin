@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useConfig } from 'ordering-components-admin'
-import { AdvancedReports as AdvancedReportsController } from './naked'
+import { useLanguage, useConfig, GoogleMapsMap, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
-import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { Alert } from '../Confirm'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
-import { GoogleMapsMap } from './GoogleMap'
 import {
   HeatMapContainer,
   Title,
@@ -32,7 +29,6 @@ const ReportsHeatMapUI = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
-  const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isHeat, setIsHeat] = useState(false)
@@ -83,11 +79,6 @@ const ReportsHeatMapUI = (props) => {
         <Title>{t('HEAT_MAP_WITH', 'Heat map with')}</Title>
         <ButtonActionList>
           <BrandBusinessWrapper>
-            <Button
-              onClick={() => setIsBrandFilter(true)}
-            >
-              {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
-            </Button>
             <Button
               onClick={() => setIsBusinessFilter(true)}
             >
@@ -144,18 +135,6 @@ const ReportsHeatMapUI = (props) => {
         >
           <AnalyticsBusinessFilter
             {...props} onClose={() => setIsBusinessFilter(false)}
-          />
-        </Modal>
-        <Modal
-          width='50%'
-          height='80vh'
-          padding='30px'
-          title={t('BRAND', 'Brand')}
-          open={isBrandFilter}
-          onClose={() => setIsBrandFilter(false)}
-        >
-          <ReportsBrandFilter
-            {...props} onClose={() => setIsBrandFilter(false)}
           />
         </Modal>
         <Modal
