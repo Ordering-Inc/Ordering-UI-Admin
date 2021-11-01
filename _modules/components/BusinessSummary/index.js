@@ -109,6 +109,9 @@ var BusinessSummary = function BusinessSummary(props) {
     key: 'ordering_channels',
     value: t('ORDERING_CHANNELS', 'Ordering channels')
   }, {
+    key: 'layout',
+    value: t('LAYOUT', 'Layout')
+  }, {
     key: 'webhooks',
     value: t('WEBHOOKS', 'Webhooks')
   }, {

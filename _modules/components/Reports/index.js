@@ -37,6 +37,14 @@ var _ReportsDriverOrder = require("../ReportsDriverOrder");
 
 var _ReportsDriverOrderTime = require("../ReportsDriverOrderTime");
 
+var _ReportsDriverSchedule = require("../ReportsDriverSchedule");
+
+var _ReportsOrderStatus = require("../ReportsOrderStatus");
+
+var _ReportsHeatMap = require("../ReportsHeatMap");
+
+var _ReportsDriverDistance = require("../ReportsDriverDistance");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -80,17 +88,17 @@ var Reports = function Reports(props) {
   var advancedReportsList = [{
     id: 1,
     name: t('DISTANCE', 'Distance'),
-    description: t('DISTANCE_DESCRIPTION', 'Distance'),
+    description: t('DISTANCE_DESC', 'Distance'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Rulers, null)
   }, {
     id: 2,
     name: t('DISTANCE_STORE_CUSTOMER', 'Distance in KM from the store to customer'),
-    description: t('DISTANCE_STORE_CUSTOMER_DESCRIPTION', 'Distance in KM from the store to customer'),
+    description: t('DISTANCE_STORE_CUSTOMER_DESC', 'Distance in KM from the store to customer'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Map, null)
   }, {
     id: 3,
     name: t('DISTANCE_STORE_CUSTOMER_RANGE_KM', 'Distance in KM from the store to customer (Range KM)'),
-    description: t('DISTANCE_STORE_CUSTOMER_RANGE_KM_DESCRIPTION', 'Distance in KM from the store to customer (Range KM)'),
+    description: t('DISTANCE_STORE_CUSTOMER_RANGE_KM_DESC', 'Distance in KM from the store to customer (Range KM)'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.MapFill, null)
   }, {
     id: 4,
@@ -100,13 +108,33 @@ var Reports = function Reports(props) {
   }, {
     id: 5,
     name: t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency'),
-    description: t('DETAIL_COMPLETED_ORDERS_DESCRIPTION', 'Detail of the completed orders of each delivery agency'),
+    description: t('DETAIL_COMPLETED_ORDERS_DESC', 'Detail of the completed orders of each delivery agency'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.FileRuled, null)
   }, {
     id: 6,
     name: t('NUMBER_ORDERS_SPECIFIC_RANGE', 'Number of orders within a specific range'),
-    description: t('NUMBER_ORDERS_SPECIFIC_RANGE_DESCRIPTION', 'Number of orders within a specific range'),
+    description: t('NUMBER_ORDERS_SPECIFIC_RANGE_DESC', 'Number of orders within a specific range'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.FileEarmarkRuled, null)
+  }, {
+    id: 7,
+    name: t('DRIVER_SCHEDULE', 'Driver schedule'),
+    description: t('DRIVER_SCHEDULE_DESC', 'Driver schedule description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CalendarCheck, null)
+  }, {
+    id: 8,
+    name: t('ORDER_STATUS', 'Order status'),
+    description: t('ORDER_STATUS_DESC', 'Order status description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart4, null)
+  }, {
+    id: 9,
+    name: t('HEAT_MAP_WITH', 'Heat map with'),
+    description: t('HEAT_MAP_WITH_DESC', 'Heat map with description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null)
+  }, {
+    id: 10,
+    name: t('DRIVER_DISTANCE', 'Driver distance'),
+    description: t('DRIVER_DISTANCE_DESC', 'Driver distance description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Vr, null)
   }];
 
   var handleCloseSidebar = function handleCloseSidebar() {
@@ -147,7 +175,7 @@ var Reports = function Reports(props) {
     onClose: function onClose() {
       return handleCloseSidebar();
     }
-  }, selectedReport === 1 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessDistance.ReportsBusinessDistance, null), selectedReport === 2 && /*#__PURE__*/_react.default.createElement(_ReportsOrderDistance.ReportsOrderDistance, null), selectedReport === 3 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessSpend.ReportsBusinessSpend, null), selectedReport === 4 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrderTime.ReportsDriverOrderTime, null), selectedReport === 5 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSpend.ReportsDriverSpend, null), selectedReport === 6 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrder.ReportsDriverOrder, null)));
+  }, selectedReport === 1 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessDistance.ReportsBusinessDistance, null), selectedReport === 2 && /*#__PURE__*/_react.default.createElement(_ReportsOrderDistance.ReportsOrderDistance, null), selectedReport === 3 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessSpend.ReportsBusinessSpend, null), selectedReport === 4 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrderTime.ReportsDriverOrderTime, null), selectedReport === 5 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSpend.ReportsDriverSpend, null), selectedReport === 6 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrder.ReportsDriverOrder, null), selectedReport === 7 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSchedule.ReportsDriverSchedule, null), selectedReport === 8 && /*#__PURE__*/_react.default.createElement(_ReportsOrderStatus.ReportsOrderStatus, null), selectedReport === 9 && /*#__PURE__*/_react.default.createElement(_ReportsHeatMap.ReportsHeatMap, null), selectedReport === 10 && /*#__PURE__*/_react.default.createElement(_ReportsDriverDistance.ReportsDriverDistance, null)));
 };
 
 exports.Reports = Reports;
