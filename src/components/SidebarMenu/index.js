@@ -275,13 +275,15 @@ export const SidebarMenu = (props) => {
                     <Accordion.Collapse eventKey='1'>
                       <MenuContent>
                         {ordersSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
+                          !(sessionState?.user?.level === 5 && item.pageName === 'drivers') && (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          )
                         ))}
                       </MenuContent>
                     </Accordion.Collapse>
