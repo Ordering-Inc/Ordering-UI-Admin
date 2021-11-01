@@ -9,7 +9,11 @@ import {
   MapFill,
   ClockHistory,
   FileRuled,
-  FileEarmarkRuled
+  FileEarmarkRuled,
+  CalendarCheck,
+  Cart4,
+  GeoAltFill,
+  Vr
 } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
@@ -25,6 +29,10 @@ import { ReportsBusinessSpend } from '../ReportsBusinessSpend'
 import { ReportsDriverSpend } from '../ReportsDriverSpend'
 import { ReportsDriverOrder } from '../ReportsDriverOrder'
 import { ReportsDriverOrderTime } from '../ReportsDriverOrderTime'
+import { ReportsDriverSchedule } from '../ReportsDriverSchedule'
+import { ReportsOrderStatus } from '../ReportsOrderStatus'
+import { ReportsHeatMap } from '../ReportsHeatMap'
+import { ReportsDriverDistance } from '../ReportsDriverDistance'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -35,12 +43,16 @@ export const Reports = (props) => {
   const sidebarWidth = 240
 
   const advancedReportsList = [
-    { id: 1, name: t('DISTANCE', 'Distance'), description: t('DISTANCE_DESCRIPTION', 'Distance'), icon: <Rulers /> },
-    { id: 2, name: t('DISTANCE_STORE_CUSTOMER', 'Distance in KM from the store to customer'), description: t('DISTANCE_STORE_CUSTOMER_DESCRIPTION', 'Distance in KM from the store to customer'), icon: <Map /> },
-    { id: 3, name: t('DISTANCE_STORE_CUSTOMER_RANGE_KM', 'Distance in KM from the store to customer (Range KM)'), description: t('DISTANCE_STORE_CUSTOMER_RANGE_KM_DESCRIPTION', 'Distance in KM from the store to customer (Range KM)'), icon: <MapFill /> },
+    { id: 1, name: t('DISTANCE', 'Distance'), description: t('DISTANCE_DESC', 'Distance'), icon: <Rulers /> },
+    { id: 2, name: t('DISTANCE_STORE_CUSTOMER', 'Distance in KM from the store to customer'), description: t('DISTANCE_STORE_CUSTOMER_DESC', 'Distance in KM from the store to customer'), icon: <Map /> },
+    { id: 3, name: t('DISTANCE_STORE_CUSTOMER_RANGE_KM', 'Distance in KM from the store to customer (Range KM)'), description: t('DISTANCE_STORE_CUSTOMER_RANGE_KM_DESC', 'Distance in KM from the store to customer (Range KM)'), icon: <MapFill /> },
     { id: 4, name: t('SERVICE_TIMES', 'Service Times'), description: t('SERVICE_TIMES_DESCRIPTION', 'Service Times'), icon: <ClockHistory /> },
-    { id: 5, name: t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency'), description: t('DETAIL_COMPLETED_ORDERS_DESCRIPTION', 'Detail of the completed orders of each delivery agency'), icon: <FileRuled /> },
-    { id: 6, name: t('NUMBER_ORDERS_SPECIFIC_RANGE', 'Number of orders within a specific range'), description: t('NUMBER_ORDERS_SPECIFIC_RANGE_DESCRIPTION', 'Number of orders within a specific range'), icon: <FileEarmarkRuled /> }
+    { id: 5, name: t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency'), description: t('DETAIL_COMPLETED_ORDERS_DESC', 'Detail of the completed orders of each delivery agency'), icon: <FileRuled /> },
+    { id: 6, name: t('NUMBER_ORDERS_SPECIFIC_RANGE', 'Number of orders within a specific range'), description: t('NUMBER_ORDERS_SPECIFIC_RANGE_DESC', 'Number of orders within a specific range'), icon: <FileEarmarkRuled /> },
+    { id: 7, name: t('DRIVER_SCHEDULE', 'Driver schedule'), description: t('DRIVER_SCHEDULE_DESC', 'Driver schedule description'), icon: <CalendarCheck /> },
+    { id: 8, name: t('ORDER_STATUS', 'Order status'), description: t('ORDER_STATUS_DESC', 'Order status description'), icon: <Cart4 /> },
+    { id: 9, name: t('HEAT_MAP_WITH', 'Heat map with'), description: t('HEAT_MAP_WITH_DESC', 'Heat map with description'), icon: <GeoAltFill /> },
+    { id: 10, name: t('DRIVER_DISTANCE', 'Driver distance'), description: t('DRIVER_DISTANCE_DESC', 'Driver distance description'), icon: <Vr /> }
   ]
 
   const handleCloseSidebar = () => {
@@ -96,6 +108,10 @@ export const Reports = (props) => {
           {selectedReport === 4 && <ReportsDriverOrderTime />}
           {selectedReport === 5 && <ReportsDriverSpend />}
           {selectedReport === 6 && <ReportsDriverOrder />}
+          {selectedReport === 7 && <ReportsDriverSchedule />}
+          {selectedReport === 8 && <ReportsOrderStatus />}
+          {selectedReport === 9 && <ReportsHeatMap />}
+          {selectedReport === 10 && <ReportsDriverDistance />}
         </SideBar>
       )}
     </ReportsContainer>
