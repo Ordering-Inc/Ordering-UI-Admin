@@ -38,7 +38,8 @@ var Pagination = function Pagination(props) {
       totalPages = props.totalPages,
       handleChangePage = props.handleChangePage,
       defaultPageSize = props.defaultPageSize,
-      handleChangePageSize = props.handleChangePageSize;
+      handleChangePageSize = props.handleChangePageSize,
+      isHidePagecontrol = props.isHidePagecontrol;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -135,7 +136,7 @@ var Pagination = function Pagination(props) {
     onClick: function onClick() {
       return activePage !== totalPages && changePage(activePage + 1);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))), /*#__PURE__*/_react.default.createElement(_styles.PageSizeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PageSizeTitle, null, t('ITEMS_PER_PAGE', 'Items per page')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))), !isHidePagecontrol && /*#__PURE__*/_react.default.createElement(_styles.PageSizeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PageSizeTitle, null, t('ITEMS_PER_PAGE', 'Items per page')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     isSecondIcon: true,
     notAsync: true,
     minWidth: "70px",

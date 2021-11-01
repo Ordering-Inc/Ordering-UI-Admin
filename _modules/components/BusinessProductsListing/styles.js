@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ViewMethodButton = exports.ActionIconList = exports.ProductHeader = exports.ProductListContainer = exports.CategoryListContainer = exports.CategoryProductsContent = exports.ActionsGroup = exports.HeaderTitleContainer = exports.HeaderContainer = exports.CategoryProductsContainer = void 0;
+exports.BusinessNameWrapper = exports.BusinessSelector = exports.ViewMethodButton = exports.ActionIconList = exports.ProductHeader = exports.ProductListContainer = exports.CategoryListContainer = exports.CategoryProductsContent = exports.ActionsGroup = exports.HeaderTitleContainer = exports.HeaderContainer = exports.CategoryProductsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -79,3 +79,11 @@ var ViewMethodButton = _styledComponents.default.span(_templateObject16 || (_tem
 });
 
 exports.ViewMethodButton = ViewMethodButton;
+
+var BusinessSelector = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: relative;\n"])));
+
+exports.BusinessSelector = BusinessSelector;
+
+var BusinessNameWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  h1 {\n    svg {\n      font-size: 0.7em;\n      transition: 0.2s ease-in-out;\n    }\n    svg.rotate-arrow {\n      transform: rotate(180deg);\n    }\n  }\n"])));
+
+exports.BusinessNameWrapper = BusinessNameWrapper;

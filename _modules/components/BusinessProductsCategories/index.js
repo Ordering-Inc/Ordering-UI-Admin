@@ -44,6 +44,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategories = function BusinessProductsCategories(props) {
+  var _businessState$busine;
+
   var businessState = props.businessState,
       categorySelected = props.categorySelected,
       onClickCategory = props.onClickCategory;
@@ -62,7 +64,7 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       key: i,
       isSkeleton: true
     });
-  }), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
+  }), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessCategory.SingleBusinessCategory, _extends({}, props, {
