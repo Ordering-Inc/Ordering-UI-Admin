@@ -112,10 +112,13 @@ var LoginFormUI = function LoginFormUI(props) {
       setConfigFile = _useContext2[1];
 
   var onSubmit = function onSubmit() {
-    var _configFile = configFile;
-    _configFile.project = projectName;
-    setConfigFile(_objectSpread({}, _configFile));
-    localStorage.setItem('project', projectName);
+    if (!configFile.onlyViewMode) {
+      var _configFile = configFile;
+      _configFile.project = projectName;
+      setConfigFile(_objectSpread({}, _configFile));
+      localStorage.setItem('project', projectName);
+    }
+
     setSubmitted(true);
   };
 
