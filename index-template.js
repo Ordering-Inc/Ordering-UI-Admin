@@ -217,7 +217,7 @@ const RouteApp = () => {
     socket: {
       url: 'https://socket.ordering.co'
     },
-    onlyViewMode: false
+    onlyViewMode: true
   })
 
   return (
