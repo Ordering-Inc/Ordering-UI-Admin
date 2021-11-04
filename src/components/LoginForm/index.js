@@ -140,24 +140,26 @@ const LoginFormUI = (props) => {
             isPopup={isPopup}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <InputWithIcon>
-              <Input
-                type='text'
-                name='project'
-                aria-label='project'
-                placeholder={t('PROJECT', 'Project')}
-                ref={register({
-                  required: t(
-                    'VALIDATION_ERROR_REQUIRED',
-                    'Project is required'
-                  ).replace('_attribute_', t('PROJECT', 'Project'))
-                })}
-                onChange={(e) => hanldeChangeProject(e)}
-                autoComplete='off'
-                autoCapitalize='off'
-              />
-              <MdExitToApp />
-            </InputWithIcon>
+            {!configFile.onlyViewMode && (
+              <InputWithIcon>
+                <Input
+                  type='text'
+                  name='project'
+                  aria-label='project'
+                  placeholder={t('PROJECT', 'Project')}
+                  ref={register({
+                    required: t(
+                      'VALIDATION_ERROR_REQUIRED',
+                      'Project is required'
+                    ).replace('_attribute_', t('PROJECT', 'Project'))
+                  })}
+                  onChange={(e) => hanldeChangeProject(e)}
+                  autoComplete='off'
+                  autoCapitalize='off'
+                />
+                <MdExitToApp />
+              </InputWithIcon>
+            )}
 
             {useLoginByEmail && loginTab === 'email' && (
               <InputWithIcon>
