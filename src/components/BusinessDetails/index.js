@@ -19,6 +19,7 @@ import { Personalization } from '../Personalization'
 import { BusinessMoreDetail } from '../BusinessMoreDetail'
 import { BusinessNotifications } from '../BusinessNotifications'
 import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
+import { BusinessFrontLayout } from '../BusinessFrontLayout'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -201,6 +202,15 @@ export const BusinessDetailsUI = (props) => {
           )}
           {selectedItem === 'ordering_channels' && (
             <BusinessOrderingChannels
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              formState={formState}
+              setFormState={setFormState}
+            />
+          )}
+          {selectedItem === 'layout' && (
+            <BusinessFrontLayout
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
               handleUpdateBusinessClick={handleUpdateBusinessClick}
