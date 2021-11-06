@@ -11,7 +11,6 @@ import {
   BarChartLine as BarChartLineIcon,
   Gear as GearIcon,
   Headset as HeadsetIcon,
-  Globe2,
   Truck
   // WindowDock
 } from 'react-bootstrap-icons'
@@ -424,7 +423,6 @@ export const SidebarMenu = (props) => {
               </div>
               <div className='d-flex flex-column mt-4'>
                 <LanguageSelectorContainer>
-                  <Globe2 />
                   <LanguageSelector />
                 </LanguageSelectorContainer>
                 {sessionState?.user?.level === 0 && (
