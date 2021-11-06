@@ -16,7 +16,7 @@ const ReportsDriverGroupFilterUI = (props) => {
   const {
     driverGroupList,
     driverGroupIds,
-    handleChangeBrandId,
+    handleChangeDriverGroupId,
     handleClickFilterButton,
     isAllCheck,
     handleChangeAllCheck
@@ -25,7 +25,7 @@ const ReportsDriverGroupFilterUI = (props) => {
   const [, t] = useLanguage()
 
   const isCheckEnableSate = (id) => {
-    const found = driverGroupIds?.find(brandId => brandId === id)
+    const found = driverGroupIds?.find(groupId => groupId === id)
     let valid = false
     if (found) {
       valid = true
@@ -57,17 +57,17 @@ const ReportsDriverGroupFilterUI = (props) => {
               )}
               <BusinessName>{t('ALL', 'All')}</BusinessName>
             </DriverGroupOption>
-            {driverGroupList?.driverGroups.map((brand, i) => (
+            {driverGroupList?.driverGroups.map((group, i) => (
               <DriverGroupOption
                 key={i}
-                onClick={() => handleChangeBrandId(brand?.id)}
+                onClick={() => handleChangeDriverGroupId(group?.id)}
               >
-                {isCheckEnableSate(brand.id) ? (
+                {isCheckEnableSate(group.id) ? (
                   <RiCheckboxFill className='fill' />
                 ) : (
                   <RiCheckboxBlankLine />
                 )}
-                <BusinessName>{brand?.name}</BusinessName>
+                <BusinessName>{group?.name}</BusinessName>
               </DriverGroupOption>
             ))}
           </div>

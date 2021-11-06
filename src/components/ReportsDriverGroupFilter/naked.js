@@ -14,30 +14,26 @@ export const ReportsDriverGroupFilter = (props) => {
   } = props
 
   const [ordering] = useApi()
-
-  /**
-   * This state save the brand type info from API
-   */
   const [driverGroupList, setDriverGroupList] = useState({ loading: true, error: null, driverGroups: [], pagination: null })
   const [driverGroupIds, setDriverGroupIds] = useState(null)
   const [isAllCheck, setIsAllCheck] = useState(false)
   const [{ token, loading }] = useSession()
 
   /**
-   * Method to change brand id
+   * Method to change driver group id
    * @param {number} id
    */
-  const handleChangeBrandId = (id) => {
-    const found = driverGroupIds?.find(brandId => brandId === id)
+  const handleChangeDriverGroupId = (id) => {
+    const found = driverGroupIds?.find(groupId => groupId === id)
     if (found) {
-      const _brandIds = driverGroupIds?.filter(brandId => brandId !== id)
-      setDriverGroupIds(_brandIds)
+      const _groupIds = driverGroupIds?.filter(groupId => groupId !== id)
+      setDriverGroupIds(_groupIds)
       setIsAllCheck(false)
     } else {
-      const _brandIds = driverGroupIds ? [...driverGroupIds] : []
-      _brandIds.push(id)
-      if (_brandIds.length === driverGroupList?.driverGroups.length) setIsAllCheck(true)
-      setDriverGroupIds(_brandIds)
+      const _groupIds = driverGroupIds ? [...driverGroupIds] : []
+      _groupIds.push(id)
+      if (_groupIds.length === driverGroupList?.driverGroups.length) setIsAllCheck(true)
+      setDriverGroupIds(_groupIds)
     }
   }
 
@@ -45,8 +41,8 @@ export const ReportsDriverGroupFilter = (props) => {
    * Method to change filter list
    */
   const handleClickFilterButton = () => {
-    const _brandIds = driverGroupIds ? [...driverGroupIds] : null
-    handleChangeFilterList({ ...filterList, driver_groups_ids: _brandIds })
+    const _groupIds = driverGroupIds ? [...driverGroupIds] : null
+    handleChangeFilterList({ ...filterList, driver_groups_ids: _groupIds })
     onClose && onClose()
   }
 
@@ -57,17 +53,17 @@ export const ReportsDriverGroupFilter = (props) => {
     if (isAllCheck) {
       setDriverGroupIds(null)
     } else {
-      const _brandIds = []
-      for (const brand of driverGroupList.driverGroups) {
-        _brandIds.push(brand.id)
+      const _groupIds = []
+      for (const group of driverGroupList.driverGroups) {
+        _groupIds.push(group.id)
       }
-      setDriverGroupIds(_brandIds)
+      setDriverGroupIds(_groupIds)
     }
     setIsAllCheck(!isAllCheck)
   }
 
   /**
-   * Method to get brand list
+   * Method to get driver group list
    */
   const getDriverGroups = async () => {
     if (loading) return
@@ -116,8 +112,8 @@ export const ReportsDriverGroupFilter = (props) => {
 
   useEffect(() => {
     if (driverGroupList?.driverGroups?.length === 0) return
-    const _brandIds = driverGroupList?.driverGroups.reduce((prev, cur) => [...prev, cur.id], [])
-    setDriverGroupIds([...filterList?.driver_groups_ids || _brandIds])
+    const _groupIds = driverGroupList?.driverGroups.reduce((prev, cur) => [...prev, cur.id], [])
+    setDriverGroupIds([...filterList?.driver_groups_ids || _groupIds])
     if (!filterList?.driver_groups_ids || filterList?.driver_groups_ids?.length === driverGroupList?.driverGroups.length) setIsAllCheck(true)
   }, [driverGroupList?.driverGroups])
 
@@ -128,7 +124,7 @@ export const ReportsDriverGroupFilter = (props) => {
           {...props}
           driverGroupList={driverGroupList}
           driverGroupIds={driverGroupIds}
-          handleChangeBrandId={handleChangeBrandId}
+          handleChangeDriverGroupId={handleChangeDriverGroupId}
           handleClickFilterButton={handleClickFilterButton}
           isAllCheck={isAllCheck}
           handleChangeAllCheck={handleChangeAllCheck}
@@ -152,30 +148,30 @@ ReportsDriverGroupFilter.propTypes = {
   */
   handleChangeFilterList: PropTypes.func,
   /**
-  * Method to close brand filter Modal
+  * Method to close driver group filter Modal
   */
   onClose: PropTypes.func,
   /**
-   * Array of brand props to fetch
+   * Array of driver group props to fetch
    */
   propsToFetch: PropTypes.arrayOf(string),
   /**
-   * Components types before brand type filter
+   * Components types before driver group filter
    * Array of type components, the parent props will pass to these components
    */
   beforeComponents: PropTypes.arrayOf(PropTypes.elementType),
   /**
-   * Components types after brand type filter
+   * Components types after driver group filter
    * Array of type components, the parent props will pass to these components
    */
   afterComponents: PropTypes.arrayOf(PropTypes.elementType),
   /**
-   * Elements before brand type filter
+   * Elements before driver group type filter
    * Array of HTML/Components elements, these components will not get the parent props
    */
   beforeElements: PropTypes.arrayOf(PropTypes.element),
   /**
-   * Elements after brand type filter
+   * Elements after driver group type filter
    * Array of HTML/Components elements, these components will not get the parent props
    */
   afterElements: PropTypes.arrayOf(PropTypes.element)
