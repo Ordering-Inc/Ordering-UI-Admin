@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
@@ -33,6 +33,7 @@ const ReportsOrderStatusUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ parsePrice }] = useUtils()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -65,7 +66,8 @@ const ReportsOrderStatusUI = (props) => {
     csv += '\n'
     reportData.content.body.rows.forEach((tr) => {
       tr.forEach((th) => {
-        csv += `${th.value},`
+        if (th.value_unit === 'currency') csv += `${th.value}$,`
+        else csv += `${th.value},`
         for (let i = 1; i < th.colspan; i++) {
           csv += ' ,'
         }
@@ -159,7 +161,7 @@ const ReportsOrderStatusUI = (props) => {
                     <Tbody key={i}>
                       <tr>
                         {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value}</td>
+                          <td key={j} colSpan={td.colspan}>{td.value_unit === 'currency' ? parsePrice(td.value) : td.value}</td>
                         ))}
                       </tr>
                     </Tbody>

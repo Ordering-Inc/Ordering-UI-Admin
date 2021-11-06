@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Button } from '../../styles/Buttons'
-import { AnalyticsCalendar } from '../AnalyticsCalendar'
-import { Modal } from '../Modal'
-import { ReportsDriverFilter } from '../ReportsDriverFilter'
-import { Alert } from '../Confirm'
 import Chart from 'react-apexcharts'
 import moment from 'moment'
+import { AnalyticsCalendar } from '../AnalyticsCalendar'
+import { Button } from '../../styles/Buttons'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { ReportsDriverFilter } from '../ReportsDriverFilter'
+import { Alert } from '../Confirm'
+import { Modal } from '../Modal'
 import {
   DriverScheduleContainer,
   Title,
@@ -31,6 +32,7 @@ const ReportsDriverScheduleUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [series, setSeries] = useState([])
   const [isDriverFilter, setIsDriverFilter] = useState(false)
+  const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -144,6 +146,11 @@ const ReportsDriverScheduleUI = (props) => {
             >
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
+            <Button
+              onClick={() => setIsDriverGroupFilter(true)}
+            >
+              {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
+            </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
             <AnalyticsCalendar
@@ -188,6 +195,18 @@ const ReportsDriverScheduleUI = (props) => {
         >
           <ReportsDriverFilter
             {...props} onClose={() => setIsDriverFilter(false)}
+          />
+        </Modal>
+        <Modal
+          width='50%'
+          height='80vh'
+          padding='30px'
+          title={t('DRIVER_GROUP', 'Driver group')}
+          open={isDriverGroupFilter}
+          onClose={() => setIsDriverGroupFilter(false)}
+        >
+          <ReportsDriverGroupFilter
+            {...props} onClose={() => setIsDriverGroupFilter(false)}
           />
         </Modal>
       </DriverScheduleContainer>

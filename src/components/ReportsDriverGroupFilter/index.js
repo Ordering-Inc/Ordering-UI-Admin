@@ -1,0 +1,97 @@
+import React from 'react'
+import Skeleton from 'react-loading-skeleton'
+import { useLanguage } from 'ordering-components-admin'
+import { ReportsDriverGroupFilter as ReportsDriverGroupFilterController } from './naked'
+import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
+import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import { Button } from '../../styles/Buttons'
+import {
+  ReportsDriverGroupContainer,
+  DriverGroupOption,
+  BusinessName,
+  FilterBtnWrapper
+} from './styles'
+
+const ReportsDriverGroupFilterUI = (props) => {
+  const {
+    driverGroupList,
+    driverGroupIds,
+    handleChangeBrandId,
+    handleClickFilterButton,
+    isAllCheck,
+    handleChangeAllCheck
+  } = props
+
+  const [, t] = useLanguage()
+
+  const isCheckEnableSate = (id) => {
+    const found = driverGroupIds?.find(brandId => brandId === id)
+    let valid = false
+    if (found) {
+      valid = true
+    }
+    return valid
+  }
+
+  return (
+    <>
+      <ReportsDriverGroupContainer>
+        {driverGroupList.loading ? (
+          [...Array(10).keys()].map(i => (
+            <DriverGroupOption key={i}>
+              <Skeleton width={15} height={15} />
+              <BusinessName>
+                <Skeleton width={120} height={24} />
+              </BusinessName>
+            </DriverGroupOption>
+          ))
+        ) : (
+          <div>
+            <DriverGroupOption
+              onClick={handleChangeAllCheck}
+            >
+              {isAllCheck ? (
+                <RiCheckboxFill className='fill' />
+              ) : (
+                <RiCheckboxBlankLine />
+              )}
+              <BusinessName>{t('ALL', 'All')}</BusinessName>
+            </DriverGroupOption>
+            {driverGroupList?.driverGroups.map((brand, i) => (
+              <DriverGroupOption
+                key={i}
+                onClick={() => handleChangeBrandId(brand?.id)}
+              >
+                {isCheckEnableSate(brand.id) ? (
+                  <RiCheckboxFill className='fill' />
+                ) : (
+                  <RiCheckboxBlankLine />
+                )}
+                <BusinessName>{brand?.name}</BusinessName>
+              </DriverGroupOption>
+            ))}
+          </div>
+        )}
+      </ReportsDriverGroupContainer>
+      <FilterBtnWrapper>
+        <Button
+          borderRadius='7.6px'
+          color='primary'
+          disabled={driverGroupList.loading}
+          onClick={handleClickFilterButton}
+        >
+          {t('FILTER', 'Filter')}
+        </Button>
+      </FilterBtnWrapper>
+    </>
+  )
+}
+
+export const ReportsDriverGroupFilter = (props) => {
+  const reportsDriverGroupFilterProps = {
+    ...props,
+    propsToFetch: ['id', 'name', 'enabled'],
+    UIComponent: ReportsDriverGroupFilterUI
+  }
+  return <ReportsDriverGroupFilterController {...reportsDriverGroupFilterProps} />
+}
