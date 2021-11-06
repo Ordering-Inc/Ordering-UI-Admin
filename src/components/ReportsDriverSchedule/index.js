@@ -63,7 +63,7 @@ const ReportsDriverScheduleUI = (props) => {
     plotOptions: {
       bar: {
         horizontal: true,
-        barHeight: '20%'
+        barHeight: '70%'
       }
     },
     xaxis: {
@@ -115,21 +115,24 @@ const ReportsDriverScheduleUI = (props) => {
   useEffect(() => {
     if (reportData?.content?.data?.length > 0) {
       const _series = []
-      reportData.content.data[0].lines.forEach((line) => {
-        const data = []
-        line.ranges.forEach(time => {
-          if (time.value) {
-            const _time = {
-              x: line.name,
-              y: [
-                new Date(time.from).getTime(), new Date(time.to).getTime()
-              ]
+      reportData.content.data.forEach(data => {
+        data.lines.forEach(line => {
+          const _time = []
+          line.ranges.forEach(range => {
+            if (range.value) {
+              const _range = {
+                x: data.metadata.name,
+                y: [
+                  new Date(range.from).getTime(),
+                  new Date(range.to).getTime()
+                ]
+              }
+              _time.push(_range)
             }
-            data.push(_time)
-          }
+          })
+          const _line = { name: `${line.name}`, data: [..._time] }
+          _series.push(_line)
         })
-        const _line = { name: line.name, data: data }
-        _series.push(_line)
       })
       setSeries(_series)
     }
