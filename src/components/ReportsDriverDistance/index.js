@@ -7,6 +7,7 @@ import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Modal } from '../Modal'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
+import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { Alert } from '../Confirm'
 import {
   DriverDistanceContainer,
@@ -34,6 +35,7 @@ const ReportsDriverDistanceUI = (props) => {
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
+  const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const tableRef = useRef(null)
@@ -117,6 +119,11 @@ const ReportsDriverDistanceUI = (props) => {
               onClick={() => setIsDriverFilter(true)}
             >
               {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setIsDriverGroupFilter(true)}
+            >
+              {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -205,6 +212,18 @@ const ReportsDriverDistanceUI = (props) => {
         >
           <ReportsDriverFilter
             {...props} onClose={() => setIsDriverFilter(false)}
+          />
+        </Modal>
+        <Modal
+          width='50%'
+          height='80vh'
+          padding='30px'
+          title={t('DRIVER_GROUP', 'Driver group')}
+          open={isDriverGroupFilter}
+          onClose={() => setIsDriverGroupFilter(false)}
+        >
+          <ReportsDriverGroupFilter
+            {...props} onClose={() => setIsDriverGroupFilter(false)}
           />
         </Modal>
       </DriverDistanceContainer>
