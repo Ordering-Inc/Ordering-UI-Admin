@@ -9,7 +9,11 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _Select = require("../../styles/Select");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,7 +24,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var LanguageSelectorUI = function LanguageSelectorUI(props) {
-  var _languagesState$langu;
+  var _languagesState$langu, _languages$;
 
   var languagesState = props.languagesState,
       currentLanguage = props.currentLanguage,
@@ -39,15 +43,16 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
   _languages && _languages.sort(function (a, b) {
     return a.content > b.content ? 1 : b.content > a.content ? -1 : 0;
   });
-  return _languages && _languages.length > 1 ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  return _languages && _languages.length > 1 ? /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     optionInnerMaxHeight: "60vh",
     options: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultLanguages : _languages,
     defaultValue: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultCurrentLanguage : currentLanguage,
     onChange: function onChange(languageId) {
       return handleChangeLanguage(languageId);
     },
-    notReload: notReload
-  }) : null;
+    notReload: notReload,
+    minWidth: "200px"
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _languages && _languages.length === 1 ? /*#__PURE__*/_react.default.createElement(_styles.LanguageItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageText, null, (_languages$ = _languages[0]) === null || _languages$ === void 0 ? void 0 : _languages$.content)) : null);
 };
 
 var LanguageSelector = function LanguageSelector(props) {

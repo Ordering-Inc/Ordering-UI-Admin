@@ -273,7 +273,7 @@ var LoginFormUI = function LoginFormUI(props) {
 var LoginForm = function LoginForm(props) {
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LoginFormUI,
-    allowedLevels: [0, 2]
+    allowedLevels: [0, 2, 5]
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LoginForm, loginControllerProps);

@@ -29,6 +29,8 @@ var _ReportsDriverFilter = require("../ReportsDriverFilter");
 
 var _styles = require("./styles");
 
+var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -80,18 +82,23 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
       isDriverFilter = _useState4[0],
       setIsDriverFilter = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isDriverGroupFilter = _useState6[0],
+      setIsDriverGroupFilter = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      isHeat = _useState8[0],
-      setIsHeat = _useState8[1];
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isHeat = _useState10[0],
+      setIsHeat = _useState10[1];
 
   var theme = (0, _styledComponents.useTheme)(); // const googleMapsApiKey = configs?.google_maps_api_key?.value
 
@@ -145,7 +152,11 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     onClick: function onClick() {
       return setIsDriverFilter(true);
     }
-  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setIsDriverGroupFilter(true);
+    }
+  }, t('DRIVER_GROUP', 'Driver group'), " (", filterList !== null && filterList !== void 0 && filterList.driver_groups_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.driver_groups_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
@@ -193,8 +204,21 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     onClose: function onClose() {
       return setIsDriverFilter(false);
     }
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('DRIVER_GROUP', 'Driver group'),
+    open: isDriverGroupFilter,
+    onClose: function onClose() {
+      return setIsDriverGroupFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsDriverGroupFilter(false);
+    }
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('DRIVER_SCHEDULE', 'Driver schedule'),
+    title: t('HEAT_MAP', 'Heat map'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

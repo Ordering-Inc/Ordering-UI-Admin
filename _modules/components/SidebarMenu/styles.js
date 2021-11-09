@@ -9,7 +9,7 @@ exports.LanguageSelectorContainer = exports.SubMenu = exports.MenuContent = expo
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -112,16 +112,8 @@ var SubMenu = _styledComponents.default.div(_templateObject22 || (_templateObjec
 
 exports.SubMenu = SubMenu;
 
-var LanguageSelectorContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  > svg {\n    position: absolute;\n    top: 7px;\n    ", "\n    width: 20px;\n    height: 20px;\n  }\n\n  .select {\n    border: none;\n    > div:first-child {\n      justify-content: flex-start;\n      font-size: 14px;\n      font-weight: 500;\n      ", "\n\n      > div:first-child {\n        flex: unset;\n      }\n    }\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
+var LanguageSelectorContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightPrimary;
-}, function (props) {
-  var _props$theme7;
-
-  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      right: 0.75rem;\n    "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n      left: 0.75rem;\n    "])));
-}, function (props) {
-  var _props$theme8;
-
-  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n        padding-right: 48px;\n      "]))) : (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n        padding-left: 48px;\n      "])));
 });
 
 exports.LanguageSelectorContainer = LanguageSelectorContainer;

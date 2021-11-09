@@ -9,23 +9,25 @@ exports.ReportsDriverSchedule = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _Buttons = require("../../styles/Buttons");
+var _reactApexcharts = _interopRequireDefault(require("react-apexcharts"));
+
+var _moment = _interopRequireDefault(require("moment"));
 
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
 
-var _Modal = require("../Modal");
+var _Buttons = require("../../styles/Buttons");
+
+var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
 
 var _ReportsDriverFilter = require("../ReportsDriverFilter");
 
 var _Confirm = require("../Confirm");
 
-var _reactApexcharts = _interopRequireDefault(require("react-apexcharts"));
-
-var _moment = _interopRequireDefault(require("moment"));
+var _Modal = require("../Modal");
 
 var _styles = require("./styles");
 
@@ -92,6 +94,11 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
       isDriverFilter = _useState6[0],
       setIsDriverFilter = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isDriverGroupFilter = _useState8[0],
+      setIsDriverGroupFilter = _useState8[1];
+
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
       from: date1,
@@ -123,7 +130,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     plotOptions: {
       bar: {
         horizontal: true,
-        barHeight: '20%'
+        barHeight: '70%'
       }
     },
     xaxis: {
@@ -160,23 +167,26 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
 
     if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.data) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0) {
       var _series = [];
-      reportData.content.data[0].lines.forEach(function (line) {
-        var data = [];
-        line.ranges.forEach(function (time) {
-          if (time.value) {
-            var _time = {
-              x: line.name,
-              y: [new Date(time.from).getTime(), new Date(time.to).getTime()]
-            };
-            data.push(_time);
-          }
-        });
-        var _line = {
-          name: line.name,
-          data: data
-        };
+      reportData.content.data.forEach(function (data) {
+        data.lines.forEach(function (line) {
+          var _time = [];
+          line.ranges.forEach(function (range) {
+            if (range.value) {
+              var _range = {
+                x: data.metadata.name,
+                y: [new Date(range.from).getTime(), new Date(range.to).getTime()]
+              };
 
-        _series.push(_line);
+              _time.push(_range);
+            }
+          });
+          var _line = {
+            name: "".concat(line.name),
+            data: [].concat(_time)
+          };
+
+          _series.push(_line);
+        });
       });
       setSeries(_series);
     }
@@ -185,7 +195,11 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     onClick: function onClick() {
       return setIsDriverFilter(true);
     }
-  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setIsDriverGroupFilter(true);
+    }
+  }, t('DRIVER_GROUP', 'Driver group'), " (", filterList !== null && filterList !== void 0 && filterList.driver_groups_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.driver_groups_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
@@ -216,6 +230,19 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsDriverFilter.ReportsDriverFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsDriverFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('DRIVER_GROUP', 'Driver group'),
+    open: isDriverGroupFilter,
+    onClose: function onClose() {
+      return setIsDriverGroupFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsDriverGroupFilter(false);
     }
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('DRIVER_SCHEDULE', 'Driver schedule'),
