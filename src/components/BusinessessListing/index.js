@@ -9,9 +9,7 @@ import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import { BusinessDetails } from '../BusinessDetails'
 import { AddBusinessSidebar } from '../AddBusinessSidebar'
-import { SideBar } from '../SideBar'
-import { ImportCustomCSVForm } from '../ImportCustomCSVForm'
-
+import { ImportersLateralBar } from '../ImportersLateralBar'
 import {
   BusinessListingContainer,
   ViewContainer,
@@ -160,15 +158,10 @@ const BusinessessListingUI = (props) => {
         />
       )}
       {openImportCsvForm && (
-        <SideBar
-          sidebarId='importCsvForm'
+        <ImportersLateralBar
           open={openImportCsvForm}
           onClose={() => setOpenImportCsvForm(false)}
-        >
-          <ImportCustomCSVForm
-            onClose={() => setOpenImportCsvForm(false)}
-          />
-        </SideBar>
+        />
       )}
     </>
   )
