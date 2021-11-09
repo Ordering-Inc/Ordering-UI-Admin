@@ -18,6 +18,7 @@ import {
   DistanceTitleBlock,
   WrapperMap
 } from './styles'
+import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 
 const ReportsHeatMapUI = (props) => {
   const {
@@ -30,6 +31,7 @@ const ReportsHeatMapUI = (props) => {
   const [configState] = useConfig()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
+  const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isHeat, setIsHeat] = useState(false)
   const theme = useTheme()
@@ -88,6 +90,11 @@ const ReportsHeatMapUI = (props) => {
               onClick={() => setIsDriverFilter(true)}
             >
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setIsDriverGroupFilter(true)}
+            >
+              {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -149,9 +156,21 @@ const ReportsHeatMapUI = (props) => {
             {...props} onClose={() => setIsDriverFilter(false)}
           />
         </Modal>
+        <Modal
+          width='50%'
+          height='80vh'
+          padding='30px'
+          title={t('DRIVER_GROUP', 'Driver group')}
+          open={isDriverGroupFilter}
+          onClose={() => setIsDriverGroupFilter(false)}
+        >
+          <ReportsDriverGroupFilter
+            {...props} onClose={() => setIsDriverGroupFilter(false)}
+          />
+        </Modal>
       </HeatMapContainer>
       <Alert
-        title={t('DRIVER_SCHEDULE', 'Driver schedule')}
+        title={t('HEAT_MAP', 'Heat map')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

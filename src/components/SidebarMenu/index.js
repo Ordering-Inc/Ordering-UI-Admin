@@ -11,7 +11,6 @@ import {
   BarChartLine as BarChartLineIcon,
   Gear as GearIcon,
   Headset as HeadsetIcon,
-  Globe2,
   Truck
   // WindowDock
 } from 'react-bootstrap-icons'
@@ -244,19 +243,21 @@ export const SidebarMenu = (props) => {
             <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
               <div className='d-flex flex-column'>
                 <Accordion>
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='0'
-                      active={
-                        location.pathname === '/home'
-                      }
-                      page='home'
-                      handleGoToPage={handleGoToPage}
-                    >
-                      <HouseDoor />
-                      <span>{t('HOME', 'Home')}</span>
-                    </ContextAwareToggle>
-                  </MenuContainer>
+                  {sessionState?.user?.level !== 5 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='0'
+                        active={
+                          location.pathname === '/home'
+                        }
+                        page='home'
+                        handleGoToPage={handleGoToPage}
+                      >
+                        <HouseDoor />
+                        <span>{t('HOME', 'Home')}</span>
+                      </ContextAwareToggle>
+                    </MenuContainer>
+                  )}
 
                   <MenuContainer>
                     <ContextAwareToggle
@@ -273,47 +274,11 @@ export const SidebarMenu = (props) => {
                     <Accordion.Collapse eventKey='1'>
                       <MenuContent>
                         {ordersSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
-
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='2'
-                      page='messages'
-                      handleGoToPage={handleGoToPage}
-                      active={location.pathname === '/messages'}
-                    >
-                      <ChatIcon />
-                      <span>{t('MESSAGES', 'Messages')}</span>
-                    </ContextAwareToggle>
-                  </MenuContainer>
-
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='3'
-                      active={
-                        location.pathname.includes('stores')
-                      }
-                    >
-                      <ShopIcon />
-                      <span>{t('STORES', 'Stores')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='3'>
-                      <MenuContent>
-                        {storesSubMenus.map(item => (
-                          !(sessionState?.user?.level === 2 && item.pageName === 'brand') && (
+                          !(sessionState?.user?.level === 5 && item.pageName === 'drivers') &&
+                          !(sessionState?.user?.level === 5 && item.pageName === 'deliveries') && (
                             <SubMenu
                               key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              active={location.pathname.includes(item.pageName)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
                               {item.title}
@@ -323,6 +288,49 @@ export const SidebarMenu = (props) => {
                       </MenuContent>
                     </Accordion.Collapse>
                   </MenuContainer>
+
+                  {sessionState?.user?.level !== 5 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='2'
+                        page='messages'
+                        handleGoToPage={handleGoToPage}
+                        active={location.pathname === '/messages'}
+                      >
+                        <ChatIcon />
+                        <span>{t('MESSAGES', 'Messages')}</span>
+                      </ContextAwareToggle>
+                    </MenuContainer>
+                  )}
+
+                  {sessionState?.user?.level !== 5 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='3'
+                        active={
+                          location.pathname.includes('stores')
+                        }
+                      >
+                        <ShopIcon />
+                        <span>{t('STORES', 'Stores')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='3'>
+                        <MenuContent>
+                          {storesSubMenus.map(item => (
+                            !(sessionState?.user?.level === 2 && item.pageName === 'brand') && (
+                              <SubMenu
+                                key={item.id}
+                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                onClick={() => handleGoToPage({ page: item.pageName })}
+                              >
+                                {item.title}
+                              </SubMenu>
+                            )
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
 
                   {sessionState?.user?.level === 0 && (
                     <MenuContainer>
@@ -353,34 +361,37 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   )}
 
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='5'
-                      active={
-                        location.pathname === '/intelligence/business' ||
-                        location.pathname === '/intelligence/drivers' ||
-                        location.pathname.includes('/intelligence/reviews') ||
-                        location.pathname === '/intelligence/invoice'
-                      }
-                    >
-                      <BarChartLineIcon />
-                      <span>{t('BUSINESS_INTELLIGENCE', 'Business Intelligence')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='5'>
-                      <MenuContent>
-                        {businessIntelligenceSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
-                  {!(sessionState?.user?.level === 2) && (
+                  {sessionState?.user?.level !== 5 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='5'
+                        active={
+                          location.pathname === '/intelligence/business' ||
+                          location.pathname === '/intelligence/drivers' ||
+                          location.pathname.includes('/intelligence/reviews') ||
+                          location.pathname === '/intelligence/invoice'
+                        }
+                      >
+                        <BarChartLineIcon />
+                        <span>{t('BUSINESS_INTELLIGENCE', 'Business Intelligence')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='5'>
+                        <MenuContent>
+                          {businessIntelligenceSubMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
+
+                  {sessionState?.user?.level === 0 && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='7'
@@ -413,7 +424,6 @@ export const SidebarMenu = (props) => {
               </div>
               <div className='d-flex flex-column mt-4'>
                 <LanguageSelectorContainer>
-                  <Globe2 />
                   <LanguageSelector />
                 </LanguageSelectorContainer>
                 {sessionState?.user?.level === 0 && (
@@ -458,7 +468,7 @@ export const SidebarMenu = (props) => {
                   <WindowDock />
                   {!isCollapse && <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>}
                 </Button> */}
-                {!(sessionState?.user?.level === 2) && (
+                {sessionState?.user?.level === 0 && (
                   <Button
                     className='d-flex align-items-center'
                     variant={location.pathname === '/support' && 'primary'}
