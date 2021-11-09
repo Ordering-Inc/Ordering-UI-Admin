@@ -33,6 +33,7 @@ export const InputWrapper = styled.div`
   label {
     color: ${props => props.theme.colors.headingColor};
     margin-bottom: 10px;
+    font-size: 14px;
   }
 
   input,
@@ -89,4 +90,14 @@ export const UploadCsvInputContainer = styled.div`
       color: #748194;
     }
   }
+`
+export const CloseButtonWrapper = styled.div`
+  position: absolute;
+  top: 30px;
+
+  ${props => props.theme?.rtl ? css`
+    left: 10px;
+  ` : css`
+    right: 10px;
+  `}
 `
