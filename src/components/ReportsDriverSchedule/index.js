@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Button } from '../../styles/Buttons'
-import { AnalyticsCalendar } from '../AnalyticsCalendar'
-import { Modal } from '../Modal'
-import { ReportsDriverFilter } from '../ReportsDriverFilter'
-import { Alert } from '../Confirm'
 import Chart from 'react-apexcharts'
 import moment from 'moment'
+import { AnalyticsCalendar } from '../AnalyticsCalendar'
+import { Button } from '../../styles/Buttons'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { ReportsDriverFilter } from '../ReportsDriverFilter'
+import { Alert } from '../Confirm'
+import { Modal } from '../Modal'
 import {
   DriverScheduleContainer,
   Title,
@@ -31,6 +32,7 @@ const ReportsDriverScheduleUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [series, setSeries] = useState([])
   const [isDriverFilter, setIsDriverFilter] = useState(false)
+  const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -61,7 +63,7 @@ const ReportsDriverScheduleUI = (props) => {
     plotOptions: {
       bar: {
         horizontal: true,
-        barHeight: '20%'
+        barHeight: '70%'
       }
     },
     xaxis: {
@@ -113,21 +115,24 @@ const ReportsDriverScheduleUI = (props) => {
   useEffect(() => {
     if (reportData?.content?.data?.length > 0) {
       const _series = []
-      reportData.content.data[0].lines.forEach((line) => {
-        const data = []
-        line.ranges.forEach(time => {
-          if (time.value) {
-            const _time = {
-              x: line.name,
-              y: [
-                new Date(time.from).getTime(), new Date(time.to).getTime()
-              ]
+      reportData.content.data.forEach(data => {
+        data.lines.forEach(line => {
+          const _time = []
+          line.ranges.forEach(range => {
+            if (range.value) {
+              const _range = {
+                x: data.metadata.name,
+                y: [
+                  new Date(range.from).getTime(),
+                  new Date(range.to).getTime()
+                ]
+              }
+              _time.push(_range)
             }
-            data.push(_time)
-          }
+          })
+          const _line = { name: `${line.name}`, data: [..._time] }
+          _series.push(_line)
         })
-        const _line = { name: line.name, data: data }
-        _series.push(_line)
       })
       setSeries(_series)
     }
@@ -143,6 +148,11 @@ const ReportsDriverScheduleUI = (props) => {
               onClick={() => setIsDriverFilter(true)}
             >
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setIsDriverGroupFilter(true)}
+            >
+              {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -188,6 +198,18 @@ const ReportsDriverScheduleUI = (props) => {
         >
           <ReportsDriverFilter
             {...props} onClose={() => setIsDriverFilter(false)}
+          />
+        </Modal>
+        <Modal
+          width='50%'
+          height='80vh'
+          padding='30px'
+          title={t('DRIVER_GROUP', 'Driver group')}
+          open={isDriverGroupFilter}
+          onClose={() => setIsDriverGroupFilter(false)}
+        >
+          <ReportsDriverGroupFilter
+            {...props} onClose={() => setIsDriverGroupFilter(false)}
           />
         </Modal>
       </DriverScheduleContainer>
