@@ -51,7 +51,7 @@ import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {
-  const [{ auth, loading }] = useSession()
+  const [{ auth, loading, user }] = useSession()
   const [orderStatus] = useOrder()
   const [loaded, setLoaded] = useState(false)
   const [, t] = useLanguage()
@@ -91,7 +91,9 @@ export const App = () => {
                   <Switch>
                     <Route exact path='/'>
                       {
-                        auth ? <Redirect to='/home' /> : <Redirect to='/login' />
+                        auth
+                          ? user?.level !== 5 ? <Redirect to='/home' /> : <Redirect to='/orders' />
+                          : <Redirect to='/login' />
                       }
                     </Route>
 
@@ -123,7 +125,7 @@ export const App = () => {
                     <Route exact path='/home'>
                       {
                         auth
-                          ? <Home />
+                          ? user?.level !== 5 ? <Home /> : <Redirect to='/orders' />
                           : <Redirect to='/login' />
                       }
                     </Route>

@@ -1,6 +1,12 @@
 import React from 'react'
 import { LanguageSelector as LanguageSelectorController } from 'ordering-components-admin'
+import { Globe2 } from 'react-bootstrap-icons'
 import { Select } from '../../styles/Select'
+import {
+  SelectWrapper,
+  LanguageItem,
+  LanguageText
+} from './styles'
 
 const LanguageSelectorUI = (props) => {
   const {
@@ -21,19 +27,34 @@ const LanguageSelectorUI = (props) => {
   )
   return (
     _languages && _languages.length > 1 ? (
-      <Select
-        optionInnerMaxHeight='60vh'
-        options={languagesState?.loading ? defaultLanguages : _languages}
-        defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
-        onChange={(languageId) => handleChangeLanguage(languageId)}
-        notReload={notReload}
-      />
-    ) : null
+      <SelectWrapper>
+        <Globe2 />
+        <Select
+          optionInnerMaxHeight='60vh'
+          options={languagesState?.loading ? defaultLanguages : _languages}
+          defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
+          onChange={(languageId) => handleChangeLanguage(languageId)}
+          notReload={notReload}
+          minWidth='200px'
+        />
+      </SelectWrapper>
+    ) : (
+      <>
+        {_languages && _languages.length === 1 ? (
+          <LanguageItem>
+            <Globe2 />
+            <LanguageText>{_languages[0]?.content}</LanguageText>
+          </LanguageItem>
+        ) : (
+          null
+        )}
+      </>
+    )
   )
 }
 
 export const LanguageSelector = (props) => {
-  const DefaultChangeLanguage = () => {}
+  const DefaultChangeLanguage = () => { }
   const langProps = {
     ...props,
     UIComponent: LanguageSelectorUI,
