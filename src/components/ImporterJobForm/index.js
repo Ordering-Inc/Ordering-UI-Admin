@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { XLg } from 'react-bootstrap-icons'
-import { useLanguage, DragAndDrop, ExamineClick, AddImporterJob as AddImporterJobController } from 'ordering-components-admin'
+import { useLanguage, DragAndDrop, ExamineClick, ImporterJobForm as ImporterJobFormController } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import { Input } from '../../styles/Inputs'
@@ -16,7 +16,7 @@ import {
   CloseButtonWrapper
 } from './styles'
 
-const AddCsvFormUI = (props) => {
+const ImporterJobFormUI = (props) => {
   const {
     selectedImporter,
     formState,
@@ -227,10 +227,10 @@ const AddCsvFormUI = (props) => {
   )
 }
 
-export const AddImporterJob = (props) => {
+export const ImporterJobForm = (props) => {
   const addCsvDetailProps = {
     ...props,
-    UIComponent: AddCsvFormUI
+    UIComponent: ImporterJobFormUI
   }
-  return <AddImporterJobController {...addCsvDetailProps} />
+  return <ImporterJobFormController {...addCsvDetailProps} />
 }

@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import { useLanguage, AddImporter as AddImporterController } from 'ordering-components-admin'
+import { useLanguage, ImporterForm as ImporterFormController } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import { IconButton, Button } from '../../styles/Buttons'
 import { XLg } from 'react-bootstrap-icons'
@@ -27,7 +27,7 @@ import {
   FieldValue
 } from './styles'
 
-export const AddImporterUI = (props) => {
+export const ImporterFormUI = (props) => {
   const {
     formState,
     handleChangeInput,
@@ -393,10 +393,10 @@ export const AddImporterUI = (props) => {
   )
 }
 
-export const AddImporter = (props) => {
+export const ImporterForm = (props) => {
   const addImporterProps = {
     ...props,
-    UIComponent: AddImporterUI
+    UIComponent: ImporterFormUI
   }
-  return <AddImporterController {...addImporterProps} />
+  return <ImporterFormController {...addImporterProps} />
 }
