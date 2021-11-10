@@ -170,7 +170,7 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
 
 var AnalyticsBusinessFilter = function AnalyticsBusinessFilter(props) {
   var AnalyticsBusinessFilterProps = _objectSpread(_objectSpread({}, props), {}, {
-    propsToFetch: ['id', 'name', 'slug'],
+    propsToFetch: ['id', 'name', 'slug', 'franchise_id'],
     UIComponent: AnalyticsBusinessFilterUI
   });
 

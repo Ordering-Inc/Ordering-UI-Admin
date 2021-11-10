@@ -288,7 +288,8 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsBusinessFilter.AnalyticsBusinessFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBusinessFilter(false);
-    }
+    },
+    isFranchise: true
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",

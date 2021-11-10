@@ -29,9 +29,7 @@ var _BusinessDetails = require("../BusinessDetails");
 
 var _AddBusinessSidebar = require("../AddBusinessSidebar");
 
-var _SideBar = require("../SideBar");
-
-var _ImportCustomCSVForm = require("../ImportCustomCSVForm");
+var _ImportersLateralBar = require("../ImportersLateralBar");
 
 var _styles = require("./styles");
 
@@ -207,17 +205,12 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       return setOpenAddBusiness(false);
     },
     handleSucessAddBusiness: onhandleSuccessAddBusiness
-  }), openImportCsvForm && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
-    sidebarId: "importCsvForm",
+  }), openImportCsvForm && /*#__PURE__*/_react.default.createElement(_ImportersLateralBar.ImportersLateralBar, {
     open: openImportCsvForm,
     onClose: function onClose() {
       return setOpenImportCsvForm(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_ImportCustomCSVForm.ImportCustomCSVForm, {
-    onClose: function onClose() {
-      return setOpenImportCsvForm(false);
-    }
-  })));
+  }));
 };
 
 var BusinessessListing = function BusinessessListing(props) {
