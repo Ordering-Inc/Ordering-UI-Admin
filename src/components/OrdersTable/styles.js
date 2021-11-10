@@ -182,6 +182,14 @@ export const CustomerInfo = styled(BusinessInfo)`
     max-width: 125px;
   }
 `
+export const StatusInfo = styled(BusinessInfo)`
+  .info {
+    margin: 0;
+    .bold {
+      max-width: 150px;
+    }
+  }
+`
 
 export const DriversInfo = styled.div`
   > div {
