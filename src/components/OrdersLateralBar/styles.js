@@ -20,9 +20,10 @@ export const LateralBarContainer = styled.div`
   `}
 
   table.orders_table {
-    thead {
+    min-width: unset;
+    /* thead {
       display: none;
-    }
+    } */
     border-collapse: separate;
     border-spacing: 0 18px;
     td {
