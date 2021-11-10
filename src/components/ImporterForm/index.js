@@ -5,6 +5,7 @@ import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useLanguage, ImporterForm as ImporterFormController } from 'ordering-components-admin'
+
 import { Alert } from '../Confirm'
 import { IconButton, Button } from '../../styles/Buttons'
 import { XLg } from 'react-bootstrap-icons'
@@ -39,10 +40,8 @@ export const ImporterFormUI = (props) => {
     removeField,
     fieldList,
     onClose,
-    openNewImporter,
     selectedImporter,
     clearImorterForm,
-    isEdit,
     setIsEdit,
     editState
   } = props
@@ -132,20 +131,21 @@ export const ImporterFormUI = (props) => {
     setImportType(val)
   }
 
-  useEffect(() => {
-    if (importType) {
-      const _target = (importypeOptions?.filter(options => options.value === importType))[0]
-      handleChangeSelect('type', _target.sync_name)
-      setMappingInpuData(_target.mapping_input_data)
-    }
-  }, [importType])
-
   const closeAlert = () => {
     setAlertState({
       open: false,
       content: []
     })
   }
+
+  useEffect(() => {
+    console.log('type--' + importType)
+    if (importType) {
+      const _target = (importypeOptions?.filter(options => options.value === importType))[0]
+      handleChangeSelect('type', _target.sync_name)
+      setMappingInpuData(_target.mapping_input_data)
+    }
+  }, [importType])
 
   useEffect(() => {
     if (formState.result?.error && Object.keys(formState.result).length > 0) {
@@ -161,6 +161,10 @@ export const ImporterFormUI = (props) => {
 
   useEffect(() => {
     clearImorterForm()
+    if (Object.keys(selectedImporter).length === 0) {
+      const _target = (importypeOptions?.filter(options => options.value === 1))[0]
+      handleChangeSelect('type', _target.sync_name)
+    }
     if (Object.keys(selectedImporter).length > 0) {
       setIsEdit(true)
       handleEditState(selectedImporter)
@@ -168,6 +172,10 @@ export const ImporterFormUI = (props) => {
       handleSelectOption(targetOption?.value)
     }
   }, [selectedImporter])
+
+  useEffect(() => {
+    console.log(formState)
+  }, [formState])
 
   return (
     <NewImporter>
@@ -241,7 +249,7 @@ export const ImporterFormUI = (props) => {
                     name={mappingInputData?.id?.name}
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.id}
+                    defaultValue={editState?.mapping?.id || ''}
                     onChange={handleChangeMappingInput}
                     ref={formMethods.register({
                       required: t('VALIDATION_ERROR_PRODUCT_ID_REQUIRED', 'Product Id is required')
@@ -263,11 +271,8 @@ export const ImporterFormUI = (props) => {
                     name={mappingInputData?.external_id?.name}
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.externalId}
+                    defaultValue={editState?.mapping?.externalId || ''}
                     onChange={handleChangeMappingInput}
-                    ref={formMethods.register({
-                      required: t('VALIDATION_ERROR_EXTERNAL_PRODUCT_ID_REQUIRED', 'External Product Id is required')
-                    })}
                     disabled={formState.loading}
                     autoComplete='off'
                   />
@@ -280,18 +285,8 @@ export const ImporterFormUI = (props) => {
                     name={mappingInputData?.external_key?.name}
                     type='text'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.externalKey}
+                    defaultValue={editState?.mapping?.externalKey || ''}
                     onChange={handleChangeMappingInput}
-                    ref={formMethods.register({
-                      required: t('VALIDATION_ERROR_EXTERNAL_BUSINESS_KEY_REQUIRED', 'External business KEY is required'),
-                      pattern: {
-                        value: /^\d+$/,
-                        message: t(
-                          'VALIDATION_ERROR_INTEGER',
-                          'Invalid integer'
-                        ).replace('_attribute_', t('VALUE', 'Vlue'))
-                      }
-                    })}
                     disabled={formState.loading}
                     autoComplete='off'
                   />
@@ -377,7 +372,7 @@ export const ImporterFormUI = (props) => {
           disabled={!(Object.keys(formState?.changes).length > 1) || formState?.loading}
           onClick={() => onSubmit()}
         >
-          {formState?.loading ? t('LOADING', 'Loading') : (isEdit ? t('EDIT', 'Edit') : t('ADD', 'Add'))}
+          {formState?.loading ? t('LOADING', 'Loading') : (Object.keys(editState).length > 0 ? t('EDIT', 'Edit') : t('ADD', 'Add'))}
         </Button>
       </ActionsForm>
       <Alert

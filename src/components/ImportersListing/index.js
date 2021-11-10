@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, ImporterListing as ImportersListingController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
-import { ImporterForm } from '../ImporterForm'
 import { ImportersList } from '../ImportersList'
+import { ImporterForm } from '../ImporterForm'
 import { ImporterJobForm } from '../ImporterJobForm'
 import {
   ImportersListingContainer,
@@ -29,9 +29,10 @@ export const ImportersListingUI = (props) => {
   const [selectedImporterJob, setSelectedImporterJob] = useState({})
 
   const addNewImporter = () => {
-    setExtraOpen(true)
-    setOpenNewImporter(true)
+    setSelectedImporter({})
     setOpenImportCsv(false)
+    setOpenNewImporter(true)
+    setExtraOpen(true)
   }
 
   const createImporterJob = (importer) => {
