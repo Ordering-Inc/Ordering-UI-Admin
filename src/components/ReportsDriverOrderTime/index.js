@@ -173,7 +173,9 @@ const ReportsDriverOrderTimeUI = (props) => {
         onClose={() => setIsBusinessFilter(false)}
       >
         <AnalyticsBusinessFilter
-          {...props} onClose={() => setIsBusinessFilter(false)}
+          {...props}
+          onClose={() => setIsBusinessFilter(false)}
+          isFranchise
         />
       </Modal>
       <Modal

@@ -173,7 +173,9 @@ const ReportsDriverOrderUI = (props) => {
         onClose={() => setIsBusinessFilter(false)}
       >
         <AnalyticsBusinessFilter
-          {...props} onClose={() => setIsBusinessFilter(false)}
+          {...props}
+          onClose={() => setIsBusinessFilter(false)}
+          isFranchise
         />
       </Modal>
       <Modal
@@ -185,7 +187,8 @@ const ReportsDriverOrderUI = (props) => {
         onClose={() => setIsBrandFilter(false)}
       >
         <ReportsBrandFilter
-          {...props} onClose={() => setIsBrandFilter(false)}
+          {...props}
+          onClose={() => setIsBrandFilter(false)}
         />
       </Modal>
     </ReportsBusinessSpendContainer>

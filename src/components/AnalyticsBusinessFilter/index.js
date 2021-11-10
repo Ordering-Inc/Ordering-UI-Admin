@@ -130,7 +130,7 @@ const AnalyticsBusinessFilterUI = (props) => {
 export const AnalyticsBusinessFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
-    propsToFetch: ['id', 'name', 'slug'],
+    propsToFetch: ['id', 'name', 'slug', 'franchise_id'],
     UIComponent: AnalyticsBusinessFilterUI
   }
   return <AnalyticsBusinessFilterController {...AnalyticsBusinessFilterProps} />
