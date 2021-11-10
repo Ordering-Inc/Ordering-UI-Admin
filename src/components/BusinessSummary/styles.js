@@ -7,6 +7,9 @@ export const BusinessDetailsContainer = styled.div`
   padding: 20px;
   position: relative;
   overflow-x: hidden;
+  @media (min-width: 768px) {
+    min-width: 500px;
+  }
 `
 
 export const DetailsHeader = styled.div`
