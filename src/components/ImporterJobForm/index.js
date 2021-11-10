@@ -1,57 +1,36 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useLanguage, DragAndDrop, ExamineClick, ImportCustomCSVForm as ImportCustomCsvController } from 'ordering-components-admin'
+import { XLg } from 'react-bootstrap-icons'
+import { useLanguage, DragAndDrop, ExamineClick, ImporterJobForm as ImporterJobFormController } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import { Input } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
-import { Select } from '../../styles/Select/FirstSelect'
+import { Button, IconButton } from '../../styles/Buttons'
 import {
   FormWrapper,
   Header,
   FormInput,
   InputWrapper,
   ActionsForm,
-  UploadCsvInputContainer
+  UploadCsvInputContainer,
+  CloseButtonWrapper
 } from './styles'
 
-const AddCsvFormUI = (props) => {
+const ImporterJobFormUI = (props) => {
   const {
+    selectedImporter,
     formState,
     fileState,
     handleChangeInput,
-    handleChangeSelect,
     handleUploadCsv,
-    handleCreateImporter,
+    handleCreateImporterJob,
     onClose
   } = props
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const headerCsvInputRef = useRef(null)
-  const [importType, setImportType] = useState(1)
-  const [importSymbol, setImportSymbol] = useState(1)
-
-  const importypeOptions = [
-    { value: 1, content: t('STORE', 'Store'), sync_name: 'sync_businesses' },
-    { value: 2, content: t('PRODUCT', 'Product'), sync_name: 'sync_products' },
-    { value: 3, content: t('CATEGORY', 'Category'), sync_name: 'sync_categories' }
-  ]
-
-  const importSymbolOptions = [
-    { value: 1, content: t('SEPARATOR', 'Separator (;)') },
-    { value: 2, content: t('ENCLOSURE', 'Enclosure (“)') },
-    { value: 3, content: t('ESCAPE', 'Escape ( )') },
-    { value: 4, content: t('STARTLINE', 'Start line') }
-  ]
-
-  const handleSelectOption = (val, selectname) => {
-    if (selectname === 'type') {
-      setImportType(val)
-    } else if (selectname === 'import_options') {
-      setImportSymbol(val)
-    }
-  }
+  const [hasImportedFile, setImportedFile] = useState(false)
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -82,16 +61,10 @@ const AddCsvFormUI = (props) => {
   }
 
   const onSubmit = () => {
-    if (Object.keys(formState.changes).length > 0) {
-      handleCreateImporter()
+    if (Object.keys(formState.changes).length > 0 || hasImportedFile) {
+      handleCreateImporterJob(selectedImporter?.id)
     }
   }
-
-  useEffect(() => {
-    if (importType) {
-      handleChangeSelect('type', (importypeOptions?.filter(options => options.value === importType))[0].sync_name)
-    }
-  }, [importType])
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -115,71 +88,79 @@ const AddCsvFormUI = (props) => {
     }
   }, [formState.result])
 
+  useEffect(() => {
+    if (fileState?.fileName) {
+      setImportedFile(true)
+    }
+  }, [fileState])
+
   return (
     <>
       <FormWrapper>
         <Header>
           {t('IMPORT', 'Import')}
+          <CloseButtonWrapper>
+            <IconButton
+              color='black'
+              onClick={() => onClose()}
+            >
+              <XLg />
+            </IconButton>
+          </CloseButtonWrapper>
         </Header>
         <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
           <InputWrapper>
-            <label>{t('NAME', 'Name')}</label>
+            <label>{t('SEPARATOR', 'Separator (;)')}</label>
             <Input
-              name='name'
+              name='separator'
               type='text'
-              placeholder={t('NAME', 'name')}
+              placeholder=';'
+              maxLength='1'
+              onChange={handleChangeInput}
+              disabled={formState.loading}
+              autoComplete='off'
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>{t('ENCLOSURE', 'Enclosure (“) ')}</label>
+            <Input
+              name='enclosure'
+              type='text'
+              placeholder='"'
+              maxLength='1'
               defaultValue={
                 formState?.result?.result
                   ? formState?.result?.result?.name
                   : formState?.changes?.name
               }
               onChange={handleChangeInput}
-              ref={formMethods.register({
-                required: t('VALIDATION_ERROR_IMPORTER_NAME_REQUIRED', 'Importer name is required')
-              })}
               disabled={formState.loading}
               autoComplete='off'
             />
           </InputWrapper>
-
           <InputWrapper>
-            <label>{t('SLUG', 'Slug')}</label>
+            <label>{t('ESCAPE', 'Escape (|)')}</label>
             <Input
-              name='slug'
-              placeholder={t('SLUG', 'slug')}
-              defaultValue={
-                formState?.result?.result
-                  ? formState?.result?.result?.slug
-                  : formState?.changes?.slug
-              }
+              name='escape'
+              type='text'
+              placeholder='\'
+              maxLength='1'
               onChange={handleChangeInput}
-              ref={formMethods.register({
-                required: t('VALIDATION_ERROR_IMPORTER_SLUG_REQUIRED', 'Importer slug is required')
-              })}
               disabled={formState.loading}
               autoComplete='off'
             />
           </InputWrapper>
-
           <InputWrapper>
-            <label>{t('TYPE', 'Type')}</label>
-            <Select
-              name='type'
-              options={importypeOptions}
-              defaultValue={importType}
-              onChange={(value) => handleSelectOption(value, 'type')}
+            <label>{t('START_LINE', 'Start line')}</label>
+            <Input
+              name='start_line'
+              type='text'
+              maxLength='1'
+              onChange={handleChangeInput}
+              disabled={formState.loading}
+              autoComplete='off'
             />
           </InputWrapper>
-
-          <InputWrapper>
-            <label>{t('IMPORT_OPTION', 'Import options')}</label>
-            <Select
-              options={importSymbolOptions}
-              defaultValue={importSymbol}
-              onChange={(value) => handleSelectOption(value, 'import_options')}
-            />
-          </InputWrapper>
-
           <InputWrapper
             onClick={() => headerCsvInputRef.current.click()}
           >
@@ -207,6 +188,7 @@ const AddCsvFormUI = (props) => {
                     ref={formMethods.register({
                       required: t('VALIDATION_ERROR_CSV_FILE_REQUIRED', 'CSV file is required')
                     })}
+                    onChange={handleChangeInput}
                   />
                   <Button
                     name='upload'
@@ -225,15 +207,14 @@ const AddCsvFormUI = (props) => {
               type='submit'
               color='primary'
               borderRadius='5px'
-              disabled={!(Object.keys(formState?.changes).length > 1) || formState?.loading}
+              disabled={(!hasImportedFile && !(Object.keys(formState?.changes).length > 0)) || formState?.loading}
             >
               {formState?.loading ? t('LOADING', 'Loading') : t('IMPORT', 'Import')}
-
             </Button>
           </ActionsForm>
         </FormInput>
         <Alert
-          title={t('IMPORT', 'Import')}
+          title={t('CREATE_IMPORTER_JOB', 'Create importer job')}
           content={alertState.content}
           acceptText={t('ACCEPT', 'Accept')}
           open={alertState.open}
@@ -246,10 +227,10 @@ const AddCsvFormUI = (props) => {
   )
 }
 
-export const ImportCustomCSVForm = (props) => {
+export const ImporterJobForm = (props) => {
   const addCsvDetailProps = {
     ...props,
-    UIComponent: AddCsvFormUI
+    UIComponent: ImporterJobFormUI
   }
-  return <ImportCustomCsvController {...addCsvDetailProps} />
+  return <ImporterJobFormController {...addCsvDetailProps} />
 }
