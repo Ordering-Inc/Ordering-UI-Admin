@@ -102,7 +102,7 @@ const ProductExtrasUI = (props) => {
     <MainContainer>
       <ProductExtrasContainer>
         <Header>
-          <h1>{t('PRODUCT_EXTRAS', 'Product extras')}</h1>
+          <h1>{t('PRODUCT_OPTIONS', 'Product options')}</h1>
           <Button
             borderRadius='8px'
             color='lightPrimary'
@@ -148,7 +148,7 @@ const ProductExtrasUI = (props) => {
         <AddButton
           onClick={() => handleOpenAddForm()}
         >
-          {t('ADD_PRODUCT_EXTRA', 'Add product extra')}
+          {t('ADD_PRODUCT_OPTION', 'Add product option')}
         </AddButton>
       </ProductExtrasContainer>
       {width >= 1000 ? (

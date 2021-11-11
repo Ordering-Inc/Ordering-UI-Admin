@@ -43,7 +43,9 @@ export const SingleBusinessCategoryUI = (props) => {
     handleDragStart,
     handleDragOver,
     handleDrop,
-    handleDragEnd
+    handleDragEnd,
+    onDataSelected,
+    dataSelected
   } = props
 
   const [, t] = useLanguage()
@@ -97,6 +99,19 @@ export const SingleBusinessCategoryUI = (props) => {
     }
   }
 
+  const handleDragOverChange = (e) => {
+    const element = e.target.closest('.draggable-category')
+    if (element) {
+      onDataSelected(element.dataset.index)
+    }
+    handleDragOver(e)
+  }
+
+  const handleDragEndChange = (e) => {
+    onDataSelected('')
+    handleDragEnd(e)
+  }
+
   useEffect(() => {
     if (categoryFormState?.result?.error) {
       setAlertState({
@@ -118,8 +133,11 @@ export const SingleBusinessCategoryUI = (props) => {
         onClick={(e) => handleChangeCategory(e, category)}
         ref={conatinerRef}
         onDrop={e => handleDrop(e)}
-        onDragOver={e => handleDragOver(e)}
-        onDragEnd={e => handleDragEnd(e)}
+        onDragOver={e => handleDragOverChange(e)}
+        onDragEnd={e => handleDragEndChange(e)}
+        className='draggable-category'
+        data-index={category?.id}
+        isAccept={dataSelected && dataSelected === category?.id.toString()}
       >
         <DraggableContainer>
           {
