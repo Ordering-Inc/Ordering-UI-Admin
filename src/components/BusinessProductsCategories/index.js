@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SingleBusinessCategory } from '../SingleBusinessCategory'
-import { BusinessCategoryCreator } from '../BusinessCategoryCreator'
 import {
   CategoryListContainer,
   HeaderContainer,
@@ -13,11 +12,11 @@ export const BusinessProductsCategories = (props) => {
   const {
     businessState,
     categorySelected,
-    onClickCategory
+    onClickCategory,
+    handleOpenCategoryDetails
   } = props
 
   const [, t] = useLanguage()
-  const [isAddCategory, setIsAddCategory] = useState(false)
 
   return (
     <>
@@ -47,13 +46,7 @@ export const BusinessProductsCategories = (props) => {
               ))
             )
           }
-          {
-            !businessState.loading && (
-              isAddCategory
-                ? <BusinessCategoryCreator {...props} setIsAddCategory={setIsAddCategory} business={businessState?.business} />
-                : <AddCategory onClick={() => setIsAddCategory(true)}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
-            )
-          }
+          <AddCategory onClick={() => handleOpenCategoryDetails()}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
         </ListContent>
       </CategoryListContainer>
     </>
