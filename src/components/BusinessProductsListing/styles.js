@@ -69,6 +69,10 @@ export const ActionsGroup = styled.div`
     `}
   }
 
+  input {
+    background: ${props => props.theme.colors.secundary};
+  }
+
   @media (min-width: 992px) {
     margin-top: 0px;
   }

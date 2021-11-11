@@ -40,6 +40,8 @@ export const MeunItem = styled.div`
   justify-content: space-between;
   padding: 12px 0;
   border-bottom: 1px solid #E9ECEF;
+  cursor: pointer;
+  user-select: none;
 `
 
 export const MenuName = styled.span`
