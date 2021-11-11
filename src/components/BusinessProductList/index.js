@@ -36,6 +36,7 @@ export const BusinessProductList = (props) => {
 
   const [openPopover, setOpenPopover] = useState(false)
   const [isAddProduct, setIsAddProduct] = useState(false)
+  const [dataSelected, setDataSelected] = useState('')
   const [allowColumns, setAllowColumns] = useState({
     business: true,
     price: true,
@@ -146,6 +147,8 @@ export const BusinessProductList = (props) => {
                         allowColumns={allowColumns}
                         business={businessState?.business}
                         handleOpenProductDetails={handleOpenProductDetails}
+                        dataSelected={dataSelected}
+                        setDataSelected={setDataSelected}
                       />
                     ))
                   }
