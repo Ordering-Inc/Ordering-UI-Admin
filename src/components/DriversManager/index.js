@@ -112,6 +112,7 @@ const DriversManagerUI = (props) => {
 export const DriversManager = (props) => {
   const DriversControlProps = {
     ...props,
+    asDashboard: true,
     UIComponent: DriversManagerUI
   }
   return (
