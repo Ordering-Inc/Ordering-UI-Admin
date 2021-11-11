@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, BusinessSchedule as BusinessScheduleController } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import BsTrash from '@meronex/icons/bs/BsTrash'
@@ -8,7 +8,6 @@ import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import { Alert } from '../Confirm'
 import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
-import { BusinessSchedule as BusinessScheduleController } from './naked'
 
 import {
   ScheduleContainer,
