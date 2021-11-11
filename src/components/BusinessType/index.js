@@ -82,6 +82,11 @@ const BusinessTypeUI = (props) => {
     }
   }
 
+  const checkKeyDown = (e) => {
+    const keyCode = e.keyCode ? e.keyCode : e.which
+    if (keyCode === 13 && Object.keys(businessTypeFormState?.changes).length > 0 && !businessTypeFormState?.loading) handleUpdateClick()
+  }
+
   useEffect(() => {
     if (businessTypeFormState?.result?.error) {
       setAlertState({
@@ -155,6 +160,7 @@ const BusinessTypeUI = (props) => {
             disabled={businessTypeFormState.loading}
             autoComplete='off'
             className='business-type-name'
+            onKeyDown={(e) => checkKeyDown(e)}
           />
         </BusinessTypeEditWrapper>
         <Trash onClick={deleteBusinessType} />
