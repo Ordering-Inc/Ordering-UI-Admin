@@ -35,6 +35,10 @@ export const SingleListBusinessContainer = styled.tbody`
       display: block;
     }
   }
+
+  ${({ isAccept }) => isAccept && css`
+    border-bottom: 1px solid ${props => props.theme.colors.headingColor};
+  `}
 `
 
 export const BusinessGeneralInfo = styled.div`

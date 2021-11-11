@@ -114,7 +114,7 @@ export const ProductDetails = (props) => {
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
-          {showOption === 'product_extras' && (
+          {showOption === 'product_options' && (
             <ProductExtras
               business={business}
               product={product}

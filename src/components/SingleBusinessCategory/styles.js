@@ -23,6 +23,10 @@ export const SingleCategoryContainer = styled.div`
     }
   `}
 
+  ${({ isAccept }) => isAccept && css`
+    background: ${props => props.theme.colors.borderColor};
+  `}
+
   .img-section {
     min-width: 41px !important;
     min-height: 41px !important;

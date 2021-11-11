@@ -23,8 +23,13 @@ export const BusinessSearch = styled.div`
   display: flex;
   margin-bottom: 5px;
   padding: 5px;
-  >div {
+
+  > div {
    width: 100%;
+
+   > input {
+    background: ${props => props.theme.colors.secundary};
+   }
   }
 `
 export const OptionItem = styled.div`
