@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoogleMapsMap, GoogleAutocompleteInput, useConfig, useLanguage } from 'ordering-components-admin'
 import { CitySelector } from '../CitySelector'
 import { Button } from '../../styles/Buttons'
@@ -24,6 +24,8 @@ export const BusinessLocation = (props) => {
   const [, t] = useLanguage()
   const googleMapsApiKey = configs?.google_maps_api_key?.value
 
+  const [location, setLocation] = useState()
+
   const googleMapsControls = {
     defaultZoom: 15,
     zoomControl: true,
@@ -42,6 +44,7 @@ export const BusinessLocation = (props) => {
 
   const handleChangeAddress = (address) => {
     getTimeZone(address)
+    setLocation({ ...address.location })
   }
 
   const handleChangeInput = (value) => {
@@ -86,13 +89,17 @@ export const BusinessLocation = (props) => {
     setFormState({ ...formState, changes: {} })
   }, [])
 
+  useEffect(() => {
+    setLocation({ ...business?.location })
+  }, [business?.location])
+
   return (
     <Container>
-      {business?.location && (
+      {location && (
         <WrapperMap>
           <GoogleMapsMap
             apiKey={configs?.google_maps_api_key?.value}
-            location={business.location}
+            location={location}
             mapControls={googleMapsControls}
             handleChangeCenter={handleChangeCenter}
             isFitCenter
