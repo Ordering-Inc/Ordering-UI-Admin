@@ -47,8 +47,8 @@ const ProductMainDetailsUI = (props) => {
       value: t('INGREDIENTS', 'Ingredients')
     },
     {
-      key: 'product_extras',
-      value: t('PRODUCT_EXTRAS', 'Product extras')
+      key: 'product_options',
+      value: t('PRODUCT_OPTIONS', 'Product options')
     },
     {
       key: 'product_images',
