@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SingleBusinessCategory } from '../SingleBusinessCategory'
 import {
@@ -17,6 +17,7 @@ export const BusinessProductsCategories = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [dataSelected, setDataSelected] = useState('')
 
   return (
     <>
@@ -42,6 +43,8 @@ export const BusinessProductsCategories = (props) => {
                   categorySelected={categorySelected}
                   handleChangeCategory={onClickCategory}
                   business={businessState?.business}
+                  dataSelected={dataSelected}
+                  onDataSelected={setDataSelected}
                 />
               ))
             )
