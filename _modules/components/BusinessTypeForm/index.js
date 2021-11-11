@@ -122,6 +122,12 @@ var BusinessTypeFormUI = function BusinessTypeFormUI(props) {
     }
   };
 
+  var checkKeyDown = function checkKeyDown(e) {
+    var keyCode = e.keyCode ? e.keyCode : e.which;
+    if (keyCode === 13 && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) handleCloseAddForm();
+    if (keyCode === 13 && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && !(formState !== null && formState !== void 0 && formState.loading)) handleUpdateClick();
+  };
+
   (0, _react.useEffect)(function () {
     var _formState$result;
 
@@ -172,7 +178,10 @@ var BusinessTypeFormUI = function BusinessTypeFormUI(props) {
     defaultValue: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.name : formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name,
     onChange: handleChangeInput,
     disabled: formState.loading,
-    autoComplete: "off"
+    autoComplete: "off",
+    onKeyDown: function onKeyDown(e) {
+      return checkKeyDown(e);
+    }
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_TYPE', 'Business type'),
     content: alertState.content,

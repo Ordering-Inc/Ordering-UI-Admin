@@ -73,7 +73,9 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       handleDragStart = props.handleDragStart,
       handleDragOver = props.handleDragOver,
       handleDrop = props.handleDrop,
-      handleDragEnd = props.handleDragEnd;
+      handleDragEnd = props.handleDragEnd,
+      onDataSelected = props.onDataSelected,
+      dataSelected = props.dataSelected;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -145,6 +147,21 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     }
   };
 
+  var handleDragOverChange = function handleDragOverChange(e) {
+    var element = e.target.closest('.draggable-category');
+
+    if (element) {
+      onDataSelected(element.dataset.index);
+    }
+
+    handleDragOver(e);
+  };
+
+  var handleDragEndChange = function handleDragEndChange(e) {
+    onDataSelected('');
+    handleDragEnd(e);
+  };
+
   (0, _react.useEffect)(function () {
     var _categoryFormState$re;
 
@@ -173,11 +190,14 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       return handleDrop(e);
     },
     onDragOver: function onDragOver(e) {
-      return handleDragOver(e);
+      return handleDragOverChange(e);
     },
     onDragEnd: function onDragEnd(e) {
-      return handleDragEnd(e);
-    }
+      return handleDragEndChange(e);
+    },
+    className: "draggable-category",
+    "data-index": category === null || category === void 0 ? void 0 : category.id,
+    isAccept: dataSelected && dataSelected === (category === null || category === void 0 ? void 0 : category.id.toString())
   }, /*#__PURE__*/_react.default.createElement(_styles.DraggableContainer, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 41,
     height: 41

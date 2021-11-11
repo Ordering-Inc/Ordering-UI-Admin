@@ -39,7 +39,7 @@ var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 =
 
 exports.Title = Title;
 
-var MeunItem = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  padding: 12px 0;\n  border-bottom: 1px solid #E9ECEF;\n"])));
+var MeunItem = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  padding: 12px 0;\n  border-bottom: 1px solid #E9ECEF;\n  cursor: pointer;\n  user-select: none;\n"])));
 
 exports.MeunItem = MeunItem;
 

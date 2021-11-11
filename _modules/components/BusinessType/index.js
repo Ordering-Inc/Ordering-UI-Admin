@@ -134,6 +134,11 @@ var BusinessTypeUI = function BusinessTypeUI(props) {
     }
   };
 
+  var checkKeyDown = function checkKeyDown(e) {
+    var keyCode = e.keyCode ? e.keyCode : e.which;
+    if (keyCode === 13 && Object.keys(businessTypeFormState === null || businessTypeFormState === void 0 ? void 0 : businessTypeFormState.changes).length > 0 && !(businessTypeFormState !== null && businessTypeFormState !== void 0 && businessTypeFormState.loading)) handleUpdateClick();
+  };
+
   (0, _react.useEffect)(function () {
     var _businessTypeFormStat;
 
@@ -197,7 +202,10 @@ var BusinessTypeUI = function BusinessTypeUI(props) {
     onChange: handleChangeInput,
     disabled: businessTypeFormState.loading,
     autoComplete: "off",
-    className: "business-type-name"
+    className: "business-type-name",
+    onKeyDown: function onKeyDown(e) {
+      return checkKeyDown(e);
+    }
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     onClick: deleteBusinessType
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {

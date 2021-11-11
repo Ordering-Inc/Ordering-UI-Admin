@@ -25,7 +25,9 @@ var SelectHeaderContent = _styledComponents.default.div(_templateObject2 || (_te
 
 exports.SelectHeaderContent = SelectHeaderContent;
 
-var BusinessSearch = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 5px;\n  padding: 5px;\n  >div {\n   width: 100%;\n  }\n"])));
+var BusinessSearch = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 5px;\n  padding: 5px;\n\n  > div {\n   width: 100%;\n\n   > input {\n    background: ", ";\n   }\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+});
 
 exports.BusinessSearch = BusinessSearch;
 

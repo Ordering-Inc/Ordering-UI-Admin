@@ -168,7 +168,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       });
     }
   }, [productState, extrasState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductExtrasContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_EXTRAS', 'Product extras')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductExtrasContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTIONS', 'Product options')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
@@ -209,7 +209,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_PRODUCT_EXTRA', 'Add product extra'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_ProductExtraOptions.ProductExtraOptions, {
+  }, t('ADD_PRODUCT_OPTION', 'Add product option'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_ProductExtraOptions.ProductExtraOptions, {
     open: openExtraDetails,
     onClose: function onClose() {
       return handleCloseExtraDetails();

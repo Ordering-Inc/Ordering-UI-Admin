@@ -66,6 +66,12 @@ var BusinessLocation = function BusinessLocation(props) {
       t = _useLanguage2[1];
 
   var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
+
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      location = _useState2[0],
+      setLocation = _useState2[1];
+
   var googleMapsControls = {
     defaultZoom: 15,
     zoomControl: true,
@@ -89,6 +95,7 @@ var BusinessLocation = function BusinessLocation(props) {
 
   var handleChangeAddress = function handleChangeAddress(address) {
     getTimeZone(address);
+    setLocation(_objectSpread({}, address.location));
   };
 
   var handleChangeInput = function handleChangeInput(value) {
@@ -173,9 +180,12 @@ var BusinessLocation = function BusinessLocation(props) {
       changes: {}
     }));
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, (business === null || business === void 0 ? void 0 : business.location) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
+  (0, _react.useEffect)(function () {
+    setLocation(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location));
+  }, [business === null || business === void 0 ? void 0 : business.location]);
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, location && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
-    location: business.location,
+    location: location,
     mapControls: googleMapsControls,
     handleChangeCenter: handleChangeCenter,
     isFitCenter: true

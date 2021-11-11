@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
-  var _theme$images$icons, _productFormState$cha2, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5, _productFormState$cha6;
+  var _product$id, _theme$images$icons, _productFormState$cha2, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5, _productFormState$cha6;
 
   var isSkeleton = props.isSkeleton,
       viewMethod = props.viewMethod,
@@ -70,7 +70,9 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       isEditMode = props.isEditMode,
       productDetailsId = props.productDetailsId,
       businessState = props.businessState,
-      handleUpdateBusinessState = props.handleUpdateBusinessState;
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      dataSelected = props.dataSelected,
+      setDataSelected = props.setDataSelected;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -183,6 +185,12 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
 
   var handleAllowDrop = function handleAllowDrop(event) {
     event.preventDefault();
+    var element = event.target.closest('.draggable-product');
+
+    if (element) {
+      console.log(element.dataset.index);
+      setDataSelected(element.dataset.index);
+    }
   };
 
   var handleDrop = function handleDrop(event) {
@@ -229,6 +237,8 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0]);
     }
+
+    setDataSelected('');
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
@@ -263,7 +273,10 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     },
     onDragEnd: function onDragEnd(e) {
       return handleDragEnd(e);
-    }
+    },
+    className: "draggable-product",
+    "data-index": product.id,
+    isAccept: dataSelected && dataSelected === (product === null || product === void 0 ? void 0 : (_product$id = product.id) === null || _product$id === void 0 ? void 0 : _product$id.toString())
   }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
   }, /*#__PURE__*/_react.default.createElement(_styles.DragableContainer, {

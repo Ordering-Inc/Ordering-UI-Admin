@@ -151,7 +151,7 @@ var ProductDetails = function ProductDetails(props) {
     business: business,
     product: product,
     handleUpdateBusinessState: handleUpdateBusinessState
-  }), showOption === 'product_extras' && /*#__PURE__*/_react.default.createElement(_ProductExtras.ProductExtras, {
+  }), showOption === 'product_options' && /*#__PURE__*/_react.default.createElement(_ProductExtras.ProductExtras, {
     business: business,
     product: product,
     setIsExtendExtraOpen: setIsExtendExtraOpen,

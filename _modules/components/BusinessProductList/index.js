@@ -88,14 +88,19 @@ var BusinessProductList = function BusinessProductList(props) {
       isAddProduct = _useState4[0],
       setIsAddProduct = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      dataSelected = _useState6[0],
+      setDataSelected = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
     business: true,
     price: true,
     description: true
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      allowColumns = _useState6[0],
-      setAllowColumns = _useState6[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      allowColumns = _useState8[0],
+      setAllowColumns = _useState8[1];
 
   var optionsDefault = [{
     value: 'business',
@@ -113,26 +118,26 @@ var BusinessProductList = function BusinessProductList(props) {
   }; // Change page
 
 
-  var _useState7 = (0, _react.useState)(1),
-      _useState8 = _slicedToArray(_useState7, 2),
-      currentPage = _useState8[0],
-      setCurrentPage = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(10),
+  var _useState9 = (0, _react.useState)(1),
       _useState10 = _slicedToArray(_useState9, 2),
-      productsPerPage = _useState10[0],
-      setProductsPerPage = _useState10[1]; // Get current products
+      currentPage = _useState10[0],
+      setCurrentPage = _useState10[1];
 
-
-  var _useState11 = (0, _react.useState)([]),
+  var _useState11 = (0, _react.useState)(10),
       _useState12 = _slicedToArray(_useState11, 2),
-      currentProducts = _useState12[0],
-      setCurrentProducts = _useState12[1];
+      productsPerPage = _useState12[0],
+      setProductsPerPage = _useState12[1]; // Get current products
 
-  var _useState13 = (0, _react.useState)(null),
+
+  var _useState13 = (0, _react.useState)([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      totalPages = _useState14[0],
-      setTotalPages = _useState14[1];
+      currentProducts = _useState14[0],
+      setCurrentProducts = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(null),
+      _useState16 = _slicedToArray(_useState15, 2),
+      totalPages = _useState16[0],
+      setTotalPages = _useState16[1];
 
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
@@ -194,7 +199,9 @@ var BusinessProductList = function BusinessProductList(props) {
       product: product,
       allowColumns: allowColumns,
       business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-      handleOpenProductDetails: handleOpenProductDetails
+      handleOpenProductDetails: handleOpenProductDetails,
+      dataSelected: dataSelected,
+      setDataSelected: setDataSelected
     }));
   })))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
     onClick: function onClick() {

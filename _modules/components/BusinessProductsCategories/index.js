@@ -13,8 +13,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _SingleBusinessCategory = require("../SingleBusinessCategory");
 
-var _BusinessCategoryCreator = require("../BusinessCategoryCreator");
-
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -48,16 +46,17 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
 
   var businessState = props.businessState,
       categorySelected = props.categorySelected,
-      onClickCategory = props.onClickCategory;
+      onClickCategory = props.onClickCategory,
+      handleOpenCategoryDetails = props.handleOpenCategoryDetails;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
-      isAddCategory = _useState2[0],
-      setIsAddCategory = _useState2[1];
+      dataSelected = _useState2[0],
+      setDataSelected = _useState2[1];
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessCategory.SingleBusinessCategory, {
@@ -72,16 +71,15 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       category: category,
       categorySelected: categorySelected,
       handleChangeCategory: onClickCategory,
-      business: businessState === null || businessState === void 0 ? void 0 : businessState.business
+      business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+      dataSelected: dataSelected,
+      onDataSelected: setDataSelected
     }));
-  })), !businessState.loading && (isAddCategory ? /*#__PURE__*/_react.default.createElement(_BusinessCategoryCreator.BusinessCategoryCreator, _extends({}, props, {
-    setIsAddCategory: setIsAddCategory,
-    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
-  })) : /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
     onClick: function onClick() {
-      return setIsAddCategory(true);
+      return handleOpenCategoryDetails();
     }
-  }, t('ADD_NEW_CATEGORY', 'Add new category'))))));
+  }, t('ADD_NEW_CATEGORY', 'Add new category')))));
 };
 
 exports.BusinessProductsCategories = BusinessProductsCategories;

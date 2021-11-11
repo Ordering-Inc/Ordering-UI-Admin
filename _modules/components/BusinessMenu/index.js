@@ -94,6 +94,12 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     setIsExtendExtraOpen(false);
   };
 
+  var handleOpenEdit = function handleOpenEdit(e, menu) {
+    var isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.action_wrapper');
+    if (isInvalid) return;
+    handleOpenOptions('option', menu);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MENU_V21', 'Menu')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
@@ -102,7 +108,10 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     }
   }, t('ADD_MENU', 'Add menu'))), businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.MeunItem, {
-      key: menu.id
+      key: menu.id,
+      onClick: function onClick(e) {
+        return handleOpenEdit(e, menu);
+      }
     }, /*#__PURE__*/_react.default.createElement(_styles.MenuName, null, menu === null || menu === void 0 ? void 0 : menu.name), /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {
       className: "business_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
@@ -110,7 +119,9 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       onChange: function onChange() {
         return handleChangeBusinessMenuActiveState(menu === null || menu === void 0 ? void 0 : menu.id);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    })), /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, {
+      className: "action_wrapper"
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
       menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
       title: ActionIcon,
       id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
