@@ -54,7 +54,6 @@ const BusinessProductsListingUI = (props) => {
   const [isProductAdd, setIsProductAdd] = useState(false)
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [businessName, setBusinessName] = useState(null)
-  const [dataSelected, setDataSelected] = useState('')
 
   const handleOpenCategoryDetails = (category = null) => {
     if (category && category?.id !== null) {
@@ -191,9 +190,6 @@ const BusinessProductsListingUI = (props) => {
           </CategoryListContainer>
           <ProductListContainer>
             <ProductHeader>
-              {/* <div className='d-flex align-items-center'>
-                <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-              </div> */}
               <SingleBusinessCategory
                   {...props}
                   key={i}
@@ -201,8 +197,6 @@ const BusinessProductsListingUI = (props) => {
                   categorySelected={categorySelected}
                   handleChangeCategory={handleChangeCategory}
                   business={businessState?.business}
-                  dataSelected={dataSelected}
-                  onDataSelected={setDataSelected}
                   handleOpenCategoryDetails={handleOpenCategoryDetails}
                 />
               <ActionIconList>

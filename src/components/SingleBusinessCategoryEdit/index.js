@@ -8,20 +8,12 @@ import {
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
-import { Switch } from '../../styles/Switch'
-import { useTheme } from 'styled-components'
-import { DropdownButton, Dropdown } from 'react-bootstrap'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Pencil } from 'react-bootstrap-icons'
 import {
   SingleCategoryContainer,
   CategoryContent,
   CategoryContentInside,
-  CategoryActionContainer,
-  CategoryEnableWrapper,
-  ActionSelectorWrapper,
-  DraggableContainer
 } from './styles'
 import {
   ProductTypeImage,
@@ -30,32 +22,19 @@ import {
 
 export const SingleBusinessCategoryUI = (props) => {
   const {
-    category,
     categorySelected,
-    handleChangeCategory,
     isSkeleton,
-    handelChangeCategoryActive,
     handleUpdateClick,
-    deleteCategory,
     handleOpenCategoryDetails,
     categoryFormState,
     handlechangeImage,
-    handleInputChange,
     isEditMode,
-    handleDragStart,
-    handleDragOver,
-    handleDrop,
-    handleDragEnd,
-    onDataSelected,
-    dataSelected
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const conatinerRef = useRef(null)
   const ProductTypeImgRef = useRef(null)
-  const ActionIcon = <FiMoreVertical />
 
   const handleClickImage = () => {
     ProductTypeImgRef.current.click()
@@ -101,19 +80,6 @@ export const SingleBusinessCategoryUI = (props) => {
     }
   }
 
-  const handleDragOverChange = (e) => {
-    const element = e.target.closest('.draggable-category')
-    if (element) {
-      onDataSelected(element.dataset.index)
-    }
-    handleDragOver(e)
-  }
-
-  const handleDragEndChange = (e) => {
-    onDataSelected('')
-    handleDragEnd(e)
-  }
-
   useEffect(() => {
     if (categoryFormState?.result?.error) {
       setAlertState({
@@ -131,15 +97,7 @@ export const SingleBusinessCategoryUI = (props) => {
   return (
     <>
       <SingleCategoryContainer
-        // active={!isSkeleton && categorySelected?.id}
-        // onClick={(e) => handleChangeCategory(e, category)}
-        // ref={conatinerRef}
-        // onDrop={e => handleDrop(e)}
-        // onDragOver={e => handleDragOverChange(e)}
-        // onDragEnd={e => handleDragEndChange(e)}
-        // className='draggable-category'
         data-index={categorySelected?.id}
-        isAccept={dataSelected && dataSelected === categorySelected?.id.toString()}
       >
       
           {
@@ -147,13 +105,6 @@ export const SingleBusinessCategoryUI = (props) => {
               ? <Skeleton width={41} height={41} />
               : (
                 <>
-                  {/* <img
-                    src={theme.images.icons?.sixDots}
-                    alt='six dots'
-                    draggable
-                    onDragStart={e => handleDrag(e, category.id)}
-                    onDragStart={e => handleDragStart(e)}
-                  /> */}
                   <ProductTypeImage
                     onClick={() => handleClickImage()}
                     disabled={categoryFormState?.loading}
@@ -187,7 +138,6 @@ export const SingleBusinessCategoryUI = (props) => {
                 </>
               )
           }
-
         <CategoryContent>
           {
             isSkeleton
