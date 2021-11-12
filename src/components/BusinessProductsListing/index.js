@@ -9,6 +9,7 @@ import BsTable from '@meronex/icons/bs/BsTable'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductList } from '../BusinessProductList'
 import { ProductDetails } from '../ProductDetails'
+import { SingleBusinessCategory } from '../SingleBusinessCategoryEdit'
 import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
@@ -53,6 +54,7 @@ const BusinessProductsListingUI = (props) => {
   const [isProductAdd, setIsProductAdd] = useState(false)
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [businessName, setBusinessName] = useState(null)
+  const [dataSelected, setDataSelected] = useState('')
 
   const handleOpenCategoryDetails = (category = null) => {
     if (category && category?.id !== null) {
@@ -189,9 +191,20 @@ const BusinessProductsListingUI = (props) => {
           </CategoryListContainer>
           <ProductListContainer>
             <ProductHeader>
-              <div className='d-flex align-items-center'>
+              {/* <div className='d-flex align-items-center'>
                 <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-              </div>
+              </div> */}
+              <SingleBusinessCategory
+                  {...props}
+                  key={i}
+                  category={categorySelected}
+                  categorySelected={categorySelected}
+                  handleChangeCategory={handleChangeCategory}
+                  business={businessState?.business}
+                  dataSelected={dataSelected}
+                  onDataSelected={setDataSelected}
+                  handleOpenCategoryDetails={handleOpenCategoryDetails}
+                />
               <ActionIconList>
                 <ViewMethodButton
                   active={viewMethod === 'list'}
