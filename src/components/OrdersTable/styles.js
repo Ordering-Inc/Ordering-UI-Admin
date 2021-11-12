@@ -6,7 +6,7 @@ export const OrdersContainer = styled.div`
   overflow: auto;
 
   @media (min-width: 768px) {
-    min-height: 350px;
+    min-height: 400px;
     max-height: calc(100vh - 385px);
   }
 
@@ -180,6 +180,14 @@ export const BusinessInfo = styled.div`
 export const CustomerInfo = styled(BusinessInfo)`
   p {
     max-width: 125px;
+  }
+`
+export const StatusInfo = styled(BusinessInfo)`
+  .info {
+    margin: 0;
+    .bold {
+      max-width: 150px;
+    }
   }
 `
 

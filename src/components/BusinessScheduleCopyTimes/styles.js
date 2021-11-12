@@ -21,7 +21,7 @@ export const HeaderItem = styled.div`
 export const PopoverBody = styled.div`
   position: absolute;
   background-color: #FFF;
-  padding: 15px 25px 15px 15px;
+  padding: 15px 0px;
   border-radius: 10px;
   max-width: 250px;
   z-index: 1001;
@@ -34,11 +34,17 @@ export const PopoverBody = styled.div`
   ` : css`
     right: 0px;
   `}
+
+  > button {
+    width: calc(100% - 20px);
+    margin: 5px 10px 0 10px;
+  }
 `
 
 export const Title = styled.div`
   color: ${props => props.theme.colors.headingColor};
   font-size: 14px;
+  padding: 0 10px;
 `
 
 export const PopoverList = styled.div`
@@ -47,8 +53,9 @@ export const PopoverList = styled.div`
 export const CopyItem = styled.div`
   display: flex;
   align-items: center;
-  padding: 7px 0;
+  padding: 7px 10px;
   cursor: pointer;
+
   svg {
     font-size: 24px;
     color: ${props => props.theme.colors?.headingColor};
@@ -67,6 +74,18 @@ export const CopyItem = styled.div`
 
   ${({ isChecked }) => isChecked && css`
     svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
+
+  &:hover {
+    background-color: ${props => props.theme.colors.borderColor};
+  }
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    svg {
+      opacity: 0.5;
       color: ${props => props.theme.colors?.primary};
     }
   `}

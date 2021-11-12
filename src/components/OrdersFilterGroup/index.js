@@ -24,7 +24,6 @@ const OrdersFilterGroupUI = (props) => {
     open,
     handleCloseFilterModal,
     filterValues,
-    singleDriverIds,
     driverGroupList,
     driversList,
     paymethodsList,
@@ -96,7 +95,7 @@ const OrdersFilterGroupUI = (props) => {
           <DriverSelector
             isFilterView
             drivers={driversList.drivers}
-            singleDriverIds={singleDriverIds}
+            filterValues={filterValues}
             handleChangeDriver={handleChangeDriver}
           />
         </WrapperRow>

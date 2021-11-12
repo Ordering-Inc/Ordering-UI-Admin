@@ -24,7 +24,8 @@ import {
   DriversInfo,
   OrderType,
   WrapOrderStatusSelector,
-  WrapperPagination
+  WrapperPagination,
+  StatusInfo
 } from './styles'
 
 export const OrdersTable = (props) => {
@@ -61,6 +62,7 @@ export const OrdersTable = (props) => {
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     orderNumber: true,
+    status: true,
     dateTime: true,
     business: true,
     customer: true,
@@ -73,6 +75,10 @@ export const OrdersTable = (props) => {
     {
       value: 'orderNumber',
       content: t('NUMBER_OF_ORDER', 'Number of order')
+    },
+    {
+      value: 'status',
+      content: t('STATUS', 'Status')
     },
     {
       value: 'dateTime',
@@ -130,6 +136,38 @@ export const OrdersTable = (props) => {
       default:
         return t('UNKNOWN', 'Unknown')
     }
+  }
+
+  const getOrderStatus = (s) => {
+    const status = parseInt(s)
+    const orderStatus = [
+      { key: 0, value: t('PENDING', theme?.defaultLanguages?.PENDING || 'Pending') },
+      { key: 1, value: t('COMPLETED', theme?.defaultLanguages?.COMPLETED || 'Completed') },
+      { key: 2, value: t('REJECTED', theme?.defaultLanguages?.REJECTED || 'Rejected') },
+      { key: 3, value: t('DRIVER_IN_BUSINESS', theme?.defaultLanguages?.DRIVER_IN_BUSINESS || 'Driver in business') },
+      { key: 4, value: t('PREPARATION_COMPLETED', theme?.defaultLanguages?.PREPARATION_COMPLETED || 'Preparation Completed') },
+      { key: 5, value: t('REJECTED_BY_BUSINESS', theme?.defaultLanguages?.REJECTED_BY_BUSINESS || 'Rejected by business') },
+      { key: 6, value: t('REJECTED_BY_DRIVER', theme?.defaultLanguages?.REJECTED_BY_DRIVER || 'Rejected by Driver') },
+      { key: 7, value: t('ACCEPTED_BY_BUSINESS', theme?.defaultLanguages?.ACCEPTED_BY_BUSINESS || 'Accepted by business') },
+      { key: 8, value: t('ACCEPTED_BY_DRIVER', theme?.defaultLanguages?.ACCEPTED_BY_DRIVER || 'Accepted by driver') },
+      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_COMPLETED_BY_DRIVER || 'Pick up completed by driver') },
+      { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_FAILED_BY_DRIVER || 'Pick up Failed by driver') },
+      { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_COMPLETED_BY_DRIVER || 'Delivery completed by driver') },
+      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_FAILED_BY_DRIVER || 'Delivery Failed by driver') },
+      { key: 13, value: t('PREORDER', theme?.defaultLanguages?.PREORDER || 'PreOrder') },
+      { key: 14, value: t('ORDER_NOT_READY', theme?.defaultLanguages?.ORDER_NOT_READY || 'Order not ready') },
+      { key: 15, value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER || 'Order picked up completed by customer') },
+      { key: 16, value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_STATUS_CANCELLED_BY_CUSTOMER || 'Order cancelled by customer') },
+      { key: 17, value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_NOT_PICKEDUP_BY_CUSTOMER || 'Order not picked up by customer') },
+      { key: 18, value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS || 'Driver almost arrived to business') },
+      { key: 19, value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER || 'Driver almost arrived to customer') },
+      { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS || 'Customer almost arrived to business') },
+      { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ARRIVED_BUSINESS || 'Customer arrived to business') }
+    ]
+
+    const objectStatus = orderStatus.find((o) => o.key === status)
+
+    return objectStatus && objectStatus
   }
 
   const handleChangeAllowColumns = (type) => {
@@ -192,6 +230,9 @@ export const OrdersTable = (props) => {
                 </CheckBox>
                 {t('ORDER', 'Order')}
               </th>
+              {allowColumns?.status && (
+                <th className='statusInfo'>{t('STATUS', 'Status')}</th>
+              )}
               {allowColumns?.business && (
                 <th className='businessInfo'>{t('BUSINESS', 'Business')}</th>
               )}
@@ -237,6 +278,15 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
+                  {allowColumns?.status && (
+                    <td className='statusInfo'>
+                      <StatusInfo>
+                        <div className='info'>
+                          <p className='bold'><Skeleton width={100} /></p>
+                        </div>
+                      </StatusInfo>
+                    </td>
+                  )}
                   {allowColumns?.business && (
                     <td className='businessInfo'>
                       <BusinessInfo>
@@ -358,6 +408,15 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
+                  {allowColumns?.status && (
+                    <td className='statusInfo'>
+                      <StatusInfo>
+                        <div className='info'>
+                          <p className='bold'>{getOrderStatus(order.status)?.value}</p>
+                        </div>
+                      </StatusInfo>
+                    </td>
+                  )}
                   {allowColumns?.business && (
                     <td className='businessInfo'>
                       <BusinessInfo>

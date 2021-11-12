@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessListContainer = styled.div`
+  min-height: 250px;
   max-height: calc(100vh - 330px);
   overflow: auto;
 
