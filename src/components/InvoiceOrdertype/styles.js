@@ -18,6 +18,10 @@ export const CheckboxWrapper = styled.div`
       margin-right: 0;
     `}
   }
+
+  label {
+    margin: 0px;
+  }
 `
 
 export const ActionBtnWrapper = styled.div`
