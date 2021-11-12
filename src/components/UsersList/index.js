@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
@@ -74,6 +74,15 @@ export const UsersList = (props) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
     getUsers(expectedPage, pageSize)
   }
+
+  useEffect(() => {
+    if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return
+    if (paginationProps.currentPage !== paginationProps.totalPages) {
+      handleChangePage(paginationProps.currentPage)
+    } else {
+      handleChangePage(paginationProps.currentPage - 1)
+    }
+  }, [usersList.users, paginationProps])
 
   return (
     <>
