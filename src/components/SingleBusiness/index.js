@@ -2,7 +2,6 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useUtils, useLanguage, BusinessDetails as BusinessController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
-import { convertHoursToMinutes } from '../../utils'
 import { Switch } from '../../styles/Switch'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { StarFill, ThreeDotsVertical } from 'react-bootstrap-icons'
@@ -37,7 +36,7 @@ const SingleBusinessUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
 
   const handleClickBusiness = (e) => {
@@ -71,40 +70,8 @@ const SingleBusinessUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {(allowColumns?.minimum || allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime || allowColumns?.featured || allowColumns?.ratings) && (
+                {(allowColumns?.featured || allowColumns?.ratings) && (
                   <>
-                    <td>
-                      {allowColumns?.minimum && (
-                        <InfoBlock>
-                          <p className='bold'><Skeleton width={80} /></p>
-                          <p><Skeleton width={60} /></p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                    <td>
-                      {allowColumns?.deliveryFee && (
-                        <InfoBlock>
-                          <p className='bold'><Skeleton width={80} /></p>
-                          <p><Skeleton width={60} /></p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                    <td>
-                      {allowColumns?.distance && (
-                        <InfoBlock>
-                          <p className='bold'><Skeleton width={80} /></p>
-                          <p><Skeleton width={60} /></p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                    <td>
-                      {allowColumns?.deliveryTime && (
-                        <InfoBlock>
-                          <p className='bold'><Skeleton width={80} /></p>
-                          <p><Skeleton width={60} /></p>
-                        </InfoBlock>
-                      )}
-                    </td>
                     <td>
                       {allowColumns?.featured && (
                         <InfoBlock>
@@ -154,40 +121,8 @@ const SingleBusinessUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {(allowColumns?.minimum || allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime || allowColumns?.featured || allowColumns?.ratings) && (
+                {(allowColumns?.featured || allowColumns?.ratings) && (
                   <>
-                    <td>
-                      {allowColumns?.minimum && (
-                        <InfoBlock>
-                          <p className='bold'>{t('MINIMUM_ORDER', 'Minimum order')}</p>
-                          <p>{parsePrice(businessState?.business?.minimum)}</p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                    <td>
-                      {allowColumns?.deliveryFee && (
-                        <InfoBlock>
-                          <p className='bold'>{t('DELIVERY_FEE', 'Delivery fee')}</p>
-                          <p>{parsePrice(businessState?.business?.delivery_price)}</p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                    <td>
-                      {allowColumns?.distance && (
-                        <InfoBlock>
-                          <p className='bold'>{t('DISTANCE', 'Distance')}</p>
-                          <p>{parseDistance(businessState?.business?.distance)}</p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                    <td>
-                      {allowColumns?.deliveryTime && (
-                        <InfoBlock>
-                          <p className='bold'>{t('DELIVERY_TIME', 'Delivery time')}</p>
-                          <p>{convertHoursToMinutes(businessState?.business?.delivery_time)}</p>
-                        </InfoBlock>
-                      )}
-                    </td>
                     <td>
                       {allowColumns?.featured && (
                         <InfoBlock>
