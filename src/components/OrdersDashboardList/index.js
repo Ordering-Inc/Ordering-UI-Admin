@@ -5,7 +5,6 @@ import { OrdersListing } from '../OrdersListing'
 export const OrdersDashboardList = (props) => {
   const {
     selectedSubOrderStatus,
-
     isMessagesView,
     orderByOption
   } = props

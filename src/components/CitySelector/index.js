@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, CityList as CityListController } from 'ordering-components-admin'
 import { Select } from '../../styles/Select/FirstSelect'
 import { MultiSelect } from '../../styles/MultiSelect'
+import Skeleton from 'react-loading-skeleton'
 import {
   PlaceholderTitle,
   Option
@@ -34,20 +35,28 @@ const CitySelectorUI = (props) => {
 
   return (
     <>
-      {isDefault ? (
-        <Select
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          options={cityOptions}
-          onChange={(city) => handleChangeCity(city)}
-        />
+      {citiesList?.loading ? (
+        <div>
+          <Skeleton style={{ height: '100%', lineHeight: 'normal' }} />
+        </div>
       ) : (
-        <MultiSelect
-          placeholder={placeholder}
-          defaultValue={filterValues?.cityIds}
-          options={cityOptions}
-          onChange={(city) => handleChangeCity(city)}
-        />
+        <>
+          {isDefault ? (
+            <Select
+              placeholder={placeholder}
+              defaultValue={defaultValue}
+              options={cityOptions}
+              onChange={(city) => handleChangeCity(city)}
+            />
+          ) : (
+            <MultiSelect
+              placeholder={placeholder}
+              defaultValue={filterValues?.cityIds}
+              options={cityOptions}
+              onChange={(city) => handleChangeCity(city)}
+            />
+          )}
+        </>
       )}
     </>
   )
