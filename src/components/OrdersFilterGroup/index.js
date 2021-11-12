@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
 import { BusinessesSelector } from '../BusinessesSelector'
@@ -11,7 +11,6 @@ import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
-import { OrdersFilter as OrdersFilterController } from './naked'
 
 import {
   FilterGroupListContainer,
