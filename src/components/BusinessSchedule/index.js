@@ -43,7 +43,8 @@ const BusinessScheduleUI = (props) => {
     addScheduleTime,
     setAddScheduleTime,
     openAddScheduleIndex,
-    setOpenAddScheduleInex
+    setOpenAddScheduleInex,
+    handleApplyScheduleCopyTimes
   } = props
   const [, t] = useLanguage()
   const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
@@ -109,9 +110,9 @@ const BusinessScheduleUI = (props) => {
                           <TimeSelect
                             value={
                               formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].open.hour
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.open?.hour
                                 : formState?.changes?.schedule
-                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open.hour
+                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open?.hour
                                   : laps.open.hour
                             }
                             onChange={(e) => handleChangeTime(daysOfWeekIndex, true, true, index, e.target.value)}
@@ -129,7 +130,7 @@ const BusinessScheduleUI = (props) => {
                           <TimeSelect
                             value={
                               formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].open.minute
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.open?.minute
                                 : formState?.changes?.schedule
                                   ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open.minute
                                   : laps.open.minute
@@ -151,7 +152,7 @@ const BusinessScheduleUI = (props) => {
                           <TimeSelect
                             value={
                               formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].close.hour
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.close?.hour
                                 : formState?.changes?.schedule
                                   ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.close.hour
                                   : laps.close.hour
@@ -171,7 +172,7 @@ const BusinessScheduleUI = (props) => {
                           <TimeSelect
                             value={
                               formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex].lapses[index].close.minute
+                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.close?.minute
                                 : formState?.changes?.schedule
                                   ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.close.minute
                                   : laps.close.minute
@@ -284,7 +285,8 @@ const BusinessScheduleUI = (props) => {
                   onClick={setIsOpenCopytimes}
                   onClose={() => setIsOpenCopytimes(null)}
                   selectedCopyDays={selectedCopyDays}
-                  handleSelectDays={(value) => handleSelectCopyTimes(value, daysOfWeekIndex)}
+                  handleSelectDays={(value) => handleSelectCopyTimes(value)}
+                  handleApplyScheduleCopyTimes={handleApplyScheduleCopyTimes}
                 />
               </ScheduleActionBlock>
             </ScheduleBlock>

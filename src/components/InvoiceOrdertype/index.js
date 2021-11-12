@@ -17,16 +17,8 @@ export const InvoiceOrderType = (props) => {
     handleChangeInvocing
   } = props
   const [, t] = useLanguage()
-  const [orderStatus, setOrderStatus] = useState(null)
+  const [orderStatus, setOrderStatus] = useState(orderTypes)
   const [invoiceState, setInvoiceState] = useState(null)
-
-  const orderTypeList = [
-    { value: 1, name: t('DELIVERY', 'Delivery'), enabled: false },
-    { value: 2, name: t('PICKUP', 'Pickup'), enabled: false },
-    { value: 3, name: t('EAT_IN', 'Eat in'), enabled: false },
-    { value: 4, name: t('CURBSIDE', 'Curbside'), enabled: false },
-    { value: 5, name: t('DRIVE_THRU', 'Drive thru'), enabled: false }
-  ]
 
   const saveFormData = () => {
     handleChangeOrderTypes(orderStatus)
@@ -63,7 +55,6 @@ export const InvoiceOrderType = (props) => {
 
   useEffect(() => {
     if (orderTypes) setOrderStatus(orderTypes)
-    else setOrderStatus(orderTypeList)
   }, [orderTypes])
 
   useEffect(() => {
