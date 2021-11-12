@@ -31,7 +31,6 @@ import { MenuControl } from './src/components/MenuControl'
 import { MomentOption } from './src/components/MomentOption'
 import { MyOrders } from './src/components/MyOrders'
 import { MyOrdersList } from './src/components/MyOrdersList'
-import { OrderList } from './src/components/OrderList'
 import { OrderTypeControl } from './src/components/OrderTypeControl'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { Popup } from './src/components/Popup'
@@ -93,7 +92,6 @@ export {
   MomentOption,
   MyOrders,
   MyOrdersList,
-  OrderList,
   OrderTypeControl,
   PaymentOptions,
   Popup,
