@@ -9,7 +9,7 @@ exports.CopyItem = exports.PopoverList = exports.Title = exports.PopoverBody = e
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -32,7 +32,7 @@ var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObje
 
 exports.HeaderItem = HeaderItem;
 
-var PopoverBody = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #FFF;\n  padding: 15px 25px 15px 15px;\n  border-radius: 10px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 6px;\n\n  ", "\n"])), function (props) {
+var PopoverBody = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #FFF;\n  padding: 15px 0px;\n  border-radius: 10px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 6px;\n\n  ", "\n\n  > button {\n    width: calc(100% - 20px);\n    margin: 5px 10px 0 10px;\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    left: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    right: 0px;\n  "])));
@@ -40,7 +40,7 @@ var PopoverBody = _styledComponents.default.div(_templateObject5 || (_templateOb
 
 exports.PopoverBody = PopoverBody;
 
-var Title = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 14px;\n"])), function (props) {
+var Title = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 14px;\n  padding: 0 10px;\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
@@ -50,7 +50,7 @@ var PopoverList = _styledComponents.default.div(_templateObject9 || (_templateOb
 
 exports.PopoverList = PopoverList;
 
-var CopyItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 7px 0;\n  cursor: pointer;\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n  span {\n    color: ", ";\n    white-space: nowrap;\n    font-size: 14px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
+var CopyItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 7px 10px;\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n  span {\n    color: ", ";\n    white-space: nowrap;\n    font-size: 14px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n"])), function (props) {
   var _props$theme$colors2;
 
   return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
@@ -68,6 +68,15 @@ var CopyItem = _styledComponents.default.div(_templateObject10 || (_templateObje
     var _props$theme$colors4;
 
     return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.primary;
+  });
+}, function (props) {
+  return props.theme.colors.borderColor;
+}, function (_ref3) {
+  var disabled = _ref3.disabled;
+  return disabled && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    svg {\n      opacity: 0.5;\n      color: ", ";\n    }\n  "])), function (props) {
+    var _props$theme$colors5;
+
+    return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.primary;
   });
 });
 

@@ -75,10 +75,6 @@ var BusinessList = function BusinessList(props) {
   var _useState3 = (0, _react.useState)({
     id: true,
     business: true,
-    minimum: true,
-    deliveryFee: true,
-    distance: true,
-    deliveryTime: true,
     featured: true,
     ratings: true
   }),
@@ -92,18 +88,6 @@ var BusinessList = function BusinessList(props) {
   }, {
     value: 'business',
     content: t('BUSINESS', 'Business')
-  }, {
-    value: 'minimum',
-    content: t('MINIMUM_ORDER', 'Minimum order')
-  }, {
-    value: 'deliveryFee',
-    content: t('DELIVERY_FEE', 'Delivery fee')
-  }, {
-    value: 'distance',
-    content: t('DISTANCE', 'Distance')
-  }, {
-    value: 'deliveryTime',
-    content: t('DELIVERY TIME', 'Delivery time')
   }, {
     value: 'featured',
     content: t('FEATURE', 'Featured')

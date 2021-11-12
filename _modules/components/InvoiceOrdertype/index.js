@@ -51,7 +51,7 @@ var InvoiceOrderType = function InvoiceOrderType(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(null),
+  var _useState = (0, _react.useState)(orderTypes),
       _useState2 = _slicedToArray(_useState, 2),
       orderStatus = _useState2[0],
       setOrderStatus = _useState2[1];
@@ -60,28 +60,6 @@ var InvoiceOrderType = function InvoiceOrderType(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       invoiceState = _useState4[0],
       setInvoiceState = _useState4[1];
-
-  var orderTypeList = [{
-    value: 1,
-    name: t('DELIVERY', 'Delivery'),
-    enabled: false
-  }, {
-    value: 2,
-    name: t('PICKUP', 'Pickup'),
-    enabled: false
-  }, {
-    value: 3,
-    name: t('EAT_IN', 'Eat in'),
-    enabled: false
-  }, {
-    value: 4,
-    name: t('CURBSIDE', 'Curbside'),
-    enabled: false
-  }, {
-    value: 5,
-    name: t('DRIVE_THRU', 'Drive thru'),
-    enabled: false
-  }];
 
   var saveFormData = function saveFormData() {
     handleChangeOrderTypes(orderStatus);
@@ -119,7 +97,7 @@ var InvoiceOrderType = function InvoiceOrderType(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (orderTypes) setOrderStatus(orderTypes);else setOrderStatus(orderTypeList);
+    if (orderTypes) setOrderStatus(orderTypes);
   }, [orderTypes]);
   (0, _react.useEffect)(function () {
     setInvoiceState(invocing);

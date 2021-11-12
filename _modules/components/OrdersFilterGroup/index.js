@@ -57,7 +57,6 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   var open = props.open,
       handleCloseFilterModal = props.handleCloseFilterModal,
       filterValues = props.filterValues,
-      singleDriverIds = props.singleDriverIds,
       driverGroupList = props.driverGroupList,
       driversList = props.driversList,
       paymethodsList = props.paymethodsList,
@@ -124,7 +123,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
     isFilterView: true,
     drivers: driversList.drivers,
-    singleDriverIds: singleDriverIds,
+    filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CitySelector.CitySelector, {
     filterValues: filterValues,

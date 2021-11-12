@@ -33,6 +33,8 @@ var _utils = require("../../utils");
 
 var _ProductExtraOptionMetaFields = require("../ProductExtraOptionMetaFields");
 
+var _ProductExtraSubOptionMetaFields = require("../ProductExtraSubOptionMetaFields");
+
 var _Modal = require("../Modal");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -123,6 +125,11 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       openModal = _useState6[0],
       setOpenModal = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      selectedSubOptionId = _useState8[0],
+      setSelectedSubOptionId = _useState8[1];
 
   var handleClickImage = function handleClickImage() {
     optionImageInputRef.current.click();
@@ -395,7 +402,10 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
-        return console.log();
+        setSelectedSubOptionId(subOption === null || subOption === void 0 ? void 0 : subOption.id);
+        setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+          subOptionMetaFields: true
+        }));
       }
     }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
@@ -506,6 +516,20 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     businessId: business.id,
     extraId: extra.id,
     optionId: optionState.option.id
+  })), (openModal === null || openModal === void 0 ? void 0 : openModal.subOptionMetaFields) && selectedSubOptionId && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "70%",
+    open: openModal === null || openModal === void 0 ? void 0 : openModal.subOptionMetaFields,
+    onClose: function onClose() {
+      setSelectedSubOptionId(null);
+      setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        option: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ProductExtraSubOptionMetaFields.ProductExtraSubOptionMetaFields, {
+    businessId: business.id,
+    extraId: extra.id,
+    optionId: optionState.option.id,
+    subOptionId: selectedSubOptionId
   })));
 };
 

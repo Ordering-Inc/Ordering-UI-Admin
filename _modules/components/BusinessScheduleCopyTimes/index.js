@@ -17,7 +17,9 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _MdcContentCopy = _interopRequireDefault(require("@meronex/icons/mdc/MdcContentCopy"));
 
-var _styles = require("./styles");
+var _styles = require("../../styles");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43,7 +45,8 @@ var BusinessScheduleCopyTimes = function BusinessScheduleCopyTimes(props) {
       daysOfWeekIndex = props.daysOfWeekIndex,
       selectedCopyDays = props.selectedCopyDays,
       handleSelectDays = props.handleSelectDays,
-      cleanSelectedCopyDays = props.cleanSelectedCopyDays;
+      cleanSelectedCopyDays = props.cleanSelectedCopyDays,
+      handleApplyScheduleCopyTimes = props.handleApplyScheduleCopyTimes;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -108,24 +111,31 @@ var BusinessScheduleCopyTimes = function BusinessScheduleCopyTimes(props) {
     style: {
       position: 'relative'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.HeaderItem, {
     ref: referenceElement,
     disabled: disabled,
     onClick: function onClick() {
       return props.onClick(daysOfWeekIndex);
     }
-  }, /*#__PURE__*/_react.default.createElement(_MdcContentCopy.default, null)), open && /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, {
+  }, /*#__PURE__*/_react.default.createElement(_MdcContentCopy.default, null)), open && /*#__PURE__*/_react.default.createElement(_styles2.PopoverBody, {
     ref: popperElement
-  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('Copy times to')), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, daysOptions.map(function (option) {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('Copy times to')), /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, daysOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: option.value
-    }, option.value !== daysOfWeekIndex && /*#__PURE__*/_react.default.createElement(_styles.CopyItem, {
+    }, /*#__PURE__*/_react.default.createElement(_styles2.CopyItem, {
+      disabled: option.value === daysOfWeekIndex,
       isChecked: selectedCopyDays.includes(option.value),
       onClick: function onClick() {
         return handleSelectDays(option.value);
       }
-    }, selectedCopyDays.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content)));
-  }))));
+    }, option.value === daysOfWeekIndex || selectedCopyDays.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content)));
+  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      handleApplyScheduleCopyTimes(daysOfWeekIndex);
+      props.onClose && props.onClose();
+    }
+  }, t('APPLY', 'Apply'))));
 };
 
 exports.BusinessScheduleCopyTimes = BusinessScheduleCopyTimes;

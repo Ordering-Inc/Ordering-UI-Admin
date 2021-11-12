@@ -50,7 +50,9 @@ var OrderCard = _styledComponents.default.div(_templateObject3 || (_templateObje
 
 exports.OrderCard = OrderCard;
 
-var OrderHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  > div {\n    display: flex;\n    margin: 10px 0;\n    > p {\n      font-size: 12px;\n    }\n  }\n"])));
+var OrderHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  > div {\n    display: flex;\n    margin: 5px 0 10px;\n    > p {\n      font-size: 12px;\n    }\n  }\n\n  > p {\n    font-size: 14px;\n    margin-top: 5px;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.colorPage;
+});
 
 exports.OrderHeader = OrderHeader;
 

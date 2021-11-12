@@ -62,13 +62,13 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       defaultValue = props.defaultValue,
       isPhoneView = props.isPhoneView,
       isFilterView = props.isFilterView,
-      singleDriverIds = props.singleDriverIds,
       small = props.small,
       padding = props.padding,
       orderView = props.orderView,
       driverActionStatus = props.driverActionStatus,
       handleAssignDriver = props.handleAssignDriver,
-      handleChangeDriver = props.handleChangeDriver;
+      handleChangeDriver = props.handleChangeDriver,
+      filterValues = props.filterValues;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -273,7 +273,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
 
   if (isFilterView) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
-      defaultValue: singleDriverIds,
+      defaultValue: filterValues.driverIds,
       placeholder: Placeholder,
       options: driversMultiOptionList,
       optionInnerMargin: "10px",

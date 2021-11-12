@@ -98,7 +98,7 @@ var BusinessDescription = _styledComponents.default.p(_templateObject16 || (_tem
 
 exports.BusinessDescription = BusinessDescription;
 
-var BusinessConfigsContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-bottom: 50px;\n  overflow: hidden;\n  > div:last-child {\n    border-bottom: none;\n  }\n\n  ", "\n"])), function (props) {
+var BusinessConfigsContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-bottom: 50px;\n  overflow: hidden;\n  ", "\n\n  > div:first-child {\n    border-top: none !important;\n  }\n\n  > div:last-child {\n    border-bottom: none !important;\n  }  \n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref2) {
   var isLoading = _ref2.isLoading;

@@ -15,7 +15,11 @@ var _FirstSelect = require("../../styles/Select/FirstSelect");
 
 var _MultiSelect = require("../../styles/MultiSelect");
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -76,7 +80,12 @@ var CitySelectorUI = function CitySelectorUI(props) {
 
     setCityOptions(_cityOptions);
   }, [citiesList, isDefault]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isDefault ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, citiesList !== null && citiesList !== void 0 && citiesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    style: {
+      height: '100%',
+      lineHeight: 'normal'
+    }
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isDefault ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     placeholder: placeholder,
     defaultValue: defaultValue,
     options: cityOptions,
@@ -90,7 +99,7 @@ var CitySelectorUI = function CitySelectorUI(props) {
     onChange: function onChange(city) {
       return handleChangeCity(city);
     }
-  }));
+  })));
 };
 
 var CitySelector = function CitySelector(props) {

@@ -143,6 +143,7 @@ var DriversManagerUI = function DriversManagerUI(props) {
 
 var DriversManager = function DriversManager(props) {
   var DriversControlProps = _objectSpread(_objectSpread({}, props), {}, {
+    asDashboard: true,
     UIComponent: DriversManagerUI
   });
 
