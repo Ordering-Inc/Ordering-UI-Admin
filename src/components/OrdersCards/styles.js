@@ -46,10 +46,16 @@ export const OrderCard = styled.div`
 export const OrderHeader = styled.div`
   > div {
     display: flex;
-    margin: 10px 0;
+    margin: 5px 0 10px;
     > p {
       font-size: 12px;
     }
+  }
+
+  > p {
+    font-size: 14px;
+    margin-top: 5px;
+    color: ${props => props.theme.colors.colorPage};
   }
 `
 

@@ -11,6 +11,7 @@ import { Select } from '../../styles/Select/FirstSelect'
 import { Alert, Confirm } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
+import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
 import { Modal } from '../Modal'
 import { PlusCircle } from 'react-bootstrap-icons'
 import { IconButton } from '../../styles/Buttons'
@@ -78,6 +79,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
+  const [selectedSubOptionId, setSelectedSubOptionId] = useState(null)
 
   const handleClickImage = () => {
     optionImageInputRef.current.click()
@@ -381,7 +383,14 @@ const ProductExtraOptionDetailsUI = (props) => {
                     title={ActionIcon}
                     id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                   >
-                    <Dropdown.Item onClick={() => console.log()}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => {
+                        setSelectedSubOptionId(subOption?.id)
+                        setOpenModal({ ...openModal, subOptionMetaFields: true })
+                      }}
+                    >
+                      {t('CUSTOM_FIELDS', 'Custom fields')}
+                    </Dropdown.Item>
                     <Dropdown.Item onClick={() => handleDeteteClick(subOption.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
                   </DropdownButton>
                 </DropDownWrapper>
@@ -507,6 +516,23 @@ const ProductExtraOptionDetailsUI = (props) => {
             businessId={business.id}
             extraId={extra.id}
             optionId={optionState.option.id}
+          />
+        </Modal>
+      )}
+      {openModal?.subOptionMetaFields && selectedSubOptionId && (
+        <Modal
+          width='70%'
+          open={openModal?.subOptionMetaFields}
+          onClose={() => {
+            setSelectedSubOptionId(null)
+            setOpenModal({ ...openModal, option: false })
+          }}
+        >
+          <ProductExtraSubOptionMetaFields
+            businessId={business.id}
+            extraId={extra.id}
+            optionId={optionState.option.id}
+            subOptionId={selectedSubOptionId}
           />
         </Modal>
       )}

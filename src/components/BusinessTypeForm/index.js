@@ -72,6 +72,12 @@ const BusinessTypeFormUI = (props) => {
     }
   }
 
+  const checkKeyDown = (e) => {
+    const keyCode = e.keyCode ? e.keyCode : e.which
+    if (keyCode === 13 && Object.keys(formState?.changes).length === 0) handleCloseAddForm()
+    if (keyCode === 13 && Object.keys(formState?.changes).length > 0 && !formState?.loading) handleUpdateClick()
+  }
+
   useEffect(() => {
     if (formState?.result?.error) {
       setAlertState({
@@ -132,6 +138,7 @@ const BusinessTypeFormUI = (props) => {
           onChange={handleChangeInput}
           disabled={formState.loading}
           autoComplete='off'
+          onKeyDown={(e) => checkKeyDown(e)}
         />
       </Container>
       <Alert

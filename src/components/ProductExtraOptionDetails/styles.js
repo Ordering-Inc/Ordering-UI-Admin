@@ -215,6 +215,8 @@ export const CheckboxWrapper = styled.div`
     cursor: pointer;
     color: ${props => props.theme.colors.headingColor};
     font-size: 14px;
+    margin-bottom: 0px;
+
     ${props => props.theme?.rtl ? css`
       padding-right: 10px;
     ` : css`

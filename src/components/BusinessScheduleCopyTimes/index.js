@@ -3,6 +3,7 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { useLanguage } from 'ordering-components-admin'
 import MdcContentCopy from '@meronex/icons/mdc/MdcContentCopy'
+import { Button } from '../../styles'
 
 import {
   HeaderItem,
@@ -19,7 +20,8 @@ export const BusinessScheduleCopyTimes = (props) => {
     daysOfWeekIndex,
     selectedCopyDays,
     handleSelectDays,
-    cleanSelectedCopyDays
+    cleanSelectedCopyDays,
+    handleApplyScheduleCopyTimes
   } = props
   const [, t] = useLanguage()
   const referenceElement = useRef()
@@ -79,24 +81,32 @@ export const BusinessScheduleCopyTimes = (props) => {
           <PopoverList>
             {daysOptions.map(option => (
               <React.Fragment key={option.value}>
-                {option.value !== daysOfWeekIndex && (
-                  <CopyItem
-                    isChecked={selectedCopyDays.includes(option.value)}
-                    onClick={() => handleSelectDays(option.value)}
-                  >
-                    {selectedCopyDays.includes(option.value) ? (
-                      <RiCheckboxFill />
-                    ) : (
-                      <RiCheckboxBlankLine />
-                    )}
-                    <span>
-                      {option.content}
-                    </span>
-                  </CopyItem>
-                )}
+                <CopyItem
+                  disabled={option.value === daysOfWeekIndex}
+                  isChecked={selectedCopyDays.includes(option.value)}
+                  onClick={() => handleSelectDays(option.value)}
+                >
+                  {(option.value === daysOfWeekIndex || selectedCopyDays.includes(option.value)) ? (
+                    <RiCheckboxFill />
+                  ) : (
+                    <RiCheckboxBlankLine />
+                  )}
+                  <span>
+                    {option.content}
+                  </span>
+                </CopyItem>
               </React.Fragment>
             ))}
           </PopoverList>
+          <Button
+            color='primary'
+            onClick={() => {
+              handleApplyScheduleCopyTimes(daysOfWeekIndex)
+              props.onClose && props.onClose()
+            }}
+          >
+            {t('APPLY', 'Apply')}
+          </Button>
         </PopoverBody>
       )}
     </div>

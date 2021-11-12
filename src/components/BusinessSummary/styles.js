@@ -7,6 +7,9 @@ export const BusinessDetailsContainer = styled.div`
   padding: 20px;
   position: relative;
   overflow-x: hidden;
+  @media (min-width: 768px) {
+    min-width: 500px;
+  }
 `
 
 export const DetailsHeader = styled.div`
@@ -130,13 +133,17 @@ export const BusinessConfigsContainer = styled.div`
   border-radius: 8px;
   margin-bottom: 50px;
   overflow: hidden;
-  > div:last-child {
-    border-bottom: none;
-  }
-
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;
   `}
+
+  > div:first-child {
+    border-top: none !important;
+  }
+
+  > div:last-child {
+    border-bottom: none !important;
+  }  
 `
 
 export const BusinessConfigItem = styled.div`

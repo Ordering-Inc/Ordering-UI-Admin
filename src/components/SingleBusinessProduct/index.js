@@ -44,7 +44,9 @@ const SingleBusinessProductUI = (props) => {
     isEditMode,
     productDetailsId,
     businessState,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    dataSelected,
+    setDataSelected
   } = props
 
   const theme = useTheme()
@@ -134,6 +136,11 @@ const SingleBusinessProductUI = (props) => {
 
   const handleAllowDrop = (event) => {
     event.preventDefault()
+    const element = event.target.closest('.draggable-product')
+    if (element) {
+      console.log(element.dataset.index)
+      setDataSelected(element.dataset.index)
+    }
   }
 
   const handleDrop = (event) => {
@@ -168,6 +175,7 @@ const SingleBusinessProductUI = (props) => {
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0])
     }
+    setDataSelected('')
   }
 
   return (
@@ -217,6 +225,9 @@ const SingleBusinessProductUI = (props) => {
               onDragOver={e => handleAllowDrop(e)}
               onDrop={e => handleDrop(e)}
               onDragEnd={e => handleDragEnd(e)}
+              className='draggable-product'
+              data-index={product.id}
+              isAccept={dataSelected && dataSelected === product?.id?.toString()}
             >
               <tr>
                 {allowColumns?.business && (

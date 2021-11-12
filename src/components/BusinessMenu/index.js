@@ -48,6 +48,13 @@ const BusinessMenuUI = (props) => {
     setShowOption(null)
     setIsExtendExtraOpen(false)
   }
+
+  const handleOpenEdit = (e, menu) => {
+    const isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.action_wrapper')
+    if (isInvalid) return
+    handleOpenOptions('option', menu)
+  }
+
   return (
     <MainContainer>
       <MenuContainer>
@@ -62,7 +69,7 @@ const BusinessMenuUI = (props) => {
           </Button>
         </Header>
         {businessMenusState?.menus.map(menu => (
-          <MeunItem key={menu.id}>
+          <MeunItem key={menu.id} onClick={(e) => handleOpenEdit(e, menu)}>
             <MenuName>{menu?.name}</MenuName>
             <EnableWrapper className='business_enable_control'>
               <span>{t('ENABLE', 'Enable')}</span>
@@ -71,7 +78,7 @@ const BusinessMenuUI = (props) => {
                 onChange={() => handleChangeBusinessMenuActiveState(menu?.id)}
               />
             </EnableWrapper>
-            <ActionsWrapper>
+            <ActionsWrapper className='action_wrapper'>
               <DropdownButton
                 menuAlign={theme?.rtl ? 'left' : 'right'}
                 title={ActionIcon}
