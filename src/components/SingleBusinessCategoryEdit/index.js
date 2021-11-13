@@ -13,7 +13,7 @@ import { Pencil } from 'react-bootstrap-icons'
 import {
   SingleCategoryContainer,
   CategoryContent,
-  CategoryContentInside,
+  CategoryContentInside
 } from './styles'
 import {
   ProductTypeImage,
@@ -28,7 +28,7 @@ export const SingleBusinessCategoryUI = (props) => {
     handleOpenCategoryDetails,
     categoryFormState,
     handlechangeImage,
-    isEditMode,
+    isEditMode
   } = props
 
   const [, t] = useLanguage()
@@ -99,29 +99,29 @@ export const SingleBusinessCategoryUI = (props) => {
       <SingleCategoryContainer
         data-index={categorySelected?.id}
       >
-      
-          {
-            isSkeleton
-              ? <Skeleton width={41} height={41} />
-              : (
-                <>
-                  <ProductTypeImage
-                    onClick={() => handleClickImage()}
+
+        {
+          isSkeleton
+            ? <Skeleton width={41} height={41} />
+            : (
+              <>
+                <ProductTypeImage
+                  onClick={() => handleClickImage()}
+                  disabled={categoryFormState?.loading}
+                  className='img-section'
+                >
+                  <ExamineClick
+                    onFiles={files => handleFiles(files)}
+                    childRef={(e) => { ProductTypeImgRef.current = e }}
+                    accept='image/png, image/jpeg, image/jpg'
                     disabled={categoryFormState?.loading}
-                    className='img-section'
                   >
-                    <ExamineClick
-                      onFiles={files => handleFiles(files)}
-                      childRef={(e) => { ProductTypeImgRef.current = e }}
+                    <DragAndDrop
+                      onDrop={dataTransfer => handleFiles(dataTransfer.files)}
                       accept='image/png, image/jpeg, image/jpg'
                       disabled={categoryFormState?.loading}
                     >
-                      <DragAndDrop
-                        onDrop={dataTransfer => handleFiles(dataTransfer.files)}
-                        accept='image/png, image/jpeg, image/jpg'
-                        disabled={categoryFormState?.loading}
-                      >
-                        {
+                      {
                           categoryFormState?.changes?.image
                             ? (
                               <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
@@ -131,13 +131,13 @@ export const SingleBusinessCategoryUI = (props) => {
                                 <BiImage />
                               </UploadWrapper>
                             )
-                        }
-                      </DragAndDrop>
-                    </ExamineClick>
-                  </ProductTypeImage>
-                </>
-              )
-          }
+                      }
+                    </DragAndDrop>
+                  </ExamineClick>
+                </ProductTypeImage>
+              </>
+            )
+        }
         <CategoryContent>
           {
             isSkeleton

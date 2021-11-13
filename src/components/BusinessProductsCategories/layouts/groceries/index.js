@@ -23,7 +23,7 @@ const BusinessProductsCategoriesUI = (props) => {
   const {
     isSkeleton,
     categories,
-    handlerClickCategory,
+    onClickCategory,
     categorySelected,
     featured,
     openCategories,
@@ -44,7 +44,7 @@ const BusinessProductsCategoriesUI = (props) => {
                         isSelected={categorySelected?.id === category.id}
                         isOpen={openCategories?.includes(category.id)}
                         spaceTab={categorySpace[category?.level ?? 1]}
-                        handleClickItem={() => handlerClickCategory(category)}
+                        handleClickItem={() => onClickCategory(category)}
                         IterateCategories={IterateCategories}
                       />
                     </div>
@@ -55,7 +55,7 @@ const BusinessProductsCategoriesUI = (props) => {
                     active={categorySelected?.id === category.id}
                     className={`${category.id === 'featured' ? 'special' : ''}`}
                     categorySpace={categorySpace[category?.level ?? 1]}
-                    onClick={() => handlerClickCategory(category)}
+                    onClick={() => onClickCategory(category)}
                   >
                     <span>
                       {category.name}
@@ -68,7 +68,7 @@ const BusinessProductsCategoriesUI = (props) => {
                 active={categorySelected?.id === category.id}
                 className={`${category.id === 'featured' ? 'special' : ''}`}
                 categorySpace={categorySpace[category?.level ?? 1]}
-                onClick={() => handlerClickCategory(category)}
+                onClick={() => onClickCategory(category)}
               >
                 <span>
                   {category.name}
@@ -83,7 +83,7 @@ const BusinessProductsCategoriesUI = (props) => {
             active={categorySelected?.id === category.id}
             className={`${category.id === 'featured' ? 'special' : ''}`}
             categorySpace={categorySpace[category?.level ?? 1]}
-            onClick={() => handlerClickCategory(category)}
+            onClick={() => onClickCategory(category)}
           >
             <span>
               {currentCat.name}
