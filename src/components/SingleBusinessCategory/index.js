@@ -94,14 +94,6 @@ export const SingleBusinessCategoryUI = (props) => {
         isAccept={dataSelected && dataSelected === category?.id.toString()}
       >
         <CategoryContent>
-          <BiCaretUp
-            className='rotate'
-            style={{
-              transform: isOpen
-                ? 'rotate(0deg)'
-                : 'rotate(180deg)'
-            }}
-          />
           {
             isSkeleton
               ? <Skeleton height={15} />

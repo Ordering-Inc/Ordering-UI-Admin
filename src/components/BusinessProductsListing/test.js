@@ -37,7 +37,8 @@ export const BusinessProductsListing = (props) => {
    * @param {Object} category Category object
    */
   const handleChangeCategory = (e, category) => {
-    e?.persist && e.persist()
+    const isInvalid = e?.target?.closest && (e?.target?.closest('.business_enable_control') || e.target.closest('.business_actions'))
+    if (isInvalid || category?.id === categorySelected?.id) return
     if (category?.subcategories?.length) {
       if (!category?.parent_category_id) {
         openCategories.values = []

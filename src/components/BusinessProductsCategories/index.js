@@ -5,8 +5,7 @@ import {
   CategoryListContainer,
   HeaderContainer,
   ListContent,
-  AddCategory,
-  CategoryTab
+  AddCategory
 } from './styles'
 import { AccordionDropdown } from '../AccordionDropdown'
 
@@ -27,12 +26,11 @@ export const BusinessProductsCategories = (props) => {
     onClickCategory,
     handleOpenCategoryDetails,
     openCategories,
-    categories
+    handleUpdateBusinessState
   } = props
 
   const [, t] = useLanguage()
   const [dataSelected, setDataSelected] = useState('')
-
   const IterateCategories = ({ list, isSub, currentCat }) => {
     return (
       <>
@@ -44,56 +42,53 @@ export const BusinessProductsCategories = (props) => {
                   <>
                     <div className='accordion'>
                       <AccordionDropdown
-                        item={category}
+                        category={category}
+                        categorySelected={categorySelected}
                         isSelected={categorySelected?.id === category.id}
-                        isOpen={openCategories?.includes(category.id)}
+                        className={`${category.id === 'featured' ? 'special' : ''}`}
+                        categorySpace={categorySpace[category?.level ?? 1]}
+                        handleChangeCategory={onClickCategory}
+                        business={businessState?.business}
+                        dataSelected={dataSelected}
                         spaceTab={categorySpace[category?.level ?? 1]}
-                        handleClickItem={(e) => onClickCategory(e, category)}
+                        isSkeleton={businessState?.loading}
+                        isOpen={openCategories?.includes(category.id)}
+                        onDataSelected={setDataSelected}
                         IterateCategories={IterateCategories}
+                        handleUpdateBusinessState={handleUpdateBusinessState}
                       />
                     </div>
                   </>
                 )}
                 {isSub && !category?.subcategories?.length && (
-                  <CategoryTab
-                    active={categorySelected?.id === category.id}
+                  <SingleBusinessCategory
+                    category={category}
+                    active={categorySelected}
                     className={`${category.id === 'featured' ? 'special' : ''}`}
                     categorySpace={categorySpace[category?.level ?? 1]}
-                    onClick={(e) => onClickCategory(e, category)}
-                  >
-                    <span>
-                      {category.name}
-                    </span>
-                  </CategoryTab>
+                    handleChangeCategory={onClickCategory}
+                    business={businessState?.business}
+                    dataSelected={dataSelected}
+                    onDataSelected={setDataSelected}
+                    handleUpdateBusinessState={handleUpdateBusinessState}
+                  />
                 )}
               </>
             ) : (
-              <CategoryTab
-                active={categorySelected?.id === category.id}
+              <SingleBusinessCategory
+                category={category}
+                categorySelected={categorySelected}
                 className={`${category.id === 'featured' ? 'special' : ''}`}
                 categorySpace={categorySpace[category?.level ?? 1]}
-                onClick={(e) => onClickCategory(e, category)}
-              >
-                <span>
-                  {category.name}
-                </span>
-              </CategoryTab>
+                handleChangeCategory={onClickCategory}
+                business={businessState?.business}
+                dataSelected={dataSelected}
+                onDataSelected={setDataSelected}
+                handleUpdateBusinessState={handleUpdateBusinessState}
+              />
             )}
           </div>
         ))}
-
-        {list && list?.length === 0 && isSub && (
-          <CategoryTab
-            active={categorySelected?.id === category.id}
-            className={`${category.id === 'featured' ? 'special' : ''}`}
-            categorySpace={categorySpace[category?.level ?? 1]}
-            onClick={(e) => onClickCategory(e, category)}
-          >
-            <span>
-              {currentCat.name}
-            </span>
-          </CategoryTab>
-        )}
       </>
     )
   }

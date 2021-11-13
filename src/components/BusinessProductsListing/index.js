@@ -44,7 +44,8 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateBusinessState,
     setCategorySelected,
     setBusinessSlug,
-    openCategories
+    openCategories,
+    setBusinessState
   } = props
 
   const [, t] = useLanguage()
@@ -188,6 +189,7 @@ const BusinessProductsListingUI = (props) => {
                 featured={featuredProducts}
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
                 openCategories={openCategories}
+                handleUpdateBusinessState={(business) => setBusinessState({ ...businessState, business })}
               />
             }
           </CategoryListContainer>
