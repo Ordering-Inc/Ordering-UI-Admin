@@ -9,7 +9,7 @@ import BsTable from '@meronex/icons/bs/BsTable'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductList } from '../BusinessProductList'
 import { ProductDetails } from '../ProductDetails'
-import { SingleBusinessCategory } from '../SingleBusinessCategoryEdit'
+import { SingleBusinessCategoryEdit } from '../SingleBusinessCategoryEdit'
 import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
@@ -192,7 +192,7 @@ const BusinessProductsListingUI = (props) => {
           </CategoryListContainer>
           <ProductListContainer>
             <ProductHeader>
-              <SingleBusinessCategory
+              <SingleBusinessCategoryEdit
                 {...props}
                 category={categorySelected}
                 categorySelected={categorySelected}

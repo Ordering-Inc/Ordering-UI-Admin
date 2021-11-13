@@ -165,7 +165,7 @@ export const SingleBusinessCategoryUI = (props) => {
   )
 }
 
-export const SingleBusinessCategory = (props) => {
+export const SingleBusinessCategoryEdit = (props) => {
   const { isSkeleton } = props
   const singleBusinessCategoryProps = {
     ...props,
