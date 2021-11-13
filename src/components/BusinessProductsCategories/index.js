@@ -49,7 +49,7 @@ export const BusinessProductsCategories = (props) => {
                         isSelected={categorySelected?.id === category.id}
                         isOpen={openCategories?.includes(category.id)}
                         spaceTab={categorySpace[category?.level ?? 1]}
-                        handleClickItem={(e) => onClickCategory(e, category)}
+                        handleClickItem={() => handlerClickCategory(category)}
                         IterateCategories={IterateCategories}
                       />
                     </div>
@@ -60,7 +60,7 @@ export const BusinessProductsCategories = (props) => {
                     active={categorySelected?.id === category.id}
                     className={`${category.id === 'featured' ? 'special' : ''}`}
                     categorySpace={categorySpace[category?.level ?? 1]}
-                    onClick={(e) => onClickCategory(e, category)}
+                    onClick={() => handlerClickCategory(category)}
                   >
                     <span>
                       {category.name}
@@ -88,7 +88,7 @@ export const BusinessProductsCategories = (props) => {
             active={categorySelected?.id === category.id}
             className={`${category.id === 'featured' ? 'special' : ''}`}
             categorySpace={categorySpace[category?.level ?? 1]}
-            onClick={(e) => onClickCategory(e, category)}
+            onClick={() => handlerClickCategory(category)}
           >
             <span>
               {currentCat.name}
