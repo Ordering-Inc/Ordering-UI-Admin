@@ -36,9 +36,6 @@ export const SingleCategoryContainer = styled.div`
 export const CategoryContent = styled.div`
   flex-grow: 1;
   color: ${props => props.theme.colors.headingColor};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   ${props => props.theme?.rtl ? css`
       padding-right: 10px;
     ` : css`
@@ -67,6 +64,7 @@ export const CategoryActionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 4px;
   > div:first-child {
     padding: 0 5px;
   }

@@ -42,7 +42,8 @@ const BusinessProductsListingUI = (props) => {
     categoryId,
     handleUpdateBusinessState,
     setCategorySelected,
-    setBusinessSlug
+    setBusinessSlug,
+    openCategories
   } = props
 
   const [, t] = useLanguage()
@@ -185,20 +186,20 @@ const BusinessProductsListingUI = (props) => {
                 onClickCategory={handleChangeCategory}
                 featured={featuredProducts}
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
+                openCategories={openCategories}
               />
             }
           </CategoryListContainer>
           <ProductListContainer>
             <ProductHeader>
               <SingleBusinessCategory
-                  {...props}
-                  key={i}
-                  category={categorySelected}
-                  categorySelected={categorySelected}
-                  handleChangeCategory={handleChangeCategory}
-                  business={businessState?.business}
-                  handleOpenCategoryDetails={handleOpenCategoryDetails}
-                />
+                {...props}
+                category={categorySelected}
+                categorySelected={categorySelected}
+                handleChangeCategory={handleChangeCategory}
+                business={businessState?.business}
+                handleOpenCategoryDetails={handleOpenCategoryDetails}
+              />
               <ActionIconList>
                 <ViewMethodButton
                   active={viewMethod === 'list'}
