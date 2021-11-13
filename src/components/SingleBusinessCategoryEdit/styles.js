@@ -34,7 +34,9 @@ export const SingleCategoryContainer = styled.div`
 `
 
 export const CategoryContent = styled.div`
-  /* flex-grow: 1; */
+  display: flex;
+  justify-content: flex-start;
+  width: 180px;
   color: ${props => props.theme.colors.headingColor};
   cursor: pointer;
   ${props => props.theme?.rtl ? css`
@@ -46,7 +48,36 @@ export const CategoryContent = styled.div`
 export const CategoryContentInside = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 80px;
+    padding-left: 10px;
+    width: 50px;
+;
+`
+export const ImageContainer = styled.div`
+  min-height: 38px;
+  min-width: 38px;
+  height: 38px;
+  width: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+  ${props => props.theme?.rtl ? css`
+  maring-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
+  img,
+  div {
+    width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    overflow: hidden;
+  };
+  img{
+    object-fit: cover;
+  }
 `
 
 export const CategoryActionContainer = styled.div`

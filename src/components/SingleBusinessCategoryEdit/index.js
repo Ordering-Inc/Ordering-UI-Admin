@@ -9,14 +9,14 @@ import {
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Pencil } from 'react-bootstrap-icons'
+import { Pencil, Trash} from 'react-bootstrap-icons'
 import {
   SingleCategoryContainer,
   CategoryContent,
-  CategoryContentInside
+  CategoryContentInside,
+  ImageContainer
 } from './styles'
 import {
-  ProductTypeImage,
   UploadWrapper
 } from '../SingleBusinessProduct/styles'
 
@@ -28,7 +28,8 @@ export const SingleBusinessCategoryUI = (props) => {
     handleOpenCategoryDetails,
     categoryFormState,
     handlechangeImage,
-    isEditMode
+    isEditMode,
+    deleteCategory
   } = props
 
   const [, t] = useLanguage()
@@ -105,22 +106,10 @@ export const SingleBusinessCategoryUI = (props) => {
             ? <Skeleton width={41} height={41} />
             : (
               <>
-                <ProductTypeImage
-                  onClick={() => handleClickImage()}
+                <ImageContainer
                   disabled={categoryFormState?.loading}
                   className='img-section'
                 >
-                  <ExamineClick
-                    onFiles={files => handleFiles(files)}
-                    childRef={(e) => { ProductTypeImgRef.current = e }}
-                    accept='image/png, image/jpeg, image/jpg'
-                    disabled={categoryFormState?.loading}
-                  >
-                    <DragAndDrop
-                      onDrop={dataTransfer => handleFiles(dataTransfer.files)}
-                      accept='image/png, image/jpeg, image/jpg'
-                      disabled={categoryFormState?.loading}
-                    >
                       {
                           categoryFormState?.changes?.image
                             ? (
@@ -132,9 +121,7 @@ export const SingleBusinessCategoryUI = (props) => {
                               </UploadWrapper>
                             )
                       }
-                    </DragAndDrop>
-                  </ExamineClick>
-                </ProductTypeImage>
+                </ImageContainer>
               </>
             )
         }
@@ -143,10 +130,13 @@ export const SingleBusinessCategoryUI = (props) => {
             isSkeleton
               ? <Skeleton height={15} />
               : (
-                <CategoryContentInside onClick={() => handleOpenCategoryDetails(categorySelected)}>
-                  <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-                  <Pencil />
+                <>
+                <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
+                <CategoryContentInside >
+                <Pencil onClick={() => handleOpenCategoryDetails(categorySelected)} />
+                <Trash onClick={deleteCategory} />
                 </CategoryContentInside>
+                </>
               )
           }
         </CategoryContent>
