@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
-  DragAndDrop,
-  ExamineClick,
   SingleBusinessCategory as SingleBusinessCategoryController
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'

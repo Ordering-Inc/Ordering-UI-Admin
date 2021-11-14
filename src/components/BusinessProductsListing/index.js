@@ -237,6 +237,7 @@ const BusinessProductsListingUI = (props) => {
             onClose={handleCloseEdit}
             category={categoryToEdit?.category}
             businessState={businessState}
+            categorySelected={categorySelected}
           />
         )
       }
