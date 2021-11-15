@@ -48,7 +48,7 @@ export const DriversCompanyGeneralDetails = (props) => {
       })
       return
     }
-    driversCompany ? handleUpdateDriversCompany(driversCompany.id, changesState) : handleAddDriversCompany()
+    driversCompany ? handleUpdateDriversCompany() : handleAddDriversCompany()
   }
 
   useEffect(() => {

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { DriversCompanyDetails as DriversCompanyDetailsController } from './naked'
+
 import { DragScroll } from '../DragScroll'
 import { DriversCompanyGeneralDetails } from '../DriversCompanyGeneralDetails'
 import { DriversCompanyScheduleDetails } from '../DriversCompanyScheduleDetails'
@@ -12,7 +14,7 @@ import {
   Tab
 } from './styles'
 
-export const DriversCompanyDetailsForm = (props) => {
+const DriversCompanyDetailsFormUI = (props) => {
   const {
     driversCompany,
     changesState
@@ -62,4 +64,12 @@ export const DriversCompanyDetailsForm = (props) => {
       )}
     </DetailsContainer>
   )
+}
+
+export const DriversCompanyDetailsForm = (props) => {
+  const driversCompanyDetailsProps = {
+    ...props,
+    UIComponent: DriversCompanyDetailsFormUI
+  }
+  return <DriversCompanyDetailsController {...driversCompanyDetailsProps} />
 }
