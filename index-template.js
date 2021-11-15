@@ -114,7 +114,7 @@ Sentry.init({
 
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
-  tracesSampleRate: 1.0
+  tracesSampleRate: window?.location?.hostname === 'localhost' ? 0 : 0.5
 })
 
 const logos = {
