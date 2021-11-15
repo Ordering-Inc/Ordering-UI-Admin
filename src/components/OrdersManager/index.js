@@ -23,6 +23,7 @@ const OrdersManagerUI = (props) => {
     driversList,
     paymethodsList,
     businessesList,
+    citiesList,
     ordersStatusGroup,
     filterValues,
     deletedOrderId,
@@ -108,6 +109,7 @@ const OrdersManagerUI = (props) => {
           searchValue={searchValue}
           driverGroupList={driverGroupList}
           driversList={driversList}
+          citiesList={citiesList}
           paymethodsList={paymethodsList}
           businessesList={businessesList}
           filterValues={filterValues}
