@@ -12,6 +12,8 @@ export const NotFound = styled.div`
   h1 {
     opacity: 0.5;
     text-align: center;
+    font-size: 24px;
+    margin: 10px 0;
   }
 
   @media (max-width: 576px) {
