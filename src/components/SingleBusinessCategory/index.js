@@ -6,7 +6,7 @@ import {
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
 import { Switch } from '../../styles/Switch'
-import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
+
 import {
   SingleCategoryContainer,
   CategoryContent,
@@ -29,7 +29,7 @@ export const SingleBusinessCategoryUI = (props) => {
     handleDragEnd,
     onDataSelected,
     dataSelected,
-    isOpen
+    spaceTab
   } = props
 
   const [, t] = useLanguage()
@@ -92,6 +92,7 @@ export const SingleBusinessCategoryUI = (props) => {
         className='draggable-category'
         data-index={category?.id}
         isAccept={dataSelected && dataSelected === category?.id.toString()}
+        spaceTab={spaceTab}
       >
         <CategoryContent>
           {

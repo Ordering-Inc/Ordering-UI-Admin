@@ -58,3 +58,8 @@ export const CategoryInfoWrapper = styled.div`
     margin-left: 5px;
   }
 `
+
+export const AccordionContainer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+`

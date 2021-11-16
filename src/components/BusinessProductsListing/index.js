@@ -190,6 +190,7 @@ const BusinessProductsListingUI = (props) => {
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
                 openCategories={openCategories}
                 handleUpdateBusinessState={(business) => setBusinessState({ ...businessState, business })}
+                setCategorySelected={setCategorySelected}
               />
             }
           </CategoryListContainer>

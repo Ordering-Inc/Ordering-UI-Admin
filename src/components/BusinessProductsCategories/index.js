@@ -26,12 +26,14 @@ export const BusinessProductsCategories = (props) => {
     onClickCategory,
     handleOpenCategoryDetails,
     openCategories,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    setOpenCategories,
+    setCategorySelected
   } = props
 
   const [, t] = useLanguage()
   const [dataSelected, setDataSelected] = useState('')
-  const IterateCategories = ({ list, isSub, currentCat }) => {
+  const IterateCategories = ({ list, isSub, index = 0 }) => {
     return (
       <>
         {list?.length && list?.map(category => (
@@ -46,16 +48,20 @@ export const BusinessProductsCategories = (props) => {
                         categorySelected={categorySelected}
                         isSelected={categorySelected?.id === category.id}
                         className={`${category.id === 'featured' ? 'special' : ''}`}
-                        categorySpace={categorySpace[category?.level ?? 1]}
                         handleChangeCategory={onClickCategory}
+                        handleOpenCategoryDetails={handleOpenCategoryDetails}
                         business={businessState?.business}
                         dataSelected={dataSelected}
-                        spaceTab={categorySpace[category?.level ?? 1]}
+                        spaceTab={categorySpace[index ?? 0]}
+                        index={index}
                         isSkeleton={businessState?.loading}
                         isOpen={openCategories?.includes(category.id)}
                         onDataSelected={setDataSelected}
                         IterateCategories={IterateCategories}
                         handleUpdateBusinessState={handleUpdateBusinessState}
+                        setOpenCategories={setOpenCategories}
+                        openCategories={openCategories}
+                        setCategorySelected={setCategorySelected}
                       />
                     </div>
                   </>
@@ -71,6 +77,7 @@ export const BusinessProductsCategories = (props) => {
                     dataSelected={dataSelected}
                     onDataSelected={setDataSelected}
                     handleUpdateBusinessState={handleUpdateBusinessState}
+                    spaceTab={categorySpace[index ?? 0]}
                   />
                 )}
               </>
@@ -107,7 +114,7 @@ export const BusinessProductsCategories = (props) => {
               ))
             )
           }
-          {businessState?.business?.categories?.length && <IterateCategories list={businessState?.business?.categories} />}
+          {businessState?.business?.categories?.length && <IterateCategories list={businessState?.business.categories.sort((a, b) => a.rank - b.rank)} />}
           {/* {
             !businessState.loading && businessState?.business?.categories.length > 0 && (
               businessState?.business.categories.sort((a, b) => a.rank - b.rank).map((category, i) => (

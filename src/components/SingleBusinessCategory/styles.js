@@ -9,6 +9,7 @@ export const SingleCategoryContainer = styled.div`
   transition: all 0.3s;
   cursor: pointer;
   height: 75px;
+  margin-left: ${props => props.spaceTab ?? 0}px;
 
   &:hover {
     background: ${props => props.theme.colors.lightPrimary};

@@ -1,9 +1,10 @@
 import React from 'react'
 import BiCaretUp from '@meronex/icons/bi/BiCaretUp'
 import Skeleton from 'react-loading-skeleton'
-import { CategoryTab, CategoryEnableWrapper, CategoryInfoWrapper } from './styles'
+import { CategoryTab, CategoryEnableWrapper, CategoryInfoWrapper, AccordionContainer } from './styles'
 import { Switch } from '../../styles/Switch'
 import { SingleBusinessCategory as SingleBusinessCategoryController } from 'ordering-components-admin'
+
 const AccordionDropdownUI = (props) => {
   const {
     category,
@@ -13,17 +14,30 @@ const AccordionDropdownUI = (props) => {
     isOpen,
     IterateCategories,
     spaceTab,
-    handleChangeCategory
+    handleChangeCategory,
+    index,
+    setOpenCategories,
+    openCategories,
+    categorySelected,
+    setCategorySelected
   } = props
 
+  const handleOnClick = () => {
+    setOpenCategories({ values: openCategories.filter(categoryId => categoryId !== categorySelected.id) })
+    if (isOpen) {
+      setCategorySelected(null)
+    }
+  }
+
   return (
-    <div className='accordion-category' style={{ display: 'flex', flexDirection: 'column-reverse' }}>
+    <AccordionContainer className='accordion-category'>
       {isOpen && (
         <div className='accordion-content'>
           <IterateCategories
             list={category.subcategories}
             isSub
             currentCat={category}
+            index={index + 1}
           />
         </div>
       )}
@@ -31,7 +45,7 @@ const AccordionDropdownUI = (props) => {
         active={isSelected}
         className='accordion-title'
         categorySpace={spaceTab}
-        onClick={(e) => handleChangeCategory(e, category)}
+        onClick={(e) => isSelected ? handleOnClick() : handleChangeCategory(e, category)}
       >
         <CategoryInfoWrapper>
           {!isSkeleton && (
@@ -61,7 +75,7 @@ const AccordionDropdownUI = (props) => {
           }
         </CategoryEnableWrapper>
       </CategoryTab>
-    </div>
+    </AccordionContainer>
   )
 }
 
