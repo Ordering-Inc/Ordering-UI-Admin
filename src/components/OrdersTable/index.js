@@ -421,7 +421,7 @@ export const OrdersTable = (props) => {
                     <td className='businessInfo'>
                       <BusinessInfo>
                         <WrapperImage>
-                          <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                          <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
                         </WrapperImage>
                         <div className='info'>
                           <p className='bold'>{order?.business?.name}</p>
@@ -435,7 +435,7 @@ export const OrdersTable = (props) => {
                       <CustomerInfo>
                         <WrapperImage>
                           {order?.customer?.photo ? (
-                            <Image bgimage={order?.customer?.photo} />
+                            <Image bgimage={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} />
                           ) : (
                             <FaUserAlt />
                           )}
