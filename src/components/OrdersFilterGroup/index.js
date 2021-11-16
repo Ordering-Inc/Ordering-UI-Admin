@@ -28,6 +28,7 @@ const OrdersFilterGroupUI = (props) => {
     driversList,
     paymethodsList,
     businessesList,
+    citiesList,
     handleChangeGroup,
     handleChangeDateType,
     handleChangeFromDate,
@@ -101,6 +102,7 @@ const OrdersFilterGroupUI = (props) => {
         </WrapperRow>
         <WrapperRow>
           <CitySelector
+            cities={citiesList}
             filterValues={filterValues}
             handleChangeCity={handleChangeCity}
           />

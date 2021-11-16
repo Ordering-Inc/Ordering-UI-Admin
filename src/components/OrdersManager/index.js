@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
+import { useLanguage, useSession, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
@@ -23,6 +23,7 @@ const OrdersManagerUI = (props) => {
     driversList,
     paymethodsList,
     businessesList,
+    citiesList,
     ordersStatusGroup,
     filterValues,
     deletedOrderId,
@@ -43,6 +44,8 @@ const OrdersManagerUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
+
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
@@ -90,11 +93,15 @@ const OrdersManagerUI = (props) => {
     const id = query.get('id')
     if (id === null) setIsOpenOrderDetail(false)
     else {
-      setOrderDetailId(id)
-      onOrderRedirect && onOrderRedirect(id)
-      setIsOpenOrderDetail(true)
+      if (user?.level === 5) {
+        handleBackRedirect()
+      } else {
+        setOrderDetailId(id)
+        onOrderRedirect && onOrderRedirect(id)
+        setIsOpenOrderDetail(true)
+      }
     }
-  }, [])
+  }, [user])
 
   return (
     <>
@@ -108,6 +115,7 @@ const OrdersManagerUI = (props) => {
           searchValue={searchValue}
           driverGroupList={driverGroupList}
           driversList={driversList}
+          citiesList={citiesList}
           paymethodsList={paymethodsList}
           businessesList={businessesList}
           filterValues={filterValues}
