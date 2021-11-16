@@ -61,7 +61,6 @@ export const OrdersTable = (props) => {
 
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
-    orderNumber: true,
     status: true,
     dateTime: true,
     business: true,
@@ -72,10 +71,6 @@ export const OrdersTable = (props) => {
   })
 
   const optionsDefault = [
-    {
-      value: 'orderNumber',
-      content: t('NUMBER_OF_ORDER', 'Number of order')
-    },
     {
       value: 'status',
       content: t('STATUS', 'Status')
