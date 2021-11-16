@@ -56,6 +56,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       driversList = props.driversList,
       paymethodsList = props.paymethodsList,
       businessesList = props.businessesList,
+      citiesList = props.citiesList,
       ordersStatusGroup = props.ordersStatusGroup,
       filterValues = props.filterValues,
       deletedOrderId = props.deletedOrderId,
@@ -77,6 +78,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
 
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
 
@@ -140,11 +145,15 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     if (isSelectedOrders) return;
     var id = query.get('id');
     if (id === null) setIsOpenOrderDetail(false);else {
-      setOrderDetailId(id);
-      onOrderRedirect && onOrderRedirect(id);
-      setIsOpenOrderDetail(true);
+      if ((user === null || user === void 0 ? void 0 : user.level) === 5) {
+        handleBackRedirect();
+      } else {
+        setOrderDetailId(id);
+        onOrderRedirect && onOrderRedirect(id);
+        setIsOpenOrderDetail(true);
+      }
     }
-  }, []);
+  }, [user]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
@@ -154,6 +163,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     searchValue: searchValue,
     driverGroupList: driverGroupList,
     driversList: driversList,
+    citiesList: citiesList,
     paymethodsList: paymethodsList,
     businessesList: businessesList,
     filterValues: filterValues,

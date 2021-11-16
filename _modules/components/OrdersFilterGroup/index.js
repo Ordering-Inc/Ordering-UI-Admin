@@ -61,6 +61,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       driversList = props.driversList,
       paymethodsList = props.paymethodsList,
       businessesList = props.businessesList,
+      citiesList = props.citiesList,
       handleChangeGroup = props.handleChangeGroup,
       handleChangeDateType = props.handleChangeDateType,
       handleChangeFromDate = props.handleChangeFromDate,
@@ -126,6 +127,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CitySelector.CitySelector, {
+    cities: citiesList,
     filterValues: filterValues,
     handleChangeCity: handleChangeCity
   }), /*#__PURE__*/_react.default.createElement(_styles.MultiSelectContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {

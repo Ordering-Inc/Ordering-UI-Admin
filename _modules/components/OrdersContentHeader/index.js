@@ -53,6 +53,7 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       searchValue = props.searchValue,
       driverGroupList = props.driverGroupList,
       driversList = props.driversList,
+      citiesList = props.citiesList,
       paymethodsList = props.paymethodsList,
       businessesList = props.businessesList,
       filterValues = props.filterValues,
@@ -125,6 +126,7 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     driversList: driversList,
     paymethodsList: paymethodsList,
     businessesList: businessesList,
+    citiesList: citiesList,
     handleChangeFilterValues: handleChangeFilterValues
   }));
 };

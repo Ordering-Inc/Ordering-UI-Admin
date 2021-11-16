@@ -76,7 +76,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var windowSize = (0, _useWindowSize.useWindowSize)();
 
@@ -200,7 +202,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return toggleAccordion(e);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
-    bgimage: product === null || product === void 0 ? void 0 : product.images
+    bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_100,c_limit')
   })), isCartProduct ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,
     value: product.quantity,

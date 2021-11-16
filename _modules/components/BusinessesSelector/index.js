@@ -62,7 +62,7 @@ var BusinessesSelector = function BusinessesSelector(props) {
           value: business.id,
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessImage, null, business.logo && /*#__PURE__*/_react.default.createElement(_styles.BusinessImage, {
             bgimage: business.logo
-          })), /*#__PURE__*/_react.default.createElement(_styles.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.OptionName, null, business.name), /*#__PURE__*/_react.default.createElement(_styles.OptionCategory, null, business.alcohol && t('ALCOHOL', 'Alcohol'), business.food && t('FOOD', 'Food'), business.groceries && t('GROCERIES', 'Groceries'), business.laundry && t('LAUNDRY', 'Laundry'))))
+          })), /*#__PURE__*/_react.default.createElement(_styles.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.OptionName, null, business.name), /*#__PURE__*/_react.default.createElement(_styles.OptionCategory, null, (business === null || business === void 0 ? void 0 : business.alcohol) && t('ALCOHOL', 'Alcohol'), (business === null || business === void 0 ? void 0 : business.food) && t('FOOD', 'Food'), (business === null || business === void 0 ? void 0 : business.groceries) && t('GROCERIES', 'Groceries'), (business === null || business === void 0 ? void 0 : business.laundry) && t('LAUNDRY', 'Laundry'))))
         };
       });
 

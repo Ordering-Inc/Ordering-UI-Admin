@@ -135,7 +135,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       var _driversOptionListTemp = driversList.drivers.map(function (driver, i) {
         return {
           value: driver.id,
-          showDisable: !(isFilterView || driver !== null && driver !== void 0 && driver.enabled && driver !== null && driver !== void 0 && driver.available && !(driver !== null && driver !== void 0 && driver.busy)),
+          showDisable: isFilterView ? true : !(isFilterView || driver !== null && driver !== void 0 && driver.enabled && driver !== null && driver !== void 0 && driver.available && !(driver !== null && driver !== void 0 && driver.busy)),
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
             small: small,
             isPhoneView: isPhoneView,
