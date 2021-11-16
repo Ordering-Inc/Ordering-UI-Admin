@@ -4,9 +4,8 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  // BusinessCategoryEdit as BusinessCategoryEditController
+  BusinessCategoryEdit as BusinessCategoryEditController
 } from 'ordering-components-admin'
-import { BusinessCategoryEdit as BusinessCategoryEditController } from './test'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { bytesConverter } from '../../utils'
 import { Alert } from '../Confirm'
@@ -40,7 +39,7 @@ const BusinessCategoryEditUI = (props) => {
     businessState,
     category
   } = props
-  // console.log(props)
+
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -206,13 +205,14 @@ const BusinessCategoryEditUI = (props) => {
                     autoComplete='off'
                   />
                 </CategoryNameWrapper>
-                <BusinessEnableWrapper className='business_enable_control'>
-                    <span>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
+                {!category && (<BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex' ,alignItems: 'center' }}>
+                    <span style={{fontSize: 15}}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
                     <Switch
                       defaultChecked={false}
                       onChange={(val) => handleChangeCheckBox({enabledParent: val})}
                     />
-                </BusinessEnableWrapper>
+                  </BusinessEnableWrapper>
+                )}
                 <BtnWrapper>
                   <Button
                     borderRadius='8px'

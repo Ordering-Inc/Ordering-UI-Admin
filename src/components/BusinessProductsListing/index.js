@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage,  BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
 import BsViewList from '@meronex/icons/bs/BsViewList'
@@ -14,7 +14,6 @@ import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
-import { BusinessProductsListing as BusinessProductsListingController } from './test'
 import {
   CategoryProductsContainer,
   HeaderContainer,
