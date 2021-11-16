@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useLanguage, useSession } from 'ordering-components-admin'
+import { useLanguage, useSession, useUtils } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
@@ -29,6 +29,7 @@ export const OrderContactInformation = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [{ optimizeImage }] = useUtils()
 
   return (
     <>
@@ -39,7 +40,7 @@ export const OrderContactInformation = (props) => {
               <BusinessInfo>
                 <PhotoWrapper>
                   {order?.business?.logo ? (
-                    <Photo bgimage={order?.business?.logo} />
+                    <Photo bgimage={optimizeImage(order?.business?.logo, 'h_50,c_limit')} />
                   ) : (
                     <BisBusiness />
                   )}
@@ -102,7 +103,7 @@ export const OrderContactInformation = (props) => {
           <CustomerInfo>
             <PhotoWrapper>
               {order?.business?.photo ? (
-                <Photo bgimage={order?.customer?.photo} />
+                <Photo bgimage={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} />
               ) : (
                 <FaUserAlt />
               )}
@@ -171,7 +172,7 @@ export const OrderContactInformation = (props) => {
           <DriverInfo>
             <PhotoWrapper>
               {order?.driver?.photo ? (
-                <Photo bgimage={order?.driver?.photo} />
+                <Photo bgimage={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} />
               ) : (
                 <FaUserAlt />
               )}

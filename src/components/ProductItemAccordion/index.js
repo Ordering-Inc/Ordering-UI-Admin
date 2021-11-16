@@ -38,7 +38,7 @@ export const ProductItemAccordion = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
   const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
@@ -123,7 +123,7 @@ export const ProductItemAccordion = (props) => {
         <ProductInfo>
           {product?.images && (
             <WrapperProductImage>
-              <ProductImage bgimage={product?.images} />
+              <ProductImage bgimage={optimizeImage(product?.images, 'h_100,c_limit')} />
             </WrapperProductImage>
           )}
           {isCartProduct ? (
