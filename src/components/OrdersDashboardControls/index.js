@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSession } from 'ordering-components-admin'
 import { OrderStatusTypeSelector } from '../../components/OrderStatusTypeSelector'
 import { OrdersExportCSV } from '../OrdersExportCSV'
 import { OrderDelete } from '../OrderDelete'
@@ -16,6 +17,8 @@ export const OrdersDashboardControls = (props) => {
     handleChangeMultiOrdersStatus
   } = props
 
+  const [{ user }] = useSession()
+
   return (
     <>
       <OrderDashboardControlsContainer>
@@ -23,9 +26,11 @@ export const OrdersDashboardControls = (props) => {
           <OrdersExportCSV filterValues={filterValues} />
           {selectedOrderNumber > 0 && (
             <>
-              <OrderDelete
-                handleDeleteMultiOrders={handleDeleteMultiOrders}
-              />
+              {user?.level !== 5 && (
+                <OrderDelete
+                  handleDeleteMultiOrders={handleDeleteMultiOrders}
+                />
+              )}
               <WrapOrderStatusTypeSelector>
                 <OrderStatusTypeSelector
                   orderControl
