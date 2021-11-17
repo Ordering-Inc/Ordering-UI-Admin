@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { AdvancedReports as AdvancedReportsController } from './naked'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
@@ -22,6 +23,7 @@ import {
   TableWrapper,
   EmptyContent
 } from './styles'
+import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
 
 const ReportsDriverOrderTimeUI = (props) => {
   const {
@@ -33,6 +35,7 @@ const ReportsDriverOrderTimeUI = (props) => {
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [isOrderTypeFilter, setIsOrderTypeFilter] = useState(false)
 
   const tableRef = useRef(null)
 
@@ -110,6 +113,11 @@ const ReportsDriverOrderTimeUI = (props) => {
             onClick={() => setIsBusinessFilter(true)}
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
+          </Button>
+          <Button
+            onClick={() => setIsOrderTypeFilter(true)}
+          >
+            {t('ORDER_TYPE', 'Order type')} ({filterList?.delivery_types_ids ? filterList?.delivery_types_ids.length : t('ALL', 'All')})
           </Button>
         </BrandBusinessWrapper>
         <CalendarWrapper>
@@ -200,6 +208,19 @@ const ReportsDriverOrderTimeUI = (props) => {
       >
         <ReportsBrandFilter
           {...props} onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('ORDER_TYPE', 'Order type')}
+        open={isOrderTypeFilter}
+        onClose={() => setIsOrderTypeFilter(false)}
+      >
+        <ReportsOrderTypeFilter
+          {...props}
+          onClose={() => setIsOrderTypeFilter(false)}
         />
       </Modal>
     </ReportsBusinessSpendContainer>
