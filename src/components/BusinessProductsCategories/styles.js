@@ -39,3 +39,43 @@ export const AddCategory = styled.div`
   cursor: pointer;
   padding: 10px;
 `
+
+export const CategoryTab = styled.div`
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: ${props => props.categorySpace ?? 0}px;
+  border-radius: 8px;
+
+  ${({ active }) => active && css`
+    background: ${props => props.theme.colors.lightPrimary};
+    border: 1px solid ${props => props.theme.colors.primary};
+    box-sizing: border-box;
+    .actions-btn {
+      display: block;
+    }
+  `}
+
+  &:hover {
+    background: ${props => props.theme.colors.lightPrimary};
+  }
+`
+
+export const CategoryEnableWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  span {
+    font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
+    font-size: 12px;
+    margin: 0px;
+    ${props => props.theme?.rtl ? css`
+      padding-left: 10px;
+    ` : css`
+      padding-right: 10px;
+    `}
+  }
+`
