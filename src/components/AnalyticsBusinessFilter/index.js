@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { SearchBar } from '../SearchBar'
 import {
   AnalyticsBusinessFilterContainer,
   BusinessFilterOption,
   BusinessName,
-  FilterBtnWrapper
+  FilterBtnWrapper,
+  SearchWrapper
 } from './styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
 import { Pagination } from '../Pagination'
-import { useLanguage, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './naked'
 
 const AnalyticsBusinessFilterUI = (props) => {
   const {
@@ -19,7 +22,9 @@ const AnalyticsBusinessFilterUI = (props) => {
     handleChangeBusinessId,
     handleClickFilterButton,
     isAllCheck,
-    handleChangeAllCheck
+    handleChangeAllCheck,
+    searchValue,
+    onSearch
   } = props
 
   const [, t] = useLanguage()
@@ -59,14 +64,22 @@ const AnalyticsBusinessFilterUI = (props) => {
     }
     const indexOfLastPost = currentPage * pagesPerPage
     const indexOfFirstPost = indexOfLastPost - pagesPerPage
-    const _currentProducts = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
+    const _currentBusinessList = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
-    setCurrentPages(_currentProducts)
+    setCurrentPages(_currentBusinessList)
   }, [businessList, currentPage, pagesPerPage])
 
   return (
     <>
       <AnalyticsBusinessFilterContainer>
+        <SearchWrapper>
+          <SearchBar
+            search={searchValue}
+            isCustomLayout
+            onSearch={(value) => onSearch(value)}
+            placeholder={t('SEARCH', 'Search')}
+          />
+        </SearchWrapper>
         {businessList.loading ? (
           [...Array(10).keys()].map(i => (
             <BusinessFilterOption key={i}>
@@ -131,6 +144,7 @@ export const AnalyticsBusinessFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
     propsToFetch: ['id', 'name', 'slug', 'franchise_id'],
+    isSearchByName: true,
     UIComponent: AnalyticsBusinessFilterUI
   }
   return <AnalyticsBusinessFilterController {...AnalyticsBusinessFilterProps} />
