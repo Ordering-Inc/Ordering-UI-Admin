@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useConfig, GoogleMapsMap, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useConfig, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -19,6 +19,7 @@ import {
   WrapperMap
 } from './styles'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { GoogleMapsMap } from './naked'
 
 const ReportsHeatMapUI = (props) => {
   const {
@@ -47,6 +48,14 @@ const ReportsHeatMapUI = (props) => {
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
     }
+  }
+
+  const fillStyle = {
+    fillColor: '#2C7BE5',
+    strokeColor: '#03459E',
+    fillOpacity: 0.2,
+    strokeWeight: 2,
+    editable: false
   }
 
   const defaultPosition = { lat: 40.77473399999999, lng: -73.9653844 }
@@ -116,6 +125,8 @@ const ReportsHeatMapUI = (props) => {
                 apiKey={configState?.configs?.google_maps_api_key?.value}
                 location={defaultPosition}
                 locations={reportData?.content?.locations}
+                data={reportData?.content?.zones}
+                fillStyle={fillStyle}
                 mapControls={googleMapsControls}
                 isHeatMap
                 isHeat={isHeat}
