@@ -149,7 +149,7 @@ export const BusinessMenuBasicOptions = (props) => {
   return (
     <>
       <BusinessMenuBasicContainer>
-        <FieldName>{t('BUSINESS_NAME', 'Business name')}</FieldName>
+        <FieldName>{t('MENU_NAME', 'Menu name')}</FieldName>
         <Input
           name='name'
           placeholder={t('NAME', 'Name')}
@@ -158,7 +158,7 @@ export const BusinessMenuBasicOptions = (props) => {
           }
           onChange={(e) => handleChangeInput(e)}
         />
-        <FieldName isBorderBottom>{t('DELIVERY_TYPE', 'Delivery type')}</FieldName>
+        <FieldName isBorderBottom>{t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order Type')}</FieldName>
         {orderTypes.map(orderType => (
           <OrderType
             key={orderType.value}
