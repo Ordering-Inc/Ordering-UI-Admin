@@ -157,7 +157,7 @@ const BusinessCategoryEditUI = (props) => {
                     }
                     <Switch
                       defaultChecked={formState?.changes?.enabled || false}
-                      onChange={handleChangeCheckBox}
+                      onChange={(val) => handleChangeCheckBox({enabled: val})}
                     />
                   </BusinessEnableWrapper>
                   <IconButton
@@ -205,6 +205,14 @@ const BusinessCategoryEditUI = (props) => {
                     autoComplete='off'
                   />
                 </CategoryNameWrapper>
+                {!category && (<BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex' ,alignItems: 'center' }}>
+                    <span style={{fontSize: 15}}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
+                    <Switch
+                      defaultChecked={false}
+                      onChange={(val) => handleChangeCheckBox({enabledParent: val})}
+                    />
+                  </BusinessEnableWrapper>
+                )}
                 <BtnWrapper>
                   <Button
                     borderRadius='8px'
