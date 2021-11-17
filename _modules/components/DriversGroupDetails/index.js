@@ -23,6 +23,8 @@ var _DriversGroupPaymethods = require("../DriversGroupPaymethods");
 
 var _DriversGroupLogistics = require("../DriversGroupLogistics");
 
+var _DriversGroupLogs = require("../DriversGroupLogs");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -79,6 +81,9 @@ var DriversGroupDetails = function DriversGroupDetails(props) {
     }, {
       key: 'advanced_logistics',
       value: t('ADVANCED_LOGISTICS', 'Advanced logistics')
+    }, {
+      key: 'logs',
+      value: t('LOGS', 'Logs')
     }] : [{
       key: 'general',
       value: t('GENERAL', 'General')
@@ -88,6 +93,9 @@ var DriversGroupDetails = function DriversGroupDetails(props) {
     }, {
       key: 'paymethods',
       value: t('PAYMENT_METHODS', 'Payment methods')
+    }, {
+      key: 'logs',
+      value: t('LOGS', 'Logs')
     }];
 
     setDriversGroupMenus(_driversGroupMenus);
@@ -111,7 +119,9 @@ var DriversGroupDetails = function DriversGroupDetails(props) {
   }))), (showMenu === 'general' || !curDriversGroup) && /*#__PURE__*/_react.default.createElement(_DriversGroupGeneralForm.DriversGroupGeneralForm, _extends({}, props, {
     useAdvanced: useAdvanced,
     setUseAdvanced: setUseAdvanced
-  })), showMenu === 'businesses' && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), showMenu === 'paymethods' && /*#__PURE__*/_react.default.createElement(_DriversGroupPaymethods.DriversGroupPaymethods, props), showMenu === 'advanced_logistics' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogistics.DriversGroupLogistics, props)));
+  })), showMenu === 'businesses' && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), showMenu === 'paymethods' && /*#__PURE__*/_react.default.createElement(_DriversGroupPaymethods.DriversGroupPaymethods, props), showMenu === 'advanced_logistics' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogistics.DriversGroupLogistics, props), showMenu === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogs.DriversGroupLogs, {
+    driversGroupId: curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.id
+  })));
 };
 
 exports.DriversGroupDetails = DriversGroupDetails;
