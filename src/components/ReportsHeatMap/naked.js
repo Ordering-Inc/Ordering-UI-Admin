@@ -238,6 +238,7 @@ export const GoogleMaps = (props) => {
               center: zone.data.center,
               radius: zone.data.radio
             })
+            console.log(circle)
           }
           if (zone.type === 2 && Array.isArray(zone.data)) {
             const polygon = new window.google.maps.Polygon({
@@ -246,6 +247,7 @@ export const GoogleMaps = (props) => {
               map: map,
               paths: zone.data
             })
+            console.log(polygon)
           }
         })
       }
