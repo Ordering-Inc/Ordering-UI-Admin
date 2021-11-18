@@ -142,8 +142,11 @@ export const BusinessList = (props) => {
                   {allowColumns?.business && (
                     <th className='business'>{t('BUSINESS', 'Business')}</th>
                   )}
-                  {(allowColumns?.minimum || allowColumns?.deliveryFee || allowColumns?.distance || allowColumns?.deliveryTime || allowColumns?.featured || allowColumns?.ratings) && (
-                    <th colSpan={6}>{t('DETAILS', 'Details')}</th>
+                  {allowColumns?.featured && (
+                    <th>{t('DETAILS', 'Details')}</th>
+                  )}
+                  {allowColumns?.ratings && (
+                    <th />
                   )}
                   <th>{t('ACTIONS', 'Actions')}</th>
                   <th>

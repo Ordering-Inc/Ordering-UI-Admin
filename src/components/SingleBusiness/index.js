@@ -121,28 +121,24 @@ const SingleBusinessUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {(allowColumns?.featured || allowColumns?.ratings) && (
-                  <>
-                    <td>
-                      {allowColumns?.featured && (
-                        <InfoBlock>
-                          {businessState?.business?.featured && (
-                            <p>{t('FEATURE', 'Featured')}</p>
-                          )}
-                        </InfoBlock>
+                {allowColumns?.featured && (
+                  <td>
+                    <InfoBlock>
+                      {businessState?.business?.featured && (
+                        <p>{t('FEATURE', 'Featured')}</p>
                       )}
-                    </td>
-                    <td>
-                      {allowColumns?.ratings && businessState?.business?.reviews?.total > 0 && (
-                        <InfoBlock>
-                          <p className='star'><StarFill /></p>
-                          {businessState?.business?.reviews?.total && (
-                            <p>{businessState?.business?.reviews?.total}</p>
-                          )}
-                        </InfoBlock>
+                    </InfoBlock>
+                  </td>
+                )}
+                {allowColumns?.ratings && businessState?.business?.reviews?.total > 0 && (
+                  <td>
+                    <InfoBlock>
+                      <p className='star'><StarFill /></p>
+                      {businessState?.business?.reviews?.total && (
+                        <p>{businessState?.business?.reviews?.total}</p>
                       )}
-                    </td>
-                  </>
+                    </InfoBlock>
+                  </td>
                 )}
                 <td>
                   <BusinessEnableWrapper className='business_enable_control'>
