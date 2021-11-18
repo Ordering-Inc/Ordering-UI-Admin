@@ -9,7 +9,7 @@ export const DriverScheduleContainer = styled.div`
   }
 `
 
-export const Title = styled.h2`
+export const ScheduleTitle = styled.h2`
   font-weight: bold;
   font-size: 20px;
   color: ${props => props.theme?.colors.headingColor};
