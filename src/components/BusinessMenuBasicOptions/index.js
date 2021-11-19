@@ -56,7 +56,8 @@ export const BusinessMenuBasicOptions = (props) => {
     setOpenAddScheduleInex,
     scheduleTimes,
     selectedProductsIds,
-    setSelectedProductsIds
+    setSelectedProductsIds,
+    handleApplyScheduleCopyTimes
   } = props
   const [, t] = useLanguage()
   const [openCategories, setOpenCategories] = useState({})
@@ -327,6 +328,7 @@ export const BusinessMenuBasicOptions = (props) => {
                     onClose={() => setIsOpenCopytimes(null)}
                     selectedCopyDays={selectedCopyDays}
                     handleSelectDays={(value) => handleSelectCopyTimes(value, daysOfWeekIndex)}
+                    handleApplyScheduleCopyTimes={handleApplyScheduleCopyTimes}
                   />
                 </ScheduleActionBlock>
               </ScheduleBlock>
@@ -354,74 +356,6 @@ export const BusinessMenuBasicOptions = (props) => {
             handleTogglePopover={handleTogglePopover}
           />
         ))}
-        {/* {business?.categories.filter(_category => _category.products.length > 0).map(category => (
-          <CategoryProductsContainer key={category.id}>
-            <BusinessCategoryContainer
-              active={openCategoryProduct[category?.name]}
-            >
-              <CheckboxContainer
-                onClick={() => handleClickCategory(category.id)}
-              >
-                <CheckBoxWrapper
-                  active={
-                    (formState?.changes?.products ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') ||
-                    (formState?.changes?.products ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some')
-                  }
-                >
-                  {
-                    (formState?.changes?.products
-                      ? handleCheckCategory(category.id) === 'all'
-                      : isCheckedCategory(category.id) === 'all')
-                      ? (
-                        <RiCheckboxFill />
-                      ) : (
-                        (formState?.changes?.products
-                          ? handleCheckCategory(category.id) === 'some'
-                          : isCheckedCategory(category.id) === 'some')
-                          ? (
-                            <AiFillMinusSquare />
-                          ) : (
-                            <RiCheckboxBlankLine />
-                          )
-                      )
-                  }
-                </CheckBoxWrapper>
-                <span className='bold'>{category?.name}</span>
-              </CheckboxContainer>
-              {category?.products.length > 0 && (
-                <GoTriangleDown
-                  onClick={() => handleTogglePopover(category?.name)}
-                />
-              )}
-            </BusinessCategoryContainer>
-            {openCategoryProduct[category?.name] && (
-              <>
-                {category?.products.map(product => (
-                  <ProductContainer
-                    key={product.id}
-                    onClick={() => handleCheckProduct(product.id)}
-                  >
-                    <CheckboxContainer>
-                      <CheckBoxWrapper
-                        active={selectedProductsIds.includes(product?.id) ?? isCheckedProduct(product?.category_id, product?.id)}
-                      >
-                        {
-                          (selectedProductsIds.includes(product?.id) ?? isCheckedProduct(product?.category_id, product?.id))
-                            ? (
-                              <RiCheckboxFill />
-                            ) : (
-                              <RiCheckboxBlankLine />
-                            )
-                        }
-                      </CheckBoxWrapper>
-                      <span>{product?.name}</span>
-                    </CheckboxContainer>
-                  </ProductContainer>
-                ))}
-              </>
-            )}
-          </CategoryProductsContainer>
-        ))} */}
       </BusinessMenuBasicContainer>
       <Button
         color='primary'
