@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
-import { useLanguage, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  BusinessProductsListing as BusinessProductsListingController
+} from 'ordering-components-admin'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
 import BsViewList from '@meronex/icons/bs/BsViewList'
