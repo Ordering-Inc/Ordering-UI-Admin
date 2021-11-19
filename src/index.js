@@ -1,6 +1,8 @@
 import { AddressForm } from './components/AddressForm'
 import { AddressList } from './components/AddressList'
 import { AutoScroll } from './components/AutoScroll'
+import { AnalyticsBusinessFilter } from './components/AnalyticsBusinessFilter'
+import { AnalyticsCalendar } from './components/AnalyticsCalendar'
 import { BusinessActiveStateFilter } from './components/BusinessActiveStateFilter'
 import { BusinessAnalytics } from './components/BusinessAnalytics'
 import { BusinessBrandListing } from './components/BusinessBrandListing'
@@ -95,6 +97,8 @@ import { ReportsHeatMap } from './components/ReportsHeatMap'
 import { ReviewsListing } from './components/ReviewsListing'
 import { ReviewProductsListing } from './components/ReviewProductsListing'
 import { Reports } from './components/Reports'
+import { ReportsDriverGroupFilter } from './components/ReportsDriverGroupFilter'
+import { ReportsDriverFilter } from './components/ReportsDriverFilter'
 import { SearchBar } from './components/SearchBar'
 import { Settings } from './components/Settings'
 import { SettingItemUI } from './components/SettingItemUI'
@@ -139,6 +143,8 @@ export {
   AddressForm,
   AddressList,
   AutoScroll,
+  AnalyticsBusinessFilter,
+  AnalyticsCalendar,
   BusinessActiveStateFilter,
   BusinessAnalytics,
   BusinessBrandListing,
@@ -233,6 +239,8 @@ export {
   ReviewsListing,
   ReviewProductsListing,
   Reports,
+  ReportsDriverGroupFilter,
+  ReportsDriverFilter,
   SearchBar,
   Settings,
   SettingItemUI,
