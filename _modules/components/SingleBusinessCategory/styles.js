@@ -17,7 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SingleCategoryContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 10px;\n  border-radius: 7.5px;\n  margin-bottom: 15px;\n  transition: all 0.3s;\n  cursor: pointer;\n  height: 75px;\n\n  &:hover {\n    background: ", ";\n  }\n\n  ", "\n\n  ", "\n\n  .img-section {\n    min-width: 41px !important;\n    min-height: 41px !important;\n  }\n"])), function (props) {
+var SingleCategoryContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 10px;\n  border-radius: 7.5px;\n  margin-bottom: 15px;\n  transition: all 0.3s;\n  cursor: pointer;\n  height: 75px;\n  margin-left: ", "px;\n\n  &:hover {\n    background: ", ";\n  }\n\n  ", "\n\n  ", "\n\n  .img-section {\n    min-width: 41px !important;\n    min-height: 41px !important;\n  }\n"])), function (props) {
+  var _props$spaceTab;
+
+  return (_props$spaceTab = props.spaceTab) !== null && _props$spaceTab !== void 0 ? _props$spaceTab : 0;
+}, function (props) {
   return props.theme.colors.lightPrimary;
 }, function (_ref) {
   var active = _ref.active;
@@ -35,7 +39,7 @@ var SingleCategoryContainer = _styledComponents.default.div(_templateObject || (
 
 exports.SingleCategoryContainer = SingleCategoryContainer;
 
-var CategoryContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex-grow: 1;\n  color: ", ";\n  ", "\n  input {\n    width: 100%;\n    outline: none;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    font-size: 12px;\n    border-radius: 3px;\n    transition: all 0.3s;\n    border: 1px solid transparent;\n    padding: 2px 5px;\n    color: ", ";\n    &:focus {\n      background-color: #FFF;\n      border: 1px solid ", ";\n    }\n  }\n"])), function (props) {
+var CategoryContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex-grow: 1;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  ", "\n  input {\n    width: 100%;\n    outline: none;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    font-size: 12px;\n    border-radius: 3px;\n    transition: all 0.3s;\n    border: 1px solid transparent;\n    padding: 2px 5px;\n    color: ", ";\n    &:focus {\n      background-color: #FFF;\n      border: 1px solid ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme;
@@ -49,7 +53,7 @@ var CategoryContent = _styledComponents.default.div(_templateObject4 || (_templa
 
 exports.CategoryContent = CategoryContent;
 
-var CategoryActionContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: 4px;\n  > div:first-child {\n    padding: 0 5px;\n  }\n"])));
+var CategoryActionContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  > div:first-child {\n    padding: 0 5px;\n  }\n"])));
 
 exports.CategoryActionContainer = CategoryActionContainer;
 

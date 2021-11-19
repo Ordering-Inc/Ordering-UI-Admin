@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _SearchBar = require("../SearchBar");
+
 var _styles = require("./styles");
 
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
@@ -63,7 +65,9 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
       handleChangeDriverId = props.handleChangeDriverId,
       handleClickFilterButton = props.handleClickFilterButton,
       isAllCheck = props.isAllCheck,
-      handleChangeAllCheck = props.handleChangeAllCheck;
+      handleChangeAllCheck = props.handleChangeAllCheck,
+      searchValue = props.searchValue,
+      _onSearch = props.onSearch;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -131,7 +135,14 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
     setTotalPages(_totalPages);
     setCurrentPages(_currentProducts);
   }, [driverList, currentPage, pagesPerPage]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsBusinessFilterContainer, null, driverList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsBusinessFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    search: searchValue,
+    isCustomLayout: true,
+    onSearch: function onSearch(value) {
+      return _onSearch(value);
+    },
+    placeholder: t('SEARCH', 'Search')
+  })), driverList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterOption, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -171,6 +182,7 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
 var ReportsDriverFilter = function ReportsDriverFilter(props) {
   var AnalyticsBusinessFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     propsToFetch: ['id', 'name'],
+    isSearchByName: true,
     UIComponent: ReportsDriverFilterUI
   });
 

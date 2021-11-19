@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EmptyContent = exports.TableWrapper = exports.DistanceTitleBlock = exports.DistancePerBrandWrapper = exports.BrandBusinessWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.Title = exports.DriverScheduleContainer = void 0;
+exports.EmptyContent = exports.TableWrapper = exports.DistanceTitleBlock = exports.DistancePerBrandWrapper = exports.BrandBusinessWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.ScheduleTitle = exports.DriverScheduleContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -21,13 +21,13 @@ var DriverScheduleContainer = _styledComponents.default.div(_templateObject || (
 
 exports.DriverScheduleContainer = DriverScheduleContainer;
 
-var Title = _styledComponents.default.h2(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  font-size: 20px;\n  color: ", ";\n  margin-top: 0;\n  margin-bottom: 30px;\n"])), function (props) {
+var ScheduleTitle = _styledComponents.default.h2(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  font-size: 20px;\n  color: ", ";\n  margin-top: 0;\n  margin-bottom: 30px;\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.colors.headingColor;
 });
 
-exports.Title = Title;
+exports.ScheduleTitle = ScheduleTitle;
 
 var ButtonActionList = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n"])));
 

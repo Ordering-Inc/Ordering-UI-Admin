@@ -23,6 +23,8 @@ var _Modal = require("../Modal");
 
 var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
 
+var _ReportsOrderTypeFilter = require("../ReportsOrderTypeFilter");
+
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
 
 var _Confirm = require("../Confirm");
@@ -89,13 +91,18 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
       isBrandFilter = _useState4[0],
       setIsBrandFilter = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isOrderTypeFilter = _useState6[0],
+      setIsOrderTypeFilter = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
 
   var tableRef = (0, _react.useRef)(null);
 
@@ -178,7 +185,11 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setIsOrderTypeFilter(true);
+    }
+  }, t('ORDER_TYPE', 'Order type'), " (", filterList !== null && filterList !== void 0 && filterList.delivery_types_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.delivery_types_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
@@ -254,7 +265,7 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value);
+      }, td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
   }), (reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content9 = reportData1.content) === null || _reportData1$content9 === void 0 ? void 0 : (_reportData1$content10 = _reportData1$content9.footer) === null || _reportData1$content10 === void 0 ? void 0 : _reportData1$content10.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content11 = reportData1.content) === null || _reportData1$content11 === void 0 ? void 0 : (_reportData1$content12 = _reportData1$content11.footer) === null || _reportData1$content12 === void 0 ? void 0 : _reportData1$content12.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
@@ -291,6 +302,19 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBrandFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('ORDER_TYPE', 'Order type'),
+    open: isOrderTypeFilter,
+    onClose: function onClose() {
+      return setIsOrderTypeFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsOrderTypeFilter.ReportsOrderTypeFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsOrderTypeFilter(false);
     }
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('DRIVER_SCHEDULE', 'Driver schedule'),

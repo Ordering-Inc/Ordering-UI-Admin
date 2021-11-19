@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
-  var _reportData$content, _reportData$content2, _reportData$content2$, _configState$configs, _configState$configs$, _reportData$content3, _theme$images, _theme$images$icons;
+  var _reportData$content, _reportData$content2, _reportData$content2$, _configState$configs, _configState$configs$, _reportData$content3, _reportData$content4, _theme$images, _theme$images$icons;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -114,6 +114,13 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
       mapTypeIds: ['roadmap', 'satellite']
     }
   };
+  var fillStyle = {
+    fillColor: '#2C7BE5',
+    strokeColor: '#03459E',
+    fillOpacity: 0.2,
+    strokeWeight: 2,
+    editable: false
+  };
   var defaultPosition = {
     lat: 40.77473399999999,
     lng: -73.9653844
@@ -167,6 +174,8 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value,
     location: defaultPosition,
     locations: reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.locations,
+    data: reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.zones,
+    fillStyle: fillStyle,
     mapControls: googleMapsControls,
     isHeatMap: true,
     isHeat: isHeat,

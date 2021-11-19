@@ -17,10 +17,6 @@ var _Buttons = require("../../styles/Buttons");
 
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
 
-var _AiFillMinusSquare = _interopRequireDefault(require("@meronex/icons/ai/AiFillMinusSquare"));
-
-var _GoTriangleDown = _interopRequireDefault(require("@meronex/icons/go/GoTriangleDown"));
-
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
 
 var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
@@ -34,6 +30,8 @@ var _AiFillPlusCircle = _interopRequireDefault(require("@meronex/icons/ai/AiFill
 var _BusinessScheduleCopyTimes = require("../BusinessScheduleCopyTimes");
 
 var _Confirm = require("../Confirm");
+
+var _CategoryTreeNode = require("../CategoryTreeNode");
 
 var _styles = require("./styles");
 
@@ -70,16 +68,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
-  var _formState$result3, _ref, _formState$changes$na, _formState$changes, _businessMenuState$me3, _ref2, _formState$changes$co, _formState$changes2, _businessMenuState$me4;
+  var _formState$result3, _ref, _formState$changes$na, _formState$changes, _businessMenuState$me, _ref2, _formState$changes$co, _formState$changes2, _businessMenuState$me2;
 
   var business = props.business,
       businessMenuState = props.businessMenuState,
       formState = props.formState,
       handleChangeInput = props.handleChangeInput,
       handleCheckOrderType = props.handleCheckOrderType,
-      handleCheckCategory = props.handleCheckCategory,
-      handleClickCategory = props.handleClickCategory,
-      handleCheckProduct = props.handleCheckProduct,
       handleUpdateBusinessMenuOption = props.handleUpdateBusinessMenuOption,
       handleAddBusinessMenuOption = props.handleAddBusinessMenuOption,
       handleChangeTime = props.handleChangeTime,
@@ -97,7 +92,9 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
       openAddScheduleIndex = props.openAddScheduleIndex,
       setOpenAddScheduleInex = props.setOpenAddScheduleInex,
       scheduleTimes = props.scheduleTimes,
-      selectedProductsIds = props.selectedProductsIds;
+      selectedProductsIds = props.selectedProductsIds,
+      setSelectedProductsIds = props.setSelectedProductsIds,
+      handleApplyScheduleCopyTimes = props.handleApplyScheduleCopyTimes;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -105,8 +102,8 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
 
   var _useState = (0, _react.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      openCategoryProduct = _useState2[0],
-      setOpenCategoryProduct = _useState2[1];
+      openCategories = _useState2[0],
+      setOpenCategories = _useState2[1];
 
   var _useState3 = (0, _react.useState)({
     open: false,
@@ -146,32 +143,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   var daysOfWeek = [t('SUNDAY_ABBREVIATION', 'Sun'), t('MONDAY_ABBREVIATION', 'Mon'), t('TUESDAY_ABBREVIATION', 'Tues'), t('WEDNESDAY_ABBREVIATION', 'Wed'), t('THURSDAY_ABBREVIATION', 'Thur'), t('FRIDAY_ABBREVIATION', 'Fri'), t('SATURDAY_ABBREVIATION', 'Sat')];
 
   var handleTogglePopover = function handleTogglePopover(type) {
-    setOpenCategoryProduct(_objectSpread(_objectSpread({}, openCategoryProduct), {}, _defineProperty({}, type, !openCategoryProduct[type])));
-  };
-
-  var isCheckedCategory = function isCheckedCategory(categoryId) {
-    var _businessMenuState$me;
-
-    if (!isEdit) return 'nothing';
-    var businessCategory = business === null || business === void 0 ? void 0 : business.categories.find(function (category) {
-      return category.id === categoryId;
-    });
-    var menuProducts = businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me = businessMenuState.menu) === null || _businessMenuState$me === void 0 ? void 0 : _businessMenuState$me.products.filter(function (product) {
-      return (product === null || product === void 0 ? void 0 : product.category_id) === categoryId;
-    });
-    var result = '';
-    if ((businessCategory === null || businessCategory === void 0 ? void 0 : businessCategory.products.length) !== 0 && (businessCategory === null || businessCategory === void 0 ? void 0 : businessCategory.products.length) === menuProducts.length) result = 'all';else if (menuProducts.length) result = 'some';else result = 'nothing';
-    return result;
-  };
-
-  var isCheckedProduct = function isCheckedProduct(categoryId, productId) {
-    var _businessMenuState$me2;
-
-    if (!isEdit) return false;
-    var found = businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me2 = businessMenuState.menu) === null || _businessMenuState$me2 === void 0 ? void 0 : _businessMenuState$me2.products.find(function (product) {
-      return (product === null || product === void 0 ? void 0 : product.category_id) === categoryId && product.id === productId;
-    });
-    return found;
+    setOpenCategories(_objectSpread(_objectSpread({}, openCategories), {}, _defineProperty({}, type, !openCategories[type])));
   };
 
   var closeAlert = function closeAlert() {
@@ -213,16 +185,16 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
       content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
     });
   }, [formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessMenuBasicContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('BUSINESS_NAME', 'Business name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessMenuBasicContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('MENU_NAME', 'Menu name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "name",
     placeholder: t('NAME', 'Name'),
-    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me3 = businessMenuState.menu) === null || _businessMenuState$me3 === void 0 ? void 0 : _businessMenuState$me3.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me = businessMenuState.menu) === null || _businessMenuState$me === void 0 ? void 0 : _businessMenuState$me.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, {
     isBorderBottom: true
-  }, t('DELIVERY_TYPE', 'Delivery type')), orderTypes.map(function (orderType) {
+  }, t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order Type')), orderTypes.map(function (orderType) {
     var _formState$changes$or, _formState$changes$or2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderType, {
@@ -350,51 +322,30 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
       selectedCopyDays: selectedCopyDays,
       handleSelectDays: function handleSelectDays(value) {
         return handleSelectCopyTimes(value, daysOfWeekIndex);
-      }
+      },
+      handleApplyScheduleCopyTimes: handleApplyScheduleCopyTimes
     })));
   }))), /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('COMMENTS', 'Comments')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     name: "comment",
-    defaultValue: (_ref2 = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.comment) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me4 = businessMenuState.menu) === null || _businessMenuState$me4 === void 0 ? void 0 : _businessMenuState$me4.comment) !== null && _ref2 !== void 0 ? _ref2 : '',
+    defaultValue: (_ref2 = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.comment) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me2 = businessMenuState.menu) === null || _businessMenuState$me2 === void 0 ? void 0 : _businessMenuState$me2.comment) !== null && _ref2 !== void 0 ? _ref2 : '',
     placeholder: t('WRITE_HERE', 'Write here'),
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.FieldName, {
     isBorderBottom: true
-  }, t('PRODUCTS', 'Products')), business === null || business === void 0 ? void 0 : business.categories.filter(function (_category) {
-    return _category.products.length > 0;
+  }, t('PRODUCTS', 'Products')), business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
+    return a.rank - b.rank;
   }).map(function (category) {
-    var _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes6;
-
-    return /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, {
-      key: category.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryContainer, {
-      active: openCategoryProduct[category === null || category === void 0 ? void 0 : category.name]
-    }, /*#__PURE__*/_react.default.createElement(_styles.CheckboxContainer, {
-      onClick: function onClick() {
-        return handleClickCategory(category.id);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
-      active: (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.products ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') || (formState !== null && formState !== void 0 && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.products ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some')
-    }, (formState !== null && formState !== void 0 && (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.products ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : (formState !== null && formState !== void 0 && (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.products ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some') ? /*#__PURE__*/_react.default.createElement(_AiFillMinusSquare.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", {
-      className: "bold"
-    }, category === null || category === void 0 ? void 0 : category.name)), (category === null || category === void 0 ? void 0 : category.products.length) > 0 && /*#__PURE__*/_react.default.createElement(_GoTriangleDown.default, {
-      onClick: function onClick() {
-        return handleTogglePopover(category === null || category === void 0 ? void 0 : category.name);
-      }
-    })), openCategoryProduct[category === null || category === void 0 ? void 0 : category.name] && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, category === null || category === void 0 ? void 0 : category.products.map(function (product) {
-      var _selectedProductsIds$, _selectedProductsIds$2;
-
-      return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
-        key: product.id,
-        onClick: function onClick() {
-          return handleCheckProduct(product.id);
-        }
-      }, /*#__PURE__*/_react.default.createElement(_styles.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
-        active: (_selectedProductsIds$ = selectedProductsIds.includes(product === null || product === void 0 ? void 0 : product.id)) !== null && _selectedProductsIds$ !== void 0 ? _selectedProductsIds$ : isCheckedProduct(product === null || product === void 0 ? void 0 : product.category_id, product === null || product === void 0 ? void 0 : product.id)
-      }, ((_selectedProductsIds$2 = selectedProductsIds.includes(product === null || product === void 0 ? void 0 : product.id)) !== null && _selectedProductsIds$2 !== void 0 ? _selectedProductsIds$2 : isCheckedProduct(product === null || product === void 0 ? void 0 : product.category_id, product === null || product === void 0 ? void 0 : product.id)) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name)));
-    })));
+    return /*#__PURE__*/_react.default.createElement(_CategoryTreeNode.CategoryTreeNode, {
+      key: category.id,
+      category: category,
+      selectedProductsIds: selectedProductsIds,
+      setSelectedProductsIds: setSelectedProductsIds,
+      openCategories: openCategories,
+      handleTogglePopover: handleTogglePopover
+    });
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     borderRadius: "5px",

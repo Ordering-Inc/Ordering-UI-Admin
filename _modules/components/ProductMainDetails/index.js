@@ -103,7 +103,7 @@ var ProductMainDetailsUI = function ProductMainDetailsUI(props) {
       return isEditMode ? setIsEditMode(false) : actionSidebar(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), !isEditMode ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
-    bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.images, 'h_400,c_limit')
+    bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.images, 'h_200,c_limit')
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.price)), /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.description), /*#__PURE__*/_react.default.createElement(_styles.ProductConfigsContainer, null, configsOptions.map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles.ProductConfigOption, {
       key: config.key,

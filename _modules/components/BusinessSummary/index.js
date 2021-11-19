@@ -139,9 +139,9 @@ var BusinessSummary = function BusinessSummary(props) {
     width: 60,
     height: 60
   }))) : /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
-    bgimage: optimizeImage(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.header, 'h_400,c_limit')
+    bgimage: optimizeImage(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.header, 'h_200,c_limit')
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
+    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_100,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContent, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
     borderRadius: "8px",

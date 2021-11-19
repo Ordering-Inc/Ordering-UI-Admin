@@ -15,21 +15,9 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Confirm = require("../Confirm");
 
-var _utils = require("../../utils");
-
 var _Switch = require("../../styles/Switch");
 
-var _styledComponents = require("styled-components");
-
-var _reactBootstrap = require("react-bootstrap");
-
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
-var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
-
 var _styles = require("./styles");
-
-var _styles2 = require("../SingleBusinessProduct/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
-  var _theme$images$icons, _categoryFormState$ch, _categoryFormState$ch2, _categoryFormState$ch3;
+  var _categoryFormState$ch;
 
   var category = props.category,
       categorySelected = props.categorySelected,
@@ -64,24 +52,18 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       isSkeleton = props.isSkeleton,
       handelChangeCategoryActive = props.handelChangeCategoryActive,
       handleUpdateClick = props.handleUpdateClick,
-      deleteCategory = props.deleteCategory,
-      handleOpenCategoryDetails = props.handleOpenCategoryDetails,
       categoryFormState = props.categoryFormState,
-      handlechangeImage = props.handlechangeImage,
-      handleInputChange = props.handleInputChange,
       isEditMode = props.isEditMode,
-      handleDragStart = props.handleDragStart,
       handleDragOver = props.handleDragOver,
       handleDrop = props.handleDrop,
       handleDragEnd = props.handleDragEnd,
       onDataSelected = props.onDataSelected,
-      dataSelected = props.dataSelected;
+      dataSelected = props.dataSelected,
+      spaceTab = props.spaceTab;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -92,45 +74,12 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       setAlertState = _useState2[1];
 
   var conatinerRef = (0, _react.useRef)(null);
-  var ProductTypeImgRef = (0, _react.useRef)(null);
-
-  var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
-
-  var handleClickImage = function handleClickImage() {
-    ProductTypeImgRef.current.click();
-  };
 
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
-  };
-
-  var handleFiles = function handleFiles(files) {
-    if (files.length === 1) {
-      var _files$;
-
-      var type = files[0].type.split('/')[0];
-
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        });
-        return;
-      }
-
-      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        });
-        return;
-      }
-
-      handlechangeImage(files[0]);
-    }
   };
 
   var closeProductEdit = function closeProductEdit(e) {
@@ -197,75 +146,19 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     },
     className: "draggable-category",
     "data-index": category === null || category === void 0 ? void 0 : category.id,
-    isAccept: dataSelected && dataSelected === (category === null || category === void 0 ? void 0 : category.id.toString())
-  }, /*#__PURE__*/_react.default.createElement(_styles.DraggableContainer, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 41,
-    height: 41
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
-    alt: "six dots",
-    draggable: true // onDragStart={e => handleDrag(e, category.id)}
-    ,
-    onDragStart: function onDragStart(e) {
-      return handleDragStart(e);
-    }
-  }), /*#__PURE__*/_react.default.createElement(_styles2.ProductTypeImage, {
-    onClick: function onClick() {
-      return handleClickImage();
-    },
-    disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading,
-    className: "img-section"
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
-    onFiles: function onFiles(files) {
-      return handleFiles(files);
-    },
-    childRef: function childRef(e) {
-      ProductTypeImgRef.current = e;
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
-    onDrop: function onDrop(dataTransfer) {
-      return handleFiles(dataTransfer.files);
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading
-  }, categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$ch = categoryFormState.changes) !== null && _categoryFormState$ch !== void 0 && _categoryFormState$ch.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image,
-    alt: "business type image",
-    loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), /*#__PURE__*/_react.default.createElement(_styles.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    isAccept: dataSelected && dataSelected === (category === null || category === void 0 ? void 0 : category.id.toString()),
+    spaceTab: spaceTab
+  }, /*#__PURE__*/_react.default.createElement(_styles.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15
-  }) : /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    name: "name",
-    value: (categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch3 = categoryFormState.changes) === null || _categoryFormState$ch3 === void 0 ? void 0 : _categoryFormState$ch3.name) || '',
-    onChange: handleInputChange,
-    autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_styles.CategoryActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryEnableWrapper, {
+  }) : /*#__PURE__*/_react.default.createElement("div", null, categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch = categoryFormState.changes) === null || _categoryFormState$ch === void 0 ? void 0 : _categoryFormState$ch.name), /*#__PURE__*/_react.default.createElement(_styles.CategoryActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryEnableWrapper, {
     className: "business_enable_control"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15,
     width: 100
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, category !== null && category !== void 0 && category.enabled ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: category === null || category === void 0 ? void 0 : category.enabled,
     onChange: handelChangeCategoryActive
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, {
-    className: "business_actions"
-  }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 15,
-    width: 15
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-    title: ActionIcon,
-    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-    onClick: function onClick() {
-      return handleOpenCategoryDetails(category);
-    }
-  }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-    onClick: deleteCategory
-  }, t('DELETE', 'Delete'))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CATEGORY', 'Category'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

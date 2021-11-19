@@ -62,8 +62,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
   var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _formState$changes$le, _formState$changes6, _props$afterComponent, _props$afterElements;
 
-  var isDelivery = props.isDelivery,
-      isEdit = props.isEdit,
+  var isEdit = props.isEdit,
       formState = props.formState,
       onCancel = props.onCancel,
       showField = props.showField,
@@ -75,7 +74,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       isCheckout = props.isCheckout,
       userData = props.userData,
       isCustomerMode = props.isCustomerMode,
-      handleChangeUserType = props.handleChangeUserType;
+      handleChangeUserType = props.handleChangeUserType,
+      isDriversPage = props.isDriversPage,
+      isDriversManagersPage = props.isDriversManagersPage;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -388,7 +389,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), !isDelivery && /*#__PURE__*/_react.default.createElement(_styles.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
+  }), !(isDriversManagersPage || isDriversPage) && /*#__PURE__*/_react.default.createElement(_styles.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
     userId: user.id,
     defaultUserType: (_formState$changes$le = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.level) !== null && _formState$changes$le !== void 0 ? _formState$changes$le : user === null || user === void 0 ? void 0 : user.level,

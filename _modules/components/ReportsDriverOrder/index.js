@@ -182,7 +182,7 @@ var ReportsDriverOrderUI = function ReportsDriverOrderUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value);
+      }, td.value_unit === 'currency' ? "".concat(td.value, "$") : td.value_refers === 'percentage' ? "".concat(td.value, "%") : td.value);
     })));
   }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.footer) === null || _reportData$content7$ === void 0 ? void 0 : _reportData$content7$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.footer) === null || _reportData$content8$ === void 0 ? void 0 : _reportData$content8$.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {

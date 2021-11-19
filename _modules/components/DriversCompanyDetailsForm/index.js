@@ -161,9 +161,6 @@ var DriversCompanyDetailsForm = function DriversCompanyDetailsForm(props) {
       return handleChangesState('webhook_new_order', e.target.value);
     },
     placeholder: t('WEBHOOK_NEW_ORDER', 'Webhook new order'),
-    ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('WEBHOOK_NEW_ORDER', 'Webhook new order'))
-    }),
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('WEBHOOK_CANCEL_REQUEST', 'Webhook cancel request')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "webhook_cancel_request",
@@ -172,9 +169,6 @@ var DriversCompanyDetailsForm = function DriversCompanyDetailsForm(props) {
       return handleChangesState('webhook_cancel_request', e.target.value);
     },
     placeholder: t('WEBHOOK_CANCEL_REQUEST', 'Webhook cancel request'),
-    ref: register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('WEBHOOK_CANCEL_REQUEST', 'Webhook cancel request'))
-    }),
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('WEBHOOK_ORDER_STATUS_CHANGED', 'Webhook order status changed')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "webhook_order_status_changed",

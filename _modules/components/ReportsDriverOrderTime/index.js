@@ -27,6 +27,8 @@ var _ReportsBrandFilter = require("../ReportsBrandFilter");
 
 var _styles = require("./styles");
 
+var _ReportsOrderTypeFilter = require("../ReportsOrderTypeFilter");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -81,6 +83,11 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       isBrandFilter = _useState4[0],
       setIsBrandFilter = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isOrderTypeFilter = _useState6[0],
+      setIsOrderTypeFilter = _useState6[1];
 
   var tableRef = (0, _react.useRef)(null);
 
@@ -140,6 +147,31 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
     document.body.removeChild(downloadLink);
   };
 
+  var convertHMS = function convertHMS(value) {
+    var sec = parseInt(value, 10); // convert value to number if it's string
+
+    var hours = Math.floor(sec / 3600); // get hours
+
+    var minutes = Math.floor((sec - hours * 3600) / 60); // get minutes
+
+    var seconds = sec - hours * 3600 - minutes * 60; //  get seconds
+    // add 0 if value < 10; Example: 2 => 02
+
+    if (hours < 10) {
+      hours = '0' + hours;
+    }
+
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+
+    return hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.ReportsBusinessSpendContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SERVICE_TIMES', 'Service Times')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setIsBrandFilter(true);
@@ -148,7 +180,11 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setIsOrderTypeFilter(true);
+    }
+  }, t('ORDER_TYPE', 'Order type'), " (", filterList !== null && filterList !== void 0 && filterList.delivery_types_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.delivery_types_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
@@ -182,7 +218,7 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value);
+      }, td.value_unit === 'seconds' && td.value ? convertHMS(td.value) : td.value);
     })));
   }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.footer) === null || _reportData$content7$ === void 0 ? void 0 : _reportData$content7$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.footer) === null || _reportData$content8$ === void 0 ? void 0 : _reportData$content8$.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
@@ -219,6 +255,19 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBrandFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('ORDER_TYPE', 'Order type'),
+    open: isOrderTypeFilter,
+    onClose: function onClose() {
+      return setIsOrderTypeFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsOrderTypeFilter.ReportsOrderTypeFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsOrderTypeFilter(false);
     }
   }))));
 };

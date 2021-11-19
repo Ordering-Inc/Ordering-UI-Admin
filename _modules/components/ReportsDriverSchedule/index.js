@@ -11,10 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _reactApexcharts = _interopRequireDefault(require("react-apexcharts"));
-
-var _moment = _interopRequireDefault(require("moment"));
-
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
 
 var _Buttons = require("../../styles/Buttons");
@@ -30,6 +26,12 @@ var _Confirm = require("../Confirm");
 var _Modal = require("../Modal");
 
 var _styles = require("./styles");
+
+require("devextreme/dist/css/dx.common.css");
+
+require("devextreme/dist/css/dx.light.compact.css");
+
+var _chart = require("devextreme-react/chart");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66,7 +68,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
-  var _reportData$content$f, _reportData$content, _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content4, _reportData$content4$;
+  var _reportData$content2, _reportData$content2$, _reportData$content2$2, _reportData$content3, _reportData$content3$;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -75,6 +77,10 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parseDate = _useUtils2[0].parseDate;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -113,6 +119,16 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     });
   };
 
+  var customizeTooltip = function customizeTooltip(arg) {
+    return {
+      text: getText(arg, arg.valueText)
+    };
+  };
+
+  var getText = function getText(item, text) {
+    return "".concat(parseDate(item.rangeValue2), " ~ ").concat(parseDate(item.rangeValue2));
+  };
+
   (0, _react.useEffect)(function () {
     if (reportData !== null && reportData !== void 0 && reportData.error) {
       setAlertState({
@@ -121,77 +137,31 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
       });
     }
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.error]);
-  var options = {
-    chart: {
-      height: '100%',
-      type: 'rangeBar',
-      redrawOnParentResize: true
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        barHeight: '70%'
-      }
-    },
-    xaxis: {
-      min: new Date((_reportData$content$f = (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : _reportData$content.from) !== null && _reportData$content$f !== void 0 ? _reportData$content$f : '2019-03-05 00:00:00').getTime(),
-      type: 'datetime',
-      labels: {
-        formatter: function formatter(value, timestamp, opts) {
-          return (0, _moment.default)(value).format('MM-DD HH:mm');
-        }
-      }
-    },
-    stroke: {
-      width: 1
-    },
-    fill: {
-      type: 'solid',
-      opacity: 0.6
-    },
-    legend: {
-      position: 'top',
-      horizontalAlign: 'center'
-    },
-    tooltip: {
-      custom: function custom(opts) {
-        var from = (0, _moment.default)(opts.y1).format('MM-DD HH:mm');
-        var to = (0, _moment.default)(opts.y2).format('MM-DD HH:mm');
-        var values = opts.ctx.rangeBar.getTooltipValues(opts);
-        return '<div class="apexcharts-tooltip-rangebar">' + '<div> <span class="series-name" style="color: ' + values.color + '">' + (values.seriesName ? values.seriesName : '') + '</span></div>' + '<div> <span class="category">' + values.ylabel + ' </span> <span class="value start-value">' + from + '</span> <span class="separator">-</span> <span class="value end-value">' + to + '</span></div>' + '</div>';
-      }
-    }
-  };
   (0, _react.useEffect)(function () {
-    var _reportData$content2, _reportData$content2$;
+    var _reportData$content, _reportData$content$d;
 
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.data) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0) {
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$d = _reportData$content.data) === null || _reportData$content$d === void 0 ? void 0 : _reportData$content$d.length) > 0) {
       var _series = [];
       reportData.content.data.forEach(function (data) {
         data.lines.forEach(function (line) {
-          var _time = [];
           line.ranges.forEach(function (range) {
             if (range.value) {
               var _range = {
-                x: data.metadata.name,
-                y: [new Date(range.from).getTime(), new Date(range.to).getTime()]
+                monarch: data.metadata.name,
+                start: new Date(range.from),
+                house: line.name,
+                end: new Date(range.to)
               };
 
-              _time.push(_range);
+              _series.push(_range);
             }
           });
-          var _line = {
-            name: "".concat(line.name),
-            data: [].concat(_time)
-          };
-
-          _series.push(_line);
         });
       });
       setSeries(_series);
     }
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.content]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverScheduleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverScheduleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setIsDriverFilter(true);
     }
@@ -203,7 +173,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.body) === null || _reportData$content3$ === void 0 ? void 0 : (_reportData$content3$2 = _reportData$content3$.rows) === null || _reportData$content3$2 === void 0 ? void 0 : _reportData$content3$2.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.body) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.rows) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE'))), reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement("div", {
     className: "row"
   }, _toConsumableArray(Array(5).keys()).map(function (i) {
@@ -213,12 +183,31 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 100
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.data) === null || _reportData$content4$ === void 0 ? void 0 : _reportData$content4$.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactApexcharts.default, {
-    options: options,
-    series: series,
+  })) : /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.data) === null || _reportData$content3$ === void 0 ? void 0 : _reportData$content3$.length) > 0 ? /*#__PURE__*/_react.default.createElement(_chart.Chart, {
+    id: "chart",
+    dataSource: series,
+    barGroupPadding: 0.2,
+    rotated: true
+  }, /*#__PURE__*/_react.default.createElement(_chart.ArgumentAxis, null, /*#__PURE__*/_react.default.createElement(_chart.Tick, {
+    visible: true
+  })), /*#__PURE__*/_react.default.createElement(_chart.CommonSeriesSettings, {
     type: "rangeBar",
-    height: "450"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    argumentField: "monarch",
+    rangeValue1Field: "start",
+    rangeValue2Field: "end"
+  }), /*#__PURE__*/_react.default.createElement(_chart.Tooltip, {
+    enabled: true,
+    customizeTooltip: customizeTooltip
+  }), /*#__PURE__*/_react.default.createElement(_chart.Legend, {
+    verticalAlignment: "top",
+    horizontalAlignment: "center"
+  }), /*#__PURE__*/_react.default.createElement(_chart.Export, {
+    enabled: true
+  }), /*#__PURE__*/_react.default.createElement(_chart.SeriesTemplate, {
+    nameField: "house"
+  }), /*#__PURE__*/_react.default.createElement(_chart.Animation, {
+    enabled: false
+  })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
     padding: "30px",

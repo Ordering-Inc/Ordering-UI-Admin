@@ -193,8 +193,6 @@ var ImporterFormUI = function ImporterFormUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    console.log('type--' + importType);
-
     if (importType) {
       var _target = (importypeOptions === null || importypeOptions === void 0 ? void 0 : importypeOptions.filter(function (options) {
         return options.value === importType;
@@ -238,9 +236,6 @@ var ImporterFormUI = function ImporterFormUI(props) {
       handleSelectOption(targetOption === null || targetOption === void 0 ? void 0 : targetOption.value);
     }
   }, [selectedImporter]);
-  (0, _react.useEffect)(function () {
-    console.log(formState);
-  }, [formState]);
   return /*#__PURE__*/_react.default.createElement(_styles.NewImporter, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ADD_IMPORTER', 'Add importer')), /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {

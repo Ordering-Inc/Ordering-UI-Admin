@@ -72,7 +72,8 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       businessState = props.businessState,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       dataSelected = props.dataSelected,
-      setDataSelected = props.setDataSelected;
+      setDataSelected = props.setDataSelected,
+      categorySelected = props.categorySelected;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -81,7 +82,9 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -188,7 +191,6 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     var element = event.target.closest('.draggable-product');
 
     if (element) {
-      console.log(element.dataset.index);
       setDataSelected(element.dataset.index);
     }
   };
@@ -309,8 +311,8 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     accept: "image/png, image/jpeg, image/jpg",
     disabled: productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading
   }, productFormState !== null && productFormState !== void 0 && (_productFormState$cha2 = productFormState.changes) !== null && _productFormState$cha2 !== void 0 && _productFormState$cha2.images ? /*#__PURE__*/_react.default.createElement("img", {
-    src: productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha3 = productFormState.changes) === null || _productFormState$cha3 === void 0 ? void 0 : _productFormState$cha3.images,
-    alt: "business type image",
+    src: optimizeImage(productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha3 = productFormState.changes) === null || _productFormState$cha3 === void 0 ? void 0 : _productFormState$cha3.images, 'h_50,c_limit'),
+    alt: "product image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement(_styles.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))), (product === null || product === void 0 ? void 0 : product.name) && /*#__PURE__*/_react.default.createElement("input", {
     type: "text",

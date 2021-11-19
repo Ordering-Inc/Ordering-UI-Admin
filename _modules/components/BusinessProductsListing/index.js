@@ -29,6 +29,8 @@ var _BusinessProductList = require("../BusinessProductList");
 
 var _ProductDetails = require("../ProductDetails");
 
+var _SingleBusinessCategoryEdit = require("../SingleBusinessCategoryEdit");
+
 var _BusinessSelectHeader = require("../BusinessSelectHeader");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -79,7 +81,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       categoryId = props.categoryId,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       setCategorySelected = props.setCategorySelected,
-      setBusinessSlug = props.setBusinessSlug;
+      setBusinessSlug = props.setBusinessSlug,
+      openCategories = props.openCategories,
+      setBusinessState = props.setBusinessState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -239,10 +243,17 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categorySelected: categorySelected,
     onClickCategory: handleChangeCategory,
     featured: featuredProducts,
+    handleOpenCategoryDetails: handleOpenCategoryDetails,
+    openCategories: openCategories,
+    handleUpdateBusinessState: handleUpdateBusinessState,
+    setCategorySelected: setCategorySelected
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductHeader, null, /*#__PURE__*/_react.default.createElement(_SingleBusinessCategoryEdit.SingleBusinessCategoryEdit, _extends({}, props, {
+    category: categorySelected,
+    categorySelected: categorySelected,
+    handleChangeCategory: handleChangeCategory,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleOpenCategoryDetails: handleOpenCategoryDetails
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductHeader, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "d-flex align-items-center"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) || t('ALL', 'All'))), /*#__PURE__*/_react.default.createElement(_styles.ActionIconList, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionIconList, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
     active: viewMethod === 'list',
     onClick: function onClick() {
       return setViewMethod('list');
@@ -262,7 +273,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     open: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open,
     onClose: handleCloseEdit,
     category: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.category,
-    businessState: businessState
+    businessState: businessState,
+    categorySelected: categorySelected
   })), openProductDetails && /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
     open: openProductDetails,
     onClose: handleCloseProductDetails,

@@ -193,7 +193,11 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     className: "business_enable_control"
   }, (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) && /*#__PURE__*/_react.default.createElement("span", null, formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) || false,
-    onChange: handleChangeCheckBox
+    onChange: function onChange(val) {
+      return handleChangeCheckBox({
+        enabled: val
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: handleClose
@@ -227,6 +231,23 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     defaultValue: formState === null || formState === void 0 ? void 0 : formState.changes.name,
     onChange: handleChangeInput,
     autoComplete: "off"
+  })), !category && /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
+    style: {
+      paddingTop: 20,
+      display: 'flex',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    style: {
+      fontSize: 15
+    }
+  }, t('ENABLE_PARENT_CATEGORY', 'Allow parent category')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+    defaultChecked: false,
+    onChange: function onChange(val) {
+      return handleChangeCheckBox({
+        enabledParent: val
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.BtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "primary",
