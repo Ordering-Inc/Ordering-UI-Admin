@@ -22,6 +22,7 @@ import {
   TableWrapper,
   EmptyContent
 } from './styles'
+import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
 
 const ReportsDriverOrderTimeUI = (props) => {
   const {
@@ -33,6 +34,7 @@ const ReportsDriverOrderTimeUI = (props) => {
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [isOrderTypeFilter, setIsOrderTypeFilter] = useState(false)
 
   const tableRef = useRef(null)
 
@@ -84,6 +86,18 @@ const ReportsDriverOrderTimeUI = (props) => {
     document.body.removeChild(downloadLink)
   }
 
+  const convertHMS = (value) => {
+    const sec = parseInt(value, 10) // convert value to number if it's string
+    let hours = Math.floor(sec / 3600) // get hours
+    let minutes = Math.floor((sec - (hours * 3600)) / 60) // get minutes
+    let seconds = sec - (hours * 3600) - (minutes * 60) //  get seconds
+    // add 0 if value < 10; Example: 2 => 02
+    if (hours < 10) { hours = '0' + hours }
+    if (minutes < 10) { minutes = '0' + minutes }
+    if (seconds < 10) { seconds = '0' + seconds }
+    return hours + ':' + minutes + ':' + seconds // Return is HH : MM : SS
+  }
+
   return (
     <ReportsBusinessSpendContainer>
       <Title>{t('SERVICE_TIMES', 'Service Times')}</Title>
@@ -98,6 +112,11 @@ const ReportsDriverOrderTimeUI = (props) => {
             onClick={() => setIsBusinessFilter(true)}
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
+          </Button>
+          <Button
+            onClick={() => setIsOrderTypeFilter(true)}
+          >
+            {t('ORDER_TYPE', 'Order type')} ({filterList?.delivery_types_ids ? filterList?.delivery_types_ids.length : t('ALL', 'All')})
           </Button>
         </BrandBusinessWrapper>
         <CalendarWrapper>
@@ -139,7 +158,7 @@ const ReportsDriverOrderTimeUI = (props) => {
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
-                        <td key={j} colSpan={td.colspan}>{td.value}</td>
+                        <td key={j} colSpan={td.colspan}>{(td.value_unit === 'seconds' && td.value) ? convertHMS(td.value) : td.value}</td>
                       ))}
                     </tr>
                   </Tbody>
@@ -188,6 +207,19 @@ const ReportsDriverOrderTimeUI = (props) => {
       >
         <ReportsBrandFilter
           {...props} onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('ORDER_TYPE', 'Order type')}
+        open={isOrderTypeFilter}
+        onClose={() => setIsOrderTypeFilter(false)}
+      >
+        <ReportsOrderTypeFilter
+          {...props}
+          onClose={() => setIsOrderTypeFilter(false)}
         />
       </Modal>
     </ReportsBusinessSpendContainer>

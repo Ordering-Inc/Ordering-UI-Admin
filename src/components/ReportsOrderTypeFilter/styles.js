@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
-export const AnalyticsBusinessFilterContainer = styled.div``
+export const OrderTypeFilterContainer = styled.div``
 
-export const BusinessFilterOption = styled.div`
+export const OrderTypeFilterOption = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #E9ECEF;
@@ -19,7 +19,7 @@ export const BusinessFilterOption = styled.div`
   }
 `
 
-export const BusinessName = styled.span`
+export const OrderTypeName = styled.span`
   margin-left: 10px;
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
@@ -39,8 +39,4 @@ export const FilterBtnWrapper = styled.div`
   button {
     height: 42px;
   }
-`
-
-export const SearchWrapper = styled.div`
-  margin-bottom: 25px;
 `

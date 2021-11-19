@@ -84,6 +84,18 @@ const ReportsBusinessSpendUI = (props) => {
     document.body.removeChild(downloadLink)
   }
 
+  const convertHMS = (value) => {
+    const sec = parseInt(value, 10) // convert value to number if it's string
+    let hours = Math.floor(sec / 3600) // get hours
+    let minutes = Math.floor((sec - (hours * 3600)) / 60) // get minutes
+    let seconds = sec - (hours * 3600) - (minutes * 60) //  get seconds
+    // add 0 if value < 10; Example: 2 => 02
+    if (hours < 10) { hours = '0' + hours }
+    if (minutes < 10) { minutes = '0' + minutes }
+    if (seconds < 10) { seconds = '0' + seconds }
+    return hours + ':' + minutes + ':' + seconds // Return is HH : MM : SS
+  }
+
   return (
     <ReportsBusinessSpendContainer>
       <Title>{t('DISTANCE_STORE_CUSTOMER_RANGE_KM', 'Distance in KM from the store to customer (Ramge KM)')}</Title>
@@ -139,7 +151,9 @@ const ReportsBusinessSpendUI = (props) => {
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
-                        <td key={j} colSpan={td.colspan}>{td.value}</td>
+                        <td key={j} colSpan={td.colspan}>
+                          {(td.value_unit === 'seconds' && td.value) ? convertHMS(td.value) : td.value}
+                        </td>
                       ))}
                     </tr>
                   </Tbody>
