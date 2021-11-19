@@ -34,10 +34,12 @@ const AccordionDropdownUI = (props) => {
       {isOpen && (
         <div className='accordion-content'>
           <IterateCategories
+            {...props}
             list={category.subcategories}
             isSub
-            currentCat={category}
             index={index + 1}
+            currentCat={category}
+            onClickCategory={handleChangeCategory}
           />
         </div>
       )}
