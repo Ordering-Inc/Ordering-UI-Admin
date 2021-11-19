@@ -3,8 +3,6 @@ import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import AiFillMinusSquare from '@meronex/icons/ai/AiFillMinusSquare'
-import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import BiMinus from '@meronex/icons/bi/BiMinus'
@@ -12,16 +10,13 @@ import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
 import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
 import { Alert } from '../Confirm'
+import { CategoryTreeNode } from '../CategoryTreeNode'
 
 import {
   BusinessMenuBasicContainer,
   FieldName,
   OrderType,
-  CategoryProductsContainer,
-  BusinessCategoryContainer,
-  CheckboxContainer,
   CheckBoxWrapper,
-  ProductContainer,
   ScheduleContainer,
   ScheduleSection,
   ScheduleBlock,
@@ -43,9 +38,6 @@ export const BusinessMenuBasicOptions = (props) => {
     formState,
     handleChangeInput,
     handleCheckOrderType,
-    handleCheckCategory,
-    handleClickCategory,
-    handleCheckProduct,
     handleUpdateBusinessMenuOption,
     handleAddBusinessMenuOption,
     handleChangeTime,
@@ -63,10 +55,12 @@ export const BusinessMenuBasicOptions = (props) => {
     openAddScheduleIndex,
     setOpenAddScheduleInex,
     scheduleTimes,
-    selectedProductsIds
+    selectedProductsIds,
+    setSelectedProductsIds,
+    handleApplyScheduleCopyTimes
   } = props
   const [, t] = useLanguage()
-  const [openCategoryProduct, setOpenCategoryProduct] = useState({})
+  const [openCategories, setOpenCategories] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
   const isEdit = Object.keys(businessMenuState?.menu).length
@@ -90,27 +84,10 @@ export const BusinessMenuBasicOptions = (props) => {
   ]
 
   const handleTogglePopover = (type) => {
-    setOpenCategoryProduct({
-      ...openCategoryProduct,
-      [type]: !openCategoryProduct[type]
+    setOpenCategories({
+      ...openCategories,
+      [type]: !openCategories[type]
     })
-  }
-
-  const isCheckedCategory = (categoryId) => {
-    if (!isEdit) return 'nothing'
-    const businessCategory = business?.categories.find(category => category.id === categoryId)
-    const menuProducts = businessMenuState?.menu?.products.filter(product => product?.category_id === categoryId)
-    let result = ''
-    if (businessCategory?.products.length !== 0 && businessCategory?.products.length === menuProducts.length) result = 'all'
-    else if (menuProducts.length) result = 'some'
-    else result = 'nothing'
-    return result
-  }
-
-  const isCheckedProduct = (categoryId, productId) => {
-    if (!isEdit) return false
-    const found = businessMenuState?.menu?.products.find(product => product?.category_id === categoryId && product.id === productId)
-    return found
   }
 
   const closeAlert = () => {
@@ -149,7 +126,7 @@ export const BusinessMenuBasicOptions = (props) => {
   return (
     <>
       <BusinessMenuBasicContainer>
-        <FieldName>{t('BUSINESS_NAME', 'Business name')}</FieldName>
+        <FieldName>{t('MENU_NAME', 'Menu name')}</FieldName>
         <Input
           name='name'
           placeholder={t('NAME', 'Name')}
@@ -158,7 +135,7 @@ export const BusinessMenuBasicOptions = (props) => {
           }
           onChange={(e) => handleChangeInput(e)}
         />
-        <FieldName isBorderBottom>{t('DELIVERY_TYPE', 'Delivery type')}</FieldName>
+        <FieldName isBorderBottom>{t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order Type')}</FieldName>
         {orderTypes.map(orderType => (
           <OrderType
             key={orderType.value}
@@ -351,6 +328,7 @@ export const BusinessMenuBasicOptions = (props) => {
                     onClose={() => setIsOpenCopytimes(null)}
                     selectedCopyDays={selectedCopyDays}
                     handleSelectDays={(value) => handleSelectCopyTimes(value, daysOfWeekIndex)}
+                    handleApplyScheduleCopyTimes={handleApplyScheduleCopyTimes}
                   />
                 </ScheduleActionBlock>
               </ScheduleBlock>
@@ -368,73 +346,15 @@ export const BusinessMenuBasicOptions = (props) => {
           onChange={(e) => handleChangeInput(e)}
         />
         <FieldName isBorderBottom>{t('PRODUCTS', 'Products')}</FieldName>
-        {business?.categories.filter(_category => _category.products.length > 0).map(category => (
-          <CategoryProductsContainer key={category.id}>
-            <BusinessCategoryContainer
-              active={openCategoryProduct[category?.name]}
-            >
-              <CheckboxContainer
-                onClick={() => handleClickCategory(category.id)}
-              >
-                <CheckBoxWrapper
-                  active={
-                    (formState?.changes?.products ? handleCheckCategory(category.id) === 'all' : isCheckedCategory(category.id) === 'all') ||
-                    (formState?.changes?.products ? handleCheckCategory(category.id) === 'some' : isCheckedCategory(category.id) === 'some')
-                  }
-                >
-                  {
-                    (formState?.changes?.products
-                      ? handleCheckCategory(category.id) === 'all'
-                      : isCheckedCategory(category.id) === 'all')
-                      ? (
-                        <RiCheckboxFill />
-                      ) : (
-                        (formState?.changes?.products
-                          ? handleCheckCategory(category.id) === 'some'
-                          : isCheckedCategory(category.id) === 'some')
-                          ? (
-                            <AiFillMinusSquare />
-                          ) : (
-                            <RiCheckboxBlankLine />
-                          )
-                      )
-                  }
-                </CheckBoxWrapper>
-                <span className='bold'>{category?.name}</span>
-              </CheckboxContainer>
-              {category?.products.length > 0 && (
-                <GoTriangleDown
-                  onClick={() => handleTogglePopover(category?.name)}
-                />
-              )}
-            </BusinessCategoryContainer>
-            {openCategoryProduct[category?.name] && (
-              <>
-                {category?.products.map(product => (
-                  <ProductContainer
-                    key={product.id}
-                    onClick={() => handleCheckProduct(product.id)}
-                  >
-                    <CheckboxContainer>
-                      <CheckBoxWrapper
-                        active={selectedProductsIds.includes(product?.id) ?? isCheckedProduct(product?.category_id, product?.id)}
-                      >
-                        {
-                          (selectedProductsIds.includes(product?.id) ?? isCheckedProduct(product?.category_id, product?.id))
-                            ? (
-                              <RiCheckboxFill />
-                            ) : (
-                              <RiCheckboxBlankLine />
-                            )
-                        }
-                      </CheckBoxWrapper>
-                      <span>{product?.name}</span>
-                    </CheckboxContainer>
-                  </ProductContainer>
-                ))}
-              </>
-            )}
-          </CategoryProductsContainer>
+        {business?.categories.sort((a, b) => a.rank - b.rank).map(category => (
+          <CategoryTreeNode
+            key={category.id}
+            category={category}
+            selectedProductsIds={selectedProductsIds}
+            setSelectedProductsIds={setSelectedProductsIds}
+            openCategories={openCategories}
+            handleTogglePopover={handleTogglePopover}
+          />
         ))}
       </BusinessMenuBasicContainer>
       <Button

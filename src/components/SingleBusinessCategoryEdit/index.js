@@ -5,41 +5,67 @@ import {
   SingleBusinessCategory as SingleBusinessCategoryController
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
-import { Switch } from '../../styles/Switch'
-
+import { bytesConverter } from '../../utils'
+import BiImage from '@meronex/icons/bi/BiImage'
+import { Pencil, Trash} from 'react-bootstrap-icons'
 import {
   SingleCategoryContainer,
   CategoryContent,
-  CategoryActionContainer,
-  CategoryEnableWrapper
+  CategoryContentInside,
+  ImageContainer
 } from './styles'
+import {
+  UploadWrapper
+} from '../SingleBusinessProduct/styles'
 
 export const SingleBusinessCategoryUI = (props) => {
   const {
-    category,
     categorySelected,
-    handleChangeCategory,
     isSkeleton,
-    handelChangeCategoryActive,
     handleUpdateClick,
+    handleOpenCategoryDetails,
     categoryFormState,
+    handlechangeImage,
     isEditMode,
-    handleDragOver,
-    handleDrop,
-    handleDragEnd,
-    onDataSelected,
-    dataSelected,
-    spaceTab
+    deleteCategory
   } = props
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const conatinerRef = useRef(null)
+  const ProductTypeImgRef = useRef(null)
+
+  const handleClickImage = () => {
+    ProductTypeImgRef.current.click()
+  }
+
   const closeAlert = () => {
     setAlertState({
       open: false,
       content: []
     })
+  }
+
+  const handleFiles = (files) => {
+    if (files.length === 1) {
+      const type = files[0].type.split('/')[0]
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        })
+        return
+      }
+
+      if (bytesConverter(files[0]?.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        })
+        return
+      }
+      handlechangeImage(files[0])
+    }
   }
 
   const closeProductEdit = (e) => {
@@ -51,19 +77,6 @@ export const SingleBusinessCategoryUI = (props) => {
         }
       }
     }
-  }
-
-  const handleDragOverChange = (e) => {
-    const element = e.target.closest('.draggable-category')
-    if (element) {
-      onDataSelected(element.dataset.index)
-    }
-    handleDragOver(e)
-  }
-
-  const handleDragEndChange = (e) => {
-    onDataSelected('')
-    handleDragEnd(e)
   }
 
   useEffect(() => {
@@ -83,43 +96,47 @@ export const SingleBusinessCategoryUI = (props) => {
   return (
     <>
       <SingleCategoryContainer
-        active={!isSkeleton && (category?.id === categorySelected?.id)}
-        onClick={(e) => handleChangeCategory(e, category)}
-        ref={conatinerRef}
-        onDrop={e => handleDrop(e)}
-        onDragOver={e => handleDragOverChange(e)}
-        onDragEnd={e => handleDragEndChange(e)}
-        className='draggable-category'
-        data-index={category?.id}
-        isAccept={dataSelected && dataSelected === category?.id.toString()}
-        spaceTab={spaceTab}
+        data-index={categorySelected?.id}
       >
+
+        {
+          isSkeleton
+            ? <Skeleton width={41} height={41} />
+            : (
+              <>
+                <ImageContainer
+                  disabled={categoryFormState?.loading}
+                  className='img-section'
+                >
+                      {
+                          categoryFormState?.changes?.image
+                            ? (
+                              <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
+                            )
+                            : (
+                              <UploadWrapper>
+                                <BiImage />
+                              </UploadWrapper>
+                            )
+                      }
+                </ImageContainer>
+              </>
+            )
+        }
         <CategoryContent>
           {
             isSkeleton
               ? <Skeleton height={15} />
               : (
-                <div>
-                  {categoryFormState?.changes?.name}
-                </div>
+                <>
+                <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
+                <CategoryContentInside >
+                <Pencil onClick={() => handleOpenCategoryDetails(categorySelected)} />
+                <Trash onClick={deleteCategory} />
+                </CategoryContentInside>
+                </>
               )
           }
-          <CategoryActionContainer>
-            <CategoryEnableWrapper className='business_enable_control'>
-              {
-                isSkeleton
-                  ? <Skeleton height={15} width={100} />
-                  : (
-                    <>
-                      <Switch
-                        defaultChecked={category?.enabled}
-                        onChange={handelChangeCategoryActive}
-                      />
-                    </>
-                  )
-              }
-            </CategoryEnableWrapper>
-          </CategoryActionContainer>
         </CategoryContent>
       </SingleCategoryContainer>
 
@@ -136,7 +153,7 @@ export const SingleBusinessCategoryUI = (props) => {
   )
 }
 
-export const SingleBusinessCategory = (props) => {
+export const SingleBusinessCategoryEdit = (props) => {
   const { isSkeleton } = props
   const singleBusinessCategoryProps = {
     ...props,

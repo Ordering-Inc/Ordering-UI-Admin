@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
-import { useLanguage, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  BusinessProductsListing as BusinessProductsListingController
+} from 'ordering-components-admin'
 import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
 import { SearchBar } from '../SearchBar'
 import BsViewList from '@meronex/icons/bs/BsViewList'
@@ -9,6 +12,7 @@ import BsTable from '@meronex/icons/bs/BsTable'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductList } from '../BusinessProductList'
 import { ProductDetails } from '../ProductDetails'
+import { SingleBusinessCategoryEdit } from '../SingleBusinessCategoryEdit'
 import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
@@ -41,7 +45,9 @@ const BusinessProductsListingUI = (props) => {
     categoryId,
     handleUpdateBusinessState,
     setCategorySelected,
-    setBusinessSlug
+    setBusinessSlug,
+    openCategories,
+    setBusinessState
   } = props
 
   const [, t] = useLanguage()
@@ -184,14 +190,22 @@ const BusinessProductsListingUI = (props) => {
                 onClickCategory={handleChangeCategory}
                 featured={featuredProducts}
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
+                openCategories={openCategories}
+                handleUpdateBusinessState={handleUpdateBusinessState}
+                setCategorySelected={setCategorySelected}
               />
             }
           </CategoryListContainer>
           <ProductListContainer>
             <ProductHeader>
-              <div className='d-flex align-items-center'>
-                <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-              </div>
+              <SingleBusinessCategoryEdit
+                {...props}
+                category={categorySelected}
+                categorySelected={categorySelected}
+                handleChangeCategory={handleChangeCategory}
+                business={businessState?.business}
+                handleOpenCategoryDetails={handleOpenCategoryDetails}
+              />
               <ActionIconList>
                 <ViewMethodButton
                   active={viewMethod === 'list'}
@@ -226,6 +240,7 @@ const BusinessProductsListingUI = (props) => {
             onClose={handleCloseEdit}
             category={categoryToEdit?.category}
             businessState={businessState}
+            categorySelected={categorySelected}
           />
         )
       }

@@ -87,7 +87,7 @@ const ProductMainDetailsUI = (props) => {
         </DetailsHeader>
         {!isEditMode ? (
           <>
-            <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_400,c_limit')} />
+            <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_200,c_limit')} />
             <ProductDetailsContent>
               <ProductPrice>{parsePrice(productState?.product?.price)}</ProductPrice>
               <ProductDescription>{productState?.product?.description}</ProductDescription>
