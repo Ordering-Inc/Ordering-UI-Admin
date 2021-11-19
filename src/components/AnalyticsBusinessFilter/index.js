@@ -12,8 +12,7 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
 import { Pagination } from '../Pagination'
-import { useLanguage } from 'ordering-components-admin'
-import { AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from './naked'
+import { useLanguage, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
 
 const AnalyticsBusinessFilterUI = (props) => {
   const {

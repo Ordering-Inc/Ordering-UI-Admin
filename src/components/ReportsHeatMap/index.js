@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useConfig, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useConfig, AdvancedReports as AdvancedReportsController, GoogleMapsMap } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -19,7 +19,6 @@ import {
   WrapperMap
 } from './styles'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
-import { GoogleMapsMap } from './naked'
 
 const ReportsHeatMapUI = (props) => {
   const {
