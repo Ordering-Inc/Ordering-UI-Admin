@@ -51,7 +51,7 @@ const SingleBusinessProductUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const containerRef = useRef(null)
@@ -259,7 +259,11 @@ const SingleBusinessProductUI = (props) => {
                               {
                                 productFormState?.changes?.images
                                   ? (
-                                    <img src={productFormState?.changes?.images} alt='business type image' loading='lazy' />
+                                    <img
+                                      src={optimizeImage(productFormState?.changes?.images, 'h_50,c_limit')}
+                                      alt='product image'
+                                      loading='lazy'
+                                    />
                                   )
                                   : (
                                     <UploadWrapper>

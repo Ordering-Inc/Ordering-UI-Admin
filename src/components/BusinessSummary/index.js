@@ -144,8 +144,8 @@ export const BusinessSummary = (props) => {
                 </BusinessLogo>
               </BusinessHeader>
             ) : (
-              <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
-                <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+              <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_200,c_limit')}>
+                <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_100,c_limit')} />
               </BusinessHeader>
             )}
 
