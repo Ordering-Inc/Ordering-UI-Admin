@@ -57,6 +57,10 @@ export const ThemeProvider = ({ children, ...props }) => {
       font-family: inherit;
     }
 
+    .dxc-tooltip {
+      z-index: 9999;
+    }
+
     .popup-backdrop {
       background-color: rgba(0, 0, 0, 0.4);
       position: fixed;

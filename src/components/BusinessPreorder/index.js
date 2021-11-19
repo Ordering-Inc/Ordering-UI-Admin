@@ -50,7 +50,6 @@ export const BusinessPreorder = (props) => {
   const handleChangePreorderTime = (evt) => {
     const type = evt.target.name
     const value = evt.target.value
-    console.log(typeof evt.target.value)
     setCurPreorderTime({
       ...curPreorderTime,
       [type]: value

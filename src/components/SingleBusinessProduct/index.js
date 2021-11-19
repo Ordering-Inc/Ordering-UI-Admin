@@ -138,7 +138,6 @@ const SingleBusinessProductUI = (props) => {
     event.preventDefault()
     const element = event.target.closest('.draggable-product')
     if (element) {
-      console.log(element.dataset.index)
       setDataSelected(element.dataset.index)
     }
   }

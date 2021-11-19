@@ -139,7 +139,11 @@ const ReportsDriverOrderUI = (props) => {
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
-                        <td key={j} colSpan={td.colspan}>{td.value}</td>
+                        <td key={j} colSpan={td.colspan}>
+                          {td.value_unit === 'currency' ? `${td.value}$` : (
+                            td.value_refers === 'percentage' ? `${td.value}%` : td.value
+                          )}
+                        </td>
                       ))}
                     </tr>
                   </Tbody>
