@@ -143,12 +143,6 @@ export const DriversCompanyDetailsForm = (props) => {
             value={changesState?.webhook_new_order ?? driversCompany?.webhook_new_order ?? ''}
             onChange={e => handleChangesState('webhook_new_order', e.target.value)}
             placeholder={t('WEBHOOK_NEW_ORDER', 'Webhook new order')}
-            ref={register({
-              required: t(
-                'VALIDATION_ERROR_REQUIRED',
-                'Name is required'
-              ).replace('_attribute_', t('WEBHOOK_NEW_ORDER', 'Webhook new order'))
-            })}
             autoComplete='off'
           />
         </InputWrapper>
@@ -159,12 +153,6 @@ export const DriversCompanyDetailsForm = (props) => {
             value={changesState?.webhook_cancel_request ?? driversCompany?.webhook_cancel_request ?? ''}
             onChange={e => handleChangesState('webhook_cancel_request', e.target.value)}
             placeholder={t('WEBHOOK_CANCEL_REQUEST', 'Webhook cancel request')}
-            ref={register({
-              required: t(
-                'VALIDATION_ERROR_REQUIRED',
-                'Name is required'
-              ).replace('_attribute_', t('WEBHOOK_CANCEL_REQUEST', 'Webhook cancel request'))
-            })}
             autoComplete='off'
           />
         </InputWrapper>

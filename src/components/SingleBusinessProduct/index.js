@@ -14,7 +14,6 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
-
 import {
   SingleListBusinessContainer,
   BusinessGeneralInfo,
@@ -46,7 +45,8 @@ const SingleBusinessProductUI = (props) => {
     businessState,
     handleUpdateBusinessState,
     dataSelected,
-    setDataSelected
+    setDataSelected,
+    categorySelected
   } = props
 
   const theme = useTheme()

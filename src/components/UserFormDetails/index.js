@@ -14,7 +14,6 @@ import { FormInput, ActionsForm, SkeletonForm, WrapperUserTypeSelector } from '.
 
 export const UserFormDetailsUI = (props) => {
   const {
-    isDelivery,
     isEdit,
     formState,
     onCancel,
@@ -27,7 +26,9 @@ export const UserFormDetailsUI = (props) => {
     isCheckout,
     userData,
     isCustomerMode,
-    handleChangeUserType
+    handleChangeUserType,
+    isDriversPage,
+    isDriversManagersPage
   } = props
 
   const formMethods = useForm()
@@ -312,7 +313,7 @@ export const UserFormDetailsUI = (props) => {
              props.afterMidComponents?.map((MidComponent, i) => (
                <MidComponent key={i} {...props} />))
             }
-            {!isDelivery && (
+            {!(isDriversManagersPage || isDriversPage) && (
               <WrapperUserTypeSelector>
                 <UserTypeSelector
                   isPrimary

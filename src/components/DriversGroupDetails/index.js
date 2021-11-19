@@ -6,6 +6,7 @@ import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
 import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
 import { DriversGroupPaymethods } from '../DriversGroupPaymethods'
 import { DriversGroupLogistics } from '../DriversGroupLogistics'
+import { DriversGroupLogs } from '../DriversGroupLogs'
 
 import {
   DetailsContainer,
@@ -31,12 +32,14 @@ export const DriversGroupDetails = (props) => {
         { key: 'general', value: t('GENERAL', 'General') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
         { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
-        { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') }
+        { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') },
+        { key: 'logs', value: t('LOGS', 'Logs') }
       ]
       : [
         { key: 'general', value: t('GENERAL', 'General') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
-        { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') }
+        { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
+        { key: 'logs', value: t('LOGS', 'Logs') }
       ]
     setDriversGroupMenus(_driversGroupMenus)
   }, [useAdvanced])
@@ -94,6 +97,9 @@ export const DriversGroupDetails = (props) => {
         )}
         {showMenu === 'advanced_logistics' && (
           <DriversGroupLogistics {...props} />
+        )}
+        {showMenu === 'logs' && (
+          <DriversGroupLogs driversGroupId={curDriversGroup?.id} />
         )}
       </DetailsContainer>
     </>

@@ -7,13 +7,12 @@ export const SingleCategoryContainer = styled.div`
   border-radius: 7.5px;
   margin-bottom: 15px;
   transition: all 0.3s;
-  cursor: pointer;
+  /* cursor: pointer; */
   height: 75px;
-  margin-left: ${props => props.spaceTab ?? 0}px;
 
-  &:hover {
+  /* &:hover {
     background: ${props => props.theme.colors.lightPrimary};
-  }
+  } */
 
   ${({ active }) => active && css`
     background: ${props => props.theme.colors.lightPrimary};
@@ -35,32 +34,49 @@ export const SingleCategoryContainer = styled.div`
 `
 
 export const CategoryContent = styled.div`
-  flex-grow: 1;
-  color: ${props => props.theme.colors.headingColor};
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  width: 180px;
+  color: ${props => props.theme.colors.headingColor};
+  cursor: pointer;
   ${props => props.theme?.rtl ? css`
       padding-right: 10px;
     ` : css`
       padding-left: 10px;
     `}
-  input {
+`
+export const CategoryContentInside = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    width: 50px;
+;
+`
+export const ImageContainer = styled.div`
+  min-height: 38px;
+  min-width: 38px;
+  height: 38px;
+  width: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+  ${props => props.theme?.rtl ? css`
+  maring-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
+  img,
+  div {
     width: 100%;
-    outline: none;
+    border-radius: 8px;
+    height: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 12px;
-    border-radius: 3px;
-    transition: all 0.3s;
-    border: 1px solid transparent;
-    padding: 2px 5px;
-    color: ${props => props.theme.colors.headingColor};
-    &:focus {
-      background-color: #FFF;
-      border: 1px solid ${props => props.theme.colors.headingColor};
-    }
+  };
+  img{
+    object-fit: cover;
   }
 `
 
@@ -68,6 +84,7 @@ export const CategoryActionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 4px;
   > div:first-child {
     padding: 0 5px;
   }
