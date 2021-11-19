@@ -82,11 +82,23 @@ import { PaymethodTypeSelector } from './components/PaymethodTypeSelector'
 import { Personalization } from './components/Personalization'
 import { PlaceListing } from './components/PlaceListing'
 import { ProductItemAccordion } from './components/ProductItemAccordion'
+import { ReportsBusinessDistance } from './components/ReportsBusinessDistance'
+import { ReportsOrderDistance } from './components/ReportsOrderDistance'
+import { ReportsBusinessSpend } from './components/ReportsBusinessSpend'
+import { ReportsDriverSpend } from './components/ReportsDriverSpend'
+import { ReportsDriverOrder } from './components/ReportsDriverOrder'
+import { ReportsDriverOrderTime } from './components/ReportsDriverOrderTime'
+import { ReportsDriverSchedule } from './components/ReportsDriverSchedule'
+import { ReportsOrderStatus } from './components/ReportsOrderStatus'
+import { ReportsDriverDistance } from './components/ReportsDriverDistance'
+import { ReportsHeatMap } from './components/ReportsHeatMap'
 import { ReviewsListing } from './components/ReviewsListing'
 import { ReviewProductsListing } from './components/ReviewProductsListing'
 import { Reports } from './components/Reports'
 import { SearchBar } from './components/SearchBar'
 import { Settings } from './components/Settings'
+import { SettingItemUI } from './components/SettingItemUI'
+import { SideBar } from './components/SideBar'
 import { SidebarMenu } from './components/SidebarMenu'
 import { SingleBusiness } from './components/SingleBusiness'
 import { Support } from './components/Support'
@@ -116,7 +128,7 @@ import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 
 // styles
-import { Button } from './styles/Buttons'
+import { Button, IconButton } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
 import { Select } from './styles/Select'
 import { Tab, Tabs } from './styles/Tabs'
@@ -208,11 +220,23 @@ export {
   Personalization,
   PlaceListing,
   ProductItemAccordion,
+  ReportsBusinessDistance,
+  ReportsOrderDistance,
+  ReportsBusinessSpend,
+  ReportsDriverSpend,
+  ReportsDriverOrder,
+  ReportsDriverOrderTime,
+  ReportsDriverSchedule,
+  ReportsOrderStatus,
+  ReportsDriverDistance,
+  ReportsHeatMap,
   ReviewsListing,
   ReviewProductsListing,
   Reports,
   SearchBar,
   Settings,
+  SettingItemUI,
+  SideBar,
   SidebarMenu,
   SingleBusiness,
   SpinnerLoader,
@@ -247,6 +271,7 @@ export {
 
   // styles
   Button,
+  IconButton,
   Input,
   InputGroup,
   InputPrimary,
