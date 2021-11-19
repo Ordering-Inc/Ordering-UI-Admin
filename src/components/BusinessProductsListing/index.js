@@ -191,7 +191,6 @@ const BusinessProductsListingUI = (props) => {
                 featured={featuredProducts}
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
                 openCategories={openCategories}
-                // handleUpdateBusinessState={(business) => setBusinessState({ ...businessState, business })}
                 handleUpdateBusinessState={handleUpdateBusinessState}
                 setCategorySelected={setCategorySelected}
               />
