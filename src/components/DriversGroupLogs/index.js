@@ -8,11 +8,10 @@ import {
   TableWrapper,
   Table,
   UserInfoContainer,
-  DataList,
-  DataItem,
   DateTimeWrapper,
   NoData,
-  WrapperPagination
+  WrapperPagination,
+  DataListTable
 } from './styles'
 
 const DriversGroupLogsUI = (props) => {
@@ -96,18 +95,15 @@ const DriversGroupLogsUI = (props) => {
                         </UserInfoContainer>
                       </td>
                       <td>
-                        <DataList>
-                          <DataItem>
-                            <Skeleton width={100} />
-                            <Skeleton width={20} />
-                            <Skeleton width={20} />
-                          </DataItem>
-                          <DataItem>
-                            <Skeleton width={100} />
-                            <Skeleton width={20} />
-                            <Skeleton width={20} />
-                          </DataItem>
-                        </DataList>
+                        <DataListTable>
+                          <tbody>
+                            <tr>
+                              <td><Skeleton width={100} /></td>
+                              <td><Skeleton width={20} /></td>
+                              <td><Skeleton width={20} /></td>
+                            </tr>
+                          </tbody>
+                        </DataListTable>
                       </td>
                       <td>
                         <DateTimeWrapper>
@@ -131,15 +127,17 @@ const DriversGroupLogsUI = (props) => {
                         </UserInfoContainer>
                       </td>
                       <td>
-                        <DataList>
+                        <DataListTable>
                           {log?.data.map((item, i) => (
-                            <DataItem key={i}>
-                              <span>{getAttributeName(item?.attribute)}</span>
-                              <span>{`${item?.new}`}</span>
-                              <span>{`${item?.old}`}</span>
-                            </DataItem>
+                            <tbody key={i}>
+                              <tr>
+                                <td>{getAttributeName(item?.attribute)}</td>
+                                <td>{`${item?.new}`}</td>
+                                <td>{`${item?.old}`}</td>
+                              </tr>
+                            </tbody>
                           ))}
-                        </DataList>
+                        </DataListTable>
                       </td>
                       <td>
                         <DateTimeWrapper>
