@@ -151,28 +151,22 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
       width: 100
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
-    })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataList, null, /*#__PURE__*/_react.default.createElement(_styles.DataItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataListTable, null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20
-    })), /*#__PURE__*/_react.default.createElement(_styles.DataItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 20
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 20
-    })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
+    })))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   }) : logsList.logs.map(function (log) {
     var _log$user, _log$user2, _log$user3;
 
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: log.id
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserInfoContainer, null, /*#__PURE__*/_react.default.createElement("p", null, log === null || log === void 0 ? void 0 : (_log$user = log.user) === null || _log$user === void 0 ? void 0 : _log$user.name, " ", log === null || log === void 0 ? void 0 : (_log$user2 = log.user) === null || _log$user2 === void 0 ? void 0 : _log$user2.lastname), /*#__PURE__*/_react.default.createElement("p", null, log === null || log === void 0 ? void 0 : (_log$user3 = log.user) === null || _log$user3 === void 0 ? void 0 : _log$user3.email))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataList, null, log === null || log === void 0 ? void 0 : log.data.map(function (item, i) {
-      return /*#__PURE__*/_react.default.createElement(_styles.DataItem, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserInfoContainer, null, /*#__PURE__*/_react.default.createElement("p", null, log === null || log === void 0 ? void 0 : (_log$user = log.user) === null || _log$user === void 0 ? void 0 : _log$user.name, " ", log === null || log === void 0 ? void 0 : (_log$user2 = log.user) === null || _log$user2 === void 0 ? void 0 : _log$user2.lastname), /*#__PURE__*/_react.default.createElement("p", null, log === null || log === void 0 ? void 0 : (_log$user3 = log.user) === null || _log$user3 === void 0 ? void 0 : _log$user3.email))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataListTable, null, log === null || log === void 0 ? void 0 : log.data.map(function (item, i) {
+      return /*#__PURE__*/_react.default.createElement("tbody", {
         key: i
-      }, /*#__PURE__*/_react.default.createElement("span", null, getAttributeName(item === null || item === void 0 ? void 0 : item.attribute)), /*#__PURE__*/_react.default.createElement("span", null, "".concat(item === null || item === void 0 ? void 0 : item.new)), /*#__PURE__*/_react.default.createElement("span", null, "".concat(item === null || item === void 0 ? void 0 : item.old)));
+      }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, getAttributeName(item === null || item === void 0 ? void 0 : item.attribute)), /*#__PURE__*/_react.default.createElement("td", null, "".concat(item === null || item === void 0 ? void 0 : item.new)), /*#__PURE__*/_react.default.createElement("td", null, "".concat(item === null || item === void 0 ? void 0 : item.old))));
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, parseDate(log.created_at, {
       utc: false
     }))), /*#__PURE__*/_react.default.createElement("td", null, log === null || log === void 0 ? void 0 : log.user_agent)));
