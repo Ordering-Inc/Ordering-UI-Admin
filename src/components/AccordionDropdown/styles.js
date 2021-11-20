@@ -3,12 +3,11 @@ import styled, { css } from 'styled-components'
 export const CategoryTab = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px 10px;
   border-radius: 7.5px;
-  margin-bottom: 15px;
   transition: all 0.3s;
   cursor: pointer;
-  height: 75px;
+  font-size: 14px;
   margin-left: ${props => props.categorySpace ?? 0}px;
 
   &:hover {
