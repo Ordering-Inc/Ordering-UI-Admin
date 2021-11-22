@@ -129,9 +129,7 @@ const BusinessCategoryEditUI = (props) => {
                     <Skeleton width={100} />
                     <Skeleton width={50} />
                   </BusinessEnableWrapper>
-                  <Button onClick={handleClose}>
-                    <Skeleton width={30} height={30} />
-                  </Button>
+                  <Skeleton width={30} height={30} />
                 </HeaderContainer>
                 <CategoryTypeImage>
                   <Skeleton width={300} height={300} />
@@ -157,7 +155,7 @@ const BusinessCategoryEditUI = (props) => {
                     }
                     <Switch
                       defaultChecked={formState?.changes?.enabled || false}
-                      onChange={(val) => handleChangeCheckBox({enabled: val})}
+                      onChange={(val) => handleChangeCheckBox({ enabled: val })}
                     />
                   </BusinessEnableWrapper>
                   <IconButton
@@ -205,11 +203,12 @@ const BusinessCategoryEditUI = (props) => {
                     autoComplete='off'
                   />
                 </CategoryNameWrapper>
-                {!category && (<BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex' ,alignItems: 'center' }}>
-                    <span style={{fontSize: 15}}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
+                {!category && (
+                  <BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex', alignItems: 'center' }}>
+                    <span style={{ fontSize: 15 }}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
                     <Switch
                       defaultChecked={false}
-                      onChange={(val) => handleChangeCheckBox({enabledParent: val})}
+                      onChange={(val) => handleChangeCheckBox({ enabledParent: val })}
                     />
                   </BusinessEnableWrapper>
                 )}

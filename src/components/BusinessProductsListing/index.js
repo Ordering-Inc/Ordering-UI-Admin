@@ -46,8 +46,7 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateBusinessState,
     setCategorySelected,
     setBusinessSlug,
-    openCategories,
-    setBusinessState
+    openCategories
   } = props
 
   const [, t] = useLanguage()

@@ -16,7 +16,8 @@ export const SpreadSheetEditor = (props) => {
     handleoutsideClickDeselects,
     isRemove,
     isUndo,
-    isRedo
+    isRedo,
+    isBusinessProducts
   } = props
   const [, t] = useLanguage()
   const [cache, setCache] = useState(null)
@@ -59,6 +60,16 @@ export const SpreadSheetEditor = (props) => {
           }
         }
       }
+    },
+    cells: (row, column, prop) => {
+      const cellProperties = { readOnly: false }
+      if (hotTableRef?.current?.hotInstance && isBusinessProducts) {
+        const visualColIndex = hotTableRef?.current?.hotInstance?.toVisualColumn(column)
+        if (visualColIndex === 0) {
+          cellProperties.readOnly = true
+        }
+      }
+      return cellProperties
     }
   }
 
