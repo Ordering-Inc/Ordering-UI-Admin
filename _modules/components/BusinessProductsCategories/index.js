@@ -11,15 +11,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _SingleBusinessCategory = require("../SingleBusinessCategory");
-
-var _IterateCategories = require("./IterateCategories");
+var _SingleBusinessSubCateogries = require("../SingleBusinessSubCateogries");
 
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -46,12 +46,8 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
 
   var businessState = props.businessState,
       categorySelected = props.categorySelected,
-      onClickCategory = props.onClickCategory,
-      handleOpenCategoryDetails = props.handleOpenCategoryDetails,
-      openCategories = props.openCategories,
-      handleUpdateBusinessState = props.handleUpdateBusinessState,
-      setOpenCategories = props.setOpenCategories,
-      setCategorySelected = props.setCategorySelected;
+      handleChangeCategory = props.handleChangeCategory,
+      handleOpenCategoryDetails = props.handleOpenCategoryDetails;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -63,31 +59,28 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       setDataSelected = _useState2[1];
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_SingleBusinessCategory.SingleBusinessCategory, {
+    return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, {
       key: i,
       isSkeleton: true
     });
-  }), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) && /*#__PURE__*/_react.default.createElement(_IterateCategories.IterateCategories, {
-    list: businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
-      return a.rank - b.rank;
-    }),
-    isSub: false,
-    index: 0,
-    categorySelected: categorySelected,
-    onClickCategory: onClickCategory,
-    businessState: businessState,
-    dataSelected: dataSelected,
-    setDataSelected: setDataSelected,
-    handleUpdateBusinessState: handleUpdateBusinessState,
-    handleOpenCategoryDetails: handleOpenCategoryDetails,
-    openCategories: openCategories,
-    setOpenCategories: setOpenCategories,
-    setCategorySelected: setCategorySelected
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
+  }), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (category) {
+    return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, _extends({}, props, {
+      index: 0,
+      key: category.id,
+      category: category,
+      categorySelected: categorySelected,
+      handleChangeCategory: handleChangeCategory,
+      business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+      dataSelected: dataSelected,
+      onDataSelected: setDataSelected
+    }));
+  }))), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
     onClick: function onClick() {
       return handleOpenCategoryDetails();
     }
-  }, t('ADD_NEW_CATEGORY', 'Add new category')))));
+  }, t('ADD_NEW_CATEGORY', 'Add new category'))));
 };
 
 exports.BusinessProductsCategories = BusinessProductsCategories;

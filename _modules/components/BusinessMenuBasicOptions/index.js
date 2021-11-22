@@ -49,12 +49,6 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -100,23 +94,18 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      openCategories = _useState2[0],
-      setOpenCategories = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
-  var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isOpenCopytimes = _useState6[0],
-      setIsOpenCopytimes = _useState6[1];
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isOpenCopytimes = _useState4[0],
+      setIsOpenCopytimes = _useState4[1];
 
   var isEdit = Object.keys(businessMenuState === null || businessMenuState === void 0 ? void 0 : businessMenuState.menu).length;
   var orderTypes = [{
@@ -141,10 +130,6 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     content: t('DRIVE_THRU', 'Drive thru')
   }];
   var daysOfWeek = [t('SUNDAY_ABBREVIATION', 'Sun'), t('MONDAY_ABBREVIATION', 'Mon'), t('TUESDAY_ABBREVIATION', 'Tues'), t('WEDNESDAY_ABBREVIATION', 'Wed'), t('THURSDAY_ABBREVIATION', 'Thur'), t('FRIDAY_ABBREVIATION', 'Fri'), t('SATURDAY_ABBREVIATION', 'Sat')];
-
-  var handleTogglePopover = function handleTogglePopover(type) {
-    setOpenCategories(_objectSpread(_objectSpread({}, openCategories), {}, _defineProperty({}, type, !openCategories[type])));
-  };
 
   var closeAlert = function closeAlert() {
     setIsConflict(false);
@@ -340,11 +325,10 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   }).map(function (category) {
     return /*#__PURE__*/_react.default.createElement(_CategoryTreeNode.CategoryTreeNode, {
       key: category.id,
+      index: 0,
       category: category,
       selectedProductsIds: selectedProductsIds,
-      setSelectedProductsIds: setSelectedProductsIds,
-      openCategories: openCategories,
-      handleTogglePopover: handleTogglePopover
+      setSelectedProductsIds: setSelectedProductsIds
     });
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",

@@ -82,8 +82,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       setCategorySelected = props.setCategorySelected,
       setBusinessSlug = props.setBusinessSlug,
-      openCategories = props.openCategories,
-      setBusinessState = props.setBusinessState;
+      openCategories = props.openCategories;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),

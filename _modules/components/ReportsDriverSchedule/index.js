@@ -126,7 +126,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
   };
 
   var getText = function getText(item, text) {
-    return "".concat(parseDate(item.rangeValue2), " ~ ").concat(parseDate(item.rangeValue2));
+    return "".concat(parseDate(item.rangeValue1), " ~ ").concat(parseDate(item.rangeValue2));
   };
 
   (0, _react.useEffect)(function () {

@@ -72,6 +72,10 @@ var ReportsDriverSpendUI = function ReportsDriverSpendUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isBusinessFilter = _useState2[0],
@@ -140,6 +144,31 @@ var ReportsDriverSpendUI = function ReportsDriverSpendUI(props) {
     document.body.removeChild(downloadLink);
   };
 
+  var convertHMS = function convertHMS(value) {
+    var sec = parseInt(value, 10); // convert value to number if it's string
+
+    var hours = Math.floor(sec / 3600); // get hours
+
+    var minutes = Math.floor((sec - hours * 3600) / 60); // get minutes
+
+    var seconds = sec - hours * 3600 - minutes * 60; //  get seconds
+    // add 0 if value < 10; Example: 2 => 02
+
+    if (hours < 10) {
+      hours = '0' + hours;
+    }
+
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+
+    return hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.ReportsBusinessSpendContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setIsBrandFilter(true);
@@ -182,7 +211,7 @@ var ReportsDriverSpendUI = function ReportsDriverSpendUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value);
+      }, td.value_unit === 'seconds' && td.value ? convertHMS(td.value) : td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
   }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.footer) === null || _reportData$content7$ === void 0 ? void 0 : _reportData$content7$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.footer) === null || _reportData$content8$ === void 0 ? void 0 : _reportData$content8$.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {

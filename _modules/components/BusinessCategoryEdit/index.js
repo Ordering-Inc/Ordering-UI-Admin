@@ -174,12 +174,10 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     width: 100
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    onClick: handleClose
-  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30,
     height: 30
-  }))), /*#__PURE__*/_react.default.createElement(_styles.CategoryTypeImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.CategoryTypeImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 300,
     height: 300
   })), /*#__PURE__*/_react.default.createElement(_styles.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

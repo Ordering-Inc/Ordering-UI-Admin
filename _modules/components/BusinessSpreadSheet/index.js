@@ -109,6 +109,7 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
     }
   }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessSpreadSheetContainer, null, /*#__PURE__*/_react.default.createElement(_SpreadSheetEditor.SpreadSheetEditor, _extends({}, props, {
+    isBusinessProducts: true,
     hotTableData: spreadSheetState.products,
     headerItems: spreadSheetHeaderItems,
     handleItemChange: handleItemChange,

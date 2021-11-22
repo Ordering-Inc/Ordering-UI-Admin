@@ -43,9 +43,7 @@ var MeunItem = _styledComponents.default.div(_templateObject7 || (_templateObjec
 
 exports.MeunItem = MeunItem;
 
-var MenuName = _styledComponents.default.span(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  color: ", ";\n"])), function (props) {
-  return props.theme.colors.headingColor;
-});
+var MenuName = _styledComponents.default.span(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  font-size: 14px;\n"])));
 
 exports.MenuName = MenuName;
 

@@ -48,7 +48,8 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
       handleoutsideClickDeselects = props.handleoutsideClickDeselects,
       isRemove = props.isRemove,
       isUndo = props.isUndo,
-      isRedo = props.isRedo;
+      isRedo = props.isRedo,
+      isBusinessProducts = props.isBusinessProducts;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -110,57 +111,76 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
           }
         }
       })
+    },
+    cells: function cells(row, column, prop) {
+      var _hotTableRef$current3;
+
+      var cellProperties = {
+        readOnly: false
+      };
+
+      if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current3 = hotTableRef.current) !== null && _hotTableRef$current3 !== void 0 && _hotTableRef$current3.hotInstance && isBusinessProducts) {
+        var _hotTableRef$current4, _hotTableRef$current5;
+
+        var visualColIndex = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current4 = hotTableRef.current) === null || _hotTableRef$current4 === void 0 ? void 0 : (_hotTableRef$current5 = _hotTableRef$current4.hotInstance) === null || _hotTableRef$current5 === void 0 ? void 0 : _hotTableRef$current5.toVisualColumn(column);
+
+        if (visualColIndex === 0) {
+          cellProperties.readOnly = true;
+        }
+      }
+
+      return cellProperties;
     }
   };
 
   var handleAfterChange = function handleAfterChange(changes, accionHanson) {
-    var _hotTableRef$current3;
+    var _hotTableRef$current6;
 
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current3 = hotTableRef.current) !== null && _hotTableRef$current3 !== void 0 && _hotTableRef$current3.hotInstance) {
-      var _hotTableRef$current4;
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current6 = hotTableRef.current) !== null && _hotTableRef$current6 !== void 0 && _hotTableRef$current6.hotInstance) {
+      var _hotTableRef$current7;
 
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current4 = hotTableRef.current) === null || _hotTableRef$current4 === void 0 ? void 0 : _hotTableRef$current4.hotInstance;
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current7 = hotTableRef.current) === null || _hotTableRef$current7 === void 0 ? void 0 : _hotTableRef$current7.hotInstance;
       handleItemChange && handleItemChange(changes, accionHanson, hotTableObj);
     }
   };
 
   var handleBeforeRemoveRow = function handleBeforeRemoveRow(index, amount, physicalRows) {
-    var _hotTableRef$current5;
+    var _hotTableRef$current8;
 
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current5 = hotTableRef.current) !== null && _hotTableRef$current5 !== void 0 && _hotTableRef$current5.hotInstance) {
-      var _hotTableRef$current6;
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current8 = hotTableRef.current) !== null && _hotTableRef$current8 !== void 0 && _hotTableRef$current8.hotInstance) {
+      var _hotTableRef$current9;
 
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current6 = hotTableRef.current) === null || _hotTableRef$current6 === void 0 ? void 0 : _hotTableRef$current6.hotInstance;
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current9 = hotTableRef.current) === null || _hotTableRef$current9 === void 0 ? void 0 : _hotTableRef$current9.hotInstance;
       handleRowRemove && handleRowRemove(index, amount, physicalRows, hotTableObj);
     }
   };
 
   var _afterSelectionEnd = function afterSelectionEnd(row, col, row1, col1) {
-    var _hotTableRef$current7;
-
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current7 = hotTableRef.current) !== null && _hotTableRef$current7 !== void 0 && _hotTableRef$current7.hotInstance) {
-      var _hotTableRef$current8;
-
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current8 = hotTableRef.current) === null || _hotTableRef$current8 === void 0 ? void 0 : _hotTableRef$current8.hotInstance;
-      handleAfterSectionEnd && handleAfterSectionEnd(row, col, row1, col1, hotTableObj);
-    }
-  };
-
-  var _outsideClickDeselects = function outsideClickDeselects(event) {
-    var _hotTableRef$current9;
-
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current9 = hotTableRef.current) !== null && _hotTableRef$current9 !== void 0 && _hotTableRef$current9.hotInstance) {
-      handleoutsideClickDeselects && handleoutsideClickDeselects(event);
-    }
-  };
-
-  (0, _react.useEffect)(function () {
     var _hotTableRef$current10;
 
     if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current10 = hotTableRef.current) !== null && _hotTableRef$current10 !== void 0 && _hotTableRef$current10.hotInstance) {
       var _hotTableRef$current11;
 
       var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current11 = hotTableRef.current) === null || _hotTableRef$current11 === void 0 ? void 0 : _hotTableRef$current11.hotInstance;
+      handleAfterSectionEnd && handleAfterSectionEnd(row, col, row1, col1, hotTableObj);
+    }
+  };
+
+  var _outsideClickDeselects = function outsideClickDeselects(event) {
+    var _hotTableRef$current12;
+
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current12 = hotTableRef.current) !== null && _hotTableRef$current12 !== void 0 && _hotTableRef$current12.hotInstance) {
+      handleoutsideClickDeselects && handleoutsideClickDeselects(event);
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    var _hotTableRef$current13;
+
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current13 = hotTableRef.current) !== null && _hotTableRef$current13 !== void 0 && _hotTableRef$current13.hotInstance) {
+      var _hotTableRef$current14;
+
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current14 = hotTableRef.current) === null || _hotTableRef$current14 === void 0 ? void 0 : _hotTableRef$current14.hotInstance;
       hotTableObj.loadData(hotTableData);
       hotTableObj.updateSettings({
         cells: function cells(row, col) {

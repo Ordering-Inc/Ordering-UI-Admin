@@ -51,11 +51,11 @@ var CategoryProductsContent = _styledComponents.default.div(_templateObject9 || 
 
 exports.CategoryProductsContent = CategoryProductsContent;
 
-var CategoryListContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  min-width: 250px;\n\n  @media (max-width: 576px) {\n    width:100%;\n  }\n"])));
+var CategoryListContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  min-width: 260px;\n\n  @media (max-width: 576px) {\n    width:100%;\n  }\n"])));
 
 exports.CategoryListContainer = CategoryListContainer;
 
-var ProductListContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex-grow: 1;\n  width: 100%;\n\n  @media (min-width: 769px) {\n    width: calc(100% - 250px);\n  }\n"])));
+var ProductListContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex-grow: 1;\n  width: 100%;\n\n  @media (min-width: 769px) {\n    width: calc(100% - 260px);\n  }\n"])));
 
 exports.ProductListContainer = ProductListContainer;
 

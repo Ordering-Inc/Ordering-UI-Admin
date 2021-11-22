@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ListContent = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-top: 35px;\n  height: 100%;\n  border: none;\n  \n  @media (min-width: 768px) {\n    border-left: 1px solid #E9ECEF;\n  }\n"])));
+var ListContent = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: 100%;\n  border: none;\n  \n  @media (min-width: 768px) {\n    border-left: 1px solid #E9ECEF;\n  }\n"])));
 
 exports.ListContent = ListContent;
 
-var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 410px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 290px);\n  }\n  \n  @media (min-width: 576px) {\n    ", "\n  }\n"])), function (props) {
+var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 420px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 300px);\n  }\n  \n  @media (min-width: 576px) {\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n    "])));
 });
 
@@ -33,7 +33,7 @@ var ProductListSpreadContainer = _styledComponents.default.div(_templateObject5 
 
 exports.ProductListSpreadContainer = ProductListSpreadContainer;
 
-var BusinessProductListTable = _styledComponents.default.table(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n  transition: all 0.3s;\n\n  td, th {\n    padding: 15px;\n    font-size: 14px;\n    &:first-child {\n      padding-left: 0px;\n      padding-right: 0px;\n    }\n  }\n\n  th.more {\n    width: 50px;\n  }\n\n  th.description {\n    width: 30%;\n  }\n\n  th.id,\n  td.id {\n    width: 10%;\n  }\n\n  thead {\n    border-bottom: 1px solid ", ";\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n      }\n    }\n  }\n"])), function (props) {
+var BusinessProductListTable = _styledComponents.default.table(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n  transition: all 0.3s;\n\n  td, th {\n    padding: 15px;\n    font-size: 14px;\n    &:first-child {\n      padding-left: 0px;\n      padding-right: 0px;\n    }\n  }\n\n  th.more {\n    width: 50px;\n  }\n\n  th.price {\n    max-width: 100px;\n  }\n\n  th.description {\n    width: 35%;\n  }\n\n  th.id,\n  td.id {\n    width: 10%;\n  }\n\n  td {\n    input.product_price {\n      max-width: 100px;\n    }\n  }\n\n  thead {\n    border-bottom: 1px solid ", ";\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;

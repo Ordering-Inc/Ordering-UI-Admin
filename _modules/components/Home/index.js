@@ -11,17 +11,23 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactChartjs = require("react-chartjs-2");
+
+var _moment = _interopRequireDefault(require("moment"));
+
 var _Buttons = require("../../styles/Buttons");
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
+var _useWindowSize2 = require("../../hooks/useWindowSize");
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _HomeReports = require("../HomeReports");
-
-var _HomeSingleTask = require("../HomeSingleTask");
-
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -33,15 +39,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -56,9 +54,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeUI = function HomeUI(props) {
-  var _taskList$data;
+  var _sessionState$user;
 
-  var taskList = props.taskList;
+  var ordersList = props.ordersList,
+      todaySalelsList = props.todaySalelsList,
+      monthSalesList = props.monthSalesList,
+      getCurrentDateRange = props.getCurrentDateRange;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -69,60 +70,229 @@ var HomeUI = function HomeUI(props) {
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
-  var _useState = (0, _react.useState)(true),
+  var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      isShowVideo = _useState2[0],
-      setIsShowVideo = _useState2[1];
+      timeAxes = _useState2[0],
+      setTimeAxes = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(true),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isShowStore = _useState4[0],
-      setIsShowStore = _useState4[1];
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
 
-  var goToContactUs = function goToContactUs() {
-    window.open('https://www.ordering.co/en-us/contact-us', '_blank');
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
+
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
+
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      sessionState = _useSession2[0];
+
+  var goToContact = function goToContact(location) {
+    if (location === 'sales') {
+      window.open('https://www.ordering.co/ordering-sales', '_blank');
+    }
+
+    if (location === 'tech') {
+      window.open('https://www.ordering.co/ordering-support', '_blank');
+    }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.HomeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  var generateData = function generateData() {
+    var values = [];
+    timeAxes.forEach(function (axe) {
+      var _monthSalesList$sales;
+
+      var index = monthSalesList === null || monthSalesList === void 0 ? void 0 : (_monthSalesList$sales = monthSalesList.sales) === null || _monthSalesList$sales === void 0 ? void 0 : _monthSalesList$sales.findIndex(function (history) {
+        return axe === (history === null || history === void 0 ? void 0 : history.time);
+      });
+
+      if (index !== -1) {
+        var _monthSalesList$sales2, _monthSalesList$sales3;
+
+        values.push({
+          x: monthSalesList === null || monthSalesList === void 0 ? void 0 : (_monthSalesList$sales2 = monthSalesList.sales[index]) === null || _monthSalesList$sales2 === void 0 ? void 0 : _monthSalesList$sales2.time,
+          y: monthSalesList === null || monthSalesList === void 0 ? void 0 : (_monthSalesList$sales3 = monthSalesList.sales[index]) === null || _monthSalesList$sales3 === void 0 ? void 0 : _monthSalesList$sales3.sales
+        });
+      } else {
+        values.push({
+          x: axe,
+          y: 0
+        });
+      }
+    });
+    return values;
+  };
+
+  var handleGoToPage = function handleGoToPage(data) {
+    events.emit('go_to_page', data);
+  };
+
+  var updateTimeAxes = function updateTimeAxes() {
+    var unitdate = getTimeAxes(getCurrentDateRange()).time.unit;
+    var maxdate = (0, _moment.default)(getTimeAxes(getCurrentDateRange()).time.max).endOf(unitdate);
+    var mindate = (0, _moment.default)(getTimeAxes(getCurrentDateRange()).time.min).startOf(unitdate);
+    var curDate = mindate;
+    var newTimeAxes = [];
+    var adder = 'd';
+
+    switch (unitdate) {
+      case 'day':
+        adder = 'd';
+        break;
+
+      case 'month':
+        adder = 'M';
+        break;
+
+      case 'year':
+        adder = 'y';
+        break;
+
+      case 'hour':
+        adder = 'h';
+        break;
+
+      default:
+        break;
+    }
+
+    do {
+      newTimeAxes.push((0, _moment.default)(curDate._d.getTime()).format('YYYY-MM-DD HH:mm:ss'));
+      curDate = curDate.clone().add(1, adder);
+    } while (curDate <= maxdate);
+
+    setTimeAxes(newTimeAxes);
+  };
+
+  var getTimeAxes = function getTimeAxes(lapse) {
+    var xAxes = {
+      type: 'time',
+      grid: {
+        display: false
+      },
+      time: {
+        stepSize: 1,
+        displayFormats: {
+          hour: 'LT'
+        }
+      },
+      ticks: {
+        fontSize: 12,
+        fontColor: '#CED4DA'
+      }
+    };
+    xAxes.time.unit = 'day';
+    xAxes.time.min = (0, _moment.default)().subtract(30, 'days').format('YYYY-MM-DD');
+    xAxes.time.max = (0, _moment.default)().format('YYYY-MM-DD');
+    return xAxes;
+  };
+
+  var defaultData = {
+    datasets: [{
+      data: generateData(),
+      fill: false,
+      backgroundColor: 'rgba(75,192,192,0.2)',
+      borderColor: '#2C7BE5',
+      tension: 0.4,
+      borderWidth: 3
+    }]
+  };
+  var options = {
+    scales: {
+      x: getTimeAxes(),
+      y: {
+        beginAtZero: true,
+        grid: {
+          drawBorder: false
+        },
+        ticks: {
+          font: {
+            size: 11,
+            color: '#CED4DA'
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    pointRadius: 0
+  };
+
+  var getTotalSales = function getTotalSales() {
+    var data = 0;
+
+    var _iterator = _createForOfIteratorHelper(monthSalesList === null || monthSalesList === void 0 ? void 0 : monthSalesList.sales),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var sale = _step.value;
+        data += sale.sales;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    return parsePrice(data, {
+      separator: '.'
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    updateTimeAxes();
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_styles.HomeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Breadcrumb, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.WelcomeMsg, null, t('WELCOME_TO_ORDERING', 'Welcome to Ordering'), "!"), /*#__PURE__*/_react.default.createElement(_styles.GuideMsg, null, t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.')), /*#__PURE__*/_react.default.createElement(_styles.VideoAndReportsWrapper, {
-    isRowDirection: isShowVideo
-  }, /*#__PURE__*/_react.default.createElement(_styles.VideoOnBoardingWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.HideAndShowWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('VIDEO_ONBOARDING', 'Video onboarding')), /*#__PURE__*/_react.default.createElement("div", {
-    onClick: function onClick() {
-      return setIsShowVideo(!isShowVideo);
-    }
-  }, isShowVideo ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.DashSquare, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, null))), isShowVideo && /*#__PURE__*/_react.default.createElement(_styles.VideoOnBoardingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IframeWrapper, {
-    dangerouslySetInnerHTML: {
-      __html: '<iframe src="https://www.youtube-nocookie.com/embed/Bi8WLLRzZ1g" frameborder="0" loading="lazy" allowfullscreen />'
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_HomeReports.HomeReports, _extends({}, props, {
-    isShowVideo: isShowVideo
-  }))), /*#__PURE__*/_react.default.createElement(_styles.FirstStoreToSellWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.HideAndShowWrapper, {
-    className: "home-store-title"
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('GET_YOUR_FIRST_STORE_READY_TO_SELL', 'Get your first store ready to sell.')), /*#__PURE__*/_react.default.createElement("div", {
-    onClick: function onClick() {
-      return setIsShowStore(!isShowStore);
-    }
-  }, isShowStore ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.DashSquare, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, null))), /*#__PURE__*/_react.default.createElement(_styles.FirstStoreToSellContent, {
-    active: isShowStore
-  }, taskList !== null && taskList !== void 0 && taskList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_HomeSingleTask.HomeSingleTask, {
-      key: i,
-      isSkeleton: true
-    });
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (taskList === null || taskList === void 0 ? void 0 : (_taskList$data = taskList.data) === null || _taskList$data === void 0 ? void 0 : _taskList$data.length) > 0 && (taskList === null || taskList === void 0 ? void 0 : taskList.data.map(function (task, i) {
-    return /*#__PURE__*/_react.default.createElement(_HomeSingleTask.HomeSingleTask, _extends({}, props, {
-      key: i,
-      task: task
-    }));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.OrderingHelpButton, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING_HELP_CONDITION_LINK', 'If you need anything else from your Ordering Team..')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WelcomeMsg, null, t('WELCOME_TO_ORDERING', 'Welcome to Ordering'), "!"), /*#__PURE__*/_react.default.createElement(_styles.GuideMsg, null, t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.'))), /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('REPORTS', 'Reports')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
-    borderRadius: "7.6px",
-    onClick: goToContactUs
-  }, t('CLICK_HERE', 'Click here'), "!")))));
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'business_analytics'
+      });
+    }
+  }, t('SEE_MORE_REPORTS', 'See more reports'))), /*#__PURE__*/_react.default.createElement(_styles.Reports, null, /*#__PURE__*/_react.default.createElement(_styles.SalesGraphContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ChartHeaderContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('THIS_MONTH_SALES', 'This month sales')), monthSalesList !== null && monthSalesList !== void 0 && monthSalesList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70,
+    height: 30
+  }) : /*#__PURE__*/_react.default.createElement("h3", null, getTotalSales())), monthSalesList !== null && monthSalesList !== void 0 && monthSalesList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 150
+  }) : /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+    data: defaultData,
+    options: options,
+    height: width > 1400 ? '106px' : ''
+  })), /*#__PURE__*/_react.default.createElement(_styles.OrdersAndSalesWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersOrSalesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContent, null, /*#__PURE__*/_react.default.createElement("p", null, t('TODAY_ORDERS', 'Today Orders')), ordersList !== null && ordersList !== void 0 && ordersList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70,
+    height: 30
+  }) : /*#__PURE__*/_react.default.createElement("h2", null, ordersList === null || ordersList === void 0 ? void 0 : ordersList.orders)), /*#__PURE__*/_react.default.createElement(_styles.BoxIconContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Basket, null))), /*#__PURE__*/_react.default.createElement(_styles.OrdersOrSalesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContent, null, /*#__PURE__*/_react.default.createElement("p", null, t('TODAY_SALES', 'Today Sales')), todaySalelsList !== null && todaySalelsList !== void 0 && todaySalelsList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70,
+    height: 30
+  }) : /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(todaySalelsList === null || todaySalelsList === void 0 ? void 0 : todaySalelsList.sales, {
+    separator: '.'
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BoxIconContainer, {
+    isSales: true
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cash, null))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('SUPPORT', 'Support'))), /*#__PURE__*/_react.default.createElement(_styles.AssistanceWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.AssistanceTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ASSIST_TITILE_1', 'Which kind of'), ' ', /*#__PURE__*/_react.default.createElement("span", null, t('ASSIST_TITILE_2', 'assistance do you need?'))), /*#__PURE__*/_react.default.createElement("p", null, t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.'))), /*#__PURE__*/_react.default.createElement(_styles.AssistanceBody, null, /*#__PURE__*/_react.default.createElement(_styles.WidgeBlock, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONTACT_SALES_TITLE', 'Contact our Sales Team')), /*#__PURE__*/_react.default.createElement("p", null, t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: function onClick() {
+      return goToContact('sales');
+    }
+  }, t('CONTACT_SALES_BUTTON_TEXT', 'Sales Contact'))), /*#__PURE__*/_react.default.createElement(_styles.WidgeBlock, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONTACT_SUPPORT_TITLE', 'Contact our Support Team')), /*#__PURE__*/_react.default.createElement("p", null, t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: function onClick() {
+      return goToContact('tech');
+    }
+  }, t('CONTACT_SUPPORT_BUTTON_TEXT', 'Tech Support')))))));
 };
 
 var Home = function Home(props) {

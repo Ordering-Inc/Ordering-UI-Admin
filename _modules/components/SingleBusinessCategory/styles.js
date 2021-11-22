@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SingleCategoryContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 10px;\n  border-radius: 7.5px;\n  margin-bottom: 15px;\n  transition: all 0.3s;\n  cursor: pointer;\n  height: 75px;\n  margin-left: ", "px;\n\n  &:hover {\n    background: ", ";\n  }\n\n  ", "\n\n  ", "\n\n  .img-section {\n    min-width: 41px !important;\n    min-height: 41px !important;\n  }\n"])), function (props) {
+var SingleCategoryContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 15px 10px;\n  border-radius: 7.5px;\n  transition: all 0.3s;\n  cursor: pointer;\n  font-size: 14px;\n  margin-left: ", "px;\n\n  &:hover {\n    background: ", ";\n  }\n\n  ", "\n\n  ", "\n\n  .img-section {\n    min-width: 41px !important;\n    min-height: 41px !important;\n  }\n"])), function (props) {
   var _props$spaceTab;
 
   return (_props$spaceTab = props.spaceTab) !== null && _props$spaceTab !== void 0 ? _props$spaceTab : 0;
