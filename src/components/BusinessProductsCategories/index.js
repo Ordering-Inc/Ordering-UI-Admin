@@ -13,7 +13,7 @@ export const BusinessProductsCategories = (props) => {
   const {
     businessState,
     categorySelected,
-    onClickCategory,
+    handleChangeCategory,
     handleOpenCategoryDetails
   } = props
 
@@ -42,7 +42,7 @@ export const BusinessProductsCategories = (props) => {
                 key={category.id}
                 category={category}
                 categorySelected={categorySelected}
-                handleChangeCategory={onClickCategory}
+                handleChangeCategory={handleChangeCategory}
                 business={businessState?.business}
                 dataSelected={dataSelected}
                 onDataSelected={setDataSelected}
