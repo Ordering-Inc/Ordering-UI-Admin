@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, useEvent, Home as HomeController } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent, useSession, Home as HomeController } from 'ordering-components-admin'
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import { IconButton, Button } from '../../styles/Buttons'
@@ -44,6 +44,8 @@ const HomeUI = (props) => {
   const [events] = useEvent()
   const { width } = useWindowSize()
   const [{ parsePrice }] = useUtils()
+  const [sessionState] = useSession()
+
 
   const goToContact = (location) => {
     if (location === 'sales') {
@@ -236,29 +238,33 @@ const HomeUI = (props) => {
           </OrdersOrSalesContainer>
         </OrdersAndSalesWrapper>
       </Reports>
-      <ParagraphHeaders>
-        <p>{t('SUPPORT', 'Support')}</p>
-      </ParagraphHeaders>
-      <AssistanceWidgets>
-        <AssistanceTitle>
-          <h1>{t('ASSIST_TITILE_1', 'Which kind of')}{' '}
-            <span>{t('ASSIST_TITILE_2', 'assistance do you need?')}</span>
-          </h1>
-          <p>{t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.')}</p>
-        </AssistanceTitle>
-        <AssistanceBody>
-          <WidgeBlock>
-            <h3>{t('CONTACT_SALES_TITLE', 'Contact our Sales Team')}</h3>
-            <p>{t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')}</p>
-            <Button outline color='primary' onClick={() => goToContact('sales')}>{t('CONTACT_SALES_BUTTON_TEXT', 'Sales Contact')}</Button>
-          </WidgeBlock>
-          <WidgeBlock>
-            <h3>{t('CONTACT_SUPPORT_TITLE', 'Contact our Support Team')}</h3>
-            <p>{t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')}</p>
-            <Button outline color='primary' onClick={() => goToContact('tech')}>{t('CONTACT_SUPPORT_BUTTON_TEXT', 'Tech Support')}</Button>
-          </WidgeBlock>
-        </AssistanceBody>
-      </AssistanceWidgets>
+      {sessionState?.user?.level !== 2 && (
+        <>
+          <ParagraphHeaders>
+            <p>{t('SUPPORT', 'Support')}</p>
+          </ParagraphHeaders>
+          <AssistanceWidgets>
+            <AssistanceTitle>
+              <h1>{t('ASSIST_TITILE_1', 'Which kind of')}{' '}
+                <span>{t('ASSIST_TITILE_2', 'assistance do you need?')}</span>
+              </h1>
+              <p>{t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.')}</p>
+            </AssistanceTitle>
+            <AssistanceBody>
+              <WidgeBlock>
+                <h3>{t('CONTACT_SALES_TITLE', 'Contact our Sales Team')}</h3>
+                <p>{t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')}</p>
+                <Button outline color='primary' onClick={() => goToContact('sales')}>{t('CONTACT_SALES_BUTTON_TEXT', 'Sales Contact')}</Button>
+              </WidgeBlock>
+              <WidgeBlock>
+                <h3>{t('CONTACT_SUPPORT_TITLE', 'Contact our Support Team')}</h3>
+                <p>{t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')}</p>
+                <Button outline color='primary' onClick={() => goToContact('tech')}>{t('CONTACT_SUPPORT_BUTTON_TEXT', 'Tech Support')}</Button>
+              </WidgeBlock>
+            </AssistanceBody>
+          </AssistanceWidgets>
+        </>
+      )}
     </HomeContainer>
   )
 }
