@@ -63,7 +63,7 @@ const ReportsDriverScheduleUI = (props) => {
   }
 
   const getText = (item, text) => {
-    return `${parseDate(item.rangeValue2)} ~ ${parseDate(item.rangeValue2)}`
+    return `${parseDate(item.rangeValue1)} ~ ${parseDate(item.rangeValue2)}`
   }
 
   useEffect(() => {
