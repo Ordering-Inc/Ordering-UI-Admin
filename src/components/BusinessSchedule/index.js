@@ -202,7 +202,7 @@ const BusinessScheduleUI = (props) => {
                         <TimeSelectContainer>
                           <TimeSelect
                             value={addScheduleTime.open.hour}
-                            onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, true, true, e.target.value)}
+                            onChange={(e) => handleChangeAddScheduleTime(true, true, e.target.value)}
                           >
                             {[...Array(24)].map((v, i) => (
                               <option
@@ -216,7 +216,7 @@ const BusinessScheduleUI = (props) => {
                           :
                           <TimeSelect
                             value={addScheduleTime.open.minute}
-                            onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, true, false, e.target.value)}
+                            onChange={(e) => handleChangeAddScheduleTime(true, false, e.target.value)}
                           >
                             {[...Array(60)].map((v, i) => (
                               <option
@@ -232,7 +232,7 @@ const BusinessScheduleUI = (props) => {
                         <TimeSelectContainer>
                           <TimeSelect
                             value={addScheduleTime.close.hour}
-                            onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, false, true, e.target.value)}
+                            onChange={(e) => handleChangeAddScheduleTime(false, true, e.target.value)}
                           >
                             {[...Array(24)].map((v, i) => (
                               <option
@@ -246,7 +246,7 @@ const BusinessScheduleUI = (props) => {
                           :
                           <TimeSelect
                             value={addScheduleTime.close.minute}
-                            onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, false, false, e.target.value)}
+                            onChange={(e) => handleChangeAddScheduleTime(false, false, e.target.value)}
                           >
                             {[...Array(60)].map((v, i) => (
                               <option
