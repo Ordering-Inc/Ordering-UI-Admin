@@ -102,14 +102,10 @@ export const DistanceTitleBlock = styled.div`
   `}
 `
 
-export const TableWrapper = styled.div`
+export const ChartWrapper = styled.div`
   width: 100%;
   overflow: auto;
-  max-height: 650px;
-
-  > div {
-    min-width: 850px;
-  }
+  max-height: 900px;
 `
 
 export const EmptyContent = styled.div`
