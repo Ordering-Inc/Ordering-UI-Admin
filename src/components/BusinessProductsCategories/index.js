@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { SingleBusinessCategory } from '../SingleBusinessCategory'
+import { SingleBusinessSubCateogries } from '../SingleBusinessSubCateogries'
+
 import {
   CategoryListContainer,
   HeaderContainer,
@@ -12,7 +13,7 @@ export const BusinessProductsCategories = (props) => {
   const {
     businessState,
     categorySelected,
-    onClickCategory,
+    handleChangeCategory,
     handleOpenCategoryDetails
   } = props
 
@@ -29,28 +30,27 @@ export const BusinessProductsCategories = (props) => {
           {
             businessState.loading && (
               [...Array(6).keys()].map(i => (
-                <SingleBusinessCategory key={i} isSkeleton />
+                <SingleBusinessSubCateogries key={i} isSkeleton />
               ))
             )
           }
-          {
-            !businessState.loading && businessState?.business?.categories.length > 0 && (
-              businessState?.business.categories.sort((a, b) => a.rank - b.rank).map((category, i) => (
-                <SingleBusinessCategory
-                  {...props}
-                  key={i}
-                  category={category}
-                  categorySelected={categorySelected}
-                  handleChangeCategory={onClickCategory}
-                  business={businessState?.business}
-                  dataSelected={dataSelected}
-                  onDataSelected={setDataSelected}
-                />
-              ))
-            )
-          }
-          <AddCategory onClick={() => handleOpenCategoryDetails()}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
+          {businessState?.business?.categories?.length && (
+            businessState?.business.categories.sort((a, b) => a.rank - b.rank).map(category => (
+              <SingleBusinessSubCateogries
+                {...props}
+                index={0}
+                key={category.id}
+                category={category}
+                categorySelected={categorySelected}
+                handleChangeCategory={handleChangeCategory}
+                business={businessState?.business}
+                dataSelected={dataSelected}
+                onDataSelected={setDataSelected}
+              />
+            ))
+          )}
         </ListContent>
+        <AddCategory onClick={() => handleOpenCategoryDetails()}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
       </CategoryListContainer>
     </>
   )

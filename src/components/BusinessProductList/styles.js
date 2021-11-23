@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
 export const ListContent = styled.div`
-  margin-top: 35px;
   height: 100%;
   border: none;
   
@@ -12,11 +11,11 @@ export const ListContent = styled.div`
 
 export const ProductListContainer = styled.div`
   margin: 0;
-  max-height: calc(100vh - 410px);
+  max-height: calc(100vh - 420px);
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 290px);
+    max-height: calc(100vh - 300px);
   }
   
   @media (min-width: 576px) {
@@ -59,13 +58,23 @@ export const BusinessProductListTable = styled.table`
     width: 50px;
   }
 
+  th.price {
+    max-width: 100px;
+  }
+
   th.description {
-    width: 30%;
+    width: 35%;
   }
 
   th.id,
   td.id {
     width: 10%;
+  }
+
+  td {
+    input.product_price {
+      max-width: 100px;
+    }
   }
 
   thead {

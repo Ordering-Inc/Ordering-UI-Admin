@@ -70,24 +70,20 @@ const SingleBusinessUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {(allowColumns?.featured || allowColumns?.ratings) && (
-                  <>
-                    <td>
-                      {allowColumns?.featured && (
-                        <InfoBlock>
-                          <p className='bold'><Skeleton width={60} /></p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                    <td>
-                      {allowColumns?.ratings && (
-                        <InfoBlock>
-                          <p className='bold'><Skeleton width={30} /></p>
-                          <p><Skeleton width={50} /></p>
-                        </InfoBlock>
-                      )}
-                    </td>
-                  </>
+                {allowColumns?.featured && (
+                  <td>
+                    <InfoBlock>
+                      <p className='bold'><Skeleton width={60} /></p>
+                    </InfoBlock>
+                  </td>
+                )}
+                {allowColumns?.ratings && (
+                  <td>
+                    <InfoBlock>
+                      <p className='bold'><Skeleton width={30} /></p>
+                      <p><Skeleton width={50} /></p>
+                    </InfoBlock>
+                  </td>
                 )}
                 <td>
                   <Skeleton width={100} />
@@ -121,28 +117,26 @@ const SingleBusinessUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {(allowColumns?.featured || allowColumns?.ratings) && (
-                  <>
-                    <td>
-                      {allowColumns?.featured && (
-                        <InfoBlock>
-                          {businessState?.business?.featured && (
-                            <p>{t('FEATURE', 'Featured')}</p>
-                          )}
-                        </InfoBlock>
+                {allowColumns?.featured && (
+                  <td>
+                    <InfoBlock>
+                      {businessState?.business?.featured && (
+                        <p>{t('FEATURE', 'Featured')}</p>
                       )}
-                    </td>
-                    <td>
-                      {allowColumns?.ratings && businessState?.business?.reviews?.total > 0 && (
-                        <InfoBlock>
-                          <p className='star'><StarFill /></p>
-                          {businessState?.business?.reviews?.total && (
-                            <p>{businessState?.business?.reviews?.total}</p>
-                          )}
-                        </InfoBlock>
-                      )}
-                    </td>
-                  </>
+                    </InfoBlock>
+                  </td>
+                )}
+                {allowColumns?.ratings && (
+                  <td>
+                    {businessState?.business?.reviews?.total > 0 && (
+                      <InfoBlock>
+                        <p className='star'><StarFill /></p>
+                        {businessState?.business?.reviews?.total && (
+                          <p>{businessState?.business?.reviews?.total}</p>
+                        )}
+                      </InfoBlock>
+                    )}
+                  </td>
                 )}
                 <td>
                   <BusinessEnableWrapper className='business_enable_control'>

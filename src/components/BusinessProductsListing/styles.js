@@ -90,7 +90,7 @@ export const CategoryProductsContent = styled.div`
 `
 
 export const CategoryListContainer = styled.div`
-  min-width: 250px;
+  min-width: 260px;
 
   @media (max-width: 576px) {
     width:100%;
@@ -102,7 +102,7 @@ export const ProductListContainer = styled.div`
   width: 100%;
 
   @media (min-width: 769px) {
-    width: calc(100% - 250px);
+    width: calc(100% - 260px);
   }
 `
 

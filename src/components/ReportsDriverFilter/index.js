@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { SearchBar } from '../SearchBar'
 import {
   AnalyticsBusinessFilterContainer,
   BusinessFilterOption,
   BusinessName,
-  FilterBtnWrapper
+  FilterBtnWrapper,
+  SearchWrapper
 } from './styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -19,7 +21,9 @@ const ReportsDriverFilterUI = (props) => {
     handleChangeDriverId,
     handleClickFilterButton,
     isAllCheck,
-    handleChangeAllCheck
+    handleChangeAllCheck,
+    searchValue,
+    onSearch
   } = props
 
   const [, t] = useLanguage()
@@ -67,6 +71,14 @@ const ReportsDriverFilterUI = (props) => {
   return (
     <>
       <AnalyticsBusinessFilterContainer>
+        <SearchWrapper>
+          <SearchBar
+            search={searchValue}
+            isCustomLayout
+            onSearch={(value) => onSearch(value)}
+            placeholder={t('SEARCH', 'Search')}
+          />
+        </SearchWrapper>
         {driverList.loading ? (
           [...Array(10).keys()].map(i => (
             <BusinessFilterOption key={i}>
@@ -131,6 +143,7 @@ export const ReportsDriverFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
     propsToFetch: ['id', 'name'],
+    isSearchByName: true,
     UIComponent: ReportsDriverFilterUI
   }
   return <ReportsDriverFilterController {...AnalyticsBusinessFilterProps} />

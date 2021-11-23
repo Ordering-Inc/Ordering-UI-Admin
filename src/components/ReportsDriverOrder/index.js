@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
@@ -31,6 +31,7 @@ const ReportsDriverOrderUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ parsePrice }] = useUtils()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
 
@@ -139,7 +140,13 @@ const ReportsDriverOrderUI = (props) => {
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
-                        <td key={j} colSpan={td.colspan}>{td.value}</td>
+                        <td key={j} colSpan={td.colspan}>
+                          {td.value_unit === 'currency'
+                            ? parsePrice(td.value)
+                            : (td.value_refers === 'percentage'
+                              ? `${td.value}%`
+                              : td.value)}
+                        </td>
                       ))}
                     </tr>
                   </Tbody>

@@ -139,7 +139,6 @@ export const ImporterFormUI = (props) => {
   }
 
   useEffect(() => {
-    console.log('type--' + importType)
     if (importType) {
       const _target = (importypeOptions?.filter(options => options.value === importType))[0]
       handleChangeSelect('type', _target.sync_name)
@@ -172,10 +171,6 @@ export const ImporterFormUI = (props) => {
       handleSelectOption(targetOption?.value)
     }
   }, [selectedImporter])
-
-  useEffect(() => {
-    console.log(formState)
-  }, [formState])
 
   return (
     <NewImporter>

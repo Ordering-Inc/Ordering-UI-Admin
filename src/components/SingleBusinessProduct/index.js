@@ -14,7 +14,6 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
-
 import {
   SingleListBusinessContainer,
   BusinessGeneralInfo,
@@ -46,12 +45,13 @@ const SingleBusinessProductUI = (props) => {
     businessState,
     handleUpdateBusinessState,
     dataSelected,
-    setDataSelected
+    setDataSelected,
+    categorySelected
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const containerRef = useRef(null)
@@ -138,7 +138,6 @@ const SingleBusinessProductUI = (props) => {
     event.preventDefault()
     const element = event.target.closest('.draggable-product')
     if (element) {
-      console.log(element.dataset.index)
       setDataSelected(element.dataset.index)
     }
   }
@@ -260,7 +259,11 @@ const SingleBusinessProductUI = (props) => {
                               {
                                 productFormState?.changes?.images
                                   ? (
-                                    <img src={productFormState?.changes?.images} alt='business type image' loading='lazy' />
+                                    <img
+                                      src={optimizeImage(productFormState?.changes?.images, 'h_50,c_limit')}
+                                      alt='product image'
+                                      loading='lazy'
+                                    />
                                   )
                                   : (
                                     <UploadWrapper>

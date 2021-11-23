@@ -42,10 +42,10 @@ export const BusinessesSelector = (props) => {
                   {business.name}
                 </OptionName>
                 <OptionCategory>
-                  {business.alcohol && t('ALCOHOL', 'Alcohol')}
-                  {business.food && t('FOOD', 'Food')}
-                  {business.groceries && t('GROCERIES', 'Groceries')}
-                  {business.laundry && t('LAUNDRY', 'Laundry')}
+                  {business?.alcohol && t('ALCOHOL', 'Alcohol')}
+                  {business?.food && t('FOOD', 'Food')}
+                  {business?.groceries && t('GROCERIES', 'Groceries')}
+                  {business?.laundry && t('LAUNDRY', 'Laundry')}
                 </OptionCategory>
               </OptionContent>
             </Option>

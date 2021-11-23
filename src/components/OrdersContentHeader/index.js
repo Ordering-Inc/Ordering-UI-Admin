@@ -25,6 +25,7 @@ export const OrdersContentHeader = (props) => {
     searchValue,
     driverGroupList,
     driversList,
+    citiesList,
     paymethodsList,
     businessesList,
     filterValues,
@@ -107,6 +108,7 @@ export const OrdersContentHeader = (props) => {
         driversList={driversList}
         paymethodsList={paymethodsList}
         businessesList={businessesList}
+        citiesList={citiesList}
         handleChangeFilterValues={handleChangeFilterValues}
       />
     </>

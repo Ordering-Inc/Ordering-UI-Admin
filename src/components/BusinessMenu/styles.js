@@ -46,7 +46,7 @@ export const MeunItem = styled.div`
 
 export const MenuName = styled.span`
   flex: 1;
-  color: ${props => props.theme.colors.headingColor};
+  font-size: 14px;
 `
 
 export const EnableWrapper = styled.div`

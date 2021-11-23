@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import Chart from 'react-apexcharts'
-import moment from 'moment'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button } from '../../styles/Buttons'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 import {
   DriverScheduleContainer,
-  Title,
+  ScheduleTitle,
   ButtonActionList,
   BrandBusinessWrapper,
   CalendarWrapper,
@@ -20,6 +18,18 @@ import {
   TableWrapper,
   EmptyContent
 } from './styles'
+import 'devextreme/dist/css/dx.common.css'
+import 'devextreme/dist/css/dx.light.compact.css'
+import {
+  Chart,
+  CommonSeriesSettings,
+  Legend, SeriesTemplate,
+  Animation,
+  ArgumentAxis,
+  Tick,
+  Export,
+  Tooltip
+} from 'devextreme-react/chart'
 
 const ReportsDriverScheduleUI = (props) => {
   const {
@@ -29,6 +39,7 @@ const ReportsDriverScheduleUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ parseDate }] = useUtils()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [series, setSeries] = useState([])
   const [isDriverFilter, setIsDriverFilter] = useState(false)
@@ -45,6 +56,16 @@ const ReportsDriverScheduleUI = (props) => {
     })
   }
 
+  const customizeTooltip = (arg) => {
+    return {
+      text: getText(arg, arg.valueText)
+    }
+  }
+
+  const getText = (item, text) => {
+    return `${parseDate(item.rangeValue1)} ~ ${parseDate(item.rangeValue2)}`
+  }
+
   useEffect(() => {
     if (reportData?.error) {
       setAlertState({
@@ -54,84 +75,22 @@ const ReportsDriverScheduleUI = (props) => {
     }
   }, [reportData?.error])
 
-  const options = {
-    chart: {
-      height: '100%',
-      type: 'rangeBar',
-      redrawOnParentResize: true
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        barHeight: '70%'
-      }
-    },
-    xaxis: {
-      min: new Date(reportData.content?.from ?? '2019-03-05 00:00:00').getTime(),
-      type: 'datetime',
-      labels: {
-        formatter: function (value, timestamp, opts) {
-          return moment(value).format('MM-DD HH:mm')
-        }
-      }
-    },
-    stroke: {
-      width: 1
-    },
-    fill: {
-      type: 'solid',
-      opacity: 0.6
-    },
-    legend: {
-      position: 'top',
-      horizontalAlign: 'center'
-    },
-    tooltip: {
-      custom: function (opts) {
-        const from = moment(opts.y1).format('MM-DD HH:mm')
-        const to = moment(opts.y2).format('MM-DD HH:mm')
-        const values = opts.ctx.rangeBar.getTooltipValues(opts)
-
-        return (
-          '<div class="apexcharts-tooltip-rangebar">' +
-          '<div> <span class="series-name" style="color: ' +
-          values.color +
-          '">' +
-          (values.seriesName ? values.seriesName : '') +
-          '</span></div>' +
-          '<div> <span class="category">' +
-          values.ylabel +
-          ' </span> <span class="value start-value">' +
-          from +
-          '</span> <span class="separator">-</span> <span class="value end-value">' +
-          to +
-          '</span></div>' +
-          '</div>'
-        )
-      }
-    }
-  }
-
   useEffect(() => {
     if (reportData?.content?.data?.length > 0) {
       const _series = []
       reportData.content.data.forEach(data => {
         data.lines.forEach(line => {
-          const _time = []
           line.ranges.forEach(range => {
             if (range.value) {
               const _range = {
-                x: data.metadata.name,
-                y: [
-                  new Date(range.from).getTime(),
-                  new Date(range.to).getTime()
-                ]
+                monarch: data.metadata.name,
+                start: new Date(range.from),
+                house: line.name,
+                end: new Date(range.to)
               }
-              _time.push(_range)
+              _series.push(_range)
             }
           })
-          const _line = { name: `${line.name}`, data: [..._time] }
-          _series.push(_line)
         })
       })
       setSeries(_series)
@@ -141,7 +100,7 @@ const ReportsDriverScheduleUI = (props) => {
   return (
     <>
       <DriverScheduleContainer>
-        <Title>{t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')}</Title>
+        <ScheduleTitle>{t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')}</ScheduleTitle>
         <ButtonActionList>
           <BrandBusinessWrapper>
             <Button
@@ -175,12 +134,22 @@ const ReportsDriverScheduleUI = (props) => {
           ) : (
             <TableWrapper>
               {reportData?.content?.data?.length > 0 ? (
-                <Chart
-                  options={options}
-                  series={series}
-                  type='rangeBar'
-                  height='450'
-                />
+                <Chart id='chart' dataSource={series} barGroupPadding={0.2} rotated>
+                  <ArgumentAxis>
+                    <Tick visible />
+                  </ArgumentAxis>
+                  <CommonSeriesSettings
+                    type='rangeBar'
+                    argumentField='monarch'
+                    rangeValue1Field='start'
+                    rangeValue2Field='end'
+                  />
+                  <Tooltip enabled customizeTooltip={customizeTooltip} />
+                  <Legend verticalAlignment='top' horizontalAlignment='center' />
+                  <Export enabled />
+                  <SeriesTemplate nameField='house' />
+                  <Animation enabled={false} />
+                </Chart>
               ) : (
                 <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
               )}
