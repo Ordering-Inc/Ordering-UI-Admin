@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
+import { Download } from 'react-bootstrap-icons'
 import { Button } from '../../styles/Buttons'
 import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
@@ -14,9 +15,9 @@ import {
   BrandBusinessWrapper,
   CalendarWrapper,
   DistancePerBrandWrapper,
-  DistanceTitleBlock,
   ChartWrapper,
-  EmptyContent
+  EmptyContent,
+  ScheduleTitleBlock
 } from './styles'
 import 'chartjs-adapter-moment'
 import moment from 'moment'
@@ -34,6 +35,8 @@ const ReportsDriverScheduleUI = (props) => {
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [chartData, setChartData] = useState(null)
+
+  const barChartRef = useRef(null)
 
   const generateAvailable = (status) => {
     const _available = []
@@ -164,6 +167,9 @@ const ReportsDriverScheduleUI = (props) => {
     plugins: {
       tooltip: {
         callbacks: {
+          title: function (item) {
+            return `${item[0].label} - ${item[0].dataset.label}`
+          },
           label: function (item) {
             return `${getDateFromDuration(reportData?.content.from, item.raw.x[0])} ~ ${getDateFromDuration(reportData?.content.from, item.raw.x[1])}`
           }
@@ -184,6 +190,15 @@ const ReportsDriverScheduleUI = (props) => {
         stacked: false
       }
     }
+  }
+
+  const downloadChart = () => {
+    if (!barChartRef?.current) return
+    const a = document.createElement('a')
+    a.href = barChartRef?.current?.toBase64Image()
+    a.download = 'driver_schedule.png'
+    // Trigger the download
+    a.click()
   }
 
   return (
@@ -211,9 +226,10 @@ const ReportsDriverScheduleUI = (props) => {
           </CalendarWrapper>
         </ButtonActionList>
         <DistancePerBrandWrapper>
-          <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
+          <ScheduleTitleBlock active={reportData?.content?.data?.length > 0}>
             <h2>{t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')}</h2>
-          </DistanceTitleBlock>
+            <Download onClick={() => downloadChart()} />
+          </ScheduleTitleBlock>
           {reportData?.loading ? (
             <div className='row'>
               {[...Array(5).keys()].map(i => (
@@ -222,8 +238,10 @@ const ReportsDriverScheduleUI = (props) => {
             </div>
           ) : (
             <ChartWrapper>
-              {(reportData?.content?.data?.length > 0 && options) ? (
-                <Bar data={chartData} options={options} />
+              {(reportData?.content?.data?.length > 0 && chartData) ? (
+                <div>
+                  <Bar data={chartData} options={options} ref={barChartRef} />
+                </div>
               ) : (
                 <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
               )}
