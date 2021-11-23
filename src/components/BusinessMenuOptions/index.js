@@ -3,7 +3,6 @@ import {
   useLanguage,
   BusinessMenuOptions as BusinessMenuOptionsController
 } from 'ordering-components-admin'
-
 import { XLg } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { BusinessMenuShare } from '../BusinessMenuShare'
