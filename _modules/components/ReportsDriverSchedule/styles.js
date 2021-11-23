@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EmptyContent = exports.TableWrapper = exports.DistanceTitleBlock = exports.DistancePerBrandWrapper = exports.BrandBusinessWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.ScheduleTitle = exports.DriverScheduleContainer = void 0;
+exports.ScheduleTitleBlock = exports.EmptyContent = exports.ChartWrapper = exports.DistancePerBrandWrapper = exports.BrandBusinessWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.ScheduleTitle = exports.DriverScheduleContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -61,17 +61,17 @@ var DistancePerBrandWrapper = _styledComponents.default.div(_templateObject9 || 
 
 exports.DistancePerBrandWrapper = DistancePerBrandWrapper;
 
-var DistanceTitleBlock = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n\n  h2 {\n    font-weight: 600;\n    font-size: 12px;\n    margin: 0;\n    text-transform: uppercase;\n  }\n\n  svg {\n    font-size: 16px;\n    color: #212121;\n    cursor: pointer;\n  }\n\n  ", "\n"])), function (_ref) {
-  var active = _ref.active;
-  return !active && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    svg {\n      cursor: not-allowed;\n    }\n  "])));
-});
+var ChartWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n  max-height: 900px;\n\n  > div {\n    min-width: 500px;\n  }\n"])));
 
-exports.DistanceTitleBlock = DistanceTitleBlock;
+exports.ChartWrapper = ChartWrapper;
 
-var TableWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n  max-height: 650px;\n\n  > div {\n    min-width: 850px;\n  }\n"])));
-
-exports.TableWrapper = TableWrapper;
-
-var EmptyContent = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 10px;\n"])));
+var EmptyContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 10px;\n"])));
 
 exports.EmptyContent = EmptyContent;
+
+var ScheduleTitleBlock = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n\n  h2 {\n    font-weight: 600;\n    font-size: 12px;\n    margin: 0;\n    text-transform: uppercase;\n  }\n\n  svg {\n    font-size: 16px;\n    color: #212121;\n    cursor: pointer;\n  }\n\n  ", "\n"])), function (_ref) {
+  var active = _ref.active;
+  return !active && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    svg {\n      cursor: not-allowed;\n    }\n  "])));
+});
+
+exports.ScheduleTitleBlock = ScheduleTitleBlock;

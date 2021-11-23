@@ -13,6 +13,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _Buttons = require("../../styles/Buttons");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -27,11 +29,11 @@ var _Modal = require("../Modal");
 
 var _styles = require("./styles");
 
-require("devextreme/dist/css/dx.common.css");
+require("chartjs-adapter-moment");
 
-require("devextreme/dist/css/dx.light.compact.css");
+var _moment = _interopRequireDefault(require("moment"));
 
-var _chart = require("devextreme-react/chart");
+var _reactChartjs = require("react-chartjs-2");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -68,7 +70,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
-  var _reportData$content2, _reportData$content2$, _reportData$content2$2, _reportData$content3, _reportData$content3$;
+  var _reportData$content2, _reportData$content2$, _reportData$content3, _reportData$content3$;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -78,10 +80,6 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parseDate = _useUtils2[0].parseDate;
-
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -90,20 +88,99 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      series = _useState4[0],
-      setSeries = _useState4[1];
+      isDriverFilter = _useState4[0],
+      setIsDriverFilter = _useState4[1];
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      isDriverFilter = _useState6[0],
-      setIsDriverFilter = _useState6[1];
+      isDriverGroupFilter = _useState6[0],
+      setIsDriverGroupFilter = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(false),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      isDriverGroupFilter = _useState8[0],
-      setIsDriverGroupFilter = _useState8[1];
+      chartData = _useState8[0],
+      setChartData = _useState8[1];
+
+  var barChartRef = (0, _react.useRef)(null);
+
+  var generateAvailable = function generateAvailable(status) {
+    var _available = [];
+    var _notAvailable = [];
+    reportData.content.data.forEach(function (data) {
+      data.lines.forEach(function (line) {
+        if (line.name === 'Available') {
+          line.ranges.forEach(function (range) {
+            if (range.value) {
+              var from = getDiff(reportData.content.from, range.from);
+              var to = getDiff(reportData.content.from, range.to);
+
+              _available.push({
+                y: data.metadata.name,
+                x: [from, to]
+              });
+            } else {
+              var _from = getDiff(reportData.content.from, range.from);
+
+              var _to = getDiff(reportData.content.from, range.to);
+
+              _notAvailable.push({
+                y: data.metadata.name,
+                x: [_from, _to]
+              });
+            }
+          });
+        }
+      });
+    });
+    return status ? _available : _notAvailable;
+  };
+
+  var generateBusy = function generateBusy(status) {
+    var _busy = [];
+    var _notBusy = [];
+    reportData.content.data.forEach(function (data) {
+      data.lines.forEach(function (line) {
+        if (line.name === 'Busy') {
+          line.ranges.forEach(function (range) {
+            if (range.value) {
+              var from = getDiff(reportData.content.from, range.from);
+              var to = getDiff(reportData.content.from, range.to);
+
+              _busy.push({
+                y: data.metadata.name,
+                x: [from, to]
+              });
+            } else {
+              var _from2 = getDiff(reportData.content.from, range.from);
+
+              var _to2 = getDiff(reportData.content.from, range.to);
+
+              _notBusy.push({
+                y: data.metadata.name,
+                x: [_from2, _to2]
+              });
+            }
+          });
+        }
+      });
+    });
+    return status ? _busy : _notBusy;
+  };
+
+  var getDiff = function getDiff(start, end) {
+    var from = (0, _moment.default)(start);
+    var to = (0, _moment.default)(end);
+
+    var duration = _moment.default.duration(from.diff(to));
+
+    return Math.abs(duration.asSeconds());
+  };
+
+  var getDateFromDuration = function getDateFromDuration(start, duration) {
+    return (0, _moment.default)(start).add(duration, 's').format('MM-DD HH:mm');
+  };
 
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
@@ -119,16 +196,6 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     });
   };
 
-  var customizeTooltip = function customizeTooltip(arg) {
-    return {
-      text: getText(arg, arg.valueText)
-    };
-  };
-
-  var getText = function getText(item, text) {
-    return "".concat(parseDate(item.rangeValue1), " ~ ").concat(parseDate(item.rangeValue2));
-  };
-
   (0, _react.useEffect)(function () {
     if (reportData !== null && reportData !== void 0 && reportData.error) {
       setAlertState({
@@ -141,26 +208,74 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     var _reportData$content, _reportData$content$d;
 
     if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$d = _reportData$content.data) === null || _reportData$content$d === void 0 ? void 0 : _reportData$content$d.length) > 0) {
-      var _series = [];
-      reportData.content.data.forEach(function (data) {
-        data.lines.forEach(function (line) {
-          line.ranges.forEach(function (range) {
-            if (range.value) {
-              var _range = {
-                monarch: data.metadata.name,
-                start: new Date(range.from),
-                house: line.name,
-                end: new Date(range.to)
-              };
-
-              _series.push(_range);
-            }
-          });
-        });
-      });
-      setSeries(_series);
+      var _data = {
+        datasets: [{
+          label: 'Available',
+          data: generateAvailable(true),
+          backgroundColor: '#2C7BE5',
+          stack: 'Stack 0'
+        }, {
+          label: 'Not available',
+          data: generateAvailable(),
+          backgroundColor: '#F0879A',
+          stack: 'Stack 0'
+        }, {
+          label: 'Busy',
+          data: generateBusy(true),
+          backgroundColor: '#52C9FD',
+          stack: 'Stack 1'
+        }, {
+          label: 'Not busy',
+          data: generateBusy(),
+          backgroundColor: '#FFC700',
+          stack: 'Stack 1'
+        }]
+      };
+      setChartData(_data);
     }
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.content]);
+  var options = {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          title: function title(item) {
+            return "".concat(item[0].label, " - ").concat(item[0].dataset.label);
+          },
+          label: function label(item) {
+            return "".concat(getDateFromDuration(reportData === null || reportData === void 0 ? void 0 : reportData.content.from, item.raw.x[0]), " ~ ").concat(getDateFromDuration(reportData === null || reportData === void 0 ? void 0 : reportData.content.from, item.raw.x[1]));
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        stacked: false,
+        ticks: {
+          // Include a dollar sign in the ticks
+          callback: function callback(value, index, values) {
+            return getDateFromDuration(reportData === null || reportData === void 0 ? void 0 : reportData.content.from, value);
+          }
+        }
+      },
+      y: {
+        stacked: false
+      }
+    }
+  };
+
+  var downloadChart = function downloadChart() {
+    var _barChartRef$current;
+
+    if (!(barChartRef !== null && barChartRef !== void 0 && barChartRef.current)) return;
+    var a = document.createElement('a');
+    a.href = barChartRef === null || barChartRef === void 0 ? void 0 : (_barChartRef$current = barChartRef.current) === null || _barChartRef$current === void 0 ? void 0 : _barChartRef$current.toBase64Image();
+    a.download = 'driver_schedule.png'; // Trigger the download
+
+    a.click();
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverScheduleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setIsDriverFilter(true);
@@ -172,9 +287,13 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
   }, t('DRIVER_GROUP', 'Driver group'), " (", filterList !== null && filterList !== void 0 && filterList.driver_groups_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.driver_groups_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
-  }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.body) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.rows) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.length) > 0
-  }, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE'))), reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement("div", {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitleBlock, {
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.data) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0
+  }, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
+    onClick: function onClick() {
+      return downloadChart();
+    }
+  })), reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement("div", {
     className: "row"
   }, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("div", {
@@ -183,30 +302,10 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 100
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.data) === null || _reportData$content3$ === void 0 ? void 0 : _reportData$content3$.length) > 0 ? /*#__PURE__*/_react.default.createElement(_chart.Chart, {
-    id: "chart",
-    dataSource: series,
-    barGroupPadding: 0.2,
-    rotated: true
-  }, /*#__PURE__*/_react.default.createElement(_chart.ArgumentAxis, null, /*#__PURE__*/_react.default.createElement(_chart.Tick, {
-    visible: true
-  })), /*#__PURE__*/_react.default.createElement(_chart.CommonSeriesSettings, {
-    type: "rangeBar",
-    argumentField: "monarch",
-    rangeValue1Field: "start",
-    rangeValue2Field: "end"
-  }), /*#__PURE__*/_react.default.createElement(_chart.Tooltip, {
-    enabled: true,
-    customizeTooltip: customizeTooltip
-  }), /*#__PURE__*/_react.default.createElement(_chart.Legend, {
-    verticalAlignment: "top",
-    horizontalAlignment: "center"
-  }), /*#__PURE__*/_react.default.createElement(_chart.Export, {
-    enabled: true
-  }), /*#__PURE__*/_react.default.createElement(_chart.SeriesTemplate, {
-    nameField: "house"
-  }), /*#__PURE__*/_react.default.createElement(_chart.Animation, {
-    enabled: false
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.data) === null || _reportData$content3$ === void 0 ? void 0 : _reportData$content3$.length) > 0 && chartData ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+    data: chartData,
+    options: options,
+    ref: barChartRef
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
