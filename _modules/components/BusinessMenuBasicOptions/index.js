@@ -249,7 +249,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     }), openAddScheduleIndex === daysOfWeekIndex && /*#__PURE__*/_react.default.createElement(_styles.TimeSection, null, /*#__PURE__*/_react.default.createElement(_styles.TimeSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TimeSelect, {
       value: addScheduleTime.open.hour,
       onChange: function onChange(e) {
-        return handleChangeAddScheduleTime(daysOfWeekIndex, true, true, e.target.value);
+        return handleChangeAddScheduleTime(true, true, e.target.value);
       }
     }, _toConsumableArray(Array(24)).map(function (v, i) {
       return /*#__PURE__*/_react.default.createElement("option", {
@@ -259,7 +259,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     })), ":", /*#__PURE__*/_react.default.createElement(_styles.TimeSelect, {
       value: addScheduleTime.open.minute,
       onChange: function onChange(e) {
-        return handleChangeAddScheduleTime(daysOfWeekIndex, true, false, e.target.value);
+        return handleChangeAddScheduleTime(true, false, e.target.value);
       }
     }, _toConsumableArray(Array(60)).map(function (v, i) {
       return /*#__PURE__*/_react.default.createElement("option", {
@@ -269,7 +269,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     }))), /*#__PURE__*/_react.default.createElement(_BiMinus.default, null), /*#__PURE__*/_react.default.createElement(_styles.TimeSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TimeSelect, {
       value: addScheduleTime.close.hour,
       onChange: function onChange(e) {
-        return handleChangeAddScheduleTime(daysOfWeekIndex, false, true, e.target.value);
+        return handleChangeAddScheduleTime(false, true, e.target.value);
       }
     }, _toConsumableArray(Array(24)).map(function (v, i) {
       return /*#__PURE__*/_react.default.createElement("option", {
@@ -279,7 +279,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     })), ":", /*#__PURE__*/_react.default.createElement(_styles.TimeSelect, {
       value: addScheduleTime.close.minute,
       onChange: function onChange(e) {
-        return handleChangeAddScheduleTime(daysOfWeekIndex, false, false, e.target.value);
+        return handleChangeAddScheduleTime(false, false, e.target.value);
       }
     }, _toConsumableArray(Array(60)).map(function (v, i) {
       return /*#__PURE__*/_react.default.createElement("option", {
