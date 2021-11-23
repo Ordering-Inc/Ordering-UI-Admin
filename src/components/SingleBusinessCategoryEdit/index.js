@@ -7,7 +7,7 @@ import {
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Pencil, Trash} from 'react-bootstrap-icons'
+import { Pencil, Trash } from 'react-bootstrap-icons'
 import {
   SingleCategoryContainer,
   CategoryContent,
@@ -108,17 +108,17 @@ export const SingleBusinessCategoryUI = (props) => {
                   disabled={categoryFormState?.loading}
                   className='img-section'
                 >
-                      {
-                          categoryFormState?.changes?.image
-                            ? (
-                              <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
-                            )
-                            : (
-                              <UploadWrapper>
-                                <BiImage />
-                              </UploadWrapper>
-                            )
-                      }
+                  {
+                    categoryFormState?.changes?.image
+                      ? (
+                        <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
+                      )
+                      : (
+                        <UploadWrapper>
+                          <BiImage />
+                        </UploadWrapper>
+                      )
+                  }
                 </ImageContainer>
               </>
             )
@@ -129,11 +129,11 @@ export const SingleBusinessCategoryUI = (props) => {
               ? <Skeleton height={15} />
               : (
                 <>
-                <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
-                <CategoryContentInside >
-                <Pencil onClick={() => handleOpenCategoryDetails(categorySelected)} />
-                <Trash onClick={deleteCategory} />
-                </CategoryContentInside>
+                  <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
+                  <CategoryContentInside>
+                    <Pencil onClick={() => handleOpenCategoryDetails(categorySelected)} />
+                    <Trash onClick={deleteCategory} />
+                  </CategoryContentInside>
                 </>
               )
           }

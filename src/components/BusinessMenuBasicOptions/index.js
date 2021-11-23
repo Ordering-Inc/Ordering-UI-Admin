@@ -60,7 +60,6 @@ export const BusinessMenuBasicOptions = (props) => {
     handleApplyScheduleCopyTimes
   } = props
   const [, t] = useLanguage()
-  const [openCategories, setOpenCategories] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
   const isEdit = Object.keys(businessMenuState?.menu).length
@@ -82,13 +81,6 @@ export const BusinessMenuBasicOptions = (props) => {
     t('FRIDAY_ABBREVIATION', 'Fri'),
     t('SATURDAY_ABBREVIATION', 'Sat')
   ]
-
-  const handleTogglePopover = (type) => {
-    setOpenCategories({
-      ...openCategories,
-      [type]: !openCategories[type]
-    })
-  }
 
   const closeAlert = () => {
     setIsConflict(false)
@@ -244,7 +236,7 @@ export const BusinessMenuBasicOptions = (props) => {
                           <TimeSelectContainer>
                             <TimeSelect
                               value={addScheduleTime.open.hour}
-                              onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, true, true, e.target.value)}
+                              onChange={(e) => handleChangeAddScheduleTime(true, true, e.target.value)}
                             >
                               {[...Array(24)].map((v, i) => (
                                 <option
@@ -258,7 +250,7 @@ export const BusinessMenuBasicOptions = (props) => {
                             :
                             <TimeSelect
                               value={addScheduleTime.open.minute}
-                              onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, true, false, e.target.value)}
+                              onChange={(e) => handleChangeAddScheduleTime(true, false, e.target.value)}
                             >
                               {[...Array(60)].map((v, i) => (
                                 <option
@@ -274,7 +266,7 @@ export const BusinessMenuBasicOptions = (props) => {
                           <TimeSelectContainer>
                             <TimeSelect
                               value={addScheduleTime.close.hour}
-                              onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, false, true, e.target.value)}
+                              onChange={(e) => handleChangeAddScheduleTime(false, true, e.target.value)}
                             >
                               {[...Array(24)].map((v, i) => (
                                 <option
@@ -288,7 +280,7 @@ export const BusinessMenuBasicOptions = (props) => {
                             :
                             <TimeSelect
                               value={addScheduleTime.close.minute}
-                              onChange={(e) => handleChangeAddScheduleTime(daysOfWeekIndex, false, false, e.target.value)}
+                              onChange={(e) => handleChangeAddScheduleTime(false, false, e.target.value)}
                             >
                               {[...Array(60)].map((v, i) => (
                                 <option
@@ -349,11 +341,10 @@ export const BusinessMenuBasicOptions = (props) => {
         {business?.categories.sort((a, b) => a.rank - b.rank).map(category => (
           <CategoryTreeNode
             key={category.id}
+            index={0}
             category={category}
             selectedProductsIds={selectedProductsIds}
             setSelectedProductsIds={setSelectedProductsIds}
-            openCategories={openCategories}
-            handleTogglePopover={handleTogglePopover}
           />
         ))}
       </BusinessMenuBasicContainer>

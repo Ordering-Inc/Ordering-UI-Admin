@@ -4,7 +4,7 @@ export const BusinessMenuBasicContainer = styled.div`
   max-height: calc(100vh - 200px);
   overflow: auto;
   padding: 0 5px;
-  input[type='text'],
+  input:not([type='checkbox']),
   textarea {
     width: 100%;
   }

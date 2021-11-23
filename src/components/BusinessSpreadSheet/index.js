@@ -48,6 +48,7 @@ const BusinessSpreadSheetUI = (props) => {
       <BusinessSpreadSheetContainer>
         <SpreadSheetEditor
           {...props}
+          isBusinessProducts
           hotTableData={spreadSheetState.products}
           headerItems={spreadSheetHeaderItems}
           handleItemChange={handleItemChange}
