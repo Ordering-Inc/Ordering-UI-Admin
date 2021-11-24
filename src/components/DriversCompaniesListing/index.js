@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, DriversCompaniesList as DriversCompaniesListController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  DriversCompaniesList as DriversCompaniesListController
+} from 'ordering-components-admin'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../styles/Buttons'
 import { List as MenuIcon } from 'react-bootstrap-icons'
@@ -19,15 +22,12 @@ import {
 const DriversCompaniesListingUI = (props) => {
   const {
     driversCompaniesState,
-    changesState,
+    setDriversCompaniesState,
     actionState,
-    cleanChagesState,
-    handleChangesState,
     openDetails,
     setOpenDetails,
     handleUpdateDriversCompany,
     handleDeleteDriversCompany,
-    handleAddDriversCompany,
     handleSelectCompany,
     selectedCompanyList,
     handleAllSelectCompany,
@@ -42,7 +42,6 @@ const DriversCompaniesListingUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleOpenDetails = (driverCompany) => {
-    cleanChagesState()
     setCurDriversCompany(driverCompany)
     setOpenDetails(true)
   }
@@ -125,12 +124,9 @@ const DriversCompaniesListingUI = (props) => {
           }}
         >
           <DriversCompanyDetailsForm
+            driversCompaniesState={driversCompaniesState}
+            setDriversCompaniesState={setDriversCompaniesState}
             driversCompany={curDriversCompany}
-            changesState={changesState}
-            actionState={actionState}
-            handleChangesState={handleChangesState}
-            handleUpdateDriversCompany={handleUpdateDriversCompany}
-            handleAddDriversCompany={handleAddDriversCompany}
           />
         </SideBar>
       )}
