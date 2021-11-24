@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const DetailsContainer = styled.div`
   width: 100%;
@@ -7,56 +7,38 @@ export const DetailsContainer = styled.div`
 `
 
 export const Header = styled.div`
-  margin-bottom: 35px;
+  margin-bottom: 19px;
   h1 {
     font-size: 20px;
     font-weight: 700;
     margin: 0px;
+    min-height: 24px;
   }
 `
 
-export const FormContainer = styled.form`
-  min-height: calc(100% - 70px);
-  button[type='submit'] {
-    position: sticky;
-    top: 100%;
-    height: 42px;
-  }
+export const TabsContainer = styled.div`
+  width: 100%;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  margin-bottom: 15px;
 `
 
-export const GroupContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+export const Tab = styled.div`
+  padding: 10px 0px;
+  cursor: pointer;
+  color: ${props => props.theme.colors?.lightGray};
+  white-space: nowrap;
+  font-size: 12px;
 
-  > div {
-    width: calc(50% - 15px);
-  }
-`
+  ${props => props.theme?.rtl ? css`
+    margin-left: 30px;
+  ` : css`
+    margin-right: 30px;
+  `}
 
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 35px;
-
-  label {
+  ${({ active }) => active && css`
+    color: ${props => props.theme.colors.headingColor};
+    border-bottom: 2px solid ${props => props.theme.colors.headingColor};
+    font-weight: 500;
     font-size: 14px;
-  }
-
-  div {
-    font-size: 14px;
-  }
-
-  .select {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border: none;
-    background-color: ${props => props.theme.colors.secundary};
-  }
-`
-
-export const SubTitle = styled.div`
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  `}
 `
