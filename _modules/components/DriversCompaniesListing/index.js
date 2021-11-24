@@ -53,15 +53,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
   var driversCompaniesState = props.driversCompaniesState,
-      changesState = props.changesState,
+      setDriversCompaniesState = props.setDriversCompaniesState,
       actionState = props.actionState,
-      cleanChagesState = props.cleanChagesState,
-      handleChangesState = props.handleChangesState,
       openDetails = props.openDetails,
       setOpenDetails = props.setOpenDetails,
       handleUpdateDriversCompany = props.handleUpdateDriversCompany,
       handleDeleteDriversCompany = props.handleDeleteDriversCompany,
-      handleAddDriversCompany = props.handleAddDriversCompany,
       handleSelectCompany = props.handleSelectCompany,
       selectedCompanyList = props.selectedCompanyList,
       handleAllSelectCompany = props.handleAllSelectCompany,
@@ -104,7 +101,6 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
       setConfirm = _useState8[1];
 
   var handleOpenDetails = function handleOpenDetails(driverCompany) {
-    cleanChagesState();
     setCurDriversCompany(driverCompany);
     setOpenDetails(true);
   };
@@ -173,12 +169,9 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
       setOpenDetails(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_DriversCompanyDetailsForm.DriversCompanyDetailsForm, {
-    driversCompany: curDriversCompany,
-    changesState: changesState,
-    actionState: actionState,
-    handleChangesState: handleChangesState,
-    handleUpdateDriversCompany: handleUpdateDriversCompany,
-    handleAddDriversCompany: handleAddDriversCompany
+    driversCompaniesState: driversCompaniesState,
+    setDriversCompaniesState: setDriversCompaniesState,
+    driversCompany: curDriversCompany
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

@@ -51,7 +51,7 @@ var CheckoutFieldsSettingUI = function CheckoutFieldsSettingUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckoutFieldsDetailsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CHECKOUT_FIELDS', 'Checkout fields')), /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckoutFieldsDetailsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CHECKOUT_CUSTOMER_FIELDS', 'Checkout and Customer fields')), /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
     isHeader: true
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "name"

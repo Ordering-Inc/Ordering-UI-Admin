@@ -21,8 +21,6 @@ var _styles = require("./styles");
 
 var _SearchBar = require("../SearchBar");
 
-var _LanguageMainManager = require("../LanguageMainManager");
-
 var _LanguageTransTable = require("../LanguageTransTable");
 
 var _LanguageTransSpread = require("../LanguageTransSpread");
@@ -62,15 +60,10 @@ var LanguageManagerUI = function LanguageManagerUI(props) {
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
-  var _useState = (0, _react.useState)('main'),
+  var _useState = (0, _react.useState)('table'),
       _useState2 = _slicedToArray(_useState, 2),
-      selectedType = _useState2[0],
-      setSelectedType = _useState2[1];
-
-  var _useState3 = (0, _react.useState)('table'),
-      _useState4 = _slicedToArray(_useState3, 2),
-      viewMode = _useState4[0],
-      setViewMode = _useState4[1];
+      viewMode = _useState2[0],
+      setViewMode = _useState2[1];
 
   return /*#__PURE__*/_react.default.createElement(_styles.LanguageManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
@@ -83,17 +76,7 @@ var LanguageManagerUI = function LanguageManagerUI(props) {
       return _onSearch(value);
     },
     placeholder: t('SEARCH', 'Search')
-  }))), /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
-    active: selectedType === 'main',
-    onClick: function onClick() {
-      return setSelectedType('main');
-    }
-  }, t('MAIN', 'Main')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
-    active: selectedType === 'translations',
-    onClick: function onClick() {
-      return setSelectedType('translations');
-    }
-  }, t('TRANSLATIONS', 'Translations'))), selectedType === 'main' && /*#__PURE__*/_react.default.createElement(_LanguageMainManager.LanguageMainManager, props), selectedType === 'translations' && /*#__PURE__*/_react.default.createElement(_styles.TranslationManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroupWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_styles.ViewIconWrapper, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.TranslationManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroupWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_styles.ViewIconWrapper, {
     className: "table-mode",
     active: viewMode === 'table',
     onClick: function onClick() {
