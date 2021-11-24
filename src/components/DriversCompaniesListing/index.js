@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { DriversCompaniesList as DriversCompaniesListController } from './naked'
+import {
+  useLanguage,
+  DriversCompaniesList as DriversCompaniesListController
+} from 'ordering-components-admin'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../styles/Buttons'
 import { List as MenuIcon } from 'react-bootstrap-icons'
@@ -125,12 +127,6 @@ const DriversCompaniesListingUI = (props) => {
             driversCompaniesState={driversCompaniesState}
             setDriversCompaniesState={setDriversCompaniesState}
             driversCompany={curDriversCompany}
-
-            // changesState={changesState}
-            // actionState={actionState}
-            // handleChangesState={handleChangesState}
-            // handleUpdateDriversCompany={handleUpdateDriversCompany}
-            // handleAddDriversCompany={handleAddDriversCompany}
           />
         </SideBar>
       )}

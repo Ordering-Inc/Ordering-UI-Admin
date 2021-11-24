@@ -62,7 +62,9 @@ export const DriversCompanyGeneralDetails = (props) => {
 
   return (
     <>
-      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <GroupContainer>
           <InputWrapper>
             <label>{t('NAME', 'Name')}</label>
