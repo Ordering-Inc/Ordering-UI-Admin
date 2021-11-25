@@ -45,8 +45,7 @@ const SingleBusinessProductUI = (props) => {
     businessState,
     handleUpdateBusinessState,
     dataSelected,
-    setDataSelected,
-    categorySelected
+    setDataSelected
   } = props
 
   const theme = useTheme()
