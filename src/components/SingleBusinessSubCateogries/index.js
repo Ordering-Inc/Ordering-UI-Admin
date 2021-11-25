@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Switch } from '../../styles/Switch'
 import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 import { SingleBusinessCategory as SingleBusinessCategoryController } from 'ordering-components-admin'
@@ -38,10 +38,12 @@ const SingleBusinessSubCateogriesUI = (props) => {
   const [setRotate, setRotateState] = useState('accordion__icon')
 
   const toggleAccordion = (e, category) => {
-    setActiveState(setActive === '' ? 'active' : '')
-    setRotateState(
-      setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
-    )
+    if (category?.enabled) {
+      setActiveState(setActive === '' ? 'active' : '')
+      setRotateState(
+        setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
+      )
+    }
     handleChangeCategory(e, category)
   }
 
@@ -57,6 +59,17 @@ const SingleBusinessSubCateogriesUI = (props) => {
     onDataSelected('')
     handleDragEnd(e)
   }
+
+  useEffect(() => {
+    if (category && !category?.enabled) {
+      setActiveState('')
+      setRotateState('accordion__icon rotate')
+    }
+    if (category && category?.enabled && categorySelected?.id === category?.id) {
+      setActiveState('active')
+      setRotateState('accordion__icon rotate')
+    }
+  }, [category?.enabled])
 
   return (
     <AccordionSection
