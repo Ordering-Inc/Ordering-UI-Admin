@@ -76,7 +76,24 @@ export const DistancePerBrandWrapper = styled.div`
   border-radius: 7.6px;
 `
 
-export const DistanceTitleBlock = styled.div`
+export const ChartWrapper = styled.div`
+  width: 100%;
+  overflow: auto;
+  max-height: 900px;
+
+  > div {
+    min-width: 500px;
+  }
+`
+
+export const EmptyContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+`
+
+export const ScheduleTitleBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -100,21 +117,4 @@ export const DistanceTitleBlock = styled.div`
       cursor: not-allowed;
     }
   `}
-`
-
-export const TableWrapper = styled.div`
-  width: 100%;
-  overflow: auto;
-  max-height: 650px;
-
-  > div {
-    min-width: 850px;
-  }
-`
-
-export const EmptyContent = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
 `

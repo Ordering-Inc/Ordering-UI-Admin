@@ -19,7 +19,7 @@ const CheckoutFieldsSettingUI = (props) => {
   return (
     <>
       <CheckoutFieldsDetailsContainer>
-        <h1>{t('CHECKOUT_FIELDS', 'Checkout fields')}</h1>
+        <h1>{t('CHECKOUT_CUSTOMER_FIELDS', 'Checkout and Customer fields')}</h1>
         <FieldContainer isHeader>
           <div className='name'>{t('FIELD', 'Field')}</div>
           <div className='required'>{t('REQUIRED', 'Required')}</div>

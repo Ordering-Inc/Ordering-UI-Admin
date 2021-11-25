@@ -1,189 +1,110 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { Input, DefaultSelect, Button } from '../../styles'
-import { timezones } from '../../config/constants'
-import { useForm } from 'react-hook-form'
+import {
+  useLanguage,
+  DriversCompanyDetails as DriversCompanyDetailsController
+} from 'ordering-components-admin'
 import { Alert } from '../Confirm'
+import { DragScroll } from '../DragScroll'
+import { DriversCompanyGeneralDetails } from '../DriversCompanyGeneralDetails'
+import { DriversCompanyScheduleDetails } from '../DriversCompanyScheduleDetails'
+import { DriversCompanyWebhooksDetails } from '../DriversCompanyWebhooksDetails'
 
 import {
   DetailsContainer,
   Header,
-  FormContainer,
-  GroupContainer,
-  InputWrapper,
-  SubTitle
+  TabsContainer,
+  Tab
 } from './styles'
 
-export const DriversCompanyDetailsForm = (props) => {
+const DriversCompanyDetailsFormUI = (props) => {
   const {
     driversCompany,
     changesState,
     actionState,
-    handleChangesState,
-    handleUpdateDriversCompany,
-    handleAddDriversCompany
+    cleanActionState
   } = props
 
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors } = useForm()
+  const [currentTabItem, setCurrentTabItem] = useState('general')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const timezonesOptions = timezones.map(timezone => {
-    return {
-      value: timezone,
-      content: timezone
-    }
-  })
-  const priorityOptions = [
-    { value: -1, content: t('LOW', 'Low') },
-    { value: 0, content: t('NORMAL', 'Normal') },
-    { value: 1, content: t('HIGH', 'High') },
-    { value: 2, content: t('URGENT', 'Urgent') }
+  const tabItems = [
+    { key: 'general', content: t('GENERAL', 'General') },
+    { key: 'schedule', content: t('SCHEDULE', 'Schedule') },
+    { key: 'webhooks', content: t('WEBHOOKS', 'Webhooks') }
   ]
 
-  const onSubmit = () => {
-    if (!(changesState?.timezone || driversCompany?.timezone)) {
-      setAlertState({
-        open: true,
-        content: t(
-          'VALIDATION_ERROR_REQUIRED',
-          'Name is required'
-        ).replace('_attribute_', t('TIMEZONE', 'Timezone'))
-      })
-      return
-    }
-    driversCompany ? handleUpdateDriversCompany(driversCompany.id, changesState) : handleAddDriversCompany()
+  const closeAlert = () => {
+    cleanActionState()
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (!actionState.loading && actionState.error) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map(error => error.message)
+        content: actionState.error || [t('ERROR')]
       })
     }
-  }, [errors])
+  }, [actionState])
 
   return (
-    <DetailsContainer>
-      <Header>
-        <h1>{t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')}</h1>
-      </Header>
-      <FormContainer onSubmit={handleSubmit(onSubmit)}>
-        <GroupContainer>
-          <InputWrapper>
-            <label>{t('NAME', 'Name')}</label>
-            <Input
-              name='name'
-              value={changesState?.name ?? driversCompany?.name ?? ''}
-              onChange={e => handleChangesState('name', e.target.value)}
-              placeholder={t('NAME', 'Name')}
-              ref={register({
-                required: t(
-                  'VALIDATION_ERROR_REQUIRED',
-                  'Name is required'
-                ).replace('_attribute_', t('NAME', 'Name'))
-              })}
-              autoComplete='off'
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>{t('LIMIT', 'Limit')}</label>
-            <Input
-              name='limit'
-              value={changesState?.limit ?? driversCompany?.limit ?? ''}
-              onChange={e => handleChangesState('limit', e.target.value)}
-              placeholder={t('LIMIT', 'Limit')}
-              autoComplete='off'
-            />
-          </InputWrapper>
-        </GroupContainer>
-        <GroupContainer>
-          <InputWrapper>
-            <label>{t('PRIORITY', 'Priority')}</label>
-            <DefaultSelect
-              placeholder={t('SELECT_PRIORITY', 'Select priority')}
-              defaultValue={changesState?.priority ?? driversCompany?.priority}
-              options={priorityOptions}
-              onChange={val => handleChangesState('priority', val)}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>{t('TIMEZONE', 'Timezone')}</label>
-            <DefaultSelect
-              placeholder={t('SELECT_TIMEZONE', 'Select a timezone')}
-              defaultValue={changesState?.timezone ?? driversCompany?.timezone}
-              options={timezonesOptions}
-              onChange={val => handleChangesState('timezone', val)}
-              optionInnerMaxHeight='60vh'
-            />
-          </InputWrapper>
-        </GroupContainer>
-        <InputWrapper>
-          <label>{t('ADDRESS', 'Address')}</label>
-          <Input
-            name='address'
-            value={changesState?.address ?? driversCompany?.address ?? ''}
-            placeholder={t('ADDRESS', 'Address')}
-            onChange={e => handleChangesState('address', e.target.value)}
-            ref={register({
-              required: t(
-                'VALIDATION_ERROR_REQUIRED',
-                'Name is required'
-              ).replace('_attribute_', t('ADDRESS', 'Address'))
-            })}
-            autoComplete='off'
-          />
-        </InputWrapper>
-        <SubTitle>{t('WEBHOOK', 'Webhook')}</SubTitle>
-        <InputWrapper>
-          <label>{t('WEBHOOK_NEW_ORDER', 'Webhook new order')}</label>
-          <Input
-            name='webhook_new_order'
-            value={changesState?.webhook_new_order ?? driversCompany?.webhook_new_order ?? ''}
-            onChange={e => handleChangesState('webhook_new_order', e.target.value)}
-            placeholder={t('WEBHOOK_NEW_ORDER', 'Webhook new order')}
-            autoComplete='off'
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label>{t('WEBHOOK_CANCEL_REQUEST', 'Webhook cancel request')}</label>
-          <Input
-            name='webhook_cancel_request'
-            value={changesState?.webhook_cancel_request ?? driversCompany?.webhook_cancel_request ?? ''}
-            onChange={e => handleChangesState('webhook_cancel_request', e.target.value)}
-            placeholder={t('WEBHOOK_CANCEL_REQUEST', 'Webhook cancel request')}
-            autoComplete='off'
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label>{t('WEBHOOK_ORDER_STATUS_CHANGED', 'Webhook order status changed')}</label>
-          <Input
-            name='webhook_order_status_changed'
-            value={changesState?.webhook_order_status_changed ?? driversCompany?.webhook_order_status_changed ?? ''}
-            onChange={e => handleChangesState('webhook_order_status_changed', e.target.value)}
-            placeholder={t('WEBHOOK_ORDER_STATUS_CHANGED', 'Webhook order status changed')}
-            autoComplete='off'
-          />
-        </InputWrapper>
-        <Button
-          borderRadius='8px'
-          color='primary'
-          type='submit'
-          disabled={Object.keys(changesState).length === 0 || actionState.loading}
-        >
-          {driversCompany ? t('SAVE', 'Save') : t('ADD', 'Add')}
-        </Button>
-      </FormContainer>
+    <>
+      <DetailsContainer>
+        <Header>
+          <h1>
+            {
+              driversCompany
+                ? changesState?.name ?? driversCompany?.name ?? ''
+                : t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')
+            }
+          </h1>
+        </Header>
+        <TabsContainer>
+          <DragScroll>
+            {tabItems.map(item => (
+              <Tab
+                key={item.key}
+                active={item.key === currentTabItem}
+                onClick={() => setCurrentTabItem(item.key)}
+              >
+                {item.content}
+              </Tab>
+            ))}
+          </DragScroll>
+        </TabsContainer>
+
+        {currentTabItem === 'general' && (
+          <DriversCompanyGeneralDetails {...props} />
+        )}
+        {currentTabItem === 'schedule' && (
+          <DriversCompanyScheduleDetails {...props} />
+        )}
+        {currentTabItem === 'webhooks' && (
+          <DriversCompanyWebhooksDetails {...props} />
+        )}
+
+      </DetailsContainer>
       <Alert
-        title={t('WEB_APPNAME', 'Ordering')}
+        title={t('ERROR')}
         content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
+        acceptText={t('ACCEPT')}
         open={alertState.open}
-        onClose={() => setAlertState({ open: false, content: [] })}
-        onAccept={() => setAlertState({ open: false, content: [] })}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-    </DetailsContainer>
+    </>
   )
+}
+
+export const DriversCompanyDetailsForm = (props) => {
+  const driversCompanyDetailsProps = {
+    ...props,
+    UIComponent: DriversCompanyDetailsFormUI
+  }
+  return <DriversCompanyDetailsController {...driversCompanyDetailsProps} />
 }
