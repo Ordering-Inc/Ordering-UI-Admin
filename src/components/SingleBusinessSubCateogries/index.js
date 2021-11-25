@@ -31,7 +31,7 @@ const SingleBusinessSubCateogriesUI = (props) => {
 
   const theme = useTheme()
 
-  const conatinerRef = useRef(null)
+  const containerRef = useRef(null)
   const content = useRef(null)
 
   const [setActive, setActiveState] = useState('')
@@ -73,7 +73,7 @@ const SingleBusinessSubCateogriesUI = (props) => {
 
   return (
     <AccordionSection
-      ref={conatinerRef}
+      ref={containerRef}
       onDrop={e => handleDrop(e)}
       onDragOver={e => handleDragOverChange(e)}
       onDragEnd={e => handleDragEndChange(e)}

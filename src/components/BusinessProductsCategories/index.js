@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SingleBusinessSubCateogries } from '../SingleBusinessSubCateogries'
 
@@ -19,10 +19,21 @@ export const BusinessProductsCategories = (props) => {
 
   const [, t] = useLanguage()
   const [dataSelected, setDataSelected] = useState('')
+  const containerRef = useRef()
+
+  useEffect(() => {
+    if (containerRef?.current) {
+      window.addEventListener('click', (e) => {
+        if (!containerRef?.current?.contains(e.target)) {
+          handleChangeCategory(null, null)
+        }
+      })
+    }
+  }, [containerRef?.current])
 
   return (
     <>
-      <CategoryListContainer>
+      <CategoryListContainer ref={containerRef}>
         <HeaderContainer>
           <h1>{t('BUSINESS_CATEGORY', 'Business category')}</h1>
         </HeaderContainer>
