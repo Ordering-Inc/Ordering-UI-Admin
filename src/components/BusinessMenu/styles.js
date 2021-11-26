@@ -109,3 +109,31 @@ export const AddMenuButton = styled.a`
   display: inline-block;
   text-decoration: none;
 `
+export const TabsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  margin-bottom: 10px;
+`
+export const Tab = styled.div`
+  user-select: none;
+  padding: 10px 0px;
+  cursor: pointer;
+  color: ${props => props.theme.colors?.headingColor};
+  font-size: 14px;
+  white-space: nowrap;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 30px;
+  ` : css`
+    margin-right: 30px;
+  `}
+
+  ${({ active }) => active && css`
+    border-bottom: 2px solid;
+    font-weight: 500;
+  `}
+
+  ${({ active }) => !active && css`
+    color: ${props => props.theme.colors?.lightGray};
+  `}
+`

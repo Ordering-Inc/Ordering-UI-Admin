@@ -7,12 +7,7 @@ export const SingleCategoryContainer = styled.div`
   border-radius: 7.5px;
   margin-bottom: 15px;
   transition: all 0.3s;
-  /* cursor: pointer; */
   height: 75px;
-
-  /* &:hover {
-    background: ${props => props.theme.colors.lightPrimary};
-  } */
 
   ${({ active }) => active && css`
     background: ${props => props.theme.colors.lightPrimary};
@@ -35,22 +30,18 @@ export const SingleCategoryContainer = styled.div`
 
 export const CategoryContent = styled.div`
   display: flex;
-  justify-content: flex-start;
-  width: 180px;
+  align-items: center;
   color: ${props => props.theme.colors.headingColor};
   cursor: pointer;
-  ${props => props.theme?.rtl ? css`
-      padding-right: 10px;
-    ` : css`
-      padding-left: 10px;
-    `}
+  h1 {
+    padding: 0 10px;
+  }
 `
 export const CategoryContentInside = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding-left: 10px;
-    width: 50px;
-;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 50px;
 `
 export const ImageContainer = styled.div`
   min-height: 38px;
@@ -61,7 +52,7 @@ export const ImageContainer = styled.div`
   overflow: hidden;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
   ${props => props.theme?.rtl ? css`
-  maring-left: 10px;
+  margin-left: 10px;
   ` : css`
     margin-right: 10px;
   `}

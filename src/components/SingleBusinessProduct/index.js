@@ -9,7 +9,7 @@ import {
 } from 'ordering-components-admin'
 import { bytesConverter } from '../../utils'
 import { Switch } from '../../styles/Switch'
-import { Alert } from '../Confirm'
+import { Alert, Confirm } from '../Confirm'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
@@ -53,6 +53,8 @@ const SingleBusinessProductUI = (props) => {
   const [{ parsePrice, optimizeImage }] = useUtils()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
   const containerRef = useRef(null)
   const ProductTypeImgRef = useRef(null)
   const ActionIcon = <FiMoreVertical />
@@ -174,6 +176,17 @@ const SingleBusinessProductUI = (props) => {
       elements[0].parentNode.removeChild(elements[0])
     }
     setDataSelected('')
+  }
+
+  const handleDeleteClick = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete this product?'),
+      handleOnAccept: () => {
+        deleteProduct()
+        setConfirm({ ...confirm, open: false })
+      }
+    })
   }
 
   return (
@@ -342,7 +355,11 @@ const SingleBusinessProductUI = (props) => {
                       id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                     >
                       <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                      <Dropdown.Item onClick={deleteProduct}>{t('DELETE', 'Delete')}</Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleDeleteClick()}
+                      >
+                        {t('DELETE', 'Delete')}
+                      </Dropdown.Item>
                     </DropdownButton>
                   </ActionSelectorWrapper>
                 </td>
@@ -439,6 +456,17 @@ const SingleBusinessProductUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        width='700px'
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </>

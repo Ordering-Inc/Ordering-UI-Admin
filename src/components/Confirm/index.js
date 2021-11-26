@@ -24,7 +24,10 @@ const ConfirmUI = (props) => {
   } = props
   const [, t] = useLanguage()
   return (
-    <PopupDialog className='popup-dialog'>
+    <PopupDialog
+      className='popup-dialog'
+      width={props.width}
+    >
       <PopupIcon>
         <IconButton color='black' onClick={() => onClose()}>
           <XLg />
