@@ -72,8 +72,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       businessState = props.businessState,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       dataSelected = props.dataSelected,
-      setDataSelected = props.setDataSelected,
-      categorySelected = props.categorySelected;
+      setDataSelected = props.setDataSelected;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),

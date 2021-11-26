@@ -15,8 +15,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Confirm = require("../Confirm");
 
-var _utils = require("../../utils");
-
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -57,7 +55,6 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       handleUpdateClick = props.handleUpdateClick,
       handleOpenCategoryDetails = props.handleOpenCategoryDetails,
       categoryFormState = props.categoryFormState,
-      handlechangeImage = props.handlechangeImage,
       isEditMode = props.isEditMode,
       deleteCategory = props.deleteCategory;
 
@@ -74,43 +71,12 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       setAlertState = _useState2[1];
 
   var conatinerRef = (0, _react.useRef)(null);
-  var ProductTypeImgRef = (0, _react.useRef)(null);
-
-  var handleClickImage = function handleClickImage() {
-    ProductTypeImgRef.current.click();
-  };
 
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
-  };
-
-  var handleFiles = function handleFiles(files) {
-    if (files.length === 1) {
-      var _files$;
-
-      var type = files[0].type.split('/')[0];
-
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        });
-        return;
-      }
-
-      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        });
-        return;
-      }
-
-      handlechangeImage(files[0]);
-    }
   };
 
   var closeProductEdit = function closeProductEdit(e) {

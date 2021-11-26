@@ -21,7 +21,7 @@ var ListContent = _styledComponents.default.div(_templateObject || (_templateObj
 
 exports.ListContent = ListContent;
 
-var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 420px);\n  overflow: auto;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 300px);\n  }\n  \n  @media (min-width: 576px) {\n    ", "\n  }\n"])), function (props) {
+var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 420px);\n  overflow: auto;\n\n  @media (min-width: 576px) {\n    ", "\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 350px);\n  }\n\n  @media (min-width: 993px) {\n    max-height: calc(100vh - 300px);\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n    "])));
 });
 
