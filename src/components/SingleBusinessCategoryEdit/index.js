@@ -5,7 +5,6 @@ import {
   SingleBusinessCategory as SingleBusinessCategoryController
 } from 'ordering-components-admin'
 import { Alert } from '../Confirm'
-import { bytesConverter } from '../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Pencil, Trash } from 'react-bootstrap-icons'
 import {
@@ -25,7 +24,6 @@ export const SingleBusinessCategoryUI = (props) => {
     handleUpdateClick,
     handleOpenCategoryDetails,
     categoryFormState,
-    handlechangeImage,
     isEditMode,
     deleteCategory
   } = props
@@ -33,39 +31,12 @@ export const SingleBusinessCategoryUI = (props) => {
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const conatinerRef = useRef(null)
-  const ProductTypeImgRef = useRef(null)
-
-  const handleClickImage = () => {
-    ProductTypeImgRef.current.click()
-  }
 
   const closeAlert = () => {
     setAlertState({
       open: false,
       content: []
     })
-  }
-
-  const handleFiles = (files) => {
-    if (files.length === 1) {
-      const type = files[0].type.split('/')[0]
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        })
-        return
-      }
-
-      if (bytesConverter(files[0]?.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        })
-        return
-      }
-      handlechangeImage(files[0])
-    }
   }
 
   const closeProductEdit = (e) => {
