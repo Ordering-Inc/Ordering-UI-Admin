@@ -54,7 +54,8 @@ var ConfirmUI = function ConfirmUI(props) {
       t = _useLanguage2[1];
 
   return /*#__PURE__*/_react.default.createElement(_styles.PopupDialog, {
-    className: "popup-dialog"
+    className: "popup-dialog",
+    width: props.width
   }, /*#__PURE__*/_react.default.createElement(_styles.PopupIcon, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {

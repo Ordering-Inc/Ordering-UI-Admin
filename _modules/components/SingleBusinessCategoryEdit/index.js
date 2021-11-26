@@ -15,13 +15,15 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Confirm = require("../Confirm");
 
+var _styles = require("../../styles");
+
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _styles = require("./styles");
+var _styles2 = require("./styles");
 
-var _styles2 = require("../SingleBusinessProduct/styles");
+var _styles3 = require("../SingleBusinessProduct/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70,6 +72,15 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useState3 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      confirm = _useState4[0],
+      setConfirm = _useState4[1];
+
   var conatinerRef = (0, _react.useRef)(null);
 
   var closeAlert = function closeAlert() {
@@ -93,6 +104,19 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     }
   };
 
+  var handleDeleteClick = function handleDeleteClick() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_CATEGORY', 'Are you sure that you want to delete this category?'),
+      handleOnAccept: function handleOnAccept() {
+        deleteCategory();
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+      }
+    });
+  };
+
   (0, _react.useEffect)(function () {
     var _categoryFormState$re;
 
@@ -111,27 +135,31 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       return document.removeEventListener('click', closeProductEdit);
     };
   }, [categoryFormState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SingleCategoryContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SingleCategoryContainer, {
     "data-index": categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 41,
     height: 41
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageContainer, {
     disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading,
     className: "img-section"
   }, categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$ch = categoryFormState.changes) !== null && _categoryFormState$ch !== void 0 && _categoryFormState$ch.image ? /*#__PURE__*/_react.default.createElement("img", {
     src: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image,
     alt: "business type image",
     loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles3.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) || t('ALL', 'All')), /*#__PURE__*/_react.default.createElement(_styles.CategoryContentInside, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) || t('ALL', 'All')), /*#__PURE__*/_react.default.createElement(_styles2.CategoryContentInside, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return handleOpenCategoryDetails(categorySelected);
     }
-  }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
-    onClick: deleteCategory
-  }))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleDeleteClick();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, null)))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CATEGORY', 'Category'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -142,6 +170,24 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     onAccept: function onAccept() {
       return closeAlert();
     },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    width: "700px",
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
 };

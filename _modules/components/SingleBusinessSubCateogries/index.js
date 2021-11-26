@@ -63,7 +63,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       onDataSelected = props.onDataSelected,
       dataSelected = props.dataSelected;
   var theme = (0, _styledComponents.useTheme)();
-  var conatinerRef = (0, _react.useRef)(null);
+  var containerRef = (0, _react.useRef)(null);
   var content = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)(''),
@@ -77,8 +77,11 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       setRotateState = _useState4[1];
 
   var toggleAccordion = function toggleAccordion(e, category) {
-    setActiveState(setActive === '' ? 'active' : '');
-    setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
+    if (category !== null && category !== void 0 && category.enabled) {
+      setActiveState(setActive === '' ? 'active' : '');
+      setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
+    }
+
     handleChangeCategory(e, category);
   };
 
@@ -97,8 +100,19 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
     handleDragEnd(e);
   };
 
+  (0, _react.useEffect)(function () {
+    if (category && !(category !== null && category !== void 0 && category.enabled)) {
+      setActiveState('');
+      setRotateState('accordion__icon rotate');
+    }
+
+    if (category && category !== null && category !== void 0 && category.enabled && (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === (category === null || category === void 0 ? void 0 : category.id)) {
+      setActiveState('active');
+      setRotateState('accordion__icon rotate');
+    }
+  }, [category === null || category === void 0 ? void 0 : category.enabled]);
   return /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
-    ref: conatinerRef,
+    ref: containerRef,
     onDrop: function onDrop(e) {
       return handleDrop(e);
     },

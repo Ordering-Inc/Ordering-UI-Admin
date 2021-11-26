@@ -58,7 +58,21 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       dataSelected = _useState2[0],
       setDataSelected = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
+  var containerRef = (0, _react.useRef)();
+  (0, _react.useEffect)(function () {
+    if (containerRef !== null && containerRef !== void 0 && containerRef.current) {
+      window.addEventListener('click', function (e) {
+        var _containerRef$current;
+
+        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target))) {
+          handleChangeCategory(null, null);
+        }
+      });
+    }
+  }, [containerRef === null || containerRef === void 0 ? void 0 : containerRef.current]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, {
+    ref: containerRef
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, {
       key: i,
       isSkeleton: true

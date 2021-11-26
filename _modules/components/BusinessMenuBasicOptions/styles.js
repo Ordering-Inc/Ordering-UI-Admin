@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddScheduleButton = exports.ScheduleActionBlock = exports.AddButton = exports.DeleteButton = exports.TimeSelectContainer = exports.TimeSelect = exports.TimeSection = exports.TimeSectionContainer = exports.ScheduleBlock = exports.ScheduleSection = exports.ScheduleContainer = exports.CheckBoxWrapper = exports.ScheduleCheckboxContainer = exports.OrderType = exports.FieldName = exports.BusinessMenuBasicContainer = void 0;
+exports.ScheduleSection = exports.ScheduleContainer = exports.ScheduleCheckboxContainer = exports.OrderType = exports.FieldName = exports.BusinessMenuBasicContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -54,92 +54,10 @@ var ScheduleCheckboxContainer = _styledComponents.default.div(_templateObject7 |
 
 exports.ScheduleCheckboxContainer = ScheduleCheckboxContainer;
 
-var CheckBoxWrapper = _styledComponents.default.span(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  \n  svg {\n    color: ", ";\n    ", "\n    font-size: 20px;\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (_ref3) {
-  var active = _ref3.active;
-  return active && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
-    return props.theme.colors.primary;
-  });
-});
-
-exports.CheckBoxWrapper = CheckBoxWrapper;
-
-var ScheduleContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n"])));
+var ScheduleContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n"])));
 
 exports.ScheduleContainer = ScheduleContainer;
 
-var ScheduleSection = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  border-top: 1px solid #E9ECEF;\n  margin-top: 30px;\n"])));
+var ScheduleSection = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  border-top: 1px solid #E9ECEF;\n  margin-top: 30px;\n"])));
 
 exports.ScheduleSection = ScheduleSection;
-
-var ScheduleBlock = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 15px 0;\n  border-bottom: 1px solid #E9ECEF;\n"])));
-
-exports.ScheduleBlock = ScheduleBlock;
-
-var TimeSectionContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  flex: 1;\n  text-align: center;\n  > p {\n    margin: 0px;\n    color: ", ";\n  }\n  > div:not(:last-child) {\n    margin-bottom: 10px;\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-});
-
-exports.TimeSectionContainer = TimeSectionContainer;
-
-var TimeSection = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0 5px;\n  color: ", ";\n"])), function (props) {
-  return props.theme.colors.lightGray;
-});
-
-exports.TimeSection = TimeSection;
-
-var TimeSelect = _styledComponents.default.select(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border: none;\n  background-color: transparent;\n  outline: none;\n  cursor: pointer;\n  -moz-appearance: none;\n  -webkit-appearance: none;\n  -ms-progress-appearance: none;\n  color: ", ";\n"])), function (props) {
-  return props.theme.colors.lightGray;
-});
-
-exports.TimeSelect = TimeSelect;
-
-var TimeSelectContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 7px;\n  padding: 5px 15px;\n"])), function (props) {
-  return props.theme.colors.lightGray;
-});
-
-exports.TimeSelectContainer = TimeSelectContainer;
-
-var DeleteButton = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  ", "\n  ", "\n  svg {\n    color: ", ";\n  }\n"])), function (_ref4) {
-  var disabled = _ref4.disabled;
-  return disabled ? (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.6;\n  "]))) : (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    cursor: pointer;\n  "])));
-}, function (props) {
-  var _props$theme3;
-
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n  "])));
-}, function (props) {
-  return props.theme.colors.headingColor;
-});
-
-exports.DeleteButton = DeleteButton;
-
-var AddButton = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  ", "\n  ", "\n  svg {\n    color: ", ";\n    font-size: 20px;\n  }\n"])), function (_ref5) {
-  var disabled = _ref5.disabled;
-  return disabled ? (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.6;\n  "]))) : (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    cursor: pointer;\n  "])));
-}, function (props) {
-  var _props$theme4;
-
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n  "])));
-}, function (props) {
-  return props.theme.colors.primary;
-});
-
-exports.AddButton = AddButton;
-
-var ScheduleActionBlock = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
-
-exports.ScheduleActionBlock = ScheduleActionBlock;
-
-var AddScheduleButton = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  ", "\n  ", "\n\n  svg {\n    color: ", ";\n  }\n"])), function (_ref6) {
-  var disabled = _ref6.disabled;
-  return disabled ? (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.6;\n  "]))) : (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    cursor: pointer;\n  "])));
-}, function (props) {
-  var _props$theme5;
-
-  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    margin-left: 5px;\n  "]))) : (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n  "])));
-}, function (props) {
-  return props.theme.colors.primary;
-});
-
-exports.AddScheduleButton = AddScheduleButton;
