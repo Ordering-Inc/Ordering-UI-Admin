@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Camera, Image as ImageIcon } from 'react-bootstrap-icons'
-import { DragAndDrop, ExamineClick, useLanguage, BusinessGallery as BusinessGalleryController } from 'ordering-components-admin'
+import {
+  DragAndDrop,
+  ExamineClick,
+  useLanguage,
+  useUtils,
+  BusinessGallery as BusinessGalleryController
+} from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { bytesConverter } from '../../utils'
 import { Alert, Confirm } from '../Confirm'
@@ -31,6 +37,7 @@ const BusinessImagesUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ optimizeImage }] = useUtils()
 
   const imageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -140,7 +147,7 @@ const BusinessImagesUI = (props) => {
                 key={photo.id}
               >
                 <img
-                  src={photo.file}
+                  src={optimizeImage(photo.file, 'h_200,c_limit')}
                 />
                 <DeleteButton
                   onClick={() => handleDeleteClick(photo.id)}
