@@ -11,8 +11,8 @@ import {
   BarChartLine as BarChartLineIcon,
   Gear as GearIcon,
   Headset as HeadsetIcon,
-  Truck
-  // WindowDock
+  Truck,
+  GraphUp
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -89,12 +89,6 @@ export const SidebarMenu = (props) => {
       pageName: 'managers',
       url: '/users/managers'
     }
-    // {
-    //   id: 3,
-    //   title: t('OPERATION', 'Operation'),
-    //   pageName: 'usersOperation',
-    //   url: '/users/operation'
-    // }
   ]
 
   const settingsSubMenus = [
@@ -193,6 +187,15 @@ export const SidebarMenu = (props) => {
       title: t('DRIVERS_GROUPS', 'Drivers groups'),
       pageName: 'drivers_groups',
       url: '/delivery/drivers-groups'
+    }
+  ]
+
+  const marketingSubmenus = [
+    {
+      id: 1,
+      title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
+      pageName: 'enterprise_promotions',
+      url: '/marketing/promotions-enterprise'
     }
   ]
 
@@ -420,6 +423,31 @@ export const SidebarMenu = (props) => {
                       </Accordion.Collapse>
                     </MenuContainer>
                   )}
+
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='8'
+                      active={
+                        location.pathname === '/marketing/promotions-enterprise'
+                      }
+                    >
+                      <GraphUp />
+                      <span>{t('MARKETING', 'Marketing')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='8'>
+                      <MenuContent>
+                        {marketingSubmenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
                 </Accordion>
               </div>
               <div className='d-flex flex-column mt-4'>

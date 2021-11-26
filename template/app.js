@@ -44,6 +44,7 @@ import { DriversCompaniesList } from './pages/DriversCompaniesList'
 import { DriversGroupsList } from './pages/DriversGroupsList'
 import { Support } from './pages/Support'
 import { AdvancedReports } from './pages/AdvancedReports'
+import { EnterprisePromotions } from './pages/EnterprisePromotions'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -308,6 +309,13 @@ export const App = () => {
                       {
                         auth
                           ? <DriversGroupsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/marketing/promotions-enterprise'>
+                      {
+                        auth
+                          ? <EnterprisePromotions />
                           : <Redirect to='/login' />
                       }
                     </Route>
