@@ -31,7 +31,7 @@ const BusinessScheduleUI = (props) => {
         <Button
           color='primary'
           borderRadius='8px'
-          disabled={Object.keys(formState?.changes).length === 0}
+          disabled={Object.keys(formState?.changes).length === 0 || formState?.loading}
           onClick={() => handleUpdateSchedule()}
         >
           {t('SAVE', 'Save')}

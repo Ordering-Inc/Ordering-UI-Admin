@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const ScheduleContainer = styled.div`
   > button {
     height: 44px;
+    margin-top: 50px;
   }
   @media (min-width: 1000px) {
     padding: 20px;
