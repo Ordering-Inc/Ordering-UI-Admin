@@ -14,16 +14,20 @@ export const ProductListContainer = styled.div`
   max-height: calc(100vh - 420px);
   overflow: auto;
 
-  @media (min-width: 768px) {
-    max-height: calc(100vh - 300px);
-  }
-  
   @media (min-width: 576px) {
     ${props => props.theme.rtl ? css`
     margin-right: 30px;
     ` : css`
     margin-left: 30px;
     `}
+  }
+
+  @media (min-width: 768px) {
+    max-height: calc(100vh - 350px);
+  }
+
+  @media (min-width: 993px) {
+    max-height: calc(100vh - 300px);
   }
 `
 
