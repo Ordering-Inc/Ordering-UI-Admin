@@ -9,6 +9,7 @@ import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Button } from '../../styles/Buttons'
+import { Confirm } from '../Confirm'
 
 import {
   MainContainer,
@@ -19,7 +20,9 @@ import {
   MenuName,
   EnableWrapper,
   ActionsWrapper,
-  AddMenuButton
+  AddMenuButton,
+  TabsContainer,
+  Tab
 } from './styles'
 
 const BusinessMenuUI = (props) => {
@@ -29,11 +32,16 @@ const BusinessMenuUI = (props) => {
     businessMenusState,
     handleChangeBusinessMenuActiveState,
     handleDeleteBusinessMenu,
-    handleSuccessBusinessMenu
+    handleSuccessBusinessMenu,
+
+    isSelectedSharedMenus,
+    setIsSelectedSharedMenus
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
+
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [showOption, setShowOption] = useState(null)
   const [currentMenu, setCurrentMenu] = useState(null)
   const ActionIcon = <FiMoreVertical />
@@ -55,6 +63,17 @@ const BusinessMenuUI = (props) => {
     handleOpenOptions('option', menu)
   }
 
+  const handleDeleteClick = (menuId) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_MENU', 'Are you sure that you want to delete this menu?'),
+      handleOnAccept: () => {
+        handleDeleteBusinessMenu(menuId)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
   return (
     <MainContainer>
       <MenuContainer>
@@ -68,14 +87,30 @@ const BusinessMenuUI = (props) => {
             {t('ADD_MENU', 'Add menu')}
           </Button>
         </Header>
-        {businessMenusState?.menus.map(menu => (
+
+        <TabsContainer>
+          <Tab
+            active={!isSelectedSharedMenus}
+            onClick={() => setIsSelectedSharedMenus(false)}
+          >
+            {t('MENU_V21', 'Menu')}
+          </Tab>
+          <Tab
+            active={isSelectedSharedMenus}
+            onClick={() => setIsSelectedSharedMenus(true)}
+          >
+            {t('SHARED_MENUS', 'Shared menus')}
+          </Tab>
+        </TabsContainer>
+
+        {(isSelectedSharedMenus ? businessMenusState?.menusShared : businessMenusState?.menus).map(menu => (
           <MeunItem key={menu.id} onClick={(e) => handleOpenEdit(e, menu)}>
             <MenuName>{menu?.name}</MenuName>
             <EnableWrapper className='business_enable_control'>
               <span>{t('ENABLE', 'Enable')}</span>
               <Switch
                 defaultChecked={menu?.enabled}
-                onChange={() => handleChangeBusinessMenuActiveState(menu?.id)}
+                onChange={(enabled) => handleChangeBusinessMenuActiveState(menu?.id, enabled)}
               />
             </EnableWrapper>
             <ActionsWrapper className='action_wrapper'>
@@ -87,7 +122,7 @@ const BusinessMenuUI = (props) => {
                 <Dropdown.Item onClick={() => handleOpenOptions('option', menu)}>{t('EDIT', 'Edit')}</Dropdown.Item>
                 <Dropdown.Item onClick={() => handleOpenOptions('customFields', menu)}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
                 <Dropdown.Item
-                  onClick={() => handleDeleteBusinessMenu(menu.id)}
+                  onClick={() => handleDeleteClick(menu.id)}
                 >
                   {t('DELETE', 'Delete')}
                 </Dropdown.Item>
@@ -95,11 +130,13 @@ const BusinessMenuUI = (props) => {
             </ActionsWrapper>
           </MeunItem>
         ))}
-        <AddMenuButton
-          onClick={() => handleOpenOptions('option', {})}
-        >
-          {t('ADD_MENU', 'Add menu')}
-        </AddMenuButton>
+        {!isSelectedSharedMenus && (
+          <AddMenuButton
+            onClick={() => handleOpenOptions('option', {})}
+          >
+            {t('ADD_MENU', 'Add menu')}
+          </AddMenuButton>
+        )}
       </MenuContainer>
       {width >= 1000 ? (
         <>
@@ -154,6 +191,17 @@ const BusinessMenuUI = (props) => {
           )}
         </>
       )}
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        width='700px'
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </MainContainer>
   )
 }

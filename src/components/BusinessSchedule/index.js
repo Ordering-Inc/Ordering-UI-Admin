@@ -1,307 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useLanguage, BusinessSchedule as BusinessScheduleController } from 'ordering-components-admin'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import BsTrash from '@meronex/icons/bs/BsTrash'
-import BiMinus from '@meronex/icons/bi/BiMinus'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
-import AiFillPlusCircle from '@meronex/icons/ai/AiFillPlusCircle'
-import { Alert } from '../Confirm'
-import { BusinessScheduleCopyTimes } from '../BusinessScheduleCopyTimes'
+import { Schedule } from '../Schedule'
+import { Button } from '../../styles'
 
 import {
   ScheduleContainer,
   Title,
-  ScheduleSection,
-  ScheduleBlock,
-  CheckBoxWrapper,
-  CheckboxContainer,
-  TimeSectionContainer,
-  TimeSection,
-  TimeSelect,
-  TimeSelectContainer,
-  DeleteButton,
-  ScheduleActionBlock,
-  AddButton,
-  AddScheduleButton
+  ScheduleSection
 } from './styles'
 
 const BusinessScheduleUI = (props) => {
   const {
-    formState,
     business,
-    handleChangeTime,
-    handleAddScheduleTime,
-    handleDeleteScheduleTime,
-    handleScheduleTimeActiveState,
-    selectedCopyDays,
-    handleSelectCopyTimes,
-    cleanSelectedCopyDays,
-    isConflict,
-    setIsConflict,
-    handleChangeAddScheduleTime,
-    addScheduleTime,
-    setAddScheduleTime,
-    openAddScheduleIndex,
-    setOpenAddScheduleInex,
-    handleApplyScheduleCopyTimes
+    formState,
+    handleChangeScheduleState,
+    handleUpdateSchedule
   } = props
   const [, t] = useLanguage()
-  const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-
-  const daysOfWeek = [
-    t('SUNDAY_ABBREVIATION', 'Sun'),
-    t('MONDAY_ABBREVIATION', 'Mon'),
-    t('TUESDAY_ABBREVIATION', 'Tue'),
-    t('WEDNESDAY_ABBREVIATION', 'Wed'),
-    t('THURSDAY_ABBREVIATION', 'Thu'),
-    t('FRIDAY_ABBREVIATION', 'Fri'),
-    t('SATURDAY_ABBREVIATION', 'Sat')
-  ]
-
-  const closeAlert = () => {
-    setIsConflict(false)
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
-
-  const handleOpenAddScheduleInex = (index) => {
-    const defaultTime = {
-      open: { hour: 0, minute: 0 },
-      close: { hour: 23, minute: 59 }
-    }
-    setAddScheduleTime(defaultTime)
-    setOpenAddScheduleInex(index)
-  }
-
-  useEffect(() => {
-    if (!isConflict) return
-    setAlertState({
-      open: true,
-      content: [t('SCHEDULE_CONFLICT', 'There is an schedule conflict')]
-    })
-  }, [isConflict])
 
   return (
     <>
       <ScheduleContainer>
         <Title>{t('SCHEDULE', 'Schedule')}</Title>
         <ScheduleSection>
-          {business?.schedule.map((schedule, daysOfWeekIndex) => (
-            <ScheduleBlock key={daysOfWeekIndex}>
-              <CheckboxContainer>
-                <CheckBoxWrapper
-                  active={schedule?.enabled}
-                  onClick={() => handleScheduleTimeActiveState(daysOfWeekIndex)}
-                >
-                  {schedule?.enabled ? <RiCheckboxFill /> : <RiCheckboxBlankLine />}
-                </CheckBoxWrapper>
-                <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
-              </CheckboxContainer>
-              <TimeSectionContainer>
-                {schedule?.enabled ? (
-                  <>
-                    {schedule.lapses.map((laps, index) => (
-                      <TimeSection key={index}>
-                        <TimeSelectContainer>
-                          <TimeSelect
-                            value={
-                              formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.open?.hour
-                                : formState?.changes?.schedule
-                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open?.hour
-                                  : laps.open.hour
-                            }
-                            onChange={(e) => handleChangeTime(daysOfWeekIndex, true, true, index, e.target.value)}
-                          >
-                            {[...Array(24)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                          :
-                          <TimeSelect
-                            value={
-                              formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.open?.minute
-                                : formState?.changes?.schedule
-                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.open.minute
-                                  : laps.open.minute
-                            }
-                            onChange={(e) => handleChangeTime(daysOfWeekIndex, true, false, index, e.target.value)}
-                          >
-                            {[...Array(60)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                        </TimeSelectContainer>
-                        <BiMinus />
-                        <TimeSelectContainer>
-                          <TimeSelect
-                            value={
-                              formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.close?.hour
-                                : formState?.changes?.schedule
-                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.close.hour
-                                  : laps.close.hour
-                            }
-                            onChange={(e) => handleChangeTime(daysOfWeekIndex, false, true, index, e.target.value)}
-                          >
-                            {[...Array(24)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                          :
-                          <TimeSelect
-                            value={
-                              formState?.result?.result
-                                ? formState?.result?.result?.schedule[daysOfWeekIndex]?.lapses[index]?.close?.minute
-                                : formState?.changes?.schedule
-                                  ? formState?.changes?.schedule[daysOfWeekIndex]?.lapses[index]?.close.minute
-                                  : laps.close.minute
-                            }
-                            onChange={(e) => handleChangeTime(daysOfWeekIndex, false, false, index, e.target.value)}
-                          >
-                            {[...Array(60)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                        </TimeSelectContainer>
-                        <DeleteButton
-                          disabled={schedule.lapses.length === 1 || formState.loading}
-                          onClick={() => handleDeleteScheduleTime(daysOfWeekIndex, index)}
-                        >
-                          <BsTrash />
-                        </DeleteButton>
-                      </TimeSection>
-                    ))}
-                    {openAddScheduleIndex === daysOfWeekIndex && (
-                      <TimeSection>
-                        <TimeSelectContainer>
-                          <TimeSelect
-                            value={addScheduleTime.open.hour}
-                            onChange={(e) => handleChangeAddScheduleTime(true, true, e.target.value)}
-                          >
-                            {[...Array(24)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                          :
-                          <TimeSelect
-                            value={addScheduleTime.open.minute}
-                            onChange={(e) => handleChangeAddScheduleTime(true, false, e.target.value)}
-                          >
-                            {[...Array(60)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                        </TimeSelectContainer>
-                        <BiMinus />
-                        <TimeSelectContainer>
-                          <TimeSelect
-                            value={addScheduleTime.close.hour}
-                            onChange={(e) => handleChangeAddScheduleTime(false, true, e.target.value)}
-                          >
-                            {[...Array(24)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                          :
-                          <TimeSelect
-                            value={addScheduleTime.close.minute}
-                            onChange={(e) => handleChangeAddScheduleTime(false, false, e.target.value)}
-                          >
-                            {[...Array(60)].map((v, i) => (
-                              <option
-                                key={i}
-                                value={i}
-                              >
-                                {i < 10 ? `0${i}` : i}
-                              </option>
-                            ))}
-                          </TimeSelect>
-                        </TimeSelectContainer>
-                        <AddButton
-                          onClick={() => handleAddScheduleTime(daysOfWeekIndex)}
-                        >
-                          <AiFillPlusCircle />
-                        </AddButton>
-                      </TimeSection>
-                    )}
-                  </>
-                ) : (
-                  <p>{t('UNAVAILABLE', 'Unavailable')}</p>
-                )}
-              </TimeSectionContainer>
-              <ScheduleActionBlock>
-                <AddScheduleButton
-                  disabled={!schedule?.enabled}
-                  onClick={() => handleOpenAddScheduleInex(daysOfWeekIndex)}
-                >
-                  <BsPlusSquare />
-                </AddScheduleButton>
-                <BusinessScheduleCopyTimes
-                  disabled={!schedule?.enabled}
-                  cleanSelectedCopyDays={cleanSelectedCopyDays}
-                  open={isOpenCopytimes === daysOfWeekIndex}
-                  daysOfWeekIndex={daysOfWeekIndex}
-                  onClick={setIsOpenCopytimes}
-                  onClose={() => setIsOpenCopytimes(null)}
-                  selectedCopyDays={selectedCopyDays}
-                  handleSelectDays={(value) => handleSelectCopyTimes(value)}
-                  handleApplyScheduleCopyTimes={handleApplyScheduleCopyTimes}
-                />
-              </ScheduleActionBlock>
-            </ScheduleBlock>
-          ))}
+          <Schedule
+            scheduleList={business?.schedule}
+            handleChangeScheduleState={handleChangeScheduleState}
+          />
         </ScheduleSection>
+        <Button
+          color='primary'
+          borderRadius='8px'
+          disabled={Object.keys(formState?.changes).length === 0 || formState?.loading}
+          onClick={() => handleUpdateSchedule()}
+        >
+          {t('SAVE', 'Save')}
+        </Button>
       </ScheduleContainer>
-      <Alert
-        title={t('WEB_APPNAME', 'Ordering')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }
