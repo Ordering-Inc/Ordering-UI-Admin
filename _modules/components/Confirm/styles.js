@@ -30,7 +30,10 @@ var PopupWrap = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.PopupWrap = PopupWrap;
 
-var PopupDialog = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  padding: 20px;\n  width: 70%;\n  border-radius: 10px;\n"])));
+var PopupDialog = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  padding: 20px;\n  width:  ", ";\n  border-radius: 10px;\n"])), function (_ref) {
+  var width = _ref.width;
+  return width || '70%';
+});
 
 exports.PopupDialog = PopupDialog;
 

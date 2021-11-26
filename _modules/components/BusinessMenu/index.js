@@ -29,6 +29,8 @@ var _useWindowSize2 = require("../../hooks/useWindowSize");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _Confirm = require("../Confirm");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -61,7 +63,9 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       businessMenusState = props.businessMenusState,
       handleChangeBusinessMenuActiveState = props.handleChangeBusinessMenuActiveState,
       handleDeleteBusinessMenu = props.handleDeleteBusinessMenu,
-      handleSuccessBusinessMenu = props.handleSuccessBusinessMenu;
+      handleSuccessBusinessMenu = props.handleSuccessBusinessMenu,
+      isSelectedSharedMenus = props.isSelectedSharedMenus,
+      setIsSelectedSharedMenus = props.setIsSelectedSharedMenus;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -71,15 +75,24 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
-  var _useState = (0, _react.useState)(null),
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
       _useState2 = _slicedToArray(_useState, 2),
-      showOption = _useState2[0],
-      setShowOption = _useState2[1];
+      confirm = _useState2[0],
+      setConfirm = _useState2[1];
 
   var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      currentMenu = _useState4[0],
-      setCurrentMenu = _useState4[1];
+      showOption = _useState4[0],
+      setShowOption = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentMenu = _useState6[0],
+      setCurrentMenu = _useState6[1];
 
   var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
 
@@ -100,13 +113,36 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     handleOpenOptions('option', menu);
   };
 
+  var handleDeleteClick = function handleDeleteClick(menuId) {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_MENU', 'Are you sure that you want to delete this menu?'),
+      handleOnAccept: function handleOnAccept() {
+        handleDeleteBusinessMenu(menuId);
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+      }
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MENU_V21', 'Menu')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenOptions('option', {});
     }
-  }, t('ADD_MENU', 'Add menu'))), businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus.map(function (menu) {
+  }, t('ADD_MENU', 'Add menu'))), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+    active: !isSelectedSharedMenus,
+    onClick: function onClick() {
+      return setIsSelectedSharedMenus(false);
+    }
+  }, t('MENU_V21', 'Menu')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+    active: isSelectedSharedMenus,
+    onClick: function onClick() {
+      return setIsSelectedSharedMenus(true);
+    }
+  }, t('SHARED_MENUS', 'Shared menus'))), (isSelectedSharedMenus ? businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared : businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus).map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.MeunItem, {
       key: menu.id,
       onClick: function onClick(e) {
@@ -116,8 +152,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       className: "business_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
       defaultChecked: menu === null || menu === void 0 ? void 0 : menu.enabled,
-      onChange: function onChange() {
-        return handleChangeBusinessMenuActiveState(menu === null || menu === void 0 ? void 0 : menu.id);
+      onChange: function onChange(enabled) {
+        return handleChangeBusinessMenuActiveState(menu === null || menu === void 0 ? void 0 : menu.id, enabled);
       }
     })), /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, {
       className: "action_wrapper"
@@ -135,10 +171,10 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       }
     }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
-        return handleDeleteBusinessMenu(menu.id);
+        return handleDeleteClick(menu.id);
       }
     }, t('DELETE', 'Delete')))));
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddMenuButton, {
+  }), !isSelectedSharedMenus && /*#__PURE__*/_react.default.createElement(_styles.AddMenuButton, {
     onClick: function onClick() {
       return handleOpenOptions('option', {});
     }
@@ -184,7 +220,25 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     },
     businessId: business === null || business === void 0 ? void 0 : business.id,
     menuId: currentMenu.id
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    width: "700px",
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  }));
 };
 
 var BusinessMenu = function BusinessMenu(props) {

@@ -4,7 +4,8 @@ import {
   useLanguage,
   SingleBusinessCategory as SingleBusinessCategoryController
 } from 'ordering-components-admin'
-import { Alert } from '../Confirm'
+import { Alert, Confirm } from '../Confirm'
+import { IconButton } from '../../styles'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Pencil, Trash } from 'react-bootstrap-icons'
 import {
@@ -30,6 +31,7 @@ export const SingleBusinessCategoryUI = (props) => {
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const conatinerRef = useRef(null)
 
   const closeAlert = () => {
@@ -48,6 +50,17 @@ export const SingleBusinessCategoryUI = (props) => {
         }
       }
     }
+  }
+
+  const handleDeleteClick = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_CATEGORY', 'Are you sure that you want to delete this category?'),
+      handleOnAccept: () => {
+        deleteCategory()
+        setConfirm({ ...confirm, open: false })
+      }
+    })
   }
 
   useEffect(() => {
@@ -102,8 +115,18 @@ export const SingleBusinessCategoryUI = (props) => {
                 <>
                   <h1>{categorySelected?.name || t('ALL', 'All')}</h1>
                   <CategoryContentInside>
-                    <Pencil onClick={() => handleOpenCategoryDetails(categorySelected)} />
-                    <Trash onClick={deleteCategory} />
+                    <IconButton
+                      color='black'
+                      onClick={() => handleOpenCategoryDetails(categorySelected)}
+                    >
+                      <Pencil />
+                    </IconButton>
+                    <IconButton
+                      color='black'
+                      onClick={() => handleDeleteClick()}
+                    >
+                      <Trash />
+                    </IconButton>
                   </CategoryContentInside>
                 </>
               )
@@ -118,6 +141,18 @@ export const SingleBusinessCategoryUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        width='700px'
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </>
