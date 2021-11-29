@@ -72,30 +72,38 @@ var DistanceTable = _styledComponents.default.table(_templateObject12 || (_templ
 
 exports.DistanceTable = DistanceTable;
 
-var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n\n  tr {\n    th {\n      padding: 12px 5px;\n      font-weight: 500;\n      font-size: 12px;\n      text-align: center;\n\n      &:first-child {\n        text-align: left;\n        border-right: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
+var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n  border-bottom: 1px solid ", ";\n\n  tr {\n    th {\n      padding: 12px 5px;\n      font-weight: 500;\n      font-size: 12px;\n      text-align: center;\n    }\n\n    &:first-child {\n      th {\n        &:not(:first-child) {\n          border-left: 1px solid ", ";\n        }\n      }\n    }\n\n    &:nth-child(2) {\n      th {\n        &:first-child, &:nth-child(2) {\n          text-align: left;\n        }\n\n        &:nth-child(4n-1) {\n          border-left: 1px solid ", ";\n        }\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme6;
 
   return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.colors.secundaryDarkContrast;
-});
-
-exports.Thead = Thead;
-
-var Tbody = _styledComponents.default.tbody(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n\n  tr {\n    td {\n      padding: 12px 5px;\n      font-size: 12px;\n      text-align: center;\n      color: ", ";\n\n      &:first-child {\n        text-align: left;\n        color: ", ";\n        border-right: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
+}, function (props) {
   var _props$theme7;
 
   return (_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.colors.secundaryDarkContrast;
 }, function (props) {
   var _props$theme8;
 
-  return (_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.colors.lightGray;
-}, function (props) {
+  return (_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.colors.secundaryDarkContrast;
+});
+
+exports.Thead = Thead;
+
+var Tbody = _styledComponents.default.tbody(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n\n  tr {\n    td {\n      padding: 12px 5px;\n      font-size: 12px;\n      text-align: center;\n      color: ", ";\n\n      &:first-child, &:nth-child(2) {\n        text-align: left;\n        color: ", ";\n      }\n\n      &:nth-child(4n-1) {\n        border-left: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme9;
 
-  return (_props$theme9 = props.theme) === null || _props$theme9 === void 0 ? void 0 : _props$theme9.colors.headingColor;
+  return (_props$theme9 = props.theme) === null || _props$theme9 === void 0 ? void 0 : _props$theme9.colors.secundaryDarkContrast;
 }, function (props) {
   var _props$theme10;
 
-  return (_props$theme10 = props.theme) === null || _props$theme10 === void 0 ? void 0 : _props$theme10.colors.secundaryDarkContrast;
+  return (_props$theme10 = props.theme) === null || _props$theme10 === void 0 ? void 0 : _props$theme10.colors.lightGray;
+}, function (props) {
+  var _props$theme11;
+
+  return (_props$theme11 = props.theme) === null || _props$theme11 === void 0 ? void 0 : _props$theme11.colors.headingColor;
+}, function (props) {
+  var _props$theme12;
+
+  return (_props$theme12 = props.theme) === null || _props$theme12 === void 0 ? void 0 : _props$theme12.colors.secundaryDarkContrast;
 });
 
 exports.Tbody = Tbody;

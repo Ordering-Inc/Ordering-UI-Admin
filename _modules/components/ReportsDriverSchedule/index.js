@@ -110,7 +110,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     var _notAvailable = [];
     reportData.content.data.forEach(function (data) {
       data.lines.forEach(function (line) {
-        if (line.name === 'Available') {
+        if (line.name.toLowerCase().search('available') > -1) {
           line.ranges.forEach(function (range) {
             if (range.value) {
               var from = getDiff(reportData.content.from, range.from);
@@ -142,7 +142,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     var _notBusy = [];
     reportData.content.data.forEach(function (data) {
       data.lines.forEach(function (line) {
-        if (line.name === 'Busy') {
+        if (line.name.toLowerCase().search('busy') > -1) {
           line.ranges.forEach(function (range) {
             if (range.value) {
               var from = getDiff(reportData.content.from, range.from);

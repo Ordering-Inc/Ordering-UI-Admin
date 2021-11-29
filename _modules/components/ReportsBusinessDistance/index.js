@@ -93,6 +93,10 @@ var ReportsBusinessDistanceUI = function ReportsBusinessDistanceUI(props) {
       chartData = _useState6[0],
       setChartData = _useState6[1];
 
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parseNumber = _useUtils2[0].parseNumber;
+
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
       from: date1,
@@ -259,7 +263,9 @@ var ReportsBusinessDistanceUI = function ReportsBusinessDistanceUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value);
+      }, td.value_refers === 'average' ? parseNumber(td.value, {
+        decimal: 2
+      }) : td.value);
     })));
   }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content16 = reportData.content) === null || _reportData$content16 === void 0 ? void 0 : (_reportData$content17 = _reportData$content16.footer) === null || _reportData$content17 === void 0 ? void 0 : _reportData$content17.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content18 = reportData.content) === null || _reportData$content18 === void 0 ? void 0 : (_reportData$content19 = _reportData$content18.footer) === null || _reportData$content19 === void 0 ? void 0 : _reportData$content19.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
