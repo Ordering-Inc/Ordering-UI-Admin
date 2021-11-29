@@ -43,7 +43,7 @@ const ReportsDriverScheduleUI = (props) => {
     const _notAvailable = []
     reportData.content.data.forEach(data => {
       data.lines.forEach(line => {
-        if (line.name === 'Available') {
+        if (line.name.toLowerCase().search('available') > -1) {
           line.ranges.forEach(range => {
             if (range.value) {
               const from = getDiff(reportData.content.from, range.from)
@@ -72,7 +72,7 @@ const ReportsDriverScheduleUI = (props) => {
     const _notBusy = []
     reportData.content.data.forEach(data => {
       data.lines.forEach(line => {
-        if (line.name === 'Busy') {
+        if (line.name.toLowerCase().search('busy') > -1) {
           line.ranges.forEach(range => {
             if (range.value) {
               const from = getDiff(reportData.content.from, range.from)
