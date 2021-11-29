@@ -126,8 +126,12 @@ export const Thead = styled.thead`
     }
 
     &:first-child {
+      th {
+        border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+      }
       th:first-child {
         text-align: center;
+        border: none;
       }
     }
     &:last-child {

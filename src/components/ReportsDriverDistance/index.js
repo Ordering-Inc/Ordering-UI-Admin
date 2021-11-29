@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
@@ -37,6 +37,7 @@ const ReportsDriverDistanceUI = (props) => {
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [{ parseNumber }] = useUtils()
 
   const tableRef = useRef(null)
 
@@ -165,7 +166,7 @@ const ReportsDriverDistanceUI = (props) => {
                     <Tbody key={i}>
                       <tr>
                         {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value}</td>
+                          <td key={j} colSpan={td.colspan}>{td.value_refers === 'distance' ? parseNumber(td.value, { decimal: 2 }) : td.value}</td>
                         ))}
                       </tr>
                     </Tbody>
