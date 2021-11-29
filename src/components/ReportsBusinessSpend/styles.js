@@ -135,7 +135,7 @@ export const Thead = styled.thead`
           text-align: left;
         }
 
-        &:nth-child(4n-1) {
+        &:nth-child(6n-3) {
           border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
         }
       }
@@ -158,7 +158,7 @@ export const Tbody = styled.tbody`
         color: ${props => props.theme?.colors.headingColor};
       }
 
-      &:nth-child(4n-1) {
+      &:nth-child(6n-3) {
         border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
       }
     }
