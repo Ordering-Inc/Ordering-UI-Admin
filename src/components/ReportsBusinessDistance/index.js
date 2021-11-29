@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Download } from 'react-bootstrap-icons'
@@ -40,6 +40,7 @@ const ReportsBusinessDistanceUI = (props) => {
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [chartData, setChartData] = useState(null)
+  const [{ parseNumber }] = useUtils()
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -189,7 +190,7 @@ const ReportsBusinessDistanceUI = (props) => {
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
-                        <td key={j} colSpan={td.colspan}>{td.value}</td>
+                        <td key={j} colSpan={td.colspan}>{td.value_refers === 'average' ? parseNumber(td.value, { decimal: 2 }) : td.value}</td>
                       ))}
                     </tr>
                   </Tbody>
