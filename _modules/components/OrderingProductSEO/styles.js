@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SEOContainer = exports.Label = exports.FormGroup = exports.FormControl = void 0;
+exports.Label = exports.FormControl = exports.FormGroup = exports.SEOContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

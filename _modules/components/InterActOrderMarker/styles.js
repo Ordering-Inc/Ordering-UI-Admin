@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperMapMarker = exports.TextContainer = exports.Text = exports.MapMarkerImg = exports.InfoContainer = void 0;
+exports.Text = exports.TextContainer = exports.InfoContainer = exports.MapMarkerImg = exports.WrapperMapMarker = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

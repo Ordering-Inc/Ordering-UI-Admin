@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SettingsSelectContainer = exports.SelectHeader = exports.SelectContent = exports.OptionsError = exports.Option = void 0;
+exports.OptionsError = exports.Option = exports.SelectContent = exports.SelectHeader = exports.SettingsSelectContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

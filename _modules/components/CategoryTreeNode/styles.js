@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AccordionSection = exports.AccordionItem = exports.AccordionContent = exports.Accordion = void 0;
+exports.AccordionContent = exports.AccordionItem = exports.Accordion = exports.AccordionSection = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

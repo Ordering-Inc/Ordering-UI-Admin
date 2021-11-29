@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserDetailsUI = exports.UserDetails = void 0;
+exports.UserDetails = exports.UserDetailsUI = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
