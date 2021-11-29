@@ -181,7 +181,7 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
 
 var ReportsDriverFilter = function ReportsDriverFilter(props) {
   var AnalyticsBusinessFilterProps = _objectSpread(_objectSpread({}, props), {}, {
-    propsToFetch: ['id', 'name'],
+    // propsToFetch: ['id', 'name', 'drivergroups'],
     isSearchByName: true,
     UIComponent: ReportsDriverFilterUI
   });

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EmptyContent = exports.ReviewBlock = exports.OrdersAcceptSpendContent = exports.TimeContentWrapper = exports.ReviewContentWrapper = exports.OrdersAcceptSpendHeader = exports.Container = void 0;
+exports.TimeContentWrapper = exports.ReviewContentWrapper = exports.ReviewBlock = exports.OrdersAcceptSpendHeader = exports.OrdersAcceptSpendContent = exports.EmptyContent = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

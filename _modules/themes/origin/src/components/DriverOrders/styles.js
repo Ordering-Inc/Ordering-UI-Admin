@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperOrderListing = exports.DriverImage = exports.WrapperDriverImage = exports.DriverInfo = exports.Header = exports.WrapperDriverOrders = void 0;
+exports.WrapperOrderListing = exports.WrapperDriverOrders = exports.WrapperDriverImage = exports.Header = exports.DriverInfo = exports.DriverImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

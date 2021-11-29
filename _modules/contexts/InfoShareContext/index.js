@@ -5,8 +5,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.useInfoShare = useInfoShare;
 exports.InfoShareProvider = exports.InfoShareContext = void 0;
+exports.useInfoShare = useInfoShare;
 
 var _react = _interopRequireWildcard(require("react"));
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AnalyticsStatusSubFilter = exports.AnalyticsStatusSubFilterUI = void 0;
+exports.AnalyticsStatusSubFilterUI = exports.AnalyticsStatusSubFilter = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

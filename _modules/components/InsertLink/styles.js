@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CheckboxWrapper = exports.WrapperInput = exports.InsertLinkContainer = void 0;
+exports.WrapperInput = exports.InsertLinkContainer = exports.CheckboxWrapper = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

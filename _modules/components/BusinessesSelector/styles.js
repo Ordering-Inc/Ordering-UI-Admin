@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessImage = exports.WrapperBusinessImage = exports.OptionCategory = exports.OptionName = exports.OptionContent = exports.PlaceholderTitle = exports.Option = void 0;
+exports.WrapperBusinessImage = exports.PlaceholderTitle = exports.OptionName = exports.OptionContent = exports.OptionCategory = exports.Option = exports.BusinessImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

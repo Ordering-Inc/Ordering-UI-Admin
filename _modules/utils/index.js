@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.getSeconds = exports.getMinutes = exports.getHours = exports.sortInputFields = exports.fieldsToSort = exports.bytesConverter = exports.getAgoMinutes = exports.getStarWidth = exports.convertHoursToMinutes = exports.formatUrlVideo = exports.scrollTo = exports.DriverTipsOptions = exports.capitalize = exports.getIconCard = exports.optimizeImage = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.optimizeImage = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

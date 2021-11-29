@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserTypeFilter = exports.UserTypeFilterUI = void 0;
+exports.UserTypeFilterUI = exports.UserTypeFilter = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
