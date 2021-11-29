@@ -142,7 +142,7 @@ const ReportsDriverFilterUI = (props) => {
 export const ReportsDriverFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
-    propsToFetch: ['id', 'name'],
+    // propsToFetch: ['id', 'name', 'drivergroups'],
     isSearchByName: true,
     UIComponent: ReportsDriverFilterUI
   }

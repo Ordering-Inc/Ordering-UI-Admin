@@ -95,14 +95,14 @@ const ReportsHeatMapUI = (props) => {
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
             <Button
-              onClick={() => setIsDriverFilter(true)}
-            >
-              {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
-            </Button>
-            <Button
               onClick={() => setIsDriverGroupFilter(true)}
             >
               {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setIsDriverFilter(true)}
+            >
+              {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -163,7 +163,9 @@ const ReportsHeatMapUI = (props) => {
           onClose={() => setIsDriverFilter(false)}
         >
           <ReportsDriverFilter
-            {...props} onClose={() => setIsDriverFilter(false)}
+            {...props}
+            onClose={() => setIsDriverFilter(false)}
+            isDriverGroup
           />
         </Modal>
         <Modal

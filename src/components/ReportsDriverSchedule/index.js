@@ -208,14 +208,14 @@ const ReportsDriverScheduleUI = (props) => {
         <ButtonActionList>
           <BrandBusinessWrapper>
             <Button
-              onClick={() => setIsDriverFilter(true)}
-            >
-              {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
-            </Button>
-            <Button
               onClick={() => setIsDriverGroupFilter(true)}
             >
               {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setIsDriverFilter(true)}
+            >
+              {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -245,7 +245,6 @@ const ReportsDriverScheduleUI = (props) => {
               ) : (
                 <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
               )}
-
             </ChartWrapper>
           )}
         </DistancePerBrandWrapper>
@@ -258,7 +257,9 @@ const ReportsDriverScheduleUI = (props) => {
           onClose={() => setIsDriverFilter(false)}
         >
           <ReportsDriverFilter
-            {...props} onClose={() => setIsDriverFilter(false)}
+            {...props}
+            onClose={() => setIsDriverFilter(false)}
+            isDriverGroup
           />
         </Modal>
         <Modal
