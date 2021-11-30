@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import {
@@ -58,6 +58,9 @@ const BusinessProductsListingUI = (props) => {
   const [isProductAdd, setIsProductAdd] = useState(false)
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [businessName, setBusinessName] = useState(null)
+  const actionsGroupRef = useRef()
+  const productsContainerRef = useRef()
+  const productDetailsRef = useRef()
 
   const handleOpenCategoryDetails = (category = null) => {
     if (category && category?.id !== null) {
@@ -155,7 +158,7 @@ const BusinessProductsListingUI = (props) => {
               </BusinessSelector>
             )}
           </HeaderTitleContainer>
-          <ActionsGroup>
+          <ActionsGroup ref={actionsGroupRef}>
             <Button
               borderRadius='8px'
               color='lightPrimary'
@@ -192,10 +195,13 @@ const BusinessProductsListingUI = (props) => {
                 openCategories={openCategories}
                 handleUpdateBusinessState={handleUpdateBusinessState}
                 setCategorySelected={setCategorySelected}
+                actionsGroupRef={actionsGroupRef?.current}
+                productsContainerRef={productsContainerRef?.current}
+                productDetailsRef={productDetailsRef?.current}
               />
             }
           </CategoryListContainer>
-          <ProductListContainer>
+          <ProductListContainer ref={productsContainerRef}>
             <ProductHeader>
               <SingleBusinessCategoryEdit
                 {...props}
@@ -243,15 +249,19 @@ const BusinessProductsListingUI = (props) => {
           />
         )
       }
-      {openProductDetails && (
-        <ProductDetails
-          open={openProductDetails}
-          onClose={handleCloseProductDetails}
-          product={selectedProduct}
-          business={businessState?.business}
-          handleUpdateBusinessState={handleUpdateBusinessState}
-        />
-      )}
+      <div
+        ref={productDetailsRef}
+      >
+        {openProductDetails && (
+          <ProductDetails
+            open={openProductDetails}
+            onClose={handleCloseProductDetails}
+            product={selectedProduct}
+            business={businessState?.business}
+            handleUpdateBusinessState={handleUpdateBusinessState}
+          />
+        )}
+      </div>
     </>
   )
 }
