@@ -69,7 +69,7 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       listener = window.addEventListener('click', function (e) {
         var _containerRef$current;
 
-        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target)) && !productDetailsRef && !(actionsGroupRef !== null && actionsGroupRef !== void 0 && actionsGroupRef.contains(e.target)) && !(productsContainerRef !== null && productsContainerRef !== void 0 && productsContainerRef.contains(e.target))) {
+        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target)) && !(productDetailsRef !== null && productDetailsRef !== void 0 && productDetailsRef.container(e.target)) && !(actionsGroupRef !== null && actionsGroupRef !== void 0 && actionsGroupRef.contains(e.target)) && !(productsContainerRef !== null && productsContainerRef !== void 0 && productsContainerRef.contains(e.target))) {
           handleChangeCategory(null, null);
         }
       });
