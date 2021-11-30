@@ -260,7 +260,6 @@ const ReportsDriverScheduleUI = (props) => {
           <ReportsDriverFilter
             {...props}
             onClose={() => setIsDriverFilter(false)}
-            isDriverGroup
             availableDriverIds={availableDriverIds}
           />
         </Modal>
