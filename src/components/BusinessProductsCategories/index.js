@@ -28,7 +28,7 @@ export const BusinessProductsCategories = (props) => {
     let listener
     if (containerRef?.current && productsContainerRef && actionsGroupRef && productDetailsRef) {
       listener = window.addEventListener('click', (e) => {
-        if (!containerRef?.current?.contains(e.target) && !productDetailsRef && !actionsGroupRef?.contains(e.target) && !productsContainerRef?.contains(e.target)) {
+        if (!containerRef?.current?.contains(e.target) && !productDetailsRef?.container(e.target) && !actionsGroupRef?.contains(e.target) && !productsContainerRef?.contains(e.target)) {
           handleChangeCategory(null, null)
         }
       })
