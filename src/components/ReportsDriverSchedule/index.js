@@ -35,6 +35,7 @@ const ReportsDriverScheduleUI = (props) => {
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [chartData, setChartData] = useState(null)
+  const [availableDriverIds, setAvailableDriverIds] = useState(null)
 
   const barChartRef = useRef(null)
 
@@ -260,6 +261,7 @@ const ReportsDriverScheduleUI = (props) => {
             {...props}
             onClose={() => setIsDriverFilter(false)}
             isDriverGroup
+            availableDriverIds={availableDriverIds}
           />
         </Modal>
         <Modal
@@ -271,7 +273,9 @@ const ReportsDriverScheduleUI = (props) => {
           onClose={() => setIsDriverGroupFilter(false)}
         >
           <ReportsDriverGroupFilter
-            {...props} onClose={() => setIsDriverGroupFilter(false)}
+            {...props}
+            onClose={() => setIsDriverGroupFilter(false)}
+            setAvailableDriverIds={setAvailableDriverIds}
           />
         </Modal>
       </DriverScheduleContainer>

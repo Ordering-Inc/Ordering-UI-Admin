@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { SearchBar } from '../SearchBar'
 import {
@@ -12,7 +12,8 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
 import { Pagination } from '../Pagination'
-import { useLanguage, ReportsDriverFilter as ReportsDriverFilterController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { ReportsDriverFilter as ReportsDriverFilterController } from './naked'
 
 const ReportsDriverFilterUI = (props) => {
   const {
@@ -23,28 +24,12 @@ const ReportsDriverFilterUI = (props) => {
     isAllCheck,
     handleChangeAllCheck,
     searchValue,
-    onSearch
+    onSearch,
+    paginationProps,
+    getDrivers
   } = props
 
   const [, t] = useLanguage()
-
-  // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pagesPerPage, setPagesPerPage] = useState(10)
-
-  // Get current products
-  const [currentPages, setCurrentPages] = useState([])
-  const [totalPages, setTotalPages] = useState(null)
-
-  const handleChangePage = (page) => {
-    setCurrentPage(page)
-  }
-
-  const handleChangePageSize = (pageSize) => {
-    const expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize)
-    setCurrentPage(expectedPage)
-    setPagesPerPage(pageSize)
-  }
 
   const isCheckEnableSate = (id) => {
     const found = driverIds?.find(businessId => businessId === id)
@@ -55,18 +40,23 @@ const ReportsDriverFilterUI = (props) => {
     return valid
   }
 
+  const handleChangePage = (page) => {
+    getDrivers(page, 10)
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(paginationProps.from / pageSize)
+    getDrivers(expectedPage, pageSize)
+  }
+
   useEffect(() => {
-    if (driverList.loading) return
-    let _totalPages
-    if (driverList.drivers.length > 0) {
-      _totalPages = Math.ceil(driverList.drivers.length / pagesPerPage)
+    if (driverList.loading || driverList.drivers.length > 0 || paginationProps.totalPages <= 1) return
+    if (paginationProps.currentPage !== paginationProps.totalPages) {
+      handleChangePage(paginationProps.currentPage)
+    } else {
+      handleChangePage(paginationProps.currentPage - 1)
     }
-    const indexOfLastPost = currentPage * pagesPerPage
-    const indexOfFirstPost = indexOfLastPost - pagesPerPage
-    const _currentProducts = driverList.drivers.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalPages(_totalPages)
-    setCurrentPages(_currentProducts)
-  }, [driverList, currentPage, pagesPerPage])
+  }, [driverList.drivers, paginationProps])
 
   return (
     <>
@@ -100,7 +90,7 @@ const ReportsDriverFilterUI = (props) => {
               )}
               <BusinessName>{t('ALL', 'All')}</BusinessName>
             </BusinessFilterOption>
-            {currentPages.map((driver, i) => (
+            {driverList?.drivers.map((driver, i) => (
               <BusinessFilterOption
                 key={i}
                 onClick={() => handleChangeDriverId(driver?.id)}
@@ -115,10 +105,9 @@ const ReportsDriverFilterUI = (props) => {
             ))}
             {driverList?.drivers?.length > 0 && (
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
+                currentPage={paginationProps.currentPage}
+                totalPages={paginationProps.totalPages}
                 handleChangePage={handleChangePage}
-                defaultPageSize={pagesPerPage}
                 handleChangePageSize={handleChangePageSize}
               />
             )}
@@ -142,8 +131,9 @@ const ReportsDriverFilterUI = (props) => {
 export const ReportsDriverFilter = (props) => {
   const AnalyticsBusinessFilterProps = {
     ...props,
-    // propsToFetch: ['id', 'name', 'drivergroups'],
+    propsToFetch: ['id', 'name', 'lastname', 'driver_groups.id'],
     isSearchByName: true,
+    isSearchByLastName: true,
     UIComponent: ReportsDriverFilterUI
   }
   return <ReportsDriverFilterController {...AnalyticsBusinessFilterProps} />
