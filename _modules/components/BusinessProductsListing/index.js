@@ -131,6 +131,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       businessName = _useState14[0],
       setBusinessName = _useState14[1];
 
+  var actionsGroupRef = (0, _react.useRef)();
+  var productsContainerRef = (0, _react.useRef)();
+  var productDetailsRef = (0, _react.useRef)();
+
   var handleOpenCategoryDetails = function handleOpenCategoryDetails() {
     var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -219,7 +223,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     close: handleClose,
     isOpen: showSelectHeader,
     changBusinessState: changBusinessState
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, {
+    ref: actionsGroupRef
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
@@ -245,8 +251,13 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleOpenCategoryDetails: handleOpenCategoryDetails,
     openCategories: openCategories,
     handleUpdateBusinessState: handleUpdateBusinessState,
-    setCategorySelected: setCategorySelected
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductHeader, null, /*#__PURE__*/_react.default.createElement(_SingleBusinessCategoryEdit.SingleBusinessCategoryEdit, _extends({}, props, {
+    setCategorySelected: setCategorySelected,
+    actionsGroupRef: actionsGroupRef === null || actionsGroupRef === void 0 ? void 0 : actionsGroupRef.current,
+    productsContainerRef: productsContainerRef === null || productsContainerRef === void 0 ? void 0 : productsContainerRef.current,
+    productDetailsRef: productDetailsRef === null || productDetailsRef === void 0 ? void 0 : productDetailsRef.current
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, {
+    ref: productsContainerRef
+  }, /*#__PURE__*/_react.default.createElement(_styles.ProductHeader, null, /*#__PURE__*/_react.default.createElement(_SingleBusinessCategoryEdit.SingleBusinessCategoryEdit, _extends({}, props, {
     category: categorySelected,
     categorySelected: categorySelected,
     handleChangeCategory: handleChangeCategory,
@@ -274,13 +285,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     category: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.category,
     businessState: businessState,
     categorySelected: categorySelected
-  })), openProductDetails && /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    ref: productDetailsRef
+  }, openProductDetails && /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
     open: openProductDetails,
     onClose: handleCloseProductDetails,
     product: selectedProduct,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleUpdateBusinessState: handleUpdateBusinessState
-  }));
+  })));
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {

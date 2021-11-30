@@ -47,7 +47,10 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
   var businessState = props.businessState,
       categorySelected = props.categorySelected,
       handleChangeCategory = props.handleChangeCategory,
-      handleOpenCategoryDetails = props.handleOpenCategoryDetails;
+      handleOpenCategoryDetails = props.handleOpenCategoryDetails,
+      actionsGroupRef = props.actionsGroupRef,
+      productsContainerRef = props.productsContainerRef,
+      productDetailsRef = props.productDetailsRef;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -60,16 +63,22 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
 
   var containerRef = (0, _react.useRef)();
   (0, _react.useEffect)(function () {
-    if (containerRef !== null && containerRef !== void 0 && containerRef.current) {
-      window.addEventListener('click', function (e) {
+    var listener;
+
+    if (containerRef !== null && containerRef !== void 0 && containerRef.current && productsContainerRef && actionsGroupRef && productDetailsRef) {
+      listener = window.addEventListener('click', function (e) {
         var _containerRef$current;
 
-        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target))) {
+        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target)) && !productDetailsRef && !(actionsGroupRef !== null && actionsGroupRef !== void 0 && actionsGroupRef.contains(e.target)) && !(productsContainerRef !== null && productsContainerRef !== void 0 && productsContainerRef.contains(e.target))) {
           handleChangeCategory(null, null);
         }
       });
     }
-  }, [containerRef === null || containerRef === void 0 ? void 0 : containerRef.current]);
+
+    return function () {
+      window.removeEventListener('click', listener);
+    };
+  }, [containerRef === null || containerRef === void 0 ? void 0 : containerRef.current, productDetailsRef]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, {
     ref: containerRef
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
