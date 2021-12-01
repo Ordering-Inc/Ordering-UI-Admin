@@ -35,15 +35,16 @@ const ReportsDriverScheduleUI = (props) => {
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [chartData, setChartData] = useState(null)
+  const [availableDriverIds, setAvailableDriverIds] = useState(null)
 
   const barChartRef = useRef(null)
 
-  const generateAvailable = (status) => {
+  const generateData = (dataKey, status) => {
     const _available = []
     const _notAvailable = []
     reportData.content.data.forEach(data => {
       data.lines.forEach(line => {
-        if (line.name.toLowerCase().search('available') > -1) {
+        if (line.label_key === dataKey) {
           line.ranges.forEach(range => {
             if (range.value) {
               const from = getDiff(reportData.content.from, range.from)
@@ -65,35 +66,6 @@ const ReportsDriverScheduleUI = (props) => {
       })
     })
     return status ? _available : _notAvailable
-  }
-
-  const generateBusy = (status) => {
-    const _busy = []
-    const _notBusy = []
-    reportData.content.data.forEach(data => {
-      data.lines.forEach(line => {
-        if (line.name.toLowerCase().search('busy') > -1) {
-          line.ranges.forEach(range => {
-            if (range.value) {
-              const from = getDiff(reportData.content.from, range.from)
-              const to = getDiff(reportData.content.from, range.to)
-              _busy.push({
-                y: data.metadata.name,
-                x: [from, to]
-              })
-            } else {
-              const from = getDiff(reportData.content.from, range.from)
-              const to = getDiff(reportData.content.from, range.to)
-              _notBusy.push({
-                y: data.metadata.name,
-                x: [from, to]
-              })
-            }
-          })
-        }
-      })
-    })
-    return status ? _busy : _notBusy
   }
 
   const getDiff = (start, end) => {
@@ -132,26 +104,26 @@ const ReportsDriverScheduleUI = (props) => {
       const _data = {
         datasets: [
           {
-            label: 'Available',
-            data: generateAvailable(true),
+            label: t('AVAILABLE', 'Available'),
+            data: generateData('REPORT_HEADER_AVAILABLE', true),
             backgroundColor: '#2C7BE5',
             stack: 'Stack 0'
           },
           {
-            label: 'Not available',
-            data: generateAvailable(),
+            label: t('NOT_AVAILABLE', 'Not available'),
+            data: generateData('REPORT_HEADER_AVAILABLE', false),
             backgroundColor: '#F0879A',
             stack: 'Stack 0'
           },
           {
-            label: 'Busy',
-            data: generateBusy(true),
+            label: t('BUSY', 'Busy'),
+            data: generateData('REPORT_HEADER_BUSY', true),
             backgroundColor: '#52C9FD',
             stack: 'Stack 1'
           },
           {
-            label: 'Not busy',
-            data: generateBusy(),
+            label: t('NOT_BUSY', 'Not busy'),
+            data: generateData('REPORT_HEADER_BUSY', false),
             backgroundColor: '#FFC700',
             stack: 'Stack 1'
           }
@@ -259,7 +231,7 @@ const ReportsDriverScheduleUI = (props) => {
           <ReportsDriverFilter
             {...props}
             onClose={() => setIsDriverFilter(false)}
-            isDriverGroup
+            availableDriverIds={availableDriverIds}
           />
         </Modal>
         <Modal
@@ -271,7 +243,9 @@ const ReportsDriverScheduleUI = (props) => {
           onClose={() => setIsDriverGroupFilter(false)}
         >
           <ReportsDriverGroupFilter
-            {...props} onClose={() => setIsDriverGroupFilter(false)}
+            {...props}
+            onClose={() => setIsDriverGroupFilter(false)}
+            setAvailableDriverIds={setAvailableDriverIds}
           />
         </Modal>
       </DriverScheduleContainer>
