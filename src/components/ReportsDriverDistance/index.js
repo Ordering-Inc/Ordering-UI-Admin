@@ -37,6 +37,7 @@ const ReportsDriverDistanceUI = (props) => {
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [availableDriverIds, setAvailableDriverIds] = useState(null)
   const [{ parseNumber }] = useUtils()
 
   const tableRef = useRef(null)
@@ -214,7 +215,7 @@ const ReportsDriverDistanceUI = (props) => {
           <ReportsDriverFilter
             {...props}
             onClose={() => setIsDriverFilter(false)}
-            isDriverGroup
+            availableDriverIds={availableDriverIds}
           />
         </Modal>
         <Modal
@@ -226,7 +227,9 @@ const ReportsDriverDistanceUI = (props) => {
           onClose={() => setIsDriverGroupFilter(false)}
         >
           <ReportsDriverGroupFilter
-            {...props} onClose={() => setIsDriverGroupFilter(false)}
+            {...props}
+            onClose={() => setIsDriverGroupFilter(false)}
+            setAvailableDriverIds={setAvailableDriverIds}
           />
         </Modal>
       </DriverDistanceContainer>

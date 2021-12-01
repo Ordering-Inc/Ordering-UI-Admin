@@ -89,7 +89,7 @@ const ReportsDriverGroupFilterUI = (props) => {
 export const ReportsDriverGroupFilter = (props) => {
   const reportsDriverGroupFilterProps = {
     ...props,
-    propsToFetch: ['id', 'name', 'enabled'],
+    propsToFetch: ['id', 'name', 'enabled', 'drivers'],
     UIComponent: ReportsDriverGroupFilterUI
   }
   return <ReportsDriverGroupFilterController {...reportsDriverGroupFilterProps} />
