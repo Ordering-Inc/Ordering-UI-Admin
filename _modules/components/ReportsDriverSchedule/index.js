@@ -103,14 +103,19 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
       chartData = _useState8[0],
       setChartData = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      availableDriverIds = _useState10[0],
+      setAvailableDriverIds = _useState10[1];
+
   var barChartRef = (0, _react.useRef)(null);
 
-  var generateAvailable = function generateAvailable(status) {
+  var generateData = function generateData(dataKey, status) {
     var _available = [];
     var _notAvailable = [];
     reportData.content.data.forEach(function (data) {
       data.lines.forEach(function (line) {
-        if (line.name.toLowerCase().search('available') > -1) {
+        if (line.label_key === dataKey) {
           line.ranges.forEach(function (range) {
             if (range.value) {
               var from = getDiff(reportData.content.from, range.from);
@@ -135,38 +140,6 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
       });
     });
     return status ? _available : _notAvailable;
-  };
-
-  var generateBusy = function generateBusy(status) {
-    var _busy = [];
-    var _notBusy = [];
-    reportData.content.data.forEach(function (data) {
-      data.lines.forEach(function (line) {
-        if (line.name.toLowerCase().search('busy') > -1) {
-          line.ranges.forEach(function (range) {
-            if (range.value) {
-              var from = getDiff(reportData.content.from, range.from);
-              var to = getDiff(reportData.content.from, range.to);
-
-              _busy.push({
-                y: data.metadata.name,
-                x: [from, to]
-              });
-            } else {
-              var _from2 = getDiff(reportData.content.from, range.from);
-
-              var _to2 = getDiff(reportData.content.from, range.to);
-
-              _notBusy.push({
-                y: data.metadata.name,
-                x: [_from2, _to2]
-              });
-            }
-          });
-        }
-      });
-    });
-    return status ? _busy : _notBusy;
   };
 
   var getDiff = function getDiff(start, end) {
@@ -210,23 +183,23 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$d = _reportData$content.data) === null || _reportData$content$d === void 0 ? void 0 : _reportData$content$d.length) > 0) {
       var _data = {
         datasets: [{
-          label: 'Available',
-          data: generateAvailable(true),
+          label: t('AVAILABLE', 'Available'),
+          data: generateData('REPORT_HEADER_AVAILABLE', true),
           backgroundColor: '#2C7BE5',
           stack: 'Stack 0'
         }, {
-          label: 'Not available',
-          data: generateAvailable(),
+          label: t('NOT_AVAILABLE', 'Not available'),
+          data: generateData('REPORT_HEADER_AVAILABLE', false),
           backgroundColor: '#F0879A',
           stack: 'Stack 0'
         }, {
-          label: 'Busy',
-          data: generateBusy(true),
+          label: t('BUSY', 'Busy'),
+          data: generateData('REPORT_HEADER_BUSY', true),
           backgroundColor: '#52C9FD',
           stack: 'Stack 1'
         }, {
-          label: 'Not busy',
-          data: generateBusy(),
+          label: t('NOT_BUSY', 'Not busy'),
+          data: generateData('REPORT_HEADER_BUSY', false),
           backgroundColor: '#FFC700',
           stack: 'Stack 1'
         }]
@@ -319,7 +292,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     onClose: function onClose() {
       return setIsDriverFilter(false);
     },
-    isDriverGroup: true
+    availableDriverIds: availableDriverIds
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
@@ -332,7 +305,8 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsDriverGroupFilter(false);
-    }
+    },
+    setAvailableDriverIds: setAvailableDriverIds
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('DRIVER_SCHEDULE', 'Driver schedule'),
     content: alertState.content,

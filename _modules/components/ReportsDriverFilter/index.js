@@ -67,43 +67,13 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
       isAllCheck = props.isAllCheck,
       handleChangeAllCheck = props.handleChangeAllCheck,
       searchValue = props.searchValue,
-      _onSearch = props.onSearch;
+      _onSearch = props.onSearch,
+      paginationProps = props.paginationProps,
+      getDrivers = props.getDrivers;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1]; // Change page
-
-
-  var _useState = (0, _react.useState)(1),
-      _useState2 = _slicedToArray(_useState, 2),
-      currentPage = _useState2[0],
-      setCurrentPage = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(10),
-      _useState4 = _slicedToArray(_useState3, 2),
-      pagesPerPage = _useState4[0],
-      setPagesPerPage = _useState4[1]; // Get current products
-
-
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      currentPages = _useState6[0],
-      setCurrentPages = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      totalPages = _useState8[0],
-      setTotalPages = _useState8[1];
-
-  var handleChangePage = function handleChangePage(page) {
-    setCurrentPage(page);
-  };
-
-  var handleChangePageSize = function handleChangePageSize(pageSize) {
-    var expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize);
-    setCurrentPage(expectedPage);
-    setPagesPerPage(pageSize);
-  };
+      t = _useLanguage2[1];
 
   var isCheckEnableSate = function isCheckEnableSate(id) {
     var found = driverIds === null || driverIds === void 0 ? void 0 : driverIds.find(function (businessId) {
@@ -118,23 +88,24 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
     return valid;
   };
 
+  var handleChangePage = function handleChangePage(page) {
+    getDrivers(page, 10);
+  };
+
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    var expectedPage = Math.ceil(paginationProps.from / pageSize);
+    getDrivers(expectedPage, pageSize);
+  };
+
   (0, _react.useEffect)(function () {
-    if (driverList.loading) return;
+    if (driverList.loading || driverList.drivers.length > 0 || paginationProps.totalPages <= 1) return;
 
-    var _totalPages;
-
-    if (driverList.drivers.length > 0) {
-      _totalPages = Math.ceil(driverList.drivers.length / pagesPerPage);
+    if (paginationProps.currentPage !== paginationProps.totalPages) {
+      handleChangePage(paginationProps.currentPage);
+    } else {
+      handleChangePage(paginationProps.currentPage - 1);
     }
-
-    var indexOfLastPost = currentPage * pagesPerPage;
-    var indexOfFirstPost = indexOfLastPost - pagesPerPage;
-
-    var _currentProducts = driverList.drivers.slice(indexOfFirstPost, indexOfLastPost);
-
-    setTotalPages(_totalPages);
-    setCurrentPages(_currentProducts);
-  }, [driverList, currentPage, pagesPerPage]);
+  }, [driverList.drivers, paginationProps]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsBusinessFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     search: searchValue,
     isCustomLayout: true,
@@ -156,7 +127,7 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
     onClick: handleChangeAllCheck
   }, isAllCheck ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, t('ALL', 'All'))), currentPages.map(function (driver, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, t('ALL', 'All'))), driverList === null || driverList === void 0 ? void 0 : driverList.drivers.map(function (driver, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterOption, {
       key: i,
       onClick: function onClick() {
@@ -166,10 +137,9 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, driver === null || driver === void 0 ? void 0 : driver.name));
   }), (driverList === null || driverList === void 0 ? void 0 : (_driverList$drivers = driverList.drivers) === null || _driverList$drivers === void 0 ? void 0 : _driverList$drivers.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
+    currentPage: paginationProps.currentPage,
+    totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
-    defaultPageSize: pagesPerPage,
     handleChangePageSize: handleChangePageSize
   }))), /*#__PURE__*/_react.default.createElement(_styles.FilterBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "7.6px",
@@ -181,8 +151,9 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
 
 var ReportsDriverFilter = function ReportsDriverFilter(props) {
   var AnalyticsBusinessFilterProps = _objectSpread(_objectSpread({}, props), {}, {
-    // propsToFetch: ['id', 'name', 'drivergroups'],
+    propsToFetch: ['id', 'name', 'lastname', 'driver_groups.id'],
     isSearchByName: true,
+    isSearchByLastName: true,
     UIComponent: ReportsDriverFilterUI
   });
 

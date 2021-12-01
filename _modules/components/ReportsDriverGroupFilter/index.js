@@ -105,7 +105,7 @@ var ReportsDriverGroupFilterUI = function ReportsDriverGroupFilterUI(props) {
 
 var ReportsDriverGroupFilter = function ReportsDriverGroupFilter(props) {
   var reportsDriverGroupFilterProps = _objectSpread(_objectSpread({}, props), {}, {
-    propsToFetch: ['id', 'name', 'enabled'],
+    propsToFetch: ['id', 'name', 'enabled', 'drivers'],
     UIComponent: ReportsDriverGroupFilterUI
   });
 

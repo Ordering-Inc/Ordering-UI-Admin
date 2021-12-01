@@ -99,6 +99,11 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
       alertState = _useState8[0],
       setAlertState = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      availableDriverIds = _useState10[0],
+      setAvailableDriverIds = _useState10[1];
+
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parseNumber = _useUtils2[0].parseNumber;
@@ -261,7 +266,7 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     onClose: function onClose() {
       return setIsDriverFilter(false);
     },
-    isDriverGroup: true
+    availableDriverIds: availableDriverIds
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
@@ -274,7 +279,8 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsDriverGroupFilter(false);
-    }
+    },
+    setAvailableDriverIds: setAvailableDriverIds
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('DRIVER_SCHEDULE', 'Driver schedule'),
     content: alertState.content,

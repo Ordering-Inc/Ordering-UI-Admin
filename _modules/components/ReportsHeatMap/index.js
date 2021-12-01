@@ -95,10 +95,15 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
       alertState = _useState8[0],
       setAlertState = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      isHeat = _useState10[0],
-      setIsHeat = _useState10[1];
+      availableDriverIds = _useState10[0],
+      setAvailableDriverIds = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isHeat = _useState12[0],
+      setIsHeat = _useState12[1];
 
   var theme = (0, _styledComponents.useTheme)(); // const googleMapsApiKey = configs?.google_maps_api_key?.value
 
@@ -213,7 +218,7 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     onClose: function onClose() {
       return setIsDriverFilter(false);
     },
-    isDriverGroup: true
+    availableDriverIds: availableDriverIds
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
@@ -226,7 +231,8 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsDriverGroupFilter(false);
-    }
+    },
+    setAvailableDriverIds: setAvailableDriverIds
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('HEAT_MAP', 'Heat map'),
     content: alertState.content,
