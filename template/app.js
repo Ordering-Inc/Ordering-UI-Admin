@@ -44,7 +44,7 @@ import { DriversCompaniesList } from './pages/DriversCompaniesList'
 import { DriversGroupsList } from './pages/DriversGroupsList'
 import { Support } from './pages/Support'
 import { AdvancedReports } from './pages/AdvancedReports'
-import { EnterprisePromotions } from './pages/EnterprisePromotions'
+import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -315,7 +315,7 @@ export const App = () => {
                     <Route exact path='/marketing/promotions-enterprise'>
                       {
                         auth
-                          ? <EnterprisePromotions />
+                          ? <EnterprisePromotionList />
                           : <Redirect to='/login' />
                       }
                     </Route>
