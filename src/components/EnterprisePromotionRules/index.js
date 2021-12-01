@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Button, Checkbox, Input } from '../../styles'
 import { Select } from '../../styles/Select/FirstSelect'
-import { RecordCircleFill, Circle, Image as ImageIcon } from 'react-bootstrap-icons'
+import { RecordCircleFill, Circle, ChevronRight } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 
@@ -18,8 +18,6 @@ import {
   CondtionItem,
   Option,
   SelectWrapper,
-  FreeProductSection,
-  ProductImageWrapper,
   DiscountContainer
 } from './styles'
 
@@ -86,20 +84,6 @@ export const EnterprisePromotionRules = (props) => {
             onChange={val => handleChangeItem({ target: val })}
           />
         </SelectWrapper>
-
-        {/* <FreeProductSection>
-          <div>
-            <span>{t('FREE_PRODUCT', 'FREE product')}</span>
-            <span>{t('EDIT', 'Edit')}</span>
-          </div>
-          <div>
-            <ProductImageWrapper>
-              <ImageIcon />
-            </ProductImageWrapper>
-            <span>prouct name</span>
-          </div>
-        </FreeProductSection> */}
-
         <DiscountContainer>
           <div>
             <label>{t('DISCOUNT_TYPE', 'Discount type')}</label>
@@ -183,16 +167,13 @@ export const EnterprisePromotionRules = (props) => {
 
         <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
         <CondtionItem
-          active
-        >
-          <RecordCircleFill />
-          <span>{t('NONE', 'None')}</span>
-        </CondtionItem>
-        <CondtionItem
           active={false}
         >
-          <Circle />
-          <span>{t('FRONT_VISUALS_APPLY', 'Apply')}</span>
+          <div>
+            <Circle />
+            <span>{t('FRONT_VISUALS_APPLY', 'Apply')}</span>
+          </div>
+          <ChevronRight />
         </CondtionItem>
 
         <Button

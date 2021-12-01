@@ -11,7 +11,9 @@ export const EnterprisePromontionList = (props) => {
   const {
     UIComponent,
     paginationSettings,
-    propsToFetch
+    propsToFetch,
+    isSearchByPromotionName,
+    isSearchByPromotionDescription
   } = props
 
   const [ordering] = useApi()
@@ -38,8 +40,43 @@ export const EnterprisePromontionList = (props) => {
     try {
       setPromotionListState({ ...promotionListState, loading: true })
 
+      let where = null
+      const conditions = []
       if (searchValue) {
+        const searchConditions = []
+        if (isSearchByPromotionName) {
+          searchConditions.push(
+            {
+              attribute: 'name',
+              value: {
+                condition: 'ilike',
+                value: encodeURI(`%${searchValue}%`)
+              }
+            }
+          )
+        }
+        if (isSearchByPromotionDescription) {
+          searchConditions.push(
+            {
+              attribute: 'description',
+              value: {
+                condition: 'ilike',
+                value: encodeURI(`%${searchValue}%`)
+              }
+            }
+          )
+        }
+        conditions.push({
+          conector: 'OR',
+          conditions: searchConditions
+        })
+      }
 
+      if (conditions.length) {
+        where = {
+          conditions,
+          conector: 'AND'
+        }
       }
 
       const requestOptions = {
@@ -49,7 +86,11 @@ export const EnterprisePromontionList = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const response = await fetch(`${ordering.root}/offers?page=${page}&page_size=${pageSize}8&params=${propsToFetch.toString()}`, requestOptions)
+      const fetchEndpoint = where
+        ? `${ordering.root}/offers?page=${page}&page_size=${pageSize}8&params=${propsToFetch.toString()}&&where=${JSON.stringify(where)}`
+        : `${ordering.root}/offers?page=${page}&page_size=${pageSize}8&params=${propsToFetch.toString()}`
+
+      const response = await fetch(fetchEndpoint, requestOptions)
       const content = await response.json()
       if (!content.error) {
         setPromotionListState({ promotions: content.result, loading: false, error: null })
@@ -289,6 +330,8 @@ export const EnterprisePromontionList = (props) => {
             promotionListState={promotionListState}
             paginationProps={paginationProps}
             setPaginationProps={setPaginationProps}
+            searchValue={searchValue}
+            onSearch={setSearchValue}
             getPromotions={getPromotions}
             dataSelected={dataSelected}
             handleDragStart={handleDragStart}

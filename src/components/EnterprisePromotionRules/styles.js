@@ -18,7 +18,7 @@ export const CouponContainer = styled.div`
 export const CouponHeader = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   cursor: pointer;
 
   ${({ active }) => active && css`
@@ -105,20 +105,31 @@ export const DiscountOption = styled.div`
 export const CondtionItem = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
   padding: 12px 0;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  > span {
-    font-size: 14px;
-    ${props => props.theme?.rtl ? css`
-      margin-right: 13px;
-    ` : css`
-      margin-left: 13px;
-    `}
+
+  > div {
+    > span {
+      font-size: 14px;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 13px;
+      ` : css`
+        margin-left: 13px;
+      `}
+    }
+  }
+
+  > svg {
+    color: ${props => props.theme.colors.secundaryLight};
   }
 
   ${({ active }) => active && css`
-    svg {
-      color: ${props => props.theme.colors.primary};
+    > div {
+      svg {
+        color: ${props => props.theme.colors.primary};
+      }
     }
   `}
 `
@@ -137,55 +148,6 @@ export const SelectWrapper = styled.div`
       padding-top: 4px;
       padding-bottom: 4px;
     }
-  }
-`
-export const FreeProductSection = styled.div`
-  margin-top: 27px;
-  > div {
-    &:first-child {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      span {
-        &:first-child {
-          font-size: 16px;
-          font-weight: 600;
-        }
-        &:last-child {
-          cursor: pointer;
-          color: ${props => props.theme.colors.primary};
-          font-weight: 500;
-          font-size: 12px;
-        }
-      }
-    }
-    &:last-child {
-      display: flex;
-      align-items: center;
-      span {
-        color: ${props => props.theme.colors.secundaryLight};
-        ${props => props.theme?.rtl ? css`
-          margin-right: 13px;
-        ` : css`
-          margin-left: 13px;
-        `}
-      }
-    }
-  }
-`
-export const ProductImageWrapper = styled.div`
-  border-radius: 8px;
-  background: ${props => props.theme.colors.borderColor};
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    font-size: 16px;
-    color: #ADB5BD;
   }
 `
 export const DiscountContainer = styled.div`
