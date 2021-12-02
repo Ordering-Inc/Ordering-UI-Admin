@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, BusinessAnalytics as BusinessAnalyticsController } from 'ordering-components-admin'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button, IconButton } from '../../styles/Buttons'
@@ -16,7 +16,6 @@ import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsSpendList } from '../AnalyticsSpendList'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
-import { BusinessAnalytics as BusinessAnalyticsController } from './naked'
 
 import {
   BusinessAnalyticsContainer,
