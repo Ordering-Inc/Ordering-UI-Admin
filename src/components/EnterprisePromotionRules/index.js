@@ -184,14 +184,14 @@ export const EnterprisePromotionRules = (props) => {
 
         <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
         <CondtionItem
-          active={false}
+          active={isShowConditions}
           onClick={() => {
             setMoveDistance(700)
             setIsShowConditions(true)
           }}
         >
           <div>
-            <Circle />
+            {isShowConditions ? <RecordCircleFill /> : <Circle />}
             <span>{t('FRONT_VISUALS_APPLY', 'Apply')}</span>
           </div>
           <ChevronRight />

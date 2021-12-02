@@ -9,29 +9,23 @@ import {
 
 export const EnterprisePromotionEditCondition = (props) => {
   const {
+    title,
     condition,
     promotionState,
     formState,
-    handleChangeItem,
     handleChangeInput,
     onClickDone
   } = props
 
   const [, t] = useLanguage()
 
-  const getName = (condition) => {
-    const langKey = condition.toUpperCase()
-    const defaultLang = condition.replace(/_/g, ' ')
-    return t(langKey, defaultLang)
-  }
-
   return (
     <>
       {condition && (
         <SingleEditConditionContainer>
-          <h1>{getName(condition)}</h1>
+          <h1>{title}</h1>
           <InputWrapper>
-            <label>{getName(condition)}</label>
+            <label>{title}</label>
             <Input
               name={condition}
               value={formState.changes[condition] ?? promotionState?.promotion[condition] ?? ''}

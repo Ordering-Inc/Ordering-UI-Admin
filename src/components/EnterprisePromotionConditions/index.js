@@ -14,22 +14,33 @@ import {
 
 export const EnterprisePromotionConditions = (props) => {
   const {
+    isAddMode,
     formState,
+    actionState,
     promotionState,
-    handleUpdateClick
+    handleUpdateClick,
+    handleAddPromotion
   } = props
 
   const [, t] = useLanguage()
   const [openSingleModal, setOpenSingleModal] = useState(false)
   const [selectedCondition, setSelectedCondition] = useState(null)
+  const [selectedTitle, setSelectedTitle] = useState(null)
+
+  const singleConditions = [
+    'limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum'
+  ]
 
   const integerConditions = [
     'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes', ''
   ]
 
-  const handleSingleEdit = (condition) => {
+  const handlePromotionEdit = (condition, title) => {
     setSelectedCondition(condition)
-    setOpenSingleModal(true)
+    setSelectedTitle(title)
+    if (singleConditions.includes(condition)) {
+      setOpenSingleModal(true)
+    }
   }
 
   const conditions = [
@@ -57,13 +68,15 @@ export const EnterprisePromotionConditions = (props) => {
           <ConditionItem key={index}>
             <div>
               <Checkbox
-                defaultChecked={formState.changes[condition] || promotionState.promotion[condition]}
+                defaultChecked={
+                  formState.changes[condition.attribute] || promotionState.promotion[condition.attribute]
+                }
                 disabled
               />
               <span>{condition.title}</span>
             </div>
             <EditButton
-              onClick={() => handleSingleEdit(condition)}
+              onClick={() => handlePromotionEdit(condition.attribute, condition.title)}
             >
               <Pencil />
             </EditButton>
@@ -73,7 +86,8 @@ export const EnterprisePromotionConditions = (props) => {
         <Button
           borderRadius='8px'
           color='primary'
-          onClick={() => handleUpdateClick()}
+          onClick={() => isAddMode ? handleAddPromotion() : handleUpdateClick()}
+          disabled={Object.keys(formState.changes).length === 0 || actionState.loading}
         >
           {t('SAVE', 'Save')}
         </Button>
@@ -86,6 +100,7 @@ export const EnterprisePromotionConditions = (props) => {
       >
         <EnterprisePromotionEditCondition
           {...props}
+          title={selectedTitle}
           condition={selectedCondition}
           onClickDone={() => setOpenSingleModal(false)}
         />
