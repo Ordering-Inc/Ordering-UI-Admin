@@ -32,6 +32,7 @@ export const EnterprisePromontionList = (props) => {
   })
   const [dataSelected, setDataSelected] = useState(null)
   const [sitesState, setSitesState] = useState({ loading: false, sites: [], error: null })
+  const [paymethodsState, setPaymethodsState] = useState({ loading: false, paymethods: [], error: null })
 
   /**
    * Method to get the promotions from API
@@ -309,6 +310,33 @@ export const EnterprisePromontionList = (props) => {
     }
   }
 
+  /**
+   * Method to get all the paymethods from API
+   */
+  const getPaymethods = async () => {
+    try {
+      setPaymethodsState({ ...paymethodsState, loading: true })
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const response = await fetch(`${ordering.root}/paymethods?where=${JSON.stringify({ enabled: true })}`, requestOptions)
+      const content = await response.json()
+      if (!content.error) {
+        setPaymethodsState({ paymethods: content.result, loading: false, error: null })
+      }
+    } catch (err) {
+      setPaymethodsState({
+        ...paymethodsState,
+        loading: false,
+        error: [err.message]
+      })
+    }
+  }
+
   useEffect(() => {
     if (promotionListState.loading) return
     getPromotions(1, paginationProps.pageSize)
@@ -316,6 +344,7 @@ export const EnterprisePromontionList = (props) => {
 
   useEffect(() => {
     getSites()
+    getPaymethods()
   }, [])
 
   return (
@@ -325,6 +354,7 @@ export const EnterprisePromontionList = (props) => {
           <UIComponent
             {...props}
             sitesState={sitesState}
+            paymethodsState={paymethodsState}
             promotionListState={promotionListState}
             paginationProps={paginationProps}
             setPaginationProps={setPaginationProps}

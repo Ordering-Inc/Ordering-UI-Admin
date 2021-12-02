@@ -24,7 +24,8 @@ const EnterprisePromontionListingUI = (props) => {
     promotionListState,
     handleSuccessUpdatePromotions,
     handleSuccessAddPromotion,
-    sitesState
+    sitesState,
+    paymethodsState
   } = props
 
   const [, t] = useLanguage()
@@ -95,6 +96,7 @@ const EnterprisePromontionListingUI = (props) => {
         >
           <EnterprisePromotionDetails
             sitesState={sitesState}
+            paymethodsState={paymethodsState}
             promotion={selectedPromotion}
             promotionsList={promotionListState.promotions}
             handleSuccessUpdatePromotions={handleSuccessUpdatePromotions}

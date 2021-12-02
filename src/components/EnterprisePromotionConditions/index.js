@@ -5,6 +5,7 @@ import { Pencil } from 'react-bootstrap-icons'
 import { Modal } from '../Modal'
 import { EnterprisePromotionEditCondition } from '../EnterprisePromotionEditCondition'
 import { EnterprisePromotionOrderTypes } from '../EnterprisePromotionOrderTypes'
+import { EnterprisePromotionPaymethods } from '../EnterprisePromotionPaymethods'
 
 import {
   ConditionsContainer,
@@ -59,6 +60,13 @@ export const EnterprisePromotionConditions = (props) => {
     { id: 12, title: t('MINIMUN_PURCHASED', 'Minimum purchase'), attribute: 'minimum' }
   ]
 
+  const handleClickSave = () => {
+    if (isAddMode) handleAddPromotion()
+    else handleUpdateClick()
+    setOpenSingleModal(false)
+    setOpenMultipleModal(false)
+  }
+
   return (
     <>
       <ConditionsContainer>
@@ -88,7 +96,7 @@ export const EnterprisePromotionConditions = (props) => {
         <Button
           borderRadius='8px'
           color='primary'
-          onClick={() => isAddMode ? handleAddPromotion() : handleUpdateClick()}
+          onClick={() => handleClickSave()}
           disabled={Object.keys(formState.changes).length === 0 || actionState.loading}
         >
           {t('SAVE', 'Save')}
@@ -104,7 +112,7 @@ export const EnterprisePromotionConditions = (props) => {
           {...props}
           title={selectedTitle}
           condition={selectedCondition}
-          onClickDone={() => setOpenSingleModal(false)}
+          onClickDone={() => handleClickSave()}
         />
       </Modal>
       <Modal
@@ -115,7 +123,13 @@ export const EnterprisePromotionConditions = (props) => {
         {selectedCondition === 'order_types_allowed' && (
           <EnterprisePromotionOrderTypes
             {...props}
-            onClickDone={() => setOpenMultipleModal(false)}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
+        {selectedCondition === 'paymethods' && (
+          <EnterprisePromotionPaymethods
+            {...props}
+            onClickDone={() => handleClickSave()}
           />
         )}
       </Modal>
