@@ -17,7 +17,8 @@ const EnterprisePromotionDetailsUI = (props) => {
   const {
     promotionState,
     formState,
-    handleChangeItem
+    handleChangeItem,
+    setMoveDistance
   } = props
 
   const [, t] = useLanguage()
@@ -29,6 +30,12 @@ const EnterprisePromotionDetailsUI = (props) => {
     { key: 'Business', content: t('CONTROL_PANEL_BUSINESS', 'Business') },
     { key: 'custom_fields', content: t('CUSTOM_FEILDS', 'Custom fields') }
   ]
+
+  const handleClickTab = (option) => {
+    setMoveDistance(0)
+    setSelectedOption(option)
+  }
+
   return (
     <DetailsContainer>
       <Header>
@@ -48,7 +55,7 @@ const EnterprisePromotionDetailsUI = (props) => {
             <Tab
               key={option.key}
               active={selectedOption === option.key}
-              onClick={() => setSelectedOption(option.key)}
+              onClick={() => handleClickTab(option.key)}
             >
               {option.content}
             </Tab>

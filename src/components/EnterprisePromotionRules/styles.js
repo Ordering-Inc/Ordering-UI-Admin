@@ -10,7 +10,7 @@ export const FormInput = styled.form`
 export const SectionTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
-  margin: 24px 0 18px 0;
+  margin: 30px 0 18px 0;
 `
 export const CouponContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};  

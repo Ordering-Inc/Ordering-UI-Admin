@@ -39,7 +39,6 @@ export const EnterprisePromontionList = (props) => {
   const getPromotions = async (page, pageSize) => {
     try {
       setPromotionListState({ ...promotionListState, loading: true })
-
       let where = null
       const conditions = []
       if (searchValue) {
@@ -101,6 +100,12 @@ export const EnterprisePromontionList = (props) => {
           totalItems: content.pagination.total,
           from: content.pagination.from,
           to: content.pagination.to
+        })
+      } else {
+        setPromotionListState({
+          ...promotionListState,
+          loading: false,
+          error: content.result
         })
       }
     } catch (err) {
@@ -211,10 +216,7 @@ export const EnterprisePromontionList = (props) => {
     if (transferPromotionRank === null && dropPromotionRank === null) {
       dropPromotionRank = 1
     }
-
-    console.log(transferPromotionId, dropPromotionRank)
-
-    handleChangeCategoryRank(transferPromotionId, { rank: dropPromotionRank })
+    // handleChangeCategoryRank(transferPromotionId, { rank: dropPromotionRank })
   }
 
   /**
@@ -249,14 +251,10 @@ export const EnterprisePromontionList = (props) => {
         showToast(ToastType.Success, t('CATEOGORY_UPDATED', 'Category updated'))
       }
     } catch (err) {
-      // setFormState({
-      //   ...formState,
-      //   loading: false,
-      //   result: {
-      //     error: true,
-      //     result: err
-      //   }
-      // })
+      setActionState({
+        loading: false,
+        error: [err.message]
+      })
     }
   }
 
@@ -389,6 +387,7 @@ EnterprisePromontionList.defaultProps = {
   propsToFetch: [
     'name', 'auto', 'enabled', 'end', 'description', 'image', 'label', 'order_priority', 'sites', 'stackable', 'start', 'target', 'type',
     'limit_per_user', 'user_order_count', 'user_order_count_condition', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes',
-    'users', 'delivery_zones', 'paymethods', 'order_types_allowed', 'max_discount', 'rank', 'rate_type', 'rate', 'public', 'coupon', 'businesses', 'condition_type'
+    'users', 'delivery_zones', 'paymethods', 'order_types_allowed', 'max_discount', 'rank', 'rate_type', 'rate', 'public', 'coupon', 'businesses', 'condition_type',
+    'minimum', 'products', 'categories', 'schedule', 'limit'
   ]
 }

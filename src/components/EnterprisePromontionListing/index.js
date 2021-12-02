@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { EnterprisePromontionList as EnterprisePromontionListController } from './naked'
 import { useInfoShare } from '../../contexts/InfoShareContext'
@@ -8,6 +8,7 @@ import { SearchBar } from '../SearchBar'
 import { EnterprisePromotionList } from '../EnterprisePromotionList'
 import { SideBar } from '../SideBar'
 import { EnterprisePromotionDetails } from '../EnterprisePromotionDetails'
+import { Alert } from '../Confirm'
 
 import {
   PromotionsListingContainer,
@@ -27,14 +28,26 @@ const EnterprisePromontionListingUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openDetails, setOpenDetails] = useState(false)
   const [selectedPromotion, setSelectedPromotion] = useState(null)
+  const [moveDistance, setMoveDistance] = useState(0)
 
   const handleOpenDetails = (promotion) => {
+    setMoveDistance(0)
     setSelectedPromotion(promotion)
     setOpenDetails(true)
   }
+
+  useEffect(() => {
+    if (!promotionListState?.error) return
+    setAlertState({
+      open: true,
+      content: promotionListState?.error
+    })
+  }, [promotionListState?.error])
 
   return (
     <>
@@ -75,7 +88,8 @@ const EnterprisePromontionListingUI = (props) => {
       {openDetails && (
         <SideBar
           sidebarId='promotion_details'
-          defaultSideBarWidth='600'
+          defaultSideBarWidth={600 + moveDistance}
+          moveDistance={moveDistance}
           open={openDetails}
           onClose={() => setOpenDetails(false)}
         >
@@ -85,9 +99,20 @@ const EnterprisePromontionListingUI = (props) => {
             promotionsList={promotionListState.promotions}
             handleSuccessUpdatePromotions={handleSuccessUpdatePromotions}
             handleSuccessAddPromotion={handleSuccessAddPromotion}
+            setMoveDistance={setMoveDistance}
           />
         </SideBar>
       )}
+
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

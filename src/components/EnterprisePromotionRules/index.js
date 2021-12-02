@@ -5,6 +5,10 @@ import { Select } from '../../styles/Select/FirstSelect'
 import { RecordCircleFill, Circle, ChevronRight } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
+import { SideBar } from '../SideBar'
+import { EnterprisePromotionConditions } from '../EnterprisePromotionConditions'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { Modal } from '../Modal'
 
 import {
   FormInput,
@@ -30,13 +34,16 @@ export const EnterprisePromotionRules = (props) => {
     handleChangeInput,
     handleChangeItem,
     handleAddPromotion,
-    handleUpdateClick
+    handleUpdateClick,
+    setMoveDistance
   } = props
 
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const formMethods = useForm()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isShowConditions, setIsShowConditions] = useState(false)
 
   const promotionTypes = [
     { value: 1, content: <Option>{t('MOBILE_FRONT_SUB_TOTAL', 'Subtotal')}</Option> },
@@ -68,6 +75,16 @@ export const EnterprisePromotionRules = (props) => {
       })
     }
   }, [formMethods.errors])
+
+  useEffect(() => {
+    if (width < 1300) {
+      setMoveDistance(0)
+    } else {
+      if (isShowConditions) {
+        setMoveDistance(700)
+      }
+    }
+  }, [width])
 
   return (
     <>
@@ -168,6 +185,10 @@ export const EnterprisePromotionRules = (props) => {
         <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
         <CondtionItem
           active={false}
+          onClick={() => {
+            setMoveDistance(700)
+            setIsShowConditions(true)
+          }}
         >
           <div>
             <Circle />
@@ -194,6 +215,35 @@ export const EnterprisePromotionRules = (props) => {
         onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
+      {width >= 1300 ? (
+        <>
+          {isShowConditions && (
+            <SideBar
+              isBorderShow
+              sidebarId='promotion_conditions_details'
+              defaultSideBarWidth='700'
+              open={isShowConditions}
+              onClose={() => {
+                setMoveDistance(0)
+                setIsShowConditions(false)
+              }}
+            >
+              <EnterprisePromotionConditions {...props} />
+            </SideBar>
+          )}
+        </>
+      ) : (
+        <Modal
+          width='70%'
+          open={isShowConditions}
+          onClose={() => {
+            setMoveDistance(0)
+            setIsShowConditions(false)
+          }}
+        >
+          <EnterprisePromotionConditions {...props} />
+        </Modal>
+      )}
     </>
   )
 }
