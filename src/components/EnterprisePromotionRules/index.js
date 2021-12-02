@@ -66,6 +66,11 @@ export const EnterprisePromotionRules = (props) => {
     }
   }
 
+  const hanndleClickApply = () => {
+    if (width > 1300) setMoveDistance(700)
+    setIsShowConditions(true)
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -185,10 +190,7 @@ export const EnterprisePromotionRules = (props) => {
         <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
         <CondtionItem
           active={isShowConditions}
-          onClick={() => {
-            setMoveDistance(700)
-            setIsShowConditions(true)
-          }}
+          onClick={() => hanndleClickApply()}
         >
           <div>
             {isShowConditions ? <RecordCircleFill /> : <Circle />}

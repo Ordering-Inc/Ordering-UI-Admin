@@ -4,6 +4,7 @@ import { Button, Checkbox } from '../../styles'
 import { Pencil } from 'react-bootstrap-icons'
 import { Modal } from '../Modal'
 import { EnterprisePromotionEditCondition } from '../EnterprisePromotionEditCondition'
+import { EnterprisePromotionOrderTypes } from '../EnterprisePromotionOrderTypes'
 
 import {
   ConditionsContainer,
@@ -24,15 +25,12 @@ export const EnterprisePromotionConditions = (props) => {
 
   const [, t] = useLanguage()
   const [openSingleModal, setOpenSingleModal] = useState(false)
+  const [openMultipleModal, setOpenMultipleModal] = useState(null)
   const [selectedCondition, setSelectedCondition] = useState(null)
   const [selectedTitle, setSelectedTitle] = useState(null)
 
   const singleConditions = [
-    'limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum'
-  ]
-
-  const integerConditions = [
-    'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes', ''
+    'limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'
   ]
 
   const handlePromotionEdit = (condition, title) => {
@@ -40,6 +38,8 @@ export const EnterprisePromotionConditions = (props) => {
     setSelectedTitle(title)
     if (singleConditions.includes(condition)) {
       setOpenSingleModal(true)
+    } else {
+      setOpenMultipleModal(true)
     }
   }
 
@@ -54,7 +54,9 @@ export const EnterprisePromotionConditions = (props) => {
     { id: 7, title: t('MAX_AMOUNT_TO_DISCOUNT', 'Maximum discount limit'), attribute: 'max_discount' },
     { id: 8, title: t('DELIVERY_ZONE', 'Delivery zones'), attribute: 'delivery_zones' },
     { id: 9, title: t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order Type'), attribute: 'order_types_allowed' },
-    { id: 10, title: t('MINIMUN_PURCHASED', 'Minimum purchase'), attribute: 'minimum' }
+    { id: 10, title: t('MINUTES_FROM_LAST_ORDER', 'Minutes from the last order'), attribute: 'valid_from_after_user_last_order_minutes' },
+    { id: 11, title: t('MINUTES_UNTIL_LAST_ORDER', 'Minutes until the last order'), attribute: 'valid_until_after_user_last_order_minutes' },
+    { id: 12, title: t('MINIMUN_PURCHASED', 'Minimum purchase'), attribute: 'minimum' }
   ]
 
   return (
@@ -104,6 +106,18 @@ export const EnterprisePromotionConditions = (props) => {
           condition={selectedCondition}
           onClickDone={() => setOpenSingleModal(false)}
         />
+      </Modal>
+      <Modal
+        width='600px'
+        open={openMultipleModal}
+        onClose={() => setOpenMultipleModal(false)}
+      >
+        {selectedCondition === 'order_types_allowed' && (
+          <EnterprisePromotionOrderTypes
+            {...props}
+            onClickDone={() => setOpenMultipleModal(false)}
+          />
+        )}
       </Modal>
     </>
   )

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { EnterprisePromotionDetails as EnterprisePromotionDetailsController } from './naked'
 import { Switch } from '../../styles'
 import { DragScroll } from '../DragScroll'
 import { EnterprisePromotionGeneralDetails } from '../EnterprisePromotionGeneralDetails'
 import { EnterprisePromotionRules } from '../EnterprisePromotionRules'
+import { Alert } from '../Confirm'
 
 import {
   DetailsContainer,
@@ -17,11 +18,13 @@ const EnterprisePromotionDetailsUI = (props) => {
   const {
     promotionState,
     formState,
+    actionState,
     handleChangeItem,
     setMoveDistance
   } = props
 
   const [, t] = useLanguage()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [selectedOption, setSelectedOption] = useState('general')
 
   const tabOptions = [
@@ -36,44 +39,63 @@ const EnterprisePromotionDetailsUI = (props) => {
     setSelectedOption(option)
   }
 
-  return (
-    <DetailsContainer>
-      <Header>
-        <h1>{formState.changes?.name ?? promotionState?.promotion?.name}</h1>
-        <Switch
-          defaultChecked={
-            typeof formState.changes?.enabled !== 'undefined'
-              ? formState.changes?.enabled
-              : promotionState.promotion?.enabled
-          }
-          onChange={val => handleChangeItem({ enabled: val })}
-        />
-      </Header>
-      <TabsContainer>
-        <DragScroll>
-          {tabOptions.map(option => (
-            <Tab
-              key={option.key}
-              active={selectedOption === option.key}
-              onClick={() => handleClickTab(option.key)}
-            >
-              {option.content}
-            </Tab>
-          ))}
-        </DragScroll>
-      </TabsContainer>
+  useEffect(() => {
+    if (!actionState?.error) return
+    setAlertState({
+      open: true,
+      content: actionState?.error
+    })
+  }, [actionState?.error])
 
-      {selectedOption === 'general' && (
-        <EnterprisePromotionGeneralDetails
-          {...props}
-        />
-      )}
-      {selectedOption === 'rules' && (
-        <EnterprisePromotionRules
-          {...props}
-        />
-      )}
-    </DetailsContainer>
+  return (
+    <>
+      <DetailsContainer>
+        <Header>
+          <h1>{formState.changes?.name ?? promotionState?.promotion?.name}</h1>
+          <Switch
+            defaultChecked={
+              typeof formState.changes?.enabled !== 'undefined'
+                ? formState.changes?.enabled
+                : promotionState.promotion?.enabled
+            }
+            onChange={val => handleChangeItem({ enabled: val })}
+          />
+        </Header>
+        <TabsContainer>
+          <DragScroll>
+            {tabOptions.map(option => (
+              <Tab
+                key={option.key}
+                active={selectedOption === option.key}
+                onClick={() => handleClickTab(option.key)}
+              >
+                {option.content}
+              </Tab>
+            ))}
+          </DragScroll>
+        </TabsContainer>
+
+        {selectedOption === 'general' && (
+          <EnterprisePromotionGeneralDetails
+            {...props}
+          />
+        )}
+        {selectedOption === 'rules' && (
+          <EnterprisePromotionRules
+            {...props}
+          />
+        )}
+      </DetailsContainer>
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
+    </>
   )
 }
 

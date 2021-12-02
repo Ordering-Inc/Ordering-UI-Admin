@@ -132,6 +132,7 @@ export const EnterprisePromotionDetails = (props) => {
           })
           handleSuccessUpdatePromotions(updatedPromotions)
         }
+        cleanFormState()
         showToast(ToastType.Success, t('PROMOTION_SAVED', 'Promotion saved'))
       } else {
         setActionState({
