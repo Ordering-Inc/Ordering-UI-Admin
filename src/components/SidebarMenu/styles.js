@@ -20,6 +20,7 @@ export const SidebarContainer = styled.div`
     overflow: hidden;
     position: relative;
     width: 240px;
+    min-width: 240px;
     ${({ isCollapse }) => isCollapse && css`
       margin-left: -240px;
     `}
