@@ -132,8 +132,20 @@ const DriversGroupLogsUI = (props) => {
                             <tbody key={i}>
                               <tr>
                                 <td>{getAttributeName(item?.attribute)}</td>
-                                <td>{`${item?.new}`}</td>
-                                <td>{`${item?.old}`}</td>
+                                <td>
+                                  {
+                                    typeof item?.new !== 'undefined'
+                                      ? `${item?.new}`
+                                      : item?.added.length > 0 ? item?.added.toString() : t('NONE', 'None')
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    typeof item?.old !== 'undefined'
+                                      ? `${item?.old}`
+                                      : item?.removed.length > 0 ? item?.removed.toString() : t('NONE', 'None')
+                                  }
+                                </td>
                               </tr>
                             </tbody>
                           ))}
