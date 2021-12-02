@@ -13,7 +13,8 @@ import {
   CalendarCheck,
   Cart4,
   GeoAltFill,
-  Vr
+  Vr,
+  Alarm
 } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
@@ -33,6 +34,7 @@ import { ReportsDriverSchedule } from '../ReportsDriverSchedule'
 import { ReportsOrderStatus } from '../ReportsOrderStatus'
 import { ReportsHeatMap } from '../ReportsHeatMap'
 import { ReportsDriverDistance } from '../ReportsDriverDistance'
+import { ReportsSpentTime } from '../ReportsSpentTime'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -52,7 +54,8 @@ export const Reports = (props) => {
     { id: 7, name: t('DRIVER_SCHEDULE', 'Driver schedule'), description: t('DRIVER_SCHEDULE_DESC', 'Driver schedule description'), icon: <CalendarCheck /> },
     { id: 8, name: t('ORDER_STATUS', 'Order status'), description: t('ORDER_STATUS_DESC', 'Order status description'), icon: <Cart4 /> },
     { id: 9, name: t('HEAT_MAP_WITH', 'Heat map with'), description: t('HEAT_MAP_WITH_DESC', 'Heat map with description'), icon: <GeoAltFill /> },
-    { id: 10, name: t('DRIVER_DISTANCE', 'Driver distance'), description: t('DRIVER_DISTANCE_DESC', 'Driver distance description'), icon: <Vr /> }
+    { id: 10, name: t('DRIVER_DISTANCE', 'Driver distance'), description: t('DRIVER_DISTANCE_DESC', 'Driver distance description'), icon: <Vr /> },
+    { id: 11, name: t('TIME', 'Time'), description: t('TIME_DESC', 'Time description'), icon: <Alarm /> }
   ]
 
   const handleCloseSidebar = () => {
@@ -112,6 +115,7 @@ export const Reports = (props) => {
           {selectedReport === 8 && <ReportsOrderStatus />}
           {selectedReport === 9 && <ReportsHeatMap />}
           {selectedReport === 10 && <ReportsDriverDistance />}
+          {selectedReport === 11 && <ReportsSpentTime />}
         </SideBar>
       )}
     </ReportsContainer>
