@@ -14,7 +14,10 @@ export const BusinessProductsCategories = (props) => {
     businessState,
     categorySelected,
     handleChangeCategory,
-    handleOpenCategoryDetails
+    handleOpenCategoryDetails,
+    actionsGroupRef,
+    productsContainerRef,
+    productDetailsRef
   } = props
 
   const [, t] = useLanguage()
@@ -22,14 +25,18 @@ export const BusinessProductsCategories = (props) => {
   const containerRef = useRef()
 
   useEffect(() => {
-    if (containerRef?.current) {
-      window.addEventListener('click', (e) => {
-        if (!containerRef?.current?.contains(e.target)) {
+    let listener
+    if (containerRef?.current && productsContainerRef && actionsGroupRef && productDetailsRef) {
+      listener = window.addEventListener('click', (e) => {
+        if (!containerRef?.current?.contains(e.target) && !productDetailsRef?.container(e.target) && !actionsGroupRef?.contains(e.target) && !productsContainerRef?.contains(e.target)) {
           handleChangeCategory(null, null)
         }
       })
     }
-  }, [containerRef?.current])
+    return () => {
+      window.removeEventListener('click', listener)
+    }
+  }, [containerRef?.current, productDetailsRef])
 
   return (
     <>

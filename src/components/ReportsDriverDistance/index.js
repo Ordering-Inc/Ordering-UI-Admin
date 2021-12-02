@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
@@ -37,6 +37,8 @@ const ReportsDriverDistanceUI = (props) => {
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [availableDriverIds, setAvailableDriverIds] = useState(null)
+  const [{ parseNumber }] = useUtils()
 
   const tableRef = useRef(null)
 
@@ -116,14 +118,14 @@ const ReportsDriverDistanceUI = (props) => {
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
             <Button
-              onClick={() => setIsDriverFilter(true)}
-            >
-              {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
-            </Button>
-            <Button
               onClick={() => setIsDriverGroupFilter(true)}
             >
               {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setIsDriverFilter(true)}
+            >
+              {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -165,7 +167,7 @@ const ReportsDriverDistanceUI = (props) => {
                     <Tbody key={i}>
                       <tr>
                         {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value}</td>
+                          <td key={j} colSpan={td.colspan}>{td.value_refers === 'distance' ? parseNumber(td.value, { decimal: 2 }) : td.value}</td>
                         ))}
                       </tr>
                     </Tbody>
@@ -211,7 +213,9 @@ const ReportsDriverDistanceUI = (props) => {
           onClose={() => setIsDriverFilter(false)}
         >
           <ReportsDriverFilter
-            {...props} onClose={() => setIsDriverFilter(false)}
+            {...props}
+            onClose={() => setIsDriverFilter(false)}
+            availableDriverIds={availableDriverIds}
           />
         </Modal>
         <Modal
@@ -223,7 +227,9 @@ const ReportsDriverDistanceUI = (props) => {
           onClose={() => setIsDriverGroupFilter(false)}
         >
           <ReportsDriverGroupFilter
-            {...props} onClose={() => setIsDriverGroupFilter(false)}
+            {...props}
+            onClose={() => setIsDriverGroupFilter(false)}
+            setAvailableDriverIds={setAvailableDriverIds}
           />
         </Modal>
       </DriverDistanceContainer>

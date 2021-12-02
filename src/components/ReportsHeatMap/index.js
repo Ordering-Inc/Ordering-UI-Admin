@@ -33,6 +33,7 @@ const ReportsHeatMapUI = (props) => {
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [availableDriverIds, setAvailableDriverIds] = useState(null)
   const [isHeat, setIsHeat] = useState(false)
   const theme = useTheme()
 
@@ -95,14 +96,14 @@ const ReportsHeatMapUI = (props) => {
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
             <Button
-              onClick={() => setIsDriverFilter(true)}
-            >
-              {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
-            </Button>
-            <Button
               onClick={() => setIsDriverGroupFilter(true)}
             >
               {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setIsDriverFilter(true)}
+            >
+              {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -163,7 +164,9 @@ const ReportsHeatMapUI = (props) => {
           onClose={() => setIsDriverFilter(false)}
         >
           <ReportsDriverFilter
-            {...props} onClose={() => setIsDriverFilter(false)}
+            {...props}
+            onClose={() => setIsDriverFilter(false)}
+            availableDriverIds={availableDriverIds}
           />
         </Modal>
         <Modal
@@ -175,7 +178,9 @@ const ReportsHeatMapUI = (props) => {
           onClose={() => setIsDriverGroupFilter(false)}
         >
           <ReportsDriverGroupFilter
-            {...props} onClose={() => setIsDriverGroupFilter(false)}
+            {...props}
+            onClose={() => setIsDriverGroupFilter(false)}
+            setAvailableDriverIds={setAvailableDriverIds}
           />
         </Modal>
       </HeatMapContainer>

@@ -111,6 +111,7 @@ export const Thead = styled.thead`
   position: sticky;
   top: 0px;
   background: white;
+  border-bottom: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
 
   tr {
     th {
@@ -118,10 +119,25 @@ export const Thead = styled.thead`
       font-weight: 500;
       font-size: 12px;
       text-align: center;
+    }
 
-      &:first-child {
-        text-align: left;
-        border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+    &:first-child {
+      th {
+        &:not(:first-child) {
+          border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      th {
+        &:first-child, &:nth-child(2) {
+          text-align: left;
+        }
+
+        &:nth-child(4n-1) {
+          border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+        }
       }
     }
   }
@@ -137,10 +153,13 @@ export const Tbody = styled.tbody`
       text-align: center;
       color: ${props => props.theme?.colors.lightGray};
 
-      &:first-child {
+      &:first-child, &:nth-child(2) {
         text-align: left;
         color: ${props => props.theme?.colors.headingColor};
-        border-right: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
+      }
+
+      &:nth-child(4n-1) {
+        border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
       }
     }
   }
