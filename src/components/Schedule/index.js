@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {
-  useLanguage
+  useLanguage,
+  Schedule as ScheduleController
 } from 'ordering-components-admin'
-import { Schedule as ScheduleController } from './naked'
 import {
   Trash,
   PlusSquare,
@@ -110,7 +110,7 @@ const ScheduleUI = (props) => {
           >
             <div>
               <Checkbox
-                defaultChecked={schedule?.enabled}
+                checked={schedule?.enabled}
                 onChange={e => handleEnabledSchedule(daysOfWeekIndex, e.target.checked)}
               />
               <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
