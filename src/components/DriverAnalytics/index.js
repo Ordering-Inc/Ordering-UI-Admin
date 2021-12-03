@@ -7,7 +7,6 @@ import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsMap } from '../AnalyticsMap'
 import { AnalyticsOrdersOrSales } from '../AnalyticsOrdersOrSales'
-import { AnalyticsProductCategories } from '../AnalyticsProductCategories'
 import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
@@ -31,6 +30,7 @@ import {
   MapWrraper,
   AnalyticsTimeZoneWrapper
 } from './styles'
+import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 
 const DriverAnalyticsUI = (props) => {
   const {
@@ -38,8 +38,6 @@ const DriverAnalyticsUI = (props) => {
     filterList,
     ordersList,
     salesList,
-    topProductList,
-    topCategoryList,
     orderStatusList,
     topOrdersList,
     customerSatisfactionList,
@@ -62,6 +60,7 @@ const DriverAnalyticsUI = (props) => {
   }
 
   const [driversFilterModal, setDriversFilterModal] = useState(false)
+  const [driverGroupModal, setDriverGroupModal] = useState(false)
 
   return (
     <BusinessAnalyticsContainer>
@@ -78,6 +77,11 @@ const DriverAnalyticsUI = (props) => {
           <h1>{t('DRIVERS_ANALYTICS', 'Drivers analytics')}</h1>
         </HeaderTitleContainer>
         <HeaderFilterContainer>
+          <BusinessFilterWrapper>
+            <Button onClick={() => setDriverGroupModal(true)}>
+              {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driv ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
+            </Button>
+          </BusinessFilterWrapper>
           <BusinessFilterWrapper>
             <Button onClick={() => setDriversFilterModal(true)}>
               {t('DRIVERS', 'DRIVERS')} ({filterList?.userIds ? filterList?.userIds.length : t('ALL', 'All')})
@@ -115,19 +119,6 @@ const DriverAnalyticsUI = (props) => {
           <AnalyticsOrdersOrSales
             filterList={filterList}
             chartDataList={salesList}
-          />
-        </div>
-        <div className='col-md-12 col-lg-6'>
-          <AnalyticsProductCategories
-            filterList={filterList}
-            productCategoryList={topProductList}
-            isProducts
-          />
-        </div>
-        <div className='col-md-12 col-lg-6'>
-          <AnalyticsProductCategories
-            filterList={filterList}
-            productCategoryList={topCategoryList}
           />
         </div>
         <div className='col-md-12 col-lg-6'>
@@ -206,6 +197,19 @@ const DriverAnalyticsUI = (props) => {
       >
         <AnalyticsDriversFilter
           {...props} onClose={() => setDriversFilterModal(false)}
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('DRIVER_GROUP', 'Driver group')}
+        open={driverGroupModal}
+        onClose={() => setDriverGroupModal(false)}
+      >
+        <ReportsDriverGroupFilter
+          {...props}
+          onClose={() => setDriverGroupModal(false)}
         />
       </Modal>
     </BusinessAnalyticsContainer>

@@ -27,6 +27,7 @@ import {
   AnalyticsContentWrapper,
   MapWrraper
 } from './styles'
+import { ReportsBrandFilter } from '../ReportsBrandFilter'
 
 const BusinessAnalyticsUI = (props) => {
   const {
@@ -48,6 +49,7 @@ const BusinessAnalyticsUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const [businessFilterModal, setBusinessFilterModal] = useState(false)
+  const [isBrandFilter, setIsBrandFilter] = useState(false)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, lapse: `${date1},${date2}` })
@@ -68,6 +70,11 @@ const BusinessAnalyticsUI = (props) => {
           <h1>{t('BUSINESS_ANALYTICS', 'Business Analytics')}</h1>
         </HeaderTitleContainer>
         <HeaderFilterContainer>
+          <BusinessFilterWrapper>
+            <Button onClick={() => setIsBrandFilter(true)}>
+              {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id.length : t('ALL', 'All')})
+            </Button>
+          </BusinessFilterWrapper>
           <BusinessFilterWrapper>
             <Button onClick={() => setBusinessFilterModal(true)}>
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
@@ -159,7 +166,22 @@ const BusinessAnalyticsUI = (props) => {
         onClose={() => setBusinessFilterModal(false)}
       >
         <AnalyticsBusinessFilter
-          {...props} onClose={() => setBusinessFilterModal(false)}
+          {...props}
+          onClose={() => setBusinessFilterModal(false)}
+          isFranchise
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('BRAND', 'Brand')}
+        open={isBrandFilter}
+        onClose={() => setIsBrandFilter(false)}
+      >
+        <ReportsBrandFilter
+          {...props}
+          onClose={() => setIsBrandFilter(false)}
         />
       </Modal>
     </BusinessAnalyticsContainer>
