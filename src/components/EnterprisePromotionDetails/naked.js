@@ -105,13 +105,17 @@ export const EnterprisePromotionDetails = (props) => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
       setActionState({ loading: true, error: null })
+      const changes = { ...formState?.changes }
+      if (changes?.schedule) {
+        changes.schedule = JSON.stringify(changes.schedule)
+      }
       const requestOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formState?.changes)
+        body: JSON.stringify(changes)
       }
 
       const response = await fetch(`${ordering.root}/offers/${promotion.id}`, requestOptions)
@@ -155,13 +159,17 @@ export const EnterprisePromotionDetails = (props) => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
       setActionState({ loading: true, error: null })
+      const changes = { ...formState?.changes }
+      if (changes?.schedule) {
+        changes.schedule = JSON.stringify(changes.schedule)
+      }
       const requestOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formState?.changes)
+        body: JSON.stringify(changes)
       }
 
       const response = await fetch(`${ordering.root}/offers`, requestOptions)
@@ -192,9 +200,7 @@ export const EnterprisePromotionDetails = (props) => {
         changes: {
           auto: false,
           public: true,
-          condition_type: 1,
-          businesses: [3, 20],
-          sites: [1]
+          condition_type: 1
         }
       })
     } else setIsAddMode(false)

@@ -6,6 +6,8 @@ import { Modal } from '../Modal'
 import { EnterprisePromotionEditCondition } from '../EnterprisePromotionEditCondition'
 import { EnterprisePromotionOrderTypes } from '../EnterprisePromotionOrderTypes'
 import { EnterprisePromotionPaymethods } from '../EnterprisePromotionPaymethods'
+import { EnterprisePromotionSchedule } from '../EnterprisePromotionSchedule'
+import { EnterprisePromotionSpecficProducts } from '../EnterprisePromotionSpecficProducts'
 
 import {
   ConditionsContainer,
@@ -33,6 +35,8 @@ export const EnterprisePromotionConditions = (props) => {
   const singleConditions = [
     'limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'
   ]
+
+  const specifics = ['products', 'categories']
 
   const handlePromotionEdit = (condition, title) => {
     setSelectedCondition(condition)
@@ -116,7 +120,7 @@ export const EnterprisePromotionConditions = (props) => {
         />
       </Modal>
       <Modal
-        width='600px'
+        width={specifics.includes(selectedCondition) ? '70%' : '600px'}
         open={openMultipleModal}
         onClose={() => setOpenMultipleModal(false)}
       >
@@ -128,6 +132,18 @@ export const EnterprisePromotionConditions = (props) => {
         )}
         {selectedCondition === 'paymethods' && (
           <EnterprisePromotionPaymethods
+            {...props}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
+        {selectedCondition === 'schedule' && (
+          <EnterprisePromotionSchedule
+            {...props}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
+        {selectedCondition === 'products' && (
+          <EnterprisePromotionSpecficProducts
             {...props}
             onClickDone={() => handleClickSave()}
           />
