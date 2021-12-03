@@ -54,6 +54,11 @@ export const HeaderFilterContainer = styled.div`
 `
 
 export const BusinessFilterWrapper = styled.div`
+  margin-left: 25px;
+  ${props => props.theme.rtl && css`
+    margin-right: 25px;
+    margin-left: 0;
+  `}
   > button {
     background: #F8F9FA;
     border-radius: 7.6px;
