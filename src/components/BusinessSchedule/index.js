@@ -1,5 +1,6 @@
 import React from 'react'
-import { useLanguage, BusinessSchedule as BusinessScheduleController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { BusinessSchedule as BusinessScheduleController } from './naked'
 import { Schedule } from '../Schedule'
 import { Button } from '../../styles'
 

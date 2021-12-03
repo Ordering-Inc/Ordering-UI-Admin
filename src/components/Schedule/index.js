@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {
-  useLanguage,
-  Schedule as ScheduleController
+  useLanguage
 } from 'ordering-components-admin'
+import { Schedule as ScheduleController } from './naked'
 import {
   Trash,
   PlusSquare,
