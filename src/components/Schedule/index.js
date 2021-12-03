@@ -110,7 +110,7 @@ const ScheduleUI = (props) => {
           >
             <div>
               <Checkbox
-                defaultChecked={schedule?.enabled}
+                checked={schedule?.enabled}
                 onChange={e => handleEnabledSchedule(daysOfWeekIndex, e.target.checked)}
               />
               <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
