@@ -25,8 +25,6 @@ var _AnalyticsMap = require("../AnalyticsMap");
 
 var _AnalyticsOrdersOrSales = require("../AnalyticsOrdersOrSales");
 
-var _AnalyticsProductCategories = require("../AnalyticsProductCategories");
-
 var _AnalyticsOrdersStatus = require("../AnalyticsOrdersStatus");
 
 var _AnalyticsCustomerSatisfaction = require("../AnalyticsCustomerSatisfaction");
@@ -50,6 +48,8 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
 var _styles = require("./styles");
+
+var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -80,8 +80,6 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
       filterList = props.filterList,
       ordersList = props.ordersList,
       salesList = props.salesList,
-      topProductList = props.topProductList,
-      topCategoryList = props.topCategoryList,
       orderStatusList = props.orderStatusList,
       topOrdersList = props.topOrdersList,
       customerSatisfactionList = props.customerSatisfactionList,
@@ -115,12 +113,21 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
       driversFilterModal = _useState2[0],
       setDriversFilterModal = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      driverGroupModal = _useState4[0],
+      setDriverGroupModal = _useState4[1];
+
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_ANALYTICS', 'Drivers analytics'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setDriverGroupModal(true);
+    }
+  }, t('DRIVER_GROUP', 'Driver group'), " (", filterList !== null && filterList !== void 0 && filterList.driv ? filterList === null || filterList === void 0 ? void 0 : filterList.driver_groups_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setDriversFilterModal(true);
     }
@@ -141,17 +148,6 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
     filterList: filterList,
     chartDataList: salesList
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-12 col-lg-6"
-  }, /*#__PURE__*/_react.default.createElement(_AnalyticsProductCategories.AnalyticsProductCategories, {
-    filterList: filterList,
-    productCategoryList: topProductList,
-    isProducts: true
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "col-md-12 col-lg-6"
-  }, /*#__PURE__*/_react.default.createElement(_AnalyticsProductCategories.AnalyticsProductCategories, {
-    filterList: filterList,
-    productCategoryList: topCategoryList
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsTopOrders.AnalyticsTopOrders, {
@@ -216,6 +212,19 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsDriversFilter.AnalyticsDriversFilter, _extends({}, props, {
     onClose: function onClose() {
       return setDriversFilterModal(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('DRIVER_GROUP', 'Driver group'),
+    open: driverGroupModal,
+    onClose: function onClose() {
+      return setDriverGroupModal(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setDriverGroupModal(false);
     }
   }))));
 };

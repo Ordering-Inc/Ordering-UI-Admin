@@ -129,7 +129,7 @@ var ScheduleUI = function ScheduleUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles2.TimeScheduleItemContainer, {
       key: daysOfWeekIndex
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      defaultChecked: schedule === null || schedule === void 0 ? void 0 : schedule.enabled,
+      checked: schedule === null || schedule === void 0 ? void 0 : schedule.enabled,
       onChange: function onChange(e) {
         return handleEnabledSchedule(daysOfWeekIndex, e.target.checked);
       }
