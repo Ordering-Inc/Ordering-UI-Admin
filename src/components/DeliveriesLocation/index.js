@@ -69,7 +69,7 @@ export const DeliveriesLocation = (props) => {
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
 
-      if (interActionMapOrder.driver !== null && interActionOrderDriverLocation) {
+      if (interActionMapOrder.driver !== null) {
         marker = interActionOrderDriverLocation !== null ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
