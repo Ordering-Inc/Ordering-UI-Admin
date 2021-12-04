@@ -30,6 +30,7 @@ export const DeliveriesLocation = (props) => {
   const [mapZoom, setMapZoom] = useState(10)
   const [onlineDrivers, setOnlineDrivers] = useState([])
   const [mapLoaded, setMapLoaded] = useState(true)
+  const [mapFitted, setMapFitted] = useState(false)
 
   const [interActionOrderDriverLocation, setInterActionOrderDriverLocation] = useState(null)
 
@@ -68,7 +69,7 @@ export const DeliveriesLocation = (props) => {
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
 
-      if (interActionMapOrder.driver !== null && interActionOrderDriverLocation) {
+      if (interActionMapOrder.driver !== null) {
         marker = interActionOrderDriverLocation !== null ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
@@ -93,6 +94,7 @@ export const DeliveriesLocation = (props) => {
     const { center, zoom } = fitBounds(newBounds, mapSize)
     setMapZoom(zoom)
     setMapCenter(center)
+    setMapFitted(true)
   }
 
   // Fit bounds on mount, and when the markers change
@@ -105,13 +107,14 @@ export const DeliveriesLocation = (props) => {
         }
       }
     }
-    mapFit()
-  }, [driversList, interActionMapOrder, mapLoaded])
+    if (!mapFitted) {
+      mapFit()
+    }
+  }, [interActionMapOrder, mapLoaded, driversList, mapFitted])
 
   useEffect(() => {
-    if (mapLoaded || interActionOrderDriverLocation === null) return
-    mapFit()
-  }, [interActionOrderDriverLocation, mapLoaded])
+    setMapFitted(false)
+  }, [interActionMapOrder])
 
   const handleMapChange = (data) => {
     setMapZoom(data?.zoom)

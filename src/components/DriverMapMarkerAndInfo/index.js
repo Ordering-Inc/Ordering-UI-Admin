@@ -22,7 +22,7 @@ export const DriverMapMarkerAndInfo = (props) => {
 
   useEffect(() => {
     if (!infoShow) return
-    setInfoTop(`-${infoRef.current.scrollHeight + 30}px`)
+    setInfoTop(`-${infoRef.current.scrollHeight + 55}px`)
   }, [infoShow])
 
   return (
