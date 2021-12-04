@@ -82,10 +82,15 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       mapLoaded = _useState8[0],
       setMapLoaded = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(null),
+  var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      interActionOrderDriverLocation = _useState10[0],
-      setInterActionOrderDriverLocation = _useState10[1];
+      mapFitted = _useState10[0],
+      setMapFitted = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      interActionOrderDriverLocation = _useState12[0],
+      setInterActionOrderDriverLocation = _useState12[1];
 
   var defaultCenter = {
     lat: 19.4326,
@@ -138,7 +143,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
       bounds.extend(_newPoint);
 
-      if (interActionMapOrder.driver !== null && interActionOrderDriverLocation) {
+      if (interActionMapOrder.driver !== null) {
         _marker = interActionOrderDriverLocation !== null ? interActionOrderDriverLocation : defaultCenter;
         _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
         bounds.extend(_newPoint);
@@ -166,6 +171,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
 
     setMapZoom(zoom);
     setMapCenter(center);
+    setMapFitted(true);
   }; // Fit bounds on mount, and when the markers change
 
 
@@ -193,12 +199,13 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       }
     }
 
-    mapFit();
-  }, [driversList, interActionMapOrder, mapLoaded]);
+    if (!mapFitted) {
+      mapFit();
+    }
+  }, [interActionMapOrder, mapLoaded, driversList, mapFitted]);
   (0, _react.useEffect)(function () {
-    if (mapLoaded || interActionOrderDriverLocation === null) return;
-    mapFit();
-  }, [interActionOrderDriverLocation, mapLoaded]);
+    setMapFitted(false);
+  }, [interActionMapOrder]);
 
   var handleMapChange = function handleMapChange(data) {
     setMapZoom(data === null || data === void 0 ? void 0 : data.zoom);

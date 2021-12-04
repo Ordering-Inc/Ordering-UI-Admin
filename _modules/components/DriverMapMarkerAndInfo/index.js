@@ -60,7 +60,7 @@ var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
 
   (0, _react.useEffect)(function () {
     if (!infoShow) return;
-    setInfoTop("-".concat(infoRef.current.scrollHeight + 30, "px"));
+    setInfoTop("-".concat(infoRef.current.scrollHeight + 55, "px"));
   }, [infoShow]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, infoShow && /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, {
     ref: infoRef,

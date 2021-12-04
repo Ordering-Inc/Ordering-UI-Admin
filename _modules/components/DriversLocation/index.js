@@ -67,6 +67,11 @@ var DriversLocation = function DriversLocation(props) {
       mapLoaded = _useState6[0],
       setMapLoaded = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      mapFitted = _useState8[0],
+      setMapFitted = _useState8[1];
+
   var defaultCenter = {
     lat: 19.4326,
     lng: -99.1332
@@ -74,17 +79,17 @@ var DriversLocation = function DriversLocation(props) {
   var defaultZoom = 10;
   var mapRef = (0, _react.useRef)(null);
 
-  var _useState7 = (0, _react.useState)([]),
-      _useState8 = _slicedToArray(_useState7, 2),
-      showDrivers = _useState8[0],
-      setShowDrivers = _useState8[1];
+  var _useState9 = (0, _react.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      showDrivers = _useState10[0],
+      setShowDrivers = _useState10[1];
 
   var mapFit = function mapFit() {
     var bounds = new window.google.maps.LatLngBounds();
 
     if (showDrivers.length === 1) {
       setMapCenter(showDrivers[0].location ? showDrivers[0].location : defaultCenter);
-      setMapZoom(defaultZoom);
+      setMapZoom(mapZoom);
       return;
     }
 
@@ -125,13 +130,17 @@ var DriversLocation = function DriversLocation(props) {
 
     setMapZoom(zoom);
     setMapCenter(center);
+    setMapFitted(true);
   }; // Fit bounds on mount, and when the markers change
 
 
   (0, _react.useEffect)(function () {
     if (showDrivers.length === 0 || mapLoaded) return;
-    mapFit();
-  }, [showDrivers, mapLoaded]);
+
+    if (!mapFitted) {
+      mapFit();
+    }
+  }, [showDrivers, mapLoaded, mapFitted]);
   (0, _react.useEffect)(function () {
     if (selectedDriver) {
       setShowDrivers([selectedDriver]);
@@ -148,6 +157,10 @@ var DriversLocation = function DriversLocation(props) {
     setMapZoom(data === null || data === void 0 ? void 0 : data.zoom);
   };
 
+  (0, _react.useEffect)(function () {
+    if (!(selectedDriver !== null && selectedDriver !== void 0 && selectedDriver.id)) return;
+    setMapFitted(false);
+  }, [selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id]);
   return /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     ref: mapRef,
     className: "drivers-location"
