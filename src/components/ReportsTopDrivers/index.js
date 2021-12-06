@@ -83,7 +83,7 @@ const ReportsTopDriversUI = (props) => {
     labels: generateLabels(),
     datasets: [
       {
-        label: t('TOP_ORDERS', 'Top orders'),
+        label: t('ORDERS', 'Orders'),
         data: generateData(),
         fill: true,
         borderColor: '#2C7BE5',
@@ -138,7 +138,7 @@ const ReportsTopDriversUI = (props) => {
 
   return (
     <ReportsTopDriversContainer>
-      <Title>{t('TOP_ORDERS', 'Top orders')}</Title>
+      <Title>{t('TOP_DRIVERS', 'Top drivers')}</Title>
       <ButtonActionList>
         <BrandBusinessWrapper>
           <Button
