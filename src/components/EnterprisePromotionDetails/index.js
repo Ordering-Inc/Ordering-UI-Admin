@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { EnterprisePromotionDetails as EnterprisePromotionDetailsController } from './naked'
+import { useLanguage, EnterprisePromotionDetails as EnterprisePromotionDetailsController } from 'ordering-components-admin'
 import { Switch } from '../../styles'
 import { DragScroll } from '../DragScroll'
 import { EnterprisePromotionGeneralDetails } from '../EnterprisePromotionGeneralDetails'
@@ -29,9 +28,9 @@ const EnterprisePromotionDetailsUI = (props) => {
 
   const tabOptions = [
     { key: 'general', content: t('GENERAL', 'General') },
-    { key: 'rules', content: t('RULES', 'Rules') },
-    { key: 'Business', content: t('CONTROL_PANEL_BUSINESS', 'Business') },
-    { key: 'custom_fields', content: t('CUSTOM_FEILDS', 'Custom fields') }
+    { key: 'rules', content: t('RULES', 'Rules') }
+    // { key: 'Business', content: t('CONTROL_PANEL_BUSINESS', 'Business') },
+    // { key: 'custom_fields', content: t('CUSTOM_FEILDS', 'Custom fields') }
   ]
 
   const handleClickTab = (option) => {
@@ -56,7 +55,7 @@ const EnterprisePromotionDetailsUI = (props) => {
             defaultChecked={
               typeof formState.changes?.enabled !== 'undefined'
                 ? formState.changes?.enabled
-                : promotionState.promotion?.enabled
+                : promotionState.promotion?.enabled ?? false
             }
             onChange={val => handleChangeItem({ enabled: val })}
           />

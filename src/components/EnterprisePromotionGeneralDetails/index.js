@@ -134,9 +134,11 @@ export const EnterprisePromotionGeneralDetails = (props) => {
   }
 
   const isSiteDefaultChecked = (siteId) => {
-    const found = promotionState.promotion?.sites.find(site => site.id === siteId)
-    if (found) return true
-    else return false
+    if (Array.isArray(promotionState.promotion?.sites)) {
+      const found = promotionState.promotion?.sites.find(site => site.id === siteId)
+      if (found) return true
+      else return false
+    } else return false
   }
 
   const isSiteChangesChecked = (siteId) => {
@@ -251,6 +253,7 @@ export const EnterprisePromotionGeneralDetails = (props) => {
                 <Button
                   color='secundary'
                   borderRadius='8px'
+                  type='button'
                   onClick={() => setIsShowCalendar(true)}
                 >
                   <Calendar4 />

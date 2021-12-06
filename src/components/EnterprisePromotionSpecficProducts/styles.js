@@ -14,3 +14,25 @@ export const Container = styled.div`
     margin-top: 36px;
   }
 `
+export const BusinessesContainer = styled.div`
+  > p {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 3px;
+  }
+  > div {
+    position: relative;
+    margin-top: 0;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    height: initial;
+
+    .pagination-container {
+      position: relative;
+      margin-top: 20px;
+      justify-content: flex-start;
+    }
+  }
+`

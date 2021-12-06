@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { EnterprisePromontionList as EnterprisePromontionListController } from './naked'
+import { useLanguage, EnterprisePromontionList as EnterprisePromontionListController } from 'ordering-components-admin'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles'
@@ -69,6 +68,7 @@ const EnterprisePromontionListingUI = (props) => {
             <Button
               color='lightPrimary'
               borderRadius='8px'
+              onClick={() => handleOpenDetails({})}
             >
               {t('ADD_PROMOTION_ENTERPRISE', 'Add promotion enterprise')}
             </Button>
