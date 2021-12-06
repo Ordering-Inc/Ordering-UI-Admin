@@ -33,6 +33,7 @@ export const ListContent = styled.div`
 `
 
 export const AddCategory = styled.div`
+  display: inline;
   user-select: none;
   font-size: 12px;
   color: ${props => props.theme.colors?.lightGray};

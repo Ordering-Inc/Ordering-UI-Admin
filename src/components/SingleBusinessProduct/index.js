@@ -45,7 +45,8 @@ const SingleBusinessProductUI = (props) => {
     businessState,
     handleUpdateBusinessState,
     dataSelected,
-    setDataSelected
+    setDataSelected,
+    business
   } = props
 
   const theme = useTheme()
@@ -106,7 +107,9 @@ const SingleBusinessProductUI = (props) => {
   const handleProductClick = (e) => {
     const isInvalid = e.target.closest('.product_info') ||
     e.target.closest('.product_price') || e.target.closest('.product_description') ||
-    e.target.closest('.product_enable_control') || e.target.closest('.product_actions')
+    e.target.closest('.product_enable_control') || e.target.closest('.product_actions') ||
+    e.target.closest('.description') || e.target.closest('.fee_fixed') ||
+    e.target.closest('.fee_percentage')
     if (isInvalid) return
     handleOpenProductDetails(product)
   }
@@ -188,6 +191,10 @@ const SingleBusinessProductUI = (props) => {
       }
     })
   }
+
+  const taxProduct = productFormState?.changes?.tax || business?.tax
+  const taxProductType = taxProduct?.type || business?.tax_type
+  const taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price')
 
   return (
     <>
@@ -324,10 +331,51 @@ const SingleBusinessProductUI = (props) => {
                       <InfoBlock>
                         <textarea
                           name='description'
+                          className='description'
                           value={productFormState?.changes?.description || ''}
                           onChange={handleChangeInput}
                           autoComplete='off'
-                          className='product_description'
+                        />
+                      </InfoBlock>
+                    }
+                  </td>
+                )}
+                {allowColumns?.tax && (
+                  <td>
+                    {
+                      <InfoBlock>
+                        <div>{taxProduct?.rate || taxProduct}% ({taxProductTypeString})</div>
+                      </InfoBlock>
+                    }
+                  </td>
+                )}
+                {allowColumns?.fee_fixed && (
+                  <td>
+                    {
+                      <InfoBlock>
+                        <input
+                          type='text'
+                          name='fee_fixed'
+                          className='fee_fixed'
+                          value={productFormState?.changes?.fee_fixed || ''}
+                          onChange={handleChangeInput}
+                          autoComplete='off'
+                        />
+                      </InfoBlock>
+                    }
+                  </td>
+                )}
+                {allowColumns?.fee_percentage && (
+                  <td>
+                    {
+                      <InfoBlock>
+                        <input
+                          type='text'
+                          name='fee_percentage'
+                          className='fee_percentage'
+                          value={productFormState?.changes?.fee_percentage || ''}
+                          onChange={handleChangeInput}
+                          autoComplete='off'
                         />
                       </InfoBlock>
                     }

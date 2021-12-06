@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
-
+import BsTrash from '@meronex/icons/bs/BsTrash'
 import {
   Select as SelectInput,
   Selected,
@@ -8,11 +8,14 @@ import {
   OptionsInner,
   Option,
   Chevron,
-  Header
+  Header,
+  FunctionalityContainer
 } from '../../Selects'
+import { Button } from '../../Buttons'
+import { useLanguage } from 'ordering-components-admin'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className } = props
+  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className, onEdit, onDelete } = props
 
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(
@@ -20,6 +23,7 @@ export const Select = (props) => {
   )
   const [selectedOption, setSelectedOption] = useState(defaultOption)
   const [value, setValue] = useState(defaultValue)
+  const [, t] = useLanguage()
   const dropdownReference = useRef()
 
   const handleSelectClick = (e) => {
@@ -54,14 +58,13 @@ export const Select = (props) => {
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
-    if (option.value === null || option.disabled) return
+    if (option.value === null || option.disabled || e.target.closest('.delete') !== null) return
     if (!noSelected) {
       setSelectedOption(option)
       setValue(option.value)
     }
     onChange && onChange(option.value)
   }
-
   return (
     <SelectInput type={type} className={className || 'select'}>
       {!selectedOption && (
@@ -105,6 +108,22 @@ export const Select = (props) => {
                 className={option.disabled ? 'disabled' : null}
               >
                 {option.content}
+                {(option.editFunctionality || option.deleteFunctionality) && (
+                  <FunctionalityContainer disabled={value === option.value}>
+                    {option.editFunctionality && (
+                      <Button
+                        borderRadius='8px'
+                        color='lightPrimary'
+                        onClick={() => onEdit(option, i)}
+                      >
+                        {t('EDIT', 'Edit')}
+                      </Button>
+                    )}
+                    {option.deleteFunctionality && (
+                      <BsTrash className='delete' onClick={() => onDelete(option.value)} />
+                    )}
+                  </FunctionalityContainer>
+                )}
               </Option>
             ))}
           </OptionsInner>

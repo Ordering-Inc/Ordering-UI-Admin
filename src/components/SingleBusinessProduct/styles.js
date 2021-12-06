@@ -85,7 +85,7 @@ export const WrapperImage = styled.div`
 `
 
 export const InfoBlock = styled.div`
-  input, textarea {
+  input, textarea, div {
     font-weight: 500;
     font-size: 13px;
     color: ${props => props.theme.colors.headingColor};
@@ -100,6 +100,9 @@ export const InfoBlock = styled.div`
       resize: none;
       width: 100%;
     }
+  }
+  div{
+    min-width: 150px;
   }
   &:hover {
     > input, textarea {

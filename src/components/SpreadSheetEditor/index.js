@@ -68,6 +68,11 @@ export const SpreadSheetEditor = (props) => {
         if (visualColIndex === 0) {
           cellProperties.readOnly = true
         }
+        console.log(prop)
+        if (prop === 'taxShow') {
+          cellProperties.readOnly = true
+          cellProperties.editor = false
+        }
       }
       return cellProperties
     }
