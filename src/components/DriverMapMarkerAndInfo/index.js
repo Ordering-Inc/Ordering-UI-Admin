@@ -15,7 +15,7 @@ export const DriverMapMarkerAndInfo = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parseDate }] = useUtils()
+  const [{ parseDate, optimizeImage }] = useUtils()
   const [infoShow, setInfoShow] = useState(false)
   const infoRef = useRef(null)
   const [infoTop, setInfoTop] = useState('0px')
@@ -69,7 +69,7 @@ export const DriverMapMarkerAndInfo = (props) => {
         onMouseLeave={() => setInfoShow(false)}
       >
         {driver.photo ? (
-          <MapMarkerImg bgimage={driver.photo} />
+          <MapMarkerImg bgimage={optimizeImage(driver.photo, 'h_50,c_limit')} />
         ) : (
           <MapMarkerImg bgimage={theme?.images?.icons?.noDriver} />
         )}
