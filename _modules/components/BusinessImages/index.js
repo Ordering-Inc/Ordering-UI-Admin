@@ -63,6 +63,10 @@ var BusinessImagesUI = function BusinessImagesUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      optimizeImage = _useUtils2[0].optimizeImage;
+
   var imageInputRef = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
@@ -185,7 +189,7 @@ var BusinessImagesUI = function BusinessImagesUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: photo.id
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: photo.file
+      src: optimizeImage(photo.file, 'h_200,c_limit')
     }), /*#__PURE__*/_react.default.createElement(_styles.DeleteButton, {
       onClick: function onClick() {
         return handleDeleteClick(photo.id);

@@ -59,15 +59,20 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       getPageBusinesses = props.getPageBusinesses,
       isOpen = props.isOpen,
       close = props.close,
-      changBusinessState = props.changBusinessState;
+      changBusinessState = props.changBusinessState,
+      defaultPageSize = props.defaultPageSize;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      optimizeImage = _useUtils2[0].optimizeImage;
+
   var dropdownReference = (0, _react.useRef)();
 
-  var _useState = (0, _react.useState)(6),
+  var _useState = (0, _react.useState)(defaultPageSize !== null && defaultPageSize !== void 0 ? defaultPageSize : 6),
       _useState2 = _slicedToArray(_useState, 2),
       businessesPerPage = _useState2[0],
       setBusinessesPerPage = _useState2[1];
@@ -152,22 +157,26 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, businessList.loading ? _toConsumableArray(Array(5).keys()).map(function (i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, businessList.loading ? _toConsumableArray(Array(businessesPerPage).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OptionItem, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 38,
       height: 38,
       style: {
-        margin: '8px',
         borderRadius: '7.6px'
       }
-    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      style: {
+        marginLeft: '8px',
+        marginRight: '8px'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 15,
-      width: 165
+      width: 100
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 12,
-      width: 130,
+      width: 80,
       style: {
         marginTop: '7px'
       }
@@ -181,10 +190,12 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
         return changBusinessState(business);
       }
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: business === null || business === void 0 ? void 0 : business.logo,
+      src: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_50,c_limit'),
       alt: ""
     }), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name));
-  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, !businessList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, {
+    className: "pagination-container"
+  }, !businessList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,
