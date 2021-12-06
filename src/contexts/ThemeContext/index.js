@@ -87,6 +87,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       padding: 10px 19px;
       width: fit-content;
       min-width: 200px;
+      font-size: 14px;
     }
   `
 

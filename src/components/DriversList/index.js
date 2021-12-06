@@ -64,7 +64,7 @@ export const DriversList = (props) => {
               active={selectedDriver?.id === driver.id}
             >
               <WrapperImage>
-                <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
+                <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
               </WrapperImage>
               <DriverInfo>
                 <div>
