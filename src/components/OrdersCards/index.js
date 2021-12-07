@@ -164,7 +164,7 @@ export const OrdersCards = (props) => {
                 <CardContent>
                   <BusinessInfo>
                     <WrapperImage>
-                      <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                      <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
                     </WrapperImage>
                     <div className='info'>
                       <p className='bold'>{order?.business?.name}</p>

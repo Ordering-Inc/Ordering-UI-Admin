@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  useUtils,
+  DashboardBusinessList as BusinessListController
+} from 'ordering-components-admin'
 import {
   PopMenuContatiner,
   BusinessSearch,
@@ -21,11 +25,13 @@ const BusinessessListingUI = (props) => {
     getPageBusinesses,
     isOpen,
     close,
-    changBusinessState
+    changBusinessState,
+    defaultPageSize
   } = props
   const [, t] = useLanguage()
+  const [{ optimizeImage }] = useUtils()
   const dropdownReference = useRef()
-  const [businessesPerPage, setBusinessesPerPage] = useState(6)
+  const [businessesPerPage, setBusinessesPerPage] = useState(defaultPageSize ?? 6)
   const [currentPage, setCurrentPage] = useState(1)
   const [currentBusinessess, setCurrentBusinessess] = useState([])
   const [totalPages, setTotalPages] = useState(null)
@@ -96,12 +102,12 @@ const BusinessessListingUI = (props) => {
         </BusinessSearch>
         <BusinessList>
           {businessList.loading ? (
-            [...Array(5).keys()].map(i => (
+            [...Array(businessesPerPage).keys()].map(i => (
               <OptionItem key={i}>
-                <Skeleton width={38} height={38} style={{ margin: '8px', borderRadius: '7.6px' }} />
-                <div>
-                  <Skeleton height={15} width={165} />
-                  <Skeleton height={12} width={130} style={{ marginTop: '7px' }} />
+                <Skeleton width={38} height={38} style={{ borderRadius: '7.6px' }} />
+                <div style={{ marginLeft: '8px', marginRight: '8px' }}>
+                  <Skeleton height={15} width={100} />
+                  <Skeleton height={12} width={80} style={{ marginTop: '7px' }} />
                 </div>
               </OptionItem>
             ))
@@ -110,7 +116,7 @@ const BusinessessListingUI = (props) => {
               {currentBusinessess && currentBusinessess.length > 0 && (
                 currentBusinessess.map(business => (
                   <OptionItem key={business.id} onClick={() => changBusinessState(business)}>
-                    <img src={business?.logo} alt='' />
+                    <img src={optimizeImage(business?.logo, 'h_50,c_limit')} alt='' />
                     <span><b>{business?.name}</b>{business?.city?.name}</span>
                   </OptionItem>
                 ))
@@ -119,7 +125,7 @@ const BusinessessListingUI = (props) => {
           )}
         </BusinessList>
         {pagination && (
-          <WrapperPagination>
+          <WrapperPagination className='pagination-container'>
             {!businessList.loading && totalPages > 0 && (
               <Pagination
                 currentPage={currentPage}

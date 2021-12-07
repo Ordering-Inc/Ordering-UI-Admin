@@ -21,6 +21,7 @@ export const DriversLocation = (props) => {
   const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
   const [mapZoom, setMapZoom] = useState(10)
   const [mapLoaded, setMapLoaded] = useState(true)
+  const [mapFitted, setMapFitted] = useState(false)
 
   const defaultCenter = { lat: 19.4326, lng: -99.1332 }
   const defaultZoom = 10
@@ -33,7 +34,7 @@ export const DriversLocation = (props) => {
 
     if (showDrivers.length === 1) {
       setMapCenter(showDrivers[0].location ? showDrivers[0].location : defaultCenter)
-      setMapZoom(defaultZoom)
+      setMapZoom(mapZoom)
       return
     }
 
@@ -61,13 +62,16 @@ export const DriversLocation = (props) => {
     const { center, zoom } = fitBounds(newBounds, mapSize)
     setMapZoom(zoom)
     setMapCenter(center)
+    setMapFitted(true)
   }
 
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
     if (showDrivers.length === 0 || mapLoaded) return
-    mapFit()
-  }, [showDrivers, mapLoaded])
+    if (!mapFitted) {
+      mapFit()
+    }
+  }, [showDrivers, mapLoaded, mapFitted])
 
   useEffect(() => {
     if (selectedDriver) {
@@ -84,6 +88,11 @@ export const DriversLocation = (props) => {
   const handleMapChange = (data) => {
     setMapZoom(data?.zoom)
   }
+
+  useEffect(() => {
+    if (!selectedDriver?.id) return
+    setMapFitted(false)
+  }, [selectedDriver?.id])
 
   return (
     <WrapperMap ref={mapRef} className='drivers-location'>

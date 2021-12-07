@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -47,6 +47,7 @@ export const UsersList = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [{ optimizeImage }] = useUtils()
 
   const getUserType = (type) => {
     const userTypes = [
@@ -162,7 +163,7 @@ export const UsersList = (props) => {
                         </CheckBoxWrapper>
                         <WrapperImage>
                           {user?.photo ? (
-                            <Image bgimage={user?.photo} />
+                            <Image bgimage={optimizeImage(user?.photo, 'h_50,c_limit')} />
                           ) : (
                             <FaUserAlt />
                           )}
