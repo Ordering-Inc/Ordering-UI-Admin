@@ -151,6 +151,7 @@ export const Tbody = styled.tbody`
       padding: 12px 5px;
       font-size: 12px;
       text-align: center;
+      white-space: nowrap;
       color: ${props => props.theme?.colors.lightGray};
 
       &:first-child, &:nth-child(2) {
