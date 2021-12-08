@@ -15,20 +15,18 @@ export const BusinessProductsCategories = (props) => {
     categorySelected,
     handleChangeCategory,
     handleOpenCategoryDetails,
-    actionsGroupRef,
-    productsContainerRef,
-    productDetailsRef
+    categoryListRef
   } = props
 
   const [, t] = useLanguage()
   const [dataSelected, setDataSelected] = useState('')
   const containerRef = useRef()
-
+  const listRef = useRef()
   useEffect(() => {
     let listener
-    if (containerRef?.current && productsContainerRef && actionsGroupRef && productDetailsRef) {
+    if (containerRef?.current && categoryListRef) {
       listener = window.addEventListener('click', (e) => {
-        if (!containerRef?.current?.contains(e.target) && !productDetailsRef?.container(e.target) && !actionsGroupRef?.contains(e.target) && !productsContainerRef?.contains(e.target)) {
+        if (!containerRef?.current?.contains(e.target) && categoryListRef?.contains(e.target)) {
           handleChangeCategory(null, null)
         }
       })
@@ -36,7 +34,7 @@ export const BusinessProductsCategories = (props) => {
     return () => {
       window.removeEventListener('click', listener)
     }
-  }, [containerRef?.current, productDetailsRef])
+  }, [containerRef?.current, categoryListRef])
 
   return (
     <>
@@ -44,7 +42,7 @@ export const BusinessProductsCategories = (props) => {
         <HeaderContainer>
           <h1>{t('BUSINESS_CATEGORY', 'Business category')}</h1>
         </HeaderContainer>
-        <ListContent>
+        <ListContent ref={listRef}>
           {
             businessState.loading && (
               [...Array(6).keys()].map(i => (
@@ -68,8 +66,8 @@ export const BusinessProductsCategories = (props) => {
             ))
           )}
         </ListContent>
-        <AddCategory onClick={() => handleOpenCategoryDetails()}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
       </CategoryListContainer>
+      <AddCategory onClick={() => handleOpenCategoryDetails()}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
     </>
   )
 }

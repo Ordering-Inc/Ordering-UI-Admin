@@ -18,7 +18,11 @@ export const ProductDetails = (props) => {
     business,
     onClose,
     product,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    setFormTaxState,
+    formTaxState,
+    taxes,
+    setTaxes
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -105,6 +109,10 @@ export const ProductDetails = (props) => {
               business={business}
               product={product}
               handleUpdateBusinessState={handleUpdateBusinessState}
+              setFormTaxState={setFormTaxState}
+              formTaxState={formTaxState}
+              taxes={taxes}
+              setTaxes={setTaxes}
             />
           )}
           {showOption === 'ingredients' && (
