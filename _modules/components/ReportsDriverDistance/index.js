@@ -227,7 +227,9 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value_refers === 'distance' ? parseNumber(td.value, {
+      }, td.value_refers === 'distance' ? td.value_unit === 'meter' ? parseNumber(td.value / 1000, {
+        decimal: 2
+      }) : parseNumber(td.value, {
         decimal: 2
       }) : td.value);
     })));
