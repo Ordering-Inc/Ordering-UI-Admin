@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
-  var _product$id, _theme$images$icons, _productFormState$cha2, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5, _productFormState$cha6;
+  var _productFormState$cha2, _product$id, _theme$images$icons, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5, _productFormState$cha6, _productFormState$cha7, _productFormState$cha8, _productFormState$cha9;
 
   var isSkeleton = props.isSkeleton,
       viewMethod = props.viewMethod,
@@ -72,7 +72,8 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       businessState = props.businessState,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       dataSelected = props.dataSelected,
-      setDataSelected = props.setDataSelected;
+      setDataSelected = props.setDataSelected,
+      business = props.business;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -159,7 +160,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   };
 
   var handleProductClick = function handleProductClick(e) {
-    var isInvalid = e.target.closest('.product_info') || e.target.closest('.product_price') || e.target.closest('.product_description') || e.target.closest('.product_enable_control') || e.target.closest('.product_actions');
+    var isInvalid = e.target.closest('.product_info') || e.target.closest('.product_price') || e.target.closest('.product_description') || e.target.closest('.product_enable_control') || e.target.closest('.product_actions') || e.target.closest('.description') || e.target.closest('.fee_fixed') || e.target.closest('.fee_percentage');
     if (isInvalid) return;
     handleOpenProductDetails(product);
   };
@@ -264,6 +265,9 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     });
   };
 
+  var taxProduct = (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha2 = productFormState.changes) === null || _productFormState$cha2 === void 0 ? void 0 : _productFormState$cha2.tax) || (business === null || business === void 0 ? void 0 : business.tax);
+  var taxProductType = (taxProduct === null || taxProduct === void 0 ? void 0 : taxProduct.type) || (business === null || business === void 0 ? void 0 : business.tax_type);
+  var taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price');
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleListBusinessContainer, null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
     className: "business"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -331,29 +335,43 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: productFormState === null || productFormState === void 0 ? void 0 : productFormState.loading
-  }, productFormState !== null && productFormState !== void 0 && (_productFormState$cha2 = productFormState.changes) !== null && _productFormState$cha2 !== void 0 && _productFormState$cha2.images ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optimizeImage(productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha3 = productFormState.changes) === null || _productFormState$cha3 === void 0 ? void 0 : _productFormState$cha3.images, 'h_50,c_limit'),
+  }, productFormState !== null && productFormState !== void 0 && (_productFormState$cha3 = productFormState.changes) !== null && _productFormState$cha3 !== void 0 && _productFormState$cha3.images ? /*#__PURE__*/_react.default.createElement("img", {
+    src: optimizeImage(productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha4 = productFormState.changes) === null || _productFormState$cha4 === void 0 ? void 0 : _productFormState$cha4.images, 'h_50,c_limit'),
     alt: "product image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement(_styles.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))), (product === null || product === void 0 ? void 0 : product.name) && /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     name: "name",
-    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha4 = productFormState.changes) === null || _productFormState$cha4 === void 0 ? void 0 : _productFormState$cha4.name) || '',
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha5 = productFormState.changes) === null || _productFormState$cha5 === void 0 ? void 0 : _productFormState$cha5.name) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
   })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     name: "price",
     className: "product_price",
-    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha5 = productFormState.changes) === null || _productFormState$cha5 === void 0 ? void 0 : _productFormState$cha5.price) || '',
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha6 = productFormState.changes) === null || _productFormState$cha6 === void 0 ? void 0 : _productFormState$cha6.price) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
   }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("textarea", {
     name: "description",
-    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha6 = productFormState.changes) === null || _productFormState$cha6 === void 0 ? void 0 : _productFormState$cha6.description) || '',
+    className: "description",
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha7 = productFormState.changes) === null || _productFormState$cha7 === void 0 ? void 0 : _productFormState$cha7.description) || '',
     onChange: handleChangeInput,
-    autoComplete: "off",
-    className: "product_description"
+    autoComplete: "off"
+  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.tax) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("div", null, (taxProduct === null || taxProduct === void 0 ? void 0 : taxProduct.rate) || taxProduct, "% (", taxProductTypeString, ")"))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.fee_fixed) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "fee_fixed",
+    className: "fee_fixed",
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha8 = productFormState.changes) === null || _productFormState$cha8 === void 0 ? void 0 : _productFormState$cha8.fee_fixed) || '',
+    onChange: handleChangeInput,
+    autoComplete: "off"
+  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.fee_percentage) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    name: "fee_percentage",
+    className: "fee_percentage",
+    value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha9 = productFormState.changes) === null || _productFormState$cha9 === void 0 ? void 0 : _productFormState$cha9.fee_percentage) || '',
+    onChange: handleChangeInput,
+    autoComplete: "off"
   }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     className: "product_enable_control"
   }, product !== null && product !== void 0 && product.enabled ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {

@@ -48,9 +48,7 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       categorySelected = props.categorySelected,
       handleChangeCategory = props.handleChangeCategory,
       handleOpenCategoryDetails = props.handleOpenCategoryDetails,
-      actionsGroupRef = props.actionsGroupRef,
-      productsContainerRef = props.productsContainerRef,
-      productDetailsRef = props.productDetailsRef;
+      categoryListRef = props.categoryListRef;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -62,14 +60,15 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       setDataSelected = _useState2[1];
 
   var containerRef = (0, _react.useRef)();
+  var listRef = (0, _react.useRef)();
   (0, _react.useEffect)(function () {
     var listener;
 
-    if (containerRef !== null && containerRef !== void 0 && containerRef.current && productsContainerRef && actionsGroupRef && productDetailsRef) {
+    if (containerRef !== null && containerRef !== void 0 && containerRef.current && categoryListRef) {
       listener = window.addEventListener('click', function (e) {
         var _containerRef$current;
 
-        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target)) && !(productDetailsRef !== null && productDetailsRef !== void 0 && productDetailsRef.container(e.target)) && !(actionsGroupRef !== null && actionsGroupRef !== void 0 && actionsGroupRef.contains(e.target)) && !(productsContainerRef !== null && productsContainerRef !== void 0 && productsContainerRef.contains(e.target))) {
+        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target)) && categoryListRef !== null && categoryListRef !== void 0 && categoryListRef.contains(e.target)) {
           handleChangeCategory(null, null);
         }
       });
@@ -78,10 +77,12 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
     return function () {
       window.removeEventListener('click', listener);
     };
-  }, [containerRef === null || containerRef === void 0 ? void 0 : containerRef.current, productDetailsRef]);
+  }, [containerRef === null || containerRef === void 0 ? void 0 : containerRef.current, categoryListRef]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, {
     ref: containerRef
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, {
+    ref: listRef
+  }, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, {
       key: i,
       isSkeleton: true
@@ -99,11 +100,11 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       dataSelected: dataSelected,
       onDataSelected: setDataSelected
     }));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
     onClick: function onClick() {
       return handleOpenCategoryDetails();
     }
-  }, t('ADD_NEW_CATEGORY', 'Add new category'))));
+  }, t('ADD_NEW_CATEGORY', 'Add new category')));
 };
 
 exports.BusinessProductsCategories = BusinessProductsCategories;

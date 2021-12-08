@@ -65,7 +65,7 @@ var WrapperImage = _styledComponents.default.div(_templateObject8 || (_templateO
 
 exports.WrapperImage = WrapperImage;
 
-var InfoBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  input, textarea {\n    font-weight: 500;\n    font-size: 13px;\n    color: ", ";\n    border: 1px solid transparent;\n    outline: none;\n    transition: all 0.3s;\n    border-radius: 3px;\n    padding: 5px;\n    &.product_description {\n      font-size: 12px;\n      color: ", ";\n      resize: none;\n      width: 100%;\n    }\n  }\n  &:hover {\n    > input, textarea {\n      border: 1px solid ", ";\n      background: white;\n    }\n  }\n"])), function (props) {
+var InfoBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  input, textarea, div {\n    font-weight: 500;\n    font-size: 13px;\n    color: ", ";\n    border: 1px solid transparent;\n    outline: none;\n    transition: all 0.3s;\n    border-radius: 3px;\n    padding: 5px;\n    &.product_description {\n      font-size: 12px;\n      color: ", ";\n      resize: none;\n      width: 100%;\n    }\n  }\n  div{\n    min-width: 150px;\n  }\n  &:hover {\n    > input, textarea {\n      border: 1px solid ", ";\n      background: white;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.lightGray;

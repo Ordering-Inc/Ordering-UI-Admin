@@ -66,7 +66,8 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
       handleUpdateClick = props.handleUpdateClick,
       handleChangeCheckBox = props.handleChangeCheckBox,
       businessState = props.businessState,
-      category = props.category;
+      category = props.category,
+      categorySelected = props.categorySelected;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -229,7 +230,7 @@ var BusinessCategoryEditUI = function BusinessCategoryEditUI(props) {
     defaultValue: formState === null || formState === void 0 ? void 0 : formState.changes.name,
     onChange: handleChangeInput,
     autoComplete: "off"
-  })), !category && /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
+  })), categorySelected && /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     style: {
       paddingTop: 20,
       display: 'flex',

@@ -52,7 +52,11 @@ var ProductDetails = function ProductDetails(props) {
       business = props.business,
       onClose = props.onClose,
       product = props.product,
-      handleUpdateBusinessState = props.handleUpdateBusinessState;
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      setFormTaxState = props.setFormTaxState,
+      formTaxState = props.formTaxState,
+      taxes = props.taxes,
+      setTaxes = props.setTaxes;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -146,7 +150,11 @@ var ProductDetails = function ProductDetails(props) {
   }, showOption === 'properties' && /*#__PURE__*/_react.default.createElement(_ProductProperties.ProductProperties, {
     business: business,
     product: product,
-    handleUpdateBusinessState: handleUpdateBusinessState
+    handleUpdateBusinessState: handleUpdateBusinessState,
+    setFormTaxState: setFormTaxState,
+    formTaxState: formTaxState,
+    taxes: taxes,
+    setTaxes: setTaxes
   }), showOption === 'ingredients' && /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
     business: business,
     product: product,

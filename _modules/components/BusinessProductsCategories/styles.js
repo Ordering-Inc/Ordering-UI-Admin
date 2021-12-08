@@ -31,7 +31,7 @@ var ListContent = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.ListContent = ListContent;
 
-var AddCategory = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 12px;\n  color: ", ";\n  cursor: pointer;\n  padding: 10px;\n"])), function (props) {
+var AddCategory = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: inline;\n  user-select: none;\n  font-size: 12px;\n  color: ", ";\n  cursor: pointer;\n  padding: 10px;\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.lightGray;

@@ -11,7 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _FiChevronDown = _interopRequireDefault(require("@meronex/icons/fi/FiChevronDown"));
 
+var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
+
 var _Selects = require("../../Selects");
+
+var _Buttons = require("../../Buttons");
+
+var _orderingComponentsAdmin = require("ordering-components-admin");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39,7 +45,9 @@ var Select = function Select(props) {
       notAsync = props.notAsync,
       type = props.type,
       noSelected = props.noSelected,
-      className = props.className;
+      className = props.className,
+      onEdit = props.onEdit,
+      onDelete = props.onDelete;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -59,6 +67,10 @@ var Select = function Select(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       value = _useState6[0],
       setValue = _useState6[1];
+
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var dropdownReference = (0, _react.useRef)();
 
@@ -99,7 +111,7 @@ var Select = function Select(props) {
 
   var handleChangeOption = function handleChangeOption(e, option) {
     if (e.target.closest('.disabled') === null) setOpen(!open);
-    if (option.value === null || option.disabled) return;
+    if (option.value === null || option.disabled || e.target.closest('.delete') !== null) return;
 
     if (!noSelected) {
       setSelectedOption(option);
@@ -136,7 +148,20 @@ var Select = function Select(props) {
       disabled: option.disabled,
       showDisable: option === null || option === void 0 ? void 0 : option.showDisable,
       className: option.disabled ? 'disabled' : null
-    }, option.content);
+    }, option.content, (option.editFunctionality || option.deleteFunctionality) && /*#__PURE__*/_react.default.createElement(_Selects.FunctionalityContainer, {
+      disabled: value === option.value
+    }, option.editFunctionality && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      borderRadius: "8px",
+      color: "lightPrimary",
+      onClick: function onClick() {
+        return onEdit(option, i);
+      }
+    }, t('EDIT', 'Edit')), option.deleteFunctionality && /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
+      className: "delete",
+      onClick: function onClick() {
+        return onDelete(option.value);
+      }
+    })));
   }))));
 };
 
