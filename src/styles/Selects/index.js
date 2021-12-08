@@ -9,6 +9,7 @@ export const Option = styled.div`
   min-width: ${({ minWidth }) => minWidth || '100px'};
   color: #333;
   cursor: pointer;
+  justify-content: space-between;
 
   ${({ disabled }) => disabled && css`
     cursor: no-drop;
@@ -201,5 +202,17 @@ export const MultiSelectOption = styled.div`
     transform: translate(100%, -50%);
     top: 11px;
     right: 15px;
+  }
+`
+
+export const FunctionalityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  svg{
+    margin-left: 20px;
+    ${props => props.disabled && css`
+      opacity: 0.4;
+      pointer-events: none;
+    `}
   }
 `

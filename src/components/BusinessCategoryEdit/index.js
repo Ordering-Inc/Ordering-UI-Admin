@@ -37,7 +37,8 @@ const BusinessCategoryEditUI = (props) => {
     handleUpdateClick,
     handleChangeCheckBox,
     businessState,
-    category
+    category,
+    categorySelected
   } = props
 
   const [, t] = useLanguage()
@@ -203,7 +204,7 @@ const BusinessCategoryEditUI = (props) => {
                     autoComplete='off'
                   />
                 </CategoryNameWrapper>
-                {!category && (
+                {categorySelected && (
                   <BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex', alignItems: 'center' }}>
                     <span style={{ fontSize: 15 }}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
                     <Switch
