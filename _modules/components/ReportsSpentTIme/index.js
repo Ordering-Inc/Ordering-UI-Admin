@@ -86,6 +86,11 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
       isDriverGroupFilter = _useState4[0],
       setIsDriverGroupFilter = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      availableDriverIds = _useState6[0],
+      setAvailableDriverIds = _useState6[1];
+
   var tableRef = (0, _react.useRef)(null);
 
   var handleChangeDate = function handleChangeDate(date1, date2) {
@@ -235,7 +240,7 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
     onClose: function onClose() {
       return setIsDriverFilter(false);
     },
-    isDriverGroup: true
+    availableDriverIds: availableDriverIds
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
@@ -248,7 +253,8 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsDriverGroupFilter(false);
-    }
+    },
+    setAvailableDriverIds: setAvailableDriverIds
   }))));
 };
 
