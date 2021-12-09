@@ -34,6 +34,7 @@ const ReportsSpentTimeUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
+  const [availableDriverIds, setAvailableDriverIds] = useState(null)
 
   const tableRef = useRef(null)
 
@@ -195,7 +196,7 @@ const ReportsSpentTimeUI = (props) => {
         <ReportsDriverFilter
           {...props}
           onClose={() => setIsDriverFilter(false)}
-          isDriverGroup
+          availableDriverIds={availableDriverIds}
         />
       </Modal>
       <Modal
@@ -207,7 +208,9 @@ const ReportsSpentTimeUI = (props) => {
         onClose={() => setIsDriverGroupFilter(false)}
       >
         <ReportsDriverGroupFilter
-          {...props} onClose={() => setIsDriverGroupFilter(false)}
+          {...props}
+          onClose={() => setIsDriverGroupFilter(false)}
+          setAvailableDriverIds={setAvailableDriverIds}
         />
       </Modal>
     </ReportsBusinessSpendContainer>
