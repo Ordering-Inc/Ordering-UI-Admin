@@ -41,6 +41,7 @@ import { ReportsSpentTime } from '../ReportsSpentTime'
 import { ReportsTopDrivers } from '../ReportsTopDrivers'
 import { ReportsOrders } from '../ReportsOrders'
 import { ReportsSales } from '../ReportsSales'
+import { ReportsUsers } from '../ReportsUsers'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -64,7 +65,9 @@ export const Reports = (props) => {
     { id: 11, name: t('TIME', 'Time'), description: t('TIME_DESC', 'Time description'), icon: <Alarm /> },
     { id: 12, name: t('TOP_DRIVERS', 'Top drivers'), description: t('TOP_DRIVERS_DESC', 'Top drivers description'), icon: <Truck /> },
     { id: 13, name: t('ORDERS', 'Orders'), description: t('ORDERS_DESC', 'Orders description'), icon: <Cart3 /> },
-    { id: 14, name: t('SALES', 'Sales'), description: t('SALES_DESC', 'Sales description'), icon: <Shop /> }
+    { id: 14, name: t('SALES', 'Sales'), description: t('SALES_DESC', 'Sales description'), icon: <Shop /> },
+    { id: 15, name: t('REGISTER_USERS', 'Register users'), description: t('REGISTER_USERS_DESC', 'Register users description'), icon: <Shop /> },
+    { id: 16, name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'), description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'), icon: <Shop /> }
   ]
 
   const handleCloseSidebar = () => {
@@ -128,6 +131,7 @@ export const Reports = (props) => {
           {selectedReport === 12 && <ReportsTopDrivers />}
           {selectedReport === 13 && <ReportsOrders />}
           {selectedReport === 14 && <ReportsSales />}
+          {selectedReport === 15 && <ReportsUsers />}
         </SideBar>
       )}
     </ReportsContainer>

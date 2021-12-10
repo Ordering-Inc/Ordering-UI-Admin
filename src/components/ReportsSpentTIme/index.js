@@ -195,7 +195,6 @@ const ReportsSpentTimeUI = (props) => {
         <ReportsDriverFilter
           {...props}
           onClose={() => setIsDriverFilter(false)}
-          isDriverGroup
         />
       </Modal>
       <Modal
