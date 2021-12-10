@@ -110,6 +110,15 @@ export const InfoBlock = styled.div`
       background: white;
     }
   }
+
+  input.fee_fixed,
+  input.fee_percentage {
+    max-width: 100px;
+  }
+
+  textarea.description {
+    width: 100%;
+  }
 `
 
 export const BusinessEnableWrapper = styled.div`

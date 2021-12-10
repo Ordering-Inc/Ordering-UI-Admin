@@ -195,7 +195,7 @@ const ProductPropertiesUI = (props) => {
         defaultValue={parseInt(productState?.sku) !== -1 ? productState?.sku : ''}
         onChange={(e) => handleClickProperty('sku', e.target.value ?? null)}
       />
-      <LabelCustom htmlFor='estimated'>{t('ESTIMATED_PERSON', 'Estimated person')}</LabelCustom>
+      {/* <LabelCustom htmlFor='estimated'>{t('ESTIMATED_PERSON', 'Estimated person')}</LabelCustom>
       <TypeSelectWrapper>
         <Select
           defaultValue={productState?.estimated_person || null}
@@ -231,7 +231,7 @@ const ProductPropertiesUI = (props) => {
         placeholder='$0.00'
         defaultValue={parseInt(productState?.fee_fixed) || ''}
         onChange={(e) => handleChangeInput(e) || 0}
-      />
+      /> */}
 
       <Button
         borderRadius='8px'
