@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const CategoryProductsContainer = styled.div`
   flex: 1;
@@ -132,6 +133,16 @@ export const ProductHeader = styled.div`
 export const ActionIconList = styled.div`
   display: flex;
   align-items: center;
+  button.batch-image-upload {
+    border: 1px solid ${props => props.theme.colors.primary};
+    background-color: transparent;
+    color: ${props => darken(0.07, props.theme.colors.primary)};
+    padding: 4px 15px;
+    &:hover {
+      background: ${props => props.theme.colors.lightPrimary};
+      color: ${props => props.theme.colors.primary};
+    }
+  }
 `
 
 export const ViewMethodButton = styled.span`
@@ -141,6 +152,12 @@ export const ViewMethodButton = styled.span`
 
   svg {
     font-size: 16px;
+  }
+
+  &.batch {
+    svg {
+      font-size: 18px;
+    }
   }
 
   ${({ active }) => active && css`
