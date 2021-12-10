@@ -42,6 +42,7 @@ import { ReportsTopDrivers } from '../ReportsTopDrivers'
 import { ReportsOrders } from '../ReportsOrders'
 import { ReportsSales } from '../ReportsSales'
 import { ReportsUsers } from '../ReportsUsers'
+import { ReportsCustomer } from '../ReportsCustomer'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -132,6 +133,7 @@ export const Reports = (props) => {
           {selectedReport === 13 && <ReportsOrders />}
           {selectedReport === 14 && <ReportsSales />}
           {selectedReport === 15 && <ReportsUsers />}
+          {selectedReport === 16 && <ReportsCustomer />}
         </SideBar>
       )}
     </ReportsContainer>
