@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, DriverAnalytics as DriverAnalyticsController } from 'ordering-components-admin'
 import { AnalyticsDriversFilter } from '../AnalyticsDriversFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Button, IconButton } from '../../styles/Buttons'
@@ -19,7 +19,6 @@ import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
-import { DriverAnalytics as DriverAnalyticsController } from './naked'
 
 import {
   BusinessAnalyticsContainer,
