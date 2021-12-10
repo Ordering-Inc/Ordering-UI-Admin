@@ -6,7 +6,6 @@ import { Button, IconButton } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AnalyticsStatusFilterBar } from '../AnalyticsStatusFilterBar'
 import { AnalyticsMap } from '../AnalyticsMap'
-import { AnalyticsOrdersOrSales } from '../AnalyticsOrdersOrSales'
 import { AnalyticsOrdersStatus } from '../AnalyticsOrdersStatus'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
@@ -18,6 +17,8 @@ import { AnalyticsBusyTimes } from '../AnalyticsBusyTimes'
 import { AnalyticsSpendList } from '../AnalyticsSpendList'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { AnalyticsStatusSubFilter } from '../AnalyticsStatusSubFilter'
 
 import {
   BusinessAnalyticsContainer,
@@ -30,7 +31,8 @@ import {
   MapWrraper,
   AnalyticsTimeZoneWrapper
 } from './styles'
-import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { AnalyticsDriverOrders } from '../AnalyticsDriverOrders'
+import { ReportsBrandFilter } from '../ReportsBrandFilter'
 
 const DriverAnalyticsUI = (props) => {
   const {
@@ -61,6 +63,7 @@ const DriverAnalyticsUI = (props) => {
 
   const [driversFilterModal, setDriversFilterModal] = useState(false)
   const [driverGroupModal, setDriverGroupModal] = useState(false)
+  const [isBrandFilter, setIsBrandFilter] = useState(false)
 
   return (
     <BusinessAnalyticsContainer>
@@ -78,8 +81,13 @@ const DriverAnalyticsUI = (props) => {
         </HeaderTitleContainer>
         <HeaderFilterContainer>
           <BusinessFilterWrapper>
+            <Button onClick={() => setIsBrandFilter(true)}>
+              {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id.length : t('ALL', 'All')})
+            </Button>
+          </BusinessFilterWrapper>
+          <BusinessFilterWrapper>
             <Button onClick={() => setDriverGroupModal(true)}>
-              {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driv ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
+              {t('DRIVER_GROUP', 'Driver group')} ({filterList?.driver_groups_ids ? filterList?.driver_groups_ids.length : t('ALL', 'All')})
             </Button>
           </BusinessFilterWrapper>
           <BusinessFilterWrapper>
@@ -101,6 +109,9 @@ const DriverAnalyticsUI = (props) => {
       <AnalyticsStatusFilterBar
         {...props}
       />
+      <AnalyticsStatusSubFilter
+        {...props}
+      />
       <MapWrraper>
         <AnalyticsMap
           locationList={orderLocationList}
@@ -109,14 +120,14 @@ const DriverAnalyticsUI = (props) => {
 
       <AnalyticsContentWrapper className='row'>
         <div className='col-md-12 col-lg-6'>
-          <AnalyticsOrdersOrSales
+          <AnalyticsDriverOrders
             isOrders
             filterList={filterList}
             chartDataList={ordersList}
           />
         </div>
         <div className='col-md-12 col-lg-6'>
-          <AnalyticsOrdersOrSales
+          <AnalyticsDriverOrders
             filterList={filterList}
             chartDataList={salesList}
           />
@@ -210,6 +221,19 @@ const DriverAnalyticsUI = (props) => {
         <ReportsDriverGroupFilter
           {...props}
           onClose={() => setDriverGroupModal(false)}
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('BRAND', 'Brand')}
+        open={isBrandFilter}
+        onClose={() => setIsBrandFilter(false)}
+      >
+        <ReportsBrandFilter
+          {...props}
+          onClose={() => setIsBrandFilter(false)}
         />
       </Modal>
     </BusinessAnalyticsContainer>
