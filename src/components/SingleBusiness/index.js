@@ -108,7 +108,7 @@ const SingleBusinessUI = (props) => {
                   <td className='business'>
                     <BusinessGeneralInfo>
                       <WrapperImage>
-                        <Image bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo)} />
+                        <Image bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
                       </WrapperImage>
                       <InfoBlock>
                         <p className='bold'>{businessState?.business?.name}</p>
@@ -205,7 +205,7 @@ const SingleBusinessUI = (props) => {
             <SingleBusinessCardContainer
               onClick={(e) => handleClickBusiness(e)}
             >
-              <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_400,c_limit')}>
+              <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_100,c_limit')}>
                 <BusinessHeaderContent>
                   <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
                   <span>{t('ID', 'ID')} {businessState?.business?.id}</span>

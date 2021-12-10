@@ -46,7 +46,11 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateBusinessState,
     setCategorySelected,
     setBusinessSlug,
-    openCategories
+    openCategories,
+    setFormTaxState,
+    formTaxState,
+    taxes,
+    setTaxes
   } = props
 
   const [, t] = useLanguage()
@@ -58,9 +62,7 @@ const BusinessProductsListingUI = (props) => {
   const [isProductAdd, setIsProductAdd] = useState(false)
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [businessName, setBusinessName] = useState(null)
-  const actionsGroupRef = useRef()
-  const productsContainerRef = useRef()
-  const productDetailsRef = useRef()
+  const categoryListRef = useRef()
 
   const handleOpenCategoryDetails = (category = null) => {
     if (category && category?.id !== null) {
@@ -158,7 +160,7 @@ const BusinessProductsListingUI = (props) => {
               </BusinessSelector>
             )}
           </HeaderTitleContainer>
-          <ActionsGroup ref={actionsGroupRef}>
+          <ActionsGroup>
             <Button
               borderRadius='8px'
               color='lightPrimary'
@@ -183,7 +185,7 @@ const BusinessProductsListingUI = (props) => {
           </ActionsGroup>
         </HeaderContainer>
         <CategoryProductsContent>
-          <CategoryListContainer>
+          <CategoryListContainer ref={categoryListRef}>
             {
               <BusinessProductsCategories
                 {...props}
@@ -195,13 +197,11 @@ const BusinessProductsListingUI = (props) => {
                 openCategories={openCategories}
                 handleUpdateBusinessState={handleUpdateBusinessState}
                 setCategorySelected={setCategorySelected}
-                actionsGroupRef={actionsGroupRef?.current}
-                productsContainerRef={productsContainerRef?.current}
-                productDetailsRef={productDetailsRef?.current}
+                categoryListRef={categoryListRef?.current}
               />
             }
           </CategoryListContainer>
-          <ProductListContainer ref={productsContainerRef}>
+          <ProductListContainer>
             <ProductHeader>
               <SingleBusinessCategoryEdit
                 {...props}
@@ -249,19 +249,19 @@ const BusinessProductsListingUI = (props) => {
           />
         )
       }
-      <div
-        ref={productDetailsRef}
-      >
-        {openProductDetails && (
-          <ProductDetails
-            open={openProductDetails}
-            onClose={handleCloseProductDetails}
-            product={selectedProduct}
-            business={businessState?.business}
-            handleUpdateBusinessState={handleUpdateBusinessState}
-          />
-        )}
-      </div>
+      {openProductDetails && (
+        <ProductDetails
+          open={openProductDetails}
+          onClose={handleCloseProductDetails}
+          product={selectedProduct}
+          business={businessState?.business}
+          handleUpdateBusinessState={handleUpdateBusinessState}
+          setFormTaxState={setFormTaxState}
+          formTaxState={formTaxState}
+          taxes={taxes}
+          setTaxes={setTaxes}
+        />
+      )}
     </>
   )
 }

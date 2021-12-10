@@ -21,10 +21,13 @@ const BusinessSpreadSheetUI = (props) => {
 
   const spreadSheetHeaderItems = [
     { title: t('ID', 'Id'), code: 'id', readOnly: true, type: 'numeric' },
-    { title: t('NAME', 'Name'), code: 'name', readOnly: false, type: 'text' },
+    { title: t('NAME', 'Name'), code: 'name', readOnly: false, type: 'text', editor: false },
     { title: t('DESCRIPTION', 'Description'), code: 'description', readOnly: false, type: 'text' },
     { title: t('PRICE', 'Price'), code: 'price', readOnly: false, type: 'numeric' },
-    { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false, type: 'numeric' }
+    { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false, type: 'numeric' },
+    { title: t('TAX', 'Tax'), code: 'taxShow', readOnly: true, editor: false },
+    { title: t('SERVICE_FEE', 'Service fee %'), code: 'fee_fixed', readOnly: false, type: 'numeric' },
+    { title: t('SERVICE_FEE_PERCENTAGE', 'Service fee %'), code: 'fee_percentage', readOnly: false, type: 'numeric' }
   ]
 
   const closeAlert = () => {
