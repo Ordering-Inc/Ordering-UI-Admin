@@ -47,6 +47,16 @@ var _ReportsDriverDistance = require("../ReportsDriverDistance");
 
 var _ReportsSpentTime = require("../ReportsSpentTime");
 
+var _ReportsTopDrivers = require("../ReportsTopDrivers");
+
+var _ReportsOrders = require("../ReportsOrders");
+
+var _ReportsSales = require("../ReportsSales");
+
+var _ReportsUsers = require("../ReportsUsers");
+
+var _ReportsCustomer = require("../ReportsCustomer");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -142,6 +152,31 @@ var Reports = function Reports(props) {
     name: t('TIME', 'Time'),
     description: t('TIME_DESC', 'Time description'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Alarm, null)
+  }, {
+    id: 12,
+    name: t('TOP_DRIVERS', 'Top drivers'),
+    description: t('TOP_DRIVERS_DESC', 'Top drivers description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Truck, null)
+  }, {
+    id: 13,
+    name: t('ORDERS', 'Orders'),
+    description: t('ORDERS_DESC', 'Orders description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null)
+  }, {
+    id: 14,
+    name: t('SALES', 'Sales'),
+    description: t('SALES_DESC', 'Sales description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null)
+  }, {
+    id: 15,
+    name: t('REGISTER_USERS', 'Register users'),
+    description: t('REGISTER_USERS_DESC', 'Register users description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonCheck, null)
+  }, {
+    id: 16,
+    name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'),
+    description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Star, null)
   }];
 
   var handleCloseSidebar = function handleCloseSidebar() {
@@ -182,7 +217,7 @@ var Reports = function Reports(props) {
     onClose: function onClose() {
       return handleCloseSidebar();
     }
-  }, selectedReport === 1 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessDistance.ReportsBusinessDistance, null), selectedReport === 2 && /*#__PURE__*/_react.default.createElement(_ReportsOrderDistance.ReportsOrderDistance, null), selectedReport === 3 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessSpend.ReportsBusinessSpend, null), selectedReport === 4 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrderTime.ReportsDriverOrderTime, null), selectedReport === 5 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSpend.ReportsDriverSpend, null), selectedReport === 6 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrder.ReportsDriverOrder, null), selectedReport === 7 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSchedule.ReportsDriverSchedule, null), selectedReport === 8 && /*#__PURE__*/_react.default.createElement(_ReportsOrderStatus.ReportsOrderStatus, null), selectedReport === 9 && /*#__PURE__*/_react.default.createElement(_ReportsHeatMap.ReportsHeatMap, null), selectedReport === 10 && /*#__PURE__*/_react.default.createElement(_ReportsDriverDistance.ReportsDriverDistance, null), selectedReport === 11 && /*#__PURE__*/_react.default.createElement(_ReportsSpentTime.ReportsSpentTime, null)));
+  }, selectedReport === 1 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessDistance.ReportsBusinessDistance, null), selectedReport === 2 && /*#__PURE__*/_react.default.createElement(_ReportsOrderDistance.ReportsOrderDistance, null), selectedReport === 3 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessSpend.ReportsBusinessSpend, null), selectedReport === 4 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrderTime.ReportsDriverOrderTime, null), selectedReport === 5 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSpend.ReportsDriverSpend, null), selectedReport === 6 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrder.ReportsDriverOrder, null), selectedReport === 7 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSchedule.ReportsDriverSchedule, null), selectedReport === 8 && /*#__PURE__*/_react.default.createElement(_ReportsOrderStatus.ReportsOrderStatus, null), selectedReport === 9 && /*#__PURE__*/_react.default.createElement(_ReportsHeatMap.ReportsHeatMap, null), selectedReport === 10 && /*#__PURE__*/_react.default.createElement(_ReportsDriverDistance.ReportsDriverDistance, null), selectedReport === 11 && /*#__PURE__*/_react.default.createElement(_ReportsSpentTime.ReportsSpentTime, null), selectedReport === 12 && /*#__PURE__*/_react.default.createElement(_ReportsTopDrivers.ReportsTopDrivers, null), selectedReport === 13 && /*#__PURE__*/_react.default.createElement(_ReportsOrders.ReportsOrders, null), selectedReport === 14 && /*#__PURE__*/_react.default.createElement(_ReportsSales.ReportsSales, null), selectedReport === 15 && /*#__PURE__*/_react.default.createElement(_ReportsUsers.ReportsUsers, null), selectedReport === 16 && /*#__PURE__*/_react.default.createElement(_ReportsCustomer.ReportsCustomer, null)));
 };
 
 exports.Reports = Reports;

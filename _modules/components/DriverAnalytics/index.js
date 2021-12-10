@@ -23,8 +23,6 @@ var _AnalyticsStatusFilterBar = require("../AnalyticsStatusFilterBar");
 
 var _AnalyticsMap = require("../AnalyticsMap");
 
-var _AnalyticsOrdersOrSales = require("../AnalyticsOrdersOrSales");
-
 var _AnalyticsOrdersStatus = require("../AnalyticsOrdersStatus");
 
 var _AnalyticsCustomerSatisfaction = require("../AnalyticsCustomerSatisfaction");
@@ -47,9 +45,15 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
+var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
+
+var _AnalyticsStatusSubFilter = require("../AnalyticsStatusSubFilter");
+
 var _styles = require("./styles");
 
-var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
+var _AnalyticsDriverOrders = require("../AnalyticsDriverOrders");
+
+var _ReportsBrandFilter = require("../ReportsBrandFilter");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -118,6 +122,11 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
       driverGroupModal = _useState4[0],
       setDriverGroupModal = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isBrandFilter = _useState6[0],
+      setIsBrandFilter = _useState6[1];
+
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessAnalyticsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -125,27 +134,31 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_ANALYTICS', 'Drivers analytics'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
+      return setIsBrandFilter(true);
+    }
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : filterList.franchises_id.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
       return setDriverGroupModal(true);
     }
-  }, t('DRIVER_GROUP', 'Driver group'), " (", filterList !== null && filterList !== void 0 && filterList.driv ? filterList === null || filterList === void 0 ? void 0 : filterList.driver_groups_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('DRIVER_GROUP', 'Driver group'), " (", filterList !== null && filterList !== void 0 && filterList.driver_groups_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.driver_groups_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setDriversFilterModal(true);
     }
   }, t('DRIVERS', 'DRIVERS'), " (", filterList !== null && filterList !== void 0 && filterList.userIds ? filterList === null || filterList === void 0 ? void 0 : filterList.userIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles.BusinessCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
     handleChangeDate: handleChangeDate
-  }))))), /*#__PURE__*/_react.default.createElement(_AnalyticsStatusFilterBar.AnalyticsStatusFilterBar, props), /*#__PURE__*/_react.default.createElement(_styles.MapWrraper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsMap.AnalyticsMap, {
+  }))))), /*#__PURE__*/_react.default.createElement(_AnalyticsStatusFilterBar.AnalyticsStatusFilterBar, props), /*#__PURE__*/_react.default.createElement(_AnalyticsStatusSubFilter.AnalyticsStatusSubFilter, props), /*#__PURE__*/_react.default.createElement(_styles.MapWrraper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsMap.AnalyticsMap, {
     locationList: orderLocationList
   })), /*#__PURE__*/_react.default.createElement(_styles.AnalyticsContentWrapper, {
     className: "row"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
-  }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
+  }, /*#__PURE__*/_react.default.createElement(_AnalyticsDriverOrders.AnalyticsDriverOrders, {
     isOrders: true,
     filterList: filterList,
     chartDataList: ordersList
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
-  }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
+  }, /*#__PURE__*/_react.default.createElement(_AnalyticsDriverOrders.AnalyticsDriverOrders, {
     filterList: filterList,
     chartDataList: salesList
   })), /*#__PURE__*/_react.default.createElement("div", {
@@ -225,6 +238,19 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
     onClose: function onClose() {
       return setDriverGroupModal(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('BRAND', 'Brand'),
+    open: isBrandFilter,
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
     }
   }))));
 };

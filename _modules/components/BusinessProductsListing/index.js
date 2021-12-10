@@ -13,6 +13,10 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _BisDownArrow = _interopRequireDefault(require("@meronex/icons/bi/BisDownArrow"));
 
+var _useWindowSize2 = require("../../hooks/useWindowSize");
+
+var _RiImageAddFill = _interopRequireDefault(require("@meronex/icons/ri/RiImageAddFill"));
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _BusinessCategoryEdit = require("../BusinessCategoryEdit");
@@ -38,6 +42,10 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Buttons = require("../../styles/Buttons");
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
+
+var _BatchImageForm = require("../BatchImageForm");
+
+var _Modal = require("../Modal");
 
 var _styles = require("./styles");
 
@@ -92,6 +100,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
+
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
@@ -136,6 +147,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setBusinessName = _useState14[1];
 
   var categoryListRef = (0, _react.useRef)();
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      batchImageFormOpen = _useState16[0],
+      setBatchImageFormOpen = _useState16[1];
 
   var handleOpenCategoryDetails = function handleOpenCategoryDetails() {
     var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -207,6 +223,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       }));
     }
   }, [categoryId]);
+
+  var openBatchImageUploader = function openBatchImageUploader() {
+    setBatchImageFormOpen(true);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -261,7 +282,20 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleChangeCategory: handleChangeCategory,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleOpenCategoryDetails: handleOpenCategoryDetails
-  })), /*#__PURE__*/_react.default.createElement(_styles.ActionIconList, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionIconList, null, viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width > 767 ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    borderRadius: "5px",
+    className: "batch-image-upload",
+    color: "lightPrimary",
+    onClick: function onClick() {
+      return openBatchImageUploader();
+    }
+  }, t('UPLOAD_IMAGE_BATCH', 'Upload images in batch')) : /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
+    className: "batch",
+    onClick: function onClick() {
+      return openBatchImageUploader();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_RiImageAddFill.default, null))), /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
     active: viewMethod === 'list',
     onClick: function onClick() {
       return setViewMethod('list');
@@ -293,14 +327,25 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     formTaxState: formTaxState,
     taxes: taxes,
     setTaxes: setTaxes
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: width > 1440 ? '40%' : '60%',
+    padding: "20px",
+    open: batchImageFormOpen,
+    onClose: function onClose() {
+      return setBatchImageFormOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BatchImageForm.BatchImageForm, _extends({}, props, {
+    onClose: function onClose() {
+      return setBatchImageFormOpen(false);
+    }
+  }))));
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState15 = (0, _react.useState)(false),
-      _useState16 = _slicedToArray(_useState15, 2),
-      isInitialRender = _useState16[0],
-      setIsInitialRender = _useState16[1];
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      isInitialRender = _useState18[0],
+      setIsInitialRender = _useState18[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

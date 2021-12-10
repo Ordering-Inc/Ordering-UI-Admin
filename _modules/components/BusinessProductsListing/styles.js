@@ -9,6 +9,8 @@ exports.BusinessNameWrapper = exports.BusinessSelector = exports.ViewMethodButto
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
+var _polished = require("polished");
+
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -67,11 +69,19 @@ var ProductHeader = _styledComponents.default.div(_templateObject12 || (_templat
 
 exports.ProductHeader = ProductHeader;
 
-var ActionIconList = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+var ActionIconList = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  button.batch-image-upload {\n    border: 1px solid ", ";\n    background-color: transparent;\n    color: ", ";\n    padding: 4px 15px;\n    &:hover {\n      background: ", ";\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return (0, _polished.darken)(0.07, props.theme.colors.primary);
+}, function (props) {
+  return props.theme.colors.lightPrimary;
+}, function (props) {
+  return props.theme.colors.primary;
+});
 
 exports.ActionIconList = ActionIconList;
 
-var ViewMethodButton = _styledComponents.default.span(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-left: 12px;\n  cursor: pointer;\n  color: ", ";\n\n  svg {\n    font-size: 16px;\n  }\n\n  ", "\n"])), function (props) {
+var ViewMethodButton = _styledComponents.default.span(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-left: 12px;\n  cursor: pointer;\n  color: ", ";\n\n  svg {\n    font-size: 16px;\n  }\n\n  &.batch {\n    svg {\n      font-size: 18px;\n    }\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (_ref) {
   var active = _ref.active;
