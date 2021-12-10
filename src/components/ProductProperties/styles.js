@@ -14,7 +14,11 @@ export const PropertiesContainer = styled.div`
 
   > input {
     width: 100%;
-    margin: 5px 0;
+  }
+
+  > button {
+    margin: 30px 0 20px 0;
+    height: 44px;
   }
   @media (min-width: 1000px) {
     padding: 20px;
@@ -27,6 +31,7 @@ export const PropertyOption = styled.div`
   display: flex;
   align-items: center;
   label {
+    font-size: 14px;
     margin-bottom: 0;
     cursor: pointer;
     color: ${props => props.theme.colors.headingColor};
@@ -78,6 +83,8 @@ export const OptionCenter = styled.div`
 
 export const LabelCustom = styled.label`
   margin-top: 20px;
+  font-size: 14px;
+  margin-bottom: 5px;
 `
 
 export const ButtonGroup = styled.div`
