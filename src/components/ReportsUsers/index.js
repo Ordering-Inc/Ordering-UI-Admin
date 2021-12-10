@@ -36,28 +36,34 @@ const ReportsUsersUI = (props) => {
   const [isAppIdFilter, setIsAppIdFilter] = useState(false)
 
   const generateData = () => {
-    const values = reportData?.content?.dataset?.dataset?.map((item, index) => {
-      const list = item.data.map(value => {
-        return value.y
+    let values = []
+    if (reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
+      values = reportData?.content?.dataset?.dataset?.map((item, index) => {
+        const list = []
+        item?.data && item.data.forEach(value => {
+          list.push(value.y)
+        })
+        return {
+          label: item.label,
+          data: [...list],
+          fill: true,
+          backgroundColor: 'rgba(75,192,192,0.2)',
+          borderColor: lighten(index / 10, '#2C7BE5'),
+          tension: 0.4,
+          borderWidth: 3
+        }
       })
-      return {
-        label: item.label,
-        data: [...list],
-        fill: true,
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: lighten(index / 10, '#2C7BE5'),
-        tension: 0.4,
-        borderWidth: 3
-      }
-    })
+    }
     return values
   }
 
   const generateLabel = () => {
     const values = []
-    reportData.content.dataset.dataset[0].data.forEach(data => {
-      values.push(data.x)
-    })
+    if (reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
+      reportData.content.dataset.dataset[0].data.forEach(data => {
+        values.push(data.x)
+      })
+    }
     return values
   }
 
@@ -109,13 +115,11 @@ const ReportsUsersUI = (props) => {
   }
 
   useEffect(() => {
-    if (reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
-      const defaultData = {
-        labels: generateLabel(),
-        datasets: generateData()
-      }
-      setDataOptions(defaultData)
+    const defaultData = {
+      labels: generateLabel(),
+      datasets: generateData()
     }
+    setDataOptions(defaultData)
   }, [reportData?.content])
 
   return (
