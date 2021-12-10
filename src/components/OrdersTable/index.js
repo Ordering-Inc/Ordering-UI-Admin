@@ -137,9 +137,9 @@ export const OrdersTable = (props) => {
     const status = parseInt(s)
     const orderStatus = [
       { key: 0, value: t('PENDING', theme?.defaultLanguages?.PENDING || 'Pending') },
-      { key: 1, value: t('COMPLETED', theme?.defaultLanguages?.COMPLETED || 'Completed') },
+      { key: 1, value: t('COMPLETED_BY_ADMIN', theme?.defaultLanguages?.COMPLETED || 'Completed by admin') },
       { key: 2, value: t('REJECTED', theme?.defaultLanguages?.REJECTED || 'Rejected') },
-      { key: 3, value: t('DRIVER_IN_BUSINESS', theme?.defaultLanguages?.DRIVER_IN_BUSINESS || 'Driver in business') },
+      { key: 3, value: t('ORDER_STATUS_IN_BUSINESS', theme?.defaultLanguages?.DRIVER_IN_BUSINESS || 'Driver arrived to business') },
       { key: 4, value: t('PREPARATION_COMPLETED', theme?.defaultLanguages?.PREPARATION_COMPLETED || 'Preparation Completed') },
       { key: 5, value: t('REJECTED_BY_BUSINESS', theme?.defaultLanguages?.REJECTED_BY_BUSINESS || 'Rejected by business') },
       { key: 6, value: t('REJECTED_BY_DRIVER', theme?.defaultLanguages?.REJECTED_BY_DRIVER || 'Rejected by Driver') },

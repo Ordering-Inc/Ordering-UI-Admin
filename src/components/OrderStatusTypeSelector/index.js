@@ -89,7 +89,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 4,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('READY_FOR_PICKUP', 'Ready for pickup')}</p>
+          <p>{t('PREPARATION_COMPLETED', 'Preparation Completed')}</p>
         </Option>
       ),
       color: 'primary'
@@ -107,7 +107,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 3,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by Business')}</p>
+          <p>{t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business')}</p>
         </Option>
       ),
       color: 'primary'
@@ -134,7 +134,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 18,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('DRIVER_ALMOST_ARRIVED_TO_BUSINESS', 'Driver almost arrived to business')}</p>
+          <p>{t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business')}</p>
         </Option>
       ),
       color: 'primary'
@@ -143,7 +143,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 19,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', 'Driver almost arrived to customer')}</p>
+          <p>{t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')}</p>
         </Option>
       ),
       color: 'primary'
@@ -152,7 +152,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 20,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', 'Customer almost arrived to business')}</p>
+          <p>{t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business')}</p>
         </Option>
       ),
       color: 'primary'
@@ -161,7 +161,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 21,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business')}</p>
+          <p>{t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')}</p>
         </Option>
       ),
       color: 'primary'
@@ -198,7 +198,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 15,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('PICKUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')}</p>
+          <p>{t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')}</p>
         </Option>
       ),
       color: 'primary'
@@ -217,7 +217,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 2,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('REJECT_BY_BUSINESS', 'Reject by Admin')}</p>
+          <p>{t('REJECTED_BY_ADMIN', 'Rejected by Admin')}</p>
         </Option>
       ),
       color: 'primary'
@@ -226,7 +226,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 5,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('REJECT_BY_BUSINESS', 'Reject by Business')}</p>
+          <p>{t('REJECTED_BY_BUSINESS', 'Rejected by Business')}</p>
         </Option>
       ),
       color: 'primary'
@@ -235,7 +235,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 6,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('REJECT_BY_DRIVER', 'Reject by Driver')}</p>
+          <p>{t('REJECTED_BY_DRIVER', 'Rejected by Driver')}</p>
         </Option>
       ),
       color: 'primary'
@@ -262,7 +262,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 16,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('CANCELLED_BY_CUSTOMER', 'Cancelled by customer')}</p>
+          <p>{t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer')}</p>
         </Option>
       ),
       color: 'primary'
@@ -271,7 +271,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 17,
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('NOT_PICKED_BY_CUSTOMER', 'Not picked by customer')}</p>
+          <p>{t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer')}</p>
         </Option>
       ),
       color: 'primary'
