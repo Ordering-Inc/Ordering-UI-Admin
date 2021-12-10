@@ -17,7 +17,9 @@ import {
   Alarm,
   Truck,
   Shop,
-  Cart3
+  Cart3,
+  PersonCheck,
+  Star
 } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
@@ -67,8 +69,8 @@ export const Reports = (props) => {
     { id: 12, name: t('TOP_DRIVERS', 'Top drivers'), description: t('TOP_DRIVERS_DESC', 'Top drivers description'), icon: <Truck /> },
     { id: 13, name: t('ORDERS', 'Orders'), description: t('ORDERS_DESC', 'Orders description'), icon: <Cart3 /> },
     { id: 14, name: t('SALES', 'Sales'), description: t('SALES_DESC', 'Sales description'), icon: <Shop /> },
-    { id: 15, name: t('REGISTER_USERS', 'Register users'), description: t('REGISTER_USERS_DESC', 'Register users description'), icon: <Shop /> },
-    { id: 16, name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'), description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'), icon: <Shop /> }
+    { id: 15, name: t('REGISTER_USERS', 'Register users'), description: t('REGISTER_USERS_DESC', 'Register users description'), icon: <PersonCheck /> },
+    { id: 16, name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'), description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'), icon: <Star /> }
   ]
 
   const handleCloseSidebar = () => {

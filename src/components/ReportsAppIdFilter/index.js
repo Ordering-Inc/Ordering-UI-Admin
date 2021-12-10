@@ -1,7 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage } from 'ordering-components-admin'
-import { ReportsAppIdFilter as ReportsAppIdFilterController } from './naked'
+import { useLanguage, ReportsAppIdFilter as ReportsAppIdFilterController } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
