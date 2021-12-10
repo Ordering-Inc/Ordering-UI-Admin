@@ -153,7 +153,7 @@ const ProductPropertiesUI = (props) => {
       <h1>{t('PROPERTIES', 'Properties')}</h1>
       <PropertyOption>
         <Checkbox
-          defaultChecked={productState?.featured}
+          defaultChecked={productState?.featured || false}
           onClick={(e) => handleClickProperty('featured', e.target.checked)}
           id='featured'
         />
@@ -161,7 +161,7 @@ const ProductPropertiesUI = (props) => {
       </PropertyOption>
       <PropertyOption>
         <Checkbox
-          defaultChecked={productState?.upselling}
+          defaultChecked={productState?.upselling || false}
           onClick={(e) => handleClickProperty('upselling', e.target.checked)}
           id='upselling'
         />
@@ -169,7 +169,7 @@ const ProductPropertiesUI = (props) => {
       </PropertyOption>
       <PropertyOption>
         <Checkbox
-          defaultChecked={productState?.inventoried}
+          defaultChecked={productState?.inventoried || false}
           onClick={(e) => handleClickStock(e)}
           id='inventoried'
         />
@@ -229,7 +229,7 @@ const ProductPropertiesUI = (props) => {
         name='fee_fixed'
         id='fee_fixed'
         placeholder='$0.00'
-        defaultValue={parseInt(productState?.fee_fixed)}
+        defaultValue={parseInt(productState?.fee_fixed) || ''}
         onChange={(e) => handleChangeInput(e) || 0}
       />
 
