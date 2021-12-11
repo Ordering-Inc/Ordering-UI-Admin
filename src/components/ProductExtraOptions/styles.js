@@ -28,9 +28,10 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   h1 {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     color: ${props => props.theme.colors.headingColor};
+    margin: 5px 0;
   }
 
   > button {
