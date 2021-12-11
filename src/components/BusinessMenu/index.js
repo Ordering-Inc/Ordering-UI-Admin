@@ -91,13 +91,19 @@ const BusinessMenuUI = (props) => {
         <TabsContainer>
           <Tab
             active={!isSelectedSharedMenus}
-            onClick={() => setIsSelectedSharedMenus(false)}
+            onClick={() => {
+              handleCloseOption()
+              setIsSelectedSharedMenus(false)
+            }}
           >
             {t('MENU_V21', 'Menu')}
           </Tab>
           <Tab
             active={isSelectedSharedMenus}
-            onClick={() => setIsSelectedSharedMenus(true)}
+            onClick={() => {
+              handleCloseOption()
+              setIsSelectedSharedMenus(true)
+            }}
           >
             {t('SHARED_MENUS', 'Shared menus')}
           </Tab>
@@ -147,6 +153,7 @@ const BusinessMenuUI = (props) => {
               menu={currentMenu}
               onClose={() => handleCloseOption()}
               handleUpdateBusinessState={handleSuccessBusinessMenu}
+              isSelectedSharedMenus={isSelectedSharedMenus}
             />
           )}
           {showOption === 'customFields' && (
