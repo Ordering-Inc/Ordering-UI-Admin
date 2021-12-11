@@ -42,17 +42,19 @@ export const SingleListBusinessContainer = styled.tbody`
 `
 
 export const BusinessGeneralInfo = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   ${props => props.theme?.rtl ? css`
-  border-left: 1px solid #E9ECEF;
-` : css`
-  border-right: 1px solid #E9ECEF;
-`}
+    border-left: 1px solid #E9ECEF;
+  ` : css`
+    border-right: 1px solid #E9ECEF;
+  `}
   p {
     margin: 0;
   }
   input {
+    flex: 1;
     font-weight: 500;
     font-size: 13px;
     color: ${props => props.theme.colors.headingColor};

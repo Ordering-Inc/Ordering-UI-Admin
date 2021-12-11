@@ -143,10 +143,10 @@ export const BusinessList = (props) => {
                     <th className='business'>{t('BUSINESS', 'Business')}</th>
                   )}
                   {allowColumns?.featured && (
-                    <th>{t('DETAILS', 'Details')}</th>
+                    <th>{t('FEATURED', 'Featured')}</th>
                   )}
                   {allowColumns?.ratings && (
-                    <th />
+                    <th>{t('RATINGS', 'Ratings')}</th>
                   )}
                   <th>{t('ACTIONS', 'Actions')}</th>
                   <th>
