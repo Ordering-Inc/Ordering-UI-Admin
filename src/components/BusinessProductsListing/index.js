@@ -7,7 +7,7 @@ import {
   useLanguage,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
-import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
+import { BusinessProductsCategoyDetails } from '../BusinessProductsCategoyDetails'
 import { SearchBar } from '../SearchBar'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import BsTable from '@meronex/icons/bs/BsTable'
@@ -72,11 +72,6 @@ const BusinessProductsListingUI = (props) => {
 
   const handleOpenCategoryDetails = (category = null) => {
     if (category && category?.id !== null) {
-      onProductRedirect && onProductRedirect({
-        slug: slug,
-        category: category?.id,
-        product: null
-      })
       setCategorySelected(category)
       setCategoryToEdit({
         open: true,
@@ -268,7 +263,7 @@ const BusinessProductsListingUI = (props) => {
       </CategoryProductsContainer>
       {
         categoryToEdit?.open && (
-          <BusinessCategoryEdit
+          <BusinessProductsCategoyDetails
             {...props}
             open={categoryToEdit?.open}
             onClose={handleCloseEdit}

@@ -19,6 +19,7 @@ import { Select } from '../../styles/Select/FirstSelect'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { Alert } from '../Confirm'
+
 const ProductPropertiesUI = (props) => {
   const {
     productState,
@@ -32,7 +33,9 @@ const ProductPropertiesUI = (props) => {
     formTaxChanges,
     handleDeleteTax,
     setAlertState,
-    alertState
+    alertState,
+    formState,
+    handleUpdateClick
   } = props
 
   const formMethods = useForm()
@@ -150,7 +153,7 @@ const ProductPropertiesUI = (props) => {
       <h1>{t('PROPERTIES', 'Properties')}</h1>
       <PropertyOption>
         <Checkbox
-          defaultChecked={productState?.featured}
+          defaultChecked={productState?.featured || false}
           onClick={(e) => handleClickProperty('featured', e.target.checked)}
           id='featured'
         />
@@ -158,7 +161,7 @@ const ProductPropertiesUI = (props) => {
       </PropertyOption>
       <PropertyOption>
         <Checkbox
-          defaultChecked={productState?.upselling}
+          defaultChecked={productState?.upselling || false}
           onClick={(e) => handleClickProperty('upselling', e.target.checked)}
           id='upselling'
         />
@@ -166,7 +169,7 @@ const ProductPropertiesUI = (props) => {
       </PropertyOption>
       <PropertyOption>
         <Checkbox
-          defaultChecked={productState?.inventoried}
+          defaultChecked={productState?.inventoried || false}
           onClick={(e) => handleClickStock(e)}
           id='inventoried'
         />
@@ -192,7 +195,7 @@ const ProductPropertiesUI = (props) => {
         defaultValue={parseInt(productState?.sku) !== -1 ? productState?.sku : ''}
         onChange={(e) => handleClickProperty('sku', e.target.value ?? null)}
       />
-      <LabelCustom htmlFor='estimated'>{t('ESTIMATED_PERSON', 'Estimated person')}</LabelCustom>
+      {/* <LabelCustom htmlFor='estimated'>{t('ESTIMATED_PERSON', 'Estimated person')}</LabelCustom>
       <TypeSelectWrapper>
         <Select
           defaultValue={productState?.estimated_person || null}
@@ -226,9 +229,18 @@ const ProductPropertiesUI = (props) => {
         name='fee_fixed'
         id='fee_fixed'
         placeholder='$0.00'
-        defaultValue={parseInt(productState?.fee_fixed)}
+        defaultValue={parseInt(productState?.fee_fixed) || ''}
         onChange={(e) => handleChangeInput(e) || 0}
-      />
+      /> */}
+
+      <Button
+        borderRadius='8px'
+        color='primary'
+        disabled={Object.keys(formState.changes).length === 0 || formState.loading}
+        onClick={() => handleUpdateClick()}
+      >
+        {t('SAVE', 'Save')}
+      </Button>
       <Modal
         open={!!taxToEdit}
         width='80%'

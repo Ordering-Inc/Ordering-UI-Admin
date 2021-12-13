@@ -15,6 +15,7 @@ import { BusinessListingHeader } from './components/BusinessListingHeader'
 import { BusinessMenu } from './components/BusinessMenu'
 import { BusinessMenuCustomFields } from './components/BusinessMenuCustomFields'
 import { BusinessOwners } from './components/BusinessOwners'
+import { BusinessProductsCategoyDetails } from './components/BusinessProductsCategoyDetails'
 import { BusinessTypeFilter } from './components/BusinessTypeFilter'
 import { BusinessTypes } from './components/BusinessTypes'
 import { BusinessTypeForm } from './components/BusinessTypeForm'
@@ -157,6 +158,7 @@ export {
   BusinessMenu,
   BusinessMenuCustomFields,
   BusinessOwners,
+  BusinessProductsCategoyDetails,
   BusinessProductsListing,
   BusinessTypeFilter,
   BusinessTypes,

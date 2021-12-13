@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLanguage, DragAndDrop, ExamineClick, ProductExtraOptionDetails as ProductExtraOptionDetailsController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  DragAndDrop,
+  ExamineClick,
+  ProductExtraOptionDetails as ProductExtraOptionDetailsController
+} from 'ordering-components-admin'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Input } from '../../styles/Inputs'
 import { Switch } from '../../styles/Switch'

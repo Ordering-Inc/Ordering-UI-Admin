@@ -340,7 +340,7 @@ const SingleBusinessProductUI = (props) => {
                     }
                   </td>
                 )}
-                {allowColumns?.tax && (
+                {/* {allowColumns?.tax && (
                   <td>
                     {
                       <InfoBlock>
@@ -348,8 +348,8 @@ const SingleBusinessProductUI = (props) => {
                       </InfoBlock>
                     }
                   </td>
-                )}
-                {allowColumns?.fee_fixed && (
+                )} */}
+                {/* {allowColumns?.fee_fixed && (
                   <td>
                     {
                       <InfoBlock>
@@ -364,8 +364,8 @@ const SingleBusinessProductUI = (props) => {
                       </InfoBlock>
                     }
                   </td>
-                )}
-                {allowColumns?.fee_percentage && (
+                )} */}
+                {/* {allowColumns?.fee_percentage && (
                   <td>
                     {
                       <InfoBlock>
@@ -380,7 +380,7 @@ const SingleBusinessProductUI = (props) => {
                       </InfoBlock>
                     }
                   </td>
-                )}
+                )} */}
                 <td>
                   <BusinessEnableWrapper className='product_enable_control'>
                     {

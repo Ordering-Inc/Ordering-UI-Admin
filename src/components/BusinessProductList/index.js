@@ -40,10 +40,10 @@ export const BusinessProductList = (props) => {
   const [allowColumns, setAllowColumns] = useState({
     business: true,
     price: true,
-    description: true,
-    tax: true,
-    fee_fixed: true,
-    fee_percentage: true
+    description: true
+    // tax: true,
+    // fee_fixed: true,
+    // fee_percentage: true
   })
 
   const optionsDefault = [
@@ -58,19 +58,19 @@ export const BusinessProductList = (props) => {
     {
       value: 'description',
       content: t('DESCRIPTION', 'Description')
-    },
-    {
-      value: 'tax',
-      content: t('TAX', 'Tax')
-    },
-    {
-      value: 'fee_fixed',
-      content: t('SERVICE_FEE', 'Service fee')
-    },
-    {
-      value: 'fee_percentage',
-      content: t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')
     }
+    // {
+    //   value: 'tax',
+    //   content: t('TAX', 'Tax')
+    // },
+    // {
+    //   value: 'fee_fixed',
+    //   content: t('SERVICE_FEE', 'Service fee')
+    // },
+    // {
+    //   value: 'fee_percentage',
+    //   content: t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')
+    // }
   ]
 
   const handleChangeAllowColumns = (type) => {
@@ -128,7 +128,7 @@ export const BusinessProductList = (props) => {
                   {allowColumns?.description && (
                     <th className='description'>{t('DESCRIPTION', 'Description')}</th>
                   )}
-                  {allowColumns?.tax && (
+                  {/* {allowColumns?.tax && (
                     <th className='tax'>{t('TAX', 'Tax')}</th>
                   )}
                   {allowColumns?.fee_fixed && (
@@ -136,7 +136,7 @@ export const BusinessProductList = (props) => {
                   )}
                   {allowColumns?.fee_percentage && (
                     <th className='fee_percentage'>{t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')}</th>
-                  )}
+                  )} */}
                   <th>{t('ACTIONS', 'Actions')}</th>
                   <th className='more'>
                     <ColumnAllowSettingPopover
