@@ -5,7 +5,7 @@ export const DriversCompaniesContainer = styled.div`
 `
 
 export const TableWrapper = styled.div`
-  overflow-y: hidden;
+  overflow: auto;
 `
 
 export const CompaniesTable = styled.table`
