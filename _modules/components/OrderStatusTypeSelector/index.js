@@ -128,7 +128,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: 4,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('READY_FOR_PICKUP', 'Ready for pickup'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('PREPARATION_COMPLETED', 'Preparation Completed'))),
     color: 'primary'
   }, {
     value: 8,
@@ -140,7 +140,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: 3,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by Business'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business'))),
     color: 'primary'
   }, {
     value: 9,
@@ -158,25 +158,25 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: 18,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_ALMOST_ARRIVED_TO_BUSINESS', 'Driver almost arrived to business'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business'))),
     color: 'primary'
   }, {
     value: 19,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', 'Driver almost arrived to customer'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer'))),
     color: 'primary'
   }, {
     value: 20,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', 'Customer almost arrived to business'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business'))),
     color: 'primary'
   }, {
     value: 21,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business'))),
     color: 'primary'
   }, {
     value: null,
@@ -203,7 +203,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: 15,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('PICKUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer'))),
     color: 'primary'
   }, {
     value: null,
@@ -218,19 +218,19 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: 2,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('REJECT_BY_BUSINESS', 'Reject by Admin'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('REJECTED_BY_ADMIN', 'Rejected by Admin'))),
     color: 'primary'
   }, {
     value: 5,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('REJECT_BY_BUSINESS', 'Reject by Business'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('REJECTED_BY_BUSINESS', 'Rejected by Business'))),
     color: 'primary'
   }, {
     value: 6,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('REJECT_BY_DRIVER', 'Reject by Driver'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('REJECTED_BY_DRIVER', 'Rejected by Driver'))),
     color: 'primary'
   }, {
     value: 10,
@@ -248,13 +248,13 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: 16,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('CANCELLED_BY_CUSTOMER', 'Cancelled by customer'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer'))),
     color: 'primary'
   }, {
     value: 17,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('NOT_PICKED_BY_CUSTOMER', 'Not picked by customer'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer'))),
     color: 'primary'
   }];
 

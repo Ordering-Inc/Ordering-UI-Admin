@@ -105,6 +105,12 @@ Object.defineProperty(exports, "BusinessOwners", {
     return _BusinessOwners.BusinessOwners;
   }
 });
+Object.defineProperty(exports, "BusinessProductsCategoyDetails", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessProductsCategoyDetails.BusinessProductsCategoyDetails;
+  }
+});
 Object.defineProperty(exports, "BusinessTypeFilter", {
   enumerable: true,
   get: function get() {
@@ -925,6 +931,8 @@ var _BusinessMenu = require("./components/BusinessMenu");
 var _BusinessMenuCustomFields = require("./components/BusinessMenuCustomFields");
 
 var _BusinessOwners = require("./components/BusinessOwners");
+
+var _BusinessProductsCategoyDetails = require("./components/BusinessProductsCategoyDetails");
 
 var _BusinessTypeFilter = require("./components/BusinessTypeFilter");
 

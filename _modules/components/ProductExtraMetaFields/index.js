@@ -29,8 +29,6 @@ var _jsoneditorReact = require("jsoneditor-react");
 
 require("jsoneditor-react/es/editor.min.css");
 
-var _SpinnerLoader = require("../SpinnerLoader");
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -321,7 +319,7 @@ var ProductExtraMetaFieldsUI = function ProductExtraMetaFieldsUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement("button", {
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))))), actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR'),
     content: alertState.content,
     acceptText: t('ACCEPT'),

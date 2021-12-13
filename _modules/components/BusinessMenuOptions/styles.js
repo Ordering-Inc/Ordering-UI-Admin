@@ -25,7 +25,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var Header = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  h1 {\n    font-size: 24px;\n    color: ", ";\n  }\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin: 5px 0;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

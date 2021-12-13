@@ -96,10 +96,10 @@ var BusinessProductList = function BusinessProductList(props) {
   var _useState7 = (0, _react.useState)({
     business: true,
     price: true,
-    description: true,
-    tax: true,
-    fee_fixed: true,
-    fee_percentage: true
+    description: true // tax: true,
+    // fee_fixed: true,
+    // fee_percentage: true
+
   }),
       _useState8 = _slicedToArray(_useState7, 2),
       allowColumns = _useState8[0],
@@ -114,16 +114,19 @@ var BusinessProductList = function BusinessProductList(props) {
   }, {
     value: 'description',
     content: t('DESCRIPTION', 'Description')
-  }, {
-    value: 'tax',
-    content: t('TAX', 'Tax')
-  }, {
-    value: 'fee_fixed',
-    content: t('SERVICE_FEE', 'Service fee')
-  }, {
-    value: 'fee_percentage',
-    content: t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')
-  }];
+  } // {
+  //   value: 'tax',
+  //   content: t('TAX', 'Tax')
+  // },
+  // {
+  //   value: 'fee_fixed',
+  //   content: t('SERVICE_FEE', 'Service fee')
+  // },
+  // {
+  //   value: 'fee_percentage',
+  //   content: t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')
+  // }
+  ];
 
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, !allowColumns[type])));
@@ -184,13 +187,7 @@ var BusinessProductList = function BusinessProductList(props) {
     className: "price"
   }, t('PRICE', 'Price')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
     className: "description"
-  }, t('DESCRIPTION', 'Description')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.tax) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "tax"
-  }, t('TAX', 'Tax')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.fee_fixed) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "fee_fixed"
-  }, t('SERVICE_FEE', 'Service fee')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.fee_percentage) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "fee_percentage"
-  }, t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement("th", {
     className: "more"
   }, /*#__PURE__*/_react.default.createElement(_ColumnAllowSettingPopover.ColumnAllowSettingPopover, {
     open: openPopover,

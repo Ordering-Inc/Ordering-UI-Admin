@@ -27,7 +27,7 @@ var DriversGroupsContainer = _styledComponents.default.div(_templateObject || (_
 
 exports.DriversGroupsContainer = DriversGroupsContainer;
 
-var TableWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  overflow-y: hidden;\n"])));
+var TableWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  overflow: auto;\n"])));
 
 exports.TableWrapper = TableWrapper;
 

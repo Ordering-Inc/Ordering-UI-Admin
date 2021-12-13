@@ -113,6 +113,7 @@ var OrdersTable = function OrdersTable(props) {
 
   var _useState7 = (0, _react.useState)({
     status: true,
+    orderNumber: true,
     dateTime: true,
     business: true,
     customer: true,
@@ -127,6 +128,9 @@ var OrdersTable = function OrdersTable(props) {
   var optionsDefault = [{
     value: 'status',
     content: t('STATUS', 'Status')
+  }, {
+    value: 'orderNumber',
+    content: t('ORDER_NO', 'Order No.')
   }, {
     value: 'dateTime',
     content: t('DATE_TIME', 'Date and time')
@@ -197,13 +201,13 @@ var OrdersTable = function OrdersTable(props) {
       value: t('PENDING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PENDING) || 'Pending')
     }, {
       key: 1,
-      value: t('COMPLETED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.COMPLETED) || 'Completed')
+      value: t('COMPLETED_BY_ADMIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.COMPLETED) || 'Completed by admin')
     }, {
       key: 2,
       value: t('REJECTED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.REJECTED) || 'Rejected')
     }, {
       key: 3,
-      value: t('DRIVER_IN_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.DRIVER_IN_BUSINESS) || 'Driver in business')
+      value: t('ORDER_STATUS_IN_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.DRIVER_IN_BUSINESS) || 'Driver arrived to business')
     }, {
       key: 4,
       value: t('PREPARATION_COMPLETED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.PREPARATION_COMPLETED) || 'Preparation Completed')

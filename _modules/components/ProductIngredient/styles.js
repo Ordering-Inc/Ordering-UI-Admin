@@ -21,7 +21,7 @@ var IngredientContainer = _styledComponents.default.div(_templateObject || (_tem
 
 exports.IngredientContainer = IngredientContainer;
 
-var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  padding-bottom: 20px;\n  width: 100%;\n  h1 {\n    color: ", ";\n    font-size: 24px;\n    font-weight: 600;\n    margin: 0px;\n  }\n\n  button {\n    height: 42px;\n    ", "\n  }\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  padding-bottom: 20px;\n  width: 100%;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n    margin: 0px;\n  }\n\n  button {\n    height: 42px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.headingColor;
@@ -39,8 +39,10 @@ var IngredientOption = _styledComponents.default.div(_templateObject5 || (_templ
 
 exports.IngredientOption = IngredientOption;
 
-var AddIngredientButton = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 12px 0;\n  color: ", ";\n"])), function (props) {
+var AddIngredientButton = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  padding: 12px 0;\n  color: ", ";\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
+}, function (props) {
+  return props.theme.colors.primary;
 });
 
 exports.AddIngredientButton = AddIngredientButton;

@@ -135,12 +135,14 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
   }, t('ADD_MENU', 'Add menu'))), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: !isSelectedSharedMenus,
     onClick: function onClick() {
-      return setIsSelectedSharedMenus(false);
+      handleCloseOption();
+      setIsSelectedSharedMenus(false);
     }
   }, t('MENU_V21', 'Menu')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: isSelectedSharedMenus,
     onClick: function onClick() {
-      return setIsSelectedSharedMenus(true);
+      handleCloseOption();
+      setIsSelectedSharedMenus(true);
     }
   }, t('SHARED_MENUS', 'Shared menus'))), (isSelectedSharedMenus ? businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared : businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus).map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.MeunItem, {
@@ -185,7 +187,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     onClose: function onClose() {
       return handleCloseOption();
     },
-    handleUpdateBusinessState: handleSuccessBusinessMenu
+    handleUpdateBusinessState: handleSuccessBusinessMenu,
+    isSelectedSharedMenus: isSelectedSharedMenus
   }), showOption === 'customFields' && /*#__PURE__*/_react.default.createElement(_BusinessMenuCustomFields.BusinessMenuCustomFields, {
     open: showOption === 'option',
     onClose: function onClose() {

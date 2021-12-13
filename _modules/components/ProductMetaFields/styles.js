@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSpinnerLoader = exports.SkeletonItem = exports.MetaAddForm = exports.NoMetaField = exports.RoundBorder = exports.MetaAddContainer = exports.MetaContainer = exports.MetaTitle = exports.WrapMetaFields = void 0;
+exports.SkeletonItem = exports.MetaAddForm = exports.NoMetaField = exports.RoundBorder = exports.MetaAddContainer = exports.MetaContainer = exports.MetaTitle = exports.WrapMetaFields = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17,7 +17,7 @@ var WrapMetaFields = _styledComponents.default.div(_templateObject || (_template
 
 exports.WrapMetaFields = WrapMetaFields;
 
-var MetaTitle = _styledComponents.default.p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  font-weight: 600;\n  color: ", ";\n  margin-bottom: 30px;\n"])), function (props) {
+var MetaTitle = _styledComponents.default.p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 700;\n  color: ", ";\n  margin-bottom: 30px;\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
@@ -68,7 +68,3 @@ exports.MetaAddForm = MetaAddForm;
 var SkeletonItem = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin: 10px 0;\n\n  span {\n    border-radius: 5px;\n  }\n"])));
 
 exports.SkeletonItem = SkeletonItem;
-
-var WrapperSpinnerLoader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  > div {\n    position: absolute;\n    top: 0px;\n  }\n"])));
-
-exports.WrapperSpinnerLoader = WrapperSpinnerLoader;

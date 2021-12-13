@@ -52,7 +52,8 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       onClose = props.onClose,
       menu = props.menu,
       business = props.business,
-      handleUpdateBusinessState = props.handleUpdateBusinessState;
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      isSelectedSharedMenus = props.isSelectedSharedMenus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -100,7 +101,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "menu_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, !isSelectedSharedMenus && Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
     open: openShareMenu,
     menu: menu,
     businessId: business === null || business === void 0 ? void 0 : business.id,

@@ -44,10 +44,6 @@ var BusinessDeliveryPickUp = function BusinessDeliveryPickUp(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       hours = _useState2[0],
@@ -73,13 +69,7 @@ var BusinessDeliveryPickUp = function BusinessDeliveryPickUp(props) {
     var _minutes = [];
 
     for (var i = 0; i < 24; i++) {
-      var _configState$configs, _configState$configs$;
-
       var text = (i < 10 ? '0' : ' ') + i;
-
-      if (parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.time_format) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) !== 24) {
-        if (i === 0) text = '12 ' + t('AM');else if (i === 12) text = '12 ' + t('PM');else if (i < 12) text = (i < 10 ? '0' : '') + i + ' ' + t('AM');else if (i < 24) text = (i - 12 < 10 ? '0' : '') + (i - 12) + ' ' + t('PM');
-      }
 
       _hours.push({
         text: text,

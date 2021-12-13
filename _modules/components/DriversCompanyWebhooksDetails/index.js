@@ -36,7 +36,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversCompanyWebhooksDetails = function DriversCompanyWebhooksDetails(props) {
-  var _ref, _changesState$webhook, _ref2, _changesState$webhook2, _ref3, _changesState$webhook3;
+  var _ref, _changesState$webhook, _ref2, _changesState$webhook2, _ref3, _changesState$webhook3, _driversCompany$api_k;
 
   var driversCompany = props.driversCompany,
       actionState = props.actionState,
@@ -115,6 +115,12 @@ var DriversCompanyWebhooksDetails = function DriversCompanyWebhooksDetails(props
       return handleChangesState('webhook_order_status_changed', e.target.value);
     },
     placeholder: t('WEBHOOK_ORDER_STATUS_CHANGED', 'Webhook order status changed'),
+    autoComplete: "off"
+  })), driversCompany && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('API_KEY', 'API Key')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "api_key",
+    value: (_driversCompany$api_k = driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.api_key) !== null && _driversCompany$api_k !== void 0 ? _driversCompany$api_k : '',
+    disabled: true,
+    placeholder: t('API_KEY', 'API Key'),
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",

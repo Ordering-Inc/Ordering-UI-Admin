@@ -19,7 +19,7 @@ var _RiImageAddFill = _interopRequireDefault(require("@meronex/icons/ri/RiImageA
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BusinessCategoryEdit = require("../BusinessCategoryEdit");
+var _BusinessProductsCategoyDetails = require("../BusinessProductsCategoyDetails");
 
 var _SearchBar = require("../SearchBar");
 
@@ -157,11 +157,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
     if (category && (category === null || category === void 0 ? void 0 : category.id) !== null) {
-      onProductRedirect && onProductRedirect({
-        slug: slug,
-        category: category === null || category === void 0 ? void 0 : category.id,
-        product: null
-      });
       setCategorySelected(category);
       setCategoryToEdit({
         open: true,
@@ -311,7 +306,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleOpenProductDetails: handleOpenProductDetails,
     handleParentProductAdd: handleProductAdd,
     isParentProductAdd: isProductAdd
-  }))))), (categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open) && /*#__PURE__*/_react.default.createElement(_BusinessCategoryEdit.BusinessCategoryEdit, _extends({}, props, {
+  }))))), (categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategoyDetails.BusinessProductsCategoyDetails, _extends({}, props, {
     open: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open,
     onClose: handleCloseEdit,
     category: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.category,

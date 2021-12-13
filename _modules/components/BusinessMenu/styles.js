@@ -67,7 +67,7 @@ var ActionsWrapper = _styledComponents.default.div(_templateObject12 || (_templa
 
 exports.ActionsWrapper = ActionsWrapper;
 
-var AddMenuButton = _styledComponents.default.a(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  margin: 15px 0;\n  display: inline-block;\n  text-decoration: none;\n"])), function (props) {
+var AddMenuButton = _styledComponents.default.a(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  margin: 15px 0;\n  display: inline-block;\n  text-decoration: none;\n  font-size: 14px;\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 

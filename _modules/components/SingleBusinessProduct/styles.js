@@ -45,10 +45,10 @@ var SingleListBusinessContainer = _styledComponents.default.tbody(_templateObjec
 
 exports.SingleListBusinessContainer = SingleListBusinessContainer;
 
-var BusinessGeneralInfo = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  ", "\n  p {\n    margin: 0;\n  }\n  input {\n    font-weight: 500;\n    font-size: 13px;\n    color: ", ";\n    border: 1px solid transparent;\n    outline: none;\n    transition: all 0.3s;\n    border-radius: 3px;\n    padding: 5px;\n  }\n  &:hover {\n    input {\n      border: 1px solid ", ";\n      background: white;\n    }\n  }\n"])), function (props) {
+var BusinessGeneralInfo = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  ", "\n  p {\n    margin: 0;\n  }\n  input {\n    flex: 1;\n    font-weight: 500;\n    font-size: 13px;\n    color: ", ";\n    border: 1px solid transparent;\n    outline: none;\n    transition: all 0.3s;\n    border-radius: 3px;\n    padding: 5px;\n  }\n  &:hover {\n    input {\n      border: 1px solid ", ";\n      background: white;\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border-left: 1px solid #E9ECEF;\n"]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border-right: 1px solid #E9ECEF;\n"])));
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "])));
 }, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
@@ -65,7 +65,7 @@ var WrapperImage = _styledComponents.default.div(_templateObject8 || (_templateO
 
 exports.WrapperImage = WrapperImage;
 
-var InfoBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  input, textarea, div {\n    font-weight: 500;\n    font-size: 13px;\n    color: ", ";\n    border: 1px solid transparent;\n    outline: none;\n    transition: all 0.3s;\n    border-radius: 3px;\n    padding: 5px;\n    &.product_description {\n      font-size: 12px;\n      color: ", ";\n      resize: none;\n      width: 100%;\n    }\n  }\n  div{\n    min-width: 150px;\n  }\n  &:hover {\n    > input, textarea {\n      border: 1px solid ", ";\n      background: white;\n    }\n  }\n"])), function (props) {
+var InfoBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  input, textarea, div {\n    font-weight: 500;\n    font-size: 13px;\n    color: ", ";\n    border: 1px solid transparent;\n    outline: none;\n    transition: all 0.3s;\n    border-radius: 3px;\n    padding: 5px;\n    &.product_description {\n      font-size: 12px;\n      color: ", ";\n      resize: none;\n      width: 100%;\n    }\n  }\n  div{\n    min-width: 150px;\n  }\n  &:hover {\n    > input, textarea {\n      border: 1px solid ", ";\n      background: white;\n    }\n  }\n\n  input.fee_fixed,\n  input.fee_percentage {\n    max-width: 100px;\n  }\n\n  textarea.description {\n    width: 100%;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.lightGray;

@@ -25,7 +25,7 @@ var ProductExtrasContainer = _styledComponents.default.div(_templateObject2 || (
 
 exports.ProductExtrasContainer = ProductExtrasContainer;
 
-var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  padding-bottom: 20px;\n  width: 100%;\n  h1 {\n    color: ", ";\n    font-size: 24px;\n    font-weight: 600;\n    margin: 0px;\n  }\n\n  button {\n    height: 42px;\n    ", "\n  }\n\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  padding-bottom: 20px;\n  width: 100%;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n    margin: 0px;\n  }\n\n  button {\n    height: 42px;\n    ", "\n  }\n\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.headingColor;
@@ -63,8 +63,10 @@ var Details = _styledComponents.default.div(_templateObject9 || (_templateObject
 
 exports.Details = Details;
 
-var AddButton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  padding: 12px 0;\n  color: ", ";\n"])), function (props) {
+var AddButton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  padding: 12px 0;\n  color: ", ";\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
+}, function (props) {
+  return props.theme.colors.primary;
 });
 
 exports.AddButton = AddButton;

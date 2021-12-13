@@ -87,7 +87,7 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       key: i,
       isSkeleton: true
     });
-  }), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
+  }), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, _extends({}, props, {

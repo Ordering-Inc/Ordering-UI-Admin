@@ -165,9 +165,10 @@ var ProductDetails = function ProductDetails(props) {
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleUpdateBusinessState: handleUpdateBusinessState
   }), showOption === 'product_images' && /*#__PURE__*/_react.default.createElement(_ProductGallery.ProductGallery, {
-    businessId: business.id,
+    business: business,
     categoryId: product.category_id,
-    productId: product.id
+    product: product,
+    handleUpdateBusinessState: handleUpdateBusinessState
   }), showOption === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_ProductMetaFields.ProductMetaFields, {
     businessId: business.id,
     categoryId: product.category_id,

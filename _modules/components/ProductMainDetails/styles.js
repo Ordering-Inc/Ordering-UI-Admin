@@ -77,7 +77,7 @@ var ProductDescription = _styledComponents.default.p(_templateObject11 || (_temp
 
 exports.ProductDescription = ProductDescription;
 
-var ProductConfigsContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-bottom: 50px;\n  overflow: hidden;\n  > div:last-child {\n    border-bottom: none;\n  }\n"])), function (props) {
+var ProductConfigsContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-bottom: 50px;\n  overflow: hidden;\n  > div:first-child {\n    border-top: none !important;\n  }\n\n  > div:last-child {\n    border-bottom: none !important;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 

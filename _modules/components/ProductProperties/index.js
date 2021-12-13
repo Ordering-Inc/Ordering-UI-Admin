@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductPropertiesUI = function ProductPropertiesUI(props) {
-  var _taxSelected$value, _ref2, _formTaxChanges$name, _ref3, _formTaxChanges$descr, _ref4, _formTaxChanges$rate, _formTaxChanges$type, _taxToEdit$type;
+  var _ref2, _formTaxChanges$name, _ref3, _formTaxChanges$descr, _ref4, _formTaxChanges$rate, _formTaxChanges$type, _taxToEdit$type;
 
   var productState = props.productState,
       handleClickProperty = props.handleClickProperty,
@@ -79,7 +79,9 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       formTaxChanges = props.formTaxChanges,
       handleDeleteTax = props.handleDeleteTax,
       setAlertState = props.setAlertState,
-      alertState = props.alertState;
+      alertState = props.alertState,
+      formState = props.formState,
+      handleUpdateClick = props.handleUpdateClick;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -234,7 +236,7 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
     }
   }, [formMethods.errors]);
   return /*#__PURE__*/_react.default.createElement(_styles.PropertiesContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PROPERTIES', 'Properties')), /*#__PURE__*/_react.default.createElement(_styles.PropertyOption, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
-    defaultChecked: productState === null || productState === void 0 ? void 0 : productState.featured,
+    defaultChecked: (productState === null || productState === void 0 ? void 0 : productState.featured) || false,
     onClick: function onClick(e) {
       return handleClickProperty('featured', e.target.checked);
     },
@@ -242,7 +244,7 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "featured"
   }, t('FEATURED', 'Featured'))), /*#__PURE__*/_react.default.createElement(_styles.PropertyOption, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
-    defaultChecked: productState === null || productState === void 0 ? void 0 : productState.upselling,
+    defaultChecked: (productState === null || productState === void 0 ? void 0 : productState.upselling) || false,
     onClick: function onClick(e) {
       return handleClickProperty('upselling', e.target.checked);
     },
@@ -250,7 +252,7 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "upselling"
   }, t('UPSELLING', 'Upselling'))), /*#__PURE__*/_react.default.createElement(_styles.PropertyOption, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
-    defaultChecked: productState === null || productState === void 0 ? void 0 : productState.inventoried,
+    defaultChecked: (productState === null || productState === void 0 ? void 0 : productState.inventoried) || false,
     onClick: function onClick(e) {
       return handleClickStock(e);
     },
@@ -279,50 +281,14 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
 
       return handleClickProperty('sku', (_e$target$value = e.target.value) !== null && _e$target$value !== void 0 ? _e$target$value : null);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "estimated"
-  }, t('ESTIMATED_PERSON', 'Estimated person')), /*#__PURE__*/_react.default.createElement(_styles.TypeSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    defaultValue: (productState === null || productState === void 0 ? void 0 : productState.estimated_person) || null,
-    options: estimatedPersons,
-    onChange: function onChange(val) {
-      return handleClickProperty('estimated_person', val);
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    borderRadius: "8px",
+    color: "primary",
+    disabled: Object.keys(formState.changes).length === 0 || formState.loading,
+    onClick: function onClick() {
+      return handleUpdateClick();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "tax"
-  }, t('TAX', 'Tax')), /*#__PURE__*/_react.default.createElement(_styles.TypeSelectWrapper, null, taxSelected && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    placeholder: taxSelected.showOnSelected,
-    defaultValue: (_taxSelected$value = taxSelected === null || taxSelected === void 0 ? void 0 : taxSelected.value) !== null && _taxSelected$value !== void 0 ? _taxSelected$value : 'inherit',
-    options: taxesOption,
-    onChange: function onChange(val) {
-      return handleClickProperty('tax_id', val === 'inherit' ? null : val);
-    },
-    onEdit: function onEdit(val, i) {
-      return setTaxToEdit(val);
-    },
-    onDelete: function onDelete(val) {
-      return setTaxToDelete(val);
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "fee_percentage"
-  }, t('SERVICE_FEE_PERCENTAGE', 'Service fee percentage')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    name: "fee_percentage",
-    id: "fee_percentage",
-    placeholder: "0.00%",
-    defaultValue: parseInt(productState === null || productState === void 0 ? void 0 : productState.fee_percentage) || '',
-    onChange: function onChange(e) {
-      return handleChangeInput(e);
-    }
-  }), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "fee_fixed"
-  }, t('SERVICE_FEE_FIXED', 'Service fee fixed')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    name: "fee_fixed",
-    id: "fee_fixed",
-    placeholder: "$0.00",
-    defaultValue: parseInt(productState === null || productState === void 0 ? void 0 : productState.fee_fixed),
-    onChange: function onChange(e) {
-      return handleChangeInput(e) || 0;
-    }
-  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('SAVE', 'Save')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: !!taxToEdit,
     width: "80%",
     padding: "30px",

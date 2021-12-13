@@ -61,10 +61,6 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
-      _useToast2 = _slicedToArray(_useToast, 2),
-      showToast = _useToast2[1].showToast;
-
   var productImageInputRef = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
@@ -124,13 +120,6 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
-  (0, _react.useEffect)(function () {
-    var _formState$result3;
-
-    if (!(formState !== null && formState !== void 0 && formState.loading) && !(formState !== null && formState !== void 0 && formState.result.error) && formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result) {
-      showToast(_orderingComponentsAdmin.ToastType.Success, t('PRODUCT_ADD', 'Product added'));
-    }
-  }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     onClick: function onClick() {
       return handleClickImage();
