@@ -18,8 +18,8 @@ export const Header = styled.div`
   width: 100%;
   h1 {
     color: ${props => props.theme.colors.headingColor};
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     margin: 0px;
   }
 
@@ -55,8 +55,13 @@ export const IngredientOption = styled.div`
 
 export const AddIngredientButton = styled.div`
   cursor: pointer;
+  font-size: 14px;
   padding: 12px 0;
   color: ${props => props.theme.colors.lightGray};
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
 `
 
 export const IngredientAddContainer = styled.div`

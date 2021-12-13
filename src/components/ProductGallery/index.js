@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, DragAndDrop, ExamineClick, ProductGallery as ProductGalleryController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  DragAndDrop,
+  ExamineClick,
+  ProductGallery as ProductGalleryController
+} from 'ordering-components-admin'
 import { Image as ImageIcon, PlusCircle, ThreeDotsVertical } from 'react-bootstrap-icons'
 import { bytesConverter } from '../../utils'
 import { Alert, Confirm } from '../Confirm'

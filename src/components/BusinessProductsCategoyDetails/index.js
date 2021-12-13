@@ -4,14 +4,12 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  BusinessCategoryEdit as BusinessCategoryEditController
+  BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController
 } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { bytesConverter } from '../../utils'
 import { Alert } from '../Confirm'
-import { Switch } from '../../styles/Switch'
-import { Input } from '../../styles/Inputs'
-import { Button, IconButton } from '../../styles/Buttons'
+import { Button, IconButton, DefaultSelect, Input, Switch } from '../../styles'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import { XLg } from 'react-bootstrap-icons'
 
@@ -24,10 +22,12 @@ import {
   BtnWrapper,
   UploadImageIconContainer,
   UploadImageIcon,
-  CategoryNameWrapper
+  CategoryNameWrapper,
+  ParentCategorySelectWrapper,
+  Option
 } from './styles'
 
-const BusinessCategoryEditUI = (props) => {
+const BusinessProductsCategoyDetailsUI = (props) => {
   const {
     open,
     onClose,
@@ -38,7 +38,10 @@ const BusinessCategoryEditUI = (props) => {
     handleChangeCheckBox,
     businessState,
     category,
-    categorySelected
+    categorySelected,
+    parentCategories,
+    handleChangeItem,
+    isAddMode
   } = props
 
   const [, t] = useLanguage()
@@ -47,6 +50,7 @@ const BusinessCategoryEditUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const categoryTypeImageInputRef = useRef(null)
+  const [parentCategoriesOptions, setParentCategoriesOptions] = useState([])
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -117,6 +121,16 @@ const BusinessCategoryEditUI = (props) => {
     if (!open) return
     actionSidebar(true)
   }, [open])
+
+  useEffect(() => {
+    const _parentCategoriesOptions = parentCategories.map(category => {
+      return {
+        value: category.id,
+        content: <Option>{category?.name}</Option>
+      }
+    })
+    setParentCategoriesOptions(_parentCategoriesOptions)
+  }, [parentCategories])
 
   return (
     <>
@@ -204,7 +218,8 @@ const BusinessCategoryEditUI = (props) => {
                     autoComplete='off'
                   />
                 </CategoryNameWrapper>
-                {categorySelected && (
+
+                {categorySelected && isAddMode && (
                   <BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex', alignItems: 'center' }}>
                     <span style={{ fontSize: 15 }}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
                     <Switch
@@ -212,6 +227,18 @@ const BusinessCategoryEditUI = (props) => {
                       onChange={(val) => handleChangeCheckBox({ enabledParent: val })}
                     />
                   </BusinessEnableWrapper>
+                )}
+
+                {!isAddMode && categorySelected && parentCategories.length > 0 && (
+                  <ParentCategorySelectWrapper>
+                    <label>{t('PARENT_CATEGORY', 'Parent category')}</label>
+                    <DefaultSelect
+                      placeholder={t('SELECT_PARENT_CATEGORY', 'Select a parent category')}
+                      options={parentCategoriesOptions}
+                      defaultValue={formState?.changes?.parent_category_id}
+                      onChange={val => handleChangeItem({ parent_category_id: val })}
+                    />
+                  </ParentCategorySelectWrapper>
                 )}
                 <BtnWrapper>
                   <Button
@@ -239,13 +266,13 @@ const BusinessCategoryEditUI = (props) => {
     </>
   )
 }
-export const BusinessCategoryEdit = (props) => {
+export const BusinessProductsCategoyDetails = (props) => {
   const businessCategoryEditProps = {
     ...props,
-    UIComponent: BusinessCategoryEditUI
+    UIComponent: BusinessProductsCategoyDetailsUI
   }
 
   return (
-    <BusinessCategoryEditController {...businessCategoryEditProps} />
+    <BusinessProductsCategoyDetailsController {...businessCategoryEditProps} />
   )
 }

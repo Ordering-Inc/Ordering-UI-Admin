@@ -94,6 +94,18 @@ export const DriversCompanyWebhooksDetails = (props) => {
             autoComplete='off'
           />
         </InputWrapper>
+        {driversCompany && (
+          <InputWrapper>
+            <label>{t('API_KEY', 'API Key')}</label>
+            <Input
+              name='api_key'
+              value={driversCompany?.api_key ?? ''}
+              disabled
+              placeholder={t('API_KEY', 'API Key')}
+              autoComplete='off'
+            />
+          </InputWrapper>
+        )}
         <Button
           borderRadius='8px'
           color='primary'

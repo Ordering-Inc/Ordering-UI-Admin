@@ -124,10 +124,3 @@ export const SkeletonItem = styled.div`
     border-radius: 5px;
   }
 `
-
-export const WrapperSpinnerLoader = styled.div`
-  > div {
-    position: absolute;
-    top: 0px;
-  }
-`

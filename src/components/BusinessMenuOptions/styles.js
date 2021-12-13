@@ -26,7 +26,9 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   h1 {
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 5px 0;
     color: ${props => props.theme.colors.headingColor};
   }
 `

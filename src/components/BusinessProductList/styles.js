@@ -70,6 +70,11 @@ export const BusinessProductListTable = styled.table`
     width: 35%;
   }
 
+  th.fee_fixed,
+  th.fee_percentage {
+    white-space: nowrap;
+  }
+
   th.id,
   td.id {
     width: 10%;

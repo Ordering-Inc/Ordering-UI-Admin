@@ -93,8 +93,12 @@ export const ProductConfigsContainer = styled.div`
   border-radius: 8px;
   margin-bottom: 50px;
   overflow: hidden;
+  > div:first-child {
+    border-top: none !important;
+  }
+
   > div:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
   }
 `
 
