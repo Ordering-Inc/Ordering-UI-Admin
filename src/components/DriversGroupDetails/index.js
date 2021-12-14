@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, DriversGroupDetails as DriversGroupDetailsController } from 'ordering-components-admin'
+import { useLanguage, useConfig, DriversGroupDetails as DriversGroupDetailsController } from 'ordering-components-admin'
 import { Switch } from '../../styles'
 import { DragScroll } from '../DragScroll'
 import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
@@ -30,6 +30,10 @@ const DriversGroupDetailsUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [configState] = useConfig()
+
+  const autoAssignType = configState?.configs?.autoassign_type?.value
+
   const [showMenu, setShowMenu] = useState('general')
   const [useAdvanced, setUseAdvanced] = useState(false)
   const [driversGroupMenus, setDriversGroupMenus] = useState([])
@@ -37,7 +41,7 @@ const DriversGroupDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   useEffect(() => {
-    const _driversGroupMenus = useAdvanced
+    const _driversGroupMenus = (useAdvanced && autoAssignType !== 'basic')
       ? [
         { key: 'general', value: t('GENERAL', 'General') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') },

@@ -3,7 +3,6 @@ import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../styles/Select/FirstSelect'
 import { Checkbox } from '../../styles/Checkbox'
 import { Alert } from '../Confirm'
-import { toast } from 'react-toastify'
 import {
   InvoiceGeneralDetailContainer,
   FormControl,
@@ -23,49 +22,39 @@ export const InvoiceGeneral = (props) => {
     businessList,
     selectedInvoice,
     invocing,
-    handleChangeInvocing
+    handleChangeInvocing,
+    getOrders
   } = props
 
   const [, t] = useLanguage()
+
   const [typeInvoiceOptions, setTypeInvoiceOptions] = useState(null)
   const [businessOptions, setBusinessOptions] = useState(null)
   const [driverOptions, setDriverOptions] = useState(null)
-  const [formState, setformState] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleChangeFormState = (type, value) => {
-    setformState({ ...formState, [type]: value })
+    handleChangeInvocing({ ...invocing, [type]: value })
   }
 
-  const saveFormData = () => {
-    if (businessList && formState?.business === '') {
+  const pdfDownload = () => {
+    if (businessList && invocing?.business === '') {
       setAlertState({
         open: true,
         content: t('SELECTED_BUSINESS_INVALID', 'The selected Business is invalid')
       })
-    } else if (driverList && formState?.driver === '') {
+    } else if (driverList && invocing?.driver === '') {
       setAlertState({
         open: true,
         content: t('SELECTED_DRIVER_INVALID', 'The selected Driver is invalid')
       })
     } else {
-      handleChangeInvocing(formState)
-      const toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-      const content = t('INVOICE_DATA_SAVED', 'Invoice data saved')
-      toast.dark(content, toastConfigure)
+      getOrders()
     }
   }
 
   const handleChangeDate = (date1, date2) => {
-    setformState({ ...formState, from: date1, to: date2 })
+    handleChangeInvocing({ ...invocing, from: date1, to: date2 })
   }
 
   const closeAlert = () => {
@@ -95,10 +84,6 @@ export const InvoiceGeneral = (props) => {
     }
   }, [driverList?.drivers, businessList?.businesses])
 
-  useEffect(() => {
-    setformState(invocing)
-  }, [invocing])
-
   return (
     <>
       <InvoiceGeneralDetailContainer className='row'>
@@ -113,7 +98,7 @@ export const InvoiceGeneral = (props) => {
                   <Select
                     options={typeInvoiceOptions}
                     className='select'
-                    defaultValue={formState?.type}
+                    defaultValue={invocing?.type}
                     onChange={(value) => handleChangeFormState('type', value)}
                   />
                 )
@@ -141,7 +126,7 @@ export const InvoiceGeneral = (props) => {
                   <Select
                     options={businessOptions}
                     className='select'
-                    defaultValue={formState?.business}
+                    defaultValue={invocing?.business}
                     placeholder={t('BUSINESS_NAME', 'Business name')}
                     onChange={(value) => handleChangeFormState('business', value)}
                   />
@@ -162,7 +147,7 @@ export const InvoiceGeneral = (props) => {
                     <Select
                       options={driverOptions}
                       className='select'
-                      defaultValue={formState?.driver}
+                      defaultValue={invocing?.driver}
                       placeholder={t('SELECT_DRIVER', 'Select a driver')}
                       onChange={(value) => handleChangeFormState('driver', value)}
                     />
@@ -177,7 +162,7 @@ export const InvoiceGeneral = (props) => {
             <CheckBoxWrapper className='col-md-12'>
               <Checkbox
                 id='cancelled'
-                defaultChecked={formState?.cancelled || false}
+                defaultChecked={invocing?.cancelled || false}
                 onClick={(e) => handleChangeFormState('cancelled', e.target.checked)}
               />
               <label htmlFor='cancelled'>{t('INCLUDE_CANCELED_ORDERS', 'Include canceled orders')}</label>
@@ -191,7 +176,7 @@ export const InvoiceGeneral = (props) => {
             type='number'
             placeholder='0%'
             min='0'
-            defaultValue={formState?.percentage_fee}
+            defaultValue={invocing?.percentage_fee}
             onChange={(e) => handleChangeFormState('percentage_fee', e.target.value)}
           />
         </FormControl>
@@ -201,7 +186,7 @@ export const InvoiceGeneral = (props) => {
             type='number'
             placeholder='00'
             min='0'
-            defaultValue={formState?.fixed_fee}
+            defaultValue={invocing?.fixed_fee}
             onChange={(e) => handleChangeFormState('fixed_fee', e.target.value)}
           />
         </FormControl>
@@ -213,7 +198,7 @@ export const InvoiceGeneral = (props) => {
                 type='number'
                 placeholder='0%'
                 min='0'
-                defaultValue={formState?.percentage_delivery_price}
+                defaultValue={invocing?.percentage_delivery_price}
                 onChange={(e) => handleChangeFormState('percentage_delivery_price', e.target.value)}
               />
             </FormControl>
@@ -227,7 +212,7 @@ export const InvoiceGeneral = (props) => {
                 type='number'
                 placeholder='0%'
                 min='0'
-                defaultValue={formState?.percentage_driver_tip}
+                defaultValue={invocing?.percentage_driver_tip}
                 onChange={(e) => handleChangeFormState('percentage_driver_tip', e.target.value)}
               />
             </FormControl>
@@ -239,7 +224,7 @@ export const InvoiceGeneral = (props) => {
             type='number'
             placeholder='00'
             min='0'
-            defaultValue={formState?.tax}
+            defaultValue={invocing?.tax}
             onChange={(e) => handleChangeFormState('tax', e.target.value)}
           />
         </FormControl>
@@ -249,7 +234,7 @@ export const InvoiceGeneral = (props) => {
             type='number'
             placeholder='00'
             min='0'
-            defaultValue={formState?.misc_amount}
+            defaultValue={invocing?.misc_amount}
             onChange={(e) => handleChangeFormState('misc_amount', e.target.value)}
           />
         </FormControl>
@@ -257,7 +242,7 @@ export const InvoiceGeneral = (props) => {
           <Label>{t('MISC_DESCRIPTION', 'MISC description')}</Label>
           <textarea
             placeholder={t('WRITE_MISC_DESCRIPTION', 'Write a MISC description')}
-            value={formState?.misc_description || ''}
+            value={invocing?.misc_description || ''}
             onChange={(e) => handleChangeFormState('misc_description', e.target.value)}
           />
         </FormControl>
@@ -265,7 +250,7 @@ export const InvoiceGeneral = (props) => {
           <Label>{t('NOTES', 'Notes')}</Label>
           <textarea
             placeholder={t('WRITE_A_NOTES', 'Write a Notes')}
-            value={formState?.notes || ''}
+            value={invocing?.notes || ''}
             onChange={(e) => handleChangeFormState('notes', e.target.value)}
           />
         </FormControl>
@@ -274,9 +259,9 @@ export const InvoiceGeneral = (props) => {
             borderRadius='7.6px'
             color='primary'
             disabled={driverList?.loading || businessList?.loading}
-            onClick={saveFormData}
+            onClick={pdfDownload}
           >
-            {t('SAVE', 'Save')}
+            {t('EXPORT', 'Export')}
           </Button>
         </ActionBtnWrapper>
       </InvoiceGeneralDetailContainer>
