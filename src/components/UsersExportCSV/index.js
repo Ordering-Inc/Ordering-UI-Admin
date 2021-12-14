@@ -12,7 +12,9 @@ import {
 const UsersExportCSVUI = (props) => {
   const {
     actionStatus,
-    getCSV
+    getCSV,
+    isDriversPage,
+    isDriversManagersPage
   } = props
   const [, t] = useLanguage()
   const [popoverOpen, setPopoverOpen] = useState(false)
@@ -31,6 +33,14 @@ const UsersExportCSVUI = (props) => {
     setPopoverOpen(false)
   }
 
+  const handleCSV = () => {
+    if (isDriversPage || isDriversManagersPage) {
+      getCSV(false)
+    } else {
+      setPopoverOpen(!popoverOpen)
+    }
+  }
+
   useEffect(() => {
     if (!popoverOpen) return
     document.addEventListener('click', closePopover)
@@ -44,7 +54,7 @@ const UsersExportCSVUI = (props) => {
           borderRadius='5px'
           color='secundary'
           disabled={actionStatus.loading}
-          onClick={() => setPopoverOpen(!popoverOpen)}
+          onClick={() => handleCSV()}
         >
           {t('CSV', 'CSV')}
           <DownloadIcon />

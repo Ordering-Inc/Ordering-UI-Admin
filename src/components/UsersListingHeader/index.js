@@ -15,6 +15,8 @@ import {
 
 export const UsersListingHeader = (props) => {
   const {
+    deafultUserTypesSelected,
+    disabledActiveStateCondition,
     title,
     selectedUsers,
     deleteUsersActionState,
@@ -59,8 +61,12 @@ export const UsersListingHeader = (props) => {
           }
         </Button>
         <UsersExportCSV
+          deafultUserTypesSelected={deafultUserTypesSelected}
+          disabledActiveStateCondition={disabledActiveStateCondition}
           userTypesSelected={userTypesSelected}
           selectedUserActiveState={selectedUserActiveState}
+          isDriversPage={isDriversPage}
+          isDriversManagersPage={isDriversManagersPage}
         />
         <UsersDeleteButton
           selectedUsers={selectedUsers}
