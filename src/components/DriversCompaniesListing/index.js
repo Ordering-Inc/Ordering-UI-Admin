@@ -128,6 +128,10 @@ const DriversCompaniesListingUI = (props) => {
             driversCompaniesState={driversCompaniesState}
             setDriversCompaniesState={setDriversCompaniesState}
             driversCompany={curDriversCompany}
+            onClose={() => {
+              setCurDriversCompany(null)
+              setOpenDetails(false)
+            }}
           />
         </SideBar>
       )}
