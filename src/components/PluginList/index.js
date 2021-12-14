@@ -112,6 +112,7 @@ const PluginListUI = (props) => {
         </Header>
         <SearchBar
           isCustomLayout
+          lazyLoad
           placeholder={t('SEARCH', 'Search')}
           search={searchValue}
           onSearch={val => setSearchValue(val)}

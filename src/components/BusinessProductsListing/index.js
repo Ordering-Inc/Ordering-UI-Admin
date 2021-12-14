@@ -183,6 +183,7 @@ const BusinessProductsListingUI = (props) => {
             </Button>
             <SearchBar
               isCustomLayout
+              lazyLoad
               search={searchValue}
               onSearch={handleChangeSearch}
               placeholder={t('SEARCH', 'Search')}

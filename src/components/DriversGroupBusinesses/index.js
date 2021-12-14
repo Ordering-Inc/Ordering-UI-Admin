@@ -45,6 +45,7 @@ export const DriversGroupBusinesses = (props) => {
         <SearchBar
           placeholder={t('SEARCH', 'Search')}
           isCustomLayout
+          lazyLoad
           search={searchValue}
           onSearch={val => setSearchValue(val)}
         />

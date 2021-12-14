@@ -132,6 +132,7 @@ const BusinessBrandListingUI = (props) => {
               {t('ADD_BRAND', 'Add brand')}
             </Button>
             <SearchBar
+              lazyLoad
               search={searchValue}
               onSearch={(value) => onSearch(value)}
               placeholder={t('SEARCH', 'Search')}

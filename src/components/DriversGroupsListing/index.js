@@ -120,6 +120,7 @@ const DriversGroupsListingUI = (props) => {
               {t('DELETE', 'Delete')}
             </Button>
             <SearchBar
+              lazyLoad
               onSearch={val => setSearchValue(val)}
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}

@@ -74,6 +74,7 @@ export const UsersListingHeader = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
         />
         <SearchBar
+          lazyLoad
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}

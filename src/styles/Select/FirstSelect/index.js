@@ -9,13 +9,31 @@ import {
   Option,
   Chevron,
   Header,
-  FunctionalityContainer
+  FunctionalityContainer,
+  SearchBarWrapper
 } from '../../Selects'
 import { Button } from '../../Buttons'
 import { useLanguage } from 'ordering-components-admin'
+import { SearchBar } from '../../../components/SearchBar'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className, onEdit, onDelete } = props
+  const {
+    placeholder,
+    options,
+    defaultValue,
+    onChange,
+    notAsync,
+    type,
+    noSelected,
+    className,
+    onEdit,
+    onDelete,
+    isShowSearchBar,
+    searchValue,
+    handleChangeSearch,
+    searchBarIsCustomLayout,
+    searchBarPlaceholder
+  } = props
 
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(
@@ -51,7 +69,13 @@ export const Select = (props) => {
       const _defaultOption = options?.find(
         (option) => option.value === defaultValue
       )
-      setSelectedOption(_defaultOption)
+      if (isShowSearchBar) {
+        if (_defaultOption) {
+          setSelectedOption(_defaultOption)
+        }
+      } else {
+        setSelectedOption(_defaultOption)
+      }
       setValue(defaultValue)
     }
   }, [defaultValue, options])
@@ -64,6 +88,9 @@ export const Select = (props) => {
       setValue(option.value)
     }
     onChange && onChange(option.value)
+    if (isShowSearchBar) {
+      handleChangeSearch('')
+    }
   }
   return (
     <SelectInput type={type} className={className || 'select'}>
@@ -92,7 +119,21 @@ export const Select = (props) => {
           position='right'
           ref={dropdownReference}
         >
+          {isShowSearchBar && (
+            <SearchBarWrapper
+              className='search-bar-container'
+            >
+              <SearchBar
+                lazyLoad
+                isCustomLayout={searchBarIsCustomLayout}
+                search={searchValue}
+                onSearch={handleChangeSearch}
+                placeholder={searchBarPlaceholder || ''}
+              />
+            </SearchBarWrapper>
+          )}
           <OptionsInner
+            className='list-wrapper'
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}
           >
