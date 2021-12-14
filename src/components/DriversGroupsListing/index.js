@@ -19,6 +19,7 @@ import {
 const DriversGroupsListingUI = (props) => {
   const {
     driversGroupsState,
+    setDriversGroupsState,
     driversManagersList,
     businessesList,
     paymethodsList,
@@ -27,32 +28,11 @@ const DriversGroupsListingUI = (props) => {
     handleSelectGroup,
     handleAllSelectGroup,
     handleDeleteSelectedGroups,
-    handleAddDriversGroup,
 
-    openDetails,
-    setOpenDetails,
-    cleanChagesState,
-    changesState,
     actionState,
-    handleChangesState,
     handleUpdateDriversGroup,
     handleDeleteDriversGroup,
-    curDriversGroup,
-    setCurDriversGroup,
-    handleSelectBusiness,
-    handleSelectAllBusiness,
-    selectedBusinessIds,
-    selectedPaymethodIds,
-    handleSelectPaymethod,
-    handleSelectAllPaymethod,
-    selectedDriverIds,
-    handleSelectAllDriver,
-    handleSelectDriver,
-
-    driversCompanyList,
-    selectedDriversCompanyIds,
-    handleSelectDriversCompany,
-    handleSelectAllDriversCompany
+    driversCompanyList
   } = props
 
   const [, t] = useLanguage()
@@ -61,10 +41,11 @@ const DriversGroupsListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [moveDistance, setMoveDistance] = useState(0)
+  const [openDetails, setOpenDetails] = useState(false)
+  const [curDriversGroup, setCurDriversGroup] = useState(null)
 
   const handleOpenDetails = (driverGroup) => {
     setMoveDistance(0)
-    cleanChagesState()
     setCurDriversGroup(driverGroup)
     setOpenDetails(true)
   }
@@ -151,30 +132,17 @@ const DriversGroupsListingUI = (props) => {
           }}
         >
           <DriversGroupDetails
+            driversGroupsState={driversGroupsState}
+            setDriversGroupsState={setDriversGroupsState}
             curDriversGroup={curDriversGroup}
             driversManagers={driversManagersList?.managers}
             businesses={businessesList?.businesses}
             paymethods={paymethodsList?.paymethods}
             drivers={driversList?.drivers}
             companies={driversCompanyList?.companies}
-            changesState={changesState}
-            actionState={actionState}
-            handleChangesState={handleChangesState}
             handleUpdateDriversGroup={handleUpdateDriversGroup}
-            handleSelectBusiness={handleSelectBusiness}
-            handleSelectAllBusiness={handleSelectAllBusiness}
-            selectedBusinessIds={selectedBusinessIds}
-            selectedPaymethodIds={selectedPaymethodIds}
-            handleSelectPaymethod={handleSelectPaymethod}
-            handleSelectAllPaymethod={handleSelectAllPaymethod}
-            selectedDriverIds={selectedDriverIds}
-            handleSelectDriver={handleSelectDriver}
-            handleSelectAllDriver={handleSelectAllDriver}
-            selectedDriversCompanyIds={selectedDriversCompanyIds}
-            handleSelectDriversCompany={handleSelectDriversCompany}
-            handleSelectAllDriversCompany={handleSelectAllDriversCompany}
-            handleAddDriversGroup={handleAddDriversGroup}
             handleParentSidebarMove={val => setMoveDistance(val)}
+            onClose={() => setOpenDetails(false)}
           />
         </SideBar>
       )}

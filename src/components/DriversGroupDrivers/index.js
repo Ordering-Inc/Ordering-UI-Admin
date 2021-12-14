@@ -30,7 +30,13 @@ export const DriversGroupDrivers = (props) => {
   useEffect(() => {
     let _filteredDrivers = []
     if (searchValue) {
-      _filteredDrivers = drivers.filter(driver => driver?.name.toLowerCase().includes(searchValue.toLowerCase()))
+      _filteredDrivers = drivers
+        .filter(
+          driver => (
+            driver?.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+            driver?.email.toLowerCase().includes(searchValue.toLowerCase())
+          )
+        )
     } else {
       _filteredDrivers = [...drivers]
     }

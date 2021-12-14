@@ -86,6 +86,9 @@ export const ActionSelectorWrapper = styled.div`
   }
 
   .show {
+    button {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
     >div {
       border: 1px solid ${props => props.theme.colors.borderColor};
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
