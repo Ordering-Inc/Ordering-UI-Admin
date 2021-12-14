@@ -20,8 +20,7 @@ export const UserDetailsUI = (props) => {
     isDriversManagersPage,
     userState,
     setExtraOpen,
-    handleSuccessUpdate,
-    handleSuccessAddressesUpdate
+    handleSuccessUserUpdate
   } = props
 
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
@@ -51,7 +50,7 @@ export const UserDetailsUI = (props) => {
               isDriversPage={isDriversPage}
               isDriversManagersPage={isDriversManagersPage}
               user={userState.user}
-              handleSuccessUpdate={handleSuccessUpdate}
+              handleSuccessUpdate={handleSuccessUserUpdate}
             />
           )}
           {currentMenuSelected === 'saved_places' && (
@@ -63,7 +62,8 @@ export const UserDetailsUI = (props) => {
                     userId={userState.user?.id}
                     addresses={userState.user?.addresses}
                     setExtraOpen={setExtraOpen}
-                    handleSuccessAddressesUpdate={handleSuccessAddressesUpdate}
+                    userState={userState}
+                    handleSuccessUpdate={handleSuccessUserUpdate}
                   />
                 </SavedPlaces>
               )}

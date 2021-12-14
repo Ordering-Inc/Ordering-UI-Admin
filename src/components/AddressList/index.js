@@ -56,7 +56,8 @@ const AddressListUI = (props) => {
     isEnableContinueButton,
     setCustomerModalOpen,
     setExtraOpen,
-    handleSuccessAddressesUpdate
+    userState,
+    handleSuccessUpdate
   } = props
 
   const [, t] = useLanguage()
@@ -99,11 +100,14 @@ const AddressListUI = (props) => {
     if (!found) {
       addresses.push(address)
     }
-    handleSuccessAddressesUpdate && handleSuccessAddressesUpdate(userId, addresses)
     setAddressList({
       ...addressList,
       addresses
     })
+    if (handleSuccessUpdate) {
+      const updatedUser = { ...userState.user, addresses: addresses }
+      handleSuccessUpdate(updatedUser)
+    }
     if (userCustomerSetup) {
       handleSetAddress(address)
       return
@@ -248,7 +252,7 @@ const AddressListUI = (props) => {
                       {address?.tag === 'home' && <HouseDoor />}
                       {address?.tag === 'office' && <Building />}
                       {address?.tag === 'favorite' && <SuitHeart />}
-                      {address?.tag === 'other' && <PlusLg />}
+                      {(address?.tag === 'other' || !address?.tag) && <PlusLg />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>
