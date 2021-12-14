@@ -98,6 +98,11 @@ export const DriversCompanyGeneralDetails = (props) => {
               onChange={e => handleChangesState('limit', e.target.value)}
               placeholder={t('LIMIT', 'Limit')}
               autoComplete='off'
+              onKeyPress={(e) => {
+                if (!/^[0-9]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
             />
           </InputWrapper>
         </GroupContainer>

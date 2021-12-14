@@ -35,6 +35,11 @@ export const InputWrapper = styled.div`
     font-size: 14px;
 
     ${({ isTimezone }) => isTimezone && css`
+      > div:first-child {
+        > div {
+          overflow: hidden;
+        }
+      }
       .list-wrapper {
         font-size: 12px;
       }
