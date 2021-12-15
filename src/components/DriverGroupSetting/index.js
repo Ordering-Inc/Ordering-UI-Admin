@@ -49,6 +49,7 @@ const DriverGroupSettingUI = (props) => {
     <Container>
       <h1>{t('DRIVER_GROUP', 'Driver group')}</h1>
       <SearchBar
+        lazyLoad
         isCustomLayout
         placeholder={t('SEARCH', 'Search')}
         search={searchValue}

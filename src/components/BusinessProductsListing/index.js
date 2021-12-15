@@ -126,6 +126,12 @@ const BusinessProductsListingUI = (props) => {
     setBusinessSlug(business?.slug)
   }
 
+  const onDeleteCategoey = (categoryId) => {
+    if (categoryToEdit.open && categoryToEdit.category?.id === categoryId) {
+      handleCloseEdit()
+    }
+  }
+
   useEffect(() => {
     if (categoryId) {
       setCategoryToEdit({
@@ -183,6 +189,7 @@ const BusinessProductsListingUI = (props) => {
             </Button>
             <SearchBar
               isCustomLayout
+              lazyLoad
               search={searchValue}
               onSearch={handleChangeSearch}
               placeholder={t('SEARCH', 'Search')}
@@ -215,6 +222,7 @@ const BusinessProductsListingUI = (props) => {
                 handleChangeCategory={handleChangeCategory}
                 business={businessState?.business}
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
+                onClose={onDeleteCategoey}
               />
               <ActionIconList>
                 {viewMethod === 'spreedsheet' && (

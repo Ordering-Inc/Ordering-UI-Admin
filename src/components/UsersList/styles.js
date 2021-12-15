@@ -114,6 +114,10 @@ export const UserMainInfo = styled.div`
     margin-right: 20px;
     padding-right: 10px;
   `}
+
+  > div:last-child {
+    flex: 1;
+  }
 `
 
 export const CheckBoxWrapper = styled.div`

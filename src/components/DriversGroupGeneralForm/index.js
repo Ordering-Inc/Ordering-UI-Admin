@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useConfig } from 'ordering-components-admin'
 import { Input, DefaultSelect, Checkbox, Button } from '../../styles'
 import { Alert } from '../Confirm'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
@@ -14,7 +14,7 @@ import {
 
 export const DriversGroupGeneralForm = (props) => {
   const {
-    curDriversGroup,
+    driversGroupState,
     driversManagers,
     changesState,
     handleChangesState,
@@ -23,8 +23,12 @@ export const DriversGroupGeneralForm = (props) => {
     handleUpdateDriversGroup,
     handleAddDriversGroup
   } = props
+
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [configState] = useConfig()
+
+  const autoAssignType = configState?.configs?.autoassign_type?.value
 
   const typeOptions = [
     { value: 0, content: t('IN_HOUSE_DRIVERS', 'In house drivers') },
@@ -52,8 +56,8 @@ export const DriversGroupGeneralForm = (props) => {
       autoassign_amount_drivers: 0,
       orders_group_max_orders: 0
     }
-    if (!curDriversGroup) return
-    handleUpdateDriversGroup(curDriversGroup.id, changes)
+    if (!driversGroupState.driversGroup) return
+    handleUpdateDriversGroup(changes)
   }
 
   return (
@@ -62,7 +66,7 @@ export const DriversGroupGeneralForm = (props) => {
         <label>{t('NAME', 'Name')}</label>
         <Input
           name='name'
-          value={changesState?.name ?? curDriversGroup?.name ?? ''}
+          value={changesState?.name ?? driversGroupState.driversGroup?.name ?? ''}
           onChange={e => handleChangesState({ name: e.target.value })}
           placeholder={t('NAME', 'Name')}
         />
@@ -72,7 +76,7 @@ export const DriversGroupGeneralForm = (props) => {
         <DefaultSelect
           placeholder={t('SELECT_MANAGER', 'Select driver manager')}
           options={driversManagersOptions}
-          defaultValue={changesState?.administrator_id ?? curDriversGroup?.administrator_id}
+          defaultValue={changesState?.administrator_id ?? driversGroupState.driversGroup?.administrator_id}
           optionInnerMaxHeight='60vh'
           onChange={val => handleChangesState({ administrator_id: val })}
         />
@@ -82,13 +86,13 @@ export const DriversGroupGeneralForm = (props) => {
         <DefaultSelect
           placeholder={t('SELECT_TYPE', 'Select type')}
           options={typeOptions}
-          defaultValue={changesState?.type ?? curDriversGroup?.type}
+          defaultValue={changesState?.type ?? driversGroupState.driversGroup?.type}
           onChange={val => handleChangesState({ type: val })}
         />
       </InputWrapper>
 
       {
-        (changesState?.type === 0 || (typeof changesState?.type === 'undefined' && curDriversGroup?.type === 0))
+        (changesState?.type === 0 || (typeof changesState?.type === 'undefined' && driversGroupState.driversGroup?.type === 0))
           ? <DriversGroupDrivers {...props} />
           : <DriversGroupCompanies {...props} />
       }
@@ -98,14 +102,14 @@ export const DriversGroupGeneralForm = (props) => {
         <DefaultSelect
           placeholder={t('SELECT_PRIORITY', 'Select priority')}
           options={priorityOptions}
-          defaultValue={changesState?.priority ?? curDriversGroup?.priority}
+          defaultValue={changesState?.priority ?? driversGroupState.driversGroup?.priority}
           onChange={val => handleChangesState({ priority: val })}
         />
       </InputWrapper>
-      {!curDriversGroup && (
+      {!driversGroupState.driversGroup && (
         <DriversGroupBusinesses {...props} />
       )}
-      {curDriversGroup && (
+      {driversGroupState.driversGroup && autoAssignType !== 'basic' && (
         <CheckboxContainer>
           <Checkbox
             checked={useAdvanced}
@@ -118,9 +122,9 @@ export const DriversGroupGeneralForm = (props) => {
         borderRadius='8px'
         color='primary'
         disabled={Object.keys(changesState).length === 0}
-        onClick={() => curDriversGroup ? handleUpdateDriversGroup(curDriversGroup.id, changesState) : handleAddDriversGroup()}
+        onClick={() => driversGroupState.driversGroup ? handleUpdateDriversGroup(changesState) : handleAddDriversGroup()}
       >
-        {curDriversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
+        {driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
       </Button>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}

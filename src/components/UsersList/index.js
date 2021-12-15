@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
@@ -10,6 +10,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { Pagination } from '../Pagination'
+import { ConfirmAdmin } from '../ConfirmAdmin'
 
 import {
   UsersConatiner,
@@ -49,6 +50,8 @@ export const UsersList = (props) => {
   const theme = useTheme()
   const [{ optimizeImage }] = useUtils()
 
+  const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
+
   const getUserType = (type) => {
     const userTypes = [
       { key: 0, value: t('ADMINISTRATOR', 'Administrator') },
@@ -74,6 +77,34 @@ export const UsersList = (props) => {
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
     getUsers(expectedPage, pageSize)
+  }
+
+  const handleEnable = (user, enabled) => {
+    if (user.level !== 0) {
+      handleChangeActiveUser({ id: user.id, enabled: enabled })
+    } else {
+      setConfirmAdmin({
+        open: true,
+        handleOnConfirm: () => {
+          setConfirmAdmin({ ...confirmAdmin, open: false })
+          handleChangeActiveUser({ id: user.id, enabled: enabled })
+        }
+      })
+    }
+  }
+
+  const onChangeUserType = (user, type) => {
+    if (user.level !== 0) {
+      handleChangeUserType(type)
+    } else {
+      setConfirmAdmin({
+        open: true,
+        handleOnConfirm: () => {
+          setConfirmAdmin({ ...confirmAdmin, open: false })
+          handleChangeUserType(type)
+        }
+      })
+    }
   }
 
   useEffect(() => {
@@ -186,7 +217,7 @@ export const UsersList = (props) => {
                           <UserTypeSelector
                             userId={user.id}
                             defaultUserType={user?.level}
-                            handleChangeUserType={handleChangeUserType}
+                            handleChangeUserType={(type) => onChangeUserType(user, type)}
                           />
                           <p>{getUserType(user?.level)?.value}</p>
                         </UserTypeWrapper>
@@ -196,8 +227,9 @@ export const UsersList = (props) => {
                       <UserEnableWrapper className='user_enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>
                         <Switch
+                          notAsync={user.level === 0}
                           defaultChecked={user?.enabled}
-                          onChange={enabled => handleChangeActiveUser({ id: user.id, enabled: enabled })}
+                          onChange={enabled => handleEnable(user, enabled)}
                         />
                       </UserEnableWrapper>
                     </td>
@@ -241,6 +273,12 @@ export const UsersList = (props) => {
           )}
         </UsersBottomContainer>
       </UsersConatiner>
+
+      <ConfirmAdmin
+        open={confirmAdmin.open}
+        onClose={() => setConfirmAdmin({ ...confirmAdmin, open: false })}
+        onConfirm={confirmAdmin.handleOnConfirm}
+      />
     </>
   )
 }
