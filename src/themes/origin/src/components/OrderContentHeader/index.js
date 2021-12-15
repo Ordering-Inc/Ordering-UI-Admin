@@ -102,6 +102,7 @@ export const OrderContentHeader = (props) => {
         <TopRightSection>
           <WrapperSearchAndFilter>
             <SearchBar
+              lazyLoad
               onSearch={handleChangeSearch}
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}

@@ -86,6 +86,7 @@ export const OrdersContentHeader = (props) => {
           >
             <SearchBar
               isCustomLayout
+              lazyLoad
               onSearch={handleChangeSearch}
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}

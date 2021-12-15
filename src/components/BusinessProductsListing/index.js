@@ -54,7 +54,9 @@ const BusinessProductsListingUI = (props) => {
     setFormTaxState,
     formTaxState,
     taxes,
-    setTaxes
+    setTaxes,
+    fees,
+    setFees
   } = props
 
   const [, t] = useLanguage()
@@ -126,6 +128,12 @@ const BusinessProductsListingUI = (props) => {
     setBusinessSlug(business?.slug)
   }
 
+  const onDeleteCategoey = (categoryId) => {
+    if (categoryToEdit.open && categoryToEdit.category?.id === categoryId) {
+      handleCloseEdit()
+    }
+  }
+
   useEffect(() => {
     if (categoryId) {
       setCategoryToEdit({
@@ -183,6 +191,7 @@ const BusinessProductsListingUI = (props) => {
             </Button>
             <SearchBar
               isCustomLayout
+              lazyLoad
               search={searchValue}
               onSearch={handleChangeSearch}
               placeholder={t('SEARCH', 'Search')}
@@ -215,6 +224,7 @@ const BusinessProductsListingUI = (props) => {
                 handleChangeCategory={handleChangeCategory}
                 business={businessState?.business}
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
+                onClose={onDeleteCategoey}
               />
               <ActionIconList>
                 {viewMethod === 'spreedsheet' && (
@@ -284,6 +294,8 @@ const BusinessProductsListingUI = (props) => {
           formTaxState={formTaxState}
           taxes={taxes}
           setTaxes={setTaxes}
+          fees={fees}
+          setFees={setFees}
         />
       )}
       <Modal

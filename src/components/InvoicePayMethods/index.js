@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useToast, ToastType } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Checkbox } from '../../styles/Checkbox'
 import { Button } from '../../styles/Buttons'
-import { toast } from 'react-toastify'
 import {
   InvoicePayMethodsContainer,
   CheckboxWrapper,
@@ -15,22 +14,14 @@ export const InvoicePayMethods = (props) => {
     payMethodsList,
     handleChangePayMethods
   } = props
+
+  const [, { showToast }] = useToast()
   const [, t] = useLanguage()
   const [checkBoxList, setCheckBoxList] = useState([])
 
   const saveFormData = () => {
     handleChangePayMethods(checkBoxList)
-    const toastConfigure = {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    }
-    const content = t('INVOICE_DATA_SAVED', 'Invoice data saved')
-    toast.dark(content, toastConfigure)
+    showToast(ToastType.Success, t('INVOICE_DATA_SAVED', 'Invoice data saved'))
   }
 
   const handleChangeCheckBox = (id, checked) => {

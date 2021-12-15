@@ -96,6 +96,7 @@ const DriversCompaniesListingUI = (props) => {
             {t('DELETE', 'Delete')}
           </Button>
           <SearchBar
+            lazyLoad
             onSearch={val => setSearchValue(val)}
             search={searchValue}
             placeholder={t('SEARCH', 'Search')}
@@ -127,6 +128,10 @@ const DriversCompaniesListingUI = (props) => {
             driversCompaniesState={driversCompaniesState}
             setDriversCompaniesState={setDriversCompaniesState}
             driversCompany={curDriversCompany}
+            onClose={() => {
+              setCurDriversCompany(null)
+              setOpenDetails(false)
+            }}
           />
         </SideBar>
       )}

@@ -489,6 +489,7 @@ const AddressFormUI = (props) => {
 
           <AddressTagSection>
             <TagButton
+              type='button'
               active={addressTag === 'home' ? 'active' : ''}
               onClick={() => handleAddressTag('home')}
             >
@@ -496,6 +497,7 @@ const AddressFormUI = (props) => {
               {t('HOME', 'Home')}
             </TagButton>
             <TagButton
+              type='button'
               active={addressTag === 'office' ? 'active' : ''}
               onClick={() => handleAddressTag('office')}
             >
@@ -503,6 +505,7 @@ const AddressFormUI = (props) => {
               {t('OFFICE', 'Office')}
             </TagButton>
             <TagButton
+              type='button'
               active={addressTag === 'favorite' ? 'active' : ''}
               onClick={() => handleAddressTag('favorite')}
             >
@@ -510,6 +513,7 @@ const AddressFormUI = (props) => {
               {t('FAVORITE', 'Favorite')}
             </TagButton>
             <TagButton
+              type='button'
               active={addressTag === 'other' ? 'active' : ''}
               onClick={() => handleAddressTag('other')}
             >

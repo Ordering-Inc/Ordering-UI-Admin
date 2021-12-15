@@ -95,6 +95,7 @@ const BusinessessListingUI = (props) => {
         <BusinessSearch>
           <SearchBar
             isCustomLayout
+            lazyLoad
             onSearch={onSearch}
             search={searchValue}
             placeholder={t('SEARCH', 'Search')}

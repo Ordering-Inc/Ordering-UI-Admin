@@ -6,7 +6,7 @@ import {
   BusinessBrandBUSIDetail as BusinessBrandBUSIDetailController
 } from 'ordering-components-admin'
 import { Pagination } from '../Pagination'
-import { Checkbox } from '../../styles'
+import { Button, Checkbox } from '../../styles'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../NotFoundSource'
@@ -18,7 +18,8 @@ import {
   WrapperImage,
   Image,
   BusinessName,
-  NoSelectedBrand
+  NoSelectedBrand,
+  SelectButtonGroup
 } from './styles'
 
 const BusinessBrandBUSIDetailUI = (props) => {
@@ -27,7 +28,8 @@ const BusinessBrandBUSIDetailUI = (props) => {
     onSearch,
     businessList,
     brand,
-    handleChangeCheckBox
+    handleChangeCheckBox,
+    handleSelectAllBusinesses
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -73,6 +75,7 @@ const BusinessBrandBUSIDetailUI = (props) => {
         <SearchBar
           search={searchValue}
           isCustomLayout
+          lazyLoad
           onSearch={(value) => onSearch(value)}
           placeholder={t('SEARCH', 'Search')}
         />
@@ -99,6 +102,20 @@ const BusinessBrandBUSIDetailUI = (props) => {
             </BusinessListWrapper>
           ) : (
             <BusinessListWrapper>
+              <SelectButtonGroup>
+                <Button
+                  color='secundaryDark'
+                  onClick={() => handleSelectAllBusinesses(true, brand?.id)}
+                >
+                  {t('SELECT_ALL', 'Select all')}
+                </Button>
+                <Button
+                  color='secundaryDark'
+                  onClick={() => handleSelectAllBusinesses(false, brand?.id)}
+                >
+                  {t('SELECT_NONE', 'Select none')}
+                </Button>
+              </SelectButtonGroup>
               {
                 currentBusinesses?.length > 0 ? currentBusinesses.map((business, i) => (
                   <BusinessItemContainer key={i}>

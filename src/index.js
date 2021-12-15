@@ -54,7 +54,7 @@ import { InterActOrderMarker } from './components/InterActOrderMarker'
 import { LanguageManager } from './components/LanguageManager'
 import { Layout } from './components/Layout'
 import { LoginForm } from './components/LoginForm'
-import { LogisticInformation } from './components/LogisticInformation'
+import { OrderLogisticInformation } from './components/OrderLogisticInformation'
 import { Logistics } from './components/Logistics'
 import { LogoutButton } from './components/LogoutButton'
 import { Messages } from './components/Messages'
@@ -198,7 +198,7 @@ export {
   LanguageManager,
   Layout,
   LoginForm,
-  LogisticInformation,
+  OrderLogisticInformation,
   Logistics,
   LogoutButton,
   Messages,
