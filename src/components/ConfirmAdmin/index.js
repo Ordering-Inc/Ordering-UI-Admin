@@ -92,5 +92,11 @@ export const ConfirmAdmin = (props) => {
     ...props,
     UIComponent: ConfirmAdminUI
   }
-  return <CheckPasswordController {...checkPasswordControlProps} />
+  return (
+    <>
+      {props.open && (
+        <CheckPasswordController {...checkPasswordControlProps} />
+      )}
+    </>
+  )
 }
