@@ -62,11 +62,6 @@ export const Tab = styled.div`
   `}
 `
 export const ActionSelectorWrapper = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
-  ` : css`
-    margin-left: 20px;
-  `}
   button {
     background: transparent !important;
     border: none;

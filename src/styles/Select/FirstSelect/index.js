@@ -97,7 +97,7 @@ export const Select = (props) => {
       {!selectedOption && (
         <Selected onClick={handleSelectClick}>
           {placeholder || ''}
-          <Chevron>
+          <Chevron className='select-arrow'>
             <FiChevronDown />
           </Chevron>
         </Selected>
