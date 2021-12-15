@@ -65,8 +65,6 @@ export const UsersListingHeader = (props) => {
           disabledActiveStateCondition={disabledActiveStateCondition}
           userTypesSelected={userTypesSelected}
           selectedUserActiveState={selectedUserActiveState}
-          isDriversPage={isDriversPage}
-          isDriversManagersPage={isDriversManagersPage}
         />
         <UsersDeleteButton
           selectedUsers={selectedUsers}
