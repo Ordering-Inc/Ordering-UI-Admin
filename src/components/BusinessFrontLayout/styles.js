@@ -322,10 +322,6 @@ export const HorzontalProductInfoList = styled.div`
     }
   }
 `
-export const VerticalProductInfoList = styled(HorzontalProductInfoList)`
-  width: 100%;
-`
-
 export const GroceriesBoxContent = styled(FoodBoxContent)``
 
 export const GroceriesCartWrapper = styled.div`
@@ -369,36 +365,6 @@ export const GroceriesProductListContent = styled(FoodProductListContent)`
   }
 `
 
-export const MarketBoxContent = styled(FoodBoxContent)`
-  position: relative;
-`
-
-export const MarketLogoWrapper = styled.div`
-  max-width: 18px;
-  max-height: 18px;
-  height: 18px;
-  width: 18px;
-  border: 1px solid #DEE2E6;
-  box-sizing: border-box;
-  border-radius: 1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 4px;
-  margin-bottom: 8px;
-
-  ${props => props.theme?.rtl && css`
-    margin-left: 0px;
-    margin-right: 4px;
-  `}
-
-  > svg {
-    width: 9px;
-    height: 8px;
-    color: #ADB5BD;
-  }
-`
-
 export const VerticalProductBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -411,12 +377,6 @@ export const VerticalProductImageWrapper = styled(HorzontalProductImageWrapper)`
   width: 23px;
   height: 23px;
   min-width: 23px;
-`
-
-export const MarketProductListContent = styled(FoodProductListContent)`
-  > div {
-    width: calc(20% - 8px);
-  }
 `
 
 export const CategoryAndActionWrapper = styled.div`
@@ -439,30 +399,6 @@ export const ButtonWrapper = styled.div`
     width: 5px;
     color: ${props => props.theme.colors.lightGray};
   }
-`
-
-export const MarketCartWrapper = styled.div`
-  position: absolute;
-  top: 2px;
-  right: 15px;
-
-  ${props => props.theme.rtl && css`
-    left: 15px;
-    right: initial;
-  `}
-`
-
-export const MarketProductList = styled(FoodProductList)`
-  padding: 0 4px;
-`
-
-export const MarketCategoryListWrapper = styled(GroceriesCategoryListWrapper)`
-  border-right: 0.5px solid ${props => props.theme.colors.secundary};
-
-  ${props => props.theme.rtl && css`
-    border-left: 0.5px solid ${props => props.theme.colors.secundary};
-    border-right: none;
-  `}
 `
 
 export const ActionButtonWrapper = styled.div`
