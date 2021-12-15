@@ -1,82 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const PropertiesContainer = styled.div`
-  height: 100%;
-  overflow-x: hidden;
-  h1 {
-    color: ${props => props.theme.colors.headingColor};
-    font-size: 20px;
-    font-weight: 700;
-    padding-bottom: 30px;
-    margin: 0px;
-    border-bottom: 1px solid #E9ECEF;
-  }
-
-  > input {
-    width: 100%;
-    margin: 5px 0;
-  }
-  @media (min-width: 1000px) {
-    padding: 20px;
-  }
-`
-
-export const PropertyOption = styled.div`
-  border-bottom: 1px solid #E9ECEF;
-  padding: 12px 0;
-  display: flex;
-  align-items: center;
-  label {
-    font-size: 14px;
-    margin-bottom: 0;
-    cursor: pointer;
-    color: ${props => props.theme.colors.headingColor};
-    ${props => props.theme?.rtl ? css`
-      padding-right: 10px;
-    ` : css`
-      padding-left: 10px;
-    `}
-  }
-`
-
-export const TypeSelectWrapper = styled.div`
-  > div {
-    max-width: 100%;
-    min-width: 100%;
-    padding: 3.5px 15px;
-    margin-bottom: 10px;
-  }
-`
-
-export const Option = styled.div`
-  font-size: 14px;
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 95%; */
-  ${({ padding }) => padding && css`
-    padding: 5px 0;
-  `}
-  ${({ isWeight }) => isWeight && css`
-    font-weight: 600;
-  `}
-`
-
-export const OptionCenter = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  font-size: 16px;
-  font-weight: 600;
-  ${({ padding }) => padding && css`
-    padding: 5px 0;
-  `}
-  ${({ isWeight }) => isWeight && css`
-    font-weight: 600;
-  `}
-`
-
 export const LabelCustom = styled.label`
   margin-top: 20px;
 `
@@ -122,7 +45,7 @@ export const WrapperRow = styled.div`
   width: 100% !important;
   flex-direction: column;
   justify-content: space-between;
-
+  flex-wrap: wrap;
   & > div {
     width: 100%;
     height: 100px;
@@ -164,4 +87,23 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3.5px 15px;
+`
+
+export const Option = styled.div`
+  font-size: 14px;
+  ${({ padding }) => padding && css`
+    padding: 5px 0;
+  `}
+  ${({ isWeight }) => isWeight && css`
+    font-weight: 600;
+  `}
+`
+
+export const TypeSelectWrapper = styled.div`
+  > div {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 3.5px 15px;
+    margin-bottom: 10px;
+  }
 `

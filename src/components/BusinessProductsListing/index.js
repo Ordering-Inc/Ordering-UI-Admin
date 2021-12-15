@@ -54,7 +54,9 @@ const BusinessProductsListingUI = (props) => {
     setFormTaxState,
     formTaxState,
     taxes,
-    setTaxes
+    setTaxes,
+    fees,
+    setFees
   } = props
 
   const [, t] = useLanguage()
@@ -292,6 +294,8 @@ const BusinessProductsListingUI = (props) => {
           formTaxState={formTaxState}
           taxes={taxes}
           setTaxes={setTaxes}
+          fees={fees}
+          setFees={setFees}
         />
       )}
       <Modal
