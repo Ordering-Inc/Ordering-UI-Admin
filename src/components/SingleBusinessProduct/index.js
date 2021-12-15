@@ -191,7 +191,7 @@ const SingleBusinessProductUI = (props) => {
     })
   }
 
-  const taxProduct = productFormState?.changes?.tax || business?.tax
+  const taxProduct = productFormState?.changes?.tax ?? business?.tax
   const taxProductType = taxProduct?.type || business?.tax_type
   const taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price')
 
@@ -343,7 +343,7 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <div>{taxProduct?.rate || taxProduct}% ({taxProductTypeString})</div>
+                        <div>{taxProduct?.rate ?? taxProduct ?? 0}% ({taxProductTypeString})</div>
                       </InfoBlock>
                     }
                   </td>
@@ -352,7 +352,7 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <div>{parsePrice(productFormState?.changes?.fee?.fixed || 0)} + {productFormState?.changes?.fee?.percentage || business?.service_fee}%</div>
+                        <div>{parsePrice(productFormState?.changes?.fee?.fixed ?? 0)} + {productFormState?.changes?.fee?.percentage ?? business?.service_fee}%</div>
                       </InfoBlock>
                     }
                   </td>
