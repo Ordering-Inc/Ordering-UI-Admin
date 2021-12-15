@@ -39,6 +39,9 @@ export const ImporterFormUI = (props) => {
     addNewField,
     removeField,
     fieldList,
+    addNewMetaField,
+    removeMetaField,
+    metafieldList,
     onClose,
     selectedImporter,
     clearImorterForm,
@@ -48,71 +51,31 @@ export const ImporterFormUI = (props) => {
 
   const [, t] = useLanguage()
   const formMethods = useForm()
-  const { width } = useWindowSize()
-  const [importType, setImportType] = useState(1)
   const fieldMethods = useForm()
-  const [mappingInputData, setMappingInpuData] = useState({})
+  const metafieldMethods = useForm()
+  const [importType, setImportType] = useState(1)
+  // const [mappingInputData, setMappingInpuData] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [filedKey, setFiledKey] = useState()
   const [filedValue, setFiledValue] = useState()
+  const [metafiledKey, setMetaFiledKey] = useState()
+  const [metafiledValue, setMetaFiledValue] = useState()
 
   const importypeOptions = [
     {
       value: 1,
       content: t('STORE', 'Store'),
-      sync_name: 'sync_businesses',
-      mapping_input_data: {
-        id: {
-          label: t('MAPPING_BUSINESS_ID', 'Business ID'),
-          name: 'business_id'
-        },
-        external_id: {
-          label: t('MAPPING_EXTERNAL_BUSINESS_ID', 'External business ID'),
-          name: 'external_business_id'
-        },
-        external_key: {
-          label: t('MAPPING_EXTERNAL_BUSINESS_KEY', 'External business key'),
-          name: 'external_business_key'
-        }
-      }
+      sync_name: 'sync_businesses'
     },
     {
       value: 2,
       content: t('CATEGORY', 'Category'),
-      sync_name: 'sync_categories',
-      mapping_input_data: {
-        id: {
-          label: t('MAPPING_CATEGORY_ID', 'Category ID'),
-          name: 'category_id'
-        },
-        external_id: {
-          label: t('MAPPING_EXTERNAL_CATEGORY_ID', 'External category ID'),
-          name: 'external_category_id'
-        },
-        external_key: {
-          label: t('MAPPING_EXTERNAL_CATEGORY_KEY', 'External category key'),
-          name: 'external_category_key'
-        }
-      }
+      sync_name: 'sync_categories'
     },
     {
       value: 3,
       content: t('PRODUCT', 'Product'),
-      sync_name: 'sync_products',
-      mapping_input_data: {
-        id: {
-          label: t('MAPPING_PRODUCT_ID', 'Product ID'),
-          name: 'product_id'
-        },
-        external_id: {
-          label: t('MAPPING_EXTERNAL_PRODUCT_ID', 'External product ID'),
-          name: 'external_product_id'
-        },
-        external_key: {
-          label: t('MAPPING_EXTERNAL_PRODUCT_KEY', 'External product key'),
-          name: 'external_product_key'
-        }
-      }
+      sync_name: 'sync_products'
     }
   ]
 
@@ -125,6 +88,11 @@ export const ImporterFormUI = (props) => {
   const onNewFiledSubmit = () => {
     addNewField(filedKey, filedValue)
     document.getElementById('field-form').reset()
+  }
+
+  const onNewMetaFiledSubmit = () => {
+    addNewMetaField(metafiledKey, metafiledValue)
+    document.getElementById('meta-field-form').reset()
   }
 
   const handleSelectOption = (val) => {
@@ -142,7 +110,7 @@ export const ImporterFormUI = (props) => {
     if (importType) {
       const _target = (importypeOptions?.filter(options => options.value === importType))[0]
       handleChangeSelect('type', _target.sync_name)
-      setMappingInpuData(_target.mapping_input_data)
+      // setMappingInpuData(_target.mapping_input_data)
     }
   }, [importType])
 
@@ -196,9 +164,6 @@ export const ImporterFormUI = (props) => {
             placeholder={t('NAME', 'name')}
             defaultValue={editState?.name}
             onChange={handleChangeInput}
-            ref={formMethods.register({
-              required: t('VALIDATION_ERROR_IMPORTER_NAME_REQUIRED', 'Importer name is required')
-            })}
             disabled={formState.loading}
             autoComplete='off'
           />
@@ -211,9 +176,6 @@ export const ImporterFormUI = (props) => {
             placeholder={t('SLUG', 'slug')}
             defaultValue={editState?.slug}
             onChange={handleChangeInput}
-            ref={formMethods.register({
-              required: t('VALIDATION_ERROR_IMPORTER_SLUG_REQUIRED', 'Importer slug is required')
-            })}
             disabled={formState.loading}
             autoComplete='off'
           />
@@ -233,40 +195,17 @@ export const ImporterFormUI = (props) => {
           <label style={{ fontSize: '16px', lineHeight: '24px', fontWeight: '600' }}>{t('MAPPING', 'Mapping')}</label>
           <span style={{ fontSize: '14px', lineHeight: '24px' }}>CSV file example <a href='www.example.com' target='_blank' rel='noopener noreferrer'>www.example.com</a></span>
         </InputWrapper>
-
-        {Object.keys(mappingInputData).length !== 0 && (
-          <>
+        <>
+          {(importType === 1 || importType === 2 || importType === 3) && (
             <Row>
               <Col>
                 <InputWrapper>
-                  <label>{mappingInputData?.id?.label}</label>
+                  <label>{t('MAPPING_BUSINESS_ID', 'Business ID')}</label>
                   <Input
-                    name={mappingInputData?.id?.name}
+                    name='business_id'
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.id || ''}
-                    onChange={handleChangeMappingInput}
-                    ref={formMethods.register({
-                      required: t('VALIDATION_ERROR_PRODUCT_ID_REQUIRED', 'Product Id is required')
-                    })}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-              {width > 767 && (
-                <Col />
-              )}
-            </Row>
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <label>{mappingInputData?.external_id?.label}</label>
-                  <Input
-                    name={mappingInputData?.external_id?.name}
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.externalId || ''}
+                    defaultValue={editState?.mapping?.business_id || ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -275,12 +214,12 @@ export const ImporterFormUI = (props) => {
               </Col>
               <Col>
                 <InputWrapper>
-                  <label>{mappingInputData?.external_key?.label}</label>
+                  <label>{t('MAPPING_EXTERNAL_BUSINESS_ID', 'External business ID')}</label>
                   <Input
-                    name={mappingInputData?.external_key?.name}
-                    type='text'
+                    name='external_business_id'
+                    type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.externalKey || ''}
+                    defaultValue={editState?.mapping?.external_business_id || ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -288,12 +227,73 @@ export const ImporterFormUI = (props) => {
                 </InputWrapper>
               </Col>
             </Row>
-          </>
-        )}
+          )}
+          {(importType === 2 || importType === 3) && (
+            <Row>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_CATEGORY_ID', 'Category ID')}</label>
+                  <Input
+                    name='category_id' type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.category_id || ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTERNAL_CATEGORY_ID', 'External category ID')}</label>
+                  <Input
+                    name='external_category_id'
+                    type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.external_category_id || ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+            </Row>
+          )}
+          {importType === 3 && (
+            <Row>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_PRODUCT_ID', 'Product ID')}</label>
+                  <Input
+                    name='product_id' type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.product_id || ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTERNAL_PRODUCT_ID', 'External product ID')}</label>
+                  <Input
+                    name='external_product_id'
+                    type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.external_product_id || ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+            </Row>
+          )}
+        </>
       </FormInput>
-
       <FiledListWrapper>
-        <label>Fields</label>
+        <label>{t('FIELDS', 'Fields')}</label>
         {Object.keys(fieldList).length > 0 && (
           <>
             {Object.entries(fieldList).map((value, i) => (
@@ -326,9 +326,6 @@ export const ImporterFormUI = (props) => {
                 type='text'
                 placeholder={t('NAME', 'name')}
                 onChange={(e) => setFiledKey(e.target.value)}
-                ref={fieldMethods.register({
-                  required: t('VALIDATION_ERROR_FIELD_NAME_REQUIRED', 'Name is required')
-                })}
                 disabled={formState.loading}
                 autoComplete='off'
               />
@@ -340,9 +337,67 @@ export const ImporterFormUI = (props) => {
                   type='number'
                   placeholder='0'
                   onChange={(e) => setFiledValue(e.target.value)}
-                  ref={fieldMethods.register({
-                    required: t('VALIDATION_ERROR_FIELD_VALUE_REQUIRED', 'Product Id is required')
-                  })}
+                  disabled={formState.loading}
+                  autoComplete='off'
+                />
+                <ButtonWrapper>
+                  <button
+                    type='submit'
+                  >
+                    <BsPlusSquare />
+                  </button>
+                </ButtonWrapper>
+              </FieldRow>
+            </Col>
+          </Row>
+        </FieldAddForm>
+      </FiledListWrapper>
+
+      <FiledListWrapper>
+        <label>{t('META_FIELDS', 'MetaFields')}</label>
+        {Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && (
+          <>
+            {Object.entries(metafieldList).map((value, i) => (
+              <Row key={i} style={{ marginBottom: '15px' }}>
+                <Col>
+                  <FieldName>{value[0]}</FieldName>
+                </Col>
+                <Col>
+                  <FieldRow>
+                    <FieldValue>{value[1]}</FieldValue>
+                    <ButtonWrapper>
+                      <button onClick={() => removeMetaField(value[0])}>
+                        <BsTrash />
+                      </button>
+                    </ButtonWrapper>
+                  </FieldRow>
+                </Col>
+              </Row>
+            ))}
+          </>
+        )}
+        <FieldAddForm
+          onSubmit={metafieldMethods.handleSubmit(onNewMetaFiledSubmit)}
+          id='meta-field-form'
+        >
+          <Row style={{ alignItems: 'flex-end' }}>
+            <Col>
+              <Input
+                name='key'
+                type='text'
+                placeholder={t('NAME', 'name')}
+                onChange={(e) => setMetaFiledKey(e.target.value)}
+                disabled={formState.loading}
+                autoComplete='off'
+              />
+            </Col>
+            <Col style={{ width: '49%' }}>
+              <FieldRow>
+                <Input
+                  name='value'
+                  type='number'
+                  placeholder='0'
+                  onChange={(e) => setMetaFiledValue(e.target.value)}
                   disabled={formState.loading}
                   autoComplete='off'
                 />
