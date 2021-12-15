@@ -22,7 +22,9 @@ export const ProductDetails = (props) => {
     setFormTaxState,
     formTaxState,
     taxes,
-    setTaxes
+    setTaxes,
+    fees,
+    setFees
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -113,6 +115,8 @@ export const ProductDetails = (props) => {
               formTaxState={formTaxState}
               taxes={taxes}
               setTaxes={setTaxes}
+              fees={fees}
+              setFees={setFees}
             />
           )}
           {showOption === 'ingredients' && (

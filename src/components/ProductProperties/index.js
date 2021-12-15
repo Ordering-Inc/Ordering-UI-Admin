@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useSession, ProductProperties as ProductPropertiesController } from 'ordering-components-admin'
+import {
+  ProductProperties as ProductPropertiesController,
+  useLanguage,
+  useSession,
+  useUtils
+} from 'ordering-components-admin'
+import { EditTaxManager } from '../EditTaxManager'
 import { Input } from '../../styles/Inputs'
 import { Checkbox } from '../../styles/Checkbox'
 import { useForm } from 'react-hook-form'
@@ -9,15 +15,10 @@ import {
   TypeSelectWrapper,
   Option,
   LabelCustom,
-  ButtonGroup,
-  EditTaxContainer,
-  WrapperRow,
-  InputContainer,
   OptionCenter
 } from './styles'
 import { Select } from '../../styles/Select/FirstSelect'
 import { Modal } from '../Modal'
-import { Button } from '../../styles/Buttons'
 import { Alert } from '../Confirm'
 const ProductPropertiesUI = (props) => {
   const {
@@ -32,16 +33,21 @@ const ProductPropertiesUI = (props) => {
     formTaxChanges,
     handleDeleteTax,
     setAlertState,
-    alertState
+    alertState,
+    fees
   } = props
 
   const formMethods = useForm()
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [{ parsePrice }] = useUtils()
   const [isShowStock, setIsShowStock] = useState(productState?.inventoried)
   const [taxesOption, setTaxesOption] = useState([])
+  const [feesOptions, setFeesOptions] = useState([])
+  const [fesSelected, setFeeSelected] = useState(null)
   const [taxSelected, setTaxSelected] = useState(null)
-  const [taxToDelete, setTaxToDelete] = useState(null)
+  const [taxToDelete, setTaxToDelete] = useState({ action: null, id: null })
+
   const estimatedPersons = [
     { value: null, content: <Option>{t('NO_APPLY', 'No apply')}</Option> },
     ...[...Array(10)].map((item, i) => ({
@@ -49,6 +55,10 @@ const ProductPropertiesUI = (props) => {
       content: <Option>{i + 1}</Option>
     }))
   ]
+
+  const getTaxOrFeeString = (string) => {
+    return string === 'taxes' ? 'tax' : 'fee'
+  }
 
   const handleClickStock = (e) => {
     handleClickProperty('inventoried', e.target.checked)
@@ -64,14 +74,9 @@ const ProductPropertiesUI = (props) => {
     else handleClickProperty('quantity', value)
   }
 
-  const handleChangeInput = (event) => {
-    if (event.target.value === '') handleClickProperty(event.target.name, productState[event.target.name])
-    else handleClickProperty(event.target.name, event.target.value)
-  }
-
-  const handleAddTax = () => {
-    setTaxToEdit(true)
-    handleChangeTax('type', 1)
+  const handleAddTax = (action) => {
+    setTaxToEdit({ action, payload: true })
+    if (action === 'taxes') handleChangeTax('type', 1)
   }
 
   const closeAlert = () => {
@@ -79,7 +84,7 @@ const ProductPropertiesUI = (props) => {
       open: false,
       content: []
     })
-    setTaxToDelete(null)
+    setTaxToDelete({ action: null, payload: null })
   }
 
   const getTaxes = async () => {
@@ -92,7 +97,7 @@ const ProductPropertiesUI = (props) => {
     const addTaxOption = {
       name: t('ADD_NEW_TAX', 'Add new tax'),
       value: null,
-      content: <OptionCenter onClick={() => handleAddTax()}>{t('ADD_NEW_TAX', 'Add new tax')}</OptionCenter>
+      content: <OptionCenter onClick={() => handleAddTax('taxes')}>{t('ADD_NEW_TAX', 'Add new tax')}</OptionCenter>
     }
     const taxesOptions = [
       inheritOption,
@@ -117,20 +122,63 @@ const ProductPropertiesUI = (props) => {
     setTaxSelected(taxesOptions.find(tax => tax.value === productState?.tax_id) || inheritOption)
   }
 
-  const deleteTax = (id) => {
-    handleDeleteTax(id)
+  const getFees = () => {
+    const inheritOption = {
+      name: t('INHERIT_FROM_BUSINESS', 'Inherit from business'),
+      value: 'inherit',
+      content: <Option>{t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (0$ + {business.service_fee}%)</Option>,
+      showOnSelected: <Option>{t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (0$ + {business.service_fee}%)</Option>
+    }
+    const addFeeOption = {
+      name: t('ADD_NEW_FEE', 'Add new fee'),
+      value: null,
+      content: <OptionCenter onClick={() => handleAddTax('fees')}>{t('ADD_NEW_FEE', 'Add new fee')}</OptionCenter>
+    }
+
+    const feesOptions = [
+      inheritOption,
+      ...Object.values(fees).map(fee => ({
+        value: fee.id,
+        name: fee.name,
+        content: (
+          <Option>{fee.name} ({parsePrice(fee.fixed)} + {fee.percentage}%)</Option>
+        ),
+        showOnSelected: (
+          <Option>{fee.name} ({parsePrice(fee.fixed)} + {fee.percentage}%)</Option>
+        ),
+        editFunctionality: user?.level === 0,
+        deleteFunctionality: user?.level === 0,
+        fixed: fee.fixed,
+        percentage: fee.percentage,
+        description: fee.description
+      })),
+      addFeeOption
+    ]
+    setFeesOptions(feesOptions)
+    setFeeSelected(feesOptions.find(fee => fee.value === productState?.fee_id) || inheritOption)
+  }
+
+  const deleteTax = (data) => {
+    handleDeleteTax(data.id, data.action)
     closeAlert()
   }
 
   useEffect(() => {
-    if (taxes) { getTaxes() }
+    if (taxes) getTaxes()
   }, [JSON.stringify(taxes)])
 
   useEffect(() => {
-    if (taxToDelete) {
+    if (fees) getFees()
+  }, [JSON.stringify(fees)])
+
+  useEffect(() => {
+    if (taxToDelete.action) {
       setAlertState({
         open: true,
-        content: t('ARE_YOUR_SURE_DELETE_TAX', 'Are you sure do you want delete this tax?')
+        content: t(
+          `ARE_YOUR_SURE_DELETE_${getTaxOrFeeString(taxToDelete.action).toUpperCase()}`,
+          `Are you sure do you want delete this ${getTaxOrFeeString(taxToDelete.action)}?`
+        )
       })
     }
   }, [taxToDelete])
@@ -208,130 +256,49 @@ const ProductPropertiesUI = (props) => {
             defaultValue={taxSelected?.value ?? 'inherit'}
             options={taxesOption}
             onChange={(val) => handleClickProperty('tax_id', val === 'inherit' ? null : val)}
-            onEdit={(val, i) => setTaxToEdit(val)}
-            onDelete={(val) => setTaxToDelete(val)}
+            onEdit={(val) => setTaxToEdit({ action: 'taxes', payload: val })}
+            onDelete={(val) => setTaxToDelete({ action: 'taxes', id: val })}
           />
         )}
       </TypeSelectWrapper>
-      <LabelCustom htmlFor='fee_percentage'>{t('SERVICE_FEE_PERCENTAGE', 'Service fee percentage')}</LabelCustom>
-      <Input
-        name='fee_percentage'
-        id='fee_percentage'
-        placeholder='0.00%'
-        defaultValue={parseInt(productState?.fee_percentage) || ''}
-        onChange={(e) => handleChangeInput(e)}
-      />
-      <LabelCustom htmlFor='fee_fixed'>{t('SERVICE_FEE_FIXED', 'Service fee fixed')}</LabelCustom>
-      <Input
-        name='fee_fixed'
-        id='fee_fixed'
-        placeholder='$0.00'
-        defaultValue={parseInt(productState?.fee_fixed)}
-        onChange={(e) => handleChangeInput(e) || 0}
-      />
+      <LabelCustom htmlFor='fees'>{t('FEES', 'Fees')}</LabelCustom>
+      <TypeSelectWrapper>
+        {fesSelected && (
+          <Select
+            placeholder={fesSelected.showOnSelected}
+            defaultValue={fesSelected?.value ?? 'inherit'}
+            options={feesOptions}
+            onChange={(val) => handleClickProperty('fee_id', val === 'inherit' ? null : val)}
+            onEdit={(val) => setTaxToEdit({ action: 'fees', payload: val })}
+            onDelete={(val) => setTaxToDelete({ action: 'fees', id: val })}
+          />
+        )}
+      </TypeSelectWrapper>
       <Modal
-        open={!!taxToEdit}
+        open={!!taxToEdit?.action}
         width='80%'
         padding='30px'
-        title={typeof taxToEdit === 'boolean' ? t('ADD_TAX', 'Add tax') : t('EDIT_TAX', 'Edit tax')}
-        onClose={() => setTaxToEdit(null)}
+        title={typeof taxToEdit?.payload === 'boolean'
+          ? t(`ADD_${getTaxOrFeeString(taxToEdit?.action).toUpperCase()}`, `Add ${getTaxOrFeeString(taxToEdit?.action)}`)
+          : t(`EDIT_${getTaxOrFeeString(taxToEdit?.action).toUpperCase()}`, `Edit ${getTaxOrFeeString(taxToEdit?.action)}`)}
+        onClose={() => setTaxToEdit({ action: null, payload: null })}
       >
-        <EditTaxContainer onSubmit={formMethods.handleSubmit(() => handleSaveTax(taxToEdit?.value))}>
-          <WrapperRow>
-            <InputContainer>
-              <LabelCustom htmlFor='name'>{t('NAME', 'Name')}</LabelCustom>
-              <Input
-                name='name'
-                id='name'
-                placeholder={t('NAME', 'Name')}
-                defaultValue={formTaxChanges?.name ?? taxToEdit?.name ?? ''}
-                onChange={(e) => handleChangeTax('name', e.target.value)}
-                ref={formMethods.register({
-                  required: t('TAX_NAME_REQUIRED', 'Tax name is required')
-                })}
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelCustom htmlFor='description'>{t('DESCRIPTION', 'Description')}</LabelCustom>
-              <Input
-                name='description'
-                id='description'
-                placeholder={t('DESCRIPTION', 'Description')}
-                defaultValue={formTaxChanges?.description ?? taxToEdit?.description ?? ''}
-                onChange={(e) => handleChangeTax('description', e.target.value)}
-                ref={formMethods.register({
-                  required: t('TAX_DESCRIPTION_REQUIRED', 'Tax description is required')
-                })}
-              />
-            </InputContainer>
-          </WrapperRow>
-          <WrapperRow>
-            <InputContainer>
-              <LabelCustom htmlFor='rate'>{t('RATE', 'Rate')}</LabelCustom>
-              <Input
-                name='rate'
-                id='rate'
-                placeholder='0.00%'
-                defaultValue={formTaxChanges?.rate ?? taxToEdit?.rate ?? ''}
-                onChange={(e) => handleChangeTax('rate', e.target.value)}
-                ref={formMethods.register({
-                  required: t('TAX_RATE_REQUIRED', 'Tax rate is required'),
-                  pattern: {
-                    value: /^-?\d+\.?\d*$/,
-                    message: t('ERROR_TAX_ID_INTEGER', 'The tax id must be an integer.')
-                  }
-                })}
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelCustom htmlFor='type'>{t('TYPE', 'Type')}</LabelCustom>
-              <TypeSelectWrapper>
-                <Select
-                  notAsync
-                  placeholder={formTaxChanges?.type ?? taxToEdit?.type}
-                  defaultValue={taxToEdit?.type ?? 1}
-                  options={[
-                    {
-                      value: 1,
-                      content: t('INCLUDED_ON_PRICE', 'Included on price'),
-                      showOnSelected: <Option>{t('INCLUDED_ON_PRICE', 'Included on price')}</Option>
-                    },
-                    {
-                      value: 2,
-                      content: t('NOT_INCLUDED_ON_PRICE', 'Not included on price'),
-                      showOnSelected: <Option>{t('NOT_INCLUDED_ON_PRICE', 'Not included on price')}</Option>
-                    }
-                  ]}
-                  onChange={(val) => handleChangeTax('type', val)}
-                />
-              </TypeSelectWrapper>
-            </InputContainer>
-          </WrapperRow>
-          <ButtonGroup>
-            <Button
-              type='submit'
-              color='primary'
-              borderRadius='8px'
-            >
-              {t('ACCEPT', 'Accept')}
-            </Button>
-            <Button
-              color='secundaryDark'
-              borderRadius='8px'
-              onClick={() => setTaxToEdit(null)}
-            >
-              {t('CLOSE', 'Close')}
-            </Button>
-          </ButtonGroup>
-        </EditTaxContainer>
+        <EditTaxManager
+          type={taxToEdit?.action}
+          data={taxToEdit?.payload}
+          onChange={handleChangeTax}
+          formChanges={formTaxChanges}
+          onClose={() => setTaxToEdit({ action: null, payload: null })}
+          handleSave={handleSaveTax}
+        />
       </Modal>
       <Alert
-        title={taxToDelete ? t('DELETE_TAX', 'Delete Tax') : t('ERROR')}
+        title={taxToDelete.action ? t(`DELETE_${getTaxOrFeeString(taxToDelete?.action).toUpperCase()}`, `Delete ${getTaxOrFeeString(taxToDelete?.action)}`) : t('ERROR')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
         onClose={() => closeAlert()}
-        onAccept={() => taxToDelete ? deleteTax(taxToDelete) : closeAlert()}
+        onAccept={() => taxToDelete.action ? deleteTax(taxToDelete) : closeAlert()}
         closeOnBackdrop={false}
       />
     </PropertiesContainer>
