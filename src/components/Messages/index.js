@@ -43,7 +43,8 @@ import {
   ChatContactInfoContainer,
   InfoBlock,
   SendToContainer,
-  MessageSender
+  MessageSender,
+  QuickMessageWrapper
 } from './styles'
 import { Image as ImageWithFallback } from '../../components/Image'
 import { Input } from '../../styles/Inputs'
@@ -77,7 +78,7 @@ export const MessagesUI = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const { handleSubmit, register, errors } = useForm()
+  const { handleSubmit, register, setValue, errors } = useForm()
   const [{ user }] = useSession()
   const [{ parseDate, getTimeAgo }] = useUtils()
   const buttonRef = useRef(null)
@@ -87,6 +88,18 @@ export const MessagesUI = (props) => {
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [load, setLoad] = useState(0)
+
+  const quickMessageList = [
+    { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'Lorem ipsum 1') },
+    { key: 'message_2', text: t('ADMIN_MESSAGE_2', 'Lorem ipsum 2') },
+    { key: 'message_3', text: t('ADMIN_MESSAGE_3', 'Lorem ipsum 3') },
+    { key: 'message_4', text: t('ADMIN_MESSAGE_4', 'Lorem ipsum 4') }
+  ]
+
+  const handleClickQuickMessage = (index) => {
+    setValue('message', `${message} ${index}`)
+    setMessage(`${message} ${index}`)
+  }
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -703,6 +716,17 @@ export const MessagesUI = (props) => {
                 </ChatContactInfoContainer>
               )}
             </ImageContainer>
+            <QuickMessageWrapper>
+              {quickMessageList.map((quickMessage, i) => (
+                <Button
+                  key={i}
+                  color='secundaryDark'
+                  onClick={() => handleClickQuickMessage(quickMessage.text)}
+                >
+                  {quickMessage.text}
+                </Button>
+              ))}
+            </QuickMessageWrapper>
             <Send onSubmit={handleSubmit(onSubmit)} noValidate>
               <WrapperSendInput>
                 <Input
