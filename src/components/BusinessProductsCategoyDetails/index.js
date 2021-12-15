@@ -4,6 +4,7 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
+  useConfig,
   BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController
 } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
@@ -45,6 +46,9 @@ const BusinessProductsCategoyDetailsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [configState] = useConfig()
+  const useParentCategory = configState?.configs?.use_parent_category?.value
+
   const { width } = useWindowSize()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -218,27 +222,30 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                     autoComplete='off'
                   />
                 </CategoryNameWrapper>
+                {useParentCategory === '1' && (
+                  <>
+                    {categorySelected && isAddMode && (
+                      <BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex', alignItems: 'center' }}>
+                        <span style={{ fontSize: 15 }}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
+                        <Switch
+                          defaultChecked={false}
+                          onChange={(val) => handleChangeCheckBox({ enabledParent: val })}
+                        />
+                      </BusinessEnableWrapper>
+                    )}
 
-                {categorySelected && isAddMode && (
-                  <BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex', alignItems: 'center' }}>
-                    <span style={{ fontSize: 15 }}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
-                    <Switch
-                      defaultChecked={false}
-                      onChange={(val) => handleChangeCheckBox({ enabledParent: val })}
-                    />
-                  </BusinessEnableWrapper>
-                )}
-
-                {!isAddMode && categorySelected && parentCategories.length > 0 && (
-                  <ParentCategorySelectWrapper>
-                    <label>{t('PARENT_CATEGORY', 'Parent category')}</label>
-                    <DefaultSelect
-                      placeholder={t('SELECT_PARENT_CATEGORY', 'Select a parent category')}
-                      options={parentCategoriesOptions}
-                      defaultValue={formState?.changes?.parent_category_id}
-                      onChange={val => handleChangeItem({ parent_category_id: val })}
-                    />
-                  </ParentCategorySelectWrapper>
+                    {!isAddMode && categorySelected && parentCategories.length > 0 && (
+                      <ParentCategorySelectWrapper>
+                        <label>{t('PARENT_CATEGORY', 'Parent category')}</label>
+                        <DefaultSelect
+                          placeholder={t('SELECT_PARENT_CATEGORY', 'Select a parent category')}
+                          options={parentCategoriesOptions}
+                          defaultValue={formState?.changes?.parent_category_id}
+                          onChange={val => handleChangeItem({ parent_category_id: val })}
+                        />
+                      </ParentCategorySelectWrapper>
+                    )}
+                  </>
                 )}
                 <BtnWrapper>
                   <Button
