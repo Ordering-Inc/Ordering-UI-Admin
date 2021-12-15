@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useConfig } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import {
   BusinessDeliveryPickUpContainer,
   DeliveryTimeWrapper,
@@ -15,7 +15,6 @@ export const BusinessDeliveryPickUp = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [configState] = useConfig()
   const [hours, setHours] = useState([])
   const [minutes, setMinutes] = useState([])
   const [curDeliveryTime, setCurDeliveryTime] = useState({})
@@ -25,13 +24,7 @@ export const BusinessDeliveryPickUp = (props) => {
     const _hours = []
     const _minutes = []
     for (let i = 0; i < 24; i++) {
-      let text = (i < 10 ? '0' : ' ') + i
-      if (parseInt(configState?.configs?.time_format?.value) !== 24) {
-        if (i === 0) text = '12 ' + t('AM')
-        else if (i === 12) text = '12 ' + t('PM')
-        else if (i < 12) text = (i < 10 ? '0' : '') + i + ' ' + t('AM')
-        else if (i < 24) text = ((i - 12) < 10 ? '0' : '') + (i - 12) + ' ' + t('PM')
-      }
+      const text = (i < 10 ? '0' : ' ') + i
       _hours.push({
         text: text,
         hour: i

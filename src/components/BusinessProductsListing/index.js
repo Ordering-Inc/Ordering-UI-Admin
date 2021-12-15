@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import RiImageAddFill from '@meronex/icons/ri/RiImageAddFill'
 import {
   useLanguage,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
-import { BusinessCategoryEdit } from '../BusinessCategoryEdit'
+import { BusinessProductsCategoyDetails } from '../BusinessProductsCategoyDetails'
 import { SearchBar } from '../SearchBar'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import BsTable from '@meronex/icons/bs/BsTable'
@@ -17,6 +19,8 @@ import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { BatchImageForm } from '../BatchImageForm'
+import { Modal } from '../Modal'
 import {
   CategoryProductsContainer,
   HeaderContainer,
@@ -56,6 +60,7 @@ const BusinessProductsListingUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [viewMethod, setViewMethod] = useState('list')
   const [categoryToEdit, setCategoryToEdit] = useState({ open: false, category: null })
@@ -65,14 +70,10 @@ const BusinessProductsListingUI = (props) => {
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [businessName, setBusinessName] = useState(null)
   const categoryListRef = useRef()
+  const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
 
   const handleOpenCategoryDetails = (category = null) => {
     if (category && category?.id !== null) {
-      onProductRedirect && onProductRedirect({
-        slug: slug,
-        category: category?.id,
-        product: null
-      })
       setCategorySelected(category)
       setCategoryToEdit({
         open: true,
@@ -135,6 +136,10 @@ const BusinessProductsListingUI = (props) => {
       })
     }
   }, [categoryId])
+
+  const openBatchImageUploader = () => {
+    setBatchImageFormOpen(true)
+  }
 
   return (
     <>
@@ -214,6 +219,25 @@ const BusinessProductsListingUI = (props) => {
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
               />
               <ActionIconList>
+                {viewMethod === 'spreedsheet' && (
+                  <>
+                    {width > 767 ? (
+                      <Button
+                        outline
+                        borderRadius='5px'
+                        className='batch-image-upload'
+                        color='lightPrimary'
+                        onClick={() => openBatchImageUploader()}
+                      >
+                        {t('UPLOAD_IMAGE_BATCH', 'Upload images in batch')}
+                      </Button>
+                    ) : (
+                      <ViewMethodButton className='batch' onClick={() => openBatchImageUploader()}>
+                        <RiImageAddFill />
+                      </ViewMethodButton>
+                    )}
+                  </>
+                )}
                 <ViewMethodButton
                   active={viewMethod === 'list'}
                   onClick={() => setViewMethod('list')}
@@ -241,7 +265,7 @@ const BusinessProductsListingUI = (props) => {
       </CategoryProductsContainer>
       {
         categoryToEdit?.open && (
-          <BusinessCategoryEdit
+          <BusinessProductsCategoyDetails
             {...props}
             open={categoryToEdit?.open}
             onClose={handleCloseEdit}
@@ -266,6 +290,17 @@ const BusinessProductsListingUI = (props) => {
           setFees={setFees}
         />
       )}
+      <Modal
+        width={width > 1440 ? '40%' : '60%'}
+        padding='20px'
+        open={batchImageFormOpen}
+        onClose={() => setBatchImageFormOpen(false)}
+      >
+        <BatchImageForm
+          {...props}
+          onClose={() => setBatchImageFormOpen(false)}
+        />
+      </Modal>
     </>
   )
 }

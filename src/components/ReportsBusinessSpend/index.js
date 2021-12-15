@@ -1,5 +1,9 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  useUtils,
+  AdvancedReports as AdvancedReportsController
+} from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { Download } from 'react-bootstrap-icons'
@@ -33,6 +37,7 @@ const ReportsBusinessSpendUI = (props) => {
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [{ parsePrice }] = useUtils()
 
   const tableRef = useRef(null)
 
@@ -152,7 +157,12 @@ const ReportsBusinessSpendUI = (props) => {
                     <tr>
                       {tbody.map((td, j) => (
                         <td key={j} colSpan={td.colspan}>
-                          {(td.value_unit === 'seconds' && td.value) ? convertHMS(td.value) : td.value}
+                          {(td.value_unit === 'seconds' && td.value)
+                            ? convertHMS(td.value)
+                            : (td.value_unit === 'currency'
+                              ? parsePrice(td.value)
+                              : td.value
+                            )}
                         </td>
                       ))}
                     </tr>

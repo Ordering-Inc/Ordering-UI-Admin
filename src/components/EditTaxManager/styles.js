@@ -45,7 +45,7 @@ export const WrapperRow = styled.div`
   width: 100% !important;
   flex-direction: column;
   justify-content: space-between;
-
+  flex-wrap: wrap;
   & > div {
     width: 100%;
     height: 100px;

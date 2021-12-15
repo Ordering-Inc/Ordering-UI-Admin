@@ -5,8 +5,8 @@ export const PropertiesContainer = styled.div`
   overflow-x: hidden;
   h1 {
     color: ${props => props.theme.colors.headingColor};
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     padding-bottom: 30px;
     margin: 0px;
     border-bottom: 1px solid #E9ECEF;
@@ -27,6 +27,7 @@ export const PropertyOption = styled.div`
   display: flex;
   align-items: center;
   label {
+    font-size: 14px;
     margin-bottom: 0;
     cursor: pointer;
     color: ${props => props.theme.colors.headingColor};

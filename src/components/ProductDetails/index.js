@@ -136,9 +136,10 @@ export const ProductDetails = (props) => {
           )}
           {showOption === 'product_images' && (
             <ProductGallery
-              businessId={business.id}
+              business={business}
               categoryId={product.category_id}
-              productId={product.id}
+              product={product}
+              handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {showOption === 'custom_fields' && (

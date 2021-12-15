@@ -167,7 +167,11 @@ const ReportsDriverDistanceUI = (props) => {
                     <Tbody key={i}>
                       <tr>
                         {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value_refers === 'distance' ? parseNumber(td.value, { decimal: 2 }) : td.value}</td>
+                          <td key={j} colSpan={td.colspan}>
+                            {td.value_refers === 'distance'
+                              ? (td.value_unit === 'meter' ? parseNumber(td.value / 1000, { decimal: 2 }) : parseNumber(td.value, { decimal: 2 }))
+                              : td.value}
+                          </td>
                         ))}
                       </tr>
                     </Tbody>

@@ -130,10 +130,10 @@ const SingleBusinessUI = (props) => {
                   <td>
                     {businessState?.business?.reviews?.total > 0 && (
                       <InfoBlock>
-                        <p className='star'><StarFill /></p>
-                        {businessState?.business?.reviews?.total && (
-                          <p>{businessState?.business?.reviews?.total}</p>
-                        )}
+                        <p className='star'>
+                          <StarFill />
+                          <span>{businessState?.business?.reviews?.total}</span>
+                        </p>
                       </InfoBlock>
                     )}
                   </td>

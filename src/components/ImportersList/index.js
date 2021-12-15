@@ -142,6 +142,5 @@ export const ImportersList = (props) => {
         )}
       </ImportersBottomContainer>
     </ImportListContainer>
-
   )
 }
