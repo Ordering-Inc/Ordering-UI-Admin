@@ -96,6 +96,9 @@ export const FiledListWrapper = styled.div`
   width: 100%;
   margin-top: 15px;
   position: relative;
+  label {
+    font-size: 14px;
+  }
 `
 export const FieldAddForm = styled.form`
 
