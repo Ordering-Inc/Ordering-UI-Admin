@@ -63,7 +63,7 @@ var ActionsForm = _styledComponents.default.div(_templateObject9 || (_templateOb
 
 exports.ActionsForm = ActionsForm;
 
-var FiledListWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 15px;\n  position: relative;\n"])));
+var FiledListWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 15px;\n  position: relative;\n  label {\n    font-size: 14px;\n  }\n"])));
 
 exports.FiledListWrapper = FiledListWrapper;
 
