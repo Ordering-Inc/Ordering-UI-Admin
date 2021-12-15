@@ -151,7 +151,7 @@ const LogisticInformationUI = (props) => {
   )
 }
 
-export const LogisticInformation = (props) => {
+export const OrderLogisticInformation = (props) => {
   const logisticsProps = {
     ...props,
     orderId: props.orderId,

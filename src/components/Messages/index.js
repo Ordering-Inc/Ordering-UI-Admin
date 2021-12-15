@@ -55,7 +55,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Alert } from '../Confirm'
 import { Logistics } from '../Logistics'
-import { LogisticInformation } from '../LogisticInformation'
+import { OrderLogisticInformation } from '../OrderLogisticInformation'
 export const MessagesUI = (props) => {
   const {
     isChat,
@@ -402,7 +402,7 @@ export const MessagesUI = (props) => {
                     )}
                     {tabActive.logistic_information && (
                       <WrapperLogisticInformation>
-                        <LogisticInformation orderId={order.id} />
+                        <OrderLogisticInformation orderId={order.id} />
                       </WrapperLogisticInformation>
                     )}
                   </>
