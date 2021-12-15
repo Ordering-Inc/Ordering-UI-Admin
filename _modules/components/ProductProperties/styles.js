@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var PropertiesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-x: hidden;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n    padding-bottom: 30px;\n    margin: 0px;\n    border-bottom: 1px solid #E9ECEF;\n  }\n\n  > input {\n    width: 100%;\n  }\n\n  > button {\n    margin: 30px 0 20px 0;\n    height: 44px;\n  }\n  @media (min-width: 1000px) {\n    padding: 20px;\n  }\n"])), function (props) {
+var PropertiesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-x: hidden;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n    padding-bottom: 30px;\n    margin: 0px;\n    border-bottom: 1px solid #E9ECEF;\n  }\n\n  > input {\n    width: 100%;\n    margin: 5px 0;\n  }\n  @media (min-width: 1000px) {\n    padding: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
@@ -57,7 +57,7 @@ var OptionCenter = _styledComponents.default.div(_templateObject9 || (_templateO
 
 exports.OptionCenter = OptionCenter;
 
-var LabelCustom = _styledComponents.default.label(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  font-size: 14px;\n  margin-bottom: 5px;\n"])));
+var LabelCustom = _styledComponents.default.label(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n"])));
 
 exports.LabelCustom = LabelCustom;
 

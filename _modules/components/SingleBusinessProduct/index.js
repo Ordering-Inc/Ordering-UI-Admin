@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
-  var _productFormState$cha2, _product$id, _theme$images$icons, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5, _productFormState$cha6, _productFormState$cha7;
+  var _productFormState$cha2, _product$id, _theme$images$icons, _productFormState$cha3, _productFormState$cha4, _productFormState$cha5, _productFormState$cha6, _productFormState$cha7, _productFormState$cha8, _productFormState$cha9, _productFormState$cha10, _productFormState$cha11;
 
   var isSkeleton = props.isSkeleton,
       viewMethod = props.viewMethod,
@@ -160,7 +160,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
   };
 
   var handleProductClick = function handleProductClick(e) {
-    var isInvalid = e.target.closest('.product_info') || e.target.closest('.product_price') || e.target.closest('.product_description') || e.target.closest('.product_enable_control') || e.target.closest('.product_actions') || e.target.closest('.description') || e.target.closest('.fee_fixed') || e.target.closest('.fee_percentage');
+    var isInvalid = e.target.closest('.product_info') || e.target.closest('.product_price') || e.target.closest('.product_description') || e.target.closest('.product_enable_control') || e.target.closest('.product_actions') || e.target.closest('.description');
     if (isInvalid) return;
     handleOpenProductDetails(product);
   };
@@ -358,7 +358,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     value: (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha7 = productFormState.changes) === null || _productFormState$cha7 === void 0 ? void 0 : _productFormState$cha7.description) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
-  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
+  }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.tax) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("div", null, (taxProduct === null || taxProduct === void 0 ? void 0 : taxProduct.rate) || taxProduct, "% (", taxProductTypeString, ")"))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.fee) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("div", null, parsePrice((productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha8 = productFormState.changes) === null || _productFormState$cha8 === void 0 ? void 0 : (_productFormState$cha9 = _productFormState$cha8.fee) === null || _productFormState$cha9 === void 0 ? void 0 : _productFormState$cha9.fixed) || 0), " + ", (productFormState === null || productFormState === void 0 ? void 0 : (_productFormState$cha10 = productFormState.changes) === null || _productFormState$cha10 === void 0 ? void 0 : (_productFormState$cha11 = _productFormState$cha10.fee) === null || _productFormState$cha11 === void 0 ? void 0 : _productFormState$cha11.percentage) || (business === null || business === void 0 ? void 0 : business.service_fee), "%"))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEnableWrapper, {
     className: "product_enable_control"
   }, product !== null && product !== void 0 && product.enabled ? /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')) : /*#__PURE__*/_react.default.createElement("span", null, t('DISABLE', 'Disable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (product === null || product === void 0 ? void 0 : product.enabled) || false,

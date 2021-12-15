@@ -38,7 +38,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UsersListingHeader = function UsersListingHeader(props) {
-  var title = props.title,
+  var deafultUserTypesSelected = props.deafultUserTypesSelected,
+      disabledActiveStateCondition = props.disabledActiveStateCondition,
+      title = props.title,
       selectedUsers = props.selectedUsers,
       deleteUsersActionState = props.deleteUsersActionState,
       handleDeleteSeveralUsers = props.handleDeleteSeveralUsers,
@@ -71,6 +73,8 @@ var UsersListingHeader = function UsersListingHeader(props) {
       return handleOpenUserAddForm();
     }
   }, isDriversPage ? t('ADD_DRIVER', 'Add driver') : isDriversManagersPage ? t('ADD_DRIVER_MANAGER', 'Add driver manager') : t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_UsersExportCSV.UsersExportCSV, {
+    deafultUserTypesSelected: deafultUserTypesSelected,
+    disabledActiveStateCondition: disabledActiveStateCondition,
     userTypesSelected: userTypesSelected,
     selectedUserActiveState: selectedUserActiveState
   }), /*#__PURE__*/_react.default.createElement(_UsersDeleteButton.UsersDeleteButton, {
@@ -78,6 +82,7 @@ var UsersListingHeader = function UsersListingHeader(props) {
     deleteUsersActionState: deleteUsersActionState,
     handleDeleteSeveralUsers: handleDeleteSeveralUsers
   }), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

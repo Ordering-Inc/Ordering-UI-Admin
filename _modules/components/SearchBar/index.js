@@ -19,19 +19,34 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var SearchBar = function SearchBar(_ref) {
-  var onSearch = _ref.onSearch,
-      search = _ref.search,
-      placeholder = _ref.placeholder,
-      isCustomLayout = _ref.isCustomLayout;
+var SearchBar = function SearchBar(props) {
+  var onSearch = props.onSearch,
+      search = props.search,
+      placeholder = props.placeholder,
+      isCustomLayout = props.isCustomLayout,
+      lazyLoad = props.lazyLoad;
   var timeout = null;
+  var previousSearch;
   var el = (0, _react.useRef)();
 
   var onChangeSearch = function onChangeSearch(e) {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
       onSearch(e.target.value);
-    }, 1000);
+    }, 750);
+
+    if (previousSearch !== e.target.value) {
+      if (!lazyLoad) {
+        onSearch(e.target.value);
+      } else {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          onSearch(e.target.value);
+        }, 750);
+      }
+    }
+
+    previousSearch = e.target.value;
   };
 
   (0, _react.useEffect)(function () {
@@ -48,7 +63,8 @@ var SearchBar = function SearchBar(_ref) {
     type: "text",
     ref: el,
     name: "search",
-    placeholder: placeholder
+    placeholder: placeholder,
+    autoComplete: "off"
   }));
 };
 

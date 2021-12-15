@@ -11,21 +11,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactBootstrap = require("react-bootstrap");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _Buttons = require("../../styles/Buttons");
-
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
+var _styles = require("../../styles");
 
 var _styledComponents = require("styled-components");
-
-var _Switch = require("../../styles/Switch");
 
 var _SearchBar = require("../SearchBar");
 
@@ -37,7 +31,7 @@ var _BusinessBrandGENDetail = require("../BusinessBrandGENDetail");
 
 var _BusinessBrandBUSIDetail = require("../BusinessBrandBUSIDetail");
 
-var _styles = require("./styles");
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79,7 +73,9 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
       brandListState = props.brandListState,
       handleChangeState = props.handleChangeState,
       brandFormState = props.brandFormState,
-      handleDeleteBrand = props.handleDeleteBrand;
+      handleDeleteBrand = props.handleDeleteBrand,
+      openDetail = props.openDetail,
+      setOpenDetail = props.setOpenDetail;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -109,20 +105,20 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
       alertState = _useState4[0],
       setAlertState = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)('general'),
       _useState6 = _slicedToArray(_useState5, 2),
-      openDetail = _useState6[0],
-      setOpenDetail = _useState6[1];
+      selectedType = _useState6[0],
+      setSelectedType = _useState6[1];
 
-  var _useState7 = (0, _react.useState)('general'),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      selectedType = _useState8[0],
-      setSelectedType = _useState8[1];
+      selectedBrand = _useState8[0],
+      setSelectedBrand = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      selectedBrand = _useState10[0],
-      setSelectedBrand = _useState10[1];
+  var moreOptions = [{
+    value: 0,
+    content: t('DELETE', 'Delete')
+  }];
 
   var handleCloseSidebar = function handleCloseSidebar() {
     setOpenDetail(false);
@@ -146,6 +142,12 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
       open: false,
       content: []
     });
+  };
+
+  var handleClickBrand = function handleClickBrand(e, brandId) {
+    var isInvalid = e.target.closest('.brand_enable_control');
+    if (isInvalid) return;
+    handleOpenSideBar(brandId);
   };
 
   (0, _react.useEffect)(function () {
@@ -191,70 +193,57 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
       });
     }
   }, [brandFormState === null || brandFormState === void 0 ? void 0 : brandFormState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BrandListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('BRAND_MANAGER', 'Brand manager'))), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('BRAND_MANAGER', 'Brand manager'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: handleOpenSideBar
   }, t('ADD_BRAND', 'Add brand')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     search: searchValue,
     onSearch: function onSearch(value) {
       return _onSearch(value);
     },
     placeholder: t('SEARCH', 'Search')
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BrandListTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BrandListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), brandListState.loading ? _toConsumableArray(Array(8).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.BrandBody, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BrandListTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), brandListState.loading ? _toConsumableArray(Array(8).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.BrandBody, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BrandGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.BrandGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
       isSkeleton: brandListState === null || brandListState === void 0 ? void 0 : brandListState.loading
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 32,
       height: 32
-    })), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80,
       height: 20
-    }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 50,
-      height: 20
-    })), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 15,
       height: 20
     }))))));
   }) : brandList.map(function (brand) {
     var _theme$images, _theme$images$dummies;
 
-    return /*#__PURE__*/_react.default.createElement(_styles.BrandBody, {
+    return /*#__PURE__*/_react.default.createElement(_styles2.BrandBody, {
       key: brand.id,
-      active: brand.id === (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.id)
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.BrandGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((brand === null || brand === void 0 ? void 0 : brand.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
-    })), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, brand === null || brand === void 0 ? void 0 : brand.name)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {
-      calssName: "page-enabled"
-    }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+      active: brand.id === (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.id),
+      onClick: function onClick(e) {
+        return handleClickBrand(e, brand.id);
+      }
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.BrandGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
+      bgimage: optimizeImage((brand === null || brand === void 0 ? void 0 : brand.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
+    })), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, brand === null || brand === void 0 ? void 0 : brand.name)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
+      calssName: "brand_enable_control"
+    }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: brand === null || brand === void 0 ? void 0 : brand.enabled,
       onChange: function onChange(enabled) {
         return handleChangeState(brand.id, 'enabled', enabled);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, {
-      className: "page-actions"
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleOpenSideBar(brand.id);
-      }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleDeleteBrand(brand.id);
-      }
-    }, t('DELETE', 'Delete'))))))));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BrandListBottomContainer, null, /*#__PURE__*/_react.default.createElement("span", {
+    }))))));
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BrandListBottomContainer, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenSideBar
   }, t('ADD_NEW_BRAND', 'Add new brand'))), openDetail && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     sidebarId: "brand-details",
@@ -263,17 +252,23 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     onClose: function onClose() {
       return handleCloseSidebar();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.BrandDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailHeder, null, (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name) && /*#__PURE__*/_react.default.createElement("span", null, selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.BrandDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailHeder, null, /*#__PURE__*/_react.default.createElement("div", null, (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name) && /*#__PURE__*/_react.default.createElement("span", null, selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.enabled) || false,
     onChange: function onChange(enabled) {
       return handleChangeState(selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.id, 'enabled', enabled);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  })), selectedBrand && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    placeholder: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    options: moreOptions,
+    onChange: function onChange() {
+      return handleDeleteBrand(selectedBrand.id);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedType === 'general',
     onClick: function onClick() {
       return setSelectedType('general');
     }
-  }, t('GENERAL', 'General')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('GENERAL', 'General')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedType === 'businesses',
     onClick: function onClick() {
       return setSelectedType('businesses');

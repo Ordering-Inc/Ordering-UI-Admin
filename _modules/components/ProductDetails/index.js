@@ -56,7 +56,9 @@ var ProductDetails = function ProductDetails(props) {
       setFormTaxState = props.setFormTaxState,
       formTaxState = props.formTaxState,
       taxes = props.taxes,
-      setTaxes = props.setTaxes;
+      setTaxes = props.setTaxes,
+      fees = props.fees,
+      setFees = props.setFees;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -154,7 +156,9 @@ var ProductDetails = function ProductDetails(props) {
     setFormTaxState: setFormTaxState,
     formTaxState: formTaxState,
     taxes: taxes,
-    setTaxes: setTaxes
+    setTaxes: setTaxes,
+    fees: fees,
+    setFees: setFees
   }), showOption === 'ingredients' && /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
     business: business,
     product: product,

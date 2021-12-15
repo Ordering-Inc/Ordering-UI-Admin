@@ -128,7 +128,7 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
           cellProperties.readOnly = true;
         }
 
-        if (prop === 'taxShow') {
+        if (prop === 'taxShow' || prop === 'feeShow') {
           cellProperties.readOnly = true;
           cellProperties.editor = false;
         }

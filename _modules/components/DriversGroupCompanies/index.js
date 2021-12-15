@@ -78,6 +78,7 @@ var DriversGroupCompanies = function DriversGroupCompanies(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
+    lazyLoad: true,
     search: searchValue,
     onSearch: function onSearch(val) {
       return setSearchValue(val);

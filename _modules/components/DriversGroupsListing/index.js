@@ -53,6 +53,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
   var driversGroupsState = props.driversGroupsState,
+      setDriversGroupsState = props.setDriversGroupsState,
       driversManagersList = props.driversManagersList,
       businessesList = props.businessesList,
       paymethodsList = props.paymethodsList,
@@ -61,30 +62,10 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       handleSelectGroup = props.handleSelectGroup,
       handleAllSelectGroup = props.handleAllSelectGroup,
       handleDeleteSelectedGroups = props.handleDeleteSelectedGroups,
-      handleAddDriversGroup = props.handleAddDriversGroup,
-      openDetails = props.openDetails,
-      setOpenDetails = props.setOpenDetails,
-      cleanChagesState = props.cleanChagesState,
-      changesState = props.changesState,
       actionState = props.actionState,
-      handleChangesState = props.handleChangesState,
       handleUpdateDriversGroup = props.handleUpdateDriversGroup,
       handleDeleteDriversGroup = props.handleDeleteDriversGroup,
-      curDriversGroup = props.curDriversGroup,
-      setCurDriversGroup = props.setCurDriversGroup,
-      handleSelectBusiness = props.handleSelectBusiness,
-      handleSelectAllBusiness = props.handleSelectAllBusiness,
-      selectedBusinessIds = props.selectedBusinessIds,
-      selectedPaymethodIds = props.selectedPaymethodIds,
-      handleSelectPaymethod = props.handleSelectPaymethod,
-      handleSelectAllPaymethod = props.handleSelectAllPaymethod,
-      selectedDriverIds = props.selectedDriverIds,
-      handleSelectAllDriver = props.handleSelectAllDriver,
-      handleSelectDriver = props.handleSelectDriver,
-      driversCompanyList = props.driversCompanyList,
-      selectedDriversCompanyIds = props.selectedDriversCompanyIds,
-      handleSelectDriversCompany = props.handleSelectDriversCompany,
-      handleSelectAllDriversCompany = props.handleSelectAllDriversCompany;
+      driversCompanyList = props.driversCompanyList;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -122,9 +103,18 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       moveDistance = _useState8[0],
       setMoveDistance = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      openDetails = _useState10[0],
+      setOpenDetails = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      curDriversGroup = _useState12[0],
+      setCurDriversGroup = _useState12[1];
+
   var handleOpenDetails = function handleOpenDetails(driverGroup) {
     setMoveDistance(0);
-    cleanChagesState();
     setCurDriversGroup(driverGroup);
     setOpenDetails(true);
   };
@@ -169,6 +159,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       return onClickSelectedGroupsDelete();
     }
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     onSearch: function onSearch(val) {
       return setSearchValue(val);
     },
@@ -194,31 +185,20 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       setOpenDetails(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_DriversGroupDetails.DriversGroupDetails, {
+    driversGroupsState: driversGroupsState,
+    setDriversGroupsState: setDriversGroupsState,
     curDriversGroup: curDriversGroup,
     driversManagers: driversManagersList === null || driversManagersList === void 0 ? void 0 : driversManagersList.managers,
     businesses: businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses,
     paymethods: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods,
     drivers: driversList === null || driversList === void 0 ? void 0 : driversList.drivers,
     companies: driversCompanyList === null || driversCompanyList === void 0 ? void 0 : driversCompanyList.companies,
-    changesState: changesState,
-    actionState: actionState,
-    handleChangesState: handleChangesState,
     handleUpdateDriversGroup: handleUpdateDriversGroup,
-    handleSelectBusiness: handleSelectBusiness,
-    handleSelectAllBusiness: handleSelectAllBusiness,
-    selectedBusinessIds: selectedBusinessIds,
-    selectedPaymethodIds: selectedPaymethodIds,
-    handleSelectPaymethod: handleSelectPaymethod,
-    handleSelectAllPaymethod: handleSelectAllPaymethod,
-    selectedDriverIds: selectedDriverIds,
-    handleSelectDriver: handleSelectDriver,
-    handleSelectAllDriver: handleSelectAllDriver,
-    selectedDriversCompanyIds: selectedDriversCompanyIds,
-    handleSelectDriversCompany: handleSelectDriversCompany,
-    handleSelectAllDriversCompany: handleSelectAllDriversCompany,
-    handleAddDriversGroup: handleAddDriversGroup,
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setMoveDistance(val);
+    },
+    onClose: function onClose() {
+      return setOpenDetails(false);
     }
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),

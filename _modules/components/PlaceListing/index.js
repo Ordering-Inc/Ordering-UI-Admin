@@ -295,6 +295,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
       return handleSeveralDeleteZones();
     }
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     placeholder: t('SEARCH', 'Search'),
     searchValue: searchValue,
     onSearch: function onSearch(val) {

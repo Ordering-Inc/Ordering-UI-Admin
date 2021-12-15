@@ -179,6 +179,7 @@ var CmsUI = function CmsUI(props) {
       return handleEditPage(null);
     }
   }, t('ADD_PAGE', 'Add page')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     placeholder: t('SEARCH', 'Search'),
     searchValue: searchValue,
     onSearch: function onSearch(val) {

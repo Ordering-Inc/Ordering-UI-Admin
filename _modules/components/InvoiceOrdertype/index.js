@@ -13,11 +13,9 @@ var _Checkbox = require("../../styles/Checkbox");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _reactToastify = require("react-toastify");
+var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styles = require("./styles");
-
-var _orderingComponentsAdmin = require("ordering-components-admin");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -47,6 +45,10 @@ var InvoiceOrderType = function InvoiceOrderType(props) {
       invocing = props.invocing,
       handleChangeInvocing = props.handleChangeInvocing;
 
+  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
+      _useToast2 = _slicedToArray(_useToast, 2),
+      showToast = _useToast2[1].showToast;
+
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -64,18 +66,7 @@ var InvoiceOrderType = function InvoiceOrderType(props) {
   var saveFormData = function saveFormData() {
     handleChangeOrderTypes(orderStatus);
     handleChangeInvocing(invoiceState);
-    var toastConfigure = {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    };
-    var content = t('INVOICE_DATA_SAVED', 'Invoice data saved');
-
-    _reactToastify.toast.dark(content, toastConfigure);
+    showToast(_orderingComponentsAdmin.ToastType.Success, t('INVOICE_DATA_SAVED', 'Invoice data saved'));
   };
 
   var handleChangeCheckBox = function handleChangeCheckBox(value, checked) {

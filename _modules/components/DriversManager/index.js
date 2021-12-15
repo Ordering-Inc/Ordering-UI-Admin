@@ -124,6 +124,7 @@ var DriversManagerUI = function DriversManagerUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_DASHBOARD', 'Drivers dashboard'))), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
+    lazyLoad: true,
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

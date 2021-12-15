@@ -31,6 +31,8 @@ var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVe
 
 var _Pagination = require("../Pagination");
 
+var _ConfirmAdmin = require("../ConfirmAdmin");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -46,6 +48,12 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -84,6 +92,14 @@ var UsersList = function UsersList(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       optimizeImage = _useUtils2[0].optimizeImage;
 
+  var _useState = (0, _react.useState)({
+    open: false,
+    handleOnConfirm: null
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      confirmAdmin = _useState2[0],
+      setConfirmAdmin = _useState2[1];
+
   var getUserType = function getUserType(type) {
     var userTypes = [{
       key: 0,
@@ -117,6 +133,44 @@ var UsersList = function UsersList(props) {
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
     getUsers(expectedPage, pageSize);
+  };
+
+  var handleEnable = function handleEnable(user, enabled) {
+    if (user.level !== 0) {
+      handleChangeActiveUser({
+        id: user.id,
+        enabled: enabled
+      });
+    } else {
+      setConfirmAdmin({
+        open: true,
+        handleOnConfirm: function handleOnConfirm() {
+          setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
+            open: false
+          }));
+          handleChangeActiveUser({
+            id: user.id,
+            enabled: enabled
+          });
+        }
+      });
+    }
+  };
+
+  var onChangeUserType = function onChangeUserType(user, type) {
+    if (user.level !== 0) {
+      handleChangeUserType(type);
+    } else {
+      setConfirmAdmin({
+        open: true,
+        handleOnConfirm: function handleOnConfirm() {
+          setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
+            open: false
+          }));
+          handleChangeUserType(type);
+        }
+      });
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -194,16 +248,16 @@ var UsersList = function UsersList(props) {
     }, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
       userId: user.id,
       defaultUserType: user === null || user === void 0 ? void 0 : user.level,
-      handleChangeUserType: handleChangeUserType
+      handleChangeUserType: function handleChangeUserType(type) {
+        return onChangeUserType(user, type);
+      }
     }), /*#__PURE__*/_react.default.createElement("p", null, (_getUserType = getUserType(user === null || user === void 0 ? void 0 : user.level)) === null || _getUserType === void 0 ? void 0 : _getUserType.value))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserEnableWrapper, {
       className: "user_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+      notAsync: user.level === 0,
       defaultChecked: user === null || user === void 0 ? void 0 : user.enabled,
       onChange: function onChange(enabled) {
-        return handleChangeActiveUser({
-          id: user.id,
-          enabled: enabled
-        });
+        return handleEnable(user, enabled);
       }
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserActionSelector, {
       className: "user_action"
@@ -229,7 +283,15 @@ var UsersList = function UsersList(props) {
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
     handleChangePageSize: handleChangePageSize
-  })))));
+  })))), /*#__PURE__*/_react.default.createElement(_ConfirmAdmin.ConfirmAdmin, {
+    open: confirmAdmin.open,
+    onClose: function onClose() {
+      return setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
+        open: false
+      }));
+    },
+    onConfirm: confirmAdmin.handleOnConfirm
+  }));
 };
 
 exports.UsersList = UsersList;

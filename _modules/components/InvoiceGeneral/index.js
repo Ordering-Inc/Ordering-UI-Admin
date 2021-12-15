@@ -17,8 +17,6 @@ var _Checkbox = require("../../styles/Checkbox");
 
 var _Confirm = require("../Confirm");
 
-var _reactToastify = require("react-toastify");
-
 var _styles = require("./styles");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -56,7 +54,8 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
       businessList = props.businessList,
       selectedInvoice = props.selectedInvoice,
       invocing = props.invocing,
-      handleChangeInvocing = props.handleChangeInvocing;
+      handleChangeInvocing = props.handleChangeInvocing,
+      getOrders = props.getOrders;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -77,53 +76,36 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
       driverOptions = _useState6[0],
       setDriverOptions = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      formState = _useState8[0],
-      setformState = _useState8[1];
-
-  var _useState9 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      alertState = _useState10[0],
-      setAlertState = _useState10[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
 
   var handleChangeFormState = function handleChangeFormState(type, value) {
-    setformState(_objectSpread(_objectSpread({}, formState), {}, _defineProperty({}, type, value)));
+    handleChangeInvocing(_objectSpread(_objectSpread({}, invocing), {}, _defineProperty({}, type, value)));
   };
 
-  var saveFormData = function saveFormData() {
-    if (businessList && (formState === null || formState === void 0 ? void 0 : formState.business) === '') {
+  var pdfDownload = function pdfDownload() {
+    if (businessList && (invocing === null || invocing === void 0 ? void 0 : invocing.business) === '') {
       setAlertState({
         open: true,
         content: t('SELECTED_BUSINESS_INVALID', 'The selected Business is invalid')
       });
-    } else if (driverList && (formState === null || formState === void 0 ? void 0 : formState.driver) === '') {
+    } else if (driverList && (invocing === null || invocing === void 0 ? void 0 : invocing.driver) === '') {
       setAlertState({
         open: true,
         content: t('SELECTED_DRIVER_INVALID', 'The selected Driver is invalid')
       });
     } else {
-      handleChangeInvocing(formState);
-      var toastConfigure = {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      };
-      var content = t('INVOICE_DATA_SAVED', 'Invoice data saved');
-
-      _reactToastify.toast.dark(content, toastConfigure);
+      getOrders();
     }
   };
 
   var handleChangeDate = function handleChangeDate(date1, date2) {
-    setformState(_objectSpread(_objectSpread({}, formState), {}, {
+    handleChangeInvocing(_objectSpread(_objectSpread({}, invocing), {}, {
       from: date1,
       to: date2
     }));
@@ -169,9 +151,6 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
       setBusinessOptions(types);
     }
   }, [driverList === null || driverList === void 0 ? void 0 : driverList.drivers, businessList === null || businessList === void 0 ? void 0 : businessList.businesses]);
-  (0, _react.useEffect)(function () {
-    setformState(invocing);
-  }, [invocing]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.InvoiceGeneralDetailContainer, {
     className: "row"
   }, selectedInvoice === 'business' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
@@ -181,7 +160,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
   }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: typeInvoiceOptions,
     className: "select",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.type,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.type,
     onChange: function onChange(value) {
       return handleChangeFormState('type', value);
     }
@@ -197,7 +176,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
   }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: businessOptions,
     className: "select",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.business,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.business,
     placeholder: t('BUSINESS_NAME', 'Business name'),
     onChange: function onChange(value) {
       return handleChangeFormState('business', value);
@@ -209,7 +188,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
   }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: driverOptions,
     className: "select",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.driver,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.driver,
     placeholder: t('SELECT_DRIVER', 'Select a driver'),
     onChange: function onChange(value) {
       return handleChangeFormState('driver', value);
@@ -218,7 +197,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     id: "cancelled",
-    defaultChecked: (formState === null || formState === void 0 ? void 0 : formState.cancelled) || false,
+    defaultChecked: (invocing === null || invocing === void 0 ? void 0 : invocing.cancelled) || false,
     onClick: function onClick(e) {
       return handleChangeFormState('cancelled', e.target.checked);
     }
@@ -230,7 +209,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     type: "number",
     placeholder: "0%",
     min: "0",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.percentage_fee,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.percentage_fee,
     onChange: function onChange(e) {
       return handleChangeFormState('percentage_fee', e.target.value);
     }
@@ -240,7 +219,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     type: "number",
     placeholder: "00",
     min: "0",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.fixed_fee,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.fixed_fee,
     onChange: function onChange(e) {
       return handleChangeFormState('fixed_fee', e.target.value);
     }
@@ -250,7 +229,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     type: "number",
     placeholder: "0%",
     min: "0",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.percentage_delivery_price,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.percentage_delivery_price,
     onChange: function onChange(e) {
       return handleChangeFormState('percentage_delivery_price', e.target.value);
     }
@@ -260,7 +239,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     type: "number",
     placeholder: "0%",
     min: "0",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.percentage_driver_tip,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.percentage_driver_tip,
     onChange: function onChange(e) {
       return handleChangeFormState('percentage_driver_tip', e.target.value);
     }
@@ -270,7 +249,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     type: "number",
     placeholder: "00",
     min: "0",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.tax,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.tax,
     onChange: function onChange(e) {
       return handleChangeFormState('tax', e.target.value);
     }
@@ -280,7 +259,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     type: "number",
     placeholder: "00",
     min: "0",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.misc_amount,
+    defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.misc_amount,
     onChange: function onChange(e) {
       return handleChangeFormState('misc_amount', e.target.value);
     }
@@ -288,7 +267,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('MISC_DESCRIPTION', 'MISC description')), /*#__PURE__*/_react.default.createElement("textarea", {
     placeholder: t('WRITE_MISC_DESCRIPTION', 'Write a MISC description'),
-    value: (formState === null || formState === void 0 ? void 0 : formState.misc_description) || '',
+    value: (invocing === null || invocing === void 0 ? void 0 : invocing.misc_description) || '',
     onChange: function onChange(e) {
       return handleChangeFormState('misc_description', e.target.value);
     }
@@ -296,7 +275,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('NOTES', 'Notes')), /*#__PURE__*/_react.default.createElement("textarea", {
     placeholder: t('WRITE_A_NOTES', 'Write a Notes'),
-    value: (formState === null || formState === void 0 ? void 0 : formState.notes) || '',
+    value: (invocing === null || invocing === void 0 ? void 0 : invocing.notes) || '',
     onChange: function onChange(e) {
       return handleChangeFormState('notes', e.target.value);
     }
@@ -306,8 +285,8 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     borderRadius: "7.6px",
     color: "primary",
     disabled: (driverList === null || driverList === void 0 ? void 0 : driverList.loading) || (businessList === null || businessList === void 0 ? void 0 : businessList.loading),
-    onClick: saveFormData
-  }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    onClick: pdfDownload
+  }, t('EXPORT', 'Export')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: selectedInvoice === 'business' ? t('BUSINESS_INVOICE', 'Business invoice') : t('DRIVER_INVOICE', 'Driver invoice'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

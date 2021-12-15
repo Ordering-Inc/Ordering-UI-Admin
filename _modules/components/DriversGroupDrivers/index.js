@@ -71,7 +71,7 @@ var DriversGroupDrivers = function DriversGroupDrivers(props) {
 
     if (searchValue) {
       _filteredDrivers = drivers.filter(function (driver) {
-        return driver === null || driver === void 0 ? void 0 : driver.name.toLowerCase().includes(searchValue.toLowerCase());
+        return (driver === null || driver === void 0 ? void 0 : driver.name.toLowerCase().includes(searchValue.toLowerCase())) || (driver === null || driver === void 0 ? void 0 : driver.email.toLowerCase().includes(searchValue.toLowerCase()));
       });
     } else {
       _filteredDrivers = _toConsumableArray(drivers);
@@ -82,6 +82,7 @@ var DriversGroupDrivers = function DriversGroupDrivers(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
+    lazyLoad: true,
     search: searchValue,
     onSearch: function onSearch(val) {
       return setSearchValue(val);

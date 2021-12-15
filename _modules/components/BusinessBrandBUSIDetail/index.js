@@ -64,7 +64,8 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
       _onSearch = props.onSearch,
       businessList = props.businessList,
       brand = props.brand,
-      handleChangeCheckBox = props.handleChangeCheckBox;
+      handleChangeCheckBox = props.handleChangeCheckBox,
+      handleSelectAllBusinesses = props.handleSelectAllBusinesses;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -128,6 +129,7 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.BrandBUSIDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     search: searchValue,
     isCustomLayout: true,
+    lazyLoad: true,
     onSearch: function onSearch(value) {
       return _onSearch(value);
     },
@@ -143,7 +145,17 @@ var BusinessBrandBUSIDetailUI = function BusinessBrandBUSIDetailUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessListWrapper, null, (currentBusinesses === null || currentBusinesses === void 0 ? void 0 : currentBusinesses.length) > 0 ? currentBusinesses.map(function (business, i) {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectAllBusinesses(true, brand === null || brand === void 0 ? void 0 : brand.id);
+    }
+  }, t('SELECT_ALL', 'Select all')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectAllBusinesses(false, brand === null || brand === void 0 ? void 0 : brand.id);
+    }
+  }, t('SELECT_NONE', 'Select none'))), (currentBusinesses === null || currentBusinesses === void 0 ? void 0 : currentBusinesses.length) > 0 ? currentBusinesses.map(function (business, i) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessItemContainer, {

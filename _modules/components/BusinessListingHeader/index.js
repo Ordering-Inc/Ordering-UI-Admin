@@ -67,6 +67,7 @@ var BusinessListingHeader = function BusinessListingHeader(props) {
     }
   }, t('ADD_NEW_STORE', 'Add new store')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
+    lazyLoad: true,
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

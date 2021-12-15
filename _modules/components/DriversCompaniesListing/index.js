@@ -145,6 +145,7 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
       return onClickSelectedCompaniesDelete();
     }
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     onSearch: function onSearch(val) {
       return setSearchValue(val);
     },
@@ -171,7 +172,11 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_DriversCompanyDetailsForm.DriversCompanyDetailsForm, {
     driversCompaniesState: driversCompaniesState,
     setDriversCompaniesState: setDriversCompaniesState,
-    driversCompany: curDriversCompany
+    driversCompany: curDriversCompany,
+    onClose: function onClose() {
+      setCurDriversCompany(null);
+      setOpenDetails(false);
+    }
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

@@ -53,8 +53,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
   var actionSidebar = props.actionSidebar,
-      getOrders = props.getOrders,
-      invocing = props.invocing,
       exportInvoiceList = props.exportInvoiceList;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -79,10 +77,6 @@ var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
     setSelectedDetailType(detailType);
   };
 
-  var pdfDownload = function pdfDownload() {
-    getOrders();
-  };
-
   (0, _react.useEffect)(function () {
     if (!(exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.loading) && exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.invoice) {
       inputRef.current.value = invoicePdfRef === null || invoicePdfRef === void 0 ? void 0 : invoicePdfRef.current.innerHTML;
@@ -90,9 +84,6 @@ var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
     }
   }, [exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESS_INVOICE', 'Business invoice')), /*#__PURE__*/_react.default.createElement(_styles.HeaderActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
-    onClick: pdfDownload,
-    disabled: !(invocing !== null && invocing !== void 0 && invocing.business) || (invocing === null || invocing === void 0 ? void 0 : invocing.business) === ''
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return actionSidebar(false);

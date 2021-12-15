@@ -67,6 +67,7 @@ var ReviewsListing = function ReviewsListing(props) {
       return handleMenuCollapse(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('REVIEWS_MANAGER', 'Reviews manager'))), /*#__PURE__*/_react.default.createElement(_styles2.HeaderRight, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     placeholder: t('SEARCH', 'Search'),
     searchValue: searchValue,
     onSearch: function onSearch(val) {

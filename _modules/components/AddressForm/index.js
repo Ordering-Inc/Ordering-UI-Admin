@@ -627,21 +627,25 @@ var AddressFormUI = function AddressFormUI(props) {
       color: '#c10000'
     }
   }, formState.error), /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_styles.TagButton, {
+    type: "button",
     active: addressTag === 'home' ? 'active' : '',
     onClick: function onClick() {
       return handleAddressTag('home');
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), t('HOME', 'Home')), /*#__PURE__*/_react.default.createElement(_styles.TagButton, {
+    type: "button",
     active: addressTag === 'office' ? 'active' : '',
     onClick: function onClick() {
       return handleAddressTag('office');
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), t('OFFICE', 'Office')), /*#__PURE__*/_react.default.createElement(_styles.TagButton, {
+    type: "button",
     active: addressTag === 'favorite' ? 'active' : '',
     onClick: function onClick() {
       return handleAddressTag('favorite');
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.SuitHeart, null), t('FAVORITE', 'Favorite')), /*#__PURE__*/_react.default.createElement(_styles.TagButton, {
+    type: "button",
     active: addressTag === 'other' ? 'active' : '',
     onClick: function onClick() {
       return handleAddressTag('other');

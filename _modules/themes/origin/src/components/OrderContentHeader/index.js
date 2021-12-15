@@ -117,6 +117,7 @@ var OrderContentHeader = function OrderContentHeader(props) {
     activeSwitch: activeSwitch,
     handleSwitch: handleSwitch
   }))), /*#__PURE__*/_react.default.createElement(_styles.TopRightSection, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearchAndFilter, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

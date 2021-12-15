@@ -19,15 +19,7 @@ var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/
 
 var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
 
-var _reactBootstrap = require("react-bootstrap");
-
 var _styles = require("../../styles");
-
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
-var _styledComponents = require("styled-components");
-
-var _Confirm = require("../Confirm");
 
 var _styles2 = require("./styles");
 
@@ -36,12 +28,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -69,47 +55,35 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
       handleOpenDetails = props.handleOpenDetails,
       curDriversCompany = props.curDriversCompany,
       handleUpdateDriversCompany = props.handleUpdateDriversCompany,
-      handleDeleteDriversCompany = props.handleDeleteDriversCompany,
       handleSelectCompany = props.handleSelectCompany,
       selectedCompanyList = props.selectedCompanyList,
       handleAllSelectCompany = props.handleAllSelectCompany;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
+      t = _useLanguage2[1]; // Change page
 
-  var theme = (0, _styledComponents.useTheme)();
 
-  var _useState = (0, _react.useState)({
-    open: false,
-    content: null,
-    handleOnAccept: null
-  }),
+  var _useState = (0, _react.useState)(1),
       _useState2 = _slicedToArray(_useState, 2),
-      confirm = _useState2[0],
-      setConfirm = _useState2[1]; // Change page
+      currentPage = _useState2[0],
+      setCurrentPage = _useState2[1];
 
-
-  var _useState3 = (0, _react.useState)(1),
+  var _useState3 = (0, _react.useState)(10),
       _useState4 = _slicedToArray(_useState3, 2),
-      currentPage = _useState4[0],
-      setCurrentPage = _useState4[1];
+      companiesPerPage = _useState4[0],
+      setCompaniesPerPage = _useState4[1]; // Get current companies
 
-  var _useState5 = (0, _react.useState)(10),
+
+  var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      companiesPerPage = _useState6[0],
-      setCompaniesPerPage = _useState6[1]; // Get current companies
+      currentCompanies = _useState6[0],
+      setCurrentCompanies = _useState6[1];
 
-
-  var _useState7 = (0, _react.useState)([]),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      currentCompanies = _useState8[0],
-      setCurrentCompanies = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      totalPages = _useState10[0],
-      setTotalPages = _useState10[1];
+      totalPages = _useState8[0],
+      setTotalPages = _useState8[1];
 
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
@@ -169,22 +143,9 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
   };
 
   var handleClickCompany = function handleClickCompany(e, company) {
-    var isInvalid = e.target.closest('.company-checkbox') || e.target.closest('.company-enabled') || e.target.closest('.company-actions');
+    var isInvalid = e.target.closest('.company-checkbox') || e.target.closest('.company-enabled');
     if (isInvalid) return;
     handleOpenDetails(company);
-  };
-
-  var onDeleteCompany = function onDeleteCompany(driversCompanyId) {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_DRIVER_COMPANY', 'Are you sure to remove this driver company?'),
-      handleOnAccept: function handleOnAccept() {
-        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-          open: false
-        }));
-        handleDeleteDriversCompany(driversCompanyId);
-      }
-    });
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriversCompaniesContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CompaniesTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.CompanyNameContainer, {
@@ -201,7 +162,7 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
     isHeader: true
   }, t('PRIORITY', 'Priority'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.TimezoneWrapper, {
     isHeader: true
-  }, t('TIMEZONE', 'Timezone'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, t('ACTIONS', 'Actions'))))), driversCompaniesState.loading ? _toConsumableArray(Array(companiesPerPage).keys()).map(function (i) {
+  }, t('TIMEZONE', 'Timezone'))), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), driversCompaniesState.loading ? _toConsumableArray(Array(companiesPerPage).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CompanyNameContainer, {
@@ -220,11 +181,9 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
       isHeader: true
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 50
-    })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 20
-    }))))));
+    })))));
   }) : currentCompanies.map(function (company) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: company.id,
@@ -238,7 +197,7 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
         return handleSelectCompany(company.id);
       },
       isChecked: selectedCompanyList.includes(company.id)
-    }, selectedCompanyList.includes(company.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("p", null, company === null || company === void 0 ? void 0 : company.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.LimitWrapper, null, company === null || company === void 0 ? void 0 : company.limit)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PriorityWrapper, null, getPriorityTag(company === null || company === void 0 ? void 0 : company.priority))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.TimezoneWrapper, null, company === null || company === void 0 ? void 0 : company.timezone)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
+    }, selectedCompanyList.includes(company.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("p", null, company === null || company === void 0 ? void 0 : company.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.LimitWrapper, null, company === null || company === void 0 ? void 0 : company.limit)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PriorityWrapper, null, getPriorityTag(company === null || company === void 0 ? void 0 : company.priority))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.TimezoneWrapper, null, company === null || company === void 0 ? void 0 : company.timezone)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
       className: "company-enabled"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: company === null || company === void 0 ? void 0 : company.enabled,
@@ -247,21 +206,7 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
           enabled: enabled
         });
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, {
-      className: "company-actions"
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleOpenDetails(company);
-      }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return onDeleteCompany(company.id);
-      }
-    }, t('DELETE', 'Delete'))))))));
+    })))));
   }))), !driversCompaniesState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewCompanyButton, {
     onClick: function onClick() {
       return handleOpenDetails(null);
@@ -272,24 +217,7 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
     handleChangePage: handleChangePage,
     defaultPageSize: companiesPerPage,
     handleChangePageSize: handleChangePageSize
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('WEB_APPNAME', 'Ordering'),
-    content: confirm.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: confirm.open,
-    onClose: function onClose() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
-    onCancel: function onCancel() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
-    onAccept: confirm.handleOnAccept,
-    closeOnBackdrop: false
-  }));
+  }))));
 };
 
 exports.DriversCompaniesList = DriversCompaniesList;

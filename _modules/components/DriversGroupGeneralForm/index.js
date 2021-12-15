@@ -40,9 +40,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
-  var _ref, _changesState$name, _changesState$adminis, _changesState$type, _changesState$priorit;
+  var _configState$configs, _configState$configs$, _ref, _changesState$name, _driversGroupState$dr, _changesState$adminis, _driversGroupState$dr2, _changesState$type, _driversGroupState$dr3, _driversGroupState$dr4, _changesState$priorit, _driversGroupState$dr5;
 
-  var curDriversGroup = props.curDriversGroup,
+  var driversGroupState = props.driversGroupState,
       driversManagers = props.driversManagers,
       changesState = props.changesState,
       handleChangesState = props.handleChangesState,
@@ -63,6 +63,11 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
+
+  var autoAssignType = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.autoassign_type) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var typeOptions = [{
     value: 0,
     content: t('IN_HOUSE_DRIVERS', 'In house drivers')
@@ -97,13 +102,13 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       autoassign_amount_drivers: 0,
       orders_group_max_orders: 0
     };
-    if (!curDriversGroup) return;
-    handleUpdateDriversGroup(curDriversGroup.id, changes);
+    if (!driversGroupState.driversGroup) return;
+    handleUpdateDriversGroup(changes);
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
-    value: (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : (_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: function onChange(e) {
       return handleChangesState({
         name: e.target.value
@@ -113,7 +118,7 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_MANAGER', 'Select driver manager'),
     options: driversManagersOptions,
-    defaultValue: (_changesState$adminis = changesState === null || changesState === void 0 ? void 0 : changesState.administrator_id) !== null && _changesState$adminis !== void 0 ? _changesState$adminis : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.administrator_id,
+    defaultValue: (_changesState$adminis = changesState === null || changesState === void 0 ? void 0 : changesState.administrator_id) !== null && _changesState$adminis !== void 0 ? _changesState$adminis : (_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.administrator_id,
     optionInnerMaxHeight: "60vh",
     onChange: function onChange(val) {
       return handleChangesState({
@@ -123,22 +128,22 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_TYPE', 'Select type'),
     options: typeOptions,
-    defaultValue: (_changesState$type = changesState === null || changesState === void 0 ? void 0 : changesState.type) !== null && _changesState$type !== void 0 ? _changesState$type : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.type,
+    defaultValue: (_changesState$type = changesState === null || changesState === void 0 ? void 0 : changesState.type) !== null && _changesState$type !== void 0 ? _changesState$type : (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.type,
     onChange: function onChange(val) {
       return handleChangesState({
         type: val
       });
     }
-  })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_PRIORITY', 'Select priority'),
     options: priorityOptions,
-    defaultValue: (_changesState$priorit = changesState === null || changesState === void 0 ? void 0 : changesState.priority) !== null && _changesState$priorit !== void 0 ? _changesState$priorit : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.priority,
+    defaultValue: (_changesState$priorit = changesState === null || changesState === void 0 ? void 0 : changesState.priority) !== null && _changesState$priorit !== void 0 ? _changesState$priorit : (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.priority,
     onChange: function onChange(val) {
       return handleChangesState({
         priority: val
       });
     }
-  })), !curDriversGroup && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), curDriversGroup && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+  })), !driversGroupState.driversGroup && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), driversGroupState.driversGroup && autoAssignType !== 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     checked: useAdvanced,
     onChange: function onChange(e) {
       return handleLogistic(e.target.checked);
@@ -148,9 +153,9 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     color: "primary",
     disabled: Object.keys(changesState).length === 0,
     onClick: function onClick() {
-      return curDriversGroup ? handleUpdateDriversGroup(curDriversGroup.id, changesState) : handleAddDriversGroup();
+      return driversGroupState.driversGroup ? handleUpdateDriversGroup(changesState) : handleAddDriversGroup();
     }
-  }, curDriversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

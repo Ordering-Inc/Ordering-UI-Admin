@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
-  var curDriversGroup = props.curDriversGroup,
+  var driversGroupState = props.driversGroupState,
       businesses = props.businesses,
       handleSelectBusiness = props.handleSelectBusiness,
       actionState = props.actionState,
@@ -81,6 +81,7 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
+    lazyLoad: true,
     search: searchValue,
     onSearch: function onSearch(val) {
       return setSearchValue(val);
@@ -108,12 +109,12 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       bgimage: business === null || business === void 0 ? void 0 : business.logo,
       alt: "logo"
     })), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.name));
-  })), curDriversGroup && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), driversGroupState.driversGroup && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     disabled: Object.keys(changesState).length === 0,
     onClick: function onClick() {
-      return handleUpdateDriversGroup(curDriversGroup.id, changesState);
+      return handleUpdateDriversGroup(changesState);
     }
   }, t('SAVE', 'Save')));
 };

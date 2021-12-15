@@ -52,7 +52,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UsersListingUI = function UsersListingUI(props) {
-  var headerTitle = props.headerTitle,
+  var deafultUserTypesSelected = props.deafultUserTypesSelected,
+      disabledActiveStateCondition = props.disabledActiveStateCondition,
+      headerTitle = props.headerTitle,
       isShowActiveStateFilter = props.isShowActiveStateFilter,
       isShowUserTypeFilter = props.isShowUserTypeFilter,
       isDriversPage = props.isDriversPage,
@@ -142,6 +144,8 @@ var UsersListingUI = function UsersListingUI(props) {
     }
   }, [usersList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
+    deafultUserTypesSelected: deafultUserTypesSelected,
+    disabledActiveStateCondition: disabledActiveStateCondition,
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,
     title: headerTitle,

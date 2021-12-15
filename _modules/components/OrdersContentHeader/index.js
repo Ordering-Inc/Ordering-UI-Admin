@@ -108,6 +108,7 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     fullWidth: isDisableTitle && isDisableControl
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
+    lazyLoad: true,
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

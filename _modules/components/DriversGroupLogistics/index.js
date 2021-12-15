@@ -46,7 +46,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupLogistics = function DriversGroupLogistics(props) {
-  var curDriversGroup = props.curDriversGroup,
+  var _driversGroupState$dr, _driversGroupState$dr2, _driversGroupState$dr3, _driversGroupState$dr4, _driversGroupState$dr5, _driversGroupState$dr6, _driversGroupState$dr7;
+
+  var driversGroupState = props.driversGroupState,
       changesState = props.changesState,
       handleChangesState = props.handleChangesState,
       handleParentSidebarMove = props.handleParentSidebarMove,
@@ -93,7 +95,7 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
   }, [width, openConfig]);
   (0, _react.useEffect)(function () {
     setOpenConfig(false);
-  }, [curDriversGroup]);
+  }, [(_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.id]);
   return /*#__PURE__*/_react.default.createElement(_styles2.LogisticsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusWrapper, {
     onClick: function onClick() {
       return handleChangesState({
@@ -101,16 +103,16 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.RadioButton, {
-    active: (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 7 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_start_in_status) === 7
-  }, changesState !== null && changesState !== void 0 && changesState.orders_group_start_in_status && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 7 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_start_in_status) === 7 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ACCEPT_BY_BUSINESS', 'Accepted by Business.'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusWrapper, {
+    active: (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 7 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && ((_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.orders_group_start_in_status) === 7
+  }, changesState !== null && changesState !== void 0 && changesState.orders_group_start_in_status && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 7 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && ((_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.orders_group_start_in_status) === 7 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ACCEPT_BY_BUSINESS', 'Accepted by Business.'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusWrapper, {
     onClick: function onClick() {
       return handleChangesState({
         orders_group_start_in_status: 4
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.RadioButton, {
-    active: (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 4 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_start_in_status) === 4
-  }, changesState !== null && changesState !== void 0 && changesState.orders_group_start_in_status && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 4 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_start_in_status) === 4 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("span", null, t('READY_FOR_PICKUP', 'Ready for Pickup'))), /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigsContainer, null, ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.type) === 0) && /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
+    active: (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 4 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && ((_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.orders_group_start_in_status) === 4
+  }, changesState !== null && changesState !== void 0 && changesState.orders_group_start_in_status && (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 4 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_start_in_status) === 'undefined' && ((_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.orders_group_start_in_status) === 4 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("span", null, t('READY_FOR_PICKUP', 'Ready for Pickup'))), /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigsContainer, null, ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr6 = driversGroupState.driversGroup) === null || _driversGroupState$dr6 === void 0 ? void 0 : _driversGroupState$dr6.type) === 0) && /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
     active: showConfig === 'GROUP_ORDERS',
     onClick: function onClick() {
       return handleOpenConfig('GROUP_ORDERS');
@@ -120,7 +122,7 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     onClick: function onClick() {
       return handleOpenConfig('AUTOASSIGN_SETTINGS');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('AUTOASSIGN_SETTINGS', 'Autoassign settings')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.type) === 0) && /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('AUTOASSIGN_SETTINGS', 'Autoassign settings')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr7 = driversGroupState.driversGroup) === null || _driversGroupState$dr7 === void 0 ? void 0 : _driversGroupState$dr7.type) === 0) && /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
     active: showConfig === 'MARK_DRIVER_BUSY',
     onClick: function onClick() {
       return handleOpenConfig('MARK_DRIVER_BUSY');
@@ -130,7 +132,7 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     color: "primary",
     disabled: Object.keys(changesState).length === 0,
     onClick: function onClick() {
-      return handleUpdateDriversGroup(curDriversGroup.id, changesState);
+      return handleUpdateDriversGroup(changesState);
     }
   }, t('SAVE', 'Save')), width >= 1200 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openConfig && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     isBorderShow: true,

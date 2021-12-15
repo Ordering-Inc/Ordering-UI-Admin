@@ -94,7 +94,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setFormTaxState = props.setFormTaxState,
       formTaxState = props.formTaxState,
       taxes = props.taxes,
-      setTaxes = props.setTaxes;
+      setTaxes = props.setTaxes,
+      fees = props.fees,
+      setFees = props.setFees;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -211,6 +213,14 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setBusinessSlug(business === null || business === void 0 ? void 0 : business.slug);
   };
 
+  var onDeleteCategoey = function onDeleteCategoey(categoryId) {
+    var _categoryToEdit$categ;
+
+    if (categoryToEdit.open && ((_categoryToEdit$categ = categoryToEdit.category) === null || _categoryToEdit$categ === void 0 ? void 0 : _categoryToEdit$categ.id) === categoryId) {
+      handleCloseEdit();
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (categoryId) {
       setCategoryToEdit(_objectSpread(_objectSpread({}, categoryToEdit), {}, {
@@ -256,6 +266,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     disabled: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : (_businessState$busine3 = _businessState$busine2.categories) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.length) === 0
   }, t('ADD_PRODUCT', 'Add product')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
+    lazyLoad: true,
     search: searchValue,
     onSearch: handleChangeSearch,
     placeholder: t('SEARCH', 'Search')
@@ -276,7 +287,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categorySelected: categorySelected,
     handleChangeCategory: handleChangeCategory,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    handleOpenCategoryDetails: handleOpenCategoryDetails
+    handleOpenCategoryDetails: handleOpenCategoryDetails,
+    onClose: onDeleteCategoey
   })), /*#__PURE__*/_react.default.createElement(_styles.ActionIconList, null, viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width > 767 ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     borderRadius: "5px",
@@ -321,7 +333,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setFormTaxState: setFormTaxState,
     formTaxState: formTaxState,
     taxes: taxes,
-    setTaxes: setTaxes
+    setTaxes: setTaxes,
+    fees: fees,
+    setFees: setFees
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: width > 1440 ? '40%' : '60%',
     padding: "20px",

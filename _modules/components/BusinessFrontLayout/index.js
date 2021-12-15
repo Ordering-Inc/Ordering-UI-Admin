@@ -15,8 +15,6 @@ var _AiOutlineShoppingCart = _interopRequireDefault(require("@meronex/icons/ai/A
 
 var _BsCardImage = _interopRequireDefault(require("@meronex/icons/bs/BsCardImage"));
 
-var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
-
 var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
@@ -54,6 +52,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessFrontLayout = function BusinessFrontLayout(props) {
+  var _configState$configs, _configState$configs$;
+
   var formState = props.formState,
       handleUpdateBusinessClick = props.handleUpdateBusinessClick,
       business = props.business,
@@ -62,6 +62,12 @@ var BusinessFrontLayout = function BusinessFrontLayout(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
+
+  var useParentCategory = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.use_parent_category) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -99,7 +105,7 @@ var BusinessFrontLayout = function BusinessFrontLayout(props) {
     return /*#__PURE__*/_react.default.createElement(HorzontalProductBoxUI, {
       key: i
     });
-  }))), /*#__PURE__*/_react.default.createElement(_styles.FoodCart, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null))))), /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles.LayoutTitle, null, t('FOOD', 'Food'))), /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxWrapper, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.FoodCart, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null))))), /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles.LayoutTitle, null, t('FOOD', 'Food'))), useParentCategory === '1' && /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxWrapper, {
     onClick: function onClick() {
       return handleChangeLayout('groceries');
     },
@@ -118,24 +124,7 @@ var BusinessFrontLayout = function BusinessFrontLayout(props) {
         key: i
       });
     })));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles.LayoutTitle, null, t('GROCERIES', 'Groceries'))), /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxWrapper, {
-    onClick: function onClick() {
-      return handleChangeLayout('market');
-    },
-    active: selectedOption === 'market'
-  }, /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxContent, null, /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxHeader, null), /*#__PURE__*/_react.default.createElement(_styles.MarketBoxContent, null, /*#__PURE__*/_react.default.createElement(_styles.MarketCartWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.GroceriesCart, null, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null))), /*#__PURE__*/_react.default.createElement(_styles.MarketLogoWrapper, null, /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)), /*#__PURE__*/_react.default.createElement(_styles.GroceriesProductListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MarketCategoryListWrapper, null, _toConsumableArray(Array(6).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.CategoryWrapper, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.CategoryImgWrapper, null, /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)), /*#__PURE__*/_react.default.createElement(_styles.CategoryTitle, null));
-  })), /*#__PURE__*/_react.default.createElement(_styles.MarketProductList, null, _toConsumableArray(Array(3).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.CategoryAndActionWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryImgWrapper, null, /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)), /*#__PURE__*/_react.default.createElement(_styles.CategoryTitle, null)), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))), /*#__PURE__*/_react.default.createElement(_styles.MarketProductListContent, null, _toConsumableArray(Array(5).keys()).map(function (i) {
-      return /*#__PURE__*/_react.default.createElement(VerticalProductBoxUI, {
-        key: i
-      });
-    })));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles.LayoutTitle, null, t('MARKET', 'Market'))))), /*#__PURE__*/_react.default.createElement(_styles.ActionButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles.LayoutTitle, null, t('GROCERIES', 'Groceries'))))), /*#__PURE__*/_react.default.createElement(_styles.ActionButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: handleSaveLayout
   }, t('SAVE', 'Save'))));
@@ -149,12 +138,4 @@ var HorzontalProductBoxUI = function HorzontalProductBoxUI() {
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "short-line"
   }), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null)), /*#__PURE__*/_react.default.createElement(_styles.HorzontalProductImageWrapper, null, /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)));
-};
-
-var VerticalProductBoxUI = function VerticalProductBoxUI() {
-  return /*#__PURE__*/_react.default.createElement(_styles.VerticalProductBox, null, /*#__PURE__*/_react.default.createElement(_styles.VerticalProductImageWrapper, null, /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)), /*#__PURE__*/_react.default.createElement(_styles.VerticalProductInfoList, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "title"
-  }), /*#__PURE__*/_react.default.createElement("div", {
-    className: "short-line"
-  }), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null)));
 };

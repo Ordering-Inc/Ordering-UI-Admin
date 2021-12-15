@@ -154,6 +154,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     ref: dropdownReference
   }, /*#__PURE__*/_react.default.createElement(_styles.SelectHeaderContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
+    lazyLoad: true,
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

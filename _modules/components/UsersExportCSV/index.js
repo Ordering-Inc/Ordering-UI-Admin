@@ -52,20 +52,22 @@ var UsersExportCSVUI = function UsersExportCSVUI(props) {
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       popoverOpen = _useState2[0],
-      setPopoverOpen = _useState2[1];
+      setPopoverOpen = _useState2[1]; // const handleExportAll = () => {
+  //   setPopoverOpen(false)
+  //   getCSV(false)
+  // }
+  // const handleExportFiltered = () => {
+  //   setPopoverOpen(false)
+  //   getCSV(true)
+  // }
 
-  var handleExportAll = function handleExportAll() {
-    setPopoverOpen(false);
-    getCSV(false);
-  };
-
-  var handleExportFiltered = function handleExportFiltered() {
-    setPopoverOpen(false);
-    getCSV(true);
-  };
 
   var closePopover = function closePopover() {
     setPopoverOpen(false);
+  };
+
+  var handleCSV = function handleCSV() {
+    getCSV(false);
   };
 
   (0, _react.useEffect)(function () {
@@ -80,17 +82,9 @@ var UsersExportCSVUI = function UsersExportCSVUI(props) {
     color: "secundary",
     disabled: actionStatus.loading,
     onClick: function onClick() {
-      return setPopoverOpen(!popoverOpen);
+      return handleCSV();
     }
-  }, t('CSV', 'CSV'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null)), popoverOpen && /*#__PURE__*/_react.default.createElement(_styles.PopoverContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Item, {
-    onClick: function onClick() {
-      return handleExportAll();
-    }
-  }, t('EXPROT_ALL', 'Export all')), /*#__PURE__*/_react.default.createElement(_styles.Item, {
-    onClick: function onClick() {
-      return handleExportFiltered();
-    }
-  }, t('EXPROT_FILTERED', 'Export filtered'))), actionStatus.loading && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+  }, t('CSV', 'CSV'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null)), actionStatus.loading && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     primary: true
   })));
 };

@@ -192,6 +192,7 @@ var WebhookListUI = function WebhookListUI(props) {
     }
   }, t('ADD_WEBHOOK', 'Add webhook'))), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
+    lazyLoad: true,
     placeholder: t('SEARCH', 'Search'),
     search: searchValue,
     onSearch: function onSearch(val) {

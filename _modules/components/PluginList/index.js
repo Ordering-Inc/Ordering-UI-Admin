@@ -190,6 +190,7 @@ var PluginListUI = function PluginListUI(props) {
     }
   }, t('ADD_PLUGIN', 'Add plugin'))), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
+    lazyLoad: true,
     placeholder: t('SEARCH', 'Search'),
     search: searchValue,
     onSearch: function onSearch(val) {

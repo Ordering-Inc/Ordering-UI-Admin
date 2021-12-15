@@ -82,7 +82,8 @@ var AddressListUI = function AddressListUI(props) {
       isEnableContinueButton = props.isEnableContinueButton,
       setCustomerModalOpen = props.setCustomerModalOpen,
       setExtraOpen = props.setExtraOpen,
-      handleSuccessAddressesUpdate = props.handleSuccessAddressesUpdate;
+      userState = props.userState,
+      handleSuccessUpdate = props.handleSuccessUpdate;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -151,10 +152,17 @@ var AddressListUI = function AddressListUI(props) {
       addresses.push(address);
     }
 
-    handleSuccessAddressesUpdate && handleSuccessAddressesUpdate(userId, addresses);
     setAddressList(_objectSpread(_objectSpread({}, addressList), {}, {
       addresses: addresses
     }));
+
+    if (handleSuccessUpdate) {
+      var updatedUser = _objectSpread(_objectSpread({}, userState.user), {}, {
+        addresses: addresses
+      });
+
+      handleSuccessUpdate(updatedUser);
+    }
 
     if (userCustomerSetup) {
       handleSetAddress(address);
@@ -294,7 +302,7 @@ var AddressListUI = function AddressListUI(props) {
       className: "radio"
     }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
       className: "tag"
-    }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.SuitHeart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
+    }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.SuitHeart, null), ((address === null || address === void 0 ? void 0 : address.tag) === 'other' || !(address !== null && address !== void 0 && address.tag)) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
     }, /*#__PURE__*/_react.default.createElement("span", null, address.address))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
       className: "form"

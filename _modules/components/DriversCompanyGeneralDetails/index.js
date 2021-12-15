@@ -64,12 +64,15 @@ var DriversCompanyGeneralDetails = function DriversCompanyGeneralDetails(props) 
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var timezonesOptions = _constants.timezones.map(function (timezone) {
-    return {
-      value: timezone,
-      content: timezone
-    };
-  });
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      timezoneSearchValue = _useState4[0],
+      setTimezoneSearchValue = _useState4[1];
+
+  var _useState5 = (0, _react.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      timezonesOptions = _useState6[0],
+      setTimezonesOptions = _useState6[1];
 
   var priorityOptions = [{
     value: -1,
@@ -107,6 +110,18 @@ var DriversCompanyGeneralDetails = function DriversCompanyGeneralDetails(props) 
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    var _timezonesOptions = _constants.timezones.filter(function (timezone) {
+      return timezone.toLocaleLowerCase().includes(timezoneSearchValue.toLocaleLowerCase());
+    }).map(function (timezone) {
+      return {
+        value: timezone,
+        content: timezone
+      };
+    });
+
+    setTimezonesOptions(_timezonesOptions);
+  }, [timezoneSearchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles2.GroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -127,7 +142,12 @@ var DriversCompanyGeneralDetails = function DriversCompanyGeneralDetails(props) 
       return handleChangesState('limit', e.target.value);
     },
     placeholder: t('LIMIT', 'Limit'),
-    autoComplete: "off"
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.GroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_PRIORITY', 'Select priority'),
     defaultValue: (_changesState$priorit = changesState === null || changesState === void 0 ? void 0 : changesState.priority) !== null && _changesState$priorit !== void 0 ? _changesState$priorit : driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.priority,
@@ -135,14 +155,20 @@ var DriversCompanyGeneralDetails = function DriversCompanyGeneralDetails(props) 
     onChange: function onChange(val) {
       return handleChangesState('priority', val);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TIMEZONE', 'Timezone')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+    isTimezone: true
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('TIMEZONE', 'Timezone')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_TIMEZONE', 'Select a timezone'),
     defaultValue: (_changesState$timezon = changesState === null || changesState === void 0 ? void 0 : changesState.timezone) !== null && _changesState$timezon !== void 0 ? _changesState$timezon : driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.timezone,
     options: timezonesOptions,
     onChange: function onChange(val) {
       return handleChangesState('timezone', val);
     },
-    optionInnerMaxHeight: "60vh"
+    optionInnerMaxHeight: "60vh",
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchValue: timezoneSearchValue,
+    handleChangeSearch: setTimezoneSearchValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "address",
     value: (_ref3 = (_changesState$address = changesState === null || changesState === void 0 ? void 0 : changesState.address) !== null && _changesState$address !== void 0 ? _changesState$address : driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.address) !== null && _ref3 !== void 0 ? _ref3 : '',

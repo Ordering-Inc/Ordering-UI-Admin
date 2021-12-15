@@ -21,6 +21,12 @@ var _DriversCompanyScheduleDetails = require("../DriversCompanyScheduleDetails")
 
 var _DriversCompanyWebhooksDetails = require("../DriversCompanyWebhooksDetails");
 
+var _reactBootstrap = require("react-bootstrap");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styledComponents = require("styled-components");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -51,11 +57,14 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
   var driversCompany = props.driversCompany,
       changesState = props.changesState,
       actionState = props.actionState,
-      cleanActionState = props.cleanActionState;
+      cleanActionState = props.cleanActionState,
+      handleDeleteDriversCompany = props.handleDeleteDriversCompany;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)('general'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -69,6 +78,15 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       alertState = _useState4[0],
       setAlertState = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
 
   var tabItems = [{
     key: 'general',
@@ -89,6 +107,19 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
     });
   };
 
+  var onDeleteCompany = function onDeleteCompany() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_DRIVER_COMPANY', 'Are you sure to remove this driver company?'),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeleteDriversCompany();
+      }
+    });
+  };
+
   (0, _react.useEffect)(function () {
     if (!actionState.loading && actionState.error) {
       setAlertState({
@@ -97,7 +128,15 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
       });
     }
   }, [actionState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, driversCompany ? (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.name) !== null && _ref !== void 0 ? _ref : '' : t('DRIVER_COMPANY_SETTINGS', 'Driver company settings'))), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, tabItems.map(function (item) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, driversCompany ? (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.name) !== null && _ref !== void 0 ? _ref : '' : t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')), driversCompany && /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return onDeleteCompany();
+    }
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, tabItems.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: item.key,
       active: item.key === currentTabItem,
@@ -116,6 +155,23 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
     onAccept: function onAccept() {
       return closeAlert();
     },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
 };

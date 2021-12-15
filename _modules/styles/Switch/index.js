@@ -31,7 +31,8 @@ var Switch = function Switch(props) {
   var defaultChecked = props.defaultChecked,
       disabled = props.disabled,
       onChange = props.onChange,
-      className = props.className;
+      className = props.className,
+      notAsync = props.notAsync;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -43,7 +44,10 @@ var Switch = function Switch(props) {
   }, [defaultChecked]);
 
   var handleCheckBoxChange = function handleCheckBoxChange(evt) {
-    setChecked(evt.target.checked);
+    if (!notAsync) {
+      setChecked(evt.target.checked);
+    }
+
     onChange && onChange(evt.target.checked);
   };
 

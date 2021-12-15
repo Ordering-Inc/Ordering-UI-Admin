@@ -119,6 +119,7 @@ var EnterprisePromontionListingUI = function EnterprisePromontionListingUI(props
       return handleOpenDetails({});
     }
   }, t('ADD_PROMOTION_ENTERPRISE', 'Add promotion enterprise')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

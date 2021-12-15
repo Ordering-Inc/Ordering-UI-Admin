@@ -13,6 +13,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _EditTaxManager = require("../EditTaxManager");
+
 var _Inputs = require("../../styles/Inputs");
 
 var _Checkbox = require("../../styles/Checkbox");
@@ -24,8 +26,6 @@ var _styles = require("./styles");
 var _FirstSelect = require("../../styles/Select/FirstSelect");
 
 var _Modal = require("../Modal");
-
-var _Buttons = require("../../styles/Buttons");
 
 var _Confirm = require("../Confirm");
 
@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductPropertiesUI = function ProductPropertiesUI(props) {
-  var _ref2, _formTaxChanges$name, _ref3, _formTaxChanges$descr, _ref4, _formTaxChanges$rate, _formTaxChanges$type, _taxToEdit$type;
+  var _taxSelected$value, _fesSelected$value;
 
   var productState = props.productState,
       handleClickProperty = props.handleClickProperty,
@@ -80,8 +80,7 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       handleDeleteTax = props.handleDeleteTax,
       setAlertState = props.setAlertState,
       alertState = props.alertState,
-      formState = props.formState,
-      handleUpdateClick = props.handleUpdateClick;
+      fees = props.fees;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -91,6 +90,10 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
+
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
 
   var _useState = (0, _react.useState)(productState === null || productState === void 0 ? void 0 : productState.inventoried),
       _useState2 = _slicedToArray(_useState, 2),
@@ -102,15 +105,28 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       taxesOption = _useState4[0],
       setTaxesOption = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      taxSelected = _useState6[0],
-      setTaxSelected = _useState6[1];
+      feesOptions = _useState6[0],
+      setFeesOptions = _useState6[1];
 
   var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      taxToDelete = _useState8[0],
-      setTaxToDelete = _useState8[1];
+      fesSelected = _useState8[0],
+      setFeeSelected = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      taxSelected = _useState10[0],
+      setTaxSelected = _useState10[1];
+
+  var _useState11 = (0, _react.useState)({
+    action: null,
+    id: null
+  }),
+      _useState12 = _slicedToArray(_useState11, 2),
+      taxToDelete = _useState12[0],
+      setTaxToDelete = _useState12[1];
 
   var estimatedPersons = [{
     value: null,
@@ -121,6 +137,10 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, i + 1)
     };
   })));
+
+  var getTaxOrFeeString = function getTaxOrFeeString(string) {
+    return string === 'taxes' ? 'tax' : 'fee';
+  };
 
   var handleClickStock = function handleClickStock(e) {
     handleClickProperty('inventoried', e.target.checked);
@@ -136,13 +156,12 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
     if (value === '') handleClickProperty('quantity', productState === null || productState === void 0 ? void 0 : productState.quantity);else handleClickProperty('quantity', value);
   };
 
-  var handleChangeInput = function handleChangeInput(event) {
-    if (event.target.value === '') handleClickProperty(event.target.name, productState[event.target.name]);else handleClickProperty(event.target.name, event.target.value);
-  };
-
-  var handleAddTax = function handleAddTax() {
-    setTaxToEdit(true);
-    handleChangeTax('type', 1);
+  var handleAddTax = function handleAddTax(action) {
+    setTaxToEdit({
+      action: action,
+      payload: true
+    });
+    if (action === 'taxes') handleChangeTax('type', 1);
   };
 
   var closeAlert = function closeAlert() {
@@ -150,7 +169,10 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       open: false,
       content: []
     });
-    setTaxToDelete(null);
+    setTaxToDelete({
+      action: null,
+      payload: null
+    });
   };
 
   var getTaxes = /*#__PURE__*/function () {
@@ -171,7 +193,7 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
                 value: null,
                 content: /*#__PURE__*/_react.default.createElement(_styles.OptionCenter, {
                   onClick: function onClick() {
-                    return handleAddTax();
+                    return handleAddTax('taxes');
                   }
                 }, t('ADD_NEW_TAX', 'Add new tax'))
               };
@@ -206,21 +228,57 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
     };
   }();
 
-  var deleteTax = function deleteTax(id) {
-    handleDeleteTax(id);
+  var getFees = function getFees() {
+    var inheritOption = {
+      name: t('INHERIT_FROM_BUSINESS', 'Inherit from business'),
+      value: 'inherit',
+      content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('INHERIT_FROM_BUSINESS', 'Inherit from business'), " (0$ + ", business.service_fee, "%)"),
+      showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('INHERIT_FROM_BUSINESS', 'Inherit from business'), " (0$ + ", business.service_fee, "%)")
+    };
+    var addFeeOption = {
+      name: t('ADD_NEW_FEE', 'Add new fee'),
+      value: null,
+      content: /*#__PURE__*/_react.default.createElement(_styles.OptionCenter, {
+        onClick: function onClick() {
+          return handleAddTax('fees');
+        }
+      }, t('ADD_NEW_FEE', 'Add new fee'))
+    };
+    var feesOptions = [inheritOption].concat(_toConsumableArray(Object.values(fees).map(function (fee) {
+      return {
+        value: fee.id,
+        name: fee.name,
+        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, fee.name, " (", parsePrice(fee.fixed), " + ", fee.percentage, "%)"),
+        showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, fee.name, " (", parsePrice(fee.fixed), " + ", fee.percentage, "%)"),
+        editFunctionality: (user === null || user === void 0 ? void 0 : user.level) === 0,
+        deleteFunctionality: (user === null || user === void 0 ? void 0 : user.level) === 0,
+        fixed: fee.fixed,
+        percentage: fee.percentage,
+        description: fee.description
+      };
+    })), [addFeeOption]);
+    setFeesOptions(feesOptions);
+    setFeeSelected(feesOptions.find(function (fee) {
+      return fee.value === (productState === null || productState === void 0 ? void 0 : productState.fee_id);
+    }) || inheritOption);
+  };
+
+  var deleteTax = function deleteTax(data) {
+    handleDeleteTax(data.id, data.action);
     closeAlert();
   };
 
   (0, _react.useEffect)(function () {
-    if (taxes) {
-      getTaxes();
-    }
+    if (taxes) getTaxes();
   }, [JSON.stringify(taxes)]);
   (0, _react.useEffect)(function () {
-    if (taxToDelete) {
+    if (fees) getFees();
+  }, [JSON.stringify(fees)]);
+  (0, _react.useEffect)(function () {
+    if (taxToDelete.action) {
       setAlertState({
         open: true,
-        content: t('ARE_YOUR_SURE_DELETE_TAX', 'Are you sure do you want delete this tax?')
+        content: t("ARE_YOUR_SURE_DELETE_".concat(getTaxOrFeeString(taxToDelete.action).toUpperCase()), "Are you sure do you want delete this ".concat(getTaxOrFeeString(taxToDelete.action), "?"))
       });
     }
   }, [taxToDelete]);
@@ -281,98 +339,81 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
 
       return handleClickProperty('sku', (_e$target$value = e.target.value) !== null && _e$target$value !== void 0 ? _e$target$value : null);
     }
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    borderRadius: "8px",
-    color: "primary",
-    disabled: Object.keys(formState.changes).length === 0 || formState.loading,
-    onClick: function onClick() {
-      return handleUpdateClick();
+  }), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
+    htmlFor: "estimated"
+  }, t('ESTIMATED_PERSON', 'Estimated person')), /*#__PURE__*/_react.default.createElement(_styles.TypeSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    defaultValue: (productState === null || productState === void 0 ? void 0 : productState.estimated_person) || null,
+    options: estimatedPersons,
+    onChange: function onChange(val) {
+      return handleClickProperty('estimated_person', val);
     }
-  }, t('SAVE', 'Save')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: !!taxToEdit,
+  })), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
+    htmlFor: "tax"
+  }, t('TAX', 'Tax')), /*#__PURE__*/_react.default.createElement(_styles.TypeSelectWrapper, null, taxSelected && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    placeholder: taxSelected.showOnSelected,
+    defaultValue: (_taxSelected$value = taxSelected === null || taxSelected === void 0 ? void 0 : taxSelected.value) !== null && _taxSelected$value !== void 0 ? _taxSelected$value : 'inherit',
+    options: taxesOption,
+    onChange: function onChange(val) {
+      return handleClickProperty('tax_id', val === 'inherit' ? null : val);
+    },
+    onEdit: function onEdit(val) {
+      return setTaxToEdit({
+        action: 'taxes',
+        payload: val
+      });
+    },
+    onDelete: function onDelete(val) {
+      return setTaxToDelete({
+        action: 'taxes',
+        id: val
+      });
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
+    htmlFor: "fees"
+  }, t('FEES', 'Fees')), /*#__PURE__*/_react.default.createElement(_styles.TypeSelectWrapper, null, fesSelected && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    placeholder: fesSelected.showOnSelected,
+    defaultValue: (_fesSelected$value = fesSelected === null || fesSelected === void 0 ? void 0 : fesSelected.value) !== null && _fesSelected$value !== void 0 ? _fesSelected$value : 'inherit',
+    options: feesOptions,
+    onChange: function onChange(val) {
+      return handleClickProperty('fee_id', val === 'inherit' ? null : val);
+    },
+    onEdit: function onEdit(val) {
+      return setTaxToEdit({
+        action: 'fees',
+        payload: val
+      });
+    },
+    onDelete: function onDelete(val) {
+      return setTaxToDelete({
+        action: 'fees',
+        id: val
+      });
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: !!(taxToEdit !== null && taxToEdit !== void 0 && taxToEdit.action),
     width: "80%",
     padding: "30px",
-    title: typeof taxToEdit === 'boolean' ? t('ADD_TAX', 'Add tax') : t('EDIT_TAX', 'Edit tax'),
+    title: typeof (taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.payload) === 'boolean' ? t("ADD_".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action).toUpperCase()), "Add ".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action))) : t("EDIT_".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action).toUpperCase()), "Edit ".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action))),
     onClose: function onClose() {
-      return setTaxToEdit(null);
+      return setTaxToEdit({
+        action: null,
+        payload: null
+      });
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.EditTaxContainer, {
-    onSubmit: formMethods.handleSubmit(function () {
-      return handleSaveTax(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.value);
-    })
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "name"
-  }, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    name: "name",
-    id: "name",
-    placeholder: t('NAME', 'Name'),
-    defaultValue: (_ref2 = (_formTaxChanges$name = formTaxChanges === null || formTaxChanges === void 0 ? void 0 : formTaxChanges.name) !== null && _formTaxChanges$name !== void 0 ? _formTaxChanges$name : taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.name) !== null && _ref2 !== void 0 ? _ref2 : '',
-    onChange: function onChange(e) {
-      return handleChangeTax('name', e.target.value);
+  }, /*#__PURE__*/_react.default.createElement(_EditTaxManager.EditTaxManager, {
+    type: taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action,
+    data: taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.payload,
+    onChange: handleChangeTax,
+    formChanges: formTaxChanges,
+    onClose: function onClose() {
+      return setTaxToEdit({
+        action: null,
+        payload: null
+      });
     },
-    ref: formMethods.register({
-      required: t('TAX_NAME_REQUIRED', 'Tax name is required')
-    })
-  })), /*#__PURE__*/_react.default.createElement(_styles.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "description"
-  }, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    name: "description",
-    id: "description",
-    placeholder: t('DESCRIPTION', 'Description'),
-    defaultValue: (_ref3 = (_formTaxChanges$descr = formTaxChanges === null || formTaxChanges === void 0 ? void 0 : formTaxChanges.description) !== null && _formTaxChanges$descr !== void 0 ? _formTaxChanges$descr : taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.description) !== null && _ref3 !== void 0 ? _ref3 : '',
-    onChange: function onChange(e) {
-      return handleChangeTax('description', e.target.value);
-    },
-    ref: formMethods.register({
-      required: t('TAX_DESCRIPTION_REQUIRED', 'Tax description is required')
-    })
-  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "rate"
-  }, t('RATE', 'Rate')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    name: "rate",
-    id: "rate",
-    placeholder: "0.00%",
-    defaultValue: (_ref4 = (_formTaxChanges$rate = formTaxChanges === null || formTaxChanges === void 0 ? void 0 : formTaxChanges.rate) !== null && _formTaxChanges$rate !== void 0 ? _formTaxChanges$rate : taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.rate) !== null && _ref4 !== void 0 ? _ref4 : '',
-    onChange: function onChange(e) {
-      return handleChangeTax('rate', e.target.value);
-    },
-    ref: formMethods.register({
-      required: t('TAX_RATE_REQUIRED', 'Tax rate is required'),
-      pattern: {
-        value: /^-?\d+\.?\d*$/,
-        message: t('ERROR_TAX_ID_INTEGER', 'The tax id must be an integer.')
-      }
-    })
-  })), /*#__PURE__*/_react.default.createElement(_styles.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
-    htmlFor: "type"
-  }, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_styles.TypeSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    notAsync: true,
-    placeholder: (_formTaxChanges$type = formTaxChanges === null || formTaxChanges === void 0 ? void 0 : formTaxChanges.type) !== null && _formTaxChanges$type !== void 0 ? _formTaxChanges$type : taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.type,
-    defaultValue: (_taxToEdit$type = taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.type) !== null && _taxToEdit$type !== void 0 ? _taxToEdit$type : 1,
-    options: [{
-      value: 1,
-      content: t('INCLUDED_ON_PRICE', 'Included on price'),
-      showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('INCLUDED_ON_PRICE', 'Included on price'))
-    }, {
-      value: 2,
-      content: t('NOT_INCLUDED_ON_PRICE', 'Not included on price'),
-      showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('NOT_INCLUDED_ON_PRICE', 'Not included on price'))
-    }],
-    onChange: function onChange(val) {
-      return handleChangeTax('type', val);
-    }
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    type: "submit",
-    color: "primary",
-    borderRadius: "8px"
-  }, t('ACCEPT', 'Accept')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secundaryDark",
-    borderRadius: "8px",
-    onClick: function onClick() {
-      return setTaxToEdit(null);
-    }
-  }, t('CLOSE', 'Close'))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: taxToDelete ? t('DELETE_TAX', 'Delete Tax') : t('ERROR'),
+    handleSave: handleSaveTax
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: taxToDelete.action ? t("DELETE_".concat(getTaxOrFeeString(taxToDelete === null || taxToDelete === void 0 ? void 0 : taxToDelete.action).toUpperCase()), "Delete ".concat(getTaxOrFeeString(taxToDelete === null || taxToDelete === void 0 ? void 0 : taxToDelete.action))) : t('ERROR'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -380,7 +421,7 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       return closeAlert();
     },
     onAccept: function onAccept() {
-      return taxToDelete ? deleteTax(taxToDelete) : closeAlert();
+      return taxToDelete.action ? deleteTax(taxToDelete) : closeAlert();
     },
     closeOnBackdrop: false
   }));

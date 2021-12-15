@@ -19,6 +19,8 @@ var _Buttons = require("../../Buttons");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _SearchBar = require("../../../components/SearchBar");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -47,7 +49,12 @@ var Select = function Select(props) {
       noSelected = props.noSelected,
       className = props.className,
       onEdit = props.onEdit,
-      onDelete = props.onDelete;
+      onDelete = props.onDelete,
+      isShowSearchBar = props.isShowSearchBar,
+      searchValue = props.searchValue,
+      handleChangeSearch = props.handleChangeSearch,
+      searchBarIsCustomLayout = props.searchBarIsCustomLayout,
+      searchBarPlaceholder = props.searchBarPlaceholder;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -104,7 +111,14 @@ var Select = function Select(props) {
         return option.value === defaultValue;
       });
 
-      setSelectedOption(_defaultOption);
+      if (isShowSearchBar) {
+        if (_defaultOption) {
+          setSelectedOption(_defaultOption);
+        }
+      } else {
+        setSelectedOption(_defaultOption);
+      }
+
       setValue(defaultValue);
     }
   }, [defaultValue, options]);
@@ -119,6 +133,10 @@ var Select = function Select(props) {
     }
 
     onChange && onChange(option.value);
+
+    if (isShowSearchBar) {
+      handleChangeSearch('');
+    }
   };
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
@@ -126,14 +144,25 @@ var Select = function Select(props) {
     className: className || 'select'
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
     onClick: handleSelectClick
-  }, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
+  }, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, {
+    className: "select-arrow"
+  }, /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
     onClick: handleSelectClick
   }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     className: "list",
     isAbsolute: true,
     position: "right",
     ref: dropdownReference
-  }, /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
+  }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
+    className: "search-bar-container"
+  }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
+    isCustomLayout: searchBarIsCustomLayout,
+    search: searchValue,
+    onSearch: handleChangeSearch,
+    placeholder: searchBarPlaceholder || ''
+  })), /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
+    className: "list-wrapper",
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
   }, options.map(function (option, i) {

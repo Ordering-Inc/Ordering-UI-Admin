@@ -17,8 +17,6 @@ var _Checkbox = require("../../styles/Checkbox");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _reactToastify = require("react-toastify");
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -57,6 +55,10 @@ var InvoicePayMethods = function InvoicePayMethods(props) {
   var payMethodsList = props.payMethodsList,
       handleChangePayMethods = props.handleChangePayMethods;
 
+  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
+      _useToast2 = _slicedToArray(_useToast, 2),
+      showToast = _useToast2[1].showToast;
+
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -68,18 +70,7 @@ var InvoicePayMethods = function InvoicePayMethods(props) {
 
   var saveFormData = function saveFormData() {
     handleChangePayMethods(checkBoxList);
-    var toastConfigure = {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    };
-    var content = t('INVOICE_DATA_SAVED', 'Invoice data saved');
-
-    _reactToastify.toast.dark(content, toastConfigure);
+    showToast(_orderingComponentsAdmin.ToastType.Success, t('INVOICE_DATA_SAVED', 'Invoice data saved'));
   };
 
   var handleChangeCheckBox = function handleChangeCheckBox(id, checked) {

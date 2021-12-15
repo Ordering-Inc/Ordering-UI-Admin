@@ -345,10 +345,10 @@ Object.defineProperty(exports, "LoginForm", {
     return _LoginForm.LoginForm;
   }
 });
-Object.defineProperty(exports, "LogisticInformation", {
+Object.defineProperty(exports, "OrderLogisticInformation", {
   enumerable: true,
   get: function get() {
-    return _LogisticInformation.LogisticInformation;
+    return _OrderLogisticInformation.OrderLogisticInformation;
   }
 });
 Object.defineProperty(exports, "Logistics", {
@@ -1010,7 +1010,7 @@ var _Layout = require("./components/Layout");
 
 var _LoginForm = require("./components/LoginForm");
 
-var _LogisticInformation = require("./components/LogisticInformation");
+var _OrderLogisticInformation = require("./components/OrderLogisticInformation");
 
 var _Logistics = require("./components/Logistics");
 

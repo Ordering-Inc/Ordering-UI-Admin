@@ -58,8 +58,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       isDriversManagersPage = props.isDriversManagersPage,
       userState = props.userState,
       setExtraOpen = props.setExtraOpen,
-      handleSuccessUpdate = props.handleSuccessUpdate,
-      handleSuccessAddressesUpdate = props.handleSuccessAddressesUpdate;
+      handleSuccessUserUpdate = props.handleSuccessUserUpdate;
 
   var _useState = (0, _react.useState)('profile'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -79,13 +78,14 @@ var UserDetailsUI = function UserDetailsUI(props) {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,
     user: userState.user,
-    handleSuccessUpdate: handleSuccessUpdate
+    handleSuccessUpdate: handleSuccessUserUpdate
   }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 ? void 0 : (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.addresses) && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isSeletectedUserAddresses: true,
     userId: (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.id,
     addresses: (_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.addresses,
     setExtraOpen: setExtraOpen,
-    handleSuccessAddressesUpdate: handleSuccessAddressesUpdate
+    userState: userState,
+    handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
     customerId: (_userState$user6 = userState.user) === null || _userState$user6 === void 0 ? void 0 : _userState$user6.id,

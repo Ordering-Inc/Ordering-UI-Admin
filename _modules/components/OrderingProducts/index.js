@@ -246,6 +246,7 @@ var OrderingProducts = function OrderingProducts(props) {
       return handleEditProduct();
     }
   }, t('ADD_PRODUCT', 'Add product')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     search: searchValue,
     onSearch: function onSearch(value) {
       return setSearchValue(value);

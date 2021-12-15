@@ -71,6 +71,7 @@ var LanguageManagerUI = function LanguageManagerUI(props) {
       return handleMenuCollapse(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LANGUAGE_MANAGER', 'Language Manager'))), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
     search: searchValue,
     onSearch: function onSearch(value) {
       return _onSearch(value);

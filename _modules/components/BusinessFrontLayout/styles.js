@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ActionButtonWrapper = exports.MarketCategoryListWrapper = exports.MarketProductList = exports.MarketCartWrapper = exports.ButtonWrapper = exports.CategoryAndActionWrapper = exports.MarketProductListContent = exports.VerticalProductImageWrapper = exports.VerticalProductBox = exports.MarketLogoWrapper = exports.MarketBoxContent = exports.GroceriesProductListContent = exports.GroceriesCategoryListWrapper = exports.GroceriesProductListWrapper = exports.GroceriesCart = exports.GroceriesCartWrapper = exports.GroceriesBoxContent = exports.VerticalProductInfoList = exports.HorzontalProductInfoList = exports.HorzontalProductImageWrapper = exports.HorzontalProductBox = exports.FoodProductListContent = exports.CategoryTitle = exports.CategoryImgWrapper = exports.CategoryWrapper = exports.FoodCategoryList = exports.FoodCart = exports.FoodProductList = exports.FoodProductListWrapper = exports.LogoWrapper = exports.BusinessImgBox = exports.BusinessImgBoxWrapper = exports.HeaderBoldLine = exports.HeaderLine = exports.FoodHeader = exports.FoodBoxContent = exports.LayoutTitle = exports.LayoutBoxContent = exports.LayoutBoxHeader = exports.LayoutBoxFooter = exports.LayoutBoxWrapper = exports.LayoutContentWrappper = exports.Title = exports.BusinessFrontLayoutContainer = void 0;
+exports.ActionButtonWrapper = exports.ButtonWrapper = exports.CategoryAndActionWrapper = exports.VerticalProductImageWrapper = exports.VerticalProductBox = exports.GroceriesProductListContent = exports.GroceriesCategoryListWrapper = exports.GroceriesProductListWrapper = exports.GroceriesCart = exports.GroceriesCartWrapper = exports.GroceriesBoxContent = exports.HorzontalProductInfoList = exports.HorzontalProductImageWrapper = exports.HorzontalProductBox = exports.FoodProductListContent = exports.CategoryTitle = exports.CategoryImgWrapper = exports.CategoryWrapper = exports.FoodCategoryList = exports.FoodCart = exports.FoodProductList = exports.FoodProductListWrapper = exports.LogoWrapper = exports.BusinessImgBox = exports.BusinessImgBoxWrapper = exports.HeaderBoldLine = exports.HeaderLine = exports.FoodHeader = exports.FoodBoxContent = exports.LayoutTitle = exports.LayoutBoxContent = exports.LayoutBoxHeader = exports.LayoutBoxFooter = exports.LayoutBoxWrapper = exports.LayoutContentWrappper = exports.Title = exports.BusinessFrontLayoutContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -175,18 +175,16 @@ var HorzontalProductInfoList = _styledComponents.default.div(_templateObject34 |
 });
 
 exports.HorzontalProductInfoList = HorzontalProductInfoList;
-var VerticalProductInfoList = (0, _styledComponents.default)(HorzontalProductInfoList)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
-exports.VerticalProductInfoList = VerticalProductInfoList;
-var GroceriesBoxContent = (0, _styledComponents.default)(FoodBoxContent)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral([""])));
+var GroceriesBoxContent = (0, _styledComponents.default)(FoodBoxContent)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral([""])));
 exports.GroceriesBoxContent = GroceriesBoxContent;
 
-var GroceriesCartWrapper = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: -3px;\n  right: 3px;\n\n  ", "\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n    left: 3px;\n    right: initial;\n  "])));
+var GroceriesCartWrapper = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: -3px;\n  right: 3px;\n\n  ", "\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    left: 3px;\n    right: initial;\n  "])));
 });
 
 exports.GroceriesCartWrapper = GroceriesCartWrapper;
 
-var GroceriesCart = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 55px;\n  height: 56px;\n  background: ", ";\n  border: 0.5px solid ", ";\n  box-sizing: border-box;\n  border-radius: 2px;\n\n  > svg {\n    width: 6px;\n    height: 6px;\n    color: ", ";\n  }\n"])), function (props) {
+var GroceriesCart = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 55px;\n  height: 56px;\n  background: ", ";\n  border: 0.5px solid ", ";\n  box-sizing: border-box;\n  border-radius: 2px;\n\n  > svg {\n    width: 6px;\n    height: 6px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.btnSecondaryContrast;
 }, function (props) {
   return props.theme.colors.borderColor;
@@ -196,39 +194,27 @@ var GroceriesCart = _styledComponents.default.div(_templateObject39 || (_templat
 
 exports.GroceriesCart = GroceriesCart;
 
-var GroceriesProductListWrapper = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
+var GroceriesProductListWrapper = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 
 exports.GroceriesProductListWrapper = GroceriesProductListWrapper;
 
-var GroceriesCategoryListWrapper = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral([""])));
+var GroceriesCategoryListWrapper = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral([""])));
 
 exports.GroceriesCategoryListWrapper = GroceriesCategoryListWrapper;
-var GroceriesProductListContent = (0, _styledComponents.default)(FoodProductListContent)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  > div {\n    width: calc(33.3% - 8px);\n  }\n"])));
+var GroceriesProductListContent = (0, _styledComponents.default)(FoodProductListContent)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  > div {\n    width: calc(33.3% - 8px);\n  }\n"])));
 exports.GroceriesProductListContent = GroceriesProductListContent;
-var MarketBoxContent = (0, _styledComponents.default)(FoodBoxContent)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: relative;\n"])));
-exports.MarketBoxContent = MarketBoxContent;
 
-var MarketLogoWrapper = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  max-width: 18px;\n  max-height: 18px;\n  height: 18px;\n  width: 18px;\n  border: 1px solid #DEE2E6;\n  box-sizing: border-box;\n  border-radius: 1px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-left: 4px;\n  margin-bottom: 8px;\n\n  ", "\n\n  > svg {\n    width: 9px;\n    height: 8px;\n    color: #ADB5BD;\n  }\n"])), function (props) {
-  var _props$theme3;
-
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 4px;\n  "])));
-});
-
-exports.MarketLogoWrapper = MarketLogoWrapper;
-
-var VerticalProductBox = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 4px;\n"])));
+var VerticalProductBox = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 4px;\n"])));
 
 exports.VerticalProductBox = VerticalProductBox;
-var VerticalProductImageWrapper = (0, _styledComponents.default)(HorzontalProductImageWrapper)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  margin: 0 0 4px 0;\n  width: 23px;\n  height: 23px;\n  min-width: 23px;\n"])));
+var VerticalProductImageWrapper = (0, _styledComponents.default)(HorzontalProductImageWrapper)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  margin: 0 0 4px 0;\n  width: 23px;\n  height: 23px;\n  min-width: 23px;\n"])));
 exports.VerticalProductImageWrapper = VerticalProductImageWrapper;
-var MarketProductListContent = (0, _styledComponents.default)(FoodProductListContent)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  > div {\n    width: calc(20% - 8px);\n  }\n"])));
-exports.MarketProductListContent = MarketProductListContent;
 
-var CategoryAndActionWrapper = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n"])));
+var CategoryAndActionWrapper = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n"])));
 
 exports.CategoryAndActionWrapper = CategoryAndActionWrapper;
 
-var ButtonWrapper = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border: 0.5px solid ", ";\n  box-sizing: border-box;\n  border-radius: 2px;\n  width: 12px;\n  height: 8px;\n\n  svg {\n    width: 5px;\n    color: ", ";\n  }\n"])), function (props) {
+var ButtonWrapper = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border: 0.5px solid ", ";\n  box-sizing: border-box;\n  border-radius: 2px;\n  width: 12px;\n  height: 8px;\n\n  svg {\n    width: 5px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.lightGray;
@@ -236,23 +222,7 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject50 || (_templat
 
 exports.ButtonWrapper = ButtonWrapper;
 
-var MarketCartWrapper = _styledComponents.default.div(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 2px;\n  right: 15px;\n\n  ", "\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n    left: 15px;\n    right: initial;\n  "])));
-});
-
-exports.MarketCartWrapper = MarketCartWrapper;
-var MarketProductList = (0, _styledComponents.default)(FoodProductList)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["\n  padding: 0 4px;\n"])));
-exports.MarketProductList = MarketProductList;
-var MarketCategoryListWrapper = (0, _styledComponents.default)(GroceriesCategoryListWrapper)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["\n  border-right: 0.5px solid ", ";\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.secundary;
-}, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["\n    border-left: 0.5px solid ", ";\n    border-right: none;\n  "])), function (props) {
-    return props.theme.colors.secundary;
-  });
-});
-exports.MarketCategoryListWrapper = MarketCategoryListWrapper;
-
-var ActionButtonWrapper = _styledComponents.default.div(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 44px;\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px;\n  }\n"])), function (props) {
+var ActionButtonWrapper = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 44px;\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

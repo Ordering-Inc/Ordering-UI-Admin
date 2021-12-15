@@ -138,6 +138,7 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsBusinessFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     search: searchValue,
     isCustomLayout: true,
+    lazyLoad: true,
     onSearch: function onSearch(value) {
       return _onSearch(value);
     },
