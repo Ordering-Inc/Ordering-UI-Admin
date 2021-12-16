@@ -3,17 +3,14 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import Skeleton from 'react-loading-skeleton'
 import { Switch } from '../../styles'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { ThreeDotsVertical, Image as ImageIcon } from 'react-bootstrap-icons'
+import { Image as ImageIcon } from 'react-bootstrap-icons'
 import { Pagination } from '../Pagination'
-import { Confirm } from '../Confirm'
 
 import {
   PromotionListContainer,
   PromotionListTable,
   EnableWrapper,
-  WrapperActionSelector,
   DragableContainer,
   DragImageWrapper,
   WrapperImage,
@@ -42,15 +39,13 @@ export const EnterprisePromotionList = (props) => {
     handleAllowDrop,
     handleDrop,
     handleDragEnd,
-    handleEnablePromotion,
-    handleDeletePromotion
+    handleEnablePromotion
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
 
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     promotions: true,
@@ -89,17 +84,6 @@ export const EnterprisePromotionList = (props) => {
     }
   }
 
-  const onClickDeletePromotion = (promotionId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('PROMOTION', 'Promotion')),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeletePromotion(promotionId)
-      }
-    })
-  }
-
   const handleChangePage = (page) => {
     getPromotions(page, paginationProps?.pageSize)
   }
@@ -111,7 +95,7 @@ export const EnterprisePromotionList = (props) => {
   }
 
   const handleClickPromotion = (e, promotion) => {
-    const inValid = e.target.closest('.enable_control') || e.target.closest('.promotion_actions')
+    const inValid = e.target.closest('.enable_control')
     if (inValid) return
     handleOpenDetails(promotion)
   }
@@ -142,9 +126,6 @@ export const EnterprisePromotionList = (props) => {
               )}
               {allowColumns?.dateRange && (
                 <th className='date_range'>{t('DATE_RANGE', 'Date Range')}</th>
-              )}
-              {allowColumns?.actions && (
-                <th>{t('ACTIONS', 'Actions')}</th>
               )}
               <th>
                 <ColumnAllowSettingPopover
@@ -193,15 +174,14 @@ export const EnterprisePromotionList = (props) => {
                       </PromotionDateRanageWrapper>
                     </td>
                   )}
-                  {allowColumns?.actions && (
-                    <td>
+                  <td>
+                    {allowColumns?.actions && (
                       <EnableWrapper className='enable_control'>
                         <Skeleton width={60} />
                         <Skeleton width={30} />
                       </EnableWrapper>
-                    </td>
-                  )}
-                  <td><Skeleton width={20} /></td>
+                    )}
+                  </td>
                 </tr>
               </SinglePromotionTbody>
             ))
@@ -275,8 +255,8 @@ export const EnterprisePromotionList = (props) => {
                       </PromotionDateRanageWrapper>
                     </td>
                   )}
-                  {allowColumns?.actions && (
-                    <td>
+                  <td>
+                    {allowColumns?.actions && (
                       <EnableWrapper className='enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>
                         <Switch
@@ -284,27 +264,7 @@ export const EnterprisePromotionList = (props) => {
                           onChange={enabled => handleEnablePromotion(promotion.id, enabled)}
                         />
                       </EnableWrapper>
-                    </td>
-                  )}
-                  <td>
-                    <WrapperActionSelector className='promotion_actions'>
-                      <DropdownButton
-                        menuAlign={theme?.rtl ? 'left' : 'right'}
-                        title={<ThreeDotsVertical />}
-                        id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                      >
-                        <Dropdown.Item
-                          onClick={(e) => handleClickPromotion(e, promotion)}
-                        >
-                          {t('EDIT', 'Edit')}
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          onClick={() => onClickDeletePromotion(promotion.id)}
-                        >
-                          {t('DELETE', 'Delete')}
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </WrapperActionSelector>
+                    )}
                   </td>
                 </tr>
               </SinglePromotionTbody>
@@ -329,17 +289,6 @@ export const EnterprisePromotionList = (props) => {
           </WrapperPagination>
         )}
       </PromotionListBottom>
-      <Confirm
-        width='700px'
-        title={t('WEB_APPNAME', 'Ordering')}
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }

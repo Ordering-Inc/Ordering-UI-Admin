@@ -82,8 +82,11 @@ export const EnterprisePromotionConditions = (props) => {
           <ConditionItem key={index}>
             <div>
               <Checkbox
-                defaultChecked={
-                  formState.changes[condition.attribute] || promotionState.promotion[condition.attribute]
+                checked={
+                  formState.changes[condition.attribute] ||
+                    Array.isArray(promotionState.promotion[condition.attribute])
+                    ? promotionState.promotion[condition.attribute].length !== 0
+                    : promotionState.promotion[condition.attribute]
                 }
                 disabled
               />
