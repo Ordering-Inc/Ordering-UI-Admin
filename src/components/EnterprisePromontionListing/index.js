@@ -24,7 +24,8 @@ const EnterprisePromontionListingUI = (props) => {
     handleSuccessUpdatePromotions,
     handleSuccessAddPromotion,
     sitesState,
-    paymethodsState
+    paymethodsState,
+    businessesList
   } = props
 
   const [, t] = useLanguage()
@@ -96,12 +97,14 @@ const EnterprisePromontionListingUI = (props) => {
         >
           <EnterprisePromotionDetails
             sitesState={sitesState}
+            businessesList={businessesList}
             paymethodsState={paymethodsState}
             promotion={selectedPromotion}
             promotionsList={promotionListState.promotions}
             handleSuccessUpdatePromotions={handleSuccessUpdatePromotions}
             handleSuccessAddPromotion={handleSuccessAddPromotion}
             setMoveDistance={setMoveDistance}
+            onClose={() => setOpenDetails(false)}
           />
         </SideBar>
       )}
