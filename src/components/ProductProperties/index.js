@@ -49,7 +49,7 @@ const ProductPropertiesUI = (props) => {
   const [taxToDelete, setTaxToDelete] = useState({ action: null, id: null })
 
   const estimatedPersons = [
-    { value: null, content: <Option>{t('NO_APPLY', 'No apply')}</Option> },
+    { value: 'no_apply', content: <Option>{t('NO_APPLY', 'No apply')}</Option>, showOnSelected: <Option>{t('NO_APPLY', 'No apply')}</Option> },
     ...[...Array(10)].map((item, i) => ({
       value: i + 1,
       content: <Option>{i + 1}</Option>
@@ -243,9 +243,9 @@ const ProductPropertiesUI = (props) => {
       <LabelCustom htmlFor='estimated'>{t('ESTIMATED_PERSON', 'Estimated person')}</LabelCustom>
       <TypeSelectWrapper>
         <Select
-          defaultValue={productState?.estimated_person || null}
+          defaultValue={productState?.estimated_person ?? 'no_apply'}
           options={estimatedPersons}
-          onChange={(val) => handleClickProperty('estimated_person', val)}
+          onChange={(val) => handleClickProperty('estimated_person', val === 'no_apply' ? null : val)}
         />
       </TypeSelectWrapper>
       <LabelCustom htmlFor='tax'>{t('TAX', 'Tax')}</LabelCustom>
