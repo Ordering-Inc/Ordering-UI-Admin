@@ -24,13 +24,9 @@ export const DriversCompanyGeneralDetails = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [timezoneSearchValue, setTimezoneSearchValue] = useState('')
+  const [timezonesOptions, setTimezonesOptions] = useState([])
 
-  const timezonesOptions = timezones.map(timezone => {
-    return {
-      value: timezone,
-      content: timezone
-    }
-  })
   const priorityOptions = [
     { value: -1, content: t('LOW', 'Low') },
     { value: 0, content: t('NORMAL', 'Normal') },
@@ -59,6 +55,18 @@ export const DriversCompanyGeneralDetails = (props) => {
       })
     }
   }, [errors])
+
+  useEffect(() => {
+    const _timezonesOptions = timezones
+      .filter(timezone => timezone.toLocaleLowerCase().includes(timezoneSearchValue.toLocaleLowerCase()))
+      .map(timezone => {
+        return {
+          value: timezone,
+          content: timezone
+        }
+      })
+    setTimezonesOptions(_timezonesOptions)
+  }, [timezoneSearchValue])
 
   return (
     <>
@@ -90,6 +98,11 @@ export const DriversCompanyGeneralDetails = (props) => {
               onChange={e => handleChangesState('limit', e.target.value)}
               placeholder={t('LIMIT', 'Limit')}
               autoComplete='off'
+              onKeyPress={(e) => {
+                if (!/^[0-9]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
             />
           </InputWrapper>
         </GroupContainer>
@@ -103,7 +116,7 @@ export const DriversCompanyGeneralDetails = (props) => {
               onChange={val => handleChangesState('priority', val)}
             />
           </InputWrapper>
-          <InputWrapper>
+          <InputWrapper isTimezone>
             <label>{t('TIMEZONE', 'Timezone')}</label>
             <DefaultSelect
               placeholder={t('SELECT_TIMEZONE', 'Select a timezone')}
@@ -111,6 +124,11 @@ export const DriversCompanyGeneralDetails = (props) => {
               options={timezonesOptions}
               onChange={val => handleChangesState('timezone', val)}
               optionInnerMaxHeight='60vh'
+
+              isShowSearchBar
+              searchBarIsCustomLayout
+              searchValue={timezoneSearchValue}
+              handleChangeSearch={setTimezoneSearchValue}
             />
           </InputWrapper>
         </GroupContainer>

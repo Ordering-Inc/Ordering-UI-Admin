@@ -42,8 +42,7 @@ export const BusinessProductList = (props) => {
     price: true,
     description: true,
     tax: true,
-    fee_fixed: true,
-    fee_percentage: true
+    fee: true
   })
 
   const optionsDefault = [
@@ -64,12 +63,8 @@ export const BusinessProductList = (props) => {
       content: t('TAX', 'Tax')
     },
     {
-      value: 'fee_fixed',
-      content: t('SERVICE_FEE', 'Service fee')
-    },
-    {
-      value: 'fee_percentage',
-      content: t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')
+      value: 'fee',
+      content: t('FEE', 'Fee')
     }
   ]
 
@@ -131,11 +126,8 @@ export const BusinessProductList = (props) => {
                   {allowColumns?.tax && (
                     <th className='tax'>{t('TAX', 'Tax')}</th>
                   )}
-                  {allowColumns?.fee_fixed && (
-                    <th className='fee_fixed'>{t('SERVICE_FEE', 'Service fee')}</th>
-                  )}
-                  {allowColumns?.fee_percentage && (
-                    <th className='fee_percentage'>{t('SERVICE_FEE_PERCENTAGE', 'Service fee (%)')}</th>
+                  {allowColumns?.fee && (
+                    <th className='fee'>{t('FEE', 'Fee')}</th>
                   )}
                   <th>{t('ACTIONS', 'Actions')}</th>
                   <th className='more'>

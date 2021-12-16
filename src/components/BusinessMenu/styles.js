@@ -108,6 +108,7 @@ export const AddMenuButton = styled.a`
   margin: 15px 0;
   display: inline-block;
   text-decoration: none;
+  font-size: 14px;
 `
 export const TabsContainer = styled.div`
   width: 100%;

@@ -25,7 +25,8 @@ const BusinessMenuOptionsUI = (props) => {
     onClose,
     menu,
     business,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    isSelectedSharedMenus
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -63,15 +64,17 @@ const BusinessMenuOptionsUI = (props) => {
       <Header>
         <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
         <ActionBlock>
-          <BusinessMenuShare
-            open={openShareMenu}
-            menu={menu}
-            businessId={business?.id}
-            business={business}
-            onClick={() => setOpenShareMenu(true)}
-            onClose={() => setOpenShareMenu(false)}
-            handleUpdateBusinessState={handleUpdateBusinessState}
-          />
+          {!isSelectedSharedMenus && Object.keys(menu).length > 0 && (
+            <BusinessMenuShare
+              open={openShareMenu}
+              menu={menu}
+              businessId={business?.id}
+              business={business}
+              onClick={() => setOpenShareMenu(true)}
+              onClose={() => setOpenShareMenu(false)}
+              handleUpdateBusinessState={handleUpdateBusinessState}
+            />
+          )}
           <IconButton
             color='black'
             onClick={() => onClose()}

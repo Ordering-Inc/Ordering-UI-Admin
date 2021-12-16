@@ -137,11 +137,35 @@ export const CategoryNameWrapper = styled.div`
     width: 100%;
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
+    margin-bottom: 12px;
   }
 
   input {
-    margin-top: 10px;
     font-size: 14px;
     width: 100%;
   }
+`
+export const ParentCategorySelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+  label {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .select {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: none;
+    background-color: ${props => props.theme.colors.secundary};
+  }
+`
+export const Option = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  font-size: 14px;
+  color: ${props => props.theme.colors.secundaryContrast};
 `

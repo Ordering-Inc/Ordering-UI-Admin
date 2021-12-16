@@ -4,14 +4,11 @@ import {
   useUtils,
   BusinessBrandListing as BusinessBrandListingController
 } from 'ordering-components-admin'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
 import Skeleton from 'react-loading-skeleton'
 import { useInfoShare } from '../../contexts/InfoShareContext'
-import { List as MenuIcon } from 'react-bootstrap-icons'
-import { Button, IconButton } from '../../styles/Buttons'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import { ThreeDots, List as MenuIcon } from 'react-bootstrap-icons'
+import { Button, IconButton, Switch, DefaultSelect } from '../../styles'
 import { useTheme } from 'styled-components'
-import { Switch } from '../../styles/Switch'
 import { SearchBar } from '../SearchBar'
 import { Alert } from '../Confirm'
 import { SideBar } from '../SideBar'
@@ -46,7 +43,9 @@ const BusinessBrandListingUI = (props) => {
     brandListState,
     handleChangeState,
     brandFormState,
-    handleDeleteBrand
+    handleDeleteBrand,
+    openDetail,
+    setOpenDetail
   } = props
 
   const [, t] = useLanguage()
@@ -55,9 +54,12 @@ const BusinessBrandListingUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [brandList, setBrandList] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [openDetail, setOpenDetail] = useState(false)
   const [selectedType, setSelectedType] = useState('general')
   const [selectedBrand, setSelectedBrand] = useState(null)
+
+  const moreOptions = [
+    { value: 0, content: t('DELETE', 'Delete') }
+  ]
 
   const handleCloseSidebar = () => {
     setOpenDetail(false)
@@ -78,6 +80,12 @@ const BusinessBrandListingUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const handleClickBrand = (e, brandId) => {
+    const isInvalid = e.target.closest('.brand_enable_control')
+    if (isInvalid) return
+    handleOpenSideBar(brandId)
   }
 
   useEffect(() => {
@@ -132,6 +140,7 @@ const BusinessBrandListingUI = (props) => {
               {t('ADD_BRAND', 'Add brand')}
             </Button>
             <SearchBar
+              lazyLoad
               search={searchValue}
               onSearch={(value) => onSearch(value)}
               placeholder={t('SEARCH', 'Search')}
@@ -165,9 +174,6 @@ const BusinessBrandListingUI = (props) => {
                         <EnableWrapper>
                           <Skeleton width={50} height={20} />
                         </EnableWrapper>
-                        <ActionSelectorWrapper>
-                          <Skeleton width={15} height={20} />
-                        </ActionSelectorWrapper>
                       </ActionsContainer>
                     </td>
                   </tr>
@@ -178,12 +184,13 @@ const BusinessBrandListingUI = (props) => {
                 <BrandBody
                   key={brand.id}
                   active={brand.id === selectedBrand?.id}
+                  onClick={e => handleClickBrand(e, brand.id)}
                 >
                   <tr>
                     <td>
                       <BrandGeneralInfo>
                         <WrapperImage>
-                          <Image bgimage={optimizeImage(brand?.logo || theme.images?.dummies?.businessLogo)} />
+                          <Image bgimage={optimizeImage(brand?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
                         </WrapperImage>
                         <InfoBlock>
                           <p>{brand?.name}</p>
@@ -192,31 +199,13 @@ const BusinessBrandListingUI = (props) => {
                     </td>
                     <td>
                       <ActionsContainer>
-                        <EnableWrapper calssName='page-enabled'>
+                        <EnableWrapper calssName='brand_enable_control'>
                           <span>{t('ENABLE', 'Enable')}</span>
                           <Switch
                             defaultChecked={brand?.enabled}
                             onChange={(enabled) => handleChangeState(brand.id, 'enabled', enabled)}
                           />
                         </EnableWrapper>
-                        <ActionSelectorWrapper className='page-actions'>
-                          <DropdownButton
-                            menuAlign={theme?.rtl ? 'left' : 'right'}
-                            title={<FiMoreVertical />}
-                            id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                          >
-                            <Dropdown.Item
-                              onClick={() => handleOpenSideBar(brand.id)}
-                            >
-                              {t('EDIT', 'Edit')}
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                              onClick={() => handleDeleteBrand(brand.id)}
-                            >
-                              {t('DELETE', 'Delete')}
-                            </Dropdown.Item>
-                          </DropdownButton>
-                        </ActionSelectorWrapper>
                       </ActionsContainer>
                     </td>
                   </tr>
@@ -237,15 +226,26 @@ const BusinessBrandListingUI = (props) => {
           >
             <BrandDetailContainer>
               <DetailHeder>
-                {
-                  selectedBrand?.name && (
-                    <span>{selectedBrand?.name}</span>
-                  )
-                }
-                <Switch
-                  defaultChecked={selectedBrand?.enabled || false}
-                  onChange={(enabled) => handleChangeState(selectedBrand?.id, 'enabled', enabled)}
-                />
+                <div>
+                  {
+                    selectedBrand?.name && (
+                      <span>{selectedBrand?.name}</span>
+                    )
+                  }
+                  <Switch
+                    defaultChecked={selectedBrand?.enabled || false}
+                    onChange={(enabled) => handleChangeState(selectedBrand?.id, 'enabled', enabled)}
+                  />
+                </div>
+                {selectedBrand && (
+                  <ActionSelectorWrapper>
+                    <DefaultSelect
+                      placeholder={<ThreeDots />}
+                      options={moreOptions}
+                      onChange={() => handleDeleteBrand(selectedBrand.id)}
+                    />
+                  </ActionSelectorWrapper>
+                )}
               </DetailHeder>
               <TabContainer>
                 <Tab

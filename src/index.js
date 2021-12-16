@@ -15,6 +15,7 @@ import { BusinessListingHeader } from './components/BusinessListingHeader'
 import { BusinessMenu } from './components/BusinessMenu'
 import { BusinessMenuCustomFields } from './components/BusinessMenuCustomFields'
 import { BusinessOwners } from './components/BusinessOwners'
+import { BusinessProductsCategoyDetails } from './components/BusinessProductsCategoyDetails'
 import { BusinessTypeFilter } from './components/BusinessTypeFilter'
 import { BusinessTypes } from './components/BusinessTypes'
 import { BusinessTypeForm } from './components/BusinessTypeForm'
@@ -53,7 +54,7 @@ import { InterActOrderMarker } from './components/InterActOrderMarker'
 import { LanguageManager } from './components/LanguageManager'
 import { Layout } from './components/Layout'
 import { LoginForm } from './components/LoginForm'
-import { LogisticInformation } from './components/LogisticInformation'
+import { OrderLogisticInformation } from './components/OrderLogisticInformation'
 import { Logistics } from './components/Logistics'
 import { LogoutButton } from './components/LogoutButton'
 import { Messages } from './components/Messages'
@@ -157,6 +158,7 @@ export {
   BusinessMenu,
   BusinessMenuCustomFields,
   BusinessOwners,
+  BusinessProductsCategoyDetails,
   BusinessProductsListing,
   BusinessTypeFilter,
   BusinessTypes,
@@ -196,7 +198,7 @@ export {
   LanguageManager,
   Layout,
   LoginForm,
-  LogisticInformation,
+  OrderLogisticInformation,
   Logistics,
   LogoutButton,
   Messages,

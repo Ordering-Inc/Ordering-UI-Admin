@@ -9,7 +9,6 @@ export const BrandBUSIDetailContainer = styled.div`
 export const SearchWrapper = styled.div``
 
 export const BusinessListWrapper = styled.div`
-  margin-top: 24px;
   margin-bottom: 20px;
 
   #not-found-source {
@@ -84,4 +83,18 @@ export const NoSelectedBrand = styled.div`
   padding: 30px 10px;
   font-size: 18px;
   text-align: center;
+`
+export const SelectButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  button:first-child {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 16px;
+    ` : css`
+      margin-right: 16px;
+    `}
+  }
 `

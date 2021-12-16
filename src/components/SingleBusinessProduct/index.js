@@ -108,8 +108,7 @@ const SingleBusinessProductUI = (props) => {
     const isInvalid = e.target.closest('.product_info') ||
     e.target.closest('.product_price') || e.target.closest('.product_description') ||
     e.target.closest('.product_enable_control') || e.target.closest('.product_actions') ||
-    e.target.closest('.description') || e.target.closest('.fee_fixed') ||
-    e.target.closest('.fee_percentage')
+    e.target.closest('.description')
     if (isInvalid) return
     handleOpenProductDetails(product)
   }
@@ -192,7 +191,7 @@ const SingleBusinessProductUI = (props) => {
     })
   }
 
-  const taxProduct = productFormState?.changes?.tax || business?.tax
+  const taxProduct = productFormState?.changes?.tax ?? business?.tax
   const taxProductType = taxProduct?.type || business?.tax_type
   const taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price')
 
@@ -344,39 +343,16 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <div>{taxProduct?.rate || taxProduct}% ({taxProductTypeString})</div>
+                        <div>{taxProduct?.rate ?? taxProduct ?? 0}% ({taxProductTypeString})</div>
                       </InfoBlock>
                     }
                   </td>
                 )}
-                {allowColumns?.fee_fixed && (
+                {allowColumns?.fee && (
                   <td>
                     {
                       <InfoBlock>
-                        <input
-                          type='text'
-                          name='fee_fixed'
-                          className='fee_fixed'
-                          value={productFormState?.changes?.fee_fixed || ''}
-                          onChange={handleChangeInput}
-                          autoComplete='off'
-                        />
-                      </InfoBlock>
-                    }
-                  </td>
-                )}
-                {allowColumns?.fee_percentage && (
-                  <td>
-                    {
-                      <InfoBlock>
-                        <input
-                          type='text'
-                          name='fee_percentage'
-                          className='fee_percentage'
-                          value={productFormState?.changes?.fee_percentage || ''}
-                          onChange={handleChangeInput}
-                          autoComplete='off'
-                        />
+                        <div>{parsePrice(productFormState?.changes?.fee?.fixed ?? 0)} + {productFormState?.changes?.fee?.percentage ?? business?.service_fee}%</div>
                       </InfoBlock>
                     }
                   </td>

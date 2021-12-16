@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useConfig } from 'ordering-components-admin'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
-import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import { Button } from '../../styles/Buttons'
 import {
   BusinessFrontLayoutContainer,
@@ -30,7 +29,6 @@ import {
   HorzontalProductBox,
   HorzontalProductImageWrapper,
   HorzontalProductInfoList,
-  VerticalProductInfoList,
   BusinessImgBoxWrapper,
   GroceriesBoxContent,
   GroceriesCartWrapper,
@@ -38,16 +36,6 @@ import {
   GroceriesProductListWrapper,
   GroceriesCategoryListWrapper,
   GroceriesProductListContent,
-  MarketBoxContent,
-  MarketLogoWrapper,
-  VerticalProductBox,
-  VerticalProductImageWrapper,
-  MarketProductListContent,
-  CategoryAndActionWrapper,
-  ButtonWrapper,
-  MarketCartWrapper,
-  MarketProductList,
-  MarketCategoryListWrapper,
   ActionButtonWrapper
 } from './styles'
 
@@ -60,6 +48,9 @@ export const BusinessFrontLayout = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [configState] = useConfig()
+
+  const useParentCategory = configState?.configs?.use_parent_category?.value
   const [selectedOption, setSelectedOption] = useState('')
 
   const handleChangeLayout = (index) => {
@@ -146,116 +137,67 @@ export const BusinessFrontLayout = (props) => {
             </LayoutBoxContent>
             <LayoutTitle>{t('FOOD', 'Food')}</LayoutTitle>
           </LayoutBoxWrapper>
-          <LayoutBoxWrapper onClick={() => handleChangeLayout('groceries')} active={selectedOption === 'groceries'}>
-            <LayoutBoxContent>
-              <LayoutBoxHeader />
-              <GroceriesBoxContent>
-                <BusinessImgBoxWrapper>
-                  <BusinessImgBox>
-                    <BsCardImage />
-                    <LogoWrapper>
-                      <BsCardImage />
-                    </LogoWrapper>
-                    <GroceriesCartWrapper>
-                      <GroceriesCart>
-                        <AiOutlineShoppingCart />
-                      </GroceriesCart>
-                    </GroceriesCartWrapper>
-                  </BusinessImgBox>
-                </BusinessImgBoxWrapper>
-                <FoodHeader>
-                  <HeaderBoldLine />
-                  <HeaderLine className='short-line' />
-                  <HeaderLine />
-                  <HeaderLine />
-                </FoodHeader>
-                <GroceriesProductListWrapper>
-                  <GroceriesCategoryListWrapper>
-                    {[...Array(6).keys()].map(i => (
-                      <CategoryWrapper key={i}>
-                        <CategoryImgWrapper>
-                          <BsCardImage />
-                        </CategoryImgWrapper>
-                        <CategoryTitle />
-                      </CategoryWrapper>
-                    ))}
 
-                  </GroceriesCategoryListWrapper>
-                  <FoodProductList>
-                    {[...Array(3).keys()].map(i => (
-                      <React.Fragment key={i}>
-                        <CategoryWrapper>
+          {useParentCategory === '1' && (
+            <LayoutBoxWrapper onClick={() => handleChangeLayout('groceries')} active={selectedOption === 'groceries'}>
+              <LayoutBoxContent>
+                <LayoutBoxHeader />
+                <GroceriesBoxContent>
+                  <BusinessImgBoxWrapper>
+                    <BusinessImgBox>
+                      <BsCardImage />
+                      <LogoWrapper>
+                        <BsCardImage />
+                      </LogoWrapper>
+                      <GroceriesCartWrapper>
+                        <GroceriesCart>
+                          <AiOutlineShoppingCart />
+                        </GroceriesCart>
+                      </GroceriesCartWrapper>
+                    </BusinessImgBox>
+                  </BusinessImgBoxWrapper>
+                  <FoodHeader>
+                    <HeaderBoldLine />
+                    <HeaderLine className='short-line' />
+                    <HeaderLine />
+                    <HeaderLine />
+                  </FoodHeader>
+                  <GroceriesProductListWrapper>
+                    <GroceriesCategoryListWrapper>
+                      {[...Array(6).keys()].map(i => (
+                        <CategoryWrapper key={i}>
                           <CategoryImgWrapper>
                             <BsCardImage />
                           </CategoryImgWrapper>
                           <CategoryTitle />
                         </CategoryWrapper>
-                        <GroceriesProductListContent>
-                          {[...Array(3).keys()].map(i => (
-                            <HorzontalProductBoxUI key={i} />
-                          ))}
-                        </GroceriesProductListContent>
-                      </React.Fragment>
-                    ))}
-                  </FoodProductList>
-                </GroceriesProductListWrapper>
-              </GroceriesBoxContent>
-              <LayoutBoxFooter />
-            </LayoutBoxContent>
-            <LayoutTitle>{t('GROCERIES', 'Groceries')}</LayoutTitle>
-          </LayoutBoxWrapper>
-          <LayoutBoxWrapper onClick={() => handleChangeLayout('market')} active={selectedOption === 'market'}>
-            <LayoutBoxContent>
-              <LayoutBoxHeader />
-              <MarketBoxContent>
-                <MarketCartWrapper>
-                  <GroceriesCart>
-                    <AiOutlineShoppingCart />
-                  </GroceriesCart>
-                </MarketCartWrapper>
-                <MarketLogoWrapper>
-                  <BsCardImage />
-                </MarketLogoWrapper>
-                <GroceriesProductListWrapper>
-                  <MarketCategoryListWrapper>
-                    {[...Array(6).keys()].map(i => (
-                      <CategoryWrapper key={i}>
-                        <CategoryImgWrapper>
-                          <BsCardImage />
-                        </CategoryImgWrapper>
-                        <CategoryTitle />
-                      </CategoryWrapper>
-                    ))}
-                  </MarketCategoryListWrapper>
-                  <MarketProductList>
-                    {[...Array(3).keys()].map(i => (
-                      <React.Fragment key={i}>
-                        <CategoryAndActionWrapper>
+                      ))}
+
+                    </GroceriesCategoryListWrapper>
+                    <FoodProductList>
+                      {[...Array(3).keys()].map(i => (
+                        <React.Fragment key={i}>
                           <CategoryWrapper>
                             <CategoryImgWrapper>
                               <BsCardImage />
                             </CategoryImgWrapper>
                             <CategoryTitle />
                           </CategoryWrapper>
-                          <ButtonWrapper>
-                            <BsArrowRight />
-                          </ButtonWrapper>
-                        </CategoryAndActionWrapper>
-
-                        <MarketProductListContent>
-                          {[...Array(5).keys()].map(i => (
-                            <VerticalProductBoxUI key={i} />
-                          ))}
-                        </MarketProductListContent>
-                      </React.Fragment>
-                    ))}
-                  </MarketProductList>
-                </GroceriesProductListWrapper>
-              </MarketBoxContent>
-              <LayoutBoxFooter />
-            </LayoutBoxContent>
-            <LayoutTitle>{t('MARKET', 'Market')}</LayoutTitle>
-          </LayoutBoxWrapper>
+                          <GroceriesProductListContent>
+                            {[...Array(3).keys()].map(i => (
+                              <HorzontalProductBoxUI key={i} />
+                            ))}
+                          </GroceriesProductListContent>
+                        </React.Fragment>
+                      ))}
+                    </FoodProductList>
+                  </GroceriesProductListWrapper>
+                </GroceriesBoxContent>
+                <LayoutBoxFooter />
+              </LayoutBoxContent>
+              <LayoutTitle>{t('GROCERIES', 'Groceries')}</LayoutTitle>
+            </LayoutBoxWrapper>
+          )}
         </LayoutContentWrappper>
       </BusinessFrontLayoutContainer>
       <ActionButtonWrapper>
@@ -278,21 +220,5 @@ const HorzontalProductBoxUI = () => {
         <BsCardImage />
       </HorzontalProductImageWrapper>
     </HorzontalProductBox>
-  )
-}
-
-const VerticalProductBoxUI = () => {
-  return (
-    <VerticalProductBox>
-      <VerticalProductImageWrapper>
-        <BsCardImage />
-      </VerticalProductImageWrapper>
-      <VerticalProductInfoList>
-        <div className='title' />
-        <div className='short-line' />
-        <div />
-        <div />
-      </VerticalProductInfoList>
-    </VerticalProductBox>
   )
 }

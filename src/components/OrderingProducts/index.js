@@ -152,6 +152,7 @@ export const OrderingProducts = (props) => {
               {t('ADD_PRODUCT', 'Add product')}
             </Button>
             <SearchBar
+              lazyLoad
               search={searchValue}
               onSearch={(value) => setSearchValue(value)}
               placeholder={t('SEARCH', 'Search')}

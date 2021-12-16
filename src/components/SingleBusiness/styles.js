@@ -83,9 +83,21 @@ export const InfoBlock = styled.div`
     color: ${props => props.theme.colors.headingColor};
   }
   p.star {
-    color: ${props => props.theme.colors.primary};
     margin: 0px;
-    font-size: 14px;
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 16px;
+      color: ${props => props.theme.colors.secundaryLight};
+    }
+    span {
+      font-size: 14px;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 8px;
+      ` : css`
+        margin-left: 8px;
+      `}
+    }
   }
 `
 

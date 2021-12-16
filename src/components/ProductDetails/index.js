@@ -22,7 +22,9 @@ export const ProductDetails = (props) => {
     setFormTaxState,
     formTaxState,
     taxes,
-    setTaxes
+    setTaxes,
+    fees,
+    setFees
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -113,6 +115,8 @@ export const ProductDetails = (props) => {
               formTaxState={formTaxState}
               taxes={taxes}
               setTaxes={setTaxes}
+              fees={fees}
+              setFees={setFees}
             />
           )}
           {showOption === 'ingredients' && (
@@ -132,9 +136,10 @@ export const ProductDetails = (props) => {
           )}
           {showOption === 'product_images' && (
             <ProductGallery
-              businessId={business.id}
+              business={business}
               categoryId={product.category_id}
-              productId={product.id}
+              product={product}
+              handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {showOption === 'custom_fields' && (

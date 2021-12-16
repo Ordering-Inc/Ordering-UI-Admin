@@ -10,8 +10,6 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  useToast,
-  ToastType,
   BusinessProductCreator as BusinessProductCreatorController
 } from 'ordering-components-admin'
 
@@ -34,7 +32,6 @@ const BusinessProductAddFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [, { showToast }] = useToast()
 
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -80,12 +77,6 @@ const BusinessProductAddFormUI = (props) => {
       })
     }
   }, [formState?.result])
-
-  useEffect(() => {
-    if (!formState?.loading && !formState?.result.error && formState?.result?.result) {
-      showToast(ToastType.Success, t('PRODUCT_ADD', 'Product added'))
-    }
-  }, [formState?.loading])
 
   return (
     <>

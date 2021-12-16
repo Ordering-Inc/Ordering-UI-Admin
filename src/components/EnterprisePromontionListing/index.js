@@ -74,6 +74,7 @@ const EnterprisePromontionListingUI = (props) => {
               {t('ADD_PROMOTION_ENTERPRISE', 'Add promotion enterprise')}
             </Button>
             <SearchBar
+              lazyLoad
               onSearch={onSearch}
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}

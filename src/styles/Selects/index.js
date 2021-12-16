@@ -216,3 +216,12 @@ export const FunctionalityContainer = styled.div`
     `}
   }
 `
+export const SearchBarWrapper = styled.div`
+  padding: 5px 10px;
+  width: 100%;
+  > div {
+    input {
+      height: 42px;
+    }
+  }
+`

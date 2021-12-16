@@ -9,7 +9,6 @@ import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
-import { SpinnerLoader } from '../SpinnerLoader'
 import {
   WrapMetaFields,
   MetaTitle,
@@ -17,8 +16,7 @@ import {
   RoundBorder,
   MetaAddForm,
   MetaAddContainer,
-  SkeletonItem,
-  WrapperSpinnerLoader
+  SkeletonItem
 } from './styles'
 
 const ProductExtraMetaFieldsUI = (props) => {
@@ -285,11 +283,6 @@ const ProductExtraMetaFieldsUI = (props) => {
               </div>
             </MetaAddContainer>
           </MetaAddForm>
-          {actionState.loading && (
-            <WrapperSpinnerLoader>
-              <SpinnerLoader />
-            </WrapperSpinnerLoader>
-          )}
         </WrapMetaFields>
       )}
       <Alert

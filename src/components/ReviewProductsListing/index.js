@@ -92,6 +92,7 @@ export const ReviewProductsListingUI = (props) => {
           </HeaderLeft>
           <HeaderRight>
             <SearchBar
+              lazyLoad
               placeholder={t('SEARCH', 'Search')}
               searchValue={searchValue}
               onSearch={handleChangeSearch}
