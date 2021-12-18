@@ -4,11 +4,13 @@ import { useLanguage, ReportsDriverGroupFilter as ReportsDriverGroupFilterContro
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Button } from '../../styles/Buttons'
+import { SearchBar } from '../SearchBar'
 import {
   ReportsDriverGroupContainer,
   DriverGroupOption,
   BusinessName,
-  FilterBtnWrapper
+  FilterBtnWrapper,
+  SearchWrapper
 } from './styles'
 
 const ReportsDriverGroupFilterUI = (props) => {
@@ -18,7 +20,9 @@ const ReportsDriverGroupFilterUI = (props) => {
     handleChangeDriverGroupId,
     handleClickFilterButton,
     isAllCheck,
-    handleChangeAllCheck
+    handleChangeAllCheck,
+    searchValue,
+    onSearch
   } = props
 
   const [, t] = useLanguage()
@@ -35,6 +39,15 @@ const ReportsDriverGroupFilterUI = (props) => {
   return (
     <>
       <ReportsDriverGroupContainer>
+        <SearchWrapper>
+          <SearchBar
+            search={searchValue}
+            isCustomLayout
+            lazyLoad
+            onSearch={(value) => onSearch(value)}
+            placeholder={t('SEARCH', 'Search')}
+          />
+        </SearchWrapper>
         {driverGroupList.loading ? (
           [...Array(10).keys()].map(i => (
             <DriverGroupOption key={i}>
