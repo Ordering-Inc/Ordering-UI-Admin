@@ -185,6 +185,10 @@ const DriverSelectorUI = (props) => {
 
   const Placeholder = <PlaceholderTitle>{t('SELECT_DRIVER', 'Select driver')}</PlaceholderTitle>
 
+  const handleSearch = (val) => {
+    console.log('val: ', val)
+  }
+
   if (isFilterView) {
     return (
       <>
@@ -222,6 +226,9 @@ const DriverSelectorUI = (props) => {
                 optionInnerMaxHeight='200px'
                 optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
+                isShowSearchBar
+                searchBarIsCustomLayout
+                handleChangeSearch={handleSearch}
               />
             ) : (
               <Select
