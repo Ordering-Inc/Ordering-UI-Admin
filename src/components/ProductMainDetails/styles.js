@@ -104,8 +104,9 @@ export const ProductConfigsContainer = styled.div`
 
 export const ProductConfigOption = styled.div`
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 13px 15px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   color: ${props => props.theme.colors.lightGray};
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
@@ -122,9 +123,9 @@ export const ProductConfigOption = styled.div`
   `}
 
   span {
-    font-size: 14px;
+    font-size: 12px;
   }
   svg {
-    font-size: 20px;
+    font-size: 14px;
   }
 `

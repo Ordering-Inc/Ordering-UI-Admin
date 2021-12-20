@@ -55,7 +55,6 @@ export const OptionsTable = styled.table`
   width: 100%;
   overflow: auto;
   th, td {
-    font-size: 12px;
     color: ${props => props.theme.colors.headingColor};
     padding: 12px 0;
 
@@ -64,7 +63,7 @@ export const OptionsTable = styled.table`
     }
 
     > input {
-      width: 60px;
+      width: 50px;
       padding: 5px;
       ${props => props.theme?.rtl ? css`
         margin-left: 5px;
@@ -81,6 +80,13 @@ export const OptionsTable = styled.table`
 
   th {
     font-weight: 700;
+    font-size: 12px;
+  }
+
+  td {
+    input {
+      font-size: 14px;
+    }
   }
 
   thead, tbody {
@@ -96,19 +102,23 @@ export const OptionNameContainer = styled.div`
   align-items: center;
   > input {
     flex: 1;
-    padding: 5px 0;
-    margin: 0 5px;
+    padding: 5px;
     border: none;
     outline: none;
     &:focus {
       border: 1px dashed ${props => props.theme.colors.lightGray};
     }
+    ${props => props.theme?.rtl ? css`
+      margin-right: 5px;
+    ` : css`
+      margin-left: 5px;
+    `}
   }
 `
 
 export const OptionImage = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;
@@ -177,9 +187,9 @@ export const EnableWrapper = styled.div`
 
 export const DropDownWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
-    margin-right: 35px;
+    margin-right: 20px;
     ` : css`
-    margin-left: 35px;
+    margin-left: 20px;
   `}
   button {
     background: #F8F9FA !important;

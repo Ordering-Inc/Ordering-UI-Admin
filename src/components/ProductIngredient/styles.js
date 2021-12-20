@@ -43,6 +43,7 @@ export const IngredientOption = styled.div`
 
   input {
     flex: 1;
+    font-size: 14px;
     border: none;
     outline: none;
   }

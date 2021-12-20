@@ -107,8 +107,7 @@ const SingleBusinessProductUI = (props) => {
   const handleProductClick = (e) => {
     const isInvalid = e.target.closest('.product_info') ||
     e.target.closest('.product_price') || e.target.closest('.product_description') ||
-    e.target.closest('.product_enable_control') || e.target.closest('.product_actions') ||
-    e.target.closest('.description')
+    e.target.closest('.product_enable_control') || e.target.closest('.product_actions')
     if (isInvalid) return
     handleOpenProductDetails(product)
   }

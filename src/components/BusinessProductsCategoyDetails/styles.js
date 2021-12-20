@@ -62,7 +62,7 @@ export const BusinessEnableWrapper = styled.div`
   width: fit-content;
 
   span {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 20px;
 
     ${props => props.theme?.rtl ? css`

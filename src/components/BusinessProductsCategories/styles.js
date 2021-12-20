@@ -35,10 +35,14 @@ export const ListContent = styled.div`
 export const AddCategory = styled.div`
   display: inline;
   user-select: none;
-  font-size: 12px;
+  font-size: 14px;
   color: ${props => props.theme.colors?.lightGray};
   cursor: pointer;
-  padding: 10px;
+  margin: 15px 10px;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
 `
 
 export const CategoryTab = styled.div`

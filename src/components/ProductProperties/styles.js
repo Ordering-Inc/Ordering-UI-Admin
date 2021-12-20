@@ -14,7 +14,6 @@ export const PropertiesContainer = styled.div`
 
   > input {
     width: 100%;
-    margin: 5px 0;
   }
   @media (min-width: 1000px) {
     padding: 20px;
@@ -44,7 +43,6 @@ export const TypeSelectWrapper = styled.div`
     max-width: 100%;
     min-width: 100%;
     padding: 3.5px 15px;
-    margin-bottom: 10px;
   }
 `
 
@@ -78,7 +76,9 @@ export const OptionCenter = styled.div`
 `
 
 export const LabelCustom = styled.label`
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 14px;
 `
 
 export const ButtonGroup = styled.div`

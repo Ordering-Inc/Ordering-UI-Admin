@@ -82,6 +82,7 @@ export const InputWrapper = styled.div`
   label {
     color: ${props => props.theme.colors.headingColor};
     margin-bottom: 10px;
+    font-size: 14px;
   }
 
   input,
