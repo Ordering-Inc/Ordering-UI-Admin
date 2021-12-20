@@ -5,10 +5,10 @@ import {
   useUtils,
   SingleBusinessCategory as SingleBusinessCategoryController
 } from 'ordering-components-admin'
-import { Alert, Confirm } from '../Confirm'
+import { Alert } from '../Confirm'
 import { IconButton } from '../../styles'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Pencil, Trash } from 'react-bootstrap-icons'
+import { Pencil } from 'react-bootstrap-icons'
 import {
   SingleCategoryContainer,
   CategoryContent,
@@ -26,15 +26,13 @@ export const SingleBusinessCategoryUI = (props) => {
     handleUpdateClick,
     handleOpenCategoryDetails,
     categoryFormState,
-    isEditMode,
-    deleteCategory
+    isEditMode
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const conatinerRef = useRef(null)
 
   const closeAlert = () => {
@@ -53,17 +51,6 @@ export const SingleBusinessCategoryUI = (props) => {
         }
       }
     }
-  }
-
-  const handleDeleteClick = () => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_CATEGORY', 'Are you sure that you want to delete this category?'),
-      handleOnAccept: () => {
-        deleteCategory()
-        setConfirm({ ...confirm, open: false })
-      }
-    })
   }
 
   useEffect(() => {
@@ -124,12 +111,6 @@ export const SingleBusinessCategoryUI = (props) => {
                     >
                       <Pencil />
                     </IconButton>
-                    <IconButton
-                      color='black'
-                      onClick={() => handleDeleteClick()}
-                    >
-                      <Trash />
-                    </IconButton>
                   </CategoryContentInside>
                 </>
               )
@@ -144,18 +125,6 @@ export const SingleBusinessCategoryUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-
-      <Confirm
-        title={t('WEB_APPNAME', 'Ordering')}
-        width='700px'
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </>
