@@ -81,7 +81,6 @@ export const InvoiceGeneral = (props) => {
             return { value: item.id, content: <Option>{item.name}</Option> }
           })
       }
-      console.log('selectedTypes: ', selectedTypes)
       setDriverOptions(selectedTypes)
     }
 
@@ -113,7 +112,6 @@ export const InvoiceGeneral = (props) => {
   }
 
   const handleChangeDriverSearch = (searchVal) => {
-    console.log('setDriverSearchValue', searchVal)
     setDriverSearchValue(searchVal)
   }
 
