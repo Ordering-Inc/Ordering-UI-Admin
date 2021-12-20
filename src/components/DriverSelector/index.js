@@ -43,6 +43,7 @@ const DriverSelectorUI = (props) => {
   const [driversOptionList, setDriversOptionList] = useState([])
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
   const [isRemoveAction, setIsRemoveAction] = useState(false)
+  const [searchValue, setSearchValue] = useState(null)
   const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
   useEffect(() => {
     const _driversOptionList = [
@@ -80,7 +81,13 @@ const DriverSelectorUI = (props) => {
       })
     }
     if (!driversList.loading) {
-      const _driversOptionListTemp = driversList.drivers.map((driver, i) => {
+      let _driverList
+      if (searchValue) {
+        _driverList = driversList.drivers.filter(driver => (driver.name + driver.lastname).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+      } else {
+        _driverList = driversList.drivers
+      }
+      const _driversOptionListTemp = _driverList.map((driver, i) => {
         return {
           value: driver.id,
           showDisable: isFilterView ? true : !(isFilterView || (driver?.enabled && driver?.available && !driver?.busy)),
@@ -111,7 +118,7 @@ const DriverSelectorUI = (props) => {
       }
     }
     setDriversOptionList(_driversOptionList)
-  }, [driversList, defaultValue])
+  }, [driversList, defaultValue, searchValue])
 
   const changeDriver = (driverId) => {
     if (isFilterView) {
@@ -185,6 +192,10 @@ const DriverSelectorUI = (props) => {
 
   const Placeholder = <PlaceholderTitle>{t('SELECT_DRIVER', 'Select driver')}</PlaceholderTitle>
 
+  const handleSearch = (val) => {
+    setSearchValue(val)
+  }
+
   if (isFilterView) {
     return (
       <>
@@ -222,6 +233,9 @@ const DriverSelectorUI = (props) => {
                 optionInnerMaxHeight='200px'
                 optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
+                isShowSearchBar
+                searchBarIsCustomLayout
+                handleChangeSearch={handleSearch}
               />
             ) : (
               <Select

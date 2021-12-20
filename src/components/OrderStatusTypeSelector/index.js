@@ -4,7 +4,7 @@ import { Select } from '../../styles/Select'
 import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import { useTheme } from 'styled-components'
 import { MultiSelect } from '../../styles/MultiSelect'
-import { Option, PlaceholderTitle } from './styles'
+import { Option, PlaceholderTitle, OrderStatusTypeSelectWrapper } from './styles'
 
 export const OrderStatusTypeSelector = (props) => {
   const {
@@ -34,11 +34,13 @@ export const OrderStatusTypeSelector = (props) => {
   const orderStatuses = [
     {
       value: 'default',
+      name: t('CHANGE_STATUS', 'Change Status'),
       content: <Option noPadding={noPadding}><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>,
       disabled: true
     },
     {
       value: 'pending',
+      name: t('PENDING', 'Pending'),
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.pending} alt='pending' />
@@ -49,6 +51,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 0,
+      name: t('PENDING', 'Pending'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PENDING', 'Pending')}</p>
@@ -58,6 +61,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 13,
+      name: t('PREORDER', 'Preorder'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PREORDER', 'Preorder')}</p>
@@ -68,6 +72,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 'inProgress',
+      name: t('IN_PROGRESS', 'In Progress'),
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.inProgress} alt='progress' />
@@ -78,6 +83,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 7,
+      name: t('ACCEPTED_BY_BUSINESS', 'Accepted by Business'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ACCEPTED_BY_BUSINESS', 'Accepted by Business')}</p>
@@ -87,6 +93,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 4,
+      name: t('PREPARATION_COMPLETED', 'Preparation Completed'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PREPARATION_COMPLETED', 'Preparation Completed')}</p>
@@ -96,6 +103,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 8,
+      name: t('ACCEPTED_BY_DRIVER', 'Accepted by Driver'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')}</p>
@@ -105,6 +113,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 3,
+      name: t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business')}</p>
@@ -114,6 +123,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 9,
+      name: t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver')}</p>
@@ -123,6 +133,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 14,
+      name: t('ORDER_NOT_READY', 'Order not ready'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_NOT_READY', 'Order not ready')}</p>
@@ -132,6 +143,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 18,
+      name: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business')}</p>
@@ -141,6 +153,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 19,
+      name: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')}</p>
@@ -150,6 +163,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 20,
+      name: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business')}</p>
@@ -159,6 +173,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 21,
+      name: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')}</p>
@@ -168,6 +183,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: null,
+      name: t('COMPLETED', 'Completed'),
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.completed} alt='completed' />
@@ -178,6 +194,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 1,
+      name: t('COMPLETED_BY_ADMIN', 'Completed by Admin'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('COMPLETED_BY_ADMIN', 'Completed by Admin')}</p>
@@ -187,6 +204,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 11,
+      name: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery Completed by Driver'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery Completed by Driver')}</p>
@@ -196,6 +214,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 15,
+      name: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')}</p>
@@ -205,6 +224,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: null,
+      name: t('CACELLED', 'Cancelled'),
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.cancelled} alt='cancelled' />
@@ -215,6 +235,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 2,
+      name: t('REJECTED_BY_ADMIN', 'Rejected by Admin'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('REJECTED_BY_ADMIN', 'Rejected by Admin')}</p>
@@ -224,6 +245,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 5,
+      name: t('REJECTED_BY_BUSINESS', 'Rejected by Business'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('REJECTED_BY_BUSINESS', 'Rejected by Business')}</p>
@@ -233,6 +255,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 6,
+      name: t('REJECTED_BY_DRIVER', 'Rejected by Driver'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('REJECTED_BY_DRIVER', 'Rejected by Driver')}</p>
@@ -242,6 +265,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 10,
+      name: t('PICKUP_FAILED_BY_DRIVER', 'Pickup Failed by Driver'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('PICKUP_FAILED_BY_DRIVER', 'Pickup Failed by Driver')}</p>
@@ -251,6 +275,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 12,
+      name: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by Driver'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by Driver')}</p>
@@ -260,6 +285,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 16,
+      name: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer')}</p>
@@ -269,6 +295,7 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 17,
+      name: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer'),
       content: (
         <Option noPadding={noPadding}>
           <p>{t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer')}</p>
@@ -361,6 +388,11 @@ export const OrderStatusTypeSelector = (props) => {
     }
   }, [filterValues])
 
+  const handleChangeSearch = (searchValue) => {
+    const _filteredOrderStatuses = [...orderStatuses?.filter(orderStatuse => orderStatuse?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
+    setFilteredOrderStatuses(_filteredOrderStatuses)
+  }
+
   if (isFilterView) {
     return (
       <MultiSelect
@@ -373,7 +405,7 @@ export const OrderStatusTypeSelector = (props) => {
     )
   } else {
     return (
-      <>
+      <OrderStatusTypeSelectWrapper>
         {isFirstSelect ? (
           <FirstSelect
             type={type}
@@ -383,6 +415,8 @@ export const OrderStatusTypeSelector = (props) => {
             options={filteredOrderStatuses}
             onChange={(orderStatus) => changeOrderStatus(orderStatus)}
             className='orderStatus'
+            isShowSearchBar
+            handleChangeSearch={handleChangeSearch}
           />
         ) : (
           <Select
@@ -395,7 +429,7 @@ export const OrderStatusTypeSelector = (props) => {
             className='orderStatus'
           />
         )}
-      </>
+      </OrderStatusTypeSelectWrapper>
     )
   }
 }
