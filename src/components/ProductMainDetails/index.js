@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useLanguage, useUtils, ProductDetatils as ProductDetatilsController } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
-import { XLg } from 'react-bootstrap-icons'
+import { XLg, ThreeDots } from 'react-bootstrap-icons'
 import { Switch } from '../../styles/Switch'
 import { ProductDetatilsEditForm } from '../ProductDetatilsEditForm'
 import { Button, IconButton } from '../../styles/Buttons'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import { useTheme } from 'styled-components'
+import { Confirm } from '../Confirm'
 
 import {
   ProductDetailsContainer,
@@ -17,7 +20,8 @@ import {
   ProductPrice,
   ProductDescription,
   ProductConfigsContainer,
-  ProductConfigOption
+  ProductConfigOption,
+  ActionSelectorWrapper
 } from './styles'
 
 const ProductMainDetailsUI = (props) => {
@@ -30,12 +34,15 @@ const ProductMainDetailsUI = (props) => {
     formState,
     handlechangeImage,
     handleChangeInput,
-    handleUpdateClick
+    handleUpdateClick,
+    handleDeleteProduct
   } = props
 
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ optimizeImage, parsePrice }] = useUtils()
   const [isEditMode, setIsEditMode] = useState(false)
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const configsOptions = [
     {
@@ -63,6 +70,17 @@ const ProductMainDetailsUI = (props) => {
       value: t('PERSONALIZATION', 'Personalization')
     }
   ]
+
+  const handleDeleteClick = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete this product?'),
+      handleOnAccept: () => {
+        handleDeleteProduct()
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
   return (
     <>
       <ProductDetailsContainer>
@@ -77,6 +95,20 @@ const ProductMainDetailsUI = (props) => {
             />
           </LeftHeader>
           <RightHeader>
+            <ActionSelectorWrapper>
+              <DropdownButton
+                className='product_actions'
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+              >
+                <Dropdown.Item
+                  onClick={() => handleDeleteClick()}
+                >
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              </DropdownButton>
+            </ActionSelectorWrapper>
             <IconButton
               color='black'
               onClick={() => isEditMode ? setIsEditMode(false) : actionSidebar(false)}
@@ -122,8 +154,18 @@ const ProductMainDetailsUI = (props) => {
             handleButtonUpdateClick={handleUpdateClick}
           />
         )}
-
       </ProductDetailsContainer>
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        width='700px'
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

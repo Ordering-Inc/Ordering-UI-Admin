@@ -9,10 +9,8 @@ import {
 } from 'ordering-components-admin'
 import { bytesConverter } from '../../utils'
 import { Switch } from '../../styles/Switch'
-import { Alert, Confirm } from '../Confirm'
-import { DropdownButton, Dropdown } from 'react-bootstrap'
+import { Alert } from '../Confirm'
 import { useTheme } from 'styled-components'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
 import {
   SingleListBusinessContainer,
@@ -20,7 +18,6 @@ import {
   WrapperImage,
   InfoBlock,
   BusinessEnableWrapper,
-  ActionSelectorWrapper,
   ProductTypeImage,
   UploadWrapper,
   DragableContainer,
@@ -35,7 +32,6 @@ const SingleBusinessProductUI = (props) => {
     allowColumns,
     handleChangeProductActive,
     handleUpdateClick,
-    deleteProduct,
     handleOpenProductDetails,
     productFormState,
     handleChangeInput,
@@ -54,11 +50,9 @@ const SingleBusinessProductUI = (props) => {
   const [{ parsePrice, optimizeImage }] = useUtils()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const containerRef = useRef(null)
   const ProductTypeImgRef = useRef(null)
-  const ActionIcon = <FiMoreVertical />
 
   const handleClickImage = () => {
     ProductTypeImgRef.current.click()
@@ -179,17 +173,6 @@ const SingleBusinessProductUI = (props) => {
     setDataSelected('')
   }
 
-  const handleDeleteClick = () => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete this product?'),
-      handleOnAccept: () => {
-        deleteProduct()
-        setConfirm({ ...confirm, open: false })
-      }
-    })
-  }
-
   const taxProduct = productFormState?.changes?.tax ?? business?.tax
   const taxProductType = taxProduct?.type || business?.tax_type
   const taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price')
@@ -227,9 +210,6 @@ const SingleBusinessProductUI = (props) => {
                 )}
                 <td>
                   <Skeleton width={100} />
-                </td>
-                <td>
-                  <Skeleton width={30} />
                 </td>
               </tr>
             </SingleListBusinessContainer>
@@ -356,7 +336,7 @@ const SingleBusinessProductUI = (props) => {
                     }
                   </td>
                 )}
-                <td>
+                <td className='actions'>
                   <BusinessEnableWrapper className='product_enable_control'>
                     {
                       product?.enabled
@@ -368,23 +348,6 @@ const SingleBusinessProductUI = (props) => {
                       onChange={handleChangeProductActive}
                     />
                   </BusinessEnableWrapper>
-                </td>
-                <td className='actions'>
-                  <ActionSelectorWrapper>
-                    <DropdownButton
-                      className='product_actions'
-                      menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={ActionIcon}
-                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                    >
-                      <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => handleDeleteClick()}
-                      >
-                        {t('DELETE', 'Delete')}
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </ActionSelectorWrapper>
                 </td>
               </tr>
             </SingleListBusinessContainer>
@@ -479,17 +442,6 @@ const SingleBusinessProductUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-      <Confirm
-        title={t('WEB_APPNAME', 'Ordering')}
-        width='700px'
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </>
