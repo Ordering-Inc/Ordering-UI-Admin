@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PlaceholderTitle = exports.Option = void 0;
+exports.PlaceholderTitle = exports.Option = exports.OrderStatusTypeSelectWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,11 +17,15 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  column-gap: 5px;  \n\n  ", "\n\n  img {\n    width: 15px;\n  }\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n  }\n"])), function (_ref) {
+var OrderStatusTypeSelectWrapper = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  .list-wrapper {\n    min-width: 297px;\n  }\n\n  .orderStatus {\n    width: 100%;\n  }\n\n  .search-bar-container {\n    padding: 10px 11px;\n    width: 100%;\n    input {\n      border-radius: 7.6px;\n      width: 100%;\n    }\n  }\n"])));
+
+exports.OrderStatusTypeSelectWrapper = OrderStatusTypeSelectWrapper;
+
+var Option = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  column-gap: 5px;  \n\n  ", "\n\n  img {\n    width: 15px;\n  }\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n  }\n"])), function (_ref) {
   var noPadding = _ref.noPadding;
-  return noPadding && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding: 0px;\n  "])));
+  return noPadding && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0px;\n  "])));
 });
 
 exports.Option = Option;
-var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 10px;\n"])));
+var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  padding: 10px;\n"])));
 exports.PlaceholderTitle = PlaceholderTitle;

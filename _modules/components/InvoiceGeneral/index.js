@@ -84,6 +84,16 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
       alertState = _useState8[0],
       setAlertState = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      businessSearchValue = _useState10[0],
+      setBusinessSearchValue = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      driverSearchValue = _useState12[0],
+      setDriverSearchValue = _useState12[1];
+
   var handleChangeFormState = function handleChangeFormState(type, value) {
     handleChangeInvocing(_objectSpread(_objectSpread({}, invocing), {}, _defineProperty({}, type, value)));
   };
@@ -119,27 +129,59 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (driverList) {
-      var _driverList$drivers;
+    if (driverList || driverSearchValue) {
+      var selectedTypes;
 
-      var selectedTypes = driverList === null || driverList === void 0 ? void 0 : (_driverList$drivers = driverList.drivers) === null || _driverList$drivers === void 0 ? void 0 : _driverList$drivers.map(function (item) {
-        return {
-          value: item.id,
-          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, item.name)
-        };
-      });
+      if (driverList) {
+        var _driverList$drivers;
+
+        selectedTypes = driverList === null || driverList === void 0 ? void 0 : (_driverList$drivers = driverList.drivers) === null || _driverList$drivers === void 0 ? void 0 : _driverList$drivers.map(function (item) {
+          return {
+            value: item.id,
+            content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, item.name)
+          };
+        });
+      }
+
+      if (driverSearchValue) {
+        selectedTypes = driverList === null || driverList === void 0 ? void 0 : driverList.drivers.filter(function (driver) {
+          return driver === null || driver === void 0 ? void 0 : driver.name.toLocaleLowerCase().includes(driverSearchValue.toLocaleLowerCase());
+        }).map(function (item) {
+          return {
+            value: item.id,
+            content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, item.name)
+          };
+        });
+      }
+
       setDriverOptions(selectedTypes);
     }
 
-    if (businessList) {
-      var _businessList$busines;
+    if (businessList || businessSearchValue) {
+      var types;
 
-      var types = businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.map(function (business) {
-        return {
-          value: business.id,
-          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, business.name)
-        };
-      });
+      if (businessList) {
+        var _businessList$busines;
+
+        types = businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.map(function (business) {
+          return {
+            value: business.id,
+            content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, business.name)
+          };
+        });
+      }
+
+      if (businessSearchValue) {
+        types = businessList === null || businessList === void 0 ? void 0 : businessList.businesses.filter(function (business) {
+          return business === null || business === void 0 ? void 0 : business.name.toLocaleLowerCase().includes(businessSearchValue.toLocaleLowerCase());
+        }).map(function (business) {
+          return {
+            value: business.id,
+            content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, business.name)
+          };
+        });
+      }
+
       var typeIvoiceList = [{
         value: 'charge',
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('CHARGE_BUSINESS_COMMISION_AND_FEES', 'Charge the business a commision and fees'))
@@ -150,7 +192,16 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
       setTypeInvoiceOptions(typeIvoiceList);
       setBusinessOptions(types);
     }
-  }, [driverList === null || driverList === void 0 ? void 0 : driverList.drivers, businessList === null || businessList === void 0 ? void 0 : businessList.businesses]);
+  }, [driverList === null || driverList === void 0 ? void 0 : driverList.drivers, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, businessSearchValue, driverSearchValue]);
+
+  var handleChangeBusinessSearch = function handleChangeBusinessSearch(searchVal) {
+    setBusinessSearchValue(searchVal);
+  };
+
+  var handleChangeDriverSearch = function handleChangeDriverSearch(searchVal) {
+    setDriverSearchValue(searchVal);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.InvoiceGeneralDetailContainer, {
     className: "row"
   }, selectedInvoice === 'business' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
@@ -180,7 +231,10 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     placeholder: t('BUSINESS_NAME', 'Business name'),
     onChange: function onChange(value) {
       return handleChangeFormState('business', value);
-    }
+    },
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    handleChangeSearch: handleChangeBusinessSearch
   })), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
   }, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('DRIVER', 'Driver')), selectedInvoice === 'driver' && (driverList !== null && driverList !== void 0 && driverList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -192,7 +246,10 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     placeholder: t('SELECT_DRIVER', 'Select a driver'),
     onChange: function onChange(value) {
       return handleChangeFormState('driver', value);
-    }
+    },
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    handleChangeSearch: handleChangeDriverSearch
   }))), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {

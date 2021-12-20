@@ -17,6 +17,8 @@ var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckb
 
 var _Buttons = require("../../styles/Buttons");
 
+var _SearchBar = require("../SearchBar");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -53,7 +55,9 @@ var ReportsDriverGroupFilterUI = function ReportsDriverGroupFilterUI(props) {
       handleChangeDriverGroupId = props.handleChangeDriverGroupId,
       handleClickFilterButton = props.handleClickFilterButton,
       isAllCheck = props.isAllCheck,
-      handleChangeAllCheck = props.handleChangeAllCheck;
+      handleChangeAllCheck = props.handleChangeAllCheck,
+      searchValue = props.searchValue,
+      _onSearch = props.onSearch;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,7 +76,15 @@ var ReportsDriverGroupFilterUI = function ReportsDriverGroupFilterUI(props) {
     return valid;
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReportsDriverGroupContainer, null, driverGroupList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReportsDriverGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    search: searchValue,
+    isCustomLayout: true,
+    lazyLoad: true,
+    onSearch: function onSearch(value) {
+      return _onSearch(value);
+    },
+    placeholder: t('SEARCH', 'Search')
+  })), driverGroupList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.DriverGroupOption, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

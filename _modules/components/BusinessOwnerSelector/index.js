@@ -51,6 +51,11 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
       usersListOptions = _useState2[0],
       setUsersListOptions = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      searchValue = _useState4[0],
+      setSearchValue = _useState4[1];
+
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SELECT_BUSINESS_OWNER', 'Select business owner'));
 
   var onSelectBusinessOwner = function onSelectBusinessOwner(id) {
@@ -63,20 +68,38 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
   (0, _react.useEffect)(function () {
     if (usersList !== null && usersList !== void 0 && usersList.loading) return;
 
-    var _usersListOptions = usersList === null || usersList === void 0 ? void 0 : usersList.users.map(function (user) {
+    var _userLists;
+
+    if (searchValue) {
+      _userLists = usersList === null || usersList === void 0 ? void 0 : usersList.users.filter(function (user) {
+        return ((user === null || user === void 0 ? void 0 : user.id) + (user === null || user === void 0 ? void 0 : user.name) + (user === null || user === void 0 ? void 0 : user.lastname)).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+      });
+    } else {
+      _userLists = usersList === null || usersList === void 0 ? void 0 : usersList.users;
+    }
+
+    var _usersListOptions = _userLists.map(function (user) {
       return {
-        value: user.id,
+        value: user === null || user === void 0 ? void 0 : user.id,
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, user.id, ". ", user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname),
         showDisable: selectedOwnerIds.includes(user.id)
       };
     });
 
     setUsersListOptions(_usersListOptions);
-  }, [usersList, selectedOwnerIds]);
+  }, [usersList, selectedOwnerIds, searchValue]);
+
+  var handleChangeSearch = function handleChangeSearch(searchVal) {
+    setSearchValue(searchVal);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: usersListOptions,
     placeholder: placeholder,
-    onChange: onSelectBusinessOwner
+    onChange: onSelectBusinessOwner,
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    handleChangeSearch: handleChangeSearch
   });
 };
 

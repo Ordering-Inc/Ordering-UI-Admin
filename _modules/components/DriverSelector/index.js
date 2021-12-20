@@ -96,6 +96,11 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       isRemoveAction = _useState8[0],
       setIsRemoveAction = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      searchValue = _useState10[0],
+      setSearchValue = _useState10[1];
+
   var driversLoading = [{
     value: 'default',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
@@ -132,7 +137,17 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     }
 
     if (!driversList.loading) {
-      var _driversOptionListTemp = driversList.drivers.map(function (driver, i) {
+      var _driverList;
+
+      if (searchValue) {
+        _driverList = driversList.drivers.filter(function (driver) {
+          return (driver.name + driver.lastname).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+        });
+      } else {
+        _driverList = driversList.drivers;
+      }
+
+      var _driversOptionListTemp = _driverList.map(function (driver, i) {
         return {
           value: driver.id,
           showDisable: isFilterView ? true : !(isFilterView || driver !== null && driver !== void 0 && driver.enabled && driver !== null && driver !== void 0 && driver.available && !(driver !== null && driver !== void 0 && driver.busy)),
@@ -174,7 +189,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     }
 
     setDriversOptionList(_driversOptionList);
-  }, [driversList, defaultValue]);
+  }, [driversList, defaultValue, searchValue]);
 
   var changeDriver = function changeDriver(driverId) {
     if (isFilterView) {
@@ -271,6 +286,10 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
 
   var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_DRIVER', 'Select driver'));
 
+  var handleSearch = function handleSearch(val) {
+    setSearchValue(val);
+  };
+
   if (isFilterView) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
       defaultValue: filterValues.driverIds,
@@ -298,7 +317,10 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       optionBottomBorder: true,
       onChange: function onChange(driverId) {
         return changeDriver(driverId);
-      }
+      },
+      isShowSearchBar: true,
+      searchBarIsCustomLayout: true,
+      handleChangeSearch: handleSearch
     }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
       defaultValue: defaultOption || 'default',
       options: driversOptionList,

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FilterBtnWrapper = exports.BusinessName = exports.DriverGroupOption = exports.ReportsDriverGroupContainer = void 0;
+exports.SearchWrapper = exports.FilterBtnWrapper = exports.BusinessName = exports.DriverGroupOption = exports.ReportsDriverGroupContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -42,3 +42,7 @@ exports.BusinessName = BusinessName;
 var FilterBtnWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  justify-content: flex-end;\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 42px;\n  }\n"])));
 
 exports.FilterBtnWrapper = FilterBtnWrapper;
+
+var SearchWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-bottom: 25px;\n"])));
+
+exports.SearchWrapper = SearchWrapper;
