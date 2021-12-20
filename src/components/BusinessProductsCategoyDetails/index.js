@@ -9,10 +9,12 @@ import {
 } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { bytesConverter } from '../../utils'
-import { Alert } from '../Confirm'
+import { Alert, Confirm } from '../Confirm'
 import { Button, IconButton, DefaultSelect, Input, Switch } from '../../styles'
 import FiCamera from '@meronex/icons/fi/FiCamera'
-import { XLg } from 'react-bootstrap-icons'
+import { XLg, ThreeDots } from 'react-bootstrap-icons'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import { useTheme } from 'styled-components'
 
 import {
   Container,
@@ -25,7 +27,9 @@ import {
   UploadImageIcon,
   CategoryNameWrapper,
   ParentCategorySelectWrapper,
-  Option
+  Option,
+  RightHeader,
+  ActionSelectorWrapper
 } from './styles'
 
 const BusinessProductsCategoyDetailsUI = (props) => {
@@ -42,9 +46,11 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     categorySelected,
     parentCategories,
     handleChangeItem,
-    isAddMode
+    isAddMode,
+    handleDeleteCategory
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const useParentCategory = configState?.configs?.use_parent_category?.value
@@ -55,6 +61,7 @@ const BusinessProductsCategoyDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const categoryTypeImageInputRef = useRef(null)
   const [parentCategoriesOptions, setParentCategoriesOptions] = useState([])
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -95,6 +102,17 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     setAlertState({
       open: false,
       content: []
+    })
+  }
+
+  const handleDeleteClick = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete this product?'),
+      handleOnAccept: () => {
+        handleDeleteCategory()
+        setConfirm({ ...confirm, open: false })
+      }
     })
   }
 
@@ -177,12 +195,30 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                       onChange={(val) => handleChangeCheckBox({ enabled: val })}
                     />
                   </BusinessEnableWrapper>
-                  <IconButton
-                    color='black'
-                    onClick={handleClose}
-                  >
-                    <XLg />
-                  </IconButton>
+                  <RightHeader>
+                    {!isAddMode && (
+                      <ActionSelectorWrapper>
+                        <DropdownButton
+                          className='product_actions'
+                          menuAlign={theme?.rtl ? 'left' : 'right'}
+                          title={<ThreeDots />}
+                          id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                        >
+                          <Dropdown.Item
+                            onClick={() => handleDeleteClick()}
+                          >
+                            {t('DELETE', 'Delete')}
+                          </Dropdown.Item>
+                        </DropdownButton>
+                      </ActionSelectorWrapper>
+                    )}
+                    <IconButton
+                      color='black'
+                      onClick={handleClose}
+                    >
+                      <XLg />
+                    </IconButton>
+                  </RightHeader>
                 </HeaderContainer>
                 <CategoryTypeImage
                   onClick={() => handleClickImage()}
@@ -268,6 +304,17 @@ const BusinessProductsCategoyDetailsUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        width='700px'
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </>

@@ -107,6 +107,7 @@ const BusinessProductsListingUI = (props) => {
 
   const handleCloseProductDetails = () => {
     setOpenProductDetails(false)
+    setSelectedProduct(null)
   }
 
   const handleProductAdd = (status) => {
@@ -127,12 +128,6 @@ const BusinessProductsListingUI = (props) => {
     setSelectedBusiness(business)
     setCategorySelected(null)
     setBusinessSlug(business?.slug)
-  }
-
-  const onDeleteCategoey = (categoryId) => {
-    if (categoryToEdit.open && categoryToEdit.category?.id === categoryId) {
-      handleCloseEdit()
-    }
   }
 
   useEffect(() => {
@@ -237,7 +232,6 @@ const BusinessProductsListingUI = (props) => {
                 handleChangeCategory={handleChangeCategory}
                 business={businessState?.business}
                 handleOpenCategoryDetails={handleOpenCategoryDetails}
-                onClose={onDeleteCategoey}
               />
               <ActionIconList>
                 {viewMethod === 'spreedsheet' && (
