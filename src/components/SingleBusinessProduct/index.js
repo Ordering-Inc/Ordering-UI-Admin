@@ -34,7 +34,6 @@ const SingleBusinessProductUI = (props) => {
     handleUpdateClick,
     handleOpenProductDetails,
     productFormState,
-    handleChangeInput,
     handlechangeImage,
     isEditMode,
     productDetailsId,
@@ -99,9 +98,7 @@ const SingleBusinessProductUI = (props) => {
   }
 
   const handleProductClick = (e) => {
-    const isInvalid = e.target.closest('.product_info') ||
-    e.target.closest('.product_price') || e.target.closest('.product_description') ||
-    e.target.closest('.product_enable_control') || e.target.closest('.product_actions')
+    const isInvalid = e.target.closest('.product_enable_control')
     if (isInvalid) return
     handleOpenProductDetails(product)
   }
@@ -190,24 +187,30 @@ const SingleBusinessProductUI = (props) => {
                       <WrapperImage>
                         <Skeleton width={38} height={38} />
                       </WrapperImage>
-                      <p><Skeleton width={80} /></p>
+                      <Skeleton width={80} />
                     </BusinessGeneralInfo>
                   </td>
                 )}
                 {allowColumns?.price && (
                   <td>
                     <InfoBlock>
-                      <p><Skeleton width={50} /></p>
+                      <Skeleton width={80} />
                     </InfoBlock>
                   </td>
                 )}
                 {allowColumns?.description && (
                   <td>
                     <InfoBlock className='description'>
-                      <p><Skeleton width={100} height={30} /></p>
+                      <Skeleton height={10} count={2} />
                     </InfoBlock>
                   </td>
                 )}
+                <td>
+                  <Skeleton width={100} />
+                </td>
+                <td>
+                  <Skeleton width={100} />
+                </td>
                 <td>
                   <Skeleton width={100} />
                 </td>
@@ -240,7 +243,7 @@ const SingleBusinessProductUI = (props) => {
                       <BusinessGeneralInfo>
                         <ProductTypeImage
                           onClick={() => handleClickImage()}
-                          disabled={productFormState?.loading}
+                          disabled
                         >
                           <ExamineClick
                             onFiles={files => handleFiles(files)}
@@ -273,13 +276,7 @@ const SingleBusinessProductUI = (props) => {
                         </ProductTypeImage>
                         {
                           product?.name && (
-                            <input
-                              type='text'
-                              name='name'
-                              value={productFormState?.changes?.name || ''}
-                              onChange={handleChangeInput}
-                              autoComplete='off'
-                            />
+                            <div className='product_name'>{productFormState?.changes?.name || ''}</div>
                           )
                         }
                       </BusinessGeneralInfo>
@@ -291,14 +288,9 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <input
-                          type='text'
-                          name='price'
-                          className='product_price'
-                          value={productFormState?.changes?.price || ''}
-                          onChange={handleChangeInput}
-                          autoComplete='off'
-                        />
+                        <div className='product_price'>
+                          {parsePrice(productFormState?.changes?.price || 0)}
+                        </div>
                       </InfoBlock>
                     }
                   </td>
@@ -307,13 +299,7 @@ const SingleBusinessProductUI = (props) => {
                   <td className='description'>
                     {
                       <InfoBlock>
-                        <textarea
-                          name='description'
-                          className='product_description'
-                          value={productFormState?.changes?.description || ''}
-                          onChange={handleChangeInput}
-                          autoComplete='off'
-                        />
+                        <div className='product_description'>{productFormState?.changes?.description || ''}</div>
                       </InfoBlock>
                     }
                   </td>
@@ -322,7 +308,7 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <div>{taxProduct?.rate ?? taxProduct ?? 0}% ({taxProductTypeString})</div>
+                        <div className='product_tax'>{taxProduct?.rate ?? taxProduct ?? 0}% ({taxProductTypeString})</div>
                       </InfoBlock>
                     }
                   </td>
@@ -331,7 +317,7 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <div>{parsePrice(productFormState?.changes?.fee?.fixed ?? 0)} + {productFormState?.changes?.fee?.percentage ?? business?.service_fee}%</div>
+                        <div className='product_fee'>{parsePrice(productFormState?.changes?.fee?.fixed ?? 0)} + {productFormState?.changes?.fee?.percentage ?? business?.service_fee}%</div>
                       </InfoBlock>
                     }
                   </td>

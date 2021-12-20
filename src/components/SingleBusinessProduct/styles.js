@@ -28,9 +28,6 @@ export const SingleListBusinessContainer = styled.tbody`
   }
 
   &:hover {
-    input, textarea {
-      background: ${props => props.theme.colors.lightPrimary};
-    }
     .action-btn {
       display: block;
     }
@@ -53,22 +50,13 @@ export const BusinessGeneralInfo = styled.div`
   p {
     margin: 0;
   }
-  input {
+  div.product_name {
     flex: 1;
     font-weight: 500;
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
-    border: 1px solid transparent;
-    outline: none;
-    transition: all 0.3s;
-    border-radius: 3px;
-    padding: 5px;
-  }
-  &:hover {
-    input {
-      border: 1px solid ${props => props.theme.colors.lightGray};
-      background: white;
-    }
+    margin: 0 10px;
+    white-space: nowrap;
   }
 `
 export const WrapperImage = styled.div`
@@ -87,42 +75,27 @@ export const WrapperImage = styled.div`
 `
 
 export const InfoBlock = styled.div`
-  input, textarea, div {
+  div {
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
-    border: 1px solid transparent;
-    outline: none;
     transition: all 0.3s;
-    border-radius: 3px;
-    padding: 5px;
     &.product_description {
       font-size: 10px;
       color: ${props => props.theme.colors.lightGray};
       resize: none;
       width: 100%;
-      min-width: 200px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
     &.product_price {
-      max-width: 60px;
+      white-space: nowrap;
     }
-  }
-  div{
-    min-width: 150px;
-  }
-  &:hover {
-    > input, textarea {
-      border: 1px solid ${props => props.theme.colors.lightGray};
-      background: white;
+    &.product_tax,
+    &.product_fee {
+      white-space: nowrap;
     }
-  }
-
-  input.fee_fixed,
-  input.fee_percentage {
-    max-width: 100px;
-  }
-
-  textarea.description {
-    width: 100%;
   }
 `
 
@@ -149,11 +122,6 @@ export const ProductTypeImage = styled.div`
   cursor: -webkit-grab;
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
-  ${props => props.theme?.rtl ? css`
-  maring-left: 10px;
-  ` : css`
-    margin-right: 10px;
-  `}
   ${({ disabled }) => disabled && css`
     pointer-events: none;
   `}
