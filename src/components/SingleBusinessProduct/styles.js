@@ -56,7 +56,7 @@ export const BusinessGeneralInfo = styled.div`
   input {
     flex: 1;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
     border: 1px solid transparent;
     outline: none;
@@ -88,8 +88,7 @@ export const WrapperImage = styled.div`
 
 export const InfoBlock = styled.div`
   input, textarea, div {
-    font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
     border: 1px solid transparent;
     outline: none;
@@ -97,10 +96,14 @@ export const InfoBlock = styled.div`
     border-radius: 3px;
     padding: 5px;
     &.product_description {
-      font-size: 12px;
+      font-size: 10px;
       color: ${props => props.theme.colors.lightGray};
       resize: none;
       width: 100%;
+      min-width: 200px;
+    }
+    &.product_price {
+      max-width: 60px;
     }
   }
   div{
@@ -140,7 +143,7 @@ export const BusinessEnableWrapper = styled.div`
 export const ActionSelectorWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 100px;
+  width: 50px;
   button {
     background: transparent !important;
     border: none;

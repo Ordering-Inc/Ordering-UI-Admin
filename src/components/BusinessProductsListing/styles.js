@@ -169,6 +169,10 @@ export const BusinessSelector = styled.div`
   position: relative;
 `
 export const BusinessNameWrapper = styled.div`
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
   cursor: pointer;
   h1 {
     svg {

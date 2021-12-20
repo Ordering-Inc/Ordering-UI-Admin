@@ -325,12 +325,12 @@ const SingleBusinessProductUI = (props) => {
                   </td>
                 )}
                 {allowColumns?.description && (
-                  <td>
+                  <td className='description'>
                     {
                       <InfoBlock>
                         <textarea
                           name='description'
-                          className='description'
+                          className='product_description'
                           value={productFormState?.changes?.description || ''}
                           onChange={handleChangeInput}
                           autoComplete='off'

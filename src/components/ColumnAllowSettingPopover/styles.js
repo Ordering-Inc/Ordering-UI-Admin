@@ -44,7 +44,7 @@ export const AllowItem = styled.div`
   }
   span {
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     ${props => props.theme?.rtl ? css`
       margin-right: 10px;

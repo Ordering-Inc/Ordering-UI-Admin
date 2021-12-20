@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
+  useUtils,
   SingleBusinessCategory as SingleBusinessCategoryController
 } from 'ordering-components-admin'
 import { Alert, Confirm } from '../Confirm'
@@ -30,6 +31,8 @@ export const SingleBusinessCategoryUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ optimizeImage }] = useUtils()
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const conatinerRef = useRef(null)
@@ -95,7 +98,7 @@ export const SingleBusinessCategoryUI = (props) => {
                   {
                     categoryFormState?.changes?.image
                       ? (
-                        <img src={categoryFormState?.changes?.image} alt='business type image' loading='lazy' />
+                        <img src={optimizeImage(categoryFormState?.changes?.image, 'h_50,c_limit')} alt='category image' loading='lazy' />
                       )
                       : (
                         <UploadWrapper>
