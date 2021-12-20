@@ -11,7 +11,9 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 import { Modal } from '../Modal'
 
 import {
+  RulesContainer,
   FormInput,
+  FormInnerContainer,
   SectionTitle,
   CouponContainer,
   CouponHeader,
@@ -92,113 +94,114 @@ export const EnterprisePromotionRules = (props) => {
   }, [width])
 
   return (
-    <>
+    <RulesContainer>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
-        <SectionTitle>{t('PROMOTION_TYPES', 'Promotion types')}</SectionTitle>
-        <SelectWrapper>
-          <Select
-            defaultValue={
-              typeof formState.changes?.target !== 'undefined'
-                ? formState.changes?.target
-                : promotionState.promotion?.target
-            }
-            options={promotionTypes}
-            onChange={val => handleChangeItem({ target: val })}
-          />
-        </SelectWrapper>
-        <DiscountContainer>
-          <div>
-            <label>{t('DISCOUNT_TYPE', 'Discount type')}</label>
+        <FormInnerContainer>
+          <SectionTitle>{t('PROMOTION_TYPES', 'Promotion types')}</SectionTitle>
+          <SelectWrapper>
             <Select
-              defaultValue={formState.changes?.rate_type ?? promotionState.promotion?.rate_type}
-              options={discountTypes}
-              onChange={val => handleChangeItem({ rate_type: val })}
+              defaultValue={
+                typeof formState.changes?.target !== 'undefined'
+                  ? formState.changes?.target
+                  : promotionState.promotion?.target
+              }
+              options={promotionTypes}
+              onChange={val => handleChangeItem({ target: val })}
             />
-          </div>
-          <div>
-            <label>{t('VALUE', 'Value')}</label>
-            <Input
-              name='rate'
-              value={formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''}
-              placeholder={0}
-              onChange={handleChangeInput}
-              onKeyPress={(e) => {
-                if (!/^[0-9.]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
-              ref={formMethods.register({
-                required: t('VALIDATION_ERROR_REQUIRED', 'The _attribute_ field is required.').replace('_attribute_', t('RATE', 'Rate'))
-              })}
-            />
-          </div>
-        </DiscountContainer>
+          </SelectWrapper>
+          <DiscountContainer>
+            <div>
+              <label>{t('DISCOUNT_TYPE', 'Discount type')}</label>
+              <Select
+                defaultValue={formState.changes?.rate_type ?? promotionState.promotion?.rate_type}
+                options={discountTypes}
+                onChange={val => handleChangeItem({ rate_type: val })}
+              />
+            </div>
+            <div>
+              <label>{t('VALUE', 'Value')}</label>
+              <Input
+                name='rate'
+                value={formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''}
+                placeholder={0}
+                onChange={handleChangeInput}
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+                ref={formMethods.register({
+                  required: t('VALIDATION_ERROR_REQUIRED', 'The _attribute_ field is required.').replace('_attribute_', t('RATE', 'Rate'))
+                })}
+              />
+            </div>
+          </DiscountContainer>
 
-        <SectionTitle>{t('QUESTION_HOW_GOING_APPLIED', 'How it\'s going to be applied?')}</SectionTitle>
-        <CouponContainer>
-          <CouponHeader
-            active={(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2))}
-            onClick={() => handleChangeItem({ type: 2 })}
+          <SectionTitle>{t('QUESTION_HOW_GOING_APPLIED', 'How it\'s going to be applied?')}</SectionTitle>
+          <CouponContainer>
+            <CouponHeader
+              active={(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2))}
+              onClick={() => handleChangeItem({ type: 2 })}
+            >
+              {(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2)) ? (
+                <RecordCircleFill />
+              ) : (
+                <Circle />
+              )}
+              <span>{t('COUPON', 'Coupon')}</span>
+            </CouponHeader>
+            {(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2)) && (
+              <CouponContent>
+                <ShowInCartContainer>
+                  <Checkbox
+                    checked={
+                      typeof formState.changes?.public !== 'undefined'
+                        ? formState.changes?.public
+                        : promotionState.promotion?.public
+                    }
+                    onChange={e => handleChangeItem({ public: e.target.checked })}
+                  />
+                  <div>
+                    <p>{t('SHOW_IN_CART', 'Show in cart')}</p>
+                    <p>{t('PLEASE_INDICATE_COUPON_FOR_CART', 'Please indicate if you want the coupon to be seen in the cart or hidden')}</p>
+                  </div>
+                </ShowInCartContainer>
+                <CouponCodeContainer>
+                  <label>{t('COUPON_CODE', 'Coupon code')}</label>
+                  <Input
+                    name='coupon'
+                    value={formState.changes?.coupon ?? promotionState?.promotion?.coupon ?? ''}
+                    onChange={e => handleChangeItem({ coupon: e.target.value.replace(/\s+/g, '') })}
+                  />
+                </CouponCodeContainer>
+              </CouponContent>
+            )}
+
+          </CouponContainer>
+          <DiscountOption
+            active={(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1))}
+            onClick={() => handleChangeItem({ type: 1 })}
           >
-            {(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2)) ? (
+            {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) ? (
               <RecordCircleFill />
             ) : (
               <Circle />
             )}
-            <span>{t('COUPON', 'Coupon')}</span>
-          </CouponHeader>
-          {(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2)) && (
-            <CouponContent>
-              <ShowInCartContainer>
-                <Checkbox
-                  checked={
-                    typeof formState.changes?.public !== 'undefined'
-                      ? formState.changes?.public
-                      : promotionState.promotion?.public
-                  }
-                  onChange={e => handleChangeItem({ public: e.target.checked })}
-                />
-                <div>
-                  <p>{t('SHOW_IN_CART', 'Show in cart')}</p>
-                  <p>{t('PLEASE_INDICATE_COUPON_FOR_CART', 'Please indicate if you want the coupon to be seen in the cart or hidden')}</p>
-                </div>
-              </ShowInCartContainer>
-              <CouponCodeContainer>
-                <label>{t('COUPON_CODE', 'Coupon code')}</label>
-                <Input
-                  name='coupon'
-                  value={formState.changes?.coupon ?? promotionState?.promotion?.coupon ?? ''}
-                  onChange={e => handleChangeItem({ coupon: e.target.value.replace(/\s+/g, '') })}
-                />
-              </CouponCodeContainer>
-            </CouponContent>
-          )}
+            <span>{t('AUTOMATIC_DISCOUNT', 'Automatic discount')}</span>
+          </DiscountOption>
 
-        </CouponContainer>
-        <DiscountOption
-          active={(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1))}
-          onClick={() => handleChangeItem({ type: 1 })}
-        >
-          {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) ? (
-            <RecordCircleFill />
-          ) : (
-            <Circle />
-          )}
-          <span>{t('AUTOMATIC_DISCOUNT', 'Automatic discount')}</span>
-        </DiscountOption>
-
-        <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
-        <CondtionItem
-          active={isShowConditions}
-          onClick={() => hanndleClickApply()}
-        >
-          <div>
-            {isShowConditions ? <RecordCircleFill /> : <Circle />}
-            <span>{t('FRONT_VISUALS_APPLY', 'Apply')}</span>
-          </div>
-          <ChevronRight />
-        </CondtionItem>
-
+          <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
+          <CondtionItem
+            active={isShowConditions}
+            onClick={() => hanndleClickApply()}
+          >
+            <div>
+              {isShowConditions ? <RecordCircleFill /> : <Circle />}
+              <span>{t('FRONT_VISUALS_APPLY', 'Apply')}</span>
+            </div>
+            <ChevronRight />
+          </CondtionItem>
+        </FormInnerContainer>
         <Button
           borderRadius='8px'
           color='primary'
@@ -246,6 +249,6 @@ export const EnterprisePromotionRules = (props) => {
           <EnterprisePromotionConditions {...props} />
         </Modal>
       )}
-    </>
+    </RulesContainer>
   )
 }

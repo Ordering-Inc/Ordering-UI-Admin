@@ -6,7 +6,7 @@ import {
   DragAndDrop,
   ExamineClick
 } from 'ordering-components-admin'
-import { Input, TextArea, Button, Checkbox } from '../../styles'
+import { Input, TextArea, Button, Switch } from '../../styles'
 import { Select } from '../../styles/Select/FirstSelect'
 
 import {
@@ -24,6 +24,7 @@ import {
   UploadImageIconContainer,
   UploadImageIcon,
   FormInput,
+  FormInnerContainer,
   InputWrapper,
   DateRangeWrapper,
   CalendarContainer,
@@ -31,14 +32,11 @@ import {
   SelectGroup,
   LabelWrapper,
   OrderPriorityContainer,
-  StackableContainer,
-  ChannelsContainer,
-  ChannelItem
+  StackableContainer
 } from './styles'
 
 export const EnterprisePromotionGeneralDetails = (props) => {
   const {
-    sitesState,
     isAddMode,
     promotionState,
     formState,
@@ -47,8 +45,7 @@ export const EnterprisePromotionGeneralDetails = (props) => {
     handleChangeInput,
     handleUpdateClick,
     handleAddPromotion,
-    handleChangeItem,
-    handleChangeSites
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
@@ -133,20 +130,6 @@ export const EnterprisePromotionGeneralDetails = (props) => {
     }
   }
 
-  const isSiteDefaultChecked = (siteId) => {
-    if (Array.isArray(promotionState.promotion?.sites)) {
-      const found = promotionState.promotion?.sites.find(site => site.id === siteId)
-      if (found) return true
-      else return false
-    } else return false
-  }
-
-  const isSiteChangesChecked = (siteId) => {
-    const found = formState.changes?.sites.find(id => id === siteId)
-    if (found) return true
-    else return false
-  }
-
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -186,152 +169,135 @@ export const EnterprisePromotionGeneralDetails = (props) => {
     <>
       <DetailsContainer>
         <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
-          <PromotionImage className='promotion_image'>
-            <Image onClick={() => handleClickImage()}>
-              <ExamineClick
-                onFiles={handleFiles}
-                childRef={(e) => { inputRef.current = e }}
-                accept='image/png, image/jpeg, image/jpg'
-                disabled={actionState.loading}
-              >
-                <DragAndDrop
-                  onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+          <FormInnerContainer>
+            <PromotionImage className='promotion_image'>
+              <Image onClick={() => handleClickImage()}>
+                <ExamineClick
+                  onFiles={handleFiles}
+                  childRef={(e) => { inputRef.current = e }}
                   accept='image/png, image/jpeg, image/jpg'
                   disabled={actionState.loading}
                 >
-                  {
-                    formState?.changes?.image
-                      ? <img src={formState?.changes?.image} alt='user image' loading='lazy' />
-                      : promotionState?.promotion?.image && <img src={promotionState?.promotion?.image} alt='user image' loading='lazy' />
-                  }
-                  <UploadImageIconContainer>
-                    <UploadImageIcon>
-                      <ImageIcon />
-                      <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                    </UploadImageIcon>
-                  </UploadImageIconContainer>
-                </DragAndDrop>
-              </ExamineClick>
-            </Image>
-          </PromotionImage>
-          <InputWrapper>
-            <label>{t('NAME', 'Name')}</label>
-            <Input
-              name='name'
-              type='text'
-              placeholder={t('NAME', 'name')}
-              value={
-                formState?.changes?.name ?? promotionState?.promotion?.name ?? ''
-              }
-              onChange={handleChangeInput}
-              ref={formMethods.register({
-                required: t('NAME_REQUIRED', 'The name is required.')
-              })}
-              disabled={formState.loading}
-              autoComplete='off'
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>{t('Description_V2', 'Description')}</label>
-            <TextArea
-              rows={4}
-              name='description'
-              placeholder={t('SHORT_PROMOTION_ABOUT', 'Write a little description')}
-              value={
-                formState?.changes?.description ?? promotionState?.promotion?.description ?? ''
-              }
-              onChange={handleChangeInput}
-              disabled={formState.loading}
-              autoComplete='off'
-            />
-          </InputWrapper>
-
-          <SelectGroup>
-            <DateRangeWrapper>
-              <label>{t('DATES_RANGE', 'Date range')}</label>
-              <CalendarContainer>
-                <Button
-                  color='secundary'
-                  borderRadius='8px'
-                  type='button'
-                  onClick={() => setIsShowCalendar(true)}
-                >
-                  <Calendar4 />
-                  <span>
+                  <DragAndDrop
+                    onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                    accept='image/png, image/jpeg, image/jpg'
+                    disabled={actionState.loading}
+                  >
                     {
-                      dateRange[0].startDate
-                        ? `${moment(dateRange[0].startDate).format('YYYY/MM/DD')} - ${moment(dateRange[0].endDate).format('YYYY/MM/DD')}`
-                        : t('SELECT_DATE_RANGE', 'Select Date Range')
+                      formState?.changes?.image
+                        ? <img src={formState?.changes?.image} alt='user image' loading='lazy' />
+                        : promotionState?.promotion?.image && <img src={promotionState?.promotion?.image} alt='user image' loading='lazy' />
                     }
-                  </span>
-                </Button>
-                {
-                  isShowCalendar && (
-                    <CalendarWrapper ref={calendarRef} notSelected={!dateRange[0].startDate}>
-                      <DateRange
-                        editableDateInputs
-                        onChange={item => handleChangeDates(item)}
-                        moveRangeOnFirstSelection={false}
-                        ranges={dateRange}
-                      />
-                    </CalendarWrapper>
-                  )
-                }
-              </CalendarContainer>
-            </DateRangeWrapper>
-            <LabelWrapper>
-              <label>{t('LABEL', 'Label')}</label>
+                    <UploadImageIconContainer>
+                      <UploadImageIcon>
+                        <ImageIcon />
+                        <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                      </UploadImageIcon>
+                    </UploadImageIconContainer>
+                  </DragAndDrop>
+                </ExamineClick>
+              </Image>
+            </PromotionImage>
+            <InputWrapper>
+              <label>{t('NAME', 'Name')}</label>
               <Input
-                name='label'
-                placeholder={t('LABEL', 'Label')}
+                name='name'
+                type='text'
+                placeholder={t('NAME', 'name')}
                 value={
-                  formState?.changes?.label ?? promotionState?.promotion?.label ?? ''
+                  formState?.changes?.name ?? promotionState?.promotion?.name ?? ''
                 }
                 onChange={handleChangeInput}
+                ref={formMethods.register({
+                  required: t('NAME_REQUIRED', 'The name is required.')
+                })}
+                disabled={formState.loading}
+                autoComplete='off'
               />
-            </LabelWrapper>
-          </SelectGroup>
+            </InputWrapper>
+            <InputWrapper>
+              <label>{t('Description_V2', 'Description')}</label>
+              <TextArea
+                rows={4}
+                name='description'
+                placeholder={t('SHORT_PROMOTION_ABOUT', 'Write a little description')}
+                value={
+                  formState?.changes?.description ?? promotionState?.promotion?.description ?? ''
+                }
+                onChange={handleChangeInput}
+                disabled={formState.loading}
+                autoComplete='off'
+              />
+            </InputWrapper>
 
-          <OrderPriorityContainer>
-            <label>{t('ORDER_PRIORITY', 'Order priority')}</label>
-            <Select
-              placeholder={t('SELECT_ORDER_PRIORITY', 'Select order priority')}
-              defaultValue={formState?.changes?.order_priority ?? promotionState.promotion?.order_priority}
-              options={OrderPriorityOptions}
-              onChange={val => handleChangeItem({ order_priority: val })}
-            />
-          </OrderPriorityContainer>
-
-          <StackableContainer>
-            <Checkbox
-              checked={
-                typeof formState.changes?.stackable !== 'undefined'
-                  ? formState.changes?.stackable
-                  : promotionState.promotion?.stackable
-              }
-              onChange={e => handleChangeItem({ stackable: e.target.checked })}
-            />
-            <span>{t('ALLOW_COMBINE_OFFER', 'Allow to combine offer (discount/coupon) with others?')}</span>
-          </StackableContainer>
-
-          <ChannelsContainer>
-            <p>{t('CHANNELS', 'Channels')}</p>
-            {sitesState.sites.map(site => (
-              <ChannelItem
-                key={site.id}
-              >
-                <Checkbox
-                  checked={
-                    formState.changes?.sites
-                      ? isSiteChangesChecked(site.id)
-                      : isSiteDefaultChecked(site.id)
+            <SelectGroup>
+              <DateRangeWrapper>
+                <label>{t('DATES_RANGE', 'Date range')}</label>
+                <CalendarContainer>
+                  <Button
+                    color='secundary'
+                    borderRadius='8px'
+                    type='button'
+                    onClick={() => setIsShowCalendar(true)}
+                  >
+                    <Calendar4 />
+                    <span>
+                      {
+                        dateRange[0].startDate
+                          ? `${moment(dateRange[0].startDate).format('YYYY/MM/DD')} - ${moment(dateRange[0].endDate).format('YYYY/MM/DD')}`
+                          : t('SELECT_DATE_RANGE', 'Select Date Range')
+                      }
+                    </span>
+                  </Button>
+                  {
+                    isShowCalendar && (
+                      <CalendarWrapper ref={calendarRef} notSelected={!dateRange[0].startDate}>
+                        <DateRange
+                          editableDateInputs
+                          onChange={item => handleChangeDates(item)}
+                          moveRangeOnFirstSelection={false}
+                          ranges={dateRange}
+                        />
+                      </CalendarWrapper>
+                    )
                   }
-                  onChange={(e) => handleChangeSites(e.target.checked, site.id)}
+                </CalendarContainer>
+              </DateRangeWrapper>
+              <LabelWrapper>
+                <label>{t('LABEL', 'Label')}</label>
+                <Input
+                  name='label'
+                  placeholder={t('LABEL', 'Label')}
+                  value={
+                    formState?.changes?.label ?? promotionState?.promotion?.label ?? ''
+                  }
+                  onChange={handleChangeInput}
                 />
-                <span>{site.name}</span>
-              </ChannelItem>
-            ))}
-          </ChannelsContainer>
+              </LabelWrapper>
+            </SelectGroup>
+
+            <OrderPriorityContainer>
+              <label>{t('ORDER_PRIORITY', 'Order priority')}</label>
+              <Select
+                placeholder={t('SELECT_ORDER_PRIORITY', 'Select order priority')}
+                defaultValue={formState?.changes?.order_priority ?? promotionState.promotion?.order_priority}
+                options={OrderPriorityOptions}
+                onChange={val => handleChangeItem({ order_priority: val })}
+              />
+            </OrderPriorityContainer>
+
+            <StackableContainer>
+              <span>{t('ALLOW_COMBINE_OFFER', 'Allow to combine offer (discount/coupon) with others?')}</span>
+              <Switch
+                defaultChecked={
+                  typeof formState.changes?.stackable !== 'undefined'
+                    ? formState.changes?.stackable
+                    : promotionState.promotion?.stackable ?? false
+                }
+                onChange={e => handleChangeItem({ stackable: e.target.checked })}
+              />
+            </StackableContainer>
+          </FormInnerContainer>
           <Button
             borderRadius='8px'
             color='primary'

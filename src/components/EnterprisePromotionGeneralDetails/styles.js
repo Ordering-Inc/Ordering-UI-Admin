@@ -5,8 +5,12 @@ export const DetailsContainer = styled.div`
 export const FormInput = styled.form`
   > button {
     height: 44px;
-    margin: 30px 0;
+    top: 100%;
+    position: sticky;
+    margin: 30px 0 20px 0;
   }
+`
+export const FormInnerContainer = styled.div`
 `
 export const PromotionImage = styled.div`
   display: flex;
@@ -168,6 +172,11 @@ export const OrderPriorityContainer = styled.div`
     margin-bottom: 10px;
   }
   .select {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 2px;
+    ` : css`
+      margin-right: 2px;
+    `}
     font-size: 14px;
     background: ${props => props.theme.colors.secundary};
     border: none;
@@ -184,40 +193,15 @@ export const OrderPriorityContainer = styled.div`
 `
 export const StackableContainer = styled.div`
   display: flex;
+  align-items: center;
   margin-top: 24px;
 
   > span {
     font-size: 14px;
     ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
-    ` : css`
       margin-left: 10px;
-    `}
-  }
-`
-export const ChannelsContainer = styled.div`
-  margin-top: 36px;
-
-  p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    padding-bottom: 14px;
-    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  }
-`
-export const ChannelItem = styled.div`
-  padding: 12px 0;
-  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  display: flex;
-  align-items: center;
-
-  span {
-    font-size: 14px;
-    ${props => props.theme?.rtl ? css`
-      margin-right: 14px;
     ` : css`
-      margin-left: 14px;
+      margin-right: 10px;
     `}
   }
 `
