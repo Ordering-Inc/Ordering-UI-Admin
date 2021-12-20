@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   useLanguage,
   DragAndDrop,
@@ -35,6 +35,8 @@ const ProductGalleryUI = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [inputRef, setInputRef] = useState(null)
+  const inputAddRef = useRef()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -70,6 +72,7 @@ const ProductGalleryUI = (props) => {
       }
       handleChangeImage(files[0], optionId)
     }
+    if (!optionId && inputRef?.value) inputRef.value = null
   }
 
   const handleDeleteClick = (itemId, type) => {
@@ -90,6 +93,10 @@ const ProductGalleryUI = (props) => {
       content: changesState?.error
     })
   }, [changesState?.error])
+
+  useEffect(() => {
+    if (Object.entries(changesState?.changes).length === 0 && inputAddRef?.current) inputAddRef.current.value = ''
+  }, [changesState?.changes])
 
   return (
     <>
@@ -169,6 +176,7 @@ const ProductGalleryUI = (props) => {
                     childId='gallery_image_add'
                     accept='image/png, image/jpeg, image/jpg'
                     disabled={changesState.loading || productGalleryState.loading}
+                    childRef={e => setInputRef(e)}
                   >
                     <DragAndDrop
                       onDrop={dataTransfer => handleFiles(dataTransfer.files, null)}
@@ -188,6 +196,7 @@ const ProductGalleryUI = (props) => {
                 <GalleryItemBottom isAdd>
                   <input
                     name='title'
+                    ref={inputAddRef}
                     placeholder={t('TITLE', 'Title')}
                     onChange={e => handleChangeInput(e, null)}
                   />
