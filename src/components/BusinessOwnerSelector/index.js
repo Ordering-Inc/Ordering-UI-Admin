@@ -13,6 +13,7 @@ const BusinessOwnerSelectorUI = (props) => {
 
   const [, t] = useLanguage()
   const [usersListOptions, setUsersListOptions] = useState([])
+  const [searchValue, setSearchValue] = useState(null)
 
   const placeholder = <Option>{t('SELECT_BUSINESS_OWNER', 'Select business owner')}</Option>
 
@@ -23,9 +24,17 @@ const BusinessOwnerSelectorUI = (props) => {
 
   useEffect(() => {
     if (usersList?.loading) return
-    const _usersListOptions = usersList?.users.map(user => {
+
+    let _userLists
+    if (searchValue) {
+      _userLists = usersList?.users.filter(user => (user?.id + user?.name + user?.lastname).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+    } else {
+      _userLists = usersList?.users
+    }
+
+    const _usersListOptions = _userLists.map(user => {
       return {
-        value: user.id,
+        value: user?.id,
         content: (
           <Option>
             {user.id}. {user?.name} {user?.lastname}
@@ -35,12 +44,20 @@ const BusinessOwnerSelectorUI = (props) => {
       }
     })
     setUsersListOptions(_usersListOptions)
-  }, [usersList, selectedOwnerIds])
+  }, [usersList, selectedOwnerIds, searchValue])
+
+  const handleChangeSearch = (searchVal) => {
+    setSearchValue(searchVal)
+  }
+
   return (
     <Select
       options={usersListOptions}
       placeholder={placeholder}
       onChange={onSelectBusinessOwner}
+      isShowSearchBar
+      searchBarIsCustomLayout
+      handleChangeSearch={handleChangeSearch}
     />
   )
 }

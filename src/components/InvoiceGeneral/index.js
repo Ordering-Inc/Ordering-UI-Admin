@@ -32,6 +32,8 @@ export const InvoiceGeneral = (props) => {
   const [businessOptions, setBusinessOptions] = useState(null)
   const [driverOptions, setDriverOptions] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [businessSearchValue, setBusinessSearchValue] = useState(null)
+  const [driverSearchValue, setDriverSearchValue] = useState(null)
 
   const handleChangeFormState = (type, value) => {
     handleChangeInvocing({ ...invocing, [type]: value })
@@ -65,16 +67,37 @@ export const InvoiceGeneral = (props) => {
   }
 
   useEffect(() => {
-    if (driverList) {
-      const selectedTypes = driverList?.drivers?.map(item => {
-        return { value: item.id, content: <Option>{item.name}</Option> }
-      })
+    if (driverList || driverSearchValue) {
+      let selectedTypes
+      if (driverList) {
+        selectedTypes = driverList?.drivers?.map(item => {
+          return { value: item.id, content: <Option>{item.name}</Option> }
+        })
+      }
+      if (driverSearchValue) {
+        selectedTypes = driverList?.drivers
+          .filter(driver => driver?.name.toLocaleLowerCase().includes(driverSearchValue.toLocaleLowerCase()))
+          .map(item => {
+            return { value: item.id, content: <Option>{item.name}</Option> }
+          })
+      }
       setDriverOptions(selectedTypes)
     }
-    if (businessList) {
-      const types = businessList?.businesses?.map(business => {
-        return { value: business.id, content: <Option>{business.name}</Option> }
-      })
+
+    if (businessList || businessSearchValue) {
+      let types
+      if (businessList) {
+        types = businessList?.businesses?.map(business => {
+          return { value: business.id, content: <Option>{business.name}</Option> }
+        })
+      }
+      if (businessSearchValue) {
+        types = businessList?.businesses
+          .filter(business => business?.name.toLocaleLowerCase().includes(businessSearchValue.toLocaleLowerCase()))
+          .map(business => {
+            return { value: business.id, content: <Option>{business.name}</Option> }
+          })
+      }
       const typeIvoiceList = [
         { value: 'charge', content: <Option>{t('CHARGE_BUSINESS_COMMISION_AND_FEES', 'Charge the business a commision and fees')}</Option> },
         { value: 'payout', content: <Option>{t('PAYOUT_BUSINESS', 'Payout the business')}</Option> }
@@ -82,7 +105,15 @@ export const InvoiceGeneral = (props) => {
       setTypeInvoiceOptions(typeIvoiceList)
       setBusinessOptions(types)
     }
-  }, [driverList?.drivers, businessList?.businesses])
+  }, [driverList?.drivers, businessList?.businesses, businessSearchValue, driverSearchValue])
+
+  const handleChangeBusinessSearch = (searchVal) => {
+    setBusinessSearchValue(searchVal)
+  }
+
+  const handleChangeDriverSearch = (searchVal) => {
+    setDriverSearchValue(searchVal)
+  }
 
   return (
     <>
@@ -129,6 +160,9 @@ export const InvoiceGeneral = (props) => {
                     defaultValue={invocing?.business}
                     placeholder={t('BUSINESS_NAME', 'Business name')}
                     onChange={(value) => handleChangeFormState('business', value)}
+                    isShowSearchBar
+                    searchBarIsCustomLayout
+                    handleChangeSearch={handleChangeBusinessSearch}
                   />
                 )
               }
@@ -150,6 +184,9 @@ export const InvoiceGeneral = (props) => {
                       defaultValue={invocing?.driver}
                       placeholder={t('SELECT_DRIVER', 'Select a driver')}
                       onChange={(value) => handleChangeFormState('driver', value)}
+                      isShowSearchBar
+                      searchBarIsCustomLayout
+                      handleChangeSearch={handleChangeDriverSearch}
                     />
                   )
                 )
