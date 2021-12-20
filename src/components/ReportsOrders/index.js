@@ -37,14 +37,18 @@ const ReportsOrdersUI = (props) => {
   const [dataOptions, setDataOptions] = useState([])
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+
   const generateData = () => {
     const values = reportData?.content?.dataset?.dataset?.map((item, index) => {
-      const list = item.data.map(value => {
-        return value.y
-      })
+      const list = []
+      if (item?.data?.length > 0) {
+        for (const value of item?.data) {
+          list.push(value.y)
+        }
+      }
       return {
         label: item.label,
-        data: [...list],
+        data: list,
         fill: false,
         backgroundColor: 'rgba(75,192,192,0.2)',
         borderColor: lighten(index / 10, '#2C7BE5'),
@@ -91,7 +95,7 @@ const ReportsOrdersUI = (props) => {
   }
 
   const downloadCSV = () => {
-    if (reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
+    if (reportData?.content?.dataset?.dataset[0]?.data && reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
       let csv = `${t('TIME', 'Time')}, ${t('ORDERS', 'Orders')}\n`
       for (const row of reportData?.content?.dataset?.dataset[0]?.data) {
         csv += row.x + ','
@@ -111,7 +115,7 @@ const ReportsOrdersUI = (props) => {
   }
 
   useEffect(() => {
-    if (reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
+    if (reportData?.content?.dataset?.dataset[0]?.data && reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
       const defaultData = {
         labels: generateLabel(),
         datasets: generateData()

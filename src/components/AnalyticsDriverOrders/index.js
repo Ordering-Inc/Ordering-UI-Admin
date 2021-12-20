@@ -29,10 +29,13 @@ export const AnalyticsDriverOrders = (props) => {
   const [dataOptions, setDataOptions] = useState([])
 
   const generateData = () => {
-    const values = chartDataList.dataset.dataset.map((item, index) => {
-      const list = item.data.map(value => {
-        return value.y
-      })
+    const values = chartDataList.data.dataset.dataset.map((item, index) => {
+      const list = []
+      if (item?.data?.length > 0) {
+        for (const value of item?.data) {
+          list.push(value.y)
+        }
+      }
       return {
         label: item.label,
         data: [...list],
@@ -48,7 +51,7 @@ export const AnalyticsDriverOrders = (props) => {
 
   const generateLabel = () => {
     const values = []
-    chartDataList.dataset.dataset[0].data.forEach(data => {
+    chartDataList.data.dataset.dataset[0].data.forEach(data => {
       values.push(data.x)
     })
     return values
@@ -120,7 +123,7 @@ export const AnalyticsDriverOrders = (props) => {
   }
 
   useEffect(() => {
-    if (chartDataList?.data?.dataset?.dataset[0]?.data.length > 0) {
+    if (chartDataList?.data?.dataset?.dataset[0]?.data && chartDataList?.data?.dataset?.dataset[0]?.data?.length > 0) {
       const defaultData = {
         labels: generateLabel(),
         datasets: generateData()
