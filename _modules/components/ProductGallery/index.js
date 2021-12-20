@@ -75,22 +75,29 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
-  var _useState = (0, _react.useState)({
+  var _useState = (0, _react.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      inputRef = _useState2[0],
+      setInputRef = _useState2[1];
+
+  var inputAddRef = (0, _react.useRef)();
+
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
 
-  var _useState3 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      confirm = _useState4[0],
-      setConfirm = _useState4[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -127,6 +134,8 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
 
       handleChangeImage(files[0], optionId);
     }
+
+    if (!optionId && inputRef !== null && inputRef !== void 0 && inputRef.value) inputRef.value = null;
   };
 
   var handleDeleteClick = function handleDeleteClick(itemId, type) {
@@ -149,6 +158,9 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
       content: changesState === null || changesState === void 0 ? void 0 : changesState.error
     });
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.error]);
+  (0, _react.useEffect)(function () {
+    if (Object.entries(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0 && inputAddRef !== null && inputAddRef !== void 0 && inputAddRef.current) inputAddRef.current.value = '';
+  }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProdcutGalleryContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_IMAGES', 'Product images')), /*#__PURE__*/_react.default.createElement(_styles2.GalleryImagesContainer, null, productGalleryState !== null && productGalleryState !== void 0 && productGalleryState.loading ? _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.GalleryItem, {
       key: i
@@ -218,7 +230,10 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
     },
     childId: "gallery_image_add",
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: changesState.loading || productGalleryState.loading
+    disabled: changesState.loading || productGalleryState.loading,
+    childRef: function childRef(e) {
+      return setInputRef(e);
+    }
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
     onDrop: function onDrop(dataTransfer) {
       return handleFiles(dataTransfer.files, null);
@@ -233,6 +248,7 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
     isAdd: true
   }, /*#__PURE__*/_react.default.createElement("input", {
     name: "title",
+    ref: inputAddRef,
     placeholder: t('TITLE', 'Title'),
     onChange: function onChange(e) {
       return handleChangeInput(e, null);
