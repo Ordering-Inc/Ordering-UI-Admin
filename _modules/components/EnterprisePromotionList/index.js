@@ -17,15 +17,11 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _styles = require("../../styles");
 
-var _reactBootstrap = require("react-bootstrap");
-
 var _styledComponents = require("styled-components");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _Pagination = require("../Pagination");
-
-var _Confirm = require("../Confirm");
 
 var _styles2 = require("./styles");
 
@@ -73,8 +69,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       handleAllowDrop = props.handleAllowDrop,
       handleDrop = props.handleDrop,
       handleDragEnd = props.handleDragEnd,
-      handleEnablePromotion = props.handleEnablePromotion,
-      handleDeletePromotion = props.handleDeletePromotion;
+      handleEnablePromotion = props.handleEnablePromotion;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -88,30 +83,21 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       parseDate = _useUtils2$.parseDate,
       optimizeImage = _useUtils2$.optimizeImage;
 
-  var _useState = (0, _react.useState)({
-    open: false,
-    content: null,
-    handleOnAccept: null
-  }),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      confirm = _useState2[0],
-      setConfirm = _useState2[1];
+      openPopover = _useState2[0],
+      setOpenPopover = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      openPopover = _useState4[0],
-      setOpenPopover = _useState4[1];
-
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     promotions: true,
     promotionType: true,
     how: true,
     dateRange: true,
     actions: true
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      allowColumns = _useState6[0],
-      setAllowColumns = _useState6[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      allowColumns = _useState4[0],
+      setAllowColumns = _useState4[1];
 
   var optionsDefault = [{
     value: 'promotions',
@@ -156,19 +142,6 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     }
   };
 
-  var onClickDeletePromotion = function onClickDeletePromotion(promotionId) {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('PROMOTION', 'Promotion')),
-      handleOnAccept: function handleOnAccept() {
-        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-          open: false
-        }));
-        handleDeletePromotion(promotionId);
-      }
-    });
-  };
-
   var handleChangePage = function handleChangePage(page) {
     getPromotions(page, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize);
   };
@@ -182,7 +155,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
   };
 
   var handleClickPromotion = function handleClickPromotion(e, promotion) {
-    var inValid = e.target.closest('.enable_control') || e.target.closest('.promotion_actions');
+    var inValid = e.target.closest('.enable_control');
     if (inValid) return;
     handleOpenDetails(promotion);
   };
@@ -200,7 +173,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     className: "promotion"
   }, t('PROMOTIONS', 'Promotions')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotionType) && /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTION_TYPES', 'Promotion types')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.how) && /*#__PURE__*/_react.default.createElement("th", null, t('QUESTION_HOW', 'How?')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateRange) && /*#__PURE__*/_react.default.createElement("th", {
     className: "date_range"
-  }, t('DATE_RANGE', 'Date Range')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_ColumnAllowSettingPopover.ColumnAllowSettingPopover, {
+  }, t('DATE_RANGE', 'Date Range')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_ColumnAllowSettingPopover.ColumnAllowSettingPopover, {
     open: openPopover,
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
@@ -236,15 +209,13 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       width: 70
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 70
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
+    }))))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
       className: "enable_control"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 30
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 20
-    }))));
+    })))));
   }) : promotionListState.promotions.map(function (promotion) {
     var _theme$images$icons;
 
@@ -283,28 +254,14 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, parseDate(promotion === null || promotion === void 0 ? void 0 : promotion.end, {
       utc: false,
       outputFormat: 'YYYY-MM-DD'
-    }))), /*#__PURE__*/_react.default.createElement(_styles2.VerticalLine, null))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
+    }))), /*#__PURE__*/_react.default.createElement(_styles2.VerticalLine, null))), /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
       className: "enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: promotion === null || promotion === void 0 ? void 0 : promotion.enabled,
       onChange: function onChange(enabled) {
         return handleEnablePromotion(promotion.id, enabled);
       }
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperActionSelector, {
-      className: "promotion_actions"
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null),
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick(e) {
-        return handleClickPromotion(e, promotion);
-      }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return onClickDeletePromotion(promotion.id);
-      }
-    }, t('DELETE', 'Delete')))))));
+    })))));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.PromotionListBottom, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButton, {
     onClick: function onClick() {
       return handleOpenDetails({});
@@ -314,25 +271,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,
     handleChangePage: handleChangePage,
     handleChangePageSize: handleChangePageSize
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    width: "700px",
-    title: t('WEB_APPNAME', 'Ordering'),
-    content: confirm.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: confirm.open,
-    onClose: function onClose() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
-    onCancel: function onCancel() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
-    onAccept: confirm.handleOnAccept,
-    closeOnBackdrop: false
-  }));
+  }))));
 };
 
 exports.EnterprisePromotionList = EnterprisePromotionList;

@@ -60,7 +60,8 @@ var EnterprisePromontionListingUI = function EnterprisePromontionListingUI(props
       handleSuccessUpdatePromotions = props.handleSuccessUpdatePromotions,
       handleSuccessAddPromotion = props.handleSuccessAddPromotion,
       sitesState = props.sitesState,
-      paymethodsState = props.paymethodsState;
+      paymethodsState = props.paymethodsState,
+      businessesList = props.businessesList;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -136,12 +137,16 @@ var EnterprisePromontionListingUI = function EnterprisePromontionListingUI(props
     }
   }, /*#__PURE__*/_react.default.createElement(_EnterprisePromotionDetails.EnterprisePromotionDetails, {
     sitesState: sitesState,
+    businessesList: businessesList,
     paymethodsState: paymethodsState,
     promotion: selectedPromotion,
     promotionsList: promotionListState.promotions,
     handleSuccessUpdatePromotions: handleSuccessUpdatePromotions,
     handleSuccessAddPromotion: handleSuccessAddPromotion,
-    setMoveDistance: setMoveDistance
+    setMoveDistance: setMoveDistance,
+    onClose: function onClose() {
+      return setOpenDetails(false);
+    }
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

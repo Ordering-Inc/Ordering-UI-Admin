@@ -19,7 +19,17 @@ var _EnterprisePromotionGeneralDetails = require("../EnterprisePromotionGeneralD
 
 var _EnterprisePromotionRules = require("../EnterprisePromotionRules");
 
+var _SelectBusinesses = require("../SelectBusinesses");
+
+var _SelectSites = require("../SelectSites");
+
 var _Confirm = require("../Confirm");
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styledComponents = require("styled-components");
 
 var _styles2 = require("./styles");
 
@@ -46,13 +56,26 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) {
-  var _formState$changes$na, _formState$changes, _promotionState$promo, _formState$changes2, _formState$changes3, _promotionState$promo2, _promotionState$promo3;
+  var _formState$changes, _promotionState$promo, _formState$changes$na, _formState$changes2, _promotionState$promo2, _formState$changes3, _formState$changes4, _promotionState$promo3, _promotionState$promo4;
 
-  var promotionState = props.promotionState,
+  var isAddMode = props.isAddMode,
+      promotionState = props.promotionState,
       formState = props.formState,
       actionState = props.actionState,
       handleChangeItem = props.handleChangeItem,
-      setMoveDistance = props.setMoveDistance;
+      setMoveDistance = props.setMoveDistance,
+      sitesState = props.sitesState,
+      handleSelectSite = props.handleSelectSite,
+      handleUpdateClick = props.handleUpdateClick,
+      handleAddPromotion = props.handleAddPromotion,
+      _handleSelectAllSites = props.handleSelectAllSites,
+      selectedSitesIds = props.selectedSitesIds,
+      selectedBusinessIds = props.selectedBusinessIds,
+      businessesList = props.businessesList,
+      handleSelectBusiness = props.handleSelectBusiness,
+      handleSelectAllBusiness = props.handleSelectAllBusiness,
+      handleDeletePromotion = props.handleDeletePromotion;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -71,36 +94,70 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       selectedOption = _useState4[0],
       setSelectedOption = _useState4[1];
 
+  var _useState5 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
+
   var tabOptions = [{
     key: 'general',
     content: t('GENERAL', 'General')
   }, {
+    key: 'sites',
+    content: t('SITES', 'Sites')
+  }, {
+    key: 'businesses',
+    content: t('CONTROL_PANEL_BUSINESS', 'Business')
+  }, {
     key: 'rules',
     content: t('RULES', 'Rules')
-  } // { key: 'Business', content: t('CONTROL_PANEL_BUSINESS', 'Business') },
-  // { key: 'custom_fields', content: t('CUSTOM_FEILDS', 'Custom fields') }
-  ];
+  }];
 
   var handleClickTab = function handleClickTab(option) {
     setMoveDistance(0);
     setSelectedOption(option);
   };
 
+  var onClickDeletePromotion = function onClickDeletePromotion() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('PROMOTION', 'Promotion')),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeletePromotion();
+      }
+    });
+  };
+
   (0, _react.useEffect)(function () {
-    if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
+    if (!(actionState !== null && actionState !== void 0 && actionState.error) || actionState.loading) return;
     setAlertState({
       open: true,
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
-  }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, (_formState$changes$na = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: typeof ((_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.enabled) !== 'undefined' ? (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled : (_promotionState$promo2 = (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.enabled) !== null && _promotionState$promo2 !== void 0 ? _promotionState$promo2 : false,
+  }, [actionState]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("div", null, (((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.name)) && /*#__PURE__*/_react.default.createElement("h1", null, (_formState$changes$na = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: typeof ((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) !== 'undefined' ? (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.enabled : (_promotionState$promo3 = (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.enabled) !== null && _promotionState$promo3 !== void 0 ? _promotionState$promo3 : false,
     onChange: function onChange(val) {
       return handleChangeItem({
         enabled: val
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, tabOptions.map(function (option) {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperActionSelector, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return onClickDeletePromotion();
+    }
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, tabOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: option.key,
       active: selectedOption === option.key,
@@ -108,7 +165,35 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
         return handleClickTab(option.key);
       }
     }, option.content);
-  }))), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionGeneralDetails.EnterprisePromotionGeneralDetails, props), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, props)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }))), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionGeneralDetails.EnterprisePromotionGeneralDetails, props), selectedOption === 'sites' && /*#__PURE__*/_react.default.createElement(_SelectSites.SelectSites, {
+    isAddMode: isAddMode,
+    allSites: sitesState.sites,
+    selectedSitesIds: selectedSitesIds,
+    handleSelectSite: handleSelectSite,
+    handleSelectAllSites: function handleSelectAllSites() {
+      return _handleSelectAllSites(true);
+    },
+    handleSelectNoneSites: function handleSelectNoneSites() {
+      return _handleSelectAllSites(false);
+    },
+    isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
+    handleUpdateClick: handleUpdateClick,
+    handleAddPromotion: handleAddPromotion
+  }), selectedOption === 'businesses' && /*#__PURE__*/_react.default.createElement(_SelectBusinesses.SelectBusinesses, {
+    isAddMode: isAddMode,
+    allBusinesses: businessesList.businesses,
+    selectedBusinessIds: selectedBusinessIds,
+    handleSelectBusiness: handleSelectBusiness,
+    handleSelectAllBusinesses: function handleSelectAllBusinesses() {
+      return handleSelectAllBusiness(true);
+    },
+    handleSelectNoneBusinesses: function handleSelectNoneBusinesses() {
+      return handleSelectAllBusiness(false);
+    },
+    isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
+    handleUpdateClick: handleUpdateClick,
+    handleAddPromotion: handleAddPromotion
+  }), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, props)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -125,6 +210,24 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
         content: []
       });
     },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    width: "700px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
 };

@@ -148,7 +148,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     return /*#__PURE__*/_react.default.createElement(_styles2.ConditionItem, {
       key: index
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      defaultChecked: formState.changes[condition.attribute] || promotionState.promotion[condition.attribute],
+      checked: formState.changes[condition.attribute] || Array.isArray(promotionState.promotion[condition.attribute]) ? promotionState.promotion[condition.attribute].length !== 0 : promotionState.promotion[condition.attribute],
       disabled: true
     }), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, {
       onClick: function onClick() {

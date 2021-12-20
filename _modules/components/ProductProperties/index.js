@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductPropertiesUI = function ProductPropertiesUI(props) {
-  var _taxSelected$value, _fesSelected$value;
+  var _productState$estimat, _taxSelected$value, _fesSelected$value;
 
   var productState = props.productState,
       handleClickProperty = props.handleClickProperty,
@@ -129,8 +129,9 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
       setTaxToDelete = _useState12[1];
 
   var estimatedPersons = [{
-    value: null,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('NO_APPLY', 'No apply'))
+    value: 'no_apply',
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('NO_APPLY', 'No apply')),
+    showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('NO_APPLY', 'No apply'))
   }].concat(_toConsumableArray(_toConsumableArray(Array(10)).map(function (item, i) {
     return {
       value: i + 1,
@@ -342,10 +343,10 @@ var ProductPropertiesUI = function ProductPropertiesUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
     htmlFor: "estimated"
   }, t('ESTIMATED_PERSON', 'Estimated person')), /*#__PURE__*/_react.default.createElement(_styles.TypeSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    defaultValue: (productState === null || productState === void 0 ? void 0 : productState.estimated_person) || null,
+    defaultValue: (_productState$estimat = productState === null || productState === void 0 ? void 0 : productState.estimated_person) !== null && _productState$estimat !== void 0 ? _productState$estimat : 'no_apply',
     options: estimatedPersons,
     onChange: function onChange(val) {
-      return handleClickProperty('estimated_person', val);
+      return handleClickProperty('estimated_person', val === 'no_apply' ? null : val);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
     htmlFor: "tax"

@@ -135,9 +135,9 @@ var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
       }
     }
   }, [width]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.RulesContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('PROMOTION_TYPES', 'Promotion types')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.FormInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('PROMOTION_TYPES', 'Promotion types')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     defaultValue: typeof ((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.target) !== 'undefined' ? (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.target : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.target,
     options: promotionTypes,
     onChange: function onChange(val) {
@@ -200,7 +200,7 @@ var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
     onClick: function onClick() {
       return hanndleClickApply();
     }
-  }, /*#__PURE__*/_react.default.createElement("div", null, isShowConditions ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('FRONT_VISUALS_APPLY', 'Apply'))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, isShowConditions ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('FRONT_VISUALS_APPLY', 'Apply'))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     type: "submit",

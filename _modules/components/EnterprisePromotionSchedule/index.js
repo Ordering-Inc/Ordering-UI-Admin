@@ -30,10 +30,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionSchedule = function EnterprisePromotionSchedule(props) {
-  var _formState$changes, _formState$changes2, _promotionState$promo;
+  var _promotionState$promo;
 
   var promotionState = props.promotionState,
-      formState = props.formState,
       handleChangeItem = props.handleChangeItem,
       onClickDone = props.onClickDone;
 
@@ -42,7 +41,7 @@ var EnterprisePromotionSchedule = function EnterprisePromotionSchedule(props) {
       t = _useLanguage2[1];
 
   return /*#__PURE__*/_react.default.createElement(_styles2.ScheduleContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SCHEDULE_LIMIT', 'Schedule limit')), /*#__PURE__*/_react.default.createElement(_Schedule.Schedule, {
-    scheduleList: (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.schedule ? (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.schedule : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.schedule,
+    scheduleList: (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.schedule,
     handleChangeScheduleState: function handleChangeScheduleState(val) {
       return handleChangeItem({
         schedule: val
