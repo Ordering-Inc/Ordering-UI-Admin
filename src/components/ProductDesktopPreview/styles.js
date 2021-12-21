@@ -2,9 +2,11 @@ import styled, { css } from 'styled-components'
 import { lighten } from 'polished'
 
 export const Container = styled.div`
-  border-radius: 8px;
-  border: 1px solid ${props => props.theme.colors.borderColor};
   margin-top: 20px;
+  ${({ isMobileView }) => !isMobileView && css`
+    border-radius: 8px;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+  `}
 `
 export const DesktopHeader = styled.div`
   height: 25px;
@@ -20,11 +22,13 @@ export const DesktopHeader = styled.div`
   }
 `
 export const DesktopBackground = styled.div`
-  background: ${props => props.theme.colors.gray};
+  ${({ isMobileView }) => !isMobileView && css`
+    background: ${props => props.theme.colors.gray};
+    border-radius: 0 0 8px 8px;
+  `}
   display: flex;
   justify-content: center;
   padding: 20px;
-  border-radius: 0 0 8px 8px;
   max-height: calc(90vh - 150px);
   overflow: auto;
 `
@@ -32,8 +36,38 @@ export const ProductInfoModalPreview = styled.div`
   max-width: 500px;
   width: 100%;
   height: 100%;
-  background: ${props => props.theme.colors.backgroundPage};
   border-radius: 8px;
+  position: relative;
+  
+  ${({ isMobileView }) => !isMobileView && css`
+    background: ${props => props.theme.colors.backgroundPage};
+  `}
+
+  ${({ isMobileView }) => isMobileView && css`
+    width: 325px;
+    height: 650px;
+    background-image: url(${({ src }) => src});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 12px;
+  `}
+`
+export const MobileContentMask = styled.div`
+  ${({ isMobileView }) => isMobileView && css`
+    -webkit-mask-image: url(${({ src }) => src});
+    mask-image: url(${({ src }) => src});
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    height: 630px;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
+    background: ${props => props.theme.colors.backgroundPage};
+  `}
 `
 export const ModalHeader = styled.div`
   padding: 20px;
@@ -161,7 +195,7 @@ export const ProductInfo = styled.div`
 `
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
-  margin: 10px;
+  margin: 10px 15px;
 
   .price-discount {
     text-decoration: line-through;
@@ -186,7 +220,7 @@ export const Divider = styled.div`
   background: ${props => props.theme.colors.secundary};
 `
 export const ProductEdition = styled.div`
-  margin: 10px;
+  margin: 10px 15px;
 `
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
@@ -484,7 +518,17 @@ export const ProductActions = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  ${({ isMobileView }) => isMobileView ? css`
+    padding: 15px;
+    button.add {
+      padding: 0px 5px;
+    }
+  ` : css`
+    padding: 10px 15px;
+    button.add {
+      padding: 5px 10px;
+    }
+  `}
   width: 100%;
   z-index: 999;
   border-top: 1px solid ${props => props.theme.colors.borderColor};
@@ -530,7 +574,6 @@ export const ProductActions = styled.div`
 
   button.add {
     width: 90%;
-    padding: 5px 10px;
     margin-top: 10px;
     position: relative;
     font-size: 12px;
@@ -546,7 +589,11 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 1200px) {
-    bottom: -21px;
+    ${({ isMobileView }) => isMobileView ? css`
+      bottom: 0;
+    ` : css`
+      bottom: -21px;
+    `}
     flex-direction: row;
     justify-content: space-between;
 
@@ -560,7 +607,7 @@ export const ProductActions = styled.div`
     }
 
     div.incdec-control {
-      width: 20%;
+      width: 30%;
     }
   }
 `

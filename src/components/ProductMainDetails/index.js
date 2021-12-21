@@ -201,13 +201,12 @@ const ProductMainDetailsUI = (props) => {
             </IconButton>
           </div>
         </ProductPreviewHeader>
-        {selectedView === 'desktop' && (
-          <ProductDesktopPreview
-            product={productState?.product}
-            productCart={productCart}
-            showProductOption={showProductOption}
-          />
-        )}
+        <ProductDesktopPreview
+          isMobileView={selectedView === 'mobile'}
+          product={productState?.product}
+          productCart={productCart}
+          showProductOption={showProductOption}
+        />
       </Modal>
     </>
   )

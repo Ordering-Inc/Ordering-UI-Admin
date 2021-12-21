@@ -25,7 +25,8 @@ import notFound404 from './template/assets/images/not-found-404.svg'
 import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import loginHero from './template/assets/images/loginHero.png'
 import personalization from './template/assets/images/personalization.svg'
-
+import mobileCase from './template/assets/images/mobile-case.png'
+import mobileMask from './template/assets/images/mobile-mask.png'
 /**
  * dummies
  */
@@ -135,7 +136,9 @@ theme.images = {
     notFound404,
     notFoundLighting,
     loginHero,
-    personalization
+    personalization,
+    mobileCase,
+    mobileMask
   },
   order: {
     status0: orderStatus0,
