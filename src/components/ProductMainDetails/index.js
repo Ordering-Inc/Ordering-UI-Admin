@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useLanguage, useUtils, ProductDetatils as ProductDetatilsController } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
-import { XLg, ThreeDots } from 'react-bootstrap-icons'
+import { XLg, ThreeDots, Laptop, Phone } from 'react-bootstrap-icons'
 import { Switch } from '../../styles/Switch'
 import { ProductDetatilsEditForm } from '../ProductDetatilsEditForm'
 import { Button, IconButton } from '../../styles/Buttons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm } from '../Confirm'
+import { Modal } from '../Modal'
+import { ProductDesktopPreview } from '../ProductDesktopPreview'
 
 import {
   ProductDetailsContainer,
@@ -21,7 +23,8 @@ import {
   ProductDescription,
   ProductConfigsContainer,
   ProductConfigOption,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  ProductPreviewHeader
 } from './styles'
 
 const ProductMainDetailsUI = (props) => {
@@ -31,11 +34,13 @@ const ProductMainDetailsUI = (props) => {
     handleShowOption,
     handleChangeProductActiveState,
     productState,
+    productCart,
     formState,
     handlechangeImage,
     handleChangeInput,
     handleUpdateClick,
-    handleDeleteProduct
+    handleDeleteProduct,
+    showProductOption
   } = props
 
   const [, t] = useLanguage()
@@ -43,6 +48,8 @@ const ProductMainDetailsUI = (props) => {
   const [{ optimizeImage, parsePrice }] = useUtils()
   const [isEditMode, setIsEditMode] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isProductPreview, setIsProductPreview] = useState(false)
+  const [selectedView, setSelectedView] = useState('desktop')
 
   const configsOptions = [
     {
@@ -102,6 +109,11 @@ const ProductMainDetailsUI = (props) => {
                 title={<ThreeDots />}
                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
+                <Dropdown.Item
+                  onClick={() => setIsProductPreview(true)}
+                >
+                  {t('PREVIEW', 'Preview')}
+                </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => handleDeleteClick()}
                 >
@@ -166,6 +178,37 @@ const ProductMainDetailsUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+
+      <Modal
+        width='900px'
+        open={isProductPreview}
+        onClose={() => setIsProductPreview(false)}
+      >
+        <ProductPreviewHeader>
+          <h1>{t('PREVIEW', 'Preview')}</h1>
+          <div>
+            <IconButton
+              color={selectedView === 'desktop' ? 'primary' : 'black'}
+              onClick={() => setSelectedView('desktop')}
+            >
+              <Laptop />
+            </IconButton>
+            <IconButton
+              color={selectedView === 'mobile' ? 'primary' : 'black'}
+              onClick={() => setSelectedView('mobile')}
+            >
+              <Phone />
+            </IconButton>
+          </div>
+        </ProductPreviewHeader>
+        {selectedView === 'desktop' && (
+          <ProductDesktopPreview
+            product={productState?.product}
+            productCart={productCart}
+            showProductOption={showProductOption}
+          />
+        )}
+      </Modal>
     </>
   )
 }

@@ -5,8 +5,7 @@ export const Tabs = styled.div`
   
   ${({ variant }) => variant === 'primary' && css`
     color: ${props => props.theme.colors.primary};
-  `}
-  
+  `}  
 `
 
 export const Tab = styled.div`

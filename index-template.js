@@ -32,6 +32,7 @@ import personalization from './template/assets/images/personalization.svg'
 import storeDummy from './template/assets/images/dummies/store.png'
 import nonOrders from './template/assets/images/dummies/nonOrders.svg'
 import promotionDummy from './template/assets/images/dummies/promotion.png'
+import productDummy from './template/assets/images/dummies/product.png'
 
 /**
  * icons
@@ -63,6 +64,8 @@ import sendToAll from './template/assets/images/icons/send-to-all.svg'
 import nearestAvailable from './template/assets/images/icons/nearest-available.svg'
 import batchWise from './template/assets/images/icons/batch-wise.svg'
 import roundRobin from './template/assets/images/icons/round-robin.svg'
+import leftArrow from './template/assets/images/icons/left-arrow.svg'
+import rightArrow from './template/assets/images/icons/right-arrow.svg'
 
 import orderPending from './template/assets/images/orderStatus/pending.svg'
 import orderInProgress from './template/assets/images/orderStatus/inProgress.svg'
@@ -197,12 +200,15 @@ theme.images = {
     sendToAll: sendToAll,
     nearestAvailable: nearestAvailable,
     batchWise: batchWise,
-    roundRobin: roundRobin
+    roundRobin: roundRobin,
+    leftArrow: leftArrow,
+    rightArrow: rightArrow
   },
   dummies: {
     nonOrders: nonOrders,
     businessLogo: storeDummy,
-    promotionDummy: promotionDummy
+    promotionDummy: promotionDummy,
+    product: productDummy
   }
 }
 

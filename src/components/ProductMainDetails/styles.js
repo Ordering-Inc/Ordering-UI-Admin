@@ -133,7 +133,7 @@ export const ProductConfigOption = styled.div`
 export const ActionSelectorWrapper = styled.div`
   button {
     display: flex;
-    background: ${props => props.theme.colors.secundary};
+    background: ${props => props.theme.colors.secundary} !important;
     border: none;
     padding: 5px;
     border-radius: 8px;
@@ -161,9 +161,6 @@ export const ActionSelectorWrapper = styled.div`
   }
 
   .show {
-    button {
-      background: ${props => props.theme.colors.secundary} !important;
-    }
     >div {
       border: 1px solid ${props => props.theme.colors.borderColor};
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
@@ -176,10 +173,37 @@ export const ActionSelectorWrapper = styled.div`
       .dropdown-item {
         font-size: 12px;
         color: ${props => props.theme.colors.headingColor};
+        padding: 7px 20px;
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
       }
       .dropdown-item:last-child {
         color: ${props => props.theme.colors.danger};
       }
+    }
+  }
+`
+export const ProductPreviewHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-right: 1px solid ${props => props.theme.colors.borderColor};
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+  > div {
+    display: flex;
+    button {
+      margin: 0 5px;
     }
   }
 `
