@@ -53,7 +53,7 @@ export const ProductSummary = (props) => {
     },
     {
       key: 'ingredients',
-      value: t('INGREDIENTS', 'Ingredients')
+      value: <span>{t('INGREDIENTS', 'Ingredients')} / {t('PROPERTIES', 'Properties')}</span>
     },
     {
       key: 'product_options',

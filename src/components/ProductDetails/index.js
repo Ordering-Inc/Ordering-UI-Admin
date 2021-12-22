@@ -136,6 +136,7 @@ const ProductDetailsUI = (props) => {
             <ProductIngredient
               business={business}
               product={productState.product}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
