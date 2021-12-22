@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const FormInput = styled.form`
-  margin-top: 20px;
-  height: calc(100% - 60px);
-  overflow: auto;
+
 `
 
 export const ProductImage = styled.div`
@@ -109,10 +107,26 @@ export const ActionsForm = styled.div`
     height: 42px;
     &:first-child {
       ${props => props.theme?.rtl ? css`
-        margin-left: 10px
+        margin-left: 10px;
       ` : css`
-        margin-right: 10px
+        margin-right: 10px;
       `}
     }
+  }
+`
+export const InventoryWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 35px;
+
+  > span {
+    font-size: 16px;
+    font-weight: 600;
+
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
   }
 `
