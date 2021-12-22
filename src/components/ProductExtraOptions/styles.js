@@ -21,7 +21,6 @@ export const MainContainer = styled.div`
 
 export const OptionsContainer = styled.div`
   padding: 20px;
-  border-bottom: 13px solid ${props => props.theme.colors.secundary};
 `
 
 export const Header = styled.div`

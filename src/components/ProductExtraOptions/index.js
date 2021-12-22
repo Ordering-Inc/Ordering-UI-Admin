@@ -79,15 +79,12 @@ const ProductExtraOptionsUI = (props) => {
   }
 
   const handleChangeAddOptionInput = (e, min) => {
-    const regexp = /^[0-9.\b]+$/
-    if (e.target.value === '' || regexp.test(e.target.value)) {
-      if (min) {
-        if (parseInt(e.target.value) > parseInt(addChangesState?.max)) return
-      } else {
-        if (parseInt(e.target.value) < parseInt(addChangesState?.min)) return
-      }
-      handleChangeAddOption(e)
+    if (min) {
+      if (parseInt(e.target.value) > parseInt(addChangesState?.max)) return
+    } else {
+      if (parseInt(e.target.value) < parseInt(addChangesState?.min)) return
     }
+    handleChangeAddOption(e)
   }
 
   const handleFiles = (files, optionId) => {
@@ -200,6 +197,11 @@ const ProductExtraOptionsUI = (props) => {
                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
                 <Dropdown.Item
+                  onClick={() => setOpenModal({ ...openModal, metaField: true })}
+                >
+                  {t('CUSTOM_FEILDS', 'Custom Fields')}
+                </Dropdown.Item>
+                <Dropdown.Item
                   onClick={() => handleDeleteExtraClick()}
                 >
                   {t('DELETE', 'Delete')}
@@ -264,6 +266,11 @@ const ProductExtraOptionsUI = (props) => {
                   name='min'
                   value={addChangesState?.min}
                   onChange={(e) => handleChangeAddOptionInput(e, true)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </td>
               <td>
@@ -271,6 +278,11 @@ const ProductExtraOptionsUI = (props) => {
                   name='max'
                   value={addChangesState?.max}
                   onChange={(e) => handleChangeAddOptionInput(e, false)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </td>
               <td>
@@ -284,10 +296,6 @@ const ProductExtraOptionsUI = (props) => {
           </tbody>
         </OptionsTable>
       </OptionsContainer>
-      <ProductExtraMetaFields
-        businessId={business.id}
-        extraId={extraState.extra.id}
-      />
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
@@ -328,6 +336,16 @@ const ProductExtraOptionsUI = (props) => {
           />
         </Modal>
       )}
+      <Modal
+        width='70%'
+        open={openModal?.metaField}
+        onClose={() => setOpenModal({ ...openModal, metaField: false })}
+      >
+        <ProductExtraMetaFields
+          businessId={business.id}
+          extraId={extraState.extra.id}
+        />
+      </Modal>
     </MainContainer>
   )
 }
