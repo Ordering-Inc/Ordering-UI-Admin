@@ -19,7 +19,8 @@ import {
   Shop,
   Cart3,
   PersonCheck,
-  Star
+  Star,
+  CreditCard
 } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
@@ -45,6 +46,7 @@ import { ReportsOrders } from '../ReportsOrders'
 import { ReportsSales } from '../ReportsSales'
 import { ReportsUsers } from '../ReportsUsers'
 import { ReportsCustomer } from '../ReportsCustomer'
+import { ReportsPaymethodSales } from '../ReportsPaymethodSales'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -70,7 +72,8 @@ export const Reports = (props) => {
     { id: 13, name: t('ORDERS', 'Orders'), description: t('ORDERS_DESC', 'Orders description'), icon: <Cart3 /> },
     { id: 14, name: t('SALES', 'Sales'), description: t('SALES_DESC', 'Sales description'), icon: <Shop /> },
     { id: 15, name: t('REGISTER_USERS', 'Register users'), description: t('REGISTER_USERS_DESC', 'Register users description'), icon: <PersonCheck /> },
-    { id: 16, name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'), description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'), icon: <Star /> }
+    { id: 16, name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'), description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'), icon: <Star /> },
+    { id: 17, name: t('PAYMETHOD_SALES', 'Paymethod sales'), description: t('PAYMETHOD_SALES_DESC', 'Paymethod sales description'), icon: <CreditCard /> }
   ]
 
   const handleCloseSidebar = () => {
@@ -136,6 +139,7 @@ export const Reports = (props) => {
           {selectedReport === 14 && <ReportsSales />}
           {selectedReport === 15 && <ReportsUsers />}
           {selectedReport === 16 && <ReportsCustomer />}
+          {selectedReport === 17 && <ReportsPaymethodSales />}
         </SideBar>
       )}
     </ReportsContainer>

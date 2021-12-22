@@ -112,7 +112,6 @@ if (!(window?.location?.hostname === 'localhost')) {
       'objects are not valid',
       'element type is invalid'
     ],
-  
     // We recommend adjusting this value in production, or using tracesSampler
     // for finer control
     tracesSampleRate: 0.2
@@ -212,7 +211,7 @@ const RouteApp = () => {
   const [configFile, setConfigFile] = useState({
     project: localStorage.getItem('project') !== null ? localStorage.getItem('project') : null,
     api: {
-      url: 'https://apiv4.ordering.co',
+      url: 'https://apiv4-staging.ordering.co',
       language: 'en',
       version: 'v400'
     },
