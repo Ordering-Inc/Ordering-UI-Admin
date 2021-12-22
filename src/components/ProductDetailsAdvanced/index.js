@@ -6,8 +6,7 @@ import {
   useUtils
 } from 'ordering-components-admin'
 import { EditTaxManager } from '../EditTaxManager'
-import { Input } from '../../styles/Inputs'
-import { Checkbox } from '../../styles/Checkbox'
+import { Input, Switch } from '../../styles'
 import { useForm } from 'react-hook-form'
 import {
   PropertiesContainer,
@@ -20,7 +19,8 @@ import {
 import { Select } from '../../styles/Select/FirstSelect'
 import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
-const ProductPropertiesUI = (props) => {
+
+const ProductDetailsAdvancedUI = (props) => {
   const {
     productState,
     handleClickProperty,
@@ -41,7 +41,7 @@ const ProductPropertiesUI = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [{ parsePrice }] = useUtils()
-  const [isShowStock, setIsShowStock] = useState(productState?.inventoried)
+  const [isSku, setIsSku] = useState(false)
   const [taxesOption, setTaxesOption] = useState([])
   const [feesOptions, setFeesOptions] = useState([])
   const [fesSelected, setFeeSelected] = useState(null)
@@ -58,20 +58,6 @@ const ProductPropertiesUI = (props) => {
 
   const getTaxOrFeeString = (string) => {
     return string === 'taxes' ? 'tax' : 'fee'
-  }
-
-  const handleClickStock = (e) => {
-    handleClickProperty('inventoried', e.target.checked)
-    if (e.target.checked) {
-      setIsShowStock(true)
-    } else {
-      setIsShowStock(false)
-    }
-  }
-
-  const hanldeClickStockInput = (value) => {
-    if (value === '') handleClickProperty('quantity', productState?.quantity)
-    else handleClickProperty('quantity', value)
   }
 
   const handleAddTax = (action) => {
@@ -163,6 +149,13 @@ const ProductPropertiesUI = (props) => {
     closeAlert()
   }
 
+  const handleEnableSKU = (enabled) => {
+    setIsSku(enabled)
+    if (!enabled) {
+      handleClickProperty('sku', -1)
+    }
+  }
+
   useEffect(() => {
     if (taxes) getTaxes()
   }, [JSON.stringify(taxes)])
@@ -193,53 +186,49 @@ const ProductPropertiesUI = (props) => {
     }
   }, [formMethods.errors])
 
+  useEffect(() => {
+    if (parseInt(productState?.sku) === -1 || !productState?.sku) {
+      setIsSku(false)
+    } else {
+      setIsSku(true)
+    }
+  }, [productState])
+
   return (
     <PropertiesContainer>
-      <h1>{t('PROPERTIES', 'Properties')}</h1>
       <PropertyOption>
-        <Checkbox
+        <label>{t('FEATURED', 'Featured')}</label>
+        <Switch
           defaultChecked={productState?.featured || false}
-          onClick={(e) => handleClickProperty('featured', e.target.checked)}
-          id='featured'
+          onChange={enabled => handleClickProperty('featured', enabled)}
         />
-        <label htmlFor='featured'>{t('FEATURED', 'Featured')}</label>
       </PropertyOption>
       <PropertyOption>
-        <Checkbox
+        <label>{t('UPSELLING', 'Upselling')}</label>
+        <Switch
           defaultChecked={productState?.upselling || false}
-          onClick={(e) => handleClickProperty('upselling', e.target.checked)}
-          id='upselling'
+          onChange={enabled => handleClickProperty('upselling', enabled)}
         />
-        <label htmlFor='upselling'>{t('UPSELLING', 'Upselling')}</label>
       </PropertyOption>
       <PropertyOption>
-        <Checkbox
-          defaultChecked={productState?.inventoried || false}
-          onClick={(e) => handleClickStock(e)}
-          id='inventoried'
+        <label>{t('SKU', 'Stock Keeping Unit (SKU)')}</label>
+        <Switch
+          defaultChecked={isSku}
+          onChange={enabled => handleEnableSKU(enabled)}
         />
-        <label htmlFor='inventoried'>{t('INVENTORIED', 'Limit product quantity')}</label>
       </PropertyOption>
-      {isShowStock && (
+      {isSku && (
         <>
-          <LabelCustom htmlFor='quantity'>{t('QUANTITY', 'Quantity')}</LabelCustom>
+          <LabelCustom htmlFor='sku'>SKU</LabelCustom>
           <Input
-            name='quantity'
-            id='quantity'
-            placeholder={t('QUANTITY', 'Quantity')}
-            defaultValue={parseInt(productState?.quantity)}
-            onChange={(e) => hanldeClickStockInput(e.target.value)}
+            name='sku'
+            id='sku'
+            placeholder={t('SKU', 'Stock Keeping Unit (SKU)')}
+            defaultValue={parseInt(productState?.sku) !== -1 ? productState?.sku : ''}
+            onChange={(e) => handleClickProperty('sku', e.target.value ?? null)}
           />
         </>
       )}
-      <LabelCustom htmlFor='sku'>{t('SKU', 'Stock Keeping Unit (SKU)')}</LabelCustom>
-      <Input
-        name='sku'
-        id='sku'
-        placeholder={t('SKU', 'Stock Keeping Unit (SKU)')}
-        defaultValue={parseInt(productState?.sku) !== -1 ? productState?.sku : ''}
-        onChange={(e) => handleClickProperty('sku', e.target.value ?? null)}
-      />
       <LabelCustom htmlFor='estimated'>{t('ESTIMATED_PERSON', 'Estimated person')}</LabelCustom>
       <TypeSelectWrapper>
         <Select
@@ -305,10 +294,10 @@ const ProductPropertiesUI = (props) => {
   )
 }
 
-export const ProductProperties = (props) => {
+export const ProductDetailsAdvanced = (props) => {
   const productProperties = {
     ...props,
-    UIComponent: ProductPropertiesUI
+    UIComponent: ProductDetailsAdvancedUI
   }
   return <ProductPropertiesController {...productProperties} />
 }

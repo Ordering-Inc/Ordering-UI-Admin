@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../DragScroll'
 import { ProductDetatilsInformation } from '../ProductDetatilsInformation'
+import { ProductDetailsAdvanced } from '../ProductDetailsAdvanced'
 
 import {
   Container,
@@ -16,7 +17,16 @@ export const ProductMainDetails = (props) => {
     handlechangeImage,
     handleChangeInput,
     handleChangeFormState,
-    handleUpdateClick
+    handleUpdateClick,
+
+    business,
+    handleUpdateBusinessState,
+    setFormTaxState,
+    formTaxState,
+    taxes,
+    setTaxes,
+    fees,
+    setFees
   } = props
   const [, t] = useLanguage()
 
@@ -51,6 +61,19 @@ export const ProductMainDetails = (props) => {
           handleChangeInput={handleChangeInput}
           handleChangeFormState={handleChangeFormState}
           handleButtonUpdateClick={handleUpdateClick}
+        />
+      )}
+      {selectedOption === 'advanced' && (
+        <ProductDetailsAdvanced
+          product={product}
+          business={business}
+          handleUpdateBusinessState={handleUpdateBusinessState}
+          setFormTaxState={setFormTaxState}
+          formTaxState={formTaxState}
+          taxes={taxes}
+          setTaxes={setTaxes}
+          fees={fees}
+          setFees={setFees}
         />
       )}
     </Container>

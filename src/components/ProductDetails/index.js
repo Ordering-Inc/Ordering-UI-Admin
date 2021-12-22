@@ -3,7 +3,6 @@ import { ProductDetatils as ProductDetatilsController } from 'ordering-component
 import { ProductSummary } from '../ProductSummary'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { MoreSidebarLayout } from '../MoreSidebarLayout'
-import { ProductProperties } from '../ProductProperties'
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductMetaFields } from '../ProductMetaFields'
 import { Personalization } from '../Personalization'
@@ -122,12 +121,8 @@ const ProductDetailsUI = (props) => {
               handleChangeFormState={handleChangeFormState}
               handleChangeInput={handleChangeInput}
               handleUpdateClick={handleUpdateClick}
-            />
-          )}
-          {showOption === 'properties' && (
-            <ProductProperties
+
               business={business}
-              product={productState.product}
               handleUpdateBusinessState={handleUpdateBusinessState}
               setFormTaxState={setFormTaxState}
               formTaxState={formTaxState}

@@ -52,10 +52,6 @@ export const ProductSummary = (props) => {
       value: t('PRODUCT_DETAILS', 'Product details')
     },
     {
-      key: 'properties',
-      value: t('PROPERTIES', 'Properties')
-    },
-    {
       key: 'ingredients',
       value: t('INGREDIENTS', 'Ingredients')
     },
