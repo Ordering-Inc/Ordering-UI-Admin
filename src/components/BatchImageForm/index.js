@@ -56,31 +56,33 @@ const BatchImageFormUI = (props) => {
   const validImages = (files) => {
     const invalidfileNames = []
     const validfiles = []
-    files.forEach(f => {
-      const type = f.type.split('/')[0]
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        })
-        invalidfileNames.push(f?.name)
-        return
-      }
-      if (bytesConverter(f.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        })
-        invalidfileNames.push(f?.name)
-        return
-      }
-      const nameWithoutExtension = f?.name.split('.')[0]
-      if (productIds.indexOf(parseInt(nameWithoutExtension)) > -1) {
-        validfiles.push(f)
-      } else {
-        invalidfileNames.push(f?.name)
-      }
-    })
+    if (files && files.length > 0) {
+      Object.values(files).forEach(f => {
+        const type = f.type.split('/')[0]
+        if (type !== 'image') {
+          setAlertState({
+            open: true,
+            content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+          })
+          invalidfileNames.push(f?.name)
+          return
+        }
+        if (bytesConverter(f.size) > 2048) {
+          setAlertState({
+            open: true,
+            content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+          })
+          invalidfileNames.push(f?.name)
+          return
+        }
+        const nameWithoutExtension = f?.name.split('.')[0]
+        if (productIds.indexOf(parseInt(nameWithoutExtension)) > -1) {
+          validfiles.push(f)
+        } else {
+          invalidfileNames.push(f?.name)
+        }
+      })
+    }
     setInvalidImages(invalidfileNames)
     return validfiles
   }
