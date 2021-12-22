@@ -87,39 +87,38 @@ var BatchImageFormUI = function BatchImageFormUI(props) {
     var invalidfileNames = [];
     var validfiles = [];
 
-    if (!(files && files.length > 0)) {
-      return;
+    if (files && files.length > 0) {
+      Object.values(files).forEach(function (f) {
+        var type = f.type.split('/')[0];
+
+        if (type !== 'image') {
+          setAlertState({
+            open: true,
+            content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+          });
+          invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
+          return;
+        }
+
+        if ((0, _utils.bytesConverter)(f.size) > 2048) {
+          setAlertState({
+            open: true,
+            content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+          });
+          invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
+          return;
+        }
+
+        var nameWithoutExtension = f === null || f === void 0 ? void 0 : f.name.split('.')[0];
+
+        if (productIds.indexOf(parseInt(nameWithoutExtension)) > -1) {
+          validfiles.push(f);
+        } else {
+          invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
+        }
+      });
     }
 
-    files.forEach(function (f) {
-      var type = f.type.split('/')[0];
-
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        });
-        invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
-        return;
-      }
-
-      if ((0, _utils.bytesConverter)(f.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        });
-        invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
-        return;
-      }
-
-      var nameWithoutExtension = f === null || f === void 0 ? void 0 : f.name.split('.')[0];
-
-      if (productIds.indexOf(parseInt(nameWithoutExtension)) > -1) {
-        validfiles.push(f);
-      } else {
-        invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
-      }
-    });
     setInvalidImages(invalidfileNames);
     return validfiles;
   };
