@@ -34,8 +34,14 @@ export const SearchBar = (props) => {
     previousSearch = e.target.value
   }
 
+  const onClearSearch = (e) => {
+    e.target.value = ''
+    onChangeSearch(e)
+  }
+
   useEffect(() => {
     el.current.onkeyup = onChangeSearch
+    el.current.onblur = onClearSearch
   }, [])
 
   useEffect(() => {
