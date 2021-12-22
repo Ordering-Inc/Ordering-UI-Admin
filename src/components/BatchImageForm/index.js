@@ -56,6 +56,9 @@ const BatchImageFormUI = (props) => {
   const validImages = (files) => {
     const invalidfileNames = []
     const validfiles = []
+    if (!(files && files.length > 0)) {
+      return
+    }
     files.forEach(f => {
       const type = f.type.split('/')[0]
       if (type !== 'image') {
