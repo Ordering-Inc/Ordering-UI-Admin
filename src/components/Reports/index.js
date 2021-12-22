@@ -20,7 +20,8 @@ import {
   Cart3,
   PersonCheck,
   Star,
-  CreditCard
+  CreditCard,
+  ShopWindow
 } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
@@ -47,6 +48,7 @@ import { ReportsSales } from '../ReportsSales'
 import { ReportsUsers } from '../ReportsUsers'
 import { ReportsCustomer } from '../ReportsCustomer'
 import { ReportsPaymethodSales } from '../ReportsPaymethodSales'
+import { ReportsAverageSales } from '../ReportsAverageSales'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -73,7 +75,8 @@ export const Reports = (props) => {
     { id: 14, name: t('SALES', 'Sales'), description: t('SALES_DESC', 'Sales description'), icon: <Shop /> },
     { id: 15, name: t('REGISTER_USERS', 'Register users'), description: t('REGISTER_USERS_DESC', 'Register users description'), icon: <PersonCheck /> },
     { id: 16, name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'), description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'), icon: <Star /> },
-    { id: 17, name: t('PAYMETHOD_SALES', 'Paymethod sales'), description: t('PAYMETHOD_SALES_DESC', 'Paymethod sales description'), icon: <CreditCard /> }
+    { id: 17, name: t('PAYMETHOD_SALES', 'Paymethod sales'), description: t('PAYMETHOD_SALES_DESC', 'Paymethod sales description'), icon: <CreditCard /> },
+    { id: 18, name: t('AVERAGE_SALES', 'Average sales'), description: t('AVERAGE_SALES_DESC', 'Average sales description'), icon: <ShopWindow /> }
   ]
 
   const handleCloseSidebar = () => {
@@ -140,6 +143,7 @@ export const Reports = (props) => {
           {selectedReport === 15 && <ReportsUsers />}
           {selectedReport === 16 && <ReportsCustomer />}
           {selectedReport === 17 && <ReportsPaymethodSales />}
+          {selectedReport === 18 && <ReportsAverageSales />}
         </SideBar>
       )}
     </ReportsContainer>

@@ -7,25 +7,25 @@ import {
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
+import { Download } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
-import { Download } from 'react-bootstrap-icons'
 import { Modal } from '../Modal'
 
 import {
   ReportsBusinessSpendContainer,
-  Title,
-  ButtonActionList,
-  BrandBusinessWrapper,
-  CalendarWrapper,
   DistancePerBrandWrapper,
+  BrandBusinessWrapper,
   DistanceTitleBlock,
+  ButtonActionList,
+  CalendarWrapper,
   DistanceTable,
+  TableWrapper,
+  EmptyContent,
+  Title,
   Thead,
   Tbody,
-  Tfoot,
-  TableWrapper,
-  EmptyContent
+  Tfoot
 } from './styles'
 
 const ReportsPaymethodSalesUI = (props) => {
