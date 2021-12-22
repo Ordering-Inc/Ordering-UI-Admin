@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const MainContainer = styled.div`
   overflow: auto;
@@ -34,19 +35,25 @@ export const Header = styled.div`
     margin: 5px 0;
   }
 
-  > button {
-    display: none;
+  > div {
+    display: flex;
+    align-items: center;
+    > button {
+      display: none;
+    }
   }
 
   @media (min-width: 1000px) {
-    > button {
-      display: block;
-      cursor: pointer;
-      ${props => props.theme?.rtl ? css`
-        margin-right: 10px;
-      ` : css`
-        margin-left: 10px;
-      `}
+    > div {
+      > button {
+        display: block;
+        cursor: pointer;
+        ${props => props.theme?.rtl ? css`
+          margin-right: 10px;
+        ` : css`
+          margin-left: 10px;
+        `}
+      }
     }
   }
 `
@@ -58,11 +65,8 @@ export const OptionsTable = styled.table`
     color: ${props => props.theme.colors.headingColor};
     padding: 12px 0;
 
-    &:last-child {
-      width: 160px;
-    }
-
     > input {
+      height: 32px;
       width: 50px;
       padding: 5px;
       ${props => props.theme?.rtl ? css`
@@ -76,6 +80,10 @@ export const OptionsTable = styled.table`
         border: 1px dashed ${props => props.theme.colors.lightGray};
       }
     }
+
+    &:first-child {
+      width: 70%;
+    }
   }
 
   th {
@@ -84,9 +92,7 @@ export const OptionsTable = styled.table`
   }
 
   td {
-    input {
-      font-size: 14px;
-    }
+    font-size: 14px;
   }
 
   thead, tbody {
@@ -95,6 +101,10 @@ export const OptionsTable = styled.table`
   tbody.add_option {
     border-top: 13px solid ${props => props.theme.colors.borderColor};
   }
+
+  tbody {
+    cursor: pointer;
+  }
 `
 
 export const OptionNameContainer = styled.div`
@@ -102,6 +112,7 @@ export const OptionNameContainer = styled.div`
   align-items: center;
   > input {
     flex: 1;
+    height: 32px;
     padding: 5px;
     border: none;
     outline: none;
@@ -114,6 +125,14 @@ export const OptionNameContainer = styled.div`
       margin-left: 5px;
     `}
   }
+
+  ${props => props.theme?.rtl ? css`
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+    margin-left: 20px;
+  ` : css`
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+    margin-right: 20px;
+  `}
 `
 
 export const OptionImage = styled.div`
@@ -121,41 +140,31 @@ export const OptionImage = styled.div`
   height: 38px;
   border-radius: 8px;
   overflow: hidden;
-  cursor: -webkit-grab;
-  cursor: grab;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => props.theme.colors.borderColor};
 
-  img,
-  div {
+  img {
     width: 100%;
     border-radius: 8px;
     height: 100%;
-    overflow: hidden;
-  };
-
-  img{
     object-fit: cover;
+    overflow: hidden;
   }
-`
 
-export const UploadImageIconContainer = styled.div`
-  position: absolute;
-  top: 0px;
-  background: rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  ${({ small }) => small ? css`
-    padding: 4px;
-  ` : css`
-    padding: 8px;
-  `}
   svg {
-    color: #FFF;
-    width: 25px;
-    height: 25px;
+    font-size: 20px;
+    color: #ADB5BD;
   }
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 15px;
+  ` : css`
+    margin-right: 15px;
+  `}
 `
 
 export const ActionsContainer = styled.div`
@@ -169,54 +178,57 @@ export const ActionsContainer = styled.div`
   }
 `
 
-export const EnableWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: fit-content;
-
-  span {
-    font-size: 14px;
-
-    ${props => props.theme?.rtl ? css`
-      padding-left: 10px;
-    ` : css`
-      padding-right: 10px;
-    `}
-  }
-`
-
-export const DropDownWrapper = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
-    ` : css`
-    margin-left: 20px;
-  `}
+export const ActionSelectorWrapper = styled.div`
   button {
-    background: #F8F9FA !important;
+    display: flex;
+    background: ${props => props.theme.colors.secundary} !important;
     border: none;
-    padding: 0px;
+    padding: 5px;
+    border-radius: 8px;
+
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     svg {
       color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
     }
 
     &:after {
       display: none;
     }
+
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+    }
+  }
+
+  .show {
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
   }
 
   > div {
     > div {
-      border: 1px solid #E9ECEF;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
       border-radius: 8px;
-
-      a:last-child {
-        color: #E63757;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+        padding: 7px 20px;
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
+      }
+      .dropdown-item:last-child {
+        color: ${props => props.theme.colors.danger};
       }
     }
-  }
-
-  .dropdown-item {
-    font-size: 14px;
   }
 `
