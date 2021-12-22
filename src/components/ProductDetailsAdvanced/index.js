@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import {
-  ProductProperties as ProductPropertiesController,
   useLanguage,
   useSession,
-  useUtils
+  useUtils,
+  ProductDetailsAdvanced as ProductDetailsAdvancedController
 } from 'ordering-components-admin'
 import { EditTaxManager } from '../EditTaxManager'
-import { Input, Switch } from '../../styles'
+import { Button, Input, Switch } from '../../styles'
 import { useForm } from 'react-hook-form'
 import {
   PropertiesContainer,
@@ -22,6 +22,7 @@ import { Alert } from '../Confirm'
 
 const ProductDetailsAdvancedUI = (props) => {
   const {
+    formState,
     productState,
     handleClickProperty,
     business,
@@ -34,7 +35,8 @@ const ProductDetailsAdvancedUI = (props) => {
     handleDeleteTax,
     setAlertState,
     alertState,
-    fees
+    fees,
+    handleUpdateClick
   } = props
 
   const formMethods = useForm()
@@ -263,6 +265,14 @@ const ProductDetailsAdvancedUI = (props) => {
           />
         )}
       </TypeSelectWrapper>
+      <Button
+        color='primary'
+        borderRadius='7.6px'
+        disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+        onClick={() => handleUpdateClick()}
+      >
+        {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
+      </Button>
       <Modal
         open={!!taxToEdit?.action}
         width='80%'
@@ -295,9 +305,9 @@ const ProductDetailsAdvancedUI = (props) => {
 }
 
 export const ProductDetailsAdvanced = (props) => {
-  const productProperties = {
+  const productAdvancedProps = {
     ...props,
     UIComponent: ProductDetailsAdvancedUI
   }
-  return <ProductPropertiesController {...productProperties} />
+  return <ProductDetailsAdvancedController {...productAdvancedProps} />
 }

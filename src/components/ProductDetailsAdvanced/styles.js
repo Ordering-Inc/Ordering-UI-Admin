@@ -4,6 +4,11 @@ export const PropertiesContainer = styled.div`
   > input {
     width: 100%;
   }
+
+  > button {
+    height: 44px;
+    margin-top: 30px;
+  }
 `
 
 export const PropertyOption = styled.div`

@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
 export const FormInput = styled.form`
-
 `
 
 export const ProductImage = styled.div`
@@ -100,7 +99,7 @@ export const InputWrapper = styled.div`
 `
 
 export const ActionsForm = styled.div`
-  margin: 30px 0;
+  margin-top: 30px;
   position: sticky;
   top: 100%;
   > button {

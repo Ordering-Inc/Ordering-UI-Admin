@@ -219,16 +219,14 @@ export const ProductDetatilsInformation = (props) => {
               {t('CANCEL', 'Cancel')}
             </Button>
           )}
-          {((formState && Object.keys(formState?.changes).length > 0)) && (
-            <Button
-              type='submit'
-              color='primary'
-              borderRadius='7.6px'
-              disabled={formState.loading}
-            >
-              {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
-            </Button>
-          )}
+          <Button
+            type='submit'
+            color='primary'
+            borderRadius='7.6px'
+            disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+          >
+            {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
+          </Button>
         </ActionsForm>
       </FormInput>
       <Alert
