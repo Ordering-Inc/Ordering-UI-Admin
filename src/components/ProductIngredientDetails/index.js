@@ -51,20 +51,22 @@ const ProductIngredientDetailsUI = (props) => {
             }
           </h1>
           <div>
-            <ActionSelectorWrapper>
-              <DropdownButton
-                className='product_actions'
-                menuAlign={theme?.rtl ? 'left' : 'right'}
-                title={<ThreeDots />}
-                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-              >
-                <Dropdown.Item
-                  onClick={() => handleDeleteClick()}
+            {!isAddMode && (
+              <ActionSelectorWrapper>
+                <DropdownButton
+                  className='product_actions'
+                  menuAlign={theme?.rtl ? 'left' : 'right'}
+                  title={<ThreeDots />}
+                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                 >
-                  {t('DELETE', 'Delete')}
-                </Dropdown.Item>
-              </DropdownButton>
-            </ActionSelectorWrapper>
+                  <Dropdown.Item
+                    onClick={() => handleDeleteClick()}
+                  >
+                    {t('DELETE', 'Delete')}
+                  </Dropdown.Item>
+                </DropdownButton>
+              </ActionSelectorWrapper>
+            )}
             <IconButton
               color='black'
               onClick={() => props.onClose && props.onClose()}

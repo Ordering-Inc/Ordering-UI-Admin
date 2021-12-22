@@ -8,6 +8,8 @@ export const Container = styled.div`
   > button {
     margin-top: 30px;
     height: 44px;
+    position: sticky;
+    top: 100%;
   }
 
   @media (min-width: 1000px) {

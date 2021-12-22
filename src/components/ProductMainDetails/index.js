@@ -33,9 +33,9 @@ export const ProductMainDetails = (props) => {
   const [selectedOption, setSelectedOption] = useState('information')
   const listOptions = [
     { key: 'information', content: t('INFORMATION', 'Information') },
-    { key: 'advanced', content: t('ADVANCED', 'Advanced') },
-    { key: 'labels', content: t('LABELS', 'Labels') },
-    { key: 'seo', content: t('SEO_OPTIONS', 'SEO options') }
+    { key: 'advanced', content: t('ADVANCED', 'Advanced') }
+    // { key: 'labels', content: t('LABELS', 'Labels') },
+    // { key: 'seo', content: t('SEO_OPTIONS', 'SEO options') }
   ]
   return (
     <Container>
