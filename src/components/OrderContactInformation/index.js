@@ -18,7 +18,8 @@ import {
   DriverSelectorContainer,
   CutsomerDetail,
   CustomerInfoTable,
-  ToggleItemWrapper
+  ToggleItemWrapper,
+  ReviewButton
 } from './styles'
 
 export const OrderContactInformation = (props) => {
@@ -119,7 +120,9 @@ export const OrderContactInformation = (props) => {
                   </IconButton>
                 )}
               </div>
-              <p>{order?.customer?.cellphone}</p>
+              <ReviewButton>
+                {t('REVIEW', 'Review')}
+              </ReviewButton>
             </InfoContent>
             <ChevronDown className='down-arrow' />
           </CustomerInfo>
@@ -128,6 +131,16 @@ export const OrderContactInformation = (props) => {
           <CutsomerDetail>
             <CustomerInfoTable>
               <tbody>
+                {order?.customer?.cellphone && (
+                  <tr>
+                    <td>{t('CELLPHONE', 'Phone / Mobile')}</td>
+                    <td>
+                      <a href={`tel:${order?.customer?.cellphone}`}>
+                        {order?.customer?.cellphone}
+                      </a>
+                    </td>
+                  </tr>
+                )}
                 {order?.customer?.email && (
                   <tr>
                     <td>{t('EMAIL', 'Email')}</td>

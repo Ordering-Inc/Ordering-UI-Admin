@@ -163,3 +163,9 @@ export const ToggleItemWrapper = styled.div`
     }
   `}
 `
+export const ReviewButton = styled.span`
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+  font-size: 14px;
+  text-decoration: underline;
+`
