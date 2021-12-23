@@ -116,7 +116,6 @@ if (!(window?.location?.hostname === 'localhost')) {
       'objects are not valid',
       'element type is invalid'
     ],
-  
     // We recommend adjusting this value in production, or using tracesSampler
     // for finer control
     tracesSampleRate: 0.2

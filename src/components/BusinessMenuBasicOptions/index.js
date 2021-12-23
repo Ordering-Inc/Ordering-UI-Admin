@@ -29,6 +29,8 @@ export const BusinessMenuBasicOptions = (props) => {
     selectedProductsIds,
     setSelectedProductsIds,
 
+    selectedProducts,
+    setSelectedProducts,
     handleChangeScheduleState
   } = props
   const [, t] = useLanguage()
@@ -115,6 +117,9 @@ export const BusinessMenuBasicOptions = (props) => {
             category={category}
             selectedProductsIds={selectedProductsIds}
             setSelectedProductsIds={setSelectedProductsIds}
+
+            selectedProducts={selectedProducts}
+            setSelectedProducts={setSelectedProducts}
           />
         ))}
       </BusinessMenuBasicContainer>
