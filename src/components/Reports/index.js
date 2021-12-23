@@ -51,6 +51,7 @@ import { ReportsCustomer } from '../ReportsCustomer'
 import { ReportsPaymethodSales } from '../ReportsPaymethodSales'
 import { ReportsAverageSales } from '../ReportsAverageSales'
 import { ReportsGeneralSales } from '../ReportsGeneralSales'
+import { ReportsSaleAndCategory } from '../ReportsSaleAndCategory'
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
@@ -79,7 +80,8 @@ export const Reports = (props) => {
     { id: 16, name: t('CUSTOMER_SATISFACTION', 'Customer safisfaction'), description: t('CUSTOMER_SATISFACTION_DESC', 'Customer safisfaction description'), icon: <Star /> },
     { id: 17, name: t('PAYMETHOD_SALES', 'Paymethod sales'), description: t('PAYMETHOD_SALES_DESC', 'Paymethod sales description'), icon: <CreditCard /> },
     { id: 18, name: t('AVERAGE_SALES', 'Average sales'), description: t('AVERAGE_SALES_DESC', 'Average sales description'), icon: <ShopWindow /> },
-    { id: 19, name: t('GENERAL_SALES', 'General sales'), description: t('GENERAL_SALES_DESC', 'General sales description'), icon: <Bag /> }
+    { id: 19, name: t('GENERAL_SALES', 'General sales'), description: t('GENERAL_SALES_DESC', 'General sales description'), icon: <Bag /> },
+    { id: 20, name: t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category'), description: t('TOP_SELLING_AND_CATEOGRY_DESC', 'Top selling and category description'), icon: <Bag /> }
   ]
 
   const handleCloseSidebar = () => {
@@ -148,6 +150,7 @@ export const Reports = (props) => {
           {selectedReport === 17 && <ReportsPaymethodSales />}
           {selectedReport === 18 && <ReportsAverageSales />}
           {selectedReport === 19 && <ReportsGeneralSales />}
+          {selectedReport === 20 && <ReportsSaleAndCategory />}
         </SideBar>
       )}
     </ReportsContainer>
