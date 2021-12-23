@@ -14,7 +14,10 @@ export const CategoryTreeNode = (props) => {
     category,
     index,
     selectedProductsIds,
-    setSelectedProductsIds
+    setSelectedProductsIds,
+
+    selectedProducts,
+    setSelectedProducts
   } = props
 
   const content = useRef(null)
@@ -42,12 +45,16 @@ export const CategoryTreeNode = (props) => {
     }
   }
 
-  const handleClickProduct = (productId) => {
-    if (selectedProductsIds.includes(productId)) {
-      const _selectedProductsIds = selectedProductsIds.filter(id => id !== productId)
+  const handleClickProduct = (product) => {
+    if (selectedProductsIds.includes(product.id)) {
+      const _selectedProductsIds = selectedProductsIds.filter(id => id !== product.id)
       setSelectedProductsIds(_selectedProductsIds)
+
+      const _selectedProducts = selectedProducts.filter(_product => _product.id !== product.id)
+      setSelectedProducts(_selectedProducts)
     } else {
-      setSelectedProductsIds([...selectedProductsIds, productId])
+      setSelectedProductsIds([...selectedProductsIds, product.id])
+      setSelectedProducts([...selectedProducts, product])
     }
   }
 
@@ -55,12 +62,27 @@ export const CategoryTreeNode = (props) => {
     const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
     const everyContain = productsIds.every(id => selectedProductsIds.includes(id))
     let _selectedProductsIds = []
+    let _selectedProducts = []
     if (!everyContain) {
       _selectedProductsIds = [...selectedProductsIds, ...productsIds].filter((value, index, self) => self.indexOf(value) === index)
       setSelectedProductsIds(_selectedProductsIds)
+
+      const uniqueArr = []
+      _selectedProducts = [...selectedProducts, ...category.products].filter(product => {
+        const index = uniqueArr.findIndex(item => (item.id === product.id))
+        if (index <= -1) {
+          uniqueArr.push(product)
+        }
+        return null
+      })
+
+      setSelectedProducts(uniqueArr)
     } else {
       _selectedProductsIds = selectedProductsIds.filter(id => !productsIds.includes(id))
       setSelectedProductsIds(_selectedProductsIds)
+
+      _selectedProducts = selectedProducts.filter(product => !productsIds.includes(product.id))
+      setSelectedProducts(_selectedProducts)
     }
   }
 
@@ -99,7 +121,7 @@ export const CategoryTreeNode = (props) => {
               <Checkbox
                 ref={checkboxRef}
                 checked={selectedProductsIds.includes(product.id)}
-                onChange={() => handleClickProduct(product.id)}
+                onChange={() => handleClickProduct(product)}
               />
               <span>{product.name}</span>
             </div>
