@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
@@ -7,7 +7,6 @@ import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Modal } from '../Modal'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
-import { Alert } from '../Confirm'
 import {
   OrderStatusContainer,
   Title,
@@ -34,7 +33,6 @@ const ReportsAverageSalesUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
 
@@ -42,13 +40,6 @@ const ReportsAverageSalesUI = (props) => {
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
-  }
-
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
   }
 
   const downloadCSV = (name) => {
@@ -95,15 +86,6 @@ const ReportsAverageSalesUI = (props) => {
     downloadLink.click()
     document.body.removeChild(downloadLink)
   }
-
-  useEffect(() => {
-    if (reportData?.error) {
-      setAlertState({
-        open: true,
-        content: reportData?.error
-      })
-    }
-  }, [reportData?.error])
 
   return (
     <>
@@ -269,15 +251,6 @@ const ReportsAverageSalesUI = (props) => {
           />
         </Modal>
       </OrderStatusContainer>
-      <Alert
-        title={t('DRIVER_SCHEDULE', 'Driver schedule')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }

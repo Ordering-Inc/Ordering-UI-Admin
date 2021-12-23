@@ -22,7 +22,8 @@ import {
   Star,
   CreditCard,
   ShopWindow,
-  Bag
+  Bag,
+  Tag
 } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
@@ -81,7 +82,7 @@ export const Reports = (props) => {
     { id: 17, name: t('PAYMETHOD_SALES', 'Paymethod sales'), description: t('PAYMETHOD_SALES_DESC', 'Paymethod sales description'), icon: <CreditCard /> },
     { id: 18, name: t('AVERAGE_SALES', 'Average sales'), description: t('AVERAGE_SALES_DESC', 'Average sales description'), icon: <ShopWindow /> },
     { id: 19, name: t('GENERAL_SALES', 'General sales'), description: t('GENERAL_SALES_DESC', 'General sales description'), icon: <Bag /> },
-    { id: 20, name: t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category'), description: t('TOP_SELLING_AND_CATEOGRY_DESC', 'Top selling and category description'), icon: <Bag /> }
+    { id: 20, name: t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category'), description: t('TOP_SELLING_AND_CATEOGRY_DESC', 'Top selling and category description'), icon: <Tag /> }
   ]
 
   const handleCloseSidebar = () => {
