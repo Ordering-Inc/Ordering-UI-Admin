@@ -15,7 +15,7 @@ export const WrapperOnlineDrivers = styled.div`
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
-  max-width: calc(100% - 380px);
+  max-width: 60%;
   padding: 10px 20px;
   box-sizing: border-box;
   overflow-y: hidden;
@@ -79,7 +79,7 @@ export const DriverImage = (props) => {
 export const DriverInfo = styled.div`
   p {
     margin: 0px;
-    &: first-child {
+    &:first-child {
       font-size: 14px;
       font-weight: 600;
       overflow: hidden;
@@ -87,7 +87,7 @@ export const DriverInfo = styled.div`
       white-space: nowrap;
     }
 
-    &: last-child {
+    &:last-child {
       font-size: 12px;
     }
   }

@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, DragAndDrop, ExamineClick, ProductExtraOptions as ProductExtraOptionsController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  ProductExtraOptions as ProductExtraOptionsController
+} from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import { Switch } from '../../styles/Switch'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
-import { PlusCircle, XLg } from 'react-bootstrap-icons'
+import { PlusCircle, XLg, ThreeDots, Image as ImageIcon } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import BiImage from '@meronex/icons/bi/BiImage'
 import { bytesConverter } from '../../utils'
 import { Alert, Confirm } from '../Confirm'
 import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
 import { Modal } from '../Modal'
 import { ProductExtraOptionDetails } from '../ProductExtraOptionDetails'
-import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { IconButton } from '../../styles/Buttons'
 
 import {
@@ -22,10 +21,8 @@ import {
   OptionsTable,
   OptionNameContainer,
   OptionImage,
-  UploadImageIconContainer,
   ActionsContainer,
-  EnableWrapper,
-  DropDownWrapper
+  ActionSelectorWrapper
 } from './styles'
 
 const ProductExtraOptionsUI = (props) => {
@@ -42,18 +39,18 @@ const ProductExtraOptionsUI = (props) => {
     handleChangeAddOption,
     addChangesState,
     handleAddOption,
-    handleChangeAddOptionEnable,
-    handleDeteteOption,
     business,
     cleanChangesState,
-    editOptionId
+    editOptionId,
+    handleDeleteExtra,
+    handleUpdateBusinessState,
+    handleSucccessDeleteOption
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const ActionIcon = <FiMoreVertical />
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [curOption, setCurOption] = useState(null)
@@ -82,19 +79,12 @@ const ProductExtraOptionsUI = (props) => {
   }
 
   const handleChangeAddOptionInput = (e, min) => {
-    const regexp = /^[0-9.\b]+$/
-    if (e.target.value === '' || regexp.test(e.target.value)) {
-      if (min) {
-        if (parseInt(e.target.value) > parseInt(addChangesState?.max)) return
-      } else {
-        if (parseInt(e.target.value) < parseInt(addChangesState?.min)) return
-      }
-      handleChangeAddOption(e)
+    if (min) {
+      if (parseInt(e.target.value) > parseInt(addChangesState?.max)) return
+    } else {
+      if (parseInt(e.target.value) < parseInt(addChangesState?.min)) return
     }
-  }
-
-  const handleClickImage = (idName) => {
-    document.getElementById(idName).click()
+    handleChangeAddOption(e)
   }
 
   const handleFiles = (files, optionId) => {
@@ -146,17 +136,6 @@ const ProductExtraOptionsUI = (props) => {
     }
   }
 
-  const handleDeteteClick = (optionId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_OPTION', 'Are you sure that you want to delete this option?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeteteOption(optionId)
-      }
-    })
-  }
-
   const handleOpenModal = (option, name) => {
     cleanChangesState({ ...changesState, changes: {} })
     setCurOption(option)
@@ -193,17 +172,49 @@ const ProductExtraOptionsUI = (props) => {
     }
   }, [editErrors])
 
+  const handleDeleteExtraClick = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_EXTRA', 'Are you sure that you want to delete this extra?'),
+      handleOnAccept: () => {
+        handleDeleteExtra()
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
   return (
     <MainContainer id='extra_options'>
       <OptionsContainer>
         <Header>
           <h1>{extraState.extra.name}</h1>
-          <IconButton
-            color='black'
-            onClick={() => onClose()}
-          >
-            <XLg />
-          </IconButton>
+          <div>
+            <ActionSelectorWrapper>
+              <DropdownButton
+                className='product_actions'
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+              >
+                <Dropdown.Item
+                  onClick={() => setOpenModal({ ...openModal, metaField: true })}
+                >
+                  {t('CUSTOM_FEILDS', 'Custom Fields')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => handleDeleteExtraClick()}
+                >
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              </DropdownButton>
+            </ActionSelectorWrapper>
+            <IconButton
+              color='black'
+              onClick={() => onClose()}
+            >
+              <XLg />
+            </IconButton>
+          </div>
         </Header>
         <OptionsTable>
           <thead>
@@ -211,92 +222,30 @@ const ProductExtraOptionsUI = (props) => {
               <th>{t('NAME', 'Name')}</th>
               <th>{t('MIN', 'Min')}</th>
               <th>{t('MAX', 'Max')}</th>
-              <th>{t('ACTIONS', 'Actions')}</th>
+              <th />
             </tr>
           </thead>
           {extraState.extra?.options && extraState.extra?.options.map(option => (
-            <tbody key={option.id}>
+            <tbody
+              key={option.id}
+              onClick={() => handleOpenModal(option, 'edit')}
+            >
               <tr>
                 <td>
                   <OptionNameContainer>
-                    <OptionImage
-                      onClick={() => handleClickImage(`option_image_${option.id}`)}
-                    >
-                      <ExamineClick
-                        onFiles={files => handleFiles(files, option.id)}
-                        childId={`option_image_${option.id}`}
-                        accept='image/png, image/jpeg, image/jpg'
-                        disabled={extraState.loading}
-                      >
-                        <DragAndDrop
-                          onDrop={dataTransfer => handleFiles(dataTransfer.files, option.id)}
-                          accept='image/png, image/jpeg, image/jpg'
-                          disabled={extraState.loading}
-                        >
-                          {
-                            (changesState?.result?.image && editOptionId === option.id)
-                              ? (<img src={changesState?.result?.image} alt='option image' loading='lazy' />)
-                              : (changesState?.changes?.image && editOptionId === option.id)
-                                ? (<img src={changesState?.changes?.image} alt='option image' loading='lazy' />)
-                                : option?.image && (<img src={option?.image} alt='option image' loading='lazy' />)
-                          }
-                          <UploadImageIconContainer>
-                            <BiImage />
-                          </UploadImageIconContainer>
-                        </DragAndDrop>
-                      </ExamineClick>
+                    <OptionImage>
+                      {option?.image ? (
+                        <img src={option?.image} alt='option image' loading='lazy' />
+                      ) : (
+                        <ImageIcon />
+                      )}
                     </OptionImage>
-                    <input
-                      name='name'
-                      defaultValue={option.name}
-                      onChange={(e) => handleChangeInput(e, option.id)}
-                    />
+                    <span>{option.name}</span>
                   </OptionNameContainer>
                 </td>
-                <td>
-                  <input
-                    name='min'
-                    value={
-                      (editOptionId === option.id)
-                        ? changesState?.changes?.min ?? option?.min
-                        : option?.min
-                    }
-                    onChange={(e) => handleChangeOptionInput(e, option, true)}
-                  />
-                </td>
-                <td>
-                  <input
-                    name='max'
-                    value={
-                      (editOptionId === option.id)
-                        ? changesState?.changes?.max ?? option?.max
-                        : option?.max
-                    }
-                    onChange={(e) => handleChangeOptionInput(e, option, false)}
-                  />
-                </td>
-                <td>
-                  <ActionsContainer>
-                    <EnableWrapper>
-                      <span>{t('ENABLE', 'Enable')}</span>
-                      <Switch
-                        defaultChecked={option?.enabled}
-                        onChange={enabled => handleChangeOptionEnable(enabled, option.id)}
-                      />
-                    </EnableWrapper>
-                    <DropDownWrapper>
-                      <DropdownButton
-                        menuAlign={theme?.rtl ? 'left' : 'right'}
-                        title={ActionIcon}
-                        id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                      >
-                        <Dropdown.Item onClick={() => handleOpenModal(option, 'edit')}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleOpenModal(option, 'metaFields')}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleDeteteClick(option.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
-                      </DropdownButton>
-                    </DropDownWrapper>
-                  </ActionsContainer>
-                </td>
+                <td>{option?.min}</td>
+                <td>{option?.max}</td>
+                <td />
               </tr>
             </tbody>
           ))}
@@ -317,6 +266,11 @@ const ProductExtraOptionsUI = (props) => {
                   name='min'
                   value={addChangesState?.min}
                   onChange={(e) => handleChangeAddOptionInput(e, true)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </td>
               <td>
@@ -324,17 +278,15 @@ const ProductExtraOptionsUI = (props) => {
                   name='max'
                   value={addChangesState?.max}
                   onChange={(e) => handleChangeAddOptionInput(e, false)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </td>
               <td>
                 <ActionsContainer>
-                  <EnableWrapper>
-                    <span>{t('ENABLE', 'Enable')}</span>
-                    <Switch
-                      defaultChecked={addChangesState?.enabled}
-                      onChange={handleChangeAddOptionEnable}
-                    />
-                  </EnableWrapper>
                   <PlusCircle
                     onClick={() => handleAddOptionClick()}
                   />
@@ -344,10 +296,6 @@ const ProductExtraOptionsUI = (props) => {
           </tbody>
         </OptionsTable>
       </OptionsContainer>
-      <ProductExtraMetaFields
-        businessId={business.id}
-        extraId={extraState.extra.id}
-      />
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
@@ -382,22 +330,22 @@ const ProductExtraOptionsUI = (props) => {
             handleChangeOptionInput={handleChangeInput}
             handleChangeNumberInput={handleChangeOptionInput}
             handleChangeOptionEnable={handleChangeOptionEnable}
+            onClose={() => setOpenModal({ ...openModal, edit: false })}
+            handleUpdateBusinessState={handleUpdateBusinessState}
+            handleSucccessDeleteOption={handleSucccessDeleteOption}
           />
         </Modal>
       )}
-      {openModal?.metaFields && (
-        <Modal
-          width='70%'
-          open={openModal?.metaFields}
-          onClose={() => setOpenModal({ ...openModal, metaFields: false })}
-        >
-          <ProductExtraOptionMetaFields
-            businessId={business.id}
-            extraId={extraState.extra.id}
-            optionId={curOption.id}
-          />
-        </Modal>
-      )}
+      <Modal
+        width='70%'
+        open={openModal?.metaField}
+        onClose={() => setOpenModal({ ...openModal, metaField: false })}
+      >
+        <ProductExtraMetaFields
+          businessId={business.id}
+          extraId={extraState.extra.id}
+        />
+      </Modal>
     </MainContainer>
   )
 }
