@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const PopMenuContatiner = styled.div`
   position: absolute;
   left:0px;
-  margin-top: 12px;
   background-color: #fff;
   width: 240px;
   height: 390px;

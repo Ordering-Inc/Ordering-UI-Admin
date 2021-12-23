@@ -5,6 +5,7 @@ import { MultiSelect } from './MultiSelect'
 import { Select as SecondSelect } from './Select'
 import { Select as DefaultSelect } from './Select/FirstSelect'
 import { Switch } from './Switch'
+import { Tabs, Tab } from './Tabs'
 
 export {
   Button,
@@ -15,5 +16,7 @@ export {
   Switch,
   SecondSelect,
   DefaultSelect,
-  TextArea
+  TextArea,
+  Tabs,
+  Tab
 }

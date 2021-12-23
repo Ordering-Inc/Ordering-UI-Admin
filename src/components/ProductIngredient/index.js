@@ -1,90 +1,91 @@
-import React, { useEffect, useRef } from 'react'
-import { useLanguage, ProductIngredient as ProductIngredientController } from 'ordering-components-admin'
-import { Trash } from 'react-bootstrap-icons'
+import React, { useState } from 'react'
+import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { ProductIngredientDetails } from '../ProductIngredientDetails'
+import { Modal } from '../Modal'
+
 import {
+  MainContainer,
   IngredientContainer,
   Header,
   IngredientOption,
-  AddIngredientButton,
-  IngredientAddContainer
+  AddIngredientButton
 } from './styles'
 
-const ProductIngredientUI = (props) => {
+export const ProductIngredient = (props) => {
   const {
-    changesState,
-    isAddMode,
-    productState,
-    handleChangeInput,
-    handleOpenAddForm,
-    handleDeleteIngredient,
-    handleAddIngredient
+    product,
+    setIsExtendExtraOpen
   } = props
-  const [, t] = useLanguage()
-  const conatinerRef = useRef(null)
 
-  const addIngredient = (e) => {
-    const outsideDropdown = !conatinerRef.current?.contains(e.target)
-    if (outsideDropdown) {
-      handleAddIngredient()
-    }
+  const [, t] = useLanguage()
+  const { width } = useWindowSize()
+  const [openDetails, setOpenDetails] = useState(false)
+  const [currentIngredient, setCurrentIngredient] = useState(null)
+
+  const handleOpenIngredient = (ingredient) => {
+    setCurrentIngredient(ingredient)
+    setIsExtendExtraOpen(true)
+    setOpenDetails(true)
   }
 
-  useEffect(() => {
-    if (!isAddMode) return
-    document.addEventListener('click', addIngredient)
-    return () => document.removeEventListener('click', addIngredient)
-  }, [isAddMode, changesState])
+  const handleCloseDetails = () => {
+    setOpenDetails(false)
+    setIsExtendExtraOpen(false)
+  }
+
   return (
-    <IngredientContainer>
-      <Header>
-        <h1>{t('INGREDIENTS', 'Ingredients')}</h1>
-        <Button
-          borderRadius='8px'
-          color='lightPrimary'
-          onClick={() => handleOpenAddForm()}
+    <MainContainer>
+      <IngredientContainer>
+        <Header>
+          <h1>{t('INGREDIENTS', 'Ingredients')} / {t('PROPERTIES', 'Properties')}</h1>
+          <Button
+            borderRadius='8px'
+            color='lightPrimary'
+            onClick={() => handleOpenIngredient(null)}
+          >
+            {t('ADD_INGREDIENT', 'Add ingredient')}
+          </Button>
+        </Header>
+        {product?.ingredients && product?.ingredients.map(ingredient => (
+          <IngredientOption
+            key={ingredient.id}
+            onClick={() => handleOpenIngredient(ingredient)}
+          >
+            {ingredient?.name}
+          </IngredientOption>
+        ))}
+        <AddIngredientButton
+          onClick={() => handleOpenIngredient(null)}
         >
           {t('ADD_INGREDIENT', 'Add ingredient')}
-        </Button>
-      </Header>
-      {productState?.product?.ingredients && productState?.product?.ingredients.map(ingredient => (
-        <IngredientOption
-          key={ingredient.id}
-        >
-          <input
-            name='name'
-            defaultValue={ingredient?.name}
-            onChange={(e) => handleChangeInput(e, ingredient.id)}
-          />
-          <Trash
-            onClick={() => handleDeleteIngredient(ingredient.id)}
-          />
-        </IngredientOption>
-      ))}
-      {isAddMode && (
-        <IngredientAddContainer
-          ref={conatinerRef}
-        >
-          <input
-            name='name'
-            placeholder={t('WRITE_A_NAME', 'Write a name')}
-            onChange={(e) => handleChangeInput(e, null)}
-          />
-        </IngredientAddContainer>
-      )}
-      <AddIngredientButton
-        onClick={() => handleOpenAddForm()}
-      >
-        {t('ADD_INGREDIENT', 'Add ingredient')}
-      </AddIngredientButton>
-    </IngredientContainer>
-  )
-}
+        </AddIngredientButton>
+      </IngredientContainer>
 
-export const ProductIngredient = (props) => {
-  const productIngredientProps = {
-    ...props,
-    UIComponent: ProductIngredientUI
-  }
-  return <ProductIngredientController {...productIngredientProps} />
+      {width >= 1000 ? (
+        <>
+          {openDetails && (
+            <ProductIngredientDetails
+              {...props}
+              ingredient={currentIngredient}
+              onClose={() => handleCloseDetails()}
+            />
+          )}
+        </>
+      ) : (
+        <Modal
+          width='80%'
+          open={openDetails}
+          onClose={() => handleCloseDetails()}
+        >
+          <ProductIngredientDetails
+            {...props}
+            ingredient={currentIngredient}
+            onClose={() => handleCloseDetails()}
+          />
+        </Modal>
+      )}
+    </MainContainer>
+  )
 }

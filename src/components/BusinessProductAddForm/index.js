@@ -136,7 +136,7 @@ const BusinessProductAddFormUI = (props) => {
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('BUSINESS_DESCRIPTION', 'Business description')}</label>
+          <label>{t('DESCRIPTION', 'Description')}</label>
           <TextArea
             rows={4}
             name='description'

@@ -82,7 +82,7 @@ export const Select = (props) => {
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
-    if (option.value === null || option.disabled || e.target.closest('.delete') !== null) return
+    if (option.value === null || option.disabled || e.target.closest('.delete') !== null || e.target.closest('.edit') !== null) return
     if (!noSelected) {
       setSelectedOption(option)
       setValue(option.value)
@@ -156,6 +156,7 @@ export const Select = (props) => {
                         borderRadius='8px'
                         color='lightPrimary'
                         onClick={() => onEdit(option, i)}
+                        className='edit'
                       >
                         {t('EDIT', 'Edit')}
                       </Button>

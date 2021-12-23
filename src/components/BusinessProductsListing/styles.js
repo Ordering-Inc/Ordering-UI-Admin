@@ -31,28 +31,6 @@ export const HeaderContainer = styled.div`
 
 export const HeaderTitleContainer = styled.div`
   flex: 1;
-  display: flex;
-  align-items: center;
-  h1 {
-    font-size: 24px;
-    margin: 0;
-    font-weight: 600;
-    color: ${props => props.theme.colors.headingColor};
-  }
-  > button {
-    ${props => props.theme?.rtl ? css`
-      margin-left: 8px;
-      margin-right: -8px;
-    ` : css`
-      margin-right: 8px;
-      margin-left: -8px;
-    `}
-
-    svg {
-      width: 25px;
-      height: 25px;
-    }
-  }
 `
 
 export const ActionsGroup = styled.div`
@@ -167,8 +145,13 @@ export const ViewMethodButton = styled.span`
 
 export const BusinessSelector = styled.div`
   position: relative;
+  width: fit-content;
 `
 export const BusinessNameWrapper = styled.div`
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
   cursor: pointer;
   h1 {
     svg {
@@ -178,5 +161,24 @@ export const BusinessNameWrapper = styled.div`
     svg.rotate-arrow {
       transform: rotate(180deg);
     }
+  }
+`
+export const Breadcrumb = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: ${props => props.theme.colors.lightGray};
+
+  span {
+    &.active {
+      color: ${props => props.theme.colors.primary};
+    }
+    &.business {
+      cursor: pointer;
+    }
+  }
+
+  svg {
+    margin: 0 9px;
   }
 `

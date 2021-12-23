@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 export const WrapperMapMarker = styled.div`
   width: 50px;
   height: 50px;
-  background: #fff;
+  background: #9D9B9B;
   border: 3px solid #F79B16;
   border-radius: 100%;
   position: absolute;

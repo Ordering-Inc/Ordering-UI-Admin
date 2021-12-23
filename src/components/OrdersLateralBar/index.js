@@ -91,9 +91,9 @@ export const OrdersLateralBar = (props) => {
         <Info>
           <WrapperImage>
             {isBusiness ? (
-              <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+              <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
             ) : (
-              <Image bgimage={optimizeImage(user?.photo || theme.images?.icons?.noDriver, 'h_200,c_limit')} />
+              <Image bgimage={optimizeImage(user?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
             )}
           </WrapperImage>
           <Name>

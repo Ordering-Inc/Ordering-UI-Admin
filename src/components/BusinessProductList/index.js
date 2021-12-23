@@ -129,7 +129,6 @@ export const BusinessProductList = (props) => {
                   {allowColumns?.fee && (
                     <th className='fee'>{t('FEE', 'Fee')}</th>
                   )}
-                  <th>{t('ACTIONS', 'Actions')}</th>
                   <th className='more'>
                     <ColumnAllowSettingPopover
                       open={openPopover}

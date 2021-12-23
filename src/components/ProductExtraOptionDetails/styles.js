@@ -1,14 +1,81 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const MainContainer = styled.div`
+`
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
   h1 {
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     color: ${props => props.theme.colors.headingColor};
   }
-`
 
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
+`
+export const ActionSelectorWrapper = styled.div`
+  button {
+    display: flex;
+    background: ${props => props.theme.colors.secundary} !important;
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
+
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+    }
+  }
+
+  .show {
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  > div {
+    > div {
+      border-radius: 8px;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+        padding: 7px 20px;
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
+      }
+      .dropdown-item:last-child {
+        color: ${props => props.theme.colors.danger};
+      }
+    }
+  }
+`
 export const OptionContainer = styled.div`
   display: flex;
   width: 100%;
