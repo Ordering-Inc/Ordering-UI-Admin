@@ -49,7 +49,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   var category = props.category,
       index = props.index,
       selectedProductsIds = props.selectedProductsIds,
-      setSelectedProductsIds = props.setSelectedProductsIds;
+      setSelectedProductsIds = props.setSelectedProductsIds,
+      selectedProducts = props.selectedProducts,
+      setSelectedProducts = props.setSelectedProducts;
   var content = (0, _react.useRef)(null);
   var checkboxRef = (0, _react.useRef)(null);
   var categoryRef = (0, _react.useRef)(null);
@@ -86,15 +88,22 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     }
   };
 
-  var handleClickProduct = function handleClickProduct(productId) {
-    if (selectedProductsIds.includes(productId)) {
+  var handleClickProduct = function handleClickProduct(product) {
+    if (selectedProductsIds.includes(product.id)) {
       var _selectedProductsIds = selectedProductsIds.filter(function (id) {
-        return id !== productId;
+        return id !== product.id;
       });
 
       setSelectedProductsIds(_selectedProductsIds);
+
+      var _selectedProducts = selectedProducts.filter(function (_product) {
+        return _product.id !== product.id;
+      });
+
+      setSelectedProducts(_selectedProducts);
     } else {
-      setSelectedProductsIds([].concat(_toConsumableArray(selectedProductsIds), [productId]));
+      setSelectedProductsIds([].concat(_toConsumableArray(selectedProductsIds), [product.id]));
+      setSelectedProducts([].concat(_toConsumableArray(selectedProducts), [product]));
     }
   };
 
@@ -106,17 +115,35 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       return selectedProductsIds.includes(id);
     });
     var _selectedProductsIds = [];
+    var _selectedProducts = [];
 
     if (!everyContain) {
       _selectedProductsIds = [].concat(_toConsumableArray(selectedProductsIds), _toConsumableArray(productsIds)).filter(function (value, index, self) {
         return self.indexOf(value) === index;
       });
       setSelectedProductsIds(_selectedProductsIds);
+      var uniqueArr = [];
+      _selectedProducts = [].concat(_toConsumableArray(selectedProducts), _toConsumableArray(category.products)).filter(function (product) {
+        var index = uniqueArr.findIndex(function (item) {
+          return item.id === product.id;
+        });
+
+        if (index <= -1) {
+          uniqueArr.push(product);
+        }
+
+        return null;
+      });
+      setSelectedProducts(uniqueArr);
     } else {
       _selectedProductsIds = selectedProductsIds.filter(function (id) {
         return !productsIds.includes(id);
       });
       setSelectedProductsIds(_selectedProductsIds);
+      _selectedProducts = selectedProducts.filter(function (product) {
+        return !productsIds.includes(product.id);
+      });
+      setSelectedProducts(_selectedProducts);
     }
   };
 
@@ -148,7 +175,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       ref: checkboxRef,
       checked: selectedProductsIds.includes(product.id),
       onChange: function onChange() {
-        return handleClickProduct(product.id);
+        return handleClickProduct(product);
       }
     }), /*#__PURE__*/_react.default.createElement("span", null, product.name)));
   }), (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0 && category.subcategories.map(function (subCategory) {

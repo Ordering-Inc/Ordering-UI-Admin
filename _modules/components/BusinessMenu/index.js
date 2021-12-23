@@ -209,7 +209,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     onClose: function onClose() {
       return handleCloseOption();
     },
-    handleUpdateBusinessState: handleSuccessBusinessMenu
+    handleUpdateBusinessState: handleSuccessBusinessMenu,
+    isSelectedSharedMenus: isSelectedSharedMenus
   })), showOption === 'customFields' && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "80%",
     open: showOption === 'customFields',

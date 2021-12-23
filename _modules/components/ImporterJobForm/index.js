@@ -150,7 +150,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       setImportedFile(true);
     }
   }, [fileState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, t('IMPORT', 'Import'), /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, t('CREATE_IMPORTER_JOB', 'Create importer job'), /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return onClose();
