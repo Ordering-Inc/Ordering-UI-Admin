@@ -9,13 +9,13 @@ exports.ProductDetails = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _ProductMainDetails = require("../ProductMainDetails");
+var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _ProductSummary = require("../ProductSummary");
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
 
 var _MoreSidebarLayout = require("../MoreSidebarLayout");
-
-var _ProductProperties = require("../ProductProperties");
 
 var _ProductIngredient = require("../ProductIngredient");
 
@@ -27,11 +27,19 @@ var _ProductExtras = require("../ProductExtras");
 
 var _ProductGallery = require("../ProductGallery");
 
+var _ProductMainDetails = require("../ProductMainDetails");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -47,18 +55,23 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var ProductDetails = function ProductDetails(props) {
+var ProductDetailsUI = function ProductDetailsUI(props) {
   var open = props.open,
       business = props.business,
       onClose = props.onClose,
-      product = props.product,
+      productState = props.productState,
+      formState = props.formState,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       setFormTaxState = props.setFormTaxState,
       formTaxState = props.formTaxState,
       taxes = props.taxes,
       setTaxes = props.setTaxes,
       fees = props.fees,
-      setFees = props.setFees;
+      setFees = props.setFees,
+      handlechangeImage = props.handlechangeImage,
+      handleChangeInput = props.handleChangeInput,
+      handleUpdateClick = props.handleUpdateClick,
+      handleChangeFormState = props.handleChangeFormState;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -139,19 +152,24 @@ var ProductDetails = function ProductDetails(props) {
   (0, _react.useEffect)(function () {
     setExtraOpen(false);
     setIsExtendExtraOpen(false);
-  }, [product]);
+  }, [props.product]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "product_details"
-  }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_ProductMainDetails.ProductMainDetails, _extends({}, props, {
+  }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_ProductSummary.ProductSummary, _extends({}, props, {
     actionSidebar: actionSidebar,
     showOption: showOption,
     handleShowOption: handleShowOption
   })), extraOpen && /*#__PURE__*/_react.default.createElement(_MoreSidebarLayout.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen
-  }, showOption === 'properties' && /*#__PURE__*/_react.default.createElement(_ProductProperties.ProductProperties, {
+  }, showOption === 'product_details' && /*#__PURE__*/_react.default.createElement(_ProductMainDetails.ProductMainDetails, {
+    product: productState === null || productState === void 0 ? void 0 : productState.product,
+    formState: formState,
+    handlechangeImage: handlechangeImage,
+    handleChangeFormState: handleChangeFormState,
+    handleChangeInput: handleChangeInput,
+    handleUpdateClick: handleUpdateClick,
     business: business,
-    product: product,
     handleUpdateBusinessState: handleUpdateBusinessState,
     setFormTaxState: setFormTaxState,
     formTaxState: formTaxState,
@@ -161,25 +179,34 @@ var ProductDetails = function ProductDetails(props) {
     setFees: setFees
   }), showOption === 'ingredients' && /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
     business: business,
-    product: product,
+    product: productState.product,
+    setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleUpdateBusinessState: handleUpdateBusinessState
   }), showOption === 'product_options' && /*#__PURE__*/_react.default.createElement(_ProductExtras.ProductExtras, {
     business: business,
-    product: product,
+    product: productState.product,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleUpdateBusinessState: handleUpdateBusinessState
   }), showOption === 'product_images' && /*#__PURE__*/_react.default.createElement(_ProductGallery.ProductGallery, {
     business: business,
-    categoryId: product.category_id,
-    product: product,
+    categoryId: productState.product.category_id,
+    product: productState.product,
     handleUpdateBusinessState: handleUpdateBusinessState
   }), showOption === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_ProductMetaFields.ProductMetaFields, {
     businessId: business.id,
-    categoryId: product.category_id,
-    productId: product.id
+    categoryId: productState.product.category_id,
+    productId: productState.product.id
   }), showOption === 'personalization' && /*#__PURE__*/_react.default.createElement(_Personalization.Personalization, {
     isShowTitle: true
   })));
+};
+
+var ProductDetails = function ProductDetails(props) {
+  var productDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: ProductDetailsUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ProductDetatils, productDetailsProps);
 };
 
 exports.ProductDetails = ProductDetails;

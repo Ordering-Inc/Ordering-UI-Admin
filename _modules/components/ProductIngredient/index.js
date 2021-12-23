@@ -11,9 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _Buttons = require("../../styles/Buttons");
+
+var _useWindowSize2 = require("../../hooks/useWindowSize");
+
+var _ProductIngredientDetails = require("../ProductIngredientDetails");
+
+var _Modal = require("../Modal");
 
 var _styles = require("./styles");
 
@@ -21,11 +25,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -39,81 +39,72 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var ProductIngredientUI = function ProductIngredientUI(props) {
-  var _productState$product, _productState$product2;
-
-  var changesState = props.changesState,
-      isAddMode = props.isAddMode,
-      productState = props.productState,
-      handleChangeInput = props.handleChangeInput,
-      handleOpenAddForm = props.handleOpenAddForm,
-      handleDeleteIngredient = props.handleDeleteIngredient,
-      handleAddIngredient = props.handleAddIngredient;
+var ProductIngredient = function ProductIngredient(props) {
+  var product = props.product,
+      setIsExtendExtraOpen = props.setIsExtendExtraOpen;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var conatinerRef = (0, _react.useRef)(null);
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
 
-  var addIngredient = function addIngredient(e) {
-    var _conatinerRef$current;
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      openDetails = _useState2[0],
+      setOpenDetails = _useState2[1];
 
-    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) !== null && _conatinerRef$current !== void 0 && _conatinerRef$current.contains(e.target));
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      currentIngredient = _useState4[0],
+      setCurrentIngredient = _useState4[1];
 
-    if (outsideDropdown) {
-      handleAddIngredient();
-    }
+  var handleOpenIngredient = function handleOpenIngredient(ingredient) {
+    setCurrentIngredient(ingredient);
+    setIsExtendExtraOpen(true);
+    setOpenDetails(true);
   };
 
-  (0, _react.useEffect)(function () {
-    if (!isAddMode) return;
-    document.addEventListener('click', addIngredient);
-    return function () {
-      return document.removeEventListener('click', addIngredient);
-    };
-  }, [isAddMode, changesState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.IngredientContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INGREDIENTS', 'Ingredients')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  var handleCloseDetails = function handleCloseDetails() {
+    setOpenDetails(false);
+    setIsExtendExtraOpen(false);
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IngredientContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INGREDIENTS', 'Ingredients'), " / ", t('PROPERTIES', 'Properties')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
-      return handleOpenAddForm();
+      return handleOpenIngredient(null);
     }
-  }, t('ADD_INGREDIENT', 'Add ingredient'))), (productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.ingredients) && (productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.ingredients.map(function (ingredient) {
+  }, t('ADD_INGREDIENT', 'Add ingredient'))), (product === null || product === void 0 ? void 0 : product.ingredients) && (product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_styles.IngredientOption, {
-      key: ingredient.id
-    }, /*#__PURE__*/_react.default.createElement("input", {
-      name: "name",
-      defaultValue: ingredient === null || ingredient === void 0 ? void 0 : ingredient.name,
-      onChange: function onChange(e) {
-        return handleChangeInput(e, ingredient.id);
-      }
-    }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
+      key: ingredient.id,
       onClick: function onClick() {
-        return handleDeleteIngredient(ingredient.id);
+        return handleOpenIngredient(ingredient);
       }
-    }));
-  })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles.IngredientAddContainer, {
-    ref: conatinerRef
-  }, /*#__PURE__*/_react.default.createElement("input", {
-    name: "name",
-    placeholder: t('WRITE_A_NAME', 'Write a name'),
-    onChange: function onChange(e) {
-      return handleChangeInput(e, null);
-    }
+    }, ingredient === null || ingredient === void 0 ? void 0 : ingredient.name);
   })), /*#__PURE__*/_react.default.createElement(_styles.AddIngredientButton, {
     onClick: function onClick() {
-      return handleOpenAddForm();
+      return handleOpenIngredient(null);
     }
-  }, t('ADD_INGREDIENT', 'Add ingredient')));
-};
-
-var ProductIngredient = function ProductIngredient(props) {
-  var productIngredientProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: ProductIngredientUI
-  });
-
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ProductIngredient, productIngredientProps);
+  }, t('ADD_INGREDIENT', 'Add ingredient'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openDetails && /*#__PURE__*/_react.default.createElement(_ProductIngredientDetails.ProductIngredientDetails, _extends({}, props, {
+    ingredient: currentIngredient,
+    onClose: function onClose() {
+      return handleCloseDetails();
+    }
+  }))) : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "80%",
+    open: openDetails,
+    onClose: function onClose() {
+      return handleCloseDetails();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ProductIngredientDetails.ProductIngredientDetails, _extends({}, props, {
+    ingredient: currentIngredient,
+    onClose: function onClose() {
+      return handleCloseDetails();
+    }
+  }))));
 };
 
 exports.ProductIngredient = ProductIngredient;

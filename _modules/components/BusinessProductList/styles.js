@@ -33,7 +33,7 @@ var ProductListSpreadContainer = _styledComponents.default.div(_templateObject5 
 
 exports.ProductListSpreadContainer = ProductListSpreadContainer;
 
-var BusinessProductListTable = _styledComponents.default.table(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n  transition: all 0.3s;\n\n  td, th {\n    padding: 15px;\n    font-size: 14px;\n    &:first-child {\n      padding-left: 0px;\n      padding-right: 0px;\n    }\n  }\n\n  th.more {\n    width: 50px;\n  }\n\n  th.price {\n    max-width: 100px;\n  }\n\n  th.description {\n    width: 35%;\n  }\n\n  th.fee_fixed,\n  th.fee_percentage {\n    white-space: nowrap;\n  }\n\n  th.id,\n  td.id {\n    width: 10%;\n  }\n\n  td {\n    input.product_price {\n      max-width: 100px;\n    }\n  }\n\n  thead {\n    border-bottom: 1px solid ", ";\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n      }\n    }\n  }\n"])), function (props) {
+var BusinessProductListTable = _styledComponents.default.table(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n  transition: all 0.3s;\n\n  th {\n    font-size: 12px;\n    font-weight: 700;\n  }\n\n  td, th {\n    padding: 15px;\n    &:first-child {\n      padding-left: 0px;\n      padding-right: 0px;\n    }\n  }\n\n  th.more {\n    width: 50px;\n  }\n\n  th.price {\n    max-width: 100px;\n  }\n\n  th.description {\n    width: 35%;\n  }\n\n  th.fee_fixed,\n  th.fee_percentage {\n    white-space: nowrap;\n  }\n\n  th.id,\n  td.id {\n    width: 10%;\n  }\n\n  thead {\n    border-bottom: 1px solid ", ";\n    tr {\n      th {\n        position: sticky;\n        top: 0px;\n        z-index: 100;\n        background: #FFF;\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
@@ -47,7 +47,11 @@ var WrapperNotFound = _styledComponents.default.div(_templateObject9 || (_templa
 
 exports.WrapperNotFound = WrapperNotFound;
 
-var AddProductBtn = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 12px;\n  color: #909BA9;\n  margin-top: 12px;\n  cursor: pointer;\n  margin-bottom: 15px;\n  display: inline-block;\n"])));
+var AddProductBtn = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 14px;\n  color: ", ";\n  margin-top: 12px;\n  cursor: pointer;\n  margin-bottom: 15px;\n  display: inline-block;\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.lightGray;
+}, function (props) {
+  return props.theme.colors.primary;
+});
 
 exports.AddProductBtn = AddProductBtn;
 

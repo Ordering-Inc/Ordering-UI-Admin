@@ -43,7 +43,7 @@ var CategoryContentInside = _styledComponents.default.div(_templateObject5 || (_
 
 exports.CategoryContentInside = CategoryContentInside;
 
-var ImageContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  min-height: 38px;\n  min-width: 38px;\n  height: 38px;\n  width: 38px;\n  border-radius: 8px;\n  overflow: hidden;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  ", "\n  ", "\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n  img{\n    object-fit: cover;\n  }\n"])), function (props) {
+var ImageContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  min-height: 41px;\n  min-width: 41px;\n  height: 41px;\n  width: 41px;\n  border-radius: 8px;\n  overflow: hidden;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  ", "\n  ", "\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n  img{\n    object-fit: cover;\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "])));

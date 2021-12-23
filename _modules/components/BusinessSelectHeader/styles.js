@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var PopMenuContatiner = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  left:0px;\n  margin-top: 12px;\n  background-color: #fff;\n  width: 240px;\n  height: 390px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n  border-radius: 7.6px;\n  padding: 8px;\n  z-index: 999;\n"])));
+var PopMenuContatiner = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  left:0px;\n  background-color: #fff;\n  width: 240px;\n  height: 390px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n  border-radius: 7.6px;\n  padding: 8px;\n  z-index: 999;\n"])));
 
 exports.PopMenuContatiner = PopMenuContatiner;
 

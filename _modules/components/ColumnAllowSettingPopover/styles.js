@@ -45,7 +45,7 @@ var PopoverList = _styledComponents.default.div(_templateObject7 || (_templateOb
 
 exports.PopoverList = PopoverList;
 
-var AllowItem = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  color: ", ";\n  padding: 7px;\n  cursor: pointer;\n  svg {\n    font-size: 24px;\n  }\n  span {\n    white-space: nowrap;\n    font-size: 14px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
+var AllowItem = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  color: ", ";\n  padding: 7px;\n  cursor: pointer;\n  svg {\n    font-size: 24px;\n  }\n  span {\n    white-space: nowrap;\n    font-size: 12px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
   var _props$theme$colors3;
 
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.headingColor;

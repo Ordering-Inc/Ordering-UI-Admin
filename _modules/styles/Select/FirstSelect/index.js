@@ -125,7 +125,7 @@ var Select = function Select(props) {
 
   var handleChangeOption = function handleChangeOption(e, option) {
     if (e.target.closest('.disabled') === null) setOpen(!open);
-    if (option.value === null || option.disabled || e.target.closest('.delete') !== null) return;
+    if (option.value === null || option.disabled || e.target.closest('.delete') !== null || e.target.closest('.edit') !== null) return;
 
     if (!noSelected) {
       setSelectedOption(option);
@@ -184,7 +184,8 @@ var Select = function Select(props) {
       color: "lightPrimary",
       onClick: function onClick() {
         return onEdit(option, i);
-      }
+      },
+      className: "edit"
     }, t('EDIT', 'Edit')), option.deleteFunctionality && /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
       className: "delete",
       onClick: function onClick() {

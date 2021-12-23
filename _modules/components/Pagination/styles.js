@@ -61,7 +61,7 @@ var PageSizeContainer = _styledComponents.default.div(_templateObject10 || (_tem
 
 exports.PageSizeContainer = PageSizeContainer;
 
-var PageSizeTitle = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin: 0px;\n  color: ", ";\n  font-size: 14px;\n  ", "\n"])), function (props) {
+var PageSizeTitle = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin: 0px;\n  color: ", ";\n  font-size: 12px;\n  ", "\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   var _props$theme3;

@@ -184,7 +184,7 @@ var BusinessProductList = function BusinessProductList(props) {
     className: "tax"
   }, t('TAX', 'Tax')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.fee) && /*#__PURE__*/_react.default.createElement("th", {
     className: "fee"
-  }, t('FEE', 'Fee')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('FEE', 'Fee')), /*#__PURE__*/_react.default.createElement("th", {
     className: "more"
   }, /*#__PURE__*/_react.default.createElement(_ColumnAllowSettingPopover.ColumnAllowSettingPopover, {
     open: openPopover,

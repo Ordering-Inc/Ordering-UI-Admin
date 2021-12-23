@@ -38,7 +38,7 @@ var MetaContainer = _styledComponents.default.div(_templateObject3 || (_template
 });
 
 exports.MetaContainer = MetaContainer;
-var MetaAddContainer = (0, _styledComponents.default)(MetaContainer)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  input {\n    font-size: 14px;\n    height: 35px;\n    border: 1px solid ", ";\n    border-radius: 5px;\n    padding: 5px 10px;\n    outline: none;\n    font-size: 16px;\n    box-sizing: border-box;\n    width: 100%;\n  }\n\n  button {\n    margin-top: 6px;\n    svg {\n      color: ", " !important;\n    }\n  }\n"])), function (props) {
+var MetaAddContainer = (0, _styledComponents.default)(MetaContainer)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  input {\n    font-size: 14px;\n    height: 35px;\n    border: 1px solid ", ";\n    border-radius: 5px;\n    padding: 5px 10px;\n    outline: none;\n    box-sizing: border-box;\n    width: 100%;\n  }\n\n  button {\n    margin-top: 6px;\n    svg {\n      color: ", " !important;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.primary;

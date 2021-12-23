@@ -57,6 +57,18 @@ Object.defineProperty(exports, "Switch", {
     return _Switch.Switch;
   }
 });
+Object.defineProperty(exports, "Tabs", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tabs;
+  }
+});
+Object.defineProperty(exports, "Tab", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tab;
+  }
+});
 
 var _Buttons = require("./Buttons");
 
@@ -71,3 +83,5 @@ var _Select = require("./Select");
 var _FirstSelect = require("./Select/FirstSelect");
 
 var _Switch = require("./Switch");
+
+var _Tabs = require("./Tabs");

@@ -21,7 +21,7 @@ var WrapperMap = _styledComponents.default.div(_templateObject || (_templateObje
 
 exports.WrapperMap = WrapperMap;
 
-var WrapperOnlineDrivers = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 10px;\n  left: 10px;\n  background: white;\n  padding: 10px;\n  border-radius: 10px;\n  box-shadow: 0px 3px 6px #00000029;\n  max-width: calc(100% - 380px);\n  padding: 10px 20px;\n  box-sizing: border-box;\n  overflow-y: hidden;\n  & > p {\n    font-weight: 600;\n    font-size: 14px;\n    color: ", ";\n    margin: 0 0 5px 0;\n  }\n"])), function (props) {
+var WrapperOnlineDrivers = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 10px;\n  left: 10px;\n  background: white;\n  padding: 10px;\n  border-radius: 10px;\n  box-shadow: 0px 3px 6px #00000029;\n  max-width: 60%;\n  padding: 10px 20px;\n  box-sizing: border-box;\n  overflow-y: hidden;\n  & > p {\n    font-weight: 600;\n    font-size: 14px;\n    color: ", ";\n    margin: 0 0 5px 0;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
@@ -55,6 +55,6 @@ var DriverImage = function DriverImage(props) {
 
 exports.DriverImage = DriverImage;
 
-var DriverInfo = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  p {\n    margin: 0px;\n    &: first-child {\n      font-size: 14px;\n      font-weight: 600;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n    }\n\n    &: last-child {\n      font-size: 12px;\n    }\n  }\n"])));
+var DriverInfo = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  p {\n    margin: 0px;\n    &:first-child {\n      font-size: 14px;\n      font-weight: 600;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n    }\n\n    &:last-child {\n      font-size: 12px;\n    }\n  }\n"])));
 
 exports.DriverInfo = DriverInfo;

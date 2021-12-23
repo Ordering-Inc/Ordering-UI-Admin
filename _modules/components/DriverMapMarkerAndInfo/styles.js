@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var WrapperMapMarker = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 50px;\n  height: 50px;\n  background: #fff;\n  border: 3px solid #F79B16;\n  border-radius: 100%;\n  position: absolute;\n  transform: translate(-50%, -100%);\n  z-index: 1;\n\n  ", "\n\n  &:after {\n    content:'';\n    position: absolute;\n    top: 77%;\n    left: 50%;\n    margin-left: -22px;\n    width: 0;\n    height: 0;\n    border-top: solid 22px #F79B16;\n    ", "\n    border-left: solid 22px transparent;\n    border-right: solid 22px transparent;\n    z-index: 10;\n  }\n"])), function (_ref) {
+var WrapperMapMarker = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 50px;\n  height: 50px;\n  background: #9D9B9B;\n  border: 3px solid #F79B16;\n  border-radius: 100%;\n  position: absolute;\n  transform: translate(-50%, -100%);\n  z-index: 1;\n\n  ", "\n\n  &:after {\n    content:'';\n    position: absolute;\n    top: 77%;\n    left: 50%;\n    margin-left: -22px;\n    width: 0;\n    height: 0;\n    border-top: solid 22px #F79B16;\n    ", "\n    border-left: solid 22px transparent;\n    border-right: solid 22px transparent;\n    z-index: 10;\n  }\n"])), function (_ref) {
   var offline = _ref.offline;
   return offline && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border: 3px solid #9D9B9B;\n  "])));
 }, function (_ref2) {

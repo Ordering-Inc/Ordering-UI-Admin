@@ -11,29 +11,17 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
+var _DragScroll = require("../DragScroll");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _ProductDetatilsInformation = require("../ProductDetatilsInformation");
 
-var _Switch = require("../../styles/Switch");
-
-var _ProductDetatilsEditForm = require("../ProductDetatilsEditForm");
-
-var _Buttons = require("../../styles/Buttons");
+var _ProductDetailsAdvanced = require("../ProductDetailsAdvanced");
 
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -47,95 +35,66 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var ProductMainDetailsUI = function ProductMainDetailsUI(props) {
-  var _productState$product, _productState$product2, _productState$product3, _productState$product4, _productState$product5;
-
-  var actionSidebar = props.actionSidebar,
-      showOption = props.showOption,
-      handleShowOption = props.handleShowOption,
-      handleChangeProductActiveState = props.handleChangeProductActiveState,
-      productState = props.productState,
+var ProductMainDetails = function ProductMainDetails(props) {
+  var product = props.product,
       formState = props.formState,
       handlechangeImage = props.handlechangeImage,
       handleChangeInput = props.handleChangeInput,
-      handleUpdateClick = props.handleUpdateClick;
+      handleChangeFormState = props.handleChangeFormState,
+      handleUpdateClick = props.handleUpdateClick,
+      business = props.business,
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      setFormTaxState = props.setFormTaxState,
+      formTaxState = props.formTaxState,
+      taxes = props.taxes,
+      setTaxes = props.setTaxes,
+      fees = props.fees,
+      setFees = props.setFees;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      optimizeImage = _useUtils2$.optimizeImage,
-      parsePrice = _useUtils2$.parsePrice;
-
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)('information'),
       _useState2 = _slicedToArray(_useState, 2),
-      isEditMode = _useState2[0],
-      setIsEditMode = _useState2[1];
+      selectedOption = _useState2[0],
+      setSelectedOption = _useState2[1];
 
-  var configsOptions = [{
-    key: 'properties',
-    value: t('PROPERTIES', 'Properties')
+  var listOptions = [{
+    key: 'information',
+    content: t('INFORMATION', 'Information')
   }, {
-    key: 'ingredients',
-    value: t('INGREDIENTS', 'Ingredients')
-  }, {
-    key: 'product_options',
-    value: t('PRODUCT_OPTIONS', 'Product options')
-  }, {
-    key: 'product_images',
-    value: t('PRODUCT_IMAGES', 'Product images')
-  }, {
-    key: 'custom_fields',
-    value: t('CUSTOM_FIELDS', 'Custom fields')
-  }, {
-    key: 'personalization',
-    value: t('PERSONALIZATION', 'Personalization')
-  }];
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: (productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.enabled) || false,
-    onChange: handleChangeProductActiveState
-  })), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return isEditMode ? setIsEditMode(false) : actionSidebar(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), !isEditMode ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
-    bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.images, 'h_200,c_limit')
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.price)), /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.description), /*#__PURE__*/_react.default.createElement(_styles.ProductConfigsContainer, null, configsOptions.map(function (config) {
-    return /*#__PURE__*/_react.default.createElement(_styles.ProductConfigOption, {
-      key: config.key,
-      active: showOption === config.key,
+    key: 'advanced',
+    content: t('ADVANCED', 'Advanced')
+  } // { key: 'labels', content: t('LABELS', 'Labels') },
+  // { key: 'seo', content: t('SEO_OPTIONS', 'SEO options') }
+  ];
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_DETAILS', 'Product details')), /*#__PURE__*/_react.default.createElement(_styles.TabsConatiner, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, listOptions.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+      key: option.key,
+      active: selectedOption === option.key,
       onClick: function onClick() {
-        return handleShowOption(config.key);
+        return setSelectedOption(option.key);
       }
-    }, /*#__PURE__*/_react.default.createElement("span", null, config.value), /*#__PURE__*/_react.default.createElement(_BsChevronRight.default, null));
-  }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "secundaryDark",
-    borderRadius: "7.6px",
-    onClick: function onClick() {
-      return setIsEditMode(true);
-    }
-  }, t('EDIT', 'Edit'))) : /*#__PURE__*/_react.default.createElement(_ProductDetatilsEditForm.ProductDetatilsEditForm, {
-    onCancel: function onCancel() {
-      return setIsEditMode(false);
-    },
-    product: productState === null || productState === void 0 ? void 0 : productState.product,
+    }, option.content);
+  }))), selectedOption === 'information' && /*#__PURE__*/_react.default.createElement(_ProductDetatilsInformation.ProductDetatilsInformation, {
+    product: product,
     formState: formState,
     handlechangeImage: handlechangeImage,
     handleChangeInput: handleChangeInput,
+    handleChangeFormState: handleChangeFormState,
     handleButtonUpdateClick: handleUpdateClick
-  })));
-};
-
-var ProductMainDetails = function ProductMainDetails(props) {
-  var productDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: ProductMainDetailsUI
-  });
-
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ProductDetatils, productDetailsProps);
+  }), selectedOption === 'advanced' && /*#__PURE__*/_react.default.createElement(_ProductDetailsAdvanced.ProductDetailsAdvanced, {
+    product: product,
+    business: business,
+    handleUpdateBusinessState: handleUpdateBusinessState,
+    setFormTaxState: setFormTaxState,
+    formTaxState: formTaxState,
+    taxes: taxes,
+    setTaxes: setTaxes,
+    fees: fees,
+    setFees: setFees
+  }));
 };
 
 exports.ProductMainDetails = ProductMainDetails;

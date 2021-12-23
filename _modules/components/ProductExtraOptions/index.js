@@ -13,17 +13,11 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
 
-var _Switch = require("../../styles/Switch");
-
 var _reactBootstrap = require("react-bootstrap");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styledComponents = require("styled-components");
-
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
-var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _utils = require("../../utils");
 
@@ -35,13 +29,9 @@ var _Modal = require("../Modal");
 
 var _ProductExtraOptionDetails = require("../ProductExtraOptionDetails");
 
-var _ProductExtraOptionMetaFields = require("../ProductExtraOptionMetaFields");
-
 var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -80,11 +70,12 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       handleChangeAddOption = props.handleChangeAddOption,
       addChangesState = props.addChangesState,
       handleAddOption = props.handleAddOption,
-      handleChangeAddOptionEnable = props.handleChangeAddOptionEnable,
-      handleDeteteOption = props.handleDeteteOption,
       business = props.business,
       cleanChangesState = props.cleanChangesState,
-      editOptionId = props.editOptionId;
+      editOptionId = props.editOptionId,
+      handleDeleteExtra = props.handleDeleteExtra,
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      handleSucccessDeleteOption = props.handleSucccessDeleteOption;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -98,8 +89,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       isMenuOpen = _useState2[0],
       setIsMenuOpen = _useState2[1];
-
-  var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
 
   var _useState3 = (0, _react.useState)({
     open: false,
@@ -158,21 +147,13 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   };
 
   var handleChangeAddOptionInput = function handleChangeAddOptionInput(e, min) {
-    var regexp = /^[0-9.\b]+$/;
-
-    if (e.target.value === '' || regexp.test(e.target.value)) {
-      if (min) {
-        if (parseInt(e.target.value) > parseInt(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max)) return;
-      } else {
-        if (parseInt(e.target.value) < parseInt(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min)) return;
-      }
-
-      handleChangeAddOption(e);
+    if (min) {
+      if (parseInt(e.target.value) > parseInt(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max)) return;
+    } else {
+      if (parseInt(e.target.value) < parseInt(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min)) return;
     }
-  };
 
-  var handleClickImage = function handleClickImage(idName) {
-    document.getElementById(idName).click();
+    handleChangeAddOption(e);
   };
 
   var handleFiles = function handleFiles(files, optionId) {
@@ -228,19 +209,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     }
   };
 
-  var handleDeteteClick = function handleDeteteClick(optionId) {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_OPTION', 'Are you sure that you want to delete this option?'),
-      handleOnAccept: function handleOnAccept() {
-        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-          open: false
-        }));
-        handleDeteteOption(optionId);
-      }
-    });
-  };
-
   var handleOpenModal = function handleOpenModal(option, name) {
     cleanChangesState(_objectSpread(_objectSpread({}, changesState), {}, {
       changes: {}
@@ -277,87 +245,53 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       }
     }
   }, [editErrors]);
+
+  var handleDeleteExtraClick = function handleDeleteExtraClick() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_EXTRA', 'Are you sure that you want to delete this extra?'),
+      handleOnAccept: function handleOnAccept() {
+        handleDeleteExtra();
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+      }
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, {
     id: "extra_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, extraState.extra.name), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, extraState.extra.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    className: "product_actions",
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        metaField: true
+      }));
+    }
+  }, t('CUSTOM_FEILDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDeleteExtraClick();
+    }
+  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.OptionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement("th", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), ((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options) && ((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.options.map(function (option) {
-    var _changesState$result, _changesState$result2, _changesState$changes5, _changesState$changes6, _changesState$changes7, _changesState$changes8, _changesState$changes9, _changesState$changes10;
-
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles.OptionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement("th", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement("th", null))), ((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options) && ((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
-      key: option.id
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OptionImage, {
-      onClick: function onClick() {
-        return handleClickImage("option_image_".concat(option.id));
-      }
-    }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
-      onFiles: function onFiles(files) {
-        return handleFiles(files, option.id);
-      },
-      childId: "option_image_".concat(option.id),
-      accept: "image/png, image/jpeg, image/jpg",
-      disabled: extraState.loading
-    }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
-      onDrop: function onDrop(dataTransfer) {
-        return handleFiles(dataTransfer.files, option.id);
-      },
-      accept: "image/png, image/jpeg, image/jpg",
-      disabled: extraState.loading
-    }, changesState !== null && changesState !== void 0 && (_changesState$result = changesState.result) !== null && _changesState$result !== void 0 && _changesState$result.image && editOptionId === option.id ? /*#__PURE__*/_react.default.createElement("img", {
-      src: changesState === null || changesState === void 0 ? void 0 : (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
-      alt: "option image",
-      loading: "lazy"
-    }) : changesState !== null && changesState !== void 0 && (_changesState$changes5 = changesState.changes) !== null && _changesState$changes5 !== void 0 && _changesState$changes5.image && editOptionId === option.id ? /*#__PURE__*/_react.default.createElement("img", {
-      src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes6 = changesState.changes) === null || _changesState$changes6 === void 0 ? void 0 : _changesState$changes6.image,
-      alt: "option image",
-      loading: "lazy"
-    }) : (option === null || option === void 0 ? void 0 : option.image) && /*#__PURE__*/_react.default.createElement("img", {
-      src: option === null || option === void 0 ? void 0 : option.image,
-      alt: "option image",
-      loading: "lazy"
-    }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))), /*#__PURE__*/_react.default.createElement("input", {
-      name: "name",
-      defaultValue: option.name,
-      onChange: function onChange(e) {
-        return handleChangeInput(e, option.id);
-      }
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
-      name: "min",
-      value: editOptionId === option.id ? (_changesState$changes7 = changesState === null || changesState === void 0 ? void 0 : (_changesState$changes8 = changesState.changes) === null || _changesState$changes8 === void 0 ? void 0 : _changesState$changes8.min) !== null && _changesState$changes7 !== void 0 ? _changesState$changes7 : option === null || option === void 0 ? void 0 : option.min : option === null || option === void 0 ? void 0 : option.min,
-      onChange: function onChange(e) {
-        return handleChangeOptionInput(e, option, true);
-      }
-    })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
-      name: "max",
-      value: editOptionId === option.id ? (_changesState$changes9 = changesState === null || changesState === void 0 ? void 0 : (_changesState$changes10 = changesState.changes) === null || _changesState$changes10 === void 0 ? void 0 : _changesState$changes10.max) !== null && _changesState$changes9 !== void 0 ? _changesState$changes9 : option === null || option === void 0 ? void 0 : option.max : option === null || option === void 0 ? void 0 : option.max,
-      onChange: function onChange(e) {
-        return handleChangeOptionInput(e, option, false);
-      }
-    })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-      defaultChecked: option === null || option === void 0 ? void 0 : option.enabled,
-      onChange: function onChange(enabled) {
-        return handleChangeOptionEnable(enabled, option.id);
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: ActionIcon,
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+      key: option.id,
       onClick: function onClick() {
         return handleOpenModal(option, 'edit');
       }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleOpenModal(option, 'metaFields');
-      }
-    }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleDeteteClick(option.id);
-      }
-    }, t('DELETE', 'Delete'))))))));
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OptionImage, null, option !== null && option !== void 0 && option.image ? /*#__PURE__*/_react.default.createElement("img", {
+      src: option === null || option === void 0 ? void 0 : option.image,
+      alt: "option image",
+      loading: "lazy"
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null)), /*#__PURE__*/_react.default.createElement("span", null, option.name))), /*#__PURE__*/_react.default.createElement("td", null, option === null || option === void 0 ? void 0 : option.min), /*#__PURE__*/_react.default.createElement("td", null, option === null || option === void 0 ? void 0 : option.max), /*#__PURE__*/_react.default.createElement("td", null)));
   })), /*#__PURE__*/_react.default.createElement("tbody", {
     className: "add_option"
   }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement("input", {
@@ -372,24 +306,28 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     value: addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min,
     onChange: function onChange(e) {
       return handleChangeAddOptionInput(e, true);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
     name: "max",
     value: addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max,
     onChange: function onChange(e) {
       return handleChangeAddOptionInput(e, false);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
-  })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.enabled,
-    onChange: handleChangeAddOptionEnable
-  })), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, {
+  })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, {
     onClick: function onClick() {
       return handleAddOptionClick();
     }
-  }))))))), /*#__PURE__*/_react.default.createElement(_ProductExtraMetaFields.ProductExtraMetaFields, {
-    businessId: business.id,
-    extraId: extraState.extra.id
-  }), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -434,19 +372,25 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     handleOptionFiles: handleFiles,
     handleChangeOptionInput: handleChangeInput,
     handleChangeNumberInput: handleChangeOptionInput,
-    handleChangeOptionEnable: handleChangeOptionEnable
-  })), (openModal === null || openModal === void 0 ? void 0 : openModal.metaFields) && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
-    open: openModal === null || openModal === void 0 ? void 0 : openModal.metaFields,
+    handleChangeOptionEnable: handleChangeOptionEnable,
     onClose: function onClose() {
       return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-        metaFields: false
+        edit: false
+      }));
+    },
+    handleUpdateBusinessState: handleUpdateBusinessState,
+    handleSucccessDeleteOption: handleSucccessDeleteOption
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "70%",
+    open: openModal === null || openModal === void 0 ? void 0 : openModal.metaField,
+    onClose: function onClose() {
+      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        metaField: false
       }));
     }
-  }, /*#__PURE__*/_react.default.createElement(_ProductExtraOptionMetaFields.ProductExtraOptionMetaFields, {
+  }, /*#__PURE__*/_react.default.createElement(_ProductExtraMetaFields.ProductExtraMetaFields, {
     businessId: business.id,
-    extraId: extraState.extra.id,
-    optionId: curOption.id
+    extraId: extraState.extra.id
   })));
 };
 

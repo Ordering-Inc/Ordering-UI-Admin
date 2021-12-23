@@ -157,7 +157,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     onChange: handleChangeInput,
     placeholder: t('WRITE_PRICE', 'Write price'),
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     name: "description",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.description) || '',

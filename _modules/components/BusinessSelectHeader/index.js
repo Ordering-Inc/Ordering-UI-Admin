@@ -214,7 +214,8 @@ var BusinessSelectHeader = function BusinessSelectHeader(props) {
     loadMorePageSize: 10,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
-    isSearchByBusinessPhone: true
+    isSearchByBusinessPhone: true,
+    propsToFetch: ['name', 'slug', 'logo', 'city']
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardBusinessList, businessListingProps);

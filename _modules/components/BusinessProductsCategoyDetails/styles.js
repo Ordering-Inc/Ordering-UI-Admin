@@ -5,11 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Option = exports.ParentCategorySelectWrapper = exports.CategoryNameWrapper = exports.UploadImageIcon = exports.UploadImageIconContainer = exports.BtnWrapper = exports.CategoryTypeImage = exports.BusinessEnableWrapper = exports.HeaderContainer = exports.EditCategoryContent = exports.SkeletonWrapper = exports.Container = void 0;
+exports.ActionSelectorWrapper = exports.RightHeader = exports.Option = exports.ParentCategorySelectWrapper = exports.CategoryNameWrapper = exports.UploadImageIcon = exports.UploadImageIconContainer = exports.BtnWrapper = exports.CategoryTypeImage = exports.BusinessEnableWrapper = exports.HeaderContainer = exports.EditCategoryContent = exports.SkeletonWrapper = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
+var _polished = require("polished");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -44,7 +46,7 @@ var HeaderContainer = _styledComponents.default.div(_templateObject9 || (_templa
 
 exports.HeaderContainer = HeaderContainer;
 
-var BusinessEnableWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: fit-content;\n\n  span {\n    font-weight: bold;\n    font-size: 20px;\n\n    ", "\n  }\n"])), function (props) {
+var BusinessEnableWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: fit-content;\n\n  span {\n    font-weight: 700;\n    font-size: 20px;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      padding-left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      padding-right: 20px;\n    "])));
@@ -88,3 +90,27 @@ var Option = _styledComponents.default.div(_templateObject20 || (_templateObject
 });
 
 exports.Option = Option;
+
+var RightHeader = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+
+exports.RightHeader = RightHeader;
+
+var ActionSelectorWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  button {\n    display: flex;\n    background: ", ";\n    border: none;\n    padding: 5px;\n    border-radius: 8px;\n\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n      font-size: 20px;\n    }\n\n    &:after {\n      display: none;\n    }\n\n    &:hover {\n      background: ", " !important;\n    }\n    &:active {\n      background: ", " !important;\n    }\n  }\n\n  .show {\n    button {\n      background: ", " !important;\n    }\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 12px;\n        color: ", ";\n      }\n      .dropdown-item:last-child {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return (0, _polished.darken)(0.04, props.theme.colors.secundary);
+}, function (props) {
+  return (0, _polished.darken)(0.1, props.theme.colors.secundary);
+}, function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.colors.danger;
+});
+
+exports.ActionSelectorWrapper = ActionSelectorWrapper;

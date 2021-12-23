@@ -76,7 +76,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3;
+  var _businessState$busine, _businessState$busine3, _businessState$busine4, _businessState$busine5;
 
   var categorySelected = props.categorySelected,
       searchValue = props.searchValue,
@@ -145,8 +145,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var _useState13 = (0, _react.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
-      businessName = _useState14[0],
-      setBusinessName = _useState14[1];
+      selectedBusiness = _useState14[0],
+      setSelectedBusiness = _useState14[1];
 
   var categoryListRef = (0, _react.useRef)();
 
@@ -191,6 +191,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var handleCloseProductDetails = function handleCloseProductDetails() {
     setOpenProductDetails(false);
+    setSelectedProduct(null);
   };
 
   var handleProductAdd = function handleProductAdd(status) {
@@ -208,17 +209,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var changBusinessState = function changBusinessState(business) {
     handleClose();
-    setBusinessName(business === null || business === void 0 ? void 0 : business.name);
+    setSelectedBusiness(business);
     setCategorySelected(null);
     setBusinessSlug(business === null || business === void 0 ? void 0 : business.slug);
-  };
-
-  var onDeleteCategoey = function onDeleteCategoey(categoryId) {
-    var _categoryToEdit$categ;
-
-    if (categoryToEdit.open && ((_categoryToEdit$categ = categoryToEdit.category) === null || _categoryToEdit$categ === void 0 ? void 0 : _categoryToEdit$categ.id) === categoryId) {
-      handleCloseEdit();
-    }
   };
 
   (0, _react.useEffect)(function () {
@@ -238,20 +231,31 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), !businessName && businessState.loading ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), !selectedBusiness && businessState.loading ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 30
-  })) : /*#__PURE__*/_react.default.createElement(_styles.BusinessSelector, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessNameWrapper, {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessSelector, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessNameWrapper, {
     onClick: function onClick() {
       return handleSelectHeader();
     }
-  }, /*#__PURE__*/_react.default.createElement("h1", null, businessName || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.name), " \xA0 ", /*#__PURE__*/_react.default.createElement(_BisDownArrow.default, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.name), " \xA0 ", /*#__PURE__*/_react.default.createElement(_BisDownArrow.default, {
     className: showSelectHeader ? 'rotate-arrow' : ''
   }))), showSelectHeader && /*#__PURE__*/_react.default.createElement(_BusinessSelectHeader.BusinessSelectHeader, {
     close: handleClose,
     isOpen: showSelectHeader,
     changBusinessState: changBusinessState
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Breadcrumb, null, /*#__PURE__*/_react.default.createElement("span", {
+    className: "business",
+    onClick: function onClick() {
+      var _businessState$busine2;
+
+      return onProductRedirect({
+        slug: (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.slug) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.slug)
+      });
+    }
+  }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", {
+    className: "active"
+  }, categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name)))), /*#__PURE__*/_react.default.createElement(_styles.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
@@ -263,7 +267,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return handleProductAdd(true);
     },
-    disabled: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : (_businessState$busine3 = _businessState$busine2.categories) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.length) === 0
+    disabled: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : (_businessState$busine5 = _businessState$busine4.categories) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.length) === 0
   }, t('ADD_PRODUCT', 'Add product')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
     lazyLoad: true,
@@ -287,8 +291,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categorySelected: categorySelected,
     handleChangeCategory: handleChangeCategory,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    handleOpenCategoryDetails: handleOpenCategoryDetails,
-    onClose: onDeleteCategoey
+    handleOpenCategoryDetails: handleOpenCategoryDetails
   })), /*#__PURE__*/_react.default.createElement(_styles.ActionIconList, null, viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width > 767 ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     borderRadius: "5px",

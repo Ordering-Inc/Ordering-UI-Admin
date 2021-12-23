@@ -57,12 +57,15 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       handleUpdateClick = props.handleUpdateClick,
       handleOpenCategoryDetails = props.handleOpenCategoryDetails,
       categoryFormState = props.categoryFormState,
-      isEditMode = props.isEditMode,
-      deleteCategory = props.deleteCategory;
+      isEditMode = props.isEditMode;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      optimizeImage = _useUtils2[0].optimizeImage;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -71,15 +74,6 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
       setAlertState = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
-    open: false,
-    content: null,
-    handleOnAccept: null
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      confirm = _useState4[0],
-      setConfirm = _useState4[1];
 
   var conatinerRef = (0, _react.useRef)(null);
 
@@ -102,19 +96,6 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
         }
       }
     }
-  };
-
-  var handleDeleteClick = function handleDeleteClick() {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_CATEGORY', 'Are you sure that you want to delete this category?'),
-      handleOnAccept: function handleOnAccept() {
-        deleteCategory();
-        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-          open: false
-        }));
-      }
-    });
   };
 
   (0, _react.useEffect)(function () {
@@ -144,8 +125,8 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading,
     className: "img-section"
   }, categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$ch = categoryFormState.changes) !== null && _categoryFormState$ch !== void 0 && _categoryFormState$ch.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image,
-    alt: "business type image",
+    src: optimizeImage(categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image, 'h_50,c_limit'),
+    alt: "category image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement(_styles3.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15
@@ -154,12 +135,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     onClick: function onClick() {
       return handleOpenCategoryDetails(categorySelected);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return handleDeleteClick();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, null)))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CATEGORY', 'Category'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -170,24 +146,6 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     onAccept: function onAccept() {
       return closeAlert();
     },
-    closeOnBackdrop: false
-  }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('WEB_APPNAME', 'Ordering'),
-    width: "700px",
-    content: confirm.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: confirm.open,
-    onClose: function onClose() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
-    onCancel: function onCancel() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
-    onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
 };

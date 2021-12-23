@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _Checkbox = require("../../styles/Checkbox");
 
 var _Confirm = require("../Confirm");
@@ -56,7 +54,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       isAddMode = props.isAddMode,
       handleOpenAddForm = props.handleOpenAddForm,
       handleChangeExtraInput = props.handleChangeExtraInput,
-      handleDeteteExtra = props.handleDeteteExtra,
       handleAddExtra = props.handleAddExtra,
       handleClickExtra = props.handleClickExtra,
       handleChangeAddExtraInput = props.handleChangeAddExtraInput,
@@ -109,6 +106,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
   var handleCloseExtraDetails = function handleCloseExtraDetails() {
     setOpenExtraDetails(false);
     setIsExtendExtraOpen(false);
+    setCurrentExtra(null);
   };
 
   var isCheckState = function isCheckState(extraId) {
@@ -136,19 +134,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     }
   };
 
-  var handleDeteteClick = function handleDeteteClick(extraId) {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_EXTRA', 'Are you sure that you want to delete this extra?'),
-      handleOnAccept: function handleOnAccept() {
-        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-          open: false
-        }));
-        handleDeteteExtra(extraId);
-      }
-    });
-  };
-
   (0, _react.useEffect)(function () {
     if (!isAddMode) return;
     document.addEventListener('click', addExtraListener);
@@ -174,9 +159,10 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_PRODUCT_EXTRA', 'Add product extra'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
+  }, t('ADD_PRODUCT_OPTION', 'Add product option'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
     return /*#__PURE__*/_react.default.createElement(_styles.ExtraOption, {
-      key: extra.id
+      key: extra.id,
+      active: extra.id === (currentExtra === null || currentExtra === void 0 ? void 0 : currentExtra.id)
     }, /*#__PURE__*/_react.default.createElement(_styles.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
       defaultChecked: isCheckState(extra.id),
       onClick: function onClick(e) {
@@ -192,11 +178,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       onClick: function onClick() {
         return handleOpenExtraDetails(extra);
       }
-    }, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
-      onClick: function onClick() {
-        return handleDeteteClick(extra.id);
-      }
-    })));
+    }, t('DETAILS', 'Details'))));
   })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles.ExtraAddContainer, {
     ref: conatinerRef
   }, /*#__PURE__*/_react.default.createElement("input", {

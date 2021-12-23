@@ -25,6 +25,10 @@ var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _reactBootstrap = require("react-bootstrap");
+
+var _styledComponents = require("styled-components");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -66,7 +70,9 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       categorySelected = props.categorySelected,
       parentCategories = props.parentCategories,
       handleChangeItem = props.handleChangeItem,
-      isAddMode = props.isAddMode;
+      isAddMode = props.isAddMode,
+      handleDeleteCategory = props.handleDeleteCategory;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -100,6 +106,15 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       _useState6 = _slicedToArray(_useState5, 2),
       parentCategoriesOptions = _useState6[0],
       setParentCategoriesOptions = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      confirm = _useState8[0],
+      setConfirm = _useState8[1];
 
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
@@ -144,6 +159,19 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     setAlertState({
       open: false,
       content: []
+    });
+  };
+
+  var handleDeleteClick = function handleDeleteClick() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete this product?'),
+      handleOnAccept: function handleOnAccept() {
+        handleDeleteCategory();
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+      }
     });
   };
 
@@ -217,10 +245,19 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
         enabled: val
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    className: "product_actions",
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDeleteClick();
+    }
+  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: handleClose
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryTypeImage, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryTypeImage, {
     onClick: function onClick() {
       return handleClickImage();
     },
@@ -291,6 +328,24 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     onAccept: function onAccept() {
       return closeAlert();
     },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    width: "700px",
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
 };
