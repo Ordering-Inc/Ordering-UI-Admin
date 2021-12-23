@@ -44,10 +44,10 @@ export const CategoryContentInside = styled.div`
   width: 50px;
 `
 export const ImageContainer = styled.div`
-  min-height: 38px;
-  min-width: 38px;
-  height: 38px;
-  width: 38px;
+  min-height: 41px;
+  min-width: 41px;
+  height: 41px;
+  width: 41px;
   border-radius: 8px;
   overflow: hidden;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));

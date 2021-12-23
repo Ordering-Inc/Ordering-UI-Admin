@@ -49,9 +49,13 @@ export const BusinessProductListTable = styled.table`
   color: ${props => props.theme.colors?.headingColor};
   transition: all 0.3s;
 
+  th {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
   td, th {
     padding: 15px;
-    font-size: 14px;
     &:first-child {
       padding-left: 0px;
       padding-right: 0px;
@@ -80,12 +84,6 @@ export const BusinessProductListTable = styled.table`
     width: 10%;
   }
 
-  td {
-    input.product_price {
-      max-width: 100px;
-    }
-  }
-
   thead {
     border-bottom: 1px solid ${props => props.theme.colors.borderColor};
     tr {
@@ -108,12 +106,15 @@ export const WrapperNotFound = styled.div`
 
 export const AddProductBtn = styled.div`
   user-select: none;
-  font-size: 12px;
-  color: #909BA9;
+  font-size: 14px;
+  color: ${props => props.theme.colors.lightGray};
   margin-top: 12px;
   cursor: pointer;
   margin-bottom: 15px;
   display: inline-block;
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
 `
 
 export const ProductListBottom = styled.div`

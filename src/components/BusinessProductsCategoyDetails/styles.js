@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const Container = styled.div`
   display: flex;
@@ -62,7 +63,7 @@ export const BusinessEnableWrapper = styled.div`
   width: fit-content;
 
   span {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 20px;
 
     ${props => props.theme?.rtl ? css`
@@ -168,4 +169,62 @@ export const Option = styled.div`
   white-space: nowrap;
   font-size: 14px;
   color: ${props => props.theme.colors.secundaryContrast};
+`
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const ActionSelectorWrapper = styled.div`
+  button {
+    display: flex;
+    background: ${props => props.theme.colors.secundary};
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
+
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+    }
+  }
+
+  .show {
+    button {
+      background: ${props => props.theme.colors.secundary} !important;
+    }
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  > div {
+    > div {
+      border-radius: 8px;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+      }
+      .dropdown-item:last-child {
+        color: ${props => props.theme.colors.danger};
+      }
+    }
+  }
 `

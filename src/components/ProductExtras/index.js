@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-components-admin'
-import { Trash } from 'react-bootstrap-icons'
 import { Checkbox } from '../../styles/Checkbox'
 import { Alert, Confirm } from '../Confirm'
 import { Modal } from '../Modal'
@@ -28,7 +27,6 @@ const ProductExtrasUI = (props) => {
     isAddMode,
     handleOpenAddForm,
     handleChangeExtraInput,
-    handleDeteteExtra,
     handleAddExtra,
     handleClickExtra,
     handleChangeAddExtraInput,
@@ -54,6 +52,7 @@ const ProductExtrasUI = (props) => {
   const handleCloseExtraDetails = () => {
     setOpenExtraDetails(false)
     setIsExtendExtraOpen(false)
+    setCurrentExtra(null)
   }
 
   const isCheckState = (extraId) => {
@@ -70,17 +69,6 @@ const ProductExtrasUI = (props) => {
     if (outsideDropdown) {
       handleAddExtra()
     }
-  }
-
-  const handleDeteteClick = (extraId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_EXTRA', 'Are you sure that you want to delete this extra?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeteteExtra(extraId)
-      }
-    })
   }
 
   useEffect(() => {
@@ -108,11 +96,14 @@ const ProductExtrasUI = (props) => {
             color='lightPrimary'
             onClick={() => handleOpenAddForm()}
           >
-            {t('ADD_PRODUCT_EXTRA', 'Add product extra')}
+            {t('ADD_PRODUCT_OPTION', 'Add product option')}
           </Button>
         </Header>
         {extrasState?.extras && extrasState?.extras.map(extra => (
-          <ExtraOption key={extra.id}>
+          <ExtraOption
+            key={extra.id}
+            active={extra.id === currentExtra?.id}
+          >
             <CheckboxContainer>
               <Checkbox
                 defaultChecked={isCheckState(extra.id)}
@@ -128,9 +119,6 @@ const ProductExtrasUI = (props) => {
               <Details onClick={() => handleOpenExtraDetails(extra)}>
                 {t('DETAILS', 'Details')}
               </Details>
-              <Trash
-                onClick={() => handleDeteteClick(extra.id)}
-              />
             </MoreContainer>
           </ExtraOption>
         ))}

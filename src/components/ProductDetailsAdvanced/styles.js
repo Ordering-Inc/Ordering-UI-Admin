@@ -1,41 +1,27 @@
 import styled, { css } from 'styled-components'
 
 export const PropertiesContainer = styled.div`
-  height: 100%;
-  overflow-x: hidden;
-  h1 {
-    color: ${props => props.theme.colors.headingColor};
-    font-size: 20px;
-    font-weight: 700;
-    padding-bottom: 30px;
-    margin: 0px;
-    border-bottom: 1px solid #E9ECEF;
-  }
-
   > input {
     width: 100%;
-    margin: 5px 0;
   }
-  @media (min-width: 1000px) {
-    padding: 20px;
+
+  > button {
+    height: 44px;
+    margin-top: 30px;
   }
 `
 
 export const PropertyOption = styled.div`
-  border-bottom: 1px solid #E9ECEF;
-  padding: 12px 0;
   display: flex;
   align-items: center;
-  label {
+  justify-content: space-between;
+  margin-bottom: 20px;
+  max-width: 300px;
+
+  label:first-child {
+    margin: 0;
     font-size: 14px;
-    margin-bottom: 0;
-    cursor: pointer;
-    color: ${props => props.theme.colors.headingColor};
-    ${props => props.theme?.rtl ? css`
-      padding-right: 10px;
-    ` : css`
-      padding-left: 10px;
-    `}
+    width: calc(100% - 50px);
   }
 `
 
@@ -44,7 +30,6 @@ export const TypeSelectWrapper = styled.div`
     max-width: 100%;
     min-width: 100%;
     padding: 3.5px 15px;
-    margin-bottom: 10px;
   }
 `
 
@@ -78,7 +63,9 @@ export const OptionCenter = styled.div`
 `
 
 export const LabelCustom = styled.label`
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 14px;
 `
 
 export const ButtonGroup = styled.div`

@@ -37,14 +37,19 @@ export const Header = styled.div`
       margin-right: 40px;
     `}
   }
-
 `
 export const ExtraOption = styled.div`
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   padding: 12px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${({ active }) => active && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.lightPrimary};
+  `}
 `
 
 export const CheckboxContainer = styled.div`
@@ -54,11 +59,13 @@ export const CheckboxContainer = styled.div`
 
   input[type='text'] {
     flex: 1;
+    margin: 0 5px;
     color: ${props => props.theme.colors.headingColor};
-    padding: 5px 10px;
+    padding: 5px;
     outline: none;
     border: none;
     font-size: 14px;
+    background: transparent;
   }
 `
 
@@ -76,11 +83,6 @@ export const Details = styled.div`
   cursor: pointer;
   font-size: 14px;
   color: ${props => props.theme.colors.primary};
-  ${props => props.theme?.rtl ? css`
-    margin-left: 15px;
-  ` : css`
-    margin-right: 15px;
-  `}
 `
 
 export const AddButton = styled.div`

@@ -55,6 +55,8 @@ export const MetaAddContainer = styled(MetaContainer)`
     font-size: 16px;
     box-sizing: border-box;
     width: 100%;
+    height: 37px;
+    font-size: 14px;
   }
 
   button {

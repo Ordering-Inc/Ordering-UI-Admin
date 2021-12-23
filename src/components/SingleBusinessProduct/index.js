@@ -9,10 +9,8 @@ import {
 } from 'ordering-components-admin'
 import { bytesConverter } from '../../utils'
 import { Switch } from '../../styles/Switch'
-import { Alert, Confirm } from '../Confirm'
-import { DropdownButton, Dropdown } from 'react-bootstrap'
+import { Alert } from '../Confirm'
 import { useTheme } from 'styled-components'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import BiImage from '@meronex/icons/bi/BiImage'
 import {
   SingleListBusinessContainer,
@@ -20,7 +18,6 @@ import {
   WrapperImage,
   InfoBlock,
   BusinessEnableWrapper,
-  ActionSelectorWrapper,
   ProductTypeImage,
   UploadWrapper,
   DragableContainer,
@@ -35,10 +32,8 @@ const SingleBusinessProductUI = (props) => {
     allowColumns,
     handleChangeProductActive,
     handleUpdateClick,
-    deleteProduct,
     handleOpenProductDetails,
     productFormState,
-    handleChangeInput,
     handlechangeImage,
     isEditMode,
     productDetailsId,
@@ -54,11 +49,9 @@ const SingleBusinessProductUI = (props) => {
   const [{ parsePrice, optimizeImage }] = useUtils()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const containerRef = useRef(null)
   const ProductTypeImgRef = useRef(null)
-  const ActionIcon = <FiMoreVertical />
 
   const handleClickImage = () => {
     ProductTypeImgRef.current.click()
@@ -105,10 +98,7 @@ const SingleBusinessProductUI = (props) => {
   }
 
   const handleProductClick = (e) => {
-    const isInvalid = e.target.closest('.product_info') ||
-    e.target.closest('.product_price') || e.target.closest('.product_description') ||
-    e.target.closest('.product_enable_control') || e.target.closest('.product_actions') ||
-    e.target.closest('.description')
+    const isInvalid = e.target.closest('.product_enable_control')
     if (isInvalid) return
     handleOpenProductDetails(product)
   }
@@ -180,17 +170,6 @@ const SingleBusinessProductUI = (props) => {
     setDataSelected('')
   }
 
-  const handleDeleteClick = () => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete this product?'),
-      handleOnAccept: () => {
-        deleteProduct()
-        setConfirm({ ...confirm, open: false })
-      }
-    })
-  }
-
   const taxProduct = productFormState?.changes?.tax ?? business?.tax
   const taxProductType = taxProduct?.type || business?.tax_type
   const taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price')
@@ -208,21 +187,21 @@ const SingleBusinessProductUI = (props) => {
                       <WrapperImage>
                         <Skeleton width={38} height={38} />
                       </WrapperImage>
-                      <p><Skeleton width={80} /></p>
+                      <Skeleton width={80} />
                     </BusinessGeneralInfo>
                   </td>
                 )}
                 {allowColumns?.price && (
                   <td>
                     <InfoBlock>
-                      <p><Skeleton width={50} /></p>
+                      <Skeleton width={80} />
                     </InfoBlock>
                   </td>
                 )}
                 {allowColumns?.description && (
                   <td>
                     <InfoBlock className='description'>
-                      <p><Skeleton width={100} height={30} /></p>
+                      <Skeleton height={10} count={2} />
                     </InfoBlock>
                   </td>
                 )}
@@ -230,7 +209,10 @@ const SingleBusinessProductUI = (props) => {
                   <Skeleton width={100} />
                 </td>
                 <td>
-                  <Skeleton width={30} />
+                  <Skeleton width={100} />
+                </td>
+                <td>
+                  <Skeleton width={100} />
                 </td>
               </tr>
             </SingleListBusinessContainer>
@@ -261,7 +243,7 @@ const SingleBusinessProductUI = (props) => {
                       <BusinessGeneralInfo>
                         <ProductTypeImage
                           onClick={() => handleClickImage()}
-                          disabled={productFormState?.loading}
+                          disabled
                         >
                           <ExamineClick
                             onFiles={files => handleFiles(files)}
@@ -294,13 +276,7 @@ const SingleBusinessProductUI = (props) => {
                         </ProductTypeImage>
                         {
                           product?.name && (
-                            <input
-                              type='text'
-                              name='name'
-                              value={productFormState?.changes?.name || ''}
-                              onChange={handleChangeInput}
-                              autoComplete='off'
-                            />
+                            <div className='product_name'>{productFormState?.changes?.name || ''}</div>
                           )
                         }
                       </BusinessGeneralInfo>
@@ -312,29 +288,18 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <input
-                          type='text'
-                          name='price'
-                          className='product_price'
-                          value={productFormState?.changes?.price || ''}
-                          onChange={handleChangeInput}
-                          autoComplete='off'
-                        />
+                        <div className='product_price'>
+                          {parsePrice(productFormState?.changes?.price || 0)}
+                        </div>
                       </InfoBlock>
                     }
                   </td>
                 )}
                 {allowColumns?.description && (
-                  <td>
+                  <td className='description'>
                     {
                       <InfoBlock>
-                        <textarea
-                          name='description'
-                          className='description'
-                          value={productFormState?.changes?.description || ''}
-                          onChange={handleChangeInput}
-                          autoComplete='off'
-                        />
+                        <div className='product_description'>{productFormState?.changes?.description || ''}</div>
                       </InfoBlock>
                     }
                   </td>
@@ -343,7 +308,7 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <div>{taxProduct?.rate ?? taxProduct ?? 0}% ({taxProductTypeString})</div>
+                        <div className='product_tax'>{taxProduct?.rate ?? taxProduct ?? 0}% ({taxProductTypeString})</div>
                       </InfoBlock>
                     }
                   </td>
@@ -352,12 +317,12 @@ const SingleBusinessProductUI = (props) => {
                   <td>
                     {
                       <InfoBlock>
-                        <div>{parsePrice(productFormState?.changes?.fee?.fixed ?? 0)} + {productFormState?.changes?.fee?.percentage ?? business?.service_fee}%</div>
+                        <div className='product_fee'>{parsePrice(productFormState?.changes?.fee?.fixed ?? 0)} + {productFormState?.changes?.fee?.percentage ?? business?.service_fee}%</div>
                       </InfoBlock>
                     }
                   </td>
                 )}
-                <td>
+                <td className='actions'>
                   <BusinessEnableWrapper className='product_enable_control'>
                     {
                       product?.enabled
@@ -369,23 +334,6 @@ const SingleBusinessProductUI = (props) => {
                       onChange={handleChangeProductActive}
                     />
                   </BusinessEnableWrapper>
-                </td>
-                <td className='actions'>
-                  <ActionSelectorWrapper>
-                    <DropdownButton
-                      className='product_actions'
-                      menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={ActionIcon}
-                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                    >
-                      <Dropdown.Item onClick={() => handleOpenProductDetails(product)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => handleDeleteClick()}
-                      >
-                        {t('DELETE', 'Delete')}
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </ActionSelectorWrapper>
                 </td>
               </tr>
             </SingleListBusinessContainer>
@@ -480,17 +428,6 @@ const SingleBusinessProductUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-      <Confirm
-        title={t('WEB_APPNAME', 'Ordering')}
-        width='700px'
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </>
