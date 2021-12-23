@@ -80,6 +80,7 @@ const DriversManagerUI = (props) => {
           </HeaderTitleContainer>
           <SearchBar
             isCustomLayout
+            lazyLoad
             onSearch={handleChangeSearch}
             search={searchValue}
             placeholder={t('SEARCH', 'Search')}

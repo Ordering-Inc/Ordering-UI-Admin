@@ -56,7 +56,6 @@ export const MetaAddContainer = styled(MetaContainer)`
     border-radius: 5px;
     padding: 5px 10px;
     outline: none;
-    font-size: 16px;
     box-sizing: border-box;
     width: 100%;
   }

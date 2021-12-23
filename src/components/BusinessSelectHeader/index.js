@@ -95,6 +95,7 @@ const BusinessessListingUI = (props) => {
         <BusinessSearch>
           <SearchBar
             isCustomLayout
+            lazyLoad
             onSearch={onSearch}
             search={searchValue}
             placeholder={t('SEARCH', 'Search')}
@@ -152,7 +153,8 @@ export const BusinessSelectHeader = (props) => {
     loadMorePageSize: 10,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
-    isSearchByBusinessPhone: true
+    isSearchByBusinessPhone: true,
+    propsToFetch: ['name', 'slug', 'logo', 'city']
   }
   return (
     <BusinessListController {...businessListingProps} />

@@ -6,7 +6,13 @@ import {
 } from './styles'
 
 export const Switch = (props) => {
-  const { defaultChecked, disabled, onChange, className } = props
+  const {
+    defaultChecked,
+    disabled,
+    onChange,
+    className,
+    notAsync
+  } = props
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {
@@ -14,7 +20,9 @@ export const Switch = (props) => {
   }, [defaultChecked])
 
   const handleCheckBoxChange = (evt) => {
-    setChecked(evt.target.checked)
+    if (!notAsync) {
+      setChecked(evt.target.checked)
+    }
     onChange && onChange(evt.target.checked)
   }
 

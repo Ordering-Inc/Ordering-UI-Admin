@@ -26,6 +26,10 @@ export const PromotionListTable = styled.table`
     &.date_range {
       width: 115px;
     }
+
+    &:last-child {
+      width: 120px;
+    }
   }
 
   th {
@@ -70,7 +74,7 @@ export const SinglePromotionTbody = styled.tbody`
 export const EnableWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: fit-content;
+  justify-content: flex-end;
 
   span {
     font-size: 12px;
@@ -80,53 +84,6 @@ export const EnableWrapper = styled.div`
     ` : css`
       padding-right: 10px;
     `}
-  }
-`
-
-export const WrapperActionSelector = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  button {
-    background: transparent !important;
-    border: none;
-    padding: 0px;
-    &:active,
-    &:focus {
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  .show {
-    button {
-      background: ${props => props.theme.colors.secundary} !important;
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    >div {
-      border: 1px solid ${props => props.theme.colors.borderColor};
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-    }
-  }
-
-  > div {
-    > div {
-      border-radius: 8px;
-      .dropdown-item {
-        font-size: 14px;
-        color: ${props => props.theme.colors.headingColor};
-      }
-      .dropdown-item:last-child {
-        color: #E63757;
-      }
-    }
   }
 `
 export const DragableContainer = styled.div`

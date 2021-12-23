@@ -19,7 +19,7 @@ import {
 
 export const DriversGroupLogistics = (props) => {
   const {
-    curDriversGroup,
+    driversGroupState,
     changesState,
     handleChangesState,
     handleParentSidebarMove,
@@ -56,7 +56,7 @@ export const DriversGroupLogistics = (props) => {
 
   useEffect(() => {
     setOpenConfig(false)
-  }, [curDriversGroup])
+  }, [driversGroupState.driversGroup?.id])
 
   return (
     <LogisticsContainer>
@@ -66,12 +66,12 @@ export const DriversGroupLogistics = (props) => {
         <RadioButton
           active={
             (changesState?.orders_group_start_in_status && changesState?.orders_group_start_in_status === 7) ||
-            (typeof changesState?.orders_group_start_in_status === 'undefined' && curDriversGroup?.orders_group_start_in_status === 7)
+            (typeof changesState?.orders_group_start_in_status === 'undefined' && driversGroupState.driversGroup?.orders_group_start_in_status === 7)
           }
         >
           {
             ((changesState?.orders_group_start_in_status && changesState?.orders_group_start_in_status === 7) ||
-              (typeof changesState?.orders_group_start_in_status === 'undefined' && curDriversGroup?.orders_group_start_in_status === 7)
+              (typeof changesState?.orders_group_start_in_status === 'undefined' && driversGroupState.driversGroup?.orders_group_start_in_status === 7)
             )
               ? (
                 <RecordCircleFill />
@@ -88,12 +88,12 @@ export const DriversGroupLogistics = (props) => {
         <RadioButton
           active={
             (changesState?.orders_group_start_in_status && changesState?.orders_group_start_in_status === 4) ||
-            (typeof changesState?.orders_group_start_in_status === 'undefined' && curDriversGroup?.orders_group_start_in_status === 4)
+            (typeof changesState?.orders_group_start_in_status === 'undefined' && driversGroupState.driversGroup?.orders_group_start_in_status === 4)
           }
         >
           {
             ((changesState?.orders_group_start_in_status && changesState?.orders_group_start_in_status === 4) ||
-              (typeof changesState?.orders_group_start_in_status === 'undefined' && curDriversGroup?.orders_group_start_in_status === 4)
+              (typeof changesState?.orders_group_start_in_status === 'undefined' && driversGroupState.driversGroup?.orders_group_start_in_status === 4)
             )
               ? (
                 <RecordCircleFill />
@@ -106,7 +106,7 @@ export const DriversGroupLogistics = (props) => {
       </OrderStatusWrapper>
 
       <LogisticsConfigsContainer>
-        {(changesState?.type === 0 || (typeof changesState?.type === 'undefined' && curDriversGroup?.type === 0)) && (
+        {(changesState?.type === 0 || (typeof changesState?.type === 'undefined' && driversGroupState.driversGroup?.type === 0)) && (
           <LogisticsConfigItem
             active={showConfig === 'GROUP_ORDERS'}
             onClick={() => handleOpenConfig('GROUP_ORDERS')}
@@ -122,7 +122,7 @@ export const DriversGroupLogistics = (props) => {
           <span>{t('AUTOASSIGN_SETTINGS', 'Autoassign settings')}</span>
           <ChevronRight />
         </LogisticsConfigItem>
-        {(changesState?.type === 0 || (typeof changesState?.type === 'undefined' && curDriversGroup?.type === 0)) && (
+        {(changesState?.type === 0 || (typeof changesState?.type === 'undefined' && driversGroupState.driversGroup?.type === 0)) && (
           <LogisticsConfigItem
             active={showConfig === 'MARK_DRIVER_BUSY'}
             onClick={() => handleOpenConfig('MARK_DRIVER_BUSY')}
@@ -136,7 +136,7 @@ export const DriversGroupLogistics = (props) => {
         borderRadius='8px'
         color='primary'
         disabled={Object.keys(changesState).length === 0}
-        onClick={() => handleUpdateDriversGroup(curDriversGroup.id, changesState)}
+        onClick={() => handleUpdateDriversGroup(changesState)}
       >
         {t('SAVE', 'Save')}
       </Button>

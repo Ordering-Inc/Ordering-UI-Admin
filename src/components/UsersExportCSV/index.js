@@ -4,9 +4,7 @@ import { SpinnerLoader } from '../SpinnerLoader'
 import { Button } from '../../styles/Buttons'
 import { Download as DownloadIcon } from 'react-bootstrap-icons'
 import {
-  ExportContainer,
-  PopoverContainer,
-  Item
+  ExportContainer
 } from './styles'
 
 const UsersExportCSVUI = (props) => {
@@ -17,18 +15,22 @@ const UsersExportCSVUI = (props) => {
   const [, t] = useLanguage()
   const [popoverOpen, setPopoverOpen] = useState(false)
 
-  const handleExportAll = () => {
-    setPopoverOpen(false)
-    getCSV(false)
-  }
+  // const handleExportAll = () => {
+  //   setPopoverOpen(false)
+  //   getCSV(false)
+  // }
 
-  const handleExportFiltered = () => {
-    setPopoverOpen(false)
-    getCSV(true)
-  }
+  // const handleExportFiltered = () => {
+  //   setPopoverOpen(false)
+  //   getCSV(true)
+  // }
 
   const closePopover = () => {
     setPopoverOpen(false)
+  }
+
+  const handleCSV = () => {
+    getCSV(false)
   }
 
   useEffect(() => {
@@ -44,12 +46,12 @@ const UsersExportCSVUI = (props) => {
           borderRadius='5px'
           color='secundary'
           disabled={actionStatus.loading}
-          onClick={() => setPopoverOpen(!popoverOpen)}
+          onClick={() => handleCSV()}
         >
           {t('CSV', 'CSV')}
           <DownloadIcon />
         </Button>
-        {popoverOpen && (
+        {/* {popoverOpen && (
           <PopoverContainer>
             <Item onClick={() => handleExportAll()}>
               {t('EXPROT_ALL', 'Export all')}
@@ -58,7 +60,7 @@ const UsersExportCSVUI = (props) => {
               {t('EXPROT_FILTERED', 'Export filtered')}
             </Item>
           </PopoverContainer>
-        )}
+        )} */}
 
         {actionStatus.loading && (
           <SpinnerLoader primary />

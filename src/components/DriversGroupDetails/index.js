@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useConfig, DriversGroupDetails as DriversGroupDetailsController } from 'ordering-components-admin'
 import { Switch } from '../../styles'
 import { DragScroll } from '../DragScroll'
 import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
@@ -7,27 +7,41 @@ import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
 import { DriversGroupPaymethods } from '../DriversGroupPaymethods'
 import { DriversGroupLogistics } from '../DriversGroupLogistics'
 import { DriversGroupLogs } from '../DriversGroupLogs'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
+import { ThreeDots } from 'react-bootstrap-icons'
+import { useTheme } from 'styled-components'
+import { Alert, Confirm } from '../Confirm'
 
 import {
   DetailsContainer,
   Header,
   MenusContainer,
-  Tab
+  Tab,
+  ActionSelectorWrapper
 } from './styles'
 
-export const DriversGroupDetails = (props) => {
+const DriversGroupDetailsUI = (props) => {
   const {
-    curDriversGroup,
-    handleParentSidebarMove
+    driversGroupState,
+    actionState,
+    handleParentSidebarMove,
+    handleDeleteDriversGroup
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
+  const [configState] = useConfig()
+
+  const autoAssignType = configState?.configs?.autoassign_type?.value
+
   const [showMenu, setShowMenu] = useState('general')
   const [useAdvanced, setUseAdvanced] = useState(false)
-
   const [driversGroupMenus, setDriversGroupMenus] = useState([])
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   useEffect(() => {
-    const _driversGroupMenus = useAdvanced
+    const _driversGroupMenus = (useAdvanced && autoAssignType !== 'basic')
       ? [
         { key: 'general', value: t('GENERAL', 'General') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
@@ -44,30 +58,66 @@ export const DriversGroupDetails = (props) => {
     setDriversGroupMenus(_driversGroupMenus)
   }, [useAdvanced])
 
+  const onDeleteGroup = (driversGroupId) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_DRIVER_GROUP', 'Are you sure to remove this driver group?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteDriversGroup()
+      }
+    })
+  }
+
   useEffect(() => {
-    setUseAdvanced(!(curDriversGroup?.autoassign_amount_drivers === 0 && curDriversGroup?.orders_group_max_orders === 0))
-  }, [curDriversGroup])
+    setUseAdvanced(!(driversGroupState.driversGroup?.autoassign_amount_drivers === 0 && driversGroupState.driversGroup?.orders_group_max_orders === 0))
+  }, [driversGroupState.driversGroup])
 
   useEffect(() => {
     handleParentSidebarMove(0)
   }, [showMenu])
 
+  useEffect(() => {
+    if (!actionState?.error) return
+    setAlertState({
+      open: true,
+      content: actionState?.error
+    })
+  }, [actionState?.error])
+
   return (
     <>
       <DetailsContainer>
         <Header>
-          {curDriversGroup ? (
+          {driversGroupState.driversGroup ? (
             <>
-              <h1>{curDriversGroup?.name}</h1>
-              <Switch
-                defaultChecked={curDriversGroup?.enabled}
-              />
+              <div>
+                <h1>{driversGroupState.driversGroup?.name}</h1>
+                <Switch
+                  defaultChecked={driversGroupState.driversGroup?.enabled}
+                />
+              </div>
+              <ActionSelectorWrapper>
+                <DropdownButton
+                  menuAlign={theme?.rtl ? 'left' : 'right'}
+                  title={<ThreeDots />}
+                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                >
+                  <Dropdown.Item
+                    onClick={() => onDeleteGroup()}
+                  >
+                    {t('DELETE', 'Delete')}
+                  </Dropdown.Item>
+                </DropdownButton>
+              </ActionSelectorWrapper>
             </>
           ) : (
-            <h1>{t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')}</h1>
+            <div>
+              <h1>{t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')}</h1>
+            </div>
           )}
         </Header>
-        {curDriversGroup && (
+        {driversGroupState.driversGroup && (
           <MenusContainer>
             <DragScroll>
               {driversGroupMenus.map(menu => (
@@ -82,7 +132,7 @@ export const DriversGroupDetails = (props) => {
             </DragScroll>
           </MenusContainer>
         )}
-        {(showMenu === 'general' || !curDriversGroup) && (
+        {(showMenu === 'general' || !driversGroupState.driversGroup) && (
           <DriversGroupGeneralForm
             {...props}
             useAdvanced={useAdvanced}
@@ -99,9 +149,36 @@ export const DriversGroupDetails = (props) => {
           <DriversGroupLogistics {...props} />
         )}
         {showMenu === 'logs' && (
-          <DriversGroupLogs driversGroupId={curDriversGroup?.id} />
+          <DriversGroupLogs driversGroupId={driversGroupState.driversGroup?.id} />
         )}
       </DetailsContainer>
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </>
   )
+}
+
+export const DriversGroupDetails = (props) => {
+  const driversGroupDetailsProps = {
+    ...props,
+    UIComponent: DriversGroupDetailsUI
+  }
+  return <DriversGroupDetailsController {...driversGroupDetailsProps} />
 }

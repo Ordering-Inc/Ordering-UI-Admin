@@ -15,6 +15,8 @@ import {
 
 export const UsersListingHeader = (props) => {
   const {
+    deafultUserTypesSelected,
+    disabledActiveStateCondition,
     title,
     selectedUsers,
     deleteUsersActionState,
@@ -59,6 +61,8 @@ export const UsersListingHeader = (props) => {
           }
         </Button>
         <UsersExportCSV
+          deafultUserTypesSelected={deafultUserTypesSelected}
+          disabledActiveStateCondition={disabledActiveStateCondition}
           userTypesSelected={userTypesSelected}
           selectedUserActiveState={selectedUserActiveState}
         />
@@ -68,6 +72,7 @@ export const UsersListingHeader = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
         />
         <SearchBar
+          lazyLoad
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}

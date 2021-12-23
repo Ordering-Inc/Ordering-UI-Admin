@@ -9,13 +9,31 @@ import {
   Option,
   Chevron,
   Header,
-  FunctionalityContainer
+  FunctionalityContainer,
+  SearchBarWrapper
 } from '../../Selects'
 import { Button } from '../../Buttons'
 import { useLanguage } from 'ordering-components-admin'
+import { SearchBar } from '../../../components/SearchBar'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, type, noSelected, className, onEdit, onDelete } = props
+  const {
+    placeholder,
+    options,
+    defaultValue,
+    onChange,
+    notAsync,
+    type,
+    noSelected,
+    className,
+    onEdit,
+    onDelete,
+    isShowSearchBar,
+    searchValue,
+    handleChangeSearch,
+    searchBarIsCustomLayout,
+    searchBarPlaceholder
+  } = props
 
   const [open, setOpen] = useState(false)
   const defaultOption = options?.find(
@@ -51,26 +69,35 @@ export const Select = (props) => {
       const _defaultOption = options?.find(
         (option) => option.value === defaultValue
       )
-      setSelectedOption(_defaultOption)
+      if (isShowSearchBar) {
+        if (_defaultOption) {
+          setSelectedOption(_defaultOption)
+        }
+      } else {
+        setSelectedOption(_defaultOption)
+      }
       setValue(defaultValue)
     }
   }, [defaultValue, options])
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
-    if (option.value === null || option.disabled || e.target.closest('.delete') !== null) return
+    if (option.value === null || option.disabled || e.target.closest('.delete') !== null || e.target.closest('.edit') !== null) return
     if (!noSelected) {
       setSelectedOption(option)
       setValue(option.value)
     }
     onChange && onChange(option.value)
+    if (isShowSearchBar) {
+      handleChangeSearch('')
+    }
   }
   return (
     <SelectInput type={type} className={className || 'select'}>
       {!selectedOption && (
         <Selected onClick={handleSelectClick}>
           {placeholder || ''}
-          <Chevron>
+          <Chevron className='select-arrow'>
             <FiChevronDown />
           </Chevron>
         </Selected>
@@ -92,7 +119,21 @@ export const Select = (props) => {
           position='right'
           ref={dropdownReference}
         >
+          {isShowSearchBar && (
+            <SearchBarWrapper
+              className='search-bar-container'
+            >
+              <SearchBar
+                lazyLoad
+                isCustomLayout={searchBarIsCustomLayout}
+                search={searchValue}
+                onSearch={handleChangeSearch}
+                placeholder={searchBarPlaceholder || ''}
+              />
+            </SearchBarWrapper>
+          )}
           <OptionsInner
+            className='list-wrapper'
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}
           >
@@ -115,6 +156,7 @@ export const Select = (props) => {
                         borderRadius='8px'
                         color='lightPrimary'
                         onClick={() => onEdit(option, i)}
+                        className='edit'
                       >
                         {t('EDIT', 'Edit')}
                       </Button>

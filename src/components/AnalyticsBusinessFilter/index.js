@@ -75,6 +75,7 @@ const AnalyticsBusinessFilterUI = (props) => {
           <SearchBar
             search={searchValue}
             isCustomLayout
+            lazyLoad
             onSearch={(value) => onSearch(value)}
             placeholder={t('SEARCH', 'Search')}
           />

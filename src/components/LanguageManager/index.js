@@ -48,6 +48,7 @@ const LanguageManagerUI = (props) => {
         </HeaderTitleContainer>
         <ActionsGroup>
           <SearchBar
+            lazyLoad
             search={searchValue}
             onSearch={(value) => onSearch(value)}
             placeholder={t('SEARCH', 'Search')}

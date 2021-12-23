@@ -6,23 +6,22 @@ import {
   ProductExtraOptionDetails as ProductExtraOptionDetailsController
 } from 'ordering-components-admin'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Input } from '../../styles/Inputs'
-import { Switch } from '../../styles/Switch'
+import { Checkbox, IconButton, Input, Switch } from '../../styles'
+import { Select } from '../../styles/Select/FirstSelect'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { Checkbox } from '../../styles/Checkbox'
-import { Select } from '../../styles/Select/FirstSelect'
 import { Alert, Confirm } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
 import { Modal } from '../Modal'
-import { PlusCircle } from 'react-bootstrap-icons'
-import { IconButton } from '../../styles/Buttons'
+import { PlusCircle, ThreeDots } from 'react-bootstrap-icons'
 
 import {
   MainContainer,
+  Header,
+  ActionSelectorWrapper,
   OptionContainer,
   OptionImage,
   UploadImageIconContainer,
@@ -73,8 +72,8 @@ const ProductExtraOptionDetailsUI = (props) => {
 
     business,
     extra,
-
-    handleAddOption
+    handleAddOption,
+    handleDeteteOption
   } = props
 
   const [, t] = useLanguage()
@@ -116,13 +115,6 @@ const ProductExtraOptionDetailsUI = (props) => {
     }
   }
 
-  const handleChangeSubOptionInput = (e, subOptionId) => {
-    const regexp = /^[0-9.\b]+$/
-    if (e.target.value === '' || regexp.test(e.target.value)) {
-      handleChangeInput(e, subOptionId)
-    }
-  }
-
   const handleDeteteClick = (id) => {
     setConfirm({
       open: true,
@@ -130,6 +122,17 @@ const ProductExtraOptionDetailsUI = (props) => {
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
         handleDeteteSubOption(id)
+      }
+    })
+  }
+
+  const handleDeleteOption = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_OPTION', 'Are you sure that you want to delete this option?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeteteOption()
       }
     })
   }
@@ -150,7 +153,29 @@ const ProductExtraOptionDetailsUI = (props) => {
 
   return (
     <MainContainer>
-      <h1>{t('PRODUCT_OPTION', 'Product option')}</h1>
+      <Header>
+        <h1>{t('PRODUCT_OPTION', 'Product option')}</h1>
+        <ActionSelectorWrapper>
+          <DropdownButton
+            className='product_actions'
+            menuAlign={theme?.rtl ? 'left' : 'right'}
+            title={<ThreeDots />}
+            id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+          >
+            <Dropdown.Item
+              onClick={() => setOpenModal({ ...openModal, option: true })}
+            >
+              {t('CUSTOM_FEILDS', 'Custom Fields')}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => handleDeleteOption()}
+            >
+              {t('DELETE', 'Delete')}
+            </Dropdown.Item>
+          </DropdownButton>
+        </ActionSelectorWrapper>
+      </Header>
+
       <OptionContainer>
         <OptionImage
           onClick={() => handleClickImage()}
@@ -199,6 +224,11 @@ const ProductExtraOptionDetailsUI = (props) => {
                   name='min'
                   defaultValue={optionState?.option?.min}
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, true)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </InputWrapper>
               <InputWrapper primary>
@@ -207,6 +237,11 @@ const ProductExtraOptionDetailsUI = (props) => {
                   name='max'
                   defaultValue={optionState?.option?.max}
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, false)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </InputWrapper>
               <ActionsContainer top>
@@ -217,9 +252,6 @@ const ProductExtraOptionDetailsUI = (props) => {
                     onChange={enabled => handleChangeOptionEnable(enabled, optionState.option?.id)}
                   />
                 </EnableWrapper>
-                <FiMoreVertical
-                  onClick={() => setOpenModal({ ...openModal, option: true })}
-                />
               </ActionsContainer>
             </RightOptionContent>
           </OptionContent>
@@ -343,7 +375,12 @@ const ProductExtraOptionDetailsUI = (props) => {
                       ? changesState?.changes?.price ?? subOption?.price
                       : subOption?.price
                   }
-                  onChange={(e) => handleChangeSubOptionInput(e, subOption.id)}
+                  onChange={(e) => handleChangeInput(e, subOption.id)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </InputWrapper>
               {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
@@ -356,7 +393,12 @@ const ProductExtraOptionDetailsUI = (props) => {
                         ? changesState?.changes?.half_price ?? subOption?.half_price
                         : subOption?.half_price ?? ''
                     }
-                    onChange={(e) => handleChangeSubOptionInput(e, subOption.id)}
+                    onChange={(e) => handleChangeInput(e, subOption.id)}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                   />
                 </InputWrapper>
               )}
@@ -370,7 +412,12 @@ const ProductExtraOptionDetailsUI = (props) => {
                         ? changesState?.changes?.max ?? subOption?.max
                         : subOption?.max
                     }
-                    onChange={(e) => handleChangeSubOptionInput(e, subOption.id)}
+                    onChange={(e) => handleChangeInput(e, subOption.id)}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                   />
                 </InputWrapper>
               )}
@@ -453,7 +500,12 @@ const ProductExtraOptionDetailsUI = (props) => {
                 value={
                   ((editSubOptionId === null) && changesState?.changes?.price) || ''
                 }
-                onChange={(e) => handleChangeSubOptionInput(e, null)}
+                onChange={(e) => handleChangeInput(e, null)}
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
               />
             </InputWrapper>
             {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
@@ -464,7 +516,12 @@ const ProductExtraOptionDetailsUI = (props) => {
                   value={
                     ((editSubOptionId === null) && changesState?.changes?.half_price) || ''
                   }
-                  onChange={(e) => handleChangeSubOptionInput(e, null)}
+                  onChange={(e) => handleChangeInput(e, null)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </InputWrapper>
             )}
@@ -476,7 +533,12 @@ const ProductExtraOptionDetailsUI = (props) => {
                   value={
                     ((editSubOptionId === null) && changesState?.changes?.max) || ''
                   }
-                  onChange={(e) => handleChangeSubOptionInput(e, null)}
+                  onChange={(e) => handleChangeInput(e, null)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </InputWrapper>
             )}
@@ -490,7 +552,6 @@ const ProductExtraOptionDetailsUI = (props) => {
             </ActionsContainer>
           </RightSubOptionContent>
         </SubOptionContainer>
-
       </ModifierOptionsContainer>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}

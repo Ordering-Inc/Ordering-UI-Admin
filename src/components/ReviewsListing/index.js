@@ -39,6 +39,7 @@ export const ReviewsListing = (props) => {
           </HeaderLeft>
           <HeaderRight>
             <SearchBar
+              lazyLoad
               placeholder={t('SEARCH', 'Search')}
               searchValue={searchValue}
               onSearch={val => setSearchValue(val)}

@@ -13,7 +13,6 @@ import {
 
 export const DriversGroupPaymethods = (props) => {
   const {
-    curDriversGroup,
     paymethods,
     actionState,
     changesState,
@@ -43,6 +42,7 @@ export const DriversGroupPaymethods = (props) => {
           <SearchBar
             placeholder={t('SEARCH', 'Search')}
             isCustomLayout
+            lazyLoad
             search={searchValue}
             onSearch={val => setSearchValue(val)}
           />
@@ -79,7 +79,7 @@ export const DriversGroupPaymethods = (props) => {
           borderRadius='8px'
           color='primary'
           disabled={Object.keys(changesState).length === 0}
-          onClick={() => handleUpdateDriversGroup(curDriversGroup.id, changesState)}
+          onClick={() => handleUpdateDriversGroup(changesState)}
         >
           {t('SAVE', 'Save')}
         </Button>

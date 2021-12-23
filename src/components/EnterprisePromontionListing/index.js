@@ -24,7 +24,8 @@ const EnterprisePromontionListingUI = (props) => {
     handleSuccessUpdatePromotions,
     handleSuccessAddPromotion,
     sitesState,
-    paymethodsState
+    paymethodsState,
+    businessesList
   } = props
 
   const [, t] = useLanguage()
@@ -73,6 +74,7 @@ const EnterprisePromontionListingUI = (props) => {
               {t('ADD_PROMOTION_ENTERPRISE', 'Add promotion enterprise')}
             </Button>
             <SearchBar
+              lazyLoad
               onSearch={onSearch}
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}
@@ -96,12 +98,14 @@ const EnterprisePromontionListingUI = (props) => {
         >
           <EnterprisePromotionDetails
             sitesState={sitesState}
+            businessesList={businessesList}
             paymethodsState={paymethodsState}
             promotion={selectedPromotion}
             promotionsList={promotionListState.promotions}
             handleSuccessUpdatePromotions={handleSuccessUpdatePromotions}
             handleSuccessAddPromotion={handleSuccessAddPromotion}
             setMoveDistance={setMoveDistance}
+            onClose={() => setOpenDetails(false)}
           />
         </SideBar>
       )}

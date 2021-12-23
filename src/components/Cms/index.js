@@ -112,6 +112,7 @@ const CmsUI = (props) => {
               {t('ADD_PAGE', 'Add page')}
             </Button>
             <SearchBar
+              lazyLoad
               placeholder={t('SEARCH', 'Search')}
               searchValue={searchValue}
               onSearch={val => setSearchValue(val)}
