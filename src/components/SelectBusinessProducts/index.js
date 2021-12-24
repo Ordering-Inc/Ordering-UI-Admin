@@ -29,10 +29,7 @@ const CategoryTreeNode = (props) => {
     category,
     index,
     selectedProductsIds,
-    setSelectedProductsIds,
-
-    selectedProducts,
-    setSelectedProducts
+    setSelectedProductsIds
   } = props
 
   const [{ optimizeImage }] = useUtils()
@@ -67,12 +64,8 @@ const CategoryTreeNode = (props) => {
     if (selectedProductsIds.includes(product.id)) {
       const _selectedProductsIds = selectedProductsIds.filter(id => id !== product.id)
       setSelectedProductsIds(_selectedProductsIds)
-
-      const _selectedProducts = selectedProducts.filter(_product => _product.id !== product.id)
-      setSelectedProducts(_selectedProducts)
     } else {
       setSelectedProductsIds([...selectedProductsIds, product.id])
-      setSelectedProducts([...selectedProducts, product])
     }
   }
 
@@ -80,27 +73,12 @@ const CategoryTreeNode = (props) => {
     const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
     const everyContain = productsIds.every(id => selectedProductsIds.includes(id))
     let _selectedProductsIds = []
-    let _selectedProducts = []
     if (!everyContain) {
       _selectedProductsIds = [...selectedProductsIds, ...productsIds].filter((value, index, self) => self.indexOf(value) === index)
       setSelectedProductsIds(_selectedProductsIds)
-
-      const uniqueArr = []
-      _selectedProducts = [...selectedProducts, ...category.products].filter(product => {
-        const index = uniqueArr.findIndex(item => (item.id === product.id))
-        if (index <= -1) {
-          uniqueArr.push(product)
-        }
-        return null
-      })
-
-      setSelectedProducts(uniqueArr)
     } else {
       _selectedProductsIds = selectedProductsIds.filter(id => !productsIds.includes(id))
       setSelectedProductsIds(_selectedProductsIds)
-
-      _selectedProducts = selectedProducts.filter(product => !productsIds.includes(product.id))
-      setSelectedProducts(_selectedProducts)
     }
   }
 
@@ -167,14 +145,13 @@ const SelectBusinessProductsUI = (props) => {
   const {
     businessState,
     searchValue,
-    handleChangeSearch
+    handleChangeSearch,
+
+    selectedProductsIds,
+    setSelectedProductsIds
   } = props
 
   const [, t] = useLanguage()
-  const [selectedProducts, setSelectedProducts] = useState([])
-  const [selectedProductsIds, setSelectedProductsIds] = useState([])
-
-  console.log(searchValue)
 
   return (
     <Container>
@@ -219,9 +196,6 @@ const SelectBusinessProductsUI = (props) => {
             category={category}
             selectedProductsIds={selectedProductsIds}
             setSelectedProductsIds={setSelectedProductsIds}
-
-            selectedProducts={selectedProducts}
-            setSelectedProducts={setSelectedProducts}
           />
         ))
       )}

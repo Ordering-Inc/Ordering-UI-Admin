@@ -50,7 +50,7 @@ export const EnterprisePromotionConditions = (props) => {
   }
 
   const conditions = [
-    // { id: 1, title: t('PRODUCTS_SPECIFIC', 'Product specific'), attribute: 'products' },
+    { id: 1, title: t('PRODUCTS_SPECIFIC', 'Product specific'), attribute: 'products' },
     // { id: 2, title: t('CATEGORIE_SPECIFIC', 'Categories specific'), attribute: 'categories' },
     { id: 3, title: t('SCHEDULE_LIMIT', 'Schedule limit'), attribute: 'schedule' },
     { id: 3, title: t('OFFER_MAX_AMOUNT_TIMES', 'Max. amount of times that can be used '), attribute: 'limit' },

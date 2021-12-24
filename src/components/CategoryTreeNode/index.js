@@ -50,11 +50,15 @@ export const CategoryTreeNode = (props) => {
       const _selectedProductsIds = selectedProductsIds.filter(id => id !== product.id)
       setSelectedProductsIds(_selectedProductsIds)
 
-      const _selectedProducts = selectedProducts.filter(_product => _product.id !== product.id)
-      setSelectedProducts(_selectedProducts)
+      if (selectedProducts) {
+        const _selectedProducts = selectedProducts.filter(_product => _product.id !== product.id)
+        setSelectedProducts(_selectedProducts)
+      }
     } else {
       setSelectedProductsIds([...selectedProductsIds, product.id])
-      setSelectedProducts([...selectedProducts, product])
+      if (selectedProducts) {
+        setSelectedProducts([...selectedProducts, product])
+      }
     }
   }
 
@@ -67,22 +71,26 @@ export const CategoryTreeNode = (props) => {
       _selectedProductsIds = [...selectedProductsIds, ...productsIds].filter((value, index, self) => self.indexOf(value) === index)
       setSelectedProductsIds(_selectedProductsIds)
 
-      const uniqueArr = []
-      _selectedProducts = [...selectedProducts, ...category.products].filter(product => {
-        const index = uniqueArr.findIndex(item => (item.id === product.id))
-        if (index <= -1) {
-          uniqueArr.push(product)
-        }
-        return null
-      })
+      if (selectedProducts) {
+        const uniqueArr = []
+        _selectedProducts = [...selectedProducts, ...category.products].filter(product => {
+          const index = uniqueArr.findIndex(item => (item.id === product.id))
+          if (index <= -1) {
+            uniqueArr.push(product)
+          }
+          return null
+        })
 
-      setSelectedProducts(uniqueArr)
+        setSelectedProducts(uniqueArr)
+      }
     } else {
       _selectedProductsIds = selectedProductsIds.filter(id => !productsIds.includes(id))
       setSelectedProductsIds(_selectedProductsIds)
 
-      _selectedProducts = selectedProducts.filter(product => !productsIds.includes(product.id))
-      setSelectedProducts(_selectedProducts)
+      if (selectedProducts) {
+        _selectedProducts = selectedProducts.filter(product => !productsIds.includes(product.id))
+        setSelectedProducts(_selectedProducts)
+      }
     }
   }
 

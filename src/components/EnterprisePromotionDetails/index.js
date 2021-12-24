@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import {
-  useLanguage,
-  EnterprisePromotionDetails as EnterprisePromotionDetailsController
+  useLanguage
+  // EnterprisePromotionDetails as EnterprisePromotionDetailsController
 } from 'ordering-components-admin'
+import {
+  EnterprisePromotionDetails as EnterprisePromotionDetailsController
+} from './naked'
 import { Switch } from '../../styles'
 import { DragScroll } from '../DragScroll'
 import { EnterprisePromotionGeneralDetails } from '../EnterprisePromotionGeneralDetails'

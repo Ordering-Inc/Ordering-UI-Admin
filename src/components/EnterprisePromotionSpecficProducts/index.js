@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   useLanguage,
   useUtils
@@ -18,7 +18,14 @@ import {
   Image
 } from './styles'
 
-export const EnterprisePromotionSpecficProducts = () => {
+export const EnterprisePromotionSpecficProducts = (props) => {
+  const {
+    handleChangeItem,
+    onClickDone,
+    selectedProductsIds,
+    setSelectedProductsIds
+  } = props
+
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -30,6 +37,14 @@ export const EnterprisePromotionSpecficProducts = () => {
     setShowSelectHeader(false)
     setSelectedBusiness(business)
   }
+
+  useEffect(() => {
+    const filteredProducts = []
+    selectedProductsIds.forEach(id => {
+      filteredProducts.push({ id: id, is_condition: true })
+    })
+    handleChangeItem({ products: filteredProducts })
+  }, [selectedProductsIds])
 
   return (
     <Container>
@@ -66,12 +81,15 @@ export const EnterprisePromotionSpecficProducts = () => {
       {selectedBusiness && (
         <SelectBusinessProducts
           slug={selectedBusiness.slug}
+          selectedProductsIds={selectedProductsIds}
+          setSelectedProductsIds={setSelectedProductsIds}
         />
       )}
 
       <Button
         borderRadius='8px'
         color='primary'
+        onClick={() => onClickDone()}
       >
         {t('DONE', 'Done')}
       </Button>
