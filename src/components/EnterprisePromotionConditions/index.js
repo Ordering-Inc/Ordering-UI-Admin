@@ -127,6 +127,12 @@ export const EnterprisePromotionConditions = (props) => {
         open={openMultipleModal}
         onClose={() => setOpenMultipleModal(false)}
       >
+        {selectedCondition === 'products' && (
+          <EnterprisePromotionSpecficProducts
+            {...props}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
         {selectedCondition === 'order_types_allowed' && (
           <EnterprisePromotionOrderTypes
             {...props}
@@ -141,12 +147,6 @@ export const EnterprisePromotionConditions = (props) => {
         )}
         {selectedCondition === 'schedule' && (
           <EnterprisePromotionSchedule
-            {...props}
-            onClickDone={() => handleClickSave()}
-          />
-        )}
-        {selectedCondition === 'products' && (
-          <EnterprisePromotionSpecficProducts
             {...props}
             onClickDone={() => handleClickSave()}
           />
