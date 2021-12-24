@@ -42,6 +42,11 @@ const EnterprisePromontionListingUI = (props) => {
     setOpenDetails(true)
   }
 
+  const handleCloseDetails = () => {
+    setOpenDetails(false)
+    setSelectedPromotion(null)
+  }
+
   useEffect(() => {
     if (!promotionListState?.error) return
     setAlertState({
@@ -94,7 +99,7 @@ const EnterprisePromontionListingUI = (props) => {
           defaultSideBarWidth={600 + moveDistance}
           moveDistance={moveDistance}
           open={openDetails}
-          onClose={() => setOpenDetails(false)}
+          onClose={() => handleCloseDetails()}
         >
           <EnterprisePromotionDetails
             sitesState={sitesState}
@@ -105,7 +110,7 @@ const EnterprisePromontionListingUI = (props) => {
             handleSuccessUpdatePromotions={handleSuccessUpdatePromotions}
             handleSuccessAddPromotion={handleSuccessAddPromotion}
             setMoveDistance={setMoveDistance}
-            onClose={() => setOpenDetails(false)}
+            onClose={() => handleCloseDetails()}
           />
         </SideBar>
       )}

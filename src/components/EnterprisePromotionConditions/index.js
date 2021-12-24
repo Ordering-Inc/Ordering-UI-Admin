@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Button, Checkbox } from '../../styles'
-import { Pencil } from 'react-bootstrap-icons'
+import { Button } from '../../styles'
+import { Pencil, Check2 } from 'react-bootstrap-icons'
 import { Modal } from '../Modal'
 import { EnterprisePromotionEditCondition } from '../EnterprisePromotionEditCondition'
 import { EnterprisePromotionOrderTypes } from '../EnterprisePromotionOrderTypes'
@@ -13,7 +13,8 @@ import {
   ConditionsContainer,
   Header,
   ConditionItem,
-  EditButton
+  EditButton,
+  CheckboxWrapper
 } from './styles'
 
 export const EnterprisePromotionConditions = (props) => {
@@ -81,15 +82,19 @@ export const EnterprisePromotionConditions = (props) => {
         {conditions.map((condition, index) => (
           <ConditionItem key={index}>
             <div>
-              <Checkbox
-                checked={
-                  formState.changes[condition.attribute] ||
-                    Array.isArray(promotionState.promotion[condition.attribute])
-                    ? promotionState.promotion[condition.attribute].length !== 0
-                    : promotionState.promotion[condition.attribute]
-                }
-                disabled
-              />
+              {
+                (typeof formState.changes[condition.attribute] !== 'undefined'
+                  ? formState.changes[condition.attribute]
+                  : Array.isArray(promotionState.promotion[condition.attribute])
+                    ? promotionState.promotion[condition.attribute]?.length
+                    : promotionState.promotion[condition.attribute])
+                  ? (
+                    <CheckboxWrapper active>
+                      <Check2 />
+                    </CheckboxWrapper>
+                  )
+                  : <CheckboxWrapper />
+              }
               <span>{condition.title}</span>
             </div>
             <EditButton
