@@ -91,7 +91,7 @@ export const PageSizeContainer = styled.div`
 export const PageSizeTitle = styled.p`
   margin: 0px;
   color: ${props => props.theme.colors.lightGray};
-  font-size: 14px;
+  font-size: 12px;
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
   ` : css`

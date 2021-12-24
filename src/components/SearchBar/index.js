@@ -2,9 +2,16 @@ import React, { useRef, useEffect } from 'react'
 import { SearchContainer } from './styles'
 import IosSearch from '@meronex/icons/ios/IosSearch'
 
-export const SearchBar = ({ onSearch, search, placeholder, isCustomLayout }) => {
+export const SearchBar = (props) => {
+  const {
+    onSearch,
+    search,
+    placeholder,
+    isCustomLayout,
+    lazyLoad
+  } = props
   let timeout = null
-
+  let previousSearch
   const el = useRef()
 
   const onChangeSearch = (e) => {
@@ -12,11 +19,29 @@ export const SearchBar = ({ onSearch, search, placeholder, isCustomLayout }) => 
 
     timeout = setTimeout(function () {
       onSearch(e.target.value)
-    }, 1000)
+    }, 750)
+
+    if (previousSearch !== e.target.value) {
+      if (!lazyLoad) {
+        onSearch(e.target.value)
+      } else {
+        clearTimeout(timeout)
+        timeout = setTimeout(function () {
+          onSearch(e.target.value)
+        }, 750)
+      }
+    }
+    previousSearch = e.target.value
+  }
+
+  const onClearSearch = (e) => {
+    e.target.value = ''
+    onChangeSearch(e)
   }
 
   useEffect(() => {
     el.current.onkeyup = onChangeSearch
+    el.current.onblur = onClearSearch
   }, [])
 
   useEffect(() => {
@@ -28,7 +53,7 @@ export const SearchBar = ({ onSearch, search, placeholder, isCustomLayout }) => 
   return (
     <SearchContainer isCustomLayout={isCustomLayout}>
       <IosSearch />
-      <input type='text' ref={el} name='search' placeholder={placeholder} />
+      <input type='text' ref={el} name='search' placeholder={placeholder} autoComplete='off' />
     </SearchContainer>
   )
 }

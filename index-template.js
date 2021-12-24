@@ -25,13 +25,15 @@ import notFound404 from './template/assets/images/not-found-404.svg'
 import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import loginHero from './template/assets/images/loginHero.png'
 import personalization from './template/assets/images/personalization.svg'
-
+import mobileCase from './template/assets/images/mobile-case.png'
+import mobileMask from './template/assets/images/mobile-mask.png'
 /**
  * dummies
  */
 import storeDummy from './template/assets/images/dummies/store.png'
 import nonOrders from './template/assets/images/dummies/nonOrders.svg'
 import promotionDummy from './template/assets/images/dummies/promotion.png'
+import productDummy from './template/assets/images/dummies/product.png'
 
 /**
  * icons
@@ -63,6 +65,8 @@ import sendToAll from './template/assets/images/icons/send-to-all.svg'
 import nearestAvailable from './template/assets/images/icons/nearest-available.svg'
 import batchWise from './template/assets/images/icons/batch-wise.svg'
 import roundRobin from './template/assets/images/icons/round-robin.svg'
+import leftArrow from './template/assets/images/icons/left-arrow.svg'
+import rightArrow from './template/assets/images/icons/right-arrow.svg'
 
 import orderPending from './template/assets/images/orderStatus/pending.svg'
 import orderInProgress from './template/assets/images/orderStatus/inProgress.svg'
@@ -97,25 +101,26 @@ import orderStatus21 from './template/assets/images/order/status-21.svg'
 
 import categoryAll from './template/assets/images/categories/category-all.png'
 
-Sentry.init({
-  environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
-  dsn: 'https://136774353f6d423da02589e771165836@o460529.ingest.sentry.io/5681485',
-  integrations: [
-    new Integrations.BrowserTracing()
-  ],
-  release: process.env.npm_package_version ? 'ordering-ui-admin@' + process.env.npm_package_version : 'ordering-ui-admin@' + '0.0.2',
-  ignoreErrors: [
-    'is not defined',
-    'is not a function',
-    'can\'t find variable',
-    'objects are not valid',
-    'element type is invalid'
-  ],
-
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
-  tracesSampleRate: window?.location?.hostname === 'localhost' ? 0 : 0.5
-})
+if (!(window?.location?.hostname === 'localhost')) {
+  Sentry.init({
+    environment: process.env.NODE_ENV,
+    dsn: 'https://84af7231923c4a298cc81c2d8d8365c7@o460529.ingest.sentry.io/5681485',
+    integrations: [
+      new Integrations.BrowserTracing()
+    ],
+    release: process.env.npm_package_version ? 'ordering-ui-admin@' + process.env.npm_package_version : 'ordering-ui-admin@' + '0.0.2',
+    ignoreErrors: [
+      'is not defined',
+      'is not a function',
+      'can\'t find variable',
+      'objects are not valid',
+      'element type is invalid'
+    ],
+    // We recommend adjusting this value in production, or using tracesSampler
+    // for finer control
+    tracesSampleRate: 0.2
+  })
+}
 
 const logos = {
   logotype,
@@ -132,7 +137,9 @@ theme.images = {
     notFound404,
     notFoundLighting,
     loginHero,
-    personalization
+    personalization,
+    mobileCase,
+    mobileMask
   },
   order: {
     status0: orderStatus0,
@@ -197,12 +204,15 @@ theme.images = {
     sendToAll: sendToAll,
     nearestAvailable: nearestAvailable,
     batchWise: batchWise,
-    roundRobin: roundRobin
+    roundRobin: roundRobin,
+    leftArrow: leftArrow,
+    rightArrow: rightArrow
   },
   dummies: {
     nonOrders: nonOrders,
     businessLogo: storeDummy,
-    promotionDummy: promotionDummy
+    promotionDummy: promotionDummy,
+    product: productDummy
   }
 }
 

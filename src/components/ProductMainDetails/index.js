@@ -1,137 +1,81 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils, ProductDetatils as ProductDetatilsController } from 'ordering-components-admin'
-import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
-import { XLg } from 'react-bootstrap-icons'
-import { Switch } from '../../styles/Switch'
-import { ProductDetatilsEditForm } from '../ProductDetatilsEditForm'
-import { Button, IconButton } from '../../styles/Buttons'
+import { useLanguage } from 'ordering-components-admin'
+import { DragScroll } from '../DragScroll'
+import { ProductDetatilsInformation } from '../ProductDetatilsInformation'
+import { ProductDetailsAdvanced } from '../ProductDetailsAdvanced'
 
 import {
-  ProductDetailsContainer,
-  DetailsHeader,
-  LeftHeader,
-  RightHeader,
-  ProductName,
-  ProductImage,
-  ProductDetailsContent,
-  ProductPrice,
-  ProductDescription,
-  ProductConfigsContainer,
-  ProductConfigOption
+  Container,
+  TabsConatiner,
+  Tab
 } from './styles'
 
-const ProductMainDetailsUI = (props) => {
+export const ProductMainDetails = (props) => {
   const {
-    actionSidebar,
-    showOption,
-    handleShowOption,
-    handleChangeProductActiveState,
-    productState,
+    product,
     formState,
     handlechangeImage,
     handleChangeInput,
-    handleUpdateClick
+    handleChangeFormState,
+    handleUpdateClick,
+
+    business,
+    handleUpdateBusinessState,
+    setFormTaxState,
+    formTaxState,
+    taxes,
+    setTaxes,
+    fees,
+    setFees
   } = props
-
   const [, t] = useLanguage()
-  const [{ optimizeImage, parsePrice }] = useUtils()
-  const [isEditMode, setIsEditMode] = useState(false)
 
-  const configsOptions = [
-    {
-      key: 'properties',
-      value: t('PROPERTIES', 'Properties')
-    },
-    {
-      key: 'ingredients',
-      value: t('INGREDIENTS', 'Ingredients')
-    },
-    {
-      key: 'product_options',
-      value: t('PRODUCT_OPTIONS', 'Product options')
-    },
-    {
-      key: 'product_images',
-      value: t('PRODUCT_IMAGES', 'Product images')
-    },
-    {
-      key: 'custom_fields',
-      value: t('CUSTOM_FIELDS', 'Custom fields')
-    },
-    {
-      key: 'personalization',
-      value: t('PERSONALIZATION', 'Personalization')
-    }
+  const [selectedOption, setSelectedOption] = useState('information')
+  const listOptions = [
+    { key: 'information', content: t('INFORMATION', 'Information') },
+    { key: 'advanced', content: t('ADVANCED', 'Advanced') }
+    // { key: 'labels', content: t('LABELS', 'Labels') },
+    // { key: 'seo', content: t('SEO_OPTIONS', 'SEO options') }
   ]
   return (
-    <>
-      <ProductDetailsContainer>
-        <DetailsHeader>
-          <LeftHeader>
-            <ProductName>
-              {productState?.product?.name}
-            </ProductName>
-            <Switch
-              defaultChecked={productState?.product?.enabled || false}
-              onChange={handleChangeProductActiveState}
-            />
-          </LeftHeader>
-          <RightHeader>
-            <IconButton
-              color='black'
-              onClick={() => isEditMode ? setIsEditMode(false) : actionSidebar(false)}
+    <Container>
+      <h1>{t('PRODUCT_DETAILS', 'Product details')}</h1>
+      <TabsConatiner>
+        <DragScroll>
+          {listOptions.map(option => (
+            <Tab
+              key={option.key}
+              active={selectedOption === option.key}
+              onClick={() => setSelectedOption(option.key)}
             >
-              <XLg />
-            </IconButton>
-          </RightHeader>
-        </DetailsHeader>
-        {!isEditMode ? (
-          <>
-            <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_200,c_limit')} />
-            <ProductDetailsContent>
-              <ProductPrice>{parsePrice(productState?.product?.price)}</ProductPrice>
-              <ProductDescription>{productState?.product?.description}</ProductDescription>
-              <ProductConfigsContainer>
-                {configsOptions.map(config => (
-                  <ProductConfigOption
-                    key={config.key}
-                    active={showOption === config.key}
-                    onClick={() => handleShowOption(config.key)}
-                  >
-                    <span>{config.value}</span>
-                    <BsChevronRight />
-                  </ProductConfigOption>
-                ))}
-              </ProductConfigsContainer>
-            </ProductDetailsContent>
-            <Button
-              color='secundaryDark'
-              borderRadius='7.6px'
-              onClick={() => setIsEditMode(true)}
-            >
-              {t('EDIT', 'Edit')}
-            </Button>
-          </>
-        ) : (
-          <ProductDetatilsEditForm
-            onCancel={() => setIsEditMode(false)}
-            product={productState?.product}
-            formState={formState}
-            handlechangeImage={handlechangeImage}
-            handleChangeInput={handleChangeInput}
-            handleButtonUpdateClick={handleUpdateClick}
-          />
-        )}
-
-      </ProductDetailsContainer>
-    </>
+              {option.content}
+            </Tab>
+          ))}
+        </DragScroll>
+      </TabsConatiner>
+      {selectedOption === 'information' && (
+        <ProductDetatilsInformation
+          product={product}
+          formState={formState}
+          handlechangeImage={handlechangeImage}
+          handleChangeInput={handleChangeInput}
+          handleChangeFormState={handleChangeFormState}
+          handleButtonUpdateClick={handleUpdateClick}
+        />
+      )}
+      {selectedOption === 'advanced' && (
+        <ProductDetailsAdvanced
+          product={product}
+          business={business}
+          handleUpdateBusinessState={handleUpdateBusinessState}
+          setFormTaxState={setFormTaxState}
+          formTaxState={formTaxState}
+          taxes={taxes}
+          setTaxes={setTaxes}
+          fees={fees}
+          setFees={setFees}
+        />
+      )}
+    </Container>
   )
-}
-
-export const ProductMainDetails = (props) => {
-  const productDetailsProps = {
-    ...props,
-    UIComponent: ProductMainDetailsUI
-  }
-  return <ProductDetatilsController {...productDetailsProps} />
 }

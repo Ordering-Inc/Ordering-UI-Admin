@@ -26,8 +26,7 @@ const BusinessSpreadSheetUI = (props) => {
     { title: t('PRICE', 'Price'), code: 'price', readOnly: false, type: 'numeric' },
     { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false, type: 'numeric' },
     { title: t('TAX', 'Tax'), code: 'taxShow', readOnly: true, editor: false },
-    { title: t('SERVICE_FEE', 'Service fee %'), code: 'fee_fixed', readOnly: false, type: 'numeric' },
-    { title: t('SERVICE_FEE_PERCENTAGE', 'Service fee %'), code: 'fee_percentage', readOnly: false, type: 'numeric' }
+    { title: t('FEE', 'Fee'), code: 'feeShow', readOnly: true, editor: false }
   ]
 
   const closeAlert = () => {

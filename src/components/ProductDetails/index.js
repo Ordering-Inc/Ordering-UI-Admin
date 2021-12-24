@@ -1,28 +1,37 @@
 import React, { useState, useEffect } from 'react'
-import { ProductMainDetails } from '../ProductMainDetails'
+import { ProductDetatils as ProductDetatilsController } from 'ordering-components-admin'
+import { ProductSummary } from '../ProductSummary'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { MoreSidebarLayout } from '../MoreSidebarLayout'
-import { ProductProperties } from '../ProductProperties'
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductMetaFields } from '../ProductMetaFields'
 import { Personalization } from '../Personalization'
 import { ProductExtras } from '../ProductExtras'
 import { ProductGallery } from '../ProductGallery'
+import { ProductMainDetails } from '../ProductMainDetails'
 
 import {
   Container
 } from './styles'
-export const ProductDetails = (props) => {
+
+const ProductDetailsUI = (props) => {
   const {
     open,
     business,
     onClose,
-    product,
+    productState,
+    formState,
     handleUpdateBusinessState,
     setFormTaxState,
     formTaxState,
     taxes,
-    setTaxes
+    setTaxes,
+    fees,
+    setFees,
+    handlechangeImage,
+    handleChangeInput,
+    handleUpdateClick,
+    handleChangeFormState
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -87,12 +96,12 @@ export const ProductDetails = (props) => {
   useEffect(() => {
     setExtraOpen(false)
     setIsExtendExtraOpen(false)
-  }, [product])
+  }, [props.product])
 
   return (
     <Container id='product_details'>
       {(!isExtendExtraOpen || width < 1000) && (
-        <ProductMainDetails
+        <ProductSummary
           {...props}
           actionSidebar={actionSidebar}
           showOption={showOption}
@@ -104,28 +113,37 @@ export const ProductDetails = (props) => {
           isExtendExtraOpen={isExtendExtraOpen}
           onClose={handleCloseExtraOpen}
         >
-          {showOption === 'properties' && (
-            <ProductProperties
+          {showOption === 'product_details' && (
+            <ProductMainDetails
+              product={productState?.product}
+              formState={formState}
+              handlechangeImage={handlechangeImage}
+              handleChangeFormState={handleChangeFormState}
+              handleChangeInput={handleChangeInput}
+              handleUpdateClick={handleUpdateClick}
+
               business={business}
-              product={product}
               handleUpdateBusinessState={handleUpdateBusinessState}
               setFormTaxState={setFormTaxState}
               formTaxState={formTaxState}
               taxes={taxes}
               setTaxes={setTaxes}
+              fees={fees}
+              setFees={setFees}
             />
           )}
           {showOption === 'ingredients' && (
             <ProductIngredient
               business={business}
-              product={product}
+              product={productState.product}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {showOption === 'product_options' && (
             <ProductExtras
               business={business}
-              product={product}
+              product={productState.product}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
@@ -133,16 +151,16 @@ export const ProductDetails = (props) => {
           {showOption === 'product_images' && (
             <ProductGallery
               business={business}
-              categoryId={product.category_id}
-              product={product}
+              categoryId={productState.product.category_id}
+              product={productState.product}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {showOption === 'custom_fields' && (
             <ProductMetaFields
               businessId={business.id}
-              categoryId={product.category_id}
-              productId={product.id}
+              categoryId={productState.product.category_id}
+              productId={productState.product.id}
             />
           )}
           {showOption === 'personalization' && (
@@ -154,4 +172,12 @@ export const ProductDetails = (props) => {
       )}
     </Container>
   )
+}
+
+export const ProductDetails = (props) => {
+  const productDetailsProps = {
+    ...props,
+    UIComponent: ProductDetailsUI
+  }
+  return <ProductDetatilsController {...productDetailsProps} />
 }

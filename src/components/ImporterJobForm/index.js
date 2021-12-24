@@ -98,7 +98,7 @@ const ImporterJobFormUI = (props) => {
     <>
       <FormWrapper>
         <Header>
-          {t('IMPORT', 'Import')}
+          {t('CREATE_IMPORTER_JOB', 'Create importer job')}
           <CloseButtonWrapper>
             <IconButton
               color='black'

@@ -40,3 +40,6 @@ export const FilterBtnWrapper = styled.div`
     height: 42px;
   }
 `
+export const SearchWrapper = styled.div`
+  margin-bottom: 25px;
+`

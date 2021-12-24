@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import React from 'react'
+import { darken } from 'polished'
 
 export const BrandListingContainer = styled.div`
   flex: 1;
@@ -171,51 +172,6 @@ export const EnableWrapper = styled.div`
   }
 `
 
-export const ActionSelectorWrapper = styled.div`
-  button {
-    background: transparent !important;
-    border: none;
-    padding: 0px;
-    &:active,
-    &:focus {
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  .show {
-    button {
-      background: ${props => props.theme.colors.secundary} !important;
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    >div {
-      border: 1px solid ${props => props.theme.colors.borderColor};
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-    }
-  }
-
-  > div {
-    > div {
-      border-radius: 8px;
-      .dropdown-item {
-        font-size: 12px;
-        color: ${props => props.theme.colors.headingColor};
-      }
-      .dropdown-item:last-child {
-        color: #E63757;
-      }
-    }
-  }
-`
-
 export const WrapperImage = styled.div`
   max-width: 32px;
   max-height: 32px;
@@ -296,16 +252,25 @@ export const BrandDetailContainer = styled.div`
 export const DetailHeder = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 3px;
   margin-bottom: 25px;
-
-  > span {
-    font-weight: bold;
-    font-size: 20px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 20px;
-    ` : css`
-      margin-right: 20px;
-    `}
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
+  > div:first-child {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    > span {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    label {
+      margin: 0 20px;
+    }
   }
 `
 
@@ -336,4 +301,37 @@ export const Tab = styled.div`
     color: ${props => props.theme?.colors.lightGray};
     font-size: 12px;
   `}
+`
+
+export const ActionSelectorWrapper = styled.div`
+  .select {
+    border: none;
+
+    > div:first-child {
+      padding: 5px;
+      border-radius: 8px;
+      svg {
+        font-size: 20px;
+      }
+      &:hover {
+        background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+      }
+      &:active {
+        background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+      }
+    }
+    .select-arrow {
+      display: none;
+    }
+    .list {
+      .list-wrapper {
+        > div {
+          font-size: 14px;
+          color: #E63757;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
 `

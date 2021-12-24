@@ -10,7 +10,6 @@ import {
 export const EnterprisePromotionSchedule = (props) => {
   const {
     promotionState,
-    formState,
     handleChangeItem,
     onClickDone
   } = props
@@ -22,9 +21,7 @@ export const EnterprisePromotionSchedule = (props) => {
       <h1>{t('SCHEDULE_LIMIT', 'Schedule limit')}</h1>
       <Schedule
         scheduleList={
-          formState.changes?.schedule
-            ? formState.changes?.schedule
-            : promotionState.promotion?.schedule
+          promotionState.promotion?.schedule
         }
         handleChangeScheduleState={val => handleChangeItem({ schedule: val })}
       />

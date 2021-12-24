@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   min-height: calc(100% - 160px);
 
-  button {
+  > button {
     position: sticky;
     top: 100%;
     height: 42px;

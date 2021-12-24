@@ -13,7 +13,6 @@ import {
 } from './styles'
 import { IconButton } from '../../styles/Buttons'
 import {
-  Download,
   XLg as CloseIcon
 } from 'react-bootstrap-icons'
 import { InvoiceGeneral } from '../InvoiceGeneral'
@@ -25,8 +24,6 @@ import { SpinnerLoader } from '../SpinnerLoader'
 const InvoiceBusinessManagerUI = (props) => {
   const {
     actionSidebar,
-    getOrders,
-    invocing,
     exportInvoiceList
   } = props
 
@@ -43,10 +40,6 @@ const InvoiceBusinessManagerUI = (props) => {
     setSelectedDetailType(detailType)
   }
 
-  const pdfDownload = () => {
-    getOrders()
-  }
-
   useEffect(() => {
     if (!exportInvoiceList?.loading && exportInvoiceList?.invoice) {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
@@ -59,12 +52,6 @@ const InvoiceBusinessManagerUI = (props) => {
       <DetailsHeader>
         <h2>{t('BUSINESS_INVOICE', 'Business invoice')}</h2>
         <HeaderActionBtnWrapper>
-          <IconButton
-            onClick={pdfDownload}
-            disabled={!invocing?.business || invocing?.business === ''}
-          >
-            <Download />
-          </IconButton>
           <IconButton
             color='black'
             onClick={() => actionSidebar(false)}

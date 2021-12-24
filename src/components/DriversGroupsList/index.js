@@ -4,11 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Pagination } from '../Pagination'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Switch } from '../../styles'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { useTheme } from 'styled-components'
-import { Confirm } from '../Confirm'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import {
@@ -24,8 +20,6 @@ import {
   DriverGroupTypeContainer,
   ActionsContainer,
   EnableWrapper,
-  ActionSelectorWrapper,
-
   PagesBottomContainer,
   AddNewGroupButton
 } from './styles'
@@ -37,7 +31,6 @@ export const DriversGroupsList = (props) => {
     searchValue,
     handleOpenDetails,
     handleUpdateDriversGroup,
-    handleDeleteDriversGroup,
     selectedGroupList,
 
     handleSelectGroup,
@@ -45,8 +38,6 @@ export const DriversGroupsList = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -86,20 +77,9 @@ export const DriversGroupsList = (props) => {
   }, [driversGroupsState, currentPage, groupsPerPage, searchValue])
 
   const handleClickDriverGroup = (e, group) => {
-    const isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled') || e.target.closest('.group-actions')
+    const isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled')
     if (isInvalid) return
     handleOpenDetails(group)
-  }
-
-  const onDeleteGroup = (driversGroupId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_DRIVER_GROUP', 'Are you sure to remove this driver group?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeleteDriversGroup(driversGroupId)
-      }
-    })
   }
 
   const getTypeTag = (type) => {
@@ -180,9 +160,6 @@ export const DriversGroupsList = (props) => {
                         <EnableWrapper>
                           <Skeleton width={50} />
                         </EnableWrapper>
-                        <ActionSelectorWrapper>
-                          <Skeleton width={20} />
-                        </ActionSelectorWrapper>
                       </ActionsContainer>
                     </td>
                   </tr>
@@ -245,24 +222,6 @@ export const DriversGroupsList = (props) => {
                             onChange={enabled => handleUpdateDriversGroup(group.id, { enabled: enabled })}
                           />
                         </EnableWrapper>
-                        <ActionSelectorWrapper className='group-actions'>
-                          <DropdownButton
-                            menuAlign={theme?.rtl ? 'left' : 'right'}
-                            title={<FiMoreVertical />}
-                            id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                          >
-                            <Dropdown.Item
-                              onClick={() => handleOpenDetails(group)}
-                            >
-                              {t('EDIT', 'Edit')}
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                              onClick={() => onDeleteGroup(group.id)}
-                            >
-                              {t('DELETE', 'Delete')}
-                            </Dropdown.Item>
-                          </DropdownButton>
-                        </ActionSelectorWrapper>
                       </ActionsContainer>
                     </td>
                   </tr>
@@ -290,16 +249,6 @@ export const DriversGroupsList = (props) => {
           </PagesBottomContainer>
         )}
       </DriversGroupsContainer>
-      <Confirm
-        title={t('WEB_APPNAME', 'Ordering')}
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }

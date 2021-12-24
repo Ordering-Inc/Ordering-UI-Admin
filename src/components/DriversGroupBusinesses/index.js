@@ -15,7 +15,7 @@ import {
 
 export const DriversGroupBusinesses = (props) => {
   const {
-    curDriversGroup,
+    driversGroupState,
     businesses,
     handleSelectBusiness,
     actionState,
@@ -45,6 +45,7 @@ export const DriversGroupBusinesses = (props) => {
         <SearchBar
           placeholder={t('SEARCH', 'Search')}
           isCustomLayout
+          lazyLoad
           search={searchValue}
           onSearch={val => setSearchValue(val)}
         />
@@ -80,12 +81,12 @@ export const DriversGroupBusinesses = (props) => {
           </BusinessWrapper>
         ))}
       </BusinessesContainer>
-      {curDriversGroup && (
+      {driversGroupState.driversGroup && (
         <Button
           borderRadius='8px'
           color='primary'
           disabled={Object.keys(changesState).length === 0}
-          onClick={() => handleUpdateDriversGroup(curDriversGroup.id, changesState)}
+          onClick={() => handleUpdateDriversGroup(changesState)}
         >
           {t('SAVE', 'Save')}
         </Button>

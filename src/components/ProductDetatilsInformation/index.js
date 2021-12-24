@@ -4,8 +4,7 @@ import { useLanguage, DragAndDrop, ExamineClick, useUtils } from 'ordering-compo
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Input, TextArea } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
+import { Button, Input, TextArea, Switch } from '../../styles'
 import Skeleton from 'react-loading-skeleton'
 
 import {
@@ -15,15 +14,17 @@ import {
   UploadImageIconContainer,
   UploadImageIcon,
   InputWrapper,
-  ActionsForm
+  ActionsForm,
+  InventoryWrapper
 } from './styles'
 
-export const ProductDetatilsEditForm = (props) => {
+export const ProductDetatilsInformation = (props) => {
   const {
     product,
     formState,
     handlechangeImage,
     handleChangeInput,
+    handleChangeFormState,
     handleButtonUpdateClick,
     onCancel
   } = props
@@ -73,13 +74,6 @@ export const ProductDetatilsEditForm = (props) => {
     }
   }
 
-  const handleChangePrice = (e) => {
-    const regexp = /^[0-9.\b]+$/
-    if (e.target.value === '' || regexp.test(e.target.value)) {
-      handleChangeInput(e)
-    }
-  }
-
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -125,7 +119,7 @@ export const ProductDetatilsEditForm = (props) => {
           </ExamineClick>
         </ProductImage>
         <InputWrapper>
-          <label>{t('PRODUCT_NAME', 'Product name')}</label>
+          <label>{t('Name_V2', 'Name')}</label>
           <Input
             name='name'
             placeholder={t('Name', 'name')}
@@ -136,7 +130,7 @@ export const ProductDetatilsEditForm = (props) => {
             }
             onChange={handleChangeInput}
             ref={formMethods.register({
-              required: t('BUSINESS_NAME_REQUIRED', 'Business name is required')
+              required: t('NAME_REQUIRED', 'The name is required')
             })}
             disabled={formState.loading}
             autoComplete='off'
@@ -152,13 +146,18 @@ export const ProductDetatilsEditForm = (props) => {
                 ? formState?.result?.result?.price
                 : formState?.changes?.price ?? product?.price
             }
-            onChange={(e) => handleChangePrice(e)}
+            onChange={(e) => handleChangeInput(e)}
             disabled={formState.loading}
             autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('BUSINESS_DESCRIPTION', 'Business description')}</label>
+          <label>{t('DESCRIPTION', 'Description')}</label>
           <TextArea
             rows={4}
             name='description'
@@ -173,6 +172,41 @@ export const ProductDetatilsEditForm = (props) => {
             autoComplete='off'
           />
         </InputWrapper>
+        <InventoryWrapper>
+          <span>{t('INVENTORY', 'Inventory')}</span>
+          <Switch
+            defaultChecked={
+              formState?.result?.result
+                ? formState?.result?.result?.inventoried
+                : formState?.changes?.inventoried ?? product?.inventoried
+            }
+            onChange={val => handleChangeFormState({ inventoried: val })}
+          />
+        </InventoryWrapper>
+        {
+          (typeof (formState?.changes?.inventoried) !== 'undefined' ? formState?.changes?.inventoried : product?.inventoried) && (
+            <InputWrapper>
+              <label>{t('QUANTITY', 'Quantity')}</label>
+              <Input
+                name='quantity'
+                placeholder={t('QUANTITY', 'Quantity')}
+                value={
+                  formState?.result?.result
+                    ? formState?.result?.result?.quantity
+                    : formState?.changes?.quantity ?? product?.quantity
+                }
+                onChange={handleChangeInput}
+                disabled={formState.loading}
+                autoComplete='off'
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            </InputWrapper>
+          )
+        }
         <ActionsForm>
           {onCancel && (
             <Button
@@ -185,16 +219,14 @@ export const ProductDetatilsEditForm = (props) => {
               {t('CANCEL', 'Cancel')}
             </Button>
           )}
-          {((formState && Object.keys(formState?.changes).length > 0)) && (
-            <Button
-              type='submit'
-              color='primary'
-              borderRadius='7.6px'
-              disabled={formState.loading}
-            >
-              {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
-            </Button>
-          )}
+          <Button
+            type='submit'
+            color='primary'
+            borderRadius='7.6px'
+            disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+          >
+            {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
+          </Button>
         </ActionsForm>
       </FormInput>
       <Alert

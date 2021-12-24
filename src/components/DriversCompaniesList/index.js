@@ -4,11 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Pagination } from '../Pagination'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Switch } from '../../styles'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { useTheme } from 'styled-components'
-import { Confirm } from '../Confirm'
 
 import {
   DriversCompaniesContainer,
@@ -18,9 +14,7 @@ import {
   AddNewCompanyButton,
   CompanyNameContainer,
   CheckBoxWrapper,
-  ActionsContainer,
   EnableWrapper,
-  ActionSelectorWrapper,
   TimezoneWrapper,
   PriorityWrapper,
   LimitWrapper
@@ -33,15 +27,12 @@ export const DriversCompaniesList = (props) => {
     handleOpenDetails,
     curDriversCompany,
     handleUpdateDriversCompany,
-    handleDeleteDriversCompany,
     handleSelectCompany,
     selectedCompanyList,
     handleAllSelectCompany
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -96,20 +87,9 @@ export const DriversCompaniesList = (props) => {
   }
 
   const handleClickCompany = (e, company) => {
-    const isInvalid = e.target.closest('.company-checkbox') || e.target.closest('.company-enabled') || e.target.closest('.company-actions')
+    const isInvalid = e.target.closest('.company-checkbox') || e.target.closest('.company-enabled')
     if (isInvalid) return
     handleOpenDetails(company)
-  }
-
-  const onDeleteCompany = (driversCompanyId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_DRIVER_COMPANY', 'Are you sure to remove this driver company?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeleteDriversCompany(driversCompanyId)
-      }
-    })
   }
 
   return (
@@ -151,9 +131,7 @@ export const DriversCompaniesList = (props) => {
                   </TimezoneWrapper>
                 </th>
                 <th>
-                  <ActionsContainer>
-                    {t('ACTIONS', 'Actions')}
-                  </ActionsContainer>
+                  {t('ACTIONS', 'Actions')}
                 </th>
               </tr>
             </thead>
@@ -182,14 +160,9 @@ export const DriversCompaniesList = (props) => {
                       </TimezoneWrapper>
                     </td>
                     <td>
-                      <ActionsContainer>
-                        <EnableWrapper>
-                          <Skeleton width={50} />
-                        </EnableWrapper>
-                        <ActionSelectorWrapper>
-                          <Skeleton width={20} />
-                        </ActionSelectorWrapper>
-                      </ActionsContainer>
+                      <EnableWrapper>
+                        <Skeleton width={50} />
+                      </EnableWrapper>
                     </td>
                   </tr>
                 </tbody>
@@ -234,33 +207,13 @@ export const DriversCompaniesList = (props) => {
                       </TimezoneWrapper>
                     </td>
                     <td>
-                      <ActionsContainer>
-                        <EnableWrapper className='company-enabled'>
-                          <span>{t('ENABLE', 'Enable')}</span>
-                          <Switch
-                            defaultChecked={company?.enabled}
-                            onChange={enabled => handleUpdateDriversCompany(company.id, { enabled: enabled })}
-                          />
-                        </EnableWrapper>
-                        <ActionSelectorWrapper className='company-actions'>
-                          <DropdownButton
-                            menuAlign={theme?.rtl ? 'left' : 'right'}
-                            title={<FiMoreVertical />}
-                            id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                          >
-                            <Dropdown.Item
-                              onClick={() => handleOpenDetails(company)}
-                            >
-                              {t('EDIT', 'Edit')}
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                              onClick={() => onDeleteCompany(company.id)}
-                            >
-                              {t('DELETE', 'Delete')}
-                            </Dropdown.Item>
-                          </DropdownButton>
-                        </ActionSelectorWrapper>
-                      </ActionsContainer>
+                      <EnableWrapper className='company-enabled'>
+                        <span>{t('ENABLE', 'Enable')}</span>
+                        <Switch
+                          defaultChecked={company?.enabled}
+                          onChange={enabled => handleUpdateDriversCompany(company.id, { enabled: enabled })}
+                        />
+                      </EnableWrapper>
                     </td>
                   </tr>
                 </tbody>
@@ -287,16 +240,6 @@ export const DriversCompaniesList = (props) => {
           </PagesBottomContainer>
         )}
       </DriversCompaniesContainer>
-      <Confirm
-        title={t('WEB_APPNAME', 'Ordering')}
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }

@@ -1,11 +1,19 @@
 import styled, { css } from 'styled-components'
 
+export const RulesContainer = styled.div`
+  height: calc(100% - 103px);
+`
 export const FormInput = styled.form`
+  height: 100%;
   > button {
     height: 44px;
-    margin-top: 44px;
-    margin-bottom: 30px;
+    top: 100%;
+    position: sticky;
   }
+`
+export const FormInnerContainer = styled.div`
+  height: calc(100% - 70px);
+  overflow: auto;
 `
 export const SectionTitle = styled.div`
   font-size: 16px;

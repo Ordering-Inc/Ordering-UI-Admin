@@ -16,7 +16,7 @@ import { BusinessProductList } from '../BusinessProductList'
 import { ProductDetails } from '../ProductDetails'
 import { SingleBusinessCategoryEdit } from '../SingleBusinessCategoryEdit'
 import { BusinessSelectHeader } from '../BusinessSelectHeader'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, ChevronRight } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { BatchImageForm } from '../BatchImageForm'
@@ -33,7 +33,8 @@ import {
   ViewMethodButton,
   ActionsGroup,
   BusinessNameWrapper,
-  BusinessSelector
+  BusinessSelector,
+  Breadcrumb
 } from './styles'
 
 const BusinessProductsListingUI = (props) => {
@@ -54,7 +55,9 @@ const BusinessProductsListingUI = (props) => {
     setFormTaxState,
     formTaxState,
     taxes,
-    setTaxes
+    setTaxes,
+    fees,
+    setFees
   } = props
 
   const [, t] = useLanguage()
@@ -66,7 +69,7 @@ const BusinessProductsListingUI = (props) => {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isProductAdd, setIsProductAdd] = useState(false)
   const [showSelectHeader, setShowSelectHeader] = useState(false)
-  const [businessName, setBusinessName] = useState(null)
+  const [selectedBusiness, setSelectedBusiness] = useState(null)
   const categoryListRef = useRef()
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
 
@@ -104,6 +107,7 @@ const BusinessProductsListingUI = (props) => {
 
   const handleCloseProductDetails = () => {
     setOpenProductDetails(false)
+    setSelectedProduct(null)
   }
 
   const handleProductAdd = (status) => {
@@ -121,7 +125,7 @@ const BusinessProductsListingUI = (props) => {
 
   const changBusinessState = (business) => {
     handleClose()
-    setBusinessName(business?.name)
+    setSelectedBusiness(business)
     setCategorySelected(null)
     setBusinessSlug(business?.slug)
   }
@@ -152,17 +156,29 @@ const BusinessProductsListingUI = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            {!businessName && businessState.loading ? (
+            {!selectedBusiness && businessState.loading ? (
               <h1><Skeleton width={200} height={30} /></h1>
             ) : (
-              <BusinessSelector>
-                <BusinessNameWrapper onClick={() => handleSelectHeader()}>
-                  <h1>{businessName || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
-                </BusinessNameWrapper>
-                {showSelectHeader && (
-                  <BusinessSelectHeader close={handleClose} isOpen={showSelectHeader} changBusinessState={changBusinessState} />
-                )}
-              </BusinessSelector>
+              <>
+                <BusinessSelector>
+                  <BusinessNameWrapper onClick={() => handleSelectHeader()}>
+                    <h1>{selectedBusiness?.name || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
+                  </BusinessNameWrapper>
+                  {showSelectHeader && (
+                    <BusinessSelectHeader close={handleClose} isOpen={showSelectHeader} changBusinessState={changBusinessState} />
+                  )}
+                </BusinessSelector>
+                <Breadcrumb>
+                  <span
+                    className='business'
+                    onClick={() => onProductRedirect({ slug: selectedBusiness?.slug || businessState?.business?.slug })}
+                  >
+                    {selectedBusiness?.name || businessState?.business?.name}
+                  </span>
+                  <ChevronRight />
+                  <span className='active'>{categorySelected?.name}</span>
+                </Breadcrumb>
+              </>
             )}
           </HeaderTitleContainer>
           <ActionsGroup>
@@ -183,6 +199,7 @@ const BusinessProductsListingUI = (props) => {
             </Button>
             <SearchBar
               isCustomLayout
+              lazyLoad
               search={searchValue}
               onSearch={handleChangeSearch}
               placeholder={t('SEARCH', 'Search')}
@@ -284,6 +301,8 @@ const BusinessProductsListingUI = (props) => {
           formTaxState={formTaxState}
           taxes={taxes}
           setTaxes={setTaxes}
+          fees={fees}
+          setFees={setFees}
         />
       )}
       <Modal

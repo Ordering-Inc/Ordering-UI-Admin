@@ -55,6 +55,7 @@ export const BusinessListingHeader = (props) => {
         </Button>
         <SearchBar
           isCustomLayout
+          lazyLoad
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}

@@ -179,6 +179,7 @@ const BusinessMenuUI = (props) => {
                 menu={currentMenu}
                 onClose={() => handleCloseOption()}
                 handleUpdateBusinessState={handleSuccessBusinessMenu}
+                isSelectedSharedMenus={isSelectedSharedMenus}
               />
             </Modal>
           )}
