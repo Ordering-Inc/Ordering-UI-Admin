@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   useLanguage,
   AdvancedReports as AdvancedReportsController
@@ -6,6 +6,10 @@ import {
 import { Download } from 'react-bootstrap-icons'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
+import { Button } from '../../styles/Buttons'
+import { Modal } from '../Modal'
+import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
+import { ReportsBrandFilter } from '../ReportsBrandFilter'
 
 import {
   ReportsContainer,
@@ -30,6 +34,8 @@ const ReportsSaleAndCategoryUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [isBusinessFilter, setIsBusinessFilter] = useState(false)
+  const [isBrandFilter, setIsBrandFilter] = useState(false)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -153,7 +159,18 @@ const ReportsSaleAndCategoryUI = (props) => {
     <ReportsContainer>
       <Title>{t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category')}</Title>
       <ButtonActionList>
-        <BrandBusinessWrapper />
+        <BrandBusinessWrapper>
+          <Button
+            onClick={() => setIsBrandFilter(true)}
+          >
+            {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
+          </Button>
+          <Button
+            onClick={() => setIsBusinessFilter(true)}
+          >
+            {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
+          </Button>
+        </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar
             handleChangeDate={handleChangeDate}
@@ -198,6 +215,32 @@ const ReportsSaleAndCategoryUI = (props) => {
           </ChartWrapper>
         </ChartBlockWrapper>
       </ChartListWrapper>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('BUSINESSES', 'Businesses')}
+        open={isBusinessFilter}
+        onClose={() => setIsBusinessFilter(false)}
+      >
+        <AnalyticsBusinessFilter
+          {...props}
+          onClose={() => setIsBusinessFilter(false)}
+          isFranchise
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('BRAND', 'Brand')}
+        open={isBrandFilter}
+        onClose={() => setIsBrandFilter(false)}
+      >
+        <ReportsBrandFilter
+          {...props} onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
     </ReportsContainer>
   )
 }
