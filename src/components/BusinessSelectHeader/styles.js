@@ -34,7 +34,6 @@ export const OptionItem = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  cursor: pointer;
   padding: 5px;
   border-radius: 7.6px;
   &:hover {

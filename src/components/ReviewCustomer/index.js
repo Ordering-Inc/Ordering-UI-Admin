@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
-  useUtils
-} from 'ordering-components-admin'
-import {
+  useUtils,
   ReviewCustomer as ReviewCustomerController
-} from './naked'
+} from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
 import { useTheme } from 'styled-components'

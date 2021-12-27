@@ -1,8 +1,7 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  min-height: 800px;
+  min-height: 500px;
   > h1 {
     font-size: 20px;
     font-weight: 700;
@@ -25,82 +24,58 @@ export const BusinessSelectorContainer = styled.div`
     margin-top: 5px;
   }
 `
-export const SelectedBusinessWrapper = styled.div`
-  cursor: pointer;
-  padding: 10px 16px;
-  background: ${props => props.theme.colors.secundary};
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  > svg {
-    font-size: 0.7em;
-    transition: 0.2s ease-in-out;
-  }
-
-  > div {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-  }
-`
 export const Label = styled.div`
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 16px;
 `
-
-export const WrapperImage = styled.div`
-  max-width: 38px;
-  max-height: 38px;
-  height: 38px;
-  width: 38px;
-
-  ${({ isSmall }) => isSmall && css`
-    max-width: 24px;
-    max-height: 24px;
-    height: 24px;
-    width: 24px;
-  `}
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin: 0 10px;
-
-  svg {
-    width: 100%;
-    height: 100%;
-    padding: 7px;
-    box-sizing: border-box;
-    border-radius: 50%;
-  }
-`
-
-const ImageStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  border-radius: 8px;
-`
-
-export const Image = (props) => {
-  return (
-    <ImageStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </ImageStyled>
-  )
-}
 export const NoSelectedBusiness = styled.p`
   font-size: 16px;
   font-weight: 500;
   text-align: center;
+`
+export const Option = styled.div`
+  display: flex;
+  align-items: center;
+  
+  img {
+    min-height: 38px;
+    min-width: 38px;
+    height: 38px;
+    width: 38px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    margin-right: 8px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 0px;
+      margin-left: 8px;
+    `}
+  }
+  span {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    max-width: 170px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: ${props => props.theme.colors.textGray};
+    b {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      color: ${props => props.theme.colors.textBlack};
+    }
+  }
+`
+export const BusinessSelectWrapper = styled.div`
+  .select {
+    width: 100%;
+    > div:first-child {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+  }
 `

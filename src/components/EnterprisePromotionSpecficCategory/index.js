@@ -3,41 +3,51 @@ import {
   useLanguage,
   useUtils
 } from 'ordering-components-admin'
-import { BusinessSelectHeader } from '../BusinessSelectHeader'
-import { ChevronDown } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { Button } from '../../styles'
+import { Button, DefaultSelect } from '../../styles'
 import { SelectBusinessCategories } from '../SelectBusinessCategories'
 
 import {
   Container,
   BusinessSelectorContainer,
-  SelectedBusinessWrapper,
   Label,
-  WrapperImage,
-  Image,
-  NoSelectedBusiness
+  NoSelectedBusiness,
+  BusinessSelectWrapper,
+  Option
 } from './styles'
 
 export const EnterprisePromotionSpecficCategory = (props) => {
   const {
+    promotionState,
     handleChangeItem,
     onClickDone,
     selectedCategoryIds,
-    setSelectedCategoryIds
+    setSelectedCategoryIds,
+    businessesList
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
 
-  const [showSelectHeader, setShowSelectHeader] = useState(false)
-  const [selectedBusiness, setSelectedBusiness] = useState(null)
+  const [businessOptions, setBusinessOptions] = useState([])
+  const [selectedBusinessSlug, setSelectedBusinessSlug] = useState(null)
 
-  const changeBusinessState = (business) => {
-    setShowSelectHeader(false)
-    setSelectedBusiness(business)
-  }
+  useEffect(() => {
+    const businessIds = promotionState?.promotion.businesses.reduce((ids, business) => [...ids, business.id], [])
+    const _businessOptions = businessesList.businesses.filter(business => businessIds.includes(business.id)).map(business => {
+      return {
+        value: business.slug,
+        content: (
+          <Option>
+            <img src={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} alt='' />
+            <span><b>{business?.name}</b>{business?.city?.name}</span>
+          </Option>
+        )
+      }
+    })
+    setBusinessOptions(_businessOptions)
+  }, [])
 
   useEffect(() => {
     const filteredCategories = []
@@ -47,41 +57,29 @@ export const EnterprisePromotionSpecficCategory = (props) => {
     handleChangeItem({ categories: filteredCategories })
   }, [selectedCategoryIds])
 
+  useEffect(() => {
+    const _selectedCategoryIds = promotionState?.promotion.categories.reduce((ids, category) => [...ids, category.id], [])
+    setSelectedCategoryIds(_selectedCategoryIds)
+  }, [])
+
   return (
     <Container>
       <h1>{t('CATEGORY_SPECIFIC', 'Category specific')}</h1>
       <Label>{t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')}</Label>
       <BusinessSelectorContainer>
-        <SelectedBusinessWrapper
-          onClick={() => setShowSelectHeader(!showSelectHeader)}
-        >
-          {
-            selectedBusiness
-              ? (
-                <div>
-                  <WrapperImage isSmall>
-                    <Image bgimage={optimizeImage(selectedBusiness?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
-                  </WrapperImage>
-                  <span>{selectedBusiness?.name}</span>
-                </div>
-              )
-              : <div>{t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')}</div>
-          }
-          <ChevronDown className={showSelectHeader ? 'rotate-arrow' : ''} />
-        </SelectedBusinessWrapper>
-        {showSelectHeader && (
-          <BusinessSelectHeader
-            isOpen={showSelectHeader}
-            close={() => setShowSelectHeader(false)}
-            defaultPageSize={10}
-            changeBusinessState={changeBusinessState}
+        <BusinessSelectWrapper>
+          <DefaultSelect
+            defaultValue={selectedBusinessSlug}
+            placeholder={t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')}
+            options={businessOptions}
+            onChange={val => setSelectedBusinessSlug(val)}
           />
-        )}
+        </BusinessSelectWrapper>
       </BusinessSelectorContainer>
       <Label>{t('SELECT_PRODUCT', 'Select product')}</Label>
-      {selectedBusiness ? (
+      {selectedBusinessSlug ? (
         <SelectBusinessCategories
-          slug={selectedBusiness.slug}
+          slug={selectedBusinessSlug}
           selectedCategoryIds={selectedCategoryIds}
           setSelectedCategoryIds={setSelectedCategoryIds}
         />

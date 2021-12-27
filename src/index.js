@@ -43,7 +43,7 @@ import { DriversList } from './components/DriversList'
 import { DriversLocation } from './components/DriversLocation'
 import { DriversManager } from './components/DriversManager'
 import { DriversOnlineOfflineFilter } from './components/DriversOnlineOfflineFilter'
-import { EnterprisePromontionListing } from './components/EnterprisePromontionListing'
+import { EnterprisePromotionListing } from './components/EnterprisePromotionListing'
 import { ForgotPasswordForm } from './components/ForgotPasswordForm'
 import { GoogleGpsButton } from './components/GoogleGpsButton'
 import { Home } from './components/Home'
@@ -187,7 +187,7 @@ export {
   DriversLocation,
   DriversManager,
   DriversOnlineOfflineFilter,
-  EnterprisePromontionListing,
+  EnterprisePromotionListing,
   ForgotPasswordForm,
   GoogleGpsButton,
   Home,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, EnterprisePromontionList as EnterprisePromontionListController } from 'ordering-components-admin'
+import { useLanguage, EnterprisePromotionList as EnterprisePromontioListController } from 'ordering-components-admin'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles'
@@ -16,7 +16,7 @@ import {
   ActionsWrapper
 } from './styles'
 
-const EnterprisePromontionListingUI = (props) => {
+const EnterprisePromotionListingUI = (props) => {
   const {
     searchValue,
     onSearch,
@@ -25,7 +25,8 @@ const EnterprisePromontionListingUI = (props) => {
     handleSuccessAddPromotion,
     sitesState,
     paymethodsState,
-    businessesList
+    businessesList,
+    handleSuccessDeletePromotion
   } = props
 
   const [, t] = useLanguage()
@@ -109,6 +110,7 @@ const EnterprisePromontionListingUI = (props) => {
             promotionsList={promotionListState.promotions}
             handleSuccessUpdatePromotions={handleSuccessUpdatePromotions}
             handleSuccessAddPromotion={handleSuccessAddPromotion}
+            handleSuccessDeletePromotion={handleSuccessDeletePromotion}
             setMoveDistance={setMoveDistance}
             onClose={() => handleCloseDetails()}
           />
@@ -128,10 +130,10 @@ const EnterprisePromontionListingUI = (props) => {
   )
 }
 
-export const EnterprisePromontionListing = (props) => {
+export const EnterprisePromotionListing = (props) => {
   const enterpisePromotionsProps = {
     ...props,
-    UIComponent: EnterprisePromontionListingUI
+    UIComponent: EnterprisePromotionListingUI
   }
-  return <EnterprisePromontionListController {...enterpisePromotionsProps} />
+  return <EnterprisePromontioListController {...enterpisePromotionsProps} />
 }

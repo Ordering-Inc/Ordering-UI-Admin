@@ -73,8 +73,6 @@ export const EnterprisePromotionConditions = (props) => {
     setOpenMultipleModal(false)
   }
 
-  console.log(formState.changes)
-
   return (
     <>
       <ConditionsContainer>
