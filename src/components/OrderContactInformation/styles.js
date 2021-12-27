@@ -75,6 +75,10 @@ export const InfoContent = styled.div`
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
+
+      &.name {
+        max-width: 70%;
+      }
     }
 
     > button {
@@ -162,4 +166,10 @@ export const ToggleItemWrapper = styled.div`
       transform: rotateZ(180deg);
     }
   `}
+`
+export const ReviewButton = styled.span`
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+  font-size: 14px;
+  text-decoration: underline;
 `

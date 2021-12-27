@@ -123,7 +123,7 @@ const BusinessProductsListingUI = (props) => {
     setShowSelectHeader(false)
   }
 
-  const changBusinessState = (business) => {
+  const changeBusinessState = (business) => {
     handleClose()
     setSelectedBusiness(business)
     setCategorySelected(null)
@@ -165,7 +165,7 @@ const BusinessProductsListingUI = (props) => {
                     <h1>{selectedBusiness?.name || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
                   </BusinessNameWrapper>
                   {showSelectHeader && (
-                    <BusinessSelectHeader close={handleClose} isOpen={showSelectHeader} changBusinessState={changBusinessState} />
+                    <BusinessSelectHeader close={handleClose} isOpen={showSelectHeader} changeBusinessState={changeBusinessState} />
                   )}
                 </BusinessSelector>
                 <Breadcrumb>

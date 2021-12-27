@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLanguage, useSession, useUtils } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
@@ -6,6 +6,8 @@ import { DriverSelector } from '../DriverSelector'
 import { IconButton } from '../../styles/Buttons'
 import { Telephone, ChevronDown } from 'react-bootstrap-icons'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
+import { ReviewCustomer } from '../ReviewCustomer'
+import { Modal } from '../Modal'
 
 import {
   BusinessInfo,
@@ -18,7 +20,8 @@ import {
   DriverSelectorContainer,
   CutsomerDetail,
   CustomerInfoTable,
-  ToggleItemWrapper
+  ToggleItemWrapper,
+  ReviewButton
 } from './styles'
 
 export const OrderContactInformation = (props) => {
@@ -30,6 +33,20 @@ export const OrderContactInformation = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [{ optimizeImage }] = useUtils()
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [currentCustomer, setCurrentCustomer] = useState(null)
+
+  const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 16, 17]
+
+  const handleReviewCustomer = (customer) => {
+    setCurrentCustomer(customer)
+    setIsModalOpen(true)
+  }
+
+  const handleCustomerReviewed = () => {
+    setIsModalOpen(false)
+  }
 
   return (
     <>
@@ -47,7 +64,7 @@ export const OrderContactInformation = (props) => {
                 </PhotoWrapper>
                 <InfoContent>
                   <div>
-                    <p>{order?.business?.name}</p>
+                    <p className='name'>{order?.business?.name}</p>
                     {order?.business?.phone && (
                       <IconButton
                         onClick={() => window.open(`tel:${order.business.phone}`)}
@@ -102,7 +119,7 @@ export const OrderContactInformation = (props) => {
         <ContextAwareToggle eventKey='1'>
           <CustomerInfo>
             <PhotoWrapper>
-              {order?.business?.photo ? (
+              {order?.customer?.photo ? (
                 <Photo bgimage={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} />
               ) : (
                 <FaUserAlt />
@@ -110,7 +127,7 @@ export const OrderContactInformation = (props) => {
             </PhotoWrapper>
             <InfoContent>
               <div>
-                <p>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
+                <p className='name'>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
                 {order?.customer?.cellphone && (
                   <IconButton
                     onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}
@@ -119,7 +136,13 @@ export const OrderContactInformation = (props) => {
                   </IconButton>
                 )}
               </div>
-              <p>{order?.customer?.cellphone}</p>
+              {!order?.user_review && pastOrderStatuses.includes(order?.status) && (
+                <ReviewButton
+                  onClick={() => handleReviewCustomer(order?.customer)}
+                >
+                  {t('REVIEW', 'Review')}
+                </ReviewButton>
+              )}
             </InfoContent>
             <ChevronDown className='down-arrow' />
           </CustomerInfo>
@@ -128,6 +151,16 @@ export const OrderContactInformation = (props) => {
           <CutsomerDetail>
             <CustomerInfoTable>
               <tbody>
+                {order?.customer?.cellphone && (
+                  <tr>
+                    <td>{t('CELLPHONE', 'Phone / Mobile')}</td>
+                    <td>
+                      <a href={`tel:${order?.customer?.cellphone}`}>
+                        {order?.customer?.cellphone}
+                      </a>
+                    </td>
+                  </tr>
+                )}
                 {order?.customer?.email && (
                   <tr>
                     <td>{t('EMAIL', 'Email')}</td>
@@ -210,6 +243,18 @@ export const OrderContactInformation = (props) => {
           </DriverSelectorContainer>
         </DriverInfoContainer>
       )}
+
+      <Modal
+        width='700px'
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <ReviewCustomer
+          order={order}
+          customer={currentCustomer}
+          onClose={() => handleCustomerReviewed()}
+        />
+      </Modal>
     </>
   )
 }

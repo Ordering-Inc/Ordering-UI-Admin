@@ -5,24 +5,24 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Button, DefaultSelect } from '../../styles'
-import { SelectBusinessProducts } from '../SelectBusinessProducts'
+import { SelectBusinessCategories } from '../SelectBusinessCategories'
 
 import {
   Container,
   BusinessSelectorContainer,
   Label,
   NoSelectedBusiness,
-  Option,
-  BusinessSelectWrapper
+  BusinessSelectWrapper,
+  Option
 } from './styles'
 
-export const EnterprisePromotionSpecficProducts = (props) => {
+export const EnterprisePromotionSpecficCategory = (props) => {
   const {
     promotionState,
     handleChangeItem,
     onClickDone,
-    selectedProductsIds,
-    setSelectedProductsIds,
+    selectedCategoryIds,
+    setSelectedCategoryIds,
     businessesList
   } = props
 
@@ -50,21 +50,21 @@ export const EnterprisePromotionSpecficProducts = (props) => {
   }, [])
 
   useEffect(() => {
-    const filteredProducts = []
-    selectedProductsIds.forEach(id => {
-      filteredProducts.push({ id: id, is_condition: true })
+    const filteredCategories = []
+    selectedCategoryIds.forEach(id => {
+      filteredCategories.push({ id: id, is_condition: true })
     })
-    handleChangeItem({ products: filteredProducts })
-  }, [selectedProductsIds])
+    handleChangeItem({ categories: filteredCategories })
+  }, [selectedCategoryIds])
 
   useEffect(() => {
-    const _selectedProductsIds = promotionState?.promotion?.products.reduce((ids, product) => [...ids, product.id], [])
-    setSelectedProductsIds(_selectedProductsIds)
+    const _selectedCategoryIds = promotionState?.promotion.categories.reduce((ids, category) => [...ids, category.id], [])
+    setSelectedCategoryIds(_selectedCategoryIds)
   }, [])
 
   return (
     <Container>
-      <h1>{t('PRODUCT_SPECIFIC', 'Product specific')}</h1>
+      <h1>{t('CATEGORY_SPECIFIC', 'Category specific')}</h1>
       <Label>{t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')}</Label>
       <BusinessSelectorContainer>
         <BusinessSelectWrapper>
@@ -78,14 +78,14 @@ export const EnterprisePromotionSpecficProducts = (props) => {
       </BusinessSelectorContainer>
       <Label>{t('SELECT_PRODUCT', 'Select product')}</Label>
       {selectedBusinessSlug ? (
-        <SelectBusinessProducts
+        <SelectBusinessCategories
           slug={selectedBusinessSlug}
-          selectedProductsIds={selectedProductsIds}
-          setSelectedProductsIds={setSelectedProductsIds}
+          selectedCategoryIds={selectedCategoryIds}
+          setSelectedCategoryIds={setSelectedCategoryIds}
         />
       ) : (
         <NoSelectedBusiness>
-          {t('SELECT_BUSINESS_BEFORE_PRODUCT', 'Please select a business before selecting your products.')}
+          {t('SELECT_BUSINESS_BEFORE_CATEGORY', 'Please select a business before selecting your cateogries.')}
         </NoSelectedBusiness>
       )}
 
