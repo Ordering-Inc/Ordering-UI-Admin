@@ -5,7 +5,6 @@ export const PopMenuContatiner = styled.div`
   left:0px;
   background-color: #fff;
   width: 240px;
-  height: 390px;
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
@@ -34,7 +33,6 @@ export const BusinessSearch = styled.div`
 export const OptionItem = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
   cursor: pointer;
   padding: 5px;
   border-radius: 7.6px;
@@ -77,9 +75,7 @@ export const BusinessList = styled.div`
 export const WrapperPagination = styled.div`
   display: flex;
   justify-content: flex-end;
-  position: absolute;
-  bottom: 3px;
-  right: 0px;
+  margin-top: 10px;
   >div>div{
     margin: 0;
     button {

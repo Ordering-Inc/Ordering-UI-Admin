@@ -294,7 +294,7 @@ export const EnterprisePromotionGeneralDetails = (props) => {
                     ? formState.changes?.stackable
                     : promotionState.promotion?.stackable ?? false
                 }
-                onChange={e => handleChangeItem({ stackable: e.target.checked })}
+                onChange={val => handleChangeItem({ stackable: val })}
               />
             </StackableContainer>
           </FormInnerContainer>

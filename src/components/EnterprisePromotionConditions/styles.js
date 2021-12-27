@@ -57,3 +57,21 @@ export const EditButton = styled.span`
     background-color: #1507261a;
   }
 `
+export const CheckboxWrapper = styled.div`
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    color: #FFF;
+    font-size: 16px;
+  }
+
+  ${({ active }) => active ? css`
+    background: ${props => props.theme.colors.primary};
+  ` : css`
+    border: 1px solid #B1BCCC;
+  `}
+`

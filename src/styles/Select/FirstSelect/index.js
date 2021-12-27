@@ -59,7 +59,12 @@ export const Select = (props) => {
   }
 
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      if (isShowSearchBar) {
+        handleChangeSearch('')
+      }
+      return
+    }
     document.addEventListener('click', closeSelect)
     return () => document.removeEventListener('click', closeSelect)
   }, [open])

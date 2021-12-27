@@ -25,7 +25,7 @@ const BusinessessListingUI = (props) => {
     getPageBusinesses,
     isOpen,
     close,
-    changBusinessState,
+    changeBusinessState,
     defaultPageSize
   } = props
   const [, t] = useLanguage()
@@ -116,7 +116,7 @@ const BusinessessListingUI = (props) => {
             <>
               {currentBusinessess && currentBusinessess.length > 0 && (
                 currentBusinessess.map(business => (
-                  <OptionItem key={business.id} onClick={() => changBusinessState(business)}>
+                  <OptionItem key={business.id} onClick={() => changeBusinessState(business)}>
                     <img src={optimizeImage(business?.logo, 'h_50,c_limit')} alt='' />
                     <span><b>{business?.name}</b>{business?.city?.name}</span>
                   </OptionItem>
@@ -154,7 +154,7 @@ export const BusinessSelectHeader = (props) => {
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
     isSearchByBusinessPhone: true,
-    propsToFetch: ['name', 'slug', 'logo', 'city']
+    propsToFetch: props.defaultPropsToFetch ?? ['name', 'slug', 'logo', 'city']
   }
   return (
     <BusinessListController {...businessListingProps} />
