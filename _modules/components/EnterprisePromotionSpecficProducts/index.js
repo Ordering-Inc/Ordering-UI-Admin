@@ -1,21 +1,35 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.EnterprisePromotionSpecficProducts = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _styledComponents = require("styled-components");
+
 var _styles = require("../../styles");
 
-var _BusinessSelectHeader = require("../BusinessSelectHeader");
+var _SelectBusinessProducts = require("../SelectBusinessProducts");
 
 var _styles2 = require("./styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -31,17 +45,85 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProducts(props) {
   var promotionState = props.promotionState,
-      formState = props.formState,
       handleChangeItem = props.handleChangeItem,
-      onClickDone = props.onClickDone;
+      onClickDone = props.onClickDone,
+      selectedProductsIds = props.selectedProductsIds,
+      setSelectedProductsIds = props.setSelectedProductsIds,
+      businessesList = props.businessesList;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCTS_SPECIFIC', 'Product specific')), /*#__PURE__*/_react.default.createElement(_styles2.BusinessesContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('FRONT_VISUALS_RESTAURANTS', 'Businesses')), /*#__PURE__*/_react.default.createElement(_BusinessSelectHeader.BusinessSelectHeader, {
-    defaultPageSize: 10
-  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      optimizeImage = _useUtils2[0].optimizeImage;
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      businessOptions = _useState2[0],
+      setBusinessOptions = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      selectedBusinessSlug = _useState4[0],
+      setSelectedBusinessSlug = _useState4[1];
+
+  (0, _react.useEffect)(function () {
+    var businessIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.businesses.reduce(function (ids, business) {
+      return [].concat(_toConsumableArray(ids), [business.id]);
+    }, []);
+
+    var _businessOptions = businessesList.businesses.filter(function (business) {
+      return businessIds.includes(business.id);
+    }).map(function (business) {
+      var _theme$images, _theme$images$dummies, _business$city;
+
+      return {
+        value: business.slug,
+        content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("img", {
+          src: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
+          alt: ""
+        }), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name))
+      };
+    });
+
+    setBusinessOptions(_businessOptions);
+  }, []);
+  (0, _react.useEffect)(function () {
+    var filteredProducts = [];
+    selectedProductsIds.forEach(function (id) {
+      filteredProducts.push({
+        id: id,
+        is_condition: true
+      });
+    });
+    handleChangeItem({
+      products: filteredProducts
+    });
+  }, [selectedProductsIds]);
+  (0, _react.useEffect)(function () {
+    var _promotionState$promo;
+
+    var _selectedProductsIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.products.reduce(function (ids, product) {
+      return [].concat(_toConsumableArray(ids), [product.id]);
+    }, []);
+
+    setSelectedProductsIds(_selectedProductsIds);
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_SPECIFIC', 'Product specific')), /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')), /*#__PURE__*/_react.default.createElement(_styles2.BusinessSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    defaultValue: selectedBusinessSlug,
+    placeholder: t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business'),
+    options: businessOptions,
+    onChange: function onChange(val) {
+      return setSelectedBusinessSlug(val);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_PRODUCT', 'Select product')), selectedBusinessSlug ? /*#__PURE__*/_react.default.createElement(_SelectBusinessProducts.SelectBusinessProducts, {
+    slug: selectedBusinessSlug,
+    selectedProductsIds: selectedProductsIds,
+    setSelectedProductsIds: setSelectedProductsIds
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.NoSelectedBusiness, null, t('SELECT_BUSINESS_BEFORE_PRODUCT', 'Please select a business before selecting your products.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     onClick: function onClick() {

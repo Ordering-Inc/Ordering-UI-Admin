@@ -49,14 +49,8 @@ var SearchBar = function SearchBar(props) {
     previousSearch = e.target.value;
   };
 
-  var onClearSearch = function onClearSearch(e) {
-    e.target.value = '';
-    onChangeSearch(e);
-  };
-
   (0, _react.useEffect)(function () {
     el.current.onkeyup = onChangeSearch;
-    el.current.onblur = onClearSearch;
   }, []);
   (0, _react.useEffect)(function () {
     if (!search) {

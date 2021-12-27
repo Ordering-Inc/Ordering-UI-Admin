@@ -207,7 +207,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setShowSelectHeader(false);
   };
 
-  var changBusinessState = function changBusinessState(business) {
+  var changeBusinessState = function changeBusinessState(business) {
     handleClose();
     setSelectedBusiness(business);
     setCategorySelected(null);
@@ -243,7 +243,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }))), showSelectHeader && /*#__PURE__*/_react.default.createElement(_BusinessSelectHeader.BusinessSelectHeader, {
     close: handleClose,
     isOpen: showSelectHeader,
-    changBusinessState: changBusinessState
+    changeBusinessState: changeBusinessState
   })), /*#__PURE__*/_react.default.createElement(_styles.Breadcrumb, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "business",
     onClick: function onClick() {

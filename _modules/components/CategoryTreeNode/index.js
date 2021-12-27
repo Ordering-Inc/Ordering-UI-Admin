@@ -96,14 +96,19 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
 
       setSelectedProductsIds(_selectedProductsIds);
 
-      var _selectedProducts = selectedProducts.filter(function (_product) {
-        return _product.id !== product.id;
-      });
+      if (selectedProducts) {
+        var _selectedProducts = selectedProducts.filter(function (_product) {
+          return _product.id !== product.id;
+        });
 
-      setSelectedProducts(_selectedProducts);
+        setSelectedProducts(_selectedProducts);
+      }
     } else {
       setSelectedProductsIds([].concat(_toConsumableArray(selectedProductsIds), [product.id]));
-      setSelectedProducts([].concat(_toConsumableArray(selectedProducts), [product]));
+
+      if (selectedProducts) {
+        setSelectedProducts([].concat(_toConsumableArray(selectedProducts), [product]));
+      }
     }
   };
 
@@ -122,28 +127,34 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
         return self.indexOf(value) === index;
       });
       setSelectedProductsIds(_selectedProductsIds);
-      var uniqueArr = [];
-      _selectedProducts = [].concat(_toConsumableArray(selectedProducts), _toConsumableArray(category.products)).filter(function (product) {
-        var index = uniqueArr.findIndex(function (item) {
-          return item.id === product.id;
+
+      if (selectedProducts) {
+        var uniqueArr = [];
+        _selectedProducts = [].concat(_toConsumableArray(selectedProducts), _toConsumableArray(category.products)).filter(function (product) {
+          var index = uniqueArr.findIndex(function (item) {
+            return item.id === product.id;
+          });
+
+          if (index <= -1) {
+            uniqueArr.push(product);
+          }
+
+          return null;
         });
-
-        if (index <= -1) {
-          uniqueArr.push(product);
-        }
-
-        return null;
-      });
-      setSelectedProducts(uniqueArr);
+        setSelectedProducts(uniqueArr);
+      }
     } else {
       _selectedProductsIds = selectedProductsIds.filter(function (id) {
         return !productsIds.includes(id);
       });
       setSelectedProductsIds(_selectedProductsIds);
-      _selectedProducts = selectedProducts.filter(function (product) {
-        return !productsIds.includes(product.id);
-      });
-      setSelectedProducts(_selectedProducts);
+
+      if (selectedProducts) {
+        _selectedProducts = selectedProducts.filter(function (product) {
+          return !productsIds.includes(product.id);
+        });
+        setSelectedProducts(_selectedProducts);
+      }
     }
   };
 

@@ -285,9 +285,9 @@ var EnterprisePromotionGeneralDetails = function EnterprisePromotionGeneralDetai
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.StackableContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('ALLOW_COMBINE_OFFER', 'Allow to combine offer (discount/coupon) with others?')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: typeof ((_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.stackable) !== 'undefined' ? (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.stackable : (_promotionState$promo9 = (_promotionState$promo10 = promotionState.promotion) === null || _promotionState$promo10 === void 0 ? void 0 : _promotionState$promo10.stackable) !== null && _promotionState$promo9 !== void 0 ? _promotionState$promo9 : false,
-    onChange: function onChange(e) {
+    onChange: function onChange(val) {
       return handleChangeItem({
-        stackable: e.target.checked
+        stackable: val
       });
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles.Button, {

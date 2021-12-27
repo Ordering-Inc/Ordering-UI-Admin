@@ -27,6 +27,8 @@ var _EnterprisePromotionSchedule = require("../EnterprisePromotionSchedule");
 
 var _EnterprisePromotionSpecficProducts = require("../EnterprisePromotionSpecficProducts");
 
+var _EnterprisePromotionSpecficCategory = require("../EnterprisePromotionSpecficCategory");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -93,9 +95,15 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     }
   };
 
-  var conditions = [// { id: 1, title: t('PRODUCTS_SPECIFIC', 'Product specific'), attribute: 'products' },
-  // { id: 2, title: t('CATEGORIE_SPECIFIC', 'Categories specific'), attribute: 'categories' },
-  {
+  var conditions = [{
+    id: 1,
+    title: t('PRODUCTS_SPECIFIC', 'Product specific'),
+    attribute: 'products'
+  }, {
+    id: 2,
+    title: t('CATEGORIE_SPECIFIC', 'Categories specific'),
+    attribute: 'categories'
+  }, {
     id: 3,
     title: t('SCHEDULE_LIMIT', 'Schedule limit'),
     attribute: 'schedule'
@@ -145,12 +153,13 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ConditionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONDITIONS', 'Conditions'))), conditions.map(function (condition, index) {
+    var _promotionState$promo;
+
     return /*#__PURE__*/_react.default.createElement(_styles2.ConditionItem, {
       key: index
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      checked: formState.changes[condition.attribute] || Array.isArray(promotionState.promotion[condition.attribute]) ? promotionState.promotion[condition.attribute].length !== 0 : promotionState.promotion[condition.attribute],
-      disabled: true
-    }), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, {
+    }, /*#__PURE__*/_react.default.createElement("div", null, (typeof formState.changes[condition.attribute] !== 'undefined' ? formState.changes[condition.attribute] : Array.isArray(promotionState.promotion[condition.attribute]) ? (_promotionState$promo = promotionState.promotion[condition.attribute]) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.length : promotionState.promotion[condition.attribute]) ? /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+      active: true
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, {
       onClick: function onClick() {
         return handlePromotionEdit(condition.attribute, condition.title);
       }
@@ -180,7 +189,15 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     onClose: function onClose() {
       return setOpenMultipleModal(false);
     }
-  }, selectedCondition === 'order_types_allowed' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionOrderTypes.EnterprisePromotionOrderTypes, _extends({}, props, {
+  }, selectedCondition === 'products' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionSpecficProducts.EnterprisePromotionSpecficProducts, _extends({}, props, {
+    onClickDone: function onClickDone() {
+      return handleClickSave();
+    }
+  })), selectedCondition === 'categories' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionSpecficCategory.EnterprisePromotionSpecficCategory, _extends({}, props, {
+    onClickDone: function onClickDone() {
+      return handleClickSave();
+    }
+  })), selectedCondition === 'order_types_allowed' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionOrderTypes.EnterprisePromotionOrderTypes, _extends({}, props, {
     onClickDone: function onClickDone() {
       return handleClickSave();
     }
@@ -189,10 +206,6 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       return handleClickSave();
     }
   })), selectedCondition === 'schedule' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionSchedule.EnterprisePromotionSchedule, _extends({}, props, {
-    onClickDone: function onClickDone() {
-      return handleClickSave();
-    }
-  })), selectedCondition === 'products' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionSpecficProducts.EnterprisePromotionSpecficProducts, _extends({}, props, {
     onClickDone: function onClickDone() {
       return handleClickSave();
     }

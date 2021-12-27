@@ -325,6 +325,7 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
     htmlFor: "estimated"
   }, t('ESTIMATED_PERSON', 'Estimated person')), /*#__PURE__*/_react.default.createElement(_styles2.TypeSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    notAsync: true,
     defaultValue: (_productState$estimat = productState === null || productState === void 0 ? void 0 : productState.estimated_person) !== null && _productState$estimat !== void 0 ? _productState$estimat : 'no_apply',
     options: estimatedPersons,
     onChange: function onChange(val) {

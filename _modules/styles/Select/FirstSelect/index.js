@@ -99,7 +99,14 @@ var Select = function Select(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (!open) return;
+    if (!open) {
+      if (isShowSearchBar) {
+        handleChangeSearch('');
+      }
+
+      return;
+    }
+
     document.addEventListener('click', closeSelect);
     return function () {
       return document.removeEventListener('click', closeSelect);

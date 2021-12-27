@@ -279,10 +279,10 @@ Object.defineProperty(exports, "DriversOnlineOfflineFilter", {
     return _DriversOnlineOfflineFilter.DriversOnlineOfflineFilter;
   }
 });
-Object.defineProperty(exports, "EnterprisePromontionListing", {
+Object.defineProperty(exports, "EnterprisePromotionListing", {
   enumerable: true,
   get: function get() {
-    return _EnterprisePromontionListing.EnterprisePromontionListing;
+    return _EnterprisePromotionListing.EnterprisePromotionListing;
   }
 });
 Object.defineProperty(exports, "ForgotPasswordForm", {
@@ -988,7 +988,7 @@ var _DriversManager = require("./components/DriversManager");
 
 var _DriversOnlineOfflineFilter = require("./components/DriversOnlineOfflineFilter");
 
-var _EnterprisePromontionListing = require("./components/EnterprisePromontionListing");
+var _EnterprisePromotionListing = require("./components/EnterprisePromotionListing");
 
 var _ForgotPasswordForm = require("./components/ForgotPasswordForm");
 

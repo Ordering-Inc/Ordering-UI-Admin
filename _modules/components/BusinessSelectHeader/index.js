@@ -59,7 +59,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       getPageBusinesses = props.getPageBusinesses,
       isOpen = props.isOpen,
       close = props.close,
-      changBusinessState = props.changBusinessState,
+      changeBusinessState = props.changeBusinessState,
       defaultPageSize = props.defaultPageSize;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -188,7 +188,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.OptionItem, {
       key: business.id,
       onClick: function onClick() {
-        return changBusinessState(business);
+        return changeBusinessState(business);
       }
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_50,c_limit'),
@@ -207,6 +207,8 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
 };
 
 var BusinessSelectHeader = function BusinessSelectHeader(props) {
+  var _props$defaultPropsTo;
+
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessessListingUI,
     asDashboard: true,
@@ -215,7 +217,7 @@ var BusinessSelectHeader = function BusinessSelectHeader(props) {
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
     isSearchByBusinessPhone: true,
-    propsToFetch: ['name', 'slug', 'logo', 'city']
+    propsToFetch: (_props$defaultPropsTo = props.defaultPropsToFetch) !== null && _props$defaultPropsTo !== void 0 ? _props$defaultPropsTo : ['name', 'slug', 'logo', 'city']
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardBusinessList, businessListingProps);

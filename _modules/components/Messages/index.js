@@ -105,6 +105,7 @@ var MessagesUI = function MessagesUI(props) {
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
+      setValue = _useForm.setValue,
       errors = _useForm.errors;
 
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
@@ -151,6 +152,47 @@ var MessagesUI = function MessagesUI(props) {
       load = _useState10[0],
       setLoad = _useState10[1];
 
+  var _useState11 = (0, _react.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      messageList = _useState12[0],
+      setMessageList = _useState12[1];
+
+  var adminMessageList = [{
+    key: 'message_1',
+    text: t('ADMIN_MESSAGE_1', 'admin_message_1')
+  }, {
+    key: 'message_2',
+    text: t('ADMIN_MESSAGE_2', 'admin_message_2')
+  }, {
+    key: 'message_3',
+    text: t('ADMIN_MESSAGE_3', 'admin_message_3')
+  }, {
+    key: 'message_4',
+    text: t('ADMIN_MESSAGE_4', 'admin_message_4')
+  }];
+  var storeMessageList = [{
+    key: 'message_1',
+    text: t('STORE_MESSAGE_1', 'store_message_1')
+  }, {
+    key: 'message_2',
+    text: t('STORE_MESSAGE_2', 'store_message_2')
+  }, {
+    key: 'message_3',
+    text: t('STORE_MESSAGE_3', 'store_message_3')
+  }, {
+    key: 'message_4',
+    text: t('STORE_MESSAGE_4', 'store_message_4')
+  }];
+
+  var handleClickQuickMessage = function handleClickQuickMessage(msg) {
+    var quickMsg = message ? "".concat(message, " ").concat(msg) : msg;
+    setValue('message', quickMsg);
+    setMessage(quickMsg);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (user.level === 0) setMessageList(adminMessageList);else if (user.level === 2) setMessageList(storeMessageList);else setMessageList([]);
+  }, [user]);
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -575,7 +617,15 @@ var MessagesUI = function MessagesUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
     src: (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
-  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), /*#__PURE__*/_react.default.createElement(_styles.Send, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), messageList.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, messageList.map(function (quickMessage, i) {
+    return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      key: i,
+      color: "secundaryDark",
+      onClick: function onClick() {
+        return handleClickQuickMessage(quickMessage.text);
+      }
+    }, quickMessage.text);
+  })), /*#__PURE__*/_react.default.createElement(_styles.Send, {
     onSubmit: handleSubmit(onSubmit),
     noValidate: true
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSendInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
