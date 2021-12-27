@@ -7,7 +7,7 @@ import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { ChevronDown } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { Button } from '../../styles'
-import { SelectBusinessProducts } from '../SelectBusinessProducts'
+import { SelectBusinessCategories } from '../SelectBusinessCategories'
 
 import {
   Container,
@@ -19,12 +19,12 @@ import {
   NoSelectedBusiness
 } from './styles'
 
-export const EnterprisePromotionSpecficProducts = (props) => {
+export const EnterprisePromotionSpecficCategory = (props) => {
   const {
     handleChangeItem,
     onClickDone,
-    selectedProductsIds,
-    setSelectedProductsIds
+    selectedCategoryIds,
+    setSelectedCategoryIds
   } = props
 
   const theme = useTheme()
@@ -40,16 +40,16 @@ export const EnterprisePromotionSpecficProducts = (props) => {
   }
 
   useEffect(() => {
-    const filteredProducts = []
-    selectedProductsIds.forEach(id => {
-      filteredProducts.push({ id: id, is_condition: true })
+    const filteredCategories = []
+    selectedCategoryIds.forEach(id => {
+      filteredCategories.push({ id: id, is_condition: true })
     })
-    handleChangeItem({ products: filteredProducts })
-  }, [selectedProductsIds])
+    handleChangeItem({ categories: filteredCategories })
+  }, [selectedCategoryIds])
 
   return (
     <Container>
-      <h1>{t('PRODUCT_SPECIFIC', 'Product specific')}</h1>
+      <h1>{t('CATEGORY_SPECIFIC', 'Category specific')}</h1>
       <Label>{t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')}</Label>
       <BusinessSelectorContainer>
         <SelectedBusinessWrapper
@@ -80,14 +80,14 @@ export const EnterprisePromotionSpecficProducts = (props) => {
       </BusinessSelectorContainer>
       <Label>{t('SELECT_PRODUCT', 'Select product')}</Label>
       {selectedBusiness ? (
-        <SelectBusinessProducts
+        <SelectBusinessCategories
           slug={selectedBusiness.slug}
-          selectedProductsIds={selectedProductsIds}
-          setSelectedProductsIds={setSelectedProductsIds}
+          selectedCategoryIds={selectedCategoryIds}
+          setSelectedCategoryIds={setSelectedCategoryIds}
         />
       ) : (
         <NoSelectedBusiness>
-          {t('SELECT_BUSINESS_BEFORE_PRODUCT', 'Please select a business before selecting your products.')}
+          {t('SELECT_BUSINESS_BEFORE_CATEGORY', 'Please select a business before selecting your cateogries.')}
         </NoSelectedBusiness>
       )}
 

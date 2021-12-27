@@ -75,6 +75,10 @@ export const InfoContent = styled.div`
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
+
+      &.name {
+        max-width: 70%;
+      }
     }
 
     > button {

@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react'
 import {
-  useUtils,
   useLanguage,
   useApi,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
 import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
-import { Button, Checkbox } from '../../styles'
+import { Checkbox } from '../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { SearchBar } from '../SearchBar'
@@ -17,8 +16,6 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  WrapperImage,
-  Image,
   SkeletonWrapper,
   SearchBarWrapper,
   ButtonGroup
@@ -28,12 +25,9 @@ const CategoryTreeNode = (props) => {
   const {
     category,
     index,
-    selectedProductsIds,
-    setSelectedProductsIds
+    selectedCategoryIds,
+    setSelectedCategoryIds
   } = props
-
-  const [{ optimizeImage }] = useUtils()
-  const theme = useTheme()
 
   const content = useRef(null)
   const checkboxRef = useRef(null)
@@ -51,35 +45,21 @@ const CategoryTreeNode = (props) => {
     )
   }
 
-  const isCheckedCategory = () => {
-    if (category?.products) {
-      const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
-      return productsIds.every(id => selectedProductsIds.includes(id))
-    } else {
-      return false
+  const handleChangeSelectCategory = (checked) => {
+    let categoryIds = []
+    if (category?.subcategories?.length > 0) {
+      category.subcategories.forEach(function iterate (category) {
+        categoryIds = [...categoryIds, category.id]
+        Array.isArray(category?.subcategories) && category.subcategories.forEach(iterate)
+      })
     }
-  }
-
-  const handleClickProduct = (product) => {
-    if (selectedProductsIds.includes(product.id)) {
-      const _selectedProductsIds = selectedProductsIds.filter(id => id !== product.id)
-      setSelectedProductsIds(_selectedProductsIds)
+    let _selectedCaetegoryIds = []
+    if (checked) {
+      _selectedCaetegoryIds = [...selectedCategoryIds, ...categoryIds, category.id].filter((value, index, self) => self.indexOf(value) === index)
     } else {
-      setSelectedProductsIds([...selectedProductsIds, product.id])
+      _selectedCaetegoryIds = selectedCategoryIds.filter(id => id !== category.id && !categoryIds.includes(id))
     }
-  }
-
-  const handleChangeSelectCategory = () => {
-    const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
-    const everyContain = productsIds.every(id => selectedProductsIds.includes(id))
-    let _selectedProductsIds = []
-    if (!everyContain) {
-      _selectedProductsIds = [...selectedProductsIds, ...productsIds].filter((value, index, self) => self.indexOf(value) === index)
-      setSelectedProductsIds(_selectedProductsIds)
-    } else {
-      _selectedProductsIds = selectedProductsIds.filter(id => !productsIds.includes(id))
-      setSelectedProductsIds(_selectedProductsIds)
-    }
+    setSelectedCategoryIds(_selectedCaetegoryIds)
   }
 
   return (
@@ -94,8 +74,8 @@ const CategoryTreeNode = (props) => {
           <div>
             <Checkbox
               ref={categoryRef}
-              checked={isCheckedCategory()}
-              onChange={() => handleChangeSelectCategory()}
+              checked={selectedCategoryIds.includes(category.id)}
+              onChange={e => handleChangeSelectCategory(e.target.checked)}
             />
             <span>{category.name}</span>
           </div>
@@ -107,25 +87,6 @@ const CategoryTreeNode = (props) => {
           maxHeight: !setActive && '0px'
         }}
       >
-        {category?.products.map(product => (
-          <AccordionItem
-            key={product.id}
-            margin={20 * (index + 1)}
-            isProduct
-          >
-            <div>
-              <Checkbox
-                ref={checkboxRef}
-                checked={selectedProductsIds.includes(product.id)}
-                onChange={() => handleClickProduct(product)}
-              />
-              <WrapperImage>
-                <Image bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_50,c_limit')} />
-              </WrapperImage>
-              <span>{product.name}</span>
-            </div>
-          </AccordionItem>
-        ))}
         {(category?.subcategories && category?.subcategories?.length > 0) && (
           category.subcategories.map(subCategory => (
             <CategoryTreeNode
@@ -141,19 +102,18 @@ const CategoryTreeNode = (props) => {
   )
 }
 
-const SelectBusinessProductsUI = (props) => {
+const SelectBusinessCategoriesUI = (props) => {
   const {
     businessState,
     searchValue,
     handleChangeSearch,
 
-    selectedProductsIds,
-    setSelectedProductsIds,
-
+    selectedCategoryIds,
+    setSelectedCategoryIds,
     categoryState
   } = props
 
-  const [, t] = useLanguage()
+  // const [, t] = useLanguage()
 
   return (
     <Container>
@@ -196,8 +156,8 @@ const SelectBusinessProductsUI = (props) => {
             key={category.id}
             index={0}
             category={category}
-            selectedProductsIds={selectedProductsIds}
-            setSelectedProductsIds={setSelectedProductsIds}
+            selectedCategoryIds={selectedCategoryIds}
+            setSelectedCategoryIds={setSelectedCategoryIds}
           />
         ))
       )}
@@ -205,14 +165,14 @@ const SelectBusinessProductsUI = (props) => {
   )
 }
 
-export const SelectBusinessProducts = (props) => {
+export const SelectBusinessCategories = (props) => {
   const [ordering] = useApi()
   const [isInitialRender, setIsInitialRender] = useState(false)
 
   const businessProductslistingProps = {
     ...props,
     ordering,
-    UIComponent: SelectBusinessProductsUI,
+    UIComponent: SelectBusinessCategoriesUI,
     isInitialRender,
     isAllCategoryProducts: true,
     isSearchByName: true,

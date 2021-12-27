@@ -37,9 +37,15 @@ export const OrderContactInformation = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentCustomer, setCurrentCustomer] = useState(null)
 
+  const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 16, 17]
+
   const handleReviewCustomer = (customer) => {
     setCurrentCustomer(customer)
     setIsModalOpen(true)
+  }
+
+  const handleCustomerReviewed = () => {
+    setIsModalOpen(false)
   }
 
   return (
@@ -58,7 +64,7 @@ export const OrderContactInformation = (props) => {
                 </PhotoWrapper>
                 <InfoContent>
                   <div>
-                    <p>{order?.business?.name}</p>
+                    <p className='name'>{order?.business?.name}</p>
                     {order?.business?.phone && (
                       <IconButton
                         onClick={() => window.open(`tel:${order.business.phone}`)}
@@ -121,7 +127,7 @@ export const OrderContactInformation = (props) => {
             </PhotoWrapper>
             <InfoContent>
               <div>
-                <p>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
+                <p className='name'>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
                 {order?.customer?.cellphone && (
                   <IconButton
                     onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}
@@ -130,11 +136,13 @@ export const OrderContactInformation = (props) => {
                   </IconButton>
                 )}
               </div>
-              <ReviewButton
-                // onClick={() => handleReviewCustomer(order?.customer)}
-              >
-                {t('REVIEW', 'Review')}
-              </ReviewButton>
+              {!order?.user_review && pastOrderStatuses.includes(order?.status) && (
+                <ReviewButton
+                  onClick={() => handleReviewCustomer(order?.customer)}
+                >
+                  {t('REVIEW', 'Review')}
+                </ReviewButton>
+              )}
             </InfoContent>
             <ChevronDown className='down-arrow' />
           </CustomerInfo>
@@ -244,6 +252,7 @@ export const OrderContactInformation = (props) => {
         <ReviewCustomer
           order={order}
           customer={currentCustomer}
+          onClose={() => handleCustomerReviewed()}
         />
       </Modal>
     </>

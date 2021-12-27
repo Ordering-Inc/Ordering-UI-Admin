@@ -30,6 +30,7 @@ export const EnterprisePromotionDetails = (props) => {
   const [selectedBusinessIds, setSelectedBusinessIds] = useState([])
   const [selectedSitesIds, setSelectedSitesIds] = useState([])
   const [selectedProductsIds, setSelectedProductsIds] = useState([])
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState([])
 
   /**
    * Clean formState
@@ -309,6 +310,8 @@ export const EnterprisePromotionDetails = (props) => {
       setSelectedSitesIds(sitesIds || [])
       const _selectedProductsIds = promotion?.products.reduce((ids, product) => [...ids, product.id], [])
       setSelectedProductsIds(_selectedProductsIds)
+      const _selectedCategoryIds = promotion?.categories.reduce((ids, category) => [...ids, category.id], [])
+      setSelectedCategoryIds(_selectedCategoryIds)
     }
     setPromotionState({ ...promotionState, promotion: promotion })
   }, [promotion])
@@ -327,6 +330,8 @@ export const EnterprisePromotionDetails = (props) => {
             selectedSitesIds={selectedSitesIds}
             selectedProductsIds={selectedProductsIds}
             setSelectedProductsIds={setSelectedProductsIds}
+            selectedCategoryIds={selectedCategoryIds}
+            setSelectedCategoryIds={setSelectedCategoryIds}
             handleChangeImage={handleChangeImage}
             handleChangeInput={handleChangeInput}
             handleUpdateClick={handleUpdateClick}

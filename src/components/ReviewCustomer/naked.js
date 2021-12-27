@@ -20,7 +20,7 @@ export const ReviewCustomer = (props) => {
     qualification: 0,
     comment: '',
     order_id: order?.id,
-    user_id: order?.customer?.id
+    user_id: order?.customer_id
   })
   const [actionState, setActionState] = useState({ loading: false, error: null })
 
@@ -30,7 +30,7 @@ export const ReviewCustomer = (props) => {
   const handleSendCustomerReview = async () => {
     setActionState({ loading: true, error: null })
     try {
-      const response = await fetch(`${ordering.root}/users/${order?.customer?.id}/user_reviews`, {
+      const response = await fetch(`${ordering.root}/users/${order?.customer_id}/user_reviews`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${session.token}`,
@@ -42,6 +42,7 @@ export const ReviewCustomer = (props) => {
       if (!error) {
         setActionState({ ...reviewState, loading: false })
         showToast(ToastType.Success, t('CUSTOMER_REVIEW_SUCCESS_CONTENT', 'Thank you, Customer review successfully submitted!'))
+        props.onClose && props.onClose()
       } else {
         setActionState({ loading: false, error: result })
       }
