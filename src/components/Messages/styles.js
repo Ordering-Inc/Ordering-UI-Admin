@@ -312,7 +312,7 @@ export const SendForm = styled.div`
 export const Send = styled.form`
   align-items: center;
   display: flex;
-  margin-top: 20px;
+  margin-top: 8px;
   height: auto;
   max-width: 1200px;
   justify-content: space-between;
@@ -577,4 +577,24 @@ export const SendToContainer = styled.div`
 export const MessageSender = styled.p`
   margin-bottom: 5px;
   text-align: center;
+`
+
+export const QuickMessageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+
+  button {
+    margin-bottom: 6px;
+    margin-right: 12px;
+    line-height: 22px;
+    font-size: 12px;
+    padding: 0 10px;
+
+    ${props => props.theme.rtl && css`
+      margin-right: 0px;
+      margin-left: 12px;
+    `}
+  }
 `
