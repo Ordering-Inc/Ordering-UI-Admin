@@ -39,23 +39,26 @@ const ReportsSalesUI = (props) => {
   const [isBrandFilter, setIsBrandFilter] = useState(false)
 
   const generateData = () => {
-    const values = reportData?.content?.dataset?.dataset?.map((item, index) => {
-      const list = []
-      if (item?.data?.length > 0) {
-        for (const value of item?.data) {
-          list.push(value.y)
+    let values = []
+    if (reportData?.content?.dataset?.dataset?.length > 0) {
+      values = reportData?.content?.dataset?.dataset?.map((item, index) => {
+        const list = []
+        if (item?.data?.length > 0) {
+          for (const value of item?.data) {
+            list.push(value.y)
+          }
         }
-      }
-      return {
-        label: item.label,
-        data: list,
-        fill: false,
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: lighten(index / 10, '#2C7BE5'),
-        tension: 0.4,
-        borderWidth: 3
-      }
-    })
+        return {
+          label: item.label,
+          data: list,
+          fill: false,
+          backgroundColor: 'rgba(75,192,192,0.2)',
+          borderColor: lighten(index / 10, '#2C7BE5'),
+          tension: 0.4,
+          borderWidth: 3
+        }
+      })
+    }
     return values
   }
 
