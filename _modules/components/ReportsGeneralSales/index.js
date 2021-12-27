@@ -13,6 +13,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
 
+var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
+
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
 
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
@@ -85,6 +87,11 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       isBrandFilter = _useState4[0],
       setIsBrandFilter = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isBusinessFilter = _useState6[0],
+      setIsBusinessFilter = _useState6[1];
 
   var tableRef = (0, _react.useRef)(null);
 
@@ -177,7 +184,11 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
     onClick: function onClick() {
       return setIsBrandFilter(true);
     }
-  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setIsBusinessFilter(true);
+    }
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DistanceTitleBlock, {
@@ -248,6 +259,20 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
     onClose: function onClose() {
       return setIsBrandFilter(false);
     }
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('BUSINESSES', 'Businesses'),
+    open: isBusinessFilter,
+    onClose: function onClose() {
+      return setIsBusinessFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AnalyticsBusinessFilter.AnalyticsBusinessFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsBusinessFilter(false);
+    },
+    isFranchise: true
   }))));
 };
 

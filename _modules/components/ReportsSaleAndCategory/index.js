@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ReportsSaleAndCategory = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
@@ -15,11 +17,25 @@ var _reactChartjs = require("react-chartjs-2");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _Buttons = require("../../styles/Buttons");
+
+var _Modal = require("../Modal");
+
+var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
+
+var _ReportsBrandFilter = require("../ReportsBrandFilter");
+
 var _styles = require("./styles");
 
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -42,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsSaleAndCategoryUI = function ReportsSaleAndCategoryUI(props) {
-  var _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content3$3, _reportData$content4, _reportData$content4$, _reportData$content4$2, _reportData$content4$3, _reportData1$content, _reportData1$content$, _reportData1$content$2, _reportData1$content$3, _reportData1$content2, _reportData1$content3, _reportData1$content4, _reportData1$content5;
+  var _filterList$franchise, _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content3$3, _reportData$content4, _reportData$content4$, _reportData$content4$2, _reportData$content4$3, _reportData1$content, _reportData1$content$, _reportData1$content$2, _reportData1$content$3, _reportData1$content2, _reportData1$content3, _reportData1$content4, _reportData1$content5;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -52,6 +68,16 @@ var ReportsSaleAndCategoryUI = function ReportsSaleAndCategoryUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isBusinessFilter = _useState2[0],
+      setIsBusinessFilter = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isBrandFilter = _useState4[0],
+      setIsBrandFilter = _useState4[1];
 
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
@@ -213,7 +239,15 @@ var ReportsSaleAndCategoryUI = function ReportsSaleAndCategoryUI(props) {
     },
     pointRadius: 0
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.ReportsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  return /*#__PURE__*/_react.default.createElement(_styles.ReportsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setIsBrandFilter(true);
+    }
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return setIsBusinessFilter(true);
+    }
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.ChartListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
@@ -238,7 +272,34 @@ var ReportsSaleAndCategoryUI = function ReportsSaleAndCategoryUI(props) {
   }) : (reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content2 = reportData1.content) === null || _reportData1$content2 === void 0 ? void 0 : (_reportData1$content3 = _reportData1$content2.dataset) === null || _reportData1$content3 === void 0 ? void 0 : (_reportData1$content4 = _reportData1$content3.dataset) === null || _reportData1$content4 === void 0 ? void 0 : (_reportData1$content5 = _reportData1$content4.data) === null || _reportData1$content5 === void 0 ? void 0 : _reportData1$content5.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data1,
     options: options
-  }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data'))))));
+  }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('BUSINESSES', 'Businesses'),
+    open: isBusinessFilter,
+    onClose: function onClose() {
+      return setIsBusinessFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AnalyticsBusinessFilter.AnalyticsBusinessFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsBusinessFilter(false);
+    },
+    isFranchise: true
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('BRAND', 'Brand'),
+    open: isBrandFilter,
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
+    }
+  }))));
 };
 
 var ReportsSaleAndCategory = function ReportsSaleAndCategory(props) {
