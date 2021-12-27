@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Button, Checkbox } from '../../styles'
-import { Pencil } from 'react-bootstrap-icons'
+import { Button } from '../../styles'
+import { Pencil, Check2 } from 'react-bootstrap-icons'
 import { Modal } from '../Modal'
 import { EnterprisePromotionEditCondition } from '../EnterprisePromotionEditCondition'
 import { EnterprisePromotionOrderTypes } from '../EnterprisePromotionOrderTypes'
 import { EnterprisePromotionPaymethods } from '../EnterprisePromotionPaymethods'
 import { EnterprisePromotionSchedule } from '../EnterprisePromotionSchedule'
 import { EnterprisePromotionSpecficProducts } from '../EnterprisePromotionSpecficProducts'
+import { EnterprisePromotionSpecficCategory } from '../EnterprisePromotionSpecficCategory'
 
 import {
   ConditionsContainer,
   Header,
   ConditionItem,
-  EditButton
+  EditButton,
+  CheckboxWrapper
 } from './styles'
 
 export const EnterprisePromotionConditions = (props) => {
@@ -49,8 +51,8 @@ export const EnterprisePromotionConditions = (props) => {
   }
 
   const conditions = [
-    // { id: 1, title: t('PRODUCTS_SPECIFIC', 'Product specific'), attribute: 'products' },
-    // { id: 2, title: t('CATEGORIE_SPECIFIC', 'Categories specific'), attribute: 'categories' },
+    { id: 1, title: t('PRODUCTS_SPECIFIC', 'Product specific'), attribute: 'products' },
+    { id: 2, title: t('CATEGORIE_SPECIFIC', 'Categories specific'), attribute: 'categories' },
     { id: 3, title: t('SCHEDULE_LIMIT', 'Schedule limit'), attribute: 'schedule' },
     { id: 3, title: t('OFFER_MAX_AMOUNT_TIMES', 'Max. amount of times that can be used '), attribute: 'limit' },
     { id: 4, title: t('OFFER_LIMIT_TIMES_PER_USER', 'Max. amount of times that can be used per user'), attribute: 'limit_per_user' },
@@ -81,15 +83,19 @@ export const EnterprisePromotionConditions = (props) => {
         {conditions.map((condition, index) => (
           <ConditionItem key={index}>
             <div>
-              <Checkbox
-                checked={
-                  formState.changes[condition.attribute] ||
-                    Array.isArray(promotionState.promotion[condition.attribute])
-                    ? promotionState.promotion[condition.attribute].length !== 0
-                    : promotionState.promotion[condition.attribute]
-                }
-                disabled
-              />
+              {
+                (typeof formState.changes[condition.attribute] !== 'undefined'
+                  ? formState.changes[condition.attribute]
+                  : Array.isArray(promotionState.promotion[condition.attribute])
+                    ? promotionState.promotion[condition.attribute]?.length
+                    : promotionState.promotion[condition.attribute])
+                  ? (
+                    <CheckboxWrapper active>
+                      <Check2 />
+                    </CheckboxWrapper>
+                  )
+                  : <CheckboxWrapper />
+              }
               <span>{condition.title}</span>
             </div>
             <EditButton
@@ -127,6 +133,18 @@ export const EnterprisePromotionConditions = (props) => {
         open={openMultipleModal}
         onClose={() => setOpenMultipleModal(false)}
       >
+        {selectedCondition === 'products' && (
+          <EnterprisePromotionSpecficProducts
+            {...props}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
+        {selectedCondition === 'categories' && (
+          <EnterprisePromotionSpecficCategory
+            {...props}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
         {selectedCondition === 'order_types_allowed' && (
           <EnterprisePromotionOrderTypes
             {...props}
@@ -141,12 +159,6 @@ export const EnterprisePromotionConditions = (props) => {
         )}
         {selectedCondition === 'schedule' && (
           <EnterprisePromotionSchedule
-            {...props}
-            onClickDone={() => handleClickSave()}
-          />
-        )}
-        {selectedCondition === 'products' && (
-          <EnterprisePromotionSpecficProducts
             {...props}
             onClickDone={() => handleClickSave()}
           />

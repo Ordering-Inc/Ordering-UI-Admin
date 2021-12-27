@@ -234,6 +234,7 @@ const ProductDetailsAdvancedUI = (props) => {
       <LabelCustom htmlFor='estimated'>{t('ESTIMATED_PERSON', 'Estimated person')}</LabelCustom>
       <TypeSelectWrapper>
         <Select
+          notAsync
           defaultValue={productState?.estimated_person ?? 'no_apply'}
           options={estimatedPersons}
           onChange={(val) => handleClickProperty('estimated_person', val === 'no_apply' ? null : val)}
