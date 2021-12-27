@@ -5,6 +5,7 @@ import {
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Download } from 'react-bootstrap-icons'
@@ -39,6 +40,7 @@ const ReportsGeneralSalesUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [isBusinessFilter, setIsBusinessFilter] = useState(false)
 
   const tableRef = useRef(null)
 
@@ -116,6 +118,11 @@ const ReportsGeneralSalesUI = (props) => {
             onClick={() => setIsBrandFilter(true)}
           >
             {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
+          </Button>
+          <Button
+            onClick={() => setIsBusinessFilter(true)}
+          >
+            {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
         </BrandBusinessWrapper>
         <CalendarWrapper>
@@ -212,6 +219,20 @@ const ReportsGeneralSalesUI = (props) => {
       >
         <ReportsBrandFilter
           {...props} onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('BUSINESSES', 'Businesses')}
+        open={isBusinessFilter}
+        onClose={() => setIsBusinessFilter(false)}
+      >
+        <AnalyticsBusinessFilter
+          {...props}
+          onClose={() => setIsBusinessFilter(false)}
+          isFranchise
         />
       </Modal>
     </ReportsBusinessSpendContainer>
