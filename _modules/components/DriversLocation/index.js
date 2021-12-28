@@ -1,7 +1,5 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -22,6 +20,8 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -88,7 +88,7 @@ var DriversLocation = function DriversLocation(props) {
     var bounds = new window.google.maps.LatLngBounds();
 
     if (showDrivers.length === 1) {
-      setMapCenter(showDrivers[0].location ? showDrivers[0].location : defaultCenter);
+      setMapCenter(showDrivers[0].location !== null && _typeof(showDrivers[0].location) === 'object' ? showDrivers[0].location : defaultCenter);
       setMapZoom(mapZoom);
       return;
     }
@@ -99,7 +99,7 @@ var DriversLocation = function DriversLocation(props) {
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var driver = _step.value;
-        var marker = driver.location !== null ? driver.location : defaultCenter;
+        var marker = driver.location !== null && _typeof(driver.location) === 'object' ? driver.location : defaultCenter;
         var newPoint = new window.google.maps.LatLng(marker.lat, marker.lng);
         bounds.extend(newPoint);
       }
@@ -187,8 +187,8 @@ var DriversLocation = function DriversLocation(props) {
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
       driver: driver,
-      lat: driver.location !== null ? driver.location.lat : defaultCenter.lat,
-      lng: driver.location !== null ? driver.location.lng : defaultCenter.lng
+      lat: driver.location !== null && _typeof(driver.location) === 'object' ? driver.location.lat : defaultCenter.lat,
+      lng: driver.location !== null && _typeof(driver.location) === 'object' ? driver.location.lng : defaultCenter.lng
     });
   })));
 };
