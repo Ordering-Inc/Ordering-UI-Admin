@@ -53,7 +53,7 @@ export const DeliveriesLocation = (props) => {
         return
       }
       for (const driver of driversList.drivers) {
-        const marker = driver.location !== null ? driver.location : defaultCenter
+        const marker = (driver.location !== null && typeof driver.location === 'object') ? driver.location : defaultCenter
         const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       }
@@ -70,7 +70,7 @@ export const DeliveriesLocation = (props) => {
       bounds.extend(newPoint)
 
       if (interActionMapOrder.driver !== null) {
-        marker = interActionOrderDriverLocation !== null ? interActionOrderDriverLocation : defaultCenter
+        marker = (interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object') ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       }
@@ -143,8 +143,8 @@ export const DeliveriesLocation = (props) => {
               <DriverMapMarkerAndInfo
                 key={driver.id}
                 driver={driver}
-                lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
-                lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
+                lat={(driver.location !== null && typeof driver.location === 'object') ? driver.location.lat : defaultCenter.lat}
+                lng={(driver.location !== null && typeof driver.location === 'object') ? driver.location.lng : defaultCenter.lng}
               />
             ))}
 
@@ -168,8 +168,8 @@ export const DeliveriesLocation = (props) => {
           {interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
             <InterActOrderMarker
               driver={interActionMapOrder?.driver}
-              lat={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
-              lng={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lng : defaultCenter.lng}
+              lat={(interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object') ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
+              lng={(interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object') ? interActionOrderDriverLocation?.lng : defaultCenter.lng}
               image={interActionMapOrder?.driver?.photo}
             />
           )}
