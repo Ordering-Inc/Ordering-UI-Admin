@@ -70,7 +70,7 @@ var ReportsOrdersUI = function ReportsOrdersUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       dataOptions = _useState2[0],
       setDataOptions = _useState2[1];
@@ -226,7 +226,7 @@ var ReportsOrdersUI = function ReportsOrdersUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.dataset) === null || _reportData$content11 === void 0 ? void 0 : (_reportData$content12 = _reportData$content11.dataset) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.data) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.dataset) === null || _reportData$content11 === void 0 ? void 0 : (_reportData$content12 = _reportData$content11.dataset) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.data) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.length) > 0 && dataOptions ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
     data: dataOptions,
     options: options
   }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
