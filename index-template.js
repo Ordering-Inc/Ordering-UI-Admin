@@ -220,12 +220,12 @@ const RouteApp = () => {
   const [configFile, setConfigFile] = useState({
     project: localStorage.getItem('project') !== null ? localStorage.getItem('project') : null,
     api: {
-      url: 'https://alsea-api-production.ordering.co',
+      url: 'https://apiv4.ordering.co',
       language: 'en',
       version: 'v400'
     },
     socket: {
-      url: 'https://alsea-socket-production.ordering.co'
+      url: 'https://socket.ordering.co'
     }
   })
 
