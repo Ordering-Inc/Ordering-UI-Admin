@@ -24,7 +24,6 @@ import {
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { Modal } from '../Modal'
-import { lighten } from 'polished'
 
 const ReportsOrdersUI = (props) => {
   const {
@@ -39,35 +38,32 @@ const ReportsOrdersUI = (props) => {
   const [isBrandFilter, setIsBrandFilter] = useState(false)
 
   const generateData = () => {
-    let values = []
-    if (reportData?.content?.dataset?.dataset?.length > 0) {
-      values = reportData?.content?.dataset?.dataset?.map((item, index) => {
-        const list = []
-        if (item?.data?.length > 0) {
-          for (const value of item?.data) {
-            list.push(value.y)
-          }
-        }
-        return {
-          label: item.label,
-          data: list,
-          fill: false,
-          backgroundColor: 'rgba(75,192,192,0.2)',
-          borderColor: lighten(index / 10, '#2C7BE5'),
-          tension: 0.4,
-          borderWidth: 3
-        }
-      })
+    const list = []
+    const newData = []
+    if (reportData?.content?.dataset?.dataset?.data?.length > 0) {
+      for (const value of reportData?.content?.dataset?.dataset?.data) {
+        list.push(value.y)
+      }
     }
-    return values
+    const values = {
+      label: reportData?.content?.dataset?.dataset.label,
+      data: list,
+      fill: false,
+      backgroundColor: 'rgba(75,192,192,0.2)',
+      borderColor: '#2C7BE5',
+      tension: 0.4,
+      borderWidth: 3
+    }
+    newData.push(values)
+    return newData
   }
 
   const generateLabel = () => {
-    const values = []
-    reportData.content.dataset.dataset[0].data.forEach(data => {
-      values.push(data.x)
+    const labels = []
+    reportData.content.dataset.dataset.data.forEach(data => {
+      labels.push(data.x)
     })
-    return values
+    return labels
   }
 
   const options = {
@@ -98,9 +94,9 @@ const ReportsOrdersUI = (props) => {
   }
 
   const downloadCSV = () => {
-    if (reportData?.content?.dataset?.dataset[0]?.data && reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
+    if (reportData?.content?.dataset?.dataset?.data && reportData?.content?.dataset?.dataset?.data?.length > 0) {
       let csv = `${t('TIME', 'Time')}, ${t('ORDERS', 'Orders')}\n`
-      for (const row of reportData?.content?.dataset?.dataset[0]?.data) {
+      for (const row of reportData?.content?.dataset?.dataset?.data) {
         csv += row.x + ','
         csv += `${row.y},`
         csv += '\n'
@@ -118,7 +114,7 @@ const ReportsOrdersUI = (props) => {
   }
 
   useEffect(() => {
-    if (reportData?.content?.dataset?.dataset[0]?.data && reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
+    if (reportData?.content?.dataset?.dataset?.data && reportData?.content?.dataset?.dataset?.data?.length > 0) {
       const defaultData = {
         labels: generateLabel(),
         datasets: generateData()
@@ -151,7 +147,7 @@ const ReportsOrdersUI = (props) => {
         </CalendarWrapper>
       </ButtonActionList>
       <ChartBlockWrapper>
-        <ChartTitleBlock active={reportData?.content?.dataset?.dataset[0]?.data?.length > 0}>
+        <ChartTitleBlock active={reportData?.content?.dataset?.dataset?.data?.length > 0}>
           <h2>{t('ORDERS', 'Orders')}</h2>
           <Download onClick={() => downloadCSV()} />
         </ChartTitleBlock>
@@ -159,7 +155,7 @@ const ReportsOrdersUI = (props) => {
           {reportData?.loading ? (
             <Skeleton height={350} />
           ) : (
-            reportData?.content?.dataset?.dataset[0]?.data?.length > 0 ? (
+            reportData?.content?.dataset?.dataset?.data?.length > 0 ? (
               <Line data={dataOptions} options={options} />
             ) : (
               <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
