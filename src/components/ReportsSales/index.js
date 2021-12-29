@@ -33,7 +33,7 @@ const ReportsSalesUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [dataOptions, setDataOptions] = useState([])
+  const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
 
@@ -155,7 +155,7 @@ const ReportsSalesUI = (props) => {
           {reportData?.loading ? (
             <Skeleton height={350} />
           ) : (
-            reportData?.content?.dataset?.dataset?.data?.length > 0 ? (
+            (reportData?.content?.dataset?.dataset?.data?.length > 0 && dataOptions) ? (
               <Line data={dataOptions} options={options} />
             ) : (
               <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
