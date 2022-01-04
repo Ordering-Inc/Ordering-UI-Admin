@@ -28,13 +28,13 @@ export const BusinessScheduleCopyTimes = (props) => {
   const popperElement = useRef()
 
   const daysOptions = [
-    { value: 0, content: t('SUNDAY', 'Sunday') },
-    { value: 1, content: t('MONDAY', 'Monday') },
-    { value: 2, content: t('TUESDAY', 'Tuesday') },
-    { value: 3, content: t('WEDNESDAU', 'Wednesday') },
-    { value: 4, content: t('THURSDAY', 'Thursday') },
-    { value: 5, content: t('FRIDAY', 'Friday') },
-    { value: 6, content: t('SATUDAY', 'Saturday') }
+    { value: 0, content: t('DAY7', 'Sunday') },
+    { value: 1, content: t('DAY1', 'Monday') },
+    { value: 2, content: t('DAY2', 'Tuesday') },
+    { value: 3, content: t('DAY3', 'Wednesday') },
+    { value: 4, content: t('DAY4', 'Thursday') },
+    { value: 5, content: t('DAY5', 'Friday') },
+    { value: 6, content: t('DAY6', 'Saturday') }
   ]
 
   const handleClickOutside = (e) => {
@@ -77,7 +77,7 @@ export const BusinessScheduleCopyTimes = (props) => {
       </HeaderItem>
       {open && (
         <PopoverBody ref={popperElement}>
-          <Title>{t('Copy times to')}</Title>
+          <Title>{t('COPY_TIMES_TO', 'Copy times to')}</Title>
           <PopoverList>
             {daysOptions.map(option => (
               <React.Fragment key={option.value}>

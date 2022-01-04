@@ -158,7 +158,7 @@ export const InvoiceGeneral = (props) => {
                     options={businessOptions}
                     className='select'
                     defaultValue={invocing?.business}
-                    placeholder={t('BUSINESS_NAME', 'Business name')}
+                    placeholder={t('EXPORT_BUSINESS_NAME', 'Business name')}
                     onChange={(value) => handleChangeFormState('business', value)}
                     isShowSearchBar
                     searchBarIsCustomLayout

@@ -140,7 +140,7 @@ export const OrdersCards = (props) => {
                 onClick={(e) => handleOrderClick(e, order)}
               >
                 <OrderHeader>
-                  <h2>{t('ORDER_NO', 'Order No.')} {order?.id}</h2>
+                  <h2>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</h2>
                   <p>{getOrderStatus(order.status)?.value}</p>
                   <div>
                     <p>

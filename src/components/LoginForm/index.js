@@ -105,7 +105,7 @@ const LoginFormUI = (props) => {
           <h1>{t('WELCOME', 'Welcome!')}</h1>
           <p>
             {t(
-              'LET’START_TO_ADMIN_YOUR_BUSINESS_NOW',
+              'SUBTITLE_ADMIN_LOGIN',
               'Let’s start to admin your business now'
             )}
           </p>

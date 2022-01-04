@@ -155,7 +155,7 @@ const BusinessFormDetailsUI = (props) => {
           </ExamineClick>
         </LogoImage>
         <InputWrapper>
-          <label>{t('BUSINESS_NAME', 'Business name')}</label>
+          <label>{t('EXPORT_BUSINESS_NAME', 'Business name')}</label>
           <Input
             name='name'
             placeholder={t('Name', 'name')}

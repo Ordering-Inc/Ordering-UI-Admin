@@ -310,7 +310,7 @@ export const MessagesUI = (props) => {
               {isChat && (
                 <ChatHeader>
                   <OrderNumber>
-                    {t('ORDER_NO', 'Order No')}. {order.id}
+                    {t('INVOICE_ORDER_NO', 'Order No')} {order.id}
                   </OrderNumber>
                   <ImageContainer>
                     {user?.level !== 2 && (

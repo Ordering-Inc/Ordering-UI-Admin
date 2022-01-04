@@ -24,7 +24,8 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   h1 {
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 700;
     color: ${props => props.theme.colors.headingColor};
   }
 `
@@ -67,6 +68,7 @@ export const Tab = styled.div`
   cursor: pointer;
   color: ${props => props.theme.colors?.headingColor};
   white-space: nowrap;
+  font-size: 14px;
 
   ${({ active }) => active && css`
     border-bottom: 3px solid;
@@ -74,6 +76,6 @@ export const Tab = styled.div`
   `}
 
   ${({ active }) => !active && css`
-    color: #909BA9;
+    color: ${props => props.theme.colors.headingColor};
   `}
 `

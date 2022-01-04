@@ -35,12 +35,12 @@ export const Support = (props) => {
       </HeaderTitleContainer>
       <HeaderContentWrapper>
         <h1>{t('SUPPORT_TITLE_START', 'Which kind of')} <span>{t('SUPPORT_TITLE_END', 'assistance do you need?')}</span></h1>
-        <p>{t('CHOOSE_ASISTANCE_LOOKING_FOR_BUTTON_BELLOW', 'Choose the asistance you are looking for in the buttons below.')}</p>
+        <p>{t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.')}</p>
       </HeaderContentWrapper>
       <SupportList>
         <SupportContent>
-          <h3>{t('CONTACT_OUR', 'Contact our')} <span>{t('SALES_TEAM', 'Sales team')}</span></h3>
-          <p>{t('ASK_PRICING_WORK_BUDGET_MONEY_TALK', 'Ask about pricing, custom work, budget and more money talk')}</p>
+          <h3>{t('CONTACT_SALES_TEAM', 'Contact our Sales Team')}</h3>
+          <p>{t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')}</p>
           <ActionBtnWrapper>
             <Button
               borderRadius='7.6px'
@@ -53,8 +53,8 @@ export const Support = (props) => {
           </ActionBtnWrapper>
         </SupportContent>
         <SupportContent>
-          <h3>{t('CONTACT_OUR', 'Contact our')} <span>{t('SUPPORT_TEAM', 'Support team')}</span></h3>
-          <p>{t('ASK_ORDERING_INSTALLATION_PRODUCTS_FEATURES', 'Ask about your ordering installation, products and features')}</p>
+          <h3>{t('CONTACT_SUPPORT_TEAM', 'Contact our Support Team')}</h3>
+          <p>{t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')}</p>
           <ActionBtnWrapper>
             <Button
               borderRadius='7.6px'
