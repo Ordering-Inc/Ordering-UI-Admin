@@ -173,7 +173,7 @@ export const AnalyticsOrdersStatus = (props) => {
         {orderStatusList?.loading ? (
           <Skeleton width={80} />
         ) : (
-          <p>{t('ORDERS_TOTALS', 'Orders totals')}</p>
+          <p>{t('ORDERS', 'Orders')} {t('TOTALS', 'totals')}</p>
         )}
       </OrderStatusFooter>
     </Container>

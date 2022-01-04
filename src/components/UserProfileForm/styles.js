@@ -67,6 +67,9 @@ export const Image = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    > div {
+      height: 100%;
+    }
   };
 
   img{

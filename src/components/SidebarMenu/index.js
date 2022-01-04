@@ -372,7 +372,8 @@ export const SidebarMenu = (props) => {
                           location.pathname === '/intelligence/business' ||
                           location.pathname === '/intelligence/drivers' ||
                           location.pathname.includes('/intelligence/reviews') ||
-                          location.pathname === '/intelligence/invoice'
+                          location.pathname === '/intelligence/invoice' ||
+                          location.pathname === '/intelligence/reports'
                         }
                       >
                         <BarChartLineIcon />
