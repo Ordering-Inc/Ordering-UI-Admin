@@ -108,7 +108,7 @@ const WebhookListUI = (props) => {
             color='lightPrimary'
             onClick={() => setIsAddMode(true)}
           >
-            {t('ADD_WEBHOOK', 'Add webhook')}
+            {t('ADD_NEW_WEBHOOK', 'Add webhook')}
           </Button>
         </Header>
         <SearchBar

@@ -120,7 +120,7 @@ const PluginListUI = (props) => {
         <PluginsTable>
           <thead>
             <tr>
-              <th>{t('PLUGIN', 'Plugin')}</th>
+              <th>{t('PLUGINS', 'Plugins')}</th>
               <th>{t('ACTIONS', 'Actions')}</th>
             </tr>
           </thead>
