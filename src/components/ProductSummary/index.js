@@ -157,7 +157,10 @@ export const ProductSummary = (props) => {
       <Modal
         width='900px'
         open={isProductPreview}
-        onClose={() => setIsProductPreview(false)}
+        onClose={() => {
+          setIsProductPreview(false)
+          setSelectedView('desktop')
+        }}
       >
         <ProductPreviewHeader>
           <h1>{t('PREVIEW', 'Preview')}</h1>
