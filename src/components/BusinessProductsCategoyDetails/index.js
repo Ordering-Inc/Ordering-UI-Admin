@@ -251,7 +251,7 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                 <CategoryNameWrapper>
                   <label>{t('CATEGORY_NAME', 'Category name')}</label>
                   <Input
-                    placeholder={t('Enter_CATEGORY_NAME', 'Enter a category name')}
+                    placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
                     name='name'
                     defaultValue={formState?.changes.name}
                     onChange={handleChangeInput}
