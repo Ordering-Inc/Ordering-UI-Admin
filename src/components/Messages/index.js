@@ -193,21 +193,21 @@ export const MessagesUI = (props) => {
       case 2:
         return t('REJECTED_BY_ADMIN', 'Rejected by admin')
       case 3:
-        return t('DRIVER_ARRIVED_BY_BUSINESS', 'Driver arrived by business')
+        return t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business')
       case 4:
-        return t('READY_FOR_PICKUP', 'Ready for pickup')
+        return t('PREPARATION_COMPLETED', 'Preparation Completed')
       case 5:
-        return t('REJECT_BY_BUSINESS', 'Reject by business')
+        return t('REJECTED_BY_BUSINESS', 'Rejected by business')
       case 6:
-        return t('REJECT_BY_DRIVER', 'Reject by driver')
+        return t('REJECTED_BY_DRIVER', 'Rejected by driver')
       case 7:
         return t('ACCEPTED_BY_BUSINESS', 'Accepted by Business')
       case 8:
         return t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')
       case 9:
-        return t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver')
+        return t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver')
       case 10:
-        return t('PICKUP_FAILED_BY_DRIVER', 'Pickup failed by driver')
+        return t('PICK_UP_FAILED_BY_DRIVER', 'Pick up failed by driver')
       case 11:
         return t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver')
       case 12:
@@ -217,19 +217,19 @@ export const MessagesUI = (props) => {
       case 14:
         return t('ORDER_NOT_READY', 'Order not ready')
       case 15:
-        return t('PICKUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')
+        return t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')
       case 16:
-        return t('CANCELLED_BY_CUSTOMER', 'Cancelled by customer')
+        return t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer')
       case 17:
-        return t('NOT_PICKED_BY_CUSTOMER', 'Not picked by customer')
+        return t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer')
       case 18:
-        return t('DRIVER_ALMOST_ARRIVED_TO_BUSINESS', 'Driver almost arrived to business')
+        return t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business')
       case 19:
-        return t('DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', 'Driver almost arrived to customer')
+        return t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')
       case 20:
-        return t('CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', 'Customer almost arrived to business')
+        return t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business')
       case 21:
-        return t('CUSTOMER_ARRIVED_TO_BUSINESS', 'Customer arrived to business')
+        return t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')
       default:
         return status
     }
