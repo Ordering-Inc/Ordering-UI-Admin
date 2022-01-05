@@ -73,7 +73,7 @@ export const Reports = (props) => {
     { id: 8, name: t('ORDER_STATUS_TEXT', 'Order status'), description: t('ORDER_STATUS_DESC', 'Order status description'), icon: <Cart4 /> },
     { id: 9, name: t('HEAT_MAP_WITH', 'Heat map with'), description: t('HEAT_MAP_WITH_DESC', 'Heat map with description'), icon: <GeoAltFill /> },
     { id: 10, name: t('DRIVER_DISTANCE', 'Driver distance'), description: t('DRIVER_DISTANCE_DESC', 'Driver distance description'), icon: <Vr /> },
-    { id: 11, name: t('RESPONSIVE_ORDER_EMAIL_TIME', 'Time'), description: t('TIME_DESC', 'Time description'), icon: <Alarm /> },
+    { id: 11, name: t('TIME', 'Time'), description: t('TIME_DESC', 'Time description'), icon: <Alarm /> },
     { id: 12, name: t('TOP_DRIVERS', 'Top drivers'), description: t('TOP_DRIVERS_DESC', 'Top drivers description'), icon: <Truck /> },
     { id: 13, name: t('ORDERS', 'Orders'), description: t('ORDERS_DESC', 'Orders description'), icon: <Cart3 /> },
     { id: 14, name: t('SALES', 'Sales'), description: t('SALES_DESC', 'Sales description'), icon: <Shop /> },
