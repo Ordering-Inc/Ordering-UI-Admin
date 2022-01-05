@@ -21,7 +21,7 @@ export const OrderDetailsHeader = (props) => {
   return (
     <OrderDetailsHeaderContainer>
       <div>
-        <h1>{t('ORDER_NO', 'Order No')}. {order?.id}</h1>
+        <h1>{t('INVOICE_ORDER_NO', 'Order No')} {order?.id}</h1>
         <p>
           <span>{order?.paymethod?.name}</span>
           <EnDotSingle />
