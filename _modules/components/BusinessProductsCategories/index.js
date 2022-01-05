@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _SingleBusinessSubCategories = require("../SingleBusinessSubCategories");
+var _SingleBusinessSubCateogries = require("../SingleBusinessSubCateogries");
 
 var _styles = require("./styles");
 
@@ -83,14 +83,14 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, {
     ref: listRef
   }, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCategories.SingleBusinessSubCateogries, {
+    return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, {
       key: i,
       isSkeleton: true
     });
   }), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category) {
-    return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCategories.SingleBusinessSubCateogries, _extends({}, props, {
+    return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, _extends({}, props, {
       index: 0,
       key: category.id,
       category: category,

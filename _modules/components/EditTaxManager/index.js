@@ -56,11 +56,11 @@ var EditTaxManager = function EditTaxManager(props) {
   var defaultInputs = [{
     field: 'name',
     placeholder: t('NAME', 'Name'),
-    required: t('TAX_NAME_REQUIRED', 'Tax name is required')
+    required: t('NAME_REQUIRED', 'The name is required')
   }, {
     field: 'description',
     placeholder: t('DESCRIPTION', 'Description'),
-    required: t('TAX_DESCRIPTION_REQUIRED', 'Tax description is required')
+    required: t('DESCRIPTION_REQUIRED', 'The Description is required')
   }];
   var inputs = [].concat(defaultInputs, [type === 'taxes' ? [{
     field: 'rate',

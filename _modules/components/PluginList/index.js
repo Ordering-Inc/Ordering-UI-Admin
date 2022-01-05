@@ -196,7 +196,7 @@ var PluginListUI = function PluginListUI(props) {
     onSearch: function onSearch(val) {
       return setSearchValue(val);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.PluginsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PLUGIN', 'Plugin')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), pluginListState.loading ? _toConsumableArray(Array(pluginsPerPage).keys()).map(function (i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.PluginsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PLUGINS', 'Plugins')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), pluginListState.loading ? _toConsumableArray(Array(pluginsPerPage).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PluginTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

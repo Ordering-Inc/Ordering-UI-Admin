@@ -130,7 +130,7 @@ var OrdersTable = function OrdersTable(props) {
     content: t('STATUS', 'Status')
   }, {
     value: 'orderNumber',
-    content: t('ORDER_NO', 'Order No.')
+    content: t('INVOICE_ORDER_NO', 'Order No.')
   }, {
     value: 'dateTime',
     content: t('DATE_TIME', 'Date and time')
@@ -148,7 +148,7 @@ var OrdersTable = function OrdersTable(props) {
     content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
   }, {
     value: 'total',
-    content: t('TOTAL', 'Total')
+    content: t('EXPORT_TOTAL', 'Total')
   }];
 
   var getLogisticTag = function getLogisticTag(status) {
@@ -480,7 +480,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "info"
     }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) && /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime) && /*#__PURE__*/_react.default.createElement("p", {
+    }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime) && /*#__PURE__*/_react.default.createElement("p", {
       className: "date"
     }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false

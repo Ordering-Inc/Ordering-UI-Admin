@@ -282,7 +282,7 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     alt: "business type image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: t('Enter_CATEGORY_NAME', 'Enter a category name'),
+    placeholder: t('ENTER_CATEGORY_NAME', 'Enter a category name'),
     name: "name",
     defaultValue: formState === null || formState === void 0 ? void 0 : formState.changes.name,
     onChange: handleChangeInput,

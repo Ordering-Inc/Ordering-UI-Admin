@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SearchBarWrapper = exports.FunctionalityContainer = exports.MultiSelectOption = exports.SelectImage = exports.Header = exports.Chevron = exports.Select = exports.Selected = exports.OptionsInner = exports.Options = exports.Option = void 0;
+exports.MultiOption = exports.SearchBarWrapper = exports.FunctionalityContainer = exports.MultiSelectOption = exports.SelectImage = exports.Header = exports.Chevron = exports.Select = exports.Selected = exports.OptionsInner = exports.Options = exports.Option = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -130,3 +130,31 @@ exports.FunctionalityContainer = FunctionalityContainer;
 var SearchBarWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  padding: 5px 10px;\n  width: 100%;\n  > div {\n    input {\n      height: 42px;\n    }\n  }\n"])));
 
 exports.SearchBarWrapper = SearchBarWrapper;
+
+var MultiOption = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  box-sizing: border-box;\n  min-width: ", ";\n  color: #333;\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  svg {\n    vertical-align: text-top;\n  }\n\n  ", "\n\n  ", "\n"])), function (_ref13) {
+  var minWidth = _ref13.minWidth;
+  return minWidth || '100px';
+}, function (_ref14) {
+  var disabled = _ref14.disabled;
+  return disabled && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n    cursor: no-drop;\n    opacity: 0.6;\n  "])));
+}, function (_ref15) {
+  var showDisable = _ref15.showDisable;
+  return showDisable && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    display: none;\n  "])));
+}, function (_ref16) {
+  var optionBottomBorder = _ref16.optionBottomBorder;
+  return optionBottomBorder && (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid #D8D8D8;\n  "])));
+}, (0, _polished.darken)(0.03, '#fafafa'), function (props) {
+  return props.selected && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  \n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#fafafa'), (0, _polished.darken)(0.07, '#fafafa'));
+}, function (_ref17) {
+  var withIcons = _ref17.withIcons;
+  return withIcons && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n      display: flex;\n      align-items: center;\n      justify-content: flex-start;\n      svg {\n        margin-right: 3px;\n        ", "\n      }\n  "])), function (props) {
+    var _props$theme6;
+
+    return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n          margin-left: 3px;\n          margin-right: 0px;\n       "])));
+  });
+}, function (_ref18) {
+  var color = _ref18.color;
+  return color === 'primary' && (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    color: #C3C3C3;\n  "])));
+});
+
+exports.MultiOption = MultiOption;

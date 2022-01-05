@@ -41,7 +41,8 @@ var Personalization = function Personalization(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, isShowTitle && /*#__PURE__*/_react.default.createElement("h1", null, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement("p", null, t('PERSONALIZATION_TITLE', 'If you are looking for something  special for your Ordering Solution'), ",", /*#__PURE__*/_react.default.createElement("a", {
     href: "https://orderingco.typeform.com/to/qHPQtU",
-    target: "_blank"
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, t('SEND_US_SPECIAL_WISH', 'send us your special wish.'))), /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images$general = theme.images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.personalization,
     loading: "lazy"

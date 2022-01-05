@@ -43,9 +43,9 @@ var EditButton = _styledComponents.default.span(_templateObject6 || (_templateOb
 
 exports.EditButton = EditButton;
 
-var CheckboxWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 18px;\n  height: 18px;\n  border-radius: 2px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  svg {\n    color: #FFF;\n    font-size: 16px;\n  }\n\n  ", "\n"])), function (_ref) {
+var CheckboxWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 18px;\n  height: 18px;\n  border-radius: 2px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  svg {\n    color: #FFF;\n    font-size: 16px;\n  }\n  cursor: not-allowed;\n\n  ", "\n"])), function (_ref) {
   var active = _ref.active;
-  return active ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: ", ";\n  "])), function (props) {
+  return active ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    /* cursor: pointer; */\n    background: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
   }) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    border: 1px solid #B1BCCC;\n  "])));
 });

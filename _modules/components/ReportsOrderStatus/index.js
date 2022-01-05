@@ -177,7 +177,7 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
       });
     }
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ORDER_STATUS', 'Order status')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setIsBrandFilter(true);
     }

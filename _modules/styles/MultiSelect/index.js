@@ -163,7 +163,7 @@ var MultiSelect = function MultiSelect(props) {
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
   }, options.map(function (option, i) {
-    return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
+    return /*#__PURE__*/_react.default.createElement(_Selects.MultiOption, {
       key: i,
       color: option.color,
       onClick: function onClick() {

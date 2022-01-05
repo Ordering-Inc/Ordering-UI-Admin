@@ -97,7 +97,7 @@ var AnalyticsMap = function AnalyticsMap(props) {
     onClick: function onClick() {
       return setIsHeat(!isHeat);
     }
-  }, isHeat ? t('GROUPED', 'Grouped') : t('HEAT_MAP', 'Heatmap')))));
+  }, isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')))));
 };
 
 exports.AnalyticsMap = AnalyticsMap;

@@ -403,7 +403,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
     onClick: function onClick() {
       return handleOpenCityDetails(null);
     }
-  }, t('ADD_NEW_CITY ', 'Add new city')), (currentCities === null || currentCities === void 0 ? void 0 : currentCities.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  }, t('ADD_NEW_CITY', 'Add new city')), (currentCities === null || currentCities === void 0 ? void 0 : currentCities.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,

@@ -179,6 +179,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, t('ADD_BUSINESS', 'Add business'))), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    disabled: true,
     onClick: function onClick() {
       return handleItemSelected('support');
     }
@@ -247,7 +248,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     small: true
   }, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, {
     small: true
-  }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_NAME', 'Business name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXPORT_BUSINESS_NAME', 'Business name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "name",
     type: "text",
     placeholder: t('NAME', 'name'),

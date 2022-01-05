@@ -47,7 +47,7 @@ var TabInnerContainer = _styledComponents.default.div(_templateObject9 || (_temp
 
 exports.TabInnerContainer = TabInnerContainer;
 
-var Tab = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n\n  ", "\n\n  ", "\n"])), function (props) {
+var Tab = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n  font-size: 14px;\n\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;

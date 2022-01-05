@@ -21,7 +21,7 @@ var BusinessMenuBasicContainer = _styledComponents.default.div(_templateObject |
 
 exports.BusinessMenuBasicContainer = BusinessMenuBasicContainer;
 
-var FieldName = _styledComponents.default.p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  font-weight: 500;\n  color: ", ";\n  padding: 30px 0 10px;\n  margin: 0;\n  ", "\n"])), function (props) {
+var FieldName = _styledComponents.default.p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  font-weight: 500;\n  color: ", ";\n  padding: 30px 0 10px;\n  margin: 0;\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (_ref) {
   var isBorderBottom = _ref.isBorderBottom;
@@ -30,7 +30,7 @@ var FieldName = _styledComponents.default.p(_templateObject2 || (_templateObject
 
 exports.FieldName = FieldName;
 
-var OrderType = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  padding: 12px 0;\n  border-bottom: 1px solid #E9ECEF;\n\n  svg {\n    font-size: 20px;\n    color: ", ";\n  }\n\n  span {\n    color: ", ";\n    ", "\n  }\n"])), function (_ref2) {
+var OrderType = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  padding: 12px 0;\n  border-bottom: 1px solid #E9ECEF;\n\n  svg {\n    font-size: 20px;\n    color: ", ";\n  }\n\n  span {\n    font-size: 14px;\n    color: ", ";\n    ", "\n  }\n"])), function (_ref2) {
   var theme = _ref2.theme,
       active = _ref2.active;
   return active ? theme.colors.primary : theme.colors.lightGray;

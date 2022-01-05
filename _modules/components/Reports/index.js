@@ -142,7 +142,7 @@ var Reports = function Reports(props) {
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CalendarCheck, null)
   }, {
     id: 8,
-    name: t('ORDER_STATUS', 'Order status'),
+    name: t('ORDER_STATUS_TEXT', 'Order status'),
     description: t('ORDER_STATUS_DESC', 'Order status description'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart4, null)
   }, {

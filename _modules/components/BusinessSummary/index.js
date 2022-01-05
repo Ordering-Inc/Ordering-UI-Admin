@@ -95,7 +95,7 @@ var BusinessSummary = function BusinessSummary(props) {
     value: t('NOTIFICATIONS', 'Notifications')
   }, {
     key: 'payment_methods',
-    value: t('PAYMENS_METHODS', 'Payment methods')
+    value: t('PAYMENTS_METHODS', 'Payment methods')
   }, {
     key: 'promotions',
     value: t('PROMOTIONS', 'Promotions')

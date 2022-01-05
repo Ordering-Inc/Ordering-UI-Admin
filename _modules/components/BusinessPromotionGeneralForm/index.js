@@ -273,7 +273,7 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
       return handleChangeInput(e);
     },
     placeholder: 0
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.MinimumLimitContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('MINIMUM_PURCHASE', 'Minimum purchase')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.MinimumLimitContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('MINIMUN_PURCHASED', 'Minimum purchase')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "number",
     name: "minimum",
     value: (_ref5 = (_formState$changes$mi = (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.minimum) !== null && _formState$changes$mi !== void 0 ? _formState$changes$mi : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo14 = promotionState.promotion) === null || _promotionState$promo14 === void 0 ? void 0 : _promotionState$promo14.minimum) !== null && _ref5 !== void 0 ? _ref5 : '',

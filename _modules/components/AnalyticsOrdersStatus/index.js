@@ -280,7 +280,7 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
     width: 30
   }) : /*#__PURE__*/_react.default.createElement(TotalOrders, null)), orderStatusList !== null && orderStatusList !== void 0 && orderStatusList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
-  }) : /*#__PURE__*/_react.default.createElement("p", null, t('ORDERS_TOTALS', 'Orders totals'))));
+  }) : /*#__PURE__*/_react.default.createElement("p", null, t('ORDERS', 'Orders'), " ", t('TOTALS', 'totals'))));
 };
 
 exports.AnalyticsOrdersStatus = AnalyticsOrdersStatus;

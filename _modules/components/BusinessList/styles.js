@@ -37,7 +37,7 @@ var WrapperPagination = _styledComponents.default.div(_templateObject3 || (_temp
 
 exports.WrapperPagination = WrapperPagination;
 
-var BusinessCardContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: calc(100% + 20px);\n  ", "\n"])), function (props) {
+var BusinessCardContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: calc(100% + 20px);\n  ", "\n  max-height: calc(100vh - 210px);\n  overflow: auto;\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    transform: translateX(10px);\n  "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    transform: translateX(-10px);\n  "])));

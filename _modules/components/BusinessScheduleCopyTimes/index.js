@@ -56,25 +56,25 @@ var BusinessScheduleCopyTimes = function BusinessScheduleCopyTimes(props) {
   var popperElement = (0, _react.useRef)();
   var daysOptions = [{
     value: 0,
-    content: t('SUNDAY', 'Sunday')
+    content: t('DAY7', 'Sunday')
   }, {
     value: 1,
-    content: t('MONDAY', 'Monday')
+    content: t('DAY1', 'Monday')
   }, {
     value: 2,
-    content: t('TUESDAY', 'Tuesday')
+    content: t('DAY2', 'Tuesday')
   }, {
     value: 3,
-    content: t('WEDNESDAU', 'Wednesday')
+    content: t('DAY3', 'Wednesday')
   }, {
     value: 4,
-    content: t('THURSDAY', 'Thursday')
+    content: t('DAY4', 'Thursday')
   }, {
     value: 5,
-    content: t('FRIDAY', 'Friday')
+    content: t('DAY5', 'Friday')
   }, {
     value: 6,
-    content: t('SATUDAY', 'Saturday')
+    content: t('DAY6', 'Saturday')
   }];
 
   var handleClickOutside = function handleClickOutside(e) {
@@ -119,7 +119,7 @@ var BusinessScheduleCopyTimes = function BusinessScheduleCopyTimes(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_MdcContentCopy.default, null)), open && /*#__PURE__*/_react.default.createElement(_styles2.PopoverBody, {
     ref: popperElement
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('Copy times to')), /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, daysOptions.map(function (option) {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('COPY_TIMES_TO', 'Copy times to')), /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, daysOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: option.value
     }, /*#__PURE__*/_react.default.createElement(_styles2.CopyItem, {

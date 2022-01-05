@@ -228,7 +228,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     options: businessOptions,
     className: "select",
     defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.business,
-    placeholder: t('BUSINESS_NAME', 'Business name'),
+    placeholder: t('EXPORT_BUSINESS_NAME', 'Business name'),
     onChange: function onChange(value) {
       return handleChangeFormState('business', value);
     },

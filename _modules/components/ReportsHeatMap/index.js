@@ -192,7 +192,7 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     onClick: function onClick() {
       return setIsHeat(!isHeat);
     }
-  }, isHeat ? t('GROUPED', 'Grouped') : t('HEAT_MAP', 'Heatmap')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
     padding: "30px",

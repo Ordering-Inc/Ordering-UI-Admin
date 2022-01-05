@@ -644,7 +644,7 @@ var AddressFormUI = function AddressFormUI(props) {
     onClick: function onClick() {
       return handleAddressTag('favorite');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.SuitHeart, null), t('FAVORITE', 'Favorite')), /*#__PURE__*/_react.default.createElement(_styles.TagButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.SuitHeart, null), t('ADDRESS_TAG_FAVORITE', 'Favorite')), /*#__PURE__*/_react.default.createElement(_styles.TagButton, {
     type: "button",
     active: addressTag === 'other' ? 'active' : '',
     onClick: function onClick() {

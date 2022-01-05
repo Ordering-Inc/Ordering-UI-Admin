@@ -29,6 +29,8 @@ var _EnterprisePromotionSpecficProducts = require("../EnterprisePromotionSpecfic
 
 var _EnterprisePromotionSpecficCategory = require("../EnterprisePromotionSpecficCategory");
 
+var _EnterprisePromotionDeliveryzones = require("../EnterprisePromotionDeliveryzones");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -55,6 +57,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       actionState = props.actionState,
       promotionState = props.promotionState,
       handleUpdateClick = props.handleUpdateClick,
+      selectedBusinessIds = props.selectedBusinessIds,
       handleAddPromotion = props.handleAddPromotion;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -82,7 +85,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       setSelectedTitle = _useState8[1];
 
   var singleConditions = ['limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'];
-  var specifics = ['products', 'categories'];
+  var specifics = ['products', 'categories', 'delivery_zones'];
 
   var handlePromotionEdit = function handlePromotionEdit(condition, title) {
     setSelectedCondition(condition);
@@ -127,8 +130,11 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     id: 7,
     title: t('MAX_AMOUNT_TO_DISCOUNT', 'Maximum discount limit'),
     attribute: 'max_discount'
-  }, // { id: 8, title: t('DELIVERY_ZONE', 'Delivery zones'), attribute: 'delivery_zones' },
-  {
+  }, {
+    id: 8,
+    title: t('DELIVERY_ZONE', 'Delivery zones'),
+    attribute: 'delivery_zones'
+  }, {
     id: 9,
     title: t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order Type'),
     attribute: 'order_types_allowed'
@@ -147,7 +153,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
   }];
 
   var handleClickSave = function handleClickSave() {
-    if (isAddMode) handleAddPromotion();else handleUpdateClick();
+    if (!isAddMode) handleUpdateClick();
     setOpenSingleModal(false);
     setOpenMultipleModal(false);
   };
@@ -158,7 +164,8 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     return /*#__PURE__*/_react.default.createElement(_styles2.ConditionItem, {
       key: index
     }, /*#__PURE__*/_react.default.createElement("div", null, (typeof formState.changes[condition.attribute] !== 'undefined' ? formState.changes[condition.attribute] : Array.isArray(promotionState.promotion[condition.attribute]) ? (_promotionState$promo = promotionState.promotion[condition.attribute]) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.length : promotionState.promotion[condition.attribute]) ? /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
-      active: true
+      active: true // onClick={() => handleChangeItem({ [condition.attribute]: null })}
+
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, {
       onClick: function onClick() {
         return handlePromotionEdit(condition.attribute, condition.title);
@@ -168,10 +175,10 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     borderRadius: "8px",
     color: "primary",
     onClick: function onClick() {
-      return handleClickSave();
+      return isAddMode ? handleAddPromotion() : handleUpdateClick();
     },
     disabled: Object.keys(formState.changes).length === 0 || actionState.loading
-  }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "600px",
     open: openSingleModal,
     onClose: function onClose() {
@@ -202,6 +209,11 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       return handleClickSave();
     }
   })), selectedCondition === 'paymethods' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionPaymethods.EnterprisePromotionPaymethods, _extends({}, props, {
+    onClickDone: function onClickDone() {
+      return handleClickSave();
+    }
+  })), selectedCondition === 'delivery_zones' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionDeliveryzones.EnterprisePromotionDeliveryzones, _extends({}, props, {
+    businessIds: selectedBusinessIds,
     onClickDone: function onClickDone() {
       return handleClickSave();
     }

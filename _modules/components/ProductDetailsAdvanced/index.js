@@ -402,7 +402,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
         payload: null
       });
     },
-    handleSave: handleSaveTax
+    handleSave: handleSaveTax,
+    setAlertState: setAlertState
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: taxToDelete.action ? t("DELETE_".concat(getTaxOrFeeString(taxToDelete === null || taxToDelete === void 0 ? void 0 : taxToDelete.action).toUpperCase()), "Delete ".concat(getTaxOrFeeString(taxToDelete === null || taxToDelete === void 0 ? void 0 : taxToDelete.action))) : t('ERROR'),
     content: alertState.content,

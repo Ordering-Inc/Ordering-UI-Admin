@@ -272,7 +272,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
         metaField: true
       }));
     }
-  }, t('CUSTOM_FEILDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('CUSTOM_FIELDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleDeleteExtraClick();
     }

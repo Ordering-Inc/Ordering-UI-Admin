@@ -189,7 +189,8 @@ var ProductSummary = function ProductSummary(props) {
     width: "900px",
     open: isProductPreview,
     onClose: function onClose() {
-      return setIsProductPreview(false);
+      setIsProductPreview(false);
+      setSelectedView('desktop');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductPreviewHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: selectedView === 'desktop' ? 'primary' : 'black',

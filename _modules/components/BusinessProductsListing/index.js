@@ -300,7 +300,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return openBatchImageUploader();
     }
-  }, t('UPLOAD_IMAGE_BATCH', 'Upload images in batch')) : /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
+  }, t('UPLOAD_IMAGES_BATCH', 'Upload images in batch')) : /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
     className: "batch",
     onClick: function onClick() {
       return openBatchImageUploader();

@@ -44,7 +44,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProducts(props) {
-  var promotionState = props.promotionState,
+  var formState = props.formState,
+      promotionState = props.promotionState,
       handleChangeItem = props.handleChangeItem,
       onClickDone = props.onClickDone,
       selectedProductsIds = props.selectedProductsIds,
@@ -71,9 +72,17 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
       setSelectedBusinessSlug = _useState4[1];
 
   (0, _react.useEffect)(function () {
-    var businessIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.businesses.reduce(function (ids, business) {
-      return [].concat(_toConsumableArray(ids), [business.id]);
-    }, []);
+    var businessIds = [];
+
+    if (Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
+      businessIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.businesses.reduce(function (ids, business) {
+        return [].concat(_toConsumableArray(ids), [business.id]);
+      }, []);
+    } else {
+      var _formState$changes, _formState$changes2;
+
+      businessIds = formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.businesses ? _toConsumableArray(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.businesses) : [];
+    }
 
     var _businessOptions = businessesList.businesses.filter(function (business) {
       return businessIds.includes(business.id);
@@ -90,6 +99,12 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     });
 
     setBusinessOptions(_businessOptions);
+
+    if (_businessOptions.length) {
+      var _businessOptions$;
+
+      setSelectedBusinessSlug((_businessOptions$ = _businessOptions[0]) === null || _businessOptions$ === void 0 ? void 0 : _businessOptions$.value);
+    }
   }, []);
   (0, _react.useEffect)(function () {
     var filteredProducts = [];
@@ -104,9 +119,11 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     });
   }, [selectedProductsIds]);
   (0, _react.useEffect)(function () {
-    var _promotionState$promo;
+    var _promotionState$promo, _promotionState$promo2;
 
-    var _selectedProductsIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.products.reduce(function (ids, product) {
+    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo = promotionState.promotion) !== null && _promotionState$promo !== void 0 && _promotionState$promo.products)) return;
+
+    var _selectedProductsIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.products.reduce(function (ids, product) {
       return [].concat(_toConsumableArray(ids), [product.id]);
     }, []);
 

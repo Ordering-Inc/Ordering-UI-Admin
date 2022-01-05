@@ -44,7 +44,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCategory(props) {
-  var promotionState = props.promotionState,
+  var formState = props.formState,
+      promotionState = props.promotionState,
       handleChangeItem = props.handleChangeItem,
       onClickDone = props.onClickDone,
       selectedCategoryIds = props.selectedCategoryIds,
@@ -71,9 +72,19 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
       setSelectedBusinessSlug = _useState4[1];
 
   (0, _react.useEffect)(function () {
-    var businessIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.businesses.reduce(function (ids, business) {
-      return [].concat(_toConsumableArray(ids), [business.id]);
-    }, []);
+    var _promotionState$promo, _promotionState$promo2;
+
+    var businessIds = [];
+
+    if (Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
+      businessIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.businesses.reduce(function (ids, business) {
+        return [].concat(_toConsumableArray(ids), [business.id]);
+      }, []);
+    } else {
+      var _formState$changes, _formState$changes2;
+
+      businessIds = formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.businesses ? _toConsumableArray(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.businesses) : [];
+    }
 
     var _businessOptions = businessesList.businesses.filter(function (business) {
       return businessIds.includes(business.id);
@@ -90,6 +101,23 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     });
 
     setBusinessOptions(_businessOptions);
+
+    if ((promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : (_promotionState$promo2 = _promotionState$promo.categories) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.length) > 0) {
+      var _promotionState$promo3, _promotionState$promo4;
+
+      var businessId = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : (_promotionState$promo4 = _promotionState$promo3.categories[0]) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.business_id;
+      var foundBusiness = businessesList.businesses.find(function (business) {
+        return business.id === businessId;
+      });
+
+      if (foundBusiness !== null && foundBusiness !== void 0 && foundBusiness.slug) {
+        setSelectedBusinessSlug(foundBusiness === null || foundBusiness === void 0 ? void 0 : foundBusiness.slug);
+      }
+    } else if (_businessOptions.length) {
+      var _businessOptions$;
+
+      setSelectedBusinessSlug((_businessOptions$ = _businessOptions[0]) === null || _businessOptions$ === void 0 ? void 0 : _businessOptions$.value);
+    }
   }, []);
   (0, _react.useEffect)(function () {
     var filteredCategories = [];
@@ -104,6 +132,10 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     });
   }, [selectedCategoryIds]);
   (0, _react.useEffect)(function () {
+    var _promotionState$promo5;
+
+    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo5 = promotionState.promotion) !== null && _promotionState$promo5 !== void 0 && _promotionState$promo5.categories)) return;
+
     var _selectedCategoryIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.categories.reduce(function (ids, category) {
       return [].concat(_toConsumableArray(ids), [category.id]);
     }, []);
