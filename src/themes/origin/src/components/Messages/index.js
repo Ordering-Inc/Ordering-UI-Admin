@@ -383,7 +383,7 @@ export const MessagesUI = (props) => {
                   {!messageDashboardView ? (
                     <span>{t('ONLINE', 'Online')}</span>
                   ) : (
-                    <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
+                    <span>{t('INVOICE_ORDER_NO', 'Order No')}. {order.id}</span>
                   )}
                 </HeaderOnline>
               )}
@@ -393,7 +393,7 @@ export const MessagesUI = (props) => {
                   {!messageDashboardView ? (
                     <span>{t('ONLINE', 'Online')}</span>
                   ) : (
-                    <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
+                    <span>{t('INVOICE_ORDER_NO', 'Order No')}. {order.id}</span>
                   )}
                 </HeaderOnline>
               )}
@@ -403,7 +403,7 @@ export const MessagesUI = (props) => {
                   {!messageDashboardView ? (
                     <span>{t('ONLINE', 'Online')}</span>
                   ) : (
-                    <span>{t('ORDER_NO', 'Order No')}. {order.id}</span>
+                    <span>{t('INVOICE_ORDER_NO', 'Order No')}. {order.id}</span>
                   )}
                 </HeaderOnline>
               )}

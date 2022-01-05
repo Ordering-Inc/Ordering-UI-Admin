@@ -169,7 +169,7 @@ export const OrderItemAccordion = (props) => {
               )}
             </CheckBoxContainer>
             <TextBlockContainer>
-              <BigText>{t('ORDER_NO', 'Order No.')} {order?.id}</BigText>
+              <BigText>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</BigText>
               <SmallText>
                 {parseDate(order?.delivery_datetime, { utc: false })}
               </SmallText>

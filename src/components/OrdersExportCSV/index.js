@@ -62,10 +62,10 @@ const ExportCSVUI = (props) => {
         {popoverOpen && (
           <PopoverContainer>
             <Item onClick={() => handleExportAll()}>
-              {t('EXPROT_ALL', 'Export all')}
+              {t('EXPORT_ALL', 'Export all')}
             </Item>
             <Item onClick={() => handleExportFiltered()}>
-              {t('EXPROT_FILTERED', 'Export filtered')}
+              {t('EXPORT_FILTERED', 'Export filtered')}
             </Item>
           </PopoverContainer>
         )}
