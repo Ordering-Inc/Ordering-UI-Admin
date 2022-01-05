@@ -28,8 +28,8 @@ export const EditTaxManager = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const defaultInputs = [
-    { field: 'name', placeholder: t('NAME', 'Name'), required: t('TAX_NAME_REQUIRED', 'Tax name is required') },
-    { field: 'description', placeholder: t('DESCRIPTION', 'Description'), required: t('TAX_DESCRIPTION_REQUIRED', 'Tax description is required') }
+    { field: 'name', placeholder: t('NAME', 'Name'), required: t('NAME_REQUIRED', 'The name is required') },
+    { field: 'description', placeholder: t('DESCRIPTION', 'Description'), required: t('DESCRIPTION_REQUIRED', 'The Description is required') }
   ]
   const inputs = [
     ...defaultInputs,
