@@ -53,6 +53,15 @@ export const EnterprisePromotionSpecficCategory = (props) => {
       }
     })
     setBusinessOptions(_businessOptions)
+    if (promotionState?.promotion?.categories?.length > 0) {
+      const businessId = promotionState?.promotion?.categories[0]?.business_id
+      const foundBusiness = businessesList.businesses.find(business => business.id === businessId)
+      if (foundBusiness?.slug) {
+        setSelectedBusinessSlug(foundBusiness?.slug)
+      }
+    } else if (_businessOptions.length) {
+      setSelectedBusinessSlug(_businessOptions[0]?.value)
+    }
   }, [])
 
   useEffect(() => {
@@ -67,13 +76,6 @@ export const EnterprisePromotionSpecficCategory = (props) => {
     if (!promotionState?.promotion?.categories) return
     const _selectedCategoryIds = promotionState?.promotion.categories.reduce((ids, category) => [...ids, category.id], [])
     setSelectedCategoryIds(_selectedCategoryIds)
-    if (promotionState?.promotion?.categories.length > 0) {
-      const businessId = promotionState?.promotion?.categories[0]?.business_id
-      const foundBusiness = businessesList.businesses.find(business => business.id === businessId)
-      if (foundBusiness?.slug) {
-        setSelectedBusinessSlug(foundBusiness?.slug)
-      }
-    }
   }, [])
 
   return (

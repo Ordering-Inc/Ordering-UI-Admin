@@ -25,7 +25,7 @@ export const EnterprisePromotionConditions = (props) => {
     formState,
     actionState,
     promotionState,
-    handleChangeItem,
+    // handleChangeItem,
     handleUpdateClick,
     selectedBusinessIds,
     handleAddPromotion
@@ -94,7 +94,7 @@ export const EnterprisePromotionConditions = (props) => {
                   ? (
                     <CheckboxWrapper
                       active
-                      onClick={() => handleChangeItem({ [condition.attribute]: null })}
+                      // onClick={() => handleChangeItem({ [condition.attribute]: null })}
                     >
                       <Check2 />
                     </CheckboxWrapper>
