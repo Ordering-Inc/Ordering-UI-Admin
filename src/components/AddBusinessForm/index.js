@@ -147,6 +147,7 @@ const AddBusinessFormUI = (props) => {
           </LeftHeader>
           <RightHeader>
             <IconButton
+              disabled
               onClick={() => handleItemSelected('support')}
             >
               <LifePreserver />
@@ -222,7 +223,7 @@ const AddBusinessFormUI = (props) => {
               </ExamineClick>
             </LogoImage>
             <InputWrapper>
-              <label>{t('BUSINESS_NAME', 'Business name')}</label>
+              <label>{t('EXPORT_BUSINESS_NAME', 'Business name')}</label>
               <Input
                 name='name'
                 type='text'

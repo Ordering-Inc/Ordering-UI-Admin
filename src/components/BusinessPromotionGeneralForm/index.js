@@ -315,7 +315,7 @@ const BusinessPromotionGeneralFormUI = (props) => {
       </DiscountContainer>
       <MinimumLimitContainer>
         <div>
-          <Label>{t('MINIMUM_PURCHASE', 'Minimum purchase')}</Label>
+          <Label>{t('MINIMUN_PURCHASED', 'Minimum purchase')}</Label>
           <Input
             type='number'
             name='minimum'

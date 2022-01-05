@@ -244,7 +244,7 @@ const BusinessProductsListingUI = (props) => {
                         color='lightPrimary'
                         onClick={() => openBatchImageUploader()}
                       >
-                        {t('UPLOAD_IMAGE_BATCH', 'Upload images in batch')}
+                        {t('UPLOAD_IMAGES_BATCH', 'Upload images in batch')}
                       </Button>
                     ) : (
                       <ViewMethodButton className='batch' onClick={() => openBatchImageUploader()}>

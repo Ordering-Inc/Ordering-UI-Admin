@@ -510,7 +510,7 @@ const AddressFormUI = (props) => {
               onClick={() => handleAddressTag('favorite')}
             >
               <SuitHeart />
-              {t('FAVORITE', 'Favorite')}
+              {t('ADDRESS_TAG_FAVORITE', 'Favorite')}
             </TagButton>
             <TagButton
               type='button'

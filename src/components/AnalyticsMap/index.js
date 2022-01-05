@@ -59,7 +59,7 @@ export const AnalyticsMap = (props) => {
                   disabled={locationList.loading}
                   onClick={() => setIsHeat(!isHeat)}
                 >
-                  {isHeat ? t('GROUPED', 'Grouped') : t('HEAT_MAP', 'Heatmap')}
+                  {isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')}
                 </Button>
               </>
             )

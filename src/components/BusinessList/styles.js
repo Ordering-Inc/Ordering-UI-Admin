@@ -60,6 +60,8 @@ export const BusinessCardContainer = styled.div`
   ` : css`
     transform: translateX(-10px);
   `}
+  max-height: calc(100vh - 210px);
+  overflow: auto;
 `
 
 export const AddNewButtonLink = styled.div`

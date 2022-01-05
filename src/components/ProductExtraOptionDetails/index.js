@@ -165,7 +165,7 @@ const ProductExtraOptionDetailsUI = (props) => {
             <Dropdown.Item
               onClick={() => setOpenModal({ ...openModal, option: true })}
             >
-              {t('CUSTOM_FEILDS', 'Custom Fields')}
+              {t('CUSTOM_FIELDS', 'Custom Fields')}
             </Dropdown.Item>
             <Dropdown.Item
               onClick={() => handleDeleteOption()}

@@ -18,6 +18,7 @@ import {
 
 export const EnterprisePromotionSpecficCategory = (props) => {
   const {
+    formState,
     promotionState,
     handleChangeItem,
     onClickDone,
@@ -34,7 +35,12 @@ export const EnterprisePromotionSpecficCategory = (props) => {
   const [selectedBusinessSlug, setSelectedBusinessSlug] = useState(null)
 
   useEffect(() => {
-    const businessIds = promotionState?.promotion.businesses.reduce((ids, business) => [...ids, business.id], [])
+    let businessIds = []
+    if (Object.keys(promotionState?.promotion).length) {
+      businessIds = promotionState?.promotion.businesses.reduce((ids, business) => [...ids, business.id], [])
+    } else {
+      businessIds = formState?.changes?.businesses ? [...formState?.changes?.businesses] : []
+    }
     const _businessOptions = businessesList.businesses.filter(business => businessIds.includes(business.id)).map(business => {
       return {
         value: business.slug,
@@ -47,6 +53,15 @@ export const EnterprisePromotionSpecficCategory = (props) => {
       }
     })
     setBusinessOptions(_businessOptions)
+    if (promotionState?.promotion?.categories?.length > 0) {
+      const businessId = promotionState?.promotion?.categories[0]?.business_id
+      const foundBusiness = businessesList.businesses.find(business => business.id === businessId)
+      if (foundBusiness?.slug) {
+        setSelectedBusinessSlug(foundBusiness?.slug)
+      }
+    } else if (_businessOptions.length) {
+      setSelectedBusinessSlug(_businessOptions[0]?.value)
+    }
   }, [])
 
   useEffect(() => {
@@ -58,6 +73,7 @@ export const EnterprisePromotionSpecficCategory = (props) => {
   }, [selectedCategoryIds])
 
   useEffect(() => {
+    if (!promotionState?.promotion?.categories) return
     const _selectedCategoryIds = promotionState?.promotion.categories.reduce((ids, category) => [...ids, category.id], [])
     setSelectedCategoryIds(_selectedCategoryIds)
   }, [])

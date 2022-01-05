@@ -138,7 +138,7 @@ const ReportsHeatMapUI = (props) => {
                 disabled={reportData.loading}
                 onClick={() => setIsHeat(!isHeat)}
               >
-                {isHeat ? t('GROUPED', 'Grouped') : t('HEAT_MAP', 'Heatmap')}
+                {isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')}
               </Button>
             </WrapperMap>
           )}

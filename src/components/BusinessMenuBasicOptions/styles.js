@@ -15,7 +15,7 @@ export const BusinessMenuBasicContainer = styled.div`
 `
 
 export const FieldName = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: ${props => props.theme.colors.headingColor};
   padding: 30px 0 10px;
@@ -38,6 +38,7 @@ export const OrderType = styled.div`
   }
 
   span {
+    font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
     ${props => props.theme?.rtl ? css`
       margin-right: 10px;

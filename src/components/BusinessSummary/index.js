@@ -65,7 +65,7 @@ export const BusinessSummary = (props) => {
     },
     {
       key: 'payment_methods',
-      value: t('PAYMENS_METHODS', 'Payment methods')
+      value: t('PAYMENTS_METHODS', 'Payment methods')
     },
     {
       key: 'promotions',

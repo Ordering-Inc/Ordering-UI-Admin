@@ -71,6 +71,7 @@ export const Tab = styled.div`
   cursor: pointer;
   color: ${props => props.theme.colors?.headingColor};
   white-space: nowrap;
+  font-size: 14px;
 
   ${({ active }) => active && css`
     border-bottom: 3px solid;
