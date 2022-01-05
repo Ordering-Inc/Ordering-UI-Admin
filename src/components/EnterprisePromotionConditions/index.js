@@ -9,6 +9,7 @@ import { EnterprisePromotionPaymethods } from '../EnterprisePromotionPaymethods'
 import { EnterprisePromotionSchedule } from '../EnterprisePromotionSchedule'
 import { EnterprisePromotionSpecficProducts } from '../EnterprisePromotionSpecficProducts'
 import { EnterprisePromotionSpecficCategory } from '../EnterprisePromotionSpecficCategory'
+import { EnterprisePromotionDeliveryzones } from '../EnterprisePromotionDeliveryzones'
 
 import {
   ConditionsContainer,
@@ -24,7 +25,9 @@ export const EnterprisePromotionConditions = (props) => {
     formState,
     actionState,
     promotionState,
+    handleChangeItem,
     handleUpdateClick,
+    selectedBusinessIds,
     handleAddPromotion
   } = props
 
@@ -38,7 +41,7 @@ export const EnterprisePromotionConditions = (props) => {
     'limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'
   ]
 
-  const specifics = ['products', 'categories']
+  const specifics = ['products', 'categories', 'delivery_zones']
 
   const handlePromotionEdit = (condition, title) => {
     setSelectedCondition(condition)
@@ -59,7 +62,7 @@ export const EnterprisePromotionConditions = (props) => {
     { id: 5, title: t('OFFER_USER_ORDER_COUNT', 'Max. amount of orders in platform of user'), attribute: 'user_order_count' },
     { id: 6, title: t('PAYMEN_METHODS_ALLOWED', 'Payment methods allowed'), attribute: 'paymethods' },
     { id: 7, title: t('MAX_AMOUNT_TO_DISCOUNT', 'Maximum discount limit'), attribute: 'max_discount' },
-    // { id: 8, title: t('DELIVERY_ZONE', 'Delivery zones'), attribute: 'delivery_zones' },
+    { id: 8, title: t('DELIVERY_ZONE', 'Delivery zones'), attribute: 'delivery_zones' },
     { id: 9, title: t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order Type'), attribute: 'order_types_allowed' },
     { id: 10, title: t('MINUTES_FROM_LAST_ORDER', 'Minutes from the last order'), attribute: 'valid_from_after_user_last_order_minutes' },
     { id: 11, title: t('MINUTES_UNTIL_LAST_ORDER', 'Minutes until the last order'), attribute: 'valid_until_after_user_last_order_minutes' },
@@ -67,8 +70,7 @@ export const EnterprisePromotionConditions = (props) => {
   ]
 
   const handleClickSave = () => {
-    if (isAddMode) handleAddPromotion()
-    else handleUpdateClick()
+    if (!isAddMode) handleUpdateClick()
     setOpenSingleModal(false)
     setOpenMultipleModal(false)
   }
@@ -90,7 +92,10 @@ export const EnterprisePromotionConditions = (props) => {
                     ? promotionState.promotion[condition.attribute]?.length
                     : promotionState.promotion[condition.attribute])
                   ? (
-                    <CheckboxWrapper active>
+                    <CheckboxWrapper
+                      active
+                      onClick={() => handleChangeItem({ [condition.attribute]: null })}
+                    >
                       <Check2 />
                     </CheckboxWrapper>
                   )
@@ -109,10 +114,10 @@ export const EnterprisePromotionConditions = (props) => {
         <Button
           borderRadius='8px'
           color='primary'
-          onClick={() => handleClickSave()}
+          onClick={() => isAddMode ? handleAddPromotion() : handleUpdateClick()}
           disabled={Object.keys(formState.changes).length === 0 || actionState.loading}
         >
-          {t('SAVE', 'Save')}
+          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ConditionsContainer>
 
@@ -154,6 +159,13 @@ export const EnterprisePromotionConditions = (props) => {
         {selectedCondition === 'paymethods' && (
           <EnterprisePromotionPaymethods
             {...props}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
+        {selectedCondition === 'delivery_zones' && (
+          <EnterprisePromotionDeliveryzones
+            {...props}
+            businessIds={selectedBusinessIds}
             onClickDone={() => handleClickSave()}
           />
         )}

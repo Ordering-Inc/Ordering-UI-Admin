@@ -18,6 +18,7 @@ import {
 
 export const EnterprisePromotionSpecficProducts = (props) => {
   const {
+    formState,
     promotionState,
     handleChangeItem,
     onClickDone,
@@ -34,7 +35,12 @@ export const EnterprisePromotionSpecficProducts = (props) => {
   const [selectedBusinessSlug, setSelectedBusinessSlug] = useState(null)
 
   useEffect(() => {
-    const businessIds = promotionState?.promotion.businesses.reduce((ids, business) => [...ids, business.id], [])
+    let businessIds = []
+    if (Object.keys(promotionState?.promotion).length) {
+      businessIds = promotionState?.promotion.businesses.reduce((ids, business) => [...ids, business.id], [])
+    } else {
+      businessIds = formState?.changes?.businesses ? [...formState?.changes?.businesses] : []
+    }
     const _businessOptions = businessesList.businesses.filter(business => businessIds.includes(business.id)).map(business => {
       return {
         value: business.slug,
@@ -47,6 +53,9 @@ export const EnterprisePromotionSpecficProducts = (props) => {
       }
     })
     setBusinessOptions(_businessOptions)
+    if (_businessOptions.length) {
+      setSelectedBusinessSlug(_businessOptions[0]?.value)
+    }
   }, [])
 
   useEffect(() => {
@@ -58,6 +67,7 @@ export const EnterprisePromotionSpecficProducts = (props) => {
   }, [selectedProductsIds])
 
   useEffect(() => {
+    if (!promotionState?.promotion?.products) return
     const _selectedProductsIds = promotionState?.promotion?.products.reduce((ids, product) => [...ids, product.id], [])
     setSelectedProductsIds(_selectedProductsIds)
   }, [])

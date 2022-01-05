@@ -70,8 +70,10 @@ export const CheckboxWrapper = styled.div`
   }
 
   ${({ active }) => active ? css`
+    cursor: pointer;
     background: ${props => props.theme.colors.primary};
   ` : css`
+    cursor: not-allowed;
     border: 1px solid #B1BCCC;
   `}
 `
