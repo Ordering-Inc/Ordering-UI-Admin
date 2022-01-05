@@ -290,6 +290,7 @@ const ProductDetailsAdvancedUI = (props) => {
           formChanges={formTaxChanges}
           onClose={() => setTaxToEdit({ action: null, payload: null })}
           handleSave={handleSaveTax}
+          setAlertState={setAlertState}
         />
       </Modal>
       <Alert
