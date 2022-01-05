@@ -149,7 +149,7 @@ const ProductExtraMetaFieldsUI = (props) => {
       ) : (
         <WrapMetaFields>
           <MetaTitle>
-            {t('CUSTOM_FEILDS', 'Custom Fields')}
+            {t('CUSTOM_FIELDS', 'Custom Fields')}
           </MetaTitle>
           {metaFieldsList.metaFields.map(metaField => (
             <MetaContainer key={metaField.id}>

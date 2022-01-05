@@ -78,7 +78,7 @@ export const OrdersTable = (props) => {
     },
     {
       value: 'orderNumber',
-      content: t('ORDER_NO', 'Order No.')
+      content: t('INVOICE_ORDER_NO', 'Order No.')
     },
     {
       value: 'dateTime',
@@ -102,7 +102,7 @@ export const OrdersTable = (props) => {
     },
     {
       value: 'total',
-      content: t('TOTAL', 'Total')
+      content: t('EXPORT_TOTAL', 'Total')
     }
   ]
 
@@ -396,7 +396,7 @@ export const OrdersTable = (props) => {
                       )}
                       <div className='info'>
                         {allowColumns?.orderNumber && (
-                          <p className='bold'>{t('ORDER_NO', 'Order No.')} {order?.id}</p>
+                          <p className='bold'>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</p>
                         )}
                         {allowColumns?.dateTime && (
                           <p className='date'>

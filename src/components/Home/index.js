@@ -46,7 +46,6 @@ const HomeUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [sessionState] = useSession()
 
-
   const goToContact = (location) => {
     if (location === 'sales') {
       window.open('https://www.ordering.co/ordering-sales', '_blank')
@@ -245,21 +244,21 @@ const HomeUI = (props) => {
           </ParagraphHeaders>
           <AssistanceWidgets>
             <AssistanceTitle>
-              <h1>{t('ASSIST_TITILE_1', 'Which kind of')}{' '}
-                <span>{t('ASSIST_TITILE_2', 'assistance do you need?')}</span>
+              <h1>{t('SUPPORT_TITLE_START', 'Which kind of')}{' '}
+                <span>{t('SUPPORT_TITLE_END', 'assistance do you need?')}</span>
               </h1>
               <p>{t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.')}</p>
             </AssistanceTitle>
             <AssistanceBody>
               <WidgeBlock>
-                <h3>{t('CONTACT_SALES_TITLE', 'Contact our Sales Team')}</h3>
+                <h3>{t('CONTACT_SALES_TEAM', 'Contact our Sales Team')}</h3>
                 <p>{t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')}</p>
-                <Button outline color='primary' onClick={() => goToContact('sales')}>{t('CONTACT_SALES_BUTTON_TEXT', 'Sales Contact')}</Button>
+                <Button outline color='primary' onClick={() => goToContact('sales')}>{t('SALES_CONTACT', 'Sales Contact')}</Button>
               </WidgeBlock>
               <WidgeBlock>
-                <h3>{t('CONTACT_SUPPORT_TITLE', 'Contact our Support Team')}</h3>
+                <h3>{t('CONTACT_SUPPORT_TEAM', 'Contact our Support Team')}</h3>
                 <p>{t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')}</p>
-                <Button outline color='primary' onClick={() => goToContact('tech')}>{t('CONTACT_SUPPORT_BUTTON_TEXT', 'Tech Support')}</Button>
+                <Button outline color='primary' onClick={() => goToContact('tech')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
               </WidgeBlock>
             </AssistanceBody>
           </AssistanceWidgets>

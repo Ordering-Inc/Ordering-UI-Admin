@@ -92,7 +92,7 @@ const DriverAnalyticsUI = (props) => {
           </BusinessFilterWrapper>
           <BusinessFilterWrapper>
             <Button onClick={() => setDriversFilterModal(true)}>
-              {t('DRIVERS', 'DRIVERS')} ({filterList?.userIds ? filterList?.userIds.length : t('ALL', 'All')})
+              {t('DRIVERS', 'Drivers')} ({filterList?.userIds ? filterList?.userIds.length : t('ALL', 'All')})
             </Button>
           </BusinessFilterWrapper>
           <AnalyticsTimeZoneWrapper>

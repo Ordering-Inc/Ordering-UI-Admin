@@ -41,7 +41,7 @@ export const SpreadSheetContainer = styled.div`
       border-bottom: 1px solid #B1BCCC !important;
       > div {
         padding: 15px !important;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         color: ${props => props.theme.colors.headingColor} !important;
       }

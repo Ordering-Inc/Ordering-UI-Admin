@@ -225,3 +225,58 @@ export const SearchBarWrapper = styled.div`
     }
   }
 `
+export const MultiOption = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  min-width: ${({ minWidth }) => minWidth || '100px'};
+  color: #333;
+  cursor: pointer;
+
+  ${({ disabled }) => disabled && css`
+    cursor: no-drop;
+    opacity: 0.6;
+  `}
+
+  ${({ showDisable }) => showDisable && css`
+    display: none;
+  `}
+
+  ${({ optionBottomBorder }) => optionBottomBorder && css`
+      border-bottom: 1px solid #D8D8D8;
+  `}
+
+  &:hover {
+    background-color: ${darken(0.03, '#fafafa')};
+  }
+
+  ${props => props.selected && css`
+    background-color: ${darken(0.07, '#fafafa')};
+  
+    &:hover {
+      background-color: ${darken(0.07, '#fafafa')};
+    }
+  `}
+
+  svg {
+    vertical-align: text-top;
+  }
+
+  ${({ withIcons }) => withIcons && css`
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      svg {
+        margin-right: 3px;
+        ${props => props.theme?.rtl && css`
+          margin-left: 3px;
+          margin-right: 0px;
+       `}
+      }
+  `}
+
+  ${({ color }) => color === 'primary' && css`
+    color: #C3C3C3;
+  `}
+`

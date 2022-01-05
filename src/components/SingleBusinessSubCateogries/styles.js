@@ -49,6 +49,7 @@ export const AccordionItem = styled.div`
   padding: 15px 10px;
 
   > div {
+    flex: 1;
     display: flex;
     align-items: center;
     img {

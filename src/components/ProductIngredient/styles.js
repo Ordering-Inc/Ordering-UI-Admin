@@ -28,6 +28,7 @@ export const Header = styled.div`
 
   button {
     height: 42px;
+    line-height: 16px;
     ${props => props.theme?.rtl ? css`
       margin-left: 40px;
     ` : css`

@@ -110,7 +110,7 @@ const ReportsOrderStatusUI = (props) => {
   return (
     <>
       <OrderStatusContainer>
-        <Title>{t('ORDER_STATUS', 'Order status')}</Title>
+        <Title>{t('ORDER_STATUS_TEXT', 'Order status')}</Title>
         <ButtonActionList>
           <BrandBusinessWrapper>
             <Button

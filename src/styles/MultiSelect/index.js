@@ -10,7 +10,7 @@ import {
   Selected,
   Options,
   OptionsInner,
-  Option,
+  MultiOption,
   Chevron,
   Header,
   MultiSelectOption
@@ -124,7 +124,7 @@ export const MultiSelect = (props) => {
             optionInnerMaxHeight={props.optionInnerMaxHeight}
           >
             {options.map((option, i) => (
-              <Option
+              <MultiOption
                 key={i}
                 color={option.color}
                 onClick={() => handleSelectOption(option)}
@@ -138,7 +138,7 @@ export const MultiSelect = (props) => {
                   </CheckBox>
                 )}
                 {option.content}
-              </Option>
+              </MultiOption>
             ))}
           </OptionsInner>
         </Options>

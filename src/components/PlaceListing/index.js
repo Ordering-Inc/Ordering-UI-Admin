@@ -365,7 +365,7 @@ const PlaceListingUI = (props) => {
                 <AddNewPageButton
                   onClick={() => handleOpenCityDetails(null)}
                 >
-                  {t('ADD_NEW_CITY ', 'Add new city')}
+                  {t('ADD_NEW_CITY', 'Add new city')}
                 </AddNewPageButton>
                 {currentCities?.length > 0 && (
                   <Pagination

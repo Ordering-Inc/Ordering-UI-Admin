@@ -70,7 +70,7 @@ export const Reports = (props) => {
     { id: 5, name: t('DETAIL_COMPLETED_ORDERS', 'Detail of the completed orders of each delivery agency'), description: t('DETAIL_COMPLETED_ORDERS_DESC', 'Detail of the completed orders of each delivery agency'), icon: <FileRuled /> },
     { id: 6, name: t('NUMBER_ORDERS_SPECIFIC_RANGE', 'Number of orders within a specific range'), description: t('NUMBER_ORDERS_SPECIFIC_RANGE_DESC', 'Number of orders within a specific range'), icon: <FileEarmarkRuled /> },
     { id: 7, name: t('DRIVER_SCHEDULE', 'Driver schedule'), description: t('DRIVER_SCHEDULE_DESC', 'Driver schedule description'), icon: <CalendarCheck /> },
-    { id: 8, name: t('ORDER_STATUS', 'Order status'), description: t('ORDER_STATUS_DESC', 'Order status description'), icon: <Cart4 /> },
+    { id: 8, name: t('ORDER_STATUS_TEXT', 'Order status'), description: t('ORDER_STATUS_DESC', 'Order status description'), icon: <Cart4 /> },
     { id: 9, name: t('HEAT_MAP_WITH', 'Heat map with'), description: t('HEAT_MAP_WITH_DESC', 'Heat map with description'), icon: <GeoAltFill /> },
     { id: 10, name: t('DRIVER_DISTANCE', 'Driver distance'), description: t('DRIVER_DISTANCE_DESC', 'Driver distance description'), icon: <Vr /> },
     { id: 11, name: t('TIME', 'Time'), description: t('TIME_DESC', 'Time description'), icon: <Alarm /> },
