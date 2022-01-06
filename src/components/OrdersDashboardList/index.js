@@ -23,6 +23,7 @@ export const OrdersDashboardList = (props) => {
     isSearchByOrderId: true,
     isSearchByCustomerEmail: true,
     isSearchByCustomerPhone: true,
+    isSearchByBusinessName: true,
     driverId: props.driverId
   }
 
