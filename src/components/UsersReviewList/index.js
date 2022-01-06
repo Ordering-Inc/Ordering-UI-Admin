@@ -157,14 +157,13 @@ const DriversReviewListUI = (props) => {
   )
 }
 
-export const DriversReviewList = (props) => {
+export const UsersReviewList = (props) => {
   const driversReviewListProps = {
     ...props,
     isSearchByUserEmail: true,
     isSearchByUserName: true,
-    deafultUserTypesSelected: [4],
     UIComponent: DriversReviewListUI,
-    propsToFetch: ['name', 'middle_name', 'second_lastname', 'lastname', 'email', 'photo', 'reviews']
+    propsToFetch: ['name', 'middle_name', 'second_lastname', 'lastname', 'email', 'photo', 'qualification', 'reviews']
   }
   return <DriversController {...driversReviewListProps} />
 }

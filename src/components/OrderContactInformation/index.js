@@ -37,7 +37,7 @@ export const OrderContactInformation = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentCustomer, setCurrentCustomer] = useState(null)
 
-  const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 16, 17]
+  const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
   const handleReviewCustomer = (customer) => {
     setCurrentCustomer(customer)
