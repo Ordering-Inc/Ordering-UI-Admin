@@ -235,7 +235,7 @@ export const DriversGroupsList = (props) => {
             <AddNewGroupButton
               onClick={() => handleOpenDetails(null)}
             >
-              {t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')}
+              {t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}
             </AddNewGroupButton>
             {currentGroups?.length > 0 && (
               <Pagination

@@ -55,7 +55,7 @@ const InvoiceDriverManagerUI = (props) => {
   return (
     <InvoiceDriversContainer>
       <DetailsHeader>
-        <h2>{t('DRIVERS_INVOICE', 'Drivers invoice')}</h2>
+        <h2>{t('DRIVER_INVOICE', 'Driver invoice')}</h2>
         <HeaderActionBtnWrapper>
           <IconButton
             onClick={pdfDownload}

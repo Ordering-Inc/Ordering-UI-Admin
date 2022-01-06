@@ -21,6 +21,7 @@ export const CheckboxWrapper = styled.div`
 
   label {
     margin: 0px;
+    font-size: 14px;
   }
 `
 
