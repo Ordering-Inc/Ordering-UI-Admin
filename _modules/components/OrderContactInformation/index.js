@@ -75,7 +75,7 @@ var OrderContactInformation = function OrderContactInformation(props) {
       currentCustomer = _useState4[0],
       setCurrentCustomer = _useState4[1];
 
-  var pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 16, 17];
+  var pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
 
   var handleReviewCustomer = function handleReviewCustomer(customer) {
     setCurrentCustomer(customer);

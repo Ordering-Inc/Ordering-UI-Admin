@@ -21,7 +21,7 @@ var _styles = require("../../styles");
 
 var _BusinessReviewList = require("../BusinessReviewList");
 
-var _DriversReviewList = require("../DriversReviewList");
+var _UsersReviewList = require("../UsersReviewList");
 
 var _styles2 = require("./styles");
 
@@ -83,9 +83,18 @@ var ReviewsListing = function ReviewsListing(props) {
     onClick: function onClick() {
       return setShowOption('drivers');
     }
-  }, t('DRIVERS', 'Drivers'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
+  }, t('DRIVERS', 'Drivers')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: showOption === 'customers',
+    onClick: function onClick() {
+      return setShowOption('customers');
+    }
+  }, t('CUSTOMERS', 'Customers'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
     parentSearchValue: searchValue
-  }), showOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_DriversReviewList.DriversReviewList, {
+  }), showOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
+    deafultUserTypesSelected: [4],
+    parentSearchValue: searchValue
+  }), showOption === 'customers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
+    deafultUserTypesSelected: [3],
     parentSearchValue: searchValue
   })));
 };

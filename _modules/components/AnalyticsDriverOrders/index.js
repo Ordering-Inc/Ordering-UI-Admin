@@ -68,7 +68,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
       isShowPreview = _useState2[0],
       setIsShowPreview = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       dataOptions = _useState4[0],
       setDataOptions = _useState4[1];
@@ -247,7 +247,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     onClick: downloadCSV
   }))), /*#__PURE__*/_react.default.createElement(_styles.ChartContentWrapper, null, chartDataList !== null && chartDataList !== void 0 && chartDataList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }) : (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data17 = chartDataList.data) === null || _chartDataList$data17 === void 0 ? void 0 : (_chartDataList$data18 = _chartDataList$data17.dataset) === null || _chartDataList$data18 === void 0 ? void 0 : (_chartDataList$data19 = _chartDataList$data18.dataset[0]) === null || _chartDataList$data19 === void 0 ? void 0 : _chartDataList$data19.data.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+  }) : (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data17 = chartDataList.data) === null || _chartDataList$data17 === void 0 ? void 0 : (_chartDataList$data18 = _chartDataList$data17.dataset) === null || _chartDataList$data18 === void 0 ? void 0 : (_chartDataList$data19 = _chartDataList$data18.dataset[0]) === null || _chartDataList$data19 === void 0 ? void 0 : _chartDataList$data19.data.length) > 0 && dataOptions ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
     data: dataOptions,
     options: options,
     ref: chartRef
@@ -264,7 +264,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     onClose: function onClose() {
       return setIsShowPreview(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.ChartContentWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ChartContentWrapper, null, dataOptions && /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
     data: dataOptions,
     options: options
   }))));
