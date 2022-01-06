@@ -187,7 +187,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('CHARGE_BUSINESS_COMMISION_AND_FEES', 'Charge the business a commision and fees'))
       }, {
         value: 'payout',
-        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PAYOUT_BUSINESS', 'Payout the business'))
+        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('TYPE_PAYOUT_BUSINESS', 'Payout the business'))
       }];
       setTypeInvoiceOptions(typeIvoiceList);
       setBusinessOptions(types);

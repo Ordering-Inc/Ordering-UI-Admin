@@ -87,7 +87,7 @@ var InvoiceDriverManagerUI = function InvoiceDriverManagerUI(props) {
       submitBtnRef.current.click();
     }
   }, [exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading]);
-  return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVERS_INVOICE', 'Drivers invoice')), /*#__PURE__*/_react.default.createElement(_styles.HeaderActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_INVOICE', 'Driver invoice')), /*#__PURE__*/_react.default.createElement(_styles.HeaderActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     onClick: pdfDownload,
     disabled: !(invocing !== null && invocing !== void 0 && invocing.driver) || (invocing === null || invocing === void 0 ? void 0 : invocing.driver) === ''
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {

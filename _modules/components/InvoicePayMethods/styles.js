@@ -21,7 +21,7 @@ var InvoicePayMethodsContainer = _styledComponents.default.div(_templateObject |
 
 exports.InvoicePayMethodsContainer = InvoicePayMethodsContainer;
 
-var CheckboxWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #E9ECEF;\n  padding: 15px 0;\n\n  > input {\n    margin-right: 20px;\n    ", "\n  }\n"])), function (props) {
+var CheckboxWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #E9ECEF;\n  padding: 15px 0;\n\n  > input {\n    margin-right: 20px;\n    ", "\n  }\n\n  label {\n    font-size: 14px;\n    margin: 0;\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n      margin-right: 0;\n    "])));

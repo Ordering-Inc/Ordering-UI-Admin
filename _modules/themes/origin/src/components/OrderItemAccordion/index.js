@@ -218,7 +218,7 @@ var OrderItemAccordion = function OrderItemAccordion(props) {
     onClick: function onClick() {
       return toggleOrderSelect(order.id);
     }
-  }, isChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxCircleFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankCircleFill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.TextBlockContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BigText, null, t('ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement(_styles.SmallText, null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, isChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxCircleFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankCircleFill.default, null)), /*#__PURE__*/_react.default.createElement(_styles.TextBlockContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BigText, null, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement(_styles.SmallText, null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   })))), /*#__PURE__*/_react.default.createElement(_styles.OrderInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.OrderItemAccordionCell, {
     className: "order-item-business"

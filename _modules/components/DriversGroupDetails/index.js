@@ -181,7 +181,7 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     onClick: function onClick() {
       return onDeleteGroup();
     }
-  }, t('DELETE', 'Delete'))))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')))), driversGroupState.driversGroup && /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, driversGroupMenus.map(function (menu) {
+  }, t('DELETE', 'Delete'))))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')))), driversGroupState.driversGroup && /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, driversGroupMenus.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: menu.key,
       active: menu.key === showMenu,

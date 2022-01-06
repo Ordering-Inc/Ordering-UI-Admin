@@ -182,7 +182,7 @@ var SmallOrderItemAccordion = function SmallOrderItemAccordion(props) {
     ref: businessRef
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperAccordionImage, null, /*#__PURE__*/_react.default.createElement(_styles.AccordionImage, {
     bgimage: order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_NO', 'Order No'), ". ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), ((activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.deliveries) || isOrdersListView) && /*#__PURE__*/_react.default.createElement(_styles.MoreDetailsButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INVOICE_ORDER_NO', 'Order No'), " ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), ((activeSwitch === null || activeSwitch === void 0 ? void 0 : activeSwitch.deliveries) || isOrdersListView) && /*#__PURE__*/_react.default.createElement(_styles.MoreDetailsButton, {
     ref: moreDetailRef,
     onClick: function onClick() {
       return openOrderDetail();

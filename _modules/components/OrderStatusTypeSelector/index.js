@@ -153,10 +153,10 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     color: 'primary'
   }, {
     value: 9,
-    name: t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver'),
+    name: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'))),
     color: 'primary'
   }, {
     value: 14,
@@ -226,13 +226,13 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     color: 'primary'
   }, {
     value: null,
-    name: t('CACELLED', 'Cancelled'),
+    name: t('CANCELLED', 'Cancelled'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$orderS = _theme$images4.orderStatus) === null || _theme$images4$orderS === void 0 ? void 0 : _theme$images4$orderS.cancelled,
       alt: "cancelled"
-    }), /*#__PURE__*/_react.default.createElement("p", null, t('CACELLED', 'Cancelled'))),
+    }), /*#__PURE__*/_react.default.createElement("p", null, t('CANCELLED', 'Cancelled'))),
     disabled: true
   }, {
     value: 2,
@@ -257,10 +257,10 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     color: 'primary'
   }, {
     value: 10,
-    name: t('PICKUP_FAILED_BY_DRIVER', 'Pickup Failed by Driver'),
+    name: t('PICK_UP_FAILED_BY_DRIVER', 'Pickup Failed by Driver'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("p", null, t('PICKUP_FAILED_BY_DRIVER', 'Pickup Failed by Driver'))),
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('PICK_UP_FAILED_BY_DRIVER', 'Pickup Failed by Driver'))),
     color: 'primary'
   }, {
     value: 12,

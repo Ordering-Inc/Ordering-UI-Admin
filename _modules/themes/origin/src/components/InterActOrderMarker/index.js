@@ -84,7 +84,7 @@ var InterActOrderMarker = function InterActOrderMarker(props) {
     fontWeight: "bold"
   }, t('NAME', 'Name'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, customer.name, " ", customer.lastname)), (customer === null || customer === void 0 ? void 0 : customer.order_id) && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
     fontWeight: "bold"
-  }, t('ORDER_NO', 'Order No'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, customer.order_id)), (customer === null || customer === void 0 ? void 0 : customer.email) && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
+  }, t('INVOICE_ORDER_NO', 'Order No')), /*#__PURE__*/_react.default.createElement(_styles.Text, null, customer.order_id)), (customer === null || customer === void 0 ? void 0 : customer.email) && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
     fontWeight: "bold"
   }, t('EMAIL', 'Email'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, customer.email)), (customer === null || customer === void 0 ? void 0 : customer.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
     fontWeight: "bold"

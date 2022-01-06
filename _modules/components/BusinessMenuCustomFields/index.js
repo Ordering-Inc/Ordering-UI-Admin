@@ -265,7 +265,7 @@ var BusinessMenuCustomFieldsUI = function BusinessMenuCustomFieldsUI(props) {
       width: 25,
       height: 30
     }));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FEILDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FIELDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
     onClick: function onClick() {
       return onClose();
     }

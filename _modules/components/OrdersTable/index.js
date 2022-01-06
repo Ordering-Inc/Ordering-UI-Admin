@@ -331,7 +331,7 @@ var OrdersTable = function OrdersTable(props) {
   }, t('DRIVER', 'Driver')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("th", {
     colSpan: 3,
     className: "advanced"
-  }, t('ADVANCE_LOGISTICS', 'Advance logistics')), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('ADVANCED_LOGISTICS', 'Advanced logistics')), /*#__PURE__*/_react.default.createElement("th", {
     className: "orderPrice"
   }, /*#__PURE__*/_react.default.createElement(_ColumnAllowSettingPopover.ColumnAllowSettingPopover, {
     open: openPopover,

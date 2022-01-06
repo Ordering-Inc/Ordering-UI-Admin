@@ -104,11 +104,11 @@ var ExportCSVUI = function ExportCSVUI(props) {
     onClick: function onClick() {
       return handleExportAll();
     }
-  }, t('EXPROT_ALL', 'Export all')), /*#__PURE__*/_react.default.createElement(_styles.Item, {
+  }, t('EXPORT_ALL', 'Export all')), /*#__PURE__*/_react.default.createElement(_styles.Item, {
     onClick: function onClick() {
       return handleExportFiltered();
     }
-  }, t('EXPROT_FILTERED', 'Export filtered'))), actionStatus.loading && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+  }, t('EXPORT_FILTERED', 'Export filtered'))), actionStatus.loading && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     primary: true
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalOpen,

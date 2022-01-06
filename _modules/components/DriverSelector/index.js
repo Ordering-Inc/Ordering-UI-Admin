@@ -131,7 +131,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
         value: 'remove',
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
           padding: "3px"
-        }, t('REMOVE_ASSIGNED_DRIVER', 'Remove assigned driver')),
+        }, t('REMOVE_DRIVER', 'Remove assigned driver')),
         disabled: defaultValue === 'default'
       });
     }

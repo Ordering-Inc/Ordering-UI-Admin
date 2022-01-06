@@ -56,7 +56,9 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var formMethods = (0, _reactHookForm.useForm)();
 
@@ -150,7 +152,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
   }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.images) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement("img", {
-    src: product === null || product === void 0 ? void 0 : product.images,
+    src: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_200,c_limit'),
     alt: "product image",
     loading: "lazy"
   }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.images) && /*#__PURE__*/_react.default.createElement("img", {

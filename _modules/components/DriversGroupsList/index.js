@@ -204,7 +204,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
     onClick: function onClick() {
       return handleOpenDetails(null);
     }
-  }, t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')), (currentGroups === null || currentGroups === void 0 ? void 0 : currentGroups.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  }, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')), (currentGroups === null || currentGroups === void 0 ? void 0 : currentGroups.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,

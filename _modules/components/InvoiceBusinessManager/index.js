@@ -103,7 +103,7 @@ var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
     onClick: function onClick() {
       return changeSelectedAnalyticsStatus('order_type');
     }
-  }, t('ORDER_TYPE', 'Order type')))), selectedDetailType === 'general' && /*#__PURE__*/_react.default.createElement(_InvoiceGeneral.InvoiceGeneral, props), selectedDetailType === 'payment_methods' && /*#__PURE__*/_react.default.createElement(_InvoicePayMethods.InvoicePayMethods, props), selectedDetailType === 'order_type' && /*#__PURE__*/_react.default.createElement(_InvoiceOrdertype.InvoiceOrderType, props), /*#__PURE__*/_react.default.createElement(_styles.Form, {
+  }, t('ORDER_TYPE', 'Delivery Type')))), selectedDetailType === 'general' && /*#__PURE__*/_react.default.createElement(_InvoiceGeneral.InvoiceGeneral, props), selectedDetailType === 'payment_methods' && /*#__PURE__*/_react.default.createElement(_InvoicePayMethods.InvoicePayMethods, props), selectedDetailType === 'order_type' && /*#__PURE__*/_react.default.createElement(_InvoiceOrdertype.InvoiceOrderType, props), /*#__PURE__*/_react.default.createElement(_styles.Form, {
     target: "_blank",
     action: "".concat(ordering.root, "/pdf/html"),
     method: "POST"
