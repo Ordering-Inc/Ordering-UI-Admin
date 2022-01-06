@@ -410,13 +410,13 @@ export const MessagesUI = (props) => {
               {history && (
                 <WrapperHitoryHeader>
                   <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false, logistic_information: false })}>
-                    {t('ORDER_HISTORY', 'Order History')}
+                    {t('MOBILE_ORDER_HISTORY', 'Order History')}
                   </TabItem>
                   <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true, logistic_information: false })}>
                     {t('LOGISTICS', 'Logistics')}
                   </TabItem>
                   <TabItem active={tabActive.logistic_information} onClick={() => setTabActive({ orderHistory: false, logistics: false, logistic_information: true })}>
-                    {t('LOGISTIC_INFORMATION', 'Logistic information')}
+                    {t('LOGISTIC_INFORMATION', 'Logistics Information')}
                   </TabItem>
                 </WrapperHitoryHeader>
               )}
