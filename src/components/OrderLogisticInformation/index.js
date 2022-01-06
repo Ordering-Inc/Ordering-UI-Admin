@@ -76,7 +76,7 @@ const LogisticInformationUI = (props) => {
               </BubbleConsole>
               <>
                 <BubbleConsole>
-                  <UppercaseText title='title'>{t('queues', 'queues')}</UppercaseText>
+                  <UppercaseText title='title'>{t('QUEUES', 'Queues')}</UppercaseText>
                 </BubbleConsole>
                 {logisticInformation.data.queues.length > 0 ? (
                   <>
@@ -88,7 +88,7 @@ const LogisticInformationUI = (props) => {
                           </BubbleConsole>
                         )}
                         <BubbleConsole>
-                          <strong>{t('AVAILABLE DRIVERS', 'Available drivers')}: </strong>
+                          <strong>{t('AVAILABLE_DRIVERS', 'Available drivers')}: </strong>
                           <span>{queue.drivers.length}</span>
                         </BubbleConsole>
                         <BubbleConsole>
@@ -103,13 +103,13 @@ const LogisticInformationUI = (props) => {
                           <BubbleConsole>
                             {queue.orders.map((order, i) => (
                               <div key={order.id}>
-                                {i + 1}. {order.id} {order?.waiting_for_preorder && <span>({t('waiting_for_preorder', 'waiting_for_preorder')})</span>}
+                                {i + 1}. {order.id} {order?.waiting_for_preorder && <span>({t('WAITING_FOR_PREORDER', 'waiting for preorder')})</span>}
                               </div>
                             ))}
                           </BubbleConsole>
                         ) : (
                           <BubbleConsole>
-                            {t('WITHOUT_ORDERS', 'without_orders')}
+                            {t('WITHOUT_ORDERS', 'without orders')}
                           </BubbleConsole>
                         )}
                       </React.Fragment>
@@ -117,13 +117,13 @@ const LogisticInformationUI = (props) => {
                   </>
                 ) : (
                   <BubbleConsole>
-                    <UppercaseText>{t('WITHOUT_QUEUES', 'without_queues')}</UppercaseText>
+                    <UppercaseText>{t('WITHOUT_QUEUES', 'Without Queues')}</UppercaseText>
                   </BubbleConsole>
                 )}
               </>
               <>
                 <BubbleConsole>
-                  <UppercaseText title='title'>{t('HISTORY_ATTEMPTS', 'history_attempts')}</UppercaseText>
+                  <UppercaseText title='title'>{t('HISTORY_ATTEMPTS', 'Attempts history')}</UppercaseText>
                 </BubbleConsole>
                 {logisticInformation.data.logistic_attempts.length > 0 ? (
                   <>
@@ -135,7 +135,7 @@ const LogisticInformationUI = (props) => {
                   </>
                 ) : (
                   <BubbleConsole>
-                    <UppercaseText>{t('WITHOUT_HISTORY_ATTEMPTS', 'without_history_attempts')}</UppercaseText>
+                    <UppercaseText>{t('WITHOUT_HISTORY_ATTEMPTS', 'without history attempts')}</UppercaseText>
                   </BubbleConsole>
                 )}
               </>

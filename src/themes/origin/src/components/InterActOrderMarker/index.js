@@ -72,7 +72,7 @@ export const InterActOrderMarker = (props) => {
               {customer?.order_id && (
                 <TextContainer>
                   <Text fontWeight='bold'>
-                    {t('ORDER_NO', 'Order No')}:
+                    {t('INVOICE_ORDER_NO', 'Order No')}
                   </Text>
                   <Text>{customer.order_id}</Text>
                 </TextContainer>

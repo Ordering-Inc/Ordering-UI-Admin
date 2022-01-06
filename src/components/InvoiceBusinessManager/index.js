@@ -80,7 +80,7 @@ const InvoiceBusinessManagerUI = (props) => {
             active={selectedDetailType === 'order_type'}
             onClick={() => changeSelectedAnalyticsStatus('order_type')}
           >
-            {t('ORDER_TYPE', 'Order type')}
+            {t('ORDER_TYPE', 'Delivery Type')}
           </Tab>
         </DragScroll>
       </DetailsList>

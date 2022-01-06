@@ -183,7 +183,7 @@ const BusinessMenuCustomFieldsUI = (props) => {
         <>
           <Header>
             <MetaTitle>
-              {t('CUSTOM_FEILDS', 'Custom Fields')}
+              {t('CUSTOM_FIELDS', 'Custom Fields')}
             </MetaTitle>
             <MdcClose
               onClick={() => onClose()}

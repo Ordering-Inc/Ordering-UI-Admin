@@ -160,7 +160,7 @@ export const SmallOrderItemAccordion = (props) => {
           </WrapperAccordionImage>
           <BusinessContent>
             <h1>
-              {t('ORDER_NO', 'Order No')}. {order?.id}
+              {t('INVOICE_ORDER_NO', 'Order No')} {order?.id}
             </h1>
             <p>{order?.business?.name}</p>
             {(activeSwitch?.deliveries || isOrdersListView) && (
