@@ -232,10 +232,15 @@ const BusinessBrandListingUI = (props) => {
                       <span>{selectedBrand?.name}</span>
                     )
                   }
-                  <Switch
-                    defaultChecked={selectedBrand?.enabled || false}
-                    onChange={(enabled) => handleChangeState(selectedBrand?.id, 'enabled', enabled)}
-                  />
+                  {!selectedBrand && (
+                    <span>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
+                  )}
+                  {selectedBrand && (
+                    <Switch
+                      defaultChecked={selectedBrand?.enabled || false}
+                      onChange={(enabled) => handleChangeState(selectedBrand?.id, 'enabled', enabled)}
+                    />
+                  )}
                 </div>
                 {selectedBrand && (
                   <ActionSelectorWrapper>
