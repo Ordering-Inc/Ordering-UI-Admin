@@ -78,7 +78,7 @@ export const OrderBill = (props) => {
           )}
           {(order?.summary?.service_fee > 0 || order?.serviceFee > 0) && (
             <tr>
-              <td>{t('SERVICE FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
+              <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
               <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee, { currencyPosition: 'left' })}</td>
             </tr>
           )}

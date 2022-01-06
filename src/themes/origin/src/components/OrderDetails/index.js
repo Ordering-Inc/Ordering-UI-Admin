@@ -184,7 +184,7 @@ const OrderDetailsUI = (props) => {
           <OrderInfoContent className='order-info' messageDashboardView={messageDashboardView}>
             <OrderInfo>
               <OrderData messageDashboardView={messageDashboardView}>
-                <h1>{t('ORDER_NO', 'Order No')}. #{order?.id}</h1>
+                <h1>{t('INVOICE_ORDER_NO', 'Order No')} #{order?.id}</h1>
                 <p>{t('DATE_TIME_FOR_ORDER', 'Date and time for your order')}</p>
                 <p className='date'>
                   {parseDate(order?.delivery_datetime, { utc: false })}

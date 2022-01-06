@@ -123,10 +123,10 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 9,
-      name: t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver'),
+      name: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver'),
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('PICKUP_COMPLETED_BY_DRIVER', 'Pickup completed by driver')}</p>
+          <p>{t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver')}</p>
         </Option>
       ),
       color: 'primary'
@@ -224,11 +224,11 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: null,
-      name: t('CACELLED', 'Cancelled'),
+      name: t('CANCELLED', 'Cancelled'),
       content: (
         <Option noPadding={noPadding}>
           <img src={theme?.images?.orderStatus?.cancelled} alt='cancelled' />
-          <p>{t('CACELLED', 'Cancelled')}</p>
+          <p>{t('CANCELLED', 'Cancelled')}</p>
         </Option>
       ),
       disabled: true
@@ -265,10 +265,10 @@ export const OrderStatusTypeSelector = (props) => {
     },
     {
       value: 10,
-      name: t('PICKUP_FAILED_BY_DRIVER', 'Pickup Failed by Driver'),
+      name: t('PICK_UP_FAILED_BY_DRIVER', 'Pickup Failed by Driver'),
       content: (
         <Option noPadding={noPadding}>
-          <p>{t('PICKUP_FAILED_BY_DRIVER', 'Pickup Failed by Driver')}</p>
+          <p>{t('PICK_UP_FAILED_BY_DRIVER', 'Pickup Failed by Driver')}</p>
         </Option>
       ),
       color: 'primary'

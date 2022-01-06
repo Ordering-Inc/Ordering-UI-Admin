@@ -217,7 +217,7 @@ const OrderDetailsUI = (props) => {
           />
           <OrderStatus>
             <div>
-              <h2>{t('ORDER_STATUS', 'Order status')}</h2>
+              <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
               <p>
                 {order?.delivery_datetime_utc
                   ? parseDate(order?.delivery_datetime_utc)
@@ -256,7 +256,7 @@ const OrderDetailsUI = (props) => {
             driversList={driversList}
           />
           <OrderProducts>
-            <h2>{t('SUMMARY', 'Summary')}</h2>
+            <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
             {order?.products?.length && order?.products.map((product) => (
               <ProductItemAccordion
                 key={product.id}

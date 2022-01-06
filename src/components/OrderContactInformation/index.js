@@ -92,7 +92,7 @@ export const OrderContactInformation = (props) => {
                     )}
                     {order?.business?.address && (
                       <tr>
-                        <td>{t('FULL_ADDRESS', 'Full address')}</td>
+                        <td>{t('CHECKOUT_FULL_ADDRESS', 'Full address')}</td>
                         <td>
                           <a href={`http://maps.google.com/?q=${order?.business?.address}`} rel='noopener noreferrer' target='_blank'>{order?.business?.address}</a>
                         </td>
@@ -171,7 +171,7 @@ export const OrderContactInformation = (props) => {
                 )}
                 {order?.customer?.address && (
                   <tr>
-                    <td>{t('FULL_ADDRESS', 'Full address')}</td>
+                    <td>{t('CHECKOUT_FULL_ADDRESS', 'Full address')}</td>
                     <td>
                       <a href={`http://maps.google.com/?q=${order?.customer?.address}`} rel='noopener noreferrer' target='_blank'>{order?.customer?.address}</a>
                     </td>

@@ -113,7 +113,7 @@ const DriversGroupDetailsUI = (props) => {
             </>
           ) : (
             <div>
-              <h1>{t('ADD_NEW_DRIVER_GROUP ', 'Add new driver group')}</h1>
+              <h1>{t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}</h1>
             </div>
           )}
         </Header>

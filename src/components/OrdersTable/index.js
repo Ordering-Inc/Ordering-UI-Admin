@@ -243,7 +243,7 @@ export const OrdersTable = (props) => {
                 <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
               )}
               {allowColumns?.advanced && (
-                <th colSpan={3} className='advanced'>{t('ADVANCE_LOGISTICS', 'Advance logistics')}</th>
+                <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
               )}
               <th className='orderPrice'>
                 <ColumnAllowSettingPopover

@@ -88,8 +88,9 @@ export const UploadImageIconContainer = styled.div`
   p {
     margin: 0px;
     padding-top: 14px;
-    font-size: 14px;
+    font-size: 12px;
     color: ${props => props.theme.colors.textGray};
+    text-align: center;
   }
 `
 export const DropDownWrapper = styled.div`

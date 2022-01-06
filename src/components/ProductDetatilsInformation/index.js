@@ -29,7 +29,7 @@ export const ProductDetatilsInformation = (props) => {
     onCancel
   } = props
 
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
   const formMethods = useForm()
   const [, t] = useLanguage()
   const productImageInputRef = useRef(null)
@@ -105,7 +105,7 @@ export const ProductDetatilsInformation = (props) => {
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                 : ((!formState.changes?.images || formState.result?.result === 'Network Error' || formState.result.error)
                   ? product?.images &&
-                    (<img src={product?.images} alt='product image' loading='lazy' />)
+                    (<img src={optimizeImage(product?.images, 'h_200,c_limit')} alt='product image' loading='lazy' />)
                   : formState?.changes?.images &&
                     <img src={formState?.changes?.images} alt='product image' loading='lazy' />
                 )}
