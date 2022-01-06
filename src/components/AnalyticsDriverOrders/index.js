@@ -26,7 +26,7 @@ export const AnalyticsDriverOrders = (props) => {
   const [{ parsePrice }] = useUtils()
   const chartRef = useRef(null)
   const [isShowPreview, setIsShowPreview] = useState(false)
-  const [dataOptions, setDataOptions] = useState([])
+  const [dataOptions, setDataOptions] = useState(null)
 
   const generateData = () => {
     const values = chartDataList.data.dataset.dataset.map((item, index) => {
@@ -147,7 +147,7 @@ export const AnalyticsDriverOrders = (props) => {
             chartDataList?.loading ? (
               <Skeleton height={150} />
             ) : (
-              chartDataList?.data?.dataset?.dataset[0]?.data.length > 0 ? <Line data={dataOptions} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+              (chartDataList?.data?.dataset?.dataset[0]?.data.length > 0 && dataOptions) ? <Line data={dataOptions} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
             )
           }
         </ChartContentWrapper>
@@ -169,7 +169,7 @@ export const AnalyticsDriverOrders = (props) => {
         onClose={() => setIsShowPreview(false)}
       >
         <ChartContentWrapper>
-          <Line data={dataOptions} options={options} />
+          {dataOptions && <Line data={dataOptions} options={options} />}
         </ChartContentWrapper>
       </Modal>
     </>
