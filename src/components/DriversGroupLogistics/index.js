@@ -102,7 +102,7 @@ export const DriversGroupLogistics = (props) => {
               )
           }
         </RadioButton>
-        <span>{t('READY_FOR_PICKUP', 'Ready for Pickup')}</span>
+        <span>{t('PREPARATION_COMPLETED', 'Preparation Completed')}</span>
       </OrderStatusWrapper>
 
       <LogisticsConfigsContainer>

@@ -215,6 +215,11 @@ export const InvoiceGeneral = (props) => {
             min='0'
             defaultValue={invocing?.percentage_fee}
             onChange={(e) => handleChangeFormState('percentage_fee', e.target.value)}
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
           />
         </FormControl>
         <FormControl className='col-md-6'>
@@ -225,6 +230,11 @@ export const InvoiceGeneral = (props) => {
             min='0'
             defaultValue={invocing?.fixed_fee}
             onChange={(e) => handleChangeFormState('fixed_fee', e.target.value)}
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
           />
         </FormControl>
         {
@@ -237,6 +247,11 @@ export const InvoiceGeneral = (props) => {
                 min='0'
                 defaultValue={invocing?.percentage_delivery_price}
                 onChange={(e) => handleChangeFormState('percentage_delivery_price', e.target.value)}
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
               />
             </FormControl>
           )
@@ -251,6 +266,11 @@ export const InvoiceGeneral = (props) => {
                 min='0'
                 defaultValue={invocing?.percentage_driver_tip}
                 onChange={(e) => handleChangeFormState('percentage_driver_tip', e.target.value)}
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
               />
             </FormControl>
           )
@@ -263,6 +283,11 @@ export const InvoiceGeneral = (props) => {
             min='0'
             defaultValue={invocing?.tax}
             onChange={(e) => handleChangeFormState('tax', e.target.value)}
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
           />
         </FormControl>
         <FormControl className='col-md-6'>
@@ -273,6 +298,11 @@ export const InvoiceGeneral = (props) => {
             min='0'
             defaultValue={invocing?.misc_amount}
             onChange={(e) => handleChangeFormState('misc_amount', e.target.value)}
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
           />
         </FormControl>
         <FormControl className='col-md-12'>
