@@ -91,16 +91,18 @@ const AnalyticsBusinessFilterUI = (props) => {
           ))
         ) : (
           <div>
-            <BusinessFilterOption
-              onClick={handleChangeAllCheck}
-            >
-              {isAllCheck ? (
-                <RiCheckboxFill className='fill' />
-              ) : (
-                <RiCheckboxBlankLine />
-              )}
-              <BusinessName>{t('ALL', 'All')}</BusinessName>
-            </BusinessFilterOption>
+            {currentPages.length > 0 && (
+              <BusinessFilterOption
+                onClick={handleChangeAllCheck}
+              >
+                {isAllCheck ? (
+                  <RiCheckboxFill className='fill' />
+                ) : (
+                  <RiCheckboxBlankLine />
+                )}
+                <BusinessName>{t('ALL', 'All')}</BusinessName>
+              </BusinessFilterOption>
+            )}
             {currentPages.map((business, i) => (
               <BusinessFilterOption
                 key={i}
