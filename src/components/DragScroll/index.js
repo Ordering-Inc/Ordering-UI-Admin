@@ -78,6 +78,14 @@ export const DragScroll = ({ children }) => {
     setContainerWidth(scrollContainerRef?.current?.offsetWidth)
   }, [scrollWrapperRef, scrollContainerRef, width, children])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setWrapperScrollLeft(scrollWrapperRef.current.scrollLeft)
+      setWrapperWidth(scrollWrapperRef?.current?.offsetWidth)
+      setContainerWidth(scrollContainerRef?.current?.offsetWidth)
+    }, 300)
+  }, [])
+
   return (
     <ScrollBox className='scroll-box'>
       <ScrollBoxWrapper className='scroll-box__wrapper' ref={scrollWrapperRef}>
