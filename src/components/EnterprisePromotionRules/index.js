@@ -49,7 +49,7 @@ export const EnterprisePromotionRules = (props) => {
 
   const promotionTypes = [
     { value: 1, content: <Option>{t('MOBILE_FRONT_SUB_TOTAL', 'Subtotal')}</Option> },
-    { vlaue: 2, content: <Option>{t('DELIVERY_FEE', 'Delivery fee')}</Option> },
+    { value: 2, content: <Option>{t('DELIVERY_FEE', 'Delivery fee')}</Option> },
     { value: 3, content: <Option>{t('BUSINESS_SERVICE_FEE', 'Service fee')}</Option> }
   ]
 
