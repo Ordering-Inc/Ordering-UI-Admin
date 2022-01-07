@@ -28,7 +28,7 @@ var AddressListUl = _styledComponents.default.ul(_templateObject3 || (_templateO
 
 exports.AddressListUl = AddressListUl;
 
-var AddressItem = _styledComponents.default.li(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 12px 0px;\n\n  label {\n    font-size: 15px;\n    margin-left: 5px;\n    font-weight: bold;\n    ", "\n  }\n\n  .wrapAddress {\n    display: flex;\n    align-items: center;\n\n    span {\n      color: ", ";\n      svg {\n        color: ", ";\n      }\n      font-size: 14px;\n      display: flex;\n      cursor: pointer;\n      margin-right: 15px;\n      ", "\n      &.radio {\n        color: ", ";\n        font-size: 24px;\n      }\n    }\n  }\n\n  .address {\n    display: flex;\n    flex-direction: column;\n    line-height: 1.5;\n    span {\n      text-align: initial;\n    }\n  }\n"])), function (props) {
+var AddressItem = _styledComponents.default.li(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 12px 0px;\n\n  label {\n    font-size: 15px;\n    margin-left: 5px;\n    font-weight: bold;\n    ", "\n  }\n\n  .wrapAddress {\n    display: flex;\n    align-items: center;\n\n    span {\n      color: ", ";\n      svg {\n        color: ", ";\n      }\n      font-size: 14px;\n      display: flex;\n      cursor: pointer;\n      margin-right: 15px;\n      ", "\n      &.radio {\n        color: ", ";\n        font-size: 24px;\n      }\n    }\n  }\n\n  .address {\n    display: flex;\n    flex-direction: column;\n    line-height: 1.5;\n    span {\n      text-align: initial;\n\n      &:last-child {\n        font-size: 10px;\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 5px;\n      margin-left: 0;\n  "])));
@@ -42,6 +42,8 @@ var AddressItem = _styledComponents.default.li(_templateObject4 || (_templateObj
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n        margin-right: 0px;\n      "])));
 }, function (props) {
   return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.colors.disabled;
 });
 
 exports.AddressItem = AddressItem;

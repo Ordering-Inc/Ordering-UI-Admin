@@ -184,7 +184,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
 
       var typeIvoiceList = [{
         value: 'charge',
-        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('CHARGE_BUSINESS_COMMISION_AND_FEES', 'Charge the business a commision and fees'))
+        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('TYPE_CHARGE_BUSINESS', 'Charge the business a commision and fees'))
       }, {
         value: 'payout',
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('TYPE_PAYOUT_BUSINESS', 'Payout the business'))
@@ -269,6 +269,11 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.percentage_fee,
     onChange: function onChange(e) {
       return handleChangeFormState('percentage_fee', e.target.value);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
@@ -279,6 +284,11 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.fixed_fee,
     onChange: function onChange(e) {
       return handleChangeFormState('fixed_fee', e.target.value);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
@@ -289,6 +299,11 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.percentage_delivery_price,
     onChange: function onChange(e) {
       return handleChangeFormState('percentage_delivery_price', e.target.value);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
@@ -299,6 +314,11 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.percentage_driver_tip,
     onChange: function onChange(e) {
       return handleChangeFormState('percentage_driver_tip', e.target.value);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
@@ -309,6 +329,11 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.tax,
     onChange: function onChange(e) {
       return handleChangeFormState('tax', e.target.value);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
@@ -319,6 +344,11 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     defaultValue: invocing === null || invocing === void 0 ? void 0 : invocing.misc_amount,
     onChange: function onChange(e) {
       return handleChangeFormState('misc_amount', e.target.value);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-12"

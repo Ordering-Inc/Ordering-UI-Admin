@@ -105,7 +105,7 @@ var DeliveryDashboardOrdersList = function DeliveryDashboardOrdersList(props) {
   };
   var ReadyForPickupOrdersControlProps = {
     orderStatus: [4],
-    orderStatusTitle: t('READY_FOR_PICKUP', 'Ready for pickup')
+    orderStatusTitle: t('PREPARATION_COMPLETED', 'Preparation Completed')
   };
   var PickupCompletedByDriverOrdersControlProps = {
     orderStatus: [9],

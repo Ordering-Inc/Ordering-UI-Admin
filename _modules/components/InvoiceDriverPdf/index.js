@@ -134,8 +134,8 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
       percentage: 60
     }, {
       key: 4,
-      value: 'Ready for pickup',
-      slug: 'READY_FOR_PICKUP',
+      value: 'Preparation Completed',
+      slug: 'PREPARATION_COMPLETED',
       percentage: 70
     }, {
       key: 5,
@@ -247,15 +247,15 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     style: styles.table.thead.trLast
   }, /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Number"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('EXPORT_ORDER_NUMBER', 'Order number')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Datetime"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('EXPORT_DATE', 'Date')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Status"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('CONTROL_PANEL_ORDERS_STATUS_HEADER', 'Status')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Subtotal"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Total"))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in8 = exportInvoiceList.invoice) === null || _exportInvoiceList$in8 === void 0 ? void 0 : _exportInvoiceList$in8.orders) && (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in9 = exportInvoiceList.invoice) === null || _exportInvoiceList$in9 === void 0 ? void 0 : (_exportInvoiceList$in10 = _exportInvoiceList$in9.orders) === null || _exportInvoiceList$in10 === void 0 ? void 0 : _exportInvoiceList$in10.map(function (order, i) {
+  }, t('TOTAL', 'Total')))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in8 = exportInvoiceList.invoice) === null || _exportInvoiceList$in8 === void 0 ? void 0 : _exportInvoiceList$in8.orders) && (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in9 = exportInvoiceList.invoice) === null || _exportInvoiceList$in9 === void 0 ? void 0 : (_exportInvoiceList$in10 = _exportInvoiceList$in9.orders) === null || _exportInvoiceList$in10 === void 0 ? void 0 : _exportInvoiceList$in10.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("td", {

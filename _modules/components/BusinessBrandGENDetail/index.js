@@ -72,10 +72,8 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
 
   var brandImageInputRef = (0, _react.useRef)(null);
 
-  var handleClickImage = function handleClickImage(type) {
-    if (type === 'image') {
-      brandImageInputRef.current.click();
-    }
+  var handleClickImage = function handleClickImage() {
+    brandImageInputRef.current.click();
   };
 
   var closeAlert = function closeAlert() {
@@ -125,7 +123,7 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
   }, [brandFormState === null || brandFormState === void 0 ? void 0 : brandFormState.result]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandGeneralDetail, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandLogo, {
     onClick: function onClick() {
-      return handleClickImage('image');
+      return handleClickImage();
     }
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
     onFiles: function onFiles(files) {
@@ -138,7 +136,7 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     disabled: brandFormState.loading
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
     onDrop: function onDrop(dataTransfer) {
-      return handleFiles(dataTransfer.files, 'image');
+      return handleFiles(dataTransfer.files, 'logo');
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: brandFormState.loading

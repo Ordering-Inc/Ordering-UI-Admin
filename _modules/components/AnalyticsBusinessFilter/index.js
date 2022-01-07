@@ -153,7 +153,7 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
       width: 120,
       height: 24
     })));
-  }) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterOption, {
+  }) : /*#__PURE__*/_react.default.createElement("div", null, currentPages.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessFilterOption, {
     onClick: handleChangeAllCheck
   }, isAllCheck ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
     className: "fill"

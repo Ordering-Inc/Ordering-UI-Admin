@@ -134,8 +134,8 @@ var InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
       percentage: 60
     }, {
       key: 4,
-      value: 'Ready for pickup',
-      slug: 'READY_FOR_PICKUP',
+      value: 'Preparation Completed',
+      slug: 'PREPARATION_COMPLETED',
       percentage: 70
     }, {
       key: 5,
@@ -190,37 +190,37 @@ var InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
     }, {
       key: 15,
       value: 'Pickup completed by customer',
-      slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
+      slug: 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER',
       percentage: 100
     }, {
       key: 16,
       value: 'Canceled by customer',
-      slug: 'CANCELED_BY_CUSTOMER',
+      slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER',
       percentage: 0
     }, {
       key: 17,
       value: 'Not picked by customer',
-      slug: 'NOT_PICKED_BY_CUSTOMER',
+      slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER',
       percentage: 0
     }, {
       key: 18,
       value: 'Driver almost arrived to business',
-      slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
+      slug: 'ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS',
       percentage: 50
     }, {
       key: 19,
       value: 'Driver almost arrived to customer',
-      slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
+      slug: 'ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER',
       percentage: 90
     }, {
       key: 20,
       value: 'Customer almost arrived to business',
-      slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
+      slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS',
       percentage: 50
     }, {
       key: 21,
       value: 'Customer arrived to business',
-      slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
+      slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS',
       percentage: 60
     }];
     var objectStatus = orderStatus.find(function (o) {
@@ -247,15 +247,15 @@ var InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
     style: styles.table.thead.trLast
   }, /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Number"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('EXPORT_ORDER_NUMBER', 'Order number')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Datetime"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('EXPORT_DATE', 'Date')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Status"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('CONTROL_PANEL_ORDERS_STATUS_HEADER', 'Status')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Subtotal"), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, "Total"))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in8 = exportInvoiceList.invoice) === null || _exportInvoiceList$in8 === void 0 ? void 0 : _exportInvoiceList$in8.orders) && (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in9 = exportInvoiceList.invoice) === null || _exportInvoiceList$in9 === void 0 ? void 0 : (_exportInvoiceList$in10 = _exportInvoiceList$in9.orders) === null || _exportInvoiceList$in10 === void 0 ? void 0 : _exportInvoiceList$in10.map(function (order, i) {
+  }, t('TOTAL', 'Total')))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in8 = exportInvoiceList.invoice) === null || _exportInvoiceList$in8 === void 0 ? void 0 : _exportInvoiceList$in8.orders) && (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in9 = exportInvoiceList.invoice) === null || _exportInvoiceList$in9 === void 0 ? void 0 : (_exportInvoiceList$in10 = _exportInvoiceList$in9.orders) === null || _exportInvoiceList$in10 === void 0 ? void 0 : _exportInvoiceList$in10.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("td", {

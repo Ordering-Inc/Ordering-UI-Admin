@@ -122,11 +122,10 @@ var AddressListUI = function AddressListUI(props) {
       _useCustomer2 = _slicedToArray(_useCustomer, 1),
       user = _useCustomer2[0].user;
 
-  var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
-    return i === self.findIndex(function (obj) {
-      return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
-    });
-  }) || [];
+  var _useState7 = (0, _react.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      uniqueAddressesList = _useState8[0],
+      setUniqueAddressesList = _useState8[1];
 
   var openAddress = function openAddress(address) {
     setCurAddress(address);
@@ -150,6 +149,7 @@ var AddressListUI = function AddressListUI(props) {
 
     if (!found) {
       addresses.push(address);
+      setAddressOpen(false);
     }
 
     setAddressList(_objectSpread(_objectSpread({}, addressList), {}, {
@@ -166,10 +166,7 @@ var AddressListUI = function AddressListUI(props) {
 
     if (userCustomerSetup) {
       handleSetAddress(address);
-      return;
     }
-
-    setAddressOpen(false);
   };
 
   var handleSetAddress = function handleSetAddress(address) {
@@ -243,6 +240,17 @@ var AddressListUI = function AddressListUI(props) {
   (0, _react.useEffect)(function () {
     setExtraOpen && setExtraOpen(addressOpen);
   }, [addressOpen]);
+  (0, _react.useEffect)(function () {
+    if (addressList.loading) return;
+
+    var _uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
+      return i === self.findIndex(function (obj) {
+        return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
+      });
+    }) || [];
+
+    setUniqueAddressesList(_uniqueAddressesList);
+  }, [addressList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -304,7 +312,7 @@ var AddressListUI = function AddressListUI(props) {
       className: "tag"
     }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.SuitHeart, null), ((address === null || address === void 0 ? void 0 : address.tag) === 'other' || !(address !== null && address !== void 0 && address.tag)) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
-    }, /*#__PURE__*/_react.default.createElement("span", null, address.address))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
+    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
       className: "form"
     }, /*#__PURE__*/_react.default.createElement("a", {
       className: actionStatus.loading ? 'disabled' : '',

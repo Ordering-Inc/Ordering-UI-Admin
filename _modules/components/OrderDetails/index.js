@@ -148,8 +148,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       percentage: 60
     }, {
       key: 4,
-      value: 'Ready for pickup',
-      slug: 'READY_FOR_PICKUP',
+      value: 'Preparation Completed',
+      slug: 'PREPARATION_COMPLETED',
       percentage: 70
     }, {
       key: 5,

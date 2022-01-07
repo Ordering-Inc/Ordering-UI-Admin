@@ -132,6 +132,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
       setSelectedBrand(brand);
     } else {
       setSelectedBrand(null);
+      setSelectedType('general');
     }
 
     setOpenDetail(true);
@@ -201,7 +202,9 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('BRAND_MANAGER', 'Brand manager'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
-    onClick: handleOpenSideBar
+    onClick: function onClick() {
+      return handleOpenSideBar();
+    }
   }, t('ADD_BRAND', 'Add brand')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     search: searchValue,
@@ -244,7 +247,9 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
       }
     }))))));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BrandListBottomContainer, null, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: handleOpenSideBar
+    onClick: function onClick() {
+      return handleOpenSideBar();
+    }
   }, t('ADD_NEW_BRAND', 'Add new brand'))), openDetail && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     sidebarId: "brand-details",
     defaultSideBarWidth: 500,
@@ -252,7 +257,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     onClose: function onClose() {
       return handleCloseSidebar();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.BrandDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailHeder, null, /*#__PURE__*/_react.default.createElement("div", null, (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name) && /*#__PURE__*/_react.default.createElement("span", null, selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.BrandDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailHeder, null, /*#__PURE__*/_react.default.createElement("div", null, (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name) && /*#__PURE__*/_react.default.createElement("span", null, selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.name), !selectedBrand && /*#__PURE__*/_react.default.createElement("span", null, t('ADD_NEW_BRAND', 'Add new brand')), selectedBrand && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.enabled) || false,
     onChange: function onChange(enabled) {
       return handleChangeState(selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.id, 'enabled', enabled);
@@ -268,7 +273,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     onClick: function onClick() {
       return setSelectedType('general');
     }
-  }, t('GENERAL', 'General')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('GENERAL', 'General')), selectedBrand && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedType === 'businesses',
     onClick: function onClick() {
       return setSelectedType('businesses');
