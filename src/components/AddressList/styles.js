@@ -66,6 +66,11 @@ export const AddressItem = styled.li`
     line-height: 1.5;
     span {
       text-align: initial;
+
+      &:last-child {
+        font-size: 10px;
+        color: ${props => props.theme.colors.disabled};
+      }
     }
   }
 `

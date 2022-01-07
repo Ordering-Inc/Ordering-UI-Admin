@@ -37,10 +37,8 @@ const BusinessBrandGENDetailUI = (props) => {
 
   const brandImageInputRef = useRef(null)
 
-  const handleClickImage = (type) => {
-    if (type === 'image') {
-      brandImageInputRef.current.click()
-    }
+  const handleClickImage = () => {
+    brandImageInputRef.current.click()
   }
 
   const closeAlert = () => {
@@ -85,7 +83,7 @@ const BusinessBrandGENDetailUI = (props) => {
     <>
       <BrandGeneralDetail>
         <BrandLogo
-          onClick={() => handleClickImage('image')}
+          onClick={() => handleClickImage()}
         >
           <ExamineClick
             onFiles={files => handleFiles(files, 'logo')}
@@ -94,7 +92,7 @@ const BusinessBrandGENDetailUI = (props) => {
             disabled={brandFormState.loading}
           >
             <DragAndDrop
-              onDrop={dataTransfer => handleFiles(dataTransfer.files, 'image')}
+              onDrop={dataTransfer => handleFiles(dataTransfer.files, 'logo')}
               accept='image/png, image/jpeg, image/jpg'
               disabled={brandFormState.loading}
             >

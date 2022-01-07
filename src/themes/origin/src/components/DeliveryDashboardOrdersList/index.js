@@ -73,7 +73,7 @@ export const DeliveryDashboardOrdersList = (props) => {
 
   const ReadyForPickupOrdersControlProps = {
     orderStatus: [4],
-    orderStatusTitle: t('READY_FOR_PICKUP', 'Ready for pickup')
+    orderStatusTitle: t('PREPARATION_COMPLETED', 'Preparation Completed')
   }
 
   const PickupCompletedByDriverOrdersControlProps = {

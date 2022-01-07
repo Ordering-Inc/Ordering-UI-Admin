@@ -86,7 +86,7 @@ export const InvoiceBusinessPdf = (props) => {
       { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
       { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
       { key: 3, value: 'Driver arrived by business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: 'Ready for pickup', slug: 'READY_FOR_PICKUP', percentage: 70 },
+      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 70 },
       { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
       { key: 6, value: 'Reject by driver', slug: 'REJECT_BY_DRIVER', percentage: 0 },
       { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
@@ -97,13 +97,13 @@ export const InvoiceBusinessPdf = (props) => {
       { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
       { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 25 },
       { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 65 },
-      { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
-      { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
-      { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
-      { key: 18, value: 'Driver almost arrived to business', slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
-      { key: 19, value: 'Driver almost arrived to customer', slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', percentage: 90 },
-      { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
-      { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 60 }
+      { key: 15, value: 'Pickup completed by customer', slug: 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
+      { key: 16, value: 'Canceled by customer', slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER', percentage: 0 },
+      { key: 17, value: 'Not picked by customer', slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER', percentage: 0 },
+      { key: 18, value: 'Driver almost arrived to business', slug: 'ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', percentage: 50 },
+      { key: 19, value: 'Driver almost arrived to customer', slug: 'ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', percentage: 90 },
+      { key: 20, value: 'Customer almost arrived to business', slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', percentage: 50 },
+      { key: 21, value: 'Customer arrived to business', slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS', percentage: 60 }
     ]
 
     const objectStatus = orderStatus.find((o) => o.key === status)
@@ -135,11 +135,11 @@ export const InvoiceBusinessPdf = (props) => {
             <th style={styles.table.thead.th} colSpan='5'>{t('ORDERS', 'Orders')}</th>
           </tr>
           <tr style={styles.table.thead.trLast}>
-            <th style={styles.table.thead.th}>Number</th>
-            <th style={styles.table.thead.th}>Datetime</th>
-            <th style={styles.table.thead.th}>Status</th>
-            <th style={styles.table.thead.th}>Subtotal</th>
-            <th style={styles.table.thead.th}>Total</th>
+            <th style={styles.table.thead.th}>{t('EXPORT_ORDER_NUMBER', 'Order number')}</th>
+            <th style={styles.table.thead.th}>{t('EXPORT_DATE', 'Date')}</th>
+            <th style={styles.table.thead.th}>{t('CONTROL_PANEL_ORDERS_STATUS_HEADER', 'Status')}</th>
+            <th style={styles.table.thead.th}>{t('SUBTOTAL', 'Subtotal')}</th>
+            <th style={styles.table.thead.th}>{t('TOTAL', 'Total')}</th>
           </tr>
         </thead>
         <tbody>
