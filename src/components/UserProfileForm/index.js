@@ -95,6 +95,10 @@ const UserProfileFormUI = (props) => {
     }
   }, [formState.changes?.photo])
 
+  useEffect(() => {
+    setEdit(false)
+  }, [userState?.result?.result?.id])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

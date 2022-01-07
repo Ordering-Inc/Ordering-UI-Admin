@@ -71,6 +71,7 @@ const BusinessBrandListingUI = (props) => {
       setSelectedBrand(brand)
     } else {
       setSelectedBrand(null)
+      setSelectedType('general')
     }
     setOpenDetail(true)
   }
@@ -135,7 +136,7 @@ const BusinessBrandListingUI = (props) => {
             <Button
               borderRadius='8px'
               color='lightPrimary'
-              onClick={handleOpenSideBar}
+              onClick={() => handleOpenSideBar()}
             >
               {t('ADD_BRAND', 'Add brand')}
             </Button>
@@ -215,7 +216,7 @@ const BusinessBrandListingUI = (props) => {
           </BrandListTable>
         </BrandListTableWrapper>
         <BrandListBottomContainer>
-          <span onClick={handleOpenSideBar}>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
+          <span onClick={() => handleOpenSideBar()}>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
         </BrandListBottomContainer>
         {openDetail && (
           <SideBar
@@ -232,10 +233,15 @@ const BusinessBrandListingUI = (props) => {
                       <span>{selectedBrand?.name}</span>
                     )
                   }
-                  <Switch
-                    defaultChecked={selectedBrand?.enabled || false}
-                    onChange={(enabled) => handleChangeState(selectedBrand?.id, 'enabled', enabled)}
-                  />
+                  {!selectedBrand && (
+                    <span>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
+                  )}
+                  {selectedBrand && (
+                    <Switch
+                      defaultChecked={selectedBrand?.enabled || false}
+                      onChange={(enabled) => handleChangeState(selectedBrand?.id, 'enabled', enabled)}
+                    />
+                  )}
                 </div>
                 {selectedBrand && (
                   <ActionSelectorWrapper>
@@ -254,12 +260,14 @@ const BusinessBrandListingUI = (props) => {
                 >
                   {t('GENERAL', 'General')}
                 </Tab>
-                <Tab
-                  active={selectedType === 'businesses'}
-                  onClick={() => setSelectedType('businesses')}
-                >
-                  {t('BUSINESSES', 'Businesses')}
-                </Tab>
+                {selectedBrand && (
+                  <Tab
+                    active={selectedType === 'businesses'}
+                    onClick={() => setSelectedType('businesses')}
+                  >
+                    {t('BUSINESSES', 'Businesses')}
+                  </Tab>
+                )}
               </TabContainer>
               {
                 selectedType === 'general' && (

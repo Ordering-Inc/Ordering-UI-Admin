@@ -70,14 +70,7 @@ const AddressListUI = (props) => {
   const theme = useTheme()
   const [{ user }] = useCustomer()
 
-  const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
-    (address, i, self) =>
-      i === self.findIndex(obj => (
-        address.address === obj.address &&
-        address.address_notes === obj.address_notes &&
-        address.zipcode === obj.zipcode &&
-        address.internal_number === obj.internal_number
-      )))) || []
+  const [uniqueAddressesList, setUniqueAddressesList] = useState([])
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -99,6 +92,7 @@ const AddressListUI = (props) => {
     })
     if (!found) {
       addresses.push(address)
+      setAddressOpen(false)
     }
     setAddressList({
       ...addressList,
@@ -110,9 +104,7 @@ const AddressListUI = (props) => {
     }
     if (userCustomerSetup) {
       handleSetAddress(address)
-      return
     }
-    setAddressOpen(false)
   }
 
   const handleSetAddress = (address) => {
@@ -170,6 +162,19 @@ const AddressListUI = (props) => {
   useEffect(() => {
     setExtraOpen && setExtraOpen(addressOpen)
   }, [addressOpen])
+
+  useEffect(() => {
+    if (addressList.loading) return
+    const _uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
+      (address, i, self) =>
+        i === self.findIndex(obj => (
+          address.address === obj.address &&
+          address.address_notes === obj.address_notes &&
+          address.zipcode === obj.zipcode &&
+          address.internal_number === obj.internal_number
+        )))) || []
+    setUniqueAddressesList(_uniqueAddressesList)
+  }, [addressList])
 
   return (
     <>
@@ -256,6 +261,7 @@ const AddressListUI = (props) => {
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>
+                      <span>{address.internal_number} {address.zipcode}</span>
                     </div>
                   </div>
                   <AddressItemActions className='form'>
