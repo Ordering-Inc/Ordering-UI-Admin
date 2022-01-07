@@ -99,7 +99,7 @@ export const InvoiceGeneral = (props) => {
           })
       }
       const typeIvoiceList = [
-        { value: 'charge', content: <Option>{t('CHARGE_BUSINESS_COMMISION_AND_FEES', 'Charge the business a commision and fees')}</Option> },
+        { value: 'charge', content: <Option>{t('TYPE_CHARGE_BUSINESS', 'Charge the business a commision and fees')}</Option> },
         { value: 'payout', content: <Option>{t('TYPE_PAYOUT_BUSINESS', 'Payout the business')}</Option> }
       ]
       setTypeInvoiceOptions(typeIvoiceList)
