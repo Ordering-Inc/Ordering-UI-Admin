@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const PromotionListContainer = styled.div`
-  min-height: 250px;
   max-height: calc(100vh - 230px);
   overflow: auto;
   margin-top: 30px;
