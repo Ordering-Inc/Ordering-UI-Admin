@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useConfig, DriversGroupDetails as DriversGroupDetailsController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  useConfig,
+  DriversGroupDetails as DriversGroupDetailsController
+} from 'ordering-components-admin'
 import { Switch } from '../../styles'
 import { DragScroll } from '../DragScroll'
 import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
