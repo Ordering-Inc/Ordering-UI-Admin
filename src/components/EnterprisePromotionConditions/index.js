@@ -25,7 +25,7 @@ export const EnterprisePromotionConditions = (props) => {
     formState,
     actionState,
     promotionState,
-    // handleChangeItem,
+    handleRemoveKey,
     handleUpdateClick,
     selectedBusinessIds,
     handleAddPromotion
@@ -71,6 +71,14 @@ export const EnterprisePromotionConditions = (props) => {
 
   const handleClickSave = () => {
     if (!isAddMode) handleUpdateClick()
+    setOpenSingleModal(false)
+    setOpenMultipleModal(false)
+  }
+
+  const handleCloseModal = () => {
+    if (selectedCondition) {
+      handleRemoveKey(selectedCondition)
+    }
     setOpenSingleModal(false)
     setOpenMultipleModal(false)
   }
@@ -124,7 +132,7 @@ export const EnterprisePromotionConditions = (props) => {
       <Modal
         width='600px'
         open={openSingleModal}
-        onClose={() => setOpenSingleModal(false)}
+        onClose={() => handleCloseModal()}
       >
         <EnterprisePromotionEditCondition
           {...props}
@@ -136,7 +144,7 @@ export const EnterprisePromotionConditions = (props) => {
       <Modal
         width={specifics.includes(selectedCondition) ? '70%' : '600px'}
         open={openMultipleModal}
-        onClose={() => setOpenMultipleModal(false)}
+        onClose={() => handleCloseModal()}
       >
         {selectedCondition === 'products' && (
           <EnterprisePromotionSpecficProducts
