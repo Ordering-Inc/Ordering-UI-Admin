@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var PromotionListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 250px;\n  max-height: calc(100vh - 230px);\n  overflow: auto;\n  margin-top: 30px;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 200px);\n  }\n"])));
+var PromotionListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 230px);\n  overflow: auto;\n  margin-top: 30px;\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 200px);\n  }\n"])));
 
 exports.PromotionListContainer = PromotionListContainer;
 

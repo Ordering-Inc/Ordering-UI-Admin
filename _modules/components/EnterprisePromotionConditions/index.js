@@ -56,6 +56,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       formState = props.formState,
       actionState = props.actionState,
       promotionState = props.promotionState,
+      handleRemoveKey = props.handleRemoveKey,
       handleUpdateClick = props.handleUpdateClick,
       selectedBusinessIds = props.selectedBusinessIds,
       handleAddPromotion = props.handleAddPromotion;
@@ -158,6 +159,15 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     setOpenMultipleModal(false);
   };
 
+  var handleCloseModal = function handleCloseModal() {
+    if (selectedCondition) {
+      handleRemoveKey(selectedCondition);
+    }
+
+    setOpenSingleModal(false);
+    setOpenMultipleModal(false);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ConditionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONDITIONS', 'Conditions'))), conditions.map(function (condition, index) {
     var _promotionState$promo;
 
@@ -182,7 +192,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     width: "600px",
     open: openSingleModal,
     onClose: function onClose() {
-      return setOpenSingleModal(false);
+      return handleCloseModal();
     }
   }, /*#__PURE__*/_react.default.createElement(_EnterprisePromotionEditCondition.EnterprisePromotionEditCondition, _extends({}, props, {
     title: selectedTitle,
@@ -194,7 +204,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     width: specifics.includes(selectedCondition) ? '70%' : '600px',
     open: openMultipleModal,
     onClose: function onClose() {
-      return setOpenMultipleModal(false);
+      return handleCloseModal();
     }
   }, selectedCondition === 'products' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionSpecficProducts.EnterprisePromotionSpecficProducts, _extends({}, props, {
     onClickDone: function onClickDone() {

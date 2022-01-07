@@ -130,6 +130,15 @@ var DragScroll = function DragScroll(_ref) {
     setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur = scrollWrapperRef.current) === null || _scrollWrapperRef$cur === void 0 ? void 0 : _scrollWrapperRef$cur.offsetWidth);
     setContainerWidth(scrollContainerRef === null || scrollContainerRef === void 0 ? void 0 : (_scrollContainerRef$c = scrollContainerRef.current) === null || _scrollContainerRef$c === void 0 ? void 0 : _scrollContainerRef$c.offsetWidth);
   }, [scrollWrapperRef, scrollContainerRef, width, children]);
+  (0, _react.useEffect)(function () {
+    setTimeout(function () {
+      var _scrollWrapperRef$cur2, _scrollContainerRef$c2;
+
+      setWrapperScrollLeft(scrollWrapperRef.current.scrollLeft);
+      setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur2 = scrollWrapperRef.current) === null || _scrollWrapperRef$cur2 === void 0 ? void 0 : _scrollWrapperRef$cur2.offsetWidth);
+      setContainerWidth(scrollContainerRef === null || scrollContainerRef === void 0 ? void 0 : (_scrollContainerRef$c2 = scrollContainerRef.current) === null || _scrollContainerRef$c2 === void 0 ? void 0 : _scrollContainerRef$c2.offsetWidth);
+    }, 300);
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.ScrollBox, {
     className: "scroll-box"
   }, /*#__PURE__*/_react.default.createElement(_styles.ScrollBoxWrapper, {

@@ -86,7 +86,7 @@ var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
     value: 1,
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('MOBILE_FRONT_SUB_TOTAL', 'Subtotal'))
   }, {
-    vlaue: 2,
+    value: 2,
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('DELIVERY_FEE', 'Delivery fee'))
   }, {
     value: 3,
