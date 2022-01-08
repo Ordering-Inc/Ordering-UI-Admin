@@ -58,7 +58,7 @@ const BusinessReviewDetailsUI = (props) => {
         </Header>
         <BusinessLogoContainer>
           <WrapperImage>
-            <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo)} />
+            <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_120,c_limit')} />
           </WrapperImage>
         </BusinessLogoContainer>
         {reviewsList?.loading ? (

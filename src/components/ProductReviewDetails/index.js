@@ -34,7 +34,7 @@ const ProductReviewDetailsUI = (props) => {
         <ProductImageContainer>
           <WrapperImage>
             {product?.images ? (
-              <Image bgimage={optimizeImage(product?.images)} />
+              <Image bgimage={optimizeImage(product?.images, 'h_120,c_limit')} />
             ) : (
               <ImageFill />
             )}
