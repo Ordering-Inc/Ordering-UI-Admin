@@ -19,6 +19,8 @@ require("react-toastify/dist/ReactToastify.css");
 
 var _reactToastify = require("react-toastify");
 
+var _styledComponents = require("styled-components");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -66,6 +68,8 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       notificationModalOpen = _useState2[0],
@@ -109,10 +113,15 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       draggable: true,
       progress: undefined
     };
-    var content = "Order #".concat(orderId, " has been ordered.");
 
-    _reactToastify.toast.dark(content, toastConfigure);
+    var content = function content() {
+      return /*#__PURE__*/_react.default.createElement(_styles.ToastWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+        src: theme.images.logos.isotype,
+        alt: ""
+      }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('WEB_DASHBOARD_APPNAME', 'Ordering Dashboard')), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)))));
+    };
 
+    (0, _reactToastify.toast)(content, toastConfigure);
     var sound = document.getElementById('notification-sound');
     sound.muted = false;
     sound.play();
@@ -156,7 +165,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ModalContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('WEB_APPNAME', 'Ordering')), registerOrderIds.map(function (orderId) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: orderId
-    }, "Order ", /*#__PURE__*/_react.default.createElement("span", null, "#", orderId), " has been ordered.");
+    }, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)));
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {

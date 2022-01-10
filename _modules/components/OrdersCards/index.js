@@ -72,17 +72,11 @@ var OrdersCards = function OrdersCards(props) {
       parseDate = _useUtils2$.parseDate,
       optimizeImage = _useUtils2$.optimizeImage;
 
-  var _useState = (0, _react.useState)(10),
-      _useState2 = _slicedToArray(_useState, 2),
-      ordersPerPage = _useState2[0],
-      setOrdersPerPage = _useState2[1];
-
   var handleChangePage = function handleChangePage(page) {
-    getPageOrders(ordersPerPage, page);
+    getPageOrders(pagination.pageSize, page);
   };
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
-    setOrdersPerPage(pageSize);
     var expectedPage = Math.ceil(pagination.from / pageSize);
     getPageOrders(pageSize, expectedPage);
   };
@@ -248,7 +242,7 @@ var OrdersCards = function OrdersCards(props) {
     currentPage: pagination.currentPage,
     totalPages: pagination.totalPages,
     handleChangePage: handleChangePage,
-    defaultPageSize: ordersPerPage,
+    defaultPageSize: pagination.pageSize,
     handleChangePageSize: handleChangePageSize
   })));
 };

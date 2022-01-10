@@ -47,21 +47,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LanguageSettingUI = function LanguageSettingUI(props) {
   var languageFiledsState = props.languageFiledsState,
-      defaultLanguage = props.defaultLanguage,
-      setDefaultLanguage = props.setDefaultLanguage,
       handleChangeFieldSetting = props.handleChangeFieldSetting;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
-  var handleSetDefaultLanguage = function handleSetDefaultLanguage(field) {
-    if (defaultLanguage.id === field.id) return;
-    setDefaultLanguage(field);
-    handleChangeFieldSetting(field.id, {
-      default: true
-    });
-  };
+      _useLanguage2 = _slicedToArray(_useLanguage, 3),
+      languageState = _useLanguage2[0],
+      t = _useLanguage2[1],
+      setLanguage = _useLanguage2[2].setLanguage;
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LanguageDetailsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('LANGUAGE_SETTINGS', 'Language settings')), /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
     isHeader: true
@@ -95,20 +87,22 @@ var LanguageSettingUI = function LanguageSettingUI(props) {
       }
     })));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, languageFiledsState.fields.map(function (field) {
+    var _languageState$langua, _languageState$langua2, _languageState$langua3;
+
     return /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "name"
     }, field.name), /*#__PURE__*/_react.default.createElement("div", {
-      className: defaultLanguage.id === field.id ? 'checked default' : 'default',
+      className: (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua = languageState.language) === null || _languageState$langua === void 0 ? void 0 : _languageState$langua.id) === field.id ? 'checked default' : 'default',
       onClick: function onClick() {
-        return handleSetDefaultLanguage(field);
+        return setLanguage(field);
       }
-    }, defaultLanguage.id === field.id ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircle, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("div", {
+    }, (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua2 = languageState.language) === null || _languageState$langua2 === void 0 ? void 0 : _languageState$langua2.id) === field.id ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircle, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "status"
     }, /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: field.enabled,
-      disabled: field.code === 'email',
+      disabled: (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua3 = languageState.language) === null || _languageState$langua3 === void 0 ? void 0 : _languageState$langua3.id) === field.id,
       onChange: function onChange(val) {
         return handleChangeFieldSetting(field.id, {
           enabled: val

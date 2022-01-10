@@ -90,7 +90,7 @@ var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
       });
     }
   }, t('PRODUCT_REVIEW', 'Product review'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_120,c_limit')
   }))), reviewsList !== null && reviewsList !== void 0 && reviewsList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ReviewItemContatiner, {
       key: i

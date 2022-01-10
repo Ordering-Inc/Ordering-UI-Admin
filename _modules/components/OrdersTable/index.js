@@ -86,32 +86,26 @@ var OrdersTable = function OrdersTable(props) {
       parseDate = _useUtils2$.parseDate,
       optimizeImage = _useUtils2$.optimizeImage;
 
-  var _useState = (0, _react.useState)(10),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      ordersPerPage = _useState2[0],
-      setOrdersPerPage = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isAllChecked = _useState4[0],
-      setIsAllChecked = _useState4[1];
+      isAllChecked = _useState2[0],
+      setIsAllChecked = _useState2[1];
 
   var handleChangePage = function handleChangePage(page) {
-    getPageOrders(ordersPerPage, page);
+    getPageOrders(pagination.pageSize, page);
   };
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
-    setOrdersPerPage(pageSize);
     var expectedPage = Math.ceil(pagination.from / pageSize);
     getPageOrders(pageSize, expectedPage);
   };
 
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openPopover = _useState6[0],
-      setOpenPopover = _useState6[1];
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      openPopover = _useState4[0],
+      setOpenPopover = _useState4[1];
 
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     status: true,
     orderNumber: true,
     dateTime: true,
@@ -121,9 +115,9 @@ var OrdersTable = function OrdersTable(props) {
     advanced: true,
     total: true
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      allowColumns = _useState8[0],
-      setAllowColumns = _useState8[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      allowColumns = _useState6[0],
+      setAllowColumns = _useState6[1];
 
   var optionsDefault = [{
     value: 'status',
@@ -545,7 +539,7 @@ var OrdersTable = function OrdersTable(props) {
     currentPage: pagination.currentPage,
     totalPages: pagination.totalPages,
     handleChangePage: handleChangePage,
-    defaultPageSize: ordersPerPage,
+    defaultPageSize: pagination.pageSize,
     handleChangePageSize: handleChangePageSize
   })));
 };
@@ -559,12 +553,12 @@ var TimgeAgo = function TimgeAgo(props) {
       _useUtils4 = _slicedToArray(_useUtils3, 1),
       getTimeAgo = _useUtils4[0].getTimeAgo;
 
-  var _useState9 = (0, _react.useState)(order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  var _useState7 = (0, _react.useState)(order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   })),
-      _useState10 = _slicedToArray(_useState9, 2),
-      diffTime = _useState10[0],
-      setDiffTime = _useState10[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      diffTime = _useState8[0],
+      setDiffTime = _useState8[1];
 
   (0, _react.useEffect)(function () {
     var deActive = (order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12;

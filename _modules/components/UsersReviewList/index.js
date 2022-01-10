@@ -19,7 +19,7 @@ var _Pagination = require("../Pagination");
 
 var _SideBar = require("../SideBar");
 
-var _DriverReviewDetails = require("../DriverReviewDetails");
+var _UserReviewDetails = require("../UserReviewDetails");
 
 var _styles = require("./styles");
 
@@ -134,7 +134,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
         return handleClickReview(e, user);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage(user === null || user === void 0 ? void 0 : user.photo)
+      bgimage: optimizeImage(user === null || user === void 0 ? void 0 : user.photo, 'w_50,c_limit')
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, (user === null || user === void 0 ? void 0 : user.qualification) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, null), /*#__PURE__*/_react.default.createElement("p", null, parseNumber(user === null || user === void 0 ? void 0 : user.qualification)))))));
@@ -151,7 +151,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
       setCurDriver(null);
       setOpenReview(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_DriverReviewDetails.DriverReviewDetails, {
+  }, /*#__PURE__*/_react.default.createElement(_UserReviewDetails.UserReviewDetails, {
     userId: curDriver === null || curDriver === void 0 ? void 0 : curDriver.id,
     driver: curDriver
   })));

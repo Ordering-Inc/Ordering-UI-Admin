@@ -116,7 +116,8 @@ var MessagesUI = function MessagesUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parseDate = _useUtils2$.parseDate,
-      getTimeAgo = _useUtils2$.getTimeAgo;
+      getTimeAgo = _useUtils2$.getTimeAgo,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var buttonRef = (0, _react.useRef)(null);
 
@@ -156,6 +157,11 @@ var MessagesUI = function MessagesUI(props) {
       _useState12 = _slicedToArray(_useState11, 2),
       messageList = _useState12[0],
       setMessageList = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isChatDisabled = _useState14[0],
+      setIsChatDisabled = _useState14[1];
 
   var adminMessageList = [{
     key: 'message_1',
@@ -417,17 +423,24 @@ var MessagesUI = function MessagesUI(props) {
 
     setFilteredMessages(_filteredMessages);
   }, [messages, messageSearchValue]);
+  (0, _react.useEffect)(function () {
+    if ((user === null || user === void 0 ? void 0 : user.level) !== 2) {
+      if (!(canRead !== null && canRead !== void 0 && canRead.business) && !(canRead !== null && canRead !== void 0 && canRead.customer) && !(canRead !== null && canRead !== void 0 && canRead.driver)) setIsChatDisabled(true);else setIsChatDisabled(false);
+    } else {
+      if (!(canRead !== null && canRead !== void 0 && canRead.customer) && !(canRead !== null && canRead !== void 0 && canRead.driver)) setIsChatDisabled(true);else setIsChatDisabled(false);
+    }
+  }, [canRead]);
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
     messageDashboardView: messageDashboardView,
     historyView: history
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, isChat && /*#__PURE__*/_react.default.createElement(_styles.ChatHeader, null, /*#__PURE__*/_react.default.createElement(_styles.OrderNumber, null, t('INVOICE_ORDER_NO', 'Order No'), " ", order.id), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo,
+    src: optimizeImage((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo, 'h_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
   }), /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo,
+    src: optimizeImage((_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo,
+    src: optimizeImage((_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
   }))), history && /*#__PURE__*/_react.default.createElement(_styles.WrapperHitoryHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
     active: tabActive.orderHistory,
@@ -595,7 +608,7 @@ var MessagesUI = function MessagesUI(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo,
+    src: optimizeImage((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo, 'h_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
   }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.name), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS', 'Business')))), /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
     disabled: !(canRead !== null && canRead !== void 0 && canRead.customer),
@@ -605,7 +618,7 @@ var MessagesUI = function MessagesUI(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.photo,
+    src: optimizeImage((_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$customer7 = order.customer) === null || _order$customer7 === void 0 ? void 0 : _order$customer7.name, " ", (_order$customer8 = order.customer) === null || _order$customer8 === void 0 ? void 0 : _order$customer8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER', 'Customer')))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
     disabled: !(canRead !== null && canRead !== void 0 && canRead.driver),
@@ -615,7 +628,7 @@ var MessagesUI = function MessagesUI(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.photo,
+    src: optimizeImage((_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
   }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), messageList.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, messageList.map(function (quickMessage, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -637,7 +650,8 @@ var MessagesUI = function MessagesUI(props) {
     ref: register({
       required: !image
     }),
-    autoComplete: "off"
+    autoComplete: "off",
+    readOnly: isChatDisabled
   }), !image && /*#__PURE__*/_react.default.createElement(_styles.SendImage, {
     htmlFor: "chat_image"
   }, /*#__PURE__*/_react.default.createElement("input", {
@@ -645,7 +659,8 @@ var MessagesUI = function MessagesUI(props) {
     name: "image",
     id: "chat_image",
     accept: "image/png,image/jpg,image/jpeg",
-    onChange: onChangeImage
+    onChange: onChangeImage,
+    disabled: isChatDisabled
   }), /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null)), image && /*#__PURE__*/_react.default.createElement(_styles.WrapperDeleteImage, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     circle: true,
     onClick: removeImage,

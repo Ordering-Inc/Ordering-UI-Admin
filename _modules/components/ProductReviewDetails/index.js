@@ -56,7 +56,7 @@ var ProductReviewDetailsUI = function ProductReviewDetailsUI(props) {
       optimizeImage = _useUtils2[0].optimizeImage;
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, product !== null && product !== void 0 && product.images ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
-    bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images)
+    bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_120,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ImageFill, null))), productReviewList !== null && productReviewList !== void 0 && productReviewList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewContentWrapper, {
       key: i

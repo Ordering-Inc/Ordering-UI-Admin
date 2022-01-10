@@ -181,7 +181,7 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
         return handleOpenReview(product);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ReviewObject, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, product !== null && product !== void 0 && product.images ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images)
+      bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_50,c_limit')
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ImageFill, null)), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.name)))));
   })), !businessState.loading && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: currentPage,
