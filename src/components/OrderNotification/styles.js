@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ModalContainer = styled.div`
   width: 100%;
@@ -25,6 +25,36 @@ export const ModalContainer = styled.div`
   
     to {
       transform: scale(1);
+    }
+  }
+`
+export const ToastWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  img {
+    height: 39px;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    color: #344050;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 15px;
+    ` : css`
+      margin-left: 15px;
+    `}
+    span {
+      &:first-child {
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      &:last-child {
+        font-size: 12px;
+        line-height: 18px;
+      }
     }
   }
 `

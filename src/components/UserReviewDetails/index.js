@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils, DriverReviewDetails as DriverReviewDetailsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, UserReviewDetails as UserReviewDetailsController } from 'ordering-components-admin'
 import { PersonFill } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 
@@ -18,10 +18,10 @@ import {
   NotReviewed
 } from './styles'
 
-const DriverReviewDetailsUI = (props) => {
+const UserReviewDetailsUI = (props) => {
   const {
     driver,
-    driverReviewState
+    userReviewState
   } = props
 
   const [, t] = useLanguage()
@@ -53,13 +53,13 @@ const DriverReviewDetailsUI = (props) => {
         <DriverPhotoContainer>
           <WrapperImage>
             {driver?.photo ? (
-              <Image bgimage={optimizeImage(driver?.photo)} />
+              <Image bgimage={optimizeImage(driver?.photo, 'w_120,c_limit')} />
             ) : (
               <PersonFill />
             )}
           </WrapperImage>
         </DriverPhotoContainer>
-        {driverReviewState.loading ? (
+        {userReviewState.loading ? (
           [...Array(5).keys()].map(i => (
             <ReviewItemContatiner key={i}>
               <ReviewQualityContainer>
@@ -81,7 +81,7 @@ const DriverReviewDetailsUI = (props) => {
             </ReviewItemContatiner>
           ))
         ) : (
-          driverReviewState?.reviews.map(review => (
+          userReviewState?.reviews.map(review => (
             <ReviewItemContatiner key={review?.id}>
               <ReviewQualityContainer>
                 <ReviewBarContainer>
@@ -102,7 +102,7 @@ const DriverReviewDetailsUI = (props) => {
           ))
         )}
 
-        {!driverReviewState.loading && driverReviewState.reviews.length === 0 && (
+        {!userReviewState.loading && userReviewState.reviews.length === 0 && (
           <NotReviewed>
             {t('ERROR_REVIEW_FIND', 'The review does not exist.')}
           </NotReviewed>
@@ -112,10 +112,10 @@ const DriverReviewDetailsUI = (props) => {
   )
 }
 
-export const DriverReviewDetails = (props) => {
-  const driverReivewDetailsProps = {
+export const UserReviewDetails = (props) => {
+  const userReivewDetailsProps = {
     ...props,
-    UIComponent: DriverReviewDetailsUI
+    UIComponent: UserReviewDetailsUI
   }
-  return <DriverReviewDetailsController {...driverReivewDetailsProps} />
+  return <UserReviewDetailsController {...userReivewDetailsProps} />
 }

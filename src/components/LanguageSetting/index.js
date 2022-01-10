@@ -1,5 +1,8 @@
 import React from 'react'
-import { useLanguage, LanguageSetting as LanguageSettingController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  LanguageSetting as LanguageSettingController
+} from 'ordering-components-admin'
 import { Switch } from '../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { Circle, RecordCircle } from 'react-bootstrap-icons'
@@ -12,18 +15,10 @@ import {
 const LanguageSettingUI = (props) => {
   const {
     languageFiledsState,
-    defaultLanguage,
-    setDefaultLanguage,
     handleChangeFieldSetting
   } = props
 
-  const [, t] = useLanguage()
-
-  const handleSetDefaultLanguage = (field) => {
-    if (defaultLanguage.id === field.id) return
-    setDefaultLanguage(field)
-    handleChangeFieldSetting(field.id, { default: true })
-  }
+  const [languageState, t, { setLanguage }] = useLanguage()
 
   return (
     <>
@@ -52,15 +47,15 @@ const LanguageSettingUI = (props) => {
               <FieldContainer key={field.id}>
                 <div className='name'>{field.name}</div>
                 <div
-                  className={defaultLanguage.id === field.id ? 'checked default' : 'default'}
-                  onClick={() => handleSetDefaultLanguage(field)}
+                  className={languageState?.language?.id === field.id ? 'checked default' : 'default'}
+                  onClick={() => setLanguage(field)}
                 >
-                  {(defaultLanguage.id === field.id) ? <RecordCircle /> : <Circle />}
+                  {(languageState?.language?.id === field.id) ? <RecordCircle /> : <Circle />}
                 </div>
                 <div className='status'>
                   <Switch
                     defaultChecked={field.enabled}
-                    disabled={field.code === 'email'}
+                    disabled={languageState?.language?.id === field.id}
                     onChange={(val) => handleChangeFieldSetting(field.id, { enabled: val })}
                   />
                 </div>

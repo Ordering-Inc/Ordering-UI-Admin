@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
   useUtils,
-  UsersList as DriversController
+  UsersList as UsersController
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { StarFill, PersonFill } from 'react-bootstrap-icons'
 import { Pagination } from '../Pagination'
 import { SideBar } from '../SideBar'
-import { DriverReviewDetails } from '../DriverReviewDetails'
+import { UserReviewDetails } from '../UserReviewDetails'
 
 import {
   ReviewsTable,
@@ -101,7 +101,7 @@ const DriversReviewListUI = (props) => {
                   <ReviewObject>
                     <WrapperImage>
                       {user?.photo ? (
-                        <Image bgimage={optimizeImage(user?.photo)} />
+                        <Image bgimage={optimizeImage(user?.photo, 'w_50,c_limit')} />
                       ) : (
                         <PersonFill />
                       )}
@@ -147,7 +147,7 @@ const DriversReviewListUI = (props) => {
             setOpenReview(false)
           }}
         >
-          <DriverReviewDetails
+          <UserReviewDetails
             userId={curDriver?.id}
             driver={curDriver}
           />
@@ -165,5 +165,5 @@ export const UsersReviewList = (props) => {
     UIComponent: DriversReviewListUI,
     propsToFetch: ['name', 'middle_name', 'second_lastname', 'lastname', 'email', 'photo', 'qualification', 'reviews']
   }
-  return <DriversController {...driversReviewListProps} />
+  return <UsersController {...driversReviewListProps} />
 }

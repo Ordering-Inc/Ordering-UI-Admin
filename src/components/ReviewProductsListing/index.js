@@ -134,7 +134,7 @@ export const ReviewProductsListingUI = (props) => {
                     <ReviewObject>
                       <WrapperImage>
                         {product?.images ? (
-                          <Image bgimage={optimizeImage(product?.images)} />
+                          <Image bgimage={optimizeImage(product?.images, 'h_50,c_limit')} />
                         ) : (
                           <ImageFill />
                         )}
