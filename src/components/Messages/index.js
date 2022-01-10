@@ -80,7 +80,7 @@ export const MessagesUI = (props) => {
   const theme = useTheme()
   const { handleSubmit, register, setValue, errors } = useForm()
   const [{ user }] = useSession()
-  const [{ parseDate, getTimeAgo }] = useUtils()
+  const [{ parseDate, getTimeAgo, optimizeImage }] = useUtils()
   const buttonRef = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -326,17 +326,17 @@ export const MessagesUI = (props) => {
                   <ImageContainer>
                     {user?.level !== 2 && (
                       <ImageWithFallback
-                        src={order.business?.logo}
+                        src={optimizeImage(order.business?.logo, 'h_40,c_limit')}
                         fallback={<BisBusiness />}
                       />
                     )}
                     <ImageWithFallback
-                      src={order.customer?.photo}
+                      src={optimizeImage(order.customer?.photo, 'w_40,c_limit')}
                       fallback={<FaUserAlt />}
                     />
                     {order?.driver && (
                       <ImageWithFallback
-                        src={order.driver?.photo}
+                        src={optimizeImage(order.driver?.photo, 'w_40,c_limit')}
                         fallback={<RiUser2Fill />}
                       />
                     )}
@@ -704,7 +704,7 @@ export const MessagesUI = (props) => {
                   onClick={() => setCanRead({ ...canRead, business: !canRead?.business })}
                 >
                   <ImageWithFallback
-                    src={order.business?.logo}
+                    src={optimizeImage(order.business?.logo, 'h_40,c_limit')}
                     fallback={<BisBusiness />}
                   />
                   <InfoBlock>
@@ -718,7 +718,7 @@ export const MessagesUI = (props) => {
                 onClick={() => setCanRead({ ...canRead, customer: !canRead?.customer })}
               >
                 <ImageWithFallback
-                  src={order.customer?.photo}
+                  src={optimizeImage(order.customer?.photo, 'w_40,c_limit')}
                   fallback={<FaUserAlt />}
                 />
                 <InfoBlock>
@@ -732,7 +732,7 @@ export const MessagesUI = (props) => {
                   onClick={() => setCanRead({ ...canRead, driver: !canRead?.driver })}
                 >
                   <ImageWithFallback
-                    src={order.driver?.photo}
+                    src={optimizeImage(order.driver?.photo, 'w_40,c_limit')}
                     fallback={<RiUser2Fill />}
                   />
                   <InfoBlock>
