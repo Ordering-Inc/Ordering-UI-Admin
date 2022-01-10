@@ -89,6 +89,7 @@ export const MessagesUI = (props) => {
   const [filteredMessages, setFilteredMessages] = useState([])
   const [load, setLoad] = useState(0)
   const [messageList, setMessageList] = useState([])
+  const [isChatDisabled, setIsChatDisabled] = useState(false)
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -297,6 +298,16 @@ export const MessagesUI = (props) => {
     })
     setFilteredMessages(_filteredMessages)
   }, [messages, messageSearchValue])
+
+  useEffect(() => {
+    if (user?.level !== 2) {
+      if (!canRead?.business && !canRead?.customer && !canRead?.driver) setIsChatDisabled(true)
+      else setIsChatDisabled(false)
+    } else {
+      if (!canRead?.customer && !canRead?.driver) setIsChatDisabled(true)
+      else setIsChatDisabled(false)
+    }
+  }, [canRead])
 
   return (
     <MessagesContainer>
@@ -757,6 +768,7 @@ export const MessagesUI = (props) => {
                     required: !image
                   })}
                   autoComplete='off'
+                  readOnly={isChatDisabled}
                 />
                 {!image && (
                   <SendImage htmlFor='chat_image'>
@@ -766,6 +778,7 @@ export const MessagesUI = (props) => {
                       id='chat_image'
                       accept='image/png,image/jpg,image/jpeg'
                       onChange={onChangeImage}
+                      disabled={isChatDisabled}
                     />
                     <BsCardImage />
                   </SendImage>
