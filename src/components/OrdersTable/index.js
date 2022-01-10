@@ -45,16 +45,13 @@ export const OrdersTable = (props) => {
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
 
-  const [ordersPerPage, setOrdersPerPage] = useState(10)
-
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   const handleChangePage = (page) => {
-    getPageOrders(ordersPerPage, page)
+    getPageOrders(pagination.pageSize, page)
   }
 
   const handleChangePageSize = (pageSize) => {
-    setOrdersPerPage(pageSize)
     const expectedPage = Math.ceil(pagination.from / pageSize)
     getPageOrders(pageSize, expectedPage)
   }
@@ -509,7 +506,7 @@ export const OrdersTable = (props) => {
             currentPage={pagination.currentPage}
             totalPages={pagination.totalPages}
             handleChangePage={handleChangePage}
-            defaultPageSize={ordersPerPage}
+            defaultPageSize={pagination.pageSize}
             handleChangePageSize={handleChangePageSize}
           />
         </WrapperPagination>
