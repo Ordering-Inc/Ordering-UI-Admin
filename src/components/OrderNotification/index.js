@@ -9,8 +9,11 @@ import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
+import { useTheme } from 'styled-components'
+
 import {
-  ModalContainer
+  ModalContainer,
+  ToastWrapper
 } from './styles'
 
 toast.configure()
@@ -19,6 +22,7 @@ const OrderNotificationUI = (props) => {
   const [configState] = useConfig()
   const [, t] = useLanguage()
   const [events] = useEvent()
+  const theme = useTheme()
 
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
@@ -51,8 +55,18 @@ const OrderNotificationUI = (props) => {
       draggable: true,
       progress: undefined
     }
-    const content = `Order #${orderId} has been ordered.`
-    toast.dark(content, toastConfigure)
+    const content = () => {
+      return (
+        <ToastWrapper>
+          <img src={theme.images.logos.isotype} alt='' />
+          <div>
+            <span>{t('WEB_DASHBOARD_APPNAME', 'Ordering Dashboard')}</span>
+            <span>{t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', `${orderId}`)}</span>
+          </div>
+        </ToastWrapper>
+      )
+    }
+    toast(content, toastConfigure)
     const sound = document.getElementById('notification-sound')
     sound.muted = false
     sound.play()
@@ -98,7 +112,9 @@ const OrderNotificationUI = (props) => {
         <ModalContainer>
           <p>{t('WEB_APPNAME', 'Ordering')}</p>
           {registerOrderIds.map((orderId) =>
-            <p key={orderId}>Order <span>#{orderId}</span> has been ordered.</p>
+            <p key={orderId}>
+              {t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', `${orderId}`)}
+            </p>
           )}
           <Button color='primary' onClick={() => handleCloseNotificationModal()}>
             {t('OK', 'OK')}

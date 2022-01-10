@@ -80,7 +80,7 @@ export const MessagesUI = (props) => {
   const theme = useTheme()
   const { handleSubmit, register, setValue, errors } = useForm()
   const [{ user }] = useSession()
-  const [{ parseDate, getTimeAgo }] = useUtils()
+  const [{ parseDate, getTimeAgo, optimizeImage }] = useUtils()
   const buttonRef = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -89,6 +89,7 @@ export const MessagesUI = (props) => {
   const [filteredMessages, setFilteredMessages] = useState([])
   const [load, setLoad] = useState(0)
   const [messageList, setMessageList] = useState([])
+  const [isChatDisabled, setIsChatDisabled] = useState(false)
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -298,6 +299,16 @@ export const MessagesUI = (props) => {
     setFilteredMessages(_filteredMessages)
   }, [messages, messageSearchValue])
 
+  useEffect(() => {
+    if (user?.level !== 2) {
+      if (!canRead?.business && !canRead?.customer && !canRead?.driver) setIsChatDisabled(true)
+      else setIsChatDisabled(false)
+    } else {
+      if (!canRead?.customer && !canRead?.driver) setIsChatDisabled(true)
+      else setIsChatDisabled(false)
+    }
+  }, [canRead])
+
   return (
     <MessagesContainer>
       <WrapperContainer>
@@ -315,17 +326,17 @@ export const MessagesUI = (props) => {
                   <ImageContainer>
                     {user?.level !== 2 && (
                       <ImageWithFallback
-                        src={order.business?.logo}
+                        src={optimizeImage(order.business?.logo, 'h_40,c_limit')}
                         fallback={<BisBusiness />}
                       />
                     )}
                     <ImageWithFallback
-                      src={order.customer?.photo}
+                      src={optimizeImage(order.customer?.photo, 'w_40,c_limit')}
                       fallback={<FaUserAlt />}
                     />
                     {order?.driver && (
                       <ImageWithFallback
-                        src={order.driver?.photo}
+                        src={optimizeImage(order.driver?.photo, 'w_40,c_limit')}
                         fallback={<RiUser2Fill />}
                       />
                     )}
@@ -693,7 +704,7 @@ export const MessagesUI = (props) => {
                   onClick={() => setCanRead({ ...canRead, business: !canRead?.business })}
                 >
                   <ImageWithFallback
-                    src={order.business?.logo}
+                    src={optimizeImage(order.business?.logo, 'h_40,c_limit')}
                     fallback={<BisBusiness />}
                   />
                   <InfoBlock>
@@ -707,7 +718,7 @@ export const MessagesUI = (props) => {
                 onClick={() => setCanRead({ ...canRead, customer: !canRead?.customer })}
               >
                 <ImageWithFallback
-                  src={order.customer?.photo}
+                  src={optimizeImage(order.customer?.photo, 'w_40,c_limit')}
                   fallback={<FaUserAlt />}
                 />
                 <InfoBlock>
@@ -721,7 +732,7 @@ export const MessagesUI = (props) => {
                   onClick={() => setCanRead({ ...canRead, driver: !canRead?.driver })}
                 >
                   <ImageWithFallback
-                    src={order.driver?.photo}
+                    src={optimizeImage(order.driver?.photo, 'w_40,c_limit')}
                     fallback={<RiUser2Fill />}
                   />
                   <InfoBlock>
@@ -757,6 +768,7 @@ export const MessagesUI = (props) => {
                     required: !image
                   })}
                   autoComplete='off'
+                  readOnly={isChatDisabled}
                 />
                 {!image && (
                   <SendImage htmlFor='chat_image'>
@@ -766,6 +778,7 @@ export const MessagesUI = (props) => {
                       id='chat_image'
                       accept='image/png,image/jpg,image/jpeg'
                       onChange={onChangeImage}
+                      disabled={isChatDisabled}
                     />
                     <BsCardImage />
                   </SendImage>

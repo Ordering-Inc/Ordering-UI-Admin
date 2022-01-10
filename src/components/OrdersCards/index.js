@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -36,14 +36,11 @@ export const OrdersCards = (props) => {
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
 
-  const [ordersPerPage, setOrdersPerPage] = useState(10)
-
   const handleChangePage = (page) => {
-    getPageOrders(ordersPerPage, page)
+    getPageOrders(pagination.pageSize, page)
   }
 
   const handleChangePageSize = (pageSize) => {
-    setOrdersPerPage(pageSize)
     const expectedPage = Math.ceil(pagination.from / pageSize)
     getPageOrders(pageSize, expectedPage)
   }
@@ -194,7 +191,7 @@ export const OrdersCards = (props) => {
             currentPage={pagination.currentPage}
             totalPages={pagination.totalPages}
             handleChangePage={handleChangePage}
-            defaultPageSize={ordersPerPage}
+            defaultPageSize={pagination.pageSize}
             handleChangePageSize={handleChangePageSize}
           />
         </WrapperPagination>
