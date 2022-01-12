@@ -3,12 +3,17 @@ import {
   useLanguage,
   BusinessMenuOptions as BusinessMenuOptionsController
 } from 'ordering-components-admin'
-import { XLg } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { BusinessMenuShare } from '../BusinessMenuShare'
 import { BusinessMenuBasicOptions } from '../BusinessMenuBasicOptions'
 import { AutoScroll } from '../AutoScroll'
 import { IconButton } from '../../styles/Buttons'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import { XLg, ThreeDots } from 'react-bootstrap-icons'
+import { useTheme } from 'styled-components'
+import { Confirm } from '../Confirm'
+import { Modal } from '../Modal'
+import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 
 import {
   Container,
@@ -16,7 +21,8 @@ import {
   ActionBlock,
   TabContainer,
   TabInnerContainer,
-  Tab
+  Tab,
+  ActionSelectorWrapper
 } from './styles'
 
 const BusinessMenuOptionsUI = (props) => {
@@ -26,12 +32,17 @@ const BusinessMenuOptionsUI = (props) => {
     menu,
     business,
     handleUpdateBusinessState,
-    isSelectedSharedMenus
+    isSelectedSharedMenus,
+    handleDeleteMenu
   } = props
+
+  const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isCustomFieldsOpen, setIsCustomFieldsOpen] = useState(false)
 
   const actionSidebar = (value) => {
     if (!value) {
@@ -41,6 +52,17 @@ const BusinessMenuOptionsUI = (props) => {
     document.getElementById('menu_options').style.width = value
       ? width > 1000 ? '500px' : '100%'
       : '0'
+  }
+
+  const handleDeleteClick = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_MENU', 'Are you sure that you want to delete this menu?'),
+      handleOnAccept: () => {
+        handleDeleteMenu()
+        setConfirm({ ...confirm, open: false })
+      }
+    })
   }
 
   useEffect(() => {
@@ -63,6 +85,29 @@ const BusinessMenuOptionsUI = (props) => {
       <Header>
         <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
         <ActionBlock>
+          {Object.keys(menu).length > 0 && (
+            <ActionSelectorWrapper>
+              <DropdownButton
+                className='product_actions'
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+              >
+                {!isSelectedSharedMenus && (
+                  <Dropdown.Item
+                    onClick={() => setIsCustomFieldsOpen(true)}
+                  >
+                    {t('CUSTOM_FIELDS', 'Custom fields')}
+                  </Dropdown.Item>
+                )}
+                <Dropdown.Item
+                  onClick={() => handleDeleteClick()}
+                >
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              </DropdownButton>
+            </ActionSelectorWrapper>
+          )}
           <IconButton
             color='black'
             onClick={() => onClose()}
@@ -104,6 +149,29 @@ const BusinessMenuOptionsUI = (props) => {
           handleUpdateBusinessState={handleUpdateBusinessState}
         />
       )}
+      <Modal
+        width='70%'
+        open={isCustomFieldsOpen}
+        onClose={() => setIsCustomFieldsOpen(false)}
+      >
+        <BusinessMenuCustomFields
+          open={isCustomFieldsOpen}
+          onClose={() => setIsCustomFieldsOpen(false)}
+          businessId={business?.id}
+          menuId={menu.id}
+        />
+      </Modal>
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        width='700px'
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }

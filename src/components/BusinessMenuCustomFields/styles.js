@@ -1,22 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const WrapMetaFields = styled.div`
   position: relative;
   box-sizing: border-box;
-  transition: 0.3s;
   overflow: auto;
 
   @media (min-width: 576px) {
     padding: 20px;
-  }
-
-  @media (min-width: 1000px) {
-    width: 0;
-    ${props => props.theme?.rtl ? css`
-      border-right: 1px solid #E9ECEF;
-    ` : css`
-      border-left: 1px solid #E9ECEF;
-    `}
   }
 `
 
