@@ -73,14 +73,14 @@ export const DragScroll = ({ children }) => {
   }
 
   useEffect(() => {
-    setWrapperScrollLeft(scrollWrapperRef.current.scrollLeft)
+    setWrapperScrollLeft(scrollWrapperRef?.current?.scrollLeft)
     setWrapperWidth(scrollWrapperRef?.current?.offsetWidth)
     setContainerWidth(scrollContainerRef?.current?.offsetWidth)
   }, [scrollWrapperRef, scrollContainerRef, width, children])
 
   useEffect(() => {
     setTimeout(() => {
-      setWrapperScrollLeft(scrollWrapperRef.current.scrollLeft)
+      setWrapperScrollLeft(scrollWrapperRef.current?.scrollLeft)
       setWrapperWidth(scrollWrapperRef?.current?.offsetWidth)
       setContainerWidth(scrollContainerRef?.current?.offsetWidth)
     }, 300)

@@ -153,7 +153,7 @@ const EnterprisePromotionDetailsUI = (props) => {
             handleSelectNoneBusinesses={() => handleSelectAllBusiness(false)}
             isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
             handleUpdateClick={handleUpdateClick}
-            handleAddPromotion={handleAddPromotion}
+            handleAddClick={handleAddPromotion}
           />
         )}
         {selectedOption === 'rules' && (

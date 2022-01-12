@@ -32,7 +32,6 @@ const BusinessMenuOptionsUI = (props) => {
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
-  const [openShareMenu, setOpenShareMenu] = useState(false)
 
   const actionSidebar = (value) => {
     if (!value) {
@@ -64,17 +63,6 @@ const BusinessMenuOptionsUI = (props) => {
       <Header>
         <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
         <ActionBlock>
-          {!isSelectedSharedMenus && Object.keys(menu).length > 0 && (
-            <BusinessMenuShare
-              open={openShareMenu}
-              menu={menu}
-              businessId={business?.id}
-              business={business}
-              onClick={() => setOpenShareMenu(true)}
-              onClose={() => setOpenShareMenu(false)}
-              handleUpdateBusinessState={handleUpdateBusinessState}
-            />
-          )}
           <IconButton
             color='black'
             onClick={() => onClose()}
@@ -92,6 +80,14 @@ const BusinessMenuOptionsUI = (props) => {
             >
               {t('BASIC', 'Basic')}
             </Tab>
+            {!isSelectedSharedMenus && Object.keys(menu).length > 0 && (
+              <Tab
+                active={selectedMenuOption === 'share_with'}
+                onClick={() => setSelectedMenuOption('share_with')}
+              >
+                {t('SHARE_WITH', 'Share with')}
+              </Tab>
+            )}
           </AutoScroll>
         </TabInnerContainer>
       </TabContainer>
@@ -99,6 +95,13 @@ const BusinessMenuOptionsUI = (props) => {
       {selectedMenuOption === 'basic' && (
         <BusinessMenuBasicOptions
           {...props}
+        />
+      )}
+      {selectedMenuOption === 'share_with' && (
+        <BusinessMenuShare
+          menu={menu}
+          business={business}
+          handleUpdateBusinessState={handleUpdateBusinessState}
         />
       )}
     </Container>
