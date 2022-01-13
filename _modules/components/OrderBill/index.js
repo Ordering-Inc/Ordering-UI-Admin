@@ -64,7 +64,9 @@ var OrderBill = function OrderBill(props) {
     className: "total"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary21 = order.summary) === null || _order$summary21 === void 0 ? void 0 : _order$summary21.total) || (order === null || order === void 0 ? void 0 : order.total), {
     currencyPosition: 'left'
-  }))))));
+  }))))), (order === null || order === void 0 ? void 0 : order.comment) && /*#__PURE__*/_react.default.createElement("table", {
+    className: "comments"
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENT', 'Comment')), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : order.comment)))));
 };
 
 exports.OrderBill = OrderBill;
