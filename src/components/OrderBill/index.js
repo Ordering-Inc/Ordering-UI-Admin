@@ -69,9 +69,9 @@ export const OrderBill = (props) => {
                 {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
                   parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                   !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                (
-                  <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
-                )}
+                  (
+                    <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                  )}
               </td>
               <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip, { currencyPosition: 'left' })}</td>
             </tr>
@@ -92,6 +92,16 @@ export const OrderBill = (props) => {
           </tr>
         </tbody>
       </table>
+      {order?.comment && (
+        <table className='comments'>
+          <tbody>
+            <tr>
+              <td>{t('COMMENT', 'Comment')}</td>
+              <td>{order?.comment}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
     </OrderBillContainer>
   )
 }
