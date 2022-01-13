@@ -6,10 +6,20 @@ export const MainContainer = styled.div`
 `
 
 export const MenuContainer = styled.div`
-  flex: 1;
-  
+  ${({ isHide }) => isHide ? css`
+    width: 0px;
+    overflow: hidden;
+    flex: initial;
+  ` : css`
+    flex: 1;
+  `}
+  transition: 0.3s;
   @media (min-width: 576px) {
-    padding: 20px;
+    ${({ isHide }) => isHide ? css`
+      padding: 0;
+    ` : css`
+      padding: 20px;
+    `}
   }
 `
 

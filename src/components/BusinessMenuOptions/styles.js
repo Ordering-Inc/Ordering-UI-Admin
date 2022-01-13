@@ -5,6 +5,7 @@ export const Container = styled.div`
   padding: 20px;
   overflow: auto;
   transition: 0.3s;
+  max-width: 500px;
   
   > button {
     height: 42px;
@@ -15,9 +16,9 @@ export const Container = styled.div`
   @media (min-width: 1000px) {
     width: 0;
     ${props => props.theme?.rtl ? css`
-      border-right: 1px solid #E9ECEF;
+      border-right: 1px solid ${props => props.theme.colors.borderColor};
     ` : css`
-      border-left: 1px solid #E9ECEF;
+      border-left: 1px solid ${props => props.theme.colors.borderColor};
     `}
   }
 `
@@ -26,20 +27,36 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
   h1 {
     font-size: 20px;
     font-weight: 700;
     margin: 5px 0;
     color: ${props => props.theme.colors.headingColor};
+
+    ${props => props.theme?.rtl ? css`
+      margin-left: 80px;
+    ` : css`
+      margin-right: 80px;
+    `}
   }
 `
 
 export const ActionBlock = styled.div`
+  background: #FFF;
+  position: absolute;
+  z-index: 1000;
   display: flex;
   align-items: center;
   > button {
     display: none;
   }
+
+  ${props => props.theme?.rtl ? css`
+    left: 0px;
+  ` : css`
+    right: 0px;
+  `}
 
   @media (min-width: 1000px) {
     > button {

@@ -14,6 +14,7 @@ import { useTheme } from 'styled-components'
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
+import { BusinessSharedMenuProducts } from '../BusinessSharedMenuProducts'
 
 import {
   Container,
@@ -33,7 +34,8 @@ const BusinessMenuOptionsUI = (props) => {
     business,
     handleUpdateBusinessState,
     isSelectedSharedMenus,
-    handleDeleteMenu
+    handleDeleteMenu,
+    setIsOpenSharedProduct
   } = props
 
   const theme = useTheme()
@@ -80,99 +82,120 @@ const BusinessMenuOptionsUI = (props) => {
     actionSidebar(true)
   }, [open])
 
-  return (
-    <Container id='menu_options'>
-      <Header>
-        <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
-        <ActionBlock>
-          {Object.keys(menu).length > 0 && (
-            <ActionSelectorWrapper>
-              <DropdownButton
-                className='product_actions'
-                menuAlign={theme?.rtl ? 'left' : 'right'}
-                title={<ThreeDots />}
-                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-              >
-                {!isSelectedSharedMenus && (
-                  <Dropdown.Item
-                    onClick={() => setIsCustomFieldsOpen(true)}
-                  >
-                    {t('CUSTOM_FIELDS', 'Custom fields')}
-                  </Dropdown.Item>
-                )}
-                <Dropdown.Item
-                  onClick={() => handleDeleteClick()}
-                >
-                  {t('DELETE', 'Delete')}
-                </Dropdown.Item>
-              </DropdownButton>
-            </ActionSelectorWrapper>
-          )}
-          <IconButton
-            color='black'
-            onClick={() => onClose()}
-          >
-            <XLg />
-          </IconButton>
-        </ActionBlock>
-      </Header>
-      <TabContainer>
-        <TabInnerContainer>
-          <AutoScroll innerScroll scrollId='menu_options'>
-            <Tab
-              active={selectedMenuOption === 'basic'}
-              onClick={() => setSelectedMenuOption('basic')}
-            >
-              {t('BASIC', 'Basic')}
-            </Tab>
-            {!isSelectedSharedMenus && Object.keys(menu).length > 0 && (
-              <Tab
-                active={selectedMenuOption === 'share_with'}
-                onClick={() => setSelectedMenuOption('share_with')}
-              >
-                {t('SHARE_WITH', 'Share with')}
-              </Tab>
-            )}
-          </AutoScroll>
-        </TabInnerContainer>
-      </TabContainer>
+  useEffect(() => {
+    if (Object.keys(menu).length === 0) {
+      setSelectedMenuOption('basic')
+    }
+  }, [menu])
 
-      {selectedMenuOption === 'basic' && (
-        <BusinessMenuBasicOptions
-          {...props}
-        />
-      )}
-      {selectedMenuOption === 'share_with' && (
-        <BusinessMenuShare
-          menu={menu}
-          business={business}
-          handleUpdateBusinessState={handleUpdateBusinessState}
-        />
-      )}
-      <Modal
-        width='70%'
-        open={isCustomFieldsOpen}
-        onClose={() => setIsCustomFieldsOpen(false)}
-      >
-        <BusinessMenuCustomFields
+  return (
+    <>
+      <Container id='menu_options'>
+        <Header>
+          <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
+          <ActionBlock>
+            {Object.keys(menu).length > 0 && (
+              <ActionSelectorWrapper>
+                <DropdownButton
+                  className='product_actions'
+                  menuAlign={theme?.rtl ? 'left' : 'right'}
+                  title={<ThreeDots />}
+                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                >
+                  {!isSelectedSharedMenus && (
+                    <Dropdown.Item
+                      onClick={() => setIsCustomFieldsOpen(true)}
+                    >
+                      {t('CUSTOM_FIELDS', 'Custom fields')}
+                    </Dropdown.Item>
+                  )}
+                  <Dropdown.Item
+                    onClick={() => handleDeleteClick()}
+                  >
+                    {t('DELETE', 'Delete')}
+                  </Dropdown.Item>
+                </DropdownButton>
+              </ActionSelectorWrapper>
+            )}
+            <IconButton
+              color='black'
+              onClick={() => onClose()}
+            >
+              <XLg />
+            </IconButton>
+          </ActionBlock>
+        </Header>
+        {Object.keys(menu).length > 0 && !isSelectedSharedMenus && (
+          <TabContainer>
+            <TabInnerContainer>
+              <AutoScroll innerScroll scrollId='menu_options'>
+                <Tab
+                  active={selectedMenuOption === 'basic'}
+                  onClick={() => setSelectedMenuOption('basic')}
+                >
+                  {t('BASIC', 'Basic')}
+                </Tab>
+                {Object.keys(menu).length > 0 && (
+                  <Tab
+                    active={selectedMenuOption === 'share_with'}
+                    onClick={() => setSelectedMenuOption('share_with')}
+                  >
+                    {t('SHARE_WITH', 'Share with')}
+                  </Tab>
+                )}
+              </AutoScroll>
+            </TabInnerContainer>
+          </TabContainer>
+        )}
+
+        {(!isSelectedSharedMenus || Object.keys(menu).length === 0) ? (
+          <>
+            {selectedMenuOption === 'basic' && (
+              <BusinessMenuBasicOptions
+                {...props}
+              />
+            )}
+            {selectedMenuOption === 'share_with' && (
+              <BusinessMenuShare
+                menu={menu}
+                business={business}
+                handleUpdateBusinessState={handleUpdateBusinessState}
+              />
+            )}
+          </>
+        ) : (
+          <BusinessSharedMenuProducts
+            menu={menu}
+            business={business}
+            handleUpdateBusinessState={handleUpdateBusinessState}
+            setIsOpenSharedProduct={setIsOpenSharedProduct}
+          />
+        )}
+        <Modal
+          width='70%'
           open={isCustomFieldsOpen}
           onClose={() => setIsCustomFieldsOpen(false)}
-          businessId={business?.id}
-          menuId={menu.id}
+        >
+          <BusinessMenuCustomFields
+            open={isCustomFieldsOpen}
+            onClose={() => setIsCustomFieldsOpen(false)}
+            businessId={business?.id}
+            menuId={menu.id}
+          />
+        </Modal>
+        <Confirm
+          title={t('WEB_APPNAME', 'Ordering')}
+          width='700px'
+          content={confirm.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={confirm.open}
+          onClose={() => setConfirm({ ...confirm, open: false })}
+          onCancel={() => setConfirm({ ...confirm, open: false })}
+          onAccept={confirm.handleOnAccept}
+          closeOnBackdrop={false}
         />
-      </Modal>
-      <Confirm
-        title={t('WEB_APPNAME', 'Ordering')}
-        width='700px'
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
-    </Container>
+      </Container>
+    </>
   )
 }
 

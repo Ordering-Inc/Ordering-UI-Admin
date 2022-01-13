@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
-import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Button, Checkbox } from '../../styles'
@@ -37,6 +36,7 @@ const BusinessMenuUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [showOption, setShowOption] = useState(null)
   const [currentMenu, setCurrentMenu] = useState(null)
+  const [isOpenSharedProduct, setIsOpenSharedProduct] = useState(false)
 
   const handleOpenOptions = (name, menu) => {
     setCurrentMenu(menu)
@@ -47,6 +47,7 @@ const BusinessMenuUI = (props) => {
   const handleCloseOption = () => {
     setShowOption(null)
     setIsExtendExtraOpen(false)
+    setIsOpenSharedProduct(false)
   }
 
   const handleOpenEdit = (e, menu) => {
@@ -57,7 +58,7 @@ const BusinessMenuUI = (props) => {
 
   return (
     <MainContainer>
-      <MenuContainer>
+      <MenuContainer isHide={isOpenSharedProduct}>
         <Header>
           <Title>{t('MENU_V21', 'Menu')}</Title>
           <Button
@@ -121,14 +122,8 @@ const BusinessMenuUI = (props) => {
               onClose={() => handleCloseOption()}
               handleUpdateBusinessState={handleSuccessBusinessMenu}
               isSelectedSharedMenus={isSelectedSharedMenus}
-            />
-          )}
-          {showOption === 'customFields' && (
-            <BusinessMenuCustomFields
-              open={showOption === 'option'}
-              onClose={() => handleCloseOption()}
-              businessId={business?.id}
-              menuId={currentMenu.id}
+              isOpenSharedProduct={isOpenSharedProduct}
+              setIsOpenSharedProduct={setIsOpenSharedProduct}
             />
           )}
         </>
@@ -147,20 +142,7 @@ const BusinessMenuUI = (props) => {
                 onClose={() => handleCloseOption()}
                 handleUpdateBusinessState={handleSuccessBusinessMenu}
                 isSelectedSharedMenus={isSelectedSharedMenus}
-              />
-            </Modal>
-          )}
-          {showOption === 'customFields' && (
-            <Modal
-              width='80%'
-              open={showOption === 'customFields'}
-              onClose={() => handleCloseOption()}
-            >
-              <BusinessMenuCustomFields
-                open={showOption === 'option'}
-                onClose={() => handleCloseOption()}
-                businessId={business?.id}
-                menuId={currentMenu.id}
+                setIsOpenSharedProduct={setIsOpenSharedProduct}
               />
             </Modal>
           )}
