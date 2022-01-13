@@ -10,8 +10,6 @@ import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
 import { SpinnerLoader } from '../SpinnerLoader'
-import { useWindowSize } from '../../hooks/useWindowSize'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import {
   WrapMetaFields,
@@ -33,12 +31,9 @@ const BusinessMenuCustomFieldsUI = (props) => {
     metaFieldsList,
     actionState,
     handleDeleteMetaField,
-    handeAddMetaField,
-    onClose
+    handeAddMetaField
   } = props
   const [, t] = useLanguage()
-  const { width } = useWindowSize()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { handleSubmit, register, errors } = useForm()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -143,31 +138,6 @@ const BusinessMenuCustomFieldsUI = (props) => {
     }
   }, [errors])
 
-  const actionSidebar = (value) => {
-    if (!value) {
-      props.onClose()
-    }
-    setIsMenuOpen(value)
-    document.getElementById('menu_meta_fields').style.width = value
-      ? width > 1000 ? '500px' : '100%'
-      : '0'
-  }
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      if (width < 1000) {
-        document.getElementById('menu_meta_fields').style.width = '100%'
-      } else {
-        document.getElementById('menu_meta_fields').style.width = '500px'
-      }
-    }
-  }, [width])
-
-  useEffect(() => {
-    if (!open) return
-    actionSidebar(true)
-  }, [open])
-
   return (
     <WrapMetaFields id='menu_meta_fields'>
       {metaFieldsList.loading ? (
@@ -185,9 +155,6 @@ const BusinessMenuCustomFieldsUI = (props) => {
             <MetaTitle>
               {t('CUSTOM_FIELDS', 'Custom Fields')}
             </MetaTitle>
-            <MdcClose
-              onClick={() => onClose()}
-            />
           </Header>
           {metaFieldsList.metaFields.length > 0 ? (
             <>

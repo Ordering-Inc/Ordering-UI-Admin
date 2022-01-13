@@ -6,10 +6,20 @@ export const MainContainer = styled.div`
 `
 
 export const MenuContainer = styled.div`
-  flex: 1;
-  
+  ${({ isHide }) => isHide ? css`
+    width: 0px;
+    overflow: hidden;
+    flex: initial;
+  ` : css`
+    flex: 1;
+  `}
+  transition: 0.3s;
   @media (min-width: 576px) {
-    padding: 20px;
+    ${({ isHide }) => isHide ? css`
+      padding: 0;
+    ` : css`
+      padding: 20px;
+    `}
   }
 `
 
@@ -49,59 +59,15 @@ export const MenuName = styled.span`
   font-size: 14px;
 `
 
-export const EnableWrapper = styled.div`
+export const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: fit-content;
-
-  span {
-    font-size: 14px;
-    color: ${props => props.theme.colors.headingColor};
-
-    ${props => props.theme?.rtl ? css`
-      padding-left: 10px;
-    ` : css`
-      padding-right: 10px;
-    `}
-  }
-`
-
-export const ActionsWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
-    margin-right: 35px;
+    margin-left: 20px;
   ` : css`
-    margin-left: 35px;
+    margin-right: 20px;
   `}
-  button {
-    background: #F8F9FA !important;
-    border: none;
-    padding: 0px;
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  > div {
-    border: 1px solid #E9ECEF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-    border-radius: 8px;
-    .dropdown-item {
-      font-size: 14px;
-    }
-    > div {
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
-      a:last-child {
-        color: #E63757;
-      }
-    }
-  }
 `
-
 export const AddMenuButton = styled.a`
   cursor: pointer;
   color: ${props => props.theme.colors.lightGray};

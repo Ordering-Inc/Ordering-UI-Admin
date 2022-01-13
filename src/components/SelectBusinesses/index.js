@@ -3,6 +3,7 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Checkbox, Button } from '../../styles'
 import { SearchBar } from '../SearchBar'
+import Skeleton from 'react-loading-skeleton'
 
 import {
   Container,
@@ -16,6 +17,7 @@ import {
 
 export const SelectBusinesses = (props) => {
   const {
+    isSkeleton,
     isAddMode,
     isDisabled,
     allBusinesses,
@@ -24,7 +26,7 @@ export const SelectBusinesses = (props) => {
     handleSelectAllBusinesses,
     handleSelectNoneBusinesses,
     handleUpdateClick,
-    handleAddPromotion
+    handleAddClick
   } = props
 
   const theme = useTheme()
@@ -42,7 +44,7 @@ export const SelectBusinesses = (props) => {
       _filteredBusinesses = [...allBusinesses]
     }
     setFilteredBusinesses(_filteredBusinesses)
-  }, [searchValue])
+  }, [searchValue, allBusinesses])
 
   return (
     <Container>
@@ -69,27 +71,39 @@ export const SelectBusinesses = (props) => {
         </Button>
       </ButtonGroup>
       <BusinessesContainer>
-        {filteredBusinesses.map(business => (
-          <BusinessWrapper
-            key={business.id}
-          >
-            <Checkbox
-              checked={selectedBusinessIds.includes(business.id)}
-              onChange={e => handleSelectBusiness(business.id, e.target.checked)}
-            />
-            <WrapperImage>
-              <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
-            </WrapperImage>
-            <p>{business?.name}</p>
-          </BusinessWrapper>
-        ))}
+        {isSkeleton ? (
+          [...Array(10).keys()].map(i => (
+            <BusinessWrapper key={i}>
+              <Skeleton width={20} height={20} />
+              <WrapperImage isSkeleton>
+                <Skeleton width={40} height={40} />
+              </WrapperImage>
+              <p><Skeleton width={100} /></p>
+            </BusinessWrapper>
+          ))
+        ) : (
+          filteredBusinesses.map(business => (
+            <BusinessWrapper
+              key={business.id}
+            >
+              <Checkbox
+                checked={selectedBusinessIds.includes(business.id)}
+                onChange={e => handleSelectBusiness(business.id, e.target.checked)}
+              />
+              <WrapperImage>
+                <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
+              </WrapperImage>
+              <p>{business?.name}</p>
+            </BusinessWrapper>
+          ))
+        )}
       </BusinessesContainer>
       <Button
         borderRadius='8px'
         color='primary'
         disabled={isDisabled}
         onClick={() => {
-          isAddMode ? handleAddPromotion() : handleUpdateClick()
+          isAddMode ? handleAddClick() : handleUpdateClick()
         }}
       >
         {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}

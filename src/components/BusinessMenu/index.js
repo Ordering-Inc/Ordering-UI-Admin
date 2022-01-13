@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
-import { Switch } from '../../styles/Switch'
-import { DropdownButton, Dropdown } from 'react-bootstrap'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { useTheme } from 'styled-components'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
-import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import { Button } from '../../styles/Buttons'
+import { Button, Checkbox } from '../../styles'
 import { Confirm } from '../Confirm'
 
 import {
@@ -18,8 +13,7 @@ import {
   Title,
   MeunItem,
   MenuName,
-  EnableWrapper,
-  ActionsWrapper,
+  CheckboxWrapper,
   AddMenuButton,
   TabsContainer,
   Tab
@@ -31,20 +25,18 @@ const BusinessMenuUI = (props) => {
     setIsExtendExtraOpen,
     businessMenusState,
     handleChangeBusinessMenuActiveState,
-    handleDeleteBusinessMenu,
     handleSuccessBusinessMenu,
 
     isSelectedSharedMenus,
     setIsSelectedSharedMenus
   } = props
-  const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [showOption, setShowOption] = useState(null)
   const [currentMenu, setCurrentMenu] = useState(null)
-  const ActionIcon = <FiMoreVertical />
+  const [isOpenSharedProduct, setIsOpenSharedProduct] = useState(false)
 
   const handleOpenOptions = (name, menu) => {
     setCurrentMenu(menu)
@@ -55,28 +47,18 @@ const BusinessMenuUI = (props) => {
   const handleCloseOption = () => {
     setShowOption(null)
     setIsExtendExtraOpen(false)
+    setIsOpenSharedProduct(false)
   }
 
   const handleOpenEdit = (e, menu) => {
-    const isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.action_wrapper')
+    const isInvalid = e.target.closest('.business_checkbox_control')
     if (isInvalid) return
     handleOpenOptions('option', menu)
   }
 
-  const handleDeleteClick = (menuId) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_MENU', 'Are you sure that you want to delete this menu?'),
-      handleOnAccept: () => {
-        handleDeleteBusinessMenu(menuId)
-        setConfirm({ ...confirm, open: false })
-      }
-    })
-  }
-
   return (
     <MainContainer>
-      <MenuContainer>
+      <MenuContainer isHide={isOpenSharedProduct}>
         <Header>
           <Title>{t('MENU_V21', 'Menu')}</Title>
           <Button
@@ -111,29 +93,15 @@ const BusinessMenuUI = (props) => {
 
         {(isSelectedSharedMenus ? businessMenusState?.menusShared : businessMenusState?.menus).map(menu => (
           <MeunItem key={menu.id} onClick={(e) => handleOpenEdit(e, menu)}>
-            <MenuName>{menu?.name}</MenuName>
-            <EnableWrapper className='business_enable_control'>
-              <span>{t('ENABLE', 'Enable')}</span>
-              <Switch
+            <CheckboxWrapper
+              className='business_checkbox_control'
+            >
+              <Checkbox
                 defaultChecked={menu?.enabled}
-                onChange={(enabled) => handleChangeBusinessMenuActiveState(menu?.id, enabled)}
+                onChange={e => handleChangeBusinessMenuActiveState(menu?.id, e.target.checked)}
               />
-            </EnableWrapper>
-            <ActionsWrapper className='action_wrapper'>
-              <DropdownButton
-                menuAlign={theme?.rtl ? 'left' : 'right'}
-                title={ActionIcon}
-                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-              >
-                <Dropdown.Item onClick={() => handleOpenOptions('option', menu)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                <Dropdown.Item onClick={() => handleOpenOptions('customFields', menu)}>{t('CUSTOM_FIELDS', 'Custom fields')}</Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => handleDeleteClick(menu.id)}
-                >
-                  {t('DELETE', 'Delete')}
-                </Dropdown.Item>
-              </DropdownButton>
-            </ActionsWrapper>
+            </CheckboxWrapper>
+            <MenuName>{menu?.name}</MenuName>
           </MeunItem>
         ))}
         {!isSelectedSharedMenus && (
@@ -154,14 +122,8 @@ const BusinessMenuUI = (props) => {
               onClose={() => handleCloseOption()}
               handleUpdateBusinessState={handleSuccessBusinessMenu}
               isSelectedSharedMenus={isSelectedSharedMenus}
-            />
-          )}
-          {showOption === 'customFields' && (
-            <BusinessMenuCustomFields
-              open={showOption === 'option'}
-              onClose={() => handleCloseOption()}
-              businessId={business?.id}
-              menuId={currentMenu.id}
+              isOpenSharedProduct={isOpenSharedProduct}
+              setIsOpenSharedProduct={setIsOpenSharedProduct}
             />
           )}
         </>
@@ -180,20 +142,7 @@ const BusinessMenuUI = (props) => {
                 onClose={() => handleCloseOption()}
                 handleUpdateBusinessState={handleSuccessBusinessMenu}
                 isSelectedSharedMenus={isSelectedSharedMenus}
-              />
-            </Modal>
-          )}
-          {showOption === 'customFields' && (
-            <Modal
-              width='80%'
-              open={showOption === 'customFields'}
-              onClose={() => handleCloseOption()}
-            >
-              <BusinessMenuCustomFields
-                open={showOption === 'option'}
-                onClose={() => handleCloseOption()}
-                businessId={business?.id}
-                menuId={currentMenu.id}
+                setIsOpenSharedProduct={setIsOpenSharedProduct}
               />
             </Modal>
           )}
