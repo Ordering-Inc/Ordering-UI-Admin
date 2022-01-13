@@ -28,4 +28,8 @@ export const OrderBillContainer = styled.div`
       }
     }
   }
+  table.comments {
+    margin-top: 20px;
+    align-items: center;
+  }
 `
