@@ -17,7 +17,11 @@ var _styles = require("../../styles");
 
 var _SearchBar = require("../SearchBar");
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _styles2 = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -44,7 +48,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SelectBusinesses = function SelectBusinesses(props) {
-  var isAddMode = props.isAddMode,
+  var isSkeleton = props.isSkeleton,
+      isAddMode = props.isAddMode,
       isDisabled = props.isDisabled,
       allBusinesses = props.allBusinesses,
       handleSelectBusiness = props.handleSelectBusiness,
@@ -52,7 +57,7 @@ var SelectBusinesses = function SelectBusinesses(props) {
       handleSelectAllBusinesses = props.handleSelectAllBusinesses,
       handleSelectNoneBusinesses = props.handleSelectNoneBusinesses,
       handleUpdateClick = props.handleUpdateClick,
-      handleAddPromotion = props.handleAddPromotion;
+      handleAddClick = props.handleAddClick;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -85,7 +90,7 @@ var SelectBusinesses = function SelectBusinesses(props) {
     }
 
     setFilteredBusinesses(_filteredBusinesses);
-  }, [searchValue]);
+  }, [searchValue, allBusinesses]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
@@ -103,7 +108,21 @@ var SelectBusinesses = function SelectBusinesses(props) {
     onClick: function onClick() {
       return handleSelectNoneBusinesses();
     }
-  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessesContainer, null, filteredBusinesses.map(function (business) {
+  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessesContainer, null, isSkeleton ? _toConsumableArray(Array(10).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.BusinessWrapper, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 20,
+      height: 20
+    }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
+      isSkeleton: true
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 40,
+      height: 40
+    })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100
+    })));
+  }) : filteredBusinesses.map(function (business) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessWrapper, {
@@ -121,7 +140,7 @@ var SelectBusinesses = function SelectBusinesses(props) {
     color: "primary",
     disabled: isDisabled,
     onClick: function onClick() {
-      isAddMode ? handleAddPromotion() : handleUpdateClick();
+      isAddMode ? handleAddClick() : handleUpdateClick();
     }
   }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')));
 };

@@ -124,18 +124,18 @@ var DragScroll = function DragScroll(_ref) {
   };
 
   (0, _react.useEffect)(function () {
-    var _scrollWrapperRef$cur, _scrollContainerRef$c;
+    var _scrollWrapperRef$cur, _scrollWrapperRef$cur2, _scrollContainerRef$c;
 
-    setWrapperScrollLeft(scrollWrapperRef.current.scrollLeft);
-    setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur = scrollWrapperRef.current) === null || _scrollWrapperRef$cur === void 0 ? void 0 : _scrollWrapperRef$cur.offsetWidth);
+    setWrapperScrollLeft(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur = scrollWrapperRef.current) === null || _scrollWrapperRef$cur === void 0 ? void 0 : _scrollWrapperRef$cur.scrollLeft);
+    setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur2 = scrollWrapperRef.current) === null || _scrollWrapperRef$cur2 === void 0 ? void 0 : _scrollWrapperRef$cur2.offsetWidth);
     setContainerWidth(scrollContainerRef === null || scrollContainerRef === void 0 ? void 0 : (_scrollContainerRef$c = scrollContainerRef.current) === null || _scrollContainerRef$c === void 0 ? void 0 : _scrollContainerRef$c.offsetWidth);
   }, [scrollWrapperRef, scrollContainerRef, width, children]);
   (0, _react.useEffect)(function () {
     setTimeout(function () {
-      var _scrollWrapperRef$cur2, _scrollContainerRef$c2;
+      var _scrollWrapperRef$cur3, _scrollWrapperRef$cur4, _scrollContainerRef$c2;
 
-      setWrapperScrollLeft(scrollWrapperRef.current.scrollLeft);
-      setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur2 = scrollWrapperRef.current) === null || _scrollWrapperRef$cur2 === void 0 ? void 0 : _scrollWrapperRef$cur2.offsetWidth);
+      setWrapperScrollLeft((_scrollWrapperRef$cur3 = scrollWrapperRef.current) === null || _scrollWrapperRef$cur3 === void 0 ? void 0 : _scrollWrapperRef$cur3.scrollLeft);
+      setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur4 = scrollWrapperRef.current) === null || _scrollWrapperRef$cur4 === void 0 ? void 0 : _scrollWrapperRef$cur4.offsetWidth);
       setContainerWidth(scrollContainerRef === null || scrollContainerRef === void 0 ? void 0 : (_scrollContainerRef$c2 = scrollContainerRef.current) === null || _scrollContainerRef$c2 === void 0 ? void 0 : _scrollContainerRef$c2.offsetWidth);
     }, 300);
   }, []);

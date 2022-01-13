@@ -192,7 +192,7 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     },
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
     handleUpdateClick: handleUpdateClick,
-    handleAddPromotion: handleAddPromotion
+    handleAddClick: handleAddPromotion
   }), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, props)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

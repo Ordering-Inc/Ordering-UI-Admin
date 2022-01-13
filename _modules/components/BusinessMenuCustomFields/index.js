@@ -31,10 +31,6 @@ require("jsoneditor-react/es/editor.min.css");
 
 var _SpinnerLoader = require("../SpinnerLoader");
 
-var _useWindowSize2 = require("../../hooks/useWindowSize");
-
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -75,58 +71,49 @@ var BusinessMenuCustomFieldsUI = function BusinessMenuCustomFieldsUI(props) {
       metaFieldsList = props.metaFieldsList,
       actionState = props.actionState,
       handleDeleteMetaField = props.handleDeleteMetaField,
-      handeAddMetaField = props.handeAddMetaField,
-      onClose = props.onClose;
+      handeAddMetaField = props.handeAddMetaField;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isMenuOpen = _useState2[0],
-      setIsMenuOpen = _useState2[1];
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
       errors = _useForm.errors;
 
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)('text'),
       _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      selectedMetaKey = _useState4[0],
+      setSelectedMetaKey = _useState4[1];
 
-  var _useState5 = (0, _react.useState)('text'),
+  var _useState5 = (0, _react.useState)('1'),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedMetaKey = _useState6[0],
-      setSelectedMetaKey = _useState6[1];
+      selectedBoolean = _useState6[0],
+      setSelectedBoolean = _useState6[1];
 
-  var _useState7 = (0, _react.useState)('1'),
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      selectedBoolean = _useState8[0],
-      setSelectedBoolean = _useState8[1];
+      metaKey = _useState8[0],
+      setMetaKey = _useState8[1];
 
   var _useState9 = (0, _react.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      metaKey = _useState10[0],
-      setMetaKey = _useState10[1];
+      metaValue = _useState10[0],
+      setMetaValue = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(''),
+  var _useState11 = (0, _react.useState)({}),
       _useState12 = _slicedToArray(_useState11, 2),
-      metaValue = _useState12[0],
-      setMetaValue = _useState12[1];
-
-  var _useState13 = (0, _react.useState)({}),
-      _useState14 = _slicedToArray(_useState13, 2),
-      json = _useState14[0],
-      setJson = _useState14[1];
+      json = _useState12[0],
+      setJson = _useState12[1];
 
   var metaTypeOptions = [{
     value: 'integer',
@@ -224,29 +211,6 @@ var BusinessMenuCustomFieldsUI = function BusinessMenuCustomFieldsUI(props) {
       });
     }
   }, [errors]);
-
-  var actionSidebar = function actionSidebar(value) {
-    if (!value) {
-      props.onClose();
-    }
-
-    setIsMenuOpen(value);
-    document.getElementById('menu_meta_fields').style.width = value ? width > 1000 ? '500px' : '100%' : '0';
-  };
-
-  (0, _react.useEffect)(function () {
-    if (isMenuOpen) {
-      if (width < 1000) {
-        document.getElementById('menu_meta_fields').style.width = '100%';
-      } else {
-        document.getElementById('menu_meta_fields').style.width = '500px';
-      }
-    }
-  }, [width]);
-  (0, _react.useEffect)(function () {
-    if (!open) return;
-    actionSidebar(true);
-  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, {
     id: "menu_meta_fields"
   }, metaFieldsList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
@@ -265,11 +229,7 @@ var BusinessMenuCustomFieldsUI = function BusinessMenuCustomFieldsUI(props) {
       width: 25,
       height: 30
     }));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FIELDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
-    onClick: function onClick() {
-      return onClose();
-    }
-  })), metaFieldsList.metaFields.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.metaFields.map(function (metaField) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FIELDS', 'Custom Fields'))), metaFieldsList.metaFields.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.metaFields.map(function (metaField) {
     return /*#__PURE__*/_react.default.createElement(_styles.MetaContainer, {
       key: metaField.id
     }, /*#__PURE__*/_react.default.createElement("div", {

@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _useWindowSize2 = require("../../hooks/useWindowSize");
 
 var _BusinessMenuShare = require("../BusinessMenuShare");
@@ -22,6 +20,20 @@ var _BusinessMenuBasicOptions = require("../BusinessMenuBasicOptions");
 var _AutoScroll = require("../AutoScroll");
 
 var _Buttons = require("../../styles/Buttons");
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styledComponents = require("styled-components");
+
+var _Confirm = require("../Confirm");
+
+var _Modal = require("../Modal");
+
+var _BusinessMenuCustomFields = require("../BusinessMenuCustomFields");
+
+var _BusinessSharedMenuProducts = require("../BusinessSharedMenuProducts");
 
 var _styles = require("./styles");
 
@@ -53,7 +65,10 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       menu = props.menu,
       business = props.business,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
-      isSelectedSharedMenus = props.isSelectedSharedMenus;
+      isSelectedSharedMenus = props.isSelectedSharedMenus,
+      handleDeleteMenu = props.handleDeleteMenu,
+      setIsOpenSharedProduct = props.setIsOpenSharedProduct;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,10 +87,19 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       selectedMenuOption = _useState4[0],
       setSelectedMenuOption = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
       _useState6 = _slicedToArray(_useState5, 2),
-      openShareMenu = _useState6[0],
-      setOpenShareMenu = _useState6[1];
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isCustomFieldsOpen = _useState8[0],
+      setIsCustomFieldsOpen = _useState8[1];
 
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
@@ -84,6 +108,19 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
 
     setIsMenuOpen(value);
     document.getElementById('menu_options').style.width = value ? width > 1000 ? '500px' : '100%' : '0';
+  };
+
+  var handleDeleteClick = function handleDeleteClick() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_MENU', 'Are you sure that you want to delete this menu?'),
+      handleOnAccept: function handleOnAccept() {
+        handleDeleteMenu();
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+      }
+    });
   };
 
   (0, _react.useEffect)(function () {
@@ -99,26 +136,32 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, {
+  (0, _react.useEffect)(function () {
+    if (Object.keys(menu).length === 0) {
+      setSelectedMenuOption('basic');
+    }
+  }, [menu]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "menu_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, !isSelectedSharedMenus && Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
-    open: openShareMenu,
-    menu: menu,
-    businessId: business === null || business === void 0 ? void 0 : business.id,
-    business: business,
+  }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    className: "product_actions",
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, !isSelectedSharedMenus && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
-      return setOpenShareMenu(true);
-    },
-    onClose: function onClose() {
-      return setOpenShareMenu(false);
-    },
-    handleUpdateBusinessState: handleUpdateBusinessState
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+      return setIsCustomFieldsOpen(true);
+    }
+  }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDeleteClick();
+    }
+  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TabInnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), Object.keys(menu).length > 0 && !isSelectedSharedMenus && /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TabInnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     innerScroll: true,
     scrollId: "menu_options"
   }, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
@@ -126,7 +169,52 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     onClick: function onClick() {
       return setSelectedMenuOption('basic');
     }
-  }, t('BASIC', 'Basic'))))), selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props));
+  }, t('BASIC', 'Basic')), Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+    active: selectedMenuOption === 'share_with',
+    onClick: function onClick() {
+      return setSelectedMenuOption('share_with');
+    }
+  }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || Object.keys(menu).length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
+    menu: menu,
+    business: business,
+    handleUpdateBusinessState: handleUpdateBusinessState
+  })) : /*#__PURE__*/_react.default.createElement(_BusinessSharedMenuProducts.BusinessSharedMenuProducts, {
+    menu: menu,
+    business: business,
+    handleUpdateBusinessState: handleUpdateBusinessState,
+    setIsOpenSharedProduct: setIsOpenSharedProduct
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "70%",
+    open: isCustomFieldsOpen,
+    onClose: function onClose() {
+      return setIsCustomFieldsOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessMenuCustomFields.BusinessMenuCustomFields, {
+    open: isCustomFieldsOpen,
+    onClose: function onClose() {
+      return setIsCustomFieldsOpen(false);
+    },
+    businessId: business === null || business === void 0 ? void 0 : business.id,
+    menuId: menu.id
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    width: "700px",
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  })));
 };
 
 var BusinessMenuOptions = function BusinessMenuOptions(props) {
