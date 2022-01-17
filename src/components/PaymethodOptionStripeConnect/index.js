@@ -5,6 +5,8 @@ import BilStripe from '@meronex/icons/bi/BilStripe'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../hooks/useWindowSize'
+import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
+import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 
 import {
   Container,
@@ -16,6 +18,9 @@ import {
   StripeConnectButton
 } from './styles'
 
+import { Tab, TabsContainer } from '../BusinessMenu/styles'
+import { TabOption, TabOptionName } from '../PaymentOptionStripeDirect/styles'
+
 export const PaymethodOptionStripeConnect = (props) => {
   const {
     business,
@@ -24,14 +29,38 @@ export const PaymethodOptionStripeConnect = (props) => {
     changesState,
     cleanChangesState,
     actionState,
+    sitesState,
     handleStripeConnect,
     handleChangeStripeInput,
     handleStripeSave,
-    businessPaymethod
+    businessPaymethod,
+    orderTypes,
+    handleChangeBusinessPaymentState
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [paymentTabs, setPaymentTabs] = useState(0)
+
+  const setPaymethodInfo = (values) => {
+    let data = {}
+    let array = changesState?.[values.key]
+      ?? (values.key === 'allowed_order_types'
+        ? businessPaymethod?.[values.key]
+        : businessPaymethod?.[values.key]?.map(i => i.id))
+      ?? []
+
+    array = [...new Set(
+      array.includes(values.value)
+        ? array.filter(item => item !== values.value)
+        : [...array, values.value]
+    )]
+
+    data[values.key] = array.length > 0 ? array : []
+
+    handleChangeBusinessPaymentState(data)
+  }
+
   const actionSidebar = (value) => {
     if (!value) {
       props.onClose()
@@ -70,91 +99,151 @@ export const PaymethodOptionStripeConnect = (props) => {
           />
         </CloseButton>
       </Header>
-      <StripeConnectButton
-        onClick={() => handleStripeConnect()}
-      >
-        <span><BilStripe /></span>
-        <span>{t('CONNECT_WITH_STRIPE', 'Connect with stripe')}</span>
-      </StripeConnectButton>
-      <FieldName>{t('ACCESS_TOKEN_ID', 'Access token ID')}</FieldName>
-      <Input
-        name='token'
-        defaultValue={
-          changesState?.data?.token
-            ? changesState?.data?.token
-            : businessPaymethod?.data?.token
-        }
-        placeholder={t('ACCESS_TOKEN_ID', 'Access token ID')}
-        disabled
-      />
 
-      <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')}</FieldName>
-      <Input
-        name='publishable'
-        defaultValue={
-          changesState?.data?.publishable
-            ? changesState?.data?.publishable
-            : businessPaymethod?.data?.publishable
-        }
-        placeholder={t('PUBLISHABLE_KEY', 'Publishable key')}
-        disabled
-      />
+      <TabsContainer>
+        <Tab
+          active={paymentTabs === 0}
+          onClick={() => setPaymentTabs(0)}
+        >
+          {t('GENERAL', 'General')}
+        </Tab>
+        {sitesState?.sites?.length > 0 && (
+          <Tab
+            active={paymentTabs === 1}
+            onClick={() => setPaymentTabs(1)}
+          >
+            {t('CHANNELS', 'Channels')}
+          </Tab>
+        )}
+        <Tab
+          active={paymentTabs === 2}
+          onClick={() => setPaymentTabs(2)}
+        >
+          {t('ORDER_TYPE', 'Order type')}
+        </Tab>
+      </TabsContainer>
 
-      <FieldName>{t('ID_USER', 'User ID')}</FieldName>
-      <Input
-        name='user'
-        defaultValue={
-          changesState?.data?.user
-            ? changesState?.data?.user
-            : businessPaymethod?.data?.user
-        }
-        placeholder={t('ID_USER', 'User ID')}
-        disabled
-      />
-
-      <FieldName>{t('REFRESH_TOKEN', 'Refresh token')}</FieldName>
-      <Input
-        name='refresh_token'
-        defaultValue={
-          changesState?.data_sandbox?.refresh_token
-            ? changesState?.data_sandbox?.refresh_token
-            : businessPaymethod?.data_sandbox?.refresh_token
-        }
-        placeholder={t('REFRESH_TOKEN', 'Refresh token')}
-        disabled
-      />
-
-      <InputGroup>
-        <InputWrapper>
-          <FieldName>{t('FIXED_FEE', 'Fixed fee')}</FieldName>
+      {paymentTabs === 0 && (
+        <>
+          <StripeConnectButton
+            onClick={() => handleStripeConnect()}
+          >
+            <span><BilStripe /></span>
+            <span>{t('CONNECT_WITH_STRIPE', 'Connect with stripe')}</span>
+          </StripeConnectButton>
+          <FieldName>{t('ACCESS_TOKEN_ID', 'Access token ID')}</FieldName>
           <Input
-            type='number'
-            name='fixed_usage_fee'
+            name='token'
             defaultValue={
-              changesState?.fixed_usage_fee
-                ? changesState?.fixed_usage_fee
-                : business?.fixed_usage_fee
+              changesState?.data?.token
+                ? changesState?.data?.token
+                : businessPaymethod?.data?.token
             }
-            placeholder={t('FIXED_FEE', 'Fixed fee')}
-            onChange={e => handleChangeStripeInput(e)}
+            placeholder={t('ACCESS_TOKEN_ID', 'Access token ID')}
+            disabled
           />
-        </InputWrapper>
 
-        <InputWrapper>
-          <FieldName>{t('PERCENTAGE_FEE', 'Percentage fee')}</FieldName>
+          <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')}</FieldName>
           <Input
-            type='number'
-            name='percentage_usage_fee'
+            name='publishable'
             defaultValue={
-              changesState?.percentage_usage_fee
-                ? changesState?.percentage_usage_fee
-                : business?.percentage_usage_fee
+              changesState?.data?.publishable
+                ? changesState?.data?.publishable
+                : businessPaymethod?.data?.publishable
             }
-            placeholder={t('PERCENTAGE_FEE', 'Percentage fee')}
-            onChange={e => handleChangeStripeInput(e)}
+            placeholder={t('PUBLISHABLE_KEY', 'Publishable key')}
+            disabled
           />
-        </InputWrapper>
-      </InputGroup>
+
+          <FieldName>{t('ID_USER', 'User ID')}</FieldName>
+          <Input
+            name='user'
+            defaultValue={
+              changesState?.data?.user
+                ? changesState?.data?.user
+                : businessPaymethod?.data?.user
+            }
+            placeholder={t('ID_USER', 'User ID')}
+            disabled
+          />
+
+          <FieldName>{t('REFRESH_TOKEN', 'Refresh token')}</FieldName>
+          <Input
+            name='refresh_token'
+            defaultValue={
+              changesState?.data_sandbox?.refresh_token
+                ? changesState?.data_sandbox?.refresh_token
+                : businessPaymethod?.data_sandbox?.refresh_token
+            }
+            placeholder={t('REFRESH_TOKEN', 'Refresh token')}
+            disabled
+          />
+
+          <InputGroup>
+            <InputWrapper>
+              <FieldName>{t('FIXED_FEE', 'Fixed fee')}</FieldName>
+              <Input
+                type='number'
+                name='fixed_usage_fee'
+                defaultValue={
+                  changesState?.fixed_usage_fee
+                    ? changesState?.fixed_usage_fee
+                    : business?.fixed_usage_fee
+                }
+                placeholder={t('FIXED_FEE', 'Fixed fee')}
+                onChange={e => handleChangeStripeInput(e)}
+              />
+            </InputWrapper>
+
+            <InputWrapper>
+              <FieldName>{t('PERCENTAGE_FEE', 'Percentage fee')}</FieldName>
+              <Input
+                type='number'
+                name='percentage_usage_fee'
+                defaultValue={
+                  changesState?.percentage_usage_fee
+                    ? changesState?.percentage_usage_fee
+                    : business?.percentage_usage_fee
+                }
+                placeholder={t('PERCENTAGE_FEE', 'Percentage fee')}
+                onChange={e => handleChangeStripeInput(e)}
+              />
+            </InputWrapper>
+          </InputGroup>
+        </>
+      )}
+
+      {paymentTabs === 1 && sitesState?.sites?.length > 0 && (
+         sitesState?.sites.map(site => (
+          <TabOption
+            key={site.id}
+            onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
+          >
+            {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
+              <RiCheckboxFill className='fill' />
+            ) : (
+              <RiCheckboxBlankLine />
+            )}
+            <TabOptionName>{site.name}</TabOptionName>
+          </TabOption>
+        ))
+      )}
+
+      {paymentTabs === 2 && (
+        orderTypes.map(type => (
+          <TabOption
+            key={type.value}
+            onClick={() => setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
+          >
+            {(changesState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
+              <RiCheckboxFill className='fill' />
+            ) : (
+              <RiCheckboxBlankLine />
+            )}
+            <TabOptionName>{type.text}</TabOptionName>
+          </TabOption>
+        ))
+      )}
 
       <Button
         borderRadius='5px'
