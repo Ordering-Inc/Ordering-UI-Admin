@@ -597,6 +597,66 @@ Object.defineProperty(exports, "ReportsHeatMap", {
     return _ReportsHeatMap.ReportsHeatMap;
   }
 });
+Object.defineProperty(exports, "ReportsSpentTime", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsSpentTime.ReportsSpentTime;
+  }
+});
+Object.defineProperty(exports, "ReportsTopDrivers", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsTopDrivers.ReportsTopDrivers;
+  }
+});
+Object.defineProperty(exports, "ReportsOrders", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsOrders.ReportsOrders;
+  }
+});
+Object.defineProperty(exports, "ReportsSales", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsSales.ReportsSales;
+  }
+});
+Object.defineProperty(exports, "ReportsUsers", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsUsers.ReportsUsers;
+  }
+});
+Object.defineProperty(exports, "ReportsCustomer", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsCustomer.ReportsCustomer;
+  }
+});
+Object.defineProperty(exports, "ReportsPaymethodSales", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsPaymethodSales.ReportsPaymethodSales;
+  }
+});
+Object.defineProperty(exports, "ReportsAverageSales", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsAverageSales.ReportsAverageSales;
+  }
+});
+Object.defineProperty(exports, "ReportsGeneralSales", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsGeneralSales.ReportsGeneralSales;
+  }
+});
+Object.defineProperty(exports, "ReportsSaleAndCategory", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsSaleAndCategory.ReportsSaleAndCategory;
+  }
+});
 Object.defineProperty(exports, "ReviewsListing", {
   enumerable: true,
   get: function get() {
@@ -1093,6 +1153,26 @@ var _ReportsOrderStatus = require("./components/ReportsOrderStatus");
 var _ReportsDriverDistance = require("./components/ReportsDriverDistance");
 
 var _ReportsHeatMap = require("./components/ReportsHeatMap");
+
+var _ReportsSpentTime = require("./components/ReportsSpentTime");
+
+var _ReportsTopDrivers = require("./components/ReportsTopDrivers");
+
+var _ReportsOrders = require("./components/ReportsOrders");
+
+var _ReportsSales = require("./components/ReportsSales");
+
+var _ReportsUsers = require("./components/ReportsUsers");
+
+var _ReportsCustomer = require("./components/ReportsCustomer");
+
+var _ReportsPaymethodSales = require("./components/ReportsPaymethodSales");
+
+var _ReportsAverageSales = require("./components/ReportsAverageSales");
+
+var _ReportsGeneralSales = require("./components/ReportsGeneralSales");
+
+var _ReportsSaleAndCategory = require("./components/ReportsSaleAndCategory");
 
 var _ReviewsListing = require("./components/ReviewsListing");
 
