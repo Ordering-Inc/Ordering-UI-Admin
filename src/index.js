@@ -96,6 +96,16 @@ import { ReportsDriverSchedule } from './components/ReportsDriverSchedule'
 import { ReportsOrderStatus } from './components/ReportsOrderStatus'
 import { ReportsDriverDistance } from './components/ReportsDriverDistance'
 import { ReportsHeatMap } from './components/ReportsHeatMap'
+import { ReportsSpentTime } from './components/ReportsSpentTime'
+import { ReportsTopDrivers } from './components/ReportsTopDrivers'
+import { ReportsOrders } from './components/ReportsOrders'
+import { ReportsSales } from './components/ReportsSales'
+import { ReportsUsers } from './components/ReportsUsers'
+import { ReportsCustomer } from './components/ReportsCustomer'
+import { ReportsPaymethodSales } from './components/ReportsPaymethodSales'
+import { ReportsAverageSales } from './components/ReportsAverageSales'
+import { ReportsGeneralSales } from './components/ReportsGeneralSales'
+import { ReportsSaleAndCategory } from './components/ReportsSaleAndCategory'
 import { ReviewsListing } from './components/ReviewsListing'
 import { ReviewProductsListing } from './components/ReviewProductsListing'
 import { Reports } from './components/Reports'
@@ -240,6 +250,16 @@ export {
   ReportsOrderStatus,
   ReportsDriverDistance,
   ReportsHeatMap,
+  ReportsSpentTime,
+  ReportsTopDrivers,
+  ReportsOrders,
+  ReportsSales,
+  ReportsUsers,
+  ReportsCustomer,
+  ReportsPaymethodSales,
+  ReportsAverageSales,
+  ReportsGeneralSales,
+  ReportsSaleAndCategory,
   ReviewsListing,
   ReviewProductsListing,
   Reports,

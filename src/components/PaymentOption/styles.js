@@ -27,35 +27,6 @@ export const Container = styled.div`
   }
 `
 
-export const SandboxWrapper = styled.div`
-  cursor: pointer;
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  color: ${props => props.theme.colors.headingColor};
-  span {
-    ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
-    ` : css`
-      margin-left: 10px;
-    `}
-  }
-
-  svg {
-    font-size: 20px;
-    color: ${props => props.theme.colors.lightGray};
-
-    &.fill {
-      color: ${props => props.theme.colors.primary};
-    }
-  }
-`
-
-export const FieldName = styled.p`
-  color: ${props => props.theme.colors.headingColor};
-  margin: 30px 0 10px;
-`
-
 export const Header = styled.div`
   display: flex;
   align-items: center;

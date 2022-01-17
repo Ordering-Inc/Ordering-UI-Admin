@@ -4,40 +4,35 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import MdcClose from '@meronex/icons/mdc/MdcClose'
 
-import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 import {
   Container,
-  SandboxWrapper,
-  FieldName,
   Header,
-  CloseButton
+  CloseButton,
+  TabOption,
+  TabOptionName
 } from './styles'
-
 import { Tab, TabsContainer } from '../BusinessMenu/styles'
-import { TabOption, TabOptionName } from '../PaymentOptionStripeDirect/styles'
 
-export const PaymethodOptionStripeRedirect = (props) => {
+export const PaymentOption = (props) => {
   const {
     open,
     onClose,
+    orderTypes,
+    sitesState,
     changesState,
+    handleChangeBusinessPaymentState,
     cleanChangesState,
     actionState,
-    sitesState,
-    handleChangeSandbox,
-    handleChangeInput,
     handleSaveClick,
-    businessPaymethod,
-    orderTypes,
-    handleChangeBusinessPaymentState
+    businessPaymethod
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [paymentTabs, setPaymentTabs] = useState(0)
+  const [paymentTabs, setPaymentTabs] = useState(sitesState?.sites?.length > 0 ? 0 : 1)
 
   const setPaymethodInfo = (values) => {
     let data = {}
@@ -63,7 +58,7 @@ export const PaymethodOptionStripeRedirect = (props) => {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById('stripe_redirect').style.width = value
+    document.getElementById('payment_method_option').style.width = value
       ? width > 1000 ? '500px' : '100%'
       : '0'
   }
@@ -71,9 +66,9 @@ export const PaymethodOptionStripeRedirect = (props) => {
   useEffect(() => {
     if (isMenuOpen) {
       if (width < 1000) {
-        document.getElementById('stripe_redirect').style.width = '100%'
+        document.getElementById('payment_method_option').style.width = '100%'
       } else {
-        document.getElementById('stripe_redirect').style.width = '500px'
+        document.getElementById('payment_method_option').style.width = '500px'
       }
     }
   }, [width])
@@ -84,14 +79,19 @@ export const PaymethodOptionStripeRedirect = (props) => {
   }, [open])
 
   useEffect(() => {
+    setPaymentTabs(sitesState?.sites?.length > 0 ? 0 : 1)
+  }, [sitesState])
+
+  useEffect(() => {
     cleanChangesState({
       sandbox: businessPaymethod?.sandbox
     })
   }, [businessPaymethod?.sandbox])
+
   return (
-    <Container id='stripe_redirect'>
+    <Container id='payment_method_option'>
       <Header>
-        <h1>{t('STRIPE_REDIRECT', 'Stripe redirect')}</h1>
+        <h1>{businessPaymethod?.paymethod?.name}</h1>
         <CloseButton>
           <MdcClose
             onClick={() => onClose()}
@@ -100,88 +100,23 @@ export const PaymethodOptionStripeRedirect = (props) => {
       </Header>
 
       <TabsContainer>
-        <Tab
-          active={paymentTabs === 0}
-          onClick={() => setPaymentTabs(0)}
-        >
-          {t('GENERAL', 'General')}
-        </Tab>
         {sitesState?.sites?.length > 0 && (
           <Tab
-            active={paymentTabs === 1}
-            onClick={() => setPaymentTabs(1)}
+            active={paymentTabs === 0}
+            onClick={() => setPaymentTabs(0)}
           >
             {t('CHANNELS', 'Channels')}
           </Tab>
         )}
         <Tab
-          active={paymentTabs === 2}
-          onClick={() => setPaymentTabs(2)}
+          active={paymentTabs === 1}
+          onClick={() => setPaymentTabs(1)}
         >
           {t('ORDER_TYPE', 'Order type')}
         </Tab>
       </TabsContainer>
 
-      {paymentTabs === 0 && (
-        <>
-          <SandboxWrapper
-            onClick={() => handleChangeSandbox()}
-          >
-            {changesState?.sandbox ? (
-              <RiCheckboxFill className='fill' />
-            ) : (
-              <RiCheckboxBlankLine />
-            )}
-            <span>{t('SANDBOX', 'Sandbox')}</span>
-          </SandboxWrapper>
-          <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')}</FieldName>
-          <Input
-            name='publishable'
-            defaultValue={
-              changesState?.data?.publishable
-                ? changesState?.data?.publishable
-                : businessPaymethod?.data?.publishable
-            }
-            placeholder={t('PUBLISHABLE_KEY', 'Publishable key')}
-            onChange={e => handleChangeInput(e, false)}
-          />
-          <FieldName>{t('SECRET_KEY', 'Secret key')}</FieldName>
-          <Input
-            name='secret'
-            defaultValue={
-              changesState?.data?.secret
-                ? changesState?.data?.secret
-                : businessPaymethod?.data?.secret
-            }
-            placeholder={t('SECRET_KEY', 'Secret key')}
-            onChange={e => handleChangeInput(e, false)}
-          />
-          <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')} ({t('SANDBOX', 'Sandbox')})</FieldName>
-          <Input
-            name='publishable'
-            defaultValue={
-              changesState?.data_sandbox?.publishable
-                ? changesState?.data_sandbox?.publishable
-                : businessPaymethod?.data_sandbox?.publishable
-            }
-            placeholder={`${t('PUBLISHABLE_KEY', 'Publishable key')} (${t('SANDBOX', 'Sandbox')})`}
-            onChange={e => handleChangeInput(e, true)}
-          />
-          <FieldName>{t('SECRECT_KEY', 'Secret key')} ({t('SANDBOX', 'Sandbox')})</FieldName>
-          <Input
-            name='secret'
-            defaultValue={
-              changesState?.data_sandbox?.secret
-                ? changesState?.data_sandbox?.secret
-                : businessPaymethod?.data_sandbox?.secret
-            }
-            placeholder={`${t('SECRECT_KEY', 'Secret key')} (${t('SANDBOX', 'Sandbox')})`}
-            onChange={e => handleChangeInput(e, true)}
-          />
-        </>
-      )}
-
-      {paymentTabs === 1 && sitesState?.sites?.length > 0 && (
+      {paymentTabs === 0 && sitesState?.sites?.length > 0 && (
          sitesState?.sites.map(site => (
           <TabOption
             key={site.id}
@@ -197,7 +132,7 @@ export const PaymethodOptionStripeRedirect = (props) => {
         ))
       )}
 
-      {paymentTabs === 2 && (
+      {paymentTabs === 1 && (
         orderTypes.map(type => (
           <TabOption
             key={type.value}
