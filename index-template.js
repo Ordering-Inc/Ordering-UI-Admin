@@ -10,6 +10,7 @@ import { ConfigFileContext } from './src/contexts/ConfigFileContext'
 import { InfoShareProvider } from './src/contexts/InfoShareContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
+import settings from './template/config.json'
 
 /**
  * Theme images
@@ -218,15 +219,8 @@ theme.images = {
 
 const RouteApp = () => {
   const [configFile, setConfigFile] = useState({
-    project: localStorage.getItem('project') !== null ? localStorage.getItem('project') : null,
-    api: {
-      url: 'https://apiv4.ordering.co',
-      language: 'en',
-      version: 'v400'
-    },
-    socket: {
-      url: 'https://socket.ordering.co'
-    }
+    ...settings,
+    project: localStorage.getItem('project') !== null ? localStorage.getItem('project') : null
   })
 
   return (
