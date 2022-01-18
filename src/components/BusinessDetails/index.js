@@ -20,6 +20,7 @@ import { BusinessMoreDetail } from '../BusinessMoreDetail'
 import { BusinessNotifications } from '../BusinessNotifications'
 import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 import { BusinessFrontLayout } from '../BusinessFrontLayout'
+import { BusinessPublishing } from '../BusinessPublishing'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -207,6 +208,12 @@ export const BusinessDetailsUI = (props) => {
               handleUpdateBusinessClick={handleUpdateBusinessClick}
               formState={formState}
               setFormState={setFormState}
+            />
+          )}
+          {selectedItem === 'publishing' && (
+            <BusinessPublishing
+              business={businessState?.business}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
             />
           )}
           {selectedItem === 'layout' && (
