@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Checkbox } from '../../styles'
 import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
 
@@ -26,6 +26,7 @@ export const CategoryTreeNode = (props) => {
 
   const [setActive, setActiveState] = useState('')
   const [setRotate, setRotateState] = useState('accordion__icon')
+  const [isCategoryChecked, setIsCategoryChecked] = useState(false)
 
   const toggleAccordion = (e) => {
     const isActionsClick = categoryRef.current?.contains(e.target) || checkboxRef.current?.contains(e.target)
@@ -37,7 +38,7 @@ export const CategoryTreeNode = (props) => {
   }
 
   const isCheckedCategory = () => {
-    if (category?.products) {
+    if (category?.products?.length > 0) {
       const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
       return productsIds.every(id => selectedProductsIds.includes(id))
     } else {
@@ -94,6 +95,17 @@ export const CategoryTreeNode = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (category?.products?.length) {
+      setIsCategoryChecked(isCheckedCategory())
+    }
+  }, [selectedProductsIds])
+
+  const onChangeCategory = (checked) => {
+    setIsCategoryChecked(checked)
+    handleChangeSelectCategory()
+  }
+
   return (
     <AccordionSection>
       <Accordion
@@ -105,8 +117,8 @@ export const CategoryTreeNode = (props) => {
           <div>
             <Checkbox
               ref={categoryRef}
-              checked={isCheckedCategory()}
-              onChange={() => handleChangeSelectCategory()}
+              checked={isCategoryChecked}
+              onChange={e => onChangeCategory(e.target.checked)}
             />
             <span>{category.name}</span>
           </div>
