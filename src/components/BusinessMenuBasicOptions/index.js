@@ -52,6 +52,17 @@ export const BusinessMenuBasicOptions = (props) => {
     })
   }
 
+  const onAddBusinessMenuOption = () => {
+    if (formState.changes?.products?.length) {
+      handleAddBusinessMenuOption()
+    } else {
+      setAlertState({
+        open: true,
+        content: [t('ERROR_MENU_PRODUCTS', 'You have not selected any product for the menu')]
+      })
+    }
+  }
+
   useEffect(() => {
     if (!formState?.result?.error) return
     setAlertState({
@@ -127,7 +138,7 @@ export const BusinessMenuBasicOptions = (props) => {
         color='primary'
         borderRadius='5px'
         disabled={formState.loading || Object.keys(formState?.changes).length === 0}
-        onClick={() => isEdit ? handleUpdateBusinessMenuOption() : handleAddBusinessMenuOption()}
+        onClick={() => isEdit ? handleUpdateBusinessMenuOption() : onAddBusinessMenuOption()}
       >
         {formState.loading ? (
           t('LOADING', 'Loading')
