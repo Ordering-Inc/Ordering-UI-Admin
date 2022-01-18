@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UsersBottomContainer = exports.AddNewUserButton = exports.WrapperUserActionSelector = exports.WrapperPagination = exports.UserEnableWrapper = exports.UserTypeWrapper = exports.InfoBlock = exports.CheckBoxWrapper = exports.UserMainInfo = exports.Image = exports.WrapperImage = exports.UsersTable = exports.UserTableWrapper = exports.UsersConatiner = void 0;
+exports.VerifiedItem = exports.UsersBottomContainer = exports.AddNewUserButton = exports.WrapperUserActionSelector = exports.WrapperPagination = exports.UserEnableWrapper = exports.UserTypeWrapper = exports.InfoBlock = exports.CheckBoxWrapper = exports.UserMainInfo = exports.Image = exports.WrapperImage = exports.UsersTable = exports.UserTableWrapper = exports.UsersConatiner = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -31,7 +31,7 @@ var UserTableWrapper = _styledComponents.default.div(_templateObject2 || (_templ
 
 exports.UserTableWrapper = UserTableWrapper;
 
-var UsersTable = _styledComponents.default.table(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n\n  td, th {\n    padding: 10px 0;\n    font-size: 14px;\n    &:first-child {\n      width: 30%;\n    }\n    &:nth-child(2) {\n      width: 20%;\n    }\n\n    &:nth-child(4),\n    \n    &:nth-child(5) {\n      width: 10%;\n    }\n  }\n\n  thead {\n    tr {\n      border-bottom: solid 1px ", ";\n    }\n  }\n\n  tbody {\n    border-bottom: 1px solid ", ";\n    cursor: pointer;\n\n    &:hover {\n      background-color: ", ";\n    }\n    &.active {\n      background-color: ", ";\n      td {\n        border-top: 1px solid ", ";\n        border-bottom: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
+var UsersTable = _styledComponents.default.table(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  color: ", ";\n\n  td, th {\n    padding: 10px 0;\n    font-size: 14px;\n    &:first-child {\n      width: 40%;\n    }\n    &:nth-child(2) {\n      width: 20%;\n    }\n\n    &:nth-child(4),\n    \n    &:nth-child(5) {\n      width: 10%;\n    }\n  }\n\n  thead {\n    tr {\n      border-bottom: solid 1px ", ";\n    }\n  }\n\n  tbody {\n    border-bottom: 1px solid ", ";\n    cursor: pointer;\n\n    &:hover {\n      background-color: ", ";\n    }\n    &.active {\n      background-color: ", ";\n      td {\n        border-top: 1px solid ", ";\n        border-bottom: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
@@ -74,7 +74,7 @@ var Image = function Image(props) {
 
 exports.Image = Image;
 
-var UserMainInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  ", "\n\n  > div:last-child {\n    flex: 1;\n  }\n"])), function (props) {
+var UserMainInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  position: relative;\n\n  ", "\n\n  > div:last-child {\n    flex: 1;\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    border-left: 1px solid ", ";\n    margin-left: 20px;\n    padding-left: 10px;\n  "])), function (props) {
@@ -154,3 +154,7 @@ exports.AddNewUserButton = AddNewUserButton;
 var UsersBottomContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n"])));
 
 exports.UsersBottomContainer = UsersBottomContainer;
+
+var VerifiedItem = _styledComponents.default.span(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  font-size: 10px;\n  background-color: #E3FEF3;\n  padding: 3px 10px;\n  border-radius: 50px;\n  color: #00D27A;\n"])));
+
+exports.VerifiedItem = VerifiedItem;
