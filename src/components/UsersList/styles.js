@@ -17,7 +17,7 @@ export const UsersTable = styled.table`
     padding: 10px 0;
     font-size: 14px;
     &:first-child {
-      width: 30%;
+      width: 40%;
     }
     &:nth-child(2) {
       width: 20%;
@@ -104,6 +104,7 @@ export const Image = (props) => {
 export const UserMainInfo = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 
   ${props => props.theme?.rtl ? css`
     border-left: 1px solid ${props => props.theme.colors.borderColor};
@@ -268,4 +269,12 @@ export const UsersBottomContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+`
+
+export const VerifiedItem = styled.span`
+  font-size: 10px;
+  background-color: #E3FEF3;
+  padding: 3px 10px;
+  border-radius: 50px;
+  color: #00D27A;
 `
