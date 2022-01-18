@@ -66,6 +66,11 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       setRotate = _useState4[0],
       setRotateState = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isCategoryChecked = _useState6[0],
+      setIsCategoryChecked = _useState6[1];
+
   var toggleAccordion = function toggleAccordion(e) {
     var _categoryRef$current, _checkboxRef$current;
 
@@ -76,7 +81,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   };
 
   var isCheckedCategory = function isCheckedCategory() {
-    if (category !== null && category !== void 0 && category.products) {
+    var _category$products;
+
+    if ((category === null || category === void 0 ? void 0 : (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.length) > 0) {
       var productsIds = category.products.reduce(function (ids, product) {
         return [].concat(_toConsumableArray(ids), [product.id]);
       }, []);
@@ -158,6 +165,19 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     }
   };
 
+  (0, _react.useEffect)(function () {
+    var _category$products2;
+
+    if (category !== null && category !== void 0 && (_category$products2 = category.products) !== null && _category$products2 !== void 0 && _category$products2.length) {
+      setIsCategoryChecked(isCheckedCategory());
+    }
+  }, [selectedProductsIds]);
+
+  var onChangeCategory = function onChangeCategory(checked) {
+    setIsCategoryChecked(checked);
+    handleChangeSelectCategory();
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles2.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles2.Accordion, {
     onClick: function onClick(e) {
       return toggleAccordion(e, category.id);
@@ -166,9 +186,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     margin: 20 * index
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     ref: categoryRef,
-    checked: isCheckedCategory(),
-    onChange: function onChange() {
-      return handleChangeSelectCategory();
+    checked: isCategoryChecked,
+    onChange: function onChange(e) {
+      return onChangeCategory(e.target.checked);
     }
   }), /*#__PURE__*/_react.default.createElement("span", null, category.name)), /*#__PURE__*/_react.default.createElement(_GoTriangleDown.default, {
     className: setRotate

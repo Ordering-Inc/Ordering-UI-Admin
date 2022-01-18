@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
-  var _formState$result3, _ref, _formState$changes$na, _formState$changes, _businessMenuState$me, _businessMenuState$me2, _ref2, _formState$changes$co, _formState$changes2, _businessMenuState$me3;
+  var _formState$result3, _ref, _formState$changes$na, _formState$changes2, _businessMenuState$me, _businessMenuState$me2, _ref2, _formState$changes$co, _formState$changes3, _businessMenuState$me3;
 
   var business = props.business,
       businessMenuState = props.businessMenuState,
@@ -103,6 +103,19 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     });
   };
 
+  var onAddBusinessMenuOption = function onAddBusinessMenuOption() {
+    var _formState$changes, _formState$changes$pr;
+
+    if ((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && (_formState$changes$pr = _formState$changes.products) !== null && _formState$changes$pr !== void 0 && _formState$changes$pr.length) {
+      handleAddBusinessMenuOption();
+    } else {
+      setAlertState({
+        open: true,
+        content: [t('ERROR_MENU_PRODUCTS', 'You have not selected any product for the menu')]
+      });
+    }
+  };
+
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result2;
 
@@ -115,7 +128,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessMenuBasicContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('MENU_NAME', 'Menu name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "name",
     placeholder: t('NAME', 'Name'),
-    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me = businessMenuState.menu) === null || _businessMenuState$me === void 0 ? void 0 : _businessMenuState$me.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me = businessMenuState.menu) === null || _businessMenuState$me === void 0 ? void 0 : _businessMenuState$me.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -137,7 +150,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles.FieldName, null, t('COMMENTS', 'Comments')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     name: "comment",
-    defaultValue: (_ref2 = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.comment) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me3 = businessMenuState.menu) === null || _businessMenuState$me3 === void 0 ? void 0 : _businessMenuState$me3.comment) !== null && _ref2 !== void 0 ? _ref2 : '',
+    defaultValue: (_ref2 = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.comment) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : businessMenuState === null || businessMenuState === void 0 ? void 0 : (_businessMenuState$me3 = businessMenuState.menu) === null || _businessMenuState$me3 === void 0 ? void 0 : _businessMenuState$me3.comment) !== null && _ref2 !== void 0 ? _ref2 : '',
     placeholder: t('WRITE_HERE', 'Write here'),
     onChange: function onChange(e) {
       return handleChangeInput(e);
@@ -161,7 +174,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     borderRadius: "5px",
     disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0,
     onClick: function onClick() {
-      return isEdit ? handleUpdateBusinessMenuOption() : handleAddBusinessMenuOption();
+      return isEdit ? handleUpdateBusinessMenuOption() : onAddBusinessMenuOption();
     }
   }, formState.loading ? t('LOADING', 'Loading') : isEdit ? t('UPDATE', 'Update') : t('ADD', 'Add')), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
