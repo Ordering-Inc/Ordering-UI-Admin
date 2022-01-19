@@ -25,6 +25,7 @@ import {
 
 export const BusinessSummary = (props) => {
   const {
+    isAdmin,
     businessState,
     actionSidebar,
     handleChangeActiveBusiness,
@@ -41,6 +42,8 @@ export const BusinessSummary = (props) => {
   const handleOpenCategory = () => {
     history.push(`/stores/list/${businessState.business.slug}`)
   }
+
+  const itemsExcluded = ['publishing']
 
   const businessConfigs = [
     {
@@ -170,7 +173,10 @@ export const BusinessSummary = (props) => {
                 )}
               </BusinessDescription>
               <BusinessConfigsContainer isLoading={businessState?.loading}>
-                {businessConfigs.map(config => (
+                {(isAdmin
+                  ? businessConfigs
+                  : businessConfigs.filter(c => !itemsExcluded.includes(c.key))
+                ).map(config => (
                   <BusinessConfigItem
                     key={config.key}
                     active={selectedItem === config.key}
