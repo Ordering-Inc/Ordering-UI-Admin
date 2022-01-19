@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
+import { BusinessDetails as BusinessDetailsController, useSession } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
 import { BusinessSupport } from '../BusinessSupport'
@@ -41,9 +41,12 @@ export const BusinessDetailsUI = (props) => {
     handleUpdateBusinessState
   } = props
   const { width } = useWindowSize()
+  const [{ user }] = useSession()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
+
+  const isAdmin = user?.level === 0
 
   const [selectedItem, setSelectedItem] = useState(null)
   const actionSidebar = (value) => {
@@ -110,6 +113,7 @@ export const BusinessDetailsUI = (props) => {
     <BarContainer id='business_details_bar'>
       {(!isExtendExtraOpen || width < 1000) && (
         <BusinessSummary
+          isAdmin={isAdmin}
           businessState={businessState}
           handleChangeActiveBusiness={handleChangeActiveBusiness}
           actionSidebar={actionSidebar}
@@ -210,7 +214,7 @@ export const BusinessDetailsUI = (props) => {
               setFormState={setFormState}
             />
           )}
-          {selectedItem === 'publishing' && (
+          {selectedItem === 'publishing' && isAdmin && (
             <BusinessPublishing
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
