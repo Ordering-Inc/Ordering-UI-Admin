@@ -93,6 +93,10 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isMenuOpen = _useState2[0],
@@ -107,6 +111,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       isExtendExtraOpen = _useState6[0],
       setIsExtendExtraOpen = _useState6[1];
+
+  var isAdmin = (user === null || user === void 0 ? void 0 : user.level) === 0;
 
   var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -174,6 +180,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
     id: "business_details_bar"
   }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_BusinessSummary.BusinessSummary, {
+    isAdmin: isAdmin,
     businessState: businessState,
     handleChangeActiveBusiness: handleChangeActiveBusiness,
     actionSidebar: actionSidebar,
@@ -243,7 +250,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     formState: formState,
     setFormState: setFormState
-  }), selectedItem === 'publishing' && /*#__PURE__*/_react.default.createElement(_BusinessPublishing.BusinessPublishing, {
+  }), selectedItem === 'publishing' && isAdmin && /*#__PURE__*/_react.default.createElement(_BusinessPublishing.BusinessPublishing, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsExtendExtraOpen: setIsExtendExtraOpen
   }), selectedItem === 'layout' && /*#__PURE__*/_react.default.createElement(_BusinessFrontLayout.BusinessFrontLayout, {

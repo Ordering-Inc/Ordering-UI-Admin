@@ -50,7 +50,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSummary = function BusinessSummary(props) {
   var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _theme$images, _theme$images$dummies, _businessState$busine5;
 
-  var businessState = props.businessState,
+  var isAdmin = props.isAdmin,
+      businessState = props.businessState,
       actionSidebar = props.actionSidebar,
       handleChangeActiveBusiness = props.handleChangeActiveBusiness,
       selectedItem = props.selectedItem,
@@ -78,6 +79,7 @@ var BusinessSummary = function BusinessSummary(props) {
     history.push("/stores/list/".concat(businessState.business.slug));
   };
 
+  var itemsExcluded = ['publishing'];
   var businessConfigs = [{
     key: 'information',
     value: t('INFORMATION', 'Information')
@@ -154,7 +156,9 @@ var BusinessSummary = function BusinessSummary(props) {
     width: 300
   }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.description), /*#__PURE__*/_react.default.createElement(_styles.BusinessConfigsContainer, {
     isLoading: businessState === null || businessState === void 0 ? void 0 : businessState.loading
-  }, businessConfigs.map(function (config) {
+  }, (isAdmin ? businessConfigs : businessConfigs.filter(function (c) {
+    return !itemsExcluded.includes(c.key);
+  })).map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessConfigItem, {
       key: config.key,
       active: selectedItem === config.key,
