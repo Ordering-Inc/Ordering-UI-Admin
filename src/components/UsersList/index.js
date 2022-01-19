@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
+import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail';
+import FiSmartphone from '@meronex/icons/fi/FiSmartphone';
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+
 import { Switch } from '../../styles/Switch'
 import { UserTypeSelector } from '../UserTypeSelector'
-import { DropdownButton, Dropdown } from 'react-bootstrap'
-import { useTheme } from 'styled-components'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { Pagination } from '../Pagination'
 import { ConfirmAdmin } from '../ConfirmAdmin'
 
@@ -26,7 +29,8 @@ import {
   WrapperPagination,
   WrapperUserActionSelector,
   AddNewUserButton,
-  UsersBottomContainer
+  UsersBottomContainer,
+  VerifiedItem
 } from './styles'
 
 export const UsersList = (props) => {
@@ -203,6 +207,25 @@ export const UsersList = (props) => {
                           <p className='bold'>{user.name} {user?.lastname}</p>
                           <p>{user?.email}</p>
                         </InfoBlock>
+                        {(user?.phone_verified || user?.email_verified) && (
+                          <div style={{ position: 'absolute', top: 0, right: 10 }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                              {!!user?.phone_verified && (
+                                <VerifiedItem style={{ marginBottom: 2 }}>
+                                  <FiSmartphone style={{ fontSize: 13, marginRight: 2 }} />
+                                  {t('VERIFIED', 'Verified')}
+                                </VerifiedItem>
+                              )}
+
+                              {!!user?.email_verified && (
+                                <VerifiedItem>
+                                  <HiOutlineMail style={{ fontSize: 14, marginRight: 2 }} />
+                                  {t('VERIFIED', 'Verified')}
+                                </VerifiedItem>
+                              )}
+                            </div>
+                          </div>
+                        )}
                       </UserMainInfo>
                     </td>
                     <td>
