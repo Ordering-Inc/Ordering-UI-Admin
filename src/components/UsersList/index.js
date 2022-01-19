@@ -207,7 +207,7 @@ export const UsersList = (props) => {
                           <p className='bold'>{user.name} {user?.lastname}</p>
                           <p>{user?.email}</p>
                         </InfoBlock>
-                        {(!user?.phone_verified || user?.email_verified) && (
+                        {(user?.phone_verified || user?.email_verified) && (
                           <div style={{ position: 'absolute', top: 0, right: 10 }}>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                               {!!user?.phone_verified && (
