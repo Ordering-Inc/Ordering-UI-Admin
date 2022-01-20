@@ -5,7 +5,6 @@ export const Container = styled.div`
   padding: 20px;
   overflow: auto;
   transition: 0.3s;
-  max-width: 500px;
   
   > button {
     height: 42px;
@@ -14,6 +13,7 @@ export const Container = styled.div`
   }
   
   @media (min-width: 1000px) {
+    max-width: 500px;
     width: 0;
     ${props => props.theme?.rtl ? css`
       border-right: 1px solid ${props => props.theme.colors.borderColor};
