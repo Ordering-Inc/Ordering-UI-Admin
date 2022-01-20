@@ -76,25 +76,30 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      advancedOfferModuleDisabled = _useState4[0],
+      setAdvancedOfferModuleDisabled = _useState4[1];
+
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      openDetails = _useState4[0],
-      setOpenDetails = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedPromotion = _useState6[0],
-      setSelectedPromotion = _useState6[1];
+      openDetails = _useState6[0],
+      setOpenDetails = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(0),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      moveDistance = _useState8[0],
-      setMoveDistance = _useState8[1];
+      selectedPromotion = _useState8[0],
+      setSelectedPromotion = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(0),
+      _useState10 = _slicedToArray(_useState9, 2),
+      moveDistance = _useState10[0],
+      setMoveDistance = _useState10[1];
 
   var handleOpenDetails = function handleOpenDetails(promotion) {
     setMoveDistance(0);
@@ -109,12 +114,15 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
 
   (0, _react.useEffect)(function () {
     if (!(promotionListState !== null && promotionListState !== void 0 && promotionListState.error)) return;
+    setAdvancedOfferModuleDisabled(true);
     setAlertState({
       open: true,
       content: promotionListState === null || promotionListState === void 0 ? void 0 : promotionListState.error
     });
   }, [promotionListState === null || promotionListState === void 0 ? void 0 : promotionListState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionsListingContainer, {
+    eventDisabled: advancedOfferModuleDisabled
+  }, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);

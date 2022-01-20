@@ -59,11 +59,12 @@ var AnalyticsMap = function AnalyticsMap(props) {
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isHeat = _useState2[0],
-      setIsHeat = _useState2[1];
+      setIsHeat = _useState2[1]; // const defaultCenter = { lat: 37.775, lng: -122.434 }
+
 
   var defaultCenter = {
-    lat: 37.775,
-    lng: -122.434
+    lat: 40.77473399999999,
+    lng: -73.9653844
   };
   var googleMapsControls = {
     defaultZoom: 15,

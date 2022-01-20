@@ -19,6 +19,10 @@ var _SideBar = require("../SideBar");
 
 var _BusinessSharedMenuProductDetails = require("../BusinessSharedMenuProductDetails");
 
+var _useWindowSize2 = require("../../hooks/useWindowSize");
+
+var _Modal = require("../Modal");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -54,6 +58,9 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
+
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       searchValue = _useState2[0],
@@ -64,14 +71,21 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
       currentProduct = _useState4[0],
       setCurrentProduct = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isOpenDetails = _useState6[0],
+      setIsOpenDetails = _useState6[1];
+
   var handleOpenProduct = function handleOpenProduct(e, product) {
     var isInvalid = e.target.closest('.product_checkbox');
     if (isInvalid) return;
     setIsOpenSharedProduct(true);
     setCurrentProduct(product);
+    setIsOpenDetails(true);
   };
 
   var handleCloseSidebar = function handleCloseSidebar() {
+    setIsOpenDetails(false);
     setCurrentProduct(null);
     setIsOpenSharedProduct(false);
   };
@@ -102,10 +116,21 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
         });
       }
     }), /*#__PURE__*/_react.default.createElement("span", null, product.name));
-  }))), currentProduct && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+  }))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isOpenDetails && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     isBorderShow: true,
     sidebarId: "shared_product_details",
-    open: currentProduct,
+    open: isOpenDetails,
+    onClose: function onClose() {
+      return handleCloseSidebar();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessSharedMenuProductDetails.BusinessSharedMenuProductDetails, {
+    business: business,
+    menu: menuState.menu,
+    product: currentProduct,
+    handleChangeInput: handleChangeInput
+  }))) : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "80%",
+    open: isOpenDetails,
     onClose: function onClose() {
       return handleCloseSidebar();
     }

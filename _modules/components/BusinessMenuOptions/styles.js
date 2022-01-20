@@ -19,7 +19,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  overflow: auto;\n  transition: 0.3s;\n  max-width: 500px;\n  \n  > button {\n    height: 42px;\n    width: 100%;\n    margin-top: 20px;\n  }\n  \n  @media (min-width: 1000px) {\n    width: 0;\n    ", "\n  }\n"])), function (props) {
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  overflow: auto;\n  transition: 0.3s;\n  \n  > button {\n    height: 42px;\n    width: 100%;\n    margin-top: 20px;\n  }\n  \n  @media (min-width: 1000px) {\n    max-width: 500px;\n    width: 0;\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
