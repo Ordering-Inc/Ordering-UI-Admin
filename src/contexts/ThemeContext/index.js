@@ -57,6 +57,10 @@ export const ThemeProvider = ({ children, ...props }) => {
       font-family: inherit;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     .dxc-tooltip {
       z-index: 9999;
     }

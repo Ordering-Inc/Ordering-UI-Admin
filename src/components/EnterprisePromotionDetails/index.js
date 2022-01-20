@@ -97,19 +97,21 @@ const EnterprisePromotionDetailsUI = (props) => {
               onChange={val => handleChangeItem({ enabled: val })}
             />
           </div>
-          <WrapperActionSelector>
-            <DropdownButton
-              menuAlign={theme?.rtl ? 'left' : 'right'}
-              title={<ThreeDots />}
-              id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-            >
-              <Dropdown.Item
-                onClick={() => onClickDeletePromotion()}
+          {!isAddMode && (
+            <WrapperActionSelector>
+              <DropdownButton
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
-                {t('DELETE', 'Delete')}
-              </Dropdown.Item>
-            </DropdownButton>
-          </WrapperActionSelector>
+                <Dropdown.Item
+                  onClick={() => onClickDeletePromotion()}
+                >
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              </DropdownButton>
+            </WrapperActionSelector>
+          )}
         </Header>
         <TabsContainer>
           <DragScroll>

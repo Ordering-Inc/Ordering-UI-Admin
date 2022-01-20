@@ -1,7 +1,99 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
-export const GeneralContainer = styled.form`
-  margin-top: 25px;
+export const DetailContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  padding: 20px;
+  max-width: 500px;
+`
+
+export const DetailHeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 35px;
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
+`
+
+export const TitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  h2 {
+    font-weight: bold;
+    font-size: 20px;
+    color: ${props => props.theme?.colors.headingColor};
+    margin: 0;
+    margin-right: 20px;
+
+    ${props => props.theme?.rtl && css`
+      margin-left: 20px;
+      margin-right: 0;
+    `}
+  }
+`
+export const ActionSelectorWrapper = styled.div`
+  .select {
+    border: none;
+
+    > div:first-child {
+      padding: 5px;
+      border-radius: 8px;
+      svg {
+        font-size: 20px;
+      }
+      &:hover {
+        background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+      }
+      &:active {
+        background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+      }
+    }
+    .select-arrow {
+      display: none;
+    }
+    .list {
+      border: none;
+      box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
+      .list-wrapper {
+        > div {
+          font-size: 14px;
+          color: #E63757;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+`
+export const ContactUsContainer = styled.div`
+  background-color: ${props => props.theme.colors.lightPrimary};
+  border-radius: 8px;
+  padding: 20px 28px;
+
+  > p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 0;
+    margin-bottom: 7px;
+  }
+
+  > button {
+    background: transparent;
+    height: 44px;
+  }
+`
+
+export const FormContainer = styled.form`
+  margin-top: 38px;
 `
 
 export const BusinessImg = styled.div`
@@ -78,9 +170,9 @@ export const UploadImageIcon = styled.div`
 
 export const LogoImage = styled.div`
   ${props => props.theme?.rtl ? css`
-    transform: translate3d(-23px,-15px,0px);
+    transform: translate3d(-30px,-45px,0px);
     ` : css`
-    transform: translate3d(22px,-15px,0px);
+    transform: translate3d(30px,-45px,0px);;
   `}
   height: 72px;
   width: 72px;
@@ -105,43 +197,15 @@ export const LogoImage = styled.div`
   }
 `
 
-export const SmallLogoImage = styled.div`
-  transform: translate3d(45px,0px,0px);
-  ${props => props.theme?.rtl ? css`
-    transform: translate3d(-45px,0px,0px);
-  ` : css`
-    transform: translate3d(45px,0px,0px);
-  `}
-  height: 24px;
-  width: 24px;
-  overflow: hidden;
-  background: #E9ECEF;
-  border-radius: 7.6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`
-
 export const FormGroup = styled.div`
-  margin-top: 20px;
 `
 
 export const FormControl = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   input, textarea {
-    background: #FFFFFF;
-    border: 1px solid #DEE2E6;
     box-sizing: border-box;
-    border-radius: 7.6px;
     font-size: 14px;
-    padding: 10px 15px;
-    outline: none;
     width: 100%;
   }
 
@@ -174,31 +238,8 @@ export const Label = styled.label`
   margin-bottom: 10px;
 `
 
-export const Option = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  font-size: 13px;
-  line-height: 2;
-  font-weight: 500;
-`
-
-export const SocialImage = styled(BusinessImg)`
-  height: 150px;
-
-  @media (min-width: 768px) {
-    height: 140px;
-  }
-`
-
-export const CameraIconContainer = styled.span`
-  position: absolute;
-  top: 17px;
-  right: 15px;
-`
-
 export const SaveBtnWrapper = styled.div`
-  padding-bottom: 20px;
+  padding: 20px 0;
   button {
     padding: 6px 20px;
   }
