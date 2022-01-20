@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AccordionTitle = exports.ToggleItemWrapper = exports.Title = exports.BusinessMoreDetailContainer = void 0;
+exports.ToggleItemWrapper = exports.Title = exports.BusinessMoreDetailContainer = exports.AccordionTitle = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

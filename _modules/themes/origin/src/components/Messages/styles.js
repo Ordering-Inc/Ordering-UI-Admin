@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrderDetailIconButton = exports.MessagesSearch = exports.SearchAndDetailControlContainer = exports.HeaderInfo = exports.WrapperLogisticInformation = exports.WrapperLogistics = exports.SkeletonHitory = exports.TabItem = exports.WrapperHitoryHeader = exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.SendImage = exports.WrapperSendInput = exports.Send = exports.SendForm = exports.TimeofSent = exports.MyName = exports.PartnerName = exports.ChatImage = exports.SkeletonBubbleBusiness = exports.SkeletonBubbleCustomer = exports.BubbleCustomer = exports.BubbleBusines = exports.BubbleConsole = exports.MessageCustomer = exports.MessageBusiness = exports.MessageConsole = exports.Chat = exports.HeaderOnline = exports.Image = exports.Status = exports.HeaderName = exports.WrapperHeader = exports.HeaderProfile = exports.BackActions = exports.WrapperContainer = exports.MessagesContainer = void 0;
+exports.WrapperSendMessageButton = exports.WrapperSendInput = exports.WrapperLogistics = exports.WrapperLogisticInformation = exports.WrapperHitoryHeader = exports.WrapperHeader = exports.WrapperDeleteImage = exports.WrapperContainer = exports.TimeofSent = exports.TabItem = exports.Status = exports.SkeletonHitory = exports.SkeletonBubbleCustomer = exports.SkeletonBubbleBusiness = exports.SendImage = exports.SendForm = exports.Send = exports.SearchAndDetailControlContainer = exports.PartnerName = exports.OrderDetailIconButton = exports.MyName = exports.MessagesSearch = exports.MessagesContainer = exports.MessageCustomer = exports.MessageConsole = exports.MessageBusiness = exports.Image = exports.HeaderProfile = exports.HeaderOnline = exports.HeaderName = exports.HeaderInfo = exports.ChatImage = exports.Chat = exports.BubbleCustomer = exports.BubbleConsole = exports.BubbleBusines = exports.BackActions = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

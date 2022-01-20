@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -358,7 +358,15 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  }))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+    className: "d-flex align-items-center",
+    variant: location.pathname === '/ordering-products' && 'primary',
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'ordering_products'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: location.pathname === '/support' && 'primary',
     onClick: function onClick() {

@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EmptyContent = exports.TableWrapper = exports.Tfoot = exports.Tbody = exports.Thead = exports.DistanceTable = exports.DistanceTitleBlock = exports.DistancePerBrandWrapper = exports.BrandBusinessWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.Title = exports.ReportsDistanceContainer = void 0;
+exports.Title = exports.Thead = exports.Tfoot = exports.Tbody = exports.TableWrapper = exports.ReportsDistanceContainer = exports.EmptyContent = exports.DistanceTitleBlock = exports.DistanceTable = exports.DistancePerBrandWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.BrandBusinessWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

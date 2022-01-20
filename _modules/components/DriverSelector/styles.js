@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PlaceholderTitle = exports.DriverImage = exports.WrapperDriverImage = exports.DriverText = exports.DriverName = exports.DriverNameContainer = exports.OptionContent = exports.Option = void 0;
+exports.WrapperDriverImage = exports.PlaceholderTitle = exports.OptionContent = exports.Option = exports.DriverText = exports.DriverNameContainer = exports.DriverName = exports.DriverImage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

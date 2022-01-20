@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -19,21 +19,15 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _reactBootstrap = require("react-bootstrap");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
-var _styledComponents = require("styled-components");
-
-var _Switch = require("../../styles/Switch");
 
 var _Pagination = require("../Pagination");
 
-var _dumy = require("./dumy");
+var _Confirm = require("../Confirm");
 
-var _OrderingProductsDetail = require("../OrderingProductsDetail");
+var _OrderingProductDetails = require("../OrderingProductDetails");
+
+var _SideBar = require("../SideBar");
 
 var _styles = require("./styles");
 
@@ -51,9 +45,9 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -69,171 +63,73 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var OrderingProducts = function OrderingProducts(props) {
-  var _orderingProductsList;
+var OrderingProductsUI = function OrderingProductsUI(props) {
+  var _sitesListState$sites;
+
+  var sitesListState = props.sitesListState,
+      searchValue = props.searchValue,
+      _onSearch = props.onSearch,
+      getSites = props.getSites,
+      paginationProps = props.paginationProps,
+      setPaginationProps = props.setPaginationProps,
+      handleSuccessUpdateSites = props.handleSuccessUpdateSites;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var _useState = (0, _react.useState)({
-    products: [],
-    loading: false,
-    error: null
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      orderingProductsList = _useState2[0],
-      setorderingProductsList = _useState2[1];
-
-  var theme = (0, _styledComponents.useTheme)();
 
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      openProductDetail = _useState4[0],
-      setOpenProductDetail = _useState4[1];
+      openDetails = _useState4[0],
+      setOpenDetails = _useState4[1];
 
   var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedProduct = _useState6[0],
-      setSelectedProduct = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      searchValue = _useState8[0],
-      setSearchValue = _useState8[1]; // Change page
-
-
-  var _useState9 = (0, _react.useState)(1),
-      _useState10 = _slicedToArray(_useState9, 2),
-      currentPage = _useState10[0],
-      setCurrentPage = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(10),
-      _useState12 = _slicedToArray(_useState11, 2),
-      pagesPerPage = _useState12[0],
-      setPagesPerPage = _useState12[1]; // Get current products
-
-
-  var _useState13 = (0, _react.useState)([]),
-      _useState14 = _slicedToArray(_useState13, 2),
-      currentPages = _useState14[0],
-      setCurrentPages = _useState14[1];
-
-  var _useState15 = (0, _react.useState)(null),
-      _useState16 = _slicedToArray(_useState15, 2),
-      totalPages = _useState16[0],
-      setTotalPages = _useState16[1];
+      selectedSite = _useState6[0],
+      setSelectedSite = _useState6[1];
 
   var handleChangePage = function handleChangePage(page) {
-    setCurrentPage(page);
+    getSites(page, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize);
   };
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
-    var expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize);
-    setCurrentPage(expectedPage);
-    setPagesPerPage(pageSize);
-  };
-
-  var onClickPage = function onClickPage(e, pageId) {
-    var isInvalid = e.target.closest('.product-enabled') || e.target.closest('.product-actions');
-    if (isInvalid) return;
-    handleEditProduct(pageId);
-  };
-
-  var handleEditProduct = function handleEditProduct(id) {
-    setOpenProductDetail(true);
-
-    if (id) {
-      var product = orderingProductsList === null || orderingProductsList === void 0 ? void 0 : orderingProductsList.products.find(function (product) {
-        return product.id === id;
-      });
-      setSelectedProduct(product);
-    } else {
-      setSelectedProduct(null);
-    }
-  };
-
-  var handleChangeState = function handleChangeState(id, type, value) {
-    var products = orderingProductsList === null || orderingProductsList === void 0 ? void 0 : orderingProductsList.products.map(function (product) {
-      if (id === product.id) {
-        return _objectSpread(_objectSpread({}, product), {}, _defineProperty({}, type, value));
-      }
-
-      return product;
-    });
-    handleUpdateOrderingProducts(products);
-  };
-
-  var handleDeleteProduct = function handleDeleteProduct(id) {
-    var products = orderingProductsList === null || orderingProductsList === void 0 ? void 0 : orderingProductsList.products.filter(function (product) {
-      return product.id !== id;
-    });
-    setorderingProductsList(_objectSpread(_objectSpread({}, orderingProductsList), {}, {
-      products: products
+    var expectedPage = Math.ceil(paginationProps.from / pageSize);
+    setPaginationProps(_objectSpread(_objectSpread({}, paginationProps), {}, {
+      pageSize: pageSize
     }));
+    getSites(expectedPage, pageSize);
   };
 
-  var handleUpdateOrderingProducts = function handleUpdateOrderingProducts(products) {
-    setorderingProductsList(_objectSpread(_objectSpread({}, orderingProductsList), {}, {
-      products: products
-    }));
-
-    if (selectedProduct) {
-      var product = products.find(function (item) {
-        return item.id === selectedProduct.id;
-      });
-      setSelectedProduct(product);
-    }
+  var onClickProduct = function onClickProduct(product) {
+    setSelectedSite(product);
+    setOpenDetails(true);
   };
 
   var handleCloseDetail = function handleCloseDetail() {
-    setOpenProductDetail(false);
-    setSelectedProduct(null);
+    setOpenDetails(false);
+    setSelectedSite(null);
   };
 
   (0, _react.useEffect)(function () {
-    if (orderingProductsList.loading) return;
-
-    var _totalPages;
-
-    if (orderingProductsList.products.length > 0) {
-      _totalPages = Math.ceil(orderingProductsList.products.length / pagesPerPage);
-    }
-
-    var indexOfLastPost = currentPage * pagesPerPage;
-    var indexOfFirstPost = indexOfLastPost - pagesPerPage;
-
-    var _currentProducts = orderingProductsList.products.slice(indexOfFirstPost, indexOfLastPost);
-
-    setTotalPages(_totalPages);
-    setCurrentPages(_currentProducts);
-  }, [orderingProductsList, currentPage, pagesPerPage]);
-  (0, _react.useEffect)(function () {
-    setorderingProductsList(_objectSpread(_objectSpread({}, orderingProductsList), {}, {
-      products: _dumy.productsList
-    }));
-  }, []);
-  (0, _react.useEffect)(function () {
-    if (searchValue) {
-      var products = _dumy.productsList.filter(function (item) {
-        return item.name.toLowerCase().includes(searchValue.toLowerCase());
-      });
-
-      setorderingProductsList(_objectSpread(_objectSpread({}, orderingProductsList), {}, {
-        products: products
-      }));
-      setCurrentPage(1);
-    } else {
-      setorderingProductsList(_objectSpread(_objectSpread({}, orderingProductsList), {}, {
-        products: _dumy.productsList
-      }));
-    }
-  }, [searchValue]);
+    if (!(sitesListState !== null && sitesListState !== void 0 && sitesListState.error)) return;
+    setAlertState({
+      open: true,
+      content: sitesListState === null || sitesListState === void 0 ? void 0 : sitesListState.error
+    });
+  }, [sitesListState === null || sitesListState === void 0 ? void 0 : sitesListState.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderingProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -243,22 +139,21 @@ var OrderingProducts = function OrderingProducts(props) {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
-      return handleEditProduct();
+      return onClickProduct(null);
     }
   }, t('ADD_PRODUCT', 'Add product')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
+    isCustomLayout: true,
     search: searchValue,
     onSearch: function onSearch(value) {
-      return setSearchValue(value);
+      return _onSearch(value);
     },
     placeholder: t('SEARCH', 'Search')
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductListTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     className: "product"
   }, t('PRODUCT', 'Product')), /*#__PURE__*/_react.default.createElement("th", {
     className: "description"
-  }, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("th", {
-    className: "action"
-  }, t('ACTIONS', 'Actions')))), orderingProductsList.loading ? _toConsumableArray(Array(pagesPerPage).keys()).map(function (i) {
+  }, t('DESCRIPTION', 'Description')))), sitesListState.loading ? _toConsumableArray(Array(paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PageTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
@@ -269,66 +164,70 @@ var OrderingProducts = function OrderingProducts(props) {
       className: "description"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 150
-    })), /*#__PURE__*/_react.default.createElement("td", {
-      className: "action"
-    }, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 50
-    })), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 15
-    }))))));
-  }) : currentPages.map(function (product) {
+    }))));
+  }) : sitesListState.sites.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_styles.PageTbody, {
       key: product.id,
-      onClick: function onClick(e) {
-        return onClickPage(e, product.id);
+      onClick: function onClick() {
+        return onClickProduct(product);
       },
-      active: (selectedProduct === null || selectedProduct === void 0 ? void 0 : selectedProduct.id) === product.id
+      active: (selectedSite === null || selectedSite === void 0 ? void 0 : selectedSite.id) === product.id
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
       className: "product"
     }, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement("td", {
       className: "description"
-    }, /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement("td", {
-      className: "action"
-    }, /*#__PURE__*/_react.default.createElement(_styles.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EnableWrapper, {
-      className: "product-enabled"
-    }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-      defaultChecked: product === null || product === void 0 ? void 0 : product.enabled,
-      onChange: function onChange(enabled) {
-        return handleChangeState(product.id, 'enabled', enabled);
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, {
-      className: "product-actions"
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleEditProduct(product.id);
-      }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleDeleteProduct(product.id);
-      }
-    }, t('DELETE', 'Delete'))))))));
-  }))), !orderingProductsList.loading && /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewPageButton, {
+    }, (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 ? void 0 : product.description))));
+  }))), !sitesListState.loading && /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewPageButton, {
     onClick: function onClick() {
-      return handleEditProduct(null);
+      return onClickProduct(null);
     }
-  }, t('ADD_PRODUCT', 'Add product')), (orderingProductsList === null || orderingProductsList === void 0 ? void 0 : (_orderingProductsList = orderingProductsList.products) === null || _orderingProductsList === void 0 ? void 0 : _orderingProductsList.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
+  }, t('ADD_PRODUCT', 'Add product')), (sitesListState === null || sitesListState === void 0 ? void 0 : (_sitesListState$sites = sitesListState.sites) === null || _sitesListState$sites === void 0 ? void 0 : _sitesListState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,
+    totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,
     handleChangePage: handleChangePage,
-    defaultPageSize: pagesPerPage,
     handleChangePageSize: handleChangePageSize
-  }))), openProductDetail && /*#__PURE__*/_react.default.createElement(_OrderingProductsDetail.OrderingProductsDetail, {
-    open: openProductDetail,
-    onClose: handleCloseDetail,
-    product: selectedProduct,
-    handleChangeState: handleChangeState,
-    orderingProductsList: orderingProductsList,
-    handleUpdateOrderingProducts: handleUpdateOrderingProducts
+  }))), openDetails && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
+    sidebarId: "product_details",
+    defaultSideBarWidth: 500,
+    moveDistance: 0,
+    open: openDetails,
+    onClose: function onClose() {
+      return handleCloseDetail();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_OrderingProductDetails.OrderingProductDetails, {
+    site: selectedSite,
+    sitesList: sitesListState.sites,
+    handleSuccessUpdateSites: handleSuccessUpdateSites,
+    onClose: function onClose() {
+      return handleCloseDetail();
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
   }));
+};
+
+var OrderingProducts = function OrderingProducts(props) {
+  var sitesProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: OrderingProductsUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.SitesList, sitesProps);
 };
 
 exports.OrderingProducts = OrderingProducts;

@@ -9,28 +9,28 @@ Object.defineProperty(exports, "Button", {
     return _Buttons.Button;
   }
 });
-Object.defineProperty(exports, "IconButton", {
-  enumerable: true,
-  get: function get() {
-    return _Buttons.IconButton;
-  }
-});
 Object.defineProperty(exports, "Checkbox", {
   enumerable: true,
   get: function get() {
     return _Checkbox.Checkbox;
   }
 });
+Object.defineProperty(exports, "DefaultSelect", {
+  enumerable: true,
+  get: function get() {
+    return _FirstSelect.Select;
+  }
+});
+Object.defineProperty(exports, "IconButton", {
+  enumerable: true,
+  get: function get() {
+    return _Buttons.IconButton;
+  }
+});
 Object.defineProperty(exports, "Input", {
   enumerable: true,
   get: function get() {
     return _Inputs.Input;
-  }
-});
-Object.defineProperty(exports, "TextArea", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.TextArea;
   }
 });
 Object.defineProperty(exports, "MultiSelect", {
@@ -45,16 +45,16 @@ Object.defineProperty(exports, "SecondSelect", {
     return _Select.Select;
   }
 });
-Object.defineProperty(exports, "DefaultSelect", {
-  enumerable: true,
-  get: function get() {
-    return _FirstSelect.Select;
-  }
-});
 Object.defineProperty(exports, "Switch", {
   enumerable: true,
   get: function get() {
     return _Switch.Switch;
+  }
+});
+Object.defineProperty(exports, "Tab", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tab;
   }
 });
 Object.defineProperty(exports, "Tabs", {
@@ -63,10 +63,10 @@ Object.defineProperty(exports, "Tabs", {
     return _Tabs.Tabs;
   }
 });
-Object.defineProperty(exports, "Tab", {
+Object.defineProperty(exports, "TextArea", {
   enumerable: true,
   get: function get() {
-    return _Tabs.Tab;
+    return _Inputs.TextArea;
   }
 });
 
