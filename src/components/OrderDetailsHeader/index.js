@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useSession } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import { Printer, Diagram3, ThreeDotsVertical, XLg as CloseIcon, Chat as ChatIcon, Dot } from 'react-bootstrap-icons'
 import { IconButton as ButtonLink } from '../../styles/Buttons'
@@ -18,6 +18,7 @@ export const OrderDetailsHeader = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
   return (
     <OrderDetailsHeaderContainer>
       <div>
@@ -53,16 +54,18 @@ export const OrderDetailsHeader = (props) => {
         </p>
       </div>
       <ButtonGroup>
-        <ButtonLink
-          onClick={() => handleOpenMessages('chat')}
-        >
-          <ChatIcon />
-          {order?.unread_count > 0 && (
-            <UreadMessageAlert>
-              <Dot />
-            </UreadMessageAlert>
-          )}
-        </ButtonLink>
+        {user?.level !== 5 && (
+          <ButtonLink
+            onClick={() => handleOpenMessages('chat')}
+          >
+            <ChatIcon />
+            {order?.unread_count > 0 && (
+              <UreadMessageAlert>
+                <Dot />
+              </UreadMessageAlert>
+            )}
+          </ButtonLink>
+        )}
         <ButtonLink onClick={() => window.print()}>
           <Printer />
         </ButtonLink>
