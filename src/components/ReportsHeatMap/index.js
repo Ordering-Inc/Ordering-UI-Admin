@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useConfig, AdvancedReports as AdvancedReportsController, GoogleMapsMap } from 'ordering-components-admin'
+import { useLanguage, useConfig, useSession, AdvancedReports as AdvancedReportsController, GoogleMapsMap } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -29,6 +29,7 @@ const ReportsHeatMapUI = (props) => {
 
   const [, t] = useLanguage()
   const [configState] = useConfig()
+  const [{ user }] = useSession()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
@@ -40,7 +41,7 @@ const ReportsHeatMapUI = (props) => {
   // const googleMapsApiKey = configs?.google_maps_api_key?.value
   const googleMapsControls = {
     defaultZoom: 15,
-    zoomControl: true,
+    zoomControl: false,
     streetViewControl: false,
     fullscreenControl: false,
     mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
@@ -121,25 +122,31 @@ const ReportsHeatMapUI = (props) => {
             <Skeleton height={350} />
           ) : (
             <WrapperMap>
-              <GoogleMapsMap
-                apiKey={configState?.configs?.google_maps_api_key?.value}
-                location={defaultPosition}
-                locations={reportData?.content?.locations}
-                data={reportData?.content?.zones}
-                fillStyle={fillStyle}
-                mapControls={googleMapsControls}
-                isHeatMap
-                isHeat={isHeat}
-                markerIcon={theme?.images?.icons?.mapMarker}
-              />
-              <Button
-                borderRadius='7.6px'
-                color='primary'
-                disabled={reportData.loading}
-                onClick={() => setIsHeat(!isHeat)}
-              >
-                {isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')}
-              </Button>
+              {
+                configState?.configs?.google_maps_api_key?.value && (
+                  <>
+                    <GoogleMapsMap
+                      apiKey={configState?.configs?.google_maps_api_key?.value}
+                      location={user?.location || defaultPosition}
+                      locations={reportData?.content?.locations}
+                      data={reportData?.content?.zones}
+                      fillStyle={fillStyle}
+                      mapControls={googleMapsControls}
+                      isHeatMap
+                      isHeat={isHeat}
+                      markerIcon={theme?.images?.icons?.mapMarker}
+                    />
+                    <Button
+                      borderRadius='7.6px'
+                      color='primary'
+                      disabled={reportData.loading}
+                      onClick={() => setIsHeat(!isHeat)}
+                    >
+                      {isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')}
+                    </Button>
+                  </>
+                )
+              }
             </WrapperMap>
           )}
         </DistancePerBrandWrapper>
