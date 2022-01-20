@@ -7,6 +7,8 @@ import { Checkbox } from '../../styles'
 import { SearchBar } from '../SearchBar'
 import { SideBar } from '../SideBar'
 import { BusinessSharedMenuProductDetails } from '../BusinessSharedMenuProductDetails'
+import { useWindowSize } from '../../hooks/useWindowSize'
+import { Modal } from '../Modal'
 
 import {
   MenuProductsContainer,
@@ -25,17 +27,21 @@ const BusinessSharedMenuProductsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [searchValue, setSearchValue] = useState('')
   const [currentProduct, setCurrentProduct] = useState(null)
+  const [isOpenDetails, setIsOpenDetails] = useState(false)
 
   const handleOpenProduct = (e, product) => {
     const isInvalid = e.target.closest('.product_checkbox')
     if (isInvalid) return
     setIsOpenSharedProduct(true)
     setCurrentProduct(product)
+    setIsOpenDetails(true)
   }
 
   const handleCloseSidebar = () => {
+    setIsOpenDetails(false)
     setCurrentProduct(null)
     setIsOpenSharedProduct(false)
   }
@@ -68,11 +74,28 @@ const BusinessSharedMenuProductsUI = (props) => {
         </ProductListWrapper>
       </MenuProductsContainer>
 
-      {currentProduct && (
-        <SideBar
-          isBorderShow
-          sidebarId='shared_product_details'
-          open={currentProduct}
+      {width >= 1000 ? (
+        <>
+          {isOpenDetails && (
+            <SideBar
+              isBorderShow
+              sidebarId='shared_product_details'
+              open={isOpenDetails}
+              onClose={() => handleCloseSidebar()}
+            >
+              <BusinessSharedMenuProductDetails
+                business={business}
+                menu={menuState.menu}
+                product={currentProduct}
+                handleChangeInput={handleChangeInput}
+              />
+            </SideBar>
+          )}
+        </>
+      ) : (
+        <Modal
+          width='80%'
+          open={isOpenDetails}
           onClose={() => handleCloseSidebar()}
         >
           <BusinessSharedMenuProductDetails
@@ -81,7 +104,7 @@ const BusinessSharedMenuProductsUI = (props) => {
             product={currentProduct}
             handleChangeInput={handleChangeInput}
           />
-        </SideBar>
+        </Modal>
       )}
     </>
   )
