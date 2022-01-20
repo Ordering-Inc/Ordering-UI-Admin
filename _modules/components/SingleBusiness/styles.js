@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperImage = exports.WrapperBusinessActionSelector = exports.SingleBusinessContainer = exports.SingleBusinessCardContainer = exports.InfoBlock = exports.Image = exports.BusinessLogo = exports.BusinessHeaderContent = exports.BusinessHeader = exports.BusinessGeneralInfo = exports.BusinessEnableWrapper = exports.BusinessContent = exports.BusinessActionContainer = void 0;
+exports.BusinessHeaderContent = exports.WrapperBusinessActionSelector = exports.BusinessActionContainer = exports.BusinessContent = exports.BusinessLogo = exports.BusinessHeader = exports.SingleBusinessCardContainer = exports.BusinessEnableWrapper = exports.InfoBlock = exports.BusinessGeneralInfo = exports.Image = exports.WrapperImage = exports.SingleBusinessContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

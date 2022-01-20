@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SmallArea = exports.RowGroupContainer = exports.MediumArea = exports.MaxDistanceCustomerContainer = exports.LargeArea = exports.InputsGroup = exports.IconImage = exports.ForcedAssignSettingWrapper = exports.FieldContainer = exports.CustomItem = exports.CheckboxWrapper = exports.AutoassignItem = exports.AutoassignContainer = exports.AreaWrapper = void 0;
+exports.SmallArea = exports.MediumArea = exports.LargeArea = exports.AreaWrapper = exports.InputsGroup = exports.FieldContainer = exports.CheckboxWrapper = exports.RowGroupContainer = exports.MaxDistanceCustomerContainer = exports.ForcedAssignSettingWrapper = exports.CustomItem = exports.IconImage = exports.AutoassignItem = exports.AutoassignContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

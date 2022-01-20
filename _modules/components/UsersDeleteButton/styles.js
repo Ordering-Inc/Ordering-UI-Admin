@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperIndicator = exports.WrapperCheckPassword = exports.ErrorText = void 0;
+exports.WrapperIndicator = exports.ErrorText = exports.WrapperCheckPassword = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

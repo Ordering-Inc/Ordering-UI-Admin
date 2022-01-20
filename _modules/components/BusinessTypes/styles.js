@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Container = exports.AddNewBusinessTypeTitle = exports.AddNewBusinessTypeContainer = void 0;
+exports.AddNewBusinessTypeTitle = exports.AddNewBusinessTypeContainer = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
