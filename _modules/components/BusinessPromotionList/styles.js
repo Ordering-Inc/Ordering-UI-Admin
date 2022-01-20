@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tab = exports.InnerTabsContainer = exports.OptionTabsContainer = exports.CloseButtonWrapper = exports.EditTitleHeaderContainer = exports.EditHeader = exports.PromotionEditFormContainer = exports.AddNewPromotionText = exports.DropdownWrapper = exports.EnableWrapper = exports.ActionsWrapper = exports.PromotionItem = exports.PromotionsTable = exports.Header = exports.BusinessPromotionsContainer = exports.MainContainer = void 0;
+exports.Tab = exports.PromotionsTable = exports.PromotionItem = exports.PromotionEditFormContainer = exports.OptionTabsContainer = exports.MainContainer = exports.InnerTabsContainer = exports.Header = exports.EnableWrapper = exports.EditTitleHeaderContainer = exports.EditHeader = exports.DropdownWrapper = exports.CloseButtonWrapper = exports.BusinessPromotionsContainer = exports.AddNewPromotionText = exports.ActionsWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

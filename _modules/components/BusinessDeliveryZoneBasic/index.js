@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -95,6 +95,9 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
   }, {
     value: 2,
     content: t('POLYGON', 'Polygon')
+  }, {
+    value: 4,
+    content: t('EVERYWHERE', 'Everywhere')
   }];
   var googleMapsControls = {
     defaultZoom: 8,
@@ -133,13 +136,13 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
   };
 
   var handleSave = function handleSave() {
-    if (!zoneData) {
+    if (zoneData || zoneType === 4) {
+      if (isAddValid) handleAddBusinessDeliveryZone();else handleUpdateBusinessDeliveryZone();
+    } else {
       setAlertState({
         open: true,
         content: t('REQUIRED_POLYGON_CIRCLE', 'Polygon or circle must be drawn.')
       });
-    } else {
-      if (isAddValid) handleAddBusinessDeliveryZone();else handleUpdateBusinessDeliveryZone();
     }
   };
 
@@ -170,7 +173,7 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
     name: "address",
     defaultValue: business === null || business === void 0 ? void 0 : business.address,
     disabled: true
-  }), configState !== null && configState !== void 0 && (_configState$configs = configState.configs) !== null && _configState$configs !== void 0 && (_configState$configs$ = _configState$configs.google_maps_api_key) !== null && _configState$configs$ !== void 0 && _configState$configs$.value ? /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement("button", {
+  }), zoneType !== 4 && (configState !== null && configState !== void 0 && (_configState$configs = configState.configs) !== null && _configState$configs !== void 0 && (_configState$configs$ = _configState$configs.google_maps_api_key) !== null && _configState$configs$ !== void 0 && _configState$configs$.value ? /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       return setClearState(true);
     }
@@ -185,7 +188,7 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
     handleData: handleZoneData,
     fillStyle: fillStyle,
     infoContentString: infoContentString
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     borderRadius: "5px",
     onClick: function onClick() {

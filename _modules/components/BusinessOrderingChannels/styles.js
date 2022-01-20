@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Label = exports.FormControl = exports.BusinessCustomSlugContainer = exports.AccordionTitle = exports.ToggleItemWrapper = exports.Title = exports.BusinessOrderingChannelsContainer = void 0;
+exports.ToggleItemWrapper = exports.Title = exports.Label = exports.FormControl = exports.BusinessOrderingChannelsContainer = exports.BusinessCustomSlugContainer = exports.AccordionTitle = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddNewPageButton = exports.PagesBottomContainer = exports.CheckboxWrapper = exports.ActionSelectorWrapper = exports.EnableWrapper = exports.ActionsContainer = exports.CountryName = exports.CityAdministrator = exports.CityName = exports.CityWrapper = exports.CitiesListContainer = exports.Tab = exports.Tabs = exports.InputWrapper = exports.CoutryNameContainer = exports.HeaderRight = exports.HeaderLeft = exports.Header = exports.PlaceListContainer = void 0;
+exports.Tabs = exports.Tab = exports.PlaceListContainer = exports.PagesBottomContainer = exports.InputWrapper = exports.HeaderRight = exports.HeaderLeft = exports.Header = exports.EnableWrapper = exports.CoutryNameContainer = exports.CountryName = exports.CityWrapper = exports.CityName = exports.CityAdministrator = exports.CitiesListContainer = exports.CheckboxWrapper = exports.AddNewPageButton = exports.ActionsContainer = exports.ActionSelectorWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

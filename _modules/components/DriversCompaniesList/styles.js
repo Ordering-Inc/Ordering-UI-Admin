@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddNewCompanyButton = exports.PagesBottomContainer = exports.EnableWrapper = exports.CheckBoxWrapper = exports.CompanyNameContainer = exports.LimitWrapper = exports.PriorityWrapper = exports.TimezoneWrapper = exports.CompaniesTable = exports.TableWrapper = exports.DriversCompaniesContainer = void 0;
+exports.TimezoneWrapper = exports.TableWrapper = exports.PriorityWrapper = exports.PagesBottomContainer = exports.LimitWrapper = exports.EnableWrapper = exports.DriversCompaniesContainer = exports.CompanyNameContainer = exports.CompaniesTable = exports.CheckBoxWrapper = exports.AddNewCompanyButton = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

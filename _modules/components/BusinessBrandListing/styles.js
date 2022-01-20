@@ -1,11 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ActionSelectorWrapper = exports.Tab = exports.TabContainer = exports.DetailHeder = exports.BrandDetailContainer = exports.BrandListBottomContainer = exports.BrandListTableWrapper = exports.InfoBlock = exports.BrandGeneralInfo = exports.Image = exports.WrapperImage = exports.EnableWrapper = exports.ActionsContainer = exports.BrandBody = exports.BrandListTable = exports.ActionsGroup = exports.HeaderTitleContainer = exports.HeaderContainer = exports.BrandListingContainer = void 0;
+exports.WrapperImage = exports.TabContainer = exports.Tab = exports.InfoBlock = exports.Image = exports.HeaderTitleContainer = exports.HeaderContainer = exports.EnableWrapper = exports.DetailHeder = exports.BrandListingContainer = exports.BrandListTableWrapper = exports.BrandListTable = exports.BrandListBottomContainer = exports.BrandGeneralInfo = exports.BrandDetailContainer = exports.BrandBody = exports.ActionsGroup = exports.ActionsContainer = exports.ActionSelectorWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
