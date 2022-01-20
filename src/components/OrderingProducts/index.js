@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import {
+  useLanguage,
+  SitesList as SitesListController
+} from 'ordering-components-admin'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { SearchBar } from '../SearchBar'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
 import Skeleton from 'react-loading-skeleton'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { useTheme } from 'styled-components'
-import { Switch } from '../../styles/Switch'
 import { Pagination } from '../Pagination'
-import { productsList } from './dumy'
-import { OrderingProductsDetail } from '../OrderingProductsDetail'
+import { Alert } from '../Confirm'
+import { OrderingProductDetails } from '../OrderingProductDetails'
+import { SideBar } from '../SideBar'
+
 import {
   OrderingProductsContainer,
   HeaderContainer,
@@ -19,114 +20,57 @@ import {
   HeaderTitleContainer,
   ProductListTable,
   PageTbody,
-  ActionsContainer,
-  EnableWrapper,
-  ActionSelectorWrapper,
   PagesBottomContainer,
   AddNewPageButton,
   ProductListTableWrapper
 } from './styles'
 
-export const OrderingProducts = (props) => {
+const OrderingProductsUI = (props) => {
+  const {
+    sitesListState,
+    searchValue,
+    onSearch,
+    getSites,
+    paginationProps,
+    setPaginationProps,
+    handleSuccessUpdateSites
+  } = props
+
   const [, t] = useLanguage()
-  const [orderingProductsList, setorderingProductsList] = useState({ products: [], loading: false, error: null })
-  const theme = useTheme()
+
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
-  const [openProductDetail, setOpenProductDetail] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const [searchValue, setSearchValue] = useState(null)
 
-  // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pagesPerPage, setPagesPerPage] = useState(10)
-
-  // Get current products
-  const [currentPages, setCurrentPages] = useState([])
-  const [totalPages, setTotalPages] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [openDetails, setOpenDetails] = useState(false)
+  const [selectedSite, setSelectedSite] = useState(null)
 
   const handleChangePage = (page) => {
-    setCurrentPage(page)
+    getSites(page, paginationProps?.pageSize)
   }
 
   const handleChangePageSize = (pageSize) => {
-    const expectedPage = Math.ceil(((currentPage - 1) * pagesPerPage + 1) / pageSize)
-    setCurrentPage(expectedPage)
-    setPagesPerPage(pageSize)
+    const expectedPage = Math.ceil(paginationProps.from / pageSize)
+    setPaginationProps({ ...paginationProps, pageSize: pageSize })
+    getSites(expectedPage, pageSize)
   }
 
-  const onClickPage = (e, pageId) => {
-    const isInvalid = e.target.closest('.product-enabled') || e.target.closest('.product-actions')
-    if (isInvalid) return
-    handleEditProduct(pageId)
-  }
-
-  const handleEditProduct = (id) => {
-    setOpenProductDetail(true)
-    if (id) {
-      const product = orderingProductsList?.products.find(product => product.id === id)
-      setSelectedProduct(product)
-    } else {
-      setSelectedProduct(null)
-    }
-  }
-
-  const handleChangeState = (id, type, value) => {
-    const products = orderingProductsList?.products.map(product => {
-      if (id === product.id) {
-        return {
-          ...product,
-          [type]: value
-        }
-      }
-      return product
-    })
-    handleUpdateOrderingProducts(products)
-  }
-
-  const handleDeleteProduct = (id) => {
-    const products = orderingProductsList?.products.filter(product => product.id !== id)
-    setorderingProductsList({ ...orderingProductsList, products: products })
-  }
-
-  const handleUpdateOrderingProducts = (products) => {
-    setorderingProductsList({ ...orderingProductsList, products: products })
-    if (selectedProduct) {
-      const product = products.find(item => item.id === selectedProduct.id)
-      setSelectedProduct(product)
-    }
+  const onClickProduct = (product) => {
+    setSelectedSite(product)
+    setOpenDetails(true)
   }
 
   const handleCloseDetail = () => {
-    setOpenProductDetail(false)
-    setSelectedProduct(null)
+    setOpenDetails(false)
+    setSelectedSite(null)
   }
 
   useEffect(() => {
-    if (orderingProductsList.loading) return
-    let _totalPages
-    if (orderingProductsList.products.length > 0) {
-      _totalPages = Math.ceil(orderingProductsList.products.length / pagesPerPage)
-    }
-    const indexOfLastPost = currentPage * pagesPerPage
-    const indexOfFirstPost = indexOfLastPost - pagesPerPage
-    const _currentProducts = orderingProductsList.products.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalPages(_totalPages)
-    setCurrentPages(_currentProducts)
-  }, [orderingProductsList, currentPage, pagesPerPage])
-
-  useEffect(() => {
-    setorderingProductsList({ ...orderingProductsList, products: productsList })
-  }, [])
-
-  useEffect(() => {
-    if (searchValue) {
-      const products = productsList.filter(item => item.name.toLowerCase().includes(searchValue.toLowerCase()))
-      setorderingProductsList({ ...orderingProductsList, products: products })
-      setCurrentPage(1)
-    } else {
-      setorderingProductsList({ ...orderingProductsList, products: productsList })
-    }
-  }, [searchValue])
+    if (!sitesListState?.error) return
+    setAlertState({
+      open: true,
+      content: sitesListState?.error
+    })
+  }, [sitesListState?.error])
 
   return (
     <>
@@ -147,14 +91,15 @@ export const OrderingProducts = (props) => {
             <Button
               borderRadius='8px'
               color='lightPrimary'
-              onClick={() => handleEditProduct()}
+              onClick={() => onClickProduct(null)}
             >
               {t('ADD_PRODUCT', 'Add product')}
             </Button>
             <SearchBar
               lazyLoad
+              isCustomLayout
               search={searchValue}
-              onSearch={(value) => setSearchValue(value)}
+              onSearch={(value) => onSearch(value)}
               placeholder={t('SEARCH', 'Search')}
             />
           </ActionsGroup>
@@ -165,72 +110,34 @@ export const OrderingProducts = (props) => {
               <tr>
                 <th className='product'>{t('PRODUCT', 'Product')}</th>
                 <th className='description'>{t('DESCRIPTION', 'Description')}</th>
-                <th className='action'>{t('ACTIONS', 'Actions')}</th>
               </tr>
             </thead>
-            {orderingProductsList.loading ? (
-              [...Array(pagesPerPage).keys()].map(i => (
+            {sitesListState.loading ? (
+              [...Array(paginationProps?.pageSize).keys()].map(i => (
                 <PageTbody key={i}>
                   <tr>
                     <td className='product'><Skeleton width={100} /></td>
                     <td className='description'><Skeleton width={150} /></td>
-                    <td className='action'>
-                      <ActionsContainer>
-                        <EnableWrapper>
-                          <Skeleton width={50} />
-                        </EnableWrapper>
-                        <ActionSelectorWrapper>
-                          <Skeleton width={15} />
-                        </ActionSelectorWrapper>
-                      </ActionsContainer>
-                    </td>
                   </tr>
                 </PageTbody>
               ))
             ) : (
-              currentPages.map(product => (
+              sitesListState.sites.map(product => (
                 <PageTbody
                   key={product.id}
-                  onClick={e => onClickPage(e, product.id)}
-                  active={selectedProduct?.id === product.id}
+                  onClick={() => onClickProduct(product)}
+                  active={selectedSite?.id === product.id}
                 >
                   <tr>
                     <td className='product'>
                       {product?.name}
                     </td>
                     <td className='description'>
-                      <div>
-                        {product?.description}
-                      </div>
-                    </td>
-                    <td className='action'>
-                      <ActionsContainer>
-                        <EnableWrapper className='product-enabled'>
-                          <span>{t('ENABLE', 'Enable')}</span>
-                          <Switch
-                            defaultChecked={product?.enabled}
-                            onChange={(enabled) => handleChangeState(product.id, 'enabled', enabled)}
-                          />
-                        </EnableWrapper>
-                        <ActionSelectorWrapper className='product-actions'>
-                          <DropdownButton
-                            menuAlign={theme?.rtl ? 'left' : 'right'}
-                            title={<FiMoreVertical />}
-                            id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                          >
-                            <Dropdown.Item
-                              onClick={() => handleEditProduct(product.id)}
-                            >
-                              {t('EDIT', 'Edit')}
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                              onClick={() => handleDeleteProduct(product.id)}
-                            >
-                              {t('DELETE', 'Delete')}
-                            </Dropdown.Item>
-                          </DropdownButton>
-                        </ActionSelectorWrapper>
-                      </ActionsContainer>
+                      {product?.description && (
+                        <div>
+                          {product?.description}
+                        </div>
+                      )}
                     </td>
                   </tr>
                 </PageTbody>
@@ -239,17 +146,18 @@ export const OrderingProducts = (props) => {
           </ProductListTable>
         </ProductListTableWrapper>
 
-        {!orderingProductsList.loading && (
+        {!sitesListState.loading && (
           <PagesBottomContainer>
-            <AddNewPageButton onClick={() => handleEditProduct(null)}>
+            <AddNewPageButton
+              onClick={() => onClickProduct(null)}
+            >
               {t('ADD_PRODUCT', 'Add product')}
             </AddNewPageButton>
-            {orderingProductsList?.products?.length > 0 && (
+            {sitesListState?.sites?.length > 0 && (
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
+                currentPage={paginationProps?.currentPage}
+                totalPages={paginationProps?.totalPages}
                 handleChangePage={handleChangePage}
-                defaultPageSize={pagesPerPage}
                 handleChangePageSize={handleChangePageSize}
               />
             )}
@@ -257,17 +165,41 @@ export const OrderingProducts = (props) => {
         )}
       </OrderingProductsContainer>
       {
-        openProductDetail && (
-          <OrderingProductsDetail
-            open={openProductDetail}
-            onClose={handleCloseDetail}
-            product={selectedProduct}
-            handleChangeState={handleChangeState}
-            orderingProductsList={orderingProductsList}
-            handleUpdateOrderingProducts={handleUpdateOrderingProducts}
-          />
+        openDetails && (
+          <SideBar
+            sidebarId='product_details'
+            defaultSideBarWidth={500}
+            moveDistance={0}
+            open={openDetails}
+            onClose={() => handleCloseDetail()}
+          >
+            <OrderingProductDetails
+              site={selectedSite}
+              sitesList={sitesListState.sites}
+              handleSuccessUpdateSites={handleSuccessUpdateSites}
+              onClose={() => handleCloseDetail()}
+            />
+          </SideBar>
         )
       }
+
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </>
   )
+}
+
+export const OrderingProducts = (props) => {
+  const sitesProps = {
+    ...props,
+    UIComponent: OrderingProductsUI
+  }
+  return <SitesListController {...sitesProps} />
 }

@@ -31,6 +31,7 @@ const EnterprisePromotionListingUI = (props) => {
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [advancedOfferModuleDisabled, setAdvancedOfferModuleDisabled] = useState(false)
 
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openDetails, setOpenDetails] = useState(false)
@@ -50,6 +51,7 @@ const EnterprisePromotionListingUI = (props) => {
 
   useEffect(() => {
     if (!promotionListState?.error) return
+    setAdvancedOfferModuleDisabled(true)
     setAlertState({
       open: true,
       content: promotionListState?.error
@@ -58,7 +60,7 @@ const EnterprisePromotionListingUI = (props) => {
 
   return (
     <>
-      <PromotionsListingContainer>
+      <PromotionsListingContainer eventDisabled={advancedOfferModuleDisabled}>
         <HeaderContainer>
           <HeaderTitleContainer>
             {isCollapse && (
