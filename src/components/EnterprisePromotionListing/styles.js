@@ -6,6 +6,10 @@ export const PromotionsListingContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
+
+  ${({ eventDisabled }) => eventDisabled && css`
+    pointer-events: none;
+  `}
 `
 export const HeaderContainer = styled.div`
   display: flex;
