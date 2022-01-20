@@ -17,7 +17,8 @@ export const AnalyticsMap = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [isHeat, setIsHeat] = useState(false)
-  const defaultCenter = { lat: 37.775, lng: -122.434 }
+  // const defaultCenter = { lat: 37.775, lng: -122.434 }
+  const defaultCenter = { lat: 40.77473399999999, lng: -73.9653844 }
 
   const googleMapsControls = {
     defaultZoom: 15,
