@@ -17,7 +17,9 @@ export const CategoryTreeNode = (props) => {
     setSelectedProductsIds,
 
     selectedProducts,
-    setSelectedProducts
+    setSelectedProducts,
+
+    subCategoriesList
   } = props
 
   const content = useRef(null)
@@ -38,9 +40,9 @@ export const CategoryTreeNode = (props) => {
   }
 
   const isCheckedCategory = () => {
-    if (category?.products?.length > 0) {
-      const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
-      return productsIds.every(id => selectedProductsIds.includes(id))
+    const _category = subCategoriesList.find(item => item.id === category.id)
+    if (_category?.productIds?.length > 0) {
+      return _category?.productIds.every(id => selectedProductsIds.includes(id))
     } else {
       return false
     }
@@ -64,7 +66,8 @@ export const CategoryTreeNode = (props) => {
   }
 
   const handleChangeSelectCategory = () => {
-    const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
+    const productsIds = subCategoriesList.find(item => item.id === category.id)?.productIds || []
+
     const everyContain = productsIds.every(id => selectedProductsIds.includes(id))
     let _selectedProductsIds = []
     let _selectedProducts = []
@@ -107,57 +110,61 @@ export const CategoryTreeNode = (props) => {
   }
 
   return (
-    <AccordionSection>
-      <Accordion
-        onClick={(e) => toggleAccordion(e, category.id)}
-      >
-        <AccordionItem
-          margin={20 * index}
-        >
-          <div>
-            <Checkbox
-              ref={categoryRef}
-              checked={isCategoryChecked}
-              onChange={e => onChangeCategory(e.target.checked)}
-            />
-            <span>{category.name}</span>
-          </div>
-          <GoTriangleDown className={setRotate} />
-        </AccordionItem>
-      </Accordion>
-      <AccordionContent
-        ref={content}
-        style={{
-          maxHeight: !setActive && '0px'
-        }}
-      >
-        {category?.products.map(product => (
-          <AccordionItem
-            key={product.id}
-            margin={20 * (index + 1)}
-            isProduct
+    <>
+      {subCategoriesList.find(_category => _category.id === category.id)?.productIds?.length > 0 && (
+        <AccordionSection>
+          <Accordion
+            onClick={(e) => toggleAccordion(e, category.id)}
           >
-            <div>
-              <Checkbox
-                ref={checkboxRef}
-                checked={selectedProductsIds.includes(product.id)}
-                onChange={() => handleClickProduct(product)}
-              />
-              <span>{product.name}</span>
-            </div>
-          </AccordionItem>
-        ))}
-        {(category?.subcategories && category?.subcategories?.length > 0) && (
-          category.subcategories.map(subCategory => (
-            <CategoryTreeNode
-              {...props}
-              key={subCategory.id}
-              category={subCategory}
-              index={index + 1}
-            />
-          ))
-        )}
-      </AccordionContent>
-    </AccordionSection>
+            <AccordionItem
+              margin={20 * index}
+            >
+              <div>
+                <Checkbox
+                  ref={categoryRef}
+                  checked={isCategoryChecked}
+                  onChange={e => onChangeCategory(e.target.checked)}
+                />
+                <span>{category.name}</span>
+              </div>
+              <GoTriangleDown className={setRotate} />
+            </AccordionItem>
+          </Accordion>
+          <AccordionContent
+            ref={content}
+            style={{
+              maxHeight: !setActive && '0px'
+            }}
+          >
+            {category?.products.map(product => (
+              <AccordionItem
+                key={product.id}
+                margin={20 * (index + 1)}
+                isProduct
+              >
+                <div>
+                  <Checkbox
+                    ref={checkboxRef}
+                    checked={selectedProductsIds.includes(product.id)}
+                    onChange={() => handleClickProduct(product)}
+                  />
+                  <span>{product.name}</span>
+                </div>
+              </AccordionItem>
+            ))}
+            {(category?.subcategories && category?.subcategories?.length > 0) && (
+              category.subcategories.map(subCategory => (
+                <CategoryTreeNode
+                  {...props}
+                  key={subCategory.id}
+                  category={subCategory}
+                  index={index + 1}
+                />
+              ))
+            )}
+          </AccordionContent>
+        </AccordionSection>
+      )}
+    </>
   )
 }

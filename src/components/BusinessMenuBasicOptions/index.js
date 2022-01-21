@@ -25,13 +25,13 @@ export const BusinessMenuBasicOptions = (props) => {
     handleCheckOrderType,
     handleUpdateBusinessMenuOption,
     handleAddBusinessMenuOption,
-
     selectedProductsIds,
     setSelectedProductsIds,
-
     selectedProducts,
     setSelectedProducts,
-    handleChangeScheduleState
+    handleChangeScheduleState,
+
+    subCategoriesList
   } = props
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -131,6 +131,7 @@ export const BusinessMenuBasicOptions = (props) => {
 
             selectedProducts={selectedProducts}
             setSelectedProducts={setSelectedProducts}
+            subCategoriesList={subCategoriesList}
           />
         ))}
       </BusinessMenuBasicContainer>
