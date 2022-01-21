@@ -35,7 +35,8 @@ export const BusinessDeliveryZoneBasic = (props) => {
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
-    { value: 2, content: t('POLYGON', 'Polygon') }
+    { value: 2, content: t('POLYGON', 'Polygon') },
+    { value: 4, content: t('EVERYWHERE', 'Everywhere') },
   ]
 
   const googleMapsControls = {
@@ -72,14 +73,14 @@ export const BusinessDeliveryZoneBasic = (props) => {
   }
 
   const handleSave = () => {
-    if (!zoneData) {
+    if (zoneData || zoneType === 4) {
+      if (isAddValid) handleAddBusinessDeliveryZone()
+      else handleUpdateBusinessDeliveryZone()
+    } else {
       setAlertState({
         open: true,
         content: t('REQUIRED_POLYGON_CIRCLE', 'Polygon or circle must be drawn.')
       })
-    } else {
-      if (isAddValid) handleAddBusinessDeliveryZone()
-      else handleUpdateBusinessDeliveryZone()
     }
   }
 
@@ -121,28 +122,30 @@ export const BusinessDeliveryZoneBasic = (props) => {
           defaultValue={business?.address}
           disabled
         />
-        {configState?.configs?.google_maps_api_key?.value ? (
-          <WrapperMap>
-            <button
-              onClick={() => setClearState(true)}
-            >
-              {t('CLEAR', 'Clear')}
-            </button>
-            <BusinessZoneGoogleMaps
-              apiKey={configState?.configs?.google_maps_api_key?.value}
-              mapControls={googleMapsControls}
-              location={business?.location}
-              clearState={clearState}
-              setClearState={setClearState}
-              type={zoneType}
-              data={zoneData}
-              handleData={handleZoneData}
-              fillStyle={fillStyle}
-              infoContentString={infoContentString}
-            />
-          </WrapperMap>
-        ) : (
-          <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
+        {zoneType !== 4 && (
+          configState?.configs?.google_maps_api_key?.value ? (
+            <WrapperMap>
+              <button
+                onClick={() => setClearState(true)}
+              >
+                {t('CLEAR', 'Clear')}
+              </button>
+              <BusinessZoneGoogleMaps
+                apiKey={configState?.configs?.google_maps_api_key?.value}
+                mapControls={googleMapsControls}
+                location={business?.location}
+                clearState={clearState}
+                setClearState={setClearState}
+                type={zoneType}
+                data={zoneData}
+                handleData={handleZoneData}
+                fillStyle={fillStyle}
+                infoContentString={infoContentString}
+              />
+            </WrapperMap>
+          ) : (
+            <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
+          )
         )}
         <Button
           color='primary'
