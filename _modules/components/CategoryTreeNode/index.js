@@ -44,14 +44,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CategoryTreeNode = function CategoryTreeNode(props) {
-  var _category$subcategori;
+  var _subCategoriesList$fi2, _subCategoriesList$fi3, _category$subcategori;
 
   var category = props.category,
       index = props.index,
       selectedProductsIds = props.selectedProductsIds,
       setSelectedProductsIds = props.setSelectedProductsIds,
       selectedProducts = props.selectedProducts,
-      setSelectedProducts = props.setSelectedProducts;
+      setSelectedProducts = props.setSelectedProducts,
+      subCategoriesList = props.subCategoriesList;
   var content = (0, _react.useRef)(null);
   var checkboxRef = (0, _react.useRef)(null);
   var categoryRef = (0, _react.useRef)(null);
@@ -81,13 +82,14 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   };
 
   var isCheckedCategory = function isCheckedCategory() {
-    var _category$products;
+    var _category$productIds;
 
-    if ((category === null || category === void 0 ? void 0 : (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.length) > 0) {
-      var productsIds = category.products.reduce(function (ids, product) {
-        return [].concat(_toConsumableArray(ids), [product.id]);
-      }, []);
-      return productsIds.every(function (id) {
+    var _category = subCategoriesList.find(function (item) {
+      return item.id === category.id;
+    });
+
+    if ((_category === null || _category === void 0 ? void 0 : (_category$productIds = _category.productIds) === null || _category$productIds === void 0 ? void 0 : _category$productIds.length) > 0) {
+      return _category === null || _category === void 0 ? void 0 : _category.productIds.every(function (id) {
         return selectedProductsIds.includes(id);
       });
     } else {
@@ -120,9 +122,11 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   };
 
   var handleChangeSelectCategory = function handleChangeSelectCategory() {
-    var productsIds = category.products.reduce(function (ids, product) {
-      return [].concat(_toConsumableArray(ids), [product.id]);
-    }, []);
+    var _subCategoriesList$fi;
+
+    var productsIds = ((_subCategoriesList$fi = subCategoriesList.find(function (item) {
+      return item.id === category.id;
+    })) === null || _subCategoriesList$fi === void 0 ? void 0 : _subCategoriesList$fi.productIds) || [];
     var everyContain = productsIds.every(function (id) {
       return selectedProductsIds.includes(id);
     });
@@ -166,9 +170,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   };
 
   (0, _react.useEffect)(function () {
-    var _category$products2;
+    var _category$products;
 
-    if (category !== null && category !== void 0 && (_category$products2 = category.products) !== null && _category$products2 !== void 0 && _category$products2.length) {
+    if (category !== null && category !== void 0 && (_category$products = category.products) !== null && _category$products !== void 0 && _category$products.length) {
       setIsCategoryChecked(isCheckedCategory());
     }
   }, [selectedProductsIds]);
@@ -178,7 +182,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     handleChangeSelectCategory();
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles2.Accordion, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_subCategoriesList$fi2 = subCategoriesList.find(function (_category) {
+    return _category.id === category.id;
+  })) === null || _subCategoriesList$fi2 === void 0 ? void 0 : (_subCategoriesList$fi3 = _subCategoriesList$fi2.productIds) === null || _subCategoriesList$fi3 === void 0 ? void 0 : _subCategoriesList$fi3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles2.Accordion, {
     onClick: function onClick(e) {
       return toggleAccordion(e, category.id);
     }
@@ -215,7 +221,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       category: subCategory,
       index: index + 1
     }));
-  })));
+  }))));
 };
 
 exports.CategoryTreeNode = CategoryTreeNode;

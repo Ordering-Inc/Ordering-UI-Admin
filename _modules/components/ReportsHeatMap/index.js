@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
-  var _reportData$content, _reportData$content2, _reportData$content2$, _configState$configs, _configState$configs$, _reportData$content3, _reportData$content4, _theme$images, _theme$images$icons;
+  var _reportData$content, _reportData$content2, _reportData$content2$, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _reportData$content3, _reportData$content4, _theme$images, _theme$images$icons;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -71,6 +71,10 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
+
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -109,7 +113,7 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
 
   var googleMapsControls = {
     defaultZoom: 15,
-    zoomControl: true,
+    zoomControl: false,
     streetViewControl: false,
     fullscreenControl: false,
     mapTypeId: 'roadmap',
@@ -175,9 +179,9 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.locations) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('HEAT_MAP_WITH', 'Heat map with'))), reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
-    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value,
-    location: defaultPosition,
+  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
+    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value,
+    location: (user === null || user === void 0 ? void 0 : user.location) || defaultPosition,
     locations: reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.locations,
     data: reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.zones,
     fillStyle: fillStyle,
@@ -192,7 +196,7 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     onClick: function onClick() {
       return setIsHeat(!isHeat);
     }
-  }, isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
     padding: "30px",

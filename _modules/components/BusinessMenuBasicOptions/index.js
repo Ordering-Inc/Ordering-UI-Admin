@@ -59,7 +59,8 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
       setSelectedProductsIds = props.setSelectedProductsIds,
       selectedProducts = props.selectedProducts,
       setSelectedProducts = props.setSelectedProducts,
-      handleChangeScheduleState = props.handleChangeScheduleState;
+      handleChangeScheduleState = props.handleChangeScheduleState,
+      subCategoriesList = props.subCategoriesList;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -167,7 +168,8 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
       selectedProductsIds: selectedProductsIds,
       setSelectedProductsIds: setSelectedProductsIds,
       selectedProducts: selectedProducts,
-      setSelectedProducts: setSelectedProducts
+      setSelectedProducts: setSelectedProducts,
+      subCategoriesList: subCategoriesList
     });
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
