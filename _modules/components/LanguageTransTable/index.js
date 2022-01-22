@@ -59,7 +59,8 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
       handleChangeText = props.handleChangeText,
       creationFormState = props.creationFormState,
       handleChangeInput = props.handleChangeInput,
-      handleUpdateClick = props.handleUpdateClick;
+      handleUpdateClick = props.handleUpdateClick,
+      textEditState = props.textEditState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -200,7 +201,7 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, translation.key), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
-      value: translation.text,
+      value: (textEditState === null || textEditState === void 0 ? void 0 : textEditState.id) === translation.id ? textEditState === null || textEditState === void 0 ? void 0 : textEditState.text : translation.text,
       placeholder: t('WRITE_A_TEXT', 'Write a text'),
       onChange: function onChange(e) {
         return handleChangeText(translation.id, translation.key, e.target.value);
