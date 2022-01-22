@@ -20,7 +20,8 @@ const LanguageTransTableUI = (props) => {
     handleChangeText,
     creationFormState,
     handleChangeInput,
-    handleUpdateClick
+    handleUpdateClick,
+    textEditState
   } = props
 
   const [, t] = useLanguage()
@@ -132,7 +133,11 @@ const LanguageTransTableUI = (props) => {
                     <td>
                       <input
                         type='text'
-                        value={translation.text}
+                        value={
+                          textEditState?.id === translation.id
+                            ? textEditState?.text
+                            : translation.text
+                        }
                         placeholder={t('WRITE_A_TEXT', 'Write a text')}
                         onChange={(e) => handleChangeText(translation.id, translation.key, e.target.value)}
                       />
