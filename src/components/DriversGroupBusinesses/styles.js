@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
-  height: calc(100% - 160px);
+export const Container = styled.form`
+  height: calc(100% - 130px);
   > button {
     position: sticky;
     top: 100%;
@@ -29,7 +29,7 @@ export const ButtonGroup = styled.div`
 `
 
 export const BusinessesContainer = styled.div`
-  height: calc(100% - 130px);
+  height: calc(100% - 175px);
   overflow: auto;
 `
 

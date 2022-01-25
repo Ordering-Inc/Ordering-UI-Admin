@@ -198,3 +198,21 @@ export const verifyDecimals = (value, parser) => {
     return parser(value)
   }
 }
+
+/**
+ * Fuctions to control the local storage
+ */
+export const getStorageItem = async (storageKey, isJson) => {
+  const value = await window.localStorage.getItem(storageKey)
+  if (isJson && typeof value !== 'object') {
+    return JSON.parse(value)
+  }
+  return value
+}
+export const setStorageItem = async (key, val, isJson) => {
+  const value = isJson ? JSON.stringify(val) : val
+  await window.localStorage.setItem(key, value)
+}
+export const removeStorageItem = async (key) => {
+  await window.localStorage.removeItem(key)
+}

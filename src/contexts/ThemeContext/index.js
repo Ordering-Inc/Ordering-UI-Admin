@@ -72,7 +72,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 2000;
+      z-index: 3000;
     }
 
     .popup-component {
@@ -92,6 +92,21 @@ export const ThemeProvider = ({ children, ...props }) => {
       width: fit-content;
       min-width: 200px;
       font-size: 14px;
+    }
+
+    #___reactour {
+      > div:first-child {
+        opacity: 0.7;
+        color: #000;
+        z-index: 2000;
+      }
+
+      span[data-tour-elem=badge] {
+        display: none;
+      }
+      div[data-tour-elem=controls] {
+        display: none;
+      }
     }
   `
 

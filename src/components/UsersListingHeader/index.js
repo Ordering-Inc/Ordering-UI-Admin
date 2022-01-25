@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { SearchBar } from '../SearchBar'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 
@@ -27,7 +27,9 @@ export const UsersListingHeader = (props) => {
     onSearch,
     handleOpenUserAddForm,
     isDriversPage,
-    isDriversManagersPage
+    isDriversManagersPage,
+
+    handleOpenTour
   } = props
 
   const [, t] = useLanguage()
@@ -45,12 +47,20 @@ export const UsersListingHeader = (props) => {
           </IconButton>
         )}
         <h1>{title}</h1>
+        <IconButton
+          color='dark'
+          className='tour_btn'
+          onClick={() => handleOpenTour()}
+        >
+          <LifePreserver />
+        </IconButton>
       </HeaderTitleContainer>
       <ActionContainer>
         <Button
           borderRadius='8px'
           color='lightPrimary'
           onClick={() => handleOpenUserAddForm()}
+          data-tour='tour_add'
         >
           {
             isDriversPage

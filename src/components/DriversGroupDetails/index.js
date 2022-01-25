@@ -29,7 +29,8 @@ const DriversGroupDetailsUI = (props) => {
     driversGroupState,
     actionState,
     handleParentSidebarMove,
-    handleDeleteDriversGroup
+    handleDeleteDriversGroup,
+    handleNextTour
   } = props
 
   const theme = useTheme()
@@ -45,20 +46,25 @@ const DriversGroupDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   useEffect(() => {
-    const _driversGroupMenus = (useAdvanced && autoAssignType !== 'basic')
+    const _driversGroupMenus = !driversGroupState.driversGroup
       ? [
         { key: 'general', value: t('GENERAL', 'General') },
-        { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
-        { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
-        { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') },
-        { key: 'logs', value: t('LOGS', 'Logs') }
+        { key: 'businesses', value: t('BUSINESSES', 'Businesses') }
       ]
-      : [
-        { key: 'general', value: t('GENERAL', 'General') },
-        { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
-        { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
-        { key: 'logs', value: t('LOGS', 'Logs') }
-      ]
+      : (useAdvanced && autoAssignType !== 'basic')
+        ? [
+          { key: 'general', value: t('GENERAL', 'General') },
+          { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
+          { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
+          { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') },
+          { key: 'logs', value: t('LOGS', 'Logs') }
+        ]
+        : [
+          { key: 'general', value: t('GENERAL', 'General') },
+          { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
+          { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
+          { key: 'logs', value: t('LOGS', 'Logs') }
+        ]
     setDriversGroupMenus(_driversGroupMenus)
   }, [useAdvanced])
 
@@ -71,6 +77,11 @@ const DriversGroupDetailsUI = (props) => {
         handleDeleteDriversGroup()
       }
     })
+  }
+
+  const handleNextClick = () => {
+    setShowMenu('businesses')
+    handleNextTour()
   }
 
   useEffect(() => {
@@ -121,26 +132,25 @@ const DriversGroupDetailsUI = (props) => {
             </div>
           )}
         </Header>
-        {driversGroupState.driversGroup && (
-          <MenusContainer>
-            <DragScroll>
-              {driversGroupMenus.map(menu => (
-                <Tab
-                  key={menu.key}
-                  active={menu.key === showMenu}
-                  onClick={() => setShowMenu(menu.key)}
-                >
-                  {menu.value}
-                </Tab>
-              ))}
-            </DragScroll>
-          </MenusContainer>
-        )}
-        {(showMenu === 'general' || !driversGroupState.driversGroup) && (
+        <MenusContainer>
+          <DragScroll>
+            {driversGroupMenus.map(menu => (
+              <Tab
+                key={menu.key}
+                active={menu.key === showMenu}
+                onClick={() => setShowMenu(menu.key)}
+              >
+                {menu.value}
+              </Tab>
+            ))}
+          </DragScroll>
+        </MenusContainer>
+        {(showMenu === 'general') && (
           <DriversGroupGeneralForm
             {...props}
             useAdvanced={useAdvanced}
             setUseAdvanced={setUseAdvanced}
+            handleNextClick={handleNextClick}
           />
         )}
         {showMenu === 'businesses' && (
