@@ -126,9 +126,10 @@ const UsersListingUI = (props) => {
     }
   }
   useEffect(() => {
+    if (usersList.loading) return
     handleSetStorage()
     getDataFromStorage()
-  }, [])
+  }, [usersList.loading])
 
   return (
     <>
