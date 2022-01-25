@@ -110,7 +110,7 @@ const UsersListingUI = (props) => {
   }, [usersList])
 
   const handleSetStorage = async () => {
-    const isVisited = await getStorageItem('isVistedDriverPage')
+    const isVisited = await getStorageItem('isVistedDriverPage', true)
     if (!isVisited) {
       await setStorageItem('isVistedDriverPage', true)
       if (isDriversPage) {
