@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
+import { getStorageItem, removeStorageItem } from '../../utils'
 import { Button, IconButton } from '../../styles/Buttons'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { SearchBar } from '../SearchBar'
 import { DriversGroupsList } from '../DriversGroupsList'
 import { Alert, Confirm } from '../Confirm'
 import { SideBar } from '../SideBar'
 import { DriversGroupDetails } from '../DriversGroupDetails'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { WizardDelivery } from '../WizardDelivery'
 
 import {
   DriversGroupsListingContainer,
@@ -28,13 +32,13 @@ const DriversGroupsListingUI = (props) => {
     handleSelectGroup,
     handleAllSelectGroup,
     handleDeleteSelectedGroups,
-
     actionState,
     handleUpdateDriversGroup,
     handleDeleteDriversGroup,
     driversCompanyList
   } = props
 
+  const history = useHistory()
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [searchValue, setSearchValue] = useState(null)
@@ -44,10 +48,19 @@ const DriversGroupsListingUI = (props) => {
   const [openDetails, setOpenDetails] = useState(false)
   const [curDriversGroup, setCurDriversGroup] = useState(null)
 
+  const [isTourOpen, setIsTourOpen] = useState(false)
+  const [currentTourStep, setCurrentTourStep] = useState(4)
+
   const handleOpenDetails = (driverGroup) => {
     setMoveDistance(0)
     setCurDriversGroup(driverGroup)
     setOpenDetails(true)
+
+    if (!driverGroup) {
+      setTimeout(() => {
+        setCurrentTourStep(5)
+      }, 600)
+    }
   }
 
   useEffect(() => {
@@ -69,6 +82,41 @@ const DriversGroupsListingUI = (props) => {
     })
   }
 
+  const handleOpenTour = () => {
+    setOpenDetails(false)
+    setCurrentTourStep(4)
+    setIsTourOpen(true)
+  }
+
+  useEffect(() => {
+    if (history.location?.state?.isFromTourDriversGroup) {
+      handleOpenTour()
+    }
+  }, [history.location?.state?.isFromTourDriversGroup])
+
+  const handleNextTour = () => {
+    setTimeout(() => {
+      setCurrentTourStep(6)
+    }, 1000)
+  }
+
+  const handleDeliveryTourCompleted = () => {
+    setTimeout(() => {
+      setCurrentTourStep(7)
+    }, 500)
+  }
+
+  const getDataFromStorage = async () => {
+    const value = await getStorageItem('isFromDeliveryDriversGroup', true)
+    if (value) {
+      removeStorageItem('isFromDeliveryDriversGroup')
+      handleOpenTour()
+    }
+  }
+  useEffect(() => {
+    getDataFromStorage()
+  }, [])
+
   return (
     <>
       <DriversGroupsListingContainer>
@@ -77,17 +125,34 @@ const DriversGroupsListingUI = (props) => {
             {isCollapse && (
               <IconButton
                 color='black'
-                onClick={() => handleMenuCollapse(false)}
+                onClick={() => handleMenuCollapse()}
               >
                 <MenuIcon />
               </IconButton>
             )}
             <h1>{t('DRIVERS_GROUPS', 'Drivers groups')}</h1>
+            <OverlayTrigger
+              placement='bottom'
+              overlay={
+                <Tooltip>
+                  {t('START_TUTORIAL', 'Start tutorial')}
+                </Tooltip>
+              }
+            >
+              <IconButton
+                color='dark'
+                className='tour_btn'
+                onClick={() => handleOpenTour()}
+              >
+                <LifePreserver />
+              </IconButton>
+            </OverlayTrigger>
           </HeaderLeftContainer>
           <HeaderRightContainer>
             <Button
               borderRadius='8px'
               color='lightPrimary'
+              data-tour='tour_add_group'
               onClick={() => handleOpenDetails(null)}
             >
               {t('ADD_DRIVER_GROUP', 'Add driver group')}
@@ -143,6 +208,10 @@ const DriversGroupsListingUI = (props) => {
             handleUpdateDriversGroup={handleUpdateDriversGroup}
             handleParentSidebarMove={val => setMoveDistance(val)}
             onClose={() => setOpenDetails(false)}
+
+            isTourOpen={isTourOpen}
+            handleNextTour={handleNextTour}
+            handleDeliveryTourCompleted={handleDeliveryTourCompleted}
           />
         </SideBar>
       )}
@@ -165,6 +234,14 @@ const DriversGroupsListingUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+
+      {isTourOpen && (
+        <WizardDelivery
+          isTourOpen={isTourOpen}
+          setIsTourOpen={setIsTourOpen}
+          currentStep={currentTourStep}
+        />
+      )}
     </>
   )
 }

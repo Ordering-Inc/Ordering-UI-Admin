@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   useLanguage,
+  useEvent,
   DragAndDrop,
   ExamineClick,
   UserFormDetails as UserFormDetailsController
@@ -12,7 +13,7 @@ import { Alert } from '../Confirm'
 import { UserTypeSelector } from '../UserTypeSelector'
 import parsePhoneNumber from 'libphonenumber-js'
 import { InputPhoneNumber } from '../InputPhoneNumber'
-import { sortInputFields, bytesConverter } from '../../utils'
+import { sortInputFields, bytesConverter, setStorageItem } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import BiImage from '@meronex/icons/bi/BiImage'
 
@@ -42,14 +43,18 @@ const UserAddFormUI = (props) => {
     handleChangeUserType,
     handlechangeImage,
     isDriversPage,
-    isDriversManagersPage
+    isDriversManagersPage,
+
+    isTourOpen
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
+  const [events] = useEvent()
 
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isSuccessSubmitted, setIsSuccessSubmitted] = useState(false)
   const emailInput = useRef(null)
   const inputRef = useRef(null)
 
@@ -74,6 +79,10 @@ const UserAddFormUI = (props) => {
     }
     if (Object.keys(formState.changes).length > 0 && isPhoneNumberValid) {
       handleButtonAddClick()
+
+      if (isTourOpen) {
+        setIsSuccessSubmitted(true)
+      }
     }
   }
 
@@ -156,6 +165,7 @@ const UserAddFormUI = (props) => {
 
   useEffect(() => {
     if ((!formState?.loading && formState?.result?.error)) {
+      setIsSuccessSubmitted(false)
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
@@ -192,9 +202,30 @@ const UserAddFormUI = (props) => {
       }
     })
   }, [formMethods])
+
+  useEffect(() => {
+    if (!isTourOpen || !isSuccessSubmitted || formState?.loading || formState?.result?.error) return
+    if (isDriversPage) {
+      setStorageItem('isFromDeliveryDrivers', true)
+      setTimeout(() => {
+        events.emit('go_to_page', { page: 'drivers_managers' })
+      }, 500)
+    }
+    if (isDriversManagersPage) {
+      setStorageItem('isFromDeliveryDriversGroup', true)
+      setTimeout(() => {
+        events.emit('go_to_page', { page: 'drivers_groups' })
+      }, 500)
+    }
+  }, [isTourOpen, isSuccessSubmitted, formState?.loading])
+
   return (
     <FormContainer>
-      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout}>
+      <FormInput
+        onSubmit={formMethods.handleSubmit(onSubmit)}
+        isCheckout={isCheckout}
+        data-tour='tour_fill'
+      >
         <h1>
           {
             isDriversPage

@@ -95,7 +95,7 @@ export const DriversGroupsList = (props) => {
     <>
       <DriversGroupsContainer>
         <TableWrapper>
-          <GroupsTable>
+          <GroupsTable data-tour='tour_delivery_completed'>
             <thead>
               <tr>
                 <th>

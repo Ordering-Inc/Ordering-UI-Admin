@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { useForm } from 'react-hook-form'
+
 import { Checkbox, Button } from '../../styles'
 import { SearchBar } from '../SearchBar'
 
@@ -21,13 +23,20 @@ export const DriversGroupBusinesses = (props) => {
     actionState,
     changesState,
     handleUpdateDriversGroup,
+    handleAddDriversGroup,
     handleSelectAllBusiness,
-    selectedBusinessIds
+    selectedBusinessIds,
+
+    isTourOpen,
+    handleDeliveryTourCompleted
   } = props
 
   const [, t] = useLanguage()
+  const { handleSubmit } = useForm()
+
   const [searchValue, setSearchValue] = useState(null)
   const [filteredBusinesses, setFilteredBusinesses] = useState([])
+  const [isSuccessSubmitted, setIsSuccessSubmitted] = useState(false)
 
   useEffect(() => {
     let _filteredBusinesses = []
@@ -39,8 +48,31 @@ export const DriversGroupBusinesses = (props) => {
     setFilteredBusinesses(_filteredBusinesses)
   }, [searchValue])
 
+  const onSubmit = () => {
+    if (driversGroupState.driversGroup) {
+      handleUpdateDriversGroup(changesState)
+    } else {
+      handleAddDriversGroup()
+      if (isTourOpen) {
+        setIsSuccessSubmitted(true)
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!isTourOpen || !isSuccessSubmitted || actionState?.loading) return
+    if (actionState?.error) {
+      setIsSuccessSubmitted(false)
+      return
+    }
+    handleDeliveryTourCompleted()
+  }, [isTourOpen, isSuccessSubmitted, actionState?.loading])
+
   return (
-    <Container>
+    <Container
+      data-tour='tour_select_business'
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <SearchBarWrapper>
         <SearchBar
           placeholder={t('SEARCH', 'Search')}
@@ -81,16 +113,13 @@ export const DriversGroupBusinesses = (props) => {
           </BusinessWrapper>
         ))}
       </BusinessesContainer>
-      {driversGroupState.driversGroup && (
-        <Button
-          borderRadius='8px'
-          color='primary'
-          disabled={Object.keys(changesState).length === 0}
-          onClick={() => handleUpdateDriversGroup(changesState)}
-        >
-          {t('SAVE', 'Save')}
-        </Button>
-      )}
+      <Button
+        borderRadius='8px'
+        color='primary'
+        disabled={Object.keys(changesState).length === 0}
+      >
+        {driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
+      </Button>
     </Container>
   )
 }

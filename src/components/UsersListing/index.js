@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { UsersList as UsersListController } from 'ordering-components-admin'
+import { getStorageItem, removeStorageItem, setStorageItem } from '../../utils'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
@@ -8,6 +9,8 @@ import { UserActiveStateFilter } from '../UserActiveStateFilter'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
 import { SideBar } from '../SideBar'
 import { UserAddForm } from '../UserAddForm'
+
+import { WizardDelivery } from '../WizardDelivery'
 
 import {
   UsersListingContainer
@@ -52,6 +55,9 @@ const UsersListingUI = (props) => {
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
 
+  const [isTourOpen, setIsTourOpen] = useState(false)
+  const [currentTourStep, setCurrentTourStep] = useState(isDriversManagersPage ? 2 : 0)
+
   const handleBackRedirect = () => {
     setIsOpenUserDetails(false)
     setOpenUser(null)
@@ -73,6 +79,19 @@ const UsersListingUI = (props) => {
     }
     setIsOpenUserDetails(false)
     setOpenUserAddForm(true)
+
+    if (isTourOpen) {
+      setTimeout(() => {
+        setCurrentTourStep(isDriversManagersPage ? 3 : 1)
+      }, 600)
+    }
+  }
+
+  const handleOpenTour = () => {
+    setCurrentTourStep(isDriversManagersPage ? 2 : 0)
+    setIsOpenUserDetails(false)
+    setOpenUserAddForm(false)
+    setIsTourOpen(true)
   }
 
   useEffect(() => {
@@ -89,6 +108,28 @@ const UsersListingUI = (props) => {
       setIsOpenUserDetails(true)
     }
   }, [usersList])
+
+  const handleSetStorage = async () => {
+    const isVisited = await getStorageItem('isVistedDriverPage', true)
+    if (!isVisited) {
+      await setStorageItem('isVistedDriverPage', true)
+      if (isDriversPage) {
+        handleOpenTour()
+      }
+    }
+  }
+  const getDataFromStorage = async () => {
+    const value = await getStorageItem('isFromDeliveryDrivers', true)
+    if (isDriversManagersPage && value) {
+      removeStorageItem('isFromDeliveryDrivers')
+      handleOpenTour()
+    }
+  }
+  useEffect(() => {
+    if (usersList.loading) return
+    handleSetStorage()
+    getDataFromStorage()
+  }, [usersList.loading])
 
   return (
     <>
@@ -107,6 +148,8 @@ const UsersListingUI = (props) => {
           onSearch={onSearch}
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
           handleOpenUserAddForm={handleOpenUserAddForm}
+
+          handleOpenTour={() => handleOpenTour()}
         />
         {isShowActiveStateFilter && (
           <UserActiveStateFilter
@@ -159,8 +202,17 @@ const UsersListingUI = (props) => {
             isDriversManagersPage={isDriversManagersPage}
             handleSuccessAdd={handleSuccessAddUser}
             onClose={() => setOpenUserAddForm(false)}
+            isTourOpen={isTourOpen}
           />
         </SideBar>
+      )}
+
+      {isTourOpen && (
+        <WizardDelivery
+          isTourOpen={isTourOpen}
+          setIsTourOpen={setIsTourOpen}
+          currentStep={currentTourStep}
+        />
       )}
     </>
   )

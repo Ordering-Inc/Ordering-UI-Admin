@@ -13,11 +13,13 @@ import {
 
 export const DriversGroupPaymethods = (props) => {
   const {
+    driversGroupState,
     paymethods,
     actionState,
     changesState,
     selectedPaymethodIds,
     handleUpdateDriversGroup,
+    handleAddDriversGroup,
     handleSelectPaymethod,
     handleSelectAllPaymethod
   } = props
@@ -79,9 +81,9 @@ export const DriversGroupPaymethods = (props) => {
           borderRadius='8px'
           color='primary'
           disabled={Object.keys(changesState).length === 0}
-          onClick={() => handleUpdateDriversGroup(changesState)}
+          onClick={() => driversGroupState.driversGroup ? handleUpdateDriversGroup(changesState) : handleAddDriversGroup()}
         >
-          {t('SAVE', 'Save')}
+          {driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
         </Button>
       </Container>
     </>
