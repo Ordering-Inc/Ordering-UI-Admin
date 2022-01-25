@@ -100,7 +100,7 @@ const ReportsSpentTimeUI = (props) => {
 
   return (
     <ReportsBusinessSpendContainer>
-      <Title>{t('TIME', 'Time')}</Title>
+      <Title>{t('DRIVER_TIME', 'Driver Time')}</Title>
       <ButtonActionList>
         <BrandBusinessWrapper>
           <Button
