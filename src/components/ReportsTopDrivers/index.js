@@ -131,6 +131,19 @@ const ReportsTopDriversUI = (props) => {
     plugins: {
       legend: {
         display: true
+      },
+      tooltip: {
+        callbacks: {
+          footer: (tooltipItem) => {
+            let label = ''
+            if (reportData?.content?.dataset?.dataset?.data?.length > 0) {
+              reportData.content.dataset.dataset.data.forEach(item => {
+                if (item.x === tooltipItem[0]?.parsed?.x) label = item?.info[0]?.label
+              })
+            }
+            return label
+          }
+        }
       }
     },
     pointRadius: 0

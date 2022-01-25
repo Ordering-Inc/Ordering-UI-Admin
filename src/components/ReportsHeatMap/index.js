@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, useConfig, useSession, AdvancedReports as AdvancedReportsController, GoogleMapsMap } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
-import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
-import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { Alert } from '../Confirm'
+import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
+import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import {
   HeatMapContainer,
   Title,
@@ -35,6 +36,7 @@ const ReportsHeatMapUI = (props) => {
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [availableDriverIds, setAvailableDriverIds] = useState(null)
+  const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [isHeat, setIsHeat] = useState(false)
   const theme = useTheme()
 
@@ -91,6 +93,11 @@ const ReportsHeatMapUI = (props) => {
         <Title>{t('HEAT_MAP_WITH', 'Heat map with')}</Title>
         <ButtonActionList>
           <BrandBusinessWrapper>
+            <Button
+              onClick={() => setIsBrandFilter(true)}
+            >
+              {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
+            </Button>
             <Button
               onClick={() => setIsBusinessFilter(true)}
             >
@@ -159,7 +166,9 @@ const ReportsHeatMapUI = (props) => {
           onClose={() => setIsBusinessFilter(false)}
         >
           <AnalyticsBusinessFilter
-            {...props} onClose={() => setIsBusinessFilter(false)}
+            {...props}
+            onClose={() => setIsBusinessFilter(false)}
+            isFranchise
           />
         </Modal>
         <Modal
@@ -188,6 +197,18 @@ const ReportsHeatMapUI = (props) => {
             {...props}
             onClose={() => setIsDriverGroupFilter(false)}
             setAvailableDriverIds={setAvailableDriverIds}
+          />
+        </Modal>
+        <Modal
+          width='50%'
+          height='80vh'
+          padding='30px'
+          title={t('BRAND', 'Brand')}
+          open={isBrandFilter}
+          onClose={() => setIsBrandFilter(false)}
+        >
+          <ReportsBrandFilter
+            {...props} onClose={() => setIsBrandFilter(false)}
           />
         </Modal>
       </HeatMapContainer>
