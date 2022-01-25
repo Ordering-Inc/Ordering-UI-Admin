@@ -47,13 +47,15 @@ export const UsersListingHeader = (props) => {
           </IconButton>
         )}
         <h1>{title}</h1>
-        <IconButton
-          color='dark'
-          className='tour_btn'
-          onClick={() => handleOpenTour()}
-        >
-          <LifePreserver />
-        </IconButton>
+        {(isDriversPage || isDriversManagersPage) && (
+          <IconButton
+            color='dark'
+            className='tour_btn'
+            onClick={() => handleOpenTour()}
+          >
+            <LifePreserver />
+          </IconButton>
+        )}
       </HeaderTitleContainer>
       <ActionContainer>
         <Button

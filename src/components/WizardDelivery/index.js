@@ -94,7 +94,7 @@ export const WizardDelivery = (props) => {
         <HelperContent>
           <Stars />
           <p>
-            <span>{t('THATS_IT', 'THAT’S IT')}</span>!! {t('TOUR_CONFIGURED_DELIVERY_SYSTEM', 'You configured your first Delivery system')}
+            <span>{t('THATS_IT', 'THAT’S IT')}!!</span> {t('TOUR_CONFIGURED_DELIVERY_SYSTEM', 'You configured your first Delivery system')}
           </p>
         </HelperContent>
       ),

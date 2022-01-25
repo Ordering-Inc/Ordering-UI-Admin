@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
-import { getStorageItem, removeStorageItem } from '../../utils'
+import { getStorageItem, setStorageItem, removeStorageItem } from '../../utils'
 import { Button, IconButton } from '../../styles/Buttons'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../contexts/InfoShareContext'

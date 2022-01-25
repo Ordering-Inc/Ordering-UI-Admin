@@ -22,7 +22,7 @@ export const HelperContent = styled.div`
     margin: 0;
 
     span {
-      font-weight: 500;
+      font-weight: 600;
     }
   }
 

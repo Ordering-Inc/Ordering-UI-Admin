@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { UsersList as UsersListController } from 'ordering-components-admin'
-import { getStorageItem, removeStorageItem } from '../../utils'
+import { getStorageItem, removeStorageItem, setStorageItem } from '../../utils'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
@@ -109,6 +109,15 @@ const UsersListingUI = (props) => {
     }
   }, [usersList])
 
+  const handleSetStorage = async () => {
+    const isVisited = await getStorageItem('isVistedDriverPage')
+    if (!isVisited) {
+      await setStorageItem('isVistedDriverPage', true)
+      if (isDriversPage) {
+        handleOpenTour()
+      }
+    }
+  }
   const getDataFromStorage = async () => {
     const value = await getStorageItem('isFromDeliveryDrivers', true)
     if (isDriversManagersPage && value) {
@@ -117,6 +126,7 @@ const UsersListingUI = (props) => {
     }
   }
   useEffect(() => {
+    handleSetStorage()
     getDataFromStorage()
   }, [])
 
