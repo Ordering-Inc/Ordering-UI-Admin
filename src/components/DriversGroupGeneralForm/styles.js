@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.form`
   min-height: calc(100% - 160px);
 
   > button {

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useConfig } from 'ordering-components-admin'
+import { useForm } from 'react-hook-form'
+
 import { Input, DefaultSelect, Checkbox, Button } from '../../styles'
 import { Alert } from '../Confirm'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
-import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
 
 import {
   Container,
@@ -21,10 +22,14 @@ export const DriversGroupGeneralForm = (props) => {
     useAdvanced,
     setUseAdvanced,
     handleUpdateDriversGroup,
-    handleAddDriversGroup
+    handleAddDriversGroup,
+
+    isTourOpen,
+    handleNextClick
   } = props
 
   const [, t] = useLanguage()
+  const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [configState] = useConfig()
 
@@ -60,8 +65,61 @@ export const DriversGroupGeneralForm = (props) => {
     handleUpdateDriversGroup(changes)
   }
 
+  const onSubmit = () => {
+    if (driversGroupState.driversGroup) {
+      handleUpdateDriversGroup(changesState)
+    } else {
+      if (!changesState?.administrator_id) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
+        })
+        return
+      }
+      if (typeof changesState?.priority === 'undefined') {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The priority is required.').replace('_attribute_', t('PRIORITY', 'Priority'))]
+        })
+        return
+      }
+      if (changesState?.type === 0 && !changesState?.drivers) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The drivers is required.').replace('_attribute_', t('DRIVERS', 'Drivers'))]
+        })
+        return
+      }
+      if (changesState?.type === 1 && !changesState?.driver_companies) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The Driver company is required.').replace('_attribute_', t('DRIVER_COMPANY', 'Driver company'))]
+        })
+        return
+      }
+
+      if (isTourOpen) {
+        handleNextClick()
+      } else {
+        handleAddDriversGroup()
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map((error) => error.message)
+      })
+    }
+  }, [errors])
+
   return (
-    <Container>
+    <Container
+      data-tour='tour_fill_group'
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <InputWrapper>
         <label>{t('NAME', 'Name')}</label>
         <Input
@@ -69,6 +127,13 @@ export const DriversGroupGeneralForm = (props) => {
           value={changesState?.name ?? driversGroupState.driversGroup?.name ?? ''}
           onChange={e => handleChangesState({ name: e.target.value })}
           placeholder={t('NAME', 'Name')}
+          ref={register({
+            required: t(
+              'VALIDATION_ERROR_REQUIRED',
+              'Project is required'
+            ).replace('_attribute_', t('NAME', 'Name'))
+          })}
+          autoComplete='off'
         />
       </InputWrapper>
       <InputWrapper>
@@ -106,9 +171,6 @@ export const DriversGroupGeneralForm = (props) => {
           onChange={val => handleChangesState({ priority: val })}
         />
       </InputWrapper>
-      {!driversGroupState.driversGroup && (
-        <DriversGroupBusinesses {...props} />
-      )}
       {driversGroupState.driversGroup && autoAssignType !== 'basic' && (
         <CheckboxContainer>
           <Checkbox
@@ -121,10 +183,14 @@ export const DriversGroupGeneralForm = (props) => {
       <Button
         borderRadius='8px'
         color='primary'
+        type='submit'
         disabled={Object.keys(changesState).length === 0}
-        onClick={() => driversGroupState.driversGroup ? handleUpdateDriversGroup(changesState) : handleAddDriversGroup()}
       >
-        {driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
+        {isTourOpen ? t('NEXT', 'Next') : (
+          <>
+            {driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')}
+          </>
+        )}
       </Button>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
