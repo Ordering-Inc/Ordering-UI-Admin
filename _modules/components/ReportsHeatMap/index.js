@@ -15,17 +15,19 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _Buttons = require("../../styles/Buttons");
 
-var _AnalyticsCalendar = require("../AnalyticsCalendar");
-
 var _styledComponents = require("styled-components");
 
 var _Modal = require("../Modal");
 
-var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
-
 var _Confirm = require("../Confirm");
 
+var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
+
 var _ReportsDriverFilter = require("../ReportsDriverFilter");
+
+var _ReportsBrandFilter = require("../ReportsBrandFilter");
+
+var _AnalyticsCalendar = require("../AnalyticsCalendar");
 
 var _styles = require("./styles");
 
@@ -58,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
-  var _reportData$content, _reportData$content2, _reportData$content2$, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _reportData$content3, _reportData$content4, _theme$images, _theme$images$icons;
+  var _reportData$content, _filterList$franchise, _reportData$content2, _reportData$content2$, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _reportData$content3, _reportData$content4, _theme$images, _theme$images$icons;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -106,8 +108,13 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
 
   var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      isHeat = _useState12[0],
-      setIsHeat = _useState12[1];
+      isBrandFilter = _useState12[0],
+      setIsBrandFilter = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isHeat = _useState14[0],
+      setIsHeat = _useState14[1];
 
   var theme = (0, _styledComponents.useTheme)(); // const googleMapsApiKey = configs?.google_maps_api_key?.value
 
@@ -162,6 +169,10 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
   }, [reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : _reportData$content.locations]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeatMapContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('HEAT_MAP_WITH', 'Heat map with')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
+      return setIsBrandFilter(true);
+    }
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
   }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -208,7 +219,8 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsBusinessFilter.AnalyticsBusinessFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBusinessFilter(false);
-    }
+    },
+    isFranchise: true
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "50%",
     height: "80vh",
@@ -237,6 +249,19 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
       return setIsDriverGroupFilter(false);
     },
     setAvailableDriverIds: setAvailableDriverIds
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('BRAND', 'Brand'),
+    open: isBrandFilter,
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
+    }
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('HEAT_MAP', 'Heat map'),
     content: alertState.content,

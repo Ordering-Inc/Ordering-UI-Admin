@@ -21,6 +21,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
+var _reactBootstrap = require("react-bootstrap");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50,7 +52,8 @@ var UsersListingHeader = function UsersListingHeader(props) {
       onSearch = props.onSearch,
       handleOpenUserAddForm = props.handleOpenUserAddForm,
       isDriversPage = props.isDriversPage,
-      isDriversManagersPage = props.isDriversManagersPage;
+      isDriversManagersPage = props.isDriversManagersPage,
+      handleOpenTour = props.handleOpenTour;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -66,12 +69,22 @@ var UsersListingHeader = function UsersListingHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, title), (isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    placement: "bottom",
+    overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, t('START_TUTORIAL', 'Start tutorial'))
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "dark",
+    className: "tour_btn",
+    onClick: function onClick() {
+      return handleOpenTour();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenUserAddForm();
-    }
+    },
+    "data-tour": "tour_add"
   }, isDriversPage ? t('ADD_DRIVER', 'Add driver') : isDriversManagersPage ? t('ADD_DRIVER_MANAGER', 'Add driver manager') : t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_UsersExportCSV.UsersExportCSV, {
     deafultUserTypesSelected: deafultUserTypesSelected,
     disabledActiveStateCondition: disabledActiveStateCondition,

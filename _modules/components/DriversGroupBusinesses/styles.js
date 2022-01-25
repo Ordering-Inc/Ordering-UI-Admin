@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 160px);\n  > button {\n    position: sticky;\n    top: 100%;\n    height: 42px;\n    margin-top: 20px;\n  }\n"])));
+var Container = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 130px);\n  > button {\n    position: sticky;\n    top: 100%;\n    height: 42px;\n    margin-top: 20px;\n  }\n"])));
 
 exports.Container = Container;
 
@@ -39,7 +39,7 @@ var ButtonGroup = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.ButtonGroup = ButtonGroup;
 
-var BusinessesContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: calc(100% - 130px);\n  overflow: auto;\n"])));
+var BusinessesContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: calc(100% - 175px);\n  overflow: auto;\n"])));
 
 exports.BusinessesContainer = BusinessesContainer;
 

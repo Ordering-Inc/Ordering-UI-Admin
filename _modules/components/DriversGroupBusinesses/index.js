@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactHookForm = require("react-hook-form");
+
 var _styles = require("../../styles");
 
 var _SearchBar = require("../SearchBar");
@@ -48,12 +50,18 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       actionState = props.actionState,
       changesState = props.changesState,
       handleUpdateDriversGroup = props.handleUpdateDriversGroup,
+      handleAddDriversGroup = props.handleAddDriversGroup,
       handleSelectAllBusiness = props.handleSelectAllBusiness,
-      selectedBusinessIds = props.selectedBusinessIds;
+      selectedBusinessIds = props.selectedBusinessIds,
+      isTourOpen = props.isTourOpen,
+      handleDeliveryTourCompleted = props.handleDeliveryTourCompleted;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit;
 
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -64,6 +72,11 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       filteredBusinesses = _useState4[0],
       setFilteredBusinesses = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isSuccessSubmitted = _useState6[0],
+      setIsSuccessSubmitted = _useState6[1];
 
   (0, _react.useEffect)(function () {
     var _filteredBusinesses = [];
@@ -78,7 +91,33 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
 
     setFilteredBusinesses(_filteredBusinesses);
   }, [searchValue]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+
+  var onSubmit = function onSubmit() {
+    if (driversGroupState.driversGroup) {
+      handleUpdateDriversGroup(changesState);
+    } else {
+      handleAddDriversGroup();
+
+      if (isTourOpen) {
+        setIsSuccessSubmitted(true);
+      }
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!isTourOpen || !isSuccessSubmitted || actionState !== null && actionState !== void 0 && actionState.loading) return;
+
+    if (actionState !== null && actionState !== void 0 && actionState.error) {
+      setIsSuccessSubmitted(false);
+      return;
+    }
+
+    handleDeliveryTourCompleted();
+  }, [isTourOpen, isSuccessSubmitted, actionState === null || actionState === void 0 ? void 0 : actionState.loading]);
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+    "data-tour": "tour_select_business",
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
     lazyLoad: true,
@@ -109,14 +148,11 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       bgimage: business === null || business === void 0 ? void 0 : business.logo,
       alt: "logo"
     })), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.name));
-  })), driversGroupState.driversGroup && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
-    disabled: Object.keys(changesState).length === 0,
-    onClick: function onClick() {
-      return handleUpdateDriversGroup(changesState);
-    }
-  }, t('SAVE', 'Save')));
+    disabled: Object.keys(changesState).length === 0
+  }, driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')));
 };
 
 exports.DriversGroupBusinesses = DriversGroupBusinesses;

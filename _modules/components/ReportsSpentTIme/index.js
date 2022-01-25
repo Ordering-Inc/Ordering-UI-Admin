@@ -174,7 +174,7 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
     return hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.ReportsBusinessSpendContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TIME', 'Time')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_styles.ReportsBusinessSpendContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DRIVER_TIME', 'Driver Time')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setIsDriverGroupFilter(true);
     }

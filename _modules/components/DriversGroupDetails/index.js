@@ -65,7 +65,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
   var driversGroupState = props.driversGroupState,
       actionState = props.actionState,
       handleParentSidebarMove = props.handleParentSidebarMove,
-      handleDeleteDriversGroup = props.handleDeleteDriversGroup;
+      handleDeleteDriversGroup = props.handleDeleteDriversGroup,
+      handleNextTour = props.handleNextTour;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -111,7 +112,13 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       setAlertState = _useState10[1];
 
   (0, _react.useEffect)(function () {
-    var _driversGroupMenus = useAdvanced && autoAssignType !== 'basic' ? [{
+    var _driversGroupMenus = !driversGroupState.driversGroup ? [{
+      key: 'general',
+      value: t('GENERAL', 'General')
+    }, {
+      key: 'businesses',
+      value: t('BUSINESSES', 'Businesses')
+    }] : useAdvanced && autoAssignType !== 'basic' ? [{
       key: 'general',
       value: t('GENERAL', 'General')
     }, {
@@ -156,6 +163,11 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     });
   };
 
+  var handleNextClick = function handleNextClick() {
+    setShowMenu('businesses');
+    handleNextTour();
+  };
+
   (0, _react.useEffect)(function () {
     var _driversGroupState$dr, _driversGroupState$dr2;
 
@@ -181,7 +193,7 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     onClick: function onClick() {
       return onDeleteGroup();
     }
-  }, t('DELETE', 'Delete'))))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')))), driversGroupState.driversGroup && /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, driversGroupMenus.map(function (menu) {
+  }, t('DELETE', 'Delete'))))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')))), /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, driversGroupMenus.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: menu.key,
       active: menu.key === showMenu,
@@ -189,9 +201,10 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
         return setShowMenu(menu.key);
       }
     }, menu.value);
-  }))), (showMenu === 'general' || !driversGroupState.driversGroup) && /*#__PURE__*/_react.default.createElement(_DriversGroupGeneralForm.DriversGroupGeneralForm, _extends({}, props, {
+  }))), showMenu === 'general' && /*#__PURE__*/_react.default.createElement(_DriversGroupGeneralForm.DriversGroupGeneralForm, _extends({}, props, {
     useAdvanced: useAdvanced,
-    setUseAdvanced: setUseAdvanced
+    setUseAdvanced: setUseAdvanced,
+    handleNextClick: handleNextClick
   })), showMenu === 'businesses' && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), showMenu === 'paymethods' && /*#__PURE__*/_react.default.createElement(_DriversGroupPaymethods.DriversGroupPaymethods, props), showMenu === 'advanced_logistics' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogistics.DriversGroupLogistics, props), showMenu === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogs.DriversGroupLogs, {
     driversGroupId: (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.id
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {

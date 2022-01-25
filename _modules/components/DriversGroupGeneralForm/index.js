@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactHookForm = require("react-hook-form");
+
 var _styles = require("../../styles");
 
 var _Confirm = require("../Confirm");
@@ -18,8 +20,6 @@ var _Confirm = require("../Confirm");
 var _DriversGroupDrivers = require("../DriversGroupDrivers");
 
 var _DriversGroupCompanies = require("../DriversGroupCompanies");
-
-var _DriversGroupBusinesses = require("../DriversGroupBusinesses");
 
 var _styles2 = require("./styles");
 
@@ -49,11 +49,18 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       useAdvanced = props.useAdvanced,
       setUseAdvanced = props.setUseAdvanced,
       handleUpdateDriversGroup = props.handleUpdateDriversGroup,
-      handleAddDriversGroup = props.handleAddDriversGroup;
+      handleAddDriversGroup = props.handleAddDriversGroup,
+      isTourOpen = props.isTourOpen,
+      handleNextClick = props.handleNextClick;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit,
+      register = _useForm.register,
+      errors = _useForm.errors;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -106,7 +113,64 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     handleUpdateDriversGroup(changes);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  var onSubmit = function onSubmit() {
+    if (driversGroupState.driversGroup) {
+      handleUpdateDriversGroup(changesState);
+    } else {
+      if (!(changesState !== null && changesState !== void 0 && changesState.administrator_id)) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
+        });
+        return;
+      }
+
+      if (typeof (changesState === null || changesState === void 0 ? void 0 : changesState.priority) === 'undefined') {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The priority is required.').replace('_attribute_', t('PRIORITY', 'Priority'))]
+        });
+        return;
+      }
+
+      if ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 && !(changesState !== null && changesState !== void 0 && changesState.drivers)) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The drivers is required.').replace('_attribute_', t('DRIVERS', 'Drivers'))]
+        });
+        return;
+      }
+
+      if ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 1 && !(changesState !== null && changesState !== void 0 && changesState.driver_companies)) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_REQUIRED', 'The Driver company is required.').replace('_attribute_', t('DRIVER_COMPANY', 'Driver company'))]
+        });
+        return;
+      }
+
+      if (isTourOpen) {
+        handleNextClick();
+      } else {
+        handleAddDriversGroup();
+      }
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(function (error) {
+          return error.message;
+        })
+      });
+    }
+  }, [errors]);
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+    "data-tour": "tour_fill_group",
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     value: (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : (_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: function onChange(e) {
@@ -114,7 +178,11 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
         name: e.target.value
       });
     },
-    placeholder: t('NAME', 'Name')
+    placeholder: t('NAME', 'Name'),
+    ref: register({
+      required: t('VALIDATION_ERROR_REQUIRED', 'Project is required').replace('_attribute_', t('NAME', 'Name'))
+    }),
+    autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_MANAGER', 'Select driver manager'),
     options: driversManagersOptions,
@@ -143,7 +211,7 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
         priority: val
       });
     }
-  })), !driversGroupState.driversGroup && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), driversGroupState.driversGroup && autoAssignType !== 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+  })), driversGroupState.driversGroup && autoAssignType !== 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     checked: useAdvanced,
     onChange: function onChange(e) {
       return handleLogistic(e.target.checked);
@@ -151,11 +219,9 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
   }), /*#__PURE__*/_react.default.createElement("p", null, t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic'))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
-    disabled: Object.keys(changesState).length === 0,
-    onClick: function onClick() {
-      return driversGroupState.driversGroup ? handleUpdateDriversGroup(changesState) : handleAddDriversGroup();
-    }
-  }, driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add')), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    type: "submit",
+    disabled: Object.keys(changesState).length === 0
+  }, isTourOpen ? t('NEXT', 'Next') : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

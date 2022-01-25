@@ -157,8 +157,8 @@ var Reports = function Reports(props) {
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Vr, null)
   }, {
     id: 11,
-    name: t('TIME', 'Time'),
-    description: t('TIME_DESC', 'Time description'),
+    name: t('DRIVER_TIME', 'Driver Time'),
+    description: t('DRIVER_TIME_DESC', 'Driver time description'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Alarm, null)
   }, {
     id: 12,

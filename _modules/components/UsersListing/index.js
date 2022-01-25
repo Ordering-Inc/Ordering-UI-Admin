@@ -7,11 +7,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.UsersListing = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _utils = require("../../utils");
 
 var _UsersListingHeader = require("../UsersListingHeader");
 
@@ -27,17 +31,25 @@ var _SideBar = require("../SideBar");
 
 var _UserAddForm = require("../UserAddForm");
 
+var _WizardDelivery = require("../WizardDelivery");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -101,6 +113,16 @@ var UsersListingUI = function UsersListingUI(props) {
       openUserAddForm = _useState8[0],
       setOpenUserAddForm = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isTourOpen = _useState10[0],
+      setIsTourOpen = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(isDriversManagersPage ? 2 : 0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      currentTourStep = _useState12[0],
+      setCurrentTourStep = _useState12[1];
+
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
     setOpenUser(null);
@@ -124,6 +146,19 @@ var UsersListingUI = function UsersListingUI(props) {
 
     setIsOpenUserDetails(false);
     setOpenUserAddForm(true);
+
+    if (isTourOpen) {
+      setTimeout(function () {
+        setCurrentTourStep(isDriversManagersPage ? 3 : 1);
+      }, 600);
+    }
+  };
+
+  var _handleOpenTour = function handleOpenTour() {
+    setCurrentTourStep(isDriversManagersPage ? 2 : 0);
+    setIsOpenUserDetails(false);
+    setOpenUserAddForm(false);
+    setIsTourOpen(true);
   };
 
   (0, _react.useEffect)(function () {
@@ -143,6 +178,83 @@ var UsersListingUI = function UsersListingUI(props) {
       setIsOpenUserDetails(true);
     }
   }, [usersList]);
+
+  var handleSetStorage = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var isVisited;
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return (0, _utils.getStorageItem)('isVistedDriverPage', true);
+
+            case 2:
+              isVisited = _context.sent;
+
+              if (isVisited) {
+                _context.next = 7;
+                break;
+              }
+
+              _context.next = 6;
+              return (0, _utils.setStorageItem)('isVistedDriverPage', true);
+
+            case 6:
+              if (isDriversPage) {
+                _handleOpenTour();
+              }
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleSetStorage() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var getDataFromStorage = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      var value;
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return (0, _utils.getStorageItem)('isFromDeliveryDrivers', true);
+
+            case 2:
+              value = _context2.sent;
+
+              if (isDriversManagersPage && value) {
+                (0, _utils.removeStorageItem)('isFromDeliveryDrivers');
+
+                _handleOpenTour();
+              }
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getDataFromStorage() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  (0, _react.useEffect)(function () {
+    if (usersList.loading) return;
+    handleSetStorage();
+    getDataFromStorage();
+  }, [usersList.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
     deafultUserTypesSelected: deafultUserTypesSelected,
     disabledActiveStateCondition: disabledActiveStateCondition,
@@ -156,7 +268,10 @@ var UsersListingUI = function UsersListingUI(props) {
     searchValue: searchValue,
     onSearch: onSearch,
     handleDeleteSeveralUsers: handleDeleteSeveralUsers,
-    handleOpenUserAddForm: handleOpenUserAddForm
+    handleOpenUserAddForm: handleOpenUserAddForm,
+    handleOpenTour: function handleOpenTour() {
+      return _handleOpenTour();
+    }
   }), isShowActiveStateFilter && /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
@@ -199,8 +314,13 @@ var UsersListingUI = function UsersListingUI(props) {
     handleSuccessAdd: handleSuccessAddUser,
     onClose: function onClose() {
       return setOpenUserAddForm(false);
-    }
-  })));
+    },
+    isTourOpen: isTourOpen
+  })), isTourOpen && /*#__PURE__*/_react.default.createElement(_WizardDelivery.WizardDelivery, {
+    isTourOpen: isTourOpen,
+    setIsTourOpen: setIsTourOpen,
+    currentStep: currentTourStep
+  }));
 };
 
 var UsersListing = function UsersListing(props) {

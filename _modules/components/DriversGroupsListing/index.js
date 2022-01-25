@@ -7,9 +7,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DriversGroupsListing = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
+
+var _utils = require("../../utils");
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -27,11 +33,21 @@ var _SideBar = require("../SideBar");
 
 var _DriversGroupDetails = require("../DriversGroupDetails");
 
+var _reactBootstrap = require("react-bootstrap");
+
+var _WizardDelivery = require("../WizardDelivery");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -52,6 +68,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
+  var _history$location2, _history$location2$st;
+
   var driversGroupsState = props.driversGroupsState,
       setDriversGroupsState = props.setDriversGroupsState,
       driversManagersList = props.driversManagersList,
@@ -66,6 +84,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       handleUpdateDriversGroup = props.handleUpdateDriversGroup,
       handleDeleteDriversGroup = props.handleDeleteDriversGroup,
       driversCompanyList = props.driversCompanyList;
+  var history = (0, _reactRouterDom.useHistory)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -113,10 +132,26 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       curDriversGroup = _useState12[0],
       setCurDriversGroup = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isTourOpen = _useState14[0],
+      setIsTourOpen = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(4),
+      _useState16 = _slicedToArray(_useState15, 2),
+      currentTourStep = _useState16[0],
+      setCurrentTourStep = _useState16[1];
+
   var handleOpenDetails = function handleOpenDetails(driverGroup) {
     setMoveDistance(0);
     setCurDriversGroup(driverGroup);
     setOpenDetails(true);
+
+    if (!driverGroup) {
+      setTimeout(function () {
+        setCurrentTourStep(5);
+      }, 600);
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -140,14 +175,84 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     });
   };
 
+  var handleOpenTour = function handleOpenTour() {
+    setOpenDetails(false);
+    setCurrentTourStep(4);
+    setIsTourOpen(true);
+  };
+
+  (0, _react.useEffect)(function () {
+    var _history$location, _history$location$sta;
+
+    if ((_history$location = history.location) !== null && _history$location !== void 0 && (_history$location$sta = _history$location.state) !== null && _history$location$sta !== void 0 && _history$location$sta.isFromTourDriversGroup) {
+      handleOpenTour();
+    }
+  }, [(_history$location2 = history.location) === null || _history$location2 === void 0 ? void 0 : (_history$location2$st = _history$location2.state) === null || _history$location2$st === void 0 ? void 0 : _history$location2$st.isFromTourDriversGroup]);
+
+  var handleNextTour = function handleNextTour() {
+    setTimeout(function () {
+      setCurrentTourStep(6);
+    }, 1000);
+  };
+
+  var handleDeliveryTourCompleted = function handleDeliveryTourCompleted() {
+    setTimeout(function () {
+      setCurrentTourStep(7);
+    }, 500);
+  };
+
+  var getDataFromStorage = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var value;
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return (0, _utils.getStorageItem)('isFromDeliveryDriversGroup', true);
+
+            case 2:
+              value = _context.sent;
+
+              if (value) {
+                (0, _utils.removeStorageItem)('isFromDeliveryDriversGroup');
+                handleOpenTour();
+              }
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getDataFromStorage() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  (0, _react.useEffect)(function () {
+    getDataFromStorage();
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriversGroupsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderLeftContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
-      return handleMenuCollapse(false);
+      return handleMenuCollapse();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_GROUPS', 'Drivers groups'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderRightContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_GROUPS', 'Drivers groups')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    placement: "bottom",
+    overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, t('START_TUTORIAL', 'Start tutorial'))
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "dark",
+    className: "tour_btn",
+    onClick: function onClick() {
+      return handleOpenTour();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles.HeaderRightContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
+    "data-tour": "tour_add_group",
     onClick: function onClick() {
       return handleOpenDetails(null);
     }
@@ -199,7 +304,10 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     },
     onClose: function onClose() {
       return setOpenDetails(false);
-    }
+    },
+    isTourOpen: isTourOpen,
+    handleNextTour: handleNextTour,
+    handleDeliveryTourCompleted: handleDeliveryTourCompleted
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
@@ -235,6 +343,10 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     },
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
+  }), isTourOpen && /*#__PURE__*/_react.default.createElement(_WizardDelivery.WizardDelivery, {
+    isTourOpen: isTourOpen,
+    setIsTourOpen: setIsTourOpen,
+    currentStep: currentTourStep
   }));
 };
 

@@ -42,11 +42,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
-  var paymethods = props.paymethods,
+  var driversGroupState = props.driversGroupState,
+      paymethods = props.paymethods,
       actionState = props.actionState,
       changesState = props.changesState,
       selectedPaymethodIds = props.selectedPaymethodIds,
       handleUpdateDriversGroup = props.handleUpdateDriversGroup,
+      handleAddDriversGroup = props.handleAddDriversGroup,
       handleSelectPaymethod = props.handleSelectPaymethod,
       handleSelectAllPaymethod = props.handleSelectAllPaymethod;
 
@@ -110,9 +112,9 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
     color: "primary",
     disabled: Object.keys(changesState).length === 0,
     onClick: function onClick() {
-      return handleUpdateDriversGroup(changesState);
+      return driversGroupState.driversGroup ? handleUpdateDriversGroup(changesState) : handleAddDriversGroup();
     }
-  }, t('SAVE', 'Save'))));
+  }, driversGroupState.driversGroup ? t('SAVE', 'Save') : t('ADD', 'Add'))));
 };
 
 exports.DriversGroupPaymethods = DriversGroupPaymethods;

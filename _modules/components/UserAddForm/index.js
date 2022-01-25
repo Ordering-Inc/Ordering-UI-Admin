@@ -81,12 +81,17 @@ var UserAddFormUI = function UserAddFormUI(props) {
       handleChangeUserType = props.handleChangeUserType,
       handlechangeImage = props.handlechangeImage,
       isDriversPage = props.isDriversPage,
-      isDriversManagersPage = props.isDriversManagersPage;
+      isDriversManagersPage = props.isDriversManagersPage,
+      isTourOpen = props.isTourOpen;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
 
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -105,6 +110,11 @@ var UserAddFormUI = function UserAddFormUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       alertState = _useState6[0],
       setAlertState = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isSuccessSubmitted = _useState8[0],
+      setIsSuccessSubmitted = _useState8[1];
 
   var emailInput = (0, _react.useRef)(null);
   var inputRef = (0, _react.useRef)(null);
@@ -136,6 +146,10 @@ var UserAddFormUI = function UserAddFormUI(props) {
 
     if (Object.keys(formState.changes).length > 0 && isPhoneNumberValid) {
       handleButtonAddClick();
+
+      if (isTourOpen) {
+        setIsSuccessSubmitted(true);
+      }
     }
   };
 
@@ -236,6 +250,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     if (!(formState !== null && formState !== void 0 && formState.loading) && formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
 
+      setIsSuccessSubmitted(false);
       setAlertState({
         open: true,
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
@@ -279,9 +294,33 @@ var UserAddFormUI = function UserAddFormUI(props) {
       }
     });
   }, [formMethods]);
+  (0, _react.useEffect)(function () {
+    var _formState$result5;
+
+    if (!isTourOpen || !isSuccessSubmitted || formState !== null && formState !== void 0 && formState.loading || formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.error) return;
+
+    if (isDriversPage) {
+      (0, _utils.setStorageItem)('isFromDeliveryDrivers', true);
+      setTimeout(function () {
+        events.emit('go_to_page', {
+          page: 'drivers_managers'
+        });
+      }, 500);
+    }
+
+    if (isDriversManagersPage) {
+      (0, _utils.setStorageItem)('isFromDeliveryDriversGroup', true);
+      setTimeout(function () {
+        events.emit('go_to_page', {
+          page: 'drivers_groups'
+        });
+      }, 500);
+    }
+  }, [isTourOpen, isSuccessSubmitted, formState === null || formState === void 0 ? void 0 : formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
-    isCheckout: isCheckout
+    isCheckout: isCheckout,
+    "data-tour": "tour_fill"
   }, /*#__PURE__*/_react.default.createElement("h1", null, isDriversPage ? t('NEW_DRIVER', 'New driver') : isDriversManagersPage ? t('NEW_DRIVER_MANAGER', 'New driver manager') : t('USERS_REGISTER', 'New user')), /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
@@ -309,7 +348,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout
   }).map(function (field) {
-    var _formState$result5, _formState$result6, _formState$changes$fi, _formState$result7, _formState$result8, _formState$changes$fi2;
+    var _formState$result6, _formState$result7, _formState$changes$fi, _formState$result8, _formState$result9, _formState$changes$fi2;
 
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
@@ -319,7 +358,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
       name: field.code,
       className: "form",
       placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result[field.code] : (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : '',
+      defaultValue: formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && _formState$result6.result ? formState === null || formState === void 0 ? void 0 : (_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : _formState$result7.result[field.code] : (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : '',
       onChange: handleChangeInputEmail,
       ref: function ref(e) {
         emailInput.current = e;
@@ -331,7 +370,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
       name: field.code,
       className: "form",
       placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: formState !== null && formState !== void 0 && (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && _formState$result7.result ? formState === null || formState === void 0 ? void 0 : (_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.result[field.code] : (_formState$changes$fi2 = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : '',
+      defaultValue: formState !== null && formState !== void 0 && (_formState$result8 = formState.result) !== null && _formState$result8 !== void 0 && _formState$result8.result ? formState === null || formState === void 0 ? void 0 : (_formState$result9 = formState.result) === null || _formState$result9 === void 0 ? void 0 : _formState$result9.result[field.code] : (_formState$changes$fi2 = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : '',
       onChange: handleChangeInput,
       ref: formMethods.register({
         required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field === null || field === void 0 ? void 0 : field.name, " is required")).replace('_attribute_', t(field === null || field === void 0 ? void 0 : field.name, field.code)) : null
