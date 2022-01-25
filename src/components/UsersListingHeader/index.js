@@ -6,6 +6,7 @@ import { SearchBar } from '../SearchBar'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 import {
   HeaderContainer,
@@ -48,13 +49,22 @@ export const UsersListingHeader = (props) => {
         )}
         <h1>{title}</h1>
         {(isDriversPage || isDriversManagersPage) && (
-          <IconButton
-            color='dark'
-            className='tour_btn'
-            onClick={() => handleOpenTour()}
+          <OverlayTrigger
+            placement='bottom'
+            overlay={
+              <Tooltip>
+                {t('START_TUTORIAL', 'Start tutorial')}
+              </Tooltip>
+            }
           >
-            <LifePreserver />
-          </IconButton>
+            <IconButton
+              color='dark'
+              className='tour_btn'
+              onClick={() => handleOpenTour()}
+            >
+              <LifePreserver />
+            </IconButton>
+          </OverlayTrigger>
         )}
       </HeaderTitleContainer>
       <ActionContainer>

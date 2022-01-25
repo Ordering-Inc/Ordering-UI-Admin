@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
-import { getStorageItem, setStorageItem, removeStorageItem } from '../../utils'
+import { getStorageItem, removeStorageItem } from '../../utils'
 import { Button, IconButton } from '../../styles/Buttons'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
@@ -10,7 +10,7 @@ import { DriversGroupsList } from '../DriversGroupsList'
 import { Alert, Confirm } from '../Confirm'
 import { SideBar } from '../SideBar'
 import { DriversGroupDetails } from '../DriversGroupDetails'
-
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { WizardDelivery } from '../WizardDelivery'
 
 import {
@@ -131,13 +131,22 @@ const DriversGroupsListingUI = (props) => {
               </IconButton>
             )}
             <h1>{t('DRIVERS_GROUPS', 'Drivers groups')}</h1>
-            <IconButton
-              color='dark'
-              className='tour_btn'
-              onClick={() => handleOpenTour()}
+            <OverlayTrigger
+              placement='bottom'
+              overlay={
+                <Tooltip>
+                  {t('START_TUTORIAL', 'Start tutorial')}
+                </Tooltip>
+              }
             >
-              <LifePreserver />
-            </IconButton>
+              <IconButton
+                color='dark'
+                className='tour_btn'
+                onClick={() => handleOpenTour()}
+              >
+                <LifePreserver />
+              </IconButton>
+            </OverlayTrigger>
           </HeaderLeftContainer>
           <HeaderRightContainer>
             <Button
