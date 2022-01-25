@@ -61,7 +61,6 @@ export const DriversGroupBusinesses = (props) => {
 
   useEffect(() => {
     if (!isTourOpen || !isSuccessSubmitted || actionState?.loading) return
-    console.log(actionState)
     if (actionState?.error) {
       setIsSuccessSubmitted(false)
       return

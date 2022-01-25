@@ -101,8 +101,9 @@ const DriversGroupsListingUI = (props) => {
   }
 
   const handleDeliveryTourCompleted = () => {
-    console.log('completed ')
-    setCurrentTourStep(7)
+    setTimeout(() => {
+      setCurrentTourStep(7)
+    }, 500)
   }
 
   const getDataFromStorage = async () => {

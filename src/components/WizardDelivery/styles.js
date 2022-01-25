@@ -16,6 +16,7 @@ export const HelperContent = styled.div`
     `}
   }
   p {
+    flex: 1;
     font-size: 14px;
     line-height: 24px;
     margin: 0;
@@ -28,5 +29,6 @@ export const HelperContent = styled.div`
   > svg {
     color: #FFC700;
     font-size: 30px;
+    margin-right: 20px;
   }
 `
