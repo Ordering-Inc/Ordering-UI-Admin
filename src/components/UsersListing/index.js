@@ -110,9 +110,13 @@ const UsersListingUI = (props) => {
   }, [usersList])
 
   const handleSetStorage = async () => {
-    const isVisited = await getStorageItem('isVistedDriverPage', true)
-    if (!isVisited) {
-      await setStorageItem('isVistedDriverPage', true)
+    const preVisited = await getStorageItem('visited', true)
+    if (!preVisited?.drivers_page) {
+      const visited = {
+        ...preVisited,
+        drivers_page: true
+      }
+      await setStorageItem('visited', visited, true)
       if (isDriversPage) {
         handleOpenTour()
       }

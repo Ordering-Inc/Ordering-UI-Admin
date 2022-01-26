@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { BusinessList } from '../BusinessList'
+import { BusinessesList } from '../BusinessesList'
 import { DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import { BusinessListingHeader } from '../BusinessListingHeader'
 import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
@@ -8,8 +8,10 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import { BusinessDetails } from '../BusinessDetails'
-import { AddBusinessSidebar } from '../AddBusinessSidebar'
 import { ImportersLateralBar } from '../ImportersLateralBar'
+import { AddBusinessForm } from '../AddBusinessForm'
+import { SideBar } from '../SideBar'
+
 import {
   BusinessListingContainer,
   ViewContainer,
@@ -122,7 +124,7 @@ const BusinessessListingUI = (props) => {
           handleChangeBusinessType={handleChangeBusinessType}
           setBusinessTypes={setBusinessTypes}
         />
-        <BusinessList
+        <BusinessesList
           viewMethod={viewMethod}
           businessList={businessList}
           pagination={pagination}
@@ -151,11 +153,15 @@ const BusinessessListingUI = (props) => {
         />
       )}
       {openAddBusiness && (
-        <AddBusinessSidebar
+        <SideBar
+          id='add_business_form'
           open={openAddBusiness}
           onClose={() => setOpenAddBusiness(false)}
-          handleSucessAddBusiness={onhandleSuccessAddBusiness}
-        />
+        >
+          <AddBusinessForm
+            handleSucessAddBusiness={onhandleSuccessAddBusiness}
+          />
+        </SideBar>
       )}
       {openImportCsvForm && (
         <ImportersLateralBar

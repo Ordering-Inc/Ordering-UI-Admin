@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Pagination } from '../Pagination'
+import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
+import { Button } from '../../styles'
+import { SingleBusiness } from '../SingleBusiness'
+import { useTheme } from 'styled-components'
+import { getStorageItem, setStorageItem } from '../../utils'
 
 import {
   BusinessListContainer,
@@ -8,12 +13,11 @@ import {
   WrapperPagination,
   BusinessCardContainer,
   AddNewButtonLink,
-  BusinessListBottomContainer
+  BusinessListBottomContainer,
+  AddFirstStoreContainer
 } from './styles'
-import { SingleBusiness } from '../SingleBusiness'
-import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 
-export const BusinessList = (props) => {
+export const BusinessesList = (props) => {
   const {
     viewMethod,
     businessList,
@@ -28,8 +32,11 @@ export const BusinessList = (props) => {
     getPageBusinesses,
     searchValue
   } = props
+
+  const theme = useTheme()
   const [, t] = useLanguage()
 
+  const [isFirstVisited, setIsFirstVisited] = useState(false)
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     id: true,
@@ -127,6 +134,22 @@ export const BusinessList = (props) => {
   useEffect(() => {
     setCurrentPage(1)
   }, [searchValue])
+
+  const handleSetStorage = async () => {
+    const preVisited = await getStorageItem('visited', true)
+    if (!preVisited?.businesses_page) {
+      const visited = {
+        ...preVisited,
+        businesses_page: true
+      }
+      await setStorageItem('visited', visited, true)
+      setIsFirstVisited(true)
+    }
+  }
+
+  useEffect(() => {
+    handleSetStorage()
+  }, [])
 
   return (
     <>
@@ -239,6 +262,19 @@ export const BusinessList = (props) => {
             ))
           )}
         </BusinessCardContainer>
+      )}
+
+      {isFirstVisited && !businessList.loading && businessList.businesses.length === 0 && (
+        <AddFirstStoreContainer>
+          <img src={theme.images.tutorials.businessTutorial1} alt='' />
+          <Button
+            borderRadius='8px'
+            color='primary'
+            onClick={() => handleOpenAddBusiness()}
+          >
+            {t('ADD_FIRST_STORE', 'Add your first store')}
+          </Button>
+        </AddFirstStoreContainer>
       )}
     </>
   )

@@ -142,7 +142,7 @@ const AddBusinessFormUI = (props) => {
         <DetailsHeader>
           <LeftHeader>
             <BusinessName>
-              {t('ADD_BUSINESS', 'Add business')}
+              {t('NEW_BUSINESS', 'New business')}
             </BusinessName>
           </LeftHeader>
           <RightHeader>

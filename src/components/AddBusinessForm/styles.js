@@ -16,9 +16,9 @@ export const DetailsHeader = styled.div`
 
 export const BusinessName = styled.h1`
   color: ${props => props.theme.colors.headingColor};
-  font-size: 24px;
+  font-size: 20px;
   margin: 0px;
-  font-weight: 600;
+  font-weight: 700;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
@@ -134,12 +134,14 @@ export const InputWrapper = styled.div`
 
   label {
     color: ${props => props.theme.colors.headingColor};
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 12px;
   }
 
   input,
   textarea {
     color: ${props => props.theme.colors.headingColor};
+    font-size: 14px;
   }
 
   .select {
