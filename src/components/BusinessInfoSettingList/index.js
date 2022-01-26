@@ -20,7 +20,8 @@ export const BusinessInfoSettingList = (props) => {
     { key: 'location', content: t('LOCATION', 'Location') },
     { key: 'description', content: t('DESCRIPTION', 'Description') },
     { key: 'images', content: t('IMAGES', 'Images') },
-    { key: 'videos', content: t('BUSINESS_VIDEOS', 'Videos') }
+    { key: 'videos', content: t('BUSINESS_VIDEOS', 'Videos') },
+    { key: 'seo_options', content: t('SEO_OPTIONS', 'SEO Options') }
   ]
   return (
     <>

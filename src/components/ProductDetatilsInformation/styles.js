@@ -129,3 +129,18 @@ export const InventoryWrapper = styled.div`
     `}
   }
 `
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  
+  > span {
+    font-size: 16px;
+    font-weight: 600;
+
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+  }
+`
