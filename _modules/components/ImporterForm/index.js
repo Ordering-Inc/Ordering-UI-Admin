@@ -17,8 +17,6 @@ var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSqua
 
 var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
 
-var _useWindowSize = require("../../hooks/useWindowSize");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Confirm = require("../Confirm");
@@ -76,7 +74,8 @@ var ImporterFormUI = function ImporterFormUI(props) {
       selectedImporter = props.selectedImporter,
       clearImorterForm = props.clearImorterForm,
       setIsEdit = props.setIsEdit,
-      editState = props.editState;
+      editState = props.editState,
+      editImporter = props.editImporter;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -135,9 +134,8 @@ var ImporterFormUI = function ImporterFormUI(props) {
   }];
 
   var onSubmit = function onSubmit() {
-    if (Object.keys(formState.changes).length > 0) {
-      handleCreateImporter();
-    }
+    if (Object.keys(formState.changes).length === 0) return;
+    if (Object.keys(editState).length > 0) editImporter();else handleCreateImporter();
   };
 
   var onNewFiledSubmit = function onNewFiledSubmit() {

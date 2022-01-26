@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.UploadImageIcon = exports.TitleWrapper = exports.SkeletonWrapper = exports.SaveBtnWrapper = exports.LogoImage = exports.Label = exports.FormGroup = exports.FormControl = exports.FormContainer = exports.DetailHeaderContainer = exports.DetailContainer = exports.ContactUsContainer = exports.BusinessImg = exports.ActionSelectorWrapper = void 0;
+exports.UploadImageIconContainer = exports.UploadImageIcon = exports.TitleWrapper = exports.SocialShareImage = exports.SkeletonWrapper = exports.SaveBtnWrapper = exports.LogoImage = exports.Label = exports.FormGroup = exports.FormControl = exports.FormContainer = exports.DetailHeaderContainer = exports.DetailContainer = exports.ContactUsContainer = exports.BusinessImg = exports.ActionSelectorWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -113,3 +113,7 @@ exports.Label = Label;
 var SaveBtnWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  padding: 20px 0;\n  button {\n    padding: 6px 20px;\n  }\n"])));
 
 exports.SaveBtnWrapper = SaveBtnWrapper;
+
+var SocialShareImage = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  height: 72px;\n  width: 72px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  background: #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 7.6px;\n    height: 100%;\n    overflow: hidden;\n    position: relative;\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])));
+
+exports.SocialShareImage = SocialShareImage;

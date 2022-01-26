@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
-  var _siteState$site, _formState$changes, _siteState$site2, _siteState$site3, _formState$changes2, _formState$changes3, _formState$changes4, _siteState$site4, _siteState$site5, _formState$changes5, _formState$changes6, _ref, _formState$changes$na, _formState$changes7, _siteState$site6, _ref2, _formState$changes$co, _formState$changes8, _siteState$site7, _ref3, _formState$changes$ur, _formState$changes9, _siteState$site8, _ref4, _formState$changes$so, _formState$changes10, _siteState$site9, _ref5, _formState$changes$re, _formState$changes11, _siteState$site10, _ref6, _formState$changes$tr, _formState$changes12, _siteState$site11, _ref7, _formState$changes$de, _formState$changes13, _siteState$site12, _ref8, _formState$changes$ch, _formState$changes14, _siteState$site13, _ref9, _formState$changes$ca, _formState$changes15, _siteState$site14, _ref10, _formState$changes$bu, _formState$changes16, _siteState$site15, _ref11, _formState$changes$ca2, _formState$changes17, _siteState$site16, _ref12, _formState$changes$pr, _formState$changes18, _siteState$site17, _ref13, _formState$changes$pr2, _formState$changes19, _siteState$site18;
+  var _siteState$site, _formState$changes, _siteState$site2, _siteState$site3, _formState$changes2, _formState$changes3, _formState$changes4, _siteState$site4, _siteState$site5, _formState$changes5, _formState$changes6, _ref, _formState$changes$na, _formState$changes7, _siteState$site6, _ref2, _formState$changes$co, _formState$changes8, _siteState$site7, _ref3, _formState$changes$ur, _formState$changes9, _siteState$site8, _formState$changes10, _siteState$site9, _siteState$site10, _formState$changes11, _formState$changes12, _ref4, _formState$changes$re, _formState$changes13, _siteState$site11, _ref5, _formState$changes$tr, _formState$changes14, _siteState$site12, _ref6, _formState$changes$de, _formState$changes15, _siteState$site13, _ref7, _formState$changes$ch, _formState$changes16, _siteState$site14, _ref8, _formState$changes$ca, _formState$changes17, _siteState$site15, _ref9, _formState$changes$bu, _formState$changes18, _siteState$site16, _ref10, _formState$changes$ca2, _formState$changes19, _siteState$site17, _ref11, _formState$changes$pr, _formState$changes20, _siteState$site18, _ref12, _formState$changes$pr2, _formState$changes21, _siteState$site19;
 
   var siteState = props.siteState,
       formState = props.formState,
@@ -91,6 +91,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
 
   var headerImageInputRef = (0, _react.useRef)(null);
   var logoImageInputRef = (0, _react.useRef)(null);
+  var socialShareInputRef = (0, _react.useRef)(null);
   var moreOptions = [{
     value: 0,
     content: t('DELETE', 'Delete')
@@ -103,6 +104,10 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
 
     if (type === 'logo') {
       logoImageInputRef.current.click();
+    }
+
+    if (type === 'social_share') {
+      socialShareInputRef.current.click();
     }
   };
 
@@ -296,27 +301,44 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SOCIAL_SHARE', 'Social share')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
-    name: "social_share",
-    placeholder: t('URL', 'Url'),
-    value: (_ref4 = (_formState$changes$so = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.social_share) !== null && _formState$changes$so !== void 0 ? _formState$changes$so : (_siteState$site9 = siteState.site) === null || _siteState$site9 === void 0 ? void 0 : _siteState$site9.social_share) !== null && _ref4 !== void 0 ? _ref4 : '',
-    onChange: function onChange(e) {
-      return handleChangeInput(e);
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SOCIAL_SHARE', 'Social share')), /*#__PURE__*/_react.default.createElement(_styles2.SocialShareImage, {
+    onClick: function onClick() {
+      return handleClickImage('social_share');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: function onFiles(files) {
+      return handleFiles(files, 'social_share');
     },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('SOCIAL_SHARE', 'Social share'))
-      }
-    })
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
+    childRef: function childRef(e) {
+      socialShareInputRef.current = e;
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+    onDrop: function onDrop(dataTransfer) {
+      return handleFiles(dataTransfer.files, 'social_share');
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes10 = formState.changes) !== null && _formState$changes10 !== void 0 && _formState$changes10.social_share) || formState.error ? ((_siteState$site9 = siteState.site) === null || _siteState$site9 === void 0 ? void 0 : _siteState$site9.social_share) && /*#__PURE__*/_react.default.createElement("img", {
+    src: (_siteState$site10 = siteState.site) === null || _siteState$site10 === void 0 ? void 0 : _siteState$site10.social_share,
+    alt: "social share image",
+    loading: "lazy"
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.social_share) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.social_share,
+    alt: "social share image",
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
+    small: true
+  }, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, {
+    small: true
+  }, /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop')))))))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('RESET_PASSWORD_URL_TEMPLATE', 'Reset password url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     name: "reset_password_url_template",
     placeholder: t('URL', 'Url'),
-    value: (_ref5 = (_formState$changes$re = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.reset_password_url_template) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : (_siteState$site10 = siteState.site) === null || _siteState$site10 === void 0 ? void 0 : _siteState$site10.reset_password_url_template) !== null && _ref5 !== void 0 ? _ref5 : '',
+    value: (_ref4 = (_formState$changes$re = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.reset_password_url_template) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : (_siteState$site11 = siteState.site) === null || _siteState$site11 === void 0 ? void 0 : _siteState$site11.reset_password_url_template) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -332,7 +354,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "track_order_url_template",
-    value: (_ref6 = (_formState$changes$tr = formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.track_order_url_template) !== null && _formState$changes$tr !== void 0 ? _formState$changes$tr : (_siteState$site11 = siteState.site) === null || _siteState$site11 === void 0 ? void 0 : _siteState$site11.track_order_url_template) !== null && _ref6 !== void 0 ? _ref6 : '',
+    value: (_ref5 = (_formState$changes$tr = formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.track_order_url_template) !== null && _formState$changes$tr !== void 0 ? _formState$changes$tr : (_siteState$site12 = siteState.site) === null || _siteState$site12 === void 0 ? void 0 : _siteState$site12.track_order_url_template) !== null && _ref5 !== void 0 ? _ref5 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -348,7 +370,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     name: "description",
     rows: 5,
     placeholder: t('SHORT_PROMOTION_ABOUT', 'Write a little description'),
-    value: (_ref7 = (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : (_siteState$site12 = siteState.site) === null || _siteState$site12 === void 0 ? void 0 : _siteState$site12.description) !== null && _ref7 !== void 0 ? _ref7 : '',
+    value: (_ref6 = (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : (_siteState$site13 = siteState.site) === null || _siteState$site13 === void 0 ? void 0 : _siteState$site13.description) !== null && _ref6 !== void 0 ? _ref6 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -358,7 +380,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "checkout_url_template",
-    value: (_ref8 = (_formState$changes$ch = formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.checkout_url_template) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : (_siteState$site13 = siteState.site) === null || _siteState$site13 === void 0 ? void 0 : _siteState$site13.checkout_url_template) !== null && _ref8 !== void 0 ? _ref8 : '',
+    value: (_ref7 = (_formState$changes$ch = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.checkout_url_template) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : (_siteState$site14 = siteState.site) === null || _siteState$site14 === void 0 ? void 0 : _siteState$site14.checkout_url_template) !== null && _ref7 !== void 0 ? _ref7 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -374,7 +396,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "cart_url_template",
-    value: (_ref9 = (_formState$changes$ca = formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.cart_url_template) !== null && _formState$changes$ca !== void 0 ? _formState$changes$ca : (_siteState$site14 = siteState.site) === null || _siteState$site14 === void 0 ? void 0 : _siteState$site14.cart_url_template) !== null && _ref9 !== void 0 ? _ref9 : '',
+    value: (_ref8 = (_formState$changes$ca = formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.cart_url_template) !== null && _formState$changes$ca !== void 0 ? _formState$changes$ca : (_siteState$site15 = siteState.site) === null || _siteState$site15 === void 0 ? void 0 : _siteState$site15.cart_url_template) !== null && _ref8 !== void 0 ? _ref8 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -390,7 +412,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "business_url_template",
-    value: (_ref10 = (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.business_url_template) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : (_siteState$site15 = siteState.site) === null || _siteState$site15 === void 0 ? void 0 : _siteState$site15.business_url_template) !== null && _ref10 !== void 0 ? _ref10 : '',
+    value: (_ref9 = (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.business_url_template) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.business_url_template) !== null && _ref9 !== void 0 ? _ref9 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -406,7 +428,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "category_url_template",
-    value: (_ref11 = (_formState$changes$ca2 = formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.category_url_template) !== null && _formState$changes$ca2 !== void 0 ? _formState$changes$ca2 : (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.category_url_template) !== null && _ref11 !== void 0 ? _ref11 : '',
+    value: (_ref10 = (_formState$changes$ca2 = formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.category_url_template) !== null && _formState$changes$ca2 !== void 0 ? _formState$changes$ca2 : (_siteState$site17 = siteState.site) === null || _siteState$site17 === void 0 ? void 0 : _siteState$site17.category_url_template) !== null && _ref10 !== void 0 ? _ref10 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -422,7 +444,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "product_url_template",
-    value: (_ref12 = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.product_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site17 = siteState.site) === null || _siteState$site17 === void 0 ? void 0 : _siteState$site17.product_url_template) !== null && _ref12 !== void 0 ? _ref12 : '',
+    value: (_ref11 = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.product_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site18 = siteState.site) === null || _siteState$site18 === void 0 ? void 0 : _siteState$site18.product_url_template) !== null && _ref11 !== void 0 ? _ref11 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -438,7 +460,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "profile_url_template",
-    value: (_ref13 = (_formState$changes$pr2 = formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.profile_url_template) !== null && _formState$changes$pr2 !== void 0 ? _formState$changes$pr2 : (_siteState$site18 = siteState.site) === null || _siteState$site18 === void 0 ? void 0 : _siteState$site18.profile_url_template) !== null && _ref13 !== void 0 ? _ref13 : '',
+    value: (_ref12 = (_formState$changes$pr2 = formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.profile_url_template) !== null && _formState$changes$pr2 !== void 0 ? _formState$changes$pr2 : (_siteState$site19 = siteState.site) === null || _siteState$site19 === void 0 ? void 0 : _siteState$site19.profile_url_template) !== null && _ref12 !== void 0 ? _ref12 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },

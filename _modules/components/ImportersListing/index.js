@@ -50,7 +50,8 @@ var ImportersListingUI = function ImportersListingUI(props) {
       paginationProps = props.paginationProps,
       handleDeleteImporter = props.handleDeleteImporter,
       setExtraOpen = props.setExtraOpen,
-      handleSuccessAddImporter = props.handleSuccessAddImporter;
+      handleSuccessAddImporter = props.handleSuccessAddImporter,
+      handleSuccessUpdateImporter = props.handleSuccessUpdateImporter;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -121,7 +122,8 @@ var ImportersListingUI = function ImportersListingUI(props) {
     onClose: function onClose() {
       return setOpenNewImporter(false);
     },
-    handleSuccessAdd: handleSuccessAddImporter
+    handleSuccessAdd: handleSuccessAddImporter,
+    handleSuccessUpdateImporter: handleSuccessUpdateImporter
   }))), openImportCsv && /*#__PURE__*/_react.default.createElement(_styles.ImportCSVForm, null, /*#__PURE__*/_react.default.createElement(_ImporterJobForm.ImporterJobForm, {
     onClose: function onClose() {
       return setOpenImportCsv(false);
