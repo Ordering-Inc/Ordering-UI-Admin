@@ -244,3 +244,26 @@ export const SaveBtnWrapper = styled.div`
     padding: 6px 20px;
   }
 `
+export const SocialShareImage = styled.div`
+  height: 72px;
+  width: 72px;
+  overflow: hidden;
+  cursor: -webkit-grab;
+  cursor: grab;
+  background: #E9ECEF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+
+  img,
+  div {
+    width: 100%;
+    border-radius: 7.6px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  };
+
+  img{
+    object-fit: cover;
+  }
+`
