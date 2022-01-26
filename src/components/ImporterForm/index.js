@@ -3,9 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Row, Col } from 'react-bootstrap'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import BsTrash from '@meronex/icons/bs/BsTrash'
-import { useWindowSize } from '../../hooks/useWindowSize'
 import { useLanguage, ImporterForm as ImporterFormController } from 'ordering-components-admin'
-
 import { Alert } from '../Confirm'
 import { IconButton, Button } from '../../styles/Buttons'
 import { XLg } from 'react-bootstrap-icons'
@@ -46,7 +44,8 @@ export const ImporterFormUI = (props) => {
     selectedImporter,
     clearImorterForm,
     setIsEdit,
-    editState
+    editState,
+    editImporter
   } = props
 
   const [, t] = useLanguage()
@@ -80,9 +79,9 @@ export const ImporterFormUI = (props) => {
   ]
 
   const onSubmit = () => {
-    if (Object.keys(formState.changes).length > 0) {
-      handleCreateImporter()
-    }
+    if (Object.keys(formState.changes).length === 0) return
+    if (Object.keys(editState).length > 0) editImporter()
+    else handleCreateImporter()
   }
 
   const onNewFiledSubmit = () => {
