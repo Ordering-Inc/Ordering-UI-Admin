@@ -29,7 +29,8 @@ import {
   FormControl,
   Label,
   FormGroup,
-  SaveBtnWrapper
+  SaveBtnWrapper,
+  SocialShareImage
 } from './styles'
 
 const OrderingProductDetailsUI = (props) => {
@@ -51,6 +52,7 @@ const OrderingProductDetailsUI = (props) => {
 
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
+  const socialShareInputRef = useRef(null)
 
   const moreOptions = [
     { value: 0, content: t('DELETE', 'Delete') }
@@ -60,9 +62,11 @@ const OrderingProductDetailsUI = (props) => {
     if (type === 'header') {
       headerImageInputRef.current.click()
     }
-
     if (type === 'logo') {
       logoImageInputRef.current.click()
+    }
+    if (type === 'social_share') {
+      socialShareInputRef.current.click()
     }
   }
 
@@ -279,24 +283,37 @@ const OrderingProductDetailsUI = (props) => {
           </FormControl>
           <FormControl className='col-md-12'>
             <Label>{t('SOCIAL_SHARE', 'Social share')}</Label>
-            <Input
-              type='text'
-              name='social_share'
-              placeholder={t('URL', 'Url')}
-              value={
-                formState?.changes?.social_share ?? siteState.site?.social_share ?? ''
-              }
-              onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('SOCIAL_SHARE', 'Social share'))
-                }
-              })}
-            />
+            <SocialShareImage
+              onClick={() => handleClickImage('social_share')}
+            >
+              <ExamineClick
+                onFiles={files => handleFiles(files, 'social_share')}
+                childRef={(e) => { socialShareInputRef.current = e }}
+                accept='image/png, image/jpeg, image/jpg'
+                disabled={formState.loading}
+              >
+                <DragAndDrop
+                  onDrop={dataTransfer => handleFiles(dataTransfer.files, 'social_share')}
+                  accept='image/png, image/jpeg, image/jpg'
+                  disabled={formState.loading}
+                >
+                  {formState.loading
+                    ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
+                    : ((!formState.changes?.social_share || formState.error)
+                      ? siteState.site?.social_share &&
+                        (<img src={siteState.site?.social_share} alt='social share image' loading='lazy' />)
+                      : formState?.changes?.social_share &&
+                        <img src={formState?.changes?.social_share} alt='social share image' loading='lazy' />
+                    )}
+                  <UploadImageIconContainer small>
+                    <UploadImageIcon small>
+                      <BsCardImage />
+                      <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                    </UploadImageIcon>
+                  </UploadImageIconContainer>
+                </DragAndDrop>
+              </ExamineClick>
+            </SocialShareImage>
           </FormControl>
           <FormControl className='col-md-12'>
             <Label>{t('RESET_PASSWORD_URL_TEMPLATE', 'Reset password url template')}</Label>
