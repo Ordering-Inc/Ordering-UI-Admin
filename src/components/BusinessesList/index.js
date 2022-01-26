@@ -5,7 +5,6 @@ import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { Button } from '../../styles'
 import { SingleBusiness } from '../SingleBusiness'
 import { useTheme } from 'styled-components'
-import { getStorageItem, setStorageItem } from '../../utils'
 
 import {
   BusinessListContainer,
@@ -30,13 +29,13 @@ export const BusinessesList = (props) => {
     handleOpenAddBusiness,
     detailsBusinessId,
     getPageBusinesses,
-    searchValue
+    searchValue,
+    isFirstVisited
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
 
-  const [isFirstVisited, setIsFirstVisited] = useState(false)
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     id: true,
@@ -135,25 +134,9 @@ export const BusinessesList = (props) => {
     setCurrentPage(1)
   }, [searchValue])
 
-  const handleSetStorage = async () => {
-    const preVisited = await getStorageItem('visited', true)
-    if (!preVisited?.businesses_page) {
-      const visited = {
-        ...preVisited,
-        businesses_page: true
-      }
-      await setStorageItem('visited', visited, true)
-      setIsFirstVisited(true)
-    }
-  }
-
-  useEffect(() => {
-    handleSetStorage()
-  }, [])
-
   return (
     <>
-      {viewMethod === 'list' && (
+      {/* {viewMethod === 'list' && (
         <>
           <BusinessListContainer>
             <BusinessListTable>
@@ -262,9 +245,10 @@ export const BusinessesList = (props) => {
             ))
           )}
         </BusinessCardContainer>
-      )}
+      )} */}
 
-      {isFirstVisited && !businessList.loading && businessList.businesses.length === 0 && (
+      {/* {isFirstVisited && !businessList.loading && businessList.businesses.length === 0 && ( */}
+      {isFirstVisited && (
         <AddFirstStoreContainer>
           <img src={theme.images.tutorials.businessTutorial1} alt='' />
           <Button

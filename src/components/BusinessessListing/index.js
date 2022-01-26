@@ -11,6 +11,7 @@ import { BusinessDetails } from '../BusinessDetails'
 import { ImportersLateralBar } from '../ImportersLateralBar'
 import { AddBusinessForm } from '../AddBusinessForm'
 import { SideBar } from '../SideBar'
+import { getStorageItem, setStorageItem } from '../../utils'
 
 import {
   BusinessListingContainer,
@@ -38,6 +39,7 @@ const BusinessessListingUI = (props) => {
 
   const query = new URLSearchParams(useLocation().search)
 
+  const [isFirstVisited, setIsFirstVisited] = useState(false)
   const [viewMethod, setViewMethod] = useState('list')
   const [openBusinessDetails, setOpenBusinessDetails] = useState(false)
   const [detailsBusiness, setDetailsBusiness] = useState(null)
@@ -89,6 +91,22 @@ const BusinessessListingUI = (props) => {
     }
   }, [])
 
+  const handleSetStorage = async () => {
+    const preVisited = await getStorageItem('visited', true)
+    if (!preVisited?.businesses_page) {
+      const visited = {
+        ...preVisited,
+        businesses_page: true
+      }
+      await setStorageItem('visited', visited, true)
+      setIsFirstVisited(true)
+    }
+  }
+
+  useEffect(() => {
+    handleSetStorage()
+  }, [])
+
   return (
     <>
       <BusinessListingContainer>
@@ -137,6 +155,7 @@ const BusinessessListingUI = (props) => {
           handleOpenBusinessDetails={handleOpenBusinessDetails}
           handleOpenAddBusiness={handleOpenAddBusiness}
           searchValue={searchValue}
+          isFirstVisited={isFirstVisited}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (
