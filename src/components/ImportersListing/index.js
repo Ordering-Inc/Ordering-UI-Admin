@@ -21,7 +21,8 @@ export const ImportersListingUI = (props) => {
     paginationProps,
     handleDeleteImporter,
     setExtraOpen,
-    handleSuccessAddImporter
+    handleSuccessAddImporter,
+    handleSuccessUpdateImporter
   } = props
   const [, t] = useLanguage()
   const [openNewImporter, setOpenNewImporter] = useState(false)
@@ -88,6 +89,7 @@ export const ImportersListingUI = (props) => {
               selectedImporter={selectedImporter}
               onClose={() => setOpenNewImporter(false)}
               handleSuccessAdd={handleSuccessAddImporter}
+              handleSuccessUpdateImporter={handleSuccessUpdateImporter}
             />
           </NewImporterWrapper>
         )}
