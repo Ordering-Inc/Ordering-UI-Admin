@@ -7,6 +7,7 @@ import { BusinessLocation } from '../BusinessLocation'
 import { BusinessDescription } from '../BusinessDescription'
 import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
+import { SeoOptions } from '../SeoOptions'
 import {
   InfoConatiner
 } from './styles'
@@ -80,6 +81,15 @@ export const BusinessInformation = (props) => {
             business={business}
             handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
             handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
+          />
+        )}
+        {selectedInfoItem === 'seo_options' && (
+          <SeoOptions
+            data={business}
+            formState={formState}
+            setFormState={setFormState}
+            handleUpdateClick={handleUpdateBusinessClick}
+            isBusinessSeo
           />
         )}
       </InfoConatiner>
