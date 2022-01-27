@@ -4,7 +4,7 @@ import { darken } from 'polished'
 export const BusinessDetailsContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 30px 20px 20px 20px;
   position: relative;
 `
 
@@ -25,24 +25,6 @@ export const BusinessName = styled.h1`
   ` : css`
     margin-right: 10px;
   `}
-`
-
-export const LeftHeader = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-export const RightHeader = styled.div`
-  display: flex;
-  align-items: center;
-
-  > button:first-child {
-    ${props => props.theme?.rlt ? css`
-      margin-left: 8px;
-    ` : css`
-      margin-right: 8px;
-    `}
-  }
 `
 
 export const FormInput = styled.form`

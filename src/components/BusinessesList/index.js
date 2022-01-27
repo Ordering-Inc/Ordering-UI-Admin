@@ -136,7 +136,7 @@ export const BusinessesList = (props) => {
 
   return (
     <>
-      {/* {viewMethod === 'list' && (
+      {viewMethod === 'list' && (
         <>
           <BusinessListContainer>
             <BusinessListTable>
@@ -245,10 +245,9 @@ export const BusinessesList = (props) => {
             ))
           )}
         </BusinessCardContainer>
-      )} */}
+      )}
 
-      {/* {isFirstVisited && !businessList.loading && businessList.businesses.length === 0 && ( */}
-      {isFirstVisited && (
+      {isFirstVisited && !businessList.loading && businessList.businesses.length === 0 && (
         <AddFirstStoreContainer>
           <img src={theme.images.tutorials.businessTutorial1} alt='' />
           <Button

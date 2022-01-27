@@ -178,6 +178,7 @@ const BusinessessListingUI = (props) => {
           onClose={() => setOpenAddBusiness(false)}
         >
           <AddBusinessForm
+            isFirstVisited={isFirstVisited}
             handleSucessAddBusiness={onhandleSuccessAddBusiness}
           />
         </SideBar>
