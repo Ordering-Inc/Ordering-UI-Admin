@@ -31,6 +31,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -44,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
-  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$result2, _formState$result3, _formState$result3$re, _formState$changes$na, _formState$changes4, _formState$result4, _formState$result5, _formState$result5$re, _formState$changes$pr, _formState$changes5, _formState$result6, _formState$result7, _formState$result7$re, _formState$changes$de, _formState$changes6, _formState$result8, _formState$result9, _formState$result9$re, _formState$changes$in, _formState$changes7, _formState$changes8, _formState$changes9, _formState$result10, _formState$result11, _formState$result11$r, _formState$changes$qu, _formState$changes10;
+  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$result2, _formState$result3, _formState$result3$re, _formState$changes$na, _formState$changes4, _formState$result4, _formState$result5, _formState$result5$re, _formState$changes$pr, _formState$changes5, _formState$result6, _formState$result7, _formState$result7$re, _formState$changes$de, _formState$changes6, _formState$result8, _formState$result9, _formState$result9$re, _formState$changes7, _formState$result10, _formState$result11, _formState$result11$r, _formState$changes$in, _formState$changes8, _formState$changes9, _formState$changes10, _formState$result12, _formState$result13, _formState$result13$r, _formState$changes$qu, _formState$changes11;
 
   var product = props.product,
       formState = props.formState,
@@ -75,6 +81,14 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
       setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)({
+    isAutoGenerate: false,
+    autoCodeText: product === null || product === void 0 ? void 0 : product.slug
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      autoGenerateCode = _useState4[0],
+      setAutoGenerate = _useState4[1];
 
   var handleClickImage = function handleClickImage() {
     productImageInputRef.current.click();
@@ -113,6 +127,27 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     });
   };
 
+  var stringToSlug = function stringToSlug(str) {
+    str = str.replace(/^\s+|\s+$/g, ""); // trim
+
+    str = str.toLowerCase(); // remove accents, swap ñ for n, etc
+
+    var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    var to = "aaaaaaeeeeiiiioooouuuunc------";
+
+    for (var i = 0, l = from.length; i < l; i++) {
+      str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+    .replace(/\s+/g, "_") // collapse whitespace and replace by _
+    .replace(/-+/g, "_") // collapse dashes
+    .replace(/^-+/, "") // trim - from start of text
+    .replace(/-+$/, ""); // trim - from end of text
+
+    return str;
+  };
+
   var onSubmit = function onSubmit() {
     if (Object.keys(formState.changes).length > 0) {
       handleButtonUpdateClick();
@@ -130,6 +165,23 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       });
     }
   }, [formMethods.errors]);
+  (0, _react.useEffect)(function () {
+    if (autoGenerateCode.isAutoGenerate) {
+      var generateCode = {
+        target: {
+          name: 'slug',
+          value: formState.changes.name ? stringToSlug(formState.changes.name) : stringToSlug(product.name)
+        }
+      };
+      setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
+        autoCodeText: generateCode.target.value
+      }));
+      handleChangeInput(generateCode);
+      setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
+        isAutoGenerate: false
+      }));
+    }
+  }, [autoGenerateCode]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles2.ProductImage, {
@@ -191,17 +243,37 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InventoryWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('INVENTORY', 'Inventory')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: formState !== null && formState !== void 0 && (_formState$result8 = formState.result) !== null && _formState$result8 !== void 0 && _formState$result8.result ? formState === null || formState === void 0 ? void 0 : (_formState$result9 = formState.result) === null || _formState$result9 === void 0 ? void 0 : (_formState$result9$re = _formState$result9.result) === null || _formState$result9$re === void 0 ? void 0 : _formState$result9$re.inventoried : (_formState$changes$in = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.inventoried) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : product === null || product === void 0 ? void 0 : product.inventoried,
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "slug",
+    placeholder: t('SLUG', 'Slug'),
+    onChange: handleChangeInput,
+    disabled: formState.loading,
+    autoComplete: "off",
+    value: formState !== null && formState !== void 0 && (_formState$result8 = formState.result) !== null && _formState$result8 !== void 0 && _formState$result8.result ? formState === null || formState === void 0 ? void 0 : (_formState$result9 = formState.result) === null || _formState$result9 === void 0 ? void 0 : (_formState$result9$re = _formState$result9.result) === null || _formState$result9$re === void 0 ? void 0 : _formState$result9$re.slug : (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.slug) || (product === null || product === void 0 ? void 0 : product.slug)
+  }), /*#__PURE__*/_react.default.createElement(_styles2.Wrapper, {
+    style: {
+      paddingTop: 10
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "7.6px",
+    disabled: formState.loading,
+    onClick: function onClick() {
+      return setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
+        isAutoGenerate: true
+      }));
+    }
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')))), /*#__PURE__*/_react.default.createElement(_styles2.InventoryWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('INVENTORY', 'Inventory')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: formState !== null && formState !== void 0 && (_formState$result10 = formState.result) !== null && _formState$result10 !== void 0 && _formState$result10.result ? formState === null || formState === void 0 ? void 0 : (_formState$result11 = formState.result) === null || _formState$result11 === void 0 ? void 0 : (_formState$result11$r = _formState$result11.result) === null || _formState$result11$r === void 0 ? void 0 : _formState$result11$r.inventoried : (_formState$changes$in = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.inventoried) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : product === null || product === void 0 ? void 0 : product.inventoried,
     onChange: function onChange(val) {
       return handleChangeFormState({
         inventoried: val
       });
     }
-  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.inventoried) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.inventoried : product === null || product === void 0 ? void 0 : product.inventoried) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('QUANTITY', 'Quantity')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.inventoried) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.inventoried : product === null || product === void 0 ? void 0 : product.inventoried) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('QUANTITY', 'Quantity')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "quantity",
     placeholder: t('QUANTITY', 'Quantity'),
-    value: formState !== null && formState !== void 0 && (_formState$result10 = formState.result) !== null && _formState$result10 !== void 0 && _formState$result10.result ? formState === null || formState === void 0 ? void 0 : (_formState$result11 = formState.result) === null || _formState$result11 === void 0 ? void 0 : (_formState$result11$r = _formState$result11.result) === null || _formState$result11$r === void 0 ? void 0 : _formState$result11$r.quantity : (_formState$changes$qu = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.quantity) !== null && _formState$changes$qu !== void 0 ? _formState$changes$qu : product === null || product === void 0 ? void 0 : product.quantity,
+    value: formState !== null && formState !== void 0 && (_formState$result12 = formState.result) !== null && _formState$result12 !== void 0 && _formState$result12.result ? formState === null || formState === void 0 ? void 0 : (_formState$result13 = formState.result) === null || _formState$result13 === void 0 ? void 0 : (_formState$result13$r = _formState$result13.result) === null || _formState$result13$r === void 0 ? void 0 : _formState$result13$r.quantity : (_formState$changes$qu = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.quantity) !== null && _formState$changes$qu !== void 0 ? _formState$changes$qu : product === null || product === void 0 ? void 0 : product.quantity,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",

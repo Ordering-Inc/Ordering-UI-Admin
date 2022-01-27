@@ -57,6 +57,9 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
   }, {
     key: 'videos',
     content: t('BUSINESS_VIDEOS', 'Videos')
+  }, {
+    key: 'seo_options',
+    content: t('SEO_OPTIONS', 'SEO Options')
   }];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingListConatiner, null, /*#__PURE__*/_react.default.createElement(_DragScroll.DragScroll, null, listOptions.map(function (option) {
     return !((user === null || user === void 0 ? void 0 : user.level) === 2 && option.key === 'owner') && /*#__PURE__*/_react.default.createElement(_styles.Tab, {

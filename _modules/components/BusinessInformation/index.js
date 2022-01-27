@@ -25,6 +25,8 @@ var _BusinessImages = require("../BusinessImages");
 
 var _BusinessVideos = require("../BusinessVideos");
 
+var _SeoOptions = require("../SeoOptions");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -104,6 +106,12 @@ var BusinessInformation = function BusinessInformation(props) {
     handleSucessDeleteBusinessGallery: function handleSucessDeleteBusinessGallery(id) {
       return handleSuccessDeleteBusinessItem('gallery', id);
     }
+  }), selectedInfoItem === 'seo_options' && /*#__PURE__*/_react.default.createElement(_SeoOptions.SeoOptions, {
+    data: business,
+    formState: formState,
+    setFormState: setFormState,
+    handleUpdateClick: handleUpdateBusinessClick,
+    isBusinessSeo: true
   })));
 };
 

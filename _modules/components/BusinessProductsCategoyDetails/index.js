@@ -13,15 +13,17 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _useWindowSize2 = require("../../hooks/useWindowSize");
+var _BusinessCategoryInfoSettingList = require("../BusinessCategoryInfoSettingList");
 
-var _utils = require("../../utils");
+var _BusinessProductsCategoyInfo = require("../BusinessProductsCategoyInfo");
+
+var _SeoOptions = require("../SeoOptions");
+
+var _useWindowSize2 = require("../../hooks/useWindowSize");
 
 var _Confirm = require("../Confirm");
 
 var _styles = require("../../styles");
-
-var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
@@ -56,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI(props) {
-  var _configState$configs, _configState$configs$, _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes6;
+  var _formState$changes, _formState$changes2, _formState$changes3;
 
   var open = props.open,
       onClose = props.onClose,
@@ -78,12 +80,6 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
-  var useParentCategory = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.use_parent_category) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
-
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
@@ -100,21 +96,19 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       alertState = _useState4[0],
       setAlertState = _useState4[1];
 
-  var categoryTypeImageInputRef = (0, _react.useRef)(null);
-
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      parentCategoriesOptions = _useState6[0],
-      setParentCategoriesOptions = _useState6[1];
-
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
+
+  var _useState7 = (0, _react.useState)('information'),
       _useState8 = _slicedToArray(_useState7, 2),
-      confirm = _useState8[0],
-      setConfirm = _useState8[1];
+      selectedInfoItem = _useState8[0],
+      setSelctedInfoItem = _useState8[1];
 
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
@@ -123,36 +117,6 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
   var handleClose = function handleClose() {
     onClose();
     setIsMenuOpen(false);
-  };
-
-  var handleClickImage = function handleClickImage() {
-    categoryTypeImageInputRef.current.click();
-  };
-
-  var handleFiles = function handleFiles(files) {
-    if (files.length === 1) {
-      var _files$;
-
-      var type = files[0].type.split('/')[0];
-
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        });
-        return;
-      }
-
-      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        });
-        return;
-      }
-
-      handlechangeImage(files[0]);
-    }
   };
 
   var closeAlert = function closeAlert() {
@@ -205,16 +169,6 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     if (!open) return;
     actionSidebar(true);
   }, [open]);
-  (0, _react.useEffect)(function () {
-    var _parentCategoriesOptions = parentCategories.map(function (category) {
-      return {
-        value: category.id,
-        content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, category === null || category === void 0 ? void 0 : category.name)
-      };
-    });
-
-    setParentCategoriesOptions(_parentCategoriesOptions);
-  }, [parentCategories]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "editCategory"
   }, /*#__PURE__*/_react.default.createElement(_styles2.EditCategoryContent, null, businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
@@ -257,67 +211,29 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
   }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: handleClose
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryTypeImage, {
-    onClick: function onClick() {
-      return handleClickImage();
-    },
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
-    onFiles: function onFiles(files) {
-      return handleFiles(files);
-    },
-    childRef: function childRef(e) {
-      categoryTypeImageInputRef.current = e;
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
-    onDrop: function onDrop(dataTransfer) {
-      return handleFiles(dataTransfer.files);
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, formState !== null && formState !== void 0 && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.image,
-    alt: "business type image",
-    loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: t('ENTER_CATEGORY_NAME', 'Enter a category name'),
-    name: "name",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.changes.name,
-    onChange: handleChangeInput,
-    autoComplete: "off"
-  })), useParentCategory === '1' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categorySelected && isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
-    style: {
-      paddingTop: 20,
-      display: 'flex',
-      alignItems: 'center'
-    }
-  }, /*#__PURE__*/_react.default.createElement("span", {
-    style: {
-      fontSize: 15
-    }
-  }, t('ENABLE_PARENT_CATEGORY', 'Allow parent category')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: false,
-    onChange: function onChange(val) {
-      return handleChangeCheckBox({
-        enabledParent: val
-      });
-    }
-  })), !isAddMode && categorySelected && parentCategories.length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ParentCategorySelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PARENT_CATEGORY', 'Parent category')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
-    placeholder: t('SELECT_PARENT_CATEGORY', 'Select a parent category'),
-    options: parentCategoriesOptions,
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.parent_category_id,
-    onChange: function onChange(val) {
-      return handleChangeItem({
-        parent_category_id: val
-      });
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.BtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    borderRadius: "8px",
-    color: "primary",
-    onClick: handleUpdateClick
-  }, category ? t('SAVE', 'Save') : t('ADD', 'Add')))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_BusinessCategoryInfoSettingList.BusinessCategoryInfoSettingList, {
+    selectedInfoItem: selectedInfoItem,
+    handleSelectInfoItem: setSelctedInfoItem
+  }), selectedInfoItem === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategoyInfo.BusinessProductsCategoyInfo, {
+    open: open,
+    formState: formState,
+    handlechangeImage: handlechangeImage,
+    handleChangeInput: handleChangeInput,
+    handleUpdateClick: handleUpdateClick,
+    handleChangeCheckBox: handleChangeCheckBox,
+    category: category,
+    categorySelected: categorySelected,
+    parentCategories: parentCategories,
+    handleChangeItem: handleChangeItem,
+    isAddMode: isAddMode
+  }), selectedInfoItem === 'seo_options' && /*#__PURE__*/_react.default.createElement(_SeoOptions.SeoOptions, {
+    data: categorySelected,
+    formState: formState,
+    handleUpdateClick: handleUpdateClick,
+    handleProductCategoryChangeInput: handleChangeInput,
+    handlechangeImageProductCategory: handlechangeImage,
+    isCategorySeo: true
+  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_TYPE', 'Business type'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
