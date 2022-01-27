@@ -6,7 +6,9 @@ import { Button } from '../../styles'
 import {
   ScheduleContainer,
   Title,
-  ScheduleSection
+  ScheduleSection,
+  BottomActionContainer,
+  SkipButton
 } from './styles'
 
 const BusinessScheduleUI = (props) => {
@@ -14,7 +16,8 @@ const BusinessScheduleUI = (props) => {
     business,
     formState,
     handleChangeScheduleState,
-    handleUpdateSchedule
+    handleUpdateSchedule,
+    isFirstVisited
   } = props
   const [, t] = useLanguage()
 
@@ -28,14 +31,25 @@ const BusinessScheduleUI = (props) => {
             handleChangeScheduleState={handleChangeScheduleState}
           />
         </ScheduleSection>
-        <Button
-          color='primary'
-          borderRadius='8px'
-          disabled={Object.keys(formState?.changes).length === 0 || formState?.loading}
-          onClick={() => handleUpdateSchedule()}
-        >
-          {t('SAVE', 'Save')}
-        </Button>
+        <BottomActionContainer>
+          <div>
+            <SkipButton>
+              {t('TUTORIAL_SKIP', 'Skip')}
+            </SkipButton>
+            <Button
+              color='primary'
+              borderRadius='8px'
+              disabled={Object.keys(formState?.changes).length === 0 || formState?.loading}
+              onClick={() => handleUpdateSchedule()}
+            >
+              {
+                formState?.loading
+                  ? t('LOADING', 'Loading')
+                  : isFirstVisited ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')
+              }
+            </Button>
+          </div>
+        </BottomActionContainer>
       </ScheduleContainer>
     </>
   )

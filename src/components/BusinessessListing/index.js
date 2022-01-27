@@ -12,6 +12,7 @@ import { ImportersLateralBar } from '../ImportersLateralBar'
 import { AddBusinessForm } from '../AddBusinessForm'
 import { SideBar } from '../SideBar'
 import { getStorageItem, setStorageItem } from '../../utils'
+import { BusinessSchedule } from '../BusinessSchedule'
 
 import {
   BusinessListingContainer,
@@ -40,6 +41,8 @@ const BusinessessListingUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
 
   const [isFirstVisited, setIsFirstVisited] = useState(false)
+  const [openSidebarState, setOpenSidebarState] = useState({})
+
   const [viewMethod, setViewMethod] = useState('list')
   const [openBusinessDetails, setOpenBusinessDetails] = useState(false)
   const [detailsBusiness, setDetailsBusiness] = useState(null)
@@ -78,7 +81,11 @@ const BusinessessListingUI = (props) => {
   const onhandleSuccessAddBusiness = (business) => {
     handleSucessAddBusiness(business)
     setOpenAddBusiness(false)
-    handleOpenBusinessDetails(business)
+    if (isFirstVisited) {
+      setOpenSidebarState({ ...openSidebarState, schedule: true })
+    } else {
+      handleOpenBusinessDetails(business)
+    }
   }
 
   useEffect(() => {
@@ -188,6 +195,24 @@ const BusinessessListingUI = (props) => {
           open={openImportCsvForm}
           onClose={() => setOpenImportCsvForm(false)}
         />
+      )}
+
+      {isFirstVisited && (
+        <>
+          {openSidebarState?.schedule && (
+            <SideBar
+              id='business_schedule_details'
+              open={openSidebarState?.schedule}
+              onClose={() => setOpenSidebarState({ ...openSidebarState, schedule: false })}
+            >
+              <BusinessSchedule
+                isFirstVisited={isFirstVisited}
+                business={detailsBusiness}
+                handleSuccessBusinessScheduleUpdate={handleSucessUpdateBusiness}
+              />
+            </SideBar>
+          )}
+        </>
       )}
     </>
   )
