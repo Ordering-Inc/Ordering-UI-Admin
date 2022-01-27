@@ -15,7 +15,8 @@ import {
   UploadImageIcon,
   InputWrapper,
   ActionsForm,
-  InventoryWrapper
+  InventoryWrapper,
+  Wrapper
 } from './styles'
 
 export const ProductDetatilsInformation = (props) => {
@@ -34,6 +35,10 @@ export const ProductDetatilsInformation = (props) => {
   const [, t] = useLanguage()
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [autoGenerateCode, setAutoGenerate] = useState({
+    isAutoGenerate: false,
+    autoCodeText: product?.slug
+  })
 
   const handleClickImage = () => {
     productImageInputRef.current.click()
@@ -68,6 +73,28 @@ export const ProductDetatilsInformation = (props) => {
     })
   }
 
+  const stringToSlug = str => {
+    str = str.replace(/^\s+|\s+$/g, ""); // trim
+    str = str.toLowerCase();
+
+    // remove accents, swap ñ for n, etc
+    var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    var to = "aaaaaaeeeeiiiioooouuuunc------";
+
+    for (var i = 0, l = from.length; i < l; i++) {
+      str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+    }
+
+    str = str
+    .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+    .replace(/\s+/g, "_") // collapse whitespace and replace by _
+    .replace(/-+/g, "_") // collapse dashes
+    .replace(/^-+/, "") // trim - from start of text
+    .replace(/-+$/, ""); // trim - from end of text
+
+    return str;
+  }
+
   const onSubmit = () => {
     if (Object.keys(formState.changes).length > 0) {
       handleButtonUpdateClick()
@@ -83,6 +110,26 @@ export const ProductDetatilsInformation = (props) => {
       })
     }
   }, [formMethods.errors])
+
+  useEffect(() => {
+    if (autoGenerateCode.isAutoGenerate) {
+      let generateCode = {
+        target: {
+          name: 'slug',
+          value: formState.changes.name ? stringToSlug(formState.changes.name) : stringToSlug(product.name)
+        }
+      }
+      setAutoGenerate({
+        ...autoGenerateCode, 
+        autoCodeText: generateCode.target.value
+      })
+      handleChangeInput(generateCode)
+      setAutoGenerate({
+        ...autoGenerateCode,
+        isAutoGenerate: false
+      })
+    }
+  },[autoGenerateCode])
 
   return (
     <>
@@ -172,6 +219,37 @@ export const ProductDetatilsInformation = (props) => {
             autoComplete='off'
           />
         </InputWrapper>
+        <InputWrapper>
+          <label>{t('SLUG', 'Slug')}</label>
+          <Input
+            name='slug'
+            placeholder={t('SLUG', 'Slug')}
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
+            value={
+              formState?.result?.result
+                  ? formState?.result?.result?.slug
+                  : formState?.changes?.slug || product?.slug
+            }
+          />
+          <Wrapper
+            style={{paddingTop: 10}}
+          >
+            <Button
+              color='primary'
+              borderRadius='7.6px'
+              disabled={formState.loading}
+              onClick={() => setAutoGenerate({
+                ...autoGenerateCode,
+                isAutoGenerate: true
+              })}
+            >
+                {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
+            </Button>
+          </Wrapper>
+        </InputWrapper>
+        
         <InventoryWrapper>
           <span>{t('INVENTORY', 'Inventory')}</span>
           <Switch

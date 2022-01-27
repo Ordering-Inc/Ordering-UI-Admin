@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../DragScroll'
 import { ProductDetatilsInformation } from '../ProductDetatilsInformation'
 import { ProductDetailsAdvanced } from '../ProductDetailsAdvanced'
-
+import { SeoOptions } from '../SeoOptions'
 import {
   Container,
   TabsConatiner,
@@ -33,9 +33,9 @@ export const ProductMainDetails = (props) => {
   const [selectedOption, setSelectedOption] = useState('information')
   const listOptions = [
     { key: 'information', content: t('INFORMATION', 'Information') },
-    { key: 'advanced', content: t('ADVANCED', 'Advanced') }
+    { key: 'advanced', content: t('ADVANCED', 'Advanced') },
     // { key: 'labels', content: t('LABELS', 'Labels') },
-    // { key: 'seo', content: t('SEO_OPTIONS', 'SEO options') }
+    { key: 'seo_options', content: t('SEO_OPTIONS', 'SEO options') }
   ]
   return (
     <Container>
@@ -74,6 +74,17 @@ export const ProductMainDetails = (props) => {
           setTaxes={setTaxes}
           fees={fees}
           setFees={setFees}
+        />
+      )}
+      {selectedOption === 'seo_options' && (
+        <SeoOptions
+          data={product}
+          formState={formState}
+          setFormState={handleChangeFormState}
+          handleUpdateClick={handleUpdateClick}
+          handlechangeImageProductCategory={handlechangeImage}
+          handleProductCategoryChangeInput={handleChangeInput}
+          isProductSeo
         />
       )}
     </Container>
