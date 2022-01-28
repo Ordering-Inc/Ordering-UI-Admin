@@ -42,9 +42,14 @@ export const BottomActionContainer = styled.div`
 export const SkipButton = styled.div`
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
   ${props => props.theme?.rtl ? css`
     margin-left: 60px;
   ` : css`
     margin-right: 60px;
   `}
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
 `

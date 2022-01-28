@@ -12,7 +12,7 @@ import { ImportersLateralBar } from '../ImportersLateralBar'
 import { AddBusinessForm } from '../AddBusinessForm'
 import { SideBar } from '../SideBar'
 import { getStorageItem, setStorageItem } from '../../utils'
-import { BusinessSchedule } from '../BusinessSchedule'
+import { WizardBusiness } from '../WizardBusiness'
 
 import {
   BusinessListingContainer,
@@ -40,8 +40,8 @@ const BusinessessListingUI = (props) => {
 
   const query = new URLSearchParams(useLocation().search)
 
-  const [isFirstVisited, setIsFirstVisited] = useState(false)
-  const [openSidebarState, setOpenSidebarState] = useState({})
+  const [isFirstVisited, setIsFirstVisited] = useState(true)
+  const [openTutorialSidebarState, setOpenTutorialSidebarState] = useState(null)
 
   const [viewMethod, setViewMethod] = useState('list')
   const [openBusinessDetails, setOpenBusinessDetails] = useState(false)
@@ -81,8 +81,9 @@ const BusinessessListingUI = (props) => {
   const onhandleSuccessAddBusiness = (business) => {
     handleSucessAddBusiness(business)
     setOpenAddBusiness(false)
+    setDetailsBusiness(business)
     if (isFirstVisited) {
-      setOpenSidebarState({ ...openSidebarState, schedule: true })
+      setOpenTutorialSidebarState('schedule')
     } else {
       handleOpenBusinessDetails(business)
     }
@@ -197,23 +198,13 @@ const BusinessessListingUI = (props) => {
         />
       )}
 
-      {isFirstVisited && (
-        <>
-          {openSidebarState?.schedule && (
-            <SideBar
-              id='business_schedule_details'
-              open={openSidebarState?.schedule}
-              onClose={() => setOpenSidebarState({ ...openSidebarState, schedule: false })}
-            >
-              <BusinessSchedule
-                isFirstVisited={isFirstVisited}
-                business={detailsBusiness}
-                handleSuccessBusinessScheduleUpdate={handleSucessUpdateBusiness}
-              />
-            </SideBar>
-          )}
-        </>
-      )}
+      <WizardBusiness
+        isFirstVisited={isFirstVisited}
+        openTutorialSidebarState={openTutorialSidebarState}
+        setOpenTutorialSidebarState={setOpenTutorialSidebarState}
+        business={detailsBusiness}
+        handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+      />
     </>
   )
 }

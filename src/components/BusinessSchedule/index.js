@@ -1,5 +1,8 @@
 import React from 'react'
-import { useLanguage, BusinessSchedule as BusinessScheduleController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  BusinessSchedule as BusinessScheduleController
+} from 'ordering-components-admin'
 import { Schedule } from '../Schedule'
 import { Button } from '../../styles'
 
@@ -17,7 +20,8 @@ const BusinessScheduleUI = (props) => {
     formState,
     handleChangeScheduleState,
     handleUpdateSchedule,
-    isFirstVisited
+    isFirstVisited,
+    handleTutorialSkip
   } = props
   const [, t] = useLanguage()
 
@@ -33,9 +37,13 @@ const BusinessScheduleUI = (props) => {
         </ScheduleSection>
         <BottomActionContainer>
           <div>
-            <SkipButton>
-              {t('TUTORIAL_SKIP', 'Skip')}
-            </SkipButton>
+            {isFirstVisited && (
+              <SkipButton
+                onClick={() => handleTutorialSkip()}
+              >
+                {t('TUTORIAL_SKIP', 'Skip')}
+              </SkipButton>
+            )}
             <Button
               color='primary'
               borderRadius='8px'
