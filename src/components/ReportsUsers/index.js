@@ -3,7 +3,7 @@ import {
   useLanguage,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
-import { lighten } from 'polished'
+import { transparentize } from 'polished'
 import 'chartjs-adapter-moment'
 import { Line } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
@@ -32,36 +32,38 @@ const ReportsUsersUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [dataOptions, setDataOptions] = useState([])
+  const [dataOptions, setDataOptions] = useState(null)
   const [isAppIdFilter, setIsAppIdFilter] = useState(false)
+
+  const generateColor = () => {
+    const colorList = ['#2C7BE5', '#52C9FD', '#FFD233', '#EB5F79', '#2ED690']
+    return colorList[Math.round(Math.random() * (colorList.length - 1))]
+  }
 
   const generateData = () => {
     let values = []
-    if (reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
+    if (reportData?.content?.dataset?.dataset?.length > 0) {
       values = reportData?.content?.dataset?.dataset?.map((item, index) => {
         const list = []
-        item?.data && item.data.forEach(value => {
-          list.push(value.y)
-        })
+        if (item?.data?.isArray) {
+          item.data.forEach(value => {
+            list.push(value.y)
+          })
+        } else {
+          Object.keys(item.data).forEach(key => {
+            list.push(item.data[key].y)
+          })
+        }
+        const bgColor = index === 0 ? '#2C7BE5' : generateColor()
         return {
           label: item.label,
           data: [...list],
           fill: true,
-          backgroundColor: 'rgba(75,192,192,0.2)',
-          borderColor: lighten(index / 10, '#2C7BE5'),
+          backgroundColor: transparentize(0.9, bgColor),
+          borderColor: bgColor,
           tension: 0.4,
           borderWidth: 3
         }
-      })
-    }
-    return values
-  }
-
-  const generateLabel = () => {
-    const values = []
-    if (reportData?.content?.dataset?.dataset[0]?.data?.length > 0) {
-      reportData.content.dataset.dataset[0].data.forEach(data => {
-        values.push(data.x)
       })
     }
     return values
@@ -115,12 +117,18 @@ const ReportsUsersUI = (props) => {
   }
 
   useEffect(() => {
-    const defaultData = {
-      labels: generateLabel(),
-      datasets: generateData()
+    if (reportData?.content?.dataset?.x?.labels.length > 0) {
+      const defaultData = {
+        labels: reportData?.content?.dataset?.x?.labels,
+        datasets: generateData()
+      }
+      setDataOptions(defaultData)
     }
-    setDataOptions(defaultData)
   }, [reportData?.content])
+
+  useEffect(() => {
+    if (reportData?.loading) setDataOptions(null)
+  }, [reportData?.loading])
 
   return (
     <ReportsUsersContainer>
@@ -149,7 +157,7 @@ const ReportsUsersUI = (props) => {
           {reportData?.loading ? (
             <Skeleton height={350} />
           ) : (
-            reportData?.content?.dataset?.dataset[0]?.data?.length > 0 ? (
+            dataOptions ? (
               <Line data={dataOptions} options={options} />
             ) : (
               <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
