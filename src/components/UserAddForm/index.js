@@ -207,15 +207,11 @@ const UserAddFormUI = (props) => {
     if (!isTourOpen || !isSuccessSubmitted || formState?.loading || formState?.result?.error) return
     if (isDriversPage) {
       setStorageItem('isFromDeliveryDrivers', true)
-      setTimeout(() => {
-        events.emit('go_to_page', { page: 'drivers_managers' })
-      }, 500)
+      events.emit('go_to_page', { page: 'drivers_managers' })
     }
     if (isDriversManagersPage) {
       setStorageItem('isFromDeliveryDriversGroup', true)
-      setTimeout(() => {
-        events.emit('go_to_page', { page: 'drivers_groups' })
-      }, 500)
+      events.emit('go_to_page', { page: 'drivers_groups' })
     }
   }, [isTourOpen, isSuccessSubmitted, formState?.loading])
 

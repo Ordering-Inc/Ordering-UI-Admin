@@ -12,7 +12,8 @@ export const SideBar = (props) => {
     sidebarId,
     defaultSideBarWidth,
     moveDistance,
-    isBorderShow
+    isBorderShow,
+    noAnimation
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -48,6 +49,7 @@ export const SideBar = (props) => {
         id={id}
         isBorderShow={isBorderShow}
         moveDistance={moveDistance}
+        noAnimation={noAnimation}
       >
         <IconButton
           color='black'
