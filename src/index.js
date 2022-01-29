@@ -10,7 +10,7 @@ import { BusinessDetails } from './components/BusinessDetails'
 import { BusinessProductsListing } from './components/BusinessProductsListing'
 import { BusinessesSelector } from './components/BusinessesSelector'
 import { BusinessessListing } from './components/BusinessessListing'
-import { BusinessList } from './components/BusinessList'
+import { BusinessesList } from './components/BusinessesList'
 import { BusinessListingHeader } from './components/BusinessListingHeader'
 import { BusinessMenu } from './components/BusinessMenu'
 import { BusinessMenuCustomFields } from './components/BusinessMenuCustomFields'
@@ -163,7 +163,7 @@ export {
   BusinessDetails,
   BusinessesSelector,
   BusinessessListing,
-  BusinessList,
+  BusinessesList,
   BusinessListingHeader,
   BusinessMenu,
   BusinessMenuCustomFields,
