@@ -99,6 +99,11 @@ const BusinessessListingUI = (props) => {
     }
   }, [])
 
+  const handleStartTutorial = () => {
+    setIsTutorialMode(true)
+    handleOpenAddBusiness()
+  }
+
   const handleSetStorage = async () => {
     const preVisited = await getStorageItem('visited', true)
     if (!preVisited?.businesses_page) {
@@ -123,6 +128,7 @@ const BusinessessListingUI = (props) => {
           onSearch={onSearch}
           handleOpenAddBusiness={handleOpenAddBusiness}
           handleOpenImportCSV={handleOpenImportCSV}
+          handleStartTutorial={handleStartTutorial}
         />
         <ViewContainer>
           <BusinessActiveStateFilter

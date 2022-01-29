@@ -30,7 +30,7 @@ export const BusinessesList = (props) => {
     detailsBusinessId,
     getPageBusinesses,
     searchValue,
-    isFirstVisited
+    isTutorialMode
   } = props
 
   const theme = useTheme()
@@ -247,7 +247,7 @@ export const BusinessesList = (props) => {
         </BusinessCardContainer>
       )}
 
-      {isFirstVisited && !businessList.loading && businessList.businesses.length === 0 && (
+      {isTutorialMode && !businessList.loading && businessList.businesses.length === 0 && (
         <AddFirstStoreContainer>
           <img src={theme.images.tutorials.businessTutorial1} alt='' />
           <Button
