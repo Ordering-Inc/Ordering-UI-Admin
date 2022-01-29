@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useUtils, useLanguage, BusinessDetails as BusinessController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Switch } from '../../styles/Switch'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { StarFill, ThreeDotsVertical } from 'react-bootstrap-icons'
+import { Confirm } from '../Confirm'
 
 import {
   SingleBusinessContainer,
@@ -38,7 +39,18 @@ const SingleBusinessUI = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
+  const onClickDeleteBusiness = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_BUSINESS', 'Are you sure that you want to delete this business?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteBusiness()
+      }
+    })
+  }
   const handleClickBusiness = (e) => {
     const isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.business_actions')
     if (isInvalid) return
@@ -165,7 +177,7 @@ const SingleBusinessUI = (props) => {
                         {t('EDIT', 'Edit')}
                       </Dropdown.Item>
                       <Dropdown.Item
-                        onClick={() => handleDeleteBusiness()}
+                        onClick={() => onClickDeleteBusiness()}
                       >
                         {t('DELETE', 'Delete')}
                       </Dropdown.Item>
@@ -239,7 +251,7 @@ const SingleBusinessUI = (props) => {
                         {t('EDIT', 'Edit')}
                       </Dropdown.Item>
                       <Dropdown.Item
-                        onClick={() => handleDeleteBusiness()}
+                        onClick={() => onClickDeleteBusiness()}
                       >
                         {t('DELETE', 'Delete')}
                       </Dropdown.Item>
@@ -251,6 +263,17 @@ const SingleBusinessUI = (props) => {
           )}
         </>
       )}
+      <Confirm
+        width='700px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

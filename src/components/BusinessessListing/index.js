@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { BusinessList } from '../BusinessList'
+import { BusinessesList } from '../BusinessesList'
 import { DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import { BusinessListingHeader } from '../BusinessListingHeader'
 import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
@@ -8,8 +8,12 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import { BusinessDetails } from '../BusinessDetails'
-import { AddBusinessSidebar } from '../AddBusinessSidebar'
 import { ImportersLateralBar } from '../ImportersLateralBar'
+import { AddBusinessForm } from '../AddBusinessForm'
+import { SideBar } from '../SideBar'
+import { getStorageItem, setStorageItem } from '../../utils'
+import { WizardBusiness } from '../WizardBusiness'
+
 import {
   BusinessListingContainer,
   ViewContainer,
@@ -35,6 +39,9 @@ const BusinessessListingUI = (props) => {
   } = props
 
   const query = new URLSearchParams(useLocation().search)
+
+  const [isTutorialMode, setIsTutorialMode] = useState(false)
+  const [openTutorialSidebarState, setOpenTutorialSidebarState] = useState(null)
 
   const [viewMethod, setViewMethod] = useState('list')
   const [openBusinessDetails, setOpenBusinessDetails] = useState(false)
@@ -74,7 +81,12 @@ const BusinessessListingUI = (props) => {
   const onhandleSuccessAddBusiness = (business) => {
     handleSucessAddBusiness(business)
     setOpenAddBusiness(false)
-    handleOpenBusinessDetails(business)
+    setDetailsBusiness(business)
+    if (isTutorialMode) {
+      setOpenTutorialSidebarState('schedule')
+    } else {
+      handleOpenBusinessDetails(business)
+    }
   }
 
   useEffect(() => {
@@ -87,6 +99,27 @@ const BusinessessListingUI = (props) => {
     }
   }, [])
 
+  const handleStartTutorial = () => {
+    setIsTutorialMode(true)
+    handleOpenAddBusiness()
+  }
+
+  const handleSetStorage = async () => {
+    const preVisited = await getStorageItem('visited', true)
+    if (!preVisited?.businesses_page) {
+      const visited = {
+        ...preVisited,
+        businesses_page: true
+      }
+      await setStorageItem('visited', visited, true)
+      setIsTutorialMode(true)
+    }
+  }
+
+  useEffect(() => {
+    handleSetStorage()
+  }, [])
+
   return (
     <>
       <BusinessListingContainer>
@@ -95,6 +128,7 @@ const BusinessessListingUI = (props) => {
           onSearch={onSearch}
           handleOpenAddBusiness={handleOpenAddBusiness}
           handleOpenImportCSV={handleOpenImportCSV}
+          handleStartTutorial={handleStartTutorial}
         />
         <ViewContainer>
           <BusinessActiveStateFilter
@@ -122,7 +156,7 @@ const BusinessessListingUI = (props) => {
           handleChangeBusinessType={handleChangeBusinessType}
           setBusinessTypes={setBusinessTypes}
         />
-        <BusinessList
+        <BusinessesList
           viewMethod={viewMethod}
           businessList={businessList}
           pagination={pagination}
@@ -135,6 +169,7 @@ const BusinessessListingUI = (props) => {
           handleOpenBusinessDetails={handleOpenBusinessDetails}
           handleOpenAddBusiness={handleOpenAddBusiness}
           searchValue={searchValue}
+          isTutorialMode={isTutorialMode}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (
@@ -151,11 +186,16 @@ const BusinessessListingUI = (props) => {
         />
       )}
       {openAddBusiness && (
-        <AddBusinessSidebar
+        <SideBar
+          id='add_business_form'
           open={openAddBusiness}
           onClose={() => setOpenAddBusiness(false)}
-          handleSucessAddBusiness={onhandleSuccessAddBusiness}
-        />
+        >
+          <AddBusinessForm
+            isTutorialMode={isTutorialMode}
+            handleSucessAddBusiness={onhandleSuccessAddBusiness}
+          />
+        </SideBar>
       )}
       {openImportCsvForm && (
         <ImportersLateralBar
@@ -163,6 +203,14 @@ const BusinessessListingUI = (props) => {
           onClose={() => setOpenImportCsvForm(false)}
         />
       )}
+
+      <WizardBusiness
+        isTutorialMode={isTutorialMode}
+        openTutorialSidebarState={openTutorialSidebarState}
+        setOpenTutorialSidebarState={setOpenTutorialSidebarState}
+        business={detailsBusiness}
+        handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+      />
     </>
   )
 }

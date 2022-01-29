@@ -112,6 +112,7 @@ export const Thead = styled.thead`
   position: sticky;
   top: 0px;
   background: white;
+  border-bottom: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
 
   tr {
     th {
@@ -143,6 +144,7 @@ export const Tbody = styled.tbody`
       font-size: 12px;
       text-align: center;
       color: ${props => props.theme?.colors.lightGray};
+      white-space: nowrap;
 
       &:first-child {
         text-align: left;

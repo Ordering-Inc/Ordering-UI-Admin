@@ -3,9 +3,8 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  useConfig,
+  useConfig
 } from 'ordering-components-admin'
-import { useWindowSize } from '../../hooks/useWindowSize'
 import { bytesConverter } from '../../utils'
 import { Alert, Confirm } from '../Confirm'
 import { Button, DefaultSelect, Input, Switch } from '../../styles'
@@ -20,12 +19,12 @@ import {
   CategoryNameWrapper,
   ParentCategorySelectWrapper,
   Option,
-  Wrapper
+  GenerateButtonWrapper,
+  SkipButton
 } from './styles'
 
 export const BusinessProductsCategoyInfo = (props) => {
   const {
-    open,
     formState,
     handlechangeImage,
     handleChangeInput,
@@ -36,15 +35,14 @@ export const BusinessProductsCategoyInfo = (props) => {
     parentCategories,
     handleChangeItem,
     isAddMode,
+    isTutorialMode,
+    handleTutorialSkip
   } = props
 
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const useParentCategory = configState?.configs?.use_parent_category?.value
 
-  const { width } = useWindowSize()
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const categoryTypeImageInputRef = useRef(null)
   const [parentCategoriesOptions, setParentCategoriesOptions] = useState([])
@@ -53,10 +51,6 @@ export const BusinessProductsCategoyInfo = (props) => {
     isAutoGenerate: false,
     autoCodeText: categorySelected?.slug
   })
-
-  const actionSidebar = (value) => {
-    setIsMenuOpen(value)
-  }
 
   const handleClickImage = () => {
     categoryTypeImageInputRef.current.click()
@@ -92,25 +86,25 @@ export const BusinessProductsCategoyInfo = (props) => {
   }
 
   const stringToSlug = str => {
-    str = str.replace(/^\s+|\s+$/g, ""); // trim
-    str = str.toLowerCase();
+    str = str.replace(/^\s+|\s+$/g, '') // trim
+    str = str.toLowerCase()
 
     // remove accents, swap ñ for n, etc
-    var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    var to = "aaaaaaeeeeiiiioooouuuunc------";
+    var from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;'
+    var to = 'aaaaaaeeeeiiiioooouuuunc------'
 
     for (var i = 0, l = from.length; i < l; i++) {
-      str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
     }
 
     str = str
-    .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
-    .replace(/\s+/g, "_") // collapse whitespace and replace by -
-    .replace(/-+/g, "_") // collapse dashes
-    .replace(/^-+/, "") // trim - from start of text
-    .replace(/-+$/, ""); // trim - from end of text
+      .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '_') // collapse whitespace and replace by -
+      .replace(/-+/g, '_') // collapse dashes
+      .replace(/^-+/, '') // trim - from start of text
+      .replace(/-+$/, '') // trim - from end of text
 
-    return str;
+    return str
   }
 
   useEffect(() => {
@@ -121,25 +115,6 @@ export const BusinessProductsCategoyInfo = (props) => {
       })
     }
   }, [formState?.result])
-
-  const toggleMainContent = () => {
-    if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('editCategory').style.width = '100vw'
-      } else {
-        document.getElementById('editCategory').style.width = '500px'
-      }
-    }
-  }
-
-  useEffect(() => {
-    toggleMainContent()
-  }, [width])
-
-  useEffect(() => {
-    if (!open) return
-    actionSidebar(true)
-  }, [open])
 
   useEffect(() => {
     const _parentCategoriesOptions = parentCategories.map(category => {
@@ -153,14 +128,14 @@ export const BusinessProductsCategoyInfo = (props) => {
 
   useEffect(() => {
     if (autoGenerateCode.isAutoGenerate) {
-      let generateCode = {
+      const generateCode = {
         target: {
           name: 'slug',
           value: formState.changes.name ? stringToSlug(formState.changes.name) : stringToSlug(categorySelected.name)
         }
       }
       setAutoGenerate({
-        ...autoGenerateCode, 
+        ...autoGenerateCode,
         autoCodeText: generateCode.target.value
       })
       handleChangeInput(generateCode)
@@ -169,7 +144,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         isAutoGenerate: false
       })
     }
-  },[autoGenerateCode])
+  }, [autoGenerateCode])
 
   return (
     <>
@@ -214,32 +189,26 @@ export const BusinessProductsCategoyInfo = (props) => {
       <CategoryNameWrapper>
         <label>{t('SLUG', 'Slug')}</label>
         <Input
-            name='slug'
-            placeholder={t('SLUG', 'Slug')}
-            onChange={handleChangeInput}
-            disabled={formState.loading}
-            autoComplete='off'
-            value={
-              formState?.result?.result
-                  ? formState?.result?.result?.slug
-                  : formState?.changes?.slug || categorySelected?.slug
-            }
-          />
-          <Wrapper
-            style={{paddingTop: 10}}
+          name='slug'
+          placeholder={t('SLUG', 'Slug')}
+          onChange={handleChangeInput}
+          disabled={formState.loading}
+          autoComplete='off'
+          defaultValue={formState?.changes?.slug}
+        />
+        <GenerateButtonWrapper>
+          <Button
+            color='primary'
+            borderRadius='7.6px'
+            disabled={formState.loading || !formState.changes?.name}
+            onClick={() => setAutoGenerate({
+              ...autoGenerateCode,
+              isAutoGenerate: true
+            })}
           >
-            <Button
-              color='primary'
-              borderRadius='7.6px'
-              disabled={formState.loading}
-              onClick={() => setAutoGenerate({
-                ...autoGenerateCode,
-                isAutoGenerate: true
-              })}
-            >
-                {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
-            </Button>
-          </Wrapper>
+            {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
+          </Button>
+        </GenerateButtonWrapper>
       </CategoryNameWrapper>
       {useParentCategory === '1' && (
         <>
@@ -267,13 +236,30 @@ export const BusinessProductsCategoyInfo = (props) => {
         </>
       )}
       <BtnWrapper>
-        <Button
-          borderRadius='8px'
-          color='primary'
-          onClick={handleUpdateClick}
-        >
-          {category ? t('SAVE', 'Save') : t('ADD', 'Add')}
-        </Button>
+        {isTutorialMode ? (
+          <>
+            <SkipButton
+              onClick={() => handleTutorialSkip()}
+            >
+              {t('TUTORIAL_SKIP', 'Skip')}
+            </SkipButton>
+            <Button
+              borderRadius='8px'
+              color='primary'
+              onClick={handleUpdateClick}
+            >
+              {t('SAVE_AND_CONTINUE', 'Save and continue')}
+            </Button>
+          </>
+        ) : (
+          <Button
+            borderRadius='8px'
+            color='primary'
+            onClick={handleUpdateClick}
+          >
+            {category ? t('SAVE', 'Save') : t('ADD', 'Add')}
+          </Button>
+        )}
       </BtnWrapper>
       <Alert
         title={t('BUSINESS_TYPE', 'Business type')}

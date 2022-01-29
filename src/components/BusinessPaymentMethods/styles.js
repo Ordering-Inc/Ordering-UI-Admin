@@ -14,13 +14,17 @@ export const PaymentMethodsContainer = styled.div`
     font-size: 20px;
     font-weight: 700;
   }
+  > button {
+    height: 44px;
+    margin: 20px 0;
+  }
   @media (min-width: 576px) {
     padding: 20px;
   }
 `
 
 export const PaymethodListWrapper = styled.div`
-  border-top: 1px solid #E9ECEF;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
   margin: 20px 0;
 `
 
@@ -28,13 +32,13 @@ export const PaymethodOptionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 `
 
 export const PaymethodOption = styled.div`
   display: flex;
   align-items: center;
-  padding: 12px 0;
+  padding: 16px 0;
   cursor: pointer;
   color: ${props => props.theme.colors.headingColor};
   
@@ -48,6 +52,7 @@ export const PaymethodOption = styled.div`
 
 export const PaymethodName = styled.span`
   color: ${props => props.theme.colors.headingColor};
+  font-size: 14px;
   ${props => props.theme?.rtl ? css`
     margin-right: 10px;
   ` : css`
@@ -74,19 +79,16 @@ export const DropDownWrapper = styled.div`
 
   > div {
     > div {
-      border: 1px solid #E9ECEF;
+      border: 1px solid ${props => props.theme.colors.borderColor};
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
       border-radius: 8px;
-      a:last-child {
-        color: #E63757;
+
+      a.dropdown-item {
+        font-size: 14px;
+        &:last-child {
+          color: #E63757;
+        }
       }
     }
-  }
-`
-
-export const WrapperSpinnerLoader = styled.div`
-  > div {
-    position: absolute;
-    top: 0px;
   }
 `

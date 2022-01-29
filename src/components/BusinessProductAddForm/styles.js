@@ -1,11 +1,17 @@
 import styled, { css } from 'styled-components'
 
 export const FormInput = styled.form`
-  margin-top: 20px;
   overflow: auto;
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+
+  > h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
 `
 
 export const ProductImage = styled.div`
@@ -103,7 +109,23 @@ export const ActionsForm = styled.div`
   margin: 30px 0;
   position: sticky;
   top: 100%;
+  display: flex;
+  align-items: center;
   > button {
     height: 42px;
+  }
+`
+export const SkipButton = styled.div`
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 60px;
+  ` : css`
+    margin-right: 60px;
+  `}
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
   }
 `

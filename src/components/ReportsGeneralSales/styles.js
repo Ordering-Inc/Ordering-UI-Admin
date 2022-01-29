@@ -153,6 +153,8 @@ export const Tbody = styled.tbody`
       font-size: 12px;
       text-align: center;
       color: ${props => props.theme?.colors.lightGray};
+      white-space: nowrap;
+
       &:nth-child(4n-1) {
         border-left: 1px solid ${props => props.theme?.colors.secundaryDarkContrast};
       }
