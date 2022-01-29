@@ -40,7 +40,7 @@ const BusinessessListingUI = (props) => {
 
   const query = new URLSearchParams(useLocation().search)
 
-  const [isFirstVisited, setIsFirstVisited] = useState(true)
+  const [isTutorialMode, setIsTutorialMode] = useState(false)
   const [openTutorialSidebarState, setOpenTutorialSidebarState] = useState(null)
 
   const [viewMethod, setViewMethod] = useState('list')
@@ -82,7 +82,7 @@ const BusinessessListingUI = (props) => {
     handleSucessAddBusiness(business)
     setOpenAddBusiness(false)
     setDetailsBusiness(business)
-    if (isFirstVisited) {
+    if (isTutorialMode) {
       setOpenTutorialSidebarState('schedule')
     } else {
       handleOpenBusinessDetails(business)
@@ -107,7 +107,7 @@ const BusinessessListingUI = (props) => {
         businesses_page: true
       }
       await setStorageItem('visited', visited, true)
-      setIsFirstVisited(true)
+      setIsTutorialMode(true)
     }
   }
 
@@ -163,7 +163,7 @@ const BusinessessListingUI = (props) => {
           handleOpenBusinessDetails={handleOpenBusinessDetails}
           handleOpenAddBusiness={handleOpenAddBusiness}
           searchValue={searchValue}
-          isFirstVisited={isFirstVisited}
+          isTutorialMode={isTutorialMode}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (
@@ -186,7 +186,7 @@ const BusinessessListingUI = (props) => {
           onClose={() => setOpenAddBusiness(false)}
         >
           <AddBusinessForm
-            isFirstVisited={isFirstVisited}
+            isTutorialMode={isTutorialMode}
             handleSucessAddBusiness={onhandleSuccessAddBusiness}
           />
         </SideBar>
@@ -199,7 +199,7 @@ const BusinessessListingUI = (props) => {
       )}
 
       <WizardBusiness
-        isFirstVisited={isFirstVisited}
+        isTutorialMode={isTutorialMode}
         openTutorialSidebarState={openTutorialSidebarState}
         setOpenTutorialSidebarState={setOpenTutorialSidebarState}
         business={detailsBusiness}

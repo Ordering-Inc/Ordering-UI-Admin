@@ -35,7 +35,7 @@ import {
 
 const AddBusinessFormUI = (props) => {
   const {
-    isFirstVisited,
+    isTutorialMode,
     formState,
     setFormState,
     handlechangeImage,
@@ -338,7 +338,7 @@ const AddBusinessFormUI = (props) => {
               {
                 formState?.loading
                   ? t('LOADING', 'Loading')
-                  : isFirstVisited ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')
+                  : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')
               }
             </Button>
           </ActionsForm>

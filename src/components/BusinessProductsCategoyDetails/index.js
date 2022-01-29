@@ -4,15 +4,17 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  useConfig,
-  BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController
+  useConfig
+  // BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController
 } from 'ordering-components-admin'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import {
+  BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController
+} from './naked'
 import { bytesConverter } from '../../utils'
 import { Alert, Confirm } from '../Confirm'
-import { Button, IconButton, DefaultSelect, Input, Switch } from '../../styles'
+import { Button, DefaultSelect, Input, Switch } from '../../styles'
 import FiCamera from '@meronex/icons/fi/FiCamera'
-import { XLg, ThreeDots } from 'react-bootstrap-icons'
+import { ThreeDots } from 'react-bootstrap-icons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 
@@ -29,13 +31,12 @@ import {
   ParentCategorySelectWrapper,
   Option,
   RightHeader,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  SkipButton
 } from './styles'
 
 const BusinessProductsCategoyDetailsUI = (props) => {
   const {
-    open,
-    onClose,
     formState,
     handlechangeImage,
     handleChangeInput,
@@ -47,7 +48,10 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     parentCategories,
     handleChangeItem,
     isAddMode,
-    handleDeleteCategory
+    handleDeleteCategory,
+
+    isTutorialMode,
+    handleTutorialSkip
   } = props
 
   const theme = useTheme()
@@ -55,22 +59,10 @@ const BusinessProductsCategoyDetailsUI = (props) => {
   const [configState] = useConfig()
   const useParentCategory = configState?.configs?.use_parent_category?.value
 
-  const { width } = useWindowSize()
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const categoryTypeImageInputRef = useRef(null)
   const [parentCategoriesOptions, setParentCategoriesOptions] = useState([])
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-
-  const actionSidebar = (value) => {
-    setIsMenuOpen(value)
-  }
-
-  const handleClose = () => {
-    onClose()
-    setIsMenuOpen(false)
-  }
 
   const handleClickImage = () => {
     categoryTypeImageInputRef.current.click()
@@ -125,25 +117,6 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     }
   }, [formState?.result])
 
-  const toggleMainContent = () => {
-    if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('editCategory').style.width = '100vw'
-      } else {
-        document.getElementById('editCategory').style.width = '500px'
-      }
-    }
-  }
-
-  useEffect(() => {
-    toggleMainContent()
-  }, [width])
-
-  useEffect(() => {
-    if (!open) return
-    actionSidebar(true)
-  }, [open])
-
   useEffect(() => {
     const _parentCategoriesOptions = parentCategories.map(category => {
       return {
@@ -185,15 +158,21 @@ const BusinessProductsCategoyDetailsUI = (props) => {
               <>
                 <HeaderContainer>
                   <BusinessEnableWrapper className='business_enable_control'>
-                    {
-                      formState?.changes?.name && (
-                        <span>{formState?.changes?.name}</span>
-                      )
-                    }
-                    <Switch
-                      defaultChecked={formState?.changes?.enabled || false}
-                      onChange={(val) => handleChangeCheckBox({ enabled: val })}
-                    />
+                    {isAddMode ? (
+                      <span>{t('NEW_CATEGORY', 'New category')}</span>
+                    ) : (
+                      <>
+                        {
+                          formState?.changes?.name && (
+                            <span>{formState?.changes?.name}</span>
+                          )
+                        }
+                        <Switch
+                          defaultChecked={formState?.changes?.enabled || false}
+                          onChange={(val) => handleChangeCheckBox({ enabled: val })}
+                        />
+                      </>
+                    )}
                   </BusinessEnableWrapper>
                   <RightHeader>
                     {!isAddMode && (
@@ -212,12 +191,6 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                         </DropdownButton>
                       </ActionSelectorWrapper>
                     )}
-                    <IconButton
-                      color='black'
-                      onClick={handleClose}
-                    >
-                      <XLg />
-                    </IconButton>
                   </RightHeader>
                 </HeaderContainer>
                 <CategoryTypeImage
@@ -284,13 +257,30 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                   </>
                 )}
                 <BtnWrapper>
-                  <Button
-                    borderRadius='8px'
-                    color='primary'
-                    onClick={handleUpdateClick}
-                  >
-                    {category ? t('SAVE', 'Save') : t('ADD', 'Add')}
-                  </Button>
+                  {isTutorialMode ? (
+                    <>
+                      <SkipButton
+                        onClick={() => handleTutorialSkip()}
+                      >
+                        {t('TUTORIAL_SKIP', 'Skip')}
+                      </SkipButton>
+                      <Button
+                        borderRadius='8px'
+                        color='primary'
+                        onClick={handleUpdateClick}
+                      >
+                        {t('SAVE_AND_CONTINUE', 'Save and continue')}
+                      </Button>
+                    </>
+                  ) : (
+                    <Button
+                      borderRadius='8px'
+                      color='primary'
+                      onClick={handleUpdateClick}
+                    >
+                      {category ? t('SAVE', 'Save') : t('ADD', 'Add')}
+                    </Button>
+                  )}
                 </BtnWrapper>
               </>
             )

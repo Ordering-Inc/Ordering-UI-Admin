@@ -51,7 +51,7 @@ const BusinessPaymentMethodsUI = (props) => {
     handleChangeStripeInput,
     handleStripeSave,
 
-    isFirstVisited,
+    isTutorialMode,
     handleTutorialContinue
   } = props
   const [, t] = useLanguage()
@@ -132,7 +132,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   )}
                   <PaymethodName>{paymethod?.name}</PaymethodName>
                 </PaymethodOption>
-                {isCheckFoundBusinessPaymethod(paymethod.id) && (
+                {!isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && (
                   <DropDownWrapper>
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
@@ -157,7 +157,7 @@ const BusinessPaymentMethodsUI = (props) => {
           </PaymethodListWrapper>
         )}
 
-        {isFirstVisited && (
+        {isTutorialMode && (
           <Button
             borderRadius='8px'
             color='primary'

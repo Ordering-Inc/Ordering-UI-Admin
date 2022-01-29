@@ -20,7 +20,7 @@ const BusinessScheduleUI = (props) => {
     formState,
     handleChangeScheduleState,
     handleUpdateSchedule,
-    isFirstVisited,
+    isTutorialMode,
     handleTutorialSkip
   } = props
   const [, t] = useLanguage()
@@ -37,7 +37,7 @@ const BusinessScheduleUI = (props) => {
         </ScheduleSection>
         <BottomActionContainer>
           <div>
-            {isFirstVisited && (
+            {isTutorialMode && (
               <SkipButton
                 onClick={() => handleTutorialSkip()}
               >
@@ -53,7 +53,7 @@ const BusinessScheduleUI = (props) => {
               {
                 formState?.loading
                   ? t('LOADING', 'Loading')
-                  : isFirstVisited ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')
+                  : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')
               }
             </Button>
           </div>

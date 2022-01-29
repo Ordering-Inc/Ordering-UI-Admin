@@ -20,7 +20,8 @@ import {
   UploadImageIconContainer,
   UploadImageIcon,
   InputWrapper,
-  ActionsForm
+  ActionsForm,
+  SkipButton
 } from './styles'
 
 const BusinessProductAddFormUI = (props) => {
@@ -28,7 +29,9 @@ const BusinessProductAddFormUI = (props) => {
     formState,
     handleChangeInput,
     handleUpdateClick,
-    handlechangeImage
+    handlechangeImage,
+    isTutorialMode,
+    handleTutorialSkip
   } = props
 
   const [, t] = useLanguage()
@@ -81,6 +84,7 @@ const BusinessProductAddFormUI = (props) => {
   return (
     <>
       <FormInput>
+        <h1>{t('NEW_PRODUCT', 'New product')}</h1>
         <ProductImage
           onClick={() => handleClickImage()}
         >
@@ -147,6 +151,13 @@ const BusinessProductAddFormUI = (props) => {
           />
         </InputWrapper>
         <ActionsForm>
+          {isTutorialMode && (
+            <SkipButton
+              onClick={() => handleTutorialSkip()}
+            >
+              {t('TUTORIAL_SKIP', 'Skip')}
+            </SkipButton>
+          )}
           {((formState && Object.keys(formState?.changes).length > 0)) && (
             <Button
               type='submit'
@@ -155,7 +166,11 @@ const BusinessProductAddFormUI = (props) => {
               disabled={formState.loading || Object.keys(formState?.changes).length === 1}
               onClick={() => Object.keys(formState?.changes).length > 1 && handleUpdateClick()}
             >
-              {formState?.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')}
+              {
+                formState?.loading
+                  ? t('LOADING', 'Loading')
+                  : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')
+              }
             </Button>
           )}
         </ActionsForm>
