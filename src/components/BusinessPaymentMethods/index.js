@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, BusinessPaymethods as BusinessPaymentMethodsController } from 'ordering-components-admin'
-
+import {
+  useLanguage,
+  BusinessPaymethods as BusinessPaymentMethodsController
+} from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { SpinnerLoader } from '../SpinnerLoader'
 import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
 import { PaymentOption } from '../PaymentOption'
 import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
@@ -16,6 +17,7 @@ import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
 import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { Modal } from '../Modal'
 import { useWindowSize } from '../../hooks/useWindowSize'
+import { Button } from '../../styles'
 
 import {
   MainContainer,
@@ -24,8 +26,7 @@ import {
   PaymethodOptionContainer,
   PaymethodOption,
   PaymethodName,
-  DropDownWrapper,
-  WrapperSpinnerLoader
+  DropDownWrapper
 } from './styles'
 
 const BusinessPaymentMethodsUI = (props) => {
@@ -48,7 +49,10 @@ const BusinessPaymentMethodsUI = (props) => {
     handleSaveClick,
     handleStripeConnect,
     handleChangeStripeInput,
-    handleStripeSave
+    handleStripeSave,
+
+    isTutorialMode,
+    handleTutorialContinue
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -63,11 +67,7 @@ const BusinessPaymentMethodsUI = (props) => {
     { value: 2, text: t('PICKUP', 'Pickup') },
     { value: 3, text: t('EATIN', 'Eatin') },
     { value: 4, text: t('CURBSIDE', 'Curbside') },
-    { value: 5, text: t('DRIVER_THRU', 'Driver thru') },
-  ]
-
-  const editablePaymethods = [
-    'stripe_direct', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'paypal'
+    { value: 5, text: t('DRIVER_THRU', 'Driver thru') }
   ]
 
   const isCheckEnableSate = (id) => {
@@ -105,11 +105,6 @@ const BusinessPaymentMethodsUI = (props) => {
 
   return (
     <MainContainer>
-      {actionState.loading && (
-        <WrapperSpinnerLoader>
-          <SpinnerLoader />
-        </WrapperSpinnerLoader>
-      )}
       <PaymentMethodsContainer>
         <h1>{t('PAYMETHODS', 'Payment methods')}</h1>
         {(paymethodsList.loading || businessPaymethodsState.loading) ? (
@@ -137,7 +132,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   )}
                   <PaymethodName>{paymethod?.name}</PaymethodName>
                 </PaymethodOption>
-                {isCheckFoundBusinessPaymethod(paymethod.id) && (
+                {!isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && (
                   <DropDownWrapper>
                     <DropdownButton
                       menuAlign={theme?.rtl ? 'left' : 'right'}
@@ -160,6 +155,16 @@ const BusinessPaymentMethodsUI = (props) => {
               </PaymethodOptionContainer>
             ))}
           </PaymethodListWrapper>
+        )}
+
+        {isTutorialMode && (
+          <Button
+            borderRadius='8px'
+            color='primary'
+            onClick={() => handleTutorialContinue()}
+          >
+            {t('CONTINUE', 'Continue')}
+          </Button>
         )}
       </PaymentMethodsContainer>
       {width >= 1000 ? (

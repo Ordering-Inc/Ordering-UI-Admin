@@ -25,9 +25,6 @@ export const SideBar = (props) => {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById(id).style.width = value
-      ? width >= sideBarWidth ? `${sideBarWidth}px` : '100vw'
-      : '0'
   }
 
   useEffect(() => {
@@ -38,7 +35,7 @@ export const SideBar = (props) => {
         document.getElementById(id).style.width = `${sideBarWidth}px`
       }
     }
-  }, [width])
+  }, [width, sideBarWidth])
 
   useEffect(() => {
     if (!open) return

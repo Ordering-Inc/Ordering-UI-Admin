@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Pagination } from '../Pagination'
+import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
+import { Button } from '../../styles'
+import { SingleBusiness } from '../SingleBusiness'
+import { useTheme } from 'styled-components'
 
 import {
   BusinessListContainer,
@@ -8,12 +12,11 @@ import {
   WrapperPagination,
   BusinessCardContainer,
   AddNewButtonLink,
-  BusinessListBottomContainer
+  BusinessListBottomContainer,
+  AddFirstStoreContainer
 } from './styles'
-import { SingleBusiness } from '../SingleBusiness'
-import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 
-export const BusinessList = (props) => {
+export const BusinessesList = (props) => {
   const {
     viewMethod,
     businessList,
@@ -26,8 +29,11 @@ export const BusinessList = (props) => {
     handleOpenAddBusiness,
     detailsBusinessId,
     getPageBusinesses,
-    searchValue
+    searchValue,
+    isTutorialMode
   } = props
+
+  const theme = useTheme()
   const [, t] = useLanguage()
 
   const [openPopover, setOpenPopover] = useState(false)
@@ -239,6 +245,19 @@ export const BusinessList = (props) => {
             ))
           )}
         </BusinessCardContainer>
+      )}
+
+      {isTutorialMode && !businessList.loading && businessList.businesses.length === 0 && (
+        <AddFirstStoreContainer>
+          <img src={theme.images.tutorials.businessTutorial1} alt='' />
+          <Button
+            borderRadius='8px'
+            color='primary'
+            onClick={() => handleOpenAddBusiness()}
+          >
+            {t('ADD_FIRST_STORE', 'Add your first store')}
+          </Button>
+        </AddFirstStoreContainer>
       )}
     </>
   )

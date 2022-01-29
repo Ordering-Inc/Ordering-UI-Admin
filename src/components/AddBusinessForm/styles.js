@@ -4,7 +4,7 @@ import { darken } from 'polished'
 export const BusinessDetailsContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 30px 20px 20px 20px;
   position: relative;
 `
 
@@ -16,33 +16,15 @@ export const DetailsHeader = styled.div`
 
 export const BusinessName = styled.h1`
   color: ${props => props.theme.colors.headingColor};
-  font-size: 24px;
+  font-size: 20px;
   margin: 0px;
-  font-weight: 600;
+  font-weight: 700;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
   ` : css`
     margin-right: 10px;
   `}
-`
-
-export const LeftHeader = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-export const RightHeader = styled.div`
-  display: flex;
-  align-items: center;
-
-  > button:first-child {
-    ${props => props.theme?.rlt ? css`
-      margin-left: 8px;
-    ` : css`
-      margin-right: 8px;
-    `}
-  }
 `
 
 export const FormInput = styled.form`
@@ -134,12 +116,14 @@ export const InputWrapper = styled.div`
 
   label {
     color: ${props => props.theme.colors.headingColor};
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 12px;
   }
 
   input,
   textarea {
     color: ${props => props.theme.colors.headingColor};
+    font-size: 14px;
   }
 
   .select {

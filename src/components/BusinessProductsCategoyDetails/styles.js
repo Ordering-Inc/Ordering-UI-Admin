@@ -2,52 +2,13 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
-  display: flex;
-  width: 0;
-  position: fixed;
-  box-shadow: -4px 0px 7px #ccc;
-
-  ${({ isDriverOrders }) => isDriverOrders && css`
-    position: absolute;
-    box-shadow: none;
-
-    ${props => props.theme?.rtl ? css`
-      border-right: 1px solid #CCC;
-    ` : css`
-      border-left: 1px solid #CCC;
-    `}
-  `}
-  background: #FFF;
-  height: 100vh;
-  top: 0px;
-  z-index: 1001;
-  overflow-x: hidden;
-  transition: 0.3s;
-
-  ${props => props.theme?.rtl ? css`
-    left: 0px;
-    ` : css`
-    right: 0px;
-  `}
-  @media print {
-    box-shadow: none;
-  }
-`
-
-export const SkeletonWrapper = styled.div`
   width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-direction: column;
-  > span {
-    width: 100%;
-  }
 `
-
 export const EditCategoryContent = styled.div`
   padding: 20px;
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   overflow-x: hidden;
 `
 
@@ -61,11 +22,9 @@ export const BusinessEnableWrapper = styled.div`
   display: flex;
   align-items: center;
   width: fit-content;
-
   span {
     font-weight: 700;
     font-size: 20px;
-
     ${props => props.theme?.rtl ? css`
       padding-left: 20px;
     ` : css`
@@ -83,7 +42,6 @@ export const CategoryTypeImage = styled.div`
   cursor: -webkit-grab;
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
-
   ${({ disabled }) => disabled && css`
     pointer-events: none;
   `}
@@ -94,7 +52,6 @@ export const CategoryTypeImage = styled.div`
     height: 100%;
     overflow: hidden;
   };
-
   img{
     object-fit: cover;
   }
@@ -103,7 +60,6 @@ export const CategoryTypeImage = styled.div`
 export const BtnWrapper = styled.div`
   position: absolute;
   bottom: 50px;
-
   button {
     height: 42px;
   }
@@ -124,7 +80,6 @@ export const UploadImageIcon = styled.div`
   span {
     margin: 0;
   }
-
   svg {
     width: 25px;
     height: 25px;
@@ -133,14 +88,12 @@ export const UploadImageIcon = styled.div`
 
 export const CategoryNameWrapper = styled.div`
   margin-top: 50px;
-
   label {
     width: 100%;
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
     margin-bottom: 12px;
   }
-
   input {
     font-size: 14px;
     width: 100%;
@@ -150,7 +103,6 @@ export const ParentCategorySelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-
   label {
     font-size: 14px;
     margin-bottom: 12px;
@@ -173,6 +125,12 @@ export const Option = styled.div`
 export const RightHeader = styled.div`
   display: flex;
   align-items: center;
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
 `
 
 export const ActionSelectorWrapper = styled.div`
@@ -182,7 +140,6 @@ export const ActionSelectorWrapper = styled.div`
     border: none;
     padding: 5px;
     border-radius: 8px;
-
     &:active,
     &:focus {
       border-color: unset !important;
@@ -192,11 +149,9 @@ export const ActionSelectorWrapper = styled.div`
       color: ${props => props.theme.colors.headingColor};
       font-size: 20px;
     }
-
     &:after {
       display: none;
     }
-
     &:hover {
       background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
     }
@@ -204,7 +159,6 @@ export const ActionSelectorWrapper = styled.div`
       background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
     }
   }
-
   .show {
     button {
       background: ${props => props.theme.colors.secundary} !important;
@@ -214,7 +168,6 @@ export const ActionSelectorWrapper = styled.div`
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     }
   }
-
   > div {
     > div {
       border-radius: 8px;

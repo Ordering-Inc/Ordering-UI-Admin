@@ -1,9 +1,10 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SearchBar } from '../SearchBar'
-import { List as MenuIcon, Upload } from 'react-bootstrap-icons'
+import { List as MenuIcon, Upload, LifePreserver } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 import {
   HeaderContainer,
@@ -17,7 +18,8 @@ export const BusinessListingHeader = (props) => {
     searchValue,
     onSearch,
     handleOpenAddBusiness,
-    handleOpenImportCSV
+    handleOpenImportCSV,
+    handleStartTutorial
   } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -34,6 +36,22 @@ export const BusinessListingHeader = (props) => {
           </IconButton>
         )}
         <h1>{t('STORES_LIST', 'Stores list')}</h1>
+        <OverlayTrigger
+          placement='bottom'
+          overlay={
+            <Tooltip>
+              {t('START_TUTORIAL', 'Start tutorial')}
+            </Tooltip>
+          }
+        >
+          <IconButton
+            color='dark'
+            className='tour_btn'
+            onClick={() => handleStartTutorial()}
+          >
+            <LifePreserver />
+          </IconButton>
+        </OverlayTrigger>
       </HeaderTitleContainer>
       <ActionsWrapper>
         <CsvImport>
