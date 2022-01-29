@@ -7,10 +7,9 @@ import {
 import { BusinessCategoryInfoSettingList } from '../BusinessCategoryInfoSettingList'
 import { BusinessProductsCategoyInfo } from '../BusinessProductsCategoyInfo'
 import { SeoOptions } from '../SeoOptions'
-import { useWindowSize } from '../../hooks/useWindowSize'
 import { Alert, Confirm } from '../Confirm'
-import { IconButton, Switch } from '../../styles'
-import { XLg, ThreeDots } from 'react-bootstrap-icons'
+import { Switch } from '../../styles'
+import { ThreeDots } from 'react-bootstrap-icons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 
@@ -28,8 +27,6 @@ import {
 
 const BusinessProductsCategoyDetailsUI = (props) => {
   const {
-    open,
-    onClose,
     formState,
     handlechangeImage,
     handleChangeInput,
@@ -41,27 +38,18 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     parentCategories,
     handleChangeItem,
     isAddMode,
-    handleDeleteCategory
+    handleDeleteCategory,
+
+    isTutorialMode,
+    handleTutorialSkip
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
 
-  const { width } = useWindowSize()
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [selectedInfoItem, setSelctedInfoItem] = useState('information')
-
-  const actionSidebar = (value) => {
-    setIsMenuOpen(value)
-  }
-
-  const handleClose = () => {
-    onClose()
-    setIsMenuOpen(false)
-  }
 
   const closeAlert = () => {
     setAlertState({
@@ -89,25 +77,6 @@ const BusinessProductsCategoyDetailsUI = (props) => {
       })
     }
   }, [formState?.result])
-
-  const toggleMainContent = () => {
-    if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('editCategory').style.width = '100vw'
-      } else {
-        document.getElementById('editCategory').style.width = '500px'
-      }
-    }
-  }
-
-  useEffect(() => {
-    toggleMainContent()
-  }, [width])
-
-  useEffect(() => {
-    if (!open) return
-    actionSidebar(true)
-  }, [open])
 
   return (
     <>
@@ -140,15 +109,21 @@ const BusinessProductsCategoyDetailsUI = (props) => {
               <>
                 <HeaderContainer>
                   <BusinessEnableWrapper className='business_enable_control'>
-                    {
-                      formState?.changes?.name && (
-                        <span>{formState?.changes?.name}</span>
-                      )
-                    }
-                    <Switch
-                      defaultChecked={formState?.changes?.enabled || false}
-                      onChange={(val) => handleChangeCheckBox({ enabled: val })}
-                    />
+                    {isAddMode ? (
+                      <span>{t('NEW_CATEGORY', 'New category')}</span>
+                    ) : (
+                      <>
+                        {
+                          formState?.changes?.name && (
+                            <span>{formState?.changes?.name}</span>
+                          )
+                        }
+                        <Switch
+                          defaultChecked={formState?.changes?.enabled || false}
+                          onChange={(val) => handleChangeCheckBox({ enabled: val })}
+                        />
+                      </>
+                    )}
                   </BusinessEnableWrapper>
                   <RightHeader>
                     {!isAddMode && (
@@ -167,21 +142,16 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                         </DropdownButton>
                       </ActionSelectorWrapper>
                     )}
-                    <IconButton
-                      color='black'
-                      onClick={handleClose}
-                    >
-                      <XLg />
-                    </IconButton>
                   </RightHeader>
                 </HeaderContainer>
-                <BusinessCategoryInfoSettingList
-                  selectedInfoItem={selectedInfoItem}
-                  handleSelectInfoItem={setSelctedInfoItem}
-                />
+                {!isAddMode && (
+                  <BusinessCategoryInfoSettingList
+                    selectedInfoItem={selectedInfoItem}
+                    handleSelectInfoItem={setSelctedInfoItem}
+                  />
+                )}
                 {selectedInfoItem === 'information' && (
                   <BusinessProductsCategoyInfo
-                    open={open}
                     formState={formState}
                     handlechangeImage={handlechangeImage}
                     handleChangeInput={handleChangeInput}
@@ -192,6 +162,8 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                     parentCategories={parentCategories}
                     handleChangeItem={handleChangeItem}
                     isAddMode={isAddMode}
+                    isTutorialMode={isTutorialMode}
+                    handleTutorialSkip={handleTutorialSkip}
                   />
                 )}
                 {selectedInfoItem === 'seo_options' && (

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useLanguage, DragAndDrop, ExamineClick, useUtils } from 'ordering-components-admin'
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
@@ -15,7 +15,8 @@ import {
   UploadImageIconContainer,
   UploadImageIcon,
   CameraWrapper,
-  WrapperImage
+  WrapperImage,
+  ActionButtons
 } from './styles'
 
 export const SeoOptions = (props) => {
@@ -30,7 +31,7 @@ export const SeoOptions = (props) => {
     isProductSeo,
     isCategorySeo
   } = props
-  
+
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const productImageInputRef = useRef(null)
@@ -47,7 +48,7 @@ export const SeoOptions = (props) => {
         ...formState,
         changes: {
           ...formState.changes,
-          seo_image: optimizeImage(reader.result,'h_200,c_limit')
+          seo_image: optimizeImage(reader.result, 'h_200,c_limit')
         }
       })
     }
@@ -81,6 +82,13 @@ export const SeoOptions = (props) => {
     setFormState({
       ...formState,
       changes: { ...formState?.changes, [e.target.name]: e.target.value }
+    })
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
     })
   }
 
@@ -159,14 +167,16 @@ export const SeoOptions = (props) => {
             placeholder={t('SEO_DESCRIPTION', 'SEO Description')}
           />
         </WrapperDescription>
-        <Button
-          color='primary'
-          borderRadius='5px'
-          disabled={formState.loading || Object.keys(formState?.changes).length === 0}
-          onClick={() => handleUpdateClick()}
-        >
-          {formState.loading ? t('UPDATING', 'Updating') : t('SAVE', 'Save')}
-        </Button>
+        <ActionButtons>
+          <Button
+            color='primary'
+            borderRadius='5px'
+            disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+            onClick={() => handleUpdateClick()}
+          >
+            {formState.loading ? t('UPDATING', 'Updating') : t('SAVE', 'Save')}
+          </Button>
+        </ActionButtons>
       </Container>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
