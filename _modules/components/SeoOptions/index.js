@@ -133,6 +133,13 @@ var SeoOptions = function SeoOptions(props) {
     }));
   };
 
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_IMAGE', 'SEO Image')), /*#__PURE__*/_react.default.createElement(_styles.SEOImage, {
     onClick: function onClick() {
       return handleClickImage();
@@ -179,14 +186,14 @@ var SeoOptions = function SeoOptions(props) {
       if (isProductSeo || isCategorySeo) handleProductCategoryChangeInput(e);
     },
     placeholder: t('SEO_DESCRIPTION', 'SEO Description')
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     borderRadius: "5px",
     disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0,
     onClick: function onClick() {
       return handleUpdateClick();
     }
-  }, formState.loading ? t('UPDATING', 'Updating') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, formState.loading ? t('UPDATING', 'Updating') : t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

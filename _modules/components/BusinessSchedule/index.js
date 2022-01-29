@@ -39,7 +39,9 @@ var BusinessScheduleUI = function BusinessScheduleUI(props) {
   var business = props.business,
       formState = props.formState,
       handleChangeScheduleState = props.handleChangeScheduleState,
-      handleUpdateSchedule = props.handleUpdateSchedule;
+      handleUpdateSchedule = props.handleUpdateSchedule,
+      isTutorialMode = props.isTutorialMode,
+      handleTutorialSkip = props.handleTutorialSkip;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -48,14 +50,18 @@ var BusinessScheduleUI = function BusinessScheduleUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ScheduleContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('SCHEDULE', 'Schedule')), /*#__PURE__*/_react.default.createElement(_styles2.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_Schedule.Schedule, {
     scheduleList: business === null || business === void 0 ? void 0 : business.schedule,
     handleChangeScheduleState: handleChangeScheduleState
-  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.BottomActionContainer, null, /*#__PURE__*/_react.default.createElement("div", null, isTutorialMode && /*#__PURE__*/_react.default.createElement(_styles2.SkipButton, {
+    onClick: function onClick() {
+      return handleTutorialSkip();
+    }
+  }, t('TUTORIAL_SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || (formState === null || formState === void 0 ? void 0 : formState.loading),
     onClick: function onClick() {
       return handleUpdateSchedule();
     }
-  }, t('SAVE', 'Save'))));
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save'))))));
 };
 
 var BusinessSchedule = function BusinessSchedule(props) {

@@ -60,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsUsersUI = function ReportsUsersUI(props) {
-  var _reportData$content6, _reportData$content6$, _reportData$content6$2, _reportData$content6$3, _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content7$3;
+  var _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content7$3;
 
   var reportData = props.reportData,
       filterList = props.filterList,
@@ -70,7 +70,7 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       dataOptions = _useState2[0],
       setDataOptions = _useState2[1];
@@ -80,42 +80,44 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
       isAppIdFilter = _useState4[0],
       setIsAppIdFilter = _useState4[1];
 
+  var generateColor = function generateColor() {
+    var colorList = ['#2C7BE5', '#52C9FD', '#FFD233', '#EB5F79', '#2ED690'];
+    return colorList[Math.round(Math.random() * (colorList.length - 1))];
+  };
+
   var generateData = function generateData() {
-    var _reportData$content, _reportData$content$d, _reportData$content$d2, _reportData$content$d3;
+    var _reportData$content, _reportData$content$d, _reportData$content$d2;
 
     var values = [];
 
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$d = _reportData$content.dataset) === null || _reportData$content$d === void 0 ? void 0 : (_reportData$content$d2 = _reportData$content$d.dataset[0]) === null || _reportData$content$d2 === void 0 ? void 0 : (_reportData$content$d3 = _reportData$content$d2.data) === null || _reportData$content$d3 === void 0 ? void 0 : _reportData$content$d3.length) > 0) {
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$d = _reportData$content.dataset) === null || _reportData$content$d === void 0 ? void 0 : (_reportData$content$d2 = _reportData$content$d.dataset) === null || _reportData$content$d2 === void 0 ? void 0 : _reportData$content$d2.length) > 0) {
       var _reportData$content2, _reportData$content2$, _reportData$content2$2;
 
       values = reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.dataset) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.dataset) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.map(function (item, index) {
+        var _item$data;
+
         var list = [];
-        (item === null || item === void 0 ? void 0 : item.data) && item.data.forEach(function (value) {
-          list.push(value.y);
-        });
+
+        if (item !== null && item !== void 0 && (_item$data = item.data) !== null && _item$data !== void 0 && _item$data.isArray) {
+          item.data.forEach(function (value) {
+            list.push(value.y);
+          });
+        } else {
+          Object.keys(item.data).forEach(function (key) {
+            list.push(item.data[key].y);
+          });
+        }
+
+        var bgColor = index === 0 ? '#2C7BE5' : generateColor();
         return {
           label: item.label,
           data: [].concat(list),
           fill: true,
-          backgroundColor: 'rgba(75,192,192,0.2)',
-          borderColor: (0, _polished.lighten)(index / 10, '#2C7BE5'),
+          backgroundColor: (0, _polished.transparentize)(0.9, bgColor),
+          borderColor: bgColor,
           tension: 0.4,
           borderWidth: 3
         };
-      });
-    }
-
-    return values;
-  };
-
-  var generateLabel = function generateLabel() {
-    var _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content3$3;
-
-    var values = [];
-
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.dataset) === null || _reportData$content3$ === void 0 ? void 0 : (_reportData$content3$2 = _reportData$content3$.dataset[0]) === null || _reportData$content3$2 === void 0 ? void 0 : (_reportData$content3$3 = _reportData$content3$2.data) === null || _reportData$content3$3 === void 0 ? void 0 : _reportData$content3$3.length) > 0) {
-      reportData.content.dataset.dataset[0].data.forEach(function (data) {
-        values.push(data.x);
       });
     }
 
@@ -153,14 +155,14 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
   };
 
   var downloadCSV = function downloadCSV() {
-    var _reportData$content4, _reportData$content4$, _reportData$content4$2, _reportData$content4$3;
+    var _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content3$3;
 
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.dataset) === null || _reportData$content4$ === void 0 ? void 0 : (_reportData$content4$2 = _reportData$content4$.dataset[0]) === null || _reportData$content4$2 === void 0 ? void 0 : (_reportData$content4$3 = _reportData$content4$2.data) === null || _reportData$content4$3 === void 0 ? void 0 : _reportData$content4$3.length) > 0) {
-      var _reportData$content5, _reportData$content5$, _reportData$content5$2;
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.dataset) === null || _reportData$content3$ === void 0 ? void 0 : (_reportData$content3$2 = _reportData$content3$.dataset[0]) === null || _reportData$content3$2 === void 0 ? void 0 : (_reportData$content3$3 = _reportData$content3$2.data) === null || _reportData$content3$3 === void 0 ? void 0 : _reportData$content3$3.length) > 0) {
+      var _reportData$content4, _reportData$content4$, _reportData$content4$2;
 
       var csv = "".concat(t('TIME', 'Time'), ", ").concat(t('USERS', 'Users'), "\n");
 
-      var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 ? void 0 : (_reportData$content5$ = _reportData$content5.dataset) === null || _reportData$content5$ === void 0 ? void 0 : (_reportData$content5$2 = _reportData$content5$.dataset[0]) === null || _reportData$content5$2 === void 0 ? void 0 : _reportData$content5$2.data),
+      var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.dataset) === null || _reportData$content4$ === void 0 ? void 0 : (_reportData$content4$2 = _reportData$content4$.dataset[0]) === null || _reportData$content4$2 === void 0 ? void 0 : _reportData$content4$2.data),
           _step;
 
       try {
@@ -189,12 +191,21 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    var defaultData = {
-      labels: generateLabel(),
-      datasets: generateData()
-    };
-    setDataOptions(defaultData);
+    var _reportData$content5, _reportData$content5$, _reportData$content5$2;
+
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 ? void 0 : (_reportData$content5$ = _reportData$content5.dataset) === null || _reportData$content5$ === void 0 ? void 0 : (_reportData$content5$2 = _reportData$content5$.x) === null || _reportData$content5$2 === void 0 ? void 0 : _reportData$content5$2.labels.length) > 0) {
+      var _reportData$content6, _reportData$content6$, _reportData$content6$2;
+
+      var defaultData = {
+        labels: reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.dataset) === null || _reportData$content6$ === void 0 ? void 0 : (_reportData$content6$2 = _reportData$content6$.x) === null || _reportData$content6$2 === void 0 ? void 0 : _reportData$content6$2.labels,
+        datasets: generateData()
+      };
+      setDataOptions(defaultData);
+    }
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.content]);
+  (0, _react.useEffect)(function () {
+    if (reportData !== null && reportData !== void 0 && reportData.loading) setDataOptions(null);
+  }, [reportData === null || reportData === void 0 ? void 0 : reportData.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.ReportsUsersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('REGISTER_USERS', 'Register users')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setIsAppIdFilter(true);
@@ -203,14 +214,14 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.dataset) === null || _reportData$content6$ === void 0 ? void 0 : (_reportData$content6$2 = _reportData$content6$.dataset[0]) === null || _reportData$content6$2 === void 0 ? void 0 : (_reportData$content6$3 = _reportData$content6$2.data) === null || _reportData$content6$3 === void 0 ? void 0 : _reportData$content6$3.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset[0]) === null || _reportData$content7$2 === void 0 ? void 0 : (_reportData$content7$3 = _reportData$content7$2.data) === null || _reportData$content7$3 === void 0 ? void 0 : _reportData$content7$3.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('REGISTER_USERS', 'Register users')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV();
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset[0]) === null || _reportData$content7$2 === void 0 ? void 0 : (_reportData$content7$3 = _reportData$content7$2.data) === null || _reportData$content7$3 === void 0 ? void 0 : _reportData$content7$3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+  }) : dataOptions ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
     data: dataOptions,
     options: options
   }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {

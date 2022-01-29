@@ -47,6 +47,8 @@ var _BatchImageForm = require("../BatchImageForm");
 
 var _Modal = require("../Modal");
 
+var _SideBar = require("../SideBar");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -321,13 +323,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleOpenProductDetails: handleOpenProductDetails,
     handleParentProductAdd: handleProductAdd,
     isParentProductAdd: isProductAdd
-  }))))), (categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategoyDetails.BusinessProductsCategoyDetails, _extends({}, props, {
+  }))))), (categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open) && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     open: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.open,
+    onClose: handleCloseEdit
+  }, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategoyDetails.BusinessProductsCategoyDetails, _extends({}, props, {
     onClose: handleCloseEdit,
     category: categoryToEdit === null || categoryToEdit === void 0 ? void 0 : categoryToEdit.category,
     businessState: businessState,
     categorySelected: categorySelected
-  })), openProductDetails && /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
+  }))), openProductDetails && /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
     open: openProductDetails,
     onClose: handleCloseProductDetails,
     product: selectedProduct,

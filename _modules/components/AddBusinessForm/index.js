@@ -13,8 +13,6 @@ var _reactHookForm = require("react-hook-form");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _Confirm = require("../Confirm");
 
 var _utils = require("../../utils");
@@ -58,8 +56,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddBusinessFormUI = function AddBusinessFormUI(props) {
   var _configs$google_maps_, _formState$changes, _formState$result3, _formState$result3$re, _formState$result4, _formState$result4$re, _formState$changes2, _formState$changes3, _formState$result5, _formState$result5$re, _formState$result6, _formState$result6$re, _formState$changes4, _formState$result7, _formState$result8, _formState$result8$re, _formState$changes5, _formState$result9, _formState$result10, _formState$result10$r, _formState$changes6, _formState$result11, _formState$result12, _formState$result12$r, _formState$changes7, _formState$result13, _formState$result14, _formState$result14$r, _formState$changes8, _formState$result15, _formState$result16, _formState$result16$r, _formState$changes$ci, _formState$changes9, _formState$result17, _formState$result18, _formState$result18$r, _formState$changes$ad, _formState$changes10, _configs$country_auto, _configs$google_maps_2, _formState$changes$lo, _formState$changes11;
 
-  var actionSidebar = props.actionSidebar,
-      handleItemSelected = props.handleItemSelected,
+  var isTutorialMode = props.isTutorialMode,
       formState = props.formState,
       setFormState = props.setFormState,
       handlechangeImage = props.handlechangeImage,
@@ -178,17 +175,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, t('ADD_BUSINESS', 'Add business'))), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
-    disabled: true,
-    onClick: function onClick() {
-      return handleItemSelected('support');
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return actionSidebar(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, t('NEW_BUSINESS', 'New business'))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.FormInputInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderImage, {
     onClick: function onClick() {
@@ -327,7 +314,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     color: "primary",
     borderRadius: "5px",
     disabled: !(Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0) || (formState === null || formState === void 0 ? void 0 : formState.loading)
-  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS', 'Business'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

@@ -84,7 +84,7 @@ var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObjec
 
 exports.Thead = Thead;
 
-var Tbody = _styledComponents.default.tbody(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n\n  tr {\n    td {\n      padding: 12px 5px;\n      font-size: 12px;\n      text-align: center;\n      color: ", ";\n\n      &:first-child, &:nth-child(2) {\n        text-align: left;\n        color: ", ";\n      }\n\n      &:nth-child(6n-3) {\n        border-left: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
+var Tbody = _styledComponents.default.tbody(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n\n  tr {\n    td {\n      padding: 12px 5px;\n      font-size: 12px;\n      text-align: center;\n      color: ", ";\n      white-space: nowrap;\n\n      &:first-child, &:nth-child(2) {\n        text-align: left;\n        color: ", ";\n      }\n\n      &:nth-child(6n-3) {\n        border-left: 1px solid ", ";\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme8;
 
   return (_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.colors.secundaryDarkContrast;

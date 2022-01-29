@@ -63,12 +63,6 @@ Object.defineProperty(exports, "BusinessDetails", {
     return _BusinessDetails.BusinessDetails;
   }
 });
-Object.defineProperty(exports, "BusinessList", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessList.BusinessList;
-  }
-});
 Object.defineProperty(exports, "BusinessListingHeader", {
   enumerable: true,
   get: function get() {
@@ -127,6 +121,12 @@ Object.defineProperty(exports, "BusinessVideos", {
   enumerable: true,
   get: function get() {
     return _BusinessVideos.BusinessVideos;
+  }
+});
+Object.defineProperty(exports, "BusinessesList", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessesList.BusinessesList;
   }
 });
 Object.defineProperty(exports, "BusinessesSelector", {
@@ -982,7 +982,7 @@ var _BusinessesSelector = require("./components/BusinessesSelector");
 
 var _BusinessessListing = require("./components/BusinessessListing");
 
-var _BusinessList = require("./components/BusinessList");
+var _BusinessesList = require("./components/BusinessesList");
 
 var _BusinessListingHeader = require("./components/BusinessListingHeader");
 

@@ -55,7 +55,9 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   var formState = props.formState,
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
-      handlechangeImage = props.handlechangeImage;
+      handlechangeImage = props.handlechangeImage,
+      isTutorialMode = props.isTutorialMode,
+      handleTutorialSkip = props.handleTutorialSkip;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -120,7 +122,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, null, /*#__PURE__*/_react.default.createElement("h1", null, t('NEW_PRODUCT', 'New product')), /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     onClick: function onClick() {
       return handleClickImage();
     }
@@ -164,7 +166,11 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     onChange: handleChangeInput,
     placeholder: t('WRITE_DESCRIPTION', 'Write description'),
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, isTutorialMode && /*#__PURE__*/_react.default.createElement(_styles.SkipButton, {
+    onClick: function onClick() {
+      return handleTutorialSkip();
+    }
+  }, t('TUTORIAL_SKIP', 'Skip')), formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "submit",
     color: "primary",
     borderRadius: "7.6px",
@@ -172,7 +178,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     onClick: function onClick() {
       return Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 1 && handleUpdateClick();
     }
-  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

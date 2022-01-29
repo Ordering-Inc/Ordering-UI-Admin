@@ -17,6 +17,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
+var _reactBootstrap = require("react-bootstrap");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -37,7 +39,8 @@ var BusinessListingHeader = function BusinessListingHeader(props) {
   var searchValue = props.searchValue,
       onSearch = props.onSearch,
       handleOpenAddBusiness = props.handleOpenAddBusiness,
-      handleOpenImportCSV = props.handleOpenImportCSV;
+      handleOpenImportCSV = props.handleOpenImportCSV,
+      handleStartTutorial = props.handleStartTutorial;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -53,7 +56,16 @@ var BusinessListingHeader = function BusinessListingHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('STORES_LIST', 'Stores list'))), /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CsvImport, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('STORES_LIST', 'Stores list')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    placement: "bottom",
+    overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, t('START_TUTORIAL', 'Start tutorial'))
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "dark",
+    className: "tour_btn",
+    onClick: function onClick() {
+      return handleStartTutorial();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CsvImport, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "5px",
     color: "secundary",
     onClick: function onClick() {

@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _useWindowSize2 = require("../../hooks/useWindowSize");
-
 var _utils = require("../../utils");
 
 var _Confirm = require("../Confirm");
@@ -48,10 +46,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
-  var _configState$configs, _configState$configs$, _formState$changes, _formState$changes2, _formState$result3, _formState$result4, _formState$result4$re, _formState$changes3, _formState$changes4;
+  var _configState$configs, _configState$configs$, _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5;
 
-  var open = props.open,
-      formState = props.formState,
+  var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
@@ -60,7 +57,9 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
       categorySelected = props.categorySelected,
       parentCategories = props.parentCategories,
       handleChangeItem = props.handleChangeItem,
-      isAddMode = props.isAddMode;
+      isAddMode = props.isAddMode,
+      isTutorialMode = props.isTutorialMode,
+      handleTutorialSkip = props.handleTutorialSkip;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,49 +71,37 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
 
   var useParentCategory = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.use_parent_category) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
 
-  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isMenuOpen = _useState2[0],
-      setIsMenuOpen = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
   var categoryTypeImageInputRef = (0, _react.useRef)(null);
 
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      parentCategoriesOptions = _useState6[0],
-      setParentCategoriesOptions = _useState6[1];
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      parentCategoriesOptions = _useState4[0],
+      setParentCategoriesOptions = _useState4[1];
 
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      confirm = _useState8[0],
-      setConfirm = _useState8[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
 
-  var _useState9 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)({
     isAutoGenerate: false,
     autoCodeText: categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.slug
   }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      autoGenerateCode = _useState10[0],
-      setAutoGenerate = _useState10[1];
-
-  var actionSidebar = function actionSidebar(value) {
-    setIsMenuOpen(value);
-  };
+      _useState8 = _slicedToArray(_useState7, 2),
+      autoGenerateCode = _useState8[0],
+      setAutoGenerate = _useState8[1];
 
   var handleClickImage = function handleClickImage() {
     categoryTypeImageInputRef.current.click();
@@ -154,22 +141,22 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   };
 
   var stringToSlug = function stringToSlug(str) {
-    str = str.replace(/^\s+|\s+$/g, ""); // trim
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
 
     str = str.toLowerCase(); // remove accents, swap ñ for n, etc
 
-    var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    var to = "aaaaaaeeeeiiiioooouuuunc------";
+    var from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;';
+    var to = 'aaaaaaeeeeiiiioooouuuunc------';
 
     for (var i = 0, l = from.length; i < l; i++) {
-      str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     }
 
-    str = str.replace(/[^a-z0-9 -]/g, "") // remove invalid chars
-    .replace(/\s+/g, "_") // collapse whitespace and replace by -
-    .replace(/-+/g, "_") // collapse dashes
-    .replace(/^-+/, "") // trim - from start of text
-    .replace(/-+$/, ""); // trim - from end of text
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/\s+/g, '_') // collapse whitespace and replace by -
+    .replace(/-+/g, '_') // collapse dashes
+    .replace(/^-+/, '') // trim - from start of text
+    .replace(/-+$/, ''); // trim - from end of text
 
     return str;
   };
@@ -186,24 +173,6 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
-
-  var toggleMainContent = function toggleMainContent() {
-    if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('editCategory').style.width = '100vw';
-      } else {
-        document.getElementById('editCategory').style.width = '500px';
-      }
-    }
-  };
-
-  (0, _react.useEffect)(function () {
-    toggleMainContent();
-  }, [width]);
-  (0, _react.useEffect)(function () {
-    if (!open) return;
-    actionSidebar(true);
-  }, [open]);
   (0, _react.useEffect)(function () {
     var _parentCategoriesOptions = parentCategories.map(function (category) {
       return {
@@ -267,15 +236,11 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    value: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.slug : (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug) || (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.slug)
-  }), /*#__PURE__*/_react.default.createElement(_styles2.Wrapper, {
-    style: {
-      paddingTop: 10
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug
+  }), /*#__PURE__*/_react.default.createElement(_styles2.GenerateButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "7.6px",
-    disabled: formState.loading,
+    disabled: formState.loading || !((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.name),
     onClick: function onClick() {
       return setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
         isAutoGenerate: true
@@ -301,13 +266,21 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   })), !isAddMode && categorySelected && parentCategories.length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ParentCategorySelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PARENT_CATEGORY', 'Parent category')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_PARENT_CATEGORY', 'Select a parent category'),
     options: parentCategoriesOptions,
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.parent_category_id,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.parent_category_id,
     onChange: function onChange(val) {
       return handleChangeItem({
         parent_category_id: val
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.BtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BtnWrapper, null, isTutorialMode ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SkipButton, {
+    onClick: function onClick() {
+      return handleTutorialSkip();
+    }
+  }, t('TUTORIAL_SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "primary",
+    onClick: handleUpdateClick
+  }, t('SAVE_AND_CONTINUE', 'Save and continue'))) : /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     onClick: handleUpdateClick

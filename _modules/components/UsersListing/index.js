@@ -181,31 +181,34 @@ var UsersListingUI = function UsersListingUI(props) {
 
   var handleSetStorage = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-      var isVisited;
+      var preVisited, visited;
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return (0, _utils.getStorageItem)('isVistedDriverPage', true);
+              return (0, _utils.getStorageItem)('visited', true);
 
             case 2:
-              isVisited = _context.sent;
+              preVisited = _context.sent;
 
-              if (isVisited) {
-                _context.next = 7;
+              if (preVisited !== null && preVisited !== void 0 && preVisited.drivers_page) {
+                _context.next = 8;
                 break;
               }
 
-              _context.next = 6;
-              return (0, _utils.setStorageItem)('isVistedDriverPage', true);
+              visited = _objectSpread(_objectSpread({}, preVisited), {}, {
+                drivers_page: true
+              });
+              _context.next = 7;
+              return (0, _utils.setStorageItem)('visited', visited, true);
 
-            case 6:
+            case 7:
               if (isDriversPage) {
                 _handleOpenTour();
               }
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }

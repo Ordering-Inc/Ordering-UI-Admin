@@ -23,8 +23,6 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _styledComponents = require("styled-components");
 
-var _SpinnerLoader = require("../SpinnerLoader");
-
 var _PaymentOptionStripeDirect = require("../PaymentOptionStripeDirect");
 
 var _PaymentOption = require("../PaymentOption");
@@ -41,7 +39,9 @@ var _Modal = require("../Modal");
 
 var _useWindowSize2 = require("../../hooks/useWindowSize");
 
-var _styles = require("./styles");
+var _styles = require("../../styles");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -94,7 +94,9 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       handleSaveClick = props.handleSaveClick,
       handleStripeConnect = props.handleStripeConnect,
       handleChangeStripeInput = props.handleChangeStripeInput,
-      handleStripeSave = props.handleStripeSave;
+      handleStripeSave = props.handleStripeSave,
+      isTutorialMode = props.isTutorialMode,
+      handleTutorialContinue = props.handleTutorialContinue;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -138,7 +140,6 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     value: 5,
     text: t('DRIVER_THRU', 'Driver thru')
   }];
-  var editablePaymethods = ['stripe_direct', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'paypal'];
 
   var isCheckEnableSate = function isCheckEnableSate(id) {
     var found = businessPaymethodsState.paymethods.find(function (paymethod) {
@@ -182,26 +183,26 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     });
     setSelectedBusinessPaymethod(updatedPaymethod);
   }, [businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods, selectedBusinessPaymethod]);
-  return /*#__PURE__*/_react.default.createElement(_styles.MainContainer, null, actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null)), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMETHODS', 'Payment methods')), paymethodsList.loading || businessPaymethodsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.PaymethodOptionContainer, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMETHODS', 'Payment methods')), paymethodsList.loading || businessPaymethodsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOptionContainer, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.PaymethodOption, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOption, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 15,
       height: 15
-    }), /*#__PURE__*/_react.default.createElement(_styles.PaymethodName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }), /*#__PURE__*/_react.default.createElement(_styles2.PaymethodName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120,
       height: 24
     }))));
-  }) : /*#__PURE__*/_react.default.createElement(_styles.PaymethodListWrapper, null, paymethodsList.paymethods.map(function (paymethod) {
-    return /*#__PURE__*/_react.default.createElement(_styles.PaymethodOptionContainer, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.PaymethodListWrapper, null, paymethodsList.paymethods.map(function (paymethod) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOptionContainer, {
       key: paymethod.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.PaymethodOption, {
+    }, /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOption, {
       onClick: function onClick() {
         return handleClickPayment(paymethod.id);
       }
     }, isCheckEnableSate(paymethod.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles.PaymethodName, null, paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)), isCheckFoundBusinessPaymethod(paymethod.id) && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.PaymethodName, null, paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)), !isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && /*#__PURE__*/_react.default.createElement(_styles2.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
       menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
       title: ActionIcon,
       id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -214,7 +215,13 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
         return handleDeleteBusinessPaymethodOption(paymethod.id);
       }
     }, t('DELETE', 'Delete')))));
-  }))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
+  })), isTutorialMode && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "primary",
+    onClick: function onClick() {
+      return handleTutorialContinue();
+    }
+  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {

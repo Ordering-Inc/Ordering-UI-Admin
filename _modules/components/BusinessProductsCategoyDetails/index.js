@@ -19,8 +19,6 @@ var _BusinessProductsCategoyInfo = require("../BusinessProductsCategoyInfo");
 
 var _SeoOptions = require("../SeoOptions");
 
-var _useWindowSize2 = require("../../hooks/useWindowSize");
-
 var _Confirm = require("../Confirm");
 
 var _styles = require("../../styles");
@@ -60,9 +58,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI(props) {
   var _formState$changes, _formState$changes2, _formState$changes3;
 
-  var open = props.open,
-      onClose = props.onClose,
-      formState = props.formState,
+  var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
@@ -73,51 +69,36 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       parentCategories = props.parentCategories,
       handleChangeItem = props.handleChangeItem,
       isAddMode = props.isAddMode,
-      handleDeleteCategory = props.handleDeleteCategory;
+      handleDeleteCategory = props.handleDeleteCategory,
+      isTutorialMode = props.isTutorialMode,
+      handleTutorialSkip = props.handleTutorialSkip;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isMenuOpen = _useState2[0],
-      setIsMenuOpen = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      confirm = _useState4[0],
+      setConfirm = _useState4[1];
+
+  var _useState5 = (0, _react.useState)('information'),
       _useState6 = _slicedToArray(_useState5, 2),
-      confirm = _useState6[0],
-      setConfirm = _useState6[1];
-
-  var _useState7 = (0, _react.useState)('information'),
-      _useState8 = _slicedToArray(_useState7, 2),
-      selectedInfoItem = _useState8[0],
-      setSelctedInfoItem = _useState8[1];
-
-  var actionSidebar = function actionSidebar(value) {
-    setIsMenuOpen(value);
-  };
-
-  var handleClose = function handleClose() {
-    onClose();
-    setIsMenuOpen(false);
-  };
+      selectedInfoItem = _useState6[0],
+      setSelctedInfoItem = _useState6[1];
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -151,24 +132,6 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
-
-  var toggleMainContent = function toggleMainContent() {
-    if (isMenuOpen) {
-      if (width <= 500) {
-        document.getElementById('editCategory').style.width = '100vw';
-      } else {
-        document.getElementById('editCategory').style.width = '500px';
-      }
-    }
-  };
-
-  (0, _react.useEffect)(function () {
-    toggleMainContent();
-  }, [width]);
-  (0, _react.useEffect)(function () {
-    if (!open) return;
-    actionSidebar(true);
-  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "editCategory"
   }, /*#__PURE__*/_react.default.createElement(_styles2.EditCategoryContent, null, businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
@@ -192,14 +155,14 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     height: 30
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
     className: "business_enable_control"
-  }, (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) && /*#__PURE__*/_react.default.createElement("span", null, formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  }, isAddMode ? /*#__PURE__*/_react.default.createElement("span", null, t('NEW_CATEGORY', 'New category')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) && /*#__PURE__*/_react.default.createElement("span", null, formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) || false,
     onChange: function onChange(val) {
       return handleChangeCheckBox({
         enabled: val
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -208,14 +171,10 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     onClick: function onClick() {
       return handleDeleteClick();
     }
-  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "black",
-    onClick: handleClose
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_BusinessCategoryInfoSettingList.BusinessCategoryInfoSettingList, {
+  }, t('DELETE', 'Delete')))))), !isAddMode && /*#__PURE__*/_react.default.createElement(_BusinessCategoryInfoSettingList.BusinessCategoryInfoSettingList, {
     selectedInfoItem: selectedInfoItem,
     handleSelectInfoItem: setSelctedInfoItem
   }), selectedInfoItem === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategoyInfo.BusinessProductsCategoyInfo, {
-    open: open,
     formState: formState,
     handlechangeImage: handlechangeImage,
     handleChangeInput: handleChangeInput,
@@ -225,7 +184,9 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     categorySelected: categorySelected,
     parentCategories: parentCategories,
     handleChangeItem: handleChangeItem,
-    isAddMode: isAddMode
+    isAddMode: isAddMode,
+    isTutorialMode: isTutorialMode,
+    handleTutorialSkip: handleTutorialSkip
   }), selectedInfoItem === 'seo_options' && /*#__PURE__*/_react.default.createElement(_SeoOptions.SeoOptions, {
     data: categorySelected,
     formState: formState,

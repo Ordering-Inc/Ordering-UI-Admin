@@ -57,7 +57,6 @@ var SideBar = function SideBar(props) {
     }
 
     setIsMenuOpen(value);
-    document.getElementById(id).style.width = value ? width >= sideBarWidth ? "".concat(sideBarWidth, "px") : '100vw' : '0';
   };
 
   (0, _react.useEffect)(function () {
@@ -68,7 +67,7 @@ var SideBar = function SideBar(props) {
         document.getElementById(id).style.width = "".concat(sideBarWidth, "px");
       }
     }
-  }, [width]);
+  }, [width, sideBarWidth]);
   (0, _react.useEffect)(function () {
     if (!open) return;
     actionSidebar(true);

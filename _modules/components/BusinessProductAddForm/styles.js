@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SkeletonWrapper = exports.ProductImage = exports.InputWrapper = exports.FormInput = exports.ActionsForm = void 0;
+exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SkipButton = exports.SkeletonWrapper = exports.ProductImage = exports.InputWrapper = exports.FormInput = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var FormInput = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  overflow: auto;\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n"])));
+var FormInput = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  overflow: auto;\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n\n  > h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 10px;\n    margin-bottom: 50px;\n  }\n"])));
 
 exports.FormInput = FormInput;
 
@@ -51,6 +51,16 @@ var InputWrapper = _styledComponents.default.div(_templateObject10 || (_template
 
 exports.InputWrapper = InputWrapper;
 
-var ActionsForm = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin: 30px 0;\n  position: sticky;\n  top: 100%;\n  > button {\n    height: 42px;\n  }\n"])));
+var ActionsForm = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin: 30px 0;\n  position: sticky;\n  top: 100%;\n  display: flex;\n  align-items: center;\n  > button {\n    height: 42px;\n  }\n"])));
 
 exports.ActionsForm = ActionsForm;
+
+var SkipButton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  ", "\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
+  var _props$theme;
+
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    margin-left: 60px;\n  "]))) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    margin-right: 60px;\n  "])));
+}, function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.SkipButton = SkipButton;

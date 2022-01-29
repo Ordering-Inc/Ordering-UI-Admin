@@ -205,7 +205,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleSuccessDeleteBusinessItem: handleSuccessDeleteBusinessItem
   }), selectedItem === 'schedule' && /*#__PURE__*/_react.default.createElement(_BusinessSchedule.BusinessSchedule, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    handleSuccessBusinessScheduleUpdate: handleUpdateBusinessState
+    handleSuccessUpdate: handleUpdateBusinessState
   }), selectedItem === 'menu' && /*#__PURE__*/_react.default.createElement(_BusinessMenu.BusinessMenu, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessBusinessMenu: handleUpdateBusinessState,

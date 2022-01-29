@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SingleBusiness = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
@@ -19,9 +21,15 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _Confirm = require("../Confirm");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -63,6 +71,28 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
       optimizeImage = _useUtils2[0].optimizeImage;
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      confirm = _useState2[0],
+      setConfirm = _useState2[1];
+
+  var onClickDeleteBusiness = function onClickDeleteBusiness() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_BUSINESS', 'Are you sure that you want to delete this business?'),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeleteBusiness();
+      }
+    });
+  };
 
   var handleClickBusiness = function handleClickBusiness(e) {
     var isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.business_actions');
@@ -137,7 +167,7 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     }
   }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
-      return handleDeleteBusiness();
+      return onClickDeleteBusiness();
     }
   }, t('DELETE', 'Delete')))))))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && businessState.loading || isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessCardContainer, {
     isSkeleton: true
@@ -187,9 +217,27 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     }
   }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
-      return handleDeleteBusiness();
+      return onClickDeleteBusiness();
     }
-  }, t('DELETE', 'Delete')))))))));
+  }, t('DELETE', 'Delete')))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    width: "700px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  }));
 };
 
 var SingleBusiness = function SingleBusiness(props) {

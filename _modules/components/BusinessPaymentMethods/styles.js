@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSpinnerLoader = exports.PaymethodOptionContainer = exports.PaymethodOption = exports.PaymethodName = exports.PaymethodListWrapper = exports.PaymentMethodsContainer = exports.MainContainer = exports.DropDownWrapper = void 0;
+exports.PaymethodOptionContainer = exports.PaymethodOption = exports.PaymethodName = exports.PaymethodListWrapper = exports.PaymentMethodsContainer = exports.MainContainer = exports.DropDownWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,21 +21,25 @@ var MainContainer = _styledComponents.default.div(_templateObject || (_templateO
 
 exports.MainContainer = MainContainer;
 
-var PaymentMethodsContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-x: hidden;\n  flex: 1;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n  }\n  @media (min-width: 576px) {\n    padding: 20px;\n  }\n"])), function (props) {
+var PaymentMethodsContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-x: hidden;\n  flex: 1;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n  }\n  > button {\n    height: 44px;\n    margin: 20px 0;\n  }\n  @media (min-width: 576px) {\n    padding: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.PaymentMethodsContainer = PaymentMethodsContainer;
 
-var PaymethodListWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-top: 1px solid #E9ECEF;\n  margin: 20px 0;\n"])));
+var PaymethodListWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n  margin: 20px 0;\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
 
 exports.PaymethodListWrapper = PaymethodListWrapper;
 
-var PaymethodOptionContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #E9ECEF;\n"])));
+var PaymethodOptionContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
 
 exports.PaymethodOptionContainer = PaymethodOptionContainer;
 
-var PaymethodOption = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 12px 0;\n  cursor: pointer;\n  color: ", ";\n  \n  > svg {\n    font-size: 20px;\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var PaymethodOption = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 16px 0;\n  cursor: pointer;\n  color: ", ";\n  \n  > svg {\n    font-size: 20px;\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.primary;
@@ -43,7 +47,7 @@ var PaymethodOption = _styledComponents.default.div(_templateObject5 || (_templa
 
 exports.PaymethodOption = PaymethodOption;
 
-var PaymethodName = _styledComponents.default.span(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  color: ", ";\n  ", "\n"])), function (props) {
+var PaymethodName = _styledComponents.default.span(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 14px;\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme;
@@ -53,14 +57,12 @@ var PaymethodName = _styledComponents.default.span(_templateObject6 || (_templat
 
 exports.PaymethodName = PaymethodName;
 
-var DropDownWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  button {\n    background: transparent !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n    &:hover {\n      background: ", " !important;\n    }\n  }\n\n  > div {\n    > div {\n      border: 1px solid #E9ECEF;\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n      border-radius: 8px;\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"])), function (props) {
+var DropDownWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  button {\n    background: transparent !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n    &:hover {\n      background: ", " !important;\n    }\n  }\n\n  > div {\n    > div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n      border-radius: 8px;\n\n      a.dropdown-item {\n        font-size: 14px;\n        &:last-child {\n          color: #E63757;\n        }\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.borderColor;
 });
 
 exports.DropDownWrapper = DropDownWrapper;
-
-var WrapperSpinnerLoader = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  > div {\n    position: absolute;\n    top: 0px;\n  }\n"])));
-
-exports.WrapperSpinnerLoader = WrapperSpinnerLoader;
