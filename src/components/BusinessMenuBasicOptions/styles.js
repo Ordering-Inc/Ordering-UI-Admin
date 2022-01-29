@@ -30,7 +30,10 @@ export const OrderType = styled.div`
   display: flex;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid #E9ECEF;
+
+  ${(props) => !props.noBorder && css`
+    border-bottom: 1px solid #E9ECEF;
+  `}
 
   svg {
     font-size: 20px;
@@ -69,5 +72,5 @@ export const ScheduleContainer = styled.div`
 
 export const ScheduleSection = styled.div`
   border-top: 1px solid #E9ECEF;
-  margin-top: 30px;
+  margin-top: 10px;
 `
