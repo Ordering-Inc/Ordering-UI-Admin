@@ -144,6 +144,7 @@ export const Tbody = styled.tbody`
       font-size: 12px;
       text-align: center;
       color: ${props => props.theme?.colors.lightGray};
+      white-space: nowrap;
 
       &:first-child {
         text-align: left;
