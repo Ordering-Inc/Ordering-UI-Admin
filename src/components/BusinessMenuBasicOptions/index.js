@@ -7,6 +7,7 @@ import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Alert } from '../Confirm'
 import { CategoryTreeNode } from '../CategoryTreeNode'
 import { Schedule } from '../Schedule'
+import { useTheme } from 'styled-components'
 
 import {
   BusinessMenuBasicContainer,
@@ -34,6 +35,7 @@ export const BusinessMenuBasicOptions = (props) => {
     subCategoriesList
   } = props
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const isEdit = Object.keys(businessMenuState?.menu).length
 
@@ -103,12 +105,34 @@ export const BusinessMenuBasicOptions = (props) => {
         ))}
         <ScheduleContainer>
           <FieldName>{t('SCHEDULE', 'Schedule')}</FieldName>
-          <ScheduleSection>
-            <Schedule
-              scheduleList={businessMenuState?.menu?.schedule}
-              handleChangeScheduleState={handleChangeScheduleState}
-            />
-          </ScheduleSection>
+          <OrderType
+            noBorder
+            active={(formState?.changes?.use_business_schedule ?? businessMenuState.menu?.use_business_schedule)}
+            onClick={() => handleChangeInput({
+              target: {
+                name: 'use_business_schedule',
+                value: !(formState?.changes?.use_business_schedule ?? businessMenuState.menu?.use_business_schedule)
+              }
+            })}
+          >
+            {
+              (formState?.changes?.use_business_schedule ?? businessMenuState.menu?.use_business_schedule)
+                ? (
+                  <RiCheckboxFill />
+                ) : (
+                  <RiCheckboxBlankLine />
+                )
+            }
+            <span>{t('USE_BUSINESS_SCHEDULE', 'Use business schedule')}</span>
+          </OrderType>
+          {!(formState?.changes?.use_business_schedule ?? businessMenuState.menu?.use_business_schedule) && (
+            <ScheduleSection>
+              <Schedule
+                scheduleList={businessMenuState?.menu?.schedule}
+                handleChangeScheduleState={handleChangeScheduleState}
+              />
+            </ScheduleSection>
+          )}
         </ScheduleContainer>
         <FieldName>{t('COMMENTS', 'Comments')}</FieldName>
         <TextArea
@@ -120,8 +144,37 @@ export const BusinessMenuBasicOptions = (props) => {
           placeholder={t('WRITE_HERE', 'Write here')}
           onChange={(e) => handleChangeInput(e)}
         />
-        <FieldName isBorderBottom>{t('PRODUCTS', 'Products')}</FieldName>
-        {business?.categories.sort((a, b) => a.rank - b.rank).map(category => (
+        <FieldName>{t('PRODUCTS', 'Products')}</FieldName>
+        <OrderType
+          noBorder
+          active={(formState?.changes?.all_products ?? businessMenuState.menu?.all_products)}
+          onClick={() => handleChangeInput({
+            target: {
+              name: 'all_products',
+              value: !(formState?.changes?.all_products ?? businessMenuState.menu?.all_products)
+            }
+          })}
+          style={{
+            paddingTop: 0,
+            paddingBottom: 10,
+            // borderBottomWidth: 1,
+            // borderBottomColor: theme.colors.gray,
+            // borderBottomStyle: 'solid',
+            marginBottom: 10
+          }}
+        >
+          {
+            (formState?.changes?.all_products ?? businessMenuState.menu?.all_products)
+              ? (
+                <RiCheckboxFill />
+              ) : (
+                <RiCheckboxBlankLine />
+              )
+          }
+          <span>{t('ALL_PRODUCTS', 'All products')}</span>
+        </OrderType>
+        {!(formState?.changes?.all_products ?? businessMenuState.menu?.all_products) &&
+          business?.categories.sort((a, b) => a.rank - b.rank).map(category => (
           <CategoryTreeNode
             key={category.id}
             index={0}

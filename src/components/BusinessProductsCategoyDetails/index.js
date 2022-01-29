@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
-  DragAndDrop,
-  ExamineClick,
-  useConfig
-  // BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController
-} from 'ordering-components-admin'
-import {
   BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController
-} from './naked'
-import { bytesConverter } from '../../utils'
+} from 'ordering-components-admin'
+import { BusinessCategoryInfoSettingList } from '../BusinessCategoryInfoSettingList'
+import { BusinessProductsCategoyInfo } from '../BusinessProductsCategoyInfo'
+import { SeoOptions } from '../SeoOptions'
+import { useWindowSize } from '../../hooks/useWindowSize'
 import { Alert, Confirm } from '../Confirm'
-import { Button, DefaultSelect, Input, Switch } from '../../styles'
-import FiCamera from '@meronex/icons/fi/FiCamera'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { IconButton, Switch } from '../../styles'
+import { XLg, ThreeDots } from 'react-bootstrap-icons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 
@@ -25,18 +21,15 @@ import {
   BusinessEnableWrapper,
   CategoryTypeImage,
   BtnWrapper,
-  UploadImageIconContainer,
-  UploadImageIcon,
   CategoryNameWrapper,
-  ParentCategorySelectWrapper,
-  Option,
   RightHeader,
-  ActionSelectorWrapper,
-  SkipButton
+  ActionSelectorWrapper
 } from './styles'
 
 const BusinessProductsCategoyDetailsUI = (props) => {
   const {
+    open,
+    onClose,
     formState,
     handlechangeImage,
     handleChangeInput,
@@ -48,46 +41,26 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     parentCategories,
     handleChangeItem,
     isAddMode,
-    handleDeleteCategory,
-
-    isTutorialMode,
-    handleTutorialSkip
+    handleDeleteCategory
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [configState] = useConfig()
-  const useParentCategory = configState?.configs?.use_parent_category?.value
 
+  const { width } = useWindowSize()
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const categoryTypeImageInputRef = useRef(null)
-  const [parentCategoriesOptions, setParentCategoriesOptions] = useState([])
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [selectedInfoItem, setSelctedInfoItem] = useState('information')
 
-  const handleClickImage = () => {
-    categoryTypeImageInputRef.current.click()
+  const actionSidebar = (value) => {
+    setIsMenuOpen(value)
   }
 
-  const handleFiles = (files) => {
-    if (files.length === 1) {
-      const type = files[0].type.split('/')[0]
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        })
-        return
-      }
-
-      if (bytesConverter(files[0]?.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        })
-        return
-      }
-      handlechangeImage(files[0])
-    }
+  const handleClose = () => {
+    onClose()
+    setIsMenuOpen(false)
   }
 
   const closeAlert = () => {
@@ -117,15 +90,24 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     }
   }, [formState?.result])
 
-  useEffect(() => {
-    const _parentCategoriesOptions = parentCategories.map(category => {
-      return {
-        value: category.id,
-        content: <Option>{category?.name}</Option>
+  const toggleMainContent = () => {
+    if (isMenuOpen) {
+      if (width <= 500) {
+        document.getElementById('editCategory').style.width = '100vw'
+      } else {
+        document.getElementById('editCategory').style.width = '500px'
       }
-    })
-    setParentCategoriesOptions(_parentCategoriesOptions)
-  }, [parentCategories])
+    }
+  }
+
+  useEffect(() => {
+    toggleMainContent()
+  }, [width])
+
+  useEffect(() => {
+    if (!open) return
+    actionSidebar(true)
+  }, [open])
 
   return (
     <>
@@ -158,21 +140,15 @@ const BusinessProductsCategoyDetailsUI = (props) => {
               <>
                 <HeaderContainer>
                   <BusinessEnableWrapper className='business_enable_control'>
-                    {isAddMode ? (
-                      <span>{t('NEW_CATEGORY', 'New category')}</span>
-                    ) : (
-                      <>
-                        {
-                          formState?.changes?.name && (
-                            <span>{formState?.changes?.name}</span>
-                          )
-                        }
-                        <Switch
-                          defaultChecked={formState?.changes?.enabled || false}
-                          onChange={(val) => handleChangeCheckBox({ enabled: val })}
-                        />
-                      </>
-                    )}
+                    {
+                      formState?.changes?.name && (
+                        <span>{formState?.changes?.name}</span>
+                      )
+                    }
+                    <Switch
+                      defaultChecked={formState?.changes?.enabled || false}
+                      onChange={(val) => handleChangeCheckBox({ enabled: val })}
+                    />
                   </BusinessEnableWrapper>
                   <RightHeader>
                     {!isAddMode && (
@@ -191,97 +167,43 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                         </DropdownButton>
                       </ActionSelectorWrapper>
                     )}
+                    <IconButton
+                      color='black'
+                      onClick={handleClose}
+                    >
+                      <XLg />
+                    </IconButton>
                   </RightHeader>
                 </HeaderContainer>
-                <CategoryTypeImage
-                  onClick={() => handleClickImage()}
-                  disabled={formState?.loading}
-                >
-                  <ExamineClick
-                    onFiles={files => handleFiles(files)}
-                    childRef={(e) => { categoryTypeImageInputRef.current = e }}
-                    accept='image/png, image/jpeg, image/jpg'
-                    disabled={formState?.loading}
-                  >
-                    <DragAndDrop
-                      onDrop={dataTransfer => handleFiles(dataTransfer.files)}
-                      accept='image/png, image/jpeg, image/jpg'
-                      disabled={formState?.loading}
-                    >
-                      {
-                      formState?.changes?.image
-                        ? <img src={formState?.changes?.image} alt='business type image' loading='lazy' />
-                        : <div />
-                      }
-                      <UploadImageIconContainer>
-                        <UploadImageIcon>
-                          <FiCamera />
-                        </UploadImageIcon>
-                      </UploadImageIconContainer>
-                    </DragAndDrop>
-                  </ExamineClick>
-                </CategoryTypeImage>
-                <CategoryNameWrapper>
-                  <label>{t('CATEGORY_NAME', 'Category name')}</label>
-                  <Input
-                    placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
-                    name='name'
-                    defaultValue={formState?.changes.name}
-                    onChange={handleChangeInput}
-                    autoComplete='off'
+                <BusinessCategoryInfoSettingList
+                  selectedInfoItem={selectedInfoItem}
+                  handleSelectInfoItem={setSelctedInfoItem}
+                />
+                {selectedInfoItem === 'information' && (
+                  <BusinessProductsCategoyInfo
+                    open={open}
+                    formState={formState}
+                    handlechangeImage={handlechangeImage}
+                    handleChangeInput={handleChangeInput}
+                    handleUpdateClick={handleUpdateClick}
+                    handleChangeCheckBox={handleChangeCheckBox}
+                    category={category}
+                    categorySelected={categorySelected}
+                    parentCategories={parentCategories}
+                    handleChangeItem={handleChangeItem}
+                    isAddMode={isAddMode}
                   />
-                </CategoryNameWrapper>
-                {useParentCategory === '1' && (
-                  <>
-                    {categorySelected && isAddMode && (
-                      <BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex', alignItems: 'center' }}>
-                        <span style={{ fontSize: 15 }}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
-                        <Switch
-                          defaultChecked={false}
-                          onChange={(val) => handleChangeCheckBox({ enabledParent: val })}
-                        />
-                      </BusinessEnableWrapper>
-                    )}
-
-                    {!isAddMode && categorySelected && parentCategories.length > 0 && (
-                      <ParentCategorySelectWrapper>
-                        <label>{t('PARENT_CATEGORY', 'Parent category')}</label>
-                        <DefaultSelect
-                          placeholder={t('SELECT_PARENT_CATEGORY', 'Select a parent category')}
-                          options={parentCategoriesOptions}
-                          defaultValue={formState?.changes?.parent_category_id}
-                          onChange={val => handleChangeItem({ parent_category_id: val })}
-                        />
-                      </ParentCategorySelectWrapper>
-                    )}
-                  </>
                 )}
-                <BtnWrapper>
-                  {isTutorialMode ? (
-                    <>
-                      <SkipButton
-                        onClick={() => handleTutorialSkip()}
-                      >
-                        {t('TUTORIAL_SKIP', 'Skip')}
-                      </SkipButton>
-                      <Button
-                        borderRadius='8px'
-                        color='primary'
-                        onClick={handleUpdateClick}
-                      >
-                        {t('SAVE_AND_CONTINUE', 'Save and continue')}
-                      </Button>
-                    </>
-                  ) : (
-                    <Button
-                      borderRadius='8px'
-                      color='primary'
-                      onClick={handleUpdateClick}
-                    >
-                      {category ? t('SAVE', 'Save') : t('ADD', 'Add')}
-                    </Button>
-                  )}
-                </BtnWrapper>
+                {selectedInfoItem === 'seo_options' && (
+                  <SeoOptions
+                    data={categorySelected}
+                    formState={formState}
+                    handleUpdateClick={handleUpdateClick}
+                    handleProductCategoryChangeInput={handleChangeInput}
+                    handlechangeImageProductCategory={handlechangeImage}
+                    isCategorySeo
+                  />
+                )}
               </>
             )
           }
