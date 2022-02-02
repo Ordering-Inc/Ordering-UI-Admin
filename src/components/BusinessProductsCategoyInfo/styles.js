@@ -2,36 +2,7 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
-  display: flex;
-  width: 0;
-  position: fixed;
-  box-shadow: -4px 0px 7px #ccc;
-
-  ${({ isDriverOrders }) => isDriverOrders && css`
-    position: absolute;
-    box-shadow: none;
-
-    ${props => props.theme?.rtl ? css`
-      border-right: 1px solid #CCC;
-    ` : css`
-      border-left: 1px solid #CCC;
-    `}
-  `}
-  background: #FFF;
-  height: 100vh;
-  top: 0px;
-  z-index: 1001;
-  overflow-x: hidden;
-  transition: 0.3s;
-
-  ${props => props.theme?.rtl ? css`
-    left: 0px;
-    ` : css`
-    right: 0px;
-  `}
-  @media print {
-    box-shadow: none;
-  }
+  width: 100%;
 `
 
 export const SkeletonWrapper = styled.div`
@@ -101,8 +72,10 @@ export const CategoryTypeImage = styled.div`
 `
 
 export const BtnWrapper = styled.div`
-  position: absolute;
-  bottom: 50px;
+  position: sticky;
+  top: 100%;
+  display: flex;
+  align-items: center;
 
   button {
     height: 42px;
@@ -240,18 +213,26 @@ export const InfoConatiner = styled.div`
     padding: 20px;
   }
 `
-export const Wrapper = styled.div`
+export const GenerateButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-  
-  > span {
-    font-size: 16px;
-    font-weight: 600;
+  padding: 20px 0;
 
-    ${props => props.theme?.rtl ? css`
-      margin-left: 20px;
-    ` : css`
-      margin-right: 20px;
-    `}
+  > button {
+    height: 42px;
+  }
+`
+export const SkipButton = styled.div`
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 60px;
+  ` : css`
+    margin-right: 60px;
+  `}
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
   }
 `

@@ -2,10 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   min-height: calc(100% - 130px);
-  > button {
-    position: sticky;
-    top: 100%;
-  }
 `
 export const WrapperShortDescription = styled.div`
   label {
@@ -109,5 +105,29 @@ export const CameraWrapper = styled.span`
   svg {
     font-size: 18px;
     color: ${props => props.theme.colors.secundaryContrast};
+  }
+`
+export const SkipButton = styled.div`
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 60px;
+  ` : css`
+    margin-right: 60px;
+  `}
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
+`
+export const ActionButtons = styled.div`
+  position: sticky;
+  top: 100%;
+  display: flex;
+  align-items: center;
+
+  > button {
+    height: 42px;
   }
 `

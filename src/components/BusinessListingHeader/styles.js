@@ -43,6 +43,20 @@ export const HeaderTitleContainer = styled.div`
       width: 25px;
       height: 25px;
     }
+  
+    &.tour_btn {
+      ${props => props.theme?.rtl ? css`
+        margin-left: -8px;
+        margin-right: 8px;
+      ` : css`
+        margin-right: -8px;
+        margin-left: 8px;
+      `}
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 `
 

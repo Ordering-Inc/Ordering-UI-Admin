@@ -9,12 +9,11 @@ import {
   GoogleMapsMap,
   BusinessFormDetails as BusinessFormDetailsController
 } from 'ordering-components-admin'
-import { XLg, LifePreserver } from 'react-bootstrap-icons'
 import { Alert } from '../Confirm'
 import { bytesConverter } from '../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Input, TextArea } from '../../styles/Inputs'
-import { Button, IconButton } from '../../styles/Buttons'
+import { Button } from '../../styles/Buttons'
 import { CitySelector } from '../CitySelector'
 import Skeleton from 'react-loading-skeleton'
 
@@ -22,8 +21,6 @@ import {
   BusinessDetailsContainer,
   DetailsHeader,
   BusinessName,
-  LeftHeader,
-  RightHeader,
   FormInput,
   HeaderImage,
   SkeletonWrapper,
@@ -38,8 +35,7 @@ import {
 
 const AddBusinessFormUI = (props) => {
   const {
-    actionSidebar,
-    handleItemSelected,
+    isTutorialMode,
     formState,
     setFormState,
     handlechangeImage,
@@ -140,25 +136,9 @@ const AddBusinessFormUI = (props) => {
     <>
       <BusinessDetailsContainer>
         <DetailsHeader>
-          <LeftHeader>
-            <BusinessName>
-              {t('ADD_BUSINESS', 'Add business')}
-            </BusinessName>
-          </LeftHeader>
-          <RightHeader>
-            <IconButton
-              disabled
-              onClick={() => handleItemSelected('support')}
-            >
-              <LifePreserver />
-            </IconButton>
-            <IconButton
-              color='black'
-              onClick={() => actionSidebar(false)}
-            >
-              <XLg />
-            </IconButton>
-          </RightHeader>
+          <BusinessName>
+            {t('NEW_BUSINESS', 'New business')}
+          </BusinessName>
         </DetailsHeader>
         <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
           <FormInputInnerContainer>
@@ -355,7 +335,11 @@ const AddBusinessFormUI = (props) => {
               borderRadius='5px'
               disabled={!(Object.keys(formState?.changes).length > 0) || formState?.loading}
             >
-              {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
+              {
+                formState?.loading
+                  ? t('LOADING', 'Loading')
+                  : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save')
+              }
             </Button>
           </ActionsForm>
         </FormInput>

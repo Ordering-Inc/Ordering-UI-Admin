@@ -21,6 +21,8 @@ import { Button, IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'
 import { BatchImageForm } from '../BatchImageForm'
 import { Modal } from '../Modal'
+import { SideBar } from '../SideBar'
+
 import {
   CategoryProductsContainer,
   HeaderContainer,
@@ -280,14 +282,18 @@ const BusinessProductsListingUI = (props) => {
       </CategoryProductsContainer>
       {
         categoryToEdit?.open && (
-          <BusinessProductsCategoyDetails
-            {...props}
+          <SideBar
             open={categoryToEdit?.open}
             onClose={handleCloseEdit}
-            category={categoryToEdit?.category}
-            businessState={businessState}
-            categorySelected={categorySelected}
-          />
+          >
+            <BusinessProductsCategoyDetails
+              {...props}
+              onClose={handleCloseEdit}
+              category={categoryToEdit?.category}
+              businessState={businessState}
+              categorySelected={categorySelected}
+            />
+          </SideBar>
         )
       }
       {openProductDetails && (

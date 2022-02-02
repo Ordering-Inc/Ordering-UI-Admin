@@ -28,6 +28,13 @@ import loginHero from './template/assets/images/loginHero.png'
 import personalization from './template/assets/images/personalization.svg'
 import mobileCase from './template/assets/images/mobile-case.png'
 import mobileMask from './template/assets/images/mobile-mask.png'
+
+/**
+ * business tutorials
+ */
+import businessTutorial1 from './template/assets/images/tutorials/business-tutorial-1.png'
+import businessTutorial2 from './template/assets/images/tutorials/business-tutorial-2.png'
+
 /**
  * dummies
  */
@@ -214,6 +221,10 @@ theme.images = {
     businessLogo: storeDummy,
     promotionDummy: promotionDummy,
     product: productDummy
+  },
+  tutorials: {
+    businessTutorial1: businessTutorial1,
+    businessTutorial2: businessTutorial2
   }
 }
 

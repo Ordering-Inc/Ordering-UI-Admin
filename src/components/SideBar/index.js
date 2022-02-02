@@ -12,7 +12,8 @@ export const SideBar = (props) => {
     sidebarId,
     defaultSideBarWidth,
     moveDistance,
-    isBorderShow
+    isBorderShow,
+    noAnimation
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,9 +26,6 @@ export const SideBar = (props) => {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById(id).style.width = value
-      ? width >= sideBarWidth ? `${sideBarWidth}px` : '100vw'
-      : '0'
   }
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export const SideBar = (props) => {
         document.getElementById(id).style.width = `${sideBarWidth}px`
       }
     }
-  }, [width])
+  }, [width, sideBarWidth])
 
   useEffect(() => {
     if (!open) return
@@ -51,6 +49,7 @@ export const SideBar = (props) => {
         id={id}
         isBorderShow={isBorderShow}
         moveDistance={moveDistance}
+        noAnimation={noAnimation}
       >
         <IconButton
           color='black'
