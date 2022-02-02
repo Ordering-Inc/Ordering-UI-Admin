@@ -27,7 +27,10 @@ import {
 export const OrderContactInformation = (props) => {
   const {
     order,
-    driversList
+    driversList,
+    isTourOpen,
+    setCurrentTourStep,
+    handleOpenMessages
   } = props
 
   const [, t] = useLanguage()
@@ -239,6 +242,9 @@ export const OrderContactInformation = (props) => {
               isPhoneView
               defaultValue={order?.driver?.id ? order.driver.id : 'default'}
               order={order}
+              isTourOpen={isTourOpen}
+              setCurrentTourStep={setCurrentTourStep}
+              handleOpenMessages={handleOpenMessages}
             />
           </DriverSelectorContainer>
         </DriverInfoContainer>

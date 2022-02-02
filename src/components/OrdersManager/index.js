@@ -14,6 +14,7 @@ import {
 import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import { OrderNotification } from '../OrderNotification'
+import { WizardOrders } from '../WizardOrders'
 
 const OrdersManagerUI = (props) => {
   const {
@@ -51,6 +52,9 @@ const OrdersManagerUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
 
+  const [isTourOpen, setIsTourOpen] = useState(false)
+  const [currentTourStep, setCurrentTourStep] = useState(0)
+
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
@@ -72,6 +76,17 @@ const OrdersManagerUI = (props) => {
     } else {
       handleCustomOrderDetail && handleCustomOrderDetail(true)
     }
+    if (isTourOpen) {
+      setTimeout(() => {
+        setCurrentTourStep(1)
+      }, 50)
+    }
+  }
+
+  const handleOpenTour = () => {
+    setCurrentTourStep(0)
+    setIsTourOpen(true)
+    setIsOpenOrderDetail(false)
   }
 
   useEffect(() => {
@@ -124,6 +139,7 @@ const OrdersManagerUI = (props) => {
           selectedOrderIds={selectedOrderIds}
           handleDeleteMultiOrders={handleDeleteMultiOrders}
           handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+          handleOpenTour={() => handleOpenTour()}
         />
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
@@ -153,6 +169,8 @@ const OrdersManagerUI = (props) => {
                 orderDetailId={orderDetailId}
                 handleOpenOrderDetail={handleOpenOrderDetail}
                 setSelectedOrderIds={setSelectedOrderIds}
+                currentTourStep={currentTourStep}
+                handleOpenTour={handleOpenTour}
               />
             </WrapItemView>
           </OrdersInnerContent>
@@ -166,7 +184,9 @@ const OrdersManagerUI = (props) => {
           order={detailsOrder}
           orderId={orderDetailId}
           driversList={driversList}
+          isTourOpen={isTourOpen}
           onClose={() => handleBackRedirect()}
+          setCurrentTourStep={setCurrentTourStep}
         />
       )}
 
@@ -176,6 +196,14 @@ const OrdersManagerUI = (props) => {
         <WrapperIndicator>
           {selectedOrderIds.length}/{totalSelectedOrder}
         </WrapperIndicator>
+      )}
+
+      {isTourOpen && (
+        <WizardOrders
+          isTourOpen={isTourOpen}
+          setIsTourOpen={setIsTourOpen}
+          currentStep={currentTourStep}
+        />
       )}
     </>
   )
