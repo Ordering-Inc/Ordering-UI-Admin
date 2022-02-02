@@ -228,8 +228,7 @@ export const ProductDetatilsInformation = (props) => {
             disabled={formState.loading}
             autoComplete='off'
             value={
-              formState?.changes?.slug ? formState?.changes?.slug ||  '' 
-              : formState?.changes?.slug === '' ? '' : formState?.result?.slug || product?.slug || ''
+              formState?.changes?.slug === '' ? '' : formState?.changes?.slug || formState?.result?.slug || product?.slug || ''
             }
           />
           <Wrapper
