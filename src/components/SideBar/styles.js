@@ -8,7 +8,9 @@ export const BarContainer = styled.div`
   top: 0;
   background: #FFF;
   overflow-x: hidden;
-  transition: 0.3s;
+  ${({ noAnimation }) => !noAnimation && css`
+    transition: 0.3s;
+  `}
   height: 100vh;
   ${({ isBorderShow }) => isBorderShow ? css`
     ${props => props.theme?.rtl ? css`
