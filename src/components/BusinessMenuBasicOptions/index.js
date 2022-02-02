@@ -55,7 +55,7 @@ export const BusinessMenuBasicOptions = (props) => {
   }
 
   const onAddBusinessMenuOption = () => {
-    if (formState.changes?.products?.length) {
+    if (formState.changes?.products?.length || formState.changes?.all_products) {
       handleAddBusinessMenuOption()
     } else {
       setAlertState({
