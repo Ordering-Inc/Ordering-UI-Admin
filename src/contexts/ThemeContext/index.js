@@ -107,9 +107,6 @@ export const ThemeProvider = ({ children, ...props }) => {
       div[data-tour-elem=controls] {
         display: none;
       }
-      .reactour__helper {
-        transition: transform 0.3s;
-      }
     }
   `
 
