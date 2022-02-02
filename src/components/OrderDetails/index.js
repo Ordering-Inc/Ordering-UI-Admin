@@ -35,9 +35,12 @@ const OrderDetailsUI = (props) => {
     driversList,
     handleBackRedirect,
     handleUpdateOrderStatus,
+    isTourOpen,
     handleUpdateOrderForUnreadCount,
-    messages
+    messages,
+    setCurrentTourStep
   } = props
+
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [openMessages, setOpenMessages] = useState({ chat: false, history: false })
@@ -190,6 +193,11 @@ const OrderDetailsUI = (props) => {
     }
   }, [extraOpen])
 
+  const handleChangeTour = (evt) => {
+    if (!isTourOpen) return
+    setCurrentTourStep(2)
+  }
+
   return (
     <Container
       isSelectedOrders={isSelectedOrders}
@@ -207,7 +215,7 @@ const OrderDetailsUI = (props) => {
         </SkeletonWrapper>
       )}
       {order && Object.keys(order).length > 0 && !loading && (
-        <OrderDetailsContent>
+        <OrderDetailsContent data-tour='tour_detail' onClick={(e) => handleChangeTour(e)}>
           <OrderDetailsHeader
             order={order}
             extraOpen={extraOpen}
@@ -249,24 +257,29 @@ const OrderDetailsUI = (props) => {
               <p>{getPriorityTag(order?.priority)}</p>
             </div>
           </AdvancedLogistic>
-          <OrderContactInformation
-            order={order}
-            extraOpen={extraOpen}
-            unreadAlert={unreadAlert}
-            driversList={driversList}
-          />
-          <OrderProducts>
-            <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
-            {order?.products?.length && order?.products.map((product) => (
-              <ProductItemAccordion
-                key={product.id}
-                product={product}
-              />
-            ))}
-          </OrderProducts>
-          <OrderBill
-            order={order}
-          />
+          <div data-tour='tour_driver'>
+            <OrderContactInformation
+              order={order}
+              extraOpen={extraOpen}
+              unreadAlert={unreadAlert}
+              driversList={driversList}
+              isTourOpen={isTourOpen}
+              setCurrentTourStep={setCurrentTourStep}
+              handleOpenMessages={handleOpenMessages}
+            />
+            <OrderProducts>
+              <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
+              {order?.products?.length && order?.products.map((product) => (
+                <ProductItemAccordion
+                  key={product.id}
+                  product={product}
+                />
+              ))}
+            </OrderProducts>
+            <OrderBill
+              order={order}
+            />
+          </div>
         </OrderDetailsContent>
       )}
 
@@ -280,7 +293,7 @@ const OrderDetailsUI = (props) => {
                 </IconButton>
               </CloseButtonWrapper>
               {(openMessages?.chat) && (
-                <ChatContainer>
+                <ChatContainer data-tour='tour_message'>
                   <Messages
                     orderId={order?.id}
                     order={order}
@@ -289,6 +302,9 @@ const OrderDetailsUI = (props) => {
                     handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                     onClose={() => handleCloseMessages()}
                     messages={messages}
+                    isTourOpen={isTourOpen}
+                    setCurrentTourStep={setCurrentTourStep}
+                    orderDetailClose={() => props.onClose()}
                   />
                 </ChatContainer>
               )}
