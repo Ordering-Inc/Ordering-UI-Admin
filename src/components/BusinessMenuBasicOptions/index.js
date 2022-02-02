@@ -157,9 +157,6 @@ export const BusinessMenuBasicOptions = (props) => {
           style={{
             paddingTop: 0,
             paddingBottom: 10,
-            // borderBottomWidth: 1,
-            // borderBottomColor: theme.colors.gray,
-            // borderBottomStyle: 'solid',
             marginBottom: 10
           }}
         >

@@ -83,7 +83,7 @@ const UsersListingUI = (props) => {
     if (isTourOpen) {
       setTimeout(() => {
         setCurrentTourStep(isDriversManagersPage ? 3 : 1)
-      }, 600)
+      }, 50)
     }
   }
 
@@ -199,6 +199,7 @@ const UsersListingUI = (props) => {
         <SideBar
           sidebarId='userAddForm'
           open={openUserAddForm}
+          noAnimation={isTourOpen}
           onClose={() => setOpenUserAddForm(false)}
         >
           <UserAddForm

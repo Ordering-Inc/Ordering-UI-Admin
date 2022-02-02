@@ -59,7 +59,7 @@ const DriversGroupsListingUI = (props) => {
     if (!driverGroup) {
       setTimeout(() => {
         setCurrentTourStep(5)
-      }, 600)
+      }, 50)
     }
   }
 
@@ -97,13 +97,13 @@ const DriversGroupsListingUI = (props) => {
   const handleNextTour = () => {
     setTimeout(() => {
       setCurrentTourStep(6)
-    }, 1000)
+    }, 50)
   }
 
   const handleDeliveryTourCompleted = () => {
     setTimeout(() => {
       setCurrentTourStep(7)
-    }, 500)
+    }, 50)
   }
 
   const getDataFromStorage = async () => {
@@ -191,6 +191,7 @@ const DriversGroupsListingUI = (props) => {
           defaultSideBarWidth={550 + moveDistance}
           open={openDetails}
           moveDistance={moveDistance}
+          noAnimation={isTourOpen}
           onClose={() => {
             setCurDriversGroup(null)
             setOpenDetails(false)
