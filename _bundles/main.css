@@ -1363,10 +1363,6 @@ div.jsoneditor-tree div.jsoneditor-color {
   cursor: pointer;
 }
 
-div.jsoneditor-tree div.jsoneditor-color.jsoneditor-color-readonly {
-  cursor: inherit;
-}
-
 div.jsoneditor-tree div.jsoneditor-date {
   background: #a1a1a1;
   color: #ffffff;

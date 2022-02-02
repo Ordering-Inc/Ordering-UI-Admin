@@ -150,7 +150,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     if (!driverGroup) {
       setTimeout(function () {
         setCurrentTourStep(5);
-      }, 600);
+      }, 50);
     }
   };
 
@@ -192,13 +192,13 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
   var handleNextTour = function handleNextTour() {
     setTimeout(function () {
       setCurrentTourStep(6);
-    }, 1000);
+    }, 50);
   };
 
   var handleDeliveryTourCompleted = function handleDeliveryTourCompleted() {
     setTimeout(function () {
       setCurrentTourStep(7);
-    }, 500);
+    }, 50);
   };
 
   var getDataFromStorage = /*#__PURE__*/function () {
@@ -285,6 +285,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     defaultSideBarWidth: 550 + moveDistance,
     open: openDetails,
     moveDistance: moveDistance,
+    noAnimation: isTourOpen,
     onClose: function onClose() {
       setCurDriversGroup(null);
       setOpenDetails(false);

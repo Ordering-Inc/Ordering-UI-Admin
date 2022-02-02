@@ -301,20 +301,16 @@ var UserAddFormUI = function UserAddFormUI(props) {
 
     if (isDriversPage) {
       (0, _utils.setStorageItem)('isFromDeliveryDrivers', true);
-      setTimeout(function () {
-        events.emit('go_to_page', {
-          page: 'drivers_managers'
-        });
-      }, 500);
+      events.emit('go_to_page', {
+        page: 'drivers_managers'
+      });
     }
 
     if (isDriversManagersPage) {
       (0, _utils.setStorageItem)('isFromDeliveryDriversGroup', true);
-      setTimeout(function () {
-        events.emit('go_to_page', {
-          page: 'drivers_groups'
-        });
-      }, 500);
+      events.emit('go_to_page', {
+        page: 'drivers_groups'
+      });
     }
   }, [isTourOpen, isSuccessSubmitted, formState === null || formState === void 0 ? void 0 : formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {

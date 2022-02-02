@@ -189,9 +189,6 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     style: {
       paddingTop: 0,
       paddingBottom: 10,
-      // borderBottomWidth: 1,
-      // borderBottomColor: theme.colors.gray,
-      // borderBottomStyle: 'solid',
       marginBottom: 10
     }
   }, ((_formState$changes$al3 = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.all_products) !== null && _formState$changes$al3 !== void 0 ? _formState$changes$al3 : (_businessMenuState$me10 = businessMenuState.menu) === null || _businessMenuState$me10 === void 0 ? void 0 : _businessMenuState$me10.all_products) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('ALL_PRODUCTS', 'All products'))), !((_formState$changes$al4 = formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.all_products) !== null && _formState$changes$al4 !== void 0 ? _formState$changes$al4 : (_businessMenuState$me11 = businessMenuState.menu) === null || _businessMenuState$me11 === void 0 ? void 0 : _businessMenuState$me11.all_products) && (business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {

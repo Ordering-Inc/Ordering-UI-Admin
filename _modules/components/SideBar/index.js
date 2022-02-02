@@ -38,7 +38,8 @@ var SideBar = function SideBar(props) {
       sidebarId = props.sidebarId,
       defaultSideBarWidth = props.defaultSideBarWidth,
       moveDistance = props.moveDistance,
-      isBorderShow = props.isBorderShow;
+      isBorderShow = props.isBorderShow,
+      noAnimation = props.noAnimation;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -75,7 +76,8 @@ var SideBar = function SideBar(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
     id: id,
     isBorderShow: isBorderShow,
-    moveDistance: moveDistance
+    moveDistance: moveDistance,
+    noAnimation: noAnimation
   }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {

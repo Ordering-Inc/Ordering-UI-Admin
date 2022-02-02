@@ -150,7 +150,7 @@ var UsersListingUI = function UsersListingUI(props) {
     if (isTourOpen) {
       setTimeout(function () {
         setCurrentTourStep(isDriversManagersPage ? 3 : 1);
-      }, 600);
+      }, 50);
     }
   };
 
@@ -308,6 +308,7 @@ var UsersListingUI = function UsersListingUI(props) {
   }), openUserAddForm && /*#__PURE__*/_react.default.createElement(_SideBar.SideBar, {
     sidebarId: "userAddForm",
     open: openUserAddForm,
+    noAnimation: isTourOpen,
     onClose: function onClose() {
       return setOpenUserAddForm(false);
     }
