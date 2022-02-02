@@ -203,6 +203,7 @@ const OrderDetailsUI = (props) => {
       isSelectedOrders={isSelectedOrders}
       id='orderDetails'
       isSkeleton={loading}
+      noAnimation={isTourOpen}
     >
       {loading && (
         <SkeletonWrapper>

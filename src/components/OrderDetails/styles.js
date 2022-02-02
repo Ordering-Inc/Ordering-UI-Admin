@@ -22,7 +22,9 @@ export const Container = styled.div`
   top: 0px;
   z-index: 1001;
   overflow-x: hidden;
-  transition: 0.3s;
+  ${({ noAnimation }) => !noAnimation && css`
+    transition: 0.3s;
+  `}
 
   ${props => props.theme?.rtl ? css`
     left: 0px;

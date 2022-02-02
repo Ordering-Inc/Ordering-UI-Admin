@@ -79,7 +79,7 @@ const OrdersManagerUI = (props) => {
     if (isTourOpen) {
       setTimeout(() => {
         setCurrentTourStep(1)
-      }, 600)
+      }, 50)
     }
   }
 
@@ -170,6 +170,7 @@ const OrdersManagerUI = (props) => {
                 handleOpenOrderDetail={handleOpenOrderDetail}
                 setSelectedOrderIds={setSelectedOrderIds}
                 currentTourStep={currentTourStep}
+                handleOpenTour={handleOpenTour}
               />
             </WrapItemView>
           </OrdersInnerContent>

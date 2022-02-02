@@ -269,9 +269,7 @@ export const MessagesUI = (props) => {
     handleSend()
     if (isTourOpen && setCurrentTourStep && orderDetailClose) {
       orderDetailClose()
-      setTimeout(() => {
-        setCurrentTourStep(4)
-      }, 600)
+      setCurrentTourStep(4)
     }
   }
 

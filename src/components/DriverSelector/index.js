@@ -144,7 +144,7 @@ const DriverSelectorUI = (props) => {
       handleOpenMessages('chat')
       setTimeout(() => {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
-      }, 600)
+      }, 50)
     }
   }
 
