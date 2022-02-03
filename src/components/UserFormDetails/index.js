@@ -329,7 +329,7 @@ export const UserFormDetailsUI = (props) => {
               <DriverZoneRestrictionWrapper>
                 <span>{('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')}</span>
                 <Switch
-                  defaultChecked={user.driver_zone_restriction}
+                  defaultChecked={formState?.changes?.driver_zone_restriction ?? user?.driver_zone_restriction}
                   onChange={(val) => handleChangeSwtich('driver_zone_restriction', val)}
                 />
               </DriverZoneRestrictionWrapper>
