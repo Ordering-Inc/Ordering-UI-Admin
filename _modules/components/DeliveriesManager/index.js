@@ -124,7 +124,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     handleSelectedOrderIds: handleSelectedOrderIds,
     handleOpenOrderDetail: handleOpenOrderDetail,
     handleOrdersStatusGroupFilter: handleOrdersStatusGroupFilter,
-    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
+    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus,
+    isOnlyDelivery: true
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,
     order: detailsOrder,
