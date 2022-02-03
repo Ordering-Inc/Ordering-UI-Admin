@@ -9,8 +9,9 @@ import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../utils'
+import { Switch } from '../../styles'
 
-import { FormInput, ActionsForm, SkeletonForm, WrapperUserTypeSelector } from './styles'
+import { FormInput, ActionsForm, SkeletonForm, WrapperUserTypeSelector, DriverZoneRestrictionWrapper } from './styles'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -28,7 +29,8 @@ export const UserFormDetailsUI = (props) => {
     isCustomerMode,
     handleChangeUserType,
     isDriversPage,
-    isDriversManagersPage
+    isDriversManagersPage,
+    handleChangeSwtich
   } = props
 
   const formMethods = useForm()
@@ -322,6 +324,15 @@ export const UserFormDetailsUI = (props) => {
                   handleChangeUserType={handleChangeUserType}
                 />
               </WrapperUserTypeSelector>
+            )}
+            {isDriversPage && (
+              <DriverZoneRestrictionWrapper>
+                <span>{('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')}</span>
+                <Switch
+                  defaultChecked={formState?.changes?.driver_zone_restriction ?? user?.driver_zone_restriction}
+                  onChange={(val) => handleChangeSwtich('driver_zone_restriction', val)}
+                />
+              </DriverZoneRestrictionWrapper>
             )}
             <ActionsForm>
               {onCancel && (
