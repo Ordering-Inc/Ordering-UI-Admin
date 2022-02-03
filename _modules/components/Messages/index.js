@@ -94,7 +94,10 @@ var MessagesUI = function MessagesUI(props) {
       history = props.history,
       messageDashboardView = props.messageDashboardView,
       handleMessageOrderDetail = props.handleMessageOrderDetail,
-      handleReadMessages = props.handleReadMessages;
+      handleReadMessages = props.handleReadMessages,
+      isTourOpen = props.isTourOpen,
+      setCurrentTourStep = props.setCurrentTourStep,
+      orderDetailClose = props.orderDetailClose;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -376,6 +379,11 @@ var MessagesUI = function MessagesUI(props) {
 
   var onSubmit = function onSubmit(values) {
     handleSend();
+
+    if (isTourOpen && setCurrentTourStep && orderDetailClose) {
+      orderDetailClose();
+      setCurrentTourStep(4);
+    }
   };
 
   var closeAlert = function closeAlert() {

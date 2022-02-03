@@ -68,7 +68,10 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       driverActionStatus = props.driverActionStatus,
       handleAssignDriver = props.handleAssignDriver,
       handleChangeDriver = props.handleChangeDriver,
-      filterValues = props.filterValues;
+      filterValues = props.filterValues,
+      isTourOpen = props.isTourOpen,
+      setCurrentTourStep = props.setCurrentTourStep,
+      handleOpenMessages = props.handleOpenMessages;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -215,6 +218,13 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       orderId: order.id,
       driverId: driverId
     });
+
+    if (isTourOpen && setCurrentTourStep) {
+      handleOpenMessages('chat');
+      setTimeout(function () {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3);
+      }, 50);
+    }
   };
 
   var toastNotify = function toastNotify(notifyContent) {

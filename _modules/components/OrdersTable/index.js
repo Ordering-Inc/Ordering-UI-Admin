@@ -452,16 +452,17 @@ var OrdersTable = function OrdersTable(props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))));
-  }) : orderList.orders.map(function (order) {
+  }) : orderList.orders.map(function (order, i) {
     var _getOrderStatus, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$summary;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
-      key: order.id,
+      key: i,
       className: parseInt(orderDetailId) === order.id ? 'active' : '',
       isCustomStyle: isSelectedOrders,
       onClick: function onClick(e) {
         return handleClickOrder(order, e);
-      }
+      },
+      "data-tour": i === 0 ? 'tour_start' : ''
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
       className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'small' : ''
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {

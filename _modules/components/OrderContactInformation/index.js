@@ -51,7 +51,10 @@ var OrderContactInformation = function OrderContactInformation(props) {
   var _order$business, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _order$business13, _order$business14, _order$business15, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer13, _order$customer14, _order$customer15, _order$customer16, _order$customer17, _order$customer18, _order$customer19, _order$customer20, _order$customer21, _order$customer22, _order$customer23, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$driver9;
 
   var order = props.order,
-      driversList = props.driversList;
+      driversList = props.driversList,
+      isTourOpen = props.isTourOpen,
+      setCurrentTourStep = props.setCurrentTourStep,
+      handleOpenMessages = props.handleOpenMessages;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -147,7 +150,10 @@ var OrderContactInformation = function OrderContactInformation(props) {
     drivers: driversList.drivers,
     isPhoneView: true,
     defaultValue: order !== null && order !== void 0 && (_order$driver9 = order.driver) !== null && _order$driver9 !== void 0 && _order$driver9.id ? order.driver.id : 'default',
-    order: order
+    order: order,
+    isTourOpen: isTourOpen,
+    setCurrentTourStep: setCurrentTourStep,
+    handleOpenMessages: handleOpenMessages
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "700px",
     open: isModalOpen,

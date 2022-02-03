@@ -25,6 +25,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _InfoShareContext = require("../../contexts/InfoShareContext");
 
+var _reactBootstrap = require("react-bootstrap");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -60,7 +62,8 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       selectedOrderIds = props.selectedOrderIds,
       handleChangeFilterValues = props.handleChangeFilterValues,
       handleDeleteMultiOrders = props.handleDeleteMultiOrders,
-      handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus;
+      handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus,
+      handleOpenTour = props.handleOpenTour;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -99,7 +102,16 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, title)), /*#__PURE__*/_react.default.createElement(_styles.TopRightSection, null, !isDisableControl && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, title), selectedOrderIds && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    placement: "bottom",
+    overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, t('START_TUTORIAL', 'Start tutorial'))
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "dark",
+    className: "tour_btn",
+    onClick: function onClick() {
+      return handleOpenTour();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles.TopRightSection, null, !isDisableControl && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,

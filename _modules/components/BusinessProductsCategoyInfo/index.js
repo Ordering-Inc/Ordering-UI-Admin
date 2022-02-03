@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
-  var _configState$configs, _configState$configs$, _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5;
+  var _configState$configs, _configState$configs$, _formState$changes, _formState$changes2, _formState$changes3, _formState$result3, _formState$result3$re, _formState$changes4, _formState$changes5;
 
   var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
@@ -236,7 +236,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.slug) || ''
   }), /*#__PURE__*/_react.default.createElement(_styles2.GenerateButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "7.6px",

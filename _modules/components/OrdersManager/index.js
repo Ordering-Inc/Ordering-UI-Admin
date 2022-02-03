@@ -27,6 +27,8 @@ var _OrderStatusSubFilter = require("../OrderStatusSubFilter");
 
 var _OrderNotification = require("../OrderNotification");
 
+var _WizardOrders = require("../WizardOrders");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -100,10 +102,20 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       detailsOrder = _useState6[0],
       setDetailsOrder = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(0),
+  var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      totalSelectedOrder = _useState8[0],
-      setTotalSelectedOrder = _useState8[1];
+      isTourOpen = _useState8[0],
+      setIsTourOpen = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(0),
+      _useState10 = _slicedToArray(_useState9, 2),
+      currentTourStep = _useState10[0],
+      setCurrentTourStep = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      totalSelectedOrder = _useState12[0],
+      setTotalSelectedOrder = _useState12[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
@@ -127,6 +139,18 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     } else {
       handleCustomOrderDetail && handleCustomOrderDetail(true);
     }
+
+    if (isTourOpen) {
+      setTimeout(function () {
+        setCurrentTourStep(1);
+      }, 50);
+    }
+  };
+
+  var _handleOpenTour = function handleOpenTour() {
+    setCurrentTourStep(0);
+    setIsTourOpen(true);
+    setIsOpenOrderDetail(false);
   };
 
   (0, _react.useEffect)(function () {
@@ -171,7 +195,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleChangeFilterValues: handleChangeFilterValues,
     selectedOrderIds: selectedOrderIds,
     handleDeleteMultiOrders: handleDeleteMultiOrders,
-    handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus
+    handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
+    handleOpenTour: function handleOpenTour() {
+      return _handleOpenTour();
+    }
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter
@@ -196,17 +223,25 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleSelectedOrderIds: handleSelectedOrderIds,
     orderDetailId: orderDetailId,
     handleOpenOrderDetail: handleOpenOrderDetail,
-    setSelectedOrderIds: setSelectedOrderIds
+    setSelectedOrderIds: setSelectedOrderIds,
+    currentTourStep: currentTourStep,
+    handleOpenTour: _handleOpenTour
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,
     order: detailsOrder,
     orderId: orderDetailId,
     driversList: driversList,
+    isTourOpen: isTourOpen,
     onClose: function onClose() {
       return handleBackRedirect();
-    }
-  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder));
+    },
+    setCurrentTourStep: setCurrentTourStep
+  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), isTourOpen && /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
+    isTourOpen: isTourOpen,
+    setIsTourOpen: setIsTourOpen,
+    currentStep: currentTourStep
+  }));
 };
 
 var OrdersManager = function OrdersManager(props) {
