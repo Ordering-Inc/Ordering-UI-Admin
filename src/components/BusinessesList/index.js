@@ -147,8 +147,7 @@ export const BusinessesList = (props) => {
                   {allowColumns?.ratings && (
                     <th>{t('RATINGS', 'Ratings')}</th>
                   )}
-                  <th>{t('ACTIONS', 'Actions')}</th>
-                  <th>
+                  <th className='action'>
                     <ColumnAllowSettingPopover
                       open={openPopover}
                       allowColumns={allowColumns}
