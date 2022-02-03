@@ -87,6 +87,7 @@ const DeliveriesManagerUI = (props) => {
               handleOpenOrderDetail={handleOpenOrderDetail}
               handleOrdersStatusGroupFilter={handleOrdersStatusGroupFilter}
               handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
+              isOnlyDelivery
             />
           </WrapItemView>
         </OrdersContent>
