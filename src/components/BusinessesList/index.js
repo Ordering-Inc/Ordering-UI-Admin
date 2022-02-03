@@ -38,17 +38,12 @@ export const BusinessesList = (props) => {
 
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
-    id: true,
     business: true,
     featured: true,
     ratings: true
   })
 
   const optionsDefault = [
-    {
-      value: 'id',
-      content: t('ID', 'ID')
-    },
     {
       value: 'business',
       content: t('BUSINESS', 'Business')
@@ -142,9 +137,7 @@ export const BusinessesList = (props) => {
             <BusinessListTable>
               <thead>
                 <tr>
-                  {allowColumns?.id && (
-                    <th>{t('ID', 'ID')}</th>
-                  )}
+                  <th>{t('ID', 'ID')}</th>
                   {allowColumns?.business && (
                     <th className='business'>{t('BUSINESS', 'Business')}</th>
                   )}

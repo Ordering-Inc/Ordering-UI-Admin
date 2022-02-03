@@ -64,11 +64,9 @@ const SingleBusinessUI = (props) => {
           {(businessState?.loading || isSkeleton) ? (
             <SingleBusinessContainer>
               <tr>
-                {allowColumns?.id && (
-                  <td className='business-id'>
-                    <Skeleton width={30} />
-                  </td>
-                )}
+                <td className='business-id'>
+                  <Skeleton width={30} />
+                </td>
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
@@ -111,11 +109,9 @@ const SingleBusinessUI = (props) => {
               onClick={(e) => handleClickBusiness(e)}
             >
               <tr>
-                {allowColumns?.id && (
-                  <td className='business-id'>
-                    {businessState?.business?.id}
-                  </td>
-                )}
+                <td className='business-id'>
+                  {businessState?.business?.id}
+                </td>
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
