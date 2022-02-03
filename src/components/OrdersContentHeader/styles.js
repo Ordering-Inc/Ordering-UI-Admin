@@ -35,12 +35,26 @@ export const HeaderSection = styled.div`
       width: 25px;
       height: 25px;
     }
+
+    &.tour_btn {
+      ${props => props.theme?.rtl ? css`
+        margin-left: -8px;
+        margin-right: 8px;
+      ` : css`
+        margin-right: -8px;
+        margin-left: 8px;
+      `}
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 `
 export const HeaderTitle = styled.p`
   color: ${(props) => props.theme.colors.headingColor};
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: bold;
   margin: 0px;
   text-transform: capitalize;
   white-space: nowrap;

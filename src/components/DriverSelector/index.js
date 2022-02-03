@@ -34,7 +34,10 @@ const DriverSelectorUI = (props) => {
     driverActionStatus,
     handleAssignDriver,
     handleChangeDriver,
-    filterValues
+    filterValues,
+    isTourOpen,
+    setCurrentTourStep,
+    handleOpenMessages
   } = props
 
   const [, t] = useLanguage()
@@ -137,6 +140,12 @@ const DriverSelectorUI = (props) => {
       setIsRemoveAction(false)
     }
     handleAssignDriver({ orderId: order.id, driverId: driverId })
+    if (isTourOpen && setCurrentTourStep) {
+      handleOpenMessages('chat')
+      setTimeout(() => {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
+      }, 50)
+    }
   }
 
   const toastNotify = (notifyContent) => {

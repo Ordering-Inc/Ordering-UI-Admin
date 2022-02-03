@@ -366,12 +366,13 @@ export const OrdersTable = (props) => {
               </OrderTbody>
             ))
           ) : (
-            orderList.orders.map(order => (
+            orderList.orders.map((order, i) => (
               <OrderTbody
-                key={order.id}
+                key={i}
                 className={parseInt(orderDetailId) === order.id ? 'active' : ''}
                 isCustomStyle={isSelectedOrders}
                 onClick={(e) => handleClickOrder(order, e)}
+                data-tour={i === 0 ? 'tour_start' : ''}
               >
                 <tr>
                   <td

@@ -73,7 +73,10 @@ export const MessagesUI = (props) => {
     history,
     messageDashboardView,
     handleMessageOrderDetail,
-    handleReadMessages
+    handleReadMessages,
+    isTourOpen,
+    setCurrentTourStep,
+    orderDetailClose
   } = props
 
   const [, t] = useLanguage()
@@ -264,6 +267,10 @@ export const MessagesUI = (props) => {
 
   const onSubmit = (values) => {
     handleSend()
+    if (isTourOpen && setCurrentTourStep && orderDetailClose) {
+      orderDetailClose()
+      setCurrentTourStep(4)
+    }
   }
 
   const closeAlert = () => {
