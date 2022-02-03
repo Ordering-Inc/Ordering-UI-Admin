@@ -194,7 +194,9 @@ export const BusinessProductsCategoyInfo = (props) => {
           onChange={handleChangeInput}
           disabled={formState.loading}
           autoComplete='off'
-          defaultValue={formState?.changes?.slug}
+          value={
+            formState?.changes?.slug || formState?.result?.result?.slug || ''
+          }
         />
         <GenerateButtonWrapper>
           <Button
