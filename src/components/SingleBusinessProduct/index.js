@@ -295,6 +295,21 @@ const SingleBusinessProductUI = (props) => {
                     }
                   </td>
                 )}
+                {allowColumns?.offer_price && (
+                  <td>
+                    {
+                      <InfoBlock>
+                        <div className='product_price'>
+                          {productFormState?.changes?.offer_price ? (
+                            <>{parsePrice(productFormState?.changes?.offer_price)}</>
+                          ) : (
+                            <>{' '}</>
+                          )}
+                        </div>
+                      </InfoBlock>
+                    }
+                  </td>
+                )}
                 {allowColumns?.description && (
                   <td className='description'>
                     {
@@ -403,6 +418,15 @@ const SingleBusinessProductUI = (props) => {
                     product?.price && (
                       <InfoBlock>
                         <p>{parsePrice(product?.price)}</p>
+                      </InfoBlock>
+                    )
+                  }
+                </td>
+                <td>
+                  {
+                    product?.offer_price && (
+                      <InfoBlock>
+                        <p>{parsePrice(productFormState?.changes?.offer_price)}</p>
                       </InfoBlock>
                     )
                   }
