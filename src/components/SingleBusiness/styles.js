@@ -92,6 +92,7 @@ export const InfoBlock = styled.div`
     }
     span {
       font-size: 14px;
+      color: ${props => props.theme.colors.headingColor};
       ${props => props.theme?.rtl ? css`
         margin-right: 8px;
       ` : css`
@@ -99,12 +100,16 @@ export const InfoBlock = styled.div`
       `}
     }
   }
+
+  > span {
+    font-size: 14px;
+  }
 `
 
 export const BusinessEnableWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: fit-content;
+  justify-content: flex-end;
 
   span {
     font-size: 14px;
@@ -226,65 +231,15 @@ export const BusinessActionContainer = styled.div`
   justify-content: space-between;
   margin-top: 10px;
   padding-top: 10px;
-`
 
-export const WrapperBusinessActionSelector = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  button {
-    background: transparent !important;
-    border: none;
-    padding: 0px;
-    &:active,
-    &:focus {
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  .show {
-    button {
-      background: ${props => props.theme.colors.secundary} !important;
-      border-color: unset !important;
-      box-shadow: none !important;
-    }
-    >div {
-      border: 1px solid ${props => props.theme.colors.borderColor};
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-    }
-  }
-
-  > div {
-    > div {
-      border-radius: 8px;
-      .dropdown-item {
-        font-size: 14px;
-        color: ${props => props.theme.colors.headingColor};
-      }
-      .dropdown-item:last-child {
-        color: #E63757;
-      }
-    }
+  > span {
+    font-size: 14px;
   }
 `
 
 export const BusinessHeaderContent = styled.div`
-  display: flex;
-  justify-content: space-between;
   position: absolute;
   bottom: -22px;
   width: 100%;
-  align-items: flex-end;
   padding: 0 15px;
-
-  > span {
-    font-size: 12px;
-  }
 `

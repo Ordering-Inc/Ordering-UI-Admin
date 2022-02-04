@@ -7,7 +7,9 @@ import { Switch } from '../../styles/Switch'
 import { Button, IconButton } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
 import { BusinessFormDetails } from '../BusinessFormDetails'
-import { XLg, LifePreserver } from 'react-bootstrap-icons'
+import { XLg, LifePreserver, ThreeDots } from 'react-bootstrap-icons'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
+import { Confirm } from '../Confirm'
 
 import {
   BusinessDetailsContainer,
@@ -20,7 +22,8 @@ import {
   BusinessDetailsContent,
   BusinessDescription,
   BusinessConfigsContainer,
-  BusinessConfigItem
+  BusinessConfigItem,
+  ActionSelectorWrapper
 } from './styles'
 
 export const BusinessSummary = (props) => {
@@ -31,13 +34,16 @@ export const BusinessSummary = (props) => {
     handleChangeActiveBusiness,
     selectedItem,
     handleSelectedItem,
-    handleSucessUpdateBusiness
+    handleSucessUpdateBusiness,
+    handleDuplicateBusiness,
+    handleDeleteBusiness
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
   const [isEdit, setIsEdit] = useState(false)
   const history = useHistory()
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleOpenCategory = () => {
     history.push(`/stores/list/${businessState.business.slug}`)
@@ -104,6 +110,17 @@ export const BusinessSummary = (props) => {
     }
   ]
 
+  const onClickDeleteBusiness = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_BUSINESS', 'Are you sure that you want to delete this business?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteBusiness()
+      }
+    })
+  }
+
   return (
     <>
       <BusinessDetailsContainer>
@@ -134,6 +151,24 @@ export const BusinessSummary = (props) => {
             >
               <LifePreserver />
             </IconButton>
+            <ActionSelectorWrapper>
+              <DropdownButton
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+              >
+                <Dropdown.Item
+                  onClick={() => handleDuplicateBusiness()}
+                >
+                  {t('DUPLICATE', 'Duplicate')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => onClickDeleteBusiness()}
+                >
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              </DropdownButton>
+            </ActionSelectorWrapper>
             <IconButton
               color='black'
               onClick={() => actionSidebar(false)}
@@ -205,6 +240,17 @@ export const BusinessSummary = (props) => {
           />
         )}
       </BusinessDetailsContainer>
+      <Confirm
+        width='700px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
