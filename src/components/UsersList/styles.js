@@ -6,6 +6,7 @@ export const UsersConatiner = styled.div`
 `
 
 export const UserTableWrapper = styled.div`
+  overflow: auto;
 `
 
 export const UsersTable = styled.table`

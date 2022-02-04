@@ -4,8 +4,8 @@ import { useTheme } from 'styled-components'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
-import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail';
-import FiSmartphone from '@meronex/icons/fi/FiSmartphone';
+import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
+import FiSmartphone from '@meronex/icons/fi/FiSmartphone'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
@@ -160,7 +160,7 @@ export const UsersList = (props) => {
                     <td>
                       {!(isDriversPage || isDriversManagersPage) && (
                         <UserTypeWrapper>
-                          <Skeleton width={100} style={{ marginBottom: '10px' }} />
+                          <Skeleton width={100} />
                           <p><Skeleton width={100} /></p>
                         </UserTypeWrapper>
                       )}
