@@ -181,8 +181,8 @@ const SingleBusinessProductUI = (props) => {
           {isSkeleton ? (
             <SingleListBusinessContainer>
               <tr>
-                {allowColumns?.business && (
-                  <td className='business'>
+                {allowColumns?.products && (
+                  <td className='products'>
                     <BusinessGeneralInfo>
                       <WrapperImage>
                         <Skeleton width={38} height={38} />
@@ -229,8 +229,8 @@ const SingleBusinessProductUI = (props) => {
               isAccept={dataSelected && dataSelected === product?.id?.toString()}
             >
               <tr>
-                {allowColumns?.business && (
-                  <td className='business'>
+                {allowColumns?.products && (
+                  <td className='products'>
                     <DragableContainer className='product_info'>
                       <DragImageWrapper>
                         <img
@@ -345,7 +345,7 @@ const SingleBusinessProductUI = (props) => {
           {isSkeleton ? (
             <SingleListBusinessContainer>
               <tr>
-                <td className='business'>
+                <td>
                   <InfoBlock>
                     <p><Skeleton width={30} /></p>
                   </InfoBlock>

@@ -111,6 +111,9 @@ const BusinessReviewDetailsUI = (props) => {
                     {review?.created_at && (
                       <p>{parseDate(review?.created_at, { utc: false })}</p>
                     )}
+                    {review?.order_id && (
+                      <p>{review?.order_id}</p>
+                    )}
                   </InfoBlock>
                 </UserInfoContainer>
                 <Switch

@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessListContainer = styled.div`
-  min-height: 250px;
   max-height: calc(100vh - 330px);
   overflow: auto;
 
@@ -12,7 +11,7 @@ export const BusinessListContainer = styled.div`
 
 export const BusinessListTable = styled.table`
   width: calc(100% - 10px);
-  min-width: 950px;
+  min-width: 650px;
   color: ${props => props.theme.colors?.headingColor};
   transition: all 0.3s;
 
@@ -27,7 +26,11 @@ export const BusinessListTable = styled.table`
 
   th.business,
   td.business {
-    width: 25%;
+    width: 35%;
+  }
+
+  th.action {
+    width: 10%;
   }
 
   td.business-id {
