@@ -54,6 +54,7 @@ const OrdersManagerUI = (props) => {
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(0)
+  const [isTourFlag, setIsTourFlag] = useState(false)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
@@ -67,7 +68,11 @@ const OrdersManagerUI = (props) => {
     }
   }
 
-  const handleOpenOrderDetail = (order) => {
+  const handleOpenOrderDetail = (order, isKeydown = false) => {
+    if (isTourOpen && currentTourStep === 4 && !isKeydown) {
+      setIsTourOpen(false)
+      return
+    }
     setDetailsOrder(order)
     setOrderDetailId(order.id)
     setIsOpenOrderDetail(true)
@@ -76,17 +81,20 @@ const OrdersManagerUI = (props) => {
     } else {
       handleCustomOrderDetail && handleCustomOrderDetail(true)
     }
-    if (isTourOpen) {
+    if (isTourOpen && currentTourStep === 4) {
+      setIsTourFlag(true)
+    }
+    if (isTourOpen && currentTourStep === 0) {
       setTimeout(() => {
         setCurrentTourStep(1)
-      }, 50)
+      }, 1)
     }
   }
 
   const handleOpenTour = () => {
     setCurrentTourStep(0)
     setIsTourOpen(true)
-    setIsOpenOrderDetail(false)
+    handleBackRedirect()
   }
 
   useEffect(() => {
@@ -117,6 +125,11 @@ const OrdersManagerUI = (props) => {
       }
     }
   }, [user])
+
+  useEffect(() => {
+    if (isTourOpen) return
+    setIsTourFlag(false)
+  }, [isTourOpen])
 
   return (
     <>
@@ -171,6 +184,7 @@ const OrdersManagerUI = (props) => {
                 setSelectedOrderIds={setSelectedOrderIds}
                 currentTourStep={currentTourStep}
                 handleOpenTour={handleOpenTour}
+                isTourOpen={isTourOpen}
               />
             </WrapItemView>
           </OrdersInnerContent>
@@ -187,6 +201,9 @@ const OrdersManagerUI = (props) => {
           isTourOpen={isTourOpen}
           onClose={() => handleBackRedirect()}
           setCurrentTourStep={setCurrentTourStep}
+          currentTourStep={currentTourStep}
+          isTourFlag={isTourFlag}
+          setIsTourFlag={setIsTourFlag}
         />
       )}
 
