@@ -229,7 +229,7 @@ export const ProductDetatilsInformation = (props) => {
                 }
                 ref={formMethods.register({
                   required: t(
-                    'REGULAR_PRICE_REQUIRED',
+                    'VALIDATION_ERROR_REQUIRED',
                     'The Regular Price field is required'
                   ).replace('_attribute_', t('REGULAR_PRICE', 'Regular Price'))
                 })}
