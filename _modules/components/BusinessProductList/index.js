@@ -96,6 +96,7 @@ var BusinessProductList = function BusinessProductList(props) {
   var _useState7 = (0, _react.useState)({
     products: true,
     price: true,
+    // offer_price: true,
     description: true,
     tax: true,
     fee: true
@@ -110,6 +111,9 @@ var BusinessProductList = function BusinessProductList(props) {
   }, {
     value: 'price',
     content: t('PRICE', 'Price')
+  }, {
+    value: 'offer_price',
+    content: t('REQULAR_PRICE', 'Regular Price')
   }, {
     value: 'description',
     content: t('DESCRIPTION', 'Description')
@@ -176,7 +180,9 @@ var BusinessProductList = function BusinessProductList(props) {
   }, [categoryState, currentPage, productsPerPage]);
   return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.products) && /*#__PURE__*/_react.default.createElement("th", null, t('PRODUCTS', 'Products')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("th", {
     className: "price"
-  }, t('PRICE', 'Price')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
+  }, t('PRICE', 'Price')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.offer_price) && /*#__PURE__*/_react.default.createElement("th", {
+    className: "regular-price"
+  }, t('REGULAR_PRICE', 'Regular Price')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
     className: "description"
   }, t('DESCRIPTION', 'Description')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.tax) && /*#__PURE__*/_react.default.createElement("th", {
     className: "tax"

@@ -84,6 +84,11 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
     readOnly: false,
     type: 'numeric'
   }, {
+    title: t('REGULAR_PRICE', 'Regular Price'),
+    code: 'offer_price',
+    readOnly: false,
+    type: 'numeric'
+  }, {
     title: t('QUANTITY', 'Quantity'),
     code: 'quantity',
     readOnly: false,
