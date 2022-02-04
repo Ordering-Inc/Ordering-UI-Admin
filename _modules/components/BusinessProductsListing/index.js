@@ -159,6 +159,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var handleOpenCategoryDetails = function handleOpenCategoryDetails() {
     var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    setOpenProductDetails(false);
+    setSelectedProduct(null);
 
     if (category && (category === null || category === void 0 ? void 0 : category.id) !== null) {
       setCategorySelected(category);
@@ -188,6 +190,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var handleOpenProductDetails = function handleOpenProductDetails(product) {
     setSelectedProduct(product);
+    setCategoryToEdit({
+      open: false,
+      category: null
+    });
     setOpenProductDetails(true);
   };
 

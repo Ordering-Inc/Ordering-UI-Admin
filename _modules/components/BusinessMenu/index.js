@@ -95,6 +95,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     setShowOption(null);
     setIsExtendExtraOpen(false);
     setIsOpenSharedProduct(false);
+    setCurrentMenu(null);
   };
 
   var handleOpenEdit = function handleOpenEdit(e, menu) {
@@ -126,12 +127,14 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
   }, t('SHARED_MENUS', 'Shared menus'))), (isSelectedSharedMenus ? businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared : businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus).map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles2.MeunItem, {
       key: menu.id,
+      active: menu.id === (currentMenu === null || currentMenu === void 0 ? void 0 : currentMenu.id),
       onClick: function onClick(e) {
         return handleOpenEdit(e, menu);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       className: "business_checkbox_control"
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+      disabled: !!currentMenu,
       defaultChecked: menu === null || menu === void 0 ? void 0 : menu.enabled,
       onChange: function onChange(e) {
         return handleChangeBusinessMenuActiveState(menu === null || menu === void 0 ? void 0 : menu.id, e.target.checked);

@@ -40,7 +40,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
   var usersList = props.usersList,
       selectedOwnerIds = props.selectedOwnerIds,
-      handleSelectBusinessOwner = props.handleSelectBusinessOwner;
+      handleSelectBusinessOwner = props.handleSelectBusinessOwner,
+      selectedOwner = props.selectedOwner;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -95,6 +96,7 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: usersListOptions,
+    defaultValue: selectedOwner === null || selectedOwner === void 0 ? void 0 : selectedOwner.id,
     placeholder: placeholder,
     onChange: onSelectBusinessOwner,
     isShowSearchBar: true,

@@ -94,7 +94,7 @@ var BusinessProductList = function BusinessProductList(props) {
       setDataSelected = _useState6[1];
 
   var _useState7 = (0, _react.useState)({
-    business: true,
+    products: true,
     price: true,
     description: true,
     tax: true,
@@ -105,8 +105,8 @@ var BusinessProductList = function BusinessProductList(props) {
       setAllowColumns = _useState8[1];
 
   var optionsDefault = [{
-    value: 'business',
-    content: t('BUSINESS', 'Business')
+    value: 'products',
+    content: t('PRODUCTS', 'Products')
   }, {
     value: 'price',
     content: t('PRICE', 'Price')
@@ -174,9 +174,7 @@ var BusinessProductList = function BusinessProductList(props) {
     setTotalPages(_totalPages);
     setCurrentProducts(_currentProducts);
   }, [categoryState, currentPage, productsPerPage]);
-  return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "business"
-  }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.products) && /*#__PURE__*/_react.default.createElement("th", null, t('PRODUCTS', 'Products')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("th", {
     className: "price"
   }, t('PRICE', 'Price')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
     className: "description"

@@ -151,6 +151,7 @@ var BusinessOwners = function BusinessOwners(props) {
     }));
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperOwnerSelector, null, /*#__PURE__*/_react.default.createElement(_BusinessOwnerSelector.BusinessOwnerSelector, {
     selectedOwnerIds: ownerIds,
+    selectedOwner: selectedOwner,
     handleSelectBusinessOwner: setSelectedOwner
   }), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, {
     onClick: function onClick() {

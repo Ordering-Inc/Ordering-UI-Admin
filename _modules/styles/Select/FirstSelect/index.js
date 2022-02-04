@@ -118,14 +118,7 @@ var Select = function Select(props) {
         return option.value === defaultValue;
       });
 
-      if (isShowSearchBar) {
-        if (_defaultOption) {
-          setSelectedOption(_defaultOption);
-        }
-      } else {
-        setSelectedOption(_defaultOption);
-      }
-
+      setSelectedOption(_defaultOption);
       setValue(defaultValue);
     }
   }, [defaultValue, options]);

@@ -136,7 +136,7 @@ var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
       className: "bold"
     }, review === null || review === void 0 ? void 0 : (_review$user3 = review.user) === null || _review$user3 === void 0 ? void 0 : _review$user3.name, " ", review === null || review === void 0 ? void 0 : (_review$user4 = review.user) === null || _review$user4 === void 0 ? void 0 : _review$user4.lastname), (review === null || review === void 0 ? void 0 : review.created_at) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(review === null || review === void 0 ? void 0 : review.created_at, {
       utc: false
-    })))), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    })), (review === null || review === void 0 ? void 0 : review.order_id) && /*#__PURE__*/_react.default.createElement("p", null, review === null || review === void 0 ? void 0 : review.order_id))), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: review === null || review === void 0 ? void 0 : review.enabled,
       onChange: function onChange(val) {
         return handleChangeReviewEnabled(review === null || review === void 0 ? void 0 : review.id, val);

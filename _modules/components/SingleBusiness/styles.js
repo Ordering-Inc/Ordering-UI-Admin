@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperImage = exports.WrapperBusinessActionSelector = exports.SingleBusinessContainer = exports.SingleBusinessCardContainer = exports.InfoBlock = exports.Image = exports.BusinessLogo = exports.BusinessHeaderContent = exports.BusinessHeader = exports.BusinessGeneralInfo = exports.BusinessEnableWrapper = exports.BusinessContent = exports.BusinessActionContainer = void 0;
+exports.WrapperImage = exports.SingleBusinessContainer = exports.SingleBusinessCardContainer = exports.InfoBlock = exports.Image = exports.BusinessLogo = exports.BusinessHeaderContent = exports.BusinessHeader = exports.BusinessGeneralInfo = exports.BusinessEnableWrapper = exports.BusinessContent = exports.BusinessActionContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -67,7 +67,7 @@ var BusinessGeneralInfo = _styledComponents.default.div(_templateObject8 || (_te
 
 exports.BusinessGeneralInfo = BusinessGeneralInfo;
 
-var InfoBlock = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  ", "\n  p {\n    margin: 5px 0 0 0;\n    font-size: 12px;\n    color: ", ";\n  }\n  p.bold {\n    margin: 0px;\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n  p.star {\n    margin: 0px;\n    display: flex;\n    align-items: center;\n    svg {\n      font-size: 16px;\n      color: ", ";\n    }\n    span {\n      font-size: 14px;\n      ", "\n    }\n  }\n"])), function (props) {
+var InfoBlock = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  ", "\n  p {\n    margin: 5px 0 0 0;\n    font-size: 12px;\n    color: ", ";\n  }\n  p.bold {\n    margin: 0px;\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n  p.star {\n    margin: 0px;\n    display: flex;\n    align-items: center;\n    svg {\n      font-size: 16px;\n      color: ", ";\n    }\n    span {\n      font-size: 14px;\n      color: ", ";\n      ", "\n    }\n  }\n\n  > span {\n    font-size: 14px;\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    padding-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    padding-right: 10px;\n  "])));
@@ -78,6 +78,8 @@ var InfoBlock = _styledComponents.default.div(_templateObject9 || (_templateObje
 }, function (props) {
   return props.theme.colors.secundaryLight;
 }, function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-right: 8px;\n      "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        margin-left: 8px;\n      "])));
@@ -85,7 +87,7 @@ var InfoBlock = _styledComponents.default.div(_templateObject9 || (_templateObje
 
 exports.InfoBlock = InfoBlock;
 
-var BusinessEnableWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: fit-content;\n\n  span {\n    font-size: 14px;\n    color: ", ";\n\n    ", "\n  }\n"])), function (props) {
+var BusinessEnableWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  span {\n    font-size: 14px;\n    color: ", ";\n\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme4;
@@ -141,24 +143,12 @@ var BusinessContent = _styledComponents.default.div(_templateObject22 || (_templ
 
 exports.BusinessContent = BusinessContent;
 
-var BusinessActionContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: 10px;\n  padding-top: 10px;\n"])), function (props) {
+var BusinessActionContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: 10px;\n  padding-top: 10px;\n\n  > span {\n    font-size: 14px;\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });
 
 exports.BusinessActionContainer = BusinessActionContainer;
 
-var WrapperBusinessActionSelector = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  button {\n    background: transparent !important;\n    border: none;\n    padding: 0px;\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n  }\n\n  .show {\n    button {\n      background: ", " !important;\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 14px;\n        color: ", ";\n      }\n      .dropdown-item:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-}, function (props) {
-  return props.theme.colors.secundary;
-}, function (props) {
-  return props.theme.colors.borderColor;
-}, function (props) {
-  return props.theme.colors.headingColor;
-});
-
-exports.WrapperBusinessActionSelector = WrapperBusinessActionSelector;
-
-var BusinessHeaderContent = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  position: absolute;\n  bottom: -22px;\n  width: 100%;\n  align-items: flex-end;\n  padding: 0 15px;\n\n  > span {\n    font-size: 12px;\n  }\n"])));
+var BusinessHeaderContent = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: -22px;\n  width: 100%;\n  padding: 0 15px;\n"])));
 
 exports.BusinessHeaderContent = BusinessHeaderContent;

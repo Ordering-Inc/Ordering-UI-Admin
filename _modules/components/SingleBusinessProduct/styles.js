@@ -21,7 +21,7 @@ var BusinessActionContainer = _styledComponents.default.div(_templateObject || (
 
 exports.BusinessActionContainer = BusinessActionContainer;
 
-var SingleListBusinessContainer = _styledComponents.default.tbody(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n  transition: all 0.3s;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n  .business {\n    padding-right: 20px;\n  }\n\n  &:hover {\n    .action-btn {\n      display: block;\n    }\n  }\n\n  ", "\n"])), function (props) {
+var SingleListBusinessContainer = _styledComponents.default.tbody(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n  transition: all 0.3s;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  &:hover {\n    .action-btn {\n      display: block;\n    }\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.lightPrimary;

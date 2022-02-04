@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserTypeSelector = exports.SkeletonForm = exports.FormInput = exports.ActionsForm = void 0;
+exports.WrapperUserTypeSelector = exports.SkeletonForm = exports.FormInput = exports.DriverZoneRestrictionWrapper = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -45,3 +45,7 @@ var WrapperUserTypeSelector = _styledComponents.default.div(_templateObject6 || 
 });
 
 exports.WrapperUserTypeSelector = WrapperUserTypeSelector;
+
+var DriverZoneRestrictionWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n\n  > span {\n    font-size: 14px;\n  }\n"])));
+
+exports.DriverZoneRestrictionWrapper = DriverZoneRestrictionWrapper;

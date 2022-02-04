@@ -88,7 +88,9 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
       setBusinessTypes = props.setBusinessTypes,
       handleSuccessAddBusinessItem = props.handleSuccessAddBusinessItem,
       handleSuccessDeleteBusinessItem = props.handleSuccessDeleteBusinessItem,
-      handleUpdateBusinessState = props.handleUpdateBusinessState;
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      handleDuplicateBusiness = props.handleDuplicateBusiness,
+      handleDeleteBusiness = props.handleDeleteBusiness;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -186,7 +188,9 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     actionSidebar: actionSidebar,
     selectedItem: selectedItem,
     handleSelectedItem: handleSelectedItem,
-    handleSucessUpdateBusiness: handleSucessUpdateBusiness
+    handleSucessUpdateBusiness: handleSucessUpdateBusiness,
+    handleDuplicateBusiness: handleDuplicateBusiness,
+    handleDeleteBusiness: handleDeleteBusiness
   }), extraOpen && /*#__PURE__*/_react.default.createElement(_MoreSidebarLayout.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen
