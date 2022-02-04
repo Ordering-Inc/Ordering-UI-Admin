@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const BusinessDetailsContainer = styled.div`
   width: 100%;
@@ -39,14 +40,6 @@ export const LeftHeader = styled.div`
 export const RightHeader = styled.div`
   display: flex;
   align-items: center;
-
-  > button:first-child {
-    ${props => props.theme?.rlt ? css`
-      margin-left: 8px;
-    ` : css`
-      margin-right: 8px;
-    `}
-  }
 `
 
 const BusinessHeaderStyled = styled.div`
@@ -170,5 +163,55 @@ export const BusinessConfigItem = styled.div`
   
   svg {
     font-size: 20px;
+  }
+`
+export const ActionSelectorWrapper = styled.div`
+  button {
+    background: transparent !important;
+    border: none;
+    padding: 0px 5px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+    }
+  }
+
+  .show {
+    button {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  > div {
+    > div {
+      border-radius: 8px;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+      }
+      .dropdown-item:last-child {
+        color: #E63757;
+      }
+    }
   }
 `

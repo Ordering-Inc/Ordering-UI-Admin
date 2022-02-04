@@ -52,6 +52,16 @@ export const MeunItem = styled.div`
   border-bottom: 1px solid #E9ECEF;
   cursor: pointer;
   user-select: none;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  `}
 `
 
 export const MenuName = styled.span`

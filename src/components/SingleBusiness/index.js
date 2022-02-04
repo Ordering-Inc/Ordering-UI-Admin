@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useUtils, useLanguage, BusinessDetails as BusinessController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Switch } from '../../styles/Switch'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { StarFill, ThreeDotsVertical } from 'react-bootstrap-icons'
-import { Confirm } from '../Confirm'
+import { StarFill } from 'react-bootstrap-icons'
 
 import {
   SingleBusinessContainer,
@@ -19,7 +17,6 @@ import {
   BusinessLogo,
   BusinessContent,
   BusinessActionContainer,
-  WrapperBusinessActionSelector,
   BusinessHeaderContent
 } from './styles'
 
@@ -30,8 +27,6 @@ const SingleBusinessUI = (props) => {
     allowColumns,
     businessState,
     handleChangeActiveBusiness,
-    handleDuplicateBusiness,
-    handleDeleteBusiness,
     handleOpenBusinessDetails,
     detailsBusinessId
   } = props
@@ -39,18 +34,7 @@ const SingleBusinessUI = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const onClickDeleteBusiness = () => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_BUSINESS', 'Are you sure that you want to delete this business?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeleteBusiness()
-      }
-    })
-  }
   const handleClickBusiness = (e) => {
     const isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.business_actions')
     if (isInvalid) return
@@ -64,11 +48,9 @@ const SingleBusinessUI = (props) => {
           {(businessState?.loading || isSkeleton) ? (
             <SingleBusinessContainer>
               <tr>
-                {allowColumns?.id && (
-                  <td className='business-id'>
-                    <Skeleton width={30} />
-                  </td>
-                )}
+                <td className='business-id'>
+                  <Skeleton width={30} />
+                </td>
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
@@ -100,9 +82,6 @@ const SingleBusinessUI = (props) => {
                 <td>
                   <Skeleton width={100} />
                 </td>
-                <td>
-                  <Skeleton width={30} />
-                </td>
               </tr>
             </SingleBusinessContainer>
           ) : (
@@ -111,11 +90,9 @@ const SingleBusinessUI = (props) => {
               onClick={(e) => handleClickBusiness(e)}
             >
               <tr>
-                {allowColumns?.id && (
-                  <td className='business-id'>
-                    {businessState?.business?.id}
-                  </td>
-                )}
+                <td className='business-id'>
+                  {businessState?.business?.id}
+                </td>
                 {allowColumns?.business && (
                   <td className='business'>
                     <BusinessGeneralInfo>
@@ -133,7 +110,7 @@ const SingleBusinessUI = (props) => {
                   <td>
                     <InfoBlock>
                       {businessState?.business?.featured && (
-                        <p>{t('FEATURE', 'Featured')}</p>
+                        <span>{t('FEATURE', 'Featured')}</span>
                       )}
                     </InfoBlock>
                   </td>
@@ -158,31 +135,6 @@ const SingleBusinessUI = (props) => {
                       onChange={handleChangeActiveBusiness}
                     />
                   </BusinessEnableWrapper>
-                </td>
-                <td>
-                  <WrapperBusinessActionSelector className='business_actions'>
-                    <DropdownButton
-                      menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={<ThreeDotsVertical />}
-                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                    >
-                      <Dropdown.Item
-                        onClick={() => handleDuplicateBusiness()}
-                      >
-                        {t('DUPLICATE', 'Duplicate')}
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => handleOpenBusinessDetails(businessState?.business)}
-                      >
-                        {t('EDIT', 'Edit')}
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => onClickDeleteBusiness()}
-                      >
-                        {t('DELETE', 'Delete')}
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </WrapperBusinessActionSelector>
                 </td>
               </tr>
             </SingleBusinessContainer>
@@ -220,13 +172,13 @@ const SingleBusinessUI = (props) => {
               <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_100,c_limit')}>
                 <BusinessHeaderContent>
                   <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-                  <span>{t('ID', 'ID')} {businessState?.business?.id}</span>
                 </BusinessHeaderContent>
               </BusinessHeader>
               <BusinessContent>
                 <h1>{businessState?.business?.name}</h1>
                 <p>{businessState?.business?.city?.name}</p>
                 <BusinessActionContainer>
+                  <span>{t('ID', 'ID')} {businessState?.business?.id}</span>
                   <BusinessEnableWrapper className='business_enable_control'>
                     <span>{t('ENABLE', 'Enable')}</span>
                     <Switch
@@ -234,46 +186,12 @@ const SingleBusinessUI = (props) => {
                       onChange={handleChangeActiveBusiness}
                     />
                   </BusinessEnableWrapper>
-                  <WrapperBusinessActionSelector className='business_actions'>
-                    <DropdownButton
-                      menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={<ThreeDotsVertical />}
-                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                    >
-                      <Dropdown.Item
-                        onClick={() => handleDuplicateBusiness()}
-                      >
-                        {t('DUPLICATE', 'Duplicate')}
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => handleOpenBusinessDetails(businessState?.business)}
-                      >
-                        {t('EDIT', 'Edit')}
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => onClickDeleteBusiness()}
-                      >
-                        {t('DELETE', 'Delete')}
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </WrapperBusinessActionSelector>
                 </BusinessActionContainer>
               </BusinessContent>
             </SingleBusinessCardContainer>
           )}
         </>
       )}
-      <Confirm
-        width='700px'
-        title={t('WEB_APPNAME', 'Ordering')}
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }

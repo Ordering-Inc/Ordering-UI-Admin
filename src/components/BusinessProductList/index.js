@@ -38,7 +38,7 @@ export const BusinessProductList = (props) => {
   const [isAddProduct, setIsAddProduct] = useState(false)
   const [dataSelected, setDataSelected] = useState('')
   const [allowColumns, setAllowColumns] = useState({
-    business: true,
+    products: true,
     price: true,
     description: true,
     tax: true,
@@ -47,8 +47,8 @@ export const BusinessProductList = (props) => {
 
   const optionsDefault = [
     {
-      value: 'business',
-      content: t('BUSINESS', 'Business')
+      value: 'products',
+      content: t('PRODUCTS', 'Products')
     },
     {
       value: 'price',
@@ -114,8 +114,8 @@ export const BusinessProductList = (props) => {
             <BusinessProductListTable>
               <thead>
                 <tr>
-                  {allowColumns?.business && (
-                    <th className='business'>{t('BUSINESS', 'Business')}</th>
+                  {allowColumns?.products && (
+                    <th>{t('PRODUCTS', 'Products')}</th>
                   )}
                   {allowColumns?.price && (
                     <th className='price'>{t('PRICE', 'Price')}</th>
