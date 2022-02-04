@@ -72,6 +72,7 @@ export const BusinessOwners = (props) => {
         <WrapperOwnerSelector>
           <BusinessOwnerSelector
             selectedOwnerIds={ownerIds}
+            selectedOwner={selectedOwner}
             handleSelectBusinessOwner={setSelectedOwner}
           />
           <BsPlusSquare

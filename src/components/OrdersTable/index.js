@@ -39,7 +39,10 @@ export const OrdersTable = (props) => {
     getPageOrders,
     handleSelectedOrderIds,
     handleOpenOrderDetail,
-    setSelectedOrderIds
+    setSelectedOrderIds,
+    currentTourStep,
+    isTourOpen,
+    handleOpenTour
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -199,6 +202,18 @@ export const OrdersTable = (props) => {
     const _isAllChecked = orderIds.every(elem => selectedOrderIds.includes(elem))
     setIsAllChecked(_isAllChecked)
   }, [orderList.orders, selectedOrderIds])
+
+  const handleChangeKeyboard = (evt) => {
+    if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour()
+    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList?.orders[0], true)
+    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList?.orders[0])
+  }
+
+  useEffect(() => {
+    if (!isTourOpen) return
+    document.addEventListener('keydown', handleChangeKeyboard)
+    return () => document.removeEventListener('keydown', handleChangeKeyboard)
+  }, [isTourOpen, currentTourStep])
 
   return (
     <>

@@ -74,13 +74,7 @@ export const Select = (props) => {
       const _defaultOption = options?.find(
         (option) => option.value === defaultValue
       )
-      if (isShowSearchBar) {
-        if (_defaultOption) {
-          setSelectedOption(_defaultOption)
-        }
-      } else {
-        setSelectedOption(_defaultOption)
-      }
+      setSelectedOption(_defaultOption)
       setValue(defaultValue)
     }
   }, [defaultValue, options])

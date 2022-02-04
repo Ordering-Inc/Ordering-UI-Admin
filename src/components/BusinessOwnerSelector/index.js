@@ -8,7 +8,8 @@ const BusinessOwnerSelectorUI = (props) => {
   const {
     usersList,
     selectedOwnerIds,
-    handleSelectBusinessOwner
+    handleSelectBusinessOwner,
+    selectedOwner
   } = props
 
   const [, t] = useLanguage()
@@ -53,6 +54,7 @@ const BusinessOwnerSelectorUI = (props) => {
   return (
     <Select
       options={usersListOptions}
+      defaultValue={selectedOwner?.id}
       placeholder={placeholder}
       onChange={onSelectBusinessOwner}
       isShowSearchBar

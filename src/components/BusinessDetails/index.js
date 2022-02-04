@@ -38,7 +38,9 @@ export const BusinessDetailsUI = (props) => {
     setBusinessTypes,
     handleSuccessAddBusinessItem,
     handleSuccessDeleteBusinessItem,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    handleDuplicateBusiness,
+    handleDeleteBusiness
   } = props
   const { width } = useWindowSize()
   const [{ user }] = useSession()
@@ -120,6 +122,8 @@ export const BusinessDetailsUI = (props) => {
           selectedItem={selectedItem}
           handleSelectedItem={handleSelectedItem}
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+          handleDuplicateBusiness={handleDuplicateBusiness}
+          handleDeleteBusiness={handleDeleteBusiness}
         />
       )}
       {extraOpen && (

@@ -38,7 +38,10 @@ const OrderDetailsUI = (props) => {
     isTourOpen,
     handleUpdateOrderForUnreadCount,
     messages,
-    setCurrentTourStep
+    setCurrentTourStep,
+    currentTourStep,
+    isTourFlag,
+    setIsTourFlag
   } = props
 
   const [, t] = useLanguage()
@@ -197,6 +200,40 @@ const OrderDetailsUI = (props) => {
     if (!isTourOpen) return
     setCurrentTourStep(2)
   }
+
+  const handleChangeKeyboard = (evt) => {
+    if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1)
+    if (evt.keyCode === 39 && currentTourStep === 1) setCurrentTourStep(2)
+    if (evt.keyCode === 37 && currentTourStep === 3) {
+      handleCloseMessages()
+      setExtraOpen(false)
+      setCurrentTourStep(2)
+      setIsTourFlag(false)
+    }
+    if ((evt.keyCode === 39 && currentTourStep === 2)) {
+      handleOpenMessages('chat')
+      setCurrentTourStep(3)
+    }
+    if (evt.keyCode === 39 && currentTourStep === 3) {
+      setExtraOpen(false)
+      props.onClose()
+      setCurrentTourStep(4)
+    }
+  }
+
+  useEffect(() => {
+    if (!isTourOpen) return
+    document.addEventListener('keydown', handleChangeKeyboard)
+    return () => document.removeEventListener('keydown', handleChangeKeyboard)
+  }, [isTourOpen, currentTourStep])
+
+  useEffect(() => {
+    if (!isTourFlag) return
+    handleOpenMessages('chat')
+    setTimeout(() => {
+      setCurrentTourStep(3)
+    }, 1)
+  }, [isTourFlag])
 
   return (
     <Container

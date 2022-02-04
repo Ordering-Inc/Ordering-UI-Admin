@@ -48,6 +48,7 @@ const BusinessMenuUI = (props) => {
     setShowOption(null)
     setIsExtendExtraOpen(false)
     setIsOpenSharedProduct(false)
+    setCurrentMenu(null)
   }
 
   const handleOpenEdit = (e, menu) => {
@@ -92,11 +93,16 @@ const BusinessMenuUI = (props) => {
         </TabsContainer>
 
         {(isSelectedSharedMenus ? businessMenusState?.menusShared : businessMenusState?.menus).map(menu => (
-          <MeunItem key={menu.id} onClick={(e) => handleOpenEdit(e, menu)}>
+          <MeunItem
+            key={menu.id}
+            active={menu.id === currentMenu?.id}
+            onClick={(e) => handleOpenEdit(e, menu)}
+          >
             <CheckboxWrapper
               className='business_checkbox_control'
             >
               <Checkbox
+                disabled={!!currentMenu}
                 defaultChecked={menu?.enabled}
                 onChange={e => handleChangeBusinessMenuActiveState(menu?.id, e.target.checked)}
               />

@@ -76,6 +76,8 @@ const BusinessProductsListingUI = (props) => {
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
 
   const handleOpenCategoryDetails = (category = null) => {
+    setOpenProductDetails(false)
+    setSelectedProduct(null)
     if (category && category?.id !== null) {
       setCategorySelected(category)
       setCategoryToEdit({
@@ -104,6 +106,10 @@ const BusinessProductsListingUI = (props) => {
 
   const handleOpenProductDetails = (product) => {
     setSelectedProduct(product)
+    setCategoryToEdit({
+      open: false,
+      category: null
+    })
     setOpenProductDetails(true)
   }
 

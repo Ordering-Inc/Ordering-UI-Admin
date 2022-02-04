@@ -23,9 +23,6 @@ export const SingleListBusinessContainer = styled.tbody`
       border-bottom: 1px solid ${props => props.theme.colors.primary};
     }
   `}
-  .business {
-    padding-right: 20px;
-  }
 
   &:hover {
     .action-btn {
