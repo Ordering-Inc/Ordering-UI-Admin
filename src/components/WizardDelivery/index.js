@@ -104,6 +104,7 @@ export const WizardDelivery = (props) => {
 
   return (
     <Tour
+      disableKeyboardNavigation
       steps={tourSteps}
       isOpen={isTourOpen}
       onRequestClose={() => setIsTourOpen(false)}

@@ -137,6 +137,11 @@ const BusinessProductAddFormUI = (props) => {
             onChange={handleChangeInput}
             placeholder={t('WRITE_PRICE', 'Write price')}
             autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
           />
         </InputWrapper>
         <InputWrapper>
