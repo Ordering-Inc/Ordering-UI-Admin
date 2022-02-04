@@ -144,3 +144,16 @@ export const Wrapper = styled.div`
     `}
   }
 `
+export const RegularWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  > span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+  }
+`

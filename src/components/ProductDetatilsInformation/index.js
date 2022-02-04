@@ -16,7 +16,8 @@ import {
   InputWrapper,
   ActionsForm,
   InventoryWrapper,
-  Wrapper
+  Wrapper,
+  RegularWrapper
 } from './styles'
 
 export const ProductDetatilsInformation = (props) => {
@@ -86,13 +87,13 @@ export const ProductDetatilsInformation = (props) => {
     }
 
     str = str
-    .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
-    .replace(/\s+/g, "_") // collapse whitespace and replace by _
-    .replace(/-+/g, "_") // collapse dashes
-    .replace(/^-+/, "") // trim - from start of text
-    .replace(/-+$/, ""); // trim - from end of text
+      .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+      .replace(/\s+/g, "_") // collapse whitespace and replace by _
+      .replace(/-+/g, "_") // collapse dashes
+      .replace(/^-+/, "") // trim - from start of text
+      .replace(/-+$/, ""); // trim - from end of text
 
-    return str;
+    return str
   }
 
   const onSubmit = () => {
@@ -113,14 +114,14 @@ export const ProductDetatilsInformation = (props) => {
 
   useEffect(() => {
     if (autoGenerateCode.isAutoGenerate) {
-      let generateCode = {
+      const generateCode = {
         target: {
           name: 'slug',
           value: formState.changes.name ? stringToSlug(formState.changes.name) : stringToSlug(product.name)
         }
       }
       setAutoGenerate({
-        ...autoGenerateCode, 
+        ...autoGenerateCode,
         autoCodeText: generateCode.target.value
       })
       handleChangeInput(generateCode)
@@ -129,7 +130,7 @@ export const ProductDetatilsInformation = (props) => {
         isAutoGenerate: false
       })
     }
-  },[autoGenerateCode])
+  }, [autoGenerateCode])
 
   return (
     <>
@@ -150,11 +151,10 @@ export const ProductDetatilsInformation = (props) => {
             >
               {formState.loading
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                : ((!formState.changes?.images || formState.result?.result === 'Network Error' || formState.result.error)
-                  ? product?.images &&
-                    (<img src={optimizeImage(product?.images, 'h_200,c_limit')} alt='product image' loading='lazy' />)
-                  : formState?.changes?.images &&
-                    <img src={formState?.changes?.images} alt='product image' loading='lazy' />
+                : (
+                  (!formState.changes?.images || formState.result?.result === 'Network Error' || formState.result.error)
+                    ? product?.images && (<img src={optimizeImage(product?.images, 'h_200,c_limit')} alt='product image' loading='lazy' />)
+                    : formState?.changes?.images && (<img src={formState?.changes?.images} alt='product image' loading='lazy' />)
                 )}
               <UploadImageIconContainer>
                 <UploadImageIcon>
@@ -184,7 +184,9 @@ export const ProductDetatilsInformation = (props) => {
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('PRICE', 'Price')}</label>
+          <label className='space-between'>
+            <span>{t('PRICE', 'Price')}</span>
+          </label>
           <Input
             name='price'
             placeholder={parsePrice(0)}
@@ -203,6 +205,43 @@ export const ProductDetatilsInformation = (props) => {
             }}
           />
         </InputWrapper>
+        <RegularWrapper>
+          <span>{t('REGULAR_PRICE', 'Regular Price')}</span>
+          <Switch
+            defaultChecked={
+              formState?.result?.result
+                ? formState?.result?.result?.in_offer
+                : formState?.changes?.in_offer ?? product?.in_offer
+            }
+            onChange={val => handleChangeFormState({ in_offer: val })}
+          />
+        </RegularWrapper>
+        {
+          (typeof (formState?.changes?.in_offer) !== 'undefined' ? formState?.changes?.in_offer : product?.in_offer) && (
+            <InputWrapper style={{ marginTop: '10px' }}>
+              <Input
+                name='offer_price'
+                placeholder={parsePrice(0)}
+                defaultValue={
+                  formState?.result?.result?.offer_price
+                    ? formState?.result?.result?.offer_price
+                    : formState?.changes?.offer_price ?? product?.offer_price
+                }
+                ref={formMethods.register({
+                  required: t('REGULAR_PRICE_REQUIRED', 'The regular price is required when regular switch is Turn On')
+                })}
+                onChange={(e) => handleChangeInput(e)}
+                disabled={formState.loading}
+                autoComplete='off'
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            </InputWrapper>
+          )
+        }
         <InputWrapper>
           <label>{t('DESCRIPTION', 'Description')}</label>
           <TextArea
@@ -232,7 +271,7 @@ export const ProductDetatilsInformation = (props) => {
             }
           />
           <Wrapper
-            style={{paddingTop: 10}}
+            style={{ paddingTop: 10 }}
           >
             <Button
               color='primary'
@@ -243,11 +282,11 @@ export const ProductDetatilsInformation = (props) => {
                 isAutoGenerate: true
               })}
             >
-                {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
+              {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
             </Button>
           </Wrapper>
         </InputWrapper>
-        
+
         <InventoryWrapper>
           <span>{t('INVENTORY', 'Inventory')}</span>
           <Switch
