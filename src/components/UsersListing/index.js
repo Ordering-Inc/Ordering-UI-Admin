@@ -6,6 +6,7 @@ import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
+import { CustomerDetails } from '../CustomerDetails'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
 import { SideBar } from '../SideBar'
 import { UserAddForm } from '../UserAddForm'
@@ -24,6 +25,7 @@ const UsersListingUI = (props) => {
     isShowActiveStateFilter,
     isShowUserTypeFilter,
 
+    isCustomersPage,
     isDriversPage,
     isDriversManagersPage,
 
@@ -46,7 +48,8 @@ const UsersListingUI = (props) => {
     handleDeleteSeveralUsers,
     onUserRedirect,
     handleSuccessUpdate,
-    handleSuccessAddUser
+    handleSuccessAddUser,
+    handleSuccessDeleteUser
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -185,19 +188,36 @@ const UsersListingUI = (props) => {
       </UsersListingContainer>
 
       {isOpenUserDetails && (
-        <UserDetailsLateralBar
-          isDriversPage={isDriversPage}
-          isDriversManagersPage={isDriversManagersPage}
-          open={isOpenUserDetails}
-          user={openUser}
-          userId={openUser?.id || queryId}
-          onClose={() => handleBackRedirect()}
-          handleSuccessUpdate={handleSuccessUpdate}
-        />
+        isCustomersPage ? (
+          <SideBar
+            id='customer_details'
+            open={isOpenUserDetails}
+            onClose={() => handleBackRedirect()}
+          >
+            <CustomerDetails
+              user={openUser}
+              userId={openUser?.id || queryId}
+              handleSuccessUpdate={handleSuccessUpdate}
+              handleSuccessDeleteUser={handleSuccessDeleteUser}
+              onClose={() => handleBackRedirect()}
+            />
+          </SideBar>
+        ) : (
+          <UserDetailsLateralBar
+            isDriversPage={isDriversPage}
+            isDriversManagersPage={isDriversManagersPage}
+            open={isOpenUserDetails}
+            user={openUser}
+            userId={openUser?.id || queryId}
+            onClose={() => handleBackRedirect()}
+            handleSuccessUpdate={handleSuccessUpdate}
+            handleSuccessDeleteUser={handleSuccessDeleteUser}
+          />
+        )
       )}
       {openUserAddForm && (
         <SideBar
-          sidebarId='userAddForm'
+          sidebarId='user_add_form'
           open={openUserAddForm}
           noAnimation={isTourOpen}
           onClose={() => setOpenUserAddForm(false)}

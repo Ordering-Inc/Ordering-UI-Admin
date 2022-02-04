@@ -274,10 +274,10 @@ export const UsersBottomContainer = styled.div`
 
 export const VerifiedItem = styled.span`
   font-size: 10px;
-  background-color: #E3FEF3;
+  background-color: ${props => props.theme.colors.lightGreen};
   padding: 3px 10px;
   border-radius: 50px;
-  color: #00D27A;
+  color: ${props => props.theme.colors.green};
   display: flex;
   align-items: center;
 

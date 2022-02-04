@@ -11,6 +11,7 @@ export const CustomersList = (props) => {
     headerTitle: t('CUSTOMERS', 'Customers'),
     isShowActiveStateFilter: true,
     deafultUserTypesSelected: [3],
+    isCustomersPage: true,
     propsToFetch: [
       'name', 'lastname', 'email', 'phone', 'photo', 'cellphone',
       'country_phone_code', 'city_id', 'city', 'address', 'addresses',
