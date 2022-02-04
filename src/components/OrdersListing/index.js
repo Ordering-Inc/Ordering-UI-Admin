@@ -35,7 +35,9 @@ export const OrdersListing = (props) => {
 
     isMessagesView,
     setSelectedOrderIds,
-    handleOpenTour
+    handleOpenTour,
+    currentTourStep,
+    isTourOpen
   } = props
 
   const theme = useTheme()
@@ -100,6 +102,9 @@ export const OrdersListing = (props) => {
                   handleUpdateOrderStatus={handleUpdateOrderStatus}
                   handleSelectedOrderIds={handleSelectedOrderIds}
                   handleOpenOrderDetail={handleOpenOrderDetail}
+                  currentTourStep={currentTourStep}
+                  isTourOpen={isTourOpen}
+                  handleOpenTour={handleOpenTour}
                 />
               ) : (
                 <OrdersCards
