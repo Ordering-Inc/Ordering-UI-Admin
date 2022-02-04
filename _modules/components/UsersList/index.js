@@ -19,15 +19,11 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
 
-var _HiOutlineMail = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineMail"));
-
-var _FiSmartphone = _interopRequireDefault(require("@meronex/icons/fi/FiSmartphone"));
-
 var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
 
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _Switch = require("../../styles/Switch");
 
@@ -212,10 +208,7 @@ var UsersList = function UsersList(props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })))), /*#__PURE__*/_react.default.createElement("td", null, !(isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_styles.UserTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100,
-      style: {
-        marginBottom: '10px'
-      }
+      width: 100
     }), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserEnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -245,32 +238,7 @@ var UsersList = function UsersList(props) {
       bgimage: optimizeImage(user === null || user === void 0 ? void 0 : user.photo, 'h_50,c_limit')
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement("div", {
-      style: {
-        position: 'absolute',
-        top: 0,
-        right: 10
-      }
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      style: {
-        display: 'flex',
-        flexDirection: 'column'
-      }
-    }, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles.VerifiedItem, {
-      style: {
-        marginBottom: 2
-      }
-    }, /*#__PURE__*/_react.default.createElement(_FiSmartphone.default, {
-      style: {
-        fontSize: 13,
-        marginRight: 2
-      }
-    }), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, {
-      style: {
-        fontSize: 14,
-        marginRight: 2
-      }
-    }), t('VERIFIED', 'Verified')))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+    }, user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement(_styles.VerifiedItemsContainer, null, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, !(isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_styles.UserTypeWrapper, {
       className: "user_type_selector"
@@ -292,7 +260,7 @@ var UsersList = function UsersList(props) {
       className: "user_action"
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
       menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
+      title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null),
       id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {

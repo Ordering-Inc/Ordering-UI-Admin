@@ -90,6 +90,7 @@ var WizardDelivery = function WizardDelivery(props) {
     position: 'bottom'
   }];
   return /*#__PURE__*/_react.default.createElement(_reactour.default, {
+    disableKeyboardNavigation: true,
     steps: tourSteps,
     isOpen: isTourOpen,
     onRequestClose: function onRequestClose() {

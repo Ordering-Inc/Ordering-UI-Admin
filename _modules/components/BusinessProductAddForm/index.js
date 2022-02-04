@@ -158,7 +158,12 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.price) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_PRICE', 'Write price'),
-    autoComplete: "off"
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     name: "description",

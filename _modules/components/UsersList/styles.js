@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserActionSelector = exports.WrapperPagination = exports.WrapperImage = exports.VerifiedItem = exports.UsersTable = exports.UsersConatiner = exports.UsersBottomContainer = exports.UserTypeWrapper = exports.UserTableWrapper = exports.UserMainInfo = exports.UserEnableWrapper = exports.InfoBlock = exports.Image = exports.CheckBoxWrapper = exports.AddNewUserButton = void 0;
+exports.WrapperUserActionSelector = exports.WrapperPagination = exports.WrapperImage = exports.VerifiedItemsContainer = exports.VerifiedItem = exports.UsersTable = exports.UsersConatiner = exports.UsersBottomContainer = exports.UserTypeWrapper = exports.UserTableWrapper = exports.UserMainInfo = exports.UserEnableWrapper = exports.InfoBlock = exports.Image = exports.CheckBoxWrapper = exports.AddNewUserButton = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -27,7 +27,7 @@ var UsersConatiner = _styledComponents.default.div(_templateObject || (_template
 
 exports.UsersConatiner = UsersConatiner;
 
-var UserTableWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n"])));
+var UserTableWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  overflow: auto;\n"])));
 
 exports.UserTableWrapper = UserTableWrapper;
 
@@ -155,6 +155,18 @@ var UsersBottomContainer = _styledComponents.default.div(_templateObject28 || (_
 
 exports.UsersBottomContainer = UsersBottomContainer;
 
-var VerifiedItem = _styledComponents.default.span(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  font-size: 10px;\n  background-color: #E3FEF3;\n  padding: 3px 10px;\n  border-radius: 50px;\n  color: #00D27A;\n"])));
+var VerifiedItem = _styledComponents.default.span(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  font-size: 10px;\n  background-color: #E3FEF3;\n  padding: 3px 10px;\n  border-radius: 50px;\n  color: #00D27A;\n  display: flex;\n  align-items: center;\n\n  svg {\n    font-size: 12px;\n    ", "\n  }\n"])), function (props) {
+  var _props$theme7;
+
+  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n      margin-left: 3px;\n    "]))) : (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      margin-right: 3px;\n    "])));
+});
 
 exports.VerifiedItem = VerifiedItem;
+
+var VerifiedItemsContainer = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  display: flex;\n  flex-direction: column;\n\n  ", "\n\n  > span {\n    &:not(:first-child) {\n      margin-top: 5px;\n    }\n  }\n"])), function (props) {
+  var _props$theme8;
+
+  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    right: 10px;\n  "])));
+});
+
+exports.VerifiedItemsContainer = VerifiedItemsContainer;
