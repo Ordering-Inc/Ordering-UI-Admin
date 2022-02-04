@@ -126,6 +126,11 @@ const OrdersManagerUI = (props) => {
     }
   }, [user])
 
+  useEffect(() => {
+    if (isTourOpen) return
+    setIsTourFlag(false)
+  }, [isTourOpen])
+
   return (
     <>
       <OrdersListContainer

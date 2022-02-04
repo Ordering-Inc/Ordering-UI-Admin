@@ -222,10 +222,7 @@ const OrderDetailsUI = (props) => {
   }
 
   useEffect(() => {
-    if (!isTourOpen) {
-      setIsTourFlag(false)
-      return
-    }
+    if (!isTourOpen) return
     document.addEventListener('keydown', handleChangeKeyboard)
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
