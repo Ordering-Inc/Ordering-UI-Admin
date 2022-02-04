@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Camera as CameraIcon } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { DriverGroupSetting } from '../DriverGroupSetting'
-import AiOutlineCheckCircle from '@meronex/icons/ai/AiOutlineCheckCircle';
+import AiOutlineCheckCircle from '@meronex/icons/ai/AiOutlineCheckCircle'
 
 import {
   UserFormDetails as UserProfileController,

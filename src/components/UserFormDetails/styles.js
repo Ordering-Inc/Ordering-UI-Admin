@@ -122,3 +122,15 @@ export const WrapperUserTypeSelector = styled.div`
     color: ${props => props.theme.colors.secundaryContrast};
   }
 `
+
+export const DriverZoneRestrictionWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  > span {
+    font-size: 14px;
+  }
+`
