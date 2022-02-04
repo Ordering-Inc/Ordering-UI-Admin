@@ -29,7 +29,8 @@ const CategoryTreeNode = (props) => {
     category,
     index,
     selectedProductsIds,
-    setSelectedProductsIds
+    setSelectedProductsIds,
+    include
   } = props
 
   const [{ optimizeImage }] = useUtils()
@@ -54,30 +55,41 @@ const CategoryTreeNode = (props) => {
   const isCheckedCategory = () => {
     if (category?.products) {
       const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
-      return productsIds.every(id => selectedProductsIds.includes(id))
+      return productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
     } else {
       return false
     }
   }
 
-  const handleClickProduct = (product) => {
-    if (selectedProductsIds.includes(product.id)) {
-      const _selectedProductsIds = selectedProductsIds.filter(id => id !== product.id)
+  const handleClickProduct = (product, include) => {
+    if (!!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include) {
+      const _selectedProductsIds = { ...selectedProductsIds }
+      delete _selectedProductsIds[product.id]
       setSelectedProductsIds(_selectedProductsIds)
     } else {
-      setSelectedProductsIds([...selectedProductsIds, product.id])
+      setSelectedProductsIds({ ...selectedProductsIds, [product.id]: { id: product.id, include: include } })
     }
   }
 
-  const handleChangeSelectCategory = () => {
+  const handleChangeSelectCategory = (include) => {
     const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
-    const everyContain = productsIds.every(id => selectedProductsIds.includes(id))
-    let _selectedProductsIds = []
+    const everyContain = productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
+    let _selectedProductsIds = {}
     if (!everyContain) {
-      _selectedProductsIds = [...selectedProductsIds, ...productsIds].filter((value, index, self) => self.indexOf(value) === index)
+      _selectedProductsIds = {
+        ...selectedProductsIds
+      }
+      productsIds.forEach(id => {
+        _selectedProductsIds[id] = { id: id, include }
+      })
+      // _selectedProductsIds = [...selectedProductsIds, ...productsIds].filter((value, index, self) => self.indexOf(value) === index)
       setSelectedProductsIds(_selectedProductsIds)
     } else {
-      _selectedProductsIds = selectedProductsIds.filter(id => !productsIds.includes(id))
+      _selectedProductsIds = Object.keys(selectedProductsIds).filter(id => productsIds.includes(id)).reduce((ids, id) => {
+        ids[id] = selectedProductsIds[id]
+        return ids
+      }, {})
+      // _selectedProductsIds = selectedProductsIds.filter(id => !productsIds.includes(id))
       setSelectedProductsIds(_selectedProductsIds)
     }
   }
@@ -95,7 +107,7 @@ const CategoryTreeNode = (props) => {
             <Checkbox
               ref={categoryRef}
               checked={isCheckedCategory()}
-              onChange={() => handleChangeSelectCategory()}
+              onChange={() => handleChangeSelectCategory(include)}
             />
             <span>{category.name}</span>
           </div>
@@ -116,8 +128,8 @@ const CategoryTreeNode = (props) => {
             <div>
               <Checkbox
                 ref={checkboxRef}
-                checked={selectedProductsIds.includes(product.id)}
-                onChange={() => handleClickProduct(product)}
+                checked={!!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include}
+                onChange={() => handleClickProduct(product, include)}
               />
               <WrapperImage>
                 <Image bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_50,c_limit')} />
@@ -146,10 +158,10 @@ const SelectBusinessProductsUI = (props) => {
     businessState,
     searchValue,
     handleChangeSearch,
-
+    include,
     selectedProductsIds,
     setSelectedProductsIds,
-
+    slug,
     categoryState
   } = props
 
@@ -198,6 +210,7 @@ const SelectBusinessProductsUI = (props) => {
             category={category}
             selectedProductsIds={selectedProductsIds}
             setSelectedProductsIds={setSelectedProductsIds}
+            include={include}
           />
         ))
       )}
@@ -217,7 +230,7 @@ export const SelectBusinessProducts = (props) => {
     isAllCategoryProducts: true,
     isSearchByName: true,
     isSearchByDescription: true,
-    handleUpdateInitialRender: (val) => setIsInitialRender(val)
+    handleUpdateInitialRender: (val) => setIsInitialRender(val),
   }
   return (
     <BusinessProductsListingController {...businessProductslistingProps} />

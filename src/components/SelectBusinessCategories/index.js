@@ -26,7 +26,8 @@ const CategoryTreeNode = (props) => {
     category,
     index,
     selectedCategoryIds,
-    setSelectedCategoryIds
+    setSelectedCategoryIds,
+    include
   } = props
 
   const content = useRef(null)
@@ -45,7 +46,7 @@ const CategoryTreeNode = (props) => {
     )
   }
 
-  const handleChangeSelectCategory = (checked) => {
+  const handleChangeSelectCategory = (include) => {
     let categoryIds = []
     if (category?.subcategories?.length > 0) {
       category.subcategories.forEach(function iterate (category) {
@@ -53,11 +54,18 @@ const CategoryTreeNode = (props) => {
         Array.isArray(category?.subcategories) && category.subcategories.forEach(iterate)
       })
     }
-    let _selectedCaetegoryIds = []
-    if (checked) {
-      _selectedCaetegoryIds = [...selectedCategoryIds, ...categoryIds, category.id].filter((value, index, self) => self.indexOf(value) === index)
+    let _selectedCaetegoryIds = {}
+    if (selectedCategoryIds[category.id] && selectedCategoryIds[category.id].include === include) {
+      _selectedCaetegoryIds = { ...selectedCategoryIds }
+      delete _selectedCaetegoryIds[category.id]
     } else {
-      _selectedCaetegoryIds = selectedCategoryIds.filter(id => id !== category.id && !categoryIds.includes(id))
+      _selectedCaetegoryIds = {
+        ...selectedCategoryIds
+      }
+      _selectedCaetegoryIds[category.id] = { id: category.id, include }
+      categoryIds.forEach(id => {
+        _selectedCaetegoryIds[id] = { id: id, include }
+      })
     }
     setSelectedCategoryIds(_selectedCaetegoryIds)
   }
@@ -74,8 +82,8 @@ const CategoryTreeNode = (props) => {
           <div>
             <Checkbox
               ref={categoryRef}
-              checked={selectedCategoryIds.includes(category.id)}
-              onChange={e => handleChangeSelectCategory(e.target.checked)}
+              checked={!!selectedCategoryIds[category.id] && selectedCategoryIds[category.id].include === include}
+              onChange={e => handleChangeSelectCategory(include)}
             />
             <span>{category.name}</span>
           </div>
@@ -107,7 +115,7 @@ const SelectBusinessCategoriesUI = (props) => {
     businessState,
     searchValue,
     handleChangeSearch,
-
+    include,
     selectedCategoryIds,
     setSelectedCategoryIds,
     categoryState
@@ -158,6 +166,7 @@ const SelectBusinessCategoriesUI = (props) => {
             category={category}
             selectedCategoryIds={selectedCategoryIds}
             setSelectedCategoryIds={setSelectedCategoryIds}
+            include={include}
           />
         ))
       )}

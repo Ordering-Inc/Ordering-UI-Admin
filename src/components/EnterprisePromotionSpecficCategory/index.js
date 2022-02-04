@@ -66,15 +66,18 @@ export const EnterprisePromotionSpecficCategory = (props) => {
 
   useEffect(() => {
     const filteredCategories = []
-    selectedCategoryIds.forEach(id => {
-      filteredCategories.push({ id: id, is_condition: true })
+    Object.values(selectedCategoryIds).forEach(category => {
+      filteredCategories.push({ id: category.id, include: category.include, is_condition: true })
     })
     handleChangeItem({ categories: filteredCategories })
   }, [selectedCategoryIds])
 
   useEffect(() => {
     if (!promotionState?.promotion?.categories) return
-    const _selectedCategoryIds = promotionState?.promotion.categories.reduce((ids, category) => [...ids, category.id], [])
+    const _selectedCategoryIds = promotionState?.promotion?.categories.reduce((ids, category) => {
+      ids[category.id] = { id: category.id, include: category.pivot.include }
+      return ids
+    }, {})
     setSelectedCategoryIds(_selectedCategoryIds)
   }, [])
 
@@ -92,13 +95,23 @@ export const EnterprisePromotionSpecficCategory = (props) => {
           />
         </BusinessSelectWrapper>
       </BusinessSelectorContainer>
-      <Label>{t('SELECT_PRODUCT', 'Select product')}</Label>
       {selectedBusinessSlug ? (
-        <SelectBusinessCategories
-          slug={selectedBusinessSlug}
-          selectedCategoryIds={selectedCategoryIds}
-          setSelectedCategoryIds={setSelectedCategoryIds}
-        />
+        <>
+          <Label>{t('SELECT_CATEGORY_INCLUDE', 'Select category to include')}</Label>
+          <SelectBusinessCategories
+            slug={selectedBusinessSlug}
+            selectedCategoryIds={selectedCategoryIds}
+            setSelectedCategoryIds={setSelectedCategoryIds}
+            include
+          />
+          <Label>{t('SELECT_CATEGORY_EXCLUDE', 'Select category to exclude')}</Label>
+          <SelectBusinessCategories
+            slug={selectedBusinessSlug}
+            selectedCategoryIds={selectedCategoryIds}
+            setSelectedCategoryIds={setSelectedCategoryIds}
+            include={false}
+          />
+        </>
       ) : (
         <NoSelectedBusiness>
           {t('SELECT_BUSINESS_BEFORE_CATEGORY', 'Please select a business before selecting your cateogries.')}
