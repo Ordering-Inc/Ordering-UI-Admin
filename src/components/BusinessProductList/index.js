@@ -40,6 +40,7 @@ export const BusinessProductList = (props) => {
   const [allowColumns, setAllowColumns] = useState({
     products: true,
     price: true,
+    // offer_price: true,
     description: true,
     tax: true,
     fee: true
@@ -53,6 +54,10 @@ export const BusinessProductList = (props) => {
     {
       value: 'price',
       content: t('PRICE', 'Price')
+    },
+    {
+      value: 'offer_price',
+      content: t('REQULAR_PRICE', 'Regular Price')
     },
     {
       value: 'description',
@@ -119,6 +124,9 @@ export const BusinessProductList = (props) => {
                   )}
                   {allowColumns?.price && (
                     <th className='price'>{t('PRICE', 'Price')}</th>
+                  )}
+                  {allowColumns?.offer_price && (
+                    <th className='regular-price'>{t('REGULAR_PRICE', 'Regular Price')}</th>
                   )}
                   {allowColumns?.description && (
                     <th className='description'>{t('DESCRIPTION', 'Description')}</th>
