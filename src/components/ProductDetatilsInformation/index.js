@@ -228,7 +228,10 @@ export const ProductDetatilsInformation = (props) => {
                     : formState?.changes?.offer_price ?? product?.offer_price
                 }
                 ref={formMethods.register({
-                  required: t('REGULAR_PRICE_REQUIRED', 'The regular price is required when regular switch is Turn On')
+                  required: t(
+                    'REGULAR_PRICE_REQUIRED',
+                    'The Regular Price field is required'
+                  ).replace('_attribute_', t('REGULAR_PRICE', 'Regular Price'))
                 })}
                 onChange={(e) => handleChangeInput(e)}
                 disabled={formState.loading}
