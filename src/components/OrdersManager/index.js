@@ -82,9 +82,7 @@ const OrdersManagerUI = (props) => {
       handleCustomOrderDetail && handleCustomOrderDetail(true)
     }
     if (isTourOpen && currentTourStep === 4) {
-      setTimeout(() => {
-        setIsTourFlag(true)
-      }, 1)
+      setIsTourFlag(true)
     }
     if (isTourOpen && currentTourStep === 0) {
       setTimeout(() => {
