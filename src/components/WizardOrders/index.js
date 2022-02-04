@@ -87,16 +87,7 @@ export const WizardOrders = (props) => {
       disableFocusLock
       startAt={currentStep}
       goToStep={currentStep}
-
-      // maskSpace={0}
-      // nextStep={() => handleTourNextClick()}
-      // prevStep={() => handleTourPrevClick()}
-      // getCurrentStep={curr => console.log(curr, 'step')}
-      // prevButton={null}
-      // disableDotsNavigation
-      // accentColor=''
-      // badgeContent=''
-      // nextButton='next'
+      disableKeyboardNavigation
     />
   )
 }

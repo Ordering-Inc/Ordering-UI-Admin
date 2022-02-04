@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import TiPencil from '@meronex/icons/ti/TiPencil'
-import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
+import IosArrowUp from '@meronex/icons/ios/IosArrowUp'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
@@ -41,8 +41,8 @@ export const ProductItemAccordion = (props) => {
   const [{ parsePrice, optimizeImage }] = useUtils()
   const windowSize = useWindowSize()
 
-  const [setActive, setActiveState] = useState('')
-  const [setHeight, setHeightState] = useState('inherit')
+  const [setActive, setActiveState] = useState('active')
+  const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon rotate')
 
   const content = useRef(null)
@@ -76,7 +76,7 @@ export const ProductItemAccordion = (props) => {
       setActive === 'active' ? `${content.current.scrollHeight}px` : '0px'
     )
     setRotateState(
-      setActive === 'active' ? 'accordion__icon rotate' : 'accordion__icon'
+      setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
   }
 
@@ -179,7 +179,7 @@ export const ProductItemAccordion = (props) => {
               </span>
               {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                 <p>
-                  <IosArrowDown className={`${setRotate}`} />
+                  <IosArrowUp className={`${setRotate}`} />
                 </p>
               )}
             </ProductPrice>
