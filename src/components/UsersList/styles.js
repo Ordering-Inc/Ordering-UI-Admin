@@ -278,4 +278,33 @@ export const VerifiedItem = styled.span`
   padding: 3px 10px;
   border-radius: 50px;
   color: #00D27A;
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 12px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 3px;
+    ` : css`
+      margin-right: 3px;
+    `}
+  }
+`
+export const VerifiedItemsContainer = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+
+  ${props => props.theme?.rtl ? css`
+    left: 10px;
+  ` : css`
+    right: 10px;
+  `}
+
+  > span {
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
 `

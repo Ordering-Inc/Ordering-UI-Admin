@@ -4,11 +4,10 @@ import { useTheme } from 'styled-components'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
-import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
-import FiSmartphone from '@meronex/icons/fi/FiSmartphone'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+
+import { Envelope, Phone, ThreeDotsVertical } from 'react-bootstrap-icons'
 
 import { Switch } from '../../styles/Switch'
 import { UserTypeSelector } from '../UserTypeSelector'
@@ -30,6 +29,7 @@ import {
   WrapperUserActionSelector,
   AddNewUserButton,
   UsersBottomContainer,
+  VerifiedItemsContainer,
   VerifiedItem
 } from './styles'
 
@@ -208,23 +208,21 @@ export const UsersList = (props) => {
                           <p>{user?.email}</p>
                         </InfoBlock>
                         {(user?.phone_verified || user?.email_verified) && (
-                          <div style={{ position: 'absolute', top: 0, right: 10 }}>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                              {!!user?.phone_verified && (
-                                <VerifiedItem style={{ marginBottom: 2 }}>
-                                  <FiSmartphone style={{ fontSize: 13, marginRight: 2 }} />
-                                  {t('VERIFIED', 'Verified')}
-                                </VerifiedItem>
-                              )}
+                          <VerifiedItemsContainer>
+                            {!!user?.phone_verified && (
+                              <VerifiedItem>
+                                <Phone />
+                                {t('VERIFIED', 'Verified')}
+                              </VerifiedItem>
+                            )}
 
-                              {!!user?.email_verified && (
-                                <VerifiedItem>
-                                  <HiOutlineMail style={{ fontSize: 14, marginRight: 2 }} />
-                                  {t('VERIFIED', 'Verified')}
-                                </VerifiedItem>
-                              )}
-                            </div>
-                          </div>
+                            {!!user?.email_verified && (
+                              <VerifiedItem>
+                                <Envelope />
+                                {t('VERIFIED', 'Verified')}
+                              </VerifiedItem>
+                            )}
+                          </VerifiedItemsContainer>
                         )}
                       </UserMainInfo>
                     </td>
@@ -260,7 +258,7 @@ export const UsersList = (props) => {
                       <WrapperUserActionSelector className='user_action'>
                         <DropdownButton
                           menuAlign={theme?.rtl ? 'left' : 'right'}
-                          title={<FiMoreVertical />}
+                          title={<ThreeDotsVertical />}
                           id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                         >
                           <Dropdown.Item onClick={() => handleOpenUserDetails(user)}>{t('EDIT', 'Edit')}</Dropdown.Item>
