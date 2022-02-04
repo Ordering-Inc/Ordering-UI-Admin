@@ -11,7 +11,7 @@ export const BusinessListContainer = styled.div`
 
 export const BusinessListTable = styled.table`
   width: calc(100% - 10px);
-  min-width: 950px;
+  min-width: 650px;
   color: ${props => props.theme.colors?.headingColor};
   transition: all 0.3s;
 
