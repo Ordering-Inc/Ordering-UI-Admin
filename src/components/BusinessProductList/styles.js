@@ -70,6 +70,10 @@ export const BusinessProductListTable = styled.table`
     max-width: 100px;
   }
 
+  th.regular-price {
+    white-space: nowrap;
+  }
+
   th.description {
     width: 35%;
   }

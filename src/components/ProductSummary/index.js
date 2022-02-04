@@ -126,7 +126,12 @@ export const ProductSummary = (props) => {
         </DetailsHeader>
         <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_200,c_limit')} />
         <ProductDetailsContent>
-          <ProductPrice>{parsePrice(productState?.product?.price)}</ProductPrice>
+          <ProductPrice>
+            {parsePrice(productState?.product?.price)}
+            {productState?.product?.in_offer && productState?.product?.offer_price && (
+              <span>{parsePrice(productState?.product?.offer_price)}</span>
+            )}
+          </ProductPrice>
           <ProductDescription>{productState?.product?.description}</ProductDescription>
           <ProductConfigsContainer>
             {configsOptions.map(config => (

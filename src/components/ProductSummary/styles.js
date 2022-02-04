@@ -70,10 +70,23 @@ export const ProductDetailsContent = styled.div`
 `
 
 export const ProductPrice = styled.p`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   font-weight: 600;
   margin: 30px 0 15px;
   color: ${props => props.theme.colors.headingColor};
+  span {
+    font-size: 18px;
+    font-weight: 300;
+    color: ${props => props.theme.colors.lightGray};
+    text-decoration: line-through;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 15px;
+    ` : css`
+      margin-left: 15px;
+    `}
+  }
 `
 
 export const ProductDescription = styled.p`
