@@ -112,10 +112,15 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       currentTourStep = _useState10[0],
       setCurrentTourStep = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(0),
+  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      totalSelectedOrder = _useState12[0],
-      setTotalSelectedOrder = _useState12[1];
+      isTourFlag = _useState12[0],
+      setIsTourFlag = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(0),
+      _useState14 = _slicedToArray(_useState13, 2),
+      totalSelectedOrder = _useState14[0],
+      setTotalSelectedOrder = _useState14[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
@@ -130,6 +135,13 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   };
 
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
+    var isKeydown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    if (isTourOpen && currentTourStep === 4 && !isKeydown) {
+      setIsTourOpen(false);
+      return;
+    }
+
     setDetailsOrder(order);
     setOrderDetailId(order.id);
     setIsOpenOrderDetail(true);
@@ -140,17 +152,21 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       handleCustomOrderDetail && handleCustomOrderDetail(true);
     }
 
-    if (isTourOpen) {
+    if (isTourOpen && currentTourStep === 4) {
+      setIsTourFlag(true);
+    }
+
+    if (isTourOpen && currentTourStep === 0) {
       setTimeout(function () {
         setCurrentTourStep(1);
-      }, 50);
+      }, 1);
     }
   };
 
   var _handleOpenTour = function handleOpenTour() {
     setCurrentTourStep(0);
     setIsTourOpen(true);
-    setIsOpenOrderDetail(false);
+    handleBackRedirect();
   };
 
   (0, _react.useEffect)(function () {
@@ -178,6 +194,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       }
     }
   }, [user]);
+  (0, _react.useEffect)(function () {
+    if (isTourOpen) return;
+    setIsTourFlag(false);
+  }, [isTourOpen]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
@@ -225,7 +245,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleOpenOrderDetail: handleOpenOrderDetail,
     setSelectedOrderIds: setSelectedOrderIds,
     currentTourStep: currentTourStep,
-    handleOpenTour: _handleOpenTour
+    handleOpenTour: _handleOpenTour,
+    isTourOpen: isTourOpen
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,
@@ -236,7 +257,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     onClose: function onClose() {
       return handleBackRedirect();
     },
-    setCurrentTourStep: setCurrentTourStep
+    setCurrentTourStep: setCurrentTourStep,
+    currentTourStep: currentTourStep,
+    isTourFlag: isTourFlag,
+    setIsTourFlag: setIsTourFlag
   }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), isTourOpen && /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,

@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
 
-var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowDown"));
+var _IosArrowUp = _interopRequireDefault(require("@meronex/icons/ios/IosArrowUp"));
 
 var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 
@@ -82,12 +82,12 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
 
   var windowSize = (0, _useWindowSize.useWindowSize)();
 
-  var _useState = (0, _react.useState)(''),
+  var _useState = (0, _react.useState)('active'),
       _useState2 = _slicedToArray(_useState, 2),
       setActive = _useState2[0],
       setActiveState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)('inherit'),
+  var _useState3 = (0, _react.useState)('0px'),
       _useState4 = _slicedToArray(_useState3, 2),
       setHeight = _useState4[0],
       setHeightState = _useState4[1];
@@ -130,7 +130,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     if (!(product !== null && product !== void 0 && product.valid_menu) && isCartProduct || isActionsClick) return;
     setActiveState(setActive === '' ? 'active' : '');
     setHeightState(setActive === 'active' ? "".concat(content.current.scrollHeight, "px") : '0px');
-    setRotateState(setActive === 'active' ? 'accordion__icon rotate' : 'accordion__icon');
+    setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
   };
 
   var handleChangeQuantity = function handleChangeQuantity(value) {
@@ -233,7 +233,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }
   })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(getProductPrice(product), {
     currencyPosition: 'left'
-  })), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  })), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowUp.default, {
     className: "".concat(setRotate)
   }))), isCartProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,

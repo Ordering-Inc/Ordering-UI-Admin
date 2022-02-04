@@ -71,7 +71,10 @@ var OrdersTable = function OrdersTable(props) {
       getPageOrders = props.getPageOrders,
       handleSelectedOrderIds = props.handleSelectedOrderIds,
       handleOpenOrderDetail = props.handleOpenOrderDetail,
-      setSelectedOrderIds = props.setSelectedOrderIds;
+      setSelectedOrderIds = props.setSelectedOrderIds,
+      currentTourStep = props.currentTourStep,
+      isTourOpen = props.isTourOpen,
+      handleOpenTour = props.handleOpenTour;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -301,6 +304,20 @@ var OrdersTable = function OrdersTable(props) {
 
     setIsAllChecked(_isAllChecked);
   }, [orderList.orders, selectedOrderIds]);
+
+  var handleChangeKeyboard = function handleChangeKeyboard(evt) {
+    if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour();
+    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0], true);
+    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0]);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!isTourOpen) return;
+    document.addEventListener('keydown', handleChangeKeyboard);
+    return function () {
+      return document.removeEventListener('keydown', handleChangeKeyboard);
+    };
+  }, [isTourOpen, currentTourStep]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {

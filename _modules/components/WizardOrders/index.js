@@ -90,16 +90,8 @@ var WizardOrders = function WizardOrders(props) {
     showCloseButton: false,
     disableFocusLock: true,
     startAt: currentStep,
-    goToStep: currentStep // maskSpace={0}
-    // nextStep={() => handleTourNextClick()}
-    // prevStep={() => handleTourPrevClick()}
-    // getCurrentStep={curr => console.log(curr, 'step')}
-    // prevButton={null}
-    // disableDotsNavigation
-    // accentColor=''
-    // badgeContent=''
-    // nextButton='next'
-
+    goToStep: currentStep,
+    disableKeyboardNavigation: true
   });
 };
 

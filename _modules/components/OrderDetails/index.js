@@ -74,7 +74,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       isTourOpen = props.isTourOpen,
       handleUpdateOrderForUnreadCount = props.handleUpdateOrderForUnreadCount,
       messages = props.messages,
-      setCurrentTourStep = props.setCurrentTourStep;
+      setCurrentTourStep = props.setCurrentTourStep,
+      currentTourStep = props.currentTourStep,
+      isTourFlag = props.isTourFlag,
+      setIsTourFlag = props.setIsTourFlag;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -397,6 +400,43 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setCurrentTourStep(2);
   };
 
+  var handleChangeKeyboard = function handleChangeKeyboard(evt) {
+    if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1);
+    if (evt.keyCode === 39 && currentTourStep === 1) setCurrentTourStep(2);
+
+    if (evt.keyCode === 37 && currentTourStep === 3) {
+      handleCloseMessages();
+      setExtraOpen(false);
+      setCurrentTourStep(2);
+      setIsTourFlag(false);
+    }
+
+    if (evt.keyCode === 39 && currentTourStep === 2) {
+      handleOpenMessages('chat');
+      setCurrentTourStep(3);
+    }
+
+    if (evt.keyCode === 39 && currentTourStep === 3) {
+      setExtraOpen(false);
+      props.onClose();
+      setCurrentTourStep(4);
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!isTourOpen) return;
+    document.addEventListener('keydown', handleChangeKeyboard);
+    return function () {
+      return document.removeEventListener('keydown', handleChangeKeyboard);
+    };
+  }, [isTourOpen, currentTourStep]);
+  (0, _react.useEffect)(function () {
+    if (!isTourFlag) return;
+    handleOpenMessages('chat');
+    setTimeout(function () {
+      setCurrentTourStep(3);
+    }, 1);
+  }, [isTourFlag]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     isSelectedOrders: isSelectedOrders,
     id: "orderDetails",
