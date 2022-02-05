@@ -6,11 +6,11 @@ import {
   BusinessBrandGENDetail as BusinessBrandGENDetailContorller
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Alert } from '../Confirm'
-import { bytesConverter } from '../../utils'
+import { Alert } from '../../Shared'
+import { bytesConverter } from '../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
-import { Button } from '../../styles'
+import { Button } from '../../../styles'
 import {
   BrandGeneralDetail,
   BrandLogo,

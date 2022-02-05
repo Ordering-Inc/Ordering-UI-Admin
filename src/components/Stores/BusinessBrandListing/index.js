@@ -5,13 +5,11 @@ import {
   BusinessBrandListing as BusinessBrandListingController
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { useInfoShare } from '../../contexts/InfoShareContext'
+import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { ThreeDots, List as MenuIcon } from 'react-bootstrap-icons'
-import { Button, IconButton, Switch, DefaultSelect } from '../../styles'
+import { Button, IconButton, Switch, DefaultSelect } from '../../../styles'
 import { useTheme } from 'styled-components'
-import { SearchBar } from '../SearchBar'
-import { Alert } from '../Confirm'
-import { SideBar } from '../SideBar'
+import { Alert, SearchBar, SideBar } from '../../Shared'
 import { BusinessBrandGENDetail } from '../BusinessBrandGENDetail'
 import { BusinessBrandBUSIDetail } from '../BusinessBrandBUSIDetail'
 import {

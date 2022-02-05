@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { SearchBar } from '../SearchBar'
 import {
   useLanguage,
   useUtils,
   BusinessBrandBUSIDetail as BusinessBrandBUSIDetailController
 } from 'ordering-components-admin'
-import { Pagination } from '../Pagination'
-import { Button, Checkbox } from '../../styles'
+import { NotFoundSource, Pagination, SearchBar } from '../../Shared'
+import { Button, Checkbox } from '../../../styles'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
-import { NotFoundSource } from '../NotFoundSource'
 import {
   BrandBUSIDetailContainer,
   SearchWrapper,
