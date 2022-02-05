@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Select } from '../../styles/Select/FirstSelect'
+import { Select } from '../../../styles/Select/FirstSelect'
 
 import {
   SettingsSelectContainer,

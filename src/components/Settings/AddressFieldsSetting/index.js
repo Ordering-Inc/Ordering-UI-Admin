@@ -1,31 +1,31 @@
 import React from 'react'
-import { useLanguage, CheckoutFieldsSetting as CheckoutFieldsSettingController } from 'ordering-components-admin'
-import { Switch } from '../../styles'
+import { useLanguage, AddressFieldsSetting as AddressFieldsSettingController } from 'ordering-components-admin'
+import { Switch } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 
 import {
-  CheckoutFieldsDetailsContainer,
+  AddressFieldsDetailsContainer,
   FieldContainer
 } from './styles'
 
-const CheckoutFieldsSettingUI = (props) => {
+const AddressFieldsSettingUI = (props) => {
   const {
-    checkoutFieldsState,
-    handleChangeCheckoutFieldSetting
+    addressFieldsState,
+    handleChangeFieldSetting
   } = props
 
   const [, t] = useLanguage()
 
   return (
     <>
-      <CheckoutFieldsDetailsContainer>
-        <h1>{t('CHECKOUT_CUSTOMER_FIELDS', 'Checkout and Customer fields')}</h1>
+      <AddressFieldsDetailsContainer>
+        <h1>{t('ADDRESS_FIELDS', 'Address fields')}</h1>
         <FieldContainer isHeader>
           <div className='name'>{t('FIELD', 'Field')}</div>
           <div className='required'>{t('REQUIRED', 'Required')}</div>
           <div className='status'>{t('STATE', 'Status')}</div>
         </FieldContainer>
-        {checkoutFieldsState?.loading ? (
+        {addressFieldsState?.loading ? (
           [...Array(10).keys()].map(i => (
             <FieldContainer key={i}>
               <div className='name'><Skeleton width={120} /></div>
@@ -39,35 +39,35 @@ const CheckoutFieldsSettingUI = (props) => {
           ))
         ) : (
           <>
-            {checkoutFieldsState.fields.map(field => (
+            {addressFieldsState.fields.map(field => (
               <FieldContainer key={field.id}>
                 <div className='name'>{t(field.code.toUpperCase())}</div>
                 <div className='required'>
                   <Switch
                     defaultChecked={field.required}
                     disabled={field.code === 'email'}
-                    onChange={(val) => handleChangeCheckoutFieldSetting(field.id, { required: val })}
+                    onChange={(val) => handleChangeFieldSetting(field.id, { required: val })}
                   />
                 </div>
                 <div className='status'>
                   <Switch
                     defaultChecked={field.enabled}
                     disabled={field.code === 'email'}
-                    onChange={(val) => handleChangeCheckoutFieldSetting(field.id, { enabled: val })}
+                    onChange={(val) => handleChangeFieldSetting(field.id, { enabled: val })}
                   />
                 </div>
               </FieldContainer>
             ))}
           </>
         )}
-      </CheckoutFieldsDetailsContainer>
+      </AddressFieldsDetailsContainer>
     </>
   )
 }
-export const CheckoutFieldsSetting = (props) => {
-  const checkoutFieldsProps = {
+export const AddressFieldsSetting = (props) => {
+  const addressFieldsProps = {
     ...props,
-    UIComponent: CheckoutFieldsSettingUI
+    UIComponent: AddressFieldsSettingUI
   }
-  return <CheckoutFieldsSettingController {...checkoutFieldsProps} />
+  return <AddressFieldsSettingController {...addressFieldsProps} />
 }

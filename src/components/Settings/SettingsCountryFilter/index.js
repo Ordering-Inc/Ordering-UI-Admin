@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { countryList } from '../../config/constants'
+import { countryList } from '../../../config/constants'
 import GoSearch from '@meronex/icons/go/GoSearch'
 import { useLanguage } from 'ordering-components-admin'
 import {

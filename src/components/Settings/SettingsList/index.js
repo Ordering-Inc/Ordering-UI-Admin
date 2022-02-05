@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { NotFoundSource } from '../../components/NotFoundSource'
-import { Button } from '../../styles/Buttons'
+import { Alert, NotFoundSource } from '../../Shared'
+import { Button } from '../../../styles'
 import { SettingsSelectUI } from '../SettingsSelectUI'
-import { Alert } from '../Confirm'
 import { SettingsCountryFilter } from '../SettingsCountryFilter'
 import {
   SettingsListContainer,

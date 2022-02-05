@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { useLanguage } from 'ordering-components-admin'
-import { NotFoundSource } from '../../components/NotFoundSource'
-import { Modal } from '../Modal'
-import { SettingsList } from '../SettingsList'
-import { useWindowSize } from '../../hooks/useWindowSize'
 import { XLg, LifePreserver } from 'react-bootstrap-icons'
-import { IconButton } from '../../styles/Buttons'
+import Skeleton from 'react-loading-skeleton'
+import { useWindowSize } from '../../../hooks/useWindowSize'
+import { useLanguage } from 'ordering-components-admin'
+import { IconButton } from '../../../styles'
+import { Modal, NotFoundSource } from '../../Shared'
 import MdcPlayCircle from '@meronex/icons/mdc/MdcPlayCircle'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
+
+import { SettingsList } from '../SettingsList'
 
 import {
   Container,

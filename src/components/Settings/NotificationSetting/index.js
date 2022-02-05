@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
-import { Button } from '../../styles/Buttons'
-import { Alert } from '../Confirm'
+import { Button } from '../../../styles'
+import { Alert } from '../../Shared'
 import { NotificationSettingContainer, AccordionTitle, GeneralWrapper, ToggleItemWrapper } from './styles'
 import {
   FormGroupText,
