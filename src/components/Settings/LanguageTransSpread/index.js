@@ -3,9 +3,8 @@ import { useLanguage, LanguageTransSpread as LanguageTransSpreadController } fro
 import {
   TransSpreadContainer
 } from './styles'
-import { SpreadSheetEditor } from '../SpreadSheetEditor'
 import Skeleton from 'react-loading-skeleton'
-import { Alert } from '../Confirm'
+import { Alert, SpreadSheetEditor } from '../../Shared'
 
 const LanguageTransSpreadUI = (props) => {
   const {

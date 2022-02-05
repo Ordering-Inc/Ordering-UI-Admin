@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, BusinessSpreadSheet as BusinessSpreadSheetController } from 'ordering-components-admin'
-import { SpreadSheetEditor } from '../SpreadSheetEditor'
-import { Alert } from '../Confirm'
+import { Alert, SpreadSheetEditor } from '../Shared'
 import {
   BusinessSpreadSheetContainer
 } from './styles'

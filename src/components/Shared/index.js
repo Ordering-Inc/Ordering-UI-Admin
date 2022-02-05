@@ -17,6 +17,7 @@ import { SelectBusinesses } from './SelectBusinesses'
 import { SelectSites } from './SelectSites'
 import { SideBar } from './SideBar'
 import { SpinnerLoader } from './SpinnerLoader'
+import { SpreadSheetEditor } from './SpreadSheetEditor'
 
 export {
   CitySelector,
@@ -38,5 +39,6 @@ export {
   SelectBusinesses,
   SelectSites,
   SideBar,
-  SpinnerLoader
+  SpinnerLoader,
+  SpreadSheetEditor
 }

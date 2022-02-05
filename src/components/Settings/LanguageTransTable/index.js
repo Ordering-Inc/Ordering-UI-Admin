@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage, LanguageTransTable as LanguageTransTableController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination } from '../Pagination'
-import { Alert } from '../Confirm'
+import { Alert, Pagination } from '../../Shared'
 
 import {
   TranslationTableContainer,
