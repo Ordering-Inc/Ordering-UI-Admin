@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
-import { BusinessessListing } from '../../../src/components/BusinessessListing'
+import { BusinessesListing } from '../../../src/components/Stores'
 
 export const BusinessesList = (props) => {
   const [events] = useEvent()
@@ -17,7 +17,7 @@ export const BusinessesList = (props) => {
   return (
     <>
       <HelmetTags page='businesses' />
-      <BusinessessListing {...businessesProps} />
+      <BusinessesListing {...businessesProps} />
     </>
   )
 }

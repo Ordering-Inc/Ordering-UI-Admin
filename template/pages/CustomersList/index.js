@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent, useLanguage } from 'ordering-components-admin'
-import { UsersListing } from '../../../src/components/UsersListing'
+import { UsersListing } from '../../../src/components/Users'
 
 export const CustomersList = (props) => {
   const [, t] = useLanguage()
@@ -11,6 +11,7 @@ export const CustomersList = (props) => {
     headerTitle: t('CUSTOMERS', 'Customers'),
     isShowActiveStateFilter: true,
     deafultUserTypesSelected: [3],
+    isCustomersPage: true,
     propsToFetch: [
       'name', 'lastname', 'email', 'phone', 'photo', 'cellphone',
       'country_phone_code', 'city_id', 'city', 'address', 'addresses',

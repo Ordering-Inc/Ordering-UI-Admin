@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { DriversGroupsListing as DriversGroupsListingController } from '../../../src/components/DriversGroupsListing'
+import { DriversGroupsListing as DriversGroupsListingController } from '../../../src/components/Delivery'
 
 export const DriversGroupsList = (props) => {
   return (

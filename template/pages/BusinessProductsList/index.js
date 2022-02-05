@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components-admin'
-import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
+import { BusinessProductsListing } from '../../../src/components/Stores'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
 
