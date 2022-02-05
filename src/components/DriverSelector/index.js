@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import { Select } from '../../styles/Select'
 import { Select as FirstSelect } from '../../styles/Select/FirstSelect'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -18,7 +16,6 @@ import {
   DriverText,
   PlaceholderTitle
 } from './styles'
-toast.configure()
 
 const DriverSelectorUI = (props) => {
   const {
@@ -31,7 +28,6 @@ const DriverSelectorUI = (props) => {
     small,
     padding,
     orderView,
-    driverActionStatus,
     handleAssignDriver,
     handleChangeDriver,
     filterValues,
@@ -45,7 +41,6 @@ const DriverSelectorUI = (props) => {
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
-  const [isRemoveAction, setIsRemoveAction] = useState(false)
   const [searchValue, setSearchValue] = useState(null)
   const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
   useEffect(() => {
@@ -135,9 +130,6 @@ const DriverSelectorUI = (props) => {
     if (driverId === 'default') return
     if (driverId === 'remove') {
       driverId = null
-      setIsRemoveAction(true)
-    } else {
-      setIsRemoveAction(false)
     }
     handleAssignDriver({ orderId: order.id, driverId: driverId })
     if (isTourOpen && setCurrentTourStep) {
@@ -147,53 +139,6 @@ const DriverSelectorUI = (props) => {
       }, 50)
     }
   }
-
-  const toastNotify = (notifyContent) => {
-    const toastConfigure = {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    }
-    if (notifyContent.type === 'success') {
-      toast.info(notifyContent.content, toastConfigure)
-    }
-    if (notifyContent.type === 'error') {
-      toast.error(notifyContent.content, toastConfigure)
-    }
-    if (notifyContent.type === 'warning') {
-      toast.warn(notifyContent.content, toastConfigure)
-    }
-  }
-
-  useEffect(() => {
-    if (!driverActionStatus) return
-    if (driverActionStatus.loading) return
-    const notifyContent = {}
-    if (driverActionStatus.error === null) {
-      if (!isRemoveAction) {
-        notifyContent.content = t('Driver assigned to order')
-        notifyContent.type = 'success'
-      } else {
-        notifyContent.content = t('Driver was removed')
-        notifyContent.type = 'warning'
-      }
-    } else {
-      if (Array.isArray(driverActionStatus.error)) {
-        notifyContent.content = ''
-        for (const _error of driverActionStatus.error) {
-          notifyContent.content += _error
-        }
-      } else {
-        notifyContent.content = driverActionStatus.error
-      }
-      notifyContent.type = 'error'
-    }
-    toastNotify(notifyContent)
-  }, [driverActionStatus])
 
   useEffect(() => {
     setDefaultOption(defaultValue)

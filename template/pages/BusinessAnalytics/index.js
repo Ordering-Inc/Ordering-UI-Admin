@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { BusinessAnalytics as BusinessAnalyticsController } from '../../../src/components/BusinessAnalytics'
+import { BusinessAnalytics as BusinessAnalyticsController } from '../../../src/components/BusinessIntelligence'
 
 export const BusinessAnalytics = (props) => {
   return (
