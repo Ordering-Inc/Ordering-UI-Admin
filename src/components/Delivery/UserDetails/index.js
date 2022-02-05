@@ -6,7 +6,7 @@ import { AddressList } from '../../AddressList'
 import { Personalization } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
-import { UserMetaFields } from '../UserMetaFields'
+import { UserMetaFields } from '../../Users'
 
 import {
   UserName,

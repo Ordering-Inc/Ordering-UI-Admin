@@ -43,9 +43,7 @@ export const UsersList = (props) => {
     selectedUsers,
     handleSelectedUsers,
     handleOpenUserDetails,
-    handleOpenUserAddForm,
-    isDriversPage,
-    isDriversManagersPage
+    handleOpenUserAddForm
   } = props
 
   const [, t] = useLanguage()
@@ -156,12 +154,10 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      {!(isDriversPage || isDriversManagersPage) && (
-                        <UserTypeWrapper>
-                          <Skeleton width={100} />
-                          <p><Skeleton width={100} /></p>
-                        </UserTypeWrapper>
-                      )}
+                      <UserTypeWrapper>
+                        <Skeleton width={100} />
+                        <p><Skeleton width={100} /></p>
+                      </UserTypeWrapper>
                     </td>
                     <td>
                       <UserEnableWrapper>
@@ -231,16 +227,14 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      {!(isDriversPage || isDriversManagersPage) && (
-                        <UserTypeWrapper className='user_type_selector'>
-                          <UserTypeSelector
-                            userId={user.id}
-                            defaultUserType={user?.level}
-                            handleChangeUserType={(type) => onChangeUserType(user, type)}
-                          />
-                          <p>{getUserType(user?.level)?.value}</p>
-                        </UserTypeWrapper>
-                      )}
+                      <UserTypeWrapper className='user_type_selector'>
+                        <UserTypeSelector
+                          userId={user.id}
+                          defaultUserType={user?.level}
+                          handleChangeUserType={(type) => onChangeUserType(user, type)}
+                        />
+                        <p>{getUserType(user?.level)?.value}</p>
+                      </UserTypeWrapper>
                     </td>
                     <td>
                       <UserEnableWrapper className='user_enable_control'>
@@ -272,13 +266,7 @@ export const UsersList = (props) => {
         </UserTableWrapper>
         <UsersBottomContainer>
           <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
-            {
-              isDriversPage
-                ? t('ADD_NEW_DRIVER', 'Add new driver')
-                : isDriversManagersPage
-                  ? t('ADD_NEW_DRIVER_MANAGER', 'Add new driver manager')
-                  : t('ADD_NEW_USER', 'Add new user')
-            }
+            {t('ADD_NEW_USER', 'Add new user')}
           </AddNewUserButton>
           {usersList?.users.length > 0 && (
             <WrapperPagination>

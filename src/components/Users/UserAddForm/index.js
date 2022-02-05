@@ -38,9 +38,7 @@ const UserAddFormUI = (props) => {
     handleButtonAddClick,
     isCheckout,
     handleChangeUserType,
-    handlechangeImage,
-    isDriversPage,
-    isDriversManagersPage
+    handlechangeImage
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -162,14 +160,8 @@ const UserAddFormUI = (props) => {
   }, [formState?.loading])
 
   useEffect(() => {
-    if (isDriversPage) {
-      cleanFormState && cleanFormState({ changes: { level: 4 } })
-    } else if (isDriversManagersPage) {
-      cleanFormState && cleanFormState({ changes: { level: 5 } })
-    } else {
-      cleanFormState && cleanFormState({ changes: { level: 3 } })
-    }
-  }, [isDriversPage, isDriversManagersPage])
+    cleanFormState && cleanFormState({ changes: { level: 3 } })
+  }, [])
 
   useEffect(() => {
     if (!validationFields.loading && emailInput.current) {
@@ -199,13 +191,7 @@ const UserAddFormUI = (props) => {
         data-tour='tour_fill'
       >
         <h1>
-          {
-            isDriversPage
-              ? t('NEW_DRIVER', 'New driver')
-              : isDriversManagersPage
-                ? t('NEW_DRIVER_MANAGER', 'New driver manager')
-                : t('USERS_REGISTER', 'New user')
-          }
+          {t('USERS_REGISTER', 'New user')}
         </h1>
         <UserImage className='user-image'>
           <Image onClick={() => handleClickImage()} isImage={formState?.changes?.photo && !formState.result.error}>
@@ -308,15 +294,13 @@ const UserAddFormUI = (props) => {
              props.afterMidComponents?.map((MidComponent, i) => (
                <MidComponent key={i} {...props} />))
             }
-            {!(isDriversPage || isDriversManagersPage) && (
-              <WrapperUserTypeSelector>
-                <UserTypeSelector
-                  isPrimary
-                  defaultUserType={formState?.changes?.level}
-                  handleChangeUserType={handleChangeUserType}
-                />
-              </WrapperUserTypeSelector>
-            )}
+            <WrapperUserTypeSelector>
+              <UserTypeSelector
+                isPrimary
+                defaultUserType={formState?.changes?.level}
+                handleChangeUserType={handleChangeUserType}
+              />
+            </WrapperUserTypeSelector>
             <ActionsForm>
               <Button
                 color='primary'

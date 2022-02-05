@@ -10,7 +10,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Envelope, Phone, ThreeDotsVertical } from 'react-bootstrap-icons'
 
 import { Switch } from '../../../styles'
-import { UserTypeSelector } from '../UserTypeSelector'
+import { UserTypeSelector } from '../../Users'
 import { Pagination, ConfirmAdmin } from '../../Shared'
 
 import {

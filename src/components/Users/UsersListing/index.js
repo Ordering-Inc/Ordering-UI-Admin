@@ -23,8 +23,6 @@ const UsersListingUI = (props) => {
     isShowUserTypeFilter,
 
     isCustomersPage,
-    isDriversPage,
-    isDriversManagersPage,
 
     usersList,
     handleSelectedUserTypes,
@@ -100,8 +98,6 @@ const UsersListingUI = (props) => {
         <UsersListingHeader
           deafultUserTypesSelected={deafultUserTypesSelected}
           disabledActiveStateCondition={disabledActiveStateCondition}
-          isDriversPage={isDriversPage}
-          isDriversManagersPage={isDriversManagersPage}
           title={headerTitle}
           selectedUsers={selectedUsers}
           userTypesSelected={userTypesSelected}
@@ -124,8 +120,6 @@ const UsersListingUI = (props) => {
           />
         )}
         <UsersList
-          isDriversPage={isDriversPage}
-          isDriversManagersPage={isDriversManagersPage}
           usersList={usersList}
           getUsers={getUsers}
           paginationProps={paginationProps}
@@ -161,8 +155,6 @@ const UsersListingUI = (props) => {
           </SideBar>
         ) : (
           <UserDetailsLateralBar
-            isDriversPage={isDriversPage}
-            isDriversManagersPage={isDriversManagersPage}
             open={isOpenUserDetails}
             user={openUser}
             userId={openUser?.id || queryId}
@@ -179,8 +171,6 @@ const UsersListingUI = (props) => {
           onClose={() => setOpenUserAddForm(false)}
         >
           <UserAddForm
-            isDriversPage={isDriversPage}
-            isDriversManagersPage={isDriversManagersPage}
             handleSuccessAdd={handleSuccessAddUser}
             onClose={() => setOpenUserAddForm(false)}
           />

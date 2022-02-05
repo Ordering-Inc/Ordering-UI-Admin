@@ -16,8 +16,6 @@ import { UserMetaFields } from '../UserMetaFields'
 
 export const UserDetailsUI = (props) => {
   const {
-    isDriversPage,
-    isDriversManagersPage,
     userState,
     setExtraOpen,
     handleSuccessUserUpdate
@@ -39,7 +37,6 @@ export const UserDetailsUI = (props) => {
         )}
       </UserName>
       <UserDetailsMenu
-        isDelivery={isDriversPage || isDriversManagersPage}
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={setCurrentMenuSelected}
       />
@@ -47,8 +44,6 @@ export const UserDetailsUI = (props) => {
         <>
           {currentMenuSelected === 'profile' && (
             <UserProfileForm
-              isDriversPage={isDriversPage}
-              isDriversManagersPage={isDriversManagersPage}
               user={userState.user}
               handleSuccessUpdate={handleSuccessUserUpdate}
             />

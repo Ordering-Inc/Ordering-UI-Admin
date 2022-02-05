@@ -8,7 +8,7 @@ import { UserTypeFilter } from '../UserTypeFilter'
 import { UsersList } from '../UsersList'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
-import { UserAddForm } from '../UserAddForm'
+import { UserAddForm } from '../../Users'
 import { WizardDelivery } from '../WizardDelivery'
 import { SideBar } from '../../Shared'
 

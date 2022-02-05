@@ -4,8 +4,7 @@ import { SearchBar } from '../../Shared'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { UsersDeleteButton } from '../UsersDeleteButton'
-import { UsersExportCSV } from '../UsersExportCSV'
+import { UsersDeleteButton, UsersExportCSV } from '../../Users'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 import {
