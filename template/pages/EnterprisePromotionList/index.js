@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { EnterprisePromotionListing } from '../../../src/components/EnterprisePromotionListing'
+import { EnterprisePromotionListing } from '../../../src/components/Marketing'
 
 export const EnterprisePromotionList = (props) => {
   const enterprisePromotionListProps = {
