@@ -10,7 +10,7 @@ import {
   DriversCompaniesListing,
   DriversGroupsListing
 } from './components/Delivery'
-import { Home } from './components/Home'
+import { HomePage } from './components/Home'
 import { LoginForm } from './components/Login'
 import { EnterprisePromotionListing } from './components/Marketing'
 import { OrderingProductsListing } from './components/OrderingProducts'
@@ -60,8 +60,7 @@ export {
   DriversCompaniesListing,
   DriversGroupsListing,
 
-  Home,
-
+  HomePage,
   LoginForm,
 
   EnterprisePromotionListing,
