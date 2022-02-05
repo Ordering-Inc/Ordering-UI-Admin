@@ -8,9 +8,8 @@ import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { Envelope, Phone, ThreeDots, PersonFill, ChevronRight } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { Confirm } from '../Confirm'
-import { SideBar } from '../SideBar'
 import { UserDetails } from '../UserDetails'
+import { Confirm, SideBar } from '../../Shared'
 
 import {
   DetailsContainer,

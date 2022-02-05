@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent, useLanguage } from 'ordering-components-admin'
-import { UsersListing } from '../../../src/components/UsersListing'
+import { DeliveryUsersListing } from '../../../src/components/DeliveryUsersListing'
 
 export const DeliveryDriversList = (props) => {
   const [events] = useEvent()
@@ -22,7 +22,7 @@ export const DeliveryDriversList = (props) => {
   return (
     <>
       <HelmetTags page='delivery_drivers' />
-      <UsersListing {...usersProps} />
+      <DeliveryUsersListing {...usersProps} />
     </>
   )
 }

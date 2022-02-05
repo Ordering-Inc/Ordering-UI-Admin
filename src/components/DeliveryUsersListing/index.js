@@ -17,7 +17,7 @@ import {
   UsersListingContainer
 } from './styles'
 
-const UsersListingUI = (props) => {
+const DeliveryUsersListingUI = (props) => {
   const {
     deafultUserTypesSelected,
     disabledActiveStateCondition,
@@ -57,6 +57,7 @@ const UsersListingUI = (props) => {
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
+  const [moveDistance, setMoveDistance] = useState(0)
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(isDriversManagersPage ? 2 : 0)
@@ -190,9 +191,11 @@ const UsersListingUI = (props) => {
       {isOpenUserDetails && (
         isCustomersPage ? (
           <SideBar
-            id='customer_details'
+            sidebarId='customer_details'
             open={isOpenUserDetails}
             onClose={() => handleBackRedirect()}
+            defaultSideBarWidth={500 + moveDistance}
+            moveDistance={moveDistance}
           >
             <CustomerDetails
               user={openUser}
@@ -200,6 +203,7 @@ const UsersListingUI = (props) => {
               handleSuccessUpdate={handleSuccessUpdate}
               handleSuccessDeleteUser={handleSuccessDeleteUser}
               onClose={() => handleBackRedirect()}
+              handleParentSidebarMove={val => setMoveDistance(val)}
             />
           </SideBar>
         ) : (
@@ -243,10 +247,10 @@ const UsersListingUI = (props) => {
   )
 }
 
-export const UsersListing = (props) => {
+export const DeliveryUsersListing = (props) => {
   const usersListingProps = {
     ...props,
-    UIComponent: UsersListingUI,
+    UIComponent: DeliveryUsersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
     isSearchByUserName: true

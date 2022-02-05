@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent, useLanguage } from 'ordering-components-admin'
-import { UsersListing as DriversListingController } from '../../../src/components/UsersListing'
+import { DeliveryUsersListing as DriversManagersListingController } from '../../../src/components/DeliveryUsersListing'
 
 export const DriversManagersList = (props) => {
   const [, t] = useLanguage()
@@ -22,7 +22,7 @@ export const DriversManagersList = (props) => {
   return (
     <>
       <HelmetTags page='drivers_managers' />
-      <DriversListingController {...usersProps} />
+      <DriversManagersListingController {...usersProps} />
     </>
   )
 }

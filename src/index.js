@@ -29,6 +29,7 @@ import { DeliveriesLocation } from './components/DeliveriesLocation'
 import { DeliveriesManager } from './components/DeliveriesManager'
 import { DeliveryDashboard } from './components/DeliveryDashboard'
 import { DeliveryTypeSelector } from './components/DeliveryTypeSelector'
+import { DeliveryUsersListing } from './components/DeliveryUsersListing'
 import { DragScroll } from './components/DragScroll'
 import { DriverMapMarkerAndInfo } from './components/DriverMapMarkerAndInfo'
 import { DriversCompaniesListing } from './components/DriversCompaniesListing'
@@ -183,6 +184,7 @@ export {
   DeliveriesManager,
   DeliveryDashboard,
   DeliveryTypeSelector,
+  DeliveryUsersListing,
   DragScroll,
   DriverAnalytics,
   DriverMapMarkerAndInfo,
