@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Input, Checkbox } from '../../styles'
 import { useTheme } from 'styled-components'
+import { Input, Checkbox } from '../../../styles'
 
 import {
   Container,

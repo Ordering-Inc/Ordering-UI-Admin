@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useConfig } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
-
-import { Input, DefaultSelect, Checkbox, Button } from '../../styles'
-import { Alert } from '../Confirm'
+import { Input, DefaultSelect, Checkbox, Button } from '../../../styles'
+import { Alert } from '../../Shared'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
 

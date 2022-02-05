@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { SearchBar } from '../SearchBar'
-import { Button, Checkbox } from '../../styles'
+import { SearchBar } from '../../Shared'
+import { Button, Checkbox } from '../../../styles'
 
 import {
   Container,

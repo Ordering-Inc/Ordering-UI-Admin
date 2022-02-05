@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useLanguage, DriversGroupAutoassign as DriversGroupAutoassignController } from 'ordering-components-admin'
-import { DragScroll } from '../DragScroll'
-import { useTheme } from 'styled-components'
 import { PlusSquare, GeoAlt } from 'react-bootstrap-icons'
-import { Checkbox, Input } from '../../styles'
+import { useTheme } from 'styled-components'
+import { DragScroll } from '../../Shared'
+import { Checkbox, Input } from '../../../styles'
 
 import {
   AutoassignContainer,

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useLanguage, useUtils, DriversGroupLogs as DriversGroupLogsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination } from '../Pagination'
+import { Pagination } from '../../Shared'
 
 import {
   DriversGroupLogsContainer,

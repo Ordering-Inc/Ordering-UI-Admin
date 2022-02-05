@@ -4,17 +4,16 @@ import {
   useConfig,
   DriversGroupDetails as DriversGroupDetailsController
 } from 'ordering-components-admin'
-import { Switch } from '../../styles'
-import { DragScroll } from '../DragScroll'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
+import { ThreeDots } from 'react-bootstrap-icons'
+import { useTheme } from 'styled-components'
+import { Switch } from '../../../styles'
+import { Alert, Confirm, DragScroll } from '../../Shared'
 import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
 import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
 import { DriversGroupPaymethods } from '../DriversGroupPaymethods'
 import { DriversGroupLogistics } from '../DriversGroupLogistics'
 import { DriversGroupLogs } from '../DriversGroupLogs'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { ThreeDots } from 'react-bootstrap-icons'
-import { useTheme } from 'styled-components'
-import { Alert, Confirm } from '../Confirm'
 
 import {
   DetailsContainer,
