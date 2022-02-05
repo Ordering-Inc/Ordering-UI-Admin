@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Input } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
-import { Checkbox } from '../../styles/Checkbox'
+import { Button, Checkbox, Input } from '../../../styles'
 
 import {
   InsertLinkContainer,

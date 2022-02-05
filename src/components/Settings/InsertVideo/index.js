@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Input } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
-import { formatUrlVideo } from '../../utils'
+import { Button, Input } from '../../../styles'
+import { formatUrlVideo } from '../../../utils'
 
 import {
   InsertLinkContainer,
@@ -20,7 +19,7 @@ export const InsertVideo = (props) => {
 
   const getVideoEmbedded = (video) => {
     if (video.indexOf('youtube')) {
-      return '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/'+formatUrlVideo(video)+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
+      return '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + formatUrlVideo(video) + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
     }
   }
 

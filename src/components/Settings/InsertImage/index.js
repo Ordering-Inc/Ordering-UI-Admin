@@ -5,12 +5,11 @@ import {
   DragAndDrop,
   ExamineClick
 } from 'ordering-components-admin'
-import { Button } from '../../styles/Buttons'
+import { Button, Input } from '../../../styles'
 import { XLg } from 'react-bootstrap-icons'
-import { Input } from '../../styles/Inputs'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { bytesConverter } from '../../utils'
-import { Alert, Confirm } from '../Confirm'
+import { bytesConverter } from '../../../utils'
+import { Alert, Confirm } from '../../Shared'
 
 import {
   InsertImageContainer,

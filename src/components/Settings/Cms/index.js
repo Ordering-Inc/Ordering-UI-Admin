@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, PagesList as PagesListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Button, IconButton } from '../../styles/Buttons'
-import { SearchBar } from '../SearchBar'
-import { Switch } from '../../styles/Switch'
+import { Button, IconButton, Switch } from '../../../styles'
+import { Modal, Pagination, SearchBar } from '../../Shared'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { useTheme } from 'styled-components'
-import { Pagination } from '../Pagination'
-import { useInfoShare } from '../../contexts/InfoShareContext'
+import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { PageForm } from '../PageForm'
-import { Modal } from '../Modal'
 
 import {
   StaticPageListContainer,

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, PageForm as PageFormController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Switch } from '../../styles/Switch'
-import { Input } from '../../styles/Inputs'
+import { Button, Input, Switch } from '../../../styles'
 
 import $ from 'jquery'
 import ReactSummernote from 'react-summernote'
@@ -12,13 +11,10 @@ import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/tooltip'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import { Button } from '../../styles/Buttons'
-import { Modal } from '../Modal'
+import { Alert, Modal } from '../../Shared'
 import { InsertLink } from '../InsertLink'
 import { InsertVideo } from '../InsertVideo'
 import { InsertImage } from '../InsertImage'
-
-import { Alert } from '../Confirm'
 
 import {
   PageContainer,
