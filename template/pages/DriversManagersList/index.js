@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent, useLanguage } from 'ordering-components-admin'
-import { DeliveryUsersListing as DriversManagersListingController } from '../../../src/components/DeliveryUsersListing'
+import { DeliveryUsersListing as DriversManagersListingController } from '../../../src/components/Delivery'
 
 export const DriversManagersList = (props) => {
   const [, t] = useLanguage()

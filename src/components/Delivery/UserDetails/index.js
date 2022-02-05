@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController } from 'ordering-components-admin'
+import { OrdersManager } from '../../OrdersManager'
+import { AddressList } from '../../AddressList'
+import { Personalization } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
-import { AddressList } from '../../AddressList'
-import { OrdersManager } from '../../OrdersManager'
+import { UserMetaFields } from '../UserMetaFields'
 
 import {
   UserName,
   SavedPlaces,
   PersonalizationWrapper
 } from './styles'
-import { Personalization } from '../../Shared/Personalization'
-import { UserMetaFields } from '../UserMetaFields'
 
 export const UserDetailsUI = (props) => {
   const {

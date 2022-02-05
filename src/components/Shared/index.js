@@ -5,6 +5,7 @@ import { InputPhoneNumber } from './InputPhoneNumber'
 import { Modal } from './Modal'
 import { NotFoundSource } from './NotFoundSource'
 import { Pagination } from './Pagination'
+import { Personalization } from './Personalization'
 import { SearchBar } from './SearchBar'
 import { SideBar } from './SideBar'
 import { SpinnerLoader } from './SpinnerLoader'
@@ -18,6 +19,7 @@ export {
   Modal,
   NotFoundSource,
   Pagination,
+  Personalization,
   SideBar,
   SearchBar,
   SpinnerLoader

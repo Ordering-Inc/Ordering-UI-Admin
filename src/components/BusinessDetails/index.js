@@ -15,7 +15,7 @@ import { BusinessWebhooks } from '../BusinessWebhooks'
 import {
   BarContainer
 } from './styles'
-import { Personalization } from '../Personalization'
+import { Personalization } from '../Shared'
 import { BusinessMoreDetail } from '../BusinessMoreDetail'
 import { BusinessNotifications } from '../BusinessNotifications'
 import { BusinessOrderingChannels } from '../BusinessOrderingChannels'

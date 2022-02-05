@@ -11,7 +11,7 @@ import { Alert, Confirm } from '../Confirm'
 import { SideBar } from '../SideBar'
 import { DriversGroupDetails } from '../DriversGroupDetails'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { WizardDelivery } from '../WizardDelivery'
+import { WizardDelivery } from '../Delivery'
 
 import {
   DriversGroupsListingContainer,
