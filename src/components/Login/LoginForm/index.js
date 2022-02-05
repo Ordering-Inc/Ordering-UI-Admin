@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { ConfigFileContext } from '../../contexts/ConfigFileContext'
+import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
   useLanguage,
   useApi
 } from 'ordering-components-admin'
-import { Alert } from '../Confirm'
+import { Alert } from '../../Shared'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
 import MdExitToApp from '@meronex/icons/md/MdExitToApp'
 import {
@@ -20,9 +20,7 @@ import {
   InputWithIcon
 } from './styles'
 
-import { Tabs, Tab } from '../../styles/Tabs'
-import { Input } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
+import { Button, Input, Tabs, Tab } from '../../../styles'
 import { useTheme } from 'styled-components'
 import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
 import RiLockPasswordLine from '@meronex/icons/ri/RiLockPasswordLine'
