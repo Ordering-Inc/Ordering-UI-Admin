@@ -3,14 +3,12 @@ import {
   useLanguage,
   DriversCompaniesList as DriversCompaniesListController
 } from 'ordering-components-admin'
-import { useInfoShare } from '../../contexts/InfoShareContext'
-import { Button, IconButton } from '../../styles/Buttons'
+import { useInfoShare } from '../../../contexts/InfoShareContext'
+import { Button, IconButton } from '../../../styles'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { SearchBar } from '../SearchBar'
+import { Alert, Confirm, SearchBar, SideBar } from '../../Shared'
 import { DriversCompaniesList } from '../DriversCompaniesList'
-import { SideBar } from '../SideBar'
 import { DriversCompanyDetailsForm } from '../DriversCompanyDetailsForm'
-import { Alert, Confirm } from '../Confirm'
 
 import {
   DriversCompaniesListContainer,

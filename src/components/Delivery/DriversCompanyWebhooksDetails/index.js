@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Input, Button } from '../../styles'
+import { Input, Button } from '../../../styles'
 import { useForm } from 'react-hook-form'
-import { Alert } from '../Confirm'
+import { Alert } from '../../Shared'
 
 import {
   FormContainer,

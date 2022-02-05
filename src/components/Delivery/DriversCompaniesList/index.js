@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination } from '../Pagination'
+import { Pagination } from '../../Shared'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
-import { Switch } from '../../styles'
+import { Switch } from '../../../styles'
 
 import {
   DriversCompaniesContainer,

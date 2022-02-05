@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Input, DefaultSelect, Button } from '../../styles'
-import { timezones } from '../../config/constants'
+import { Input, DefaultSelect, Button } from '../../../styles'
+import { timezones } from '../../../config/constants'
 import { useForm } from 'react-hook-form'
-import { Alert } from '../Confirm'
+import { Alert } from '../../Shared'
 
 import {
   FormContainer,

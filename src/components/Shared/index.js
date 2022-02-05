@@ -6,6 +6,7 @@ import { Modal } from './Modal'
 import { NotFoundSource } from './NotFoundSource'
 import { Pagination } from './Pagination'
 import { Personalization } from './Personalization'
+import { Schedule } from './Schedule'
 import { SearchBar } from './SearchBar'
 import { SideBar } from './SideBar'
 import { SpinnerLoader } from './SpinnerLoader'
@@ -20,7 +21,8 @@ export {
   NotFoundSource,
   Pagination,
   Personalization,
-  SideBar,
+  Schedule,
   SearchBar,
+  SideBar,
   SpinnerLoader
 }

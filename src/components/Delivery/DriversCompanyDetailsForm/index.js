@@ -3,14 +3,14 @@ import {
   useLanguage,
   DriversCompanyDetails as DriversCompanyDetailsController
 } from 'ordering-components-admin'
-import { Alert, Confirm } from '../Confirm'
-import { DragScroll } from '../DragScroll'
-import { DriversCompanyGeneralDetails } from '../DriversCompanyGeneralDetails'
-import { DriversCompanyScheduleDetails } from '../DriversCompanyScheduleDetails'
-import { DriversCompanyWebhooksDetails } from '../DriversCompanyWebhooksDetails'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { ThreeDots } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
+import { Alert, Confirm, DragScroll } from '../../Shared'
+
+import { DriversCompanyGeneralDetails } from '../DriversCompanyGeneralDetails'
+import { DriversCompanyScheduleDetails } from '../DriversCompanyScheduleDetails'
+import { DriversCompanyWebhooksDetails } from '../DriversCompanyWebhooksDetails'
 
 import {
   DetailsContainer,

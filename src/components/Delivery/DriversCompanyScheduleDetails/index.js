@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button } from '../../styles'
-import { Schedule } from '../Schedule'
+import { Button } from '../../../styles'
+import { Schedule } from '../../Shared'
 import { useLanguage } from 'ordering-components-admin'
 
 import {
