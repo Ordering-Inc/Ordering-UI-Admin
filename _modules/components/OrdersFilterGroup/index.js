@@ -17,7 +17,7 @@ var _BusinessesSelector = require("../BusinessesSelector");
 
 var _DriverSelector = require("../DriverSelector");
 
-var _CitySelector = require("../CitySelector");
+var _Shared = require("../Shared");
 
 var _OrderStatusTypeSelector = require("../OrderStatusTypeSelector");
 
@@ -126,7 +126,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     drivers: driversList.drivers,
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CitySelector.CitySelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     cities: citiesList,
     filterValues: filterValues,
     handleChangeCity: handleChangeCity

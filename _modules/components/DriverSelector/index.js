@@ -13,10 +13,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styledComponents = require("styled-components");
 
-var _reactToastify = require("react-toastify");
-
-require("react-toastify/dist/ReactToastify.css");
-
 var _Select = require("../../styles/Select");
 
 var _FirstSelect = require("../../styles/Select/FirstSelect");
@@ -53,8 +49,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-_reactToastify.toast.configure();
-
 var DriverSelectorUI = function DriverSelectorUI(props) {
   var isFirstSelect = props.isFirstSelect,
       order = props.order,
@@ -65,7 +59,6 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       small = props.small,
       padding = props.padding,
       orderView = props.orderView,
-      driverActionStatus = props.driverActionStatus,
       handleAssignDriver = props.handleAssignDriver,
       handleChangeDriver = props.handleChangeDriver,
       filterValues = props.filterValues,
@@ -94,15 +87,10 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       driversMultiOptionList = _useState6[0],
       setDriversMultiOptionList = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(false),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      isRemoveAction = _useState8[0],
-      setIsRemoveAction = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      searchValue = _useState10[0],
-      setSearchValue = _useState10[1];
+      searchValue = _useState8[0],
+      setSearchValue = _useState8[1];
 
   var driversLoading = [{
     value: 'default',
@@ -209,9 +197,6 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
 
     if (driverId === 'remove') {
       driverId = null;
-      setIsRemoveAction(true);
-    } else {
-      setIsRemoveAction(false);
     }
 
     handleAssignDriver({
@@ -227,69 +212,6 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     }
   };
 
-  var toastNotify = function toastNotify(notifyContent) {
-    var toastConfigure = {
-      position: 'bottom-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    };
-
-    if (notifyContent.type === 'success') {
-      _reactToastify.toast.info(notifyContent.content, toastConfigure);
-    }
-
-    if (notifyContent.type === 'error') {
-      _reactToastify.toast.error(notifyContent.content, toastConfigure);
-    }
-
-    if (notifyContent.type === 'warning') {
-      _reactToastify.toast.warn(notifyContent.content, toastConfigure);
-    }
-  };
-
-  (0, _react.useEffect)(function () {
-    if (!driverActionStatus) return;
-    if (driverActionStatus.loading) return;
-    var notifyContent = {};
-
-    if (driverActionStatus.error === null) {
-      if (!isRemoveAction) {
-        notifyContent.content = t('Driver assigned to order');
-        notifyContent.type = 'success';
-      } else {
-        notifyContent.content = t('Driver was removed');
-        notifyContent.type = 'warning';
-      }
-    } else {
-      if (Array.isArray(driverActionStatus.error)) {
-        notifyContent.content = '';
-
-        var _iterator2 = _createForOfIteratorHelper(driverActionStatus.error),
-            _step2;
-
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var _error = _step2.value;
-            notifyContent.content += _error;
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-      } else {
-        notifyContent.content = driverActionStatus.error;
-      }
-
-      notifyContent.type = 'error';
-    }
-
-    toastNotify(notifyContent);
-  }, [driverActionStatus]);
   (0, _react.useEffect)(function () {
     setDefaultOption(defaultValue);
   }, [defaultValue]);
