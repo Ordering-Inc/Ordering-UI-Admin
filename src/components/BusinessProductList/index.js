@@ -6,7 +6,7 @@ import { ColumnAllowSettingPopover } from '../ColumnAllowSettingPopover'
 import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
 import { Pagination } from '../Pagination'
 import { SideBar } from '../SideBar'
-import { BusinessProductAddForm } from '../BusinessProductAddForm'
+import { BusinessProductAddForm } from '../Stores/BusinessProductAddForm'
 
 import {
   ListContent,

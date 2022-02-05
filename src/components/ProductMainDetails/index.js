@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../DragScroll'
 import { ProductDetatilsInformation } from '../ProductDetatilsInformation'
 import { ProductDetailsAdvanced } from '../ProductDetailsAdvanced'
-import { SeoOptions } from '../SeoOptions'
+import { SeoOptions } from '../Stores/SeoOptions'
 import {
   Container,
   TabsConatiner,

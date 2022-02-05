@@ -7,7 +7,7 @@ import {
   useLanguage,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
-import { BusinessProductsCategoyDetails } from '../BusinessProductsCategoyDetails'
+import { BusinessProductsCategoyDetails } from '../Stores/BusinessProductsCategoyDetails'
 import { SearchBar } from '../SearchBar'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import BsTable from '@meronex/icons/bs/BsTable'
