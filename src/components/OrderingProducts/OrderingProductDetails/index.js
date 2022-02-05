@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { bytesConverter } from '../../utils'
+import { bytesConverter } from '../../../utils'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import Skeleton from 'react-loading-skeleton'
-import { Alert, Confirm } from '../Confirm'
-import { Input, TextArea, Button, DefaultSelect } from '../../styles'
+import { Alert, Confirm } from '../../Shared'
+import { Input, TextArea, Button, DefaultSelect } from '../../../styles'
 import { ThreeDots } from 'react-bootstrap-icons'
 
 import {
