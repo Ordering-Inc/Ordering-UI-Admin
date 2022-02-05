@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, WebhookList as WebhookListController } from 'ordering-components-admin'
-import { Button, IconButton } from '../../styles/Buttons'
-import { SearchBar } from '../SearchBar'
+import { Button, IconButton } from '../../../styles'
+import { Alert, Confirm, Pagination, SearchBar } from '../../Shared'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination } from '../Pagination'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { useTheme } from 'styled-components'
+import { PlusCircleFill } from 'react-bootstrap-icons'
 import { WebhookDelaySelector } from '../WebhookDelaySelector'
 import { WebhookListSelector } from '../WebhookListSelector'
-import { Alert, Confirm } from '../Confirm'
-import { PlusCircleFill } from 'react-bootstrap-icons'
 
 import {
   WebhookListContainer,

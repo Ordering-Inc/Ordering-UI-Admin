@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, PluginList as PluginListController } from 'ordering-components-admin'
-import { Button, IconButton } from '../../styles/Buttons'
-import { SearchBar } from '../SearchBar'
+import { Button, IconButton, Switch } from '../../../styles'
+import { Alert, Confirm, Pagination, SearchBar } from '../../Shared'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination } from '../Pagination'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { PlusCircleFill } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { Switch } from '../../styles/Switch'
-import { Alert, Confirm } from '../Confirm'
 
 import {
   PluginListContainer,

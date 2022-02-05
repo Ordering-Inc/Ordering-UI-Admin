@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, ApiKeysList as ApiKeysListController } from 'ordering-components-admin'
-import { Button } from '../../styles'
+import { Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { ThreeDotsVertical } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { Alert, Confirm } from '../Confirm'
+import { Alert, Confirm } from '../../Shared'
 
 import {
   ApiKeysListContainer,

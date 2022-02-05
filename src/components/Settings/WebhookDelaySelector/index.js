@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Select } from '../../styles/Select'
+import { Select } from '../../../styles/Select'
 import { Option } from './styles'
 
 export const WebhookDelaySelector = (props) => {
