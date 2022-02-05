@@ -14,7 +14,7 @@ import { bytesConverter } from '../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Input, TextArea } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { CitySelector } from '../CitySelector'
+import { CitySelector } from '../Shared'
 import Skeleton from 'react-loading-skeleton'
 
 import {

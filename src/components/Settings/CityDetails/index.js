@@ -1,10 +1,8 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Switch } from '../../styles/Switch'
-import { Input } from '../../styles/Inputs'
+import { Button, Input, Switch } from '../../../styles'
 import { CityAdministratorSelector } from '../CityAdministratorSelector'
 import { CountrySelector } from '../CountrySelector'
-import { Button } from '../../styles/Buttons'
 
 import {
   CityDetailsContainer,

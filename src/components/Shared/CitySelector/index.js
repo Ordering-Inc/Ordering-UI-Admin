@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, CityList as CityListController } from 'ordering-components-admin'
-import { Select } from '../../styles/Select/FirstSelect'
-import { MultiSelect } from '../../styles/MultiSelect'
+import { Select } from '../../../styles/Select/FirstSelect'
+import { MultiSelect } from '../../../styles/MultiSelect'
 import Skeleton from 'react-loading-skeleton'
 import {
   PlaceholderTitle,

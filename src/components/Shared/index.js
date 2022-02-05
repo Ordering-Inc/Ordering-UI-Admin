@@ -1,3 +1,4 @@
+import { CitySelector } from './CitySelector'
 import { ColumnAllowSettingPopover } from './ColumnAllowSettingPopover'
 import { Alert, Confirm } from './Confirm'
 import { ConfirmAdmin } from './ConfirmAdmin'
@@ -18,6 +19,7 @@ import { SideBar } from './SideBar'
 import { SpinnerLoader } from './SpinnerLoader'
 
 export {
+  CitySelector,
   ColumnAllowSettingPopover,
   Alert,
   Confirm,

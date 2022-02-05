@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Select } from '../../styles/Select/FirstSelect'
+import { Select } from '../../../styles/Select/FirstSelect'
 import { Option } from './styles'
 
 export const CountrySelector = (props) => {

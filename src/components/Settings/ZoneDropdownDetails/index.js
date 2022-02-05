@@ -1,10 +1,8 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Switch } from '../../styles/Switch'
-import { Input } from '../../styles/Inputs'
-import { CitySelector } from '../CitySelector'
+import { Button, Input, Switch } from '../../../styles'
+import { CitySelector } from '../../Shared'
 import { CountrySelector } from '../CountrySelector'
-import { Button } from '../../styles/Buttons'
 
 import {
   ZoneDropdownDetailsContainer,

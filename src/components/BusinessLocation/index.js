@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GoogleMapsMap, GoogleAutocompleteInput, useConfig, useLanguage } from 'ordering-components-admin'
-import { CitySelector } from '../CitySelector'
+import { CitySelector } from '../Shared'
 import { Button } from '../../styles/Buttons'
 import { TextArea } from '../../styles/Inputs'
 import {
