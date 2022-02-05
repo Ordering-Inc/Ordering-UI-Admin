@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-import { Pagination } from '../Pagination'
 import { StarFill } from 'react-bootstrap-icons'
-import { Confirm } from '../Confirm'
-import { SideBar } from '../SideBar'
+import { Confirm, Pagination, SideBar } from '../../Shared'
 import { BusinessReviewDetails } from '../BusinessReviewDetails'
 
 import {

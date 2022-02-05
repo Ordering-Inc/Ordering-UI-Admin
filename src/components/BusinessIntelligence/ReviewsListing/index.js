@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { useInfoShare } from '../../contexts/InfoShareContext'
+import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { SearchBar } from '../SearchBar'
-import { IconButton } from '../../styles'
+import { SearchBar } from '../../Shared'
+import { IconButton } from '../../../styles'
 import { BusinessReviewList } from '../BusinessReviewList'
 import { UsersReviewList } from '../UsersReviewList'
 

@@ -3,7 +3,7 @@ import { useLanguage, useUtils, useEvent, BusinessReviews as BusinessReviewsCont
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { PersonFill } from 'react-bootstrap-icons'
-import { Button, Switch } from '../../styles'
+import { Button, Switch } from '../../../styles'
 
 import {
   ReviewDetailsContainer,

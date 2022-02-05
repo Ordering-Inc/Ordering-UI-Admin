@@ -6,8 +6,7 @@ import {
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { StarFill, PersonFill } from 'react-bootstrap-icons'
-import { Pagination } from '../Pagination'
-import { SideBar } from '../SideBar'
+import { Pagination, SideBar } from '../../Shared'
 import { UserReviewDetails } from '../UserReviewDetails'
 
 import {
