@@ -1,3 +1,13 @@
+import { DeliveriesManager } from './components/DeliveriesManager'
+import { DriversManager } from './components/DriversManager'
+import { ForgotPasswordForm } from './components/ForgotPasswordForm'
+import { MessagesListing } from './components/MessagesListing'
+import { OrderingProductsListing } from './components/OrderingProducts'
+import { OrdersManager } from './components/OrdersManager'
+import { PageNotFound } from './components/PageNotFound'
+import { ReviewProductsListing } from './components/ReviewProductsListing'
+import { Support } from './components/Support'
+
 import {
   BusinessAnalytics,
   DriverAnalytics,
@@ -13,7 +23,6 @@ import {
 import { HomePage } from './components/Home'
 import { LoginForm } from './components/Login'
 import { EnterprisePromotionListing } from './components/Marketing'
-import { OrderingProductsListing } from './components/OrderingProducts'
 import {
   Cms,
   IntegrationListing,
@@ -26,7 +35,6 @@ import {
   BusinessesListing,
   BusinessProductsListing
 } from './components/Stores'
-import { Support } from './components/Support'
 import {
   UsersListing
 } from './components/Users'
@@ -50,6 +58,14 @@ import { Tab, Tabs } from './styles/Tabs'
 import { Toast } from './styles/Toast'
 
 export {
+  DeliveriesManager,
+  DriversManager,
+  ForgotPasswordForm,
+  MessagesListing,
+  OrdersManager,
+  PageNotFound,
+  ReviewProductsListing,
+
   BusinessAnalytics,
   DriverAnalytics,
   InvoiceManager,
