@@ -39,6 +39,14 @@ import {
   UsersListing
 } from './components/Users'
 
+import { Layout } from './components/Layout'
+import { SidebarMenu } from './components/SidebarMenu'
+import { NotNetworkConnectivity } from './components/NotNetworkConnectivity'
+import {
+  Alert,
+  SpinnerLoader
+} from './components/Shared'
+
 import { capitalize } from './utils'
 
 // contexts
@@ -93,8 +101,13 @@ export {
   BusinessBrandListing,
   BusinessesListing,
   BusinessProductsListing,
-
   UsersListing,
+
+  Layout,
+  SidebarMenu,
+  NotNetworkConnectivity,
+  Alert,
+  SpinnerLoader,
 
   capitalize,
 
