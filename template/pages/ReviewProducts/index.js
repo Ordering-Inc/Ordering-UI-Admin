@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useApi } from 'ordering-components-admin'
 import { HelmetTags } from '../../components/HelmetTags'
-import { ReviewProductsListing as ReviewProductsListingController } from '../../../src/components/ReviewProductsListing'
+import { ReviewProductsListing as ReviewProductsListingController } from '../../../src/components/BusinessIntelligence'
 
 export const ReviewProducts = (props) => {
   const { store } = useParams()

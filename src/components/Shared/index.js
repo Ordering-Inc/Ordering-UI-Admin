@@ -4,11 +4,13 @@ import { ColumnAllowSettingPopover } from './ColumnAllowSettingPopover'
 import { Alert, Confirm } from './Confirm'
 import { ConfirmAdmin } from './ConfirmAdmin'
 import { DragScroll } from './DragScroll'
+import { Image } from './Image'
 import { InputPhoneNumber } from './InputPhoneNumber'
 import { Modal } from './Modal'
 import { MoreSidebarLayout } from './MoreSidebarLayout'
 import { NotFoundSource } from './NotFoundSource'
 import { Pagination } from './Pagination'
+import { PaginationButton } from './PaginationButton'
 import { Personalization } from './Personalization'
 import { Schedule } from './Schedule'
 import { SearchBar } from './SearchBar'
@@ -29,11 +31,13 @@ export {
   Confirm,
   ConfirmAdmin,
   DragScroll,
+  Image,
   InputPhoneNumber,
   Modal,
   MoreSidebarLayout,
   NotFoundSource,
   Pagination,
+  PaginationButton,
   Personalization,
   Schedule,
   SearchBar,

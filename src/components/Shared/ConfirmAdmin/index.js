@@ -4,7 +4,7 @@ import {
   useLanguage,
   CheckPassword as CheckPasswordController
 } from 'ordering-components-admin'
-import { Modal } from '../../Modal'
+import { Modal } from '../Modal'
 import { Button } from '../../../styles'
 
 import {

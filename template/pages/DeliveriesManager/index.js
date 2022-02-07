@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
-import { DeliveriesManager as DeliveriesManagerController } from '../../../src/components/DeliveriesManager'
+import { DeliveriesManager as DeliveriesManagerController } from '../../../src/components/Orders'
 export const DeliveriesManager = (props) => {
   const [events] = useEvent()
   const deliveriesManagerProps = {

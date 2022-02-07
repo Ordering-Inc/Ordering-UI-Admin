@@ -3,8 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
-import { AddressList } from '../../AddressList'
-import { OrdersManager } from '../../OrdersManager'
+import { AddressList } from '../../Delivery'
+import { OrdersManager } from '../../Orders'
 
 import {
   UserName,
