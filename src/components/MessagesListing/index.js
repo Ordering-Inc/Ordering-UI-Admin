@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrdersContentHeader } from '../OrdersContentHeader'
-import { OrdersDashboardList } from '../OrdersDashboardList'
+import { OrdersContentHeader, OrdersDashboardList, OrderNotification, OrderDetails, Messages } from '../Orders'
 import { Button } from '../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
-import { OrderNotification } from '../OrderNotification'
-import { OrderDetails } from '../OrderDetails'
-import { Messages } from '../Messages'
 import { ChatContactList } from '../ChatContactList'
 import { ChatBusinessesList } from '../ChatBusinessesList'
 

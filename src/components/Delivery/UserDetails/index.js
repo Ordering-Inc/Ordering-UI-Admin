@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController } from 'ordering-components-admin'
-import { OrdersManager } from '../../OrdersManager'
+import { OrdersManager } from '../../Orders'
 import { AddressList } from '../../AddressList'
 import { Personalization } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'

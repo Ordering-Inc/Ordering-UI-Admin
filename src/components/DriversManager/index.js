@@ -4,7 +4,7 @@ import { useLanguage, DriversList as DriversController } from 'ordering-componen
 import { DriversDashboard } from '../DriversDashboard'
 import { OrdersLateralBar } from '../OrdersLateralBar'
 import { SearchBar } from '../SearchBar'
-import { OrderNotification } from '../OrderNotification'
+import { OrderNotification } from '../Orders'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { IconButton } from '../../styles/Buttons'
 import { useInfoShare } from '../../contexts/InfoShareContext'

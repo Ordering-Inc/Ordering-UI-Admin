@@ -4,6 +4,7 @@ import { ColumnAllowSettingPopover } from './ColumnAllowSettingPopover'
 import { Alert, Confirm } from './Confirm'
 import { ConfirmAdmin } from './ConfirmAdmin'
 import { DragScroll } from './DragScroll'
+import { Image } from './Image'
 import { InputPhoneNumber } from './InputPhoneNumber'
 import { Modal } from './Modal'
 import { MoreSidebarLayout } from './MoreSidebarLayout'
@@ -29,6 +30,7 @@ export {
   Confirm,
   ConfirmAdmin,
   DragScroll,
+  Image,
   InputPhoneNumber,
   Modal,
   MoreSidebarLayout,
