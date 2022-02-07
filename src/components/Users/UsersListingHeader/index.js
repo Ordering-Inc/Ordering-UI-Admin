@@ -37,6 +37,7 @@ export const UsersListingHeader = (props) => {
       <ActionContainer>
         <SearchBar
           lazyLoad
+          isCustomLayout
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}
