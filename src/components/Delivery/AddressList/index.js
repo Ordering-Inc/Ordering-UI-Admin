@@ -30,11 +30,11 @@ import {
   WrapperAddressForm
 } from './styles'
 
-import { Confirm, Modal, NotFoundSource } from '../Shared'
-import { Button } from '../../styles/Buttons'
+import { Confirm, Modal, NotFoundSource } from '../../Shared'
+import { Button } from '../../../styles/Buttons'
 import { AddressForm } from '../AddressForm'
 import { useTheme } from 'styled-components'
-import { scrollTo } from '../../utils'
+import { scrollTo } from '../../../utils'
 
 const AddressListUI = (props) => {
   const {

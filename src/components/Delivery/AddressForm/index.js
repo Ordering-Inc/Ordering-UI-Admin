@@ -23,9 +23,9 @@ import {
   useConfig
 } from 'ordering-components-admin'
 
-import { Alert } from '../Shared'
+import { Alert } from '../../Shared'
 import { GoogleGpsButton } from '../GoogleGpsButton'
-import { Button, IconButton } from '../../styles/Buttons'
+import { Button, IconButton, Input, TextArea } from '../../../styles'
 
 import {
   FormControl,
@@ -41,8 +41,6 @@ import {
   WrapInput,
   TagButton
 } from './styles'
-
-import { Input, TextArea } from '../../styles/Inputs'
 
 const inputNames = [
   { name: 'address', code: 'Address' },

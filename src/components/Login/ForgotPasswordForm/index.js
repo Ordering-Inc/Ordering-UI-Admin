@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { ConfigFileContext } from '../../contexts/ConfigFileContext'
+import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 import MdExitToApp from '@meronex/icons/md/MdExitToApp'
 import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
 
 import { useForm } from 'react-hook-form'
-import { Alert } from '../Shared'
+import { Alert } from '../../Shared'
 import {
   ForgotPasswordForm as ForgotPasswordController,
   useLanguage,
@@ -20,8 +20,7 @@ import {
   InputWithIcon
 } from './styles'
 
-import { Input } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
+import { Button, Input } from '../../../styles'
 import { useTheme } from 'styled-components'
 
 const ForgotPasswordUI = (props) => {
