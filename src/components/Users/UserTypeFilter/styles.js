@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components'
 
 export const UserTypeFilterContainer = styled.div`
-  width: 100%;
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
   button {
     white-space: nowrap;
+    font-size: 12px;
+    height: 32px;
+    display: flex;
+    align-items: center;
     ${props => props.theme?.rtl ? css`
       margin-left: 12px;
     ` : css`

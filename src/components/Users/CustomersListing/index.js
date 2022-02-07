@@ -1,39 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { UsersList as UsersListController, useLanguage } from 'ordering-components-admin'
+import {
+  UsersList as UsersListController,
+  useLanguage
+} from 'ordering-components-admin'
 import { UsersList } from '../UsersList'
 import { UsersListingHeader } from '../UsersListingHeader'
-import { UserTypeFilter } from '../UserTypeFilter'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
 import { CustomerDetails } from '../CustomerDetails'
-import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
 import { SideBar } from '../../Shared'
 import { UserAddForm } from '../UserAddForm'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { Button } from '../../../styles'
+import { X as CloseIcon } from 'react-bootstrap-icons'
 
 import {
   UsersListingContainer,
   ActionsContainer,
+  VerifiedStatusFilterContainer,
   ActionButtonsGroup
 } from './styles'
 
-const UsersListingUI = (props) => {
+const CustomersListingUI = (props) => {
   const {
     deafultUserTypesSelected,
     disabledActiveStateCondition,
     headerTitle,
 
-    isCustomersPage,
-
     usersList,
-    handleSelectedUserTypes,
     paginationProps,
     getUsers,
     searchValue,
     onSearch,
     userTypesSelected,
+    isVerified,
+    setIsVerified,
     paginationDetail,
     selectedUserActiveState,
     handleChangeUserActiveState,
@@ -109,9 +111,22 @@ const UsersListingUI = (props) => {
           handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <ActionsContainer>
-          <UserTypeFilter
-            handleChangeUserType={handleSelectedUserTypes}
-          />
+          <VerifiedStatusFilterContainer>
+            <Button
+              color={!isVerified ? 'primary' : 'secundaryDark'}
+              onClick={() => setIsVerified(false)}
+            >
+              {t('ALL', 'All')}
+              <CloseIcon />
+            </Button>
+            <Button
+              color={isVerified ? 'primary' : 'secundaryDark'}
+              onClick={() => setIsVerified(true)}
+            >
+              {t('VERIFIED', 'Verified')}
+              <CloseIcon />
+            </Button>
+          </VerifiedStatusFilterContainer>
           <ActionButtonsGroup>
             <Button
               borderRadius='8px'
@@ -151,33 +166,22 @@ const UsersListingUI = (props) => {
       </UsersListingContainer>
 
       {isOpenUserDetails && (
-        isCustomersPage ? (
-          <SideBar
-            sidebarId='customer_details'
-            open={isOpenUserDetails}
-            onClose={() => handleBackRedirect()}
-            defaultSideBarWidth={500 + moveDistance}
-            moveDistance={moveDistance}
-          >
-            <CustomerDetails
-              user={openUser}
-              userId={openUser?.id || queryId}
-              handleSuccessUpdate={handleSuccessUpdate}
-              handleSuccessDeleteUser={handleSuccessDeleteUser}
-              onClose={() => handleBackRedirect()}
-              handleParentSidebarMove={val => setMoveDistance(val)}
-            />
-          </SideBar>
-        ) : (
-          <UserDetailsLateralBar
-            open={isOpenUserDetails}
+        <SideBar
+          sidebarId='customer_details'
+          open={isOpenUserDetails}
+          onClose={() => handleBackRedirect()}
+          defaultSideBarWidth={500 + moveDistance}
+          moveDistance={moveDistance}
+        >
+          <CustomerDetails
             user={openUser}
             userId={openUser?.id || queryId}
-            onClose={() => handleBackRedirect()}
             handleSuccessUpdate={handleSuccessUpdate}
             handleSuccessDeleteUser={handleSuccessDeleteUser}
+            onClose={() => handleBackRedirect()}
+            handleParentSidebarMove={val => setMoveDistance(val)}
           />
-        )
+        </SideBar>
       )}
       {openUserAddForm && (
         <SideBar
@@ -195,15 +199,15 @@ const UsersListingUI = (props) => {
   )
 }
 
-export const UsersListing = (props) => {
-  const usersListingProps = {
+export const CustomersListing = (props) => {
+  const customersProps = {
     ...props,
-    UIComponent: UsersListingUI,
+    UIComponent: CustomersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
     isSearchByUserName: true
   }
   return (
-    <UsersListController {...usersListingProps} />
+    <UsersListController {...customersProps} />
   )
 }

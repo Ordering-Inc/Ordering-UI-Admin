@@ -17,10 +17,35 @@ export const ActionsContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+`
+export const VerifiedStatusFilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  button {
+    white-space: nowrap;
+    font-size: 12px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 12px;
+    ` : css`
+      margin-right: 12px;
+    `}
+    svg {
+      font-size: 20px;
+
+      ${props => props.theme?.rtl ? css`
+        margin-right: 10px;
+      ` : css`
+        margin-left: 10px;
+      `}
+    }
   }
 `
 export const ActionButtonsGroup = styled.div`
@@ -40,7 +65,7 @@ export const ActionButtonsGroup = styled.div`
     }
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     margin-top: 0;
   }
 `
