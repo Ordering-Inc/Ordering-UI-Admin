@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
-import { useInfoShare } from '../../contexts/InfoShareContext'
+import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon, ImageFill } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination, SearchBar, SideBar } from '../Shared'
-import { IconButton } from '../../styles'
+import { Pagination, SearchBar, SideBar } from '../../Shared'
+import { IconButton } from '../../../styles'
 import { ProductReviewDetails } from '../ProductReviewDetails'
 
 import {
