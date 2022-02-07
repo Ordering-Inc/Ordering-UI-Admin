@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, BusinessMetaFields as BusinessMetaFieldsController } from 'ordering-components-admin'
-import { Alert } from '../../Confirm'
 import Skeleton from 'react-loading-skeleton'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
@@ -9,7 +8,7 @@ import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
 import { useForm } from 'react-hook-form'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
-import { SpinnerLoader } from '../../Shared'
+import { Alert, SpinnerLoader } from '../../Shared'
 import { IconButton } from '../../../styles/Buttons'
 import {
   WrapMetaFields,

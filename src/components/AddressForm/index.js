@@ -23,7 +23,7 @@ import {
   useConfig
 } from 'ordering-components-admin'
 
-import { Alert } from '../Confirm'
+import { Alert } from '../Shared'
 import { GoogleGpsButton } from '../GoogleGpsButton'
 import { Button, IconButton } from '../../styles/Buttons'
 

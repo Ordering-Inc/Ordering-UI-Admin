@@ -4,7 +4,7 @@ import MdExitToApp from '@meronex/icons/md/MdExitToApp'
 import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
 
 import { useForm } from 'react-hook-form'
-import { Alert } from '../Confirm'
+import { Alert } from '../Shared'
 import {
   ForgotPasswordForm as ForgotPasswordController,
   useLanguage,

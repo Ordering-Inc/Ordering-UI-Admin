@@ -8,7 +8,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
 import { useTheme } from 'styled-components'
 import { Button, TextArea } from '../../../styles'
-import { Alert } from '../../Confirm'
+import { Alert } from '../../Shared'
 
 import {
   ReviewContainer,

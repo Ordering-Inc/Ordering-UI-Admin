@@ -14,7 +14,7 @@ import {
 } from '../../Selects'
 import { Button } from '../../Buttons'
 import { useLanguage } from 'ordering-components-admin'
-import { SearchBar } from '../../../components/SearchBar'
+import { SearchBar } from '../../../components/Shared'
 
 export const Select = (props) => {
   const {

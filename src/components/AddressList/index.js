@@ -30,11 +30,9 @@ import {
   WrapperAddressForm
 } from './styles'
 
-import { NotFoundSource } from '../../components/NotFoundSource'
+import { Confirm, Modal, NotFoundSource } from '../Shared'
 import { Button } from '../../styles/Buttons'
-import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
-import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../utils'
 
