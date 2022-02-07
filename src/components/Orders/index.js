@@ -1,4 +1,5 @@
 import { DeliveriesManager } from './DeliveriesManager'
+import { DriversManager } from './DriversManager'
 
 import { Messages } from './Messages'
 import { OrdersContentHeader } from './OrdersContentHeader'
@@ -8,9 +9,11 @@ import { OrderStatusFilterBar } from './OrderStatusFilterBar'
 import { OrderStatusSubFilter } from './OrderStatusSubFilter'
 import { OrderNotification } from './OrderNotification'
 import { OrderDetails } from './OrderDetails'
+import { OrdersLateralBar } from './OrdersLateralBar'
 
 export {
   DeliveriesManager,
+  DriversManager,
 
   Messages,
   OrdersContentHeader,
@@ -19,5 +22,6 @@ export {
   OrderStatusFilterBar,
   OrderStatusSubFilter,
   OrderNotification,
-  OrderDetails
+  OrderDetails,
+  OrdersLateralBar
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 import { XLg } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { OrdersManager } from '../Orders'
-import { IconButton } from '../../styles/Buttons'
+import { OrdersManager } from '../OrdersManager'
+import { IconButton } from '../../../styles/Buttons'
 
 import {
   LateralBarContainer,

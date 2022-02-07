@@ -3,7 +3,7 @@ import { useUtils, useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
-import { getStarWidth } from '../../utils'
+import { getStarWidth } from '../../../utils'
 import {
   DriversListContainer,
   DriverCard,

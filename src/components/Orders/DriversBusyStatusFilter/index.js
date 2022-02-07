@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Button } from '../../styles/Buttons'
+import { Button } from '../../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
 
 import {

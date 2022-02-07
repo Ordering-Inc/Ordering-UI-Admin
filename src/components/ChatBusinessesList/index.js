@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
 import { PaginationButton } from '../PaginationButton'
-import { OrdersLateralBar } from '../OrdersLateralBar'
+import { OrdersLateralBar } from '../Orders'
 
 import {
   Container,

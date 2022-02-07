@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom'
 import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
 import { DriversDashboard } from '../DriversDashboard'
 import { OrdersLateralBar } from '../OrdersLateralBar'
-import { SearchBar } from '../SearchBar'
-import { OrderNotification } from '../Orders'
+import { SearchBar } from '../../Shared'
+import { OrderNotification } from '../OrderNotification'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { IconButton } from '../../styles/Buttons'
-import { useInfoShare } from '../../contexts/InfoShareContext'
+import { IconButton } from '../../../styles/Buttons'
+import { useInfoShare } from '../../../contexts/InfoShareContext'
 
 import {
   DriversHeader,
