@@ -48,7 +48,7 @@ import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
-import { SpinnerLoader } from '../src/components/SpinnerLoader'
+import { SpinnerLoader } from '../src/components/Shared'
 import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {
