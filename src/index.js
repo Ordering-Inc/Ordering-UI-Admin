@@ -1,43 +1,16 @@
-import { DeliveriesManager } from './components/DeliveriesManager'
-import { DriversManager } from './components/DriversManager'
-import { ForgotPasswordForm } from './components/ForgotPasswordForm'
-import { MessagesListing } from './components/MessagesListing'
+import { MessagesListing } from './components/Messages'
 import { OrderingProductsListing } from './components/OrderingProducts'
-import { OrdersManager } from './components/OrdersManager'
 import { PageNotFound } from './components/PageNotFound'
-import { ReviewProductsListing } from './components/ReviewProductsListing'
+import { DeliveriesManager, DriversManager, OrdersManager } from './components/Orders'
 import { Support } from './components/Support'
-
-import {
-  BusinessAnalytics,
-  DriverAnalytics,
-  InvoiceManager,
-  Reports,
-  ReviewsListing
-} from './components/BusinessIntelligence'
-import {
-  DeliveryUsersListing,
-  DriversCompaniesListing,
-  DriversGroupsListing
-} from './components/Delivery'
+import { BusinessAnalytics, DriverAnalytics, InvoiceManager, Reports, ReviewsListing, ReviewProductsListing } from './components/BusinessIntelligence'
+import { DeliveryUsersListing, DriversCompaniesListing, DriversGroupsListing } from './components/Delivery'
 import { HomePage } from './components/Home'
-import { LoginForm } from './components/Login'
+import { LoginForm, ForgotPasswordForm } from './components/Login'
 import { EnterprisePromotionListing } from './components/Marketing'
-import {
-  Cms,
-  IntegrationListing,
-  LanguageManager,
-  PlaceListing,
-  Settings
-} from './components/Settings'
-import {
-  BusinessBrandListing,
-  BusinessesListing,
-  BusinessProductsListing
-} from './components/Stores'
-import {
-  UsersListing
-} from './components/Users'
+import { Cms, IntegrationListing, LanguageManager, PlaceListing, Settings } from './components/Settings'
+import { BusinessBrandListing, BusinessesListing, BusinessProductsListing } from './components/Stores'
+import { UsersListing } from './components/Users'
 
 import { Layout } from './components/Layout'
 import { SidebarMenu } from './components/SidebarMenu'
