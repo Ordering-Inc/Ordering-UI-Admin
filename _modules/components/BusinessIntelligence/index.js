@@ -27,6 +27,12 @@ Object.defineProperty(exports, "Reports", {
     return _Reports.Reports;
   }
 });
+Object.defineProperty(exports, "ReviewProductsListing", {
+  enumerable: true,
+  get: function get() {
+    return _ReviewProductsListing.ReviewProductsListing;
+  }
+});
 Object.defineProperty(exports, "ReviewsListing", {
   enumerable: true,
   get: function get() {
@@ -43,3 +49,5 @@ var _InvoiceManager = require("./InvoiceManager");
 var _Reports = require("./Reports");
 
 var _ReviewsListing = require("./ReviewsListing");
+
+var _ReviewProductsListing = require("./ReviewProductsListing");

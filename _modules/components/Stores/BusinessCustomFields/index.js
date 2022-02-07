@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _Confirm = require("../../Confirm");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
@@ -322,7 +320,7 @@ var BusinessCustomFieldsUI = function BusinessCustomFieldsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "primary",
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))))), actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, null))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))))), actionState.loading && /*#__PURE__*/_react.default.createElement(_styles.WrapperSpinnerLoader, null, /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, null))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ERROR'),
     content: alertState.content,
     acceptText: t('ACCEPT'),

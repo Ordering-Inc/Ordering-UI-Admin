@@ -19,7 +19,7 @@ var _Buttons = require("../../Buttons");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _SearchBar = require("../../../components/SearchBar");
+var _Shared = require("../../../components/Shared");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -155,7 +155,7 @@ var Select = function Select(props) {
     ref: dropdownReference
   }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
     className: "search-bar-container"
-  }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
     isCustomLayout: searchBarIsCustomLayout,
     search: searchValue,

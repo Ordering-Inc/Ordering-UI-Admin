@@ -13,9 +13,9 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _OrdersManager = require("../../OrdersManager");
+var _Orders = require("../../Orders");
 
-var _AddressList = require("../../AddressList");
+var _AddressList = require("../AddressList");
 
 var _Shared = require("../../Shared");
 
@@ -86,7 +86,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     setExtraOpen: setExtraOpen,
     userState: userState,
     handleSuccessUpdate: handleSuccessUserUpdate
-  }))), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
+  }))), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_Orders.OrdersManager, {
     isSelectedOrders: true,
     customerId: (_userState$user6 = userState.user) === null || _userState$user6 === void 0 ? void 0 : _userState$user6.id,
     handleCustomOrderDetail: setExtraOpen

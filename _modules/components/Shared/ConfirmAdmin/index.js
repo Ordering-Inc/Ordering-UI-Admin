@@ -13,7 +13,7 @@ var _reactHookForm = require("react-hook-form");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _Modal = require("../../Modal");
+var _Modal = require("../Modal");
 
 var _styles = require("../../../styles");
 

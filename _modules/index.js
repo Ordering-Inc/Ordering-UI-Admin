@@ -54,7 +54,7 @@ Object.defineProperty(exports, "ConfigFileContext", {
 Object.defineProperty(exports, "DeliveriesManager", {
   enumerable: true,
   get: function get() {
-    return _DeliveriesManager.DeliveriesManager;
+    return _Orders.DeliveriesManager;
   }
 });
 Object.defineProperty(exports, "DeliveryUsersListing", {
@@ -84,7 +84,7 @@ Object.defineProperty(exports, "DriversGroupsListing", {
 Object.defineProperty(exports, "DriversManager", {
   enumerable: true,
   get: function get() {
-    return _DriversManager.DriversManager;
+    return _Orders.DriversManager;
   }
 });
 Object.defineProperty(exports, "EnterprisePromotionListing", {
@@ -96,7 +96,7 @@ Object.defineProperty(exports, "EnterprisePromotionListing", {
 Object.defineProperty(exports, "ForgotPasswordForm", {
   enumerable: true,
   get: function get() {
-    return _ForgotPasswordForm.ForgotPasswordForm;
+    return _Login.ForgotPasswordForm;
   }
 });
 Object.defineProperty(exports, "HomePage", {
@@ -198,7 +198,7 @@ Object.defineProperty(exports, "LoginForm", {
 Object.defineProperty(exports, "MessagesListing", {
   enumerable: true,
   get: function get() {
-    return _MessagesListing.MessagesListing;
+    return _Messages.MessagesListing;
   }
 });
 Object.defineProperty(exports, "NotNetworkConnectivity", {
@@ -216,7 +216,7 @@ Object.defineProperty(exports, "OrderingProductsListing", {
 Object.defineProperty(exports, "OrdersManager", {
   enumerable: true,
   get: function get() {
-    return _OrdersManager.OrdersManager;
+    return _Orders.OrdersManager;
   }
 });
 Object.defineProperty(exports, "PageNotFound", {
@@ -240,7 +240,7 @@ Object.defineProperty(exports, "Reports", {
 Object.defineProperty(exports, "ReviewProductsListing", {
   enumerable: true,
   get: function get() {
-    return _ReviewProductsListing.ReviewProductsListing;
+    return _BusinessIntelligence.ReviewProductsListing;
   }
 });
 Object.defineProperty(exports, "ReviewsListing", {
@@ -352,21 +352,13 @@ Object.defineProperty(exports, "useWindowSize", {
   }
 });
 
-var _DeliveriesManager = require("./components/DeliveriesManager");
-
-var _DriversManager = require("./components/DriversManager");
-
-var _ForgotPasswordForm = require("./components/ForgotPasswordForm");
-
-var _MessagesListing = require("./components/MessagesListing");
+var _Messages = require("./components/Messages");
 
 var _OrderingProducts = require("./components/OrderingProducts");
 
-var _OrdersManager = require("./components/OrdersManager");
-
 var _PageNotFound = require("./components/PageNotFound");
 
-var _ReviewProductsListing = require("./components/ReviewProductsListing");
+var _Orders = require("./components/Orders");
 
 var _Support = require("./components/Support");
 
