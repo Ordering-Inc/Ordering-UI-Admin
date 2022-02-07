@@ -10,6 +10,7 @@ import { Modal } from './Modal'
 import { MoreSidebarLayout } from './MoreSidebarLayout'
 import { NotFoundSource } from './NotFoundSource'
 import { Pagination } from './Pagination'
+import { PaginationButton } from './PaginationButton'
 import { Personalization } from './Personalization'
 import { Schedule } from './Schedule'
 import { SearchBar } from './SearchBar'
@@ -36,6 +37,7 @@ export {
   MoreSidebarLayout,
   NotFoundSource,
   Pagination,
+  PaginationButton,
   Personalization,
   Schedule,
   SearchBar,

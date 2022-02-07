@@ -3,8 +3,8 @@ import { useUtils, useLanguage, DashboardBusinessList as BusinessListController 
 import Skeleton from 'react-loading-skeleton'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
-import { PaginationButton } from '../PaginationButton'
-import { OrdersLateralBar } from '../Orders'
+import { OrdersLateralBar } from '../../Orders'
+import { PaginationButton } from '../../Shared'
 
 import {
   Container,

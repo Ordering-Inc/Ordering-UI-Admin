@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrdersContentHeader, OrdersDashboardList, OrderNotification, OrderDetails, Messages } from '../Orders'
-import { Button } from '../../styles/Buttons'
+import { OrdersContentHeader, OrdersDashboardList, OrderNotification, OrderDetails, Messages } from '../../Orders'
+import { Button } from '../../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
 import { ChatContactList } from '../ChatContactList'
 import { ChatBusinessesList } from '../ChatBusinessesList'
+import { AutoScroll } from '../../Shared'
 
 import {
   MessagesListingContainer,
@@ -18,7 +19,6 @@ import {
   ContactsContainer,
   InnerTabsContainer
 } from './styles'
-import { AutoScroll } from '../AutoScroll'
 
 const MessagesListingUI = (props) => {
   const {

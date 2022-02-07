@@ -5,7 +5,7 @@ import Prev from '@meronex/icons/md/MdKeyboardArrowLeft'
 import Next from '@meronex/icons/md/MdKeyboardArrowRight'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
-import { OrdersLateralBar } from '../Orders'
+import { OrdersLateralBar } from '../../Orders'
 
 import {
   Container,
