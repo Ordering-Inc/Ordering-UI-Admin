@@ -1,3 +1,5 @@
+import { DeliveriesManager } from './DeliveriesManager'
+
 import { Messages } from './Messages'
 import { OrdersContentHeader } from './OrdersContentHeader'
 import { OrdersDashboardList } from './OrdersDashboardList'
@@ -8,6 +10,8 @@ import { OrderNotification } from './OrderNotification'
 import { OrderDetails } from './OrderDetails'
 
 export {
+  DeliveriesManager,
+
   Messages,
   OrdersContentHeader,
   OrdersManager,

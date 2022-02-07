@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { DeliveriesLocation } from '../DeliveriesLocation'
-import { OrdersDashboardList, OrderStatusFilterBar, OrderStatusSubFilter } from '../Orders'
+import { OrdersDashboardList } from '../OrdersDashboardList'
+import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
+import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import {
   DeliveryDashboardContainer,
   OrdersContainer,

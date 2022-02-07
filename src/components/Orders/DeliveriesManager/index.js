@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrdersContentHeader, OrderNotification, OrderDetails } from '../Orders'
+import { OrdersContentHeader } from '../OrdersContentHeader'
+import { OrderDetails } from '../OrderDetails'
+import { OrderNotification } from '../OrderNotification'
 import { DeliveryDashboard } from '../DeliveryDashboard'
 
 import {

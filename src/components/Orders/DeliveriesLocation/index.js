@@ -4,7 +4,7 @@ import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 import { InterActOrderMarker } from '../InterActOrderMarker'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { AutoScroll } from '../../components/AutoScroll'
+import { AutoScroll } from '../../Shared'
 
 import {
   WrapperMap,

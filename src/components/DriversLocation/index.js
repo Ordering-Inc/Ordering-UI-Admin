@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useConfig } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
-import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
+import { DriverMapMarkerAndInfo } from '../Orders/DriverMapMarkerAndInfo'
 
 import {
   WrapperMap
