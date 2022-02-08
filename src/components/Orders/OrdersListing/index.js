@@ -76,7 +76,7 @@ export const OrdersListing = (props) => {
     <>
       {((ordersStatusGroup === groupStatus) || isMessagesView) && (
         <>
-          {!orderList.loading && orderList.orders.length === 0 ? (
+          {!orderList.loading && pagination?.total === 0 ? (
             <WrapperNoneOrders
               small={orderListView === 'small'}
             >
