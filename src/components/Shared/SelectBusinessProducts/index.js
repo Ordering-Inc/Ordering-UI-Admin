@@ -25,7 +25,8 @@ const CategoryTreeNode = (props) => {
     category,
     index,
     selectedProductsIds,
-    setSelectedProductsIds
+    setSelectedProductsIds,
+    include
   } = props
 
   const [{ optimizeImage }] = useUtils()
@@ -50,30 +51,41 @@ const CategoryTreeNode = (props) => {
   const isCheckedCategory = () => {
     if (category?.products) {
       const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
-      return productsIds.every(id => selectedProductsIds.includes(id))
+      return productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
     } else {
       return false
     }
   }
 
-  const handleClickProduct = (product) => {
-    if (selectedProductsIds.includes(product.id)) {
-      const _selectedProductsIds = selectedProductsIds.filter(id => id !== product.id)
+  const handleClickProduct = (product, include) => {
+    if (!!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include) {
+      const _selectedProductsIds = { ...selectedProductsIds }
+      delete _selectedProductsIds[product.id]
       setSelectedProductsIds(_selectedProductsIds)
     } else {
-      setSelectedProductsIds([...selectedProductsIds, product.id])
+      setSelectedProductsIds({ ...selectedProductsIds, [product.id]: { id: product.id, include: include } })
     }
   }
 
-  const handleChangeSelectCategory = () => {
+  const handleChangeSelectCategory = (include) => {
     const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
-    const everyContain = productsIds.every(id => selectedProductsIds.includes(id))
-    let _selectedProductsIds = []
+    const everyContain = productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
+    let _selectedProductsIds = {}
+    _selectedProductsIds = {
+      ...selectedProductsIds
+    }
     if (!everyContain) {
-      _selectedProductsIds = [...selectedProductsIds, ...productsIds].filter((value, index, self) => self.indexOf(value) === index)
+      productsIds.forEach(id => {
+        _selectedProductsIds[id] = { id: id, include }
+      })
       setSelectedProductsIds(_selectedProductsIds)
     } else {
-      _selectedProductsIds = selectedProductsIds.filter(id => !productsIds.includes(id))
+      const _keys = Object.keys(selectedProductsIds).reduce((ids, id) => {
+        ids.push(parseInt(id))
+        return ids
+      }, [])
+      const _keysFiltered = _keys.filter(id => productsIds.includes(id))
+      _keysFiltered.forEach(id => delete _selectedProductsIds[id])
       setSelectedProductsIds(_selectedProductsIds)
     }
   }
@@ -91,7 +103,7 @@ const CategoryTreeNode = (props) => {
             <Checkbox
               ref={categoryRef}
               checked={isCheckedCategory()}
-              onChange={() => handleChangeSelectCategory()}
+              onChange={() => handleChangeSelectCategory(include)}
             />
             <span>{category.name}</span>
           </div>
@@ -112,8 +124,8 @@ const CategoryTreeNode = (props) => {
             <div>
               <Checkbox
                 ref={checkboxRef}
-                checked={selectedProductsIds.includes(product.id)}
-                onChange={() => handleClickProduct(product)}
+                checked={!!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include}
+                onChange={() => handleClickProduct(product, include)}
               />
               <WrapperImage>
                 <Image bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_50,c_limit')} />
@@ -141,7 +153,8 @@ const SelectBusinessProductsUI = (props) => {
   const {
     businessState,
     selectedProductsIds,
-    setSelectedProductsIds
+    setSelectedProductsIds,
+    include
   } = props
 
   return (
@@ -164,6 +177,7 @@ const SelectBusinessProductsUI = (props) => {
             category={category}
             selectedProductsIds={selectedProductsIds}
             setSelectedProductsIds={setSelectedProductsIds}
+            include={include}
           />
         ))
       )}
