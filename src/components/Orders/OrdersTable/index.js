@@ -214,8 +214,6 @@ export const OrdersTable = (props) => {
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
 
-  console.log(pagination)
-
   return (
     <>
       <OrdersContainer
