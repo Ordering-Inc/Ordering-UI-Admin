@@ -27,13 +27,13 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -61,7 +61,8 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   var category = props.category,
       index = props.index,
       selectedProductsIds = props.selectedProductsIds,
-      setSelectedProductsIds = props.setSelectedProductsIds;
+      setSelectedProductsIds = props.setSelectedProductsIds,
+      include = props.include;
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -97,43 +98,59 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
         return [].concat(_toConsumableArray(ids), [product.id]);
       }, []);
       return productsIds.every(function (id) {
-        return selectedProductsIds.includes(id);
+        return !!selectedProductsIds[id] && selectedProductsIds[id].include === include;
       });
     } else {
       return false;
     }
   };
 
-  var handleClickProduct = function handleClickProduct(product) {
-    if (selectedProductsIds.includes(product.id)) {
-      var _selectedProductsIds = selectedProductsIds.filter(function (id) {
-        return id !== product.id;
-      });
+  var handleClickProduct = function handleClickProduct(product, include) {
+    if (!!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include) {
+      var _selectedProductsIds = _objectSpread({}, selectedProductsIds);
 
+      delete _selectedProductsIds[product.id];
       setSelectedProductsIds(_selectedProductsIds);
     } else {
-      setSelectedProductsIds([].concat(_toConsumableArray(selectedProductsIds), [product.id]));
+      setSelectedProductsIds(_objectSpread(_objectSpread({}, selectedProductsIds), {}, _defineProperty({}, product.id, {
+        id: product.id,
+        include: include
+      })));
     }
   };
 
-  var handleChangeSelectCategory = function handleChangeSelectCategory() {
+  var handleChangeSelectCategory = function handleChangeSelectCategory(include) {
     var productsIds = category.products.reduce(function (ids, product) {
       return [].concat(_toConsumableArray(ids), [product.id]);
     }, []);
     var everyContain = productsIds.every(function (id) {
-      return selectedProductsIds.includes(id);
+      return !!selectedProductsIds[id] && selectedProductsIds[id].include === include;
     });
-    var _selectedProductsIds = [];
+    var _selectedProductsIds = {};
+    _selectedProductsIds = _objectSpread({}, selectedProductsIds);
 
     if (!everyContain) {
-      _selectedProductsIds = [].concat(_toConsumableArray(selectedProductsIds), _toConsumableArray(productsIds)).filter(function (value, index, self) {
-        return self.indexOf(value) === index;
+      productsIds.forEach(function (id) {
+        _selectedProductsIds[id] = {
+          id: id,
+          include: include
+        };
       });
       setSelectedProductsIds(_selectedProductsIds);
     } else {
-      _selectedProductsIds = selectedProductsIds.filter(function (id) {
-        return !productsIds.includes(id);
+      var _keys = Object.keys(selectedProductsIds).reduce(function (ids, id) {
+        ids.push(parseInt(id));
+        return ids;
+      }, []);
+
+      var _keysFiltered = _keys.filter(function (id) {
+        return productsIds.includes(id);
       });
+
+      _keysFiltered.forEach(function (id) {
+        return delete _selectedProductsIds[id];
+      });
+
       setSelectedProductsIds(_selectedProductsIds);
     }
   };
@@ -150,7 +167,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     ref: categoryRef,
     checked: isCheckedCategory(),
     onChange: function onChange() {
-      return handleChangeSelectCategory();
+      return handleChangeSelectCategory(include);
     }
   }), /*#__PURE__*/_react.default.createElement("span", null, category.name)))), /*#__PURE__*/_react.default.createElement(_styles2.AccordionContent, {
     ref: content,
@@ -166,9 +183,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       isProduct: true
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       ref: checkboxRef,
-      checked: selectedProductsIds.includes(product.id),
+      checked: !!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include,
       onChange: function onChange() {
-        return handleClickProduct(product);
+        return handleClickProduct(product, include);
       }
     }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_50,c_limit')
@@ -187,7 +204,8 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
 
   var businessState = props.businessState,
       selectedProductsIds = props.selectedProductsIds,
-      setSelectedProductsIds = props.setSelectedProductsIds;
+      setSelectedProductsIds = props.setSelectedProductsIds,
+      include = props.include;
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, {
       key: i
@@ -209,7 +227,8 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
       index: 0,
       category: category,
       selectedProductsIds: selectedProductsIds,
-      setSelectedProductsIds: setSelectedProductsIds
+      setSelectedProductsIds: setSelectedProductsIds,
+      include: include
     });
   }));
 };

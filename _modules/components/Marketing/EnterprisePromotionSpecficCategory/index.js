@@ -121,9 +121,10 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
   }, []);
   (0, _react.useEffect)(function () {
     var filteredCategories = [];
-    selectedCategoryIds.forEach(function (id) {
+    Object.values(selectedCategoryIds).forEach(function (category) {
       filteredCategories.push({
-        id: id,
+        id: category.id,
+        include: category.include,
         is_condition: true
       });
     });
@@ -132,13 +133,17 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     });
   }, [selectedCategoryIds]);
   (0, _react.useEffect)(function () {
-    var _promotionState$promo5;
+    var _promotionState$promo5, _promotionState$promo6;
 
     if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo5 = promotionState.promotion) !== null && _promotionState$promo5 !== void 0 && _promotionState$promo5.categories)) return;
 
-    var _selectedCategoryIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.categories.reduce(function (ids, category) {
-      return [].concat(_toConsumableArray(ids), [category.id]);
-    }, []);
+    var _selectedCategoryIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo6 = promotionState.promotion) === null || _promotionState$promo6 === void 0 ? void 0 : _promotionState$promo6.categories.reduce(function (ids, category) {
+      ids[category.id] = {
+        id: category.id,
+        include: category.pivot.include
+      };
+      return ids;
+    }, {});
 
     setSelectedCategoryIds(_selectedCategoryIds);
   }, []);
@@ -149,11 +154,17 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     onChange: function onChange(val) {
       return setSelectedBusinessSlug(val);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_PRODUCT', 'Select product')), selectedBusinessSlug ? /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessCategories, {
+  }))), selectedBusinessSlug ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_CATEGORY_INCLUDE', 'Select category to include')), /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessCategories, {
     slug: selectedBusinessSlug,
     selectedCategoryIds: selectedCategoryIds,
-    setSelectedCategoryIds: setSelectedCategoryIds
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.NoSelectedBusiness, null, t('SELECT_BUSINESS_BEFORE_CATEGORY', 'Please select a business before selecting your cateogries.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    setSelectedCategoryIds: setSelectedCategoryIds,
+    include: true
+  }), /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_CATEGORY_EXCLUDE', 'Select category to exclude')), /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessCategories, {
+    slug: selectedBusinessSlug,
+    selectedCategoryIds: selectedCategoryIds,
+    setSelectedCategoryIds: setSelectedCategoryIds,
+    include: false
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.NoSelectedBusiness, null, t('SELECT_BUSINESS_BEFORE_CATEGORY', 'Please select a business before selecting your cateogries.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     onClick: function onClick() {

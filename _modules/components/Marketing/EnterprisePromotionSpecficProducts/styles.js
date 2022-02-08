@@ -25,7 +25,7 @@ var BusinessSelectorContainer = _styledComponents.default.div(_templateObject2 |
 
 exports.BusinessSelectorContainer = BusinessSelectorContainer;
 
-var Label = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  line-height: 24px;\n  margin-bottom: 16px;\n"])));
+var Label = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  line-height: 24px;\n  margin: 16px 0px;\n"])));
 
 exports.Label = Label;
 

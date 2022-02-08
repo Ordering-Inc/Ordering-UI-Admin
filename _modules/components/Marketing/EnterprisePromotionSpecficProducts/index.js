@@ -108,9 +108,10 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
   }, []);
   (0, _react.useEffect)(function () {
     var filteredProducts = [];
-    selectedProductsIds.forEach(function (id) {
+    Object.values(selectedProductsIds).forEach(function (product) {
       filteredProducts.push({
-        id: id,
+        id: product.id,
+        include: product.include,
         is_condition: true
       });
     });
@@ -124,8 +125,12 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo = promotionState.promotion) !== null && _promotionState$promo !== void 0 && _promotionState$promo.products)) return;
 
     var _selectedProductsIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.products.reduce(function (ids, product) {
-      return [].concat(_toConsumableArray(ids), [product.id]);
-    }, []);
+      ids[product.id] = {
+        id: product.id,
+        include: product.pivot.include
+      };
+      return ids;
+    }, {});
 
     setSelectedProductsIds(_selectedProductsIds);
   }, []);
@@ -136,11 +141,17 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     onChange: function onChange(val) {
       return setSelectedBusinessSlug(val);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_PRODUCT', 'Select product')), selectedBusinessSlug ? /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessProducts, {
+  }))), selectedBusinessSlug ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_PRODUCT_INCLUDE', 'Select product to include')), /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessProducts, {
     slug: selectedBusinessSlug,
     selectedProductsIds: selectedProductsIds,
-    setSelectedProductsIds: setSelectedProductsIds
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.NoSelectedBusiness, null, t('SELECT_BUSINESS_BEFORE_PRODUCT', 'Please select a business before selecting your products.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    setSelectedProductsIds: setSelectedProductsIds,
+    include: true
+  }), /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_PRODUCT_EXCLUDE', 'Select product to exclude')), /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessProducts, {
+    slug: selectedBusinessSlug,
+    selectedProductsIds: selectedProductsIds,
+    setSelectedProductsIds: setSelectedProductsIds,
+    include: false
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.NoSelectedBusiness, null, t('SELECT_BUSINESS_BEFORE_PRODUCT', 'Please select a business before selecting your products.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     onClick: function onClick() {

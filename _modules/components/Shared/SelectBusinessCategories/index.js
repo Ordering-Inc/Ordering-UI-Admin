@@ -25,13 +25,13 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -59,7 +59,8 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   var category = props.category,
       index = props.index,
       selectedCategoryIds = props.selectedCategoryIds,
-      setSelectedCategoryIds = props.setSelectedCategoryIds;
+      setSelectedCategoryIds = props.setSelectedCategoryIds,
+      include = props.include;
   var content = (0, _react.useRef)(null);
   var checkboxRef = (0, _react.useRef)(null);
   var categoryRef = (0, _react.useRef)(null);
@@ -83,7 +84,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
   };
 
-  var handleChangeSelectCategory = function handleChangeSelectCategory(checked) {
+  var handleChangeSelectCategory = function handleChangeSelectCategory(include) {
     var _category$subcategori;
 
     var categoryIds = [];
@@ -95,15 +96,22 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       });
     }
 
-    var _selectedCaetegoryIds = [];
+    var _selectedCaetegoryIds = {};
 
-    if (checked) {
-      _selectedCaetegoryIds = [].concat(_toConsumableArray(selectedCategoryIds), _toConsumableArray(categoryIds), [category.id]).filter(function (value, index, self) {
-        return self.indexOf(value) === index;
-      });
+    if (selectedCategoryIds[category.id] && selectedCategoryIds[category.id].include === include) {
+      _selectedCaetegoryIds = _objectSpread({}, selectedCategoryIds);
+      delete _selectedCaetegoryIds[category.id];
     } else {
-      _selectedCaetegoryIds = selectedCategoryIds.filter(function (id) {
-        return id !== category.id && !categoryIds.includes(id);
+      _selectedCaetegoryIds = _objectSpread({}, selectedCategoryIds);
+      _selectedCaetegoryIds[category.id] = {
+        id: category.id,
+        include: include
+      };
+      categoryIds.forEach(function (id) {
+        _selectedCaetegoryIds[id] = {
+          id: id,
+          include: include
+        };
       });
     }
 
@@ -120,9 +128,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     className: setRotate
   }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     ref: categoryRef,
-    checked: selectedCategoryIds.includes(category.id),
+    checked: !!selectedCategoryIds[category.id] && selectedCategoryIds[category.id].include === include,
     onChange: function onChange(e) {
-      return handleChangeSelectCategory(e.target.checked);
+      return handleChangeSelectCategory(include);
     }
   }), /*#__PURE__*/_react.default.createElement("span", null, category.name)))), /*#__PURE__*/_react.default.createElement(_styles2.AccordionContent, {
     ref: content,
@@ -143,7 +151,8 @@ var SelectBusinessCategoriesUI = function SelectBusinessCategoriesUI(props) {
 
   var businessState = props.businessState,
       selectedCategoryIds = props.selectedCategoryIds,
-      setSelectedCategoryIds = props.setSelectedCategoryIds;
+      setSelectedCategoryIds = props.setSelectedCategoryIds,
+      include = props.include;
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, {
       key: i
@@ -165,7 +174,8 @@ var SelectBusinessCategoriesUI = function SelectBusinessCategoriesUI(props) {
       index: 0,
       category: category,
       selectedCategoryIds: selectedCategoryIds,
-      setSelectedCategoryIds: setSelectedCategoryIds
+      setSelectedCategoryIds: setSelectedCategoryIds,
+      include: include
     });
   }));
 };
