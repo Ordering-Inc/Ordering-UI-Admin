@@ -202,7 +202,9 @@ var BusinessProductList = function BusinessProductList(props) {
       viewMethod: viewMethod,
       allowColumns: allowColumns
     });
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentProducts.map(function (product, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentProducts.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
       key: i,
       productDetailsId: productDetailsId,

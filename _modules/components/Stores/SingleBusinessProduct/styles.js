@@ -36,7 +36,7 @@ var SingleListBusinessContainer = _styledComponents.default.tbody(_templateObjec
   });
 }, function (_ref2) {
   var isAccept = _ref2.isAccept;
-  return isAccept && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
+  return isAccept && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    background-color: #F8F9FA;\n    tr {\n      border-top: 1px solid ", ";\n    }\n  "])), function (props) {
     return props.theme.colors.headingColor;
   });
 });
