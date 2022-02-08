@@ -137,7 +137,7 @@ const ProductDetailsUI = (props) => {
               business={business}
               product={productState.product}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
-              handleUpdateBusinessState={handleUpdateBusinessState}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           )}
           {showOption === 'product_options' && (
