@@ -4,9 +4,9 @@ import {
   useUtils,
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  SingleBusinessProduct as SingleBusinessProductController
 } from 'ordering-components-admin'
-import { SingleBusinessProduct as SingleBusinessProductController } from './nest'
 import { bytesConverter } from '../../../utils'
 import { Switch } from '../../../styles/Switch'
 import { Alert } from '../../Shared'
