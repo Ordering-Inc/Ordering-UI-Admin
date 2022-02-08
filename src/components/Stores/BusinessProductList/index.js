@@ -158,7 +158,7 @@ export const BusinessProductList = (props) => {
               ) : (
                 <>
                   {
-                    currentProducts.map((product, i) => (
+                    currentProducts.sort((a, b) => a.rank - b.rank).map((product, i) => (
                       <SingleBusinessProduct
                         {...props}
                         key={i}
