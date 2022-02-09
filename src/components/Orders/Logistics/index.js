@@ -84,11 +84,11 @@ const LogisticsUI = (props) => {
         <>
           {[...Array(3)].map((item, i) => (
             <SkeletonHitory key={i}>
-              <Skeleton width={400} height={50} />
-              <Skeleton width={300} height={50} />
-              <Skeleton width={380} height={50} />
-              <Skeleton width={200} height={50} />
-              <Skeleton width={450} height={50} />
+              <Skeleton width={400} height={50} style={{ marginBottom: '20px' }} />
+              <Skeleton width={300} height={50} style={{ marginBottom: '20px' }} />
+              <Skeleton width={380} height={50} style={{ marginBottom: '20px' }} />
+              <Skeleton width={200} height={50} style={{ marginBottom: '20px' }} />
+              <Skeleton width={450} height={50} style={{ marginBottom: '20px' }} />
             </SkeletonHitory>
           ))}
         </>
