@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessManagerBusinesses as BusinessManagerBusinessesController } from './naked'
+import { BusinessManagerBusinesses as BusinessManagerBusinessesController } from 'ordering-components-admin'
 import { SelectBusinesses } from '../../Shared'
 
 const BusinessManagerBusinessesUI = (props) => {
