@@ -102,7 +102,9 @@ const DeliveriesManagerUI = (props) => {
           onClose={() => handleBackRedirect()}
         />
       )}
-      <OrderNotification />
+      <OrderNotification
+        isOnlyDelivery
+      />
     </>
   )
 }
