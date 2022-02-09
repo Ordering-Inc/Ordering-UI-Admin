@@ -19,6 +19,8 @@ import {
 toast.configure()
 
 const OrderNotificationUI = (props) => {
+  const { isOnlyDelivery } = props
+
   const [configState] = useConfig()
   const [, t] = useLanguage()
   const [events] = useEvent()
@@ -27,13 +29,14 @@ const OrderNotificationUI = (props) => {
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
 
-  const handleNotification = (orderId) => {
+  const handleNotification = (order) => {
+    if (isOnlyDelivery && order?.delivery_type !== 1) return
     const _registerOrderIds = [...registerOrderIds]
-    if (!_registerOrderIds.includes(orderId)) {
-      _registerOrderIds.push(orderId)
+    if (!_registerOrderIds.includes(order.id)) {
+      _registerOrderIds.push(order.id)
       setRegisterOrderIds(_registerOrderIds)
       if (configState?.configs?.notification_toast?.value === 'true') {
-        toastNotify(orderId)
+        toastNotify(order.id)
       } else {
         setNotificationModalOpen(true)
       }
