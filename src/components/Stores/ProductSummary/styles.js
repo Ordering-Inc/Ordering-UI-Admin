@@ -39,19 +39,32 @@ export const RightHeader = styled.div`
   display: flex;
   align-items: center;
 `
-
-const ProductImageStyled = styled.div`
-  background: #CCC;
+export const ProductImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 200px;
   height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: ${props => props.theme.colors.lightGray};
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+
+  > svg {
+    width: 70%;
+    height: 70%;
+    color: white;
+  }
+`
+const ProductImageStyled = styled.div`
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  border-radius: 8px;
-  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 `
 
 export const ProductImage = (props) => {

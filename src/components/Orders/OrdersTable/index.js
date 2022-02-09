@@ -519,7 +519,7 @@ export const OrdersTable = (props) => {
         <WrapperPagination>
           <Pagination
             currentPage={pagination.currentPage}
-            totalPages={pagination.totalPages}
+            totalPages={Math.ceil(pagination?.total / pagination.pageSize)}
             handleChangePage={handleChangePage}
             defaultPageSize={pagination.pageSize}
             handleChangePageSize={handleChangePageSize}

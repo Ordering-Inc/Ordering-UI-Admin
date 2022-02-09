@@ -30,7 +30,8 @@ const ProductDetailsUI = (props) => {
     handlechangeImage,
     handleChangeInput,
     handleUpdateClick,
-    handleChangeFormState
+    handleChangeFormState,
+    handleSuccessUpdate
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -122,7 +123,7 @@ const ProductDetailsUI = (props) => {
               handleUpdateClick={handleUpdateClick}
 
               business={business}
-              handleUpdateBusinessState={handleUpdateBusinessState}
+              handleSuccessUpdate={handleSuccessUpdate}
               setFormTaxState={setFormTaxState}
               formTaxState={formTaxState}
               taxes={taxes}
@@ -136,7 +137,7 @@ const ProductDetailsUI = (props) => {
               business={business}
               product={productState.product}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
-              handleUpdateBusinessState={handleUpdateBusinessState}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           )}
           {showOption === 'product_options' && (
