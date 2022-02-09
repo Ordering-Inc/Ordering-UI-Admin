@@ -20,7 +20,7 @@ export const ProductMainDetails = (props) => {
     handleUpdateClick,
 
     business,
-    handleUpdateBusinessState,
+    handleSuccessUpdate,
     setFormTaxState,
     formTaxState,
     taxes,
@@ -67,7 +67,7 @@ export const ProductMainDetails = (props) => {
         <ProductDetailsAdvanced
           product={product}
           business={business}
-          handleUpdateBusinessState={handleUpdateBusinessState}
+          handleSuccessUpdate={handleSuccessUpdate}
           setFormTaxState={setFormTaxState}
           formTaxState={formTaxState}
           taxes={taxes}

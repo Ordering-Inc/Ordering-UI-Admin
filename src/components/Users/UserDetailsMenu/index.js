@@ -11,14 +11,16 @@ export const UserDetailsMenu = (props) => {
   const {
     currentMenuSelected,
     handleChangeMenu,
-    isDelivery
+    isBusinessOwner
   } = props
 
   const [, t] = useLanguage()
-  const menuItems = isDelivery
+  const menuItems = isBusinessOwner
     ? [
       { key: 'profile', content: t('PROFILE', 'Profile') },
       { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
+      { key: 'businesses', content: t('BUSINESSES', 'Businesses') },
+      { key: 'orders', content: t('ORDERS', 'Orders') },
       { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
       { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
     ]

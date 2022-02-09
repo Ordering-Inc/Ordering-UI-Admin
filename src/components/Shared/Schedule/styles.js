@@ -90,6 +90,7 @@ export const SelectWrapper = styled.div`
 `
 
 export const Option = styled.div`
+  white-space: nowrap;
 `
 
 export const SplitLine = styled.div`
