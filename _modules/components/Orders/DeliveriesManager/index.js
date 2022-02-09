@@ -134,7 +134,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     onClose: function onClose() {
       return handleBackRedirect();
     }
-  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null));
+  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, {
+    isOnlyDelivery: true
+  }));
 };
 
 var DeliveriesManager = function DeliveriesManager(props) {

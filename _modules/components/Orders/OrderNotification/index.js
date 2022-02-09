@@ -56,6 +56,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 
 var OrderNotificationUI = function OrderNotificationUI(props) {
+  var isOnlyDelivery = props.isOnlyDelivery;
+
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
@@ -80,18 +82,20 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       registerOrderIds = _useState4[0],
       setRegisterOrderIds = _useState4[1];
 
-  var handleNotification = function handleNotification(orderId) {
+  var handleNotification = function handleNotification(order) {
+    if (isOnlyDelivery && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) return;
+
     var _registerOrderIds = _toConsumableArray(registerOrderIds);
 
-    if (!_registerOrderIds.includes(orderId)) {
+    if (!_registerOrderIds.includes(order.id)) {
       var _configState$configs, _configState$configs$;
 
-      _registerOrderIds.push(orderId);
+      _registerOrderIds.push(order.id);
 
       setRegisterOrderIds(_registerOrderIds);
 
       if ((configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.notification_toast) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === 'true') {
-        toastNotify(orderId);
+        toastNotify(order.id);
       } else {
         setNotificationModalOpen(true);
       }
