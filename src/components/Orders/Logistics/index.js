@@ -1,6 +1,8 @@
 import React from 'react'
 import { Logistics as LogisticsController, useUtils } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+
 import {
   WraaperLogs,
   BubbleConsole,
@@ -11,7 +13,7 @@ import {
 
 const LogisticsUI = (props) => {
   const { logisticList } = props
-  const [{ getTimeAgo, parseDistance }] = useUtils()
+  const [{ getTimeAgo, parseDistance, parseDate }] = useUtils()
 
   const getEventName = (log) => {
     switch (log.event) {
@@ -100,7 +102,16 @@ const LogisticsUI = (props) => {
               {log.event === 'logistic_expired' && (
                 <Reason>Reason: {log?.data?.reason}</Reason>
               )}
-              <TimeofSent>{getTimeAgo(log.updated_at)}</TimeofSent>
+              <OverlayTrigger
+                placement='top'
+                overlay={
+                  <Tooltip>
+                    {parseDate(log.updated_at)}
+                  </Tooltip>
+                }
+              >
+                <TimeofSent>{getTimeAgo(log.updated_at)}</TimeofSent>
+              </OverlayTrigger>
             </BubbleConsole>
           ))}
         </WraaperLogs>

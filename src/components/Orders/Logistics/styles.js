@@ -21,13 +21,17 @@ export const BubbleConsole = styled.div`
 `
 export const TimeofSent = styled.p`
   position: relative;
-  text-align: right;
   font-size: 0.8em;
   margin-block-start: 0.2em;
   margin-block-end: initial;
-
-  ${props => props.theme?.rtl && css`
-    text-align: left;
+  width: fit-content;
+  cursor: pointer;
+  font-weight: 600;
+  
+  ${props => props.theme?.rtl ? css`
+    margin-right: auto;
+  ` : css`
+    margin-left: auto;
   `}
 `
 export const Reason = styled.p`
