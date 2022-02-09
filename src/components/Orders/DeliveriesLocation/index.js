@@ -139,7 +139,7 @@ export const DeliveriesLocation = (props) => {
         >
 
           {interActionMapOrder === null && driversList.drivers.length !== 0 &&
-            driversList.drivers.map((driver) => (
+            driversList.drivers.filter(driver => driver?.enabled).map((driver) => (
               <DriverMapMarkerAndInfo
                 key={driver.id}
                 driver={driver}
