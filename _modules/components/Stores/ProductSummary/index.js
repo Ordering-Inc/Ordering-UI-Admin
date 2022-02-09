@@ -13,6 +13,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
 
+var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _Switch = require("../../../styles/Switch");
@@ -54,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductSummary = function ProductSummary(props) {
-  var _productState$product, _productState$product2, _productState$product3, _productState$product4, _productState$product5, _productState$product6, _productState$product7, _productState$product8;
+  var _productState$product, _productState$product2, _productState$product3, _productState$product4, _productState$product5, _productState$product6, _productState$product7, _productState$product8, _productState$product9;
 
   var actionSidebar = props.actionSidebar,
       showOption = props.showOption,
@@ -155,9 +157,9 @@ var ProductSummary = function ProductSummary(props) {
     onClick: function onClick() {
       return isEditMode ? setIsEditMode(false) : actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ProductImage, {
-    bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.images, 'h_200,c_limit')
-  }), /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductPrice, null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.price), (productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.in_offer) && (productState === null || productState === void 0 ? void 0 : (_productState$product6 = productState.product) === null || _productState$product6 === void 0 ? void 0 : _productState$product6.offer_price) && /*#__PURE__*/_react.default.createElement("span", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product7 = productState.product) === null || _productState$product7 === void 0 ? void 0 : _productState$product7.offer_price))), /*#__PURE__*/_react.default.createElement(_styles2.ProductDescription, null, productState === null || productState === void 0 ? void 0 : (_productState$product8 = productState.product) === null || _productState$product8 === void 0 ? void 0 : _productState$product8.description), /*#__PURE__*/_react.default.createElement(_styles2.ProductConfigsContainer, null, configsOptions.map(function (config) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ProductImageWrapper, null, productState !== null && productState !== void 0 && (_productState$product3 = productState.product) !== null && _productState$product3 !== void 0 && _productState$product3.images ? /*#__PURE__*/_react.default.createElement(_styles2.ProductImage, {
+    bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.images, 'h_200,c_limit')
+  }) : /*#__PURE__*/_react.default.createElement(_BiImage.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductPrice, null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.price), (productState === null || productState === void 0 ? void 0 : (_productState$product6 = productState.product) === null || _productState$product6 === void 0 ? void 0 : _productState$product6.in_offer) && (productState === null || productState === void 0 ? void 0 : (_productState$product7 = productState.product) === null || _productState$product7 === void 0 ? void 0 : _productState$product7.offer_price) && /*#__PURE__*/_react.default.createElement("span", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product8 = productState.product) === null || _productState$product8 === void 0 ? void 0 : _productState$product8.offer_price))), /*#__PURE__*/_react.default.createElement(_styles2.ProductDescription, null, productState === null || productState === void 0 ? void 0 : (_productState$product9 = productState.product) === null || _productState$product9 === void 0 ? void 0 : _productState$product9.description), /*#__PURE__*/_react.default.createElement(_styles2.ProductConfigsContainer, null, configsOptions.map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ProductConfigOption, {
       key: config.key,
       active: showOption === config.key,

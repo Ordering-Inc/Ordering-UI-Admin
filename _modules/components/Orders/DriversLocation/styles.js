@@ -7,8 +7,6 @@ exports.WrapperMap = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _react = _interopRequireDefault(require("react"));
-
 var _templateObject;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

@@ -233,7 +233,9 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       return handleMapChange(data);
     },
     yesIWantToUseGoogleMapApiInternals: true
-  }, interActionMapOrder === null && driversList.drivers.length !== 0 && driversList.drivers.map(function (driver) {
+  }, interActionMapOrder === null && driversList.drivers.length !== 0 && driversList.drivers.filter(function (driver) {
+    return driver === null || driver === void 0 ? void 0 : driver.enabled;
+  }).map(function (driver) {
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
       driver: driver,

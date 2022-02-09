@@ -43,7 +43,7 @@ var SelectWrapper = _styledComponents.default.div(_templateObject7 || (_template
 
 exports.SelectWrapper = SelectWrapper;
 
-var Option = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n"])));
+var Option = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  white-space: nowrap;\n"])));
 
 exports.Option = Option;
 

@@ -109,7 +109,7 @@ var BusinessOwnerSelector = function BusinessOwnerSelector(props) {
   var businessOwnersProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessOwnerSelectorUI,
     isBusinessOwners: true,
-    deafultUserTypesSelected: [0, 2]
+    deafultUserTypesSelected: [2]
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UsersList, businessOwnersProps);

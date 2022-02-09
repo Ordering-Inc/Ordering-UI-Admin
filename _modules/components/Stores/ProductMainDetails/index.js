@@ -45,7 +45,7 @@ var ProductMainDetails = function ProductMainDetails(props) {
       handleChangeFormState = props.handleChangeFormState,
       handleUpdateClick = props.handleUpdateClick,
       business = props.business,
-      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      handleSuccessUpdate = props.handleSuccessUpdate,
       setFormTaxState = props.setFormTaxState,
       formTaxState = props.formTaxState,
       taxes = props.taxes,
@@ -91,7 +91,7 @@ var ProductMainDetails = function ProductMainDetails(props) {
   }), selectedOption === 'advanced' && /*#__PURE__*/_react.default.createElement(_ProductDetailsAdvanced.ProductDetailsAdvanced, {
     product: product,
     business: business,
-    handleUpdateBusinessState: handleUpdateBusinessState,
+    handleSuccessUpdate: handleSuccessUpdate,
     setFormTaxState: setFormTaxState,
     formTaxState: formTaxState,
     taxes: taxes,

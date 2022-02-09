@@ -69,7 +69,8 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
       handlechangeImage = props.handlechangeImage,
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
-      handleChangeFormState = props.handleChangeFormState;
+      handleChangeFormState = props.handleChangeFormState,
+      handleSuccessUpdate = props.handleSuccessUpdate;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -168,7 +169,7 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     handleChangeInput: handleChangeInput,
     handleUpdateClick: handleUpdateClick,
     business: business,
-    handleUpdateBusinessState: handleUpdateBusinessState,
+    handleSuccessUpdate: handleSuccessUpdate,
     setFormTaxState: setFormTaxState,
     formTaxState: formTaxState,
     taxes: taxes,
@@ -179,7 +180,7 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     business: business,
     product: productState.product,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
-    handleUpdateBusinessState: handleUpdateBusinessState
+    handleSuccessUpdate: handleSuccessUpdate
   }), showOption === 'product_options' && /*#__PURE__*/_react.default.createElement(_ProductExtras.ProductExtras, {
     business: business,
     product: productState.product,
