@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImporterFormUI = function ImporterFormUI(props) {
-  var _editState$mapping, _editState$mapping2, _editState$mapping3, _editState$mapping4, _editState$mapping5, _editState$mapping6;
+  var _editState$mapping, _editState$mapping2, _editState$mapping3, _editState$mapping4, _editState$mapping5, _editState$mapping6, _editState$mapping7;
 
   var formState = props.formState,
       handleChangeInput = props.handleChangeInput,
@@ -277,11 +277,19 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off"
+  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null), " ", /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_EXTERNAL_PARENT_CATEGORY_ID', 'External parent category ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "external_parent_category_id",
+    type: "number",
+    placeholder: "0",
+    defaultValue: (editState === null || editState === void 0 ? void 0 : (_editState$mapping5 = editState.mapping) === null || _editState$mapping5 === void 0 ? void 0 : _editState$mapping5.external_parent_category_id) || '',
+    onChange: handleChangeMappingInput,
+    disabled: formState.loading,
+    autoComplete: "off"
   })))), importType === 3 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_PRODUCT_ID', 'Product ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "product_id",
     type: "number",
     placeholder: "0",
-    defaultValue: (editState === null || editState === void 0 ? void 0 : (_editState$mapping5 = editState.mapping) === null || _editState$mapping5 === void 0 ? void 0 : _editState$mapping5.product_id) || '',
+    defaultValue: (editState === null || editState === void 0 ? void 0 : (_editState$mapping6 = editState.mapping) === null || _editState$mapping6 === void 0 ? void 0 : _editState$mapping6.product_id) || '',
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -289,7 +297,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     name: "external_product_id",
     type: "number",
     placeholder: "0",
-    defaultValue: (editState === null || editState === void 0 ? void 0 : (_editState$mapping6 = editState.mapping) === null || _editState$mapping6 === void 0 ? void 0 : _editState$mapping6.external_product_id) || '',
+    defaultValue: (editState === null || editState === void 0 ? void 0 : (_editState$mapping7 = editState.mapping) === null || _editState$mapping7 === void 0 ? void 0 : _editState$mapping7.external_product_id) || '',
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off"
