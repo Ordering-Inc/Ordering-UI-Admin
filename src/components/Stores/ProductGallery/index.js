@@ -2,12 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
-  // ProductGallery as ProductGalleryController
-} from 'ordering-components-admin'
-import {
+  ExamineClick,
   ProductGallery as ProductGalleryController
-} from './naked'
+} from 'ordering-components-admin'
 import { Image as ImageIcon, PlusCircle, ThreeDotsVertical } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
