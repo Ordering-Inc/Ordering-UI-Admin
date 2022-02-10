@@ -223,6 +223,7 @@ const OrdersManagerUI = (props) => {
           isTourOpen={isTourOpen}
           setIsTourOpen={setIsTourOpen}
           currentStep={currentTourStep}
+          detailsOrder={detailsOrder}
         />
       )}
     </>

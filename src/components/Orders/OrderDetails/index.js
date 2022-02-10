@@ -198,16 +198,31 @@ const OrderDetailsUI = (props) => {
 
   const handleChangeTour = (evt) => {
     if (!isTourOpen) return
-    setCurrentTourStep(2)
+    if (order?.delivery_type === 1) {
+      setCurrentTourStep(2)
+      return
+    }
+    if (isTourOpen && setCurrentTourStep) {
+      handleOpenMessages('chat')
+      setTimeout(() => {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
+      }, 50)
+    }
   }
 
   const handleChangeKeyboard = (evt) => {
     if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1)
-    if (evt.keyCode === 39 && currentTourStep === 1) setCurrentTourStep(2)
+    if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type === 1) setCurrentTourStep(2)
+    if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type !== 1) {
+      handleOpenMessages('chat')
+      setTimeout(() => {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
+      }, 50)
+    }
     if (evt.keyCode === 37 && currentTourStep === 3) {
       handleCloseMessages()
       setExtraOpen(false)
-      setCurrentTourStep(2)
+      order?.delivery_type === 1 ? setCurrentTourStep(2) : setCurrentTourStep(1)
       setIsTourFlag(false)
     }
     if ((evt.keyCode === 39 && currentTourStep === 2)) {

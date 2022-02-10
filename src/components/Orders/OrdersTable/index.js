@@ -219,6 +219,7 @@ export const OrdersTable = (props) => {
       <OrdersContainer
         id='orderTable'
         isSelectedOrders={isSelectedOrders}
+        noScroll={isTourOpen && currentTourStep === 0}
       >
         <Table
           className='orders_table'
@@ -463,7 +464,7 @@ export const OrdersTable = (props) => {
                   {allowColumns?.driver && (
                     <td>
                       {order?.delivery_type === 1 && (
-                        <DriversInfo className='driverInfo'>
+                        <DriversInfo className='driverInfo' noClick={isTourOpen && currentTourStep === 0}>
                           <DriverSelector
                             orderView
                             padding='5px 0'
