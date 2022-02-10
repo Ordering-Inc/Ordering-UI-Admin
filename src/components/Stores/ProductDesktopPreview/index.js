@@ -188,38 +188,14 @@ export const ProductDesktopPreview = (props) => {
                 <Swiper
                   onSwiper={setThumbsSwiper}
                   spaceBetween={20}
-                  slidesPerView={5}
+                  slidesPerView={6}
                   breakpoints={{
                     0: {
-                      slidesPerView: 3,
-                      spaceBetween: 20
-                    },
-                    300: {
                       slidesPerView: 4,
-                      spaceBetween: 20
+                      spaceBetween: 10
                     },
-                    400: {
-                      slidesPerView: 5,
-                      spaceBetween: 20
-                    },
-                    550: {
+                    768: {
                       slidesPerView: 6,
-                      spaceBetween: 20
-                    },
-                    769: {
-                      slidesPerView: 4,
-                      spaceBetween: 20
-                    },
-                    1000: {
-                      slidesPerView: 5,
-                      spaceBetween: 20
-                    },
-                    1400: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    },
-                    1600: {
-                      slidesPerView: 7,
                       spaceBetween: 20
                     }
                   }}
