@@ -20,6 +20,7 @@ import { ProductDetails } from '../ProductDetails'
 import { SingleBusinessCategoryEdit } from '../SingleBusinessCategoryEdit'
 import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { BatchImageForm } from '../BatchImageForm'
+import { BusinessDetails } from '../BusinessDetails'
 
 import {
   CategoryProductsContainer,
@@ -46,6 +47,7 @@ const BusinessProductsListingUI = (props) => {
     featuredProducts,
     businessState,
     onProductRedirect,
+    handleStoresRedirect,
     slug,
     categoryId,
     handleUpdateBusinessState,
@@ -64,29 +66,25 @@ const BusinessProductsListingUI = (props) => {
   const { width } = useWindowSize()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [viewMethod, setViewMethod] = useState('list')
-  const [categoryToEdit, setCategoryToEdit] = useState({ open: false, category: null })
-  const [openProductDetails, setOpenProductDetails] = useState(false)
+  const [currentCategory, setCurrentCategory] = useState(null)
   const [selectedProduct, setSelectedProduct] = useState(null)
-  const [isProductAdd, setIsProductAdd] = useState(false)
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [selectedBusiness, setSelectedBusiness] = useState(null)
   const categoryListRef = useRef()
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
 
+  const [openSidebar, setOpenSidebar] = useState(null)
+
   const handleOpenCategoryDetails = (category = null) => {
-    setOpenProductDetails(false)
+    setOpenSidebar(null)
     setSelectedProduct(null)
     if (category && category?.id !== null) {
       setCategorySelected(category)
-      setCategoryToEdit({
-        open: true,
-        category: { ...category }
-      })
+      setCurrentCategory(category)
+      setOpenSidebar('category_details')
     } else {
-      setCategoryToEdit({
-        open: true,
-        category: null
-      })
+      setCurrentCategory(null)
+      setOpenSidebar('category_details')
     }
   }
 
@@ -96,29 +94,27 @@ const BusinessProductsListingUI = (props) => {
       category: null,
       product: null
     })
-    setCategoryToEdit({
-      open: false,
-      category: null
-    })
+    setCurrentCategory(null)
+    setOpenSidebar(null)
   }
 
   const handleOpenProductDetails = (product) => {
     setSelectedProduct(product)
-    setCategoryToEdit({
-      open: false,
-      category: null
-    })
-    setOpenProductDetails(true)
+    setOpenSidebar('product_details')
   }
 
   const handleCloseProductDetails = () => {
-    setOpenProductDetails(false)
+    setOpenSidebar(null)
     setSelectedProduct(null)
   }
 
   const handleProductAdd = (status) => {
     if (viewMethod !== 'list') return
-    setIsProductAdd(status)
+    if (status) {
+      setOpenSidebar('add_product')
+    } else {
+      setOpenSidebar(null)
+    }
   }
 
   const handleSelectHeader = () => {
@@ -134,14 +130,12 @@ const BusinessProductsListingUI = (props) => {
     setSelectedBusiness(business)
     setCategorySelected(null)
     setBusinessSlug(business?.slug)
+    onProductRedirect({ slug: business?.slug })
   }
 
   useEffect(() => {
     if (categoryId) {
-      setCategoryToEdit({
-        ...categoryToEdit,
-        open: true
-      })
+      setOpenSidebar('category_details')
     }
   }, [categoryId])
 
@@ -177,7 +171,7 @@ const BusinessProductsListingUI = (props) => {
                 <Breadcrumb>
                   <span
                     className='business'
-                    onClick={() => onProductRedirect({ slug: selectedBusiness?.slug || businessState?.business?.slug })}
+                    onClick={() => setOpenSidebar('business_details')}
                   >
                     {selectedBusiness?.name || businessState?.business?.name}
                   </span>
@@ -279,30 +273,30 @@ const BusinessProductsListingUI = (props) => {
               viewMethod={viewMethod}
               handleOpenProductDetails={handleOpenProductDetails}
               handleParentProductAdd={handleProductAdd}
-              isParentProductAdd={isProductAdd}
+              isParentProductAdd={openSidebar === 'add_product'}
             />
           </ProductListContainer>
         </CategoryProductsContent>
       </CategoryProductsContainer>
       {
-        categoryToEdit?.open && (
+        openSidebar === 'category_details' && (
           <SideBar
-            open={categoryToEdit?.open}
+            open={openSidebar === 'category_details'}
             onClose={handleCloseEdit}
           >
             <BusinessProductsCategoyDetails
               {...props}
               onClose={handleCloseEdit}
-              category={categoryToEdit?.category}
+              category={currentCategory}
               businessState={businessState}
               categorySelected={categorySelected}
             />
           </SideBar>
         )
       }
-      {openProductDetails && (
+      {openSidebar === 'product_details' && (
         <ProductDetails
-          open={openProductDetails}
+          open={openSidebar === 'product_details'}
           onClose={handleCloseProductDetails}
           product={selectedProduct}
           business={businessState?.business}
@@ -313,6 +307,15 @@ const BusinessProductsListingUI = (props) => {
           setTaxes={setTaxes}
           fees={fees}
           setFees={setFees}
+        />
+      )}
+      {openSidebar === 'business_details' && (
+        <BusinessDetails
+          open={openSidebar === 'business_details'}
+          businessId={selectedBusiness?.id || businessState?.business?.id}
+          handleSucessRemoveBusiness={() => handleStoresRedirect()}
+          // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+          onClose={() => setOpenSidebar(null)}
         />
       )}
       <Modal

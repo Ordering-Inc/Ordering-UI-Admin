@@ -144,7 +144,7 @@ export const BusinessDetailsUI = (props) => {
               handleAddBusinessOwner={handleAddBusinessOwner}
               formState={formState}
               setFormState={setFormState}
-              businessTypes={businessTypes}
+              businessTypes={businessTypes || businessState?.business?.types}
               handleUpdateBusinessClick={handleUpdateBusinessClick}
               setBusinessTypes={setBusinessTypes}
               handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
