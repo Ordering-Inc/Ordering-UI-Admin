@@ -9,7 +9,7 @@ import {
   AccordionItem
 } from './styles'
 
-export const CategoryTreeNode = (props) => {
+export const BusinessMenuCategoryTreeNode = (props) => {
   const {
     category,
     index,
@@ -154,7 +154,7 @@ export const CategoryTreeNode = (props) => {
             ))}
             {(category?.subcategories && category?.subcategories?.length > 0) && (
               category.subcategories.map(subCategory => (
-                <CategoryTreeNode
+                <BusinessMenuCategoryTreeNode
                   {...props}
                   key={subCategory.id}
                   category={subCategory}
