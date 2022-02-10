@@ -217,6 +217,7 @@ export const OrdersTable = (props) => {
   return (
     <>
       <OrdersContainer
+        id='orderTable'
         isSelectedOrders={isSelectedOrders}
       >
         <Table
