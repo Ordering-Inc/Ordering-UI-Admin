@@ -255,6 +255,21 @@ export const ImporterFormUI = (props) => {
                   />
                 </InputWrapper>
               </Col>
+              <Col /> {/* empty col for layout */}
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTERNAL_PARENT_CATEGORY_ID', 'External parent category ID')}</label>
+                  <Input
+                    name='external_parent_category_id'
+                    type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.external_parent_category_id || ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
             </Row>
           )}
           {importType === 3 && (
