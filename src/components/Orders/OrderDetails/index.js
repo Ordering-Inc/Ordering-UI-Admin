@@ -268,7 +268,11 @@ const OrderDetailsUI = (props) => {
         </SkeletonWrapper>
       )}
       {order && Object.keys(order).length > 0 && !loading && (
-        <OrderDetailsContent data-tour='tour_detail' onClick={(e) => handleChangeTour(e)}>
+        <OrderDetailsContent
+          data-tour='tour_detail'
+          noScroll={isTourOpen && currentTourStep === 2}
+          onClick={(e) => handleChangeTour(e)}
+        >
           <OrderDetailsHeader
             order={order}
             extraOpen={extraOpen}
@@ -279,7 +283,7 @@ const OrderDetailsUI = (props) => {
             currentTourStep={currentTourStep}
             setIsTourOpen={setIsTourOpen}
           />
-          <OrderStatus>
+          <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
               <p>

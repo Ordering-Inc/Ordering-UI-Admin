@@ -66,6 +66,7 @@ export const OrderDetailsHeader = (props) => {
         {user?.level !== 5 && (
           <ButtonLink
             onClick={() => handleOpenMessages('chat')}
+            isDisabled={isTourOpen && currentTourStep === 1}
           >
             <ChatIcon />
             {order?.unread_count > 0 && (
@@ -80,11 +81,13 @@ export const OrderDetailsHeader = (props) => {
         </ButtonLink>
         <ButtonLink
           onClick={() => handleOpenMessages('history')}
+          isDisabled={isTourOpen && currentTourStep === 1}
         >
           <Diagram3 />
         </ButtonLink>
         <ButtonLink
           onClick={() => handleOpenMetaFields()}
+          isDisabled={isTourOpen && currentTourStep === 1}
         >
           <ThreeDotsVertical />
         </ButtonLink>

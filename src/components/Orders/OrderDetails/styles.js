@@ -51,6 +51,10 @@ export const OrderDetailsContent = styled.div`
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
+
+  ${({ noScroll }) => noScroll && css`
+    overflow: hidden;
+  `}
 `
 
 export const OrderDetailsExtraContent = styled.div`
@@ -119,6 +123,10 @@ export const OrderStatus = styled.div`
       }
     }
   }
+
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+  `}
 `
 
 export const StatusBarContainer = styled.div`
