@@ -117,6 +117,16 @@ const BusinessesListingUI = (props) => {
     }
   }
 
+  const handleViewMethod = (method) => {
+    setViewMethod(method)
+    if (method === 'list') {
+      getPageBusinesses(10, 1)
+    }
+    if (method === 'card') {
+      getPageBusinesses(50, 1)
+    }
+  }
+
   useEffect(() => {
     handleSetStorage()
   }, [])
@@ -139,13 +149,13 @@ const BusinessesListingUI = (props) => {
           <WrapperView>
             <ViewMethodButton
               active={viewMethod === 'card'}
-              onClick={() => setViewMethod('card')}
+              onClick={() => handleViewMethod('card')}
             >
               <BsGrid />
             </ViewMethodButton>
             <ViewMethodButton
               active={viewMethod === 'list'}
-              onClick={() => setViewMethod('list')}
+              onClick={() => handleViewMethod('list')}
             >
               <BsViewList />
             </ViewMethodButton>
@@ -169,7 +179,6 @@ const BusinessesListingUI = (props) => {
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleOpenBusinessDetails={handleOpenBusinessDetails}
           handleOpenAddBusiness={handleOpenAddBusiness}
-          searchValue={searchValue}
           isTutorialMode={isTutorialMode}
         />
       </BusinessListingContainer>
@@ -221,8 +230,6 @@ export const BusinessesListing = (props) => {
     ...props,
     UIComponent: BusinessesListingUI,
     asDashboard: true,
-    initialPageSize: 50,
-    loadMorePageSize: 10,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
     isSearchByBusinessPhone: true
