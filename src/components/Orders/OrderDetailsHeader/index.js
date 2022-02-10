@@ -14,11 +14,20 @@ export const OrderDetailsHeader = (props) => {
     order,
     handleOpenMetaFields,
     handleOpenMessages,
-    actionSidebar
+    actionSidebar,
+    setIsTourOpen,
+    isTourOpen,
+    currentTourStep
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+
+  const closeSideBar = () => {
+    actionSidebar(false)
+    if (isTourOpen && currentTourStep === 1) setIsTourOpen(false)
+  }
+
   return (
     <OrderDetailsHeaderContainer>
       <div>
@@ -81,7 +90,7 @@ export const OrderDetailsHeader = (props) => {
         </ButtonLink>
         <ButtonLink
           color='black'
-          onClick={() => actionSidebar(false)}
+          onClick={() => closeSideBar()}
         >
           <CloseIcon />
         </ButtonLink>

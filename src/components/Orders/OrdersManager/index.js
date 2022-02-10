@@ -204,6 +204,7 @@ const OrdersManagerUI = (props) => {
           currentTourStep={currentTourStep}
           isTourFlag={isTourFlag}
           setIsTourFlag={setIsTourFlag}
+          setIsTourOpen={setIsTourOpen}
         />
       )}
 

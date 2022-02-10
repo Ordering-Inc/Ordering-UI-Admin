@@ -40,7 +40,8 @@ const OrderDetailsUI = (props) => {
     setCurrentTourStep,
     currentTourStep,
     isTourFlag,
-    setIsTourFlag
+    setIsTourFlag,
+    setIsTourOpen
   } = props
 
   const [, t] = useLanguage()
@@ -259,6 +260,9 @@ const OrderDetailsUI = (props) => {
             actionSidebar={actionSidebar}
             handleOpenMetaFields={handleOpenMetaFields}
             handleOpenMessages={handleOpenMessages}
+            isTourOpen={isTourOpen}
+            currentTourStep={currentTourStep}
+            setIsTourOpen={setIsTourOpen}
           />
           <OrderStatus>
             <div>
