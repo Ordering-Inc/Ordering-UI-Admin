@@ -153,7 +153,7 @@ const ProductDetailsUI = (props) => {
               business={business}
               categoryId={productState.product.category_id}
               product={productState.product}
-              handleUpdateBusinessState={handleUpdateBusinessState}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           )}
           {showOption === 'custom_fields' && (

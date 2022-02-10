@@ -94,8 +94,10 @@ export const ProductDesktopPreview = (props) => {
   useEffect(() => {
     const imageList = []
     imageList.push(product?.images || theme.images?.dummies?.product)
-    for (const galleryItem of product?.gallery) {
-      imageList.push(galleryItem.file)
+    if (product?.gallery) {
+      for (const galleryItem of product?.gallery) {
+        imageList.push(galleryItem.file)
+      }
     }
     setGallery(imageList)
   }, [product])
@@ -231,7 +233,7 @@ export const ProductDesktopPreview = (props) => {
               <Divider />
               <ProductEdition>
                 {
-                  (product?.ingredients.length > 0 || product?.extras.length > 0) && (
+                  (product?.ingredients?.length > 0 || product?.extras?.length > 0) && (
                     <ProductTabContainer id='all'>
                       <Tabs variant='primary'>
                         <Tab
@@ -268,103 +270,107 @@ export const ProductDesktopPreview = (props) => {
                   )
                 }
                 <div id='ingredients'>
-                  {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
-                  <WrapperIngredients isProductSoldout={isSoldOut}>
-                    {product?.ingredients.map(ingredient => (
-                      <IngredientContainer
-                        key={ingredient?.id}
-                      >
-                        <Checkbox
-                          defaultChecked={productCart.ingredients[`id:${ingredient?.id}`]?.selected}
-                        />
-                        <span>
-                          {ingredient.name}
-                        </span>
-                      </IngredientContainer>
-                    ))}
-                  </WrapperIngredients>
+                  {product?.ingredients?.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                  {product?.ingredients && (
+                    <WrapperIngredients isProductSoldout={isSoldOut}>
+                      {product?.ingredients.map(ingredient => (
+                        <IngredientContainer
+                          key={ingredient?.id}
+                        >
+                          <Checkbox
+                            defaultChecked={productCart.ingredients[`id:${ingredient?.id}`]?.selected}
+                          />
+                          <span>
+                            {ingredient.name}
+                          </span>
+                        </IngredientContainer>
+                      ))}
+                    </WrapperIngredients>
+                  )}
                 </div>
-                <div id='extra'>
-                  {
-                    product?.extras.map(extra => extra.options.map(option => {
-                      return (
-                        <div key={option?.id}>
-                          {
-                            showProductOption(option) && (
-                              <OptionContainer>
-                                <OptionWrapHeader>
-                                  <OptionTitleContainer>
-                                    {option.image && option.image !== '-' && (
-                                      <OptionThumbnail src={option.image} />
-                                    )}
-                                    <OptionTitle><span>{option.name}</span></OptionTitle>
-                                  </OptionTitleContainer>
-                                  <OptionFlag>{getMaxMin(option)}</OptionFlag>
-                                </OptionWrapHeader>
-                                <WrapperSubOption>
-                                  {
-                                    option.suboptions.map(suboption => {
-                                      const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                      const price = option?.with_half_option && suboption?.half_price && currentState.position !== 'whole' ? suboption?.half_price : suboption?.price
-                                      return suboption?.enabled ? (
-                                        <ProductSuboptionContainer
-                                          key={suboption?.id}
-                                        >
-                                          <IconControl>
-                                            {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
-                                              <Checkbox defaultChecked={currentState?.selected} />
-                                            ) : (
-                                              currentState?.selected ? (
-                                                <MdRadioButtonChecked />
+                {product?.extras && (
+                  <div id='extra'>
+                    {
+                      product?.extras.map(extra => extra.options.map(option => {
+                        return (
+                          <div key={option?.id}>
+                            {
+                              showProductOption(option) && (
+                                <OptionContainer>
+                                  <OptionWrapHeader>
+                                    <OptionTitleContainer>
+                                      {option.image && option.image !== '-' && (
+                                        <OptionThumbnail src={option.image} />
+                                      )}
+                                      <OptionTitle><span>{option.name}</span></OptionTitle>
+                                    </OptionTitleContainer>
+                                    <OptionFlag>{getMaxMin(option)}</OptionFlag>
+                                  </OptionWrapHeader>
+                                  <WrapperSubOption>
+                                    {
+                                      option.suboptions.map(suboption => {
+                                        const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                        const price = option?.with_half_option && suboption?.half_price && currentState.position !== 'whole' ? suboption?.half_price : suboption?.price
+                                        return suboption?.enabled ? (
+                                          <ProductSuboptionContainer
+                                            key={suboption?.id}
+                                          >
+                                            <IconControl>
+                                              {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
+                                                <Checkbox defaultChecked={currentState?.selected} />
                                               ) : (
-                                                <MdRadioButtonUnchecked disabled />
-                                              )
+                                                currentState?.selected ? (
+                                                  <MdRadioButtonChecked />
+                                                ) : (
+                                                  <MdRadioButtonUnchecked disabled />
+                                                )
+                                              )}
+                                            </IconControl>
+                                            {suboption.image && suboption.image !== '-' && (
+                                              <SubOptionThumbnail src={suboption.image} />
                                             )}
-                                          </IconControl>
-                                          {suboption.image && suboption.image !== '-' && (
-                                            <SubOptionThumbnail src={suboption.image} />
-                                          )}
-                                          <SuoptionText>
-                                            <div>{suboption?.name}</div>
-                                          </SuoptionText>
-                                          {option?.allow_suboption_quantity && (
-                                            <QuantityControl>
-                                              <BsDashCircle />
-                                              {currentState.quantity}
-                                              <BsPlusCircle />
-                                            </QuantityControl>
-                                          )}
-                                          {
-                                            option?.with_half_option && (
-                                              <PositionControl>
-                                                <BsCircleHalf
-                                                  className={['reverse', currentState.selected && currentState.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
-                                                />
-                                                <BsCircleFill
-                                                  className={[currentState.selected && currentState.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
-                                                />
-                                                <BsCircleHalf
-                                                  className={[currentState.selected && currentState.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
-                                                />
-                                              </PositionControl>
-                                            )
-                                          }
-                                          <SuboptionPrice>
-                                            + {parsePrice(price)}
-                                          </SuboptionPrice>
-                                        </ProductSuboptionContainer>
-                                      ) : null
-                                    })
-                                  }
-                                </WrapperSubOption>
-                              </OptionContainer>
-                            )
-                          }
-                        </div>
-                      )
-                    }))
-                  }
-                </div>
+                                            <SuoptionText>
+                                              <div>{suboption?.name}</div>
+                                            </SuoptionText>
+                                            {option?.allow_suboption_quantity && (
+                                              <QuantityControl>
+                                                <BsDashCircle />
+                                                {currentState.quantity}
+                                                <BsPlusCircle />
+                                              </QuantityControl>
+                                            )}
+                                            {
+                                              option?.with_half_option && (
+                                                <PositionControl>
+                                                  <BsCircleHalf
+                                                    className={['reverse', currentState.selected && currentState.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
+                                                  />
+                                                  <BsCircleFill
+                                                    className={[currentState.selected && currentState.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
+                                                  />
+                                                  <BsCircleHalf
+                                                    className={[currentState.selected && currentState.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
+                                                  />
+                                                </PositionControl>
+                                              )
+                                            }
+                                            <SuboptionPrice>
+                                              + {parsePrice(price)}
+                                            </SuboptionPrice>
+                                          </ProductSuboptionContainer>
+                                        ) : null
+                                      })
+                                    }
+                                  </WrapperSubOption>
+                                </OptionContainer>
+                              )
+                            }
+                          </div>
+                        )
+                      }))
+                    }
+                  </div>
+                )}
                 <ProductComment>
                   <SectionTitle>{t('COMMENTS', 'COMMENTS')}</SectionTitle>
                   <TextArea
