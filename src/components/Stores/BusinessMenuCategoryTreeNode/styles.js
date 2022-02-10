@@ -76,3 +76,14 @@ export const AccordionContent = styled.div`
   transition: max-height 0.6s ease;
   width: 100%;
 `
+export const CheckboxWrapper = styled.div`
+  cursor: pointer;
+  svg {
+    font-size: 18px;
+    color: ${props => props.theme.colors.disabled};
+
+    ${({ active }) => active && css`
+      color: ${props => props.theme.colors.primary};
+    `}
+  }
+`
