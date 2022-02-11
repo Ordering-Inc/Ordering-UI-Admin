@@ -43,11 +43,15 @@ const ProductExtraOptionsUI = (props) => {
     addChangesState,
     handleAddOption,
     business,
-    cleanChangesState,
     editOptionId,
     handleDeleteExtra,
     handleUpdateBusinessState,
-    handleSucccessDeleteOption
+    handleSucccessDeleteOption,
+
+    curOption,
+    openModal,
+    setOpenModal,
+    handleOpenModal
   } = props
 
   const theme = useTheme()
@@ -58,8 +62,6 @@ const ProductExtraOptionsUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-  const [curOption, setCurOption] = useState(null)
-  const [openModal, setOpenModal] = useState({})
 
   const closeAlert = () => {
     cleanEditErrors()
@@ -126,12 +128,6 @@ const ProductExtraOptionsUI = (props) => {
 
   const onSubmit = () => {
     handleAddOption()
-  }
-
-  const handleOpenModal = (option, name) => {
-    cleanChangesState({ ...changesState, changes: {} })
-    setCurOption(option)
-    setOpenModal({ ...openModal, [name]: true })
   }
 
   useEffect(() => {

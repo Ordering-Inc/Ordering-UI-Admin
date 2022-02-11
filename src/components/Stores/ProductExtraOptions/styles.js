@@ -194,6 +194,7 @@ export const AddOptionForm = styled.form`
     padding: 5px;
     border: none;
     outline: none;
+    font-size: 14px;
 
     &:focus {
       border: 1px dashed ${props => props.theme.colors.lightGray};
