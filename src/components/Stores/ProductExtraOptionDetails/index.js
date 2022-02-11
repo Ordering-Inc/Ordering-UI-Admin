@@ -563,6 +563,7 @@ const ProductExtraOptionDetailsUI = (props) => {
         closeOnBackdrop={false}
       />
       <Confirm
+        width='600px'
         title={t('WEB_APPNAME', 'Ordering')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}

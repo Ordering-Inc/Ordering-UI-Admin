@@ -57,58 +57,13 @@ export const Header = styled.div`
   }
 `
 
-export const OptionsTable = styled.table`
-  width: 100%;
-  overflow: auto;
-  th, td {
-    color: ${props => props.theme.colors.headingColor};
-    padding: 12px 0;
-
-    > input {
-      height: 32px;
-      width: 50px;
-      padding: 5px;
-      ${props => props.theme?.rtl ? css`
-        margin-left: 5px;
-      ` : css`
-        margin-right: 5px;
-      `}
-      border: none;
-      outline: none;
-      &:focus {
-        border: 1px dashed ${props => props.theme.colors.lightGray};
-      }
-    }
-
-    &:first-child {
-      width: 70%;
-    }
-  }
-
-  th {
-    font-weight: 700;
-    font-size: 12px;
-  }
-
-  td {
-    font-size: 14px;
-  }
-
-  thead, tbody {
-    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  }
-  tbody.add_option {
-    border-top: 13px solid ${props => props.theme.colors.borderColor};
-  }
-
-  tbody {
-    cursor: pointer;
-  }
-`
-
 export const OptionNameContainer = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
+  width: 70%;
+  margin: 12px 0;
+  font-size: 14px;
   > input {
     flex: 1;
     height: 32px;
@@ -131,6 +86,13 @@ export const OptionNameContainer = styled.div`
   ` : css`
     border-right: 1px solid ${props => props.theme.colors.borderColor};
     margin-right: 20px;
+  `}
+
+  ${({ isHeader }) => isHeader && css`
+    font-size: 12px;
+    font-weight: 700;
+    border-right: none;
+    border-left: none;
   `}
 `
 
@@ -164,17 +126,6 @@ export const OptionImage = styled.div`
   ` : css`
     margin-right: 15px;
   `}
-`
-
-export const ActionsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  > svg {
-    color: ${props => props.theme.colors.primary};
-    font-size: 20px;
-    cursor: pointer;
-  }
 `
 
 export const ActionSelectorWrapper = styled.div`
@@ -230,4 +181,61 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
+`
+export const AddOptionForm = styled.form`
+  display: flex;
+  align-items: center;
+  border-top: 13px solid ${props => props.theme.colors.borderColor};
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+
+  > input {
+    width: 80px;
+    height: 32px;
+    padding: 5px;
+    border: none;
+    outline: none;
+
+    &:focus {
+      border: 1px dashed ${props => props.theme.colors.lightGray};
+    }
+  }
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
+`
+export const OptionsList = styled.div`
+`
+export const OptionItem = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+
+  ${props => props.theme?.rtl ? css`
+    padding-left: 40px;
+  ` : css`
+    padding-right: 40px;
+  `}
+`
+export const MinimumPurchase = styled.div`
+  min-width: 80px;
+  ${({ isHeader }) => isHeader ? css`
+    font-size: 12px;
+    font-weight: 700;
+  ` : css`
+    font-size: 14px;
+  `}
+`
+export const MaxPurchase = styled.div`
+  min-width: 80px;
+  ${({ isHeader }) => isHeader ? css`
+    font-size: 12px;
+    font-weight: 700;
+  ` : css`
+    font-size: 14px;
+  `}
 `

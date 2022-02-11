@@ -3,6 +3,7 @@ import {
   useLanguage,
   ProductExtraOptions as ProductExtraOptionsController
 } from 'ordering-components-admin'
+import { useForm } from 'react-hook-form'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { PlusCircle, XLg, ThreeDots, Image as ImageIcon } from 'react-bootstrap-icons'
@@ -17,11 +18,14 @@ import {
   MainContainer,
   OptionsContainer,
   Header,
-  OptionsTable,
   OptionNameContainer,
   OptionImage,
-  ActionsContainer,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  AddOptionForm,
+  OptionsList,
+  OptionItem,
+  MinimumPurchase,
+  MaxPurchase
 } from './styles'
 
 const ProductExtraOptionsUI = (props) => {
@@ -49,6 +53,8 @@ const ProductExtraOptionsUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
+  const { handleSubmit, register, errors } = useForm()
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -118,21 +124,8 @@ const ProductExtraOptionsUI = (props) => {
       : '0'
   }
 
-  const handleAddOptionClick = () => {
-    if (addChangesState?.name === '' || !addChangesState?.name || addChangesState?.min === '' || addChangesState?.max === '') {
-      const errorContent = []
-      if (addChangesState?.name === '' || !addChangesState?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
-      if (addChangesState?.min === '') errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'))
-      if (addChangesState?.max === '') errorContent.push(t('MAX_PURCHASED_REQUIRED', 'The max is required.'))
-      if (errorContent.length) {
-        setAlertState({
-          open: true,
-          content: errorContent
-        })
-      }
-    } else {
-      handleAddOption()
-    }
+  const onSubmit = () => {
+    handleAddOption()
   }
 
   const handleOpenModal = (option, name) => {
@@ -140,6 +133,15 @@ const ProductExtraOptionsUI = (props) => {
     setCurOption(option)
     setOpenModal({ ...openModal, [name]: true })
   }
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map((error) => error.message)
+      })
+    }
+  }, [errors])
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -215,86 +217,85 @@ const ProductExtraOptionsUI = (props) => {
             </IconButton>
           </div>
         </Header>
-        <OptionsTable>
-          <thead>
-            <tr>
-              <th>{t('NAME', 'Name')}</th>
-              <th>{t('MIN', 'Min')}</th>
-              <th>{t('MAX', 'Max')}</th>
-              <th />
-            </tr>
-          </thead>
+
+        <OptionsList>
+          <OptionItem>
+            <OptionNameContainer isHeader>{t('NAME', 'Name')}</OptionNameContainer>
+            <MinimumPurchase isHeader>{t('MIN', 'Min')}</MinimumPurchase>
+            <MaxPurchase isHeader>{t('MAX', 'Max')}</MaxPurchase>
+          </OptionItem>
           {extraState.extra?.options && extraState.extra?.options.map(option => (
-            <tbody
+            <OptionItem
               key={option.id}
               onClick={() => handleOpenModal(option, 'edit')}
             >
-              <tr>
-                <td>
-                  <OptionNameContainer>
-                    <OptionImage>
-                      {option?.image ? (
-                        <img src={option?.image} alt='option image' loading='lazy' />
-                      ) : (
-                        <ImageIcon />
-                      )}
-                    </OptionImage>
-                    <span>{option.name}</span>
-                  </OptionNameContainer>
-                </td>
-                <td>{option?.min}</td>
-                <td>{option?.max}</td>
-                <td />
-              </tr>
-            </tbody>
+              <OptionNameContainer>
+                <OptionImage>
+                  {option?.image ? (
+                    <img src={option?.image} alt='option image' loading='lazy' />
+                  ) : (
+                    <ImageIcon />
+                  )}
+                </OptionImage>
+                <span>{option.name}</span>
+              </OptionNameContainer>
+              <MinimumPurchase>{option?.min}</MinimumPurchase>
+              <MaxPurchase>{option?.max}</MaxPurchase>
+            </OptionItem>
           ))}
-          <tbody className='add_option'>
-            <tr>
-              <td>
-                <OptionNameContainer>
-                  <input
-                    name='name'
-                    value={addChangesState?.name || ''}
-                    placeholder={t('WRITE_A_NAME', 'Write a name')}
-                    onChange={(e) => handleChangeAddOption(e)}
-                  />
-                </OptionNameContainer>
-              </td>
-              <td>
-                <input
-                  name='min'
-                  value={addChangesState?.min}
-                  onChange={(e) => handleChangeAddOptionInput(e, true)}
-                  onKeyPress={(e) => {
-                    if (!/^[0-9.]$/.test(e.key)) {
-                      e.preventDefault()
-                    }
-                  }}
-                />
-              </td>
-              <td>
-                <input
-                  name='max'
-                  value={addChangesState?.max}
-                  onChange={(e) => handleChangeAddOptionInput(e, false)}
-                  onKeyPress={(e) => {
-                    if (!/^[0-9.]$/.test(e.key)) {
-                      e.preventDefault()
-                    }
-                  }}
-                />
-              </td>
-              <td>
-                <ActionsContainer>
-                  <PlusCircle
-                    onClick={() => handleAddOptionClick()}
-                  />
-                </ActionsContainer>
-              </td>
-            </tr>
-          </tbody>
-        </OptionsTable>
+        </OptionsList>
+
+        <AddOptionForm
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <OptionNameContainer>
+            <input
+              name='name'
+              value={addChangesState?.name || ''}
+              placeholder={t('WRITE_A_NAME', 'Write a name')}
+              onChange={(e) => handleChangeAddOption(e)}
+              ref={register({
+                required: t('NAME_REQUIRED', 'The name is required.')
+              })}
+              autoComplete='off'
+            />
+          </OptionNameContainer>
+          <input
+            name='min'
+            value={addChangesState?.min}
+            onChange={(e) => handleChangeAddOptionInput(e, true)}
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+            ref={register({
+              required: t('MIN_PURCHASED_REQUIRED', 'The min is required.')
+            })}
+            autoComplete='off'
+          />
+          <input
+            name='max'
+            value={addChangesState?.max}
+            onChange={(e) => handleChangeAddOptionInput(e, false)}
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+            ref={register({
+              required: t('MAX_PURCHASED_REQUIRED', 'The max is required.')
+            })}
+            autoComplete='off'
+          />
+          <IconButton
+            type='submit'
+          >
+            <PlusCircle />
+          </IconButton>
+        </AddOptionForm>
       </OptionsContainer>
+
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
