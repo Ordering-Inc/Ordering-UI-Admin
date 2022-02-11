@@ -9,7 +9,6 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import { Envelope, Phone, ThreeDotsVertical } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles'
-import { UserTypeSelector } from '../UserTypeSelector'
 import { ConfirmAdmin, Pagination } from '../../Shared'
 
 import {
@@ -37,7 +36,6 @@ export const UsersList = (props) => {
     usersList,
     paginationProps,
     getUsers,
-    handleChangeUserType,
     handleChangeActiveUser,
     handleDeleteUser,
     selectedUsers,
@@ -65,7 +63,7 @@ export const UsersList = (props) => {
   }
 
   const onChangeUserDetails = (e, user) => {
-    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
+    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
     if (isInvalid) return
     handleOpenUserDetails(user)
   }
@@ -88,20 +86,6 @@ export const UsersList = (props) => {
         handleOnConfirm: () => {
           setConfirmAdmin({ ...confirmAdmin, open: false })
           handleChangeActiveUser({ id: user.id, enabled: enabled })
-        }
-      })
-    }
-  }
-
-  const onChangeUserType = (user, type) => {
-    if (user.level !== 0) {
-      handleChangeUserType(type)
-    } else {
-      setConfirmAdmin({
-        open: true,
-        handleOnConfirm: () => {
-          setConfirmAdmin({ ...confirmAdmin, open: false })
-          handleChangeUserType(type)
         }
       })
     }
@@ -227,12 +211,7 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      <UserTypeWrapper className='user_type_selector'>
-                        <UserTypeSelector
-                          userId={user.id}
-                          defaultUserType={user?.level}
-                          handleChangeUserType={(type) => onChangeUserType(user, type)}
-                        />
+                      <UserTypeWrapper>
                         <p>{getUserType(user?.level)?.value}</p>
                       </UserTypeWrapper>
                     </td>
