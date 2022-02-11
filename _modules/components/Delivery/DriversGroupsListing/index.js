@@ -277,7 +277,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleSelectGroup: handleSelectGroup,
     handleAllSelectGroup: handleAllSelectGroup
   })), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "city-details",
+    sidebarId: "driver_group_details",
     defaultSideBarWidth: 550 + moveDistance,
     open: openDetails,
     moveDistance: moveDistance,
@@ -285,6 +285,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     onClose: function onClose() {
       setCurDriversGroup(null);
       setOpenDetails(false);
+      setIsTourOpen(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_DriversGroupDetails.DriversGroupDetails, {
     driversGroupsState: driversGroupsState,
@@ -300,11 +301,14 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       return setMoveDistance(val);
     },
     onClose: function onClose() {
-      return setOpenDetails(false);
+      setOpenDetails(false);
+
+      if (isTourOpen) {
+        handleDeliveryTourCompleted();
+      }
     },
     isTourOpen: isTourOpen,
-    handleNextTour: handleNextTour,
-    handleDeliveryTourCompleted: handleDeliveryTourCompleted
+    handleNextTour: handleNextTour
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

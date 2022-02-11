@@ -180,6 +180,14 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     }
   }, [usersList]);
 
+  var handleCloseAddForm = function handleCloseAddForm() {
+    setOpenUserAddForm(false);
+
+    if (isTourOpen) {
+      setIsTourOpen(false);
+    }
+  };
+
   var handleSetStorage = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
       var preVisited, visited;
@@ -312,7 +320,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     open: openUserAddForm,
     noAnimation: isTourOpen,
     onClose: function onClose() {
-      return setOpenUserAddForm(false);
+      return handleCloseAddForm();
     }
   }, /*#__PURE__*/_react.default.createElement(_UserAddForm.UserAddForm, {
     isDriversPage: isDriversPage,

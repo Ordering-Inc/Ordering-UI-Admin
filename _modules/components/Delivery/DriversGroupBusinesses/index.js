@@ -52,9 +52,7 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       handleUpdateDriversGroup = props.handleUpdateDriversGroup,
       handleAddDriversGroup = props.handleAddDriversGroup,
       handleSelectAllBusiness = props.handleSelectAllBusiness,
-      selectedBusinessIds = props.selectedBusinessIds,
-      isTourOpen = props.isTourOpen,
-      handleDeliveryTourCompleted = props.handleDeliveryTourCompleted;
+      selectedBusinessIds = props.selectedBusinessIds;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,11 +70,6 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       filteredBusinesses = _useState4[0],
       setFilteredBusinesses = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isSuccessSubmitted = _useState6[0],
-      setIsSuccessSubmitted = _useState6[1];
 
   (0, _react.useEffect)(function () {
     var _filteredBusinesses = [];
@@ -97,23 +90,9 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       handleUpdateDriversGroup(changesState);
     } else {
       handleAddDriversGroup();
-
-      if (isTourOpen) {
-        setIsSuccessSubmitted(true);
-      }
     }
   };
 
-  (0, _react.useEffect)(function () {
-    if (!isTourOpen || !isSuccessSubmitted || actionState !== null && actionState !== void 0 && actionState.loading) return;
-
-    if (actionState !== null && actionState !== void 0 && actionState.error) {
-      setIsSuccessSubmitted(false);
-      return;
-    }
-
-    handleDeliveryTourCompleted();
-  }, [isTourOpen, isSuccessSubmitted, actionState === null || actionState === void 0 ? void 0 : actionState.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     "data-tour": "tour_select_business",
     onSubmit: handleSubmit(onSubmit)

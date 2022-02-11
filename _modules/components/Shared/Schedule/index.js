@@ -159,7 +159,7 @@ var ScheduleUI = function ScheduleUI(props) {
           return handleChangeScheduleTime(val, daysOfWeekIndex, index, false);
         },
         optionInnerMaxHeight: "300px"
-      })), /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, {
+      })), /*#__PURE__*/_react.default.createElement(_styles2.TrashIconWrapper, {
         isHide: (schedule === null || schedule === void 0 ? void 0 : schedule.lapses.length) <= 1
       }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
         onClick: function onClick() {
@@ -185,6 +185,10 @@ var ScheduleUI = function ScheduleUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles2.AddScheduleIconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircleFill, {
       onClick: function onClick() {
         return handleAddSchedule(daysOfWeekIndex);
+      }
+    }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.DashCircleFill, {
+      onClick: function onClick() {
+        return handleOpenAddSchedule(null);
       }
     })))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('UNAVAILABLE', 'Unavailable'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, {
       isHide: !(schedule !== null && schedule !== void 0 && schedule.enabled)

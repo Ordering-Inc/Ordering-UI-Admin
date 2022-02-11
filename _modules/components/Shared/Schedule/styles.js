@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TimeScheduleItemContainer = exports.SplitLine = exports.SelectWrapper = exports.ScheduleContainer = exports.Option = exports.IconWrapper = exports.AddScheduleIconWrapper = void 0;
+exports.TrashIconWrapper = exports.TimeScheduleItemContainer = exports.SplitLine = exports.SelectWrapper = exports.ScheduleContainer = exports.Option = exports.IconWrapper = exports.AddScheduleIconWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,12 +21,12 @@ var ScheduleContainer = _styledComponents.default.div(_templateObject || (_templ
 
 exports.ScheduleContainer = ScheduleContainer;
 
-var TimeScheduleItemContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 12px 0;\n  border-bottom: 1px solid ", ";\n\n  > div {\n    display: flex;\n    align-items: center;\n    h4 {\n      font-size: 14px;\n      font-weight: 600;\n      margin: 0px;\n      padding: 0 16px;\n    }\n\n    &:first-child {\n      width: 90px;\n    }\n\n    &:nth-child(2) {\n      flex-direction: column;\n      flex: 1;\n      margin: 0 10px;\n      > div {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        &:not(:last-child) {\n          margin-bottom: 10px;\n        }\n  \n        svg {\n          font-size: 20px;\n          cursor: pointer;\n  \n          ", "\n        }\n      }\n      > p {\n        margin: 6px 0;\n      }\n    }\n\n    &:nth-child(3) {\n      > span {\n        svg {\n          cursor: pointer;\n          font-size: 20px;\n          color: ", ";\n          ", "\n        }\n      }\n    }\n  }\n"])), function (props) {
+var TimeScheduleItemContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 12px 0;\n  border-bottom: 1px solid ", ";\n\n  > div {\n    display: flex;\n    align-items: center;\n    h4 {\n      font-size: 14px;\n      font-weight: 600;\n      margin: 0px;\n      padding: 0 16px;\n    }\n\n    &:first-child {\n      width: 95px;\n    }\n\n    &:nth-child(2) {\n      flex-direction: column;\n      flex: 1;\n      ", "\n      > div {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        &:not(:last-child) {\n          margin-bottom: 10px;\n        }\n  \n        svg {\n          font-size: 20px;\n          cursor: pointer;\n        }\n      }\n      > p {\n        margin: 6px 0;\n      }\n    }\n\n    &:nth-child(3) {\n      > span {\n        svg {\n          cursor: pointer;\n          font-size: 20px;\n          color: ", ";\n          ", "\n        }\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n            margin-right: 16px;\n          "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n            margin-left: 16px;\n          "])));
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        padding-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n        padding-left: 10px;\n      "])));
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
@@ -60,8 +60,21 @@ var IconWrapper = _styledComponents.default.span(_templateObject10 || (_template
 
 exports.IconWrapper = IconWrapper;
 
-var AddScheduleIconWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  svg {\n    color: ", ";\n  }\n"])), function (props) {
+var TrashIconWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  width: 56px;\n  ", "\n"])), function (_ref2) {
+  var isHide = _ref2.isHide;
+  return isHide ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    opacity: 0;\n    pointer-events: none;\n  "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    opacity: 1;\n  "])));
+});
+
+exports.TrashIconWrapper = TrashIconWrapper;
+
+var AddScheduleIconWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  width: 56px;\n  > svg {\n    color: ", ";\n    ", "\n    &:last-child {\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
+}, function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n    "])));
+}, function (props) {
+  return props.theme.colors.lightGray;
 });
 
 exports.AddScheduleIconWrapper = AddScheduleIconWrapper;
