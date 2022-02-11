@@ -9,6 +9,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Envelope, Phone, ThreeDots, PersonFill, ChevronRight } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { UserDetails } from '../UserDetails'
+import { CustomerWallet } from '../CustomerWallet'
 import { Confirm, SideBar } from '../../Shared'
 
 import {
@@ -162,6 +163,11 @@ const CustomerDetailsUI = (props) => {
                 setExtraOpen={isOpen => setMenuMoveDistance(isOpen ? 500 : 0)}
               />
             </UserDetailsWrapper>
+          )}
+          {showOption === 'cash_wallet' && (
+            <CustomerWallet
+              user={userState.user}
+            />
           )}
         </SideBar>
       )}

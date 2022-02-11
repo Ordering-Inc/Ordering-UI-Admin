@@ -273,4 +273,15 @@ export const Button = styled.button`
       }
     `}
   `}
+  ${({ color }) => color === 'black' && css`
+    background: ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.white};
+    border-color: ${props => props.theme.colors.black};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.black)};
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.black)};
+    }
+  `}
 `

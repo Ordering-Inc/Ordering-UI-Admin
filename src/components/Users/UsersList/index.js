@@ -28,6 +28,7 @@ import {
 
 export const UsersList = (props) => {
   const {
+    isCustomer,
     userDetailsId,
     usersList,
     paginationProps,
@@ -40,7 +41,7 @@ export const UsersList = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ optimizeImage }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
 
   const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
 
@@ -104,6 +105,9 @@ export const UsersList = (props) => {
                 <th>{t('USER', 'User')}</th>
                 <th>{t('PHONE', 'Phone')}</th>
                 <th>{t('TYPE', 'Type')}</th>
+                {isCustomer && (
+                  <th>{t('WALLET', 'Wallet')}</th>
+                )}
                 <th>{t('ACTION', 'Action')}</th>
               </tr>
             </thead>
@@ -129,8 +133,13 @@ export const UsersList = (props) => {
                       <Skeleton width={50} />
                     </td>
                     <td>
-                      <Skeleton width={100} />
+                      <Skeleton width={50} />
                     </td>
+                    {isCustomer && (
+                      <td>
+                        <Skeleton width={50} />
+                      </td>
+                    )}
                     <td>
                       <UserEnableWrapper>
                         <span><Skeleton width={55} /></span>
@@ -195,6 +204,9 @@ export const UsersList = (props) => {
                     <td>
                       {getUserType(user?.level)?.value}
                     </td>
+                    {isCustomer && (
+                      <td>{parsePrice(user?.wallets?.balance || 0)}</td>
+                    )}
                     <td>
                       <UserEnableWrapper className='user_enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>

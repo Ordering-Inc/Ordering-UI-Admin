@@ -20,12 +20,8 @@ export const UsersTable = styled.table`
     &:first-child {
       width: 40%;
     }
-    &:nth-child(2) {
-      width: 20%;
-    }
 
     &:nth-child(4),
-    
     &:nth-child(5) {
       width: 10%;
     }

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
-  UsersList as UsersListController,
+  // UsersList as UsersListController,
   useLanguage
 } from 'ordering-components-admin'
+import {
+  UsersList as UsersListController
+} from './naked'
 import { UsersList } from '../UsersList'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
@@ -148,6 +151,7 @@ const CustomersListingUI = (props) => {
           </ActionButtonsGroup>
         </ActionsContainer>
         <UsersList
+          isCustomer
           usersList={usersList}
           getUsers={getUsers}
           paginationProps={paginationProps}
