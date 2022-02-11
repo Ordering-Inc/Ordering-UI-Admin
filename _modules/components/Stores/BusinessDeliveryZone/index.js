@@ -77,7 +77,8 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
       isAddValid = props.isAddValid,
       setIsAddValid = props.setIsAddValid,
       handleUpdateBusinessDeliveryZone = props.handleUpdateBusinessDeliveryZone,
-      handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone;
+      handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone,
+      cleanFormState = props.cleanFormState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -129,6 +130,7 @@ var BusinessDeliveryZoneUI = function BusinessDeliveryZoneUI(props) {
   };
 
   var handleCloseOption = function handleCloseOption() {
+    cleanFormState();
     setIsEdit(false);
     setIsAddValid(false);
     setIsExtendExtraOpen(false);

@@ -89,16 +89,6 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
     code: 'quantity',
     readOnly: false,
     type: 'numeric'
-  }, {
-    title: t('TAX', 'Tax'),
-    code: 'taxShow',
-    readOnly: true,
-    editor: false
-  }, {
-    title: t('FEE', 'Fee'),
-    code: 'feeShow',
-    readOnly: true,
-    editor: false
   }];
 
   var closeAlert = function closeAlert() {

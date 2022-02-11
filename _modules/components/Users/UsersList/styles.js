@@ -109,7 +109,7 @@ var InfoBlock = _styledComponents.default.div(_templateObject16 || (_templateObj
 
 exports.InfoBlock = InfoBlock;
 
-var UserTypeWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  ", "\n  > div {\n    display: flex;\n\n    .select {\n      border: none;\n      padding: 0px;\n\n      > div {\n        padding: 0px;\n      }\n    }\n\n    .list {\n      .options {\n        border: 1px solid #E9ECEF;\n        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n        border-radius: 8px;\n      }\n    }\n  }\n  > p {\n    margin: 5px 0 0 0;\n    font-size: 12px;\n    color: ", ";\n  }\n"])), function (props) {
+var UserTypeWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  ", "\n  > p {\n    margin: 5px 0 0 0;\n    font-size: 14px;\n    font-weight: 500;\n  }\n"])), function (props) {
   var _props$theme4;
 
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    border-left: 1px solid ", ";\n    margin-left: 20px;\n  "])), function (props) {
@@ -117,8 +117,6 @@ var UserTypeWrapper = _styledComponents.default.div(_templateObject17 || (_templ
   }) : (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    border-right: 1px solid ", ";\n    margin-right: 20px;\n  "])), function (props) {
     return props.theme.colors.borderColor;
   });
-}, function (props) {
-  return props.theme.colors.lightGray;
 });
 
 exports.UserTypeWrapper = UserTypeWrapper;

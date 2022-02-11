@@ -535,6 +535,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+    width: "600px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),

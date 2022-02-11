@@ -15,10 +15,6 @@ var _Shared = require("../../Shared");
 
 var _styles = require("./styles");
 
-var _styles2 = require("../../../styles");
-
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _InvoiceGeneral = require("../InvoiceGeneral");
 
 var _InvoicePayMethods = require("../InvoicePayMethods");
@@ -50,8 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
-  var actionSidebar = props.actionSidebar,
-      exportInvoiceList = props.exportInvoiceList;
+  var exportInvoiceList = props.exportInvoiceList;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,12 +76,7 @@ var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
       submitBtnRef.current.click();
     }
   }, [exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading]);
-  return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESS_INVOICE', 'Business invoice')), /*#__PURE__*/_react.default.createElement(_styles.HeaderActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return actionSidebar(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles.DetailsList, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESS_INVOICE', 'Business invoice'))), /*#__PURE__*/_react.default.createElement(_styles.DetailsList, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedDetailType === 'general',
     onClick: function onClick() {
       return changeSelectedAnalyticsStatus('general');

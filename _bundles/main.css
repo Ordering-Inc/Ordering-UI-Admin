@@ -3285,6 +3285,11 @@ textarea.HandsontableCopyPaste {
   padding: 4px;
 }
 
+.jsoneditor-modal textarea,
+.jsoneditor-modal #query {
+  border-radius: unset;
+}
+
 .jsoneditor-modal,
 .jsoneditor-modal table td,
 .jsoneditor-modal table th,

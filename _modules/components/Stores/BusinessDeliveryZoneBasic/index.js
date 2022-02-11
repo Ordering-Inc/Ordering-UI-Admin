@@ -193,7 +193,7 @@ var BusinessDeliveryZoneBasic = function BusinessDeliveryZoneBasic(props) {
       return handleSave();
     },
     disabled: loading
-  }, loading ? t('LOADING', 'loading') : isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

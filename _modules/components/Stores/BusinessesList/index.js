@@ -63,7 +63,6 @@ var BusinessesList = function BusinessesList(props) {
       handleOpenAddBusiness = props.handleOpenAddBusiness,
       detailsBusinessId = props.detailsBusinessId,
       getPageBusinesses = props.getPageBusinesses,
-      searchValue = props.searchValue,
       isTutorialMode = props.isTutorialMode;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -98,69 +97,17 @@ var BusinessesList = function BusinessesList(props) {
 
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, !allowColumns[type])));
-  }; // Change page
-
-
-  var _useState5 = (0, _react.useState)(1),
-      _useState6 = _slicedToArray(_useState5, 2),
-      currentPage = _useState6[0],
-      setCurrentPage = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(10),
-      _useState8 = _slicedToArray(_useState7, 2),
-      businessesPerPage = _useState8[0],
-      setBusinessesPerPage = _useState8[1]; // Get current businesses
-
-
-  var _useState9 = (0, _react.useState)([]),
-      _useState10 = _slicedToArray(_useState9, 2),
-      currentBusinessess = _useState10[0],
-      setCurrentBusinessess = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(null),
-      _useState12 = _slicedToArray(_useState11, 2),
-      totalPages = _useState12[0],
-      setTotalPages = _useState12[1];
+  };
 
   var handleChangePage = function handleChangePage(page) {
-    if (pagination.from <= page * businessesPerPage && page * businessesPerPage <= pagination.to || pagination.from <= page * businessesPerPage && page * businessesPerPage > pagination.total) {
-      setCurrentPage(page);
-    } else {
-      getPageBusinesses(businessesPerPage, page);
-    }
+    getPageBusinesses(pagination.pageSize, page);
   };
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
-    setBusinessesPerPage(pageSize);
     var expectedPage = Math.ceil(pagination.from / pageSize);
-
-    if (pagination.from <= expectedPage * pageSize && expectedPage * pageSize <= pagination.to || pagination.from <= expectedPage * pageSize && expectedPage * pageSize > pagination.total) {
-      setCurrentPage(expectedPage);
-    } else {
-      setCurrentPage(expectedPage);
-      getPageBusinesses(pageSize, expectedPage);
-    }
+    getPageBusinesses(pageSize, expectedPage);
   };
 
-  (0, _react.useEffect)(function () {
-    if (businessList.loading) return;
-
-    var _totalPages;
-
-    if (pagination !== null && pagination !== void 0 && pagination.total) {
-      _totalPages = Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / businessesPerPage);
-    } else if (businessList.businesses.length > 0) {
-      _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage);
-    }
-
-    var indexOfLastPost = currentPage * businessesPerPage;
-    var indexOfFirstPost = indexOfLastPost - businessesPerPage;
-
-    var _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost);
-
-    setTotalPages(_totalPages);
-    setCurrentBusinessess(_currentBusinessess);
-  }, [businessList, currentPage, pagination, businessesPerPage]);
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2;
 
@@ -177,9 +124,6 @@ var BusinessesList = function BusinessesList(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll, viewMethod]);
-  (0, _react.useEffect)(function () {
-    setCurrentPage(1);
-  }, [searchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ID', 'ID')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
     className: "business"
   }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) && /*#__PURE__*/_react.default.createElement("th", null, t('FEATURED', 'Featured')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && /*#__PURE__*/_react.default.createElement("th", null, t('RATINGS', 'Ratings')), /*#__PURE__*/_react.default.createElement("th", {
@@ -202,7 +146,7 @@ var BusinessesList = function BusinessesList(props) {
       viewMethod: viewMethod,
       allowColumns: allowColumns
     });
-  }) : currentBusinessess.map(function (business) {
+  }) : businessList.businesses.map(function (business) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusiness.SingleBusiness, {
       key: business.id,
       detailsBusinessId: detailsBusinessId,
@@ -219,11 +163,10 @@ var BusinessesList = function BusinessesList(props) {
     onClick: function onClick() {
       return handleOpenAddBusiness();
     }
-  }, t('ADD_NEW_STORE', 'Add new store')), pagination && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, !businessList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
+  }, t('ADD_NEW_STORE', 'Add new store')), pagination && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: pagination.currentPage,
+    totalPages: pagination.totalPages,
     handleChangePage: handleChangePage,
-    defaultPageSize: businessesPerPage,
     handleChangePageSize: handleChangePageSize
   })))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_styles2.BusinessCardContainer, null, businessList.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusiness.SingleBusiness, {

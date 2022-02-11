@@ -114,6 +114,20 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
       toggleMainContent();
     }
   }, [isOpenDriverOrderDetails]);
+
+  var onCloseSidebar = function onCloseSidebar(e) {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!open) return;
+    document.addEventListener('keydown', onCloseSidebar);
+    return function () {
+      return document.removeEventListener('keydown', onCloseSidebar);
+    };
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles.LateralBarContainer, {
     id: "driver_lateral_bar"
   }, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {

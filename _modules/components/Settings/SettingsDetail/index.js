@@ -156,6 +156,20 @@ var SettingsDetail = function SettingsDetail(props) {
       setExtraSubCatOpen(false);
     }
   }, [category]);
+
+  var onCloseSidebar = function onCloseSidebar(e) {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!open) return;
+    document.addEventListener('keydown', onCloseSidebar);
+    return function () {
+      return document.removeEventListener('keydown', onCloseSidebar);
+    };
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "catDescription"
   }, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderIcons, null, (category === null || category === void 0 ? void 0 : category.support_url) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

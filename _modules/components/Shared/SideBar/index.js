@@ -73,6 +73,20 @@ var SideBar = function SideBar(props) {
     if (!open) return;
     actionSidebar(true);
   }, [open, defaultSideBarWidth]);
+
+  var onCloseSidebar = function onCloseSidebar(e) {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!open) return;
+    document.addEventListener('keydown', onCloseSidebar);
+    return function () {
+      return document.removeEventListener('keydown', onCloseSidebar);
+    };
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BarContainer, {
     id: id,
     isBorderShow: isBorderShow,

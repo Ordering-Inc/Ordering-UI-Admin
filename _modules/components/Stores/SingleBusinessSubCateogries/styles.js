@@ -32,7 +32,7 @@ var AccordionSection = _styledComponents.default.div(_templateObject || (_templa
 
 exports.AccordionSection = AccordionSection;
 
-var AccordionStyled = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n\n  .rotate {\n    transform: rotate(-90deg);\n  }\n\n  .accordion__icon {\n    margin-right: 10px;\n    transition: transform 0.3s ease;\n    ", "\n  }\n\n  @media (min-width: 411px){\n    flex-direction: row;\n  }\n\n"])), function (props) {
+var AccordionStyled = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n\n  .rotate {\n    transform: rotate(90deg);\n  }\n\n  .accordion__icon {\n    margin-right: 10px;\n    transition: transform 0.3s ease;\n    ", "\n  }\n\n  @media (min-width: 411px){\n    flex-direction: row;\n  }\n\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-left: initial;\n    "])));

@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactHookForm = require("react-hook-form");
+
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 
 var _reactBootstrap = require("react-bootstrap");
@@ -69,11 +71,14 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       addChangesState = props.addChangesState,
       handleAddOption = props.handleAddOption,
       business = props.business,
-      cleanChangesState = props.cleanChangesState,
       editOptionId = props.editOptionId,
       handleDeleteExtra = props.handleDeleteExtra,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
-      handleSucccessDeleteOption = props.handleSucccessDeleteOption;
+      handleSucccessDeleteOption = props.handleSucccessDeleteOption,
+      curOption = props.curOption,
+      openModal = props.openModal,
+      setOpenModal = props.setOpenModal,
+      handleOpenModal = props.handleOpenModal;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -82,6 +87,11 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
+
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit,
+      register = _useForm.register,
+      errors = _useForm.errors;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -104,16 +114,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       confirm = _useState6[0],
       setConfirm = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      curOption = _useState8[0],
-      setCurOption = _useState8[1];
-
-  var _useState9 = (0, _react.useState)({}),
-      _useState10 = _slicedToArray(_useState9, 2),
-      openModal = _useState10[0],
-      setOpenModal = _useState10[1];
 
   var closeAlert = function closeAlert() {
     cleanEditErrors();
@@ -189,32 +189,20 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     document.getElementById('extra_options').style.width = value ? width > 1000 ? '500px' : '100%' : '0';
   };
 
-  var handleAddOptionClick = function handleAddOptionClick() {
-    if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) === '' || !(addChangesState !== null && addChangesState !== void 0 && addChangesState.name) || (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === '' || (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === '') {
-      var errorContent = [];
-      if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) === '' || !(addChangesState !== null && addChangesState !== void 0 && addChangesState.name)) errorContent.push(t('NAME_REQUIRED', 'The name is required.'));
-      if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === '') errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'));
-      if ((addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === '') errorContent.push(t('MAX_PURCHASED_REQUIRED', 'The max is required.'));
+  var onSubmit = function onSubmit() {
+    handleAddOption();
+  };
 
-      if (errorContent.length) {
-        setAlertState({
-          open: true,
-          content: errorContent
-        });
-      }
-    } else {
-      handleAddOption();
+  (0, _react.useEffect)(function () {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(function (error) {
+          return error.message;
+        })
+      });
     }
-  };
-
-  var handleOpenModal = function handleOpenModal(option, name) {
-    cleanChangesState(_objectSpread(_objectSpread({}, changesState), {}, {
-      changes: {}
-    }));
-    setCurOption(option);
-    setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, _defineProperty({}, name, true)));
-  };
-
+  }, [errors]);
   (0, _react.useEffect)(function () {
     if (isMenuOpen) {
       if (width < 1000) {
@@ -279,27 +267,37 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.OptionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement("th", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement("th", null))), ((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options) && ((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.options.map(function (option) {
-    return /*#__PURE__*/_react.default.createElement("tbody", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.OptionsList, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, {
+    isHeader: true
+  }, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles2.MinimumPurchase, {
+    isHeader: true
+  }, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, {
+    isHeader: true
+  }, t('MAX', 'Max'))), ((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options) && ((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.options.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {
       key: option.id,
       onClick: function onClick() {
         return handleOpenModal(option, 'edit');
       }
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, null, option !== null && option !== void 0 && option.image ? /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, null, option !== null && option !== void 0 && option.image ? /*#__PURE__*/_react.default.createElement("img", {
       src: option === null || option === void 0 ? void 0 : option.image,
       alt: "option image",
       loading: "lazy"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null)), /*#__PURE__*/_react.default.createElement("span", null, option.name))), /*#__PURE__*/_react.default.createElement("td", null, option === null || option === void 0 ? void 0 : option.min), /*#__PURE__*/_react.default.createElement("td", null, option === null || option === void 0 ? void 0 : option.max), /*#__PURE__*/_react.default.createElement("td", null)));
-  })), /*#__PURE__*/_react.default.createElement("tbody", {
-    className: "add_option"
-  }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement("input", {
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null)), /*#__PURE__*/_react.default.createElement("span", null, option.name)), /*#__PURE__*/_react.default.createElement(_styles2.MinimumPurchase, null, option === null || option === void 0 ? void 0 : option.min), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, null, option === null || option === void 0 ? void 0 : option.max));
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.AddOptionForm, {
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement("input", {
     name: "name",
     value: (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) || '',
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     onChange: function onChange(e) {
       return handleChangeAddOption(e);
-    }
-  }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
+    },
+    ref: register({
+      required: t('NAME_REQUIRED', 'The name is required.')
+    }),
+    autoComplete: "off"
+  })), /*#__PURE__*/_react.default.createElement("input", {
     name: "min",
     value: addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min,
     onChange: function onChange(e) {
@@ -309,8 +307,12 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
-    }
-  })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
+    },
+    ref: register({
+      required: t('MIN_PURCHASED_REQUIRED', 'The min is required.')
+    }),
+    autoComplete: "off"
+  }), /*#__PURE__*/_react.default.createElement("input", {
     name: "max",
     value: addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max,
     onChange: function onChange(e) {
@@ -320,12 +322,14 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
-    }
-  })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, {
-    onClick: function onClick() {
-      return handleAddOptionClick();
-    }
-  }))))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    },
+    ref: register({
+      required: t('MAX_PURCHASED_REQUIRED', 'The max is required.')
+    }),
+    autoComplete: "off"
+  }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    type: "submit"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null)))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

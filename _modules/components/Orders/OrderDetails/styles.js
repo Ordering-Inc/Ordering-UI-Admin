@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -43,25 +43,28 @@ var SkeletonWrapper = _styledComponents.default.div(_templateObject8 || (_templa
 
 exports.SkeletonWrapper = SkeletonWrapper;
 
-var OrderDetailsContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 30px 20px;\n  box-sizing: border-box;\n  width: 100%;\n  overflow-x: hidden;\n"])));
+var OrderDetailsContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 30px 20px;\n  box-sizing: border-box;\n  width: 100%;\n  overflow-x: hidden;\n\n  ", "\n"])), function (_ref3) {
+  var noScroll = _ref3.noScroll;
+  return noScroll && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    overflow: hidden;\n  "])));
+});
 
 exports.OrderDetailsContent = OrderDetailsContent;
 
-var OrderDetailsExtraContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 30px 20px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n"])), function (props) {
+var OrderDetailsExtraContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 30px 20px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n"])), function (props) {
   var _props$theme3;
 
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "])));
 });
 
 exports.OrderDetailsExtraContent = OrderDetailsExtraContent;
 
-var ChatContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-top: 40px;\n  height: calc(100% - 40px);\n  overflow: hidden;\n"])), function (props) {
+var ChatContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-top: 40px;\n  height: calc(100% - 40px);\n  overflow: hidden;\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 
 exports.ChatContainer = ChatContainer;
 
-var ButtonLink = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px;\n  margin: 0 5px;\n\n  &:hover {\n    background-color: ", ";\n    border-radius: 5px;\n  }\n\n  svg {\n    color: ", ";\n    font-size: 24px;\n  }\n"])), function (props) {
+var ButtonLink = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px;\n  margin: 0 5px;\n\n  &:hover {\n    background-color: ", ";\n    border-radius: 5px;\n  }\n\n  svg {\n    color: ", ";\n    font-size: 24px;\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.secundary;
@@ -73,7 +76,7 @@ var ButtonLink = _styledComponents.default.div(_templateObject14 || (_templateOb
 
 exports.ButtonLink = ButtonLink;
 
-var OrderStatus = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin: 20px 0;\n\n  h2 {\n    color: ", ";\n    margin: 0px;\n    font-size: 16px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    margin: 0px;\n  }\n\n  > div:not(:first-child) {\n    min-width: 40%;\n    border-color: ", ";\n    border-radius: 8px;\n    > div:first-child {\n      background-color: ", ";\n      p {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
+var OrderStatus = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin: 20px 0;\n\n  h2 {\n    color: ", ";\n    margin: 0px;\n    font-size: 16px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    margin: 0px;\n  }\n\n  > div:not(:first-child) {\n    min-width: 40%;\n    border-color: ", ";\n    border-radius: 8px;\n    > div:first-child {\n      background-color: ", ";\n      p {\n        color: ", ";\n      }\n    }\n  }\n\n  ", "\n"])), function (props) {
   var _props$theme$colors3;
 
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.headingColor;
@@ -91,15 +94,18 @@ var OrderStatus = _styledComponents.default.div(_templateObject15 || (_templateO
   return (_props$theme$colors6 = props.theme.colors) === null || _props$theme$colors6 === void 0 ? void 0 : _props$theme$colors6.secundary;
 }, function (props) {
   return props.theme.colors.secundaryContrast;
+}, function (_ref4) {
+  var isDisabled = _ref4.isDisabled;
+  return isDisabled && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 });
 
 exports.OrderStatus = OrderStatus;
 
-var StatusBarContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n"])));
+var StatusBarContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n"])));
 
 exports.StatusBarContainer = StatusBarContainer;
 
-var StatusBarStyled = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  height: 10px;\n  border-radius: 10px;\n  background: ", ";\n"])), function (props) {
+var StatusBarStyled = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  height: 10px;\n  border-radius: 10px;\n  background: ", ";\n"])), function (props) {
   return "linear-gradient(to right, ".concat(props.theme.colors.primary, " ").concat(props.percentage, "%, ").concat(props.theme.colors.borderColor, " ").concat(props.percentage, "%)");
 });
 
@@ -109,7 +115,7 @@ var StatusBar = function StatusBar(props) {
 
 exports.StatusBar = StatusBar;
 
-var AdvancedLogistic = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin: 20px 0;\n\n  > div {\n    p {\n      color: ", ";\n      margin: 0px;\n\n      &:first-child {\n        font-weight: 500;\n        font-size: 14px;\n      }\n      &:not(:first-child) {\n        font-size: 12px;\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
+var AdvancedLogistic = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin: 20px 0;\n\n  > div {\n    p {\n      color: ", ";\n      margin: 0px;\n\n      &:first-child {\n        font-weight: 500;\n        font-size: 14px;\n      }\n      &:not(:first-child) {\n        font-size: 12px;\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors7;
 
   return (_props$theme$colors7 = props.theme.colors) === null || _props$theme$colors7 === void 0 ? void 0 : _props$theme$colors7.headingColor;
@@ -119,7 +125,7 @@ var AdvancedLogistic = _styledComponents.default.div(_templateObject18 || (_temp
 
 exports.AdvancedLogistic = AdvancedLogistic;
 
-var OrderProducts = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding: 10px 0 10px 0;\n  border-bottom: 1px solid #E9ECEF;\n  h2 {\n    color: ", ";\n    font-size: 18px;\n  }\n"])), function (props) {
+var OrderProducts = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  padding: 10px 0 10px 0;\n  border-bottom: 1px solid #E9ECEF;\n  h2 {\n    color: ", ";\n    font-size: 18px;\n  }\n"])), function (props) {
   var _props$theme$colors8;
 
   return (_props$theme$colors8 = props.theme.colors) === null || _props$theme$colors8 === void 0 ? void 0 : _props$theme$colors8.headingColor;
@@ -127,10 +133,10 @@ var OrderProducts = _styledComponents.default.div(_templateObject19 || (_templat
 
 exports.OrderProducts = OrderProducts;
 
-var CloseButtonWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  z-index: 100;\n  position: absolute;\n  top: 30px;\n  ", "\n"])), function (props) {
+var CloseButtonWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  z-index: 100;\n  position: absolute;\n  top: 30px;\n  ", "\n"])), function (props) {
   var _props$theme4;
 
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    right: 20px;\n  "])));
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    right: 20px;\n  "])));
 });
 
 exports.CloseButtonWrapper = CloseButtonWrapper;

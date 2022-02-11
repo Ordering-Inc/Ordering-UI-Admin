@@ -91,6 +91,20 @@ var UserDetailsLateralBar = function UserDetailsLateralBar(props) {
       toggleMainContent();
     }
   }, [extraOpen]);
+
+  var onCloseSidebar = function onCloseSidebar(e) {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!open) return;
+    document.addEventListener('keydown', onCloseSidebar);
+    return function () {
+      return document.removeEventListener('keydown', onCloseSidebar);
+    };
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles2.LateralBarContainer, {
     id: "user_lateral_bar"
   }, /*#__PURE__*/_react.default.createElement(_styles2.WrapUserDetails, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

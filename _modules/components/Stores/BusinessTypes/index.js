@@ -113,7 +113,7 @@ var BusinessTypes = function BusinessTypes(props) {
 
   var handleSuccessAddBusinessType = function handleSuccessAddBusinessType(result) {
     setIsAdd(false);
-    setBusinessTypes([].concat(_toConsumableArray(businessTypes), [result]));
+    setBusinessTypes && setBusinessTypes([].concat(_toConsumableArray(businessTypes), [result]));
   };
 
   (0, _react.useEffect)(function () {

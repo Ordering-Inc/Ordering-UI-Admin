@@ -317,7 +317,9 @@ var OrdersTable = function OrdersTable(props) {
     };
   }, [isTourOpen, currentTourStep]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
-    isSelectedOrders: isSelectedOrders
+    id: "orderTable",
+    isSelectedOrders: isSelectedOrders,
+    noScroll: isTourOpen && currentTourStep === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
     isSelectedOrders: isSelectedOrders
@@ -517,7 +519,8 @@ var OrdersTable = function OrdersTable(props) {
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.cellphone)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("td", null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
-      className: "driverInfo"
+      className: "driverInfo",
+      noClick: isTourOpen && currentTourStep === 0
     }, /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
       orderView: true,
       padding: "5px 0",

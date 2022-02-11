@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Switch = require("../../../styles/Switch");
 
-var _GoTriangleDown = _interopRequireDefault(require("@meronex/icons/go/GoTriangleDown"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
@@ -143,7 +143,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
     onDragStart: function onDragStart(e) {
       return handleDragStart(e);
     }
-  }), (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 ? void 0 : category.subcategories.length) > 0 && /*#__PURE__*/_react.default.createElement(_GoTriangleDown.default, {
+  }), (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 ? void 0 : category.subcategories.length) > 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretRightFill, {
     className: setRotate
   }), /*#__PURE__*/_react.default.createElement("span", null, category === null || category === void 0 ? void 0 : category.name)), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: category === null || category === void 0 ? void 0 : category.enabled,

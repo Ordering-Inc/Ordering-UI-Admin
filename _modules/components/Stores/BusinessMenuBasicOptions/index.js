@@ -19,7 +19,7 @@ var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckb
 
 var _Shared = require("../../Shared");
 
-var _CategoryTreeNode = require("../CategoryTreeNode");
+var _BusinessMenuCategoryTreeNode = require("../BusinessMenuCategoryTreeNode");
 
 var _styles2 = require("./styles");
 
@@ -186,7 +186,7 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
   }, ((_formState$changes$al3 = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.all_products) !== null && _formState$changes$al3 !== void 0 ? _formState$changes$al3 : (_businessMenuState$me10 = businessMenuState.menu) === null || _businessMenuState$me10 === void 0 ? void 0 : _businessMenuState$me10.all_products) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('ALL_PRODUCTS', 'All products'))), !((_formState$changes$al4 = formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.all_products) !== null && _formState$changes$al4 !== void 0 ? _formState$changes$al4 : (_businessMenuState$me11 = businessMenuState.menu) === null || _businessMenuState$me11 === void 0 ? void 0 : _businessMenuState$me11.all_products) && (business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category) {
-    return /*#__PURE__*/_react.default.createElement(_CategoryTreeNode.CategoryTreeNode, {
+    return /*#__PURE__*/_react.default.createElement(_BusinessMenuCategoryTreeNode.BusinessMenuCategoryTreeNode, {
       key: category.id,
       index: 0,
       category: category,

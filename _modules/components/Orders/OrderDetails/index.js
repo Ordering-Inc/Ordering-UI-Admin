@@ -75,7 +75,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       setCurrentTourStep = props.setCurrentTourStep,
       currentTourStep = props.currentTourStep,
       isTourFlag = props.isTourFlag,
-      setIsTourFlag = props.setIsTourFlag;
+      setIsTourFlag = props.setIsTourFlag,
+      setIsTourOpen = props.setIsTourOpen;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -395,17 +396,35 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 
   var handleChangeTour = function handleChangeTour(evt) {
     if (!isTourOpen) return;
-    setCurrentTourStep(2);
+
+    if (isTourOpen && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1) {
+      setCurrentTourStep(2);
+      return;
+    }
+
+    if (isTourOpen && setCurrentTourStep) {
+      handleOpenMessages('chat');
+      setTimeout(function () {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3);
+      }, 1);
+    }
   };
 
   var handleChangeKeyboard = function handleChangeKeyboard(evt) {
     if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1);
-    if (evt.keyCode === 39 && currentTourStep === 1) setCurrentTourStep(2);
+    if (evt.keyCode === 39 && currentTourStep === 1 && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1) setCurrentTourStep(2);
+
+    if (evt.keyCode === 39 && currentTourStep === 1 && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) {
+      handleOpenMessages('chat');
+      setTimeout(function () {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3);
+      }, 1);
+    }
 
     if (evt.keyCode === 37 && currentTourStep === 3) {
       handleCloseMessages();
       setExtraOpen(false);
-      setCurrentTourStep(2);
+      (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 ? setCurrentTourStep(2) : setCurrentTourStep(1);
       setIsTourFlag(false);
     }
 
@@ -435,6 +454,20 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       setCurrentTourStep(3);
     }, 1);
   }, [isTourFlag]);
+
+  var onCloseSidebar = function onCloseSidebar(e) {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!open) return;
+    document.addEventListener('keydown', onCloseSidebar);
+    return function () {
+      return document.removeEventListener('keydown', onCloseSidebar);
+    };
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     isSelectedOrders: isSelectedOrders,
     id: "orderDetails",
@@ -473,6 +506,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   })), order && Object.keys(order).length > 0 && !loading && /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsContent, {
     "data-tour": "tour_detail",
+    noScroll: isTourOpen && currentTourStep === 2,
     onClick: function onClick(e) {
       return handleChangeTour(e);
     }
@@ -481,8 +515,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     extraOpen: extraOpen,
     actionSidebar: actionSidebar,
     handleOpenMetaFields: handleOpenMetaFields,
-    handleOpenMessages: handleOpenMessages
-  }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    handleOpenMessages: handleOpenMessages,
+    isTourOpen: isTourOpen,
+    currentTourStep: currentTourStep,
+    setIsTourOpen: setIsTourOpen
+  }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
+    isDisabled: isTourOpen && currentTourStep === 1
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   }))), /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,

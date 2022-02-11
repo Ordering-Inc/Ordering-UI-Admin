@@ -17,6 +17,8 @@ var _styles = require("../../../styles");
 
 var _InvoiceDetails = require("../InvoiceDetails");
 
+var _Shared = require("../../Shared");
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles2 = require("./styles");
@@ -93,11 +95,13 @@ var InvoiceManager = function InvoiceManager(props) {
         return handleOpenInvoiceDetail(invoice.key);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, invoice === null || invoice === void 0 ? void 0 : invoice.icon), /*#__PURE__*/_react.default.createElement(_styles2.InvoiceListDetailsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, invoice === null || invoice === void 0 ? void 0 : invoice.name), /*#__PURE__*/_react.default.createElement("p", null, invoice === null || invoice === void 0 ? void 0 : invoice.description)));
-  }))), openInvoiceDetail && /*#__PURE__*/_react.default.createElement(_InvoiceDetails.InvoiceDetails, {
+  }))), openInvoiceDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    sidebarId: "invoice_details",
     open: openInvoiceDetail,
-    onClose: handleCloseInvoiceDetail,
+    onClose: handleCloseInvoiceDetail
+  }, /*#__PURE__*/_react.default.createElement(_InvoiceDetails.InvoiceDetails, {
     selectedInvoice: selectedInvoice
-  }));
+  })));
 };
 
 exports.InvoiceManager = InvoiceManager;

@@ -34,7 +34,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var WizardOrders = function WizardOrders(props) {
   var isTourOpen = props.isTourOpen,
       setIsTourOpen = props.setIsTourOpen,
-      currentStep = props.currentStep;
+      currentStep = props.currentStep,
+      detailsOrder = props.detailsOrder;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -61,7 +62,7 @@ var WizardOrders = function WizardOrders(props) {
   }, {
     selector: '[data-tour="tour_message"]',
     content: function content() {
-      return /*#__PURE__*/_react.default.createElement(_styles.HelperContent, null, /*#__PURE__*/_react.default.createElement("span", null, "4."), /*#__PURE__*/_react.default.createElement("p", null, t('TOUR_ORDER_CHAT', 'Finally, you can use the order chat to communicate with customer or driver')));
+      return /*#__PURE__*/_react.default.createElement(_styles.HelperContent, null, /*#__PURE__*/_react.default.createElement("span", null, (detailsOrder === null || detailsOrder === void 0 ? void 0 : detailsOrder.delivery_type) === 1 ? 4 : 3, "."), /*#__PURE__*/_react.default.createElement("p", null, t('TOUR_ORDER_CHAT', 'Finally, you can use the order chat to communicate with customer or driver')));
     },
     position: 'left'
   }, {

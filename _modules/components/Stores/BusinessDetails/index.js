@@ -70,7 +70,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessDetailsUI = function BusinessDetailsUI(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4;
 
   var open = props.open,
       businessId = props.businessId,
@@ -177,6 +177,20 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     setExtraOpen(false);
     setIsExtendExtraOpen(false);
   }, [businessId]);
+
+  var onCloseSidebar = function onCloseSidebar(e) {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!open) return;
+    document.addEventListener('keydown', onCloseSidebar);
+    return function () {
+      return document.removeEventListener('keydown', onCloseSidebar);
+    };
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
     id: "business_details_bar"
   }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_BusinessSummary.BusinessSummary, {
@@ -200,7 +214,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleAddBusinessOwner: handleAddBusinessOwner,
     formState: formState,
     setFormState: setFormState,
-    businessTypes: businessTypes,
+    businessTypes: businessTypes || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.types),
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     setBusinessTypes: setBusinessTypes,
     handleSuccessAddBusinessItem: handleSuccessAddBusinessItem,
@@ -230,14 +244,14 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleSuccessUpdate: handleUpdateBusinessState
   }), selectedItem === 'promotions' && /*#__PURE__*/_react.default.createElement(_BusinessPromotionList.BusinessPromotionList, {
-    promotions: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.offers,
-    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.id,
+    promotions: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.offers,
+    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.id,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleSuccessUpdate: handleUpdateBusinessState
   }), selectedItem === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_BusinessCustomFields.BusinessCustomFields, {
     businessId: businessState === null || businessState === void 0 ? void 0 : businessState.business.id,
-    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.metafields,
+    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.metafields,
     handleSuccessAddMetaFields: function handleSuccessAddMetaFields(result) {
       return handleSuccessAddBusinessItem('metafields', result);
     },

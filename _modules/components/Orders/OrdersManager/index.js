@@ -164,6 +164,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   };
 
   var _handleOpenTour = function handleOpenTour() {
+    var orderElement = document.getElementById('orderTable');
+    if (orderElement) orderElement.scrollTo(0, 0);
     setCurrentTourStep(0);
     setIsTourOpen(true);
     handleBackRedirect();
@@ -260,11 +262,13 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setCurrentTourStep: setCurrentTourStep,
     currentTourStep: currentTourStep,
     isTourFlag: isTourFlag,
-    setIsTourFlag: setIsTourFlag
+    setIsTourFlag: setIsTourFlag,
+    setIsTourOpen: setIsTourOpen
   }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), isTourOpen && /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,
-    currentStep: currentTourStep
+    currentStep: currentTourStep,
+    detailsOrder: detailsOrder
   }));
 };
 

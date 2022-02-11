@@ -27,8 +27,6 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("../../../styles");
 
-var _UserTypeSelector = require("../UserTypeSelector");
-
 var _Shared = require("../../Shared");
 
 var _styles2 = require("./styles");
@@ -70,7 +68,6 @@ var UsersList = function UsersList(props) {
       usersList = props.usersList,
       paginationProps = props.paginationProps,
       getUsers = props.getUsers,
-      handleChangeUserType = props.handleChangeUserType,
       handleChangeActiveUser = props.handleChangeActiveUser,
       handleDeleteUser = props.handleDeleteUser,
       selectedUsers = props.selectedUsers,
@@ -117,7 +114,7 @@ var UsersList = function UsersList(props) {
   };
 
   var onChangeUserDetails = function onChangeUserDetails(e, user) {
-    var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action');
+    var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_enable_control') || e.target.closest('.user_action');
     if (isInvalid) return;
     handleOpenUserDetails(user);
   };
@@ -148,22 +145,6 @@ var UsersList = function UsersList(props) {
             id: user.id,
             enabled: enabled
           });
-        }
-      });
-    }
-  };
-
-  var onChangeUserType = function onChangeUserType(user, type) {
-    if (user.level !== 0) {
-      handleChangeUserType(type);
-    } else {
-      setConfirmAdmin({
-        open: true,
-        handleOnConfirm: function handleOnConfirm() {
-          setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
-            open: false
-          }));
-          handleChangeUserType(type);
         }
       });
     }
@@ -205,9 +186,7 @@ var UsersList = function UsersList(props) {
       width: 100
     })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 50
@@ -236,15 +215,7 @@ var UsersList = function UsersList(props) {
       className: "bold"
     }, user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItemsContainer, null, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserTypeWrapper, {
-      className: "user_type_selector"
-    }, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
-      userId: user.id,
-      defaultUserType: user === null || user === void 0 ? void 0 : user.level,
-      handleChangeUserType: function handleChangeUserType(type) {
-        return onChangeUserType(user, type);
-      }
-    }), /*#__PURE__*/_react.default.createElement("p", null, (_getUserType = getUserType(user === null || user === void 0 ? void 0 : user.level)) === null || _getUserType === void 0 ? void 0 : _getUserType.value))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
+    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserTypeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, (_getUserType = getUserType(user === null || user === void 0 ? void 0 : user.level)) === null || _getUserType === void 0 ? void 0 : _getUserType.value))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
       className: "user_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       notAsync: user.level === 0,

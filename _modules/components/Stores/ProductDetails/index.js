@@ -152,6 +152,20 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     setExtraOpen(false);
     setIsExtendExtraOpen(false);
   }, [props.product]);
+
+  var onCloseSidebar = function onCloseSidebar(e) {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose();
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!open) return;
+    document.addEventListener('keydown', onCloseSidebar);
+    return function () {
+      return document.removeEventListener('keydown', onCloseSidebar);
+    };
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "product_details"
   }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_ProductSummary.ProductSummary, _extends({}, props, {
@@ -190,7 +204,7 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     business: business,
     categoryId: productState.product.category_id,
     product: productState.product,
-    handleUpdateBusinessState: handleUpdateBusinessState
+    handleSuccessUpdate: handleSuccessUpdate
   }), showOption === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_ProductMetaFields.ProductMetaFields, {
     businessId: business.id,
     categoryId: productState.product.category_id,

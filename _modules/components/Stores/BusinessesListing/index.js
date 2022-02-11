@@ -225,6 +225,18 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     };
   }();
 
+  var handleViewMethod = function handleViewMethod(method) {
+    setViewMethod(method);
+
+    if (method === 'list') {
+      getPageBusinesses(10, 1);
+    }
+
+    if (method === 'card') {
+      getPageBusinesses(50, 1);
+    }
+  };
+
   (0, _react.useEffect)(function () {
     handleSetStorage();
   }, []);
@@ -240,12 +252,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperView, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
     active: viewMethod === 'card',
     onClick: function onClick() {
-      return setViewMethod('card');
+      return handleViewMethod('card');
     }
   }, /*#__PURE__*/_react.default.createElement(_BsGrid.default, null)), /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
     active: viewMethod === 'list',
     onClick: function onClick() {
-      return setViewMethod('list');
+      return handleViewMethod('list');
     }
   }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     businessTypes: props.businessTypes,
@@ -264,7 +276,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleOpenBusinessDetails: handleOpenBusinessDetails,
     handleOpenAddBusiness: handleOpenAddBusiness,
-    searchValue: searchValue,
     isTutorialMode: isTutorialMode
   })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails // business={detailsBusiness}
@@ -305,8 +316,6 @@ var BusinessesListing = function BusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessesListingUI,
     asDashboard: true,
-    initialPageSize: 50,
-    loadMorePageSize: 10,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
     isSearchByBusinessPhone: true

@@ -66,7 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
 
 var ProductDesktopPreview = function ProductDesktopPreview(props) {
-  var _product$product, _product$product2, _theme$defaultLanguag, _theme$defaultLanguag2;
+  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _theme$defaultLanguag2;
 
   var product = props.product,
       productCart = props.productCart,
@@ -122,18 +122,20 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     var imageList = [];
     imageList.push((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product));
 
-    var _iterator = _createForOfIteratorHelper(product === null || product === void 0 ? void 0 : product.gallery),
-        _step;
+    if (product !== null && product !== void 0 && product.gallery) {
+      var _iterator = _createForOfIteratorHelper(product === null || product === void 0 ? void 0 : product.gallery),
+          _step;
 
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var galleryItem = _step.value;
-        imageList.push(galleryItem.file);
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var galleryItem = _step.value;
+          imageList.push(galleryItem.file);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
     }
 
     setGallery(imageList);
@@ -215,38 +217,14 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
   })), /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     onSwiper: setThumbsSwiper,
     spaceBetween: 20,
-    slidesPerView: 5,
+    slidesPerView: 6,
     breakpoints: {
       0: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      },
-      300: {
         slidesPerView: 4,
-        spaceBetween: 20
+        spaceBetween: 10
       },
-      400: {
-        slidesPerView: 5,
-        spaceBetween: 20
-      },
-      550: {
+      768: {
         slidesPerView: 6,
-        spaceBetween: 20
-      },
-      769: {
-        slidesPerView: 4,
-        spaceBetween: 20
-      },
-      1000: {
-        slidesPerView: 5,
-        spaceBetween: 20
-      },
-      1400: {
-        slidesPerView: 6,
-        spaceBetween: 20
-      },
-      1600: {
-        slidesPerView: 7,
         spaceBetween: 20
       }
     },
@@ -266,7 +244,7 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     className: "price-wrapper"
   }, /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.offer_price) && /*#__PURE__*/_react.default.createElement("span", {
     className: "price-discount"
-  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles2.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles2.Divider, null), /*#__PURE__*/_react.default.createElement(_styles2.ProductEdition, null, ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles2.ProductTabContainer, {
+  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles2.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles2.Divider, null), /*#__PURE__*/_react.default.createElement(_styles2.ProductEdition, null, ((product === null || product === void 0 ? void 0 : (_product$ingredients = product.ingredients) === null || _product$ingredients === void 0 ? void 0 : _product$ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : (_product$extras = product.extras) === null || _product$extras === void 0 ? void 0 : _product$extras.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles2.ProductTabContainer, {
     id: "all"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Tabs, {
     variant: "primary"
@@ -290,7 +268,7 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     }
   }, t('EXTRA', 'Extra')))), /*#__PURE__*/_react.default.createElement("div", {
     id: "ingredients"
-  }, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperIngredients, {
+  }, (product === null || product === void 0 ? void 0 : (_product$ingredients2 = product.ingredients) === null || _product$ingredients2 === void 0 ? void 0 : _product$ingredients2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), (product === null || product === void 0 ? void 0 : product.ingredients) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperIngredients, {
     isProductSoldout: isSoldOut
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     var _productCart$ingredie;
@@ -300,7 +278,7 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       defaultChecked: (_productCart$ingredie = productCart.ingredients["id:".concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id)]) === null || _productCart$ingredie === void 0 ? void 0 : _productCart$ingredie.selected
     }), /*#__PURE__*/_react.default.createElement("span", null, ingredient.name));
-  }))), /*#__PURE__*/_react.default.createElement("div", {
+  }))), (product === null || product === void 0 ? void 0 : product.extras) && /*#__PURE__*/_react.default.createElement("div", {
     id: "extra"
   }, product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
     return extra.options.map(function (option) {
