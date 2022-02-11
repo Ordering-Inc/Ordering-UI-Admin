@@ -6,7 +6,8 @@ import {
 import {
   Trash,
   PlusSquare,
-  PlusCircleFill
+  PlusCircleFill,
+  DashCircleFill
 } from 'react-bootstrap-icons'
 import { Alert } from '../Confirm'
 import { ScheduleCopyTimes } from '../ScheduleCopyTimes'
@@ -19,7 +20,8 @@ import {
   SplitLine,
   IconWrapper,
   SelectWrapper,
-  AddScheduleIconWrapper
+  AddScheduleIconWrapper,
+  TrashIconWrapper
 } from './styles'
 
 const ScheduleUI = (props) => {
@@ -154,13 +156,13 @@ const ScheduleUI = (props) => {
                         optionInnerMaxHeight='300px'
                       />
                     </SelectWrapper>
-                    <IconWrapper
+                    <TrashIconWrapper
                       isHide={schedule?.lapses.length <= 1}
                     >
                       <Trash
                         onClick={() => handleDeleteSchedule(daysOfWeekIndex, index)}
                       />
-                    </IconWrapper>
+                    </TrashIconWrapper>
                   </div>
                 ))}
                 {openAddSchedule[daysOfWeekIndex] && (
@@ -195,6 +197,9 @@ const ScheduleUI = (props) => {
                     <AddScheduleIconWrapper>
                       <PlusCircleFill
                         onClick={() => handleAddSchedule(daysOfWeekIndex)}
+                      />
+                      <DashCircleFill
+                        onClick={() => handleOpenAddSchedule(null)}
                       />
                     </AddScheduleIconWrapper>
                   </div>
