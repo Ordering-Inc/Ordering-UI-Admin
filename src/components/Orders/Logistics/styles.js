@@ -9,28 +9,29 @@ export const WraaperLogs = styled.div`
   border-radius: 97px;
 `
 export const BubbleConsole = styled.div`
-  border-radius: 50px;
-  padding: 15px 25px;
-  max-width: 40%;
-  margin-bottom: 15px;
-  background: #EFEFEF;
+  border-radius: 5px;
+  padding: 10px 25px;
+  margin-bottom: 20px;
+  background: ${props => props.theme.colors.secundary};
   text-align: center;
   height: auto;
   overflow: hidden;
   overflow-wrap: break-word;
-  @media (min-width: 1024px){
-    max-width: 30%
-  }
+  max-width: 80%;
 `
 export const TimeofSent = styled.p`
   position: relative;
-  text-align: right;
   font-size: 0.8em;
   margin-block-start: 0.2em;
   margin-block-end: initial;
-
-  ${props => props.theme?.rtl && css`
-    text-align: left;
+  width: fit-content;
+  cursor: pointer;
+  font-weight: 600;
+  
+  ${props => props.theme?.rtl ? css`
+    margin-right: auto;
+  ` : css`
+    margin-left: auto;
   `}
 `
 export const Reason = styled.p`

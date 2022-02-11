@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 import {
   MessagesContainer,
@@ -433,7 +434,16 @@ export const MessagesUI = (props) => {
                       {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
                       <strong>{parseDate(order.created_at)}</strong> {' '}
                       {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
-                      <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
+                      <OverlayTrigger
+                        placement='top'
+                        overlay={
+                          <Tooltip>
+                            {parseDate(order.created_at)}
+                          </Tooltip>
+                        }
+                      >
+                        <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
+                      </OverlayTrigger>
                     </BubbleConsole>
                   </MessageConsole>
                 )}
@@ -472,7 +482,16 @@ export const MessagesUI = (props) => {
                                   <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
                                   {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
                                 </>
-                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                <OverlayTrigger
+                                  placement='top'
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
+                                >
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </OverlayTrigger>
                               </BubbleConsole>
                             ) : (
                               <BubbleConsole>
@@ -489,7 +508,16 @@ export const MessagesUI = (props) => {
                                     </>
                                   )}
                                 </>
-                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                <OverlayTrigger
+                                  placement='top'
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
+                                >
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </OverlayTrigger>
                               </BubbleConsole>
                             )}
                           </MessageConsole>
@@ -515,7 +543,16 @@ export const MessagesUI = (props) => {
                                   <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
                                   {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
                                 </>
-                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                <OverlayTrigger
+                                  placement='top'
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
+                                >
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </OverlayTrigger>
                               </BubbleConsole>
                             ) : (
                               <BubbleConsole>
@@ -532,7 +569,16 @@ export const MessagesUI = (props) => {
                                     </>
                                   )}
                                 </>
-                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                <OverlayTrigger
+                                  placement='top'
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
+                                >
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </OverlayTrigger>
                               </BubbleConsole>
                             )}
                           </MessageConsole>
@@ -542,7 +588,16 @@ export const MessagesUI = (props) => {
                             <BubbleCustomer>
                               <MessageSender>{message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})</MessageSender>
                               {message.comment}
-                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              <OverlayTrigger
+                                placement='top'
+                                overlay={
+                                  <Tooltip>
+                                    {parseDate(message.created_at)}
+                                  </Tooltip>
+                                }
+                              >
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </OverlayTrigger>
                             </BubbleCustomer>
                             <SendToContainer>
                               <p>{t('SEND_TO', 'Send to')}:</p>
@@ -583,7 +638,16 @@ export const MessagesUI = (props) => {
                                   {message.comment}
                                 </>
                               )}
-                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              <OverlayTrigger
+                                placement='top'
+                                overlay={
+                                  <Tooltip>
+                                    {parseDate(message.created_at)}
+                                  </Tooltip>
+                                }
+                              >
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </OverlayTrigger>
                             </BubbleCustomer>
                             <SendToContainer>
                               <p>{t('SEND_TO', 'Send to')}:</p>
@@ -619,7 +683,16 @@ export const MessagesUI = (props) => {
                             <BubbleBusines>
                               <MessageSender>{message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})</MessageSender>
                               {message.comment}
-                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              <OverlayTrigger
+                                placement='top'
+                                overlay={
+                                  <Tooltip>
+                                    {parseDate(message.created_at)}
+                                  </Tooltip>
+                                }
+                              >
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </OverlayTrigger>
                             </BubbleBusines>
                             <SendToContainer isReceived>
                               <p>{t('SEND_TO', 'Send to')}:</p>
@@ -660,7 +733,16 @@ export const MessagesUI = (props) => {
                                   {message.comment}
                                 </>
                               )}
-                              <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              <OverlayTrigger
+                                placement='top'
+                                overlay={
+                                  <Tooltip>
+                                    {parseDate(message.created_at)}
+                                  </Tooltip>
+                                }
+                              >
+                                <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                              </OverlayTrigger>
                             </BubbleBusines>
                             <SendToContainer isReceived>
                               <p>{t('SEND_TO', 'Send to')}:</p>

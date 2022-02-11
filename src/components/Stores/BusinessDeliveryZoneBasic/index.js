@@ -153,9 +153,7 @@ export const BusinessDeliveryZoneBasic = (props) => {
           disabled={loading}
         >
           {
-            loading
-              ? t('LOADING', 'loading')
-              : isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save')
+            isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save')
           }
         </Button>
       </BasicContainer>

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Switch } from '../../../styles/Switch'
-import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
+import { CaretRightFill } from 'react-bootstrap-icons'
 import { SingleBusinessCategory as SingleBusinessCategoryController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
@@ -108,7 +108,7 @@ const SingleBusinessSubCateogriesUI = (props) => {
                 />
                 {category?.subcategories && (
                   category?.subcategories.length > 0 && (
-                    <GoTriangleDown className={setRotate} />
+                    <CaretRightFill className={setRotate} />
                   )
                 )}
                 <span>{category?.name}</span>

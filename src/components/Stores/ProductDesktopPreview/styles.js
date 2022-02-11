@@ -116,7 +116,7 @@ export const SwiperWrapper = styled.div`
     .swiper-slide {
       opacity: 0.8;
       border-radius: 7.6px;
-      height: auto;
+      height: 60px;
 
       img {
         border-radius: 7.6px;

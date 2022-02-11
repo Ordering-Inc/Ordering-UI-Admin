@@ -31,8 +31,8 @@ export const BusinessProductsList = (props) => {
     slug: store,
     categoryId,
     productId,
-    handleSearchRedirect: () => {
-      events.emit('go_to_page', { page: 'store' })
+    handleStoresRedirect: () => {
+      events.emit('go_to_page', { page: 'businesses' })
     },
     onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {

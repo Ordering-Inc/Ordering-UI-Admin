@@ -152,7 +152,7 @@ export const ProductConfigOption = styled.div`
 export const ActionSelectorWrapper = styled.div`
   button {
     display: flex;
-    background: ${props => props.theme.colors.secundary} !important;
+    background: transparent !important;
     border: none;
     padding: 5px;
     border-radius: 8px;
@@ -163,7 +163,7 @@ export const ActionSelectorWrapper = styled.div`
       box-shadow: none !important;
     }
     svg {
-      color: ${props => props.theme.colors.headingColor};
+      color: #B1BCCC;
       font-size: 20px;
     }
 
@@ -172,10 +172,13 @@ export const ActionSelectorWrapper = styled.div`
     }
 
     &:hover {
-      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+      background: #1507260a !important;
+      > svg {
+        color:  #151b26;
+      }
     }
     &:active {
-      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+      background: #1507261a !important;
     }
   }
 

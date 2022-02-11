@@ -3,6 +3,8 @@ import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { InvoiceDetails } from '../InvoiceDetails'
+import { SideBar } from '../../Shared'
+
 import {
   List as MenuIcon,
   ShopWindow as BusinessIcon,
@@ -71,11 +73,15 @@ export const InvoiceManager = (props) => {
       </InvoiceManagerContainer>
       {
         openInvoiceDetail && (
-          <InvoiceDetails
+          <SideBar
+            sidebarId='invoice_details'
             open={openInvoiceDetail}
             onClose={handleCloseInvoiceDetail}
-            selectedInvoice={selectedInvoice}
-          />
+          >
+            <InvoiceDetails
+              selectedInvoice={selectedInvoice}
+            />
+          </SideBar>
         )
       }
     </>
