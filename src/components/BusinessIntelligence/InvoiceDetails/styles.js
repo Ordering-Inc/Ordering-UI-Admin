@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  display: flex;
+  /* display: flex;
   width: 0;
   position: fixed;
   box-shadow: -4px 0px 7px #ccc;
@@ -30,5 +30,5 @@ export const Container = styled.div`
   `}
   @media print {
     box-shadow: none;
-  }
+  } */
 `

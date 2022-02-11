@@ -32,6 +32,12 @@ export const HeaderActionBtnWrapper = styled.div`
       margin-right: 8px;
     `}
   }
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
 `
 
 export const DetailsList = styled.div`

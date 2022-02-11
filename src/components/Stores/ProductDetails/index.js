@@ -98,6 +98,18 @@ const ProductDetailsUI = (props) => {
     setIsExtendExtraOpen(false)
   }, [props.product])
 
+  const onCloseSidebar = (e) => {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (!open) return
+    document.addEventListener('keydown', onCloseSidebar)
+    return () => document.removeEventListener('keydown', onCloseSidebar)
+  }, [open])
+
   return (
     <Container id='product_details'>
       {(!isExtendExtraOpen || width < 1000) && (

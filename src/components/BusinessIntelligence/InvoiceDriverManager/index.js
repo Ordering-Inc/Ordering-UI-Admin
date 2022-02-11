@@ -13,8 +13,7 @@ import {
 } from './styles'
 import { IconButton } from '../../../styles'
 import {
-  Download,
-  XLg as CloseIcon
+  Download
 } from 'react-bootstrap-icons'
 import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
@@ -22,7 +21,6 @@ import { InvoiceDriverPdf } from '../InvoiceDriverPdf'
 
 const InvoiceDriverManagerUI = (props) => {
   const {
-    actionSidebar,
     exportInvoiceList,
     invocing,
     getOrders
@@ -61,12 +59,6 @@ const InvoiceDriverManagerUI = (props) => {
             disabled={!invocing?.driver || invocing?.driver === ''}
           >
             <Download />
-          </IconButton>
-          <IconButton
-            color='black'
-            onClick={() => actionSidebar(false)}
-          >
-            <CloseIcon />
           </IconButton>
         </HeaderActionBtnWrapper>
       </DetailsHeader>
