@@ -51,7 +51,7 @@ export const BusinessTypes = (props) => {
 
   const handleSuccessAddBusinessType = (result) => {
     setIsAdd(false)
-    setBusinessTypes([...businessTypes, result])
+    setBusinessTypes && setBusinessTypes([...businessTypes, result])
   }
 
   useEffect(() => {

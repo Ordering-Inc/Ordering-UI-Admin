@@ -162,30 +162,10 @@ export const UserTypeWrapper = styled.div`
     border-right: 1px solid ${props => props.theme.colors.borderColor};
     margin-right: 20px;
   `}
-  > div {
-    display: flex;
-
-    .select {
-      border: none;
-      padding: 0px;
-
-      > div {
-        padding: 0px;
-      }
-    }
-
-    .list {
-      .options {
-        border: 1px solid #E9ECEF;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-        border-radius: 8px;
-      }
-    }
-  }
   > p {
     margin: 5px 0 0 0;
-    font-size: 12px;
-    color: ${props => props.theme.colors.lightGray};
+    font-size: 14px;
+    font-weight: 500;
   }
 `
 

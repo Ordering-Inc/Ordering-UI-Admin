@@ -12,7 +12,7 @@ const AccordionStyled = styled.div`
   transition: background-color 0.3s ease;
 
   .rotate {
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
   }
 
   .accordion__icon {

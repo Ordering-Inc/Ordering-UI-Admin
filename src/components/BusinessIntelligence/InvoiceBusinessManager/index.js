@@ -4,17 +4,13 @@ import { DragScroll, SpinnerLoader } from '../../Shared'
 import {
   InvoiceDriversContainer,
   DetailsHeader,
-  HeaderActionBtnWrapper,
   DetailsList,
   Tab,
   Form,
   InvoicePdfWrapper,
   LoadingWrapper
 } from './styles'
-import { IconButton } from '../../../styles'
-import {
-  XLg as CloseIcon
-} from 'react-bootstrap-icons'
+
 import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceOrderType } from '../InvoiceOrdertype'
@@ -22,7 +18,6 @@ import { InvoiceBusinessPdf } from '../InvoiceBusinessPdf'
 
 const InvoiceBusinessManagerUI = (props) => {
   const {
-    actionSidebar,
     exportInvoiceList
   } = props
 
@@ -50,14 +45,6 @@ const InvoiceBusinessManagerUI = (props) => {
     <InvoiceDriversContainer>
       <DetailsHeader>
         <h2>{t('BUSINESS_INVOICE', 'Business invoice')}</h2>
-        <HeaderActionBtnWrapper>
-          <IconButton
-            color='black'
-            onClick={() => actionSidebar(false)}
-          >
-            <CloseIcon />
-          </IconButton>
-        </HeaderActionBtnWrapper>
       </DetailsHeader>
       <DetailsList>
         <DragScroll>

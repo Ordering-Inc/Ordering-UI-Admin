@@ -14,11 +14,20 @@ export const OrderDetailsHeader = (props) => {
     order,
     handleOpenMetaFields,
     handleOpenMessages,
-    actionSidebar
+    actionSidebar,
+    setIsTourOpen,
+    isTourOpen,
+    currentTourStep
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+
+  const closeSideBar = () => {
+    actionSidebar(false)
+    if (isTourOpen && currentTourStep === 1) setIsTourOpen(false)
+  }
+
   return (
     <OrderDetailsHeaderContainer>
       <div>
@@ -57,6 +66,7 @@ export const OrderDetailsHeader = (props) => {
         {user?.level !== 5 && (
           <ButtonLink
             onClick={() => handleOpenMessages('chat')}
+            isDisabled={isTourOpen && currentTourStep === 1}
           >
             <ChatIcon />
             {order?.unread_count > 0 && (
@@ -71,17 +81,19 @@ export const OrderDetailsHeader = (props) => {
         </ButtonLink>
         <ButtonLink
           onClick={() => handleOpenMessages('history')}
+          isDisabled={isTourOpen && currentTourStep === 1}
         >
           <Diagram3 />
         </ButtonLink>
         <ButtonLink
           onClick={() => handleOpenMetaFields()}
+          isDisabled={isTourOpen && currentTourStep === 1}
         >
           <ThreeDotsVertical />
         </ButtonLink>
         <ButtonLink
           color='black'
-          onClick={() => actionSidebar(false)}
+          onClick={() => closeSideBar()}
         >
           <CloseIcon />
         </ButtonLink>

@@ -48,7 +48,8 @@ const BusinessDeliveryZoneUI = (props) => {
     isAddValid,
     setIsAddValid,
     handleUpdateBusinessDeliveryZone,
-    handleAddBusinessDeliveryZone
+    handleAddBusinessDeliveryZone,
+    cleanFormState
   } = props
   const [, t] = useLanguage()
   const [{ parseNumber }] = useUtils()
@@ -77,6 +78,7 @@ const BusinessDeliveryZoneUI = (props) => {
   }
 
   const handleCloseOption = () => {
+    cleanFormState()
     setIsEdit(false)
     setIsAddValid(false)
     setIsExtendExtraOpen(false)

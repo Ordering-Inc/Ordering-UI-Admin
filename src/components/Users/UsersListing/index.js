@@ -34,7 +34,6 @@ const UsersListingUI = (props) => {
     paginationDetail,
     selectedUserActiveState,
     handleChangeUserActiveState,
-    handleChangeUserType,
     handleChangeActiveUser,
     handleDeleteUser,
     selectedUsers,
@@ -124,7 +123,6 @@ const UsersListingUI = (props) => {
           getUsers={getUsers}
           paginationProps={paginationProps}
           paginationDetail={paginationDetail}
-          handleChangeUserType={handleChangeUserType}
           handleChangeActiveUser={handleChangeActiveUser}
           handleDeleteUser={handleDeleteUser}
           selectedUsers={selectedUsers}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage, useUtils, BusinessPromotionList as BusinessPromotionListController } from 'ordering-components-admin'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { LayoutThreeColumns, XLg } from 'react-bootstrap-icons'
+import { XLg } from 'react-bootstrap-icons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Button, IconButton, Switch } from '../../../styles'
@@ -95,7 +95,6 @@ const BusinessPromotionListUI = (props) => {
               <th>
                 <ActionsWrapper>
                   <span>{t('ACTIONS', 'Actions')}</span>
-                  <LayoutThreeColumns />
                 </ActionsWrapper>
               </th>
             </tr>
