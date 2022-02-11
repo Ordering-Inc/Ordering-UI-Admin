@@ -140,7 +140,6 @@ export const UsersList = (props) => {
                     <td>
                       <UserTypeWrapper>
                         <Skeleton width={100} />
-                        <p><Skeleton width={100} /></p>
                       </UserTypeWrapper>
                     </td>
                     <td>

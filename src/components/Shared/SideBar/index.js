@@ -43,6 +43,18 @@ export const SideBar = (props) => {
     actionSidebar(true)
   }, [open, defaultSideBarWidth])
 
+  const onCloseSidebar = (e) => {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (!open) return
+    document.addEventListener('keydown', onCloseSidebar)
+    return () => document.removeEventListener('keydown', onCloseSidebar)
+  }, [open])
+
   return (
     <>
       <BarContainer
