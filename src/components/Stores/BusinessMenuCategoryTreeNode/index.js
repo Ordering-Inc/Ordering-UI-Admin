@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Checkbox } from '../../../styles'
 import GoTriangleDown from '@meronex/icons/go/GoTriangleDown'
+import { DashSquareFill, CheckSquareFill, Square } from 'react-bootstrap-icons'
 
 import {
   AccordionSection,
   Accordion,
   AccordionContent,
-  AccordionItem
+  AccordionItem,
+  CheckboxWrapper
 } from './styles'
 
-export const CategoryTreeNode = (props) => {
+export const BusinessMenuCategoryTreeNode = (props) => {
   const {
     category,
     index,
@@ -28,7 +29,7 @@ export const CategoryTreeNode = (props) => {
 
   const [setActive, setActiveState] = useState('')
   const [setRotate, setRotateState] = useState('accordion__icon')
-  const [isCategoryChecked, setIsCategoryChecked] = useState(false)
+  const [isCategoryState, setIsCategoryState] = useState(0)
 
   const toggleAccordion = (e) => {
     const isActionsClick = categoryRef.current?.contains(e.target) || checkboxRef.current?.contains(e.target)
@@ -41,11 +42,12 @@ export const CategoryTreeNode = (props) => {
 
   const isCheckedCategory = () => {
     const _category = subCategoriesList.find(item => item.id === category.id)
-    if (_category?.productIds?.length > 0) {
-      return _category?.productIds.every(id => selectedProductsIds.includes(id))
-    } else {
-      return false
+    if (_category?.productIds.every(id => selectedProductsIds.includes(id))) {
+      return 2
+    } else if (_category?.productIds.some(id => selectedProductsIds.includes(id))) {
+      return 1
     }
+    return 0
   }
 
   const handleClickProduct = (product) => {
@@ -100,14 +102,9 @@ export const CategoryTreeNode = (props) => {
 
   useEffect(() => {
     if (category?.products?.length) {
-      setIsCategoryChecked(isCheckedCategory())
+      setIsCategoryState(isCheckedCategory())
     }
   }, [selectedProductsIds])
-
-  const onChangeCategory = (checked) => {
-    setIsCategoryChecked(checked)
-    handleChangeSelectCategory()
-  }
 
   return (
     <>
@@ -120,11 +117,17 @@ export const CategoryTreeNode = (props) => {
               margin={20 * index}
             >
               <div>
-                <Checkbox
+                <CheckboxWrapper
                   ref={categoryRef}
-                  checked={isCategoryChecked}
-                  onChange={e => onChangeCategory(e.target.checked)}
-                />
+                  active={isCategoryState}
+                  onClick={() => handleChangeSelectCategory()}
+                >
+                  {isCategoryState === 2 ? (
+                    <CheckSquareFill />
+                  ) : (
+                    isCategoryState === 1 ? <DashSquareFill /> : <Square />
+                  )}
+                </CheckboxWrapper>
                 <span>{category.name}</span>
               </div>
               <GoTriangleDown className={setRotate} />
@@ -143,18 +146,20 @@ export const CategoryTreeNode = (props) => {
                 isProduct
               >
                 <div>
-                  <Checkbox
+                  <CheckboxWrapper
                     ref={checkboxRef}
-                    checked={selectedProductsIds.includes(product.id)}
-                    onChange={() => handleClickProduct(product)}
-                  />
+                    active={selectedProductsIds.includes(product.id)}
+                    onClick={() => handleClickProduct(product)}
+                  >
+                    {selectedProductsIds.includes(product.id) ? <CheckSquareFill /> : <Square />}
+                  </CheckboxWrapper>
                   <span>{product.name}</span>
                 </div>
               </AccordionItem>
             ))}
             {(category?.subcategories && category?.subcategories?.length > 0) && (
               category.subcategories.map(subCategory => (
-                <CategoryTreeNode
+                <BusinessMenuCategoryTreeNode
                   {...props}
                   key={subCategory.id}
                   category={subCategory}

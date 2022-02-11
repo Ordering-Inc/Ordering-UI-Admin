@@ -20,20 +20,6 @@ export const DetailsHeader = styled.div`
     color: ${props => props.theme?.colors.headingColor};
   }
 `
-
-export const HeaderActionBtnWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  > button:first-child {
-    ${props => props.theme?.rlt ? css`
-      margin-left: 8px;
-    ` : css`
-      margin-right: 8px;
-    `}
-  }
-`
-
 export const DetailsList = styled.div`
   width: 100%;
   border-bottom: 1px solid ${props => props.theme?.colors.borderColor};

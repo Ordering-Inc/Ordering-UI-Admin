@@ -112,6 +112,18 @@ export const BusinessDetailsUI = (props) => {
     setIsExtendExtraOpen(false)
   }, [businessId])
 
+  const onCloseSidebar = (e) => {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (!open) return
+    document.addEventListener('keydown', onCloseSidebar)
+    return () => document.removeEventListener('keydown', onCloseSidebar)
+  }, [open])
+
   return (
     <BarContainer id='business_details_bar'>
       {(!isExtendExtraOpen || width < 1000) && (
@@ -144,7 +156,7 @@ export const BusinessDetailsUI = (props) => {
               handleAddBusinessOwner={handleAddBusinessOwner}
               formState={formState}
               setFormState={setFormState}
-              businessTypes={businessTypes}
+              businessTypes={businessTypes || businessState?.business?.types}
               handleUpdateBusinessClick={handleUpdateBusinessClick}
               setBusinessTypes={setBusinessTypes}
               handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}

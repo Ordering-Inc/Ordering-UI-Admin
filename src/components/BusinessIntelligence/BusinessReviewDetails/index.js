@@ -112,7 +112,10 @@ const BusinessReviewDetailsUI = (props) => {
                       <p>{parseDate(review?.created_at, { utc: false })}</p>
                     )}
                     {review?.order_id && (
-                      <p>{review?.order_id}</p>
+                      <p>
+                        <span>{t('INVOICE_ORDER_NO', 'Order No.')}{' '}</span>
+                        <span>{review?.order_id}</span>
+                      </p>
                     )}
                   </InfoBlock>
                 </UserInfoContainer>

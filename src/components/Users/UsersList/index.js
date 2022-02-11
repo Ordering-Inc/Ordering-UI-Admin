@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
-import { Envelope, Phone } from 'react-bootstrap-icons'
+import { Envelope, Phone, ThreeDotsVertical } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles'
 import { ConfirmAdmin, Pagination } from '../../Shared'
 
@@ -18,8 +20,10 @@ import {
   UserMainInfo,
   CheckBoxWrapper,
   InfoBlock,
+  UserTypeWrapper,
   UserEnableWrapper,
   WrapperPagination,
+  WrapperUserActionSelector,
   AddNewUserButton,
   UsersBottomContainer,
   VerifiedItemsContainer,
@@ -28,12 +32,12 @@ import {
 
 export const UsersList = (props) => {
   const {
-    isCustomer,
     userDetailsId,
     usersList,
     paginationProps,
     getUsers,
     handleChangeActiveUser,
+    handleDeleteUser,
     selectedUsers,
     handleSelectedUsers,
     handleOpenUserDetails,
@@ -41,7 +45,8 @@ export const UsersList = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ parsePrice, optimizeImage }] = useUtils()
+  const theme = useTheme()
+  const [{ optimizeImage }] = useUtils()
 
   const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
 
@@ -58,7 +63,7 @@ export const UsersList = (props) => {
   }
 
   const onChangeUserDetails = (e, user) => {
-    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
+    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
     if (isInvalid) return
     handleOpenUserDetails(user)
   }
@@ -103,12 +108,9 @@ export const UsersList = (props) => {
             <thead>
               <tr>
                 <th>{t('USER', 'User')}</th>
-                <th>{t('PHONE', 'Phone')}</th>
-                <th>{t('TYPE', 'Type')}</th>
-                {isCustomer && (
-                  <th>{t('WALLET', 'Wallet')}</th>
-                )}
-                <th>{t('ACTION', 'Action')}</th>
+                <th>{t('DETAILS', 'Details')}</th>
+                <th />
+                <th colSpan={2}>{t('ACTION', 'Action')}</th>
               </tr>
             </thead>
             {usersList.loading ? (
@@ -130,21 +132,24 @@ export const UsersList = (props) => {
                       </UserMainInfo>
                     </td>
                     <td>
-                      <Skeleton width={50} />
+                      <InfoBlock>
+                        <p className='bold'><Skeleton width={100} /></p>
+                        <p><Skeleton width={100} /></p>
+                      </InfoBlock>
                     </td>
                     <td>
-                      <Skeleton width={50} />
+                      <UserTypeWrapper>
+                        <Skeleton width={100} />
+                      </UserTypeWrapper>
                     </td>
-                    {isCustomer && (
-                      <td>
-                        <Skeleton width={50} />
-                      </td>
-                    )}
                     <td>
                       <UserEnableWrapper>
-                        <span><Skeleton width={55} /></span>
-                        <Skeleton width={25} />
+                        <span><Skeleton width={100} /></span>
+                        <Skeleton width={50} />
                       </UserEnableWrapper>
+                    </td>
+                    <td>
+                      <Skeleton width={20} />
                     </td>
                   </tr>
                 </tbody>
@@ -199,14 +204,16 @@ export const UsersList = (props) => {
                       </UserMainInfo>
                     </td>
                     <td>
-                      {user?.cellphone}
+                      <InfoBlock>
+                        <p className='bold'>{t('PHONE')}</p>
+                        <p>{user?.cellphone}</p>
+                      </InfoBlock>
                     </td>
                     <td>
-                      {getUserType(user?.level)?.value}
+                      <UserTypeWrapper>
+                        <p>{getUserType(user?.level)?.value}</p>
+                      </UserTypeWrapper>
                     </td>
-                    {isCustomer && (
-                      <td>{parsePrice(user?.wallets?.balance || 0)}</td>
-                    )}
                     <td>
                       <UserEnableWrapper className='user_enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>
@@ -216,6 +223,18 @@ export const UsersList = (props) => {
                           onChange={enabled => handleEnable(user, enabled)}
                         />
                       </UserEnableWrapper>
+                    </td>
+                    <td>
+                      <WrapperUserActionSelector className='user_action'>
+                        <DropdownButton
+                          menuAlign={theme?.rtl ? 'left' : 'right'}
+                          title={<ThreeDotsVertical />}
+                          id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                        >
+                          <Dropdown.Item onClick={() => handleOpenUserDetails(user)}>{t('EDIT', 'Edit')}</Dropdown.Item>
+                          <Dropdown.Item onClick={() => handleDeleteUser(user?.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
+                        </DropdownButton>
+                      </WrapperUserActionSelector>
                     </td>
                   </tr>
                 </tbody>

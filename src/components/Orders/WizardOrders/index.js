@@ -12,7 +12,8 @@ export const WizardOrders = (props) => {
   const {
     isTourOpen,
     setIsTourOpen,
-    currentStep
+    currentStep,
+    detailsOrder
   } = props
 
   const [, t] = useLanguage()
@@ -52,7 +53,7 @@ export const WizardOrders = (props) => {
       selector: '[data-tour="tour_message"]',
       content: () => (
         <HelperContent>
-          <span>4.</span>
+          <span>{detailsOrder?.delivery_type === 1 ? 4 : 3}.</span>
           <p>{t('TOUR_ORDER_CHAT', 'Finally, you can use the order chat to communicate with customer or driver')}</p>
         </HelperContent>
       ),

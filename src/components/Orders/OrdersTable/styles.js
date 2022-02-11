@@ -5,6 +5,10 @@ export const OrdersContainer = styled.div`
   max-height: calc(100vh - 410px);
   overflow: auto;
 
+  ${({ noScroll }) => noScroll && css`
+    overflow: hidden;
+  `}
+
   @media (min-width: 768px) {
     max-height: calc(100vh - 385px);
   }
@@ -211,6 +215,9 @@ export const DriversInfo = styled.div`
       }
     }
   }
+  ${({ noClick }) => noClick && css`
+    pointer-events: none;
+  `}
 `
 
 export const WrapperImage = styled.div`

@@ -37,11 +37,13 @@ const SingleBusinessProductUI = (props) => {
     handlechangeImage,
     isEditMode,
     productDetailsId,
-    businessState,
-    handleUpdateBusinessState,
     dataSelected,
-    setDataSelected,
-    business
+    business,
+
+    handleDragStart,
+    handleDragOver,
+    handleDrop,
+    handleDragEnd
   } = props
 
   const theme = useTheme()
@@ -117,59 +119,6 @@ const SingleBusinessProductUI = (props) => {
     return () => document.removeEventListener('click', closeProductEdit)
   }, [productFormState])
 
-  const handleDrag = (event, productId) => {
-    event.dataTransfer.setData('transferProductId', productId)
-
-    const ghostEle = document.createElement('div')
-    ghostEle.classList.add('ghostDragging')
-    ghostEle.innerHTML = productFormState?.changes?.name
-    document.body.appendChild(ghostEle)
-    event.dataTransfer.setDragImage(ghostEle, 0, 0)
-  }
-
-  const handleAllowDrop = (event) => {
-    event.preventDefault()
-    const element = event.target.closest('.draggable-product')
-    if (element) {
-      setDataSelected(element.dataset.index)
-    }
-  }
-
-  const handleDrop = (event) => {
-    event.preventDefault()
-    const transferProductId = parseInt(event.dataTransfer.getData('transferProductId'))
-    const _categories = businessState?.business?.categories.map(item => {
-      if (item.id === product?.category_id) {
-        const transferProduct = item.products.find(_product => _product.id === transferProductId)
-        const updatedProducts = []
-        let counter
-        for (let i = 0; i < item.products.length; i++) {
-          if (item.products[i].id === product?.id) {
-            counter = i
-          }
-          if (item.products[i].id !== transferProductId) {
-            updatedProducts.push(item.products[i])
-          }
-        }
-        updatedProducts.splice(counter, 0, transferProduct)
-        return {
-          ...item,
-          products: updatedProducts
-        }
-      }
-      return item
-    })
-    handleUpdateBusinessState({ ...businessState?.business, categories: _categories })
-  }
-
-  const handleDragEnd = () => {
-    const elements = document.getElementsByClassName('ghostDragging')
-    while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0])
-    }
-    setDataSelected('')
-  }
-
   const taxProduct = productFormState?.changes?.tax ?? business?.tax
   const taxProductType = taxProduct?.type || business?.tax_type
   const taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price')
@@ -221,7 +170,7 @@ const SingleBusinessProductUI = (props) => {
               ref={containerRef}
               active={product.id === productDetailsId}
               onClick={(e) => handleProductClick(e)}
-              onDragOver={e => handleAllowDrop(e)}
+              onDragOver={e => handleDragOver(e)}
               onDrop={e => handleDrop(e)}
               onDragEnd={e => handleDragEnd(e)}
               className='draggable-product'
@@ -237,7 +186,7 @@ const SingleBusinessProductUI = (props) => {
                           src={theme.images.icons?.sixDots}
                           alt='six dots'
                           draggable
-                          onDragStart={e => handleDrag(e, product.id)}
+                          onDragStart={e => handleDragStart(e, product.id)}
                         />
                       </DragImageWrapper>
                       <BusinessGeneralInfo>

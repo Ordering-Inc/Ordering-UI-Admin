@@ -6,7 +6,8 @@ import {
 import {
   Trash,
   PlusSquare,
-  PlusCircleFill
+  PlusCircleFill,
+  DashCircleFill
 } from 'react-bootstrap-icons'
 import { Alert } from '../Confirm'
 import { ScheduleCopyTimes } from '../ScheduleCopyTimes'
@@ -19,7 +20,8 @@ import {
   SplitLine,
   IconWrapper,
   SelectWrapper,
-  AddScheduleIconWrapper
+  AddScheduleIconWrapper,
+  TrashIconWrapper
 } from './styles'
 
 const ScheduleUI = (props) => {
@@ -98,6 +100,12 @@ const ScheduleUI = (props) => {
         })
       }
     }
+    _scheduleOptions.push({
+      value: '23:59',
+      content: (
+        <Option>23 : 59</Option>
+      )
+    })
     setScheduleOptions(_scheduleOptions)
   }, [])
 
@@ -126,7 +134,9 @@ const ScheduleUI = (props) => {
                         noSelected
                         options={scheduleOptions}
                         defaultValue={
-                          `${lapse?.open?.hour}:${parseInt(lapse?.open?.minute / 15) * 15}`
+                          lapse?.open?.hour === 23 && lapse?.open?.minute === 59
+                            ? `${lapse?.open?.hour}:${lapse?.open?.minute}`
+                            : `${lapse?.open?.hour}:${parseInt(lapse?.open?.minute / 15) * 15}`
                         }
                         onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, true)}
                         optionInnerMaxHeight='300px'
@@ -138,19 +148,21 @@ const ScheduleUI = (props) => {
                         noSelected
                         options={scheduleOptions}
                         defaultValue={
-                          `${lapse?.close?.hour}:${parseInt(lapse?.close?.minute / 15) * 15}`
+                          lapse?.close?.hour === 23 && lapse?.close?.minute === 59
+                            ? `${lapse?.close?.hour}:${lapse?.close?.minute}`
+                            : `${lapse?.close?.hour}:${parseInt(lapse?.close?.minute / 15) * 15}`
                         }
                         onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, false)}
                         optionInnerMaxHeight='300px'
                       />
                     </SelectWrapper>
-                    <IconWrapper
+                    <TrashIconWrapper
                       isHide={schedule?.lapses.length <= 1}
                     >
                       <Trash
                         onClick={() => handleDeleteSchedule(daysOfWeekIndex, index)}
                       />
-                    </IconWrapper>
+                    </TrashIconWrapper>
                   </div>
                 ))}
                 {openAddSchedule[daysOfWeekIndex] && (
@@ -160,7 +172,9 @@ const ScheduleUI = (props) => {
                         noSelected
                         options={scheduleOptions}
                         defaultValue={
-                          `${addScheduleTime?.open?.hour}:${parseInt(addScheduleTime?.open?.minute / 15) * 15}`
+                          addScheduleTime?.open?.hour === 23 && addScheduleTime?.open?.minute === 59
+                            ? `${addScheduleTime?.open?.hour}:${addScheduleTime?.open?.minute}`
+                            : `${addScheduleTime?.open?.hour}:${parseInt(addScheduleTime?.open?.minute / 15) * 15}`
                         }
                         optionInnerMaxHeight='300px'
                         onChange={val => handleChangeAddScheduleTime(val, true)}
@@ -172,7 +186,9 @@ const ScheduleUI = (props) => {
                         noSelected
                         options={scheduleOptions}
                         defaultValue={
-                          `${addScheduleTime?.close?.hour}:${parseInt(addScheduleTime?.close?.minute / 15) * 15}`
+                          addScheduleTime?.close?.hour === 23 && addScheduleTime?.close?.minute === 59
+                            ? `${addScheduleTime?.close?.hour}:${addScheduleTime?.close?.minute}`
+                            : `${addScheduleTime?.close?.hour}:${parseInt(addScheduleTime?.close?.minute / 15) * 15}`
                         }
                         optionInnerMaxHeight='300px'
                         onChange={val => handleChangeAddScheduleTime(val, false)}
@@ -181,6 +197,9 @@ const ScheduleUI = (props) => {
                     <AddScheduleIconWrapper>
                       <PlusCircleFill
                         onClick={() => handleAddSchedule(daysOfWeekIndex)}
+                      />
+                      <DashCircleFill
+                        onClick={() => handleOpenAddSchedule(null)}
                       />
                     </AddScheduleIconWrapper>
                   </div>

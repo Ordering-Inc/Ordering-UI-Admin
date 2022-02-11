@@ -59,6 +59,18 @@ export const UserDetailsLateralBar = (props) => {
     }
   }, [extraOpen])
 
+  const onCloseSidebar = (e) => {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (!open) return
+    document.addEventListener('keydown', onCloseSidebar)
+    return () => document.removeEventListener('keydown', onCloseSidebar)
+  }, [open])
+
   return (
     <LateralBarContainer id='user_lateral_bar'>
       <WrapUserDetails>

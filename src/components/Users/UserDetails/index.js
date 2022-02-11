@@ -5,6 +5,7 @@ import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../../Delivery'
 import { OrdersManager } from '../../Orders'
+import { BusinessManagerBusinesses } from '../BusinessManagerBusinesses'
 
 import {
   UserName,
@@ -39,6 +40,7 @@ export const UserDetailsUI = (props) => {
       <UserDetailsMenu
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={setCurrentMenuSelected}
+        isBusinessOwner={userState?.user?.level === 2}
       />
       {!userState?.loading && userState?.user && (
         <>
@@ -63,6 +65,11 @@ export const UserDetailsUI = (props) => {
                 </SavedPlaces>
               )}
             </>
+          )}
+          {currentMenuSelected === 'businesses' && (
+            <BusinessManagerBusinesses
+              userId={userState?.user?.id}
+            />
           )}
           {currentMenuSelected === 'orders' && (
             <OrdersManager

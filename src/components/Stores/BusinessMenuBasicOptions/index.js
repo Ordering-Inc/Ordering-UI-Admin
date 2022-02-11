@@ -4,7 +4,7 @@ import { Button, Input, TextArea } from '../../../styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Alert, Schedule } from '../../Shared'
-import { CategoryTreeNode } from '../CategoryTreeNode'
+import { BusinessMenuCategoryTreeNode } from '../BusinessMenuCategoryTreeNode'
 
 import {
   BusinessMenuBasicContainer,
@@ -168,7 +168,7 @@ export const BusinessMenuBasicOptions = (props) => {
         </OrderType>
         {!(formState?.changes?.all_products ?? businessMenuState.menu?.all_products) &&
           business?.categories.sort((a, b) => a.rank - b.rank).map(category => (
-            <CategoryTreeNode
+            <BusinessMenuCategoryTreeNode
               key={category.id}
               index={0}
               category={category}

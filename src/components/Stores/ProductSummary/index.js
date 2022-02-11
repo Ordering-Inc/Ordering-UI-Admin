@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
+import BiImage from '@meronex/icons/bi/BiImage'
 import { XLg, ThreeDots, Laptop, Phone } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles/Switch'
 import { IconButton } from '../../../styles'
@@ -15,6 +16,7 @@ import {
   LeftHeader,
   RightHeader,
   ProductName,
+  ProductImageWrapper,
   ProductImage,
   ProductDetailsContent,
   ProductPrice,
@@ -123,7 +125,13 @@ export const ProductSummary = (props) => {
             </IconButton>
           </RightHeader>
         </DetailsHeader>
-        <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_200,c_limit')} />
+        <ProductImageWrapper>
+          {productState?.product?.images ? (
+            <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_200,c_limit')} />
+          ) : (
+            <BiImage />
+          )}
+        </ProductImageWrapper>
         <ProductDetailsContent>
           <ProductPrice>
             {parsePrice(productState?.product?.price)}

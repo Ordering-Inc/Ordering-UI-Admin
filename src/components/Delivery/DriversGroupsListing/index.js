@@ -185,7 +185,7 @@ const DriversGroupsListingUI = (props) => {
       </DriversGroupsListingContainer>
       {openDetails && (
         <SideBar
-          sidebarId='city-details'
+          sidebarId='driver_group_details'
           defaultSideBarWidth={550 + moveDistance}
           open={openDetails}
           moveDistance={moveDistance}
@@ -193,6 +193,7 @@ const DriversGroupsListingUI = (props) => {
           onClose={() => {
             setCurDriversGroup(null)
             setOpenDetails(false)
+            setIsTourOpen(false)
           }}
         >
           <DriversGroupDetails
@@ -206,11 +207,14 @@ const DriversGroupsListingUI = (props) => {
             companies={driversCompanyList?.companies}
             handleUpdateDriversGroup={handleUpdateDriversGroup}
             handleParentSidebarMove={val => setMoveDistance(val)}
-            onClose={() => setOpenDetails(false)}
-
+            onClose={() => {
+              setOpenDetails(false)
+              if (isTourOpen) {
+                handleDeliveryTourCompleted()
+              }
+            }}
             isTourOpen={isTourOpen}
             handleNextTour={handleNextTour}
-            handleDeliveryTourCompleted={handleDeliveryTourCompleted}
           />
         </SideBar>
       )}

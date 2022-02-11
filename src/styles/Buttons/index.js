@@ -50,6 +50,9 @@ export const IconButton = styled.button`
       }
     }
   `}
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+  `}
 `
 
 export const Button = styled.button`

@@ -292,13 +292,17 @@ export const MyName = styled.p`
 
 export const TimeofSent = styled.p`
   position: relative;
-  text-align: right;
   font-size: 0.8em;
   margin-block-start: 0.2em;
   margin-block-end: initial;
+  width: fit-content;
+  cursor: pointer;
+  font-weight: 600;
 
-  ${props => props.theme?.rtl && css`
-    text-align: left;
+  ${props => props.theme?.rtl ? css`
+    margin-right: auto;
+  ` : css`
+    margin-left: auto;
   `}
 `
 

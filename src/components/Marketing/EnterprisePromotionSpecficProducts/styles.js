@@ -27,7 +27,7 @@ export const BusinessSelectorContainer = styled.div`
 export const Label = styled.div`
   font-size: 14px;
   line-height: 24px;
-  margin-bottom: 16px;
+  margin: 16px 0px;
 `
 export const NoSelectedBusiness = styled.p`
   font-size: 16px;

@@ -30,7 +30,8 @@ const ProductDetailsUI = (props) => {
     handlechangeImage,
     handleChangeInput,
     handleUpdateClick,
-    handleChangeFormState
+    handleChangeFormState,
+    handleSuccessUpdate
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -97,6 +98,18 @@ const ProductDetailsUI = (props) => {
     setIsExtendExtraOpen(false)
   }, [props.product])
 
+  const onCloseSidebar = (e) => {
+    if (e.code === 'Escape') {
+      props.onClose() && props.onClose()
+    }
+  }
+
+  useEffect(() => {
+    if (!open) return
+    document.addEventListener('keydown', onCloseSidebar)
+    return () => document.removeEventListener('keydown', onCloseSidebar)
+  }, [open])
+
   return (
     <Container id='product_details'>
       {(!isExtendExtraOpen || width < 1000) && (
@@ -122,7 +135,7 @@ const ProductDetailsUI = (props) => {
               handleUpdateClick={handleUpdateClick}
 
               business={business}
-              handleUpdateBusinessState={handleUpdateBusinessState}
+              handleSuccessUpdate={handleSuccessUpdate}
               setFormTaxState={setFormTaxState}
               formTaxState={formTaxState}
               taxes={taxes}
@@ -136,7 +149,7 @@ const ProductDetailsUI = (props) => {
               business={business}
               product={productState.product}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
-              handleUpdateBusinessState={handleUpdateBusinessState}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           )}
           {showOption === 'product_options' && (
@@ -152,7 +165,7 @@ const ProductDetailsUI = (props) => {
               business={business}
               categoryId={productState.product.category_id}
               product={productState.product}
-              handleUpdateBusinessState={handleUpdateBusinessState}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           )}
           {showOption === 'custom_fields' && (
