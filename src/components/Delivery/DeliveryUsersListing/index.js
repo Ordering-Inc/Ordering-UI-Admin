@@ -110,6 +110,13 @@ const DeliveryUsersListingUI = (props) => {
     }
   }, [usersList])
 
+  const handleCloseAddForm = () => {
+    setOpenUserAddForm(false)
+    if (isTourOpen) {
+      setIsTourOpen(false)
+    }
+  }
+
   const handleSetStorage = async () => {
     const preVisited = await getStorageItem('visited', true)
     if (!preVisited?.drivers_page) {
@@ -202,7 +209,7 @@ const DeliveryUsersListingUI = (props) => {
           sidebarId='user_add_form'
           open={openUserAddForm}
           noAnimation={isTourOpen}
-          onClose={() => setOpenUserAddForm(false)}
+          onClose={() => handleCloseAddForm()}
         >
           <UserAddForm
             isDriversPage={isDriversPage}

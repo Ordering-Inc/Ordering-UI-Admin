@@ -25,10 +25,7 @@ export const DriversGroupBusinesses = (props) => {
     handleUpdateDriversGroup,
     handleAddDriversGroup,
     handleSelectAllBusiness,
-    selectedBusinessIds,
-
-    isTourOpen,
-    handleDeliveryTourCompleted
+    selectedBusinessIds
   } = props
 
   const [, t] = useLanguage()
@@ -36,7 +33,6 @@ export const DriversGroupBusinesses = (props) => {
 
   const [searchValue, setSearchValue] = useState(null)
   const [filteredBusinesses, setFilteredBusinesses] = useState([])
-  const [isSuccessSubmitted, setIsSuccessSubmitted] = useState(false)
 
   useEffect(() => {
     let _filteredBusinesses = []
@@ -53,20 +49,8 @@ export const DriversGroupBusinesses = (props) => {
       handleUpdateDriversGroup(changesState)
     } else {
       handleAddDriversGroup()
-      if (isTourOpen) {
-        setIsSuccessSubmitted(true)
-      }
     }
   }
-
-  useEffect(() => {
-    if (!isTourOpen || !isSuccessSubmitted || actionState?.loading) return
-    if (actionState?.error) {
-      setIsSuccessSubmitted(false)
-      return
-    }
-    handleDeliveryTourCompleted()
-  }, [isTourOpen, isSuccessSubmitted, actionState?.loading])
 
   return (
     <Container
