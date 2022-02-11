@@ -4,26 +4,19 @@ import { DragScroll, SpinnerLoader } from '../../Shared'
 import {
   InvoiceDriversContainer,
   DetailsHeader,
-  HeaderActionBtnWrapper,
   DetailsList,
   Tab,
   Form,
   InvoicePdfWrapper,
   LoadingWrapper
 } from './styles'
-import { IconButton } from '../../../styles'
-import {
-  Download
-} from 'react-bootstrap-icons'
 import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceDriverPdf } from '../InvoiceDriverPdf'
 
 const InvoiceDriverManagerUI = (props) => {
   const {
-    exportInvoiceList,
-    invocing,
-    getOrders
+    exportInvoiceList
   } = props
 
   const [, t] = useLanguage()
@@ -38,10 +31,6 @@ const InvoiceDriverManagerUI = (props) => {
     setSelectedDetailType(detailType)
   }
 
-  const pdfDownload = () => {
-    getOrders()
-  }
-
   useEffect(() => {
     if (!exportInvoiceList?.loading && exportInvoiceList?.invoice) {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
@@ -53,14 +42,6 @@ const InvoiceDriverManagerUI = (props) => {
     <InvoiceDriversContainer>
       <DetailsHeader>
         <h2>{t('DRIVER_INVOICE', 'Driver invoice')}</h2>
-        <HeaderActionBtnWrapper>
-          <IconButton
-            onClick={pdfDownload}
-            disabled={!invocing?.driver || invocing?.driver === ''}
-          >
-            <Download />
-          </IconButton>
-        </HeaderActionBtnWrapper>
       </DetailsHeader>
       <DetailsList>
         <DragScroll>
