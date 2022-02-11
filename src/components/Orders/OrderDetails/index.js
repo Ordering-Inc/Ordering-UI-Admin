@@ -198,7 +198,7 @@ const OrderDetailsUI = (props) => {
 
   const handleChangeTour = (evt) => {
     if (!isTourOpen) return
-    if (order?.delivery_type === 1) {
+    if (isTourOpen && order?.delivery_type === 1) {
       setCurrentTourStep(2)
       return
     }
