@@ -21,13 +21,17 @@ export const TimeScheduleItemContainer = styled.div`
     }
 
     &:first-child {
-      width: 90px;
+      width: 95px;
     }
 
     &:nth-child(2) {
       flex-direction: column;
       flex: 1;
-      margin: 0 10px;
+      ${props => props.theme?.rtl ? css`
+        padding-right: 10px;
+      ` : css`
+        padding-left: 10px;
+      `}
       > div {
         display: flex;
         justify-content: center;
@@ -39,12 +43,6 @@ export const TimeScheduleItemContainer = styled.div`
         svg {
           font-size: 20px;
           cursor: pointer;
-  
-          ${props => props.theme?.rtl ? css`
-            margin-right: 16px;
-          ` : css`
-            margin-left: 16px;
-          `}
         }
       }
       > p {
@@ -107,9 +105,31 @@ export const IconWrapper = styled.span`
     opacity: 1;
   `}
 `
+export const TrashIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 56px;
+  ${({ isHide }) => isHide ? css`
+    opacity: 0;
+    pointer-events: none;
+  ` : css`
+    opacity: 1;
+  `}
+`
 
 export const AddScheduleIconWrapper = styled.div`
-  svg {
+  display: flex;
+  justify-content: center;
+  width: 56px;
+  > svg {
     color: ${props => props.theme.colors.primary};
+    ${props => props.theme?.rtl ? css`
+      margin-right: 8px;
+    ` : css`
+      margin-left: 8px;
+    `}
+    &:last-child {
+      color: ${props => props.theme.colors.lightGray};
+    }
   }
 `
