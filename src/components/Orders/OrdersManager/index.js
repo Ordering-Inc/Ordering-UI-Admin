@@ -92,6 +92,8 @@ const OrdersManagerUI = (props) => {
   }
 
   const handleOpenTour = () => {
+    const orderElement = document.getElementById('orderTable')
+    if (orderElement) orderElement.scrollTo(0, 0)
     setCurrentTourStep(0)
     setIsTourOpen(true)
     handleBackRedirect()
@@ -204,6 +206,7 @@ const OrdersManagerUI = (props) => {
           currentTourStep={currentTourStep}
           isTourFlag={isTourFlag}
           setIsTourFlag={setIsTourFlag}
+          setIsTourOpen={setIsTourOpen}
         />
       )}
 
@@ -220,6 +223,7 @@ const OrdersManagerUI = (props) => {
           isTourOpen={isTourOpen}
           setIsTourOpen={setIsTourOpen}
           currentStep={currentTourStep}
+          detailsOrder={detailsOrder}
         />
       )}
     </>
