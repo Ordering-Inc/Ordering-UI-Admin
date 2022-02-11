@@ -206,7 +206,7 @@ const OrderDetailsUI = (props) => {
       handleOpenMessages('chat')
       setTimeout(() => {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
-      }, 50)
+      }, 1)
     }
   }
 
@@ -217,7 +217,7 @@ const OrderDetailsUI = (props) => {
       handleOpenMessages('chat')
       setTimeout(() => {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
-      }, 50)
+      }, 1)
     }
     if (evt.keyCode === 37 && currentTourStep === 3) {
       handleCloseMessages()
