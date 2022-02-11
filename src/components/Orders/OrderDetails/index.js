@@ -40,7 +40,8 @@ const OrderDetailsUI = (props) => {
     setCurrentTourStep,
     currentTourStep,
     isTourFlag,
-    setIsTourFlag
+    setIsTourFlag,
+    setIsTourOpen
   } = props
 
   const [, t] = useLanguage()
@@ -197,16 +198,31 @@ const OrderDetailsUI = (props) => {
 
   const handleChangeTour = (evt) => {
     if (!isTourOpen) return
-    setCurrentTourStep(2)
+    if (isTourOpen && order?.delivery_type === 1) {
+      setCurrentTourStep(2)
+      return
+    }
+    if (isTourOpen && setCurrentTourStep) {
+      handleOpenMessages('chat')
+      setTimeout(() => {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
+      }, 1)
+    }
   }
 
   const handleChangeKeyboard = (evt) => {
     if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1)
-    if (evt.keyCode === 39 && currentTourStep === 1) setCurrentTourStep(2)
+    if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type === 1) setCurrentTourStep(2)
+    if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type !== 1) {
+      handleOpenMessages('chat')
+      setTimeout(() => {
+        isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
+      }, 1)
+    }
     if (evt.keyCode === 37 && currentTourStep === 3) {
       handleCloseMessages()
       setExtraOpen(false)
-      setCurrentTourStep(2)
+      order?.delivery_type === 1 ? setCurrentTourStep(2) : setCurrentTourStep(1)
       setIsTourFlag(false)
     }
     if ((evt.keyCode === 39 && currentTourStep === 2)) {
@@ -264,15 +280,22 @@ const OrderDetailsUI = (props) => {
         </SkeletonWrapper>
       )}
       {order && Object.keys(order).length > 0 && !loading && (
-        <OrderDetailsContent data-tour='tour_detail' onClick={(e) => handleChangeTour(e)}>
+        <OrderDetailsContent
+          data-tour='tour_detail'
+          noScroll={isTourOpen && currentTourStep === 2}
+          onClick={(e) => handleChangeTour(e)}
+        >
           <OrderDetailsHeader
             order={order}
             extraOpen={extraOpen}
             actionSidebar={actionSidebar}
             handleOpenMetaFields={handleOpenMetaFields}
             handleOpenMessages={handleOpenMessages}
+            isTourOpen={isTourOpen}
+            currentTourStep={currentTourStep}
+            setIsTourOpen={setIsTourOpen}
           />
-          <OrderStatus>
+          <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
               <p>
