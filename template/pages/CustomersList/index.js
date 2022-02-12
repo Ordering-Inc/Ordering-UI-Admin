@@ -15,7 +15,7 @@ export const CustomersList = (props) => {
       'country_phone_code', 'city_id', 'city', 'address', 'addresses',
       'address_notes', 'dropdown_option_id', 'dropdown_option', 'location',
       'zipcode', 'level', 'enabled', 'middle_name', 'second_lastname', 'birthdate', 'drivergroups',
-      'phone_verified', 'email_verified', 'wallets'
+      'phone_verified', 'email_verified'
     ],
     onUserRedirect: (userId) => {
       if (!userId) {

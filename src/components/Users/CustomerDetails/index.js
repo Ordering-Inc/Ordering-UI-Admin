@@ -28,7 +28,6 @@ const CustomerDetailsUI = (props) => {
   const {
     userState,
     handleDeleteUser,
-    handleSuccessUserUpdate,
     handleParentSidebarMove
   } = props
 
@@ -166,7 +165,7 @@ const CustomerDetailsUI = (props) => {
           )}
           {showOption === 'cash_wallet' && (
             <CustomerWallet
-              user={userState.user}
+              userId={userState.user?.id}
             />
           )}
         </SideBar>
