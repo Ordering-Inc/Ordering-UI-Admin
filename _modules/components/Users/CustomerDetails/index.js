@@ -21,6 +21,8 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _UserDetails = require("../UserDetails");
 
+var _CustomerCashWallet = require("../CustomerCashWallet");
+
 var _Shared = require("../../Shared");
 
 var _styles = require("./styles");
@@ -50,11 +52,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomerDetailsUI = function CustomerDetailsUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6;
+  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7;
 
   var userState = props.userState,
       handleDeleteUser = props.handleDeleteUser,
-      handleSuccessUserUpdate = props.handleSuccessUserUpdate,
       handleParentSidebarMove = props.handleParentSidebarMove;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -93,19 +94,13 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
   var customerMenus = [{
     key: 'user_details',
     value: t('USER_DETAILS', 'User details')
-  }, {
-    key: 'businesses_opened',
-    value: t('BUSINESSES_OPENED', 'Businesses opened')
-  }, {
-    key: 'products_opened',
-    value: t('PRODUCTS_OPENED', 'Products opened')
-  }, {
+  }, // { key: 'businesses_opened', value: t('BUSINESSES_OPENED', 'Businesses opened') },
+  // { key: 'products_opened', value: t('PRODUCTS_OPENED', 'Products opened') },
+  {
     key: 'cash_wallet',
     value: t('CASH_WALLET', 'Cash wallet')
-  }, {
-    key: 'points_wallet',
-    value: t('POINTS_WALLET', 'Points wallet')
-  }];
+  } // { key: 'points_wallet', value: t('POINTS_WALLET', 'Points wallet') }
+  ];
 
   var onDeleteCustomer = function onDeleteCustomer() {
     setConfirm({
@@ -190,7 +185,9 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     setExtraOpen: function setExtraOpen(isOpen) {
       return setMenuMoveDistance(isOpen ? 500 : 0);
     }
-  }))));
+  })), showOption === 'cash_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerCashWallet.CustomerCashWallet, {
+    userId: (_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.id
+  })));
 };
 
 var CustomerDetails = function CustomerDetails(props) {

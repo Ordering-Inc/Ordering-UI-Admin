@@ -9,10 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _UsersDeleteButton = require("../UsersDeleteButton");
-
-var _UsersExportCSV = require("../UsersExportCSV");
-
 var _Shared = require("../../Shared");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -38,17 +34,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UsersListingHeader = function UsersListingHeader(props) {
-  var deafultUserTypesSelected = props.deafultUserTypesSelected,
-      disabledActiveStateCondition = props.disabledActiveStateCondition,
-      title = props.title,
-      selectedUsers = props.selectedUsers,
-      deleteUsersActionState = props.deleteUsersActionState,
-      handleDeleteSeveralUsers = props.handleDeleteSeveralUsers,
-      userTypesSelected = props.userTypesSelected,
-      selectedUserActiveState = props.selectedUserActiveState,
+  var title = props.title,
       searchValue = props.searchValue,
-      onSearch = props.onSearch,
-      handleOpenUserAddForm = props.handleOpenUserAddForm;
+      onSearch = props.onSearch;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -64,24 +52,9 @@ var UsersListingHeader = function UsersListingHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles2.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    borderRadius: "8px",
-    color: "lightPrimary",
-    onClick: function onClick() {
-      return handleOpenUserAddForm();
-    },
-    "data-tour": "tour_add"
-  }, t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_UsersExportCSV.UsersExportCSV, {
-    deafultUserTypesSelected: deafultUserTypesSelected,
-    disabledActiveStateCondition: disabledActiveStateCondition,
-    userTypesSelected: userTypesSelected,
-    selectedUserActiveState: selectedUserActiveState
-  }), /*#__PURE__*/_react.default.createElement(_UsersDeleteButton.UsersDeleteButton, {
-    selectedUsers: selectedUsers,
-    deleteUsersActionState: deleteUsersActionState,
-    handleDeleteSeveralUsers: handleDeleteSeveralUsers
-  }), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles2.ActionContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
+    isCustomLayout: true,
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

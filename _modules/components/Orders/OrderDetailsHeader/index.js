@@ -35,7 +35,7 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
   var _order$paymethod;
 
   var order = props.order,
-      handleOpenMetaFields = props.handleOpenMetaFields,
+      handleShowOption = props.handleShowOption,
       handleOpenMessages = props.handleOpenMessages,
       actionSidebar = props.actionSidebar,
       setIsTourOpen = props.setIsTourOpen,
@@ -62,16 +62,12 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.UreadMessageAlert, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Dot, null))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     onClick: function onClick() {
-      return window.print();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Printer, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    onClick: function onClick() {
       return handleOpenMessages('history');
     },
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Diagram3, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     onClick: function onClick() {
-      return handleOpenMetaFields();
+      return handleShowOption('metafields');
     },
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

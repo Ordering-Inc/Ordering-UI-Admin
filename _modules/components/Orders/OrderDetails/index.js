@@ -93,10 +93,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       openMessages = _useState2[0],
       setOpenMessages = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      openMetaFields = _useState4[0],
-      setOpenMetaFields = _useState4[1];
+      showOption = _useState4[0],
+      setShowOption = _useState4[1];
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -334,7 +334,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       });
     }
 
-    setOpenMetaFields(false);
+    setShowOption(null);
     setExtraOpen(true);
   };
 
@@ -345,10 +345,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
   };
 
-  var handleOpenMetaFields = function handleOpenMetaFields() {
+  var handleShowOption = function handleShowOption(option) {
     handleCloseMessages();
     setExtraOpen(true);
-    setOpenMetaFields(true);
+    setShowOption(option);
   };
 
   (0, _react.useEffect)(function () {
@@ -514,7 +514,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     extraOpen: extraOpen,
     actionSidebar: actionSidebar,
-    handleOpenMetaFields: handleOpenMetaFields,
+    handleShowOption: handleShowOption,
     handleOpenMessages: handleOpenMessages,
     isTourOpen: isTourOpen,
     currentTourStep: currentTourStep,
@@ -576,7 +576,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     history: openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     messages: messages
-  })), openMetaFields && /*#__PURE__*/_react.default.createElement(_OrderMetaFields.OrderMetaFields, {
+  })), showOption === 'metafields' && /*#__PURE__*/_react.default.createElement(_OrderMetaFields.OrderMetaFields, {
     orderId: order === null || order === void 0 ? void 0 : order.id
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
@@ -611,11 +611,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     height: "70vh",
-    open: openMetaFields,
+    open: !!showOption,
     onClose: function onClose() {
-      return setOpenMetaFields(false);
+      return setShowOption(null);
     }
-  }, /*#__PURE__*/_react.default.createElement(_OrderMetaFields.OrderMetaFields, {
+  }, showOption === 'metafields' && /*#__PURE__*/_react.default.createElement(_OrderMetaFields.OrderMetaFields, {
     orderId: order === null || order === void 0 ? void 0 : order.id
   })))), !loading && !order && /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),

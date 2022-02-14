@@ -127,14 +127,31 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
         if (visualColIndex === 0) {
           cellProperties.readOnly = true;
         }
-
-        if (prop === 'taxShow' || prop === 'feeShow') {
-          cellProperties.readOnly = true;
-          cellProperties.editor = false;
-        }
       }
 
       return cellProperties;
+    },
+    beforeKeyDown: function beforeKeyDown(e) {
+      var selectedLast = this.getSelectedLast();
+
+      if (!selectedLast) {
+        return;
+      }
+
+      var row = selectedLast[0];
+      var col = selectedLast[1];
+      var celltype = this.getCellMeta(row, col).type;
+
+      if (celltype === 'numeric') {
+        var evt = e || window.event;
+        var key = evt.charCode || evt.keyCode || 0;
+        var isNumeric = key === 8 || key === 9 || key === 13 || key === 46 || key === 110 || key === 116 || key === 123 || key === 189 || key === 190 || key >= 35 && key <= 40 || key >= 48 && key <= 57 || key >= 96 && key <= 105;
+
+        if (!isNumeric) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      }
     }
   };
 

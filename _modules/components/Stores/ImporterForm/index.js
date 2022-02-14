@@ -19,6 +19,8 @@ var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _styledComponents = require("styled-components");
+
 var _Shared = require("../../Shared");
 
 var _styles = require("../../../styles");
@@ -54,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImporterFormUI = function ImporterFormUI(props) {
-  var _editState$mapping, _editState$mapping2, _editState$mapping3, _editState$mapping4, _editState$mapping5, _editState$mapping6, _editState$mapping7;
+  var _theme$files, _theme$files2, _editState$mapping, _editState$mapping2, _editState$mapping3, _editState$mapping4, _editState$mapping5, _editState$mapping6, _editState$mapping7;
 
   var formState = props.formState,
       handleChangeInput = props.handleChangeInput,
@@ -117,6 +119,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
       metafiledValue = _useState12[0],
       setMetaFiledValue = _useState12[1];
 
+  var theme = (0, _styledComponents.useTheme)();
   var importypeOptions = [{
     value: 1,
     content: t('STORE', 'Store'),
@@ -242,10 +245,11 @@ var ImporterFormUI = function ImporterFormUI(props) {
       lineHeight: '24px'
     }
   }, "CSV file example ", /*#__PURE__*/_react.default.createElement("a", {
-    href: "www.example.com",
+    href: ((_theme$files = theme.files) === null || _theme$files === void 0 ? void 0 : _theme$files.exampleCSV) || 'www.example.com',
     target: "_blank",
-    rel: "noopener noreferrer"
-  }, "www.example.com"))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (importType === 1 || importType === 2 || importType === 3) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    rel: "noopener noreferrer",
+    download: (_theme$files2 = theme.files) === null || _theme$files2 === void 0 ? void 0 : _theme$files2.exampleCSV
+  }, "example.csv"))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (importType === 1 || importType === 2 || importType === 3) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "business_id",
     type: "number",
     placeholder: "0",

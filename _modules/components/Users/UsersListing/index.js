@@ -29,7 +29,13 @@ var _Shared = require("../../Shared");
 
 var _UserAddForm = require("../UserAddForm");
 
-var _styles = require("./styles");
+var _UsersDeleteButton = require("../UsersDeleteButton");
+
+var _UsersExportCSV = require("../UsersExportCSV");
+
+var _styles = require("../../../styles");
+
+var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -57,8 +63,6 @@ var UsersListingUI = function UsersListingUI(props) {
   var deafultUserTypesSelected = props.deafultUserTypesSelected,
       disabledActiveStateCondition = props.disabledActiveStateCondition,
       headerTitle = props.headerTitle,
-      isShowActiveStateFilter = props.isShowActiveStateFilter,
-      isShowUserTypeFilter = props.isShowUserTypeFilter,
       isCustomersPage = props.isCustomersPage,
       usersList = props.usersList,
       handleSelectedUserTypes = props.handleSelectedUserTypes,
@@ -71,7 +75,6 @@ var UsersListingUI = function UsersListingUI(props) {
       selectedUserActiveState = props.selectedUserActiveState,
       handleChangeUserActiveState = props.handleChangeUserActiveState,
       handleChangeActiveUser = props.handleChangeActiveUser,
-      handleDeleteUser = props.handleDeleteUser,
       selectedUsers = props.selectedUsers,
       handleSelectedUsers = props.handleSelectedUsers,
       deleteUsersActionState = props.deleteUsersActionState,
@@ -80,6 +83,11 @@ var UsersListingUI = function UsersListingUI(props) {
       handleSuccessUpdate = props.handleSuccessUpdate,
       handleSuccessAddUser = props.handleSuccessAddUser,
       handleSuccessDeleteUser = props.handleSuccessDeleteUser;
+
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
 
   var _useState = (0, _react.useState)(null),
@@ -149,30 +157,37 @@ var UsersListingUI = function UsersListingUI(props) {
       setIsOpenUserDetails(true);
     }
   }, [usersList]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
-    deafultUserTypesSelected: deafultUserTypesSelected,
-    disabledActiveStateCondition: disabledActiveStateCondition,
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
     title: headerTitle,
-    selectedUsers: selectedUsers,
-    userTypesSelected: userTypesSelected,
-    selectedUserActiveState: selectedUserActiveState,
-    deleteUsersActionState: deleteUsersActionState,
     searchValue: searchValue,
-    onSearch: onSearch,
-    handleDeleteSeveralUsers: handleDeleteSeveralUsers,
-    handleOpenUserAddForm: handleOpenUserAddForm
-  }), isShowActiveStateFilter && /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
+    onSearch: onSearch
+  }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
-  }), isShowUserTypeFilter && /*#__PURE__*/_react.default.createElement(_UserTypeFilter.UserTypeFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_UserTypeFilter.UserTypeFilter, {
     handleChangeUserType: handleSelectedUserTypes
-  }), /*#__PURE__*/_react.default.createElement(_UsersList.UsersList, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
+    onClick: function onClick() {
+      return handleOpenUserAddForm();
+    },
+    "data-tour": "tour_add"
+  }, t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_UsersExportCSV.UsersExportCSV, {
+    deafultUserTypesSelected: deafultUserTypesSelected,
+    disabledActiveStateCondition: disabledActiveStateCondition,
+    userTypesSelected: userTypesSelected,
+    selectedUserActiveState: selectedUserActiveState
+  }), /*#__PURE__*/_react.default.createElement(_UsersDeleteButton.UsersDeleteButton, {
+    selectedUsers: selectedUsers,
+    deleteUsersActionState: deleteUsersActionState,
+    handleDeleteSeveralUsers: handleDeleteSeveralUsers
+  }))), /*#__PURE__*/_react.default.createElement(_UsersList.UsersList, {
     usersList: usersList,
     getUsers: getUsers,
     paginationProps: paginationProps,
     paginationDetail: paginationDetail,
     handleChangeActiveUser: handleChangeActiveUser,
-    handleDeleteUser: handleDeleteUser,
     selectedUsers: selectedUsers,
     handleSelectedUsers: handleSelectedUsers,
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,

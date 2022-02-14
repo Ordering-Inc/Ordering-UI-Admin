@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
-  var _productState$estimat, _taxSelected$value, _fesSelected$value;
+  var _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$calorie;
 
   var formState = props.formState,
       productState = props.productState,
@@ -370,6 +370,25 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
         action: 'fees',
         id: val
       });
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "calories"
+  }, "Calories"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "calories",
+    id: "calories",
+    placeholder: "0.00",
+    defaultValue: (_productState$calorie = productState === null || productState === void 0 ? void 0 : productState.calories) !== null && _productState$calorie !== void 0 ? _productState$calorie : '',
+    onChange: function onChange(e) {
+      var _e$target$value2;
+
+      return handleClickProperty('calories', (_e$target$value2 = e.target.value) !== null && _e$target$value2 !== void 0 ? _e$target$value2 : null);
+    },
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",

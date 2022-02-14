@@ -11,8 +11,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styles = require("../../../styles");
 
-var _Shared = require("../../Shared");
-
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
 
 var _styles2 = require("./styles");
@@ -53,7 +51,7 @@ var UserTypeFilterUI = function UserTypeFilterUI(props) {
     return isSame;
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.UserTypeFilterContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, userTypes && userTypes.length > 0 && userTypes.map(function (type) {
+  return /*#__PURE__*/_react.default.createElement(_styles2.UserTypeFilterContainer, null, userTypes && userTypes.length > 0 && userTypes.map(function (type) {
     return /*#__PURE__*/_react.default.createElement(_styles.Button, {
       key: type.id,
       color: checkIsActive(type.value) ? 'primary' : 'secundaryDark',
@@ -61,7 +59,7 @@ var UserTypeFilterUI = function UserTypeFilterUI(props) {
         return handleChangeUserRole(type.value);
       }
     }, type.title, checkIsActive(type.value) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  })));
+  }));
 };
 
 exports.UserTypeFilterUI = UserTypeFilterUI;

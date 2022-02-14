@@ -69,6 +69,6 @@ var WrapperRow = _styledComponents.default.div(_templateObject15 || (_templateOb
 
 exports.WrapperRow = WrapperRow;
 
-var InputContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 3.5px 15px;\n"])));
+var InputContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 
 exports.InputContainer = InputContainer;
