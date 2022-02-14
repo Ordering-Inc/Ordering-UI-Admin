@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const WrapMetaFields = styled.div`
-  padding-top: 10px;
   box-sizing: border-box;
 `
 export const MetaTitle = styled.p`

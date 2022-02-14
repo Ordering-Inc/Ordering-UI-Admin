@@ -1,6 +1,5 @@
 import React from 'react'
 import { useUtils } from 'ordering-components-admin'
-// import { UserWalletTransactionHistory } from './naked'
 import { CircleFill } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 
@@ -14,7 +13,7 @@ import {
   Amount
 } from './styles'
 
-export const CustomerTransactionHistory = (props) => {
+export const CustomerCashWalletEvents = (props) => {
   const {
     cashEventsState,
     parseEvent

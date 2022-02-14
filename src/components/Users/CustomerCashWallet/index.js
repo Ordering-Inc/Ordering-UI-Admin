@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage, UserCashWallet } from 'ordering-components-admin'
 import { CustomerCashWalletDetails } from '../CustomerCashWalletDetails'
-import { CustomerTransactionHistory } from '../CustomerTransactionHistory'
+import { CustomerCashWalletEvents } from '../CustomerCashWalletEvents'
 
 import {
   Container,
@@ -34,7 +34,7 @@ const CustomerCashWalletUI = (props) => {
         <CustomerCashWalletDetails {...props} />
       )}
       {showOption === 'history' && (
-        <CustomerTransactionHistory {...props} />
+        <CustomerCashWalletEvents {...props} />
       )}
     </Container>
   )
