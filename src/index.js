@@ -10,7 +10,7 @@ import { LoginForm, ForgotPasswordForm } from './components/Login'
 import { EnterprisePromotionListing } from './components/Marketing'
 import { Cms, IntegrationListing, LanguageManager, PlaceListing, Settings } from './components/Settings'
 import { BusinessBrandListing, BusinessesListing, BusinessProductsListing } from './components/Stores'
-import { UsersListing } from './components/Users'
+import { UsersListing, CustomersListing } from './components/Users'
 
 import { Layout } from './components/Layout'
 import { SidebarMenu } from './components/SidebarMenu'
@@ -75,6 +75,7 @@ export {
   BusinessesListing,
   BusinessProductsListing,
   UsersListing,
+  CustomersListing,
 
   Layout,
   SidebarMenu,

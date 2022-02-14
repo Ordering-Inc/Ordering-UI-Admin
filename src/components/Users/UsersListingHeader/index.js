@@ -1,10 +1,8 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { UsersDeleteButton } from '../UsersDeleteButton'
-import { UsersExportCSV } from '../UsersExportCSV'
 import { SearchBar } from '../../Shared'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { Button, IconButton } from '../../../styles'
+import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 
 import {
@@ -15,17 +13,9 @@ import {
 
 export const UsersListingHeader = (props) => {
   const {
-    deafultUserTypesSelected,
-    disabledActiveStateCondition,
     title,
-    selectedUsers,
-    deleteUsersActionState,
-    handleDeleteSeveralUsers,
-    userTypesSelected,
-    selectedUserActiveState,
     searchValue,
-    onSearch,
-    handleOpenUserAddForm
+    onSearch
   } = props
 
   const [, t] = useLanguage()
@@ -45,27 +35,9 @@ export const UsersListingHeader = (props) => {
         <h1>{title}</h1>
       </HeaderTitleContainer>
       <ActionContainer>
-        <Button
-          borderRadius='8px'
-          color='lightPrimary'
-          onClick={() => handleOpenUserAddForm()}
-          data-tour='tour_add'
-        >
-          {t('ADD_USER', 'Add user')}
-        </Button>
-        <UsersExportCSV
-          deafultUserTypesSelected={deafultUserTypesSelected}
-          disabledActiveStateCondition={disabledActiveStateCondition}
-          userTypesSelected={userTypesSelected}
-          selectedUserActiveState={selectedUserActiveState}
-        />
-        <UsersDeleteButton
-          selectedUsers={selectedUsers}
-          deleteUsersActionState={deleteUsersActionState}
-          handleDeleteSeveralUsers={handleDeleteSeveralUsers}
-        />
         <SearchBar
           lazyLoad
+          isCustomLayout
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}

@@ -1,3 +1,4 @@
+import { CustomersListing } from './CustomersListing'
 import { UserAddForm } from './UserAddForm'
 import { UserMetaFields } from './UserMetaFields'
 import { UsersListing } from './UsersListing'
@@ -6,6 +7,7 @@ import { UsersExportCSV } from './UsersExportCSV'
 import { UserTypeSelector } from './UserTypeSelector'
 
 export {
+  CustomersListing,
   UserAddForm,
   UserMetaFields,
   UsersListing,

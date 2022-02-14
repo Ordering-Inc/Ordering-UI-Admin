@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useTheme } from 'styled-components'
-import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
-import { Envelope, Phone, ThreeDotsVertical } from 'react-bootstrap-icons'
+import { Envelope, Phone } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles'
 import { ConfirmAdmin, Pagination } from '../../Shared'
 
@@ -23,7 +21,6 @@ import {
   UserTypeWrapper,
   UserEnableWrapper,
   WrapperPagination,
-  WrapperUserActionSelector,
   AddNewUserButton,
   UsersBottomContainer,
   VerifiedItemsContainer,
@@ -37,7 +34,6 @@ export const UsersList = (props) => {
     paginationProps,
     getUsers,
     handleChangeActiveUser,
-    handleDeleteUser,
     selectedUsers,
     handleSelectedUsers,
     handleOpenUserDetails,
@@ -45,7 +41,6 @@ export const UsersList = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [{ optimizeImage }] = useUtils()
 
   const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
@@ -108,9 +103,9 @@ export const UsersList = (props) => {
             <thead>
               <tr>
                 <th>{t('USER', 'User')}</th>
-                <th>{t('DETAILS', 'Details')}</th>
-                <th />
-                <th colSpan={2}>{t('ACTION', 'Action')}</th>
+                <th>{t('PHONE', 'Phone')}</th>
+                <th>{t('TYPE', 'Type')}</th>
+                <th>{t('ACTION', 'Action')}</th>
               </tr>
             </thead>
             {usersList.loading ? (
@@ -132,21 +127,12 @@ export const UsersList = (props) => {
                       </UserMainInfo>
                     </td>
                     <td>
-                      <InfoBlock>
-                        <p className='bold'><Skeleton width={100} /></p>
-                        <p><Skeleton width={100} /></p>
-                      </InfoBlock>
+                      <Skeleton width={100} />
                     </td>
                     <td>
                       <UserTypeWrapper>
-                        <Skeleton width={100} />
+                        <Skeleton width={80} />
                       </UserTypeWrapper>
-                    </td>
-                    <td>
-                      <UserEnableWrapper>
-                        <span><Skeleton width={100} /></span>
-                        <Skeleton width={50} />
-                      </UserEnableWrapper>
                     </td>
                     <td>
                       <Skeleton width={20} />
@@ -223,18 +209,6 @@ export const UsersList = (props) => {
                           onChange={enabled => handleEnable(user, enabled)}
                         />
                       </UserEnableWrapper>
-                    </td>
-                    <td>
-                      <WrapperUserActionSelector className='user_action'>
-                        <DropdownButton
-                          menuAlign={theme?.rtl ? 'left' : 'right'}
-                          title={<ThreeDotsVertical />}
-                          id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                        >
-                          <Dropdown.Item onClick={() => handleOpenUserDetails(user)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                          <Dropdown.Item onClick={() => handleDeleteUser(user?.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
-                        </DropdownButton>
-                      </WrapperUserActionSelector>
                     </td>
                   </tr>
                 </tbody>
