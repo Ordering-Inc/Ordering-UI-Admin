@@ -47,7 +47,7 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [openMessages, setOpenMessages] = useState({ chat: false, history: false })
-  const [openMetaFields, setOpenMetaFields] = useState(false)
+  const [showOption, setShowOption] = useState(null)
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
 
@@ -138,7 +138,7 @@ const OrderDetailsUI = (props) => {
     if (openMessage === 'history') {
       setOpenMessages({ chat: false, history: true })
     }
-    setOpenMetaFields(false)
+    setShowOption(null)
     setExtraOpen(true)
   }
 
@@ -146,10 +146,10 @@ const OrderDetailsUI = (props) => {
     setOpenMessages({ chat: false, history: false })
   }
 
-  const handleOpenMetaFields = () => {
+  const handleShowOption = (option) => {
     handleCloseMessages()
     setExtraOpen(true)
-    setOpenMetaFields(true)
+    setShowOption(option)
   }
 
   useEffect(() => {
@@ -289,7 +289,7 @@ const OrderDetailsUI = (props) => {
             order={order}
             extraOpen={extraOpen}
             actionSidebar={actionSidebar}
-            handleOpenMetaFields={handleOpenMetaFields}
+            handleShowOption={handleShowOption}
             handleOpenMessages={handleOpenMessages}
             isTourOpen={isTourOpen}
             currentTourStep={currentTourStep}
@@ -393,7 +393,7 @@ const OrderDetailsUI = (props) => {
                 </ChatContainer>
               )}
 
-              {openMetaFields && (
+              {showOption === 'metafields' && (
                 <OrderMetaFields
                   orderId={order?.id}
                 />
@@ -440,12 +440,14 @@ const OrderDetailsUI = (props) => {
               <Modal
                 width='70%'
                 height='70vh'
-                open={openMetaFields}
-                onClose={() => setOpenMetaFields(false)}
+                open={!!showOption}
+                onClose={() => setShowOption(null)}
               >
-                <OrderMetaFields
-                  orderId={order?.id}
-                />
+                {showOption === 'metafields' && (
+                  <OrderMetaFields
+                    orderId={order?.id}
+                  />
+                )}
               </Modal>
             </>
           )}

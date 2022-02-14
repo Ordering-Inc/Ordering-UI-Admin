@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import { useLanguage, ImporterForm as ImporterFormController } from 'ordering-components-admin'
+import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
 import { IconButton, Button, Input } from '../../../styles'
 import { XLg } from 'react-bootstrap-icons'
@@ -58,6 +59,7 @@ export const ImporterFormUI = (props) => {
   const [filedValue, setFiledValue] = useState()
   const [metafiledKey, setMetaFiledKey] = useState()
   const [metafiledValue, setMetaFiledValue] = useState()
+  const theme = useTheme()
 
   const importypeOptions = [
     {
@@ -191,7 +193,7 @@ export const ImporterFormUI = (props) => {
 
         <InputWrapper>
           <label style={{ fontSize: '16px', lineHeight: '24px', fontWeight: '600' }}>{t('MAPPING', 'Mapping')}</label>
-          <span style={{ fontSize: '14px', lineHeight: '24px' }}>CSV file example <a href='www.example.com' target='_blank' rel='noopener noreferrer'>www.example.com</a></span>
+          <span style={{ fontSize: '14px', lineHeight: '24px' }}>CSV file example <a href={theme.files?.exampleCSV || 'www.example.com'} target='_blank' rel='noopener noreferrer' download={theme.files?.exampleCSV}>example.csv</a></span>
         </InputWrapper>
         <>
           {(importType === 1 || importType === 2 || importType === 3) && (

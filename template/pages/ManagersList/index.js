@@ -9,8 +9,6 @@ export const ManagersList = (props) => {
   const usersProps = {
     ...props,
     headerTitle: t('MANAGERS', 'Managers'),
-    isShowActiveStateFilter: true,
-    isShowUserTypeFilter: true,
     deafultUserTypesSelected: [0, 1, 2],
     onUserRedirect: (userId) => {
       if (!userId) {
