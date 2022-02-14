@@ -108,6 +108,7 @@ import orderStatus20 from './template/assets/images/order/status-20.svg'
 import orderStatus21 from './template/assets/images/order/status-21.svg'
 
 import categoryAll from './template/assets/images/categories/category-all.png'
+import exampleCSV from './template/assets/files/ordering_business_example.csv'
 
 if (!(window?.location?.hostname === 'localhost')) {
   Sentry.init({
@@ -226,6 +227,10 @@ theme.images = {
     businessTutorial1: businessTutorial1,
     businessTutorial2: businessTutorial2
   }
+}
+
+theme.files = {
+  exampleCSV
 }
 
 const RouteApp = () => {
