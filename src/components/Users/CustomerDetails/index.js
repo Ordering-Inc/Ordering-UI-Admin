@@ -9,7 +9,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Envelope, Phone, ThreeDots, PersonFill, ChevronRight } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { UserDetails } from '../UserDetails'
-import { CustomerWallet } from '../CustomerWallet'
+import { CustomerCashWallet } from '../CustomerCashWallet'
 import { Confirm, SideBar } from '../../Shared'
 
 import {
@@ -42,10 +42,10 @@ const CustomerDetailsUI = (props) => {
 
   const customerMenus = [
     { key: 'user_details', value: t('USER_DETAILS', 'User details') },
-    { key: 'businesses_opened', value: t('BUSINESSES_OPENED', 'Businesses opened') },
-    { key: 'products_opened', value: t('PRODUCTS_OPENED', 'Products opened') },
-    { key: 'cash_wallet', value: t('CASH_WALLET', 'Cash wallet') },
-    { key: 'points_wallet', value: t('POINTS_WALLET', 'Points wallet') }
+    // { key: 'businesses_opened', value: t('BUSINESSES_OPENED', 'Businesses opened') },
+    // { key: 'products_opened', value: t('PRODUCTS_OPENED', 'Products opened') },
+    { key: 'cash_wallet', value: t('CASH_WALLET', 'Cash wallet') }
+    // { key: 'points_wallet', value: t('POINTS_WALLET', 'Points wallet') }
   ]
 
   const onDeleteCustomer = () => {
@@ -164,7 +164,7 @@ const CustomerDetailsUI = (props) => {
             </UserDetailsWrapper>
           )}
           {showOption === 'cash_wallet' && (
-            <CustomerWallet
+            <CustomerCashWallet
               userId={userState.user?.id}
             />
           )}
