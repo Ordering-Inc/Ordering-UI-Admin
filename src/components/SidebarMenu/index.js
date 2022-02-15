@@ -13,7 +13,8 @@ import {
   Headset as HeadsetIcon,
   Truck,
   GraphUp,
-  WindowDock
+  WindowDock,
+  Award
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -59,6 +60,27 @@ export const SidebarMenu = (props) => {
       id: 3,
       title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
       pageName: 'drivers'
+    }
+  ]
+
+  const loyaltySubMenus = [
+    {
+      id: 1,
+      title: t('REWARDS_PROGRAMS', 'Rewards programs'),
+      pageName: 'rewards_programs',
+      url: '/loyalty/rewards-programs'
+    },
+    {
+      id: 2,
+      title: t('LOYALTY_LEVELS', 'Loyalty levels'),
+      pageName: 'loyalty_levels',
+      url: '/loyalty/levels'
+    },
+    {
+      id: 3,
+      title: t('REPORTS', 'Reports'),
+      pageName: 'loyalty_reports',
+      url: '/loyalty/reports'
     }
   ]
 
@@ -442,6 +464,32 @@ export const SidebarMenu = (props) => {
                           <SubMenu
                             key={item.id}
                             active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='9'
+                      active={
+                        location.pathname === '/loyalty/rewards-programs' ||
+                        location.pathname === '/loyalty/levels' ||
+                        location.pathname === '/loyalty/reports'
+                      }
+                    >
+                      <Award />
+                      <span>{t('LOYALTY', 'Loyalty')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='9'>
+                      <MenuContent>
+                        {loyaltySubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.url)}
                             onClick={() => handleGoToPage({ page: item.pageName })}
                           >
                             {item.title}
