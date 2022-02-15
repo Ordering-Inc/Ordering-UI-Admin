@@ -103,6 +103,7 @@ export const ProductPrice = styled.p`
 `
 
 export const ProductDescription = styled.p`
+  word-break: break-word;
   font-size: 14px;
   color: ${props => props.theme.colors.headingColor};
   margin: 25px 0;
