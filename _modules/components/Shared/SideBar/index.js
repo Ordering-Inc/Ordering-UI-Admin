@@ -39,7 +39,8 @@ var SideBar = function SideBar(props) {
       defaultSideBarWidth = props.defaultSideBarWidth,
       moveDistance = props.moveDistance,
       isBorderShow = props.isBorderShow,
-      noAnimation = props.noAnimation;
+      noAnimation = props.noAnimation,
+      handleCloseWizard = props.handleCloseWizard;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -76,7 +77,8 @@ var SideBar = function SideBar(props) {
 
   var onCloseSidebar = function onCloseSidebar(e) {
     if (e.code === 'Escape') {
-      props.onClose() && props.onClose();
+      props.onClose && props.onClose();
+      handleCloseWizard && handleCloseWizard();
     }
   };
 

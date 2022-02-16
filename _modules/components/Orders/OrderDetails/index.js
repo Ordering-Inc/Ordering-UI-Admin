@@ -458,6 +458,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var onCloseSidebar = function onCloseSidebar(e) {
     if (e.code === 'Escape') {
       props.onClose() && props.onClose();
+      setIsTourOpen && setIsTourOpen(false);
     }
   };
 
