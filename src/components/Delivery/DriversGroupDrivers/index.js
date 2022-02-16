@@ -56,12 +56,14 @@ export const DriversGroupDrivers = (props) => {
       </SearchBarWrapper>
       <ButtonGroup>
         <Button
+          type='button'
           color='secundaryDark'
           onClick={() => handleSelectAllDriver(true)}
         >
           {t('SELECT_ALL', 'Select all')}
         </Button>
         <Button
+          type='button'
           color='secundaryDark'
           onClick={() => handleSelectAllDriver(false)}
         >
