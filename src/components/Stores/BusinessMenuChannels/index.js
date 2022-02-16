@@ -43,10 +43,10 @@ export const BusinessMenuChannels = (props) => {
         {sitesState.sites?.map(site => (
           <TabOption
             key={site.id}
-            onClick={() => handleChangeMenuSite(site.id, formState?.changes?.sites?.includes(site.id) ?? menu?.sites.find(s => s?.id === site?.id))}
+            onClick={() => handleChangeMenuSite(site.id, formState?.changes?.sites?.includes(site.id) ?? menu?.sites?.find(s => s?.id === site?.id))}
           >
             {
-              formState?.changes?.sites?.includes(site.id) ?? menu?.sites.find(s => s?.id === site?.id) ? (
+              formState?.changes?.sites?.includes(site.id) ?? menu?.sites?.find(s => s?.id === site?.id) ? (
                 <RiCheckboxFill className='fill' />
               ) : (
                 <RiCheckboxBlankLine />
