@@ -85,7 +85,7 @@ var ProductPrice = _styledComponents.default.p(_templateObject11 || (_templateOb
 
 exports.ProductPrice = ProductPrice;
 
-var ProductDescription = _styledComponents.default.p(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: ", ";\n  margin: 25px 0;\n"])), function (props) {
+var ProductDescription = _styledComponents.default.p(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  word-break: break-word;\n  font-size: 14px;\n  color: ", ";\n  margin: 25px 0;\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

@@ -61,7 +61,7 @@ var WrapperImage = _styledComponents.default.div(_templateObject8 || (_templateO
 
 exports.WrapperImage = WrapperImage;
 
-var InfoBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  div {\n    font-size: 14px;\n    color: ", ";\n    transition: all 0.3s;\n    &.product_description {\n      font-size: 10px;\n      color: ", ";\n      resize: none;\n      width: 100%;\n      display: -webkit-box;\n      -webkit-box-orient: vertical;\n      -webkit-line-clamp: 2;\n      overflow: hidden;\n    }\n    &.product_price {\n      white-space: nowrap;\n    }\n    &.product_tax,\n    &.product_fee {\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
+var InfoBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  div {\n    font-size: 14px;\n    color: ", ";\n    transition: all 0.3s;\n    &.product_description {\n      word-break: break-word;\n      font-size: 10px;\n      color: ", ";\n      resize: none;\n      width: 100%;\n      display: -webkit-box;\n      -webkit-box-orient: vertical;\n      -webkit-line-clamp: 2;\n      overflow: hidden;\n    }\n    &.product_price {\n      white-space: nowrap;\n    }\n    &.product_tax,\n    &.product_fee {\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.lightGray;
