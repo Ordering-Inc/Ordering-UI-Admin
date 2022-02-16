@@ -25,9 +25,9 @@ const BusinessMenuUI = (props) => {
     businessMenusState,
     handleChangeBusinessMenuActiveState,
     handleSuccessBusinessMenu,
-
     isSelectedSharedMenus,
-    setIsSelectedSharedMenus
+    setIsSelectedSharedMenus,
+    sitesState
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -129,6 +129,7 @@ const BusinessMenuUI = (props) => {
               isSelectedSharedMenus={isSelectedSharedMenus}
               isOpenSharedProduct={isOpenSharedProduct}
               setIsOpenSharedProduct={setIsOpenSharedProduct}
+              sitesState={sitesState}
             />
           )}
         </>
@@ -148,6 +149,7 @@ const BusinessMenuUI = (props) => {
                 handleUpdateBusinessState={handleSuccessBusinessMenu}
                 isSelectedSharedMenus={isSelectedSharedMenus}
                 setIsOpenSharedProduct={setIsOpenSharedProduct}
+                sitesState={sitesState}
               />
             </Modal>
           )}
