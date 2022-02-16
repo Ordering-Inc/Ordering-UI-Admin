@@ -253,6 +253,7 @@ const OrderDetailsUI = (props) => {
   const onCloseSidebar = (e) => {
     if (e.code === 'Escape') {
       props.onClose() && props.onClose()
+      setIsTourOpen && setIsTourOpen(false)
     }
   }
 

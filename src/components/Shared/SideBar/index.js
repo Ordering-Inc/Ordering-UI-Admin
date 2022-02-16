@@ -13,7 +13,8 @@ export const SideBar = (props) => {
     defaultSideBarWidth,
     moveDistance,
     isBorderShow,
-    noAnimation
+    noAnimation,
+    handleCloseWizard
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -45,7 +46,8 @@ export const SideBar = (props) => {
 
   const onCloseSidebar = (e) => {
     if (e.code === 'Escape') {
-      props.onClose() && props.onClose()
+      props.onClose && props.onClose()
+      handleCloseWizard && handleCloseWizard()
     }
   }
 
