@@ -13,6 +13,7 @@ import { BusinessMenuShare } from '../BusinessMenuShare'
 import { BusinessMenuBasicOptions } from '../BusinessMenuBasicOptions'
 import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { BusinessSharedMenuProducts } from '../BusinessSharedMenuProducts'
+import { BusinessMenuChannels } from '../BusinessMenuChannels'
 
 import {
   Container,
@@ -33,7 +34,8 @@ const BusinessMenuOptionsUI = (props) => {
     handleUpdateBusinessState,
     isSelectedSharedMenus,
     handleDeleteMenu,
-    setIsOpenSharedProduct
+    setIsOpenSharedProduct,
+    sitesState
   } = props
 
   const theme = useTheme()
@@ -133,6 +135,14 @@ const BusinessMenuOptionsUI = (props) => {
                 >
                   {t('BASIC', 'Basic')}
                 </Tab>
+                {sitesState?.sites?.length > 0 && (
+                  <Tab
+                    active={selectedMenuOption === 'channels'}
+                    onClick={() => setSelectedMenuOption('channels')}
+                  >
+                    {t('CHANNELS', 'Channels')}
+                  </Tab>
+                )}
                 {Object.keys(menu).length > 0 && (
                   <Tab
                     active={selectedMenuOption === 'share_with'}
@@ -150,6 +160,11 @@ const BusinessMenuOptionsUI = (props) => {
           <>
             {selectedMenuOption === 'basic' && (
               <BusinessMenuBasicOptions
+                {...props}
+              />
+            )}
+            {selectedMenuOption === 'channels' && (
+              <BusinessMenuChannels
                 {...props}
               />
             )}
