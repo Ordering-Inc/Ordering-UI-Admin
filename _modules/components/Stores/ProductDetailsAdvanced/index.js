@@ -308,6 +308,11 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     onChange: function onChange(enabled) {
       return handleEnableSKU(enabled);
     }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('HIDE_SPECIAL_INSTRUCTIONS', 'Hide special instructions')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: productState === null || productState === void 0 ? void 0 : productState.hide_special_instructions,
+    onChange: function onChange(enabled) {
+      return handleClickProperty('hide_special_instructions', enabled);
+    }
   })), isSku && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
     htmlFor: "sku"
   }, "SKU"), /*#__PURE__*/_react.default.createElement(_styles.Input, {

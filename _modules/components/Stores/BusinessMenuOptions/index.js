@@ -31,6 +31,8 @@ var _BusinessMenuCustomFields = require("../BusinessMenuCustomFields");
 
 var _BusinessSharedMenuProducts = require("../BusinessSharedMenuProducts");
 
+var _BusinessMenuChannels = require("../BusinessMenuChannels");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -56,6 +58,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
+  var _sitesState$sites;
+
   var open = props.open,
       onClose = props.onClose,
       menu = props.menu,
@@ -63,7 +67,8 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       isSelectedSharedMenus = props.isSelectedSharedMenus,
       handleDeleteMenu = props.handleDeleteMenu,
-      setIsOpenSharedProduct = props.setIsOpenSharedProduct;
+      setIsOpenSharedProduct = props.setIsOpenSharedProduct,
+      sitesState = props.sitesState;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -165,12 +170,17 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     onClick: function onClick() {
       return setSelectedMenuOption('basic');
     }
-  }, t('BASIC', 'Basic')), Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('BASIC', 'Basic')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: selectedMenuOption === 'channels',
+    onClick: function onClick() {
+      return setSelectedMenuOption('channels');
+    }
+  }, t('CHANNELS', 'Channels')), Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedMenuOption === 'share_with',
     onClick: function onClick() {
       return setSelectedMenuOption('share_with');
     }
-  }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || Object.keys(menu).length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
+  }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || Object.keys(menu).length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'channels' && /*#__PURE__*/_react.default.createElement(_BusinessMenuChannels.BusinessMenuChannels, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
     menu: menu,
     business: business,
     handleUpdateBusinessState: handleUpdateBusinessState
