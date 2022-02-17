@@ -219,6 +219,13 @@ const ProductDetailsAdvancedUI = (props) => {
           onChange={enabled => handleEnableSKU(enabled)}
         />
       </PropertyOption>
+      <PropertyOption>
+        <label>{t('HIDE_SPECIAL_INSTRUCTIONS', 'Hide special instructions')}</label>
+        <Switch
+          defaultChecked={productState?.hide_special_instructions}
+          onChange={enabled => handleClickProperty('hide_special_instructions', enabled)}
+        />
+      </PropertyOption>
       {isSku && (
         <>
           <LabelCustom htmlFor='sku'>SKU</LabelCustom>
