@@ -27,6 +27,12 @@ Object.defineProperty(exports, "PlaceListing", {
     return _PlaceListing.PlaceListing;
   }
 });
+Object.defineProperty(exports, "SettingItemUI", {
+  enumerable: true,
+  get: function get() {
+    return _SettingItemUI.SettingItemUI;
+  }
+});
 Object.defineProperty(exports, "Settings", {
   enumerable: true,
   get: function get() {
@@ -43,3 +49,5 @@ var _LanguageManager = require("./LanguageManager");
 var _PlaceListing = require("./PlaceListing");
 
 var _Settings = require("./Settings");
+
+var _SettingItemUI = require("./SettingItemUI");

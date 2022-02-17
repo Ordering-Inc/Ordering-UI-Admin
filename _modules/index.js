@@ -9,6 +9,18 @@ Object.defineProperty(exports, "Alert", {
     return _Shared.Alert;
   }
 });
+Object.defineProperty(exports, "AnalyticsBusinessFilter", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.AnalyticsBusinessFilter;
+  }
+});
+Object.defineProperty(exports, "AnalyticsCalendar", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.AnalyticsCalendar;
+  }
+});
 Object.defineProperty(exports, "BusinessAnalytics", {
   enumerable: true,
   get: function get() {
@@ -207,6 +219,12 @@ Object.defineProperty(exports, "MessagesListing", {
     return _Messages.MessagesListing;
   }
 });
+Object.defineProperty(exports, "Modal", {
+  enumerable: true,
+  get: function get() {
+    return _Shared.Modal;
+  }
+});
 Object.defineProperty(exports, "NotNetworkConnectivity", {
   enumerable: true,
   get: function get() {
@@ -243,6 +261,132 @@ Object.defineProperty(exports, "Reports", {
     return _BusinessIntelligence.Reports;
   }
 });
+Object.defineProperty(exports, "ReportsAverageSales", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsAverageSales;
+  }
+});
+Object.defineProperty(exports, "ReportsBusinessDistance", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsBusinessDistance;
+  }
+});
+Object.defineProperty(exports, "ReportsBusinessSpend", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsBusinessSpend;
+  }
+});
+Object.defineProperty(exports, "ReportsCustomer", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsCustomer;
+  }
+});
+Object.defineProperty(exports, "ReportsDriverDistance", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsDriverDistance;
+  }
+});
+Object.defineProperty(exports, "ReportsDriverFilter", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsDriverFilter;
+  }
+});
+Object.defineProperty(exports, "ReportsDriverGroupFilter", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsDriverGroupFilter;
+  }
+});
+Object.defineProperty(exports, "ReportsDriverOrder", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsDriverOrder;
+  }
+});
+Object.defineProperty(exports, "ReportsDriverOrderTime", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsDriverOrderTime;
+  }
+});
+Object.defineProperty(exports, "ReportsDriverSchedule", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsDriverSchedule;
+  }
+});
+Object.defineProperty(exports, "ReportsDriverSpend", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsDriverSpend;
+  }
+});
+Object.defineProperty(exports, "ReportsGeneralSales", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsGeneralSales;
+  }
+});
+Object.defineProperty(exports, "ReportsOrderDistance", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsOrderDistance;
+  }
+});
+Object.defineProperty(exports, "ReportsOrderStatus", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsOrderStatus;
+  }
+});
+Object.defineProperty(exports, "ReportsOrders", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsOrders;
+  }
+});
+Object.defineProperty(exports, "ReportsPaymethodSales", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsPaymethodSales;
+  }
+});
+Object.defineProperty(exports, "ReportsSaleAndCategory", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsSaleAndCategory;
+  }
+});
+Object.defineProperty(exports, "ReportsSales", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsSales;
+  }
+});
+Object.defineProperty(exports, "ReportsSpentTime", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsSpentTime;
+  }
+});
+Object.defineProperty(exports, "ReportsTopDrivers", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsTopDrivers;
+  }
+});
+Object.defineProperty(exports, "ReportsUsers", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessIntelligence.ReportsUsers;
+  }
+});
 Object.defineProperty(exports, "ReviewProductsListing", {
   enumerable: true,
   get: function get() {
@@ -261,10 +405,22 @@ Object.defineProperty(exports, "Select", {
     return _Select.Select;
   }
 });
+Object.defineProperty(exports, "SettingItemUI", {
+  enumerable: true,
+  get: function get() {
+    return _Settings.SettingItemUI;
+  }
+});
 Object.defineProperty(exports, "Settings", {
   enumerable: true,
   get: function get() {
     return _Settings.Settings;
+  }
+});
+Object.defineProperty(exports, "SideBar", {
+  enumerable: true,
+  get: function get() {
+    return _Shared.SideBar;
   }
 });
 Object.defineProperty(exports, "SidebarMenu", {
