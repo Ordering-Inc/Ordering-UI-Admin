@@ -9,7 +9,7 @@ import {
   PlusCircleFill,
   DashCircleFill
 } from 'react-bootstrap-icons'
-import { Alert } from '../Confirm'
+import { Alert, Confirm } from '../Confirm'
 import { ScheduleCopyTimes } from '../ScheduleCopyTimes'
 import { DefaultSelect, Checkbox } from '../../../styles'
 
@@ -48,6 +48,8 @@ const ScheduleUI = (props) => {
   const [, t] = useLanguage()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
   const [scheduleOptions, setScheduleOptions] = useState([])
   const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
 
@@ -67,6 +69,17 @@ const ScheduleUI = (props) => {
     setAlertState({
       open: false,
       content: []
+    })
+  }
+
+  const onClickDelete = (daysOfWeekIndex, index) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('SCHEDULE', 'Schedule')),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteSchedule(daysOfWeekIndex, index)
+      }
     })
   }
 
@@ -160,7 +173,7 @@ const ScheduleUI = (props) => {
                       isHide={schedule?.lapses.length <= 1}
                     >
                       <Trash
-                        onClick={() => handleDeleteSchedule(daysOfWeekIndex, index)}
+                        onClick={() => onClickDelete(daysOfWeekIndex, index)}
                       />
                     </TrashIconWrapper>
                   </div>
@@ -240,6 +253,17 @@ const ScheduleUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <Confirm
+        width='700px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </>
