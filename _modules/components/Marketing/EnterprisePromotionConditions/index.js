@@ -31,6 +31,8 @@ var _EnterprisePromotionSpecficCategory = require("../EnterprisePromotionSpecfic
 
 var _EnterprisePromotionDeliveryzones = require("../EnterprisePromotionDeliveryzones");
 
+var _EnterprisePromotionMaxOrders = require("../EnterprisePromotionMaxOrders");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -85,7 +87,7 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       selectedTitle = _useState8[0],
       setSelectedTitle = _useState8[1];
 
-  var singleConditions = ['limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'];
+  var singleConditions = ['limit', 'limit_per_user', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'];
   var specifics = ['products', 'categories', 'delivery_zones'];
 
   var handlePromotionEdit = function handlePromotionEdit(condition, title) {
@@ -211,6 +213,10 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       return handleClickSave();
     }
   })), selectedCondition === 'categories' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionSpecficCategory.EnterprisePromotionSpecficCategory, _extends({}, props, {
+    onClickDone: function onClickDone() {
+      return handleClickSave();
+    }
+  })), selectedCondition === 'user_order_count' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionMaxOrders.EnterprisePromotionMaxOrders, _extends({}, props, {
     onClickDone: function onClickDone() {
       return handleClickSave();
     }
