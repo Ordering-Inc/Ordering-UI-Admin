@@ -105,10 +105,11 @@ var BusinessProductList = function BusinessProductList(props) {
   }, {
     value: 'price',
     content: t('PRICE', 'Price')
-  }, {
-    value: 'offer_price',
-    content: t('REQULAR_PRICE', 'Regular Price')
-  }, {
+  }, // {
+  //   value: 'offer_price',
+  //   content: t('REQULAR_PRICE', 'Regular Price')
+  // },
+  {
     value: 'description',
     content: t('DESCRIPTION', 'Description')
   }, {

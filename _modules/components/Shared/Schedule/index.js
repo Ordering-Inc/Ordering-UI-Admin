@@ -74,15 +74,24 @@ var ScheduleUI = function ScheduleUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
       _useState4 = _slicedToArray(_useState3, 2),
-      scheduleOptions = _useState4[0],
-      setScheduleOptions = _useState4[1];
+      confirm = _useState4[0],
+      setConfirm = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      isOpenCopytimes = _useState6[0],
-      setIsOpenCopytimes = _useState6[1];
+      scheduleOptions = _useState6[0],
+      setScheduleOptions = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isOpenCopytimes = _useState8[0],
+      setIsOpenCopytimes = _useState8[1];
 
   var daysOfWeek = [t('SUNDAY_ABBREVIATION', 'Sun'), t('MONDAY_ABBREVIATION', 'Mon'), t('TUESDAY_ABBREVIATION', 'Tue'), t('WEDNESDAY_ABBREVIATION', 'Wed'), t('THURSDAY_ABBREVIATION', 'Thu'), t('FRIDAY_ABBREVIATION', 'Fri'), t('SATURDAY_ABBREVIATION', 'Sat')];
 
@@ -92,6 +101,19 @@ var ScheduleUI = function ScheduleUI(props) {
     setAlertState({
       open: false,
       content: []
+    });
+  };
+
+  var onClickDelete = function onClickDelete(daysOfWeekIndex, index) {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('SCHEDULE', 'Schedule')),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeleteSchedule(daysOfWeekIndex, index);
+      }
     });
   };
 
@@ -163,7 +185,7 @@ var ScheduleUI = function ScheduleUI(props) {
         isHide: (schedule === null || schedule === void 0 ? void 0 : schedule.lapses.length) <= 1
       }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
         onClick: function onClick() {
-          return handleDeleteSchedule(daysOfWeekIndex, index);
+          return onClickDelete(daysOfWeekIndex, index);
         }
       })));
     }), openAddSchedule[daysOfWeekIndex] && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
@@ -222,6 +244,24 @@ var ScheduleUI = function ScheduleUI(props) {
     onAccept: function onAccept() {
       return closeAlert();
     },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    width: "700px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
 };
