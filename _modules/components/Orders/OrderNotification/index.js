@@ -13,15 +13,13 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Shared = require("../../Shared");
 
-var _styles = require("../../../styles");
-
 require("react-toastify/dist/ReactToastify.css");
 
 var _reactToastify = require("react-toastify");
 
 var _styledComponents = require("styled-components");
 
-var _styles2 = require("./styles");
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -119,7 +117,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     };
 
     var content = function content() {
-      return /*#__PURE__*/_react.default.createElement(_styles2.ToastWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+      return /*#__PURE__*/_react.default.createElement(_styles.ToastWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
         src: theme.images.logos.isotype,
         alt: ""
       }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('WEB_DASHBOARD_APPNAME', 'Ordering Dashboard')), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)))));
@@ -162,20 +160,17 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     };
   }, [configState, registerOrderIds]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    width: "50%",
-    hideCloseDefault: true,
+    width: "750px",
     open: notificationModalOpen,
     onClose: handleCloseNotificationModal
-  }, /*#__PURE__*/_react.default.createElement(_styles2.ModalContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('WEB_APPNAME', 'Ordering')), registerOrderIds.map(function (orderId) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ModalContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('NEW_ORDRES_RECEIVED', 'New orders have been received!')), /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.general.registerOrder,
+    alt: ""
+  }), registerOrderIds.map(function (orderId) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: orderId
     }, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "primary",
-    onClick: function onClick() {
-      return handleCloseNotificationModal();
-    }
-  }, t('OK', 'OK')))), /*#__PURE__*/_react.default.createElement("audio", {
+  }))), /*#__PURE__*/_react.default.createElement("audio", {
     id: "notification-sound",
     muted: true
   }, /*#__PURE__*/_react.default.createElement("source", {

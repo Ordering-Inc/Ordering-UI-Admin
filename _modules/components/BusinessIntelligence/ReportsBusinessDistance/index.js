@@ -263,9 +263,7 @@ var ReportsBusinessDistanceUI = function ReportsBusinessDistanceUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value_refers === 'average' ? parseNumber(td.value, {
-        decimal: 2
-      }) : td.value);
+      }, td.value_refers === 'average' ? parseNumber(td.value) : td.value);
     })));
   }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content16 = reportData.content) === null || _reportData$content16 === void 0 ? void 0 : (_reportData$content17 = _reportData$content16.footer) === null || _reportData$content17 === void 0 ? void 0 : _reportData$content17.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content18 = reportData.content) === null || _reportData$content18 === void 0 ? void 0 : (_reportData$content19 = _reportData$content18.footer) === null || _reportData$content19 === void 0 ? void 0 : _reportData$content19.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
@@ -274,7 +272,7 @@ var ReportsBusinessDistanceUI = function ReportsBusinessDistanceUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value);
+      }, parseNumber(td.value));
     }));
   }))) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_ReportsBarChart.ReportsBarChart, {
     chartDataList: reportData,
