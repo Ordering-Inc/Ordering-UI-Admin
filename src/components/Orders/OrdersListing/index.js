@@ -77,10 +77,8 @@ export const OrdersListing = (props) => {
       {((ordersStatusGroup === groupStatus) || isMessagesView) && (
         <>
           {!orderList.loading && pagination?.total === 0 ? (
-            <WrapperNoneOrders
-              small={orderListView === 'small'}
-            >
-              <InnerNoneOrdersContainer>
+            <WrapperNoneOrders>
+              <InnerNoneOrdersContainer small={orderListView === 'small'}>
                 <img src={theme?.images?.dummies?.noOrders} alt='none' />
               </InnerNoneOrdersContainer>
             </WrapperNoneOrders>
