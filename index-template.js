@@ -40,7 +40,7 @@ import businessTutorial2 from './template/assets/images/tutorials/business-tutor
  * dummies
  */
 import storeDummy from './template/assets/images/dummies/store.png'
-import nonOrders from './template/assets/images/dummies/nonOrders.svg'
+import noOrders from './template/assets/images/dummies/no-orders.png'
 import promotionDummy from './template/assets/images/dummies/promotion.png'
 import productDummy from './template/assets/images/dummies/product.png'
 
@@ -220,7 +220,7 @@ theme.images = {
     rightArrow: rightArrow
   },
   dummies: {
-    nonOrders: nonOrders,
+    noOrders: noOrders,
     businessLogo: storeDummy,
     promotionDummy: promotionDummy,
     product: productDummy

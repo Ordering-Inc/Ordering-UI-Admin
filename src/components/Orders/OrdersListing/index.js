@@ -81,7 +81,7 @@ export const OrdersListing = (props) => {
               small={orderListView === 'small'}
             >
               <InnerNoneOrdersContainer>
-                <img src={theme?.images?.dummies?.nonOrders} alt='none' />
+                <img src={theme?.images?.dummies?.noOrders} alt='none' />
               </InnerNoneOrdersContainer>
             </WrapperNoneOrders>
           ) : (
