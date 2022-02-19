@@ -6,7 +6,6 @@ import {
   OrderNotification as OrderNotificationController
 } from 'ordering-components-admin'
 import { Modal } from '../../Shared'
-import { Button } from '../../../styles'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
 import { useTheme } from 'styled-components'
@@ -107,21 +106,18 @@ const OrderNotificationUI = (props) => {
   return (
     <>
       <Modal
-        width='50%'
-        hideCloseDefault
+        width='750px'
         open={notificationModalOpen}
         onClose={handleCloseNotificationModal}
       >
         <ModalContainer>
-          <p>{t('WEB_APPNAME', 'Ordering')}</p>
+          <h1>{t('NEW_ORDRES_RECEIVED', 'New orders have been received!')}</h1>
+          <img src={theme.images.general.registerOrder} alt='' />
           {registerOrderIds.map((orderId) =>
             <p key={orderId}>
               {t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', `${orderId}`)}
             </p>
           )}
-          <Button color='primary' onClick={() => handleCloseNotificationModal()}>
-            {t('OK', 'OK')}
-          </Button>
         </ModalContainer>
       </Modal>
       <audio id='notification-sound' muted>

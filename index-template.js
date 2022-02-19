@@ -28,6 +28,7 @@ import loginHero from './template/assets/images/loginHero.png'
 import personalization from './template/assets/images/personalization.svg'
 import mobileCase from './template/assets/images/mobile-case.png'
 import mobileMask from './template/assets/images/mobile-mask.png'
+import registerOrder from './template/assets/images/register-order.png'
 
 /**
  * business tutorials
@@ -39,7 +40,7 @@ import businessTutorial2 from './template/assets/images/tutorials/business-tutor
  * dummies
  */
 import storeDummy from './template/assets/images/dummies/store.png'
-import nonOrders from './template/assets/images/dummies/nonOrders.svg'
+import noOrders from './template/assets/images/dummies/no-orders.png'
 import promotionDummy from './template/assets/images/dummies/promotion.png'
 import productDummy from './template/assets/images/dummies/product.png'
 
@@ -148,7 +149,8 @@ theme.images = {
     loginHero,
     personalization,
     mobileCase,
-    mobileMask
+    mobileMask,
+    registerOrder
   },
   order: {
     status0: orderStatus0,
@@ -218,7 +220,7 @@ theme.images = {
     rightArrow: rightArrow
   },
   dummies: {
-    nonOrders: nonOrders,
+    noOrders: noOrders,
     businessLogo: storeDummy,
     promotionDummy: promotionDummy,
     product: productDummy
