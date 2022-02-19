@@ -190,7 +190,7 @@ const ReportsBusinessDistanceUI = (props) => {
                   <Tbody key={i}>
                     <tr>
                       {tbody.map((td, j) => (
-                        <td key={j} colSpan={td.colspan}>{td.value_refers === 'average' ? parseNumber(td.value, { decimal: 2 }) : td.value}</td>
+                        <td key={j} colSpan={td.colspan}>{td.value_refers === 'average' ? parseNumber(td.value) : td.value}</td>
                       ))}
                     </tr>
                   </Tbody>
@@ -201,7 +201,7 @@ const ReportsBusinessDistanceUI = (props) => {
                       reportData?.content?.footer?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((td, j) => (
-                            <td key={j} colSpan={td.colspan}>{td.value}</td>
+                            <td key={j} colSpan={td.colspan}>{parseNumber(td.value)}</td>
                           ))}
                         </tr>
                       ))
