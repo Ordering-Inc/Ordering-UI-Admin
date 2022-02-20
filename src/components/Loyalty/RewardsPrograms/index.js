@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { List as MenuIcon, Wallet, BarChartSteps } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
+import { RewardsPrograms as RewardsProgramsController } from './naked'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { SideBar } from '../../Shared'
@@ -14,8 +15,9 @@ import {
   LoyaltyItemContent
 } from './styles'
 import { PointsWallet } from '../PointsWallet'
+import { Levels } from '../Levels'
 
-export const RewardsPrograms = () => {
+const RewardsProgramsUI = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
@@ -72,6 +74,7 @@ export const RewardsPrograms = () => {
           moveDistance={moveDistance}
         >
           <PointsWallet
+            {...props}
             handleParentSidebarMove={val => setMoveDistance(val)}
           />
         </SideBar>
@@ -83,9 +86,17 @@ export const RewardsPrograms = () => {
           open={showOption === 'levels'}
           onClose={() => setShowOption(null)}
         >
-          <div>Levels</div>
+          <Levels />
         </SideBar>
       )}
     </>
   )
+}
+
+export const RewardsPrograms = (props) => {
+  const rewardsProgramsProps = {
+    ...props,
+    UIComponent: RewardsProgramsUI
+  }
+  return <RewardsProgramsController {...rewardsProgramsProps} />
 }

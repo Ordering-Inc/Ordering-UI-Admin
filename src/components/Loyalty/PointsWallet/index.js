@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { PointsWallet as PointsWalletController } from './naked'
+import { LoyaltyBusinessDetail } from '../LoyaltyBusinessDetail'
+import { WalletBusinessList } from '../WalletBusinessList'
+
 import {
   Container,
   Title,
   Tabs,
   Tab
 } from './styles'
-import { WalletBusinessList } from '../WalletBusinessList'
-import { LoyaltyBusinessDetail } from '../LoyaltyBusinessDetail'
 
-export const PointsWallet = (props) => {
-  const { handleParentSidebarMove } = props
+const PointsWalletUI = (props) => {
+  const { handleParentSidebarMove, pointWallet, handleUpdatePointsWallet } = props
 
   const [, t] = useLanguage()
   const [selectedOption, setSelectedOption] = useState('business')
@@ -38,8 +40,22 @@ export const PointsWallet = (props) => {
           </Tab>
         ))}
       </Tabs>
-      {selectedOption === 'general' && <LoyaltyBusinessDetail />}
+      {selectedOption === 'general' && (
+        <LoyaltyBusinessDetail
+          walletData={pointWallet}
+          handleUpdatePointsWallet={handleUpdatePointsWallet}
+        />
+      )}
       {selectedOption === 'business' && <WalletBusinessList {...props} />}
     </Container>
   )
+}
+
+export const PointsWallet = (props) => {
+  const pointsWalletProps = {
+    ...props,
+    UIComponent: PointsWalletUI,
+    propsToFetch: ['id', 'name', 'logo']
+  }
+  return <PointsWalletController {...pointsWalletProps} />
 }

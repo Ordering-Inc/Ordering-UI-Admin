@@ -5,6 +5,15 @@ export const Container = styled.div`
   ${({ isBusiness }) => isBusiness && css`
     padding: 20px;
   `}
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 `
 
 export const HeaderContainer = styled.div`
@@ -87,11 +96,12 @@ export const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 18px;
+  cursor: pointer;
 
   svg {
     color: ${props => props.theme.colors.primary};
-    font-size: 17px;
-    min-width: 17px;
+    font-size: 19px;
+    min-width: 19px;
     margin-right: 13px;
     ${props => props.theme.rtl && css`
       margin-left: 13px;

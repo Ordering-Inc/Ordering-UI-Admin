@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
+import { useLanguage, useUtils } from 'ordering-components-admin'
+import { WalletBusinessList as WalletBusinessListController } from './naked'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { SearchBar, Pagination, Modal, SideBar } from '../../Shared'
-import { Button } from '../../../styles'
+import { Button, Checkbox } from '../../../styles'
 import { ChevronRight } from 'react-bootstrap-icons'
 import {
   Container,
@@ -26,10 +25,11 @@ import { LoyaltyBusinessDetail } from '../LoyaltyBusinessDetail'
 const WalletBusinessListUI = (props) => {
   const {
     businessList,
-    businessIds,
-    searchValue,
-    onSearch,
-    handleParentSidebarMove
+    handleParentSidebarMove,
+    pointWallet,
+    handleCheckBox,
+    handleUpdateWalletBusiness,
+    handleUpdateBusinessList
   } = props
 
   const [, t] = useLanguage()
@@ -46,6 +46,7 @@ const WalletBusinessListUI = (props) => {
   const [totalPages, setTotalPages] = useState(null)
   const [extraOpen, setExtraOpen] = useState(false)
   const [selectedBusiness, setSelectedBusiness] = useState(null)
+  const [searchVal, setSearchVal] = useState('')
 
   const handleChangePage = (page) => {
     setCurrentPage(page)
@@ -57,16 +58,8 @@ const WalletBusinessListUI = (props) => {
     setPagesPerPage(pageSize)
   }
 
-  const isCheckEnableSate = (id) => {
-    const found = businessIds?.find(businessId => businessId === id)
-    let valid = false
-    if (found) {
-      valid = true
-    }
-    return valid
-  }
-
-  const handleClickBusiness = (business) => {
+  const handleClickBusiness = (business, e) => {
+    if (e.target.closest('#accumulates') || e.target.closest('#redeems')) return
     setSelectedBusiness(business)
     setExtraOpen(true)
     if (width >= 1100) {
@@ -90,32 +83,45 @@ const WalletBusinessListUI = (props) => {
 
   useEffect(() => {
     if (businessList.loading) return
-    let _totalPages
-    if (businessList.businesses.length > 0) {
-      _totalPages = Math.ceil(businessList.businesses.length / pagesPerPage)
+    let filteredBusinessList = []
+    if (businessList?.businesses.length > 0) {
+      if (searchVal) {
+        filteredBusinessList = businessList.businesses.filter(business => business?.business_name.toLowerCase().includes(searchVal.toLowerCase()))
+      } else {
+        filteredBusinessList = [...businessList.businesses]
+      }
     }
+    const _totalPages = Math.ceil(filteredBusinessList.length / pagesPerPage)
     const indexOfLastPost = currentPage * pagesPerPage
     const indexOfFirstPost = indexOfLastPost - pagesPerPage
-    const _currentBusinessList = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
+    const _currentBusinessList = filteredBusinessList.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
     setCurrentPages(_currentBusinessList)
-  }, [businessList, currentPage, pagesPerPage])
+  }, [businessList, currentPage, pagesPerPage, searchVal])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchVal])
 
   return (
     <Container>
       <SearchWrapper>
         <SearchBar
-          search={searchValue}
+          search={searchVal}
           isCustomLayout
           lazyLoad
-          onSearch={(value) => onSearch(value)}
+          onSearch={(value) => setSearchVal(value)}
           placeholder={t('SEARCH', 'Search')}
         />
       </SearchWrapper>
-      <BusinessSelectOption>
-        <Button color='secundaryDark'>{t('SELECT_ALL', 'Select all')}</Button>
-        <Button color='secundaryDark'>{t('SELECT_NONE', 'Select none')}</Button>
-      </BusinessSelectOption>
+
+      {pointWallet?.type !== 'credit_point' && (
+        <BusinessSelectOption>
+          <Button color='secundaryDark'>{t('SELECT_ALL', 'Select all')}</Button>
+          <Button color='secundaryDark'>{t('SELECT_NONE', 'Select none')}</Button>
+        </BusinessSelectOption>
+      )}
+
       <TableWrapper>
         {businessList.loading ? (
           <BusinessTable>
@@ -172,33 +178,33 @@ const WalletBusinessListUI = (props) => {
               <TBoday
                 key={i}
                 active={business?.id === selectedBusiness?.id}
-                onClick={() => handleClickBusiness(business)}
+                onClick={(e) => handleClickBusiness(business, e)}
               >
                 <tr>
                   <td>
                     <BusinessInfoWrapper>
                       <WrapperImage>
-                        <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_120,c_limit')} />
+                        <Image bgimage={optimizeImage(business?.business_logo || theme.images?.dummies?.businessLogo, 'h_120,c_limit')} />
                       </WrapperImage>
-                      <span>{business?.name}</span>
+                      <span>{business?.business_name}</span>
                     </BusinessInfoWrapper>
                   </td>
                   <td>
                     <CheckBoxWrapper>
-                      {isCheckEnableSate(business.id) ? (
-                        <RiCheckboxFill className='fill' />
-                      ) : (
-                        <RiCheckboxBlankLine />
-                      )}
+                      <Checkbox
+                        defaultChecked={business?.redeems}
+                        id='redeems'
+                        onClick={(e) => handleCheckBox(business.business_id, 'redeems', e.target.checked)}
+                      />
                     </CheckBoxWrapper>
                   </td>
                   <td>
                     <CheckBoxWrapper>
-                      {isCheckEnableSate(business.id) ? (
-                        <RiCheckboxFill className='fill' />
-                      ) : (
-                        <RiCheckboxBlankLine />
-                      )}
+                      <Checkbox
+                        defaultChecked={business?.accumulates}
+                        id='accumulates'
+                        onClick={(e) => handleCheckBox(business.business_id, 'accumulates', e.target.checked)}
+                      />
                     </CheckBoxWrapper>
                   </td>
                   <td>
@@ -215,7 +221,7 @@ const WalletBusinessListUI = (props) => {
           </BusinessTable>
         )}
       </TableWrapper>
-      {businessList?.businesses?.length > 0 && (
+      {currentPages?.length > 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -236,7 +242,10 @@ const WalletBusinessListUI = (props) => {
               onClose={handleCloseBusinessDetail}
             >
               <LoyaltyBusinessDetail
-                business={selectedBusiness}
+                walletData={selectedBusiness}
+                handleUpdateWalletBusiness={handleUpdateWalletBusiness}
+                handleUpdateBusinessList={handleUpdateBusinessList}
+                isBusiness
               />
             </SideBar>
           ) : (
@@ -248,7 +257,10 @@ const WalletBusinessListUI = (props) => {
               onClose={handleCloseBusinessDetail}
             >
               <LoyaltyBusinessDetail
-                business={selectedBusiness}
+                walletData={selectedBusiness}
+                handleUpdateWalletBusiness={handleUpdateWalletBusiness}
+                handleUpdateBusinessList={handleUpdateBusinessList}
+                isBusiness
               />
             </Modal>
           )}
@@ -261,9 +273,8 @@ const WalletBusinessListUI = (props) => {
 export const WalletBusinessList = (props) => {
   const walletBusinessListProps = {
     ...props,
-    propsToFetch: ['id', 'name', 'slug', 'logo'],
-    isSearchByName: true,
+    propsToFetch: ['id', 'name', 'logo'],
     UIComponent: WalletBusinessListUI
   }
-  return <AnalyticsBusinessFilterController {...walletBusinessListProps} />
+  return <WalletBusinessListController {...walletBusinessListProps} />
 }

@@ -126,15 +126,6 @@ export const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  svg {
-    font-size: 20px;
-    color: ${props => props.theme.colors.secundaryLight};
-
-    &.fill {
-      color: ${props => props.theme.colors.primary};
-    }
-  }
 `
 
 export const ModifiedWrapper = styled.div`
