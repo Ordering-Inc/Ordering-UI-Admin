@@ -14,7 +14,8 @@ import {
   TypeSelectWrapper,
   Option,
   LabelCustom,
-  OptionCenter
+  OptionCenter,
+  InputContainer
 } from './styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Alert, Modal } from '../../Shared'
@@ -218,6 +219,13 @@ const ProductDetailsAdvancedUI = (props) => {
           onChange={enabled => handleEnableSKU(enabled)}
         />
       </PropertyOption>
+      <PropertyOption>
+        <label>{t('HIDE_SPECIAL_INSTRUCTIONS', 'Hide special instructions')}</label>
+        <Switch
+          defaultChecked={productState?.hide_special_instructions}
+          onChange={enabled => handleClickProperty('hide_special_instructions', enabled)}
+        />
+      </PropertyOption>
       {isSku && (
         <>
           <LabelCustom htmlFor='sku'>SKU</LabelCustom>
@@ -265,6 +273,23 @@ const ProductDetailsAdvancedUI = (props) => {
           />
         )}
       </TypeSelectWrapper>
+      <InputContainer>
+        <LabelCustom htmlFor='calories'>Calories</LabelCustom>
+        <Input
+          name='calories'
+          id='calories'
+          placeholder='0.00'
+          defaultValue={productState?.calories ?? ''}
+          onChange={(e) => handleClickProperty('calories', e.target.value ?? null)}
+          disabled={formState.loading}
+          autoComplete='off'
+          onKeyPress={(e) => {
+            if (!/^[0-9.]$/.test(e.key)) {
+              e.preventDefault()
+            }
+          }}
+        />
+      </InputContainer>
       <Button
         color='primary'
         borderRadius='7.6px'

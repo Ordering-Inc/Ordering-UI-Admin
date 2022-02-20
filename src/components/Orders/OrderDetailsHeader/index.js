@@ -1,7 +1,14 @@
 import React from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
-import { Printer, Diagram3, ThreeDotsVertical, XLg as CloseIcon, Chat as ChatIcon, Dot } from 'react-bootstrap-icons'
+import {
+  // Wallet2,
+  Diagram3,
+  ThreeDotsVertical,
+  XLg as CloseIcon,
+  Chat as ChatIcon,
+  Dot
+} from 'react-bootstrap-icons'
 import { IconButton as ButtonLink } from '../../../styles'
 import {
   OrderDetailsHeaderContainer,
@@ -12,7 +19,7 @@ import {
 export const OrderDetailsHeader = (props) => {
   const {
     order,
-    handleOpenMetaFields,
+    handleShowOption,
     handleOpenMessages,
     actionSidebar,
     setIsTourOpen,
@@ -63,6 +70,12 @@ export const OrderDetailsHeader = (props) => {
         </p>
       </div>
       <ButtonGroup>
+        {/* <ButtonLink
+          isDisabled={isTourOpen && currentTourStep === 1}
+          onClick={() => handleShowOption('cash_wallet')}
+        >
+          <Wallet2 />
+        </ButtonLink> */}
         {user?.level !== 5 && (
           <ButtonLink
             onClick={() => handleOpenMessages('chat')}
@@ -76,9 +89,9 @@ export const OrderDetailsHeader = (props) => {
             )}
           </ButtonLink>
         )}
-        <ButtonLink onClick={() => window.print()}>
+        {/* <ButtonLink onClick={() => window.print()}>
           <Printer />
-        </ButtonLink>
+        </ButtonLink> */}
         <ButtonLink
           onClick={() => handleOpenMessages('history')}
           isDisabled={isTourOpen && currentTourStep === 1}
@@ -86,7 +99,7 @@ export const OrderDetailsHeader = (props) => {
           <Diagram3 />
         </ButtonLink>
         <ButtonLink
-          onClick={() => handleOpenMetaFields()}
+          onClick={() => handleShowOption('metafields')}
           isDisabled={isTourOpen && currentTourStep === 1}
         >
           <ThreeDotsVertical />

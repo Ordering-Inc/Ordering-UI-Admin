@@ -1,45 +1,38 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useToast, ToastType } from 'ordering-components-admin'
 
-const ToastBar = styled.div`
-  visibility: hidden;
-  min-width: 250px;
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 16px;
-  position: fixed;
-  z-index: 9999;
-  bottom: 30px;
-  border-radius: 8px;
+const ToastContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 
-  ${props => props.theme?.rtl ? css`
-    left: 30px;
-  ` : css`
-    right: 30px;
-  `}
+  .toast-bar {
+    background-color: ${({ backgroundColor }) => backgroundColor};
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 9999;
+    bottom: 30px;
+    border-radius: 8px;
+    opacity: 1;
 
-  /* Animations to fade the snackbar in and out */
-  @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-  }
+    ${props => props.theme?.rtl ? css`
+      left: 30px;
+    ` : css`
+      right: 30px;
+    `}
 
-  @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-  }
-
-  @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-  }
-
-  @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+    font-size: 14px;
+    min-width: 200px;
+    max-width: 200px;
+    @media(min-width: 380px){
+      font-size: 16px;
+      min-width: 250px;
+      max-width: initial;
+    }
   }
 `
 
@@ -47,18 +40,26 @@ export const Toast = () => {
   const [toastConfig, { hideToast }] = useToast()
   const toastRef = useRef()
 
-  useEffect(() => {
-    if (!toastConfig && !toastRef.current) {
-      return
-    }
+  const [timeoutState, setTimeoutState] = useState(null)
 
-    const toast = document.getElementById('toast-bar')
-    toast.style.visibility = 'visible'
-    toast.style.animation = 'fadein 0.5s, fadeout 0.5s 2.5s'
-    setTimeout(() => {
-      toast.style.visibility = 'hidden'
+  useEffect(() => {
+    if (!toastConfig && !toastRef.current) return
+    const container = document.getElementById('toast-container')
+    const oldToast = document.querySelector('.toast-bar')
+    clearTimeout(timeoutState)
+    if (oldToast) {
+      container.removeChild(oldToast)
+    }
+    const toast = document.createElement('div')
+    toast.classList.add('toast-bar')
+    toast.innerHTML = message
+    container.appendChild(toast)
+
+    const timeout = setTimeout(() => {
+      toast.remove()
       hideToast()
-    }, duration)
+    }, [duration])
+    setTimeoutState(timeout)
   }, [toastConfig])
 
   if (!toastConfig) {
@@ -82,6 +83,10 @@ export const Toast = () => {
   }
 
   return (
-    <ToastBar backgroundColor={backgroundColor} id='toast-bar' ref={toastRef}>{message}</ToastBar>
+    <ToastContainer
+      backgroundColor={backgroundColor}
+      ref={toastRef}
+      id='toast-container'
+    />
   )
 }

@@ -68,12 +68,14 @@ export const DriversGroupBusinesses = (props) => {
       </SearchBarWrapper>
       <ButtonGroup>
         <Button
+          type='button'
           color='secundaryDark'
           onClick={() => handleSelectAllBusiness(true)}
         >
           {t('SELECT_ALL', 'Select all')}
         </Button>
         <Button
+          type='button'
           color='secundaryDark'
           onClick={() => handleSelectAllBusiness(false)}
         >

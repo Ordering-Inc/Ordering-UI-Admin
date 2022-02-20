@@ -80,6 +80,7 @@ export const InfoBlock = styled.div`
     color: ${props => props.theme.colors.headingColor};
     transition: all 0.3s;
     &.product_description {
+      word-break: break-word;
       font-size: 10px;
       color: ${props => props.theme.colors.lightGray};
       resize: none;

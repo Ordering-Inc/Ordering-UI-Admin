@@ -1,7 +1,6 @@
 import React from 'react'
 import { useLanguage, UserTypeFilter as UserTypeFilterController } from 'ordering-components-admin'
 import { Button } from '../../../styles'
-import { DragScroll } from '../../Shared'
 import MdClose from '@meronex/icons/ios/MdClose'
 
 import {
@@ -28,18 +27,16 @@ export const UserTypeFilterUI = (props) => {
 
   return (
     <UserTypeFilterContainer>
-      <DragScroll>
-        {userTypes && userTypes.length > 0 && userTypes.map(type => (
-          <Button
-            key={type.id}
-            color={checkIsActive(type.value) ? 'primary' : 'secundaryDark'}
-            onClick={() => handleChangeUserRole(type.value)}
-          >
-            {type.title}
-            {checkIsActive(type.value) && <MdClose />}
-          </Button>
-        ))}
-      </DragScroll>
+      {userTypes && userTypes.length > 0 && userTypes.map(type => (
+        <Button
+          key={type.id}
+          color={checkIsActive(type.value) ? 'primary' : 'secundaryDark'}
+          onClick={() => handleChangeUserRole(type.value)}
+        >
+          {type.title}
+          {checkIsActive(type.value) && <MdClose />}
+        </Button>
+      ))}
     </UserTypeFilterContainer>
   )
 }

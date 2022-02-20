@@ -55,7 +55,7 @@ export const HeaderTitleContainer = styled.div`
 export const ActionContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 15px;
 
   > *:not(:last-child) {
     ${props => props.theme?.rtl ? css`
@@ -68,10 +68,6 @@ export const ActionContainer = styled.div`
   input {
     background: ${props => props.theme.colors.secundary};
     border: none;
-  }
-
-  button {
-    height: 41px;
   }
 
   @media (min-width: 768px) {

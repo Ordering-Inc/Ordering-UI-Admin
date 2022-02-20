@@ -10,6 +10,7 @@ import { EnterprisePromotionSchedule } from '../EnterprisePromotionSchedule'
 import { EnterprisePromotionSpecficProducts } from '../EnterprisePromotionSpecficProducts'
 import { EnterprisePromotionSpecficCategory } from '../EnterprisePromotionSpecficCategory'
 import { EnterprisePromotionDeliveryzones } from '../EnterprisePromotionDeliveryzones'
+import { EnterprisePromotionMaxOrders } from '../EnterprisePromotionMaxOrders'
 
 import {
   ConditionsContainer,
@@ -38,7 +39,7 @@ export const EnterprisePromotionConditions = (props) => {
   const [selectedTitle, setSelectedTitle] = useState(null)
 
   const singleConditions = [
-    'limit', 'limit_per_user', 'user_order_count', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'
+    'limit', 'limit_per_user', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'
   ]
 
   const specifics = ['products', 'categories', 'delivery_zones']
@@ -154,6 +155,12 @@ export const EnterprisePromotionConditions = (props) => {
         )}
         {selectedCondition === 'categories' && (
           <EnterprisePromotionSpecficCategory
+            {...props}
+            onClickDone={() => handleClickSave()}
+          />
+        )}
+        {selectedCondition === 'user_order_count' && (
+          <EnterprisePromotionMaxOrders
             {...props}
             onClickDone={() => handleClickSave()}
           />

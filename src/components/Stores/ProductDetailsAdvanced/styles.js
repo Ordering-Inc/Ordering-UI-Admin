@@ -150,5 +150,4 @@ export const WrapperRow = styled.div`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 3.5px 15px;
 `

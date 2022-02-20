@@ -75,7 +75,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(svg|png|jpe?g|gif|webp|mp3|ogg|otf|eot|ttf|woff|woff2)$/i,
+        test: /\.(svg|png|jpe?g|gif|webp|mp3|ogg|otf|eot|ttf|woff|woff2|csv)$/i,
         use: [
           {
             loader: 'url-loader',
