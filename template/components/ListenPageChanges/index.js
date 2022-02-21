@@ -39,7 +39,8 @@ export const ListenPageChanges = ({ children }) => {
     drivers_groups: '/delivery/drivers-groups',
     enterprise_promotions: '/marketing/promotions-enterprise',
     ordering_products: '/ordering-products',
-    support: '/support'
+    support: '/support',
+    rewards_programs: '/loyalty/rewards-programs'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

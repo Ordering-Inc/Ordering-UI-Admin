@@ -3,14 +3,14 @@ import { OrderingProductsListing } from './components/OrderingProducts'
 import { PageNotFound } from './components/PageNotFound'
 import { DeliveriesManager, DriversManager, OrdersManager } from './components/Orders'
 import { Support } from './components/Support'
-import { 
-  BusinessAnalytics, 
-  DriverAnalytics, 
-  InvoiceManager, 
-  Reports, 
-  ReviewsListing, 
-  ReviewProductsListing, 
-  ReportsDriverGroupFilter, 
+import {
+  BusinessAnalytics,
+  DriverAnalytics,
+  InvoiceManager,
+  Reports,
+  ReviewsListing,
+  ReviewProductsListing,
+  ReportsDriverGroupFilter,
   ReportsDriverFilter,
   AnalyticsBusinessFilter,
   AnalyticsCalendar,
@@ -32,7 +32,7 @@ import {
   ReportsDriverOrderTime,
   ReportsBusinessSpend,
   ReportsOrderDistance,
-  ReportsBusinessDistance,
+  ReportsBusinessDistance
 } from './components/BusinessIntelligence'
 import { DeliveryUsersListing, DriversCompaniesListing, DriversGroupsListing } from './components/Delivery'
 import { HomePage } from './components/Home'
@@ -41,6 +41,7 @@ import { EnterprisePromotionListing } from './components/Marketing'
 import { Cms, IntegrationListing, LanguageManager, PlaceListing, Settings, SettingItemUI } from './components/Settings'
 import { BusinessBrandListing, BusinessesListing, BusinessProductsListing } from './components/Stores'
 import { UsersListing, CustomersListing } from './components/Users'
+import { RewardsPrograms } from './components/Loyalty'
 
 import { Layout } from './components/Layout'
 import { SidebarMenu } from './components/SidebarMenu'
@@ -132,6 +133,8 @@ export {
   BusinessProductsListing,
   UsersListing,
   CustomersListing,
+
+  RewardsPrograms,
 
   Layout,
   SidebarMenu,

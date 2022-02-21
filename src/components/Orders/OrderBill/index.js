@@ -15,6 +15,15 @@ export const OrderBill = (props) => {
   const [{ parsePrice, parseNumber }] = useUtils()
   const [{ configs }] = useConfig()
 
+  const walletName = {
+    cash: {
+      name: t('CASH_WALLET', 'Cash Wallet')
+    },
+    credit_point: {
+      name: t('POINTS_WALLET', 'Points Wallet')
+    }
+  }
+
   return (
     <OrderBillContainer>
       <table>
@@ -82,6 +91,12 @@ export const OrderBill = (props) => {
               <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee, { currencyPosition: 'left' })}</td>
             </tr>
           )}
+          {order?.payment_events?.length > 0 && order?.payment_events?.map((event, i) => (
+            <tr key={i}>
+              <td>{walletName[event?.wallet_event?.wallet?.type]?.name}</td>
+              <td>-{parsePrice(event?.amount)}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <table className='total'>

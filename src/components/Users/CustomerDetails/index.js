@@ -23,6 +23,7 @@ import {
   OptionMenu,
   UserDetailsWrapper
 } from './styles'
+import { CustomerPointsWallet } from '../CustomerPointsWallet'
 
 const CustomerDetailsUI = (props) => {
   const {
@@ -44,8 +45,8 @@ const CustomerDetailsUI = (props) => {
     { key: 'user_details', value: t('USER_DETAILS', 'User details') },
     // { key: 'businesses_opened', value: t('BUSINESSES_OPENED', 'Businesses opened') },
     // { key: 'products_opened', value: t('PRODUCTS_OPENED', 'Products opened') },
-    { key: 'cash_wallet', value: t('CASH_WALLET', 'Cash wallet') }
-    // { key: 'points_wallet', value: t('POINTS_WALLET', 'Points wallet') }
+    { key: 'cash_wallet', value: t('CASH_WALLET', 'Cash wallet') },
+    { key: 'points_wallet', value: t('POINTS_WALLET', 'Points wallet') }
   ]
 
   const onDeleteCustomer = () => {
@@ -166,6 +167,12 @@ const CustomerDetailsUI = (props) => {
           {showOption === 'cash_wallet' && (
             <CustomerCashWallet
               userId={userState.user?.id}
+            />
+          )}
+          {showOption === 'points_wallet' && (
+            <CustomerPointsWallet
+              userId={userState.user?.id}
+              user={userState.user}
             />
           )}
         </SideBar>
