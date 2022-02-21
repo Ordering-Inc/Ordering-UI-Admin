@@ -15,7 +15,11 @@ import {
   Option,
   LabelCustom,
   OptionCenter,
-  InputContainer
+  InputContainer,
+  FieldRow,
+  WeightWrapper,
+  PropertyOptionWrapper,
+  PricePerUnit
 } from './styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Alert, Modal } from '../../Shared'
@@ -44,11 +48,15 @@ const ProductDetailsAdvancedUI = (props) => {
   const [{ user }] = useSession()
   const [{ parsePrice }] = useUtils()
   const [isSku, setIsSku] = useState(false)
+  const [isShowPriceByWeight, setIsShowPriceByWeight] = useState(false)
   const [taxesOption, setTaxesOption] = useState([])
   const [feesOptions, setFeesOptions] = useState([])
   const [fesSelected, setFeeSelected] = useState(null)
   const [taxSelected, setTaxSelected] = useState(null)
   const [taxToDelete, setTaxToDelete] = useState({ action: null, id: null })
+  const [productPrice, setProductPrice] = useState()
+  const [unitPrice, setunitPrice] = useState(0)
+  const [pricePerUnit, setPricePerUnit] = useState('grams')
 
   const estimatedPersons = [
     { value: 'no_apply', content: <Option>{t('NO_APPLY', 'No apply')}</Option>, showOnSelected: <Option>{t('NO_APPLY', 'No apply')}</Option> },
@@ -57,6 +65,35 @@ const ProductDetailsAdvancedUI = (props) => {
       content: <Option>{i + 1}</Option>
     }))
   ]
+
+  const weightUnitOptions = [
+    {
+      value: 'grams',
+      content: t('WEIGHT_UNIT_GRAM', 'grams'),
+      ratio: 1
+    },
+    {
+      value: 'kg',
+      content: t('WEIGHT_UNIT_KILOGRAM', 'kilograms'),
+      ratio: 0.001
+    },
+    {
+      value: 'ounces',
+      content: t('WEIGHT_UNIT_OUNCE', 'ounces'),
+      ratio: 0.035274
+    },
+    {
+      value: 'pounds',
+      content: t('WEIGHT_UNIT_POUND', 'pounds'),
+      ratio: 0.00220462
+    }
+  ]
+
+  const [inputs, setInputs] = useState({
+    productWeight: null,
+    unitOfWeight: weightUnitOptions[0].ratio,
+    perPriceOfWeight: weightUnitOptions[0].ratio
+  })
 
   const getTaxOrFeeString = (string) => {
     return string === 'taxes' ? 'tax' : 'fee'
@@ -158,6 +195,51 @@ const ProductDetailsAdvancedUI = (props) => {
     }
   }
 
+  const handleEnablePriceWeight = (enabled) => {
+    setIsShowPriceByWeight(enabled)
+    setunitPrice(0)
+    if (!enabled) {
+      handleClickProperty('weight', null)
+    }
+  }
+
+  const handleChangeWeight = (e) => {
+    handleClickProperty('weight', e.target.value)
+    e.persist()
+    setInputs(values => ({
+      ...values,
+      productWeight: e.target.value
+    }))
+  }
+
+  const handleChangeUnit = (val) => {
+    handleClickProperty('weight_unit', val ?? 'grams')
+    setPricePerUnit(val)
+    const _unitRatio = weightUnitOptions.filter(option => option.value === val)[0]?.ratio
+    setInputs(values => ({
+      ...values,
+      unitOfWeight: _unitRatio
+    }))
+  }
+
+  const handleChangePricePerUnit = (val) => {
+    setPricePerUnit(val)
+    const _unitRatio = weightUnitOptions.filter(option => option.value === val)[0]?.ratio
+    setInputs(values => ({
+      ...values,
+      perPriceOfWeight: _unitRatio
+    }))
+  }
+
+  const getPerWeightPrice = () => {
+    const pricePerWeight = productPrice / inputs.productWeight / inputs.perPriceOfWeight * inputs.unitOfWeight
+    if (pricePerWeight === Number.POSITIVE_INFINITY || pricePerWeight === Number.NEGATIVE_INFINITY) {
+      setunitPrice(0)
+      return
+    }
+    setunitPrice(pricePerWeight)
+  }
+
   useEffect(() => {
     if (taxes) getTaxes()
   }, [JSON.stringify(taxes)])
@@ -196,36 +278,40 @@ const ProductDetailsAdvancedUI = (props) => {
     }
   }, [productState])
 
+  useEffect(() => {
+    if (productState?.weight) {
+      setIsShowPriceByWeight(true)
+    } else {
+      setIsShowPriceByWeight(false)
+    }
+  }, [productState?.weight])
+
+  useEffect(() => {
+    if (formState?.changes?.weight && !productState?.weight_unit) {
+      handleClickProperty('weight_unit', 'grams')
+    }
+  }, [formState?.changes?.weight])
+
+  useEffect(() => {
+    setProductPrice(productState?.price)
+    if (productState?.weight && productState?.weight_unit) {
+      const _unitRatio = weightUnitOptions.filter(option => option.value === productState?.weight_unit)[0]?.ratio
+      setInputs(values => ({
+        ...values,
+        productWeight: productState?.weight,
+        perPriceOfWeight: _unitRatio
+      }))
+      setPricePerUnit(productState?.weight_unit)
+    }
+  }, [productState])
+
+  useEffect(() => {
+    getPerWeightPrice()
+  }, [inputs])
+
   return (
     <PropertiesContainer>
-      <PropertyOption>
-        <label>{t('FEATURED', 'Featured')}</label>
-        <Switch
-          defaultChecked={productState?.featured || false}
-          onChange={enabled => handleClickProperty('featured', enabled)}
-        />
-      </PropertyOption>
-      <PropertyOption>
-        <label>{t('UPSELLING', 'Upselling')}</label>
-        <Switch
-          defaultChecked={productState?.upselling || false}
-          onChange={enabled => handleClickProperty('upselling', enabled)}
-        />
-      </PropertyOption>
-      <PropertyOption>
-        <label>{t('SKU', 'Stock Keeping Unit (SKU)')}</label>
-        <Switch
-          defaultChecked={isSku}
-          onChange={enabled => handleEnableSKU(enabled)}
-        />
-      </PropertyOption>
-      <PropertyOption>
-        <label>{t('HIDE_SPECIAL_INSTRUCTIONS', 'Hide special instructions')}</label>
-        <Switch
-          defaultChecked={productState?.hide_special_instructions}
-          onChange={enabled => handleClickProperty('hide_special_instructions', enabled)}
-        />
-      </PropertyOption>
+      <p>product price: {parsePrice(productState?.price)}</p>
       {isSku && (
         <>
           <LabelCustom htmlFor='sku'>SKU</LabelCustom>
@@ -273,23 +359,136 @@ const ProductDetailsAdvancedUI = (props) => {
           />
         )}
       </TypeSelectWrapper>
-      <InputContainer>
-        <LabelCustom htmlFor='calories'>Calories</LabelCustom>
-        <Input
-          name='calories'
-          id='calories'
-          placeholder='0.00'
-          defaultValue={productState?.calories ?? ''}
-          onChange={(e) => handleClickProperty('calories', e.target.value ?? null)}
-          disabled={formState.loading}
-          autoComplete='off'
-          onKeyPress={(e) => {
-            if (!/^[0-9.]$/.test(e.key)) {
-              e.preventDefault()
-            }
-          }}
-        />
-      </InputContainer>
+      <FieldRow>
+        <InputContainer>
+          <LabelCustom htmlFor='cost_price'>{t('PRODUCT_COST', 'Product cost')}</LabelCustom>
+          <Input
+            name='cost_price'
+            id='cost_price'
+            placeholder='0.00'
+            defaultValue={productState?.cost_price ?? ''}
+            onChange={(e) => handleClickProperty('cost_price', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+        <InputContainer>
+          <LabelCustom htmlFor='cost_offer_price'>{t('PRODUCT_REGULAR_COST', 'Product cost - regular price')}</LabelCustom>
+          <Input
+            name='cost_offer_price'
+            id='cost_offer_price'
+            placeholder='0.00'
+            defaultValue={productState?.cost_offer_price ?? ''}
+            onChange={(e) => handleClickProperty('cost_offer_price', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+      </FieldRow>
+      <FieldRow>
+        <InputContainer className={`${isShowPriceByWeight ? 'growUnset showWeight' : 'growUnset'}`}>
+          <LabelCustom htmlFor='calories'>{t('CALORIES', 'Calories')}</LabelCustom>
+          <Input
+            name='calories'
+            id='calories'
+            placeholder='0.00'
+            defaultValue={productState?.calories ?? ''}
+            onChange={(e) => handleClickProperty('calories', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+        {isShowPriceByWeight && (
+          <InputContainer>
+            <LabelCustom htmlFor='weight'>{t('PRODUCT_WEIGHT', 'Product weight')}</LabelCustom>
+            <WeightWrapper>
+              <Input
+                name='weight'
+                id='weight'
+                placeholder='0.00'
+                defaultValue={productState?.weight ?? ''}
+                // onChange={(e) => handleClickProperty('weight', e.target.value ?? null)}
+                onChange={handleChangeWeight}
+                disabled={formState.loading}
+                autoComplete='off'
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+              <Select
+                notAsync
+                defaultValue={productState?.weight_unit ?? 'grams'}
+                options={weightUnitOptions}
+                onChange={(val) => handleChangeUnit(val)}
+              />
+            </WeightWrapper>
+          </InputContainer>
+        )}
+      </FieldRow>
+      <PropertyOptionWrapper>
+        <PropertyOption>
+          <label>{t('FEATURED', 'Featured')}</label>
+          <Switch
+            defaultChecked={productState?.featured || false}
+            onChange={enabled => handleClickProperty('featured', enabled)}
+          />
+        </PropertyOption>
+        <PropertyOption>
+          <label>{t('UPSELLING', 'Upselling')}</label>
+          <Switch
+            defaultChecked={productState?.upselling || false}
+            onChange={enabled => handleClickProperty('upselling', enabled)}
+          />
+        </PropertyOption>
+        <PropertyOption>
+          <label>{t('SKU', 'Stock Keeping Unit (SKU)')}</label>
+          <Switch
+            defaultChecked={isSku}
+            onChange={enabled => handleEnableSKU(enabled)}
+          />
+        </PropertyOption>
+        <PropertyOption>
+          <label>{t('HIDE_SPECIAL_INSTRUCTIONS', 'Hide special instructions')}</label>
+          <Switch
+            defaultChecked={productState?.hide_special_instructions}
+            onChange={enabled => handleClickProperty('hide_special_instructions', enabled)}
+          />
+        </PropertyOption>
+        <PropertyOption>
+          <label>{t('SHOW_PRICE_BY_WEIGHT', 'Show price by weight')}</label>
+          <Switch
+            defaultChecked={isShowPriceByWeight}
+            onChange={enabled => handleEnablePriceWeight(enabled)}
+          />
+        </PropertyOption>
+        {isShowPriceByWeight && (
+          <PricePerUnit>
+            <label>{parsePrice(unitPrice)} / </label>
+            <Select
+              defaultValue={pricePerUnit}
+              options={weightUnitOptions}
+              onChange={(val) => handleChangePricePerUnit(val)}
+            />
+          </PricePerUnit>
+        )}
+      </PropertyOptionWrapper>
       <Button
         color='primary'
         borderRadius='7.6px'

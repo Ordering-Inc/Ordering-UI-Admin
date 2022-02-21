@@ -22,7 +22,7 @@ import {
   TableWrapper,
   EmptyContent
 } from './styles'
-import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
+// import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
 
 const ReportsDriverOrderTimeUI = (props) => {
   const {
@@ -34,7 +34,7 @@ const ReportsDriverOrderTimeUI = (props) => {
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
-  const [isOrderTypeFilter, setIsOrderTypeFilter] = useState(false)
+  // const [isOrderTypeFilter, setIsOrderTypeFilter] = useState(false)
 
   const tableRef = useRef(null)
 
@@ -113,11 +113,11 @@ const ReportsDriverOrderTimeUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          <Button
+          {/* <Button
             onClick={() => setIsOrderTypeFilter(true)}
           >
             {t('ORDER_TYPE', 'Order type')} ({filterList?.delivery_types_ids ? filterList?.delivery_types_ids.length : t('ALL', 'All')})
-          </Button>
+          </Button> */}
         </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar
@@ -209,7 +209,7 @@ const ReportsDriverOrderTimeUI = (props) => {
           {...props} onClose={() => setIsBrandFilter(false)}
         />
       </Modal>
-      <Modal
+      {/* <Modal
         width='50%'
         height='80vh'
         padding='30px'
@@ -221,7 +221,7 @@ const ReportsDriverOrderTimeUI = (props) => {
           {...props}
           onClose={() => setIsOrderTypeFilter(false)}
         />
-      </Modal>
+      </Modal> */}
     </ReportsBusinessSpendContainer>
   )
 }
