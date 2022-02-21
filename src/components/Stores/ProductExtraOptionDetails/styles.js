@@ -175,6 +175,18 @@ export const InputWrapper = styled.div`
   ` : css`
     margin-right: 20px;
   `}
+
+  ${props => props.disabled && css`
+    div{
+      pointer-events: none;
+    }
+  `}
+  
+  .checked {
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
 `
 
 export const ActionsContainer = styled.div`
