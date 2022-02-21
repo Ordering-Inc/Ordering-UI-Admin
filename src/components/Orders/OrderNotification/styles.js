@@ -1,22 +1,36 @@
 import styled, { css } from 'styled-components'
 
 export const ModalContainer = styled.div`
-  width: 100%;
+  padding: 10px;
   background: #fff;
   display: flex;
   flex-direction: column;
-  row-gap: 15px;
+  align-items: center;
+  animation: fadeIn 200ms;
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0px;
+  }
+
   p {
     text-align: center;
-    font-size: 20px;
-    margin: 0px;
+    font-size: 16px;
+    margin-top: 0px;
+    margin-bottom: 22px;
 
     span {
       color: ${props => props.theme.colors.primary};
       font-weight: 600;
     }
   }
-  animation: fadeIn 200ms;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    margin: 40px 0;
+  }
 
   @keyframes fadeIn {
     from {
@@ -25,6 +39,13 @@ export const ModalContainer = styled.div`
   
     to {
       transform: scale(1);
+    }
+  }
+
+  @media (min-width: 768px) {
+    img {
+      width: 290px;
+      height: 290px;
     }
   }
 `
