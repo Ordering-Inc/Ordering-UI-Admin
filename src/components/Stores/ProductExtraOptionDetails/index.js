@@ -16,7 +16,7 @@ import { Alert, Confirm, Modal } from '../../Shared'
 
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
-import { PlusCircle, ThreeDots } from 'react-bootstrap-icons'
+import { PlusCircle, ThreeDots, Circle, RecordCircle } from 'react-bootstrap-icons'
 
 import {
   MainContainer,
@@ -69,6 +69,7 @@ const ProductExtraOptionDetailsUI = (props) => {
     conditionalSubOptionId,
     handleChangeConditionalOption,
     handleChangeConditionalSubOption,
+    handledisableDefaultSuboption,
 
     business,
     extra,
@@ -421,6 +422,16 @@ const ProductExtraOptionDetailsUI = (props) => {
                   />
                 </InputWrapper>
               )}
+              <InputWrapper primary disabled={optionState?.loading}>
+                <label>{t('DEFAULT', 'Default')}</label>
+                <div
+                  name='preselected'
+                  className={subOption?.preselected ? 'checked default' : 'default'}
+                  onClick={(e) => handledisableDefaultSuboption(subOption.id)}
+                >
+                  {subOption?.preselected ? <RecordCircle /> : <Circle />}
+                </div>
+              </InputWrapper>
               <ActionsContainer primary={index === 0}>
                 <EnableWrapper>
                   <span>{t('ENABLE', 'Enable')}</span>
