@@ -7,7 +7,7 @@ import { Switch } from '../../../styles/Switch'
 import { IconButton } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Confirm, Modal } from '../../Shared'
+import { Confirm, Modal, ProgressRing } from '../../Shared'
 import { ProductDesktopPreview } from '../ProductDesktopPreview'
 
 import {
@@ -19,12 +19,17 @@ import {
   ProductImageWrapper,
   ProductImage,
   ProductDetailsContent,
-  ProductPrice,
-  ProductDescription,
+  // ProductPrice,
+  // ProductDescription,
   ProductConfigsContainer,
   ProductConfigOption,
   ActionSelectorWrapper,
-  ProductPreviewHeader
+  ProductPreviewHeader,
+  ProductSummaryContent,
+  ProductSales,
+  RolWrapper,
+  ProductDetails,
+  FieldsItem
 } from './styles'
 
 export const ProductSummary = (props) => {
@@ -125,21 +130,65 @@ export const ProductSummary = (props) => {
             </IconButton>
           </RightHeader>
         </DetailsHeader>
-        <ProductImageWrapper>
-          {productState?.product?.images ? (
-            <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_200,c_limit')} />
-          ) : (
-            <BiImage />
-          )}
-        </ProductImageWrapper>
+        <ProductSummaryContent>
+          <ProductImageWrapper>
+            {productState?.product?.images ? (
+              <ProductImage bgimage={optimizeImage(productState?.product?.images, 'h_200,c_limit')} />
+            ) : (
+              <BiImage />
+            )}
+          </ProductImageWrapper>
+          <ProductSales>
+            <ProgressRing
+              percent={35}
+              size={70}
+              lineWidth={8}
+              progressColor={theme.colors.primary}
+              trackColor={theme.colors.borderColor}
+              caps='round'
+              children
+              spin={false}
+              transitionDuration={200}
+            />
+            <RolWrapper>
+              <h4>{parsePrice(productState?.product?.price)}</h4>
+              <p>{t('PRODUCT_SALES_ROI', 'Product sales ROI')}</p>
+            </RolWrapper>
+          </ProductSales>
+        </ProductSummaryContent>
+
         <ProductDetailsContent>
-          <ProductPrice>
+          <ProductDetails>
+            <FieldsItem>
+              <h4>{parsePrice(productState?.product?.price)}</h4>
+              <p>{t('PRODUCT_SELLING_PRICE', 'Selling price')}</p>
+            </FieldsItem>
+            {productState?.product?.in_offer && (
+              <FieldsItem>
+                <h4>{parsePrice(productState?.product?.offer_price)}</h4>
+                <p>{t('REGULAR_PRICE', 'Regular Price')}</p>
+              </FieldsItem>
+            )}
+            {productState?.product?.cost_price && (
+              <FieldsItem>
+                <h4>{parsePrice(productState?.product?.cost_price)}</h4>
+                <p>{t('PRODUCT_COST', 'Product cost')}</p>
+              </FieldsItem>
+            )}
+            {productState?.product?.cost_offer_price && (
+              <FieldsItem>
+                <h4>{parsePrice(productState?.product?.cost_offer_price)}</h4>
+                <p>{t('PRODUCT_REGULAR_COST', 'Product cost - regular price')}</p>
+              </FieldsItem>
+            )}
+          </ProductDetails>
+          {/* <ProductPrice>
             {parsePrice(productState?.product?.price)}
             {productState?.product?.in_offer && productState?.product?.offer_price && (
               <span>{parsePrice(productState?.product?.offer_price)}</span>
             )}
           </ProductPrice>
-          <ProductDescription>{productState?.product?.description}</ProductDescription>
+          <ProductDescription>{productState?.product?.description}</ProductDescription> */}
           <ProductConfigsContainer>
             {configsOptions.map(config => (
               <ProductConfigOption

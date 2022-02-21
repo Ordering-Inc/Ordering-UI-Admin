@@ -311,7 +311,6 @@ const ProductDetailsAdvancedUI = (props) => {
 
   return (
     <PropertiesContainer>
-      <p>product price: {parsePrice(productState?.price)}</p>
       {isSku && (
         <>
           <LabelCustom htmlFor='sku'>SKU</LabelCustom>
