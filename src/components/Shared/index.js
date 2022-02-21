@@ -22,6 +22,7 @@ import { SelectSites } from './SelectSites'
 import { SideBar } from './SideBar'
 import { SpinnerLoader } from './SpinnerLoader'
 import { SpreadSheetEditor } from './SpreadSheetEditor'
+import { ProgressRing } from './ProgressRing'
 
 export {
   AutoScroll,
@@ -48,5 +49,6 @@ export {
   SelectSites,
   SideBar,
   SpinnerLoader,
-  SpreadSheetEditor
+  SpreadSheetEditor,
+  ProgressRing
 }
