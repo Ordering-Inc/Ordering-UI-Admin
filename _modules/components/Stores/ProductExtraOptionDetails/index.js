@@ -83,6 +83,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       conditionalSubOptionId = props.conditionalSubOptionId,
       handleChangeConditionalOption = props.handleChangeConditionalOption,
       handleChangeConditionalSubOption = props.handleChangeConditionalSubOption,
+      handledisableDefaultSuboption = props.handledisableDefaultSuboption,
       business = props.business,
       extra = props.extra,
       handleAddOption = props.handleAddOption,
@@ -421,7 +422,16 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
           e.preventDefault();
         }
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+      primary: true,
+      disabled: optionState === null || optionState === void 0 ? void 0 : optionState.loading
+    }, /*#__PURE__*/_react.default.createElement("label", null, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement("div", {
+      name: "preselected",
+      className: subOption !== null && subOption !== void 0 && subOption.preselected ? 'checked default' : 'default',
+      onClick: function onClick(e) {
+        return handledisableDefaultSuboption(subOption.id);
+      }
+    }, subOption !== null && subOption !== void 0 && subOption.preselected ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircle, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
       primary: index === 0
     }, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: subOption === null || subOption === void 0 ? void 0 : subOption.enabled,
