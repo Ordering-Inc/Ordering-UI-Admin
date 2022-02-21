@@ -73,7 +73,7 @@ const ProductDetailsAdvancedUI = (props) => {
       ratio: 1
     },
     {
-      value: 'kilograms',
+      value: 'kg',
       content: t('WEIGHT_UNIT_KILOGRAM', 'kilograms'),
       ratio: 0.001
     },
