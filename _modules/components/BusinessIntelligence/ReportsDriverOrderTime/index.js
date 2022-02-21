@@ -27,8 +27,6 @@ var _ReportsBrandFilter = require("../ReportsBrandFilter");
 
 var _styles2 = require("./styles");
 
-var _ReportsOrderTypeFilter = require("../ReportsOrderTypeFilter");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -63,6 +61,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+// import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
 var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
   var _filterList$franchise, _reportData$content2, _reportData$content2$, _reportData$content2$2, _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content4, _reportData$content4$, _reportData$content5, _reportData$content5$, _reportData$content6, _reportData$content6$, _reportData$content7, _reportData$content7$, _reportData$content8, _reportData$content8$;
 
@@ -82,12 +81,8 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       isBrandFilter = _useState4[0],
-      setIsBrandFilter = _useState4[1];
+      setIsBrandFilter = _useState4[1]; // const [isOrderTypeFilter, setIsOrderTypeFilter] = useState(false)
 
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isOrderTypeFilter = _useState6[0],
-      setIsOrderTypeFilter = _useState6[1];
 
   var tableRef = (0, _react.useRef)(null);
 
@@ -180,11 +175,7 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    onClick: function onClick() {
-      return setIsOrderTypeFilter(true);
-    }
-  }, t('ORDER_TYPE', 'Order type'), " (", filterList !== null && filterList !== void 0 && filterList.delivery_types_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.delivery_types_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
@@ -255,19 +246,6 @@ var ReportsDriverOrderTimeUI = function ReportsDriverOrderTimeUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBrandFilter(false);
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    width: "50%",
-    height: "80vh",
-    padding: "30px",
-    title: t('ORDER_TYPE', 'Order type'),
-    open: isOrderTypeFilter,
-    onClose: function onClose() {
-      return setIsOrderTypeFilter(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ReportsOrderTypeFilter.ReportsOrderTypeFilter, _extends({}, props, {
-    onClose: function onClose() {
-      return setIsOrderTypeFilter(false);
     }
   }))));
 };

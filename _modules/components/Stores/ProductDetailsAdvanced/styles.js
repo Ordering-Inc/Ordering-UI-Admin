@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperRow = exports.TypeSelectWrapper = exports.PropertyOption = exports.PropertiesContainer = exports.OptionCenter = exports.Option = exports.LabelCustom = exports.InputContainer = exports.EditTaxContainer = exports.ButtonGroup = void 0;
+exports.WrapperRow = exports.WeightWrapper = exports.TypeSelectWrapper = exports.PropertyOptionWrapper = exports.PropertyOption = exports.PropertiesContainer = exports.PricePerUnit = exports.OptionCenter = exports.Option = exports.LabelCustom = exports.InputContainer = exports.FieldRow = exports.EditTaxContainer = exports.ButtonGroup = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var PropertiesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  > input {\n    width: 100%;\n  }\n\n  > button {\n    height: 44px;\n    margin-top: 30px;\n  }\n"])));
+var PropertiesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  label:first-child{\n    margin-top: 0;\n  }\n\n  > input {\n    width: 100%;\n  }\n\n  > button {\n    height: 44px;\n    margin-top: 30px;\n  }\n"])));
 
 exports.PropertiesContainer = PropertiesContainer;
 
@@ -69,6 +69,26 @@ var WrapperRow = _styledComponents.default.div(_templateObject15 || (_templateOb
 
 exports.WrapperRow = WrapperRow;
 
-var InputContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
+var FieldRow = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-left: -10px;\n  margin-right: -10px;\n  label:first-child{\n    margin-top: 30px;\n  }\n"])));
+
+exports.FieldRow = FieldRow;
+
+var InputContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  flex-basis: 0;\n  flex-grow: 1;\n  max-width: 100%;\n  padding: 0 10px;\n\n  &.growUnset {\n    flex-grow: unset;\n  }\n\n  &.showWeight {\n    width: 40%;\n  }\n"])));
 
 exports.InputContainer = InputContainer;
+
+var WeightWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n\n  input {\n    width: 55%;\n  }\n\n  .select {\n    width: 40%;\n    padding-top: 3.5px;\n    font-size: 14px;\n\n    .list {\n      padding-top: 7px;\n      padding-bottom: 7px;\n      margin-bottom: 10px;\n    }\n  }\n"])));
+
+exports.WeightWrapper = WeightWrapper;
+
+var PropertyOptionWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: block;\n  margin-top: 30px;\n"])));
+
+exports.PropertyOptionWrapper = PropertyOptionWrapper;
+
+var PricePerUnit = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  label {\n    font-size: 14px;\n    margin: 0;\n    margin-right: 15px;\n    ", "\n  }\n  \n  .select {\n    font-size: 14px;\n    padding: 3.5px;\n    .list {\n      padding-top: 7px;\n      padding-bottom: 7px;\n    }\n  }\n"])), function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    margin-right: 0;\n    margin-left: 15px;\n    "])));
+});
+
+exports.PricePerUnit = PricePerUnit;

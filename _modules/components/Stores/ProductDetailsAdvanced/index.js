@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
-  var _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$calorie;
+  var _formState$changes2, _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$cost_pr, _productState$cost_of, _productState$calorie, _productState$weight, _productState$weight_;
 
   var formState = props.formState,
       productState = props.productState,
@@ -98,33 +98,53 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       isSku = _useState2[0],
       setIsSku = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      taxesOption = _useState4[0],
-      setTaxesOption = _useState4[1];
+      isShowPriceByWeight = _useState4[0],
+      setIsShowPriceByWeight = _useState4[1];
 
   var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      feesOptions = _useState6[0],
-      setFeesOptions = _useState6[1];
+      taxesOption = _useState6[0],
+      setTaxesOption = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      fesSelected = _useState8[0],
-      setFeeSelected = _useState8[1];
+      feesOptions = _useState8[0],
+      setFeesOptions = _useState8[1];
 
   var _useState9 = (0, _react.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      taxSelected = _useState10[0],
-      setTaxSelected = _useState10[1];
+      fesSelected = _useState10[0],
+      setFeeSelected = _useState10[1];
 
-  var _useState11 = (0, _react.useState)({
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      taxSelected = _useState12[0],
+      setTaxSelected = _useState12[1];
+
+  var _useState13 = (0, _react.useState)({
     action: null,
     id: null
   }),
-      _useState12 = _slicedToArray(_useState11, 2),
-      taxToDelete = _useState12[0],
-      setTaxToDelete = _useState12[1];
+      _useState14 = _slicedToArray(_useState13, 2),
+      taxToDelete = _useState14[0],
+      setTaxToDelete = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(),
+      _useState16 = _slicedToArray(_useState15, 2),
+      productPrice = _useState16[0],
+      setProductPrice = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(0),
+      _useState18 = _slicedToArray(_useState17, 2),
+      unitPrice = _useState18[0],
+      setunitPrice = _useState18[1];
+
+  var _useState19 = (0, _react.useState)('grams'),
+      _useState20 = _slicedToArray(_useState19, 2),
+      pricePerUnit = _useState20[0],
+      setPricePerUnit = _useState20[1];
 
   var estimatedPersons = [{
     value: 'no_apply',
@@ -136,6 +156,32 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, i + 1)
     };
   })));
+  var weightUnitOptions = [{
+    value: 'grams',
+    content: t('WEIGHT_UNIT_GRAM', 'grams'),
+    ratio: 1
+  }, {
+    value: 'kg',
+    content: t('WEIGHT_UNIT_KILOGRAM', 'kilograms'),
+    ratio: 0.001
+  }, {
+    value: 'ounces',
+    content: t('WEIGHT_UNIT_OUNCE', 'ounces'),
+    ratio: 0.035274
+  }, {
+    value: 'pounds',
+    content: t('WEIGHT_UNIT_POUND', 'pounds'),
+    ratio: 0.00220462
+  }];
+
+  var _useState21 = (0, _react.useState)({
+    productWeight: null,
+    unitOfWeight: weightUnitOptions[0].ratio,
+    perPriceOfWeight: weightUnitOptions[0].ratio
+  }),
+      _useState22 = _slicedToArray(_useState21, 2),
+      inputs = _useState22[0],
+      setInputs = _useState22[1];
 
   var getTaxOrFeeString = function getTaxOrFeeString(string) {
     return string === 'taxes' ? 'tax' : 'fee';
@@ -261,6 +307,69 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     }
   };
 
+  var handleEnablePriceWeight = function handleEnablePriceWeight(enabled) {
+    setIsShowPriceByWeight(enabled);
+    setunitPrice(0);
+
+    if (!enabled) {
+      handleClickProperty('weight', null);
+    }
+  };
+
+  var handleChangeWeight = function handleChangeWeight(e) {
+    handleClickProperty('weight', e.target.value);
+    e.persist();
+    setInputs(function (values) {
+      return _objectSpread(_objectSpread({}, values), {}, {
+        productWeight: e.target.value
+      });
+    });
+  };
+
+  var handleChangeUnit = function handleChangeUnit(val) {
+    var _weightUnitOptions$fi;
+
+    handleClickProperty('weight_unit', val !== null && val !== void 0 ? val : 'grams');
+    setPricePerUnit(val);
+
+    var _unitRatio = (_weightUnitOptions$fi = weightUnitOptions.filter(function (option) {
+      return option.value === val;
+    })[0]) === null || _weightUnitOptions$fi === void 0 ? void 0 : _weightUnitOptions$fi.ratio;
+
+    setInputs(function (values) {
+      return _objectSpread(_objectSpread({}, values), {}, {
+        unitOfWeight: _unitRatio
+      });
+    });
+  };
+
+  var handleChangePricePerUnit = function handleChangePricePerUnit(val) {
+    var _weightUnitOptions$fi2;
+
+    setPricePerUnit(val);
+
+    var _unitRatio = (_weightUnitOptions$fi2 = weightUnitOptions.filter(function (option) {
+      return option.value === val;
+    })[0]) === null || _weightUnitOptions$fi2 === void 0 ? void 0 : _weightUnitOptions$fi2.ratio;
+
+    setInputs(function (values) {
+      return _objectSpread(_objectSpread({}, values), {}, {
+        perPriceOfWeight: _unitRatio
+      });
+    });
+  };
+
+  var getPerWeightPrice = function getPerWeightPrice() {
+    var pricePerWeight = productPrice / inputs.productWeight / inputs.perPriceOfWeight * inputs.unitOfWeight;
+
+    if (pricePerWeight === Number.POSITIVE_INFINITY || pricePerWeight === Number.NEGATIVE_INFINITY) {
+      setunitPrice(0);
+      return;
+    }
+
+    setunitPrice(pricePerWeight);
+  };
+
   (0, _react.useEffect)(function () {
     if (taxes) getTaxes();
   }, [JSON.stringify(taxes)]);
@@ -293,27 +402,43 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       setIsSku(true);
     }
   }, [productState]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.PropertiesContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (productState === null || productState === void 0 ? void 0 : productState.featured) || false,
-    onChange: function onChange(enabled) {
-      return handleClickProperty('featured', enabled);
+  (0, _react.useEffect)(function () {
+    if (productState !== null && productState !== void 0 && productState.weight) {
+      setIsShowPriceByWeight(true);
+    } else {
+      setIsShowPriceByWeight(false);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('UPSELLING', 'Upselling')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (productState === null || productState === void 0 ? void 0 : productState.upselling) || false,
-    onChange: function onChange(enabled) {
-      return handleClickProperty('upselling', enabled);
+  }, [productState === null || productState === void 0 ? void 0 : productState.weight]);
+  (0, _react.useEffect)(function () {
+    var _formState$changes;
+
+    if (formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.weight && !(productState !== null && productState !== void 0 && productState.weight_unit)) {
+      handleClickProperty('weight_unit', 'grams');
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('SKU', 'Stock Keeping Unit (SKU)')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: isSku,
-    onChange: function onChange(enabled) {
-      return handleEnableSKU(enabled);
+  }, [formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.weight]);
+  (0, _react.useEffect)(function () {
+    setProductPrice(productState === null || productState === void 0 ? void 0 : productState.price);
+
+    if (productState !== null && productState !== void 0 && productState.weight && productState !== null && productState !== void 0 && productState.weight_unit) {
+      var _weightUnitOptions$fi3;
+
+      var _unitRatio = (_weightUnitOptions$fi3 = weightUnitOptions.filter(function (option) {
+        return option.value === (productState === null || productState === void 0 ? void 0 : productState.weight_unit);
+      })[0]) === null || _weightUnitOptions$fi3 === void 0 ? void 0 : _weightUnitOptions$fi3.ratio;
+
+      setInputs(function (values) {
+        return _objectSpread(_objectSpread({}, values), {}, {
+          productWeight: productState === null || productState === void 0 ? void 0 : productState.weight,
+          perPriceOfWeight: _unitRatio
+        });
+      });
+      setPricePerUnit(productState === null || productState === void 0 ? void 0 : productState.weight_unit);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('HIDE_SPECIAL_INSTRUCTIONS', 'Hide special instructions')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: productState === null || productState === void 0 ? void 0 : productState.hide_special_instructions,
-    onChange: function onChange(enabled) {
-      return handleClickProperty('hide_special_instructions', enabled);
-    }
-  })), isSku && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+  }, [productState]);
+  (0, _react.useEffect)(function () {
+    getPerWeightPrice();
+  }, [inputs]);
+  return /*#__PURE__*/_react.default.createElement(_styles2.PropertiesContainer, null, /*#__PURE__*/_react.default.createElement("p", null, "product price: ", parsePrice(productState === null || productState === void 0 ? void 0 : productState.price)), isSku && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
     htmlFor: "sku"
   }, "SKU"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "sku",
@@ -376,17 +501,17 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
         id: val
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
-    htmlFor: "calories"
-  }, "Calories"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "calories",
-    id: "calories",
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "cost_price"
+  }, t('PRODUCT_COST', 'Product cost')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "cost_price",
+    id: "cost_price",
     placeholder: "0.00",
-    defaultValue: (_productState$calorie = productState === null || productState === void 0 ? void 0 : productState.calories) !== null && _productState$calorie !== void 0 ? _productState$calorie : '',
+    defaultValue: (_productState$cost_pr = productState === null || productState === void 0 ? void 0 : productState.cost_price) !== null && _productState$cost_pr !== void 0 ? _productState$cost_pr : '',
     onChange: function onChange(e) {
       var _e$target$value2;
 
-      return handleClickProperty('calories', (_e$target$value2 = e.target.value) !== null && _e$target$value2 !== void 0 ? _e$target$value2 : null);
+      return handleClickProperty('cost_price', (_e$target$value2 = e.target.value) !== null && _e$target$value2 !== void 0 ? _e$target$value2 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",
@@ -395,7 +520,101 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
         e.preventDefault();
       }
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "cost_offer_price"
+  }, t('PRODUCT_REGULAR_COST', 'Product cost - regular price')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "cost_offer_price",
+    id: "cost_offer_price",
+    placeholder: "0.00",
+    defaultValue: (_productState$cost_of = productState === null || productState === void 0 ? void 0 : productState.cost_offer_price) !== null && _productState$cost_of !== void 0 ? _productState$cost_of : '',
+    onChange: function onChange(e) {
+      var _e$target$value3;
+
+      return handleClickProperty('cost_offer_price', (_e$target$value3 = e.target.value) !== null && _e$target$value3 !== void 0 ? _e$target$value3 : null);
+    },
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, {
+    className: "".concat(isShowPriceByWeight ? 'growUnset showWeight' : 'growUnset')
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "calories"
+  }, t('CALORIES', 'Calories')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "calories",
+    id: "calories",
+    placeholder: "0.00",
+    defaultValue: (_productState$calorie = productState === null || productState === void 0 ? void 0 : productState.calories) !== null && _productState$calorie !== void 0 ? _productState$calorie : '',
+    onChange: function onChange(e) {
+      var _e$target$value4;
+
+      return handleClickProperty('calories', (_e$target$value4 = e.target.value) !== null && _e$target$value4 !== void 0 ? _e$target$value4 : null);
+    },
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  })), isShowPriceByWeight && /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "weight"
+  }, t('PRODUCT_WEIGHT', 'Product weight')), /*#__PURE__*/_react.default.createElement(_styles2.WeightWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "weight",
+    id: "weight",
+    placeholder: "0.00",
+    defaultValue: (_productState$weight = productState === null || productState === void 0 ? void 0 : productState.weight) !== null && _productState$weight !== void 0 ? _productState$weight : '' // onChange={(e) => handleClickProperty('weight', e.target.value ?? null)}
+    ,
+    onChange: handleChangeWeight,
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    notAsync: true,
+    defaultValue: (_productState$weight_ = productState === null || productState === void 0 ? void 0 : productState.weight_unit) !== null && _productState$weight_ !== void 0 ? _productState$weight_ : 'grams',
+    options: weightUnitOptions,
+    onChange: function onChange(val) {
+      return handleChangeUnit(val);
+    }
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOptionWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (productState === null || productState === void 0 ? void 0 : productState.featured) || false,
+    onChange: function onChange(enabled) {
+      return handleClickProperty('featured', enabled);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('UPSELLING', 'Upselling')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (productState === null || productState === void 0 ? void 0 : productState.upselling) || false,
+    onChange: function onChange(enabled) {
+      return handleClickProperty('upselling', enabled);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('SKU', 'Stock Keeping Unit (SKU)')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: isSku,
+    onChange: function onChange(enabled) {
+      return handleEnableSKU(enabled);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('HIDE_SPECIAL_INSTRUCTIONS', 'Hide special instructions')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: productState === null || productState === void 0 ? void 0 : productState.hide_special_instructions,
+    onChange: function onChange(enabled) {
+      return handleClickProperty('hide_special_instructions', enabled);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.PropertyOption, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHOW_PRICE_BY_WEIGHT', 'Show price by weight')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: isShowPriceByWeight,
+    onChange: function onChange(enabled) {
+      return handleEnablePriceWeight(enabled);
+    }
+  })), isShowPriceByWeight && /*#__PURE__*/_react.default.createElement(_styles2.PricePerUnit, null, /*#__PURE__*/_react.default.createElement("label", null, parsePrice(unitPrice), " / "), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    defaultValue: pricePerUnit,
+    options: weightUnitOptions,
+    onChange: function onChange(val) {
+      return handleChangePricePerUnit(val);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "7.6px",
     disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0,
