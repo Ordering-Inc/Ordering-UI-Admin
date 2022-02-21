@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components'
 
 export const PropertiesContainer = styled.div`
+  label:first-child{
+    margin-top: 0;
+  }
+
   > input {
     width: 100%;
   }
@@ -147,7 +151,76 @@ export const WrapperRow = styled.div`
   }
 `
 
+export const FieldRow = styled.div`
+  display: flex;
+  margin-left: -10px;
+  margin-right: -10px;
+  label:first-child{
+    margin-top: 30px;
+  }
+`
+
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  padding: 0 10px;
+
+  &.growUnset {
+    flex-grow: unset;
+  }
+
+  &.showWeight {
+    width: 40%;
+  }
+`
+export const WeightWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    width: 55%;
+  }
+
+  .select {
+    width: 40%;
+    padding-top: 3.5px;
+    font-size: 14px;
+
+    .list {
+      padding-top: 7px;
+      padding-bottom: 7px;
+      margin-bottom: 10px;
+    }
+  }
+`
+export const PropertyOptionWrapper = styled.div`
+  display: block;
+  margin-top: 30px;
+`
+
+export const PricePerUnit = styled.div`
+  display: flex;
+  align-items: center;
+
+  label {
+    font-size: 14px;
+    margin: 0;
+    margin-right: 15px;
+    ${props => props.theme?.rtl && css`
+    margin-right: 0;
+    margin-left: 15px;
+    `}
+  }
+  
+  .select {
+    font-size: 14px;
+    padding: 3.5px;
+    .list {
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+  }
 `
