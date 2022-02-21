@@ -50,6 +50,7 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/components/Shared'
 import { HelmetTags } from './components/HelmetTags'
+import { RewardsPrograms } from './pages/RewardsPrograms'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -323,6 +324,13 @@ export const App = () => {
                       {
                         auth
                           ? <OrderingProducts />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/loyalty/rewards-programs'>
+                      {
+                        auth
+                          ? <RewardsPrograms />
                           : <Redirect to='/login' />
                       }
                     </Route>
