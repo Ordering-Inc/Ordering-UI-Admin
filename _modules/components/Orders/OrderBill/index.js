@@ -28,7 +28,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderBill = function OrderBill(props) {
-  var _order$summary, _order$summary2, _order$summary3, _order$summary4, _order$summary5, _order$summary6, _order$summary7, _order$summary8, _order$summary9, _order$summary10, _order$summary11, _order$summary12, _order$summary13, _order$summary14, _order$summary15, _order$summary16, _order$summary17, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary18, _order$summary19, _order$summary20, _order$summary21;
+  var _order$summary, _order$summary2, _order$summary3, _order$summary4, _order$summary5, _order$summary6, _order$summary7, _order$summary8, _order$summary9, _order$summary10, _order$summary11, _order$summary12, _order$summary13, _order$summary14, _order$summary15, _order$summary16, _order$summary17, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary18, _order$summary19, _order$summary20, _order$payment_events, _order$payment_events2, _order$summary21;
 
   var order = props.order;
 
@@ -46,6 +46,14 @@ var OrderBill = function OrderBill(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var walletName = {
+    cash: {
+      name: t('CASH_WALLET', 'Cash Wallet')
+    },
+    credit_point: {
+      name: t('POINTS_WALLET', 'Points Wallet')
+    }
+  };
   return /*#__PURE__*/_react.default.createElement(_styles.OrderBillContainer, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", null, order.tax_type === 1 ? parsePrice(((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.subtotal) || (order === null || order === void 0 ? void 0 : order.subtotal)) + ((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.tax) || (order === null || order === void 0 ? void 0 : order.tax)) || 0, {
     currencyPosition: 'left'
   }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary3 = order.summary) === null || _order$summary3 === void 0 ? void 0 : _order$summary3.subtotal) || (order === null || order === void 0 ? void 0 : order.subtotal) || 0, {
@@ -60,7 +68,13 @@ var OrderBill = function OrderBill(props) {
     currencyPosition: 'left'
   }))), ((order === null || order === void 0 ? void 0 : (_order$summary19 = order.summary) === null || _order$summary19 === void 0 ? void 0 : _order$summary19.service_fee) > 0 || (order === null || order === void 0 ? void 0 : order.serviceFee) > 0) && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE_FEE', 'Service Fee'), " (", parseNumber(order === null || order === void 0 ? void 0 : order.service_fee), "%)"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary20 = order.summary) === null || _order$summary20 === void 0 ? void 0 : _order$summary20.service_fee) || (order === null || order === void 0 ? void 0 : order.serviceFee), {
     currencyPosition: 'left'
-  }))))), /*#__PURE__*/_react.default.createElement("table", {
+  }))), (order === null || order === void 0 ? void 0 : (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.length) > 0 && (order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event, i) {
+    var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w;
+
+    return /*#__PURE__*/_react.default.createElement("tr", {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("td", null, (_walletName$event$wal = walletName[event === null || event === void 0 ? void 0 : (_event$wallet_event = event.wallet_event) === null || _event$wallet_event === void 0 ? void 0 : (_event$wallet_event$w = _event$wallet_event.wallet) === null || _event$wallet_event$w === void 0 ? void 0 : _event$wallet_event$w.type]) === null || _walletName$event$wal === void 0 ? void 0 : _walletName$event$wal.name), /*#__PURE__*/_react.default.createElement("td", null, "-", parsePrice(event === null || event === void 0 ? void 0 : event.amount)));
+  })))), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary21 = order.summary) === null || _order$summary21 === void 0 ? void 0 : _order$summary21.total) || (order === null || order === void 0 ? void 0 : order.total), {
     currencyPosition: 'left'

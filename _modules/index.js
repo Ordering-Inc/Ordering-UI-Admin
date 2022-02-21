@@ -399,6 +399,12 @@ Object.defineProperty(exports, "ReviewsListing", {
     return _BusinessIntelligence.ReviewsListing;
   }
 });
+Object.defineProperty(exports, "RewardsPrograms", {
+  enumerable: true,
+  get: function get() {
+    return _Loyalty.RewardsPrograms;
+  }
+});
 Object.defineProperty(exports, "Select", {
   enumerable: true,
   get: function get() {
@@ -539,6 +545,8 @@ var _Settings = require("./components/Settings");
 var _Stores = require("./components/Stores");
 
 var _Users = require("./components/Users");
+
+var _Loyalty = require("./components/Loyalty");
 
 var _Layout = require("./components/Layout");
 

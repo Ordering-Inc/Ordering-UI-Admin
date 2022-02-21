@@ -27,6 +27,8 @@ var _Shared = require("../../Shared");
 
 var _styles = require("./styles");
 
+var _CustomerPointsWallet = require("../CustomerPointsWallet");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -52,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomerDetailsUI = function CustomerDetailsUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7;
+  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7, _userState$user8;
 
   var userState = props.userState,
       handleDeleteUser = props.handleDeleteUser,
@@ -99,8 +101,10 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
   {
     key: 'cash_wallet',
     value: t('CASH_WALLET', 'Cash wallet')
-  } // { key: 'points_wallet', value: t('POINTS_WALLET', 'Points wallet') }
-  ];
+  }, {
+    key: 'points_wallet',
+    value: t('POINTS_WALLET', 'Points wallet')
+  }];
 
   var onDeleteCustomer = function onDeleteCustomer() {
     setConfirm({
@@ -187,6 +191,9 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     }
   })), showOption === 'cash_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerCashWallet.CustomerCashWallet, {
     userId: (_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.id
+  }), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerPointsWallet.CustomerPointsWallet, {
+    userId: (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.id,
+    user: userState.user
   })));
 };
 
