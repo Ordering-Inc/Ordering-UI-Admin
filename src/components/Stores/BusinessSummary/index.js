@@ -157,9 +157,24 @@ export const BusinessSummary = (props) => {
                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
                 <Dropdown.Item
+                  onClick={() => console.log('preview')}
+                >
+                  {t('PREVIEW', 'Preview')}
+                </Dropdown.Item>
+                <Dropdown.Item
                   onClick={() => handleDuplicateBusiness()}
                 >
                   {t('DUPLICATE', 'Duplicate')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => handleSelectedItem('personalization')}
+                >
+                  {t('PERSONALIZATION', 'Personalization')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => handleSelectedItem('custom_fields')}
+                >
+                  {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => onClickDeleteBusiness()}
