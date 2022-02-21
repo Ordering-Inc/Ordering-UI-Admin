@@ -28,6 +28,7 @@ import loginHero from './template/assets/images/loginHero.png'
 import personalization from './template/assets/images/personalization.svg'
 import mobileCase from './template/assets/images/mobile-case.png'
 import mobileMask from './template/assets/images/mobile-mask.png'
+import level from './template/assets/images/level.png'
 
 /**
  * business tutorials
@@ -148,7 +149,8 @@ theme.images = {
     loginHero,
     personalization,
     mobileCase,
-    mobileMask
+    mobileMask,
+    level
   },
   order: {
     status0: orderStatus0,
