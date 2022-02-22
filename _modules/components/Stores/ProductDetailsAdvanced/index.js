@@ -438,7 +438,7 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
   (0, _react.useEffect)(function () {
     getPerWeightPrice();
   }, [inputs]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.PropertiesContainer, null, /*#__PURE__*/_react.default.createElement("p", null, "product price: ", parsePrice(productState === null || productState === void 0 ? void 0 : productState.price)), isSku && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.PropertiesContainer, null, isSku && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
     htmlFor: "sku"
   }, "SKU"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "sku",

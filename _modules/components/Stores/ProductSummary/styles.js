@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RightHeader = exports.ProductPrice = exports.ProductPreviewHeader = exports.ProductName = exports.ProductImageWrapper = exports.ProductImage = exports.ProductDetailsContent = exports.ProductDetailsContainer = exports.ProductDescription = exports.ProductConfigsContainer = exports.ProductConfigOption = exports.LeftHeader = exports.DetailsHeader = exports.ActionSelectorWrapper = void 0;
+exports.RolWrapper = exports.RightHeader = exports.ProductSummaryContent = exports.ProductSales = exports.ProductPrice = exports.ProductPreviewHeader = exports.ProductName = exports.ProductImageWrapper = exports.ProductImage = exports.ProductDetailsContent = exports.ProductDetailsContainer = exports.ProductDetails = exports.ProductDescription = exports.ProductConfigsContainer = exports.ProductConfigOption = exports.LeftHeader = exports.FieldsItem = exports.DetailsHeader = exports.ActionSelectorWrapper = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,7 +13,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -139,3 +139,35 @@ var ProductPreviewHeader = _styledComponents.default.div(_templateObject19 || (_
 });
 
 exports.ProductPreviewHeader = ProductPreviewHeader;
+
+var ProductSummaryContent = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n"])));
+
+exports.ProductSummaryContent = ProductSummaryContent;
+
+var ProductSales = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 230px;\n  height: 90px;\n  padding: 10px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  border-radius: 7.6px;\n"])));
+
+exports.ProductSales = ProductSales;
+
+var RolWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin-left: 20px;\n  ", "\n\n  h4 {\n    font-size: 20px;\n    font-weight: 600;\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    ", ";\n  }\n\n  p {\n    margin: 0;\n    font-size: 12px;\n    line-height: 18px;\n    ", ";\n  }\n"])), function (props) {
+  var _props$theme4;
+
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n    margin-left: 0;\n "])));
+}, function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.colors.lightGray;
+});
+
+exports.RolWrapper = RolWrapper;
+
+var ProductDetails = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  padding: 10px 0;\n"])));
+
+exports.ProductDetails = ProductDetails;
+
+var FieldsItem = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 48%;\n  margin-bottom: 25px;\n  \n  h4 {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    ", ";\n  }\n\n  p {\n    margin: 0;\n    font-size: 12px;\n    line-height: 18px;\n    ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.colors.lightGray;
+});
+
+exports.FieldsItem = FieldsItem;

@@ -93,6 +93,12 @@ Object.defineProperty(exports, "Personalization", {
     return _Personalization.Personalization;
   }
 });
+Object.defineProperty(exports, "ProgressRing", {
+  enumerable: true,
+  get: function get() {
+    return _ProgressRing.ProgressRing;
+  }
+});
 Object.defineProperty(exports, "Schedule", {
   enumerable: true,
   get: function get() {
@@ -193,3 +199,5 @@ var _SideBar = require("./SideBar");
 var _SpinnerLoader = require("./SpinnerLoader");
 
 var _SpreadSheetEditor = require("./SpreadSheetEditor");
+
+var _ProgressRing = require("./ProgressRing");
