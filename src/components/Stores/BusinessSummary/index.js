@@ -5,10 +5,11 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { XLg, LifePreserver, ThreeDots } from 'react-bootstrap-icons'
+import { XLg, LifePreserver, ThreeDots, Laptop, Phone } from 'react-bootstrap-icons'
 import { BusinessFormDetails } from '../BusinessFormDetails'
 import { Button, IconButton, Switch } from '../../../styles'
-import { Confirm } from '../../Shared'
+import { Confirm, Modal } from '../../Shared'
+import { BusinessPreview } from '../BusinessPreview'
 
 import {
   BusinessDetailsContainer,
@@ -22,7 +23,8 @@ import {
   BusinessDescription,
   BusinessConfigsContainer,
   BusinessConfigItem,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  BusinessPreviewHeader
 } from './styles'
 
 export const BusinessSummary = (props) => {
@@ -42,6 +44,8 @@ export const BusinessSummary = (props) => {
   const theme = useTheme()
   const [isEdit, setIsEdit] = useState(false)
   const history = useHistory()
+  const [isBusinessPreview, setIsBusinessPreview] = useState(false)
+  const [selectedView, setSelectedView] = useState('desktop')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleOpenCategory = () => {
@@ -157,7 +161,7 @@ export const BusinessSummary = (props) => {
                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
                 <Dropdown.Item
-                  onClick={() => console.log('preview')}
+                  onClick={() => setIsBusinessPreview(true)}
                 >
                   {t('PREVIEW', 'Preview')}
                 </Dropdown.Item>
@@ -265,6 +269,36 @@ export const BusinessSummary = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='900px'
+        open={isBusinessPreview}
+        onClose={() => {
+          setIsBusinessPreview(false)
+          setSelectedView('desktop')
+        }}
+      >
+        <BusinessPreviewHeader>
+          <h1>{t('PREVIEW', 'Preview')}</h1>
+          <div>
+            <IconButton
+              color={selectedView === 'desktop' ? 'primary' : 'black'}
+              onClick={() => setSelectedView('desktop')}
+            >
+              <Laptop />
+            </IconButton>
+            <IconButton
+              color={selectedView === 'mobile' ? 'primary' : 'black'}
+              onClick={() => setSelectedView('mobile')}
+            >
+              <Phone />
+            </IconButton>
+          </div>
+        </BusinessPreviewHeader>
+        <BusinessPreview
+          isMobileView={selectedView === 'mobile'}
+          business={businessState?.business}
+        />
+      </Modal>
     </>
   )
 }
