@@ -233,6 +233,15 @@ const SingleBusinessProductUI = (props) => {
                     </DragableContainer>
                   </td>
                 )}
+                {allowColumns?.description && (
+                  <td className='description'>
+                    {
+                      <InfoBlock>
+                        <div className='product_description'>{productFormState?.changes?.description || ''}</div>
+                      </InfoBlock>
+                    }
+                  </td>
+                )}
                 {allowColumns?.price && (
                   <td>
                     {
@@ -259,11 +268,17 @@ const SingleBusinessProductUI = (props) => {
                     }
                   </td>
                 )}
-                {allowColumns?.description && (
-                  <td className='description'>
+                {allowColumns?.cost_price && (
+                  <td>
                     {
                       <InfoBlock>
-                        <div className='product_description'>{productFormState?.changes?.description || ''}</div>
+                        <div className='product_price'>
+                          {productFormState?.changes?.cost_price ? (
+                            <>{parsePrice(productFormState?.changes?.cost_price)}</>
+                          ) : (
+                            <>{' '}</>
+                          )}
+                        </div>
                       </InfoBlock>
                     }
                   </td>

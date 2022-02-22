@@ -36,9 +36,10 @@ export const BusinessProductList = (props) => {
   const [dataSelected, setDataSelected] = useState('')
   const [allowColumns, setAllowColumns] = useState({
     products: true,
+    description: true,
     price: true,
     // offer_price: true,
-    description: true,
+    cost_price: true,
     tax: true,
     fee: true
   })
@@ -49,6 +50,10 @@ export const BusinessProductList = (props) => {
       content: t('PRODUCTS', 'Products')
     },
     {
+      value: 'description',
+      content: t('DESCRIPTION', 'Description')
+    },
+    {
       value: 'price',
       content: t('PRICE', 'Price')
     },
@@ -57,8 +62,8 @@ export const BusinessProductList = (props) => {
     //   content: t('REQULAR_PRICE', 'Regular Price')
     // },
     {
-      value: 'description',
-      content: t('DESCRIPTION', 'Description')
+      value: 'cost_price',
+      content: t('PRODUCT_COST', 'Product cost')
     },
     {
       value: 'tax',
@@ -119,14 +124,17 @@ export const BusinessProductList = (props) => {
                   {allowColumns?.products && (
                     <th>{t('PRODUCTS', 'Products')}</th>
                   )}
+                  {allowColumns?.description && (
+                    <th className='description'>{t('DESCRIPTION', 'Description')}</th>
+                  )}
                   {allowColumns?.price && (
                     <th className='price'>{t('PRICE', 'Price')}</th>
                   )}
                   {allowColumns?.offer_price && (
                     <th className='regular-price'>{t('REGULAR_PRICE', 'Regular Price')}</th>
                   )}
-                  {allowColumns?.description && (
-                    <th className='description'>{t('DESCRIPTION', 'Description')}</th>
+                  {allowColumns?.cost_price && (
+                    <th className='regular-price'>{t('PRODUCT_COST', 'Product cost')}</th>
                   )}
                   {allowColumns?.tax && (
                     <th className='tax'>{t('TAX', 'Tax')}</th>

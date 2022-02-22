@@ -230,3 +230,69 @@ export const ProductPreviewHeader = styled.div`
     }
   }
 `
+export const ProductSummaryContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+export const ProductSales = styled.div`
+  display: flex;
+  align-items: center;
+  width: 230px;
+  height: 90px;
+  padding: 10px;
+  border: 1px solid #E9ECEF;
+  box-sizing: border-box;
+  border-radius: 7.6px;
+`
+export const RolWrapper = styled.div`
+  margin-left: 20px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 20px;
+    margin-left: 0;
+ `}
+
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    ${props => props.theme.colors.headingColor};
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 18px;
+    ${props => props.theme.colors.lightGray};
+  }
+`
+export const ProductDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px 0;
+`
+export const FieldsItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  margin-bottom: 25px;
+  
+  h4 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    ${props => props.theme.colors.headingColor};
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 18px;
+    ${props => props.theme.colors.lightGray};
+  }
+`
