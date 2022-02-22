@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { Camera as CameraIcon } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import AiOutlineCheckCircle from '@meronex/icons/ai/AiOutlineCheckCircle'
 
 import {
   UserFormDetails as UserProfileController,
@@ -147,12 +146,10 @@ const UserProfileFormUI = (props) => {
                   <h1>{userData?.name || userState?.result?.result?.name} {userData?.lastname || userState?.result?.result?.lastname}</h1>
                   <p>
                     {userData?.email || userState?.result?.result?.email}
-                    {!!userState?.result?.result?.email_verified && (<AiOutlineCheckCircle style={{ fontSize: 18, marginLeft: 5, color: '#00D27A' }} />)}
                   </p>
                   {(userData?.cellphone || userState?.result?.result?.cellphone) && (
                     <p>
                       {(userData?.country_phone_code || userState?.result?.result?.country_phone_code) && `+${(userData?.country_phone_code || userState?.result?.result?.country_phone_code)} `}{(userData?.cellphone || userState?.result?.result?.cellphone)}
-                      {!!userState?.result?.result?.phone_verified && (<AiOutlineCheckCircle style={{ fontSize: 18, marginLeft: 5, color: '#00D27A' }} />)}
                     </p>
                   )}
                   {(userData?.birthdate || userState?.result?.result?.birthdate) && (
