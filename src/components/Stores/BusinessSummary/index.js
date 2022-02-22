@@ -6,7 +6,6 @@ import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { XLg, LifePreserver, ThreeDots, Laptop, Phone } from 'react-bootstrap-icons'
-import { BusinessFormDetails } from '../BusinessFormDetails'
 import { Button, IconButton, Switch } from '../../../styles'
 import { Confirm, Modal } from '../../Shared'
 import { BusinessPreview } from '../BusinessPreview'
@@ -35,14 +34,12 @@ export const BusinessSummary = (props) => {
     handleChangeActiveBusiness,
     selectedItem,
     handleSelectedItem,
-    handleSucessUpdateBusiness,
     handleDuplicateBusiness,
     handleDeleteBusiness
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
-  const [isEdit, setIsEdit] = useState(false)
   const history = useHistory()
   const [isBusinessPreview, setIsBusinessPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
@@ -56,8 +53,8 @@ export const BusinessSummary = (props) => {
 
   const businessConfigs = [
     {
-      key: 'information',
-      value: t('INFORMATION', 'Information')
+      key: 'store_details',
+      value: t('STORE_DETAILS', 'Store details')
     },
     {
       key: 'schedule',
@@ -195,68 +192,50 @@ export const BusinessSummary = (props) => {
             </IconButton>
           </RightHeader>
         </DetailsHeader>
-        {!isEdit ? (
-          <>
-            {businessState?.loading ? (
-              <BusinessHeader isSkeleton>
-                <BusinessLogo>
-                  <Skeleton width={60} height={60} />
-                </BusinessLogo>
-              </BusinessHeader>
-            ) : (
-              <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_200,c_limit')}>
-                <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_100,c_limit')} />
-              </BusinessHeader>
-            )}
-
-            <BusinessDetailsContent>
-              <Button
-                color='lightPrimary'
-                borderRadius='8px'
-                onClick={handleOpenCategory}
-                disabled={businessState?.loading}
-              >
-                {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
-              </Button>
-              <BusinessDescription>
-                {businessState?.loading ? (
-                  <Skeleton width={300} />
-                ) : (
-                  businessState?.business?.description
-                )}
-              </BusinessDescription>
-              <BusinessConfigsContainer isLoading={businessState?.loading}>
-                {(isAdmin
-                  ? businessConfigs
-                  : businessConfigs.filter(c => !itemsExcluded.includes(c.key))
-                ).map(config => (
-                  <BusinessConfigItem
-                    key={config.key}
-                    active={selectedItem === config.key}
-                    onClick={() => handleSelectedItem(config.key)}
-                  >
-                    <span>{config.value}</span>
-                    <BsChevronRight />
-                  </BusinessConfigItem>
-                ))}
-              </BusinessConfigsContainer>
-              <Button
-                color='secundaryDark'
-                borderRadius='8px'
-                disabled={businessState.loading}
-                onClick={() => setIsEdit(true)}
-              >
-                {t('EDIT', 'Edit')}
-              </Button>
-            </BusinessDetailsContent>
-          </>
+        {businessState?.loading ? (
+          <BusinessHeader isSkeleton>
+            <BusinessLogo>
+              <Skeleton width={60} height={60} />
+            </BusinessLogo>
+          </BusinessHeader>
         ) : (
-          <BusinessFormDetails
-            business={businessState.business}
-            onCancel={() => setIsEdit(false)}
-            handleSuccessUpdate={handleSucessUpdateBusiness}
-          />
+          <BusinessHeader bgimage={optimizeImage(businessState?.business?.header, 'h_200,c_limit')}>
+            <BusinessLogo bgimage={optimizeImage(businessState?.business?.logo || theme.images?.dummies?.businessLogo, 'h_100,c_limit')} />
+          </BusinessHeader>
         )}
+
+        <BusinessDetailsContent>
+          <Button
+            color='lightPrimary'
+            borderRadius='8px'
+            onClick={handleOpenCategory}
+            disabled={businessState?.loading}
+          >
+            {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
+          </Button>
+          <BusinessDescription>
+            {businessState?.loading ? (
+              <Skeleton width={300} />
+            ) : (
+              businessState?.business?.description
+            )}
+          </BusinessDescription>
+          <BusinessConfigsContainer isLoading={businessState?.loading}>
+            {(isAdmin
+              ? businessConfigs
+              : businessConfigs.filter(c => !itemsExcluded.includes(c.key))
+            ).map(config => (
+              <BusinessConfigItem
+                key={config.key}
+                active={selectedItem === config.key}
+                onClick={() => handleSelectedItem(config.key)}
+              >
+                <span>{config.value}</span>
+                <BsChevronRight />
+              </BusinessConfigItem>
+            ))}
+          </BusinessConfigsContainer>
+        </BusinessDetailsContent>
       </BusinessDetailsContainer>
       <Confirm
         width='700px'

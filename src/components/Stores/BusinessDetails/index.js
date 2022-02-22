@@ -3,7 +3,7 @@ import { BusinessDetails as BusinessDetailsController, useSession } from 'orderi
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
 import { BusinessSupport } from '../BusinessSupport'
-import { BusinessInformation } from '../BusinessInformation'
+import { BusinessDetail } from '../BusinessDetail'
 import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
 import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
@@ -149,8 +149,8 @@ export const BusinessDetailsUI = (props) => {
               businessState={businessState}
             />
           )}
-          {selectedItem === 'information' && (
-            <BusinessInformation
+          {selectedItem === 'store_details' && (
+            <BusinessDetail
               business={businessState?.business}
               handleDeleteBusinessOwner={handleDeleteBusinessOwner}
               handleAddBusinessOwner={handleAddBusinessOwner}
@@ -161,6 +161,7 @@ export const BusinessDetailsUI = (props) => {
               setBusinessTypes={setBusinessTypes}
               handleSuccessAddBusinessItem={handleSuccessAddBusinessItem}
               handleSuccessDeleteBusinessItem={handleSuccessDeleteBusinessItem}
+              handleSucessUpdateBusiness={handleSucessUpdateBusiness}
             />
           )}
           {selectedItem === 'schedule' && (

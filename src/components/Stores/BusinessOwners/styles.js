@@ -15,21 +15,25 @@ export const OwnerItem = styled.div`
     font-size: 14px;
   }
 
-  svg {
-    font-size: 20px;
+  p {
+    color: ${props => props.theme.colors.danger};
+    margin: 0px;
+    font-size: 14px;
     cursor: pointer;
+    user-select: none;
   }
 `
 
 export const WrapperOwnerSelector = styled(OwnerItem)`
   border-bottom: none;
 
-  > svg {
-    color: ${props => props.theme.colors.primary};
+  button {
+    border-radius: 8px;
+    height: 44px;
   }
 
   > div:first-child {
-    width: calc(100% - 50px);
+    width: calc(100% - 80px);
     background: #F8F9FA;
     border: none;
     .list {

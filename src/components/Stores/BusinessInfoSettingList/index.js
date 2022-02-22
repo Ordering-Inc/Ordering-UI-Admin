@@ -15,6 +15,7 @@ export const BusinessInfoSettingList = (props) => {
   const [{ user }] = useSession()
 
   const listOptions = [
+    { key: 'information', content: t('INFORMATION', 'Information') },
     { key: 'owner', content: t('OWNER_ID', 'Owner') },
     { key: 'type', content: t('TYPE', 'Type') },
     { key: 'location', content: t('LOCATION', 'Location') },
