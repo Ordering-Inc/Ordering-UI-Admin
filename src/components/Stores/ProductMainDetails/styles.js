@@ -10,6 +10,10 @@ export const Container = styled.div`
     margin: 0px;
   }
 
+  ${({ maxLimit }) => maxLimit && css`
+    max-width: 500px;
+  `}
+
   @media (min-width: 1000px) {
     padding: 20px;
   }
