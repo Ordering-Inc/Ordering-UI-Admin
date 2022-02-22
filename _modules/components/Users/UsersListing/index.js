@@ -21,8 +21,6 @@ var _UserTypeFilter = require("../UserTypeFilter");
 
 var _UserActiveStateFilter = require("../UserActiveStateFilter");
 
-var _CustomerDetails = require("../CustomerDetails");
-
 var _UserDetailsLateralBar = require("../UserDetailsLateralBar");
 
 var _Shared = require("../../Shared");
@@ -63,7 +61,6 @@ var UsersListingUI = function UsersListingUI(props) {
   var deafultUserTypesSelected = props.deafultUserTypesSelected,
       disabledActiveStateCondition = props.disabledActiveStateCondition,
       headerTitle = props.headerTitle,
-      isCustomersPage = props.isCustomersPage,
       usersList = props.usersList,
       handleSelectedUserTypes = props.handleSelectedUserTypes,
       paginationProps = props.paginationProps,
@@ -109,11 +106,6 @@ var UsersListingUI = function UsersListingUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       openUserAddForm = _useState8[0],
       setOpenUserAddForm = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(0),
-      _useState10 = _slicedToArray(_useState9, 2),
-      moveDistance = _useState10[0],
-      setMoveDistance = _useState10[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
@@ -193,26 +185,7 @@ var UsersListingUI = function UsersListingUI(props) {
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm
-  })), isOpenUserDetails && (isCustomersPage ? /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "customer_details",
-    open: isOpenUserDetails,
-    onClose: function onClose() {
-      return handleBackRedirect();
-    },
-    defaultSideBarWidth: 500 + moveDistance,
-    moveDistance: moveDistance
-  }, /*#__PURE__*/_react.default.createElement(_CustomerDetails.CustomerDetails, {
-    user: openUser,
-    userId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
-    handleSuccessUpdate: handleSuccessUpdate,
-    handleSuccessDeleteUser: handleSuccessDeleteUser,
-    onClose: function onClose() {
-      return handleBackRedirect();
-    },
-    handleParentSidebarMove: function handleParentSidebarMove(val) {
-      return setMoveDistance(val);
-    }
-  })) : /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
+  })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     open: isOpenUserDetails,
     user: openUser,
     userId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
@@ -221,7 +194,7 @@ var UsersListingUI = function UsersListingUI(props) {
     },
     handleSuccessUpdate: handleSuccessUpdate,
     handleSuccessDeleteUser: handleSuccessDeleteUser
-  })), openUserAddForm && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }), openUserAddForm && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "user_add_form",
     open: openUserAddForm,
     onClose: function onClose() {

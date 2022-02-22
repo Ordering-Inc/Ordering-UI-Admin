@@ -31,8 +31,6 @@ var _UsersExportCSV = require("../UsersExportCSV");
 
 var _styles = require("../../../styles");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -67,8 +65,6 @@ var CustomersListingUI = function CustomersListingUI(props) {
       searchValue = props.searchValue,
       onSearch = props.onSearch,
       userTypesSelected = props.userTypesSelected,
-      isVerified = props.isVerified,
-      setIsVerified = props.setIsVerified,
       paginationDetail = props.paginationDetail,
       selectedUserActiveState = props.selectedUserActiveState,
       handleChangeUserActiveState = props.handleChangeUserActiveState,
@@ -162,17 +158,7 @@ var CustomersListingUI = function CustomersListingUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
-  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.VerifiedStatusFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: !isVerified ? 'primary' : 'secundaryDark',
-    onClick: function onClick() {
-      return setIsVerified(false);
-    }
-  }, t('ALL', 'All'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, null)), /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: isVerified ? 'primary' : 'secundaryDark',
-    onClick: function onClick() {
-      return setIsVerified(true);
-    }
-  }, t('VERIFIED', 'Verified'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, null))), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {

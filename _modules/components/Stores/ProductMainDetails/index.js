@@ -19,6 +19,8 @@ var _ProductDetatilsInformation = require("../ProductDetatilsInformation");
 
 var _ProductDetailsAdvanced = require("../ProductDetailsAdvanced");
 
+var _ProductTagsList = require("../ProductTagsList");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -44,6 +46,8 @@ var ProductMainDetails = function ProductMainDetails(props) {
       handleChangeInput = props.handleChangeInput,
       handleChangeFormState = props.handleChangeFormState,
       handleUpdateClick = props.handleUpdateClick,
+      isExtendExtraOpen = props.isExtendExtraOpen,
+      setIsExtendExtraOpen = props.setIsExtendExtraOpen,
       business = props.business,
       handleSuccessUpdate = props.handleSuccessUpdate,
       setFormTaxState = props.setFormTaxState,
@@ -68,17 +72,27 @@ var ProductMainDetails = function ProductMainDetails(props) {
   }, {
     key: 'advanced',
     content: t('ADVANCED', 'Advanced')
-  }, // { key: 'labels', content: t('LABELS', 'Labels') },
-  {
+  }, {
+    key: 'labels',
+    content: t('LABELS', 'Labels')
+  }, {
     key: 'seo_options',
     content: t('SEO_OPTIONS', 'SEO options')
   }];
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_DETAILS', 'Product details')), /*#__PURE__*/_react.default.createElement(_styles.TabsConatiner, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, listOptions.map(function (option) {
+
+  var handleSelectOption = function handleSelectOption(tab) {
+    setSelectedOption(tab);
+    setIsExtendExtraOpen(false);
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    maxLimit: isExtendExtraOpen
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_DETAILS', 'Product details')), /*#__PURE__*/_react.default.createElement(_styles.TabsConatiner, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, listOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: option.key,
       active: selectedOption === option.key,
       onClick: function onClick() {
-        return setSelectedOption(option.key);
+        return handleSelectOption(option.key);
       }
     }, option.content);
   }))), selectedOption === 'information' && /*#__PURE__*/_react.default.createElement(_ProductDetatilsInformation.ProductDetatilsInformation, {
@@ -98,6 +112,12 @@ var ProductMainDetails = function ProductMainDetails(props) {
     setTaxes: setTaxes,
     fees: fees,
     setFees: setFees
+  }), selectedOption === 'labels' && /*#__PURE__*/_react.default.createElement(_ProductTagsList.ProductTagsList, {
+    tags: product.tags,
+    businessId: business.id,
+    product: product,
+    setIsExtendExtraOpen: setIsExtendExtraOpen,
+    handleSuccessProductUpdate: handleSuccessUpdate
   }), selectedOption === 'seo_options' && /*#__PURE__*/_react.default.createElement(_SeoOptions.SeoOptions, {
     data: product,
     formState: formState,
