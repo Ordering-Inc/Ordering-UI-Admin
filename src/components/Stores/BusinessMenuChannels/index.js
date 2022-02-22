@@ -3,12 +3,14 @@ import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../../styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { Alert } from '../../Shared'
+import { Alert, SearchBar } from '../../Shared'
 
 import {
   TabOption,
   TabOptionName,
-  BusinessMenuChannelsContainer
+  BusinessMenuChannelsContainer,
+  SearchBarWrapper,
+  ButtonGroup
 } from './styles'
 
 export const BusinessMenuChannels = (props) => {
@@ -17,10 +19,13 @@ export const BusinessMenuChannels = (props) => {
     handleUpdateBusinessMenuOption,
     sitesState,
     handleChangeMenuSite,
-    menu
+    menu,
+    handleSelectAllChannels,
+    handleSelectNoneChannels
   } = props
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [searchValue, setSearchValue] = useState('')
 
   const closeAlert = () => {
     setAlertState({
@@ -40,10 +45,32 @@ export const BusinessMenuChannels = (props) => {
   return (
     <>
       <BusinessMenuChannelsContainer>
-        {sitesState.sites?.map(site => (
+        <SearchBarWrapper>
+          <SearchBar
+            placeholder={t('SEARCH', 'Search')}
+            isCustomLayout
+            search={searchValue}
+            onSearch={val => setSearchValue(val)}
+          />
+        </SearchBarWrapper>
+        <ButtonGroup>
+          <Button
+            color='secundaryDark'
+            onClick={() => handleSelectAllChannels()}
+          >
+            {t('SELECT_ALL', 'Select all')}
+          </Button>
+          <Button
+            color='secundaryDark'
+            onClick={() => handleSelectNoneChannels()}
+          >
+            {t('SELECT_NONE', 'Select none')}
+          </Button>
+        </ButtonGroup>
+        {sitesState.sites?.filter(site => site?.name.toLowerCase().includes(searchValue))?.map(site => (
           <TabOption
             key={site.id}
-            onClick={() => handleChangeMenuSite(site.id, formState?.changes?.sites?.includes(site.id) ?? menu?.sites?.find(s => s?.id === site?.id))}
+            onClick={() => handleChangeMenuSite(site.id)}
           >
             {
               formState?.changes?.sites?.includes(site.id) ?? menu?.sites?.find(s => s?.id === site?.id) ? (
