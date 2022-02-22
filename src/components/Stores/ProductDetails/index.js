@@ -133,7 +133,8 @@ const ProductDetailsUI = (props) => {
               handleChangeFormState={handleChangeFormState}
               handleChangeInput={handleChangeInput}
               handleUpdateClick={handleUpdateClick}
-
+              isExtendExtraOpen={isExtendExtraOpen}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
               business={business}
               handleSuccessUpdate={handleSuccessUpdate}
               setFormTaxState={setFormTaxState}

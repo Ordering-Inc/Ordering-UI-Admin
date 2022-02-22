@@ -1,11 +1,35 @@
 import styled, { css } from 'styled-components'
 
+export const DetailsHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`
 export const UserName = styled.h1`
   font-size: 20px;
   font-weight: 700;
   color: ${props => props.theme.colors.headingColor};
+  margin: 0;
 `
+export const VerifiedItem = styled.span`
+  font-size: 10px;
+  background-color: ${props => props.theme.colors.lightGreen};
+  padding: 2px 7px;
+  border-radius: 50px;
+  color: ${props => props.theme.colors.green};
+  display: flex;
+  align-items: center;
+  margin: 0 5px;
 
+  svg {
+    font-size: 12px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 3px;
+    ` : css`
+      margin-right: 3px;
+    `}
+  }
+`
 export const SavedPlaces = styled.div`
   text-align: center;
   height: calc(100% - 100px);
