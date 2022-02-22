@@ -5,7 +5,6 @@ import { UsersList } from '../UsersList'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
-import { CustomerDetails } from '../CustomerDetails'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
 import { SideBar } from '../../Shared'
 import { UserAddForm } from '../UserAddForm'
@@ -24,8 +23,6 @@ const UsersListingUI = (props) => {
     deafultUserTypesSelected,
     disabledActiveStateCondition,
     headerTitle,
-
-    isCustomersPage,
 
     usersList,
     handleSelectedUserTypes,
@@ -54,7 +51,6 @@ const UsersListingUI = (props) => {
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
-  const [moveDistance, setMoveDistance] = useState(0)
 
   const handleBackRedirect = () => {
     setIsOpenUserDetails(false)
@@ -147,33 +143,14 @@ const UsersListingUI = (props) => {
       </UsersListingContainer>
 
       {isOpenUserDetails && (
-        isCustomersPage ? (
-          <SideBar
-            sidebarId='customer_details'
-            open={isOpenUserDetails}
-            onClose={() => handleBackRedirect()}
-            defaultSideBarWidth={500 + moveDistance}
-            moveDistance={moveDistance}
-          >
-            <CustomerDetails
-              user={openUser}
-              userId={openUser?.id || queryId}
-              handleSuccessUpdate={handleSuccessUpdate}
-              handleSuccessDeleteUser={handleSuccessDeleteUser}
-              onClose={() => handleBackRedirect()}
-              handleParentSidebarMove={val => setMoveDistance(val)}
-            />
-          </SideBar>
-        ) : (
-          <UserDetailsLateralBar
-            open={isOpenUserDetails}
-            user={openUser}
-            userId={openUser?.id || queryId}
-            onClose={() => handleBackRedirect()}
-            handleSuccessUpdate={handleSuccessUpdate}
-            handleSuccessDeleteUser={handleSuccessDeleteUser}
-          />
-        )
+        <UserDetailsLateralBar
+          open={isOpenUserDetails}
+          user={openUser}
+          userId={openUser?.id || queryId}
+          onClose={() => handleBackRedirect()}
+          handleSuccessUpdate={handleSuccessUpdate}
+          handleSuccessDeleteUser={handleSuccessDeleteUser}
+        />
       )}
       {openUserAddForm && (
         <SideBar
