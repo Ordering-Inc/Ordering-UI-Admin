@@ -91,10 +91,10 @@ export const BusinessSummary = (props) => {
       key: 'ordering_channels',
       value: t('ORDERING_CHANNELS', 'Ordering channels')
     },
-    {
-      key: 'publishing',
-      value: t('PUBLISHING', 'Publishing')
-    },
+    // {
+    //   key: 'publishing',
+    //   value: t('PUBLISHING', 'Publishing')
+    // },
     {
       key: 'layout',
       value: t('LAYOUT', 'Layout')
