@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils, useToast, ToastType } from 'ordering-components-admin'
+import { useLanguage, useUtils } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { XLg, ThreeDots, Laptop, Phone, Link45deg } from 'react-bootstrap-icons'
+import { XLg, ThreeDots, Laptop, Phone } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles/Switch'
 import { IconButton } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
@@ -47,7 +47,6 @@ export const ProductSummary = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage, parsePrice }] = useUtils()
-  const [, { showToast }] = useToast()
 
   const [isEditMode, setIsEditMode] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -92,10 +91,10 @@ export const ProductSummary = (props) => {
     })
   }
 
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href)
-    showToast(ToastType.Success, t('PRODUCT_LINK_COPIED_TO_CLIPBOARD', 'The product link was copied to your clipboard.'))
-  }
+  // const handleCopyLink = () => {
+  //   navigator.clipboard.writeText(window.location.href)
+  //   showToast(ToastType.Success, t('PRODUCT_LINK_COPIED_TO_CLIPBOARD', 'The product link was copied to your clipboard.'))
+  // }
 
   return (
     <>
@@ -111,11 +110,11 @@ export const ProductSummary = (props) => {
             />
           </LeftHeader>
           <RightHeader>
-            <IconButton
+            {/* <IconButton
               onClick={() => handleCopyLink()}
             >
               <Link45deg />
-            </IconButton>
+            </IconButton> */}
             <ActionSelectorWrapper>
               <DropdownButton
                 className='product_actions'
