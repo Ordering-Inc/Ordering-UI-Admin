@@ -157,7 +157,7 @@ const ProductMetaFieldsUI = (props) => {
           {metaFieldsList.metaFields.length > 0 ? (
             <>
               {metaFieldsList.metaFields.map(metaField => (
-                <MetaContainer key={metaField.id}>
+                <MetaContainer key={metaField?.id}>
                   <div className='meta_type'>
                     {metaField.value_type}
                   </div>
@@ -176,7 +176,7 @@ const ProductMetaFieldsUI = (props) => {
                         </>
                       )}
                     </RoundBorder>
-                    <BsTrash onClick={() => handleDeleteMetaField(metaField.id)} />
+                    <BsTrash onClick={() => handleDeleteMetaField(metaField?.id)} />
                   </div>
                 </MetaContainer>
               ))}

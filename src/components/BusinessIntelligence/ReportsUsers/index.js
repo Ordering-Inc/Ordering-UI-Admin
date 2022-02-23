@@ -46,7 +46,7 @@ const ReportsUsersUI = (props) => {
       values = reportData?.content?.dataset?.dataset?.map((item, index) => {
         const list = []
         if (item?.data?.isArray) {
-          item.data.forEach(value => {
+          item?.data && item.data.forEach(value => {
             list.push(value.y)
           })
         } else {

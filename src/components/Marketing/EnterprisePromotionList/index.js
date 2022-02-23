@@ -190,7 +190,7 @@ export const EnterprisePromotionList = (props) => {
                 key={promotion.id}
                 className={(selectedPromotion?.id === promotion.id) ? 'draggable_promotion active' : 'draggable_promotion'}
                 onClick={(e) => handleClickPromotion(e, promotion)}
-                onDragOver={e => handleAllowDrop(e, promotion.id)}
+                onDragOver={e => handleAllowDrop?.(e, promotion.id)}
                 onDrop={e => handleDrop(e, promotion)}
                 onDragEnd={e => handleDragEnd(e)}
                 isAccept={dataSelected && dataSelected === promotion?.id}

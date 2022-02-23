@@ -45,7 +45,7 @@ export const BusinessSummary = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleOpenCategory = () => {
-    history.push(`/stores/list/${businessState.business.slug}`)
+    history.push(`/stores/list/${businessState?.business?.slug}`)
   }
 
   const itemsExcluded = ['publishing']
@@ -91,10 +91,10 @@ export const BusinessSummary = (props) => {
       key: 'ordering_channels',
       value: t('ORDERING_CHANNELS', 'Ordering channels')
     },
-    {
-      key: 'publishing',
-      value: t('PUBLISHING', 'Publishing')
-    },
+    // {
+    //   key: 'publishing',
+    //   value: t('PUBLISHING', 'Publishing')
+    // },
     {
       key: 'layout',
       value: t('LAYOUT', 'Layout')
