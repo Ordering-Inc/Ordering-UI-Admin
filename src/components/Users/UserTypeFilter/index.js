@@ -48,12 +48,11 @@ export const UserTypeFilter = (props) => {
     ...props,
     UIComponent: UserTypeFilterUI,
     userTypes: props.userTypes || [
-      { id: 1, title: t('ALL', 'All'), value: [0, 1, 2] },
+      { id: 1, title: t('ALL', 'All'), value: [0, 2] },
       { id: 2, title: t('BUSINESS_OWNER', 'Business owner'), value: [2] },
-      { id: 3, title: t('CITY_MANAGER', 'City manager'), value: [1] },
-      { id: 4, title: t('ADMINISTRATORS', 'Administrators'), value: [0] }
+      { id: 3, title: t('ADMINISTRATORS', 'Administrators'), value: [0] }
     ],
-    defaultUserTypes: props.defaultUserTypes || [0, 1, 2],
+    defaultUserTypes: props.defaultUserTypes || [0, 2],
     onChangeUserType: props.handleChangeUserType
   }
 

@@ -9,7 +9,7 @@ export const ManagersList = (props) => {
   const usersProps = {
     ...props,
     headerTitle: t('MANAGERS', 'Managers'),
-    deafultUserTypesSelected: [0, 1, 2],
+    deafultUserTypesSelected: [0, 2],
     propsToFetch: [
       'name', 'lastname', 'email', 'phone', 'photo', 'cellphone',
       'country_phone_code', 'city_id', 'city', 'address', 'addresses',
