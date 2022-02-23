@@ -2,7 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  max-width: 500px;
+
+  @media (min-width: 1000px) {
+    max-width: 500px;
+  }
 `
 export const InfoConatiner = styled.div`
   height: 100%;

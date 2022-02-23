@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const FormInput = styled.form`
   margin-top: 20px;
+  min-height: calc(100vh - 150px);
 `
 
 export const HeaderImage = styled.div`
@@ -106,7 +107,9 @@ export const InputWrapper = styled.div`
 `
 
 export const ActionsForm = styled.div`
-  margin-top: 50px;
+  position: sticky;
+  top: 100%;
+  margin-top: 15px;
   > button {
     height: 35px;
   }

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
-import { Confirm, Modal } from '../../Shared'
+import { Confirm, Modal, SearchBar } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox } from '../../../styles'
 
@@ -15,7 +15,9 @@ import {
   CheckboxWrapper,
   AddMenuButton,
   TabsContainer,
-  Tab
+  Tab,
+  SearchBarWrapper,
+  SelectButtonGroup
 } from './styles'
 
 const BusinessMenuUI = (props) => {
@@ -36,6 +38,8 @@ const BusinessMenuUI = (props) => {
   const [showOption, setShowOption] = useState(null)
   const [currentMenu, setCurrentMenu] = useState(null)
   const [isOpenSharedProduct, setIsOpenSharedProduct] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+  const [menuList, setMenuList] = useState([])
 
   const handleOpenOptions = (name, menu) => {
     setCurrentMenu(menu)
@@ -55,6 +59,12 @@ const BusinessMenuUI = (props) => {
     if (isInvalid) return
     handleOpenOptions('option', menu)
   }
+
+  useEffect(() => {
+    const updatedMenus = [...(isSelectedSharedMenus ? businessMenusState?.menusShared : businessMenusState?.menus)]
+    const filteredMenus = updatedMenus.filter(menu => menu?.name.toLowerCase().includes(searchValue.toLowerCase()))
+    setMenuList(filteredMenus)
+  }, [businessMenusState?.menus, businessMenusState?.menusShared, searchValue, isSelectedSharedMenus])
 
   return (
     <MainContainer>
@@ -90,8 +100,31 @@ const BusinessMenuUI = (props) => {
             {t('SHARED_MENUS', 'Shared menus')}
           </Tab>
         </TabsContainer>
+        <SearchBarWrapper>
+          <SearchBar
+            isCustomLayout
+            lazyLoad
+            placeholder={t('SEARCH', 'Search')}
+            search={searchValue}
+            onSearch={val => setSearchValue(val)}
+          />
+        </SearchBarWrapper>
+        {/* <SelectButtonGroup>
+          <Button
+            color='secundaryDark'
+            // onClick={() => handleSelectAllTags()}
+          >
+            {t('SELECT_ALL', 'Select all')}
+          </Button>
+          <Button
+            color='secundaryDark'
+            // onClick={() => handleSelectNoneTags()}
+          >
+            {t('SELECT_NONE', 'Select none')}
+          </Button>
+        </SelectButtonGroup> */}
 
-        {(isSelectedSharedMenus ? businessMenusState?.menusShared : businessMenusState?.menus).map(menu => (
+        {menuList.map(menu => (
           <MeunItem
             key={menu.id}
             active={menu.id === currentMenu?.id}
