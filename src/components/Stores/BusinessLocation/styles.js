@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
-  min-height: calc(100% - 150px);
+  min-height: calc(100vh - 150px);
   > button {
     position: sticky;
     top: 100%;
