@@ -4,6 +4,7 @@ export const BusinessMenuChannelsContainer = styled.div`
   max-height: calc(100vh - 200px);
   overflow: auto;
   padding: 0 5px;
+  margin-top: 27px;
   input:not([type='checkbox']),
   textarea {
     width: 100%;
@@ -36,4 +37,21 @@ export const TabOptionName = styled.span`
   ` : css`
     margin-left: 10px;
   `}
+`
+
+export const SearchBarWrapper = styled.div`
+  margin-bottom: 15px;
+`
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 17px;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  button:first-child {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 16px;
+    ` : css`
+      margin-right: 16px;
+    `}
+  }
 `
