@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import React from 'react'
 
 export const Container = styled.div`
 `
@@ -18,6 +19,7 @@ export const BusinessTypeContainer = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid #E9ECEF;
   transition: all 0.3s;
+  cursor: pointer;
 
   &:hover {
     background: ${props => props.theme.colors.secundary};
@@ -25,10 +27,8 @@ export const BusinessTypeContainer = styled.div`
 
   ${({ active }) => active && css`
     background: #F5F9FF;
-    > div {
-      border-bottom: 1px solid ${props => props.theme.colors.primary};
-      border-top: 1px solid ${props => props.theme.colors.primary};
-    }
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+    border-top: 1px solid ${props => props.theme.colors.primary};
   `}
 `
 
@@ -69,7 +69,7 @@ export const LogoWrapper = styled.div`
   width: 32px;
   height: 32px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 7.6px;
+  border-radius: 8px;
   min-width: 32px;
   margin-left: 23px;
 
@@ -77,14 +77,40 @@ export const LogoWrapper = styled.div`
     margin-right: 23px;
     margin-left: 0px;
   `}
+`
 
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 7.6px;
-    object-fit: cover;
+const ImageStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 8px;
+  ${({ bgimage }) => !bgimage && css`
+    background: #E9ECEF;
+  `}
+
+  svg {
+    color: #ADB5BD;
+    font-size: 15px;
   }
 `
+export const Image = (props) => {
+  return (
+    <ImageStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </ImageStyled>
+  )
+}
 
 export const CheckBoxWrapper = styled.div`
   display: flex;

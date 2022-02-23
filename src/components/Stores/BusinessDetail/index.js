@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
 import { BusinessOwners } from '../BusinessOwners'
@@ -9,8 +9,6 @@ import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
 import { SeoOptions } from '../SeoOptions'
 import { BusinessInformation } from '../BusinessInformation'
-import { Modal, SideBar } from '../../Shared'
-import { useWindowSize } from '../../../hooks/useWindowSize'
 import {
   InfoConatiner,
   Container
@@ -34,12 +32,11 @@ export const BusinessDetail = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const { width } = useWindowSize()
   const [selectedInfoItem, setSelctedInfoItem] = useState('information')
 
-  const handleCloseExtra = () => {
+  useEffect(() => {
     setIsExtendExtraOpen(false)
-  }
+  }, [selectedInfoItem])
 
   return (
     <>
@@ -72,6 +69,7 @@ export const BusinessDetail = (props) => {
               handleUpdateBusinessClick={handleUpdateBusinessClick}
               setBusinessTypes={setBusinessTypes}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
+              isExtendExtraOpen={isExtendExtraOpen}
             />
           )}
           {selectedInfoItem === 'location' && (
@@ -115,28 +113,6 @@ export const BusinessDetail = (props) => {
           )}
         </InfoConatiner>
       </Container>
-      {isExtendExtraOpen && (
-        <>
-          {width >= 1000 ? (
-            <SideBar
-              sidebarId='busiiness-type'
-              defaultSideBarWidth={500}
-              open={isExtendExtraOpen}
-              onClose={() => handleCloseExtra()}
-            >
-              <div>side bar</div>
-            </SideBar>
-          ) : (
-            <Modal
-              width='80%'
-              open={isExtendExtraOpen}
-              onClose={() => handleCloseExtra()}
-            >
-              <div>dddd</div>
-            </Modal>
-          )}
-        </>
-      )}
     </>
   )
 }
