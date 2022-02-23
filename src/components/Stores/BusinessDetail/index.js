@@ -4,7 +4,6 @@ import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
 import { BusinessOwners } from '../BusinessOwners'
 import { BusinessTypes } from '../BusinessTypes'
 import { BusinessLocation } from '../BusinessLocation'
-import { BusinessDescription } from '../BusinessDescription'
 import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
 import { SeoOptions } from '../SeoOptions'
@@ -74,14 +73,6 @@ export const BusinessDetail = (props) => {
           )}
           {selectedInfoItem === 'location' && (
             <BusinessLocation
-              business={business}
-              formState={formState}
-              setFormState={setFormState}
-              handleUpdateBusinessClick={handleUpdateBusinessClick}
-            />
-          )}
-          {selectedInfoItem === 'description' && (
-            <BusinessDescription
               business={business}
               formState={formState}
               setFormState={setFormState}

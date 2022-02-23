@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.div`
 `
@@ -18,9 +18,12 @@ export const BusinessVideoPathWrapper = styled.div`
     white-space: nowrap;
     font-size: 14px;
   }
-  svg {
-    font-size: 20px;
+  p {
+    color: ${props => props.theme.colors.danger};
+    margin: 0px;
+    font-size: 14px;
     cursor: pointer;
+    user-select: none;
   }
 `
 
@@ -32,18 +35,11 @@ export const BusinessAddVideoWrapper = styled.div`
   justify-content: space-between;
 
   input {
-    width: calc(100% - 60px);
+    width: calc(100% - 80px);
   }
-`
 
-export const AddButton = styled.a`
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  ${({ disabled }) => disabled && css`
-    pointer-events: none;
-    opacity: 0.6;
-  `}
-  svg {
-    font-size: 20px;
+  button {
+    border-radius: 8px;
+    height: 44px;
   }
 `
