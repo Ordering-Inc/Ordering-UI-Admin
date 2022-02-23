@@ -13,12 +13,12 @@ import { UserAddForm } from '../UserAddForm'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { Button } from '../../../styles'
-import { X as CloseIcon } from 'react-bootstrap-icons'
+// import { X as CloseIcon } from 'react-bootstrap-icons'
 
 import {
   UsersListingContainer,
   ActionsContainer,
-  VerifiedStatusFilterContainer,
+  // VerifiedStatusFilterContainer,
   ActionButtonsGroup
 } from './styles'
 
@@ -34,8 +34,8 @@ const CustomersListingUI = (props) => {
     searchValue,
     onSearch,
     userTypesSelected,
-    isVerified,
-    setIsVerified,
+    // isVerified,
+    // setIsVerified,
     paginationDetail,
     selectedUserActiveState,
     handleChangeUserActiveState,
@@ -109,7 +109,7 @@ const CustomersListingUI = (props) => {
           handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <ActionsContainer>
-          <VerifiedStatusFilterContainer>
+          {/* <VerifiedStatusFilterContainer>
             <Button
               color={!isVerified ? 'primary' : 'secundaryDark'}
               onClick={() => setIsVerified(false)}
@@ -124,7 +124,7 @@ const CustomersListingUI = (props) => {
               {t('VERIFIED', 'Verified')}
               <CloseIcon />
             </Button>
-          </VerifiedStatusFilterContainer>
+          </VerifiedStatusFilterContainer> */}
           <ActionButtonsGroup>
             <Button
               borderRadius='8px'

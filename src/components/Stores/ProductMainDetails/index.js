@@ -4,6 +4,8 @@ import { DragScroll } from '../../Shared'
 import { SeoOptions } from '../SeoOptions'
 import { ProductDetatilsInformation } from '../ProductDetatilsInformation'
 import { ProductDetailsAdvanced } from '../ProductDetailsAdvanced'
+import { ProductTagsList } from '../ProductTagsList'
+
 import {
   Container,
   TabsConatiner,
@@ -18,7 +20,8 @@ export const ProductMainDetails = (props) => {
     handleChangeInput,
     handleChangeFormState,
     handleUpdateClick,
-
+    isExtendExtraOpen,
+    setIsExtendExtraOpen,
     business,
     handleSuccessUpdate,
     setFormTaxState,
@@ -34,11 +37,16 @@ export const ProductMainDetails = (props) => {
   const listOptions = [
     { key: 'information', content: t('INFORMATION', 'Information') },
     { key: 'advanced', content: t('ADVANCED', 'Advanced') },
-    // { key: 'labels', content: t('LABELS', 'Labels') },
+    { key: 'labels', content: t('LABELS', 'Labels') },
     { key: 'seo_options', content: t('SEO_OPTIONS', 'SEO options') }
   ]
+  const handleSelectOption = (tab) => {
+    setSelectedOption(tab)
+    setIsExtendExtraOpen(false)
+  }
+
   return (
-    <Container>
+    <Container maxLimit={isExtendExtraOpen}>
       <h1>{t('PRODUCT_DETAILS', 'Product details')}</h1>
       <TabsConatiner>
         <DragScroll>
@@ -46,7 +54,7 @@ export const ProductMainDetails = (props) => {
             <Tab
               key={option.key}
               active={selectedOption === option.key}
-              onClick={() => setSelectedOption(option.key)}
+              onClick={() => handleSelectOption(option.key)}
             >
               {option.content}
             </Tab>
@@ -74,6 +82,15 @@ export const ProductMainDetails = (props) => {
           setTaxes={setTaxes}
           fees={fees}
           setFees={setFees}
+        />
+      )}
+      {selectedOption === 'labels' && (
+        <ProductTagsList
+          tags={product.tags}
+          businessId={business.id}
+          product={product}
+          setIsExtendExtraOpen={setIsExtendExtraOpen}
+          handleSuccessProductUpdate={handleSuccessUpdate}
         />
       )}
       {selectedOption === 'seo_options' && (

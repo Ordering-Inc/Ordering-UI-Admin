@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { UserDetails as UserDetailsController } from 'ordering-components-admin'
+import { UserDetails as UserDetailsController, useLanguage } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../../Delivery'
 import { OrdersManager } from '../../Orders'
 import { BusinessManagerBusinesses } from '../BusinessManagerBusinesses'
+import { Envelope, Phone } from 'react-bootstrap-icons'
 
 import {
+  DetailsHeader,
+  VerifiedItem,
   UserName,
   SavedPlaces,
   PersonalizationWrapper
@@ -22,6 +25,7 @@ export const UserDetailsUI = (props) => {
     handleSuccessUserUpdate
   } = props
 
+  const [, t] = useLanguage()
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
 
   useEffect(() => {
@@ -30,13 +34,28 @@ export const UserDetailsUI = (props) => {
 
   return (
     <>
-      <UserName>
-        {userState.loading ? (
-          <Skeleton width={150} />
-        ) : (
-          <span>{userState?.user?.name} {userState?.user?.lastname}</span>
+      <DetailsHeader>
+        <UserName>
+          {userState.loading ? (
+            <Skeleton width={150} />
+          ) : (
+            <span>{userState?.user?.name} {userState?.user?.lastname}</span>
+          )}
+        </UserName>
+        {!!userState.user?.phone_verified && (
+          <VerifiedItem>
+            <Phone />
+            {t('VERIFIED', 'Verified')}
+          </VerifiedItem>
         )}
-      </UserName>
+
+        {!!userState.user?.email_verified && (
+          <VerifiedItem>
+            <Envelope />
+            {t('VERIFIED', 'Verified')}
+          </VerifiedItem>
+        )}
+      </DetailsHeader>
       <UserDetailsMenu
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={setCurrentMenuSelected}
