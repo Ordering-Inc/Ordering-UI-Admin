@@ -33,7 +33,7 @@ const BusinessOwnerSelectorUI = (props) => {
       _userLists = usersList?.users
     }
 
-    const _usersListOptions = _userLists.map(user => {
+    const _usersListOptions = _userLists?.map(user => {
       return {
         value: user?.id,
         content: (

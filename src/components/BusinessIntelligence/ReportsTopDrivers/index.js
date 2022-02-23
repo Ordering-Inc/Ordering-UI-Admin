@@ -137,7 +137,7 @@ const ReportsTopDriversUI = (props) => {
           footer: (tooltipItem) => {
             let label = ''
             if (reportData?.content?.dataset?.dataset?.data?.length > 0) {
-              reportData.content.dataset.dataset.data.forEach(item => {
+              reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(item => {
                 if (item.x === tooltipItem[0]?.parsed?.x) label = item?.info[0]?.label
               })
             }

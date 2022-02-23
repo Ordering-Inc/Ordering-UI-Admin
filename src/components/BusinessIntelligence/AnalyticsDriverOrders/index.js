@@ -51,7 +51,7 @@ export const AnalyticsDriverOrders = (props) => {
 
   const generateLabel = () => {
     const values = []
-    chartDataList.data.dataset.dataset[0].data.forEach(data => {
+    chartDataList?.data?.dataset?.dataset?.[0]?.data && chartDataList.data.dataset.dataset[0].data.forEach(data => {
       values.push(data.x)
     })
     return values

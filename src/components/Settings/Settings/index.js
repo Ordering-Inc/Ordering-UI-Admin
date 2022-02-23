@@ -61,7 +61,7 @@ const SettingsUI = (props) => {
     setIsOpenSettingDetails(null)
     setIsOpenDescription(true)
     setSelectedCategory(category)
-    onBasicSettingsRedirect({ category: category.id })
+    onBasicSettingsRedirect({ category: category?.id })
     handChangeConfig && handChangeConfig(false)
   }
 
@@ -88,7 +88,7 @@ const SettingsUI = (props) => {
 
   useEffect(() => {
     if (categoryId && categoryList?.categories?.length > 0) {
-      const categorySelected = categoryList?.categories.find(item => item.id === parseInt(categoryId))
+      const categorySelected = categoryList?.categories.find(item => item?.id === parseInt(categoryId))
       setSelectedCategory(categorySelected)
     }
   }, [categoryList?.categories])
