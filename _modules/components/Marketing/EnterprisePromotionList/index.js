@@ -224,7 +224,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
         return handleClickPromotion(e, promotion);
       },
       onDragOver: function onDragOver(e) {
-        return handleAllowDrop(e, promotion.id);
+        return handleAllowDrop === null || handleAllowDrop === void 0 ? void 0 : handleAllowDrop(e, promotion.id);
       },
       onDrop: function onDrop(e) {
         return handleDrop(e, promotion);

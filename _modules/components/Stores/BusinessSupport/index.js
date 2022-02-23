@@ -32,7 +32,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessSupport = function BusinessSupport(props) {
-  var _businessState$busine;
+  var _businessState$busine, _businessState$busine2;
 
   var businessState = props.businessState;
 
@@ -44,7 +44,7 @@ var BusinessSupport = function BusinessSupport(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       getTimeAgo = _useUtils2[0].getTimeAgo;
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.BusinessSupportContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_DETAILS', 'Product details')), /*#__PURE__*/_react.default.createElement(_styles2.BusinessOwnersContainer, null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.owners.map(function (owner) {
+  return /*#__PURE__*/_react.default.createElement(_styles2.BusinessSupportContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_DETAILS', 'Product details')), /*#__PURE__*/_react.default.createElement(_styles2.BusinessOwnersContainer, null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.owners) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.map(function (owner) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessOwnerInfo, {
       key: owner.id
     }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, owner !== null && owner !== void 0 && owner.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {

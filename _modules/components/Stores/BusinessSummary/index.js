@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessSummary = function BusinessSummary(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _theme$images, _theme$images$dummies, _businessState$busine5;
+  var _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5, _theme$images, _theme$images$dummies, _businessState$busine6;
 
   var isAdmin = props.isAdmin,
       businessState = props.businessState,
@@ -95,7 +95,9 @@ var BusinessSummary = function BusinessSummary(props) {
       setConfirm = _useState4[1];
 
   var handleOpenCategory = function handleOpenCategory() {
-    history.push("/stores/list/".concat(businessState.business.slug));
+    var _businessState$busine;
+
+    history.push("/stores/list/".concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.slug));
   };
 
   var itemsExcluded = ['publishing'];
@@ -129,10 +131,11 @@ var BusinessSummary = function BusinessSummary(props) {
   }, {
     key: 'ordering_channels',
     value: t('ORDERING_CHANNELS', 'Ordering channels')
-  }, {
-    key: 'publishing',
-    value: t('PUBLISHING', 'Publishing')
-  }, {
+  }, // {
+  //   key: 'publishing',
+  //   value: t('PUBLISHING', 'Publishing')
+  // },
+  {
     key: 'layout',
     value: t('LAYOUT', 'Layout')
   }, {
@@ -158,10 +161,10 @@ var BusinessSummary = function BusinessSummary(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.name), businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.name), businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
   }) : /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.enabled,
+    defaultChecked: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.enabled,
     onChange: handleChangeActiveBusiness
   })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     disabled: true // onClick={() => handleSelectedItem('support')}
@@ -189,9 +192,9 @@ var BusinessSummary = function BusinessSummary(props) {
     width: 60,
     height: 60
   }))) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessHeader, {
-    bgimage: optimizeImage(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.header, 'h_200,c_limit')
+    bgimage: optimizeImage(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.header, 'h_200,c_limit')
   }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogo, {
-    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_100,c_limit')
+    bgimage: optimizeImage((businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_100,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
@@ -199,7 +202,7 @@ var BusinessSummary = function BusinessSummary(props) {
     disabled: businessState === null || businessState === void 0 ? void 0 : businessState.loading
   }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDescription, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 300
-  }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.description), /*#__PURE__*/_react.default.createElement(_styles2.BusinessConfigsContainer, {
+  }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.description), /*#__PURE__*/_react.default.createElement(_styles2.BusinessConfigsContainer, {
     isLoading: businessState === null || businessState === void 0 ? void 0 : businessState.loading
   }, (isAdmin ? businessConfigs : businessConfigs.filter(function (c) {
     return !itemsExcluded.includes(c.key);

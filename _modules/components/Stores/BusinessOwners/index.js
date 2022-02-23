@@ -56,6 +56,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessOwners = function BusinessOwners(props) {
+  var _business$owners;
+
   var business = props.business,
       handleDeleteBusinessOwner = props.handleDeleteBusinessOwner,
       handleAddBusinessOwner = props.handleAddBusinessOwner;
@@ -141,7 +143,7 @@ var BusinessOwners = function BusinessOwners(props) {
 
     setOwnerIds(_ownerIds);
   }, [business === null || business === void 0 ? void 0 : business.owners]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, business === null || business === void 0 ? void 0 : business.owners.map(function (owner) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, business === null || business === void 0 ? void 0 : (_business$owners = business.owners) === null || _business$owners === void 0 ? void 0 : _business$owners.map(function (owner) {
     return /*#__PURE__*/_react.default.createElement(_styles.OwnerItem, {
       key: owner === null || owner === void 0 ? void 0 : owner.id
     }, /*#__PURE__*/_react.default.createElement("span", null, owner === null || owner === void 0 ? void 0 : owner.name, " ", owner === null || owner === void 0 ? void 0 : owner.lastname), /*#__PURE__*/_react.default.createElement(_BsTrash.default, {

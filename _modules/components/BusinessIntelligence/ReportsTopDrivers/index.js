@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
-  var _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content8$3, _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
+  var _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -228,7 +228,9 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
             var label = '';
 
             if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset) === null || _reportData$content7$2 === void 0 ? void 0 : (_reportData$content7$3 = _reportData$content7$2.data) === null || _reportData$content7$3 === void 0 ? void 0 : _reportData$content7$3.length) > 0) {
-              reportData.content.dataset.dataset.data.forEach(function (item) {
+              var _reportData$content8, _reportData$content8$, _reportData$content8$2;
+
+              (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.dataset) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.dataset) === null || _reportData$content8$2 === void 0 ? void 0 : _reportData$content8$2.data) && reportData.content.dataset.dataset.data.forEach(function (item) {
                 var _tooltipItem$, _tooltipItem$$parsed, _item$info$;
 
                 if (item.x === ((_tooltipItem$ = tooltipItem[0]) === null || _tooltipItem$ === void 0 ? void 0 : (_tooltipItem$$parsed = _tooltipItem$.parsed) === null || _tooltipItem$$parsed === void 0 ? void 0 : _tooltipItem$$parsed.x)) label = item === null || item === void 0 ? void 0 : (_item$info$ = item.info[0]) === null || _item$info$ === void 0 ? void 0 : _item$info$.label;
@@ -254,14 +256,14 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.dataset) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.dataset) === null || _reportData$content8$2 === void 0 ? void 0 : (_reportData$content8$3 = _reportData$content8$2.data) === null || _reportData$content8$3 === void 0 ? void 0 : _reportData$content8$3.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.dataset) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.dataset) === null || _reportData$content9$2 === void 0 ? void 0 : (_reportData$content9$3 = _reportData$content9$2.data) === null || _reportData$content9$3 === void 0 ? void 0 : _reportData$content9$3.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('TOP_ORDERS', 'Top orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV();
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.dataset) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.dataset) === null || _reportData$content9$2 === void 0 ? void 0 : (_reportData$content9$3 = _reportData$content9$2.data) === null || _reportData$content9$3 === void 0 ? void 0 : _reportData$content9$3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.dataset) === null || _reportData$content11 === void 0 ? void 0 : (_reportData$content12 = _reportData$content11.dataset) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.data) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options
   }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

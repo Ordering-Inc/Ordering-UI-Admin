@@ -40,13 +40,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessMenuChannels = function BusinessMenuChannels(props) {
-  var _formState$result3, _sitesState$sites;
+  var _formState$result3, _sitesState$sites, _sitesState$sites$fil;
 
   var formState = props.formState,
       handleUpdateBusinessMenuOption = props.handleUpdateBusinessMenuOption,
       sitesState = props.sitesState,
       handleChangeMenuSite = props.handleChangeMenuSite,
-      menu = props.menu;
+      menu = props.menu,
+      handleSelectAllChannels = props.handleSelectAllChannels,
+      handleSelectNoneChannels = props.handleSelectNoneChannels;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -59,6 +61,11 @@ var BusinessMenuChannels = function BusinessMenuChannels(props) {
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
       setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      searchValue = _useState4[0],
+      setSearchValue = _useState4[1];
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -76,19 +83,34 @@ var BusinessMenuChannels = function BusinessMenuChannels(props) {
       content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
     });
   }, [formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessMenuChannelsContainer, null, (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.map(function (site) {
-    var _formState$changes$si3, _formState$changes2, _formState$changes2$s, _menu$sites2;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessMenuChannelsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    placeholder: t('SEARCH', 'Search'),
+    isCustomLayout: true,
+    search: searchValue,
+    onSearch: function onSearch(val) {
+      return setSearchValue(val);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectAllChannels();
+    }
+  }, t('SELECT_ALL', 'Select all')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectNoneChannels();
+    }
+  }, t('SELECT_NONE', 'Select none'))), (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : (_sitesState$sites$fil = _sitesState$sites.filter(function (site) {
+    return site === null || site === void 0 ? void 0 : site.name.toLowerCase().includes(searchValue);
+  })) === null || _sitesState$sites$fil === void 0 ? void 0 : _sitesState$sites$fil.map(function (site) {
+    var _formState$changes$si, _formState$changes, _formState$changes$si2, _menu$sites;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
       key: site.id,
       onClick: function onClick() {
-        var _formState$changes$si, _formState$changes, _formState$changes$si2, _menu$sites;
-
-        return handleChangeMenuSite(site.id, (_formState$changes$si = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$si2 = _formState$changes.sites) === null || _formState$changes$si2 === void 0 ? void 0 : _formState$changes$si2.includes(site.id)) !== null && _formState$changes$si !== void 0 ? _formState$changes$si : menu === null || menu === void 0 ? void 0 : (_menu$sites = menu.sites) === null || _menu$sites === void 0 ? void 0 : _menu$sites.find(function (s) {
-          return (s === null || s === void 0 ? void 0 : s.id) === (site === null || site === void 0 ? void 0 : site.id);
-        }));
+        return handleChangeMenuSite(site.id);
       }
-    }, ((_formState$changes$si3 = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : (_formState$changes2$s = _formState$changes2.sites) === null || _formState$changes2$s === void 0 ? void 0 : _formState$changes2$s.includes(site.id)) !== null && _formState$changes$si3 !== void 0 ? _formState$changes$si3 : menu === null || menu === void 0 ? void 0 : (_menu$sites2 = menu.sites) === null || _menu$sites2 === void 0 ? void 0 : _menu$sites2.find(function (s) {
+    }, ((_formState$changes$si = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$si2 = _formState$changes.sites) === null || _formState$changes$si2 === void 0 ? void 0 : _formState$changes$si2.includes(site.id)) !== null && _formState$changes$si !== void 0 ? _formState$changes$si : menu === null || menu === void 0 ? void 0 : (_menu$sites = menu.sites) === null || _menu$sites === void 0 ? void 0 : _menu$sites.find(function (s) {
       return (s === null || s === void 0 ? void 0 : s.id) === (site === null || site === void 0 ? void 0 : site.id);
     })) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"

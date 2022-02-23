@@ -389,15 +389,7 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  }))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
-    className: "d-flex align-items-center",
-    variant: location.pathname === '/ordering-products' && 'primary',
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'ordering_products'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: location.pathname === '/support' && 'primary',
     onClick: function onClick() {

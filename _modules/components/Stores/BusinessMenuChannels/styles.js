@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TabOptionName = exports.TabOption = exports.BusinessMenuChannelsContainer = void 0;
+exports.TabOptionName = exports.TabOption = exports.SearchBarWrapper = exports.ButtonGroup = exports.BusinessMenuChannelsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessMenuChannelsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 200px);\n  overflow: auto;\n  padding: 0 5px;\n  input:not([type='checkbox']),\n  textarea {\n    width: 100%;\n  }\n  > button {\n    height: 40px;\n    margin-top: 50px;\n  }\n"])));
+var BusinessMenuChannelsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 200px);\n  overflow: auto;\n  padding: 0 5px;\n  margin-top: 27px;\n  input:not([type='checkbox']),\n  textarea {\n    width: 100%;\n  }\n  > button {\n    height: 40px;\n    margin-top: 50px;\n  }\n"])));
 
 exports.BusinessMenuChannelsContainer = BusinessMenuChannelsContainer;
 
@@ -38,3 +38,17 @@ var TabOptionName = _styledComponents.default.span(_templateObject3 || (_templat
 });
 
 exports.TabOptionName = TabOptionName;
+
+var SearchBarWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n"])));
+
+exports.SearchBarWrapper = SearchBarWrapper;
+
+var ButtonGroup = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding-bottom: 17px;\n  border-bottom: 1px solid ", ";\n  button:first-child {\n    ", "\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme2;
+
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 16px;\n    "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-right: 16px;\n    "])));
+});
+
+exports.ButtonGroup = ButtonGroup;

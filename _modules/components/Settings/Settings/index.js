@@ -138,7 +138,7 @@ var SettingsUI = function SettingsUI(props) {
     setIsOpenDescription(true);
     setSelectedCategory(category);
     onBasicSettingsRedirect({
-      category: category.id
+      category: category === null || category === void 0 ? void 0 : category.id
     });
     handChangeConfig && handChangeConfig(false);
   };
@@ -172,7 +172,7 @@ var SettingsUI = function SettingsUI(props) {
 
     if (categoryId && (categoryList === null || categoryList === void 0 ? void 0 : (_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.length) > 0) {
       var categorySelected = categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories.find(function (item) {
-        return item.id === parseInt(categoryId);
+        return (item === null || item === void 0 ? void 0 : item.id) === parseInt(categoryId);
       });
       setSelectedCategory(categorySelected);
     }

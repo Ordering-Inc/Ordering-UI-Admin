@@ -197,7 +197,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       return handleProductClick(e);
     },
     onDragOver: function onDragOver(e) {
-      return handleDragOver(e);
+      return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e);
     },
     onDrop: function onDrop(e) {
       return handleDrop(e);

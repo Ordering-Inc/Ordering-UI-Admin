@@ -41,8 +41,6 @@ var _BusinessOrderingChannels = require("../BusinessOrderingChannels");
 
 var _BusinessFrontLayout = require("../BusinessFrontLayout");
 
-var _BusinessPublishing = require("../BusinessPublishing");
-
 var _Shared = require("../../Shared");
 
 var _styles = require("./styles");
@@ -266,9 +264,6 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     formState: formState,
     setFormState: setFormState
-  }), selectedItem === 'publishing' && isAdmin && /*#__PURE__*/_react.default.createElement(_BusinessPublishing.BusinessPublishing, {
-    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    setIsExtendExtraOpen: setIsExtendExtraOpen
   }), selectedItem === 'layout' && /*#__PURE__*/_react.default.createElement(_BusinessFrontLayout.BusinessFrontLayout, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState,

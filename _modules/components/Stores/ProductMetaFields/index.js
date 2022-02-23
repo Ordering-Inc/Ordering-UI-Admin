@@ -229,7 +229,7 @@ var ProductMetaFieldsUI = function ProductMetaFieldsUI(props) {
     }));
   })) : /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FIELDS', 'Custom Fields')), metaFieldsList.metaFields.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaFieldsList.metaFields.map(function (metaField) {
     return /*#__PURE__*/_react.default.createElement(_styles.MetaContainer, {
-      key: metaField.id
+      key: metaField === null || metaField === void 0 ? void 0 : metaField.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "meta_type"
     }, metaField.value_type), /*#__PURE__*/_react.default.createElement("div", {
@@ -238,7 +238,7 @@ var ProductMetaFieldsUI = function ProductMetaFieldsUI(props) {
       className: "meta_value"
     }, /*#__PURE__*/_react.default.createElement(_styles.RoundBorder, null, metaField.value_type === 'boolean' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, metaField.value)), /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
       onClick: function onClick() {
-        return handleDeleteMetaField(metaField.id);
+        return handleDeleteMetaField(metaField === null || metaField === void 0 ? void 0 : metaField.id);
       }
     })));
   })) : /*#__PURE__*/_react.default.createElement(_styles.NoMetaField, null, t('NO_METAFIELD', 'No MetaField')), /*#__PURE__*/_react.default.createElement(_styles.MetaAddForm, {

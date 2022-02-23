@@ -68,7 +68,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
-  var _reportData$content2, _reportData$content2$, _reportData$content3, _reportData$content3$;
+  var _reportData$content3, _reportData$content3$, _reportData$content4, _reportData$content4$;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -109,9 +109,11 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
   var barChartRef = (0, _react.useRef)(null);
 
   var generateData = function generateData(dataKey, status) {
+    var _reportData$content;
+
     var _available = [];
     var _notAvailable = [];
-    reportData.content.data.forEach(function (data) {
+    (reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : _reportData$content.data) && reportData.content.data.forEach(function (data) {
       data.lines.forEach(function (line) {
         if (line.label_key === dataKey) {
           line.ranges.forEach(function (range) {
@@ -176,9 +178,9 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     }
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.error]);
   (0, _react.useEffect)(function () {
-    var _reportData$content, _reportData$content$d;
+    var _reportData$content2, _reportData$content2$;
 
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$d = _reportData$content.data) === null || _reportData$content$d === void 0 ? void 0 : _reportData$content$d.length) > 0) {
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.data) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0) {
       var _data = {
         datasets: [{
           label: t('AVAILABLE', 'Available'),
@@ -259,7 +261,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ScheduleTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.data) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.data) === null || _reportData$content3$ === void 0 ? void 0 : _reportData$content3$.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadChart();
@@ -273,7 +275,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 100
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.ChartWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.data) === null || _reportData$content3$ === void 0 ? void 0 : _reportData$content3$.length) > 0 && chartData ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ChartWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.data) === null || _reportData$content4$ === void 0 ? void 0 : _reportData$content4$.length) > 0 && chartData ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: chartData,
     options: options,
     ref: barChartRef

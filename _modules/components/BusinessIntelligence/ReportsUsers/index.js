@@ -99,7 +99,7 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
         var list = [];
 
         if (item !== null && item !== void 0 && (_item$data = item.data) !== null && _item$data !== void 0 && _item$data.isArray) {
-          item.data.forEach(function (value) {
+          (item === null || item === void 0 ? void 0 : item.data) && item.data.forEach(function (value) {
             list.push(value.y);
           });
         } else {

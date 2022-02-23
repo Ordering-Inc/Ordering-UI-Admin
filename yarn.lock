@@ -1694,9 +1694,9 @@
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
 
 "@types/node@*":
-  version "17.0.19"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.19.tgz#726171367f404bfbe8512ba608a09ebad810c7e6"
-  integrity sha512-PfeQhvcMR4cPFVuYfBN4ifG7p9c+Dlh3yUZR6k+5yQK7wX3gDgVxBly4/WkBRs9x4dmcy1TVl08SY67wwtEvmA==
+  version "17.0.20"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.20.tgz#29626bd9c9119df5b8194353d34044c895fe56e3"
+  integrity sha512-Q15Clj3lZSLnhVA6yKw1G7SQz46DeL9gO1TEgfK1OQGvMdQ6TUWmCeWf1QBUNkw2BDfV52i2YuYd9OF3ZwGhjw==
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -2396,9 +2396,9 @@ babel-plugin-polyfill-regenerator@^0.3.0:
     "@babel/helper-define-polyfill-provider" "^0.3.1"
 
 "babel-plugin-styled-components@>= 1.12.0":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-2.0.3.tgz#68a040a511ea260d3ea330bc43c1882d5134e707"
-  integrity sha512-lMrl3GdPrTl9daQJ70eRCPM9fHlvQx6YJNM7RqojKGbRnvG2AL7qvURlZ3L0GzRGnGr19SjvBKWcnlZZkgQ8/Q==
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-2.0.5.tgz#8c402e5868c2a419eefb5466fccf154af18c52d1"
+  integrity sha512-A7kfST5odbf8Ev42OQbj5teEiT8DskpRoQ/iPYePLLdcTCAsodpYKqtoy4SJthpsGzQKc2vvnrtlUgdmJq6WKQ==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.16.0"
     "@babel/helper-module-imports" "^7.16.0"
@@ -7888,7 +7888,7 @@ optionator@^0.8.3:
 
 "ordering-components-admin@github:Ordering-Inc/ordering-components-admin#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/767c02de0da48dcc1979c3225e790896c193f787"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/f624f01746d326f8df5467915e1e0ec8c476c103"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

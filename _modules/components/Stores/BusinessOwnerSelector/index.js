@@ -67,6 +67,8 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    var _userLists2;
+
     if (usersList !== null && usersList !== void 0 && usersList.loading) return;
 
     var _userLists;
@@ -79,7 +81,7 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
       _userLists = usersList === null || usersList === void 0 ? void 0 : usersList.users;
     }
 
-    var _usersListOptions = _userLists.map(function (user) {
+    var _usersListOptions = (_userLists2 = _userLists) === null || _userLists2 === void 0 ? void 0 : _userLists2.map(function (user) {
       return {
         value: user === null || user === void 0 ? void 0 : user.id,
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, user.id, ". ", user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname),

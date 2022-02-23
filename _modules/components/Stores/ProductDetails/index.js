@@ -54,6 +54,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductDetailsUI = function ProductDetailsUI(props) {
+  var _productState$product;
+
   var open = props.open,
       business = props.business,
       onClose = props.onClose,
@@ -208,9 +210,9 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     product: productState.product,
     handleSuccessUpdate: handleSuccessUpdate
   }), showOption === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_ProductMetaFields.ProductMetaFields, {
-    businessId: business.id,
+    businessId: business === null || business === void 0 ? void 0 : business.id,
     categoryId: productState.product.category_id,
-    productId: productState.product.id
+    productId: (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.id
   }), showOption === 'personalization' && /*#__PURE__*/_react.default.createElement(_Shared.Personalization, {
     isShowTitle: true
   })));
