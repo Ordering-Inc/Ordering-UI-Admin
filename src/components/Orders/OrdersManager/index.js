@@ -187,6 +187,7 @@ const OrdersManagerUI = (props) => {
                 currentTourStep={currentTourStep}
                 handleOpenTour={handleOpenTour}
                 isTourOpen={isTourOpen}
+                setIsTourOpen={setIsTourOpen}
               />
             </WrapItemView>
           </OrdersInnerContent>
