@@ -21,8 +21,9 @@ export const Container = styled.div`
   }
 
   > svg {
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
+    color: ${props => props.theme.colors.secundaryLight};
     margin-left: 10px;
     ${props => props.theme.rtl && css`
       margin-right: 10px;

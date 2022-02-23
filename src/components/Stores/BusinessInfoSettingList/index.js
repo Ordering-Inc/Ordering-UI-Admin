@@ -17,7 +17,7 @@ export const BusinessInfoSettingList = (props) => {
   const listOptions = [
     { key: 'information', content: t('INFORMATION', 'Information') },
     { key: 'owner', content: t('OWNER_ID', 'Owner') },
-    { key: 'type', content: t('TYPE', 'Type') },
+    { key: 'categories', content: t('CATEGORIES', 'Categories') },
     { key: 'location', content: t('LOCATION', 'Location') },
     { key: 'description', content: t('DESCRIPTION', 'Description') },
     { key: 'images', content: t('IMAGES', 'Images') },

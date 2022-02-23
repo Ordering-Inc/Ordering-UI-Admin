@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const Container = styled.div`
+  display: flex;
+  max-width: 500px;
+`
 export const InfoConatiner = styled.div`
   height: 100%;
   overflow-x: hidden;

@@ -106,10 +106,7 @@ export const InputWrapper = styled.div`
 `
 
 export const ActionsForm = styled.div`
-  margin-top: 20px;
-  padding-bottom: 10px;
-  position: sticky;
-  top: 100%;
+  margin-top: 50px;
   > button {
     height: 35px;
   }

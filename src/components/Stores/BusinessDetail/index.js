@@ -8,10 +8,13 @@ import { BusinessDescription } from '../BusinessDescription'
 import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
 import { SeoOptions } from '../SeoOptions'
-import {
-  InfoConatiner
-} from './styles'
 import { BusinessInformation } from '../BusinessInformation'
+import { Modal, SideBar } from '../../Shared'
+import { useWindowSize } from '../../../hooks/useWindowSize'
+import {
+  InfoConatiner,
+  Container
+} from './styles'
 
 export const BusinessDetail = (props) => {
   const {
@@ -25,82 +28,115 @@ export const BusinessDetail = (props) => {
     setBusinessTypes,
     handleSuccessAddBusinessItem,
     handleSuccessDeleteBusinessItem,
-    handleSucessUpdateBusiness
+    handleSucessUpdateBusiness,
+    setIsExtendExtraOpen,
+    isExtendExtraOpen
   } = props
 
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [selectedInfoItem, setSelctedInfoItem] = useState('information')
+
+  const handleCloseExtra = () => {
+    setIsExtendExtraOpen(false)
+  }
+
   return (
     <>
-      <InfoConatiner>
-        <h1>{t('STORE_DETAILS', 'Store details')}</h1>
-        <BusinessInfoSettingList
-          selectedInfoItem={selectedInfoItem}
-          handleSelectInfoItem={setSelctedInfoItem}
-        />
-        {selectedInfoItem === 'information' && (
-          <BusinessInformation
-            business={business}
-            handleSuccessUpdate={handleSucessUpdateBusiness}
+      <Container>
+        <InfoConatiner>
+          <h1>{t('STORE_DETAILS', 'Store details')}</h1>
+          <BusinessInfoSettingList
+            selectedInfoItem={selectedInfoItem}
+            handleSelectInfoItem={setSelctedInfoItem}
           />
-        )}
-        {selectedInfoItem === 'owner' && (
-          <BusinessOwners
-            business={business}
-            handleDeleteBusinessOwner={handleDeleteBusinessOwner}
-            handleAddBusinessOwner={handleAddBusinessOwner}
-          />
-        )}
-        {selectedInfoItem === 'type' && (
-          <BusinessTypes
-            business={business}
-            businessTypes={businessTypes}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateBusinessClick={handleUpdateBusinessClick}
-            setBusinessTypes={setBusinessTypes}
-          />
-        )}
-        {selectedInfoItem === 'location' && (
-          <BusinessLocation
-            business={business}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateBusinessClick={handleUpdateBusinessClick}
-          />
-        )}
-        {selectedInfoItem === 'description' && (
-          <BusinessDescription
-            business={business}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateBusinessClick={handleUpdateBusinessClick}
-          />
-        )}
-        {selectedInfoItem === 'images' && (
-          <BusinessImages
-            business={business}
-            handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
-            handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
-          />
-        )}
-        {selectedInfoItem === 'videos' && (
-          <BusinessVideos
-            business={business}
-            handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
-            handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
-          />
-        )}
-        {selectedInfoItem === 'seo_options' && (
-          <SeoOptions
-            data={business}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateClick={handleUpdateBusinessClick}
-            isBusinessSeo
-          />
-        )}
-      </InfoConatiner>
+          {selectedInfoItem === 'information' && (
+            <BusinessInformation
+              business={business}
+              handleSuccessUpdate={handleSucessUpdateBusiness}
+            />
+          )}
+          {selectedInfoItem === 'owner' && (
+            <BusinessOwners
+              business={business}
+              handleDeleteBusinessOwner={handleDeleteBusinessOwner}
+              handleAddBusinessOwner={handleAddBusinessOwner}
+            />
+          )}
+          {selectedInfoItem === 'categories' && (
+            <BusinessTypes
+              business={business}
+              businessTypes={businessTypes}
+              formState={formState}
+              setFormState={setFormState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              setBusinessTypes={setBusinessTypes}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+            />
+          )}
+          {selectedInfoItem === 'location' && (
+            <BusinessLocation
+              business={business}
+              formState={formState}
+              setFormState={setFormState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+            />
+          )}
+          {selectedInfoItem === 'description' && (
+            <BusinessDescription
+              business={business}
+              formState={formState}
+              setFormState={setFormState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+            />
+          )}
+          {selectedInfoItem === 'images' && (
+            <BusinessImages
+              business={business}
+              handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
+              handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
+            />
+          )}
+          {selectedInfoItem === 'videos' && (
+            <BusinessVideos
+              business={business}
+              handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
+              handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
+            />
+          )}
+          {selectedInfoItem === 'seo_options' && (
+            <SeoOptions
+              data={business}
+              formState={formState}
+              setFormState={setFormState}
+              handleUpdateClick={handleUpdateBusinessClick}
+              isBusinessSeo
+            />
+          )}
+        </InfoConatiner>
+      </Container>
+      {isExtendExtraOpen && (
+        <>
+          {width >= 1000 ? (
+            <SideBar
+              sidebarId='busiiness-type'
+              defaultSideBarWidth={500}
+              open={isExtendExtraOpen}
+              onClose={() => handleCloseExtra()}
+            >
+              <div>side bar</div>
+            </SideBar>
+          ) : (
+            <Modal
+              width='80%'
+              open={isExtendExtraOpen}
+              onClose={() => handleCloseExtra()}
+            >
+              <div>dddd</div>
+            </Modal>
+          )}
+        </>
+      )}
     </>
   )
 }

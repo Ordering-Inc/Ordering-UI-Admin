@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import { useTheme } from 'styled-components'
 import { useLanguage } from 'ordering-components-admin'
-import { Alert } from '../../Shared'
-
+import { Alert, SearchBar } from '../../Shared'
 import { BusinessTypeForm } from '../BusinessTypeForm'
-import { BusinessType } from '../BusinessType'
+import { ChevronRight, Square, CheckSquareFill } from 'react-bootstrap-icons'
 
 import {
   Container,
   AddNewBusinessTypeContainer,
-  AddNewBusinessTypeTitle
+  AddNewBusinessTypeTitle,
+  BusinessTypeContainer,
+  BusinessTypeInfoWrapper,
+  LogoWrapper,
+  CheckBoxWrapper,
+  BusinessTypeWrapper,
+  ArrowWrapper,
+  SearchWrapper
 } from './styles'
 
 export const BusinessTypes = (props) => {
@@ -18,14 +25,18 @@ export const BusinessTypes = (props) => {
     formState,
     setFormState,
     handleUpdateBusinessClick,
-    setBusinessTypes
+    setBusinessTypes,
+    setIsExtendExtraOpen
   } = props
 
   const [, t] = useLanguage()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const theme = useTheme()
 
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [selectedBusinessTypes, setSelectedBusinessTypes] = useState([])
   const [isAdd, setIsAdd] = useState(false)
+  const [searchVal, setSearchVal] = useState('')
+  const [filteredBusinessTypes, setFilteredBusinessTypes] = useState([])
 
   const handleSelectBusinessTypes = (typeId) => {
     let _selectedBusinessTypes = [...selectedBusinessTypes]
@@ -54,6 +65,10 @@ export const BusinessTypes = (props) => {
     setBusinessTypes && setBusinessTypes([...businessTypes, result])
   }
 
+  const handleClickCategory = () => {
+    setIsExtendExtraOpen(true)
+  }
+
   useEffect(() => {
     if (!business?.types) return
     const _selectedBusinessTypes = []
@@ -72,19 +87,46 @@ export const BusinessTypes = (props) => {
     setFormState({ ...formState, changes: {} })
   }, [])
 
+  useEffect(() => {
+    const updatedBusinessTypes = businessTypes.filter(type => type?.name.toLowerCase().includes(searchVal.toLowerCase()))
+    setFilteredBusinessTypes([...updatedBusinessTypes])
+  }, [businessTypes, searchVal])
+
   return (
     <Container>
-      {businessTypes.map(businessType => (
-        businessType?.id && (
-          <BusinessType
-            {...props}
-            key={businessType.id}
-            businessType={businessType}
-            selectedBusinessTypes={selectedBusinessTypes}
-            handleSelectBusinessTypes={handleSelectBusinessTypes}
-          />
-        )
-      ))}
+      <SearchWrapper>
+        <SearchBar
+          search={searchVal}
+          isCustomLayout
+          lazyLoad
+          onSearch={(value) => setSearchVal(value)}
+          placeholder={t('SEARCH', 'Search')}
+        />
+      </SearchWrapper>
+      <BusinessTypeWrapper>
+        {filteredBusinessTypes.map(category => (
+          category?.id && (
+            <BusinessTypeContainer
+              key={category?.id}
+              onClick={() => handleClickCategory(category)}
+            >
+              <BusinessTypeInfoWrapper>
+                <CheckBoxWrapper onClick={() => handleSelectBusinessTypes(category.id)}>
+                  {selectedBusinessTypes.includes(category.id) ? <CheckSquareFill className='fill' /> : <Square />}
+                </CheckBoxWrapper>
+                <LogoWrapper>
+                  <img src={category?.image || theme.images?.categories?.all} alt='business type image' loading='lazy' />
+                </LogoWrapper>
+                <span>{category?.name}</span>
+              </BusinessTypeInfoWrapper>
+              <ArrowWrapper>
+                <ChevronRight />
+              </ArrowWrapper>
+            </BusinessTypeContainer>
+          )
+        ))}
+      </BusinessTypeWrapper>
+
       <AddNewBusinessTypeContainer>
         {isAdd ? (
           <BusinessTypeForm

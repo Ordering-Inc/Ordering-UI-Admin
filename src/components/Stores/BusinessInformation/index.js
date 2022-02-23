@@ -224,25 +224,21 @@ const BusinessInformationUI = (props) => {
         <SwitchWrapper>
           <span>{t('FEATURED', 'Featured')}</span>
           <Switch
-            defaultValue={
-              formState?.result?.result
-                ? formState?.result?.result?.featured
-                : formState?.changes?.featured ?? businessState?.business?.featured
-            }
+            defaultChecked={businessState?.business?.featured || false}
             onChange={(val) => handleChangeSwtich('featured', val)}
           />
         </SwitchWrapper>
+        <ActionsForm>
+          <Button
+            type='submit'
+            color='primary'
+            borderRadius='5px'
+            disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+          >
+            {t('SAVE', 'Save')}
+          </Button>
+        </ActionsForm>
       </FormInput>
-      <ActionsForm>
-        <Button
-          type='submit'
-          color='primary'
-          borderRadius='5px'
-          disabled={formState.loading || Object.keys(formState?.changes).length === 0}
-        >
-          {t('SAVE', 'Save')}
-        </Button>
-      </ActionsForm>
       <Alert
         title={t('BUSINESS', 'Business')}
         content={alertState.content}

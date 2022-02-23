@@ -6,8 +6,9 @@ import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { Trash } from 'react-bootstrap-icons'
+import { ChevronRight } from 'react-bootstrap-icons'
 import BiImage from '@meronex/icons/bi/BiImage'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   Container,
@@ -19,50 +20,52 @@ import {
   BusinessTypeEditWrapper
 } from './styles'
 
-const BusinessTypeUI = (props) => {
-  const {
-    businessTypeFormState,
-    handlechangeImage,
-    handleUpdateClick,
-    handleChangeInput,
-    businessType,
-    selectedBusinessTypes,
-    formState,
-    handleSelectBusinessTypes,
-    deleteBusinessType
-  } = props
+export const BusinessType = (props) => {
+  // const {
+  //   // businessTypeFormState,
+  //   // handlechangeImage,
+  //   // handleUpdateClick,
+  //   // handleChangeInput,
+  //   // businessType,
+  //   // selectedBusinessTypes,
+  //   // formState,
+  //   // handleSelectBusinessTypes,
+  //   // deleteBusinessType
+  // } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const conatinerRef = useRef(null)
+  const { width } = useWindowSize()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const businessTypeImageInputRef = useRef(null)
-  const handleClickImage = (type) => {
-    businessTypeImageInputRef.current.click()
-  }
+  // const businessTypeImageInputRef = useRef(null)
+  // const handleClickImage = (type) => {
+  //   businessTypeImageInputRef.current.click()
+  // }
 
-  const handleFiles = (files) => {
-    if (files.length === 1) {
-      const type = files[0].type.split('/')[0]
-      if (type !== 'image') {
-        setAlertState({
-          open: true,
-          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-        })
-        return
-      }
+  // const handleFiles = (files) => {
+  //   if (files.length === 1) {
+  //     const type = files[0].type.split('/')[0]
+  //     if (type !== 'image') {
+  //       setAlertState({
+  //         open: true,
+  //         content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+  //       })
+  //       return
+  //     }
 
-      if (bytesConverter(files[0]?.size) > 2048) {
-        setAlertState({
-          open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-        })
-        return
-      }
-      handlechangeImage(files[0])
-    }
-  }
+  //     if (bytesConverter(files[0]?.size) > 2048) {
+  //       setAlertState({
+  //         open: true,
+  //         content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+  //       })
+  //       return
+  //     }
+  //     handlechangeImage(files[0])
+  //   }
+  // }
 
   const closeAlert = () => {
     setAlertState({
@@ -71,42 +74,68 @@ const BusinessTypeUI = (props) => {
     })
   }
 
-  const CloseAddBusinessTypeForm = (e) => {
-    const outsideDropdown = !conatinerRef.current?.contains(e.target)
-    if (outsideDropdown) {
-      if (!e.target.closest('.popup-component')) {
-        if (Object.keys(businessTypeFormState?.changes).length > 0 && !businessTypeFormState?.loading) {
-          handleUpdateClick()
-        }
+  // const CloseAddBusinessTypeForm = (e) => {
+  //   const outsideDropdown = !conatinerRef.current?.contains(e.target)
+  //   if (outsideDropdown) {
+  //     if (!e.target.closest('.popup-component')) {
+  //       if (Object.keys(businessTypeFormState?.changes).length > 0 && !businessTypeFormState?.loading) {
+  //         handleUpdateClick()
+  //       }
+  //     }
+  //   }
+  // }
+
+  // const checkKeyDown = (e) => {
+  //   const keyCode = e.keyCode ? e.keyCode : e.which
+  //   if (keyCode === 13 && Object.keys(businessTypeFormState?.changes).length > 0 && !businessTypeFormState?.loading) handleUpdateClick()
+  // }
+
+  const actionSidebar = (value) => {
+    if (!value) {
+      props.onClose()
+    }
+    setIsMenuOpen(value)
+    document.getElementById('zone_setting').style.width = value
+      ? width > 1000 ? '500px' : '100%'
+      : '0'
+  }
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      if (width < 1000) {
+        document.getElementById('zone_setting').style.width = '100%'
+      } else {
+        document.getElementById('zone_setting').style.width = '500px'
       }
     }
-  }
-
-  const checkKeyDown = (e) => {
-    const keyCode = e.keyCode ? e.keyCode : e.which
-    if (keyCode === 13 && Object.keys(businessTypeFormState?.changes).length > 0 && !businessTypeFormState?.loading) handleUpdateClick()
-  }
+  }, [width])
 
   useEffect(() => {
-    if (businessTypeFormState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: [businessTypeFormState?.result?.result]
-      })
-    }
-  }, [businessTypeFormState])
+    if (!open) return
+    actionSidebar(true)
+  }, [open])
 
-  useEffect(() => {
-    document.addEventListener('click', CloseAddBusinessTypeForm)
-    return () => document.removeEventListener('click', CloseAddBusinessTypeForm)
-  }, [businessTypeFormState])
+  // useEffect(() => {
+  //   if (businessTypeFormState?.result?.error) {
+  //     setAlertState({
+  //       open: true,
+  //       content: [businessTypeFormState?.result?.result]
+  //     })
+  //   }
+  // }, [businessTypeFormState])
+
+  // useEffect(() => {
+  //   document.addEventListener('click', CloseAddBusinessTypeForm)
+  //   return () => document.removeEventListener('click', CloseAddBusinessTypeForm)
+  // }, [businessTypeFormState])
 
   return (
     <>
       <Container
         ref={conatinerRef}
+        id='zone_setting'
       >
-        <BusinessTypeEditWrapper>
+        {/* <BusinessTypeEditWrapper>
           <CheckBoxWrapper
             disabled={formState?.loading}
             isChecked={selectedBusinessTypes.includes(businessType.id)}
@@ -163,7 +192,8 @@ const BusinessTypeUI = (props) => {
             onKeyDown={(e) => checkKeyDown(e)}
           />
         </BusinessTypeEditWrapper>
-        <Trash onClick={deleteBusinessType} />
+        {/* <Trash onClick={deleteBusinessType} /> */}
+        {/* <ChevronRight /> */}
       </Container>
       <Alert
         title={t('BUSINESS_TYPE', 'Business type')}
@@ -176,12 +206,4 @@ const BusinessTypeUI = (props) => {
       />
     </>
   )
-}
-
-export const BusinessType = (props) => {
-  const businessTypeProps = {
-    ...props,
-    UIComponent: BusinessTypeUI
-  }
-  return <BusinessTypeController {...businessTypeProps} />
 }
