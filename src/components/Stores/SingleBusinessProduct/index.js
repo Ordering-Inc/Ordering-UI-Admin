@@ -170,7 +170,7 @@ const SingleBusinessProductUI = (props) => {
               ref={containerRef}
               active={product.id === productDetailsId}
               onClick={(e) => handleProductClick(e)}
-              onDragOver={e => handleDragOver(e)}
+              onDragOver={e => handleDragOver?.(e)}
               onDrop={e => handleDrop(e)}
               onDragEnd={e => handleDragEnd(e)}
               className='draggable-product'

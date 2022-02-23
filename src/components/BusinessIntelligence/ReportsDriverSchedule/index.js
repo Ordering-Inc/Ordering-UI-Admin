@@ -41,7 +41,7 @@ const ReportsDriverScheduleUI = (props) => {
   const generateData = (dataKey, status) => {
     const _available = []
     const _notAvailable = []
-    reportData.content.data.forEach(data => {
+    reportData?.content?.data && reportData.content.data.forEach(data => {
       data.lines.forEach(line => {
         if (line.label_key === dataKey) {
           line.ranges.forEach(range => {

@@ -22,7 +22,7 @@ export const BusinessSupport = (props) => {
     <BusinessSupportContainer>
       <h1>{t('PRODUCT_DETAILS', 'Product details')}</h1>
       <BusinessOwnersContainer>
-        {businessState?.business?.owners.map(owner => (
+        {businessState?.business?.owners?.map(owner => (
           <BusinessOwnerInfo key={owner.id}>
             <WrapperImage>
               {owner?.photo ? (

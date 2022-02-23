@@ -60,7 +60,7 @@ const ReportsSalesUI = (props) => {
 
   const generateLabel = () => {
     const values = []
-    reportData.content.dataset.dataset.data.forEach(data => {
+    reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(data => {
       values.push(data.x)
     })
     return values

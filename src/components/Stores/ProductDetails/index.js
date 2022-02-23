@@ -170,9 +170,9 @@ const ProductDetailsUI = (props) => {
           )}
           {showOption === 'custom_fields' && (
             <ProductMetaFields
-              businessId={business.id}
+              businessId={business?.id}
               categoryId={productState.product.category_id}
-              productId={productState.product.id}
+              productId={productState.product?.id}
             />
           )}
           {showOption === 'personalization' && (
