@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Alert } from '../../Shared'
-
-import { BusinessTypeForm } from '../BusinessTypeForm'
-import { BusinessType } from '../BusinessType'
+import { Alert, SearchBar, Modal, SideBar } from '../../Shared'
+import { ChevronRight, Square, CheckSquareFill } from 'react-bootstrap-icons'
+import { useWindowSize } from '../../../hooks/useWindowSize'
+import BsCardImage from '@meronex/icons/bs/BsCardImage'
 
 import {
   Container,
   AddNewBusinessTypeContainer,
-  AddNewBusinessTypeTitle
+  AddNewBusinessTypeTitle,
+  BusinessTypeContainer,
+  BusinessTypeInfoWrapper,
+  LogoWrapper,
+  CheckBoxWrapper,
+  BusinessTypeWrapper,
+  ArrowWrapper,
+  SearchWrapper,
+  Image
 } from './styles'
+import { BusinessTypeDetail } from '../BusinessTypeDetail'
 
 export const BusinessTypes = (props) => {
   const {
@@ -18,14 +27,34 @@ export const BusinessTypes = (props) => {
     formState,
     setFormState,
     handleUpdateBusinessClick,
-    setBusinessTypes
+    setBusinessTypes,
+    setIsExtendExtraOpen
   } = props
 
   const [, t] = useLanguage()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const { width } = useWindowSize()
 
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [selectedBusinessTypes, setSelectedBusinessTypes] = useState([])
-  const [isAdd, setIsAdd] = useState(false)
+  const [searchVal, setSearchVal] = useState('')
+  const [filteredBusinessTypes, setFilteredBusinessTypes] = useState([])
+  const [selectedBusinessType, setSelectedBusinessType] = useState(null)
+  const [isOpenTypeDetail, setIsOpenTypeDetail] = useState(false)
+
+  const handleOpenBusinessTypeDetail = (e, category) => {
+    const isInvalid = e.target.closest('.business-type-checkbox')
+    if (isInvalid) return
+
+    setSelectedBusinessType(category)
+    setIsExtendExtraOpen(true)
+    setIsOpenTypeDetail(true)
+  }
+
+  const handleCloseDetail = () => {
+    setIsOpenTypeDetail(false)
+    setIsExtendExtraOpen(false)
+    setSelectedBusinessType(null)
+  }
 
   const handleSelectBusinessTypes = (typeId) => {
     let _selectedBusinessTypes = [...selectedBusinessTypes]
@@ -49,11 +78,6 @@ export const BusinessTypes = (props) => {
     })
   }
 
-  const handleSuccessAddBusinessType = (result) => {
-    setIsAdd(false)
-    setBusinessTypes && setBusinessTypes([...businessTypes, result])
-  }
-
   useEffect(() => {
     if (!business?.types) return
     const _selectedBusinessTypes = []
@@ -72,34 +96,92 @@ export const BusinessTypes = (props) => {
     setFormState({ ...formState, changes: {} })
   }, [])
 
+  useEffect(() => {
+    const updatedBusinessTypes = businessTypes.filter(type => type?.name.toLowerCase().includes(searchVal.toLowerCase()))
+    setFilteredBusinessTypes([...updatedBusinessTypes])
+  }, [businessTypes, searchVal])
+
   return (
     <Container>
-      {businessTypes.map(businessType => (
-        businessType?.id && (
-          <BusinessType
-            {...props}
-            key={businessType.id}
-            businessType={businessType}
-            selectedBusinessTypes={selectedBusinessTypes}
-            handleSelectBusinessTypes={handleSelectBusinessTypes}
-          />
-        )
-      ))}
+      <SearchWrapper>
+        <SearchBar
+          search={searchVal}
+          isCustomLayout
+          lazyLoad
+          onSearch={(value) => setSearchVal(value)}
+          placeholder={t('SEARCH', 'Search')}
+        />
+      </SearchWrapper>
+      <BusinessTypeWrapper>
+        {filteredBusinessTypes.map(category => (
+          category?.id && (
+            <BusinessTypeContainer
+              key={category?.id}
+              active={selectedBusinessType?.id === category?.id}
+              onClick={(evt) => handleOpenBusinessTypeDetail(evt, category)}
+            >
+              <BusinessTypeInfoWrapper>
+                <CheckBoxWrapper
+                  onClick={() => handleSelectBusinessTypes(category.id)}
+                  className='business-type-checkbox'
+                >
+                  {selectedBusinessTypes.includes(category.id) ? <CheckSquareFill className='fill' /> : <Square />}
+                </CheckBoxWrapper>
+                <LogoWrapper>
+                  <Image bgimage={category?.image}>
+                    {!category?.image && <BsCardImage />}
+                  </Image>
+                </LogoWrapper>
+                <span>{category?.name}</span>
+              </BusinessTypeInfoWrapper>
+              <ArrowWrapper>
+                <ChevronRight />
+              </ArrowWrapper>
+            </BusinessTypeContainer>
+          )
+        ))}
+      </BusinessTypeWrapper>
+
       <AddNewBusinessTypeContainer>
-        {isAdd ? (
-          <BusinessTypeForm
-            businessTypes={businessTypes}
-            handleSuccessAddBusinessType={handleSuccessAddBusinessType}
-            handleCloseAddForm={() => setIsAdd(false)}
-          />
-        ) : (
-          <AddNewBusinessTypeTitle
-            onClick={() => setIsAdd(true)}
-          >
-            {t('ADD_NEW_BUSINESS_TYPE', 'Add new business type')}
-          </AddNewBusinessTypeTitle>
-        )}
+        <AddNewBusinessTypeTitle
+          onClick={(evt) => handleOpenBusinessTypeDetail(evt, null)}
+        >
+          {t('ADD_NEW_BUSINESS_CATEGORY', 'Add new business category')}
+        </AddNewBusinessTypeTitle>
       </AddNewBusinessTypeContainer>
+      {isOpenTypeDetail && (
+        <>
+          {width >= 1000 ? (
+            <SideBar
+              sidebarId='busiiness-type'
+              defaultSideBarWidth={500}
+              open={isOpenTypeDetail}
+              onClose={() => handleCloseDetail()}
+              isBorderShow
+            >
+              <BusinessTypeDetail
+                setBusinessTypes={setBusinessTypes}
+                businessType={selectedBusinessType}
+                onClose={() => handleCloseDetail()}
+                businessTypes={businessTypes}
+              />
+            </SideBar>
+          ) : (
+            <Modal
+              width='80%'
+              open={isOpenTypeDetail}
+              onClose={() => handleCloseDetail()}
+            >
+              <BusinessTypeDetail
+                setBusinessTypes={setBusinessTypes}
+                businessType={selectedBusinessType}
+                onClose={() => handleCloseDetail()}
+                businessTypes={businessTypes}
+              />
+            </Modal>
+          )}
+        </>
+      )}
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
