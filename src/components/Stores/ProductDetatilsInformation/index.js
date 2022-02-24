@@ -277,7 +277,7 @@ export const ProductDetatilsInformation = (props) => {
             style={{ paddingTop: 10 }}
           >
             <Button
-              color='primary'
+              color='lightPrimary'
               borderRadius='7.6px'
               disabled={formState.loading}
               onClick={() => setAutoGenerate({
