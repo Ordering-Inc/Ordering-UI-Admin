@@ -232,7 +232,7 @@ const ProductExtraOptionDetailsUI = (props) => {
             </InputWrapper>
             <RightOptionContent>
               <InputWrapper primary>
-                <label>{t('MIN', 'Min')}</label>
+                <label>{t('MINIMUM', 'Minimum')}</label>
                 <Input
                   name='min'
                   defaultValue={optionState?.option?.min}
