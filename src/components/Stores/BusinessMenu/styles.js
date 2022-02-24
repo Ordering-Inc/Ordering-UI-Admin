@@ -114,3 +114,24 @@ export const Tab = styled.div`
     color: ${props => props.theme.colors?.lightGray};
   `}
 `
+
+export const SearchBarWrapper = styled.div`
+  margin-bottom: 15px;
+`
+export const SelectButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  button {
+    font-size: 12px;
+
+    &:first-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 16px;
+      ` : css`
+        margin-right: 16px;
+      `}
+    }
+  }
+`

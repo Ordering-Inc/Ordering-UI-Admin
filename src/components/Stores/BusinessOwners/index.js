@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import BsTrash from '@meronex/icons/bs/BsTrash'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { BusinessOwnerSelector } from '../BusinessOwnerSelector'
 import { Confirm } from '../../Shared'
+import { Button } from '../../../styles'
 
 import {
   Container,
@@ -64,9 +63,11 @@ export const BusinessOwners = (props) => {
         {business?.owners?.map(owner => (
           <OwnerItem key={owner?.id}>
             <span>{owner?.name} {owner?.lastname}</span>
-            <BsTrash
+            <p
               onClick={() => onDeleteBusinessOwner(owner?.id)}
-            />
+            >
+              {t('DELETE', 'Delete')}
+            </p>
           </OwnerItem>
         ))}
         <WrapperOwnerSelector>
@@ -75,9 +76,12 @@ export const BusinessOwners = (props) => {
             selectedOwner={selectedOwner}
             handleSelectBusinessOwner={setSelectedOwner}
           />
-          <BsPlusSquare
+          <Button
             onClick={() => onAddBusinessOwner()}
-          />
+            color='primary'
+          >
+            {t('ADD', 'Add')}
+          </Button>
         </WrapperOwnerSelector>
       </Container>
       <Confirm
