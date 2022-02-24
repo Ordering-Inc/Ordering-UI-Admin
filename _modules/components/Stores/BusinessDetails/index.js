@@ -17,7 +17,7 @@ var _BusinessSummary = require("../BusinessSummary");
 
 var _BusinessSupport = require("../BusinessSupport");
 
-var _BusinessInformation = require("../BusinessInformation");
+var _BusinessDetail = require("../BusinessDetail");
 
 var _BusinessSchedule = require("../BusinessSchedule");
 
@@ -206,7 +206,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     onClose: handleCloseExtraOpen
   }, selectedItem === 'support' && /*#__PURE__*/_react.default.createElement(_BusinessSupport.BusinessSupport, {
     businessState: businessState
-  }), selectedItem === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
+  }), selectedItem === 'store_details' && /*#__PURE__*/_react.default.createElement(_BusinessDetail.BusinessDetail, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleDeleteBusinessOwner: handleDeleteBusinessOwner,
     handleAddBusinessOwner: handleAddBusinessOwner,
@@ -216,7 +216,10 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     setBusinessTypes: setBusinessTypes,
     handleSuccessAddBusinessItem: handleSuccessAddBusinessItem,
-    handleSuccessDeleteBusinessItem: handleSuccessDeleteBusinessItem
+    handleSuccessDeleteBusinessItem: handleSuccessDeleteBusinessItem,
+    handleSucessUpdateBusiness: handleSucessUpdateBusiness,
+    setIsExtendExtraOpen: setIsExtendExtraOpen,
+    isExtendExtraOpen: isExtendExtraOpen
   }), selectedItem === 'schedule' && /*#__PURE__*/_react.default.createElement(_BusinessSchedule.BusinessSchedule, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState

@@ -65,7 +65,8 @@ var OrdersListing = function OrdersListing(props) {
       setSelectedOrderIds = props.setSelectedOrderIds,
       handleOpenTour = props.handleOpenTour,
       currentTourStep = props.currentTourStep,
-      isTourOpen = props.isTourOpen;
+      isTourOpen = props.isTourOpen,
+      setIsTourOpen = props.setIsTourOpen;
   var theme = (0, _styledComponents.useTheme)();
 
   var handleSetStorage = /*#__PURE__*/function () {
@@ -148,7 +149,8 @@ var OrdersListing = function OrdersListing(props) {
     handleOpenOrderDetail: handleOpenOrderDetail,
     currentTourStep: currentTourStep,
     isTourOpen: isTourOpen,
-    handleOpenTour: handleOpenTour
+    handleOpenTour: handleOpenTour,
+    setIsTourOpen: setIsTourOpen
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,

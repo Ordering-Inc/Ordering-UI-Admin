@@ -72,7 +72,8 @@ var OrdersTable = function OrdersTable(props) {
       setSelectedOrderIds = props.setSelectedOrderIds,
       currentTourStep = props.currentTourStep,
       isTourOpen = props.isTourOpen,
-      handleOpenTour = props.handleOpenTour;
+      handleOpenTour = props.handleOpenTour,
+      setIsTourOpen = props.setIsTourOpen;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -304,6 +305,7 @@ var OrdersTable = function OrdersTable(props) {
   }, [orderList.orders, selectedOrderIds]);
 
   var handleChangeKeyboard = function handleChangeKeyboard(evt) {
+    if (evt.code === 'Escape') setIsTourOpen && setIsTourOpen(false);
     if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour();
     if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0], true);
     if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0]);
@@ -520,7 +522,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.cellphone)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("td", null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
       className: "driverInfo",
-      noClick: isTourOpen && currentTourStep === 0
+      noClick: isTourOpen && (currentTourStep === 0 || currentTourStep === 4)
     }, /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
       orderView: true,
       padding: "5px 0",

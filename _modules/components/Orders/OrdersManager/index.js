@@ -248,7 +248,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setSelectedOrderIds: setSelectedOrderIds,
     currentTourStep: currentTourStep,
     handleOpenTour: _handleOpenTour,
-    isTourOpen: isTourOpen
+    isTourOpen: isTourOpen,
+    setIsTourOpen: setIsTourOpen
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

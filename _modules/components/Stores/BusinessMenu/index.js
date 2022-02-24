@@ -31,6 +31,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -84,6 +92,16 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       isOpenSharedProduct = _useState8[0],
       setIsOpenSharedProduct = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      searchValue = _useState10[0],
+      setSearchValue = _useState10[1];
+
+  var _useState11 = (0, _react.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      menuList = _useState12[0],
+      setMenuList = _useState12[1];
+
   var handleOpenOptions = function handleOpenOptions(name, menu) {
     setCurrentMenu(menu);
     setIsExtendExtraOpen(true);
@@ -103,6 +121,14 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     handleOpenOptions('option', menu);
   };
 
+  (0, _react.useEffect)(function () {
+    var updatedMenus = _toConsumableArray(isSelectedSharedMenus ? businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared : businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus);
+
+    var filteredMenus = updatedMenus.filter(function (menu) {
+      return menu === null || menu === void 0 ? void 0 : menu.name.toLowerCase().includes(searchValue.toLowerCase());
+    });
+    setMenuList(filteredMenus);
+  }, [businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus, businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared, searchValue, isSelectedSharedMenus]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.MenuContainer, {
     isHide: isOpenSharedProduct
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('MENU_V21', 'Menu')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -123,7 +149,15 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       handleCloseOption();
       setIsSelectedSharedMenus(true);
     }
-  }, t('SHARED_MENUS', 'Shared menus'))), (isSelectedSharedMenus ? businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared : businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus).map(function (menu) {
+  }, t('SHARED_MENUS', 'Shared menus'))), /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    isCustomLayout: true,
+    lazyLoad: true,
+    placeholder: t('SEARCH', 'Search'),
+    search: searchValue,
+    onSearch: function onSearch(val) {
+      return setSearchValue(val);
+    }
+  })), menuList.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles2.MeunItem, {
       key: menu.id,
       active: menu.id === (currentMenu === null || currentMenu === void 0 ? void 0 : currentMenu.id),

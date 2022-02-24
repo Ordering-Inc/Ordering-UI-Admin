@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.TabsContainer = exports.Tab = exports.MeunItem = exports.MenuName = exports.MenuContainer = exports.MainContainer = exports.Header = exports.CheckboxWrapper = exports.AddMenuButton = void 0;
+exports.Title = exports.TabsContainer = exports.Tab = exports.SelectButtonGroup = exports.SearchBarWrapper = exports.MeunItem = exports.MenuName = exports.MenuContainer = exports.MainContainer = exports.Header = exports.CheckboxWrapper = exports.AddMenuButton = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -105,3 +105,17 @@ var Tab = _styledComponents.default.div(_templateObject19 || (_templateObject19 
 });
 
 exports.Tab = Tab;
+
+var SearchBarWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n"])));
+
+exports.SearchBarWrapper = SearchBarWrapper;
+
+var SelectButtonGroup = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding-bottom: 15px;\n  border-bottom: 1px solid ", ";\n  button {\n    font-size: 12px;\n\n    &:first-child {\n      ", "\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme4;
+
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n        margin-left: 16px;\n      "]))) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n        margin-right: 16px;\n      "])));
+});
+
+exports.SelectButtonGroup = SelectButtonGroup;

@@ -40,23 +40,23 @@ var BusinessInfoSettingList = function BusinessInfoSettingList(props) {
       user = _useSession2[0].user;
 
   var listOptions = [{
+    key: 'information',
+    content: t('INFORMATION', 'Information')
+  }, {
     key: 'owner',
     content: t('OWNER_ID', 'Owner')
   }, {
-    key: 'type',
-    content: t('TYPE', 'Type')
+    key: 'categories',
+    content: t('CATEGORIES', 'Categories')
   }, {
     key: 'location',
     content: t('LOCATION', 'Location')
-  }, {
-    key: 'description',
-    content: t('DESCRIPTION', 'Description')
   }, {
     key: 'images',
     content: t('IMAGES', 'Images')
   }, {
     key: 'videos',
-    content: t('BUSINESS_VIDEOS', 'Videos')
+    content: t('VIDEOS', 'Videos')
   }, {
     key: 'seo_options',
     content: t('SEO_OPTIONS', 'SEO Options')

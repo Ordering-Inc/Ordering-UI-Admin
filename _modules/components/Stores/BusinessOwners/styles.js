@@ -17,12 +17,12 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var OwnerItem = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  color: ", ";\n  border-bottom: 1px solid #E9ECEF;\n  padding: 15px 0;\n\n  span {\n    font-size: 14px;\n  }\n\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n  }\n"])), function (props) {
+var OwnerItem = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  color: ", ";\n  border-bottom: 1px solid #E9ECEF;\n  padding: 15px 0;\n\n  span {\n    font-size: 14px;\n  }\n\n  p {\n    color: ", ";\n    margin: 0px;\n    font-size: 14px;\n    cursor: pointer;\n    user-select: none;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.colors.danger;
 });
 
 exports.OwnerItem = OwnerItem;
-var WrapperOwnerSelector = (0, _styledComponents.default)(OwnerItem)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-bottom: none;\n\n  > svg {\n    color: ", ";\n  }\n\n  > div:first-child {\n    width: calc(100% - 50px);\n    background: #F8F9FA;\n    border: none;\n    .list {\n      > div {\n        max-height: 300px;\n      }\n    }\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
-});
+var WrapperOwnerSelector = (0, _styledComponents.default)(OwnerItem)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-bottom: none;\n\n  button {\n    border-radius: 8px;\n    height: 44px;\n  }\n\n  > div:first-child {\n    width: calc(100% - 80px);\n    background: #F8F9FA;\n    border: none;\n    .list {\n      > div {\n        max-height: 300px;\n      }\n    }\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n    }\n  }\n"])));
 exports.WrapperOwnerSelector = WrapperOwnerSelector;

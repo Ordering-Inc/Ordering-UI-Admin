@@ -11,17 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
-
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
-
 var _BusinessOwnerSelector = require("../BusinessOwnerSelector");
 
 var _Shared = require("../../Shared");
 
-var _styles = require("./styles");
+var _styles = require("../../../styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -143,23 +139,24 @@ var BusinessOwners = function BusinessOwners(props) {
 
     setOwnerIds(_ownerIds);
   }, [business === null || business === void 0 ? void 0 : business.owners]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, business === null || business === void 0 ? void 0 : (_business$owners = business.owners) === null || _business$owners === void 0 ? void 0 : _business$owners.map(function (owner) {
-    return /*#__PURE__*/_react.default.createElement(_styles.OwnerItem, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, business === null || business === void 0 ? void 0 : (_business$owners = business.owners) === null || _business$owners === void 0 ? void 0 : _business$owners.map(function (owner) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.OwnerItem, {
       key: owner === null || owner === void 0 ? void 0 : owner.id
-    }, /*#__PURE__*/_react.default.createElement("span", null, owner === null || owner === void 0 ? void 0 : owner.name, " ", owner === null || owner === void 0 ? void 0 : owner.lastname), /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
+    }, /*#__PURE__*/_react.default.createElement("span", null, owner === null || owner === void 0 ? void 0 : owner.name, " ", owner === null || owner === void 0 ? void 0 : owner.lastname), /*#__PURE__*/_react.default.createElement("p", {
       onClick: function onClick() {
         return onDeleteBusinessOwner(owner === null || owner === void 0 ? void 0 : owner.id);
       }
-    }));
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperOwnerSelector, null, /*#__PURE__*/_react.default.createElement(_BusinessOwnerSelector.BusinessOwnerSelector, {
+    }, t('DELETE', 'Delete')));
+  }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperOwnerSelector, null, /*#__PURE__*/_react.default.createElement(_BusinessOwnerSelector.BusinessOwnerSelector, {
     selectedOwnerIds: ownerIds,
     selectedOwner: selectedOwner,
     handleSelectBusinessOwner: setSelectedOwner
-  }), /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return onAddBusinessOwner();
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+    },
+    color: "primary"
+  }, t('ADD', 'Add')))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),

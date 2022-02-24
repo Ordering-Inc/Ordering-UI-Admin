@@ -23,11 +23,11 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _BusinessFormDetails = require("../BusinessFormDetails");
-
 var _styles = require("../../../styles");
 
 var _Shared = require("../../Shared");
+
+var _BusinessPreview = require("../BusinessPreview");
 
 var _styles2 = require("./styles");
 
@@ -64,7 +64,6 @@ var BusinessSummary = function BusinessSummary(props) {
       handleChangeActiveBusiness = props.handleChangeActiveBusiness,
       selectedItem = props.selectedItem,
       handleSelectedItem = props.handleSelectedItem,
-      handleSucessUpdateBusiness = props.handleSucessUpdateBusiness,
       handleDuplicateBusiness = props.handleDuplicateBusiness,
       handleDeleteBusiness = props.handleDeleteBusiness;
 
@@ -77,22 +76,26 @@ var BusinessSummary = function BusinessSummary(props) {
       optimizeImage = _useUtils2[0].optimizeImage;
 
   var theme = (0, _styledComponents.useTheme)();
+  var history = (0, _reactRouter.useHistory)();
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      isEdit = _useState2[0],
-      setIsEdit = _useState2[1];
+      isBusinessPreview = _useState2[0],
+      setIsBusinessPreview = _useState2[1];
 
-  var history = (0, _reactRouter.useHistory)();
+  var _useState3 = (0, _react.useState)('desktop'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      selectedView = _useState4[0],
+      setSelectedView = _useState4[1];
 
-  var _useState3 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      confirm = _useState4[0],
-      setConfirm = _useState4[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
 
   var handleOpenCategory = function handleOpenCategory() {
     var _businessState$busine;
@@ -102,8 +105,8 @@ var BusinessSummary = function BusinessSummary(props) {
 
   var itemsExcluded = ['publishing'];
   var businessConfigs = [{
-    key: 'information',
-    value: t('INFORMATION', 'Information')
+    key: 'store_details',
+    value: t('STORE_DETAILS', 'Store details')
   }, {
     key: 'schedule',
     value: t('SCHEDULE', 'Schedule')
@@ -175,9 +178,21 @@ var BusinessSummary = function BusinessSummary(props) {
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
+      return setIsBusinessPreview(true);
+    }
+  }, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
       return handleDuplicateBusiness();
     }
   }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleSelectedItem('personalization');
+    }
+  }, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleSelectedItem('custom_fields');
+    }
+  }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return onClickDeleteBusiness();
     }
@@ -186,7 +201,7 @@ var BusinessSummary = function BusinessSummary(props) {
     onClick: function onClick() {
       return actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), !isEdit ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessHeader, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessHeader, {
     isSkeleton: true
   }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 60,
@@ -214,20 +229,7 @@ var BusinessSummary = function BusinessSummary(props) {
         return handleSelectedItem(config.key);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, config.value), /*#__PURE__*/_react.default.createElement(_BsChevronRight.default, null));
-  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "secundaryDark",
-    borderRadius: "8px",
-    disabled: businessState.loading,
-    onClick: function onClick() {
-      return setIsEdit(true);
-    }
-  }, t('EDIT', 'Edit')))) : /*#__PURE__*/_react.default.createElement(_BusinessFormDetails.BusinessFormDetails, {
-    business: businessState.business,
-    onCancel: function onCancel() {
-      return setIsEdit(false);
-    },
-    handleSuccessUpdate: handleSucessUpdateBusiness
-  })), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  })))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
@@ -245,7 +247,27 @@ var BusinessSummary = function BusinessSummary(props) {
     },
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "900px",
+    open: isBusinessPreview,
+    onClose: function onClose() {
+      setIsBusinessPreview(false);
+      setSelectedView('desktop');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessPreviewHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: selectedView === 'desktop' ? 'primary' : 'black',
+    onClick: function onClick() {
+      return setSelectedView('desktop');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Laptop, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: selectedView === 'mobile' ? 'primary' : 'black',
+    onClick: function onClick() {
+      return setSelectedView('mobile');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null)))), /*#__PURE__*/_react.default.createElement(_BusinessPreview.BusinessPreview, {
+    isMobileView: selectedView === 'mobile',
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
+  })));
 };
 
 exports.BusinessSummary = BusinessSummary;

@@ -11,17 +11,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
-
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
-
 var _Shared = require("../../Shared");
 
 var _styles = require("../../../styles");
 
 var _styles2 = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -116,11 +110,11 @@ var BusinessVideosUI = function BusinessVideosUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, businessVideos.map(function (video) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessVideoPathWrapper, {
       key: video.id
-    }, /*#__PURE__*/_react.default.createElement("span", null, video === null || video === void 0 ? void 0 : video.video), /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
+    }, /*#__PURE__*/_react.default.createElement("span", null, video === null || video === void 0 ? void 0 : video.video), /*#__PURE__*/_react.default.createElement("p", {
       onClick: function onClick() {
         return handleDeleteClick(video.id);
       }
-    }));
+    }, t('DELETE', 'Delete')));
   }), /*#__PURE__*/_react.default.createElement(_styles2.BusinessAddVideoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('VIDEO_URL', 'Video url'),
     value: (_formState$changes$vi = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.video) !== null && _formState$changes$vi !== void 0 ? _formState$changes$vi : '',
@@ -129,12 +123,13 @@ var BusinessVideosUI = function BusinessVideosUI(props) {
     },
     disabled: formState === null || formState === void 0 ? void 0 : formState.loading,
     autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.AddButton, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     disabled: !(formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.video),
     onClick: function onClick() {
       return handleUpdateBusinessGallery();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    },
+    color: "primary"
+  }, t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ERROR', 'Error'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

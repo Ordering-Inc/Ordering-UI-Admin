@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RightHeader = exports.LeftHeader = exports.DetailsHeader = exports.BusinessName = exports.BusinessLogo = exports.BusinessHeader = exports.BusinessDetailsContent = exports.BusinessDetailsContainer = exports.BusinessDescription = exports.BusinessConfigsContainer = exports.BusinessConfigItem = exports.ActionSelectorWrapper = void 0;
+exports.RightHeader = exports.LeftHeader = exports.DetailsHeader = exports.BusinessPreviewHeader = exports.BusinessName = exports.BusinessLogo = exports.BusinessHeader = exports.BusinessDetailsContent = exports.BusinessDetailsContainer = exports.BusinessDescription = exports.BusinessConfigsContainer = exports.BusinessConfigItem = exports.ActionSelectorWrapper = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,7 +13,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -141,3 +141,13 @@ var ActionSelectorWrapper = _styledComponents.default.div(_templateObject19 || (
 });
 
 exports.ActionSelectorWrapper = ActionSelectorWrapper;
+
+var BusinessPreviewHeader = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-right: 1px solid ", ";\n  ", "\n\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin: 0;\n  }\n  > div {\n    display: flex;\n    button {\n      margin: 0 5px;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    margin-left: 40px;\n  "]))) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    margin-right: 40px;\n  "])));
+});
+
+exports.BusinessPreviewHeader = BusinessPreviewHeader;
