@@ -15,7 +15,7 @@ import { BusinessMoreDetail } from '../BusinessMoreDetail'
 import { BusinessNotifications } from '../BusinessNotifications'
 import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 import { BusinessFrontLayout } from '../BusinessFrontLayout'
-import { BusinessPublishing } from '../BusinessPublishing'
+// import { BusinessPublishing } from '../BusinessPublishing'
 
 import { MoreSidebarLayout, Personalization } from '../../Shared'
 
@@ -234,12 +234,12 @@ export const BusinessDetailsUI = (props) => {
               setFormState={setFormState}
             />
           )}
-          {selectedItem === 'publishing' && isAdmin && (
+          {/* {selectedItem === 'publishing' && isAdmin && (
             <BusinessPublishing
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
             />
-          )}
+          )} */}
           {selectedItem === 'layout' && (
             <BusinessFrontLayout
               business={businessState?.business}

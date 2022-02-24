@@ -60,7 +60,7 @@ export const BusinessOwners = (props) => {
   return (
     <>
       <Container>
-        {business?.owners.map(owner => (
+        {business?.owners?.map(owner => (
           <OwnerItem key={owner?.id}>
             <span>{owner?.name} {owner?.lastname}</span>
             <p

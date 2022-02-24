@@ -35,7 +35,7 @@ import { IntegrationsList } from './pages/IntegrationsList'
 import { LanguageManager } from './pages/LanguageManager'
 import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
-import { OrderingProducts } from './pages/OrderingProducts'
+// import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
 import { ReviewProducts } from './pages/ReviewProducts'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
@@ -320,13 +320,13 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/ordering-products'>
+                    {/* <Route exact path='/ordering-products'>
                       {
                         auth
                           ? <OrderingProducts />
                           : <Redirect to='/login' />
                       }
-                    </Route>
+                    </Route> */}
                     <Route exact path='/loyalty/rewards-programs'>
                       {
                         auth
