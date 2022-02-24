@@ -3,9 +3,9 @@ import {
   useLanguage,
   DragAndDrop,
   ExamineClick,
-  useUtils
+  useUtils,
+  BusinessTypeDetail as BusinessTypeDetailController
 } from 'ordering-components-admin'
-import { BusinessTypeDetail as BusinessTypeDetailController } from './naked'
 import { useTheme } from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
