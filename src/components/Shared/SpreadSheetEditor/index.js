@@ -83,11 +83,23 @@ export const SpreadSheetEditor = (props) => {
       if (celltype === 'numeric') {
         const evt = e || window.event
         const key = evt.charCode || evt.keyCode || 0
+
+        // check for cut and paste
+        let isClipboard = false
+        const ctrlDown = evt.ctrlKey || evt.metaKey // Mac support
+
+        // Check for Alt+Gr (http://en.wikipedia.org/wiki/AltGr_key)
+        if (ctrlDown && evt.altKey) isClipboard = false
+        // Check for ctrl+c, v and x
+        else if (ctrlDown && key === 67) isClipboard = true // c
+        else if (ctrlDown && key === 86) isClipboard = true // v
+        else if (ctrlDown && key === 88) isClipboard = true // x
+
         const isNumeric = ((key === 8) || (key === 9) || (key === 13) || (key === 46) || (key === 110) ||
           (key === 116) || (key === 123) || (key === 189) || (key === 190) || ((key >= 35) && (key <= 40)) ||
           ((key >= 48) && (key <= 57)) || ((key >= 96) && (key <= 105)))
 
-        if (!isNumeric) {
+        if (!isNumeric && !isClipboard) {
           e.stopImmediatePropagation()
           e.preventDefault()
         }
