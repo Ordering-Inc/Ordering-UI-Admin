@@ -215,3 +215,27 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
+
+export const BusinessPreviewHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-right: 1px solid ${props => props.theme.colors.borderColor};
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+  > div {
+    display: flex;
+    button {
+      margin: 0 5px;
+    }
+  }
+`

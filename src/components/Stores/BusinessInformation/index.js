@@ -1,98 +1,260 @@
-import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
-import { BusinessOwners } from '../BusinessOwners'
-import { BusinessTypes } from '../BusinessTypes'
-import { BusinessLocation } from '../BusinessLocation'
-import { BusinessDescription } from '../BusinessDescription'
-import { BusinessImages } from '../BusinessImages'
-import { BusinessVideos } from '../BusinessVideos'
-import { SeoOptions } from '../SeoOptions'
+import React, { useState, useRef, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
+import Skeleton from 'react-loading-skeleton'
+import { Alert } from '../../Shared'
+import { bytesConverter } from '../../../utils'
+import BiImage from '@meronex/icons/bi/BiImage'
+import { Button, Input, Switch } from '../../../styles'
+
 import {
-  InfoConatiner
+  FormInput,
+  HeaderImage,
+  SkeletonWrapper,
+  UploadImageIcon,
+  InputWrapper,
+  ActionsForm,
+  UploadImageIconContainer,
+  LogoImage,
+  PhoneWrapper,
+  SwitchWrapper
 } from './styles'
 
-export const BusinessInformation = (props) => {
+const BusinessInformationUI = (props) => {
   const {
-    business,
-    handleDeleteBusinessOwner,
-    handleAddBusinessOwner,
     formState,
-    setFormState,
-    handleUpdateBusinessClick,
-    businessTypes,
-    setBusinessTypes,
-    handleSuccessAddBusinessItem,
-    handleSuccessDeleteBusinessItem
+    businessState,
+    handlechangeImage,
+    handleChangeInput,
+    handleButtonUpdateClick,
+    handleChangeSwtich
   } = props
-
+  const formMethods = useForm()
   const [, t] = useLanguage()
-  const [selectedInfoItem, setSelctedInfoItem] = useState('owner')
+  const headerImageInputRef = useRef(null)
+  const logoImageInputRef = useRef(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const handleClickImage = (type) => {
+    if (type === 'header') {
+      headerImageInputRef.current.click()
+    }
+
+    if (type === 'logo') {
+      logoImageInputRef.current.click()
+    }
+  }
+
+  const handleFiles = (files, name) => {
+    if (files.length === 1) {
+      const type = files[0].type.split('/')[0]
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        })
+        return
+      }
+
+      if (bytesConverter(files[0]?.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        })
+        return
+      }
+      handlechangeImage(files[0], name)
+    }
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  const onSubmit = () => {
+    if (Object.keys(formState.changes).length > 0) {
+      handleButtonUpdateClick()
+    }
+  }
+
+  useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
+      const content = Object.values(formMethods.errors).map(error => error.message)
+      setAlertState({
+        open: true,
+        content
+      })
+    }
+  }, [formMethods.errors])
+
   return (
     <>
-      <InfoConatiner>
-        <h1>{t('INFORMATION', 'Information')}</h1>
-        <BusinessInfoSettingList
-          selectedInfoItem={selectedInfoItem}
-          handleSelectInfoItem={setSelctedInfoItem}
-        />
-        {selectedInfoItem === 'owner' && (
-          <BusinessOwners
-            business={business}
-            handleDeleteBusinessOwner={handleDeleteBusinessOwner}
-            handleAddBusinessOwner={handleAddBusinessOwner}
+      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
+        <HeaderImage
+          onClick={() => handleClickImage('header')}
+        >
+          <ExamineClick
+            onFiles={files => handleFiles(files, 'header')}
+            childRef={(e) => { headerImageInputRef.current = e }}
+            accept='image/png, image/jpeg, image/jpg'
+            disabled={formState.loading}
+          >
+            <DragAndDrop
+              onDrop={dataTransfer => handleFiles(dataTransfer.files, 'header')}
+              accept='image/png, image/jpeg, image/jpg'
+              disabled={formState.loading}
+            >
+              {formState.loading
+                ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
+                : ((!formState.changes?.header || formState.result?.result === 'Network Error' || formState.result.error)
+                  ? businessState?.business?.header &&
+                    (<img src={businessState?.business?.header} alt='header image' loading='lazy' />)
+                  : formState?.changes?.header &&
+                    <img src={formState?.changes?.header} alt='header image' loading='lazy' />
+                )}
+              <UploadImageIconContainer>
+                <UploadImageIcon>
+                  <BiImage />
+                  <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
+                </UploadImageIcon>
+              </UploadImageIconContainer>
+            </DragAndDrop>
+          </ExamineClick>
+        </HeaderImage>
+
+        <LogoImage
+          onClick={() => handleClickImage('logo')}
+        >
+          <ExamineClick
+            onFiles={files => handleFiles(files, 'logo')}
+            childRef={(e) => { logoImageInputRef.current = e }}
+            accept='image/png, image/jpeg, image/jpg'
+            disabled={formState.loading}
+          >
+            <DragAndDrop
+              onDrop={dataTransfer => handleFiles(dataTransfer.files, 'logo')}
+              accept='image/png, image/jpeg, image/jpg'
+              disabled={formState.loading}
+            >
+              {formState.loading
+                ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
+                : ((!formState.changes?.logo || formState.result?.result === 'Network Error' || formState.result.error)
+                  ? businessState?.business?.logo &&
+                    (<img src={businessState?.business?.logo} alt='logo image' loading='lazy' />)
+                  : formState?.changes?.logo &&
+                    <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
+                )}
+              <UploadImageIconContainer small>
+                <UploadImageIcon small>
+                  <BiImage />
+                </UploadImageIcon>
+              </UploadImageIconContainer>
+            </DragAndDrop>
+          </ExamineClick>
+        </LogoImage>
+        <InputWrapper>
+          <label>{t('NAME', 'Name')}</label>
+          <Input
+            name='name'
+            placeholder={t('Name', 'name')}
+            defaultValue={
+              formState?.result?.result
+                ? formState?.result?.result?.name
+                : formState?.changes?.name ?? businessState?.business?.name
+            }
+            onChange={handleChangeInput}
+            ref={formMethods.register({
+              required: t('BUSINESS_NAME_REQUIRED', 'Business name is required')
+            })}
+            disabled={formState.loading}
+            autoComplete='off'
           />
-        )}
-        {selectedInfoItem === 'type' && (
-          <BusinessTypes
-            business={business}
-            businessTypes={businessTypes}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateBusinessClick={handleUpdateBusinessClick}
-            setBusinessTypes={setBusinessTypes}
+        </InputWrapper>
+        <InputWrapper>
+          <label>{t('SHORT_DESCRIPTION', 'Short description')}</label>
+          <Input
+            name='description'
+            placeholder={t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description')}
+            defaultValue={
+              formState?.result?.result
+                ? formState?.result?.result?.description
+                : formState?.changes?.description ?? businessState?.business?.description
+            }
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
           />
-        )}
-        {selectedInfoItem === 'location' && (
-          <BusinessLocation
-            business={business}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateBusinessClick={handleUpdateBusinessClick}
+        </InputWrapper>
+        <PhoneWrapper>
+          <InputWrapper>
+            <label>{t('PHONE_NUMBER', 'Phone number')}</label>
+            <Input
+              name='phone'
+              placeholder='(000) 0000 000'
+              defaultValue={
+                formState?.result?.result
+                  ? formState?.result?.result?.phone
+                  : formState?.changes?.phone ?? businessState?.business?.phone
+              }
+              onChange={handleChangeInput}
+              disabled={formState.loading}
+              autoComplete='off'
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>{t('MOBILE_NUMBER', 'Mobile number')} <span>{t('OPTIONAL', 'Optional')}</span></label>
+            <Input
+              name='cellphone'
+              placeholder='(000) 0000 000'
+              defaultValue={
+                formState?.result?.result
+                  ? formState?.result?.result?.cellphone
+                  : formState?.changes?.cellphone ?? businessState?.business?.cellphone
+              }
+              onChange={handleChangeInput}
+              disabled={formState.loading}
+              autoComplete='off'
+            />
+          </InputWrapper>
+        </PhoneWrapper>
+        <SwitchWrapper>
+          <span>{t('FEATURED', 'Featured')}</span>
+          <Switch
+            defaultChecked={businessState?.business?.featured || false}
+            onChange={(val) => handleChangeSwtich('featured', val)}
           />
-        )}
-        {selectedInfoItem === 'description' && (
-          <BusinessDescription
-            business={business}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateBusinessClick={handleUpdateBusinessClick}
-          />
-        )}
-        {selectedInfoItem === 'images' && (
-          <BusinessImages
-            business={business}
-            handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
-            handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
-          />
-        )}
-        {selectedInfoItem === 'videos' && (
-          <BusinessVideos
-            business={business}
-            handleSucessAddBusinessGallery={(result) => handleSuccessAddBusinessItem('gallery', result)}
-            handleSucessDeleteBusinessGallery={(id) => handleSuccessDeleteBusinessItem('gallery', id)}
-          />
-        )}
-        {selectedInfoItem === 'seo_options' && (
-          <SeoOptions
-            data={business}
-            formState={formState}
-            setFormState={setFormState}
-            handleUpdateClick={handleUpdateBusinessClick}
-            isBusinessSeo
-          />
-        )}
-      </InfoConatiner>
+        </SwitchWrapper>
+        <ActionsForm>
+          <Button
+            type='submit'
+            color='primary'
+            borderRadius='5px'
+            disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+          >
+            {t('SAVE', 'Save')}
+          </Button>
+        </ActionsForm>
+      </FormInput>
+      <Alert
+        title={t('BUSINESS', 'Business')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
+}
+
+export const BusinessInformation = (props) => {
+  const businessInformationProps = {
+    ...props,
+    UIComponent: BusinessInformationUI
+  }
+  return <BusinessFormDetailsController {...businessInformationProps} />
 }

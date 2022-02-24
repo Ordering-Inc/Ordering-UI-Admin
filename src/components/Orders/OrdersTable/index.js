@@ -41,7 +41,8 @@ export const OrdersTable = (props) => {
     setSelectedOrderIds,
     currentTourStep,
     isTourOpen,
-    handleOpenTour
+    handleOpenTour,
+    setIsTourOpen
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -203,6 +204,7 @@ export const OrdersTable = (props) => {
   }, [orderList.orders, selectedOrderIds])
 
   const handleChangeKeyboard = (evt) => {
+    if (evt.code === 'Escape') setIsTourOpen && setIsTourOpen(false)
     if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour()
     if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList?.orders[0], true)
     if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList?.orders[0])
@@ -464,7 +466,7 @@ export const OrdersTable = (props) => {
                   {allowColumns?.driver && (
                     <td>
                       {order?.delivery_type === 1 && (
-                        <DriversInfo className='driverInfo' noClick={isTourOpen && currentTourStep === 0}>
+                        <DriversInfo className='driverInfo' noClick={isTourOpen && (currentTourStep === 0 || currentTourStep === 4)}>
                           <DriverSelector
                             orderView
                             padding='5px 0'

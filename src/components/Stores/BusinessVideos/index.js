@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, BusinessGallery as BusinessGalleryController } from 'ordering-components-admin'
-import BsTrash from '@meronex/icons/bs/BsTrash'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { Confirm, Alert } from '../../Shared'
-import { Input } from '../../../styles'
+import { Input, Button } from '../../../styles'
 
 import {
   Container,
   BusinessVideoPathWrapper,
-  BusinessAddVideoWrapper,
-  AddButton
+  BusinessAddVideoWrapper
 } from './styles'
 
 const BusinessVideosUI = (props) => {
@@ -62,9 +59,11 @@ const BusinessVideosUI = (props) => {
         {businessVideos.map(video => (
           <BusinessVideoPathWrapper key={video.id}>
             <span>{video?.video}</span>
-            <BsTrash
+            <p
               onClick={() => handleDeleteClick(video.id)}
-            />
+            >
+              {t('DELETE', 'Delete')}
+            </p>
           </BusinessVideoPathWrapper>
         ))}
         <BusinessAddVideoWrapper>
@@ -75,12 +74,13 @@ const BusinessVideosUI = (props) => {
             disabled={formState?.loading}
             autoComplete='off'
           />
-          <AddButton
+          <Button
             disabled={!formState?.changes?.video}
             onClick={() => handleUpdateBusinessGallery()}
+            color='primary'
           >
-            <BsPlusSquare />
-          </AddButton>
+            {t('ADD', 'Add')}
+          </Button>
         </BusinessAddVideoWrapper>
         <Alert
           title={t('ERROR', 'Error')}
