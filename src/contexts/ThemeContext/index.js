@@ -45,7 +45,7 @@ export const ThemeProvider = ({ children, ...props }) => {
     body {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
       margin: 0;
-      background-color: #FFFFFF;
+      background-color: ${props => props.theme.colors?.backgroundPage || '#FFFFFF'};
       color: ${props => props.theme.colors?.headingColor || '#000'};
 
       ${theme.rtl && css`
@@ -84,7 +84,7 @@ export const ThemeProvider = ({ children, ...props }) => {
 
     .ghostDragging {
       border-radius: 8px;
-      background-color: #FFF;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
       border: 1px solid ${props => props.theme.colors?.borderColor};
       font-size: 14px;

@@ -57,7 +57,7 @@ export const MapMarkerImg = (props) => {
 }
 
 export const DriverInfo = styled.div`
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   position: absolute;
   border-radius: 5px;
   padding: 10px;

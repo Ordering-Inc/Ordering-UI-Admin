@@ -337,7 +337,6 @@ export const WrapperSendInput = styled.div`
 
   > input {
     background-color: ${props => props.theme.colors.secundary};
-    border: none;
   }
 `
 
@@ -384,7 +383,7 @@ export const WrapperDeleteImage = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    background: white;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     width: 20px;
     height: 20px;
     transform: translate(100%, -50%);

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const ModalContainer = styled.div`
   padding: 10px;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   display: flex;
   flex-direction: column;
   align-items: center;

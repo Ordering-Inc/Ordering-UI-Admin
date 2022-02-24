@@ -226,7 +226,7 @@ export const ProductTabContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   position: sticky;
   top: 50px;
-  background: white;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   z-index: 900;
 
   @media (min-width: 769px) {
@@ -305,7 +305,7 @@ export const OptionWrapHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
 `
 export const OptionTitleContainer = styled.div`
   margin: 0px;
@@ -537,7 +537,7 @@ export const ProductActions = styled.div`
   bottom: 0;
   right: 0;
   width: 100%;
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
 
   div.price {
     font-weight: 600;

@@ -62,7 +62,7 @@ export const OrdersCloseButton = styled.button`
 `
 export const WrapperOrdersAndUser = styled.div`
   width: 350px;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   left: 10px;
   top: 15px;
   height: 100%;
@@ -127,7 +127,7 @@ export const MessageOrderDetailContainer = styled.div`
     display: block;
     position: absolute;
     right: 0px;
-    background: #fff;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     height: calc(100% - 30px);
     border: 1px solid #D8D8D8;
     box-shadow: -3px 3px 6px #00000029;

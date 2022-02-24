@@ -15,9 +15,10 @@ export const SearchContainer = styled.div`
     color: ${props => props.theme.colors.lightGray};
   }
 
-  input {
+  > input {
     width: 250px;
-    border: 1px solid ${props => props.theme.colors.borderColor};
+    border: 1px solid ${props => props.theme.colors.borderColor} !important;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     border-radius: 22px;
     outline: none;
     padding: 10px 8px;

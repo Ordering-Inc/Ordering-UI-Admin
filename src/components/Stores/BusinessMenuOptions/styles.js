@@ -43,7 +43,7 @@ export const Header = styled.div`
 `
 
 export const ActionBlock = styled.div`
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   position: absolute;
   z-index: 1000;
   display: flex;

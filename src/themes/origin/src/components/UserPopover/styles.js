@@ -16,7 +16,7 @@ export const DropDownContainer = styled.div`
 `
 
 export const PopoverBody = styled.div`
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   color: #333;
   padding: 15px;
   border-radius: 10px;

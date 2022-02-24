@@ -47,7 +47,7 @@ export const PromotionListTable = styled.table`
         position: sticky;
         top: 0px;
         z-index: 100;
-        background: #FFF;
+        background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       }
     }
   }

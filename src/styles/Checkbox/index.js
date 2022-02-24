@@ -17,7 +17,7 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     left: 0;
     border: 1px solid #B1BCCC;
     border-radius: 2px;
-    background-color: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   }
 
   &:checked:before {

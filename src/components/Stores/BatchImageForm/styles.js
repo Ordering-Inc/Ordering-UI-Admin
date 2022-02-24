@@ -109,7 +109,7 @@ export const ImageIssue = styled.div`
       position: absolute;
       left: -1px;
       bottom: 0;
-      background-color: #fff;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       width: 2px;
       height: 55px;
     }

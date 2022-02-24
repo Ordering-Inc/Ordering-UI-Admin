@@ -179,7 +179,7 @@ export const WrapperAddressForm = styled.div`
   ` : css`
     right: 0px;
   `}
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   width: 100vw;
   height: 100vh;
   overflow: auto;

@@ -61,7 +61,7 @@ export const Option = styled.div`
 export const Options = styled.div`
   position: absolute;
   min-width: 100%;
-  background-color: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   margin-top: 7px;
   z-index: 10000;
   border-width: 1px;
