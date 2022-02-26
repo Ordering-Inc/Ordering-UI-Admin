@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
+  ToastType,
+  useToast,
   ProductExtraOptions as ProductExtraOptionsController
 } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
@@ -58,10 +60,12 @@ const ProductExtraOptionsUI = (props) => {
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const { handleSubmit, register, errors } = useForm()
+  const [, { showToast }] = useToast()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isMaxError, setIsMaxError] = useState(false)
 
   const closeAlert = () => {
     cleanEditErrors()
@@ -78,6 +82,12 @@ const ProductExtraOptionsUI = (props) => {
         const max = changesState?.changes?.max ? changesState?.changes?.max : option?.max
         if (parseInt(e.target.value) > parseInt(max)) return
       } else {
+        if (option?.suboptions?.filter(suboption => suboption?.preselected)?.length > parseInt(e?.target?.value)) {
+          setIsMaxError(true)
+          showToast(ToastType.Error, t('ERROR_MATCH_MAX_DEFAULT_SUBOPTIONS', 'Max default suboptions length is less than preselected suboptions'))
+          return
+        }
+        setIsMaxError(false)
         const min = changesState?.changes?.min ? changesState?.changes?.min : option?.min
         if (parseInt(e.target.value) < parseInt(min)) return
       }
@@ -315,7 +325,10 @@ const ProductExtraOptionsUI = (props) => {
         <Modal
           width='70%'
           open={openModal?.edit}
-          onClose={() => setOpenModal({ ...openModal, edit: false })}
+          onClose={() => {
+            setOpenModal({ ...openModal, edit: false })
+            setIsMaxError(false)
+          }}
         >
           <ProductExtraOptionDetails
             business={business}
@@ -329,6 +342,7 @@ const ProductExtraOptionsUI = (props) => {
             onClose={() => setOpenModal({ ...openModal, edit: false })}
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
+            isMaxError={isMaxError}
           />
         </Modal>
       )}

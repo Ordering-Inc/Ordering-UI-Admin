@@ -160,10 +160,16 @@ export const InputWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  input {
+    border-color: ${({ isMaxError, theme }) => isMaxError ? `${theme.colors.danger} !important` : '#DEE2E6'};
+  }
   label {
     color: ${props => props.theme.colors.headingColor};
     font-size: 14px;
     margin-bottom: 10px;
+  }
+  .default {
+    min-width: 50px;
   }
   ${({ primary }) => !primary && css`
     label {
@@ -179,6 +185,13 @@ export const InputWrapper = styled.div`
   ${props => props.disabled && css`
     div{
       pointer-events: none;
+    }
+  `}
+
+  ${props => props.maxHeight && css`
+    height: 100%;
+    div {
+      margin-top: 10px;
     }
   `}
   

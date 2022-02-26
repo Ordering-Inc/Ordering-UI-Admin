@@ -16,7 +16,7 @@ import { Alert, Confirm, Modal } from '../../Shared'
 
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
-import { PlusCircle, ThreeDots, Circle, RecordCircle } from 'react-bootstrap-icons'
+import { PlusCircle, ThreeDots } from 'react-bootstrap-icons'
 
 import {
   MainContainer,
@@ -69,12 +69,13 @@ const ProductExtraOptionDetailsUI = (props) => {
     conditionalSubOptionId,
     handleChangeConditionalOption,
     handleChangeConditionalSubOption,
-    handledisableDefaultSuboption,
+    handleChangeDefaultSuboption,
 
     business,
     extra,
     handleAddOption,
-    handleDeteteOption
+    handleDeteteOption,
+    isMaxError
   } = props
 
   const [, t] = useLanguage()
@@ -232,7 +233,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   }}
                 />
               </InputWrapper>
-              <InputWrapper primary>
+              <InputWrapper primary isMaxError={isMaxError}>
                 <label>{t('MAX', 'Max')}</label>
                 <Input
                   name='max'
@@ -422,14 +423,17 @@ const ProductExtraOptionDetailsUI = (props) => {
                   />
                 </InputWrapper>
               )}
-              <InputWrapper primary disabled={optionState?.loading}>
+              <InputWrapper maxHeight primary={index === 0} disabled={optionState?.loading}>
                 <label>{t('DEFAULT', 'Default')}</label>
                 <div
                   name='preselected'
                   className={subOption?.preselected ? 'checked default' : 'default'}
-                  onClick={(e) => handledisableDefaultSuboption(subOption.id)}
                 >
-                  {subOption?.preselected ? <RecordCircle /> : <Circle />}
+                  <Checkbox
+                    checked={subOption?.preselected}
+                    id='allow_suboption_quantity'
+                    onClick={(e) => handleChangeDefaultSuboption(subOption.id)}
+                  />
                 </div>
               </InputWrapper>
               <ActionsContainer primary={index === 0}>
@@ -491,7 +495,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 </DragAndDrop>
               </ExamineClick>
             </SubOptionImage>
-            <InputWrapper>
+            <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
               <label>{t('NAME', 'Name')}</label>
               <Input
                 name='name'
@@ -504,7 +508,7 @@ const ProductExtraOptionDetailsUI = (props) => {
             </InputWrapper>
           </LeftSubOptionContent>
           <RightSubOptionContent>
-            <InputWrapper>
+            <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
               <label>{t('PRICE', 'Price')}</label>
               <Input
                 name='price'
@@ -520,7 +524,7 @@ const ProductExtraOptionDetailsUI = (props) => {
               />
             </InputWrapper>
             {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
-              <InputWrapper>
+              <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
                 <label>{t('HALF_PRICE', 'Half price')}</label>
                 <Input
                   name='half_price'
@@ -537,7 +541,7 @@ const ProductExtraOptionDetailsUI = (props) => {
               </InputWrapper>
             )}
             {(typeof settingChangeState?.changes?.allow_suboption_quantity !== 'undefined' ? settingChangeState?.changes?.allow_suboption_quantity : optionState?.option?.allow_suboption_quantity) && (
-              <InputWrapper>
+              <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
                 <label>{t('MAX', 'Max')}</label>
                 <Input
                   name='max'
@@ -553,6 +557,12 @@ const ProductExtraOptionDetailsUI = (props) => {
                 />
               </InputWrapper>
             )}
+            <InputWrapper maxHeight>
+              <div
+                name='preselected'
+                className='default'
+              />
+            </InputWrapper>
             <ActionsContainer>
               <IconButton
                 color='primary'
