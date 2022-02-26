@@ -534,9 +534,6 @@ const ProductExtraOptionDetailsUI = (props) => {
                     e.preventDefault()
                   }
                 }}
-                ref={register({
-                  required: t('PRICE_REQUIRED', 'The price is required.')
-                })}
               />
             </InputWrapper>
             {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
