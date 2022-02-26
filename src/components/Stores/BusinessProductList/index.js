@@ -187,7 +187,11 @@ export const BusinessProductList = (props) => {
           <ProductListBottom>
             {
               !businessState.loading && businessState?.business?.categories?.length > 0 && (
-                <AddProductBtn onClick={() => setIsAddProduct(true)}>{t('ADD_NEW_PRODUCT', 'Add new product')}</AddProductBtn>
+                <AddProductBtn
+                  onClick={() => handleParentProductAdd(true)}
+                >
+                  {t('ADD_NEW_PRODUCT', 'Add new product')}
+                </AddProductBtn>
               )
             }
 

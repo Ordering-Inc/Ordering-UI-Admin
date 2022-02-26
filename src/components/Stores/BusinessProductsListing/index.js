@@ -186,7 +186,11 @@ const BusinessProductsListingUI = (props) => {
                     <h1>{selectedBusiness?.name || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
                   </BusinessNameWrapper>
                   {showSelectHeader && (
-                    <BusinessSelectHeader close={handleClose} isOpen={showSelectHeader} changeBusinessState={changeBusinessState} />
+                    <BusinessSelectHeader
+                      close={handleClose}
+                      isOpen={showSelectHeader}
+                      changeBusinessState={changeBusinessState}
+                    />
                   )}
                 </BusinessSelector>
                 <Breadcrumb>

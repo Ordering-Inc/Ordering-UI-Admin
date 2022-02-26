@@ -131,7 +131,7 @@ export const BusinessProductsCategoyInfo = (props) => {
       const generateCode = {
         target: {
           name: 'slug',
-          value: formState.changes.name ? stringToSlug(formState.changes.name) : stringToSlug(categorySelected.name)
+          value: formState.changes?.name ? stringToSlug(formState.changes.name) : stringToSlug(categorySelected.name)
         }
       }
       setAutoGenerate({
@@ -181,7 +181,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         <Input
           placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
           name='name'
-          defaultValue={formState?.changes.name}
+          defaultValue={formState?.changes?.name || ''}
           onChange={handleChangeInput}
           autoComplete='off'
         />

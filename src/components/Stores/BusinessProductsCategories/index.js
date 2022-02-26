@@ -22,11 +22,12 @@ export const BusinessProductsCategories = (props) => {
   const [dataSelected, setDataSelected] = useState('')
   const containerRef = useRef()
   const listRef = useRef()
+  const addButtonRef = useRef()
   useEffect(() => {
     let listener
     if (containerRef?.current && categoryListRef) {
       listener = window.addEventListener('click', (e) => {
-        if (!containerRef?.current?.contains(e.target) && categoryListRef?.contains(e.target)) {
+        if (!containerRef?.current?.contains(e.target) && !addButtonRef?.current?.contains(e.target) && categoryListRef?.contains(e.target)) {
           handleChangeCategory(null, null)
         }
       })
@@ -67,7 +68,12 @@ export const BusinessProductsCategories = (props) => {
           )}
         </ListContent>
       </CategoryListContainer>
-      <AddCategory onClick={() => handleOpenCategoryDetails()}>{t('ADD_NEW_CATEGORY', 'Add new category')}</AddCategory>
+      <AddCategory
+        ref={addButtonRef}
+        onClick={() => handleOpenCategoryDetails()}
+      >
+        {t('ADD_NEW_CATEGORY', 'Add new category')}
+      </AddCategory>
     </>
   )
 }
