@@ -104,7 +104,10 @@ export const ProductDetatilsInformation = (props) => {
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
-      const content = Object.values(formMethods.errors).map(error => error.message)
+      const content = Object.values(formMethods.errors).map(error => {
+        if (error.type === 'min') return t('REGULAR_PRICE_MUST_BIGGER_PRICE', 'This regular price must be bigger than price')
+        else return error.message
+      })
       setAlertState({
         open: true,
         content
@@ -170,11 +173,7 @@ export const ProductDetatilsInformation = (props) => {
           <Input
             name='name'
             placeholder={t('Name', 'name')}
-            defaultValue={
-              formState?.result?.result
-                ? formState?.result?.result?.name
-                : formState?.changes?.name ?? product?.name
-            }
+            defaultValue={product?.name}
             onChange={handleChangeInput}
             ref={formMethods.register({
               required: t('NAME_REQUIRED', 'The name is required')
@@ -190,11 +189,7 @@ export const ProductDetatilsInformation = (props) => {
           <Input
             name='price'
             placeholder={parsePrice(0)}
-            value={
-              formState?.result?.result
-                ? formState?.result?.result?.price
-                : formState?.changes?.price ?? product?.price
-            }
+            defaultValue={product?.price}
             onChange={(e) => handleChangeInput(e)}
             disabled={formState.loading}
             autoComplete='off'
@@ -208,11 +203,7 @@ export const ProductDetatilsInformation = (props) => {
         <RegularWrapper>
           <span>{t('REGULAR_PRICE', 'Regular Price')}</span>
           <Switch
-            defaultChecked={
-              formState?.result?.result
-                ? formState?.result?.result?.in_offer
-                : formState?.changes?.in_offer ?? product?.in_offer
-            }
+            defaultChecked={product?.in_offer}
             onChange={val => handleChangeFormState({ in_offer: val })}
           />
         </RegularWrapper>
@@ -222,16 +213,13 @@ export const ProductDetatilsInformation = (props) => {
               <Input
                 name='offer_price'
                 placeholder={parsePrice(0)}
-                defaultValue={
-                  formState?.result?.result?.offer_price
-                    ? formState?.result?.result?.offer_price
-                    : formState?.changes?.offer_price ?? product?.offer_price
-                }
+                defaultValue={product?.offer_price}
                 ref={formMethods.register({
                   required: t(
                     'VALIDATION_ERROR_REQUIRED',
                     'The Regular Price field is required'
-                  ).replace('_attribute_', t('REGULAR_PRICE', 'Regular Price'))
+                  ).replace('_attribute_', t('REGULAR_PRICE', 'Regular Price')),
+                  min: formState?.changes?.price ?? product?.price
                 })}
                 onChange={(e) => handleChangeInput(e)}
                 disabled={formState.loading}
@@ -251,11 +239,7 @@ export const ProductDetatilsInformation = (props) => {
             rows={4}
             name='description'
             placeholder={t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description')}
-            defaultValue={
-              formState?.result?.result
-                ? formState?.result?.result?.description
-                : formState?.changes?.description ?? product?.description
-            }
+            defaultValue={product?.description}
             onChange={handleChangeInput}
             disabled={formState.loading}
             autoComplete='off'
@@ -269,9 +253,7 @@ export const ProductDetatilsInformation = (props) => {
             onChange={handleChangeInput}
             disabled={formState.loading}
             autoComplete='off'
-            value={
-              formState?.changes?.slug === '' ? '' : formState?.changes?.slug || formState?.result?.slug || product?.slug || ''
-            }
+            defaultValue={product?.slug}
           />
           <Wrapper
             style={{ paddingTop: 10 }}
@@ -293,11 +275,7 @@ export const ProductDetatilsInformation = (props) => {
         <InventoryWrapper>
           <span>{t('INVENTORY', 'Inventory')}</span>
           <Switch
-            defaultChecked={
-              formState?.result?.result
-                ? formState?.result?.result?.inventoried
-                : formState?.changes?.inventoried ?? product?.inventoried
-            }
+            defaultChecked={product?.inventoried}
             onChange={val => handleChangeFormState({ inventoried: val })}
           />
         </InventoryWrapper>
@@ -308,11 +286,7 @@ export const ProductDetatilsInformation = (props) => {
               <Input
                 name='quantity'
                 placeholder={t('QUANTITY', 'Quantity')}
-                value={
-                  formState?.result?.result
-                    ? formState?.result?.result?.quantity
-                    : formState?.changes?.quantity ?? product?.quantity
-                }
+                defaultValue={product?.quantity}
                 onChange={handleChangeInput}
                 disabled={formState.loading}
                 autoComplete='off'
@@ -348,6 +322,7 @@ export const ProductDetatilsInformation = (props) => {
         </ActionsForm>
       </FormInput>
       <Alert
+        width='700px'
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
