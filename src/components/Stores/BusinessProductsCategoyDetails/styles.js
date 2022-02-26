@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const Container = styled.div`
   width: 100%;
@@ -162,9 +163,6 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
   .show {
-    button {
-      background: ${props => props.theme.colors.secundary} !important;
-    }
     >div {
       border: 1px solid ${props => props.theme.colors.borderColor};
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
@@ -176,6 +174,9 @@ export const ActionSelectorWrapper = styled.div`
       .dropdown-item {
         font-size: 12px;
         color: ${props => props.theme.colors.headingColor};
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
       }
       .dropdown-item:last-child {
         color: ${props => props.theme.colors.danger};
