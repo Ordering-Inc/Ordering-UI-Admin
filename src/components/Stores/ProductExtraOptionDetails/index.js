@@ -383,11 +383,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('PRICE', 'Price')}</label>
                 <Input
                   name='price'
-                  value={
-                    (editSubOptionId === subOption.id)
-                      ? changesState?.changes?.price ?? subOption?.price
-                      : subOption?.price
-                  }
+                  defaultValue={subOption?.price}
                   onChange={(e) => handleChangeInput(e, subOption.id)}
                   onKeyPress={(e) => {
                     if (!/^[0-9.]$/.test(e.key)) {
@@ -401,11 +397,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   <label>{t('HALF_PRICE', 'Half price')}</label>
                   <Input
                     name='half_price'
-                    value={
-                      (editSubOptionId === subOption.id)
-                        ? changesState?.changes?.half_price ?? subOption?.half_price
-                        : subOption?.half_price ?? ''
-                    }
+                    defaultValue={subOption?.half_price}
                     onChange={(e) => handleChangeInput(e, subOption.id)}
                     onKeyPress={(e) => {
                       if (!/^[0-9.]$/.test(e.key)) {
@@ -420,11 +412,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   <label>{t('MAX', 'Max')}</label>
                   <Input
                     name='max'
-                    value={
-                      (editSubOptionId === subOption.id)
-                        ? changesState?.changes?.max ?? subOption?.max
-                        : subOption?.max
-                    }
+                    defaultValue={subOption?.max}
                     onChange={(e) => handleChangeInput(e, subOption.id)}
                     onKeyPress={(e) => {
                       if (!/^[0-9.]$/.test(e.key)) {
