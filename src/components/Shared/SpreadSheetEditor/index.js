@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { HotTable, HotColumn } from '@handsontable/react'
 import 'handsontable/dist/handsontable.full.css'
 import { useLanguage } from 'ordering-components-admin'
@@ -25,7 +25,7 @@ export const SpreadSheetEditor = (props) => {
   const hotTableRef = useRef(null)
 
   const settings = {
-    data: hotTableData,
+    // data: hotTableData,
     licenseKey: 'non-commercial-and-evaluation',
     autoRowSize: false,
     autoColumnSize: false,
@@ -134,40 +134,45 @@ export const SpreadSheetEditor = (props) => {
     }
   }
 
-  useEffect(() => {
-    if (hotTableRef?.current?.hotInstance) {
-      const hotTableObj = hotTableRef?.current?.hotInstance
-      hotTableObj.loadData(hotTableData)
-      hotTableObj.updateSettings({
-        cells (row, col) {
-          const cellProperties = {}
-          if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
-            cellProperties.readOnly = false
-          }
-          return cellProperties
-        }
-      })
+  // useEffect(() => {
+  //   if (hotTableRef?.current?.hotInstance) {
+  //     const hotTableObj = hotTableRef?.current?.hotInstance
+  //     hotTableObj.loadData(hotTableData)
+  //     hotTableObj.updateSettings({
+  //       cells (row, col) {
+  //         const cellProperties = {}
+  //         if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
+  //           cellProperties.readOnly = false
+  //         }
+  //         return cellProperties
+  //       }
+  //     })
+  //   }
+  // }, [hotTableData])
+
+  const handleCache = useCallback(() => {
+    if (navigator.clipboard) {
+      navigator.clipboard.readText().then(function (clipboardData) {
+        if (clipboardData) setCache(clipboardData)
+      }).catch(function (e) { })
     }
-  }, [hotTableData])
+  }, [cache])
 
   useEffect(() => {
     const interVal = setInterval(() => {
-      if (navigator.clipboard) {
-        navigator.clipboard.readText().then(function (clipboardData) {
-          if (clipboardData) setCache(clipboardData)
-        }).catch(function (e) { })
-      }
+      handleCache()
     }, 500)
     return () => clearInterval(interVal)
-  }, [cache])
+  }, [handleCache])
 
   return (
     <SpreadSheetContainer>
       <HotTable
+        data={hotTableData}
         settings={settings}
-        afterChange={(changes, accionHanson) => handleAfterChange(changes, accionHanson)}
         ref={hotTableRef}
         beforeRemoveRow={(index, amount, physicalRows) => handleBeforeRemoveRow(index, amount, physicalRows)}
+        afterChange={(changes, accionHanson) => handleAfterChange(changes, accionHanson)}
         afterSelectionEnd={(row, col, row1, col1) => afterSelectionEnd(row, col, row1, col1)}
         outsideClickDeselects={(event) => outsideClickDeselects(event)}
       >
