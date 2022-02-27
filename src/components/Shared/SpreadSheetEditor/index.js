@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState, memo } from 'react'
 import { HotTable, HotColumn } from '@handsontable/react'
 import 'handsontable/dist/handsontable.full.css'
 import { useLanguage } from 'ordering-components-admin'
@@ -6,7 +6,7 @@ import {
   SpreadSheetContainer
 } from './styles'
 
-export const SpreadSheetEditor = (props) => {
+const SpreadSheetEditor = (props) => {
   const {
     headerItems,
     hotTableData,
@@ -151,18 +151,19 @@ export const SpreadSheetEditor = (props) => {
   // }, [hotTableData])
 
   const handleCache = useCallback(() => {
-    if (navigator.clipboard) {
-      navigator.clipboard.readText().then(function (clipboardData) {
-        if (clipboardData) setCache(clipboardData)
-      }).catch(function (e) { })
-    }
+    const interVal = setInterval(() => {
+      if (navigator.clipboard) {
+        navigator.clipboard.readText().then(function (clipboardData) {
+          if (clipboardData) setCache(clipboardData)
+        }).catch(function (e) { })
+      }
+    }, 500)
+    return () => clearInterval(interVal)
   }, [cache])
 
   useEffect(() => {
-    const interVal = setInterval(() => {
-      handleCache()
-    }, 500)
-    return () => clearInterval(interVal)
+    handleCache()
+    // return () => clearInterval(interVal)
   }, [handleCache])
 
   return (
@@ -191,3 +192,5 @@ export const SpreadSheetEditor = (props) => {
     </SpreadSheetContainer>
   )
 }
+
+export default memo(SpreadSheetEditor)
